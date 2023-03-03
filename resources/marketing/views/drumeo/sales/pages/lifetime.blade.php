@@ -437,6 +437,35 @@
             {{--            @endif--}}
         </div>
     </section>
+    @php
+        $faqs = [
+            [
+                "title" => "How long does my lifetime membership last?",
+                "desc" => 'Simply, for life! Either yours or ours. Your Lifetime Membership is valid as long as Drumeo (Musora) remains in service and you stay alive.',
+            ],
+            [
+                "title" => "What happens if Drumeo or Musora’s service ends?",
+                "desc" => 'We’ll make every effort to provide Lifetime Members with all the original media content we have created available for download. That way, you can continue to enjoy everything we’ve done.<br><br>This will cover all available Musora original content (our entire curriculum and courses) but will not include and 3rd party content that we do not own rights to.',
+            ],
+            [
+                "title" => "What content is included with my Lifetime Membership? Are songs included?",
+                "desc" => 'As a Drumeo Lifetime Member, you get access to all original Musora content for life and our entire library of 5000+ drum transcriptions. That’s all our courses, the Method, Live lessons, Student Reviews, and Songs.<br><br>Some of our content is licensed by 3rd parties, which means we have to pay a fee for each member to use the material on a temporary basis. This includes song transcriptions for our other instruments (Piano, Guitar, Vocals).<br><br>If all you want to play is drums, then you have everything. But if you’re interested in learning songs for other instruments, there is a small fee for ongoing access because these songs are licensed. <br><br>We wish it wasn’t the case and have done our best to make the fee as small as possible. Currently, the fee is $40/year for Lifetime Members.<br><br>But again, this does NOT apply to drum transcriptions.',
+            ],
+        ]
+    @endphp
+
+    <section class="py-12 md:py-20" style="background-color:#01050f;">
+        <div class="container mx-auto max-w-5xl px-6">
+            <h2 class="font-extrabold mb-10 text-center text-white">Frequently Asked Questions</h2>
+            @foreach($faqs as $faq)
+                @include('_partials.components.question-dropdown', [
+                    'num' => '?',
+                    "title" => $faq['title'],
+                    "desc" => $faq['desc'],
+                ])
+            @endforeach
+        </div>
+    </section>
 
     <section class="content-section text-center" style="background: #0c1429;">
         <div class="container mx-auto relative z-50">

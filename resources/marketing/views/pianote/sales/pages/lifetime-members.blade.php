@@ -9,7 +9,7 @@
     <meta property="og:description" content="Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.">
     <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
@@ -393,6 +393,35 @@
             @else
                 <span class="join sold-out methodcta my-4">Sold Out</span>
             @endif
+        </div>
+    </section>
+    @php
+        $faqs = [
+            [
+                "title" => "How long does my lifetime membership last?",
+                "desc" => 'Simply, for life! Either yours or ours. Your Lifetime Membership is valid as long as Pianote (Musora) remains in service and you stay alive.',
+            ],
+            [
+                "title" => "What happens if Pianote or Musora’s service ends?",
+                "desc" => 'We’ll make every effort to provide Lifetime Members with all the original media content we have created available for download. That way, you can continue to enjoy everything we’ve done.<br><br>This will cover all available Musora original content (our entire curriculum and courses) but will not include and 3rd party content that we do not own rights to.',
+            ],
+            [
+                "title" => "What content is included with my Lifetime Membership? Are songs included?",
+                "desc" => 'As a Lifetime Member, you get access to all original Musora content for life. That’s all our courses, the Method, Live lessons, Student Reviews, and the forums.<br><br>Some of our content is licensed by 3rd parties, which means we have to pay a fee for each member to use the material on a temporary basis. This includes song transcriptions.<br><br>Those songs are licensed and require an additional fee for ongoing access. We wish it wasn’t the case and have done our best to make the fee as small as possible. Currently, the fee is $40/year for Lifetime Members.<br><br>To put that in context, that’s $40/year for ALL the song transcriptions inside Musora (Pianote, Guitareo, Singeo, and Drumeo). You’ll get access to thousands of officially licensed song transcriptions for the price of one songbook a year.',
+            ],
+        ]
+    @endphp
+
+    <section class="py-12 md:py-20" style="background: #000;">
+        <div class="container mx-auto max-w-5xl px-6">
+            <h2 class="font-extrabold mb-10 text-center text-white">Frequently Asked Questions</h2>
+            @foreach($faqs as $faq)
+                @include('_partials.components.question-dropdown', [
+                    'num' => '?',
+                    "title" => $faq['title'],
+                    "desc" => $faq['desc'],
+                ])
+            @endforeach
         </div>
     </section>
     <section class="content-section text-center" style="background: #040c1b;">
