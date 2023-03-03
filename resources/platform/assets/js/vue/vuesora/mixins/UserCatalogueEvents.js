@@ -3,11 +3,12 @@ import Toasts from '../assets/js/classes/toasts';
 
 
 const getValue = (obj, key) => {
-    return obj.filter((field) => {
+    const filtered = obj.filter((field) => {
         if (field.key === key) {
             return true;
         }
-    })[0].value;
+    })
+    return filtered.length ? [0].value : '';
 }
 
 export default {
@@ -40,13 +41,24 @@ export default {
                     },
                 });
             } else {
-                const name = getValue(this.item.fields, 'title');
-                const thumbnail_url = getValue(this.item.data, 'thumbnail_url');
-                const description = getValue(this.item.data, 'description');
+                const type = this.item.type ? this.item.type : e.currentTarget.getAttribute('data-content-type');
+                let name = '';
+                let thumbnail_url = '';
+                let description = '';
 
+                if (type === 'song') {
+                    name = getValue(this.item.fields, 'title');
+                    thumbnail_url = getValue(this.item.data, 'thumbnail_url');
+                    description = getValue(this.item.fields, 'artist');
+                } else {
+                    name = getValue(this.item.fields, 'title');
+                    thumbnail_url = getValue(this.item.data, 'thumbnail_url');
+                    description = getValue(this.item.data, 'description');
+
+                }
                 this.emitAddToList({
                     content_id: this.item.id,
-                    type: e.currentTarget.getAttribute('data-content-type'),
+                    type,
                     is_added: this.item.is_added_to_primary_playlist || false,
                     name,
                     thumbnail_url,

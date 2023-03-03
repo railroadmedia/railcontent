@@ -29,7 +29,7 @@ const isLoadingPlaylists = ref(false);
 const isLoadingAssignments = ref(false);
 const selectedPlaylists = ref([]);
 const showSongToggle = ref(false);
-const addFullSongToggle = ref(false);
+const addFullSongToggle = ref(true);
 const addInstrumentlessToggle = ref(false);
 
 const handleOnToggleAssignments = (val) => {
@@ -108,13 +108,10 @@ const handleCreate = () => {
     }
 }
 onMounted(() => {
-    console.log('add to list content ', props.content)
     isLoadingPlaylists.value = true;
     if (props.content.type === 'song') {
         showSongToggle.value = true
-    } else if (props.content.type === 'Assignments') {
-        addFullSongToggle.value = true;
-    } else {
+    } else if (props.content.type !== 'Assignments') {
         isLoadingAssignments.value = true;
         PlaylistService.getAssignmentsForContent({ token, contentId: props.content.content_id, brand: props.brand }).then((r) => {
             const { data: { soundslice_assignments_count } } = r;
@@ -124,6 +121,7 @@ onMounted(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
         });
     }
+
     PlaylistService.getCurrentUserPlaylists({ token }).then(r => {
         isLoadingPlaylists.value = false;
         const { data: { data } } = r;
@@ -185,12 +183,12 @@ onMounted(() => {
                 <fieldset class="tw-flex tw-flex-row tw-items-center">
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">FULL TRACK</strong>
                     </p>
-                    <Toggle id="toggle-full-song" @onToggle="handleOnToggleFullSong" />
+                    <Toggle :initialValue="addFullSongToggle" id="toggle-full-song" @onToggle="handleOnToggleFullSong" />
                 </fieldset>
                 <fieldset class="tw-flex tw-flex-row tw-items-center">
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">{{ instrumentless }}
                             TRACK</strong></p>
-                    <Toggle id="toggle-instrumentless-song" @onToggle="handleOnToggleInstrumentlessSong" />
+                    <Toggle :initialValue="addInstrumentlessToggle" id="toggle-instrumentless-song" @onToggle="handleOnToggleInstrumentlessSong" />
                 </fieldset>
             </div>
         </div>
