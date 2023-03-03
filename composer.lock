@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b50205e388c2e7a85ba04639ec6bffcf",
+    "content-hash": "359f6b2a775e9333c83d521e65bfa962",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -6796,16 +6796,16 @@
         },
         {
             "name": "openspout/openspout",
-            "version": "v4.12.1",
+            "version": "v4.12.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openspout/openspout.git",
-                "reference": "7359af2ffdd4523f53f182f97347389362b9d352"
+                "reference": "90ceeefef3750dd2afab95689ed2107dd576905e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openspout/openspout/zipball/7359af2ffdd4523f53f182f97347389362b9d352",
-                "reference": "7359af2ffdd4523f53f182f97347389362b9d352",
+                "url": "https://api.github.com/repos/openspout/openspout/zipball/90ceeefef3750dd2afab95689ed2107dd576905e",
+                "reference": "90ceeefef3750dd2afab95689ed2107dd576905e",
                 "shasum": ""
             },
             "require": {
@@ -6873,7 +6873,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openspout/openspout/issues",
-                "source": "https://github.com/openspout/openspout/tree/v4.12.1"
+                "source": "https://github.com/openspout/openspout/tree/v4.12.2"
             },
             "funding": [
                 {
@@ -6885,7 +6885,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-19T13:22:14+00:00"
+            "time": "2023-03-03T07:45:00+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -8602,12 +8602,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "2a1fd53246547f17c33401b598b44c174c5c3e12"
+                "reference": "fdeb44b91f9252b3c67feea73c0b670b819104d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/2a1fd53246547f17c33401b598b44c174c5c3e12",
-                "reference": "2a1fd53246547f17c33401b598b44c174c5c3e12",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/fdeb44b91f9252b3c67feea73c0b670b819104d4",
+                "reference": "fdeb44b91f9252b3c67feea73c0b670b819104d4",
                 "shasum": ""
             },
             "require": {
@@ -8663,7 +8663,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists"
             },
-            "time": "2023-03-02T12:27:13+00:00"
+            "time": "2023-03-03T12:43:11+00:00"
         },
         {
             "name": "railroad/railforums",

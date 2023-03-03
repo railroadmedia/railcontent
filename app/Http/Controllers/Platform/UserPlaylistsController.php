@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Platform;
 
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
+use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -18,22 +19,27 @@ class UserPlaylistsController extends BaseController
     private ContentService $contentService;
     private UserContentProgressRepository $userContentRepository;
     private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
+    private LessonAssignmentDecorator $lessonAssignmentDecorator;
 
     /**
      * @param UserPlaylistsService $userPlaylistsService
      * @param ContentService $contentService
      * @param UserContentProgressRepository $userContentProgressRepository
+     * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
+     * @param LessonAssignmentDecorator $lessonAssignmentDecorator
      */
     public function __construct(
         UserPlaylistsService $userPlaylistsService,
         ContentService $contentService,
         UserContentProgressRepository $userContentProgressRepository,
-        VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
+        VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
+        LessonAssignmentDecorator $lessonAssignmentDecorator
     ) {
         $this->userPlaylistsService = $userPlaylistsService;
         $this->contentService = $contentService;
         $this->userContentRepository = $userContentProgressRepository;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
+        $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
     }
 
     public function index(Request $request)
@@ -195,7 +201,15 @@ class UserPlaylistsController extends BaseController
         $relatedLessons = (new ContentFilterResultsEntity(['results' => $parentChildren]))->toResponseRawJson();
         $playlistLessons = (new ContentFilterResultsEntity(['results' => $playlistItems]))->toResponseRawJson();
 
+        if (empty($playlistItem['assignments'] ?? [])) {
+            LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
+            $this->lessonAssignmentDecorator->decorate(new Collection([$playlistItem]))
+                ->first();
+        }
 
+        $lessonAssignments = $playlistItem['assignments'] ?? [];
+
+        $playlistItem['assignments'] = $lessonAssignments;
 
         return view('account.playlist-item', [
             "lessonContent" => $playlistItem,
