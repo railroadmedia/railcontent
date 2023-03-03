@@ -47,7 +47,7 @@
     })
 
     onBeforeMount(() => {      
-
+        console.log('lessons ', props.lessons)
     });
 </script>
 <template>
