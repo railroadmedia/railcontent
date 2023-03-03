@@ -130,14 +130,15 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
-        <a href="/30-day-drummer" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
-            <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30 day drummer logo" />
-            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight">
-                Enrollment is open | February 27 - March 28 <span class="hidden sm:inline">|</span> <br class="sm:hidden"><span class="text-drumeo underline">Click here to join season II.</span>
-            </p>
-        </a>
     @endif
 
+    <a href="#customize-anchor" class="anchor-slide flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
+        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/logo.png" alt="11th anniversary logo" />
+        <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-none sm:leading-none">
+            Celebrate 11 Years Of Drumeo With<br>
+            11 FREE Bonuses 🥳 (worth $1198.95)
+        </p>
+    </a>
 
     @php
         $features = [
@@ -183,55 +184,36 @@
             ],
         ];
     @endphp
+    @include('musora.sales.components.header-section', [
+        'header' => 'Online drum lessons for all skill levels.',
+        'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
+        'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/jan-thumb-no-badge.jpg',
+        'promoThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo2.png',
+        'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m2.jpg',
+        'pointOne' => 'Improve Your Skills',
+        'pointTwo' => 'World-Class Teachers',
+        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
+        'students' => number_format(Prices::$students),
+    ])
 
-    <header class="pb-24 md:py-14 lg:py-20">
-        <div class="max-w-4xl mx-auto text-center px-4">
-            <img class="mt-14 md:mt-0 h-24 md:h-28 lg:h-32 mb-6" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/logo.png" alt="Anniversary logo" />
-            <h3 class="font-extrabold mb-10">Save 18% on your membership <br class="">+ get 11 FREE bonuses worth $1198.95!</h3>
-        </div>
-        <div class="md:flex md:justify-center md:items-center px-4 lg:px-0">
-            <div class="max-w-sm md:max-w-none mx-auto md:hidden">
-                <img
-                    class="-mt-8 sm:-mt-14 transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/promo-collage-m.png"
-                    alt="Promo Collage Image"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                />
-            </div>
-            <div class="max-w-lg mx-auto md:mx-0">
-                Join Drumeo in March and you’ll receive 11 free bonuses with your membership. That’s one bonus for every year we’ve been around – including a QuietPad, drumsticks, and digital packs to help you achieve ALL your goals on the drums. And that’s not all… <br><br>
-                To celebrate 11 years of inspiring & informative drum lessons we’ve dropped the price of Drumeo to our 2012 price!. <br><br>
-                That’s right, you’ll time travel back to 2012 for this deal. <br><br>
-                Scroll down to see all your bonuses and click the button to lock in your discount and grab a year of unlimited drum lessons! <br><br>
-                <a class="join drumeo smaller w-full lg:w-96 mb-2" href="#order">Get Started &raquo;</a>
-            </div>
-            <img
-                class="hidden md:inline-block md:h-96 lg:h-[450px] md:ml-6 transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/promo-collage.png"
-                alt="Promo Collage"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-            />
-        </div>
-    </header>
+    <div style="background:linear-gradient(30deg, #0a3761, #0c1526);">
+        <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:url(https://drumeo-assets.s3.amazonaws.com/sales/2023/order-bg-tile-2.png) center center/160px;">
+            <div class="container max-w-6xl mx-auto">
+                <img class="h-18 sm:h-24 mb-6" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/logo.png" alt="Anniversary logo" />
+                <h3 class="font-extrabold mb-10">Save 18% on your membership <br class="hidden sm:inline">+ get 11 FREE bonuses worth $1198.95!</h3>
+                <div class="text-left flex flex-wrap sm:flex-nowrap justify-center mb-24 sm:mb-48 lg:mb-72">
+                    <img class="h-48 mb-5 inline sm:hidden transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://cdn.musora.com/image/fetch/w_520,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/promo-collage.png" alt="promo image">
+                   <div>
+                       <p class="leading-normal max-w-xl sm:pr-4 mx-0 mb-4">Eleven’s kind of an awkward number.<br><br>More than ten, less than a dozen. So we decided to make it special by celebrating YOU – the students whose passion for drumming keeps us going.<br><br>Join Drumeo in March and you’ll receive 11 free bonuses with your membership. That’s one bonus for every year of Drumeo – including a QuietPad, drumsticks, and digital packs to help you achieve ALL your goals on the drums. And that’s not all…<br><br>To celebrate 11 years of inspiring &amp; informative drum lessons we’ve dropped the price of Drumeo to our first-ever price.<br><br>You’ll time travel back to 2012 to save 18% for this month only.<br><br>Scroll down to see all your bonuses and click the button to lock in your discount and grab a year of unlimited drum lessons!</p>
+                       <a href="#customize-anchor" class="w-full sm:w-64 join smaller w-full max-w-sm blue anchor-slide ">SEE YOUR DEAL »</a>
+                   </div>
+                    <img class="h-72 lg:h-96 hidden sm:inline transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/promo-collage.png" alt="promo image">
+                </div>
 
-{{--    @if(!empty($promoVersion))--}}
-{{--        @include('musora.sales.components.promo-section', [--}}
-{{--        'promoLogo' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs.svg',--}}
-{{--           'promoLogoM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/new-year-new-songs-m.png',--}}
-{{--        'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',--}}
-{{--           'text' => 'The NEW Drumeo Songs is here.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have <strong>the ultimate tool for learning songs on the drums.</strong> <br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',--}}
-{{--           'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage3.png',--}}
-{{--           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $1342.94',--}}
-{{--       ])--}}
-{{--    @else--}}
-        @include('musora.sales.components.learn-by-playing-section', [
-            'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
-            'desc' => 'It’s the best feeling in the world –<br><br>Nailing that fill in your favorite song, slamming out the chorus of an all-time classic, or writing your own drum part that locks in with the music… but it’s a process.<br><br>And it starts with learning the skills & techniques you need to play the drums.<br><br>Drumeo makes learning the drums easier by giving you step-by-step lessons anytime & anywhere it fits your schedule. Plus, the groundbreaking NEW Drumeo Songs tool makes playing your favorite songs a reality – with note-for-note breakdowns of 5,000 popular songs.<br><br>You’ll play more. You’ll fall in love with your progress. And you’ll have personalized support every step of the way.<br><br>Scroll down to watch the trailer, see more details, and learn to play like you’ve always wanted!',
-            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/collage2.png',
-        ])
-{{--    @endif--}}
+            </div>
+        </section>
+    </div>
 
     @php
         $gridItems = [

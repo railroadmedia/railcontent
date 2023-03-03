@@ -88,7 +88,7 @@ class Carousel extends Resource
                     return $value;
                 }),
             Text::make('logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            Markdown::make('Description')->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.<br> Use &lt;br&gt; for a line break.'),
+            Markdown::make('Description')->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.<br> Use &lt;br&gt; for a line break, &lt;i&gt;&lt;/i&gt; for italics, and &lt;b&gt;&lt;/b&gt; for bold. <br> Limited to three lines of text.'),
             Text::make('CTA Button Text', 'cta_text')->hideFromIndex(),
             Text::make('CTA URL', 'cta_url'),
             Image::make('Image', 'img')

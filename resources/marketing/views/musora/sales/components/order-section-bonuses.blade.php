@@ -26,7 +26,8 @@
             @if(!empty($promoText)){!! $promoText !!}@endif
             @if(!empty($header))<h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>{!! $header !!}</strong></h3>@endif
             <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-            <p class="leading-tight text-sm @if(empty($subDescription)) mb-6 @endif"><em>First year discount: <s class="opacity-40">${{ Prices::$plusSubscriptionAnnualFull }}</s> ${{ Prices::$plusSubscriptionAnnual }}.<br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
+            <p class="leading-tight text-sm @if(empty($subDescription)) mb-6 @endif"><em>First year discount: <s class="opacity-40">${{ Prices::$plusSubscriptionAnnualFull }}</s> @if(!empty($firstYearPrice))
+                ${{$firstYearPrice}} @else ${{ Prices::$plusSubscriptionAnnual }}@endif.<br class="inline sm:hidden"> Cancel anytime. 90-day guarantee.</em></p>
             @if(!empty($subDescription))<h4 class="leading-tight mt-8 mb-4 sm:my-8 uppercase text-coaches"><strong>{!!  $subDescription  !!}</strong></h4>@endif
             @if(!empty($countdown))
                 <div class="rounded-xl px-4 sm:px-6 py-2 inline-flex flex-wrap mx-auto mb-4 sm:mb-8 justify-center items-center" style="background-color:#181515;">

@@ -138,7 +138,7 @@
     @include('._partials.components.sticky-bar',[
         'link' => '#order',
         'logo' => 'https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/logo.png',
-        'text' => 'SAVE 17% ON YOUR FIRST YEAR OF <br>LESSONS + GET $962 IN FREE BONUSES',
+        'text' => 'SAVE 18% ON YOUR FIRST YEAR OF <br>LESSONS + GET $962 IN FREE BONUSES',
     ])
 
     @php
@@ -213,30 +213,50 @@
     <section class="bg-[#0C1524] px-4 lg:px-0">
         <div class="md:flex md:justify-center md:items-center">
             <div class="max-w-sm md:max-w-none mx-auto md:hidden">
-                <img
-                    class="-mt-20 sm:-mt-14 transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/ttps://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage-m.png"
-                    alt="Promo Collage Image"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                />
+                @if($products['pianote-headphones']->getPublicStockCount() > 0)
+                    <img
+                        class="-mt-20 sm:-mt-14 transition-opacity opacity-0"
+                        src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage-m.png"
+                        alt="Promo Collage Image"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                    />
+                @else
+                    <img
+                        class="-mt-20 sm:-mt-14 transition-opacity opacity-0"
+                        src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage-replace-m.png"
+                        alt="Promo Collage Image"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                    />
+                @endif
             </div>
             <div class="max-w-lg text-white py-14 mx-auto md:mx-0">
                 Time flies when you’re changing the world. <br><br>
                 This month we’re celebrating 7 years since Pianote began its mission of spreading the joy of music across the globe.<br><br>
                 <b>And you get the presents!</b><br><br>
-                Join Pianote today and you’ll save 17% on your first year of lessons PLUS get 13 incredible bonuses. <br><br>
+                Join Pianote today and you’ll save 18% on your first year of lessons PLUS get 13 incredible bonuses. <br><br>
                 So come party with us! <br><br>
                 <a class="join pianote smaller w-full lg:w-96 mb-2" href="#order">Get Started &raquo;</a>
-                <p class="uppercase"><b>GEN IN QUICK!</b> Only @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} Headphones left!</p>
+                @if($products['pianote-headphones']->getPublicStockCount() > 0)<p class="uppercase"><b>GEN IN QUICK!</b> Only @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} Headphones left!</p>@endif
             </div>
-            <img
-                class="hidden md:inline-block md:h-96 lg:h-[450px] md:mt-0 lg:-mt-16 md:ml-6 transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage.png"
-                alt="Promo Collage"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-            />
+            @if($products['pianote-headphones']->getPublicStockCount() > 0)
+                <img
+                    class="hidden md:inline-block md:h-96 lg:h-[450px] md:mt-0 lg:-mt-16 md:ml-6 transition-opacity opacity-0"
+                    src="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage.png"
+                    alt="Promo Collage"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                />
+            @else
+                <img
+                    class="hidden md:inline-block md:h-96 lg:h-[450px] md:mt-0 lg:-mt-16 md:ml-6 transition-opacity opacity-0"
+                    src="https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/promo-collage-replace.png"
+                    alt="Promo Collage"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                />
+            @endif
         </div>
     </section>
 
@@ -475,7 +495,9 @@
         'bannerDesc' => 'Powered by Musora, Pianote includes full access to our communities for drums, guitar, and voice.',
     ])
 
-    @include('pianote.sales.headphones-section')
+    @if($products['pianote-headphones']->getPublicStockCount() > 0)
+        @include('pianote.sales.headphones-section')
+    @endif
 
     @php
         $testimonials = [
@@ -562,11 +584,19 @@
     <div id="order" class="anchor"></div>
     @php
         $bonuses = [
+            $products['pianote-headphones']->getPublicStockCount() > 0 ?
             [
                 'image' => 'https://pianote.s3.amazonaws.com/shop/card-thumbs/headphones-cart.jpg',
                 'title' => 'Pianote Headphones',
                 'description' => 'Hear your piano the way it was meant to sound.',
                 'price' => floatval($productPrices['pianote-headphones']->price),
+                'shipping' => true,
+            ] :
+            [
+                'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/planner.png',
+                'title' => 'Practice <br>Planner',
+                'description' => 'Always know exactly what to practice.',
+                'price' => floatval($productPrices['pianote-practice-planner']->price),
                 'shipping' => true,
             ],
             [
@@ -649,10 +679,11 @@
     @include('musora.sales.components.order-section-bonuses', [
         'topImage' => 'https://pianote.s3.amazonaws.com/sales/2023/pianote-annual-2w-card.png',
         'promoLogo' => 'https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/logo.png',
-        'promoText' => '<h4 class="leading-tight mt-4 sm:mt-5 mb-2 uppercase text-coaches"><strong>SAVE 17% + GET 13 BONUSES <br class="inline sm:hidden">WORTH $962</strong></h4>
+        'promoText' => '<h4 class="leading-tight mt-4 sm:mt-5 mb-2 uppercase text-coaches"><strong>SAVE 18% + GET 13 BONUSES <br class="inline sm:hidden">WORTH $962</strong></h4>
         <p class="max-w-lg">Step-by-step lessons, world-class instructors, and thousands of songs at your fingertips. The ultimate in online piano lessons.</p>',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products['.($products['pianote-headphones']->getPublicStockCount() > 0 ? 'pianote-headphones' : 'pianote-practice-planner').']=1&products[piano-chords-and-scales-guide]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true',
         'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
+        'firstYearPrice' => 197,
     ])
 
     @include('musora.sales.components.app-section', [
@@ -673,11 +704,14 @@
         'video' => '785314388',
         'vimeo' => true,
     ])
+
+{{--    TODO swap when headphones sell out:--}}
+{{--    TODO 803663343 --}}
     @include('_partials.components.video-modal',[
     'name' => 'promoTrailer',
-    'video' => 'TODO',
+    'video' => $products['pianote-headphones']->getPublicStockCount() > 0 ? '803662678' : '803663343',
     'vimeo' => true,
-])
+    ])
     @include('_partials.components.video-modal',[
         'name' => 'unbox',
         'video' => '774408046',

@@ -41,7 +41,7 @@
             color: #000;
         }
     </style>
-    <div class="py-24 md:py-32 lg:py-40 px-2 md:px-5 text-white text-center w-full" style="background-color:#000c17;">
+    <div class="py-24 md:py-32 lg:py-40 px-2 md:px-5 text-white text-center w-full bg-musora-black">
         <div class="container mx-auto relative z-0">
             <a href="https://musora-center.s3.amazonaws.com/brand/brand-guide.pdf" class="join relative">DOWNLOAD GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
 

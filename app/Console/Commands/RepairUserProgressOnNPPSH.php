@@ -44,13 +44,26 @@ class RepairUserProgressOnNPPSH extends Command
 
         $sql = <<<'EOT'
 UPDATE railcontent_user_content_progress up
-SET up.state = '%s' , up.progress_percent = 4
+SET up.state = '%s' , up.progress_percent = 16
 WHERE up.content_id = '%s' and up.state = '%s'
 EOT;
         $statement = sprintf(
             $sql,
             'started',
             383675,
+            'completed'
+        );
+        $databaseManager->statement($statement);
+
+        $sql = <<<'EOT'
+UPDATE railcontent_user_content_progress up
+SET up.state = '%s' , up.progress_percent = 16
+WHERE up.content_id = '%s' and up.state = '%s'
+EOT;
+        $statement = sprintf(
+            $sql,
+            'started',
+            383674,
             'completed'
         );
         $databaseManager->statement($statement);

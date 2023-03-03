@@ -3,7 +3,7 @@
     <div class="max-w-screen-xl m-auto px-6 flex text-white flex-wrap md:flex-no-wrap">
         <div class="text-center flex-col w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
             <div class="mb-10 m-auto w-5/6 sm:mb-20 sm:w-full sm:px-4">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Ficon-playing-first-song.svg?auto=format&ixlib=php-1.2.1&w=45&s=906665135d1164b5c75573f75ce86702" width="45px" class="m-auto mb-2">
+                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Ficon-playing-first-song.svg?auto=format&ixlib=php-1.2.1&w=45&s=906665135d1164b5c75573f75ce86702" width="45px" class="m-auto mb-2" alt="Note icon">
                 <h3 class="font-bison-bold uppercase text-3xl" alt="play your first song icon">Play Your First Song</h3>
                 <p class="font-semibold md:text-lg">If you can walk and talk, then you can do this way sooner than you’d think. We promise!</p>
             </div>
@@ -23,7 +23,7 @@
         </div>
         <div class="text-center flex-col m-auto w-full sm:w-1/2 md:w-1/3 lg:w-1/4">
             <div class="mb-10 m-auto w-5/6 sm:mb-20 sm:w-full sm:px-4">
-                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Ficon-jamming-with-band.svg?auto=format&ixlib=php-1.2.1&w=45&s=c4d00a6bee07a988fabb34e5cc1db217" width="45px" class="m-auto mb-2">
+                <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Ficon-jamming-with-band.svg?auto=format&ixlib=php-1.2.1&w=45&s=c4d00a6bee07a988fabb34e5cc1db217" width="45px" class="m-auto mb-2" alt="Calendar icon">
                 <h3 class="font-bison-bold uppercase text-3xl" alt="gain insane momentum icon">Gain Insane Momentum</h3>
                 <p class="font-semibold md:text-lg">Practice just became FUN with exciting missions and challenges to keep you motivated. </p>
             </div>

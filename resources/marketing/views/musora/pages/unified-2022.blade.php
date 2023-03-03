@@ -177,8 +177,7 @@
 
 @section('body-data')
     x-data = '{
-    modal: false,
-    trailer: false,
+        trailer: false,
     }'
 @endsection
 <!-- Main -->
@@ -187,7 +186,7 @@
     <header class="text-white px-5 sm:px-6 py-12 sm:py-16 lg:py-24" style="background-color:#020f1a;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap items-center">
-                <div class="header-pic sm:order-1 pb-64 sm:pb-80 mb-7 sm:mb-0 w-full sm:w-auto rounded-xl flex-grow relative bg-center bg-cover cursor-pointer autoplay-video" x-on:click="trailer = true; modal = true">
+                <div class="header-pic sm:order-1 pb-64 sm:pb-80 mb-7 sm:mb-0 w-full sm:w-auto rounded-xl flex-grow relative bg-center bg-cover cursor-pointer autoplay-video" x-on:click="trailer = true;">
                     <div class="join white smaller absolute bottom-3 sm:bottom-7 right-3 sm:right-7"><i class="fas fa-play"></i>&nbsp; PLAY TRAILER</div>
                 </div>
                 <div class="w-full sm:w-5/12 sm:pr-4 text-center sm:text-left">
@@ -550,15 +549,9 @@
         </div>
     </section>
 
-    @include('_partials.components.modal',[
-        'name' => 'modal',
-        'additionalOnClose' => 'trailer = false;',
-        'content' => '
-            <div x-show="trailer" class="max-w-4xl mx-auto">
-                <div class="w-full relative" style="padding-bottom:56.25%;">
-                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/759635284" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-                </div>
-            </div>
-        ',
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '759635284',
+        'vimeo' => true,
     ])
 @stop

@@ -29,15 +29,16 @@
 @section('content')
 
     @include('drumeo.products.partials.promo-banner', [
-                "name" => "Learn Songs Faster",
-                "fullPrice" => floatval($productPrices['learn-songs-faster-pack']->price),
-                "price" => floatval($productPrices['learn-songs-faster-pack']->discounted_price),
-                "noBreadcrumb" => true
-            ])
+        "name" => "Learn Songs Faster",
+        "fullPrice" => floatval($productPrices['learn-songs-faster-pack']->price),
+        "price" => floatval($productPrices['learn-songs-faster-pack']->discounted_price),
+        "noBreadcrumb" => true
+    ])
+
     <header class="header text-center">
         <div class="row">
-            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/learn-songs-faster-logo.png"><br>
-            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png">
+            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/learn-songs-faster-logo.png" alt="Learn Songs Faster Logo"><br>
+            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play Button">
             <h1><strong>Your guide to learning MORE songs in  <br class="show-for-medium">
                     less time with Jared Falk & Dave Atkinson.</strong></h1>
             <h3 class="dense"><strong>
@@ -90,14 +91,14 @@
         <div class="row">
             <h2><strong>Meet your teachers.</strong></h2>
             <div class="columns medium-6">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/jared-falk.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/jared-falk.jpg" alt="Jared Falk">
                 <h3 class="dense"><strong>Jared Falk</strong></h3>
                 <p><em class="text-grey">TEACHING FOR {{ date('Y') - 1998 }} YEARS</em><br>
                     Jared Falk is the Co-Founder and CEO of Drumeo.com. As a drum teacher, his DVD-based curriculum “Successful Drumming” has helped more than 20,000 students, his YouTube videos have been seen by millions of drummers around the world, and he’s been voted “Best Drum Educator” by the readers of Rhythm Magazine. Jared’s goal is to create more drummers and keep them playing longer by helping them have more fun learning and playing drums.
                 </p>
             </div>
             <div class="columns medium-6">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/dave-atkinson.jpg">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/dave-atkinson.jpg" alt="Dave Atkinson">
                 <h3 class="dense"><strong>Dave Atkinson</strong></h3>
                 <p><em class="text-grey">TEACHING FOR {{ date('Y') - 2006 }} YEARS</em><br>
                     Dave Atkinson has been working with students and teachers at FreeDrumLessons.com and Drumeo.com since 2006 -- teaching video lessons, hosting online events, and working alongside many of the world’s best drummers. Dave is one of the rare teachers in the world who has been directly responding to students every single day for the past 14 years -- making him uniquely qualified on the problems that drummers face and the best ways to overcome them.
@@ -181,7 +182,7 @@
 
     <section class="content-section text-center question-answered">
         <div class="row">
-            <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/question-answer.png">
+            <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/question-answer.png" alt="Question Answer Image">
             <div class="text medium-text-left">
                 <h2><strong>Your questions answered...</strong></h2>
                 <p>Inside this course, you’ll have opportunities to ask your biggest questions and get personalized feedback & support from real-live teachers and Drumeo students.</p>
@@ -192,7 +193,7 @@
 
     <section class="content-section final text-center">
         <div class="row">
-            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/learn-songs-faster-logo.png">
+            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/learn-songs-faster-logo.png" alt="Learn Songs Faster Logo">
             <h2><strong>Your guide to learning MORE songs in  <br class="show-for-medium">
                     less time with Jared Falk & Dave Atkinson</strong></h2>
 

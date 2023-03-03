@@ -67,18 +67,18 @@
         "cartVersion" => true
     ])
     @include('drumeo.products.partials.promo-banner', [
-                    "name" => "Beyond Beginner Drumming",
-                    "fullPrice" => floatval($productPrices['beyond-beginner-drumming']->price),
-                    "price" => floatval($productPrices['beyond-beginner-drumming']->discounted_price),
-                "noBreadcrumb" => true
-                ])
+        "name" => "Beyond Beginner Drumming",
+        "fullPrice" => floatval($productPrices['beyond-beginner-drumming']->price),
+        "price" => floatval($productPrices['beyond-beginner-drumming']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="text-center text-white py-5 md:py-10 px-4 bg-top bg-no-repeat relative" style="background-color:#00101d;background-image: url(https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Header_BG.jpg);">
         <div class="container mx-auto relative z-10">
-            <img class="h-12 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo.svg"><br>
+            <img class="h-12 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo.svg" alt="Beyond Beginner Drumming Logo"><br>
             <i class="fas fa-play play-button autoplay-video mt-36 lg:mt-44 mb-5 md:mb-12" data-open="trailer"></i>
             <h2><strong>Make the jump from beginner to<br> intermediate drummer.</strong></h2>
-            <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg"><br>
+            <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg" alt="Siros Signature"><br>
             <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[beyond-beginner-drumming]=1">Get Started</a>
             <h6>ONLY @if(floatval($productPrices['beyond-beginner-drumming']->price) > floatval($productPrices['beyond-beginner-drumming']->discounted_price)) <s class="opacity-60">${{ floatval($productPrices['beyond-beginner-drumming']->price) }}</s> @endif
                 <strong class="text-yellow-400">${{ floatval($productPrices['beyond-beginner-drumming']->discounted_price) }} {{--Launch Special--}}</strong></h6>
@@ -281,9 +281,9 @@
     <div id="customize-anchor" class="anchor"></div>
     <section class="final text-center text-white py-10 md:py-20 lg:py-24 px-4 bg-center bg-cover lazyload" style="background-color:#051626;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Order_BG.jpg">
         <div class="container mx-auto">
-            <img class="logo" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo.svg"><br>
+            <img class="logo" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo.svg" alt="Beyond Beginner Drumming Logo"><br>
             <h2 class="mt-5"><strong>Make the jump from beginner to<br> intermediate drummer.</strong></h2>
-            <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg"><br>
+            <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg" alt="Siros signature"><br>
             <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[beyond-beginner-drumming]=1">Get Started</a>
             <h6>ONLY @if(floatval($productPrices['beyond-beginner-drumming']->price) > floatval($productPrices['beyond-beginner-drumming']->discounted_price)) <s class="opacity-60">${{ floatval($productPrices['beyond-beginner-drumming']->price) }}</s> @endif
                 <strong class="text-yellow-400">${{ floatval($productPrices['beyond-beginner-drumming']->discounted_price) }} {{--Launch Special--}}</strong></h6>
