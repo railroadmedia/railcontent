@@ -147,7 +147,7 @@ class SalesController extends BaseController
 
     public function lifetimeMembers()
     {
-        return view('pianote.sales.pages.lifetime-members');
+        return view('pianote.sales.pages.lifetime-members', [ 'theme' => 'pianote' ]);
     }
 
     public function lisarecommends()
