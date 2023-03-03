@@ -243,7 +243,7 @@ class UserPlaylistsService
 
         $singularContentTypes = array_diff(array_merge(
                                                config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
-                                               config('railcontent.singularContentTypes')
+                                               config('railcontent.singularContentTypes'),['assignment']
                                            ), ['song']);
 
         $assignments = $this->contentService->countLessonsAndAssignments($contentId);
