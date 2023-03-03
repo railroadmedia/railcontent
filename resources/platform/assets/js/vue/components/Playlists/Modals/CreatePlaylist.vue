@@ -117,6 +117,11 @@
         state.description = '';
     }
 
+    const updateThumbnail = (img) => {
+        state.thumb = img;
+        console.log('new thumbnail ', state.thumb);
+    }
+
     const handleConfirm = () => {
         const payload = {
             brand: props.brand,
@@ -227,7 +232,12 @@
             </p>
         </div>
         <div class="tw-flex tw-pt-[24px]">
-            <ThumbnailUpload :token="token" type='playlist' :imgUrl="state.thumb"/>
+            <ThumbnailUpload 
+                :token="token" 
+                type='playlist' 
+                :imgUrl="state.thumb"
+                @imageUploaded="updateThumbnail($event)"
+            />
             <div class="tw-flex tw-flex-col tw-w-full">
                 <InputLabel 
                     :initialValue="state.name"

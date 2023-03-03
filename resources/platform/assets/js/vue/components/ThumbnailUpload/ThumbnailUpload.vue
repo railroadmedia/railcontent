@@ -9,6 +9,10 @@ import InfoModal from "../Modal/InfoModal.vue";
 // TODO: Pass file service, and field key as a parameter to the image upload progress component
 // TODO: Refactor the cropper to have a squared stencil
 
+
+//emits
+const emit = defineEmits(['imageUploaded']);
+
 const title = {
     dropzone: "Upload Image",
     crop: "Crop Your Thumbnail",
@@ -68,6 +72,7 @@ function openUploadForm() {
 function handleUploadDone({ thumbnail_url }) {
     imgUrlRef.value = thumbnail_url;
     showUploadForm.value = false;
+    emit('imageUploaded', imgUrlRef.value)
 }
 
 function handleUploadError() {
