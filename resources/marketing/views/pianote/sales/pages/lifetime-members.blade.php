@@ -125,7 +125,7 @@
             <div class="w-full mx-auto mt-10 mb-20 px-3" style="max-width:920px;">
                 <img
                     class="cursor-pointer"
-                    src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/ascension-thumb.jpg"
+                    src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/thumb.jpg"
                     alt="Video thumbnail"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
