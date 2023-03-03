@@ -130,6 +130,7 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
+
     @endif
 
 

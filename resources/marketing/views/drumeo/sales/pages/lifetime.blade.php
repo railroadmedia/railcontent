@@ -127,7 +127,7 @@
                     <br><br>
                     You’ll also get your choice of 3 bonuses. You can select a pile of drumsticks, a new practice pad, or whatever you think will fire up the next stage of your drumming journey. PLUS, you’ll have an exclusive Masterclass to get you inspired.
                     <br><br>
-                    Anika Nilles has agreed to teach a Masterclass to Drumeo Lifetime Members that will help you become more comfortable in odd time signatures. (Who better to teach that, right?)
+                    Anika Nilles has agreed to teach a Masterclass to Drumeo Lifetime Members that will help you develop your hand technique and creativity around the kit.
                     <br><br>
                     Scroll down to see everything included with your Drumeo Lifetime Membership and we’ll see you with your little infinity badge around your name very soon!
                 </p>
@@ -177,13 +177,13 @@
 
     <section class="text-center text-white py-10 md:py-20 lg:py-24 px-4 md:px-6 relative overflow-hidden" style="background:#01050f;">
         <div class="container mx-auto z-10 relative max-w-4xl">
-            <h3 class="mb-8 sm:mb-12"><strong>Improve Your Odd-Time Feel <br class="inline sm:hidden">With Anika Nilles</strong></h3>
+            <h3 class="mb-8 sm:mb-12"><strong>Improve Your Hands and Creativity <br class="inline sm:hidden">With Anika Nilles</strong></h3>
             <div class="flex flex-wrap sm:flex-nowrap items-start lg:items-center justify-center">
                 <div class="order-1 sm:order-0 text-left text-light-navy sm:pr-5 lg:pr-12">
                     <p>
                         It’s one of the trickiest parts of playing the drums.
                         <br><br>
-                        And to celebrate your Lifetime commitment to drumming, we’ve brought in famed educator & performer, Anika Nilles, to help you conquer the world of odd-time. You’ll get exercises + handy tips & tricks that will help you get more comfortable playing everything from 5/4 to 9/16.
+                        And to celebrate your Lifetime commitment to drumming, we’ve brought in celebrated educator & performer, Anika Nilles, to help you improve your hands & creativity on the drums.
                         <br><br>
                         <b>This Masterclass will ONLY be available to you & your fellow Lifetime Members.</b>
                         <br><br>
