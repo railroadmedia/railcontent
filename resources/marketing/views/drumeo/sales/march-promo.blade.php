@@ -187,7 +187,10 @@
     @include('musora.sales.components.header-section', [
         'header' => 'Online drum lessons for all skill levels.',
         'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
-        'thumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/jan-thumb-no-badge.jpg',
+        'thumb' => 'https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/march-thumb1.png',
+        'thumbM' => 'https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/march-thumb-m2.jpg',
+        'noThumbShadow' => true,
+        'badge' => 'https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/badge.svg',
         'promoThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo2.png',
         'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m2.jpg',
         'pointOne' => 'Improve Your Skills',
@@ -196,6 +199,7 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
         'students' => number_format(Prices::$students),
     ])
+
 
     <div style="background:linear-gradient(30deg, #0a3761, #0c1526);">
         <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:url(https://drumeo-assets.s3.amazonaws.com/sales/2023/order-bg-tile-2.png) center center/160px;">
