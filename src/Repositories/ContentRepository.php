@@ -750,7 +750,6 @@ class ContentRepository extends RepositoryBase
                 ->get()
                 ->value('rowNumber');
 
-            // if $afterSubqueryTwo is null, check if we should not set a higher limit for $afterSubqueryOne
             if ($afterSubqueryTwo) {
                 $afterContents =
                     $this->query()
