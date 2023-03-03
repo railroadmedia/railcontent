@@ -21,7 +21,6 @@ use Railroad\Railforums\Repositories\PostRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use \Illuminate\Database\Eloquent\ModelNotFoundException;
 
-
 class MusoraApiUserProvider implements UserProviderInterface
 {
     private SubscriptionRepository $subscriptionRepository;
@@ -95,6 +94,26 @@ class MusoraApiUserProvider implements UserProviderInterface
             $isGoogleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_GOOGLE_SUBSCRIPTION;
         }
 
+        $hasExperience = user()->onboardingExperience ? true : false;
+
+        $hasGear = count(
+                user()->onboardingGear->filter(function ($item) use($user) {
+                    return $item->brand == $user->last_used_brand;
+                })
+            ) > 0;
+
+        $hasTopics = count(
+                user()->onboardingTopics->filter(function ($item) use($user) {
+                    return $item->brand == $user->last_used_brand;
+                })
+            ) > 0;
+
+        $hasGenres = count(
+                user()->onboardingGenres->filter(function ($item) use($user) {
+                    return $item->brand == $user->last_used_brand;
+                })
+            ) > 0;
+
         return [
             'isEdge' => $user->isAMember(),
             'isEdgeExpired' => $user->isAnExpiredMember(),
@@ -104,7 +123,8 @@ class MusoraApiUserProvider implements UserProviderInterface
             'isGoogleAppSubscriber' => $isGoogleAppSubscriber,
             'membership_level' => $user->membership_level,
             'is_drumeo_lifetime_member' => $user->is_drumeo_lifetime_member,
-            'is_lifetime_member' => $user->is_lifetime_member
+            'is_lifetime_member' => $user->is_lifetime_member,
+            'show_onboarding' => (!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience)
         ];
     }
 
@@ -133,14 +153,16 @@ class MusoraApiUserProvider implements UserProviderInterface
         $methodContent =
             $this->contentService->getBySlugAndType($methodSlug, 'learning-path')
                 ->first();
-        if($methodContent){
+        if ($methodContent) {
             $hasStartedMethod = $methodContent['started'];
             $hasCompletedMethod = $methodContent['completed'];
         }
 
         try {
-            $customerIoData = $this->customerIoService->getCustomerByUserId(config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
-                                                                            $user->id);
+            $customerIoData = $this->customerIoService->getCustomerByUserId(
+                config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
+                $user->id
+            );
         } catch (ModelNotFoundException $exception) {
             $customerIoData = null;
         }
@@ -158,19 +180,21 @@ class MusoraApiUserProvider implements UserProviderInterface
         }
 
         return array_merge([
-            'id' => $user->id,
-            'email' => $user->email,
-            'permission_level' => $user->permission_level,
-            'display_name' => $user->display_name,
-            'first_name' => $user->first_name,
-            'last_name' => $user->last_name,
-            'avatarUrl' => $user->profile_picture_url,
-            'profile_picture_url' => $user->profile_picture_url,
-            'helpscout_beacon_id' => config('railhelpscout.helpscout_tracking_beacon_id.' . brand()),
-            'level_rank' => $user->getMethodLevel(),
-            'has_started_method' => $hasStartedMethod ?? false,
-            'has_completed_method' => $hasCompletedMethod ?? false,
-        ], $extraData);
+                               'id' => $user->id,
+                               'email' => $user->email,
+                               'permission_level' => $user->permission_level,
+                               'display_name' => $user->display_name,
+                               'first_name' => $user->first_name,
+                               'last_name' => $user->last_name,
+                               'avatarUrl' => $user->profile_picture_url,
+                               'profile_picture_url' => $user->profile_picture_url,
+                               'helpscout_beacon_id' => config(
+                                   'railhelpscout.helpscout_tracking_beacon_id.'.brand()
+                               ),
+                               'level_rank' => $user->getMethodLevel(),
+                               'has_started_method' => $hasStartedMethod ?? false,
+                               'has_completed_method' => $hasCompletedMethod ?? false,
+                           ], $extraData);
     }
 
     public function getCurrentUserExperienceData()
@@ -179,7 +203,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         return [
             'totalXp' => user()->getBrandTotalXp(),
             'xpRank' => user()->getXpRank(),
-            'musoraXP' => user()->getTotalXp()
+            'musoraXP' => user()->getTotalXp(),
         ];
     }
 
@@ -222,16 +246,15 @@ class MusoraApiUserProvider implements UserProviderInterface
      */
     public function setCurrentUserFirebaseTokens(?string $iosToken, ?string $androidToken)
     {
-       $firebaseToken =
-            [
-                'type' => ($iosToken) ? 'ios' : 'android',
-                'brand' => brand(),
-                'user_id' => user()->id,
-                'token' => $iosToken ?? $androidToken,
-            ]
-        ;
+        $firebaseToken = [
+            'type' => ($iosToken) ? 'ios' : 'android',
+            'brand' => brand(),
+            'user_id' => user()->id,
+            'token' => $iosToken ?? $androidToken,
+        ];
 
-       FirebaseToken::firstOrNew($firebaseToken)->save();
+        FirebaseToken::firstOrNew($firebaseToken)
+            ->save();
 
         return $this->getCurrentUser();
     }
@@ -301,7 +324,8 @@ class MusoraApiUserProvider implements UserProviderInterface
         return null;
     }
 
-    public function deleteAccount(){
+    public function deleteAccount()
+    {
         $user = user();
         $userId = $user['id'];
 
@@ -310,34 +334,43 @@ class MusoraApiUserProvider implements UserProviderInterface
         $this->subscriptionService->cancelUserSubscriptions($userId);
 
         $user->fill([
-            'email' => 'musora+deleted_'.Carbon::now()->getTimestamp().'@musora.com',
-            'first_name' => null,
-            'last_name' => null,
-            'display_name' => '',
-            'gender' => null,
-            'country' => null,
-            'region' => null,
-            'city' => null,
-            'birthday' => null,
-            'phone_number' => null,
-            'profile_picture_url' => null,
-            'timezone' => null,
-            'permission_level' => null,
-            'drums_gear_photo' => null,
-            'biography' => null,
-            'piano_gear_photo' => null,
-            'drums_gear_set_brands' => null,
-            'drums_gear_hardware_brands' => null,
-            'drums_gear_stick_brands' => null,
-            'drums_gear_cymbal_brands' => null,
-            'drums_playing_since_year' => null,
-            'piano_gear_piano_brands' => null,
-            'piano_gear_keyboard_brands' => null,
-            'piano_playing_since_year' => null,
+                        'email' => 'musora+deleted_'.
+                            Carbon::now()
+                                ->getTimestamp().
+                            '@musora.com',
+                        'first_name' => null,
+                        'last_name' => null,
+                        'display_name' => '',
+                        'gender' => null,
+                        'country' => null,
+                        'region' => null,
+                        'city' => null,
+                        'birthday' => null,
+                        'phone_number' => null,
+                        'profile_picture_url' => null,
+                        'timezone' => null,
+                        'permission_level' => null,
+                        'drums_gear_photo' => null,
+                        'biography' => null,
+                        'piano_gear_photo' => null,
+                        'drums_gear_set_brands' => null,
+                        'drums_gear_hardware_brands' => null,
+                        'drums_gear_stick_brands' => null,
+                        'drums_gear_cymbal_brands' => null,
+                        'drums_playing_since_year' => null,
+                        'piano_gear_piano_brands' => null,
+                        'piano_gear_keyboard_brands' => null,
+                        'piano_playing_since_year' => null,
 
-        ]);
-        $user->email = 'musora+deleted_'.Carbon::now()->getTimestamp().'@musora.com';
-        $user->updated_at = Carbon::now()->toDateTimeString();
+                    ]);
+        $user->email =
+            'musora+deleted_'.
+            Carbon::now()
+                ->getTimestamp().
+            '@musora.com';
+        $user->updated_at =
+            Carbon::now()
+                ->toDateTimeString();
         $user->save();
 
         return $user;
