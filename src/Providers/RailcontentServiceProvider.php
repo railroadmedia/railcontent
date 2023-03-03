@@ -22,6 +22,7 @@ use Railroad\Railcontent\Commands\DeleteContentAndHierarchiesForUserPlaylists;
 use Railroad\Railcontent\Commands\ExpireCache;
 use Railroad\Railcontent\Commands\FillContentCompiledViewData;
 use Railroad\Railcontent\Commands\FillContentParentContentDataColumnFromHierarchy;
+use Railroad\Railcontent\Commands\FillTimestampsRailcontentTables;
 use Railroad\Railcontent\Commands\MigrateContentColumns;
 use Railroad\Railcontent\Commands\MigrateContentFields;
 use Railroad\Railcontent\Commands\MigrateContentToElasticsearch;
@@ -125,6 +126,7 @@ class RailcontentServiceProvider extends ServiceProvider
             CleanMetadata::class,
             CleanContentTopicsAndStyles::class,
             CalculateContentPopularity::class,
+            FillTimestampsRailcontentTables::class,
             MigrateContentToNewStructure::class,
             MigrateContentColumns::class,
             MigrateContentFields::class,
