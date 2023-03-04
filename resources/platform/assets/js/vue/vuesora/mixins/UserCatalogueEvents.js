@@ -8,7 +8,7 @@ const getValue = (obj, key) => {
             return true;
         }
     })
-    return filtered.length ? [0].value : '';
+    return filtered.length ? filtered[0].value : '';
 }
 
 export default {
@@ -45,7 +45,6 @@ export default {
                 let name = '';
                 let thumbnail_url = '';
                 let description = '';
-
                 if (type === 'song') {
                     name = getValue(this.item.fields, 'title');
                     thumbnail_url = getValue(this.item.data, 'thumbnail_url');

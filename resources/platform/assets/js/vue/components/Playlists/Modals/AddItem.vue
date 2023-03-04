@@ -108,6 +108,7 @@ const handleCreate = () => {
     }
 }
 onMounted(() => {
+    console.log({...props.content})
     isLoadingPlaylists.value = true;
     if (props.content.type === 'song') {
         showSongToggle.value = true
