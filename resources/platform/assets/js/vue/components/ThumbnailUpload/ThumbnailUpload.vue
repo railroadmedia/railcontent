@@ -1,8 +1,9 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { XCircleIcon } from '@heroicons/vue/outline'
+import { XCircleIcon } from '@heroicons/vue/outline';
 import ImageDropzone from "../ImageDropzone/ImageDropzone.vue";
 import ImageCropper from "../ImageCropper/ImageCropper.vue";
+import PlaylistThumbnail from "../Playlists/PlaylistThumbnail.vue"
 import ImageUploadProgress from "../ImageUploadProgress/ImageUploadProgress.vue";
 import InfoModal from "../Modal/InfoModal.vue";
 
@@ -127,6 +128,13 @@ function handleUploadError() {
                     </div>
                 </template>
 
+                <!-- Playlist thumbnail -->
+                <PlaylistThumbnail 
+                    v-if="type==='playlist'"
+                    :img="imgUrlRef"
+                    :brand="brand"
+                />   
+                
                 <img v-else class="tw-w-[158px] tw-h-[158px] tw-rounded-[9px]"
                     :src="`${imgUrlRef ? imgUrlRef : 'https://placehold.jp/158x158.png'}`" 
                 />

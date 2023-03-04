@@ -17,19 +17,27 @@
         isListView: {
             type: Boolean,
             default: true,
+        },
+        img: {
+            type: String,
+            default: "",
+        },
+        isLink: {
+            type: Boolean,
+            default: true,
         }
     });
 </script>
 <template>
         <!-- Playlist thumbnail -->
-        <a :href="list.url"
+        <a :href="isLink ? list.url : false"
             class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square"
            :class="isListView ? 'tw-h-[48px] tw-w-[48px] tw-rounded tw-shrink-0' : 'tw-row-span-5 tw-col-span-5 tw-rounded-lg'"
         >
             <!-- Image Conatiner -->
-            <div class="tw-relative tw-w-full tw-h-full" v-if="list.thumbnail_url">
+            <div class="tw-relative tw-w-full tw-h-full" v-if="list.thumbnail_url || img">
                 <img
-                    :src="`https://musora.com/cdn-cgi/image/width=200/${list.thumbnail_url}`"
+                    :src="`https://musora.com/cdn-cgi/image/width=200/${list.thumbnail_url || img}`"
                     alt="playlist thumbnail"
                     class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm"
                     loading="lazy"
@@ -37,7 +45,7 @@
                 />
                 <!-- Image Mask -->
                 <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                    <img class="tw-h-full tw-object-contain" :src="`https://musora.com/cdn-cgi/image/width=330/${list.thumbnail_url}`" alt="playlist thumbnail">
+                    <img class="tw-h-full tw-object-contain" :src="`https://musora.com/cdn-cgi/image/width=330/${list.thumbnail_url || img}`" alt="playlist thumbnail">
                 </div>
             </div>
 

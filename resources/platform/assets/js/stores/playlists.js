@@ -7,6 +7,7 @@ export const usePlaylistsStore = defineStore({
     return {
       playlists: [], // For Collection Page
       pinnedPlaylists: [], // [{ id: '', title: '', isPinned: false}]
+      activePlaylist: {},
       modalOpen: {
         modalType: null,
       },
@@ -64,18 +65,31 @@ export const usePlaylistsStore = defineStore({
       })
       this.playlistsQuantity--;
     },
+    //Set/Update Playlist Data for Playlist page
+    setActivePlaylist(list) {    
+      this.activePlaylist = list;
+    },
+    updateActivePlaylist(list) {    
+      this.activePlaylist.thumbnail_url = list.thumbnail_url,
+      this.activePlaylist.name = list.name,
+      this.activePlaylist.description = list.description
+    },
+    //Pin/Unpin
     pinPlaylist(list) {
-      console.log('playlist ', list)
-      //Pin in Catalog      
-      let playlist = this.playlists.find(p => p === list);
-      playlist.pinned = true;
+      //Pin in Catalog IF Playlist Collection Page
+      if( window.location.href.indexOf("/playlists") > -1 ) {     
+        let playlist = this.playlists.find(p => p === list);
+        playlist.pinned = true;
+      }
       //Pin in Sidebar
       this.pinnedPlaylists.push(list)
     },
     unpinPlaylist(id) {
-      //Unpin from Catalog
-      let playlist = this.playlists.find(p => p.id === id)
-      playlist.pinned = false;
+      //Unpin from Catalog IF Playlist Collection Page
+      if( window.location.href.indexOf("/playlists") > -1 ) {
+        let playlist = this.playlists.find(p => p.id === id)
+        playlist.pinned = false;
+      }
       //Unpin from Sidebar
       this.pinnedPlaylists = this.pinnedPlaylists.filter(p => {
         return p.id !== id;

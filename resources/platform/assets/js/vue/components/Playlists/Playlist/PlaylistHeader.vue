@@ -109,8 +109,10 @@
     }
     
     //---------Lifecycle Methods---------//
-    
+
     onBeforeMount(() => {
+        playlistsStore.setActivePlaylist(props.playlist) 
+        console.log(props.playlist)
         // console.log('Playlist', props.playlist)
         state.isLiked = props.playlist.is_liked_by_current_user;
         state.isPinned = props.playlist.pinned;
@@ -119,7 +121,7 @@
 </script>
 <template>
     <platform-header
-        :backgroundImage="playlist.thumbnail_url || 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg'"
+        :backgroundImage="playlistsStore.activePlaylist.thumbnail_url || 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg'"
         :blurBG="true"
     >
         <template v-slot:content> 
@@ -127,9 +129,9 @@
                 <!-- Playlist thumbnail -->
                 <div class="tw-realtive tw-h-[198px] tw-w-[198px] tw-relative tw-rounded tw-shrink-0 tw-overflow-hidden tw-mb-[16px] lg:tw-mb-0">
                     <!-- Image Conatiner -->
-                    <div v-if="playlist.thumbnail_url" class="tw-relative tw-w-full tw-h-full">
+                    <div v-if="playlistsStore.activePlaylist.thumbnail_url" class="tw-relative tw-w-full tw-h-full">
                         <img
-                            :src="`https://musora.com/cdn-cgi/image/width=200/${playlist.thumbnail_url}`"
+                            :src="`https://musora.com/cdn-cgi/image/width=200/${playlistsStore.activePlaylist.thumbnail_url}`"
                             alt="playlist thumbnail"
                             class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm"
                             loading="lazy"
@@ -137,7 +139,7 @@
                         />
                         <!-- Image Mask -->
                         <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                            <img class="tw-h-full tw-object-contain" :src="`https://musora.com/cdn-cgi/image/width=330/${playlist.thumbnail_url}`" alt="playlist thumbnail">
+                            <img class="tw-h-full tw-object-contain" :src="`https://musora.com/cdn-cgi/image/width=330/${playlistsStore.activePlaylist.thumbnail_url}`" alt="playlist thumbnail">
                         </div>
                     </div>
                     <!-- placeholder (no image or items) -->
@@ -165,15 +167,15 @@
                     <!-- Avatar -->
                     <div class="tw-hidden lg:tw-flex tw-items-center tw-mb-2">
                         <div class="tw-h-[40px] tw-w-[40px] tw-rounded-full tw-overflow-hidden tw-mr-[9px]">
-                            <img :src="playlist.user['fields.profile_picture_image_url']" alt="">
+                            <img :src="playlistsStore.activePlaylist.user['fields.profile_picture_image_url']" alt="">
                         </div>
-                        <p class="tw-font-bebas-neue tw-text-white tw-text-xl">{{ playlist.user.display_name }}</p>
+                        <p class="tw-font-bebas-neue tw-text-white tw-text-xl">{{ playlistsStore.activePlaylist.user.display_name }}</p>
                     </div>
-                    <div class="tw-text-white tw-flex tw-flex-col tw-mb-3">
-                        <h1 class="tw-capitalize tw-leading-none tw-mb-1">{{ playlist.name }}</h1>
-                        <p class="lg:tw-line-clamp-2">{{ playlist.description }}</p>
+                    <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
+                        <h1 class="tw-capitalize tw-leading-none tw-mb-2">{{ playlistsStore.activePlaylist.name }}</h1>
+                        <p class="lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.description }}</p>
                     </div>
-                    <a v-if="lessons.data.length" :href="playlist.playback_url" class="tw-w-[50px] tw-inline-flex" :class="`tw-text-${brand}`" :title="`Go To Player`">
+                    <a v-if="lessons.data.length" :href="playlistsStore.activePlaylist.playback_url" class="tw-w-[50px] tw-inline-flex" :class="`tw-text-${brand}`" :title="`Go To Player`">
                         <i class="tw-text-[50px] fas fa-play-circle"></i>
                     </a>
                 </div>

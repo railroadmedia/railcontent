@@ -119,7 +119,6 @@
 
     const updateThumbnail = (img) => {
         state.thumb = img;
-        console.log('new thumbnail ', state.thumb);
     }
 
     const handleConfirm = () => {
@@ -164,7 +163,13 @@
                             text: `Your playlist was successfully edited`
                         })
                         //load Playlists
-                        playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
+                        playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);    
+                        //Update Active Playlist
+                        playlistsStore.updateActivePlaylist({
+                            thumbnail_url: state.thumb,
+                            name: state.name,
+                            description: state.description
+                        })   
                     } else {
                         console.log('edit response code', response)
                     }
