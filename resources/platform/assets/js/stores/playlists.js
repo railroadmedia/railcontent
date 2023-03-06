@@ -6,6 +6,7 @@ export const usePlaylistsStore = defineStore({
   state: () => {
     return {
       playlists: [], // For Collection Page
+      lessons: [], // For Detail Page
       pinnedPlaylists: [], // [{ id: '', title: '', isPinned: false}]
       activePlaylist: {},
       modalOpen: {
@@ -64,6 +65,11 @@ export const usePlaylistsStore = defineStore({
         return p.id !== playlist.id;
       })
       this.playlistsQuantity--;
+    },
+    deleteLesson(lesson, index) {
+      this.lessons = this.lessons.filter((l,i) => {
+        return l.id !== lesson.id && index !== l[i];
+      })
     },
     //Set/Update Playlist Data for Playlist page
     setActivePlaylist(list) {    

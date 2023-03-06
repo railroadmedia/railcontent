@@ -282,4 +282,27 @@ export default {
         });
     },
 
+
+    /**
+     * DELETE Lesson
+     *
+     * @param {string} id
+     * @param {string} token
+     */
+    deleteLesson(id, token) {
+        const payload = {
+            "user_playlist_item_id": id
+        }
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
+            method: 'DELETE',
+            url: '/railcontent/remove-item-from-list',
+            data: payload,
+            headers
+        });
+    },
+
 };

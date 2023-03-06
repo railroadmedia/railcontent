@@ -14,7 +14,8 @@
             default: () => ({
                 modalType: null,
                 imgSrc: 'asdasdsad',
-                data: {}
+                data: {},
+                index: null
             })
         },
         brand: {
@@ -28,6 +29,7 @@
         duplicate: 'tw-max-w-[654px] tw-px-[64px]',
         edit: 'tw-max-w-[654px] tw-px-[64px]',
         remove: 'tw-max-w-[606px] tw-px-[64px]',
+        removeLesson: 'tw-max-w-[606px] tw-px-[64px]',
         startEnd: 'tw-max-w-[589px] tw-px-[48px]',
         addItem: 'tw-max-w-[917px] tw-px-[32px]',
         unpinPlaylists: 'tw-max-w-[917px] tw-px-[32px]',
@@ -46,12 +48,20 @@
             <CreatePlaylist mode="duplicate" @onCloseModal="() => emit('onClosePlaylistsModal')" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'duplicate'"  />
             <CreatePlaylist mode="edit" @onCloseModal="() => emit('onClosePlaylistsModal')" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
             
-            <div v-if="modalProps.modalType === 'remove'">
-                <DeleteModal @onCloseModal="() => emit('onClosePlaylistsModal')"
-                             :brand="brand" 
-                             :playlist="modalProps.data"
-                />
-            </div>
+
+            <DeleteModal v-if="modalProps.modalType === 'remove'"
+                         @onCloseModal="() => emit('onClosePlaylistsModal')"
+                        :brand="brand" 
+                        :data="modalProps.data"
+            />
+            <DeleteModal v-if="modalProps.modalType === 'removeLesson'"
+                         @onCloseModal="() => emit('onClosePlaylistsModal')"
+                         :brand="brand" 
+                         mode="lesson"
+                         :data="modalProps.data"
+                         :index="modalProps.index"
+            />
+
             <div v-if="modalProps.modalType === 'startEnd'">
                 <StartEnd @onCloseModal="() => emit('onClosePlaylistsModal')"
                           :brand="brand" 

@@ -19,33 +19,45 @@
             type: String,
             default: 'drumeo'
         },
-        playlist: {
+        data: {
             type: Object,
             default: {}
+        },
+        mode: {
+            type: String,
+            default: null
+        },
+        index: {
+            type: Number,
+            default: null
         }
     });
+
+    //--------Computed Properties--------//
+
 
     //--------Reactive Data--------//
     const state = reactive({
         isLoading: false,
+        title: '',
     })
 
     //-----------Methods-----------//
     const handleDeletePlaylist = () => {
-        PlaylistService.deletePlaylist(props.playlist.id, token)
+        PlaylistService.deletePlaylist(props.data.id, token)
             .then(function(response) {
                 if (response.status === 200) {
                     //update pinia stores (if pinned)
-                    playlistsStore.unpinPlaylist(props.playlist.id)
+                    playlistsStore.unpinPlaylist(props.data.id)
                     
                     //Redirect on Playlist Page
-                    if(props.playlist.id === playlistsStore.activePlaylist.id) {
+                    if(props.data.id === playlistsStore.activePlaylist.id) {
                         state.isLoading = true;
                         window.location.href = `/${brand}/playlists/`;
                         //Possibly store the deleted playlist name in session storage for notification
                     } else {
                         if(playlistsStore.playlistsQuantity <=10) {
-                            playlistsStore.deletePlaylist(props.playlist);
+                            playlistsStore.deletePlaylist(props.data);
                         } else {
                             //load
                             playlistsStore.loadingPlaylists = true;
@@ -54,7 +66,7 @@
                         //show success message
                         window.shownotification({
                             icon: 'fa-not-equal',
-                            text: `'${props.playlist.name}' was removed from your library.`
+                            text: `'${props.data.name}' was removed from your library.`
                         })
                         //Close Modal
                         emit('onCloseModal')
@@ -74,25 +86,73 @@
             });
     }
 
+    const handleDeleteLesson = () => {
+        //Delete from UI First
+        playlistsStore.deleteLesson(props.data, props.index);
+        //Send Request
+        console.log('id ', props.data.id)
+        PlaylistService.deleteLesson(props.data.id, token)
+            .then(function(response) {
+                if (response.status === 200) {   
+                    //show success message
+                    window.shownotification({
+                        icon: 'fa-not-equal',
+                        text: `'${state.title}' was removed from your playlist.`
+                    })
+                    //Close Modal
+                    emit('onCloseModal')
+                }
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    //handle error
+                    window.shownotification({
+                        icon: 'error',
+                        text: 'Woops! Something wrong happened, please try again later.'
+                    })
+                    //Close Modal
+                    emit('onCloseModal')
+                }
+            });
+    }
+
     onBeforeMount(()=> {
         // console.log(playlistsStore.playlists.length)
+        if(props.mode === "lesson") {
+            const title = props.data.fields.find(field => field.key === 'title');
+            state.title = title.value;
+        }
     })
 </script>
 
 <template>
     <div class="tw-h-full tw-w-full tw-flex tw-flex-col tw-items-center tw-justify-center">
         <template v-if="!state.isLoading">
-            <h2 class="tw-text-[24px] tw-font-bold tw-w-full  tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-4">
-                Delete <span :class="`tw-text-${brand}`" class="tw-mr-0.5">{{ playlist.name }}</span>?
+            
+            <h2 class="tw-text-2xl tw-font-bold tw-w-full  tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-4">
+                Delete 
+                <span :class="`tw-text-${brand}`" class="tw-mr-0.5">
+                    <span v-if="mode === 'lesson'">{{ state.title }}</span>
+                    <span v-else>{{ data.name }}</span>
+                </span>?
             </h2>
+
             <p class="dark:tw-text-white tw-text-center">This action can not be undone</p>
 
             <div class="tw-pt-8 tw-flex tw-flex-col tw-items-center tw-justify-center tw-w-full">
-                <button :class="`tw-mb-2 tw-btn-primary tw-btn-small tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"
+                <!-- Delete Playlist -->
+                <button v-if="mode !== 'lesson'" :class="`tw-mb-2 tw-btn-primary tw-btn-small tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"
                         @click.prevent="handleDeletePlaylist()"
                 >
                     CONFIRM
                 </button>
+                <!-- Delete Lesson -->
+                <button v-else :class="`tw-mb-2 tw-btn-primary tw-btn-small tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"
+                        @click.prevent="handleDeleteLesson()"
+                >
+                    CONFIRM
+                </button>
+                <!-- Close Modal -->
                 <button @click="() => emit('onCloseModal')"
                         class="tw-btn-primary tw-btn-small tw-text-base dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px]">
                         CANCEL

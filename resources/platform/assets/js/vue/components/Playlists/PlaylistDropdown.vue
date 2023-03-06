@@ -25,6 +25,10 @@
         data: {
             type: Object,
         },
+        index: {
+            type: Number,
+            default: 0, 
+        },
         isOpen: {
             type: Boolean,
             default: false
@@ -167,6 +171,11 @@
         emit('closeDropdown');
     };
 
+    const removeLesson = () => {
+        window.openplaylistmodal({ modalType: 'removeLesson', data: props.data, index: props.index });
+        emit('closeDropdown');
+    };
+
     const addToPlaylist = () => {
         window.openplaylistmodal({ modalType: 'addItem', contentId: props.data.id, type: props.data.type });
     }
@@ -195,6 +204,7 @@
             case "duplicatePlaylist": duplicatePlaylist(); break;
             case "pinPlaylist": pinPlaylist(); break;
             case "privateToggle": privateToggle(); break;
+            case "removeLesson": removeLesson(); break;
             case "editLessonTime": editLessonTime(); break;
         }
     }

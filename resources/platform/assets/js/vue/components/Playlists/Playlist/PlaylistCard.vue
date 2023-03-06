@@ -11,7 +11,7 @@
     //Pinia Stores
     const playlistsStore = usePlaylistsStore();
 
-    //-----------Props-----------//
+    //--------------Props--------------//
     const props = defineProps({
         brand: {
             type: String,
@@ -314,6 +314,7 @@
                     :is-open="state.dropdownOpen"
                     :dropdownOptions="dropdownOptions"
                     :data="lesson"
+                    :index="index"
                     type="lesson"
                     @closeDropdown="state.dropdownOpen = false"
                     @pinItem="(val) => state.isPinned = val"
