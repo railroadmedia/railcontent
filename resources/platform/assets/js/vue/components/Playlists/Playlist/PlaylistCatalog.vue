@@ -48,9 +48,7 @@
     })
 
     onBeforeMount(() => {      
-        console.log('props lessons quantity ', props.lessons.data.length)
         playlistsStore.lessons = props.lessons.data;
-        console.log('store lessons quantity ', playlistsStore.lessons.length)
     });
 </script>
 <template>

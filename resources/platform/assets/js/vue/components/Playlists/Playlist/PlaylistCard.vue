@@ -32,9 +32,6 @@
 
     //-----------Computed Props-----------//
     
-    const duration_formated = computed(()=> {
-        return props.lesson.created_on.replace(/^0(?:0:0?)?/, '');;
-    })
     //Thumbnail
     const lessonThumbnail = computed( () => {
         const thumbnail = props.lesson.data.find(data => data.key === 'original_thumbnail_url');
@@ -44,17 +41,6 @@
     const lessonDescription = computed( () => {
         const description = props.lesson.fields.find(field => field.key === 'title');
         return description.value;
-    })
-    //Duration
-    const duration = computed( () => {
-        let time = props.lesson.duration;
-        const hrs = Math.floor(time / 3600);
-        const min = Math.floor(time / 60);
-        const sec = time - min * 60;
-        const hrsFormatted = hrs < 10 ? `0${hrs}` : hrs;
-        const minFormatted = min < 10 ? `0${min}` : min;
-        const secFormatted = sec < 10 ? `0${sec}` : sec;
-        return `${hrsFormatted}:${minFormatted}:${secFormatted}`;
     })
 
     //-----------Refs-----------//
@@ -83,6 +69,23 @@
     ]
 
     //-----------Methods-----------//
+
+    //Duration
+    const duration_formatted = (value) => {
+        let time = value;
+        if( time ) { //does it exist
+            const hrs = Math.floor(time / 3600);
+            const min = Math.floor(time / 60);
+            const sec = time - min * 60;
+            const hrsFormatted = hrs < 10 ? `${hrs}` : hrs;
+            const minFormatted = min < 10 ? `0${min}` : min;
+            const secFormatted = sec < 10 ? `0${sec}` : sec;
+            return `${hrsFormatted}:${minFormatted}:${secFormatted}`;
+        } else {
+            return false;
+        }
+
+    }
 
     //Handle Share
     const shareHandler = () => {
@@ -226,7 +229,7 @@
         state.isPinned = props.lesson.pinned;
         state.isPrivate = props.lesson.private;
 
-        // console.log('lesson', props.lesson)
+        console.log('lesson', props.lesson)
     });
 </script>
 <template>
@@ -275,8 +278,10 @@
                 <!-- description -->
                 <p class="tw-font-bold tw-truncate">{{ lessonDescription }}</p>
                 <!-- Time -->
-                <p class="tw-text-[13px]">
-                    <span>Begins {{ }}</span><span class="tw-mx-0.5">•</span><span>Ends</span>
+                <p class="tw-text-[13px] tw-text-[#00101D] dark:tw-text-[#7E9AB1]">
+                    <span>Begins {{ duration_formatted(lesson.start_second ) || '0:00:00' }}</span>
+                    <span class="tw-mx-0.5">•</span>
+                    <span>Ends {{ duration_formatted( lesson.end_second ) || duration_formatted(lesson.duration) || '0:00:00' }} </span>
                 </p>
             </div>
 
@@ -289,7 +294,7 @@
 
             <!-- Lesson Time -->
             <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px]">
-                <span>{{ duration }}</span>
+                <span>{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>
             </div>
         </a>
 
