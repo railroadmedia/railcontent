@@ -25,12 +25,14 @@ const token = inject('csrf_token');
 const importAll = ref(false);
 const formattedRows = ref([]);
 const additionalItems = ref(0);
+const pageNumber = ref(1);
 const isLoadingPlaylists = ref(false);
 const isLoadingAssignments = ref(false);
 const selectedPlaylists = ref([]);
 const showSongToggle = ref(false);
 const addFullSongToggle = ref(true);
 const addInstrumentlessToggle = ref(false);
+const preventReFetch = ref(false);
 
 const handleOnToggleAssignments = (val) => {
     importAll.value = val;
@@ -68,15 +70,15 @@ const addRemovePlaylistSelection = (payload) => {
 const handleActionClick = (payload) => {
     const index = selectedPlaylists.value.indexOf(String(payload));
     if (index === -1) {
+        addRemovePlaylistSelection(payload);
         handleSaveItem(payload)
-            .then(() => { })
             .catch(() => {
                 addRemovePlaylistSelection(payload);
             });
     } else {
-        handleRemoveFromPlaylist(payload)
+        addRemovePlaylistSelection(payload);
+        handleRemoveFromPlaylist(payload);
     }
-    addRemovePlaylistSelection(payload);
 };
 
 const handleCancel = () => {
@@ -85,11 +87,11 @@ const handleCancel = () => {
 
 const handleRemoveFromPlaylist = (contentId) => {
     PlaylistService.deletePlaylistItem(contentId, token)
-        .then(function (response) {
-                window.shownotification({
-                    icon: 'fa-not-equal',
-                    text: `'${state.title}' was removed from your playlist.`
-                })
+        .then(() => {
+            window.shownotification({
+                icon: 'fa-not-equal',
+                text: `'${state.title}' was removed from your playlist.`
+            })
         })
         .catch(function (error) {
             if (error.response) {
@@ -99,6 +101,7 @@ const handleRemoveFromPlaylist = (contentId) => {
                     text: 'Woops! Something wrong happened, please try again later.'
                 })
             }
+            addRemovePlaylistSelection(contentId);
         });
 };
 
@@ -131,8 +134,50 @@ const handleCreate = () => {
         window.addItemCallback = null;
     }
 }
+const handleScroll = (e) => {
+    if ((e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 1) && !preventReFetch.value) {
+        pageNumber.value = pageNumber.value + 1;
+        e.target.scrollTop = e.target.scrollTop / pageNumber.value;
+        getUserPlaylists();
+    }
+}
+const getUserPlaylists = () => {
+    PlaylistService.getCurrentUserPlaylists({ brand: props.brand, page: pageNumber.value, limit: 10 }, token).then(r => {
+        isLoadingPlaylists.value = false;
+        const { data: { data } } = r;
+        if (data.length) {
+            const formattedTable = data.map((item) => {
+                const { name, thumbnail_url, duration_formated, id, created_at } = item;
+                const dateCreated = new Date(created_at);
+                const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                const month = months[dateCreated.getMonth()];
+                const formattedDate = `${month} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`;
+                return ([
+                    {
+                        thumb: thumbnail_url,
+                        content: name
+                    },
+                    {
+                        content: formattedDate
+                    },
+                    {
+                        content: duration_formated
+                    },
+                    {
+                        showActionSlot: true,
+                        actionPayload: id
+                    }
+                ])
+            });
+            formattedRows.value = [...formattedRows.value, ...formattedTable];
+        } else {
+            preventReFetch.value = true;
+        }
+    }).catch(() => {
+        window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
+    });
+}
 onMounted(() => {
-    console.log({ ...props.content })
     isLoadingPlaylists.value = true;
     if (props.content.type === 'song') {
         showSongToggle.value = true
@@ -146,37 +191,7 @@ onMounted(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
         });
     }
-
-    PlaylistService.getCurrentUserPlaylists({ token }).then(r => {
-        isLoadingPlaylists.value = false;
-        const { data: { data } } = r;
-        const formattedTable = data.map((item) => {
-            const { name, thumbnail_url, duration_formated, id, created_at } = item;
-            const dateCreated = new Date(created_at);
-            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-            const month = months[dateCreated.getMonth()];
-            const formattedDate = `${month} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`;
-            return ([
-                {
-                    thumb: thumbnail_url,
-                    content: name
-                },
-                {
-                    content: formattedDate
-                },
-                {
-                    content: duration_formated
-                },
-                {
-                    showActionSlot: true,
-                    actionPayload: id
-                }
-            ])
-        });
-        formattedRows.value = formattedTable;
-    }).catch(() => {
-        window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
-    });
+    getUserPlaylists();
 });
 </script>
 
@@ -218,8 +233,12 @@ onMounted(() => {
                 </fieldset>
             </div>
         </div>
-        <Table v-if="formattedRows.length" @onActionClick="handleActionClick"
-            classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll" :rows="formattedRows">
+        <Table v-if="formattedRows.length" 
+               @onActionClick="handleActionClick" 
+               @onScroll="handleScroll"
+               classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll" 
+               :stickyHeader="true"
+               :rows="formattedRows">
             <template v-slot:actionContent="slotProps">
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
                     class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]" />
