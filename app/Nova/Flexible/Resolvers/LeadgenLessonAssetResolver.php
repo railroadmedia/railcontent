@@ -70,7 +70,7 @@ class LeadgenLessonAssetResolver implements ResolverInterface
 
         foreach($assets as $asset){
             //insert
-            if(is_null($asset['id'])){
+            if(is_null($asset['id']) && !is_null(empty($model['id']))){
                 $addAsset = new LeadgenLessonAsset();
                 $addAsset->leadgen_id = !empty($model['meta_desc']) ? $model['id'] : null;
                 $addAsset->leadgen_lesson_id = empty($model['meta_desc']) ? $model['id'] : null;
