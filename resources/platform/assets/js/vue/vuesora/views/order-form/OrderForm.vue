@@ -91,6 +91,7 @@
                     :brand="brand"
                     :number-of-payments="cartData.number_of_payments"
                     :payment-plan-options="cartData.payment_plan_options"
+                    :cartDataUrl="cartDataUrl"
                     @updateCartData="updateCart"
                 />
             </section>
