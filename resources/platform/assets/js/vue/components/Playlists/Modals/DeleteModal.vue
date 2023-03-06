@@ -88,10 +88,9 @@
 
     const handleDeleteLesson = () => {
         //Delete from UI First
-        playlistsStore.deleteLesson(props.data, props.index);
+        playlistsStore.deletePlaylistItem(props.data, props.index);
         //Send Request
-        console.log('id ', props.data.id)
-        PlaylistService.deleteLesson(props.data.id, token)
+        PlaylistService.deletePlaylistItem(props.data.id, token)
             .then(function(response) {
                 if (response.status === 200) {   
                     //show success message

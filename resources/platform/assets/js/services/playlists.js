@@ -289,7 +289,7 @@ export default {
      * @param {string} id
      * @param {string} token
      */
-    deleteLesson(id, token) {
+    deletePlaylistItem(id, token) {
         const payload = {
             "user_playlist_item_id": id
         }
