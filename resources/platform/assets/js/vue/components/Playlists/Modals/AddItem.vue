@@ -68,15 +68,15 @@ const addRemovePlaylistSelection = (payload) => {
 const handleActionClick = (payload) => {
     const index = selectedPlaylists.value.indexOf(String(payload));
     if (index === -1) {
+        addRemovePlaylistSelection(payload);
         handleSaveItem(payload)
-            .then(() => { })
             .catch(() => {
                 addRemovePlaylistSelection(payload);
             });
     } else {
-        handleRemoveFromPlaylist(payload)
+        addRemovePlaylistSelection(payload);
+        handleRemoveFromPlaylist(payload);
     }
-    addRemovePlaylistSelection(payload);
 };
 
 const handleCancel = () => {
@@ -85,8 +85,8 @@ const handleCancel = () => {
 
 const handleRemoveFromPlaylist = (contentId) => {
     PlaylistService.deletePlaylistItem(contentId, token)
-        .then(function (response) {
-                window.shownotification({
+        .then(()=>{
+            window.shownotification({
                     icon: 'fa-not-equal',
                     text: `'${state.title}' was removed from your playlist.`
                 })
@@ -99,6 +99,7 @@ const handleRemoveFromPlaylist = (contentId) => {
                     text: 'Woops! Something wrong happened, please try again later.'
                 })
             }
+            addRemovePlaylistSelection(contentId);
         });
 };
 
