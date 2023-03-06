@@ -701,13 +701,14 @@ class ContentRepository extends RepositoryBase
         $orderDirection = 'desc',
         $contentId = null
     ) {
-
         if ($contentId) {
             $beforeSubqueryOne = $this
                 ->query()
-                ->selectRaw(DB::raw(
-                    'ROW_NUMBER() OVER (order by railcontent_content.' . $orderColumn . ' desc, railcontent_content.id desc) AS rowNumber'
-                ))
+                ->selectRaw(
+                    DB::raw(
+                        'ROW_NUMBER() OVER (order by railcontent_content.' . $orderColumn . ' desc, railcontent_content.id desc) AS rowNumber'
+                    )
+                )
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
                 ->where(ConfigService::$tableContent . '.type', $type)
@@ -731,15 +732,16 @@ class ContentRepository extends RepositoryBase
 
             $afterSubqueryOne = $this
                 ->query()
-                ->selectRaw(DB::raw(
-                    'ROW_NUMBER() OVER (order by railcontent_content.' . $orderColumn . ' asc, railcontent_content.id asc) AS rowNumber'
-                ))
+                ->selectRaw(
+                    DB::raw(
+                        'ROW_NUMBER() OVER (order by railcontent_content.' . $orderColumn . ' asc, railcontent_content.id asc) AS rowNumber'
+                    )
+                )
                 ->selectPrimaryColumns()
                 ->restrictByUserAccess()
                 ->where(ConfigService::$tableContent . '.type', $type)
                 ->where(ConfigService::$tableContent . '.' . $columnName, '>=', $columnValue)
-                ->limit(70)
-            ;
+                ->limit(70);
 
             $afterSubqueryTwo = $this->query()
                 ->selectRaw(DB::raw('rowNumber'))
@@ -748,14 +750,17 @@ class ContentRepository extends RepositoryBase
                 ->get()
                 ->value('rowNumber');
 
-            // if $afterSubqueryTwo is null, check if we should not set a higher limit for $afterSubqueryOne
-            $afterContents =
-                $this->query()
-                    ->select('*')
-                    ->fromSub($afterSubqueryOne, 'sub')
-                    ->where('rowNumber', '>', $afterSubqueryTwo)
-                    ->limit($siblingPairLimit)
-                    ->getToArray();
+            if ($afterSubqueryTwo) {
+                $afterContents =
+                    $this->query()
+                        ->select('*')
+                        ->fromSub($afterSubqueryOne, 'sub')
+                        ->where('rowNumber', '>', $afterSubqueryTwo)
+                        ->limit($siblingPairLimit)
+                        ->getToArray();
+            } else {
+                $afterContents = [];
+            }
         } else {
             $beforeContents =
                 $this->query()
@@ -2357,9 +2362,11 @@ class ContentRepository extends RepositoryBase
                 ->toArray();
 
             foreach ($filterOptionsArray[$filterOptionName] as $filterOptionIndexToClean => $filterOptionValueToClean) {
-                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(ucwords(
-                    $filterOptionValueToClean
-                ));
+                $filterOptionsArray[$filterOptionName][$filterOptionIndexToClean] = trim(
+                    ucwords(
+                        $filterOptionValueToClean
+                    )
+                );
             }
 
             $filterOptionsArray[$filterOptionName] = array_unique($filterOptionsArray[$filterOptionName]);
