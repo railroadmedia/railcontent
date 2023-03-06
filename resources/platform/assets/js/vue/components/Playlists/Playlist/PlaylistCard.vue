@@ -70,9 +70,9 @@
 
     //-----------Methods-----------//
 
-    //Duration
-    const duration_formatted = (value) => {
-        let time = value;
+    //Format Duration (in seconds)
+    const duration_formatted = (seconds) => {
+        let time = seconds;
         if( time ) { //does it exist
             const hrs = Math.floor(time / 3600);
             const min = Math.floor(time / 60);
@@ -84,7 +84,6 @@
         } else {
             return false;
         }
-
     }
 
     //Handle Share
@@ -225,11 +224,8 @@
     //-----------Lifecycle Methods-----------//
 
     onBeforeMount(() => {
-        //check if it's pinned with request? Or prerender?
         state.isPinned = props.lesson.pinned;
         state.isPrivate = props.lesson.private;
-
-        console.log('lesson', props.lesson)
     });
 </script>
 <template>

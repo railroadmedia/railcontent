@@ -65,6 +65,8 @@
             <div v-if="modalProps.modalType === 'startEnd'">
                 <StartEnd @onCloseModal="() => emit('onClosePlaylistsModal')"
                           :brand="brand" 
+                          :data="modalProps.data"
+                          :index="modalProps.index"
                 />
             </div>
             <div v-if="modalProps.modalType === 'addItem'">
