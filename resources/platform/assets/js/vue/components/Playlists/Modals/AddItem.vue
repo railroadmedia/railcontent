@@ -66,12 +66,16 @@ const addRemovePlaylistSelection = (payload) => {
 }
 
 const handleActionClick = (payload) => {
-    addRemovePlaylistSelection(payload);
-    handleSaveItem(payload)
-        .then(() => {})
-        .catch(() => {
-            addRemovePlaylistSelection(payload);
-        });
+    if (selectedPlaylists.value.indexOf(String(payload)) !== -1) {
+        addRemovePlaylistSelection(payload);
+        handleSaveItem(payload)
+            .then(() => { })
+            .catch(() => {
+                addRemovePlaylistSelection(payload);
+            });
+    } else {
+        
+    }
 };
 
 const handleCancel = () => {
@@ -108,7 +112,7 @@ const handleCreate = () => {
     }
 }
 onMounted(() => {
-    console.log({...props.content})
+    console.log({ ...props.content })
     isLoadingPlaylists.value = true;
     if (props.content.type === 'song') {
         showSongToggle.value = true
@@ -189,7 +193,8 @@ onMounted(() => {
                 <fieldset class="tw-flex tw-flex-row tw-items-center">
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">{{ instrumentless }}
                             TRACK</strong></p>
-                    <Toggle :initialValue="addInstrumentlessToggle" id="toggle-instrumentless-song" @onToggle="handleOnToggleInstrumentlessSong" />
+                    <Toggle :initialValue="addInstrumentlessToggle" id="toggle-instrumentless-song"
+                        @onToggle="handleOnToggleInstrumentlessSong" />
                 </fieldset>
             </div>
         </div>
