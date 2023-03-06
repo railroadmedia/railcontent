@@ -73,7 +73,7 @@
         .tab-switcher.active {
             background:#fff;
             border-color:#fff;
-            color:#000c18;
+            color:#000C17;
         }
 
         .tab-switcher .bottom-arrow {

@@ -127,7 +127,7 @@
                     <br><br>
                     You’ll also get your choice of 3 bonuses. You can select a pile of drumsticks, a new practice pad, or whatever you think will fire up the next stage of your drumming journey. PLUS, you’ll have an exclusive Masterclass to get you inspired.
                     <br><br>
-                    Anika Nilles has agreed to teach a Masterclass to Drumeo Lifetime Members that will help you become more comfortable in odd time signatures. (Who better to teach that, right?)
+                    Anika Nilles has agreed to teach a Masterclass to Drumeo Lifetime Members that will help you develop your hand technique and creativity around the kit.
                     <br><br>
                     Scroll down to see everything included with your Drumeo Lifetime Membership and we’ll see you with your little infinity badge around your name very soon!
                 </p>
@@ -177,13 +177,13 @@
 
     <section class="text-center text-white py-10 md:py-20 lg:py-24 px-4 md:px-6 relative overflow-hidden" style="background:#01050f;">
         <div class="container mx-auto z-10 relative max-w-4xl">
-            <h3 class="mb-8 sm:mb-12"><strong>Improve Your Odd-Time Feel <br class="inline sm:hidden">With Anika Nilles</strong></h3>
+            <h3 class="mb-8 sm:mb-12"><strong>Improve Your Hands and Creativity <br class="inline sm:hidden">With Anika Nilles</strong></h3>
             <div class="flex flex-wrap sm:flex-nowrap items-start lg:items-center justify-center">
                 <div class="order-1 sm:order-0 text-left text-light-navy sm:pr-5 lg:pr-12">
                     <p>
                         It’s one of the trickiest parts of playing the drums.
                         <br><br>
-                        And to celebrate your Lifetime commitment to drumming, we’ve brought in famed educator & performer, Anika Nilles, to help you conquer the world of odd-time. You’ll get exercises + handy tips & tricks that will help you get more comfortable playing everything from 5/4 to 9/16.
+                        And to celebrate your Lifetime commitment to drumming, we’ve brought in celebrated educator & performer, Anika Nilles, to help you improve your hands & creativity on the drums.
                         <br><br>
                         <b>This Masterclass will ONLY be available to you & your fellow Lifetime Members.</b>
                         <br><br>
@@ -435,6 +435,35 @@
             {{--            @else--}}
 {{--            <a class="join sold-out my-4">Sold Out</a>--}}
             {{--            @endif--}}
+        </div>
+    </section>
+    @php
+        $faqs = [
+            [
+                "title" => "How long does my lifetime membership last?",
+                "desc" => 'Simply, for life! Either yours or ours. Your Lifetime Membership is valid as long as Drumeo (Musora) remains in service and you stay alive.',
+            ],
+            [
+                "title" => "What happens if Drumeo or Musora’s service ends?",
+                "desc" => 'We’ll make every effort to provide Lifetime Members with all the original media content we have created available for download. That way, you can continue to enjoy everything we’ve done.<br><br>This will cover all available Musora original content (our entire curriculum and courses) but will not include and 3rd party content that we do not own rights to.',
+            ],
+            [
+                "title" => "What content is included with my Lifetime Membership? Are songs included?",
+                "desc" => 'As a Drumeo Lifetime Member, you get access to all original Musora content for life and our entire library of 5000+ drum transcriptions. That’s all our courses, the Method, Live lessons, Student Reviews, and Songs.<br><br>Some of our content is licensed by 3rd parties, which means we have to pay a fee for each member to use the material on a temporary basis. This includes song transcriptions for our other instruments (Piano, Guitar, Vocals).<br><br>If all you want to play is drums, then you have everything. But if you’re interested in learning songs for other instruments, there is a small fee for ongoing access because these songs are licensed. <br><br>We wish it wasn’t the case and have done our best to make the fee as small as possible. Currently, the fee is $40/year for Lifetime Members.<br><br>But again, this does NOT apply to drum transcriptions.',
+            ],
+        ]
+    @endphp
+
+    <section class="py-12 md:py-20" style="background-color:#01050f;">
+        <div class="container mx-auto max-w-5xl px-6">
+            <h2 class="font-extrabold mb-10 text-center text-white">Frequently Asked Questions</h2>
+            @foreach($faqs as $faq)
+                @include('_partials.components.question-dropdown', [
+                    'num' => '?',
+                    "title" => $faq['title'],
+                    "desc" => $faq['desc'],
+                ])
+            @endforeach
         </div>
     </section>
 

@@ -72,7 +72,7 @@
         .tab-switcher.active {
             background:#fff;
             border-color:#fff;
-            color:#000c18;
+            color:#000C17;
         }
 
         .tab-switcher .bottom-arrow {
@@ -183,10 +183,6 @@
             background:#001429;
         }
 
-        .bg-navy-900 {
-            background:#000C18;
-        }
-
         .border-navy-700 {
             border-color:#04203C;
         }
@@ -240,7 +236,7 @@
                         Plus you’ll get support and help from real teachers every step of the way to make sure you’re seeing the results you want.</p>
                 </div>
             </div>
-            <div class="absolute bottom-0 left-0 right-0 z-10 h-1/2" style="background: linear-gradient(0, #000c18 60%, transparent);"></div>
+            <div class="absolute bottom-0 left-0 right-0 z-10 h-1/2" style="background: linear-gradient(0, #000C17 60%, transparent);"></div>
         </div>
     </header>
 
@@ -259,7 +255,7 @@
         </div>
     </div>
 
-    <section class="bg-navy-900 text-white py-8 sm:py-12 relative z-20 text-center">
+    <section class="bg-musora-black text-white py-8 sm:py-12 relative z-20 text-center">
         <div class="container mx-auto">
             <h1 class="font-bold leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>Everything you need to get inspired,<br class="hidden sm:inline">
                     focused, and better at the piano.</strong></h1>
@@ -332,7 +328,7 @@
 
         </div>
     </section>
-    <section class="bg-navy-900 text-white py-8 sm:py-12 relative z-20 text-center">
+    <section class="bg-musora-black text-white py-8 sm:py-12 relative z-20 text-center">
         <div class="container mx-auto">
             <div class="flex text-center">
                 <div class="w-1/3 font-extrabold px-1 sm:px-3">
@@ -465,7 +461,7 @@
 
         </div>
     </section>
-    <section class="bg-navy-900 text-white py-8 sm:py-12 relative z-20 text-center">
+    <section class="bg-musora-black text-white py-8 sm:py-12 relative z-20 text-center">
         <div class="container mx-auto">
             <h1 class="font-bold mb-10 sm:mb-16 leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>What students are saying about Lisa &<br class="hidden sm:inline"> the Pianote Foundations book set.</strong></h1>
             <div class="testimonials px-6">
@@ -506,10 +502,10 @@
                     </div>
                 </div>
             </div>
-            <div class="absolute top-0 left-0 right-0 z-10 h-1/2" style="background: linear-gradient(180deg, #000c18 60%, transparent);"></div>
+            <div class="absolute top-0 left-0 right-0 z-10 h-1/2" style="background: linear-gradient(180deg, #000C17 60%, transparent);"></div>
         </div>
     </section>
-    <section class="bg-navy-900 text-white py-8 sm:py-12 relative z-20 text-center border-t-4 border-pianote">
+    <section class="bg-musora-black text-white py-8 sm:py-12 relative z-20 text-center border-t-4 border-pianote">
         <div class="container mx-auto">
             <h1 class="font-bold mb-8 sm:mb-10 leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>Still have questions?</strong></h1>
             <div class="px-6 mx-auto max-w-4xl">
