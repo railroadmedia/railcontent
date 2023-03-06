@@ -53,6 +53,10 @@ export default {
             type: Array,
             default: () => [],
         },
+
+        cartDataUrl: {
+            type: String,
+        },
     },
     computed: {
         $_numberOfPayments: {
@@ -66,7 +70,7 @@ export default {
     },
     methods: {
         updateNumberOfPayments(value) {
-            Api.updateNumberOfPayments(value)
+            Api.updateNumberOfPayments(this.cartDataUrl, value)
                 .then((response) => {
                     if (response) {
                         this.$emit('updateCartData', response.data);
