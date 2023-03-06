@@ -136,7 +136,7 @@
         }
 
         header {
-            background-image:url('https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/header-m.jpg');
+            background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/header-m.jpg');
             background-size:cover;
         }
 
@@ -162,7 +162,7 @@
 
         @media (min-width:768px) {
             header {
-                background-image:url('https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/header.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/header.jpg');
                 background-size:cover;
             }
 
@@ -193,12 +193,12 @@
         <div class="max-w-4xl mx-auto px-2 sm:px-4 lg:px-0">
             <div class="flex flex-wrap items-center">
                 <div class="w-full mb-5 sm:mb-0 sm:w-2/5 sm:order-1 text-center">
-                    <img class="inline-block sm:hidden h-20 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png" alt="logo white"><br>
+                    <img class="inline-block sm:hidden h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png" alt="logo white"><br>
                     <i class="fas fa-play mt-36 mb-14 sm:my-0 play-button autoplay-video" data-open="trailer"></i>
                 </div>
                 <div class="w-full sm:w-3/5 text-center sm:text-left">
                     <div class="px-1">
-                        <img class="hidden sm:inline-block sm:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png" alt="logo white">
+                        <img class="hidden sm:inline-block sm:h-20 lg:h-24 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png" alt="logo white">
                         <h3 class="font-extrabold leading-tight sm:mt-4">
                             Start playing the piano <br>
                             in just 5 Days!
@@ -260,7 +260,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center md:justify-start w-full md:w-1/2 sm:order-1 md:pl-6 mt-7 sm:mt-0 relative">
-                        <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/collage.png" alt="collage">
+                        <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/collage.png" alt="collage">
                     </div>
                 </div>
             </div>
@@ -279,7 +279,7 @@
                     <div class="relative mb-4 autoplay-video cursor-pointer text-white" data-open="lesson">
                         <p class="text-xs bg-pianote rounded-full py-0.5 px-2 absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 mt-0.5"><strong>Click to see the first lesson!</strong></p>
                         <i class="fas fa-play play-button smaller z-10 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></i>
-                        <img class="relative z-0 rounded-lg border-4 border-pianote lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day-1.jpg" alt="lesson-1">
+                        <img class="relative z-0 rounded-lg border-4 border-pianote lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day-1.jpg" alt="lesson-1">
                     </div>
                     <p>
                         Day one starts off with the basics! You’ll learn the layout of the keyboard, the musical alphabet, your first scale, and the super easy and fun concept of power chords.
@@ -287,7 +287,7 @@
                 </div>
                 <div class="w-full sm:w-1/3 px-4 sm:px-2 mb-6">
                     <div class="relative mb-4">
-                        <img class="relative z-0 rounded-lg lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day-2.jpg" alt="lesson-2">
+                        <img class="relative z-0 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day-2.jpg" alt="lesson-2">
                     </div>
                     <p>
                         Time to learn a melody! You’ll use your new skills and musical knowledge from day one to start playing a beautiful melody by ear.
@@ -295,7 +295,7 @@
                 </div>
                 <div class="w-full sm:w-1/3 px-4 sm:px-2 mb-6">
                     <div class="relative mb-4">
-                        <img class="relative z-0 rounded-lg lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day-3.jpg" alt="lesson-3">
+                        <img class="relative z-0 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day-3.jpg" alt="lesson-3">
                     </div>
                     <p>
                         These lessons focus on one of the most important skills when learning the piano – playing with both hands. You’ll add to the melody you learned on day 2 to play something amazing!
@@ -303,7 +303,7 @@
                 </div>
                 <div class="w-full sm:w-1/3 px-4 sm:px-2 mb-6">
                     <div class="relative mb-4">
-                        <img class="relative z-0 rounded-lg lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day-4.jpg" alt="lesson-4">
+                        <img class="relative z-0 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day-4.jpg" alt="lesson-4">
                     </div>
                     <p>
                         Reading music allows you to play more songs on the piano! This introduction to reading music will show you how to read and identify the notes on the piano that you’ve already been playing.
@@ -311,7 +311,7 @@
                 </div>
                 <div class="w-full sm:w-1/3 px-4 sm:px-2 mb-6">
                     <div class="relative mb-4">
-                        <img class="relative z-0 rounded-lg lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day-5.jpg" alt="lesson-5">
+                        <img class="relative z-0 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/day-5.jpg" alt="lesson-5">
                     </div>
                     <p>
                         Time to play a REAL song using everything you’ve learned so far! You’ll also get some new ideas to take away and practice, and ways to keep exploring the piano.
@@ -369,8 +369,8 @@
             </h3>
             <div class="flex flex-wrap sm:flex-nowrap items-center text-left">
                 <picture class="mb-5 md:mb-0 sm:order-1">
-                    <source media="(min-width:768px)" srcset="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/3-image.png">
-                    <img class="h-56 md:h-72 lg:h-80 lazyload" data-src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/3-image-m.png" alt="3-image">
+                    <source media="(min-width:768px)" srcset="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/3-image.png">
+                    <img class="h-56 md:h-72 lg:h-80 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/3-image-m.png" alt="3-image">
                 </picture>
                 <p class="w-full sm:w-auto sm:pr-6 max-w-sm">
                     Practice makes piano players.
@@ -389,8 +389,8 @@
         <div class="h-10 absolute left-0 right-0" style="background: linear-gradient(to top left, #01050F calc(50% - 1px), #01050F, #fff calc(50% + 1px)); top: -1px;"></div>
         <div class="max-w-sm md:max-w-4xl mx-auto px-4 sm:px-0 text-white lg:gap-10 relative flex flex-col md:flex-row lg:block items-center justify-center text-right">
             <picture>
-                <source media="(min-width:768px)" srcset="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/coach.jpg">
-                <img class="rounded-lg lg:absolute lg:left-10 lg:top-0 h-72 md:h-96 lg:h-full mb-10 md:mb-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/coach-m.jpg" alt="jared profile">
+                <source media="(min-width:768px)" srcset="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/coach.jpg">
+                <img class="rounded-lg lg:absolute lg:left-10 lg:top-0 h-72 md:h-96 lg:h-full mb-10 md:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/coach-m.jpg" alt="jared profile">
             </picture>
 
             <div class="max-w-md inline-block text-left md:pl-8 lg:pl-0">
@@ -401,9 +401,9 @@
                     Lisa Witt
                 </h1>
                 <div class="font-bold text-white mb-8">
-                    <img class="h-6 mr-2 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/youtube_icon.svg" alt="youtube icon">
+                    <img class="h-6 mr-2 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/youtube_icon.svg" alt="youtube icon">
                     1M Subscribers
-                    <img class="h-6 ml-6 mr-2 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/youtube_icon.svg" alt="youtube icon">
+                    <img class="h-6 ml-6 mr-2 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/youtube_icon.svg" alt="youtube icon">
                     24M Views
                 </div>
                 <p>
@@ -427,7 +427,7 @@
             <div class="flex flex-wrap max-w-md mx-auto sm:max-w-full">
                 <div class="w-full sm:w-1/2 lg:w-1/4 flex flex-auto px-2 mb-8 md:mb-4 lg:mb-0">
                     <div class="rounded-xl overflow-hidden w-full" style="background: #051124;">
-                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/testimonials/jessripley.jpg">
+                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/sales/2022/testimonials/jessripley.jpg">
                         </div>
                         <div class="p-4">
                             <p class="italic mb-4">
@@ -445,7 +445,7 @@
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/4 flex flex-auto px-2 mb-8 md:mb-4 lg:mb-0">
                     <div class="rounded-xl overflow-hidden w-full" style="background: #051124;">
-                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/testimonials/nabilabdelmoneim.jpg" >
+                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/sales/2022/testimonials/nabilabdelmoneim.jpg" >
                         </div>
                         <div class="p-4">
                             <p class="italic mb-4">
@@ -463,7 +463,7 @@
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/4 flex flex-auto px-2 mb-8 sm:mb-0">
                     <div class="rounded-xl overflow-hidden w-full" style="background: #051124;">
-                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/testimonials/xitlalicaballero2.jpg">
+                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/sales/2022/testimonials/xitlalicaballero2.jpg">
                         </div>
                         <div class="p-4">
                             <p class="italic mb-4">
@@ -481,7 +481,7 @@
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/4 flex flex-auto px-2">
                     <div class="rounded-xl overflow-hidden w-full" style="background: #051124;">
-                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/testimonials/serenadorward.jpg">
+                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/sales/2022/testimonials/serenadorward.jpg">
                         </div>
                         <div class="p-4">
                             <p class="italic mb-4">
@@ -535,7 +535,7 @@
     <section class="text-center customize px-4 lg:px-6 relative z-50 overflow-hidden text-white py-20" style="background:#01050F;">
         <div class="max-w-5xl mx-auto flex flex-wrap flex-col md:flex-row md:items-center">
             <div class="max-w-lg mx-auto text-center sm:text-left w-full sm:w-7/12 lg:w-1/2 sm:pl-5">
-                <img class="h-16 sm:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png" alt="logo">
+                <img class="h-16 sm:h-20 lg:h-24 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png" alt="logo">
                 <h4 class="pt-3 md:pt-4 leading-tight font-extrabold mb-4">
                     5 beginner piano lessons.<br>
                     Daily play-along practice routines.<br>
@@ -562,7 +562,7 @@
                 </div>
             </div>
             <div class="flex justify-center md:justify-start w-full sm:w-5/12 lg:w-1/2 sm:order-1 md:pl-6 mt-7 md:mt-0 relative">
-                <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/collage.png" alt="collage">
+                <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/collage.png" alt="collage">
             </div>
         </div>
     </section>
@@ -571,7 +571,7 @@
         <div class="reveal large relative" style="background: transparent;" id="{{ str_replace(' ', '', $review['name']) }}" data-reveal data-reset-on-close="false">
             <div class="px-10 sm:px-20 relative" style="background: transparent;">
                 <div class="max-w-xl mx-auto rounded-lg overflow-hidden" style="background: #051124;">
-                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/{{ $review['img'] }}" alt="{{ $review['name'] }}">
+                    <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=700,quality=85/{{ $review['img'] }}" alt="{{ $review['name'] }}">
                     <p class="italic p-4 text-white">
                         “{!! $review['testimonial'] !!}”
                     </p>

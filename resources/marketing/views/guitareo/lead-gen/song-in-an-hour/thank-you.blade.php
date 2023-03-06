@@ -23,8 +23,8 @@
 @section('body')
     <header class="hero-header text-center px-3 py-5 md:py-6 lg:py-16 relative text-white" style="background: linear-gradient(180deg, #010611, #10052b);">
         <div class="container mx-auto relative z-10">
-            <img class="logo guitar-quest mx-auto mb-2 sm:mb-5" src="https://cdn.musora.com/image/fetch/w_220,q_60,q_auto:best/https://guitareo.s3.amazonaws.com/shop/logos/guitar-quest-logo.png"><br>
-            <img class="logo mx-auto mb-7 md:mb-10" src="https://cdn.musora.com/image/fetch/w_640,q_60,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/logo-purple.png"><br>
+            <img class="logo guitar-quest mx-auto mb-2 sm:mb-5" src="https://www.musora.com/musora-cdn/image/width=220,q_60,quality=85/https://guitareo.s3.amazonaws.com/shop/logos/guitar-quest-logo.png"><br>
+            <img class="logo mx-auto mb-7 md:mb-10" src="https://www.musora.com/musora-cdn/image/width=640,q_60,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/logo-purple.png"><br>
 
             <h2><span class="text-yellow"><i class="fad fa-check-circle"></i></span> <strong>Success!</strong> <br class="inline md:hidden">Check your email!</h2>
             <p class="mt-4 mb-8 leading-relaxed md:leading-loose" style="max-width: 670px;">You will receive an email from <strong>Rob Scallon (Guitareo)</strong> within 10 minutes with your SONG IN AN HOUR CHALLENGE. Good luck! And if you don’t receive that email for some funky reason, please check your spam folder or re-enter your email address again.</p>

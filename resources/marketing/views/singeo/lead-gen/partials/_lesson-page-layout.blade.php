@@ -113,10 +113,10 @@
             </div>
         </div>
     </section>
-    <section class="text-center py-12 md:py-20 text-white bg-center bg-cover lazyload" style="background-color:#030d17;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_60,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/final-bg.jpg">
+    <section class="text-center py-12 md:py-20 text-white bg-center bg-cover lazyload" style="background-color:#030d17;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://singeo.s3.amazonaws.com/products/singing-starter-kit/final-bg.jpg">
         <div class="container mx-auto">
             <div class="w-full px-3 md:px-4 text-center">
-                <img class="h-16 sm:h-20 lg:h-24 mb-5 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1300,q_60,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png">
+                <img class="h-16 sm:h-20 lg:h-24 mb-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1300,q_60,quality=85/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png">
                 <h3><strong>Put your beautiful new voice to work.</strong></h3>
                 <h5 class="mt-3 leading-normal">
                     Build your control, range, and confidence with the Singing Starter Kit.<br class="hidden sm:inline">

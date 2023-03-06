@@ -8,7 +8,7 @@
     <meta property="og:description" content="Win $2,000 in prizes and have everything you need to transform your voice with the ULTIMATE Singer’s Toolkit.">
 
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/header_bg.jpg" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/header_bg.jpg" style="display: none;">
 
     @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
@@ -178,14 +178,14 @@
         }
 
         .final-bg {
-            background-image:url(https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/footer_bg_m.jpg);
+            background-image:url(https://www.musora.com/musora-cdn/image/width=750,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/footer_bg_m.jpg);
             background-position:50% 0;
             background-size:cover;
         }
 
         @media (min-width:768px) {
             .final-bg {
-                background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/footer_bg.jpg);
+                background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/footer_bg.jpg);
             }
         }
     </style>
@@ -200,8 +200,8 @@
                 <div class="w-full md:w-5/12 lg:w-1/2 pt-48 sm:pt-96 sm:order-1 relative">
                 </div>
                 <div class="w-full md:w-7/12 lg:w-1/2 sm:text-left">
-                    <img class="inline-block sm:hidden h-32  lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/logo_center_align.svg" alt="title image">
-                    <img class="hidden sm:inline-block h-28 lg:h-36 lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/logo_left_align.svg" alt="title image">
+                    <img class="inline-block sm:hidden h-32  lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/logo_center_align.svg" alt="title image">
+                    <img class="hidden sm:inline-block h-28 lg:h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/logo_left_align.svg" alt="title image">
                     {{--<p class="my-2 sm:my-3">Enter your email for your chance to win a microphone, audio interface, and a LIFETIME of singing lessons from Singeo.</p>--}}
                     <p class="leading-tight sm:leading-normal my-2 sm:my-5" style="color:#d0e2e7">
 
@@ -245,7 +245,7 @@
                                 ICON USB Studio<br> Microphone
                             </strong></h5>
                         <p class="rounded-md px-5 my-3 py-1.5 leading-none" style="background-color:#21173b;">Value of <strong>$340</strong></p>
-                        <img class="mx-auto h-28 md:h-36 lg:h-44 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/Mic.png" alt="logo">
+                        <img class="mx-auto h-28 md:h-36 lg:h-44 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/Mic.png" alt="logo">
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 mb-7 sm:mb-2 md:px-1">
@@ -254,7 +254,7 @@
                                 Eikon H1000 <br>Hi-End Headphones
                             </strong></h5>
                         <p class="rounded-md px-5 my-3 py-1.5 leading-none" style="background-color:#21173b;">Value of <strong>$180</strong></p>
-                        <img class="mx-auto h-28 md:h-36 lg:h-44 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/Headphones.png" alt="logo">
+                        <img class="mx-auto h-28 md:h-36 lg:h-44 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/Headphones.png" alt="logo">
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 mb-7 sm:mb-2 md:px-1">
@@ -263,7 +263,7 @@
                                 VocalMist<br> Mister
                             </strong></h5>
                         <p class="rounded-md px-5 my-3 py-1.5 leading-none" style="background-color:#21173b;">Value of <strong>$166</strong></p>
-                        <img class="mx-auto h-28 md:h-36 lg:h-44 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/VocalMist.png" alt="logo">
+                        <img class="mx-auto h-28 md:h-36 lg:h-44 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/VocalMist.png" alt="logo">
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 mb-7 sm:mb-2 md:px-1">
@@ -272,7 +272,7 @@
                                 Singeo Do Re Mi<br> Hoodie
                             </strong></h5>
                         <p class="rounded-md px-5 my-3 py-1.5 leading-none" style="background-color:#21173b;">Value of <strong>$59</strong></p>
-                        <img class="mx-auto h-28 md:h-36 lg:h-44 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/Hoodie.png" alt="logo">
+                        <img class="mx-auto h-28 md:h-36 lg:h-44 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/Hoodie.png" alt="logo">
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 mb-7 sm:mb-2 md:px-1">
@@ -281,7 +281,7 @@
                                 Singeo Chorus<br> T-Shirt
                             </strong></h5>
                         <p class="rounded-md px-5 my-3 py-1.5 leading-none" style="background-color:#21173b;">Value of <strong>$29</strong></p>
-                        <img class="mx-auto h-28 md:h-36 lg:h-44 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/Shirt.png" alt="logo">
+                        <img class="mx-auto h-28 md:h-36 lg:h-44 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/Shirt.png" alt="logo">
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 mb-7 sm:mb-2 md:px-1">
@@ -290,7 +290,7 @@
                                 Singeo Do Re Mi<br> Tumbler
                             </strong></h5>
                         <p class="rounded-md px-5 my-3 py-1.5 leading-none" style="background-color:#21173b;">Value of <strong>$29</strong></p>
-                        <img class="mx-auto h-28 md:h-36 lg:h-44 lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/Tumbler.png" alt="logo">
+                        <img class="mx-auto h-28 md:h-36 lg:h-44 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/Tumbler.png" alt="logo">
                     </div>
                 </div>
             </div>
@@ -303,7 +303,7 @@
     <section class="px-4 py-12 sm:py-20">
         <div class="max-w-md sm:max-w-2xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center text-center">
-                <img class="sm:order-1 rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_660,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/UI.png" alt="intro image">
+                <img class="sm:order-1 rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=660,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/UI.png" alt="intro image">
                 <div class="text-left sm:pr-6">
                     <h4 class="font-extrabold mb-1 sm:mb-2 leading-tight text-left mx-0">Everyone’s a winner</h4>
                     <p class="leading-normal">Even if you don’t win the main prize - although, who are we kidding? You probably will ;) - we won’t leave you empty-handed. <strong>When you sign up, you’ll receive FREE ACCESS to The Singing Starter Kit ($19).</strong>
@@ -319,7 +319,7 @@
     <div id="final" class="anchor"></div>
     <section class="text-center text-white py-8 md:py-14 lg:py-20 px-5 md:px-7 bg-center bg-cover final-bg">
         <div class="container mx-auto max-w-2xl">
-            <img class="h-24 sm:h-28 lg:h-44 lazyload mb-4 sm:mb-6" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/logo_center_align.svg" alt="title image">
+            <img class="h-24 sm:h-28 lg:h-44 lazyload mb-4 sm:mb-6" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/ultimate/logo_center_align.svg" alt="title image">
             @include("lead-gen.partials._sign-up-form-cio", [
                 "formId" => "Singeo - Engagement - Trigger - Ultimate Giveaway - Web Form",
                 "formName" => 'Ultimate Giveaway',
@@ -329,14 +329,14 @@
         </div>
     </section>
     <section class="flex items-center text-center text-white" style="background:linear-gradient(180deg, #8300E9 0%, #3F0071 100%);">
-        <img class="lazyload w-2/12 hidden md:inline" data-src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/mic-icon.png" alt="mic icon" />
+        <img class="lazyload w-2/12 hidden md:inline" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/mic-icon.png" alt="mic icon" />
         <div class="container mx-auto max-w-3xl px-6 sm:px-0 lg:px-4 py-8 md:py-10 lg:py-12">
             <h3 class="mb-5 sm:mb-7"><strong>Why do I need to give<br class="inline sm:hidden"> my email address?</strong></h3>
             <p>Well, we want the winner to be someone who really wants and will use this equipment. <br class="hidden lg:inline">So it’s our way of making sure you’re a real person!
                 <br><br>
                 On top of that, we want to start a relationship with you. It’s our way of saying, “Hey, we create awesome singing lessons and we’d love to show you.” Don’t worry, we won’t send you spam or share your email address with anybody else. You’ll get free ongoing vocal lessons and some special offers. And if you don’t like our emails, you can unsubscribe at any time.</p>
         </div>
-        <img class="lazyload w-2/12 hidden md:inline" data-src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/giveaway/email-icon.png" alt="email icon" />
+        <img class="lazyload w-2/12 hidden md:inline" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://singeo.s3.amazonaws.com/lead-gen/giveaway/email-icon.png" alt="email icon" />
     </section>
 
     @php
@@ -366,7 +366,7 @@
             {{--@else--}}
             {{--<i class="absolute transform -translate-y-1/2 top-44 md:top-60 text-white cursor-pointer py-2.5 pr-2.5 md:pr-5 text-5xl md:text-6xl fas fa-angle-left -left-7 md:-left-10 opacity-50"></i>--}}
             {{--@endif--}}
-            <div class="relative rounded-t-lg pb-44 md:pb-60 bg-top bg-cover bg-black lazyload" data-bg="https://cdn.musora.com/image/fetch/w_800,q_auto:best/{{ $spec['modalImage'] }}"></div>
+            <div class="relative rounded-t-lg pb-44 md:pb-60 bg-top bg-cover bg-black lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $spec['modalImage'] }}"></div>
             <div class="p-4 md:p-5">
                 <h2 class="leading-none font-bebas">{!!  str_replace('<br>', ' ', $spec['name'])  !!}</h2>
                 <p class="text-singeo uppercase mx-auto mb-3 md:mb-2">{!!  str_replace('<br>', ' ', $spec['subtitle'])  !!}</p>

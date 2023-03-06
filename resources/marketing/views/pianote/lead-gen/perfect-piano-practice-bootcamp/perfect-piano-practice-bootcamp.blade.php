@@ -42,7 +42,7 @@
     <meta property="og:title" content="Perfect Piano Practice Live Bootcamp | Pianote">
     <meta name="description" content="Accelerate your progress on the piano with a FREE 90-minute live lesson from Lisa Witt"/>
     <meta property="og:description" content="Accelerate your progress on the piano with a FREE 90-minute live lesson from Lisa Witt">
-    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/header.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/header.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
 @endsection
@@ -180,7 +180,7 @@
         .header {
             background-position: top;
             background-size: cover;
-            background-image: url('https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/header_m.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/header_m.jpg');
         }
 
         .text-yellow {
@@ -243,7 +243,7 @@
 
         @media (min-width: 768px) {
             .header {
-                background-image: url('https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/header.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/header.jpg');
                 background-size: 1410px;
             }
 
@@ -296,7 +296,7 @@
                     <div class="pl-2 sm:pl-3">
                         <h1 class="leading-none font-bebas uppercase" style="color:#fcffe3">Perfect Piano Practice</h1>
                         <h3 class="tracking-widest">LIVE BOOTCAMP</h3>
-                        {{--<img class="h-12 sm:h-14 lg:h-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_840,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/logo_left.png" alt="logo">--}}
+                        {{--<img class="h-12 sm:h-14 lg:h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=840,quality=85/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/logo_left.png" alt="logo">--}}
                         <h5 class="mt-2 md:mt-5 sub-header mb-2 md:mb-8">
                             <strong class="font-extrabold">Free 90-minute LIVE piano<br class="md:hidden"> lesson with Lisa Witt</strong>
                         </h5>
@@ -324,7 +324,7 @@
     <section class="text-white py-12 sm:py-20 px-4 sm:px-6 bg-musora-black">
         <div class="max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-7 lg:gap-10 items-center justify-center flex flex-col mx-auto">
-                <img class="sm:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_810,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/collage.png" alt="intro image">
+                <img class="sm:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/collage.png" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h3 class="font-extrabold mx-0 mb-4 sm:mb-6 leading-tight">
                         It’s the #1 challenge for piano players
@@ -369,11 +369,11 @@
                                     </p>
                                 </div>
                             </div>
-                            <img class="timeline-img rounded-lg lazyload mb-4 md:mb-0" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $step['img'] }}" alt="step {{$key+1}}" />
+                            <img class="timeline-img rounded-lg lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $step['img'] }}" alt="step {{$key+1}}" />
                         </div>
                     @else
                         <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-2 md:gap-12 lg:gap-20 mb-16 md:mb-16 lg:mb-28 pl-6 md:pl-0">
-                            <img class="timeline-img rounded-lg lazyload mb-4 md:mb-0" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $step['img'] }}" alt="step {{$key+1}}" />
+                            <img class="timeline-img rounded-lg lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $step['img'] }}" alt="step {{$key+1}}" />
                             <div class="content relative flex items-center justify-center">
                                 <div class="md:max-w-xs lg:max-w-md w-full">
                                     <h3 class="font-extrabold uppercase lg:mb-2">step {{$key+1}}</h3>
@@ -393,7 +393,7 @@
     <section class="px-4 py-12 sm:py-20">
         <div class="max-w-md sm:max-w-3xl lg:max-w-6xl mx-auto">
             <div class="sm:grid sm:grid-cols-2 sm:gap-6 md:gap-12 lg:gap-20 items-center text-center">
-                <img class="rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_660,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/ui2.png" alt="intro image">
+                <img class="rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=660,quality=85/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/ui2.png" alt="intro image">
                 <div class="inline-flex flex-col text-left">
                     <h3 class="font-extrabold mb-2 sm:mb-3 leading-tight text-left mx-0">
                         These aren’t <br>
@@ -417,7 +417,7 @@
     <section class="px-4 py-14 sm:py-20 md:pb-32 bg-musora-black">
         <div class="max-w-3xl lg:max-w-4xl mx-auto text-white relative">
             <div class="w-3/4 sm:w-2/3 mx-auto relative md:static text-center mb-8">
-                <img class="md:w-80 lg:w-96 md:absolute -bottom-10 right-2 md:border-8 rounded-3xl md:border-solid border-musora-black lazyload" data-src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/profile_pic.png" alt="coach image">
+                <img class="md:w-80 lg:w-96 md:absolute -bottom-10 right-2 md:border-8 rounded-3xl md:border-solid border-musora-black lazyload" data-src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/profile_pic.png" alt="coach image">
             </div>
 
             <div class="mx-auto md:mx-0 max-w-md sm:max-w-lg md:max-w-full md:w-2/3 rounded-xl p-4 sm:p-10 md:py-10 md:pl-8 md:pr-24 lg:p-10 lg:pr-28" style="background:#4d1823;">
@@ -438,11 +438,11 @@
         </div>
     </section>
 
-    <section class="py-20 sm:py-28 bg-cover lazyload" style="background-color:#3d151a;background-position: 25% 50%;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/footer.png">
+    <section class="py-20 sm:py-28 bg-cover lazyload" style="background-color:#3d151a;background-position: 25% 50%;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/footer.png">
         <div class="max-w-2xl lg:max-w-3xl mx-auto text-center text-white px-4">
             <h1 class="leading-none font-bebas uppercase" style="color:#fcffe3">Perfect Piano Practice</h1>
             <h3 class="tracking-widest">LIVE BOOTCAMP</h3>
-            {{--<img class="mb-4 h-12 sm:h-16 lg:h-20 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1040,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/logo_centre.png" alt="logo">--}}
+            {{--<img class="mb-4 h-12 sm:h-16 lg:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1040,quality=85/https://pianote.s3.amazonaws.com/lead-gen/magic-of-piano-chords/logo_centre.png" alt="logo">--}}
             <h5 class="my-2">
                 <strong class="font-extrabold">Free 90-minute LIVE piano<br class="inline sm:hidden"> lesson</strong> with Lisa Witt
             </h5>

@@ -41,22 +41,22 @@
 @section('content')
     @include('guitareo.sales.partials._nav')
 
-    <header class="relative text-white text-center bg-cover bg-top pb-8 md:pb-12 lg:pb-16 pt-40 md:pt-64 lg:pt-96 px-4 bg-musora-black" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/shop/affiliate-header.jpg);">
+    <header class="relative text-white text-center bg-cover bg-top pb-8 md:pb-12 lg:pb-16 pt-40 md:pt-64 lg:pt-96 px-4 bg-musora-black" style="background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://guitareo.s3.amazonaws.com/shop/affiliate-header.jpg);">
         <div class="container mx-auto relative z-10">
             <h1 class="lg:mt-10"><strong>Ayla’s Top Gear Picks</strong></h1>
             <h5 class="mt-3 md:mt-5 mb-3 md:mb-4">WE RECOMMEND:</h5>
             <div class="flex flex-wrap items-center justify-center max-w-3xl mx-auto">
                 <div class="w-1/2 md:w-1/4 px-1 mb-3 md:mb-0">
-                    <a target="_blank" class="join with-logo w-full" style="background-color:#0074c1;" href="https://www.sweetwater.com/shop/guitareo/?irgwc=1&utm_source=Impact&utm_medium=Guitareo&utm_campaign=Online%20Tracking%20Link&irclickid=yebUGaXrWxyLRxLSdcy%3AOQDDUkBRwpXtITh7V40"><img class="h-6 md:h-7" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/sweetwater-logo.png"></a>
+                    <a target="_blank" class="join with-logo w-full" style="background-color:#0074c1;" href="https://www.sweetwater.com/shop/guitareo/?irgwc=1&utm_source=Impact&utm_medium=Guitareo&utm_campaign=Online%20Tracking%20Link&irclickid=yebUGaXrWxyLRxLSdcy%3AOQDDUkBRwpXtITh7V40"><img class="h-6 md:h-7" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/sweetwater-logo.png"></a>
                 </div>
                 <div class="w-1/2 md:w-1/4 px-1 mb-3 md:mb-0">
-                    <a target="_blank" class="join with-logo w-full" style="background-color:#ff9400;" href="https://www.amazon.com/shop/guitarlessons"><img class="h-6 md:h-7" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/amazon-logo.png"></a>
+                    <a target="_blank" class="join with-logo w-full" style="background-color:#ff9400;" href="https://www.amazon.com/shop/guitarlessons"><img class="h-6 md:h-7" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/amazon-logo.png"></a>
                 </div>
                 <div class="w-1/2 md:w-1/4 px-1">
-                    <a target="_blank" class="join with-logo w-full" style="background-color:#00b8c0;" href="https://www.thomann.de/intl/thlpg_wf86p8mhug.html?offid=1&affid=886"><img class="h-6 md:h-7" style="padding: 1px 0 4px;" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/thomann-logo.png"></a>
+                    <a target="_blank" class="join with-logo w-full" style="background-color:#00b8c0;" href="https://www.thomann.de/intl/thlpg_wf86p8mhug.html?offid=1&affid=886"><img class="h-6 md:h-7" style="padding: 1px 0 4px;" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/thomann-logo.png"></a>
                 </div>
                 <div class="w-1/2 md:w-1/4 px-1">
-                    <a target="_blank" class="join with-logo w-full" style="background-color:#cd2418;" href="https://guitar-center.pxf.io/LP200o"><img class="h-6 md:h-7" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/guitar-center-logo.png"></a>
+                    <a target="_blank" class="join with-logo w-full" style="background-color:#cd2418;" href="https://guitar-center.pxf.io/LP200o"><img class="h-6 md:h-7" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/guitar-center-logo.png"></a>
                 </div>
             </div>
         </div>
@@ -153,16 +153,16 @@
                             </div>
                             <div class="flip-card-back p-2 md:p-3 border-2 border-gray-200 rounded-lg flex flex-col flex-wrap justify-around">
                                 @if(!empty($topic['sweetwater']))
-                                    <a target="_blank" class="join with-logo w-full" style="background-color:#0074c1;" href="{{ $topic['sweetwater'] }}"><img class="h-6 md:h-7" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/sweetwater-logo.png"></a>
+                                    <a target="_blank" class="join with-logo w-full" style="background-color:#0074c1;" href="{{ $topic['sweetwater'] }}"><img class="h-6 md:h-7" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/sweetwater-logo.png"></a>
                                 @endif
                                 @if(!empty($topic['amazon']))
-                                    <a target="_blank" class="join with-logo w-full" style="background-color:#ff9400;" href="{{ $topic['amazon'] }}"><img class="h-6 md:h-7" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/amazon-logo.png"></a>
+                                    <a target="_blank" class="join with-logo w-full" style="background-color:#ff9400;" href="{{ $topic['amazon'] }}"><img class="h-6 md:h-7" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/amazon-logo.png"></a>
                                 @endif
                                 @if(!empty($topic['thomann']))
-                                    <a target="_blank" class="join with-logo w-full" style="background-color:#00b8c0;" href="{{ $topic['thomann'] }}"><img class="h-6 md:h-7" style="padding: 1px 0 4px;" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/thomann-logo.png"></a>
+                                    <a target="_blank" class="join with-logo w-full" style="background-color:#00b8c0;" href="{{ $topic['thomann'] }}"><img class="h-6 md:h-7" style="padding: 1px 0 4px;" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/thomann-logo.png"></a>
                                 @endif
                                 @if(!empty($topic['guitarcenter']))
-                                    <a target="_blank" class="join with-logo w-full" style="background-color:#cd2418;" href="{{ $topic['guitarcenter'] }}"><img class="h-6 md:h-7" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/guitar-center-logo.png"></a>
+                                    <a target="_blank" class="join with-logo w-full" style="background-color:#cd2418;" href="{{ $topic['guitarcenter'] }}"><img class="h-6 md:h-7" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/guitar-center-logo.png"></a>
                                 @endif
                             </div>
                         </div>
@@ -179,16 +179,16 @@
             <h3 class="mb-5 md:mb-8">Shop for more of Ayla’s top <br class="inline md:hidden"> gear at these online stores:</h3>
             <div class="flex flex-wrap items-center justify-center max-w-3xl mx-auto">
                 <div class="w-1/2 md:w-1/4 px-1 mb-3 md:mb-0">
-                    <a target="_blank" class="join with-logo w-full" style="background-color:#0074c1;" href="https://www.sweetwater.com/shop/guitareo/?irgwc=1&utm_source=Impact&utm_medium=Guitareo&utm_campaign=Online%20Tracking%20Link&irclickid=yebUGaXrWxyLRxLSdcy%3AOQDDUkBRwpXtITh7V40"><img class="h-6 md:h-7" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/sweetwater-logo.png"></a>
+                    <a target="_blank" class="join with-logo w-full" style="background-color:#0074c1;" href="https://www.sweetwater.com/shop/guitareo/?irgwc=1&utm_source=Impact&utm_medium=Guitareo&utm_campaign=Online%20Tracking%20Link&irclickid=yebUGaXrWxyLRxLSdcy%3AOQDDUkBRwpXtITh7V40"><img class="h-6 md:h-7" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/sweetwater-logo.png"></a>
                 </div>
                 <div class="w-1/2 md:w-1/4 px-1 mb-3 md:mb-0">
-                    <a target="_blank" class="join with-logo w-full" style="background-color:#ff9400;" href="https://www.amazon.com/shop/guitarlessons"><img class="h-6 md:h-7" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/amazon-logo.png"></a>
+                    <a target="_blank" class="join with-logo w-full" style="background-color:#ff9400;" href="https://www.amazon.com/shop/guitarlessons"><img class="h-6 md:h-7" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/amazon-logo.png"></a>
                 </div>
                 <div class="w-1/2 md:w-1/4 px-1">
-                    <a target="_blank" class="join with-logo w-full" style="background-color:#00b8c0;" href="https://www.thomann.de/intl/thlpg_wf86p8mhug.html?offid=1&affid=886"><img class="h-6 md:h-7" style="padding: 1px 0 4px;" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/thomann-logo.png"></a>
+                    <a target="_blank" class="join with-logo w-full" style="background-color:#00b8c0;" href="https://www.thomann.de/intl/thlpg_wf86p8mhug.html?offid=1&affid=886"><img class="h-6 md:h-7" style="padding: 1px 0 4px;" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/thomann-logo.png"></a>
                 </div>
                 <div class="w-1/2 md:w-1/4 px-1">
-                    <a target="_blank" class="join with-logo w-full" style="background-color:#cd2418;" href="https://guitar-center.pxf.io/LP200o"><img class="h-6 md:h-7" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/guitar-center-logo.png"></a>
+                    <a target="_blank" class="join with-logo w-full" style="background-color:#cd2418;" href="https://guitar-center.pxf.io/LP200o"><img class="h-6 md:h-7" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/guitar-center-logo.png"></a>
                 </div>
             </div>
         </div>

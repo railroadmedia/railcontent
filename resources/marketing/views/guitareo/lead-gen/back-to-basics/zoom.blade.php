@@ -20,14 +20,14 @@
         }
 
         .header {
-            background-image: url('https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/bg_header_m.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/bg_header_m.jpg');
         }
 
 
         @media (min-width:768px) {
 
             .header {
-                background-image: url('https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/bg_header.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/bg_header.jpg');
             }
         }
         .join.medium {
@@ -50,7 +50,7 @@
             <div class="flex flex-wrap items-center">
                 <div class="w-full md:w-7/12 lg:w-2/3 md:text-left">
                     <div class="mt-56 md:mt-0 pl-2 sm:pl-3">
-                        <img class="h-28 lg:h-36 lazyload" data-src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/logo.png" alt="logo">
+                        <img class="h-28 lg:h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/logo.png" alt="logo">
                         <p class="hidden md:block leading-tight mt-4">
                             <em>Join this 60-minute LIVE guitar lesson with Ayla Tesler-Mabe</em>
                         </p>

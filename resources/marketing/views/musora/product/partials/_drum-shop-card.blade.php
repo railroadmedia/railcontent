@@ -4,7 +4,7 @@
         <div class="flip-card-front card-inside">
             <section class="drum-shop h-full flex flex-col">
                 <div class="top-image @if(!empty($thumbnail_logo)) with-logo @endif"
-                     style="flex: 1; background-image:url(https://cdn.musora.com/image/fetch/w_600,q_auto:best/@if(str_contains($thumbnail, 'amazonaws') || str_contains($thumbnail, 'cloudfront')){{$thumbnail}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$thumbnail}}@endif"
+                     style="flex: 1; background-image:url(https://www.musora.com/musora-cdn/image/width=600,quality=85/@if(str_contains($thumbnail, 'amazonaws') || str_contains($thumbnail, 'cloudfront')){{$thumbnail}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$thumbnail}}@endif"
                      ;>
                     @if (!empty($badgeText))
                         <span

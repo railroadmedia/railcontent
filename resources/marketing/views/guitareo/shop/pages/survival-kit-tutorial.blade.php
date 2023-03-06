@@ -22,24 +22,24 @@
 @stop()
 
 @section('banner')
-    <section class="pb-60 bg-cover bg-center" style="background-image: url('https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-tutorial-header.jpg')">
+    <section class="pb-60 bg-cover bg-center" style="background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-tutorial-header.jpg')">
     </section>
 
     <section class="py-6 md:py-20 text-2xl">
         <h4 class="font-extrabold mb-4 text-center">How to Use The Guitarist's Survival Kit <br class="hidden md:inline">in 3 Simple Steps</h4>
         <div class="grid md:grid-cols-3 gap-4 md:gap-2 lg:gap-4 max-w-xl md:max-w-5xl mx-auto px-4 lg:px-0">
             <div data-open="step1" class="cursor-pointer autoplay-video">
-                <img class="rounded-xl w-full" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-thumb-01.jpg" alt="thumb 1">
+                <img class="rounded-xl w-full" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-thumb-01.jpg" alt="thumb 1">
                 <div class="font-bold text-sm md:text-base">Step 1: Stay Perfectly in Tune</div>
                 <div class="text-sm md:text-base">Using the Nexxus 360 Tuner</div>
             </div>
             <div data-open="step2" class="cursor-pointer autoplay-video">
-                <img class="rounded-xl w-full" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-thumb-02.jpg" alt="thumb 2">
+                <img class="rounded-xl w-full" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-thumb-02.jpg" alt="thumb 2">
                 <div class="font-bold text-sm md:text-base">Step 2: Get Crisp, Clean Notes</div>
                 <div class="text-sm md:text-base">Changing Your Strings on Electric or Acoustic Guitar</div>
             </div>
             <div data-open="step3" class="cursor-pointer autoplay-video">
-                <img class="rounded-xl w-full" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-thumb-03.jpg" alt="thumb 3">
+                <img class="rounded-xl w-full" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/shop/survival-kit/survival-kit-thumb-03.jpg" alt="thumb 3">
                 <div class="font-bold text-sm md:text-base leading-tight">Step 3: Pick on Great Licks // Freshen up Your Look</div>
                 <div class="text-sm md:text-base">Referring to the Survival Guide</div>
             </div>

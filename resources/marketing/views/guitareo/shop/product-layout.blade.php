@@ -44,7 +44,7 @@
                 @if($product->productType->name === 'Bundles' && !empty($product->spread_img))
                     <div class="text-center">
                         <h3 class="mb-4"><strong>What's included:</strong></h3>
-                        <img class="mb-4" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/@if(str_contains($product->spread_img, 'amazonaws') || str_contains($product->spread_img, 'cloudfront')){{$product->spread_img}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$product->spread_img}}@endif" alt="bundle spread image" />
+                        <img class="mb-4" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/@if(str_contains($product->spread_img, 'amazonaws') || str_contains($product->spread_img, 'cloudfront')){{$product->spread_img}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$product->spread_img}}@endif" alt="bundle spread image" />
                     </div>
                 @endif
 

@@ -243,7 +243,7 @@
     <section class="py-12 sm:py-20 px-4 sm:px-6">
         <div class="max-w-md md:max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto">
-                <img class="md:order-1 rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_810,q_auto:best/https://pianote.s3.amazonaws.com/sales/about/intro.jpg" alt="intro image">
+                <img class="md:order-1 rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://pianote.s3.amazonaws.com/sales/about/intro.jpg" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-4 sm:mb-6">
                         The Pianote Mission
@@ -301,7 +301,7 @@
                             <li class="splide__slide flex flex-col items-center justify-center">
                                 <div class="rounded-xl border-4 border-white border-solid relative overflow-hidden">
                                     <h3 class="font-bebas text-center py-2" style="background:linear-gradient(180deg, #780000 0%, #3C0000 100%);">{{$slide['year']}}</h3>
-                                    <div class="w-full bg-cover bg-top lazyload" style="padding-bottom:56%" data-bg="https://cdn.musora.com/image/fetch/w_420,q_auto:best/{{$slide['img']}}"></div>
+                                    <div class="w-full bg-cover bg-top lazyload" style="padding-bottom:56%" data-bg="https://www.musora.com/musora-cdn/image/width=420,quality=85/{{$slide['img']}}"></div>
                                     <div class="text-xs flex items-center px-2 h-36 md:h-20 text-center" style="background: linear-gradient(180deg, #780000 0%, #3C0000 100%);">
                                         <div>{!! $slide['desc']!!}</div>
                                     </div>
@@ -320,7 +320,7 @@
     <section class="py-12 sm:py-20 px-4 sm:px-6">
         <div class="max-w-md md:max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto mb-10 md:mb-20">
-                <img class="md:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_810,q_auto:best/https://pianote.s3.amazonaws.com/sales/about/start_collage.png" alt="intro image">
+                <img class="md:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://pianote.s3.amazonaws.com/sales/about/start_collage.png" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-4 sm:mb-6 leading-tight">
                         It all started <br class="sm:hidden md:inline"> with a duck farmer...
@@ -333,7 +333,7 @@
                 </div>
             </div>
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto mb-10 md:mb-20">
-                <img class="rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_810,q_auto:best/https://pianote.s3.amazonaws.com/sales/about/lisa.jpg" alt="intro image">
+                <img class="rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://pianote.s3.amazonaws.com/sales/about/lisa.jpg" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-4 sm:mb-6 leading-tight">
                         Lisa Witt becomes <br class="sm:hidden md:inline"> the face of Pianote
@@ -358,7 +358,7 @@
                 </div>
             </div>
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto">
-                <img class="rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_810,q_auto:best/https://pianote.s3.amazonaws.com/sales/about/pianote-coaches-collage.png" alt="intro image">
+                <img class="rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://pianote.s3.amazonaws.com/sales/about/pianote-coaches-collage.png" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-4 sm:mb-6 leading-tight">
                         The world's best <br> pianists join Pianote
@@ -502,7 +502,7 @@
     <section class="py-12 sm:py-20 border-t px-4 sm:px-6" style="background:#FAFAFA; border-color:#D1D1D1;">
         <div class="max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-16 lg:gap-20 items-center justify-center flex flex-col mx-auto">
-                <img class="sm:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_810,q_auto:best/https://pianote.s3.amazonaws.com/sales/about/company_collage.png" alt="intro image">
+                <img class="sm:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://pianote.s3.amazonaws.com/sales/about/company_collage.png" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-2">
                         The Pianote BTS Team

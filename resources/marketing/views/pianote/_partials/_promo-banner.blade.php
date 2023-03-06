@@ -5,7 +5,7 @@
 {{--<div class="big-promo-banner" style="background: linear-gradient(to bottom, #dfeef2, #f9e4d3);">--}}
     {{--<div class="noise-wrap">--}}
         {{--<div class="row container tw-container mx-auto tw-mx-auto">--}}
-            {{--<a href="/shop/"><img src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/july/pianote-summer-sale-dark.png"></a>--}}
+            {{--<a href="/shop/"><img src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://pianote.s3.amazonaws.com/sales/promos/july/pianote-summer-sale-dark.png"></a>--}}
             {{--<span class="text-right tw-text-right">--}}
                     {{--<p>@if(!empty($price))--}}
                             {{--@if(round(100 - (100 * ($price / $fullPrice))) > 1)--}}
@@ -34,7 +34,7 @@
         {{--<div class="noise-wrap">--}}
             {{--<div class="container tw-container mx-auto tw-mx-auto">--}}
                 {{--<div class="text text-left">--}}
-                    {{--<img class="logo" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/july/pianote-summer-sale-dark.png">--}}
+                    {{--<img class="logo" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://pianote.s3.amazonaws.com/sales/promos/july/pianote-summer-sale-dark.png">--}}
                     {{--<p>--}}
                         {{--@if(!empty($price))--}}
                             {{--@if(round(100 - (100 * ($price / $fullPrice))) > 1)--}}

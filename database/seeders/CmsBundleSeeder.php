@@ -25,11 +25,11 @@ class CmsBundleSeeder extends Seeder
                 'slug' => 'bundle-perfect-gift',
                 'sku' => 'products[PASS-12]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=1&locked=true',
                 'meta_desc' => 'Need the perfect gift idea for YOU or a drummer you know?',
-                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/perfect-gift-fb-share-image.jpg',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/november/perfect-gift-fb-share-image.jpg',
                 'price' => 240,
                 'discounted_price' => 0,
                 'special_text' => '+$91.95 In Bonuses',
-                'page_logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/perfect-gift-bundle-black.png',
+                'page_logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/november/perfect-gift-bundle-black.png',
                 'header_text' => 'The perfect gift for any drummer. (Unlimited drum lessons + free bonuses!)',
                 'video_src' => '//player.vimeo.com/video/774004079',
                 'images' => [
@@ -66,10 +66,10 @@ class CmsBundleSeeder extends Seeder
                 'price' => 98.95,
                 'discounted_price' => 79,
                 'special_text' => '',
-                'page_logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-bundle-black.png',
+                'page_logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/november/practice-anywhere-bundle-black.png',
                 'header_text' => 'Improve your rudiments & stickings on the fly.',
                 'video_src' => '//player.vimeo.com/video/773981652',
-                'spread' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-spread.png',
+                'spread' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/november/practice-anywhere-spread.png',
                 'overview' => 'Run your rudiments anytime day or night & develop silky-smooth hands on the kit.
 
 The Practice Anywhere Bundle includes the P4 Practice Pad – the only practice pad that simulates the feels of a REAL drum set – fresh drumsticks, and the all NEW Drumeo Rudiments poster.
@@ -105,14 +105,14 @@ You’ll have everything you need to improve your hands around the drums.',
                 'slug' => 'bundle-ultimate-lessons',
                 'sku' => 'products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true" data-base-url="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[GHFAL-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&locked=true',
                 'meta_desc' => 'The Biggest Drumeo Discount EVER + 10 Free Bonuses',
-                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/ultimate-lessons-fb-share-image.jpg',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/november/ultimate-lessons-fb-share-image.jpg',
                 'price' => 1468.94,
                 'discounted_price' => 240,
                 'special_text' => '',
-                'page_logo' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/ultimate-lessons-bundle-black.png',
+                'page_logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/november/ultimate-lessons-bundle-black.png',
                 'header_text' => 'The Biggest Drumeo Discount EVER + 10 Free Bonuses',
                 'video_src' => '//player.vimeo.com/video/772644649',
-                'spread' => 'https://drumeo-assets.s3.amazonaws.com/promos/november/ultimate-bundle-spread.png',
+                'spread' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/november/ultimate-bundle-spread.png',
                 'overview' => 'The Ultimate Lessons Bundle is your chance to get unlimited drum lessons for a year at **the lowest price ever.**
 
 You’ll get $1228.94 in FREE bonuses (including an ultra-quiet practice pad & drumsticks).

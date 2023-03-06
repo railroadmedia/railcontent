@@ -32,9 +32,9 @@
         "noBreadcrumb" => true
     ])
 
-    <header class="px-5 sm:px-6 py-8 lg:py-10 text-white text-center bg-cover bg-center relative lazyload" style="background-color:#020b17;" data-bg="https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/header.jpg">
+    <header class="px-5 sm:px-6 py-8 lg:py-10 text-white text-center bg-cover bg-center relative lazyload" style="background-color:#020b17;" data-bg="https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/header.jpg">
         <div class="container mx-auto max-w-5xl relative z-10">
-            <img class="h-16 sm:h-20 lg:h-24" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg" alt="Rhythm and groove logo"><br>
+            <img class="h-16 sm:h-20 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg" alt="Rhythm and groove logo"><br>
             <i class="fas fa-play play-button mt-56 sm:mt-80 mb-5 sm:mb-24 lg:mb-28 autoplay-video" data-open="trailer"></i>
             <h2><strong>Go beyond simple<br class="inline sm:hidden"> strumming</strong> on the guitar.</h2>
             <a class="join my-3 md:my-4 w-full max-w-xl" href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['rhythm-and-groove' => 1], 'redirect' => '/order']) }}">Start Your Course</a>
@@ -51,7 +51,7 @@
     <section class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background-color:#020b17;">
         <div class="container mx-auto max-w-4xl">
             <div class="sm:flex justify-center items-center">
-                <img class="float-right h-24 sm:h-44 lg:h-60 mb-4 sm:mb-0 ml-3 sm:ml-0 sm:order-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_620,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/music_guitar.png" alt="Guitar icon">
+                <img class="float-right h-24 sm:h-44 lg:h-60 mb-4 sm:mb-0 ml-3 sm:ml-0 sm:order-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=620,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/music_guitar.png" alt="Guitar icon">
                 <p class="leading-normal sm:pr-5 flex-grow">Rhythm is an essential part of playing guitar. Without it, songs can sound flat and dull to yourself and listeners. Anyone can lose interest in basic strums without a sense of groove or feel.
                     <br><br>
                     It’s also one of the most challenging skills for guitarists to learn. That’s why we created an easy-to-follow course you can complete in under two hours – to get you excited and confident in playing rhythm on the guitar.</p>
@@ -102,49 +102,49 @@
 
             <div class="flex flex-wrap items-start justify-center text-left">
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-3 mb-8 sm:mb-6">
-                    <div data-open="meetSami" class="cursor-pointer autoplay-video relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_meet.jpg">
+                    <div data-open="meetSami" class="cursor-pointer autoplay-video relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_meet.jpg">
                         <div class="join white smaller absolute bottom-4 left-4"><i class="fas fa-play"></i> PREVIEW</div>
                     </div>
                     <p class="leading-tight"><strong>Intro - The Importance of Rhythm</strong><br>
                     Meet Sami Ghawi, Ayla’s guitar teacher!</p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-3 mb-8 sm:mb-6">
-                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_feel.jpg"></div>
+                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_feel.jpg"></div>
                     <p class="leading-tight"><strong>The Essentials of Rhythm</strong><br>
                     Feel the groove. Learn how to connect with the rhythm using your ears and hands.</p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-3 mb-8 sm:mb-6">
-                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_learn.jpg"></div>
+                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_learn.jpg"></div>
                     <p class="leading-tight"><strong>It All Starts With Counting</strong><br>
                     Stay on the beat. Learn how to improve your timing and tempo using your voice, hands, and the guitar.</p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-3 mb-8 sm:mb-6">
-                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_strum.jpg"></div>
+                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_strum.jpg"></div>
                     <p class="leading-tight"><strong>Make Your Strum Patterns FEEL Good!</strong><br>
                     Strum with accents and fun patterns. Hear the most typical rhythms for genres (including rock, country, reggae, etc.)</p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-3 mb-8 sm:mb-6">
-                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_spice.jpg"></div>
+                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_spice.jpg"></div>
                     <p class="leading-tight"><strong>Sultans of Swing Fill</strong><br>
                     Learn to play this fun and exciting skip fill. Spice up your music and practice sessions by using more rhythmic fills.</p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-3 mb-8 sm:mb-6">
-                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_triplets.jpg"></div>
+                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_triplets.jpg"></div>
                     <p class="leading-tight"><strong>Playing Triplets</strong><br>
                     Use triplets to change the dynamics of a song. Play this popular rhythm in All My Loving by The Beatles.</p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-3 mb-8 sm:mb-6">
-                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_changing.jpg"></div>
+                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_changing.jpg"></div>
                     <p class="leading-tight"><strong>Change Up the Feel To Create Interest</strong><br>
                     Keep your audience engaged. Use rhythmic techniques such as palm mutes, accents, crescendos, etc.</p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-3 mb-8 sm:mb-6">
-                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_creating.jpg"></div>
+                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_creating.jpg"></div>
                     <p class="leading-tight"><strong>Putting It All Together – Creating Space</strong><br>
                     Space is required! Create space in your guitar playing to let listeners breathe.</p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-3 mb-8 sm:mb-6">
-                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_bonus.jpg"></div>
+                    <div class="relative bg-cover bg-center rounded-xl mb-2 sm:mb-3 bg-black lazyload" style="padding-bottom: 65%;" data-bg="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/thumb_bonus.jpg"></div>
                     <p class="leading-tight"><strong>Bonus Q&A</strong><br>
                     View exclusive content with Sami Ghawi that answers questions from real students.</p>
                 </div>
@@ -196,7 +196,7 @@
             </div>
 
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8 mb-20">
-                <img class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_760,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/coach.jpg" alt="Coach profile">
+                <img class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=760,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/coach.jpg" alt="Coach profile">
 
                 <div class="text-left bg-white text-black rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow">
                     <h6 class="uppercase text-guitareo leading-normal text-center sm:text-left mb-2">Guitar Teacher,<br class="inline sm:hidden"> Producer, Songwriter</h6>
@@ -212,7 +212,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 relative">
         <div class="max-w-4xl mx-auto px-4">
             <div class="-mt-24 sm:-mt-28 lg:-mt-36">
-                <img class="h-28 md:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://guitareo.s3.amazonaws.com/sales/2022/guitareo-guarantee.png" alt="gurantee badge">
+                <img class="h-28 md:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://guitareo.s3.amazonaws.com/sales/2022/guitareo-guarantee.png" alt="gurantee badge">
             </div>
             <h2 class="font-extrabold text-center my-7">
                 Our promise to you:
@@ -246,9 +246,9 @@
         </div>
     </section>
     <div id="customize-anchor" class="anchor"></div>
-    <section class="text-center px-5 sm:px-6 py-14 sm:py-20 lg:py-28 text-center text-white bg-center bg-cover lazyload" style="background-color:#051626;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/footer.jpg">
+    <section class="text-center px-5 sm:px-6 py-14 sm:py-20 lg:py-28 text-center text-white bg-center bg-cover lazyload" style="background-color:#051626;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/footer.jpg">
         <div class="container mx-auto">
-            <img class="h-14 sm:h-20 lg:h-24" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg" alt="Rhythm and groove logo"><br>
+            <img class="h-14 sm:h-20 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://guitareo.s3.amazonaws.com/shop/rhythm-and-groove/Logo.svg" alt="Rhythm and groove logo"><br>
             <h3 class="leading-normal my-6 sm:my-8"><strong>Get grooving on guitar</strong><br class="hidden sm:inline"> with fun rhythms you can add to any song.</h3>
             {{--<p class="text-coaches tracking-widest">LIMITED TIME OFFER</p>--}}
             <a class="join my-2 md:my-3 w-full max-w-xl" href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['rhythm-and-groove' => 1], 'redirect' => '/order']) }}">Start Your Course</a>

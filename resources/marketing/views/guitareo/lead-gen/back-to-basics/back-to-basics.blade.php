@@ -55,7 +55,7 @@
         }
 
         .header {
-            background-image: url('https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/bg_header_m.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/bg_header_m.jpg');
             background-size: cover;
         }
 
@@ -109,7 +109,7 @@
         }
 
         .footer {
-            background-image: url('https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/footer_bg_m.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/footer_bg_m.jpg');
         }
 
         @media (min-width: 640px) {
@@ -125,7 +125,7 @@
         @media (min-width:768px) {
 
             .header {
-                background-image: url('https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/bg_header.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/bg_header.jpg');
                 background-size: 1600px;
             }
 
@@ -142,7 +142,7 @@
             }
 
             .footer {
-                background-image: url('https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/footer_bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/footer_bg.jpg');
             }
         }
 
@@ -168,7 +168,7 @@
             <div class="flex flex-wrap items-center">
                 <div class="w-full md:w-7/12 lg:w-2/3 md:text-left">
                     <div class="mt-56 md:mt-0 sm:pl-3">
-                        <img class="h-28 lg:h-36 mx-auto md:mx-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/logo.png" alt="logo">
+                        <img class="h-28 lg:h-36 mx-auto md:mx-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/logo.png" alt="logo">
                         <p class="leading-tight mt-2 md:mt-5 mb-2 md:mb-8">
                             <strong class="font-extrabold">Free 60-minute beginner guitar lesson</strong> <br class="lg:hidden">with Ayla Tesler-Mabe
                             <br><strong class="text-yellow uppercase md:mt-2 mb-6">SIGN UP FOR NOTICE ON THE NEXT EVENT</strong>
@@ -201,7 +201,7 @@
     <section class="text-white py-12 sm:py-20 px-4 sm:px-6 bg-musora-black">
         <div class="max-w-sm md:max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-10 items-center justify-center flex flex-col mx-auto">
-                <img class="md:order-1 rounded-md mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/collage.png" alt="intro image">
+                <img class="md:order-1 rounded-md mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/collage.png" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h3 class="font-extrabold mx-0 mb-4 sm:mb-6 leading-tight">
                         Get motivated with <br>pain-free & fun guitar playing.
@@ -261,11 +261,11 @@
                                     </p>
                                 </div>
                             </div>
-                            <img class="timeline-img rounded-lg lazyload mb-4 md:mb-0" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $step['img'] }}" alt="step {{$key+1}}" />
+                            <img class="timeline-img rounded-lg lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $step['img'] }}" alt="step {{$key+1}}" />
                         </div>
                     @else
                         <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-2 md:gap-12 lg:gap-20 mb-16 md:mb-16 lg:mb-28 pl-6 md:pl-0">
-                            <img class="timeline-img rounded-lg lazyload mb-4 md:mb-0" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $step['img'] }}" alt="step {{$key+1}}" />
+                            <img class="timeline-img rounded-lg lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $step['img'] }}" alt="step {{$key+1}}" />
                             <div class="content relative flex items-center justify-center">
                                 <div class="md:max-w-xs lg:max-w-md w-full">
                                     <h4 class="font-extrabold uppercase lg:mb-2">step {{$key+1}}</h4>
@@ -285,7 +285,7 @@
     <section class="px-4 py-12 sm:py-20" style="background-color: #FAFAFA;">
         <div class="max-w-md sm:max-w-3xl lg:max-w-6xl mx-auto">
             <div class="sm:grid sm:grid-cols-2 sm:gap-6 md:gap-12 lg:gap-20 items-center text-center">
-                <img class="rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/ui.png" alt="intro image">
+                <img class="rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/ui.png" alt="intro image">
                 <div class="inline-flex flex-col text-left">
                     <h3 class="font-extrabold mb-2 sm:mb-3 leading-tight text-left mx-0">
                         These aren’t <br>
@@ -311,8 +311,8 @@
         <div class="max-w-3xl lg:max-w-4xl mx-auto relative">
             <div class="w-3/4 sm:w-2/3 mx-auto relative md:static text-center mb-8">
                 <picture>
-                    <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/coach_profile.png">
-                    <img class="md:w-80 lg:w-96 md:absolute -bottom-10 -right-0 lg:-right-2 md:border-8 rounded-3xl md:border-solid border-musora-black lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/coach_profile_m.png" alt="coach image">
+                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/coach_profile.png">
+                    <img class="md:w-80 lg:w-96 md:absolute -bottom-10 -right-0 lg:-right-2 md:border-8 rounded-3xl md:border-solid border-musora-black lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/coach_profile_m.png" alt="coach image">
                 </picture>
             </div>
 
@@ -333,7 +333,7 @@
 
     <section class="py-20 sm:py-28 bg-cover lazyload footer" style="background-color:#3d151a;background-position: 25% 50%;">
         <div class="max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-center text-white px-4">
-            <img class="lazyload h-32 mx-auto" data-src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/logo.png" alt="logo">
+            <img class="lazyload h-32 mx-auto" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/back-to-basics/logo.png" alt="logo">
             <h6 class="my-2 leading-normal">
                 <strong class="font-extrabold">Free 60-minute beginner guitar lesson</strong> <br class="inline md:hidden"> with Ayla Tesler-Mabe
                 <br><strong class="text-yellow uppercase md:mt-2 mb-6">SIGN UP FOR NOTICE ON THE NEXT EVENT</strong>

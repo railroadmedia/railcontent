@@ -42,11 +42,11 @@
         display: inline-block;
         margin-right: 2%;
         margin-top: 10px;" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=afddd5f6-fbc3-46c9-b6e4-6c9e6a6936af" target="_blank">
-                <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store icon"></a>
+                <img src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store icon"></a>
             <a style="width: 48%;max-width:130px;
         display: inline-block;
         margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=pianote_previews" target="_blank">
-                <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play icon"></a>
+                <img src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play icon"></a>
         </div>
         <div class="footer-link-wrap">
             <h1>Resources</h1>
@@ -75,7 +75,7 @@
     @endif
     <div class="footer-bottom" @if(!empty($minimal)) style="border-top: 0;padding-top: 0;" @endif>
         <div class="container mx-auto">
-            <img class="logo" src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png" alt="Pianote">
+            <img class="logo" src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png" alt="Pianote">
             @if(empty($minimal))
             <p><a rel="noopener" href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
                 <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>

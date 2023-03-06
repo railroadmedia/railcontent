@@ -54,7 +54,7 @@
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
-                                            src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$slide['img']}}"
+                                            src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
                                             alt="{{$slide['title']}} img"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
@@ -101,7 +101,7 @@
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
-                                            src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$slide['img']}}"
+                                            src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
                                             alt="{{$slide['title']}} img"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
@@ -148,7 +148,7 @@
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
-                                            src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$slide['img']}}"
+                                            src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
                                             alt="{{$slide['title']}} img"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
@@ -195,7 +195,7 @@
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
-                                            src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$slide['img']}}"
+                                            src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
                                             alt="{{$slide['title']}} img"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
@@ -241,7 +241,7 @@
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
-                                            src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$slide['img']}}"
+                                            src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
                                             alt="{{$slide['title']}} img"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
@@ -288,7 +288,7 @@
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
                                             class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
-                                            src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{$slide['img']}}"
+                                            src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
                                             alt="{{$slide['title']}} img"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"

@@ -141,7 +141,7 @@
         }
 
         header {
-            background-image:url('https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/header-m.jpg');
+            background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/header-m.jpg');
             background-size:cover;
         }
 
@@ -167,7 +167,7 @@
 
         @media (min-width:768px) {
             header {
-                background-image:url('https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/header.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/header.jpg');
                 background-size:cover;
             }
 
@@ -194,8 +194,8 @@
             <div class="max-w-lg mx-auto md:mx-0 text-center md:text-left">
                 <div class="px-1">
                     <picture>
-                        <source media="(min-width:768px)" srcset="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/logo.png">
-                        <img class="h-14 sm:h-16 lg:h-20 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/logo-m.png" alt="logo white">
+                        <source media="(min-width:768px)" srcset="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/logo.png">
+                        <img class="h-14 sm:h-16 lg:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/logo-m.png" alt="logo white">
                     </picture>
                     <h3 class="font-extrabold leading-tight text-white mt-80 md:mt-6">
                         Go from a total beginner to playing your first song in four easy lessons!
@@ -256,7 +256,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center md:justify-start w-full md:w-1/2 sm:order-1 md:pl-6 mt-7 sm:mt-0 relative">
-                        <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/collage.png" alt="collage">
+                        <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/collage.png" alt="collage">
                     </div>
                 </div>
             </div>
@@ -273,26 +273,26 @@
             <div class="flex flex-wrap mb-14">
                 <div class="w-full sm:w-1/2 px-4 sm:px-2 mb-6">
                     <div class="relative mb-4">
-                        <img class="relative z-0 rounded-lg lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/Lesson_1.jpg" alt="lesson-1">
+                        <img class="relative z-0 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/Lesson_1.jpg" alt="lesson-1">
                     </div>
                     <p>
                         You sit down at the piano -- now what? Let’s make sense of all the notes on your piano keyboard and how to start playing them. You’ll play with both hands right away in this lesson.
                     </p>
                 </div>
                 <div class="w-full sm:w-1/2 px-4 sm:px-2 mb-6">
-                    <img class="rounded-lg mb-4 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/Lesson_2.jpg" alt="lesson-2">
+                    <img class="rounded-lg mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/Lesson_2.jpg" alt="lesson-2">
                     <p>
                         Scales are the building blocks of ALL songs. Learn your first scale, which you’ll use to play a song in just a few lessons time.
                     </p>
                 </div>
                 <div class="w-full sm:w-1/2 px-4 sm:px-2 mb-6">
-                    <img class="rounded-lg mb-4 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/Lesson_3.jpg" alt="lesson-3">
+                    <img class="rounded-lg mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/Lesson_3.jpg" alt="lesson-3">
                     <p>
                         How does some music feel sad and moody? You’ll discover exactly how in this lesson. It’ll also help you see the piano keyboard in a new light!
                     </p>
                 </div>
                 <div class="w-full sm:w-1/2 px-4 sm:px-2 mb-6 sm:mb-0">
-                    <img class="rounded-lg mb-4 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/Lesson_4.jpg" alt="lesson-4">
+                    <img class="rounded-lg mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/Lesson_4.jpg" alt="lesson-4">
                     <p>
                         It’s time. In these few short lessons, you’ve gained enough knowledge and skill to start playing real pop songs, like the ones you hear on the radio.
                     </p>
@@ -346,8 +346,8 @@
     <section class="py-20" style="background:#01050F;">
         <div class="max-w-sm md:max-w-4xl mx-auto px-4 sm:px-0 text-white lg:gap-10 relative flex flex-col md:flex-row lg:block items-center justify-center text-right">
             <picture>
-                <source media="(min-width:768px)" srcset="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/coach.jpg">
-                <img class="rounded-lg lg:absolute lg:left-10 lg:top-0 h-72 md:h-96 lg:h-full mb-10 md:mb-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/coach-m.jpg" alt="jared profile">
+                <source media="(min-width:768px)" srcset="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/coach.jpg">
+                <img class="rounded-lg lg:absolute lg:left-10 lg:top-0 h-72 md:h-96 lg:h-full mb-10 md:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/coach-m.jpg" alt="jared profile">
             </picture>
 
             <div class="max-w-md inline-block text-left md:pl-8 lg:pl-0">
@@ -358,9 +358,9 @@
                     Lisa Witt
                 </h1>
                 <div class="font-bold text-white mb-8">
-                    <img class="h-6 mr-2 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/youtube_icon.svg" alt="youtube icon">
+                    <img class="h-6 mr-2 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/youtube_icon.svg" alt="youtube icon">
                     1M Subscribers
-                    <img class="h-6 ml-6 mr-2 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/youtube_icon.svg" alt="youtube icon">
+                    <img class="h-6 ml-6 mr-2 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/youtube_icon.svg" alt="youtube icon">
                     24M Views
                 </div>
                 <p>
@@ -384,7 +384,7 @@
             <div class="flex flex-wrap max-w-md mx-auto sm:max-w-full">
                 <div class="w-full sm:w-1/2 lg:w-1/4 flex flex-auto px-2 mb-8 md:mb-4 lg:mb-0">
                     <div class="rounded-xl overflow-hidden w-full" style="background: #051124;">
-                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/testimonials/jessripley.jpg">
+                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/sales/2022/testimonials/jessripley.jpg">
                         </div>
                         <div class="p-4">
                             <p class="italic mb-4">
@@ -402,7 +402,7 @@
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/4 flex flex-auto px-2 mb-8 md:mb-4 lg:mb-0">
                     <div class="rounded-xl overflow-hidden w-full" style="background: #051124;">
-                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/testimonials/nabilabdelmoneim.jpg" >
+                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/sales/2022/testimonials/nabilabdelmoneim.jpg" >
                         </div>
                         <div class="p-4">
                             <p class="italic mb-4">
@@ -420,7 +420,7 @@
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/4 flex flex-auto px-2 mb-8 sm:mb-0">
                     <div class="rounded-xl overflow-hidden w-full" style="background: #051124;">
-                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/testimonials/xitlalicaballero2.jpg">
+                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/sales/2022/testimonials/xitlalicaballero2.jpg">
                         </div>
                         <div class="p-4">
                             <p class="italic mb-4">
@@ -438,7 +438,7 @@
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/4 flex flex-auto px-2">
                     <div class="rounded-xl overflow-hidden w-full" style="background: #051124;">
-                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/testimonials/serenadorward.jpg">
+                        <div class="aspect-16:9 relative bg-top bg-cover py-10 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/sales/2022/testimonials/serenadorward.jpg">
                         </div>
                         <div class="p-4">
                             <p class="italic mb-4">
@@ -493,8 +493,8 @@
         <div class="max-w-5xl mx-auto flex flex-wrap flex-col md:flex-row md:items-center">
             <div class="max-w-lg mx-auto text-center sm:text-left w-full md:w-1/2 sm:pl-5">
                 <picture>
-                    <source media="(min-width:768px)" srcset="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/logo.png">
-                    <img class="h-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/logo-m.png" alt="logo">
+                    <source media="(min-width:768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/logo.png">
+                    <img class="h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/logo-m.png" alt="logo">
                 </picture>
                 <h3 class="pt-4 md:pt-5 leading-7 md:leading-9 font-extrabold mb-6">
                     4 beginner piano lessons. <br>Learn your first song on the piano. Study at your own pace
@@ -517,7 +517,7 @@
                 </div>
             </div>
             <div class="flex justify-center md:justify-start w-full md:w-1/2 sm:order-1 md:pl-6 mt-7 md:mt-0 relative">
-                <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/collage.png" alt="collage">
+                <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://pianote.s3.amazonaws.com/lead-gen/getting-started-2022/collage.png" alt="collage">
             </div>
         </div>
     </section>
@@ -526,7 +526,7 @@
         <div class="reveal large relative" style="background: transparent;" id="{{ str_replace(' ', '', $review['name']) }}" data-reveal data-reset-on-close="false">
             <div class="px-10 sm:px-20 relative" style="background: transparent;">
                 <div class="max-w-xl mx-auto rounded-lg overflow-hidden" style="background: #051124;">
-                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/{{ $review['img'] }}" alt="{{ $review['name'] }}">
+                    <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=700,quality=85/{{ $review['img'] }}" alt="{{ $review['name'] }}">
                     <p class="italic p-4 text-white">
                         “{!! $review['testimonial'] !!}”
                     </p>

@@ -250,10 +250,10 @@
 @stop
 
 @section('body')
-    <div class="overflow-hidden text-white px-3 py-5 sm:py-7" style="background-image: url(https://cdn.musora.com/image/fetch/w_300,q_60,q_auto:best/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/star-pattern.svg);background-color:#000718;">
+    <div class="overflow-hidden text-white px-3 py-5 sm:py-7" style="background-image: url(https://www.musora.com/musora-cdn/image/width=300,q_60,quality=85/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/star-pattern.svg);background-color:#000718;">
         <div class="container mx-auto clearfix" style="max-width:940px">
             <div class="text-center sm:px-3">
-                <img class="logo mx-auto inline-block w-40 sm:w-56" src="https://cdn.musora.com/image/fetch/w_448,q_60,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/logo-purple.png">
+                <img class="logo mx-auto inline-block w-40 sm:w-56" src="https://www.musora.com/musora-cdn/image/width=448,q_60,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/logo-purple.png">
                 <div class="video-row relative my-4 sm:my-7">
                     @hasSection('prev-thumb')
                         <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -10%;width: 80%;" src="@yield('prev-thumb')">
@@ -353,7 +353,7 @@
 
                 <div class="flex items-center">
 
-                    <img class="hidden sm:inline-block w-36 mr-6" src="https://cdn.musora.com/image/fetch/w_290,q_60,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/logo-white.png">
+                    <img class="hidden sm:inline-block w-36 mr-6" src="https://www.musora.com/musora-cdn/image/width=290,q_60,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/logo-white.png">
                     <span class="text-center countdown-timer whitespace-nowrap">
                         <span class="countdown-timer-minutes">00</span>:<span class="countdown-timer-seconds">00</span>
                     </span>

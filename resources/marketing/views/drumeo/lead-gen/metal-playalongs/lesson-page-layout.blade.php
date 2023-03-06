@@ -11,7 +11,7 @@
     <meta property="og:title" content="9 Metal Play-Alongs | Drumeo">
     <meta name="description" content="Add your drumming to nine heavy drum play-along tracks. (FREE).">
     <meta property="og:description" content="Add your drumming to nine heavy drum play-along tracks. (FREE).">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/metal-playalongs/">
 @stop
 

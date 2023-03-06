@@ -19,7 +19,7 @@
 @section('layout-body')
     <section class="py-24 md:py-40 text-white text-center relative">
         <img
-            src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/header-about.jpg"
+            src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/header-about.jpg"
             class="absolute object-cover w-full h-full top-0 left-0 z-[-2] transition-opacity opacity-0"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
@@ -47,7 +47,7 @@
                 email-subject="Support Request From Musora"
                 email-type="support-contact"
                 email-endpoint="{{url()->route('mailora.public.send') }}"
-                email-logo="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/logo.png"
+                email-logo="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://musora-web-platform.s3.amazonaws.com/musora/logo.png"
                 input-label="Report your issue here.."
                 recipient="support@musora.com"
                 success-message="Your email has been sent!"

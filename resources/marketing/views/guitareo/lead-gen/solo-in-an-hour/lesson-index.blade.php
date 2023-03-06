@@ -17,7 +17,7 @@
     @include('guitareo.lead-gen.partials._course-lessons1', [
         "bgColor" => "#030d17",
         "bgImg" => "https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/order-bg.jpg",
-        "img" => '<img class="tw-h-20 md:tw-h-28 lg:tw-h-40 tw-inline-block" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png">',
+        "img" => '<img class="tw-h-20 md:tw-h-28 lg:tw-h-40 tw-inline-block" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png">',
         "rootLink" => "/solo-in-an-hour/lessons/",
         "bonuses" => [
             [

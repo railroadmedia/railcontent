@@ -19,7 +19,7 @@
     @include('guitareo.lead-gen.partials._course-lessons1', [
         "bgColor" => "#030d17",
         "bgImg" => "https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/order-bg.jpg",
-        "img" => '<img class="h-12 md:h-20 lg:h-36 inline-block" src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/electric-logo.png">',
+        "img" => '<img class="h-12 md:h-20 lg:h-36 inline-block" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/electric-logo.png">',
         "rootLink" => "/free-electric-guitar-lessons/lessons/",
         "bonuses" => [
             [

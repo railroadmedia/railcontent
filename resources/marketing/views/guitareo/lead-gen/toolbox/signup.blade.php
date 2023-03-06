@@ -26,16 +26,16 @@
     <header class="header blue" style="background:#1a1c1d;">
         <div class="container clearfix mx-auto max-w-6xl flex flex-col">
             <picture>
-                <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
-                <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
-                <img class="logo" src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg" alt="logo">
+                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
+                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
+                <img class="logo" src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://guitareo.s3.amazonaws.com/toolbox/logo.svg" alt="logo">
             </picture>
             <div class="flex flex-col sm:flex-row">
                 <div class="text-center sm:w-5/12 preview-circle">
                     <picture>
-                        <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg">
-                        <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg">
-                        <img class="circle-nate" src="https://cdn.musora.com/image/fetch/w_270,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg" alt="nate-savage">
+                        <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg">
+                        <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg">
+                        <img class="circle-nate" src="https://www.musora.com/musora-cdn/image/width=270,quality=85/https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg" alt="nate-savage">
                     </picture>
                 </div>
                 <div class="px-2 sm:px-8 sm:w-7/12">
@@ -133,9 +133,9 @@
         <div class="container clearfix mx-auto max-w-6xl">
             <div class="logo">
                 <picture>
-                    <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
-                    <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
-                    <img src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg" alt="logo">
+                    <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
+                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
+                    <img src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://guitareo.s3.amazonaws.com/toolbox/logo.svg" alt="logo">
                 </picture>
             </div>
             <p>

@@ -22,7 +22,7 @@
 @section('body')
     <section class="py-10" style="background: #010D18;">
         <div class="max-w-2xl mx-auto text-center text-white px-4 md:px-0">
-            <img class="h-24 md:h-32 mb-8 inline-block lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
+            <img class="h-24 md:h-32 mb-8 inline-block lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
             <h2>
                 <span class="text-guitareo"><i class="fad fa-check-circle" aria-hidden="true"></i></span>
                 <strong>Success!</strong> <br class="inline md:hidden">Check your email!

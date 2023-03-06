@@ -8,7 +8,7 @@
 
 <!-- Main -->
 @section('layout-body')
-<section class="py-24 md:py-40 text-white text-center bg-center bg-cover" style="background-color:#1a1e58;background-image:url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/header-about.jpg);">
+<section class="py-24 md:py-40 text-white text-center bg-center bg-cover" style="background-color:#1a1e58;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/header-about.jpg);">
     <div class="container mx-auto relative z-0">
         <h1 class="text-2xl sm:text-4xl lg:text-5xl"><strong>Terms of Use</strong></h1>
     </div>

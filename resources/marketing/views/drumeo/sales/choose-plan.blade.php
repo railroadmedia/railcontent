@@ -5,7 +5,7 @@
     <meta property="og:title" content="Drumeo | Reach your drumming goals.">
     <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/">
 
     @include('_partials.layout._fonts')
@@ -40,7 +40,7 @@
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @if(empty($month))
     @include('musora.sales.components.card-selection-section', [
-        "plusLogo" => "https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo.svg",
+        "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
         "songs" => "5000",
         "firstPoint" => "The world’s best drum lessons.",
@@ -52,7 +52,7 @@
         "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
     ])
     @include('musora.sales.components.plans-different-section', [
-        "plusLogo" => "https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo-dark.svg",
+        "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo-dark.svg",
         "logo" => "https://musora-center.s3.amazonaws.com/logos/drumeo-logo.png",
         "secondPoint" => "200+ courses with legendary teachers",
         "thirdPoint" => "Go beyond drums with lessons for piano, guitar, and singing.",
@@ -61,7 +61,7 @@
     ])
     @else
         @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo.svg",
+            "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
             "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
             "songs" => "5000",
             "firstPoint" => "The world’s best drum lessons.",

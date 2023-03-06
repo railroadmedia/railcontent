@@ -22,18 +22,18 @@
         }
         .header-bg {
             background-size:675px;
-            background-image: url('https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/bg.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=750,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/bg.jpg');
         }
         .teacher-gradient {
             background:linear-gradient(to top, #04111d 40%, transparent 75%);
         }
         .teacher-section {
-            background: #04111d 50% top/530px no-repeat url('https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/coach-bg.jpg');;
+            background: #04111d 50% top/530px no-repeat url('https://www.musora.com/musora-cdn/image/width=750,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/coach-bg.jpg');;
         }
         @media (min-width: 768px) {
             .header-bg {
                 background-size:1140px;
-                background-image:url('https://cdn.musora.com/image/fetch/w_1250,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/bg.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=1250,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/bg.jpg');
             }
             .teacher-gradient {
                 background:linear-gradient(to right, #04111d, transparent 80%);
@@ -41,14 +41,14 @@
             .teacher-section {
                 background-size:630px;
                 background-position:180% 50%;
-                background-image:url('https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/coach-bg.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/coach-bg.jpg');
             }
 
         }
         @media (min-width: 1024px) {
             .header-bg {
                 background-size:1240px;
-                background-image: url('https://cdn.musora.com/image/fetch/w_1600,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=1600,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/bg.jpg');
             }
             .teacher-gradient {
                 background:linear-gradient(to right, #04111d, transparent 60%);
@@ -56,7 +56,7 @@
             .teacher-section {
                 background-size:750px;
                 background-position:95% 50%;
-                background-image:url('https://cdn.musora.com/image/fetch/w_1250,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/coach-bg.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=1250,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/coach-bg.jpg');
             }
         }
     </style>
@@ -76,7 +76,7 @@
     @include('guitareo.lead-gen.partials._header1', [
         "bgColor" => "#00101d",
         "imgs" => [
-            '<img class="w-full h-24 md:h-32 lg:h-36" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png" alt="logo">',
+            '<img class="w-full h-24 md:h-32 lg:h-36" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png" alt="logo">',
         ],
         "playButton" => "down",
         "headLine" => '<h1 class="font-bison-bold">Play your first solo<br class="inline md:hidden"> in less than 60 minutes</h1>
@@ -152,7 +152,7 @@
             <div class="flex flex-wrap items-start max-w-4xl mx-auto">
                 @foreach ($steps as $key => $step)
                     <div class="w-full md:w-1/3 px-3 mb-8 md:mb-0">
-                        <img class="h-12" src="https://cdn.musora.com/image/fetch/w_60,q_auto:best/{{ $step['icon'] }}" alt="step-icon-{{ $key + 1 }}">
+                        <img class="h-12" src="https://www.musora.com/musora-cdn/image/width=60,quality=85/{{ $step['icon'] }}" alt="step-icon-{{ $key + 1 }}">
                         <p class="my-3"><strong>{!! $step['title'] !!}</strong></p>
                         <p class="leading-normal">{!! $step['description'] !!}</p>
                     </div>
@@ -181,9 +181,9 @@
         "bgImg" => "https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/order-bg.jpg",
         "img" => '
             <picture>
-                <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png">
-                <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png">
-                <img class="h-28 md:h-40 lg:h-52 lazyload" data-src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png" alt="logo">
+                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png">
+                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png">
+                <img class="h-28 md:h-40 lg:h-52 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png" alt="logo">
             </picture>
         ',
         "text" => '<h1 class="font-bison-bold">Play your first solo<br class="inline md:hidden"> in less than 60 minutes</h1>

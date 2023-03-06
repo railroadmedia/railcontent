@@ -16,7 +16,7 @@
 
     <!-- Hero Component -->
     @component('_partials.components.hero-section', [
-        "backgroundImage" => "https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/musora-hero.jpg",
+        "backgroundImage" => "https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://musora-web-platform.s3.amazonaws.com/musora/homepage/musora-hero.jpg",
     ])
         @slot('content')
             <div class="text-center text-white">
@@ -24,10 +24,10 @@
                 <p class="mt-4 mb-7">We make it easier to play the songs you love by combining great teachers, organized<br class="hidden md:inline">
                     lessons, and practical technology with student-centered communities.</p>
                 <div class="flex items-center justify-center">
-                    <a href="https://www.drumeo.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3 mb-2" data-cfsrc="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo"></a>
-                    <a href="https://www.pianote.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3" data-cfsrc="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png" alt="pianote logo"></a>
-                    <a href="https://www.guitareo.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3" data-cfsrc="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" alt="guitareo logo"></a>
-                    <a href="https://www.singeo.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3" data-cfsrc="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="singeo logo"></a>
+                    <a href="https://www.drumeo.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3 mb-2" data-cfsrc="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo"></a>
+                    <a href="https://www.pianote.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3" data-cfsrc="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png" alt="pianote logo"></a>
+                    <a href="https://www.guitareo.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3" data-cfsrc="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" alt="guitareo logo"></a>
+                    <a href="https://www.singeo.com/" target="_blank"><img class="h-5 md:h-7 mx-1 md:mx-3" data-cfsrc="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="singeo logo"></a>
                 </div>
             </div>
 
@@ -111,7 +111,7 @@
     </section>
     <section class="py-12 md:py-20 relative overflow-hidden text-white text-center">
         {{-- background --}}
-        <img src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/drumeo-background.jpg"
+        <img src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/drumeo-background.jpg"
             class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
@@ -120,7 +120,7 @@
         <div class="container mx-auto relative z-0">
             <img
                 class="h-9 md:h-14 transition-opacity opacity-0"
-                src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
+                src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="drumeo logo"
@@ -129,7 +129,7 @@
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center">
                 <img
                     class="flex-shrink-0 h-40 md:h-60 lg:h-80 transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/drumeo-graphic.png"
+                    src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/drumeo-graphic.png"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     alt="drumeo graphic"
@@ -150,7 +150,7 @@
     </section>
     <section class="py-12 md:py-20 relative overflow-hidden text-white text-center">
         {{-- background --}}
-        <img src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/pianote-background.jpg"
+        <img src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/pianote-background.jpg"
             class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
@@ -168,7 +168,7 @@
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center">
                 <img
                     class="flex-shrink-0 h-40 md:h-60 lg:h-80 transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/pianote-graphic.png"
+                    src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/pianote-graphic.png"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     alt="pianote graphic"
@@ -190,7 +190,7 @@
     <section class="py-12 md:py-20 relative overflow-hidden text-white text-center lazyload">
         {{-- background --}}
         <img
-            src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/guitareo-background.jpg"
+            src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/guitareo-background.jpg"
             class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
@@ -208,7 +208,7 @@
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center">
                 <img
                     class="flex-shrink-0 h-40 md:h-60 lg:h-80 transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/guitareo-graphic.png"
+                    src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/guitareo-graphic.png"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     alt="guitareo graphic"
@@ -229,7 +229,7 @@
     <section class="py-12 md:py-20 relative overflow-hidden text-white text-center lazyload">
             {{-- background --}}
             <img
-                src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/singeo-background.jpg"
+                src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/singeo-background.jpg"
                 class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
@@ -247,7 +247,7 @@
             <div class="flex flex-wrap md:flex-nowrap items-center justify-center">
                 <img
                     class="flex-shrink-0 h-40 md:h-60 lg:h-80 transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/singeo-graphic.png"
+                    src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/singeo-graphic.png"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     alt="singeo graphic"

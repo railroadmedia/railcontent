@@ -50,7 +50,7 @@
     </div>
     <div class="w-full h-10 sm:h-12 lg:h-14"></div>
     <header class="pb-24 sm:pb-32 pt-32 sm:pt-40 text-white text-center relative">
-        <img src="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://musora-center.s3.amazonaws.com/careers/header-image.jpg"
+        <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://musora-center.s3.amazonaws.com/careers/header-image.jpg"
              class="absolute object-cover transition-opacity opacity-0 top-0 left-0 w-full h-full z-[-2]"
              loading="lazy"
              onload="this.classList.remove('opacity-0')"
@@ -59,28 +59,28 @@
         <div class="container mx-auto">
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
+                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo blue"
             >
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png"
+                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo red"
             >
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png"
+                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo green"
             >
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"
+                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="singeo logo"
@@ -139,14 +139,14 @@
         <div class="container mx-auto relative z-0 max-w-5xl">
             <img
                 class="-mt-40 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://musora-center.s3.amazonaws.com/careers/collage-1-m.png"
+                src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://musora-center.s3.amazonaws.com/careers/collage-1-m.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="collage 1"
             >
             <img
                 class="-mt-40 hidden sm:inline-block transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/careers/collage-1.png"
+                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://musora-center.s3.amazonaws.com/careers/collage-1.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="collage 1"
@@ -161,14 +161,14 @@
 
             <img
                 class="my-12 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://musora-center.s3.amazonaws.com/careers/quote-m.png"
+                src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://musora-center.s3.amazonaws.com/careers/quote-m.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="quote"
             >
             <img
                 class="my-24 hidden sm:inline-block transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/careers/quote.png"
+                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://musora-center.s3.amazonaws.com/careers/quote.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="quote"
@@ -195,14 +195,14 @@
         <div class="container mx-auto max-w-5xl">
             <img
                 class="-mt-96 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://musora-center.s3.amazonaws.com/careers/collage-2-m.png"
+                src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://musora-center.s3.amazonaws.com/careers/collage-2-m.png"
                 alt="collage 2"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
             >
             <img
                 class="-mt-96 hidden sm:inline-block"
-                src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/careers/collage-2.png"
+                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://musora-center.s3.amazonaws.com/careers/collage-2.png"
                 alt="collage 2"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"

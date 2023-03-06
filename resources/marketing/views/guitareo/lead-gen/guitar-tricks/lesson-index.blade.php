@@ -17,7 +17,7 @@
     @include('guitareo.lead-gen.partials._course-lessons1', [
         "bgColor" => "#000316",
         "bgImg" => "https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/map-background.jpg",
-        "img" => '<img class="h-20 md:h-28 lg:h-40 inline-block" style="margin-bottom: 0;" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/logo-with.png">',
+        "img" => '<img class="h-20 md:h-28 lg:h-40 inline-block" style="margin-bottom: 0;" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/logo-with.png">',
         "rootLink" => "/guitar-tricks/your-videos/",
         "bonuses" => [
             [

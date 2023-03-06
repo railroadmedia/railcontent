@@ -2,7 +2,7 @@
 <?php
     $learn = [
         [
-            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming-masterclass.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/rock-drumming-masterclass.jpg',
             'title' => 'Rock',
             'artist' => 'Todd Sucherman',
         ],

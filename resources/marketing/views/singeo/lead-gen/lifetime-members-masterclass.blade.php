@@ -161,7 +161,7 @@
 
 @section('global-body')
     @include("singeo.sales.partials._nav")
-    <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/products/shop-header.jpg">
+    <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://singeo.s3.amazonaws.com/products/shop-header.jpg">
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
                 <h1><strong>Lifetime Members Masterclass</strong></h1>
                 <h3>with Lisa Witt</h3>

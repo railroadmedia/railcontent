@@ -32,7 +32,7 @@
 
     <section class="py-24 md:py-40 text-white text-center relative">
         <img
-            src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/header-about.jpg"
+            src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/header-about.jpg"
             loading="lazy"
             class="transition-opacity opacity-0 absolute w-full h-full object-cover top-0 left-0 z-[-2]"
             onload="this.classList.remove('opacity-0')"
@@ -60,7 +60,7 @@
             <div class="flex items-center mt-8">
                 <img
                     class="h-32 rounded-full transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/jared-falk.jpg"
+                    src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/jared-falk.jpg"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                     alt="jared falk"
@@ -87,7 +87,7 @@
             </p>
             <img
                 class="timeline px-3 md:px-0 transition-opacity opacity-0"
-                src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/meet-musora.png"
+                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://singeo.s3.amazonaws.com/sales/2021/meet-musora.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="meet musora diagram"
@@ -103,7 +103,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="jared = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
-                            src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/jared-falk.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/team/jared-falk.jpg"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="jared falk"
@@ -116,7 +116,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="james = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
-                            src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/jame-falk.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/jame-falk.jpg"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="jame falk"
@@ -129,7 +129,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="dave = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
-                            src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/dave-atkinson.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/dave-atkinson.jpg"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="dave atkinson"
@@ -142,7 +142,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="pam = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
-                            src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/pam-black.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/team/pam-black.jpg"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="pam black"
@@ -155,7 +155,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="mary = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
-                            src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/mary-liz-borseth.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/mary-liz-borseth.jpg"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="mary liz borseth"
@@ -168,7 +168,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="caleb = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
-                            src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/caleb-favo.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/caleb-favo.jpg"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="caleb favo"
@@ -181,7 +181,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="victor = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
-                            src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/victor-guidera.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/victor-guidera.jpg"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="victor guidera"
@@ -194,7 +194,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="chad = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
-                            src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/chad-kettner.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/team/chad-kettner.jpg"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="chad kettner"
@@ -207,7 +207,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="amy = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
-                            src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/amy-malcomson.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/amy-malcomson.jpg"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="amy malcomson"
@@ -220,7 +220,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="jordan = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
-                            src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/jord-paul.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/team/jord-paul.jpg"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             alt="jord paul"
@@ -238,7 +238,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px] opacity-30"></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
-                                src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/jared-falk.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/team/jared-falk.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 alt="Jared Falk"
@@ -255,7 +255,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="jared = true; james = false"></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
-                                src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/jame-falk.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/jame-falk.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 alt="James Falk"
@@ -272,7 +272,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="james = true; dave = false"></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
-                                src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/dave-atkinson.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/dave-atkinson.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 alt="Dave Atkinson"
@@ -289,7 +289,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="dave = true; pam = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
-                                src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/pam-black.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/team/pam-black.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 alt="Pam Black"
@@ -306,7 +306,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="pam = true; mary = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
-                                src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/mary-liz-borseth.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/mary-liz-borseth.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 alt="Mary-Liz Borseth"
@@ -323,7 +323,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="mary = true; caleb = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
-                                src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/caleb-favo.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/caleb-favo.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 alt="Caleb Favor"
@@ -340,7 +340,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="caleb = true; victor = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
-                                src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/victor-guidera.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/victor-guidera.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 alt="Victor Guidera"
@@ -357,7 +357,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="victor = true; chad = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
-                                src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/chad-kettner.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/team/chad-kettner.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 alt="Chad Kettner"
@@ -374,7 +374,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="chad = true; amy = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
-                                src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/amy-malcomson.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/amy-malcomson.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 alt="Amy Malcomson"
@@ -391,7 +391,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="amy = true; jordan = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
-                                src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/team/jord-paul.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://musora-center.s3.amazonaws.com/homepage/2021/team/jord-paul.jpg"
                                 loading="lazy"
                                 onload="this.classList.remove('opacity-0')"
                                 alt="Jordan Paul"

@@ -16,9 +16,9 @@
     /song-in-an-hour/your-challenge/6
 @stop
 
-@section('prev-thumb', 'https://cdn.musora.com/image/fetch/w_800,q_60,q_auto:best/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-4.png')
+@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-4.png')
 
-@section('next-thumb', 'https://cdn.musora.com/image/fetch/w_800,q_60,q_auto:best/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-6.png')
+@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-6.png')
 
 @section('assignments')
     <p class="tw-mb-2 sm:tw-mb-3 bg-yellow tw-px-2 tw-inline-block tw-rounded-md">Interactive sheet music is optional. <br class="tw-hidden sm:tw-inline lg:tw-hidden"> To complete your challenge in one-hour, only practice-along with the video.</p>

@@ -35,7 +35,7 @@
     <a href="/500-songs-chord-discount" class="edge-pitch block text-center w-full whitespace-nowrap z-10 py-2 sm:py-1 fixed mx-auto bg-black text-white">
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
-                <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://cdn.musora.com/image/fetch/w_1300,q_60,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/500-songs-logo.svg">
+                <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=1300,q_60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/500-songs-logo.svg">
                 <p class="inline-block align-middle mx-auto text-xs leading-tight"><strong>Like these songs? Learn 450 more <br>
                         with 500 Songs in 5 Days.</strong></p>
             </div>
@@ -357,7 +357,7 @@
                     <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 md:px-3 mb-7 md:mb-10">
                         <a class="block relative cursor-pointer overflow-hidden rounded-md" target="_blank" href="{{ $bonus['pdf'] }}">
                             <i class="absolute top-1/2 left-1/2 fas fa-cloud-download play-button opacity-0 transition-opacity duration-300" style="margin: -39px;padding: 22px 17px;"></i>
-                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_470,q_auto:best/{{ $bonus['image'] }}"></div>
+                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=85/{{ $bonus['image'] }}"></div>
                         </a>
                         <h5 class="mt-3 mb-1"><strong>{{ $bonus['artist'] }}</strong></h5>
                         <p class="text-navy leading-none">{{ $bonus['song'] }}</p>
@@ -366,10 +366,10 @@
             </div>
         </div>
     </section>
-    <section class="text-center py-14 md:py-24 lg:py-28 text-white bg-center bg-cover lazyload" style="background-color:#000417;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_60,q_auto:best/https://pianote.s3.amazonaws.com/shop/header-background.jpg">
+    <section class="text-center py-14 md:py-24 lg:py-28 text-white bg-center bg-cover lazyload" style="background-color:#000417;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://pianote.s3.amazonaws.com/shop/header-background.jpg">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
-                <img class="w-full max-w-xs md:max-w-md lg:max-w-lg mb-5 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1300,q_60,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/500-songs-logo.svg">
+                <img class="w-full max-w-xs md:max-w-md lg:max-w-lg mb-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1300,q_60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/500-songs-logo.svg">
                 <h4 class="leading-normal"><em><strong>Like these songs? Learn 450 more <br class="inline sm:hidden">
                             with 500 Songs in 5 Days.</strong><br>
                         <span class="opacity-70">Get your exclusive discount here:</span></em></h4>

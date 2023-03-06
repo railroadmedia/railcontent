@@ -17,11 +17,11 @@
 {{--    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">--}}
     <style>
         .shop-header {
-            background-image:url(https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://musora-center.s3.amazonaws.com/shop/header-m.jpg);
+            background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=85/https://musora-center.s3.amazonaws.com/shop/header-m.jpg);
         }
         @media (min-width: 768px) {
             .shop-header {
-                background-image:url(https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://musora-center.s3.amazonaws.com/shop/header.jpg);
+                background-image:url(https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://musora-center.s3.amazonaws.com/shop/header.jpg);
             }
         }
         footer a {

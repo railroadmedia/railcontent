@@ -11,7 +11,7 @@
     <meta property="og:title" content="Grooves Of John Bonham | Drumeo">
     <meta name="description" content="The ultimate breakdown of Led Zeppelin’s famous drum grooves. (FREE)">
     <meta property="og:description" content="The ultimate breakdown of Led Zeppelin’s famous drum grooves. (FREE)">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/grooves-of-john-bonham/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/grooves-of-john-bonham/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/grooves-of-john-bonham/">
 @stop
 

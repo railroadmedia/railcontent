@@ -5,7 +5,7 @@
     <meta name="description" content="Get 5 free video lessons with YouTube-star COOP3RDRUMM3R, covering everything you need to start learning the drums for the very first time!">
 
     <!-- Social Media -->
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
     <meta property="og:title" content="How To Start Playing Drums | Drumeo">
     <meta property="og:description" content="Get 5 free video lessons with YouTube-star COOP3RDRUMM3R, covering everything you need to start learning the drums for the very first time!">
     <meta property="og:url" content="https://www.drumeo.com/coop3rdrumm3r/">

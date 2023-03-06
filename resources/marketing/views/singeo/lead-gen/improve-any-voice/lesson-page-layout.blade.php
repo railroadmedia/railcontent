@@ -4,7 +4,7 @@
     @parent
 
     <meta name="description" content="Anyone can sing! Singeo is here to show you how in this free mini lesson series."/>
-    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_60,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/4-exercises/og-image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=85/https://singeo.s3.amazonaws.com/lead-gen/4-exercises/og-image.jpg">
     <meta property="og:title" content="4 Exercises Guaranteed To Improve ANY Voice!">
     <meta property="og:description" content="Anyone can sing! Singeo is here to show you how in this free mini lesson series.">
     <meta property="og:url" content="https://www.singeo.com/improve-any-voice/">

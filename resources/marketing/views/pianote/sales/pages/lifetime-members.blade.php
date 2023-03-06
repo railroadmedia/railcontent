@@ -110,7 +110,7 @@
     {{--<div class="container mx-auto">--}}
     {{--<div class="text text-left">--}}
     {{--<img class="logo"--}}
-    {{--src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/march/logo.png">--}}
+    {{--src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://pianote.s3.amazonaws.com/sales/promos/march/logo.png">--}}
     {{--<p>--}}
     {{--<strong>ONLY <s class='opacity-60'>50</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability()}} SPOTS LEFT</strong>--}}
     {{--</p>--}}
@@ -125,7 +125,7 @@
             <div class="w-full mx-auto mt-10 mb-20 px-3" style="max-width:920px;">
                 <img
                     class="cursor-pointer"
-                    src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/thumb.jpg"
+                    src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/thumb.jpg"
                     alt="Video thumbnail"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -198,7 +198,7 @@
 
             <div class="max-w-4xl mx-auto px-4">
                 <div class="flex flex-wrap mb-2">
-                    <img class="w-full rounded-xl mb-2 cursor-pointer autoplay-video lazyloaded" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-04.png" alt="montage 4" data-open="unbox" aria-haspopup="true" tabindex="0" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-04.png">
+                    <img class="w-full rounded-xl mb-2 cursor-pointer autoplay-video lazyloaded" data-src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-04.png" alt="montage 4" data-open="unbox" aria-haspopup="true" tabindex="0" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-04.png">
                 </div>
             </div>
         </div>
@@ -222,7 +222,7 @@
                     Exact dates and times TBD. But we’ll make sure you have plenty of notice.
 
                 </p>
-                <img class="mb-4 sm:mb-0 order-0 sm:order-1 w-36 sm:w-72 lg:w-80" src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/june/Live_Chat_Screen.png" alt="Lisa">
+                <img class="mb-4 sm:mb-0 order-0 sm:order-1 w-36 sm:w-72 lg:w-80" src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://pianote.s3.amazonaws.com/sales/promos/june/Live_Chat_Screen.png" alt="Lisa">
             </div>
         </div>
     </section>
@@ -238,7 +238,7 @@
                         <div class="flip-div inline-block relative w-full group" style="padding-bottom: 47%;perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div class="front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="h-full w-full bg-black bg-center bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_460,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/pianote-lifetime.png"></div>
+                                    <div class="h-full w-full bg-black bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=460,quality=85/https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/pianote-lifetime.png"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -355,7 +355,7 @@
                                         <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-drumeo rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                         {{--                                        <h4 class="absolute text-white -top-3 -left-3  py-3 px-2.5 rounded-full transform -rotate-12" style="    line-height: 0.6;background-color:#cda880;"><strong>6<br><span class="leading-none" style="font-size: 50%;">PAIRS</span></strong></h4>--}}
                                     @endif
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }}"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=460,quality=85/{{ $bonus['image'] }}"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>

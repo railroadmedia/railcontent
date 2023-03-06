@@ -205,7 +205,7 @@
     <div class="promo-banner text-white" style="background:linear-gradient(to bottom, #01325b, #01101d);">
         <div class="container mx-auto relative z-10">
             <div class="text text-center">
-                {{--<img class="logo" src="https://drumeo-assets.s3.amazonaws.com/promos/november/recital-logo.svg">--}}
+                {{--<img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/promos/november/recital-logo.svg">--}}
                 <p class="leading-none">
                     <strong>Share your progress with the community!</strong> <br>
                         Submission deadline <strong class="text-guitareo">June 15th, 2022.</strong></p>
@@ -214,7 +214,7 @@
     </div>
     <section class="text-center text-white py-5 md:py-10 lg:py-16 px-5 md:px-7" style="background:#00101d ;">
         <div class="container mx-auto max-w-5xl">
-            <img class="h-24 sm:h-32 lg:h-40 mb-3" src="https://drumeo-assets.s3.amazonaws.com/promos/may/recitals-logo2.png">
+            <img class="h-24 sm:h-32 lg:h-40 mb-3" src="https://dpwjbsxqtam5n.cloudfront.net/promos/may/recitals-logo2.png">
             <h3 class="leading-tight"><strong>Share your progress with Ayla,<br> Kent, and the Guitareo Community!</strong></h3>
             <a class="join blue smaller anchor-slide my-5 md:my-7" href="#form">Submit Now &raquo;</a>
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-4xl">
