@@ -112,8 +112,6 @@
 
     onBeforeMount(() => {
         playlistsStore.setActivePlaylist(props.playlist) 
-        console.log(props.playlist)
-        // console.log('Playlist', props.playlist)
         state.isLiked = props.playlist.is_liked_by_current_user;
         state.isPinned = props.playlist.pinned;
         state.isPrivate = props.playlist.private; 
