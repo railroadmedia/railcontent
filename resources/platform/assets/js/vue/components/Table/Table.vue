@@ -62,9 +62,9 @@ const emit = defineEmits(['onActionClick']);
                             <span class="tw-ml-[10px] tw-font-bold">{{ firstCol.content }}</span>
                         </div>
                     </th>
-                    <td v-for="(col, i) in cols" :key="i" class="tw-px-6 tw-py-4">
+                    <td v-for="(col, i) in cols" :key="`table-row-${i}`" class="tw-px-6 tw-py-4">
                         <span v-if="!col.showActionSlot && col.content">{{ col.content }}</span>
-                        <button v-if="col.showActionSlot" @click="() => emit('onActionClick', col.actionPayload)">
+                        <button v-if="col.showActionSlot" @click="() => emit('onActionClick', col.actionPayload, index)">
                             <slot :tableIndex="index" :actionPayload="col.actionPayload" name="actionContent"></slot>
                         </button>
                     </td>

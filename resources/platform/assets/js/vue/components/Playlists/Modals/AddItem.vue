@@ -2,7 +2,7 @@
 /*
 TODO: Open Create Playlist and on close open the addItem again with the right props
 */
-import { ref, onMounted, inject, computed, onUpdated } from 'vue';
+import { ref, onMounted, inject, computed } from 'vue';
 import PlaylistService from '../../../../services/playlists';
 import Toggle from '../../Toggle/Toggle.vue'
 import Table from '../../Table/Table.vue'
@@ -66,20 +66,40 @@ const addRemovePlaylistSelection = (payload) => {
 }
 
 const handleActionClick = (payload) => {
-    if (selectedPlaylists.value.indexOf(String(payload)) !== -1) {
-        addRemovePlaylistSelection(payload);
+    const index = selectedPlaylists.value.indexOf(String(payload));
+    if (index === -1) {
         handleSaveItem(payload)
             .then(() => { })
             .catch(() => {
                 addRemovePlaylistSelection(payload);
             });
     } else {
-        
+        handleRemoveFromPlaylist(payload)
     }
+    addRemovePlaylistSelection(payload);
 };
 
 const handleCancel = () => {
     emit('onCancel');
+};
+
+const handleRemoveFromPlaylist = (contentId) => {
+    PlaylistService.deletePlaylistItem(contentId, token)
+        .then(function (response) {
+                window.shownotification({
+                    icon: 'fa-not-equal',
+                    text: `'${state.title}' was removed from your playlist.`
+                })
+        })
+        .catch(function (error) {
+            if (error.response) {
+                //handle error
+                window.shownotification({
+                    icon: 'error',
+                    text: 'Woops! Something wrong happened, please try again later.'
+                })
+            }
+        });
 };
 
 const handleSaveItem = (playlistId) => {
