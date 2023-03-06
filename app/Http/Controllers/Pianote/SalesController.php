@@ -221,7 +221,7 @@ class SalesController extends BaseController
     }
     public function newPianoPlayersDeal()
     {
-        return view('pianote.products.30-day-drummer-deal');
+        return view('pianote.products.new-piano-players-deal', ['theme' => 'drumeo']);
     }
 
 
