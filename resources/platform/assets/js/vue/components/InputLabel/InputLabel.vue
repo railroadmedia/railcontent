@@ -121,7 +121,7 @@ onBeforeMount(()=> {
   <div :class="`tw-flex tw-w-full tw-flex-col tw-relative ${id + '-wrapper'} ${wrapperOverride ? wrapperOverride : ''
   }`">
     <label v-if="labelValue" :for="id"
-      :class="`tw-px-[13px] tw-pb-[5px] ${id + '-label'} ${labelOverride ? labelOverride : 'dark:tw-text-[#9EC0DC]'}`">{{
+      :class="`tw-text-sm tw-px-[13px] tw-pb-[5px] ${id + '-label'} ${labelOverride ? labelOverride : 'dark:tw-text-[#9EC0DC]'}`">{{
         labelValue
       }}</label>
     <div class="tw-flex tw-relative">

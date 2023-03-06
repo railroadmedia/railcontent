@@ -204,6 +204,7 @@
     };
 
     //----------Lifecycle Hooks----------//
+    
     onMounted(()=> {
         console.log(props.playlist)
     })

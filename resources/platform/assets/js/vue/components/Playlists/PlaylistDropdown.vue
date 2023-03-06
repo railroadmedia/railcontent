@@ -171,11 +171,6 @@
         emit('closeDropdown');
     };
 
-    const removeLesson = () => {
-        window.openplaylistmodal({ modalType: 'removeLesson', data: props.data, index: props.index });
-        emit('closeDropdown');
-    };
-
     const addToPlaylist = () => {
         window.openplaylistmodal({ modalType: 'addItem', contentId: props.data.id, type: props.data.type });
     }
@@ -190,8 +185,13 @@
         emit('closeDropdown');
     };
 
+    const removeLesson = () => {
+        window.openplaylistmodal({ modalType: 'removeLesson', data: props.data, index: props.index });
+        emit('closeDropdown');
+    };
+
     const editLessonTime = () => {
-        window.openplaylistmodal({ modalType: 'startEnd' });
+        window.openplaylistmodal({ modalType: 'startEnd', data: props.data, index: props.index });
         emit('closeDropdown');
     };
 
