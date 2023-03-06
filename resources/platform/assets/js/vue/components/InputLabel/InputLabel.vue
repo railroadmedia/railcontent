@@ -63,6 +63,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  error: {
+    type: Boolean,
+    default: false,
+  },
   maskProps: {
     type: Object,
     default: {
@@ -100,12 +104,7 @@ const onEnter = (e) => {
 };
 
 const getBaseInputStyles = () => `
-    ${props.removeDefaultInputStyles
-    ?
-    ''
-    :
-    'tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-bg-[#00101D] dark:tw-border-[#445F74] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none'
-  }
+    ${props.removeDefaultInputStyles ? '' : 'tw-text-[#00101D] tw-border-[#D1D5DB] dark:tw-bg-[#00101D] dark:tw-border-[#445F74] dark:tw-text-white dark:placeholder:tw-text-[#9EC0DC] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px] focus:tw-border-none focus:tw-outline-none' }
   `
 
 onUpdated(() => {
@@ -125,10 +124,23 @@ onBeforeMount(()=> {
         labelValue
       }}</label>
     <div class="tw-flex tw-relative">
-      <input :data-maska="maskaConfig.dataMaska" :data-maska-tokens="maskaConfig.maskaTokens" :placeholder="placeholder" :id="id"
-        :class="`${inputOverride ? inputOverride + getBaseInputStyles() + (disabled ? ' tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : '') : getBaseInputStyles() + (disabled ? ' tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : '')}`"
-        v-model="maskedValue" v-maska="bindedObject" v-on:keypress.enter.prevent="onEnter" @focus="() => emit('onFocus')" autocomplete="off"
-        :name="inputName" :type="inputType" :disabled="disabled" />
+      <input v-model="maskedValue" 
+             v-maska="bindedObject" 
+             v-on:keypress.enter.prevent="onEnter" 
+             :data-maska="maskaConfig.dataMaska" 
+             :data-maska-tokens="maskaConfig.maskaTokens" 
+             :placeholder="placeholder" :id="id"
+             :class="[getBaseInputStyles(),
+                      `${inputOverride ? inputOverride : ''}`,
+                      { '!tw-border-red-500' : error },
+                      { 'tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : disabled  },
+                    ]"
+             :name="inputName" 
+             :type="inputType"
+             :disabled="disabled" 
+             autocomplete="off"
+             @focus="() => emit('onFocus')" 
+      />
       <div v-if="showClearButton"
         :class="`tw-absolute tw-right-0 tw-h-full tw-flex tw-items-center tw-justify-center ${maskedValue.length ? 'tw-flex' : 'tw-hidden'} ${clearButtonOverride}`">
         <button class="tw-h-[16px] tw-w-[16px] tw-mx-[12px] tw-z-10" @click="onClear">

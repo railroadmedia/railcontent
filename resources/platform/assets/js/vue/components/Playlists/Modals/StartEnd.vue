@@ -34,7 +34,9 @@
         title: '',
         duration: 0,
         start_second: 0,
+        wrongStartTime: true,
         end_second: 0,
+        wrongEndTime: true,
     })
 
     //-----------Methods-----------//
@@ -129,20 +131,28 @@
         <p class="tw-italic tw-text-sm tw-w-full tw-text-[#00101D] dark:tw-text-[#7E9AB1] tw-text-center tw-mb-2">Please enter time in 00:00:00 format</p>
 
         <div class="tw-flex tw-pt-[29px]">
-            <InputLabel :maskaConfig="{  dataMaska: 'T#:T#:T#', maskaTokens: 'T:[0-5]' }"
-                        :initialValue="duration_formatted(state.start_second) || '00:00:00'" 
-                        labelValue="Start Time" 
-                        placeholder="00:00:00" 
-                        inputOverride="!tw-rounded-[8px] tw-ml-[13px] tw-w-full tw-bg-[#000]/[.05]" 
-                        @onChange="handleStartTimeChange" 
-            />
-            <InputLabel :maskaConfig="{  dataMaska: 'T#:T#:T#', maskaTokens: 'T:[0-5]' }" 
-                        :initialValue="duration_formatted(state.end_second) || duration_formatted(data.duration) || '00:00:00'"
-                        labelValue="End Time" 
-                        placeholder="00:00:00" 
-                        inputOverride="!tw-rounded-[8px] tw-ml-[13px] tw-w-full tw-bg-[#000]/[.05]" 
-                        @onChange="handleEndTimeChange" 
-            />
+            <div class="tw-w-full tw-flex-col">
+                <InputLabel :maskaConfig="{  dataMaska: 'T#:T#:T#', maskaTokens: 'T:[0-5]' }"
+                            :error="state.wrongStartTime"
+                            :initialValue="duration_formatted(state.start_second) || '00:00:00'" 
+                            labelValue="Start Time" 
+                            placeholder="00:00:00" 
+                            inputOverride="!tw-rounded-[8px] tw-ml-[13px] tw-w-full tw-bg-[#000]/[.05]" 
+                            @onChange="handleStartTimeChange" 
+                />
+                <span class="tw-text-red-500 tw-text-xs tw-ml-[13px] tw-mt-1 tw-italic">Incorrect time format</span>
+            </div>
+            <div class="tw-w-full tw-flex-col">
+                <InputLabel :maskaConfig="{  dataMaska: 'T#:T#:T#', maskaTokens: 'T:[0-5]' }"
+                            :error="state.wrongEndTime"     
+                            :initialValue="duration_formatted(state.end_second) || duration_formatted(data.duration) || '00:00:00'"
+                            labelValue="End Time" 
+                            placeholder="00:00:00" 
+                            inputOverride="!tw-rounded-[8px] tw-ml-[13px] tw-w-full tw-bg-[#000]/[.05]" 
+                            @onChange="handleEndTimeChange" 
+                />
+                <span class="tw-text-red-500 tw-text-xs tw-ml-[13px] tw-mt-1 tw-italic">Incorrect time format</span>
+            </div>
         </div>
         <div class="tw-pt-[30px] tw-flex tw-justify-end tw-w-full">
             <!-- Close Modal -->
