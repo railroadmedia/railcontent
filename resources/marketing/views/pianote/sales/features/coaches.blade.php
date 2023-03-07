@@ -10,10 +10,10 @@
     <meta property="og:url" content="https://www.pianote.com/coaches">
     <meta name="description" content="Amplify your skills with artist courses + exclusive live events with teachers, performers, and trending stars.">
     <meta property="og:description" content="Amplify your skills with artist courses + exclusive live events with teachers, performers, and trending stars.">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-coaches.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-coaches.jpg" style="display: none;">
 @endsection
 
-@section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/coaches-thumb.jpg')
+@section('header-img', 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/coaches-thumb.jpg')
 
 @section('header', 'Study with the world’s best teachers.')
 

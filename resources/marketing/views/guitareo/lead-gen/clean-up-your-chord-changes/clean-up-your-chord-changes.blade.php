@@ -2,27 +2,27 @@
     $steps = [
         [
             'position' => 'left',
-            'img' => 'https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/Step1.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/Step1.jpg',
             'desc' => 'Enter your email address. It’s free. That’s right - 100% free!'
         ],
         [
             'position' => 'right',
-            'img' => 'https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/Step2.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/Step2.jpg',
             'desc' => 'Access your unique link for your LIVE lesson with Ayla and Kent.'
         ],
         [
             'position' => 'left',
-            'img' => 'https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/Step3.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/Step3.jpg',
             'desc' => 'Get your downloadable resources, and practice tips, and connect with Ayla and Kent.'
         ],
         [
             'position' => 'right',
-            'img' => 'https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/Step4.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/Step4.jpg',
             'desc' => 'Share your progress (if you want - it’s totally up to you).'
         ],
         [
             'position' => 'left',
-            'img' => 'https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/Step5.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/Step5.jpg',
             'desc' => 'Play guitar BETTER!'
         ],
       ];
@@ -36,7 +36,7 @@
     <meta name="description" content="Join this 60-minute LIVE guitar lesson with Ayla Tesler-Mabe and Kent Shores"/>
     <meta property="og:description" content="Join this 60-minute LIVE guitar lesson with Ayla Tesler-Mabe and Kent Shores">
 
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/share_image.jpg">
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/share_image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/clean-up-chords/">
 
     @parent
@@ -50,7 +50,7 @@
         }
 
         .header {
-            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/header_bg_m.png');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/header_bg_m.png');
             background-size: cover;
         }
 
@@ -104,7 +104,7 @@
         }
 
         .footer {
-            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/footer-bg-m.png');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/footer-bg-m.png');
         }
 
         @media (min-width: 426px) {
@@ -126,7 +126,7 @@
         @media (min-width:768px) {
 
             .header {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/header_bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/header_bg.jpg');
                 background-size: 1600px;
             }
 
@@ -143,7 +143,7 @@
             }
 
             .footer {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/Footer_bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/Footer_bg.jpg');
             }
         }
 
@@ -169,7 +169,7 @@
             <div class="flex flex-wrap items-center">
                 <div class="w-full md:w-8/12 lg:w-2/3 md:text-left">
                     <div class="mt-40 md:mt-0 sm:pl-3">
-                        <img class="h-28 lg:h-36 mx-auto md:mx-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/logo.png" alt="logo">
+                        <img class="h-28 lg:h-36 mx-auto md:mx-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/logo.png" alt="logo">
                         <p class="leading-tight mt-2 md:mt-5 mb-2 md:mb-4">
                             <strong class="font-bold">Free 60-minute beginner guitar lesson</strong> <br>with Ayla Tesler-Mabe and Kent Shores
                         </p>
@@ -204,7 +204,7 @@
     <section class="text-white py-12 sm:py-20 px-4 sm:px-6 bg-musora-black">
         <div class="max-w-sm md:max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-10 items-center justify-center flex flex-col mx-auto">
-                <img class="md:order-1 rounded-md mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/collage.png" alt="intro image">
+                <img class="md:order-1 rounded-md mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/collage.png" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h3 class="font-extrabold mx-0 mb-4 sm:mb-6 leading-tight">
                         Struggling to switch between guitar chords?
@@ -226,15 +226,15 @@
             </h5>
             <div class="flex flex-wrap items-start justify-center text-center mt-5 md:mt-7 sm:gap-16 mb-10">
                 <div class="w-full sm:flex-1 mb-8 sm:mb-0">
-                    <img class="h-12 mb-4 inline-block" src="https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/guitar_icon.svg" alt="guitar icon">
+                    <img class="h-12 mb-4 inline-block" src="https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/guitar_icon.svg" alt="guitar icon">
                     <p class="leading-normal max-w-xs md:max-w-full">Master a few essential chords you’ll need for playing guitar</p>
                 </div>
                 <div class="w-full sm:flex-1 mb-8 sm:mb-0">
-                    <img class="h-12 mb-4 inline-block" src="https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/strum_icon.svg" alt="strum icon">
+                    <img class="h-12 mb-4 inline-block" src="https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/strum_icon.svg" alt="strum icon">
                     <p class="leading-normal max-w-xs md:max-w-full">Learn to transition between chords, seamlessly</p>
                 </div>
                 <div class="w-full sm:flex-1">
-                    <img class="h-12 mb-4 inline-block" src="https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/music_icon.svg" alt="music icon">
+                    <img class="h-12 mb-4 inline-block" src="https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/music_icon.svg" alt="music icon">
                     <p class="leading-normal max-w-xs md:max-w-full">Put it all together by playing a classic Bill Withers song</p>
                 </div>
             </div>
@@ -288,7 +288,7 @@
         <div class="max-w-md sm:max-w-3xl lg:max-w-6xl mx-auto">
             <div class="sm:grid sm:grid-cols-2 items-center text-center gap-14">
                 <div class="md:text-right">
-                    <img class="inline-block rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/ui.png" alt="intro image">
+                    <img class="inline-block rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/ui.png" alt="intro image">
                 </div>
                 <div class="inline-flex flex-col text-left">
                     <h3 class="font-extrabold mb-2 sm:mb-3 leading-tight text-left mx-0">
@@ -316,8 +316,8 @@
         <div class="max-w-3xl lg:max-w-4xl mx-auto relative mt-6 md:mt-14">
             <div class="w-3/4 sm:w-2/3 mx-auto relative md:static text-center mb-2 md:mb-8">
                 <picture>
-                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/Ayla.png">
-                    <img class="md:w-80 lg:w-96 md:absolute md:top-20 lg:-top-2 -right-0 lg:-right-2 lg:border-8 md:rounded-3xl lg:border-solid border-musora-black lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/Ayla_m.png" alt="coach image">
+                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/Ayla.png">
+                    <img class="md:w-80 lg:w-96 md:absolute md:top-20 lg:-top-2 -right-0 lg:-right-2 lg:border-8 md:rounded-3xl lg:border-solid border-musora-black lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/Ayla_m.png" alt="coach image">
                 </picture>
             </div>
 
@@ -332,8 +332,8 @@
         <div class="max-w-3xl lg:max-w-4xl mx-auto relative mt-6 md:mt-40 md:text-right">
             <div class="w-3/4 sm:w-2/3 mx-auto relative md:static text-center mb-6 md:mb-8">
                 <picture>
-                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/Kent.png">
-                    <img class="md:w-80 lg:w-96 md:absolute -top-20 -left-0 lg:-left-2 md:rounded-3xl border-musora-black lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/Kent_m.png" alt="coach image">
+                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/Kent.png">
+                    <img class="md:w-80 lg:w-96 md:absolute -top-20 -left-0 lg:-left-2 md:rounded-3xl border-musora-black lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/Kent_m.png" alt="coach image">
                 </picture>
             </div>
 
@@ -349,7 +349,7 @@
 
     <section class="py-20 sm:py-28 bg-cover lazyload footer" style="background-color:#3d151a;background-position: 25% 50%;">
         <div class="max-w-md md:max-w-2xl lg:max-w-3xl mx-auto text-center text-white px-4">
-            <img class="lazyload h-32 mx-auto" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/logo.png" alt="logo">
+            <img class="lazyload h-32 mx-auto" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/logo.png" alt="logo">
             <h6 class="my-2 leading-normal">
                 <strong class="font-bold">Free 60-minute beginner guitar lesson</strong> <br class="inline md:hidden"> with Ayla Tesler-Mabe and Kent Shores
                 <br>

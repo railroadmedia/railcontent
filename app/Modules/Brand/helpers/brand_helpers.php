@@ -55,6 +55,13 @@ if (! function_exists('guitareo_cdn')) {
 if (! function_exists('singeo_cdn')) {
     function singeo_cdn($file)
     {
-        return 'https://TODO.cloudfront.net/' . $file;
+        return 'https://d21xeg6s76swyd.cloudfront.net/' . $file;
+    }
+}
+
+if (! function_exists('musora_cdn')) {
+    function musora_cdn($file)
+    {
+        return 'https://dmmior4id2ysr.cloudfront.net/' . $file;
     }
 }

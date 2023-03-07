@@ -1,17 +1,17 @@
 @php
     $slider = [
         [
-            'img' => 'https://pianote.s3.amazonaws.com/sales/about/story_one.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/story_one.jpg',
             'year' => '2003',
             'desc' => 'Founder and Musora CEO Jared Falk jumps into the online music lessons scene by launching BreakSticks.com for drummers.',
         ],
         [
-            'img' => 'https://pianote.s3.amazonaws.com/sales/about/story_two.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/story_two.jpg',
             'year' => '2008',
             'desc' => 'Jared buys <a href="https://www.pianolessons.com/" target="_blank">www.pianolessons.com</a> launches The Piano System with pianist Nate Bosch.',
         ],
         [
-            'img' => 'https://pianote.s3.amazonaws.com/sales/about/story_three.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/story_three.jpg',
             'year' => '2008',
             'desc' => 'We launch our first video on YouTube: Nate Bosch’s cover of the theme from The Office.',
         ],
@@ -21,22 +21,22 @@
             'desc' => 'Lisa Witt joins Pianote…and it soon becomes clear that she’s something special.',
         ],
         [
-            'img' => 'https://pianote.s3.amazonaws.com/sales/about/story_six.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/story_six.jpg',
             'year' => '2019',
             'desc' => 'Lisa’s lesson “Create Emotion With 3 Notes” goes viral on YouTube!',
         ],
         [
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/march/timeline-11.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/march/timeline-11.jpg',
             'year' => '2020',
             'desc' => 'Pianote passes 10,000 members around the world.',
         ],
         [
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/march/timeline-13.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/march/timeline-13.jpg',
             'year' => '2021',
             'desc' => 'Pianote launches its new app for Apple and Android.',
         ],
         [
-            'img' => 'https://pianote.s3.amazonaws.com/sales/about/story_seven.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/story_seven.jpg',
             'year' => '2022',
             'desc' => 'Pianote launches Coaches, inviting the best pianists in the world to teach our growing community.',
         ],
@@ -112,7 +112,7 @@
     <meta name="description" content="Life is better with music - Learn how to play piano, whenever you want, wherever you want.">
     <meta property="og:description" content="Life is better with music - Learn how to play piano, whenever you want, wherever you want.">
 
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     <!-- Tailwind -->
@@ -126,7 +126,7 @@
     <style>
         header {
             background-color: #121818;
-            background-image: url('https://pianote.s3.amazonaws.com/sales/about/header_m.png');
+            background-image: url('https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/header_m.png');
             background-size: cover;
             background-position: center top;
         }
@@ -195,7 +195,7 @@
 
         @media (min-width:768px){
             header {
-                background-image: url('https://pianote.s3.amazonaws.com/sales/about/header.jpg');
+                background-image: url('https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/header.jpg');
                 background-size:cover;
                 background-position:60% 0;
             }
@@ -243,7 +243,7 @@
     <section class="py-12 sm:py-20 px-4 sm:px-6">
         <div class="max-w-md md:max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto">
-                <img class="md:order-1 rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://pianote.s3.amazonaws.com/sales/about/intro.jpg" alt="intro image">
+                <img class="md:order-1 rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/intro.jpg" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-4 sm:mb-6">
                         The Pianote Mission
@@ -320,7 +320,7 @@
     <section class="py-12 sm:py-20 px-4 sm:px-6">
         <div class="max-w-md md:max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto mb-10 md:mb-20">
-                <img class="md:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://pianote.s3.amazonaws.com/sales/about/start_collage.png" alt="intro image">
+                <img class="md:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/start_collage.png" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-4 sm:mb-6 leading-tight">
                         It all started <br class="sm:hidden md:inline"> with a duck farmer...
@@ -333,7 +333,7 @@
                 </div>
             </div>
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto mb-10 md:mb-20">
-                <img class="rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://pianote.s3.amazonaws.com/sales/about/lisa.jpg" alt="intro image">
+                <img class="rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/lisa.jpg" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-4 sm:mb-6 leading-tight">
                         Lisa Witt becomes <br class="sm:hidden md:inline"> the face of Pianote
@@ -348,7 +348,7 @@
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto mb-10 md:mb-20">
                 <a class="md:order-1" target="_blank" href="https://www.youtube.com/watch?v=TZteV8UW3ds">
                 <video autoplay loop muted class="mb-7 md:mb-0 rounded-xl shadow-lg">
-                    <source src="https://pianote.s3.amazonaws.com/sales/about/create_emotion.mp4" type="video/mp4">
+                    <source src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/create_emotion.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video></a>
                 <div class="inline-flex flex-col">
@@ -358,7 +358,7 @@
                 </div>
             </div>
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto">
-                <img class="rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://pianote.s3.amazonaws.com/sales/about/pianote-coaches-collage.png" alt="intro image">
+                <img class="rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/pianote-coaches-collage.png" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-4 sm:mb-6 leading-tight">
                         The world's best <br> pianists join Pianote
@@ -386,28 +386,28 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4">
                 <div class="flex-1 rounded-xl shadow-lg text-white p-2 md:p-4 relative" style="background:#FF0000;">
                     <a href="https://youtube.com/user/pianolessonscom" target="_blank">
-                    <img class="absolute h-4 lg:h-6 top-4 left-4" src="https://pianote.s3.amazonaws.com/sales/about/youtube_icon.svg" alt="youtube icon">
+                    <img class="absolute h-4 lg:h-6 top-4 left-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/youtube_icon.svg" alt="youtube icon">
                     <div class="text-right mb-12 font-bold text-3xl md:text-4xl lg:text-5xl">1.1M</div>
                     <p class="text-center font-bold text-xs md:text-sm">YouTube Subscribers</p>
                     </a>
                 </div>
                 <div class="flex-1 rounded-xl shadow-lg text-white p-2 md:p-4 relative" style="background:linear-gradient(180deg, #F61A30 0%, #9E1623 100%);">
                     <a href="/blog/" target="_blank">
-                    <img class="absolute h-4 lg:h-6 top-4 left-4" src="https://pianote.s3.amazonaws.com/sales/about/pianote_icon.svg" alt="pianote icon">
+                    <img class="absolute h-4 lg:h-6 top-4 left-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/pianote_icon.svg" alt="pianote icon">
                     <div class="text-right mb-12 font-bold text-3xl md:text-4xl lg:text-5xl">679K</div>
                     <p class="text-center font-bold text-xs md:text-sm">Organic Blog Pageviews</p>
                     </a>
                 </div>
                 <div class="flex-1 rounded-xl shadow-lg text-white p-2 md:p-4 relative" style="background:#1877F2;">
                     <a href="https://facebook.com/pianoteofficial" target="_blank">
-                    <img class="absolute h-4 lg:h-6 top-4 left-4" src="https://pianote.s3.amazonaws.com/sales/about/facebook_icon.svg" alt="facebook icon">
+                    <img class="absolute h-4 lg:h-6 top-4 left-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/facebook_icon.svg" alt="facebook icon">
                     <div class="text-right mb-12 font-bold text-3xl md:text-4xl lg:text-5xl">408K</div>
                     <p class="text-center font-bold text-xs md:text-sm">Facebook <br class="hidden md:inline lg:hidden">Likes</p>
                     </a>
                 </div>
                 <div class="flex-1 rounded-xl shadow-lg text-white p-2 md:p-4 relative" style="background:linear-gradient(243.54deg, #012296 0.52%, #810090 26.94%, #EB0B61 52.85%, #FD5240 77.2%, #F8B803 100%);">
                     <a href="https://instagram.com/pianoteofficial" target="_blank">
-                    <img class="absolute h-4 lg:h-6 top-4 left-4" src="https://pianote.s3.amazonaws.com/sales/about/instagram_icon.svg" alt="instagram icon">
+                    <img class="absolute h-4 lg:h-6 top-4 left-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/instagram_icon.svg" alt="instagram icon">
                     <div class="text-right mb-12 font-bold text-3xl md:text-4xl lg:text-5xl">101K</div>
                     <p class="text-center font-bold text-xs md:text-sm">Instagram Followers</p>
                     </a>
@@ -502,7 +502,7 @@
     <section class="py-12 sm:py-20 border-t px-4 sm:px-6" style="background:#FAFAFA; border-color:#D1D1D1;">
         <div class="max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-16 lg:gap-20 items-center justify-center flex flex-col mx-auto">
-                <img class="sm:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://pianote.s3.amazonaws.com/sales/about/company_collage.png" alt="intro image">
+                <img class="sm:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/company_collage.png" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-2">
                         The Pianote BTS Team
@@ -520,12 +520,12 @@
         <div class="max-w-md md:max-w-4xl mx-auto text-white text-center">
             <p class="tracking-widest uppercase font-light mb-6">As seen in</p>
             <div class="px-4 lg:px-0 flex flex-wrap justify-center items-center lg:block">
-                <a class="w-1/2 md:w-1/3 lg:w-auto p-3 lg:p-0" href="https://www.pianodreamers.com/pianote-review" target="_blank"><img class="lg:h-6 lg:mr-4" src="https://pianote.s3.amazonaws.com/sales/about/pianodreamers_icon.png" alt="piano dreamers icon"></a>
-                <a class="w-1/2 md:w-1/3 lg:w-auto p-3 lg:p-0" href="https://www.musicradar.com/reviews/pianote-review" target="_blank"><img class="lg:h-6 lg:mr-4" src="https://pianote.s3.amazonaws.com/sales/about/musicradar_icon.svg" alt="music rardar icon"></a>
-                <a class="w-1/2 md:w-1/3 lg:w-auto p-3 lg:p-0" href="https://keyboardkraze.com/pianote-review/" target="_blank"><img class="lg:h-6 lg:mr-4" src="https://pianote.s3.amazonaws.com/sales/about/keyboardkraze_icon.svg" alt="keyboard kraze icon"></a>
-                <a class="w-1/2 md:w-1/3 lg:w-auto p-3 lg:p-0" href="https://learnopoly.com/pianote-review/" target="_blank"><img class="lg:h-6 lg:mr-4" src="https://pianote.s3.amazonaws.com/sales/about/learnopoly_icon.svg" alt="learn opoly icon"> <br class="lg:hidden"><br class="lg:hidden"></a>
-                <a class="w-1/2 md:w-1/3 lg:w-auto p-3 lg:p-0" href="https://www.pianistmagazine.com/blogs/a-closer-look-at-pianote/" target="_blank"><img class="lg:h-6 lg:mr-4" src="https://pianote.s3.amazonaws.com/sales/about/pianist_icon.svg" alt="pianist icon"></a>
-                <a class="w-1/2 md:w-1/3 lg:w-auto p-3 lg:p-0" href="https://equipboard.com/posts/online-piano-lessons" target="_blank"><img class="lg:h-6" src="https://pianote.s3.amazonaws.com/sales/about/equipboard_icon.svg" alt="equipboard icon"></a>
+                <a class="w-1/2 md:w-1/3 lg:w-auto p-3 lg:p-0" href="https://www.pianodreamers.com/pianote-review" target="_blank"><img class="lg:h-6 lg:mr-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/pianodreamers_icon.png" alt="piano dreamers icon"></a>
+                <a class="w-1/2 md:w-1/3 lg:w-auto p-3 lg:p-0" href="https://www.musicradar.com/reviews/pianote-review" target="_blank"><img class="lg:h-6 lg:mr-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/musicradar_icon.svg" alt="music rardar icon"></a>
+                <a class="w-1/2 md:w-1/3 lg:w-auto p-3 lg:p-0" href="https://keyboardkraze.com/pianote-review/" target="_blank"><img class="lg:h-6 lg:mr-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/keyboardkraze_icon.svg" alt="keyboard kraze icon"></a>
+                <a class="w-1/2 md:w-1/3 lg:w-auto p-3 lg:p-0" href="https://learnopoly.com/pianote-review/" target="_blank"><img class="lg:h-6 lg:mr-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/learnopoly_icon.svg" alt="learn opoly icon"> <br class="lg:hidden"><br class="lg:hidden"></a>
+                <a class="w-1/2 md:w-1/3 lg:w-auto p-3 lg:p-0" href="https://www.pianistmagazine.com/blogs/a-closer-look-at-pianote/" target="_blank"><img class="lg:h-6 lg:mr-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/pianist_icon.svg" alt="pianist icon"></a>
+                <a class="w-1/2 md:w-1/3 lg:w-auto p-3 lg:p-0" href="https://equipboard.com/posts/online-piano-lessons" target="_blank"><img class="lg:h-6" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/equipboard_icon.svg" alt="equipboard icon"></a>
             </div>
         </div>
     </section>

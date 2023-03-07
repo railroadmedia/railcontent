@@ -6,7 +6,7 @@
     <title>2 Simple Guitar Tricks | Guitareo</title>
     <meta name="description" content="How to use vibrato & palm muting to unlock new possibilities on the guitar."/>
 
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/og-image.jpg">
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/og-image.jpg">
     <meta property="og:title" content="2 Simple Guitar Tricks">
     <meta property="og:description" content="How to use vibrato & palm muting to unlock new possibilities on the guitar.">
     <meta property="og:url" content="https://www.guitareo.com/guitar-tricks/">
@@ -16,21 +16,21 @@
 
     <style>
         .header-bg {
-            background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/header.jpg');
+            background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/header.jpg');
             background-position-y: top;
             background-position-x: center;
         }
 
         @media (min-width:768px) {
             .header-bg {
-                background-image:url('https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/header.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/header.jpg');
                 background-position: center;
             }
         }
 
         @media (min-width:1024px) {
             .header-bg {
-                background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/header.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/header.jpg');
             }
         }
     </style>
@@ -50,7 +50,7 @@
     @include('guitareo.lead-gen.partials._header1', [
         "bgColor" => "black",
         "imgs" => [
-            '<img class="md:max-w-sm lg:max-w-md" style="max-width:220px;" src="https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/logo-with.png">',
+            '<img class="md:max-w-sm lg:max-w-md" style="max-width:220px;" src="https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/logo-with.png">',
         ],
         "playButton" => "down",
         "headLine" => '<h2 class="mb-4 md:mb-5">How to use <strong>vibrato</strong> & <strong>palm muting</strong> to <br class="hidden sm:inline">unlock new possibilities on the guitar.</h2>',
@@ -63,37 +63,37 @@
     @php
         $steps = [
             [
-                'img' => 'https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/1-intro.png',
+                'img' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/1-intro.png',
                 'title' => 'Introduction',
                 'exclusive' => false,
                 'commercial' => false,
             ],
             [
-                'img' => 'https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/2-vibrato-magic.png',
+                'img' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/2-vibrato-magic.png',
                 'title' => 'Skill #1:<br> Vibrato',
                 'exclusive' => false,
                 'commercial' => false,
             ],
             [
-                'img' => 'https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/3-shampoo-song.png',
+                'img' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/3-shampoo-song.png',
                 'title' => 'The Shampoo<br> Jingle',
                 'exclusive' => true,
                 'commercial' => true,
             ],
             [
-                'img' => 'https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/4-palm-muting-madness.png',
+                'img' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/4-palm-muting-madness.png',
                 'title' => 'Skill #2:<br> Palm Muting',
                 'exclusive' => false,
                 'commercial' => false,
             ],
             [
-                'img' => 'https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/5-truck-song.png',
+                'img' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/5-truck-song.png',
                 'title' => 'The Truck<br> Jingle',
                 'exclusive' => true,
                 'commercial' => true,
             ],
             [
-                'img' => 'https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/6-your-future-awaits.png',
+                'img' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/6-your-future-awaits.png',
                 'title' => 'Your Future<br> Awaits',
                 'exclusive' => false,
                 'commercial' => false,
@@ -102,7 +102,7 @@
         ]
     @endphp
 
-    <section class="your-mission text-center text-white py-10 px-4 md:py-12 md:px-0 lg:py-16" style="background-image:url(https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/map-background.jpg); background: #000314 center/cover no-repeat;">
+    <section class="your-mission text-center text-white py-10 px-4 md:py-12 md:px-0 lg:py-16" style="background-image:url(https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/map-background.jpg); background: #000314 center/cover no-repeat;">
         <div class="container lg:mx-auto max-w-6xl">
             <h2>Your mission starts <strong class="text-yellow">HERE</strong>.</h2>
             <h4 class="leading-7 mt-2 mx-auto mb-5 max-w-xl md:mt-4 md:mb-9 lg:max-w-3xl lg:mt-4 l:mb-12">Most guitar lessons are boring because the end-result is <strong>so far away</strong>. This is different. Rob Scallon is
@@ -133,7 +133,7 @@
         "font" => "font-bison-bold",
         "bgColor" => "black",
         "meetYourTeacher" => '<h2>Meet your teacher...</h2>',
-        "name" => '<img class="w-full mb-80 md:my-7 md:max-w-md" src="https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/rob-scallon.png" style="max-width:210px;">',
+        "name" => '<img class="w-full mb-80 md:my-7 md:max-w-md" src="https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/rob-scallon.png" style="max-width:210px;">',
         "desc" => "Rob Scallon plays guitar for the internet -- with 2M Subscribers on YouTube and counting -- and now he’s sharing his best tips to help YOU get more out of this amazing instrument.",
         "asSeenColor" => "text-yellow",
         "thumbnails" => [
@@ -167,8 +167,8 @@
     ])
 
     @include('guitareo.lead-gen.partials._enter-email', [
-        "bgImg" => "https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/order-background.jpg",
-        "img" => '<img class="w-full max-w-md" src="https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/logo-with.png">',
+        "bgImg" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/order-background.jpg",
+        "img" => '<img class="w-full max-w-md" src="https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/logo-with.png">',
         "text" => '<h2 class="my-10">Enter your email below<br class="sm:hidden"> to get started!</h2>',
         "formId" => "Guitareo - Engagement - Trigger - Guitar Tricks - Web Form",
         "formName" => 'Guitar Tricks',

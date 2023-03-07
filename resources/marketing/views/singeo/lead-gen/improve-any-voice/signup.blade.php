@@ -6,7 +6,7 @@
     <title>4 Exercises Guaranteed To Improve ANY Voice!</title>
     <meta name="description" content="Anyone can sing! Singeo is here to show you how in this free mini lesson series."/>
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=85/https://singeo.s3.amazonaws.com/lead-gen/4-exercises/og-image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/og-image.jpg">
     <meta property="og:title" content="4 Exercises Guaranteed To Improve ANY Voice!">
     <meta property="og:description" content="Anyone can sing! Singeo is here to show you how in this free mini lesson series.">
     <meta property="og:url" content="https://www.singeo.com/improve-any-voice/">
@@ -18,13 +18,13 @@
         .hero-header {
             background-position: center top;
             background-size: 470px;
-            background-image: url('https://www.musora.com/musora-cdn/image/width=900,q_60,quality=85/https://singeo.s3.amazonaws.com/lead-gen/4-exercises/header-mobile.png');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=900,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/header-mobile.png');
         }
 
         @media (min-width: 768px) {
             .hero-header {
                 background-size: 1300px;
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2900,q_60,quality=85/https://singeo.s3.amazonaws.com/lead-gen/4-exercises/header-desktop.png');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2900,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/header-desktop.png');
             }
         }
 
@@ -77,7 +77,7 @@
                 @php
                     $lessons = [
                         [
-                            'img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-1.png',
+                            'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-1.png',
                             'title' => 'Vocal Lesson #1 - Start Here',
                             'titleColor' => '#f6d31a',
                             'desc' => 'Why You Need To<br class="hidden md:inline"> Exercise Your Voice',
@@ -85,31 +85,31 @@
                             'data' => 'lesson1'
                         ],
                         [
-                            'img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-2.png',
+                            'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-2.png',
                             'title' => 'Vocal Lesson #2',
                             'titleColor' => '#f51a93',
                             'desc' => 'The Most Useful<br class="hidden md:inline"> Vocal Exercise'
                         ],
                         [
-                            'img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-3.png',
+                            'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-3.png',
                             'title' => 'Vocal Lesson #3',
                             'titleColor' => '#50e49e',
                             'desc' => 'The Perfect<br class="hidden md:inline"> Balance Exercise'
                         ],
                         [
-                            'img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-4.png',
+                            'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-4.png',
                             'title' => 'Vocal Lesson #4',
                             'titleColor' => '#19b2f6',
                             'desc' => 'The Strength Building,<br class="hidden md:inline"> Pitch Accuracy Exercise'
                         ],
                         [
-                            'img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-5.png',
+                            'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-5.png',
                             'title' => 'Vocal Lesson #5',
                             'titleColor' => '#ff1c52',
                             'desc' => 'The Range<br class="hidden md:inline"> Builder Exercise'
                         ],
                         [
-                            'img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-6.png',
+                            'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-6.png',
                             'title' => 'Vocal Lesson #6',
                             'titleColor' => '#ff6900',
                             'desc' => 'The Full Vocal<br class="hidden md:inline"> Routine'
@@ -122,7 +122,7 @@
         </div>
     </section>
 
-    <section class="final-pitch px-4 py-14 md:py-20 lg:py-24 text-white text-center bg-cover bg-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://singeo.s3.amazonaws.com/lead-gen/4-exercises/bottom-background.png);">
+    <section class="final-pitch px-4 py-14 md:py-20 lg:py-24 text-white text-center bg-cover bg-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/bottom-background.png);">
         <div class="container mx-auto">
             <h3 class="mb-5 md:mb-8 lg:mb-10"><strong>Simply enter your email to<br class="inline lg:hidden"> unlock your FREE videos!</strong></h3>
             <div class="w-full mx-auto max-w-lg lg:max-w-3xl">

@@ -14,9 +14,9 @@
 
 @section('meta-description', 'Learn to read music. Play your favorite songs. Have more fun.')
 
-@section('meta-img', 'https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/share_image.jpg')
+@section('meta-img', 'https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/share_image.jpg')
 
-@section('lesson-logo', 'https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/logo.png')
+@section('lesson-logo', 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/logo.png')
 
 @section('lesson-index-url', '/7-days-to-sight-reading/lessons')
 
@@ -44,7 +44,7 @@
 @endsection
 
 @section('offers')
-    <section class="text-center py-12 md:py-20 text-white bg-center bg-cover lazyload" style="background-color:#000417;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/footer_lessons.jpg">
+    <section class="text-center py-12 md:py-20 text-white bg-center bg-cover lazyload" style="background-color:#000417;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/footer_lessons.jpg">
         <div class="max-w-2xl mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
                 <h3 class="mb-6"><strong>Ready for the next step?</strong></h3>

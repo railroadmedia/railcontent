@@ -98,7 +98,7 @@
         {{--<div x-show.transition="modalOpen === 'exitModal'"--}}
                 {{--x-on:click.away="modalOpen = false;"--}}
                 {{--class="tw-flex tw-flex-wrap tw-items-start tw-max-w-screen tw-mx-auto tw-bg-white tw-p-3 md:tw-p-6 tw-rounded-lg tw-max-w-lg tw-text-center">--}}
-            {{--<img style="filter:invert(1)" class="tw-h-8 md:tw-h-10 tw-mx-auto" src="https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/logo-white.png">--}}
+            {{--<img style="filter:invert(1)" class="tw-h-8 md:tw-h-10 tw-mx-auto" src="https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/logo-white.png">--}}
             {{--<br>--}}
             {{--<h1 style="color:#9101f6;" class="tw-w-full tw-uppercase tw-leading-none tw-text-6xl md:tw-text-8xl font-bison-bold tw-mt-2">* WAIT *</h1>--}}
             {{--<br>--}}

@@ -7,7 +7,7 @@
 @section('content')
 
     @include('partials.bladesora.members.partials._account-header', [
-        'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
+        'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
         'userAvatar' => user()->profile_picture_url,
         'userName' => user()->display_name,
         'appName' => 'Musora',

@@ -1,4 +1,4 @@
-<section class="text-center py-14 md:py-24 lg:py-28 text-white bg-center bg-cover lazyload" style="background-color:#000417;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://pianote.s3.amazonaws.com/shop/header-background.jpg">
+<section class="text-center py-14 md:py-24 lg:py-28 text-white bg-center bg-cover lazyload" style="background-color:#000417;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">
     <div class="container mx-auto">
         <div class="w-full px-2 md:px-3 text-center">
             <img class="w-full max-w-xs md:max-w-md lg:max-w-lg mb-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1300,q_60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/500-songs-logo.svg">

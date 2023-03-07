@@ -5,7 +5,7 @@
     <meta property="og:title" content="Beginner's Vocal Bootcamp | Singeo">
     <meta name="description" content="Get free LIVE vocal training with Lisa Witt"/>
     <meta property="og:description" content="Get free LIVE vocal training with Lisa Witt">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/og_image.jpg">
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/og_image.jpg">
     <meta property="og:url" content="https://www.singeo.com/beginner-vocal-bootcamp/">
 
     @include('_partials.layout._tailwindcdn')
@@ -146,12 +146,12 @@
         .header {
             background-position: top;
             background-size: cover;
-            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/header_bg_m.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/header_bg_m.jpg');
         }
 
         @media (min-width: 768px) {
             .header {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/header_image_d.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/header_image_d.jpg');
                 background-size: 1160px;
             }
         }
@@ -177,7 +177,7 @@
             <div class="flex flex-wrap items-center">
                 <div class="w-full md:w-1/2">
                     <div class="block mt-72 mb-24 md:my-0"></div>
-                    <img class="sm:w-4/5 md:w-full" src="https://www.musora.com/musora-cdn/image/width=840,quality=85/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/logo.png" alt="logo">
+                    <img class="sm:w-4/5 md:w-full" src="https://www.musora.com/musora-cdn/image/width=840,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/logo.png" alt="logo">
                     <h5 class="mt-2 md:mt-5 leading-tight">Start singing the RIGHT way with a LIVE<br> singing lesson from a vocal coach.</h5>
                 </div>
             </div>

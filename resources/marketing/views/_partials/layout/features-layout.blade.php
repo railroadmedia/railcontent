@@ -54,7 +54,7 @@
             <div class="mb-6">
                 <img
                     class="h-6 md:h-10 transition-opacity opacity-0 @if($theme !== 'drumeo') mr-2 @endif"
-                    src="https://www.musora.com/musora-cdn/image/width=300,quality=85/@if($theme === 'drumeo')https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png @elseif($theme === 'pianote')https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png @elseif($theme === 'guitareo')https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png @elseif($theme === 'singeo')https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png @endif"
+                    src="https://www.musora.com/musora-cdn/image/width=300,quality=85/@if($theme === 'drumeo')https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png @elseif($theme === 'pianote')https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png @elseif($theme === 'guitareo')https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png @elseif($theme === 'singeo')https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png @endif"
                     alt="{{$theme}} logo"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"

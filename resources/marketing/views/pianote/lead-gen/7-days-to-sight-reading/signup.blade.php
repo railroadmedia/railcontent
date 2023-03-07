@@ -2,43 +2,43 @@
     $steps = [
           [
               'position' => 'left',
-              'img' => 'https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/Day1.jpg',
+              'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/Day1.jpg',
               'title' => 'The Basics',
               'desc' => 'Let’s start with the basics! You’ll play a super-simple melody in the key of C. Today is all about connecting some “landmark notes” on the piano to the page.'
           ],
           [
               'position' => 'right',
-              'img' => 'https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/Day2.jpg',
+              'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/Day2.jpg',
               'title' => 'Musical Patterns',
               'desc' => 'You’ll dive deeper into some common musical patterns. By identifying patterns, you’ll be able to read music much faster (because you won’t have to read every single note).'
           ],
           [
               'position' => 'left',
-              'img' => 'https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/Day3.jpg',
+              'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/Day3.jpg',
               'title' => 'Intervals',
               'desc' => 'Today is all about INTERVALS! Which is a fancy way of saying the space between two notes. All music is a combination of different intervals, and recognizing them is like finding a secret cheat code!'
           ],
           [
               'position' => 'right',
-              'img' => 'https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/Day4.jpg',
+              'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/Day4.jpg',
               'title' => 'Play a Song',
               'desc' => 'It’s time to play a song! You’ll play a REAL song simply by reading the notes on the page. You won’t know until you play it, but you WILL be able to play it.'
           ],
           [
               'position' => 'left',
-              'img' => 'https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/Day5.jpg',
+              'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/Day5.jpg',
               'title' => 'Chords & Arpeggios',
               'desc' => 'What makes music beautiful? Play beautiful broken chords and arpeggios written for the left and right hands and start playing chords.'
           ],
           [
               'position' => 'right',
-              'img' => 'https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/Day6.jpg',
+              'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/Day6.jpg',
               'title' => 'Understanding Rhythm',
               'desc' => 'Music is more than just note names. It’s also rhythm. Today you’ll learn the basics of rhythm and how to recognize and play different rhythms written on a page.'
           ],
           [
               'position' => 'left',
-              'img' => 'https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/Day7.jpg',
+              'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/Day7.jpg',
               'title' => 'Putting it All Together',
               'desc' => 'You made it! Time to celebrate by playing an ENTIRE piece of music. There are lots of notes on the page, but you’ll have ALL of the skills you need to do it!'
           ],
@@ -53,7 +53,7 @@
     <meta property="og:title" content="7 Days to Sight Reading | Pianote">
     <meta name="description" content="Learn to read music. Play your favorite songs. Have more fun."/>
     <meta property="og:description" content="Learn to read music. Play your favorite songs. Have more fun.">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/share_image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/share_image.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
 @endsection
@@ -334,11 +334,11 @@
         <div class="max-w-md md:max-w-4xl mx-auto text-white">
             <div class="md:flex md:items-center md:gap-4 lg:gap-8 mb-10">
                 <div class="w-full md:w-7/12 lg:w-1/2 text-center md:text-left">
-                    <img class="h-12 md:h-16 mb-2 md:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/logo.png" alt="logo">
+                    <img class="h-12 md:h-16 mb-2 md:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/logo.png" alt="logo">
                     <h3 class="font-extrabold leading-tight my-2 text-xl md:text-2xl lg:text-3xl">
                         Learn to read music. <br>Play your favorite songs. <br>Have more fun.
                     </h3>
-                    <img class="rounded-xl md:hidden mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/header_m.jpg" alt="lisa header image">
+                    <img class="rounded-xl md:hidden mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/header_m.jpg" alt="lisa header image">
                     <p class="mb-8" style="color:#D0E2E7;">7 days of guided lessons and practices to help you learn the language of music.</p>
                     @include('pianote._partials._sign-up-form', [
                             "formId" => 'Pianote - Engagement - Trigger - 7 Days To Sight Reading - Web Form',
@@ -348,20 +348,20 @@
                     ])
                 </div>
                 <div class="w-full md:w-5/12 lg:w-1/2 hidden md:block">
-                    <img class="rounded-xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/header.jpg" alt="lisa header image">
+                    <img class="rounded-xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/header.jpg" alt="lisa header image">
                 </div>
             </div>
             <div class="md:mx-12 lg:mx-20 border rounded-xl p-6 md:py-6 md:px-10 md:flex md:text-center gap-10 lg:gap-16" style="border-color: #4B4B4B;">
                 <div class="flex-1 mb-3 md:mb-0 flex items-center md:block">
-                    <img class="h-8 mb-0 md:mb-2 mr-4 md:mr-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=60,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/lesson-time_icon.svg" alt="lesson time icon">
+                    <img class="h-8 mb-0 md:mb-2 mr-4 md:mr-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/lesson-time_icon.svg" alt="lesson time icon">
                     <p class="inline md:block mx-0 md:mx-auto">One short lesson a <br class="hidden md:inline">day for 7 days</p>
                 </div>
                 <div class="flex-1 mb-3 md:mb-0 flex items-center md:block">
-                    <img class="h-8 mb-0 md:mb-2 mr-4 md:mr-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=60,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/follow-along_icon.svg" alt="follow along icon">
+                    <img class="h-8 mb-0 md:mb-2 mr-4 md:mr-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/follow-along_icon.svg" alt="follow along icon">
                     <p class="inline md:block mx-0 md:mx-auto">Follow-along for <br class="hidden md:inline">faster results</p>
                 </div>
                 <div class="flex-1 flex items-center md:block">
-                    <img class="h-8 mb-0 md:mb-2 mr-4 md:mr-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=60,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/help_icon.svg" alt="help icon">
+                    <img class="h-8 mb-0 md:mb-2 mr-4 md:mr-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/help_icon.svg" alt="help icon">
                     <p class="inline md:block mx-0 md:mx-auto">Help when you need <br class="hidden md:inline">it from real teachers</p>
                 </div>
             </div>
@@ -370,11 +370,11 @@
     <section class="py-12 md:pt-20 md:pb-32 px-6 md:px-6" style="background:#F9F9F9;">
         <div class="max-w-md md:max-w-4xl mx-auto">
             <img
-                class="md:hidden mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/intro_collage.png" alt="intro collage">
+                class="md:hidden mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/intro_collage.png" alt="intro collage">
             <h3 class="md:text-center font-extrabold mb-4 md:mb-10">Learn to read music by playing music.</h3>
             <div class="md:flex md:items-center md:gap-8 lg:gap-14">
                 <div class="flex-1 order-1 hidden md:block">
-                    <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/intro_collage.png" alt="intro collage">
+                    <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/intro_collage.png" alt="intro collage">
                 </div>
                 <div class="flex-1">
                     <p style="color:#52525A;">
@@ -432,7 +432,7 @@
     <section class="py-12 md:py-20 px-4 md:px-6" style="background:#F9F9F9;">
         <div class="max-w-md md:max-w-4xl mx-auto md:flex md:items-center gap-6 lg:gap-8">
             <div class="flex-1 order-1 mb-4 md:mb-0">
-                <img data-open="soundSlice" class="lazyload autoplay-video cursor-pointer" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/ui.png" alt="ui">
+                <img data-open="soundSlice" class="lazyload autoplay-video cursor-pointer" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/ui.png" alt="ui">
             </div>
             <div class="flex-1">
                 <h3 class="font-extrabold leading-tight mb-2">Perfect practice for <br class="hidden md:inline">FASTER results</h3>
@@ -452,9 +452,9 @@
     <section class="pt-12 md:pb-20 md:pt-28 md:px-6" style="background:#00101D;">
         <div class="max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-12 mb-12">
-                <div class="py-40 sm:py-48 lg:py-64 border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 bg-center bg-cover relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 flex-shrink-0 cursor-pointer lazyload autoplay-video" data-bg="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/7dtsr_coach.jpg">
+                <div class="py-40 sm:py-48 lg:py-64 border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 bg-center bg-cover relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 flex-shrink-0 cursor-pointer lazyload autoplay-video" data-bg="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/7dtsr_coach.jpg">
                 </div>
-                {{-- <img class="border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://pianote.s3.amazonaws.com/products/the-power-of-chords/coach_profile-min.png"> --}}
+                {{-- <img class="border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/coach_profile-min.png"> --}}
                 <div class="bg-white text-left md:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-16 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow">
                     <h6 class="uppercase text-pianote leading-normal text-center sm:text-left tracking-widest">MEET YOUR COACH</h6>
                     <h2 class="text-center sm:text-left"><strong>Lisa Witt</strong></h2>
@@ -470,13 +470,13 @@
                         You’ll be able to pick up a piece of music and just play it. Without having to hear it a bunch of times or search for hours to find a video tutorial. <br><br>
                         I’m so excited for the journey you’re about to start. And I’ll see you in Lesson 1!
                     </p>
-                    <img class="h-10 lg:h-16 mt-7 lg:mt-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://pianote.s3.amazonaws.com/products/the-power-of-chords/signature.png" alt="signature">
+                    <img class="h-10 lg:h-16 mt-7 lg:mt-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/signature.png" alt="signature">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="py-12 md:py-20 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://pianote.s3.amazonaws.com/lead-gen/7-days-to-sight-reading/footer_7dtsr.jpg">
+    <section class="py-12 md:py-20 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/footer_7dtsr.jpg">
         <div class="max-w-md md:max-w-4xl mx-auto text-center px-4 lg:px-0">
             <h3 class="text-white font-extrabold leading-snug">
                 Learn to read music. <br class="hidden md:inline">

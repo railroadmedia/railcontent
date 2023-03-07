@@ -1,10 +1,10 @@
 @component('members.partials._header-banner', [
         'hideUser' => true,
         'backgroundImage' => $displayFoundations
-            ? 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'
+            ? 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg'
             : $featuredContent->fetch(
                 'data.header_image_url',
-                'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'
+                'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg'
             ),
     ])
     @slot('content')
@@ -15,7 +15,7 @@
                 </h3>
 
                 <img
-                    src="https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg"
+                    src="https://d38h3dn806jqj1.cloudfront.net/logos/singeo-method.svg"
                     alt="The Drumeo Method Logo"
                     class="tw-mb-3"
                 >

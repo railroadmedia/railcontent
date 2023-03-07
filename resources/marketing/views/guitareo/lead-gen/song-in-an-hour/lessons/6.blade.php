@@ -27,20 +27,20 @@
         "subTitle" => "Practice going back and forth between both chords, sounding clean, without hurting your fingers.",
         "assignmentID" => "lesson_6_assignment_1",
         "soundslice" => "jBjfc",
-        "pdfURL" => "https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/6a.svg"
+        "pdfURL" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/6a.svg"
     ])
     @include('guitareo.lead-gen.song-in-an-hour._assignment-resources', [
         "title" => "Practice both chords in time with the jam track.",
         "subTitle" => "Practice going back and forth between both chords IN TIME along with the drum track.",
         "assignmentID" => "lesson_6_assignment_2",
         "soundslice" => "zWSfc",
-        "pdfURL" => "https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/6b.svg"
+        "pdfURL" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/6b.svg"
     ])
 @stop
 @section('assets')
     @include('guitareo.lead-gen.song-in-an-hour._assignment-resources', [
         "title" => "Sheet Music",
-        "pdfURL" => "https://www.musora.com/musora-cdn/image/width=1760,q_60,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/6.png"
+        "pdfURL" => "https://www.musora.com/musora-cdn/image/width=1760,q_60,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/6.png"
     ])
     @include('guitareo.lead-gen.song-in-an-hour._assignment-resources', [
         "title" => "Practice Both Chords In Time",

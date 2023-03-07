@@ -100,7 +100,7 @@
         </div>
         @if($guaranteeBadge)
             <div class="flex justify-center items-center px-5 py-2 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto border-t" style="border-color: #CCD3D3; border-top-style: solid;">
-                <img class="w-24 my-0 pr-6" src="https://www.musora.com/musora-cdn/image/width=220,quality=85/https://guitareo.s3.amazonaws.com/sales/2021/guarantee-badge.png">
+                <img class="w-24 my-0 pr-6" src="https://www.musora.com/musora-cdn/image/width=220,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/2021/guarantee-badge.png">
                 <p class="text-xs font-bold text-left my-0 text-guitareo">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
             </div>
         @endif

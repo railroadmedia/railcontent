@@ -10,7 +10,7 @@
     <meta property="og:description" content="We are looking for exceptional people who believe in the power of music and can contribute on a daily basis to the growth of our brands">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
 
     <style>
          .join.gradient-outline.fill-white {
@@ -50,7 +50,7 @@
     </div>
     <div class="w-full h-10 sm:h-12 lg:h-14"></div>
     <header class="pb-24 sm:pb-32 pt-32 sm:pt-40 text-white text-center relative">
-        <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://musora-center.s3.amazonaws.com/careers/header-image.jpg"
+        <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/header-image.jpg"
              class="absolute object-cover transition-opacity opacity-0 top-0 left-0 w-full h-full z-[-2]"
              loading="lazy"
              onload="this.classList.remove('opacity-0')"
@@ -66,21 +66,21 @@
             >
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png"
+                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo red"
             >
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png"
+                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo green"
             >
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"
+                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="singeo logo"
@@ -99,7 +99,7 @@
                 <div class="w-full md:w-1/3 px-2 lg:px-5 mb-5 sm:mb-0">
                     <img
                         class="h-10 inline-block transition-opacity opacity-0"
-                        src="https://musora-center.s3.amazonaws.com/careers/empathy--icon.svg"
+                        src="https://dmmior4id2ysr.cloudfront.net/careers/empathy--icon.svg"
                         alt="empathy icon"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -111,7 +111,7 @@
                 <div class="w-full md:w-1/3 px-2 lg:px-5 mb-5 sm:mb-0">
                     <img
                         class="h-10 inline-block transition-opacity opacity-0"
-                        src="https://musora-center.s3.amazonaws.com/careers/grit-icon.svg"
+                        src="https://dmmior4id2ysr.cloudfront.net/careers/grit-icon.svg"
                         alt="grit icon"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -123,7 +123,7 @@
                 <div class="w-full md:w-1/3 px-2 lg:px-5">
                     <img
                         class="h-10 inline-block transition-opacity opacity-0"
-                        src="https://musora-center.s3.amazonaws.com/careers/passion-icon.svg"
+                        src="https://dmmior4id2ysr.cloudfront.net/careers/passion-icon.svg"
                         alt="passion icon"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -139,14 +139,14 @@
         <div class="container mx-auto relative z-0 max-w-5xl">
             <img
                 class="-mt-40 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://musora-center.s3.amazonaws.com/careers/collage-1-m.png"
+                src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/collage-1-m.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="collage 1"
             >
             <img
                 class="-mt-40 hidden sm:inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://musora-center.s3.amazonaws.com/careers/collage-1.png"
+                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/collage-1.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="collage 1"
@@ -161,14 +161,14 @@
 
             <img
                 class="my-12 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://musora-center.s3.amazonaws.com/careers/quote-m.png"
+                src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/quote-m.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="quote"
             >
             <img
                 class="my-24 hidden sm:inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://musora-center.s3.amazonaws.com/careers/quote.png"
+                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/quote.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="quote"
@@ -195,14 +195,14 @@
         <div class="container mx-auto max-w-5xl">
             <img
                 class="-mt-96 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://musora-center.s3.amazonaws.com/careers/collage-2-m.png"
+                src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/collage-2-m.png"
                 alt="collage 2"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
             >
             <img
                 class="-mt-96 hidden sm:inline-block"
-                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://musora-center.s3.amazonaws.com/careers/collage-2.png"
+                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/collage-2.png"
                 alt="collage 2"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
@@ -279,62 +279,62 @@
                 @php
                     $points = [
                         [
-                        "icon" => "https://musora-center.s3.amazonaws.com/careers/health-icon.svg",
+                        "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/health-icon.svg",
                         "title" => "Health Benefits",
                         "description" => "Our people matter -- so you’ll gain access to a benefits package including health, dental, and vision.",
                         ],
                         [
-                        "icon" => "https://musora-center.s3.amazonaws.com/careers/mental-icon.svg",
+                        "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/mental-icon.svg",
                         "title" => "Mental Health Support",
                         "description" => "We provide $2000/year/employee on services such as counselling and offer an Employee Assistance Program.",
                         ],
                         [
-                        "icon" => "https://musora-center.s3.amazonaws.com/careers/time-icon.svg",
+                        "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/time-icon.svg",
                         "title" => "Time Freedom",
                         "description" => "Put in an honest days work and you’ll earn flexibility for what days and hours you do it.",
                         ],
                         [
-                        "icon" => "https://musora-center.s3.amazonaws.com/careers/snacks-icon.svg",
+                        "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/snacks-icon.svg",
                         "title" => "Snacks & Refreshments",
                         "description" => "Fresh fruit, energy bars, espresso machine, and a fully stocked soda, kombucha and beer fridge.",
                         ],
                         [
-                        "icon" => "https://musora-center.s3.amazonaws.com/careers/strong-icon.svg",
+                        "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/strong-icon.svg",
                         "title" => "Stay Strong",
                         "description" => "You’ll have access to an onsite gym loaded with weights and cardio equipment to keep you going.",
                         ],
                         [
-                        "icon" => "https://musora-center.s3.amazonaws.com/careers/lessons-icon.svg",
+                        "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/lessons-icon.svg",
                         "title" => "Music Lessons",
                         "description" => "We make the best online music education in the world. You and your friends & family get it free!",
                         ],
                         [
-                        "icon" => "https://musora-center.s3.amazonaws.com/careers/sharp-icon.svg",
+                        "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/sharp-icon.svg",
                         "title" => "Stay Sharp",
                         "description" => "Stay up to date and improve your skills. We’ll support your journey to being the best you can be!",
                         ],
                         [
-                        "icon" => "https://musora-center.s3.amazonaws.com/careers/collaboration-icon.svg",
+                        "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/collaboration-icon.svg",
                         "title" => "Collaborative Team",
                         "description" => "Your ideas matter. We want to learn from one another and collaborate across all departments.",
                         ],
                         [
-                        "icon" => "https://musora-center.s3.amazonaws.com/careers/right-tools-icon.svg",
+                        "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/right-tools-icon.svg",
                         "title" => "The Right Tools",
                         "description" => "We’ll provide the right computer for your needs, with everything you need to get the job done!",
                         ],
                         [
-                        "icon" => "https://musora-center.s3.amazonaws.com/careers/events-icon.svg",
+                        "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/events-icon.svg",
                         "title" => "FUN Company Events",
                         "description" => "Golf tournaments, warehouse jam nights, LEGENDARY Holiday party and more!",
                         ],
                         [
-                        "icon" => "https://musora-center.s3.amazonaws.com/careers/remote-icon.svg",
+                        "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/remote-icon.svg",
                         "title" => "Remote Choice",
                         "description" => "Depending on the role, you’ll have the freedom to work in-office or at home, whatever suits you best.",
                         ],
                         [
-                        "icon" => "https://musora-center.s3.amazonaws.com/careers/growth-icon.svg",
+                        "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/growth-icon.svg",
                         "title" => "Room for Growth",
                         "description" => "Whether that means laterally, vertically or somewhere else, we want to support your growth!",
                         ],

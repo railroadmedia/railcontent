@@ -12,7 +12,7 @@
 @section('layout-header')
     @include('_partials.layout.global-header', [
         "emptyPromoVersion" => $emptyPromoVersion,
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo.svg",
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/singeo.svg",
         // TOP NAV
         "nav_links" => [
             "Features" => [
@@ -156,7 +156,7 @@
 {{--    @include('_partials.layout.global-footer', [--}}
 {{--        "emptyPromoVersion" => empty($promoVersion),--}}
 {{--        "brand" => "singeo",--}}
-{{--        "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",--}}
+{{--        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/singeo-white.svg",--}}
 {{--        "sections" => [--}}
 {{--            [--}}
 {{--                "title" => "Resources",--}}

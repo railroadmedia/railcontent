@@ -27,6 +27,6 @@
         "subTitle" => "Practice strumming a G Chord using the top 4 strings cleanly.",
         "assignmentID" => "lesson_5_assignment_1",
         "soundslice" => "PBjfc",
-        "pdfURL" => "https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/5.svg"
+        "pdfURL" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/5.svg"
     ])
 @stop

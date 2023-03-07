@@ -5,7 +5,7 @@
     <title>The Lifetime Bundle</title>
     <meta name="description" content="Lock in a lifetime of piano lessons!">
     <meta property="og:description" content="Lock in a lifetime of piano lessons!">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
     @include('_partials.layout._tailwindcdn')
 @stop()
@@ -23,7 +23,7 @@
             'lifetimeAccess' => false,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/pianote-lifetime.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/pianote-lifetime.jpg',
         ],
         [
             'name' => 'Lifetime Drumeo Membership',
@@ -37,7 +37,7 @@
             'freeShipping' => false,
             'lineBreak' => true,
             'included' => true,
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/drumeo-lifetime.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/drumeo-lifetime.jpg',
         ],
         [
             'name' => 'Lifetime Guitareo Membership',
@@ -51,7 +51,7 @@
             'freeShipping' => false,
             'lineBreak' => true,
             'included' => true,
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/guitareo-lifetime.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/guitareo-lifetime.jpg',
         ],
         [
             'name' => 'Lifetime Singeo Membership',
@@ -65,7 +65,7 @@
             'freeShipping' => false,
             'lineBreak' => true,
             'included' => true,
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/singeo-lifetime.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/singeo-lifetime.jpg',
         ],
         [
             'name' => 'Pianote Headphones',
@@ -78,7 +78,7 @@
             'lifetimeAccess' => false,
             'freeShipping' => true,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/shop/card-thumbs/headphones-cart.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/headphones-cart.jpg',
         ],
         [
             'name' => 'Chords & Scales Book',
@@ -91,7 +91,7 @@
             'lifetimeAccess' => false,
             'freeShipping' => true,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/chords-scales.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/chords-scales.jpg',
         ],
         [
             'name' => 'Pianote Practice Planner',
@@ -104,7 +104,7 @@
             'lifetimeAccess' => false,
             'freeShipping' => true,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/planner.png',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/planner.png',
         ],
         [
             'name' => 'Pianote Christmas Songbook',
@@ -117,7 +117,7 @@
             'lifetimeAccess' => false,
             'freeShipping' => true,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-book.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-book.jpg',
         ],
         [
             'name' => 'Pianote Christmas Songbook (Digital Version)',
@@ -130,7 +130,7 @@
             'lifetimeAccess' => true,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-songbook-card.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-songbook-card.jpg',
         ],
         [
             'name' => 'Pianote Chords Poster',
@@ -143,7 +143,7 @@
             'lifetimeAccess' => false,
             'freeShipping' => true,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/poster-chords.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/poster-chords.jpg',
         ],
         [
             'name' => 'Pianote Scales Poster',
@@ -156,7 +156,7 @@
             'lifetimeAccess' => false,
             'freeShipping' => true,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/poster-scales.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/poster-scales.jpg',
         ],
         [
             'name' => 'The Power of Chords',
@@ -169,7 +169,7 @@
             'lifetimeAccess' => true,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/power-of-chords.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/power-of-chords.jpg',
         ],
         [
             'name' => 'The Beginner’s Guide to Classical Piano',
@@ -182,7 +182,7 @@
             'lifetimeAccess' => true,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTCP.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTCP.jpg',
         ],
         [
             'name' => 'Improvisation and Musical Freedom',
@@ -195,7 +195,7 @@
             'lifetimeAccess' => true,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/improv-musical-freedom.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/improv-musical-freedom.jpg',
         ],
         [
             'name' => 'The Beginner’s Guide To Playing Beautiful Piano',
@@ -208,7 +208,7 @@
             'lifetimeAccess' => true,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTPBP.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTPBP.jpg',
         ],
         [
             'name' => 'Piano Riffs & Fills',
@@ -221,7 +221,7 @@
             'lifetimeAccess' => true,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
         ],
         [
             'name' => 'Piano Technique Made Easy',
@@ -234,7 +234,7 @@
             'lifetimeAccess' => true,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
         ],
         [
             'name' => 'De-Stupefy Your Left Hand',
@@ -247,7 +247,7 @@
             'lifetimeAccess' => true,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
         ],
         [
             'name' => 'Worship Piano',
@@ -260,7 +260,7 @@
             'lifetimeAccess' => true,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/worship-piano.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/worship-piano.jpg',
         ],
         [
             'name' => 'Faster Fingers',
@@ -273,7 +273,7 @@
             'lifetimeAccess' => true,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/faster-fingers.jpg',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/faster-fingers.jpg',
         ],
     ];
 @endphp
@@ -288,7 +288,7 @@
     @include('pianote.shop._partials._slider', [
         "headerText" => "<strong>Lock in a lifetime of piano lessons!</strong>",
         "videoSrc" => "//player.vimeo.com/video/774401520",
-        "defaultCover" => "https://pianote.s3.amazonaws.com/sales/promos/november/unlimited-lessons-thumb.jpg",
+        "defaultCover" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/unlimited-lessons-thumb.jpg",
         "noSlider" => true,
     ])
 
@@ -307,7 +307,7 @@
 
 @section('bottom')
     <h3 class="text-center" style="margin-bottom: 15px;"><strong>What's included:</strong></h3>
-{{--    <img src="https://pianote.s3.amazonaws.com/sales/promos/november/lifetime-bundle-spread.png">--}}
+{{--    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/lifetime-bundle-spread.png">--}}
 {{--    <br><br>--}}
     <p>Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.
         <br><br>

@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/1123576828-d4d2a0ec2867d0d6579ed0a02f62fc5ba567b42e73eb9c30d9292be5080d89b0-d?mw=1000&mh=563')
 
 @section('lesson-description')
-    <a class="join smaller mb-4" target="_blank" href="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/leonard-cohen-hallelujah.pdf">DOWNLOAD PDF</a>
+    <a class="join smaller mb-4" target="_blank" href="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/lessons/leonard-cohen-hallelujah.pdf">DOWNLOAD PDF</a>
     <p>Hallelujah! <br><br> You’re ready to learn your next song. And it’s a classic.
         <br><br> Hallelujah by Leonard Cohen is one of the most famous songs in the world and has been covered by so many musicians over the years.
         <br><br> There are only 5 chords in this song, and the best news is…
@@ -36,11 +36,11 @@
         <br><br> But for now, I’d like you to just practice adding in the middle note if you can. The good news is, this song is in the key of C - so EVERY note will be a white note.
         <br><br> Here is how to play all of the chords you’ll need for this song.</p>
     <div class="flex flex-wrap justify-center my-2">
-        <img class="w-full sm:w-1/2" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/c-maj.png" alt="c-maj">
-        <img class="w-full sm:w-1/2" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/a-min.png" alt="a-min">
-        <img class="w-full sm:w-1/2" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/f-maj.png" alt="f-maj">
-        <img class="w-full sm:w-1/2" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/g-maj.png" alt="g-maj">
-        <img class="w-full sm:w-1/2" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/e-min.png" alt="e-min">
+        <img class="w-full sm:w-1/2" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/lessons/c-maj.png" alt="c-maj">
+        <img class="w-full sm:w-1/2" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/lessons/a-min.png" alt="a-min">
+        <img class="w-full sm:w-1/2" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/lessons/f-maj.png" alt="f-maj">
+        <img class="w-full sm:w-1/2" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/lessons/g-maj.png" alt="g-maj">
+        <img class="w-full sm:w-1/2" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/lessons/e-min.png" alt="e-min">
     </div>
     <p>For all of these chords, you’ll use your thumb for the bottom note, your pinky for the top note, and your middle finger for the middle note.
         <br><br> <strong>A quick note on rhythm</strong>
@@ -53,7 +53,7 @@
         <br><br> But if you’re finding the chords a little “easy” and are looking for an added challenge, you could try playing each chord as a “broken” chord. This means instead of playing all the notes at the same time, you play them one at a time, going up and down.
         <br><br> The musical term for this is an “arpeggio”. Here’s what it looks like for the C chord:</p>
 
-    <video class="rounded-xl my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/c-arpeggio.mp4" autoplay muted playsinline loop></video>
+    <video class="rounded-xl my-7" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/lessons/c-arpeggio.mp4" autoplay muted playsinline loop></video>
 
     <p>It sounds amazing, but it takes practice!
         <br><br> Make sure you watch the lesson to see how to play these arpeggios for all the chords in this song.

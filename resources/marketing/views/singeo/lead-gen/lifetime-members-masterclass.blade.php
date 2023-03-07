@@ -8,7 +8,7 @@
     <meta property="og:description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee."/>
 
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2023/share-image-singeo.jpg"/>
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2023/share-image-singeo.jpg"/>
 
     @include('_partials.layout._fonts')
     @include('_partials.layout._tailwindcdn')
@@ -161,7 +161,7 @@
 
 @section('global-body')
     @include("singeo.sales.partials._nav")
-    <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://singeo.s3.amazonaws.com/products/shop-header.jpg">
+    <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/shop-header.jpg">
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
                 <h1><strong>Lifetime Members Masterclass</strong></h1>
                 <h3>with Lisa Witt</h3>

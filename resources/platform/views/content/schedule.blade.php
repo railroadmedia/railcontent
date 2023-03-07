@@ -7,7 +7,7 @@
 @section('content')
 
     @component('partials._header-banner', [
-        'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
+        'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
     ])
         @slot('content')
             <div class="tw-flex tw-flex-col tw-pr-1">
@@ -58,14 +58,14 @@
                     </h1>
                 </div>
                 <div class="tw-flex tw-flex-col">
-                    <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" 
+                    <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white"
                             data-open-modal="scheduleAddToCalendarModal"
                     >
                         <i class="fas fa-calendar-plus tw-mr-2"></i>
-                        Subscribe to Calendar 
+                        Subscribe to Calendar
                     </button>
                 </div>
-            </div>   
+            </div>
             <div class="tw-flex tw-flex-row">
                 <content-schedule
                     :preloaded-content="{{ $scheduleEvents }}"

@@ -36,7 +36,7 @@
         <div class="relative py-12 md:py-24">
             <div class="absolute inset-0 z-10">
                 <img
-                    src="@if($theme === 'drumeo') https://musora-web-platform.s3.amazonaws.com/headers/drumeo-header.jpg @elseif($theme === 'pianote') https://musora-web-platform.s3.amazonaws.com/headers/pianote-header.jpg @elseif($theme === 'guitareo') https://musora-web-platform.s3.amazonaws.com/headers/guitareo-header.jpg @elseif($theme === 'singeo') https://musora-web-platform.s3.amazonaws.com/headers/singeo-header.jpg @endif"
+                    src="@if($theme === 'drumeo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/drumeo-header.jpg @elseif($theme === 'pianote') https://d3fzm1tzeyr5n3.cloudfront.net/headers/pianote-header.jpg @elseif($theme === 'guitareo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/guitareo-header.jpg @elseif($theme === 'singeo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/singeo-header.jpg @endif"
                     class="h-full w-full object-top object-cover transition-opacity opacity-0"
                     alt="{{ $theme }} background"
                     loading="lazy"

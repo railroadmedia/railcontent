@@ -5,7 +5,7 @@
 
     <!-- Hero Component -->
     @component('_partials.components.hero-section', [
-        "backgroundImage" => "https://musora-web-platform.s3.amazonaws.com/singeo/homepage/singeo-hero.jpg",
+        "backgroundImage" => "https://d3fzm1tzeyr5n3.cloudfront.net/singeo/homepage/singeo-hero.jpg",
         "gradientClasses" => "from-[#1a0239] to-[#1a0239]"
     ])
         @slot('content')

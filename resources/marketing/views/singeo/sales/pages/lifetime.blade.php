@@ -6,7 +6,7 @@
 
     <meta name="description" content="With the LIFETIME bundle, you'll get everything you need to pursue and develop your skills on the guitar.">
     <meta property="og:description" content="With the LIFETIME bundle, you'll get everything you need to pursue and develop your skills on the guitar.">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/promos/august/lifetime_bundle.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/promos/august/lifetime_bundle.jpg" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._tailwindcdn')
@@ -92,19 +92,19 @@
         <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-6 mb-6 px-4">
             <div class="overflow-hidden rounded-xl">
                 <div class="text-white font-bold flex items-center justify-center h-16" style="font-size:13px; background:#170426;">Condenser studio microphone with USB interface</div>
-                <img src="https://singeo.s3.amazonaws.com/sales/lifetime/mic_giveaway.jpg" alt="giveaway 1">
+                <img src="https://d21xeg6s76swyd.cloudfront.net/sales/lifetime/mic_giveaway.jpg" alt="giveaway 1">
             </div>
             <div class="overflow-hidden rounded-xl">
                 <div class="text-white font-bold flex items-center justify-center h-16" style="font-size:13px; background:#170426;">Desktop microphone stand</div>
-                <img src="https://singeo.s3.amazonaws.com/sales/lifetime/stand_giveaway.jpg" alt="giveaway 2">
+                <img src="https://d21xeg6s76swyd.cloudfront.net/sales/lifetime/stand_giveaway.jpg" alt="giveaway 2">
             </div>
             <div class="overflow-hidden rounded-xl">
                 <div class="text-white font-bold flex items-center justify-center h-16" style="font-size:13px; background:#170426;">Nylon screen professional <br>pop filter</div>
-                <img src="https://singeo.s3.amazonaws.com/sales/lifetime/filter_giveaway.jpg" alt="giveaway 3">
+                <img src="https://d21xeg6s76swyd.cloudfront.net/sales/lifetime/filter_giveaway.jpg" alt="giveaway 3">
             </div>
             <div class="overflow-hidden rounded-xl">
                 <div class="text-white font-bold flex items-center justify-center h-16" style="font-size:13px; background:#170426;">Professional Hi-End stereo headphones</div>
-                <img src="https://singeo.s3.amazonaws.com/sales/lifetime/headphones_giveaway.jpg" alt="giveaway 4">
+                <img src="https://d21xeg6s76swyd.cloudfront.net/sales/lifetime/headphones_giveaway.jpg" alt="giveaway 4">
             </div>
         </div>
         <span class="uppercase join smaller w-40" data-open="specs">See specs</span>
@@ -115,7 +115,7 @@
         <h4 class="text-white text-center font-extrabold mb-16">Chat and sing with Lisa… LIVE!</h4>
         <div class="md:flex items-center max-w-4xl mx-auto px-4">
             <div class="order-1 md:w-2/5 md:pl-10 mb-6 md:mb-0">
-                <img class="w-full rounded-xl" src="https://singeo.s3.amazonaws.com/sales/lifetime/lifetime-ui.jpg" alt="ui image">
+                <img class="w-full rounded-xl" src="https://d21xeg6s76swyd.cloudfront.net/sales/lifetime/lifetime-ui.jpg" alt="ui image">
             </div>
             <p class="md:w-3/5" style="color:#A4AFC7;">
                 We’ve never done this before. <br><br>
@@ -150,14 +150,14 @@
                 </style>
                 <div class="flex flex-wrap">
                     <div class="w-full">
-                        <img class="px-2 md:px-3 lg:px-2 mb-6" src="https://singeo.s3.amazonaws.com/sales/lifetime/lifetime-singeo-membership.png" alt="lifetime membership">
+                        <img class="px-2 md:px-3 lg:px-2 mb-6" src="https://d21xeg6s76swyd.cloudfront.net/sales/lifetime/lifetime-singeo-membership.png" alt="lifetime membership">
                     </div>
                     <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 md:mb-4 px-2 md:px-3 lg:px-2 w-full md:w-1/2">
                         <div class="flip-div special">
                             <div class="flip-inner">
                                 <div class="front">
                                     <div class="hover-icon"><i class="fas fa-arrow-right"></i><br>DETAILS</div>
-                                    <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=670,quality=85/https://singeo.s3.amazonaws.com/sales/promos/november/lifetime-bundle-mic-card.jpg);"></div>
+                                    <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=670,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/promos/november/lifetime-bundle-mic-card.jpg);"></div>
                                 </div>
                                 <div class="back">
                                     <div class="text-wrap">
@@ -177,7 +177,7 @@
                             <div class="flip-inner">
                                 <div class="front">
                                     <div class="hover-icon"><i class="fas fa-arrow-right"></i><br>DETAILS</div>
-                                    <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=670,quality=85/https://singeo.s3.amazonaws.com/sales/lifetime/lisa-witt-exclusive-card.jpg);"></div>
+                                    <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=670,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/lifetime/lisa-witt-exclusive-card.jpg);"></div>
                                 </div>
                                 <div class="back">
                                     <div class="text-wrap">
@@ -197,7 +197,7 @@
                 @php
                     $bonuses = [
                         [
-                            'image' => 'https://singeo.s3.amazonaws.com/sales/promos/november/poster2.png',
+                            'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/november/poster2.png',
                             'title' => 'Vowel Practice Poster',
                             'badge' => 'Vowel Practice Poster',
                             'description' => 'Your new favorite practice tool - and your ticket hitting higher notes with ease and confidence.',
@@ -205,21 +205,21 @@
                             'online-ship' => "Free Shipping",
                         ],
                         [
-                            'image' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/drumeo-lifetime.jpg',
+                            'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/drumeo-lifetime.jpg',
                             'title' => 'Drumeo Membership',
                             'description' => 'Get drumming lessons for LIFE with a Drumeo Lifetime Membership.',
                             'price' => 0,
                             'online-ship' => 'Lifetime access'
                         ],
                         [
-                            'image' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/pianote-lifetime.jpg',
+                            'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/pianote-lifetime.jpg',
                             'title' => 'Pianote Membership',
                             'description' => 'Get piano lessons for LIFE with a Pianote Lifetime Membership',
                             'price' => 0,
                             'online-ship' => 'Lifetime access'
                         ],
                         [
-                            'image' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/guitareo-lifetime.jpg',
+                            'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/guitareo-lifetime.jpg',
                             'title' => 'Guitareo Membership',
                             'description' => 'Get guitar lessons for LIFE with a Guitareo Lifetime Membership',
                             'price' => 0,

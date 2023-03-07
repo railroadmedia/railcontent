@@ -15,11 +15,11 @@
 
 @section('meta-description', 'Start playing beautiful classical piano with 4 easy lessons.')
 
-@section('meta-img', 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/og-image2.jpg')
+@section('meta-img', 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/og-image2.jpg')
 
 @section('meta-url', 'https://www.pianote.com/classical-piano')
 
-@section('lesson-logo', 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/logo.png')
+@section('lesson-logo', 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo.png')
 
 @section('lesson-index-url', '/classical-piano/lessons')
 

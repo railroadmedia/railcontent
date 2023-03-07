@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://www.pianote.com/songs">
     <meta name="description" content="1000+ note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.">
     <meta property="og:description" content="1000+ note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-songs.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-songs.jpg" style="display: none;">
 @endsection
 
 @section('body-data')
@@ -19,7 +19,7 @@
     }'
 @endsection
 
-@section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/songs-thumb2.jpg')
+@section('header-img', 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/songs-thumb2.jpg')
 
 @section('header', 'Play your favorite songs.')
 

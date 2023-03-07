@@ -107,10 +107,10 @@
                         echo 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/90-day.png';
                     }
                     elseif($theme === 'guitareo'){
-                        echo 'https://guitareo.s3.amazonaws.com/sales/2021/guarantee-badge.png';
+                        echo 'https://d122ay5chh2hr5.cloudfront.net/sales/2021/guarantee-badge.png';
                     }
                     elseif($theme === 'singeo'){
-                        echo 'https://singeo.s3.amazonaws.com/sales/2021/guarantee.png';
+                        echo 'https://d21xeg6s76swyd.cloudfront.net/sales/2021/guarantee.png';
                     }
                 @endphp" alt="guarantee badge">
                 <p class="text-sm text-left my-0 text-{{ $theme }}"><em>Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</em></p>

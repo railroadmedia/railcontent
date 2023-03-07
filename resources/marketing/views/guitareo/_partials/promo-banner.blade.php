@@ -6,7 +6,7 @@
 {{--</style>--}}
 {{--<div class="big-promo-banner tw-text-white tw-text-center lg:tw-text-left tw-uppercase tw-relative tw-py-4" style="background: #000 url(https://dpwjbsxqtam5n.cloudfront.net/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 100px inset #000;">--}}
 {{--    <div class="row tw-container tw-mx-auto tw-px-3 sm:tw-flex tw-items-center tw-justify-between">--}}
-{{--        <a href="/shop/"><img src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://guitareo.s3.amazonaws.com/sales/promos/november/holiday-guitar.png"></a>--}}
+{{--        <a href="/shop/"><img src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/promos/november/holiday-guitar.png"></a>--}}
 {{--        <span class="tw-text-center sm:tw-text-right tw-flex tw-flex-wrap tw-items-center sm:tw-justify-end">--}}
 {{--                <p class="text tw-mx-auto sm:tw-ml-0 sm:tw-mr-3 tw-my-2 sm:tw-my-0 tw-w-full sm:tw-w-auto">@if(!empty($price))--}}
 {{--                        @if(round(100 - (100 * ($price / $fullPrice))) > 1)--}}
@@ -46,7 +46,7 @@
 {{--        <div class="noise-wrap">--}}
 {{--            <div class="row tw-container tw-mx-auto">--}}
 {{--                <div class="text tw-text-left">--}}
-{{--                    <img class="logo" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://guitareo.s3.amazonaws.com/sales/promos/november/holiday-guitar.png">--}}
+{{--                    <img class="logo" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/promos/november/holiday-guitar.png">--}}
 {{--                    <p>--}}
 {{--                        @if(!empty($price))--}}
 {{--                            @if(round(100 - (100 * ($price / $fullPrice))) > 1)--}}

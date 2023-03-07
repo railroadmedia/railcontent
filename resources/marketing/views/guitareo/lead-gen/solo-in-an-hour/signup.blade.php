@@ -7,7 +7,7 @@
     <meta property="og:title" content="Solo In An Hour">
     <meta name="description" content="Play your first solo in less than 60 minutes"/>
     <meta property="og:description" content="Play your first solo in less than 60 minutes">
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/og-image.jpg">
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/solo-in-an-hour/">
 
     <link rel="preload" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -22,18 +22,18 @@
         }
         .header-bg {
             background-size:675px;
-            background-image: url('https://www.musora.com/musora-cdn/image/width=750,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/bg.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=750,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/bg.jpg');
         }
         .teacher-gradient {
             background:linear-gradient(to top, #04111d 40%, transparent 75%);
         }
         .teacher-section {
-            background: #04111d 50% top/530px no-repeat url('https://www.musora.com/musora-cdn/image/width=750,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/coach-bg.jpg');;
+            background: #04111d 50% top/530px no-repeat url('https://www.musora.com/musora-cdn/image/width=750,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/coach-bg.jpg');;
         }
         @media (min-width: 768px) {
             .header-bg {
                 background-size:1140px;
-                background-image:url('https://www.musora.com/musora-cdn/image/width=1250,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/bg.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=1250,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/bg.jpg');
             }
             .teacher-gradient {
                 background:linear-gradient(to right, #04111d, transparent 80%);
@@ -41,14 +41,14 @@
             .teacher-section {
                 background-size:630px;
                 background-position:180% 50%;
-                background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/coach-bg.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/coach-bg.jpg');
             }
 
         }
         @media (min-width: 1024px) {
             .header-bg {
                 background-size:1240px;
-                background-image: url('https://www.musora.com/musora-cdn/image/width=1600,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=1600,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/bg.jpg');
             }
             .teacher-gradient {
                 background:linear-gradient(to right, #04111d, transparent 60%);
@@ -56,7 +56,7 @@
             .teacher-section {
                 background-size:750px;
                 background-position:95% 50%;
-                background-image:url('https://www.musora.com/musora-cdn/image/width=1250,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/coach-bg.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=1250,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/coach-bg.jpg');
             }
         }
     </style>
@@ -76,7 +76,7 @@
     @include('guitareo.lead-gen.partials._header1', [
         "bgColor" => "#00101d",
         "imgs" => [
-            '<img class="w-full h-24 md:h-32 lg:h-36" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png" alt="logo">',
+            '<img class="w-full h-24 md:h-32 lg:h-36" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/logo.png" alt="logo">',
         ],
         "playButton" => "down",
         "headLine" => '<h1 class="font-bison-bold">Play your first solo<br class="inline md:hidden"> in less than 60 minutes</h1>
@@ -94,32 +94,32 @@
             [
             'title' => "The Most Important Scale For Soloing",
             'description' => "Solo over all different types of music with just a few notes from this scale.",
-            'image' => 'https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/thumbs1.jpg',
+            'image' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/thumbs1.jpg',
             ],
             [
             'title' => "What Makes A Good Solo?",
             'description' => "See how the greats do it and learn from the best.",
-            'image' => 'https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/thumbs2.jpg',
+            'image' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/thumbs2.jpg',
             ],
             [
             'title' => "Building A Lick Vocabulary",
             'description' => "Get inspired with 3 boxed and ready licks and build your lick library.",
-            'image' => 'https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/thumbs3.jpg',
+            'image' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/thumbs3.jpg',
             ],
             [
             'title' => "Playing Your First Solo",
             'description' => "Put it all together to create your very first solo.",
-            'image' => 'https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/thumbs4.jpg',
+            'image' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/thumbs4.jpg',
             ],
             [
             'title' => "What About Soloing In Other Keys?",
             'description' => "Move up and down the fretboard freely and play along to any song in any key.",
-            'image' => 'https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/thumbs5.jpg',
+            'image' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/thumbs5.jpg',
             ],
             [
             'title' => "Where To Go From Here?",
             'description' => "Take your solos from good to great and find your own artistic identity on the guitar.",
-            'image' => 'https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/thumbs6.jpg',
+            'image' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/thumbs6.jpg',
             ],
         ],
     ])
@@ -129,17 +129,17 @@
             [
                 "title" => "STEP-BY-STEP LESSONS",
                 "description" => "Learn the right things<br> at the right time",
-                "icon" => "https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/guide-icon.svg",
+                "icon" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/guide-icon.svg",
             ],
             [
                 "title" => "DOWNLOADABLE LICKS",
                 "description" => "Save them, print them,<br> they’re yours!",
-                "icon" => "https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/download-icon.svg",
+                "icon" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/download-icon.svg",
             ],
             [
                 "title" => "PLAY-ALONG BACKING TRACKS",
                 "description" => "Jam out with your<br> new skills",
-                "icon" => "https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/play-along-icon.svg",
+                "icon" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/play-along-icon.svg",
             ],
         ];
     ?>
@@ -178,12 +178,12 @@
     </section>
 
     @include('guitareo.lead-gen.partials._enter-email', [
-        "bgImg" => "https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/order-bg.jpg",
+        "bgImg" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/order-bg.jpg",
         "img" => '
             <picture>
-                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png">
-                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png">
-                <img class="h-28 md:h-40 lg:h-52 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/solo-in-an-hour/logo.png" alt="logo">
+                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/logo.png">
+                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/logo.png">
+                <img class="h-28 md:h-40 lg:h-52 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/logo.png" alt="logo">
             </picture>
         ',
         "text" => '<h1 class="font-bison-bold">Play your first solo<br class="inline md:hidden"> in less than 60 minutes</h1>

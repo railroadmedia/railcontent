@@ -10,9 +10,9 @@
 @endsection
 
 @section('page-body')
-    <header class="header text-center text-white py-6 md:py-12 lg:py-16 px-4 bg-top bg-no-repeat relative" style="background-color:#010519; background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/email-bg.jpg);">
+    <header class="header text-center text-white py-6 md:py-12 lg:py-16 px-4 bg-top bg-no-repeat relative" style="background-color:#010519; background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/email-bg.jpg);">
         <div class="container mx-auto relative z-10 max-w-4xl">
-            <img class="h-10 md:h-20 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/logo.png">
+            <img class="h-10 md:h-20 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/logo.png">
         </div>
     </header>
 
@@ -31,10 +31,10 @@
                 @endforeach
             </div>
             <h5 class="leading-normal max-w-xl lg:max-w-2xl">And don’t forget to download your FREE resources, including lead sheets for each song and a handy Chord Reference Guide.</h5>
-            <a class="join smaller mt-6" href="https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/sheet-music/christmas-carols.zip">Download All PDFs</a>
+            <a class="join smaller mt-6" href="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/sheet-music/christmas-carols.zip">Download All PDFs</a>
         </div>
     </div>
-    <section class="text-center py-14 md:py-24 lg:py-28 text-white bg-center bg-cover lazyload" style="background-color:#000417;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://pianote.s3.amazonaws.com/shop/header-background.jpg">
+    <section class="text-center py-14 md:py-24 lg:py-28 text-white bg-center bg-cover lazyload" style="background-color:#000417;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
                 <img class="w-full max-w-xs md:max-w-md lg:max-w-lg mb-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1300,q_60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/500-songs-logo.svg">

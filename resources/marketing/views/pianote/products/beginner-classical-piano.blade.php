@@ -1,9 +1,9 @@
 @php
   $gettings = [
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/piano_icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/piano_icon.svg',
           'position' => 'left',
-          'img' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/intro_thumbnail.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/intro_thumbnail.jpg',
           'title' => 'Your intro to classical piano',
           'desc' => 'Dive into your first classical lessons with a practical warm-up routine you can use every time you get ready to play piano, and start learning your first classical piece from the Baroque Era - “Burlesque”. You’ll be amazed at how fast you’ll be able to play this music!',
           'wyg' => [
@@ -13,9 +13,9 @@
           ],
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/music_notes_icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/music_notes_icon.svg',
           'position' => 'right',
-          'img' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/more_than_just_notes_thumbnail.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/more_than_just_notes_thumbnail.jpg',
           'title' => 'More than just the notes',
           'desc' => 'Music from the Classical Era was defined by elegance, grace, question and answer song structure, and contrasting moods. In these lessons, you’ll learn the wonderful “Melody In C” which ties in all of these elements to make your playing really stand out.',
           'wyg' => [
@@ -25,9 +25,9 @@
           ],
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/heart_icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/heart_icon.svg',
           'position' => 'left',
-          'img' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/the_romance_of_chopin_thumbnail.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/the_romance_of_chopin_thumbnail.jpg',
           'title' => 'The romance of chopin',
           'desc' => 'It’s time for some romance! In these lessons, you’ll explore the Romantic Era and discover the immense passion and expressive playing that characterized the pieces from this period. You’ll play a piece by the famous Chopin and learn the finer techniques to make it sound beautiful on the piano. ',
           'wyg' => [
@@ -37,9 +37,9 @@
           ],
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/electric_piano_icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/electric_piano_icon.svg',
           'position' => 'right',
-          'img' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/classical_modern_thumbnail.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/classical_modern_thumbnail.jpg',
           'title' => 'Classical Piano In The Modern Era',
           'desc' => 'Classical music didn’t just end in the 19th century. Discover the modern style of classical piano with Victoria’s very own contemporary piano suite. You’ll learn about tension and release in classical music which will help you understand why pieces feel a certain way.',
           'wyg' => [
@@ -52,22 +52,22 @@
 
   $bonuses = [
       [
-          'img' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/a-morning-sunbeam.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/a-morning-sunbeam.jpg',
           'title' => 'A Morning Sunbeam',
           'artist' => 'Florence B. Price',
       ],
       [
-          'img' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/minuet-in-g.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/minuet-in-g.jpg',
           'title' => 'Minuet In G',
           'artist' => 'J.S. Bach',
       ],
       [
-          'img' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/piano-sonata.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/piano-sonata.jpg',
           'title' => 'Piano Sonata In B-Flat Major',
           'artist' => 'Franz Schubert',
       ],
       [
-          'img' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/tempo-di-minuetto.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/tempo-di-minuetto.jpg',
           'title' => 'Tempo Di Minuetto',
           'artist' => 'James Hook',
       ],
@@ -75,22 +75,22 @@
 
   $paths = [
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/guided_lessons_icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/guided_lessons_icon.svg',
           'title' => 'Guided Lessons',
           'desc' => 'You’ll know exactly what to play and practice with our carefully designed step-by-step lessons.',
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/personal_support_icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/personal_support_icon.svg',
           'title' => 'Personal support',
           'desc' => 'Ask your biggest questions and get personalized feedback from teachers and connect with other students.',
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/practice_excercises_icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/practice_excercises_icon.svg',
           'title' => 'Practice Exercises',
           'desc' => 'Each lesson will provide you with exercises to improve your playing and build your skills.',
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/free_sheet_music_icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/free_sheet_music_icon.svg',
           'title' => 'Free sheet music',
           'desc' => 'Get downloadable sheet music for 8 beautiful classical piano pieces.',
       ],
@@ -98,43 +98,43 @@
 
   $learnings = [
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/pianote.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/pianote.svg',
           'desc' => 'Learn from a classically trained touring musician who has played with Beyoncé, Stevie Wonder, Prince, and Tony Bennett (to name a few). ',
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/Search_Icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Search_Icon.svg',
           'desc' => 'Depending on your location, it can be hard to find a teacher with the skills and experience to teach you what you want to learn.',
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/own_pace_icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/own_pace_icon.svg',
           'desc' => 'Learn at your own pace – anywhere, anytime. You can retake the lessons as many times as you like, with free downloadable sheet music.',
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/Calendar_Icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Calendar_Icon.svg',
           'desc' => 'Learn when it suits your teacher, not you. Plus you have to drive across town to make a lesson, and what happens when you have to reschedule?',
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/Speech_Icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Speech_Icon.svg',
           'desc' => 'Full access when you need it to expert piano teachers to answer any questions you may have. You’re not alone!',
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/no_personal_support_icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/no_personal_support_icon.svg',
           'desc' => 'No personal support in between lessons, meaning if you have questions or forget something, you’ll have to wait until your next lesson to get the answers.',
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/community_icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/community_icon.svg',
           'desc' => 'A friendly and supportive community to cheer you on as you learn (no scary recitals either). It’s your squad!',
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/person_icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/person_icon.svg',
           'desc' => 'No community support other than recitals where your fellow students are competing against you, rather than supporting you.',
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/Inexpensive_Icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Inexpensive_Icon.svg',
           'desc' => 'One low payment and the course is yours forever! No ongoing fees or surprise costs. Plus all your music is included.',
       ],
       [
-          'icon' => 'https://pianote.s3.amazonaws.com/lead-gen/classical-piano/Expensive_Icon.svg',
+          'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Expensive_Icon.svg',
           'desc' => 'Pay upwards of $60 for one in-person lesson a week (every week). Plus all your books and music will cost extra.',
       ],
   ];
@@ -148,7 +148,7 @@
     <meta property="og:title" content="The Beginner's Guide To Classical Piano | Pianote">
     <meta name="description" content="The fun way to start playing classical piano.">
     <meta property="og:description" content="The fun way to start playing classical piano.">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/lead-gen/classical-piano/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
 @endsection
@@ -160,7 +160,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
     <style>
         .header-bg {
-            background-image: url('https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/header_image_mobile.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/header_image_mobile.jpg');
             background-position: top center;
         }
 
@@ -233,7 +233,7 @@
 
             .header-bg {
                 background-position: center;
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/header_image_desktop.jpg')
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/header_image_desktop.jpg')
             }
 
             .timeline-container::after {
@@ -447,7 +447,7 @@
     <header class="header-bg text-center text-white sm:px-4 bg-no-repeat bg-cover bg-center relative" style="background-color:#101e29;">
         <div class="container mx-auto relative py-10 md:py-32 lg:py-40 z-10 max-w-sm md:max-w-6xl">
             <div class="text-center md:text-left md:w-3/5 md:pl-4">
-                <img class="h-20 mb-80 md:mb-4 md:h-14 lg:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/logo-2.svg">
+                <img class="h-20 mb-80 md:mb-4 md:h-14 lg:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg">
                 <h1 class="px-4 sm:px-0">
                     <strong>
                         The fun way to start playing classical piano.
@@ -510,7 +510,7 @@
     {{--class="promo-banner block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap shadow-md py-1 hover:text-gray-100 z-0 mx-auto -mt-12 text-xs">--}}
         {{--<div class="container mx-auto relative">--}}
             {{--<div class="inline-block align-middle text-center">--}}
-                {{--<img class="inline-block align-middle mr-2 h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/logo-2.svg">--}}
+                {{--<img class="inline-block align-middle mr-2 h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg">--}}
                 {{--<div class="inline-block align-middle bg-white rounded-full px-6 sm:px-10 py-1 font-medium items-center font-bebas tracking-wider cursor-pointer text-center leading-none text-base" style="color:#902E38;">Get Started &raquo;</div>--}}
             {{--</div>--}}
         {{--</div>--}}
@@ -519,7 +519,7 @@
     <section class="pt-10 sm:pt-16 md:pt-24 lg:pt-40 sm:mb-24 sm:mb-0 pb-10 sm:pb-0" style="background: #F5F5F7">
         <div class="flex mx-auto px-4 flex-col-reverse sm:flex-row md:max-w-2xl lg:max-w-4xl">
             <div class="w-full sm:w-1/2 relative">
-                <img class="sm:absolute left-0 right-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/intro_collage.png" alt="intro_collage">
+                <img class="sm:absolute left-0 right-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/intro_collage.png" alt="intro_collage">
             </div>
             <div class="w-full mb-6 sm:mb-0 sm:w-1/2 sm:pl-6 lg:pl-10 sm:pb-5 md:pb-7 lg:pb-16">
                 <div class="uppercase tracking-wide lg:tracking-widest text-gray-500 text-xs lg:text-base">A New Approach To </div>
@@ -594,7 +594,7 @@
         </div>
     </section>
     <section class="text-center md:pt-14 pb-20 lg:pb-40">
-        <img class="h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=120,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/gift_icon.svg" alt="gift icon">
+        <img class="h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=120,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/gift_icon.svg" alt="gift icon">
         @include('pianote.products.partials._header-text',[
             'topText' => 'Bonus Pieces',
             'topStyles' => 'mt-3 mb-6'
@@ -630,21 +630,21 @@
                     <div>
                         <span class="italic lg:text-2xl">“... a new approach to traditional lessons”</span>
                         <div class="mt-8 flex justify-center items-center">
-                            <img class="h-10 rounded-full mr-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/KeyboardKraze_avatar.jpg" />
+                            <img class="h-10 rounded-full mr-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/KeyboardKraze_avatar.jpg" />
                             Keyboard Kraze
                         </div>
                     </div>
                     <div>
                         <span class="italic lg:text-2xl">“Pianote is a really fun resource for those wishing to pick up tips and tricks and gain perspective.”</span>
                         <div class="mt-6 flex justify-center items-center">
-                            <img class="h-10 rounded-full mr-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://pianote.s3.amazonaws.com/sales/2022/feature-testimonial-yvette.jpg" />
+                            <img class="h-10 rounded-full mr-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/feature-testimonial-yvette.jpg" />
                             Yvette Young, Multi-Instrumentalist
                         </div>
                     </div>
                     <div>
                         <span class="italic lg:text-2xl">“You should check out Pianote. If you’re a beginner or intermediate, this is ideal for you!”</span>
                         <div class="mt-6 flex justify-center items-center">
-                            <img class="h-10 rounded-full mr-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://pianote.s3.amazonaws.com/sales/2022/feature-testimonial-ali.jpg" />
+                            <img class="h-10 rounded-full mr-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/feature-testimonial-ali.jpg" />
                             Ali Spagnola, YouTube Entertainer
                         </div>
                     </div>
@@ -654,7 +654,7 @@
 
         <div id="Performances" class="anchor"></div>
         <div class="py-16 relative" style="background-color:#f5f5f7;">
-            <div class="absolute -top-2 sm:-top-8 left-0 right-0 z-10 h-96 bg-cover bg-top lazyload" data-bg="https://pianote.s3.amazonaws.com/lead-gen/classical-piano/pattern.png"></div>
+            <div class="absolute -top-2 sm:-top-8 left-0 right-0 z-10 h-96 bg-cover bg-top lazyload" data-bg="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/pattern.png"></div>
             <div class="container mx-auto max-w-5xl z-30 relative">
                 @include('pianote.products.partials._header-text',[
                     'topText' => 'Hear what students are <s>saying</s>',
@@ -684,7 +684,7 @@
             </div>
         </div>
         <div class="relative">
-            <div class="absolute -top-14 left-0 right-0 z-10 h-96 bg-cover bg-top lazyload" data-bg="https://pianote.s3.amazonaws.com/lead-gen/classical-piano/pattern.png"></div>
+            <div class="absolute -top-14 left-0 right-0 z-10 h-96 bg-cover bg-top lazyload" data-bg="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/pattern.png"></div>
 
             @include('pianote.products.partials._header-text',[
                 'topText' => 'Your clear path to',
@@ -711,7 +711,7 @@
     <section class="z-20 py-16 pt-10 md:pt-16 lg:pb-40 lg:pt-20">
         <div class="relative learning-container mx-auto max-w-5xl flex flex-wrap px-2 sm:px-4 md:px-8 lg:px-10">
             <div class="w-1/2 text-center mb-20 pr-2 sm:pr-4 md:pr-8 lg:pr-10">
-                <img style="filter: brightness(.245) sepia(1) saturate(9) hue-rotate(320deg);" class="w-3/4 md:w-2/3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/logo-2.png" alt="classical piano logo red">
+                <img style="filter: brightness(.245) sepia(1) saturate(9) hue-rotate(320deg);" class="w-3/4 md:w-2/3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.png" alt="classical piano logo red">
             </div>
             <div class="w-1/2 mb-20 uppercase pl-2 sm:pl-4 md:pl-8 lg:pl-10" style="color:#879097;">
                 <div class="tracking-widest sm:-mb-1 md:mb-0 lg:mt-4 text-xs sm:text-sm md:text-base">Traditional</div>
@@ -728,7 +728,7 @@
         </div>
     </section>
     <section class="px-5 py-16 md:py-24 text-center" style="background: #051321;">
-        <img class="h-10 lg:h-14 mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/logo-2.svg" alt="classical piano logo">
+        <img class="h-10 lg:h-14 mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg" alt="classical piano logo">
         <h1 class="font-knewave text-white mb-4">Jump-Start Program</h1>
         <p class="uppercase text-gray-400 leading-5 mb-10">
             Personal Support For <br class="sm:hidden">Guaranteed Results
@@ -775,8 +775,8 @@
                 </ul>
             </div>
             <picture class="w-full md:w-5/12 rounded-xl overflow-hidden">
-                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/Lisa_Live.jpg">
-                <img src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/Lisa_Live.jpg" alt="value image">
+                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Lisa_Live.jpg">
+                <img src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Lisa_Live.jpg" alt="value image">
             </picture>
 
         </div>
@@ -791,9 +791,9 @@
         ])
         <div class="sm:max-w-xl md:max-w-3xl lg:max-w-4xl mx-auto md:flex md:px-10 lg:px-0">
             <div class="relative md:h-10 lg:h-28 w-80 sm:w-2/3 md:w-3/5 md:-ml-10 mx-auto">
-                <img class="coach-image z-20 md:absolute w-5/6 sm:w-full rounded-3xl sm:rounded-md left-10 lazyload" style="border-color:#f5f5f7;border-width: 20px" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/victoria_theodore_coach.png" alt="coach image">
+                <img class="coach-image z-20 md:absolute w-5/6 sm:w-full rounded-3xl sm:rounded-md left-10 lazyload" style="border-color:#f5f5f7;border-width: 20px" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/victoria_theodore_coach.png" alt="coach image">
 
-                <img class="corner-shape absolute h-10 sm:h-16 lg:h-20 left-4 sm:-left-4 md:left-7 lg:left-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/corner_shape.png" alt="corner shape">
+                <img class="corner-shape absolute h-10 sm:h-16 lg:h-20 left-4 sm:-left-4 md:left-7 lg:left-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/corner_shape.png" alt="corner shape">
             </div>
             <div class="relative w-5/6 sm:w-5/6 md:w-3/5 -mt-8 sm:mt-0 mx-auto">
                 <div class="z-10 md:absolute text-white rounded-md px-4 sm:px-12 md:pl-14 lg:pl-16 md:pr-4 lg:pr-6 py-6 lg:py-10 text-left mt-20 lg:mt-14 text-xs sm:text-sm lg:text-base" style="background: linear-gradient(180deg, #BB3744 0%, #6D282F 100%);">
@@ -810,7 +810,7 @@
         </div>
     </section>
     <section class="text-center py-10 md:pt-40 md:pb-20">
-        <img class="h-28 mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/guarantee_logo.png" alt="guarantee badge">
+        <img class="h-28 mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/guarantee_logo.png" alt="guarantee badge">
         @include('pianote.products.partials._header-text',[
             'headerText' => 'The guarantee that lasts<br>longer than the course'
         ])
@@ -835,12 +835,12 @@
             </div>
         </div>
     </section>
-    <section class="text-white px-5 sm:px-0 py-14 md:py-20 bg-no-repeat bg-cover bg-center overflow-hidden lazyload" style="background-color:#071522;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/Order_BG.jpg">
+    <section class="text-white px-5 sm:px-0 py-14 md:py-20 bg-no-repeat bg-cover bg-center overflow-hidden lazyload" style="background-color:#071522;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Order_BG.jpg">
         <div class="container mx-auto max-w-6xl">
 
             <div class="flex flex-wrap items-center">
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5">
-                    <img class="h-14 md:h-14 lg:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/logo-2.svg">
+                    <img class="h-14 md:h-14 lg:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg">
                     <h2 class="pt-4 md:pt-5"><strong>Pieces you can actually play, with lessons that are actually fun.</strong></h2>
                     <p class="text-left mx-auto inline-block py-4 md:py-5 sm:leading-loose">
                         <i class="text-pianote fas fa-check sm:mr-2"></i> 4 bonus hours of LIVE lessons<br>
@@ -873,7 +873,7 @@
                     </div>
                 </div>
                 <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 lg:pl-10 mt-7 sm:mt-0">
-                    <img class="max-w-xl sm:max-w-3xl lg:max-w-5xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/https://pianote.s3.amazonaws.com/lead-gen/classical-piano/order_collage.png">
+                    <img class="max-w-xl sm:max-w-3xl lg:max-w-5xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/order_collage.png">
                 </div>
             </div>
         </div>

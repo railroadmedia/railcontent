@@ -6,7 +6,7 @@
 
 @section('content')
 
-        @component('partials._header-banner', ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'])
+        @component('partials._header-banner', ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg'])
             @slot('content')
                 <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
                     <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
@@ -19,7 +19,7 @@
                             Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.
                         @elseif($brand === 'singeo')
                             Submit your singing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.
-                        @endif 
+                        @endif
                     </p>
                 </div>
             @endslot

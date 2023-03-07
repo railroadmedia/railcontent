@@ -8,7 +8,7 @@
     <meta property="og:description" content="We can’t wait to see your submission. Don’t be shy! Submit today!">
 
     <meta property="og:url" content="https://www.singeo.com/recitals/">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
 
     @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
@@ -220,7 +220,7 @@
             <a class="join blue smaller anchor-slide my-5 md:my-7" href="#form">Submit Now &raquo;</a>
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-4xl">
                 <div class="flex flex-wrap items-start flex-image mx-auto w-full md:w-4/12 lg:w-5/12 md:order-1 mb-5 md:mb-0 justify-center">
-                    <img class="h-60 md:h-auto" src="https://singeo.s3.amazonaws.com/sales/promos/november/recitals-spread.png">
+                    <img class="h-60 md:h-auto" src="https://d21xeg6s76swyd.cloudfront.net/sales/promos/november/recitals-spread.png">
                 </div>
                 <div class="text-left md:pr-3 lg:pr-8 w-full md:w-8/12 lg:w-7/12">
                     <p class="mx-auto">This community has grown so much this year, and we have so much to celebrate.
@@ -244,7 +244,7 @@
             </div>
         </div>
     </section>
-    <section class="py-5 md:py-10 lg:py-16" style="background:#000 url(https://singeo.s3.amazonaws.com/sales/promos/november/recitals-bg.jpg) center center/cover;">
+    <section class="py-5 md:py-10 lg:py-16" style="background:#000 url(https://d21xeg6s76swyd.cloudfront.net/sales/promos/november/recitals-bg.jpg) center center/cover;">
         <div class="container mx-auto max-w-3xl">
             <div id="form" class="anchor"></div>
             <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLSfXmMAynu5wgCebw2OOYKusI6yZbvcQYj2sIvX6DV_HbB2UkQ/viewform?embedded=true" height="2177" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>

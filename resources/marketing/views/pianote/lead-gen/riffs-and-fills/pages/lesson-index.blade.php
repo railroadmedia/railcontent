@@ -21,8 +21,8 @@
             <h5 class="mx-auto leading-normal max-w-xl lg:max-w-2xl">Anyone can play a chord -- but what happens in the spaces between the chords is what will really make your playing stand out!
                 <br><br>
                 Fill those spaces with piano riffs that will make you sound professional, polished ... and close to perfect. Learn the secrets and tips to play fills that sound complicated and advanced, but are actually very simple to learn and start adding to your repertoire.</h5>
-            <a class="join smaller mt-6" href="https://pianote.s3.amazonaws.com/lead-gen/riffs-and-fills/pfr-building-your-foundation-w-chord-inversions.pdf">Download Chord Inversions PDF</a>
-            <a class="join smaller mt-6" href="https://pianote.s3.amazonaws.com/lead-gen/riffs-and-fills/pfr-let-it-be-the-beatles.pdf">Download Let It Be PDF</a>
+            <a class="join smaller mt-6" href="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/riffs-and-fills/pfr-building-your-foundation-w-chord-inversions.pdf">Download Chord Inversions PDF</a>
+            <a class="join smaller mt-6" href="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/riffs-and-fills/pfr-let-it-be-the-beatles.pdf">Download Let It Be PDF</a>
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-xs md:max-w-xl lg:max-w-6xl px-6 md:px-2 my-12">
                 <a href="/riffs-and-fills/lessons/1" class="px-2 md:px-4 w-full md:w-1/2 lg:w-1/3 mb-7">
                     <div class="aspect-16:9 border-4 rounded-xl w-full bg-cover bg-black bg-center mb-2 cursor-pointer hover:opacity-90 transition-opacity duration-300 relative" style="background-image:url(https://www.musora.com/musora-cdn/image/width=350,q_60,quality=85/https://d1923uyy6spedc.cloudfront.net/255245-card-thumbnail-maxres-1588770771.jpg);"></div>

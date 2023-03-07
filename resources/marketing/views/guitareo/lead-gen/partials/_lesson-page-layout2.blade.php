@@ -79,7 +79,7 @@
             @endif
             @include('guitareo.lead-gen.free-acoustic-guitar-lessons._assignment-resources', [
                 "title" => "Course Resources",
-                "zipURL" => "https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/getting-started-on-the-acoustic-guitar.zip"
+                "zipURL" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/getting-started-on-the-acoustic-guitar.zip"
             ])
         </div>
     </div>

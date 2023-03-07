@@ -7,7 +7,7 @@
     <meta name="description" content="Your spot is confirmed! Thanks for RSVPing for our Guitareo New Student Welcome Party!">
     <meta property="og:description" content="Your spot is confirmed! Thanks for RSVPing for our Guitareo New Student Welcome Party!">
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1400,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/welcome-party-kent.jpg"/>
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1400,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/welcome-party-kent.jpg"/>
     <meta property="og:url" content="https://www.guitareo.com/welcome-party/">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
@@ -99,7 +99,7 @@
     <div class="title-wrap">
         <div class="container mx-auto">
             <div class="text-wrap">
-                <img class="w-full rounded-xl" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/welcome-party-kent.jpg">
+                <img class="w-full rounded-xl" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/welcome-party-kent.jpg">
                 <h1>Thanks for confirming!</h1>
                 <p>Your spot is confirmed! Thanks for RSVPing for our Guitareo New Student Welcome Party! We are all so excited to welcome you into the Guitareo community. Kent (your in-house coach) is really looking forward to meeting you and eager to chat about the incredible things you will learn to play on the guitar!
                    <br><br>

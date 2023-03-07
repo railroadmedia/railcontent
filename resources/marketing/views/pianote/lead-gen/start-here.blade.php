@@ -8,7 +8,7 @@
     <meta name="description" content="Get started on the right foot (or rather hand!) with free piano lessons.">
     <meta property="og:description" content="Get started on the right foot (or rather hand!) with free piano lessons.">
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https:/pianote.s3.amazonaws.com/lead-gen/start-here/header_image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https:/d2vyvo0tyx8ig5.cloudfront.net/lead-gen/start-here/header_image.jpg">
     <meta property="og:url" content="https://www.pianote.com/blog/start-here">
 @endsection
 
@@ -270,7 +270,7 @@
     <div class="beat-navigation drumeo">
         <div class="row">
             <a href="/blog/" class="nav-item active">
-                <img alt="The Note" src="https://pianote.s3.amazonaws.com/blog/the-note-logo.svg">
+                <img alt="The Note" src="https://d2vyvo0tyx8ig5.cloudfront.net/blog/the-note-logo.svg">
             </a>
             <a href="/start-here" class="nav-item show-for-medium">
                 START HERE</a>
@@ -294,7 +294,7 @@
                 ARTICLES</a>
         </div>
     </div>
-    <header class="text-center sm:text-left relative bg-cover px-6 md:px-10 pt-72 pb-8 md:py-36 lg:py-40 bg-cover bg-right sm:bg-left lazyload" style="background-color:#00101D;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://pianote.s3.amazonaws.com/lead-gen/start-here/header2.jpg">
+    <header class="text-center sm:text-left relative bg-cover px-6 md:px-10 pt-72 pb-8 md:py-36 lg:py-40 bg-cover bg-right sm:bg-left lazyload" style="background-color:#00101D;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/start-here/header2.jpg">
         <div class="relative z-10 max-w-md md:max-w-5xl mx-auto">
             <h2 class="text-white font-extrabold">
                 Begin Your Piano <br>

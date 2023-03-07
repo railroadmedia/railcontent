@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://www.singeo.com/method">
     <meta name="description" content="1000+ popular song breakdowns for every style, era, and skill level with handy play-along tools.">
     <meta property="og:description" content="1000+ popular song breakdowns for every style, era, and skill level with handy play-along tools.">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2023/share-image-songs.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2023/share-image-songs.jpg" style="display: none;">
 @endsection
 
 @section('body-data')
@@ -19,7 +19,7 @@
     }'
 @endsection
 
-@section('header-img', 'https://singeo.s3.amazonaws.com/sales/2023/songs-thumb.jpg')
+@section('header-img', 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/songs-thumb.jpg')
 
 @section('header', 'Sing your favorite songs. ')
 

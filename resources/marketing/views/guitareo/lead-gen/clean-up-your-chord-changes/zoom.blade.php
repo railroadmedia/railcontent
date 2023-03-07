@@ -6,7 +6,7 @@
     <meta name="description" content="Join this 60-minute LIVE guitar lesson with Ayla Tesler-Mabe and Kent Shores"/>
     <meta property="og:description" content="Join this 60-minute LIVE guitar lesson with Ayla Tesler-Mabe and Kent Shores">
 
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/share_image.jpg">
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/share_image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/clean-up-chords/">
 
     @parent
@@ -20,14 +20,14 @@
         }
 
         .header {
-            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/header_bg_m.png');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/header_bg_m.png');
         }
 
 
         @media (min-width:768px) {
 
             .header {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/header_bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/header_bg.jpg');
             }
         }
         .join.medium {
@@ -50,7 +50,7 @@
             <div class="flex flex-wrap items-center">
                 <div class="w-full md:w-7/12 lg:w-2/3 md:text-left">
                     <div class="mt-56 md:mt-0 pl-2 sm:pl-3">
-                        <img class="h-28 lg:h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://guitareo.s3.amazonaws.com/lead-gen/clean-up-chords/logo.png" alt="logo">
+                        <img class="h-28 lg:h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/clean-up-chords/logo.png" alt="logo">
                         <p class="hidden md:block leading-tight mt-4">
                             <em>Join this 60-minute LIVE guitar lesson with Ayla Tesler-Mabe and Kent Shores</em>
                         </p>

@@ -5,13 +5,13 @@
         $badge = 'https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png';
     }
     elseif($theme === 'pianote') {
-        $badge = 'https://pianote.s3.amazonaws.com/sales/guarantee-badge.png';
+        $badge = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/guarantee-badge.png';
     }
     elseif($theme === 'singeo') {
-        $badge = 'https://singeo.s3.amazonaws.com/sales/2021/guarantee.png';
+        $badge = 'https://d21xeg6s76swyd.cloudfront.net/sales/2021/guarantee.png';
     }
     elseif($theme === 'guitareo') {
-        $badge = 'https://guitareo.s3.amazonaws.com/sales/guitareo-guarantee.png';
+        $badge = 'https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-guarantee.png';
     }
 ?>
 

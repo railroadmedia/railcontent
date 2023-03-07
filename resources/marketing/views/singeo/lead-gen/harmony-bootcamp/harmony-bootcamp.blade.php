@@ -2,32 +2,32 @@
     $steps = [
           [
               'position' => 'left',
-              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/step1.jpg',
+              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/step1.jpg',
               'desc' => 'Enter your email address. It’s free. <br class="hidden md:inline">That’s right - 100% free!'
           ],
           [
               'position' => 'right',
-              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/step2.jpg',
+              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/step2.jpg',
               'desc' => 'Get your Email invitation to the livestream.'
           ],
           [
               'position' => 'left',
-              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/step3.jpg',
+              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/step3.jpg',
               'desc' => 'Log in for your 60-minute LIVE lessons with Lisa.'
           ],
           [
               'position' => 'right',
-              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/step4.jpg',
+              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/step4.jpg',
               'desc' => 'Get your downloadable resources, practice tips, and connect with Lisa.'
           ],
           [
               'position' => 'left',
-              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/step5.jpg',
+              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/step5.jpg',
               'desc' => 'Post your progress <br class="hidden md:inline">(if you want - it’s totally up to you).'
           ],
           [
               'position' => 'right',
-              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/step6.jpg',
+              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/step6.jpg',
               'desc' => 'Sing INCREDIBLE harmonies!'
           ],
       ];
@@ -41,7 +41,7 @@
     <meta property="og:title" content="Harmony Bootcamp | Singeo">
     <meta name="description" content="Learn how to sing beautiful harmonies with this FREE singing lesson from a vocal coach."/>
     <meta property="og:description" content="Learn how to sing beautiful harmonies with this FREE singing lesson from a vocal coach.">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/fb_share_image.jpg">
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/fb_share_image.jpg">
     <meta property="og:url" content="https://www.singeo.com/live-bootcamp/">
 
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
@@ -54,7 +54,7 @@
         .header {
             background-position: top;
             background-size: cover;
-            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/header_m.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/header_m.jpg');
         }
 
         .text-yellow {
@@ -117,7 +117,7 @@
 
         @media (min-width: 768px) {
             .header {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/header_bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/header_bg.jpg');
                 background-size: 1910px;
             }
 
@@ -163,7 +163,7 @@
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
             <div class="flex flex-wrap items-center">
                 <div class="w-full md:w-2/3 lg:w-1/2 md:text-left mt-40 md:mt-0">
-                    <img class="h-28 sm:h-36 lg:h-40 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=840,quality=85/https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/logo.png" alt="logo">
+                    <img class="h-28 sm:h-36 lg:h-40 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=840,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/logo.png" alt="logo">
                     <h5 class="mt-2 md:mt-5 sub-header mb-5">
                         <strong class="font-extrabold">Free 60-minute LIVE vocal training</strong> <br class="sm:hidden">with Lisa Witt
                     </h5>
@@ -206,7 +206,7 @@
                         Like any other skill, with some time, training and practice… and the right guidance… ANYONE can learn to sing beautiful harmonies.
                     </p>
                 </div>
-                <img class="rounded-xl sm:w-2/3 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/intro_image.jpg" alt="intro image">
+                <img class="rounded-xl sm:w-2/3 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/intro_image.jpg" alt="intro image">
             </div>
         </div>
     </section>
@@ -220,21 +220,21 @@
                 </h4>
                 <div class="flex flex-col md:flex-row md:gap-10 lg:gap-13 mb-10">
                     <div class="md:w-1/3 mb-8 md:mb-0">
-                        <img class="h-12 md:h-16" src="https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/mic_icon.svg" alt="ear icon">
+                        <img class="h-12 md:h-16" src="https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/mic_icon.svg" alt="ear icon">
                         <h4 class="font-extrabold mb-1 md:mb-2 mt-3 leading-tight">1. Sing your first <br>harmony</h4>
                         <p class="max-w-xs md:max-w-full lg:leading-loose" style="color:#6A6868;">
                             You’ll be singing your first harmony within the first 15 minutes of the lesson!
                         </p>
                     </div>
                     <div class="md:w-1/3 mb-8 md:mb-0">
-                        <img class="h-12 md:h-16" src="https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/choir_icon.svg" alt="hurts icon">
+                        <img class="h-12 md:h-16" src="https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/choir_icon.svg" alt="hurts icon">
                         <h4 class="font-extrabold mb-1 md:mb-2 mt-3 leading-tight">2. Understand <br>harmonies work</h4>
                         <p class="max-w-xs md:max-w-full lg:leading-loose" style="color:#6A6868;">
                             Learn easy techniques to find the right notes in perfect harmony.
                         </p>
                     </div>
                     <div class="md:w-1/3">
-                        <img class="h-12 md:h-16" src="https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/music_icon.svg" alt="bad song icon">
+                        <img class="h-12 md:h-16" src="https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/music_icon.svg" alt="bad song icon">
                         <h4 class="font-extrabold mb-1 md:mb-2 mt-3 leading-tight">3. Harmonize with <br>any melody </h4>
                         <p class="max-w-xs md:max-w-full lg:leading-loose" style="color:#6A6868;">
                             Apply your new knowledge to any melody and create the extraordinary!
@@ -292,7 +292,7 @@
     <section class="px-4 py-12 sm:py-20">
         <div class="max-w-md sm:max-w-3xl lg:max-w-6xl mx-auto">
             <div class="sm:grid sm:grid-cols-2 items-center text-center">
-                <img class="rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=660,quality=85/https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/ui.png" alt="intro image">
+                <img class="rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=660,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/ui.png" alt="intro image">
                 <div class="inline-flex flex-col text-left">
                     <h3 class="font-extrabold mb-4 sm:mb-6 leading-tight text-left mx-0">
                         These aren’t <br>
@@ -314,7 +314,7 @@
     <section class="px-4 py-14 sm:py-20 md:pb-32 bg-musora-black">
         <div class="max-w-3xl lg:max-w-4xl mx-auto text-white relative">
             <div class="w-3/4 sm:w-2/3 mx-auto relative md:static text-center mb-8">
-                <img class="md:w-80 lg:w-96 md:absolute -bottom-10 right-2 md:border-8 rounded-3xl md:border-solid border-musora-black lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/coach_image.png" alt="coach image">
+                <img class="md:w-80 lg:w-96 md:absolute -bottom-10 right-2 md:border-8 rounded-3xl md:border-solid border-musora-black lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/coach_image.png" alt="coach image">
             </div>
 
             <div class="mx-auto md:mx-0 max-w-md sm:max-w-lg md:max-w-full md:w-2/3 rounded-xl p-4 sm:p-10 md:py-10 md:pl-8 md:pr-24 lg:p-12 lg:pr-28" style="background:#8300E9;">
@@ -332,9 +332,9 @@
         </div>
     </section>
 
-    <section class="py-20 bg-cover lazyload" style="background-position: 25% 50%;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/footer_bg_d.jpg">
+    <section class="py-20 bg-cover lazyload" style="background-position: 25% 50%;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/footer_bg_d.jpg">
         <div class="max-w-2xl lg:max-w-3xl mx-auto text-center text-white px-4">
-            <img class="mb-4 h-28 md:h-36 lg:h-40 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=840,quality=85/https://singeo.s3.amazonaws.com/lead-gen/harmony-bootcamp/logo.png" alt="logo">
+            <img class="mb-4 h-28 md:h-36 lg:h-40 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=840,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/logo.png" alt="logo">
             <h5 class="mb-2">
                 <strong class="font-extrabold">Get free LIVE vocal training</strong> with Lisa Witt
             </h5>

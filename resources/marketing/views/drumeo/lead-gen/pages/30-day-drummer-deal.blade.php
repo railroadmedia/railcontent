@@ -326,7 +326,7 @@
             </h3>
             <div class="flex items-center">
                 <div class="md:w-7/12 text-center">
-                    <img class="h-80 mb-4 md:hidden lazyload" data-src="https://pianote.s3.amazonaws.com/giveaways/ui.png" alt="ui">
+                    <img class="h-80 mb-4 md:hidden lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/ui.png" alt="ui">
                     <p class="text-left">
                         Domino will help you get settled into your Drumeo membership and show you how to:
                     </p>

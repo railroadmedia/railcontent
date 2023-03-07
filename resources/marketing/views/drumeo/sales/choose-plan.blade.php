@@ -53,7 +53,7 @@
     ])
     @include('musora.sales.components.plans-different-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo-dark.svg",
-        "logo" => "https://musora-center.s3.amazonaws.com/logos/drumeo-logo.png",
+        "logo" => "https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo.png",
         "secondPoint" => "200+ courses with legendary teachers",
         "thirdPoint" => "Go beyond drums with lessons for piano, guitar, and singing.",
         "fifthPoint" => "Thousands of songs transcribed w/ playback tools for all instruments.",

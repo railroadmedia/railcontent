@@ -41,7 +41,7 @@
         </div>
 
         @include('partials.content._guitar-quest-pack', [
-            'itemThumbnail' => 'https://www.musora.com/musora-cdn/image/width=2500,q_60,quality=85/https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background.jpg',
+            'itemThumbnail' => 'https://www.musora.com/musora-cdn/image/width=2500,q_60,quality=85/https://d122ay5chh2hr5.cloudfront.net/shop/card-thumbs/guitar-quest-background.jpg',
             'logoImage' => $guitarQuestPack->fetch('data.logo_image_url'),
             'nextItemUrl' => $guitarQuestPack->fetch('next_lesson_url'),
             'lessonsUrl' => $guitarQuestPack->fetch('url'),

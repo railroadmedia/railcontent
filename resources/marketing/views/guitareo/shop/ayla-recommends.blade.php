@@ -9,7 +9,7 @@
     <meta name="description" content="You can peruse Ayla’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views -- and gotten the Guitareo stamp of approval!">
     <meta property="og:description" content="You can peruse Ayla’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views -- and gotten the Guitareo stamp of approval!">
 
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg">
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-guitareo.jpg">
     <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">
 @stop()
 
@@ -41,7 +41,7 @@
 @section('content')
     @include('guitareo.sales.partials._nav')
 
-    <header class="relative text-white text-center bg-cover bg-top pb-8 md:pb-12 lg:pb-16 pt-40 md:pt-64 lg:pt-96 px-4 bg-musora-black" style="background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://guitareo.s3.amazonaws.com/shop/affiliate-header.jpg);">
+    <header class="relative text-white text-center bg-cover bg-top pb-8 md:pb-12 lg:pb-16 pt-40 md:pt-64 lg:pt-96 px-4 bg-musora-black" style="background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/shop/affiliate-header.jpg);">
         <div class="container mx-auto relative z-10">
             <h1 class="lg:mt-10"><strong>Ayla’s Top Gear Picks</strong></h1>
             <h5 class="mt-3 md:mt-5 mb-3 md:mb-4">WE RECOMMEND:</h5>

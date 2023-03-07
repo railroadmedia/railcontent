@@ -7,15 +7,15 @@
     <meta property="og:title" content="How To Stop Hating Your Voice">
     <meta name="description" content="Learn to love your voice in 3 easy lessons!"/>
     <meta property="og:description" content="Learn to love your voice in 3 easy lessons!">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=85/https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/fb-share-image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/fb-share-image.jpg">
     <meta property="og:url" content="https://www.singeo.com/stop-hating-your-voice/">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
 @stop
 
 @section('body')
-    <header class="header text-center text-white py-10 md:py-18 px-4 bg-center bg-no-repeat relative" style="background-color:#010519; background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/order-bg.jpg);">
+    <header class="header text-center text-white py-10 md:py-18 px-4 bg-center bg-no-repeat relative" style="background-color:#010519; background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/order-bg.jpg);">
         <div class="container mx-auto relative z-10 max-w-4xl">
-            <img class="h-16 md:h-24 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/logo.png">
+            <img class="h-16 md:h-24 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/logo.png">
         </div>
     </header>
 
@@ -25,19 +25,19 @@
             @php
                 $lessons = [
                     [
-                        'img' => 'https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/thumb-1.png',
+                        'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-1.png',
                         'title' => 'IT’S NORMAL!',
                         'desc' => 'Everyone hates their voice. But it’s completely normal! In this lesson, you’ll learn the ONE thing you can do that will instantly make you sound better.',
                         'href' => '/stop-hating-your-voice/lessons/1'
                     ],
                     [
-                        'img' => 'https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/thumb-2.png',
+                        'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-2.png',
                         'title' => 'GET CONTROL',
                         'desc' => 'Your voice uses muscles. And when you strengthen them, you gain control of how you sound. This lesson will show you how to sing stronger, and sound better.',
                         'href' => '/stop-hating-your-voice/lessons/2'
                     ],
                     [
-                        'img' => 'https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/thumb-3.png',
+                        'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-3.png',
                         'title' => 'FIND YOUR NEW VOICE',
                         'desc' => 'Put your exercises to work and sing a real song. Notice how much better and more confident you’ll sound after only a few short lessons!',
                         'href' => '/stop-hating-your-voice/lessons/3'
@@ -61,10 +61,10 @@
             </div>
         </div>
     </div>
-    <section class="text-center py-12 md:py-20 text-white bg-center bg-cover lazyload" style="background-color:#030d17;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://singeo.s3.amazonaws.com/products/singing-starter-kit/final-bg.jpg">
+    <section class="text-center py-12 md:py-20 text-white bg-center bg-cover lazyload" style="background-color:#030d17;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/final-bg.jpg">
         <div class="container mx-auto">
             <div class="w-full px-3 md:px-4 text-center">
-                <img class="h-16 sm:h-20 lg:h-24 mb-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1300,q_60,quality=85/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png">
+                <img class="h-16 sm:h-20 lg:h-24 mb-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1300,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/logo.png">
                 <h3><strong>Put your beautiful new voice to work.</strong></h3>
                 <h5 class="mt-3 leading-normal">
                     Build your control, range, and confidence with the Singing Starter Kit.<br class="hidden sm:inline">
