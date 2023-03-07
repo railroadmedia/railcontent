@@ -224,6 +224,7 @@
     //-----------Lifecycle Methods-----------//
 
     onBeforeMount(() => {
+        console.log(props.lesson);
         state.isPinned = props.lesson.pinned;
         state.isPrivate = props.lesson.private;
     });
