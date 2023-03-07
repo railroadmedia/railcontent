@@ -36,8 +36,8 @@
                 This Employee Handbook outlines some basic guidelines for all staff working at Musora Media Inc. Keep in mind, these are simply guidelines and not meant to be a strict set of rules. Occasionally, you may operate outside of these guidelines, but it’s important to use these as a baseline set of standards.
             </p>
         </div>
-        <img class="hidden sm:inline-block mt-6 mb-16" src="https://musora-web-platform.s3.amazonaws.com/handbook/collage-header.png" alt="header img" />
-        <img class="sm:hidden mt-6 mb-16" src="https://musora-web-platform.s3.amazonaws.com/handbook/collage-header-m.png" alt="header img" />
+        <img class="hidden sm:inline-block mt-6 mb-16" src="https://d3fzm1tzeyr5n3.cloudfront.net/handbook/collage-header.png" alt="header img" />
+        <img class="sm:hidden mt-6 mb-16" src="https://d3fzm1tzeyr5n3.cloudfront.net/handbook/collage-header-m.png" alt="header img" />
         <div class="px-4 lg:px-0">
             <div class="header">Our mission (Why does this company exist?)</div>
             <p>
@@ -65,7 +65,7 @@
                 <li>We believe in a clean workspace, even if we have to clean up someone else’s mess.</li>
             </ol>
         </div>
-        <img class="mt-6 mb-16" src="https://musora-web-platform.s3.amazonaws.com/handbook/collage-1.png" alt="collage 1" />
+        <img class="mt-6 mb-16" src="https://d3fzm1tzeyr5n3.cloudfront.net/handbook/collage-1.png" alt="collage 1" />
         <div class="px-4 lg:px-0">
             <div class="header">Holiday</div>
             <p>
@@ -92,7 +92,7 @@
                 We are a team and we succeed or fail together. Please do your best to make this a positive, clean, and friendly work environment to be a part of.
             </p>
         </div>
-        <img class="mt-6 mb-16" src="https://musora-web-platform.s3.amazonaws.com/handbook/collage-2.png" alt="collage 2" />
+        <img class="mt-6 mb-16" src="https://d3fzm1tzeyr5n3.cloudfront.net/handbook/collage-2.png" alt="collage 2" />
         <div class="px-4 lg:px-0">
             <div class="header">Travel</div>
             <p>
@@ -126,7 +126,7 @@
                 <li>Overtime must be tracked using the process described in the said procedure.</li>
             </ul>
         </div>
-        <img class="mt-6 mb-16" src="https://musora-web-platform.s3.amazonaws.com/handbook/collage-3.png" alt="collage 3" />
+        <img class="mt-6 mb-16" src="https://d3fzm1tzeyr5n3.cloudfront.net/handbook/collage-3.png" alt="collage 3" />
         <div class="px-4 lg:px-0">
             <div class="header">Communication</div>
             <p>
