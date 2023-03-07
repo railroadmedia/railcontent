@@ -30,3 +30,31 @@ if (! function_exists('all_brands')) {
         return array_column(Brand::cases(), 'value');
     }
 }
+
+if (! function_exists('drumeo_cdn')) {
+    function drumeo_cdn($file)
+    {
+        return 'https://dpwjbsxqtam5n.cloudfront.net/' . $file;
+    }
+}
+
+if (! function_exists('pianote_cdn')) {
+    function pianote_cdn($file)
+    {
+        return 'https://d2vyvo0tyx8ig5.cloudfront.net/' . $file;
+    }
+}
+
+if (! function_exists('guitareo_cdn')) {
+    function guitareo_cdn($file)
+    {
+        return 'https://d122ay5chh2hr5.cloudfront.net/' . $file;
+    }
+}
+
+if (! function_exists('singeo_cdn')) {
+    function singeo_cdn($file)
+    {
+        return 'https://TODO.cloudfront.net/' . $file;
+    }
+}

@@ -8,7 +8,7 @@
     <meta property="og:description" content="We put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.">
 
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
+    <meta property="og:image" content="{{ drumeo_cdn('sales/2023/share-image-drumeo.jpg') }}" style="display: none;">
 
     @include('_partials.layout._fonts')
 
