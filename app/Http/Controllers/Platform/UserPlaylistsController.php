@@ -54,7 +54,8 @@ class UserPlaylistsController extends BaseController
             brand(),
             $limit,
             $page,
-            $term
+            $term,
+            $request->get('sortby_val', $request->get('sort', '-created_at'))
         );
 
         $playlistsNumber = $this->userPlaylistsService->countUserPlaylists(
@@ -63,8 +64,6 @@ class UserPlaylistsController extends BaseController
             brand(),
             $term
         );
-
-        $likedPlaylists = $this->userPlaylistsService->getLikedPlaylists(brand(), 5, 1);
 
         $currentUser = [
             "avatar" => user()->profile_picture_url,
@@ -80,7 +79,6 @@ class UserPlaylistsController extends BaseController
         return view('account.playlists', [
             "listLessons" => $listLessons,
             "playlists" => $lessons,
-            "likedPlaylists" => $likedPlaylists,
             "allowedTypes" => [],
             "resetProgress" => false,
             "initialPage" => $initialPage,
