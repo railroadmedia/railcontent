@@ -60,16 +60,20 @@ class UserPlaylistContentRepository extends RepositoryBase
             );
         }
 
-        if ($limit) {
-            $query->limit($limit)
-                ->skip(($page - 1) * $limit);
-        }
+
 
         $orderByColumn = trim($sort, '-');
         if ($orderByColumn == 'random') {
             $query = $query->inRandomOrder();
+            $limit = null;
+
         } else {
             $query = $query->orderBy(config('railcontent.table_prefix').'user_playlist_content.position', 'asc');
+        }
+
+        if ($limit) {
+            $query->limit($limit)
+                ->skip(($page - 1) * $limit);
         }
 
         $contentRows =
