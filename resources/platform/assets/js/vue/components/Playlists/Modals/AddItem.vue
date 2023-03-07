@@ -142,12 +142,12 @@ const handleScroll = (e) => {
     }
 }
 const getUserPlaylists = () => {
-    PlaylistService.getCurrentUserPlaylists({ brand: props.brand, page: pageNumber.value, limit: 10 }, token).then(r => {
+    PlaylistService.getCurrentUserPlaylists({ brand: props.brand, page: pageNumber.value, limit: 10, content_id: props.content.content_id}, token).then(r => {
         isLoadingPlaylists.value = false;
         const { data: { data } } = r;
         if (data.length) {
             const formattedTable = data.map((item) => {
-                const { name, thumbnail_url, duration_formated, id, created_at } = item;
+                const { name, thumbnail_url, duration_formated, id, created_at, user_playlist_item_id , is_added_to_playlist } = item;
                 const dateCreated = new Date(created_at);
                 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 const month = months[dateCreated.getMonth()];

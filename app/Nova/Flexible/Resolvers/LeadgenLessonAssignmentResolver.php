@@ -30,6 +30,11 @@ class LeadgenLessonAssignmentResolver implements ResolverInterface
 
             return $layout->duplicateAndHydrate($assignment->id, [
                 'title' => $assignment->title,
+                'subtitle' => $assignment->subtitle,
+                'src' => $assignment->src,
+                'soundslice' => $assignment->soundslice,
+                'id' => $assignment->id,
+                'leadgen_lesson_id' => $assignment->leadgen_lesson_id
             ],
             );
         })->filter();
@@ -49,6 +54,9 @@ class LeadgenLessonAssignmentResolver implements ResolverInterface
         $assignments = $groups->map(function($group, $index){
             return [
                 'title' => $group->getAttributes()['title'],
+                'subtitle' => $group->getAttributes()['subtitle'],
+                'src' => $group->getAttributes()['src'],
+                'soundslice' => $group->getAttributes()['soundslice'],
                 'id' => !empty($group->getAttributes()['id']) ? $group->getAttributes()['id'] : null,
             ];
         });
@@ -59,6 +67,9 @@ class LeadgenLessonAssignmentResolver implements ResolverInterface
                 $addAssignment = new LeadgenLessonAssignment();
                 $addAssignment->leadgen_lesson_id = $model->id;
                 $addAssignment->title = $assignment['title'];
+                $addAssignment->subtitle = $assignment['subtitle'];
+                $addAssignment->src = $assignment['src'];
+                $addAssignment->soundslice = $assignment['soundslice'];
                 $addAssignment->save();
                 $updatedIds[] = $addAssignment->id;
             }
@@ -70,6 +81,17 @@ class LeadgenLessonAssignmentResolver implements ResolverInterface
                     $dbAssignment->title = $assignment['title'];
                 }
 
+                if($dbAssignment['subtitle'] !== $assignment['subtitle']){
+                    $dbAssignment->subtitle = $assignment['subtitle'];
+                }
+
+                if($dbAssignment['src'] !== $assignment['src']){
+                    $dbAssignment->src = $assignment['src'];
+                }
+
+                if($dbAssignment['soundslice'] !== $assignment['soundslice']){
+                    $dbAssignment->soundslice = $assignment['soundslice'];
+                }
 
                 $dbAssignment->save();
                 $updatedIds[] = $assignment['id'];

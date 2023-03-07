@@ -1292,48 +1292,6 @@ h1, h2, h3, h4, h5, h6 {
                 }
             }
         }
-
-        .author-box {
-            border-top: 1px solid #BBB;
-            width: 100%;
-            margin: 40px auto 0;
-            padding: 30px 15px;
-            text-align: center;
-            @include tablet {
-                text-align: left;
-                display: flex;
-                align-items: center;
-                margin: 40px auto 0;
-                padding: 30px 0;
-            }
-            @include desktop {
-                margin: 60px auto 0;
-                padding: 50px 0;
-
-            }
-
-            img {
-                border-radius: 1000px;
-                margin: 0 auto 15px;
-                width: 100px;
-                @include tablet {
-                    margin: 0 auto;
-                    width: 135px;
-                }
-            }
-
-            p {
-                font: 400 13px/1.6em $opensans;
-                margin: 0 auto !important;
-                @include tablet {
-                    padding-left: 30px;
-                    font-size: 15px;
-                }
-                @include desktop {
-                    font-size: 16px;
-                }
-            }
-        }
     }
 
     &.homepage .white-box .post-grid.full-width .post-tile {
@@ -1597,6 +1555,51 @@ h1, h2, h3, h4, h5, h6 {
             &.alignright {
                 @include tablet {
                     margin: 10px 0 20px 20px;
+                }
+            }
+        }
+
+        .author-box {
+            border-top: 1px solid #BBB;
+            width: 100%;
+            margin: 40px auto 0;
+            padding: 30px 15px;
+            text-align: center;
+            @include tablet {
+                text-align: left;
+                display: flex;
+                align-items: center;
+                margin: 40px auto 0;
+                padding: 30px 0;
+            }
+            @include desktop {
+                margin: 60px auto 0;
+                padding: 50px 0;
+
+            }
+
+            img {
+                border-radius: 1000px;
+                margin: 0 auto 15px;
+                width: 100px;
+                height:100px;
+                object-fit: cover;
+                @include tablet {
+                    margin: 0 auto;
+                    width: 135px;
+                    height:135px;
+                }
+            }
+
+            p {
+                font: 400 13px/1.6em $opensans;
+                margin: 0 auto !important;
+                @include tablet {
+                    padding-left: 30px;
+                    font-size: 15px;
+                }
+                @include desktop {
+                    font-size: 16px;
                 }
             }
         }

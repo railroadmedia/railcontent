@@ -7195,12 +7195,12 @@ li, p {
     line-height: 2 !important;
   }
 
-  .md\:leading-9 {
-    line-height: 2.25rem !important;
-  }
-
   .md\:leading-none {
     line-height: 1 !important;
+  }
+
+  .md\:leading-9 {
+    line-height: 2.25rem !important;
   }
 
   .md\:leading-tight {
@@ -8240,6 +8240,11 @@ li, p {
     padding-bottom: 1.75rem !important;
   }
 
+  .lg\:px-1 {
+    padding-left: 0.25rem !important;
+    padding-right: 0.25rem !important;
+  }
+
   .lg\:py-64 {
     padding-top: 16rem !important;
     padding-bottom: 16rem !important;
@@ -8268,11 +8273,6 @@ li, p {
   .lg\:py-44 {
     padding-top: 11rem !important;
     padding-bottom: 11rem !important;
-  }
-
-  .lg\:px-1 {
-    padding-left: 0.25rem !important;
-    padding-right: 0.25rem !important;
   }
 
   .lg\:px-2\.5 {

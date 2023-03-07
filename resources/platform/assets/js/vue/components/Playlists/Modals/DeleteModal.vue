@@ -90,7 +90,7 @@
         //Delete from UI First
         playlistsStore.deletePlaylistItem(props.data, props.index);
         //Send Request
-        PlaylistService.deletePlaylistItem(props.data.id, token)
+        PlaylistService.deletePlaylistItem(props.data.user_playlist_item_id, token)
             .then(function(response) {
                 if (response.status === 200) {   
                     //show success message

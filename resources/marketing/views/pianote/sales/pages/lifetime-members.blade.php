@@ -9,7 +9,7 @@
     <meta property="og:description" content="Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.">
     <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
@@ -89,9 +89,16 @@
     </style>
 @stop
 
+@section('body-data')
+    x-data ='{
+        trailer : false,
+    }'
+@endsection
+
 @section('global-body')
     @include('pianote.sales.partials._nav', [
-    "subscriptionVersion" => true,
+        "subscriptionVersion" => true,
+        "scrollToJoin" => true
     ])
     {{--<style>--}}
     {{--.promo-banner-shim{display:block;width:100%;height:40px}--}}
@@ -116,10 +123,18 @@
             <h1 class="font-bebas">LOCK IN A <span class="text-coaches">LIFETIME OF PIANO LESSONS!</span></h1>
             <h6 class="leading-tight"><strong>PAY ONCE. ENJOY LESSONS FOREVER.</strong></h6>
             <div class="w-full mx-auto mt-10 mb-20 px-3" style="max-width:920px;">
-                <div class="aspect-16:9 w-full relative">
-                    {{-- TODO swap vimeo when headphones are sold out: 803663213--}}
-                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/803662615" frameborder="0" allowfullscreen allow="autoplay" title="promo video"></iframe>
-                </div>
+                <img
+                    class="cursor-pointer"
+                    src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/thumb.jpg"
+                    alt="Video thumbnail"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    @click="trailer = true"
+                />
+{{--                <div class="aspect-16:9 w-full relative">--}}
+{{--                    --}}{{-- TODO swap vimeo when headphones are sold out: 803663213--}}
+{{--                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/803662615" frameborder="0" allowfullscreen allow="autoplay" title="promo video"></iframe>--}}
+{{--                </div>--}}
             </div>
 
             {{--            @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability() > 0)--}}
@@ -274,13 +289,6 @@
                             'feature' => "Free Shipping",
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-songbook-card.jpg',
-                            'title' => 'Christmas Book',
-                            'description' => 'Learn these 10 beautiful Christmas Carols.',
-                            'price' => 10,
-                            'feature' => "Instant Access",
-                        ],
-                        [
                             'image' => 'https://pianote.s3.amazonaws.com/shop/products/2021-merch/card-chords-poster.jpg',
                             'title' => 'Chords Poster',
                             'description' => 'Always know your chord shapes with this helpful poster.',
@@ -295,11 +303,25 @@
                             'feature' => "Free Shipping",
                         ],
                         [
+                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-songbook-card.jpg',
+                            'title' => 'Christmas Book',
+                            'description' => 'Learn these 10 beautiful Christmas Carols.',
+                            'price' => 10,
+                            'feature' => "Instant Access",
+                        ],
+                        [
                             'image' => 'https://pianote.s3.amazonaws.com/sales/2022/Lisa-zoom-live-card.jpg',
                             'title' => 'Exclusive Masterclass',
                             'description' => 'Join Lisa in an exclusive LIVE Zoom masterclass to get your questions answered.',
                             'price' => -1,
                             'feature' => "<b class='text-promo'>Exclusive</b> <br>Masterclass",
+                        ],
+                        [
+                            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/9-digital-courses-card.jpg',
+                            'title' => 'Training Packs',
+                            'description' => 'Get 9 digital courses for life. Even if you cancel your membership. They’re yours forever.',
+                            'price' => 716,
+                            'feature' => "Lifetime Access",
                         ],
                         [
                             'image' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/guitareo-lifetime.jpg',
@@ -320,13 +342,6 @@
                             'title' => 'Singeo Membership',
                             'description' => 'Get singing lessons for LIFE with a Singeo Lifetime Membership',
                             'price' => 0,
-                            'feature' => "Lifetime Access",
-                        ],
-                        [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/9-digital-courses-card.jpg',
-                            'title' => 'Training Packs',
-                            'description' => 'Get 9 digital courses for life. Even if you cancel your membership. They’re yours forever.',
-                            'price' => 716,
                             'feature' => "Lifetime Access",
                         ],
                     ]
@@ -372,12 +387,42 @@
 
             @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability() > 0)
                 <a  href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[classical-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true"
-                                        class="join methodcta my-4" style="background:#FB0188;">Become A lifetime Member &raquo;</a>
+                    class="join pianote my-4">Become A lifetime Member &raquo;</a>
                 <p>Only @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() < 100)<s>100</s>@endif {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} spots remaining!</p>
             {{--<p>(Or choose a payment plan on the next page.)</p>--}}
             @else
                 <span class="join sold-out methodcta my-4">Sold Out</span>
             @endif
+        </div>
+    </section>
+    @php
+        $faqs = [
+            [
+                "title" => "How long does my lifetime membership last?",
+                "desc" => 'Simply, for life! Either yours or ours. Your Lifetime Membership is valid as long as Pianote (Musora) remains in service and you stay alive.',
+            ],
+            [
+                "title" => "What happens if Pianote or Musora’s service ends?",
+                "desc" => 'We’ll make every effort to provide Lifetime Members with all the original media content we have created available for download. That way, you can continue to enjoy everything we’ve done.<br><br>This will cover all available Musora original content (our entire curriculum and courses) but will not include and 3rd party content that we do not own rights to.',
+            ],
+            [
+                "title" => "What content is included with my Lifetime Membership? Are songs included?",
+                "desc" => 'As a Lifetime Member, you get access to all original Musora content for life. That’s all our courses, the Method, Live lessons, Student Reviews, and the forums.<br><br>Some of our content is licensed by 3rd parties, which means we have to pay a fee for each member to use the material on a temporary basis. This includes song transcriptions.<br><br>Those songs are licensed and require an additional fee for ongoing access. We wish it wasn’t the case and have done our best to make the fee as small as possible. Currently, the fee is $40/year for Lifetime Members.<br><br>To put that in context, that’s $40/year for ALL the song transcriptions inside Musora (Pianote, Guitareo, Singeo, and Drumeo). You’ll get access to thousands of officially licensed song transcriptions for the price of one songbook a year.',
+            ],
+        ]
+    @endphp
+
+    <div id="faq" class="anchor"></div>
+    <section class="py-12 md:py-20" style="background: #000;">
+        <div class="container mx-auto max-w-5xl px-6">
+            <h2 class="font-extrabold mb-10 text-center text-white">Frequently Asked Questions</h2>
+            @foreach($faqs as $faq)
+                @include('_partials.components.question-dropdown', [
+                    'num' => '?',
+                    "title" => $faq['title'],
+                    "desc" => $faq['desc'],
+                ])
+            @endforeach
         </div>
     </section>
     <section class="content-section text-center" style="background: #040c1b;">
@@ -401,6 +446,12 @@
     @include('pianote.lead-gen.partials.video-player',[
         "name" => "unbox",
         "vimeoId" => "774408046",
+    ])
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '803662615',
+        'vimeo' => true,
     ])
     @include('pianote.sales.partials._footer')
 
