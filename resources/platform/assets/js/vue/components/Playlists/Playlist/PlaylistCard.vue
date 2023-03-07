@@ -34,7 +34,7 @@
     
     //Thumbnail
     const lessonThumbnail = computed( () => {
-        const thumbnail = props.lesson.data.find(data => data.key === 'original_thumbnail_url');
+        const thumbnail = props.lesson.find(data => data.key === 'original_thumbnail_url');
         return props.lesson.thumbnail_url || thumbnail.value;
     })
     //Description
@@ -224,6 +224,7 @@
     //-----------Lifecycle Methods-----------//
 
     onBeforeMount(() => {
+        console.log(props.lesson)
         state.isPinned = props.lesson.pinned;
         state.isPrivate = props.lesson.private;
     });

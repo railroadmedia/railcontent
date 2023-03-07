@@ -43,7 +43,7 @@
         isListView: false,
         showControls: true,
         searchTerm: '',
-        sortbyValue: '',
+        sortValue: '',
     })
 
     //----------Methods----------//
@@ -68,11 +68,19 @@
             playlistsStore.playlists = props.playlists;
         } else {
             playlistsStore.loadingPlaylists = true;
-            playlistsStore.getPlaylists({ brand: brand, page: 1, limit: null }, token); 
+            playlistsStore.getPlaylists(
+                { 
+                    brand: brand, 
+                    page: 1, 
+                    limit: null,
+                    term: state.searchTerm,
+                    sort: state.sortValue,
+                }, token); 
         }
     })
 
-    onBeforeMount(() => {      
+    onBeforeMount(() => {  
+        console.log(props.playlists)    
         //Get Local Storage Value
         if (!props.miniCatalog) {
             if(localStorage.getItem('playlistIsListView')) {
@@ -84,9 +92,11 @@
         const params = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
         });
+        
         //Set resultsPage
         playlistsStore.resultsPage = Number(params.page || 1);
         state.searchTerm = params.search || '';
+        state.sortValue = params.sortby_val || '-created_at';
     });
 
     onUpdated(()=> {
@@ -95,7 +105,7 @@
             get: (searchParams, prop) => searchParams.get(prop),
         });
         state.searchTerm = params.search || '';
-        state.sortbyValue = params.sortby_val || '-created_at';
+        state.sortValue = params.sortby_val || '-created_at';
     })
 
     //-----------Watchers-----------//

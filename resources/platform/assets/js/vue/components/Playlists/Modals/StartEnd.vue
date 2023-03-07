@@ -101,16 +101,11 @@
         PlaylistService.updatePlaylistItem(payload, token)
             .then(function(response) {
                 if (response.status === 201) {
-                    // playlistsStore.loadingItems = true;
                     //show success message
                     window.shownotification({
                         icon: 'fa-pen-to-square',
                         text: `You have successfully set the Start and End time of '${state.title}'`
-                    })
-                    //load Playlists
-                    // playlistsStore.getPlaylistItems({ 
-                    //     playlist_id: props.playlist.id,
-                    // }, token);      
+                    })    
                 } else {
                     console.log('edit response code', response)
                 }

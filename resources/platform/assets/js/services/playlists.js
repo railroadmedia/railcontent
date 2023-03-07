@@ -238,7 +238,7 @@ export default {
      *
      */
     updatePlaylistItem(payload, csrf_token) {
-        return axios.patch(
+        return axios.put(
             `/railcontent/change-playlist-content`,
             payload,
             {
