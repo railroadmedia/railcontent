@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+        <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
 
         @yield('head-includes')
 
@@ -43,7 +44,7 @@
              x-on:click="showOverlay = !showOverlay, sidebarOpen = !sidebarOpen"
              x-bind:class="{ 'fixed h-screen w-screen z-30 bg-black bg-opacity-20': showOverlay }"
         ></div>
-        
+
          @yield('layout-scripts')
         {!! \App\Analytics\Tracker::bodyBottom() !!}
     </body>
