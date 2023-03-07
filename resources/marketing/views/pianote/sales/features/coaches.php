@@ -32,7 +32,7 @@
             'artist' => 'Erskine Hawkins',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/221257-card-thumbnail-maxres-1551813520',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/222917-card-thumbnail-maxres-1554751707.jpg',
             'title' => 'Latin Jazz',
             'artist' => 'Gabriel Palatchi',
         ],

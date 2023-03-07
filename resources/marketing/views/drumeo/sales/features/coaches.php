@@ -349,7 +349,7 @@
             'artist' => 'Marco Minnemann',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/218926-card-thumbnail-maxres-1549645098',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/221450-card-thumbnail-maxres-1553514724.jpg',
             'title' => 'Tasty Combinations',
             'artist' => 'Brian Frasier-Moore',
         ],

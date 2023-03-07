@@ -16,7 +16,7 @@
             'artist' => 'Sami Ghawi',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/220981-card-thumbnail-maxres-1551210078',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/222675-card-thumbnail-maxres-1553776379.jpg',
             'title' => 'Timing & Feel',
             'artist' => 'David Becker',
         ],
