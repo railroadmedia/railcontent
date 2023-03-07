@@ -236,7 +236,7 @@
             'artist' => 'Larnell Lewis',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/220257-card-thumbnail-maxres-1551383521',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/The+Grooves+of+John+Bonham.jpeg',
             'title' => 'The Grooves of John Bonham',
             'artist' => 'Brian Tichy',
         ],

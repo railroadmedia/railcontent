@@ -138,7 +138,7 @@
             'artist' => 'Lisa Witt',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/221244-card-thumbnail-maxres-1551730631',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/Creative+Songwriting.jpeg',
             'title' => 'Creative Songwriting',
             'artist' => 'Josh Dion',
         ],
