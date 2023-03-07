@@ -47,12 +47,29 @@ Route::domain('{drumeoDomain}')
 
     Route::get('/{pageT?}', SalesController::class . '@trialPages')
         ->whereIn('pageT', [
-            'bestbook-trial', 'coaches-quiz', 'earthworks', 'melodics', 'new-drummers-trial', 'power-pack', 'toolbox-trial'
+            'bestbook-trial',
+            'coaches-quiz',
+            'earthworks',
+            'melodics',
+            'new-drummers-trial',
+            'power-pack',
+            'toolbox-trial'
         ]);
 
     Route::get('/{pageC?}', SalesController::class . '@coachTrial')
         ->whereIn('pageC', [
-            'aric', 'domino', 'dorothea', 'jared', 'john', 'kaz', 'larnell', 'matt', 'sarah', 'schack', 'sharon', 'todd'
+            'aric',
+            'domino',
+            'dorothea',
+            'jared',
+            'john',
+            'kaz',
+            'larnell',
+            'matt',
+            'sarah',
+            'schack',
+            'sharon',
+            'todd'
         ]);
 
 
@@ -61,7 +78,25 @@ Route::domain('{drumeoDomain}')
         function () {
             Route::get('/{page?}', SalesController::class . '@a')
                 ->whereIn('page', [
-                    '66samus', 'adriendrums', 'kristina-rybalchenko', 'alejandrosifuentes', 'brandonscott', 'cooperdrummer', 'davidcola', 'drumhelper', 'joshcrawford', 'leviclay', 'linaanderberg', 'rdavidr', 'robbrown', 'rocker-girl', 'the8bitdrummer', 'wojtek', 'worshipdrummer', 'wyattstav', 'zackgrooves'
+                    '66samus',
+                    'adriendrums',
+                    'alejandrosifuentes',
+                    'brandonscott',
+                    'cooperdrummer',
+                    'davidcola',
+                    'drumhelper',
+                    'joshcrawford',
+                    'kristina-rybalchenko',
+                    'leviclay',
+                    'linaanderberg',
+                    'rdavidr',
+                    'robbrown',
+                    'rocker-girl',
+                    'the8bitdrummer',
+                    'wojtek',
+                    'worshipdrummer',
+                    'wyattstav',
+                    'zackgrooves'
                 ]);
         }
     );
@@ -77,7 +112,36 @@ Route::domain('{drumeoDomain}')
         function () {
             Route::get('/{page?}', SalesController::class . '@affiliates')
                 ->whereIn('page', [
-                    'andrewrooney', 'asobergirlsguide', 'bhcollective', 'bryanforcedrums', 'drummingreview', 'drumninja', 'electronicdrumadvisor', 'jessica-burdeaux', 'kylemcgrail', 'leyandrums', 'lindseyward', 'musicindustryhowto', 'rickyficarelli', 'tobines', '66samus', 'adriendrums', 'alejandrosifuentes', 'brandonscott', 'cooperdrummer', 'davidcola', 'drumhelper', 'joshcrawford', 'leviclay', 'linaanderberg', 'rdavidr', 'robbrown', 'the8bitdrummer', 'worshipdrummer', 'wyattstav', 'zackgrooves'
+                    '66samus',
+                    'adriendrums',
+                    'alejandrosifuentes',
+                    'andrewrooney',
+                    'asobergirlsguide',
+                    'bhcollective',
+                    'brandonscott',
+                    'bryanforcedrums',
+                    'cooperdrummer',
+                    'davidcola',
+                    'drumhelper',
+                    'drummingreview',
+                    'drumninja',
+                    'electronicdrumadvisor',
+                    'jessica-burdeaux',
+                    'joshcrawford',
+                    'kylemcgrail',
+                    'leviclay',
+                    'leyandrums',
+                    'linaanderberg',
+                    'lindseyward',
+                    'musicindustryhowto',
+                    'rdavidr',
+                    'rickyficarelli',
+                    'robbrown',
+                    'the8bitdrummer',
+                    'tobines',
+                    'worshipdrummer',
+                    'wyattstav',
+                    'zackgrooves'
                 ]);
         }
     );
