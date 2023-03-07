@@ -1339,6 +1339,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 1.5rem !important;
   margin-bottom: 1.5rem !important;
 }
+.-my-4 {
+  margin-top: -1rem !important;
+  margin-bottom: -1rem !important;
+}
 .mx-1 {
   margin-left: 0.25rem !important;
   margin-right: 0.25rem !important;
@@ -1467,6 +1471,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 1.5rem !important;
   margin-bottom: 1.5rem !important;
 }
+.-mx-4 {
+  margin-left: -1rem !important;
+  margin-right: -1rem !important;
+}
 .mt-3 {
   margin-top: 0.75rem !important;
 }
@@ -1475,6 +1483,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mt-4 {
   margin-top: 1rem !important;
+}
+.mb-16 {
+  margin-bottom: 4rem !important;
+}
+.mb-4 {
+  margin-bottom: 1rem !important;
 }
 .mb-7 {
   margin-bottom: 1.75rem !important;
@@ -1493,9 +1507,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mt-5 {
   margin-top: 1.25rem !important;
-}
-.mb-4 {
-  margin-bottom: 1rem !important;
 }
 .mr-auto {
   margin-right: auto !important;
@@ -1532,9 +1543,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mb-0 {
   margin-bottom: 0px !important;
-}
-.mb-16 {
-  margin-bottom: 4rem !important;
 }
 .mb-10 {
   margin-bottom: 2.5rem !important;
@@ -1781,6 +1789,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mr-0\.5 {
   margin-right: 0.125rem !important;
+}
+.mt-4 {
+  margin-top: 1rem !important;
+}
+.mb-16 {
+  margin-bottom: 4rem !important;
+}
+.mb-4 {
+  margin-bottom: 1rem !important;
 }
 .box-border {
   box-sizing: border-box !important;
@@ -2317,14 +2334,17 @@ Ensure the default browser behavior of the `hidden` attribute.
 .list-outside {
   list-style-position: outside !important;
 }
-.list-disc {
-  list-style-type: disc !important;
-}
 .list-decimal {
   list-style-type: decimal !important;
 }
+.list-disc {
+  list-style-type: disc !important;
+}
 .list-none {
   list-style-type: none !important;
+}
+.list-decimal {
+  list-style-type: decimal !important;
 }
 .list-disc {
   list-style-type: disc !important;
@@ -2987,13 +3007,13 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 2.5rem !important;
   padding-bottom: 2.5rem !important;
 }
-.py-12 {
-  padding-top: 3rem !important;
-  padding-bottom: 3rem !important;
-}
 .px-4 {
   padding-left: 1rem !important;
   padding-right: 1rem !important;
+}
+.py-12 {
+  padding-top: 3rem !important;
+  padding-bottom: 3rem !important;
 }
 .px-6 {
   padding-left: 1.5rem !important;
@@ -3146,6 +3166,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 .py-10 {
   padding-top: 2.5rem !important;
   padding-bottom: 2.5rem !important;
+}
+.px-4 {
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+.pl-6 {
+  padding-left: 1.5rem !important;
 }
 .pl-3 {
   padding-left: 0.75rem !important;
@@ -3303,9 +3330,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pb-56 {
   padding-bottom: 14rem !important;
 }
-.pl-6 {
-  padding-left: 1.5rem !important;
-}
 .pb-72 {
   padding-bottom: 18rem !important;
 }
@@ -3357,8 +3381,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pr-5 {
   padding-right: 1.25rem !important;
 }
-.pl-10 {
-  padding-left: 2.5rem !important;
+.pl-6 {
+  padding-left: 1.5rem !important;
 }
 .text-left {
   text-align: left !important;
@@ -3488,6 +3512,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .leading-normal {
   line-height: 1.5 !important;
 }
+.leading-snug {
+  line-height: 1.375 !important;
+}
 .leading-none {
   line-height: 1 !important;
 }
@@ -3503,9 +3530,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .leading-9 {
   line-height: 2.25rem !important;
 }
-.leading-snug {
-  line-height: 1.375 !important;
-}
 .leading-6 {
   line-height: 1.5rem !important;
 }
@@ -3518,8 +3542,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .leading-7 {
   line-height: 1.75rem !important;
 }
-.leading-\[30px\] {
-  line-height: 30px !important;
+.leading-snug {
+  line-height: 1.375 !important;
 }
 .tracking-widest {
   letter-spacing: 0.1em !important;
@@ -3546,10 +3570,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-blue-100 {
   --tw-text-opacity: 1 !important;
   color: rgb(219 234 254 / var(--tw-text-opacity)) !important;
-}
-.text-\[\#44444F\] {
-  --tw-text-opacity: 1 !important;
-  color: rgb(68 68 79 / var(--tw-text-opacity)) !important;
 }
 .text-drumeo {
   --tw-text-opacity: 1 !important;
@@ -3682,10 +3702,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-gray-900 {
   --tw-text-opacity: 1 !important;
   color: rgb(17 24 39 / var(--tw-text-opacity)) !important;
-}
-.text-\[\#44444F\] {
-  --tw-text-opacity: 1 !important;
-  color: rgb(68 68 79 / var(--tw-text-opacity)) !important;
 }
 .underline {
   -webkit-text-decoration-line: underline !important;
@@ -4544,6 +4560,10 @@ li, p {
     margin-right: auto !important;
   }
 
+  .sm\:mb-0 {
+    margin-bottom: 0px !important;
+  }
+
   .sm\:mt-2 {
     margin-top: 0.5rem !important;
   }
@@ -4562,10 +4582,6 @@ li, p {
 
   .sm\:mt-7 {
     margin-top: 1.75rem !important;
-  }
-
-  .sm\:mb-0 {
-    margin-bottom: 0px !important;
   }
 
   .sm\:mb-3 {
@@ -4844,6 +4860,10 @@ li, p {
     margin-left: 0.75rem !important;
   }
 
+  .sm\:mb-0 {
+    margin-bottom: 0px !important;
+  }
+
   .sm\:block {
     display: block !important;
   }
@@ -4956,6 +4976,10 @@ li, p {
     height: 12rem !important;
   }
 
+  .sm\:w-2\/3 {
+    width: 66.666667% !important;
+  }
+
   .sm\:w-9 {
     width: 2.25rem !important;
   }
@@ -5005,10 +5029,6 @@ li, p {
   }
 
   .sm\:w-8\/12 {
-    width: 66.666667% !important;
-  }
-
-  .sm\:w-2\/3 {
     width: 66.666667% !important;
   }
 
@@ -5081,6 +5101,10 @@ li, p {
     width: 25% !important;
   }
 
+  .sm\:w-2\/3 {
+    width: 66.666667% !important;
+  }
+
   .sm\:max-w-full {
     max-width: 100% !important;
   }
@@ -5147,6 +5171,10 @@ li, p {
 
   .sm\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .sm\:flex-row {
+    flex-direction: row !important;
   }
 
   .sm\:flex-row {
@@ -5597,6 +5625,10 @@ li, p {
 
   .sm\:pb-2 {
     padding-bottom: 0.5rem !important;
+  }
+
+  .sm\:text-left {
+    text-align: left !important;
   }
 
   .sm\:text-left {
@@ -8146,6 +8178,11 @@ li, p {
     padding: 3rem !important;
   }
 
+  .lg\:px-0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
   .lg\:px-4 {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
@@ -8204,11 +8241,6 @@ li, p {
   .lg\:py-24 {
     padding-top: 6rem !important;
     padding-bottom: 6rem !important;
-  }
-
-  .lg\:px-0 {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
   }
 
   .lg\:px-6 {
@@ -8359,6 +8391,11 @@ li, p {
   .lg\:py-60 {
     padding-top: 15rem !important;
     padding-bottom: 15rem !important;
+  }
+
+  .lg\:px-0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
   }
 
   .lg\:pl-12 {
