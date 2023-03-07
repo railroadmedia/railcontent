@@ -132,7 +132,7 @@ onBeforeMount(()=> {
              :placeholder="placeholder" :id="id"
              :class="[getBaseInputStyles(),
                       `${inputOverride ? inputOverride : ''}`,
-                      { '!tw-border-red-500' : error },
+                      { '!tw-border-red-500 dark:!tw-border-red-500' : error },
                       { 'tw-bg-[#D3D3D3] dark:tw-bg-transparent dark:tw-opacity-20' : disabled  },
                     ]"
              :name="inputName" 

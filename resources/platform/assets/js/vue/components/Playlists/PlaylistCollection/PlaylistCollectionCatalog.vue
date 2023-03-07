@@ -78,8 +78,6 @@
             if(localStorage.getItem('playlistIsListView')) {
                 state.isListView = JSON.parse(localStorage.getItem('playlistIsListView'));
             }
-        } else {
-            state.isListView = !props.miniCatalog;
         }
 
         //Get URL Params
@@ -104,7 +102,9 @@
 
     //Store ListView to Local Storage
     watch(state, async () => {
-        localStorage.setItem('playlistIsListView', state.isListView);
+        if (!props.miniCatalog) {
+            localStorage.setItem('playlistIsListView', state.isListView);
+        }
     })
 
 </script>
@@ -138,7 +138,7 @@
 
             <!-- List View Header -->
             <header v-if="playlistsStore.playlists.length !== 0" class="tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-py-4 tw-pl-[48px]"
-                    :class="state.isListView ? 'tw-hidden md:tw-flex' : 'tw-hidden'"
+                    :class="state.isListView && !miniCatalog ? 'tw-hidden md:tw-flex' : 'tw-hidden'"
             >
                 <div class="tw-grid tw-grid-cols-10 tw-w-full">
                     <p class="tw-col-span-2 tw-relative">
@@ -158,7 +158,7 @@
 
             <!-- Cards -->
             <section v-if="!playlistsStore.loadingPlaylists" class="tw-w-full tw-relative tw-mb-5"
-                :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 3xl:tw-grid-cols-6 tw-gap-4' "
+                :class="state.isListView && !miniCatalog ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 3xl:tw-grid-cols-6 tw-gap-4' "
             >
                 <!-- Mini Catalog -->
                 <template v-if="miniCatalog">
@@ -166,7 +166,7 @@
                         v-for="list in playlistsStore.playlists.slice(0,5)" 
                         :key="list.id" 
                         :list="list"
-                        :isListView="state.isListView"
+                        :isListView="false"
                         :token="token"
                         :brand="brand"
                     />  
@@ -202,18 +202,18 @@
         <!-- Skeleton Loader -->
         <div v-if="playlistsStore.loadingPlaylists" 
              class="tw-w-full tw-animate-pulse" 
-             :class="state.isListView ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-4 tw-mt-4' "
+             :class="state.isListView && !miniCatalog ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-4 tw-mt-4' "
         >
             <div v-for="(n, index) in (playlistsStore.playlists.length)" 
                 :key="n" 
                 class="tw-flex tw-w-full "
-                :class="state.isListView ? 'tw-h-[52px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]' : 'tw-flex-col'"
+                :class="state.isListView && !miniCatalog ? 'tw-h-[52px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]' : 'tw-flex-col'"
             >
                 <template v-if="index <= 10">
                     <div class="tw-w-full tw-bg-[#E6E7E9] dark:tw-bg-[#081825] tw-aspect-square"
-                         :class="state.isListView ? 'tw-hidden' : 'tw-rounded-lg'"
+                         :class="state.isListView && !miniCatalog ? 'tw-hidden' : 'tw-rounded-lg'"
                     ></div>
-                    <div :class="state.isListView ? 'tw-hidden' : 'tw-mt-2 tw-w-full tw-bg-[#E6E7E9] dark:tw-bg-[#081825] tw-aspect-square tw-h-[44px] tw-rounded-lg' "></div>
+                    <div :class="state.isListView && !miniCatalog ? 'tw-hidden' : 'tw-mt-2 tw-w-full tw-bg-[#E6E7E9] dark:tw-bg-[#081825] tw-aspect-square tw-h-[44px] tw-rounded-lg' "></div>
                 </template>
             </div>
         </div>       

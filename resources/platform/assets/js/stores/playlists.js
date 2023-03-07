@@ -101,6 +101,14 @@ export const usePlaylistsStore = defineStore({
         return p.id !== id;
       })
     },
+    //Update Set/Time
+    updatePlaylistItem(data) {
+      console.log(data.id)
+      console.log(this.lessons[data.index])
+      let lesson = this.lessons.find(l => l.id === data.id);
+      lesson.start_second = data.start;
+      lesson.end_second = data.end
+    },
 
     openModal(modalOpen) {
       this.$patch({

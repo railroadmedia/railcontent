@@ -25,7 +25,7 @@ const emit = defineEmits(['onActionClick', 'onScroll']);
         <table class="tw-w-full tw-text-left tw-text-[#0D0D0D] dark:tw-text-white">
             <thead
                 class=" tw-h-[37px] tw-text-[16px] tw-text-[#0D0D0D] tw-bg-[#E6E7E9] dark:tw-bg-[#031d32] dark:tw-text-white tw-font-bold tw-rounded-t tw-overflow-hidden"
-                :class="stickyHeader ? 'tw-sticky tw-top-0 tw-z-10' : ''"
+                :class="stickyHeader ? 'tw-sticky tw-top-0 tw-z-30' : ''"
             >
                 <tr>
                     <th v-for="(title, i) in headTitles" :key="i" scope="col" class="tw-px-6 tw-py-2">
