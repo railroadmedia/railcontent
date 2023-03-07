@@ -288,6 +288,7 @@ class UserPlaylistsService
                 foreach ($assignments['lessons'] ?? [] as $lesson) {
                     $input = [
                         'content_id' => $lesson['id'],
+                        'parent_id' => $contentId,
                         'user_playlist_id' => $userPlaylistId,
                         'position' => $position,
                         'extra_data' => $extraData,
@@ -311,6 +312,7 @@ class UserPlaylistsService
                 foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
                     $assignmentInput = [
                         'content_id' => $assignment['id'],
+                        'parent_id' => $contentId,
                         'user_playlist_id' => $userPlaylistId,
                         'created_at' => Carbon::now()
                             ->toDateTimeString(),
@@ -327,6 +329,7 @@ class UserPlaylistsService
                 foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
                     $assignmentInput = [
                         'content_id' => $assignment['id'],
+                        'parent_id' => $contentId,
                         'user_playlist_id' => $userPlaylistId,
                         'created_at' => Carbon::now()
                             ->toDateTimeString(),
@@ -552,7 +555,7 @@ class UserPlaylistsService
             return $itemPlaylist;
         }
 
-        $deleted = $this->userPlaylistContentRepository->deletePlaylistItemAndReposition($itemPlaylist);
+        $deleted = $this->userPlaylistContentRepository->deletePlaylistItemAndReposition(['id'=>$itemPlaylist['id']]);
 
         event(new PlaylistItemsUpdated($itemPlaylist['user_playlist_id']));
 
