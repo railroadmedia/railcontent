@@ -84,7 +84,7 @@
     //Send request
     const handleConfirm = () => {
         const payload = {
-            user_playlist_item_id: props.data.id,
+            user_playlist_item_id: props.data.user_playlist_item_id,
             position: props.index,
             start_second: getSeconds(state.start.hrs,state.start.min,state.start.sec),
             end_second: getSeconds(state.end.hrs,state.end.min,state.end.sec),
@@ -92,7 +92,7 @@
         };
         //Update UI
         playlistsStore.updatePlaylistItem({
-            id: props.data.id,
+            user_playlist_item_id: props.data.user_playlist_item_id,
             index: props.index,
             start: payload.start_second,
             end: payload.end_second

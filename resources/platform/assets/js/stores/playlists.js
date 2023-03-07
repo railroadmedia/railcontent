@@ -103,9 +103,9 @@ export const usePlaylistsStore = defineStore({
     },
     //Update Set/Time
     updatePlaylistItem(data) {
-      console.log(data.id)
+      console.log(data.user_playlist_item_id)
       console.log(this.lessons[data.index])
-      let lesson = this.lessons.find(l => l.id === data.id);
+      let lesson = this.lessons.find(l => l.user_playlist_item_id === data.user_playlist_item_id);
       lesson.start_second = data.start;
       lesson.end_second = data.end
     },

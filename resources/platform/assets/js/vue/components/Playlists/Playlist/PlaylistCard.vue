@@ -259,7 +259,7 @@
             <div class="tw-truncate tw-w-full lg:tw-w-[calc(100%-350px)] tw-px-3 lg:tw-pl-[15px]">
                 <!--name-->
                 <p class="tw-truncate">
-                    <template v-if="lesson.type !== 'Assignments'">
+                    <template v-if="lesson.type !== 'assignment'">
                         <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
                                 v-for="(instructor, i) in lesson.instructors"
                                 :key="i">
@@ -267,8 +267,10 @@
                         </span>
                     </template>
                     <template v-else>
-                        <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm">
-                            {{ lesson.instructors }}
+                        <span class="tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
+                                v-for="(route, i) in lesson.route"
+                                :key="i">
+                                {{ route }}<span v-if="i != (lesson.route.length - 1)" class="tw-px-1">•</span>
                         </span>
                     </template>
                 </p>

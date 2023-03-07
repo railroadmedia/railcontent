@@ -124,7 +124,7 @@
     const handleConfirm = () => {
         const payload = {
             brand: props.brand,
-            name: state.name || 'New Playlist',
+            name: state.name ? state.name : 'Playlist',
             description: state.description,
             category: state.category,
             private: props.playlist.private,
@@ -167,7 +167,7 @@
                         //Update Active Playlist
                         playlistsStore.updateActivePlaylist({
                             thumbnail_url: state.thumb,
-                            name: state.name,
+                            name: state.name ? state.name : 'Playlist',
                             description: state.description
                         })   
                     } else {
@@ -178,7 +178,7 @@
         if(props.mode === "duplicate") {
             const duplicateData = {
                 playlist_id: props.playlist.id,
-                name: state.name,
+                name: state.name ? state.name : 'Playlist',
                 description: state.description,
                 thumbnail_url: state.thumb,
                 category: state.category,
@@ -204,7 +204,6 @@
     };
 
     //----------Lifecycle Hooks----------//
-    
     onMounted(()=> {
         console.log(props.playlist)
     })
