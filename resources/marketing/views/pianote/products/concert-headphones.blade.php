@@ -244,10 +244,10 @@
     </section>
 
     <div id="customize-anchor" class="anchor"></div>
-    <section class="py-12 md:py-20 text-center" style="background: linear-gradient(180deg, #010101 0%, #330606 43.19%)">
+    <section class="py-12 md:py-20 text-center text-white" style="background: linear-gradient(180deg, #010101 0%, #330606 43.19%)">
         <img class="h-16 md:h-20 mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://pianote.s3.amazonaws.com/products/concert-headphones/logo-promo.png" alt="headphone logo">
         <p class="text-yellow mb-4 italic font-bold">Enhance your playing experience.</p>
-        <p class="text-white">LIMITED EDITION.</p>
+        <p>LIMITED EDITION.</p>
         <div class="flex flex-wrap justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-7 mx-auto text-center">
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'false']) }}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
@@ -299,6 +299,8 @@
 {{--                    </div>--}}
 {{--                </a>--}}
 {{--            </div>--}}
+
+            <p class="mt-5 uppercase"><strong>For hygienic reasons all <br class="inline sm:hidden"> headphone sales are final.</strong></p>
         </div>
 {{--        <a href="/new-year#customize-anchor" class="text-pianote"><h6><strong><u>OR FREE WITH A PIANOTE MEMBERSHIP</u></strong></h6></a>--}}
     </section>

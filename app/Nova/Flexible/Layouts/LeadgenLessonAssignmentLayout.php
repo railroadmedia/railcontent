@@ -31,6 +31,9 @@ class LeadgenLessonAssignmentLayout extends Layout
         return [
             // Define the layout's fields.
             Text::make('title')->required(),
+            Text::make('Sub Title','subtitle'),
+            Text::make('Source', 'src'),
+            Text::make('Sound Slice', 'soundslice'),
         ];
     }
 

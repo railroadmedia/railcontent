@@ -412,6 +412,7 @@
         ]
     @endphp
 
+    <div id="faq" class="anchor"></div>
     <section class="py-12 md:py-20" style="background: #000;">
         <div class="container mx-auto max-w-5xl px-6">
             <h2 class="font-extrabold mb-10 text-center text-white">Frequently Asked Questions</h2>
