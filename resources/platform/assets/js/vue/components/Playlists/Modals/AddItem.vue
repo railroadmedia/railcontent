@@ -68,17 +68,7 @@ const addRemovePlaylistSelection = (payload) => {
 }
 
 const handleActionClick = (payload) => {
-    const index = selectedPlaylists.value.indexOf(String(payload));
-    if (index === -1) {
-        addRemovePlaylistSelection(payload);
-        handleSaveItem(payload)
-            .catch(() => {
-                addRemovePlaylistSelection(payload);
-            });
-    } else {
-        addRemovePlaylistSelection(payload);
-        handleRemoveFromPlaylist(payload);
-    }
+    addRemovePlaylistSelection(payload);
 };
 
 const handleCancel = () => {
@@ -105,22 +95,23 @@ const handleRemoveFromPlaylist = (contentId) => {
         });
 };
 
-const handleSaveItem = (playlistId) => {
+const handleSaveItem = () => {
     isLoadingPlaylists.value = true;
     return PlaylistService.addToPlaylist({
         brand: props.brand,
         contentId: props.content.content_id,
         importAssignments: importAll.value,
-        playlistIds: [String(playlistId)],
+        playlistIds: selectedPlaylists.value,
         addFull: addFullSongToggle.value,
         addInstrumentless: addInstrumentlessToggle.value,
         token,
     }).then(() => {
-        window.shownotification({ icon: 'check', text: 'The items were added to your selected playlist.' });
+        window.shownotification({ icon: 'check', text: 'The items were added to your selected playlists.' });
     }).catch(() => {
         window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
     }).finally(() => {
         isLoadingPlaylists.value = false;
+        handleCancel();
     });
 };
 const handleCreate = () => {
@@ -253,7 +244,7 @@ onMounted(() => {
                 <span class="tw-pl-[6px]">ADD TO NEW PLAYLIST</span>
             </button>
             <div class="tw-flex">
-                <button @click="handleCancel"
+                <button @click="handleSaveItem"
                     :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">DONE</button>
             </div>
         </div>
