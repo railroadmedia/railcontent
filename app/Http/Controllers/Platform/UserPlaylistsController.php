@@ -147,7 +147,7 @@ class UserPlaylistsController extends BaseController
 
         if(empty($content)){
             // TODO: Replace with Upgrade to View page
-            return view('pages.upgrade', [
+            return view('pages.no-access', [
                 "brand" => brand(),
             ]);
         }

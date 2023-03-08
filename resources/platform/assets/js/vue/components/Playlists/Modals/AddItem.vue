@@ -8,6 +8,7 @@ import Toggle from '../../Toggle/Toggle.vue'
 import Table from '../../Table/Table.vue'
 import { PlusCircleIcon, PlusIcon, CheckCircleIcon } from '@heroicons/vue/outline';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.vue';
+import AddDuplicate from './AddDuplicate.vue';
 
 const props = defineProps({
     brand: {
@@ -33,6 +34,9 @@ const showSongToggle = ref(false);
 const addFullSongToggle = ref(true);
 const addInstrumentlessToggle = ref(false);
 const preventReFetch = ref(false);
+const duplicatedIDs = ref([]);
+const duplicateProps = ref({ show: false, id: null });
+const duplicatedItemIdNameMap = ref({});
 
 const handleOnToggleAssignments = (val) => {
     importAll.value = val;
@@ -56,6 +60,7 @@ const instrumentless = computed(() => {
 });
 
 const addRemovePlaylistSelection = (payload) => {
+    console.log(payload)
     const index = selectedPlaylists.value.indexOf(String(payload));
     if (index !== -1) {
         const selectionCopy = [...selectedPlaylists.value];
@@ -68,16 +73,13 @@ const addRemovePlaylistSelection = (payload) => {
 }
 
 const handleActionClick = (payload) => {
-    const index = selectedPlaylists.value.indexOf(String(payload));
-    if (index === -1) {
-        addRemovePlaylistSelection(payload);
-        handleSaveItem(payload)
-            .catch(() => {
-                addRemovePlaylistSelection(payload);
-            });
+    console.log('duplicated ids', duplicatedIDs.value)
+    const duplicateIndex = duplicatedIDs.value.indexOf(String(payload));
+    const selectedIndex = selectedPlaylists.value.indexOf(String(payload));
+    if (duplicateIndex !== -1 && selectedIndex === -1) {
+        duplicateProps.value = { id: payload, show: true, title: duplicatedItemIdNameMap.value[payload] };
     } else {
         addRemovePlaylistSelection(payload);
-        handleRemoveFromPlaylist(payload);
     }
 };
 
@@ -85,42 +87,23 @@ const handleCancel = () => {
     emit('onCancel');
 };
 
-const handleRemoveFromPlaylist = (contentId) => {
-    PlaylistService.deletePlaylistItem(contentId, token)
-        .then(() => {
-            window.shownotification({
-                icon: 'fa-not-equal',
-                text: `'${state.title}' was removed from your playlist.`
-            })
-        })
-        .catch(function (error) {
-            if (error.response) {
-                //handle error
-                window.shownotification({
-                    icon: 'error',
-                    text: 'Woops! Something wrong happened, please try again later.'
-                })
-            }
-            addRemovePlaylistSelection(contentId);
-        });
-};
-
-const handleSaveItem = (playlistId) => {
+const handleSaveItem = () => {
     isLoadingPlaylists.value = true;
     return PlaylistService.addToPlaylist({
         brand: props.brand,
         contentId: props.content.content_id,
         importAssignments: importAll.value,
-        playlistIds: [String(playlistId)],
+        playlistIds: selectedPlaylists.value,
         addFull: addFullSongToggle.value,
         addInstrumentless: addInstrumentlessToggle.value,
         token,
     }).then(() => {
-        window.shownotification({ icon: 'check', text: 'The items were added to your selected playlist.' });
+        window.shownotification({ icon: 'check', text: 'The items were added to your selected playlists.' });
     }).catch(() => {
         window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
     }).finally(() => {
         isLoadingPlaylists.value = false;
+        handleCancel();
     });
 };
 const handleCreate = () => {
@@ -141,9 +124,21 @@ const handleScroll = (e) => {
         getUserPlaylists();
     }
 }
+
+const handleDuplicateConfirm = () => {
+    console.log('duplicate id', duplicateProps.value.id)
+    addRemovePlaylistSelection(duplicateProps.value.id);
+    handleDuplicateCancel();
+};
+
+const handleDuplicateCancel = () => {
+    duplicateProps.value = { id: null, show: false, title: '' };
+};
+
 const getUserPlaylists = () => {
     PlaylistService.getCurrentUserPlaylists({ brand: props.brand, page: pageNumber.value, limit: 10, content_id: props.content.content_id}, token).then(r => {
         isLoadingPlaylists.value = false;
+        const duplicatedItemIDs = [];
         const { data: { data } } = r;
         if (data.length) {
             const formattedTable = data.map((item) => {
@@ -152,6 +147,14 @@ const getUserPlaylists = () => {
                 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 const month = months[dateCreated.getMonth()];
                 const formattedDate = `${month} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`;
+                console.log('item id:', user_playlist_item_id, 'is added:', is_added_to_playlist);
+                if(is_added_to_playlist) {
+                    duplicatedItemIDs.push(String(id));
+                    duplicatedItemIdNameMap.value = {
+                        ...duplicatedItemIdNameMap.value,
+                        [id]: name,
+                    };
+                }
                 return ([
                     {
                         thumb: thumbnail_url,
@@ -169,6 +172,7 @@ const getUserPlaylists = () => {
                     }
                 ])
             });
+            duplicatedIDs.value = duplicatedItemIDs;
             formattedRows.value = [...formattedRows.value, ...formattedTable];
         } else {
             preventReFetch.value = true;
@@ -197,6 +201,7 @@ onMounted(() => {
 
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
+        <AddDuplicate v-if="duplicateProps.show" :title="duplicateProps.title" @onConfirm="() => handleDuplicateConfirm(duplicateProps.id)" @onClose="handleDuplicateCancel" />
         <div v-if="isLoadingAssignments || isLoadingPlaylists"
             class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-items-center tw-justify-center tw-bg-black/40">
             <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
@@ -253,7 +258,7 @@ onMounted(() => {
                 <span class="tw-pl-[6px]">ADD TO NEW PLAYLIST</span>
             </button>
             <div class="tw-flex">
-                <button @click="handleCancel"
+                <button @click="handleSaveItem"
                     :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">DONE</button>
             </div>
         </div>
