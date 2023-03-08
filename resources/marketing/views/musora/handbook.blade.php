@@ -52,53 +52,53 @@
 <!-- Main -->
 @section('layout-body')
     <div class="md:flex">
-        <div class="bg-[#020815] text-white flex flex-col px-4 md:pl-14 md:pr-10 py-5 md:pt-14 fixed md:relative w-full md:w-auto transition-all duration-200 ease-in-out">
+        <div class="bg-[#020815] text-white flex flex-col px-5 lg:pl-14 lg:pr-10 py-5 fixed md:relative w-full md:w-auto transition-all duration-200 ease-in-out">
             <div class="flex justify-between items-center" @click="navOpen = !navOpen">
                 <b class="text-[#888888] uppercase text-sm">Index</b>
                 <i class="fa-sharp fa-solid fa-chevron-down md:hidden text-[#888888] transition-all duration-200" :class="navOpen && 'rotate-180'"></i>
             </div>
-            <hr class="border-[#888888] mt-2 mb-6 md:w-32 lg:w-40 hidden md:block" />
+            <hr class="border-[#888888] mt-2 mb-6 w-28 xl:w-40 hidden md:block" />
             <div x-cloak
-                 class="md:flex flex-col text-center md:text-left md:h-auto md:translate-y-0 overflow-hidden transition-all duration-200 ease-in-out hidden"
+                 class="hidden md:flex flex-col text-left h-auto translate-y-0 overflow-hidden"
             >
-                <a class="py-2 md:py-0 md:mb-4" href="#holiday">Holiday</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#schedule">Schedule</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#focus">Focus</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#payroll">Payroll</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#etiquette">Etiquette</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#travel">Travel</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#expenses">Expenses</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#drinking">Drinking</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#deadlines">Deadlines</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#overtime">Overtime</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#communication">Communication</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#statutory">Statutory</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#leadership">Management</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#meetings">Meetings</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#thankyou">Thank You</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#holiday">Holiday</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#schedule">Schedule</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#focus">Focus</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#payroll">Payroll</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#etiquette">Etiquette</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#travel">Travel</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#expenses">Expenses</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#drinking">Drinking</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#deadlines">Deadlines</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#overtime">Overtime</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#communication">Communication</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#statutory">Statutory</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#leadership">Management</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#meetings">Meetings</a>
+                <a class="py-0 md:mb-4 hover:opacity-80" href="#thankyou">Thank You</a>
             </div>
             <div x-cloak
-                 class="flex flex-col text-center overflow-hidden transition-all duration-200 ease-in-out md:hidden"
-                 :class="navOpen ? 'visible -translate-y-0 max-h-full opacity-1' : 'invisible -translate-y-8 md:visible md:max-h-full max-h-0 opacity-0'"
+                 class="flex md:hidden flex-col text-center overflow-hidden transition-all duration-200 ease-in-out"
+                 :class="navOpen ? 'visible -translate-y-0 max-h-full opacity-1' : 'invisible -translate-y-8 max-h-0 opacity-0'"
             >
-                <a class="py-2 md:py-0 md:mb-4" href="#holiday">Holiday</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#schedule">Schedule</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#focus">Focus</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#payroll">Payroll</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#etiquette">Etiquette</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#travel">Travel</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#expenses">Expenses</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#drinking">Drinking</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#deadlines">Deadlines</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#overtime">Overtime</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#communication">Communication</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#statutory">Statutory</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#leadership">Management</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#meetings">Meetings</a>
-                <a class="py-2 md:py-0 md:mb-4" href="#thankyou">Thank You</a>
+                <a class="py-2" href="#holiday">Holiday</a>
+                <a class="py-2" href="#schedule">Schedule</a>
+                <a class="py-2" href="#focus">Focus</a>
+                <a class="py-2" href="#payroll">Payroll</a>
+                <a class="py-2" href="#etiquette">Etiquette</a>
+                <a class="py-2" href="#travel">Travel</a>
+                <a class="py-2" href="#expenses">Expenses</a>
+                <a class="py-2" href="#drinking">Drinking</a>
+                <a class="py-2" href="#deadlines">Deadlines</a>
+                <a class="py-2" href="#overtime">Overtime</a>
+                <a class="py-2" href="#communication">Communication</a>
+                <a class="py-2" href="#statutory">Statutory</a>
+                <a class="py-2" href="#leadership">Management</a>
+                <a class="py-2" href="#meetings">Meetings</a>
+                <a class="py-2" href="#thankyou">Thank You</a>
             </div>
         </div>
-        <div class="max-w-3xl mx-auto pt-20 pb-10 md:py-10 handbook md:px-4">
+        <div class="max-w-3xl mx-auto pt-20 pb-10 md:py-10 handbook md:px-6">
             <div class="px-4 md:px-0">
                 <h1 class="font-extrabold">Employee Handbook</h1>
                 <div class="inline-block w-20 border-[3px] border-black my-6"></div>
