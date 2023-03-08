@@ -241,10 +241,9 @@ class UserPlaylistsService
     ) {
         $content = $this->contentService->getById($contentId);
 
-        $singularContentTypes = array_diff(array_merge(
-                                               config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
-                                               config('railcontent.singularContentTypes'),['assignment']
-                                           ), ['song']);
+        $singularContentTypes = array_merge(config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
+                                            config('railcontent.singularContentTypes'),
+                                            ['assignment']);
 
         $assignments = $this->contentService->countLessonsAndAssignments($contentId);
 
@@ -263,24 +262,53 @@ class UserPlaylistsService
             );
 
             if ($content && (in_array($content['type'], $singularContentTypes))) {
-                $input = [
-                    'content_id' => $contentId,
-                    'user_playlist_id' => $userPlaylistId,
-                    'position' => $position,
-                    'extra_data' => $extraData,
-                    'start_second' => $startSecond,
-                    'end_second' => $endSecond,
-                    'created_at' => Carbon::now()
-                        ->toDateTimeString(),
-                ];
-
-                $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
-
-                if ($importAllAssignments) {
-                    $this->addSounsliceAssignments(
-                        $assignments['soundslice_assignments'][$contentId] ?? [],
-                        $userPlaylistId
+                if ($importFullSoundsliceAssignment) {
+                    $assignmentInput = [
+                        'content_id' => $contentId,
+                        'user_playlist_id' => $userPlaylistId,
+                        'created_at' => Carbon::now()
+                            ->toDateTimeString(),
+                        'extra_data' => json_encode(['is_full_track' => true]),
+                    ];
+                    $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+                        null,
+                        $assignmentInput
                     );
+                }
+
+                if ($importInstrumentlessSoundsliceAssignment) {
+                    $assignmentInput = [
+                        'content_id' => $contentId,
+                        'user_playlist_id' => $userPlaylistId,
+                        'created_at' => Carbon::now()
+                            ->toDateTimeString(),
+                        'extra_data' => json_encode(['is_instrumentless_track' => true]),
+                    ];
+                    $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+                        null,
+                        $assignmentInput
+                    );
+                }
+
+                if ($content['type'] != 'song') {
+                    $input = [
+                        'content_id' => $contentId,
+                        'user_playlist_id' => $userPlaylistId,
+                        'position' => $position,
+                        'extra_data' => $extraData,
+                        'start_second' => $startSecond,
+                        'end_second' => $endSecond,
+                        'created_at' => Carbon::now()
+                            ->toDateTimeString(),
+                    ];
+                    $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+
+                    if ($importAllAssignments) {
+                        $this->addSounsliceAssignments(
+                            $assignments['soundslice_assignments'][$contentId] ?? [],
+                            $userPlaylistId
+                        );
+                    }
                 }
             }
 
@@ -288,7 +316,6 @@ class UserPlaylistsService
                 foreach ($assignments['lessons'] ?? [] as $lesson) {
                     $input = [
                         'content_id' => $lesson['id'],
-                        'parent_id' => $contentId,
                         'user_playlist_id' => $userPlaylistId,
                         'position' => $position,
                         'extra_data' => $extraData,
@@ -305,40 +332,6 @@ class UserPlaylistsService
                             $userPlaylistId
                         );
                     }
-                }
-            }
-
-            if ($importFullSoundsliceAssignment) {
-                foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
-                    $assignmentInput = [
-                        'content_id' => $assignment['id'],
-                        'parent_id' => $contentId,
-                        'user_playlist_id' => $userPlaylistId,
-                        'created_at' => Carbon::now()
-                            ->toDateTimeString(),
-                        'extra_data' => json_encode(['is_full_track' => true]),
-                    ];
-                    $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
-                        null,
-                        $assignmentInput
-                    );
-                }
-            }
-
-            if ($importInstrumentlessSoundsliceAssignment) {
-                foreach ($assignments['soundslice_assignments'][$contentId] ?? [] as $assignment) {
-                    $assignmentInput = [
-                        'content_id' => $assignment['id'],
-                        'parent_id' => $contentId,
-                        'user_playlist_id' => $userPlaylistId,
-                        'created_at' => Carbon::now()
-                            ->toDateTimeString(),
-                        'extra_data' => json_encode(['is_instrumentless_track' => true]),
-                    ];
-                    $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
-                        null,
-                        $assignmentInput
-                    );
                 }
             }
 
@@ -555,7 +548,7 @@ class UserPlaylistsService
             return $itemPlaylist;
         }
 
-        $deleted = $this->userPlaylistContentRepository->deletePlaylistItemAndReposition(['id'=>$itemPlaylist['id']]);
+        $deleted = $this->userPlaylistContentRepository->deletePlaylistItemAndReposition(['id' => $itemPlaylist['id']]);
 
         event(new PlaylistItemsUpdated($itemPlaylist['user_playlist_id']));
 
