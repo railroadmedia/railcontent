@@ -2,10 +2,28 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Arr;
+use Railroad\Railcontent\Transformers\ContentCompiledColumnTransformer;
 use Railroad\Railcontent\Transformers\PlaylistItemTransformer;
 
 class UserPlaylistContentRepository extends RepositoryBase
 {
+
+    private ContentCompiledColumnTransformer $contentCompiledColumnTransformer;
+
+    /**
+     * @param ContentCompiledColumnTransformer $contentCompiledColumnTransformer
+     */
+    public function __construct(
+        ContentCompiledColumnTransformer $contentCompiledColumnTransformer
+    ) {
+        parent::__construct();
+
+        $this->contentCompiledColumnTransformer = $contentCompiledColumnTransformer;
+    }
+
     /**
      * @return \Illuminate\Database\Query\Builder
      */
@@ -79,6 +97,9 @@ class UserPlaylistContentRepository extends RepositoryBase
         $contentRows =
             $query->get()
                 ->toArray();
+        if (!empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video'], $contentRows);
 
