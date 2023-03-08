@@ -214,7 +214,7 @@
         }"
     >
         <div class="container mx-auto relative z-50">
-            <div class="mx-auto max-w-xs sm:max-w-md md:max-w-xl lg:max-w-5xl" style="font-size: 0;">
+            <div class="mx-auto max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl" style="font-size: 0;">
                 {{--<h1 data-aos="fade-down" class="font-bebas leading-none mt-3 md:mt-5 text-5xl md:text-6xl">REACH YOUR  <br class="inline md:hidden"> <span class="text-coaches">DRUMMING GOALS.</span></h1>--}}
                 {{--<h2 data-aos-once="true" data-aos="fade-up" class="my-3 md:my-5 leading-normal"><strong>Improve your drumming for<br> just <span class="text-drumeo">${{ round((Prices::$plusSubscriptionAnnual / 12), 2) }}</span> per month.</strong></h2>--}}
                 <h3 class="mb-6" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="inline sm:hidden"> today and get:</strong></h3>
@@ -294,6 +294,14 @@
                             'sku' => 'drumeo-eardrums',
                         ],
                         [
+                            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/shop-image.jpg',
+                            'title' => 'Comfort Cover',
+                            'description' => '',
+                            'price' => floatval($productPrices['comfort-cover']->price),
+                            'shipping' => true,
+                            'sku' => 'comfort-cover',
+                        ],
+                        [
                             'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/bbdb.jpg',
                             'title' => 'The Best Beginner Drum Book',
                             'description' => '',
@@ -305,7 +313,7 @@
                 @endphp
                 @foreach($bonuses as $bonus)
                     <div
-                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/3 lg:w-1/6"
+                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/4"
                         x-data="{
                             selected: false,
                         }"
