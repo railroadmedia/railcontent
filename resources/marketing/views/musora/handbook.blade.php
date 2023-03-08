@@ -257,7 +257,7 @@
                 <p class="no-mb">
                     Please read guidelines outlined in procedure PCPR01A.  Among other things, this procedure explains:
                 </p>
-                <ul class="pl-6 mt-4 list-disc">
+                <ul class="pl-6 mt-4 list-disc mb-16">
                     <li>All employees who have been employed for the 30 calendar days before the statutory and have worked 15 of the 30 days are entitled to a day off with pay for statutory holidays in BC plus National Truth and Reconciliation Day and Boxing Day. </li>
                 </ul>
                 <div id="leadership" class="relative -top-28 md:-top-20"></div>
