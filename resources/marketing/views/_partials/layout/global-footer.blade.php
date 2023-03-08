@@ -1,4 +1,4 @@
-<footer id="publicFooter" class="flex-none bg-[#111729] pt-10 pb-9 sales-footer bottom-footer">
+<footer id="publicFooter" class="flex-none bg-[#111729] pt-10 pb-9 sales-footer bottom-footer z-40">
 
     {{-- Footer Top --}}
     @if( @isset($sections) )
