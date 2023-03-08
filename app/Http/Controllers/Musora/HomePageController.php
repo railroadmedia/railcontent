@@ -11,4 +11,9 @@ class HomePageController extends BaseController
     {
         return view('musora.home');
     }
+
+    public function handbook()
+    {
+        return view('musora.handbook');
+    }
 }
