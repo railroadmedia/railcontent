@@ -19,12 +19,8 @@
 
         .handbook p {
             color: #44444F;
-            /*margin-bottom: 60px;*/
+            margin-bottom: 60px;
             line-height: 30px;
-        }
-
-        .anchor {
-            padding-bottom: 56px;
         }
 
 
@@ -160,19 +156,19 @@
                     <li>We believe in a clean workspace, even if we have to clean up someone else’s mess.</li>
                 </ol>
             </div>
-            <img class="mt-6" src="https://d3fzm1tzeyr5n3.cloudfront.net/handbook/collage-1.png" alt="collage 1" />
+            <img class="mt-6 mb-16" src="https://d3fzm1tzeyr5n3.cloudfront.net/handbook/collage-1.png" alt="collage 1" />
             <div class="px-4 md:px-0">
-                <div id="holiday" class="anchor"></div>
+                <div id="holiday" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Holiday</div>
                 <p>
                     At Musora Media Inc we believe in taking a break from work from time to time. It’s important to get time away from the office to just recharge and connect closer with family and friends.
                 </p>
-                <div id="schedule" class="anchor"></div>
+                <div id="schedule" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Schedule</div>
                 <p>
                     We value an autonomous work mindset and have a “Work from Wherever Just Get Your Sh*t Done” policy. Your leadership team loves working with you in the office in person. However, you are welcome to work in-office or from home. A typical work-day will be 8am - 4pm however if you need to make alternate arrangements, that can be discussed with your manager. You are welcome to work from wherever you want. We will only question the process if we’re not getting the result.
                 </p>
-                <div id="focus" class="anchor"></div>
+                <div id="focus" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Focus</div>
                 <p>
                     Working on a computer all day can be tiring on the eyes and easy to get distracted. We suggest taking a quick 5-minute break or standing up to grab a glass of water if you need to. However, it’s important to stay focused and do your best to not distract other team members by talking loudly or sending random messages through chat.<br><br>
@@ -180,47 +176,47 @@
                     Personal mobile devices are fine to use during work hours, however, situations will be treated on a case-by-case basis. If a team member is on their phone too frequently, disciplinary action will be taken in the form of a public shaming.<br><br>
                     Logging into social media sites like Reddit, Facebook, Instagram, and Snapchat can be a huge distraction from your main focus and Musora Media Inc’s Mission. We ask that you keep all of this activity to a minimum unless it’s in your job description or you need to check something very important.
                 </p>
-                <div id="payroll" class="anchor"></div>
+                <div id="payroll" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Payroll</div>
                 <p>
                     All team members are paid every two weeks on Friday. This is generally done by direct deposit (Note: you must give Elizabeth a direct deposit form or VOID cheque to initiate this). For all questions relating to payroll and deductions you can email Elizabeth at: elizabeth@musora.com
                 </p>
-                <div id="etiquette" class="anchor"></div>
+                <div id="etiquette" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Etiquette</div>
                 <p class="no-mb">
                     As the team continues to grow and improve, so should our office etiquette. Here are some tips to get you started: If you spill coffee, wipe it up. If you pee on the toilet seat, clean it up. If you see a bag of garbage in the hallway, take it to the bin. If you see someone unloading something, ask them if they’d like help. I think you get the point. If someone in your department is staying late to complete a project, you should stay late as well.
                     We are a team and we succeed or fail together. Please do your best to make this a positive, clean, and friendly work environment to be a part of.
                 </p>
             </div>
-            <img class="mt-6" src="https://d3fzm1tzeyr5n3.cloudfront.net/handbook/collage-2.png" alt="collage 2" />
+            <img class="mt-6 mb-16" src="https://d3fzm1tzeyr5n3.cloudfront.net/handbook/collage-2.png" alt="collage 2" />
             <div class="px-4 md:px-0">
-                <div id="travel" class="anchor"></div>
+                <div id="travel" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Travel</div>
                 <p>
                     If you are using your personal vehicle for work-related tasks, you are entitled to be paid per kilometer for when it’s being used. You will find an Employee Reimbursement form in the Asana Finance project called “FN Guides and Documents”. Fill in the number of kilometres you drove and multiply it by $.61. Finance will then reimburse you. For mileage over 5000 km the rate claimed will be $.55/km.<br><br>
                     For staff members traveling out of the office for events or seminars, all travel, food, and lodging will be covered by Musora Media Inc. In the event you have to pay something from your own finances, feel free to submit an Employee Reimbursement form.
                 </p>
-                <div id="expenses" class="anchor"></div>
+                <div id="expenses" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Expenses</div>
                 <p>
                     If you would like to make an office-related purchase you will need to make sure you have the proper approval prior to doing so. There are department credit cards so talk with your team lead to discuss the purchase.<br><br>
                     If you paid for a company expense from your personal finances, please keep the receipt and submit this to Finance using the Asana Expense Reimbursement form. Any questions ask pam@drumeo.com
                     All expenses must be approved.
                 </p>
-                <div id="drinking" class="anchor"></div>
+                <div id="drinking" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Drinking</div>
                 <p>
                     We like to have fun and occasionally have a drink during office hours. Please do not drink an excessive amount that will cause you to negatively impact your work performance.<br><br>
                     If you would like to partake after work hours, it’s extremely important that each staff member secure a ride home with a sober driver, or find alternate transportation. If driving after drinking happens we will be forced to remove the alcohol from the premises (please don’t be the one that ruins it for everyone!)
                 </p>
-                <div id="deadlines" class="anchor"></div>
+                <div id="deadlines" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Deadlines</div>
                 <p>
                     Setting deadlines is extremely important in how a business operates. It allows each department to stay on track and continue to grow and reach our mission of reaching every musician in the world.<br><br>
                     If a deadline for a project is set at a specific date, you are required to meet or exceed that deadline. If this is not possible, you must talk in person with management and find an alternate solution.<br><br>
                     Also, we encourage you to do your best to be part of the conversation when setting deadlines. We like to set realistic but challenging deadlines as this ensures that every department is constantly challenged to improve and be the best they can be.
                 </p>
-                <div id="overtime" class="anchor"></div>
+                <div id="overtime" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Overtime</div>
                 <p class="no-mb">
                     Occasionally, overtime is necessary in order to meet deadlines. If your project requires you to put in extra time, please follow procedure PCPR01A.  Among other things this procedure explains:
@@ -231,15 +227,15 @@
                     <li>Overtime must be tracked using the process described in the said procedure.</li>
                 </ul>
             </div>
-            <img class="mt-6" src="https://d3fzm1tzeyr5n3.cloudfront.net/handbook/collage-3.png" alt="collage 3" />
+            <img class="mt-6 mb-16" src="https://d3fzm1tzeyr5n3.cloudfront.net/handbook/collage-3.png" alt="collage 3" />
             <div class="px-4 md:px-0">
-                <div id="communication" class="anchor"></div>
+                <div id="communication" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Communication</div>
                 <p>
                     Inter-office communications are managed through Asana and Slack. Upon starting at Musora Media Inc, you will get a branded email address, as well as invites to Asana and Slack. Please browse around the different projects within the project management system (Asana) to familiarize yourself with the standard operating procedures.<br><br>
                     If you have a quick question to ask someone, feel free to use Slack. However, it is important to not overuse this as it can be a distraction for yourself as well as other team members.
                 </p>
-                <div id="statutory" class="anchor"></div>
+                <div id="statutory" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Statutory Holidays</div>
                 <p class="no-mb">
                     Below is a list of Musora Media’s statutory holidays.
@@ -264,7 +260,7 @@
                 <ul class="pl-6 mt-4 list-disc">
                     <li>All employees who have been employed for the 30 calendar days prior to the stat and have worked 15 of the 30 days are entitled to a day off with pay for statutory holidays in BC plus National Truth and Reconciliation Day and Boxing Day. </li>
                 </ul>
-                <div id="leadership" class="anchor"></div>
+                <div id="leadership" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Leadership</div>
                 <p class="no-mb">
                     Our leadership team can always help you when needed. I would encourage you to not bother them repeatedly throughout the day, but prepare a shortlist of questions and request a meeting time to go over any items on the list.
@@ -281,14 +277,14 @@
                     <li><div class="flex justify-between"><span>Pam Black</span><div class="flex justify-between sm:w-2/3 flex-col sm:flex-row leading-snug mb-4 sm:mb-0 text-right sm:text-left"><span>Controller</span><span>pam@musora.com</span></div></div></li>
                     <li><div class="flex justify-between"><span>Mary-Liz Borseth</span><div class="flex justify-between sm:w-2/3 flex-col sm:flex-row leading-snug mb-4 sm:mb-0 text-right sm:text-left"><span>People & Culture Manager</span><span>mary-liz@musora.com</span></div></div></li>
                 </ul>
-                <div id="meetings" class="anchor"></div>
+                <div id="meetings" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Meetings</div>
                 <p>
                     Meetings can be a productive time for staff members to get together, collaborate, and be creative. They are crucial to the success of our Mission. However, they can also be a quick way to waste lots of combined staff hours.<br><br>
                     In order to book a meeting, please follow this process. In summary, you must plan your meeting date, time, attendees, and agenda. The staff member who books the meeting is the host.<br><br>
                     When booking a meeting, if you require the boardroom please follow this process.
                 </p>
-                <div id="thankyou" class="anchor"></div>
+                <div id="thankyou" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Thank you</div>
                 <p class="mb-14">
                     Lastly, I want to say thank you for reading this. I’m happy and surprised you made it all the way through. As your feared, fearful, and fearless leader, I hope I do a good job of making you love getting up in the morning and coming to work at Musora Media Inc. It’s my personal goal that you love coming to work, after all, most of us spend almost ⅓ of our lives working, we might as well enjoy it.<br><br>
