@@ -22,6 +22,7 @@
         .anchor {
             padding-bottom: 56px;
         }
+        
 
         .no-mb {
             margin-bottom: 0 !important;
@@ -54,7 +55,7 @@
         <div class="bg-[#020815] text-white flex flex-col px-4 md:pl-14 md:pr-10 py-5 md:pt-14 fixed md:relative w-full md:w-auto transition-all duration-200 ease-in-out">
             <div class="flex justify-between items-center" @click="navOpen = !navOpen">
                 <b class="text-[#888888] uppercase text-sm">Index</b>
-                <i class="fa-sharp fa-solid fa-chevron-down md:hidden text-[#888888]"></i>
+                <i class="fa-sharp fa-solid fa-chevron-down md:hidden text-[#888888] transition-all duration-200" :class="navOpen && 'rotate-180'"></i>
             </div>
             <hr class="border-[#888888] mt-2 mb-6 md:w-32 lg:w-40 hidden md:block" />
             <div x-cloak
