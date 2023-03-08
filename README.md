@@ -444,6 +444,35 @@ https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://s3.amaz
 ```  
 
 
+# AWS Cloudfront URLs & Linked S3 Buckets
+| S3 Bucket URL                                                |Cloudfront URL|
+|--------------------------------------------------------------|---|
+| vapor-us-east-2-assets-1652901486.s3.us-east-2.amazonaws.com | d15lhc6p38kxp4.cloudfront.net|
+| railcontent.s3.amazonaws.com                                 | d1923uyy6spedc.cloudfront.net|
+| musora-ui.s3.us-east-1.amazonaws.com                         | d38h3dn806jqj1.cloudfront.net|
+| musora-web-platform.s3.us-east-1.amazonaws.com               | d3fzm1tzeyr5n3.cloudfront.net|
+| musora-icons.s3.amazonaws.com                                | d1prhhmg8i11jr.cloudfront.net|
+| drumeo-assets.s3.amazonaws.com                               | dpwjbsxqtam5n.cloudfront.net|
+| musora-remote-storage.s3.amazonaws.com                       | d292x7cpdimrbp.cloudfront.net|
+| guitareo.s3.amazonaws.com                                    | d122ay5chh2hr5.cloudfront.net|
+| musora-center.s3.amazonaws.com                               | dmmior4id2ysr.cloudfront.net|
+| recordeo.s3.amazonaws.com                                    | d1y4o0cjx5s9r3.cloudfront.net|
+| drumeosecure.s3.amazonaws.com                                | d1bky84797xpim.cloudfront.net|
+| drumeosecure.s3.amazonaws.com                                | dz5i3s4prcfun.cloudfront.net|
+| drumeo-profile-images.s3.amazonaws.com                       | d27ld4lwv748k5.cloudfront.net|
+| pianote.s3.amazonaws.com                                     | d2vyvo0tyx8ig5.cloudfront.net|
+| drumeo.com                                                   | d3i39s8nl7xrej.cloudfront.net|
+| cloudf.s3.amazonaws.com                                      | d2wwppc2wb7nxm.cloudfront.net|
+| cloudf.s3.amazonaws.com                                      | dw4s1olb8patj.cloudfront.net|
+| drumeo.s3.amazonaws.com                                      | dzryyo1we6bm3.cloudfront.net|
+| drummingsystem.s3.amazonaws.com                              | d1kkqge3y0g04o.cloudfront.net|
+| singeo.s3.us-east-1.amazonaws.com                            | d21xeg6s76swyd.cloudfront.net|
+
+## Example
+`https://drumeo-assets.s3.amazonaws.com/avatars/billy123.jpg`  
+should be used from:  
+`https://dpwjbsxqtam5n.cloudfront.net/avatars/billy123.jpg`
+
 # Login As A User
 
 Log in with an authorized account (in incog or another session), 
