@@ -106,21 +106,21 @@
                  class="flex md:hidden flex-col text-center overflow-hidden transition-all duration-200 ease-in-out"
                  :class="navOpen ? 'visible -translate-y-0 max-h-full opacity-1' : 'invisible -translate-y-8 max-h-0 opacity-0'"
             >
-                <a class="py-2" href="#holiday">Holiday</a>
-                <a class="py-2" href="#schedule">Schedule</a>
-                <a class="py-2" href="#focus">Focus</a>
-                <a class="py-2" href="#payroll">Payroll</a>
-                <a class="py-2" href="#etiquette">Etiquette</a>
-                <a class="py-2" href="#travel">Travel</a>
-                <a class="py-2" href="#expenses">Expenses</a>
-                <a class="py-2" href="#drinking">Drinking</a>
-                <a class="py-2" href="#deadlines">Deadlines</a>
-                <a class="py-2" href="#overtime">Overtime</a>
-                <a class="py-2" href="#communication">Communication</a>
-                <a class="py-2" href="#statutory">Statutory</a>
-                <a class="py-2" href="#leadership">Management</a>
-                <a class="py-2" href="#meetings">Meetings</a>
-                <a class="py-2" href="#thankyou">Thank You</a>
+                <a @click="navOpen = false" class="py-2" href="#holiday">Holiday</a>
+                <a @click="navOpen = false" class="py-2" href="#schedule">Schedule</a>
+                <a @click="navOpen = false" class="py-2" href="#focus">Focus</a>
+                <a @click="navOpen = false" class="py-2" href="#payroll">Payroll</a>
+                <a @click="navOpen = false" class="py-2" href="#etiquette">Etiquette</a>
+                <a @click="navOpen = false" class="py-2" href="#travel">Travel</a>
+                <a @click="navOpen = false" class="py-2" href="#expenses">Expenses</a>
+                <a @click="navOpen = false" class="py-2" href="#drinking">Drinking</a>
+                <a @click="navOpen = false" class="py-2" href="#deadlines">Deadlines</a>
+                <a @click="navOpen = false" class="py-2" href="#overtime">Overtime</a>
+                <a @click="navOpen = false" class="py-2" href="#communication">Communication</a>
+                <a @click="navOpen = false" class="py-2" href="#statutory">Statutory</a>
+                <a @click="navOpen = false" class="py-2" href="#leadership">Management</a>
+                <a @click="navOpen = false" class="py-2" href="#meetings">Meetings</a>
+                <a @click="navOpen = false" class="py-2" href="#thankyou">Thank You</a>
             </div>
         </div>
         <div class="max-w-3xl mx-auto pt-20 pb-10 md:py-10 handbook md:px-6">
