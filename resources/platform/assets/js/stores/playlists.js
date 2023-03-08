@@ -8,11 +8,12 @@ export const usePlaylistsStore = defineStore({
       playlists: [], // For Collection Page
       lessons: [], // For Detail Page
       pinnedPlaylists: [], // [{ id: '', title: '', isPinned: false}]
-      activePlaylist: {},
+      activePlaylist: {}, //playlist a user is a currently viewing 
       modalOpen: {
         modalType: null,
       },
       loadingPlaylists: false,
+      sortingPlaylist: false,
       loadingPinnedPlaylists: false,
       playlistsQuantity: 0,
       resultsPage: 1

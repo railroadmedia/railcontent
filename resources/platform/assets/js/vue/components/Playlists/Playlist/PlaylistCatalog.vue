@@ -52,42 +52,65 @@
     });
 </script>
 <template>
-    <main class="tw-w-full tw-pt-[33px]">
-        
-        <!-- Empty State -->
-        <section v-if="playlistsStore.lessons.length === 0" class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
-            <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#3F3F46] dark:tw-bg-[#445F74] tw-mb-6">
-                <musora-icon icon-name="eigth-notes" width="45" height="45" />
+    <main class="tw-w-full ">
+
+        <div class="tw-w-full tw-transition-all dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-overflow-hidden" :class="playlistsStore.sortingPlaylist ? 'tw-max-h-[200px]' : 'tw-max-h-0'">
+            <div class="tw-w-full tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-flex tw-items-center">
+                <p class="tw-mr-auto">Click <span class="tw-font-bold tw-mx-0.5">save changes</span> to save your changes or <span class="tw-font-bold tw-mx-0.5">cancel</span> to exit re-ordering</p>
+                <div class="tw-ml-6 tw-flex tw-py-[15px]">
+                    <button class="tw-btn-primary tw-btn-small tw-mr-[10px] tw-px-[30px]" :class="`tw-bg-${brand}`" @click.prevent="handleSort">
+                        Save changes
+                    </button>
+                    <button class="tw-btn-primary tw-btn-small tw-bg-transparent dark:tw-text-white tw-text-[#00101D] tw-px-[30px] hover:tw-bg-black/10" @click.prevent="playlistsStore.sortingPlaylist = false">
+                        Cancel
+                    </button>
+                </div>
             </div>
-            <h1 class="tw-text-3xl tw-font-bold tw-mb-[15px]">No lessons here yet</h1>
-            <p>Go to a lesson and click the plus icon to add to this playlist. </p>
-        </section>
+        </div>
+        
 
-        <!-- Catalog -->
-        <div v-if="playlistsStore.lessons.length" class="tw-w-full">
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-[28px]">
+            <div class="tw-flex tw-flex-col">
+                <!-- Empty State -->
+                <section v-if="playlistsStore.lessons.length === 0" class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
+                    <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#3F3F46] dark:tw-bg-[#445F74] tw-mb-6">
+                        <musora-icon icon-name="eigth-notes" width="45" height="45" />
+                    </div>
+                    <h1 class="tw-text-3xl tw-font-bold tw-mb-[15px]">No lessons here yet</h1>
+                    <p>Go to a lesson and click the plus icon to add to this playlist. </p>
+                </section>
 
-            <!-- List View Header -->
-            <header class="tw-hidden lg:tw-flex tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-p-4">
-                <div class="tw-w-[40px]">#</div>
-                <p class="tw-relative tw-inline-block tw-mr-auto tw-w-full">Name</p>
-                <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[128px]">Type</p>
-                <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[100px]">Time</p>
-                <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[100px]">Actions</p>
-            </header>
+                <!-- Catalog -->
+                <div v-if="playlistsStore.lessons.length" class="tw-w-full">
 
-            <!-- Cards -->
-            <section v-if="playlistsStore.lessons.length" class="tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-col">
-                <!-- Print Each Card -->
-                <playlist-card 
-                    v-for="(lesson,i) in playlistsStore.lessons" 
-                    :key="i" 
-                    :index="i"
-                    :lesson="lesson"
-                    :token="token"
-                    :brand="brand"
-                />  
-            </section>
+                    <!-- List View Header -->
+                    <header class="tw-hidden lg:tw-flex tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-p-4">
+                        <div class="tw-w-[40px]">#</div>
+                        <p class="tw-relative tw-inline-block tw-mr-auto tw-w-full">Name</p>
+                        <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[128px]">Type</p>
+                        <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[100px]">Time</p>
+                        <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[100px]">Actions</p>
+                    </header>
 
-        </div>      
+                    <!-- Cards -->
+                    <section v-if="playlistsStore.lessons.length" 
+                            class="tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-col"
+                    >
+                        <!-- Print Each Card -->
+                        <playlist-card 
+                            v-for="(lesson,i) in playlistsStore.lessons" 
+                            :key="i" 
+                            :index="i"
+                            :lesson="lesson"
+                            :token="token"
+                            :brand="brand"
+                            :draggable="playlistsStore.sortingPlaylist"
+                        />  
+                    </section>
+
+                </div>   
+            </div>
+        </div>
+
     </main>
 </template>

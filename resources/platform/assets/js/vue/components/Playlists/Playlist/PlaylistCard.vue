@@ -23,6 +23,7 @@
         },
         index: {
             type: Number,
+            default: 0,
         },
         isListView: {
             type: Boolean,
@@ -230,13 +231,16 @@
     });
 </script>
 <template>
-    <div class="tw-group tw-relative tw-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4"
-    >
+    <div class="tw-group tw-relative tw-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4">
         <!-- PLAYLIST INFO: clickable link -->
         <a  :href="lesson.url"
             class="tw-inline-flex tw-items-center tw-flex tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)] tw-text-[#0D0D0D] dark:tw-text-white"
         >
-            <div class="tw-inline-flex tw-items-center tw-font-bold tw-shrink-0 tw-w-[40px] tw-pl-4">{{ props.index + 1 }}</div>
+            <div class="tw-inline-flex tw-items-center tw-font-bold tw-shrink-0 tw-w-[40px] tw-pl-4 tw-transition-opacity"
+                 :class="{ 'tw-opacity-0' : playlistsStore.sortingPlaylist }"
+            >
+                {{ props.index }}
+            </div>
 
             <!-- Playlist thumbnail -->
             <div class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-w-[110px] tw-rounded tw-shrink-0">
@@ -324,6 +328,11 @@
                     @pinItem="(val) => state.isPinned = val"
                 />
             </div>
+        </div>
+
+        <!-- Drag/Drop Overlay -->
+        <div :class="{ 'tw-hidden' : !playlistsStore.sortingPlaylist }" 
+             class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-cursor-move">
         </div>
     </div>
 </template>

@@ -32,7 +32,7 @@
                 </div>
             </div>
             <div class="flex flex-column tw-ml-auto complete-column tw-items-start">
-                <div class="flex flex-row tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full">
+                <div class="flex flex-row md:tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full">
 
                     <button id="open-exercise-button" v-if="soundsliceSlug"
                         class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] tw-mb-2 md:tw-mb-0 md:tw-mr-2 tw-w-full md:tw-w-[250px]"
@@ -40,7 +40,7 @@
                         <i class="fas fa-play mr-1"></i> Practice
                     </button>
 
-                    <button class="tw-w-full md:tw-w-[250px] tw-mr-2"
+                    <button class="tw-w-full md:tw-w-[250px] md:tw-mr-2 tw-mb-2"
                         :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`"
                         :disabled="isRequesting" @click.stop="markAsComplete">
                         <i class="fas fa-check mr-1"></i>
@@ -51,7 +51,7 @@
                     <button v-if="soundsliceSlug"
                             title="Add To Playlist" 
                             class="tw-btn-secondary tw-btn-circle dark:tw-text-white tw-text-[#00101D]"
-                            @click.stop.prevent="addToPlaylist({ content_id: id, type: 'Assignments', name: breadcrumbArray, description: title, thumbnail_url: lessonThumbnail })"
+                            @click.stop.prevent="addToPlaylist({ content_id: id, type: 'My List', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail })"
                     >
                         <musora-icon icon-name="plus" class="tw-h-7 tw-w-7" />
                     </button>
@@ -142,11 +142,11 @@ export default {
         SoundSliceControls,
     },
     props: {
-        breadcrumbArray: {
-            type: Array,
-            default: [],
-        },
         lessonThumbnail: {
+            type: String,
+            default: () => '',
+        },
+        lessonTitle: {
             type: String,
             default: () => '',
         },

@@ -4,7 +4,7 @@
             <div class="flex flex-column grow tw-w-full">
                 <ContentAssignment
                     :lesson-thumbnail="lessonThumbnail"
-                    :breadcrumb-array="breadcrumbs"
+                    :lesson-title="lessonTitle"
                     :theme-color="assignment.themeColor"
                     :brand="assignment.themeColor"
                     :timecode="assignment.timecode"
@@ -44,10 +44,6 @@ export default {
         lessonData: {
             type: Object,
         },
-        breadcrumbArray: {
-            type: Array,
-            defualt: []
-        }
     },
     data() {
         return {
@@ -55,18 +51,18 @@ export default {
         };
     },
     mounted() {
-
+        console.log('lessonData: ', this.lessonData)
     },
     computed: {
         //Thumbnail
         lessonThumbnail() {
-            const thumbnail = this.lessonData.find(data => data.key === 'thumbnail_url');
+            const thumbnail = this.lessonData['data'].find(data => data.key === 'thumbnail_url');
             return thumbnail.value;
         },
-        breadcrumbs() {
-            const breadcrumbs = this.breadcrumbArray.join(' • ');
-            return breadcrumbs;
-        }
+        lessonTitle() {
+            const title = this.lessonData['fields'].find(data => data.key === 'title');
+            return title.value;
+        },
     }
 
 };

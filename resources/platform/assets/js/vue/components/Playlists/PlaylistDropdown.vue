@@ -195,6 +195,12 @@
         emit('closeDropdown');
     };
 
+    //Dragon Drop
+    const reorderPlaylist = () => {
+        playlistsStore.sortingPlaylist = true;
+        emit('closeDropdown');
+    };
+
     const clickHandler = (fnstring) => {
         switch (fnstring) {
             case "sharePlaylist": sharePlaylist(); break;
@@ -206,6 +212,7 @@
             case "privateToggle": privateToggle(); break;
             case "removeLesson": removeLesson(); break;
             case "editLessonTime": editLessonTime(); break;
+            case "reorderPlaylist": reorderPlaylist(); break;
         }
     }
 
