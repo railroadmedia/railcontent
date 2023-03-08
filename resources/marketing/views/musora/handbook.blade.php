@@ -22,7 +22,7 @@
         .anchor {
             padding-bottom: 56px;
         }
-        
+
 
         .no-mb {
             margin-bottom: 0 !important;
@@ -60,7 +60,7 @@
             <hr class="border-[#888888] mt-2 mb-6 md:w-32 lg:w-40 hidden md:block" />
             <div x-cloak
                  class="flex flex-col text-center md:text-left md:h-auto md:translate-y-0 overflow-hidden transition-all duration-200 ease-in-out "
-                 :class="navOpen ? 'visible -translate-y-0 max-h-full' : 'invisible -translate-y-8 md:visible max-h-0'"
+                 :class="navOpen ? 'visible -translate-y-0 max-h-full' : !navOpen && window.innerWidth < 768 && 'invisible -translate-y-8 md:visible max-h-0'"
             >
                 <a class="py-2 md:py-0 md:mb-4" href="#holiday">Holiday</a>
                 <a class="py-2 md:py-0 md:mb-4" href="#schedule">Schedule</a>
