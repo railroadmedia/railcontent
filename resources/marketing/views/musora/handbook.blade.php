@@ -2,6 +2,16 @@
 
 @section('head-includes')
     <meta name="robots" content="noindex">
+
+    <title>Employee Handbook | Musora</title>
+    <meta property="og:title" content="Employee Handbook | Musora">
+
+    <meta name="description" content="This Employee Handbook outlines some basic guidelines for all staff working at Musora Media Inc.">
+    <meta property="og:description" content="This Employee Handbook outlines some basic guidelines for all staff working at Musora Media Inc.">
+
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+
     <style>
         .handbook p {
             color: #44444F;
