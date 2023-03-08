@@ -3,7 +3,7 @@
 @section('head-includes')
     <meta name="robots" content="noindex">
     <style>
-        p {
+        .handbook p {
             color: #44444F;
             margin-bottom: 60px;
             line-height: 30px;
@@ -13,7 +13,8 @@
             margin-bottom: 0 !important;
         }
 
-        ul, ol {
+        .handbook ul,
+        .handbook  ol {
             line-height: 30px;
             color: #44444F;
         }
@@ -28,7 +29,7 @@
 
 <!-- Main -->
 @section('layout-body')
-    <div class="max-w-3xl mx-auto py-10">
+    <div class="max-w-3xl mx-auto py-10 handbook">
         <div class="px-4 lg:px-0">
             <h1 class="font-extrabold">Employee Handbook</h1>
             <div class="inline-block w-20 border-[3px] border-black my-6"></div>
@@ -161,13 +162,13 @@
             <p class="no-mb">
                 Our leadership team can always help you when needed. I would encourage you to not bother them repeatedly throughout the day, but prepare a shortlist of questions and request a meeting time to go over any items on the list.
             </p>
-            <ul class="mb-16 pl-6 mt-4 list-disc">
+            <ul class="mb-16 pl-2 sm:pl-6 mt-4 list-disc">
                 <li><div class="flex justify-between"><span>Jared Falk</span><div class="flex justify-between sm:w-2/3 flex-col sm:flex-row leading-snug mb-4 sm:mb-0 text-right sm:text-left"><span>President/CEO</span><span>jared@musora.com</span></div></div></li>
                 <li><div class="flex justify-between"><span>James Falk</span><div class="flex justify-between sm:w-2/3 flex-col sm:flex-row leading-snug mb-4 sm:mb-0 text-right sm:text-left"><span>Chief Operating Officer</span><span>jame@musora.com</span></div></div></li>
                 <li><div class="flex justify-between"><span>Dave Atkinson</span><div class="flex justify-between sm:w-2/3 flex-col sm:flex-row leading-snug mb-4 sm:mb-0 text-right sm:text-left"><span>Chief Community Officer</span><span>dave@musora.com</span></div></div></li>
                 <li><div class="flex justify-between"><span>Chad Kettner</span><div class="flex justify-between sm:w-2/3 flex-col sm:flex-row leading-snug mb-4 sm:mb-0 text-right sm:text-left"><span>Chief Marketing Officer</span><span>chad@musora.com</span></div></div></li>
                 <li><div class="flex justify-between"><span>Caleb Favor</span><div class="flex justify-between sm:w-2/3 flex-col sm:flex-row leading-snug mb-4 sm:mb-0 text-right sm:text-left"><span>Chief Technology Officer</span><span>caleb@musora.com</span></div></div></li>
-                <li><div class="flex justify-between"><span>Victor Guidera</span><div class="flex justify-between sm:w-2/3 flex-col sm:flex-row leading-snug mb-4 sm:mb-0 text-right sm:text-left"><span>Production and Technology Director</span><span>victor@musora.com</span></div></div></li>
+                <li><div class="flex justify-between"><span>Victor Guidera</span><div class="flex justify-between sm:w-2/3 flex-col sm:flex-row leading-snug mb-4 sm:mb-0 text-right sm:text-left"><span>Production & Technology Director</span><span>victor@musora.com</span></div></div></li>
                 <li><div class="flex justify-between"><span>Jordan Paul</span><div class="flex justify-between sm:w-2/3 flex-col sm:flex-row leading-snug mb-4 sm:mb-0 text-right sm:text-left"><span>Creative Director</span><span>jord@musora.com</span></div></div></li>
                 <li><div class="flex justify-between"><span>Amy Malcolmson</span><div class="flex justify-between sm:w-2/3 flex-col sm:flex-row leading-snug mb-4 sm:mb-0 text-right sm:text-left"><span>Student Experience Director</span><span>amy@musora.com</span></div></div></li>
                 <li><div class="flex justify-between"><span>Pam Black</span><div class="flex justify-between sm:w-2/3 flex-col sm:flex-row leading-snug mb-4 sm:mb-0 text-right sm:text-left"><span>Controller</span><span>pam@musora.com</span></div></div></li>
@@ -185,6 +186,9 @@
                 It’s also my goal to help you succeed at doing something you love. Whether that is at Musora Media Inc or somewhere else, it doesn’t matter to me. What matters is that you are happy. I know what it’s like to hate a job and I know what it’s like to love one. I love this job and I want you to love coming to hang out here as well. If you ever feel like you don’t love your job anymore, please come talk to me, I will help find a solution.<br><br>
                 Lastly, we have the opportunity to do amazing things and actually effect change in people’s lives - that’s pretty incredible. So I don’t take that responsibility lightly and I want to make sure that I am building a team of “A” players to get the work done. Always try to be an “A” player, play your hardest, play to dominate, and most importantly, always have fun!
             </p>
+            <div class="text-right">
+                <img class="filter invert h-20 sm:h-28 -mt-10" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/signature.png" alt="jareds signature">
+            </div>
         </div>
     </div>
 @stop
