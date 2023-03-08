@@ -13,6 +13,10 @@
     <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         .handbook p {
             color: #44444F;
             /*margin-bottom: 60px;*/
@@ -40,6 +44,26 @@
             padding-bottom: 10px;
         }
 
+        @media (min-width: 767px) {
+            .nav-space {
+                width: 160px;
+                min-width: 160px;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .nav-space {
+                width: 215px;
+                min-width: 215px;
+            }
+        }
+
+        @media (min-width: 1280px) {
+            .nav-space {
+                width: 256px;
+                min-width: 256px;
+            }
+        }
     </style>
 @endsection
 
@@ -52,7 +76,8 @@
 <!-- Main -->
 @section('layout-body')
     <div class="md:flex">
-        <div class="bg-[#020815] text-white flex flex-col px-5 lg:pl-14 lg:pr-10 py-5 fixed md:relative w-full md:w-auto transition-all duration-200 ease-in-out">
+        <div class="nav-space hidden md:block bg-[#020815]"></div>
+        <div class="bg-[#020815] text-white flex flex-col px-5 lg:pl-14 lg:pr-10 py-5 fixed w-full md:w-auto transition-all duration-200 ease-in-out z-10">
             <div class="flex justify-between items-center" @click="navOpen = !navOpen">
                 <b class="text-[#888888] uppercase text-sm">Index</b>
                 <i class="fa-sharp fa-solid fa-chevron-down md:hidden text-[#888888] transition-all duration-200" :class="navOpen && 'rotate-180'"></i>
