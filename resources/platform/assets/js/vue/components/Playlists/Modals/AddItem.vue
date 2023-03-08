@@ -74,8 +74,9 @@ const addRemovePlaylistSelection = (payload) => {
 
 const handleActionClick = (payload) => {
     console.log('duplicated ids', duplicatedIDs.value)
-    const index = duplicatedIDs.value.indexOf(String(payload));
-    if (index !== -1) {
+    const duplicateIndex = duplicatedIDs.value.indexOf(String(payload));
+    const selectedIndex = selectedPlaylists.value.indexOf(String(payload));
+    if (duplicateIndex !== -1 && selectedIndex === -1) {
         duplicateProps.value = { id: payload, show: true, title: duplicatedItemIdNameMap.value[payload] };
     } else {
         addRemovePlaylistSelection(payload);
@@ -125,12 +126,13 @@ const handleScroll = (e) => {
 }
 
 const handleDuplicateConfirm = () => {
+    console.log('duplicate id', duplicateProps.value.id)
     addRemovePlaylistSelection(duplicateProps.value.id);
     handleDuplicateCancel();
 };
 
 const handleDuplicateCancel = () => {
-    duplicateProps.value = { id: null, show: false };
+    duplicateProps.value = { id: null, show: false, title: '' };
 };
 
 const getUserPlaylists = () => {

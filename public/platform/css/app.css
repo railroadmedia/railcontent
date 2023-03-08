@@ -23495,10 +23495,6 @@ a:visited{
 .tw-bg-\[\#002039\]\/90{
   background-color: rgb(0 32 57 / 0.9) !important;
 }
-.tw-bg-\[\#9EC0DC\]{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(158 192 220 / var(--tw-bg-opacity)) !important;
-}
 .tw-bg-\[\#000\]\/\[\.05\]{
   background-color: rgb(0 0 0 / .05) !important;
 }
@@ -25221,10 +25217,6 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#A1A1A9\]{
   --tw-text-opacity: 1 !important;
   color: rgb(161 161 169 / var(--tw-text-opacity)) !important;
-}
-.tw-dark .dark\:tw-text-\[\#081825\]{
-  --tw-text-opacity: 1 !important;
-  color: rgb(8 24 37 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-text-\[\#000C17\]{
   --tw-text-opacity: 1 !important;
