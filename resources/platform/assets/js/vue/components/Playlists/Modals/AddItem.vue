@@ -8,6 +8,7 @@ import Toggle from '../../Toggle/Toggle.vue'
 import Table from '../../Table/Table.vue'
 import { PlusCircleIcon, PlusIcon, CheckCircleIcon } from '@heroicons/vue/outline';
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.vue';
+import AddDuplicate from './AddDuplicate.vue';
 
 const props = defineProps({
     brand: {
@@ -188,6 +189,7 @@ onMounted(() => {
 
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
+        <AddDuplicate :title="currentDuplicateTitle" @onConfirm="handleDuplicateConfirm" @onCancel="handleDuplicateCancel" />
         <div v-if="isLoadingAssignments || isLoadingPlaylists"
             class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-items-center tw-justify-center tw-bg-black/40">
             <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
