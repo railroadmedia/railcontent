@@ -2,7 +2,7 @@
 import InfoModal from '../../Modal/InfoModal.vue';
 
 //Emits
-const emit = defineEmits(['onCloseModal', 'onConfirm']);
+const emit = defineEmits(['oClose', 'onConfirm']);
 
 //-----------Props-----------//
 const props = defineProps({
@@ -18,8 +18,8 @@ const props = defineProps({
 </script>
 
 <template>
-    <InfoModal :classOverride="`tw-bg-white dark:tw-bg-[#081825] tw-border tw-border-[#445F74] dark:tw-border-[#445F74] tw-max-w-[365px]`"
-        key="create-playlist-modal-instance" modalId="create-playlist-modal" @onClose="() => emit('onClosePlaylistsModal')"
+    <InfoModal :classOverride="`tw-bg-white dark:tw-bg-[#081825] tw-border tw-border-[#445F74] dark:tw-border-[#445F74] tw-max-w-[468px]`"
+        key="duplicate-playlist-modal-instance" modalId="duplicate-playlist-modal" @onClose="() => emit('onClose')"
         :selfContained="true">
         <div class="tw-h-full tw-w-full tw-flex tw-flex-col tw-items-center tw-justify-center">
             <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-4">
@@ -27,7 +27,7 @@ const props = defineProps({
             </h2>
 
             <p class="dark:tw-text-white tw-text-center">
-                Lesson with the title <span class="tw-bg-[#9EC0DC]">{{ title }}</span> already exists in this playlist.
+                Lesson with the title <span class="tw-text-[#9EC0DC]">{{ title }}</span> already exists in this playlist.
                 <br />
                 Add anyway?
             </p>
@@ -39,7 +39,7 @@ const props = defineProps({
                     CONFIRM
                 </button>
                 <!-- Close Modal -->
-                <button @click="() => emit('onCloseModal')"
+                <button @click="() => emit('onClose')"
                     class="tw-btn-primary tw-btn-small tw-text-base dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px]">
                     CANCEL
                 </button>
