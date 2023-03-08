@@ -132,7 +132,7 @@
             <div class="px-4 md:px-0">
                 <div class="header">Our mission (Why does this company exist?)</div>
                 <p class="mb-14">
-                    Empowering music students around the world to achieve musical freedom through our inspiring social learning communities. We do this by partnering with the best teachers, filming entertaining and educational content, hiring an amazing staff, and utilizing cutting edge web and mobile technology.
+                    Empowering music students around the world to achieve musical freedom through our inspiring social learning communities. We do this by partnering with the best teachers, filming entertaining and educational content, hiring an amazing staff, and utilizing cutting-edge web and mobile technology.
                 </p>
                 <div class="header">Our vision (What are we going to do?)</div>
                 <p class="mb-14">
@@ -141,7 +141,7 @@
                 </p>
                 <div class="header">Our values (How are we going to achieve our vision?)</div>
                 <p class="no-mb">
-                    Below are the values that guide management and employees to make decisions autonomously. This is how we prioritize new projects, make the best staff hiring decisions, and gives us a guideline on how we treat our students and staff.
+                    Below are the values that guide management and employees to make decisions autonomously. This is how we prioritize new projects, make the best staff hiring decisions, and give us a guideline on how we treat our students and staff.
                 </p>
                 <ol class="pl-6 mt-4 list-decimal no-mb">
                     <li>We believe that all of our students should be treated like family members.</li>
@@ -149,10 +149,10 @@
                     <li>We believe that staff should always keep pushing, in our successes and failures.</li>
                     <li>We believe in sticking to deadlines and will work extra hours to get the job done right.</li>
                     <li>We believe in connecting with our students, regardless of whether they’ve paid us or not.</li>
-                    <li>We believe that strong relationships are more important than powerful technology.</li>
+                    <li>We believe that strong relationships are more important than a powerful technology.</li>
                     <li>We believe that every day is an opportunity to do a better job than the previous day.</li>
                     <li>We believe that music education can have a positive effect on people’s lives.</li>
-                    <li>We believe in an open door policy; staff and instructors should be approachable.</li>
+                    <li>We believe in an open-door policy; staff and instructors should be approachable.</li>
                     <li>We believe in a clean workspace, even if we have to clean up someone else’s mess.</li>
                 </ol>
             </div>
@@ -166,20 +166,20 @@
                 <div id="schedule" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Schedule</div>
                 <p>
-                    We value an autonomous work mindset and have a “Work from Wherever Just Get Your Sh*t Done” policy. Your leadership team loves working with you in the office in person. However, you are welcome to work in-office or from home. A typical work-day will be 8am - 4pm however if you need to make alternate arrangements, that can be discussed with your manager. You are welcome to work from wherever you want. We will only question the process if we’re not getting the result.
+                    We value an autonomous work mindset and have a “Work from Wherever Just Get Your Sh*t Done” policy. Your leadership team loves working with you in the office in person. However, you are welcome to work in-office or from home. A typical work day will be 8 am - 4 pm however if you need to make alternate arrangements, that can be discussed with your manager. You are welcome to work from wherever you want. We will only question the process if we’re not getting the result.
                 </p>
                 <div id="focus" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Focus</div>
                 <p>
                     Working on a computer all day can be tiring on the eyes and easy to get distracted. We suggest taking a quick 5-minute break or standing up to grab a glass of water if you need to. However, it’s important to stay focused and do your best to not distract other team members by talking loudly or sending random messages through chat.<br><br>
                     There are exceptions to this if what you have to say is very funny. However, if it’s only a 6/10 on the funny scale you should probably wait until lunch break or after hours to discuss.<br><br>
-                    Personal mobile devices are fine to use during work hours, however, situations will be treated on a case-by-case basis. If a team member is on their phone too frequently, disciplinary action will be taken in the form of a public shaming.<br><br>
-                    Logging into social media sites like Reddit, Facebook, Instagram, and Snapchat can be a huge distraction from your main focus and Musora Media Inc’s Mission. We ask that you keep all of this activity to a minimum unless it’s in your job description or you need to check something very important.
+                    Personal mobile devices are fine to use during work hours, however, situations will be treated on a case-by-case basis. If a team member is on their phone too frequently, disciplinary action will be taken in the form of public shaming.<br><br>
+                    Logging into social media sites like Reddit, Facebook, Instagram, and Snapchat can be a huge distraction from your main focus and Musora Media Inc’s Mission. We ask that you keep all of this activity to a minimum unless it’s in your job description or you need to check something significant.
                 </p>
                 <div id="payroll" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Payroll</div>
                 <p>
-                    All team members are paid every two weeks on Friday. This is generally done by direct deposit (Note: you must give Elizabeth a direct deposit form or VOID cheque to initiate this). For all questions relating to payroll and deductions you can email Elizabeth at: elizabeth@musora.com
+                    All team members are paid every two weeks on Friday. This is generally done by direct deposit (Note: you must give Elizabeth a direct deposit form or VOID cheque to initiate this). For all questions relating to payroll and deductions, you can email Elizabeth at: elizabeth@musora.com
                 </p>
                 <div id="etiquette" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Etiquette</div>
@@ -193,14 +193,14 @@
                 <div id="travel" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Travel</div>
                 <p>
-                    If you are using your personal vehicle for work-related tasks, you are entitled to be paid per kilometer for when it’s being used. You will find an Employee Reimbursement form in the Asana Finance project called “FN Guides and Documents”. Fill in the number of kilometres you drove and multiply it by $.61. Finance will then reimburse you. For mileage over 5000 km the rate claimed will be $.55/km.<br><br>
-                    For staff members traveling out of the office for events or seminars, all travel, food, and lodging will be covered by Musora Media Inc. In the event you have to pay something from your own finances, feel free to submit an Employee Reimbursement form.
+                    If you are using personal vehicle for work-related tasks, you are entitled to be paid per kilometer for when it’s being used. You will find an Employee Reimbursement form in the Asana Finance project called “FN Guides and Documents”. Fill in the number of kilometers you drove and multiply it by $0.61. Finance will then reimburse you. For mileage over 5000 km, the rate claimed will be $0.55/km.<br><br>
+                    For staff members traveling out of the office for events or seminars, all travel, food, and lodging will be covered by Musora Media Inc. In the event, you have to pay something from your finances, feel free to submit an Employee Reimbursement form.
                 </p>
                 <div id="expenses" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Expenses</div>
                 <p>
-                    If you would like to make an office-related purchase you will need to make sure you have the proper approval prior to doing so. There are department credit cards so talk with your team lead to discuss the purchase.<br><br>
-                    If you paid for a company expense from your personal finances, please keep the receipt and submit this to Finance using the Asana Expense Reimbursement form. Any questions ask pam@drumeo.com
+                    If you would like to make an office-related purchase you will need to make sure you have the proper approval before doing so. There are department credit cards so talk with your team lead to discuss the purchase.<br><br>
+                    If you paid for a company expense from your finances, please keep the receipt and submit this to Finance using the Asana Expense Reimbursement form. Any questions ask pam@drumeo.com
                     All expenses must be approved.
                 </p>
                 <div id="drinking" class="relative -top-28 md:-top-20"></div>
@@ -219,10 +219,10 @@
                 <div id="overtime" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Overtime</div>
                 <p class="no-mb">
-                    Occasionally, overtime is necessary in order to meet deadlines. If your project requires you to put in extra time, please follow procedure PCPR01A.  Among other things this procedure explains:
+                    Occasionally, overtime is necessary to meet deadlines. If your project requires you to put in extra time, please follow procedure PCPR01A.  Among other things this procedure explains:
                 </p>
                 <ul class="pl-6 mt-4 list-disc">
-                    <li>Overtime is time worked in excess of 8 hours a day or PCPR01A40 hours a week</li>
+                    <li>Overtime is time worked more than 8 hours a day or >40 hours a week</li>
                     <li>Overtime can be banked or paid at 1.5 x your regular pay</li>
                     <li>Overtime must be tracked using the process described in the said procedure.</li>
                 </ul>
@@ -258,7 +258,7 @@
                     Please read guidelines outlined in procedure PCPR01A.  Among other things, this procedure explains:
                 </p>
                 <ul class="pl-6 mt-4 list-disc">
-                    <li>All employees who have been employed for the 30 calendar days prior to the stat and have worked 15 of the 30 days are entitled to a day off with pay for statutory holidays in BC plus National Truth and Reconciliation Day and Boxing Day. </li>
+                    <li>All employees who have been employed for the 30 calendar days before the statutory and have worked 15 of the 30 days are entitled to a day off with pay for statutory holidays in BC plus National Truth and Reconciliation Day and Boxing Day. </li>
                 </ul>
                 <div id="leadership" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Leadership</div>
@@ -281,15 +281,15 @@
                 <div class="header">Meetings</div>
                 <p>
                     Meetings can be a productive time for staff members to get together, collaborate, and be creative. They are crucial to the success of our Mission. However, they can also be a quick way to waste lots of combined staff hours.<br><br>
-                    In order to book a meeting, please follow this process. In summary, you must plan your meeting date, time, attendees, and agenda. The staff member who books the meeting is the host.<br><br>
+                    To book a meeting, please follow this process. In summary, you must plan your meeting date, time, attendees, and agenda. The staff member who books the meeting is the host.<br><br>
                     When booking a meeting, if you require the boardroom please follow this process.
                 </p>
                 <div id="thankyou" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Thank you</div>
                 <p class="mb-14">
-                    Lastly, I want to say thank you for reading this. I’m happy and surprised you made it all the way through. As your feared, fearful, and fearless leader, I hope I do a good job of making you love getting up in the morning and coming to work at Musora Media Inc. It’s my personal goal that you love coming to work, after all, most of us spend almost ⅓ of our lives working, we might as well enjoy it.<br><br>
-                    It’s also my goal to help you succeed at doing something you love. Whether that is at Musora Media Inc or somewhere else, it doesn’t matter to me. What matters is that you are happy. I know what it’s like to hate a job and I know what it’s like to love one. I love this job and I want you to love coming to hang out here as well. If you ever feel like you don’t love your job anymore, please come talk to me, I will help find a solution.<br><br>
-                    Lastly, we have the opportunity to do amazing things and actually effect change in people’s lives - that’s pretty incredible. So I don’t take that responsibility lightly and I want to make sure that I am building a team of “A” players to get the work done. Always try to be an “A” player, play your hardest, play to dominate, and most importantly, always have fun!
+                    Lastly, I want to say thank you for reading this. I’m happy and surprised you made it all the way through. As your feared, fearful, and fearless leader, I hope I do a good job of making you love getting up in the morning and coming to work at Musora Media Inc. It’s my personal goal that you love coming to work, after all, most of us spend almost 1/3 of our lives working, and we might as well enjoy it.<br><br>
+                    It’s also my goal to help you succeed at doing something you love. Whether that is at Musora Media Inc or somewhere else, it doesn’t matter to me. What matters is that you are happy. I know what it’s like to hate a job and I know what it’s like to love one. I love this job and I want you to love coming to hang out here as well. If you ever feel like you don’t love your job anymore, please come talk to me, and I will help find a solution.<br><br>
+                    Lastly, we have the opportunity to do amazing things and effect change in people’s lives - that’s pretty incredible. So I don’t take that responsibility lightly and I want to make sure that I am building a team of “A” players to get the work done. Always try to be an “A” player, play your hardest, play to dominate, and most importantly, always have fun!
                 </p>
                 <div class="text-right">
                     <img class="filter invert h-20 sm:h-28 -mt-10" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/signature.png" alt="jareds signature">
