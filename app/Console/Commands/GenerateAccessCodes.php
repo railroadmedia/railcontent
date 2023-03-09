@@ -106,7 +106,7 @@ class GenerateAccessCodes extends Command
         $sourceInfo = ($source) ?  ' source "' . $source . '"' : ' no source attribute';
 
         $answer = $this->ask(
-            'Confirm to create ' . $amountToCreate . ' access codes for product' . $product->getName() .  ' with id ' .
+            'Confirm to create ' . $amountToCreate . ' access codes for product ' . $product->getName() .  ' with id ' .
             $productId . ' for brand "' . $brand . '" and with' . $sourceInfo . '. Enter "yes" if this is correct'
         );
 

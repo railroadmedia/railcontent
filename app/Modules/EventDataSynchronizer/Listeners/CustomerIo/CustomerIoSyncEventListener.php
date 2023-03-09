@@ -1181,15 +1181,21 @@ class CustomerIoSyncEventListener
     public function handleAccessCodeClaimed(AccessCodeClaimed $accessCodeClaimed)
     {
         $accessCode = $accessCodeClaimed->getAccessCode();
+        $brand = $accessCode->getBrand();
 
         dispatch(
             (new CustomerIoCreateEventByUserId(
                 $accessCodeClaimed->getUser()->getId(),
-                $accessCode->getBrand(),
-                $accessCode->getBrand() . '_user_redemption',
+                $brand,
+                'musora_membership_access_code_redemption',
                 [
-                    'redemption_source' => $accessCode->getSource(),
-                    'redemption_code' => $accessCode->getCode()
+                    'branch_source' => $brand,
+                    'access_code' => $accessCode->getCode(),
+                    'access_source' => $accessCode->getSource(),
+                    'claim_timestamp' => $accessCode->getUpdatedAt(),
+                    'code_creating_date' => $accessCode->getCreatedAt(),
+                    'product_ids' => $accessCode->getProductIdsAsString()
+
                 ],
                 null,
                 Carbon::now()->timestamp
@@ -1199,6 +1205,27 @@ class CustomerIoSyncEventListener
                     ->addSeconds(3)
             )
         );
+
+
+//        dispatch(
+//            (new CustomerIoCreateEventByUserId(
+//                $accessCodeClaimed->getUser()->getId(),
+//                $brand,
+//                'musora_membership_access',
+//                [
+//                    'access_type' => 'manual_access_type',
+//                    'access_start_date' => '',
+//                    'access_expiration_date' => '',
+//
+//                ],
+//                null,
+//                Carbon::now()->timestamp
+//            ))
+//                ->delay(
+//                    Carbon::now()
+//                        ->addSeconds(3)
+//                )
+//        );
     }
 
 }
