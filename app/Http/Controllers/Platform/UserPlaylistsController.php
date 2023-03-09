@@ -7,6 +7,7 @@ use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
@@ -129,6 +130,16 @@ class UserPlaylistsController extends BaseController
 
     public function playlistItem(Request $request, $domain, $brand, $playlistId, $playlistItemId)
     {
+        $oldStatuses = ContentRepository::$availableContentStatues;
+        $oldFutureContent = ContentRepository::$pullFutureContent;
+
+        ContentRepository::$availableContentStatues = [
+            ContentService::STATUS_PUBLISHED,
+            ContentService::STATUS_SCHEDULED,
+        ];
+
+        ContentRepository::$pullFutureContent = true;
+
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
         throw_if(empty($playlist), new NotFoundHttpException());
 
@@ -144,6 +155,9 @@ class UserPlaylistsController extends BaseController
                 ->first();
         $content = $this->contentService->getById($playlistItem['id']);
         throw_if(empty($playlistItem), new NotFoundHttpException());
+
+        ContentRepository::$availableContentStatues = $oldStatuses;
+        ContentRepository::$pullFutureContent = $oldFutureContent;
 
         if(empty($content)){
             // TODO: Replace with Upgrade to View page
