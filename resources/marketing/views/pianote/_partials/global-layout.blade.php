@@ -36,63 +36,6 @@
 </script>
 {!! \App\Analytics\Tracker::bodyBottom() !!}
 
-<script type="text/javascript" src={{ asset('/marketing/js/jquery.countdown-2.min.js') }}></script>
-<script>
-    $(document).ready(function () {
-        $('.tzcd-big').countdown('2022/12/27')
-            .on('update.countdown', function (event) {
-                var format = '' + '<div class="inline-block mr-2"><h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">%M</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">min%!M</p></div> ' + '<div class="inline-block"><h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">%S</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">sec%!S</p></div>';
-                if (event.offset.totalHours > 0) {
-                    format = '' + '<div class="inline-block mx-2"><h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">%H</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">hr%!H</p></div> ' + format;
-                }
-                if (event.offset.totalDays > 0) {
-                    format = '' + '<div class="inline-block"><h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">%D</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">day%!D</p></div> ' + format;
-                }
-                $(this).html(event.strftime(format));
-            })
-            .on('finish.countdown', function (event) {
-                $(this).html('<div class="inline-block"><h2 class="font-extrabold leading-none text-2xl md:text-3xl lg:text-4xl">LIMITED</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">TIME LEFT</p></div>');
-            });
-
-        $('.tzcd-nppsh2').countdown('2023/02/20')
-            .on('update.countdown', function (event) {
-                var format = '' + '%MM %SS ';
-                if (event.offset.totalHours > 0) {
-                    format = '' + '%HH ' + format;
-                }
-                if (event.offset.totalDays > 0) {
-                    format = '' + '%DD ' + format;
-                }
-                $(this).html(event.strftime(format));
-            })
-            .on('finish.countdown', function (event) {
-                $(this).html('<div class="inline-block"><h2 class="font-extrabold leading-none text-lg">LIMITED</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">TIME LEFT</p></div>');
-            });
-        @if(Carbon\Carbon::create(2023, 2, 24, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
-        $('.tzcd-nppsh').countdown('2023/02/27')
-            .on('update.countdown', function (event) {
-                $(this).html(event.strftime('%D day%!D'));
-            });
-        @else
-        $('.tzcd-nppsh').countdown('2023/02/27')
-            .on('update.countdown', function (event) {
-                var format = '' + '%M minute%!M %S second%!S ';
-                if (event.offset.totalHours > 0) {
-                    format = '' + '%H hour%!H ' + format;
-                }
-                if (event.offset.totalDays > 0) {
-                    format = '' + '%D day%!D ' + format;
-                }
-                $(this).html(event.strftime(format));
-            })
-            .on('finish.countdown', function (event) {
-                $(this).html('<div class="inline-block"><h2 class="font-extrabold leading-none text-lg">LIMITED</h2> <p class="leading-none uppercase font-extrabold text-xs text-promo">TIME LEFT</p></div>');
-            });
-
-        @endif
-    });
-</script>
-
 <script type="text/javascript" id="inspectletjs">
     window.__insp = window.__insp || [];
     __insp.push(['wid', 563774139]);

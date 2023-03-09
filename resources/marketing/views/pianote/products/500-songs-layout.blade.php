@@ -28,7 +28,7 @@
 
     <header class="header text-center">
         <div class="container">
-            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/500-songs-logo.svg">
+            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/500-songs-logo.svg" alt="500 songs logo">
 
             <br>
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
@@ -113,7 +113,7 @@
             @endif
             <div class="day-slice">
                 <div class="day-thumbnail @hasSection('lesson-watched') watched @endif">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/the-songs.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/the-songs.jpg" alt="Day 1 thumbnail">
                     @hasSection('lesson-watched')
                         <div class="badge-watched">WATCHED</div>
                     @endif
@@ -126,7 +126,7 @@
             </div>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/the-order.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/the-order.jpg" alt="Day 2 thumbnail">
                     <div class="top-badge">DAY 2</div>
                     <div class="bottom-badge hide">13:43</div>
                 </div>
@@ -136,7 +136,7 @@
             </div>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/adding-style-flair.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/adding-style-flair.jpg" alt="Day 3 thumbnail">
                     <div class="top-badge">DAY 3</div>
                     <div class="bottom-badge hide">11:37</div>
                 </div>
@@ -146,7 +146,7 @@
             </div>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/inversions.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/inversions.jpg" alt="Day 4 thumbnail">
                     <div class="top-badge">DAY 4</div>
                     <div class="bottom-badge hide">15:09</div>
                 </div>
@@ -156,7 +156,7 @@
             </div>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/the-key.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/the-key.jpg" alt="Day  thumbnail">
                     <div class="top-badge">DAY 5</div>
                     <div class="bottom-badge hide">11:22</div>
                 </div>
@@ -167,7 +167,7 @@
             <hr>
             <div class="day-slice bonus">
                 <div class="day-thumbnail">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/complex-chords.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/complex-chords.jpg" alt="Bonus 1 thumbnail">
                     <div class="top-badge">BONUS #1</div>
                     <div class="bottom-badge hide">15:13</div>
                 </div>
@@ -177,7 +177,7 @@
             </div>
             <div class="day-slice bonus">
                 <div class="day-thumbnail">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/the-melody.jpg">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/the-melody.jpg" alt="Bonus 2 thumbnail">
                     <div class="top-badge">BONUS #2</div>
                     <div class="bottom-badge hide">9:08</div>
                 </div>
@@ -191,7 +191,7 @@
     <div id="moreSongs" class="anchor"></div>
     <section class="more-songs">
         <div class="container">
-            <img class="yellow-red-icons" src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/more-songs-icons.png">
+            <img class="yellow-red-icons" src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/more-songs-icons.png" alt="More songs icon">
             <h1>More Songs Than<br class="hidden-sm hidden-md hidden-lg"> You'll Ever Need</h1>
             <h4>This training pack will teach you the skills to <em>play nearly any popular song on the piano</em> using chord charts. We won’t take up hours of your time to do this -- because we know you’d rather be playing songs than watching videos.
                 <br><br>
@@ -210,7 +210,7 @@
                 @include('pianote.products._songs')
             </div>
             <div class="text-center">
-                <a id="uncoverAll" class="join outline white">Show All</a>
+                <span id="uncoverAll" class="join outline white">Show All</span>
             </div>
         </div>
     </section>
@@ -256,14 +256,14 @@
                 <h1>Lisa Witt: Your Personal<br class="hidden-xs">
                 Piano Teacher</h1>
                 <p><em>"This was my first attempt at the piano and I learned songs on the first day. 500 Songs in 5 Days cut through to the fun parts early on. The lessons are concise with clear goals showing where I currently am and what it takes to be where I want to be, it provides small victories along the way that keep me interested - I have never seen lessons on any instrument as good as 500 Songs in 5 Days."</em></p>
-                <div class="avatar-name"><img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/connor.jpg"> <p><strong>CONNOR BECKETT</strong><br><em>UNITED KINGDOM</em></p></div>
+                <div class="avatar-name"><img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/connor.jpg" alt="Connor Beckett"> <p><strong>CONNOR BECKETT</strong><br><em>UNITED KINGDOM</em></p></div>
             </div>
         </div>
     </section>
 
     <section class="teacher-bio">
         <div class="container">
-            <p><span class="first-letter"><img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/big-l.png"></span>isa Witt has been teaching the piano for 18 years and in that time has helped hundreds of students realize their musical dreams. Now she’s here to help you.
+            <p><span class="first-letter"><img src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/big-l.png" alt="Bold L"></span>isa Witt has been teaching the piano for 18 years and in that time has helped hundreds of students realize their musical dreams. Now she’s here to help you.
                 <br><br>
                 Lisa’s contagious enthusiasm will have you excited to practice and return to the keys for your next lesson. Her teaching style makes lessons fun and focused on you and your learning.
                 <br><br>
@@ -363,7 +363,7 @@
 
     <section class="final text-center">
         <div class="container">
-            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/500-songs-logo.svg">
+            <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/500-songs-logo.svg" alt="500 songs logo">
             <h2>Develop the skills to play
                 @hasSection('name')
                      songs by <br class="hidden-sm hidden-md hidden-lg"> <strong>@yield('name')</strong> for a one-time <br class="hidden-sm hidden-md hidden-lg">

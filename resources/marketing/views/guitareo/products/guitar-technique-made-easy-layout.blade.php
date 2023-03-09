@@ -92,11 +92,11 @@
         "cartVersion" => true
     ])
     @include('guitareo._partials.promo-banner', [
-                "name" => "Guitar Technique Made Easy",
-                "fullPrice" => floatval($productPrices['GTME-OCT-2018-SEMESTER']->price),
-                "price" => floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price),
-                "noBreadcrumb" => true
-            ])
+        "name" => "Guitar Technique Made Easy",
+        "fullPrice" => floatval($productPrices['GTME-OCT-2018-SEMESTER']->price),
+        "price" => floatval($productPrices['GTME-OCT-2018-SEMESTER']->discounted_price),
+        "noBreadcrumb" => true
+    ])
     @hasSection('topbar')
         @yield('topbar')
     @endif
@@ -107,7 +107,7 @@
                 <div class="play-video play-trailer"><i class="fas fa-play play-button" data-open="trailer"></i></div>
                 <div class="logo">
                     <p><em>Nate Savage's</em></p>
-                    <img src="https://guitareo.s3.amazonaws.com/gtme/logo-white.png">
+                    <img src="https://guitareo.s3.amazonaws.com/gtme/logo-white.png" alt="GTME logo">
                 </div>
             </div>
             {{--<p>Guitar Technique Made Easy is an intimate<br class="hide-for-large">--}}
@@ -435,7 +435,7 @@
                 "weekDescription" => "Place the last technique puzzle-piece and finally gain full freedom on the guitar!"
                 ])
             </div>
-            <a class="join made-easy outline toggle">Show All</a>
+            <span class="join made-easy outline toggle">Show All</span>
         </div>
     </section>
 
@@ -451,7 +451,7 @@
     <section class="instructor-bio">
         <div class="row">
             <p class="columns">
-                <span class="first-letter"><img src="https://guitareo.s3.amazonaws.com/gtme/bold-n.png"></span>ate Savage always knew he wanted to share his love for playing the guitar with others. After earning his Music Degree at San Jacinto College and playing hundreds of shows across Canada, the USA, and Europe -- he wanted to find a better way to help guitarists around the world.
+                <span class="first-letter"><img src="https://guitareo.s3.amazonaws.com/gtme/bold-n.png" alt="Bold n"></span>ate Savage always knew he wanted to share his love for playing the guitar with others. After earning his Music Degree at San Jacinto College and playing hundreds of shows across Canada, the USA, and Europe -- he wanted to find a better way to help guitarists around the world.
                 <br><br>
                 So in 2009, he connected with Musora Media to start GuitarLessons.com -- a massive library of free online guitar lessons that has since helped more than 20 million guitar players.
                 <br><br>
@@ -472,7 +472,7 @@
             <div class="columns no-padding medium-4 benefit-row practice">
                 <div class="columns float-right">
                     <div class="arrow-outline">
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-gl.png">
+                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-gl.png" alt="G">
                     </div>
                 </div>
                 <div class="columns text-wrap">
@@ -483,7 +483,7 @@
             <div class="columns no-padding medium-4 benefit-row play">
                 <div class="column">
                     <div class="arrow-outline">
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-subs.png">
+                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-subs.png" alt="Youtube text">
                     </div>
                 </div>
                 <div class="columns text-wrap">
@@ -494,7 +494,7 @@
             <div class="columns no-padding medium-4 benefit-row support">
                 <div class="columns float-right">
                     <div class="arrow-outline">
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-views.png">
+                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-views.png" alt="Youtube icon">
                     </div>
                 </div>
                 <div class="columns text-wrap">
@@ -512,14 +512,14 @@
 
             <div class="columns no-padding small-up-1 medium-up-2 drummer-testimonial">
                 <div class="columns">
-                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/holger-strunk.jpg">
+                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/holger-strunk.jpg" alt="Holger Strunk">
                     <p>"With Guitar Technique Made Easy, it really felt like having a teacher monitoring my learning curve. <strong>I don't think you could find a better way of learning the guitar.</strong> If you have trouble with specific things, you can always ask and watch the video again and again and again. No teacher in the real world would stay so cool when being asked over and over again.
                         <br><br>
                         I am a fan of this weekly concept. Although it is possible in theory to prepare something for myself (dividing a course into weekly sections), I would not get the same results because there is a way to cheat and go on faster or slower. Nate's time-setting is ideal."</p>
                     <h1>Holger Strunk<br> <span class="band">Leimen, Germany</span></h1>
                 </div>
                 <div class="columns">
-                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/kathy-mire.jpg">
+                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/kathy-mire.jpg" alt="Kathy Mire">
                     <p>"I highly recommend Guitar Technique Made Easy. Nate is the best guitar instructor I've ever had. Just the passion that he shows and his love of the instrument -- his way of explaining things is great. I especially liked the way he started with the basic topics and then increased the difficulty levels. Also, he didn't pull any punches. <strong>Nate let the students know exactly what was expected of them and what it took for improvement on the guitar, myself included.</strong>
                         <br><br>
                         I have absolutely no negative comments. The course was very informative and multi-topical; utilizing videos, charts, jam tracks, etc. to accelerate the learning process (can you tell I'm a teacher?!). Thank you, Nate, for giving me a new perspective on my guitar playing."</p>
@@ -529,7 +529,7 @@
 
             <div class="columns no-padding small-up-1 medium-up-2 large-up-3 drummer-testimonial">
                 <div class="columns">
-                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/bill-hulme.jpg">
+                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/bill-hulme.jpg" alt="Bill Hulme">
                     <p>"Before signing up, I was concerned about my ability to keep up with the lessons due to family and travel commitments. However, I knew that I needed to improve and the lessons every week provided the focus I was missing.
                         <br><br>
                         I liked the fact that the lessons are recorded and were/are available whenever I had time to catch up. Also, the grading practice for beginner / intermediate / advanced players made sure I didn’t feel left out.
@@ -538,14 +538,14 @@
                     <h1>Bill Hulme <br> <span class="band">Prestbury, UK</span></h1>
                 </div>
                 <div class="columns">
-                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/glenn-hussey.jpg">
+                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/glenn-hussey.jpg" alt="Glenn Hussey">
                     <p>"Guitar Technique Made Easy provided structure and a well-organized curriculum.  For the first time, I knew what to study and in what order. I liked having challenging yet attainable weekly goals; these provided a real sense of progress.
                         <br><br>
                         <strong>If someone wants to learn guitar, Guitareo and Guitar Technique Made Easy are the first things I would recommend.</strong> I struggled for a couple of years learning from poorly-written books, another learning site provided by a major guitar manufacturer, and YouTube videos with little progress. The real progress I've made is directly attributable to Guitareo and GTME! I'm currently going through GTME again at a snail’s pace to try to absorb and master as much as possible."</p>
                     <h1>Glenn Hussey  <br> <span class="band">Alfred, United States</span></h1>
                 </div>
                 <div class="columns">
-                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/simon-hellinger.jpg">
+                    <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/simon-hellinger.jpg" alt="Simon Hellinger">
                     <p>"At first, I was unsure about joining Guitar Technique Made Easy because I didn’t know if I could keep up with the course. <strong>It was a leap of faith, and worth it.</strong> As a result, I learned to let go of my perfectionism (I always got hung up on details before) and found that progress is progress!
                         <br><br>
                         I liked that there are tasks for beginners, intermediates, and pro players in every unit, so I can revisit the course in the future and still learn something new. I'd recommend it to people who are into online teaching and struggling with how to proceed with learning."</p>
@@ -564,8 +564,8 @@
                 <tr>
                     <td></td>
                     <td>
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/macbook.png" class="macbook"><br>
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/logo.png" class="blue-logo">
+                        <img src="https://guitareo.s3.amazonaws.com/gtme/macbook.png" class="macbook" alt="Macbook"><br>
+                        <img src="https://guitareo.s3.amazonaws.com/gtme/logo.png" class="blue-logo" alt="GTME logo">
                     </td>
                     <td><i class="fas fa-user gray-logo"></i><br>Private Lessons</td>
                 </tr>
@@ -657,7 +657,7 @@
         <div class="row">
             <div class="columns logo">
                 {{--<img class="edge" src="https://guitareo.s3.amazonaws.com/sales/promos/cyber-monday/logo.png"><br>--}}
-                <img src="https://guitareo.s3.amazonaws.com/gtme/logo-white.png"></div>
+                <img src="https://guitareo.s3.amazonaws.com/gtme/logo-white.png" alt="GTME logo"></div>
 
 
             {{--<div class="outline-box">--}}

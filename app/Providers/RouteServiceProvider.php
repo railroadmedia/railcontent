@@ -34,7 +34,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         $subDomain = current(explode('.', request()->getHost()));
-
+//dd($subDomain);
         /*
          * Domain patterns for usage in routes. This allows routes to accept any subdomain OR no subdomain for a given domain.
          */
@@ -55,6 +55,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         $this->routes(function () {
+            Route::group([], base_path('routes/misc/legacy_brand_members_redirects_to_up.php'));
             Route::group([], base_path('routes/routes.php')); // not actually needed
             Route::group([], base_path('routes/misc/manifest_files_routes.php'));
             Route::group([], base_path('routes/misc/mobile_app_store_api_keys_json_routes.php'));
@@ -69,6 +70,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::group([], base_path('routes/musora/marketing/cohort-packs.php'));
             Route::group([], base_path('routes/musora/platform/home.php'));
             Route::group([], base_path('routes/musora/platform/search.php'));
+
 
             Route::group([], base_path('routes/drumeo/sales.php'));
             Route::group([], base_path('routes/drumeo/shop.php'));
@@ -88,7 +90,6 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::group([], base_path('routes/misc/http_error_code_routes.php'));
 
-            Route::group([], base_path('routes/misc/legacy_brand_members_redirects_to_up.php'));
         });
     }
 }

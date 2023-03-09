@@ -10,6 +10,7 @@
                     class="close"
                     style="font-size: 16px !important;"
                     @click.stop.prevent="closeCartSidebar"
+                    aria-label="close"
                 ><i class="fal fa-times fa-2x"></i></a>
             </div>
             <div class="csb-guarantee">

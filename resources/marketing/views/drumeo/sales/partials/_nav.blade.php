@@ -62,7 +62,7 @@
             </div>
         @endif
 
-        <div class="button-wrap @if(!empty($hideJoin)) opacity-0 px-0.5 @endif">
+        <div class="button-wrap @if(!empty($hideJoin)) hidden @endif">
             <a @if(!empty($scrollToJoin))
                     href="#customize-anchor" class="join anchor-slide"
                 @elseif(!empty($joinUrl))
@@ -78,6 +78,9 @@
                     Join<span class="show-for-medium"> Drumeo</span>
                 @endif
             </a>
+        </div>
+        <div class="hidden lg:block button-wrap">
+            <a href="https://www.musora.com/drumeo" class="join outline-button">Login</a>
         </div>
     @endif
 </nav>

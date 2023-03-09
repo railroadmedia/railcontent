@@ -161,20 +161,20 @@
 
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
-                "name" => "Comfort Cover",
-                "fullPrice" => floatval($productPrices['comfort-cover']->price),
-                "price" => floatval($productPrices['comfort-cover']->discounted_price),
-                "noBreadcrumb" => true
-            ])
+        "name" => "Comfort Cover",
+        "fullPrice" => floatval($productPrices['comfort-cover']->price),
+        "price" => floatval($productPrices['comfort-cover']->discounted_price),
+        "noBreadcrumb" => true
+    ])
 
     <header class="header text-center">
         <video poster="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/header-background.jpg" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/header.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         <div class="overlay"></div>
         <div class="row">
-            <img class="logo" src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/comfort-cover-logo-w-drumart.png"><br>
+            <img class="logo" src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/comfort-cover-logo-w-drumart.png" alt="Comfort cover logo"><br>
             <div class="watch-badge">
                 WATCH<br> THE DEMO
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
             <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
             <br>
@@ -210,7 +210,7 @@
         <div class="container mx-auto relative z-10">
             <h2><strong>The best seat <br class="hide-for-medium"> in the house.</strong></h2>
             <div class="text-section text-center relative z-10">
-                <img alt="" class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/comfort-cover-spread.png">
+                <img alt="Comfort cover spread" class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/comfort-cover-spread.png">
                 <p class="text-left">As a drummer, you’re ALWAYS sitting.
                     <br><br>
                     Through every practice, rehearsal and gig, you’re constantly confined to your drum throne. Sometimes it’s great -- you have a built in place to chill out. But other times, it’s NOT.
@@ -244,7 +244,7 @@
             <div class="three-point">
                 <div class="columns medium-4">
                     {{--<i class="fas fa-hands-heart"></i>--}}
-                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/icon-hand-made.png">
+                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/icon-hand-made.png" alt="Handmade icon">
                     <h4><strong>HAND-MADE QUALITY </strong></h4>
                     <p>
                         Every Comfort Cover is hand-made in Italy with a cool, breathable gel that conforms to your body for maximum comfort.
@@ -252,7 +252,7 @@
                 </div>
                 <div class="columns medium-4">
                     {{--<i class="fas fa-heartbeat"></i>--}}
-                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/icon-ergonomic.png">
+                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/icon-ergonomic.png" alt="Ergonomic icon">
                     <h4><strong>ERGONOMIC DESIGN </strong></h4>
                     <p>
                         Absorbs shock, distributes weight evenly, and improves your posture. Long playing sessions have never felt better!
@@ -260,7 +260,7 @@
                 </div>
                 <div class="columns medium-4">
                     {{--<i class="fas fa-stopwatch"></i>--}}
-                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/icon-10-second.png">
+                    <img class="lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/icon-10-second.png" alt="Time icon">
                     <h4><strong>10 SECOND SET UP </strong></h4>
                     <p>
                         The Comfort Cover easily folds up and can be taken to any of your gigs or rehearsals -- making every drum throne feel like home.
@@ -276,15 +276,15 @@
                 <h2><strong>Save your butt.</strong></h2>
                 <div class="pic-wrap">
                     <div class="pic-section">
-                        <img class="img-modal lazyload" data-slide="0" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/cc-photo-front.jpg">
-                        <img class="img-modal lazyload" data-slide="1" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/cc-photo-under.jpg">
+                        <img class="img-modal lazyload" data-slide="0" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/cc-photo-front.jpg" alt="Front photo">
+                        <img class="img-modal lazyload" data-slide="1" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/cc-photo-under.jpg" alt="Under photo">
                     </div>
                     <div class="pic-section bigger">
-                        <img class="img-modal lazyload" data-slide="2" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/cc-photo-main-sit.jpg">
+                        <img class="img-modal lazyload" data-slide="2" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/cc-photo-main-sit.jpg" alt="Main sit photo">
                     </div>
                     <div class="pic-section">
-                        <img class="img-modal lazyload" data-slide="3" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/cc-photo-italy.jpg">
-                        <img class="img-modal lazyload" data-slide="4" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/cc-photo-top.jpg">
+                        <img class="img-modal lazyload" data-slide="3" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/cc-photo-italy.jpg" alt="Italy photo">
+                        <img class="img-modal lazyload" data-slide="4" data-src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/cc-photo-top.jpg" alt="Top photo">
                     </div>
                 </div>
                 <div class="table-wrap">
@@ -342,7 +342,7 @@
     <section class="final lazyload" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/order-background.jpg">
         <div id="customize-anchor" class="anchor"></div>
         <div class="row">
-            <img class="logo" src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/comfort-cover-logo-w-drumart.png"><br>
+            <img class="logo" src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/comfort-cover-logo-w-drumart.png" alt="Comfort cover logo"><br>
             <h1><strong>Upgrade your drum<br class="hide-for-medium"> throne in seconds.</strong></h1>
             {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
             <a href="/ecommerce/add-to-cart?products[comfort-cover]=1" class="join blue">Get Comfy &raquo;</a>

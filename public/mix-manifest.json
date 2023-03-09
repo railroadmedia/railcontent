@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=dfbc75ce9b9900337235a287f9dfa316",
+    "/platform/js/app.js": "/platform/js/app.js?id=76309e3752e2bd53a90efff41f87baaf",
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
@@ -11,11 +11,11 @@
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=a121116bf28ae9fddf985bb2860bc9a9",
     "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=2cb6cdf4d68ab4ce703cbb67c210ec2e",
     "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=e1aff93b03d2b1a2c6bc672c52b2ba23",
-    "/platform/js/order-form.js": "/platform/js/order-form.js?id=c7dd95c054d38a223a80183e243ff883",
+    "/platform/js/order-form.js": "/platform/js/order-form.js?id=4ab4e65366124b690d4ceaf1b5edfe64",
     "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=73ae80c7f031460ed4c5b74c96923e7f",
     "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=81a9404cd71a68b793e020b62446c1e8",
     "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=d340487f0b9bc3c2ebc3748dac8c1dad",
-    "/platform/js/cart-sidebar.js": "/platform/js/cart-sidebar.js?id=64e65d0ac3336a16517f430a644fb266",
+    "/platform/js/cart-sidebar.js": "/platform/js/cart-sidebar.js?id=df261e97da27944638d8871171d44277",
     "/platform/js/nav-cart-button.js": "/platform/js/nav-cart-button.js?id=aac1d09564b9dc21e6655310c5232f48",
     "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=2ffc323971e9d67fe85ab4c0f7e823d5",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=03c27881bada5dbcf24cf77eeeba29ef",
@@ -30,6 +30,6 @@
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=39de52086a9c6bfbeabc595ee9a371f2",
     "/platform/css/app.css": "/platform/css/app.css?id=8eab82e6533ba466afe4b990b4ff4c62",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=95b61f73a67fc65546a81e742dda8905",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=7ab4288a54c0305970807544f07c9c1d",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=e18ddcfa991cb9ae829810e730b5e3d8",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=49f0817b99cd1af9df9cbd7fcee415f7"
 }

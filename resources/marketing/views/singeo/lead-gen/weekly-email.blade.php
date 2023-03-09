@@ -16,7 +16,6 @@
         body {
             height:100vh;
             position:relative;
-            background:#000c17;
             color:#fff;
         }
         h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
@@ -129,7 +128,7 @@
     {!! \App\Analytics\Tracker::headBottom() !!}
 </head>
 
-<body>
+<body class="bg-musora-black">
 
 {!! \App\Analytics\Tracker::bodyTop() !!}
 

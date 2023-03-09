@@ -29,6 +29,10 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'month' => true]);
     }
+    public function trial()
+    {
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true]);
+    }
     public function promo()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true']);
@@ -147,7 +151,7 @@ class SalesController extends BaseController
 
     public function lifetimeMembers()
     {
-        return view('pianote.sales.pages.lifetime-members');
+        return view('pianote.sales.pages.lifetime-members', [ 'theme' => 'pianote' ]);
     }
 
     public function lisarecommends()
@@ -221,7 +225,7 @@ class SalesController extends BaseController
     }
     public function newPianoPlayersDeal()
     {
-        return view('pianote.products.30-day-drummer-deal');
+        return view('pianote.products.new-piano-players-deal', ['theme' => 'drumeo']);
     }
 
 

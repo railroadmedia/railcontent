@@ -101,7 +101,7 @@ form :-moz-placeholder {
 }
 
 .header {
-  background: #000c17 center top/cover;
+  background: $musoraBlack center top/cover;
   color: #FFF;
   overflow: hidden;
   padding: 35px 0;
@@ -225,7 +225,7 @@ form :-moz-placeholder {
       &[type="submit"],
       button {
         font-family: $bebas;
-        font-weight: 700;
+        font-weight: 400;
         color: #FFF;
         background: $drumeoBlue;
         text-transform: uppercase;
@@ -679,7 +679,7 @@ form :-moz-placeholder {
         &[type="submit"],
         button {
           font-family: $bebas;
-          font-weight: 700;
+          font-weight: 400;
           color: #FFF;
           background: $drumeoBlue;
           text-transform: uppercase;

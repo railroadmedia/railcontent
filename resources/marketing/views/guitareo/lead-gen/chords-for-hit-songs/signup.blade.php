@@ -56,7 +56,6 @@
         header {
             background-image: url('https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/header-bg-m.jpg');
             background-size: 450px;
-            background-color: #000C17;
             background-position-x: center;
             background-position-y: 0px;
         }
@@ -67,7 +66,6 @@
 
         .footer {
             background-image: url('https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/footer-bg-m.jpg');
-            background-color: #000C17;
         }
 
         @media (min-width:768px){
@@ -92,7 +90,7 @@
 @endsection
 
 @section('body')
-    <header class="pt-3 pb-6 md:py-20 bg-no-repeat">
+    <header class="pt-3 pb-6 md:py-20 bg-no-repeat bg-musora-black">
         <div class="max-w-md md:max-w-5xl mx-auto md:flex px-4">
             <div class="md:w-1/2 text-center md:text-left">
                 <img class="h-24 md:h-40 md:mb-8 md:pl-3 inline-block lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
@@ -163,7 +161,7 @@
         </div>
     </section>
 
-    <section class="bg-no-repeat py-12 md:py-20 footer">
+    <section class="bg-no-repeat py-12 md:py-20 footer bg-musora-black">
         <div class="max-w-md md:max-w-5xl px-4 mx-auto md:flex">
             <div class="md:w-1/2">
                 <div class="md:pl-3 text-white text-center md:text-left">

@@ -45,7 +45,7 @@
 @endsection
 
 @section('body')
-    <header class="header text-white text-center px-3 py-6 md:py-24 relative bg-cover bg-top" style="background-color:#000C17;">
+    <header class="header text-white text-center px-3 py-6 md:py-24 relative bg-cover bg-top bg-musora-black">
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
             <div class="flex flex-wrap items-center">
                 <div class="w-full md:w-7/12 lg:w-2/3 md:text-left">

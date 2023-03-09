@@ -38,10 +38,10 @@
             <h4 class="mt-3 mb-5 md:mb-10 leading-normal">Get paid to promote world-class<br class="inline md:hidden"> online music lessons.</h4>
 
             <span class="join smaller gradient-outline mb-3 md:mb-0 md:mx-2 cursor-pointer bg-[#031627] border-musora hover:bg-musora" x-on:click="modal = true">Guidelines</span>
-            <a class="join smaller gradient md:mx-2 bg-musora" href="https://airtable.com/shrmKAXQyoWLbKKW6">APPLY NOW</a>
+            <a class="join smaller gradient md:mx-2 bg-musora" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
         </div>
     </header>
-    <section class="text-white py-8 md:py-10 lg:py-12 px-4" style="background:#000c18;">
+    <section class="text-white py-8 md:py-10 lg:py-12 px-4 bg-musora-black">
         <div class="container mx-auto max-w-6xl">
             <p class="leading-normal px-3">
                 Musora is the home of Drumeo, Pianote, Guitareo, and Singeo -- and the leader in online music education with more than 15 years experience, 500 million video views, and 100 world-class instructors.
@@ -54,7 +54,7 @@
             </p>
         </div>
     </section>
-    <section class="text-white py-8 md:py-14 lg:py-20 px-4" style="background:#000c18;">
+    <section class="text-white py-8 md:py-14 lg:py-20 px-4 bg-musora-black">
         <div class="container mx-auto max-w-6xl">
             <h3 class="text-center mb-8 md:mb-16"><strong>Program Benefits</strong></h3>
             <ul class="fa-ul flex flex-wrap">
@@ -88,7 +88,7 @@
                 <div class="w-full md:w-1/3 px-2 mb-8 md:mb-0">
                     <div class="inline-block rounded-full p-3 text-center border-musora before:m-[-6px] relative" style="background-color:#161e29;width: 78px;"><h1 class="text-5xl text-musora"><strong>2</strong></h1></div>
                     <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Apply For The Program</strong></h4>
-                    <p><em><a href="https://airtable.com/shrmKAXQyoWLbKKW6"><u>Just fill out the short form &raquo;</u></a></em></p>
+                    <p><em><a href="https://airtable.com/shr086ixt4K8JIQpi"><u>Just fill out the short form &raquo;</u></a></em></p>
                 </div>
                 <div class="w-full md:w-1/3 px-2">
                     <div class="inline-block rounded-full p-3 text-center border-musora before:m-[-6px] relative" style="background-color:#020e1a;width: 78px;"><h1 class="text-5xl text-musora"><strong>3</strong></h1></div>
@@ -130,14 +130,14 @@
                 }).mount()
             },
         }"
-        class="bg-[#000c18]"
+        class="bg-musora-black"
     >
         <div x-ref="splide" class="splide text-white px-7 py-8 md:py-14 lg:py-20 mx-auto max-w-6xl" aria-label="Splide/Alpine.js Carousel Example">
             <div class="splide__track relative">
                 <ul class="splide__list">
                     <li class="splide__slide flex flex-col items-center justify-center">
                         <div class="px-3">
-                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
+                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000C17, #01132b)">
                                 <p class="leading-normal md:leading-relaxed">
                                     "Drumeo is by far the greatest drum community out there. Literally you can find everything about drums, from lessons, to play alongs, live streams, documentaries, tips, drum sheets. Everything is extremely well organized. It’s amazing!"
                                 </p>
@@ -161,7 +161,7 @@
 
                     <li class="splide__slide flex flex-col items-center justify-center">
                         <div class="px-3">
-                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
+                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000C17, #01132b)">
                                 <p class="leading-normal md:leading-relaxed">
                                     "Pianote avoids the one-size-fits-all feel that online piano methods can have, and gives in-person piano teachers a run for their money with several instructors with whom students can interact."
                                 </p>
@@ -185,7 +185,7 @@
 
                     <li class="splide__slide flex flex-col items-center justify-center">
                         <div class="px-3">
-                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
+                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000C17, #01132b)">
                                 <p class="leading-normal md:leading-relaxed">
                                     "The reason this approach appeals to me is because it’s kind of a more guided way to how I learned guitar. And that’s just doing the cool stuff! So if you tried the theory and exercise way and it’s just not working or you already play guitar and just want to have fun, check it out!"
                                 </p>
@@ -209,7 +209,7 @@
 
                     <li class="splide__slide flex flex-col items-center justify-center">
                         <div class="px-3">
-                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000c18, #01132b)">
+                            <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000C17, #01132b)">
                                 <p class="leading-normal md:leading-relaxed">
                                     "I always recommend Drumeo because of the absolute wealth of knowledge they offer from so many of the world’s greatest drummers! Not only will you learn just about anything you could desire to learn, but you will be so inspired and entertained by your drum heroes with some of the best production value on the internet!"
                                 </p>
@@ -244,9 +244,9 @@
         />
         <div class="container mx-auto max-w-6xl">
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
-            <a class="join bg-musora my-8 md:my-10 inline-block" href="https://airtable.com/shrmKAXQyoWLbKKW6">APPLY NOW</a>
+            <a class="join bg-musora my-8 md:my-10 inline-block" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
             <p class="leading-normal">Have any questions? Please email <a href="mailto:natalie@musora.com"><u>natalie@musora.com</u></a> after<br class="hidden md:inline">
-                reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <a href="https://airtable.com/shrmKAXQyoWLbKKW6"><u>application page</u></a>.</p>
+                reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <a href="https://airtable.com/shr086ixt4K8JIQpi"><u>application page</u></a>.</p>
         </div>
     </section>
 

@@ -11,6 +11,11 @@
     <!-- Scripts -->
     <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <style>
+        a {
+            color:inherit!important;
+        }
+    </style>
 @endsection
 
 <!-- Main -->
@@ -30,7 +35,7 @@
         </div>
     </section>
 
-    <div class="pt-20 pb-10 text-white bg-[#000c17]">
+    <div class="pt-20 pb-10 text-white bg-musora-black">
         <div class="container mx-auto text-center px-4 lg:px-8">
             <h2 class="font-bold text-xl md:text-3xl">We'd love to hear from you!</h2>
             <p class="mt-5 text-sm md:text-base text-[#a1afc9] max-w-3xl mx-auto">Whether your question is about membership, shipping, technical troubles or anything else, our amazing support team is ready to answer any and all of your questions!
@@ -39,7 +44,7 @@
         </div>
     </div>
 
-    <section class="bg-[#000c17]">
+    <section class="bg-musora-black">
         <div class="max-w-3xl mx-auto px-4 lg:px-8" id="contactPageApp">
             <contact-email-form-marketing
                 brand="drumeo"
@@ -55,7 +60,7 @@
         </div>
     </section>
 
-    <div class="pt-16 text-white bg-[#000c17]">
+    <div class="pt-16 text-white bg-musora-black">
         <div class="container mx-auto text-center max-w-3xl">
             <div class="flex flex-wrap items-center">
                 <h2 class="font-bold text-xl md:text-3xl w-full">Old fashioned phone calls work too!</h2>
@@ -72,7 +77,7 @@
         </div>
     </div>
 
-    <div class="py-20 text-white bg-[#000c17]">
+    <div class="py-20 text-white bg-musora-black">
         <div class="container mx-auto text-center">
             <h2 class="font-bold text-xl md:text-3xl">Want to join the team?</h2>
             <p class="mt-5 text-sm md:text-base text-[#a1afc9]">For current available positions at our company, please visit <a href="/careers"><u>Musora.com/Careers</u></a>.</p>

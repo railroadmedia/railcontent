@@ -2,14 +2,17 @@
 
 @section('meta')
     <title>{{ $product->name }} || {{ ucfirst($theme) }}</title>
-    <meta property="og:description" content="{{ $product->meta_desc }}}">
+    <meta property="og:title" content="{{ $product->name }} || {{ ucfirst($theme) }}">
+    <meta property="description" content="{{ $product->meta_desc }}">
+    <meta property="og:description" content="{{ $product->meta_desc }}">
+    <meta property="og:url" content="{{ get_legacy_brand_base_url($theme)}}/{{ Request::path() }}"/>
     @if(!empty($product->meta_img))
         <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront') || str_contains($product->meta_img, 'vimeocdn')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif">
     @endif
 @endsection
 
 @section('layout-styles')
-    <link href="{{ asset('marketing/css/drumeo/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="preload" href="{{ mix('marketing/css/app.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}"></noscript>
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
@@ -69,8 +72,8 @@
                             I understand that these items are preorders<br class="hidden md:inline-block"> and will not ship until <b>March 1st, 2023</b>.
                         </p>
                         <div class="flex gap-2">
-                            <a class="flex-1 rounded-full border-2 border-black uppercase text-black py-2 font-bold uppercase text-sm md:text-base" @click="orderModal = false">Cancel</a>
-                            <a class="understand-button flex-1 rounded-full border-2 border-drumeo bg-drumeo uppercase text-white py-2 font-bold uppercase text-sm md:text-base" href="">I understand</a>
+                            <span class="flex-1 rounded-full border-2 border-black uppercase text-black py-2 font-bold uppercase text-sm md:text-base" @click="orderModal = false">Cancel</span>
+                            <span class="understand-button flex-1 rounded-full border-2 border-drumeo bg-drumeo uppercase text-white py-2 font-bold uppercase text-sm md:text-base" href="">I understand</span>
                         </div>
                     </div>
                 </div>

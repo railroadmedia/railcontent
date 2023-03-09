@@ -35,7 +35,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .beat-navigation {
-    background: #000c17;
+    background: $musoraBlack;
     text-align: center;
     border: 1px solid #111c26;
     border-width: 1px 0;
@@ -76,7 +76,7 @@ h1, h2, h3, h4, h5, h6 {
 
         &:hover {
             @include tablet {
-                background: lighten(#000c17, 5%);
+                background: lighten($musoraBlack, 5%);
                 opacity: 0.8;
             }
         }
@@ -174,7 +174,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .feat-post-wrap {
-    background: #000c17;
+    background: $musoraBlack;
     text-align: center;
     position: relative;
     z-index: 1;
@@ -200,7 +200,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     .featured-posts {
-        background-color: #000c17;
+        background-color: $musoraBlack;
         background-position: 50% 0;
         background-size: cover;
         text-align: center;
@@ -226,9 +226,9 @@ h1, h2, h3, h4, h5, h6 {
             right: 0;
             bottom: 0;
             z-index: 0;
-            background: linear-gradient(0deg, #000c17 20%, transparent 55%);
+            background: linear-gradient(0deg, $musoraBlack 20%, transparent 55%);
             @include tablet {
-                background: linear-gradient(0deg, #000c17 15%, transparent 50%);
+                background: linear-gradient(0deg, $musoraBlack 15%, transparent 50%);
             }
         }
 
@@ -241,7 +241,7 @@ h1, h2, h3, h4, h5, h6 {
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background: linear-gradient(90deg, #000c17 0%, transparent 10%, transparent 90%, #000c17 100%);
+                background: linear-gradient(90deg, $musoraBlack 0%, transparent 10%, transparent 90%, $musoraBlack 100%);
                 z-index: 0;
             }
         }
@@ -449,7 +449,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 
     &.simple .featured-posts {
-        background: #000c17;
+        background: $musoraBlack;
         box-shadow: none;
         height: 320px;
 
@@ -1292,48 +1292,6 @@ h1, h2, h3, h4, h5, h6 {
                 }
             }
         }
-
-        .author-box {
-            border-top: 1px solid #BBB;
-            width: 100%;
-            margin: 40px auto 0;
-            padding: 30px 15px;
-            text-align: center;
-            @include tablet {
-                text-align: left;
-                display: flex;
-                align-items: center;
-                margin: 40px auto 0;
-                padding: 30px 0;
-            }
-            @include desktop {
-                margin: 60px auto 0;
-                padding: 50px 0;
-
-            }
-
-            img {
-                border-radius: 1000px;
-                margin: 0 auto 15px;
-                width: 100px;
-                @include tablet {
-                    margin: 0 auto;
-                    width: 135px;
-                }
-            }
-
-            p {
-                font: 400 13px/1.6em $opensans;
-                margin: 0 auto !important;
-                @include tablet {
-                    padding-left: 30px;
-                    font-size: 15px;
-                }
-                @include desktop {
-                    font-size: 16px;
-                }
-            }
-        }
     }
 
     &.homepage .white-box .post-grid.full-width .post-tile {
@@ -1601,6 +1559,51 @@ h1, h2, h3, h4, h5, h6 {
             }
         }
 
+        .author-box {
+            border-top: 1px solid #BBB;
+            width: 100%;
+            margin: 40px auto 0;
+            padding: 30px 15px;
+            text-align: center;
+            @include tablet {
+                text-align: left;
+                display: flex;
+                align-items: center;
+                margin: 40px auto 0;
+                padding: 30px 0;
+            }
+            @include desktop {
+                margin: 60px auto 0;
+                padding: 50px 0;
+
+            }
+
+            img {
+                border-radius: 1000px;
+                margin: 0 auto 15px;
+                width: 100px;
+                height:100px;
+                object-fit: cover;
+                @include tablet {
+                    margin: 0 auto;
+                    width: 135px;
+                    height:135px;
+                }
+            }
+
+            p {
+                font: 400 13px/1.6em $opensans;
+                margin: 0 auto !important;
+                @include tablet {
+                    padding-left: 30px;
+                    font-size: 15px;
+                }
+                @include desktop {
+                    font-size: 16px;
+                }
+            }
+        }
+
         .wp-caption-text, figcaption {
             font-style: italic;
             color: #999;
@@ -1848,7 +1851,7 @@ h1, h2, h3, h4, h5, h6 {
                 float: none;
 
                 .subscribe-app {
-                    background: #000c17;
+                    background: $musoraBlack;
                     display: flex;
                     flex-direction: row;
                     border-radius: 5px;
@@ -1858,7 +1861,7 @@ h1, h2, h3, h4, h5, h6 {
 
                     &:hover {
                         @include tablet {
-                            background: lighten(#000c17, 5%);
+                            background: lighten($musoraBlack, 5%);
                         }
                     }
 
