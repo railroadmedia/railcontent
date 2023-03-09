@@ -35,11 +35,56 @@
 
     //-----------Reactive Data-----------//
     const state = reactive({ 
-
+        startPosition: 0,
+        endPosition: 0,
+        newSortPositions: [],
     })
 
     //-------------Methods-------------//
-
+    const handleSort = () => {
+        playlistsStore.sortingPlaylist = false;
+        //Update each item in temp array
+        state.newSortPositions.forEach(lesson => {
+            //Then send update item request
+            PlaylistService.updatePlaylistItem({ 
+                user_playlist_item_id: lesson.id, 
+                position: lesson.position 
+            }, token)
+        });
+        //show success message
+        window.shownotification({
+            icon: 'fa-pen-to-square',
+            text: `You have successfully re-ordered your playlist items`
+        })
+    }
+    const handleDragStart = (event, position) => {
+        if(playlistsStore.sortingPlaylist) {
+            //save start position
+            state.startPosition = position;
+        }
+    }
+    const handleDragOver = (event) => {
+        // console.log('drag over: ')
+        if(playlistsStore.sortingPlaylist) {
+            event.target.classList.add('tw-border-b');
+        }
+    }
+    const handleDragLeave = (event) => {
+        // console.log('drag leave: ')
+        if(playlistsStore.sortingPlaylist) {
+            event.target.classList.remove('tw-border-b');
+        }
+    }
+    const handleDrop = (event, position, id) => {
+        if(playlistsStore.sortingPlaylist) {
+            event.target.classList.remove('tw-border-b');
+            state.endPosition = position;
+            //Reorder UI
+            playlistsStore.lessons.splice(state.endPosition, 0, playlistsStore.lessons.splice(state.startPosition, 1)[0])
+            //Update Array
+            state.newSortPositions.push({ id, position: state.endPosition + 1 })
+        }
+    }
 
     //---------Lifecycle Methods---------//
 
@@ -105,7 +150,12 @@
                             :token="token"
                             :brand="brand"
                             :draggable="playlistsStore.sortingPlaylist"
+                            @dragstart="handleDragStart($event, i)"
+                            @dragleave="handleDragLeave($event)"
+                            @dragover.prevent="handleDragOver($event)"
+                            @drop="handleDrop($event, i, lesson.user_playlist_item_id)"
                         />  
+
                     </section>
 
                 </div>   
