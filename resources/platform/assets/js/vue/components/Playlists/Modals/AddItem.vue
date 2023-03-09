@@ -60,7 +60,6 @@ const instrumentless = computed(() => {
 });
 
 const addRemovePlaylistSelection = (payload) => {
-    console.log(payload)
     const index = selectedPlaylists.value.indexOf(String(payload));
     if (index !== -1) {
         const selectionCopy = [...selectedPlaylists.value];
@@ -73,11 +72,10 @@ const addRemovePlaylistSelection = (payload) => {
 }
 
 const handleActionClick = (payload) => {
-    console.log('duplicated ids', duplicatedIDs.value)
     const duplicateIndex = duplicatedIDs.value.indexOf(String(payload));
     const selectedIndex = selectedPlaylists.value.indexOf(String(payload));
     if (duplicateIndex !== -1 && selectedIndex === -1) {
-        duplicateProps.value = { id: payload, show: true, title: duplicatedItemIdNameMap.value[payload] };
+        duplicateProps.value = { id: payload, show: true, title: props.content.name };
     } else {
         addRemovePlaylistSelection(payload);
     }
