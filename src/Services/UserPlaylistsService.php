@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Services;
 use Carbon\Carbon;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Events\PlaylistItemsUpdated;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Repositories\PlaylistLikeRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
@@ -239,6 +240,16 @@ class UserPlaylistsService
         $importFullSoundsliceAssignment = false,
         $importInstrumentlessSoundsliceAssignment = false
     ) {
+        $oldStatuses = ContentRepository::$availableContentStatues;
+        $oldFutureContent = ContentRepository::$pullFutureContent;
+
+        ContentRepository::$availableContentStatues = [
+            ContentService::STATUS_PUBLISHED,
+            ContentService::STATUS_SCHEDULED,
+        ];
+
+        ContentRepository::$pullFutureContent = true;
+
         $content = $this->contentService->getById($contentId);
 
         $singularContentTypes = array_merge(config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
@@ -337,6 +348,9 @@ class UserPlaylistsService
 
             event(new PlaylistItemsUpdated($userPlaylistId));
         }
+
+        ContentRepository::$availableContentStatues = $oldStatuses;
+        ContentRepository::$pullFutureContent = $oldFutureContent;
 
         return true;
     }
