@@ -92,6 +92,8 @@ class UserPlaylistsController extends BaseController
 
     public function playlist(Request $request, $domain, $brand, $playlistId)
     {
+        $user = user();
+
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
         throw_if(empty($playlist), new NotFoundHttpException());
 
@@ -105,6 +107,7 @@ class UserPlaylistsController extends BaseController
 
         $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
         foreach ($items as $index => $item) {
+            $items[$index]['need_access'] = ($user->isPackOwner() && !$user->isAMember());
             $items[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
             $items[$index]['url'] = url()->route('platform.user.playlist-item', [
                 'playlistId' => $playlistId,
@@ -222,6 +225,10 @@ class UserPlaylistsController extends BaseController
         $lessonAssignments = $playlistItem['assignments'] ?? [];
 
         $playlistItem['assignments'] = $lessonAssignments;
+
+        if($playlistItem['type'] == 'song'){
+            $playlistItem['soundslice_slug'] = (isset($lessonAssignments[0]))?$lessonAssignments[0]->fetch('fields.soundslice_slug'):$playlistItem['soundslice_slug'];
+        }
 
         return view('account.playlist-item', [
             "lessonContent" => $playlistItem,
