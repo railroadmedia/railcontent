@@ -1316,6 +1316,8 @@ class ContentRepository extends RepositoryBase
      */
     public function getFilterFields()
     {
+        return [];
+        
         $query =
             $this->query()
                 ->selectFilterOptionColumns()
