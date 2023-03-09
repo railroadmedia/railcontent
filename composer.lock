@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "62e992e5349e12dbce4f03ba0049c0c8",
+    "content-hash": "b50205e388c2e7a85ba04639ec6bffcf",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8160,16 +8160,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "dev-5.0-feature-add-source-column-access-codes-CMT-7",
+            "version": "v5.0.64",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "9d4b802eb0168a0ebb9500b80efd0a9e64b1ccea"
+                "reference": "8348bd783cdf77fa6abdc1aaf5b37bda4fa97efa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/9d4b802eb0168a0ebb9500b80efd0a9e64b1ccea",
-                "reference": "9d4b802eb0168a0ebb9500b80efd0a9e64b1ccea",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/8348bd783cdf77fa6abdc1aaf5b37bda4fa97efa",
+                "reference": "8348bd783cdf77fa6abdc1aaf5b37bda4fa97efa",
                 "shasum": ""
             },
             "require": {
@@ -8206,9 +8206,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-feature-add-source-column-access-codes-CMT-7"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.64"
             },
-            "time": "2023-03-09T12:47:33+00:00"
+            "time": "2023-03-09T22:01:35+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -16899,12 +16899,6 @@
     ],
     "aliases": [
         {
-            "package": "railroad/ecommerce",
-            "version": "dev-5.0-feature-add-source-column-access-codes-CMT-7",
-            "alias": "5.0",
-            "alias_normalized": "5.0.0.0"
-        },
-        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
@@ -16913,7 +16907,6 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/ecommerce": 20,
         "railroad/railanalytics": 20
     },
     "prefer-stable": true,
@@ -16923,5 +16916,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
