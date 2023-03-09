@@ -188,17 +188,18 @@
     <header class="pb-24 md:py-14 lg:py-20" style="background-color:#F6F8FC;">
         <div class="max-w-4xl mx-auto text-center px-4">
             <img class="mt-14 md:mt-0 h-24 md:h-28 lg:h-32 mb-6" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/logo.png" alt="Anniversary logo" />
-            <h3 class="font-extrabold mb-2">Join Pianote + get $962 <br class="sm:hidden">in FREE bonuses!</h3>
-            <p class="uppercase mb-10 text-pianote">Only
-                <span x-cloak x-data="timer()" x-init="countdown()">
-                    <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0 && hour !== '00'"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                    <span x-cloak x-show="timeLeft < 0">Limited Time Left</span>
-                </span>
-                Left!
-            </p>
+            <h3 class="font-extrabold mb-10">Join Pianote + get $962 <br class="sm:hidden">in FREE bonuses!</h3>
+{{--            <p class="uppercase mb-10 text-pianote">--}}
+{{--                Only--}}
+{{--                <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                    <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                    <span x-cloak x-show="timeLeft > 0 && hour !== '00'"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                    <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                    <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                    <span x-cloak x-show="timeLeft < 0">Limited Time</span>--}}
+{{--                </span>--}}
+{{--                Left!--}}
+{{--            </p>--}}
             <img
                 class="rounded-xl cursor-pointer transition-opacity opacity-0"
                 src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/thumb.jpg"
@@ -238,7 +239,7 @@
                 Join Pianote today and you’ll save 18% on your first year of lessons PLUS get 13 incredible bonuses. <br><br>
                 So come party with us! <br><br>
                 <a class="join pianote smaller w-full lg:w-96 mb-2" href="#order">Get Started &raquo;</a>
-                @if($products['pianote-headphones']->getPublicStockCount() > 0)<p class="uppercase"><b>GEN IN QUICK!</b> Only @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} Headphones left!</p>@endif
+                @if($products['pianote-headphones']->getPublicStockCount() > 0)<p class="uppercase"><b>GET IN QUICK!</b> Only @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} Headphones left!</p>@endif
             </div>
             @if($products['pianote-headphones']->getPublicStockCount() > 0)
                 <img
@@ -729,6 +730,8 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     @include('_partials.components.countdown',[
         'countdownDate' => '2023-03-31 23:59:59',
         'promoVersion' => false

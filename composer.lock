@@ -6796,16 +6796,16 @@
         },
         {
             "name": "openspout/openspout",
-            "version": "v4.12.1",
+            "version": "v4.12.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openspout/openspout.git",
-                "reference": "7359af2ffdd4523f53f182f97347389362b9d352"
+                "reference": "90ceeefef3750dd2afab95689ed2107dd576905e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openspout/openspout/zipball/7359af2ffdd4523f53f182f97347389362b9d352",
-                "reference": "7359af2ffdd4523f53f182f97347389362b9d352",
+                "url": "https://api.github.com/repos/openspout/openspout/zipball/90ceeefef3750dd2afab95689ed2107dd576905e",
+                "reference": "90ceeefef3750dd2afab95689ed2107dd576905e",
                 "shasum": ""
             },
             "require": {
@@ -6873,7 +6873,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openspout/openspout/issues",
-                "source": "https://github.com/openspout/openspout/tree/v4.12.1"
+                "source": "https://github.com/openspout/openspout/tree/v4.12.2"
             },
             "funding": [
                 {
@@ -6885,7 +6885,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-19T13:22:14+00:00"
+            "time": "2023-03-03T07:45:00+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -8598,16 +8598,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.75",
+            "version": "v2.0.76",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "542c72eec03f0007c7ee7fcdfd5e008ba9e00399"
+                "reference": "362b110cf373cff2615a78861f0a6c0e99dc5ca9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/542c72eec03f0007c7ee7fcdfd5e008ba9e00399",
-                "reference": "542c72eec03f0007c7ee7fcdfd5e008ba9e00399",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/362b110cf373cff2615a78861f0a6c0e99dc5ca9",
+                "reference": "362b110cf373cff2615a78861f0a6c0e99dc5ca9",
                 "shasum": ""
             },
             "require": {
@@ -8661,22 +8661,22 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.75"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.76"
             },
-            "time": "2023-03-02T14:05:18+00:00"
+            "time": "2023-03-06T20:06:28+00:00"
         },
         {
             "name": "railroad/railforums",
-            "version": "v2.0.17",
+            "version": "v2.0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "24e029f9ebf9ebe917dc42c65c0ad3b72d29749f"
+                "reference": "c3b9e85ddb5eaa0dddcd9d847d64590f6a701af1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/24e029f9ebf9ebe917dc42c65c0ad3b72d29749f",
-                "reference": "24e029f9ebf9ebe917dc42c65c0ad3b72d29749f",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/c3b9e85ddb5eaa0dddcd9d847d64590f6a701af1",
+                "reference": "c3b9e85ddb5eaa0dddcd9d847d64590f6a701af1",
                 "shasum": ""
             },
             "require": {
@@ -8715,9 +8715,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.17"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.18"
             },
-            "time": "2023-03-02T14:07:04+00:00"
+            "time": "2023-03-03T13:37:55+00:00"
         },
         {
             "name": "railroad/railnotifications",
@@ -16915,5 +16915,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
