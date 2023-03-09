@@ -26,8 +26,43 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 foreach (json_decode($content['user_playlist_item_extra_data'], true) as $key => $value) {
                     $contentsOfType[$contentIndex][$key] = $value;
                 }
-
             }
+            $route = [];
+
+            if (!empty($content['parent_content_data'])) {
+                $parentContentData = array_reverse(json_decode($content['parent_content_data'], true));
+                $parentIds = \Arr::pluck($parentContentData, 'id');
+                $parents =
+                    $this->contentService->getByIds($parentIds)
+                        ->keyBy('id');
+
+                foreach ($parentContentData as $value) {
+                    if ((isset($parents[$value['id']]))) {
+                        $parentTitle = $parents[$value['id']]['title'];
+                        if ($content['type'] == 'assignment') {
+                            $contentsOfType[$contentIndex]['fields'] =
+                                array_merge($content['fields'], $parents[$value['id']]['fields'] ?? []);
+                        }
+                    }
+                    switch ($value['type']) {
+                        case 'learning-path':
+                            $route[] = 'Method';
+                            break;
+                        case 'learning-path-level':
+                            $route[] = 'L'.$value['position'];
+                            break;
+                        case 'song':
+                            break;
+                        case 'play-along':
+                            break;
+                        default:
+                            $route[] = $parentTitle ?? '';
+                            break;
+                    }
+                }
+                $contentsOfType[$contentIndex]['parent'] = (isset($parents[$value['id']])) ? $parents[$value['id']] : null;
+            }
+            $contentsOfType[$contentIndex]['route'] = $route;
         }
 
         return $this->mergeDecorated($contents, $contentsOfType);
