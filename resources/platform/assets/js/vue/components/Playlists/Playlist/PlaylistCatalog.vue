@@ -103,9 +103,10 @@
 <template>
     <main class="tw-w-full ">
 
-        <div class="tw-w-full tw-transition-all dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-overflow-hidden" :class="playlistsStore.sortingPlaylist ? 'tw-max-h-[200px]' : 'tw-max-h-0'">
-            <div class="tw-w-full tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-flex tw-items-center">
-                <p class="tw-mr-auto">Click <span class="tw-font-bold tw-mx-0.5">save changes</span> to save your changes or <span class="tw-font-bold tw-mx-0.5">cancel</span> to exit re-ordering</p>
+        <div class="tw-w-full tw-transition-all dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-overflow-hidden" 
+             :class="playlistsStore.sortingPlaylist ? 'tw-max-h-[200px] tw-z-20 tw-sticky tw-top-0 tw-drop-shadow-md' : 'tw-max-h-0'">
+            <div class="tw-w-full tw-container tw-mx-auto tw-pt-4 md:tw-pt-0 tw-px-4 md:tw-px-8 dark:tw-text-white tw-flex tw-flex-col md:tw-flex-row tw-items-center">
+                <p class="tw-text-center md:tw-text-left  md:tw-mr-auto">Click <span class="tw-font-bold tw-mx-0.5">save changes</span> to save your changes or <span class="tw-font-bold tw-mx-0.5">cancel</span> to exit re-ordering</p>
                 <div class="tw-ml-6 tw-flex tw-py-[15px]">
                     <button class="tw-btn-primary tw-btn-small tw-mr-[10px] tw-px-[30px]" :class="`tw-bg-${brand}`" @click.prevent="handleSort">
                         Save changes

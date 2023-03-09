@@ -228,7 +228,7 @@
 </script>
 <template>
     <div v-if="isOpen" 
-            class="tw-w-[162px] tw-shadow-lg tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-z-50"
+            class="tw-w-[162px] tw-drop-shadow-lg tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-z-50"
             :class="dropdownTop ? 'tw-bottom-[100%]' : 'tw-top-[100%]'"
     >
         <span class="tw-absolute tw-w-3 tw-h-3 tw-bg-white dark:tw-bg-[#081825] tw-rotate-45 tw-right-[11px]" :class="dropdownTop ? 'tw-bottom-[-4px]' : 'tw-top-[-4px]' "></span>
@@ -245,7 +245,7 @@
                     <template v-if="item.name === 'Private'">
                         {{ state.isPrivate ? 'Private' : 'Public' }} 
                         <div class="tw-relative tw-inline-flex tw-ml-auto tw-w-[27px] tw-h-[12px] tw-rounded-xl tw-bg-[#445F74]">
-                            <div class="tw-rounded-full tw-h-[15px] tw-w-[15px] tw-bg-white tw-flex-inline tw-items-center tw-justify-center tw-shadow tw-absolute tw-top-[-1.5px] tw-transition"
+                            <div class="tw-rounded-full tw-h-[15px] tw-w-[15px] tw-bg-white tw-flex-inline tw-items-center tw-justify-center tw-drop-shadow-lg tw-absolute tw-top-[-1.5px] tw-transition"
                                  :class="state.isPrivate ? 'tw-left-[-1px]': 'tw-right-[-1px]' ">
                             </div>
                         </div>

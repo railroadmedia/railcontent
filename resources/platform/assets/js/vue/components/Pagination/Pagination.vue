@@ -45,7 +45,7 @@
         <!-- Left Arrow -->
         <button
             v-if="currentPage > 1"
-            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
             @click="goToPage(currentPage - 1)"
         >
             <i class="far fa-chevron-left"></i>
@@ -54,7 +54,7 @@
         <!-- Page is greater thatn 2 -->
         <button
             v-if="currentPage > 2"
-            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
             @click="goToPage(1)"
         >
             1
@@ -64,7 +64,7 @@
         <button
             v-if="currentPage > 3"
             disabled
-            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
         >
             ...
         </button>
@@ -83,14 +83,14 @@
         <button
             v-if="currentPage < totalPages - 2"
             disabled
-            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
         >
             ...
         </button>
 
         <button
             v-if="currentPage < totalPages - 1"
-            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
             @click="goToPage(totalPages)"
         >
             {{ totalPages }}
@@ -99,7 +99,7 @@
         <!-- Right Arrow -->
         <button
             v-if="currentPage < totalPages"
-            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
+            class="tw-w-[26px] tw-h-[26px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-lg tw-font-bold tw-mx-1 tw-text-[#A1A1A9] dark:tw-text-[#9EC0DC]"
             @click="goToPage(currentPage + 1)"
         >
             <i class="far fa-chevron-right"></i>
