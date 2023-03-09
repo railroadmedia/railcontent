@@ -1192,8 +1192,8 @@ class CustomerIoSyncEventListener
                     'branch_source' => $brand,
                     'access_code' => $accessCode->getCode(),
                     'access_source' => $accessCode->getSource(),
-                    'claim_timestamp' => $accessCode->getUpdatedAt(),
-                    'code_creating_date' => $accessCode->getCreatedAt(),
+                    'claim_timestamp' => $accessCode->getUpdatedAt()->timestamp,
+                    'code_creating_date' => $accessCode->getCreatedAt()->timestamp,
                     'product_ids' => $accessCode->getProductIdsAsString()
 
                 ],
