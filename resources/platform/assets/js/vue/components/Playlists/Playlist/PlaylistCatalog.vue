@@ -35,6 +35,7 @@
 
     //-----------Reactive Data-----------//
     const state = reactive({ 
+        startID: 0,
         startPosition: 0,
         endPosition: 0,
         newSortPositions: [],
@@ -57,10 +58,12 @@
             text: `You have successfully re-ordered your playlist items`
         })
     }
-    const handleDragStart = (event, position) => {
+    const handleDragStart = (event, position, id) => {
         if(playlistsStore.sortingPlaylist) {
             //save start position
+            state.startID = id;
             state.startPosition = position;
+            console.log(state.startID, position)
         }
     }
     const handleDragOver = (event) => {
@@ -75,14 +78,15 @@
             event.target.classList.remove('tw-border-b');
         }
     }
-    const handleDrop = (event, position, id) => {
+    const handleDrop = (event, position) => {
+        console.log(state.startID, position)
         if(playlistsStore.sortingPlaylist) {
             event.target.classList.remove('tw-border-b');
             state.endPosition = position;
             //Reorder UI
             playlistsStore.lessons.splice(state.endPosition, 0, playlistsStore.lessons.splice(state.startPosition, 1)[0])
             //Update Array
-            state.newSortPositions.push({ id, position: state.endPosition + 1 })
+            state.newSortPositions.push({ id: state.startID, position: state.endPosition + 1 })
         }
     }
 
@@ -150,10 +154,10 @@
                             :token="token"
                             :brand="brand"
                             :draggable="playlistsStore.sortingPlaylist"
-                            @dragstart="handleDragStart($event, i)"
+                            @dragstart="handleDragStart($event, i,lesson.user_playlist_item_id)"
                             @dragleave="handleDragLeave($event)"
                             @dragover.prevent="handleDragOver($event)"
-                            @drop="handleDrop($event, i, lesson.user_playlist_item_id)"
+                            @drop="handleDrop($event, i)"
                         />  
 
                     </section>
