@@ -24743,6 +24743,9 @@ a:visited{
   font-size: 32px !important;
   line-height: 1.5 !important;
 }
+.tw-text-\[48px\]{
+  font-size: 48px !important;
+}
 .tw-text-3xl{
   font-size: 1.875rem !important;
   line-height: 2.25rem !important;
