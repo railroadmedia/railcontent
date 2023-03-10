@@ -604,7 +604,7 @@
         'topImage' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-annual-2w-card.png',
         'promoLogo' => 'https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/logo.png',
         'promoText' => '<h4 class="leading-tight mt-4 sm:mt-5 mb-2 uppercase text-coaches"><strong>SAVE 18% + GET 11 BONUSES <br class="inline sm:hidden">WORTH $1198.95</strong></h4>',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1 &products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',
+        'buttonLink' => '/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,quietpad:1,Drumeo-VaterSticks:1,rock-drumming-masterclass-pack:1,drum-technique-made-easy-pack:1,independence-made-easy-pack:1,electrify-your-drumming:1,SD-DIGI:1,four-weeks-to-better-drum-fills:1,learn-songs-faster-pack:1,GHFAL-DIGI:1,CC-DIGI:1',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
         'bonusWidth' => 'w-1/2 md:w-1/4 lg:w-[16%]',
         'firstYearPrice' => 197,
