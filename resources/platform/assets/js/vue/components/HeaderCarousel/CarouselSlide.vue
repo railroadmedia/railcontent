@@ -25,7 +25,27 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  ctaText: {
+  primaryCtaText: {
+    type: String,
+    default: "",
+  },
+  primaryCtaTextAlt: {
+    type: String,
+    default: "",
+  },
+  primaryCtaUrl: {
+    type: String,
+    default: "",
+  },
+  primaryCtaUrlAlt: {
+    type: String,
+    default: "",
+  },
+  secondaryCtaText: {
+    type: String,
+    default: "",
+  },
+  secondaryCtaUrl: {
     type: String,
     default: "",
   },
@@ -33,19 +53,19 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  ctaUrl: {
-    type: String,
-    default: "",
-  },
-  registerUrl: {
-    type: String,
-    default: "",
-  },
   video: {
     type: String,
     default: "",
   },
-  img: {
+  desktopImg: {
+    type: String,
+    default: "",
+  },
+  tabletImg: {
+    type: String,
+    default: "",
+  },
+  mobileImg: {
     type: String,
     default: "",
   },
@@ -98,21 +118,28 @@ onMounted(() => {
 
 <template>
   <div v-if="showSlide || isPrevSlide"
-      :class="`tw-bg-[#000C17] tw-overflow-hidden tw-rounded-[10px] tw-absolute tw-w-full tw-h-full tw-cursor-pointer
+      :class="`tw-overflow-hidden tw-rounded-[10px] tw-absolute tw-w-full tw-h-full
         ${ showSlide ? `tw-z-20 ${showSlide ? `slide-in-${animateDirection}` : ''}` : 'tw-z-0' }
       `"
-      @click="goToUrl(ctaUrl)"
   >
-    <section class="tw-w-full tw-h-full tw-rounded-[10px] tw-grid tw-grid-cols-1 md:tw-grid-cols-2 tw-gap-0 header-carousel-slide-bg">
-      <!-- Mobile Image -->
-      <div class="md:tw-hidden tw-bg-top tw-bg-cover tw-absolute tw-w-full tw-top-0 tw-min-h-[25vh] tw-text-white"
-           :style="`background-color: rgb(0, 16, 29); background-image: url('${img}'); background-position: 50% center;`"
-      >
-        <div style="width: 100%; height: 100%; background: linear-gradient(rgba(0, 16, 29, 0) 50%, rgb(0, 16, 29));"></div>
-      </div>
+    <section class="tw-w-full tw-h-full tw-rounded-[10px] tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 tw-gap-0 relative">
+        <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10"
+             :style="`background-color: rgb(0, 16, 29); background-image: url('${desktopImg}');  background-position: 50% center;`">
+            <picture>
+                <source media="(min-width:768px)" :srcset="`${desktopImg}`">
+                <source media="(min-width:768px)" :srcset="`${tabletImg}`">
+                <img
+                    class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
+                    :src="`${mobileImg}`"
+                    alt="banner background image"
+                    onload="this.classList.remove('opacity-0')"
+                    loading="lazy"
+                />
+            </picture>
+        </div>
       <!-- Text Content -->
-      <div class="tw-absolute tw-bottom-0 tw-w-full md:tw-relative tw-text-white md:tw-bg-[#00101D] tw-h-4/5 md:tw-h-full tw-bg-gradient-to-t tw-from-[#00101D] tw-via-[#00101D]">
-        <div class="tw-flex tw-flex-col tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[26px] tw-font-open-sans tw-pb-[26px] lg:tw-pb-0">
+      <div class="tw-absolute tw-bottom-0 tw-w-full md:tw-relative tw-text-white tw-h-4/5 md:tw-h-full">
+        <div class="tw-flex tw-flex-col tw-flex-wrap tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[26px] tw-font-open-sans tw-pb-10 sm:tw-pb-[26px] lg:tw-pb-0">
           <h4 class="tw-font-bold tw-text-sm tw-uppercase tw-leading-none tw-mb-3">{{ topSubtitle }}</h4>
           <h2 class="
               tw-font-bebas-neue
@@ -128,25 +155,29 @@ onMounted(() => {
           </h2>
             <!-- Logo -->
             <img v-if="logo" class="tw-h-24 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
-          <p class="tw-text-sm tw-mb-3 tw-hidden xl:tw-block xl:tw-line-clamp-3" v-html="description"></p>
+          <p class="tw-hidden xl:tw-block xl:tw-line-clamp-3" v-html="description"></p>
           <!-- CTA -->
-          <span
-              :class="`tw-text-white tw-font-bebas-neue tw-text-lg ${(ctaText && logo) && 'xl:tw-hidden'}`"
-          >{{ ctaText }}
-            <ArrowSmRightIcon class="tw-inline tw-w-[20px] tw-h-[18px]" />
-          </span>
-            <div v-if="registerUrl || video" class="tw-gap-2 tw-mt-2 tw-hidden xl:tw-flex tw-flex-wrap">
-                <a v-if="registerUrl" :href="ctaUrl" :class="`tw-btn-primary tw-bg-${brand} tw-text-xl go-to-button tw-w-[200px]`">
-                    {{ ctaText }}
+            <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
+                <a
+                    :href="primaryCtaUrl"
+                    :class="`tw-bg-white tw-text-[#000C17] tw-font-bebas-neue tw-rounded-full tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2`"
+                >
+                    {{ primaryCtaText }}
                 </a>
-                <span v-if="video && registerUrl === ctaUrl" @click="openModal()" class="tw-btn-secondary tw-text-white tw-text-xl tw-w-[200px] tw-z-100 tw-relative">Learn More</span>
+                <a
+                    :href="secondaryCtaUrl"
+                    :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg `"
+                >
+                    {{ secondaryCtaText }}
+                </a>
             </div>
+<!--            <div v-if="registerUrl || video" class="tw-gap-2 tw-mt-2 tw-hidden xl:tw-flex tw-flex-wrap">-->
+<!--                <a v-if="registerUrl" :href="ctaUrl" :class="`tw-btn-primary tw-bg-${brand} tw-text-xl go-to-button tw-w-[200px]`">-->
+<!--                    {{ ctaText }}-->
+<!--                </a>-->
+<!--                <span v-if="video" @click="openModal()" class="tw-btn-secondary tw-text-white tw-text-xl tw-w-[200px] tw-z-100 tw-relative">Learn More</span>-->
+<!--            </div>-->
         </div>
-      </div>
-      <!-- Desktop Image -->
-      <div class="tw-hidden md:tw-flex tw-bg-top tw-bg-cover tw-text-white"
-           :style="`background-color: rgb(0, 16, 29); background-image: url('${img}');  background-position: 50% center;`">
-           <div class="tw-w-full tw-h-full" style="background: linear-gradient(268deg, rgba(0, 16, 29, 0) 50%, rgb(0, 16, 29))"></div>
       </div>
     </section>
   </div>
@@ -163,14 +194,14 @@ onMounted(() => {
 </template>
 
 <style type="text/css">
-.header-carousel-slide-bg {
-  transition: all 1s;
-  background: linear-gradient(0deg, #000C17 1.16%, #000C17 38.86%, rgba(0, 12, 23, 0) 70.78%), linear-gradient(180deg, rgba(0, 0, 0, 0) 75.35%, #000000 98.04%), linear-gradient(0deg, #000C17 1.16%, #000C17 28.86%, rgba(0, 12, 23, 0) 50.78%);
-}
+/*.header-carousel-slide-bg {*/
+/*  transition: all 1s;*/
+/*  background: linear-gradient(0deg, #000C17 1.16%, #000C17 38.86%, rgba(0, 12, 23, 0) 70.78%), linear-gradient(180deg, rgba(0, 0, 0, 0) 75.35%, #000000 98.04%), linear-gradient(0deg, #000C17 1.16%, #000C17 28.86%, rgba(0, 12, 23, 0) 50.78%);*/
+/*}*/
 
-.header-carousel-slide-bg:hover {
-  background: linear-gradient(0deg, #000C17 1.16%, #000C17 38.86%, rgba(0, 12, 23, 0) 99.78%), linear-gradient(180deg, rgba(0, 0, 0, 0) 75.35%, #000000 98.04%), linear-gradient(0deg, #000C17 1.16%, #000C17 28.86%, rgba(0, 12, 23, 0) 50.78%);
-}
+/*.header-carousel-slide-bg:hover {*/
+/*  background: linear-gradient(0deg, #000C17 1.16%, #000C17 38.86%, rgba(0, 12, 23, 0) 99.78%), linear-gradient(180deg, rgba(0, 0, 0, 0) 75.35%, #000000 98.04%), linear-gradient(0deg, #000C17 1.16%, #000C17 28.86%, rgba(0, 12, 23, 0) 50.78%);*/
+/*}*/
 
 /* Same as .md */
 /* @media (min-width: 768px) {
