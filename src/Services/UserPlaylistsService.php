@@ -486,7 +486,7 @@ class UserPlaylistsService
             'content_id' => $playlistContent['content_id'],
             'user_playlist_id' => $playlistContent['user_playlist_id'],
             'position' => $position,
-            'extra_data' => $extraData,
+            'extra_data' => !empty($extraData)?$extraData:$playlistContent['extra_data'],
             'start_second' => $startSecond,
             'end_second' => $endSecond,
             'updated_at' => Carbon::now()
