@@ -18,6 +18,7 @@ return new class extends Migration
             $table->renameColumn('cta_text', 'primary_cta_text');
             $table->renameColumn('cta_url', 'primary_cta_url');
             $table->renameColumn('img', 'desktop_img');
+            $table->renameColumn('product_url', 'primary_cta_url_alt');
             $table->string('primary_cta_text_alt')->nullable();
             $table->string('secondary_cta_text')->nullable();
             $table->string('secondary_cta_url')->nullable();
@@ -39,6 +40,7 @@ return new class extends Migration
             $table->renameColumn('primary_cta_text', 'cta_text');
             $table->renameColumn('primary_cta_url', 'cta_url');
             $table->renameColumn('desktop_img', 'img');
+            $table->renameColumn('primary_cta_url_alt', 'product_url');
             $table->dropColumn('primary_cta_text_alt');
             $table->dropColumn('secondary_cta_text');
             $table->dropColumn('secondary_cta_url');
