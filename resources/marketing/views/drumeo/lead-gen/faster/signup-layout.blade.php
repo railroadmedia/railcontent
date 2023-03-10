@@ -1,3 +1,58 @@
+@php
+    $lessons = [
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/the-tinder.jpg',
+            'title' => 'The Tinder',
+            'desc' => '',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/the-swiss-cheese.jpg',
+            'title' => 'The Swiss Cheese',
+            'desc' => '',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/double-trouble.jpg',
+            'title' => 'Double Trouble',
+            'desc' => '',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/clavediddle.jpg',
+            'title' => 'Clavedidle',
+            'desc' => '',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fingerson.jpg',
+            'title' => 'Fingerson',
+            'desc' => '',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/machine-gun.jpg',
+            'title' => 'Machine Gun',
+            'desc' => '',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/the-classy.jpg',
+            'title' => 'The Classy',
+            'desc' => '',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/six-stroke-roll.jpg',
+            'title' => 'Six Stroke Roll',
+            'desc' => '',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/chopadiddle.jpg',
+            'title' => 'Chopadiddle',
+            'desc' => '',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/diddlechopa.jpg',
+            'title' => 'DiddleChopa',
+            'desc' => '',
+        ],
+    ];
+@endphp
+
 @extends('drumeo.lead-gen.lead-gen-layout-tw',[ 'appTailwind' => true, ])
 
 @section('meta')
@@ -51,82 +106,25 @@
 {{--        </div>--}}
 {{--    </header>--}}
 
-
-    <section class="lesson-grid">
-        <div class="container max-w-6xl mx-auto px-4">
-            <h1>Jared Falk's 10-Day Plan For Faster Hands & Feet</h1>
-            <p>The Fastest Way To Get Faster is a 10-Day routine that will help you rapidly improve your speed around the kit. You will need to practice hard, you will need to stick with it, and you might need to push yourself harder than usual - but it's been created to deliver results.</p>
-            <div class="thumbnail-wrap grid gap-6 grid-cols-2 md:grid-cols-3">
-                <div class="w-full">
-                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
-                        "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/1.jpg",
-                        "badge" => "Day #1",
-                        "title" => "Paradiddle Madness"
-                    ])
-                </div>
-                <div class="w-full">
-                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
-                        "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/2.jpg",
-                        "badge" => "Day #2",
-                        "title" => "The Buddy Bruiser"
-                    ])
-                </div>
-                <div class="w-full">
-                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
-                        "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/3.jpg",
-                        "badge" => "Day #3",
-                        "title" => "The Forearm Crusher"
-                    ])
-                </div>
-                <div class="w-full">
-                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
-                        "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/4.jpg",
-                        "badge" => "Day #4",
-                        "title" => "Do You Even Math?"
-                    ])
-                </div>
-                <div class="w-full">
-                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
-                        "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/5.jpg",
-                        "badge" => "Day #5",
-                        "title" => "Crazy Crossover"
-                    ])
-                </div>
-                <div class="w-full">
-                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
-                        "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/6.jpg",
-                        "badge" => "Day #6",
-                        "title" => "The Illusion Of Speed"
-                    ])
-                </div>
-                <div class="w-full">
-                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
-                        "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/7.jpg",
-                        "badge" => "Day #7",
-                        "title" => "The Main Foot Killer"
-                    ])
-                </div>
-                <div class="w-full">
-                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
-                        "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/8.jpg",
-                        "badge" => "Day #8",
-                        "title" => "Do You Even Math? (The Sequel)"
-                    ])
-                </div>
-                <div class="w-full">
-                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
-                        "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/9.jpg",
-                        "badge" => "Day #9",
-                        "title" => "Everything's Better When You're Part Of A Team"
-                    ])
-                </div>
-                <div class="w-full end">
-                    @include("drumeo.lead-gen.partials.thumbnail-signup", [
-                        "image" => "https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/10.jpg",
-                        "badge" => "Day #10",
-                        "title" => "Take'r For A Rip, Eh?"
-                    ])
-                </div>
+    <section class="py-12 md:py-20">
+        <div class="container max-w-6xl mx-auto px-4 text-center">
+           <h2 class="font-extrabold mb-4">10 exercises guaranteed to improve your speed.</h2>
+            <p class="mb-10">
+                These are the very same exercises Estepario uses to practice his speed <br class="hidden lg:inline">
+                & endurance on the kit. Now you can use them to improve yours!
+            </p>
+            <div class="grid grid-cols-3 gap-6">
+                @foreach($lessons as $key => $lesson)
+                    <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
+                        <img src="{{ $lesson['img'] }}" src="lesson thumbnail {{ $key+1 }}" />
+                        <div class="p-4">
+                            <h6 class="font-bold">{{ $key+1 }}. {{ $lesson['title'] }}</h6>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur. Tortor nibh lorem senectus dui. Dolor id pellentesque magna est gravida in sed euismod iaculis.
+                            </p>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
