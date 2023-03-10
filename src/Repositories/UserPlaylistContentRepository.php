@@ -334,14 +334,12 @@ class UserPlaylistContentRepository extends RepositoryBase
 
         $query =
             $this->query()
-                ->where('user_playlist_id', $existingLink['id']);
-
-        $query->where(
+                ->where('user_playlist_id', $existingLink['user_playlist_id'])
+                ->where(
             $positionColumnPrefix.'position',
             '>',
             $existingLink[$positionColumnPrefix."position"]
-        )
-            ->decrement($positionColumnPrefix.'position');
+        )->decrement($positionColumnPrefix.'position');
 
         $deleted =
             $this->query()
