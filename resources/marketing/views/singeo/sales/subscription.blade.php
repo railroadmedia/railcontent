@@ -504,7 +504,21 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @if(!empty($promoVersion))
+
+    @if(!empty($trialVersion))
+        @include('musora.sales.components.card-selection-section', [
+            "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
+            "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
+            "songs" => "1000",
+            "firstPoint" => "Unlimited singing lessons",
+            "thirdPoint" => "Direct access to vocal coaches.",
+            "fifthPoint" => "Lesson access for guitar, piano, and drums.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+            "annualLink" => "/ecommerce/add-to-cart?products[singeo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+            "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        ])
+    @elseif(!empty($promoVersion))
         @php
             $bonuses = [
                 [
@@ -528,19 +542,6 @@
         'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $46',
         'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&locked=true&redirect=/order',
         'altButtonLink' => '/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true',
-        ])
-    @elseif(!empty($trialVersion))
-        @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
-            "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-            "songs" => "1000",
-            "firstPoint" => "Unlimited singing lessons",
-            "thirdPoint" => "Direct access to vocal coaches.",
-            "fifthPoint" => "Lesson access for guitar, piano, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[singeo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
         ])
     @else
         @include('musora.sales.components.order-section-collage', [

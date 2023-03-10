@@ -19,7 +19,7 @@ class SalesController extends BaseController
 
     public function trial()
     {
-        return view('singeo.sales.subscription', ['theme' => 'singeo', 'trialVersion' => true]);
+        return view('singeo.sales.subscription', ['theme' => 'singeo', 'trialVersion' => true, 'promoVersion' => 'true']);
     }
 
     public function promo()
