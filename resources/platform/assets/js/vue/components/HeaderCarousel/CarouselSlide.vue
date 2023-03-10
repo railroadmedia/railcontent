@@ -154,19 +154,19 @@ onMounted(() => {
             {{ title }}
           </h2>
             <!-- Logo -->
-            <img v-if="logo" class="tw-h-24 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
-          <p class="tw-hidden xl:tw-block xl:tw-line-clamp-3" v-html="description"></p>
+            <img v-if="logo" class="tw-h-24 md:tw-h-28 lg:tw-h-32 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
+          <p class="tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg" v-html="description"></p>
           <!-- CTA -->
             <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
                 <a
                     :href="primaryCtaUrl"
-                    :class="`tw-bg-white tw-text-[#000C17] tw-font-bebas-neue tw-rounded-full tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2`"
+                    :class="`tw-bg-white tw-text-[#000C17] tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block`"
                 >
                     {{ primaryCtaText }}
                 </a>
                 <a
                     :href="secondaryCtaUrl"
-                    :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg `"
+                    :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block`"
                 >
                     {{ secondaryCtaText }}
                 </a>
