@@ -330,6 +330,8 @@ class UserPlaylistsService
                     ];
 
                     $itemId = $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+                    $results[$userPlaylistId][] = $itemId;
+
                     if ($importAllAssignments) {
                         $itemIds = $this->addSounsliceAssignments(
                             $assignments['soundslice_assignments'][$lesson['id']] ?? [],
