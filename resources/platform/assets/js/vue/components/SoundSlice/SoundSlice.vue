@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, onBeforeUnmount, ref } from 'vue';
 import LoadingAnimation from '../../vuesora/components/LoadingAnimation/LoadingAnimation.vue';
+import ProgressTracker from '../../vuesora/assets/js/classes/progress-tracker';
 
 const props = defineProps({
     themeColor: {
@@ -19,13 +20,10 @@ const props = defineProps({
         type: [Number, String],
         default: () => 0,
     },
-    loading: {
-        type: Boolean,
-        default: false,
-    }
+    contentId: {
+        type: Number
+    },
 });
-
-const emit = defineEmits(['', '', '', '', '', '', '', '',]);
 
 const scoreOrSlice = () => {
     if (/^\d+$/.test(props.soundsliceSlug)) {
@@ -35,6 +33,10 @@ const scoreOrSlice = () => {
 };
 
 const isPlaying = ref(false);
+const isLoading = ref(true);
+const hasBeenPlayed = ref(false);
+const progressTrackerEventListener = ref(null);
+let progressTracker = new ProgressTracker();
 
 const spacebarToPlayPause = (event) => {
     const embeddedPlayer = document.getElementById('ssEmbed').contentWindow;
@@ -51,20 +53,53 @@ const spacebarToPlayPause = (event) => {
 };
 
 const handleSoundsliceEvent = (event) => {
+    console.log('soundslice event', event)
     if (event.origin === 'https://www.soundslice.com') {
         const cmd = JSON.parse(event.data);
 
         switch (cmd.method) {
             case 'ssPlay':
                 isPlaying.value = true;
-                emit('onPlay');
+                handlePlay();
                 break;
             case 'ssPause':
                 isPlaying.value = false;
-                emit('onPause');
+                handlePause();
                 break;
         }
     }
+};
+
+
+const sendProgressTracking = () => {
+    progressTracker.send({
+        mediaId: props.contentId,
+        mediaType: 'assignment',
+        mediaCategory: 'soundslice',
+    });
+}
+
+const handlePlay = () => {
+    if (!hasBeenPlayed.value) {
+        hasBeenPlayed.value = true;
+        ContentService.markContentAsStarted(props.contentId);
+    }
+
+    progressTracker.start();
+
+    if (!progressTrackerEventListener.value) {
+        progressTrackerEventListener.value = true;
+
+        window.addEventListener('unload', sendProgressTracking);
+    }
+}
+
+const handlePause = () => {
+    progressTracker.stop();
+}
+
+const handleOnLoad = () => {
+    isLoading.value = false;
 };
 
 onMounted(() => {
@@ -73,6 +108,15 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+    progressTracker.sendAsync({
+        mediaId: props.contentId,
+        mediaType: 'assignment',
+        mediaCategory: 'soundslice',
+    });
+
+    progressTracker = null;
+
+    window.removeEventListener('unload', () => sendProgressTracking);
     window.removeEventListener('message', handleSoundsliceEvent);
     document.removeEventListener('keyup', spacebarToPlayPause);
 });
@@ -87,12 +131,12 @@ onBeforeUnmount(() => {
                 <div class="flex flex-column relative">
                     <iframe id="ssEmbed"
                         :src="'https://www.soundslice.com/' + scoreOrSlice() + '/' + soundsliceSlug + '/embed/?api=1&scroll_type=2&branding=0&top_controls=1&u=' + userId + additionalParams"
-                        frameBorder="0" allowfullscreen @load="emit('onLoad')"></iframe>
+                        frameBorder="0" allowfullscreen @load="handleOnLoad"></iframe>
                 </div>
             </div>
         </div>
 
-        <div v-if="loading" class="loading-exercise heading ph-4 pv-2">
+        <div v-if="isLoading" class="loading-exercise heading ph-4 pv-2">
             <LoadingAnimation :theme-color="themeColor" />
         </div>
     </div>

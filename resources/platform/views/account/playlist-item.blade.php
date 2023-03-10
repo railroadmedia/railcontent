@@ -8,7 +8,11 @@
     );
     $recordingIdx = 1;
 
-    if (($lessonType == 'song' || $lessonType == 'assignment') && $playlistItem['is_instrumentless_track']) {
+    if (
+        ($lessonType == 'song' || $lessonType == 'assignment')
+        && property_exists($playlistItem, 'is_instrumentless_track')
+        && $playlistItem['is_instrumentless_track']
+    ) {
         $recordingIdx = 2;
     }
 
@@ -39,7 +43,8 @@
                         <div class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
                             <sound-slice user-id="{{ user()->id }}" theme-color="{{$brand}}"
                                 additional-params="{{ $soundsliceAdditionalParams }}"
-                                soundslice-slug="{{$playlistItem['soundslice_slug']}}"
+                                soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? ''}}"
+                                :content-id="{{ $lessonContent->fetch('id') }}"
                             >
                             </sound-slice>
                         </div>
@@ -57,7 +62,7 @@
                                             theme-color="{{ $brand }}" @play="handleVideoPlay" @pause="handleVideoPause">
                             </youtube-player>
                         </div>
-                    @else
+                    @elseif($lessonType !== 'song' && $lessonType !== 'assignment')
                         <div id="lessonVideoWrap">
                             @if (user()->use_legacy_video_player ?? false || $agent->isSamsung())
                                 <transition appear name="fade">
