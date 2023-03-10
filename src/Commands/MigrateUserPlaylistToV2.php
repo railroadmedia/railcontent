@@ -5,6 +5,8 @@ namespace Railroad\Railcontent\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
@@ -66,25 +68,59 @@ class MigrateUserPlaylistToV2 extends Command
                 ->toDateTimeString()
         );
 
+        //delete items that do not have the 'published' status
+        $del =
+            $dbConnection->table(config('railcontent.table_prefix').'user_playlist_content')
+                ->join(
+                    'railcontent_content',
+                    'railcontent_content.id',
+                    '=',
+                    config('railcontent.table_prefix').'user_playlist_content.content_id'
+                )
+                ->whereNot('railcontent_content.status', '=', 'published')
+                ->delete();
+
+        //delete instructor items from playlist
+        $instructors =
+            $dbConnection->table(config('railcontent.table_prefix').'user_playlist_content')
+                ->join(
+                    'railcontent_content',
+                    'railcontent_content.id',
+                    '=',
+                    config('railcontent.table_prefix').'user_playlist_content.content_id'
+                )
+                ->where('railcontent_content.type', '=', 'instructor')
+                ->delete();
+
+        $this->info(
+            'Deleted '.
+            $del.
+            ' items that do not have the published status '.
+            Carbon::now()
+                ->toDateTimeString()
+        );
+
+        $this->info(
+            'Deleted '.
+            $instructors.
+            ' instructors items '.
+            Carbon::now()
+                ->toDateTimeString()
+        );
+
+        $total = 0;
         $dbConnection->table(config('railcontent.table_prefix').'user_playlists')
-            //            ->select(
-            //                'railcontent_content.id',
-            //                'railcontent_content.type',
-            //                'railcontent_user_playlist_content.*'
-            //            )
-            //            ->leftJoin('railcontent_content', 'railcontent_content.id', '=', config('railcontent.table_prefix') . 'user_playlist_content.content_id')
-            //            ->whereNot('railcontent_content.type', 'user-playlist')
-            //            ->whereIn('key', $contentColumnNames)
             ->where('type', '=', 'primary-playlist')
-            ->where('id', '=', 4)
+            // ->where('id', '=', 4)
             ->orderBy('id', 'asc')
-            ->chunk(5, function (Collection $rows) use ($dbConnection) {
+            ->chunk(5000, function (Collection $rows) use ($dbConnection, &$total) {
                 foreach ($rows as $row) {
                     $items =
                         $dbConnection->table(config('railcontent.table_prefix').'user_playlist_content')
                             ->select(
                                 'railcontent_content.id',
                                 'railcontent_content.type',
+                                'railcontent_content.status',
                                 'railcontent_user_playlist_content.*'
                             )
                             ->leftJoin(
@@ -93,13 +129,11 @@ class MigrateUserPlaylistToV2 extends Command
                                 '=',
                                 config('railcontent.table_prefix').'user_playlist_content.content_id'
                             )
-                            //            ->whereNot('railcontent_content.type', 'user-playlist')
-                            //            ->whereIn('key', $contentColumnNames)
-                            // ->where('position', '=', 0)
+                            ->where('position', '=', 0)
                             ->where('user_playlist_id', '=', $row->id)
                             ->orderBy('created_at', 'desc')
-                            //            ->whereNotIn('value', ['Invalid date'])
                             ->get();
+
                     if ($items->isNotEmpty()) {
                         $itemsOrdered = [];
                         $position = 1;
@@ -107,24 +141,63 @@ class MigrateUserPlaylistToV2 extends Command
                         $shouldBeRemoved = [];
                         foreach ($items as $item) {
                             if (in_array($item->type, [
-                                                        'course-part',
-                                                        'live',
-                                                        'challenges',
-                                                        'quick-tips',
-                                                        'play-along',
-                                                        'in-rhythm',
-                                                        'student-collaborations',
-                                                        'performances',
-                                                        'sonor-drums',
-                                                        'rhythms-from-another-planet',
-                                                        'exploring-beats',
-                                                        'pack-bundle-lesson',
-                                                    ])) {
+                                'course-part',
+                                'live',
+                                'challenges',
+                                'quick-tips',
+                                'play-along',
+                                'in-rhythm',
+                                'student-collaborations',
+                                'performances',
+                                'sonor-drums',
+                                'rhythms-from-another-planet',
+                                'exploring-beats',
+                                'pack-bundle-lesson',
+                                'study-the-greats',
+                                'student-focus',
+                                'gear-guides',
+                                'boot-camps',
+                                'learning-path-lesson',
+                                'semester-pack-lesson',
+                                'solos',
+                                'podcasts',
+                                'question-and-answer',
+                                'spotlight',
+                                'coach-stream',
+                                '25-days-of-christmas',
+                                'backstage-secrets',
+                                'diy-drum-experiments',
+                                'tama-drums',
+                                'rhythmic-adventures-of-captain-carson',
+                                'on-the-road',
+                                'camp-drumeo-ah',
+                                'namm-2019',
+                                'rudiment',
+                                'the-history-of-electronic-drums',
+                                'behind-the-scenes',
+                                'paiste-cymbals',
+                                'assignment',
+                                'recording',
+                                'chord-and-scale',
+                                'play-along-part',
+                                'student-review',
+                                'song-tutorial-children',
+                                'unit-part'
+                            ])) {
                                 $item->position = $position;
                                 $itemsOrdered[] = $item;
                                 $position++;
-                                //
-                            } elseif (($item->type == 'course') || ($item->type == 'song')) {
+                            } elseif ($item->type == 'song') {
+                                $item->position = $position;
+                                $item->extra_data = '{"is_full_track": true}';
+                                $itemsOrdered[] = $item;
+                                $position++;
+                            } elseif (($item->type == 'course') ||
+                                ($item->type == 'learning-path-course') ||
+                                ($item->type == 'semester-pack') ||
+                                ($item->type == 'pack-bundle') ||
+                                ($item->type == 'unit') ||
+                                ($item->type == 'song-tutorial')) {
                                 $lessons =
                                     $dbConnection->table(config('railcontent.table_prefix').'content_hierarchy')
                                         ->where('parent_id', '=', $item->content_id)
@@ -136,14 +209,42 @@ class MigrateUserPlaylistToV2 extends Command
                                         'user_playlist_id' => $item->user_playlist_id,
                                         'position' => $position,
                                         'created_at' => $item->created_at,
-                                        'extra_data' =>($item->type == 'song')?'{"is_full_track": true}':null
+                                        'extra_data' => null,
                                     ];
-                                    // $itemsOrdered[] = $item;
                                     $position++;
                                 }
                                 $shouldBeRemoved[] = $item->content_id;
-                            } elseif (($item->type != 'song') && ($item->type != 'course')) {
-                                dd($item);
+                            } elseif (($item->type == 'learning-path-level') || ($item->type == 'pack')) {
+                                $lessons =
+                                    $dbConnection->table('railcontent_content_hierarchy as ch_1')
+                                        ->select([
+                                                     'ch_2.child_id as child_id',
+                                                 ])
+                                        ->join(
+                                            'railcontent_content_hierarchy as ch_2',
+                                            'ch_2.parent_id',
+                                            '=',
+                                            'ch_1.child_id'
+                                        )
+                                        ->where('ch_1.parent_id', $item->content_id)
+                                        ->orderBy('ch_2.child_position', 'asc')
+                                        ->get();
+
+                                foreach ($lessons as $lesson) {
+                                    $newItems[] = [
+                                        'content_id' => $lesson->child_id,
+                                        'user_playlist_id' => $item->user_playlist_id,
+                                        'position' => $position,
+                                        'created_at' => $item->created_at,
+                                        'extra_data' => null,
+                                    ];
+                                    $position++;
+                                }
+                                $shouldBeRemoved[] = $item->content_id;
+                            } elseif (($item->content_id == 0) || ($item->type == null)) {
+                                $shouldBeRemoved[] = $item->content_id;
+                            } elseif (($item->type != 'learning-path') && ($item->type != 'song-part')) {
+                                $this->info($item->type);
                             }
                         }
 
@@ -169,7 +270,6 @@ class MigrateUserPlaylistToV2 extends Command
                             $statement .= ' ON DUPLICATE KEY UPDATE position = VALUES(position); ';
 
                             $dbConnection->statement($statement);
-                            // dd($statement);
                         }
 
                         if (!empty($newItems)) {
@@ -189,63 +289,64 @@ class MigrateUserPlaylistToV2 extends Command
                                 }
                             }
                             $statement = rtrim($statement, ',');
-                            // $statement .= ' ON DUPLICATE KEY UPDATE position = VALUES(position); ';
 
                             $dbConnection->statement($statement);
                         }
 
                         if (!empty($shouldBeRemoved)) {
-                            $dbConnection->table(config('railcontent.table_prefix').'user_playlist_content')->whereIn('content_id', $shouldBeRemoved)
+                            $dbConnection->table(config('railcontent.table_prefix').'user_playlist_content')
+                                ->whereIn('content_id', $shouldBeRemoved)
                                 ->delete();
                         }
                     }
 
-                    //        ->chunk(5, function (Collection $rows) {
-                    //            foreach ($rows as $row) {
-                    //                if (in_array($row['type'], ['course-part', 'live'])) {
-                    //                }
-                    //            }
-                    //        });
                 }
+                $total += 5000;
+                $this->info(
+                    'Migrated '.
+                    $total.
+                    ' items  '.
+                    Carbon::now()
+                        ->toDateTimeString()
+                );
             });
 
-        //        $dbConnection->table(config('railcontent.table_prefix') . 'user_playlist_content')
-        //            ->select(
-        //                'railcontent_content.id',
-        //                'railcontent_content.type',
-        //                'railcontent_user_playlist_content.*'
-        //            )
-        //            ->leftJoin('railcontent_content', 'railcontent_content.id', '=', config('railcontent.table_prefix') . 'user_playlist_content.content_id')
-        ////            ->whereNot('railcontent_content.type', 'user-playlist')
-        ////            ->whereIn('key', $contentColumnNames)
-        //            ->where('position','=',0)
-        ////            ->whereNotIn('value', ['Invalid date'])
-        //            ->orderBy('user_playlist_id', 'asc')
-        //            ->chunk(5, function (Collection $rows)  {
-        //foreach($rows as $row){
-        //    if(in_array($row['type'], ['course-part','live'])){
-        //
-        //    }
-        //}
-        //            });
-        //
-        //        $sql = <<<'EOT'
-        //UPDATE `%s` cs
-        //SET cs.`type` = '%s', cs.name = '%s', cs.thumbnail_url = '%s'
-        //
-        //EOT;
-        //
-        //        $statement = sprintf(
-        //            $sql,
-        //            config('railcontent.table_prefix').'user_playlists',
-        //            'user-playlist',
-        //            'My List',
-        //            'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/00a9cf48-0bad-4b94-6d6a-d4aa73a63f00/public'
-        //        );
-        //        $dbConnection->statement($statement);
-        //
-        //        $finish = microtime(true) - $start;
-        //        $format = "Finished user playlist data migration  in total %s seconds\n ";
-        //        $this->info(sprintf($format, $finish));
+        //delete empty playlists
+        $emptyPlaylists =
+            $dbConnection->table(config('railcontent.table_prefix').'user_playlists')
+                ->leftJoin(
+                    'railcontent_user_playlist_content',
+                    'railcontent_user_playlists.id',
+                    '=',
+                    config('railcontent.table_prefix').'user_playlist_content.user_playlist_id'
+                )
+                ->whereNull('railcontent_user_playlist_content.id')
+                ->delete();
+
+        $this->info(
+            'Deleted '.
+            $emptyPlaylists.
+            ' empty playlists '.
+            Carbon::now()
+                ->toDateTimeString()
+        );
+
+                $sql = <<<'EOT'
+        UPDATE `%s` cs
+        SET cs.`type` = '%s', cs.name = '%s'
+        
+        EOT;
+
+                $statement = sprintf(
+                    $sql,
+                    config('railcontent.table_prefix').'user_playlists',
+                    'user-playlist',
+                    'My List'
+                );
+                $dbConnection->statement($statement);
+
+        $finish = microtime(true) - $start;
+        $format = "Finished user playlist data migration  in total %s seconds\n ";
+        $this->info(sprintf($format, $finish));
     }
 }
