@@ -258,20 +258,9 @@ class UserPlaylistsService
 
         $assignments = $this->contentService->countLessonsAndAssignments($contentId);
 
-        foreach ($userPlaylistIds as $userPlaylistId) {
-            error_log(
-                'Add item to playlist - playlistId :::'.
-                $userPlaylistId.
-                '     contentId:::'.
-                $contentId.
-                '   import all assignments::'.
-                $importAllAssignments.
-                '  import full::'.
-                $importFullSoundsliceAssignment.
-                '  import instrumentless:::'.
-                $importInstrumentlessSoundsliceAssignment
-            );
+        $results =[];
 
+        foreach ($userPlaylistIds as $userPlaylistId) {
             if ($content && (in_array($content['type'], $singularContentTypes))) {
                 if ($importFullSoundsliceAssignment) {
                     $assignmentInput = [
@@ -281,10 +270,11 @@ class UserPlaylistsService
                             ->toDateTimeString(),
                         'extra_data' => json_encode(['is_full_track' => true]),
                     ];
-                    $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+                    $itemId = $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
                         null,
                         $assignmentInput
                     );
+                    $results[$userPlaylistId][] = $itemId;
                 }
 
                 if ($importInstrumentlessSoundsliceAssignment) {
@@ -295,10 +285,11 @@ class UserPlaylistsService
                             ->toDateTimeString(),
                         'extra_data' => json_encode(['is_instrumentless_track' => true]),
                     ];
-                    $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+                    $itemId = $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
                         null,
                         $assignmentInput
                     );
+                    $results[$userPlaylistId][] = $itemId;
                 }
 
                 if ($content['type'] != 'song') {
@@ -312,13 +303,15 @@ class UserPlaylistsService
                         'created_at' => Carbon::now()
                             ->toDateTimeString(),
                     ];
-                    $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+                    $itemId = $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+                    $results[$userPlaylistId][] = $itemId;
 
                     if ($importAllAssignments) {
-                        $this->addSounsliceAssignments(
+                        $itemIds = $this->addSounsliceAssignments(
                             $assignments['soundslice_assignments'][$contentId] ?? [],
                             $userPlaylistId
                         );
+                        $results[$userPlaylistId] = array_merge($results[$userPlaylistId]??[], $itemIds);
                     }
                 }
             }
@@ -336,12 +329,13 @@ class UserPlaylistsService
                             ->toDateTimeString(),
                     ];
 
-                    $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+                    $itemId = $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
                     if ($importAllAssignments) {
-                        $this->addSounsliceAssignments(
+                        $itemIds = $this->addSounsliceAssignments(
                             $assignments['soundslice_assignments'][$lesson['id']] ?? [],
                             $userPlaylistId
                         );
+                        $results[$userPlaylistId] = array_merge($results[$userPlaylistId]??[], $itemIds);
                     }
                 }
             }
@@ -352,7 +346,7 @@ class UserPlaylistsService
         ContentRepository::$availableContentStatues = $oldStatuses;
         ContentRepository::$pullFutureContent = $oldFutureContent;
 
-        return true;
+        return $results;
     }
 
     /**
@@ -649,6 +643,7 @@ class UserPlaylistsService
      */
     private function addSounsliceAssignments($assignments, $userPlaylistId)
     : array {
+        $results = [];
         foreach ($assignments ?? [] as $assignment) {
             $assignmentInput = [
                 'content_id' => $assignment['id'],
@@ -656,13 +651,14 @@ class UserPlaylistsService
                 'created_at' => Carbon::now()
                     ->toDateTimeString(),
             ];
-            $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+            $itemId = $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
                 null,
                 $assignmentInput
             );
+            $results[] = $itemId;
         }
 
-        return $assignments;
+        return $results;
     }
 
     /**
