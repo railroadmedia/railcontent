@@ -97,7 +97,7 @@ class Carousel extends Resource
             Text::make('logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Markdown::make('Description')->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.<br> Use &lt;br&gt; for a line break, &lt;i&gt;&lt;/i&gt; for italics, and &lt;b&gt;&lt;/b&gt; for bold. <br> Limited to three lines of text.'),
             Image::make('Desktop Image', 'desktop_img')
-                ->help('The image should be 1536 x 440px or a comparable aspect ratio.')
+                ->help('The image should be 1536 x 370px or a comparable aspect ratio.')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -120,7 +120,7 @@ class Carousel extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('img')->getClientOriginalName();
+                    return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('desktop_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
@@ -129,7 +129,7 @@ class Carousel extends Resource
                 }),
             Text::make('Desktop Image', 'desktop_img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Image::make('Tablet Image', 'tablet_img')
-                ->help('The image should be 768 x 440px or a comparable aspect ratio.')
+                ->help('The image should be 768 x 370px or a comparable aspect ratio.')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -152,7 +152,7 @@ class Carousel extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('img')->getClientOriginalName();
+                    return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('tablet_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
@@ -161,7 +161,7 @@ class Carousel extends Resource
                 }),
             Text::make('Tablet Image', 'tablet_img')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Image::make('Mobile Image', 'mobile_img')
-                ->help('The image should be 340 x 440px or a comparable aspect ratio.')
+                ->help('The image should be 340 x 370px or a comparable aspect ratio.')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -184,7 +184,7 @@ class Carousel extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('img')->getClientOriginalName();
+                    return '/'.$brand.'/carousels/'.$request->uuid.'-'.$request->file('mobile_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
@@ -219,7 +219,7 @@ class Carousel extends Resource
                     }
                 ),
             Text::make('Primary Button URL', 'primary_cta_url'),
-            Text::make('Primary Button URL Alt', 'product_url')->hideFromIndex()
+            Text::make('Primary Button URL Alt', 'primary_cta_url_alt')->hideFromIndex()
                 ->hide()
                 ->hideFromDetail(function (NovaRequest $request, $resource) {
                     return !$this->is_featured;
