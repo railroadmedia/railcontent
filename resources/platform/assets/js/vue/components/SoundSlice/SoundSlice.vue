@@ -2,6 +2,7 @@
 import { onMounted, onBeforeUnmount, ref } from 'vue';
 import LoadingAnimation from '../../vuesora/components/LoadingAnimation/LoadingAnimation.vue';
 import ProgressTracker from '../../vuesora/assets/js/classes/progress-tracker';
+import ContentService from "../../vuesora/assets/js/services/content";
 
 const props = defineProps({
     themeColor: {
@@ -53,12 +54,17 @@ const spacebarToPlayPause = (event) => {
 };
 
 const handleSoundsliceEvent = (event) => {
-    console.log('soundslice event', event)
+    const embeddedPlayer = document.getElementById('ssEmbed').contentWindow;
+    //const videoContainer = embeddedPlayer.document.getElementById('ytvid0')
+
     if (event.origin === 'https://www.soundslice.com') {
         const cmd = JSON.parse(event.data);
 
         switch (cmd.method) {
             case 'ssPlay':
+                if (!hasBeenPlayed) {
+                    //embeddedPlayer.postMessage('{"method": "play"}', 'https://www.soundslice.com');
+                }
                 isPlaying.value = true;
                 handlePlay();
                 break;
