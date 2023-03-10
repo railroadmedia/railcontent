@@ -1,4 +1,4 @@
-@extends('drumeo.lead-gen.lead-gen-layout-tw')
+@extends('drumeo.lead-gen.lead-gen-layout-tw',[ 'appTailwind' => true, ])
 
 @section('meta')
     <title>Fastest Way To Get Faster</title>
@@ -23,15 +23,33 @@
 @stop
 
 @section('content')
-    <header class="header" style="background-image: url(https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/bg.jpg);">
-        <div class="container max-w-6xl mx-auto px-4">
-            <div class="text-center">
-                <img class="series-logo mx-auto" src="https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/logo.png" alt="The Fastest Way To Get Faster">
-                <p>Enter your email below for 10 free video lessons...</p>
-                @yield('form1')
+    <header class="py-12 md:py-20" style="background: #040A20;">
+        <div class="max-w-6xl mx-auto flex items-center container px-4">
+            <div class="flex-1 text-white">
+                <img class="h-14 lg:h-20 mb-3" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
+                <h2 class="leading-tight mb-5">Improve your speed on the drums with <b class="font-extrabold">10 free workouts.</b></h2>
+                <p class="mb-2">Enter your email below to grab your lessons.</p>
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                    "formId" => $formId,
+                    "formName" => $formName,
+                    "buttonText" => "Get started for free",
+                    "stacked" => true
+                ])
+            </div>
+            <div class="flex-1 pl-12 xl:px-12">
+                <img src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/solid-hero-header.png" alt="header hero image" />
             </div>
         </div>
     </header>
+{{--    <header class="header" style="background-image: url(https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/bg.jpg);">--}}
+{{--        <div class="container max-w-6xl mx-auto px-4">--}}
+{{--            <div class="text-center">--}}
+{{--                <img class="series-logo mx-auto" src="https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/logo.png" alt="The Fastest Way To Get Faster">--}}
+{{--                <p>Enter your email below for 10 free video lessons...</p>--}}
+{{--                @yield('form1')--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </header>--}}
 
 
     <section class="lesson-grid">
