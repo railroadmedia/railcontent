@@ -75,7 +75,7 @@
                 @endif
             </a>
         </div>
-        <div class="hidden lg:block button-wrap">
+        <div class="hidden lg:block button-wrap @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
             <a href="https://www.musora.com/guitareo" class="join outline-button">Login</a>
         </div>
     @endif

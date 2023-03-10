@@ -536,6 +536,19 @@
     <div id="order" class="anchor"></div>
     @hasSection('final')
         @yield('final')
+    @elseif(!empty($trialVersion))
+        @include('musora.sales.components.card-selection-section', [
+            "plusLogo" => "https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo.svg",
+            "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
+            "songs" => "5000",
+            "firstPoint" => "The world’s best drum lessons.",
+            "thirdPoint" => "Unlimited personal support",
+            "fifthPoint" => "Lesson access for piano, guitar, and singing.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
+            "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
+            "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+        ])
     @elseif(!empty($promoVersion))
         @php
             $bonuses = [
@@ -572,19 +585,6 @@
         'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
         'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
-        ])
-    @elseif(!empty($trialVersion))
-        @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo.svg",
-            "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-            "songs" => "5000",
-            "firstPoint" => "The world’s best drum lessons.",
-            "thirdPoint" => "Unlimited personal support",
-            "fifthPoint" => "Lesson access for piano, guitar, and singing.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
