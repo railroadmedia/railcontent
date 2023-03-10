@@ -22000,14 +22000,14 @@ a:visited{
 .tw-hidden{
   display: none !important;
 }
+.tw-aspect-video{
+  aspect-ratio: 16 / 9 !important;
+}
 .tw-aspect-\[16\/9\]{
   aspect-ratio: 16 / 9 !important;
 }
 .tw-aspect-square{
   aspect-ratio: 1 / 1 !important;
-}
-.tw-aspect-video{
-  aspect-ratio: 16 / 9 !important;
 }
 .tw-h-\[26px\]{
   height: 26px !important;
@@ -24163,9 +24163,6 @@ a:visited{
 .tw-text-32{
   font-size: 32px !important;
   line-height: 1.5 !important;
-}
-.tw-text-\[48px\]{
-  font-size: 48px !important;
 }
 .tw-text-3xl{
   font-size: 1.875rem !important;

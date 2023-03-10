@@ -11,6 +11,8 @@
     if (($lessonType == 'song' || $lessonType == 'assignment') && $playlistItem['is_instrumentless_track']) {
         $recordingIdx = 2;
     }
+
+    $soundsliceAdditionalParams = $brandParams[$brand] . '&layout=3&recording_idx=' . $recordingIdx;
 @endphp
 
 @extends('partials.layout', ['forceHideSidebar' => false])
@@ -33,15 +35,17 @@
         <div class="tw-flex tw-flex-col tw-w-full">
 
             <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
-
+                @if ($lessonType == 'song' || $lessonType == 'assignment')
+                        <div class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
+                            <sound-slice user-id="{{ user()->id }}" theme-color="{{$brand}}"
+                                additional-params="{{ $soundsliceAdditionalParams }}"
+                                soundslice-slug="{{$playlistItem['soundslice_slug']}}"
+                            >
+                            </sound-slice>
+                        </div>
+                @endif
                 <div class="p-lg-only lean">
-                    @if ($lessonType == 'song' || $lessonType == 'assignment')
-                        <sound-slice :user-id="{{ user()->id }}" :theme-color="$brand"
-                            :additional-params="{{ $brandParams[$brand] }}&layout=3&recording_idx={{ $recordingIdx }}"
-                            :soundslice-slug="$playlistItem['soundslice_slug']"
-                        >
-                        </sound-slice>
-                    @elseif(!empty($lessonContent->fetch('fields.video.fields.youtube_video_id')))
+                    @if(!empty($lessonContent->fetch('fields.video.fields.youtube_video_id')))
                         <div class="widescreen mb-2 bg-black">
                             <youtube-player ref="mediaElementVueInstance" brand="{{ $brand }}"
                                             video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"
@@ -107,8 +111,6 @@
                         </div>
                     @endif
                 </div>
-
-                <div class="tw-w-full tw-text-white tw-text-[48px]">{{ $lessonType }}</div>
 
                 <div class="tw-container tw-mx-auto lean">
                     <video-resources theme-color="{{ $brand }}" brand="{{ $brand }}"
