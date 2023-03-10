@@ -86,8 +86,14 @@
             //Reorder UI
             playlistsStore.lessons.splice(state.endPosition, 0, playlistsStore.lessons.splice(state.startPosition, 1)[0])
             //Update Array
-            state.newSortPositions.push({ id: state.startID, position: state.endPosition + 1 })
+            const index = state.newSortPositions.findIndex(object => object.id === state.startID);
+            if(index == -1) {
+                state.newSortPositions.push({id: state.startID, position: state.endPosition + 1})
+            } else{
+                state.newSortPositions[index].position =  state.endPosition + 1;
+            }
         }
+        console.log(state.newSortPositions)
     }
 
     //---------Lifecycle Methods---------//
