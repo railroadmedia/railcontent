@@ -154,7 +154,7 @@
                     </div>
                     <!-- Pinned Icon -->
                     <div class="tw-inline-flex tw-items-center tw-transition-colors tw-z-20 tw-absolute tw-top-3 tw-right-3" 
-                        :class="[`tw-text-${brand}`, { 'tw-opacity-0' : !state.isPinned } ]"
+                        :class="[`tw-text-${brand}`, { 'tw-opacity-0' : !playlistsStore.activePlaylist.pinned } ]"
                     >
                         <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto tw-hidden md:tw-flex" />
                     </div>
@@ -215,13 +215,13 @@
                             :brand="brand"
                             :dropdownTop="state.dropdownTop"
                             :is-private="state.isPrivate"
-                            :is-pinned="state.isPinned"
+                            :is-pinned="playlistsStore.activePlaylist.pinned"
                             :dropdownOptions="dropdownOptions"
-                            :data="playlistsStore.activePlaylist"
+                            :data="playlist"
                             :is-open="state.dropdownOpen"
                             type="playlist"
                             @closeDropdown="state.dropdownOpen = false"
-                            @pinItem="state.isPinned = $event"
+                            @pinItem="playlistsStore.activePlaylist.pinned = $event"
                             @makePublic="(val) => state.isPrivate = val"
                         />  
                     </div>  

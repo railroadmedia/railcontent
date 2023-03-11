@@ -80,7 +80,7 @@
     })
 
     onBeforeMount(() => {  
-        console.log(props.playlists)    
+        // console.log(props.playlists)    
         //Get Local Storage Value
         if (!props.miniCatalog) {
             if(localStorage.getItem('playlistIsListView')) {

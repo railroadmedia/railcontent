@@ -22,9 +22,6 @@
 
     //-----------Methods-----------//
     const handleCreatePlaylist = () => {
-        console.log(state.sortbyValue);
-        console.log(state.searchTerm);
-
         window.openplaylistmodal({ 
             modalType: 'create', 
             data: { 

@@ -146,7 +146,6 @@ export default {
      *
      */
     pinPlaylist(id, brand = "drumeo", csrf_token) {
-        console.log('pinPlaylist')
         return axios.put(
             '/railcontent/pin-playlist',
             {

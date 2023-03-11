@@ -164,7 +164,7 @@
                 })  
             }
             // Update Pinned Playlist if name changed
-            playlistsStore.updatePinnedItem(props.playlist.id, payload.name );
+            playlistsStore.updatePinnedItem(props.playlist.id, payload.name);
             //Send Request
             PlaylistService.updatePlaylist(props.playlist.id, payload, token)
                 .then(function(response) {

@@ -92,19 +92,25 @@ export const usePlaylistsStore = defineStore({
       this.pinnedPlaylists.push(list)
     },
     unpinPlaylist(id) {
-      //Unpin from Catalog IF Playlist Collection Page
-      if( window.location.href.indexOf("/playlists") > -1 ) {
+      //Unpin from Playlist Detail Page
+      if (window.location.href.indexOf("/playlist/") > -1 ) {
+        this.activePlaylist.pinned = false;
+      } else {
+        //Unpin from Catalog (wherever there's a catalog)
         let playlist = this.playlists.find(p => p.id === id)
         playlist.pinned = false;
       }
+      
       //Unpin from Sidebar
       this.pinnedPlaylists = this.pinnedPlaylists.filter(p => {
         return p.id !== id;
       })
     },
     updatePinnedItem(id, name){
-      let pinnedList = this.pinnedPlaylists.find(l => l.id === id);
-      pinnedList.name = name;
+      if(this.pinnedPlaylists.length) {
+        let pinnedList = this.pinnedPlaylists.find(l => l.id === id);
+        pinnedList.name = name;
+      }
     },
     //Update Set/Time
     updatePlaylistItem(data) {
