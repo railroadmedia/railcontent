@@ -1,3 +1,24 @@
+@php
+    //dd($playlistItem);
+    $brandParams = array(
+        'drumeo'  => '&show_chords=0',
+        'singeo'  => '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
+        'guitareo'    => '',
+        'pianote' => '&show_chords=1'
+    );
+    $recordingIdx = 1;
+
+    if (
+        ($lessonType == 'song' || $lessonType == 'assignment')
+        && property_exists($playlistItem, 'is_instrumentless_track')
+        && $playlistItem['is_instrumentless_track']
+    ) {
+        $recordingIdx = 2;
+    }
+
+    $soundsliceAdditionalParams = $brandParams[$brand] . '&layout=3&recording_idx=' . $recordingIdx;
+@endphp
+
 @extends('partials.layout', ['forceHideSidebar' => false])
 
 @section('meta')
@@ -18,28 +39,18 @@
         <div class="tw-flex tw-flex-col tw-w-full">
 
             <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
-
+                @if ($lessonType == 'song' || $lessonType == 'assignment')
+                        <div class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
+                            <sound-slice user-id="{{ user()->id }}" theme-color="{{$brand}}"
+                                additional-params="{{ $soundsliceAdditionalParams }}"
+                                soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? ''}}"
+                                :content-id="{{ $lessonContent->fetch('id') }}"
+                            >
+                            </sound-slice>
+                        </div>
+                @endif
                 <div class="p-lg-only lean">
-                    {{-- Video Player --}}
-                    @if ($lessonType == 'song')
-                        <youtube-player ref="mediaElementVueInstance" brand="{{ $brand }}"
-                                        video-id="{{ $rangesVideoIds['original'] ?? '' }}"
-                                        video-length="{{ $lessonContent->fetch(
-                                'fields.video.fields.length_in_seconds',
-                                $lessonContent->fetch('fields.original_video.fields.length_in_seconds'),
-                            ) }}"
-                                        :current-second="{{ $playlistItem['start_second'] ?? 0 }}"
-                                        :total-duration="{{ $lessonContent->fetch(
-                                'fields.video.fields.length_in_seconds',
-                                $lessonContent->fetch('fields.original_video.fields.length_in_seconds'),
-                            ) }}"
-                                        progress-state="{{ $lessonContent->fetch('progress_state') }}"
-                                        :content-id="{{ $lessonContent->fetch('id') }}" :use-intersection-observer="true"
-                                        @play="handleVideoPlay" @pause="handleVideoPause"
-                                        :ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
-                                        :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}">
-                        </youtube-player>
-                    @elseif(!empty($lessonContent->fetch('fields.video.fields.youtube_video_id')))
+                    @if(!empty($lessonContent->fetch('fields.video.fields.youtube_video_id')))
                         <div class="widescreen mb-2 bg-black">
                             <youtube-player ref="mediaElementVueInstance" brand="{{ $brand }}"
                                             video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"
@@ -51,7 +62,7 @@
                                             theme-color="{{ $brand }}" @play="handleVideoPlay" @pause="handleVideoPause">
                             </youtube-player>
                         </div>
-                    @else
+                    @elseif($lessonType !== 'song' && $lessonType !== 'assignment')
                         <div id="lessonVideoWrap">
                             @if (user()->use_legacy_video_player ?? false || $agent->isSamsung())
                                 <transition appear name="fade">

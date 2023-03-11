@@ -86,23 +86,25 @@ const handleCancel = () => {
 };
 
 const handleSaveItem = () => {
-    isLoadingPlaylists.value = true;
-    return PlaylistService.addToPlaylist({
-        brand: props.brand,
-        contentId: props.content.content_id,
-        importAssignments: importAll.value,
-        playlistIds: selectedPlaylists.value,
-        addFull: addFullSongToggle.value,
-        addInstrumentless: addInstrumentlessToggle.value,
-        token,
-    }).then(() => {
-        window.shownotification({ icon: 'check', text: 'The items were added to your selected playlists.' });
-    }).catch(() => {
-        window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
-    }).finally(() => {
-        isLoadingPlaylists.value = false;
-        handleCancel();
-    });
+    if (selectedPlaylists.value.length) {
+        isLoadingPlaylists.value = true;
+        return PlaylistService.addToPlaylist({
+            brand: props.brand,
+            contentId: props.content.content_id,
+            importAssignments: importAll.value,
+            playlistIds: selectedPlaylists.value,
+            addFull: addFullSongToggle.value,
+            addInstrumentless: addInstrumentlessToggle.value,
+            token,
+        }).then(() => {
+            window.shownotification({ icon: 'check', text: 'The items were added to your selected playlists.' });
+        }).catch(() => {
+            window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
+        }).finally(() => {
+            isLoadingPlaylists.value = false;
+            handleCancel();
+        });
+    }
 };
 const handleCreate = () => {
     emit('onCancel');

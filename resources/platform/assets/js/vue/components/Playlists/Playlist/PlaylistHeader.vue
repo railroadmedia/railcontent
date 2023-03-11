@@ -173,7 +173,11 @@
                         <h1 class="tw-capitalize tw-leading-none tw-mb-2">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.description }}</p>
                     </div>
-                    <a v-if="lessons.data.length" :href="playlistsStore.activePlaylist.playback_url" class="tw-w-[50px] tw-inline-flex" :class="`tw-text-${brand}`" :title="`Go To Player`">
+                    <a v-if="lessons.data.length" :href="playlistsStore.activePlaylist.playback_url" 
+                        class="tw-w-[50px] tw-inline-flex tw-transition" 
+                        :class="`tw-text-${brand} hover:tw-text-${brand}-600`" 
+                        :title="`Go To Player`"
+                    >
                         <i class="tw-text-[50px] fas fa-play-circle"></i>
                     </a>
                 </div>

@@ -27,6 +27,10 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                     $contentsOfType[$contentIndex][$key] = $value;
                 }
             }
+
+            //thumbnail_url
+            $contentsOfType[$contentIndex]['thumbnail_url'] = $content->fetch('data.original_thumbnail_url');
+
             $route = [];
 
             if (!empty($content['parent_content_data'])) {
@@ -42,6 +46,9 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         if ($content['type'] == 'assignment') {
                             $contentsOfType[$contentIndex]['fields'] =
                                 array_merge($content['fields'], $parents[$value['id']]['fields'] ?? []);
+//                            $contentsOfType[$contentIndex]['data'] =
+//                                array_merge($content['data'], $parents[$value['id']]['data'] ?? []);
+                            $contentsOfType[$contentIndex]['thumbnail_url'] = $parents[$value['id']]->fetch('data.original_thumbnail_url');
                         }
                     }
                     switch ($value['type']) {
