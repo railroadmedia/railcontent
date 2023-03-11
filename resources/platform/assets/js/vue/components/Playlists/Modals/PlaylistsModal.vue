@@ -4,6 +4,7 @@
     import AddItem from './AddItem.vue'
     import StartEnd from './StartEnd.vue';
     import DeleteModal from './DeleteModal.vue';
+    import NoAccess from './NoAccess.vue';
     import UnpinModal from './UnpinModal/UnpinModal.vue';
 
     const emit = defineEmits(['onClosePlaylistsModal']);
@@ -29,6 +30,7 @@
         duplicate: 'tw-max-w-[654px] tw-px-[64px]',
         edit: 'tw-max-w-[654px] tw-px-[64px]',
         remove: 'tw-max-w-[606px] tw-px-[64px]',
+        noAccess: 'tw-max-w-[550px] tw-px-[64px]',
         removeLesson: 'tw-max-w-[606px] tw-px-[64px]',
         startEnd: 'tw-max-w-[589px] tw-px-[48px]',
         addItem: 'tw-max-w-[917px] tw-px-[32px]',
@@ -60,6 +62,12 @@
                          mode="lesson"
                          :data="modalProps.data"
                          :index="modalProps.index"
+            />
+
+            <NoAccess v-if="modalProps.modalType === 'noAccess'"
+                      @onCloseModal="() => emit('onClosePlaylistsModal')"
+                      :brand="brand" 
+                      :data="modalProps.data"
             />
 
             <div v-if="modalProps.modalType === 'startEnd'">

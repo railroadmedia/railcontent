@@ -87,8 +87,10 @@
     }
 
     const handleDeleteLesson = () => {
+        //Close Modal
+        emit('onCloseModal')
         //Delete from UI First
-        playlistsStore.deletePlaylistItem(props.data, props.index);
+        setTimeout(playlistsStore.deletePlaylistItem(props.data, props.index), 1000)
         //Send Request
         PlaylistService.deletePlaylistItem(props.data.user_playlist_item_id, token)
             .then(function(response) {
@@ -98,8 +100,6 @@
                         icon: 'fa-not-equal',
                         text: `'${state.title}' was removed from your playlist.`
                     })
-                    //Close Modal
-                    emit('onCloseModal')
                 }
             })
             .catch(function (error) {
@@ -109,8 +109,6 @@
                         icon: 'error',
                         text: 'Woops! Something wrong happened, please try again later.'
                     })
-                    //Close Modal
-                    emit('onCloseModal')
                 }
             });
     }
@@ -127,7 +125,6 @@
 <template>
     <div class="tw-h-full tw-w-full tw-flex tw-flex-col tw-items-center tw-justify-center">
         <template v-if="!state.isLoading">
-            
             <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-4">
                 Delete 
                 <span :class="`tw-text-${brand}`" class="tw-mr-0.5">
@@ -135,9 +132,7 @@
                     <span v-else>{{ data.name }}</span>
                 </span>?
             </h2>
-
             <p class="dark:tw-text-white tw-text-center">This action can not be undone</p>
-
             <div class="tw-pt-8 tw-flex tw-flex-col tw-items-center tw-justify-center tw-w-full">
                 <!-- Delete Playlist -->
                 <button v-if="mode !== 'lesson'" :class="`tw-mb-2 tw-btn-primary tw-btn-small tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"

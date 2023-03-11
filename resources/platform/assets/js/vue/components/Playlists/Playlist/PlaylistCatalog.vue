@@ -1,5 +1,5 @@
 <script setup>
-    import { onBeforeMount, onMounted, watch, inject, reactive, computed } from 'vue';
+    import { onBeforeMount, onMounted, watch, inject, ref, reactive, computed } from 'vue';
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
     import PlaylistCard from './PlaylistCard.vue';
@@ -41,7 +41,13 @@
         newSortPositions: [],
     })
 
+    //-----------Static Data-----------//
+
+    let initialLessonsArray = [];
+
+
     //-------------Methods-------------//
+
     const handleSort = () => {
         playlistsStore.sortingPlaylist = false;
         //Update each item in temp array
@@ -58,12 +64,17 @@
             text: `You have successfully re-ordered your playlist items`
         })
     }
+    const handleCancelSort = () => {
+        console.log(initialLessonsArray)
+        playlistsStore.lessons = initialLessonsArray;
+        playlistsStore.sortingPlaylist = false;
+    }
     const handleDragStart = (event, position, id) => {
         if(playlistsStore.sortingPlaylist) {
             //save start position
             state.startID = id;
             state.startPosition = position;
-            console.log(state.startID, position)
+            // console.log(state.startID, position)
         }
     }
     const handleDragOver = (event) => {
@@ -79,7 +90,7 @@
         }
     }
     const handleDrop = (event, position) => {
-        console.log(state.startID, position)
+        // console.log(state.startID, position)
         if(playlistsStore.sortingPlaylist) {
             event.target.classList.remove('tw-border-b');
             state.endPosition = position;
@@ -89,6 +100,18 @@
             state.newSortPositions.push({ id: state.startID, position: state.endPosition + 1 })
         }
     }
+    // TODO:
+    // Scroll Page on Drag
+
+    //-------------Watchers-------------//
+
+    watch(() => playlistsStore.sortingPlaylist, (isSorting) => {
+        if(isSorting) {
+            initialLessonsArray = playlistsStore.lessons;
+            console.log('initialArray', initialLessonsArray)
+        }
+    });
+
 
     //---------Lifecycle Methods---------//
 
@@ -111,7 +134,8 @@
                     <button class="tw-btn-primary tw-btn-small tw-mr-[10px] tw-px-[30px]" :class="`tw-bg-${brand}`" @click.prevent="handleSort">
                         Save changes
                     </button>
-                    <button class="tw-btn-primary tw-btn-small tw-bg-transparent dark:tw-text-white tw-text-[#00101D] tw-px-[30px] hover:tw-bg-black/10" @click.prevent="playlistsStore.sortingPlaylist = false">
+                    <button class="tw-btn-primary tw-btn-small tw-bg-transparent dark:tw-text-white tw-text-[#00101D] tw-px-[30px] hover:tw-bg-black/10" 
+                            @click.prevent="handleCancelSort">
                         Cancel
                     </button>
                 </div>
