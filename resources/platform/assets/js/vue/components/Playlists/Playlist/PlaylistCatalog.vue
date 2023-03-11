@@ -104,7 +104,6 @@
                 state.newSortPositions[index].position =  state.endPosition + 1;
             }
         }
-        console.log(state.newSortPositions)
     }
     // TODO:
     // Scroll Page on Drag

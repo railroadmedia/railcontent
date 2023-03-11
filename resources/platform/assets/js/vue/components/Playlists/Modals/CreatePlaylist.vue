@@ -153,6 +153,19 @@
             })
         }
         if(props.mode === "edit") {
+            //Update Active Playlist (For Playlist Detail Page)
+            if( Object.keys(playlistsStore.activePlaylist).length ) {
+                playlistsStore.updateActivePlaylist({
+                    id: props.playlist.id,
+                    thumbnail_url: state.thumb,
+                    name: state.name ? state.name : 'Playlist',
+                    description: state.description,
+                    category: state.category,
+                })  
+            }
+            // Update Pinned Playlist if name changed
+            playlistsStore.updatePinnedItem(props.playlist.id, payload.name );
+            //Send Request
             PlaylistService.updatePlaylist(props.playlist.id, payload, token)
                 .then(function(response) {
                     if (response.status === 201) {
@@ -162,14 +175,11 @@
                             icon: 'fa-pen-to-square',
                             text: `Your playlist was successfully edited`
                         })
-                        //load Playlists
-                        playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);    
-                        //Update Active Playlist
-                        playlistsStore.updateActivePlaylist({
-                            thumbnail_url: state.thumb,
-                            name: state.name ? state.name : 'Playlist',
-                            description: state.description
-                        })   
+                        //load Playlists (if mini catalog has less than 5 and not detail page - use activePlaylist )
+                        if( Object.keys(playlistsStore.activePlaylist).length === 0 ) {
+                            playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);     
+                        }
+
                     } else {
                         console.log('edit response code', response)
                     }
@@ -178,7 +188,7 @@
         if(props.mode === "duplicate") {
             const duplicateData = {
                 playlist_id: props.playlist.id,
-                name: state.name ? state.name : 'Playlist',
+                name: state.name ? state.name : 'Playlist (Duplicate)',
                 description: state.description,
                 thumbnail_url: state.thumb,
                 category: state.category,
@@ -205,14 +215,15 @@
 
     //----------Lifecycle Hooks----------//
     onMounted(()=> {
-        console.log(props.playlist)
+        // console.log(props.playlist)
     })
     onBeforeMount(()=> {
-        //Load Data        
+        //Load Data   
         state.thumb = props.playlist.thumbnail_url;
-        state.name = props.playlist.name;
+        state.name = props.mode === 'duplicate' ? props.playlist.name + ' (Duplicate)' : props.playlist.name;
         state.description = props.playlist.description;
         state.category = props.playlist.category || 'My List';
+
     })
     onBeforeUnmount(() => {
         //Reset Modal Data

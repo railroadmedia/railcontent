@@ -73,10 +73,10 @@ export const usePlaylistsStore = defineStore({
       })
     },
     //Set/Update Playlist Data for Playlist page
-    setActivePlaylist(list) {    
+    setActivePlaylist(list) {  
       this.activePlaylist = list;
     },
-    updateActivePlaylist(list) {    
+    updateActivePlaylist(list) {  
       this.activePlaylist.thumbnail_url = list.thumbnail_url,
       this.activePlaylist.name = list.name,
       this.activePlaylist.description = list.description
@@ -102,10 +102,12 @@ export const usePlaylistsStore = defineStore({
         return p.id !== id;
       })
     },
+    updatePinnedItem(id, name){
+      let pinnedList = this.pinnedPlaylists.find(l => l.id === id);
+      pinnedList.name = name;
+    },
     //Update Set/Time
     updatePlaylistItem(data) {
-      console.log(data.user_playlist_item_id)
-      console.log(this.lessons[data.index])
       let lesson = this.lessons.find(l => l.user_playlist_item_id === data.user_playlist_item_id);
       lesson.start_second = data.start;
       lesson.end_second = data.end

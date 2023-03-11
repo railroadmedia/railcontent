@@ -217,7 +217,7 @@
                             :is-private="state.isPrivate"
                             :is-pinned="state.isPinned"
                             :dropdownOptions="dropdownOptions"
-                            :data="playlist"
+                            :data="playlistsStore.activePlaylist"
                             :is-open="state.dropdownOpen"
                             type="playlist"
                             @closeDropdown="state.dropdownOpen = false"

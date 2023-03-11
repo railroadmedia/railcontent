@@ -23279,38 +23279,6 @@ a:visited{
   --tw-border-opacity: 1 !important;
   border-color: rgb(31 41 55 / var(--tw-border-opacity)) !important;
 }
-.tw-border-drumeo{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(11 118 219 / var(--tw-border-opacity)) !important;
-}
-.tw-border-singeo{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(131 0 233 / var(--tw-border-opacity)) !important;
-}
-.tw-border-guitareo{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(0 201 172 / var(--tw-border-opacity)) !important;
-}
-.tw-border-pianote{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(246 26 48 / var(--tw-border-opacity)) !important;
-}
-.tw-border-red-400{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(248 113 113 / var(--tw-border-opacity)) !important;
-}
-.tw-border-green-400{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(74 222 128 / var(--tw-border-opacity)) !important;
-}
-.tw-border-blue-400{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(96 165 250 / var(--tw-border-opacity)) !important;
-}
-.tw-border-yellow-400{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(250 204 21 / var(--tw-border-opacity)) !important;
-}
 .tw-border-b-\[\#223F57\]{
   --tw-border-opacity: 1 !important;
   border-bottom-color: rgb(34 63 87 / var(--tw-border-opacity)) !important;
@@ -23570,34 +23538,6 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity)) !important;
 }
-.tw-bg-singeo{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(131 0 233 / var(--tw-bg-opacity)) !important;
-}
-.tw-bg-drumeo{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(11 118 219 / var(--tw-bg-opacity)) !important;
-}
-.tw-bg-pianote{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(246 26 48 / var(--tw-bg-opacity)) !important;
-}
-.tw-bg-guitareo{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 201 172 / var(--tw-bg-opacity)) !important;
-}
-.tw-bg-pianote\/10{
-  background-color: rgb(246 26 48 / 0.1) !important;
-}
-.tw-bg-drumeo\/10{
-  background-color: rgb(11 118 219 / 0.1) !important;
-}
-.tw-bg-guitareo\/10{
-  background-color: rgb(0 201 172 / 0.1) !important;
-}
-.tw-bg-singeo\/10{
-  background-color: rgb(131 0 233 / 0.1) !important;
-}
 .tw-bg-opacity-75{
   --tw-bg-opacity: 0.75 !important;
 }
@@ -23651,36 +23591,8 @@ a:visited{
   --tw-gradient-from: #00101D !important;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(0 16 29 / 0)) !important;
 }
-.tw-from-singeo{
-  --tw-gradient-from: #8300E9 !important;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(131 0 233 / 0)) !important;
-}
-.tw-from-drumeo{
-  --tw-gradient-from: #0B76DB !important;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(11 118 219 / 0)) !important;
-}
-.tw-from-pianote{
-  --tw-gradient-from: #F61A30 !important;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(246 26 48 / 0)) !important;
-}
-.tw-from-guitareo{
-  --tw-gradient-from: #00C9AC !important;
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(0 201 172 / 0)) !important;
-}
 .tw-via-\[\#00101D\]{
   --tw-gradient-stops: var(--tw-gradient-from), #00101D, var(--tw-gradient-to, rgb(0 16 29 / 0)) !important;
-}
-.tw-to-singeo-700{
-  --tw-gradient-to: #4F008C !important;
-}
-.tw-to-drumeo-700{
-  --tw-gradient-to: #074783 !important;
-}
-.tw-to-pianote-700{
-  --tw-gradient-to: #7B0D18 !important;
-}
-.tw-to-guitareo-700{
-  --tw-gradient-to: #007967 !important;
 }
 .tw-to-singeo-700{
   --tw-gradient-to: #4F008C !important;
@@ -24639,22 +24551,6 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(35 46 48 / var(--tw-text-opacity)) !important;
 }
-.tw-text-drumeo{
-  --tw-text-opacity: 1 !important;
-  color: rgb(11 118 219 / var(--tw-text-opacity)) !important;
-}
-.tw-text-singeo{
-  --tw-text-opacity: 1 !important;
-  color: rgb(131 0 233 / var(--tw-text-opacity)) !important;
-}
-.tw-text-guitareo{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 201 172 / var(--tw-text-opacity)) !important;
-}
-.tw-text-pianote{
-  --tw-text-opacity: 1 !important;
-  color: rgb(246 26 48 / var(--tw-text-opacity)) !important;
-}
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
           text-decoration-line: underline !important;
@@ -24960,38 +24856,6 @@ a:visited{
   --tw-border-opacity: 1 !important;
   border-color: rgb(0 32 57 / var(--tw-border-opacity)) !important;
 }
-.hover\:tw-border-drumeo:hover{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(11 118 219 / var(--tw-border-opacity)) !important;
-}
-.hover\:tw-border-pianote:hover{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(246 26 48 / var(--tw-border-opacity)) !important;
-}
-.hover\:tw-border-singeo:hover{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(131 0 233 / var(--tw-border-opacity)) !important;
-}
-.hover\:tw-border-guitareo:hover{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(0 201 172 / var(--tw-border-opacity)) !important;
-}
-.hover\:tw-border-red-400:hover{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(248 113 113 / var(--tw-border-opacity)) !important;
-}
-.hover\:tw-border-green-400:hover{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(74 222 128 / var(--tw-border-opacity)) !important;
-}
-.hover\:tw-border-blue-400:hover{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(96 165 250 / var(--tw-border-opacity)) !important;
-}
-.hover\:tw-border-yellow-400:hover{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(250 204 21 / var(--tw-border-opacity)) !important;
-}
 .hover\:tw-bg-gray-100:hover{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity)) !important;
@@ -25046,22 +24910,6 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(231 239 246 / var(--tw-bg-opacity)) !important;
 }
-.hover\:tw-bg-drumeo-600:hover{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(9 94 175 / var(--tw-bg-opacity)) !important;
-}
-.hover\:tw-bg-pianote-600:hover{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(172 18 34 / var(--tw-bg-opacity)) !important;
-}
-.hover\:tw-bg-guitareo-600:hover{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 161 138 / var(--tw-bg-opacity)) !important;
-}
-.hover\:tw-bg-singeo-600:hover{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(105 0 186 / var(--tw-bg-opacity)) !important;
-}
 .hover\:tw-bg-opacity-100:hover{
   --tw-bg-opacity: 1 !important;
 }
@@ -25074,22 +24922,6 @@ a:visited{
 .hover\:tw-text-\[\#00101D\]:hover{
   --tw-text-opacity: 1 !important;
   color: rgb(0 16 29 / var(--tw-text-opacity)) !important;
-}
-.hover\:tw-text-\[\#001017\]:hover{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 16 23 / var(--tw-text-opacity)) !important;
-}
-.hover\:tw-text-black:hover{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
-}
-.hover\:tw-text-gray-500:hover{
-  --tw-text-opacity: 1 !important;
-  color: rgb(107 114 128 / var(--tw-text-opacity)) !important;
-}
-.hover\:tw-text-\[\#0B76DB\]:hover{
-  --tw-text-opacity: 1 !important;
-  color: rgb(11 118 219 / var(--tw-text-opacity)) !important;
 }
 .hover\:tw-text-drumeo-600:hover{
   --tw-text-opacity: 1 !important;
@@ -25106,6 +24938,22 @@ a:visited{
 .hover\:tw-text-singeo-600:hover{
   --tw-text-opacity: 1 !important;
   color: rgb(105 0 186 / var(--tw-text-opacity)) !important;
+}
+.hover\:tw-text-\[\#001017\]:hover{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 16 23 / var(--tw-text-opacity)) !important;
+}
+.hover\:tw-text-black:hover{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
+}
+.hover\:tw-text-gray-500:hover{
+  --tw-text-opacity: 1 !important;
+  color: rgb(107 114 128 / var(--tw-text-opacity)) !important;
+}
+.hover\:tw-text-\[\#0B76DB\]:hover{
+  --tw-text-opacity: 1 !important;
+  color: rgb(11 118 219 / var(--tw-text-opacity)) !important;
 }
 .hover\:tw-underline:hover{
   -webkit-text-decoration-line: underline !important;
@@ -25220,22 +25068,6 @@ a:visited{
 }
 .tw-peer:checked ~ .peer-checked\:tw-bg-\[\#445F74\]\/60{
   background-color: rgb(68 95 116 / 0.6) !important;
-}
-.tw-peer:checked ~ .peer-checked\:tw-bg-drumeo{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(11 118 219 / var(--tw-bg-opacity)) !important;
-}
-.tw-peer:checked ~ .peer-checked\:tw-bg-pianote{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(246 26 48 / var(--tw-bg-opacity)) !important;
-}
-.tw-peer:checked ~ .peer-checked\:tw-bg-singeo{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(131 0 233 / var(--tw-bg-opacity)) !important;
-}
-.tw-peer:checked ~ .peer-checked\:tw-bg-guitareo{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 201 172 / var(--tw-bg-opacity)) !important;
 }
 .tw-peer:disabled ~ .peer-disabled\:tw-pointer-events-none{
   pointer-events: none !important;
@@ -25501,22 +25333,6 @@ a:visited{
 .tw-dark .dark\:hover\:tw-border-\[\#80A0B9\]:hover{
   --tw-border-opacity: 1 !important;
   border-color: rgb(128 160 185 / var(--tw-border-opacity)) !important;
-}
-.tw-dark .hover\:dark\:tw-border-drumeo:hover{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(11 118 219 / var(--tw-border-opacity)) !important;
-}
-.tw-dark .hover\:dark\:tw-border-pianote:hover{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(246 26 48 / var(--tw-border-opacity)) !important;
-}
-.tw-dark .hover\:dark\:tw-border-singeo:hover{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(131 0 233 / var(--tw-border-opacity)) !important;
-}
-.tw-dark .hover\:dark\:tw-border-guitareo:hover{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(0 201 172 / var(--tw-border-opacity)) !important;
 }
 .tw-dark .dark\:hover\:tw-bg-\[\#445F74\]\/20:hover{
   background-color: rgb(68 95 116 / 0.2) !important;
@@ -26290,22 +26106,6 @@ a:visited{
   }
   .md\:tw-bg-transparent{
     background-color: transparent !important;
-  }
-  .md\:tw-bg-drumeo{
-    --tw-bg-opacity: 1 !important;
-    background-color: rgb(11 118 219 / var(--tw-bg-opacity)) !important;
-  }
-  .md\:tw-bg-singeo{
-    --tw-bg-opacity: 1 !important;
-    background-color: rgb(131 0 233 / var(--tw-bg-opacity)) !important;
-  }
-  .md\:tw-bg-guitareo{
-    --tw-bg-opacity: 1 !important;
-    background-color: rgb(0 201 172 / var(--tw-bg-opacity)) !important;
-  }
-  .md\:tw-bg-pianote{
-    --tw-bg-opacity: 1 !important;
-    background-color: rgb(246 26 48 / var(--tw-bg-opacity)) !important;
   }
   .md\:tw-p-7{
     padding: 1.75rem !important;
