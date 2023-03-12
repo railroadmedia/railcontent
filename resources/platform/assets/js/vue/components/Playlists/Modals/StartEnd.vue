@@ -114,9 +114,9 @@
             <!-- Start Time -->
             <div class="tw-w-full tw-flex-col tw-px-3">
                 <p class="tw-text-sm tw-pb-[5px] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-1">Start Time</p>
-                <h3 class="tw-mb-3 dark:tw-text-white tw-text-3xl">{{ splitSeconds(state.startTime ) }}</h3>
+                <h3 class="tw-mb-2 dark:tw-text-white tw-text-3xl">{{ splitSeconds(state.startTime ) }}</h3>
                 <input type="range" 
-                       class=""
+                       class="tw-w-full tw-h-2 tw-bg-gray-200 tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
                        v-model="state.startTime"
                        :min="0" 
                        :max="state.endTime"
@@ -125,9 +125,9 @@
             <!-- End Time -->
             <div class="tw-w-full tw-flex-col tw-px-3">
                 <p class="tw-text-sm tw-pb-[5px] tw-text-[#00101D] dark:tw-text-[#9EC0DC] tw-px-1">End Time</p>
-                <h3 class="tw-mb-3 dark:tw-text-white tw-text-3xl">{{ splitSeconds(state.endTime ) }}</h3>
+                <h3 class="tw-mb-2 dark:tw-text-white tw-text-3xl">{{ splitSeconds(state.endTime ) }}</h3>
                 <input type="range" 
-                    class=""
+                    class="tw-w-full tw-h-2 tw-bg-gray-200 tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
                     v-model="state.endTime"
                     :min="state.startTime" 
                     :max="state.durationTime"
