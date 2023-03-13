@@ -55,33 +55,12 @@ const props = defineProps({
   },
 });
 
-const learnMoreModal = ref(false);
-const screenSize = ref(window.innerWidth);
-
 const goToUrl = (url) => {
   if (url) {
       if(props.video && screenSize.value > 1279) return;
       window.location.href = url;
   }
 };
-
-const detectScreenSize = () => {
-    window.addEventListener("resize", ()=>{
-        screenSize.value = window.innerWidth;
-    });
-};
-
-const openModal = () => {
-    learnMoreModal.value = true;
-};
-
-const closeModal = () => {
-    learnMoreModal.value = false;
-};
-
-onMounted(() => {
-    detectScreenSize();
-});
 </script>
 
 <template>
