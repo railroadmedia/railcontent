@@ -121,7 +121,7 @@ onMounted(() => {
     <!-- Navigation Dots -->
     <div
         :key="`carousel-nav`"
-        class="tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[15px] lg:tw-py-[25px] tw-z-40 lg:tw-translate-x-[-50%] tw-right-0 lg:tw-mx-auto tw-px-[26px] lg:tw-px-0"
+        class="tw-absolute tw-w-auto tw-bottom-0 tw-justify-center tw-py-[15px] lg:tw-py-[25px] tw-z-40 lg:tw-mx-auto tw-right-[26px]"
         v-if="slides.length > 1"
     >
       <button v-for="(slide, i) in slides" v-bind:key="slide.title" @click="() => handleNavClick(i)" :class="`tw-h-[6px] tw-w-[6px] tw-mr-[10px] lg:tw-mx-[15px]    lg:tw-h-[10px] lg:tw-w-[10px] tw-rounded-full ${i === currentSlide ? 'tw-bg-white' : 'tw-bg-[#c4c4c4]/50'
