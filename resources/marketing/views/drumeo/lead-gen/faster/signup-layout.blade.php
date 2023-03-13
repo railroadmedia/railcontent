@@ -157,7 +157,7 @@
     </section>
 
     <section class="py-12 md:py-20" style="background: radial-gradient(34.53% 68.28% at 31.51% 33.16%, #FFEBDD 0%, #E2E7F0 100%)">
-        <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8 md:px-4 lg:px-0">
+        <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8 sm:px-4 lg:px-0">
             <img
                 class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-16 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10"
                 src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/coach.jpg"
