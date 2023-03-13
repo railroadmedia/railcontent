@@ -3,20 +3,20 @@
     <div class="relative gq-container corners-10 bg-grey-2 dark:tw-bg-[#081825] tw-overflow-hidden md:tw-h-[276px] tw-w-full">
         <a href="{{ $lessonsUrl }}" class="tw-w-full tw-h-full">
             {{-- Desktop Image --}}
-            <img src="https://musora.com/cdn-cgi/image/width=1600,q_auto:best/https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background.jpg"
+            <img src="https://musora.com/cdn-cgi/image/width=1600,q_auto:best/https://d122ay5chh2hr5.cloudfront.net/shop/card-thumbs/guitar-quest-background.jpg"
                 alt="Guitar Quest Lesson Promotional Image"
-                class="tw-w-full tw-hidden md:tw-block tw-transition-opacity tw-opacity-0 tw-h-full tw-object-cover" 
+                class="tw-w-full tw-hidden md:tw-block tw-transition-opacity tw-opacity-0 tw-h-full tw-object-cover"
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
             >
             {{-- Mobile Image --}}
-            <img src="https://musora.com/cdn-cgi/image/width=600,q_auto:best/https://guitareo.s3.amazonaws.com/shop/card-thumbs/guitar-quest-background-mobile.jpg"
+            <img src="https://musora.com/cdn-cgi/image/width=600,q_auto:best/https://d122ay5chh2hr5.cloudfront.net/shop/card-thumbs/guitar-quest-background-mobile.jpg"
                 alt="Guitar Quest Lesson Promotional Image"
-                class="gq-small-thumb tw-transition-opacity tw-opacity-0"  
+                class="gq-small-thumb tw-transition-opacity tw-opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('tw-opacity-0')"
             >
-            <div class="bg-guitareoGuitarQuest text-white tw-font-normal dense uppercase title tw-px-3 tw-py-2 tw-leading-none tw-absolute tw-top-0 tw-left-0" 
+            <div class="bg-guitareoGuitarQuest text-white tw-font-normal dense uppercase title tw-px-3 tw-py-2 tw-leading-none tw-absolute tw-top-0 tw-left-0"
                  style="border-radius:10px 0 10px 0">
                 Beginner Guitarist? Start Here!
             </div>
@@ -25,7 +25,7 @@
             <div class="flex flex-row align-v-center" style="height: 100%;">
                 <div class="flex flex-column align-h-center">
                     <div class="mb-1" style="max-width: 190px">
-                        <img src="{{ $logoImage }}" 
+                        <img src="{{ $logoImage }}"
                              alt="Guitar Quest Logo"
                              class="tw-transition-opacity tw-opacity-0"
                              loading="lazy"

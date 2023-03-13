@@ -6,7 +6,7 @@
     <title>Guitar Technique Made Easy | Guitareo</title>
     <meta name="description" content="Guitar Technique Made Easy is a 26-week online course with Nate Savage.">
 
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/gtme/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/gtme/og-image.jpg" style="display: none;">
     <meta property="og:description" content="Guitar Technique Made Easy is a 26-week online course with Nate Savage.">
     <meta property="og:url" content="https://www.guitareo.com/guitar-technique-made-easy">
 @stop()
@@ -107,7 +107,7 @@
                 <div class="play-video play-trailer"><i class="fas fa-play play-button" data-open="trailer"></i></div>
                 <div class="logo">
                     <p><em>Nate Savage's</em></p>
-                    <img src="https://guitareo.s3.amazonaws.com/gtme/logo-white.png" alt="GTME logo">
+                    <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/logo-white.png" alt="GTME logo">
                 </div>
             </div>
             {{--<p>Guitar Technique Made Easy is an intimate<br class="hide-for-large">--}}
@@ -150,7 +150,7 @@
         {{--<div class="noise-wrap">--}}
             {{--<div class="row">--}}
                 {{--<a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GTME-OCT-2018-SEMESTER' => 1], 'redirect' => '/order']) }}">--}}
-                    {{--<img class="logo animated tada delay-2s" src="https://guitareo.s3.amazonaws.com/sales/promos/april/guitar-month-logo.png">--}}
+                    {{--<img class="logo animated tada delay-2s" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/april/guitar-month-logo.png">--}}
                     {{--<br>--}}
                     {{--<div class="text">--}}
                         {{--<p class="text-left" style="max-width:510px">Celebrate Guitar Month right and brush up on your techniques.--}}
@@ -451,7 +451,7 @@
     <section class="instructor-bio">
         <div class="row">
             <p class="columns">
-                <span class="first-letter"><img src="https://guitareo.s3.amazonaws.com/gtme/bold-n.png" alt="Bold n"></span>ate Savage always knew he wanted to share his love for playing the guitar with others. After earning his Music Degree at San Jacinto College and playing hundreds of shows across Canada, the USA, and Europe -- he wanted to find a better way to help guitarists around the world.
+                <span class="first-letter"><img src="https://d122ay5chh2hr5.cloudfront.net/gtme/bold-n.png" alt="Bold n"></span>ate Savage always knew he wanted to share his love for playing the guitar with others. After earning his Music Degree at San Jacinto College and playing hundreds of shows across Canada, the USA, and Europe -- he wanted to find a better way to help guitarists around the world.
                 <br><br>
                 So in 2009, he connected with Musora Media to start GuitarLessons.com -- a massive library of free online guitar lessons that has since helped more than 20 million guitar players.
                 <br><br>
@@ -472,7 +472,7 @@
             <div class="columns no-padding medium-4 benefit-row practice">
                 <div class="columns float-right">
                     <div class="arrow-outline">
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-gl.png" alt="G">
+                        <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/bubble-gl.png" alt="G">
                     </div>
                 </div>
                 <div class="columns text-wrap">
@@ -483,7 +483,7 @@
             <div class="columns no-padding medium-4 benefit-row play">
                 <div class="column">
                     <div class="arrow-outline">
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-subs.png" alt="Youtube text">
+                        <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/bubble-subs.png" alt="Youtube text">
                     </div>
                 </div>
                 <div class="columns text-wrap">
@@ -494,7 +494,7 @@
             <div class="columns no-padding medium-4 benefit-row support">
                 <div class="columns float-right">
                     <div class="arrow-outline">
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-views.png" alt="Youtube icon">
+                        <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/bubble-views.png" alt="Youtube icon">
                     </div>
                 </div>
                 <div class="columns text-wrap">
@@ -564,8 +564,8 @@
                 <tr>
                     <td></td>
                     <td>
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/macbook.png" class="macbook" alt="Macbook"><br>
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/logo.png" class="blue-logo" alt="GTME logo">
+                        <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/macbook.png" class="macbook" alt="Macbook"><br>
+                        <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/logo.png" class="blue-logo" alt="GTME logo">
                     </td>
                     <td><i class="fas fa-user gray-logo"></i><br>Private Lessons</td>
                 </tr>
@@ -643,7 +643,7 @@
     <section class="guarantee">
         <div class="row">
             <div class="large-4 medium-5 columns float-right text-center medium-text-right">
-                <img src="https://guitareo.s3.amazonaws.com/gtme/guarantee-green.png" alt="90-Day Money-Back Guarantee">
+                <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/guarantee-green.png" alt="90-Day Money-Back Guarantee">
             </div>
             <div class="large-8 medium-7 columns text-center medium-text-left">
                 <h1>90-Day Money-Back Guarantee.</h1>
@@ -656,8 +656,8 @@
     <section class="final">
         <div class="row">
             <div class="columns logo">
-                {{--<img class="edge" src="https://guitareo.s3.amazonaws.com/sales/promos/cyber-monday/logo.png"><br>--}}
-                <img src="https://guitareo.s3.amazonaws.com/gtme/logo-white.png" alt="GTME logo"></div>
+                {{--<img class="edge" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/cyber-monday/logo.png"><br>--}}
+                <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/logo-white.png" alt="GTME logo"></div>
 
 
             {{--<div class="outline-box">--}}

@@ -1,7 +1,7 @@
 <template>
     <div class="cart-item-container">
         <div class="image-container">
-            <a :href="this.item.sales_page_url"><img :src="'https://cdn.musora.com/image/fetch/w_200,q_auto:best/' + item.thumbnail_url" class="item-thumbnail"></a>
+            <a :href="this.item.sales_page_url"><img :src="'https://www.musora.com/musora-cdn/image/width=200,quality=85/' + item.thumbnail_url" class="item-thumbnail"></a>
             <div class="item-logo" v-if="item.logo">
                 <img :src="item.logo">
             </div>

@@ -44,7 +44,7 @@
     <header class="pb-12 md:pb-0 md:pt-20 bg-[#111729] text-center text-white">
         <img
             class="md:hidden mb-16 transition-opacity opacity-0 @if($page === 'songs') cursor-pointer @endif"
-            src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/@yield('header-img')"
+            src="https://www.musora.com/musora-cdn/image/width=900,quality=85/@yield('header-img')"
             alt="{{$page}} thumb"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
@@ -54,14 +54,14 @@
             <div class="mb-6">
                 <img
                     class="h-6 md:h-10 transition-opacity opacity-0 @if($theme !== 'drumeo') mr-2 @endif"
-                    src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/@if($theme === 'drumeo')https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png @elseif($theme === 'pianote')https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png @elseif($theme === 'guitareo')https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png @elseif($theme === 'singeo')https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png @endif"
+                    src="https://www.musora.com/musora-cdn/image/width=300,quality=85/@if($theme === 'drumeo')https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png @elseif($theme === 'pianote')https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png @elseif($theme === 'guitareo')https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png @elseif($theme === 'singeo')https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png @endif"
                     alt="{{$theme}} logo"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                 />
                 <img
                     class="h-6 md:h-10 transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/@if($page === 'method')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg @elseif($page === 'coaches')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg @elseif($page === 'songs')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg @endif"
+                    src="https://www.musora.com/musora-cdn/image/width=300,quality=85/@if($page === 'method')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg @elseif($page === 'coaches')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg @elseif($page === 'songs')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg @endif"
                     alt="{{$page}} logo"
                     style="filter:@if($theme === 'drumeo')invert(1) brightness(.35) sepia(1) saturate(50) hue-rotate(195deg); @elseif($theme === 'pianote')invert(21%) sepia(91%) saturate(4092%) hue-rotate(344deg) brightness(96%) contrast(102%); @elseif($theme === 'guitareo')invert(55%) sepia(45%) saturate(5847%) hue-rotate(141deg) brightness(110%) contrast(101%); @elseif($theme === 'singeo')invert(24%) sepia(99%) saturate(7465%) hue-rotate(275deg) brightness(85%) contrast(125%); @endif"
                     loading="lazy"
@@ -73,7 +73,7 @@
         </div>
         <img
             class="rounded-t-xl md:h-72 lg:h-80 hidden md:inline-block transition-opacity opacity-0 @if($page === 'songs') cursor-pointer @endif"
-            src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/@yield('header-img')"
+            src="https://www.musora.com/musora-cdn/image/width=900,quality=85/@yield('header-img')"
             alt="{{$page}} thumb"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"

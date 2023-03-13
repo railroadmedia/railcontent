@@ -18,7 +18,7 @@
     <div class="columns no-padding benefit-row">
         <div class="columns medium-6">
             <div class="arrow-outline right">
-                <img src="https://guitareo.s3.amazonaws.com/gtme/bubble1.jpg">
+                <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/bubble1.jpg">
             </div>
         </div>
         <div class="columns medium-6 text-wrap">
@@ -32,7 +32,7 @@
     <div class="columns no-padding benefit-row">
         <div class="columns medium-6 float-right">
             <div class="arrow-outline">
-                <img src="https://guitareo.s3.amazonaws.com/gtme/bubble3.jpg">
+                <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/bubble3.jpg">
             </div>
         </div>
         <div class="columns medium-6 text-wrap">
@@ -46,7 +46,7 @@
     <div class="columns no-padding benefit-row">
         <div class="columns medium-6">
             <div class="arrow-outline right">
-                <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-nate.jpg">
+                <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/bubble-nate.jpg">
             </div>
         </div>
         <div class="columns medium-6 text-wrap">

@@ -281,7 +281,7 @@
     @component('bladesora::members.partials._page-header', [
     "themeColor" => $brand,
     "pageTitle" => $existingSubscriptionActive ? 'Edit Payment Method' : 'Your Subscription has Expired',
-    "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
+    "backgroundImage" => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
     "pageDescription" => $existingSubscriptionActive ? "Edit your payment subscription details below." : "To renew your account you must update your payment details below.",
 ])
         @slot('interactionSlot')

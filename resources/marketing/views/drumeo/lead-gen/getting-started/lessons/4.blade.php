@@ -21,6 +21,6 @@
 
     @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Reading Drum Notation",
-        "pdfURL" => "https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/4-reading-drum-notation.jpg",
+        "pdfURL" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/4-reading-drum-notation.jpg",
     ])
 @stop

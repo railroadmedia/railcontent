@@ -12,9 +12,9 @@
 
 @section('next', '/free-electric-guitar-lessons/lessons/3')
 
-@section('prev-thumb', 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-01.jpg')
+@section('prev-thumb', 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/thumbs-electric-01.jpg')
 
-@section('next-thumb', 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-03.jpg')
+@section('next-thumb', 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/thumbs-electric-03.jpg')
 
 @section('lesson-description', 'Plug in your guitar and start exploring the tone of your guitar through the different knobs and switches. Ayla explains how finding your tone can come from playing around with your guitar and amplifier settings to find what you like the most. You’ll also play your first chord, E Minor.')
 

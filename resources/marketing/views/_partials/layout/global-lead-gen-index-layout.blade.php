@@ -25,7 +25,7 @@
         <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap py-2 sm:py-1 fixed mx-auto bg-black text-white z-[100]">
             <div class="container mx-auto">
                 <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
-                    <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://cdn.musora.com/image/fetch/w_300,q_60,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
+                    <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=300,q_60,quality=85/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
                     <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$drumeoPlayAlongs }}+ more play-alongs + world-class drum  <br>
                         lessons inside Drumeo. Click for a FREE trial.</p>
                 </div>
@@ -36,7 +36,7 @@
         <div class="relative py-12 md:py-24">
             <div class="absolute inset-0 z-10">
                 <img
-                    src="@if($theme === 'drumeo') https://musora-web-platform.s3.amazonaws.com/headers/drumeo-header.jpg @elseif($theme === 'pianote') https://musora-web-platform.s3.amazonaws.com/headers/pianote-header.jpg @elseif($theme === 'guitareo') https://musora-web-platform.s3.amazonaws.com/headers/guitareo-header.jpg @elseif($theme === 'singeo') https://musora-web-platform.s3.amazonaws.com/headers/singeo-header.jpg @endif"
+                    src="@if($theme === 'drumeo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/drumeo-header.jpg @elseif($theme === 'pianote') https://d3fzm1tzeyr5n3.cloudfront.net/headers/pianote-header.jpg @elseif($theme === 'guitareo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/guitareo-header.jpg @elseif($theme === 'singeo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/singeo-header.jpg @endif"
                     class="h-full w-full object-top object-cover transition-opacity opacity-0"
                     alt="{{ $theme }} background"
                     loading="lazy"

@@ -77,7 +77,7 @@ class LeadgenSeeder extends Seeder
                 'brand_id' => 1,
                 'title' => 'How To Start Playing Drums',
                 'meta_desc' => 'Get 5 free video lessons with YouTube-star COOP3RDRUMM3R, covering everything you need to start learning the drums for the very first time!',
-                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg',
                 'slug' => 'coop3rdrumm3r/lessons',
                 'lessons' => [
                     [
@@ -530,15 +530,15 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'brand_id' => 1,
                 'title' => '9 FREE PLAY-ALONGS',
                 'meta_desc' => 'Add your drumming to nine high-quality drum play-along tracks. (FREE).',
-                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/og-image.jpg',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/og-image.jpg',
                 'slug' => 'free-playalongs/songs',
-                'logo' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/logo.svg',
+                'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/logo.svg',
                 'lessons' => [
                     [
                         'slug' => 'free-playalongs/songs/1',
                         'title' => 'The Check In (Jost Nickel)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/jost-nickel-the-check-in.png',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/jost-nickel-the-check-in.png',
                         'video_src' => '//player.vimeo.com/video/541721200',
                         'duration' => 6,
                         'assets' => [
@@ -558,7 +558,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'free-playalongs/songs/2',
                         'title' => 'Rock Out (Rashid Williams)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/Rashid-williams-Rock-out.png',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/Rashid-williams-Rock-out.png',
                         'video_src' => '//player.vimeo.com/video/370373250',
                         'duration' => 4,
                         'assets' => [
@@ -583,7 +583,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'free-playalongs/songs/3',
                         'title' => 'Funky NASA (Raghav Mehrotra)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/Raghav-mehrotra-funky-nasa.png',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/Raghav-mehrotra-funky-nasa.png',
                         'video_src' => '//player.vimeo.com/video/371460235',
                         'duration' => 2,
                         'assets' => [
@@ -608,7 +608,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'free-playalongs/songs/4',
                         'title' => 'Hypnotized (Thomas Pridgen)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/thomas-pridgen-hypnotized.png',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/thomas-pridgen-hypnotized.png',
                         'video_src' => '//player.vimeo.com/video/266779491',
                         'duration' => 4,
                         'assets' => [
@@ -633,7 +633,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'free-playalongs/songs/5',
                         'title' => 'Drum-E-O (Kaz Rodriguez)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/kaz-rodriguez-drum-e-o.png',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/kaz-rodriguez-drum-e-o.png',
                         'video_src' => '//player.vimeo.com/video/558181220',
                         'duration' => 4,
                         'assets' => [
@@ -658,7 +658,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'free-playalongs/songs/6',
                         'title' => '7/8 Rock (Glen Sobel)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/glen-sobel-7-8-rock.png',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/glen-sobel-7-8-rock.png',
                         'video_src' => '//player.vimeo.com/video/546105932',
                         'duration' => 3,
                         'assets' => [
@@ -683,7 +683,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'free-playalongs/songs/7',
                         'title' => 'Straight Reggae (Sarah Thawer)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/sarah-thawer-straight-reggae.png',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/sarah-thawer-straight-reggae.png',
                         'video_src' => '//player.vimeo.com/video/471541648',
                         'duration' => 3,
                         'assets' => [
@@ -718,7 +718,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'free-playalongs/songs/8',
                         'title' => 'Tony Coleman Shuffle (Tony Coleman)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/tony-coleman-shuffle.png',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/tony-coleman-shuffle.png',
                         'video_src' => '//player.vimeo.com/video/342294294',
                         'duration' => 5,
                         'assets' => [
@@ -743,7 +743,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'free-playalongs/songs/9',
                         'title' => 'Just A Second (Todd Sucherman)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/todd-sucherman-just-a-second.png',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/todd-sucherman-just-a-second.png',
                         'video_src' => '//player.vimeo.com/video/534524172',
                         'duration' => 4,
                         'assets' => [
@@ -770,15 +770,15 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'brand_id' => 1,
                 'title' => '9 Metal Play-Alongs',
                 'meta_desc' => 'Add your drumming to nine heavy drum play-along tracks. (FREE).',
-                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/share-image.jpg',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/share-image.jpg',
                 'slug' => 'metal-playalongs/songs',
-                'logo' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Logo.svg',
+                'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Logo.svg',
                 'lessons' => [
                     [
                         'slug' => 'metal-playalongs/songs/1',
                         'title' => 'The Marzear Labyrinth (Derek Roddy)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/The+Marzear+Labyrinth.jpg',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/The+Marzear+Labyrinth.jpg',
                         'video_src' => '//player.vimeo.com/video/201214928',
                         'duration' => 5,
                         'assets' => [
@@ -793,7 +793,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'metal-playalongs/songs/2',
                         'title' => 'Nightmares (Jared Falk)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Nightmares.jpg',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Nightmares.jpg',
                         'video_src' => '//player.vimeo.com/video/286086238',
                         'duration' => 4,
                         'assets' => [
@@ -808,7 +808,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'metal-playalongs/songs/3',
                         'title' => 'Double Bass (With Alex Rüdinger)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Double+Bass.jpg',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Double+Bass.jpg',
                         'video_src' => '//player.vimeo.com/video/546106139',
                         'duration' => 3,
                         'assets' => [
@@ -823,7 +823,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'metal-playalongs/songs/4',
                         'title' => 'Basic Metal (Mike Michalkow)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Basic+Metal.jpg',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Basic+Metal.jpg',
                         'video_src' => '//player.vimeo.com/video/538801358',
                         'duration' => 3,
                         'assets' => [
@@ -838,7 +838,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'metal-playalongs/songs/5',
                         'title' => 'Hypnotized (Thomas Pridgen)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Hypnotized.jpg',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Hypnotized.jpg',
                         'video_src' => '//player.vimeo.com/video/266779491',
                         'duration' => 5,
                         'assets' => [
@@ -853,7 +853,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'metal-playalongs/songs/6',
                         'title' => 'Resurrection Through Fire (Jason Bittner)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Resurrection+Through+Fire.jpg',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Resurrection+Through+Fire.jpg',
                         'video_src' => '//player.vimeo.com/video/151171143',
                         'duration' => 6,
                         'assets' => [
@@ -868,7 +868,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'metal-playalongs/songs/7',
                         'title' => 'Opus I Excerpt, No. 5 (Julia Gaeman)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Opus+I+Excerpt%2C+No.5.jpg',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Opus+I+Excerpt%2C+No.5.jpg',
                         'video_src' => '//player.vimeo.com/video/262427768',
                         'duration' => 4,
                         'assets' => [],
@@ -877,7 +877,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'metal-playalongs/songs/8',
                         'title' => 'Brotherhood Of The Snake (Gene Hoglan)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Brotherhood+Of+The+Snake.jpg',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Brotherhood+Of+The+Snake.jpg',
                         'video_src' => '//player.vimeo.com/video/274582283',
                         'duration' => 4,
                         'assets' => [
@@ -892,7 +892,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'slug' => 'metal-playalongs/songs/9',
                         'title' => 'Teratogenesis (Ash Pearson)',
                         'desc' => '',
-                        'thumbnail' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Teratogenesis.jpg',
+                        'thumbnail' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Teratogenesis.jpg',
                         'video_src' => '//player.vimeo.com/video/154760938',
                         'duration' => 4,
                         'assets' => [
@@ -956,7 +956,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'assets' => [
                             [
                                 'title' => 'Reading Drum Notation',
-                                'src' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/4-reading-drum-notation.jpg',
+                                'src' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/4-reading-drum-notation.jpg',
                                 'soundslice' => ''
                             ],
                         ],
@@ -971,7 +971,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'assets' => [
                             [
                                 'title' => 'Basic Counting',
-                                'src' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/5-basic-counting.jpg',
+                                'src' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/5-basic-counting.jpg',
                                 'soundslice' => ''
                             ],
                         ],
@@ -1071,7 +1071,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'brand_id' => 1,
                 'title' => 'Grooves Of John Bonham',
                 'meta_desc' => 'The ultimate breakdown of Led Zeppelin’s famous drum grooves. (FREE)',
-                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/grooves-of-john-bonham/og-image.jpg',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/grooves-of-john-bonham/og-image.jpg',
                 'slug' => 'grooves-of-john-bonham/lessons',
                 'lessons' => [
                     [
@@ -1253,7 +1253,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'brand_id' => 1,
                 'title' => 'Hand Technique - The Motions Of Drumming',
                 'meta_desc' => 'Learn drumming\'s 3 hand techniques in this FREE series.',
-                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/hand-technique/share-image.jpg',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/hand-technique/share-image.jpg',
                 'slug' => 'hand-technique/lessons',
                 'assets' => [
                     [
@@ -1323,7 +1323,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                 'brand_id' => 1,
                 'title' => 'Linear Drumming',
                 'meta_desc' => 'In this exclusive video series, you\'ll get his best tips on linear drumming and how to apply it to a range of fills, grooves, and styles of music!',
-                'meta_img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg',
+                'meta_img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg',
                 'slug' => 'linear-drumming/lessons',
                 'lessons' => [
                     [
@@ -1748,7 +1748,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'assets' => [
                             [
                                 'title' => 'Reading Drum Notation',
-                                'src' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/4-reading-drum-notation.jpg',
+                                'src' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/4-reading-drum-notation.jpg',
                                 'soundslice' => ''
                             ],
                         ],
@@ -1763,7 +1763,7 @@ The second exercise is similar, but this time we’re playing longer groups of u
                         'assets' => [
                             [
                                 'title' => 'Basic Counting',
-                                'src' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/5-basic-counting.jpg',
+                                'src' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/5-basic-counting.jpg',
                                 'soundslice' => ''
                             ],
                         ],

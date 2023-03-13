@@ -7,7 +7,7 @@
 @section('content')
 
     @component('partials._header-banner',
-        ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'])
+        ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg'])
         @slot('content')
             <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
@@ -18,7 +18,7 @@
                 <p class="tw-text-white tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base" >
                     Practice sessions, Q&A, celebrations, and more are available during <span class="tw-capitalize">{{ $brand }}</span> live lessons. Subscribe to an event or the whole calendar, so you don’t miss out!
                 </p>
-                
+
                 {{-- Header CTAs --}}
                 <div class="tw-flex tw-flex-row tw-flex-wrap tw-items-center tw-mt-3">
                     <div class="flex flex-column">
@@ -61,10 +61,10 @@
                 <div class="tw-flex tw-flex-col">
                     <button class="tw-btn-secondary tw-text-[#00101D] dark:tw-text-white" data-open-modal="scheduleAddToCalendarModal">
                         <i class="fas fa-calendar-plus mr-1"></i>
-                        Subscribe to Calendar 
+                        Subscribe to Calendar
                     </button>
                 </div>
-            </div>   
+            </div>
             <div class="tw-flex tw-flex-row">
                 <content-schedule
                     :preloaded-content="{{ $scheduleEvents }}"

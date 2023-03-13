@@ -7,7 +7,7 @@
                 class="lg:-mt-11 lg:-mb-4 max-w-md lg:max-w-2xl transition-opacity opacity-0 order-1 mb-6 md:mb-0 w-full"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/{!! $image !!}"
+                src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/{!! $image !!}"
                 alt="device image"
             >
             <div class="pr-4 lg:pr-7">
@@ -15,13 +15,13 @@
                 <a class="inline-block" href="https://itunes.apple.com/us/app/musora/id1619053766?ls=1" target="_blank">
                     <img
                         class="h-8 md:h-10 m-1"
-                        src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"
+                        src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"
                         alt="app store icon"
                     ></a>
                 <a class="inline-block" href="https://play.google.com/store/apps/details?id=com.musoraapp" target="_blank">
                     <img
                         class="h-8 md:h-10 m-1"
-                        src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"
+                        src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"
                         alt="google play icon"
                     >
                 </a>

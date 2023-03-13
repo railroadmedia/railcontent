@@ -91,7 +91,7 @@
     <div class="title-wrap">
         <div class="row">
             <div class="text-wrap text-center">
-                <img style="border-radius:10px;" src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/promos/rocktober/welcome-party-kyle.jpg">
+                <img style="border-radius:10px;" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/rocktober/welcome-party-kyle.jpg">
                 <h1>Thanks for confirming!</h1>
                 <p class="text-left">Your spot is now confirmed! Thanks for RSVPing for your New Student Welcome Party! Kyle can’t wait to welcome you to the Drumeo community and show you how to take your drumming skills to the next level.
                     <br><br>You’ll receive an email confirmation in the next 24 hours.</p>

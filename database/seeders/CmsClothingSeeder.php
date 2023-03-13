@@ -83,7 +83,7 @@ class CmsClothingSeeder extends Seeder
                 "name" => "Minimalist Hat",
                 "slug" => "hat-minimalist",
                 "sku" => "6477-wool-flexfit-cap-black",
-                "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/card-thumbs/minimalist-hat2.jpg",
+                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/minimalist-hat2.jpg",
                 "meta_desc" => "Simple and clean, this hat features a branded snare icon on the front and a discreet Drumeo logo on the back.",
                 "meta_img" => "https://s3.amazonaws.com/drumeo-packs/Merch/2018-merch/hat.jpg",
                 "short_desc" => "Simple and clean, this hat features a branded snare icon on the front and a discreet Drumeo logo on the back.",

@@ -19,7 +19,7 @@
 
     <style>
         header {
-            background-image: url('https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/header_bg_m.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/header_bg_m.jpg');
             background-size: cover;
         }
 
@@ -53,7 +53,7 @@
 
         @media (min-width: 768px){
             header {
-                background-image: url('https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/header.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/header.jpg');
                 background-size: cover;
             }
 
@@ -94,8 +94,8 @@
             <div class="max-w-lg mx-auto md:mx-0 text-center md:text-left">
                 <div class="px-1">
                     <picture>
-                        <source media="(min-width:768px)" srcset="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/logo_left_white.png">
-                        <img class="h-14 mb-2 md:mb-6 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/logo_centre_white.png" alt="logo white">
+                        <source media="(min-width:768px)" srcset="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/logo_left_white.png">
+                        <img class="h-14 mb-2 md:mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/logo_centre_white.png" alt="logo white">
                     </picture>
                     <h2 class="font-extrabold leading-tight text-white">
                         Go from a total beginner to playing your first drum beats in this FREE series.
@@ -156,7 +156,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center md:justify-start w-full md:w-1/2 sm:order-1 md:pl-6 mt-7 sm:mt-0 relative">
-                        <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/collage.png" alt="collage">
+                        <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/collage.png" alt="collage">
                     </div>
                 </div>
             </div>
@@ -173,7 +173,7 @@
             <div class="flex flex-wrap mb-14">
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-2 mb-6">
                     <div class="relative mb-2 cursor-pointer hover:opacity-90 transition-opacity" data-open="signUpModal">
-                        <img class="relative z-0 rounded-lg lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/lesson1_thumb.jpg" alt="thumb1">
+                        <img class="relative z-0 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/lesson1_thumb.jpg" alt="thumb1">
                         <i class="absolute top-1/2 left-1/2 fas fa-play play-button text-white" style="margin: -39px;"></i>
                     </div>
                     <p>
@@ -181,31 +181,31 @@
                     </p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-2 mb-6">
-                    <img class="rounded-lg mb-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/lesson2_thumb.jpg" alt="thumb2">
+                    <img class="rounded-lg mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/lesson2_thumb.jpg" alt="thumb2">
                     <p>
                         Tuning your drums doesn’t need to be frustrating. Follow Jared’s simple guide to getting great sounds out of your kit with the turn of a key.
                     </p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-2 mb-6">
-                    <img class="rounded-lg mb-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/lesson3_thumb.jpg" alt="thumb3">
+                    <img class="rounded-lg mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/lesson3_thumb.jpg" alt="thumb3">
                     <p>
                         Yep, there’s a right and wrong way. Jared covers the 3 main grips in drumming and how you can get the most out of every stroke without risking injuries.
                     </p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-2 mb-6 sm:mb-0">
-                    <img class="rounded-lg mb-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/lesson4_thumb.jpg" alt="thumb4">
+                    <img class="rounded-lg mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/lesson4_thumb.jpg" alt="thumb4">
                     <p>
                         Reading drum music is surprisingly simple. Jared shows you this vital skill so you can take your drumming ANYWHERE.
                     </p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-2 mb-6 sm:mb-0">
-                    <img class="rounded-lg mb-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/lesson6_thumb.jpg" alt="thumb6">
+                    <img class="rounded-lg mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/lesson6_thumb.jpg" alt="thumb6">
                     <p>
                         And just like that, you’re playing full beats. Jared shows you some of the most popular drum beats -- you’re almost ready to play along with real music!
                     </p>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-2 mb-6 sm:mb-0">
-                    <img class="rounded-lg mb-2 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/lesson7_thumb.jpg" alt="thumb7">
+                    <img class="rounded-lg mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/lesson7_thumb.jpg" alt="thumb7">
                     <p>
                         Drum fills are your moment to shine. You’ll learn how to move around the kit musically with these fun & effective transitions.
                     </p>
@@ -225,7 +225,7 @@
             </h3>
             <div class="max-w-sm md:max-w-5xl mx-auto flex flex-col md:flex-row md:gap-8 mb-8">
                 <div class="text-center flex-1 mb-8">
-                    <img class="h-16 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/guided_icon.svg" alt="guided icon">
+                    <img class="h-16 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/guided_icon.svg" alt="guided icon">
                     <h5 class="font-extrabold my-4">
                         Guided Lessons
                     </h5>
@@ -234,7 +234,7 @@
                     </p>
                 </div>
                 <div class="text-center flex-1 mb-8">
-                    <img class="h-16 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/learn_icon.svg" alt="learn icon">
+                    <img class="h-16 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/learn_icon.svg" alt="learn icon">
                     <h5 class="font-extrabold my-4">
                         Free Sheet Music
                     </h5>
@@ -243,7 +243,7 @@
                     </p>
                 </div>
                 <div class="text-center flex-1">
-                    <img class="h-16 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/sheet_icon.svg" alt="sheet icon">
+                    <img class="h-16 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/sheet_icon.svg" alt="sheet icon">
                     <h5 class="font-extrabold my-4">
                         Learn Anytime
                     </h5>
@@ -259,8 +259,8 @@
     <section class="py-20" style="background:#01050F;">
         <div class="max-w-sm md:max-w-4xl mx-auto px-4 sm:px-0 text-white lg:gap-10 relative flex flex-col md:flex-row lg:block items-center justify-center text-right">
             <picture>
-                <source media="(min-width:768px)" srcset="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/profile_pic.jpg">
-                <img class="rounded-lg lg:absolute lg:left-10 lg:top-0 h-72 md:h-96 lg:h-full mb-10 md:mb-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/profile_pic_square.jpg" alt="jared profile">
+                <source media="(min-width:768px)" srcset="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/profile_pic.jpg">
+                <img class="rounded-lg lg:absolute lg:left-10 lg:top-0 h-72 md:h-96 lg:h-full mb-10 md:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/profile_pic_square.jpg" alt="jared profile">
             </picture>
 
             <div class="max-w-md inline-block text-left md:pl-8 lg:pl-0">
@@ -271,9 +271,9 @@
                     Jared Falk
                 </h1>
                 <div class="font-bold text-white mb-8">
-                    <img class="h-6 mr-2 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/youtube_icon.svg" alt="youtube icon">
+                    <img class="h-6 mr-2 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/youtube_icon.svg" alt="youtube icon">
                     2M Subscribers
-                    <img class="h-6 ml-6 mr-2 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/youtube_icon.svg" alt="youtube icon">
+                    <img class="h-6 ml-6 mr-2 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/youtube_icon.svg" alt="youtube icon">
                     24M Views
                 </div>
                 <p>
@@ -298,7 +298,7 @@
             <div class="flex flex-wrap max-w-md mx-auto sm:max-w-full">
                 <div class="w-full sm:w-1/2 lg:w-1/4 flex flex-auto px-2 mb-8 md:mb-4 lg:mb-0">
                     <div class="rounded-xl overflow-hidden w-full" style="background: #051124;">
-                        <div class="aspect-16:9 relative bg-center bg-cover py-10 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/billy.jpg">
+                        <div class="aspect-16:9 relative bg-center bg-cover py-10 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/billy.jpg">
                         </div>
                         <div class="p-4">
                             <p class="italic mb-4">
@@ -316,7 +316,7 @@
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/4 flex flex-auto px-2 mb-8 md:mb-4 lg:mb-0">
                     <div class="rounded-xl overflow-hidden w-full" style="background: #051124;">
-                        <div class="aspect-16:9 relative bg-center bg-cover py-10 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/david.jpg" >
+                        <div class="aspect-16:9 relative bg-center bg-cover py-10 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/david.jpg" >
                         </div>
                         <div class="p-4">
                             <p class="italic mb-4">
@@ -334,7 +334,7 @@
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/4 flex flex-auto px-2 mb-8 sm:mb-0">
                     <div class="rounded-xl overflow-hidden w-full" style="background: #051124;">
-                        <div class="aspect-16:9 relative bg-center bg-cover py-10 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/anika.jpg">
+                        <div class="aspect-16:9 relative bg-center bg-cover py-10 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/anika.jpg">
                         </div>
                         <div class="p-4">
                             <p class="italic mb-4">
@@ -352,7 +352,7 @@
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-1/4 flex flex-auto px-2">
                     <div class="rounded-xl overflow-hidden w-full" style="background: #051124;">
-                        <div class="aspect-16:9 relative bg-center bg-cover py-10 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/casey.jpg">
+                        <div class="aspect-16:9 relative bg-center bg-cover py-10 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/casey.jpg">
                         </div>
                         <div class="p-4">
                             <p class="italic mb-4">
@@ -407,8 +407,8 @@
         <div class="max-w-5xl mx-auto flex flex-wrap flex-col md:flex-row md:items-center">
             <div class="max-w-lg mx-auto text-center sm:text-left w-full md:w-1/2 sm:pl-5">
                 <picture>
-                    <source media="(min-width:768px)" srcset="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/logo_left_white.png">
-                    <img class="h-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/logo_centre_white.png" alt="">
+                    <source media="(min-width:768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/logo_left_white.png">
+                    <img class="h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/logo_centre_white.png" alt="">
                 </picture>
                 <h3 class="pt-4 md:pt-5 leading-7 md:leading-9 font-extrabold mb-6" data-open="test">
                     10 beginner drum lessons. Learn your first drum beats  & fills at your own pace.
@@ -432,7 +432,7 @@
                 </div>
             </div>
             <div class="flex justify-center md:justify-start w-full md:w-1/2 sm:order-1 md:pl-6 mt-7 md:mt-0 relative">
-                <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/collage.png" alt="collage">
+                <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/collage.png" alt="collage">
             </div>
         </div>
     </section>
@@ -440,25 +440,25 @@
     @php
         $modals = [
             [
-                'img' => 'https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/billy.jpg',
+                'img' => 'https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/billy.jpg',
                 'testimonial' => 'Drumeo is the real deal folks! Jared Falk and his team have my confidence and support in what is done to promote music through the art of drumming and percussion. It is absolutely imperative for the student of the art to SEE, HEAR and EMULATE every lesson that is presented by the instructor. This is accomplished when studying lessons at Drumeo - a good place to study and realize one’s dreams.',
                 'name' => 'Billy Cobham',
                 'position' => 'Legendary Jazz Fusion Drummer',
             ],
             [
-                'img' => 'https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/david.jpg',
+                'img' => 'https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/david.jpg',
                 'testimonial' => 'The Drumeo standard is one of the highest quality and is THE place to go for the best in drum education!',
                 'name' => 'David Garibaldi',
                 'position' => 'Drummer for tower of power',
             ],
             [
-                'img' => 'https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/anika.jpg',
+                'img' => 'https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/anika.jpg',
                 'testimonial' => 'Jared Falk has a comprehensive expert knowledge in providing and structuring lesson plans. He has a great human sense and knows how to handle, host and guide a lesson. It certainly didn’t come overnight. It’s more that he grew over the years to an expert and a professional instructor who really knows how to teach.',
                 'name' => 'Anika Nilles',
                 'position' => 'Drummer & Composer',
             ],
             [
-                'img' => 'https://cdn.musora.com/image/fetch/w_740,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/casey.jpg',
+                'img' => 'https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/casey.jpg',
                 'testimonial' => "After years of watching Jared's lessons on YouTube and Drumeo, and getting to work side by side with him, I can confidently say that he gives every bit of his effort and skill into every product or lesson he teaches. He cares about each and every drummer who will watch and learn from his work and wants nothing more than to change drumming education for the better each time he puts his name on something.",
                 'name' => 'Casey Cooper',
                 'position' => 'Youtube Drummer',

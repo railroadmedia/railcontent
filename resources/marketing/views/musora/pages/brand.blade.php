@@ -6,13 +6,13 @@
     <meta property="og:title" content="Musora Brand Guide">
     <meta property="og:description" content="We help musicians reach their goals through inspiration and education.">
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
 @endsection
 
 <!-- Main -->
 @section('layout-body')
 
-    <section class="py-24 md:py-32 lg:py-40 text-white text-center bg-center bg-cover" style="background-color:#1a1e58;background-image:url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/header.jpg);">
+    <section class="py-24 md:py-32 lg:py-40 text-white text-center bg-center bg-cover" style="background-color:#1a1e58;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/header.jpg);">
         <div class="container mx-auto relative z-0">
             <h1 class="mt-6"><strong>Brand Guides</strong></h1>
         </div>
@@ -43,35 +43,35 @@
     </style>
     <div class="py-24 md:py-32 lg:py-40 px-2 md:px-5 text-white text-center w-full bg-musora-black">
         <div class="container mx-auto relative z-0">
-            <a href="https://musora-center.s3.amazonaws.com/brand/brand-guide.pdf" class="join relative">DOWNLOAD GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
+            <a href="https://dmmior4id2ysr.cloudfront.net/brand/brand-guide.pdf" class="join relative">DOWNLOAD GUIDE &nbsp; <i class="fas fa-arrow-to-bottom"></i></a>
 
             <div class="mt-7 md:mt-16" style="font-size: 0;">
-                <a href="https://musora-center.s3.amazonaws.com/brand/Drumeo-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #0b76db;">
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>
+                <a href="https://dmmior4id2ysr.cloudfront.net/brand/Drumeo-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #0b76db;">
+                    <img src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>
                     <p class="text-xs"><strong>ASSETS</strong></p>
                     <i class="fas fa-arrow-to-bottom absolute left-1/2 bottom-0 transform -translate-x-1/2 pb-3 text-xs"></i>
                 </a>
-                <a href="https://musora-center.s3.amazonaws.com/brand/Pianote-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #f61a30;">
-                    <img src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>
+                <a href="https://dmmior4id2ysr.cloudfront.net/brand/Pianote-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #f61a30;">
+                    <img src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>
                     <p class="text-xs"><strong>ASSETS</strong></p>
                     <i class="fas fa-arrow-to-bottom absolute left-1/2 bottom-0 transform -translate-x-1/2 pb-3 text-xs"></i>
                 </a>
-                <a href="https://musora-center.s3.amazonaws.com/brand/Guitareo-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #03c8ac;">
-                    <img src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>
+                <a href="https://dmmior4id2ysr.cloudfront.net/brand/Guitareo-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #03c8ac;">
+                    <img src="https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>
                     <p class="text-xs"><strong>ASSETS</strong></p>
                     <i class="fas fa-arrow-to-bottom absolute left-1/2 bottom-0 transform -translate-x-1/2 pb-3 text-xs"></i>
                 </a>
-                <a href="https://musora-center.s3.amazonaws.com/brand/Singeo-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #9a01ee;">
-                    <img src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>
+                <a href="https://dmmior4id2ysr.cloudfront.net/brand/Singeo-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #9a01ee;">
+                    <img src="https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>
                     <p class="text-xs"><strong>ASSETS</strong></p>
                     <i class="fas fa-arrow-to-bottom absolute left-1/2 bottom-0 transform -translate-x-1/2 pb-3 text-xs"></i>
                 </a>
-                <a href="https://musora-center.s3.amazonaws.com/brand/musora-assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #fff;">
+                <a href="https://dmmior4id2ysr.cloudfront.net/brand/musora-assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #fff;">
                     <img src="https://dmmior4id2ysr.cloudfront.net/logos/musora-logo-white.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;padding: 6px 0 5px;"><br>
                     <p class="text-xs"><strong>ASSETS</strong></p>
                     <i class="fas fa-arrow-to-bottom absolute left-1/2 bottom-0 transform -translate-x-1/2 pb-3 text-xs"></i>
                 </a>
-                {{--<a href="https://musora-center.s3.amazonaws.com/brand/Recordeo-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #ffae03;">--}}
+                {{--<a href="https://dmmior4id2ysr.cloudfront.net/brand/Recordeo-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #ffae03;">--}}
                     {{--<img src="https://d1y4o0cjx5s9r3.cloudfront.net/marketing/sales/logo-yellow.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>--}}
                     {{--<p class="text-xs"><strong>ASSETS</strong></p>--}}
                     {{--<i class="fas fa-arrow-to-bottom absolute left-1/2 bottom-0 transform -translate-x-1/2 pb-3 text-xs"></i>--}}
