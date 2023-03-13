@@ -123,19 +123,19 @@ onMounted(() => {
       `"
   >
     <section class="tw-w-full tw-h-full tw-rounded-[10px] tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 tw-gap-0 relative">
-        <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10"
-             :style="`background-color: rgb(0, 16, 29); background-image: url('${desktopImg}');  background-position: 50% center;`">
+        <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
             <picture>
-                <source media="(min-width:768px)" :srcset="`${desktopImg}`">
+                <source media="(min-width:1024px)" :srcset="`${desktopImg}`">
                 <source media="(min-width:768px)" :srcset="`${tabletImg}`">
                 <img
-                    class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
+                    class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0 tw-z-50"
                     :src="`${mobileImg}`"
                     alt="banner background image"
-                    onload="this.classList.remove('opacity-0')"
+                    onload="this.classList.remove('tw-opacity-0')"
                     loading="lazy"
                 />
             </picture>
+
         </div>
       <!-- Text Content -->
       <div class="tw-absolute tw-bottom-0 tw-w-full md:tw-relative tw-text-white tw-h-4/5 md:tw-h-full">
@@ -159,12 +159,14 @@ onMounted(() => {
           <!-- CTA -->
             <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
                 <a
+                    v-if="primaryCtaText"
                     :href="primaryCtaUrl"
                     :class="`tw-bg-white tw-text-[#000C17] tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block`"
                 >
                     {{ primaryCtaText }}
                 </a>
                 <a
+                    v-if="secondaryCtaText"
                     :href="secondaryCtaUrl"
                     :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block`"
                 >
