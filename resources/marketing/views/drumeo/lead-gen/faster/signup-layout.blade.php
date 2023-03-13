@@ -89,10 +89,11 @@
 
 @section('content')
     <header class="py-12 md:py-20" style="background: #040A20;">
-        <div class="max-w-6xl mx-auto flex items-center container px-4">
-            <div class="flex-1 text-white">
+        <div class="max-w-6xl mx-auto md:flex items-center container px-4 text-center md:text-left">
+            <div class="flex-1 text-white max-w-xl mx-auto md:max-w-full">
                 <div class="px-2 md:px-3">
-                    <img class="h-14 lg:h-20 mb-3" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
+                    <img class="h-12 md:h-14 lg:h-20 mb-3" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
+                    <img class="rounded-xl md:hidden mb-5" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/solid-hero-header-m.jpg" alt="header hero image mobile" />
                     <h2 class="leading-tight mb-5">Improve your speed on the drums with <b class="font-extrabold">10 free workouts.</b></h2>
                     <p class="mb-4">Enter your email below to grab your lessons.</p>
                 </div>
@@ -103,7 +104,7 @@
                     "stacked" => true
                 ])
             </div>
-            <div class="flex-1 pl-12 xl:px-12">
+            <div class="flex-1 pl-12 xl:px-12 hidden md:block">
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/solid-hero-header.png" alt="header hero image" />
             </div>
         </div>
@@ -158,7 +159,7 @@
         <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8 md:px-4 lg:px-0">
             <img
                 class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-16 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10"
-                src="https://drumeo-assets.s3.amazonaws.com/lead-gen/fwtgf/coach.jpg"
+                src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/coach.jpg"
                 alt="profile picture"
             >
             <div class="h-10 w-full sm:hidden" style="background: linear-gradient(to left top, #00101d calc(50% - 1px), transparent, transparent calc(50% + 1px));"></div>
@@ -174,17 +175,17 @@
                 </h6>
                 <div class="flex justify-between text-center mt-7 lg:mt-10">
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
                         <h3 class="mt-2"><strong>2.2M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">Followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
                         <h3 class="mt-2"><strong>948k</strong></h3>
                         <p class="uppercase opacity-70 text-sm">followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
                         <h3 class="mt-2"><strong>224M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">views</p>
                     </div>
