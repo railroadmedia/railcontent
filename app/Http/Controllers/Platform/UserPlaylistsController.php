@@ -98,7 +98,7 @@ class UserPlaylistsController extends BaseController
         throw_if(empty($playlist), new NotFoundHttpException());
 
         $page = $request->get('page', 1);
-        $limit = $request->get('limit', 20);
+        $limit = $request->get('limit');
 
         $contentTypes = array_merge(
             config('railcontent.appUserListContentTypes', []),
