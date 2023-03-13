@@ -127,7 +127,7 @@
                 href="/choose-plan"
             @endif
         >
-            @if(!empty($promoVersion))
+            @if(!empty($promoVersion) && empty($trialVersion))
                 Get Started &raquo;
             @else
                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>

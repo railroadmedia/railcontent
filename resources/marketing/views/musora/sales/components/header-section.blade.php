@@ -34,7 +34,7 @@
                                 href="/choose-plan"
                             @endif
                         >
-                            @if(!empty($promoVersion))
+                            @if(!empty($promoVersion) && empty($trialVersion))
                                 @if(!empty($cta))
                                     {!! $cta !!}
                                 @else

@@ -6,7 +6,7 @@
         <p class="leading-tight mt-2 sm:mt-3">{!! $desc !!}</p>
 
         <div class="flex flex-wrap lg:flex-nowrap items-center justify-center mt-4 sm:mt-6 lg:my-6">
-            <video class="lg:order-1 h-64 sm:h-96 rounded-xl cursor-pointer" x-on:click="soundslice = true;" src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+            <video class="lg:order-1 h-64 sm:h-96 rounded-xl cursor-pointer lazyload" x-on:click="soundslice = true;" data-src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
             <div class="text-left w-full sm:w-auto mt-6 lg:mt-0 lg:pr-8">
                 @foreach ($songItems as $songItem)
                     <div class="flex mb-6 lg:my-6">
@@ -31,7 +31,7 @@
                 href="/choose-plan"
             @endif
         >
-            @if(!empty($promoVersion))
+            @if(!empty($promoVersion) && empty($trialVersion))
                 Get Started &raquo;
             @else
                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>

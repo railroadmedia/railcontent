@@ -524,7 +524,20 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @if(!empty($promoVersion))
+    @if(!empty($trialVersion))
+        @include('musora.sales.components.card-selection-section', [
+            "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
+            "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
+            "songs" => "1000",
+            "firstPoint" => "Unlimited guitar lessons",
+            "thirdPoint" => "Direct access to real teachers.",
+            "fifthPoint" => "Lesson access for singing, piano, and drums.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=/order&locked=true",
+            "annualLink" => "/ecommerce/add-to-cart?products[guitareo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+            "monthlyLink" => "/ecommerce/add-to-cart?products[guitareo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        ])
+    @elseif(!empty($promoVersion))
         @php
             $bonuses = [
                 [
@@ -555,19 +568,6 @@
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
         'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true',
         'altButtonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true',
-        ])
-    @elseif(!empty($trialVersion))
-        @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
-            "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
-            "songs" => "1000",
-            "firstPoint" => "Unlimited guitar lessons",
-            "thirdPoint" => "Direct access to real teachers.",
-            "fifthPoint" => "Lesson access for singing, piano, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[guitareo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[guitareo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
@@ -612,6 +612,8 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     <script>
         // $(document).ready(function () {
         //     var stickyBar = $('.promo-banner');
