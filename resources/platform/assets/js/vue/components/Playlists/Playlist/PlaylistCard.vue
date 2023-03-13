@@ -58,6 +58,7 @@
 
     //-----------Refs-----------//
     const dropdownTarget = ref(null)
+    const parentContent = ref({});
 
     //-----------Reactive Data-----------//
     const state = reactive({
@@ -130,9 +131,14 @@
         state.dropdownOpen = !state.dropdownOpen;
     }
 
-    //-----------Lifecycle Methods-----------//
+    //-----------Lifecycle Methods-----------//gps
 
     onBeforeMount(() => {
+        console.log('lesson', { ...props.lesson })
+        if (props.lesson && props.lesson.parent_content_data) {
+            parentContent.value = JSON.parse(props.lesson.parent_content_data);
+            console.log('parsed parent content data',{...parentContent.value})
+        }
         state.isPinned = props.lesson.pinned;
         state.isPrivate = props.lesson.private;
     });
@@ -185,7 +191,7 @@
             <div class="tw-truncate tw-w-full lg:tw-w-[calc(100%-350px)] tw-px-3 lg:tw-pl-[15px]">
                 <!--name-->
                 <p class="tw-truncate">
-                    <template v-if="lesson.type !== 'assignment'">
+                    <template v-if="lesson.type !== 'assignment' && lesson.instructors && lesson.instructors.length">
                         <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
                                 v-for="(instructor, i) in lesson.instructors"
                                 :key="i">
@@ -222,7 +228,7 @@
                     </button>
                 </div>
                 <!-- Assignment Instructors -->
-                <p v-if="lesson.type === 'assignment'" class="tw-truncate">   
+                <p v-if="lesson.type === 'assignment' && lesson.parent && lesson.parent.instructors" class="tw-truncate">   
                     <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
                             v-for="(instructor, i) in lesson.parent.instructors"
                             :key="i">
