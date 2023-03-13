@@ -60,7 +60,7 @@
     <meta name="description" content="Jared Falk's 10-day routine that will help you rapidly improve your speed around the kit.">
 
     <meta property="og:url" content="https://www.drumeo.com/faster/">
-    <meta property="og:image" content="https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/thumbnails/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/share-image.jpg" style="display: none;">
     <meta property="og:title" content="Fastest Way To Get Faster">
     <meta property="og:description" content="Jared Falk's 10-day routine that will help you rapidly improve your speed around the kit.">
 @stop
@@ -88,12 +88,12 @@
 @endsection
 
 @section('content')
-    <header class="py-12 md:py-20" style="background: #040A20;">
+    <header class="py-12 md:py-20" style="background: {{ !empty($layoutAlt) ? 'linear-gradient(79.2deg, #FF3DD8 0.06%, #FD6915 100%);' : '#040A20' }};">
         <div class="max-w-6xl mx-auto md:flex items-center container px-4 text-center md:text-left">
             <div class="flex-1 text-white max-w-xl mx-auto md:max-w-full">
                 <div class="px-2 md:px-3">
-                    <img class="h-12 md:h-14 lg:h-20 mb-3" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
-                    <img class="rounded-xl md:hidden mb-5" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/solid-hero-header-m.jpg" alt="header hero image mobile" />
+                    <img class="h-12 md:h-14 lg:h-20 mb-3" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
+                    <img class="rounded-xl md:hidden mb-5" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $headerImageM }}" alt="header hero image mobile" />
                     <h2 class="leading-tight mb-5">Improve your speed on the drums with <b class="font-extrabold">10 free workouts.</b></h2>
                     <p class="mb-4">Enter your email below to grab your lessons.</p>
                 </div>
@@ -105,7 +105,7 @@
                 ])
             </div>
             <div class="flex-1 pl-12 xl:px-12 hidden md:block">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/solid-hero-header.png" alt="header hero image" />
+                <img src="https://www.musora.com/musora-cdn/image/width=700,quality=85/{{ $headerImage }}" alt="header hero image" />
             </div>
         </div>
     </header>
@@ -134,7 +134,7 @@
             >
                 @foreach($lessons as $key => $lesson)
                     <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
-                        <img src="{{ $lesson['img'] }}" src="lesson thumbnail {{ $key+1 }}" />
+                        <img src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['img'] }}" src="lesson thumbnail {{ $key+1 }}" />
                         <div class="p-4">
                             <h6 class="font-bold mb-2">{{ $key+1 }}. {{ $lesson['title'] }}</h6>
                             <p>
@@ -145,9 +145,10 @@
                 @endforeach
             </div>
             <span
-                class="btn-secondary text-drumeo"
+                class="btn-secondary text-drumeo transition-opacity duration-300"
+                :class="showAll ? 'opacity-0' : 'opacity-100'"
                 @click="
-                    showAll = !showAll
+                    showAll = true
                 "
             >
                     Show all
@@ -175,17 +176,17 @@
                 </h6>
                 <div class="flex justify-between text-center mt-7 lg:mt-10">
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
                         <h3 class="mt-2"><strong>2.2M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">Followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
                         <h3 class="mt-2"><strong>948k</strong></h3>
                         <p class="uppercase opacity-70 text-sm">followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
                         <h3 class="mt-2"><strong>224M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">views</p>
                     </div>
@@ -199,9 +200,9 @@
         'bgColor' => 'white'
     ])
 
-    <section class="py-8 md:py-14 text-center text-white" style="background:#040A20;">
+    <section class="py-8 md:py-14 text-center text-white" style="background:{{ !empty($layoutAlt) ? 'linear-gradient(79.2deg, #FF3DD8 0.06%, #FD6915 100%);' : '#040A20' }};">
         <div class="max-w-3xl mx-auto">
-        <img class="h-12 lg:h-14 mb-3" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
+        <img class="h-12 lg:h-14 mb-3" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
         <p class="mb-5">Enter your email to receive ten free exercises.</p>
         @include("drumeo.lead-gen.partials.sign-up-form-tw", [
             "formId" => $formId,

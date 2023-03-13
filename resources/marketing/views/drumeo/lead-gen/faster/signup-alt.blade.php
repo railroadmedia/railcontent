@@ -1,8 +1,10 @@
-@extends('drumeo.lead-gen.faster.signup-layout')
+@extends('drumeo.lead-gen.faster.signup-layout', [ 'layoutAlt' => true ])
 
 @php
     $formId = "Drumeo - Engagement - Trigger - FWTGF - FB Web Form";
     $formName = "Fastest Way To Get Faster - Facebook";
+    $headerImage = "https://drumeo-assets.s3.amazonaws.com/lead-gen/fwtgf/neon-hero-header.png";
+    $headerImageM = 'https://drumeo-assets.s3.amazonaws.com/lead-gen/fwtgf/neon-hero-header-m.jpg';
 @endphp
 
 @section('form1')
