@@ -65,6 +65,10 @@
     <meta property="og:description" content="Jared Falk's 10-day routine that will help you rapidly improve your speed around the kit.">
 @stop
 
+@section('styles')
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
+@endsection
+
 @section('scripts')
     <script>
         $(document).ready(function () {
@@ -81,9 +85,11 @@
     <header class="py-12 md:py-20" style="background: #040A20;">
         <div class="max-w-6xl mx-auto flex items-center container px-4">
             <div class="flex-1 text-white">
-                <img class="h-14 lg:h-20 mb-3" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
-                <h2 class="leading-tight mb-5">Improve your speed on the drums with <b class="font-extrabold">10 free workouts.</b></h2>
-                <p class="mb-2">Enter your email below to grab your lessons.</p>
+                <div class="px-2 md:px-3">
+                    <img class="h-14 lg:h-20 mb-3" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
+                    <h2 class="leading-tight mb-5">Improve your speed on the drums with <b class="font-extrabold">10 free workouts.</b></h2>
+                    <p class="mb-4">Enter your email below to grab your lessons.</p>
+                </div>
                 @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "formId" => $formId,
                     "formName" => $formName,
@@ -174,11 +180,17 @@
         'bgColor' => 'white'
     ])
 
-    @include('drumeo.lead-gen.partials.enter-email1',[
-        "headLine" => "Enter your email below for 10 free video lessons...",
-        "formId" => $formId,
-        "formName" => $formName,
-    ])
+    <section class="py-8 md:py-14 text-center text-white" style="background:#040A20;">
+        <div class="max-w-3xl mx-auto">
+        <img class="h-12 lg:h-14 mb-3" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
+        <p class="mb-5">Enter your email to receive ten free exercises.</p>
+        @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+            "formId" => $formId,
+            "formName" => $formName,
+            "buttonText" => "Send videos",
+        ])
+        </div>
+    </section>
 
     <div class="reveal medium" id="signUpModal" data-reveal>
         <section class="header pop-up">
