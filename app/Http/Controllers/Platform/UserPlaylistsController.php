@@ -6,6 +6,7 @@ use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
@@ -105,6 +106,7 @@ class UserPlaylistsController extends BaseController
             array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
         );
 
+        Decorator::$typeDecoratorsEnabled = false;
         $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
         foreach ($items as $index => $item) {
             $items[$index]['need_access'] = ($user->isPackOwner() && !$user->isAMember());
