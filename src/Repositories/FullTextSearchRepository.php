@@ -85,7 +85,7 @@ class FullTextSearchRepository extends RepositoryBase
         $this->deleteOldIndexes();
         $brands = config('railcontent.available_brands');
         $showTypes = [];
-        foreach ($brands as $brand){
+        foreach ($brands as $brand) {
             $showTypes += config('railcontent.showTypes', [])[$brand] ?? [];
         }
 
@@ -147,7 +147,7 @@ class FullTextSearchRepository extends RepositoryBase
         });
 
         $this->connection()
-            ->statement('OPTIMIZE table '.ConfigService::$tableSearchIndexes);
+            ->statement('OPTIMIZE table ' . ConfigService::$tableSearchIndexes);
     }
 
     /** Delete old indexes for the brand
@@ -251,12 +251,13 @@ class FullTextSearchRepository extends RepositoryBase
                 ->restrictByPermissions()
                 ->restrictBrand()
                 ->restrictByTerm($term)
-                ->distinct()
-                ->order($orderByColumn, $orderByDirection)
-                ->directPaginate($page, $limit);
+                ->distinct();
+
+        $query = $this->orderBy($orderByColumn, $query, $orderByDirection);
+        $query = $query->directPaginate($page, $limit);
 
         if (!empty($contentTypes)) {
-            $query->whereIn(ConfigService::$tableSearchIndexes.'.content_type', $contentTypes);
+            $query->whereIn(ConfigService::$tableSearchIndexes . '.content_type', $contentTypes);
         }
 
         if (!empty($contentStatuses)) {
@@ -276,7 +277,7 @@ class FullTextSearchRepository extends RepositoryBase
         if (!empty($coachIds)) {
             $query->where(function (Builder $builder) use ($coachIds) {
                 foreach ($coachIds as $coachId) {
-                    return $builder->orwhereRaw(' FIND_IN_SET('.$coachId.',content_instructors)');
+                    return $builder->orwhereRaw(' FIND_IN_SET(' . $coachId . ',content_instructors)');
                 }
             });
         }
@@ -307,7 +308,7 @@ class FullTextSearchRepository extends RepositoryBase
                 ->restrictBrand();
 
         if (!empty($contentType)) {
-            $query->whereIn(ConfigService::$tableSearchIndexes.'.content_type', $contentType);
+            $query->whereIn(ConfigService::$tableSearchIndexes . '.content_type', $contentType);
         }
 
         if (!empty($contentStatus)) {
@@ -321,11 +322,31 @@ class FullTextSearchRepository extends RepositoryBase
         if (!empty($coachIds)) {
             $query->where(function (Builder $builder) use ($coachIds) {
                 foreach ($coachIds as $coachId) {
-                    return $builder->orwhereRaw(' FIND_IN_SET('.$coachId.',content_instructors)');
+                    return $builder->orwhereRaw(' FIND_IN_SET(' . $coachId . ',content_instructors)');
                 }
             });
         }
 
         return $query->count();
+    }
+
+    private function orderBy(
+        $orderByColumn,
+        FullTextSearchQueryBuilder $query,
+        $orderByDirection
+    ): FullTextSearchQueryBuilder {
+        $contentOrderColumns = ['popularity', 'published_on', 'slug'];
+        if (in_array($orderByColumn, $contentOrderColumns)) {
+            $query = $query->addSelect("c.$orderByColumn")->join(
+                'railcontent_content as c',
+                'c.id',
+                '=',
+                'railcontent_search_indexes.content_id'
+            )
+                ->order("c.$orderByColumn", $orderByDirection);
+        } else {
+            $query = $query->order($orderByColumn, $orderByDirection);
+        }
+        return $query;
     }
 }
