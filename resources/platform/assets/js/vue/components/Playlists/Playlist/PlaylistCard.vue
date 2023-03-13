@@ -1,4 +1,5 @@
 <script setup>
+    import { DateTime } from 'luxon';
     import { onBeforeMount, watch, ref, inject, computed, reactive } from 'vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import PlaylistService from '../../../../services/playlists.js';
@@ -81,16 +82,23 @@
         }
     ]
 
-    const lessonDate = Date.parse(props.lesson.published_on_in_timezone );
-
     const dateNow = Date.now();
-
+    const lessonDateParsed = props.lesson.published_on_in_timezone ? Date.parse(props.lesson.published_on_in_timezone ) : Date.parse(props.lesson.published_on);
+    const lessonDate = props.lesson.published_on_in_timezone ? props.lesson.published_on_in_timezone : props.lesson.published_on ;
+    
+    //Parse Release Date
+    const month = DateTime.fromSQL(lessonDate).toFormat('LLL');
+    const day = DateTime.fromSQL(lessonDate).toFormat('ccc');
+    const dayNumber = DateTime.fromSQL(lessonDate).toFormat('d');
+    const yearNumber = DateTime.fromSQL(lessonDate).toFormat('yy');
+    const time = DateTime.fromSQL(lessonDate).toFormat('h:mm a');
+    
     //-----------Methods-----------//
 
     const released = () => {
-        return lessonDate < dateNow;
+        return lessonDateParsed < dateNow;
     }
-
+    
     //Format Duration (in seconds)
     const duration_formatted = (seconds) => {
         let time = seconds;
@@ -133,6 +141,7 @@
     //-----------Lifecycle Methods-----------//
 
     onBeforeMount(() => {
+        console.log(props.lesson)
         state.isPinned = props.lesson.pinned;
         state.isPrivate = props.lesson.private;
     });
