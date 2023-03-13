@@ -11,6 +11,11 @@
     <!-- Scripts -->
     <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <style>
+        a {
+            color:inherit!important;
+        }
+    </style>
 @endsection
 
 <!-- Main -->

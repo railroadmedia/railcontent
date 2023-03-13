@@ -98,6 +98,20 @@
             margin-left: -5px;
             margin-bottom: -5px;
         }
+
+        @if(!empty($trialVersion))
+            .option-buttons.active {
+                border-color:#8300E9!important;
+                background-color:#2f0c4a !important;
+            }
+            .option-buttons.active .radio-check {
+                border-color:#8300E9!important;
+                background-color:#8300E9!important;
+            }
+            .option-buttons.active .radio-check i {
+                display:block!important;
+        }
+        @endif
     </style>
 @stop
 
@@ -490,8 +504,21 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @if(!empty($promoVersion))
 
+    @if(!empty($trialVersion))
+        @include('musora.sales.components.card-selection-section', [
+            "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
+            "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
+            "songs" => "1000",
+            "firstPoint" => "Unlimited singing lessons",
+            "thirdPoint" => "Direct access to vocal coaches.",
+            "fifthPoint" => "Lesson access for guitar, piano, and drums.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+            "annualLink" => "/ecommerce/add-to-cart?products[singeo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
+            "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        ])
+    @elseif(!empty($promoVersion))
         @php
             $bonuses = [
                 [
@@ -557,4 +584,6 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop

@@ -98,13 +98,27 @@
             margin-left: -5px;
             margin-bottom: -5px;
         }
+
+        @if(!empty($trialVersion))
+            .option-buttons.active {
+                border-color:#0b76db!important;
+                background-color:#0c2949!important;
+            }
+            .option-buttons.active .radio-check {
+                border-color:#0b76db!important;
+                background-color:#0b76db!important;
+            }
+            .option-buttons.active .radio-check i {
+                display:block!important;
+            }
+        @endif
     </style>
 @stop
 
 @section('body-data')
     x-data ='{
         soundslice : false,
-        trailer : false
+        trailer : false,
     }'
 @endsection
 
@@ -522,8 +536,20 @@
     <div id="order" class="anchor"></div>
     @hasSection('final')
         @yield('final')
+    @elseif(!empty($trialVersion))
+        @include('musora.sales.components.card-selection-section', [
+            "plusLogo" => "https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo.svg",
+            "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
+            "songs" => "5000",
+            "firstPoint" => "The world’s best drum lessons.",
+            "thirdPoint" => "Unlimited personal support",
+            "fifthPoint" => "Lesson access for piano, guitar, and singing.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
+            "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
+            "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+        ])
     @elseif(!empty($promoVersion))
-
         @php
             $bonuses = [
                 [
@@ -601,5 +627,7 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     @yield('scripts')
 @stop
