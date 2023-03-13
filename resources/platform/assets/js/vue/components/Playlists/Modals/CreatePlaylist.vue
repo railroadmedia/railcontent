@@ -146,9 +146,10 @@
                         console.log(response.data)
                         window.addItemCallback(response.data.data[0].id)
                     }
-                    //load Playlists 
-                    //TODO: Conditionally add this only when catalog is on page. 
-                    playlistsStore.getPlaylists({ brand: props.brand, page: playlistsStore.resultsPage, limit: null }, token);
+                    //load Playlists (if collection catalog exists)
+                    if(playlistsStore.pageHasPlaylistCatalog) {
+                        playlistsStore.getPlaylists({ brand: props.brand, page: playlistsStore.resultsPage, limit: null }, token);
+                    }
                 }
             })
         }
@@ -179,7 +180,6 @@
                         if( Object.keys(playlistsStore.activePlaylist).length === 0 ) {
                             playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);     
                         }
-
                     } else {
                         console.log('edit response code', response)
                     }

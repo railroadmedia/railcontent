@@ -77,6 +77,8 @@
                     sort: state.sortValue,
                 }, token); 
         }
+        //For Create Modal to reload Playlists
+        playlistsStore.pageHasPlaylistCatalog = true;
     })
 
     onBeforeMount(() => {  

@@ -12,6 +12,7 @@ export const usePlaylistsStore = defineStore({
       modalOpen: {
         modalType: null,
       },
+      pageHasPlaylistCatalog: false, 
       loadingPlaylists: false,
       sortingPlaylist: false,
       loadingPinnedPlaylists: false,
