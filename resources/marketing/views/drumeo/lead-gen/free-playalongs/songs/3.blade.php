@@ -16,9 +16,9 @@
     /free-playalongs/songs/4
 @stop
 
-@section('prev-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/Rashid-williams-Rock-out.png')
+@section('prev-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/Rashid-williams-Rock-out.png')
 
-@section('next-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/thomas-pridgen-hypnotized.png')
+@section('next-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/thomas-pridgen-hypnotized.png')
 
 @section('assets')
     @include('drumeo.lead-gen.partials._assignment-resources', [

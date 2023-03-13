@@ -4,11 +4,11 @@
     <title>{{ ucfirst($brand) }} Coaches | Musora</title>
 @endsection
 
-@section('content') 
+@section('content')
 
     @component('partials.bladesora.members.components.header-banner', [
         'hideUser' => true,
-        'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
+        'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
         'brand' => '{{ $brand }}'
     ])
         @slot('content')
@@ -20,19 +20,19 @@
 
                 <p class="text-white body tw-max-w-[960px]">
                     @if($brand === "drumeo")
-                        Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world! 
+                        Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!
                     @elseif($brand === "pianote")
                         Your piano journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best pianists in the world!
                     @elseif($brand === "guitareo")
                         Tackle your next guitar goal with bite-sized courses from many of the world's best guitarists.
                     @elseif($brand === "singeo")
-                        Your singing journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best singers and vocal coaches in the world! 
+                        Your singing journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best singers and vocal coaches in the world!
                     @endif
                 </p>
             </div>
         @endslot
     @endcomponent
-    
+
     @if( !empty($coachEvent) )
         <div class=" tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-4">
             {{-- Live Banner --}}
@@ -97,19 +97,19 @@
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-2 tw-mb-3">
             <div class="tw-flex tw-flex-row tw-mb-3">
                 <div class="tw-flex tw-flex-col tw-flex-grow">
-                    
+
                     <!-- Section Title -->
                     <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
                         <a href="/{{ $brand }}/lessons/subscribed" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                             <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">From Subscribed Coaches</h2>
                         </a>
-                        <a href="/{{ $brand }}/lessons/subscribed"  
+                        <a href="/{{ $brand }}/lessons/subscribed"
                             aria-label="See All Subscribed Lessons"
                             class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
                         >
                             See All
                         </a>
-                    </div> 
+                    </div>
 
                     <div class="tw-flex tw-flex-row six-cards-row">
                         <transition appear name="fade">

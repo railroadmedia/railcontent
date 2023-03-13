@@ -11,7 +11,7 @@
 @section('content')
 
     @component('partials._forum-header-banner',[
-        "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
+        "backgroundImage" => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
         "brand" => $brand,
         "currentUser" =>$user,
         'profileUrl' => user()->getDashboardUrl(),
@@ -19,16 +19,16 @@
         @slot('content')
             <div class="tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 dark:tw-text-white">
                 <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
-                    <musora-icon icon-name="messages-filled" 
+                    <musora-icon icon-name="messages-filled"
                                     class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                     <span class="tw-text-32 tw-font-bold"><span class="tw-capitalize">{{ $brand }}</span> Forums</span>
                 </h1>
 
                 <p class="tw-text-white tw-mb-6 sm:tw-mb-4 tw-max-w-4xl sm:tw-pr-12 tw-text-base">
                     @if($brand === "drumeo")
-                        Connect with drummers from around the world! Our forums help you build social connections and find other students that share your goals and passions. 
+                        Connect with drummers from around the world! Our forums help you build social connections and find other students that share your goals and passions.
                     @elseif($brand === "pianote")
-                        Connect with piano players from around the world! Our forums help you build social connections and find other students that share your goals and passions. 
+                        Connect with piano players from around the world! Our forums help you build social connections and find other students that share your goals and passions.
                     @elseif($brand === "guitareo")
                         Connect with guitarists from around the world! Our forums help you build social connections and find other students that share your goals and passions.
                     @elseif($brand === "singeo")

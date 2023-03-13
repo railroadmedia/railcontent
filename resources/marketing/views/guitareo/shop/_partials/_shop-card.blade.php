@@ -10,7 +10,7 @@
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
             <section class="drum-shop">
-                <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url('https://cdn.musora.com/image/fetch/w_600,q_auto:best/@if(str_contains($thumbnail, 'amazonaws') || str_contains($thumbnail, 'cloudfront')){{$thumbnail}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$thumbnail}}@endif');">
+                <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url('https://www.musora.com/musora-cdn/image/width=600,quality=85/@if(str_contains($thumbnail, 'amazonaws') || str_contains($thumbnail, 'cloudfront')){{$thumbnail}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$thumbnail}}@endif');">
                     @if (!empty($badgeText))
                         <span class="top-left-badge text-white bg-promo">
                             {!! $badgeText !!}

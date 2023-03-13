@@ -7,10 +7,10 @@ $footerLineTwo = $canRefer ? 'redeemed for renewals, extensions, or gift subscri
 $containerClass = $canRefer ? '' : 'tw-justify-center';
 
 $cardImages = [
-    'drumeo' => 'https://drumeo-assets.s3.amazonaws.com/redeem/referral/30-day-guest-pass.png',
-    'pianote' => 'https://drumeo-assets.s3.amazonaws.com/redeem/referral/pianote-guest-pass.png',
-    'singeo' => 'https://drumeo-assets.s3.amazonaws.com/redeem/referral/singeo-guest-pass.png',
-    'guitareo' => 'https://drumeo-assets.s3.amazonaws.com/redeem/referral/guitareo-guest-pass.png',
+    'drumeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/30-day-guest-pass.png',
+    'pianote' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/pianote-guest-pass.png',
+    'singeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/singeo-guest-pass.png',
+    'guitareo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/guitareo-guest-pass.png',
 ];
 
 $cardImage = $cardImages[brand()];
@@ -46,7 +46,7 @@ $cardImage = $cardImages[brand()];
                 <strong>{{ $titleLineOne }}<br> {{ $titleLineTwo }}</strong>
             </h1>
             <div class="tw-flex tw-flex-col 2xl:tw-flex-row tw-items-center tw-px-4 {{ $containerClass }}">
-                
+
                 <div class="tw-flex-shrink-0 tw-w-full tw-max-w-xs sm:tw-max-w-md md:tw-max-w-lg lg:tw-max-w-xl tw-my-5 md:tw-my-6 lg:tw-my-0">
                     <div class="tw-flex tw-w-full tw-relative">
                         <div class="tw-inline-flex tw-w-full ">

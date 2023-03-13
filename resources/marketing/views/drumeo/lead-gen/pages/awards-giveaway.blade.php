@@ -8,7 +8,7 @@
     <meta property="og:description" content="Drumeo Awards Live Show Presented By Yamaha">
 
     <meta property="og:url" content="https://www.drumeo.com/awards-giveaway/">
-     <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/awards.jpg" style="display: none;">
+     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/january/awards.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
 
@@ -226,7 +226,7 @@
     @include("drumeo.sales.partials._nav")
     <section class="text-center text-white pb-5 md:pb-10 px-3 md:px-4" style="background:linear-gradient(to bottom, #000 65%, #06488F);">
         <div class="container mx-auto max-w-5xl">
-            <a href="https://www.youtube.com/watch?v=p2FVUMYO-6k" target="_blank"><img class="inline-block h-48 md:h-96" src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/LiveShowGiveaway-01.jpg"></a>
+            <a href="https://www.youtube.com/watch?v=p2FVUMYO-6k" target="_blank"><img class="inline-block h-48 md:h-96" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/january/LiveShowGiveaway-01.jpg"></a>
 {{--            <h1 class="md:tracking-widest -mt-4 md:-mt-8 lg:-mt-12">The Drumeo Awards LIVE Show</h1>--}}
             <h6 class="leading-normal my-3 md:my-5 lg:my-8">
                 Enter your email for your chance to win a prize <br class="hidden md:inline lg:hidden">
@@ -295,10 +295,10 @@
             </ul>
             <div class="flex flex-wrap">
                 <div class="w-full sm:w-1/2">
-                    <img src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/prizesyamaha.jpg">
+                    <img src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/january/prizesyamaha.jpg">
                 </div>
                 <div class="w-full sm:w-1/2">
-                    <img src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/january/prizesall.jpg">
+                    <img src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/january/prizesall.jpg">
                 </div>
             </div>
             <p>Drop your email address at the top of this page to be entered into the random draws we’ll be doing throughout the live stream.

@@ -10,7 +10,7 @@
     <meta property="og:description" content="We can’t wait to see your submission. Don’t be shy! Submit today!">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/recitals/fb-share-image.png">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/recitals/fb-share-image.png">
 
     <style>
         html {
@@ -24,7 +24,7 @@
     <div class="promo-banner text-white py-1 mt-10 md:mt-14 lg:mt-0 hidden md:block" style="background:linear-gradient(75.93deg, #00C9AC 0%, #0B76DB 32.62%, #8300E9 65.25%, #F61A30 92.11%)">
         <div class="container mx-auto relative z-10">
             <div class="text text-center flex justify-center items-center">
-                <img class="logo h-11" src="https://musora-center.s3.amazonaws.com/recitals/MusoraWinterRecital-logo.png">
+                <img class="logo h-11" src="https://dmmior4id2ysr.cloudfront.net/recitals/MusoraWinterRecital-logo.png">
                 <p class="leading-tight">
                     <strong class="font-extrabold">Share your progress with the community!</strong> <br>
                     Submission deadline <strong class="font-extrabold">December 15th, 2022.</strong></p>
@@ -33,12 +33,12 @@
     </div>
     <section class="text-center text-white py-5 md:py-10 lg:py-16 px-5 md:px-7" style="background:#00101d ;">
         <div class="container mx-auto max-w-5xl">
-            <img class="h-24 sm:h-32 lg:h-40 mb-3 mt-10 md:mt-10" src="https://musora-center.s3.amazonaws.com/recitals/MusoraWinterRecital-logo.png" alt="recital logo">
+            <img class="h-24 sm:h-32 lg:h-40 mb-3 mt-10 md:mt-10" src="https://dmmior4id2ysr.cloudfront.net/recitals/MusoraWinterRecital-logo.png" alt="recital logo">
             <h3 class="leading-tight"><strong>Be a part of the first ever <br>Musora Winter Recital!</strong></h3>
             <a class="btn-primary anchor-slide mt-5 mb-10 md:mt-7 md:mb-20 bg-musora border-none" href="#form">Submit Now &raquo;</a>
             <div class="flex flex-wrap items-center justify-center mx-auto max-w-4xl">
                 <div class="flex flex-wrap items-start flex-image mx-auto w-full md:w-2/5 lg:w-5/12 md:order-1 mb-5 md:mb-0 justify-center">
-                    <img class="h-72 md:h-auto" src="https://musora-center.s3.amazonaws.com/recitals/collage.png">
+                    <img class="h-72 md:h-auto" src="https://dmmior4id2ysr.cloudfront.net/recitals/collage.png">
                 </div>
                 <div class="text-left md:pr-3 lg:pr-8 w-full md:w-3/5 lg:w-7/12">
                     <p class="mx-auto">

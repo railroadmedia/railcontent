@@ -5,7 +5,7 @@
     <meta property="og:title" content="Beyond Beginner Drumming">
     <meta name="description" content="Make the jump from beginner to intermediate drummer.">
     <meta property="og:description" content="Make the jump from beginner to intermediate drummer.">
-    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Title+Banner.jpg" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/Title+Banner.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -73,12 +73,12 @@
         "noBreadcrumb" => true
     ])
 
-    <header class="text-center text-white py-5 md:py-10 px-4 bg-top bg-no-repeat relative" style="background-color:#00101d;background-image: url(https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Header_BG.jpg);">
+    <header class="text-center text-white py-5 md:py-10 px-4 bg-top bg-no-repeat relative" style="background-color:#00101d;background-image: url(https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/Header_BG.jpg);">
         <div class="container mx-auto relative z-10">
-            <img class="h-12 sm:h-16 lg:h-20" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo.svg" alt="Beyond Beginner Drumming Logo"><br>
+            <img class="h-12 sm:h-16 lg:h-20" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo.svg" alt="Beyond Beginner Drumming Logo"><br>
             <i class="fas fa-play play-button autoplay-video mt-36 lg:mt-44 mb-5 md:mb-12" data-open="trailer"></i>
             <h2><strong>Make the jump from beginner to<br> intermediate drummer.</strong></h2>
-            <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg" alt="Siros Signature"><br>
+            <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg" alt="Siros Signature"><br>
             <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[beyond-beginner-drumming]=1">Get Started</a>
             <h6>ONLY @if(floatval($productPrices['beyond-beginner-drumming']->price) > floatval($productPrices['beyond-beginner-drumming']->discounted_price)) <s class="opacity-60">${{ floatval($productPrices['beyond-beginner-drumming']->price) }}</s> @endif
                 <strong class="text-yellow-400">${{ floatval($productPrices['beyond-beginner-drumming']->discounted_price) }} {{--Launch Special--}}</strong></h6>
@@ -86,7 +86,7 @@
     </header>
 
 
-    <section class="text-white py-8 sm:py-14 lg:py-20 px-4 sm:px-10 relative lazyload bg-cover bg-center" style="background-color:#020d1f;" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Intro_BG.jpg">
+    <section class="text-white py-8 sm:py-14 lg:py-20 px-4 sm:px-10 relative lazyload bg-cover bg-center" style="background-color:#020d1f;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/Intro_BG.jpg">
         <div class="container mx-auto max-w-5xl relative z-10">
             <div class="md:flex flex-wrap md:w-7/12">
                 <h3 class="mx-0 mb-3"><strong>Take your drumming &<br> musicianship to the next level.</strong></h3>
@@ -245,8 +245,8 @@
         </div>
     </section>
     <section class="text-white py-7 md:py-10 lg:py-16 relative" style="background-color:#00101d;">
-        <div class="absolute inset-0 z-0 bg-top bg-no-repeat jared-bio lazyload hidden md:block" data-bg="https://cdn.musora.com/image/fetch/w_3000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Coach_BG.jpg" style="background-size: cover;background-color:#020d1f;"></div>
-        {{--<div class="absolute inset-0 z-0 bg-top bg-no-repeat jared-bio lazyload block md:hidden" data-bg="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Coach_BG.jpg" style="background-color:#020d1f;"></div>--}}
+        <div class="absolute inset-0 z-0 bg-top bg-no-repeat jared-bio lazyload hidden md:block" data-bg="https://www.musora.com/musora-cdn/image/width=3000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/Coach_BG.jpg" style="background-size: cover;background-color:#020d1f;"></div>
+        {{--<div class="absolute inset-0 z-0 bg-top bg-no-repeat jared-bio lazyload block md:hidden" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/Coach_BG.jpg" style="background-color:#020d1f;"></div>--}}
         <div class="container mx-auto max-w-5xl relative z-10 px-4">
             <div class="md:flex flex-wrap w-full sm:w-7/12 lg:w-1/2 ml-auto order-1">
                 <h3 class="mx-0"><strong>Who is Siros Vaziri?</strong></h3>
@@ -279,11 +279,11 @@
 
 
     <div id="customize-anchor" class="anchor"></div>
-    <section class="final text-center text-white py-10 md:py-20 lg:py-24 px-4 bg-center bg-cover lazyload" style="background-color:#051626;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Order_BG.jpg">
+    <section class="final text-center text-white py-10 md:py-20 lg:py-24 px-4 bg-center bg-cover lazyload" style="background-color:#051626;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/Order_BG.jpg">
         <div class="container mx-auto">
-            <img class="logo" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo.svg" alt="Beyond Beginner Drumming Logo"><br>
+            <img class="logo" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo.svg" alt="Beyond Beginner Drumming Logo"><br>
             <h2 class="mt-5"><strong>Make the jump from beginner to<br> intermediate drummer.</strong></h2>
-            <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg" alt="Siros signature"><br>
+            <img class="mt-1 h-10 sm:h-14 lg:h-16" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/with+Siros+Vaziri.svg" alt="Siros signature"><br>
             <a class="join blue my-3 md:my-4 w-full max-w-xl" href="/ecommerce/add-to-cart?products[beyond-beginner-drumming]=1">Get Started</a>
             <h6>ONLY @if(floatval($productPrices['beyond-beginner-drumming']->price) > floatval($productPrices['beyond-beginner-drumming']->discounted_price)) <s class="opacity-60">${{ floatval($productPrices['beyond-beginner-drumming']->price) }}</s> @endif
                 <strong class="text-yellow-400">${{ floatval($productPrices['beyond-beginner-drumming']->discounted_price) }} {{--Launch Special--}}</strong></h6>

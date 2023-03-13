@@ -8,7 +8,7 @@
     <meta property="og:description" content="Lisa is SO excited to welcome you to the Singeo community and this event is going to be so much fun!">
 
     <meta property="og:url" content="https://www.singeo.com/welcome-party/">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg"/>
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2022/og-image.jpg"/>
 
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
@@ -49,7 +49,7 @@
 
     <div class="title-wrap text-white py-5 md:py-12 lg:py-16 px-5 md:px-7 lg:px-3" style="background: linear-gradient(00deg, #011a33, #000c17);">
         <div class="container mx-auto max-w-3xl">
-            <img style="width: 100%;border-radius:10px;" src="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/background-teachers-2.jpg">
+            <img style="width: 100%;border-radius:10px;" src="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/background-teachers-2.jpg">
             <h1 class="uppercase my-3 text-center leading-normal"><strong>Thanks for confirming!</strong></h1>
             <p class="mt-2 md:mt-4 lg:mt-2 mb-6 md:mb-4 lg:mb-7">Your spot is confirmed! Thanks for RSVPing for our Singeo New Student Welcome Party! We are all so excited to welcome you into the Singeo community. Lisa and Darcy (your singing coaches) are really looking forward to meeting you and easter to chat about the incredible things you will learn to do with your voice!
                 <br><br>

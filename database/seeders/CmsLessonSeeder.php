@@ -55,7 +55,7 @@ class CmsLessonSeeder extends Seeder
                 "instructor_img" => null,
                 "studyText" => "",
                 "overview" => "",
-                'bundle_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/drumeo_annual.jpg',
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/drumeo_annual.jpg',
                 "bundle_desc" => "Get better, faster with Drumeo’s award-winning online drum lessons taught by the world’s greatest drummers. You’ll always know what to practice with step-by-step lessons, 3100+ note-for-note song breakdowns, hundreds of drum-less playalongs, and ongoing support & motivation from pro drummers."
             ],
             [
@@ -114,7 +114,7 @@ class CmsLessonSeeder extends Seeder
                 "slug" => "30-day-drummer",
                 "sku" => "",
                 "thumbnail" => "https:/drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/header_thumb.png",
-                "thumbnail_logo" => "https://drumeo-assets.s3.amazonaws.com/promos/august/30logo.png",
+                "thumbnail_logo" => "https://dpwjbsxqtam5n.cloudfront.net/promos/august/30logo.png",
                 "meta_desc" => "",
                 "meta_img" => "",
                 "short_desc" => "Learn the drums by PLAYING the drums with daily guided workouts. The first-ever class starts September 5, 2022.",
@@ -151,7 +151,7 @@ class CmsLessonSeeder extends Seeder
                 "sku" => "new-drummers-start-here",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/new-drummers-start-here.jpg",
                 "meta_desc" => "The fastest way to get started on the drums and play the songs you love.",
-                "meta_img" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/new-drummers/og-image.jpg",
+                "meta_img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/og-image.jpg",
                 "short_desc" => "Your guide to go from a total beginner to playing drums with real music in 90-days or less.",
                 "header_text" => "",
                 "price" => 7,
@@ -374,8 +374,8 @@ class CmsLessonSeeder extends Seeder
                 "name" => "Beyond Beginner Drumming",
                 "slug" => "beyond-beginner-drumming",
                 "sku" => "beyond-beginner-drumming",
-                "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/Title+Card.jpg",
-                "thumbnail_logo" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
+                "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/Title+Card.jpg",
+                "thumbnail_logo" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
                 "meta_desc" => "",
                 "meta_img" => "",
                 "short_desc" => "Make the jump from beginner to intermediate drummer",
@@ -394,7 +394,7 @@ class CmsLessonSeeder extends Seeder
                 "lifetime_access" => true,
                 "free_shipping" => false,
                 "included_edge" => true,
-                "thumbnail_logo" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
+                "thumbnail_logo" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/beyond-beginner-drummer/BeyondBeginnerDrumming_Logo-white.svg",
                 "page_logo" => "",
                 "video" => "",
                 "instructor_name" => "Siros Vaziri",
@@ -747,7 +747,7 @@ At the heart of this life-changing, career-extending system is the three-tier �
 Your pathway to playing better, faster, and healthier for a lifetime of pain-free drumming -- Great Hands For A Lifetime will help you unlock your potential and protect your hands for the many years of drumming to come.
 
 All sheet music features Drumeo SmartBeat Sheet Music for playing or pausing the notation, speeding up or slowing down the exercises, and creating loops to improve your learning experience. You’ll also get online access to Drumeo features like progress tracking, video commenting, and community forums where you can connect with students and teachers from around the world.",
-                'bundle_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
+                'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/tommy_card.jpg',
                 "bundle_desc" => "Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control on the drums in this digital course. You’ll learn a challenging routine that weaves its way through standard rudiments while keeping you in command of drumming’s basic motions.",
             ],
             [

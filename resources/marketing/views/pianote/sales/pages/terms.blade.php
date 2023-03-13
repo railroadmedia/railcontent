@@ -4,7 +4,7 @@
     <title>Terms Of Use | Pianote</title>
     <meta property="og:title" content="Terms Of Use">
     <meta name="description" content="Please read this agreement carefully before accessing or using this web site.">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/terms/">
 
     @include('_partials.layout._tailwindcdn')

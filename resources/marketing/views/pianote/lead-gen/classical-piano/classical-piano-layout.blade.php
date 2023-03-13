@@ -6,7 +6,7 @@
     <meta property="og:title" content="Classical Piano Quick Start | Pianote">
     <meta name="description" content="Start playing beautiful classical piano with 4 easy lessons.">
     <meta property="og:description" content="Start playing beautiful classical piano with 4 easy lessons.">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/lead-gen/classical-piano/og-image2.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/og-image2.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/classical-piano">
 
 @endsection

@@ -30,9 +30,9 @@
                                 </div>
                             @endif
                             <picture>
-                                <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_550,q_auto:best/{{ $lesson['imgUrl'] }}">
-                                <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_500,q_auto:best/{{ $lesson['imgUrl'] }}">
-                                <img class="w-full" src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/{{ $lesson['imgUrl'] }}" alt="lesson-{{ $key + 1 }}">
+                                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=85/{{ $lesson['imgUrl'] }}">
+                                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['imgUrl'] }}">
+                                <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{ $lesson['imgUrl'] }}" alt="lesson-{{ $key + 1 }}">
                             </picture>
                         </div>
                     </div>
