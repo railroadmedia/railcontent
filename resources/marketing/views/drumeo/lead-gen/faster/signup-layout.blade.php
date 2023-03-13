@@ -113,7 +113,7 @@
                 These are the very same exercises Estepario uses to practice his speed <br class="hidden lg:inline">
                 & endurance on the kit. Now you can use them to improve yours!
             </p>
-            <div class="grid grid-cols-3 gap-6">
+            <div class="grid grid-cols-3 gap-6 mb-10 max-h-[800px] overflow-hidden">
                 @foreach($lessons as $key => $lesson)
                     <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
                         <img src="{{ $lesson['img'] }}" src="lesson thumbnail {{ $key+1 }}" />
@@ -126,6 +126,7 @@
                     </div>
                 @endforeach
             </div>
+            <span class="btn-secondary text-drumeo">Show all</span>
         </div>
     </section>
 
