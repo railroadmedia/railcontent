@@ -110,7 +110,7 @@ const handleCreate = () => {
     emit('onCancel');
     window.openplaylistmodal({
         modalType: 'create',
-        data: { ...props.content, hasAddItemCallback: true, additionalItems: additionalItems.value },
+        data: { ...props.content, brand: props.brand, hasAddItemCallback: true, additionalItems: additionalItems.value },
     });
     window.addItemCallback = function (playlistId) {
         handleSaveItem(playlistId);

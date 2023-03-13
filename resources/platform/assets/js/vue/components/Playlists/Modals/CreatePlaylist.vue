@@ -145,10 +145,10 @@
                     if (props.playlist.hasAddItemCallback) {
                         console.log(response.data)
                         window.addItemCallback(response.data.data[0].id)
-                    } else {
-                        //load Playlists
-                        playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);
-                    }  
+                    }
+                    //load Playlists 
+                    //TODO: Conditionally add this only when catalog is on page. 
+                    playlistsStore.getPlaylists({ brand: props.brand, page: playlistsStore.resultsPage, limit: null }, token);
                 }
             })
         }

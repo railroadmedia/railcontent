@@ -46,9 +46,9 @@
     >
         <div class="tw-pt-[12px]">
             
-            <CreatePlaylist mode="create" @onCloseModal="() => emit('onClosePlaylistsModal')" :modalProps="modalProps" :playlist="modalProps.data" v-if="modalProps.modalType === 'create'"  />
-            <CreatePlaylist mode="duplicate" @onCloseModal="() => emit('onClosePlaylistsModal')" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'duplicate'"  />
-            <CreatePlaylist mode="edit" @onCloseModal="() => emit('onClosePlaylistsModal')" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
+            <CreatePlaylist mode="create" @onCloseModal="() => emit('onClosePlaylistsModal')" :brand="brand" :modalProps="modalProps" :playlist="modalProps.data" v-if="modalProps.modalType === 'create'"  />
+            <CreatePlaylist mode="duplicate" @onCloseModal="() => emit('onClosePlaylistsModal')" :brand="brand" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'duplicate'"  />
+            <CreatePlaylist mode="edit" @onCloseModal="() => emit('onClosePlaylistsModal')" :brand="brand" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
             
 
             <DeleteModal v-if="modalProps.modalType === 'remove'"
@@ -83,7 +83,7 @@
                          :content="modalProps.content"
                 />
             </div>
-            <div v-if="modalProps.modalType === 'alreadyAddedItem'">
+            <div :brand="brand" v-if="modalProps.modalType === 'alreadyAddedItem'">
                 Already Added Item
             </div>
             <div v-if="modalProps.modalType === 'unpinPlaylists'">

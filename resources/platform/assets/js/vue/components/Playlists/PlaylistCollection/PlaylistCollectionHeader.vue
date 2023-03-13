@@ -12,6 +12,10 @@
             type: Number,
             default: 0
         },
+        brand: {
+            type: String, 
+            default: 'drumeo'
+        }
     });
 
     //-----------Reactive Data-----------//
@@ -24,6 +28,7 @@
     const handleCreatePlaylist = () => {
         window.openplaylistmodal({ 
             modalType: 'create', 
+            brand: props.brand,
             data: { 
                 name: '', 
                 category: 'My List', 

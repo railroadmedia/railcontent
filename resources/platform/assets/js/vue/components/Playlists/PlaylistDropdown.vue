@@ -172,7 +172,7 @@
     };
 
     const addToPlaylist = () => {
-        window.openplaylistmodal({ modalType: 'addItem', contentId: props.data.id, type: props.data.type });
+        window.openplaylistmodal({ modalType: 'addItem', brand: props.brand, contentId: props.data.id, type: props.data.type });
     }
 
     const editPlaylist = () => {

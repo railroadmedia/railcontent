@@ -74,7 +74,7 @@ export default {
      */
     getCurrentUserPlaylists(payload, token) {
         const playlistParams = {
-            "brand": "drumeo",
+            // "brand": "drumeo",
             "limit": null,
             "page": 1
         }
@@ -146,6 +146,7 @@ export default {
      *
      */
     pinPlaylist(id, brand = "drumeo", csrf_token) {
+        console.log('pinPlaylist')
         return axios.put(
             '/railcontent/pin-playlist',
             {
