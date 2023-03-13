@@ -138,7 +138,7 @@
                 alt="profile picture"
             >
             <div class="h-10 w-full sm:hidden" style="background: linear-gradient(to left top, #00101d calc(50% - 1px), transparent, transparent calc(50% + 1px));"></div>
-            <div class="text-white text-left rounded-none md:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-14 sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
+            <div class="text-white text-left rounded-none md:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-14 sm:mt-8 w-full sm:w-auto sm:flex-grow lg:max-w-xl" style="background-color:#00101d;">
                 <h6 class="uppercase text-drumeo leading-normal">MEET YOUR TEACHER</h6>
                 <h2><strong>El Estepario Siberiano</strong></h2>
                 <h6 class="leading-normal mt-4 lg:mt-6">
