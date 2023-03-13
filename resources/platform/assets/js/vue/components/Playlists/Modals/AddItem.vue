@@ -104,6 +104,8 @@ const handleSaveItem = () => {
             isLoadingPlaylists.value = false;
             handleCancel();
         });
+    } else {
+        handleCancel();
     }
 };
 const handleCreate = () => {
@@ -126,7 +128,6 @@ const handleScroll = (e) => {
 }
 
 const handleDuplicateConfirm = () => {
-    console.log('duplicate id', duplicateProps.value.id)
     addRemovePlaylistSelection(duplicateProps.value.id);
     handleDuplicateCancel();
 };
@@ -147,7 +148,6 @@ const getUserPlaylists = () => {
                 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 const month = months[dateCreated.getMonth()];
                 const formattedDate = `${month} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`;
-                console.log('item id:', user_playlist_item_id, 'is added:', is_added_to_playlist);
                 if(is_added_to_playlist) {
                     duplicatedItemIDs.push(String(id));
                     duplicatedItemIdNameMap.value = {

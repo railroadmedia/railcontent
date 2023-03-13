@@ -244,10 +244,10 @@ const handleCloseSoundslice = () => {
                             </div>
 
                             <div class="flex-row content-lesson-action-buttons">
-                                <ContentLessonActionButtons :theme-color="brand" :title="songTitle"
+                                <ContentLessonActionButtons :theme-color="brand" :title="songTitle" :description="songArtist"
                                     :instructors="instructors" :parent-title="parentTitle" :is-liked="isLiked"
                                     :like-count="likeCount" :is-added="isAdded" :content-id="contentId"
-                                    :user-id="userId" :resources="resources" content-type="song" />
+                                    :user-id="userId" :resources="resources" content-type="song" :thumbnailUrl="thumbnailUrl" />
                             </div>
                         </div>
                     </div>

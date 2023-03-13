@@ -161,6 +161,11 @@ export default {
             default: () => 'drumeo',
         },
 
+        thumbnailUrl: {
+            type: String,
+            default: ''
+        },
+
         title: {
             type: String,
             default: () => '',
@@ -210,6 +215,11 @@ export default {
             type: Array,
             default: () => [],
         },
+
+        description: {
+            type: String,
+            default: '',
+        }
     },
 
     data() {
@@ -273,7 +283,13 @@ export default {
 
         addToList() {
             //this.hasAdded = !this.hasAdded;
-            window.openplaylistmodal({ modalType: 'addItem', contentId: this.contentId, type: this.contentType });
+            window.openplaylistmodal({ modalType: 'addItem', content: {
+                content_id: this.contentId,
+                type: this.contentType,
+                name: this.title,
+                thumbnail_url: this.thumbnailUrl,
+                description: this.description,
+            } });
         },
 
         getResourceIcon(resource) {

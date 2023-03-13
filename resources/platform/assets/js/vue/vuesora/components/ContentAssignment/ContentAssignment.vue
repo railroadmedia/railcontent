@@ -349,7 +349,6 @@ export default {
     },
     methods: {
         addToPlaylist(data) {
-            console.log(data)
             window.openplaylistmodal({ modalType: 'addItem', brand: this.brand, content: data });
         },
 
