@@ -31,7 +31,7 @@ const isLoadingPlaylists = ref(false);
 const isLoadingAssignments = ref(false);
 const selectedPlaylists = ref([]);
 const showSongToggle = ref(false);
-const addFullSongToggle = ref(true);
+const addFullSongToggle = ref(false);
 const addInstrumentlessToggle = ref(false);
 const preventReFetch = ref(false);
 const duplicatedIDs = ref([]);
@@ -184,7 +184,8 @@ const getUserPlaylists = () => {
 onMounted(() => {
     isLoadingPlaylists.value = true;
     if (props.content.type === 'song') {
-        showSongToggle.value = true
+        showSongToggle.value = true;
+        addFullSongToggle.value = true;
     } else if (props.content.type !== 'Assignments') {
         isLoadingAssignments.value = true;
         PlaylistService.getAssignmentsForContent({ token, contentId: props.content.content_id, brand: props.brand }).then((r) => {
