@@ -36,7 +36,7 @@
     //Thumbnail
     const lessonThumbnail = computed( () => {
         const thumbnail = props.lesson.data.find(data => data.key === 'original_thumbnail_url');
-        return props.lesson.thumbnail_url || thumbnail.value;
+        return thumbnail ? thumbnail.value : props.lesson.thumbnail_url;
     })
     //Description
     const lessonDescription = computed( () => {
@@ -81,7 +81,15 @@
         }
     ]
 
+    const lessonDate = Date.parse(props.lesson.published_on_in_timezone );
+
+    const dateNow = Date.now();
+
     //-----------Methods-----------//
+
+    const released = () => {
+        return lessonDate < dateNow;
+    }
 
     //Format Duration (in seconds)
     const duration_formatted = (seconds) => {
@@ -125,7 +133,6 @@
     //-----------Lifecycle Methods-----------//
 
     onBeforeMount(() => {
-        // console.log(props.lesson);
         state.isPinned = props.lesson.pinned;
         state.isPrivate = props.lesson.private;
     });
@@ -163,6 +170,15 @@
                              alt="playlist thumbnail"
                         >
                     </div>
+                </div>
+
+                <!-- Release Date -->
+                <div v-if="!released" class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/80 tw-flex tw-flex-col tw-items-center tw-justify-center">
+                    <p class="tw-text-xs text-white font-bold">
+                        {{ day }},
+                        <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber }}</span>
+                    </p>
+                    <p class="tw-text-xs text-white">{{ time }}</p>
                 </div>
             </div>
 
