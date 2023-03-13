@@ -5,11 +5,7 @@ namespace Railroad\Railcontent\Commands;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
-use Illuminate\Database\Query\Builder;
-use Illuminate\Database\Query\JoinClause;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Schema;
 
 class MigrateUserPlaylistToV2 extends Command
 {
@@ -27,16 +23,10 @@ class MigrateUserPlaylistToV2 extends Command
      */
     protected $description = 'Migrate user playlists to the new v2 structure';
 
-    /**
-     * @var DatabaseManager
-     */
-    private $databaseManager;
+    private DatabaseManager $databaseManager;
 
     /**
-     * MigrateUserPlaylist constructor.
-     *
      * @param DatabaseManager $databaseManager
-     * @param UserProviderInterface $userProvider
      */
     public function __construct(
         DatabaseManager $databaseManager
@@ -121,6 +111,7 @@ class MigrateUserPlaylistToV2 extends Command
                                 'railcontent_content.id',
                                 'railcontent_content.type',
                                 'railcontent_content.status',
+                                'railcontent_content.slug',
                                 'railcontent_user_playlist_content.*'
                             )
                             ->leftJoin(
@@ -139,6 +130,7 @@ class MigrateUserPlaylistToV2 extends Command
                         $position = 1;
                         $newItems = [];
                         $shouldBeRemoved = [];
+                        $ids = [];
                         foreach ($items as $item) {
                             if (in_array($item->type, [
                                 'course-part',
@@ -182,7 +174,7 @@ class MigrateUserPlaylistToV2 extends Command
                                 'play-along-part',
                                 'student-review',
                                 'song-tutorial-children',
-                                'unit-part'
+                                'unit-part',
                             ])) {
                                 $item->position = $position;
                                 $itemsOrdered[] = $item;
@@ -214,7 +206,10 @@ class MigrateUserPlaylistToV2 extends Command
                                     $position++;
                                 }
                                 $shouldBeRemoved[] = $item->content_id;
-                            } elseif (($item->type == 'learning-path-level') || ($item->type == 'pack')) {
+                            } elseif (($item->type == 'learning-path-level') ||
+                                ($item->type == 'pack') ||
+                                ($item->slug == 'singeo-method') ||
+                                ($item->slug == 'guitareo-method')) {
                                 $lessons =
                                     $dbConnection->table('railcontent_content_hierarchy as ch_1')
                                         ->select([
@@ -230,6 +225,38 @@ class MigrateUserPlaylistToV2 extends Command
                                         ->orderBy('ch_2.child_position', 'asc')
                                         ->get();
 
+                                foreach ($lessons as $lesson) {
+                                    $newItems[] = [
+                                        'content_id' => $lesson->child_id,
+                                        'user_playlist_id' => $item->user_playlist_id,
+                                        'position' => $position,
+                                        'created_at' => $item->created_at,
+                                        'extra_data' => null,
+                                    ];
+                                    $position++;
+                                }
+                                $shouldBeRemoved[] = $item->content_id;
+                            } elseif (($item->slug == 'drumeo-method') || ($item->slug == 'pianote-method')) {
+                                $lessons =
+                                    $dbConnection->table('railcontent_content_hierarchy as ch_1')
+                                        ->select([
+                                                     'ch_3.child_id as child_id',
+                                                 ])
+                                        ->join(
+                                            'railcontent_content_hierarchy as ch_2',
+                                            'ch_2.parent_id',
+                                            '=',
+                                            'ch_1.child_id'
+                                        )
+                                        ->join(
+                                            'railcontent_content_hierarchy as ch_3',
+                                            'ch_3.parent_id',
+                                            '=',
+                                            'ch_2.child_id'
+                                        )
+                                        ->where('ch_1.parent_id', $item->content_id)
+                                        ->orderBy('ch_3.child_position', 'asc')
+                                        ->get();
                                 foreach ($lessons as $lesson) {
                                     $newItems[] = [
                                         'content_id' => $lesson->child_id,
@@ -264,6 +291,7 @@ class MigrateUserPlaylistToV2 extends Command
                                         ',"'.
                                         $itemOrder->created_at.
                                         '"),';
+                                    $ids[] = $itemOrder->content_id;
                                 }
                             }
                             $statement = rtrim($statement, ',');
@@ -286,6 +314,7 @@ class MigrateUserPlaylistToV2 extends Command
                                         ',"'.
                                         $item['created_at'].
                                         '"),';
+                                    $ids[] = $item['content_id'];
                                 }
                             }
                             $statement = rtrim($statement, ',');
@@ -298,8 +327,40 @@ class MigrateUserPlaylistToV2 extends Command
                                 ->whereIn('content_id', $shouldBeRemoved)
                                 ->delete();
                         }
-                    }
 
+                        $duration =
+                            $dbConnection->table('railcontent_content_fields')
+                                ->selectRaw(
+                                    'sum(length_in_seconds) as duration',
+                                )
+                                ->join(
+                                    'railcontent_content',
+                                    'railcontent_content_fields.value',
+                                    '=',
+                                    'railcontent_content.id'
+                                )
+                                ->whereIn('content_id', $ids)
+                                ->where('railcontent_content_fields.key', '=', 'video')
+                                ->orderBy('railcontent_content_fields.id', 'asc')
+                                ->first();
+
+                        $sql = <<<'EOT'
+        UPDATE `%s` cs
+        SET cs.`type` = '%s', cs.name = '%s', cs.duration = '%s'
+        where cs.id = '%s'
+        
+        EOT;
+
+                        $statement = sprintf(
+                            $sql,
+                            config('railcontent.table_prefix').'user_playlists',
+                            'user-playlist',
+                            'My List',
+                            $duration->duration ?? 0,
+                            $row->id
+                        );
+                        $dbConnection->statement($statement);
+                    }
                 }
                 $total += 5000;
                 $this->info(
@@ -330,20 +391,6 @@ class MigrateUserPlaylistToV2 extends Command
             Carbon::now()
                 ->toDateTimeString()
         );
-
-                $sql = <<<'EOT'
-        UPDATE `%s` cs
-        SET cs.`type` = '%s', cs.name = '%s'
-        
-        EOT;
-
-                $statement = sprintf(
-                    $sql,
-                    config('railcontent.table_prefix').'user_playlists',
-                    'user-playlist',
-                    'My List'
-                );
-                $dbConnection->statement($statement);
 
         $finish = microtime(true) - $start;
         $format = "Finished user playlist data migration  in total %s seconds\n ";
