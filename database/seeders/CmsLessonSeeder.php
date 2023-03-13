@@ -481,7 +481,7 @@ class CmsLessonSeeder extends Seeder
                 "brand" => 1,
                 "product_type_id" => 1,
                 "name" => "Drumming System",
-                "slug" => "drumming-system-discount",
+                "slug" => "drumming-system",
                 "sku" => "DSYS2-DIGI",
                 "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/drumming-system-2.jpg",
                 "meta_desc" => "",
