@@ -113,7 +113,7 @@
                 These are the very same exercises Estepario uses to practice his speed <br class="hidden lg:inline">
                 & endurance on the kit. Now you can use them to improve yours!
             </p>
-            <div class="grid grid-cols-3 gap-6 mb-10 max-h-[800px] overflow-hidden">
+            <div x-ref="lessons" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-md mx-auto md:max-w-full {{-- max-h-[800px] --}} overflow-hidden transition-all duration-300">
                 @foreach($lessons as $key => $lesson)
                     <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
                         <img src="{{ $lesson['img'] }}" src="lesson thumbnail {{ $key+1 }}" />
@@ -126,9 +126,53 @@
                     </div>
                 @endforeach
             </div>
-            <span class="btn-secondary text-drumeo">Show all</span>
+            <span class="btn-secondary text-drumeo" @click="console.log('click')">Show all</span>
         </div>
     </section>
+
+    <section class="py-12 md:py-20" style="background: radial-gradient(34.53% 68.28% at 31.51% 33.16%, #FFEBDD 0%, #E2E7F0 100%)">
+        <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8 md:px-4 lg:px-0">
+            <img
+                class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-16 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10"
+                src="https://drumeo-assets.s3.amazonaws.com/lead-gen/fwtgf/coach.jpg"
+                alt="profile picture"
+            >
+            <div class="h-10 w-full sm:hidden" style="background: linear-gradient(to left top, #00101d calc(50% - 1px), transparent, transparent calc(50% + 1px));"></div>
+            <div class="text-white text-left rounded-none md:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-14 sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
+                <h6 class="uppercase text-drumeo leading-normal">MEET YOUR TEACHER</h6>
+                <h2><strong>El Estepario Siberiano</strong></h2>
+                <h6 class="leading-normal mt-4 lg:mt-6">
+                    Estepario Siberiano has pushed the boundaries of drumming.<br><br>
+
+                    He’s inspired millions of people with his dedication, talent, and innovation – playing at speeds (with one AND two hands) that were thought to be impossible. And always applying these skills in a musical context – not just playing fast for the sake of playing fast.<br><br>
+
+                    He’s developed key exercises that have helped him play at these speeds – and now he’s here to teach you!
+                </h6>
+                <div class="flex justify-between text-center mt-7 lg:mt-10">
+                    <div class="">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
+                        <h3 class="mt-2"><strong>2.2M</strong></h3>
+                        <p class="uppercase opacity-70 text-sm">Followers</p>
+                    </div>
+                    <div class="">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
+                        <h3 class="mt-2"><strong>948k</strong></h3>
+                        <p class="uppercase opacity-70 text-sm">followers</p>
+                    </div>
+                    <div class="">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://cdn.musora.com/image/fetch/w_100,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
+                        <h3 class="mt-2"><strong>224M</strong></h3>
+                        <p class="uppercase opacity-70 text-sm">views</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @include('drumeo.lead-gen.partials.quick-questions', [
+        'textColor' => 'black',
+        'bgColor' => 'white'
+    ])
 
     @include('drumeo.lead-gen.partials.enter-email1',[
         "headLine" => "Enter your email below for 10 free video lessons...",
