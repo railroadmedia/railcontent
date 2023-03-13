@@ -46,6 +46,7 @@
                 @endif
 
                 <page-container 
+                    csrf_token="{{ csrf_token() }}"
                     brand="{{ $brand }}" 
                     :is-live="{{ !empty($coachEvent) }}"
                     :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}

@@ -176,8 +176,8 @@
                             icon: 'fa-pen-to-square',
                             text: `Your playlist was successfully edited`
                         })
-                        //load Playlists (if mini catalog has less than 5 and not detail page - use activePlaylist )
-                        if( Object.keys(playlistsStore.activePlaylist).length === 0 ) {
+                        //load Playlists (if collection catalog exists)
+                        if( playlistsStore.pageHasPlaylistCatalog ) {
                             playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);     
                         }
                     } else {
@@ -203,7 +203,9 @@
                             text: `The playlist was successfully duplicated.`
                         })
                         //load Playlists
-                        playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
+                        if( playlistsStore.pageHasPlaylistCatalog ) {
+                            playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
+                        }
                     } else {
                         console.log('duplicate response code', response)
                     }
