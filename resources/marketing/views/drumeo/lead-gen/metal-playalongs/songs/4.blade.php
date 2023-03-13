@@ -16,9 +16,9 @@
     /metal-playalongs/songs/5
 @stop
 
-@section('prev-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Double+Bass.jpg')
+@section('prev-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Double+Bass.jpg')
 
-@section('next-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Hypnotized.jpg')
+@section('next-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Hypnotized.jpg')
 
 @section('assets')
     @include('drumeo.lead-gen.partials._assignment-resources', [

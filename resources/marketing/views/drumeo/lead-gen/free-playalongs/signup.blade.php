@@ -5,7 +5,7 @@
     <meta property="og:title" content="9 FREE PLAY-ALONGS | Drumeo">
     <meta name="description" content="Add your drumming to nine high-quality drum play-along tracks. (FREE).">
     <meta property="og:description" content="Add your drumming to nine high-quality drum play-along tracks. (FREE).">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/free-playalongs/">
 
     @include('_partials.layout._fonts')
@@ -22,10 +22,10 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
     <header class="text-white relative overflow-hidden text-center py-24 md:py-44 lg:py-52 px-4 md:px-6" style="background-color:#0c3361;">
-        <video class="object-cover h-full w-full absolute top-0 left-0 right-0 bottom-0 z-0" poster="" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/header.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+        <video class="object-cover h-full w-full absolute top-0 left-0 right-0 bottom-0 z-0" poster="" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/header.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         <div class="h-full w-full absolute top-0 left-0 right-0 bottom-0 z-10" style="    background: linear-gradient(to bottom, rgba(18, 80, 161, 0.3) 0%, rgba(5, 46, 87, 0.9) 100%);"></div>
         <div class="container mx-auto relative z-20">
-            <img class="h-16 md:h-28 lg:h-36" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/logo.svg" alt="play-along-logo">
+            <img class="h-16 md:h-28 lg:h-36" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/logo.svg" alt="play-along-logo">
             <h6 class="leading-normal my-5">Add your drumming to nine high-quality drumless play-along tracks.</h6>
             <div class="mx-auto text-center max-w-2xl">
                 @include("drumeo.lead-gen.partials.sign-up-form-tw", [
@@ -46,47 +46,47 @@
                 @php
                     $bonuses = [
                         [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/thomas-pridgen-hypnotized.png',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/thomas-pridgen-hypnotized.png',
                         'descriptions' => 'A heavy prog-rock tune with plenty of room to add your biggest fills.',
                         'artist' => 'Thomas Pridgen',
                         ],
                         [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/kaz-rodriguez-drum-e-o.png',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/kaz-rodriguez-drum-e-o.png',
                         'descriptions' => 'Kaz has created play-alongs for the best drummers in the world -- now it’s your turn!',
                         'artist' => 'Kaz Rodriguez',
                         ],
                         [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/todd-sucherman-just-a-second.png',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/todd-sucherman-just-a-second.png',
                         'descriptions' => 'A pop-rock banger begging for your best back beat to drive the song. ',
                         'artist' => 'Todd Sucherman',
                         ],
                         [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/jost-nickel-the-check-in.png',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/jost-nickel-the-check-in.png',
                         'descriptions' => 'Contemporary funk with a few odd-time curve balls -- keep your head up!',
                         'artist' => 'Jost Nickel',
                         ],
                         [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/Rashid-williams-Rock-out.png',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/Rashid-williams-Rock-out.png',
                         'descriptions' => 'Get creative with this straight-ahead rock jam for all levels.',
                         'artist' => 'Rashid Williams',
                         ],
                         [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/Raghav-mehrotra-funky-nasa.png',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/Raghav-mehrotra-funky-nasa.png',
                         'descriptions' => 'Put your groove to the test with this mid-tempo funk track.',
                         'artist' => 'Raghav Mehrotra',
                         ],
                         [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/sarah-thawer-straight-reggae.png',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/sarah-thawer-straight-reggae.png',
                         'descriptions' => 'Turn the beat around with a stanky reggae groove -- is your crosstick ready?',
                         'artist' => 'Sarah Thawer',
                         ],
                         [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/glen-sobel-7-8-rock.png',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/glen-sobel-7-8-rock.png',
                         'descriptions' => 'A brain-busting odd-time rock song to test your feel & metre.',
                         'artist' => 'Glen Sobel',
                         ],
                         [
-                        'image' => 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/tony-coleman-shuffle.png',
+                        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/tony-coleman-shuffle.png',
                         'descriptions' => 'Give your shuffle a workout in this eponymous blues jam.',
                         'artist' => 'Tony Coleman',
                         ],
@@ -96,7 +96,7 @@
                     <div class="w-1/2 sm:w-1/3 px-2 md:px-3 mb-5 md:mb-7">
                         <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md" data-open="signUpModal">
                             <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;"></i>
-                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_470,q_auto:best/{{ $bonus['image'] }}"></div>
+                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=85/{{ $bonus['image'] }}"></div>
                         </div>
                         <h5 class="mt-3 mb-1"><strong>w/ {{ $bonus['artist'] }}</strong></h5>
                         <p class="text-light-navy leading-tight">{{ $bonus['descriptions'] }}</p>
@@ -111,7 +111,7 @@
             <div class="flex flex-wrap items-center justify-center max-w-4xl mx-auto">
                 <div class="w-full md:w-1/2 px-3 lg:px-5 mb-12">
                     <div class="flex">
-                        <img class="w-10" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/skills_icon.svg" alt="skill-icon">
+                        <img class="w-10" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/skills_icon.svg" alt="skill-icon">
                         <div class="text-left pl-5">
                             <h5 class="leading-normal uppercase"><strong>All skill levels.</strong></h5>
                             <p class="leading-tight">Get started with a beginner track OR dive into a more advanced song.</p>
@@ -120,7 +120,7 @@
                 </div>
                 <div class="w-full md:w-1/2 px-3 lg:px-5 mb-12">
                     <div class="flex">
-                        <img class="w-10" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/drums_icon.svg" alt="drum-icon">
+                        <img class="w-10" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/drums_icon.svg" alt="drum-icon">
                         <div class="text-left pl-5">
                             <h5 class="leading-normal uppercase"><strong>Nine drum-less tracks.</strong></h5>
                             <p class="leading-tight">Hear exactly how your playing fits the music with no other drums.</p>
@@ -129,7 +129,7 @@
                 </div>
                 <div class="w-full md:w-1/2 px-3 lg:px-5 mb-12">
                     <div class="flex">
-                        <img class="w-10" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/videos_icon.svg" alt="video-icon">
+                        <img class="w-10" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/videos_icon.svg" alt="video-icon">
                         <div class="text-left pl-5">
                             <h5 class="leading-normal uppercase"><strong>Pro reference videos.</strong></h5>
                             <p class="leading-tight">Get new ideas watching a professional drummer play the same song.</p>
@@ -138,7 +138,7 @@
                 </div>
                 <div class="w-full md:w-1/2 px-3 lg:px-5 mb-12">
                     <div class="flex">
-                        <img class="w-10" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/metronome_icon.svg" alt="metronome-icon">
+                        <img class="w-10" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/metronome_icon.svg" alt="metronome-icon">
                         <div class="text-left pl-5">
                             <h5 class="leading-normal uppercase"><strong>Playback tools.</strong></h5>
                             <p class="leading-tight">Add or remove the metronome to help you count out every section.</p>
@@ -147,7 +147,7 @@
                 </div>
                 <div class="w-full md:w-1/2 px-3 lg:px-5 mb-12 md:mb-0">
                     <div class="flex">
-                        <img class="w-10" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/songcharts_icon.svg" alt="songchart-icon">
+                        <img class="w-10" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/songcharts_icon.svg" alt="songchart-icon">
                         <div class="text-left pl-5">
                             <h5 class="leading-normal uppercase"><strong>Follow along in real time.</strong></h5>
                             <p class="leading-tight">You’ll also have downloadable charts to bring to your kit.</p>
@@ -156,7 +156,7 @@
                 </div>
                 <div class="w-full md:w-1/2 px-3 lg:px-5">
                     <div class="flex">
-                        <img class="w-10" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/styles_icon.svg" alt="style-icon">
+                        <img class="w-10" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/styles_icon.svg" alt="style-icon">
                         <div class="text-left pl-5">
                             <h5 class="leading-normal uppercase"><strong>All different styles.</strong></h5>
                             <p class="leading-tight">Odd-time, reggae, blues - expand your skills into a new genre!</p>
@@ -172,9 +172,9 @@
         "textColor" => "white"
     ])
 
-    <section class="text-white text-center py-10 md:py-28 px-4 md:px-6" style="background: #062342 url(https://cdn.musora.com/image/fetch/w_1900,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/order_background.jpg) center bottom/cover;">
+    <section class="text-white text-center py-10 md:py-28 px-4 md:px-6" style="background: #062342 url(https://www.musora.com/musora-cdn/image/width=1900,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/order_background.jpg) center bottom/cover;">
         <div class="container mx-auto">
-            <img class="h-16 md:h-28 lg:h-36" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/logo.svg" alt="free-playalongs-icon">
+            <img class="h-16 md:h-28 lg:h-36" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/logo.svg" alt="free-playalongs-icon">
             <h6 class="leading-normal my-5">Add your drumming to nine high-quality drumless play-along tracks.</h6>
             <div class="mx-auto text-center max-w-2xl">
                 @include("drumeo.lead-gen.partials.sign-up-form-tw", [

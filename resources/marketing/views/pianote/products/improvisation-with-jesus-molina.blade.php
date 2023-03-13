@@ -9,7 +9,7 @@
     <meta property="og:description" content="Get inside the mind of one of the world’s best improvisers">
 
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/fb_share_image.jpg" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/fb_share_image.jpg" style="display: none;">
 
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
@@ -102,7 +102,7 @@
     <header class="header text-white relative overflow-hidden z-10" style="background: rgba(38, 13, 15, 0.7);">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 sm:px-6 text-center">
             <div class="container mx-auto max-w-6xl">
-                <img class="h-20 sm:h-28 lg:h-32 mb-64 sm:mb-80" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Logo.png" alt="Improvisation logo">
+                <img class="h-20 sm:h-28 lg:h-32 mb-64 sm:mb-80" src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Logo.png" alt="Improvisation logo">
                 <h2 class="leading-tight max-w-xs sm:max-w-md lg:max-w-2xl mx-auto sm:text-3xl lg:text-4xl"><strong>Get inside the mind of one of the world’s best improvisers</strong></h2>
                 <p class="leading-normal mt-2 sm:mt-3 mb-4 sm:mb-5">Learn from the master himself in <br class="inline sm:hidden"> this exclusive course from Pianote</p>
                 <a href="{{ $annualLink }}" class="join blue w-1/2">Get Started</a>
@@ -117,7 +117,7 @@
         <div class="container mx-auto max-w-xl lg:max-w-6xl">
             {{--<div class="text-black text-left border-4 rounded-xl p-3 sm:py-7 sm:px-10 mb-7 sm:mb-14 inline-block" style="background-color:#fff8f9;border-color:#3f4850;">--}}
             {{--<div class="flex flex-wrap sm:flex-nowrap items-center justify-center mx-auto">--}}
-            {{--<img class="mb-2 sm:mb-0 h-10 sm:h-14 lazyload" data-src="https://cdn.musora.com/image/fetch/w_160,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/pianote-coaches-logo.png">--}}
+            {{--<img class="mb-2 sm:mb-0 h-10 sm:h-14 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/pianote-coaches-logo.png">--}}
             {{--<p class="w-full sm:w-auto leading-tight pl-3 sm:pl-5 m-0"><strong>Jesús Molina’s coach feature--}}
             {{--@if(Carbon\Carbon::create(2022, 5, 24, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())--}}
             {{--& live event are--}}
@@ -148,7 +148,7 @@
             </div>
         </div>
     </section>
-    <section class="px-4 lg:px-6 py-10 md:py-12 md:py-14 text-white text-center overflow-hidden bg-center bg-cover lazyload" style="background-color:#010d17;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Thumbnail_BG.jpg">
+    <section class="px-4 lg:px-6 py-10 md:py-12 md:py-14 text-white text-center overflow-hidden bg-center bg-cover lazyload" style="background-color:#010d17;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Thumbnail_BG.jpg">
         <div class="container mx-auto max-w-6xl">
             <h2><strong>How to improvise, step-by-step</strong></h2>
             <h6 class="mt-1 mb-10"><em>But in a fun way</em></h6>
@@ -169,7 +169,7 @@
                     <strong>Here’s how:</strong></p>
                 <div class="w-full sm:w-1/2 px-2 mt-5 sm:mt-0">
                     <div class="rounded-xl overflow-hidden" style="background-color:#061b30;">
-                        <div class="relative aspect-16:9 bg-cover bg-center cursor-pointer autoplay-video lazyload" data-open="molinaTrailer" data-bg="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/what-is-improv-no-play.jpg">
+                        <div class="relative aspect-16:9 bg-cover bg-center cursor-pointer autoplay-video lazyload" data-open="molinaTrailer" data-bg="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/what-is-improv-no-play.jpg">
                             <i class="absolute z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller"></i>
                         </div>
                         <p class="p-6">Think you can’t improvise? Jesús Molina is here to bust that myth. You’ll discover how to think about improvisation in a new way.</p>
@@ -179,13 +179,13 @@
             <div class="flex flex-wrap text-left mb-3">
                 <div class="w-full sm:w-1/2 mb-5 sm:mb-0 px-2">
                     <div class="rounded-xl overflow-hidden" style="background-color:#061b30;">
-                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Classical.jpg"></div>
+                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Classical.jpg"></div>
                         <p class="p-6">Classical improvisation? It sounds like a contradiction, but when you hear Jesús talk about this theme, you’ll be inspired to start making classical-sounding music.</p>
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 px-2">
                     <div class="rounded-xl overflow-hidden" style="background-color:#061b30;">
-                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Jazz_improv.jpg"></div>
+                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Jazz_improv.jpg"></div>
                         <p class="p-6">Get ready to play “Happy Birthday” like you’ve never played it before. Jesús will break down step-by-step, bar-by-bar how he makes this classic sound jazzy.</p>
                     </div>
                 </div>
@@ -193,19 +193,19 @@
             <div class="flex flex-wrap text-left">
                 <div class="w-full sm:w-1/3 mb-5 sm:mb-0 px-2 sm:px-1">
                     <div class="rounded-xl overflow-hidden" style="background-color:#061b30;">
-                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Latin_improv.jpg"></div>
+                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Latin_improv.jpg"></div>
                         <p class="p-5">Discover the iconic rhythms and melodies unique to Latin music, and how to use them to transform any song.</p>
                     </div>
                 </div>
                 <div class="w-full sm:w-1/3 mb-5 sm:mb-0 px-2 sm:px-1">
                     <div class="rounded-xl overflow-hidden" style="background-color:#061b30;">
-                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Stride.jpg"></div>
+                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Stride.jpg"></div>
                         <p class="p-5">Learn the basics of Stride, and how to start improvising over new, powerful left hand.</p>
                     </div>
                 </div>
                 <div class="w-full sm:w-1/3 px-2 sm:px-1">
                     <div class="rounded-xl overflow-hidden" style="background-color:#061b30;">
-                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Power_ballad.jpg"></div>
+                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Power_ballad.jpg"></div>
                         <p class="p-5">Unlock an entire world of possibilities on the piano with just a little knowledge (and one interval).</p>
                     </div>
                 </div>
@@ -227,13 +227,13 @@
             <div class="flex flex-wrap text-left">
                 <div class="w-full sm:w-1/2 mb-5 sm:mb-0 px-2">
                     <div class="rounded-xl overflow-hidden" style="background-color:#061b30;">
-                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/How_to_practice.jpg"></div>
+                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/How_to_practice.jpg"></div>
                         <p class="p-6">Imagine if your daily practice sessions were the most effective they could be. Jesús will show you how to make every minute count, so you’ll never waste time at the keys, and you’ll get better faster.</p>
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 px-2">
                     <div class="rounded-xl overflow-hidden" style="background-color:#061b30;">
-                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Six_month_plan.jpg"></div>
+                        <div class="relative aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Six_month_plan.jpg"></div>
                         <p class="p-6">How did Jesús get so good? This is how. For the first time, he’s revealing his detailed, 6-month practice methodology. This is your roadmap to better playing, and musical freedom.</p>
                     </div>
                 </div>
@@ -250,8 +250,8 @@
     {{--<a class="join smaller" href="{{ $annualLink }}">Get Started</a>--}}
     {{--</div>--}}
     {{--</div>--}}
-    {{--<div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden lazyload" data-bg="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Live_BG_mobile.jpg"></div>--}}
-    {{--<div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block lazyload" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Live_chat.jpg"></div>--}}
+    {{--<div class="inset-0 absolute z-0 bg-top bg-cover block sm:hidden lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Live_BG_mobile.jpg"></div>--}}
+    {{--<div class="inset-0 absolute z-0 bg-top bg-cover hidden sm:block lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Live_chat.jpg"></div>--}}
     {{--</section>--}}
 
     <div id="lessons" class="anchor"></div>
@@ -261,7 +261,7 @@
             <h6 class="mt-1 mb-7"><em>All the tools at your fingertips.</em></h6>
 
             <div class="flex flex-wrap sm:flex-nowrap items-center text-left mb-8 sm:mb-16">
-                <img class="h-44 sm:h-56 lg:h-72 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Fully_transcribed_lessons.jpg" alt="Fully transcribed lesson image">
+                <img class="h-44 sm:h-56 lg:h-72 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Fully_transcribed_lessons.jpg" alt="Fully transcribed lesson image">
                 <div class="w-full sm:w-1/2 sm:pl-10">
                     <h4 class="mx-0 mb-3 text-center sm:text-left"><strong>Fully transcribed lessons.</strong></h4>
                     <p class="text-light-navy max-w-xs sm:max-w-full">Every lesson has been transcribed for you. You won’t just listen to Jesús talk, you’ll play with him, and get downloadable sheet music of everything he plays.</p>
@@ -286,7 +286,7 @@
     <section class="px-6 sm:px-8 py-8 md:py-10 md:py-12 text-white text-center overflow-hidden lazyload" style="background:linear-gradient(to right, #7d182c, #560314);">
         <div class="container mx-auto max-w-4xl">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <img class="h-48 sm:h-56 lg:h-72 mx-auto border-4 lg:border-8 rounded-full" src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Jesus_Molina_profile.jpg" alt="Jesus Molina profile">
+                <img class="h-48 sm:h-56 lg:h-72 mx-auto border-4 lg:border-8 rounded-full" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Jesus_Molina_profile.jpg" alt="Jesus Molina profile">
                 <div class="w-full sm:w-auto mt-7 sm:mt-0 sm:pl-7 lg:pl-14 sm:text-left">
                     <h4 class="leading-normal"><em>“You are not limited. If you think you don’t have musicality in you - that’s the biggest mistake you can make.”</em>
                         <br><br>
@@ -298,23 +298,23 @@
     {{--<section class="px-6 sm:px-5 lg:px-6 py-10 md:py-12 md:py-14 text-white text-center overflow-hidden" style="background:linear-gradient(to bottom, #01050f 60%, #021124);">--}}
     {{--<div class="container mx-auto max-w-6xl">--}}
     {{--<p class="text-sm text-pianote mb-1"><em><strong>Exclusively</strong> available inside</em></p>--}}
-    {{--<img class="h-12 sm:h-14 lg:h-16" src="https://cdn.musora.com/image/fetch/w_420,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png">--}}
+    {{--<img class="h-12 sm:h-14 lg:h-16" src="https://www.musora.com/musora-cdn/image/width=420,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png">--}}
     {{--<h3 class="leading-tight my-2 md:my-4"><strong>Achieve musical freedom<br class="inline sm:hidden"> on the piano.</strong></h3>--}}
     {{--<p class="text-light-navy mb-8 md:mb-10">--}}
     {{--In addition to Jesús Molina’s coach feature, you’ll develop your skills on the piano <br class="hidden sm:inline">--}}
     {{--through lessons, songs, and personal support from the best piano players in the world. </p>--}}
     {{--<div class="md:grid md:grid-cols-3 md:gap-4 mx-auto">--}}
     {{--<div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#051124;">--}}
-    {{--<div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/method-thumbs.jpg"></div>--}}
+    {{--<div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/method-thumbs.jpg"></div>--}}
     {{--<div class="px-4 lg:px-6 py-5 lg:py-7">--}}
-    {{--<img class="h-8 icon imgfilter-coaches" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon">--}}
+    {{--<img class="h-8 icon imgfilter-coaches" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon">--}}
     {{--<img class="h-5 ml-2 imgfilter-coaches lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">--}}
     {{--<h4 class="leading-tight my-3"><strong>Motivation <br class="hidden md:inline"> & Support</strong></h4>--}}
     {{--<p class="leading-normal text-light-navy">From the big stage straight to your living room – you’ll get weekly live events, lessons, and personal feedback from incredible artists as they guide and support you every step of the way on your piano journey. </p>--}}
     {{--</div>--}}
     {{--</div>--}}
     {{--<div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#051124;">--}}
-    {{--<div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/coaches-thumbs.jpg"></div>--}}
+    {{--<div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/coaches-thumbs.jpg"></div>--}}
     {{--<div class=" px-4 lg:px-6 py-5 lg:py-7">--}}
     {{--<i class="text-4xl align-middle fal fa-piano text-pianote"></i>--}}
     {{--<img class="h-5 ml-2 imgfilter-method lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method-text">--}}
@@ -323,7 +323,7 @@
     {{--</div>--}}
     {{--</div>--}}
     {{--<div class="relative rounded-xl overflow-hidden" style="background-color:#051124;">--}}
-    {{--<div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/songs-thumbs.jpg"></div>--}}
+    {{--<div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/songs-thumbs.jpg"></div>--}}
     {{--<div class="px-4 lg:px-6 py-5 lg:py-7">--}}
     {{--<i class="text-4xl align-middle icon-songs text-songs"></i>--}}
     {{--<img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">--}}
@@ -340,65 +340,65 @@
     {{--@php--}}
     {{--$topics = [--}}
     {{--[--}}
-    {{--'logo' => 'https://pianote.s3.amazonaws.com/sales/jesus-molina/Logo.png',--}}
-    {{--'image' => 'https://pianote.s3.amazonaws.com/sales/2022/jesus-molina-card.jpg',--}}
+    {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Logo.png',--}}
+    {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/jesus-molina-card.jpg',--}}
     {{--'title' => 'Improvisation & Musical Freedom',--}}
     {{--'description' => 'Anyone can improvise. Even you! Learn from one of the world’s best as Jesús Molina shows you his “secret chord voicings” and other tips.',--}}
     {{--'artist' => 'Jesús  <strong>Molina</strong>',--}}
     {{--'classes' => 'border-4 border-pianote',--}}
     {{--],--}}
     {{--[--}}
-    {{--'logo' => 'https://pianote.s3.amazonaws.com/sales/2022/course-logo-classical.png',--}}
-    {{--'image' => 'https://pianote.s3.amazonaws.com/sales/2022/classical-piano-card2.jpg',--}}
+    {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/course-logo-classical.png',--}}
+    {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/classical-piano-card2.jpg',--}}
     {{--'title' => 'Classical Piano',--}}
     {{--'description' => 'Unlock the beauty of classical music with this course from world-class touring pianist, Victoria Theodore.',--}}
     {{--'artist' => 'Victoria  <strong>Theodore</strong>',--}}
     {{--],--}}
     {{--[--}}
-    {{--'logo' => 'https://pianote.s3.amazonaws.com/sales/2022/gospel-piano-logo.png',--}}
-    {{--'image' => 'https://pianote.s3.amazonaws.com/sales/2022/erskine-card.jpg',--}}
+    {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/gospel-piano-logo.png',--}}
+    {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/erskine-card.jpg',--}}
     {{--'title' => 'Gospel Piano',--}}
     {{--'description' => 'Get that “Gospel” sound from acclaimed touring pianist and musical director Erskine Hawkins. From beautiful chords to a stunning left hand, you’ll learn it all.',--}}
     {{--'artist' => 'Erskine  <strong>Hawkins</strong>',--}}
     {{--],--}}
     {{--[--}}
-    {{--'logo' => 'https://pianote.s3.amazonaws.com/sales/2022/course-logo-cocktail.png',--}}
-    {{--'image' => 'https://pianote.s3.amazonaws.com/sales/2022/cocktail-piano-card2.jpg',--}}
+    {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/course-logo-cocktail.png',--}}
+    {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/cocktail-piano-card2.jpg',--}}
     {{--'title' => 'Cocktail Piano For Beginners',--}}
     {{--'description' => 'Learn the chord progressions, songs, and improvisation techniques to start playing cocktail piano.',--}}
     {{--'artist' => 'Brett <strong>Ziegler</strong>',--}}
     {{--],--}}
     {{--[--}}
-    {{--'logo' => 'https://pianote.s3.amazonaws.com/products/play-beautiful-piano/logo-minimal.png',--}}
-    {{--'image' => 'https://pianote.s3.amazonaws.com/sales/2022/playing-beautiful-card2.jpg',--}}
+    {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/logo-minimal.png',--}}
+    {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/playing-beautiful-card2.jpg',--}}
     {{--'title' => 'The Beginners Guide To Playing Beautiful Piano',--}}
     {{--'description' => 'Start playing beautiful piano music from your very first lesson.',--}}
     {{--'artist' => 'Lisa <strong>Witt</strong>',--}}
     {{--],--}}
     {{--[--}}
-    {{--'logo' => 'https://pianote.s3.amazonaws.com/sales/2022/course-logo-latin.png',--}}
-    {{--'image' => 'https://pianote.s3.amazonaws.com/sales/2022/latin-piano-card2.jpg',--}}
+    {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/course-logo-latin.png',--}}
+    {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/latin-piano-card2.jpg',--}}
     {{--'title' => 'Latin Piano Essentials',--}}
     {{--'description' => 'Spice up your playing and learn five of the most influential Latin genres on the piano.',--}}
     {{--'artist' => 'Kevin <strong>Castro</strong>',--}}
     {{--],--}}
     {{--[--}}
     {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/logo-text-white.png',--}}
-    {{--'image' => 'https://pianote.s3.amazonaws.com/sales/2022/worship-card2.jpg',--}}
+    {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/worship-card2.jpg',--}}
     {{--'title' => 'Worship Piano',--}}
     {{--'description' => 'Start playing piano or keyboard in your church.',--}}
     {{--'artist' => 'Amberly <strong>Martz</strong>',--}}
     {{--],--}}
     {{--[--}}
     {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/piano-riffs-fills-logo.png',--}}
-    {{--'image' => 'https://pianote.s3.amazonaws.com/sales/2022/riffs-fills-card2.jpg',--}}
+    {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/riffs-fills-card2.jpg',--}}
     {{--'title' => 'Piano Riffs & Fills',--}}
     {{--'description' => 'Fill those spaces with piano riffs that will make you sound professional, polished ... and close to perfect.',--}}
     {{--'artist' => 'Lisa <strong>Witt</strong>',--}}
     {{--],--}}
     {{--[--}}
     {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/500-songs-logo.svg',--}}
-    {{--'image' => 'https://pianote.s3.amazonaws.com/sales/2022/500-songs-card2.jpg',--}}
+    {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/500-songs-card2.jpg',--}}
     {{--'title' => '500 Songs in 5 Days',--}}
     {{--'description' => 'Play the songs you love in this 5-day bootcamp that teaches you how to play almost any song.',--}}
     {{--'artist' => 'Lisa <strong>Witt</strong>',--}}
@@ -412,14 +412,14 @@
     {{--],--}}
     {{--[--}}
     {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/logo.png',--}}
-    {{--'image' => 'https://pianote.s3.amazonaws.com/sales/2022/faster-card2.jpg',--}}
+    {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/faster-card2.jpg',--}}
     {{--'title' => 'Faster Fingers',--}}
     {{--'description' => 'Your roadmap to success for increasing your speed on the keys so you can learn songs quicker and play them better.',--}}
     {{--'artist' => 'Lisa <strong>Witt</strong>',--}}
     {{--],--}}
     {{--[--}}
-    {{--'logo' => 'https://pianote.s3.amazonaws.com/sales/2022/essential-styles-logo.png',--}}
-    {{--'image' => 'https://pianote.s3.amazonaws.com/sales/2022/sangah-card.jpg',--}}
+    {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/essential-styles-logo.png',--}}
+    {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/sangah-card.jpg',--}}
     {{--'title' => 'Essential Styles',--}}
     {{--'description' => 'Pop, Jazz, Blues, Funk, Bossa Nova, and more. Sangha Noona can do it all, and she’ll help you discover new techniques to sound incredible in any style.',--}}
     {{--'artist' => 'Sangah <strong>Noona</strong>',--}}
@@ -435,11 +435,11 @@
     {{--<i class="fas fa-arrow-right text-4xl"></i><br>--}}
     {{--<p class="text-sm"><strong>DETAILS</strong></p>--}}
     {{--</div>--}}
-    {{--<div class="bg-image w-full bg-black bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_550,q_auto:best/{{ $topic['image'] }}"></div>--}}
+    {{--<div class="bg-image w-full bg-black bg-top bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=550,quality=85/{{ $topic['image'] }}"></div>--}}
     {{--<div class="absolute uppercase w-full bottom-3 md:bottom-5 z-10 text-shadow-4">--}}
     {{--@if(!empty($topic['logo']))--}}
     {{--<div class="px-6">--}}
-    {{--<img class="w-full h-12 md:h-16 object-contain lazyload" data-src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/{{ $topic['logo'] }}" alt="{!! $topic['title'] !!}">--}}
+    {{--<img class="w-full h-12 md:h-16 object-contain lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $topic['logo'] }}" alt="{!! $topic['title'] !!}">--}}
     {{--</div>--}}
     {{--@else--}}
     {{--<h3><strong> {!! $topic['title']  !!} </strong></h3>--}}
@@ -471,7 +471,7 @@
 
     <section class="px-4 sm:px-6 py-10 md:py-12 md:py-14 text-white text-center overflow-hidden" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
         <div class="container mx-auto max-w-4xl">
-            <img class="h-28 md:h-32 lazyload" data-src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png" alt="guarantee-badge">
+            <img class="h-28 md:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" alt="guarantee-badge">
 
             <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 "><strong>Test-drive your lessons for 90 days.</strong><br>
                 Zero risk.</h3>
@@ -494,11 +494,11 @@
     </section>
 
     <div id="customize-anchor" class="anchor"></div>
-    <section class="content-section px-3 sm:px-0 text-center customize relative z-50 overflow-hidden lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Order_BG.jpg">
+    <section class="content-section px-3 sm:px-0 text-center customize relative z-50 overflow-hidden lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Order_BG.jpg">
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center">
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5">
-                    <img class="h-16 md:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/Logo.png" alt="Improvisation logo">
+                    <img class="h-16 md:h-20 lg:h-24 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/Logo.png" alt="Improvisation logo">
                     <h4 class="leading-tight mt-2 md:mt-3"><strong>Learn from one of the world’s<br class="inline lg:hidden"> best for just <!--<s class="opacity-70">${{ floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price) }}</s>--> <span class="text-pianote">${{ floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->discounted_price) }}</span></strong></h4>
                     <p class="leading-tight mx-auto inline-block my-4 md:my-5"><em>Get Jesús Molina’s entire course for less than the cost of a single in-person piano lesson.</em></p>
                     <div class="w-full mx-auto sm:mx-0">
@@ -514,7 +514,7 @@
                     </div>
                 </div>
                 <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 mt-7 sm:mt-0">
-                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://cdn.musora.com/image/fetch/w_1400,q_auto:best/https://pianote.s3.amazonaws.com/sales/jesus-molina/order_collage.png" alt="Order collage">
+                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/order_collage.png" alt="Order collage">
                 </div>
             </div>
         </div>

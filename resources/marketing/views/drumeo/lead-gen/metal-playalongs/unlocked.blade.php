@@ -10,7 +10,7 @@
     <meta property="og:title" content="9 Metal Play-Alongs | Drumeo">
     <meta name="description" content="Add your drumming to nine heavy drum play-along tracks. (FREE).">
     <meta property="og:description" content="Add your drumming to nine heavy drum play-along tracks. (FREE).">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/metal-playalongs/">
 
     @include('_partials.layout._fonts')
@@ -29,16 +29,16 @@
     <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap z-10 py-2 sm:py-1 fixed mx-auto bg-black text-white">
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
-                <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
+                <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
                 <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$drumeoPlayAlongs }}+ more play-alongs + world-class drum  <br>
                     lessons inside Drumeo. Click for a FREE trial.</p>
             </div>
         </div>
     </a>
 
-    <header class="text-white text-center py-14 md:py-24 lg:py-32 px-4 md:px-6" style="background: #062342 url(https://cdn.musora.com/image/fetch/w_1900,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/order_background.jpg) center center/cover;">
+    <header class="text-white text-center py-14 md:py-24 lg:py-32 px-4 md:px-6" style="background: #062342 url(https://www.musora.com/musora-cdn/image/width=1900,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/order_background.jpg) center center/cover;">
         <div class="container mx-auto">
-            <img class="h-16 md:h-28 lg:h-36" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Logo.svg" alt="metal playalongs logo">
+            <img class="h-16 md:h-28 lg:h-36" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Logo.svg" alt="metal playalongs logo">
             <h6 class="leading-normal my-5">Add your drumming to nine heavy drumless play-along tracks.</h6>
         </div>
     </header>
@@ -49,7 +49,7 @@
                     <a href="{{ $lesson['url'] }}" class="w-1/2 sm:w-1/3 px-2 md:px-3 mb-5 md:mb-7">
                         <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md">
                             <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;"></i>
-                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_550,q_auto:best/{{ $lesson['image'] }}"></div>
+                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=550,quality=85/{{ $lesson['image'] }}"></div>
                         </div>
                         <h5 class="mt-3 mb-1"><strong>w/ {{ $lesson['artist'] }}</strong></h5>
                         <p class="text-light-navy leading-tight">{{ $lesson['descriptions'] }}</p>
@@ -58,7 +58,7 @@
             </div>
         </div>
     </section>
-    <section class="text-center py-14 md:py-24 lg:py-32 text-white" style="background: #062342 url(https://cdn.musora.com/image/fetch/w_1900,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/order_background.jpg) center bottom/cover;">
+    <section class="text-center py-14 md:py-24 lg:py-32 text-white" style="background: #062342 url(https://www.musora.com/musora-cdn/image/width=1900,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/order_background.jpg) center bottom/cover;">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
                 <h1 class="text-2xl md:text-4xl lg:text-5xl"><strong>Keep the party going.</strong></h1>

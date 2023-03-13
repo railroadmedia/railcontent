@@ -4,7 +4,7 @@
     <title>The Beginner Guitar Starter Kit by Nate Savage</title>
     <meta name="description" content="Sign up and you'll get an exclusive beginner guitar course with Nate Savage designed specifically for new guitarists."/>
 
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/music-theory/final-bg.jpg" style="display: none;">
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/music-theory/final-bg.jpg" style="display: none;">
     <meta property="og:title" content="The Beginner Guitar Starter Kit">
     <meta property="og:description" content="Sign up and you'll get an exclusive beginner guitar course with Nate Savage designed specifically for new guitarists.">
     <meta property="og:url" content="https://www.guitareo.com/starter-kit/">
@@ -27,18 +27,18 @@
 @stop
 
 @section('body')
-    <header class="header" style="background: url(https://guitareo.s3.amazonaws.com/starter-kit/bg-tile.jpg);">
+    <header class="header" style="background: url(https://d122ay5chh2hr5.cloudfront.net/starter-kit/bg-tile.jpg);">
         <div class="container clearfix mx-auto max-w-6xl flex flex-col">
             <div class="flex flex-col-reverse sm:flex-row">
                 <div class="sm:w-3/4">
                     <picture>
-                        <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png">
-                        <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png">
-                        <img class="logo" src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png" alt="logo">
+                        <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
+                        <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
+                        <img class="logo" src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png" alt="logo">
                     </picture>
                 </div>
                 <div class="text-center sm:w-1/4">
-                    <img class="circle-nate" src="https://cdn.musora.com/image/fetch/w_450,q_auto:best/https://guitareo.s3.amazonaws.com/gl-sales/nate-circle.png" alt="nate-circle">
+                    <img class="circle-nate" src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://d122ay5chh2hr5.cloudfront.net/gl-sales/nate-circle.png" alt="nate-circle">
                 </div>
             </div>
             <div>
@@ -64,42 +64,42 @@
                 'locked' => true,
                 'badgeText' => 'course #1',
                 'details' => 'Beginner / 7 Videos / 21 Minutes',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/fundamentals.jpg',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/fundamentals.jpg',
                 'title' => 'Guitar Fundamentals',
             ],
             [
                 'locked' => true,
                 'badgeText' => 'course #2',
                 'details' => 'Beginner / 1 Video / 8 Minutes',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/tuner.jpg',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/tuner.jpg',
                 'title' => 'Using An Electronic Tuner',
             ],
             [
                 'locked' => true,
                 'badgeText' => 'course #3',
                 'details' => 'Beginner / 6 Videos / 38 Minutes',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/open-chords.jpg',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/open-chords.jpg',
                 'title' => 'Open Chords',
             ],
             [
                 'locked' => true,
                 'badgeText' => 'course #4',
                 'details' => 'Beginner / 7 Videos / 27 Minutes',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/strumming.jpg',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/strumming.jpg',
                 'title' => 'Strumming',
             ],
             [
                 'locked' => true,
                 'badgeText' => 'course #5',
                 'details' => 'Beginner / 7 Videos / 18 Minutes',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/heartbreak.jpg',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/heartbreak.jpg',
                 'title' => 'Heartbreak Avenue',
             ],
             [
                 'locked' => true,
                 'badgeText' => 'course #6',
                 'details' => 'Beginner / 1 Videos / 5 Minutes',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/whats-next.jpg',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/whats-next.jpg',
                 'title' => 'What&apos;s Next?',
             ],
         ]
@@ -135,9 +135,9 @@
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <div class="logo">
                 <picture>
-                    <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png">
-                    <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png">
-                    <img src="https://cdn.musora.com/image/fetch/w_330,q_auto:best/https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png" alt="logo">
+                    <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
+                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
+                    <img src="https://www.musora.com/musora-cdn/image/width=330,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png" alt="logo">
                 </picture>
             </div>
             <p>

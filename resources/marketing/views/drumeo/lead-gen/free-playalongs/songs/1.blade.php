@@ -12,7 +12,7 @@
     /free-playalongs/songs/2
 @stop
 
-@section('next-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/Rashid-williams-Rock-out.png')
+@section('next-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/Rashid-williams-Rock-out.png')
 
 @section('assets')
     @include('drumeo.lead-gen.partials._assignment-resources', [

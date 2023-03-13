@@ -294,7 +294,7 @@
     <section class="guarantee">
         <div class="container mx-auto clearfix">
             <div class="lg:w-3/12 sm:w-5/12 w-full px-3 sm:px-4 float-right text-center sm:text-right">
-                <img src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="90-Day Money-Back Guarantee">
+                <img src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="90-Day Money-Back Guarantee">
             </div>
             <div class="lg:w-9/12 sm:w-7/12 float-left w-full px-3 sm:px-4 text-center sm:text-left">
                 <h1>90-Day Money-Back Guarantee.</h1>

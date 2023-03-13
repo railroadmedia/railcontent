@@ -75,7 +75,7 @@
     @endif
     <div class="footer-bottom" @if(!empty($minimal)) style="border-top: 0;padding-top: 0;" @endif>
         <div class="container mx-auto">
-            <img class="logo" src="https://cdn.musora.com/image/fetch/w_280,q_auto:best/https://musora-center.s3.amazonaws.com/logos/singeo-logo-white.png" alt="Singeo">
+            <img class="logo" src="https://www.musora.com/musora-cdn/image/width=280,quality=85/https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-white.png" alt="Singeo">
             @if(empty($minimal))
                 <p><a href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
                     <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>

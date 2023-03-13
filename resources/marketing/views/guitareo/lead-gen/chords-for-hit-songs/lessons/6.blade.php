@@ -10,7 +10,7 @@
 
 @section('previous', '/chords-for-hit-songs/lessons/5')
 
-@section('prev-thumb', 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-01.jpg')
+@section('prev-thumb', 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/thumbs-electric-01.jpg')
 
 {{-- @section('lesson-description', 'Ayla goes over each part of the guitar that’s important to know and what its purpose is. She also goes over how to tune your guitar by using various different methods. Lastly, she explains the name of each string by using a fun trick to help you memorize their names.') --}}
 

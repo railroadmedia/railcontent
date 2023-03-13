@@ -8,7 +8,7 @@
     <meta property="og:description" content="Learn the songs you love; now on drums, piano, guitar, or vocals.">
 
     <meta property="og:url" content="https://www.musora.com/unified-2022">
-    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
     <style>
         [placeholder]:focus::-webkit-input-placeholder {
             color: transparent;

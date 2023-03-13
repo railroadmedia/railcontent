@@ -43,6 +43,6 @@
 {{--            </div>--}}
 {{--        </div>--}}
 {{--    </div>--}}
-{{--    <div class="inset-0 block sm:hidden absolute bg-center z-0" style="background: #000 url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 100px inset #000;"></div>--}}
-{{--    <div class="inset-0 hidden sm:block absolute bg-center z-0" style="background: #000 url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 100px inset #000;"></div>--}}
+{{--    <div class="inset-0 block sm:hidden absolute bg-center z-0" style="background: #000 url(https://dpwjbsxqtam5n.cloudfront.net/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 100px inset #000;"></div>--}}
+{{--    <div class="inset-0 hidden sm:block absolute bg-center z-0" style="background: #000 url(https://dpwjbsxqtam5n.cloudfront.net/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 100px inset #000;"></div>--}}
 {{--</section>--}}

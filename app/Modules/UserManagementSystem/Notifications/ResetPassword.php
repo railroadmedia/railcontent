@@ -46,7 +46,7 @@ class ResetPassword extends ResetPasswordBase
                             'user_management_system.password.show-reset-form',
                             ['token' => $this->token, 'email' => request('email')]
                         ),
-                        'logo' => 'https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/logo.png',
+                        'logo' => 'https://www.musora.com/musora-cdn/image/width=400,quality=85/https://musora-web-platform.s3.amazonaws.com/musora/logo.png',
                         'display-name' => $user->display_name
                     ]
                 ]

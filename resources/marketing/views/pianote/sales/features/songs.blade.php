@@ -10,7 +10,7 @@
     <meta property="og:url" content="https://www.pianote.com/songs">
     <meta name="description" content="1000+ note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.">
     <meta property="og:description" content="1000+ note-for-note song breakdowns for every style, era, and skill level with handy play-along tools.">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-songs.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-songs.jpg" style="display: none;">
 @endsection
 
 @section('body-data')
@@ -19,7 +19,7 @@
     }'
 @endsection
 
-@section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/songs-thumb2.jpg')
+@section('header-img', 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/songs-thumb2.jpg')
 
 @section('header', 'Play your favorite songs.')
 
@@ -64,7 +64,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -113,7 +113,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -162,7 +162,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -211,7 +211,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -257,7 +257,7 @@
 {{--                                <div>--}}
 {{--                                    <img--}}
 {{--                                        class="rounded-xl mb-1 transition-opacity opacity-0"--}}
-{{--                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"--}}
+{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"--}}
 {{--                                        alt="{{$slide['title']}} img"--}}
 {{--                                        loading="lazy"--}}
 {{--                                        onload="this.classList.remove('opacity-0')"--}}
@@ -303,7 +303,7 @@
 {{--                                <div>--}}
 {{--                                    <img--}}
 {{--                                        class="rounded-xl mb-1 transition-opacity opacity-0"--}}
-{{--                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"--}}
+{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"--}}
 {{--                                        alt="{{$slide['title']}} img"--}}
 {{--                                        loading="lazy"--}}
 {{--                                        onload="this.classList.remove('opacity-0')"--}}
@@ -352,7 +352,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -401,7 +401,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -450,7 +450,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -499,7 +499,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -545,7 +545,7 @@
 {{--                                <div>--}}
 {{--                                    <img--}}
 {{--                                        class="rounded-xl mb-1 transition-opacity opacity-0"--}}
-{{--                                        src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/{{$slide['img']}}"--}}
+{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"--}}
 {{--                                        alt="{{$slide['title']}} img"--}}
 {{--                                        loading="lazy"--}}
 {{--                                        onload="this.classList.remove('opacity-0')"--}}

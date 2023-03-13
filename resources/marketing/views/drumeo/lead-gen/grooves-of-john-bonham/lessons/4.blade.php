@@ -16,7 +16,7 @@
     /grooves-of-john-bonham/lessons/5
 @stop
 
-@section('prev-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/Raghav-mehrotra-funky-nasa.png')
+@section('prev-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/Raghav-mehrotra-funky-nasa.png')
 
 @section('next-thumb', 'https://d1923uyy6spedc.cloudfront.net/221067-card-thumbnail-maxres-1551455704')
 

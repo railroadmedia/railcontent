@@ -4,7 +4,7 @@
             {!! $img !!}
             <div class="video-row relative my-4 sm:my-7">
                 @hasSection('prev-thumb')
-                    <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -10%;width: 80%;" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/@yield('prev-thumb')">
+                    <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -10%;width: 80%;" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/@yield('prev-thumb')">
                 @endif
 
                 @hasSection ('video')
@@ -14,7 +14,7 @@
                 @endif
 
                 @hasSection('next-thumb')
-                    <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 110%;width: 80%;" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/@yield('next-thumb')">
+                    <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 110%;width: 80%;" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/@yield('next-thumb')">
                 @endif
             </div>
         </div>
@@ -79,7 +79,7 @@
             @endif
             @include('guitareo.lead-gen.free-acoustic-guitar-lessons._assignment-resources', [
                 "title" => "Course Resources",
-                "zipURL" => "https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/getting-started-on-the-acoustic-guitar.zip"
+                "zipURL" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/getting-started-on-the-acoustic-guitar.zip"
             ])
         </div>
     </div>

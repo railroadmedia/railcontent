@@ -32,7 +32,7 @@
 @section('content')
     <header class="header" style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/bg2.jpg);">
         <div class="container mx-auto text-center max-w-6xl">
-            <img class="inline-block mx-auto w-3/4 sm:w-full max-w-xs md:max-w-lg lg:max-w-2xl" src="https://cdn.musora.com/image/fetch/w_1350,q_60,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/logo2.png" alt="Getting Started On The Drums">
+            <img class="inline-block mx-auto w-3/4 sm:w-full max-w-xs md:max-w-lg lg:max-w-2xl" src="https://www.musora.com/musora-cdn/image/width=1350,q_60,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/logo2.png" alt="Getting Started On The Drums">
         </div>
     </header>
 
@@ -43,7 +43,7 @@
                     <a href="{{ $lesson['url'] }}" class="px-2 md:px-3 mb-5 md:mb-7">
                         <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md border-2" style="border-color:#2d384e;">
                             <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;"></i>
-                            <div class="aspect-16:9 w-full bg-contain bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_550,q_auto:best/{{ $lesson['image'] }}"></div>
+                            <div class="aspect-16:9 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=550,quality=85/{{ $lesson['image'] }}"></div>
                         </div>
                         <h5 class="mt-3 mb-1"><strong>{{ $lesson['title'] }}</strong></h5>
                     </a>

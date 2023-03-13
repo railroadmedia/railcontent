@@ -10,10 +10,10 @@
     <meta property="og:url" content="https://www.pianote.com/method">
     <meta name="description" content="Always know exactly what to practice with an organized 10-level curriculum.">
     <meta property="og:description" content="Always know exactly what to practice with an organized 10-level curriculum.">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-method.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-method.jpg" style="display: none;">
 @endsection
 
-@section('header-img', 'https://pianote.s3.amazonaws.com/sales/2023/method-thumb.jpg')
+@section('header-img', 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/method-thumb.jpg')
 
 @section('header', 'Your piano goals start here.')
 

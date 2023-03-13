@@ -383,7 +383,7 @@
             'artist' => 'Carrie Underwood',
         ],
         [
-            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/chris-stapleton-traveller.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/chris-stapleton-traveller.jpg',
             'title' => 'Tennessee Whiskey ',
             'artist' => 'Chris Stapleton',
         ],
