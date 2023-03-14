@@ -91,7 +91,7 @@ class CodeRedemptionController extends BaseController
 
     public function renderNewAccountRedeemPage()
     {
-        return view('musora.pages.redeem.card-redeem-theme', ['newAccount' => true]);
+        return view('musora.pages.redeem.card-redeem-layout', ['newAccount' => true]);
     }
 
     public function renderNewAccountThomannRedeemPage()
@@ -101,7 +101,7 @@ class CodeRedemptionController extends BaseController
 
     public function renderExistingAccountRedeemPage()
     {
-        return view('musora.pages.redeem.card-redeem-theme', ['newAccount' => false]);
+        return view('musora.pages.redeem.card-redeem-layout', ['newAccount' => false]);
     }
 
     public function roland()

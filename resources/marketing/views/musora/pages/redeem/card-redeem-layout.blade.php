@@ -260,7 +260,7 @@
     <div id="content">
         @yield('title')
         <div class="flex-video widescreen vimeo border-2 rounded-xl overflow-hidden">
-            @yield('video')
+            <iframe src="//player.vimeo.com/video/113327941" width="600" height="338" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
         </div>
         <p class="redeem-switcher text-left"><i class="fal fa-info-circle"></i> Although the card is for Drumeo, this card will give you full access to Drumeo, Pianote, Guitareo, and Singeo.</p>
          @if($newAccount)
@@ -268,16 +268,16 @@
                 <span><b>Existing Member?</b> <br><a class="text-white underline" href="/redeem/existing">Click here to add to your account.</a> </span><br>
                 (The form below is only for new accounts)
             </div>
-
-
-            @include('musora.pages.redeem.redeem-form-new')
+            @include('musora.pages.redeem._redeem-form')
          @else
             <div class="redeem-switcher text-white rounded-xl py-4" style="background:#00060B;">
                 <span> <b>Not already a member?</b> <br><a class="text-white underline" href="/redeem">Click here to redeem on a new account.</a> </span><br>
                 (The form below is only for existing members)
             </div>
 
-            @include('musora.pages.redeem.redeem-form-existing')
+            @include('musora.pages.redeem._redeem-form', [
+                "existing" => true
+            ])
          @endif
 
         @foreach ($errors->all() as $error)

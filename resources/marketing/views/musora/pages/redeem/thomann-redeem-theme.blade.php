@@ -279,7 +279,7 @@
         <p class="validation-error">{{ $error }}</p>
     @endforeach
 
-    @include('musora.pages.redeem.redeem-form-new')
+    @include('musora.pages.redeem._redeem-form')
 </div>
     @include("drumeo.sales.partials._footer")
 @endsection
