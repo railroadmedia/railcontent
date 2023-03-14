@@ -23,7 +23,7 @@
                 @if (!empty($images))
                     @foreach ($images as $key => $image)
                         <div style="display: none;">
-                            <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeo')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif" alt="slide image {{ $key+1 }}">
+                            <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeo')){{$image->path}}@else{{'https://d1fyshwdvi6fth.cloudfront.net/'.$image->path}}@endif" alt="slide image {{ $key+1 }}">
                         </div>
                     @endforeach
                 @endif
@@ -32,7 +32,7 @@
                 @if(!empty($images))
                     @foreach ($images as $image)
                         @if((!empty($videoSrc) && $key !== 0) || empty($videoSrc) )
-                            <div @if(count($images) > 1)style="display: none;"@endif><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeo')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif" alt="slide image {{ $key+1 }}"></div>
+                            <div @if(count($images) > 1)style="display: none;"@endif><img class="w-full rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeo')){{$image->path}}@else{{'https://d1fyshwdvi6fth.cloudfront.net/'.$image->path}}@endif" alt="slide image {{ $key+1 }}"></div>
                         @endif
                     @endforeach
                 @endif

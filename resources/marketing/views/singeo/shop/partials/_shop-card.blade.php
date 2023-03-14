@@ -2,7 +2,7 @@
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
             <section class="drum-shop">
-                <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url('https://www.musora.com/musora-cdn/image/width=600,quality=85/@if(str_contains($thumbnail, 'amazonaws') || str_contains($thumbnail, 'cloudfront')){{$thumbnail}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$thumbnail}}@endif');">
+                <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url('https://www.musora.com/musora-cdn/image/width=600,quality=85/@if(str_contains($thumbnail, 'amazonaws') || str_contains($thumbnail, 'cloudfront')){{$thumbnail}}@else{{'https://d1fyshwdvi6fth.cloudfront.net/'.$thumbnail}}@endif');">
                     @if (!empty($badgeText))
                         <span class="top-left-badge text-white bg-promo">
                             {!! $badgeText !!}
@@ -14,7 +14,7 @@
                     @endif
                     @if(!empty($packLogo))
                         <div class="logo">
-                            <img src="https://www.musora.com/musora-cdn/image/width=600,quality=85/@if(str_contains($packLogo, 'amazonaws') || str_contains($packLogo, 'cloudfront')){{$packLogo}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$packLogo}}@endif" alt="{{ $title }} logo">
+                            <img src="https://www.musora.com/musora-cdn/image/width=600,quality=85/@if(str_contains($packLogo, 'amazonaws') || str_contains($packLogo, 'cloudfront')){{$packLogo}}@else{{'https://d1fyshwdvi6fth.cloudfront.net/'.$packLogo}}@endif" alt="{{ $title }} logo">
                         </div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>

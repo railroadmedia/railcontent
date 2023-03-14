@@ -27,7 +27,7 @@
                     <p class="instructor hidden lg:inline"><em>{{ $instructor }} </em></p>
                 @endif
                 @if(!empty($logo))
-                    <img class="hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block" src="@if(str_contains($logo, 'amazonaws') || str_contains($logo, 'cloudfront')){{$logo}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$logo}}@endif" alt="logo">
+                    <img class="hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block" src="@if(str_contains($logo, 'amazonaws') || str_contains($logo, 'cloudfront')){{$logo}}@else{{'https://d1fyshwdvi6fth.cloudfront.net/'.$logo}}@endif" alt="logo">
                 @endif
 
                 @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)
