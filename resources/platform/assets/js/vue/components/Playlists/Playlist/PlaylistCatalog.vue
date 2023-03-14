@@ -33,6 +33,10 @@
         return props.playlistCount && playlistsStore.playlists.length ? true : false;
     })
 
+    //-----------Refs-----------//
+    const pageNumber = ref(1);
+    const preventReFetch = ref(false);
+
     //-----------Reactive Data-----------//
     const state = reactive({ 
         startID: 0,
@@ -121,10 +125,36 @@
     //---------Lifecycle Methods---------//
 
     onMounted(()=> {
-
+        // console.log(playlistsStore.activePlaylist)
+        const scrollContainer = document.querySelector('#content-container');
+        scrollContainer.onscroll = () => {
+            if ( (scrollContainer.scrollHeight - scrollContainer.scrollTop - scrollContainer.clientHeight < 1) && !preventReFetch.value ) {
+                pageNumber.value = pageNumber.value + 1;
+                // scrollContainer.scrollTop = scrollContainer.scrollTop / pageNumber.value;
+                //Payload
+                const payload = {
+                    page: pageNumber.value,
+                    limit: 20,
+                    playlist_id: playlistsStore.activePlaylist.id,
+                };
+                //Get Lessons
+                playlistsStore.loadingLessons = true;
+                PlaylistService.getPlaylistLessons(payload, token).then(response => {
+                    playlistsStore.loadingLessons = false;
+                    if (response.data.results.length) {
+                        playlistsStore.lessons = playlistsStore.lessons.concat(response.data.results);
+                    } else {
+                        preventReFetch.value = true;
+                    }
+                }).catch(() => {
+                    window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
+                });
+            }
+        }
     })
 
-    onBeforeMount(() => {      
+    onBeforeMount(() => {    
+        // console.log('lessons', props.lessons) 
         playlistsStore.lessons = props.lessons.data;
     });
 </script>
@@ -147,7 +177,6 @@
             </div>
         </div>
         
-
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-[28px]">
             <div class="tw-flex tw-flex-col">
                 <!-- Empty State -->
@@ -173,7 +202,7 @@
 
                     <!-- Cards -->
                     <section v-if="playlistsStore.lessons.length" 
-                            class="tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-col"
+                             class="tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-col"
                     >
                         <!-- Print Each Card -->
                         <playlist-card 
@@ -188,7 +217,17 @@
                             @dragleave="handleDragLeave($event)"
                             @dragover.prevent="handleDragOver($event)"
                             @drop="handleDrop($event, i)"
-                        />  
+                        /> 
+
+                        <!-- Skeleton Loader -->
+                        <div v-if="playlistsStore.loadingLessons" 
+                            class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
+                            <div v-for="n in 20" 
+                                :key="n" 
+                                class="tw-flex tw-w-full tw-h-[90px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]"
+                            >
+                            </div>
+                        </div>   
 
                     </section>
 

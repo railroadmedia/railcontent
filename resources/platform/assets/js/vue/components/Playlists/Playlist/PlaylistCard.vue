@@ -141,7 +141,7 @@
     //-----------Lifecycle Methods-----------//
 
     onBeforeMount(() => {
-        console.log(props.lesson)
+        // console.log(props.lesson)
         state.isPinned = props.lesson.pinned;
         state.isPrivate = props.lesson.private;
     });
@@ -182,7 +182,7 @@
                 </div>
 
                 <!-- Release Date -->
-                <div v-if="!released" class="tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/80 tw-flex tw-flex-col tw-items-center tw-justify-center">
+                <div v-if="!released" class="tw-z-20 tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/80 tw-flex tw-flex-col tw-items-center tw-justify-center">
                     <p class="tw-text-xs text-white font-bold">
                         {{ day }},
                         <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber }}</span>

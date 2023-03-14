@@ -67,14 +67,11 @@ export default {
     /**
      * GET Playlists
      *
-     * @param {string} brand
-     * @param {number} page -
-     * @param {number} limit -
+     * @param {object} payload
      * @param {string} token
      */
     getCurrentUserPlaylists(payload, token) {
         const playlistParams = {
-            // "brand": "drumeo",
             "limit": null,
             "page": 1
         }
@@ -86,6 +83,25 @@ export default {
             method: 'GET',
             url: '/railcontent/playlists',
             params: payload ? payload : playlistParams,
+            headers
+        });
+    },
+
+    /**
+     * GET Playlists Lessons
+     *
+     * @param {object} payload
+     * @param {string} token
+     */
+    getPlaylistLessons(payload, token) {
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
+            method: 'GET',
+            url: '/railcontent/playlist-lessons',
+            params: payload,
             headers
         });
     },

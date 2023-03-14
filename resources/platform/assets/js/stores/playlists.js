@@ -14,6 +14,7 @@ export const usePlaylistsStore = defineStore({
       },
       pageHasPlaylistCatalog: false, 
       loadingPlaylists: false,
+      loadingLessons: false,
       sortingPlaylist: false,
       loadingPinnedPlaylists: false,
       playlistsQuantity: 0,
@@ -55,6 +56,16 @@ export const usePlaylistsStore = defineStore({
         this.loadingPlaylists = false;
         this.playlists = await response.data.data;
         this.playlistsQuantity = await response.data.meta.totalResults;
+      } catch {
+        console.log('there was an error with your request');
+        //hard reload?
+      }
+    },
+    async getPlaylistLessons(payload, token) {
+      const response = await PlaylistService.getPlaylistLessons(payload, token);
+      try {
+        this.loadingLoading = false;
+        this.lessons.concat(response.data.data);
       } catch {
         console.log('there was an error with your request');
         //hard reload?
