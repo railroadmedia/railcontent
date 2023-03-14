@@ -31,7 +31,7 @@ class SalesController extends BaseController
     }
     public function trial()
     {
-        return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true]);
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
     }
     public function promo()
     {
@@ -146,7 +146,7 @@ class SalesController extends BaseController
 
     public function lifetime()
     {
-        return view('pianote.shop.pages.lifetime');
+        return view('pianote.shop.pages.lifetime', [ 'theme' => 'pianote' ]);
     }
 
     public function lifetimeMembers()

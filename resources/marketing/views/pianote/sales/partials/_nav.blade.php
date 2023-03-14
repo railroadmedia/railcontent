@@ -71,13 +71,13 @@
                 >
 
                 @if(!empty($trialVersion))
-                    Start Trial
+                    Start for free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @else
                     Join<span class="show-for-medium"> Pianote</span>
                 @endif
             </a>
         </div>
-        <div class="hidden lg:block button-wrap">
+        <div class="hidden lg:block button-wrap @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
             <a href="https://www.musora.com/pianote" class="join outline-button">Login</a>
         </div>
     @endif

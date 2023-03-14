@@ -73,7 +73,7 @@ class LeadgenLessonResolver implements ResolverInterface
             foreach($lessons as $key => $lesson){
                 //insert
                 if(is_null($lesson['id'])){
-                    if(!str_contains($lesson['thumbnail'], 'https')) $lesson['thumbnail'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$lesson['thumbnail'];
+                    if(!str_contains($lesson['thumbnail'], 'https')) $lesson['thumbnail'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$lesson['thumbnail'];
 
                     $addLesson = new LeadgenLesson();
                     $addLesson->leadgen_id = $model['id'];
@@ -139,7 +139,7 @@ class LeadgenLessonResolver implements ResolverInterface
             $deleteLessons = LeadgenLesson::where('leadgen_id', $model['id'])->whereNotIn('id', $updatedIds ?? []);
             if(count($deleteLessons->get()) > 0){
                 foreach($deleteLessons->get() as $id){
-                    Storage::disk('nova_s3')->delete(str_replace('https://laravel-nova.s3.us-east-2.amazonaws.com/','',$id->thumbnail));
+                    Storage::disk('nova_s3')->delete(str_replace('https://d1fyshwdvi6fth.cloudfront.net/','',$id->thumbnail));
                     $assetIds[] = $id->id;
                 }
                 $deleteAssets = LeadgenLessonAsset::where('leadgen_lesson_id', $assetIds)->delete();

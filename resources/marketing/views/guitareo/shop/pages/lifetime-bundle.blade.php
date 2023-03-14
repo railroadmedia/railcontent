@@ -163,13 +163,13 @@
 @endphp
 
 @section('top')
-    @include('guitareo.shop._partials.slider', [
+    @include('_partials.components.shop.slider', [
         "headerText" => '<strong>Become a lifelong learner of music.</strong><br><h3 class="leading-tight text-gradient uppercase mb-2"><strong>ONLY <s class="opacity-60">100</s>  SPOTS</strong><br></h3>',
         "videoSrc" => "//player.vimeo.com/video/774475100",
         "videoThumb" => "https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/sound-better-thumb.jpg",
     ])
 
-     @include('guitareo.shop._partials.sidebar', [
+     @include('_partials.components.shop.sidebar', [
         "bundle" => true,
         "soldOut" => true,
         "logo" => "https://d122ay5chh2hr5.cloudfront.net/shop/bundles/lifetime_logo_black.png",

@@ -467,6 +467,7 @@ https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://s3.amaz
 | drumeo.s3.amazonaws.com                                      | dzryyo1we6bm3.cloudfront.net|
 | drummingsystem.s3.amazonaws.com                              | d1kkqge3y0g04o.cloudfront.net|
 | singeo.s3.us-east-1.amazonaws.com                            | d21xeg6s76swyd.cloudfront.net|
+| laravel-nova.s3.us-east-2.amazonaws.com                      | d1fyshwdvi6fth.cloudfront.net|
 
 ## Example
 `https://drumeo-assets.s3.amazonaws.com/avatars/billy123.jpg`  
