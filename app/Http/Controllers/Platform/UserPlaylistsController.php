@@ -99,14 +99,13 @@ class UserPlaylistsController extends BaseController
         throw_if(empty($playlist), new NotFoundHttpException());
 
         $page = $request->get('page', 1);
-        $limit = $request->get('limit');
+        $limit = $request->get('limit', 20);
 
         $contentTypes = array_merge(
             config('railcontent.appUserListContentTypes', []),
             array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
         );
 
-        Decorator::$typeDecoratorsEnabled = false;
         $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
         foreach ($items as $index => $item) {
             $items[$index]['need_access'] = ($user->isPackOwner() && !$user->isAMember());
