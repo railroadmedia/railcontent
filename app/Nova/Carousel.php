@@ -57,7 +57,7 @@ class Carousel extends Resource
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Boolean::make('visible')->hideFromIndex()->default(true),
-            Number::make('Display order', 'display_order'),
+            Number::make('Display order', 'display_order')->hideFromIndex(),
             DateTime::make('Start Time', 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.'),
             DateTime::make(__('End Time'), 'end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.'),
             Heading::make('BANNER COPY & IMAGES'),
@@ -218,7 +218,7 @@ class Carousel extends Resource
                         if ($formData->is_featured) $field->show();
                     }
                 ),
-            Text::make('Primary Button URL', 'primary_cta_url'),
+            Text::make('Primary Button URL', 'primary_cta_url')->hideFromIndex(),
             Text::make('Primary Button URL Alt', 'primary_cta_url_alt')->hideFromIndex()
                 ->hide()
                 ->hideFromDetail(function (NovaRequest $request, $resource) {
@@ -232,7 +232,7 @@ class Carousel extends Resource
                     }
                 ),
             Text::make('Secondary Button Text', 'secondary_cta_text')->hideFromIndex(),
-            Text::make('Secondary Button URL', 'secondary_cta_url'),
+            Text::make('Secondary Button URL', 'secondary_cta_url')->hideFromIndex(),
             Text::make('Video Source', 'video_src')->hideFromIndex()
                 ->hide()
                 ->hideFromDetail(function (NovaRequest $request, $resource) {
@@ -245,6 +245,9 @@ class Carousel extends Resource
                         if ($formData->is_featured) $field->show();
                     }
                 ),
+            //duplicated fields for displaying index page purpose
+            Number::make('Display order', 'display_order')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating(),
+            Boolean::make('visible')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating(),
         ];
     }
 
