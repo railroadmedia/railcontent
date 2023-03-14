@@ -1,172 +1,13 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    @yield('meta')
-
-    <meta property="fb:app_id" content="1772693566314871"/>
-
+    <title>Access Pass Redeem | Pianote</title>
+    <meta name="description" content="To redeem your access pass enter your code below!">
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/lead-gen.css') }}">
-
-    @yield('head')
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(
-            function () {
-                $('.code-input').bind(
-                    'paste', function (e) {
-                        var value = e.originalEvent.clipboardData.getData('text');
-                        value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
-                        var chunks = value.match(new RegExp('.{1,4}', 'g'));
-                        for (var i = 0; i < chunks.length; i++) {
-                            $('.code-input').eq(i).val(chunks[i]);
-                        }
-                    }
-                ).bind(
-                    'input',
-                    function (e) {
-                        console.log($(this).val().length);
-                        if ($(this).val().length == 4) {
-                            $('.code-input').eq($(this).index('.code-input') + 1).focus();
-                        }
-                    }
-                );
-            }
-        );
-    </script>
-
     <style>
-        .tipsy {
-            font-size: 10px;
-            position: absolute;
-            padding: 5px;
-            z-index: 100000;
-        }
-
-        .tipsy-inner {
-            background-color: #000;
-            color: #FFF;
-            max-width: 200px;
-            padding: 5px 8px 4px 8px;
-            text-align: center;
-        }
-
-        /* Rounded corners */
-        .tipsy-inner {
-            border-radius: 3px;
-            -moz-border-radius: 3px;
-            -webkit-border-radius: 3px;
-        }
-
-        /* Uncomment for shadow */
-        /*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
-
-        .tipsy-arrow {
-            position: absolute;
-            width: 0;
-            height: 0;
-            line-height: 0;
-            border: 5px dashed #000;
-        }
-
-        /* Rules to colour arrows */
-        .tipsy-arrow-n {
-            border-bottom-color: #000;
-        }
-
-        .tipsy-arrow-s {
-            border-top-color: #000;
-        }
-
-        .tipsy-arrow-e {
-            border-left-color: #000;
-        }
-
-        .tipsy-arrow-w {
-            border-right-color: #000;
-        }
-
-        .tipsy-n .tipsy-arrow {
-            top: 0px;
-            left: 50%;
-            margin-left: -5px;
-            border-bottom-style: solid;
-            border-top: none;
-            border-left-color: transparent;
-            border-right-color: transparent;
-        }
-
-        .tipsy-nw .tipsy-arrow {
-            top: 0;
-            left: 10px;
-            border-bottom-style: solid;
-            border-top: none;
-            border-left-color: transparent;
-            border-right-color: transparent;
-        }
-
-        .tipsy-ne .tipsy-arrow {
-            top: 0;
-            right: 10px;
-            border-bottom-style: solid;
-            border-top: none;
-            border-left-color: transparent;
-            border-right-color: transparent;
-        }
-
-        .tipsy-s .tipsy-arrow {
-            bottom: 0;
-            left: 50%;
-            margin-left: -5px;
-            border-top-style: solid;
-            border-bottom: none;
-            border-left-color: transparent;
-            border-right-color: transparent;
-        }
-
-        .tipsy-sw .tipsy-arrow {
-            bottom: 0;
-            left: 10px;
-            border-top-style: solid;
-            border-bottom: none;
-            border-left-color: transparent;
-            border-right-color: transparent;
-        }
-
-        .tipsy-se .tipsy-arrow {
-            bottom: 0;
-            right: 10px;
-            border-top-style: solid;
-            border-bottom: none;
-            border-left-color: transparent;
-            border-right-color: transparent;
-        }
-
-        .tipsy-e .tipsy-arrow {
-            right: 0;
-            top: 50%;
-            margin-top: -5px;
-            border-left-style: solid;
-            border-right: none;
-            border-top-color: transparent;
-            border-bottom-color: transparent;
-        }
-
-        .tipsy-w .tipsy-arrow {
-            left: 0;
-            top: 50%;
-            margin-top: -5px;
-            border-right-style: solid;
-            border-left: none;
-            border-top-color: transparent;
-            border-bottom-color: transparent;
-        }
-    </style>
-    <style type="text/css">
         [placeholder]:focus::-webkit-input-placeholder {
             color: transparent;
         }
@@ -225,7 +66,7 @@
         }
 
         .apply {
-            background: #10D05F;
+            background: #F61A30;
             border-radius: 70px;
             color: #FFF;
             font: 700 28px/60px "Open Sans", sans-serif;
@@ -237,20 +78,7 @@
         }
 
         .apply:hover {
-            background: #13e868;
-        }
-
-        .tipsy {
-            font-size: 12px;
-            font-family: "Open Sans", sans-serif;
-        }
-
-        .tipsy-arrow {
-            border: 5px dashed red;
-        }
-
-        .tipsy-inner {
-            background-color: red;
+            background:#ff364a;
         }
 
         input[type="text"],
@@ -354,20 +182,20 @@
 @stop
 
 @section('global-body')
-
     @include('pianote.sales.partials._nav')
 
     <div id="content">
         <h1 class="text-center mb-3">Claim A Membership Access Code</h1>
-        {{--<div class="aspect-16:9 w-full relative">--}}
-            {{--<iframe class="absolute w-full h-full" src="//player.vimeo.com/video/558173509" frameborder="0" allowfullscreen allow="autoplay"></iframe>--}}
-        {{--</div>--}}
 
         @if($newAccount)
             @if(empty($noSwitch))
-                <div class="redeem-switcher">
-                    <span class="red"><i class="fas fa-user"></i> Existing Member? <a href="/pianote/redeem/existing">Click here to add your access to your existing account.</a> </span><br>
-                    (The form below is only for new accounts)
+                <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                    <strong><b>Existing Member?</b>
+                        <br>
+                        <a class="text-pianote underline" href="/pianote/redeem/existing">Click here to add to your account.</a>
+                    </strong>
+                    <br>
+                    <em>(The form below is only for new accounts)</em>
                 </div>
             @endif
 
@@ -430,9 +258,13 @@
 
         @else
             @if(empty($noSwitch))
-                <div class="redeem-switcher">
-                    <span class="red"><i class="fas fa-user-slash"></i> Not already a member? <a href="/pianote/redeem">Click here to redeem on a new Pianote account.</a> </span><br>
-                    (The form below is only for existing members)
+                <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                    <strong> <b>Not already a member?</b>
+                        <br>
+                        <a class="text-pianote underline" href="/pianote/redeem">Click here to redeem on a new account.</a>
+                    </strong>
+                    <br>
+                    <em>(The form below is only for existing members)</em>
                 </div>
             @endif
 
@@ -505,5 +337,29 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                $('.code-input').bind(
+                    'paste', function (e) {
+                        var value = e.originalEvent.clipboardData.getData('text');
+                        value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
+                        var chunks = value.match(new RegExp('.{1,4}', 'g'));
+                        for (var i = 0; i < chunks.length; i++) {
+                            $('.code-input').eq(i).val(chunks[i]);
+                        }
+                    }
+                ).bind(
+                    'input',
+                    function (e) {
+                        console.log($(this).val().length);
+                        if ($(this).val().length == 4) {
+                            $('.code-input').eq($(this).index('.code-input') + 1).focus();
+                        }
+                    }
+                );
+            }
+        );
+    </script>
 
 @stop

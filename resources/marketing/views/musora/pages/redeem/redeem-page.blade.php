@@ -3,63 +3,9 @@
 @section('head-includes')
     <title>Access Pass Redeem | Drumeo</title>
     <meta name="description" content="To redeem your access pass enter your code below!">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
+    @include('_partials.layout._tailwindcdn')
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready(
-            function () {
-                $('.code-input').bind(
-                    'paste', function (e) {
-                        var value = e.originalEvent.clipboardData.getData('text');
-                        value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
-                        var chunks = value.match(new RegExp('.{1,4}', 'g'));
-                        for (var i = 0; i < chunks.length; i++) {
-                            $('.code-input').eq(i).val(chunks[i]);
-                        }
-                    }
-                ).bind(
-                    'input',
-                    function (e) {
-                        console.log($(this).val().length);
-                        if ($(this).val().length == 4) {
-                            $('.code-input').eq($(this).index('.code-input') + 1).focus();
-                        }
-                    }
-                );
-            }
-        );
-    </script>
-
-    <style>
-        .tipsy { font-size: 10px; position: absolute; padding: 5px; z-index: 100000; }
-        .tipsy-inner { background-color: #000; color: #FFF; max-width: 200px; padding: 5px 8px 4px 8px; text-align: center; }
-
-        /* Rounded corners */
-        .tipsy-inner { border-radius: 3px; -moz-border-radius: 3px; -webkit-border-radius: 3px; }
-
-        /* Uncomment for shadow */
-        /*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
-
-        .tipsy-arrow { position: absolute; width: 0; height: 0; line-height: 0; border: 5px dashed #000; }
-
-        /* Rules to colour arrows */
-        .tipsy-arrow-n { border-bottom-color: #000; }
-        .tipsy-arrow-s { border-top-color: #000; }
-        .tipsy-arrow-e { border-left-color: #000; }
-        .tipsy-arrow-w { border-right-color: #000; }
-
-        .tipsy-n .tipsy-arrow { top: 0px; left: 50%; margin-left: -5px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent; }
-        .tipsy-nw .tipsy-arrow { top: 0; left: 10px; border-bottom-style: solid; border-top: none; border-left-color: transparent; border-right-color: transparent;}
-        .tipsy-ne .tipsy-arrow { top: 0; right: 10px; border-bottom-style: solid; border-top: none;  border-left-color: transparent; border-right-color: transparent;}
-        .tipsy-s .tipsy-arrow { bottom: 0; left: 50%; margin-left: -5px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
-        .tipsy-sw .tipsy-arrow { bottom: 0; left: 10px; border-top-style: solid; border-bottom: none;  border-left-color: transparent; border-right-color: transparent; }
-        .tipsy-se .tipsy-arrow { bottom: 0; right: 10px; border-top-style: solid; border-bottom: none; border-left-color: transparent; border-right-color: transparent; }
-        .tipsy-e .tipsy-arrow { right: 0; top: 50%; margin-top: -5px; border-left-style: solid; border-right: none; border-top-color: transparent; border-bottom-color: transparent; }
-        .tipsy-w .tipsy-arrow { left: 0; top: 50%; margin-top: -5px; border-right-style: solid; border-left: none; border-top-color: transparent; border-bottom-color: transparent; }
-    </style>
     <style>
         [placeholder]:focus::-webkit-input-placeholder {
             color:transparent;
@@ -135,19 +81,6 @@
             margin:20px auto 0;
             border:none;
             cursor:pointer;
-        }
-
-        .tipsy {
-            font-size:12px;
-            font-family:"Open Sans", sans-serif;
-        }
-
-        .tipsy-arrow {
-            border:5px dashed red;
-        }
-
-        .tipsy-inner {
-            background-color:red;
         }
 
         input[type="text"],
@@ -253,47 +186,111 @@
             }
         }
     </style>
+    @if(!empty($thomann))
+        <style>
+            .apply {
+                background:#0b76db;
+            }
+
+            .apply:hover {
+                background:#258ff4;
+            }
+        </style>
+    @endif
 @endsection
 
 <!-- Main -->
 @section('layout-body')
     <div id="content">
-        @yield('title')
-        <div class="flex-video widescreen vimeo border-2 rounded-xl overflow-hidden">
-            <iframe src="//player.vimeo.com/video/113327941" width="600" height="338" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-        </div>
-        <p class="redeem-switcher text-left"><i class="fal fa-info-circle"></i> Although the card is for Drumeo, this card will give you full access to Drumeo, Pianote, Guitareo, and Singeo.</p>
-         @if($newAccount)
-            <div class="redeem-switcher text-white rounded-xl py-4" style="background:#00060B;">
-                <span><b>Existing Member?</b> <br><a class="text-white underline" href="/redeem/existing">Click here to add to your account.</a> </span><br>
-                (The form below is only for new accounts)
+        @if(empty($thomann))
+            <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
+                <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/113327941" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
             </div>
+            <p class="redeem-switcher text-left"><i class="fal fa-info-circle"></i> Although the card is for Drumeo, this card will give you full access to Drumeo, Pianote, Guitareo, and Singeo.</p>
+        @else
+            <div class="text-center">
+                <img style="height:30px;width:auto;filter:invert(1);margin-bottom: 15px;" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/thomann-logo.png">
+                <h3 style="font-family: 'Open Sans', sans-serif;"><strong style="font-weight: 900;">CLAIM YOUR DRUMEO 3-MONTH MEMBERSHIP</strong></h3>
+                {{--        <p>Redeem your free 1-year Drumeo membership here.</p>--}}
+            </div>
+            <div class="redeem-switcher">
+                <span class="red"> These access codes can only be <br class="inline sm:hidden"> redeemed for new accounts</span>
+            </div>
+        @endif
+         @if($newAccount)
+            @if(empty($thomann))
+                <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                    <strong><b>Existing Member?</b>
+                        <br>
+                        <a class="text-drumeo underline" href="/redeem/existing">Click here to add to your account.</a>
+                    </strong>
+                    <br>
+                    <em>(The form below is only for new accounts)</em>
+                </div>
+            @endif
+
+            @foreach ($errors->all() as $error)
+                <br>
+                <p class="validation-error">{{ $error }}</p>
+            @endforeach
+
             @include('musora.pages.redeem._redeem-form')
          @else
-            <div class="redeem-switcher text-white rounded-xl py-4" style="background:#00060B;">
-                <span> <b>Not already a member?</b> <br><a class="text-white underline" href="/redeem">Click here to redeem on a new account.</a> </span><br>
-                (The form below is only for existing members)
+            <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                <strong> <b>Not already a member?</b>
+                    <br>
+                    <a class="text-drumeo underline" href="/redeem">Click here to redeem on a new account.</a>
+                </strong>
+                <br>
+                <em>(The form below is only for existing members)</em>
             </div>
+
+            @foreach ($errors->all() as $error)
+                <br>
+                <p class="validation-error">{{ $error }}</p>
+            @endforeach
 
             @include('musora.pages.redeem._redeem-form', [
                 "existing" => true
             ])
          @endif
 
-        @foreach ($errors->all() as $error)
-            <br>
-            <p class="validation-error">{{ $error }}</p>
-        @endforeach
 
         <br>
         <p class="help-message">
             ** If you enter the email of an account that already has an existing valid subscription, your subscription will be extended based on the time associated with your card.
         </p>
         <p class="help-message">
-            ** If you enter a new email address, a Drumeo account will be created for you and your new password will be emailed to you shortly after claiming your card.
+            ** If you enter a new email address, an account will be created for you and your new password will be emailed to you shortly after claiming your card.
         </p>
         <p class="help-message">
             ** Your Access Page may look like it’s only for Drumeo, but this pass will give you access to all four of our communities: Drumeo, Pianote, Guitareo, and Singeo!
         </p>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(
+            function () {
+                $('.code-input').bind(
+                    'paste', function (e) {
+                        var value = e.originalEvent.clipboardData.getData('text');
+                        value = value.toUpperCase().replace(/[^0-9A-Z]/g, "");
+                        var chunks = value.match(new RegExp('.{1,4}', 'g'));
+                        for (var i = 0; i < chunks.length; i++) {
+                            $('.code-input').eq(i).val(chunks[i]);
+                        }
+                    }
+                ).bind(
+                    'input',
+                    function (e) {
+                        console.log($(this).val().length);
+                        if ($(this).val().length == 4) {
+                            $('.code-input').eq($(this).index('.code-input') + 1).focus();
+                        }
+                    }
+                );
+            }
+        );
+    </script>
 @endsection

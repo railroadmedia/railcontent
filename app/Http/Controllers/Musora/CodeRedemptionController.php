@@ -91,17 +91,17 @@ class CodeRedemptionController extends BaseController
 
     public function renderNewAccountRedeemPage()
     {
-        return view('musora.pages.redeem.card-redeem-layout', ['newAccount' => true]);
+        return view('musora.pages.redeem.redeem-page', ['newAccount' => true]);
     }
 
     public function renderNewAccountThomannRedeemPage()
     {
-        return view('musora.pages.redeem.thomann-redeem-theme', ['newAccount' => true]);
+        return view('musora.pages.redeem.redeem-page', ['newAccount' => true, 'thomann' => true]);
     }
 
     public function renderExistingAccountRedeemPage()
     {
-        return view('musora.pages.redeem.card-redeem-layout', ['newAccount' => false]);
+        return view('musora.pages.redeem.redeem-page', ['newAccount' => false]);
     }
 
     public function roland()
@@ -117,7 +117,7 @@ class CodeRedemptionController extends BaseController
     public function showPianoteRedeemPageForNewUsers()
     {
         return view(
-            'musora.pages.redeem.access-code-redeem-page',
+            'musora.pages.redeem.redeem-page-pianote',
             ['newAccount' => true, 'redirectUrl' => get_musora_brand_base_url() . '/pianote']
         );
     }
@@ -125,7 +125,7 @@ class CodeRedemptionController extends BaseController
     public function showPianoteRedeemPageForExistingUsers()
     {
         return view(
-            'musora.pages.redeem.access-code-redeem-page',
+            'musora.pages.redeem.redeem-page-pianote',
             ['newAccount' => false, 'redirectUrl' => get_musora_brand_base_url() . '/pianote']
         );
     }
