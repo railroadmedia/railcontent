@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Events\ContentFieldCreated;
 use Railroad\Railcontent\Events\ContentFieldDeleted;
 use Railroad\Railcontent\Events\ContentFieldUpdated;
@@ -168,10 +169,14 @@ class ContentFieldService
 
         $this->fieldRepository->createOrUpdateAndReposition($id, $data);
 
+        Log::debug("CachHelper::deleteCache finish");
+
         //delete cache for associated content id
         CacheHelper::deleteCache('content_' . $oldField['content_id']);
+        Log::debug("CachHelper::deleteUserFields");
 
         CacheHelper::deleteUserFields(null, 'contents');
+        Log::debug("CachHelper::deleteUserFields finish");
 
         $newField = $this->get($id);
 
