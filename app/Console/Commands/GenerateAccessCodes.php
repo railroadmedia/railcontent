@@ -103,18 +103,6 @@ class GenerateAccessCodes extends Command
             ];
         }
 
-        $sourceInfo = ($source) ?  ' source "' . $source . '"' : ' no source attribute';
-
-        $answer = $this->ask(
-            'Confirm to create ' . $amountToCreate . ' access codes for product ' . $product->getName() .  ' with id ' .
-            $productId . ' for brand "' . $brand . '" and with' . $sourceInfo . '. Enter "yes" if this is correct'
-        );
-
-        if($answer !== 'yes'){
-            $this->info('Exiting now without creating access codes.');
-            die();
-        }
-
         $this->databaseManager->connection(config('ecommerce.database_connection_name'))
             ->table('ecommerce_access_codes')
             ->insert($accessCodes);
