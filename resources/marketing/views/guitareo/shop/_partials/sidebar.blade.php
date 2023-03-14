@@ -16,7 +16,7 @@
                 <p class="text-center text-sm uppercase mx-auto mb-1 hidden lg:block"><em>{{ $instructor }}</em></p>
             @endif
             @if(!empty($logo))
-                    <img class="@if(!empty($logoStyles)) {{ $logoStyles }} @endif hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block" src="@if(str_contains($logo, 'amazonaws') || str_contains($logo, 'cloudfront')){{$logo}}@else{{'https://d1fyshwdvi6fth.cloudfront.net/'.$logo}}@endif" alt="logo">
+                    <img class="@if(!empty($logoStyles)) {{ $logoStyles }} @endif hidden max-h-20 w-full mx-auto mb-4 object-contain lg:block" src="{{$logo}}" alt="logo">
             @endif
 
             @if(isset($fullPrice) && isset($price) && ($fullPrice - $price) > 0)

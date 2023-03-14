@@ -20,7 +20,7 @@
                 <p class="text-center text-sm uppercase mx-auto mb-1 hidden lg:inline"><em>{{ $instructor }}</em></p>
             @endif
             @if(!empty($logo))
-                <img class="hidden lg:inline max-h-24 w-full mx-auto object-contain lg:block" src="@if(str_contains($logo, 'amazonaws') || str_contains($logo, 'cloudfront')){{$logo}}@else{{'https://d1fyshwdvi6fth.cloudfront.net/'.$logo}}@endif" alt="product logo">
+                <img class="hidden lg:inline max-h-24 w-full mx-auto object-contain lg:block" src="{{$logo}}" alt="product logo">
             @endif
             @if(($fullPrice - $price) > 0)
                 <p class="text-center font-bold text-sm leading-none mb-1 md:text-base" style="color:#10D05F;">Save {{ round(100 - (100 * ($price / $fullPrice))) }}%</p>

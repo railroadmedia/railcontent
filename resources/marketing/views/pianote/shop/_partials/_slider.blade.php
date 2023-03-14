@@ -20,7 +20,7 @@
                     @foreach ($images as $key => $image)
                             @if((!empty($videoSrc) && $key !== 0) || empty($videoSrc) )
                         <div @if(count($images) > 1)style="display: none;"@endif>
-                            <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://d1fyshwdvi6fth.cloudfront.net/'.$image->path}}@endif" alt="slide image {{$key+1}}">
+                            <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{$image->path}}@endif" alt="slide image {{$key+1}}">
                         </div>
                             @endif
                     @endforeach
@@ -29,7 +29,7 @@
             <div class="slider-nav mx-auto w-full @if(!empty($images) && count($images) <= 1) hidden @endif">
                 @if(!empty($images))
                     @foreach ($images as $key => $image)
-                        <div style="display: none;"><img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://d1fyshwdvi6fth.cloudfront.net/'.$image->path}}@endif" alt="slide image {{$key+1}}"></div>
+                        <div style="display: none;"><img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{$image->path}}" alt="slide image {{$key+1}}"></div>
                     @endforeach
                 @endif
             </div>

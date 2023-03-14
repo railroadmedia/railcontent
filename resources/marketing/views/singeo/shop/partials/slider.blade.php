@@ -23,7 +23,7 @@
                 @if (!empty($images))
                     @foreach ($images as $key => $image)
                             <div @if(count($images) > 1)style="display: none;"@endif>
-                                <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://d1fyshwdvi6fth.cloudfront.net/'.$image->path}}@endif" alt="image {{ $key+1 }}">
+                                <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{$image->path}}" alt="image {{ $key+1 }}">
                             </div>
                     @endforeach
                 @endif
@@ -32,7 +32,7 @@
                 @if(!empty($images))
                     @foreach ($images as $key => $image)
                         <div @if(count($images) > 1)style="display: none;"@endif>
-                            <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://d1fyshwdvi6fth.cloudfront.net/'.$image->path}}@endif" alt="image {{ $key+1 }}">
+                            <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{$image->path}}" alt="image {{ $key+1 }}">
                         </div>
                     @endforeach
                 @endif
