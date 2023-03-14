@@ -9,182 +9,153 @@
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/lead-gen.css') }}">
     <style>
         [placeholder]:focus::-webkit-input-placeholder {
-            color: transparent;
+            color:transparent;
         }
 
         input::-webkit-input-placeholder,
         textarea::-webkit-input-placeholder {
-            color: #AAA;
+            color:#AAA;
         }
 
         input::-moz-placeholder,
         textarea::-moz-placeholder {
-            color: #AAA;
+            color:#AAA;
         }
 
         input:-ms-input-placeholder,
         textarea:-ms-input-placeholder {
-            color: #AAA;
+            color:#AAA;
         }
 
         input::placeholder,
         textarea::placeholder {
-            color: #AAA;
+            color:#AAA;
         }
 
         .error {
-            color: red;
-            font: 500 16px "Open Sans", sans-serif;
+            color:red;
+            font:500 16px "Open Sans", sans-serif;
         }
 
         input.jq-couponcode-part {
-            width: 69px;
+            width:69px;
         }
 
         input.jq-couponcode-good {
-            background-color: #77ff77;
+            background-color:#77ff77;
         }
 
         input.jq-couponcode-good-nohighlight {
-            text-align: center;
-            padding: 2px 10px;
+            text-align:center;
+            padding:2px 10px;
         }
 
         input.jq-couponcode-bad {
-            background-color: #ff7777;
+            background-color:#ff7777;
         }
 
         .jq-couponcode-sep {
-            width: 6px;
-        }
-
-        #content {
-            max-width: 800px;
-            width: 100%;
-            margin: 30px auto 50px;
-            padding: 15px;
+            width:6px;
         }
 
         .apply {
-            background: #F61A30;
-            border-radius: 70px;
-            color: #FFF;
-            font: 700 28px/60px "Open Sans", sans-serif;
-            height: 60px;
-            width: 100%;
-            margin: 20px auto 0;
-            border: none;
-            cursor: pointer;
-        }
-
-        .apply:hover {
-            background:#ff364a;
+            background:#00060B;
+            border-radius:70px;
+            color:#FFF;
+            font:400 28px/60px "Bebas Neue", sans-serif;
+            text-transform:uppercase;
+            height:60px;
+            width:100%;
+            margin:20px auto 0;
+            border:none;
+            cursor:pointer;
         }
 
         input[type="text"],
         input[type="password"] {
-            background: #FFF;
-            color: #000;
-            border: 1px solid #ccc;
-            font: 400 12px/23px "Open Sans", sans-serif;
-            margin: 0;
-            padding: 10px;
-            box-sizing: border-box;
-            box-shadow: none !important;
-            height: 45px;
-            border-radius: 70px;
-        }
-
-        .error-form-field {
-            width: 442px;
-            padding-right: 38px;
-            background-repeat: no-repeat;
-            background-image: url("https://d2vyvo0tyx8ig5.cloudfront.net/redeem/error.png");
-            background-position: 454px 16px
-        }
-
-        .correct-form-field {
-            width: 442px;
-            padding-right: 38px;
-            background-repeat: no-repeat;
-            background-image: url("https://d2vyvo0tyx8ig5.cloudfront.net/redeem/correct.png");
-            background-position: 454px 16px
-        }
-
-        .loading-form-field {
-            width: 442px;
-            padding-right: 38px;
-            background-repeat: no-repeat;
-            background-image: url("https://d2vyvo0tyx8ig5.cloudfront.net/redeem/loading.gif");
-            background-position: 460px 18px
+            background:#FFF;
+            color:#000;
+            border:1px solid #ccc;
+            font:400 12px/23px "Open Sans", sans-serif;
+            margin:0;
+            padding:10px 15px;
+            box-sizing:border-box;
+            box-shadow:none !important;
+            height:45px;
+            border-radius:70px;
         }
 
         .default-form-field {
-            width: 100%;
+            width:100%;
         }
 
         .help-message {
-            color: #666;
-            font: 400 14px "Open Sans", sans-serif;
-            padding: 0 0.9375rem;
+            color:#666;
+            font:400 14px "Open Sans", sans-serif;
+            padding:0 0.9375rem;
         }
 
         .validation-error {
             color: red;
-            font: 600 14px "Open Sans", sans-serif;
+            font: 600 16px/1em "Open Sans", sans-serif;
         }
 
         #commentform .code-input {
-            text-align: center;
-            display: inline-block;
-            margin: 0;
-            font-size: 10px;
+            text-align:center;
+            display:inline-block;
+            margin:0;
+            font-size:10px;
         }
 
-        #content .redeem-switcher {
-            font: 400 16px "Open Sans", sans-serif;
-            text-align: center;
-            display: block;
-            margin: 20px auto 5px;
+        .redeem-switcher {
+            font:400 16px "Open Sans", sans-serif;
+            text-align:center;
+            display:block;
+            margin:20px auto 5px;
         }
 
-        #content .redeem-switcher .red {
-            font-weight: 600;
-            color: red;
+        .redeem-switcher .red {
+            font-weight:600;
+            color:red;
         }
 
         .input-describer {
-            font: 700 14px "Open Sans", sans-serif;
-            margin: 15px auto 10px;
+            font:700 14px "Open Sans", sans-serif;
+            margin:15px auto 10px;
         }
 
-        @media only screen and (min-width: 40em) {
-            #content {
-                padding: 25px;
-            }
-
-            #content .redeem-switcher {
-                margin: 30px auto 15px;
+        @media only screen and (min-width:40em) {
+            .redeem-switcher {
+                margin:30px auto 15px;
             }
 
             input[type="text"],
             input[type="password"] {
-                font-size: 16px;
-                width: 99%;
+                font-size:16px;
+                width:99%;
             }
 
             #commentform .code-input {
-                font-size: 16px;
-                width: 95%;
+                font-size:16px;
+                width:95%;
             }
+        }
+    </style>
+    <style>
+        .apply {
+            background: #F61A30;
+        }
+
+        .apply:hover {
+            background:#ff364a;
         }
     </style>
 @stop
 
 @section('global-body')
     @include('pianote.sales.partials._nav')
-
-    <div id="content">
+<div class="py-8 sm:py-12 px-4 sm:px-6">
+    <div class="container mx-auto max-w-3xl">
         <h1 class="text-center mb-3">Claim A Membership Access Code</h1>
 
         @if($newAccount)
@@ -332,7 +303,7 @@
             ** If you enter a new email address, a Pianote account will be created for you and
             your new password will be emailed to you shortly after claiming your card. </p>
     </div>
-
+</div>
     @include('pianote.sales.partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
