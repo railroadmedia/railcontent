@@ -76,7 +76,7 @@ class ImageResolver implements ResolverInterface
                 }
 
                 elseif(!empty($image['path'])) {
-                    if(!str_contains($image['path'], 'https')) $image['path'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image['path'];
+                    if(!str_contains($image['path'], 'https')) $image['path'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$image['path'];
 
                     $addImg = new Image();
                     $addImg->path = $image['path'];
@@ -92,7 +92,7 @@ class ImageResolver implements ResolverInterface
             $imgs = Image::where('product_id', $model['id'])->whereNotIn('id', $updatedIds ?? []);
             if(count($imgs->get()) > 0){
                 foreach($imgs->get() as $img){
-                    Storage::disk('nova_s3')->delete(str_replace('https://laravel-nova.s3.us-east-2.amazonaws.com/','',$img->path));
+                    Storage::disk('nova_s3')->delete(str_replace('https://d1fyshwdvi6fth.cloudfront.net/','',$img->path));
                 }
 
                 $imgs->delete();
