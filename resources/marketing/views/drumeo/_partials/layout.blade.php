@@ -11,7 +11,7 @@
     @include('_partials.layout.global-header', [
         "theme_bg" => "bg-drumeo",
         "theme_text" => "text-drumeo",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/drumeo.svg",
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/drumeo.svg",
         "links" => [
             "Member Login" => [
                 "iconClass" => "fas fa-sign-in",
@@ -95,7 +95,7 @@
 @section('layout-footer')
     @include('_partials.layout.global-footer', [
         "brand" => "drumeo",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/drumeo-white.svg",
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/drumeo-white.svg",
         "sections" => [
             [
                 "title" => "Resources",

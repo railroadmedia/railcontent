@@ -56,7 +56,7 @@ export default {
         <!-- Method Progress -->
         <div class="tw-flex tw-flex-col lg:tw-flex-row tw-justify-center tw-items-center tw-mb-5 tw-w-full tw-rounded-full tw-min-h-[150px] lg:tw-pr-6 tw-bg-gradient-to-b" :class="bgBottomGradients[brand]">
             <div class="tw-flex tw-items-center tw-justify-center tw-px-8 tw-w-full lg:tw-w-7/12">
-                <img :src="`https://musora-ui.s3.amazonaws.com/logos/${ brand }-method.svg`" :alt="brand" class="tw-max-w-[200px] lg:tw-max-w-[567px] tw-w-full tw-mb-4 lg:tw-mb-0" />
+                <img :src="`https://d38h3dn806jqj1.cloudfront.net/logos/${ brand }-method.svg`" :alt="brand" class="tw-max-w-[200px] lg:tw-max-w-[567px] tw-w-full tw-mb-4 lg:tw-mb-0" />
             </div>
             <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-px-10 sm:tw-px-8 tw-w-full lg:tw-w-5/12">
                 <div class="tw-text-center tw-w-full tw-max-w-[287px]">
@@ -81,7 +81,7 @@ export default {
                 class="tw-inline-flex tw-w-full tw-min-h-[150px] tw-text-[#00101D] dark:tw-text-white tw-flex-col tw-rounded-full tw-border-[3px] dark:tw-border-[#445F74] tw-justify-center tw-items-center tw-justify-items-stretch tw-transition dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-center"
             >
                 <i :class="`${ metric.icon } tw-text-${ brand }`"
-                    class="text-center nowrap tw-text-3xl" 
+                    class="text-center nowrap tw-text-3xl"
                     style="line-height:32px;">
                 </i>
 

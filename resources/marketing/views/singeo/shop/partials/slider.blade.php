@@ -23,7 +23,7 @@
                 @if (!empty($images))
                     @foreach ($images as $key => $image)
                             <div @if(count($images) > 1)style="display: none;"@endif>
-                                <img class="w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif" alt="image {{ $key+1 }}">
+                                <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif" alt="image {{ $key+1 }}">
                             </div>
                     @endforeach
                 @endif
@@ -32,7 +32,7 @@
                 @if(!empty($images))
                     @foreach ($images as $key => $image)
                         <div @if(count($images) > 1)style="display: none;"@endif>
-                            <img class="w-full" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif" alt="image {{ $key+1 }}">
+                            <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif" alt="image {{ $key+1 }}">
                         </div>
                     @endforeach
                 @endif
@@ -71,10 +71,10 @@
                 <div class="slider-nav w-full">
                     @if(!empty($images))
                         @if(!empty($videoSrc))
-                            <div class="video-slide"><img class="video-thumbnail" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $videoThumb }}"></div>
+                            <div class="video-slide"><img class="video-thumbnail" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $videoThumb }}"></div>
                         @endif
                         @foreach ($images as $image)
-                            <div><img class="rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $image }}"></div>
+                            <div><img class="rounded border-4 border-solid w-full" style="border-color: #FFF;" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $image }}"></div>
                         @endforeach
                     @endif
                 </div>

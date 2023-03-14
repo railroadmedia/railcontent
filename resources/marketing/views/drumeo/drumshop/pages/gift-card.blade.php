@@ -29,8 +29,8 @@
         <div class="lg:h-0">
             <div id="order" class="anchor"></div>
             <div class="side-slide overflow-hidden rounded border border-solid fixedSlider" style="border-color: rgb(204, 211, 211); width: 352px;">
-                <div class="promo-tab hidden lg:block text-center py-4 px-3" style="position:relative;background: #000 url(https://drumeo-assets.s3.amazonaws.com/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 10px inset #000;">
-                    <img class="w-auto max-h-12" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/christmas/holiday-drums.png">
+                <div class="promo-tab hidden lg:block text-center py-4 px-3" style="position:relative;background: #000 url(https://dpwjbsxqtam5n.cloudfront.net/promos/christmas/snow-dark.gif) center center/250px;box-shadow: 0 0 10px inset #000;">
+                    <img class="w-auto max-h-12" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/christmas/holiday-drums.png">
                 </div>
 
                 <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">

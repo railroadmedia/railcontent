@@ -362,7 +362,7 @@ h1, h2, h3, h4, h5, h6, p, li {
 
     &#getAccess {
       max-width: 550px;
-      background: #06B298 url(https://guitareo.s3.amazonaws.com/music-theory/bg-tile-2.png) center/400px;
+      background: #06B298 url(https://d122ay5chh2hr5.cloudfront.net/music-theory/bg-tile-2.png) center/400px;
       color: #FFF;
       @include desktop {
         background-size: 450px;
@@ -403,7 +403,7 @@ h1, h2, h3, h4, h5, h6, p, li {
 .header {
   text-align: center;
   color: #FFF;
-  background: #06B298 url(https://guitareo.s3.amazonaws.com/music-theory/bg-tile-2.png) center/400px;
+  background: #06B298 url(https://d122ay5chh2hr5.cloudfront.net/music-theory/bg-tile-2.png) center/400px;
   padding: 30px 0;
   @include tablet {
     padding: 50px 0;
@@ -693,7 +693,7 @@ h1, h2, h3, h4, h5, h6, p, li {
 }
 
 .final {
-  background: #031614 url("https://guitareo.s3.amazonaws.com/music-theory/final-bg.jpg") center/cover;
+  background: #031614 url("https://d122ay5chh2hr5.cloudfront.net/music-theory/final-bg.jpg") center/cover;
   text-align: center;
   padding: 50px 10px;
   color: #FFF;

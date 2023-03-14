@@ -209,7 +209,7 @@
                         <div class="post-tile columns">
                             <a href="{{ $drumFillLesson['url'] }}">
                                 <div class="image-fill">
-                                    <div class="thumbnail-pic" style="background-image:url(https://cdn.musora.com/image/fetch/w_450,q_auto:best/{{ $drumFillLesson['thumb'] }})"></div>
+                                    <div class="thumbnail-pic" style="background-image:url(https://www.musora.com/musora-cdn/image/width=450,quality=85/{{ $drumFillLesson['thumb'] }})"></div>
                                     <i class="fas fa-arrow-circle-right"></i>
                                 </div>
                                 <p>
@@ -231,7 +231,7 @@
                         <div class="post-tile columns">
                             <a href="{{ $bassDrumLesson['url'] }}">
                                 <div class="image-fill">
-                                    <div class="thumbnail-pic" style="background-image:url(https://cdn.musora.com/image/fetch/w_450,q_auto:best/{{ $bassDrumLesson['thumb'] }})"></div>
+                                    <div class="thumbnail-pic" style="background-image:url(https://www.musora.com/musora-cdn/image/width=450,quality=85/{{ $bassDrumLesson['thumb'] }})"></div>
                                     <i class="fas fa-arrow-circle-right"></i>
                                 </div>
                                 <p>
@@ -254,7 +254,7 @@
                         <div class="post-tile columns">
                             <a href="{{ $drumTechniqueLesson['url'] }}">
                                 <div class="image-fill">
-                                    <div class="thumbnail-pic" style="background-image:url(https://cdn.musora.com/image/fetch/w_450,q_auto:best/{{ $drumTechniqueLesson['thumb'] }})"></div>
+                                    <div class="thumbnail-pic" style="background-image:url(https://www.musora.com/musora-cdn/image/width=450,quality=85/{{ $drumTechniqueLesson['thumb'] }})"></div>
                                     <i class="fas fa-arrow-circle-right"></i>
                                 </div>
                                 <p>
@@ -284,7 +284,7 @@
                         <div class="post-tile columns">
                             <a href="{{ $extraLesson['url'] }}">
                                 <div class="image-fill">
-                                    <div class="thumbnail-pic" style="background-image:url(https://cdn.musora.com/image/fetch/w_450,q_auto:best/{{ $extraLesson['thumb'] }})"></div>
+                                    <div class="thumbnail-pic" style="background-image:url(https://www.musora.com/musora-cdn/image/width=450,quality=85/{{ $extraLesson['thumb'] }})"></div>
                                     <i class="fas fa-arrow-circle-right"></i>
                                 </div>
                                 <p>
@@ -306,7 +306,7 @@
                         <div class="post-tile columns">
                             <a href="{{ $warmupLesson['url'] }}">
                                 <div class="image-fill">
-                                    <div class="thumbnail-pic" style="background-image:url(https://cdn.musora.com/image/fetch/w_450,q_auto:best/{{ $warmupLesson['thumb'] }})"></div>
+                                    <div class="thumbnail-pic" style="background-image:url(https://www.musora.com/musora-cdn/image/width=450,quality=85/{{ $warmupLesson['thumb'] }})"></div>
                                     <i class="fas fa-arrow-circle-right"></i>
                                 </div>
                                 <p>
@@ -328,7 +328,7 @@
                         <div class="post-tile columns">
                             <a href="{{ $songLesson['url'] }}">
                                 <div class="image-fill">
-                                    <div class="thumbnail-pic" style="background-image:url(https://cdn.musora.com/image/fetch/w_450,q_auto:best/{{ $songLesson['thumb'] }})"></div>
+                                    <div class="thumbnail-pic" style="background-image:url(https://www.musora.com/musora-cdn/image/width=450,quality=85/{{ $songLesson['thumb'] }})"></div>
                                     <i class="fas fa-arrow-circle-right"></i>
                                 </div>
                                 <p>
@@ -350,7 +350,7 @@
                         <div class="post-tile columns">
                             <a href="{{ $stickTrickLesson['url'] }}">
                                 <div class="image-fill">
-                                    <div class="thumbnail-pic" style="background-image:url(https://cdn.musora.com/image/fetch/w_450,q_auto:best/{{ $stickTrickLesson['thumb'] }})"></div>
+                                    <div class="thumbnail-pic" style="background-image:url(https://www.musora.com/musora-cdn/image/width=450,quality=85/{{ $stickTrickLesson['thumb'] }})"></div>
                                     <i class="fas fa-arrow-circle-right"></i>
                                 </div>
                                 <p>
@@ -372,7 +372,7 @@
                         <div class="post-tile columns">
                             <a href="{{ $rockDrummingLesson['url'] }}">
                                 <div class="image-fill">
-                                    <div class="thumbnail-pic" style="background-image:url(https://cdn.musora.com/image/fetch/w_450,q_auto:best/{{ $rockDrummingLesson['thumb'] }})"></div>
+                                    <div class="thumbnail-pic" style="background-image:url(https://www.musora.com/musora-cdn/image/width=450,quality=85/{{ $rockDrummingLesson['thumb'] }})"></div>
                                     <i class="fas fa-arrow-circle-right"></i>
                                 </div>
                                 <p>
@@ -394,7 +394,7 @@
                         <div class="post-tile columns">
                             <a href="{{ $jazzDrummingLesson['url'] }}">
                                 <div class="image-fill">
-                                    <div class="thumbnail-pic" style="background-image:url(https://cdn.musora.com/image/fetch/w_450,q_auto:best/{{ $jazzDrummingLesson['thumb'] }})"></div>
+                                    <div class="thumbnail-pic" style="background-image:url(https://www.musora.com/musora-cdn/image/width=450,quality=85/{{ $jazzDrummingLesson['thumb'] }})"></div>
                                     <i class="fas fa-arrow-circle-right"></i>
                                 </div>
                                 <p>
@@ -416,7 +416,7 @@
                         <div class="post-tile columns">
                             <a href="{{ $drummerLesson['url'] }}">
                                 <div class="image-fill">
-                                    <div class="thumbnail-pic" style="background-image:url(https://cdn.musora.com/image/fetch/w_450,q_auto:best/{{ $drummerLesson['thumb'] }})"></div>
+                                    <div class="thumbnail-pic" style="background-image:url(https://www.musora.com/musora-cdn/image/width=450,quality=85/{{ $drummerLesson['thumb'] }})"></div>
                                     <i class="fas fa-arrow-circle-right"></i>
                                 </div>
                                 <p>

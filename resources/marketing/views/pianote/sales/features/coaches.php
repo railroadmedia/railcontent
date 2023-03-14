@@ -32,7 +32,7 @@
             'artist' => 'Erskine Hawkins',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/221257-card-thumbnail-maxres-1551813520',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/222917-card-thumbnail-maxres-1554751707.jpg',
             'title' => 'Latin Jazz',
             'artist' => 'Gabriel Palatchi',
         ],
@@ -138,7 +138,7 @@
             'artist' => 'Lisa Witt',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/221244-card-thumbnail-maxres-1551730631',
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/Creative+Songwriting.jpeg',
             'title' => 'Creative Songwriting',
             'artist' => 'Josh Dion',
         ],

@@ -6,7 +6,7 @@
             @else
                 <i class="fas fa-lock absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-40 text-4xl"></i>
             @endisset
-        <img class="rounded-3xl border-4" style="border-color:#15283a;" src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/{{ $lesson['img'] }}">
+        <img class="rounded-3xl border-4" style="border-color:#15283a;" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $lesson['img'] }}">
         </div>
         <p class="uppercase mt-2 mb-1" @isset($lesson['titleColor']) style="color:{{ $lesson['titleColor'] }};" @endisset>{{ $lesson['title'] }}</p>
         <h5><strong>{!! $lesson['desc'] !!}</strong></h5>

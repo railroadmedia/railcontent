@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
     <title>Here's a gift | Drumeo</title>
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
     @include('_partials.layout.favicons.drumeo-favicons')
     @include('_partials.layout._fonts')
     @include('_partials.layout._tailwindcdn')
@@ -126,7 +126,7 @@
         <br><br>
         In the meantime, enjoy these 40 free charts of drumming’s biggest songs!</em>
 </p>
-<a href="/100-songs/unlocked"><img class="w-full max-w-md lg:max-w-lg rounded-xl mx-auto my-5 hover:opacity-90" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/40-song-ad.png"></a>
+<a href="/100-songs/unlocked"><img class="w-full max-w-md lg:max-w-lg rounded-xl mx-auto my-5 hover:opacity-90" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/40-song-ad.png"></a>
 <a href="/100-songs/unlocked" class="join hover:opacity-90">CLICK HERE &raquo;</a>
 <div class="social-media">
     <a href="https://www.youtube.com/freedrumlessons/" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>

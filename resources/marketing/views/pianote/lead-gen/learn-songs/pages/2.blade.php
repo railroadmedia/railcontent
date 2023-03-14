@@ -21,7 +21,7 @@
 @section('next-thumb', 'https://i.vimeocdn.com/video/1123533706-a2a3b17fca5f8a71d1ea803cb4ade2f72ff45d92a60826da1e4a3b1c6d0ea7ed-d?mw=1000&mh=563')
 
 @section('lesson-description')
-    <a class="join smaller mb-4" target="_blank" href="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/lewis-capaldi-someone-you-loved.pdf">DOWNLOAD PDF</a>
+    <a class="join smaller mb-4" target="_blank" href="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/lessons/lewis-capaldi-someone-you-loved.pdf">DOWNLOAD PDF</a>
     <p>We’ll be starting with a beautiful song that’s wildly popular, fun to play, super simple!
         <br><br> In fact, there are really only 4 chords you’ll need to know for this one. <br><br>
         <strong>How to play a “power chord”</strong>
@@ -30,7 +30,7 @@
         <br><br> Let’s look at the first line of the song.
         <br><br> This is called a chord chart. It contains the lyrics to the song and the chords written above the lyrics.
     </p>
-    <img class="my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/chords.jpg" alt="chords">
+    <img class="my-7" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/lessons/chords.jpg" alt="chords">
     <p>When you see a chord written above a word - that’s when you play it.
         <br><br> So let’s learn the 4 chords that make up 99% of this song. The first one is C.
         <br><br> As you’ll remember from the musical alphabet, you can find C immediately to the left of a group of 2 black notes.
@@ -42,7 +42,7 @@
         <br><br> So play it. <br><br> That’s a G power chord. You can repeat this for all the chords in the first line.
         <br><br> And here’s the good news… <br><br> They simply repeat over and over again! <br><br>
         <strong>The Bridge. And a new chord</strong> <br><br> When you get to the bridge, you’ll notice something.</p>
-    <img class="my-7" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/bridge-chords.png" alt="bridge-chords">
+    <img class="my-7" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/lessons/bridge-chords.png" alt="bridge-chords">
     <p>Dm?!
         <br><br> What the heck is that?! It’s a new chord! But don’t worry, because you’ll simply use the exact same process you’ve already learned.
         <br><br> So all you need to do is find D. It’s one up from C, remember?
@@ -51,7 +51,7 @@
         <br><br> You’ll see the little “m” next to chords like Am and Dm.
         <br><br> That means it’s a minor chord. In music, there are 2 main types of chords: major and minor. The difference between them is the middle note.
         <br><br> You don’t need to know too much more about that here, but it helps to think of major chords as the “happier” sounding chords, while minor chords are more “sad” sounding.
-        <br><br> If you’d like to hear the difference, you can refer to <a href="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/lessons/chord-chart.pdf"><u>the chord reference guide</u></a>. Try playing a C major chord, then play a C minor chord.
+        <br><br> If you’d like to hear the difference, you can refer to <a href="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/lessons/chord-chart.pdf"><u>the chord reference guide</u></a>. Try playing a C major chord, then play a C minor chord.
         <br><br> Notice the difference?
         <br><br> We’ll explore those types of chords a little bit more in the coming lessons, but for now it’s just something to be aware of.
         <br><br> So there you go! You’ve learned your first song and it’s a beautiful one.

@@ -1,7 +1,7 @@
 <nav id="nav" class="top-bar expanded">
     <div class="logo">
         <a href="{{ get_legacy_brand_base_url('singeo') }}">
-            <img src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="Singeo">
+            <img src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="Singeo">
         </a>
     </div>
 
@@ -79,7 +79,7 @@
                 >
 
                     @if(!empty($trialVersion))
-                        Start Trial
+                        Start for free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                     @else
                         Join<span class="show-for-medium"> Singeo</span>
                     @endif

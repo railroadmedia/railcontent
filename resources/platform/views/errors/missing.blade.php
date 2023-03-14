@@ -66,20 +66,20 @@
                         <template v-cloak v-slot="slotProps">
 
                             <div class="tw-relative tw-flex tw-flex-col tw-h-[calc(100%+1.75rem)] tw-justify-center tw-items-center">
-                                <img src="https://cdn.musora.com/image/fetch/c_thumb,w_1200,q_auto:best/https://musora-web-platform.s3.amazonaws.com/Rehearsal+Studio_deSaturated.png" 
-                                    alt="Image of Musical instrument on a stage" 
+                                <img src="https://cdn.musora.com/image/fetch/c_thumb,w_1200,q_auto:best/https://d3fzm1tzeyr5n3.cloudfront.net/Rehearsal+Studio_deSaturated.png"
+                                    alt="Image of Musical instrument on a stage"
                                     class="tw-absolute tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
                                     onload="this.classList.remove('tw-opacity-0')"
                                 >
                                 <div class="tw-absolute tw-h-full tw-w-full tw-top-0 tw-left-0 tw-bg-[#E5E5E5]/90 dark:tw-bg-[#00101D]/90"></div>
-                    
+
                                 {{-- Content --}}
                                 <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3 tw-z-50 tw-items-center tw-justify-center">
                                     <div class="tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
                                         <h1 class="tw-text-5xl lg:tw-text-6xl tw-font-bold tw-mb-4 lg:tw-mb-6">Page not found</h1>
                                         <h2 class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-2xl lg:tw-text-3xl tw-font-bold tw-mb-4">404 ERROR</h1>
                                         <p class="tw-mb-8">The Page you're looking for doesn't exist.</p>
-                    
+
                                         <a href="javascript:history.back()" class="tw-btn-primary tw-bg-[#081825] tw-text-white dark:tw-bg-white dark:tw-text-[#00101D] tw-mb-4">Go Back</a>
                                         <p class="tw-mb-4">Go back or <a href="/{{ $brand }}/support" class="tw-text-[#081825] dark:tw-text-white tw-underline tw-font-bold">contact support</a></p>
                                     </div>
@@ -119,7 +119,7 @@
         <body class="tw-bg-[#000C17] tw-text-white tw-flex">
             <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
                 <div class="tw-text-center tw-max-w-md tw-px-6 md:tw-px-0 md:tw-max-w-full">
-                    <img class="md:tw-h-60 lg:tw-h-72 tw-mx-auto" src="https://musora-center.s3.amazonaws.com/logos/404_musora_logo.png" alt="404 logo" />
+                    <img class="md:tw-h-60 lg:tw-h-72 tw-mx-auto" src="https://dmmior4id2ysr.cloudfront.net/logos/404_musora_logo.png" alt="404 logo" />
                     <div class="tw-mb-2 tw-text-xl md:tw-text-2xl lg:tw-text-3xl">Oops, this link is lost in your <br class="md:tw-hidden">stack of notes.</div>
                     <div class="tw-font-normal tw-mb-3 md:tw-mb-6 tw-text-sm md:tw-text- tw-text-[#E4E4E7]">The page you're looking for doesn't exist.</div>
                     <button onclick="history.back()" class="tw-btn-primary tw-bg-white tw-text-black tw-mb-3 md:tw-mb-4">Go Back</button>

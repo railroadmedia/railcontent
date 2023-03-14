@@ -4,7 +4,7 @@
     <title>Terms Of Use | Singeo</title>
     <meta property="og:title" content="Terms Of Use">
     <meta name="description" content="Please read this agreement carefully before accessing or using this web site.">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/terms/">
 
     @include('_partials.layout._tailwindcdn')
@@ -23,7 +23,7 @@
         "joinVersion" => true,
     ])
 
-    <div class="hero-header px-4 py-12 md:py-20 lg:py-32 bg-black bg-top bg-cover" style="background-image:url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/background-order.jpg);">
+    <div class="hero-header px-4 py-12 md:py-20 lg:py-32 bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/background-order.jpg);">
         <div class="container mx-auto">
             <h1 class="mx-auto text-center text-white text-2xl md:text-4xl font-bold">Terms of Use</h1>
             <p class="text-sm text-center text-white opacity-75"><em>Last updated: January 2021</em></p>

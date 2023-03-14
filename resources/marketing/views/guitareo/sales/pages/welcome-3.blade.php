@@ -8,7 +8,7 @@
     <meta property="og:url" content="https://www.guitareo.com/welcome/3"/>
     <meta property="og:title" content="Add Guitareo To Your Phone or Tablet"/>
     <meta property="og:description" content=""/>
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/og-image3.jpg"/>
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/og-image3.jpg"/>
 @stop()
 
 @section('styles')

@@ -36,6 +36,10 @@ class LegacyBrandCartURLRedirects
 
             if (Str::endsWith($parse['host'], 'drumeo.com')) {
                 $queryStringArray['redirect'] = '/order/drumeo';
+                Log::debug("LegacyBrandCartURLRedirects");
+                Log::debug("url=" . $request->fullUrl());
+                Log::debug("array=" . print_r($queryStringArray, true));
+                Log::debug("query=" . http_build_query($queryStringArray));
                 
                 return redirect()->away(
                     get_musora_brand_base_url() . $parse['path'] . '?' . (http_build_query($queryStringArray))

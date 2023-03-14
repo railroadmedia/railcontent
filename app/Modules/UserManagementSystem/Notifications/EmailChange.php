@@ -76,7 +76,7 @@ class EmailChange extends Notification
                         'request-email-change' => true,
                         'button-name' => 'Confirm Email Change',
                         'url' => url()->route('user_management_system.email-change.confirm', ['code' => $this->token]),
-                        'logo' => 'https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/logo.png',
+                        'logo' => 'https://www.musora.com/musora-cdn/image/width=400,quality=85/https://musora-web-platform.s3.amazonaws.com/musora/logo.png',
                         'display-name' => user()->display_name
                     ]
                 ])

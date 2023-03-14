@@ -5,7 +5,7 @@
 @foreach ($bonuses as $bonus)
     <div class="bonus-pic mb-7 md:flex md:items-center">
         <div class="image-wrap overflow-hidden mb-4 md:mb-0 mx-auto md:mr-5">
-            <img class="w-full h-full rounded-xl" src="https://cdn.musora.com/image/fetch/w_220,q_auto:best/{{ $bonus['img'] }}" alt="{{ $bonus['name'] }} thumb">
+            <img class="w-full h-full rounded-xl" src="https://www.musora.com/musora-cdn/image/width=220,quality=85/{{ $bonus['img'] }}" alt="{{ $bonus['name'] }} thumb">
         </div>
         <div>
             <strong>{{ $bonus['name'] }} -

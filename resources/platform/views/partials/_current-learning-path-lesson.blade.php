@@ -5,7 +5,7 @@
                 @if(!empty($showLogo))
                     <a href="{{ url()->route('members.learning-paths.show', ['singeo-method', config('railcontent.singeo_method_id')]) }}">
                         <img
-                            src="https://musora-ui.s3.amazonaws.com/logos/singeo-method.svg"
+                            src="https://d38h3dn806jqj1.cloudfront.net/logos/singeo-method.svg"
                             alt="The {{ $brand }} Method Logo"
                             class="invert-fill"
                             style="max-width:225px;width:200px;height:auto; padding-left: 1px;"

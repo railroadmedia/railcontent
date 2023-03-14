@@ -7,11 +7,11 @@
 @section('content')
 
     @component('partials._header-banner',
-        ['backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg'])
+        ['backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg'])
         @slot('content')
             <div class="tw-flex tw-flex-col tw-pr-1">
                 <div class="tw-inline-flex tw-w-full tw-flex-col tw-pr-4">
-                    <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">        
+                    <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
                         <musora-icon icon-name="box-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}"></musora-icon>
                         <span class="tw-text-32 tw-font-bold">Packs</span>
                     </h1>

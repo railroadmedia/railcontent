@@ -2,64 +2,64 @@
   $steps = [
       [
           'position' => 'left',
-          'img' => 'https://pianote.s3.amazonaws.com/products/the-power-of-chords/thumb1.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/thumb1.jpg',
           'title' => 'Why Chords Are Powerful',
           'desc' => 'All music is chords. You’ll learn why chords are one of the most important concepts in music, and how YOU can use chords to play your favorite songs, and even write your own music.'
       ],
       [
           'position' => 'right',
-          'img' => 'https://pianote.s3.amazonaws.com/products/the-power-of-chords/thumb2.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/thumb2.jpg',
           'title' => 'How Chords Are Made',
           'desc' => 'Chords are NOT a big mystery. They follow formulas and those formulas never change. Unlock the formulas behind the most common chords you’ll play in popular music.'
       ],
       [
           'position' => 'left',
-          'img' => 'https://pianote.s3.amazonaws.com/products/the-power-of-chords/thumb3.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/thumb3.jpg',
           'title' => 'Chord Inversions 101',
           'desc' => 'Inversions can be scary and a little confusing. But they open up the keyboard in an entirely new way. The concept behind them is simple. And the result -- is powerful. You’ll get tips to practice and master your chord inversions so they’ll become second nature.'
       ],
       [
           'position' => 'right',
-          'img' => 'https://pianote.s3.amazonaws.com/products/the-power-of-chords/thumb4.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/thumb4.jpg',
           'title' => '“Sus” Chords Explained',
           'desc' => '“Sus” chords are “suspended” chords that replace one of the notes to create a beautiful, open sound that leads wonderfully into a resolution. Knowing what they are is one thing. You’ll learn how and where to use them.'
       ],
       [
           'position' => 'left',
-          'img' => 'https://pianote.s3.amazonaws.com/products/the-power-of-chords/thumb5.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/thumb5.jpg',
           'title' => 'Slash Chords Explained',
           'desc' => 'No, we’re not talking about a famous guitarist. Slash chords can trip up beginner players, but a little bit of knowledge will add a new weapon to your chord arsenal. Slash chords add new bass notes to change the sound of the chords you’re playing.'
       ],
       [
           'position' => 'right',
-          'img' => 'https://pianote.s3.amazonaws.com/products/the-power-of-chords/thumb6.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/thumb6.jpg',
           'title' => 'How To Build 7th Chords',
           'desc' => 'Go beyond basic chords to start sounding more sophisticated and complex. You’ll be shown how to play all the different types of 7th chords and get a cheat sheet to learn some beautiful progressions using 7th chords.'
       ],
       [
           'position' => 'left',
-          'img' => 'https://pianote.s3.amazonaws.com/products/the-power-of-chords/thumb8.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/thumb8.jpg',
           'title' => 'Reading Chord Charts & Lead Sheets',
           'desc' => 'Why do you learn chords? To play songs! It’s time to take what you’ve learned and see how it will make playing your favorite songs so much easier. You’ll be able to approach any chord chart or lead sheet with confidence.'
       ],
       [
           'position' => 'right',
-          'img' => 'https://pianote.s3.amazonaws.com/products/the-power-of-chords/thumb7.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/thumb7.jpg',
           'title' => 'Finding Chords in Sheet Music',
           'desc' => 'What if the music doesn’t have chord names? No problem. You’ll learn how to find chords “hidden” in sheet music. Even classical music is based on chords (like Für Elise). And after this lesson, you’ll never look at sheet music the same way again.'
       ],
       [
           'position' => 'left',
-          'img' => 'https://pianote.s3.amazonaws.com/products/the-power-of-chords/thumb9.jpg',
+          'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/thumb9.jpg',
           'title' => 'Write Your Own Chord Progressions',
           'desc' => 'It’s time to take everything you’ve learned and write your own music. But you won’t be alone. We’ll help you start writing your own beautiful chord progressions and exploring melodies. Your relationship with music and the piano will change once you start creating and expressing yourself.'
       ],
   ];
 
   $modalImages = [
-      "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-106-Edit.jpg",
-      "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg",
-      "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg"
+      "https://d2vyvo0tyx8ig5.cloudfront.net/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-106-Edit.jpg",
+      "https://d2vyvo0tyx8ig5.cloudfront.net/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg",
+      "https://d2vyvo0tyx8ig5.cloudfront.net/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg"
   ];
 @endphp
 
@@ -77,7 +77,7 @@
     <meta property="og:title" content="The Power of Chords | Pianote">
     <meta name="description" content="Play the music you love on piano.">
     <meta property="og:description" content="Play the music you love on piano.">
-    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/products/the-power-of-chords/share-image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/share-image.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
 
@@ -344,7 +344,7 @@
         <div class="max-w-5xl mx-auto md:flex relative items-center px-4">
             <div class="flex-1 text-center lg:text-right">
                 <div class="md:inline-block text-center md:text-left">
-                    <img class="h-20 md:h-24 mb-6 lazyload" data-src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://pianote.s3.amazonaws.com/products/the-power-of-chords/Logo_left.png" alt="logo left">
+                    <img class="h-20 md:h-24 mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/Logo_left.png" alt="logo left">
                     <h1 class="font-extrabold mb-4">
                         Play the music <br>you love on piano.
                     </h1>
@@ -359,7 +359,7 @@
                             {{--</div>--}}
                         </div>
                         <div class="flex-1 flex items-center pl-2">
-                            <img class="h-6 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_80,q_auto:best/https://pianote.s3.amazonaws.com/products/the-power-of-chords/profiles.png" alt="profiles">
+                            <img class="h-6 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">
                             <div style="font-size: 10px;">
                                 Join {{ $students }} pianists who<br> have already registered.
                             </div>
@@ -369,8 +369,8 @@
             </div>
             <div class="flex-1 text-center md:pl-6 lg:pl-0">
                 <div class="inline-block relative max-w-lg">
-                    <img class="hidden md:inline-block rounded-xl cursor-pointer header-thumb lazyload autoplay-video" data-src="https://cdn.musora.com/image/fetch/w_760,q_auto:best/https://pianote.s3.amazonaws.com/products/the-power-of-chords/header_thumb.png" data-open="sample" alt="header thumb">
-                    <img class="md:hidden rounded-xl mb-6 cursor-pointer lazyload autoplay-video" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://pianote.s3.amazonaws.com/products/the-power-of-chords/header_thumb_m.png" data-open="sample" alt="mobile header thumb">
+                    <img class="hidden md:inline-block rounded-xl cursor-pointer header-thumb lazyload autoplay-video" data-src="https://www.musora.com/musora-cdn/image/width=760,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/header_thumb.png" data-open="sample" alt="header thumb">
+                    <img class="md:hidden rounded-xl mb-6 cursor-pointer lazyload autoplay-video" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/header_thumb_m.png" data-open="sample" alt="mobile header thumb">
                     <div class="join smaller white absolute bottom-8 md:bottom-3 left-2 autoplay-video" data-open="sample">
                         <i class="fa-solid fa-play"></i>
                         watch a sample
@@ -385,7 +385,7 @@
                     {{--</div>--}}
                 </div>
                 <div class="flex-1 flex items-center md:pl-2 justify-center">
-                    <img class="h-6 mr-1 lazyload" data-src="https://cdn.musora.com/image/fetch/w_80,q_auto:best/https://pianote.s3.amazonaws.com/products/the-power-of-chords/profiles.png" alt="profiles">
+                    <img class="h-6 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">
                     <div style="font-size: 10px;">
                         Join {{ $students }} pianists who<br class="hidden md:inline-block"> have already <br class="md:hidden">registered.
                     </div>
@@ -412,7 +412,7 @@
                 </div>
             </div>
             <div class="flex-1 md:pl-4 lg:pl-10 text-center">
-                <img class="music-sheet -mb-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1050,q_auto:best/https://pianote.s3.amazonaws.com/products/the-power-of-chords/sheet_music.png" alt="sheet music">
+                <img class="music-sheet -mb-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1050,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/sheet_music.png" alt="sheet music">
             </div>
         </div>
 
@@ -441,13 +441,13 @@
                                 </div>
                             </div>
                             <div class="pl-1 md:pl-9 lg:pl-10">
-                                <img class="timeline-img rounded-xl lazyload mb-4 md:mb-0" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/{{ $step['img'] }}" alt="step {{$key+1}}" />
+                                <img class="timeline-img rounded-xl lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $step['img'] }}" alt="step {{$key+1}}" />
                             </div>
                         </div>
                     @else
                         <div class="timeline relative flex flex-col md:grid md:grid-cols-2 {{--gap-2 md:gap-12 lg:gap-20--}} mb-16 md:mb-16 lg:mb-28 pl-6 md:pl-0">
                             <div class="pr-1 md:pr-9 lg:pr-10">
-                                <img class="timeline-img rounded-xl lazyload mb-4 md:mb-0" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/{{ $step['img'] }}" alt="step {{$key+1}}" />
+                                <img class="timeline-img rounded-xl lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $step['img'] }}" alt="step {{$key+1}}" />
                             </div>
                             <div class="content relative flex items-center justify-center pl-1 md:pl-8 lg:pl-10">
                                 <div class="relative w-full">
@@ -476,7 +476,7 @@
             <div class="md:flex gap-5 px-4">
                 <div class="flex-1 mb-10 md:mb-0">
                     <video autoplay loop muted class="mb-4 rounded-xl shadow-md">
-                        <source src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/practice-alongs3.mp4" type="video/mp4">
+                        <source src="https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/practice-alongs3.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <h5 class="font-extrabold mb-2">
@@ -487,7 +487,7 @@
                     </p>
                 </div>
                 <div class="flex-1 mb-10 md:mb-0">
-                    <div class="bg-cover bg-top w-full aspect-16:9 rounded-xl mb-4 lazyload shadow-md" data-bg="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://pianote.s3.amazonaws.com/products/the-power-of-chords/downloadable.jpg"></div>
+                    <div class="bg-cover bg-top w-full aspect-16:9 rounded-xl mb-4 lazyload shadow-md" data-bg="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/downloadable.jpg"></div>
                     <h5 class="font-extrabold mb-2">
                         Downloadable Cheat Sheats
                     </h5>
@@ -496,7 +496,7 @@
                     </p>
                 </div>
                 <div class="flex-1">
-                    <div class="bg-cover bg-top w-full aspect-16:9 rounded-xl mb-4 lazyload shadow-md" data-bg="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://pianote.s3.amazonaws.com/products/the-power-of-chords/personal_support.jpg"></div>
+                    <div class="bg-cover bg-top w-full aspect-16:9 rounded-xl mb-4 lazyload shadow-md" data-bg="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/personal_support.jpg"></div>
                     <h5 class="font-extrabold mb-2">
                         Personal Support
                     </h5>
@@ -525,7 +525,7 @@
             {{--</div>--}}
             {{--<div class="flex-1 relative sm:w-2/3 md:w-auto mx-auto text-center sm:pl-10">--}}
                 {{--<div class="relative md:max-w-md mx-auto">--}}
-                    {{--<img class="md:absolute md:w-full h-80 md:h-auto md:left-0 --}}{{---top-20--}}{{-- scales-book cursor-pointer lazyload" data-src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/piano_scales_book.png" alt="scales book" data-open="seeInside1">--}}
+                    {{--<img class="md:absolute md:w-full h-80 md:h-auto md:left-0 --}}{{---top-20--}}{{-- scales-book cursor-pointer lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/piano_scales_book.png" alt="scales book" data-open="seeInside1">--}}
                 {{--</div>--}}
             {{--</div>--}}
         {{--</div>--}}
@@ -536,13 +536,13 @@
     <section class="text-center px-5 sm:px-6 pb-20 pt-10 sm:py-16 lg:py-24" style="background-color:#00101D;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-12 mb-12">
-                <div class="py-40 sm:py-48 lg:py-64 border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 bg-center bg-cover relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 flex-shrink-0 cursor-pointer lazyload autoplay-video" data-bg="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://pianote.s3.amazonaws.com/products/the-power-of-chords/coach_profile-min.png" data-open="meetlisa">
+                <div class="py-40 sm:py-48 lg:py-64 border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 bg-center bg-cover relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 flex-shrink-0 cursor-pointer lazyload autoplay-video" data-bg="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/coach_profile-min.png" data-open="meetlisa">
                     <div class="join smaller white absolute bottom-2 md:bottom-3 left-2 autoplay-video" data-open="meetlisa">
                         <i class="fa-solid fa-play"></i>
                         meet lisa!
                     </div>
                 </div>
-                {{-- <img class="border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://pianote.s3.amazonaws.com/products/the-power-of-chords/coach_profile-min.png"> --}}
+                {{-- <img class="border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/coach_profile-min.png"> --}}
                 <div class="bg-white text-left rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow">
                     <h6 class="uppercase text-pianote leading-normal text-center sm:text-left">MEET YOUR COACH</h6>
                     <h2 class="text-center sm:text-left"><strong>Lisa Witt</strong></h2>
@@ -553,7 +553,7 @@
                         It’s why I’m so excited about this course - because it’s going to show you what’s possible. <br><br>
                         I hope you’ll give me a chance to do that.
                     </h6>
-                    <img class="h-10 lg:h-16 mt-7 lg:mt-10 lazyload" data-src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/signature.png" alt="signature">
+                    <img class="h-10 lg:h-16 mt-7 lg:mt-10 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/signature.png" alt="signature">
                 </div>
             </div>
         </div>
@@ -561,7 +561,7 @@
 
     <section class="pt-20 sm:pt-28 pb-10 md:pb-20 relative">
         <div class="text-center absolute left-0 right-0 -top-16">
-            <img class="h-28 md:h-32 lazyload" data-src="https://pianote.s3.amazonaws.com/sales/2022/piano-guarantee.png" alt="gurantee badge">
+            <img class="h-28 md:h-32 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" alt="gurantee badge">
         </div>
         <div class="max-w-4xl mx-auto px-4">
             <h2 class="font-extrabold text-center mb-10">
@@ -590,7 +590,7 @@
     <div id="customize-anchor" class="anchor"></div>
     <section class="px-4 py-10 md:py-20" style="background: #EFF7FF;">
         <div class="max-w-sm md:max-w-2xl lg:max-w-3xl mx-auto text-center">
-            <img class="h-20 sm:h-24 mb-8 lazyload" data-src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/Logo_center.png" alt="centerd logo">
+            <img class="h-20 sm:h-24 mb-8 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/Logo_center.png" alt="centerd logo">
             <h2 class="font-extrabold">Play the music you love.</h2>
             <h6 class="mt-2 leading-normal">
                 Simple steps to transform your <br class="md:hidden">understanding of music.

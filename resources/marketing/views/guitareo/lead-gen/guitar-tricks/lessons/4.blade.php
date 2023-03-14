@@ -43,16 +43,16 @@
 @section('assets')
     @include('guitareo.lead-gen.partials._assignment-resources', [
         "title" => "Playthrough MP3",
-        "mp3URL" => "https://guitareo.s3.amazonaws.com/guitarquest/2-Simple-Guitar-Tricks/TruckJingle-Playthrough.mp3"
+        "mp3URL" => "https://d122ay5chh2hr5.cloudfront.net/guitarquest/2-Simple-Guitar-Tricks/TruckJingle-Playthrough.mp3"
     ])
 
     @include('guitareo.lead-gen.partials._assignment-resources', [
         "title" => "Full Ad MP3",
-        "mp3URL" => "https://guitareo.s3.amazonaws.com/guitarquest/2-Simple-Guitar-Tricks/TruckJingle-FullAd.mp3"
+        "mp3URL" => "https://d122ay5chh2hr5.cloudfront.net/guitarquest/2-Simple-Guitar-Tricks/TruckJingle-FullAd.mp3"
     ])
 
     @include('guitareo.lead-gen.partials._assignment-resources', [
         "title" => "Sheet Music PDF",
-        "pdfURL" => "https://guitareo.s3.amazonaws.com/guitarquest/2-Simple-Guitar-Tricks/TruckJingle-SheetMusic.pdf"
+        "pdfURL" => "https://d122ay5chh2hr5.cloudfront.net/guitarquest/2-Simple-Guitar-Tricks/TruckJingle-SheetMusic.pdf"
     ])
 @endsection

@@ -1,9 +1,9 @@
 export const brandUrl = {
   drumeo: 'https://musora.com/cdn-cgi/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
-  singeo: 'https://musora.com/cdn-cgi/image/quality=100,width=250,metadata=none/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png',
+  singeo: 'https://musora.com/cdn-cgi/image/quality=100,width=250,metadata=none/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png',
   guitareo: 'https://d38h3dn806jqj1.cloudfront.net/logos/guitareo.svg',
   pianote:
-    'https://musora.com/cdn-cgi/image/quality=100,width=250,metadata=none/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png'
+    'https://musora.com/cdn-cgi/image/quality=100,width=250,metadata=none/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png'
 }
 
 export const whiteLogos = {

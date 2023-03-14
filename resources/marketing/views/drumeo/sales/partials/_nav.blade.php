@@ -1,7 +1,7 @@
 <nav id="nav" class="top-bar row expanded">
     <div class="logo">
         <a href="{{ get_legacy_brand_base_url('drumeo') }}">
-            <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo">
+            <img src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo">
         </a>
     </div>
 
@@ -73,7 +73,7 @@
                 >
 
                 @if(!empty($trialVersion))
-                    Start Trial
+                    Start for free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @else
                     Join<span class="show-for-medium"> Drumeo</span>
                 @endif

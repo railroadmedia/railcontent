@@ -16,9 +16,9 @@
     /metal-playalongs/songs/9
 @stop
 
-@section('prev-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Opus+I+Excerpt%2C+No.5.jpg')
+@section('prev-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Opus+I+Excerpt%2C+No.5.jpg')
 
-@section('next-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Teratogenesis.jpg')
+@section('next-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Teratogenesis.jpg')
 
 @section('assets')
     @include('drumeo.lead-gen.partials._assignment-resources', [

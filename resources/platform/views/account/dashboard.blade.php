@@ -34,7 +34,7 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
 
 @section('content')
     @include('partials.bladesora.members.partials._account-header', [
-        'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/' . $brand . '-header.jpg',
+        'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/' . $brand . '-header.jpg',
         'userAvatar' => $dashboardUser->profile_picture_url,
         'userName' => $dashboardUser->display_name,
         'appName' => 'Musora',
@@ -63,7 +63,7 @@ $showCompleteYourAccountButton = !$hasGear || !$hasTopics || !$hasGenres || !$ha
                 <!-- Method Progress -->
                 <div class="tw-flex tw-flex-col lg:tw-flex-row tw-justify-center tw-items-center tw-mb-5 tw-w-full tw-rounded-full tw-min-h-[150px] lg:tw-pr-6 tw-bg-gradient-to-b tw-from-{{ $brand }} tw-to-{{ $brand }}-700">
                     <div class="tw-flex tw-items-center tw-justify-center tw-px-8 tw-w-full lg:tw-w-7/12">
-                        <img src="https://musora-ui.s3.amazonaws.com/logos/{{ $brand }}-method.svg" alt="brand" class="tw-max-w-[200px] lg:tw-max-w-[567px] tw-w-full tw-mb-4 lg:tw-mb-0" />
+                        <img src="https://d38h3dn806jqj1.cloudfront.net/logos/{{ $brand }}-method.svg" alt="brand" class="tw-max-w-[200px] lg:tw-max-w-[567px] tw-w-full tw-mb-4 lg:tw-mb-0" />
                     </div>
                     <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-px-10 sm:tw-px-8 tw-w-full lg:tw-w-5/12">
                         <div class="tw-text-center tw-w-full tw-max-w-[287px]">

@@ -23,7 +23,7 @@
                 input-label="Type your suggestion here..."
                 email-type="layouts/inline/alert"
                 email-endpoint="/mailora/secure/send"
-                email-logo="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"
+                email-logo="https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png"
                 email-alert="Learning Path Suggestion from: {{ user()->display_name }} ({{ current_user()->getEmail() }})"
                 theme-color="{{ $brand }}"
                 success-message="Suggestion successfully sent!"

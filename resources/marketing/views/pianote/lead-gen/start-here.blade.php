@@ -8,7 +8,7 @@
     <meta name="description" content="Get started on the right foot (or rather hand!) with free piano lessons.">
     <meta property="og:description" content="Get started on the right foot (or rather hand!) with free piano lessons.">
 
-    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https:/pianote.s3.amazonaws.com/lead-gen/start-here/header_image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https:/d2vyvo0tyx8ig5.cloudfront.net/lead-gen/start-here/header_image.jpg">
     <meta property="og:url" content="https://www.pianote.com/blog/start-here">
 @endsection
 
@@ -270,7 +270,7 @@
     <div class="beat-navigation drumeo">
         <div class="row">
             <a href="/blog/" class="nav-item active">
-                <img alt="The Note" src="https://pianote.s3.amazonaws.com/blog/the-note-logo.svg">
+                <img alt="The Note" src="https://d2vyvo0tyx8ig5.cloudfront.net/blog/the-note-logo.svg">
             </a>
             <a href="/start-here" class="nav-item show-for-medium">
                 START HERE</a>
@@ -294,7 +294,7 @@
                 ARTICLES</a>
         </div>
     </div>
-    <header class="text-center sm:text-left relative bg-cover px-6 md:px-10 pt-72 pb-8 md:py-36 lg:py-40 bg-cover bg-right sm:bg-left lazyload" style="background-color:#00101D;" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://pianote.s3.amazonaws.com/lead-gen/start-here/header2.jpg">
+    <header class="text-center sm:text-left relative bg-cover px-6 md:px-10 pt-72 pb-8 md:py-36 lg:py-40 bg-cover bg-right sm:bg-left lazyload" style="background-color:#00101D;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/start-here/header2.jpg">
         <div class="relative z-10 max-w-md md:max-w-5xl mx-auto">
             <h2 class="text-white font-extrabold">
                 Begin Your Piano <br>
@@ -374,7 +374,7 @@
             <div class="flex flex-col md:flex-row md:gap-4">
                 <a href="/blog/how-to-play-piano/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote.s3.us-east-1.amazonaws.com/blog/2021/How%20to%20Play%20Piano%20-%20Ultimate%20Guide/HowToPlayPiano-01.jpg" alt="how to play piano">
+                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote.s3.us-east-1.amazonaws.com/blog/2021/How%20to%20Play%20Piano%20-%20Ultimate%20Guide/HowToPlayPiano-01.jpg" alt="how to play piano">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1">
@@ -389,7 +389,7 @@
                 </a>
                 <a href="/blog/how-to-buy-piano/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote.s3.us-east-1.amazonaws.com/blog/2021/Chord%20Progressions%20That%20Move%20You/dream%20piano.jpg" alt="how to buy your first piano">
+                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote.s3.us-east-1.amazonaws.com/blog/2021/Chord%20Progressions%20That%20Move%20You/dream%20piano.jpg" alt="how to buy your first piano">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1">
@@ -404,7 +404,7 @@
                 </a>
                 <a href="/blog/learn-piano-online/" class="flex-1">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote.s3.us-east-1.amazonaws.com/blog/2021/Learn%20Piano%20Online/Learn%20Piano%20Online-02.jpg" alt="how to learn piano">
+                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote.s3.us-east-1.amazonaws.com/blog/2021/Learn%20Piano%20Online/Learn%20Piano%20Online-02.jpg" alt="how to learn piano">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1">
@@ -423,9 +423,9 @@
 
     <section class="pt-16">
         <div class="max-w-5xl mx-auto flex flex-wrap sm:flex-nowrap items-center lg:rounded-lg bg-cover py-10 px-4 px-6 lg:px-20 text-white bg-bottom" style="background-image: url(https://d2vyvo0tyx8ig5.cloudfront.net/backgrounds/background-1.jpg);">
-            <img class="rounded-full h-40 md:h-52 border-white border-8 mx-auto mb-6 md:mb-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lisa-witt.jpg" alt="lisa witt">
+            <img class="rounded-full h-40 md:h-52 border-white border-8 mx-auto mb-6 md:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/lisa-witt.jpg" alt="lisa witt">
             <div class="w-full md:w-auto text-center flex-grow sm:pl-5 lg:pl-8">
-                <img class="h-12 sm:h-16 lazyload" data-src="https://cdn.musora.com/image/fetch/w_750,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/logo-2.svg" alt="chord hacks">
+                <img class="h-12 sm:h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/logo-2.svg" alt="chord hacks">
                 <div class="my-4">
                     Go from absolute beginner to playing<br class="hidden sm:inline-block">
                     your first song in four easy lessons!
@@ -447,7 +447,7 @@
             <div class="flex flex-col md:flex-row md:gap-4">
                 <a href="/blog/fur-elise-piano-sheet-music-tutorial/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://img.youtube.com/vi/4rs4IYUoI1Y/maxresdefault.jpg" alt="the best tutorial on the internet">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://img.youtube.com/vi/4rs4IYUoI1Y/maxresdefault.jpg" alt="the best tutorial on the internet">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -462,7 +462,7 @@
                 </a>
                 <a href="/blog/bohemian-rhapsody-sheet-music/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://img.youtube.com/vi/HLB28rTqNTw/maxresdefault.jpg" alt="how to pya bohemian rhapsody">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://img.youtube.com/vi/HLB28rTqNTw/maxresdefault.jpg" alt="how to pya bohemian rhapsody">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -477,7 +477,7 @@
                 </a>
                 <a href="/blog/play-any-song-on-the-piano/" class="flex-1">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://img.youtube.com/vi/pZHKJHprR4Y/maxresdefault.jpg" alt="3 things to play any song">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://img.youtube.com/vi/pZHKJHprR4Y/maxresdefault.jpg" alt="3 things to play any song">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -500,7 +500,7 @@
             <div class="flex flex-col md:flex-row md:gap-4">
                 <a href="/blog/how-to-read-piano-notes/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://img.youtube.com/vi/gEI7uYOCQXo/maxresdefault.jpg" alt="how to read notes">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://img.youtube.com/vi/gEI7uYOCQXo/maxresdefault.jpg" alt="how to read notes">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -515,7 +515,7 @@
                 </a>
                 <a href="/blog/how-to-play-piano-chords/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2022/07/25151755/ChordFormulas-1-768x432.jpg" alt="piano chord formulas">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2022/07/25151755/ChordFormulas-1-768x432.jpg" alt="piano chord formulas">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -530,7 +530,7 @@
                 </a>
                 <a href="/blog/how-to-use-the-circle-of-fifths/" class="flex-1">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2018/08/22095755/Circle-of-Fifths-New-768x432.png" alt="circle of fifths">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2018/08/22095755/Circle-of-Fifths-New-768x432.png" alt="circle of fifths">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -553,7 +553,7 @@
             <div class="flex flex-col md:flex-row md:gap-4">
                 <a href="/blog/piano-technique-made-easy/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://img.youtube.com/vi/rXC7CJgTeYY/maxresdefault.jpg" alt="improve your piano technique">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://img.youtube.com/vi/rXC7CJgTeYY/maxresdefault.jpg" alt="improve your piano technique">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -568,7 +568,7 @@
                 </a>
                 <a href="/blog/hand-independence-in-5-days/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://img.youtube.com/vi/AKEHb08ztlY/maxresdefault.jpg" alt="5 days to better hand independence">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://img.youtube.com/vi/AKEHb08ztlY/maxresdefault.jpg" alt="5 days to better hand independence">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -583,7 +583,7 @@
                 </a>
                 <a href="/blog/piano-practice-routine-for-beginners/" class="flex-1">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://img.youtube.com/vi/yrgO3R8mgGo/maxresdefault.jpg" alt="beginner pianist practice routine">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://img.youtube.com/vi/yrgO3R8mgGo/maxresdefault.jpg" alt="beginner pianist practice routine">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -606,7 +606,7 @@
             <div class="flex flex-col md:flex-row md:gap-4">
                 <a href="/blog/history-of-the-piano/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote.s3.us-east-1.amazonaws.com/blog/2022/History%20of%20Pianos/history%20piano%20thumbnail%20copy.png" alt="piano evolutiong">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote.s3.us-east-1.amazonaws.com/blog/2022/History%20of%20Pianos/history%20piano%20thumbnail%20copy.png" alt="piano evolutiong">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -621,7 +621,7 @@
                 </a>
                 <a href="/blog/hardest-piano-song/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2020/04/30181754/Header-4-768x403.jpg" alt="top 10 hardest piano songs">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2020/04/30181754/Header-4-768x403.jpg" alt="top 10 hardest piano songs">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -636,7 +636,7 @@
                 </a>
                 <a href="/blog/the-many-styles-of-piano-playing-styles-genres/" class="flex-1">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2022/06/27155954/Piano-Styles-copy-768x432.jpg" alt="piano styles">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2022/06/27155954/Piano-Styles-copy-768x432.jpg" alt="piano styles">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
@@ -652,7 +652,7 @@
             </div>
         </div>
     </section>
-    <section class="px-4 py-16 text-white bg-cover bg-bottom lazyload" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/customize-bg.jpg">
+    <section class="px-4 py-16 text-white bg-cover bg-bottom lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/customize-bg.jpg">
         <div class="max-w-lg md:max-w-4xl mx-auto text-center">
             <h4 class="font-extrabold">
                 Get the Best Piano Content on the Web

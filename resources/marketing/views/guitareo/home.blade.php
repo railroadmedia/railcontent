@@ -5,7 +5,7 @@
 
     <!-- Hero Component -->
     @component('_partials.components.hero-section', [
-        "backgroundImage" => "https://musora-web-platform.s3.amazonaws.com/guitareo/homepage/guitareo-hero.jpg",
+        "backgroundImage" => "https://d3fzm1tzeyr5n3.cloudfront.net/guitareo/homepage/guitareo-hero.jpg",
         "gradientClasses" => "from-[#032829] to-[#032829]"
     ])
         @slot('content')
