@@ -14,7 +14,7 @@ class MigrateUserPlaylistToV2 extends Command
      *
      * @var string
      */
-    protected $signature = 'MigrateUserPlaylistToV2';
+    protected $signature = 'MigrateUserPlaylistToV2 {brand}';
 
     /**
      * The console command description.
@@ -98,11 +98,16 @@ class MigrateUserPlaylistToV2 extends Command
                 ->toDateTimeString()
         );
 
+
+
         $total = 0;
-        $dbConnection->table(config('railcontent.table_prefix').'user_playlists')
-            ->where('type', '=', 'primary-playlist')
-            // ->where('id', '=', 4)
-            ->orderBy('id', 'asc')
+       $query =  $dbConnection->table(config('railcontent.table_prefix').'user_playlists')
+            ->where('type', '=', 'primary-playlist');
+        if (!empty($this->argument('brand'))) {
+            $query->where('brand', '=', $this->argument('brand'));
+        }
+
+           $query->orderBy('id', 'asc')
             ->chunk(5000, function (Collection $rows) use ($dbConnection, &$total) {
                 foreach ($rows as $row) {
                     $items =
