@@ -5,7 +5,6 @@ namespace Railroad\Railcontent\Helpers;
 use Carbon\Carbon;
 use Illuminate\Cache\RedisStore;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Predis\Transaction\AbortedMultiExecException;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -151,7 +150,9 @@ class CacheHelper
     {
         $cursor = 0;
         do {
+            Log::debug("CachHelper::deleteAllCachedSearchResults scan");
             list($cursor, $keys) = Redis::scan($cursor, 'match', "*$key*", 'count', 1000);
+            Log::debug("CachHelper::deleteAllCachedSearchResults scan finish");
             self::deleteCacheKeys($keys);
         } while ($cursor);
 
@@ -348,22 +349,8 @@ class CacheHelper
                     )
                 );
             }
-            Log::debug("CachHelper::deleteAllCachedSearchResults");
 
             self::deleteAllCachedSearchResults('userId');
-
-            Log::debug("CachHelper::deleteAllCachedSearchResults finished");
-
-            try {
-                if (!$userKeys) {
-                    Log::debug(print_r($userKeys, true));
-                    $count = count($userKeys);
-                    Log::debug("CachHelper::deleteUserFields $count");
-                }
-            } catch (\Throwable $ex) {
-                Log::debug("CachHelper::deleteUserFields $userKeys ex");
-                Log::error($ex);
-            }
 
             foreach ($userKeys as $userKey) {
                 $fields = iterator_to_array(
