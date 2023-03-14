@@ -117,7 +117,7 @@ class CodeRedemptionController extends BaseController
     public function showPianoteRedeemPageForNewUsers()
     {
         return view(
-            'pianote.access-code-redeem.access-code-redeem-page',
+            'musora.pages.redeem.access-code-redeem-page',
             ['newAccount' => true, 'redirectUrl' => get_musora_brand_base_url() . '/pianote']
         );
     }
@@ -125,7 +125,7 @@ class CodeRedemptionController extends BaseController
     public function showPianoteRedeemPageForExistingUsers()
     {
         return view(
-            'pianote.access-code-redeem.access-code-redeem-page',
+            'musora.pages.redeem.access-code-redeem-page',
             ['newAccount' => false, 'redirectUrl' => get_musora_brand_base_url() . '/pianote']
         );
     }
