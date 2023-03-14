@@ -16,9 +16,9 @@
     /metal-playalongs/songs/4
 @stop
 
-@section('prev-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Nightmares.jpg')
+@section('prev-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Nightmares.jpg')
 
-@section('next-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Basic+Metal.jpg')
+@section('next-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Basic+Metal.jpg')
 
 @section('assets')
     @include('drumeo.lead-gen.partials._assignment-resources', [

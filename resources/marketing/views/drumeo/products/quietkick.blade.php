@@ -5,7 +5,7 @@
     <meta property="og:title" content="QuietKick | Drumeo">
     <meta name="description" content="Improve your kick foot anywhere.">
     <meta property="og:description" content="Improve your kick foot anywhere.">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/fb-share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/fb-share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/quietkick/">
 
     @include('_partials.layout._fonts')
@@ -83,7 +83,7 @@
     <header class="header text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-6xl">
-                <img alt="quietkick" class="h-16 sm:h-24 lg:h-28" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/drumeo-quietkick.png"><br>
+                <img alt="quietkick" class="h-16 sm:h-24 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/drumeo-quietkick.png"><br>
                 <h1 class="leading-tight mt-72 sm:mt-96"><strong>Improve your kick<br class="inline sm:hidden"> foot anywhere.</strong></h1>
                 @if( $products['quietkick']->getStockAvailability() > 1 && !empty($products['quietkick']->getStockAvailability()))
                     <a class="join blue my-2 sm:my-4 lg:my-6 w-2/3 anchor-slide" href="#customize-anchor">Get Started &raquo;</a>
@@ -103,11 +103,11 @@
         <video class="object-cover w-full h-full relative z-0" poster="" src="https://player.vimeo.com/progressive_redirect/playback/696274730/rendition/1080p?loc=external&signature=a2e19f58b044993d2561fbeaabcd4855ec9d1f577a7bba332fc5a7e7221cb23a" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
     </header>
 
-    <section class="text-left text-white px-5 sm:pl-5 sm:pr-0 bg-cover lazyload" style="background-color: #c1c6ca; color: #203e59;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/bg.jpg">
+    <section class="text-left text-white px-5 sm:pl-5 sm:pr-0 bg-cover lazyload" style="background-color: #c1c6ca; color: #203e59;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/bg.jpg">
         <div class="container mx-auto max-w-6xl relative pb-8 md:py-10 lg:py-16">
             <div class="mx-auto mb-4 sm:mb-0 sm:absolute sm:top-0 sm:right-0 z-10 max-w-xs sm:max-w-full w-full sm:w-1/2 lg:w-7/12">
-                <img class="w-full img-toggle hidden active" src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/quietkick-up2.png" alt="quietkick pedal">
-                <img class="w-full img-toggle hidden" src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/quietkick-down2.png" alt="quietkick pedal">
+                <img class="w-full img-toggle hidden active" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/quietkick-up2.png" alt="quietkick pedal">
+                <img class="w-full img-toggle hidden" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/quietkick-down2.png" alt="quietkick pedal">
             </div>
             <div class="w-full sm:w-1/2 lg:w-5/12 z-20">
                 <h2 class="leading-none mb-3 lg:mb-5"><strong>Never skip leg day.</strong></h2>
@@ -126,21 +126,21 @@
         <div class="container mx-auto z-10 relative max-w-5xl">
             <h2 class="text-center mb-10 sm:mb-16"><strong>Foot workouts on the fly.</strong></h2>
             <div class="flex flex-wrap sm:flex-nowrap items-center mb-8 sm:mb-16">
-                <img  alt="quietkick double pedal" class="h-44 sm:h-56 lg:h-80 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/double-kick.jpg">
+                <img  alt="quietkick double pedal" class="h-44 sm:h-56 lg:h-80 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/double-kick.jpg">
                 <div class="w-full sm:w-1/2 sm:pl-10">
                     <h5 class="mb-3 text-center sm:text-left"><strong>Single OR double kick.</strong></h5>
                     <p class="text-light-navy max-w-xs sm:max-w-full">Yup, your double pedal works too. An extra beater turns your QuietKick into the ultimate double-kick workout station. (Extra beater sold separately.)</p>
                 </div>
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-center mb-6 sm:mb-16">
-                <img  alt="quietkick in library" class="sm:order-1 h-44 sm:h-56 lg:h-80 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/anywhere.jpg">
+                <img  alt="quietkick in library" class="sm:order-1 h-44 sm:h-56 lg:h-80 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/anywhere.jpg">
                 <div class="w-full sm:w-1/2 sm:pr-10">
                     <h5 class="mb-3 text-center sm:text-left"><strong>Practice anywhere.</strong></h5>
                     <p class="text-light-navy max-w-xs sm:max-w-full">A hotel, the park, or maybe just a new spot in your house. The QuietKick allows you to practice anywhere – and that means your foot will never hold you back again.</p>
                 </div>
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-center {{--mb-8 sm:mb-16--}}">
-                <img  alt="quietkick pedal" class="h-44 sm:h-56 lg:h-80 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/any-pedal.jpg">
+                <img  alt="quietkick pedal" class="h-44 sm:h-56 lg:h-80 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/any-pedal.jpg">
                 <div class="w-full sm:w-1/2 sm:pl-10">
                     <h5 class="mb-3 text-center sm:text-left"><strong>Feels like a bass drum.</strong></h5>
                     <p class="text-light-navy max-w-xs sm:max-w-full">The Drumeo QuietKick replicates the action & feel of playing a real bass drum. That makes your transition from pad to kit seamless.</p>
@@ -160,17 +160,17 @@
             <div class="flex flex-wrap">
                 <div class="w-full sm:w-1/3 mb-6 sm:mb-0 sm:px-3 lg:px-8">
                     <h1 class="inline-block text-drumeo rounded-full leading-none py-3.5 sm:py-3 lg:py-3.5 w-14 sm:w-16 lg:w-20 border-drumeo border-2"><strong>1</strong></h1><br>
-                    <img  alt="quietkick icon" class="my-6 sm:my-8 lg:my-10 h-16 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/step2.svg">
+                    <img  alt="quietkick icon" class="my-6 sm:my-8 lg:my-10 h-16 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/step2.svg">
                     <p class="text-light-navy">Swap out your existing beater with the included reverse-angle beater. This directs your kick motion downward – creating a quieter practice rig with little-to-no creeping across the floor.</p>
                 </div>
                 <div class="w-full sm:w-1/3 mb-6 sm:mb-0 sm:px-3 lg:px-8">
                     <h1 class="inline-block text-drumeo rounded-full leading-none py-3.5 sm:py-3 lg:py-3.5 w-14 sm:w-16 lg:w-20 border-drumeo border-2"><strong>2</strong></h1><br>
-                    <img  alt="kick icon" class="my-6 sm:my-8 lg:my-10 h-16 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/step1.svg">
+                    <img  alt="kick icon" class="my-6 sm:my-8 lg:my-10 h-16 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/step1.svg">
                     <p class="text-light-navy">Now attach your QuietKick to your kick pedal the same way you would any bass drum. Just slide the unit under your pedal and clamp down until it’s secure.</p>
                 </div>
                 <div class="w-full sm:w-1/3 sm:px-3 lg:px-8">
                     <h1 class="inline-block text-drumeo rounded-full leading-none py-3.5 sm:py-3 lg:py-3.5 w-14 sm:w-16 lg:w-20 border-drumeo border-2"><strong>3</strong></h1><br>
-                    <img  alt="pad icon" class="my-6 sm:my-8 lg:my-10 h-16 lazyload" data-src="https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/step-3.svg">
+                    <img  alt="pad icon" class="my-6 sm:my-8 lg:my-10 h-16 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/step-3.svg">
                     <p class="text-light-navy">And finally, choose your strike pad. You’ll get one long-lasting strike pads + 2 ultra-quiet strike pads included with your QuietKick. And that’s it! You’re off to the races.</p>
                 </div>
             </div>
@@ -182,10 +182,10 @@
             <h2><strong>Finally, a practice pad<br class="inline sm:hidden"> for your feet.</strong></h2>
             <h6 class="mt-2">(Kick pedal not included)</h6>
             <div class="flex flex-wrap my-5 sm:my-10">
-                <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/product-image03.jpg"></div></div>
-                <div class="p-1 w-full sm:w-8/12"><div class="h-32 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/product-image04.jpg"></div></div>
-                <div class="p-1 w-full sm:w-8/12"><div class="h-36 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/product-image02.jpg"></div></div>
-                <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/product-image01.jpg"></div></div>
+                <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/product-image03.jpg"></div></div>
+                <div class="p-1 w-full sm:w-8/12"><div class="h-32 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/product-image04.jpg"></div></div>
+                <div class="p-1 w-full sm:w-8/12"><div class="h-36 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/product-image02.jpg"></div></div>
+                <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/product-image01.jpg"></div></div>
             </div>
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
                 <p class="sm:max-w-md m-0 sm:pr-5 lg:pr-10 text-left mb-5 sm:mb-0">The QuietKick includes everything you need to start working out your foot. You’ll get three strike pads, one QuietKick unit, and one reverse-angle beater (with the option to add a second beater if you play double-kick).</p>
@@ -213,9 +213,9 @@
     </section>
 
     <div id="customize-anchor" class="anchor"></div>
-    <section class="content-section text-center customize px-4 lg:px-6 lazyload" style="background-color:#132332;background-size: cover;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/final.jpg">
+    <section class="content-section text-center customize px-4 lg:px-6 lazyload" style="background-color:#132332;background-size: cover;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/final.jpg">
         <div class="container mx-auto">
-            <img alt="quietkick logo" class="h-14 sm:h-20 lg:h-28" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/drumeo-quietkick.png"><br>
+            <img alt="quietkick logo" class="h-14 sm:h-20 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/drumeo-quietkick.png"><br>
             <h2 class="leading-tight mt-4 mb-2"><strong>Improve your kick foot anywhere.</strong></h2>
             <h6><em>Bass drum pedal not included.</em></h6>
 

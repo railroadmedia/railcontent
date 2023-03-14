@@ -1,4 +1,4 @@
-<section class="final-pitch px-2 py-14 md:py-20 lg:py-24 text-white text-center bg-center bg-cover lazyload" style="@isset($bgColor) background:{{ $bgColor }}; @endisset @isset($bgImg) background-image:url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/{{ $bgImg }}); @endisset">
+<section class="final-pitch px-2 py-14 md:py-20 lg:py-24 text-white text-center bg-center bg-cover lazyload" style="@isset($bgColor) background:{{ $bgColor }}; @endisset @isset($bgImg) background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ $bgImg }}); @endisset">
     <div class="container mx-auto md:max-w-2xl lg:max-w-3xl">
         {!! $img !!}
 

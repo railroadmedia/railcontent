@@ -18,7 +18,7 @@
     <a href="@yield('order-link')" class="artist-promo-banner fixed">
         <div class="noise-wrap">
             <div class="container">
-                <img class="logo" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/logo-horizontal.png">
+                <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/logo-horizontal.png">
                 <div class="text">
                     <p><strong>Save {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days']->price)))) }}% on 500 Songs in 5 Days</strong><br>
                         Special for Learn 3 Songs Students Only</p>
@@ -32,7 +32,7 @@
     <section class="messenger-slice" style="background: #051529;">
         <div class="container">
             <a href="@yield('order-link')">
-                <h2><strong>You’ve Learned 3 Songs. Now Learn 497 More!</strong> <br class="hidden-xs"> Exclusive Offer Only For <img class="logo" width="190px" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/logo-horizontal.png"> Students</h2>
+                <h2><strong>You’ve Learned 3 Songs. Now Learn 497 More!</strong> <br class="hidden-xs"> Exclusive Offer Only For <img class="logo" width="190px" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/logo-horizontal.png"> Students</h2>
             </a>
         </div>
     </section>

@@ -8,16 +8,16 @@
         $logo = 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png';
     }
     elseif($theme === 'pianote') {
-        $background = 'https://pianote.s3.amazonaws.com/shop/header-background.jpg';
-        $logo = 'https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png';
+        $background = 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg';
+        $logo = 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png';
     }
     elseif($theme === 'singeo') {
-        $background = 'https://singeo.s3.amazonaws.com/products/shop-header.jpg';
-        $logo = 'https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png';
+        $background = 'https://d21xeg6s76swyd.cloudfront.net/products/shop-header.jpg';
+        $logo = 'https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png';
     }
     elseif($theme === 'guitareo') {
-        $background = 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/shop-bg.jpg';
-        $logo = 'https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png';
+        $background = 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg';
+        $logo = 'https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png';
     }
 ?>
 

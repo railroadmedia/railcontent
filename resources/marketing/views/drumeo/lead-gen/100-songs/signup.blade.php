@@ -4,7 +4,7 @@
     <title>100 Drumming Anthems | Drumeo</title>
     <meta name="description" content="Get expertly transcribed sheet music for 100 of drumming’s biggest songs (FREE).">
     <!-- Social Media -->
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/og-image.png" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/og-image.png" style="display: none;">
     <meta property="og:title" content="100 Drumming Anthems | Drumeo">
     <meta property="og:description" content="Get expertly transcribed sheet music for 100 of drumming’s biggest songs (FREE).">
     <meta property="og:url" content="https://www.drumeo.com/100-songs/">
@@ -37,17 +37,17 @@
             </div>
         </div>
     </a>
-    <header class="text-white text-center sm:text-left pt-7 md:pt-20 px-6 pb-7 md:pb-0" style="background: #010a2b url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/header-background.jpg) center bottom/cover;">
+    <header class="text-white text-center sm:text-left pt-7 md:pt-20 px-6 pb-7 md:pb-0" style="background: #010a2b url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/header-background.jpg) center bottom/cover;">
         <div class="container mx-auto max-w-5xl">
             <div class="flex flex-wrap justify-center items-end lg:items-center">
                 <div class="w-10/12 sm:w-1/2 {{--lg:w-7/12--}} sm:order-1 text-right sm:pl-4 lg:pl-0">
                     <div class="relative inline-block align-bottom z-10 w-1/3" style="max-width:190px;margin-right: -6%;">
-                        <video class="absolute top-0 left-0 right-0 bottom-0 w-full p-1 rounded-2xl overflow-hidden" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/tom-sawyer.mp4" muted autoplay loop playsinline></video>
-                        <img src="https://cdn.musora.com/image/fetch/w_250,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/phone-background.png" alt="phone-background">
+                        <video class="absolute top-0 left-0 right-0 bottom-0 w-full p-1 rounded-2xl overflow-hidden" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/tom-sawyer.mp4" muted autoplay loop playsinline></video>
+                        <img src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/phone-background.png" alt="phone-background">
                     </div>
                     <div class="relative inline-block align-bottom z-0 w-2/3" style="max-width:420px">
-                        <div class="absolute rounded-xl overflow-hidden bg-white bg-cover bg-center" style="top: 1.5%;left: 1.5%;right: 1.5%;bottom: 7%;background-image:url(https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/tablet-screen2.png);"></div>
-                        <img src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/tablet-background.png" alt="tablet-background">
+                        <div class="absolute rounded-xl overflow-hidden bg-white bg-cover bg-center" style="top: 1.5%;left: 1.5%;right: 1.5%;bottom: 7%;background-image:url(https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/tablet-screen2.png);"></div>
+                        <img src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/tablet-background.png" alt="tablet-background">
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 {{--lg:w-5/12--}} mt-5 sm:mt-0 {{--lg:mt-14--}}">
@@ -105,10 +105,10 @@
             </h6>
             <div class="flex-container w-full mx-auto md:max-w-6xl md:flex items-center px-5 md:px-8 mb-9 md:mb-10 mt-4 md:mt-16 lg:mt-20">
                 <div class="pic-wrap">
-                    <img class="lazyload side-pic" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-1.png" alt="songs-1">
-                    <img class="lazyload side-pic mobile-feature" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-2-alt.png" alt="songs-2">
-                    <img class="lazyload side-pic" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-3.png" alt="songs-3">
-                    <img class="lazyload side-pic" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-5.png" alt="songs-4">
+                    <img class="lazyload side-pic" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-1.png" alt="songs-1">
+                    <img class="lazyload side-pic mobile-feature" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-2-alt.png" alt="songs-2">
+                    <img class="lazyload side-pic" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-3.png" alt="songs-3">
+                    <img class="lazyload side-pic" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-5.png" alt="songs-4">
                 </div>
                 <div class="text-left">
                     <div class="text-icon-wrap active">
@@ -149,7 +149,7 @@
         "textColor" => "white",
     ])
 
-    <section class="text-center py-14 md:py-24 lg:py-32 text-white bg-black bg-center bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://drumeo-assets.s3.amazonaws.com/lead-gen/40-songs/order-background.jpg">
+    <section class="text-center py-14 md:py-24 lg:py-32 text-white bg-black bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/order-background.jpg">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
                 <h1 class="leading-none uppercase font-bebas"><span class="text-coaches">100 Drumming Anthems</span><br> Every. Single. Note.</h1>

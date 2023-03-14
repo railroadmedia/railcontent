@@ -1,7 +1,7 @@
 <nav id="nav" class="top-bar row expanded">
     <div class="logo">
         <a href="/">
-            <img src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo">
+            <img src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo">
         </a>
     </div>
 

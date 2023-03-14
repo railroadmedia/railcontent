@@ -5,7 +5,7 @@
     <meta name="description" content="When you visit or access Musora Media, Inc websites, we may use web beacons, cookies, pixel tags, scripts, tags, API and other technologies.">
 
     <meta property="og:title" content="Cookie Policy">
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-guitareo.jpg"/>
     <meta property="og:url" content="https://www.guitareo.com/cookie/">
 
 @endsection

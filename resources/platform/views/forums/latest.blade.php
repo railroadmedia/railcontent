@@ -29,7 +29,7 @@
 @section('content')
 
     @component('partials._forum-header-banner',[
-                "backgroundImage" => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
+                "backgroundImage" => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
                 "brand" => "{{ $brand }}",
                 "currentUser" => $user,
                 'profileUrl' => user()->getDashboardUrl(),

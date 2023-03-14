@@ -321,10 +321,10 @@ form :-moz-placeholder {
 .hero-header {
   background-position: center top;
   background-size: 470px;
-  background-image: url(https://cdn.musora.com/image/fetch/w_900,q_60,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/4-exercises/header-mobile.png);
+  background-image: url(https://www.musora.com/musora-cdn/image/width=900,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/header-mobile.png);
   @include tablet {
     background-size: 1300px;
-    background-image: url(https://cdn.musora.com/image/fetch/w_2900,q_60,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/4-exercises/header-desktop.png);
+    background-image: url(https://www.musora.com/musora-cdn/image/width=2900,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/header-desktop.png);
   }
   @include desktop {
     background-size: 1450px;

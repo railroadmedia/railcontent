@@ -13,7 +13,7 @@
         <img
             alt="shopper approved image"
             class="h-6 sm:h-8 mb-2 md:mb-0 mx-auto sm:mr-1 transition-opacity opacity-0"
-            src="https://cdn.musora.com/image/fetch/w_320,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/shopper-approved-icon.svg"
+            src="https://www.musora.com/musora-cdn/image/width=320,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/shopper-approved-icon.svg"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
         >
@@ -76,7 +76,7 @@
                                 >
                                     <img
                                         class="rounded-xl transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/{{$testimonial['image']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{$testimonial['image']}}"
                                         alt="{{$testimonial['name']}} testimonial"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"

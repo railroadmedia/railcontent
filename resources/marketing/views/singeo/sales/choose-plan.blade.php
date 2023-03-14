@@ -8,7 +8,7 @@
     <meta name="description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee." />
     <meta property="og:description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee."/>
 
-        <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2023/share-image-singeo.jpg"/>
+        <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2023/share-image-singeo.jpg"/>
 
     @include('_partials.layout._fonts')
 
@@ -42,8 +42,8 @@
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @if(empty($month))
         @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
-            "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
+            "plusLogo" => "https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-plus-logo-light.svg",
+            "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/singeo-white.svg",
             "songs" => "1000",
             "firstPoint" => "Unlimited singing lessons",
             "thirdPoint" => "Direct access to vocal coaches.",
@@ -54,16 +54,16 @@
             "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
         ])
         @include('musora.sales.components.plans-different-section', [
-            "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo.svg",
-            "logo" => "https://musora-center.s3.amazonaws.com/logos/singeo-logo-black.png",
+            "plusLogo" => "https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-plus-logo.svg",
+            "logo" => "https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-black.png",
             "secondPoint" => "Artist courses and exclusive events with special guests.",
             "thirdPoint" => "Go beyond singing with lessons for guitar, piano, and drums.",
             "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
         ])
     @else
         @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
-            "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
+            "plusLogo" => "https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-plus-logo-light.svg",
+            "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/singeo-white.svg",
             "songs" => "1000",
             "firstPoint" => "Unlimited singing lessons",
             "thirdPoint" => "Direct access to vocal coaches.",

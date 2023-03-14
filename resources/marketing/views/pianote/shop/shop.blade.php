@@ -5,7 +5,7 @@
     <meta property="og:title" content="Pianote Shop">
     <meta name="description" content="Get Lessons, T-Shirts, & Much More!">
     <meta property="og:description" content="Get Lessons, T-Shirts, & Much More!">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 @endsection
 
@@ -20,11 +20,11 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://pianote.s3.amazonaws.com/shop/header-background.jpg);">
+    <header class="drum-shop-header" style="background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg);">
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
                 <div class="float-left px-2 md:px-3 w-full">
-                    <img class="h-12 sm:h-14 md:h-24 lg:h-28 mb-4" src="https://pianote.s3.amazonaws.com/shop/pianote-shop-logo.png" alt="pianote logo">
+                    <img class="h-12 sm:h-14 md:h-24 lg:h-28 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/pianote-shop-logo.png" alt="pianote logo">
                     <h3>GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>
                 </div>
             </div>
@@ -66,10 +66,10 @@
         {{--        <section class="bundles">--}}
         {{--            <div class="container mx-auto">--}}
         {{--                <div class="w-full card-wrap mb-5">--}}
-        {{--                    <a href="/shop/book-bundle/" class="w-full --}}{{--py-20 sm:py-28 lg:py-40--}}{{-- py-5 lg:py-8 px-4 sm:px-6 lg:px-20 banner-product overflow-hidden bg-cover bg-center sm:bg-right" style="background-color:#ca1176;background-image:url(https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/november/just-the-books-shop-no-classic.jpg);">--}}
+        {{--                    <a href="/shop/book-bundle/" class="w-full --}}{{--py-20 sm:py-28 lg:py-40--}}{{-- py-5 lg:py-8 px-4 sm:px-6 lg:px-20 banner-product overflow-hidden bg-cover bg-center sm:bg-right" style="background-color:#ca1176;background-image:url(https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/just-the-books-shop-no-classic.jpg);">--}}
         {{--                        <span class="top-left-badge text-white bg-promo z-10"><i class="fas fa-star"></i> SAVE {{ round(100 - (100 * (59 / 145))) }}%</span>--}}
         {{--                        <div class="text-wrap relative z-10">--}}
-        {{--                            <img class="h-24 lg:h-32 relative z-10" src="https://cdn.musora.com/image/fetch/w_1600,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/november/just-the-books-bundle-white.png">--}}
+        {{--                            <img class="h-24 lg:h-32 relative z-10" src="https://www.musora.com/musora-cdn/image/width=1600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/just-the-books-bundle-white.png">--}}
         {{--                            <p class="my-2">--}}
         {{--                                Chords & Scales Book + Practice Planner + Christmas<br class="hidden sm:inline">--}}
         {{--                                Songbook + Chords Poster + Scales Poster</p>--}}

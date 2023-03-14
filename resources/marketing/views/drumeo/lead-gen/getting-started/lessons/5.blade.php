@@ -21,6 +21,6 @@
 
     @include('drumeo.lead-gen.partials._assignment-resources', [
         "title" => "Basic Counting",
-        "pdfURL" => "https://drumeo-assets.s3.amazonaws.com/lead-gen/getting-started/5-basic-counting.jpg",
+        "pdfURL" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/5-basic-counting.jpg",
     ])
 @stop

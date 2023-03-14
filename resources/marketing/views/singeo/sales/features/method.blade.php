@@ -10,10 +10,10 @@
     <meta property="og:url" content="https://www.singeo.com/method">
     <meta name="description" content="Step-by-step lessons to understand your voice, strengthen it, and sing with confidence!">
     <meta property="og:description" content="Step-by-step lessons to understand your voice, strengthen it, and sing with confidence!">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2023/share-image-method.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2023/share-image-method.jpg" style="display: none;">
 @endsection
 
-@section('header-img', 'https://singeo.s3.amazonaws.com/sales/2023/method-thumb.jpg')
+@section('header-img', 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/method-thumb.jpg')
 
 @section('header', 'Your singing goals start here.')
 

@@ -4,7 +4,7 @@
     @parent
 
     <meta name="description" content="Anyone can sing! Singeo is here to show you how in this free mini lesson series."/>
-    <meta property="og:image" content="https://cdn.musora.com/image/fetch/w_1200,q_60,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/4-exercises/og-image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/og-image.jpg">
     <meta property="og:title" content="4 Exercises Guaranteed To Improve ANY Voice!">
     <meta property="og:description" content="Anyone can sing! Singeo is here to show you how in this free mini lesson series.">
     <meta property="og:url" content="https://www.singeo.com/improve-any-voice/">
@@ -17,7 +17,7 @@
 @section('assets')
     @include('singeo.lead-gen.partials._assignment-resources', [
         "title" => "Download All MP3 Exercises",
-        "zipURL" => "https://singeo.s3.amazonaws.com/lead-gen/4-exercises/4-exercises.zip"
+        "zipURL" => "https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/4-exercises.zip"
     ])
 @endsection
 
@@ -25,42 +25,42 @@
     @php
         $lessons = [
             [
-                'img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-1.png',
+                'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-1.png',
                 'title' => 'Vocal Lesson #1 - Start Here',
                 'titleColor' => '#f6d31a',
                 'desc' => 'Why You Need To<br class="hidden md:inline"> Exercise Your Voice',
                 'href' => '/improve-any-voice/lessons/1'
             ],
             [
-                'img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-2.png',
+                'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-2.png',
                 'title' => 'Vocal Lesson #2',
                 'titleColor' => '#f51a93',
                 'desc' => 'The Most Useful<br class="hidden md:inline"> Vocal Exercise',
                 'href' => '/improve-any-voice/lessons/2'
             ],
             [
-                'img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-3.png',
+                'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-3.png',
                 'title' => 'Vocal Lesson #3',
                 'titleColor' => '#50e49e',
                 'desc' => 'The Perfect<br class="hidden md:inline"> Balance Exercise',
                 'href' => '/improve-any-voice/lessons/3'
             ],
             [
-                'img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-4.png',
+                'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-4.png',
                 'title' => 'Vocal Lesson #4',
                 'titleColor' => '#19b2f6',
                 'desc' => 'The Strength Building,<br class="hidden md:inline"> Pitch Accuracy Exercise',
                 'href' => '/improve-any-voice/lessons/4'
             ],
             [
-                'img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-5.png',
+                'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-5.png',
                 'title' => 'Vocal Lesson #5',
                 'titleColor' => '#ff1c52',
                 'desc' => 'The Range<br class="hidden md:inline"> Builder Exercise',
                 'href' => '/improve-any-voice/lessons/5'
             ],
             [
-                'img' => 'https://singeo.s3.amazonaws.com/lead-gen/4-exercises/thumb-6.png',
+                'img' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-6.png',
                 'title' => 'Vocal Lesson #6',
                 'titleColor' => '#ff6900',
                 'desc' => 'The Full Vocal<br class="hidden md:inline"> Routine',

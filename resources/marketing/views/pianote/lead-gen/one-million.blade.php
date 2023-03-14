@@ -8,7 +8,7 @@
     <meta property="og:description" content="We’ve just hit an incredible milestone… 1 MILLION SUBSCRIBERS!">
 
     <meta property="og:url" content="https://www.pianote.com/one-million/">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg" style="display: none;">
 
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
@@ -150,7 +150,7 @@
     @include('pianote.sales.partials._nav')
     <section class="text-center text-white pb-5 md:pb-10 px-3 md:px-4" style="background:linear-gradient(to bottom, #030a14 50%, #44151d);">
         <div class="container mx-auto max-w-5xl">
-            <a href="https://youtu.be/yRdOLuLz2I0" target="_blank"><img class="inline-block h-44 md:h-72 lg:h-96" src="https://pianote.s3.amazonaws.com/lead-gen/one-mil.png"></a>
+            <a href="https://youtu.be/yRdOLuLz2I0" target="_blank"><img class="inline-block h-44 md:h-72 lg:h-96" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/one-mil.png"></a>
             <h1 class="md:tracking-widest -mt-1 md:-mt-2 lg:-mt-3">SUBSCRIBER CELEBRATION</h1>
             <h6 class="leading-normal my-3 md:my-5">
                 Enter your contact info for your chance to win one<br class="hidden md:inline">

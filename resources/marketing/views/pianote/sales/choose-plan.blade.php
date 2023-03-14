@@ -8,7 +8,7 @@
     <meta name="description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
 
-        <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
+        <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
 
@@ -42,8 +42,8 @@
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @if(empty($month))
         @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
-            "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
+            "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
+            "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
             "songs" => "1000",
             "firstPoint" => "Unlimited piano lessons",
             "thirdPoint" => "Direct access to real teachers.",
@@ -55,16 +55,16 @@
         ])
 
         @include('musora.sales.components.plans-different-section', [
-            "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo.svg",
-            "logo" => "https://musora-center.s3.amazonaws.com/logos/pianote-logo.png",
+            "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo.svg",
+            "logo" => "https://dmmior4id2ysr.cloudfront.net/logos/pianote-logo.png",
             "secondPoint" => "Artist courses and exclusive events with special guests.",
             "thirdPoint" => "Go beyond piano with lessons for singing, guitar, and drums.",
             "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
         ])
     @else
         @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
-            "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
+            "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
+            "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
             "songs" => "1000",
             "firstPoint" => "Unlimited piano lessons",
             "thirdPoint" => "Direct access to real teachers.",

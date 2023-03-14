@@ -17,6 +17,7 @@
 
 @section('scripts')
     @parent
+
     <script>
         $(document).ready(function () {
 
@@ -24,6 +25,8 @@
         });
     </script>
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop()
 
 @section('content')
@@ -68,278 +71,231 @@
         </div>
     </header>
 
-    <section class="lesson-breakdown">
-        <div class="container mx-auto clearfix">
-            <h1>The Faster Way To Improve  <br class="hidden sm:inline lg:hidden">
-                Your Skills… <u>For Just ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</u></h1>
-            @if($productPrices['SD-DIGI']->price > $productPrices['SD-DIGI']->discounted_price)
-                <h3 class="light"><s>NORMALLY ${{ floatval($productPrices['SD-DIGI']->price) }}</s></h3>
-            @endif
-            <div class="float-left w-full px-3 sm:px-4 tile-wrap grid grid-cols-2 sm:grid-cols-3 gap-4 mt-4">
-                @include('drumeo.products.partials.lesson-tile2', [
-                "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/1.jpg",
-                "tileTitle" => "THE FOUNDATION",
-                "tileDescription" => "Build a solid foundation on topics like technique, notation, and your first beats and fills!",
-                "lessonNumber" => "32",
-                "lessonDuration" => "3 HR 44",
-                ])
-                @include('drumeo.products.partials.lesson-tile2', [
-                "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/2.jpg",
-                "tileTitle" => "THE TECHNIQUES",
-                "tileDescription" => "Take your drumming to the next level with step-by-step lessons on essential technical topics.",
-                "lessonNumber" => "11",
-                "lessonDuration" => "2 HR 25",
-                ])
-                @include('drumeo.products.partials.lesson-tile2', [
-                "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/3.jpg",
-                "tileTitle" => "THE GROOVES",
-                "tileDescription" => "Get time-saving tools and video guides for composing your own beats and fills for any musical style.",
-                "lessonNumber" => "14",
-                "lessonDuration" => "2 HR 19",
-                ])
-                @include('drumeo.products.partials.lesson-tile2', [
-                "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/4.jpg",
-                "tileTitle" => "THE BREAKDOWN",
-                "tileDescription" => "Get three unique tools to simplify your favorite songs so you can apply your skills to real music.",
-                "lessonNumber" => "4",
-                "lessonDuration" => "1 HR 12",
-                ])
-                @include('drumeo.products.partials.lesson-tile2', [
-                "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/5.jpg",
-                "tileTitle" => "THE BASSIST",
-                "tileDescription" => "The three keys to locking-in with a bass guitar player to make the band sound and perform better.",
-                "lessonNumber" => "6",
-                "lessonDuration" => "42",
-                ])
-                @include('drumeo.products.partials.lesson-tile2', [
-                "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/6.jpg",
-                "tileTitle" => "THE BAND",
-                "tileDescription" => "Watch the creation of 5 original songs and get a 10 step process for establishing your band’s goals.",
-                "lessonNumber" => "12",
-                "lessonDuration" => "3 HR 57",
-                ])
-                @include('drumeo.products.partials.lesson-tile2', [
-                "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/7.jpg",
-                "tileTitle" => "THE SHOWS",
-                "tileDescription" => "You’ll get detailed interviews with professional gigging drummers and a checklist for your next gig.",
-                "lessonNumber" => "6",
-                "lessonDuration" => "2 HR 27",
-                ])
-                @include('drumeo.products.partials.lesson-tile2', [
-                "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/8.jpg",
-                "tileTitle" => "THE MUSIC",
-                "tileDescription" => "Enjoy 10 fun play-along songs that you can jam along with to challenge yourself and build experience.",
-                "lessonNumber" => "10",
-                "lessonDuration" => "39",
-                ])
-                @include('drumeo.products.partials.lesson-tile2', [
-                "imageURL" => "https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/9.jpg",
-                "tileTitle" => "THE LIFESTYLE",
-                "tileDescription" => "Three tools for focusing on your goals, staying excited about the drums, and connecting with other musicians.",
-                "lessonNumber" => "5",
-                "lessonDuration" => "43",
-                ])
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+        <div class="container max-w-6xl mx-auto">
+            <h2 class=" mb-8 sm:mb-10"><strong>The Faster Way To Improve Your Skills… For Just $247</strong></h2>
+
+
+            <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6">
+                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <img class="w-1/3 sm:w-full rounded-xl mb-3 transition-opacity" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/1.jpg" alt="grid1" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">
+                        <strong class="font-black inline-block mb-0.5">THE FOUNDATION</strong><br> Build a solid foundation on topics like technique, notation, and your first beats and fills!
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <img class="w-1/3 sm:w-full rounded-xl mb-3 transition-opacity" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/2.jpg" alt="grid1" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">
+                        <strong class="font-black inline-block mb-0.5">THE TECHNIQUES</strong><br> Take your drumming to the next level with step-by-step lessons on essential technical topics.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <img class="w-1/3 sm:w-full rounded-xl mb-3 transition-opacity" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/3.jpg" alt="grid1" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">
+                        <strong class="font-black inline-block mb-0.5">THE GROOVES</strong><br> Get time-saving tools and video guides for composing your own beats and fills for any musical style.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <img class="w-1/3 sm:w-full rounded-xl mb-3 transition-opacity" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/4.jpg" alt="grid1" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">
+                        <strong class="font-black inline-block mb-0.5">THE BREAKDOWN</strong><br> Get three unique tools to simplify your favorite songs so you can apply your skills to real music.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <img class="w-1/3 sm:w-full rounded-xl mb-3 transition-opacity" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/5.jpg" alt="grid1" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">
+                        <strong class="font-black inline-block mb-0.5">THE BASSIST</strong><br> The three keys to locking-in with a bass guitar player to make the band sound and perform better.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <img class="w-1/3 sm:w-full rounded-xl mb-3 transition-opacity" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/6.jpg" alt="grid1" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">
+                        <strong class="font-black inline-block mb-0.5">THE BAND</strong><br> Watch the creation of 5 original songs and get a 10 step process for establishing your band’s goals.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <img class="w-1/3 sm:w-full rounded-xl mb-3 transition-opacity" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/7.jpg" alt="grid1" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">
+                        <strong class="font-black inline-block mb-0.5">THE SHOWS</strong><br> You’ll get detailed interviews with professional gigging drummers and a checklist for your next gig.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <img class="w-1/3 sm:w-full rounded-xl mb-3 transition-opacity" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/8.jpg" alt="grid1" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">
+                        <strong class="font-black inline-block mb-0.5">THE MUSIC</strong><br> Enjoy 10 fun play-along songs that you can jam along with to challenge yourself and build experience.
+                    </p>
+                </div>
+                <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <img class="w-1/3 sm:w-full rounded-xl mb-3 transition-opacity" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/9.jpg" alt="grid1" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">
+                        <strong class="font-black inline-block mb-0.5">THE LIFESTYLE</strong><br> Three tools for focusing on your goals, staying excited about the drums, and connecting with other musicians.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
-
-    <section class="three-icon">
-        <div class="container mx-auto clearfix">
-            <h1 class="float-left w-full px-3 sm:px-4">YOUR TOOLBOX FOR SUCCESS ON THE DRUMS</h1>
-            <h3 class="float-left w-full px-3 sm:px-4">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+        <div class="container max-w-6xl mx-auto">
+            <h2 class="leading-tight "><strong>Your toolbox for success on the drums</strong></h2>
+            <h6 class="leading-normal mt-3  mb-8 sm:mb-10">
                 Get Jared’s personal toolbox for learning songs faster, locking-in with other musicians,<br class="hidden lg:inline">
                   preparing for gigs, and setting yourself up for a successful experience on the drums, <br class="hidden lg:inline">
-                 whatever that might mean to you.</h3>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><i class="fal fa-tree"></i></div>
-                <p><strong>THE DRUMMING TREE</strong><br>
-                    Perfect for drummers of all levels with progressive step-by-step lessons on every topic.</p>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/drum-icon.png" alt="Drum icon"></div>
-                <p><strong>THE EASY BEAT SYSTEM </strong><br>
-                    A simple three-step formula for writing original drum beats and expressing your ideas.</p>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/stick-icon.png" alt="Stick icon"></div>
-                <p><strong>THE DRUM FILL BUILDER</strong><br>
-                    A simple three-step formula for unlocking your creativity while creating your own drum fills.</p>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><i class="fal fa-list"></i></div>
-                <p><strong>THE STYLE SELECTOR </strong><br>
-                    Explore a variety of musical styles including rock, jazz, latin, funk, country, metal, and more.</p>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><i class="fal fa-file-alt"></i></div>
-                <p><strong>THE DRUMMING CHEAT SHEET </strong><br>
-                    The easier way to create personalized charts for learning and remembering song structures.</p>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><i class="fal fa-music"></i></div>
-                <p><strong>THE DRUMMING SONG SIMPLIFIER</strong><br>
-                    A fast and effective way to play-along to virtually any song without learning every drum part.</p>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><i class="fal fa-lock"></i></div>
-                <p><strong>THE LOCKED-IN SYSTEM </strong><br>
-                    A simple three-phase approach for working with a bassist to create a better musical foundation.</p>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><i class="fal fa-headphones"></i></div>
-                <p><strong>THE SUCCESSFUL BAND METHOD </strong><br>
-                    A list of 10 important guidelines for bands to follow to improve your chance of success.</p>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><i class="fal fa-check"></i></div>
-                <p><strong>THE DRUMMER’S CHECKLIST </strong><br>
-                    A comprehensive list of everything drummers should bring to the practice room, studio, or live gig.</p>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><i class="fal fa-calendar-alt"></i></div>
-                <p><strong>THE HABITUAL DRUMMER </strong><br>
-                    Five steps to maintaining the habits you need to achieve consistent drumming progress.</p>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><i class="fal fa-lightbulb"></i></div>
-                <p><strong>THE INSPIRED DRUMMER </strong><br>
-                    Ten sources of drumming inspiration to help you stay motivated as a musician.</p>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/2 circle-point">
-                <div class="point-icon"><i class="fal fa-users"></i></div>
-                <p><strong>THE CONNECTED DRUMMER </strong><br>
-                    Ten unique ways you can connect with other musicians for support and encouragement.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="student-reviews">
-        <div class="container mx-auto clearfix">
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/fred-rose.jpg" alt="Fred Rose">
-                <p>"I’ve used several other packs online, I’ve taken private lessons, and nothing gives you this clear sense of accomplishment and goals and direction..."</p>
-                <h2>Fred Rose <span class="location">- California</span></h2>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/rich-behe.jpg" alt="Rich Behe">
-                <p>"One of the biggest frustrations for me has been trying to keep track of where I am within different video lessons. I would forget where I left off..."</p>
-                <h2>Rich Behe <span class="location">- Germany</span></h2>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/ken-voller.jpg" alt="Ken Voller">
-                <p>"The way that 'Successful Drumming', particularly the Foundation, sets out goals and achievements in small, bite size, chunks is so good!"</p>
-                <h2>Ken Voller <span class="location">- UK</span></h2>
-            </div>
-        </div>
-    </section>
-
-    <section class="history-bruce sd-tripwire" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/meet-jared.jpg);">
-        <div class="container mx-auto clearfix">
-            <div class="float-left w-full px-3 sm:px-4 sm:w-7/12 end">
-                <h1>Jared Falk: The World’s Most<br class="hidden lg:inline">
-                     Watched Drum Teacher</h1>
-                <p class="hidden sm:inline">
-                    "He puts the lessons together so beginners or advanced <br class="hidden lg:inline">
-                    students can understand and simply get better..."
-                </p>
-                <div class="float-left w-full steve-details hidden sm:inline">
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/dave-mccoy.jpg" alt="Dave Mccoy">
-                    <div class="float-left w-full px-3 sm:px-4 end text">
-                        <h2>Dave McCoy</h2>
-                        <h3>California</h3>
-                    </div>
+                 whatever that might mean to you.</h6>
+            <div class="flex flex-wrap justify-center align-center">
+                <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
+                    <div class="point-icon"><i class="fal fa-tree"></i></div>
+                    <p><strong>THE DRUMMING TREE</strong><br>
+                        Perfect for drummers of all levels with progressive step-by-step lessons on every topic.</p>
+                </div>
+                <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
+                    <div class="point-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/drum-icon.png" alt="Drum icon"></div>
+                    <p><strong>THE EASY BEAT SYSTEM </strong><br>
+                        A simple three-step formula for writing original drum beats and expressing your ideas.</p>
+                </div>
+                <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
+                    <div class="point-icon"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/stick-icon.png" alt="Stick icon"></div>
+                    <p><strong>THE DRUM FILL BUILDER</strong><br>
+                        A simple three-step formula for unlocking your creativity while creating your own drum fills.</p>
+                </div>
+                <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
+                    <div class="point-icon"><i class="fal fa-list"></i></div>
+                    <p><strong>THE STYLE SELECTOR </strong><br>
+                        Explore a variety of musical styles including rock, jazz, latin, funk, country, metal, and more.</p>
+                </div>
+                <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
+                    <div class="point-icon"><i class="fal fa-file-alt"></i></div>
+                    <p><strong>THE DRUMMING CHEAT SHEET </strong><br>
+                        The easier way to create personalized charts for learning and remembering song structures.</p>
+                </div>
+                <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
+                    <div class="point-icon"><i class="fal fa-music"></i></div>
+                    <p><strong>THE DRUMMING SONG SIMPLIFIER</strong><br>
+                        A fast and effective way to play-along to virtually any song without learning every drum part.</p>
+                </div>
+                <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
+                    <div class="point-icon"><i class="fal fa-lock"></i></div>
+                    <p><strong>THE LOCKED-IN SYSTEM </strong><br>
+                        A simple three-phase approach for working with a bassist to create a better musical foundation.</p>
+                </div>
+                <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
+                    <div class="point-icon"><i class="fal fa-headphones"></i></div>
+                    <p><strong>THE SUCCESSFUL BAND METHOD </strong><br>
+                        A list of 10 important guidelines for bands to follow to improve your chance of success.</p>
+                </div>
+                <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
+                    <div class="point-icon"><i class="fal fa-check"></i></div>
+                    <p><strong>THE DRUMMER’S CHECKLIST </strong><br>
+                        A comprehensive list of everything drummers should bring to the practice room, studio, or live gig.</p>
+                </div>
+                <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
+                    <div class="point-icon"><i class="fal fa-calendar-alt"></i></div>
+                    <p><strong>THE HABITUAL DRUMMER </strong><br>
+                        Five steps to maintaining the habits you need to achieve consistent drumming progress.</p>
+                </div>
+                <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
+                    <div class="point-icon"><i class="fal fa-lightbulb"></i></div>
+                    <p><strong>THE INSPIRED DRUMMER </strong><br>
+                        Ten sources of drumming inspiration to help you stay motivated as a musician.</p>
+                </div>
+                <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
+                    <div class="point-icon"><i class="fal fa-users"></i></div>
+                    <p><strong>THE CONNECTED DRUMMER </strong><br>
+                        Ten unique ways you can connect with other musicians for support and encouragement.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="bruce-bio">
-        <div class="container mx-auto clearfix">
-            <p class="float-left w-full px-3 sm:px-4">
-                <span class="first-letter smaller"><img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/bold-j.png" alt="Bold J"></span>ared Falk has been creating online drum lessons since before YouTube even existed!
-                <br><br>
-                Back in 2003, Jared partnered with one of his private drum students to create simple websites with drum articles, video tutorials, and community discussion forums. As online drum lessons transitioned to becoming a full-time job, Jared launched several step-by-step DVD packs including the One-Handed Drum Roll, Bass Drum Secrets, and The Rock Drumming System.
-                <br><br>
-                As video streaming started to improve and websites like YouTube gained traction, Jared launched FreeDrumLessons.com in 2007 and built a massive library of drum lessons on YouTube. And through these platforms, Jared has become the world’s most-watched drum teacher with his YouTube lessons alone reaching more than 50 million views -- including his “How To Play Drums” video that has helped more than 4 million drummers.
-                <br class="hidden lg:inline"><br><br>
-                In 2012, Jared co-founded Drumeo.com as “The Ultimate Online Drum Lessons Experience”, giving drum students the opportunity to learn from the best drummers and teachers in the world through step-by-step courses, live video drum lessons, play-along songs, personalized lesson plans, and community support.
-                <br><br>
-                Drumeo has since been voted as “The Best Educational Website” by the readers of DRUM! Magazine for three consecutive years, “The Best Educational Product” by the readers of Modern Drummer magazine, and Jared was awarded “The Best Drum Educator” by Rhythm Magazine.
-                <br><br>
-                Successful Drumming is Jared’s step-by-step curriculum to help drummers of all levels build a rock solid foundation on the drums -- to achieve “success” in any definition they choose. You’ll get the foundational skills you need for playing proficiently to music and you’ll get deeper insights into playing with a band, what it takes to be a gigging drummer, and staying motivated as you continue to progress as a musician.
-            </p>
-        </div>
-    </section>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+        <div class="container max-w-5xl mx-auto">
+            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
+                <img class="border-solid border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/meet-jared-3.jpg" alt="profile picture">
 
-    <section class="student-reviews">
-        <div class="container mx-auto clearfix">
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/michael-peraza.jpg" alt="Michael Peraza">
-                <p>"I hit a wall very quickly and got very frustrated. The band ended up splitting up. I felt at fault because my timing was horrible..."</p>
-                <h2>Michael Peraza <span class="location">- California</span></h2>
+                <div class="text-white text-left rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
+                    <h6 class="uppercase text-drumeo leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
+                    <h2 class="text-center sm:text-left"><strong>Jared Falk</strong></h2>
+                    <h6 class="leading-normal mt-4 lg:mt-6">Jared Falk has been a trusted source for online drum lessons for 15+ years.
+                        <br><br>
+                        As the face of Drumeo, Jared is a pioneer of online drum instruction -- helping prospective drummers around the world learn their first beats and beyond.
+                        <br><br>
+                        His passion, grit, and approachable style have helped him become the most-watched drum instructor online… ever! And now you can take in his first-ever full curriculum for beginner drummers anytime and anywhere it fits your schedule.
+                    </h6>
+                </div>
             </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/robert-kidd.jpg" alt="Robert Kidd">
-                <p>"I started playing drums in school when I was in 6th grade. I stopped playing for a number of years and just recently started back up..."</p>
-                <h2>Robert Kidd <span class="location">- Maryland</span></h2>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 sm:w-1/3 testimonial-wrap">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/jim-olson.jpg" alt="Jim Olson">
-                <p>"A few years ago, after more than 30 years away, I'm back playing with a band in my spare time..."</p>
-                <h2>Jim Olson <span class="location">- California</span></h2>
-            </div>
-        </div>
-    </section>
 
-    <section class="guarantee">
-        <div class="container mx-auto clearfix">
-            <div class="lg:w-3/12 sm:w-5/12 w-full px-3 sm:px-4 float-right text-center sm:text-right">
-                <img src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="90-Day Money-Back Guarantee">
-            </div>
-            <div class="lg:w-9/12 sm:w-7/12 float-left w-full px-3 sm:px-4 text-center sm:text-left">
-                <h1>90-Day Money-Back Guarantee.</h1>
-                <p>More than anything, we want you to enjoy a super-positive experience on the drums. And that means we
-                    only want you to pay if you actually LOVE your Successful Drumming experience. So get started below
-                    to try it out risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for
-                    a full refund.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="final">
-        <div class="container mx-auto clearfix">
-            <div class="float-left w-full px-3 sm:px-4 logo">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="Successful drumming logo">
-            </div>
-            <h2 class="float-left w-full px-3 sm:px-4">Get Jared Falk’s trusted step-by-step curriculum <br class="inline sm:hidden">
-                for a one-time payment of just ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}.</h2>
-            {{--<div class="float-left w-full px-3 sm:px-4"><a class="join sold-out">Sold Out</a></div>--}}
-            <div class="float-left w-full px-3 sm:px-4"><a href="/ecommerce/add-to-cart?products[SD-DIGI]=1" class="join blue">Get Started &raquo;</a></div>
-
-            <h2 class="float-left w-full px-3 sm:px-4 highlighted">
-                @if($productPrices['SD-DIGI']->price > $productPrices['SD-DIGI']->discounted_price)
-                    <s>NORMALLY ${{ floatval($productPrices['SD-DIGI']->price) }}.</s> <strong><u>ONLY ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</u></strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['SD-DIGI']->discounted_price) / floatval($productPrices['SD-DIGI']->price)))) }}%).
-                @else
-                    <strong>NOW ${{ floatval($productPrices['SD-DIGI']->discounted_price) }}</strong>
-                @endif
-                <br> <span class="text-blue">90-DAY GUARANTEE.</span>
-                {{--<br><span class="countdown">ONLY <strong class="tzcd2">a limited time</strong> LEFT!</span>--}}
-            </h2>
-
-            <div class="credit-cards float-left w-full px-3 sm:px-4">
-                <i class="fab fa-cc-visa"></i>
-                <i class="fab fa-cc-mastercard"></i>
-                <i class="fab fa-cc-amex"></i>
-                <i class="fab fa-cc-paypal"></i>
-                <i class="fab fa-cc-discover"></i>
-            </div>
-            <div class="float-left w-full px-3 sm:px-4 questions">
-                <p><strong>Any questions?</strong><br class="inline sm:hidden">
-                    Call us toll-free at <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline sm:hidden">
-                    or directly at <a href="tel:+16048557605">1-604-855-7605</a>.<br>
-                    All prices listed in USD. </p>
+            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What drummers are saying:</strong></h3>
+            <div class="flex flex-wrap text-left">
+                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
+                    <div class="flex items-start p-5 bg-white rounded-lg">
+                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/dave-mccoy.jpg" alt="Larnell lewis" >
+                        <p class="pl-4"><strong>DAVE MCCOY</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">CALIFORNIA</em><br>
+                            He puts the lessons together so beginners or advanced students can understand and simply get better...
+                        </p>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
+                    <div class="flex items-start p-5 bg-white rounded-lg">
+                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/fred-rose.jpg" alt="Matt Mcguire" >
+                        <p class="pl-4"><strong>Fred Rose</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">CALIFORNIA</em><br>
+                            "I’ve used several other packs online, I’ve taken private lessons, and nothing gives you this clear sense of accomplishment and goals and direction..."
+                        </p>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
+                    <div class="flex items-start p-5 bg-white rounded-lg">
+                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/rich-behe.jpg" alt="Dorothea Taylor" >
+                        <p class="pl-4"><strong>Rich Behe</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">GERMANY</em><br>
+                            "One of the biggest frustrations for me has been trying to keep track of where I am within different video lessons. I would forget where I left off..."
+                        </p>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
+                    <div class="flex items-start p-5 bg-white rounded-lg">
+                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/ken-voller.jpg" alt="Dorothea Taylor">
+                        <p class="pl-4"><strong>Ken Voller</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">UK</em><br>
+                            "The way that 'Successful Drumming', particularly the Foundation, sets out goals and achievements in small, bite size, chunks is so good!"
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+    <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
+        <div class="container max-w-4xl mx-auto">
+            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=410,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png" alt="guarantee badge" src="https://www.musora.com/musora-cdn/image/width=410,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png">
+            <h2 class="my-4 sm:my-6 lg:my-8"><strong>Happy student guarantee.</strong><br> Test-drive your lessons for 90 days. Zero risk.
+
+            <h6 class="leading-normal">Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.</h6>
+
+        </div>
+    </section>
+
+    <section class="pt-32 pb-20 px-2 sm:px-4 relative" style="background: #F2F8FB;">
+        <div class="max-w-xl md:max-w-3xl mx-auto text-center">
+            <img class="filter invert h-20 sm:h-24 lazyload" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="logo centered">
+            <h3 class="leading-tight font-extrabold my-10">
+                Get Jared Falk’s trusted step-by-step curriculum <br class="hidden sm:inline">
+                for a one-time payment of just $247.
+            </h3>
+            <a href="/ecommerce/add-to-cart?products[SD-DIGI]=1" class="join blue">Get Started &raquo;</a>
+            <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
+                <p><strong>Any other questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
+                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
+                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
+            </div>
+            <div class="inline-block w-full px-3 md:px-4" style="color:#2a2f34;">
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa" aria-hidden="true"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard" aria-hidden="true"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex" aria-hidden="true"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal" aria-hidden="true"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover" aria-hidden="true"></i>
+            </div>
+        </div>
+    </section>
+
     <span class="pack-details float-left mx-auto mb-7 px-2 pb-5 sm:px-0 sm:pb-9 lg:pb-11 hide"></span>
 @stop

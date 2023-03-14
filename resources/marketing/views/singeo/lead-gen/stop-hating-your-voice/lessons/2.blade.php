@@ -16,9 +16,9 @@
     /stop-hating-your-voice/lessons/3
 @stop
 
-@section('prev-thumb', 'https://cdn.musora.com/image/fetch/w_800,q_60,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/thumb-1.png')
+@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-1.png')
 
-@section('next-thumb', 'https://cdn.musora.com/image/fetch/w_800,q_60,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/thumb-3.png')
+@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-3.png')
 
 @section('description')
     You’ll get control of your voice after this lesson. Follow along with these exercises to build a stronger voice you can be proud of.
@@ -29,12 +29,12 @@
 
     @include('singeo.lead-gen.partials._assignment-resources', [
         "title" => "Practice Along (Lower Octave)",
-        "mp3URL" => "https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/practice-along-lower.mp3",
+        "mp3URL" => "https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/practice-along-lower.mp3",
         "defaultOpen" => true,
     ])
     @include('singeo.lead-gen.partials._assignment-resources', [
         "title" => "Practice Along (Higher Octave)",
-        "mp3URL" => "https://singeo.s3.amazonaws.com/lead-gen/stop-hating-your-voice/practice-along-higher.mp3",
+        "mp3URL" => "https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/practice-along-higher.mp3",
         "defaultOpen" => true,
     ])
 @stop

@@ -10,10 +10,10 @@
     <meta property="og:url" content="https://www.drumeo.com/method">
     <meta name="description" content="10 perfectly organized levels with video lessons from the top authorities on every topic.">
     <meta property="og:description" content="10 perfectly organized levels with video lessons from the top authorities on every topic.">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/method/share-image-method.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/method/share-image-method.jpg" style="display: none;">
 @endsection
 
-@section('header-img', 'https://drumeo-assets.s3.amazonaws.com/sales/2023/method-header.jpg')
+@section('header-img', 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/method-header.jpg')
 
 @section('header', 'Always know exactly what to practice.')
 

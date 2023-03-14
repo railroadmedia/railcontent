@@ -12,7 +12,7 @@
     /metal-playalongs/songs/2
 @stop
 
-@section('next-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Nightmares.jpg')
+@section('next-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Nightmares.jpg')
 
 @section('assets')
     @include('drumeo.lead-gen.partials._assignment-resources', [

@@ -11,9 +11,9 @@
                 <div class="w-5/6 md:w-1/2 lg:w-1/3 px-2 md:px-4 mb-7 md:mb-10 step">
                     <div class="@isset($lesson['playButton'])cursor-pointer play-vimeo autoplay-video @endisset relative" @isset($lesson['dataOpen']) data-open="{{ $lesson['dataOpen'] }}" @endisset>
                         <picture>
-                            <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_450,q_auto:best/{{ $lesson['image'] }}">
-                            <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_500,q_auto:best/{{ $lesson['image'] }}">
-                            <img class="w-full rounded-lg lazyload" data-src="https://cdn.musora.com/image/fetch/w_520,q_auto:best/{{ $lesson['image'] }}" alt="lesson-thumbnail{{ $key + 1 }}">
+                            <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=450,quality=85/{{ $lesson['image'] }}">
+                            <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['image'] }}">
+                            <img class="w-full rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=520,quality=85/{{ $lesson['image'] }}" alt="lesson-thumbnail{{ $key + 1 }}">
                         </picture>
 
                         @isset($lesson['playButton'])

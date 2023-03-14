@@ -8,7 +8,7 @@
     <meta property="og:description" content="We put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.">
 
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
+    <meta property="og:image" content="{{ drumeo_cdn('sales/2023/share-image-drumeo.jpg') }}" style="display: none;">
 
     @include('_partials.layout._fonts')
 
@@ -87,7 +87,7 @@
                     loading="lazy"
                     class="transition-opacity opacity-0 cursor-pointer"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/ascension-thumb.jpg"
+                    src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/ascension-thumb.jpg"
                     alt="Ascension thumbnail"
                     @click="trailer = true"
                 />
@@ -154,12 +154,12 @@
     <div id="customize-section" class="anchor"></div>
     <section class="py-12 md:py-20 px-4 sm:px-6" style="background:linear-gradient(180deg, #01050F 60.48%, #07132C 100%);">
         <div class="max-w-2xl lg:max-w-5xl mx-auto text-center text-white">
-            <img class="h-12 mb-4" src="https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png" alt="pianote logo">
+            <img class="h-12 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png" alt="pianote logo">
             <h3 class="font-extrabold">Join Pianote today and get 12 free bonuses!</h3>
             <h5 class="uppercase my-8 text-yellow">Only available until October 8, 2022</h5>
             <div class="max-w-md mx-auto mb-10">
                 <img
-                    src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/november/pianote-annual-card.jpg"
+                    src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/pianote-annual-card.jpg"
                     alt="pianote annual membership"
                     loading="lazy"
                     class="transition-opacity opacity-0 cursor-pointer rounded-xl"
@@ -170,83 +170,83 @@
                 @php
                     $bonuses = [
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Pianote_Planner_Card.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Pianote_Planner_Card.jpg',
                             'title' => 'Practice Planner',
                             'description' => 'Always know exactly what to practice.',
                             'price' => floatval($productPrices['pianote-practice-planner']->price),
                             'shipping' => true,
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
                             'title' => 'Chords & <br>Scales Book',
                             'description' => 'Your encyclopedia of piano chords & scales.',
                             'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
                             'shipping' => true,
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Piano_Chords_Card.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Piano_Chords_Card.jpg',
                             'title' => 'Chords Poster',
                             'description' => 'Hang these piano chords in your practice space.',
                             'price' => floatval($productPrices['poster-chords']->price),
                             'shipping' => true,
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/may/Piano_Scales_Card.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Piano_Scales_Card.jpg',
                             'title' => 'Scales Poster',
                             'description' => 'All the major and minor piano scales in one poster.',
                             'price' => floatval($productPrices['poster-scales']->price),
                             'shipping' => true,
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/october/power_of_chords_card.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/power_of_chords_card.jpg',
                             'title' => 'The Power of Chords',
                             'description' => 'Play the music you love using the power of chords.',
                             'price' => floatval($productPrices['the-power-of-chords']->price),
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTCP.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTCP.jpg',
                             'title' => 'Classical Piano',
                             'description' => 'Pieces you can actually play, with lessons that are actually fun.',
                             'price' => floatval($productPrices['classical-piano']->price),
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/improv-musical-freedom.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/improv-musical-freedom.jpg',
                             'title' => 'Improvisation & Musical Freedom',
                             'description' => 'Learn to improvise from one of the best piano players in the world, Jesús Molina',
                             'price' => floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price),
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/TBGTPBP.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTPBP.jpg',
                             'title' => 'Play Beautiful Piano',
                             'description' => 'Start playing beautiful music from your very 1st lesson.',
                             'price' => floatval($productPrices['play-beautiful-piano']->price),
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
                             'title' => 'Piano Riffs<br> & Fills',
                             'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
                             'price' => floatval($productPrices['piano-riffs-and-fills']->price),
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
                             'title' => 'Piano Technique<br> Made Easy',
                             'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
                             'price' => floatval($productPrices['piano-technique-made-easy']->price),
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
                             'title' => 'De-Stupefy Your<br> Left Hand',
                             'description' => 'Most piano players find their left-hand is weaker. Fix those weaknesses and “de-stupefy” that left hand.',
                             'price' => floatval($productPrices['destupefy-your-left-hand']->price),
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/worship-piano.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/worship-piano.jpg',
                             'title' => 'Worship Piano',
                             'description' => 'Learn hundreds of worship songs and get the skills to start playing in a worship band.',
                             'price' => floatval($productPrices['worship-piano']->price),
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/faster-fingers.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/faster-fingers.jpg',
                             'title' => 'Faster Fingers',
                             'description' => 'Boost your speed and confidence with this guided practice course.',
                             'price' => floatval($productPrices['faster-fingers']->price),

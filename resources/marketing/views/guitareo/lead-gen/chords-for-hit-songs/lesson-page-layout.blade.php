@@ -4,7 +4,7 @@
 
 @section('meta-description', 'Gain the skills to play guitar chords used in thousands of hit songs with Ayla Tesler-Mabe.')
 
-@section('image', 'https://guitareo.s3.amazonaws.com/lead-gen/chords-for-hit-songs/fb-share-image.jpg')
+@section('image', 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/fb-share-image.jpg')
 
 @section('url', 'https://www.guitareo.com/chords-for-hit-songs/')
 
