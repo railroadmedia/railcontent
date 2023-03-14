@@ -158,7 +158,7 @@ class Clothing extends Resource
                 ->hideWhenCreating()
                 ->hideWhenUpdating()
                 ->displayUsing(function($value){
-                    return is_null($value) ? "-" : "<img src=\"https://laravel-nova.s3.us-east-2.amazonaws.com/".SizeChart::where('id', '=', $value)->first()->chart."\" alt='size chart' />";
+                    return is_null($value) ? "-" : "<img src=\"https://d1fyshwdvi6fth.cloudfront.net/".SizeChart::where('id', '=', $value)->first()->chart."\" alt='size chart' />";
                 }),
             Flexible::make('Sizes')
                 ->addLayout(SizeLayout::class)

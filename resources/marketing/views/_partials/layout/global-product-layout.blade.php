@@ -7,7 +7,7 @@
     <meta property="og:description" content="{{ $product->meta_desc }}">
     <meta property="og:url" content="{{ get_legacy_brand_base_url($theme)}}/{{ Request::path() }}"/>
     @if(!empty($product->meta_img))
-        <meta property="og:image" content="@if(str_contains($product->meta_img, 'amazonaws') || str_contains($product->meta_img, 'cloudfront') || str_contains($product->meta_img, 'vimeocdn')) {{$product->meta_img}} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $product->meta_img  }}@endif">
+        <meta property="og:image" content="{{ $product->meta_img  }}">
     @endif
 @endsection
 
