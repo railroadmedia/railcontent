@@ -153,7 +153,7 @@
             :class="{ 'tw-grayscale' : needAccess }"
             class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)] tw-text-[#0D0D0D] dark:tw-text-white"
         >
-            <div class="tw-inline-flex tw-items-center tw-font-bold tw-shrink-0 tw-w-[40px] tw-pl-4 tw-transition-opacity"
+            <div class="tw-inline-flex tw-items-center tw-font-bold tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity"
                  :class="{ 'tw-opacity-0' : playlistsStore.sortingPlaylist }"
             >
                 {{ props.index + 1 }}
