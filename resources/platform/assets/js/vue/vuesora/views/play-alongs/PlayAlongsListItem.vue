@@ -7,13 +7,13 @@
         <!-- THUMBNAIL COLUMN -->
         <div
             class="flex flex-column align-v-center thumbnail-col hide-xs-only"
-            :class="themeColor"        
+            :class="themeColor"
             >
             <div class="thumb-wrap corners-10">
                 <div
                     class="thumb-img corners-10 bg-grey-2 dark:tw-bg-[#081825]"
                     :class="thumbnailType"
-                    :style="'background-image:url( ' + mappedData.thumbnail + ' );'"
+                    :style="'background-image:url( https://www.musora.com/musora-cdn/image/width=300/' + mappedData.thumbnail + ' );'"
                 >
                     <div class="lesson-progress overflow">
                         <span
