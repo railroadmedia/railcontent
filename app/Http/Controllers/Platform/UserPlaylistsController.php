@@ -175,12 +175,6 @@ class UserPlaylistsController extends BaseController
                 ->first();
         $parent = \Arr::last($playlistItem->getParentContentData());
 
-//        if($playlistItem['type'] == 'assignment'){
-//            $assignment = $playlistItem;
-//            $playlistItem = $this->contentService->getById($parent->id);
-//            $playlistItem['assignments'] = [$assignment];
-//        }
-
         if ($parent) {
             $parentChildren = $this->contentService->getByParentId($parent->id);
         } else {
@@ -229,6 +223,10 @@ class UserPlaylistsController extends BaseController
 
         if($playlistItem['type'] == 'song'){
             $playlistItem['soundslice_slug'] = (isset($lessonAssignments[0]))?$lessonAssignments[0]->fetch('fields.soundslice_slug'):$playlistItem['soundslice_slug'];
+        }
+
+        if($playlistItem['type'] == 'assignment'){
+            $playlistItem['soundslice_slug'] = $playlistItem->fetch('fields.soundslice_slug');
         }
 
         return view('account.playlist-item', [

@@ -1783,6 +1783,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'parent',
         ],
 
         'student-focus' => [
