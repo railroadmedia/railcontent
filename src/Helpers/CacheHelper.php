@@ -321,7 +321,6 @@ class CacheHelper
                         );
                 return (json_decode($results[1], true));
             } catch (AbortedMultiExecException $e) {
-
             }
         }
 
@@ -336,6 +335,7 @@ class CacheHelper
      */
     public static function deleteUserFields($userKeys = null, $fieldKey = 'content')
     {
+        return; //disable redis caching
         if (Cache::store(ConfigService::$cacheDriver)
                 ->getStore() instanceof RedisStore) {
             if (!$userKeys) {
