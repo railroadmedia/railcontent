@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Helpers;
 use Carbon\Carbon;
 use Illuminate\Cache\RedisStore;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redis;
 use Predis\Transaction\AbortedMultiExecException;
 use Railroad\Railcontent\Repositories\ContentRepository;
