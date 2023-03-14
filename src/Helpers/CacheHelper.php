@@ -150,9 +150,7 @@ class CacheHelper
     {
         $cursor = 0;
         do {
-            Log::debug("CachHelper::deleteAllCachedSearchResults scan");
             list($cursor, $keys) = Redis::scan($cursor, 'match', "*$key*", 'count', 1000);
-            Log::debug("CachHelper::deleteAllCachedSearchResults scan finish");
             self::deleteCacheKeys($keys);
         } while ($cursor);
 
