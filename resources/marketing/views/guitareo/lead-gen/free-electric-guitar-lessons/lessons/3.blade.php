@@ -12,9 +12,9 @@
 
 @section('next', '/free-electric-guitar-lessons/lessons/4')
 
-@section('prev-thumb', 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-02.jpg')
+@section('prev-thumb', 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/thumbs-electric-02.jpg')
 
-@section('next-thumb', 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-04.jpg')
+@section('next-thumb', 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/thumbs-electric-04.jpg')
 
 @section('lesson-description', 'Learn the correct motion of your wrist to strum the guitar. You’ll go over downstrokes in a whole note and quarter note pattern and then add in upstrokes. Play another new chord shape, the A Minor chord.')
 
@@ -33,7 +33,7 @@
 
     @include('guitareo.lead-gen.partials._assignment-resources', [
         "title" => "MP3",
-        "mp3URL" => "https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/strumming-basics.mp3"
+        "mp3URL" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/strumming-basics.mp3"
     ])
 
 @stop

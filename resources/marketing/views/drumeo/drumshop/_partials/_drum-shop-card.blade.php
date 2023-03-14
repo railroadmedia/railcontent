@@ -2,7 +2,7 @@
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
             <section class="drum-shop">
-                <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url('{{ str_contains($thumbnail, 'cloudfront') ? $thumbnail : 'https://cdn.musora.com/image/fetch/w_600,q_auto:best/'.$thumbnail }}')">
+                <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url('{{ str_contains($thumbnail, 'cloudfront') ? $thumbnail : 'https://www.musora.com/musora-cdn/image/width=600,quality=85/'.$thumbnail }}')">
                     @if (!empty($badgeText))
                         <span class="top-left-badge text-white bg-promo">
                             {!! $badgeText !!}
@@ -14,7 +14,7 @@
                     @endif
                     @if(!empty($packLogo))
                         <div class="logo">
-                            <img @if($sku === '30-day-drummer-2') class="max-h-full h-24" @endif src="{{ str_contains($packLogo, 'cloudfront') ? $packLogo : 'https://cdn.musora.com/image/fetch/w_600,q_auto:best/'.$packLogo }}" alt="{{ $title }} logo">
+                            <img @if($sku === '30-day-drummer-2') class="max-h-full h-24" @endif src="{{ str_contains($packLogo, 'cloudfront') ? $packLogo : 'https://www.musora.com/musora-cdn/image/width=600,quality=85/'.$packLogo }}" alt="{{ $title }} logo">
                         </div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>

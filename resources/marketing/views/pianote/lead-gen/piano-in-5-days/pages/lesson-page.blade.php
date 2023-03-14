@@ -13,11 +13,11 @@
 
 @section('meta-description', 'Start learning how to play the piano in just 5 days!')
 
-@section('meta-img', 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/og-image.jpg')
+@section('meta-img', 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/piano-in-5-days/og-image.jpg')
 
 @section('meta-url', 'https://www.pianote.com/piano-in-5-days')
 
-@section('lesson-logo', 'https://pianote.s3.amazonaws.com/lead-gen/piano-in-5-days/logo.png')
+@section('lesson-logo', 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/piano-in-5-days/logo.png')
 
 @section('lesson-index-url', '/piano-in-5-days/lessons')
 

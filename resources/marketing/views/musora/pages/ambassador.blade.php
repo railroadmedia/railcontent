@@ -9,7 +9,7 @@
     <meta property="og:description" content="Get paid to promote world-class online music lessons.">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
 
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
@@ -25,20 +25,20 @@
 
 <!-- Main -->
 @section('layout-body')
-    <header class="bg-cover bg-center text-center text-white py-12 md:py-20 lg:py-24 px-4 relative" style="background-color:#011223;background-image:url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-drums.jpg);">
+    <header class="bg-cover bg-center text-center text-white py-12 md:py-20 lg:py-24 px-4 relative" style="background-color:#011223;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-drums.jpg);">
         <div class="background-fade">
-            <div class="drums" style="background-image: url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-drums.jpg);"></div>
-            <div class="piano"  style="background-image: url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-piano.jpg);"></div>
-            <div class="guitar"  style="background-image: url(https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-guitar.jpg);"></div>
+            <div class="drums" style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-drums.jpg);"></div>
+            <div class="piano"  style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-piano.jpg);"></div>
+            <div class="guitar"  style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-guitar.jpg);"></div>
         </div>
         <div class="container mx-auto max-w-6xl relative z-10">
-            <img class="w-full mx-auto max-w-xs md:max-w-sm lg:max-w-md mb-10 md:mb-14 lg:mb-20" src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/musora-logos.png" alt="musora logos">
+            <img class="w-full mx-auto max-w-xs md:max-w-sm lg:max-w-md mb-10 md:mb-14 lg:mb-20" src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/musora-logos.png" alt="musora logos">
 
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
             <h4 class="mt-3 mb-5 md:mb-10 leading-normal">Get paid to promote world-class<br class="inline md:hidden"> online music lessons.</h4>
 
             <span class="join smaller gradient-outline mb-3 md:mb-0 md:mx-2 cursor-pointer bg-[#031627] border-musora hover:bg-musora" x-on:click="modal = true">Guidelines</span>
-            <a class="join smaller gradient md:mx-2 bg-musora" href="https://airtable.com/shrmKAXQyoWLbKKW6">APPLY NOW</a>
+            <a class="join smaller gradient md:mx-2 bg-musora" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
         </div>
     </header>
     <section class="text-white py-8 md:py-10 lg:py-12 px-4 bg-musora-black">
@@ -71,7 +71,7 @@
     </section>
     <section class="bg-cover bg-center text-center text-white py-8 md:py-10 lg:py-14 px-4 relative">
         {{-- background --}}
-        <img src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-piano.jpg"
+        <img src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-piano.jpg"
             class="absolute object-cover object-center transition-opacity opacity-0 inset-0 w-full h-full"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
@@ -88,7 +88,7 @@
                 <div class="w-full md:w-1/3 px-2 mb-8 md:mb-0">
                     <div class="inline-block rounded-full p-3 text-center border-musora before:m-[-6px] relative" style="background-color:#161e29;width: 78px;"><h1 class="text-5xl text-musora"><strong>2</strong></h1></div>
                     <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Apply For The Program</strong></h4>
-                    <p><em><a href="https://airtable.com/shrmKAXQyoWLbKKW6"><u>Just fill out the short form &raquo;</u></a></em></p>
+                    <p><em><a href="https://airtable.com/shr086ixt4K8JIQpi"><u>Just fill out the short form &raquo;</u></a></em></p>
                 </div>
                 <div class="w-full md:w-1/3 px-2">
                     <div class="inline-block rounded-full p-3 text-center border-musora before:m-[-6px] relative" style="background-color:#020e1a;width: 78px;"><h1 class="text-5xl text-musora"><strong>3</strong></h1></div>
@@ -144,7 +144,7 @@
                                 <div class="flex items-center justify-center pt-5 md:pt-8">
                                     <img
                                         class="rounded-full w-1/4 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-alejandro.jpg"
+                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/testimonial-alejandro.jpg"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
                                         alt="testimonial alejandro"
@@ -168,7 +168,7 @@
                                 <div class="flex items-center justify-center pt-5 md:pt-8">
                                     <img
                                         class="rounded-full w-1/4 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-piano-dreamers.jpg"
+                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/testimonial-piano-dreamers.jpg"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
                                         alt="testimonial piano dreamer"
@@ -192,7 +192,7 @@
                                 <div class="flex items-center justify-center pt-5 md:pt-8">
                                     <img
                                         class="rounded-full w-1/4 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/testimonial-aguafish.jpg"
+                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/testimonial-aguafish.jpg"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
                                         alt="testimonial aguafish"
@@ -216,7 +216,7 @@
                                 <div class="flex items-center justify-center pt-5 md:pt-8">
                                     <img
                                         class="rounded-full w-1/4 transition-opacity opacity-0"
-                                        src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/trials/casey-cooper.jpg"
+                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/trials/casey-cooper.jpg"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
                                         alt="casey cooper"
@@ -236,7 +236,7 @@
     </section>
 
     <section class="bg-cover bg-center text-center text-white py-24 md:py-32 lg:py-52 px-4 relative">
-        <img src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/affiliate/background-guitar.jpg"
+        <img src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-guitar.jpg"
             class="absolute object-cover transition-opacity opacity-0 z-[-2] w-full h-full top-0 left-0 object-cover"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
@@ -244,9 +244,9 @@
         />
         <div class="container mx-auto max-w-6xl">
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
-            <a class="join bg-musora my-8 md:my-10 inline-block" href="https://airtable.com/shrmKAXQyoWLbKKW6">APPLY NOW</a>
+            <a class="join bg-musora my-8 md:my-10 inline-block" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
             <p class="leading-normal">Have any questions? Please email <a href="mailto:natalie@musora.com"><u>natalie@musora.com</u></a> after<br class="hidden md:inline">
-                reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <a href="https://airtable.com/shrmKAXQyoWLbKKW6"><u>application page</u></a>.</p>
+                reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <a href="https://airtable.com/shr086ixt4K8JIQpi"><u>application page</u></a>.</p>
         </div>
     </section>
 

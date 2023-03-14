@@ -16,9 +16,9 @@
     /song-in-an-hour/your-challenge/5
 @stop
 
-@section('prev-thumb', 'https://cdn.musora.com/image/fetch/w_800,q_60,q_auto:best/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-3.png')
+@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-3.png')
 
-@section('next-thumb', 'https://cdn.musora.com/image/fetch/w_800,q_60,q_auto:best/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-5.png')
+@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-5.png')
 
 @section('assignments')
     <p class="mb-2 sm:mb-3 bg-yellow px-2 inline-block rounded-md">Interactive sheet music is optional. <br class="hidden sm:inline lg:hidden"> To complete your challenge in one-hour, only practice-along with the video.</p>
@@ -27,27 +27,27 @@
         "subTitle" => "Practice strumming all strings without any snags.",
         "assignmentID" => "lesson_4_assignment_1",
         "soundslice" => "WBjfc",
-        "pdfURL" => "https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/4a.svg"
+        "pdfURL" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/4a.svg"
     ])
     @include('guitareo.lead-gen.song-in-an-hour._assignment-resources', [
         "title" => "Strum all the strings in time with the jam track.",
         "subTitle" => "Practice your strumming along with Rob using the video, the provided jam track, or the interactive tab.",
         "assignmentID" => "lesson_4_assignment_2",
         "soundslice" => "BBjfc",
-        "pdfURL" => "https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/4b.svg"
+        "pdfURL" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/4b.svg"
     ])
     @include('guitareo.lead-gen.song-in-an-hour._assignment-resources', [
         "title" => "Strum the top four strings in time with the jam track.",
         "subTitle" => "Practice your 4 string strumming along with Rob using the video, the provided jam track, or the interactive tab.",
         "assignmentID" => "lesson_4_assignment_3",
         "soundslice" => "ZBjfc",
-        "pdfURL" => "https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/4c.svg"
+        "pdfURL" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/4c.svg"
     ])
 @stop
 @section('assets')
     @include('guitareo.lead-gen.song-in-an-hour._assignment-resources', [
         "title" => "Sheet Music",
-        "pdfURL" => "https://cdn.musora.com/image/fetch/w_1760,q_60,q_auto:best/https://guitareo.s3.amazonaws.com/lead-gen/song-in-an-hour/4.png"
+        "pdfURL" => "https://www.musora.com/musora-cdn/image/width=1760,q_60,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/4.png"
     ])
     @include('guitareo.lead-gen.song-in-an-hour._assignment-resources', [
         "title" => "4 Top Strings Jam",

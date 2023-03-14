@@ -1,7 +1,7 @@
 <div class="top-bar expanded">
     <div class="logo">
         <a href="{{ get_legacy_brand_base_url('guitareo') }}">
-            <img src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png" alt="Guitareo Logo">
+            <img src="https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="Guitareo Logo">
         </a>
     </div>
     <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
@@ -69,13 +69,13 @@
             >
 
                 @if(!empty($trialVersion))
-                    Start Trial
+                    Start for free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @else
                     Join<span class="show-for-medium"> Guitareo</span>
                 @endif
             </a>
         </div>
-        <div class="hidden lg:block button-wrap">
+        <div class="hidden lg:block button-wrap @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
             <a href="https://www.musora.com/guitareo" class="join outline-button">Login</a>
         </div>
     @endif

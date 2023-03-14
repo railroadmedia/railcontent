@@ -5,7 +5,7 @@
     <meta property="og:title" content="Musora Shop">
     <meta name="description" content="">
     <meta property="og:description" content="">
-    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/shop/header-m.jpg">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/shop/header-m.jpg">
     <meta property="og:url" content="https://www.musora.com/merch">
 @endsection
 
@@ -17,11 +17,11 @@
 {{--    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">--}}
     <style>
         .shop-header {
-            background-image:url(https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://musora-center.s3.amazonaws.com/shop/header-m.jpg);
+            background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dmmior4id2ysr.cloudfront.net/shop/header-m.jpg);
         }
         @media (min-width: 768px) {
             .shop-header {
-                background-image:url(https://cdn.musora.com/image/fetch/w_2500,q_auto:best/https://musora-center.s3.amazonaws.com/shop/header.jpg);
+                background-image:url(https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://dmmior4id2ysr.cloudfront.net/shop/header.jpg);
             }
         }
         footer a {
@@ -46,7 +46,7 @@
     @include('_partials.layout.global-header', [
         "theme_bg" => "bg-musora",
         "theme_text" => "text-musora",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/musora-white.svg",
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
         "links" => [
             "Home" => [
                 "iconClass" => "fas fa-home",
@@ -115,7 +115,7 @@
     <header class="shop-header text-center text-white relative py-7 sm:py-10 bg-cover bg-center" style="background-color:#140c08;">
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                <img class="h-10 md:h-16 mb-2 sm:mb-4" src="https://musora-center.s3.amazonaws.com/shop/musora-member-logo.svg" alt="drumeo logo">
+                <img class="h-10 md:h-16 mb-2 sm:mb-4" src="https://dmmior4id2ysr.cloudfront.net/shop/musora-member-logo.svg" alt="drumeo logo">
                 <p>As a Musora Member you’re getting exclusive access to <strong>NEW</strong><br class="hidden sm:inline-block"> limited edition merch designed for musicians – by musicians.</p>
                 <p><strong><em>Pre-orders are now closed</em></strong></p>
             </div>
@@ -530,7 +530,7 @@
 @section('layout-footer')
     @include('_partials.layout.global-footer', [
     "brand" => "musora",
-    "logo" => "https://musora-ui.s3.amazonaws.com/logos/musora-white.svg"
+    "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg"
 ])
 @endsection
 

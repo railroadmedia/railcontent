@@ -1,4 +1,4 @@
-<footer id="publicFooter" class="flex-none bg-[#111729] pt-10 pb-9 sales-footer bottom-footer">
+<footer id="publicFooter" class="flex-none bg-[#111729] pt-10 pb-9 sales-footer bottom-footer z-40">
 
     {{-- Footer Top --}}
     @if( @isset($sections) )
@@ -36,11 +36,11 @@
                     <div class="flex">
                         {{-- App Store Link --}}
                         <a style="width: 48%;max-width:130px; display: inline-block; margin-right: 2%; margin-top: 10px;" href="https://itunes.apple.com/us/app/musora/id1619053766?ls=1" target="_blank">
-                            <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png">
+                            <img src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png">
                         </a>
                         {{-- Google Play Store Link--}}
                         <a style="width: 48%;max-width:130px; display: inline-block; margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp" target="_blank">
-                            <img src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png">
+                            <img src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png">
                         </a>
                     </div>
                 </div>

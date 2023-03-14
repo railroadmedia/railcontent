@@ -36,7 +36,7 @@
                 {{--</div>--}}
                 {{--<div class="flex flex-wrap items-center justify-center mx-auto" style="max-width: 900px;">--}}
                     {{--<div class="mx-auto mb-4 md:mb-0 w-2/3 md:w-1/3 lg:w-4/12 md:order-1">--}}
-                        {{--<img class="mx-auto" src="https://guitareo.s3.amazonaws.com/sales/promos/october/gq-spread.png">--}}
+                        {{--<img class="mx-auto" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/october/gq-spread.png">--}}
                     {{--</div>--}}
                     {{--<div class="text-left md:pr-6 lg:pr-8 w-full md:w-2/3 lg:w-8/12">--}}
                         {{--<p class="font-primary text-base my-4" style="max-width: 550px;">--}}

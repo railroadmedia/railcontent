@@ -4,7 +4,7 @@
     <div class="container max-w-6xl mx-auto">
         <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96 mb-6 sm:mb-20" x-on:click="trailer = true;">
             <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-            <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0" src="{{ $vid }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+            <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="{{ $vid }}" type="video/mp4" autoplay muted loop playsinline></video>
         </div>
         <h2><strong>{!! $header !!}</strong></h2>
         <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">{!! $desc !!}</p>
@@ -13,7 +13,7 @@
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <img
                         class="w-1/3 sm:w-full rounded-xl mb-3 transition-opacity opacity-0"
-                        src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/{{ $gridItem['image'] }}"
+                        src="https://www.musora.com/musora-cdn/image/width=640,quality=85/{{ $gridItem['image'] }}"
                         alt="grid{{$key+1}}"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -36,7 +36,7 @@
                 href="/choose-plan"
             @endif
         >
-            @if(!empty($promoVersion))
+            @if(!empty($promoVersion) && empty($trialVersion))
                 Get Started &raquo;
             @else
                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>

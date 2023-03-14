@@ -4,7 +4,7 @@
     <title>500 Songs In 5 Days | Guitareo</title>
     <meta name="description" content="This training pack will give you the skills and knowledge to quickly learn and play 500 popular songs from a variety of eras and styles.">
 
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/500-songs/header.jpg" style="display: none;">
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/500-songs/header.jpg" style="display: none;">
     <meta property="og:title" content="Learn To Play Guitar With 500 Songs In 5 Days">
     <meta property="og:description" content="This training pack will give you the skills and knowledge to quickly learn and play 500 popular songs from a variety of eras and styles.">
     <meta property="og:url" content="https://www.guitareo.com/500-songs">
@@ -75,7 +75,7 @@
     <header class="header text-center">
 
         <div class="row">
-            <img class="logo" src="https://guitareo.s3.amazonaws.com/500-songs/logo.svg" alt="500 songs logo">
+            <img class="logo" src="https://d122ay5chh2hr5.cloudfront.net/500-songs/logo.svg" alt="500 songs logo">
             <br><i class="fas fa-play play-vimeo play-button" data-open="trailer"></i>
             <h2>Build The Knowledge & Skills To Play<br>
                 <strong>500 Songs On The Guitar</strong> In 5 Days</h2>
@@ -111,7 +111,7 @@
             @endif
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://guitareo.s3.amazonaws.com/500-songs/thumb1.jpg" alt="Day 1 thumbnail">
+                    <img src="https://d122ay5chh2hr5.cloudfront.net/500-songs/thumb1.jpg" alt="Day 1 thumbnail">
                     <div class="top-badge">DAY 1</div>
                 </div>
                 <p><strong>The Million Dollar Chord Progression</strong><br>
@@ -120,7 +120,7 @@
             </div>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://guitareo.s3.amazonaws.com/500-songs/thumb2.jpg" alt="Day 2 thumbnail">
+                    <img src="https://d122ay5chh2hr5.cloudfront.net/500-songs/thumb2.jpg" alt="Day 2 thumbnail">
                     <div class="top-badge">DAY 2</div>
                 </div>
                 <p><strong>The Chord Chart</strong><br>
@@ -129,7 +129,7 @@
             </div>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://guitareo.s3.amazonaws.com/500-songs/thumb3.jpg" alt="Day 3 thumbnail">
+                    <img src="https://d122ay5chh2hr5.cloudfront.net/500-songs/thumb3.jpg" alt="Day 3 thumbnail">
                     <div class="top-badge">DAY 3</div>
                 </div>
                 <p><strong>Changing Keys with a Capo</strong><br>
@@ -138,7 +138,7 @@
             </div>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://guitareo.s3.amazonaws.com/500-songs/thumb4.jpg" alt="Day 4 thumbnail">
+                    <img src="https://d122ay5chh2hr5.cloudfront.net/500-songs/thumb4.jpg" alt="Day 4 thumbnail">
                     <div class="top-badge">DAY 4</div>
                 </div>
                 <p><strong>The “Other” Chords</strong><br>
@@ -147,7 +147,7 @@
             </div>
             <div class="day-slice">
                 <div class="day-thumbnail">
-                    <img src="https://guitareo.s3.amazonaws.com/500-songs/thumb5.jpg" alt="Day 5 thumbnail">
+                    <img src="https://d122ay5chh2hr5.cloudfront.net/500-songs/thumb5.jpg" alt="Day 5 thumbnail">
                     <div class="top-badge">DAY 5</div>
                 </div>
                 <p><strong>Adding Style & Flair</strong><br>
@@ -157,7 +157,7 @@
             <hr>
             <div class="day-slice bonus">
                 <div class="day-thumbnail">
-                    <img src="https://guitareo.s3.amazonaws.com/500-songs/thumb-bonus1.jpg" alt="Bonus 1 thumbnail">
+                    <img src="https://d122ay5chh2hr5.cloudfront.net/500-songs/thumb-bonus1.jpg" alt="Bonus 1 thumbnail">
                     <div class="top-badge">BONUS #1</div>
                 </div>
                 <p><strong>Even More Keys</strong><br>
@@ -166,7 +166,7 @@
             </div>
             <div class="day-slice bonus">
                 <div class="day-thumbnail">
-                    <img src="https://guitareo.s3.amazonaws.com/500-songs/thumb-bonus2.jpg" alt="Bonus 2 thumbnail">
+                    <img src="https://d122ay5chh2hr5.cloudfront.net/500-songs/thumb-bonus2.jpg" alt="Bonus 2 thumbnail">
                     <div class="top-badge">BONUS #2</div>
                 </div>
                 <p><strong>Raising the Bar</strong><br>
@@ -179,7 +179,7 @@
     <div id="songs" class="anchor"></div>
     <section class="more-songs">
         <div class="row">
-            <img src="https://guitareo.s3.amazonaws.com/500-songs/more-songs-icons.png" alt="More songs icon">
+            <img src="https://d122ay5chh2hr5.cloudfront.net/500-songs/more-songs-icons.png" alt="More songs icon">
             <h1>More Songs Than<br class="hide-for-medium"> You'll Ever Need</h1>
             <h4>This training pack was designed to give you the skills and knowledge to quickly learn and play 500 songs from a variety of eras and styles.
                 <br><br>
@@ -187,7 +187,7 @@
                 <br><br>
                 But "play almost any song" just wasn't catchy enough ;) So we're giving you <strong>downloadable chord charts for 500 songs</strong> to PROVE that you'll be able to play so many of the songs you love.
                 <br><br>
-                Here's an example: <a target="_blank" href="https://guitareo.s3.amazonaws.com/500-songs/500-songs-let-it-be-the-beatles.pdf"><u>Open PDF &raquo;</u></a>
+                Here's an example: <a target="_blank" href="https://d122ay5chh2hr5.cloudfront.net/500-songs/500-songs-let-it-be-the-beatles.pdf"><u>Open PDF &raquo;</u></a>
                 <br><br>
                 Here is every song that's included:
             </h4>
@@ -240,7 +240,7 @@
         <div class="background">
             <div class="row">
                 <div class="columns medium-4 large-6 float-right text-left medium-text-center">
-                    <img src="https://guitareo.s3.amazonaws.com/500-songs/teachers.png" alt="Nate and Chelsea">
+                    <img src="https://d122ay5chh2hr5.cloudfront.net/500-songs/teachers.png" alt="Nate and Chelsea">
                 </div>
                 <div class="columns end medium-8 large-6 text-wrap">
                     <h2><strong>Nate Savage & Chelsea Amber:<br class="show-for-large">
@@ -270,19 +270,19 @@
     <div class="testimonials">
         <div class="row">
             <div class="testimonial medium-4 columns">
-                <img src="https://guitareo.s3.amazonaws.com/500-songs/erick.jpg" alt="Erick Kahlenberg">
+                <img src="https://d122ay5chh2hr5.cloudfront.net/500-songs/erick.jpg" alt="Erick Kahlenberg">
                 <p><em>"Free lessons are great, but fumbling through in no particular order isn't the best way to learn new skills. Nate introduces new skills and combines them with practice of previously learned material that makes the learning stick. Nate presents everything clearly, and each lesson is just another small step on the path. None of the lessons are overwhelming or trying to provide too much at one time."</em><br>
                     <strong>ERICK KAHLENBERG</strong>
                     <em class="red">WISCONSIN</em></p>
             </div>
             <div class="testimonial medium-4 columns">
-                <img src="https://guitareo.s3.amazonaws.com/500-songs/don.jpg" alt="Don Tatarelli">
+                <img src="https://d122ay5chh2hr5.cloudfront.net/500-songs/don.jpg" alt="Don Tatarelli">
                 <p><em>"I wasn’t sure I would be able to learn with online instruction. I checked out YouTube videos of instructors and really liked Nate’s style the most. His lessons are organized and well planned. Others seem to bounce all over the place or are so impressed with themselves that they talk down to students."</em><br>
                     <strong>DON TATARELLI</strong>
                     <em class="red">NEVADA</em></p>
             </div>
             <div class="testimonial medium-4 columns">
-                <img src="https://guitareo.s3.amazonaws.com/500-songs/james.jpg" alt="James Mcdowell">
+                <img src="https://d122ay5chh2hr5.cloudfront.net/500-songs/james.jpg" alt="James Mcdowell">
                 <p><em>"When I first started playing guitar, it was frustrating because of the lack of a path to follow. I felt like stopping altogether. It was when Nate broke down the song Brown Eyed Girl when I got it. I was finally able to get through the entire thing... quite a milestone for me!"</em><br>
                     <strong>JAMES MCDOWELL</strong>
                     <em class="red">WASHINGTON</em></p>
@@ -293,7 +293,7 @@
     <section class="guarantee">
         <div class="row">
             <div class="large-4 medium-5 columns float-right guarantee-icon">
-                <img src="https://guitareo.s3.amazonaws.com/sales/90-day.png" alt="90-Day Money-Back Guarantee">
+                <img src="https://d122ay5chh2hr5.cloudfront.net/sales/90-day.png" alt="90-Day Money-Back Guarantee">
             </div>
             <div class="large-8 medium-7 columns end guarantee-text">
                 <h1>90-Day Money-Back Guarantee.</h1>
@@ -304,8 +304,8 @@
 
     <section class="final text-center">
         <div class="row">
-            {{--<img class="logo edge" src="https://guitareo.s3.amazonaws.com/sales/promos/cyber-monday/logo.png"><br>--}}
-            <img class="h-12 md:h-16 lg:h-20 mb-2 md:mb-4" src="https://guitareo.s3.amazonaws.com/500-songs/logo.svg" alt="500 songs logo">
+            {{--<img class="logo edge" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/cyber-monday/logo.png"><br>--}}
+            <img class="h-12 md:h-16 lg:h-20 mb-2 md:mb-4" src="https://d122ay5chh2hr5.cloudfront.net/500-songs/logo.svg" alt="500 songs logo">
             <h2>Build The Knowledge & Skills To Play<br>
                 <strong>500 Songs On The Guitar</strong> In 5 Days</h2>
 

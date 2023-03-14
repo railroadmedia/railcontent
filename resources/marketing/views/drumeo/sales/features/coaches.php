@@ -2,7 +2,7 @@
 <?php
     $learn = [
         [
-            'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/rock-drumming-masterclass.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/rock-drumming-masterclass.jpg',
             'title' => 'Rock',
             'artist' => 'Todd Sucherman',
         ],
@@ -236,7 +236,7 @@
             'artist' => 'Larnell Lewis',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/220257-card-thumbnail-maxres-1551383521',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/The+Grooves+of+John+Bonham.jpeg',
             'title' => 'The Grooves of John Bonham',
             'artist' => 'Brian Tichy',
         ],
@@ -349,7 +349,7 @@
             'artist' => 'Marco Minnemann',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/218926-card-thumbnail-maxres-1549645098',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/221450-card-thumbnail-maxres-1553514724.jpg',
             'title' => 'Tasty Combinations',
             'artist' => 'Brian Frasier-Moore',
         ],

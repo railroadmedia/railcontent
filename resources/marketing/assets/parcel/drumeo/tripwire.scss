@@ -1,983 +1,370 @@
 @import "../_variables";
 
-h1, h2, h3, h4, h5, h6, p, li {
-  font-family: $opensans;
+h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong, td strong {
+    font-weight: 900;
 }
 
-.text-yellow,
-a.text-yellow:hover {
-  color: #ffe200;
+h1, h2, h3, h4, h5, h6, li, p {
+    font-weight: 400;
+    line-height: 1em;
+    font-family: $opensans;
+    margin: 0 auto;
+
+    sup {
+        font-size: 50%;
+        top: -0.75em;
+    }
 }
 
-.join {
-  padding: 17px 7%;
-  @include tablet {
-    font-size: 28px;
-  }
+h1 {
+    line-height: 1.2em;
+    font-size: 30px;
+    @include tablet {
+        font-size: 36px;
+    }
+    @include desktop {
+        font-size: 48px;
+    }
+}
+
+h2 {
+    line-height: 1.2em;
+    font-size: 24px;
+    @include tablet {
+        font-size: 30px;
+    }
+    @include desktop {
+        font-size: 36px;
+    }
+}
+
+h3 {
+    font-size: 20px;
+    @include tablet {
+        font-size: 24px;
+    }
+    @include desktop {
+        font-size: 30px;
+    }
+}
+
+h4 {
+    font-size: 18px;
+    @include tablet {
+        font-size: 20px;
+    }
+    @include desktop {
+        font-size: 24px;
+    }
+}
+
+h5 {
+    font-size: 16px;
+    @include tablet {
+        font-size: 18px;
+    }
+    @include desktop {
+        font-size: 20px;
+    }
+}
+
+h6 {
+    font-size: 15px;
+    @include tablet {
+        font-size: 16px;
+    }
+    @include desktop {
+        font-size: 18px;
+    }
+}
+
+p, li {
+    line-height: 1.6em;
+    font-size: 15px;
+    @include desktop {
+        font-size: 16px;
+    }
+}
+
+img {
+    display: inline-block;
 }
 
 .play-button {
-  cursor: pointer;
-  outline: none;
-  transition: opacity .3s;
-  background: rgba(0, 0, 0, 0.6);
-  border: 3px solid #fff;
-  border-radius: 200px;
-  line-height: 1em;
-  font-size: 29px;
-  padding: 18px 22px;
-  @include tablet {
-    font-size: 35px;
-    padding: 22px 27px;
-    border-width: 4px;
-  }
-  @include desktop {
-    font-size: 39px;
-    padding: 25px 30px;
-  }
+    cursor: pointer;
+    outline: none;
+    transition: opacity .3s;
+    background: rgba(0, 0, 0, 0.6);
+    border: 3px solid #fff;
+    border-radius: 200px;
+    line-height: 1em;
+    font-size: 29px;
+    padding: 18px 22px;
+    @include tablet {
+        font-size: 35px;
+        padding: 22px 27px;
+        border-width: 4px;
+    }
+    @include desktop {
+        font-size: 39px;
+        padding: 25px 30px;
+    }
 
-  &:hover {
-    opacity: 0.8;
-  }
+    &:hover {
+        opacity: 0.8;
+    }
 }
 
 .header {
-  padding: 0;
-  text-align: center;
-  background-color: #000;
-  @include tablet {
-    text-align: left;
-  }
-
-  .container {
-    position: relative;
-    color: #FFF;
-    margin: 0 auto;
+    padding: 0;
     text-align: center;
-    padding: 20px 0;
-    background: #000 center top/cover no-repeat;
+    background-color: #000;
     @include tablet {
-      padding: 30px 0 50px;
-    }
-    @include desktop {
-      padding: 50px 0 60px;
+        text-align: left;
     }
 
-  }
-
-  .logo {
-    width: 240px;
-    @include tablet {
-      width: 300px;
-      margin: 0 auto 5px;
-    }
-    @include desktop {
-      width: 470px;
-    }
-  }
-
-  .video-container {
-    margin: 0 auto;
-    text-align: center;
-    max-height: 550px;
-    position: relative;
-
-    h1 {
-      font-weight: 700;
-      font-size: 25px;
-      line-height: 1.1em;
-      margin: 0 auto;
-      text-shadow: 0 0 15px #000;
-    }
-
-    .play-button {
-      margin: 130px auto 20px;
-      @include tablet {
-        margin: 200px auto 70px;
-      }
-      @include desktop {
-        margin: 260px auto 150px;
-      }
-    }
-
-    .anniversary-badge {
-      position: absolute;
-      transform: translate(-50%, -50%);
-      top: 37%;
-      left: 83%;
-      width: 110px;
-      @include tablet {
-        top: 27%;
-        left: 79%;
-        width: 180px;
-      }
-      @include desktop {
-        left: 74%;
-        width: 250px;
-      }
-    }
-  }
-
-  .text-container {
-    padding: 0 15px;
-
-    h1 {
-      font-weight: 700;
-      font-size: 25px;
-      line-height: 1.2em;
-      margin: 0 auto 15px;
-      text-shadow: 0 0 15px #000;
-      @include tablet {
-        font-size: 31px;
-      }
-      @include desktop {
-        font-size: 43px;
-        margin: 0 auto 25px;
-      }
-    }
-
-    p {
-      font-size: 16px;
-      margin: 0 auto 15px;
-      font-weight: 600;
-      line-height: 1.2em;
-      @include tablet {
-        font-weight: 400;
-        line-height: 1.5em;
-        margin: 0 auto 20px;
-        text-shadow: 0 0 7px #000;
-      }
-      @include desktop {
-        font-size: 19px;
-        margin: 0 auto 35px;
-      }
-
-      &.disclaimer {
-        font-size: 12px;
-        font-weight: 600;
-        margin: 5px auto 0;
-        text-align: center;
-        @include tablet {
-          margin: 5px auto -26px;
-
-        }
-      }
-    }
-
-    .join {
-      width: 100%;
-      max-width: 820px;
-    }
-
-    .awards {
-      text-align: center;
-      padding: 10px 0 0;
-      @include desktop {
-        padding: 15px 30px 0;
-      }
-
-      .float-left {
-        padding: 0 3px;
-        @include tablet {
-          padding: 0 15px;
-        }
-
-        img {
-          width: 100%;
-          max-width: 130px;
-        }
-
-      }
-    }
-  }
-
-  &.stacked {
-    .text-container {
-
-      p {
-        font-weight: 400;
-        margin: 0 auto 15px;
-        font-size: 14px;
-        @include tablet {
-          font-size: 16px;
-          margin: 0 auto 15px;
-        }
-        @include desktop {
-          font-size: 19px;
-        }
-
-        &.price-info {
-          text-transform: uppercase;
-          margin: 7px auto 0;
-          font-size: 12px;
-          @include tablet {
-            font-size: 14px;
-            margin: 15px auto 0;
-          }
-          @include desktop {
-            font-size: 16px;
-          }
-
-          s {
-            opacity: 0.7;
-          }
-        }
-      }
-    }
-
-    .course-logo {
-      margin: 0 auto 10px;
-
-      h2 {
-        font: 300 25px/1em $robotocondensed;
+    .container {
+        position: relative;
+        color: #FFF;
         margin: 0 auto;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+        text-align: center;
+        padding: 20px 0;
+        background: #000 center top/cover no-repeat;
         @include tablet {
-          font-size: 46px;
-          letter-spacing: 4px;
+            padding: 30px 0 50px;
         }
         @include desktop {
-          font-size: 62px;
-          letter-spacing: 8px;
+            padding: 50px 0 60px;
         }
-      }
+
     }
-  }
+
+    .video-container {
+        margin: 0 auto;
+        text-align: center;
+        max-height: 550px;
+        position: relative;
+
+        h1 {
+            font-weight: 700;
+            font-size: 25px;
+            line-height: 1.1em;
+            margin: 0 auto;
+            text-shadow: 0 0 15px #000;
+        }
+
+        .play-button {
+            margin: 130px auto 20px;
+            @include tablet {
+                margin: 200px auto 70px;
+            }
+            @include desktop {
+                margin: 260px auto 150px;
+            }
+        }
+    }
+
+    .text-container {
+        padding: 0 15px;
+
+        h1 {
+            font-weight: 700;
+            font-size: 25px;
+            line-height: 1.2em;
+            margin: 0 auto 15px;
+            text-shadow: 0 0 15px #000;
+            @include tablet {
+                font-size: 31px;
+            }
+            @include desktop {
+                font-size: 43px;
+                margin: 0 auto 25px;
+            }
+        }
+
+        p {
+            font-size: 16px;
+            margin: 0 auto 15px;
+            font-weight: 600;
+            line-height: 1.2em;
+            @include tablet {
+                font-weight: 400;
+                line-height: 1.5em;
+                margin: 0 auto 20px;
+                text-shadow: 0 0 7px #000;
+            }
+            @include desktop {
+                font-size: 19px;
+                margin: 0 auto 35px;
+            }
+        }
+
+        .join {
+            width: 100%;
+            max-width: 820px;
+        }
+    }
+
+    &.stacked {
+        .text-container {
+
+            p {
+                font-weight: 400;
+                margin: 0 auto 15px;
+                font-size: 14px;
+                @include tablet {
+                    font-size: 16px;
+                    margin: 0 auto 15px;
+                }
+                @include desktop {
+                    font-size: 19px;
+                }
+
+                &.price-info {
+                    text-transform: uppercase;
+                    margin: 7px auto 0;
+                    font-size: 12px;
+                    @include tablet {
+                        font-size: 14px;
+                        margin: 15px auto 0;
+                    }
+                    @include desktop {
+                        font-size: 16px;
+                    }
+
+                    s {
+                        opacity: 0.7;
+                    }
+                }
+            }
+        }
+
+        .course-logo {
+            margin: 0 auto 10px;
+
+            h2 {
+                font: 300 25px/1em $robotocondensed;
+                margin: 0 auto;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                @include tablet {
+                    font-size: 46px;
+                    letter-spacing: 4px;
+                }
+                @include desktop {
+                    font-size: 62px;
+                    letter-spacing: 8px;
+                }
+            }
+        }
+    }
 }
 
 .reveal-overlay {
-  background-color: rgba(0, 0, 0, 0.8);
-
-  &:after {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    font-family: "Font Awesome 5 Pro";
-    font-weight: 900;
-    font-style: normal;
-    font-variant: normal;
-    text-rendering: auto;
-    content: "\f00d";
-    color: #fff;
-    z-index: 1;
-    opacity: 0.8;
-    position: absolute;
-    margin: 0;
-    line-height: 1em;
-    text-align: center;
-    display: inline-block;
-    outline: none;
-    top: 0;
-    right: 0;
-    font-size: 35px;
-    width: 35px;
-    @include tablet {
-      top: 7px;
-      right: 7px;
-      font-size: 50px;
-      width: 50px;
-    }
-  }
-}
-
-.reveal {
-  height: inherit;
-  min-height: 0;
-  max-height: inherit;
-  outline: none;
-  padding: 0;
-
-  .flex-video {
-    margin: 0 auto;
-  }
-}
-
-.lesson-breakdown {
-  background: #FFF;
-  text-align: center;
-  padding: 40px 0;
-  @include tablet {
-    padding: 70px 0;
-  }
-  @include desktop {
-    padding: 100px 0;
-  }
-
-  h1 {
-    font: 700 25px/1.1em $opensans;
-    margin: 0 auto 5px;
-    @include tablet {
-      font-size: 30px;
-    }
-    @include desktop {
-      font-size: 35px;
-    }
-  }
-
-  h3 {
-    font: 400 16px/1em $opensans;
-    text-transform: uppercase;
-    color: #BBB;
-    margin: 0 auto 35px;
-    @include tablet {
-      font-size: 18px;
-      margin: 0 auto 40px;
-    }
-    @include desktop {
-      font-size: 21px;
-      margin: 0 auto 55px;
-    }
-  }
-
-  .tile-wrap {
-    padding: 0 5px;
-    @include tablet {
-      padding: 0 15px;
-    }
-    @include desktop {
-      padding: 0 40px;
-    }
-
-    .lesson-tile {
-      text-align: left;
-      margin: 0 auto 15px;
-      @include tablet {
-        margin: 0 auto 30px;
-      }
-      @include desktop {
-        margin: 0 auto 40px;
-      }
-
-      img {
-        border-radius: 5px;
-      }
-
-      h1 {
-        font: 700 13px/1.3em $opensans;
-        margin: 4px auto 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    &:after {
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        font-family: "Font Awesome 5 Pro";
+        font-weight: 900;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        content: "\f00d";
+        color: #fff;
+        z-index: 1;
+        opacity: 0.8;
+        position: absolute;
+        margin: 0;
+        line-height: 1em;
+        text-align: center;
+        display: inline-block;
+        outline: none;
+        top: 0;
+        right: 0;
+        font-size: 35px;
+        width: 35px;
         @include tablet {
-          font-size: 14px;
-          margin: 7px auto 0;
+            top: 7px;
+            right: 7px;
+            font-size: 50px;
+            width: 50px;
         }
-        @include desktop {
-          font-size: 19px;
-        }
-      }
-
-      p {
-        font: 500 10px/1.3em $opensans;
-        margin: 0 auto;
-        @include tablet {
-          font-size: 13px;
-        }
-        @include desktop {
-          font-size: 14px;
-        }
-
-        .duration {
-          display: inline-block;
-          margin: 5px auto 0;
-          color: #888;
-          font-style: italic;
-          font-size: 10px;
-          @include tablet {
-            font-size: 12px;
-            margin: 10px auto 0;
-          }
-          @include desktop {
-            font-size: 14px;
-          }
-        }
-      }
     }
-  }
+    .reveal {
+        height: inherit;
+        min-height: 0;
+        max-height: inherit;
+        outline: none;
+        padding: 0;
 
-  .join {
-    width: 95%;
-  }
-
-  p {
-    font: 400 14px/1em $opensans;
-
-    &.price-info {
-      color: #000;
-      margin: 7px auto 0;
-      font-size: 12px;
-      @include tablet {
-        font-size: 14px;
-        margin: 15px auto 0;
-      }
-      @include desktop {
-        font-size: 16px;
-      }
+        .flex-video {
+            margin: 0 auto;
+        }
     }
-  }
 }
 
-.three-icon {
-  background: #E9EDF0;
-  text-align: center;
-  padding: 40px 0;
-  @include tablet {
-    padding: 70px 0;
-  }
-  @include desktop {
-    padding: 100px 0;
-  }
-
-  h1 {
-    font: 700 26px/1em $robotocondensed;
-    margin: 0 auto 10px;
-    color: $drumeoBlue;
-    text-transform: uppercase;
-    @include tablet {
-      font-size: 35px;
-    }
-    @include desktop {
-      font-size: 48px;
-      margin: 0 auto 15px;
-    }
-  }
-
-  h3 {
-    font: 400 15px/1.4em $opensans;
-    margin: 0 auto;
-    @include tablet {
-      font-size: 19px;
-    }
-    @include desktop {
-      font-size: 24px;
-    }
-  }
-
-  .circle-point {
+.circle-point {
     margin: 30px auto 0;
     @include tablet {
-      margin: 40px auto 0;
+        margin: 40px auto 0;
     }
     @include desktop {
-      margin: 50px auto 0;
+        margin: 50px auto 0;
     }
 
     .point-icon {
-      border: 2px solid $drumeoBlue;
-      color: $drumeoBlue;
-      border-radius: 50%;
-      text-align: center;
-      font-size: 35px;
-      line-height: 66px;
-      height: 70px;
-      width: 70px;
-      margin: 0 auto 15px;
-      @include desktop {
-        margin: 0;
-        line-height: 96px;
-        height: 100px;
-        width: 100px;
-        font-size: 55px;
-        float: left;
-      }
+        border: 2px solid $drumeoBlue;
+        color: $drumeoBlue;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 35px;
+        line-height: 66px;
+        height: 70px;
+        width: 70px;
+        margin: 0 auto 15px;
+        @include desktop {
+            margin: 0;
+            line-height: 96px;
+            height: 100px;
+            width: 100px;
+            font-size: 55px;
+            float: left;
+        }
 
-      img {
-        display: block;
-        padding: 20%;
-      }
+        img {
+            display: block;
+            padding: 20%;
+        }
 
-      .fa-music {
-        top: -3px;
-        position: relative;
-      }
+        .fa-music {
+            top: -3px;
+            position: relative;
+        }
     }
 
     p {
-      font: 400 14px/1.5em $opensans;
-      margin: 0 auto;
-      max-width: 250px;
-      @include desktop {
-        font-size: 16px;
-        width: calc(100% - 100px);
-        text-align: left;
-        padding-left: 20px;
-        float: left;
-        max-width: 390px;
-      }
-
-      strong {
-        font: 700 17px/1em $robotocondensed;
-        margin: 0 auto 5px;
-        color: $drumeoBlue;
-        text-transform: uppercase;
-        display: inline-block;
-        @include desktop {
-          font-size: 23px;
-        }
-      }
-    }
-  }
-}
-
-.student-reviews {
-  background: #FFF;
-  padding: 40px 0;
-  @include tablet {
-    padding: 70px 0;
-  }
-  @include desktop {
-    padding: 80px 0;
-  }
-
-  .testimonial-wrap {
-    text-align: center;
-    padding: 0 30px;
-    margin: 0 auto 35px;
-    @include tablet {
-      margin: 0 auto;
-      padding: 0 15px;
-    }
-    @include desktop {
-      padding: 0 30px;
-    }
-
-    &:last-child {
-      margin: 0 auto;
-    }
-
-    img {
-      border-radius: 50%;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-      margin: 0 auto 15px;
-      border: 6px solid #FFF;
-      width: 100%;
-      max-width: 100px;
-      @include desktop {
-        max-width: 135px;
-      }
-    }
-
-    p {
-      font: italic 400 13px/1.5em $opensans;
-      margin: 0 auto 15px;
-      @include tablet {
-        font-size: 14px;
-      }
-      @include desktop {
-        font-size: 16px;
-        margin: 0 auto 20px;
-      }
-    }
-
-    h2 {
-      font: 700 14px/1em $opensans;
-      margin: 0 auto;
-      @include tablet {
-        font-size: 16px;
-      }
-      @include desktop {
-        font-size: 19px;
-      }
-
-      .location {
-        color: $drumeoBlue;
-        text-transform: uppercase;
-        font-weight: 400;
-        font-size: 13px;
-        @include tablet {
-          font-size: 14px;
-        }
-        @include desktop {
-          font-size: 16px;
-        }
-      }
-    }
-  }
-
-  .join {
-    width: 95%;
-  }
-
-  p.price-info {
-    font: 400 14px/1em $opensans;
-    color: #000;
-    margin: 7px auto 20px;
-    font-size: 12px;
-    @include tablet {
-      font-size: 14px;
-      margin: 15px auto 40px;
-    }
-    @include desktop {
-      font-size: 16px;
-    }
-  }
-}
-
-.history-bruce {
-  background: #000 url(https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/mike-bio-mobile.jpg) 57% center/cover;
-  color: #FFF;
-  position: relative;
-  padding: 30px 10px 160px;
-  @include tablet {
-    background-image: url("https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/mike-bio.jpg");
-    padding: 120px 15px 100px;
-  }
-  @include desktop {
-    padding: 160px 20px 140px;
-  }
-
-  .container {
-    position: relative;
-
-  }
-  h1 {
-    text-shadow: 0 0 15px #000;
-    margin: 0 0 20px;
-    @include tablet {
-      margin: 0 0 30px;
-    }
-    @include desktop {
-      margin: 0 0 40px;
-    }
-  }
-
-  p {
-    font: italic 400 15px/1.4em $opensans;
-    text-shadow: 0 0 15px #000;
-    max-width: 260px;
-    @include tablet {
-      max-width: 100%;
-      font-size: 18px;
-      line-height: 1.7em;
-    }
-    @include desktop {
-      font-size: 20px;
-    }
-  }
-
-  .steve-details {
-    img {
-      border-radius: 50%;
-      overflow: hidden;
-      border: 3px solid #FFF;
-      background: #FFF;
-      width: 50px;
-      float: left;
-      display: block;
-      @include tablet {
-        width: 60px;
-      }
-    }
-
-    .text {
-      width: auto;
-      text-shadow: 0 0 10px #000;
-
-      h2 {
-        text-transform: uppercase;
-        font: 700 18px/1em $robotocondensed;
-        margin: 10px auto 0;
-      }
-
-      h3 {
-        text-transform: uppercase;
-        font: italic 400 18px/1em $robotocondensed;
-        color: $drumeoBlue;
+        font: 400 14px/1.5em $opensans;
         margin: 0 auto;
-      }
+        max-width: 250px;
+        @include desktop {
+            font-size: 16px;
+            width: calc(100% - 100px);
+            text-align: left;
+            padding-left: 20px;
+            float: left;
+            max-width: 390px;
+        }
+
+        strong {
+            font: 700 17px/1em $robotocondensed;
+            margin: 0 auto 5px;
+            color: $drumeoBlue;
+            text-transform: uppercase;
+            display: inline-block;
+            @include desktop {
+                font-size: 23px;
+            }
+        }
     }
-  }
-
-  &.sd-tripwire {
-    padding: 70px 10px;
-    @include tablet {
-      padding: 120px 15px 100px;
-    }
-    @include desktop {
-      padding: 160px 20px 140px;
-    }
-
-    h1 {
-      width: 65%;
-      @include tablet {
-        width: 100%;
-      }
-    }
-
-  }
-}
-
-.bruce-bio {
-  background: #FFF;
-  padding: 30px 15px 0;
-  @include tablet {
-    padding: 40px 20px 0;
-  }
-  @include desktop {
-    padding: 50px 20px 0;
-  }
-
-  p {
-    margin: 0 auto;
-    font: 400 14px/1.6em $opensans;
-    @include tablet {
-      -moz-column-count: 2;
-      -webkit-column-count: 2;
-      column-count: 2;
-      -webkit-column-gap: 40px;
-      -moz-column-gap: 40px;
-      column-gap: 40px;
-      font-size: 14px;
-    }
-    @include desktop {
-      font-size: 16px;
-    }
-  }
-
-  .first-letter {
-    float: left;
-    padding-right: 7px;
-    width: 73px;
-    @include desktop {
-      width: 82px;
-    }
-
-    &.smaller {
-      width: 51px;
-      @include desktop {
-        width: 60px;
-      }
-    }
-  }
-
-  .timeline-pic {
-    text-align: center;
-    margin: 20px auto 0;
-
-    @include desktop {
-      margin: 60px auto 0;
-    }
-
-    img {
-      width: 100%;
-      max-width: 375px;
-      margin: 0 auto;
-      @include tablet {
-        max-width: 100%;
-      }
-    }
-  }
-
-}
-
-.guarantee {
-  background: #E9EDF0;
-  padding: 20px 10px;
-  @include tablet {
-    padding: 35px 0;
-  }
-
-  h1 {
-    font: 700 23px/1em $robotocondensed;
-    margin: 20px auto 10px;
-    text-transform: uppercase;
-    @include tablet {
-      font-size: 28px;
-      margin: 0 auto 15px;
-    }
-    @include desktop {
-      font-size: 38px;
-      margin: 35px auto 20px;
-    }
-  }
-
-  p {
-    font: 400 15px/1.7em $opensans;
-    margin: 0 auto;
-    @include desktop {
-      font-size: 17px;
-    }
-  }
-
-  img {
-    width: 100%;
-    max-width: 250px;
-    @include tablet {
-      max-width: 290px;
-    }
-    @include tablet {
-      max-width: 100%;
-    }
-  }
-}
-
-.final {
-  background: #000 url("https://dpwjbsxqtam5n.cloudfront.net/tripwires/ds/customize-bg.jpg") center top/cover;
-  text-align: center;
-  padding: 50px 10px;
-  color: #FFF;
-  @include tablet {
-    padding: 70px 20px;
-  }
-  @include desktop {
-    padding: 100px 20px;
-  }
-
-  .logo img {
-    width: 100%;
-    max-width: 350px;
-    margin: 0 auto 10px;
-    @include tablet {
-      max-width: 570px;
-      margin: 0 auto 20px;
-    }
-    @include desktop {
-      max-width: 680px;
-      margin: 0 auto 80px;
-    }
-
-    &.anniversary-badge {
-      width: auto;
-      max-width: 100%;
-      height: 50px;
-      margin: 0 0 20px;
-      @include tablet {
-        height: 65px;
-        margin: 0 0 30px;
-      }
-      @include desktop {
-        height: 80px;
-        margin: 0 0 80px 25px;
-      }
-    }
-  }
-
-  h1 {
-    font: 500 20px/1.2em $opensans;
-    margin: 50px auto 15px;
-    @include tablet {
-      font-size: 25px;
-      margin: 60px auto 15px;
-    }
-    @include desktop {
-      font-size: 34px;
-      margin: 85px auto 25px;
-    }
-  }
-
-  h2 {
-    font: 400 13px/1.2em $opensans;
-    margin: 0 auto 20px;
-    @include tablet {
-      font-size: 16px;
-      margin: 0 auto 25px;
-    }
-    @include desktop {
-      font-size: 21px;
-      margin: 0 auto 30px;
-    }
-
-    &.highlighted {
-      text-transform: uppercase;
-      margin: 15px auto 0;
-      @include tablet {
-        margin: 20px auto 5px;
-      }
-
-      strong {
-        display: inline-block;
-      }
-
-      s {
-        opacity: 0.7;
-      }
-    }
-  }
-
-  .join {
-    width: 90%;
-    font-size: 24px;
-    padding: 12px;
-    @include tablet {
-      font-size: 32px;
-      padding: 17px;
-    }
-  }
-
-  p {
-    font: 400 13px/1em $opensans;
-    color: #FFF;
-    @include tablet {
-      font-size: 15px;
-    }
-
-    &.final-questions {
-      margin: 40px auto 0;
-      @include tablet {
-        margin: 60px auto 0;
-      }
-      @include desktop {
-        margin: 80px auto 0;
-      }
-    }
-
-    span {
-      margin: 0 auto 7px;
-      text-transform: uppercase;
-      display: block;
-      font-size: 15px;
-      @include tablet {
-        font-size: 17px;
-      }
-    }
-
-    a {
-      color: #CCE6FF;
-
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-  }
-
-  .credit-cards {
-    margin: 40px 0 10px;
-    @include tablet {
-      margin: 40px auto 15px;
-    }
-    @include desktop {
-      margin: 80px auto 15px;
-    }
-
-    i {
-      opacity: 0.7;
-      margin: 0 3px;
-      font-size: 45px;
-      @include tablet {
-        font-size: 50px;
-      }
-    }
-
-    img {
-      width: 100%;
-      max-width: 340px;
-      @include tablet {
-        max-width: 480px;
-      }
-      @include desktop {
-        max-width: 550px;
-      }
-    }
-  }
-
-  .questions {
-    p {
-      margin: 0;
-      opacity: 0.7;
-      max-width: 100%;
-      font-size: 13px;
-
-      a {
-        color: inherit;
-        display: inline-block;
-      }
-    }
-  }
 }

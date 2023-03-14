@@ -11,7 +11,7 @@
     @include('_partials.layout.global-header', [
         "theme_bg" => "bg-guitareo",
         "theme_text" => "text-guitareo",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/guitareo.svg",
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/guitareo.svg",
         "links" => [
             "Member Login" => [
                 "iconClass" => "fas fa-sign-in",
@@ -89,7 +89,7 @@
 @section('layout-footer')
     @include('_partials.layout.global-footer', [
         "brand" => "guitareo",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/guitareo-white.svg",
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/guitareo-white.svg",
         "sections" => [
             [
                 "title" => "Resources",

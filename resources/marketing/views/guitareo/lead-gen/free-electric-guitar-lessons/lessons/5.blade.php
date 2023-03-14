@@ -12,9 +12,9 @@
 
 @section('next', '/free-electric-guitar-lessons/lessons/6')
 
-@section('prev-thumb', 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-04.jpg')
+@section('prev-thumb', 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/thumbs-electric-04.jpg')
 
-@section('next-thumb', 'https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/thumbs-electric-06.jpg')
+@section('next-thumb', 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/thumbs-electric-06.jpg')
 
 @section('lesson-description', 'It’s the moment you’ve been waiting for! Put together everything you’ve learned to play “Aint No Sunshine.” You’ll be playing two chords for two bars each as well as an easy lead guitar line.')
 
@@ -29,10 +29,10 @@
 
     @include('guitareo.lead-gen.partials._assignment-resources', [
         "title" => "Mp3",
-        "mp3URL" => "https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/play-along-no-guitar.mp3"
+        "mp3URL" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/play-along-no-guitar.mp3"
     ])
     @include('guitareo.lead-gen.partials._assignment-resources', [
         "title" => "MP3",
-        "mp3URL" => "https://guitareo.s3.amazonaws.com/lead-gen/free-electric-guitar-lessons/play-along-with-guitar.mp3"
+        "mp3URL" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/play-along-with-guitar.mp3"
     ])
 @stop

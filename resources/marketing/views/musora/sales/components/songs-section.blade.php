@@ -6,11 +6,11 @@
         <p class="leading-tight mt-2 sm:mt-3">{!! $desc !!}</p>
 
         <div class="flex flex-wrap lg:flex-nowrap items-center justify-center mt-4 sm:mt-6 lg:my-6">
-            <video class="lg:order-1 h-64 sm:h-96 rounded-xl cursor-pointer" x-on:click="soundslice = true;" src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
+            <video class="lg:order-1 h-64 sm:h-96 rounded-xl cursor-pointer lazyload" x-on:click="soundslice = true;" data-src="{{ $video }}" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
             <div class="text-left w-full sm:w-auto mt-6 lg:mt-0 lg:pr-8">
                 @foreach ($songItems as $songItem)
                     <div class="flex mb-6 lg:my-6">
-                        <div class="w-10 sm:w-14 flex-grow-0"><img alt="point icon" src="{{ $songItem['icon'] }}" class="h-6 sm:h-10"></div>
+                        <div class="w-10 sm:w-14 flex-grow-0"><img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10"></div>
                         <div class="flex-grow pl-4">
                             <h5><strong>{!!$songItem['title']!!}</strong></h5>
                             <p class="mt-1 sm:mt-2 text-sm">{!! $songItem['desc'] !!}</p>
@@ -31,7 +31,7 @@
                 href="/choose-plan"
             @endif
         >
-            @if(!empty($promoVersion))
+            @if(!empty($promoVersion) && empty($trialVersion))
                 Get Started &raquo;
             @else
                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
@@ -45,7 +45,7 @@
 <section class="text-center text-white px-5 sm:px-6 py-7 sm:py-8" style="    background: linear-gradient(40deg,#03c8ac, #0976db, #9a01ee, #f61a30);">
     <div class="container max-w-6xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-            <img class="h-12 sm:h-14" src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/2023/musora-instruments.svg" alt="instrument image">
+            <img class="h-12 sm:h-14" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/musora-instruments.svg" alt="instrument image">
             <p class="w-full sm:w-auto sm:text-left max-w-md mt-2 sm:mt-0 mx-0 sm:pl-8 leading-normal sm:leading-tight"><strong>Any instrument, any time.</strong><br>
                 {{ $bannerDesc }}
             </p>

@@ -11,7 +11,7 @@
     @include('_partials.layout.global-header', [
         "theme_bg" => "bg-pianote",
         "theme_text" => "text-pianote",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/pianote.svg",
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/pianote.svg",
         "links" => [
             "Member Login" => [
                 "iconClass" => "fas fa-sign-in",
@@ -83,7 +83,7 @@
 @section('layout-footer')
     @include('_partials.layout.global-footer', [
         "brand" => "pianote",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/pianote-white.svg",
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/pianote-white.svg",
         "sections" => [
             [
                 "title" => "Resources",

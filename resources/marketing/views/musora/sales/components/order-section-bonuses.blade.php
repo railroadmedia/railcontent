@@ -1,5 +1,5 @@
 <div style="background:linear-gradient(30deg, #0a3761, #0c1526);">
-<section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"  style="background:url(https://drumeo-assets.s3.amazonaws.com/sales/2023/order-bg-tile-2.png) center center/160px;">
+<section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6"  style="background:url(https://dpwjbsxqtam5n.cloudfront.net/sales/2023/order-bg-tile-2.png) center center/160px;">
     <div class="container mx-auto max-w-6xl relative z-50">
         <div class="w-full">
             @if(!empty($promoLogo))
@@ -17,7 +17,7 @@
                 <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
                     <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                         <div class=" {{--border-2 border-promo--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                            <div class="h-full w-full bg-top bg-cover" style="background-image:url(https://cdn.musora.com/image/fetch/w_850,q_auto:best/{{ $topImage }});"></div>
+                            <div class="h-full w-full bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $topImage }});"></div>
                         </div>
                     </div>
                 </div>
@@ -88,7 +88,7 @@
                                     <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                     {{--                                        <h4 class="absolute text-white -top-3 -left-3  py-3 px-2.5 rounded-full transform -rotate-12" style="    line-height: 0.6;background-color:#cda880;"><strong>6<br><span class="leading-none" style="font-size: 50%;">PAIRS</span></strong></h4>--}}
                                 @endif
-                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }});"></div>
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/{{ $bonus['image'] }});"></div>
                                 <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                     <i class="fas fa-arrow-right text-4xl"></i><br>
                                     <p class="text-sm"><strong>DETAILS</strong></p>
@@ -123,36 +123,36 @@
                 @if($theme !== 'drumeo')
                     <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                         <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
-                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-bonus.jpg">
+                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-bonus.jpg">
                         <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
-                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-bonus-m.jpg">
+                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-bonus-m.jpg">
                         <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">DRUM LESSONS INCLUDED</p>
                     </div>
                 @endif
                 @if($theme !== 'pianote')
                     <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                         <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
-                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-bonus.jpg">
+                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/pianote-bonus.jpg">
                         <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
-                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/pianote-bonus-m.jpg">
+                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/pianote-bonus-m.jpg">
                         <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">PIANO LESSONS INCLUDED</p>
                     </div>
                 @endif
                 @if($theme !== 'guitareo')
                     <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                         <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
-                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-bonus.jpg">
+                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guitareo-bonus.jpg">
                         <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
-                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/guitareo-bonus-m.jpg">
+                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guitareo-bonus-m.jpg">
                         <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">GUITAR LESSONS INCLUDED</p>
                     </div>
                 @endif
                 @if($theme !== 'singeo')
                     <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
                         <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl"
-                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-bonus.jpg">
+                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/singeo-bonus.jpg">
                         <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl"
-                            src="https://drumeo-assets.s3.amazonaws.com/sales/2023/singeo-bonus-m.jpg">
+                            src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/singeo-bonus-m.jpg">
                         <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">SINGING LESSONS INCLUDED</p>
                     </div>
                 @endif

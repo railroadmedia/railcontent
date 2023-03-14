@@ -7,7 +7,7 @@
 
     <meta name="description" content="Drum lessons for LIFE. (+20 FREE bonuses)">
     <meta property="og:description" content="Drum lessons for LIFE. (+20 FREE bonuses)">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/promos/november/lifetime-fb-share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/november/lifetime-fb-share-image.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
 
@@ -68,7 +68,7 @@
             <div class="container mx-auto">
                 <img
                     class="hidden md:inline-block md:h-16 lg:h-20 mb-2 transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/lifetime-title.png"
+                    src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/lifetime-title.png"
                     alt="Lifetime title"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -76,7 +76,7 @@
                 />
                 <img
                     class="md:hidden mb-4 px-4 transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/lifetime-title-m.png"
+                    src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/lifetime-title-m.png"
                     alt="Lifetime title"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -99,7 +99,7 @@
                 <div class="w-full mx-auto my-10 px-3" style="max-width:920px;">
                     <img
                         class="cursor-pointer"
-                        src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/thumb.jpg"
+                        src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/thumb.jpg"
                         alt="Video thumbnail"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -163,11 +163,11 @@
             <div class="relative w-full rounded-2xl mx-auto h-8 beg-adv-text" style="max-width: 840px;">
                 <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap">NOW<br><i class="fal fa-angle-down"></i></p>
                 <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap">YEAR 5<br><i class="fal fa-angle-down"></i></p>
-                <img class="absolute top-0 h-14 md:h-20 md:-mt-5 rounded-full z-10" src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://drumeo-assets.s3.amazonaws.com/drum-shop/lifetime/jared.jpg" alt="Granpa Jared">
+                <img class="absolute top-0 h-14 md:h-20 md:-mt-5 rounded-full z-10" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/lifetime/jared.jpg" alt="Granpa Jared">
             </div>
             <div class="relative w-full rounded-2xl h-28 mx-auto flex space-between overflow-hidden items-center beg-adv-bar" style="background-color: #325e97;max-width: 840px;">
                 <div class="h-full flex items-center flex-wrap relative" style="background-color:#64c3ef;">
-                    <h4 class="uppercase leading-none w-full"><img class="h-5 sm:h-8" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo logo"></h4>
+                    <h4 class="uppercase leading-none w-full"><img class="h-5 sm:h-8" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo logo"></h4>
                     <p class="text-xs leading-none absolute left-0 right-0" style="color:#003e5a;bottom: 7px;"><i class="fas fa-long-arrow-left"></i> LIFETIME PAYMENT <i class="fas fa-long-arrow-right"></i></p>
                 </div>
                 <h3 class="uppercase leading-none font-bebas"><i class="fas fa-infinity"></i> DRUM LESSONS FOR LIFE</h3>
@@ -195,7 +195,7 @@
                 </div>
                 <img
                     class="mb-4 sm:mb-0 order-0 sm:order-1 w-52 sm:w-72 lg:w-80 rounded-xl transition-opacity opacity-0"
-                    src="https://cdn.musora.com/image/fetch/w_640,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/anika-ui-screen.jpg"
+                    src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/anika-ui-screen.jpg"
                     alt="Anika"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -214,7 +214,7 @@
         }"
     >
         <div class="container mx-auto relative z-50">
-            <div class="mx-auto max-w-xs sm:max-w-md md:max-w-xl lg:max-w-5xl" style="font-size: 0;">
+            <div class="mx-auto max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl" style="font-size: 0;">
                 {{--<h1 data-aos="fade-down" class="font-bebas leading-none mt-3 md:mt-5 text-5xl md:text-6xl">REACH YOUR  <br class="inline md:hidden"> <span class="text-coaches">DRUMMING GOALS.</span></h1>--}}
                 {{--<h2 data-aos-once="true" data-aos="fade-up" class="my-3 md:my-5 leading-normal"><strong>Improve your drumming for<br> just <span class="text-drumeo">${{ round((Prices::$plusSubscriptionAnnual / 12), 2) }}</span> per month.</strong></h2>--}}
                 <h3 class="mb-6" style="line-height: 1.4em;"><strong>Become a Lifetime Member<br class="inline sm:hidden"> today and get:</strong></h3>
@@ -224,7 +224,7 @@
 {{--                    <div class="flip-div inline-block relative w-full group" style="padding-bottom: 70%;perspective: 1000px;">--}}
 {{--                        <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">--}}
 {{--                            <div class="border-2 border-drumeo front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">--}}
-{{--                                <div class="h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_460,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/edge-lifetime.png"></div>--}}
+{{--                                <div class="h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=460,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/edge-lifetime.png"></div>--}}
 {{--                                <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">--}}
 {{--                                    <i class="fas fa-arrow-right text-4xl"></i><br>--}}
 {{--                                    <p class="text-sm"><strong>DETAILS</strong></p>--}}
@@ -251,7 +251,7 @@
 
                     $bonuses = [
                         [
-                            'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
+                            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                             'title' => '12 Pairs Of Drumeo Drumsticks',
                             'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
                             'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
@@ -260,7 +260,7 @@
                             'sku' => 'Drumeo-VaterSticks',
                         ],
                         [
-                            'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/pad.jpg',
+                            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/pad.jpg',
                             'title' => 'QuietPad',
                             'description' => 'Practice anywhere with two full-size playing surfaces.',
                             'price' => floatval($productPrices['quietpad']->price),
@@ -268,7 +268,7 @@
                             'sku' => 'quietpad',
                         ],
                         [
-                            'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/quietkick_card.jpg',
+                            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/quietkick_card.jpg',
                             'title' => 'Drumeo QuietKick',
                             'description' => 'Improve your kick foot anywhere with the portable & quiet bass drum workout pad. Attaches to any single OR double pedal (pedal not included).',
                             'price' => floatval($productPrices['quietkick']->price),
@@ -277,7 +277,7 @@
                             'sku' => 'quietkick',
                         ],
                         [
-                            'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/p4.jpg',
+                            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/p4.jpg',
                             'title' => 'Practice Pad',
                             'description' => '',
                             'price' => floatval($productPrices['practicepad']->price),
@@ -285,7 +285,7 @@
                             'sku' => 'practicepad',
                         ],
                         [
-                            'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
+                            'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
                             'title' => 'Drumeo EarDrums',
                             'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
                             'price' => floatval($productPrices['drumeo-eardrums']->price),
@@ -294,7 +294,15 @@
                             'sku' => 'drumeo-eardrums',
                         ],
                         [
-                            'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/bbdb.jpg',
+                            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/shop-image.jpg',
+                            'title' => 'Comfort Cover',
+                            'description' => '',
+                            'price' => floatval($productPrices['comfort-cover']->price),
+                            'shipping' => true,
+                            'sku' => 'comfort-cover',
+                        ],
+                        [
+                            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/bbdb.jpg',
                             'title' => 'The Best Beginner Drum Book',
                             'description' => '',
                             'price' => floatval($productPrices['BeginnerBook']->price),
@@ -305,7 +313,7 @@
                 @endphp
                 @foreach($bonuses as $bonus)
                     <div
-                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/3 lg:w-1/6"
+                        class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3 w-1/2 md:w-1/4"
                         x-data="{
                             selected: false,
                         }"
@@ -334,7 +342,7 @@
                                     @endif
                                     <div
                                         class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover"
-                                        style="background-image:url(https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }});"
+                                        style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/{{ $bonus['image'] }});"
                                         :class="!selected && bonus === 3 && 'grayscale'"
                                     ></div>
                                 </div>
@@ -353,7 +361,7 @@
 {{--                                    @if(!empty($bonus['live']))--}}
 {{--                                        <p class="absolute text-white top-0 left-0 w-full pb-0.5 text-sm bg-drumeo"><strong>Exclusive</strong></p>--}}
 {{--                                    @endif--}}
-{{--                                    <div class="h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }}"></div>--}}
+{{--                                    <div class="h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=460,quality=85/{{ $bonus['image'] }}"></div>--}}
 {{--                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">--}}
 {{--                                        <i class="fas fa-arrow-right text-4xl"></i><br>--}}
 {{--                                        <p class="text-sm"><strong>DETAILS</strong></p>--}}
@@ -392,14 +400,14 @@
                     <div class="inline-block relative lg:w-4/6 px-3 lg:px-0">
                         <img
                             class="border-4 border-drumeo rounded-xl hidden md:inline transition-opacity opacity-0"
-                            src="https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/anika-bonus.jpg"
+                            src="https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/anika-bonus.jpg"
                             alt="Anika bonus"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                         />
                         <img
                             class="border-4 border-drumeo rounded-xl md:hidden transition-opacity opacity-0"
-                            src="https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/anika-bonus-m.jpg"
+                            src="https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/anika-bonus-m.jpg"
                             alt="Anika bonus"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -470,7 +478,7 @@
     <section class="content-section text-center" style="background: #0c1429;">
         <div class="container mx-auto relative z-50">
             <a class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738', 'newwindow', 'width=750, height=550'); return false;">
-                <img alt="" class="h-7 md:h-12 lg:h-14 mb-2 md:mb-0 mx-auto md:mr-2 opacity-70 lazyload" data-src="https://cdn.musora.com/image/fetch/w_320,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/shopper-approved-logo-white.png">
+                <img alt="" class="h-7 md:h-12 lg:h-14 mb-2 md:mb-0 mx-auto md:mr-2 opacity-70 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=320,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/shopper-approved-logo-white.png">
                 <i class="align-middle text-2xl md:text-4xl fas fa-star" style="color: #f68d2d;"></i>
                 <i class="align-middle text-2xl md:text-4xl fas fa-star" style="color: #f68d2d;"></i>
                 <i class="align-middle text-2xl md:text-4xl fas fa-star" style="color: #f68d2d;"></i>

@@ -4,7 +4,7 @@
 
 @section('meta-description', "How to use vibrato & palm muting to unlock new possibilities on the guitar.")
 
-@section('image', 'https://guitareo.s3.amazonaws.com/lead-gen/guitar-tricks/og-image.jpg')
+@section('image', 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/og-image.jpg')
 
 @section('url', 'https://www.guitareo.com/guitar-tricks/')
 

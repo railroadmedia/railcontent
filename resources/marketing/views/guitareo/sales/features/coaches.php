@@ -16,7 +16,7 @@
             'artist' => 'Sami Ghawi',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/220981-card-thumbnail-maxres-1551210078',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/222675-card-thumbnail-maxres-1553776379.jpg',
             'title' => 'Timing & Feel',
             'artist' => 'David Becker',
         ],
@@ -26,17 +26,17 @@
             'artist' => 'Mark Lettieri',
         ],
         [
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/add-power-to-your-playing-thumb.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/add-power-to-your-playing-thumb.jpg',
             'title' => 'Add Power To Your Playing',
             'artist' => 'Dave Weiner',
         ],
         [
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/unlock-your-creativity-thumb.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/unlock-your-creativity-thumb.jpg',
             'title' => 'Unlock Your Creativity',
             'artist' => 'Yvette Young',
         ],
         [
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/2023/the-anatomy-of-a-song-thumb.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/the-anatomy-of-a-song-thumb.jpg',
             'title' => 'The Anatomy of a Song',
             'artist' => 'Pete Thorn',
         ],

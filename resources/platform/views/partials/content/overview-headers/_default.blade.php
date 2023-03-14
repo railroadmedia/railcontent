@@ -1,6 +1,6 @@
 @component('partials.bladesora.members.components.header-banner', [
     "hideUser" => true,
-    'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/headers/'.$brand.'-header.jpg',
+    'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
 ])
     @slot('content')
         <div class="flex flex-column">

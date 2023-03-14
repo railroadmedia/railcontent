@@ -13,7 +13,7 @@
     @include('_partials.layout.global-header', [
         "theme_bg" => "bg-singeo",
         "theme_text" => "text-singeo",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo.svg",
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/singeo.svg",
         "links" => [
             "Member Login" => [
                 "iconClass" => "fas fa-sign-in",
@@ -72,6 +72,6 @@
 @section('layout-footer')
     @include('_partials.layout.global-footer', [
         "brand" => "singeo",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg"
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/singeo-white.svg"
     ])
 @stop

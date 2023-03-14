@@ -8,7 +8,7 @@
     <meta property="og:description" content="Learn the songs you love; now on drums, piano, guitar, or vocals.">
 
     <meta property="og:url" content="https://www.musora.com/unified-2022">
-    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
     <style>
         .reveal-overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483002;display:none;overflow-y:auto;background-color:rgba(0,0,0,0.8)}.reveal-overlay:after{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family:"Font Awesome 5 Pro";font-weight:900;font-style:normal;font-variant:normal;text-rendering:auto;content:"\f00d";color:#fff;z-index:1;opacity:0.8;position:absolute;margin:0;line-height:1em;text-align:center;display:inline-block;outline:none;top:0;right:0;font-size:35px;width:35px}@media (min-width: 768px){.reveal-overlay:after{top:7px;right:7px;font-size:50px;width:50px}}.reveal-overlay .reveal{z-index:1006;-webkit-backface-visibility:hidden;backface-visibility:hidden;display:none;background-color:#fefefe;position:relative;top:100px;margin-right:auto;margin-left:auto;overflow-y:auto;width:90%;height:inherit;min-height:0;outline:none;padding:0;border:none;border-radius:7px}@media (min-width: 768px){.reveal-overlay .reveal{right:auto;left:auto;margin:0 auto}}
         .join.smaller {
@@ -75,11 +75,11 @@
             max-height: 1000px;
         }
         .header-pic {
-            background-image:url(https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/header_m.jpg);
+            background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/header_m.jpg);
         }
         @media (min-width: 64em) {
             .header-pic {
-                background-image:url(https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/header.jpg);
+                background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/header.jpg);
             }
 
         }
@@ -190,8 +190,8 @@
                     <div class="join white smaller absolute bottom-3 sm:bottom-7 right-3 sm:right-7"><i class="fas fa-play"></i>&nbsp; PLAY TRAILER</div>
                 </div>
                 <div class="w-full sm:w-5/12 sm:pr-4 text-center sm:text-left">
-                    <img class="h-14 hidden sm:inline-block" src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/musora_brands_logo.png">
-                    <img class="h-10 inline-block sm:hidden" src="https://musora-web-platform.s3.amazonaws.com/musora/homepage/musora_brands_logo_m.png">
+                    <img class="h-14 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/musora_brands_logo.png">
+                    <img class="h-10 inline-block sm:hidden" src="https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/musora_brands_logo_m.png">
                     <h2 class="leading-tight mt-5 sm:mt-10 mb-2 sm:mb-5"><strong>Your membership just got a massive upgrade.</strong></h2>
                     <p>You now have an all-access pass to <br class="hidden md:inline-block">
                         learn drums, piano, vocals, and guitar.</p>
@@ -207,22 +207,22 @@
 
             <div class="flex flex-wrap items-start text-left">
                 <div class="flex items-start w-full sm:w-1/2 p-4">
-                    <img class="h-12" src="https://musora-web-platform.s3.amazonaws.com/musora/homepage/unified_icon.svg">
+                    <img class="h-12" src="https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/unified_icon.svg">
                     <p class="pl-5 mt-2"><strong class="font-black">Improved search capability</strong><br>
                         Find the lessons you want faster with our improved and predictive search capability!</p>
                 </div>
                 <div class="flex items-start w-full sm:w-1/2 p-4">
-                    <img class="h-12" src="https://musora-web-platform.s3.amazonaws.com/musora/homepage/navigation_icon.svg">
+                    <img class="h-12" src="https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/navigation_icon.svg">
                     <p class="pl-5 mt-2"><strong class="font-black">Updated navigation</strong><br>
                         Easily access account links (settings, schedule, notifications, and support) from a new drop-down menu.</p>
                 </div>
                 <div class="flex items-start w-full sm:w-1/2 p-4">
-                    <img class="h-12" src="https://musora-web-platform.s3.amazonaws.com/musora/homepage/loading_icon.svg">
+                    <img class="h-12" src="https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/loading_icon.svg">
                     <p class="pl-5 mt-2"><strong class="font-black">Faster load times across the site</strong><br>
                         Attention spans are shorter than ever -- and our new site now loads faster to keep up!</p>
                 </div>
                 <div class="flex items-start w-full sm:w-1/2 p-4">
-                    <img class="h-12" src="https://musora-web-platform.s3.amazonaws.com/musora/homepage/dark_icon.svg">
+                    <img class="h-12" src="https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/dark_icon.svg">
                     <p class="pl-5 mt-2"><strong class="font-black">Dark mode</strong><br>
                         Some find dark mode easier on the eyes - others just think it looks cool! Either way, it’s available now!</p>
                 </div>
@@ -236,7 +236,7 @@
                 <div class="w-full sm:w-1/2 pl-5 sm:pl-0 sm:pr-5">
                     <img
                         class="rounded-xl transition-opacity opacity-0"
-                        src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/drumeo_feature.jpg"
+                        src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/drumeo_feature.jpg"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     >
@@ -244,7 +244,7 @@
                 <div class="w-full sm:w-1/2 relative mt-5 md:mt-0 px-6 md:pr-0 md:pl-10 lg:pl-12">
                     <img
                         class="h-7 md:h-10 transition-opacity opacity-0"
-                        src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
+                        src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     >
@@ -265,7 +265,7 @@
                 <div class="sm:order-1 w-full sm:w-1/2 pl-5">
                     <img
                         class="rounded-xl transition-opacity opacity-0"
-                        src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/pianote_feature.jpg"
+                        src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/pianote_feature.jpg"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     >
@@ -273,7 +273,7 @@
                 <div class="w-full sm:w-1/2 relative mt-5 md:mt-0 px-6 md:pr-0 md:pr-10 lg:pr-12">
                     <img
                         class="h-7 md:h-10 transition-opacity opacity-0"
-                        src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png"
+                        src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     >
@@ -294,7 +294,7 @@
                 <div class="w-full sm:w-1/2 pl-5 sm:pl-0 sm:pr-5">
                     <img
                         class="rounded-xl transition-opacity opacity-0"
-                        src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/guitareo_feature.jpg"
+                        src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/guitareo_feature.jpg"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     >
@@ -302,7 +302,7 @@
                 <div class="w-full sm:w-1/2 relative mt-5 md:mt-0 px-6 md:pr-0 md:pl-10 lg:pl-12">
                     <img
                         class="h-7 md:h-10 transition-opacity opacity-0"
-                        src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png"
+                        src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     >
@@ -322,7 +322,7 @@
                 <div class="sm:order-1 w-full sm:w-1/2 pl-5">
                     <img
                         class="rounded-xl transition-opacity opacity-0"
-                        src="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/singeo_feature.jpg"
+                        src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/singeo_feature.jpg"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     >
@@ -330,7 +330,7 @@
                 <div class="w-full sm:w-1/2 relative mt-5 md:mt-0 px-6 md:pr-0 md:pr-10 lg:pr-12">
                     <img
                         class="h-7 md:h-10 transition-opacity opacity-0"
-                        src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"
+                        src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     >
@@ -350,13 +350,13 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f9f9fb;">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-16" src="https://cdn.musora.com/image/fetch/w_480,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/musora_mentors_logo.png">
+            <img class="h-16" src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/musora_mentors_logo.png">
             <p class="mt-1 tracking-wider"><strong>MUSICIANS HELPING MUSICIANS</strong></p>
             <p class="max-w-2xl my-5 mx-auto">Our music lesson communities have always valued relationships before technology.
                 <br><br>
                 So we're doubling down on the personal touch with Musora Mentors – where you’ll get direct access to a Mentor that aligns with your musical experience and goals.</p>
             <div class="flex flex-wrap items-center">
-                <div class="w-1/2 flex-grow md:order-1 mb-5 sm:mb-0"><img src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/features.png"></div>
+                <div class="w-1/2 flex-grow md:order-1 mb-5 sm:mb-0"><img src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/features.png"></div>
                 <div class="w-full sm:w-5/12 text-left py-7 px-6 sm:px-9 sm:mr-5 rounded-xl bg-white border border-gray-300">
                     <p><strong>You’ll get personal guidance for a better music lessons experience, including:</strong></p>
                     <ul class="fa-ul mt-4 sm:mt-7 ml-6">
@@ -375,7 +375,7 @@
                 @php
                     $bonuses = [
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/jenn.jpg',
+                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/jenn.jpg',
                         'first' => 'Jenn ',
                         'last' => 'vO',
                         'drumeo' => true,
@@ -383,7 +383,7 @@
                         'description' => 'Jenn vO grew up in a musical family with piano playing in the background and songs sung around the dinner table. She took piano, trumpet, and guitar lessons, and sang in a concert choir for 8 years! When she’s not working, she adores hanging out with her husband and kids and cooking good food for friends. ',
                         ],
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/carlos.jpg',
+                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/carlos.jpg',
                         'first' => 'Carlos ',
                         'last' => 'B',
                         'drumeo' => true,
@@ -391,7 +391,7 @@
                         'description' => 'Carlos began classical guitar studies through a conservatory in Venezuela. At 11, he learned to hold the drumsticks and play his first beat using Drumeo! Aside from spending time with friends and family, personal training, and traveling, Carlos will soon release his debut album: Inner Child, featuring drummer Matt Garstka. ',
                         ],
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/sara.jpg',
+                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/sara.jpg',
                         'first' => 'Sara ',
                         'last' => 'T',
                         'pianote' => true,
@@ -399,7 +399,7 @@
                         'description' => 'When she’s not chatting with students, Sara spends her free time wandering the forests of the West Coast. You might find her practicing vocal exercises during her adventures (so she doesn’t encounter bears, of course. She’s a great singer - we promise!) Having spent most of her life singing, Sara credits her passion to the happiness and fulfillment of learning music. ',
                         ],
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/emily.jpg',
+                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/emily.jpg',
                         'first' => 'Emily ',
                         'last' => 'J',
                         'pianote' => true,
@@ -407,7 +407,7 @@
                         'description' => 'Emily’s #1 passion in life is music! She’s toured across six countries with her all-female rock’n’roll band and has released three albums, with a fourth on the way! While her primary focus has always been songwriting, singing, and playing the guitar, she also has a passion for the drums, bass, ukulele & piano!',
                         ],
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/jorge.jpg',
+                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/jorge.jpg',
                         'first' => 'Jorge ',
                         'last' => 'B',
                         'drumeo' => true,
@@ -415,7 +415,7 @@
                         'description' => 'Jorge always dreamed of becoming a musician. At 16, he discovered Drumeo and began to learn the drums, even though he didn’t have a drum kit, practicing by air drumming and memorizing patterns. Jorge lives in Madrid, where he works with local artists as a session drummer. He is also a drum teacher, music producer, and soon-to-be audio engineer.',
                         ],
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/roni.jpg',
+                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/roni.jpg',
                         'first' => 'Roni ',
                         'last' => 'K',
                         'drumeo' => true,
@@ -423,7 +423,7 @@
                         'description' => 'Roni grew up in a musical family playing “Name That Tune” and enjoying live music performances. She took every musical opportunity growing up including Concert and Jazz band, choir, guitar class, drumline, and even played for the Special Olympics opening ceremony. Roni can be found hanging with family and friends, being crafty, and playing her clarinet. ',
                         ],
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/kaitlyn.jpg',
+                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/kaitlyn.jpg',
                         'first' => 'Kaitlyn ',
                         'last' => 'C',
                         'drumeo' => true,
@@ -431,7 +431,7 @@
                         'description' => 'Kaitlyn is a huge music lover and has been jamming along to all genres of music all her life! She is a beginner-level piano player (you may have seen some videos in Pianote!). Kaitlyn loves making people laugh, listening to and finding new music, hiking mountains, and spending time with her friends, family, and cat (Leo). ',
                         ],
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/hannah2.jpg',
+                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/hannah2.jpg',
                         'first' => 'Hannah ',
                         'last' => 'D',
                         'pianote' => true,
@@ -439,7 +439,7 @@
                         'description' => 'Hannah is a lifelong music lover who dabbles in piano, singing, guitar, and occasionally ukulele! She loves to see students realize the joy music can bring to their lives. In her free time, she loves finding new music to listen to, spending time with her partner and two devious cats, and pursuing various other artistic interests.',
                         ],
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/joy2.jpg',
+                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/joy2.jpg',
                         'first' => 'Joy ',
                         'last' => 'B',
                         'drumeo' => true,
@@ -447,7 +447,7 @@
                         'description' => 'Joy is passionate about everything music and loves helping people find their unique rhythm and style.  She plays drums, dabbles at the piano, and is learning bass. Sax was her first instrument, but the drums are what feed her soul. Joy has been a die-hard Raptors fan since Day 1, screaming her coaching advice at the TV! ',
                         ],
                         [
-                        'image' => 'https://musora-web-platform.s3.amazonaws.com/musora/homepage/jenn_k.jpg',
+                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/jenn_k.jpg',
                         'first' => 'Jenn ',
                         'last' => 'K',
                         'drumeo' => true,
@@ -463,12 +463,12 @@
                                 <div class="shadow-sm front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
                                     <div class="pb-3 flex flex-wrap content-end justify-center absolute z-30 text-center inset-0 text-white visible text-shadow-2" style="background:linear-gradient(to bottom, transparent 70%, black);">
                                         <h4 class="w-full uppercase font-bebas leading-normal mx-auto"><strong>{!! $bonus['first'] !!}</strong> {!! $bonus['last'] !!}</h4>
-                                        <img class="inline-block h-3 mr-1.5 @if(empty($bonus['drumeo'])) filter brightness-0 contrast-0 invert saturate-0 @endif" src="https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
-                                        <img class="inline-block h-3 mr-1.5 @if(empty($bonus['pianote'])) filter brightness-0 contrast-0 invert saturate-0 @endif" src="https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png">
-                                        <img class="inline-block h-3 mr-1.5 @if(empty($bonus['guitareo'])) filter brightness-0 contrast-0 invert saturate-0 @endif" src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png">
-                                        <img class="inline-block h-3 @if(empty($bonus['singeo'])) filter brightness-0 contrast-0 invert saturate-0 @endif" src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
+                                        <img class="inline-block h-3 mr-1.5 @if(empty($bonus['drumeo'])) filter brightness-0 contrast-0 invert saturate-0 @endif" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
+                                        <img class="inline-block h-3 mr-1.5 @if(empty($bonus['pianote'])) filter brightness-0 contrast-0 invert saturate-0 @endif" src="https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png">
+                                        <img class="inline-block h-3 mr-1.5 @if(empty($bonus['guitareo'])) filter brightness-0 contrast-0 invert saturate-0 @endif" src="https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png">
+                                        <img class="inline-block h-3 @if(empty($bonus['singeo'])) filter brightness-0 contrast-0 invert saturate-0 @endif" src="https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png">
                                     </div>
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }})"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/{{ $bonus['image'] }})"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-repeat text-4xl"></i><br>
                                         <p class="text-sm"><strong>LEARN MORE</strong></p>
@@ -490,14 +490,14 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:linear-gradient(45deg, #e6fffb, #e6f2ff, #f6e6ff, #ffe6e8);">
         <div class="container max-w-2xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="h-72 sm:h-96 mb-5 sm:mb-0" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/homepage/ui.png">
+                <img class="h-72 sm:h-96 mb-5 sm:mb-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/ui.png">
                 <div class="flex-grow pl-8 sm:text-left">
                     <h3 class="leading-tight"><strong>The app for learning<br> the music you love.</strong></h3>
                     <p class="leading-tight my-5">Access the member’s area for Drumeo, Pianote, Singeo, and Guitareo all in one place. Our brand new Musora app has improved functionality and added features with full access to all four brands.</p>
                     <a class="inline-block" href="https://itunes.apple.com/us/app/musora/id1619053766?ls=1" target="_blank">
-                        <img class="h-10 m-1" src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
+                        <img class="h-10 m-1" src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
                     <a class="inline-block" href="https://play.google.com/store/apps/details?id=com.musoraapp" target="_blank">
-                        <img class="h-10 m-1" src="https://cdn.musora.com/image/fetch/w_260,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
+                        <img class="h-10 m-1" src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
                 </div>
             </div>
         </div>

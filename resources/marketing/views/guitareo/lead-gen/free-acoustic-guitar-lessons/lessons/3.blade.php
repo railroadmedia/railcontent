@@ -12,9 +12,9 @@
 
 @section('next', '/free-acoustic-guitar-lessons/lessons/4')
 
-@section('prev-thumb', 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/thumbs-acoustic-02.jpg')
+@section('prev-thumb', 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/thumbs-acoustic-02.jpg')
 
-@section('next-thumb', 'https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/thumbs-acoustic-04.jpg')
+@section('next-thumb', 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/thumbs-acoustic-04.jpg')
 
 @section('lesson-description', 'Learn the correct motion of your wrist to strum the guitar. You’ll go over downstrokes, upstrokes, and a bonus strumming pattern if you’re feeling up for it. ')
 
@@ -33,7 +33,7 @@
 
     @include('guitareo.lead-gen.partials._assignment-resources', [
         "title" => "Chord Charts",
-        "pdfURL" => "https://guitareo.s3.amazonaws.com/lead-gen/free-acoustic-guitar-lessons/strumming-basics.pdf"
+        "pdfURL" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/strumming-basics.pdf"
     ])
 
 @stop

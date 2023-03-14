@@ -12,7 +12,7 @@
     /metal-playalongs/songs/8
 @stop
 
-@section('prev-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/metal-playalongs/Brotherhood+Of+The+Snake.jpg')
+@section('prev-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/metal-playalongs/Brotherhood+Of+The+Snake.jpg')
 
 @section('assets')
     @include('drumeo.lead-gen.partials._assignment-resources', [

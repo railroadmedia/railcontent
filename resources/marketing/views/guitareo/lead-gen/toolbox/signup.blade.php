@@ -5,7 +5,7 @@
     <meta name="description"
             content="Sign up and you'll get a collection of exclusive guitar courses with Nate Savage covering a wide range of essential topics."/>
 
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/toolbox/bottom-background.jpg" style="display: none;">
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/toolbox/bottom-background.jpg" style="display: none;">
     <meta property="og:title" content="The Guitarist's Toolbox">
     <meta property="og:description"
             content="Sign up and you'll get a collection of exclusive guitar courses with Nate Savage covering a wide range of essential topics.">
@@ -26,16 +26,16 @@
     <header class="header blue" style="background:#1a1c1d;">
         <div class="container clearfix mx-auto max-w-6xl flex flex-col">
             <picture>
-                <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
-                <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
-                <img class="logo" src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg" alt="logo">
+                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg">
+                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg">
+                <img class="logo" src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg" alt="logo">
             </picture>
             <div class="flex flex-col sm:flex-row">
                 <div class="text-center sm:w-5/12 preview-circle">
                     <picture>
-                        <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg">
-                        <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg">
-                        <img class="circle-nate" src="https://cdn.musora.com/image/fetch/w_270,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/nate-savage.jpg" alt="nate-savage">
+                        <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/nate-savage.jpg">
+                        <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/nate-savage.jpg">
+                        <img class="circle-nate" src="https://www.musora.com/musora-cdn/image/width=270,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/nate-savage.jpg" alt="nate-savage">
                     </picture>
                 </div>
                 <div class="px-2 sm:px-8 sm:w-7/12">
@@ -57,47 +57,47 @@
             [
                 'locked' => true,
                 'title' => 'Playing Your First Song',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/playing-your-first-song.png',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/playing-your-first-song.png',
             ],
             [
                 'locked' => true,
                 'title' => 'How To Tune A Guitar',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/how-to-tune-a-guitar.png',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/how-to-tune-a-guitar.png',
             ],
             [
                 'locked' => true,
                 'title' => 'Making Chords Sound Clean',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/making-chords-sound-clean.png',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/making-chords-sound-clean.png',
             ],
             [
                 'locked' => true,
                 'title' => 'Changing Chords Smoothly',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/changing-chords-smoothly.png',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/changing-chords-smoothly.png',
             ],
             [
                 'locked' => true,
                 'title' => 'Sight Reading Essentials',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/sight-reading-essentials.png',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/sight-reading-essentials.png',
             ],
             [
                 'locked' => true,
                 'title' => 'Exploring Guitar Rhythms',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/exploring-guitar-rhythms.png',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/exploring-guitar-rhythms.png',
             ],
             [
                 'locked' => true,
                 'title' => 'Playing Your First Guitar Solo',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/playing-your-first-guitar-solo.png',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/playing-your-first-guitar-solo.png',
             ],
             [
                 'locked' => true,
                 'title' => 'Legato Hammer Ons & Pull Offs',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/legato-hammer-ons-pull-offs.png',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/legato-hammer-ons-pull-offs.png',
             ],
             [
                 'locked' => true,
                 'title' => 'Soloing With Minor Pentatonic Scales',
-                'imgUrl' => 'https://guitareo.s3.amazonaws.com/starter-kit/thumbnails/soloing-with-minor-pentatonic-scales.png',
+                'imgUrl' => 'https://d122ay5chh2hr5.cloudfront.net/starter-kit/thumbnails/soloing-with-minor-pentatonic-scales.png',
             ],
         ],
     ])
@@ -129,13 +129,13 @@
     @include('guitareo.lead-gen.partials._quick-questions')
 
     <section class="final blue"
-            style="background-image:url(https://guitareo.s3.amazonaws.com/toolbox/bottom-background.jpg);">
+            style="background-image:url(https://d122ay5chh2hr5.cloudfront.net/toolbox/bottom-background.jpg);">
         <div class="container clearfix mx-auto max-w-6xl">
             <div class="logo">
                 <picture>
-                    <source media="(min-width: 1024px)" srcset="https://cdn.musora.com/image/fetch/w_900,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
-                    <source media="(min-width: 768px)" srcset="https://cdn.musora.com/image/fetch/w_550,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg">
-                    <img src="https://cdn.musora.com/image/fetch/w_350,q_auto:best/https://guitareo.s3.amazonaws.com/toolbox/logo.svg" alt="logo">
+                    <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg">
+                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg">
+                    <img src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg" alt="logo">
                 </picture>
             </div>
             <p>
