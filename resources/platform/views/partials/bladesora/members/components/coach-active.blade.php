@@ -14,8 +14,8 @@
                         class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">
 
                         <!-- Coach Image -->
-                        <img src="https://musora.com/cdn-cgi/image/width=300/{{ $coach->fetch('data.coach_card_image') }}"
-                             class="tw-w-full tw-flex tw-object-top tw-object-cover tw-transition-opacity tw-opacity-0" 
+                        <img src="https://www.musora.com/musora-cdn/image/width=300/{{ $coach->fetch('data.coach_card_image') }}"
+                             class="tw-w-full tw-flex tw-object-top tw-object-cover tw-transition-opacity tw-opacity-0"
                              alt="{{ $coach->fetch('fields.name') }} Card"
                              loading="lazy"
                              onload="this.classList.remove('tw-opacity-0')"
@@ -42,9 +42,9 @@
 
                             @if ($coach->fetch('is_house_coach'))
                                 <div class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-4 tw-justify-center tw-items-center">
-                                    <musora-icon 
+                                    <musora-icon
                                         icon-name="whistle-filled"
-                                        height="12" 
+                                        height="12"
                                         class="tw-text-white tw-mr-0.5 tw-w-[16px] tw-leading-none"
                                     ></musora-icon>
                                     <span class="tw-mt-1">HOUSE</span>

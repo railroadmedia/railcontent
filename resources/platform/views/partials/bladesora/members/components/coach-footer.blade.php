@@ -22,7 +22,7 @@
                     <div
                         class="tw-mx-auto tw-mb-6 lg:tw-mb-0 lg:tw-mx-0 lg:tw-mr-4 tw-rounded-full tw-relative tw-w-48 tw-h-48 tw-overflow-hidden tw-flex-shrink-0">
                         <img class="tw-w-48 tw-h-48 tw-rounded-full tw-border-4 tw-border-solid tw-border-yellow-500"
-                            src="https://musora.com/cdn-cgi/image/width=300/{{ $headShotPicture }}">
+                            src="https://www.musora.com/musora-cdn/image/width=300/{{ $headShotPicture }}">
                         <!-- Badge -->
                         <div
                             class="tw-bg-yellow-500 tw-absolute tw-w-full tw-h-6 tw-left-0 tw-bottom-0 tw-z-10 tw-flex tw-items-center tw-justify-center">
