@@ -86,7 +86,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="tw-block tw-border-[0.5px] tw-border-[#344858] tw-w-full tw-h-[370px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4 tw-overflow-hidden">
+    class="tw-block tw-border-[0.5px] tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-w-full tw-h-[370px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4 tw-overflow-hidden">
 
     <CarouselSlide
       v-for="(slide, i) in slides"
@@ -127,13 +127,13 @@ onMounted(() => {
       >
 
           <button
-              class="tw-bg-[#000C17] tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[26px] lg:tw-w-[26px] hover:tw-text-[#00101D] hover:tw-bg-white hover:tw-border-none"
+              class="tw-bg-[#000C17] tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[30px] lg:tw-w-[30px] hover:tw-text-[#00101D] hover:tw-bg-white hover:tw-border-none"
               @click="handleLeft()">
               <ChevronLeftIcon />
           </button>
 
           <button
-              class="tw-bg-[#000C17] tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[26px] lg:tw-w-[26px] tw-ml-[10px] md:tw-ml-[23px] hover:tw-text-[#00101D] hover:tw-bg-white hover:tw-border-none"
+              class="tw-bg-[#000C17] tw-rounded-full tw-border-2 tw-border-white tw-text-white tw-h-[23px] tw-w-[23px] lg:tw-h-[30px] lg:tw-w-[30px] tw-ml-[10px] md:tw-ml-[23px] hover:tw-text-[#00101D] hover:tw-bg-white hover:tw-border-none"
               @click="handleRight()">
               <ChevronRightIcon />
           </button>

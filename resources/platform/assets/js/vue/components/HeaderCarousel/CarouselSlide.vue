@@ -132,7 +132,7 @@ const closeModal = () => {
         </div>
       <!-- Text Content -->
       <div class="tw-absolute tw-bottom-0 tw-w-full md:tw-relative tw-text-white tw-h-4/5 md:tw-h-full">
-        <div class="tw-flex tw-flex-col tw-flex-wrap tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[26px] tw-font-open-sans tw-pb-10 sm:tw-pb-[26px] md:tw-pb-10 lg:tw-pb-0">
+        <div class="tw-flex tw-flex-col tw-flex-wrap tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[26px] tw-font-open-sans tw-pb-12 sm:tw-pb-[38px] md:tw-pb-10 lg:tw-pb-0">
           <h4 class="tw-font-bold tw-text-sm tw-uppercase tw-leading-none tw-mb-3">{{ topSubtitle }}</h4>
           <h2 class="
               tw-font-bebas-neue
