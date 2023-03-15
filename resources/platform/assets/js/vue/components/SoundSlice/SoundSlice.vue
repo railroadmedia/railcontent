@@ -117,7 +117,7 @@ onMounted(() => {
     document.addEventListener('keyup', spacebarToPlayPause);
 
     if(props.autoplay) {
-        const soundsliceWrapper = 
+        //const soundsliceWrapper = 
         //const x = 
         //document.elementFromPoint(x, y).click();
     }

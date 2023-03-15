@@ -181,7 +181,7 @@ const props = defineProps({
             <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                 <div class="tw-flex tw-flex-row tw-w-full">
                     <div class="tw-w-full">
-
+                        Expand Section
                     </div>
                     <Comments v-if="!collapsedComments" :theme-color="brand" :brand="brand" :content-id="contentId" :user-id="userId"
                         :user-name="userName" :user-avatar="userAvatar" :user-xp="userXp"
