@@ -82,7 +82,7 @@
         })
     }
     const handleCancelSort = () => {
-        console.log(initialLessonsArray)
+        // console.log(initialLessonsArray)
         playlistsStore.lessons = initialLessonsArray;
         playlistsStore.sortingPlaylist = false;
     }
@@ -136,7 +136,7 @@
     watch(() => playlistsStore.sortingPlaylist, (isSorting) => {
         if(isSorting) {
             initialLessonsArray = playlistsStore.lessons;
-            console.log('initialArray', initialLessonsArray)
+            // console.log('initialArray', initialLessonsArray)
         }
     });
 
