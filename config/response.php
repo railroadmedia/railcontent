@@ -447,6 +447,7 @@ return [
                 'length_in_seconds',
                 'data.thumbnail_url',
             ],
+            'lesson_count',
             'lessons' => [
                 'id',
                 'type',
@@ -1305,6 +1306,7 @@ return [
                 'mobile_app_url',
                 'fields.video.fields.length_in_seconds',
             ],
+            'lesson_count',
             'coaches' => [
                 'id',
                 'fields.name',
@@ -1342,6 +1344,7 @@ return [
                 'is_added_to_primary_playlist',
             ],
             "current_lesson_index",
+            'lesson_count',
             "next_lesson" => [
                 'fields.title',
                 'fields.artist',
@@ -1619,6 +1622,7 @@ return [
                 'data.thumbnail_url',
                 'mobile_app_url',
             ],
+            'lesson_count',
             'coaches' => [
                 'id',
                 'fields.name',
@@ -1678,6 +1682,7 @@ return [
                 'data.thumbnail_url',
                 'mobile_app_url',
             ],
+            'lesson_count',
             'coaches' => [
                 'id',
                 'fields.name',
@@ -2555,6 +2560,7 @@ return [
             'like_count',
             'total_length_in_seconds',
             'level_position',
+            'lesson_count',
             'course_position',
             '*fields.instructor',
             'lessons' => [
@@ -2698,6 +2704,7 @@ return [
             'last_incomplete_lesson_from_course',
             'is_last_incomplete_course_from_level',
             'resources',
+            'parent',
             'coaches' => [
                 'id',
                 'fields.name',
