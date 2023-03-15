@@ -8,6 +8,7 @@ use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermiss
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
+use Railroad\Ecommerce\Events\AccessCodeClaimed;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
@@ -186,7 +187,10 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
         ],
         HigherKeyProgressUpdated::class => [
             ContentProgressEventListener::class . '@handleHeighKeyProgressUpdates',
-        ]
+        ],
+        AccessCodeClaimed::class => [
+            CustomerIoSyncEventListener::class . '@handleAccessCodeClaimed',
+        ],
     ];
 
     /**
