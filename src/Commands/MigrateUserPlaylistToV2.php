@@ -16,7 +16,7 @@ class MigrateUserPlaylistToV2 extends Command
      *
      * @var string
      */
-    protected $signature = 'MigrateUserPlaylistToV2 {brand?}';
+    protected $signature = 'MigrateUserPlaylistToV2 {brand=all} {startingUserId=0} {endingUserId=9999999} ';
 
     /**
      * The console command description.
@@ -139,9 +139,16 @@ class MigrateUserPlaylistToV2 extends Command
 
         $query =
             $dbConnection->table(config('railcontent.table_prefix').'user_playlists')
-                ->whereNot('migrated', true);
-        if (!empty($this->argument('brand'))) {
+                ->where('migrated', '=',0);
+        if (!empty($this->argument('brand')) && $this->argument('brand') != "all") {
             $query->where('brand', '=', $this->argument('brand'));
+        }
+        if (!empty($this->argument('startingUserId'))) {
+            $query->where('user_id', '>', $this->argument('startingUserId'));
+        }
+
+        if (!empty($this->argument('endingUserId'))) {
+            $query->where('user_id', '<', $this->argument('endingUserId'));
         }
 
         $parents = [];
@@ -425,14 +432,14 @@ class MigrateUserPlaylistToV2 extends Command
                             }
                         }
 
-                        //            $total = $total + count($rows);
-                        //            $this->info(
-                        //                'Migrated '.
-                        //                $total.
-                        //                ' items  '.
-                        //                Carbon::now()
-                        //                    ->toDateTimeString()
-                        //            );
+                                    $total = $total + count($rows);
+                                    $this->info(
+                                        'Migrated '.
+                                        $total.
+                                        ' items  '.
+                                        Carbon::now()
+                                            ->toDateTimeString()
+                                    );
                     });
 
         $dbConnection->table('railcontent_user_playlists')
