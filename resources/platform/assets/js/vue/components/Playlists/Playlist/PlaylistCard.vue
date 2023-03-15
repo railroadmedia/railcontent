@@ -292,7 +292,7 @@
 
         <!-- content mask -->
         <div :class="[{ 'tw-hidden' : !showMask }, playlistsStore.sortingPlaylist ? 'tw-cursor-move' : 'tw-cursor-pointer']" 
-             class="tw-z-20 tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-border-[#445F74] dark:tw-border-[#7E9AB1]"
+             class="tw-z-[15] tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-border-[#445F74] dark:tw-border-[#7E9AB1]"
              @click="handleNoAccess"
         >
         </div>
