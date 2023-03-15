@@ -140,9 +140,6 @@
                 width:95%;
             }
         }
-    </style>
-    @if(!empty($thomann))
-        <style>
             .apply {
                 background:#0b76db;
             }
@@ -151,34 +148,27 @@
                 background:#258ff4;
             }
         </style>
-    @endif
 @endsection
 
 <!-- Main -->
 @section('layout-body')
-    <div class="py-8 sm:py-12 px-4 sm:px-6">
+    <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url({{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+        <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
+            <img class="h-8 sm:h-11 lg:h-14" src="{{ musora_cdn('redeem/sweetwater/drumeo-sweetwater.svg') }}">
+            <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Drumeo.</strong></h3>
+            <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Drumeo Student through Sweetwater!<br class="hidden sm:inline">
+                Please enter the code that they provided you in the form below.</h6>
+            <img class="-mb-4" src="{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
+        </div>
+    </div>
+    <div class="py-8 sm:py-12 px-3 sm:px-6">
         <div class="container mx-auto max-w-3xl">
-            @if(empty($thomann))
-                <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/113327941" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
-                </div>
-                <p class="redeem-switcher text-left"><i class="fal fa-info-circle"></i> Although the card is for Drumeo, this card will give you full access to Drumeo, Pianote, Guitareo, and Singeo.</p>
-            @else
-                <div class="text-center">
-                    <img style="height:30px;width:auto;filter:invert(1);margin-bottom: 15px;" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/thomann-logo.png">
-                    <h3 style="font-family: 'Open Sans', sans-serif;"><strong style="font-weight: 900;">CLAIM YOUR DRUMEO 3-MONTH MEMBERSHIP</strong></h3>
-                    {{--        <p>Redeem your free 1-year Drumeo membership here.</p>--}}
-                </div>
-                <div class="redeem-switcher">
-                    <span class="red"> These access codes can only be <br class="inline sm:hidden"> redeemed for new accounts</span>
-                </div>
-            @endif
              @if($newAccount)
                 @if(empty($thomann))
                     <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
                         <strong><b>Existing Member?</b>
                             <br>
-                            <a class="text-drumeo underline" href="/redeem/existing">Click here to add to your account.</a>
+                            <a class="text-drumeo underline" href="/drumeo/sweetwater/existing">Click here to add to your account.</a>
                         </strong>
                         <br>
                         <em>(The form below is only for new accounts)</em>

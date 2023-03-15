@@ -104,6 +104,15 @@ class CodeRedemptionController extends BaseController
         return view('musora.pages.redeem.redeem-page', ['newAccount' => false]);
     }
 
+    public function sweetwaterRedeemNewDrumeo()
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'drumeo']);
+    }
+    public function sweetwaterRedeemExistingDrumeo()
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'drumeo']);
+    }
+
     public function roland()
     {
         return view('pianote.sales.roland', ['redirectUrl' => get_musora_brand_base_url() . '/pianote']);
