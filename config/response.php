@@ -410,7 +410,8 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
-            'resources'
+            'resources',
+            'route'
         ],
 
         'course' => [
@@ -561,6 +562,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'route'
         ],
 
         'play-along' => [
@@ -765,6 +767,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'route'
         ],
 
         'song-tutorial' => [
@@ -847,6 +850,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'route'
         ],
         'song-tutorial-children' => [
             'ranges',
@@ -914,7 +918,8 @@ return [
                 'current_user_is_subscribed',
             ],
             'artist',
-            'parent'
+            'parent',
+            'route'
         ],
         'song' => [
             'ranges',
@@ -1067,7 +1072,8 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
-            'artist'
+            'artist',
+            'route'
         ],
 
 
@@ -1464,7 +1470,8 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
-            'resources'
+            'resources',
+            'route'
         ],
 
         'assignment' => [
@@ -1481,6 +1488,7 @@ return [
             'data.timecode',
             'parent',
             'url',
+            'route'
         ],
 
         'comment' => [
@@ -1789,6 +1797,7 @@ return [
                 'current_user_is_subscribed',
             ],
             'parent',
+            'route'
         ],
 
         'student-focus' => [
@@ -2711,6 +2720,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'route'
         ],
         'recording' => [
             'id',
