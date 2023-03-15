@@ -1,5 +1,5 @@
 <script>
-import { ref } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import OptionElement from '../AvatarMenu/OptionElement.vue'
 import OptionGroup from '../AvatarMenu/OptionGroup.vue'
 import AvatarMenu from '../AvatarMenu/AvatarMenu.vue'
@@ -11,7 +11,6 @@ import { XIcon } from "@heroicons/vue/solid";
 
 export default {
   name: 'UserIcon',
-  inject: ['userNavigationDropdownLinks'],
   props: {
     userName: {
       type: String
@@ -47,6 +46,7 @@ export default {
   setup(props, context) {
     const isUserMenuOpen = ref(false)
     const isReviewModalOpen = ref(false)
+    const userNavigationDropdownLinks = ref([])
 
     const handleMenuOpen = (val) => {
       if (typeof val === 'boolean') {
@@ -67,6 +67,10 @@ export default {
     const handleLogout = () => {
       window.location.reload()
     }
+
+    onBeforeMount(() => {
+      userNavigationDropdownLinks.value = window.userNavigationDropdownLinks;
+    });
 
     return {
       handleMenuOpen,

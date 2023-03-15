@@ -1,5 +1,5 @@
 <script setup>
-import { defineProps, defineEmits, inject } from 'vue';
+import { defineProps, defineEmits, onBeforeMount, ref } from 'vue';
 import SidebarContainer from './SidebarContainer.vue';
 import { textColor, borderColor } from '../../../constants/brands.js';
 import SidebarPlaylists from '../Playlists/SidebarPlaylists.vue';
@@ -37,7 +37,7 @@ const props = defineProps({
   }
 });
 
-const sidebarNavigationLinks = inject('sidebarNavigationLinks');
+const sidebarNavigationLinks = ref([]);
 
 const activePath = (path) => {
   let windowPathArray = window.location.pathname.split('/');
@@ -53,6 +53,10 @@ const activePath = (path) => {
     return true;
   }
 }
+
+onBeforeMount(() => {
+  sidebarNavigationLinks.value = window.sidebarNavigationLinks;
+});
 </script>
 
 <template>
@@ -62,7 +66,7 @@ const activePath = (path) => {
     <SearchInput :isSidebarCollapsed="isSidebarCollapsed" :brand="brand" @onCollapse="handleCollapse" />
 
     <!-- Sidebar Link Sections -->
-    <section v-for="(section, i) in this.sidebarNavigationLinks" :key="i"
+    <section v-for="(section, i) in sidebarNavigationLinks" :key="i"
       class="tw-border-b dark:tw-border-b-[#1E364A]">
       <ul>
         <li v-for="(link, j) in section" :key="j" :class="[activePath(link.path) ? textColor[brand] : '']">
