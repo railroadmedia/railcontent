@@ -117,8 +117,8 @@ const props = defineProps({
     }
 });
 onBeforeMount(() => {
-    console.log('playlistItems', props.playlistItems)
-    console.log('relatedLessons', props.relatedLessons)
+    console.log('playlistItems', typeof props.playlistItems)
+    console.log('relatedLessons',typeof props.relatedLessons)
 })
 </script>
 
