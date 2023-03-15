@@ -132,6 +132,7 @@
     }
     //Scroll Handler for Drag
     const scroll = (step) => {
+        console.log('scroll', step)
         var scrollY = scrollContainer.scrollTop || document.body.scrollTop;
         scrollContainer.scrollBy(0, scrollY + step)        
         if (!state.stopScroll) {
@@ -154,16 +155,17 @@
         //Handle drag Event
         document.addEventListener('drag', function(e) {
             if(playlistsStore.sortingPlaylist) {
+                const { clientHeight } = scrollContainer;
                 if (e.target.classList.contains('draggable')) {
                     //Scroll Container on Drag
                     state.stopScroll = true;
-                    if (e.clientY < 126 ) {
+                    if (e.clientY < 200 ) {
                         state.stopScroll = false;
-                        scrollContainer.scrollBy(0, -1);
+                        scrollContainer.scrollBy(0, -120);
                     }
-                    if ( (e.clientY > ( scrollContainer.clientHeight - 90) ) && !VerticalMaxed() ) { 
+                    if ( (e.clientY > ( clientHeight - 200) ) && !VerticalMaxed() ) {
                         state.stopScroll = false;
-                        scroll(0,1) && !VerticalMaxed()
+                        scrollContainer.scrollBy(0, 80);
                     }   
                 } 
             }
