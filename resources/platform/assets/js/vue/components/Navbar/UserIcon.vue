@@ -77,7 +77,8 @@ export default {
       handleLogout,
       isUserMenuOpen,
       isReviewModalOpen,
-      handleReviewOpen
+      handleReviewOpen,
+      userNavigationDropdownLinks
     }
   }
 }
@@ -115,7 +116,7 @@ export default {
         :href="accountUrl.length ? accountUrl : '/profile'"
       />
       <OptionGroup>
-        <OptionElement :href="this.userNavigationDropdownLinks.notificationsPageUrl">
+        <OptionElement :href="userNavigationDropdownLinks.notificationsPageUrl">
           <musora-icon icon-name="bell" class="tw-w-[20px] tw-mr-2"/>
           Notifications
           <!-- Notification Indicator -->
@@ -124,7 +125,7 @@ export default {
             <span class="tw-relative tw-inline-flex tw-rounded-full tw-h-[8px] tw-w-[8px] tw-bg-red-500"></span>
           </span>
         </OptionElement>
-        <!-- <OptionElement :href="this.userNavigationDropdownLinks.playlistsPageUrl">
+        <!-- <OptionElement :href="userNavigationDropdownLinks.playlistsPageUrl">
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
           Playlists
         </OptionElement> -->
@@ -141,7 +142,7 @@ export default {
           <musora-icon icon-name="board-complete" class="tw-w-[20px] tw-mr-2"/>
           Apply For Review
         </OptionElement>
-        <OptionElement :href="this.userNavigationDropdownLinks.settingsPageUrl">
+        <OptionElement :href="userNavigationDropdownLinks.settingsPageUrl">
           <musora-icon icon-name="settings" class="tw-w-[20px] tw-mr-2"/>
           Settings
         </OptionElement>
@@ -160,13 +161,13 @@ export default {
             </div>
           </div>
         </OptionElement>
-        <OptionElement :href="this.userNavigationDropdownLinks.supportPageUrl">
+        <OptionElement :href="userNavigationDropdownLinks.supportPageUrl">
           <musora-icon icon-name="phone" class="tw-w-[20px] tw-mr-2"/>
             Support
           </OptionElement>
       </OptionGroup>
       <OptionGroup>
-        <OptionElement :href="this.userNavigationDropdownLinks.logoutPageUrl">
+        <OptionElement :href="userNavigationDropdownLinks.logoutPageUrl">
           <musora-icon icon-name="sign-out" class="tw-w-[20px] tw-mr-2"/>
           Logout
         </OptionElement>
