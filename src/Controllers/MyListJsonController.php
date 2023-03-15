@@ -245,7 +245,8 @@ class MyListJsonController extends Controller
     public function getPlaylist(Request $request)
     {
         $playlist = $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
-        throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
+        throw_if(($playlist == -1), new NotFoundException("You don’t have access to this playlist", 'Private Playlist'));
+        throw_if(!$playlist, new NotFoundException("Playlist not exists."));
 
         return reply()->json([$playlist], [
             'transformer' => DataTransformer::class,

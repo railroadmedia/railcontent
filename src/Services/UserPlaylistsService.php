@@ -370,8 +370,11 @@ class UserPlaylistsService
     public function getPlaylist($playlistId)
     {
         $playlist = $this->userPlaylistsRepository->getById($playlistId);
-        if (!$playlist || ($playlist['user_id'] != auth()->id() && $playlist['private'] == 1)) {
+        if(!$playlist){
             return null;
+        }
+        if ($playlist['user_id'] != auth()->id() && $playlist['private'] == 1) {
+            return -1;
         }
 
         $playlist['like_count'] =
