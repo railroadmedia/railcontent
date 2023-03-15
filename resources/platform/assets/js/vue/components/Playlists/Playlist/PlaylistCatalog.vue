@@ -82,7 +82,7 @@
         })
     }
     const handleCancelSort = () => {
-        console.log(initialLessonsArray)
+        // console.log(initialLessonsArray)
         playlistsStore.lessons = initialLessonsArray;
         playlistsStore.sortingPlaylist = false;
     }
@@ -130,22 +130,13 @@
     const VerticalMaxed = () => { 
         return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
     }
-    //Scroll Handler for Drag
-    const scroll = (step) => {
-        console.log('scroll', step)
-        var scrollY = scrollContainer.scrollTop || document.body.scrollTop;
-        scrollContainer.scrollBy(0, scrollY + step)        
-        if (!state.stopScroll) {
-            setTimeout( () => { scroll(step) }, 20);
-        }
-    }
 
     //-------------Watchers-------------//
 
     watch(() => playlistsStore.sortingPlaylist, (isSorting) => {
         if(isSorting) {
             initialLessonsArray = playlistsStore.lessons;
-            console.log('initialArray', initialLessonsArray)
+            // console.log('initialArray', initialLessonsArray)
         }
     });
 
@@ -159,14 +150,16 @@
                 if (e.target.classList.contains('draggable')) {
                     //Scroll Container on Drag
                     state.stopScroll = true;
-                    if (e.clientY < 200 ) {
-                        state.stopScroll = false;
-                        scrollContainer.scrollBy(0, -120);
-                    }
+                    //Scroll Down
                     if ( (e.clientY > ( clientHeight - 200) ) && !VerticalMaxed() ) {
                         state.stopScroll = false;
-                        scrollContainer.scrollBy(0, 80);
-                    }   
+                        scrollContainer.scrollBy(0, 1);
+                    } else if ( e.clientY < 175 ) {
+                        state.stopScroll = false;
+                        scrollContainer.scrollBy(0, -90);
+                    } else {
+                        return false
+                    }
                 } 
             }
         })
@@ -264,7 +257,6 @@
                             @dragend="handleDragEnd"
                             @drop="handleDrop($event, i)"
                         /> 
-
                         <!-- Skeleton Loader For Infinite Scroll -->
                         <div v-if="playlistsStore.loadingLessons && infiniteScroll" 
                             class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">

@@ -212,6 +212,7 @@
                         </svg> 
                         <!-- Dropdown-->
                         <PlaylistDropdown
+                            :lessons-length="lessons.data.length"
                             :brand="brand"
                             :dropdownTop="state.dropdownTop"
                             :is-private="state.isPrivate"
