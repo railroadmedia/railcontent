@@ -69,7 +69,7 @@
             >
 
                 @if(!empty($trialVersion))
-                    Start Trial
+                    Start for free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
                 @else
                     Join<span class="show-for-medium"> Guitareo</span>
                 @endif
