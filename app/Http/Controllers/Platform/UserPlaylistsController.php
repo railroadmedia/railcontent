@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Decorators\DecoratorInterface;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
@@ -99,12 +102,15 @@ class UserPlaylistsController extends BaseController
         throw_if(empty($playlist), new NotFoundHttpException());
 
         $page = $request->get('page', 1);
-        $limit = $request->get('limit', 20);
+        $limit = $request->get('limit');
 
         $contentTypes = array_merge(
             config('railcontent.appUserListContentTypes', []),
             array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
         );
+
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
         foreach ($items as $index => $item) {
