@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeMount } from 'vue';
+import { onBeforeMount, ref } from 'vue';
 import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import SoundSlice from '../SoundSlice/SoundSlice.vue';
 import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
@@ -7,6 +7,9 @@ import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
 import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
 import Comments from '../../vuesora/views/comments/Comments.vue';
 import ContentCatalogue from '../../vuesora/views/catalogues/ContentCatalogue.vue';
+
+// Refs
+const collapsedComments = ref(true);
 
 const props = defineProps({
     lessonType: {
@@ -116,10 +119,6 @@ const props = defineProps({
         type: [String, Number]
     }
 });
-onBeforeMount(() => {
-    console.log('playlistItems', typeof props.playlistItems)
-    console.log('relatedLessons',typeof props.relatedLessons)
-})
 </script>
 
 <template>
@@ -181,7 +180,10 @@ onBeforeMount(() => {
 
             <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                 <div class="tw-flex tw-flex-row tw-w-full">
-                    <Comments :theme-color="brand" :brand="brand" :content-id="contentId" :user-id="userId"
+                    <div class="tw-w-full">
+
+                    </div>
+                    <Comments v-if="!collapsedComments" :theme-color="brand" :brand="brand" :content-id="contentId" :user-id="userId"
                         :user-name="userName" :user-avatar="userAvatar" :user-xp="userXp"
                         :user-access-level="userAccessLevel" profile-base-route="/profile/" :is-admin="false">
                     </Comments>

@@ -24,6 +24,10 @@ const props = defineProps({
     contentId: {
         type: [Number, String]
     },
+    autoplay: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 const scoreOrSlice = () => {
@@ -111,6 +115,12 @@ const handleOnLoad = () => {
 onMounted(() => {
     window.addEventListener('message', handleSoundsliceEvent);
     document.addEventListener('keyup', spacebarToPlayPause);
+
+    if(props.autoplay) {
+        const soundsliceWrapper = 
+        //const x = 
+        //document.elementFromPoint(x, y).click();
+    }
 });
 
 onBeforeUnmount(() => {
@@ -134,7 +144,7 @@ onBeforeUnmount(() => {
         <div class="flex flex-column tw-h-full">
             <slot name="soundsliceControls"></slot>
             <div class="flex flex-row grow">
-                <div class="flex flex-column relative">
+                <div id="soundslice-container" class="flex flex-column relative">
                     <iframe id="ssEmbed"
                         :src="'https://www.soundslice.com/' + scoreOrSlice() + '/' + soundsliceSlug + '/embed/?api=1&scroll_type=2&branding=0&top_controls=1&u=' + userId + additionalParams"
                         frameBorder="0" allowfullscreen @load="handleOnLoad"></iframe>
