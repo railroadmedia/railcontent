@@ -26,4 +26,7 @@ Route::domain('{musoraDomain}')
         Route::get('redeem-thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
         Route::get('pianote/redeem', [CodeRedemptionController::class, 'showPianoteRedeemPageForNewUsers']);
         Route::get('pianote/redeem/existing', [CodeRedemptionController::class, 'showPianoteRedeemPageForExistingUsers']);
+
+        Route::get('drumeo/sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewDrumeo']);
+        Route::get('drumeo/sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingDrumeo']);
     });
