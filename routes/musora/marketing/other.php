@@ -35,4 +35,6 @@ Route::domain('{musoraDomain}')
         Route::get('guitareo/sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingGuitareo']);
         Route::get('singeo/sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewSingeo']);
         Route::get('singeo/sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingSingeo']);
+        Route::get('sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewMusora']);
+        Route::get('sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingMusora']);
     });
