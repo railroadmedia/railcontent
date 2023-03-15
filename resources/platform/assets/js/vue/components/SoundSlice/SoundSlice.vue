@@ -22,7 +22,7 @@ const props = defineProps({
         default: () => 0,
     },
     contentId: {
-        type: Number
+        type: [Number, String]
     },
 });
 
@@ -130,7 +130,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="tw-h-full tw-w-full">
+    <div v-if="soundsliceSlug" class="tw-h-full tw-w-full">
         <div class="flex flex-column tw-h-full">
             <slot name="soundsliceControls"></slot>
             <div class="flex flex-row grow">

@@ -23,7 +23,7 @@ import ResetPassForm from './vue/components/ResetPassForm/ResetPassForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
 import InfoModal from './vue/components/Modal/InfoModal';
-import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue'
+import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -250,6 +250,13 @@ app.component('AppContainer', AppContainer)
     .component('AddEventModal', AddEventModal)
     .component('InfoModal', InfoModal)
     .component('SoundSlice', SoundSlice)
+
+    .component('PlaylistPlaybackWrapper', defineAsyncComponent(() => 
+        import(
+            /* webpackChunkName: "playlist-playback-wrapper" */
+            `./vue/components/Playlists/PlaylistPlaybackWrapper.vue`
+        )
+    ))
 
     .component('PlatformHeader', defineAsyncComponent(() => 
         import(
