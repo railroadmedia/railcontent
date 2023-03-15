@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             CmsBundleSeeder::class,
             BFUpdates::class,
             CmsPlaylistLikesPinsSeeder::class,
+            CmsPlaylistContentSeeder::class,
         ]);
     }
 }
