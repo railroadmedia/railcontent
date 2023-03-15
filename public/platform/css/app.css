@@ -21715,9 +21715,6 @@ a:visited{
 .tw-mr-2{
   margin-right: 0.5rem !important;
 }
-.tw-mt-3{
-  margin-top: 0.75rem !important;
-}
 .tw-mt-4{
   margin-top: 1rem !important;
 }
@@ -21732,6 +21729,9 @@ a:visited{
 }
 .tw-mt-\[10px\]{
   margin-top: 10px !important;
+}
+.tw-mt-3{
+  margin-top: 0.75rem !important;
 }
 .tw-mt-8{
   margin-top: 2rem !important;
@@ -22000,10 +22000,10 @@ a:visited{
 .tw-hidden{
   display: none !important;
 }
-.tw-aspect-video{
+.tw-aspect-\[16\/9\]{
   aspect-ratio: 16 / 9 !important;
 }
-.tw-aspect-\[16\/9\]{
+.tw-aspect-video{
   aspect-ratio: 16 / 9 !important;
 }
 .tw-aspect-square{
@@ -22589,17 +22589,17 @@ a:visited{
 .tw-max-w-\[287px\]{
   max-width: 287px !important;
 }
-.tw-max-w-\[1703px\]{
-  max-width: 1703px !important;
-}
-.tw-max-w-\[1280px\]{
-  max-width: 1280px !important;
-}
 .tw-max-w-4xl{
   max-width: 56rem !important;
 }
 .tw-max-w-\[960px\]{
   max-width: 960px !important;
+}
+.tw-max-w-\[1703px\]{
+  max-width: 1703px !important;
+}
+.tw-max-w-\[1280px\]{
+  max-width: 1280px !important;
 }
 .tw-max-w-md{
   max-width: 28rem !important;

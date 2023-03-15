@@ -1,21 +1,17 @@
 @php
     //dd($playlistItem);
-    $brandParams = array(
-        'drumeo'  => '&show_chords=0',
-        'singeo'  => '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
-        'guitareo'    => '',
-        'pianote' => '&show_chords=1'
-    );
+    $brandParams = [
+        'drumeo' => '&show_chords=0',
+        'singeo' => '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
+        'guitareo' => '',
+        'pianote' => '&show_chords=1',
+    ];
     $recordingIdx = 1;
-
-    if (
-        ($lessonType == 'song' || $lessonType == 'assignment')
-        && property_exists($playlistItem, 'is_instrumentless_track')
-        && $playlistItem['is_instrumentless_track']
-    ) {
+    
+    if (($lessonType == 'song' || $lessonType == 'assignment') && property_exists($playlistItem, 'is_instrumentless_track') && $playlistItem['is_instrumentless_track']) {
         $recordingIdx = 2;
     }
-
+    
     $soundsliceAdditionalParams = $brandParams[$brand] . '&layout=3&recording_idx=' . $recordingIdx;
 @endphp
 
@@ -33,164 +29,55 @@
 
     {{-- Session Token for Railtracker progress tracking --}}
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
-
-    <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row">
-
-        <div class="tw-flex tw-flex-col tw-w-full">
-
-            <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
-                @if ($lessonType == 'song' || $lessonType == 'assignment')
-                        <div class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
-                            <sound-slice user-id="{{ user()->id }}" theme-color="{{$brand}}"
-                                additional-params="{{ $soundsliceAdditionalParams }}"
-                                soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? ''}}"
-                                :content-id="{{ $lessonContent->fetch('id') }}"
-                            >
-                            </sound-slice>
-                        </div>
-                @endif
-                <div class="p-lg-only lean">
-                    @if(!empty($lessonContent->fetch('fields.video.fields.youtube_video_id')))
-                        <div class="widescreen mb-2 bg-black">
-                            <youtube-player ref="mediaElementVueInstance" brand="{{ $brand }}"
-                                            video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"
-                                            :current-second="{{ $playlistItem['start_second'] ?? 0 }}"
-                                            :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
-                                            video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
-                                            progress-state="{{ $lessonContent->fetch('progress_state') }}"
-                                            content-id="{{ $lessonContent->fetch('id') }}" :use-intersection-observer="true"
-                                            theme-color="{{ $brand }}" @play="handleVideoPlay" @pause="handleVideoPause">
-                            </youtube-player>
-                        </div>
-                    @elseif($lessonType !== 'song' && $lessonType !== 'assignment')
-                        <div id="lessonVideoWrap">
-                            @if (user()->use_legacy_video_player ?? false || $agent->isSamsung())
-                                <transition appear name="fade">
-                                    <video-media-element ref="mediaElementVueInstance" element-id="lessonPlayer"
-                                                         brand="{{ $brand }}" theme-color="{{ $brand }}"
-                                                         poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
-                                                         :sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
-                                                         hls-manifest-url="{{ $lessonContent['hlsManifestUrl'] ?? '' }}"
-                                                         video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
-                                                         content-id="{{ $lessonContent->fetch('id') }}"
-                                                         current-second="{{ $playlistItem['start_second'] ?? 0 }}"
-                                                         progress-state="{{ $lessonContent->fetch('progress_state') }}"
-                                                         video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
-                                                         :chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
-                                                         user-id="{{ user()->id }}" like-count="{{ $lessonContent['like_count'] ?? 0 }}"
-                                                         :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
-                                                         :check-for-timecode="true" @playing="handleVideoPlay" @pause="handleVideoPause">
-
-                                        <div class="widescreen title tw-text-{{ $brand }}">
-                                            <i class="fas fa-spinner fa-spin absolute-center"></i>
-                                        </div>
-                                    </video-media-element>
-                                </transition>
-                            @else
-                                <transition appear name="fade">
-                                    <video-player
-                                        ref="mediaElementVueInstance"
-                                        theme-color="{{ $brand }}"
-                                        brand="{{ $brand }}"
-                                        poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
-                                        :sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
-                                        @if ($lessonType == 'song') :ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
-                                        :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
-                                        :show-range-buttons="true" @endif
-                                        hls-manifest-url="{{ $lessonContent['hlsManifestUrl'] ?? '' }}"
-                                        captions="{{ $lessonContent->fetch('fields.video.data.captions', $lessonContent['captions'][0] ?? null) }}"
-                                        :chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
-                                        current-second="{{ $playlistItem['start_second'] ?? 0 }}"
-                                        content-id="{{ $lessonContent->fetch('id') }}" user-id="{{ user()->id }}"
-                                        video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
-                                        video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
-                                        :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
-                                        cast-title="{{ $lessonContent->fetch('fields.title') }}"
-                                        :use-intersection-observer="true"
-                                        @play="handleVideoPlay"
-                                        @pause="handleVideoPause">
-                                        <div class="widescreen title tw-text-{{ $brand }} tw-mb-2"></div>
-                                    </video-player>
-                                </transition>
-                            @endif
-                        </div>
-                    @endif
-                </div>
-
-                <div class="tw-container tw-mx-auto lean">
-                    <video-resources theme-color="{{ $brand }}" brand="{{ $brand }}"
-                                     title="{{ $lessonContent->fetch('fields.title') }}"
-                                     lesson-type="{{ $lessonType }}"
-                                     thumbnail-url="{{ $lessonContent->fetch('data.thumbnail_url') }}"
-                                     description="{{ $lessonContent->fetch('data.description') }}"
-                                     :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
-                                     parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
-                                     :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
-                                     :like-count="{{ $lessonContent['like_count'] ?? 0 }}"
-                                     :is-added="{{ json_encode($lessonContent->fetch('is_added_to_primary_playlist') ?? false) }}"
-                                     content-id="{{ $lessonContent->fetch('id') }}" user-id="{{ auth()->id() }}"
-                                     :resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
-                                     :show-add-to-list="{{ json_encode($lessonType != 'song') }}"></video-resources>
-
-                    {{-- Add to List and Next/Prev Buttons --}}
-                    @include('partials.bladesora.members.content.lesson-video._buttons', [
-                        'themeColor' => '{{ $brand }}',
-                        'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
-                        'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
-                        'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
-                        'isCompleted' => $lessonContent->fetch('completed'),
-                        'contentId' => $lessonContent->fetch('id'),
-                        'xpAmount' => $lessonContent->fetch('fields.xp'),
-                    ])
-                </div>
-            </div>
-
-
-            <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
-                <div class="tw-flex tw-flex-row tw-w-full">
-                    <comments theme-color="{{ $brand }}" brand="{{ $brand }}"
-                              content-id="{{ $lessonContent->fetch('id') }}" user-id="{{ user()->id }}"
-                              user-name="{{ user()->display_name }}" user-avatar="{{ user()->profile_picture_url }}"
-                              user-xp="{{ user()->totalXP() }}" user-access-level="{{ user()->access_level }}"
-                              profile-base-route="/profile/" :is-admin="false">
-                    </comments>
-                </div>
-            </div>
-
-        </div>
-
-        {{-- Related Lessons Section --}}
-        <div class="">
-            <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
-                <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
-                    <div class="tw-flex tw-flex-col tw-mb-5">
-                        <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
-                            {{ $playlist['name'] }}
-                        </h6>
-                    </div>
-
-                    <content-catalogue catalogue-type="grid" theme-color="{{ $brand }}" :use-theme-color="true"
-                                       brand="{{ brand() }}" :pre-loaded-content="{{ $playlistItems }}"
-                                       @if (!empty($lockUnowned)) :lock-unowned="true" @endif :display-inline="true"
-                                       user-id="{{ auth()->id() }}"></content-catalogue>
-                </div>
-            </div>
-            <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
-                <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
-                    <div class="tw-flex tw-flex-col tw-mb-5">
-                            <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
-                                Related Lessons
-                            </h6>
-                    </div>
-
-                    <content-catalogue catalogue-type="grid" theme-color="{{ $brand }}" :use-theme-color="true"
-                                       brand="{{ brand() }}" :pre-loaded-content="{{ $relatedLessons }}"
-                                       @if (!empty($lockUnowned)) :lock-unowned="true" @endif :display-inline="true"
-                                       user-id="{{ auth()->id() }}"></content-catalogue>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- WRAPPER VUE --}}
+    <playlist-playback-wrapper lesson-type="{{ $lessonType }}" brand="{{ $brand }}" user-id="{{ user()->id }}"
+        additional-soundslice-params="{{ $soundsliceAdditionalParams }}"
+        soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}" content-id="{{ $lessonContent->fetch('id') }}"
+        youtube-video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"
+        vimeo-video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
+        current-second="{{ $playlistItem['start_second'] ?? 0 }}"
+        total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
+        video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
+        progress-state="{{ $lessonContent->fetch('progress_state') }}"
+        :useLegacyVideoPlayer="{{ user()->use_legacy_video_player ?? false }}"
+        video-poster-image-url="{{ $lessonContent['video_poster_image_url'] ?? '' }} }}"
+        :video-media-sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
+        hls-manifest-url="{{ $lessonContent['hlsManifestUrl'] ?? '' }}"
+        :video-chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
+        like-count="{{ $lessonContent['like_count'] ?? 0 }}"
+        :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
+        :song-ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
+        :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
+        :captions="{{ $lessonContent->fetch('fields.video.data.captions', $lessonContent['captions'][0] ?? null) }}"
+        cast-title="{{ $lessonContent->fetch('fields.title') }}"
+        thumbnail-url="{{ $lessonContent->fetch('data.thumbnail_url') }}"
+        description="{{ $lessonContent->fetch('data.description') }}"
+        :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
+        parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
+        :video-resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
+        :playlist-items="{{ json_encode($playlistItems) }}"
+        :related-lessons="{{ json_encode($relatedLessons) }}"
+        :lock-unowned="{{ !empty($lockUnowned) }}"
+        playlist-name="{{ $playlist['name'] }}"
+        user-name="{{ user()->display_name }}"
+        user-avatar="{{ user()->profile_picture_url }}"
+        user-xp="{{ user()->totalXP() }}"
+        user-access-level="{{ user()->access_level }}"
+        >
+        <template>
+            @include('partials.bladesora.members.content.lesson-video._buttons', [
+                'themeColor' => '{{ $brand }}',
+                'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
+                'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
+                'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
+                'isCompleted' => $lessonContent->fetch('completed'),
+                'contentId' => $lessonContent->fetch('id'),
+                'xpAmount' => $lessonContent->fetch('fields.xp'),
+                'nextLabel' => 'Next',
+                'prevLabel' => 'Previous',
+            ])
+        </template>
+    </playlist-playback-wrapper>
 
 @endsection
 
