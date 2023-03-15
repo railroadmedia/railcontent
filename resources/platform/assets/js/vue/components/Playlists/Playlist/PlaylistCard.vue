@@ -147,7 +147,7 @@
     });
 </script>
 <template>
-    <div class="tw-group tw-relative tw-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4">
+    <div class="draggable tw-group tw-relative tw-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4">
         <!-- PLAYLIST INFO: clickable link -->
         <a  :href="lesson.url && !showMask ? lesson.url : ''"
             :class="{ 'tw-grayscale' : needAccess }"
@@ -256,7 +256,7 @@
         <!-- PLAYLISTS OPTIONS DROPDOWN -->
         <div class="tw-inline-flex tw-items-center tw-justify-end tw-shrink-0 tw-w-[35px] lg:tw-w-[100px] md:tw-justify-center" >
             <div class="tw-relative "
-                    v-click-outside="()=>{ state.dropdownOpen = false }"
+                 v-click-outside="()=>{ state.dropdownOpen = false }"
             >
                 <button v-if="!needAccess && !playlistsStore.sortingPlaylist" class="tw-btn-primary tw-btn-small tw-btn-circle tw-text-[#445F74] dark:tw-text-[#7E9AB1] tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2 tw-rotate-0 lg:tw-rotate-90"
                         title="Playlist Options"

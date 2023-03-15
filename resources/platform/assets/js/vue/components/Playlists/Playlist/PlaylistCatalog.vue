@@ -26,6 +26,18 @@
             type: Number,
             default: 0
         },
+        infiniteScroll: {
+            type: Boolean,
+            default: false
+        },
+        limit: {
+            type: Number,
+            default: 20,
+        }, 
+        isCueCatalog: {
+            type: Boolean, 
+            default: false, 
+        }
     })
     
     //-----------Computed Props-----------//
@@ -43,12 +55,13 @@
         startPosition: 0,
         endPosition: 0,
         newSortPositions: [],
+        stopScroll: true,
     })
 
     //-----------Static Data-----------//
 
     let initialLessonsArray = [];
-
+    const scrollContainer = document.querySelector('#content-container');
 
     //-------------Methods-------------//
 
@@ -78,7 +91,6 @@
             //save start position
             state.startID = id;
             state.startPosition = position;
-            // console.log(state.startID, position)
         }
     }
     const handleDragOver = (event) => {
@@ -93,6 +105,10 @@
             event.target.classList.remove('tw-border-b');
         }
     }
+
+    const handleDragEnd = () => { state.stopScroll = true };
+
+    //Handle Drop Event
     const handleDrop = (event, position) => {
         // console.log(state.startID, position)
         if(playlistsStore.sortingPlaylist) {
@@ -103,14 +119,25 @@
             //Update Array
             const index = state.newSortPositions.findIndex(object => object.id === state.startID);
             if(index == -1) {
-                state.newSortPositions.push({id: state.startID, position: state.endPosition + 1})
+                state.newSortPositions.push({ id: state.startID, position: state.endPosition + 1 })
             } else{
                 state.newSortPositions[index].position =  state.endPosition + 1;
             }
         }
     }
-    // TODO:
-    // Scroll Page on Drag
+
+    //Vertical Scroll
+    const VerticalMaxed = () => { 
+        return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
+    }
+    //Scroll Handler for Drag
+    const scroll = (step) => {
+        var scrollY = scrollContainer.scrollTop || document.body.scrollTop;
+        scrollContainer.scrollBy(0, scrollY + step)        
+        if (!state.stopScroll) {
+            setTimeout( () => { scroll(step) }, 20);
+        }
+    }
 
     //-------------Watchers-------------//
 
@@ -121,40 +148,56 @@
         }
     });
 
-
     //---------Lifecycle Methods---------//
 
     onMounted(()=> {
-        // console.log(playlistsStore.activePlaylist)
-        const scrollContainer = document.querySelector('#content-container');
-        scrollContainer.onscroll = () => {
-            if ( (scrollContainer.scrollHeight - scrollContainer.scrollTop - scrollContainer.clientHeight < 1) && !preventReFetch.value ) {
-                pageNumber.value = pageNumber.value + 1;
-                // scrollContainer.scrollTop = scrollContainer.scrollTop / pageNumber.value;
-                //Payload
-                const payload = {
-                    page: pageNumber.value,
-                    limit: 20,
-                    playlist_id: playlistsStore.activePlaylist.id,
-                };
-                //Get Lessons
-                playlistsStore.loadingLessons = true;
-                PlaylistService.getPlaylistLessons(payload, token).then(response => {
-                    playlistsStore.loadingLessons = false;
-                    if (response.data.results.length) {
-                        playlistsStore.lessons = playlistsStore.lessons.concat(response.data.results);
-                    } else {
-                        preventReFetch.value = true;
+        //Handle drag Event
+        document.addEventListener('drag', function(e) {
+            if(playlistsStore.sortingPlaylist) {
+                if (e.target.classList.contains('draggable')) {
+                    //Scroll Container on Drag
+                    state.stopScroll = true;
+                    if (e.clientY < 126 ) {
+                        state.stopScroll = false;
+                        scrollContainer.scrollBy(0, -1);
                     }
-                }).catch(() => {
-                    window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
-                });
+                    if ( (e.clientY > ( scrollContainer.clientHeight - 90) ) && !VerticalMaxed() ) { 
+                        state.stopScroll = false;
+                        scroll(0,1) && !VerticalMaxed()
+                    }   
+                } 
+            }
+        })
+
+        //Handle infinite Scroll
+        if(props.infiniteScroll) {
+            scrollContainer.onscroll = () => {
+                if ( (scrollContainer.scrollHeight - scrollContainer.scrollTop - scrollContainer.clientHeight < 1) && !preventReFetch.value ) {
+                    pageNumber.value = pageNumber.value + 1;
+                    //Payload
+                    const payload = {
+                        page: pageNumber.value,
+                        limit: props.limit,
+                        playlist_id: playlistsStore.activePlaylist.id,
+                    };
+                    //Get Lessons
+                    playlistsStore.loadingLessons = true;
+                    PlaylistService.getPlaylistLessons(payload, token).then(response => {
+                        playlistsStore.loadingLessons = false;
+                        if (response.data.results.length) {
+                            playlistsStore.lessons = playlistsStore.lessons.concat(response.data.results);
+                        } else {
+                            preventReFetch.value = true;
+                        }
+                    }).catch(() => {
+                        window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
+                    });
+                }
             }
         }
     })
 
     onBeforeMount(() => {    
-        // console.log('lessons', props.lessons) 
         playlistsStore.lessons = props.lessons.data;
     });
 </script>
@@ -216,13 +259,14 @@
                             @dragstart="handleDragStart($event, i,lesson.user_playlist_item_id)"
                             @dragleave="handleDragLeave($event)"
                             @dragover.prevent="handleDragOver($event)"
+                            @dragend="handleDragEnd"
                             @drop="handleDrop($event, i)"
                         /> 
 
-                        <!-- Skeleton Loader -->
-                        <div v-if="playlistsStore.loadingLessons" 
+                        <!-- Skeleton Loader For Infinite Scroll -->
+                        <div v-if="playlistsStore.loadingLessons && infiniteScroll" 
                             class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
-                            <div v-for="n in 20" 
+                            <div v-for="n in limit" 
                                 :key="n" 
                                 class="tw-flex tw-w-full tw-h-[90px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]"
                             >
