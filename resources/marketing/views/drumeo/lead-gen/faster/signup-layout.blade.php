@@ -3,52 +3,52 @@
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/the-tinder.jpg',
             'title' => 'The Tinder',
-            'desc' => '',
+            'desc' => 'The fastest way to go from singles to… well, not singles. This is a deceptively simple exercise that will help you make a seamless transition from single to double strokes.',
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/the-swiss-cheese.jpg',
             'title' => 'The Swiss Cheese',
-            'desc' => '',
+            'desc' => 'A clever variation of the Swiss Army Triplet, this workout will improve your flams & triplets and ensure both Rights and Lefts develop equally. (No rudiment background required.)',
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/double-trouble.jpg',
             'title' => 'Double Trouble',
-            'desc' => '',
+            'desc' => 'You’re ready to start moving around the kit. This exercise uses simple double strokes on two different surfaces to boost your coordination & speed in both hands.',
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/clavediddle.jpg',
             'title' => 'Clavedidle',
-            'desc' => '',
+            'desc' => 'This is one of Estepario’s favorites. This exercise incorporates a basic clave rhythm combined with double strokes to help you improve your speed with a musical twist.',
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fingerson.jpg',
             'title' => 'Fingerson',
-            'desc' => '',
+            'desc' => 'You’re getting into new finger techniques now. Estepario shows you his signature exercise for developing finger technique to unlock new levels of speed in your playing.',
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/machine-gun.jpg',
             'title' => 'Machine Gun',
-            'desc' => '',
+            'desc' => 'Estepario’s secret weapon for moving around the kit with speed & precision. You’ll harness the power of single strokes to move effortlessly between the snare and floor tom.',
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/the-classy.jpg',
             'title' => 'The Classy',
-            'desc' => '',
+            'desc' => 'A tongue twister that will boost your 16th note triplets. This exercise will push your coordination and open up combinations around the drum set at high speeds.',
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/six-stroke-roll.jpg',
             'title' => 'Six Stroke Roll',
-            'desc' => '',
+            'desc' => 'No fancy name required. Estepario shows you how to move the six stroll around the drum set to create blistering patterns and musical ostinatos that can be used in any setting.',
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/chopadiddle.jpg',
             'title' => 'Chopadiddle',
-            'desc' => '',
+            'desc' => 'An innovative spin on the classic paradiddle, this exercise is a signature Estepario lick that will spice up your chops instantly while boosting your double strokes.',
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/diddlechopa.jpg',
             'title' => 'DiddleChopa',
-            'desc' => '',
+            'desc' => 'Harness the inverted paradiddle to move around the kit with speed and ease. This is another simple concept that will push you at higher tempos as you move around the kit.',
         ],
     ];
 @endphp
@@ -137,9 +137,7 @@
                         <img src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['img'] }}" src="lesson thumbnail {{ $key+1 }}" />
                         <div class="p-4">
                             <h6 class="font-bold mb-2">{{ $key+1 }}. {{ $lesson['title'] }}</h6>
-                            <p>
-                                Lorem ipsum dolor sit amet consectetur. Tortor nibh lorem senectus dui. Dolor id pellentesque magna est gravida in sed euismod iaculis.
-                            </p>
+                            <p>{{ $lesson['desc'] }}</p>
                         </div>
                     </div>
                 @endforeach
