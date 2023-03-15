@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('secondary_cta_url')->nullable();
             $table->string('tablet_img');
             $table->string('mobile_img');
+            $table->string('desc_color');
             $table->dropColumn('endpoint');
         });
     }
@@ -46,6 +47,7 @@ return new class extends Migration
             $table->dropColumn('secondary_cta_url');
             $table->dropColumn('tablet_img');
             $table->dropColumn('mobile_img');
+            $table->dropColumn('desc_color');
             $table->string('endpoint');
         });
     }

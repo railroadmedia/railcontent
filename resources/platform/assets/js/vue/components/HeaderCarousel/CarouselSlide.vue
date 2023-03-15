@@ -53,6 +53,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  descriptionColor: {
+    type: String,
+    default: "",
+  },
   video: {
     type: String,
     default: "",
@@ -128,7 +132,7 @@ const closeModal = () => {
         </div>
       <!-- Text Content -->
       <div class="tw-absolute tw-bottom-0 tw-w-full md:tw-relative tw-text-white tw-h-4/5 md:tw-h-full">
-        <div class="tw-flex tw-flex-col tw-flex-wrap tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[26px] tw-font-open-sans tw-pb-10 sm:tw-pb-[26px] lg:tw-pb-0">
+        <div class="tw-flex tw-flex-col tw-flex-wrap tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[26px] tw-font-open-sans tw-pb-10 sm:tw-pb-[26px] md:tw-pb-10 lg:tw-pb-0">
           <h4 class="tw-font-bold tw-text-sm tw-uppercase tw-leading-none tw-mb-3">{{ topSubtitle }}</h4>
           <h2 class="
               tw-font-bebas-neue
@@ -144,7 +148,7 @@ const closeModal = () => {
           </h2>
             <!-- Logo -->
             <img v-if="logo" class="tw-h-24 md:tw-h-28 lg:tw-h-32 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
-          <p class="tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg" v-html="description"></p>
+          <p :class="`tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
           <!-- CTA -->
             <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
                 <a
