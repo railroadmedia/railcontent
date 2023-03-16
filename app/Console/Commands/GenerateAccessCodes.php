@@ -116,7 +116,7 @@ class GenerateAccessCodes extends Command
             ],
             function (\Illuminate\Mail\Message $message) use ($emails, $now, $amountToCreate) {
                 $subject = 'Musora - ' . $amountToCreate . ' Access Codes Generated on ' . $now;
-                $message->from('support@drumeo.com', 'Drumeo');
+                $message->from('support@musora.com', 'Musora');
                 $message->to($emails)
                     ->subject($subject);
             }
