@@ -8602,12 +8602,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "adececd9760371fd5fcb8397064886875fd85c34"
+                "reference": "cbc50b97cbbfa4452149bda3384fbe1548c6c9a0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/adececd9760371fd5fcb8397064886875fd85c34",
-                "reference": "adececd9760371fd5fcb8397064886875fd85c34",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/cbc50b97cbbfa4452149bda3384fbe1548c6c9a0",
+                "reference": "cbc50b97cbbfa4452149bda3384fbe1548c6c9a0",
                 "shasum": ""
             },
             "require": {
@@ -8663,7 +8663,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists"
             },
-            "time": "2023-03-16T14:25:08+00:00"
+            "time": "2023-03-16T16:04:07+00:00"
         },
         {
             "name": "railroad/railforums",
