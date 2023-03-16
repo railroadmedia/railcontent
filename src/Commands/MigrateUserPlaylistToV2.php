@@ -451,25 +451,28 @@ class MigrateUserPlaylistToV2 extends Command
             )
             ->whereNull('railcontent_user_playlist_content.id')
             ->delete();
-        $sql = <<<'EOT'
+
+        if(!empty($migratedPlaylistIds)) {
+            $sql = <<<'EOT'
         UPDATE `%s` cs
         SET cs.`type` = '%s', cs.name = '%s', cs.migrated = %s
         where cs.id IN (%s)
 
         EOT;
 
-        $statement = sprintf(
-            $sql,
-            config('railcontent.table_prefix').'user_playlists',
-            'user-playlist',
-            'My List',
-            1,
-            implode(
-                ", ",
-                $migratedPlaylistIds
-            )
-        );
-        $dbConnection->statement($statement);
+            $statement = sprintf(
+                $sql,
+                config('railcontent.table_prefix').'user_playlists',
+                'user-playlist',
+                'My List',
+                1,
+                implode(
+                    ", ",
+                    $migratedPlaylistIds
+                )
+            );
+            $dbConnection->statement($statement);
+        }
 
         $finish = microtime(true) - $start;
         $format = "Finished user playlist data migration(%s) in total %s seconds\n ";
