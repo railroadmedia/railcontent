@@ -29,6 +29,10 @@
         isListView: {
             type: Boolean,
             default: true,
+        },
+        cueVersion: {
+            type: Boolean,
+            default: false,
         }
     });
 
@@ -141,22 +145,24 @@
     //-----------Lifecycle Methods-----------//
 
     onBeforeMount(() => {
-        // console.log(props.lesson)
+        console.log(props.lesson)
         state.isPinned = props.lesson.pinned;
         state.isPrivate = props.lesson.private;
     });
 </script>
 <template>
-    <div class="draggable tw-group tw-relative tw-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4">
+    <div class="draggable tw-group tw-relative tw-min-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4">
         <!-- PLAYLIST INFO: clickable link -->
         <a  :href="lesson.url && !showMask ? lesson.url : ''"
-            :class="{ 'tw-grayscale' : needAccess }"
-            class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)] tw-text-[#0D0D0D] dark:tw-text-white"
+            class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-text-[#0D0D0D] dark:tw-text-white"
+            :class="[{ 'tw-grayscale' : needAccess }, !cueVersion ? 'tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)]' : 'tw-w-full' ]"
         >
+            
             <div class="tw-inline-flex tw-items-center tw-font-bold tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity"
                  :class="{ 'tw-opacity-0' : playlistsStore.sortingPlaylist }"
             >
-                {{ props.index + 1 }}
+                <template v-if="!cueVersion">{{ props.index + 1 }}</template>
+                <template v-else><i class="fas fa-play"></i></template>
             </div>
 
             <!-- Playlist thumbnail -->
@@ -191,7 +197,9 @@
                 </div>
             </div>
 
-            <div class="tw-truncate tw-w-full lg:tw-w-[calc(100%-350px)] tw-px-3 lg:tw-pl-[15px]">
+            <div class="tw-truncate tw-w-full  tw-px-3 lg:tw-pl-[15px]"
+                 :class="[{ 'lg:tw-w-[calc(100%-350px)]' : !cueVersion }]"
+            >
                 <!--name-->
                 <p class="tw-truncate">
                     <template v-if="lesson.type !== 'assignment'">
@@ -241,20 +249,20 @@
             </div>
 
             <!-- Lesson Type -->
-            <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[128px]">
+            <div v-if="!cueVersion" class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[128px]">
                 <span v-if="lesson.type" class="tw-text-center">
                     {{ lesson.type }}
                 </span>
             </div>
 
             <!-- Lesson Time -->
-            <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px]">
+            <div v-if="!cueVersion" class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px]">
                 <span>{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>
             </div>
         </a>
 
         <!-- PLAYLISTS OPTIONS DROPDOWN -->
-        <div class="tw-inline-flex tw-items-center tw-justify-end tw-shrink-0 tw-w-[35px] lg:tw-w-[100px] md:tw-justify-center" >
+        <div v-if="!cueVersion" class="tw-inline-flex tw-items-center tw-justify-end tw-shrink-0 tw-w-[35px] lg:tw-w-[100px] md:tw-justify-center" >
             <div class="tw-relative "
                  v-click-outside="()=>{ state.dropdownOpen = false }"
             >

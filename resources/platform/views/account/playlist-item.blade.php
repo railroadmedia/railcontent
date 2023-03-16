@@ -28,10 +28,15 @@
 @section('content')
     {{-- Session Token for Railtracker progress tracking --}}
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
+    
     {{-- WRAPPER VUE --}}
-    <playlist-playback-wrapper lesson-type="{{ $lessonType }}" brand="{{ $brand }}" user-id="{{ user()->id }}"
+    <playlist-playback-wrapper 
+        lesson-type="{{ $lessonType }}" 
+        brand="{{ $brand }}" 
+        user-id="{{ user()->id }}"
         additional-soundslice-params="{{ $soundsliceAdditionalParams }}"
-        soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}" content-id="{{ $lessonContent->fetch('id') }}"
+        soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}" 
+        content-id="{{ $lessonContent->fetch('id') }}"
         youtube-video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"
         vimeo-video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
         current-second="{{ $playlistItem['start_second'] ?? 0 }}"
@@ -54,10 +59,15 @@
         :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
         parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
         :video-resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
-        :playlist-items="{{ $playlistItems }}" :related-lessons="{{ $relatedLessons }}"
-        :lock-unowned="{{ !empty($lockUnowned) }}" playlist-name="{{ $playlist['name'] }}"
-        user-name="{{ user()->display_name }}" user-avatar="{{ user()->profile_picture_url }}"
-        user-xp="{{ user()->totalXP() }}" user-access-level="{{ user()->access_level }}">
+        :playlist-items="{{ $playlistItems }}" 
+        :related-lessons="{{ $relatedLessons }}"
+        :lock-unowned="{{ !empty($lockUnowned) }}" 
+        playlist-name="{{ $playlist['name'] }}"
+        user-name="{{ user()->display_name }}" 
+        user-avatar="{{ user()->profile_picture_url }}"
+        user-xp="{{ user()->totalXP() }}" 
+        user-access-level="{{ user()->access_level }}"
+    >
         <template>
             @include('partials.bladesora.members.content.lesson-video._buttons', [
                 'themeColor' => '{{ $brand }}',
