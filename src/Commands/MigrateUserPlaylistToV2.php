@@ -232,6 +232,7 @@ class MigrateUserPlaylistToV2 extends Command
                                         'unit-part',
                                     ])) {
                                         $item->position = $position;
+                                        $item->extra_data = '{}';
                                         $itemsOrdered[] = $item;
                                         $position++;
                                     } elseif ($item->type == 'song') {
@@ -352,16 +353,16 @@ class MigrateUserPlaylistToV2 extends Command
                                                 $itemOrder->content_id.
                                                 ','.
                                                 $itemOrder->user_playlist_id.
-                                                ','.
-                                                ($itemOrder->extra_data ?? '').
-                                                            ',"'.
+                                                ',\''.
+                                                ($itemOrder->extra_data).
+                                                            '\',"'.
                                                 $itemOrder->created_at.
                                                 '"),';
                                             $ids[] = $itemOrder->content_id;
                                         }
                                     }
                                     $statement = rtrim($statement, ',');
-                                    $statement .= ' ON DUPLICATE KEY UPDATE position = VALUES(position), extra_data = VALUES(extra_data); ';
+                                    $statement .= " ON DUPLICATE KEY UPDATE position = VALUES(position), extra_data = VALUES(extra_data); ";
 
                                     $dbConnection->statement($statement);
                                 }
