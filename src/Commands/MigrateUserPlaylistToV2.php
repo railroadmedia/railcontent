@@ -453,8 +453,8 @@ class MigrateUserPlaylistToV2 extends Command
             ->delete();
         $sql = <<<'EOT'
         UPDATE `%s` cs
-        SET cs.`type` = '%s', cs.name = '%s', cs.migrated = '%s'
-        where cs.id IN ('%s')
+        SET cs.`type` = '%s', cs.name = '%s', cs.migrated = %s
+        where cs.id IN (%s)
 
         EOT;
 
@@ -465,7 +465,7 @@ class MigrateUserPlaylistToV2 extends Command
             'My List',
             1,
             implode(
-                "', '",
+                ", ",
                 $migratedPlaylistIds
             )
         );
