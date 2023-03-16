@@ -463,7 +463,7 @@ class MigrateUserPlaylistToV2 extends Command
             config('railcontent.table_prefix').'user_playlists',
             'user-playlist',
             'My List',
-            true,
+            1,
             implode(
                 "', '",
                 $migratedPlaylistIds
