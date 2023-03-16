@@ -166,13 +166,13 @@
                 background:#258ff4;
             }
         </style>
-        <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url({{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+        <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
             <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-                <img class="h-8 sm:h-11 lg:h-14" src="{{ musora_cdn('redeem/sweetwater/drumeo-sweetwater.svg') }}">
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/drumeo-sweetwater.svg') }}">
                 <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Drumeo.</strong></h3>
                 <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Drumeo Student through Sweetwater!<br class="hidden sm:inline">
                     Please enter the code that they provided you in the form below.</h6>
-                <img class="-mb-4" src="{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
             </div>
         </div>
     @elseif($theme == 'pianote')
@@ -188,13 +188,13 @@
                 background:#f53347;
             }
         </style>
-        <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url({{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+        <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
             <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-                <img class="h-8 sm:h-11 lg:h-14" src="{{ musora_cdn('redeem/sweetwater/pianote-sweetwater.svg') }}">
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/pianote-sweetwater.svg') }}">
                 <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Pianote.</strong></h3>
                 <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Pianote Student through Sweetwater!<br class="hidden sm:inline">
                     Please enter the code that they provided you in the form below.</h6>
-                <img class="-mb-4" src="{{ musora_cdn('redeem/sweetwater/pianote-spread.png') }}">
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/pianote-spread.png') }}">
             </div>
         </div>
     @elseif($theme == 'guitareo')
@@ -210,13 +210,13 @@
                 background:#00e3c5;
             }
         </style>
-        <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url({{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+        <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
             <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-                <img class="h-8 sm:h-11 lg:h-14" src="{{ musora_cdn('redeem/sweetwater/guitareo-sweetwater.svg') }}">
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/guitareo-sweetwater.svg') }}">
                 <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Guitareo.</strong></h3>
                 <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Guitareo Student through Sweetwater!<br class="hidden sm:inline">
                     Please enter the code that they provided you in the form below.</h6>
-                <img class="-mb-4" src="{{ musora_cdn('redeem/sweetwater/guitareo-spread.png') }}">
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/guitareo-spread.png') }}">
             </div>
         </div>
     @elseif($theme == 'singeo')
@@ -232,13 +232,13 @@
                 background:#9000ff;
             }
         </style>
-        <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url({{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+        <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
             <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-                <img class="h-8 sm:h-11 lg:h-14" src="{{ musora_cdn('redeem/sweetwater/singeo-sweetwater.svg') }}">
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/singeo-sweetwater.svg') }}">
                 <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Singeo.</strong></h3>
                 <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Singeo Student through Sweetwater!<br class="hidden sm:inline">
                     Please enter the code that they provided you in the form below.</h6>
-                <img class="-mb-4" src="{{ musora_cdn('redeem/sweetwater/singeo-spread.png') }}">
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/singeo-spread.png') }}">
             </div>
         </div>
     @else
@@ -254,11 +254,11 @@
                 background:#001930;
             }
         </style>
-        <div class="py-8 sm:py-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url({{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+        <div class="py-8 sm:py-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
             <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-                <img class="h-8 sm:h-11 lg:h-14" src="{{ musora_cdn('redeem/sweetwater/musora-sweetwater.svg') }}">
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/musora-sweetwater.svg') }}">
                 <h3 class="leading-tight mt-4 mb-6 sm:mb-10"><strong>Redeem your membership for Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
-                <img class="-mb-4" src="{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
             </div>
         </div>
     @endif
