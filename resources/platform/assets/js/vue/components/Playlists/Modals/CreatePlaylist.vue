@@ -143,7 +143,7 @@
                         text: `'${payload.name}' was added to your library.`
                     })
                     if (props.playlist.hasAddItemCallback) {
-                        console.log(response.data)
+                        console.log('has add item callback', response.data)
                         window.addItemCallback(response.data.data[0].id)
                     }
                     //load Playlists (if collection catalog exists)
@@ -217,7 +217,7 @@
 
     //----------Lifecycle Hooks----------//
     onMounted(()=> {
-        // console.log(props.playlist)
+        console.log(props.playlist)
     })
     onBeforeMount(()=> {
         //Load Data   

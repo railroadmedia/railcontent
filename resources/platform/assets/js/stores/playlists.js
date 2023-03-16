@@ -132,6 +132,7 @@ export const usePlaylistsStore = defineStore({
     },
 
     openModal(modalOpen) {
+      console.log('modalopen', modalOpen)
       this.$patch({
         modalOpen,
       });

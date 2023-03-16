@@ -85,18 +85,22 @@ const handleCancel = () => {
     emit('onCancel');
 };
 
+const saveData = (playlistId) => {
+    return PlaylistService.addToPlaylist({
+        brand: props.brand,
+        contentId: props.content.content_id,
+        importAssignments: importAll.value,
+        playlistIds: playlistId ? [playlistId] : selectedPlaylists.value,
+        addFull: addFullSongToggle.value,
+        addInstrumentless: addInstrumentlessToggle.value,
+        token,
+    })
+};
+
 const handleSaveItem = () => {
     if (selectedPlaylists.value.length) {
         isLoadingPlaylists.value = true;
-        return PlaylistService.addToPlaylist({
-            brand: props.brand,
-            contentId: props.content.content_id,
-            importAssignments: importAll.value,
-            playlistIds: selectedPlaylists.value,
-            addFull: addFullSongToggle.value,
-            addInstrumentless: addInstrumentlessToggle.value,
-            token,
-        }).then(() => {
+        return saveData().then(() => {
             window.shownotification({ icon: 'check', text: 'The items were added to your selected playlists.' });
         }).catch(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
@@ -115,7 +119,8 @@ const handleCreate = () => {
         data: { ...props.content, brand: props.brand, hasAddItemCallback: true, additionalItems: additionalItems.value },
     });
     window.addItemCallback = function (playlistId) {
-        handleSaveItem(playlistId);
+        console.log('callback called')
+        saveData(playlistId);
         window.addItemCallback = null;
     }
 }
@@ -137,18 +142,18 @@ const handleDuplicateCancel = () => {
 };
 
 const getUserPlaylists = () => {
-    PlaylistService.getCurrentUserPlaylists({ brand: props.brand, page: pageNumber.value, limit: 10, content_id: props.content.content_id}, token).then(r => {
+    PlaylistService.getCurrentUserPlaylists({ brand: props.brand, page: pageNumber.value, limit: 10, content_id: props.content.content_id }, token).then(r => {
         isLoadingPlaylists.value = false;
         const duplicatedItemIDs = [];
         const { data: { data } } = r;
         if (data.length) {
             const formattedTable = data.map((item) => {
-                const { name, thumbnail_url, duration_formated, id, created_at, user_playlist_item_id , is_added_to_playlist } = item;
+                const { name, thumbnail_url, duration_formated, id, created_at, user_playlist_item_id, is_added_to_playlist } = item;
                 const dateCreated = new Date(created_at);
                 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 const month = months[dateCreated.getMonth()];
                 const formattedDate = `${month} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`;
-                if(is_added_to_playlist) {
+                if (is_added_to_playlist) {
                     duplicatedItemIDs.push(String(id));
                     duplicatedItemIdNameMap.value = {
                         ...duplicatedItemIdNameMap.value,
@@ -202,7 +207,8 @@ onMounted(() => {
 
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
-        <AddDuplicate v-if="duplicateProps.show" :title="duplicateProps.title" @onConfirm="() => handleDuplicateConfirm(duplicateProps.id)" @onClose="handleDuplicateCancel" />
+        <AddDuplicate v-if="duplicateProps.show" :title="duplicateProps.title"
+            @onConfirm="() => handleDuplicateConfirm(duplicateProps.id)" @onClose="handleDuplicateCancel" />
         <div v-if="isLoadingAssignments || isLoadingPlaylists"
             class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-items-center tw-justify-center tw-bg-black/40">
             <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
@@ -239,12 +245,8 @@ onMounted(() => {
                 </fieldset>
             </div>
         </div>
-        <Table v-if="formattedRows.length" 
-               @onActionClick="handleActionClick" 
-               @onScroll="handleScroll"
-               classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll" 
-               :stickyHeader="true"
-               :rows="formattedRows">
+        <Table v-if="formattedRows.length" @onActionClick="handleActionClick" @onScroll="handleScroll"
+            classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll" :stickyHeader="true" :rows="formattedRows">
             <template v-slot:actionContent="slotProps">
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
                     class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]" />
