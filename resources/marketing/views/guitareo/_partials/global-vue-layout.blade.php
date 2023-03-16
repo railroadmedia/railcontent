@@ -29,7 +29,7 @@
 
     {!! \App\Analytics\Tracker::headBottom() !!}
 
-    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
 </head>
 
 <body>
