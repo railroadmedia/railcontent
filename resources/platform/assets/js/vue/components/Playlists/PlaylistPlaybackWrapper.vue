@@ -104,6 +104,9 @@
         playlistItems: {
             type: Array,
         },
+        playlistDuration: {
+            type: Number
+        },
         lockUnowned: {
             type: Boolean,
         },
@@ -219,8 +222,9 @@
                         :autoplay="false"
                         :repeat="false"
                         :brand="brand"
-                        :lessons="playlistItems.data"
+                        :lessons="playlistItems"
                         :playlist-name="playlistName"
+                        :duration="playlistDuration"
                     />
                 </div>
             </div>
