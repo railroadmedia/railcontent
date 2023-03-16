@@ -68,6 +68,10 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                     }
                 }
                 $contentsOfType[$contentIndex]['parent'] = (isset($parents[$value['id']])) ? $parents[$value['id']] : null;
+
+                if(empty($contentsOfType[$contentIndex]['instructors'])){
+                    $contentsOfType[$contentIndex]['instructors'] += $parents[$value['id']]['instructors'];
+                }
             }
             $contentsOfType[$contentIndex]['route'] = $route;
         }

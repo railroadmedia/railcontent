@@ -34,6 +34,18 @@ class InstructorDecorator extends ModeDecoratorBase
     public function decorate(Collection $contents)
     {
         if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
+                    foreach ($contents as $contentIndex => $content) {
+                        $contents[$contentIndex]['instructors'] = [];
+
+                        foreach ($content['fields'] as $field) {
+                            if ($field['key'] === 'instructor') {
+                                $coachName = $field['value']->fetch('fields.name');
+                                if (!in_array($coachName, $contents[$contentIndex]['instructors'])) {
+                                    $contents[$contentIndex]['instructors'][] = $coachName;
+                                }
+                            }
+                        }
+                    }
             return $contents;
         }
 
