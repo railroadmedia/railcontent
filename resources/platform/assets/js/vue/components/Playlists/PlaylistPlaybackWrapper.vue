@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeMount, ref } from 'vue';
+import { onBeforeMount } from 'vue';
 import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import SoundSlice from '../SoundSlice/SoundSlice.vue';
 import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
@@ -7,9 +7,6 @@ import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
 import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
 import Comments from '../../vuesora/views/comments/Comments.vue';
 import ContentCatalogue from '../../vuesora/views/catalogues/ContentCatalogue.vue';
-
-// Refs
-const collapsedComments = ref(true);
 
 const props = defineProps({
     lessonType: {
@@ -127,7 +124,7 @@ const props = defineProps({
             <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
                 <div v-if="lessonType === 'song' || lessonType === 'assignment'"
                     class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
-                    <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
+                    <SoundSlice :autoplay="true" :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
                         :soundslice-slug="soundsliceSlug" :content-id="contentId">
                     </SoundSlice>
                 </div>
@@ -180,10 +177,7 @@ const props = defineProps({
 
             <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                 <div class="tw-flex tw-flex-row tw-w-full">
-                    <div class="tw-w-full">
-                        Expand Section
-                    </div>
-                    <Comments v-if="!collapsedComments" :theme-color="brand" :brand="brand" :content-id="contentId" :user-id="userId"
+                    <Comments :collapseComments="true" :theme-color="brand" :brand="brand" :content-id="contentId" :user-id="userId"
                         :user-name="userName" :user-avatar="userAvatar" :user-xp="userXp"
                         :user-access-level="userAccessLevel" profile-base-route="/profile/" :is-admin="false">
                     </Comments>

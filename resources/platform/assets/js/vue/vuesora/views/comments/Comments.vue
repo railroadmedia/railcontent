@@ -1,163 +1,109 @@
 <template>
-    <div
-        id="commentsSection"
-        class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full"
-    >
-        <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
-            <div class="tw-flex tw-flex-col xs-12 sm-9 tw-mb-3">
-                <h1 class="heading">
-                    {{ totalCommentsAndReplies }} Comments
-                </h1>
-            </div>
-
-            <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-3">
-                <div
-                    class="form-group xs-12"
-                    style="width:100%;"
-                >
-                    <select
-                        id="commentSort"
-                        class="dark:tw-text-white tw-pb-0 has-input"
-                        v-model="sortInterface"
-                    >
-                        <option class="tw-text-[#00101D]" value="-like_count">
-                            Popular
-                        </option>
-                        <option class="tw-text-[#00101D]" value="-created_on">
-                            Latest
-                        </option>
-                        <option class="tw-text-[#00101D]" value="created_on">
-                            Oldest
-                        </option>
-                        <option class="tw-text-[#00101D]" value="-mine">
-                            My Comments
-                        </option>
-                    </select>
-                    <label
-                        for="commentSort"
-                        :class="brandTextColor"
-                    >Sort By</label>
-                </div>
-            </div>
-        </div>
-
-        <div
-            id="postComment"
-            class="tw-flex tw-flex-row comment-post mv-3"
-        >
-            <div class="tw-flex-col avatar-column tw-mr-[15px] tw-hidden md:tw-flex">
-                <div
-                    class="user-avatar smaller"
-                    :class="avatarClassObject"
-                >   
-                    <!-- User Avatar -->
-                    <img :src="currentUser.avatar"
-                         loading="lazy"
-                         class="tw-rounded-full tw-transition-opacity tw-duration-500"
-                         :class="currentUser.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
-                         @load="currentUser.imageLoaded = true"
-                    >
-                </div>
-                <p
-                    v-if="showUserExp"
-                    class="tw-text-sm dense tw-uppercase tw-text-center mt-1"
-                >
-                    {{ userExpRank }}
-                </p>
-                <p
-                    v-if="showUserExp"
-                    class="tw-text-sm dense tw-text-center font-compressed"
-                >
-                    {{ userExpValue }} XP
-                </p>
-            </div>
-
-            <div class="tw-flex tw-flex-col tw-grow tw-w-full">
-                <text-editor
-                    :fieldKey="contentId + '-comment-text-editor'"
-                    ref="textEditor"
-                    v-model="commentInterface"
-                    @input="handleInput"
-                    :height="150"
-                ></text-editor>
-
-                <div class="tw-flex tw-flex-row tw-justify-end mv-1">
-                    <button
-                        class="btn collapse-150"
-                        :disabled="loading"
-                        dusk="submit-comment"
-                        @click="postComment"
-                    >
-                        <span
-                            class="tw-text-white short"
-                            :class="themeBgClass"
-                        >
-                            Comment
-                        </span>
-                    </button>
+    <div id="commentsSection" class="tw-w-full tw-h-full">
+        <div v-if="!commentsCollapsed" class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full">
+            <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
+                <div class="tw-flex tw-flex-col xs-12 sm-9 tw-mb-3">
+                    <h1 class="heading">
+                        {{ totalCommentsAndReplies }} Comments
+                    </h1>
                 </div>
 
-                <div
-                    :class="loading ? 'tw-flex' : 'tw-hidden' "
-                    class="loading-reply tw-z-10 dark:tw-bg-[#000c17]/80 tw-flex-col tw-justify-center tw-items-center"
-                >
-                    <i
-                        class="fas fa-spinner fa-spin tw-mb-2"
-                        :class="themeTextClass"
-                    ></i>
-                    <p class="tw-text-sm text-grey-3 dark:tw-text-white tw-font-bold">
-                        loading...
+                <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-3">
+                    <div class="form-group xs-12" style="width:100%;">
+                        <select id="commentSort" class="dark:tw-text-white tw-pb-0 has-input" v-model="sortInterface">
+                            <option class="tw-text-[#00101D]" value="-like_count">
+                                Popular
+                            </option>
+                            <option class="tw-text-[#00101D]" value="-created_on">
+                                Latest
+                            </option>
+                            <option class="tw-text-[#00101D]" value="created_on">
+                                Oldest
+                            </option>
+                            <option class="tw-text-[#00101D]" value="-mine">
+                                My Comments
+                            </option>
+                        </select>
+                        <label for="commentSort" :class="brandTextColor">Sort By</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="postComment" class="tw-flex tw-flex-row comment-post mv-3">
+                <div class="tw-flex-col avatar-column tw-mr-[15px] tw-hidden md:tw-flex">
+                    <div class="user-avatar smaller" :class="avatarClassObject">
+                        <!-- User Avatar -->
+                        <img :src="currentUser.avatar" loading="lazy"
+                            class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                            :class="currentUser.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                            @load="currentUser.imageLoaded = true">
+                    </div>
+                    <p v-if="showUserExp" class="tw-text-sm dense tw-uppercase tw-text-center mt-1">
+                        {{ userExpRank }}
+                    </p>
+                    <p v-if="showUserExp" class="tw-text-sm dense tw-text-center font-compressed">
+                        {{ userExpValue }} XP
                     </p>
                 </div>
+
+                <div class="tw-flex tw-flex-col tw-grow tw-w-full">
+                    <text-editor :fieldKey="contentId + '-comment-text-editor'" ref="textEditor" v-model="commentInterface"
+                        @input="handleInput" :height="150"></text-editor>
+
+                    <div class="tw-flex tw-flex-row tw-justify-end mv-1">
+                        <button class="btn collapse-150" :disabled="loading" dusk="submit-comment" @click="postComment">
+                            <span class="tw-text-white short" :class="themeBgClass">
+                                Comment
+                            </span>
+                        </button>
+                    </div>
+
+                    <div :class="loading ? 'tw-flex' : 'tw-hidden'"
+                        class="loading-reply tw-z-10 dark:tw-bg-[#000c17]/80 tw-flex-col tw-justify-center tw-items-center">
+                        <i class="fas fa-spinner fa-spin tw-mb-2" :class="themeTextClass"></i>
+                        <p class="tw-text-sm text-grey-3 dark:tw-text-white tw-font-bold">
+                            loading...
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <comment-post v-if="pinnedComment != null" :comment="pinnedComment" :brand="brand" :current-user="currentUser"
+                :pinned="true" :theme-color="themeColor" :profile-base-route="profileBaseRoute"
+                :has-public-profiles="hasPublicProfiles" :opened-comment-id="openedCommentId"
+                @likeComment="handleCommentLike" @likeReply="handleReplyLike" @deleteComment="handleCommentDelete"
+                @deleteReply="handleReplyDelete" @openLikes="addLikeUsersToModal"
+                @replyOpened="handleReplyOpened"></comment-post>
+
+            <comment-post v-for="(comment, i) in comments" :key="i" :comment="comment" :brand="brand"
+                :current-user="currentUser" :theme-color="themeColor" :profile-base-route="profileBaseRoute"
+                :has-public-profiles="hasPublicProfiles" :opened-comment-id="openedCommentId"
+                @likeComment="handleCommentLike" @likeReply="handleReplyLike" @deleteComment="handleCommentDelete"
+                @deleteReply="handleReplyDelete" @openLikes="addLikeUsersToModal"
+                @replyOpened="handleReplyOpened"></comment-post>
+
+            <comment-likes-modal :theme-color="themeColor" :brand="brand" :comment-id="currentLikeUsersId"
+                :like-users="likeUsers" :total-like-users="totalLikeUsers" :loading-like-users="loadingLikeUsers"
+                :requesting-like-users="requestingLikeUsers" @loadMoreLikeUsers="addLikeUsersToModal"></comment-likes-modal>
+        </div>
+        <div @click="handleCollapseComments" v-if="commentsCollapsed" class="tw-cursor-pointer tw-flex tw-justify-between tw-items-center dark:tw-text-white tw-text-black">
+            <div class="tw-flex tw-text-white tw-font-open-sans tw-text-[24px] tw-font-bold">
+                <div v-if="comments.length > 0" class="tw-relative tw-h-[40px] tw-hidden lg:tw-block" :style="`${flattenedProfilePics.length > 1 ? 'width: 100px;' : 'width: 60px;'}`">
+                    <div class="tw-h-[40px] tw-absolute" v-for="(src, index) in (flattenedProfilePics.slice(0, 3))" :style="`margin-left: ${index*20}px`">
+                        <img :src="src" :class="`tw-h-[40px] tw-w-[40px] tw-rounded-full tw-border-[1px] tw-border-${brand} tw-box-border`" />
+                    </div>
+                </div>
+                <div>
+                    {{ totalCommentsAndReplies }} Comments
+                </div>
+            </div>
+            <div class="tw-flex tw-items-center">
+                <span class="tw-font-bebas-neue tw-font-bold tw-text-[16px] tw-text-white tw-pr-[14px]">Expand comment section</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="16" viewBox="0 0 15 16" fill="none">
+                <path d="M13.049 8.33366L7.21566 14.167L1.38232 8.33366M13.049 1.66699L7.21566 7.50033L1.38232 1.66699" stroke="#9EC0DC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </div>
         </div>
-
-        <comment-post
-            v-if="pinnedComment != null"
-            :comment="pinnedComment"
-            :brand="brand"
-            :current-user="currentUser"
-            :pinned="true"
-            :theme-color="themeColor"
-            :profile-base-route="profileBaseRoute"
-            :has-public-profiles="hasPublicProfiles"
-            :opened-comment-id="openedCommentId"
-            @likeComment="handleCommentLike"
-            @likeReply="handleReplyLike"
-            @deleteComment="handleCommentDelete"
-            @deleteReply="handleReplyDelete"
-            @openLikes="addLikeUsersToModal"
-            @replyOpened="handleReplyOpened"
-        ></comment-post>
-
-        <comment-post
-            v-for="(comment, i) in comments"
-            :key="i"
-            :comment="comment"
-            :brand="brand"
-            :current-user="currentUser"
-            :theme-color="themeColor"
-            :profile-base-route="profileBaseRoute"
-            :has-public-profiles="hasPublicProfiles"
-            :opened-comment-id="openedCommentId"
-            @likeComment="handleCommentLike"
-            @likeReply="handleReplyLike"
-            @deleteComment="handleCommentDelete"
-            @deleteReply="handleReplyDelete"
-            @openLikes="addLikeUsersToModal"
-            @replyOpened="handleReplyOpened"
-        ></comment-post>
-
-        <comment-likes-modal
-            :theme-color="themeColor"
-            :brand="brand"
-            :comment-id="currentLikeUsersId"
-            :like-users="likeUsers"
-            :total-like-users="totalLikeUsers"
-            :loading-like-users="loadingLikeUsers"
-            :requesting-like-users="requestingLikeUsers"
-            @loadMoreLikeUsers="addLikeUsersToModal"
-        ></comment-likes-modal>
     </div>
 </template>
 <script>
@@ -188,6 +134,10 @@ export default {
             type: Number,
             default: () => '',
         },
+        collapseComments: {
+            type: Boolean,
+            default: false,
+        }
     },
     data() {
         return {
@@ -197,6 +147,8 @@ export default {
             sortOption: '-like_count',
             comment: '',
             loading: false,
+            commentsCollapsed: this.collapseComments,
+            flattenedProfilePics: []
         };
     },
     computed: {
@@ -291,7 +243,10 @@ export default {
         });
     },
     methods: {
-        handleReplyOpened({id}) {
+        handleCollapseComments() {
+            this.commentsCollapsed = !this.commentsCollapsed;
+        },
+        handleReplyOpened({ id }) {
             this.openedCommentId = id;
         },
         getComments(params, replace = false) {
@@ -312,6 +267,16 @@ export default {
                                 (resolved.data || resolved.results),
                             );
                         }
+
+                        // Flatten comment profile pics
+                        this.comments.forEach(({ user, replies }) => {
+                            this.flattenedProfilePics.push(user['fields.profile_picture_image_url']);
+                            if (replies && replies.length) {
+                                replies.forEach(({user: replyUser}) => {
+                                    this.flattenedProfilePics.push(replyUser['fields.profile_picture_image_url']);
+                                })
+                            }
+                        });
 
                         if (this.pinnedComment != null) {
                             this.comments = this.comments.filter(comment => comment.id !== this.pinnedComment.id);

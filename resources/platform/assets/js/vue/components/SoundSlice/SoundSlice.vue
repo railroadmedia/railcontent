@@ -57,6 +57,20 @@ const spacebarToPlayPause = (event) => {
     }
 };
 
+const click = (x, y) => {
+    var ev = new MouseEvent('click', {
+        'view': window,
+        'bubbles': true,
+        'cancelable': true,
+        'screenX': x,
+        'screenY': y
+    });
+
+    var el = document.elementFromPoint(x, y);
+
+    el.dispatchEvent(ev);
+}
+
 const handleSoundsliceEvent = (event) => {
     const embeddedPlayer = document.getElementById('ssEmbed').contentWindow;
     //const videoContainer = embeddedPlayer.document.getElementById('ytvid0')
@@ -75,6 +89,18 @@ const handleSoundsliceEvent = (event) => {
             case 'ssPause':
                 isPlaying.value = false;
                 handlePause();
+                break;
+            case 'ssAudioLoaded':
+                console.log('AUDIO LOADED')
+                if (props.autoplay) {
+                    console.log('autoplay code')
+                    setTimeout(() => {
+                        const soundsliceWrapper = document.getElementById('soundslice-container');
+                        const { x, y } = soundsliceWrapper.getBoundingClientRect();
+                        click(x + 153, y + 130);
+                        console.log('done calling')
+                    }, 600);
+                }
                 break;
         }
     }
@@ -115,12 +141,6 @@ const handleOnLoad = () => {
 onMounted(() => {
     window.addEventListener('message', handleSoundsliceEvent);
     document.addEventListener('keyup', spacebarToPlayPause);
-
-    if(props.autoplay) {
-        //const soundsliceWrapper = 
-        //const x = 
-        //document.elementFromPoint(x, y).click();
-    }
 });
 
 onBeforeUnmount(() => {

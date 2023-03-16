@@ -29,6 +29,7 @@
 
     <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative">
         {!! \App\Analytics\Tracker::bodyTop() !!}
+        <div id="red-dot" class="tw-w-2 tw-h-2 tw-bg-red tw-absolute" style="z-index: 2000;"></div>
         {{-- Notifications Container --}}
         <div id="notifications-container"></div>
 
