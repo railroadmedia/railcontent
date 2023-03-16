@@ -4,6 +4,7 @@
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/the-tinder.jpg',
             'title' => 'The Tinder',
             'desc' => 'The fastest way to go from singles to… well, not singles. This is a deceptively simple exercise that will help you make a seamless transition from single to double strokes.',
+            'unlocked' => true,
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/the-swiss-cheese.jpg',
@@ -83,7 +84,8 @@
 
 @section('body-data')
     x-data="{
-        showAll: false
+        showAll: false,
+        sampleLesson: false,
     }"
 @endsection
 
@@ -129,15 +131,25 @@
             <div
                 x-cloak
                 x-ref="lessons"
-                class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 max-w-md mx-auto md:max-w-full overflow-hidden transition-all duration-500 pb-4"
+                class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-10 max-w-md mx-auto md:max-w-full overflow-hidden transition-all duration-500 pb-4"
                 :class="showAll ? 'max-h-[4000px]' : 'max-h-[1150px] md:max-h-[720px] lg:max-h-[800px]'"
             >
                 @foreach($lessons as $key => $lesson)
                     <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
-                        <img src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['img'] }}" src="lesson thumbnail {{ $key+1 }}" />
+                        <div class="relative">
+                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['img'] }}" src="lesson thumbnail {{ $key+1 }}" />
+                            @if(!empty($lesson['unlocked']))
+                                <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;" @click="sampleLesson = true;"></i>
+                            @else
+                                <div class="absolute inset-0 bg-black opacity-60"></div>
+                                <div class="absolute inset-0 flex justify-center items-center">
+                                    <i class="fa-solid fa-lock-keyhole text-white text-5xl"></i>
+                                </div>
+                            @endif
+                        </div>
                         <div class="p-4">
                             <h6 class="font-bold mb-2">{{ $key+1 }}. {{ $lesson['title'] }}</h6>
-                            <p>{{ $lesson['desc'] }}</p>
+                            <p class="text-left">{{ $lesson['desc'] }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -233,4 +245,10 @@
             </div>
         </div>
     </div>
+
+    @include('_partials.components.video-modal',[
+        'name' => 'sampleLesson',
+        'video' => '806957290',
+        'vimeo' => true,
+    ])
 @stop
