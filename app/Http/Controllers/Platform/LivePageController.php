@@ -177,7 +177,7 @@ class LivePageController extends BaseController
                         return strtotime($a['published_on']) - strtotime($b['published_on']);
                     }
                 )
-                ->slice(0, 5)
+                ->slice(0, 10)
                 ->values();
 
         // calculate if there is a current event and the previous/next events
@@ -284,7 +284,7 @@ class LivePageController extends BaseController
                         $this->permissionService->is(user()->id, 'live_chat_moderator'),
                     'userData' => $userData,
                     'embedUrl' => $embedUrl,
-                    'scheduleEvents' => json_encode(array_slice($liveEvents->toArray(), 0, 5)),
+                    'scheduleEvents' => json_encode(array_slice($liveEvents->toArray(), 0, 10)),
                 ]
             );
         }
@@ -300,7 +300,7 @@ class LivePageController extends BaseController
             }
         }
 
-        $onlyFutureScheduleEvents = array_slice($onlyFutureScheduleEvents, 0, 5);
+        $onlyFutureScheduleEvents = array_slice($onlyFutureScheduleEvents, 0, 10);
 
         return view(
             'live.offline',
