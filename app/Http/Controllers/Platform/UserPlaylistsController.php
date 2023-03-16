@@ -151,7 +151,7 @@ class UserPlaylistsController extends BaseController
         ContentRepository::$pullFutureContent = true;
 
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
-        throw_if(empty($playlist), new NotFoundHttpException());
+        throw_if((empty($playlist) || ($playlist == -1)), new NotFoundHttpException());
 
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id']);
         foreach($playlistItems as $item){
