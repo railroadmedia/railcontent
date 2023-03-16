@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=9f585384f2f96208728b325b6fb38d88",
+    "/platform/js/app.js": "/platform/js/app.js?id=e081b0bad21b18d0b082e3c93660b2a6",
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
@@ -20,7 +20,7 @@
     "/platform/js/contact-email-form-marketing.js": "/platform/js/contact-email-form-marketing.js?id=2ffc323971e9d67fe85ab4c0f7e823d5",
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=03c27881bada5dbcf24cf77eeeba29ef",
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=fa034becc87a52ea151b981f707363b1",
-    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=9eb718200a0335e57e8474b8233f4cc9",
+    "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=0f2035e28fd388f42388f20ad16c9b41",
     "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=886938c4c27c2ed5bca044e159618b72",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=316ae4561a831312b3fe669d0bb920d9",
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=3b29eed954db900d64bb3ede3bdb26cc",
@@ -31,5 +31,5 @@
     "/platform/css/app.css": "/platform/css/app.css?id=dde4b3dab283cd9dc42995046e20176e",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=95b61f73a67fc65546a81e742dda8905",
     "/marketing/css/app.css": "/marketing/css/app.css?id=3a0e6ed99083c9b0c6769eeda5db51c8",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=46dff8232f4f860648adf24b6569b014"
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=49f0817b99cd1af9df9cbd7fcee415f7"
 }

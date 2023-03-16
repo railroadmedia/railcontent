@@ -242,10 +242,14 @@
             </div>
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
                 You’ve spent 30 days crushing it on the drums. <br><br>
-                And we want to make it easy for you to keep it up. So we put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses. <br><br>
+                And we want to make it easy for you to keep going. So we put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses. <br><br>
                 <b>Join Drumeo today and you’ll get:</b>
             </p>
             <ul class="pl-4 mx-auto text-left" style="width: 100%; max-width: 700px;">
+                <li class="flex items-start">
+                    <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span>
+                    Step-by-step lessons building on what you learned in 30-Day Drummer
+                </li>
                 <li class="flex items-start">
                     <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span>
                     Easy access to hundreds of popular songs you can play with your new skills
@@ -265,8 +269,8 @@
             </ul>
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
                 Plus, you’ll have FREE priority registration for any future 30-Day Drummer events like this one (we’ll be doing more, promise). <br><br>
-                And we’ll also knock $40 off your membership for being one of the first-ever 30-Day Drummer students (because hey, why not?). <br><br>
-                <b>But heads up:</b> This offer is only available until October 8, 2022. <br><br>
+                And we’ll also knock $40 off your membership for being a dedicated 30-Day Drummer student (because hey, why not?). <br><br>
+                <b>But heads up:</b> This offer is only available until March 31, 2023. <br><br>
                 Click below to get started and keep crushing it on the drums for the next year! <br><br>
             </p>
             {{--            <div class="px-3 md:px-0">--}}

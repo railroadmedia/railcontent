@@ -27,7 +27,15 @@
             <div class="text-center sm:px-3">
                 <div class="video-row relative mb-4 sm:mb-7">
                     @if(!is_null($prevLesson))
-                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -5%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $prevLesson->thumbnail }}" alt="pre-thumb">
+                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -5%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/@php
+                            if(str_contains($prevLesson->thumbnail, 'i.vimeocdn.com')){
+                                  $prevLesson->thumbnail = preg_replace('/[?]mw[=][0-9]+[&]mh[=][0-9]+/', '.jpg', $prevLesson->thumbnail);
+                                  if(preg_match('/[.]png|[.]jpg|[.]jpeg|[.]svg/', $prevLesson->thumbnail) !== 1){
+                                        $prevLesson->thumbnail = $prevLesson->thumbnail.'.jpg';
+                                    }
+                              }
+                              echo $prevLesson->thumbnail;
+                        @endphp" alt="pre-thumb">
                     @endif
 
                     <div class="aspect-16:9 w-full relative">
@@ -35,7 +43,15 @@
                     </div>
 
                     @if(!is_null($nextLesson))
-                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 105%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $nextLesson->thumbnail }}" alt="next-thumb">
+                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 105%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/@php
+                            if(str_contains($nextLesson->thumbnail, 'i.vimeocdn.com')){
+                                  $nextLesson->thumbnail = preg_replace('/[?]mw[=][0-9]+[&]mh[=][0-9]+/', '.jpg', $nextLesson->thumbnail);
+                                  if(preg_match('/[.]png|[.]jpg|[.]jpeg|[.]svg/', '$nextLesson->thumbnail') !== 1){
+                                        $nextLesson->thumbnail = $nextLesson->thumbnail.'.jpg';
+                                    }
+                            }
+                              echo $nextLesson->thumbnail;
+                        @endphp" alt="next-thumb">
                     @endif
                 </div>
             </div>
