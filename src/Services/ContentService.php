@@ -2652,9 +2652,9 @@ class ContentService
         if (in_array($content['type'], $singularContentTypes)) {
             $soundsliceAssingment = 0;
             $assign = [];
-            $assignments = $content['assignments'] ?? [];
+            $assignments = $this->contentRepository->getByParentId($content['id']);
             foreach ($assignments as $assignment) {
-                if ($assignment->fetch('soundslice_slug')) {
+                if (isset($assignment['soundslice_slug'])) {
                     $soundsliceAssingment++;
                     $assign[] = $assignment;
                 }
