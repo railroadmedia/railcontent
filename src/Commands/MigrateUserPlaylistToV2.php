@@ -139,7 +139,8 @@ class MigrateUserPlaylistToV2 extends Command
 
         $query =
             $dbConnection->table(config('railcontent.table_prefix').'user_playlists')
-                ->where('migrated', '=',0);
+                ->where('migrated', '=',0)
+                ->where('type', '=','primary-playlist');
         if (!empty($this->argument('brand')) && $this->argument('brand') != "all") {
             $query->where('brand', '=', $this->argument('brand'));
         }
