@@ -20,7 +20,7 @@
                 </div>
             </a>
             @endif
-            
+
             <a href="/members"
                class="flex flex-column logo align-center"
                @if(!empty($isIframe)) target="_parent" @endif>
@@ -133,7 +133,7 @@
                    @if(!empty($isIframe)) target="_parent" @endif>
                     <div class="pa-1 wrap">
                         <img class="rounded tw-h-7 tw-w-7 lg:tw-w-9 lg:tw-h-9 tw-box-border"
-                             src="https://musora.com/cdn-cgi/image/height=50,width=50,quality=90/{{ $userAvatar }}"
+                             src="https://www.musora.com/musora-cdn/image/height=50,width=50,quality=90/{{ $userAvatar }}"
                              data-avatar-update="true">
                     </div>
                 </a>
@@ -167,8 +167,8 @@
             <div class="sidebar-member-section flex flex-row align-v-center bb-grey-1-1">
                 <div class="member-avatar">
                     <a href="{{ $member['profileUrl'] ?? '#' }}">
-                        <img class="bg-grey-2 rounded {{ $themeColor }}" 
-                             src="https://musora.com/cdn-cgi/image/width=60,height=60,quality=90/{{ $member['avatar'] }}" 
+                        <img class="bg-grey-2 rounded {{ $themeColor }}"
+                             src="https://www.musora.com/musora-cdn/image/width=60,height=60,quality=90/{{ $member['avatar'] }}"
                              alt="member avatar"
                         >
                     </a>

@@ -69,7 +69,7 @@ function onFollow(e) {
       `"
   >
     <img
-      :src="`https://musora.com/cdn-cgi/image/width=232,quality=75/${cardImg}`"
+      :src="`https://www.musora.com/musora-cdn/image/width=232,quality=75/${cardImg}`"
       :alt="name"
       class="tw-w-[232px]"
     />
@@ -187,7 +187,7 @@ function onFollow(e) {
       ),
       linear-gradient(180deg, rgba(1, 5, 15, 0) 0%, #01050f 100%);
   }
-  
+
 .one-word-per-line {
   word-spacing: 232px;
 }
