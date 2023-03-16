@@ -1189,11 +1189,11 @@ class CustomerIoSyncEventListener
                 $brand,
                 'musora_membership_access_code_redemption',
                 [
-                    'branch_source' => $brand,
+                    'brand_source' => $brand,
                     'access_code' => $accessCode->getCode(),
                     'access_source' => $accessCode->getSource(),
                     'claim_timestamp' => $accessCode->getUpdatedAt()->timestamp,
-                    'code_creating_date' => $accessCode->getCreatedAt()->timestamp,
+                    'code_creation_date' => $accessCode->getCreatedAt()->timestamp,
                     'product_ids' => $accessCode->getProductIdsAsString()
 
                 ],
