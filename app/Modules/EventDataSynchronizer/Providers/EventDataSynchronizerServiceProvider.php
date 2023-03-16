@@ -3,6 +3,7 @@
 namespace App\Modules\EventDataSynchronizer\Providers;
 
 use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
+use App\Modules\EventDataSynchronizer\Console\Commands\ExpiredProductResync;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermissionsResyncTool;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
@@ -137,10 +138,10 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
         ],
         CommentCreated::class => [
             CustomerIoSyncEventListener::class . '@handleCommentCreated',
-            ContentProgressEventListener::class. '@handleCommentCreated',
+            ContentProgressEventListener::class . '@handleCommentCreated',
         ],
         CommentDeleted::class => [
-            ContentProgressEventListener::class. '.@handleCommentDeleted',
+            ContentProgressEventListener::class . '.@handleCommentDeleted',
         ],
         ThreadCreated::class => [
             CustomerIoSyncEventListener::class . '@handleForumsThreadCreated',
@@ -217,7 +218,8 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 ProductOwnerUserFieldResyncTool::class,
                 SyncUserTotalXp::class,
                 IsDrumeoLifetimeUserFieldResyncTool::class,
-                CustomerIOSyncUser::class
+                CustomerIOSyncUser::class,
+                ExpiredProductResync::class,
             ]
         );
         $this->mergeConfigFrom(
