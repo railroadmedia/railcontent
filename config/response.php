@@ -188,6 +188,7 @@ return [
             'apple_product_id',
             'google_product_id',
             'lesson_count',
+            'child_count',
             'lessons' => [
                 'id',
                 'type',
@@ -379,6 +380,8 @@ return [
                 'data.thumbnail_url',
             ],
             'parent',
+            'lesson_count',
+            'child_count',
             'next_content_type',
             'total_comments',
             'comments',
@@ -449,6 +452,7 @@ return [
                 'data.thumbnail_url',
             ],
             'lesson_count',
+            'child_count',
             'lessons' => [
                 'id',
                 'type',
@@ -556,6 +560,7 @@ return [
             'last_watch_position_in_seconds',
             'fields.video.fields.length_in_seconds',
             'parent',
+            'child_count',
             'coaches' => [
                 'id',
                 'fields.name',
@@ -659,6 +664,7 @@ return [
                 'current_user_is_subscribed',
             ],
             'lesson_count',
+            'child_count',
             'lessons' => [
                 'id',
                 'type',
@@ -830,6 +836,7 @@ return [
             'fields.artist',
             'fields.style',
             'lesson_count',
+            'child_count',
             'lessons' => [
                 'id',
                 'type',
@@ -984,6 +991,7 @@ return [
             'fields.artist',
             'fields.style',
             'lesson_count',
+            'child_count',
             'lessons' => [
                 'id',
                 'type',
@@ -1159,6 +1167,7 @@ return [
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
             'parent',
+            'child_count',
             'fields.artist',
             'fields.style',
             'live_event_start_time_in_timezone',
@@ -1313,6 +1322,7 @@ return [
                 'fields.video.fields.length_in_seconds',
             ],
             'lesson_count',
+            'child_count',
             'coaches' => [
                 'id',
                 'fields.name',
@@ -1351,6 +1361,7 @@ return [
             ],
             "current_lesson_index",
             'lesson_count',
+            'child_count',
             "next_lesson" => [
                 'fields.title',
                 'fields.artist',
@@ -1631,6 +1642,7 @@ return [
                 'mobile_app_url',
             ],
             'lesson_count',
+            'child_count',
             'coaches' => [
                 'id',
                 'fields.name',
@@ -1691,6 +1703,7 @@ return [
                 'mobile_app_url',
             ],
             'lesson_count',
+            'child_count',
             'coaches' => [
                 'id',
                 'fields.name',
@@ -2570,6 +2583,7 @@ return [
             'total_length_in_seconds',
             'level_position',
             'lesson_count',
+            'child_count',
             'course_position',
             '*fields.instructor',
             'lessons' => [
