@@ -145,11 +145,11 @@ class MigrateUserPlaylistToV2 extends Command
             $query->where('brand', '=', $this->argument('brand'));
         }
         if (!empty($this->argument('startingUserId'))) {
-            $query->where('user_id', '>', $this->argument('startingUserId'));
+            $query->where('user_id', '>=', $this->argument('startingUserId'));
         }
 
         if (!empty($this->argument('endingUserId'))) {
-            $query->where('user_id', '<', $this->argument('endingUserId'));
+            $query->where('user_id', '<=', $this->argument('endingUserId'));
         }
 
         $parents = [];
@@ -236,7 +236,7 @@ class MigrateUserPlaylistToV2 extends Command
                                         $position++;
                                     } elseif ($item->type == 'song') {
                                         $item->position = $position;
-                                        $item->extra_data = '{"is_full_track": true}';
+                                        $item->extra_data = json_encode(['is_full_track' => true]);
                                         $itemsOrdered[] = $item;
                                         $position++;
                                     } elseif (($item->type == 'course') ||
@@ -341,7 +341,7 @@ class MigrateUserPlaylistToV2 extends Command
 
                                 if (!empty($itemsOrdered)) {
                                     $statement =
-                                        "INSERT into railcontent_user_playlist_content (id, position, content_id, user_playlist_id, created_at) VALUES ";
+                                        "INSERT into railcontent_user_playlist_content (id, position, content_id, user_playlist_id, extra_data, created_at) VALUES ";
                                     foreach ($itemsOrdered as $itemOrder) {
                                         if ($itemOrder->position != 0) {
                                             $statement .= "(".
@@ -352,14 +352,16 @@ class MigrateUserPlaylistToV2 extends Command
                                                 $itemOrder->content_id.
                                                 ','.
                                                 $itemOrder->user_playlist_id.
-                                                ',"'.
+                                                ','.
+                                                ($itemOrder->extra_data ?? '').
+                                                            ',"'.
                                                 $itemOrder->created_at.
                                                 '"),';
                                             $ids[] = $itemOrder->content_id;
                                         }
                                     }
                                     $statement = rtrim($statement, ',');
-                                    $statement .= ' ON DUPLICATE KEY UPDATE position = VALUES(position); ';
+                                    $statement .= ' ON DUPLICATE KEY UPDATE position = VALUES(position), extra_data = VALUES(extra_data); ';
 
                                     $dbConnection->statement($statement);
                                 }
