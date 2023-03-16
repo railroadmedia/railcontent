@@ -113,6 +113,42 @@ class CodeRedemptionController extends BaseController
         return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'drumeo']);
     }
 
+    public function sweetwaterRedeemNewPianote()
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'pianote']);
+    }
+    public function sweetwaterRedeemExistingPianote()
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'pianote']);
+    }
+
+    public function sweetwaterRedeemNewGuitareo()
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'guitareo']);
+    }
+    public function sweetwaterRedeemExistingGuitareo()
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'guitareo']);
+    }
+
+    public function sweetwaterRedeemNewSingeo()
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'singeo']);
+    }
+    public function sweetwaterRedeemExistingSingeo()
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'singeo']);
+    }
+
+    public function sweetwaterRedeemNewMusora()
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => true, 'theme' => 'musora']);
+    }
+    public function sweetwaterRedeemExistingMusora()
+    {
+        return view('musora.pages.redeem.redeem-page-sweetwater', ['newAccount' => false, 'theme' => 'musora']);
+    }
+
     public function roland()
     {
         return view('pianote.sales.roland', ['redirectUrl' => get_musora_brand_base_url() . '/pianote']);

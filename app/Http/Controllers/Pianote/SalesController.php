@@ -201,7 +201,7 @@ class SalesController extends BaseController
 
     public function concertHeadphonesMember()
     {
-        return view('pianote.products.concert-headphones-member');
+        return view('pianote.products.concert-headphones', ['memberVersion' => true]);
     }
 
     public function foundations()
