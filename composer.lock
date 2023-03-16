@@ -8160,16 +8160,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.65",
+            "version": "v5.0.66",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "6fa97a15f225401f89f6fffd309a1ee9d05a0a60"
+                "reference": "5929ceef17e19dcc4ac6716c636db0c7ebd20173"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/6fa97a15f225401f89f6fffd309a1ee9d05a0a60",
-                "reference": "6fa97a15f225401f89f6fffd309a1ee9d05a0a60",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/5929ceef17e19dcc4ac6716c636db0c7ebd20173",
+                "reference": "5929ceef17e19dcc4ac6716c636db0c7ebd20173",
                 "shasum": ""
             },
             "require": {
@@ -8206,9 +8206,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.65"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.66"
             },
-            "time": "2023-03-15T12:49:08+00:00"
+            "time": "2023-03-16T13:22:30+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -8602,12 +8602,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "37baf22044392a42356fafc8e9647e22d39ad442"
+                "reference": "adececd9760371fd5fcb8397064886875fd85c34"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/37baf22044392a42356fafc8e9647e22d39ad442",
-                "reference": "37baf22044392a42356fafc8e9647e22d39ad442",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/adececd9760371fd5fcb8397064886875fd85c34",
+                "reference": "adececd9760371fd5fcb8397064886875fd85c34",
                 "shasum": ""
             },
             "require": {
@@ -8663,7 +8663,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists"
             },
-            "time": "2023-03-16T12:21:20+00:00"
+            "time": "2023-03-16T14:25:08+00:00"
         },
         {
             "name": "railroad/railforums",

@@ -157,7 +157,7 @@ class UserPlaylistsController extends BaseController
         foreach($playlistItems as $item){
             $item['url'] = url()->route('platform.user.playlist-item', [
                 'playlistId' => $playlistId,
-                'playlistItemId' => $playlistItemId
+                'playlistItemId' => $item['user_playlist_item_id']
             ]);
         }
         $playlistItem =
