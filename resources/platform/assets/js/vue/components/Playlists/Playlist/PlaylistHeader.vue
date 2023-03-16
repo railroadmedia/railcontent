@@ -103,8 +103,8 @@
     }
     
     //Handle Dropdown Trigger
-    const dropdownTriggerHandler = target => {
-        GetElementDistance(target.$el);
+    const dropdownTriggerHandler = event => {
+        GetElementDistance(event.target);
         state.dropdownOpen = !state.dropdownOpen;
     }
     
@@ -203,7 +203,7 @@
                 <button class="tw-relative  tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]" 
                         :class="props.isListView ? 'md:tw-rotate-90' : ''"
                         title="Playlist Options"
-                        @click.prevent="dropdownTriggerHandler(this)" 
+                        @click.prevent="dropdownTriggerHandler($event)" 
                         v-click-outside="()=>{ state.dropdownOpen = false }"
                 >
                     <div class="tw-relative tw-w-[32px] tw-flex tw-justify-center tw-items-center tw-h-[35px] tw-mb-1 tw-text-center">
