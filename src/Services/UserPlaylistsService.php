@@ -149,7 +149,7 @@ class UserPlaylistsService
             $sort
         );
 
-        return Decorator::decorate($results, 'content');
+        return Decorator::decorate($results, 'playlist-item');
     }
 
     /**
@@ -377,10 +377,10 @@ class UserPlaylistsService
             return -1;
         }
 
-        $playlist['like_count'] =
-            $this->playlistLikeRepository->query()
-                ->where('playlist_id', $playlistId)
-                ->count();
+//        $playlist['like_count'] =
+//            $this->playlistLikeRepository->query()
+//                ->where('playlist_id', $playlistId)
+//                ->count();
         $playlist['is_liked_by_current_user'] =
             $this->playlistLikeRepository->query()
                 ->where('playlist_id', $playlistId)
