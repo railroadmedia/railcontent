@@ -205,7 +205,7 @@
                     <template v-if="lesson.type !== 'assignment'">
                         <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
                                 v-for="(instructor, i) in lesson.instructors"
-                                :key="i">
+                                :key="i+'-instructor'">
                                 {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
                         </span>
                     </template>
@@ -240,7 +240,7 @@
                 </div>
                 <!-- Assignment Instructors -->
                 <p v-if="lesson.type === 'assignment'" class="tw-truncate">   
-                    <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
+                    <span v-if="lesson.parent && lesson.parent.instructors" class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
                             v-for="(instructor, i) in lesson.parent.instructors"
                             :key="i">
                             {{ instructor }}<span v-if="i != (lesson.parent.instructors.length - 1)">,</span>

@@ -129,7 +129,9 @@
             type: [String, Number]
         }
     });
-
+    onBeforeMount(() => {
+        console.log(props)
+    });
 </script>
 
 <template>

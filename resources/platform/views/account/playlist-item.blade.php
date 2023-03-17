@@ -44,7 +44,7 @@
         video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
         progress-state="{{ $lessonContent->fetch('progress_state') }}"
         :useLegacyVideoPlayer="{{ user()->use_legacy_video_player ?? false }}"
-        video-poster-image-url="{{ $lessonContent['video_poster_image_url'] ?? '' }} }}"
+        video-poster-image-url="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
         :video-media-sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
         hls-manifest-url="{{ $lessonContent['hlsManifestUrl'] ?? '' }}"
         :video-chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"

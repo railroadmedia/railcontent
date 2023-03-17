@@ -44,10 +44,10 @@ const progressTrackerEventListener = ref(null);
 let progressTracker = new ProgressTracker();
 
 const spacebarToPlayPause = (event) => {
-    const embeddedPlayer = document.getElementById('ssEmbed').contentWindow;
-
     if (event.keyCode === 32) {
         event.preventDefault();
+
+        const embeddedPlayer = document.getElementById('ssEmbed').contentWindow;
 
         if (isPlaying.value) {
             embeddedPlayer.postMessage('{"method": "pause"}', 'https://www.soundslice.com');
@@ -72,7 +72,7 @@ const click = (x, y) => {
 }
 
 const handleSoundsliceEvent = (event) => {
-    const embeddedPlayer = document.getElementById('ssEmbed').contentWindow;
+    //const embeddedPlayer = document.getElementById('ssEmbed').contentWindow;
     //const videoContainer = embeddedPlayer.document.getElementById('ytvid0')
 
     if (event.origin === 'https://www.soundslice.com') {
@@ -92,7 +92,7 @@ const handleSoundsliceEvent = (event) => {
                 break;
             case 'ssAudioLoaded':
                 console.log('AUDIO LOADED')
-                if (props.autoplay) {
+                if (false && props.autoplay) {
                     console.log('autoplay code')
                     setTimeout(() => {
                         const soundsliceWrapper = document.getElementById('soundslice-container');
