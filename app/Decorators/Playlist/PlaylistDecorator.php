@@ -2,7 +2,9 @@
 
 namespace App\Decorators\Playlist;
 
+use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Services\ContentService;
@@ -32,23 +34,17 @@ class PlaylistDecorator extends ModeDecoratorBase
     public function decorate($playlists)
     {
         $playlists = $playlists->toArray();
-//        $pinnedPlaylists = $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
-//        $pinnedPlaylistsd = array_combine(array_column($pinnedPlaylists, 'id'), $pinnedPlaylists);
         $userIds = [];
 
         foreach ($playlists as $index => $playlist) {
             $userIds[] = $playlist['user_id'];
             $playlists[$index]['url'] =
                 url()->route('platform.user.playlist', ["id" => $playlist['id'], "brand" => brand()]);
-//            $playlists[$index]['pinned'] = array_key_exists($playlist['id'], $pinnedPlaylistsd);
             if (!$playlist['thumbnail_url']) {
                 $playlists[$index]['uploaded_thumbnail'] = false;
                 if (isset($playlist['user_playlist_item_id'])) {
-//
-//                    dd($playlist);
-//                }
-//                $lessons = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 1);
-//                if ($lessons->isNotEmpty()) {
+                    Decorator::$typeDecoratorsEnabled = false;
+                    \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
                     $firstPlaylistItem = $this->userPlaylistsService->getPlaylistItemById($playlist['user_playlist_item_id']);
                     $firstItem = $this->contentService->getById($firstPlaylistItem['content_id']);
 
