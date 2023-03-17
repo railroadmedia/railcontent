@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Illuminate\Database\Query\JoinClause;
+
 class UserPlaylistsRepository extends RepositoryBase
 {
     /**
@@ -41,6 +43,16 @@ class UserPlaylistsRepository extends RepositoryBase
 
         $query =
             $this->query()
+                ->select(config('railcontent.table_prefix').'user_playlists.*', config('railcontent.table_prefix').'user_playlist_content.id as user_playlist_item_id' )
+                ->leftjoin(config('railcontent.table_prefix').'user_playlist_content', function (JoinClause $join) {
+                    $join->on(
+                        config('railcontent.table_prefix').'user_playlists'.'.id',
+                        '=',
+                        config('railcontent.table_prefix').'user_playlist_content'.'.user_playlist_id'
+                    )
+                        ->where(config('railcontent.table_prefix').'user_playlist_content.position', '=', 1);
+                })
+
                 ->where('user_id', $userId)
                 ->where('brand', $brand)
                 ->where('type', $playlistType);
@@ -55,7 +67,7 @@ class UserPlaylistsRepository extends RepositoryBase
         if (!in_array($orderByColumn, ['name', 'id', 'created_at', 'last_progress'])) {
             $orderByColumn = 'id';
         }
-        $query = $query->orderBy($orderByColumn, $orderByDirection);
+        $query = $query->orderBy(config('railcontent.table_prefix').'user_playlists.'.$orderByColumn, $orderByDirection);
 
         $data =
             $query->get()
