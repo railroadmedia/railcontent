@@ -47,6 +47,7 @@ class PlaylistDecorator extends ModeDecoratorBase
                     \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
                     $firstPlaylistItem = $this->userPlaylistsService->getPlaylistItemById($playlist['user_playlist_item_id']);
                     $firstItem = $this->contentService->getById($firstPlaylistItem['content_id']);
+                    Decorator::$typeDecoratorsEnabled = true;
 
                     $playlists[$index]['square_thumbnail'] =
                         (($firstItem['type'] == 'assignment' &&
