@@ -92,6 +92,7 @@
             color:#666;
             font:400 14px "Open Sans", sans-serif;
             padding:0 0.9375rem;
+            margin-bottom:10px;
         }
 
         .validation-error {
@@ -110,12 +111,7 @@
             font:400 16px "Open Sans", sans-serif;
             text-align:center;
             display:block;
-            margin:20px auto 5px;
-        }
-
-        .redeem-switcher .red {
-            font-weight:600;
-            color:red;
+            margin:0 auto 5px;
         }
 
         .input-describer {
@@ -125,7 +121,7 @@
 
         @media only screen and (min-width:40em) {
             .redeem-switcher {
-                margin:30px auto 15px;
+                margin:0 auto 15px;
             }
 
             input[type="text"],
@@ -280,12 +276,16 @@
                 ])
              @endif
             <br>
-             <p class="help-message">
-                 ** If you apply your code to an account that already has an active Membership subscription, your subscription will be extended based on the time associated with your card.
-             </p>
-            <p class="help-message">
-                ** If you enter a new email address, an account will be created for you and your new password will be emailed to you shortly after claiming your card.
-            </p>
+            @if($newAccount)
+                <p class="help-message">
+                    ** If you enter a new email address, an account will be created for you and your new password will be emailed to you shortly after claiming your card.
+                </p>
+            @else
+                <p class="help-message">
+                    ** If you apply your code to an account that already has an active Membership subscription, your subscription will be extended based on the time associated with your card.
+                </p>
+            @endif
+
             <p class="help-message">
                 ** Your Access Pass will give you access to all four of our communities: Drumeo, Pianote, Guitareo, and Singeo!
             </p>

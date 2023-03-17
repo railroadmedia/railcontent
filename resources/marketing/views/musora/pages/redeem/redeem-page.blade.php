@@ -92,6 +92,7 @@
             color:#666;
             font:400 14px "Open Sans", sans-serif;
             padding:0 0.9375rem;
+            margin-bottom:10px;
         }
 
         .validation-error {
@@ -110,12 +111,7 @@
             font:400 16px "Open Sans", sans-serif;
             text-align:center;
             display:block;
-            margin:20px auto 5px;
-        }
-
-        .redeem-switcher .red {
-            font-weight:600;
-            color:red;
+            margin:0 auto 5px;
         }
 
         .input-describer {
@@ -125,7 +121,7 @@
 
         @media only screen and (min-width:40em) {
             .redeem-switcher {
-                margin:30px auto 15px;
+                margin:0 auto 15px;
             }
 
             input[type="text"],
@@ -168,27 +164,23 @@
 @section('layout-body')
     <div class="py-8 sm:py-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-                <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
             @if(empty($thomann))
+                <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
                 <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/113327941" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
                 </div>
             @else
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="filter  h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/thomann-logo.png">
+                <h3 class="leading-tight mt-4 mb-6 sm:mb-10"><strong>Redeem your membership to Drumeo.</strong></h3>
                 <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
             @endif
         </div>
     </div>
     <div class="py-8 sm:py-12 px-4 sm:px-6">
         <div class="container mx-auto max-w-3xl">
-
             @if(!empty($thomann))
-                <div class="text-center">
-                    <img style="height:30px;width:auto;filter:invert(1);margin-bottom: 15px;" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/thomann-logo.png">
-                    <h3 style="font-family: 'Open Sans', sans-serif;"><strong style="font-weight: 900;">CLAIM YOUR DRUMEO 3-MONTH MEMBERSHIP</strong></h3>
-                    {{--        <p>Redeem your free 1-year Drumeo membership here.</p>--}}
-                </div>
-                <div class="redeem-switcher">
-                    <span class="red"> These access codes can only be <br class="inline sm:hidden"> redeemed for new accounts</span>
+                <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                    <strong class="text-pianote"> These access codes can only be <br class="inline sm:hidden"> redeemed for new accounts</strong>
                 </div>
             @endif
              @if($newAccount)
@@ -231,12 +223,16 @@
 
 
             <br>
-            <p class="help-message">
-                ** If you apply your code to an account that already has an active Membership subscription, your subscription will be extended based on the time associated with your card.
-            </p>
-            <p class="help-message">
-                ** If you enter a new email address, an account will be created for you and your new password will be emailed to you shortly after claiming your card.
-            </p>
+            @if($newAccount)
+                <p class="help-message">
+                    ** If you enter a new email address, an account will be created for you and your new password will be emailed to you shortly after claiming your card.
+                </p>
+            @else
+                <p class="help-message">
+                    ** If you apply your code to an account that already has an active Membership subscription, your subscription will be extended based on the time associated with your card.
+                </p>
+            @endif
+
             <p class="help-message">
                 ** Your Access Pass will give you access to all four of our communities: Drumeo, Pianote, Guitareo, and Singeo!
             </p>
