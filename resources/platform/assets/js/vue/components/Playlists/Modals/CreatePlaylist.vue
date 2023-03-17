@@ -110,13 +110,6 @@
         state.description = e.target.value;
     };
 
-    const resetState = () => {
-        state.name = '';
-        state.category = 'My List'; //Default
-        state.thumb = null;
-        state.description = '';
-    }
-
     const updateThumbnail = (img) => {
         state.thumb = img;
     }
