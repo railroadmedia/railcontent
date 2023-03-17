@@ -152,117 +152,99 @@
 
 <!-- Main -->
 @section('layout-body')
-
-    @if($theme == 'drumeo')
-        <style>
-            .text-brand {
+    <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+        <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
+            @if($theme == 'drumeo')
+                <style>
+                .text-brand {
                 color:#0b76db;
-            }
-            .apply {
+                }
+                .apply {
                 background:#0b76db;
-            }
+                }
 
-            .apply:hover {
+                .apply:hover {
                 background:#258ff4;
-            }
-        </style>
-        <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url({{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
-            <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-                <img class="h-8 sm:h-11 lg:h-14" src="{{ musora_cdn('redeem/sweetwater/drumeo-sweetwater.svg') }}">
+                }
+                </style>
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/drumeo-sweetwater.svg') }}">
                 <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Drumeo.</strong></h3>
                 <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Drumeo Student through Sweetwater!<br class="hidden sm:inline">
-                    Please enter the code that they provided you in the form below.</h6>
-                <img class="-mb-4" src="{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
-            </div>
-        </div>
-    @elseif($theme == 'pianote')
-        <style>
-            .text-brand {
+                Please enter the code that they provided you in the form below.</h6>
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
+            @elseif($theme == 'pianote')
+                <style>
+                .text-brand {
                 color:#F61A30;
-            }
-            .apply {
+                }
+                .apply {
                 background:#F61A30;
-            }
+                }
 
-            .apply:hover {
+                .apply:hover {
                 background:#f53347;
-            }
-        </style>
-        <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url({{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
-            <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-                <img class="h-8 sm:h-11 lg:h-14" src="{{ musora_cdn('redeem/sweetwater/pianote-sweetwater.svg') }}">
+                }
+                </style>
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/pianote-sweetwater.svg') }}">
                 <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Pianote.</strong></h3>
                 <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Pianote Student through Sweetwater!<br class="hidden sm:inline">
-                    Please enter the code that they provided you in the form below.</h6>
-                <img class="-mb-4" src="{{ musora_cdn('redeem/sweetwater/pianote-spread.png') }}">
-            </div>
-        </div>
-    @elseif($theme == 'guitareo')
-        <style>
-            .text-brand {
+                Please enter the code that they provided you in the form below.</h6>
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/pianote-spread.png') }}">
+            @elseif($theme == 'guitareo')
+                <style>
+                .text-brand {
                 color:#00C9AC;
-            }
-            .apply {
+                }
+                .apply {
                 background:#00C9AC;
-            }
+                }
 
-            .apply:hover {
+                .apply:hover {
                 background:#00e3c5;
-            }
-        </style>
-        <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url({{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
-            <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-                <img class="h-8 sm:h-11 lg:h-14" src="{{ musora_cdn('redeem/sweetwater/guitareo-sweetwater.svg') }}">
+                }
+                </style>
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/guitareo-sweetwater.svg') }}">
                 <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Guitareo.</strong></h3>
                 <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Guitareo Student through Sweetwater!<br class="hidden sm:inline">
-                    Please enter the code that they provided you in the form below.</h6>
-                <img class="-mb-4" src="{{ musora_cdn('redeem/sweetwater/guitareo-spread.png') }}">
-            </div>
-        </div>
-    @elseif($theme == 'singeo')
-        <style>
-            .text-brand {
+                Please enter the code that they provided you in the form below.</h6>
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/guitareo-spread.png') }}">
+            @elseif($theme == 'singeo')
+                <style>
+                .text-brand {
                 color:#8300E9;
-            }
-            .apply {
+                }
+                .apply {
                 background:#8300E9;
-            }
+                }
 
-            .apply:hover {
+                .apply:hover {
                 background:#9000ff;
-            }
-        </style>
-        <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url({{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
-            <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-                <img class="h-8 sm:h-11 lg:h-14" src="{{ musora_cdn('redeem/sweetwater/singeo-sweetwater.svg') }}">
+                }
+                </style>
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/singeo-sweetwater.svg') }}">
                 <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Singeo.</strong></h3>
                 <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Singeo Student through Sweetwater!<br class="hidden sm:inline">
-                    Please enter the code that they provided you in the form below.</h6>
-                <img class="-mb-4" src="{{ musora_cdn('redeem/sweetwater/singeo-spread.png') }}">
-            </div>
-        </div>
-    @else
-        <style>
-            .text-brand {
+                Please enter the code that they provided you in the form below.</h6>
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/singeo-spread.png') }}">
+            @else
+                <style>
+                .text-brand {
                 color:#0b76db;
-            }
-            .apply {
+                }
+                .apply {
                 background:#000C17;
-            }
+                }
 
-            .apply:hover {
+                .apply:hover {
                 background:#001930;
-            }
-        </style>
-        <div class="py-8 sm:py-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url({{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
-            <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-                <img class="h-8 sm:h-11 lg:h-14" src="{{ musora_cdn('redeem/sweetwater/musora-sweetwater.svg') }}">
-                <h3 class="leading-tight mt-4 mb-6 sm:mb-10"><strong>Redeem your membership for Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
-                <img class="-mb-4" src="{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
-            </div>
+                }
+                </style>
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/musora-sweetwater.svg') }}">
+                <h3 class="leading-tight mt-4 mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
+            @endif
         </div>
-    @endif
-
+    </div>
     <div class="py-8 sm:py-12 px-3 sm:px-6">
         <div class="container mx-auto max-w-3xl">
              @if($newAccount)
@@ -300,8 +282,6 @@
                     "existing" => true
                 ])
              @endif
-
-
             <br>
             <p class="help-message">
                 ** If you enter the email of an account that already has an existing valid subscription, your subscription will be extended based on the time associated with your card.

@@ -24,7 +24,7 @@
                         $currentCoach->title = $fullName;
                         $currentCoach->topSubtitle = $featured->fetch('data.focus_text.value');
                         $currentCoach->ctaUrl = $featured->fetch('url');
-                        $currentCoach->img = "https://musora.com/cdn-cgi/image/width=720/".$featured->fetch('data.coach_featured_image');
+                        $currentCoach->img = "https://www.musora.com/musora-cdn/image/width=720/".$featured->fetch('data.coach_featured_image');
 
                         array_push($formattedResults, $currentCoach);
                     @endphp
