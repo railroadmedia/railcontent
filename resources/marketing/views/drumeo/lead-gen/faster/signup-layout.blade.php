@@ -94,8 +94,20 @@
         <div class="max-w-6xl mx-auto md:flex items-center container px-4 text-center md:text-left">
             <div class="flex-1 text-white max-w-xl mx-auto md:max-w-full">
                 <div class="px-2 md:px-3">
-                    <img class="h-12 md:h-14 lg:h-20 mb-3" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
-                    <img class="rounded-xl md:hidden mb-5" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $headerImageM }}" alt="header hero image mobile" />
+                    <img
+                        class="h-12 md:h-14 lg:h-20 mb-3 transition-opacity opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg"
+                        alt="FWTGF logo"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                    />
+                    <img
+                        class="rounded-xl md:hidden mb-5 transition-opacity opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $headerImageM }}"
+                        alt="header hero image mobile"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                    />
                     <h2 class="leading-tight mb-5">Improve your speed on the drums with <b class="font-extrabold">10 free workouts.</b></h2>
                     <p class="mb-4">Enter your email below to grab your lessons.</p>
                 </div>
@@ -107,7 +119,13 @@
                 ])
             </div>
             <div class="flex-1 pl-12 xl:px-12 hidden md:block">
-                <img src="https://www.musora.com/musora-cdn/image/width=700,quality=85/{{ $headerImage }}" alt="header hero image" />
+                <img
+                    class="transition-opacity opacity-0"
+                    src="https://www.musora.com/musora-cdn/image/width=700,quality=85/{{ $headerImage }}"
+                    alt="header hero image"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                />
             </div>
         </div>
     </header>
@@ -137,7 +155,13 @@
                 @foreach($lessons as $key => $lesson)
                     <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
                         <div class="relative">
-                            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['img'] }}" src="lesson thumbnail {{ $key+1 }}" />
+                            <img
+                                class="transition-opacity opacity-0"
+                                src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['img'] }}"
+                                alt="lesson thumbnail {{ $key+1 }}"
+                                loading="lazy"
+                                onload="this.classList.remove('opacity-0')"
+                            />
                             @if(!empty($lesson['unlocked']))
                                 <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;" @click="sampleLesson = true;"></i>
                             @else
@@ -169,9 +193,11 @@
     <section class="py-12 md:py-20" style="background: radial-gradient(34.53% 68.28% at 31.51% 33.16%, #FFEBDD 0%, #E2E7F0 100%)">
         <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8 sm:px-4 lg:px-0">
             <img
-                class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-16 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10"
+                class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-16 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 transition-opacity opacity-0"
                 src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/coach.jpg"
                 alt="profile picture"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
             >
             <div class="h-10 w-full sm:hidden" style="background: linear-gradient(to left top, #00101d calc(50% - 1px), transparent, transparent calc(50% + 1px));"></div>
             <div class="text-white text-left rounded-none md:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-14 sm:mt-8 w-full sm:w-auto sm:flex-grow lg:max-w-xl" style="background-color:#00101d;">
