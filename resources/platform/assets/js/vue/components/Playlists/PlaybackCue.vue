@@ -1,5 +1,5 @@
 <script setup>
-    import { onBeforeMount, onMounted, inject, reactive, computed } from 'vue';
+    import { onBeforeMount, onMounted, inject, ref, reactive, computed } from 'vue';
     import PlaylistService from '../../../services/playlists.js';
     import PlaylistCard from './Playlist/PlaylistCard.vue';
     import { usePlaylistsStore } from '../../../stores/playlists';
@@ -46,6 +46,7 @@
         }
     })
 
+    //-----------Computed Props-----------//
     const activeItem = computed(()=>{
         //Get index of playlist item 
         //TODO: may have to replace this with a request from BE later
@@ -54,6 +55,10 @@
         let item = props.lessons.data.find((item) => { item.user_playlist_item_id === props.playlistItemId })
         return props.lessons.data.indexOf(item)
     })
+
+    //-----------Refs-----------//
+    const pageNumber = ref(1);
+    const preventReFetch = ref(false);
 
     //-----------Reactive Data-----------//
 
