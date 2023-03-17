@@ -101,20 +101,26 @@
         videoResources: {
             type: Array,
         },
+        playlistName: {
+            type: String,
+        },
         playlistItems: {
             type: Array,
         },
         playlistDuration: {
             type: Number
         },
+        playlistUrl: {
+            type: String
+        },
+        playlistItemId: {
+            type: String
+        },
         lockUnowned: {
             type: Boolean,
         },
         relatedLessons: {
             type: Array,
-        },
-        playlistName: {
-            type: String,
         },
         userName: {
             type: String,
@@ -225,6 +231,8 @@
                         :lessons="playlistItems"
                         :playlist-name="playlistName"
                         :duration="playlistDuration"
+                        :playlist-url="playlistUrl"
+                        :playlist-item-id="playlistItemId"
                     />
                 </div>
             </div>
