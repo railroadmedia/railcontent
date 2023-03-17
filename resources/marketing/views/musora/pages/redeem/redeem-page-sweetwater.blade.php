@@ -156,9 +156,6 @@
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
             @if($theme == 'drumeo')
                 <style>
-                .text-brand {
-                color:#0b76db;
-                }
                 .apply {
                 background:#0b76db;
                 }
@@ -174,9 +171,6 @@
                 <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
             @elseif($theme == 'pianote')
                 <style>
-                .text-brand {
-                color:#F61A30;
-                }
                 .apply {
                 background:#F61A30;
                 }
@@ -192,9 +186,6 @@
                 <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/pianote-spread.png') }}">
             @elseif($theme == 'guitareo')
                 <style>
-                .text-brand {
-                color:#00C9AC;
-                }
                 .apply {
                 background:#00C9AC;
                 }
@@ -210,9 +201,6 @@
                 <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/guitareo-spread.png') }}">
             @elseif($theme == 'singeo')
                 <style>
-                .text-brand {
-                color:#8300E9;
-                }
                 .apply {
                 background:#8300E9;
                 }
@@ -228,9 +216,6 @@
                 <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/singeo-spread.png') }}">
             @else
                 <style>
-                .text-brand {
-                color:#0b76db;
-                }
                 .apply {
                 background:#000C17;
                 }
@@ -251,7 +236,13 @@
                 <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
                     <strong><b>Existing Member?</b>
                         <br>
-                        <a class="text-brand underline" href="/drumeo/sweetwater/existing">Click here to add to your account.</a>
+                        <a
+                            @if($theme == 'musora')
+                                class="text-drumeo underline" href="/sweetwater/existing"
+                            @else
+                                class="text-{{ $theme }} underline" href="/{{ $theme }}/sweetwater/existing"
+                            @endif
+                        >Click here to add to your account.</a>
                     </strong>
                     <br>
                     <em>(The form below is only for new accounts)</em>
@@ -267,7 +258,13 @@
                 <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
                     <strong> <b>Not already a member?</b>
                         <br>
-                        <a class="text-brand underline" href="/redeem">Click here to redeem on a new account.</a>
+                        <a
+                            @if($theme == 'musora')
+                                class="text-drumeo underline" href="/sweetwater"
+                            @else
+                                class="text-{{ $theme }} underline" href="/{{ $theme }}/sweetwater"
+                            @endif
+                        >Click here to redeem on a new account.</a>
                     </strong>
                     <br>
                     <em>(The form below is only for existing members)</em>
@@ -283,14 +280,14 @@
                 ])
              @endif
             <br>
-            <p class="help-message">
-                ** If you enter the email of an account that already has an existing valid subscription, your subscription will be extended based on the time associated with your card.
-            </p>
+             <p class="help-message">
+                 ** If you apply your code to an account that already has an active Membership subscription, your subscription will be extended based on the time associated with your card.
+             </p>
             <p class="help-message">
                 ** If you enter a new email address, an account will be created for you and your new password will be emailed to you shortly after claiming your card.
             </p>
             <p class="help-message">
-                ** Your Access Page may look like it’s only for Drumeo, but this pass will give you access to all four of our communities: Drumeo, Pianote, Guitareo, and Singeo!
+                ** Your Access Pass will give you access to all four of our communities: Drumeo, Pianote, Guitareo, and Singeo!
             </p>
         </div>
     </div>
