@@ -538,7 +538,7 @@
         @yield('final')
     @elseif(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeoplus_logo.svg",
+            "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
             "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
             "songs" => "5000",
             "firstPoint" => "The world’s best drum lessons.",
