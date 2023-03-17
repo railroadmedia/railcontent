@@ -363,6 +363,13 @@ return [
         'playlist' => [
            \App\Decorators\Playlist\PlaylistDecorator::class,
         ],
+        'playlist-item' => [
+            \Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator::class,
+            \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
+
+            \App\Decorators\Content\InstructorDecorator::class,
+            \App\Decorators\Content\PlaylistItemDecorator::class,
+        ]
     ],
 
     // specific decorator configs

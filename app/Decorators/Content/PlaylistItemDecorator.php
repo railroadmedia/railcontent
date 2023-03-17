@@ -2,10 +2,14 @@
 
 namespace App\Decorators\Content;
 
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Support\Collection;
 
 class PlaylistItemDecorator extends TypeDecoratorBase
 {
+    private static $parents = [];
+
+
     /**
      * @param Collection $contents
      * @return mixed|Collection
@@ -29,28 +33,28 @@ class PlaylistItemDecorator extends TypeDecoratorBase
             }
 
             //thumbnail_url
-            $contentsOfType[$contentIndex]['thumbnail_url'] = $content->fetch('data.original_thumbnail_url');
+            $contentsOfType[$contentIndex]['thumbnail_url'] = $content->fetch('data.original_thumbnail_url',  $content->fetch('data.thumbnail_url'));
 
             $route = [];
 
             if (!empty($content['parent_content_data'])) {
                 $parentContentData = array_reverse(json_decode($content['parent_content_data'], true));
-                $parentIds = \Arr::pluck($parentContentData, 'id');
-                $parents =
-                    $this->contentService->getByIds($parentIds)
-                        ->keyBy('id');
-
                 foreach ($parentContentData as $value) {
-                    if ((isset($parents[$value['id']]))) {
-                        $parentTitle = $parents[$value['id']]['title'];
+                    if ((isset(self::$parents[$value['id']]))) {
                         if ($content['type'] == 'assignment') {
                             $contentsOfType[$contentIndex]['fields'] =
-                                array_merge($content['fields'], $parents[$value['id']]['fields'] ?? []);
+                                array_merge($content['fields'], self::$parents[$value['id']]['fields'] ?? []);
 //                            $contentsOfType[$contentIndex]['data'] =
 //                                array_merge($content['data'], $parents[$value['id']]['data'] ?? []);
-                            $contentsOfType[$contentIndex]['thumbnail_url'] = $parents[$value['id']]->fetch('data.original_thumbnail_url');
+                            $contentsOfType[$contentIndex]['thumbnail_url'] = self::$parents[$value['id']]->fetch('data.original_thumbnail_url');
                         }
+                    }else{
+                        $parentIds = \Arr::pluck($parentContentData, 'id');
+                        Decorator::$typeDecoratorsEnabled = false;
+                        self::$parents += $this->contentService->getByIds($parentIds)->keyBy('id')->toArray();
+                        Decorator::$typeDecoratorsEnabled = true;
                     }
+
                     switch ($value['type']) {
                         case 'learning-path':
                             $route[] = 'Method';
@@ -62,15 +66,19 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                             break;
                         case 'play-along':
                             break;
+                        case 'edge-pack':
+                            break;
                         default:
-                            $route[] = $parentTitle ?? '';
+                            $route[] = self::$parents[$value['id']]['title'] ?? '';
                             break;
                     }
                 }
-                $contentsOfType[$contentIndex]['parent'] = (isset($parents[$value['id']])) ? $parents[$value['id']] : null;
+                $contentsOfType[$contentIndex]['parent'] = (isset(self::$parents[$value['id']])) ? self::$parents[$value['id']] : null;
 
                 if(empty($contentsOfType[$contentIndex]['instructors'])){
-                    $contentsOfType[$contentIndex]['instructors'] += $parents[$value['id']]['instructors'];
+//                    \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+//                    $this->instructorDecorator->decorate(new Collection(self::$parents[$value['id']]));
+                    $contentsOfType[$contentIndex]['instructors'] += self::$parents[$value['id']]['instructors'] ?? [];
                 }
             }
             $contentsOfType[$contentIndex]['route'] = $route;

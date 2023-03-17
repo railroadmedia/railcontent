@@ -96,6 +96,8 @@ class UserPlaylistsController extends BaseController
 
     public function playlist(Request $request, $domain, $brand, $playlistId)
     {
+        ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
+
         $user = user();
 
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
@@ -110,7 +112,6 @@ class UserPlaylistsController extends BaseController
         );
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-        ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
         foreach ($items as $index => $item) {
