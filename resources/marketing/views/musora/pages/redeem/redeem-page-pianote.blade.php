@@ -304,11 +304,7 @@
 
         @endif
         <br>
-        @if($newAccount)
-            <p class="help-message">
-                ** If you enter a new email address, an account will be created for you and your new password will be emailed to you shortly after claiming your card.
-            </p>
-        @else
+        @if(!$newAccount)
             <p class="help-message">
                 ** If you apply your code to an account that already has an active Membership subscription, your subscription will be extended based on the time associated with your card.
             </p>
