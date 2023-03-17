@@ -151,19 +151,37 @@
                 background:#258ff4;
             }
         </style>
+    @else
+        <style>
+            .apply {
+                background:#000C17;
+            }
+
+            .apply:hover {
+                background:#001930;
+            }
+        </style>
     @endif
 @endsection
 
 <!-- Main -->
 @section('layout-body')
-    <div class="py-8 sm:py-12 px-4 sm:px-6">
-        <div class="container mx-auto max-w-3xl">
+    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+        <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
+                <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
             @if(empty($thomann))
                 <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/113327941" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
                 </div>
-                <p class="redeem-switcher text-left"><i class="fal fa-info-circle"></i> Although the card is for Drumeo, this card will give you full access to Drumeo, Pianote, Guitareo, and Singeo.</p>
             @else
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
+            @endif
+        </div>
+    </div>
+    <div class="py-8 sm:py-12 px-4 sm:px-6">
+        <div class="container mx-auto max-w-3xl">
+
+            @if(!empty($thomann))
                 <div class="text-center">
                     <img style="height:30px;width:auto;filter:invert(1);margin-bottom: 15px;" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/thomann-logo.png">
                     <h3 style="font-family: 'Open Sans', sans-serif;"><strong style="font-weight: 900;">CLAIM YOUR DRUMEO 3-MONTH MEMBERSHIP</strong></h3>
@@ -214,13 +232,13 @@
 
             <br>
             <p class="help-message">
-                ** If you enter the email of an account that already has an existing valid subscription, your subscription will be extended based on the time associated with your card.
+                ** If you apply your code to an account that already has an active Membership subscription, your subscription will be extended based on the time associated with your card.
             </p>
             <p class="help-message">
                 ** If you enter a new email address, an account will be created for you and your new password will be emailed to you shortly after claiming your card.
             </p>
             <p class="help-message">
-                ** Your Access Page may look like it’s only for Drumeo, but this pass will give you access to all four of our communities: Drumeo, Pianote, Guitareo, and Singeo!
+                ** Your Access Pass will give you access to all four of our communities: Drumeo, Pianote, Guitareo, and Singeo!
             </p>
         </div>
     </div>

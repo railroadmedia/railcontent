@@ -5,8 +5,8 @@
     <meta name="description" content="To redeem your access pass enter your code below!">
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/lead-gen.css') }}">
     <style>
         [placeholder]:focus::-webkit-input-placeholder {
             color:transparent;
@@ -154,10 +154,25 @@
 
 @section('global-body')
     @include('pianote.sales.partials._nav')
+    <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+        <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
+                <style>
+                    .apply {
+                        background:#F61A30;
+                    }
+
+                    .apply:hover {
+                        background:#f53347;
+                    }
+                </style>
+                <h3 class="leading-tight mb-3"><strong>Redeem your membership to Pianote.</strong></h3>
+                <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Pianote Student through Sweetwater!<br class="hidden sm:inline">
+                    Please enter the code that they provided you in the form below.</h6>
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/pianote-spread.png') }}">
+        </div>
+    </div>
 <div class="py-8 sm:py-12 px-4 sm:px-6">
     <div class="container mx-auto max-w-3xl">
-        <h1 class="text-center mb-3">Claim A Membership Access Code</h1>
-
         @if($newAccount)
             @if(empty($noSwitch))
                 <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
@@ -296,12 +311,14 @@
         @endif
         <br>
         <p class="help-message">
-            ** If you enter the email of an account that already has an existing valid
-            subscription, your subscription will be extended based on the time associated with
-            your card. </p>
+            ** If you apply your code to an account that already has an active Membership subscription, your subscription will be extended based on the time associated with your card.
+        </p>
         <p class="help-message">
             ** If you enter a new email address, a Pianote account will be created for you and
             your new password will be emailed to you shortly after claiming your card. </p>
+        <p class="help-message">
+            ** Your Access Pass will give you access to all four of our communities: Drumeo, Pianote, Guitareo, and Singeo!
+        </p>
     </div>
 </div>
     @include('pianote.sales.partials._footer')
