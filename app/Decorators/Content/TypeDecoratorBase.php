@@ -31,16 +31,20 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
      */
     protected $contentFollowsService;
 
+    protected $instructorDecorator;
+
     public function __construct(
         ContentService $contentService,
         UserContentProgressService $userContentProgressService,
         ContentHierarchyService $contentHierarchyService,
-        ContentFollowsService $contentFollowsService
+        ContentFollowsService $contentFollowsService,
+        InstructorDecorator $instructorDecorator
     ) {
         $this->contentService = $contentService;
         $this->userContentProgressService = $userContentProgressService;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentFollowsService = $contentFollowsService;
+        $this->instructorDecorator = $instructorDecorator;
     }
 
     /**

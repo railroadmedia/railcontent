@@ -76,8 +76,9 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 $contentsOfType[$contentIndex]['parent'] = (isset(self::$parents[$value['id']])) ? self::$parents[$value['id']] : null;
 
                 if(empty($contentsOfType[$contentIndex]['instructors'])){
-//                    \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-//                    $this->instructorDecorator->decorate(new Collection(self::$parents[$value['id']]));
+                    \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+
+                    $this->instructorDecorator->decorate(new Collection(self::$parents));
                     $contentsOfType[$contentIndex]['instructors'] += self::$parents[$value['id']]['instructors'] ?? [];
                 }
             }
