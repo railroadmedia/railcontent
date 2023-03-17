@@ -43,6 +43,11 @@
         const thumbnail = props.lesson.data.find(data => data.key === 'original_thumbnail_url');
         return thumbnail ? thumbnail.value : props.lesson.thumbnail_url;
     })
+    //Song Artist
+    const artist = computed( () => {
+        const artist = props.lesson.fields.find(data => data.key === 'artist');
+        return artist.value;
+    })
     //Description
     const lessonDescription = computed( () => {
         const description = props.lesson.fields.find(field => field.key === 'title');
@@ -145,7 +150,7 @@
     //-----------Lifecycle Methods-----------//
 
     onBeforeMount(() => {
-        console.log(props.lesson)
+        // console.log(props.lesson)
         state.isPinned = props.lesson.pinned;
         state.isPrivate = props.lesson.private;
     });
@@ -200,28 +205,31 @@
             <div class="tw-truncate tw-w-full  tw-px-3 lg:tw-pl-[15px]"
                  :class="[{ 'lg:tw-w-[calc(100%-350px)]' : !cueVersion }]"
             >
-                <!--name-->
-                <p class="tw-truncate">
-                    <template v-if="lesson.type !== 'assignment'">
-                        <span class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
-                                v-for="(instructor, i) in lesson.instructors"
-                                :key="i+'-instructor'">
-                                {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
+                <!--title-->
+                <p class="tw-hidden tw-truncate tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
+                   :class="[{'md:tw-block' : !cueVersion }]"
+                >  
+                    <template v-if="lesson.type !== 'assignment' || lesson.type !== 'song'">
+                        <span v-for="(instructor, i) in lesson.instructors"
+                              :key="i">
+                               {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
                         </span>
                     </template>
-                    <template v-else>
-                        <span class="tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
-                                v-for="(route, i) in lesson.route"
+                    <template v-if="lesson.type === 'song'">
+                        <span>{{ artist }}</span>
+                    </template>
+                    <template v-if="lesson.type === 'assignment'">
+                        <span  v-for="(route, i) in lesson.route"
                                 :key="i">
                                 {{ route }}<span v-if="i != (lesson.route.length - 1)" class="tw-px-1">•</span>
                         </span>
                     </template>
                 </p>
                 <!-- description / Time Stamp-->
-                <div class="tw-flex tw-items-center">
-                    <p class="tw-font-bold tw-truncate">{{ lessonDescription }}</p>
+                <div class="tw-flex tw-items-center tw-w-full">
+                    <p class="tw-font-bold tw-leading-tight tw-whitespace-normal tw-line-clamp-2 md:tw-line-clamp-1">{{ lessonDescription }}</p>
                     <!-- Time Stamp Icon -->
-                    <button :title="`Begins ${ duration_formatted(lesson.start_second ) || '0:00:00'}&nbsp; • &nbsp;Ends ${ duration_formatted( lesson.end_second ) || duration_formatted(lesson.duration) || '0:00:00' }`">
+                    <button  v-if="!cueVersion" :title="`Begins ${ duration_formatted(lesson.start_second ) || '0:00:00'}&nbsp; • &nbsp;Ends ${ duration_formatted( lesson.end_second ) || duration_formatted(lesson.duration) || '0:00:00' }`">
                         <svg v-if="showTimeStamp" 
                             class="tw-ml-2 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]" width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_225_6622)">
@@ -239,26 +247,49 @@
                     </button>
                 </div>
                 <!-- Assignment Instructors -->
-                <p v-if="lesson.type === 'assignment'" class="tw-truncate">   
-                    <span v-if="lesson.parent && lesson.parent.instructors" class="tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
-                            v-for="(instructor, i) in lesson.parent.instructors"
-                            :key="i">
-                            {{ instructor }}<span v-if="i != (lesson.parent.instructors.length - 1)">,</span>
+                <p v-if="lesson.type === 'assignment' && !cueVersion" class="tw-hidden md:tw-flex tw-text-xs md:tw-text-sm tw-truncate tw-capitalize tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mt-1 md:tw-mt-0">   
+                    <span v-for="(instructor, i) in lesson.instructors"
+                        :key="i">
+                        {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
                     </span>
                 </p>   
+                <!-- Cue Version Data -->
+                <p class="tw-w-full tw-flex tw-items-center tw-text-xs tw-capitalize tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mt-1 tw-mr-1"
+                   :class="[{'md:tw-hidden md:tw-mt-0 md:tw-text-sm' : !cueVersion }]"
+                >   
+                    <!-- Instructor / Artist -->
+                    <template v-if="!cueVersion">
+                        <template v-if="lesson.type !== 'songs' ">
+                            <span v-for="(instructor, i) in lesson.instructors"
+                                class="tw-whitespace-nowrap tw-truncate"
+                                :key="i">
+                                {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
+                            </span>
+                        </template>
+                        <template v-if="lesson.type === 'song'">
+                            <span>{{ artist }}</span>
+                        </template>
+                    </template>
+                    <!-- Or Lesson Type -->
+                    <span v-else>{{ lesson.type }}</span>
+                    <!-- Duration -->
+                    <span class="tw-mx-0.5">|</span>
+                    <span>{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>   
+                </p>      
             </div>
 
-            <!-- Lesson Type -->
-            <div v-if="!cueVersion" class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[128px]">
-                <span v-if="lesson.type" class="tw-text-center">
-                    {{ lesson.type }}
-                </span>
-            </div>
-
-            <!-- Lesson Time -->
-            <div v-if="!cueVersion" class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px]">
-                <span>{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>
-            </div>
+            <template v-if="!cueVersion">
+                <!-- Lesson Type -->
+                <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[128px]">
+                    <span v-if="lesson.type" class="tw-text-center">
+                        {{ lesson.type }}
+                    </span>
+                </div>
+                <!-- Lesson Time -->
+                <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px]">
+                    <span>{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>
+                </div>
+            </template>
         </a>
 
         <!-- PLAYLISTS OPTIONS DROPDOWN -->

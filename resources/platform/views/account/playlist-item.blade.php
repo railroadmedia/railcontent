@@ -29,6 +29,8 @@
     {{-- Session Token for Railtracker progress tracking --}}
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
 
+    {{-- <p class="tw-text-white">{{ json_encode($playlist) }}</p> --}}
+
     {{-- WRAPPER VUE --}}
     <playlist-playback-wrapper 
         lesson-type="{{ $lessonType }}" 
@@ -64,6 +66,8 @@
         :lock-unowned="{{ !empty($lockUnowned) }}" 
         playlist-name="{{ $playlist['name'] }}"
         playlist-duration="{{ $playlist['duration'] }}"
+        playlist-url="{{ $playlist['url'] }}"
+        playlist-item-id="{{ $playlist['user_playlist_item_id'] }}"
         user-name="{{ user()->display_name }}" 
         user-avatar="{{ user()->profile_picture_url }}"
         user-xp="{{ user()->totalXP() }}" 
