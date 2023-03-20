@@ -160,7 +160,15 @@
         <div class="max-w-2xl lg:max-w-5xl mx-auto text-center text-white">
             <img class="h-12 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png" alt="pianote logo">
             <h3 class="font-extrabold">Join Pianote today and get 12 free bonuses!</h3>
-            <h5 class="uppercase my-8 text-yellow">Only available until October 8, 2022</h5>
+            <h5 class="uppercase my-8 text-yellow">Only
+                    <span x-cloak x-data="timer()" x-init="countdown()">
+                         <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0 && hour !== '00'"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                     </span>
+                left!</h5>
             <div class="max-w-md mx-auto mb-10">
                 <img
                     src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/pianote-annual-card.jpg"
@@ -344,4 +352,9 @@
 
         })
     </script>
+
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-04-01 00:00:00',
+        'promoVersion' => false
+    ])
 @stop
