@@ -1,5 +1,5 @@
 @php
-    //dd($playlistItem);
+    //dd($relatedPlaylists);
     $brandParams = [
         'drumeo' => '&show_chords=0',
         'singeo' => '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
@@ -55,8 +55,9 @@
         playlist-url="{{ $playlist['url'] }}"
         playlist-item-id="{{ $playlist['user_playlist_item_id'] }}"
         :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
-        :related-lessons="{{ $relatedLessons }}"
-        soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}" 
+        :related-lessons="{{ $relatedPlaylists }}"
+        :related-lesson="{{ $relatedLesson }}"
+        soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}"
         :song-ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
         thumbnail-url="{{ $lessonContent->fetch('data.thumbnail_url') }}"
         total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
