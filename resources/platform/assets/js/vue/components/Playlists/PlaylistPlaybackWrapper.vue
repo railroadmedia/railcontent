@@ -116,6 +116,9 @@
         playlistItemId: {
             type: String
         },
+        playlistItemPosition: {
+            type: String
+        },
         lockUnowned: {
             type: Boolean,
         },
@@ -235,6 +238,7 @@
                         :duration="playlistDuration"
                         :playlist-url="playlistUrl"
                         :playlist-item-id="playlistItemId"
+                        :playlist-item-position="playlistItemPosition"
                     />
                 </div>
             </div>

@@ -155,12 +155,13 @@ class UserPlaylistsController extends BaseController
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
         throw_if((empty($playlist) || ($playlist == -1)), new NotFoundHttpException());
 
-        $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
+//        $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AddedToPrimaryPlaylistDecorator::$skip = true;
-        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
-
-        $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20);
+//        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+//        Decorator::$typeDecoratorsEnabled = false;
+        $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id']);
+        $playlistItem = $playlistItems->where('user_playlist_item_id','=',$playlistItemId)->first();
 
         foreach ($playlistItems as $item) {
             $item['url'] = url()->route('platform.user.playlist-item', [
@@ -170,7 +171,8 @@ class UserPlaylistsController extends BaseController
             $item['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
         }
 
-        $content = $this->contentService->getById($playlistItem['content_id']);
+        $content = $this->contentService->getById($playlistItem['id']);
+        $content['user_playlist_item_position'] = $playlistItem['user_playlist_item_position'];
 
         throw_if(empty($playlistItem), new NotFoundHttpException());
 
@@ -234,6 +236,7 @@ class UserPlaylistsController extends BaseController
             "relatedPlaylists" => $relatedPlaylists,
             "playlistItems" => $playlistLessons,
             "relatedLesson" => $relatedLesson,
+           // 'positionInPlaylist' => $playlistItems->where('user_playlist_item_id', '=',$playlistItemId),
             //            'currentUser' => user(),
             "brand" => brand(),
         ]);

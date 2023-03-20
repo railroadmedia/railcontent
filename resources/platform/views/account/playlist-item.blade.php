@@ -54,6 +54,7 @@
         playlist-duration="{{ $playlist['duration'] }}"
         playlist-url="{{ $playlist['url'] }}"
         playlist-item-id="{{ $playlist['user_playlist_item_id'] }}"
+        playlist-item-position="{{ $playlistItem['user_playlist_item_position'] }}"
         :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
         :related-lessons="{{ $relatedPlaylists }}"
         :related-lesson="{{ $relatedLesson }}"

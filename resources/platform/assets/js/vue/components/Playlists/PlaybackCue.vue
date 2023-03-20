@@ -32,6 +32,10 @@
             type: String,
             default: ""
         },
+        playlistItemPosition: {
+            type: String,
+            default: "1"
+        },
         lessons: {
             type: Array,
             default: []
@@ -52,8 +56,8 @@
         //TODO: may have to replace this with a request from BE later
         console.log('item id ', props.playlistItemId)
         console.log('lessons', props.lessons.data)
-        let item = props.lessons.data.find((item) => { item.user_playlist_item_id === props.playlistItemId })
-        return props.lessons.data.indexOf(item)
+       // let item = props.lessons.data.find((item) => { item.user_playlist_item_id === props.playlistItemId })
+        return props.playlistItemPosition
     })
 
     //-----------Refs-----------//
