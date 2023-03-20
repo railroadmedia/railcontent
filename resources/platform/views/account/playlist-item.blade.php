@@ -46,15 +46,15 @@
             :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
             :song-ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
             :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
-            :captions="{{ $lessonContent->fetch('fields.video.data.captions', $lessonContent['captions'][0] ?? null) }}"
+            {{-- :captions="{{ $lessonContent->fetch('fields.video.data.captions', $lessonContent['captions'][0] ?? null) }}" --}}
             cast-title="{{ $lessonContent->fetch('fields.title') }}"
             thumbnail-url="{{ $lessonContent->fetch('data.thumbnail_url') }}"
             description="{{ $lessonContent->fetch('data.description') }}"
             :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
             parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
             :video-resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
-            :playlist-items="{{ $playlistItems }}" :related-lessons="{{ $relatedLessons }}"
-            :lock-unowned="{{ !empty($lockUnowned) }}" playlist-name="{{ $playlist['name'] }}"
+            :playlist-items="{{ $playlistItems }}" :related-lesson="{{ $relatedLesson }}"
+            :lock-unowned="{{ true }}" playlist-name="{{ $playlist['name'] }}"
             playlist-duration="{{ $playlist['duration'] }}" user-name="{{ user()->display_name }}"
             user-avatar="{{ user()->profile_picture_url }}" user-xp="{{ user()->totalXP() }}"
             user-access-level="{{ user()->access_level }}">

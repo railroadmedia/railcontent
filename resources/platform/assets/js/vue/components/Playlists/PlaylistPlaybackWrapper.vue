@@ -151,7 +151,7 @@
             type: Boolean,
             default: false
         },
-        relatedLessons: {
+        relatedLesson: {
             type: Object,
             default: {}
         },
@@ -170,6 +170,10 @@
         userAccessLevel: {
             type: [String, Number],
             default: ''
+        },
+        captions: {
+            type: Array,
+            default: null,
         }
     });
     onBeforeMount(() => {
@@ -272,6 +276,7 @@
                         :duration="playlistDuration"
                         :playlist-url="playlistUrl"
                         :playlist-item-id="playlistItemId"
+                        :infinite-scroll="true"
                     />
                 </div>
             </div>
@@ -284,9 +289,9 @@
                         </h6>
                     </div>
 
-<!--                    <ContentCatalogue v-if="relatedLessons.data && relatedLessons.data.length" catalogue-type="grid" :theme-color="brand" :use-theme-color="true" :brand="brand"-->
-<!--                        :pre-loaded-content="relatedLessons" :lock-unowned="lockUnowned" :display-inline="true"-->
-<!--                        :user-id="userId"></ContentCatalogue>-->
+                    <ContentCatalogue v-if="relatedLesson.data && relatedLesson.data.length" catalogue-type="grid" :theme-color="brand" :use-theme-color="true" :brand="brand"
+                       :pre-loaded-content="relatedLesson" :lock-unowned="lockUnowned" :display-inline="true"
+                        :user-id="userId"></ContentCatalogue>
                 </div>
             </div>
         </div>
