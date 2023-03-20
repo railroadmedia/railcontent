@@ -54,6 +54,7 @@
             parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
             :video-resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
             :playlist-items="{{ $playlistItems }}" :related-lessons="{{ $relatedLessons }}"
+            :playlist-item-position="{{$positionInPlaylist}}"
             :lock-unowned="{{ !empty($lockUnowned) }}" playlist-name="{{ $playlist['name'] }}"
             playlist-duration="{{ $playlist['duration'] }}" user-name="{{ user()->display_name }}"
             user-avatar="{{ user()->profile_picture_url }}" user-xp="{{ user()->totalXP() }}"
