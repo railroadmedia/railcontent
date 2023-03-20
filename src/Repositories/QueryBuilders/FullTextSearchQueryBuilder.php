@@ -3,7 +3,11 @@
 namespace Railroad\Railcontent\Repositories\QueryBuilders;
 
 
+use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Facades\DB;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 
 class FullTextSearchQueryBuilder extends QueryBuilder
@@ -62,6 +66,83 @@ class FullTextSearchQueryBuilder extends QueryBuilder
         if ($column) {
             $this->orderByRaw($column .' '. $direction);
         }
+
+        return $this;
+    }
+
+
+    /**
+     * @return $this
+     */
+    public function restrictByPermissions()
+    {
+        if (ContentRepository::$bypassPermissions === true) {
+            return $this;
+        }
+
+        // A member for any brand should get access to all brands membership content.
+        // If the contents' permission id is any member one and the users permission id is any member one, show all with
+        // the membership content.
+        //
+        // 1 - Drumeo Edge
+        // 77 - Pianote Membership
+        // 73 - Singeo Membership
+        // 52 - Guitareo Membership
+
+        $membershipPermissionIds = [1, 52, 73, 77,];
+
+
+        $this->leftJoin(ConfigService::$tableContentPermissions.' as id_content_permissions',
+            function (JoinClause $join) {
+                $join->on(
+                    'id_content_permissions'.'.content_id',
+                    ConfigService::$tableSearchIndexes.'.content_id'
+                );
+            })
+            ->where(function (Builder $builder) use ($membershipPermissionIds) {
+                return $builder->where(function (Builder $builder) {
+                    return $builder->whereNull(
+                        'id_content_permissions'.'.permission_id'
+                    );
+                })
+                    ->orWhereExists(function (Builder $builder) use ($membershipPermissionIds) {
+                        return $builder->select('id')
+                            ->from(ConfigService::$tableUserPermissions)
+                            ->where('user_id', auth()->id() ?? null)
+                            ->where(function (Builder $builder) use ($membershipPermissionIds) {
+                                return $builder
+                                    ->whereRaw(
+                                        'permission_id = id_content_permissions.permission_id'
+                                    )
+                                    ->orWhere(function (Builder $builder) use ($membershipPermissionIds) {
+                                        return $builder
+                                            ->whereIn('permission_id', $membershipPermissionIds)
+                                            ->whereIn(
+                                                'id_content_permissions.permission_id',
+                                                $membershipPermissionIds
+                                            );
+                                    });
+                            })
+                            ->where(function (Builder $builder) {
+                                return $builder->where(
+                                    'expiration_date',
+                                    '>=',
+                                    Carbon::now()
+                                        ->toDateTimeString()
+                                )
+                                    ->orWhereNull('expiration_date');
+                            })
+                            ->where(function (Builder $builder) {
+                                return $builder->where(
+                                    'start_date',
+                                    '<=',
+                                    Carbon::now()
+                                        ->toDateTimeString()
+                                )
+                                    ->orWhereNull('start_date');
+                            });
+                    });
+            });
 
         return $this;
     }
