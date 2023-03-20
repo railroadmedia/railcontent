@@ -40,39 +40,26 @@ $cardImage = $cardImages[brand()];
         </div>
     </div>
     @endif
-    <section class="tw-text-center tw-text-[#00101D] dark:tw-text-white tw-transition-colors tw-py-6 md:tw-py-10 lg:tw-pt-12 lg:tw-pb-16">
-        <div class="tw-max-w-7xl tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
-            <h1 class="lg:tw-mb-14 tw-text-2xl sm:tw-text-3xl xl:tw-text-5xl">
-                <strong>{{ $titleLineOne }}<br> {{ $titleLineTwo }}</strong>
-            </h1>
-            <div class="tw-flex tw-flex-col 2xl:tw-flex-row tw-items-center tw-px-4 {{ $containerClass }}">
-
-                <div class="tw-flex-shrink-0 tw-w-full tw-max-w-xs sm:tw-max-w-md md:tw-max-w-lg lg:tw-max-w-xl tw-my-5 md:tw-my-6 lg:tw-my-0">
-                    <div class="tw-flex tw-w-full tw-relative">
-                        <div class="tw-inline-flex tw-w-full ">
-                            <img class="tw-inline-block tw-w-full tw-transition-opacity tw-opacity-0"
-                                src="{{ $cardImage }}"
-                                loading="lazy"
-                                onload="this.classList.remove('tw-opacity-0')"
-                            >
-                        </div>
-                        <div class="tw-absolute tw-bottom-0 tw-w-full tw-p-4 tw-text-white">
-                            <p class="tw-leading-none">PASSES REDEEMED</p>
-                            <h1 class="tw-leading-none">
-                                <strong>{{ $userReferralsPerformed }}/{{ $referralsPerUser }}</strong>
-                            </h1>
-                        </div>
-                    </div>
-                </div>
-                @if ($canRefer)
+    <section class="tw-text-center tw-text-[#00101D] tw-transition-colors tw-relative {{-- tw-py-6 md:tw-py-10 lg:tw-pt-12 lg:tw-pb-16 --}}">
+        <div class="tw-bg-[#D8EBFF] tw-py-48"></div>
+        <div class="tw-flex tw-justify-center tw-px-4 sm:tw-px-0">
+            <div class="tw-max-w-4xl tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-rounded-xl tw-bg-white -tw-mt-80 tw-mb-16 tw-py-20" style="box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);">
+                <h3 class="tw-font-normal tw-mb-6">
+                    Refer your friends & family for a chance to <br class="tw-hidden sm:tw-inline"><strong class="tw-font-extrabold">win a $200 Amazon Gift Card.</strong>
+                </h3>
+                <div class="tw-flex tw-flex-col 2xl:tw-flex-row tw-items-center {{ $containerClass }}">
                     <div
-                        class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-lg 2xl:tw-max-w-none tw-mx-auto">
-                        <h5 class="tw-leading-tight tw-py-4 tw-text-lg">Give a friend unlimited access to {{ ucfirst($brand) }}, free for 30 days
-                        </h5>
+                        class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-lg md:tw-max-w-2xl tw-mx-auto">
+                        <p class="tw-mb-6">
+                            Give a friend unlimited access to Pianote, free for 30 days.<br><br>
+                            Every new Musora referral you make from <strong>April 6 to May 8, 2023,</strong> automatically enters you for a chance to win 1 of 4 $200 Amazon gift cards.<br><br>
+                            <i class="tw-underline">See Contest Details - Terms & Conditions*</i>
+                        </p>
+
                         <form id="invite-email-form" name="invite-email-form" method="post"
                             action="{{ $emailInviteUrl }}">
-                            <label class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6"
-                                for="email"><strong>Invite via email</strong></label>
+                            <label class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-2 tw-uppercase tw-text-sm tw-tracking-wide"
+                                for="email"><b>Invite via email</b></label>
                             <div
                                 class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
                                 <input type="hidden" name="_token" class="sort-input"
@@ -80,37 +67,65 @@ $cardImage = $cardImages[brand()];
                                 <input type="hidden" name="brand" class="sort-input"
                                        value="{{ $brand }}" />
                                 <input
-                                    class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
+                                    class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-2 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
                                     type="email" id="email" name="email" placeholder="Email address..." value="">
                                 <input name="button" type="submit" id="button"
-                                    class=" tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
+                                    class=" tw-btn-primary tw-bg-[#030814] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                     value="Send Guest Pass" />
                             </div>
                         </form>
 
                         <form id="invite-link-form" name="invite-link-form" action="#">
-                            <label class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6"
-                                for="email"><strong>Share your link</strong></label>
+                            <label class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-2 tw-uppercase tw-text-sm tw-tracking-wide"
+                                for="email"><b>Share your link</b></label>
                             <div
                                 class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
                                 <input
-                                    class="tw-text-black tw-inline-block tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
+                                    class="tw-text-black tw-inline-block tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-2 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
                                     type="text" id="referral-link" readonly name="referral-link" placeholder="link"
                                     value="{{ $userReferralLink }}">
                                 <input onclick="copyLink()" name="button" id="button" readonly
-                                    class="tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
+                                    class="tw-bg-[#030814] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                     value="Copy Link" />
                             </div>
                         </form>
                     </div>
-                @endif
+                </div>
             </div>
         </div>
     </section>
-    <section class="tw-text-center dark:tw-text-white tw-py-5 md:tw-py-8 dark:tw-bg-[#081f35] tw-bg-[#E6E7E9]">
-        <div class="tw-max-w-6xl tw-mx-auto tw-px-4 md:tw-px-8">
-            <h5 class="tw-leading-normal tw-opacity-70 tw-text-lg">{{ $footerLineOne }}<br class="tw-hidden lg:tw-inline">
-                {{ $footerLineTwo }}</h5>
+    <section class="tw-bg-[#030814] tw-py-12 lg:tw-py-20">
+        <div class="tw-max-w-5xl tw-mx-auto tw-flex tw-px-4 xl:tw-px-0">
+            <div class="tw-order-1">
+
+            </div>
+            <div class="tw-text-white tw-max-w-md">
+                <p class="tw-uppercase tw-text-sm tw-mb-2">Got more musical friends? </p>
+                <h3 class="tw-leading-tight">
+                    <strong>You can refer them to @if($brand !== 'drumeo') Drumeo, @endif  @if($brand !== 'pianote') Pianote, @endif @if($brand === 'singeo') and @endif @if($brand !== 'guitareo') Guitareo, @endif @if($brand !== 'singeo') and Singeo, @endif too.</strong>
+                </h3>
+                <div class="tw-flex tw-items-center tw-my-5">
+                    <i class="fa-light fa-calendar-days tw-text-{{$brand}} tw-text-2xl tw-mr-4"></i> <span>Musora Referral Contest&nbsp;-&nbsp;<b>April 6 to May 8, 2023</b></span>
+                </div>
+                <div class="tw-flex tw-items-center tw-my-5">
+                    <i class="fa-regular fa-gift tw-text-{{$brand}} tw-text-2xl tw-mr-4"></i> <span>Refer & Enter to&nbsp;<b>Win a $200 Gift Card to Amazon.</b></span>
+                </div>
+                <i class="tw-text-sm">
+                    Guest passes are for new subscribers only and cannot be redeemed for renewals, extensions, or gift subscriptions.
+                </i>
+            </div>
+        </div>
+    </section>
+    <section class="tw-py-12 lg:tw-py-20">
+        <div class="tw-max-w-6xl tw-mx-auto tw-px-4 2xl:tw-px-0 dark:tw-text-white">
+            <h4 class="tw-mb-4"><strong>Terms and Conditions</strong></h4>
+            <p>
+                Lorem ipsum dolor sit amet consectetur. Ultricies pretium enim vitae consectetur. Nisl tristique mi sed molestie sed. Eu tellus sed tristique cras fames orci in duis turpis. Cras mi eget cursus elementum aliquet. Ultrices tellus morbi lorem egestas non placerat facilisis nisi. Ut nisi bibendum non odio arcu nibh pellentesque nec. <br><br>
+                Mi morbi mollis fusce libero. Donec faucibus faucibus auctor ut nam. Vitae amet viverra et integer faucibus faucibus. Imperdiet sit placerat tempor quis volutpat. Tempor nullam libero quis dui interdum nunc suspendisse. Bibendum cursus duis facilisi elementum scelerisque neque tortor nec. Vitae morbi tortor eu risus.<br><br>
+                Nunc amet sit nisi consectetur gravida imperdiet turpis eget dui. Faucibus amet amet lacus ut. Lectus enim erat hendrerit sit nulla tortor. Massa mauris duis potenti ullamcorper amet feugiat. Maecenas lacus dolor elit vel diam at. Mauris in urna dolor netus viverra odio rhoncus condimentum turpis. Vitae est ultrices euismod pulvinar molestie tempus sollicitudin eu. Felis consectetur id nascetur enim sit integer est odio semper. Purus vitae lobortis a bibendum donec vestibulum tellus. Condimentum dictumst nibh consectetur enim auctor dictumst sit lacus et.<br><br>
+                Justo massa est amet sed. Leo eget fringilla pellentesque et. Ipsum maecenas adipiscing aliquet risus aliquam viverra quam. Sed ante ornare leo tristique ultricies nunc libero. At leo lectus amet curabitur diam nec at et quisque.<br><br>
+                Pellentesque feugiat dignissim diam scelerisque. Id sit ultrices semper mi eu. Commodo risus nisl lacus tristique enim erat imperdiet. Viverra massa nunc id sollicitudin pretium et pulvinar ullamcorper tincidunt. Mauris eu odio est lobortis ultricies. Fringilla venenatis aenean ultricies cursus. In morbi ac mi sed orci est. Ut nunc enim risus nunc ut volutpat at. Quis pharetra aliquam non nulla bibendum platea tempus amet. Ultrices turpis sed cursus cras maecenas orci nunc condimentum. Elementum vulputate elit tristique montes arcu dictumst nec faucibus. Posuere suspendisse eleifend porttitor sagittis mi. In in orci justo amet nisl elementum ut netus. Lacus vitae arcu dictum augue ultrices tortor penatibus orci lectus. Faucibus ut sit lobortis id phasellus id.
+            </p>
         </div>
     </section>
 </div>
