@@ -147,6 +147,9 @@
             type: String,
             default: ''
         },
+        playlistItemPosition: {
+            type: String
+        },
         lockUnowned: {
             type: Boolean,
             default: false
@@ -277,6 +280,7 @@
                         :playlist-url="playlistUrl"
                         :playlist-item-id="playlistItemId"
                         :infinite-scroll="true"
+                        :playlist-item-position="playlistItemPosition"
                     />
                 </div>
             </div>

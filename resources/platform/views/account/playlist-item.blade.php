@@ -55,6 +55,7 @@
             :video-resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
             :playlist-items="{{ $playlistItems }}" :related-lesson="{{ $relatedLesson }}"
             :lock-unowned="{{ true }}" playlist-name="{{ $playlist['name'] }}"
+            :playlist-item-position="{{$positionInPlaylist}}"
             playlist-duration="{{ $playlist['duration'] }}" user-name="{{ user()->display_name }}"
             user-avatar="{{ user()->profile_picture_url }}" user-xp="{{ user()->totalXP() }}"
             user-access-level="{{ user()->access_level }}">

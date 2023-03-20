@@ -175,4 +175,5 @@ onBeforeMount(() => {
                 </div>
             </div>
         </div>
-</section></template>
+    </section>
+</template>
