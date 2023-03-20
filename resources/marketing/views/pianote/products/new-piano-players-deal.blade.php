@@ -1,14 +1,14 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Get unlimited drum lessons for a year!</title>
-    <meta property="og:title" content="Get unlimited drum lessons for a year!">
+    <title>GET UNLIMITED PIANO LESSONS FOR A YEAR + 12 FREE BONUSES</title>
+    <meta property="og:title" content="GET UNLIMITED PIANO LESSONS FOR A YEAR + 12 FREE BONUSES">
 
-    <meta name="description" content="We put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.">
-    <meta property="og:description" content="We put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.">
+    <meta name="description" content="We’ve put together an exclusive offer for New Piano Players Start Here students.">
+    <meta property="og:description" content="We’ve put together an exclusive offer for New Piano Players Start Here students.">
 
-    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-    <meta property="og:image" content="{{ drumeo_cdn('sales/2023/share-image-drumeo.jpg') }}" style="display: none;">
+    <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
 

@@ -13,14 +13,23 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
 - run `r musora-web-platform composer install` -- NOTE: if asked for nova package credentials, 
   input 'caleb@drumeo.com' for the username and for the password use our Nova license key which is inside the 1pass note: 
   "Laravel Nova v4.0 License Key". When it asks if you want to store a composer auth file, enter Y
-- run these two sets of commands, each conveniently available as a one liner
+- run these two sets of commands
     - set up databases
         ```
-        r musora db8 local fromprod && r drumeo db8 local fromprod && r pianote db8 local fromprod && r guitareo db8 local fromprod && r singeo db8 local fromprod && r musora-web-platform artisan migrate
+        r musora db8 local fromprod && 
+        r drumeo db8 local fromprod && 
+        r pianote db8 local fromprod && 
+        r guitareo db8 local fromprod && 
+        r singeo db8 local fromprod && 
+        r musora-web-platform artisan migrate
         ```
     - compile frontend assets
         ```
-        cd /app/musora-web-platform && nvm use 16 && yarn && yarn platform-production && yarn marketing-production && yarn pp && echo "gotem"
+        cd /app/musora-web-platform && 
+        nvm use 16 && 
+        yarn &&
+        yarn pp && 
+        yarn mp
         ```
 - [https://devplatform.musora.com:8443](https://devplatform.musora.com:8443) should now load and the app and automated testing should work
 
