@@ -1,8 +1,8 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>GET UNLIMITED PIANO LESSONS FOR A YEAR + 12 FREE BONUSES</title>
-    <meta property="og:title" content="GET UNLIMITED PIANO LESSONS FOR A YEAR + 12 FREE BONUSES">
+    <title>Keep the momentum going!</title>
+    <meta property="og:title" content="Keep the momentum going!">
 
     <meta name="description" content="We’ve put together an exclusive offer for New Piano Players Start Here students.">
     <meta property="og:description" content="We’ve put together an exclusive offer for New Piano Players Start Here students.">
