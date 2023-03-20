@@ -121,7 +121,7 @@
                 </li>
                 <li class="flex items-start">
                     <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-pianote"></i></span>
-                    The Chords & Scales Book to help remember everything you’ve learned
+                    Professional over-ear headphones to help you sound better
                 </li>
                 <li class="flex items-start">
                     <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-pianote"></i></span>
@@ -137,10 +137,14 @@
                 </li>
             </ul>
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
-                We’ll also discount your first year by $40 as a special thank you, and you’ll have 90 days to try it risk-free.<br><br>
-
-                But this offer is only available until the end of March.<br><br>
-
+                Plus…
+                <br><br>
+                A special, LIVE Masterclass with Lisa where you’ll learn how to take all the skills you’ve learned in New PIano Players Start Here and apply it to other areas of music.
+                <br><br>
+                We’ll also discount your first year by $43 as a special thank you, and you’ll have 90 days to try it risk-free
+                <br><br>
+                But this offer is only available until the end of March.
+                <br><br>
                 So click below and keep your progress going!<br><br><br>
             </p>
             <div class="px-3 md:px-0">
@@ -170,17 +174,17 @@
                 @php
                     $bonuses = [
                         [
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/headphones-cart.jpg',
+                            'title' => 'Pianote Headphones',
+                            'description' => 'Hear your piano the way it was meant to sound.',
+                            'price' => floatval($productPrices['pianote-headphones']->price),
+                            'shipping' => true,
+                        ],
+                        [
                             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Pianote_Planner_Card.jpg',
                             'title' => 'Practice Planner',
                             'description' => 'Always know exactly what to practice.',
                             'price' => floatval($productPrices['pianote-practice-planner']->price),
-                            'shipping' => true,
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
-                            'title' => 'Chords & <br>Scales Book',
-                            'description' => 'Your encyclopedia of piano chords & scales.',
-                            'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
                             'shipping' => true,
                         ],
                         [
@@ -300,7 +304,7 @@
             <h3 class="mb-8"><strong>ONLY <s class="opacity-60">${{ 240 }}</s> $197</strong></h3>
             <div class="w-2/3 mx-auto">
                 <a
-                    href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true"
+                    href="/ecommerce/add-to-cart?locked=true&redirect=/order&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,pianote-headphones:1,pianote-practice-planner:1,poster-chords:1,poster-scales:1,the-power-of-chords:1,classical-piano:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1,piano-riffs-and-fills:1,piano-technique-made-easy:1,destupefy-your-left-hand:1,worship-piano:1,faster-fingers:1"
                     class="join pianote w-full">Claim your offer</a>
             </div>
             <p class="text-center my-8" style="color:#ABB5C2;">
@@ -322,7 +326,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => 'TODO',
+        'video' => '809895671',
         'vimeo' => true,
     ])
 
