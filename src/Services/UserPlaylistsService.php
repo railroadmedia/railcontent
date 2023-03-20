@@ -257,10 +257,26 @@ class UserPlaylistsService
                                             ['assignment']);
 
         $assignments = $this->contentService->countLessonsAndAssignments($contentId);
+        $itemsThatShouldBeAdd = $assignments['lessons_count'] ?? 0;
+        if ($importInstrumentlessSoundsliceAssignment) {
+            $itemsThatShouldBeAdd++;
+        }
+        if ($importFullSoundsliceAssignment) {
+            $itemsThatShouldBeAdd++;
+        }
+        if ($importAllAssignments) {
+            $itemsThatShouldBeAdd = $itemsThatShouldBeAdd +$assignments['soundslice_assignments_count'];
+        }
 
         $results =[];
 
         foreach ($userPlaylistIds as $userPlaylistId) {
+            $playlistItems = $this->countUserPlaylistContents($userPlaylistId);
+            if($playlistItems + $itemsThatShouldBeAdd > config('railcontent.playlist_items_limit', 300)){
+                $playlist = $this->getPlaylist($userPlaylistId);
+                $limitExcedeed[] = $playlist;
+                continue;
+            }
             if ($content && (in_array($content['type'], $singularContentTypes))) {
                 if ($importFullSoundsliceAssignment) {
                     $assignmentInput = [
@@ -347,6 +363,10 @@ class UserPlaylistsService
 
         ContentRepository::$availableContentStatues = $oldStatuses;
         ContentRepository::$pullFutureContent = $oldFutureContent;
+
+        if(isset($limitExcedeed)){
+            $results['limit_excedeed'] = $limitExcedeed;
+        }
 
         return $results;
     }

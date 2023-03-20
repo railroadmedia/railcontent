@@ -374,7 +374,7 @@ class MyListJsonController extends Controller
         $playlist = $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
         throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
 
-        $this->userPlaylistsService->addItemToPlaylist(
+        $added = $this->userPlaylistsService->addItemToPlaylist(
             $request->get('playlist_id'),
             $request->get('content_id'),
             $request->get('position'),
@@ -386,7 +386,7 @@ class MyListJsonController extends Controller
             $request->get('import_instrumentless_soundslice_assignment', false)
         );
 
-        return response()->json(['success']);
+        return response()->json($added);
     }
 
     /**
