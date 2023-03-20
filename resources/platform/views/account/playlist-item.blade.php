@@ -26,70 +26,53 @@
 @endsection
 
 @section('content')
-    {{-- Session Token for Railtracker progress tracking --}}
-    <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
-
-    {{-- <p class="tw-text-white">{{ json_encode($playlist) }}</p> --}}
-
-    {{-- WRAPPER VUE --}}
-    <playlist-playback-wrapper 
-        additional-soundslice-params="{{ $soundsliceAdditionalParams }}"
-        brand="{{ $brand }}" 
-        cast-title="{{ $lessonContent->fetch('fields.title') }}"
-        content-id="{{ $lessonContent->fetch('id') }}"
-        description="{{ $lessonContent->fetch('data.description') }}"
-        lesson-type="{{ $lessonType }}" 
-        {{-- --}}
-           
-        {{-- --}}
-        current-second="{{ $playlistItem['start_second'] ?? 0 }}"
-        hls-manifest-url="{{ $lessonContent['hlsManifestUrl'] ?? '' }}"
-        like-count="{{ $lessonContent['like_count'] ?? 0 }}"
-        :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
-        :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
-        progress-state="{{ $lessonContent->fetch('progress_state') }}"
-        parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
-        :playlist-items="{{ $playlistItems }}" 
-        playlist-name="{{ $playlist['name'] }}"
-        playlist-duration="{{ $playlist['duration'] }}"
-        playlist-url="{{ $playlist['url'] }}"
-        playlist-item-id="{{ $playlist['user_playlist_item_id'] }}"
-        playlist-item-position="{{ $playlistItem['user_playlist_item_position'] }}"
-        :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
-        :related-lessons="{{ $relatedPlaylists }}"
-        :related-lesson="{{ $relatedLesson }}"
-        soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}"
-        :song-ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
-        thumbnail-url="{{ $lessonContent->fetch('data.thumbnail_url') }}"
-        total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
-        user-name="{{ user()->display_name }}" 
-        user-avatar="{{ user()->profile_picture_url }}"
-        user-xp="{{ user()->totalXP() }}" 
-        user-access-level="{{ user()->access_level }}"
-        user-id="{{ user()->id }}"
-        :useLegacyVideoPlayer="{{ user()->use_legacy_video_player ?? false }}"
-        :video-resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
-        vimeo-video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
-        video-poster-image-url="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
-        :video-media-sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
-        :video-chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
-        video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
-        youtube-video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"
-    >
-        <template>
-            @include('partials.bladesora.members.content.lesson-video._buttons', [
-                'themeColor' => '{{ $brand }}',
-                'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
-                'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
-                'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
-                'isCompleted' => $lessonContent->fetch('completed'),
-                'contentId' => $lessonContent->fetch('id'),
-                'xpAmount' => $lessonContent->fetch('fields.xp'),
-                'nextLabel' => 'Next',
-                'prevLabel' => 'Previous',
-            ])
-        </template>
-    </playlist-playback-wrapper>
+    <div>
+        <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
+        <playlist-playback-wrapper lesson-type="{{ $lessonType }}" brand="{{ $brand }}" user-id="{{ user()->id }}"
+            :additional-soundslice-params="'{{ $soundsliceAdditionalParams }}'"
+            soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}" :content-id="{{ $lessonContent->fetch('id') }}"
+            youtube-video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"
+            vimeo-video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
+            current-second="{{ $playlistItem['start_second'] ?? 0 }}"
+            total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
+            video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
+            progress-state="{{ $lessonContent->fetch('progress_state') }}"
+            :use-legacy-video-player="{{ boolval(user()->use_legacy_video_player) ?? false }}"
+            video-poster-image-url="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
+            :video-media-sources="{{ json_encode($lessonContent['video_playback_endpoints'] ?? []) }}"
+            hls-manifest-url="{{ $lessonContent['hlsManifestUrl'] ?? '' }}"
+            :video-chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
+            like-count="{{ $lessonContent['like_count'] ?? 0 }}"
+            :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
+            :song-ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
+            :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
+            :captions="{{ $lessonContent->fetch('fields.video.data.captions', $lessonContent['captions'][0] ?? null) }}"
+            cast-title="{{ $lessonContent->fetch('fields.title') }}"
+            thumbnail-url="{{ $lessonContent->fetch('data.thumbnail_url') }}"
+            description="{{ $lessonContent->fetch('data.description') }}"
+            :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
+            parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
+            :video-resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
+            :playlist-items="{{ $playlistItems }}" :related-lessons="{{ $relatedLessons }}"
+            :lock-unowned="{{ !empty($lockUnowned) }}" playlist-name="{{ $playlist['name'] }}"
+            playlist-duration="{{ $playlist['duration'] }}" user-name="{{ user()->display_name }}"
+            user-avatar="{{ user()->profile_picture_url }}" user-xp="{{ user()->totalXP() }}"
+            user-access-level="{{ user()->access_level }}">
+            <template>
+                @include('partials.bladesora.members.content.lesson-video._buttons', [
+                    'themeColor' => '{{ $brand }}',
+                    'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
+                    'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
+                    'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
+                    'isCompleted' => $lessonContent->fetch('completed'),
+                    'contentId' => $lessonContent->fetch('id'),
+                    'xpAmount' => $lessonContent->fetch('fields.xp'),
+                    'nextLabel' => 'Next',
+                    'prevLabel' => 'Previous',
+                ])
+            </template>
+        </playlist-playback-wrapper>
+    </div>
 @endsection
 
 @section('layout-scripts')

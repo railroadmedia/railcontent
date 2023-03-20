@@ -205,7 +205,7 @@ export default {
     mixins: [ThemeClasses, CommentMixin],
     props: {
         contentId: {
-            type: Number,
+            type: [Number, String],
             default: () => '',
         },
         collapsable: {

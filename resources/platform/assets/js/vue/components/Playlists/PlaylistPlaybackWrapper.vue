@@ -21,39 +21,51 @@
     const props = defineProps({
         lessonType: {
             type: String,
+            default: ''
         },
         brand: {
             type: String,
+            default: ''
         },
         userId: {
             type: [String, Number],
+            default: ''
         },
         additionalSoundsliceParams: {
             type: String,
+            default: ''
         },
         soundsliceSlug: {
             type: String,
+            default: ''
         },
         contentId: {
             type: [Number, String],
+            default: ''
         },
         youtubeVideoId: {
-            type: [Number, String]
+            type: [Number, String],
+            default: ''
         },
         vimeoVideoId: {
-            type: [Number, String]
+            type: [Number, String],
+            default: ''
         },
         currentSecond: {
-            type: [Number, String]
+            type: [Number, String],
+            default: ''
         },
         totalDuration: {
-            type: [Number, String]
+            type: [Number, String],
+            default: ''
         },
         videoLength: {
-            type: [Number, String]
+            type: [Number, String],
+            default: ''
         },
         progressState: {
-            type: [Number, String]
+            type: [Number, String],
+            default: ''
         },
         useLegacyVideoPlayer: {
             type: Boolean,
@@ -61,81 +73,106 @@
         },
         videoPosterImageUrl: {
             type: String,
+            default: ''
         },
         videoMediaSources: {
             type: [Array, Object],
+            default: {}
         },
         hlsManifestUrl: {
             type: String,
+            default: ''
         },
         videoChapters: {
-            type: Array
+            type: Array,
+            default: []
         },
         likeCount: {
-            type: [Number, String]
+            type: [Number, String],
+            default: ''
         },
         isLiked: {
             type: Boolean,
+            default: false
         },
         songRanges: {
             type: Array,
+            default: []
         },
         rangesVideoIds: {
             type: Array,
+            default: []
         },
         castTitle: {
             type: String,
+            default: ''
         },
         thumbnailUrl: {
             type: String,
+            default: ''
         },
         description: {
             type: String,
+            default: ''
         },
         instructors: {
             type: Array,
+            default: []
         },
         parentTitle: {
             type: String,
+            default: ''
         },
         videoResources: {
             type: Array,
+            default: []
         },
         playlistName: {
             type: String,
+            default: ''
         },
         playlistItems: {
-            type: Array,
+            type: Object,
+            default: {}
         },
         playlistDuration: {
-            type: Number
+            type: [Number, String],
+            default: ''
         },
         playlistUrl: {
-            type: String
+            type: String,
+            default: ''
         },
         playlistItemId: {
-            type: String
+            type: String,
+            default: ''
         },
         playlistItemPosition: {
             type: String
         },
         lockUnowned: {
             type: Boolean,
+            default: false
         },
         relatedLessons: {
-            type: Array,
+            type: Object,
+            default: {}
         },
         userName: {
             type: String,
+            default: ''
         },
         userAvatar: {
             type: String,
+            default: ''
         },
         userXp: {
             type: [String, Number],
+            default: ''
         },
         userAccessLevel: {
-            type: [String, Number]
+            type: [String, Number],
+            default: ''
         }
     });
     onBeforeMount(() => {

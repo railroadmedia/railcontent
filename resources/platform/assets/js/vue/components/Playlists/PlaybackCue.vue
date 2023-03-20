@@ -37,8 +37,8 @@
             default: "1"
         },
         lessons: {
-            type: Array,
-            default: []
+            type: Object,
+            default: {}
         },
         duration: {
             type: String,

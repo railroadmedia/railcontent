@@ -222,6 +222,8 @@ app.config.unwrapInjectedRef = true;
 //Temporary Emitter for Chatsora
 app.config.globalProperties.eventBus = eventBus;
 
+app.config.productionTip = false;
+
 //Register Global Components
 
 app.component('AppContainer', AppContainer)
