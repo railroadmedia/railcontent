@@ -1633,5 +1633,6 @@ return [
 
     'content_multiple_level_content_depth_playlist_allowed' => [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
-    ]
+    ],
+    'playlist_items_limit' => 300
 ];

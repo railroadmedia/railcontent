@@ -1,5 +1,5 @@
 @php
-    //dd($playlistItem);
+    //dd($relatedPlaylists);
     $brandParams = [
         'drumeo' => '&show_chords=0',
         'singeo' => '&show_staff_t1=0&show_staff_t2=0&show_chords=0',

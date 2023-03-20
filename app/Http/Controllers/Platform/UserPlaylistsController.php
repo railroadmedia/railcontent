@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
@@ -90,7 +91,7 @@ class UserPlaylistsController extends BaseController
             'currentUser' => $currentUser,
             "noResultsMessage" => 'no results',
             "playlistsNumber" => $playlistsNumber,
-            "searchTerm" => $term
+            "searchTerm" => $term,
         ]);
     }
 
@@ -135,7 +136,7 @@ class UserPlaylistsController extends BaseController
             'currentUser' => user(),
             "noResultsMessage" => 'Nothing here yet! Start adding videos',
             "brand" => brand(),
-            'totalItems' => $items->totalResults()
+            'totalItems' => $items->totalResults(),
         ]);
     }
 
@@ -154,23 +155,33 @@ class UserPlaylistsController extends BaseController
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
         throw_if((empty($playlist) || ($playlist == -1)), new NotFoundHttpException());
 
-        $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id']);
-        foreach($playlistItems as $item){
+        $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
+        ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
+        AddedToPrimaryPlaylistDecorator::$skip = true;
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
+
+        $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20);
+
+        foreach ($playlistItems as $item) {
             $item['url'] = url()->route('platform.user.playlist-item', [
                 'playlistId' => $playlistId,
-                'playlistItemId' => $item['user_playlist_item_id']
+                'playlistItemId' => $item['user_playlist_item_id'],
             ]);
+            $item['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
         }
-        $playlistItem =
-            $playlistItems->where('user_playlist_item_id', $playlistItemId)
-                ->first();
-        $content = $this->contentService->getById($playlistItem['id']);
+
+        $content = $this->contentService->getById($playlistItem['content_id']);
+
         throw_if(empty($playlistItem), new NotFoundHttpException());
 
+        if($content['parent_content_data']){
+            $content['parent'] = $this->contentService->getByChildId($content['id'])
+                    ->first();
+        }
         ContentRepository::$availableContentStatues = $oldStatuses;
         ContentRepository::$pullFutureContent = $oldFutureContent;
 
-        if(empty($content)){
+        if (empty($content)) {
             // TODO: Replace with Upgrade to View page
             return view('pages.no-access', [
                 "brand" => brand(),
@@ -178,45 +189,19 @@ class UserPlaylistsController extends BaseController
         }
 
         $playlistItem =
-            $this->vimeoVideoSourcesDecorator->decorate(new Collection([$playlistItem]))
+            $this->vimeoVideoSourcesDecorator->decorate(new Collection([$content]))
                 ->first();
-        $parent = \Arr::last($playlistItem->getParentContentData());
 
-        if ($parent) {
-            $parentChildren = $this->contentService->getByParentId($parent->id);
-        } else {
-            $sort = $playlistItem['published_on'] ? 'published_on' : 'sort';
+        $userPlaylists = collect($this->userPlaylistsService->getUserPlaylist(user()->id, 'user-playlist'));
+        $playlists = $userPlaylists->whereNotIn('id', $playlistId);
+        $relatedPlaylists = (new ContentFilterResultsEntity(['results' => $playlists]))->toResponseRawJson();
 
-            if ($playlistItem['type'] == 'rhythmic-adventures-of-captain-carson' ||
-                $playlistItem['type'] == 'diy-drum-experiments' ||
-                $playlistItem['type'] == 'in-rhythm') {
-                $sort = 'sort';
-            }
-
-            $parentChildren =
-                $this->contentService->getFiltered($request->get('page', 1),
-                                                   $request->get('limit', 10),
-                                                   '-'.$sort,
-                                                   [$playlistItem['type']])['results'];
-        }
-
-        $parentChildrenTrimmed = [];
-        $matched = false;
-
-        foreach ($parentChildren as $parentChildIndex => $parentChild) {
-            if ((count($parentChildren) - $parentChildIndex) <= 10 && count($parentChildrenTrimmed) < 10) {
-                $parentChildrenTrimmed[] = $parentChild;
-            } elseif ($matched && count($parentChildrenTrimmed) < 10) {
-                $parentChildrenTrimmed[] = $parentChild;
-            }
-
-            if ($parentChild['id'] == $playlistItem['id']) {
-                $matched = true;
-            }
-        }
-
-        $relatedLessons = (new ContentFilterResultsEntity(['results' => $parentChildren]))->toResponseRawJson();
-        $playlistLessons = (new ContentFilterResultsEntity(['results' => $playlistItems]))->toResponseRawJson();
+        $playlistLessons = (new ContentFilterResultsEntity([
+                                                               'results' => $playlistItems,
+                                                               'total_results' => $this->userPlaylistsService->countUserPlaylistContents(
+                                                                   $playlistId
+                                                               ),
+                                                           ]))->toResponseRawJson();
 
         if (empty($playlistItem['assignments'] ?? [])) {
             LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
@@ -228,21 +213,27 @@ class UserPlaylistsController extends BaseController
 
         $playlistItem['assignments'] = $lessonAssignments;
 
-        if($playlistItem['type'] == 'song'){
-            $playlistItem['soundslice_slug'] = (isset($lessonAssignments[0]))?$lessonAssignments[0]->fetch('fields.soundslice_slug'):$playlistItem['soundslice_slug'];
+        if ($playlistItem['type'] == 'song') {
+            $playlistItem['soundslice_slug'] =
+                (isset($lessonAssignments[0])) ? $lessonAssignments[0]->fetch('fields.soundslice_slug') :
+                    $playlistItem['soundslice_slug'];
         }
 
-        if($playlistItem['type'] == 'assignment'){
+        if ($playlistItem['type'] == 'assignment') {
             $playlistItem['soundslice_slug'] = $playlistItem->fetch('fields.soundslice_slug');
         }
+
+        $relatedLesson =
+            (new ContentFilterResultsEntity(['results' => $playlistItem['parent'] ?? []]))->toResponseRawJson();
 
         return view('account.playlist-item', [
             "lessonContent" => $playlistItem,
             "playlist" => $playlist,
             "playlistItem" => $playlistItem,
             "lessonType" => $playlistItem['type'],
-            "relatedLessons" => $relatedLessons,
+            "relatedPlaylists" => $relatedPlaylists,
             "playlistItems" => $playlistLessons,
+            "relatedLesson" => $relatedLesson,
             //            'currentUser' => user(),
             "brand" => brand(),
         ]);

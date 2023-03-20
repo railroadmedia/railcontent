@@ -280,13 +280,13 @@
                 <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
                     <div class="tw-flex tw-flex-col tw-mb-5">
                         <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
-                            Related Lessons
+                            Related Playlists
                         </h6>
                     </div>
 
-                    <ContentCatalogue v-if="relatedLessons.data && relatedLessons.data.length" catalogue-type="grid" :theme-color="brand" :use-theme-color="true" :brand="brand"
-                        :pre-loaded-content="relatedLessons" :lock-unowned="lockUnowned" :display-inline="true"
-                        :user-id="userId"></ContentCatalogue>
+<!--                    <ContentCatalogue v-if="relatedLessons.data && relatedLessons.data.length" catalogue-type="grid" :theme-color="brand" :use-theme-color="true" :brand="brand"-->
+<!--                        :pre-loaded-content="relatedLessons" :lock-unowned="lockUnowned" :display-inline="true"-->
+<!--                        :user-id="userId"></ContentCatalogue>-->
                 </div>
             </div>
         </div>
