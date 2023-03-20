@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Platform;
 
+use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
@@ -156,6 +157,7 @@ class UserPlaylistsController extends BaseController
 
         $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
+        AddedToPrimaryPlaylistDecorator::$skip = true;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
 
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20);
