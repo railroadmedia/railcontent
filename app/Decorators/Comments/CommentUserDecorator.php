@@ -12,7 +12,9 @@ class CommentUserDecorator extends ModeDecoratorBase
     public function decorate(Collection $comments)
     {
         $userIds = [];
-
+        if ($comments->isEmpty()) {
+            return $comments;
+        }
         foreach ($comments as $commentIndex => $comment) {
             $comment['url'] = route('platform.jump-to-comment',['brand' => config('railcontent.brand'), 'contentId' => $comment['content_id'],'commentId' => $comment['id']]);
             $comment['created_on_diff'] =
