@@ -61,6 +61,11 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.blog-forms.pentatonic-scale');
     }
 
+    public function chordInversions()
+    {
+        return view('pianote.lead-gen.blog-forms.chord-inversions');
+    }
+
     public function recitals()
     {
         return view('pianote.lead-gen.recitals');
