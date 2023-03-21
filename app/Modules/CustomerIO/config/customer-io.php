@@ -410,6 +410,16 @@ return [
                     'pianote',
                 ],
             ],
+            'Practice Chord Inversions' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_chord-inversions',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Riffs And Fills' => [
                 'custom_attributes' => [
                 ],
