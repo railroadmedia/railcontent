@@ -33,7 +33,7 @@
         noAccess: 'tw-max-w-[550px] tw-px-[64px]',
         removeLesson: 'tw-max-w-[606px] tw-px-[64px]',
         startEnd: 'tw-max-w-[589px] tw-px-[48px]',
-        addItem: 'tw-max-w-[917px] tw-px-[32px]',
+        addItem: 'tw-max-w-[917px] tw-px-4 sm:tw-px-[32px]',
         unpinPlaylists: 'tw-max-w-[917px] tw-px-[32px]',
         alreadyAddedItem: '',
     };
