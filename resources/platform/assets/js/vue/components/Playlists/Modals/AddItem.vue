@@ -216,13 +216,15 @@ onMounted(() => {
         <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
 
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-4" v-if="additionalItems > 0">
-            <h4 class="tw-text-[16px] tw-text-left tw-w-full">Additional Playlist Items</h4>
+            <p class="tw-text-center tw-text-[14px] tw-mb-3">
+                Your selected videos contain {{
+                    additionalItems
+                }} additional
+                assignment items. Would you like to also import them into your playlist?
+            </p>
             <div class="tw-flex tw-w-full">
-                <fieldset class="tw-flex tw-flex-row tw-items-center tw-w-full">
-                    <p class="tw-text-left tw-text-[14px] tw-pr-[16px]">Your selected videos contain {{
-                        additionalItems
-                    }} additional
-                        assignment items. Would you like to also import them into your playlist?</p>
+                <fieldset class="tw-flex tw-flex-row tw-items-center tw-justify-between tw-w-full">
+                    <b class="tw-uppercase tw-text-sm">Additional Playlist Items</b>
                     <Toggle id="import-all-toggle" @onToggle="handleOnToggleAssignments" />
                 </fieldset>
             </div>
@@ -264,7 +266,7 @@ onMounted(() => {
         </Table>
         <div class="tw-w-full tw-flex tw-flex-col sm:tw-flex-row sm:tw-justify-between tw-pt-[25px] tw-max-w-xs sm:tw-max-w-none tw-mx-auto">
             <button @click="handleCreate"
-                class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-min-w-[167px] tw-h-[35px] tw-hidden sm:tw-inline-flex">
+                class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-white tw-min-w-[167px] tw-h-[35px] tw-hidden sm:tw-inline-flex">
                 <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
