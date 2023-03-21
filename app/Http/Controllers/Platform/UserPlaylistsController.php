@@ -158,15 +158,18 @@ class UserPlaylistsController extends BaseController
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AddedToPrimaryPlaylistDecorator::$skip = true;
 
-        $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);   
+        $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
         $position = $playlistItem['position'];
-        $page = ceil(($playlistItem['position']) / 20);
+        $page = ($playlistItem['position'] <= 20)? 1: (ceil(($playlistItem['position']) / 20));
         $request->merge(['page' => $page]);
         $request->merge(['limit' => 20]);
 
         //        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20, $page);
 
+        $playlistItem =
+            $playlistItems->where('user_playlist_item_id', '=', $playlistItemId)
+                ->first();
 
         foreach ($playlistItems as $item) {
             $item['url'] = url()->route('platform.user.playlist-item', [
@@ -181,7 +184,7 @@ class UserPlaylistsController extends BaseController
 
         throw_if(empty($playlistItem), new NotFoundHttpException());
 
-        if ($content['parent_content_data']) {
+        if (!empty($content['parent_content_data'] ?? [])) {
             $content['parent'] =
                 $this->contentService->getByChildId($content['id'])
                     ->first();
