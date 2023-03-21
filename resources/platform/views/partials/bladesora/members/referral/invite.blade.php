@@ -41,9 +41,34 @@ $cardImage = $cardImages[brand()];
     </div>
     @endif
     <section class="tw-text-center tw-text-[#00101D] tw-transition-colors tw-relative {{-- tw-py-6 md:tw-py-10 lg:tw-pt-12 lg:tw-pb-16 --}}">
-        <div class="tw-bg-[#D8EBFF] tw-py-48"></div>
-        <div class="tw-flex tw-justify-center tw-px-4 sm:tw-px-0">
-            <div class="tw-max-w-4xl tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-rounded-xl tw-bg-white -tw-mt-80 tw-mb-16 tw-py-20" style="box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);">
+        <div class="tw-h-[450px] tw-relative">
+            {{--     BG IMAGES      --}}
+            <img
+                class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-transition-opacity tw-opacity-0 tw-z-10 tw-hidden dark:tw-inline-block"
+                src="https://d3fzm1tzeyr5n3.cloudfront.net/referral/header-bg-dark.jpg"
+                onload="this.classList.remove('tw-opacity-0')"
+                loading="lazy"
+                alt="background image"
+            />
+            <img
+                class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-transition-opacity tw-opacity-0 tw-z-10 dark:tw-hidden"
+                src="https://d3fzm1tzeyr5n3.cloudfront.net/referral/header-bg-light.jpg"
+                onload="this.classList.remove('tw-opacity-0')"
+                loading="lazy"
+                alt="background image"
+            />
+        </div>
+        <div class="tw-flex tw-justify-center tw-px-4 sm:tw-px-0 dark:tw-bg-[#1B1B1B]">
+            <div class="tw-max-w-4xl tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-rounded-xl tw-bg-white -tw-mt-60 tw-mb-16 tw-py-20 tw-relative tw-z-30 dark:tw-bg-[#303030] dark:tw-text-white" style="box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);">
+                <div class="tw-max-w-sm sm:tw-max-w-none tw-mx-auto">
+                    <img
+                        class="-tw-mt-40 sm:-tw-mt-52 sm:tw-h-48 md:tw-h-56 tw-mx-auto tw-mb-6 tw-transition-opacity tw-opacity-0"
+                        src="https://d3fzm1tzeyr5n3.cloudfront.net/referral/header-collage.png"
+                        alt="header amazon image"
+                        onload="this.classList.remove('tw-opacity-0')"
+                        loading="lazy"
+                    />
+                </div>
                 <h3 class="tw-font-normal tw-mb-6">
                     Refer your friends & family for a chance to <br class="tw-hidden sm:tw-inline"><strong class="tw-font-extrabold">win a $200 Amazon Gift Card.</strong>
                 </h3>
@@ -70,10 +95,11 @@ $cardImage = $cardImages[brand()];
                                     class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-2 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
                                     type="email" id="email" name="email" placeholder="Email address..." value="">
                                 <input name="button" type="submit" id="button"
-                                    class=" tw-btn-primary tw-bg-[#030814] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
+                                    class=" tw-btn-primary tw-bg-[#030814] dark:tw-bg-[#030303] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                     value="Send Guest Pass" />
                             </div>
                         </form>
+                        <hr class="tw-mt-6" />
 
                         <form id="invite-link-form" name="invite-link-form" action="#">
                             <label class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-2 tw-uppercase tw-text-sm tw-tracking-wide"
@@ -85,7 +111,7 @@ $cardImage = $cardImages[brand()];
                                     type="text" id="referral-link" readonly name="referral-link" placeholder="link"
                                     value="{{ $userReferralLink }}">
                                 <input onclick="copyLink()" name="button" id="button" readonly
-                                    class="tw-bg-[#030814] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
+                                    class="tw-bg-[#030814] dark:tw-bg-[#030303] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                     value="Copy Link" />
                             </div>
                         </form>
@@ -94,25 +120,35 @@ $cardImage = $cardImages[brand()];
             </div>
         </div>
     </section>
-    <section class="tw-bg-[#030814] tw-py-12 lg:tw-py-20">
-        <div class="tw-max-w-5xl tw-mx-auto tw-flex tw-px-4 xl:tw-px-0">
-            <div class="tw-order-1">
-
+    <section class="tw-bg-[#00101D] tw-py-12 lg:tw-py-20">
+        <div class="tw-max-w-5xl tw-mx-auto md:tw-flex md:tw-items-center md:tw-justify-center tw-px-4 xl:tw-px-0">
+            <div class="tw-order-1 tw-relative md:tw-pl-10 tw-mb-10 md:tw-mb-0">
+                <img
+                    class="tw-w-96 tw-mx-auto"
+                    src="https://musora-web-platform.s3.amazonaws.com/referral/intro-collage.png"
+                    alt="intro"
+                />
             </div>
-            <div class="tw-text-white tw-max-w-md">
+            <div class="tw-text-white tw-max-w-md tw-mx-auto tw-text-center md:tw-text-left">
                 <p class="tw-uppercase tw-text-sm tw-mb-2">Got more musical friends? </p>
                 <h3 class="tw-leading-tight">
                     <strong>You can refer them to @if($brand !== 'drumeo') Drumeo, @endif  @if($brand !== 'pianote') Pianote, @endif @if($brand === 'singeo') and @endif @if($brand !== 'guitareo') Guitareo, @endif @if($brand !== 'singeo') and Singeo, @endif too.</strong>
                 </h3>
-                <div class="tw-flex tw-items-center tw-my-5">
+                <div class="tw-flex tw-items-center tw-justify-center md:tw-justify-start tw-my-5 tw-text-sm md:tw-text-base">
                     <i class="fa-light fa-calendar-days tw-text-{{$brand}} tw-text-2xl tw-mr-4"></i> <span>Musora Referral Contest&nbsp;-&nbsp;<b>April 6 to May 8, 2023</b></span>
                 </div>
-                <div class="tw-flex tw-items-center tw-my-5">
+                <div class="tw-flex tw-items-center tw-justify-center md:tw-justify-start tw-my-5 tw-text-sm md:tw-text-base">
                     <i class="fa-regular fa-gift tw-text-{{$brand}} tw-text-2xl tw-mr-4"></i> <span>Refer & Enter to&nbsp;<b>Win a $200 Gift Card to Amazon.</b></span>
                 </div>
                 <i class="tw-text-sm">
                     Guest passes are for new subscribers only and cannot be redeemed for renewals, extensions, or gift subscriptions.
                 </i>
+                <div class="tw-mt-6 tw-flex tw-flex-col md:tw-flex-row">
+                    @if($brand !== 'drumeo') <a href="/drumeo/referral/invite-a-friend" class="tw-btn-secondary tw-text-drumeo tw-px-4 tw-mr-0 md:tw-mr-2 tw-mb-3 md:tw-mb-0 tw-text-base">Refer to Drumeo</a> @endif
+                    @if($brand !== 'pianote') <a href="/pianote/referral/invite-a-friend" class="tw-btn-secondary tw-text-pianote tw-px-4 tw-mr-0 md:tw-mr-2 tw-mb-3 md:tw-mb-0 tw-text-base">Refer to Pianote</a> @endif
+                    @if($brand !== 'guitareo') <a href="/guitareo/referral/invite-a-friend" class="tw-btn-secondary tw-text-guitareo tw-px-4 tw-mb-3 md:tw-mb-0 @if($brand !== 'singeo') tw-mr-0 md:tw-mr-2 @endif tw-text-base">Refer to Guitareo</a> @endif
+                    @if($brand !== 'singeo') <a href="/singeo/referral/invite-a-friend" class="tw-btn-secondary tw-text-singeo tw-px-4 tw-text-base">Refer to Singeo</a> @endif
+                </div>
             </div>
         </div>
     </section>
