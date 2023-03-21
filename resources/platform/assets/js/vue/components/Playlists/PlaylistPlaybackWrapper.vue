@@ -150,10 +150,6 @@
         playlistItemPosition: {
             type: String
         },
-        lockUnowned: {
-            type: Boolean,
-            default: false
-        },
         relatedLesson: {
             type: Object,
             default: {}
@@ -174,10 +170,6 @@
             type: [String, Number],
             default: ''
         },
-        captions: {
-            type: Array,
-            default: null,
-        }
     });
     onBeforeMount(() => {
         console.log(props)
@@ -223,7 +215,7 @@
                             <VideoPlayer ref="mediaElementVueInstance" :theme-color="brand" :brand="brand"
                                 :poster="videoPosterImageUrl" :sources="videoMediaSources" :ranges="songRanges"
                                 :ranges-video-ids="rangesVideoIds" :show-range-buttons="true"
-                                :hls-manifest-url="hlsManifestUrl" :captions="captions" :chapters="videoChapters"
+                                :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters"
                                 :current-second="currentSecond" :content-id="contentId" :user-id="userId"
                                 :video-id="vimeoVideoId" :video-length="videoLength" :total-duration="totalDuration"
                                 :cast-title="castTitle" :use-intersection-observer="true" @play="handleVideoPlay"
@@ -294,7 +286,7 @@
                     </div>
 
                     <ContentCatalogue v-if="relatedLesson.data && relatedLesson.data.length" catalogue-type="grid" :theme-color="brand" :use-theme-color="true" :brand="brand"
-                       :pre-loaded-content="relatedLesson" :lock-unowned="lockUnowned" :display-inline="true"
+                       :pre-loaded-content="relatedLesson" :display-inline="true"
                         :user-id="userId"></ContentCatalogue>
                 </div>
             </div>
