@@ -49,7 +49,7 @@
                 if (response.status === 200) {
                     //update pinia stores (if pinned)
                     playlistsStore.unpinPlaylist(props.data.id)
-                    
+
                     //Redirect on Playlist Page
                     if(props.data.id === playlistsStore.activePlaylist.id) {
                         state.isLoading = true;
@@ -61,7 +61,7 @@
                         } else {
                             //load
                             playlistsStore.loadingPlaylists = true;
-                            playlistsStore.getPlaylists({ brand: props.brand, page: playlistsStore.resultsPage, limit: 10 }, token); 
+                            playlistsStore.getPlaylists({ brand: props.brand, page: playlistsStore.resultsPage, limit: 10 }, token);
                         }
                         //show success message
                         window.shownotification({
@@ -94,7 +94,7 @@
         //Send Request
         PlaylistService.deletePlaylistItem(props.data.user_playlist_item_id, token)
             .then(function(response) {
-                if (response.status === 200) {   
+                if (response.status === 200) {
                     //show success message
                     window.shownotification({
                         icon: 'fa-not-equal',
@@ -126,29 +126,29 @@
     <div class="tw-h-full tw-w-full tw-flex tw-flex-col tw-items-center tw-justify-center">
         <template v-if="!state.isLoading">
             <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-4">
-                Delete 
+                Delete
                 <span :class="`tw-text-${brand}`" class="tw-mr-0.5">
                     <span v-if="mode === 'lesson'">{{ state.title }}</span>
                     <span v-else>{{ data.name }}</span>
                 </span>?
             </h2>
-            <p class="dark:tw-text-white tw-text-center">This action can not be undone</p>
-            <div class="tw-pt-8 tw-flex tw-flex-col tw-items-center tw-justify-center tw-w-full">
+            <p class="dark:tw-text-white tw-text-center">This action cannot be undone</p>
+            <div class="tw-pt-8 tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-justify-center tw-w-full">
                 <!-- Delete Playlist -->
-                <button v-if="mode !== 'lesson'" :class="`tw-mb-2 tw-btn-primary tw-btn-small tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"
+                <button v-if="mode !== 'lesson'" :class="`tw-mb-2 tw-btn-primary tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1`"
                         @click.prevent="handleDeletePlaylist()"
                 >
                     CONFIRM
                 </button>
                 <!-- Delete Lesson -->
-                <button v-else :class="`tw-mb-2 tw-btn-primary tw-btn-small tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"
+                <button v-else :class="`tw-mb-2 tw-btn-primary tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1`"
                         @click.prevent="handleDeleteLesson()"
                 >
                     CONFIRM
                 </button>
                 <!-- Close Modal -->
                 <button @click="() => emit('onCloseModal')"
-                        class="tw-btn-primary tw-btn-small tw-text-base dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px]">
+                        class="tw-btn-primary tw-text-base dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px] tw-border-white sm:tw-mr-2">
                         CANCEL
                 </button>
             </div>
