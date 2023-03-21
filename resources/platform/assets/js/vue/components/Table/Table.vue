@@ -13,7 +13,7 @@ const props = defineProps({
         default: []
     },
     stickyHeader: {
-        type: Boolean, 
+        type: Boolean,
         default: false,
     }
 });
@@ -24,11 +24,11 @@ const emit = defineEmits(['onActionClick', 'onScroll']);
     <div class="tw-w-full tw-relative tw-overflow-x-auto tw-shadow-md" :class="classOverride" @scroll="emit('onScroll', $event)">
         <table class="tw-w-full tw-text-left tw-text-[#0D0D0D] dark:tw-text-white">
             <thead
-                class=" tw-h-[37px] tw-text-[16px] tw-text-[#0D0D0D] tw-bg-[#E6E7E9] dark:tw-bg-[#031d32] dark:tw-text-white tw-font-bold tw-rounded-t tw-overflow-hidden"
+                class=" tw-h-[37px] tw-text-[16px] tw-text-[#0D0D0D] tw-bg-[#E6E7E9] dark:tw-bg-[#031d32] dark:tw-text-white tw-font-bold tw-rounded-t tw-overflow-hidden tw-hidden sm:tw-table-header-group"
                 :class="stickyHeader ? 'tw-sticky tw-top-0 tw-z-30' : ''"
             >
                 <tr>
-                    <th v-for="(title, i) in headTitles" :key="i" scope="col" class="tw-px-6 tw-py-2">
+                    <th v-for="(title, i) in headTitles" :key="i" scope="col" class="tw-px-6 tw-py-2" v-on:click="check">
                         {{ title }}
                     </th>
                 </tr>
@@ -36,7 +36,7 @@ const emit = defineEmits(['onActionClick', 'onScroll']);
             <tbody class="tw-text-[14px]">
                 <tr v-for="([firstCol, ...cols], index) in rows" :key="index"
                     :class="`${index % 2 === 0 ? 'tw-bg-[#F9F9F9] dark:tw-bg-[#071826]' : 'dark:tw-bg-[#00101D]'}`">
-                    <th scope="row" class="tw-px-6 tw-py-4 tw-font-medium tw-whitespace-nowrap dark:text-white">
+                    <th scope="row" class="tw-px-2 sm:tw-px-6 tw-py-4 tw-font-medium tw-whitespace-nowrap dark:text-white">
                         <div class="tw-flex tw-flex-row tw-w-full tw-h-full tw-items-center">
                             <div
                                 class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square tw-h-[48px] tw-w-[48px] tw-rounded tw-shrink-0">
@@ -72,10 +72,17 @@ const emit = defineEmits(['onActionClick', 'onScroll']);
                                     </svg>
                                 </div>
                             </div>
-                            <span class="tw-ml-[10px] tw-font-bold">{{ firstCol.content }}</span>
+                            <div class="tw-ml-[10px]">
+                                <span class="tw-font-bold">{{ firstCol.content }}</span>
+                                <div class="tw-text-[#7E9AB1] sm:tw-hidden">
+                                    <template v-for="(col, i) in cols" :key="`table-row-${i}`">
+                                        <span v-if="!col.showActionSlot && col.content">{{ col.content }}</span><span v-if="i === 0"> | </span>
+                                    </template>
+                                </div>
+                            </div>
                         </div>
                     </th>
-                    <td v-for="(col, i) in cols" :key="`table-row-${i}`" class="tw-px-6 tw-py-4">
+                    <td v-for="(col, i) in cols" :key="`table-row-${i}`" :class="`tw-px-2 sm:tw-px-6 tw-py-4 sm:tw-table-cell sm:tw-text-left tw-text-right ${!col.showActionSlot && col.content && 'tw-hidden'}`">
                         <span v-if="!col.showActionSlot && col.content">{{ col.content }}</span>
                         <button v-if="col.showActionSlot" @click="() => emit('onActionClick', col.actionPayload, index)">
                             <slot :tableIndex="index" :actionPayload="col.actionPayload" name="actionContent"></slot>

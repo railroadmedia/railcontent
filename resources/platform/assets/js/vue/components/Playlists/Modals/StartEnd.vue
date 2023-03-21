@@ -50,11 +50,11 @@
         const min = Math.floor(time / 60);
         const sec = time - min * 60;
         //Formatted
-        const hrsFormatted = hrs < 10 ? `0${hrs}` : hrs;  
-        const minFormatted = min < 10 ? `0${min}` : min;  
-        const secFormatted = sec < 10 ? `0${sec}` : sec;        
+        const hrsFormatted = hrs < 10 ? `0${hrs}` : hrs;
+        const minFormatted = min < 10 ? `0${min}` : min;
+        const secFormatted = sec < 10 ? `0${sec}` : sec;
 
-        return `${hrsFormatted}:${minFormatted}:${secFormatted}`; 
+        return `${hrsFormatted}:${minFormatted}:${secFormatted}`;
     }
 
     //Send request
@@ -81,7 +81,7 @@
                     window.shownotification({
                         icon: 'fa-pen-to-square',
                         text: `You have successfully set the Start and End time of '${state.title}'`
-                    })    
+                    })
                 } else {
                     console.log('edit response code', response)
                 }
@@ -109,42 +109,42 @@
 <template>
     <div class="tw-h-full tw-w-full">
         <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">Set Start/End Time</h2>
-        
+
         <div class="tw-flex tw-pt-[29px] tw-pb-4">
             <!-- Start Time -->
             <div class="tw-w-full tw-flex-col tw-px-3">
                 <p class="tw-text-sm tw-pb-[5px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Start Time</p>
                 <h3 class="tw-mb-2 dark:tw-text-white tw-text-3xl">{{ splitSeconds(state.startTime ) }}</h3>
-                <input type="range" 
+                <input type="range"
                        class="tw-w-full tw-h-2 tw-bg-gray-200 tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
                        v-model="state.startTime"
-                       :min="0" 
+                       :min="0"
                        :max="state.endTime"
-                >       
+                >
             </div>
             <!-- End Time -->
             <div class="tw-w-full tw-flex-col tw-px-3">
                 <p class="tw-text-sm tw-pb-[5px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]">End Time</p>
                 <h3 class="tw-mb-2 dark:tw-text-white tw-text-3xl">{{ splitSeconds(state.endTime ) }}</h3>
-                <input type="range" 
+                <input type="range"
                     class="tw-w-full tw-h-2 tw-bg-gray-200 tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
                     v-model="state.endTime"
-                    :min="state.startTime" 
+                    :min="state.startTime"
                     :max="state.durationTime"
-                >    
+                >
             </div>
         </div>
         <div class="tw-pt-[30px] tw-flex tw-justify-end tw-w-full">
             <!-- Close Modal -->
             <button @click="() => emit('onCloseModal')"
-                    class="tw-btn-secondary tw-btn-small tw-text-base tw-text-[#002039] dark:tw-text-[#80A0B9] tw-mr-4 tw-w-[218px]">
+                    class="tw-btn-secondary tw-text-base tw-text-[#002039] dark:tw-text-white tw-mr-4 tw-w-[218px]">
                     CANCEL
             </button>
             <!-- Delete Lesson -->
-            <button :class="`tw-mb-2 tw-ml-auto tw-btn-primary tw-btn-small tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"
+            <button :class="`tw-mb-2 tw-ml-auto tw-btn-primary tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"
                     @click.prevent="handleConfirm()"
             >
-                CONFIRM
+                SAVE
             </button>
         </div>
     </div>

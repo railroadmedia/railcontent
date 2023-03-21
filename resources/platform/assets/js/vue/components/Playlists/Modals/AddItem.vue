@@ -216,16 +216,26 @@ onMounted(() => {
         <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
 
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-4" v-if="additionalItems > 0">
-            <h4 class="tw-text-[16px] tw-text-left tw-w-full">Additional Playlist Items</h4>
+            <p class="tw-text-center tw-text-[14px] tw-mb-3">
+                Your selected videos contain {{
+                    additionalItems
+                }} additional
+                assignment items. Would you like to also import them into your playlist?
+            </p>
             <div class="tw-flex tw-w-full">
-                <fieldset class="tw-flex tw-flex-row tw-items-center tw-w-full">
-                    <p class="tw-text-left tw-text-[14px] tw-pr-[16px]">Your selected videos contain {{
-                        additionalItems
-                    }} additional
-                        assignment items. Would you like to also import them into your playlist?</p>
+                <fieldset class="tw-flex tw-flex-row tw-items-center tw-justify-between tw-w-full">
+                    <b class="tw-uppercase tw-text-sm">Additional Playlist Items</b>
                     <Toggle id="import-all-toggle" @onToggle="handleOnToggleAssignments" />
                 </fieldset>
             </div>
+        </div>
+
+        <div class="sm:tw-hidden tw-mt-4">
+            <button @click="handleCreate"
+                    class="tw-btn-secondary tw-btn-small tw-uppercase tw-text-[#3F3F46] dark:tw-text-white">
+                <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
+                <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
+            </button>
         </div>
 
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-pt-[18px]" v-if="showSongToggle">
@@ -254,16 +264,17 @@ onMounted(() => {
                     :class="`tw-w-[30px] tw-h-[30px] tw-text-[#4ADE80]`" />
             </template>
         </Table>
-        <div class="tw-w-full tw-flex tw-justify-between tw-pt-[25px]">
+        <div class="tw-w-full tw-flex tw-flex-col sm:tw-flex-row sm:tw-justify-between tw-pt-[25px] tw-max-w-xs sm:tw-max-w-none tw-mx-auto">
             <button @click="handleCreate"
-                class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-min-w-[167px] tw-h-[35px]">
+                class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-white tw-min-w-[167px] tw-h-[35px] tw-hidden sm:tw-inline-flex">
                 <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
-                <span class="tw-pl-[6px]">ADD TO NEW PLAYLIST</span>
+                <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
-            <div class="tw-flex">
-                <button @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">DONE</button>
-            </div>
+            <button @click="handleSaveItem"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`"
+            >
+                SAVE
+            </button>
         </div>
     </div>
 </template>
