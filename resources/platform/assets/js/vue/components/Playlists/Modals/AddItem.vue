@@ -232,7 +232,7 @@ onMounted(() => {
 
         <div class="sm:tw-hidden tw-mt-4">
             <button @click="handleCreate"
-                    class="tw-btn-secondary tw-btn-small tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">
+                    class="tw-btn-secondary tw-btn-small tw-uppercase tw-text-[#3F3F46] dark:tw-text-white">
                 <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
