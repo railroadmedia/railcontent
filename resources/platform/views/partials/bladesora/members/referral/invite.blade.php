@@ -152,7 +152,7 @@ $cardImage = $cardImages[brand()];
             </div>
         </div>
     </section>
-    <section class="tw-py-12 lg:tw-py-20">
+    <section class="tw-py-12 lg:tw-py-20 dark:tw-bg-[#1B1B1B]">
         <div class="tw-max-w-6xl tw-mx-auto tw-px-4 2xl:tw-px-0 dark:tw-text-white">
             <h4 class="tw-mb-4"><strong>Terms and Conditions</strong></h4>
             <p>
