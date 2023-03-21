@@ -32,6 +32,10 @@ const props = defineProps({
         type: String,
         default: ""
     },
+    playlistd: {
+        type: String,
+        default: ""
+    },
     lessons: {
         type: Object,
         default: {}
@@ -53,15 +57,17 @@ const props = defineProps({
 //-----------Computed Props-----------//
 const activeItem = computed(() => {
     //Get index of playlist item
-    console.log('item id ', props.playlistItemId)
-    console.log('lessons', props.lessons.data)
-    let item = props.lessons.data.find((item) => { item.user_playlist_item_id === props.playlistItemId })
-    return props.lessons.data.indexOf(item)
+    const item = props.lessons.data.find((item) => { item.user_playlist_item_id === props.playlistItemId });
+    const itemIndex = props.lessons.data.indexOf(item);
+    console.log(itemIndex)
+    return itemIndex;
 })
 
 //-----------Refs-----------//
 const pageNumber = ref(1);
 const preventReFetch = ref(false);
+const isLoading = ref(false);
+const loadedLessons = ref(props.lessons?.data ? props.lessons.data : []);
 
 //-----------Reactive Data-----------//
 
@@ -70,33 +76,26 @@ const state = reactive({
     isRepeat: false,
 })
 
-//-----------Static Data-----------//
-
-const scrollContainer = document.querySelector('#cue-scroll-container');
-
 //-----------Methods-----------//
 
 const handleScroll = (e) => {
     //Handle infinite Scroll
     if (props.infiniteScroll) {
-        console.log('e.scrollHeight', e.target.scrollHeight)
-        console.log('e.scrollTop', e.target.scrollTop)
-        console.log('e.clientHeight', e.target.clientHeight)
-        console.log('e.scrollHeight - e.scrollTop - e.clientHeight < 1', e.scrollHeight - e.scrollTop - e.clientHeight < 1)
         if ((e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 1) && !preventReFetch.value) {
             pageNumber.value = pageNumber.value + 1;
+            console.log(pageNumber.value, 'bottom reached')
             //Payload
             const payload = {
                 page: pageNumber.value,
                 limit: props.limit,
-                playlist_id: playlistsStore.activePlaylist.id,
+                playlist_id: props.playlistId
             };
             //Get Lessons
-            playlistsStore.loadingLessons = true;
+            isLoading.value = true;
             PlaylistService.getPlaylistLessons(payload, token).then(response => {
-                playlistsStore.loadingLessons = false;
+            isLoading.value = false;
                 if (response.data.results.length) {
-                    playlistsStore.lessons = playlistsStore.lessons.concat(response.data.results);
+                    loadedLessons.value = loadedLessons.value.concat(response.data.results);
                 } else {
                     preventReFetch.value = true;
                 }
@@ -110,9 +109,7 @@ const handleScroll = (e) => {
 //-----------Lifecycle Hooks -----------//
 
 onBeforeMount(() => {
-    // console.log(props.lessons)
-    console.log('Active Item', activeItem)
-    playlistsStore.lessons = props.lessons.data;
+    console.log(props.lessons);
     pageNumber.value = props.lessons.meta.page;
 })
 </script>
@@ -127,7 +124,7 @@ onBeforeMount(() => {
             </a>
             <!-- Cue Data -->
             <p class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1">
-                <span>{{ activeItem }}/{{ playlistsStore.lessons.length }}</span>
+                <span>{{ activeItem }}/{{ loadedLessons.length }}</span>
                 <span class="tw-mx-1">•</span>
                 <span>{{ Math.floor(duration / 60) }} min</span>
             </p>
@@ -162,13 +159,13 @@ onBeforeMount(() => {
             </div>
         </div>
         <!-- Items -->
-        <div @scroll="handleScroll" v-if="playlistsStore.lessons.length" id="cue-scroll-container"
-            class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-overflow-y-auto">
+        <div @scroll="handleScroll" v-if="loadedLessons.length" id="cue-scroll-container"
+            class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-overflow-y-auto tw-relative">
             <!-- Print Each Card -->
-            <playlist-card v-for="(lesson, i) in playlistsStore.lessons" :key="i" :index="i" :lesson="lesson" :token="token"
+            <playlist-card v-for="(lesson, i) in loadedLessons" :key="i" :index="i" :lesson="lesson" :token="token"
                 :brand="brand" :cue-version="true" />
             <!-- Skeleton Loader For Infinite Scroll -->
-            <div v-if="playlistsStore.loadingLessons && infiniteScroll"
+            <div v-if="isLoading && infiniteScroll"
                 class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
                 <div v-for="n in limit" :key="n"
                     class="tw-flex tw-w-full tw-h-[90px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]">

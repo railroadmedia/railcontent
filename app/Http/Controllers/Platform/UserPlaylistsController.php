@@ -160,7 +160,7 @@ class UserPlaylistsController extends BaseController
 
         $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
         $position = $playlistItem['position'];
-        $page = ceil(($playlistItem['position']) / 20);
+        $page = ($playlistItem['position'] <= 20)? 1: (ceil(($playlistItem['position']) / 20));
         $request->merge(['page' => $page]);
         $request->merge(['limit' => 20]);
 
@@ -180,11 +180,11 @@ class UserPlaylistsController extends BaseController
         }
 
         $content = $this->contentService->getById($playlistItem['id']);
-        $content['user_playlist_item_position'] = $playlistItem['user_playlist_item_position'];
+        $content['user_playlist_item_position'] = $position;
 
         throw_if(empty($playlistItem), new NotFoundHttpException());
 
-        if ($content['parent_content_data']) {
+        if (!empty($content['parent_content_data'] ?? [])) {
             $content['parent'] =
                 $this->contentService->getByChildId($content['id'])
                     ->first();

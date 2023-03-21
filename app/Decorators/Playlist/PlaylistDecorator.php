@@ -47,20 +47,24 @@ class PlaylistDecorator extends ModeDecoratorBase
                     \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
                     $firstPlaylistItem = $this->userPlaylistsService->getPlaylistItemById($playlist['user_playlist_item_id']);
                     $firstItem = $this->contentService->getById($firstPlaylistItem['content_id']);
-                    Decorator::$typeDecoratorsEnabled = true;
+                    $playlists[$index]['thumbnail_url'] = '';
+                    if($firstItem) {
+                        Decorator::$typeDecoratorsEnabled = true;
 
-                    $playlists[$index]['square_thumbnail'] =
-                        (($firstItem['type'] == 'assignment' &&
-                                ($firstItem->fetch('parent')) &&
-                                in_array($firstItem->fetch('parent')['type'], ['song', 'song-tutorial-children'])) ||
-                            $firstItem['type'] == 'song-tutorial-children' ||
-                            $firstItem['type'] == 'song');
-                    $playlists[$index]['thumbnail_url'] = $firstItem->fetch(
-                        'data.thumbnail_url',
-                        ($firstItem->fetch('parent')) ?
-                            $firstItem->fetch('parent')
-                                ->fetch('data.thumbnail_url') : ''
-                    );
+                        $playlists[$index]['square_thumbnail'] =
+                            (($firstItem['type'] == 'assignment' &&
+                                    ($firstItem->fetch('parent')) &&
+                                    in_array($firstItem->fetch('parent')['type'], ['song', 'song-tutorial-children']
+                                    )) ||
+                                $firstItem['type'] == 'song-tutorial-children' ||
+                                $firstItem['type'] == 'song');
+                        $playlists[$index]['thumbnail_url'] = $firstItem->fetch(
+                            'data.thumbnail_url',
+                            ($firstItem->fetch('parent')) ?
+                                $firstItem->fetch('parent')
+                                    ->fetch('data.thumbnail_url') : ''
+                        );
+                    }
                 }
             } else {
                 $playlists[$index]['uploaded_thumbnail'] = true;

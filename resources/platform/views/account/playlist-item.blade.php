@@ -52,6 +52,8 @@
         :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
         :song-ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
         :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}"
+        {{-- Todo: Find a way to re add captions --}}
+        {{-- :captions="{{ $lessonContent->fetch('fields.video.data.captions') }}" --}}
         cast-title="{{ $lessonContent->fetch('fields.title') }}"
         thumbnail-url="{{ $lessonContent->fetch('data.thumbnail_url') }}"
         description="{{ $lessonContent->fetch('data.description') }}"

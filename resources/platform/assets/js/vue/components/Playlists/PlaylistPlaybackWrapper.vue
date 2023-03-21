@@ -1,4 +1,5 @@
 <script setup>
+/* Todo: RE add captions */
     import { onBeforeMount, reactive, ref } from 'vue';
     import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
     import SoundSlice from '../SoundSlice/SoundSlice.vue';
@@ -271,6 +272,7 @@
                         :duration="playlistDuration"
                         :playlist-url="playlistUrl"
                         :playlist-item-id="playlistItemId"
+                        :playlist-id="playlistId"
                         :infinite-scroll="true"
                         :playlist-item-position="playlistItemPosition"
                     />
