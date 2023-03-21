@@ -128,7 +128,7 @@
                 token,
                 payload
             }).then(function(response) {
-                if (response.status === 201) { 
+                if (response.status === 201) {
                     playlistsStore.loadingPlaylists = true;
                     //show success message
                     window.shownotification({
@@ -155,7 +155,7 @@
                     name: state.name ? state.name : 'Playlist',
                     description: state.description,
                     category: state.category,
-                })  
+                })
             }
             // Update Pinned Playlist if name changed
             playlistsStore.updatePinnedItem(props.playlist.id, payload.name);
@@ -171,7 +171,7 @@
                         })
                         //load Playlists (if collection catalog exists)
                         if( playlistsStore.pageHasPlaylistCatalog ) {
-                            playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);     
+                            playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);
                         }
                     } else {
                         console.log('edit response code', response)
@@ -197,7 +197,7 @@
                         })
                         //load Playlists
                         if( playlistsStore.pageHasPlaylistCatalog ) {
-                            playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);       
+                            playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);
                         }
                     } else {
                         console.log('duplicate response code', response)
@@ -213,7 +213,7 @@
         console.log(props.playlist)
     })
     onBeforeMount(()=> {
-        //Load Data   
+        //Load Data
         state.thumb = props.playlist.thumbnail_url;
         state.name = props.mode === 'duplicate' ? props.playlist.name + ' (Duplicate)' : props.playlist.name;
         state.description = props.playlist.description;
@@ -242,40 +242,40 @@
                 <strong>{{ playlist.name }}</strong> will be added to your new playlist
             </p>
         </div>
-        <div class="tw-flex tw-pt-[24px]">
-            <ThumbnailUpload 
-                :token="token" 
-                type='playlist' 
+        <div class="tw-flex tw-pt-[24px] tw-flex-col sm:tw-flex-row">
+            <ThumbnailUpload
+                :token="token"
+                type='playlist'
                 :imgUrl="state.thumb"
                 @imageUploaded="updateThumbnail($event)"
             />
             <div class="tw-flex tw-flex-col tw-w-full">
-                <InputLabel 
+                <InputLabel
                     :initialValue="state.name"
-                    placeholder="Playlist Title" 
+                    placeholder="Playlist Title"
                     :remove-default-input-styles="true"
                     inputOverride="tw-mb-[20px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-w-full tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px]"
-                    @onChange="handleTitleChange" 
+                    @onChange="handleTitleChange"
                 />
-                <Dropdown 
-                    :sortedOptions="sortedOptions" 
-                    :selected-value="state.category" 
+                <Dropdown
+                    :sortedOptions="sortedOptions"
+                    :selected-value="state.category"
                     placeholderLabel="Playlist Category"
-                    @onChange="handleCategoryChange" 
+                    @onChange="handleCategoryChange"
                 />
-                <textarea 
-                    id="playlist-description" 
+                <textarea
+                    id="playlist-description"
                     name="playlistDescription"
                     placeholder="Playlist Description"
                     class="tw-no-scrollbar tw-text-sm tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-py-[9px]"
                     v-model="state.description"
-                    @change="handleDescriptionChange" 
+                    @change="handleDescriptionChange"
                 ></textarea>
-                <div class="tw-pt-[30px] tw-flex tw-justify-end">
-                    <button @click="() => emit('onCloseModal')" class="tw-btn-primary tw-btn-small tw-text-center tw-justify-center tw-items-center dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10">CANCEL</button>
-                    <button @click="() => handleConfirm()" :class="`tw-ml-4 tw-btn-primary tw-btn-small tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center tw-p-0 tw-px-[30px]`"><span>CONFIRM</span></button>
-                </div>
             </div>
+        </div>
+        <div class="tw-pt-[30px] tw-flex tw-flex-col sm:tw-flex-row tw-justify-between">
+            <button @click="() => emit('onCloseModal')" class="tw-order-1 sm:tw-order-none tw-btn-primary tw-text-center tw-justify-center tw-items-center dark:tw-text-white dark:tw-border-white dark:bg-[#081825] tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10">CANCEL</button>
+            <button @click="() => handleConfirm()" :class="`tw-mb-2 sm:tw-mb-0 sm:tw-ml-4 tw-btn-primary tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center`"><span>{{ props.modalProps.modalType === 'create' ? 'create' : 'save' }}</span></button>
         </div>
     </div>
 </template>
