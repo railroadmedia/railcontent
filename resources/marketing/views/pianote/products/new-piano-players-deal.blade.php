@@ -178,7 +178,7 @@
                     onload="this.classList.remove('opacity-0')"
                 />
             </div>
-            <div class="flex justify-center lg:mb-10 flex-wrap">
+            <div class="max-w-2xl mx-auto flex justify-center lg:mb-10 flex-wrap">
                 @php
                     $bonuses = [
                         [
@@ -215,58 +215,10 @@
                             'description' => 'Play the music you love using the power of chords.',
                             'price' => floatval($productPrices['the-power-of-chords']->price),
                         ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTCP.jpg',
-                            'title' => 'Classical Piano',
-                            'description' => 'Pieces you can actually play, with lessons that are actually fun.',
-                            'price' => floatval($productPrices['classical-piano']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/improv-musical-freedom.jpg',
-                            'title' => 'Improvisation & Musical Freedom',
-                            'description' => 'Learn to improvise from one of the best piano players in the world, Jesús Molina',
-                            'price' => floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTPBP.jpg',
-                            'title' => 'Play Beautiful Piano',
-                            'description' => 'Start playing beautiful music from your very 1st lesson.',
-                            'price' => floatval($productPrices['play-beautiful-piano']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
-                            'title' => 'Piano Riffs<br> & Fills',
-                            'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                            'price' => floatval($productPrices['piano-riffs-and-fills']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
-                            'title' => 'Piano Technique<br> Made Easy',
-                            'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
-                            'price' => floatval($productPrices['piano-technique-made-easy']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
-                            'title' => 'De-Stupefy Your<br> Left Hand',
-                            'description' => 'Most piano players find their left-hand is weaker. Fix those weaknesses and “de-stupefy” that left hand.',
-                            'price' => floatval($productPrices['destupefy-your-left-hand']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/worship-piano.jpg',
-                            'title' => 'Worship Piano',
-                            'description' => 'Learn hundreds of worship songs and get the skills to start playing in a worship band.',
-                            'price' => floatval($productPrices['worship-piano']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/faster-fingers.jpg',
-                            'title' => 'Faster Fingers',
-                            'description' => 'Boost your speed and confidence with this guided practice course.',
-                            'price' => floatval($productPrices['faster-fingers']->price),
-                        ],
                     ]
                 @endphp
                 @foreach($bonuses as $bonus)
-                    <div class="bonus-wrap relative inline-block align-top mb-3 px-1 md:px-4 lg:px-1 w-1/2 sm:w-1/3 lg:w-1/5">
+                    <div class="bonus-wrap relative inline-block align-top mb-3 px-1 md:px-4 w-1/2 sm:w-1/3">
                         <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div class="border-2 border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
@@ -285,7 +237,7 @@
                         </div>
 
                         <p class="uppercase w-full leading-normal mt-2">
-                            {{--<strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>--}}
+                            <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
                             <span style="text-transform:uppercase; display:inline-block;">
 
                         @if(!empty($bonus['price']))
@@ -308,6 +260,42 @@
                         </p>
                     </div>
                 @endforeach
+                <div class="bonus-wrap relative inline-block align-top mb-3 px-1 md:px-4 w-1/2 sm:w-1/3">
+                    <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
+                        <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
+                            <div class="border-2 border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black">
+                                    <div class="flex flex-wrap justify-center">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTCP.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/improv-musical-freedom.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTPBP.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/worship-piano.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/faster-fingers.jpg">
+                                    </div>
+                                </div>
+                                <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                    <i class="fas fa-arrow-right text-4xl"></i><br>
+                                    <p class="text-sm"><strong>DETAILS</strong></p>
+                                </div>
+                            </div>
+                            <div class="back border-2 border-pianote absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                    <p class="leading-normal mx-auto text-sm">Get 8 digital courses for life. Even if you cancel your membership. They’re yours forever.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="uppercase w-full leading-normal mt-2">
+                        <strong class="font-black leading-tight inline-block mb-1">8 Digital Courses</strong><br>
+                        <span style="text-transform:uppercase; display:inline-block;"><s class="opacity-50">$617</s> <strong class="text-promo">FREE</strong></span><br>
+                        <i>Online Access</i>
+                    </p>
+                </div>
+
             </div>
             <h3 class="mb-8"><strong>ONLY <s class="opacity-60">${{ 240 }}</s> $197</strong></h3>
             <div class="w-2/3 mx-auto">
