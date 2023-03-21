@@ -38,27 +38,27 @@ class LeadGenController extends BaseController
 
     public function weeklyemail()
     {
-        return view('pianote.lead-gen.weekly-email');
+        return view('pianote.lead-gen.blog-forms.weekly-email');
     }
 
     public function weeklyemail2()
     {
-        return view('pianote.lead-gen.weekly-email-2');
+        return view('pianote.lead-gen.blog-forms.weekly-email-2');
     }
 
     public function minorBlues()
     {
-        return view('pianote.lead-gen.minor-blues');
+        return view('pianote.lead-gen.blog-forms.minor-blues');
     }
 
     public function fSharpMinor()
     {
-        return view('pianote.lead-gen.f-sharp-minor');
+        return view('pianote.lead-gen.blog-forms.f-sharp-minor');
     }
 
     public function pentatonicScale()
     {
-        return view('pianote.lead-gen.pentatonic-scale');
+        return view('pianote.lead-gen.blog-forms.pentatonic-scale');
     }
 
     public function recitals()

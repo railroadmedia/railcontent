@@ -108,23 +108,13 @@
 {{--{!! \App\Analytics\Tracker::bodyTop() !!}--}}
 
 <section class="text-center absolute top-1/2 left-1/2 w-full px-5" style="transform:translate(-50%,-50%)">
-    <form id="PianoteEngagementTriggerFSharpMinorWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form"
-          method="POST" class="ajax-form clearfix infusion-form max-w-3xl mx-auto" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
-        <input type="hidden" name="form_name" value="F Sharp Minor">
-        <input type="hidden" name="leadtracker_form_name" value="F Sharp Minor">
-        <div class="infusion-field w-full sm:pr-3 float-left sm:w-7/12 md:text-left">
-            <input id="inf_field_Email" class="w-full" name="email" type="email" placeholder="Email Address..." required/>
-        </div>
-        <div class="infusion-submit w-full sm:pl-3 float-left sm:w-5/12">
-            <button class="submit" type="submit">Get Backing Track</button>
-        </div>
-        <input name="inf_form_xid" type="hidden" value="PianoteEngagementTriggerFSharpMinorWebForm">
-        <input name="tag_names_to_add[]" type="hidden" value="Pianote - Engagement - Trigger - F Sharp Minor - Web Form">
-        <input name="list_ids_to_subscribe_to[]" type="hidden" value="33">
-        <input name="success_redirect" type="hidden" value="/thank-you">
-    </form>
-    <div class="thank-you-box bg-white rounded-full w-full mx-auto text-center text-green-300 max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
-        <h5 class="mx-auto text-xl font-bold"><strong><i class="fas fa-check"></i> Success, Check your email!</strong></h5>
+    <div class="max-w-3xl mx-auto">
+        @include("pianote._partials._sign-up-form", [
+            "formName" => 'F Sharp Minor',
+            "formId" => "Pianote - Engagement - Trigger - F Sharp Minor - Web Form",
+            "buttonText" => "Get Backing Track",
+            "minimalForm" => true,
+        ])
     </div>
 </section>
 
