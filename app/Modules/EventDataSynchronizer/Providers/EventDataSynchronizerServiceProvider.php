@@ -4,6 +4,7 @@ namespace App\Modules\EventDataSynchronizer\Providers;
 
 use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
 use App\Modules\EventDataSynchronizer\Console\Commands\ExpiredProductResync;
+use App\Modules\EventDataSynchronizer\Console\Commands\PackBonusExpirationDateResyncTool;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermissionsResyncTool;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
@@ -208,6 +209,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 SyncCustomerIoForUpdatedUserProductsAndSubscriptions::class,
                 UserContentPermissionsResyncTool::class,
                 UserContentProductPermissionsResyncTool::class,
+                PackBonusExpirationDateResyncTool::class,
                 SyncHelpScout::class,
                 SyncExistingHelpScout::class,
                 HelpScoutIndex::class,

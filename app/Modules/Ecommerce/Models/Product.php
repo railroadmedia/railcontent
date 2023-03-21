@@ -39,6 +39,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property string digital_access_time_type
  * @property string digital_access_time_interval_length
  * @property string note
+ * @property Carbon $digital_membership_access_expiration_date
  * @property Carbon $start_date
  * @property Carbon $expiration_date
  * @property Carbon $created_at
