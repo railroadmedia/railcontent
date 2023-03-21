@@ -44,7 +44,7 @@ const props = defineProps({
     },
     fileServiceRoute: {
         type: String,
-        default: null  
+        default: null
     },
     token: {
         type: String,
@@ -95,7 +95,7 @@ function handleUploadError() {
                 @onUploadDone="handleUploadDone" @onUploadError="handleUploadError" />
         </InfoModal>
 
-        <div class="hover:tw-underline tw-flex tw-flex-col lg:tw-pr-[42px] tw-w-[200px] tw-shrink-0">
+        <div class="hover:tw-underline tw-flex tw-flex-col lg:tw-pr-[42px] tw-w-[200px] tw-shrink-0 tw-mx-auto tw-items-center sm:tw-items-start">
             <button v-on:click="openUploadForm" :class="type === 'playlist' ? 'tw-w-[158px] tw-h-[158px] tw-rounded-lg tw-overflow-hidden' : '' ">
 
                 <!-- Image Conatiner -->
@@ -129,22 +129,22 @@ function handleUploadError() {
                 </template>
 
                 <!-- Playlist thumbnail -->
-                <PlaylistThumbnail 
+                <PlaylistThumbnail
                     v-if="type==='playlist'"
                     :img="imgUrlRef"
                     :brand="brand"
-                />   
-                
+                />
+
                 <img v-else class="tw-w-[158px] tw-h-[158px] tw-rounded-[9px]"
-                    :src="`${imgUrlRef ? imgUrlRef : 'https://placehold.jp/158x158.png'}`" 
+                    :src="`${imgUrlRef ? imgUrlRef : 'https://placehold.jp/158x158.png'}`"
                 />
             </button>
-            <div class="tw-flex tw-pt-[12px] tw-justify-center tw-items-center">
+            <div class="tw-flex tw-flex-row tw-pt-[12px] tw-justify-center tw-items-center tw-mb-7 sm:tw-mb-0 tw-w-full">
                 <button v-on:click="openUploadForm" class="tw-underline tw-text-[#0D0D0D] dark:tw-text-[#7E9AB1] tw-italic tw-text-[13px]">
                     <span v-if="!(imgUrlRef && imgUrlRef.length)">Upload Playlist Image</span>
                     <span v-if="(imgUrlRef && imgUrlRef.length)">Change Image</span>
                 </button>
-                <button v-if="(imgUrlRef && imgUrlRef.length)" class="tw-ml-[3px]">
+                <button v-if="(imgUrlRef && imgUrlRef.length)" class="tw-ml-[5px]">
                     <XCircleIcon class="tw-text-[#7E9AB1] tw-w-[14px] tw-h-[14px]" />
                 </button>
             </div>
