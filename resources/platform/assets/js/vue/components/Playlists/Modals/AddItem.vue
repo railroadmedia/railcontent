@@ -258,11 +258,11 @@ onMounted(() => {
             <button @click="handleCreate"
                 class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-min-w-[167px] tw-h-[35px]">
                 <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
-                <span class="tw-pl-[6px]">ADD TO NEW PLAYLIST</span>
+                <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
             <div class="tw-flex">
                 <button @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">DONE</button>
+                    :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">SAVE</button>
             </div>
         </div>
     </div>
