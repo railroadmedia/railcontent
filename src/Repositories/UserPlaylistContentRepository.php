@@ -357,6 +357,7 @@ class UserPlaylistContentRepository extends RepositoryBase
     {
         return $this->query()
             ->where('user_playlist_id', $playlistId)
+            ->orderBy('position', 'asc')
             ->first();
     }
 }
