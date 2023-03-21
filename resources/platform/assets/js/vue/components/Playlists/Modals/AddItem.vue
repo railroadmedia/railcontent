@@ -228,6 +228,14 @@ onMounted(() => {
             </div>
         </div>
 
+        <div class="sm:tw-hidden tw-mt-4">
+            <button @click="handleCreate"
+                    class="tw-btn-secondary tw-btn-small tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]">
+                <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
+                <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
+            </button>
+        </div>
+
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-pt-[18px]" v-if="showSongToggle">
             <p class="tw-text-[16px] tw-text-center tw-w-full tw-pb-[20px]">This song contains both full and {{
                 instrumentless }} tracks. Choose which tracks you want to Import into your Playlist.</p>
@@ -254,16 +262,17 @@ onMounted(() => {
                     :class="`tw-w-[30px] tw-h-[30px] tw-text-[#4ADE80]`" />
             </template>
         </Table>
-        <div class="tw-w-full tw-flex tw-justify-between tw-pt-[25px]">
+        <div class="tw-w-full tw-flex tw-flex-col sm:tw-flex-row sm:tw-justify-between tw-pt-[25px] tw-max-w-xs sm:tw-max-w-none tw-mx-auto">
             <button @click="handleCreate"
-                class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-min-w-[167px] tw-h-[35px]">
+                class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-min-w-[167px] tw-h-[35px] tw-hidden sm:tw-inline-flex">
                 <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
-            <div class="tw-flex">
-                <button @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`">SAVE</button>
-            </div>
+            <button @click="handleSaveItem"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`"
+            >
+                SAVE
+            </button>
         </div>
     </div>
 </template>
