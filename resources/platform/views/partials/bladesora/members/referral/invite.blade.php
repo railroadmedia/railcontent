@@ -41,7 +41,7 @@ $cardImage = $cardImages[brand()];
     </div>
     @endif
     <section class="tw-text-center tw-text-[#00101D] tw-transition-colors tw-relative {{-- tw-py-6 md:tw-py-10 lg:tw-pt-12 lg:tw-pb-16 --}}">
-        <div class="tw-h-[450px] tw-relative">
+        <div class="tw-h-96 sm:tw-h-[450px] tw-relative">
             {{--     BG IMAGES      --}}
             <img
                 class="tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-object-cover tw-transition-opacity tw-opacity-0 tw-z-10 tw-hidden dark:tw-inline-block"
@@ -59,7 +59,7 @@ $cardImage = $cardImages[brand()];
             />
         </div>
         <div class="tw-flex tw-justify-center tw-px-4 sm:tw-px-0 dark:tw-bg-[#1B1B1B]">
-            <div class="tw-max-w-4xl tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-rounded-xl tw-bg-white -tw-mt-60 tw-mb-16 tw-py-20 tw-relative tw-z-30 dark:tw-bg-[#303030] dark:tw-text-white" style="box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);">
+            <div class="tw-max-w-4xl tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-rounded-xl tw-bg-white -tw-mt-60 tw-mb-16 tw-py-12 sm:tw-py-20 tw-relative tw-z-30 dark:tw-bg-[#303030] dark:tw-text-white" style="box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);">
                 <div class="tw-max-w-sm sm:tw-max-w-none tw-mx-auto">
                     <img
                         class="-tw-mt-40 sm:-tw-mt-52 sm:tw-h-48 md:tw-h-56 tw-mx-auto tw-mb-6 tw-transition-opacity tw-opacity-0"
@@ -120,11 +120,11 @@ $cardImage = $cardImages[brand()];
             </div>
         </div>
     </section>
-    <section class="tw-bg-[#00101D] tw-py-12 lg:tw-py-20">
-        <div class="tw-max-w-5xl tw-mx-auto md:tw-flex md:tw-items-center md:tw-justify-center tw-px-4 xl:tw-px-0">
-            <div class="tw-order-1 tw-relative md:tw-pl-10 tw-mb-10 md:tw-mb-0">
+    <section class="tw-bg-[#00101D] tw-py-10 lg:tw-py-20">
+        <div class="tw-max-w-5xl tw-mx-auto md:tw-flex md:tw-items-center md:tw-justify-center tw-px-4 sm:tw-px-6 xl:tw-px-0">
+            <div class="tw-order-1 tw-relative md:tw-pl-5 lg:tw-pl-10 tw-mb-10 md:tw-mb-0">
                 <img
-                    class="tw-w-96 tw-mx-auto"
+                    class="tw-w-72 md:tw-w-96 tw-mx-auto"
                     src="https://musora-web-platform.s3.amazonaws.com/referral/intro-collage.png"
                     alt="intro"
                 />
@@ -153,7 +153,7 @@ $cardImage = $cardImages[brand()];
         </div>
     </section>
     <section class="tw-py-12 lg:tw-py-20 dark:tw-bg-[#1B1B1B]">
-        <div class="tw-max-w-6xl tw-mx-auto tw-px-4 2xl:tw-px-0 dark:tw-text-white">
+        <div class="tw-max-w-6xl tw-mx-auto tw-px-6 2xl:tw-px-0 dark:tw-text-white">
             <h4 class="tw-mb-4"><strong>Terms and Conditions</strong></h4>
             <p>
                 Lorem ipsum dolor sit amet consectetur. Ultricies pretium enim vitae consectetur. Nisl tristique mi sed molestie sed. Eu tellus sed tristique cras fames orci in duis turpis. Cras mi eget cursus elementum aliquet. Ultrices tellus morbi lorem egestas non placerat facilisis nisi. Ut nisi bibendum non odio arcu nibh pellentesque nec. <br><br>
