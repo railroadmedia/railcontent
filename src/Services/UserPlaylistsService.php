@@ -250,7 +250,13 @@ class UserPlaylistsService
 
         ContentRepository::$pullFutureContent = true;
 
+        $results = [];
+        $added = [];
+
         $content = $this->contentService->getById($contentId);
+        if (!$content) {
+            return $results;
+        }
 
         $singularContentTypes = array_merge(config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
                                             config('railcontent.singularContentTypes'),
@@ -265,14 +271,12 @@ class UserPlaylistsService
             $itemsThatShouldBeAdd++;
         }
         if ($importAllAssignments) {
-            $itemsThatShouldBeAdd = $itemsThatShouldBeAdd +$assignments['soundslice_assignments_count'];
+            $itemsThatShouldBeAdd = $itemsThatShouldBeAdd + ($assignments['soundslice_assignments_count'] ?? 0);
         }
-
-        $results =[];
 
         foreach ($userPlaylistIds as $userPlaylistId) {
             $playlistItems = $this->countUserPlaylistContents($userPlaylistId);
-            if($playlistItems + $itemsThatShouldBeAdd > config('railcontent.playlist_items_limit', 300)){
+            if ($playlistItems + $itemsThatShouldBeAdd > config('railcontent.playlist_items_limit', 300)) {
                 $playlist = $this->getPlaylist($userPlaylistId);
                 $limitExcedeed[] = $playlist;
                 continue;
@@ -290,7 +294,7 @@ class UserPlaylistsService
                         null,
                         $assignmentInput
                     );
-                    $results[$userPlaylistId][] = $itemId;
+                    $added[$userPlaylistId][] = $itemId;
                 }
 
                 if ($importInstrumentlessSoundsliceAssignment) {
@@ -305,7 +309,7 @@ class UserPlaylistsService
                         null,
                         $assignmentInput
                     );
-                    $results[$userPlaylistId][] = $itemId;
+                    $added[$userPlaylistId][] = $itemId;
                 }
 
                 if ($content['type'] != 'song') {
@@ -319,15 +323,18 @@ class UserPlaylistsService
                         'created_at' => Carbon::now()
                             ->toDateTimeString(),
                     ];
-                    $itemId = $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
-                    $results[$userPlaylistId][] = $itemId;
+
+                    $itemId =
+                        $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+
+                    $added[$userPlaylistId][] = $itemId;
 
                     if ($importAllAssignments) {
                         $itemIds = $this->addSounsliceAssignments(
                             $assignments['soundslice_assignments'][$contentId] ?? [],
                             $userPlaylistId
                         );
-                        $results[$userPlaylistId] = array_merge($results[$userPlaylistId]??[], $itemIds);
+                        $added[$userPlaylistId] = array_merge($added[$userPlaylistId] ?? [], $itemIds);
                     }
                 }
             }
@@ -345,15 +352,16 @@ class UserPlaylistsService
                             ->toDateTimeString(),
                     ];
 
-                    $itemId = $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
-                    $results[$userPlaylistId][] = $itemId;
+                    $itemId =
+                        $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
+                    $added[$userPlaylistId][] = $itemId;
 
                     if ($importAllAssignments) {
                         $itemIds = $this->addSounsliceAssignments(
                             $assignments['soundslice_assignments'][$lesson['id']] ?? [],
                             $userPlaylistId
                         );
-                        $results[$userPlaylistId] = array_merge($results[$userPlaylistId]??[], $itemIds);
+                        $added[$userPlaylistId] = array_merge($added[$userPlaylistId] ?? [], $itemIds);
                     }
                 }
             }
@@ -364,9 +372,11 @@ class UserPlaylistsService
         ContentRepository::$availableContentStatues = $oldStatuses;
         ContentRepository::$pullFutureContent = $oldFutureContent;
 
-        if(isset($limitExcedeed)){
+        if (isset($limitExcedeed)) {
             $results['limit_excedeed'] = $limitExcedeed;
         }
+
+        $results['successful'] = $added;
 
         return $results;
     }
@@ -390,17 +400,17 @@ class UserPlaylistsService
     public function getPlaylist($playlistId)
     {
         $playlist = $this->userPlaylistsRepository->getById($playlistId);
-        if(!$playlist){
+        if (!$playlist) {
             return null;
         }
         if ($playlist['user_id'] != auth()->id() && $playlist['private'] == 1) {
             return -1;
         }
 
-//        $playlist['like_count'] =
-//            $this->playlistLikeRepository->query()
-//                ->where('playlist_id', $playlistId)
-//                ->count();
+        //        $playlist['like_count'] =
+        //            $this->playlistLikeRepository->query()
+        //                ->where('playlist_id', $playlistId)
+        //                ->count();
         $playlist['is_liked_by_current_user'] =
             $this->playlistLikeRepository->query()
                 ->where('playlist_id', $playlistId)
@@ -505,7 +515,7 @@ class UserPlaylistsService
             'content_id' => $playlistContent['content_id'],
             'user_playlist_id' => $playlistContent['user_playlist_id'],
             'position' => $position,
-            'extra_data' => !empty($extraData)?$extraData:$playlistContent['extra_data'],
+            'extra_data' => !empty($extraData) ? $extraData : $playlistContent['extra_data'],
             'start_second' => $startSecond,
             'end_second' => $endSecond,
             'updated_at' => Carbon::now()
@@ -739,5 +749,19 @@ class UserPlaylistsService
         }
 
         return true;
+    }
+
+    /**
+     * @param $id
+     * @return mixed|null
+     */
+    public function getUserPlaylistById($id)
+    {
+        $playlist = $this->userPlaylistsRepository->getUserPlaylistById($id);
+        if (!$playlist) {
+            return null;
+        }
+
+        return Decorator::decorate([$playlist], 'playlist')[0];
     }
 }
