@@ -28,7 +28,7 @@
                                 <div @if(count($images) > 1)style="display: none;"@endif>
                                     <img
                                         class="w-full"
-                                        src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif"
+                                        src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{$image->path}}"
                                         alt="slide image {{ $key+1 }}"
                                     >
                                 </div>
@@ -42,7 +42,7 @@
                         <div style="display:none;">
                             <img
                                 class="w-full rounded-md border-4 border-solid w-full border-white slide-img cursor-pointer"
-                                src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/@if(str_contains($image->path, 'amazonaws') || str_contains($image->path, 'cloudfront') || str_contains($image->path, 'vimeocdn')){{$image->path}}@else{{'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$image->path}}@endif"
+                                src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{$image->path}}"
                                 alt="slide image {{ $key+1 }}"
                             >
                         </div>
@@ -51,12 +51,12 @@
             </div>
             @if(!empty($interactiveBanner))
                 <div class="rounded-b p-4 flex justify-between items-center bg-{{ $theme }} sm:py-1 sm:px-5">
-                    <img class="w-full sm:w-2/3" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://s3.amazonaws.com/drumeo-packs/interactive-edition-logo-white.png">
-                    <img class="w-40 hidden sm:inline lg:w-48" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $interactiveBanner }}">
+                    <img class="w-full sm:w-2/3" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://s3.amazonaws.com/drumeo-packs/interactive-edition-logo-white.png">
+                    <img class="w-40 hidden sm:inline lg:w-48" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $interactiveBanner }}">
                 </div>
             @elseif(!empty($packBanner))
                 <div class="rounded-b p-4 w-full flex justify-between items-center bg-{{ $theme }} sm:py-1 sm:px-5">
-                    <img class="w-full sm:w-2/3" src="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://s3.amazonaws.com/drumeo-packs/drumeo-training-pack-white.png">
+                    <img class="w-full sm:w-2/3" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://s3.amazonaws.com/drumeo-packs/drumeo-training-pack-white.png">
                     <img class="w-40 hidden sm:inline lg:w-48" src="{{ $packBanner }}">
                 </div>
             @endif

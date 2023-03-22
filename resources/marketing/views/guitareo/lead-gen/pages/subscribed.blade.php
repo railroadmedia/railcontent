@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
     <title>Success! | Guitareo</title>
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg" style="display: none;">
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-guitareo.jpg" style="display: none;">
     @include('_partials.layout.favicons.guitareo-favicons')
     @include('_partials.layout._fonts')
     @include('_partials.layout._tailwindcdn')

@@ -3,10 +3,10 @@
     :href="item.url"
     class="tw-relative tw-flex tw-bg-cover tw-bg-toptw-bg-gray-200 tw-overflow-hidden tw-rounded-lg lg:tw-rounded-xl tw-no-underline tw-text-white tw-group"
   >
-    <img :src="`https://musora.com/cdn-cgi/image/width=300/${coachImage}`" 
-         :alt="coachName" 
+    <img :src="`https://www.musora.com/musora-cdn/image/width=300/${coachImage}`"
+         :alt="coachName"
          class="tw-w-full tw-transition-opacity tw-duration-500"
-         :class="[ 
+         :class="[
             item.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0',
             item.type === 'song' ? 'tw-blur-sm' : ''
          ]"
@@ -27,9 +27,9 @@
       </h3>
       <p class="tw-text-yellow-400 tw-text-xs tw-h-8 tw-leading-snug tw-mb-4 tw-uppercase">{{ coachFocus }}</p>
       <div v-if="item.is_house_coach" class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center">
-        <musora-icon 
+        <musora-icon
             icon-name="whistle-filled"
-            height="12" 
+            height="12"
             class="tw-text-white tw-mr-0.5 tw-w-[16px] tw-leading-none"
         ></musora-icon>
         <span class="tw-mt-1">HOUSE</span>

@@ -37,16 +37,16 @@
     >
         {{-- Background Image --}}
         <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top">
-            <img src="https://musora.com/cdn-cgi/image/width=1000,quality=90/https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg" 
+            <img src="https://www.musora.com/musora-cdn/image/width=1000,quality=90/https://d3fzm1tzeyr5n3.cloudfront.net/headers/unified_header.jpg"
                 class="tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
                 onload="this.classList.remove('tw-opacity-0')"
             >
         </div>
         {{-- Background Gradient --}}
         <div class="header-gradient-overlay absolute-fill"></div>
-    
+
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 account-header tw-flex tw-flex-col tw-items-center lg:tw-items-end xl:tw-items-center lg:tw-flex-row dark:tw-text-white tw-relative tw-z-10 ">
-            
+
             {{-- Avatar Image --}}
             <div class="header-avatar tw-flex tw-flex-col tw-mb-4 lg:tw-mb-0">
                 <div class="user-avatar
@@ -56,14 +56,14 @@
                 >
                     <div class="no-decoration tw-bg-cover tw-bg-top tw-inline-block tw-rounded-full tw-h-[165px] tw-w-[165px]">
                         @if($user->profile_picture_url)
-                            <img class="tw-inline-block tw-rounded-full tw-h-full" 
+                            <img class="tw-inline-block tw-rounded-full tw-h-full"
                                  src="{{ $user->profile_picture_url }}"
                             >
                         @endif
                     </div>
                 </div>
             </div>
-            
+
             <div class="tw-flex tw-flex-col xl:tw-flex-row tw-w-full tw-justify-end xl:tw-items-center tw-pl-6">
                 {{-- Account Header --}}
                 <div class="tw-flex tw-w-full tw-items-center">
@@ -79,11 +79,11 @@
                         </p>
                     </div>
                 </div>
-    
+
                 {{-- Calls To Action --}}
                 <div class="tw-flex tw-items-center tw-justify-center lg:tw-justify-start xl:tw-justify-end tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
                     {{-- Complete Your Account / Update Your Account --}}
-                    <a href="/onboarding?brand={{ $brand }}&update={{ !$showCompleteYourAccountButton ? 'true' : 'false'  }}" 
+                    <a href="/onboarding?brand={{ $brand }}&update={{ !$showCompleteYourAccountButton ? 'true' : 'false'  }}"
                         class="tw-btn-secondary tw-border-2 tw-text-white tw-w-auto tw-inline-flex tw-max-w-[267px] tw-mx-2"
                     >
                         {{ $showCompleteYourAccountButton ? 'Complete Your Account' : 'Update Your Account' }}
@@ -91,7 +91,7 @@
                 </div>
 
             </div>
-    
+
         </div>
     </div>
 

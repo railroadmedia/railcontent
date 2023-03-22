@@ -20,7 +20,7 @@ class SalesController extends BaseController
 
     public function trial()
     {
-        return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'trialVersion' => true]);
+        return view('guitareo.sales.subscription', ['theme' => 'guitareo', 'trialVersion' => true, 'promoVersion' => 'true']);
     }
 
     public function promo()
@@ -60,7 +60,7 @@ class SalesController extends BaseController
 
     public function lifetime()
     {
-        return view('guitareo.shop.pages.lifetime-bundle');
+        return view('guitareo.shop.pages.lifetime-bundle', [ 'theme' => 'guitareo' ]);
     }
 
 

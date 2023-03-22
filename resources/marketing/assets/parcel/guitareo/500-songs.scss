@@ -136,12 +136,12 @@ img {
   position: relative;
 
   .row {
-    background: linear-gradient(to top, #141416 0%, rgba(20, 20, 22, 0) 60%), url(https://guitareo.s3.amazonaws.com/500-songs/header.jpg) 57% center/cover no-repeat;
+    background: linear-gradient(to top, #141416 0%, rgba(20, 20, 22, 0) 60%), url(https://d122ay5chh2hr5.cloudfront.net/500-songs/header.jpg) 57% center/cover no-repeat;
     padding: 25px 15px;
     width: 100%;
     max-width: 1400px;
     @include tablet {
-      background: #141416 url(https://guitareo.s3.amazonaws.com/500-songs/header.jpg) 57% center/cover no-repeat;
+      background: #141416 url(https://d122ay5chh2hr5.cloudfront.net/500-songs/header.jpg) 57% center/cover no-repeat;
       padding: 40px 15px;
     }
   }
@@ -721,12 +721,12 @@ img {
   position: relative;
 
   .background {
-    background: linear-gradient(to right, #000 0%, transparent 70%), url(https://guitareo.s3.amazonaws.com/500-songs/meet-bg.jpg) 61% 50%/cover no-repeat;
+    background: linear-gradient(to right, #000 0%, transparent 70%), url(https://d122ay5chh2hr5.cloudfront.net/500-songs/meet-bg.jpg) 61% 50%/cover no-repeat;
     max-width: 1600px;
     margin: 0 auto;
     padding: 60px 7px;
     @include tablet {
-      background: #000 url(https://guitareo.s3.amazonaws.com/500-songs/meet-bg.jpg) center center/cover no-repeat;
+      background: #000 url(https://d122ay5chh2hr5.cloudfront.net/500-songs/meet-bg.jpg) center center/cover no-repeat;
       padding: 60px 15px;
     }
     @include desktop {
@@ -971,7 +971,7 @@ img {
 }
 
 .final {
-  background: #171717 url(https://guitareo.s3.amazonaws.com/500-songs/customize.jpg) center center/cover;
+  background: #171717 url(https://d122ay5chh2hr5.cloudfront.net/500-songs/customize.jpg) center center/cover;
   position: relative;
   overflow: hidden;
   text-align: center;

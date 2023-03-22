@@ -56,11 +56,11 @@ class Carousel extends Model
             unset($model['uuid']);
 
             if (gettype($model['img']) === 'object') {
-                $model['img'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/' . $model->brand->name . '/carousels/' . $uuid . '-' . $model['img']->getClientOriginalName();
+                $model['img'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' . $model['img']->getClientOriginalName();
             }
 
             if (gettype($model['logo']) === 'object') {
-                $model['logo'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/' . $model->brand->name . '/carousels/' . $uuid . '-' . $model['logo']->getClientOriginalName();
+                $model['logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' . $model['logo']->getClientOriginalName();
             }
         });
     }

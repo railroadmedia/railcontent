@@ -316,7 +316,7 @@ class OrderController extends Controller
                 'bonuses' => json_encode($bonuses),
                 'paymentMethodsJson' => $paymentMethodsJson,
                 'shippingAddressesJson' => $shippingAddressesJson,
-                'allMembershipProductSkus' => config('event-data-synchronizer.drumeo_membership_product_skus', []),
+                'allMembershipProductSkus' => config('event-data-synchronizer.' . $brand . '_membership_product_skus', []),
                 'lifetimeMembershipProductSkus' => config('ecommerce.lifetime_membership_product_skus.drumeo', []),
                 'membershipsNumberOfFreeDays' => config('ecommerce.memberships_number_of_free_days.drumeo', []),
             ]

@@ -12,6 +12,7 @@
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+        <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
 
         @yield('head-includes')
 
@@ -19,7 +20,7 @@
 
         {!! \App\Analytics\Tracker::headBottom() !!}
 
-        <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
     </head>
 
     <body class="flex flex-col w-full min-h-screen pt-[40px] lg:pt-[56px] @yield('body-class')"
@@ -43,7 +44,7 @@
              x-on:click="showOverlay = !showOverlay, sidebarOpen = !sidebarOpen"
              x-bind:class="{ 'fixed h-screen w-screen z-30 bg-black bg-opacity-20': showOverlay }"
         ></div>
-        
+
          @yield('layout-scripts')
         {!! \App\Analytics\Tracker::bodyBottom() !!}
     </body>

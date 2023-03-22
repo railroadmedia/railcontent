@@ -19,9 +19,9 @@ class CmsAccessorySeeder extends Seeder
             "name" => "Drumeo EarDRUM In-Ear Monitors",
             "slug" => "eardrums",
             "sku" => "drumeo-eardrums",
-            "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/card-thumbs/drumeo-eardrums.jpg",
+            "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/drumeo-eardrums.jpg",
             "meta_desc" => "Protect your ears + play your favorite songs.",
-            "meta_img" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/eardrums/Pro_BG2.jpg",
+            "meta_img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Pro_BG2.jpg",
             "short_desc" => "Feel every kick drum while protecting your ears. Drumeo’s new EarDRUMS are professional-quality in-ear monitors for drummers of all levels.",
             "header_text" => "",
             "price" => 149,
@@ -81,9 +81,9 @@ class CmsAccessorySeeder extends Seeder
             "name" => "Drumeo QuietKick",
             "slug" => "quietkick",
             "sku" => "quietkick",
-            "thumbnail" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/card-thumbs/quietkick.jpg",
+            "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/quietkick.jpg",
             "meta_desc" => "Improve your kick foot anywhere.",
-            "meta_img" => "https://drumeo-assets.s3.amazonaws.com/drum-shop/quietkick/fb-share-image.jpg",
+            "meta_img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/fb-share-image.jpg",
             "short_desc" => "Improve your kick foot anywhere.",
             "header_text" => "",
             "price" => 79,
@@ -98,7 +98,7 @@ class CmsAccessorySeeder extends Seeder
             "guaranteed" => false,
             "lifetime_access" => false,
             "free_shipping" => false,
-            'bundle_img' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/quietkick_card.jpg',
+            'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/quietkick_card.jpg',
             "bundle_desc" => "Improve your kick foot anywhere with the portable & quiet bass drum workout pad. Attaches to any single OR double pedal (pedal not included).",
             'bundle_free_shipping' => true,
             "images" => [
@@ -911,13 +911,13 @@ Say you're learning a new song, and it's in the key of Eb major. But you haven't
 
 You simply pull out your handy Chords & Scales Book and use the keyboard tabs on the side to find Eb and quickly flip to the page:
 
-<img src='https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg' alt='image 1' />
+<img src='https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg' alt='image 1' />
 
 In there, you'll find all the major, minor, sus, and 7th chords you can expect in Eb, along with the notes of 9 different scales all starting on Eb.
 
 Or, say you need to quickly find an F major chord in 1st inversion. Again, just use the tab to flip to F and find all the information you need:
 
-<img src='https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg' alt='image 2' />
+<img src='https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg' alt='image 2' />
 
 Easy peasy!
 
@@ -989,13 +989,13 @@ Say you're learning a new song, and it's in the key of Eb major. But you haven't
 
 You simply pull out your handy Chords & Scales Book and use the keyboard tabs on the side to find Eb and quickly flip to the page:
 
-<img src='https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg' alt='image 1' />
+<img src='https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg' alt='image 1' />
 
 In there, you'll find all the major, minor, sus, and 7th chords you can expect in Eb, along with the notes of 9 different scales all starting on Eb.
 
 Or, say you need to quickly find an F major chord in 1st inversion. Again, just use the tab to flip to F and find all the information you need:
 
-<img src='https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg' alt='image 2' />
+<img src='https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg' alt='image 2' />
 
 Easy peasy!
 
@@ -1067,7 +1067,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
 
         <a target=\"_blank\" class=\"text-center\" style=\"display:inline-block\" href=\"https://pianote.s3.amazonaws.com/shop/products/practice-planner/preview.pdf\">
             <strong>Click to see inside &raquo;</strong><br>
-            <img class='w-full mt-1' src=\"https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg\" alt='sample image' />
+            <img class='w-full mt-1' src=\"https://www.musora.com/musora-cdn/image/width=850,quality=85/https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg\" alt='sample image' />
         </a>",
             "product_img" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg",
             "features" => [
@@ -1181,7 +1181,7 @@ This is Lisa Witt’s personal practice guide. Written by her, exclusively for p
 
         <a target=\'_blank\" class=\"text-center\" style=\"display:inline-block\" href=\"https://pianote.s3.amazonaws.com/shop/products/practice-planner/preview.pdf\">
             <strong>Click to see inside &raquo;</strong><br>
-            <img class='w-full mt-1' src=\"https://cdn.musora.com/image/fetch/w_850,q_auto:best/https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg\" alt='sample image' />
+            <img class='w-full mt-1' src=\"https://www.musora.com/musora-cdn/image/width=850,quality=85/https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg\" alt='sample image' />
         </a>",
             "product_img" => "https://pianote.s3.amazonaws.com/shop/products/practice-planner/pianote-planner.jpg",
             "features" => [

@@ -14,11 +14,11 @@
 
 @section('meta-description', 'Start playing REAL songs today!')
 
-@section('meta-img', 'https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/share-image.jpg')
+@section('meta-img', 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/share-image.jpg')
 
 @section('meta-url', 'https://www.pianote.com/learn-songs')
 
-@section('lesson-logo', 'https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/logo-horizontal.png')
+@section('lesson-logo', 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/logo-horizontal.png')
 
 @section('lesson-index-url', '/learn-songs/lessons')
 

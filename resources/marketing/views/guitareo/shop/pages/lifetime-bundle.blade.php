@@ -5,7 +5,7 @@
     <title>The Lifetime Bundle</title>
     <meta name="description" content="Become a lifelong learner of music.">
     <meta property="og:description" content="Become a lifelong learner of music.">
-    <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/promos/black-friday/lifetime-shop.jpg" style="display: none;">
+    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/lifetime-shop.jpg" style="display: none;">
     <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">
     <style>
         .side-bar .side-slide .logo {max-height:130px;display:none;}
@@ -37,7 +37,7 @@
             'freeShipping' => false,
             'lineBreak' => true,
             'included' => true,
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/guitareo-lifetime.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/guitareo-lifetime.jpg',
         ],
         [
             'name' => 'Lifetime Drumeo Membership',
@@ -51,7 +51,7 @@
             'freeShipping' => false,
             'lineBreak' => true,
             'included' => true,
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/drumeo-lifetime.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/drumeo-lifetime.jpg',
         ],
         [
             'name' => 'Lifetime Pianote Membership',
@@ -65,7 +65,7 @@
             'freeShipping' => false,
             'lineBreak' => true,
             'included' => true,
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/pianote-lifetime.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/pianote-lifetime.jpg',
         ],
         [
             'name' => 'Lifetime Singeo Membership',
@@ -79,7 +79,7 @@
             'freeShipping' => false,
             'lineBreak' => true,
             'included' => true,
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/singeo-lifetime.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/singeo-lifetime.jpg',
         ],
         [
             'name' => '(NEW) The Guitarist’s Survival Kit',
@@ -92,7 +92,7 @@
             'lifetimeAccess' => false,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/promos/november/survival-kit-shop.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/november/survival-kit-shop.jpg',
         ],
         [
             'name' => 'GuitarQuest',
@@ -157,22 +157,22 @@
             'lifetimeAccess' => true,
             'freeShipping' => false,
             'lineBreak' => true,
-            'img' => 'https://guitareo.s3.amazonaws.com/sales/promos/black-friday/rhythm_groove_cart.jpg',
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/rhythm_groove_cart.jpg',
         ],
     ];
 @endphp
 
 @section('top')
-    @include('guitareo.shop._partials.slider', [
+    @include('_partials.components.shop.slider', [
         "headerText" => '<strong>Become a lifelong learner of music.</strong><br><h3 class="leading-tight text-gradient uppercase mb-2"><strong>ONLY <s class="opacity-60">100</s>  SPOTS</strong><br></h3>',
         "videoSrc" => "//player.vimeo.com/video/774475100",
-        "videoThumb" => "https://guitareo.s3.amazonaws.com/sales/promos/black-friday/sound-better-thumb.jpg",
+        "videoThumb" => "https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/sound-better-thumb.jpg",
     ])
 
-     @include('guitareo.shop._partials.sidebar', [
+     @include('_partials.components.shop.sidebar', [
         "bundle" => true,
         "soldOut" => true,
-        "logo" => "https://guitareo.s3.amazonaws.com/shop/bundles/lifetime_logo_black.png",
+        "logo" => "https://d122ay5chh2hr5.cloudfront.net/shop/bundles/lifetime_logo_black.png",
         "sku" => "products[GUITAREO-LIFETIME-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&products[GUITAR-SYSTEM]=1&products[AGME-JAN-2019-SEMESTER]=1&products[GTME-OCT-2018-SEMESTER]=1&redirect=/order&locked=true",
         "fullPrice" => 1200,
         "price" => 1200,
@@ -187,7 +187,7 @@
             <div class="accordion-content bundle">
         <div class="flex flex-wrap my-7 lg:my-0 lg:mb-7">
             <h4 class="font-extrabold text-center text-xl md:text-2xl w-full mb-4 mt-0">What's included:</h4>
-            <img class="w-full" src="https://guitareo.s3.amazonaws.com/sales/promos/november/lifetime-bundle-spread.png" alt="bundle spread">
+            <img class="w-full" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/november/lifetime-bundle-spread.png" alt="bundle spread">
             <p>
                 <i>“My goal is to be one with the music. I just dedicate my whole life to this art.” - Jimi Hendrix </i><br><br>
 

@@ -13,14 +13,23 @@ This repository is designed to run on PHP 8.0, MySQL 8.0, and Apache/PHP-FPM.
 - run `r musora-web-platform composer install` -- NOTE: if asked for nova package credentials, 
   input 'caleb@drumeo.com' for the username and for the password use our Nova license key which is inside the 1pass note: 
   "Laravel Nova v4.0 License Key". When it asks if you want to store a composer auth file, enter Y
-- run these two sets of commands, each conveniently available as a one liner
+- run these two sets of commands
     - set up databases
         ```
-        r musora db8 local fromprod && r drumeo db8 local fromprod && r pianote db8 local fromprod && r guitareo db8 local fromprod && r singeo db8 local fromprod && r musora-web-platform artisan migrate
+        r musora db8 local fromprod && 
+        r drumeo db8 local fromprod && 
+        r pianote db8 local fromprod && 
+        r guitareo db8 local fromprod && 
+        r singeo db8 local fromprod && 
+        r musora-web-platform artisan migrate
         ```
     - compile frontend assets
         ```
-        cd /app/musora-web-platform && nvm use 16 && yarn && yarn platform-production && yarn marketing-production && yarn pp && echo "gotem"
+        cd /app/musora-web-platform && 
+        nvm use 16 && 
+        yarn &&
+        yarn pp && 
+        yarn mp
         ```
 - [https://devplatform.musora.com:8443](https://devplatform.musora.com:8443) should now load and the app and automated testing should work
 
@@ -432,15 +441,15 @@ of our CDN url to serve it from our cloudflare CDN.
 
 URL Structure:  
 ```
-https://musora.com/cdn-cgi/image/FORMATTING_OPTIONS/FULL_SOURCE_IMAGE_URL
+https://www.musora.com/musora-cdn/image/FORMATTING_OPTIONS/FULL_SOURCE_IMAGE_URL
 ```
 
 Examples:  
 ```
-https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/e275983d-455d-43af-6c8a-f1e62bda7500/public
+https://www.musora.com/musora-cdn/image/width=100,height=100,quality=85/https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/e275983d-455d-43af-6c8a-f1e62bda7500/public
 ```  
 ```
-https://musora.com/cdn-cgi/image/width=100,height=100,quality=85/https://s3.amazon.com/my-image.jpeg
+https://www.musora.com/musora-cdn/image/width=100,height=100,quality=85/https://s3.amazon.com/my-image.jpeg
 ```  
 
 

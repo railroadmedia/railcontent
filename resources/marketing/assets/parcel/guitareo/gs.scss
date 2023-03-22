@@ -57,7 +57,7 @@ h1, h2, h3, h4, h5, h6, p {
     position: relative;
     @include tablet {
       padding: 85px 0;
-      background: #000 url(https://guitareo.s3.amazonaws.com/tripwire/header.jpg) center top no-repeat;
+      background: #000 url(https://d122ay5chh2hr5.cloudfront.net/tripwire/header.jpg) center top no-repeat;
     }
     @include desktop {
       padding: 120px 0;
@@ -161,7 +161,7 @@ h1, h2, h3, h4, h5, h6, p {
   &.stacked {
     .row {
       color: #FFF;
-      background: #000 url(https://guitareo.s3.amazonaws.com/tripwire/header.jpg) center top/cover no-repeat;
+      background: #000 url(https://d122ay5chh2hr5.cloudfront.net/tripwire/header.jpg) center top/cover no-repeat;
       margin: 0 auto;
       text-align: center;
       padding: 20px 0;
@@ -748,12 +748,12 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .meet-nate {
-  background: #000 url("https://guitareo.s3.amazonaws.com/tripwire/meet-nate-mobile.jpg") center 13%/cover;
+  background: #000 url("https://d122ay5chh2hr5.cloudfront.net/tripwire/meet-nate-mobile.jpg") center 13%/cover;
   color: #FFF;
   position: relative;
   padding: 60px 10px 80px;
   @include tablet {
-    background: #000 url("https://guitareo.s3.amazonaws.com/tripwire/meet-nate.jpg") center 15%/cover;
+    background: #000 url("https://d122ay5chh2hr5.cloudfront.net/tripwire/meet-nate.jpg") center 15%/cover;
     padding: 110px 20px 190px;
   }
   @include desktop {
@@ -874,7 +874,7 @@ h1, h2, h3, h4, h5, h6, p {
 }
 
 .final {
-  background: #171717 url(https://guitareo.s3.amazonaws.com/sales/customize-bg.jpg) center center/cover;
+  background: #171717 url(https://d122ay5chh2hr5.cloudfront.net/sales/customize-bg.jpg) center center/cover;
   position: relative;
   overflow: hidden;
   text-align: center;

@@ -7,7 +7,7 @@
 
     <meta name="description" content="Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.">
     <meta property="og:description" content="Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
@@ -110,7 +110,7 @@
     {{--<div class="container mx-auto">--}}
     {{--<div class="text text-left">--}}
     {{--<img class="logo"--}}
-    {{--src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/march/logo.png">--}}
+    {{--src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/march/logo.png">--}}
     {{--<p>--}}
     {{--<strong>ONLY <s class='opacity-60'>50</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability()}} SPOTS LEFT</strong>--}}
     {{--</p>--}}
@@ -125,7 +125,7 @@
             <div class="w-full mx-auto mt-10 mb-20 px-3" style="max-width:920px;">
                 <img
                     class="cursor-pointer"
-                    src="https://cdn.musora.com/image/fetch/w_1300,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/anniversary/2023/thumb.jpg"
+                    src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/anniversary/2023/thumb.jpg"
                     alt="Video thumbnail"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -164,7 +164,7 @@
             <div class="max-w-md md:max-w-4xl mx-auto px-4 lg:px-0">
                 <div class="flex items-center mb-10 md:mb-32 flex-col md:flex-row">
                     <div class="md:w-1/2 md:pl-10 md:order-1 mb-6 md:mb-0">
-                        <img class="rounded-xl" src="https://pianote.s3.amazonaws.com/sales/promos/black-friday/lifetime/lifetime-headphones-collage.jpg" alt="lifetime headphones 1">
+                        <img class="rounded-xl" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/lifetime/lifetime-headphones-collage.jpg" alt="lifetime headphones 1">
                     </div>
                     <p class="md:text-left md:w-1/2" style="color:#A4AFC7;">
                         Two, maybe three times per year you get the chance to become a Pianote Lifetime Member. <br><br>
@@ -178,7 +178,7 @@
                 </div>
                 <div class="flex items-center mb-10 flex-col md:flex-row">
                     <div class="md:w-1/2 md:pr-10 mb-6 md:mb-0">
-                        <img class="rounded-xl" src="https://pianote.s3.amazonaws.com/sales/promos/black-friday/lifetime/lifetime-headphones-feature.jpg" alt="lifetime headphones 2">
+                        <img class="rounded-xl" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/lifetime/lifetime-headphones-feature.jpg" alt="lifetime headphones 2">
                     </div>
                     <div class="md:text-left md:w-1/2">
                         <h4 class="font-extrabold mb-4">Hear your piano the way it was meant to sound</h4>
@@ -198,7 +198,7 @@
 
             <div class="max-w-4xl mx-auto px-4">
                 <div class="flex flex-wrap mb-2">
-                    <img class="w-full rounded-xl mb-2 cursor-pointer autoplay-video lazyloaded" data-src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-04.png" alt="montage 4" data-open="unbox" aria-haspopup="true" tabindex="0" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://pianote.s3.amazonaws.com/products/concert-headphones/montage-04.png">
+                    <img class="w-full rounded-xl mb-2 cursor-pointer autoplay-video lazyloaded" data-src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/concert-headphones/montage-04.png" alt="montage 4" data-open="unbox" aria-haspopup="true" tabindex="0" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/concert-headphones/montage-04.png">
                 </div>
             </div>
         </div>
@@ -222,7 +222,7 @@
                     Exact dates and times TBD. But we’ll make sure you have plenty of notice.
 
                 </p>
-                <img class="mb-4 sm:mb-0 order-0 sm:order-1 w-36 sm:w-72 lg:w-80" src="https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/june/Live_Chat_Screen.png" alt="Lisa">
+                <img class="mb-4 sm:mb-0 order-0 sm:order-1 w-36 sm:w-72 lg:w-80" src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/Live_Chat_Screen.png" alt="Lisa">
             </div>
         </div>
     </section>
@@ -238,7 +238,7 @@
                         <div class="flip-div inline-block relative w-full group" style="padding-bottom: 47%;perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div class="front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="h-full w-full bg-black bg-center bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_460,q_auto:best/https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/pianote-lifetime.png"></div>
+                                    <div class="h-full w-full bg-black bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=460,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/pianote-lifetime.png"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -261,84 +261,84 @@
                 @php
                     $bonuses = [
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/shop/card-thumbs/headphones-cart.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/headphones-cart.jpg',
                             'title' => 'Pianote Headphones',
                             'description' => 'Hi-end, lightweight over-ear headphones for beautiful private practice sessions.',
                             'price' => 189,
                             'feature' => "Free Shipping",
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
                             'title' => 'Chords & <br>Scales Book',
                             'description' => 'Your encyclopedia of piano chords & scales.',
                             'price' => 39,
                             'feature' => "Free Shipping",
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/planner.png',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/planner.png',
                             'title' => 'Practice <br>Planner',
                             'description' => 'Always know exactly what to practice.',
                             'price' => 39,
                             'feature' => "Free Shipping",
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/classical-piano-book.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/classical-piano-book.jpg',
                             'title' => 'Classical <br>Book',
                             'description' => '92 pages full of beautiful pieces by famous classical composers that you can actually play!',
                             'price' => 39,
                             'feature' => "Free Shipping",
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/shop/products/2021-merch/card-chords-poster.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2021-merch/card-chords-poster.jpg',
                             'title' => 'Chords Poster',
                             'description' => 'Always know your chord shapes with this helpful poster.',
                             'price' => 9,
                             'feature' => "Free Shipping",
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/shop/products/2021-merch/card-scales-poster.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/2021-merch/card-scales-poster.jpg',
                             'title' => 'Scales Poster',
                             'description' => 'Never forget the notes of a scale with this easy-to-read poster.',
                             'price' => 9,
                             'feature' => "Free Shipping",
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/promos/november/bonuses/christmas-songbook-card.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/christmas-songbook-card.jpg',
                             'title' => 'Christmas Book',
                             'description' => 'Learn these 10 beautiful Christmas Carols.',
                             'price' => 10,
                             'feature' => "Instant Access",
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/Lisa-zoom-live-card.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/Lisa-zoom-live-card.jpg',
                             'title' => 'Exclusive Masterclass',
                             'description' => 'Join Lisa in an exclusive LIVE Zoom masterclass to get your questions answered.',
                             'price' => -1,
                             'feature' => "<b class='text-promo'>Exclusive</b> <br>Masterclass",
                         ],
                         [
-                            'image' => 'https://pianote.s3.amazonaws.com/sales/2022/9-digital-courses-card.jpg',
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/9-digital-courses-card.jpg',
                             'title' => 'Training Packs',
                             'description' => 'Get 9 digital courses for life. Even if you cancel your membership. They’re yours forever.',
                             'price' => 716,
                             'feature' => "Lifetime Access",
                         ],
                         [
-                            'image' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/guitareo-lifetime.jpg',
+                            'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/guitareo-lifetime.jpg',
                             'title' => 'Guitareo Membership',
                             'description' => 'Get guitar lessons for LIFE with a Guitareo Lifetime Membership',
                             'price' => 0,
                             'feature' => "Lifetime Access",
                         ],
                         [
-                            'image' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/drumeo-lifetime.jpg',
+                            'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/drumeo-lifetime.jpg',
                             'title' => 'Drumeo Membership',
                             'description' => 'Get drumming lessons for LIFE with a Drumeo Lifetime Membership',
                             'price' => 0,
                             'feature' => "Lifetime Access",
                         ],
                         [
-                            'image' => 'https://guitareo.s3.amazonaws.com/sales/lifetime/singeo-lifetime.jpg',
+                            'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/lifetime/singeo-lifetime.jpg',
                             'title' => 'Singeo Membership',
                             'description' => 'Get singing lessons for LIFE with a Singeo Lifetime Membership',
                             'price' => 0,
@@ -355,7 +355,7 @@
                                         <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-drumeo rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                         {{--                                        <h4 class="absolute text-white -top-3 -left-3  py-3 px-2.5 rounded-full transform -rotate-12" style="    line-height: 0.6;background-color:#cda880;"><strong>6<br><span class="leading-none" style="font-size: 50%;">PAIRS</span></strong></h4>--}}
                                     @endif
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_460,q_auto:best/{{ $bonus['image'] }}"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=460,quality=85/{{ $bonus['image'] }}"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>

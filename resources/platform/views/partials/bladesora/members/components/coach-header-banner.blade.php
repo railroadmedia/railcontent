@@ -43,7 +43,7 @@
             >
                 <span>
                     <i aria-hidden="true" class="fa fa-check tw-mr-1"></i>
-                    <span>Subscribed</span> 
+                    <span>Subscribed</span>
                 </span>
             </button>
         </div>
@@ -61,7 +61,7 @@
         @endif
         @if ($vimeoVideo != null)
             <div class="lg:tw-mr-4">
-                <button onclick="onModalButtonClick()" 
+                <button onclick="onModalButtonClick()"
                         data-open-modal="coach-trailer-modal"
                         class="tw-btn tw-btn-secondary tw-transition hover:tw-bg-opacity-10 hover:tw-bg-white tw-box-border tw-px-auto tw-mb-4 tw-w-[200px]"
                 >
@@ -85,7 +85,7 @@
             <a href="{{ $profileUrl }}" class="tw-no-underline">
                 <img
                     class="tw-rounded inset-border"
-                    src="https://musora.com/cdn-cgi/image/width=50,height=50/{{ currentUser['avatar'] }}"
+                    src="https://www.musora.com/musora-cdn/image/width=50,height=50/{{ currentUser['avatar'] }}"
                     alt="User Avatar"
                 >
             </a>

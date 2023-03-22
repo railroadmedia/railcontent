@@ -5,7 +5,7 @@
     <meta property="og:title" content="Singeo Shop - Get Lessons, T-Shirts, & More!">
     <meta name="description" content="Singeo.com: Your start-to-finish guide to confident singing">
     <meta property="og:description" content="Singeo.com: Your start-to-finish guide to confident singing">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg"/>
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2022/og-image.jpg"/>
     <meta property="og:url" content="https://www.singeo.com/shop/">
 @endsection
 
@@ -16,10 +16,10 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header" style="background-color:#080e1e;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/products/shop-header.jpg);">
+    <header class="drum-shop-header" style="background-color:#080e1e;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/shop-header.jpg);">
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                <img class="logo" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png" alt="singeo logo">
+                <img class="logo" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="singeo logo">
                 <h1><strong>SHOP</strong></h1>
                 <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>
             </div>
@@ -88,7 +88,7 @@
                 {{--                <div class="float-left w-full px-2 md:px-3 md:w-1/2 card-wrap">--}}
                 {{--                    <a href="/shop/bundle-unlimited" class="bundle-card lg:pb-1">--}}
                 {{--                        <span class="top-left-badge text-white bg-promo"><i class="fas fa-star"></i> $538 IN FREE BONUSES</span>--}}
-                {{--                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-64" style="background-image:url(https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/black-friday/unlimited-lessons.png);"></div>--}}
+                {{--                        <div class="bg-center bg-cover pb-40 sm:pb-56 xl:pb-64" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/unlimited-lessons.png);"></div>--}}
                 {{--                        <div class="float-left w-full px-2 md:px-3">--}}
                 {{--                            <p><strong>Singeo Membership + 5 Bonuses </strong><br>--}}
                 {{--                                <em>Singeo Annual Membership<br class="hidden lg:inline"> + Starter Kit + Practice Poster + Guitar/Piano Lessons & More!</em>--}}
@@ -101,13 +101,13 @@
                 <div class="float-left w-full px-2 md:px-3 card-wrap">
                     <a href="/shop/singing-starter-kit" class="flex flex-row text-white rounded-xl mb-3 md:mb-5 overflow-hidden relative w-full sm:text-left px-5 lg:px-10 py-10 sm:py-10 lg:py-28 xl:py-32">
                         <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
-                            <img class="h-20 md:h-16 lg:h-28" src="https://cdn.musora.com/image/fetch/w_500,q_auto:best/https://singeo.s3.amazonaws.com/products/singing-starter-kit/logo.png" alt="essential bundle logo"><br>
+                            <img class="h-20 md:h-16 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/logo.png" alt="essential bundle logo"><br>
                             <p class="leading-tight mt-2 mb-2 lg:mb-3 lg:mt-5 text-sm">
                                 Everything you need to <b>start singing now.</b>
                             </p>
                             <div class="join white smaller w-full" style="background:#D46A7D;color:white;">only <!--<s style="color:#C4C4C4;">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>--> ${{ floatval($productPrices['singing-starter-kit']->discounted_price) }} &raquo;</div><br>
                         </div>
-                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover" style="background-position:60% 0;background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/black-friday/singing-starter-kit-banner.jpg);"></div>
+                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover" style="background-position:60% 0;background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/singing-starter-kit-banner.jpg);"></div>
                         <div class="inline-block sm:hidden absolute inset-0 z-0" style="background-color:#293239;"></div>
                     </a>
                 </div>
@@ -115,13 +115,13 @@
                 <div class="float-left w-full px-2 md:px-3 card-wrap">
                     <a href="/beautiful-harmonies" class="flex flex-row-reverse text-white rounded-xl mb-5 overflow-hidden relative w-full sm:text-left px-4 lg:px-12 py-10 sm:py-7 lg:py-20 margin-per">
                         <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
-                            <img class="h-20 md:h-16 lg:h-28" src="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/black-friday/essential-logo.png" alt="essential bundle logo"><br>
+                            <img class="h-20 md:h-16 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/essential-logo.png" alt="essential bundle logo"><br>
                             <p class="leading-tight mt-4 mb-2 lg:mb-3 lg:mt-5 text-sm">
                                 Take your singing skills to the <b>next level.</b>
                             </p>
                             <div class="join white smaller w-full" style="background:white;color:#2B384D;">only <!--<s style="color:#C4C4C4;">${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price) }}</s>--> ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }} &raquo;</div><br>
                         </div>
-                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/sales/promos/black-friday/beautiful-harmonies-banner.jpg);"></div>
+                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/beautiful-harmonies-banner.jpg);"></div>
                         <div class="inline-block sm:hidden absolute inset-0 z-0" style="background-color:#293239;"></div>
                     </a>
                 </div>

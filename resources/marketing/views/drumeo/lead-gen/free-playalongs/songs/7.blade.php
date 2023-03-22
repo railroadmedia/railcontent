@@ -16,9 +16,9 @@
     /free-playalongs/songs/8
 @stop
 
-@section('prev-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/glen-sobel-7-8-rock.png')
+@section('prev-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/glen-sobel-7-8-rock.png')
 
-@section('next-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/tony-coleman-shuffle.png')
+@section('next-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/tony-coleman-shuffle.png')
 
 @section('assets')
     @include('drumeo.lead-gen.partials._assignment-resources', [

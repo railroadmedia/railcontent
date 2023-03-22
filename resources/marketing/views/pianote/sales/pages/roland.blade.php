@@ -34,10 +34,10 @@
 @endsection
 @section('promo-banner')
     <header class="text-center text-white" style="background-color:#0e1213;">
-        <div class="container relative mx-auto px-2 md:px-0 pb-7 md:pb-12 lg:pb-16 pt-3 lg:pt-5 bg-cover bg-top" style="background-image:url(https://cdn.musora.com/image/fetch/w_1920,q_auto:best/q_auto:best/https://pianote.s3.amazonaws.com/sales/trials/roland/header.jpg);">
+        <div class="container relative mx-auto px-2 md:px-0 pb-7 md:pb-12 lg:pb-16 pt-3 lg:pt-5 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1920,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/trials/roland/header.jpg);">
             <div class="z-10 relative">
                 <h5 class="text-light-navy mb-1"><em>Learn piano for FREE with</em></h5>
-                <img class="w-64 md:w-80 lg:w-96" src="https://pianote.s3.amazonaws.com/sales/trials/roland/pianote-roland-logo-blue.png"><br>
+                <img class="w-64 md:w-80 lg:w-96" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/trials/roland/pianote-roland-logo-blue.png"><br>
                 <i class="fas fa-play play-button autoplay-video memvideo mt-40 md:mt-48 lg:mt-60 mb-10 md:mb-7 lg:mb-20" x-on:click="rolandTrailer = true;"></i>
                 <h2><strong>Learn to play your Roland piano <br class="hidden md:inline">
                         anytime with real teachers.</strong></h2>
@@ -55,7 +55,7 @@
                 <div class="flex flex-wrap items-start justify-center mx-auto mt-1 md:mt-10 lg:mt-12" style="max-width:890px">
                     <div class="flex-image md:order-1 mx-auto my-4 md:my-0 w-full md:w-5/12 relative">
                         <i class="fas fa-play play-button smaller autoplay-video transform -translate-x-1/2 -translate-y-1/2 absolute top-1/2 left-1/2" x-on:click="rolandTrailer = true;"></i>
-                        <img class="w-full max-w-xs md:max-w-none" src="https://pianote.s3.amazonaws.com/sales/trials/roland/roland-lisa.png">
+                        <img class="w-full max-w-xs md:max-w-none" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/trials/roland/roland-lisa.png">
                     </div>
                     <div class="text-left w-full md:pr-6 lg:pr-10 md:w-7/12">
                         <p class="mx-auto max-w-xl leading-relaxed">
@@ -84,7 +84,7 @@
     <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative overflow-hidden" style="background:linear-gradient(to bottom, #000318, #01082a);">
         <div class="container mx-auto">
             <h3><em>Learn piano for FREE with</em></h3>
-            <img class="w-full max-w-sm md:max-w-lg lg:max-w-xl mb-6 md:mb-10 mt-1 md:mt-2 px-4" src="https://pianote.s3.amazonaws.com/sales/trials/roland/pianote-roland-logo.png"><br>
+            <img class="w-full max-w-sm md:max-w-lg lg:max-w-xl mb-6 md:mb-10 mt-1 md:mt-2 px-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/trials/roland/pianote-roland-logo.png"><br>
 
             <h4 class="leading-normal" style="margin:0 auto"><strong>Activate your 90 days of <br class="inline md:hidden">
                     FREE lessons with Pianote.<br>

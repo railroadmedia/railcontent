@@ -11,7 +11,7 @@
         <div class="container">
             <div class="flex flex-column pack-header align-h-center align-v-top relative pv gq-header">
                 <img id="packLogo"
-                     src="https://musora.com/cdn-cgi/image/width=1000,quality=90/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png"
+                     src="https://www.musora.com/musora-cdn/image/width=1000,quality=90/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/guitar-quest-logo.png"
                      class="mt-5">
 
                 <h1 class="heading text-white mb-2 mt-3 uppercase text-center">

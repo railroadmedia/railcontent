@@ -5,7 +5,7 @@
     @include('_partials.layout.global-header', [
         "theme_bg" => "bg-musora",
         "theme_text" => "text-musora",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/musora-white.svg",
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
         "links" => [
             "Home" => [
                 "iconClass" => "fas fa-home",
@@ -71,6 +71,6 @@
 @section('layout-footer')
     @include('_partials.layout.global-footer', [
         "brand" => "musora",
-        "logo" => "https://musora-ui.s3.amazonaws.com/logos/musora-white.svg"
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg"
     ])
 @stop

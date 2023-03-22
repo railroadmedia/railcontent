@@ -5,7 +5,7 @@
     <title>You Can Be A Singer – Let’s Sing A Song! | Singeo</title>
     <meta name="description" content="There is no better way to start singing than by actually singing something!"/>
 
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg">
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2022/og-image.jpg">
     <meta property="og:title" content="You Can Be A Singer – Let’s Sing A Song!">
     <meta property="og:description" content="There is no better way to start singing than by actually singing something!">
     <meta property="og:url" content="https://www.singeo.com/lets-sing-a-song/">
