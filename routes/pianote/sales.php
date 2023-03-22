@@ -55,7 +55,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/foundations', [SalesController::class, 'foundations'] );
     Route::get('/new-piano-players', [SalesController::class, 'newPianoPlayers'] );
     Route::get('/shop/new-piano-players', [SalesController::class, 'newPianoPlayers'] );
-    Route::get('/new-piano-players/deal', [SalesController::class, 'newPianoPlayersDeal'] );
+    Route::get('/new-piano-players-deal', [SalesController::class, 'newPianoPlayersDeal'] );
     Route::get('/concert-headphones-members', [SalesController::class, 'concertHeadphonesMember']);
 
     Route::get('/about', [SalesController::class, 'about'] );
