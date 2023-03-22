@@ -8160,16 +8160,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.67",
+            "version": "dev-5.0-feature-add-source-column-access-codes-CMT-7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "c46718e06d4f69eaf83a1794ea9a97c3fdc650c0"
+                "reference": "d9feef31b7a7d78e8991fadadf74ad1f5bc442c7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/c46718e06d4f69eaf83a1794ea9a97c3fdc650c0",
-                "reference": "c46718e06d4f69eaf83a1794ea9a97c3fdc650c0",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/d9feef31b7a7d78e8991fadadf74ad1f5bc442c7",
+                "reference": "d9feef31b7a7d78e8991fadadf74ad1f5bc442c7",
                 "shasum": ""
             },
             "require": {
@@ -8206,9 +8206,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.67"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-feature-add-source-column-access-codes-CMT-7"
             },
-            "time": "2023-03-17T21:30:56+00:00"
+            "time": "2023-03-14T09:10:12+00:00"
         },
         {
             "name": "railroad/lead-tracker",
