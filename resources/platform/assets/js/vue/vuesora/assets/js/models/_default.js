@@ -42,7 +42,7 @@ export default class ContentModel {
     }
 
     getPostField(key) {
-        const postField = this.post.fields.find(field => field.key === key);
+        const postField = this.post?.fields?.find(field => field.key === key);
 
         return postField ? postField.value : 'TBD';
     }
@@ -54,9 +54,9 @@ export default class ContentModel {
     }
 
     getPostDatum(key) {
-        const datum = this.post.data.find(data => data.key === key);
+        const datum = this.post?.data?.find(data => data.key === key);
 
-        return datum ? datum.value : 'TBD';
+        return datum && datum.value ? datum.value : 'TBD';
     }
 
     get postInstructor() {
@@ -89,7 +89,7 @@ export default class ContentModel {
     }
 
     getPostDuration() {
-        const video = this.post.fields.find(field => field.key === 'video');
+        const video = this.post?.fields?.find(field => field.key === 'video');
 
         if (video) {
             let duration = 0;
@@ -165,7 +165,7 @@ export default class ContentModel {
     }
 
     static mapDifficulty(post) {
-        const difficultyField = post.fields.find(field => field.key === 'difficulty');
+        const difficultyField = post?.fields?.find(field => field.key === 'difficulty');
         const difficulty = difficultyField ? difficultyField.value : null;
 
         if (!difficulty) {

@@ -4,6 +4,7 @@
     import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
     import SoundSlice from '../SoundSlice/SoundSlice.vue';
     import PlaybackCue from './PlaybackCue.vue';
+    import RelatedPlaylists from './RelatedPlaylists.vue';
     import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
     import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
     import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
@@ -159,6 +160,10 @@
             type: Object,
             default: {}
         },
+        relatedPlaylists: {
+            type: Object,
+            default: {}
+        },
         userName: {
             type: String,
             default: ''
@@ -290,10 +295,10 @@
                             Related Playlists
                         </h6>
                     </div>
-
-                    <ContentCatalogue v-if="relatedLesson.data && relatedLesson.data.length" catalogue-type="grid" :theme-color="brand" :use-theme-color="true" :brand="brand"
-                       :pre-loaded-content="relatedLesson" :display-inline="true"
-                        :user-id="userId"></ContentCatalogue>
+                    <RelatedPlaylists
+                        :playlists="relatedPlaylists"
+                        :brand="brand"
+                    />
                 </div>
             </div>
         </div>

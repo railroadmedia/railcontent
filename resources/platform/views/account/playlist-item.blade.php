@@ -64,6 +64,7 @@
         :video-resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
         :playlist-items="{{ $playlistItems }}" 
         :related-lesson="{{ $relatedLesson }}"
+        :related-playlists="{{ $relatedPlaylists }}"
         playlist-name="{{ $playlist['name'] }}"
         playlist-duration="{{ $playlist['duration'] }}"
         user-name="{{ user()->display_name }}" 

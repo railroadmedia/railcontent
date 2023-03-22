@@ -182,7 +182,7 @@ onBeforeMount(() => {
         <div @scroll="handleScroll" v-if="loadedLessons.length" id="cue-scroll-container"
             class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-overflow-y-auto tw-relative">
             <!-- Print Each Card -->
-            <playlist-card v-for="(lesson, i) in loadedLessons" :key="i" :index="i" :lesson="lesson" :token="token"
+            <playlist-card v-for="(lesson, i) in loadedLessons" :key="i+'playlist-card-cue'" :index="i" :lesson="lesson" :token="token"
                 :brand="brand" :cue-version="true" />
             <!-- Skeleton Loader For Infinite Scroll -->
             <div v-if="isLoading && infiniteScroll" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">

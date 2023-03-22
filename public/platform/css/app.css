@@ -21536,6 +21536,9 @@ a:visited{
 .tw-z-\[15\]{
   z-index: 15 !important;
 }
+.tw-z-10{
+  z-index: 10 !important;
+}
 .tw-order-1{
   order: 1 !important;
 }
@@ -21979,6 +21982,9 @@ a:visited{
 .tw-ml-1\.5{
   margin-left: 0.375rem !important;
 }
+.tw-mb-4{
+  margin-bottom: 1rem !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22261,6 +22267,12 @@ a:visited{
 .tw-h-52{
   height: 13rem !important;
 }
+.tw-h-\[366px\]{
+  height: 366px !important;
+}
+.tw-h-\[100px\]{
+  height: 100px !important;
+}
 .tw-max-h-\[100vh\]{
   max-height: 100vh !important;
 }
@@ -22287,6 +22299,9 @@ a:visited{
 }
 .tw-max-h-full{
   max-height: 100% !important;
+}
+.tw-max-h-\[540px\]{
+  max-height: 540px !important;
 }
 .tw-min-h-\[150px\]{
   min-height: 150px !important;
@@ -22588,6 +22603,36 @@ a:visited{
 }
 .tw-w-9\/12{
   width: 75% !important;
+}
+.tw-w-full{
+  width: 100% !important;
+}
+.tw-w-\[366px\]{
+  width: 366px !important;
+}
+.tw-w-full{
+  width: 100% !important;
+}
+.tw-w-\[100px\]{
+  width: 100px !important;
+}
+.tw-w-full{
+  width: 100% !important;
+}
+.tw-w-\[100px\]{
+  width: 100px !important;
+}
+.tw-w-full{
+  width: 100% !important;
+}
+.tw-w-\[100px\]{
+  width: 100px !important;
+}
+.tw-w-full{
+  width: 100% !important;
+}
+.tw-w-\[100px\]{
+  width: 100px !important;
 }
 .tw-min-w-\[232px\]{
   min-width: 232px !important;
@@ -23317,6 +23362,10 @@ a:visited{
   --tw-border-opacity: 1 !important;
   border-color: rgb(31 41 55 / var(--tw-border-opacity)) !important;
 }
+.tw-border-\[\#002039\]{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(0 32 57 / var(--tw-border-opacity)) !important;
+}
 .tw-border-b-\[\#223F57\]{
   --tw-border-opacity: 1 !important;
   border-bottom-color: rgb(34 63 87 / var(--tw-border-opacity)) !important;
@@ -23576,6 +23625,10 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity)) !important;
 }
+.tw-bg-\[\#F9F9F9\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(249 249 249 / var(--tw-bg-opacity)) !important;
+}
 .tw-bg-opacity-75{
   --tw-bg-opacity: 0.75 !important;
 }
@@ -23669,6 +23722,10 @@ a:visited{
 .tw-object-cover{
   -o-object-fit: cover !important;
      object-fit: cover !important;
+}
+.tw-object-fill{
+  -o-object-fit: fill !important;
+     object-fit: fill !important;
 }
 .tw-object-top{
   -o-object-position: top !important;
@@ -24164,6 +24221,15 @@ a:visited{
 .tw-pl-5{
   padding-left: 1.25rem !important;
 }
+.tw-pl-\[16px\]{
+  padding-left: 16px !important;
+}
+.tw-pt-\[1px\]{
+  padding-top: 1px !important;
+}
+.tw-pt-\[7px\]{
+  padding-top: 7px !important;
+}
 .tw-text-left{
   text-align: left !important;
 }
@@ -24280,6 +24346,30 @@ a:visited{
 .tw-text-\[22px\]{
   font-size: 22px !important;
 }
+.tw-text-\[14px\]{
+  font-size: 14px !important;
+}
+.tw-text-\[16px\]{
+  font-size: 16px !important;
+}
+.tw-text-\[14px\]{
+  font-size: 14px !important;
+}
+.tw-text-\[16px\]{
+  font-size: 16px !important;
+}
+.tw-text-\[14px\]{
+  font-size: 14px !important;
+}
+.tw-text-\[16px\]{
+  font-size: 16px !important;
+}
+.tw-text-\[14px\]{
+  font-size: 14px !important;
+}
+.tw-text-\[16px\]{
+  font-size: 16px !important;
+}
 .tw-font-bold{
   font-weight: 700 !important;
 }
@@ -24300,6 +24390,9 @@ a:visited{
 }
 .tw-font-medium{
   font-weight: 500 !important;
+}
+.tw-font-bold{
+  font-weight: 700 !important;
 }
 .tw-uppercase{
   text-transform: uppercase !important;
@@ -24596,6 +24689,22 @@ a:visited{
 .tw-text-\[\#232e30\]{
   --tw-text-opacity: 1 !important;
   color: rgb(35 46 48 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#9EC0DC\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
+}
+.tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#9EC0DC\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
+}
+.tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
@@ -25268,6 +25377,10 @@ a:visited{
 }
 .tw-dark .dark\:tw-bg-\[\#000c17\]\/80{
   background-color: rgb(0 12 23 / 0.8) !important;
+}
+.tw-dark .dark\:tw-bg-\[\#000C17\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 12 23 / var(--tw-bg-opacity)) !important;
 }
 .tw-dark .dark\:tw-text-white{
   --tw-text-opacity: 1 !important;
