@@ -1,193 +1,187 @@
 <script setup>
 /* Todo: RE add captions */
-    import { onBeforeMount, reactive, ref } from 'vue';
-    import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
-    import SoundSlice from '../SoundSlice/SoundSlice.vue';
-    import PlaybackCue from './PlaybackCue.vue';
-    import RelatedPlaylists from './RelatedPlaylists.vue';
-    import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
-    import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
-    import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
-    import Comments from '../../vuesora/views/comments/Comments.vue';
-    import ContentCatalogue from '../../vuesora/views/catalogues/ContentCatalogue.vue';
+import { onBeforeMount, reactive, ref } from 'vue';
+import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
+import SoundSlice from '../SoundSlice/SoundSlice.vue';
+import PlaybackCue from './PlaybackCue.vue';
+import RelatedPlaylists from './RelatedPlaylists.vue';
+import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
+import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
+import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
+import Comments from '../../vuesora/views/comments/Comments.vue';
+import PlaybackNavButtons from './PlaybackNavButtons.vue';
 
-    //-----------Reactive-----------//
-    const state = reactive({
-        commentsCollapsed: true,
-    })
+//-----------Props-----------//
+const props = defineProps({
+    lessonType: {
+        type: String,
+        default: ''
+    },
+    brand: {
+        type: String,
+        default: ''
+    },
+    userId: {
+        type: [String, Number],
+        default: ''
+    },
+    playlistId: {
+        type: [String, Number],
+        default: ''
+    },
+    additionalSoundsliceParams: {
+        type: String,
+        default: ''
+    },
+    soundsliceSlug: {
+        type: String,
+        default: ''
+    },
+    contentId: {
+        type: [Number, String],
+        default: ''
+    },
+    youtubeVideoId: {
+        type: [Number, String],
+        default: ''
+    },
+    vimeoVideoId: {
+        type: [Number, String],
+        default: ''
+    },
+    currentSecond: {
+        type: [Number, String],
+        default: ''
+    },
+    totalDuration: {
+        type: [Number, String],
+        default: ''
+    },
+    videoLength: {
+        type: [Number, String],
+        default: ''
+    },
+    progressState: {
+        type: [Number, String],
+        default: ''
+    },
+    useLegacyVideoPlayer: {
+        type: Boolean,
+        default: false,
+    },
+    videoPosterImageUrl: {
+        type: String,
+        default: ''
+    },
+    videoMediaSources: {
+        type: [Array, Object],
+        default: {}
+    },
+    hlsManifestUrl: {
+        type: String,
+        default: ''
+    },
+    videoChapters: {
+        type: Array,
+        default: []
+    },
+    likeCount: {
+        type: [Number, String],
+        default: ''
+    },
+    isLiked: {
+        type: Boolean,
+        default: false
+    },
+    songRanges: {
+        type: Array,
+        default: []
+    },
+    rangesVideoIds: {
+        type: Array,
+        default: []
+    },
+    castTitle: {
+        type: String,
+        default: ''
+    },
+    thumbnailUrl: {
+        type: String,
+        default: ''
+    },
+    description: {
+        type: String,
+        default: ''
+    },
+    instructors: {
+        type: Array,
+        default: []
+    },
+    parentTitle: {
+        type: String,
+        default: ''
+    },
+    videoResources: {
+        type: Array,
+        default: []
+    },
+    playlistName: {
+        type: String,
+        default: ''
+    },
+    playlistItems: {
+        type: Object,
+        default: {}
+    },
+    playlistDuration: {
+        type: [Number, String],
+        default: ''
+    },
+    playlistUrl: {
+        type: String,
+        default: ''
+    },
+    playlistItemId: {
+        type: String,
+        default: ''
+    },
+    playlistItemPosition: {
+        type: String
+    },
+    relatedLesson: {
+        type: Object,
+        default: {}
+    },
+    relatedPlaylists: {
+        type: Object,
+        default: {}
+    },
+    userName: {
+        type: String,
+        default: ''
+    },
+    userAvatar: {
+        type: String,
+        default: ''
+    },
+    userXp: {
+        type: [String, Number],
+        default: ''
+    },
+    userAccessLevel: {
+        type: [String, Number],
+        default: ''
+    },
+});
 
-    //-----------Refs-----------//
-
-
-    //-----------Props-----------//
-    const props = defineProps({
-        lessonType: {
-            type: String,
-            default: ''
-        },
-        brand: {
-            type: String,
-            default: ''
-        },
-        userId: {
-            type: [String, Number],
-            default: ''
-        },
-        playlistId: {
-            type: [String, Number],
-            default: ''
-        },
-        additionalSoundsliceParams: {
-            type: String,
-            default: ''
-        },
-        soundsliceSlug: {
-            type: String,
-            default: ''
-        },
-        contentId: {
-            type: [Number, String],
-            default: ''
-        },
-        youtubeVideoId: {
-            type: [Number, String],
-            default: ''
-        },
-        vimeoVideoId: {
-            type: [Number, String],
-            default: ''
-        },
-        currentSecond: {
-            type: [Number, String],
-            default: ''
-        },
-        totalDuration: {
-            type: [Number, String],
-            default: ''
-        },
-        videoLength: {
-            type: [Number, String],
-            default: ''
-        },
-        progressState: {
-            type: [Number, String],
-            default: ''
-        },
-        useLegacyVideoPlayer: {
-            type: Boolean,
-            default: false,
-        },
-        videoPosterImageUrl: {
-            type: String,
-            default: ''
-        },
-        videoMediaSources: {
-            type: [Array, Object],
-            default: {}
-        },
-        hlsManifestUrl: {
-            type: String,
-            default: ''
-        },
-        videoChapters: {
-            type: Array,
-            default: []
-        },
-        likeCount: {
-            type: [Number, String],
-            default: ''
-        },
-        isLiked: {
-            type: Boolean,
-            default: false
-        },
-        songRanges: {
-            type: Array,
-            default: []
-        },
-        rangesVideoIds: {
-            type: Array,
-            default: []
-        },
-        castTitle: {
-            type: String,
-            default: ''
-        },
-        thumbnailUrl: {
-            type: String,
-            default: ''
-        },
-        description: {
-            type: String,
-            default: ''
-        },
-        instructors: {
-            type: Array,
-            default: []
-        },
-        parentTitle: {
-            type: String,
-            default: ''
-        },
-        videoResources: {
-            type: Array,
-            default: []
-        },
-        playlistName: {
-            type: String,
-            default: ''
-        },
-        playlistItems: {
-            type: Object,
-            default: {}
-        },
-        playlistDuration: {
-            type: [Number, String],
-            default: ''
-        },
-        playlistUrl: {
-            type: String,
-            default: ''
-        },
-        playlistItemId: {
-            type: String,
-            default: ''
-        },
-        playlistItemPosition: {
-            type: String
-        },
-        relatedLesson: {
-            type: Object,
-            default: {}
-        },
-        relatedPlaylists: {
-            type: Object,
-            default: {}
-        },
-        userName: {
-            type: String,
-            default: ''
-        },
-        userAvatar: {
-            type: String,
-            default: ''
-        },
-        userXp: {
-            type: [String, Number],
-            default: ''
-        },
-        userAccessLevel: {
-            type: [String, Number],
-            default: ''
-        },
-    });
-    onBeforeMount(() => {
-        console.log(props)
-    });
+onBeforeMount(() => {
+    console.log(props)
+});
 </script>
 
 <template>
-    <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row tw-mb-4">
+    <div
+        class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row tw-mb-4">
         <div class="tw-flex tw-flex-col tw-w-full">
             <!--Player Wrapper -->
             <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
@@ -225,11 +219,10 @@
                             <VideoPlayer ref="mediaElementVueInstance" :theme-color="brand" :brand="brand"
                                 :poster="videoPosterImageUrl" :sources="videoMediaSources" :ranges="songRanges"
                                 :ranges-video-ids="rangesVideoIds" :show-range-buttons="true"
-                                :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters"
-                                :current-second="currentSecond" :content-id="contentId" :user-id="userId"
-                                :video-id="vimeoVideoId" :video-length="videoLength" :total-duration="totalDuration"
-                                :cast-title="castTitle" :use-intersection-observer="true" @play="handleVideoPlay"
-                                @pause="handleVideoPause">
+                                :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters" :current-second="currentSecond"
+                                :content-id="contentId" :user-id="userId" :video-id="vimeoVideoId"
+                                :video-length="videoLength" :total-duration="totalDuration" :cast-title="castTitle"
+                                :use-intersection-observer="true" @play="handleVideoPlay" @pause="handleVideoPause">
                                 <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                             </VideoPlayer>
                         </transition>
@@ -240,51 +233,31 @@
                     <VideoResources :theme-color="brand" :brand="brand" :title="castTitle" :lesson-type="lessonType"
                         :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
                         :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
-                        :user-id="userId" :resources="videoResources" :show-add-to-list="true"></VideoResources>
-                    <slot></slot>
+                        :user-id="userId" :resources="videoResources" :show-add-to-list="true"
+                        :relatedLesson="relatedLesson" />
+                    <PlaybackNavButtons next-lesson-url="/" prev-lesson-url="/" />
                 </div>
             </div>
 
             <!-- Comments Section -->
             <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full tw-mb-4">
                 <div class="tw-flex tw-flex-col tw-w-full">
-                    <Comments  
-                        :collapsable="true"
-                        :theme-color="brand" 
-                        :brand="brand" 
-                        :content-id="contentId" 
-                        :user-id="userId"
-                        :user-name="userName" 
-                        :user-avatar="userAvatar" 
-                        :user-xp="userXp"
-                        :user-access-level="userAccessLevel" 
-                        profile-base-route="/profile/" 
-                        :is-admin="false"
-                    />
+                    <Comments :collapsable="true" :theme-color="brand" :brand="brand" :content-id="contentId"
+                        :user-id="userId" :user-name="userName" :user-avatar="userAvatar" :user-xp="userXp"
+                        :user-access-level="userAccessLevel" profile-base-route="/profile/" :is-admin="false" />
                 </div>
             </div>
         </div>
 
         <div class="related-lessons-section">
             <!-- Playback Cue -->
-            <div v-if="playlistItems.data && playlistItems.data.length" 
-                 id="lessonInfo" 
-                 class="tw-flex tw-flex-row reverse tw-items-start"
-            >
+            <div v-if="playlistItems.data && playlistItems.data.length" id="lessonInfo"
+                class="tw-flex tw-flex-row reverse tw-items-start">
                 <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
-                    <playback-cue
-                        :autoplay="false"
-                        :repeat="false"
-                        :brand="brand"
-                        :lessons="playlistItems"
-                        :playlist-name="playlistName"
-                        :duration="playlistDuration"
-                        :playlist-url="playlistUrl"
-                        :playlist-item-id="playlistItemId"
-                        :playlist-id="playlistId"
-                        :infinite-scroll="true"
-                        :playlist-item-position="playlistItemPosition"
-                    />
+                    <playback-cue :autoplay="false" :repeat="false" :brand="brand" :lessons="playlistItems"
+                        :playlist-name="playlistName" :duration="playlistDuration" :playlist-url="playlistUrl"
+                        :playlist-item-id="playlistItemId" :playlist-id="playlistId" :infinite-scroll="true"
+                        :playlist-item-position="playlistItemPosition" />
                 </div>
             </div>
             <!-- Related Lessons -->
@@ -295,10 +268,7 @@
                             Related Playlists
                         </h6>
                     </div>
-                    <RelatedPlaylists
-                        :playlists="relatedPlaylists"
-                        :brand="brand"
-                    />
+                    <RelatedPlaylists :playlists="relatedPlaylists" :brand="brand" />
                 </div>
             </div>
         </div>

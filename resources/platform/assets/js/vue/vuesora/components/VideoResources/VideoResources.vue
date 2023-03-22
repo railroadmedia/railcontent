@@ -250,6 +250,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    relatedLesson: {
+      type: Object,
+      default: {},
+    }
   },
 
   data() {
