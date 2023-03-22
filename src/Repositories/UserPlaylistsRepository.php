@@ -43,16 +43,30 @@ class UserPlaylistsRepository extends RepositoryBase
 
         $query =
             $this->query()
-                ->select(config('railcontent.table_prefix').'user_playlists.*', config('railcontent.table_prefix').'user_playlist_content.id as user_playlist_item_id' )
-                ->leftjoin(config('railcontent.table_prefix').'user_playlist_content', function (JoinClause $join) {
-                    $join->on(
-                        config('railcontent.table_prefix').'user_playlists'.'.id',
-                        '=',
-                        config('railcontent.table_prefix').'user_playlist_content'.'.user_playlist_id'
-                    )
-                        ->where(config('railcontent.table_prefix').'user_playlist_content.position', '=', 1);
-                })
-
+                ->select(
+                    config('railcontent.table_prefix').'user_playlists.*',
+                    'c.id as user_playlist_item_id'
+                )
+                ->leftjoin(
+                    config('railcontent.table_prefix').'user_playlist_content as c',
+                    function (JoinClause $join) {
+                        $join->on(
+                            config('railcontent.table_prefix').'user_playlists'.'.id',
+                            '=',
+                            'c.user_playlist_id'
+                        )
+                            ->on(
+                                'c.position',
+                                '=',
+                                \DB::raw(
+                                    '(select min(position) from '.
+                                    config('railcontent.table_prefix').
+                                    'user_playlist_content'.
+                                    ' where user_playlist_id = c.user_playlist_id)'
+                                )
+                            );
+                    }
+                )
                 ->where('user_id', $userId)
                 ->where('brand', $brand)
                 ->where('type', $playlistType);
@@ -67,7 +81,8 @@ class UserPlaylistsRepository extends RepositoryBase
         if (!in_array($orderByColumn, ['name', 'id', 'created_at', 'last_progress'])) {
             $orderByColumn = 'id';
         }
-        $query = $query->orderBy(config('railcontent.table_prefix').'user_playlists.'.$orderByColumn, $orderByDirection);
+        $query =
+            $query->orderBy(config('railcontent.table_prefix').'user_playlists.'.$orderByColumn, $orderByDirection);
 
         $data =
             $query->get()
@@ -188,5 +203,53 @@ class UserPlaylistsRepository extends RepositoryBase
             ->where('user_id', '=', auth()->id())
             ->where('brand', config('railcontent.brand'))
             ->count();
+    }
+
+    /**
+     * @param $userId
+     * @param $playlistType
+     * @param null $brand
+     * @param null $limit
+     * @param int $page
+     * @param null $term
+     * @param string $sort
+     * @return array|mixed[]
+     */
+    public function getUserPlaylistById(
+        $playlistId
+    ) {
+        $query =
+            $this->query()
+                ->select(
+                    config('railcontent.table_prefix').'user_playlists.*',
+                    'c.id as user_playlist_item_id'
+                )
+                ->leftjoin(
+                    config('railcontent.table_prefix').'user_playlist_content as c',
+                    function (JoinClause $join) {
+                        $join->on(
+                            config('railcontent.table_prefix').'user_playlists'.'.id',
+                            '=',
+                            'c.user_playlist_id'
+                        )
+                            ->on(
+                                'c.position',
+                                '=',
+                                \DB::raw(
+                                    '(select min(position) from '.
+                                    config('railcontent.table_prefix').
+                                    'user_playlist_content'.
+                                    ' where user_playlist_id = c.user_playlist_id)'
+                                )
+                            );
+                    }
+                )
+                ->where(config('railcontent.table_prefix').'user_playlists.'.'id', $playlistId);
+
+        $data =
+            $query->get()
+                ->first();
+
+        return $data;
     }
 }
