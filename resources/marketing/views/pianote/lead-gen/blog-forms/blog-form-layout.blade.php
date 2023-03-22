@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
     <meta name="robots" content="noindex">
-    <title>F#m | Pianote</title>
+    <title>@yield('title') | Pianote</title>
 
     <base target="_parent">
     @include('_partials.layout._tailwindcdn')
@@ -15,6 +15,29 @@
         body {
             height:100vh;
             position:relative;
+        }
+        h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
+            font-weight:900
+        }
+
+        h5 {
+            font-weight:400;
+            line-height:1em;
+            font-family:"Open Sans", sans-serif;
+            margin:0 auto;
+            font-size:15px
+        }
+
+        @media (min-width:768px) {
+            h5 {
+                font-size:18px
+            }
+        }
+
+        @media (min-width:1024px) {
+            h5 {
+                font-size:20px
+            }
         }
 
         [placeholder]:focus::-webkit-input-placeholder {
@@ -70,8 +93,6 @@
         .infusion-form button:hover {
             background:#f73346
         }
-    </style>
-    <style>
         form input, form button {
             line-height:40px;
             height: 40px;
@@ -99,32 +120,21 @@
     @include('_partials.layout.favicons.pianote-favicons')
 
 {{--    {!! \App\Analytics\Tracker::trackPageView() !!}--}}
-
 {{--    {!! \App\Analytics\Tracker::headBottom() !!}--}}
 </head>
 
-<body>
+<body
+    @if(!empty($darkBg))
+        class="bg-musora-black text-white"
+    @endif
+>
 
 {{--{!! \App\Analytics\Tracker::bodyTop() !!}--}}
 
-<section class="text-center absolute top-1/2 left-1/2 w-full px-5" style="transform:translate(-50%,-50%)">
-    <form id="PianoteEngagementTriggerFSharpMinorWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form"
-          method="POST" class="ajax-form clearfix infusion-form max-w-3xl mx-auto" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
-        <input type="hidden" name="form_name" value="F Sharp Minor">
-        <input type="hidden" name="leadtracker_form_name" value="F Sharp Minor">
-        <div class="infusion-field w-full sm:pr-3 float-left sm:w-7/12 md:text-left">
-            <input id="inf_field_Email" class="w-full" name="email" type="email" placeholder="Email Address..." required/>
-        </div>
-        <div class="infusion-submit w-full sm:pl-3 float-left sm:w-5/12">
-            <button class="submit" type="submit">Get Backing Track</button>
-        </div>
-        <input name="inf_form_xid" type="hidden" value="PianoteEngagementTriggerFSharpMinorWebForm">
-        <input name="tag_names_to_add[]" type="hidden" value="Pianote - Engagement - Trigger - F Sharp Minor - Web Form">
-        <input name="list_ids_to_subscribe_to[]" type="hidden" value="33">
-        <input name="success_redirect" type="hidden" value="/thank-you">
-    </form>
-    <div class="thank-you-box bg-white rounded-full w-full mx-auto text-center text-green-300 max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
-        <h5 class="mx-auto text-xl font-bold"><strong><i class="fas fa-check"></i> Success, Check your email!</strong></h5>
+<section class="text-center absolute top-1/2 left-1/2 w-full px-3 sm:px-4" style="transform:translate(-50%,-50%)">
+    <div class="max-w-4xl mx-auto">
+        @yield('subtitle')
+        @yield('form')
     </div>
 </section>
 
