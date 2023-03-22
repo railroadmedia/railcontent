@@ -101,7 +101,7 @@ class UserPlaylistsController extends BaseController
 
         $user = user();
 
-        $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
+        $playlist = $this->userPlaylistsService->getUserPlaylistById($playlistId);
         throw_if(empty($playlist), new NotFoundHttpException());
 
         $page = $request->get('page', 1);
