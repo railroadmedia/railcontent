@@ -11,15 +11,27 @@
 
 @endphp
 
+@section('body-data')
+    x-data="{
+        drumeoTrailer: false,
+        pianoteTrailer: false,
+        guitareoTrailer: false,
+        singeoTrailer: false,
+    }"
+@endsection
+
 <div class="referral-sections pt-8 lg:pt-0" style="background:linear-gradient(to bottom, #010e2c, #000c17);">
     <section class="text-center text-white py-16">
         <div class="container mx-auto max-w-6xl px-4 md:px-8">
             @if ($canRefer && !$errors->has('email-invite-message'))
                 <h1 class="leading-tight lg:mb-14"><strong>{{ $referredByUserName }} gifted you 30 days<br class="hidden md:inline"> of free lessons!</strong></h1>
-                <div class="flex flex-wrap lg:flex-nowrap items-center px-4">
+                <div class="flex flex-wrap lg:flex-nowrap items-center sm:px-4">
                     <div class="flex-shrink-0 w-full lg:w-auto my-5 md:my-6 lg:my-0">
                         <div class="relative">
-                            <img class="inline-block w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl" src="{{ $cardImage }}">
+                            <img class="inline-block w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl" src="{{ $cardImage }}" alt="{{ $brand }} guest card">
+                            <div class="absolute top-0 left-0 w-full h-full flex justify-center items-center cursor-pointer" @click="{{ $brand }}Trailer = true;">
+                                <i class="fas fa-play play-button border-white border-2 rounded-full text-xl py-3 px-5 sm:text-2xl sm:py-4 sm:px-6 md:text-3xl md:py-6 md:px-8" style="background:#0009;"></i>
+                            </div>
                         </div>
 
                         <ul class="fa-ul text-left mb-0 mt-4 md:mt-6 lg:mt-14 ml-6 md:ml-7 lg:ml-8 w-auto inline-block">
@@ -63,4 +75,25 @@
             @endif
         </div>
     </section>
+
+    @include('_partials.components.video-modal',[
+        'name' => 'drumeoTrailer',
+        'video' => 'TODO',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
+        'name' => 'pianoteTrailer',
+        'video' => 'TODO',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
+        'name' => 'guitareoTrailer',
+        'video' => 'TODO',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
+        'name' => 'singeoTrailer',
+        'video' => 'TODO',
+        'vimeo' => true,
+    ])
 </div>
