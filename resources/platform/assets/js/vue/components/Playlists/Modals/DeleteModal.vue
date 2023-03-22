@@ -148,7 +148,7 @@
                 </button>
                 <!-- Close Modal -->
                 <button @click="() => emit('onCloseModal')"
-                        class="tw-btn-primary tw-text-base dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px] tw-border-white sm:tw-mr-2">
+                        class="tw-btn-primary tw-text-base dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px] tw-border-[#000C17] dark:tw-border-white sm:tw-mr-2">
                         CANCEL
                 </button>
             </div>
