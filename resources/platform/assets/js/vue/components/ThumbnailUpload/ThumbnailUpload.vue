@@ -142,10 +142,7 @@ function handleUploadError() {
             <div class="tw-flex tw-flex-row tw-pt-[12px] tw-justify-center tw-items-center tw-mb-7 sm:tw-mb-0 tw-w-full">
                 <button v-on:click="openUploadForm" class="tw-underline tw-text-[#0D0D0D] dark:tw-text-[#7E9AB1] tw-italic tw-text-[13px]">
                     <span v-if="!(imgUrlRef && imgUrlRef.length)">Upload Playlist Image</span>
-                    <span v-if="(imgUrlRef && imgUrlRef.length)">Change Image</span>
-                </button>
-                <button v-if="(imgUrlRef && imgUrlRef.length)" class="tw-ml-[5px]">
-                    <XCircleIcon class="tw-text-[#7E9AB1] tw-w-[14px] tw-h-[14px]" />
+                    <span v-if="(imgUrlRef && imgUrlRef.length)">Re-upload the image</span>
                 </button>
             </div>
         </div>
