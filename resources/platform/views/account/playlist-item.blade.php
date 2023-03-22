@@ -1,5 +1,6 @@
 @php
     //dd($playlistItem);
+    //dd(get_defined_vars()['__data']);
     $brandParams = [
         'drumeo' => '&show_chords=0',
         'singeo' => '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
@@ -35,6 +36,7 @@
         brand="{{ $brand }}" 
         user-id="{{ user()->id }}"
         additional-soundslice-params="{{ $soundsliceAdditionalParams }}"
+        playlist-id="{{ $playlist['id'] }}"
         soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}" 
         content-id="{{ $lessonContent->fetch('id') }}"
         youtube-video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"

@@ -9,7 +9,6 @@ class PlaylistItemDecorator extends TypeDecoratorBase
 {
     private static $parents = [];
 
-
     /**
      * @param Collection $contents
      * @return mixed|Collection

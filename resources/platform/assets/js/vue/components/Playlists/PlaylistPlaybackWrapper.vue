@@ -32,6 +32,10 @@
             type: [String, Number],
             default: ''
         },
+        playlistId: {
+            type: [String, Number],
+            default: ''
+        },
         additionalSoundsliceParams: {
             type: String,
             default: ''

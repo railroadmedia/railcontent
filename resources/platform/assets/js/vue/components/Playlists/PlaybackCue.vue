@@ -32,8 +32,8 @@ const props = defineProps({
         type: String,
         default: ""
     },
-    playlistd: {
-        type: String,
+    playlistId: {
+        type: [String, Number],
         default: ""
     },
     lessons: {
@@ -64,7 +64,8 @@ const activeItem = computed(() => {
 })
 
 //-----------Refs-----------//
-const pageNumber = ref(1);
+const pageNumberTop = ref(1);
+const pageNumberBottom = ref(1);
 const preventReFetch = ref(false);
 const isLoading = ref(false);
 const loadedLessons = ref(props.lessons?.data ? props.lessons.data : []);
@@ -81,21 +82,39 @@ const state = reactive({
 const handleScroll = (e) => {
     //Handle infinite Scroll
     if (props.infiniteScroll) {
-        if ((e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 1) && !preventReFetch.value) {
-            pageNumber.value = pageNumber.value + 1;
-            console.log(pageNumber.value, 'bottom reached')
+        if (e.target.scrollTop === 0 && pageNumberTop.value > 1) {
+            pageNumberTop.value = pageNumberTop.value - 1;
             //Payload
             const payload = {
-                page: pageNumber.value,
+                page: pageNumberTop.value,
                 limit: props.limit,
                 playlist_id: props.playlistId
             };
             //Get Lessons
             isLoading.value = true;
             PlaylistService.getPlaylistLessons(payload, token).then(response => {
-            isLoading.value = false;
+                isLoading.value = false;
                 if (response.data.results.length) {
-                    loadedLessons.value = loadedLessons.value.concat(response.data.results);
+                    loadedLessons.value = [...response.data.results, ...loadedLessons.value]
+                }
+            }).catch(() => {
+                window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
+            });
+        }
+        if ((e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 1) && !preventReFetch.value) {
+            pageNumberBottom.value = pageNumberBottom.value + 1;
+            //Payload
+            const payload = {
+                page: pageNumberBottom.value,
+                limit: props.limit,
+                playlist_id: props.playlistId
+            };
+            //Get Lessons
+            isLoading.value = true;
+            PlaylistService.getPlaylistLessons(payload, token).then(response => {
+                isLoading.value = false;
+                if (response.data.results.length) {
+                    loadedLessons.value = [...loadedLessons.value, ...response.data.results]
                 } else {
                     preventReFetch.value = true;
                 }
@@ -110,7 +129,8 @@ const handleScroll = (e) => {
 
 onBeforeMount(() => {
     console.log(props.lessons);
-    pageNumber.value = props.lessons.meta.page;
+    pageNumberBottom.value = props.lessons.meta.page;
+    pageNumberTop.value = props.lessons.meta.page;
 })
 </script>
 <template>
@@ -165,8 +185,7 @@ onBeforeMount(() => {
             <playlist-card v-for="(lesson, i) in loadedLessons" :key="i" :index="i" :lesson="lesson" :token="token"
                 :brand="brand" :cue-version="true" />
             <!-- Skeleton Loader For Infinite Scroll -->
-            <div v-if="isLoading && infiniteScroll"
-                class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
+            <div v-if="isLoading && infiniteScroll" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
                 <div v-for="n in limit" :key="n"
                     class="tw-flex tw-w-full tw-h-[90px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]">
                 </div>
