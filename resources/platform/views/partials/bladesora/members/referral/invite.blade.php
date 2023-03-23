@@ -84,7 +84,7 @@ $cardImage = $cardImages[brand()];
                         <form id="invite-email-form" name="invite-email-form" method="post"
                             action="{{ $emailInviteUrl }}">
                             <label class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-2 tw-uppercase tw-text-sm tw-tracking-wide"
-                                for="email"><b>Invite via email</b></label>
+                                for="email" data-open-modal="signatureModal" dusk="signatureModal"><b>Invite via email</b></label>
                             <div
                                 class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
                                 <input type="hidden" name="_token" class="sort-input"
@@ -110,7 +110,9 @@ $cardImage = $cardImages[brand()];
                                     class="tw-text-black tw-inline-block tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-2 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
                                     type="text" id="referral-link" readonly name="referral-link" placeholder="link"
                                     value="{{ $userReferralLink }}">
-                                <input onclick="copyLink()" name="button" id="button" readonly
+                                <input
+                                    onclick="copyLink()"
+                                    name="button" id="button" readonly
                                     class="tw-bg-[#030814] dark:tw-bg-[#030303] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                     value="Copy Link" />
                             </div>
@@ -164,4 +166,19 @@ $cardImage = $cardImages[brand()];
             </p>
         </div>
     </section>
+
+    <div id="signatureModal" class="modal">
+        <div class="tw-flex tw-flex-col tw-bg-white dark:tw-bg-[#081825] dark:tw-border-[#445F74] dark:tw-text-white corners-10 tw-shadow tw-py-10 tw-px-7 tw-text-center">
+            <h3 class="tw-mb-4"><strong>Thanks for sharing your love for music!</strong></h3>
+            <p class="tw-px-4 tw-mb-6">
+                You've successfully sent [email address] a 30-Day Guest Pass to [brand].
+            </p>
+            <div class="tw-max-w-lg tw-w-full tw-mx-auto">
+                <div class="sm:tw-flex tw-gap-2">
+                    <a class="tw-btn-primary tw-bg-{{ $brand }} sm:tw-flex-1 tw-w-full tw-px-0 sm:tw-order-1">Share more passes</a>
+                    <span class="tw-btn-secondary tw-text-black dark:tw-text-white sm:tw-flex-1 tw-w-full tw-px-0">Close</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
