@@ -30,6 +30,8 @@ const props = defineProps({
     }
 });
 
+const emit = defineEmits(['onAudioEnd']);
+
 const scoreOrSlice = () => {
     if (/^\d+$/.test(props.soundsliceSlug)) {
         return 'scores';
@@ -89,6 +91,9 @@ const handleSoundsliceEvent = (event) => {
             case 'ssPause':
                 isPlaying.value = false;
                 handlePause();
+                break;
+            case 'ssAudioEnd':
+                emit('onAudioEnd');
                 break;
             case 'ssAudioLoaded':
                 console.log('AUDIO LOADED')

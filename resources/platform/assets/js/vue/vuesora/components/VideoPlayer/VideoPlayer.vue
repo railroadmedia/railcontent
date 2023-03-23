@@ -126,7 +126,7 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits('play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state');
+const emit = defineEmits('onVideoEnd', 'play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state');
 
 // Non reactive vars
 let shakaPlayer = null;
@@ -381,6 +381,7 @@ function playPause() {
         chromeCast.value.playOrPause();
     } else if (isPlaying.value) {
         mediaElement.value.pause();
+        console.log('PAUSE WAS TRIGGERED')
         isPlaying.value = false;
     } else {
         mediaElement.value.play();
@@ -744,6 +745,7 @@ function handleOverlayClick () {
 };
 
 onMounted(() => {
+    console.log('VIDEO PLAYER')
     const supportsMSE = false;
 
     currentRange.value = window.localStorage.getItem('currentRange') || 'original';
@@ -1016,6 +1018,10 @@ const currentTimeInSeconds = computed({
     },
 });
 
+const endCallback = () => {
+    emit('onVideoEnd');
+};
+
 onBeforeUnmount(() => {
     document.removeEventListener('click', closeDrawers);
     document.removeEventListener('mouseup', mouseUpEventHandler);
@@ -1055,6 +1061,7 @@ const {
     chromeCast,
     seek,
     playPause,
+    endCallback,
     fullscreen,
     changeVolume,
     currentVolume,

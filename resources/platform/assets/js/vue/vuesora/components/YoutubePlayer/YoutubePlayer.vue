@@ -202,6 +202,14 @@ export default {
                                 contentId: vm.contentId,
                             });
                         }
+
+                        if (event.data === 0) {
+                            vm.$emit('onVideoEnd', {
+                                ...event,
+                                contentId: vm.contentId,
+                            });
+                        }
+
                     },
                 },
             });

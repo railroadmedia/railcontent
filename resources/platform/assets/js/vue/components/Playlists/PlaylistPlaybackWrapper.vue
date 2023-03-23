@@ -183,8 +183,14 @@ const props = defineProps({
     },
 });
 
+const handleGoToNext = () => {
+    if (props.nextLessonUrl && props.nextLessonUrl !== '/') {
+        window.location.href = props.nextLessonUrl;
+    }
+};
+
 onBeforeMount(() => {
-    console.log(props)
+    //console.log(props)
 });
 </script>
 
@@ -198,7 +204,7 @@ onBeforeMount(() => {
                 <div v-if="lessonType === 'song' || lessonType === 'assignment'"
                     class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
                     <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
-                        :soundslice-slug="soundsliceSlug" :content-id="contentId">
+                        :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext">
                     </SoundSlice>
                 </div>
                 <!-- Video Players -->
@@ -207,7 +213,7 @@ onBeforeMount(() => {
                         <YoutubePlayer ref="mediaElementVueInstance" :brand="brand" :video-id="youtubeVideoId"
                             :current-second="currentSecond" :total-duration="totalDuration" :video-length="videoLength"
                             :progress-state="progressState" :content-id="contentId" :use-intersection-observer="true"
-                            :theme-color="brand" @play="handleVideoPlay" @pause="handleVideoPause">
+                            :theme-color="brand" @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
                         </YoutubePlayer>
                     </div>
                     <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment'" id="lessonVideoWrap">
@@ -217,7 +223,7 @@ onBeforeMount(() => {
                                 :hls-manifest-url="hlsManifestUrl" :video-id="vimeoVideoId" :content-id="contentId"
                                 :current-second="currentSecond" :progress-state="progressState" :video-length="videoLength"
                                 :chapters="videoChapters" :user-id="userId" :like-count="likeCount" :is-liked="isLiked"
-                                :check-for-timecode="true" @playing="handleVideoPlay" @pause="handleVideoPause">
+                                :check-for-timecode="true" @playing="handleVideoPlay" @pause="handleVideoPause" @ended="handleGoToNext">
 
                                 <div :class="`widescreen title tw-text-${brand}`">
                                     <i class="fas fa-spinner fa-spin absolute-center"></i>
@@ -231,7 +237,7 @@ onBeforeMount(() => {
                                 :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters" :current-second="currentSecond"
                                 :content-id="contentId" :user-id="userId" :video-id="vimeoVideoId"
                                 :video-length="videoLength" :total-duration="totalDuration" :cast-title="castTitle"
-                                :use-intersection-observer="true" @play="handleVideoPlay" @pause="handleVideoPause">
+                                :use-intersection-observer="true" @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
                                 <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                             </VideoPlayer>
                         </transition>
