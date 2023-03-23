@@ -10,6 +10,7 @@ import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
 import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
 import Comments from '../../vuesora/views/comments/Comments.vue';
 import PlaybackNavButtons from './PlaybackNavButtons.vue';
+import RelatedLesson from './RelatedLesson.vue';
 
 //-----------Props-----------//
 const props = defineProps({
@@ -235,6 +236,9 @@ onBeforeMount(() => {
                         :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                         :user-id="userId" :resources="videoResources" :show-add-to-list="true"
                         :relatedLesson="relatedLesson" />
+                    <RelatedLesson
+                        v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
+                        :relatedLesson="relatedLesson.data[0]" />
                     <PlaybackNavButtons next-lesson-url="/" prev-lesson-url="/" />
                 </div>
             </div>

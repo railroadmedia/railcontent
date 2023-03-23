@@ -22246,6 +22246,9 @@ a:visited{
 .tw-h-52{
   height: 13rem !important;
 }
+.tw-h-\[70px\]{
+  height: 70px !important;
+}
 .tw-max-h-\[100vh\]{
   max-height: 100vh !important;
 }
