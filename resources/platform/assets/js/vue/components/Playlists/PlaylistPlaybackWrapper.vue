@@ -173,6 +173,14 @@ const props = defineProps({
         type: [String, Number],
         default: ''
     },
+    nextLessonUrl: {
+        type: String,
+        default: '/'
+    },
+    prevLessonUrl: {
+        type: String,
+        default: '/'
+    },
 });
 
 onBeforeMount(() => {
@@ -239,7 +247,7 @@ onBeforeMount(() => {
                     <RelatedLesson
                         v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
                         :relatedLesson="relatedLesson.data[0]" />
-                    <PlaybackNavButtons next-lesson-url="/" prev-lesson-url="/" />
+                    <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
                 </div>
             </div>
 

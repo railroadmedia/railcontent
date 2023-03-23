@@ -8,11 +8,9 @@
         'pianote' => '&show_chords=1',
     ];
     $recordingIdx = 1;
-    
     if (($lessonType == 'song' || $lessonType == 'assignment') && property_exists($playlistItem, 'is_instrumentless_track') && $playlistItem['is_instrumentless_track']) {
         $recordingIdx = 2;
     }
-    
     $soundsliceAdditionalParams = $brandParams[$brand] . '&layout=3&recording_idx=' . $recordingIdx;
 @endphp
 
@@ -57,6 +55,7 @@
         :video-resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
         :playlist-items="{{ $playlistItems }}" :related-lesson="{{ $relatedLesson }}"
         :related-playlists="{{ $relatedPlaylists }}" playlist-name="{{ $playlist['name'] }}"
+        next-lesson-url="{{ $nextPlaylistItemUrl }}" prev-lesson-url="{{ $previousPlaylistItemUrl }}"
         playlist-duration="{{ $playlist['duration'] }}" user-name="{{ user()->display_name }}"
         user-avatar="{{ user()->profile_picture_url }}" user-xp="{{ user()->totalXP() }}"
         user-access-level="{{ user()->access_level }}">

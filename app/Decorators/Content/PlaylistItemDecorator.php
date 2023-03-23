@@ -50,7 +50,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                     }else{
                         $parentIds = \Arr::pluck($parentContentData, 'id');
                         Decorator::$typeDecoratorsEnabled = false;
-                        self::$parents += $this->contentService->getByIds($parentIds)->keyBy('id')->toArray();
+                        self::$parents = $this->contentService->getByIds($parentIds)->keyBy('id')->toArray() + self::$parents;
                         Decorator::$typeDecoratorsEnabled = true;
                     }
 

@@ -6,6 +6,7 @@ use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
+use App\Decorators\Playlist\RoutingDecorator;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Railroad\Railcontent\Decorators\Decorator;
@@ -26,6 +27,7 @@ class UserPlaylistsController extends BaseController
     private UserContentProgressRepository $userContentRepository;
     private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
     private LessonAssignmentDecorator $lessonAssignmentDecorator;
+    private RoutingDecorator $routingDecorator;
 
     /**
      * @param UserPlaylistsService $userPlaylistsService
@@ -33,19 +35,22 @@ class UserPlaylistsController extends BaseController
      * @param UserContentProgressRepository $userContentProgressRepository
      * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
      * @param LessonAssignmentDecorator $lessonAssignmentDecorator
+     * @param RoutingDecorator $routingDecorator
      */
     public function __construct(
         UserPlaylistsService $userPlaylistsService,
         ContentService $contentService,
         UserContentProgressRepository $userContentProgressRepository,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
-        LessonAssignmentDecorator $lessonAssignmentDecorator
+        LessonAssignmentDecorator $lessonAssignmentDecorator,
+        RoutingDecorator $routingDecorator
     ) {
         $this->userPlaylistsService = $userPlaylistsService;
         $this->contentService = $contentService;
         $this->userContentRepository = $userContentProgressRepository;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
         $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
+        $this->routingDecorator = $routingDecorator;
     }
 
     public function index(Request $request)
@@ -160,7 +165,7 @@ class UserPlaylistsController extends BaseController
 
         $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
         $position = $playlistItem['position'];
-        $page = ($playlistItem['position'] <= 20)? 1: (ceil(($playlistItem['position']) / 20));
+        $page = ($playlistItem['position'] <= 20) ? 1 : (ceil(($playlistItem['position']) / 20));
         $request->merge(['page' => $page]);
         $request->merge(['limit' => 20]);
 
@@ -170,6 +175,8 @@ class UserPlaylistsController extends BaseController
         $playlistItem =
             $playlistItems->where('user_playlist_item_id', '=', $playlistItemId)
                 ->first();
+        $nextPlaylistItem = $playlistItems->getMatchOffset($playlistItem, 1);
+        $previousPlaylistItem = $playlistItems->getMatchOffset($playlistItem, -1);
 
         foreach ($playlistItems as $item) {
             $item['url'] = url()->route('platform.user.playlist-item', [
@@ -234,6 +241,10 @@ class UserPlaylistsController extends BaseController
             $playlistItem['soundslice_slug'] = $playlistItem->fetch('fields.soundslice_slug');
         }
 
+        if (!empty($playlistItem['parent'] ?? []) && (!empty($playlistItem['parent']['parent_content_data']))) {
+            $this->routingDecorator->decorate([$playlistItem['parent']]);
+        }
+
         $relatedLesson =
             (new ContentFilterResultsEntity(['results' => $playlistItem['parent'] ?? []]))->toResponseRawJson();
 
@@ -247,7 +258,8 @@ class UserPlaylistsController extends BaseController
             "relatedLesson" => $relatedLesson,
             "relatedLessons" => $relatedLesson,
             'positionInPlaylist' => $position,
-            //            'currentUser' => user(),
+            "nextPlaylistItemUrl" => $nextPlaylistItem['url'] ?? '',
+            "previousPlaylistItemUrl" => $previousPlaylistItem['url'] ?? '',
             "brand" => brand(),
         ]);
     }
