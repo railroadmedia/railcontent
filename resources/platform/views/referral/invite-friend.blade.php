@@ -23,6 +23,32 @@
 
 @section('layout-scripts')
     <script>
+        function sendPass(e) {
+            e.preventDefault();
+            let token = document.getElementById('_token').value;
+            let brand = document.getElementById('brand').value;
+            let email = document.getElementById('email').value;
+
+            let data = {
+                _token: token,
+                brand,
+                email,
+            };
+
+            if(email){
+                fetch('{{ url()->route('referral.email-invite') }}', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then((res) => {
+                    //add code to open modal
+                })
+            }
+        }
+
         function copyLink() {
             var link = document.getElementById("referral-link");
             navigator.clipboard.writeText(link.value);
