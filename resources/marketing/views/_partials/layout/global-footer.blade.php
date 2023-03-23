@@ -86,7 +86,7 @@
             <a rel="noopener" href="https://www.instagram.com/guitareoofficial/" target="_blank" class="flex items-center justify-center mx-2 text-xl h-11 w-11 border-2 border-gray-500 rounded-full"><i class="fab fa-instagram" aria-hidden="true"></i></a>
         </div> --}}
         <p class="text-xs md:text-sm">
-            Musora Media, Inc. © 2022 - &nbsp;
+            Musora Media, Inc. © {{ date('Y') }} - &nbsp;
             <a class="text-xs md:text-sm" href="/terms-of-service">Terms</a>&nbsp;&nbsp;/&nbsp;&nbsp;
             <a href="/privacy-policy" class="text-xs md:text-sm">Privacy</a>&nbsp;&nbsp;/&nbsp;&nbsp;
             <a rel="noopener" href="/careers" class="text-xs md:text-sm">Careers</a>&nbsp;&nbsp;/&nbsp;&nbsp;
