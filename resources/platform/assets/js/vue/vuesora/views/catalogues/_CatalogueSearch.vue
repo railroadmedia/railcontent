@@ -74,7 +74,7 @@ export default {
             type: String,
             default: () => undefined,
         },
-        currentPage: {
+        current_page: {
             type: [String, Number],
             default: () => 1,
         },
@@ -107,11 +107,11 @@ export default {
         },
 
         currentResults() {
-            return `${1 + ((this.currentPage * this.limit) - this.limit)}-${this.displayedLimit}`;
+            return `${1 + ((this.current_page * this.limit) - this.limit)}-${this.displayedLimit}`;
         },
 
         displayedLimit() {
-            return this.limit > this.totalResults ? this.totalResults : this.limit;
+            return this.totalResults > this.current_page * this.limit ? this.current_page * this.limit : this.totalResults;
         },
 
         parsedTypes() {
