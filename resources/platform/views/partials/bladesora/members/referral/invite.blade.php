@@ -112,7 +112,7 @@ $cardImage = $cardImages[brand()];
                                     value="{{ $userReferralLink }}">
                                 <input
                                     onclick="copyLink()"
-                                    name="button" id="button" readonly
+                                    name="button" id="sendButton" readonly
                                     class="tw-bg-[#030814] dark:tw-bg-[#030303] tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                     value="Copy Link" />
                             </div>
@@ -174,7 +174,7 @@ $cardImage = $cardImages[brand()];
                 You've successfully sent [email address] a 30-Day Guest Pass to [brand].
             </p>
             <div class="tw-text-center">
-                <span class="tw-btn-secondary tw-text-black dark:tw-text-white sm:tw-flex-1">Close</span>
+                <span class="tw-btn-secondary tw-text-black dark:tw-text-white sm:tw-flex-1" onclick="closeModal()">Close</span>
             </div>
         </div>
     </div>
