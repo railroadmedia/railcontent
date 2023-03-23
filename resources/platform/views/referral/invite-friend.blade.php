@@ -26,6 +26,10 @@
         function copyLink() {
             var link = document.getElementById("referral-link");
             navigator.clipboard.writeText(link.value);
+            window.shownotification({
+                icon: 'fa-file-import',
+                text: `Link copied to clipboard.`
+            });
         }
 
         function hideToast() {
