@@ -176,92 +176,124 @@
             opacity: 1;
         }
 
+
         .beat-navigation {
-            background:#000c17;
-            text-align:center;
-            border:1px solid #111c26;
-            border-width:1px 0;
-            font-size:0;
-            position:sticky;
-            top:0;
-            transition:top .4s;
-            z-index:100
+            text-align: center;
+            z-index: 100;
+            background: #000c17;
+            border: 1px solid #111c26;
+            border-width: 1px 0;
+            font-size: 0;
+            transition: top .4s;
+            position: sticky;
+            top: 0
         }
 
         .beat-navigation.scrollUp {
-            top:40px
+            top: 40px
         }
 
-        @media (min-width:768px) {
+        @media(min-width: 768px) {
             .beat-navigation.scrollUp {
                 top:56px
             }
         }
 
         .beat-navigation .nav-item {
-            text-align:center;
-            color:#FFF;
-            position:relative;
-            width:auto;
-            display:inline-block;
-            vertical-align:middle;
-            font:700 0px/1em "Open Sans", sans-serif;
-            transition:all .3s;
-            padding:12px 13px;
-            max-height:40px;
-            opacity:0.7
+            text-align: center;
+            color: #fff;
+            width: auto;
+            vertical-align: middle;
+            max-height: 40px;
+            opacity: .7;
+            padding: 12px 13px;
+            font: 700 0/1em Open Sans,sans-serif;
+            transition: all .3s;
+            position: relative
         }
 
-        @media (min-width:768px) {
+        @media(min-width: 768px) {
             .beat-navigation .nav-item {
-                font-size:11px;
-                padding:13px 14px;
-                max-height:52px
+                max-height:52px;
+                padding: 13px 14px;
+                font-size: 11px
             }
         }
 
-        @media (min-width:1024px) {
+        @media(min-width: 1024px) {
             .beat-navigation .nav-item {
                 padding:13px 30px
             }
         }
 
-        @media (min-width:768px) {
+        @media(min-width: 768px) {
             .beat-navigation .nav-item:hover {
-                background:#001931;
-                opacity:0.8
+                opacity:.8;
+                background: #001931
             }
         }
 
-        .beat-navigation .nav-item.active, .beat-navigation .nav-item.active:hover {
-            opacity:1
+        .beat-navigation .nav-item.active,.beat-navigation .nav-item.active:hover {
+            opacity: 1
         }
 
         .beat-navigation .nav-item img {
-            height:16px
+            height: 16px
         }
 
-        @media (min-width:768px) {
+        @media(min-width: 768px) {
             .beat-navigation .nav-item img {
                 height:29px
             }
         }
 
         .beat-navigation .nav-item i {
-            color:#f61a30;
-            font-size:16px;
-            line-height:16px;
-            display:block
+            color: #0b76db;
+            font-size: 16px;
+            line-height: 16px;
+            display: block
         }
 
-        @media (min-width:768px) {
+        @media(min-width: 768px) {
             .beat-navigation .nav-item i {
-                font-size:15px;
-                line-height:15px;
-                margin:0 auto 3px
+                margin:0 auto 3px;
+                font-size: 15px;
+                line-height: 15px
             }
         }
-        .beat-navigation.drumeo .nav-item img{height:29px}.beat-navigation.drumeo .nav-item{text-transform:uppercase;font-weight:600;padding:5px 5px 6px}@media(min-width:640px){.beat-navigation.drumeo .nav-item{font-size:12px;padding:8px 6px}}@media(min-width:768px){.beat-navigation.drumeo .nav-item{font-size:13px;padding:13px 12px}}@media(min-width:1024px){.beat-navigation.drumeo .nav-item{font-size:15px;padding:13px 22px}}
+
+        .beat-navigation.drumeo .nav-item img {
+            height: 29px
+        }
+
+        .beat-navigation.drumeo .nav-item {
+            text-transform: uppercase;
+            font-weight: 600;
+            padding: 5px 5px 6px;
+            letter-spacing: -.05em
+        }
+
+        @media(min-width: 640px) {
+            .beat-navigation.drumeo .nav-item {
+                font-size:11px;
+                padding: 8px 4px
+            }
+        }
+
+        @media(min-width: 768px) {
+            .beat-navigation.drumeo .nav-item {
+                font-size:13px;
+                padding: 13px 6px
+            }
+        }
+
+        @media(min-width: 1024px) {
+            .beat-navigation.drumeo .nav-item {
+                font-size:15px;
+                padding: 13px 16px
+            }
+        }
+
     </style>
 @endsection
 
@@ -269,29 +301,29 @@
 @section('page-body')
     <div class="beat-navigation drumeo">
         <div class="row">
-            <a href="/blog/" class="nav-item active">
-                <img alt="The Note" src="https://d2vyvo0tyx8ig5.cloudfront.net/blog/the-note-logo.svg">
+            <a href="/blog/" class="nav-item inline-block">
+                <img alt="The Note" src="https://pianote.s3.amazonaws.com/blog/the-note-logo.svg">
             </a>
-            <a href="/start-here" class="nav-item show-for-medium">
+            <a href="/start-here" class="nav-item hidden sm:inline-block">
                 START HERE</a>
-            <a href="https://www.pianote.com/blog/chording/" class="nav-item show-for-medium
+            <a href="https://www.pianote.com/blog/chord-theory/" class="nav-item hidden sm:inline-block
         ">
-                CHORDING</a>
-            <a href="https://www.pianote.com/blog/song-tutorials/" class="nav-item show-for-medium
+                CHORD THEORY</a>
+            <a href="https://www.pianote.com/blog/song-tutorials/" class="nav-item hidden sm:inline-block
         ">
                 SONG TUTORIALS</a>
-            <a href="https://www.pianote.com/blog/theory/" class="nav-item show-for-medium
+            <a href="https://www.pianote.com/blog/theory/" class="nav-item hidden sm:inline-block
         ">
                 THEORY</a>
-            <a href="https://www.pianote.com/blog/technique/" class="nav-item show-for-medium
+            <a href="https://www.pianote.com/blog/technique/" class="nav-item hidden sm:inline-block
         ">
                 TECHNIQUE</a>
-            <a href="https://www.pianote.com/blog/musicianship/" class="nav-item show-for-medium
+            <a href="https://www.pianote.com/blog/musicianship/" class="nav-item hidden sm:inline-block
         ">
                 MUSICIANSHIP</a>
-            <a href="https://www.pianote.com/blog/articles/" class="nav-item show-for-medium
+            <a href="https://www.pianote.com/blog/chords-and-scales/" class="nav-item hidden sm:inline-block
         ">
-                ARTICLES</a>
+                CHORDS &amp; SCALES LIBRARY</a>
         </div>
     </div>
     <header class="text-center sm:text-left relative bg-cover px-6 md:px-10 pt-72 pb-8 md:py-36 lg:py-40 bg-cover bg-right sm:bg-left lazyload" style="background-color:#00101D;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/start-here/header2.jpg">
@@ -305,7 +337,7 @@
                 {{--Want a deeper dive? Try a Pianote Membership for 7 days.--}}
             </p>
             <div class="text-center md:text-left">
-                <a href="/blog/how-to-play-piano/" class="join">How to Play Piano</a>
+                <a href="/blog/all-piano-chords/" class="join">How to Play Piano</a>
             </div>
         </div>
         <div class="absolute inset-0 z-0 hidden sm:block" style="background:linear-gradient(to right, #00101D 33%, transparent);"></div>
@@ -374,17 +406,18 @@
             <div class="flex flex-col md:flex-row md:gap-4">
                 <a href="/blog/how-to-play-piano/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote.s3.us-east-1.amazonaws.com/blog/2021/How%20to%20Play%20Piano%20-%20Ultimate%20Guide/HowToPlayPiano-01.jpg" alt="how to play piano">
+                        <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://img.youtube.com/vi/sG7QDw5CoU8/maxresdefault.jpg" alt="how to play piano">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1">
-                        Pianote / Articles
+                        Lisa Witt / Chord Theory
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        How to Play Piano: The <br class="hidden md:inline-block">Ultimate Guide
+                        How to Play ALL Piano Chords
+                        (Major, Minor, 7ths)
                     </h5>
                     <p style="color: #D4D4D4;">
-                        Your one-stop resource on how to play the piano, from choosing your first instrument to playing your first song.
+                        Learn how to play ALL piano chords with a free, downloadable chord chart PDF with complete chord formulas.
                     </p>
                 </a>
                 <a href="/blog/how-to-buy-piano/" class="flex-1 mb-10 md:mb-0">
@@ -396,7 +429,7 @@
                         Pianote / Articles
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        How to Buy Your First <br class="hidden md:inline-block">Piano
+                        How to Buy Your First Piano
                     </h5>
                     <p style="color: #D4D4D4;">
                         Acoustic vs. digital. Upright vs. grand. Learn how to shop for your dream instrument with confidence.
@@ -411,7 +444,7 @@
                         Pianote / Articles
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        How to Learn Piano <br class="hidden md:inline-block">Online
+                        How to Learn Piano Online
                     </h5>
                     <p style="color: #D4D4D4;">
                         Take advantage of learning whatever you want, wherever you want, whenever you want.
@@ -454,7 +487,7 @@
                         Lisa Witt / Classical Songs
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        The Best “Für Elise” <br class="hidden md:inline-block">Tutorial on the Internet
+                        The Best “Für Elise” Tutorial on the Internet
                     </h5>
                     <p>
                         How to play the entire piece, from top to bottom, in its original form written by Beethoven.
@@ -469,7 +502,7 @@
                         Lisa Witt / Song Tutorials
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        “Bohemian Rhapsody” <br class="hidden md:inline-block">(Queen) Tutorial
+                        “Bohemian Rhapsody” (Queen) Tutorial
                     </h5>
                     <p>
                         Channel your inner Freddie Mercury with the iconic and legendary piano-driven rock anthem.
@@ -522,7 +555,7 @@
                         Pianote / THEORY
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        How to Play Piano <br class="hidden md:inline-block">Chords
+                        How to Play Piano Chords
                     </h5>
                     <p>
                         Chords form the foundation to all Western music. Instantly unlock hundreds of songs by understanding them.
@@ -537,7 +570,7 @@
                         Pianote / THEORY
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        How to Use the Circle <br class="hidden md:inline-block">of Fifths
+                        How to Use the Circle of Fifths
                     </h5>
                     <p>
                         The Circle of Fifths is an invaluable tool that helps with understanding key signatures and chord progressions.
@@ -560,7 +593,7 @@
                         Lisa Witt / TECHNIQUE
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        Piano Technique Made <br class="hidden md:inline-block">Easy
+                        Piano Technique Made Easy
                     </h5>
                     <p>
                         What to focus on when you practice technique, including scales, inversions, finger patterns, and arpeggios.
@@ -575,7 +608,7 @@
                         Lisa Witt / Hand Independence
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        Hand Independence in <br class="hidden md:inline-block">5 Days
+                        Hand Independence in 5 Days
                     </h5>
                     <p>
                         Playing hands together is one of the toughest skills for beginners to master. Here’s a 5-day plan to improve hand independence.
@@ -606,47 +639,47 @@
             <div class="flex flex-col md:flex-row md:gap-4">
                 <a href="/blog/history-of-the-piano/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote.s3.us-east-1.amazonaws.com/blog/2022/History%20of%20Pianos/history%20piano%20thumbnail%20copy.png" alt="piano evolutiong">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:good/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2023/01/04154216/2023-01-What-Is-Musicianship-768x432.jpg" alt="piano evolutiong">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
                         CHARMAINE LI / ARTICLES
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        A Complete History of <br class="hidden md:inline-block">the Piano
+                        What Is Musicianship?
                     </h5>
                     <p>
-                        From dulcimers to harpsichords, synthesizers to hybrid pianos, our 88-key friend has come a long way.
+                        Being a piano player is more than playing the right notes at the right time. Learn how to develop your musicianship.
                     </p>
                 </a>
                 <a href="/blog/hardest-piano-song/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2020/04/30181754/Header-4-768x403.jpg" alt="top 10 hardest piano songs">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:good/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2022/10/06100459/2022-10-Legendary-Pieces-768x432.jpg" alt="top 10 hardest piano songs">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
                         CHARMAINE LI / ARTICLES
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        Top 10 Hardest Piano <br class="hidden md:inline-block">Songs
+                        40+ Legendary Classical Piano Songs By Difficulty
                     </h5>
                     <p>
-                        A list of some of the most notorious piano pieces in history and why they’re so challenging to play.
+                        Explore the stories behind 40+ famous classical piano songs and get links to sheet music and tutorials to help you start playing.
                     </p>
                 </a>
                 <a href="/blog/the-many-styles-of-piano-playing-styles-genres/" class="flex-1">
                     <div class="relative thumbnail-container">
-                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2022/06/27155954/Piano-Styles-copy-768x432.jpg" alt="piano styles">
+                        <img class="rounded-lg mb-4 thumbnail lazyload" data-src="https://cdn.musora.com/image/fetch/w_650,q_auto:good/https://pianote-blog.s3.us-east-2.amazonaws.com/wp-content/uploads/2022/09/14114445/HowPianosWork-02-768x432.jpg" alt="piano styles">
                         <i class="fas fa-arrow-circle-right arrows"></i>
                     </div>
                     <p class="uppercase text-xs font-semibold mb-1" style="color: #AAAAAA;">
-                        Pianote / Articles
+                        CHARMAINE LI / Articles
                     </p>
                     <h5 class="font-bold mb-2 leading-6">
-                        Piano Styles & Genres
+                        How Pianos Work
                     </h5>
                     <p>
-                        The piano is unique in that it can play virtually any genre of music. An introduction to pop, classical, jazz, gospel, and more.
+                        How does a piano work? Take a peek under the lid for a fascinating tour of the piano's intricate system of hammers and strings.
                     </p>
                 </a>
             </div>
