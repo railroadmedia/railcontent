@@ -343,10 +343,10 @@
         <div class="absolute inset-0 z-0 hidden sm:block" style="background:linear-gradient(to right, #00101D 33%, transparent);"></div>
         <div class="absolute inset-0 z-0 block sm:hidden" style="background:linear-gradient(to top, #00101D, transparent);"></div>
     </header>
-    <section x-data='{ nav: "start here"}'>
+    <section class="bg-white sticky z-50 top-10 md:top-14" x-data='{ nav: "start here"}'>
         <div class="max-w-xl md:max-w-5xl mx-auto flex justify-evenly uppercase font-bebas text-base sm:text-lg text-center">
             <a
-                    class="py-4 flex-grow nav-items"
+                    class="py-1 sm:py-2 flex-grow nav-items"
                     x-bind:class="nav === 'start here' && 'selected-nav'"
                     href="#starthere"
                     x-on:click="
@@ -356,7 +356,7 @@
                 start here
             </a>
             <a
-                    class="py-4 flex-grow nav-items"
+                    class="py-1 sm:py-2 flex-grow nav-items"
                     x-bind:class="nav === 'tutorials' && 'selected-nav'"
                     href="#tutorials"
                     x-on:click="
@@ -366,7 +366,7 @@
                 song tutorials
             </a>
             <a
-                    class="py-4 flex-grow nav-items"
+                    class="py-1 sm:py-2 flex-grow nav-items"
                     x-bind:class="nav === 'theory' && 'selected-nav'"
                     href="#theory"
                     x-on:click="
@@ -376,7 +376,7 @@
                 theory
             </a>
             <a
-                    class="py-4 flex-grow nav-items"
+                    class="py-1 sm:py-2 flex-grow nav-items"
                     x-bind:class="nav === 'technique' && 'selected-nav'"
                     href="#technique"
                     x-on:click="
@@ -386,7 +386,7 @@
                 technique
             </a>
             <a
-                    class="py-4 flex-grow nav-items"
+                    class="py-1 sm:py-2 flex-grow nav-items"
                     x-bind:class="nav === 'articles' && 'selected-nav'"
                     href="#articles"
                     x-on:click="
