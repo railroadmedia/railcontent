@@ -36,7 +36,6 @@ class UserMembershipOwnedProductSyncJob extends BatchQueryJob
         if ($this->productId) {
             $query = $query->where('product_id', '=', $this->productId);
         }
-      $test =   $query->toSql();
         return $query;
     }
 
