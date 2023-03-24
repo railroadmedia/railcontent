@@ -191,13 +191,15 @@
             <h3 class="font-extrabold mb-10">Join Pianote + get $962 <br class="sm:hidden">in FREE bonuses!</h3>
             <p class="uppercase mb-10 text-pianote transition-opacity tw-opacity-0">
                 <span x-cloak x-data="timer()" x-init="countdown()">
-                    Only
-                    <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0 && hour !== '00'"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                    <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                    <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                    Left!
+                    <span x-show="day !== '00' && hour !== '00' && minute !== '00' && second !== '00'">
+                        Only
+                        <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>
+                        <span x-cloak x-show="timeLeft > 0 && hour !== '00'"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                        <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                        <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                        <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                        Left!
+                    </span>
                 </span>
             </p>
             <img
