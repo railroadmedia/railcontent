@@ -38,7 +38,7 @@
                 <!-- File Upload Button -->
                 <file-input name="attach file" id="support-file" :required="false" :disabled="false" :multiple="false"
                     accept="video/*,image/*" :files="formData.attachments"
-                    message="For security reasons, we only accept image and video files." :megabiteLimit="100"
+                    message="For security reasons, we only accept image and video files." :megabiteLimit="2"
                     @attachFile="attachFile($event)" @removeFile="removeFile($event)" @clearFiles="clearFiles()" />
             </div>
 
