@@ -257,7 +257,7 @@ onUpdated(() => {
       <!-- Sidebar -->
       <Sidebar :brand="brand" :isLive="isLive" :isSidebarCollapsed="isSidebarCollapsed"
         :isSidebarHidden="isSidebarHidden" @onCollapseSidebar="onCollapseSidebar"
-        :forceSidebarHidden="forceSidebarHidden" :pinnedPlaylists="playlistsStore.pinnedPlaylists" :user-id="userId" />
+        :forceSidebarHidden="forceSidebarHidden" :user-id="userId" />
 
       <!-- Content Container -->
       <main class="
