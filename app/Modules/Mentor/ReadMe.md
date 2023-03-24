@@ -120,3 +120,7 @@ By default this is setup to push data to the Customer.io Dev Sandbox Musora.
 ```
 r mwp artisan queue:listen database --queue=customer-io --timeout=10000000
 ```
+
+#### Resyncing mentors with customerio
+
+See mentors:sync command to resync mentors with customerio.
