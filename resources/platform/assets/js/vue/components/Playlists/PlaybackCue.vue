@@ -69,11 +69,12 @@ const pageNumberBottom = ref(1);
 const preventReFetch = ref(false);
 const isLoading = ref(false);
 const loadedLessons = ref(props.lessons?.data ? props.lessons.data : []);
+const computedLessons = computed(() => loadedLessons.value)
 
 //-----------Reactive Data-----------//
 
 const state = reactive({
-    isAutoPlay: false,
+    isShuffle: false,
     isRepeat: false,
 })
 
@@ -128,7 +129,7 @@ const handleScroll = (e) => {
 //-----------Lifecycle Hooks -----------//
 
 onBeforeMount(() => {
-    console.log(props.lessons);
+    //console.log(props.lessons);
     pageNumberBottom.value = props.lessons.meta.page;
     pageNumberTop.value = props.lessons.meta.page;
 })
@@ -152,7 +153,7 @@ onBeforeMount(() => {
             <div class="tw-flex">
                 <button
                     class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors tw-mr-3"
-                    @click.prevent="state.isAutoPlay = !state.isAutoPlay" title="Autoplay">
+                    @click.prevent="state.isShuffe = !state.isShuffe" title="Shuffle">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M20.7447 14.5602L17.1993 12.5479C17.1129 12.5048 17.0174 12.4823 16.9205 12.4823C16.8236 12.4823 16.728 12.5048 16.6417 12.5479C16.4632 12.6353 16.3518 12.8324 16.3518 13.0291V14.4945H14.3225C13.7555 14.4966 13.1995 14.3418 12.7183 14.0478C12.2371 13.7537 11.8504 13.3324 11.6026 12.8324L9.1283 7.99896C8.41297 6.59965 6.98573 5.747 5.40259 5.747H1.50027C1.35244 5.747 1.21066 5.80459 1.10612 5.90711C1.00158 6.00963 0.942856 6.14868 0.942856 6.29366C0.942856 6.43865 1.00158 6.57769 1.10612 6.68021C1.21066 6.78273 1.35244 6.84033 1.50027 6.84033H5.4028C5.96966 6.83821 6.52563 6.99306 7.00675 7.28705C7.48788 7.58105 7.87462 8.00225 8.12249 8.50223L10.5978 13.3356C11.3115 14.7363 12.7387 15.5882 14.3219 15.5882H16.3518V17.0532C16.3518 17.2505 16.4632 17.4251 16.6417 17.5344C16.732 17.5776 16.8311 17.6001 16.9316 17.6001C17.0321 17.6001 17.1313 17.5776 17.2216 17.5344L20.7673 15.5221C20.9457 15.4347 21.0571 15.2378 21.0571 15.0411C21.0571 14.8444 20.9008 14.6694 20.7447 14.5602Z"
@@ -182,7 +183,7 @@ onBeforeMount(() => {
         <div @scroll="handleScroll" v-if="loadedLessons.length" id="cue-scroll-container"
             class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-overflow-y-auto tw-relative">
             <!-- Print Each Card -->
-            <playlist-card v-for="(lesson, i) in loadedLessons" :key="i+'playlist-card-cue'" :index="i" :lesson="lesson" :token="token"
+            <playlist-card v-for="(lesson, i) in loadedLessons" :key="'playlist-card-cue-'+lesson.id" :index="i" :lesson="lesson" :token="token"
                 :brand="brand" :cue-version="true" />
             <!-- Skeleton Loader For Infinite Scroll -->
             <div v-if="isLoading && infiniteScroll" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">

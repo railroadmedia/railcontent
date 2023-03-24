@@ -1,6 +1,6 @@
 <script setup>
     import { DateTime } from 'luxon';
-    import { onBeforeMount, watch, ref, inject, computed, reactive } from 'vue';
+    import { onBeforeMount, watch, ref, inject, computed, reactive, onMounted } from 'vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
     import PlaylistService from '../../../../services/playlists.js';
     import PlaylistDropdown from '../PlaylistDropdown.vue';
@@ -36,6 +36,10 @@
         }
     });
 
+    onMounted(() => {
+        console.log(props.lesson)
+    })
+
     //-----------Computed Props-----------//
     
     //Thumbnail
@@ -45,7 +49,7 @@
     })
     //Song Artist
     const artist = computed( () => {
-        const artist = props.lesson.fields.find(data => data.key === 'artist');
+        const artist = props.lesson?.fields?.length ? props.lesson.fields.find(data => data.key === 'artist') : { value: 'TBD' };
         return artist.value;
     })
     //Description
