@@ -37,7 +37,7 @@
     });
 
     onMounted(() => {
-        console.log(props.lesson)
+        //console.log(props.lesson)
     })
 
     //-----------Computed Props-----------//
@@ -49,8 +49,14 @@
     })
     //Song Artist
     const artist = computed( () => {
-        const artist = props.lesson?.fields?.length ? props.lesson.fields.find(data => data.key === 'artist') : { value: 'TBD' };
-        return artist.value;
+        const artist = props.lesson?.fields?.length ? props.lesson.fields.find(data => data.key === 'artist') : { value: null };
+        return artist && artist.value ? artist.value : null;
+    })
+    //Instructor
+    const instructor = computed(() => {
+        const instructorObject = props.lesson?.fields?.length ? props.lesson.fields.find(data => data.key === 'instructor') : { value: null };
+        console.log('instructor', instructorObject)
+        return instructorObject && instructorObject.value ? instructorObject.value : null;
     })
     //Description
     const lessonDescription = computed( () => {
@@ -231,7 +237,7 @@
                 </p>
                 <!-- description / Time Stamp-->
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <p class="tw-font-bold tw-leading-tight tw-whitespace-normal tw-line-clamp-2 md:tw-line-clamp-1">{{ lessonDescription }}</p>
+                    <p class="tw-font-bold tw-text-[16px] tw-whitespace-normal tw-line-clamp-2 xl:tw-line-clamp-1">{{ lessonDescription }}</p>
                     <!-- Time Stamp Icon -->
                     <button  v-if="!cueVersion" :title="`Begins ${ duration_formatted(lesson.start_second ) || '0:00:00'}&nbsp; • &nbsp;Ends ${ duration_formatted( lesson.end_second ) || duration_formatted(lesson.duration) || '0:00:00' }`">
                         <svg v-if="showTimeStamp" 
@@ -262,23 +268,29 @@
                    :class="[{'md:tw-hidden md:tw-mt-0 md:tw-text-sm' : !cueVersion }]"
                 >   
                     <!-- Instructor / Artist -->
-                    <template v-if="!cueVersion">
-                        <template v-if="lesson.type !== 'songs' ">
+
+                    <template v-if="lesson.type === 'song'">
+                            <span>{{ artist }}</span>
+                    </template>
+                    <template v-else-if="lesson.instructors && lesson.instructors.length">
                             <span v-for="(instructor, i) in lesson.instructors"
                                 class="tw-whitespace-nowrap tw-truncate"
                                 :key="i">
                                 {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
                             </span>
-                        </template>
-                        <template v-if="lesson.type === 'song'">
-                            <span>{{ artist }}</span>
-                        </template>
+                    </template>
+
+                    <template v-else-if="instructor">
+                        <span class="tw-whitespace-nowrap tw-truncate">
+                                {{ instructor.name }}
+                        </span>
                     </template>
                     <!-- Or Lesson Type -->
                     <span v-else>{{ lesson.type }}</span>
-                    <!-- Duration -->
+                    <!-- Duration OR Lesson Type -->
                     <span class="tw-mx-0.5">|</span>
-                    <span>{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>   
+                    <span v-if="cueVersion">{{ lesson.type }}</span>
+                    <span v-if="!cueVersion">{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>   
                 </p>      
             </div>
 

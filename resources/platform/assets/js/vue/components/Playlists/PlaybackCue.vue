@@ -129,7 +129,7 @@ const handleScroll = (e) => {
 //-----------Lifecycle Hooks -----------//
 
 onBeforeMount(() => {
-    //console.log(props.lessons);
+    console.log(props.lessons.meta);
     pageNumberBottom.value = props.lessons.meta.page;
     pageNumberTop.value = props.lessons.meta.page;
 })

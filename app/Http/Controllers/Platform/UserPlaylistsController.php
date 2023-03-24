@@ -162,7 +162,7 @@ class UserPlaylistsController extends BaseController
 
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AddedToPrimaryPlaylistDecorator::$skip = true;
-
+        
         $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
         $position = $playlistItem['position'];
         $page = ($playlistItem['position'] <= 20) ? 1 : (ceil(($playlistItem['position']) / 20));
