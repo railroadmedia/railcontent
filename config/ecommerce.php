@@ -90,7 +90,7 @@ return [
                 [
                     'type' => 'PST',
                     'rate' => 0.07,
-                    'applies_to_shipping_costs' => false,
+                    'applies_to_shipping_costs' => true,
                 ],
             ],
             'manitoba' => [
