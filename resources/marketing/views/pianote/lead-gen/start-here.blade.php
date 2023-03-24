@@ -337,7 +337,7 @@
                 {{--Want a deeper dive? Try a Pianote Membership for 7 days.--}}
             </p>
             <div class="text-center md:text-left">
-                <a href="/blog/all-piano-chords/" class="join">How to Play Piano</a>
+                <a href="/blog/how-to-play-piano" class="join">How to Play Piano</a>
             </div>
         </div>
         <div class="absolute inset-0 z-0 hidden sm:block" style="background:linear-gradient(to right, #00101D 33%, transparent);"></div>
@@ -404,7 +404,7 @@
                 The most important beginner lessons, all in one place.
             </p>
             <div class="flex flex-col md:flex-row md:gap-4">
-                <a href="/blog/how-to-play-piano/" class="flex-1 mb-10 md:mb-0">
+                <a href="/blog/all-piano-chords/" class="flex-1 mb-10 md:mb-0">
                     <div class="relative thumbnail-container">
                         <img class="rounded-lg border-pianote border-2 mb-4 thumbnail lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://img.youtube.com/vi/sG7QDw5CoU8/maxresdefault.jpg" alt="how to play piano">
                         <i class="fas fa-arrow-circle-right arrows"></i>
