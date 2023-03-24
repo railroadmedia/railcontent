@@ -90,6 +90,10 @@ export default {
             type: [String, Number],
             default: () => 0,
         },
+        infiniteScroll: {
+            type: Boolean,
+            default: () => false,
+        },
     },
     data() {
         return {
@@ -107,11 +111,11 @@ export default {
         },
 
         currentResults() {
-            return `${1 + ((this.currentPage * this.limit) - this.limit)}-${this.displayedLimit}`;
+            return `${1 + (this.infiniteScroll ? 0 : ((this.currentPage * this.limit) - this.limit))}-${this.displayedLimit}`;
         },
 
         displayedLimit() {
-            return this.limit > this.totalResults ? this.totalResults : this.limit;
+            return this.currentPage * this.limit > this.totalResults ? this.totalResults : this.currentPage * this.limit;
         },
 
         parsedTypes() {
