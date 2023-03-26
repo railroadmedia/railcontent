@@ -1187,7 +1187,7 @@ class CustomerIoSyncEventListener
             (new CustomerIoCreateEventByUserId(
                 $accessCodeClaimed->getUser()->getId(),
                 $brand,
-                'musora_membership_access_code_redemption',
+                'musora_membership_non_recurring_access_added',
                 [
                     'brand_source' => $brand,
                     'access_code' => $accessCode->getCode(),
@@ -1226,6 +1226,35 @@ class CustomerIoSyncEventListener
 //                        ->addSeconds(3)
 //                )
 //        );
+    }
+
+    /**
+     * @param ReferralClaimed $referralClaimed
+     */
+    public function handleReferralClaimed(ReferralClaimed $referralClaimed) {
+
+        $referrer = $referralClaimed->getReferrer();
+        dispatch(
+            (new CustomerIoCreateEventByUserId(
+                $referralClaimed->getUserId(),
+                $referrer->getBrand(),
+                'musora_membership_non_recurring_access_added',
+                [
+                    'brand_source' => $referrer->getBrand(),
+                    'access_code' => $referrer->referral_code,
+                    'access_source' => 'saasquatch',
+                    'claim_timestamp' => $referrer->updated_at->timestamp,
+                    'code_creation_date' => null,
+                    'product_ids' => $referralClaimed->getProductId()
+                ],
+                null,
+                Carbon::now()->timestamp
+            ))
+                ->delay(
+                    Carbon::now()
+                        ->addSeconds(3)
+                )
+        );
     }
 
 }
