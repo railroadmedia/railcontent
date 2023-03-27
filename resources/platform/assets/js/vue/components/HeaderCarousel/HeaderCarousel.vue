@@ -110,6 +110,7 @@ onMounted(() => {
       :descriptionColor="slide.desc_color"
       :registerUrl="slide.endpoint"
       :video="slide.video_src"
+      :is-featured="slide.is_featured"
       :desktopImg="slide.desktop_img"
       :tabletImg="slide.tablet_img"
       :mobileImg="slide.mobile_img"
