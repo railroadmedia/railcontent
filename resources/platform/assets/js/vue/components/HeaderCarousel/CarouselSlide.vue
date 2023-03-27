@@ -159,12 +159,19 @@ const closeModal = () => {
                     {{ primaryCtaText }}
                 </a>
                 <a
-                    v-if="secondaryCtaText"
-                    :href="secondaryCtaUrl"
+                    v-if="secondaryCtaText && !video"
+                    :href="video && secondaryCtaUrl"
                     :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block`"
                 >
                     {{ secondaryCtaText }}
                 </a>
+                <span
+                    v-if="secondaryCtaText && video"
+                    @click="openModal()"
+                    :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block tw-cursor-pointer`"
+                >
+                    {{ secondaryCtaText }}
+                </span>
             </div>
 <!--            <div v-if="registerUrl || video" class="tw-gap-2 tw-mt-2 tw-hidden xl:tw-flex tw-flex-wrap">-->
 <!--                <a v-if="registerUrl" :href="ctaUrl" :class="`tw-btn-primary tw-bg-${brand} tw-text-xl go-to-button tw-w-[200px]`">-->
