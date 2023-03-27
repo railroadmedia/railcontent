@@ -1,13 +1,8 @@
 <script setup>
 import { DateTime } from 'luxon';
-import { onBeforeMount, watch, ref, inject, computed, reactive, onMounted } from 'vue';
-import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
-import PlaylistService from '../../../../services/playlists.js';
+import { onBeforeMount, ref, computed, reactive, onMounted } from 'vue';
 import PlaylistDropdown from '../PlaylistDropdown.vue';
 import { usePlaylistsStore } from '../../../../stores/playlists';
-
-//Inject
-const token = inject('csrf_token');
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
@@ -36,21 +31,15 @@ const props = defineProps({
     }
 });
 
-onMounted(() => {
-    //console.log(props.lesson)
-})
-
 //-----------Computed Props-----------//
 
 //Thumbnail
 const lessonThumbnail = computed(() => {
-    const thumbnail = props.lesson.data.find(data => data.key === 'original_thumbnail_url');
-    return thumbnail ? thumbnail.value : props.lesson.thumbnail_url;
+    return props.lesson.thumbnail_url;
 })
 //Song Artist
 const artist = computed(() => {
-    const artist = props.lesson?.fields?.length ? props.lesson.fields.find(data => data.key === 'artist') : { value: null };
-    return artist && artist.value ? artist.value : null;
+    return props.lesson.artist;
 })
 //Instructor
 const instructor = computed(() => {
@@ -60,8 +49,7 @@ const instructor = computed(() => {
 })
 //Description
 const lessonDescription = computed(() => {
-    const description = props.lesson.fields.find(field => field.key === 'title');
-    return description.value;
+    return props.lesson.title;
 })
 //Show Content Mask
 const showMask = computed(() => {
@@ -278,12 +266,6 @@ onBeforeMount(() => {
                             {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
                         </span>
                     </template>
-
-                    <template v-else-if="instructor">
-                        <span class="tw-whitespace-nowrap tw-truncate">
-                            {{ instructor.name }}
-                        </span>
-                    </template>
                     <!-- Or Lesson Type -->
                     <span v-else>{{ lesson.type }}</span>
                     <!-- Duration OR Lesson Type -->
@@ -301,7 +283,8 @@ onBeforeMount(() => {
                     </span>
                 </div>
                 <!-- Lesson Time -->
-                <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px]" :title="lesson.duration">
+                <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px]"
+                    :title="lesson.duration">
                     <span>{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>
                 </div>
             </template>

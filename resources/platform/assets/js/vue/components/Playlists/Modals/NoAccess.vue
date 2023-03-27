@@ -53,25 +53,25 @@
     //-----------Lifecycle Hooks -----------//
     onBeforeMount(()=> {
         //Get Modal Data
-        const title = props.data.fields.find(field => field.key === 'title');
-        const album = props.data.fields.find(field => field.key === 'album');
-        const thumbnail = props.data.data.find(data => data.key === 'original_thumbnail_url');
-        state.thumbnail = props.data.type === 'assignment' ? props.data.thumbnail_url : thumbnail.value;
-        state.title = title ? title.value : '';
-        state.album = album ? album.value : '';
-        state.packTitle = props.data.type === 'song' ? '' : props.data.parent.title;
+        const title = props.data.title;
+        const album = props.data.album;
+        const thumbnail = props.data.thumbnail_url;
+        state.thumbnail = props.data.type === 'assignment' ? props.data.thumbnail_url : thumbnail;
+        state.title = title ? title : '';
+        state.album = album ? album : '';
+        state.packTitle = props.data.type === 'song' ? '' : props.data.parent_title;
     })
 </script>
 
 <template>
     <div class="tw-h-full tw-w-full tw-flex tw-flex-col tw-items-center tw-justify-center">
         <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-3">
-            Content Unavailable  
+            Content Unavailable
         </h2>
-        <template v-if="!isSong">   
+        <template v-if="!isSong">
             <p class="dark:tw-text-white tw-text-center tw-mb-4">
                 <span class="tw-font-bold tw-whitespace-nowrap">{{ state.title }}</span>
-                is part of a premium pack 
+                is part of a premium pack
                 <span class="tw-font-bold tw-whitespace-nowrap">{{ state.packTitle }}</span>.
             </p>
         </template>
@@ -95,9 +95,9 @@
             />
             <!-- Image Mask -->
             <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                <img class="tw-h-full tw-object-contain" 
+                <img class="tw-h-full tw-object-contain"
                         :class="{ '' : needAccess }"
-                        :src="`https://musora.com/cdn-cgi/image/width=175/${state.thumbnail}`" 
+                        :src="`https://musora.com/cdn-cgi/image/width=175/${state.thumbnail}`"
                         alt="playlist thumbnail"
                 >
             </div>
@@ -106,7 +106,7 @@
         <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-w-full">
             <!-- Go To Shop -->
             <a v-if="!isSong"
-               :href="`https://${brand}.com/shop`" 
+               :href="`https://${brand}.com/shop`"
                target="_blank"
                class="tw-btn-secondary tw-text-[#0D0D0D] dark:tw-text-white">
                Click Here To Learn More
