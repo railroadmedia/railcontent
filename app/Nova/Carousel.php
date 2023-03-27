@@ -97,7 +97,7 @@ class Carousel extends Resource
                 }),
             Text::make('logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Markdown::make('Description')->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.<br> Use &lt;br&gt; for a line break, &lt;i&gt;&lt;/i&gt; for italics, and &lt;b&gt;&lt;/b&gt; for bold. <br> Limited to three lines of text.'),
-            Text::make('Description Color', 'desc_color')->hideFromIndex(),
+            Text::make('Description Color', 'desc_color')->hideFromIndex()->help('Leave blank for white text. Otherwise, type "black" or the desired colour hex code.'),
             Image::make('Desktop Image', 'desktop_img')
                 ->help('The image should be 1536 x 370px or a comparable aspect ratio.')
                 ->disk('nova_s3')
