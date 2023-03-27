@@ -8,11 +8,11 @@ export const usePlaylistsStore = defineStore({
       playlists: [], // For Collection Page
       lessons: [], // For Detail Page
       pinnedPlaylists: [], // [{ id: '', title: '', isPinned: false}]
-      activePlaylist: {}, //playlist a user is a currently viewing 
+      activePlaylist: {}, //playlist a user is a currently viewing
       modalOpen: {
         modalType: null,
       },
-      pageHasPlaylistCatalog: false, 
+      pageHasPlaylistCatalog: false,
       loadingPlaylists: false,
       loadingLessons: false,
       sortingPlaylist: false,
@@ -35,14 +35,14 @@ export const usePlaylistsStore = defineStore({
       this.$patch({
         playlists,
       })
-    }, 
+    },
 
     //Dynamic Updates
     async getPinnedPlaylists(brand, token) {
       this.loadingPinnedPlaylists = true;
       PlaylistService.getPinnedPlaylists(brand, token)
         .then((response) => {
-          if(response.status === 200) {    
+          if(response.status === 200) {
             this.pinnedPlaylists = response.data;
             this.loadingPinnedPlaylists = false;
           } else {
@@ -85,10 +85,10 @@ export const usePlaylistsStore = defineStore({
       })
     },
     //Set/Update Playlist Data for Playlist page
-    setActivePlaylist(list) {  
+    setActivePlaylist(list) {
       this.activePlaylist = list;
     },
-    updateActivePlaylist(list) {  
+    updateActivePlaylist(list) {
       this.activePlaylist.thumbnail_url = list.thumbnail_url,
       this.activePlaylist.name = list.name,
       this.activePlaylist.description = list.description
@@ -96,8 +96,8 @@ export const usePlaylistsStore = defineStore({
     //Pin/Unpin
     pinPlaylist(list) {
       //Pin in Catalog IF Playlist Collection Page
-      if( window.location.href.indexOf("/playlists") > -1 ) {     
-        let playlist = this.playlists.find(p => p === list);
+      if( window.location.href.indexOf("/playlists") > -1 ) {
+        let playlist = this.playlists.find(p => p.id === list.id);
         playlist.pinned = true;
       }
       //Pin in Sidebar
@@ -112,7 +112,7 @@ export const usePlaylistsStore = defineStore({
         let playlist = this.playlists.find(p => p.id === id)
         playlist.pinned = false;
       }
-      
+
       //Unpin from Sidebar
       this.pinnedPlaylists = this.pinnedPlaylists.filter(p => {
         return p.id !== id;

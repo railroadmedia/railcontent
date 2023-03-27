@@ -87,7 +87,6 @@ const pinPlaylist = (item, brand) => {
     PlaylistService.pinPlaylist(item.id, brand, token)
         .then((response) => {
             if (response.status === 200) {
-
                 //emit event or update pinia
                 playlistsStore.pinPlaylist(item)
                 //show success message
@@ -95,7 +94,6 @@ const pinPlaylist = (item, brand) => {
                     icon: 'playlist',
                     text: `'${item.name}' has been pinned within the sidebar.`
                 })
-                console.log('pinned')
             }
         })
         .catch(function (error) {
