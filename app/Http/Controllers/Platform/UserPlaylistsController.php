@@ -177,7 +177,7 @@ class UserPlaylistsController extends BaseController
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
         ];
-
+$user = user();
         ContentRepository::$pullFutureContent = true;
 
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
@@ -201,12 +201,40 @@ class UserPlaylistsController extends BaseController
         $nextPlaylistItem = $playlistItems->getMatchOffset($playlistItem, 1);
         $previousPlaylistItem = $playlistItems->getMatchOffset($playlistItem, -1);
 
-        foreach ($playlistItems as $item) {
-            $item['url'] = url()->route('platform.user.playlist-item', [
+        $otherItems = [];
+        foreach ($playlistItems as $index=>$item) {
+            $otherItems[$index]['url'] = url()->route('platform.user.playlist-item', [
                 'playlistId' => $playlistId,
                 'playlistItemId' => $item['user_playlist_item_id'],
             ]);
-            $item['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
+            $otherItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
+            $otherItems[$index]['id'] = $item['id'];
+            $otherItems[$index]['type'] = $item['type'];
+            $otherItems[$index]['title'] = $item->fetch('title');
+            $otherItems[$index]['artist'] = $item->fetch('artist');
+            $otherItems[$index]['status'] = $item['status'];
+            $otherItems[$index]['fields'] = $item['fields'];
+            $otherItems[$index]['data'] = $item['data'];
+            $otherItems[$index]['need_access'] = ($user->isPackOwner() && !$user->isAMember());
+            $otherItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
+            $otherItems[$index]['url'] = url()->route('platform.user.playlist-item', [
+                'playlistId' => $playlistId,
+                'playlistItemId' => $item['user_playlist_item_id'],
+            ]);
+            $otherItems[$index]['route'] = $item['route'] ?? '';
+            //            $playlistItems[$index]['parent'] = $item['parent']??null;
+            $otherItems[$index]['instructors'] = $item['instructors'] ?? null;
+            $otherItems[$index]['user_playlist_item_id'] = $item['user_playlist_item_id'] ?? null;
+            $otherItems[$index]['user_playlist_item_extra_data'] = $item['user_playlist_item_extra_data'] ?? null;
+            $otherItems[$index]['user_playlist_item_position'] = $item['user_playlist_item_position'] ?? null;
+            $otherItems[$index]['set_start_end_time'] = $item['set_start_end_time'] ?? null;
+            $otherItems[$index]['start_second'] = $item['start_second'] ?? null;
+            $otherItems[$index]['end_second'] = $item['end_second'] ?? null;
+            $otherItems[$index]['started'] = $item['started'] ?? false;
+            $otherItems[$index]['completed'] = $item['completed'] ?? false;
+            $otherItems[$index]['thumbnail_url'] = $item['thumbnail_url'] ?? '';
+            $otherItems[$index]['user_progress'] = $item['user_progress'] ?? '';
+            $otherItems[$index]['parent_title'] = $item['parent_title'] ?? '';
         }
 
         $content = $this->contentService->getById($playlistItem['id']);
@@ -238,7 +266,7 @@ class UserPlaylistsController extends BaseController
         $relatedPlaylists = (new ContentFilterResultsEntity(['results' => $playlists]))->toResponseRawJson();
 
         $playlistLessons = (new ContentFilterResultsEntity([
-                                                               'results' => $playlistItems,
+                                                               'results' => $otherItems,
                                                                'total_results' => $this->userPlaylistsService->countUserPlaylistContents(
                                                                    $playlistId
                                                                ),
