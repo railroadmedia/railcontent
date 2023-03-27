@@ -49,6 +49,7 @@ use Railroad\Railforums\Repositories\PostRepository;
 use Railroad\Railforums\Repositories\ThreadRepository;
 use Railroad\Railforums\Services\ConfigService;
 use Railroad\Referral\Events\EmailInvite;
+use Railroad\Referral\Events\ReferralClaimed;
 use Throwable;
 
 class CustomerIoSyncEventListener
@@ -1237,10 +1238,10 @@ class CustomerIoSyncEventListener
         dispatch(
             (new CustomerIoCreateEventByUserId(
                 $referralClaimed->getUserId(),
-                $referrer->getBrand(),
+                $referrer->brand,
                 'musora_membership_non_recurring_access_added',
                 [
-                    'brand_source' => $referrer->getBrand(),
+                    'brand_source' => $referrer->brand,
                     'access_code' => $referrer->referral_code,
                     'access_source' => 'saasquatch',
                     'claim_timestamp' => $referrer->updated_at->timestamp,
