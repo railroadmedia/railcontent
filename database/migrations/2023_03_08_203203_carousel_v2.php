@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('mobile_img');
             $table->string('desc_color')->nullable();
             $table->dropColumn('endpoint');
+            $table->string('name');
         });
 
         Carousel::where('brand_id', 1)->update(['visible' => false]);
@@ -146,6 +147,7 @@ return new class extends Migration
             $table->dropColumn('mobile_img');
             $table->dropColumn('desc_color');
             $table->string('endpoint');
+            $table->dropColumn('name');
         });
     }
 };
