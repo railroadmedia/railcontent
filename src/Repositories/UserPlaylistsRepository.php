@@ -47,6 +47,7 @@ class UserPlaylistsRepository extends RepositoryBase
                     config('railcontent.table_prefix').'user_playlists.*',
                     'c.id as user_playlist_item_id'
                 )
+                ->selectRaw('IF( pp.id IS NULL, FALSE, TRUE) as  pinned')
                 ->leftjoin(
                     config('railcontent.table_prefix').'user_playlist_content as c',
                     function (JoinClause $join) {
@@ -67,8 +68,14 @@ class UserPlaylistsRepository extends RepositoryBase
                             );
                     }
                 )
-                ->where('user_id', $userId)
-                ->where('brand', $brand)
+                ->leftjoin(
+                    config('railcontent.table_prefix').'pinned_playlists as pp',
+                    config('railcontent.table_prefix').'user_playlists'.'.id',
+                    '=',
+                    'pp.playlist_id'
+                )
+                ->where(config('railcontent.table_prefix').'user_playlists'.'.user_id', $userId)
+                ->where(config('railcontent.table_prefix').'user_playlists'.'.brand', $brand)
                 ->where('type', $playlistType);
         if ($term) {
             $query->where('name', 'LIKE', '%'.$term.'%');
