@@ -14,11 +14,11 @@
 
 @section('meta-description', 'Play these beautiful carols for your loved ones this holiday season.')
 
-@section('meta-img', 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/og-image.jpg')
+@section('meta-img', 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/og-image.jpg')
 
 @section('meta-url', 'https://www.pianote.com/christmas-carols')
 
-@section('lesson-logo', 'https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/logo.png')
+@section('lesson-logo', 'https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/logo.png')
 
 @section('lesson-index-url', '/christmas-carols/songs')
 

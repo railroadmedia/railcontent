@@ -8,7 +8,7 @@
     <meta property="og:description" content="We can’t wait to see your submission. Don’t be shy! Submit today!">
 
     <meta property="og:url" content="https://www.drumeo.com/recitals/">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
 
@@ -217,12 +217,12 @@
     </div>
     <section class="text-center text-white py-5 md:py-10 lg:py-16 px-5 md:px-7" style="background:#00101d ;">
         <div class="container mx-auto max-w-5xl">
-            <img class="h-24 sm:h-32 lg:h-40 mb-3" src="https://drumeo-assets.s3.amazonaws.com/promos/may/recitals-logo2.png">
+            <img class="h-24 sm:h-32 lg:h-40 mb-3" src="https://dpwjbsxqtam5n.cloudfront.net/promos/may/recitals-logo2.png">
             <h3 class="leading-tight"><strong>Share your progress with the<br>  Drumeo Community!</strong></h3>
             <a class="join blue smaller anchor-slide my-5 md:my-7" href="#form">Submit Now &raquo;</a>
             <div class="flex flex-wrap items-start justify-center mx-auto max-w-4xl">
                 <div class="flex flex-wrap items-start flex-image mx-auto w-full md:w-4/12 lg:w-5/12 md:order-1 mb-5 md:mb-0 justify-center">
-                    <img class="h-60 md:h-auto" src="https://drumeo-assets.s3.amazonaws.com/promos/november/recital-spread.png">
+                    <img class="h-60 md:h-auto" src="https://dpwjbsxqtam5n.cloudfront.net/promos/november/recital-spread.png">
                 </div>
                 <div class="text-left md:pr-3 lg:pr-8 w-full md:w-8/12 lg:w-7/12">
                     <p class="mx-auto">With close to 30,000 Drumeo members, this will no doubt be our biggest Drum Recital yet!
@@ -246,7 +246,7 @@
             </div>
         </div>
     </section>
-    <section class="py-5 md:py-10 lg:py-16" style="background:#000 url(https://drumeo-assets.s3.amazonaws.com/promos/november/recital-bg.jpg) center center/cover;">
+    <section class="py-5 md:py-10 lg:py-16" style="background:#000 url(https://dpwjbsxqtam5n.cloudfront.net/promos/november/recital-bg.jpg) center center/cover;">
         <div class="container mx-auto max-w-3xl">
             <div id="form" class="anchor"></div>
             <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLScRKA6Dwt57208VCZr6h1nr2zOvvVoPawVt5sRQ7BZISEGzrw/viewform?embedded=true" height="2177" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>

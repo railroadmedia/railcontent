@@ -2,32 +2,32 @@
     $steps = [
           [
               'position' => 'left',
-              'img' => 'https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/step1.jpg',
+              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/step1.jpg',
               'desc' => 'Enter your email address. It’s free. That’s right - 100% free!'
           ],
           [
               'position' => 'right',
-              'img' => 'https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/step2.jpg',
+              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/step2.jpg',
               'desc' => 'Join the Private Facebook Group. You’ll be emailed the invite.'
           ],
           [
               'position' => 'left',
-              'img' => 'https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/step3.jpg',
+              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/step3.jpg',
               'desc' => 'Log in for your 60 minute LIVE lessons with Lisa.'
           ],
           [
               'position' => 'right',
-              'img' => 'https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/step4.jpg',
+              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/step4.jpg',
               'desc' => 'Get your downloadable resources, practice tips, and connect with Lisa.'
           ],
           [
               'position' => 'left',
-              'img' => 'https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/step5.jpg',
+              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/step5.jpg',
               'desc' => 'Post your progress (if you want - it’s totally up to you).'
           ],
           [
               'position' => 'right',
-              'img' => 'https://cdn.musora.com/image/fetch/w_1000,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/step6.jpg',
+              'img' => 'https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/step6.jpg',
               'desc' => 'Sing BETTER!'
           ],
       ];
@@ -41,7 +41,7 @@
     <meta property="og:title" content="Beginner's Vocal Bootcamp | Singeo">
     <meta name="description" content="Get free LIVE vocal training with Lisa Witt"/>
     <meta property="og:description" content="Get free LIVE vocal training with Lisa Witt">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/og_image.jpg">
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/og_image.jpg">
     <meta property="og:url" content="https://www.singeo.com/beginner-vocal-bootcamp/">
 
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
@@ -54,7 +54,7 @@
         .header {
             background-position: top;
             background-size: cover;
-            background-image: url('https://cdn.musora.com/image/fetch/w_700,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/header_bg_mobile1.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/header_bg_mobile1.jpg');
         }
 
         .text-yellow {
@@ -117,7 +117,7 @@
 
         @media (min-width: 768px) {
             .header {
-                background-image: url('https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/header_image_d.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/header_image_d.jpg');
                 background-size: 1910px;
             }
 
@@ -167,7 +167,7 @@
                     <i data-open="trailer" class="mt-32 md:mt-44 mb-3 md:mb-5 md:my-0 fas fa-play play-button autoplay-video" aria-controls="trailer" aria-haspopup="true" tabindex="0"></i>
                 </div>
                 <div class="w-full md:w-1/2 md:text-left">
-                    <img class="h-16 sm:h-20 lg:h-24 lazyload" data-src="https://cdn.musora.com/image/fetch/w_840,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/logo.png" alt="logo">
+                    <img class="h-16 sm:h-20 lg:h-24 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=840,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/logo.png" alt="logo">
                     <h5 class="mt-2 md:mt-5 sub-header mb-5">
                         <strong class="font-extrabold">Free 60-minute LIVE vocal training</strong> <br class="sm:hidden">with Lisa Witt
                     </h5>
@@ -206,7 +206,7 @@
                         You would fall in love with singing (and start getting good at it)!
                     </p>
                 </div>
-                <img class="rounded-md sm:w-2/3 md:w-auto mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_810,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/intro_image.jpg" alt="intro image">
+                <img class="rounded-md sm:w-2/3 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/intro_image.jpg" alt="intro image">
             </div>
 
             <div class="text-center mb-10 sm:mb-20 md:mb-24 lg:mb-32">
@@ -216,21 +216,21 @@
                 </h4>
                 <div class="flex flex-col md:flex-row md:gap-10 lg:gap-13">
                     <div class="md:w-1/3 mb-8 md:mb-0">
-                        <img class="h-12 md:h-16" src="https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/sound_bad_icon.svg" alt="ear icon">
+                        <img class="h-12 md:h-16" src="https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/sound_bad_icon.svg" alt="ear icon">
                         <h4 class="font-extrabold mb-1 md:mb-2 mt-5 md:mt-6 lg:mt-8 leading-tight">1. You sound “bad”</h4>
                         <p class="max-w-md md:max-w-full lg:leading-loose" style="color:#A4AFC7;">
                             You’ve heard yourself recorded and you just aren’t happy. That’s because you need to get to know your voice. What type of singer are you? What styles and songs would suit your particular voice?
                         </p>
                     </div>
                     <div class="md:w-1/3 mb-8 md:mb-0">
-                        <img class="h-12 md:h-16" src="https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/hurts_icon.svg" alt="hurts icon">
+                        <img class="h-12 md:h-16" src="https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/hurts_icon.svg" alt="hurts icon">
                         <h4 class="font-extrabold mb-1 md:mb-2 mt-5 md:mt-6 lg:mt-8 leading-tight">2. It hurts</h4>
                         <p class="max-w-md md:max-w-full lg:leading-loose" style="color:#A4AFC7;">
                             Your voice feels weak and it starts to hurt or get tired. That’s because you need to exercise, and you need to do it correctly (and safely)! Lisa will show you the perfect vocal routine to balance and strengthen your voice so you can sing powerfully and pain-free.
                         </p>
                     </div>
                     <div class="md:w-1/3">
-                        <img class="h-12 md:h-16" src="https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/bad_song_icon.svg" alt="bad song icon">
+                        <img class="h-12 md:h-16" src="https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/bad_song_icon.svg" alt="bad song icon">
                         <h4 class="font-extrabold mb-1 md:mb-2 mt-5 md:mt-6 lg:mt-8 leading-tight">3. Your songs don't “sparkle” </h4>
                         <p class="max-w-md md:max-w-full lg:leading-loose" style="color:#A4AFC7;">
                             They don’t sound like your favorite singers. That’s because you need to understand how to use vowels to transform your voice when you’re singing real songs. This is the day you’ll never forget, as Lisa shows you the transformative power of vowel shapes.
@@ -240,7 +240,7 @@
             </div>
 
             <div class="flex flex-wrap sm:flex-nowrap items-center max-w-xs sm:max-w-5xl mx-auto">
-                <img class="rounded-xl mx-auto w-72 lg:w-96 order-1 sm:order-0 lazyload" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/end_of_bootcamp_image.jpg" alt="intro image">
+                <img class="rounded-xl mx-auto w-72 lg:w-96 order-1 sm:order-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/end_of_bootcamp_image.jpg" alt="intro image">
                 <div class="mb-5 md:mt-0 sm:pl-5 lg:pl-10">
                     <h3 class="font-extrabold mx-0 mb-4 leading-tight">
                         By the end of your bootcamp…
@@ -273,11 +273,11 @@
                                     </p>
                                 </div>
                             </div>
-                            <img class="timeline-img rounded-lg lazyload mb-4 md:mb-0" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/{{ $step['img'] }}" alt="step {{$key+1}}" />
+                            <img class="timeline-img rounded-lg lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $step['img'] }}" alt="step {{$key+1}}" />
                         </div>
                     @else
                         <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-2 md:gap-12 lg:gap-20 mb-16 md:mb-16 lg:mb-28 pl-6 md:pl-0">
-                            <img class="timeline-img rounded-lg lazyload mb-4 md:mb-0" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/{{ $step['img'] }}" alt="step {{$key+1}}" />
+                            <img class="timeline-img rounded-lg lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $step['img'] }}" alt="step {{$key+1}}" />
                             <div class="content relative flex items-center justify-center">
                                 <div class="md:max-w-xs lg:max-w-md w-full">
                                     <h3 class="font-extrabold uppercase lg:mb-2">step {{$key+1}}</h3>
@@ -297,7 +297,7 @@
     <section class="px-4 py-12 sm:py-20">
         <div class="max-w-md sm:max-w-3xl lg:max-w-6xl mx-auto">
             <div class="sm:grid sm:grid-cols-2 sm:gap-6 md:gap-12 lg:gap-20 items-center text-center">
-                <img class="rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_660,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/screen_image2.png" alt="intro image">
+                <img class="rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=660,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/screen_image2.png" alt="intro image">
                 <div class="inline-flex flex-col text-left">
                     <h3 class="font-extrabold mb-4 sm:mb-6 leading-tight text-left mx-0">
                         These aren’t <br>
@@ -319,8 +319,8 @@
     <section class="px-4 py-14 sm:py-20 md:pb-32 bg-musora-black">
         <div class="max-w-3xl lg:max-w-4xl mx-auto text-white relative">
             <div class="w-3/4 sm:w-2/3 mx-auto relative md:static text-center mb-8">
-                <img class="md:w-80 lg:w-96 md:absolute -bottom-10 right-2 md:border-8 rounded-xl md:border-solid border-musora-black lazyload" data-src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/coach_image_d.jpg" alt="coach image">
-                <img class="w-20 absolute bottom-0 md:-bottom-12 -right-3 md:right-0" src="https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/corner_piece_d.svg" alt="corner image">
+                <img class="md:w-80 lg:w-96 md:absolute -bottom-10 right-2 md:border-8 rounded-xl md:border-solid border-musora-black lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/coach_image_d.jpg" alt="coach image">
+                <img class="w-20 absolute bottom-0 md:-bottom-12 -right-3 md:right-0" src="https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/corner_piece_d.svg" alt="corner image">
             </div>
 
             <div class="mx-auto md:mx-0 max-w-md sm:max-w-lg md:max-w-full md:w-2/3 rounded-xl p-4 sm:p-10 md:py-10 md:pl-8 md:pr-24 lg:p-12 lg:pr-28" style="background:#8300E9;">
@@ -339,9 +339,9 @@
     </section>
 
 
-    <section class="py-20 bg-cover lazyload" style="background-position: 25% 50%;" data-bg="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/footer_bg_d.jpg">
+    <section class="py-20 bg-cover lazyload" style="background-position: 25% 50%;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/footer_bg_d.jpg">
         <div class="max-w-2xl lg:max-w-3xl mx-auto text-center text-white px-4">
-            <img class="mb-4 w-3/4 sm:w-2/3 lazyload" data-src="https://cdn.musora.com/image/fetch/w_840,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/beginner-vocal-bootcamp/logo.png" alt="logo">
+            <img class="mb-4 w-3/4 sm:w-2/3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=840,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/logo.png" alt="logo">
             <h5 class="mb-2">
                 <strong class="font-extrabold">Get free LIVE vocal training</strong> with Lisa Witt
             </h5>

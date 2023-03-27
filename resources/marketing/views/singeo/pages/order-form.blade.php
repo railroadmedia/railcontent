@@ -7,11 +7,12 @@
     <meta name="description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee." />
     <meta property="og:description" content="Online singing lessons for any voice & vocal coaches to support you every step of the way. 90-Day Guarantee."/>
 
-        <meta property="og:image" content="https://singeo.s3.amazonaws.com/sales/2022/og-image.jpg"/>
+        <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2022/og-image.jpg"/>
 
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
@@ -23,6 +24,9 @@
 @section('global-body')
     {{-- Notifications Container --}}
     <div id="notifications-container"></div>
+
+    {{-- Confirmation Modal Container --}}
+    <div id="confirmation-container"></div>
 
     @include("singeo.sales.partials._nav", [
         "checkoutVersion" => true

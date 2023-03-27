@@ -14,7 +14,7 @@
 
 @section('lesson-description')
     <div class="w-full px-2 md:px-3 text-center">
-        <a class="join smaller w-full sm:w-1/2 mx-auto" href="https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/sheet-music/deck-the-halls.pdf">Download The Sheet Music</a>
+        <a class="join smaller w-full sm:w-1/2 mx-auto" href="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/sheet-music/deck-the-halls.pdf">Download The Sheet Music</a>
     </div>
 @endsection
 

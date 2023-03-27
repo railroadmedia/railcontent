@@ -6,7 +6,7 @@
     <meta property="og:title" content="Beginner Piano Christmas Carols | Pianote">
     <meta name="description" content="Play these beautiful carols for your loved ones this holiday season.">
     <meta property="og:description" content="Play these beautiful carols for your loved ones this holiday season.">
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/lead-gen/christmas-carols/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/christmas-carols">
 
 @endsection

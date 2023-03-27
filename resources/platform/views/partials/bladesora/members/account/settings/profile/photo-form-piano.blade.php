@@ -24,8 +24,8 @@
                                 <p class="tw-text-sm tw-italic tw-mt-2 tw-text-center">Add a photo of your<br> piano gear</p>
                             </div>
                             {{-- Uploaded Gear Image --}}
-                            <img class="tw-w-full tw-absolute tw-top-0 tw-left-0 {{ empty($gearPhotoUrl) ? 'tw-hidden' : ''}}" 
-                                 src="{{ !empty($gearPhotoUrl) ? $gearPhotoUrl : 'https://musora.com/cdn-cgi/image/quality=90/https://dmmior4id2ysr.cloudfront.net/assets/images/default-gear-photo.jpg' }}"
+                            <img class="tw-w-full tw-absolute tw-top-0 tw-left-0 {{ empty($gearPhotoUrl) ? 'tw-hidden' : ''}}"
+                                 src="{{ !empty($gearPhotoUrl) ? $gearPhotoUrl : 'https://www.musora.com/musora-cdn/image/quality=90/https://dmmior4id2ysr.cloudfront.net/assets/images/default-gear-photo.jpg' }}"
                                  data-pianote-gear-update="true"
                             >
                         </button>

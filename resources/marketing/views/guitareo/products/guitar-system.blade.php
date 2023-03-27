@@ -59,7 +59,7 @@
     <header class="header stacked">
         <div class="row header-row">
             <div class="columns drumeo-free">
-                <img src="https://guitareo.s3.amazonaws.com/tripwire/gs-logo.png" alt="GS logo">
+                <img src="https://d122ay5chh2hr5.cloudfront.net/tripwire/gs-logo.png" alt="GS logo">
             </div>
             <div class="columns video-container">
                 <i class="fas fa-play play-button autoplay" data-open="previewModal"></i>
@@ -96,7 +96,7 @@
         {{--<div class="noise-wrap">--}}
             {{--<div class="row">--}}
                 {{--<a href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['GUITAR-SYSTEM' => 1], 'redirect' => '/order']) }}">--}}
-                    {{--<img class="logo animated tada delay-2s" src="https://guitareo.s3.amazonaws.com/sales/promos/april/guitar-month-logo.png">--}}
+                    {{--<img class="logo animated tada delay-2s" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/april/guitar-month-logo.png">--}}
                     {{--<br>--}}
                     {{--<div class="text">--}}
                         {{--<p class="text-left" style="max-width:510px">It’s Guitar Month! And we’re celebrating by giving you a {{ round(100 - (100 * (floatval($productPrices['GUITAR-SYSTEM']->discounted_price) / floatval($productPrices['GUITAR-SYSTEM']->price)))) }}% discount on our most popular training pack where you’ll learn ANYTHING you want on guitar.--}}
@@ -121,181 +121,181 @@
             <h3 class="light">&nbsp;</h3>
             <div class="columns tile-wrap small-up-2 medium-up-3">
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/1.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/1.jpg",
                 "tileTitle" => "Guitar Fundamentals",
                 "lessonNumber" => "14",
                 "lessonDuration" => "1 HR 26",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/2.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/2.jpg",
                 "tileTitle" => "Guitar Gear & Tone",
                 "lessonNumber" => "13",
                 "lessonDuration" => "1 HR 37",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/3.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/3.jpg",
                 "tileTitle" => "Power Chords",
                 "lessonNumber" => "13",
                 "lessonDuration" => "1 HR 4",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/4.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/4.jpg",
                 "tileTitle" => "Palm Muting & Theory",
                 "lessonNumber" => "29",
                 "lessonDuration" => "1 HR 9",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/5.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/5.jpg",
                 "tileTitle" => "Open Chords & Strumming",
                 "lessonNumber" => "21",
                 "lessonDuration" => "1 HR 21",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/6.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/6.jpg",
                 "tileTitle" => "Minor Chords & Walk Downs",
                 "lessonNumber" => "11",
                 "lessonDuration" => "49",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/7.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/7.jpg",
                 "tileTitle" => "Bar Chords",
                 "lessonNumber" => "19",
                 "lessonDuration" => "1 HR 35",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/8.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/8.jpg",
                 "tileTitle" => "Into The World Of Lead Guitar",
                 "lessonNumber" => "29",
                 "lessonDuration" => "1 HR 30",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/9.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/9.jpg",
                 "tileTitle" => "More Pentatonic Scales & The Blues",
                 "lessonNumber" => "24",
                 "lessonDuration" => "59",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/10.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/10.jpg",
                 "tileTitle" => "Essential Guitar Scales & Lead Techniques",
                 "lessonNumber" => "33",
                 "lessonDuration" => "1 HR 10",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/11.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/11.jpg",
                 "tileTitle" => "Riffs & Cross Picking",
                 "lessonNumber" => "13",
                 "lessonDuration" => "1 HR 5",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/12.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/12.jpg",
                 "tileTitle" => "Major Keys & More Chords",
                 "lessonNumber" => "25",
                 "lessonDuration" => "1 HR 29",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/13.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/13.jpg",
                 "tileTitle" => "Scales & Sequencing",
                 "lessonNumber" => "23",
                 "lessonDuration" => "56",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/14.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/14.jpg",
                 "tileTitle" => "More Scales & Lead Techniques",
                 "lessonNumber" => "32",
                 "lessonDuration" => "1 HR 10",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/15.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/15.jpg",
                 "tileTitle" => "Intervals & Arpeggios",
                 "lessonNumber" => "20",
                 "lessonDuration" => "48",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/16.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/16.jpg",
                 "tileTitle" => "The Blues",
                 "lessonNumber" => "28",
                 "lessonDuration" => "1 HR 33",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/17.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/17.jpg",
                 "tileTitle" => "Strumming, Riffs, Chords, & Minor Keys",
                 "lessonNumber" => "22",
                 "lessonDuration" => "1 HR 16",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/18.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/18.jpg",
                 "tileTitle" => "Alternate Tunings & Advanced Chords",
                 "lessonNumber" => "19",
                 "lessonDuration" => "58",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/19.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/19.jpg",
                 "tileTitle" => "Lead Techniques, Scales, & Fretboard Layout",
                 "lessonNumber" => "34",
                 "lessonDuration" => "1 HR 29",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/20.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/20.jpg",
                 "tileTitle" => "Scales, Sequencing & Sweep Picking",
                 "lessonNumber" => "24",
                 "lessonDuration" => "1 HR 19",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/21.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/21.jpg",
                 "tileTitle" => "Knowing Your Fretboard",
                 "lessonNumber" => "26",
                 "lessonDuration" => "1 HR 17",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/22.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/22.jpg",
                 "tileTitle" => "Advanced Lead Concepts",
                 "lessonNumber" => "36",
                 "lessonDuration" => "1 HR 19",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/23.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/23.jpg",
                 "tileTitle" => "7th Arpeggios & Modal Playing",
                 "lessonNumber" => "22",
                 "lessonDuration" => "54",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/24.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/24.jpg",
                 "tileTitle" => "Chops & Metal",
                 "lessonNumber" => "28",
                 "lessonDuration" => "1 HR 33",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/25.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/25.jpg",
                 "tileTitle" => "Fingerstyle & Classical",
                 "lessonNumber" => "19",
                 "lessonDuration" => "1 HR 35",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/26.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/26.jpg",
                 "tileTitle" => "Bluegrass & Country",
                 "lessonNumber" => "25",
                 "lessonDuration" => "1 HR 47",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/27.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/27.jpg",
                 "tileTitle" => "Jazz",
                 "lessonNumber" => "26",
                 "lessonDuration" => "1 HR 22",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/28.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/28.jpg",
                 "tileTitle" => "Music Theory & Reading Music",
                 "lessonNumber" => "34",
                 "lessonDuration" => "1 HR 34",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/29.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/29.jpg",
                 "tileTitle" => "Ear Training & Playing By Ear",
                 "lessonNumber" => "35",
                 "lessonDuration" => "48",
                 ])
                 @include('guitareo.products._lesson-tile', [
-                "imageURL" => "https://guitareo.s3.amazonaws.com/tripwire/thumbnails/30.jpg",
+                "imageURL" => "https://d122ay5chh2hr5.cloudfront.net/tripwire/thumbnails/30.jpg",
                 "tileTitle" => "Play-Alongs",
                 "lessonNumber" => "12",
                 "lessonDuration" => "38",
@@ -377,7 +377,7 @@
     <section class="nate-bio">
         <div class="row">
             <p class="columns paragraph-split">
-                <span class="first-letter"><img src="https://guitareo.s3.amazonaws.com/tripwire/bold-p.png" alt="Bold p"></span>laying the guitar is both fun and rewarding. So, why is it difficult to make steady and consistent progress? Why do some students seem to learn much faster than others? Do they just have a natural skill advantage or is there something more to it than that?
+                <span class="first-letter"><img src="https://d122ay5chh2hr5.cloudfront.net/tripwire/bold-p.png" alt="Bold p"></span>laying the guitar is both fun and rewarding. So, why is it difficult to make steady and consistent progress? Why do some students seem to learn much faster than others? Do they just have a natural skill advantage or is there something more to it than that?
                 <br><br>
                 I’ve spent the last 17 years teaching the guitar to students around the world. From what I’ve seen, the most successful students have one thing in common. That is, they have clarity on the exact steps they need to take in order to get better. They don’t spend their time wondering what to do next, while playing the same old riffs over and over again.
                 <br><br>
@@ -416,7 +416,7 @@
     <section class="guarantee">
         <div class="row">
             <div class="large-4 medium-5 columns float-right text-center medium-text-right">
-                <img src="https://guitareo.s3.amazonaws.com/sales/90-day.png" alt="90-Day Money-Back Guarantee">
+                <img src="https://d122ay5chh2hr5.cloudfront.net/sales/90-day.png" alt="90-Day Money-Back Guarantee">
             </div>
             <div class="large-8 medium-7 columns text-center medium-text-left">
                 <h1>90-Day Money-Back Guarantee.</h1>
@@ -428,8 +428,8 @@
     <div id="order-section" class="anchor anchor-slide"></div>
     <section class="final text-center">
         <div class="row">
-            {{--<img class="logo edge" src="https://guitareo.s3.amazonaws.com/sales/promos/cyber-monday/logo.png"><br>--}}
-            <img class="logo mx-auto" src="https://guitareo.s3.amazonaws.com/tripwire/gs-logo.png" alt="GS logo">
+            {{--<img class="logo edge" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/cyber-monday/logo.png"><br>--}}
+            <img class="logo mx-auto" src="https://d122ay5chh2hr5.cloudfront.net/tripwire/gs-logo.png" alt="GS logo">
             <h2>The Ultimate Encyclopedia <br>Of Guitar Lessons</h2>
             <a href="{{ url()->route('shopping-cart.add-to-cart',
                 ['products' => ['GUITAR-SYSTEM' => 1], 'redirect' => '/order']) }}" class="join" data-product-json='{"GUITAR-SYSTEM": 1}'>Get Started &raquo;</a>

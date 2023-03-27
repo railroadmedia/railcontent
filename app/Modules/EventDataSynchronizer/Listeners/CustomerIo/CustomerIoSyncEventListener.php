@@ -21,6 +21,7 @@ use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
+use Railroad\Ecommerce\Events\AccessCodeClaimed;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
@@ -1171,6 +1172,60 @@ class CustomerIoSyncEventListener
         } catch (Throwable $throwable) {
             error_log($throwable);
         }
+    }
+
+
+    /**
+     * @param AccessCodeClaimed $accessCodeClaimed
+     */
+    public function handleAccessCodeClaimed(AccessCodeClaimed $accessCodeClaimed)
+    {
+        $accessCode = $accessCodeClaimed->getAccessCode();
+        $brand = $accessCode->getBrand();
+
+        dispatch(
+            (new CustomerIoCreateEventByUserId(
+                $accessCodeClaimed->getUser()->getId(),
+                $brand,
+                'musora_membership_access_code_redemption',
+                [
+                    'brand_source' => $brand,
+                    'access_code' => $accessCode->getCode(),
+                    'access_source' => $accessCode->getSource(),
+                    'claim_timestamp' => $accessCode->getUpdatedAt()->timestamp,
+                    'code_creation_date' => $accessCode->getCreatedAt()->timestamp,
+                    'product_ids' => $accessCode->getProductIdsAsString()
+
+                ],
+                null,
+                Carbon::now()->timestamp
+            ))
+                ->delay(
+                Carbon::now()
+                    ->addSeconds(3)
+            )
+        );
+
+
+//        dispatch(
+//            (new CustomerIoCreateEventByUserId(
+//                $accessCodeClaimed->getUser()->getId(),
+//                $brand,
+//                'musora_membership_access',
+//                [
+//                    'access_type' => 'manual_access_type',
+//                    'access_start_date' => '',
+//                    'access_expiration_date' => '',
+//
+//                ],
+//                null,
+//                Carbon::now()->timestamp
+//            ))
+//                ->delay(
+//                    Carbon::now()
+//                        ->addSeconds(3)
+//                )
+//        );
     }
 
 }

@@ -1,7 +1,7 @@
 @foreach ($product->bundles as $key => $bundle)
     <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center">
         <div class="image-wrap relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto {{-- @if($bundle['bundle_free_shipping']) shipping @endif--}}">
-            <img class="w-full rounded-lg" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/@if(str_contains($bundle['bundle_img'], 'amazonaws') || str_contains($bundle['bundle_img'], 'cloudfront')){{ $bundle['bundle_img'] }} @else https://laravel-nova.s3.us-east-2.amazonaws.com/{{ $bundle['bundle_img']  }}@endif" alt="product thumbnail{{$key}}">
+            <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/{{ $bundle['bundle_img'] }}" alt="product thumbnail{{$key+1}}">
         </div>
         <div>
             <strong>{{ $bundle['name'] }} - <span @if($bundle['priceColor'] == 'orange') class="orange" @endif>Normally ${{ floatVal($bundle['price'])}}</span>

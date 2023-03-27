@@ -7,7 +7,7 @@ Route::domain('{pianoteDomain}')
     ->middleware(['web_public'])
     ->group(function () {
     Route::get('/', [SalesController::class, 'home'] );
-    Route::get('/trial', [SalesController::class, 'home'] );
+    Route::get('/trial', [SalesController::class, 'trial'] );
     Route::get('/trial-month', [SalesController::class, 'homeMonth'] );
     Route::get('/new-year', [SalesController::class, 'promo'] );
     Route::get('/lp', [SalesController::class, 'promo'] );
@@ -55,7 +55,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/foundations', [SalesController::class, 'foundations'] );
     Route::get('/new-piano-players', [SalesController::class, 'newPianoPlayers'] );
     Route::get('/shop/new-piano-players', [SalesController::class, 'newPianoPlayers'] );
-    Route::get('/new-piano-players/deal', [SalesController::class, 'newPianoPlayersDeal'] );
+    Route::get('/new-piano-players-deal', [SalesController::class, 'newPianoPlayersDeal'] );
     Route::get('/concert-headphones-members', [SalesController::class, 'concertHeadphonesMember']);
 
     Route::get('/about', [SalesController::class, 'about'] );

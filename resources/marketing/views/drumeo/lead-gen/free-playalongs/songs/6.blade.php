@@ -16,9 +16,9 @@
     /free-playalongs/songs/7
 @stop
 
-@section('prev-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/kaz-rodriguez-drum-e-o.png')
+@section('prev-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/kaz-rodriguez-drum-e-o.png')
 
-@section('next-thumb', 'https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/sarah-thawer-straight-reggae.png')
+@section('next-thumb', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/sarah-thawer-straight-reggae.png')
 
 @section('assets')
     @include('drumeo.lead-gen.partials._assignment-resources', [

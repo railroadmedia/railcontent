@@ -5,7 +5,7 @@
     <title>The Lifetime Bundle</title>
     <meta name="description" content="Get A Lifetime Drumeo Membership + FREE In-Ear Headphones, An Exclusive Masterclass, And More!">
     <meta property="og:description" content="Get A Lifetime Drumeo Membership + FREE In-Ear Headphones, An Exclusive Masterclass, And More!">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/promos/november/lifetime-fb-share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/november/lifetime-fb-share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 @stop()
 
@@ -18,7 +18,7 @@
             'freeBonus' => true,
             'freeShipping' => true,
             'lineBreak' => true,
-            'img' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eardrums.jpg'
+            'img' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eardrums.jpg'
         ],
         [
             'name' => '12 Pairs of Drumeo Drumsticks',
@@ -180,13 +180,13 @@
     @include('_partials.components.shop.slider', [
         "headerText" => "<strong>Get A Lifetime Drumeo Membership + FREE In-Ear Headphones, An Exclusive Masterclass, And More!</strong>",
         "videoSrc" => "//player.vimeo.com/video/774477396",
-        "videoThumb" => "https://drumeo-assets.s3.amazonaws.com/promos/november/practice-anywhere-thumb.jpg",
+        "videoThumb" => "https://dpwjbsxqtam5n.cloudfront.net/promos/november/practice-anywhere-thumb.jpg",
         "noSlider" => true
     ])
 
         @include('_partials.components.shop.sidebar', [
             "bundle" => true,
-            "logo" => "https://drumeo-assets.s3.amazonaws.com/promos/november/lifetime-bundle-white.png",
+            "logo" => "https://dpwjbsxqtam5n.cloudfront.net/promos/november/lifetime-bundle-white.png",
             "sku" => "products[DLM-Lifetime]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=12&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&products[TLOD-DIGI]=1&products[MAM-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[AOADS-DIGI]=1&products[ICM-DIGI]=1&products[BTC-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&locked=true",
             "fullPrice" => 1200,
             "price" => 1200,
@@ -199,7 +199,7 @@
 
 @section('bottom')
     <h3 class="text-center" style="margin-bottom: 15px;"><strong>What's included:</strong></h3>
-    <img src="https://cdn.musora.com/image/fetch/c_fill,w_800,q_auto:good/https://drumeo-assets.s3.amazonaws.com/promos/november/lifetime-bundle-spread2.png">
+    <img src="https://cdn.musora.com/image/fetch/c_fill,w_800,q_auto:good/https://dpwjbsxqtam5n.cloudfront.net/promos/november/lifetime-bundle-spread2.png">
     <br><br>
     <p>“My soul is that of a drummer. I didn’t do it to become rich and famous. I did it because it was the love of my life.” – Ringo Starr
         <br><br>

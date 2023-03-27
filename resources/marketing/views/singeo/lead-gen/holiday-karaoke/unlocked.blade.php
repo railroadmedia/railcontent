@@ -6,7 +6,7 @@
     <meta property="og:title" content="Singeo Holiday Karaoke | Singeo">
     <meta name="description" content="Simply enter your email to unlock your holiday karaoke library!">
     <meta property="og:description" content="Simply enter your email to unlock your holiday karaoke library!">
-    <meta property="og:image" content="https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/holiday-karaoke/">
 
     <link href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}" rel="stylesheet">
@@ -54,7 +54,7 @@
     <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap z-10 py-2 sm:py-1 fixed mx-auto bg-black text-white">
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
-                <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://cdn.musora.com/image/fetch/w_200,q_auto:best/https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png">
+                <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png">
                 <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$singeoSongs - 30 }}+ more songs + world-class vocal lessons <br>
                     inside Singeo. Click for a FREE trial.</p>
             </div>
@@ -69,7 +69,7 @@
                 @php
                     $bonuses = [
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-01.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-01.jpg',
                         'song' => "All I Want For Christmas Is You",
                         'artist' => 'Mariah Carey ',
                         'original' => '7NFBZlOBGwU',
@@ -77,7 +77,7 @@
                         'low' => 'B2RqxEJJXq0',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-02.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-02.jpg',
                         'song' => "Auld Lang Syne",
                         'artist' => 'Susan Boyle',
                         'original' => '8pIbuQsYwjQ',
@@ -85,7 +85,7 @@
                         'low' => 'RoLryeQXMQg',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-03.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-03.jpg',
                         'song' => "Blue Christmas",
                         'artist' => 'Elvis Presley',
                         'original' => 'tan2k57DDtQ',
@@ -93,7 +93,7 @@
                         'low' => 'OlOIMSyYvSg',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-04.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-04.jpg',
                         'song' => "Christmas (Baby Please Come Home) ",
                         'artist' => 'Michael Bublé',
                         'original' => 'mDvyr4cn3t0',
@@ -101,7 +101,7 @@
                         'low' => 'oIT5rsBZHnc',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-05.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-05.jpg',
                         'song' => "Christmas Time is Here",
                         'artist' => 'Devin Dawson',
                         'original' => 'Urs7WT1t18g',
@@ -109,7 +109,7 @@
                         'low' => 'mA9Hlu59N7Y',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-06.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-06.jpg',
                         'song' => "Cool Yule",
                         'artist' => 'Bette Midler',
                         'original' => 'ROyOgxGQZiM',
@@ -117,7 +117,7 @@
                         'low' => 'ZrvZdorK3R4',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-07.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-07.jpg',
                         'song' => "Deck The Halls",
                         'artist' => 'Nat "King" Cole',
                         'original' => 'KveUR7j0kR4',
@@ -125,7 +125,7 @@
                         'low' => 'FF2Fb6XG230',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-08.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-08.jpg',
                         'song' => "Feliz Navidad",
                         'artist' => 'José Feliciano',
                         'original' => 'ftdlDcuxC-0',
@@ -133,7 +133,7 @@
                         'low' => 'TrvZJX51ZXw',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-09.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-09.jpg',
                         'song' => "Have Yourself a Merry Little Christmas ",
                         'artist' => 'Dan + Shay',
                         'original' => '_v7R0EWRwLM',
@@ -141,7 +141,7 @@
                         'low' => 'tcRfOWz2WsA',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-10.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-10.jpg',
                         'song' => "Here Comes Santa Clause",
                         'artist' => 'Doris Day',
                         'original' => 'E_rbYkIUMW0',
@@ -149,7 +149,7 @@
                         'low' => 'B3M6-448QVI',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-11.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-11.jpg',
                         'song' => "It's Beginning To Look A Lot Like Christmas",
                         'artist' => 'Michael Bublé',
                         'original' => 'nDAnNU913fw',
@@ -157,7 +157,7 @@
                         'low' => 'Yyh13A8pXCk',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-12.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-12.jpg',
                         'song' => "It's the Most Wonderful Time Of The Year",
                         'artist' => 'Andy Williams',
                         'original' => 'rlYJoBw0ggQ',
@@ -165,7 +165,7 @@
                         'low' => 'wSBHSTLeZ4I',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-13.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-13.jpg',
                         'song' => "Jingle Bell Rock ",
                         'artist' => 'Brenda Lee',
                         'original' => '_ChLheYjInk',
@@ -173,7 +173,7 @@
                         'low' => '8XjmuUhg5wE',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-14.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-14.jpg',
                         'song' => "Last Christmas",
                         'artist' => 'Wham',
                         'original' => '6VVcuhh7QUg',
@@ -181,7 +181,7 @@
                         'low' => '5TMxNz2T8Hc',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-15.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-15.jpg',
                         'song' => "Mary's Boy Child",
                         'artist' => 'Boney M',
                         'original' => 'fXp5GpW6VfA',
@@ -189,7 +189,7 @@
                         'low' => '8C7Ft1T8AYg',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-16.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-16.jpg',
                         'song' => "Merry Christmas Baby",
                         'artist' => 'Otis Redding',
                         'original' => 'vzsucOmmvXQ',
@@ -197,7 +197,7 @@
                         'low' => 'bS5YStkq7mg',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-17.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-17.jpg',
                         'song' => "My Favorite Things",
                         'artist' => 'Martina McBride',
                         'original' => 'GKptQOmAle8',
@@ -205,7 +205,7 @@
                         'low' => 'l9hgIAfXl-Q',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-18.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-18.jpg',
                         'song' => "Please Come Home For Christmas (Bells Will Be Ringing)",
                         'artist' => 'Kelly Clarkson',
                         'original' => 'tgmVh6obp6g',
@@ -213,7 +213,7 @@
                         'low' => 'UsLOReAiIVo',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-19.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-19.jpg',
                         'song' => "Rockin' Around The Christmas Tree",
                         'artist' => 'Brenda Lee',
                         'original' => 'Itdh5bhBoIc',
@@ -221,7 +221,7 @@
                         'low' => 'UI6sNyC932s',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-20.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-20.jpg',
                         'song' => "Rudolph The Red Nosed Reindeer",
                         'artist' => 'John Denver',
                         'original' => 'ea7RUrJJiaQ',
@@ -229,7 +229,7 @@
                         'low' => 'Q8-MbvQasAs',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-21.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-21.jpg',
                         'song' => "Run Rudolph Run",
                         'artist' => 'Chuck Berry',
                         'original' => 'n2mGo8qzQWE',
@@ -237,7 +237,7 @@
                         'low' => 'j4YrvKOu1gg',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-22.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-22.jpg',
                         'song' => "Santa Baby",
                         'artist' => 'Eartha Kitt',
                         'original' => 'RwfWQD2KsUA',
@@ -245,7 +245,7 @@
                         'low' => 'fbB0zF48uI4',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-23.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-23.jpg',
                         'song' => "Santa Tell Me ",
                         'artist' => 'Ariana Grandé',
                         'original' => 'FJdKEykHEOo',
@@ -253,7 +253,7 @@
                         'low' => '56G0aqhipz0',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-24.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-24.jpg',
                         'song' => "Sleigh Ride",
                         'artist' => 'The Ronettes',
                         'original' => 'nslCk0VTp48',
@@ -261,7 +261,7 @@
                         'low' => '5WrTAqD1nhI',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-25.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-25.jpg',
                         'song' => "Step Into Christmas ",
                         'artist' => 'Elton John',
                         'original' => 'x3DpA3WP2TM',
@@ -269,7 +269,7 @@
                         'low' => 'eD0DfkoAIN4',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-26.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-26.jpg',
                         'song' => "This Christmas",
                         'artist' => 'Donny Hathaway',
                         'original' => 'SKBOpBCnhBg',
@@ -277,7 +277,7 @@
                         'low' => 'HHOdNhARdik',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-27.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-27.jpg',
                         'song' => "What Christmas Means To Me",
                         'artist' => 'Stevie Wonder',
                         'original' => 'ozzoT-qQzK8',
@@ -285,7 +285,7 @@
                         'low' => '_O1uZGbO9co',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-28.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-28.jpg',
                         'song' => "What Christmas Means To Me",
                         'artist' => 'Cee Lo Green',
                         'original' => '0Ppqyxkb2IQ',
@@ -293,7 +293,7 @@
                         'low' => 'MNOD0Lgk-xA',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-29.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-29.jpg',
                         'song' => "White Christmas ",
                         'artist' => 'Bing Crosby',
                         'original' => 'RtOM29c2kbI',
@@ -301,7 +301,7 @@
                         'low' => '-tpZrbi3GJ8',
                         ],
                         [
-                        'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-30.jpg',
+                        'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-30.jpg',
                         'song' => "Winter Wonderland",
                         'artist' => 'Tony Bennett',
                         'original' => 'EE5XRveTYFY',
@@ -314,7 +314,7 @@
                     <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 md:px-3 mb-5 md:mb-6 lg:mb-8">
                         <div class="relative autoplay-video cursor-pointer overflow-hidden group" data-open="{{ str_replace(".","",(str_replace("/","",(str_replace(" ","",$bonus['original']))))) }}">
                             <i class="absolute top-1/2 left-1/2 fas fa-play play-button smaller opacity-0 group-hover:opacity-100 -m-10 lg:-m-12"></i>
-                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_470,q_auto:best/{{ $bonus['image'] }}"></div>
+                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=85/{{ $bonus['image'] }}"></div>
                         </div>
                         <h6 class="mt-3 mb-0.5 leading-tight"><strong>{{ $bonus['song'] }}</strong></h6>
                         <p class="text-navy leading-tight">{{ $bonus['artist'] }}</p>
@@ -323,7 +323,7 @@
             </div>
         </div>
     </section>
-    <section class="text-center py-14 md:py-24 lg:py-32 text-white lazyload" style="background: #6d7894 center center/cover;" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/final.jpg">
+    <section class="text-center py-14 md:py-24 lg:py-32 text-white lazyload" style="background: #6d7894 center center/cover;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/final.jpg">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
                 <h1><strong>Keep the party going.</strong></h1>
@@ -338,7 +338,7 @@
     @php
         $bonuses = [
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-01.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-01.jpg',
             'song' => "All I Want For Christmas Is You",
             'artist' => 'Mariah Carey ',
             'original' => '7NFBZlOBGwU',
@@ -346,7 +346,7 @@
             'low' => 'B2RqxEJJXq0',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-02.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-02.jpg',
             'song' => "Auld Lang Syne",
             'artist' => 'Susan Boyle',
             'original' => '8pIbuQsYwjQ',
@@ -354,7 +354,7 @@
             'low' => 'RoLryeQXMQg',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-03.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-03.jpg',
             'song' => "Blue Christmas",
             'artist' => 'Elvis Presley',
             'original' => 'tan2k57DDtQ',
@@ -362,7 +362,7 @@
             'low' => 'OlOIMSyYvSg',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-04.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-04.jpg',
             'song' => "Christmas (Baby Please Come Home) ",
             'artist' => 'Michael Bublé',
             'original' => 'mDvyr4cn3t0',
@@ -370,7 +370,7 @@
             'low' => 'oIT5rsBZHnc',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-05.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-05.jpg',
             'song' => "Christmas Time is Here",
             'artist' => 'Devin Dawson',
             'original' => 'Urs7WT1t18g',
@@ -378,7 +378,7 @@
             'low' => 'mA9Hlu59N7Y',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-06.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-06.jpg',
             'song' => "Cool Yule",
             'artist' => 'Bette Midler',
             'original' => 'ROyOgxGQZiM',
@@ -386,7 +386,7 @@
             'low' => 'ZrvZdorK3R4',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-07.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-07.jpg',
             'song' => "Deck The Halls",
             'artist' => 'Nat "King" Cole',
             'original' => 'KveUR7j0kR4',
@@ -394,7 +394,7 @@
             'low' => 'FF2Fb6XG230',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-08.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-08.jpg',
             'song' => "Feliz Navidad",
             'artist' => 'José Feliciano',
             'original' => 'ftdlDcuxC-0',
@@ -402,7 +402,7 @@
             'low' => 'TrvZJX51ZXw',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-09.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-09.jpg',
             'song' => "Have Yourself a Merry Little Christmas ",
             'artist' => 'Dan + Shay',
             'original' => '_v7R0EWRwLM',
@@ -410,7 +410,7 @@
             'low' => 'tcRfOWz2WsA',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-10.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-10.jpg',
             'song' => "Here Comes Santa Clause",
             'artist' => 'Doris Day',
             'original' => 'E_rbYkIUMW0',
@@ -418,7 +418,7 @@
             'low' => 'B3M6-448QVI',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-11.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-11.jpg',
             'song' => "It's Beginning To Look A Lot Like Christmas",
             'artist' => 'Michael Bublé',
             'original' => 'nDAnNU913fw',
@@ -426,7 +426,7 @@
             'low' => 'Yyh13A8pXCk',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-12.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-12.jpg',
             'song' => "It's the Most Wonderful Time Of The Year",
             'artist' => 'Andy Williams',
             'original' => 'rlYJoBw0ggQ',
@@ -434,7 +434,7 @@
             'low' => 'wSBHSTLeZ4I',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-13.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-13.jpg',
             'song' => "Jingle Bell Rock ",
             'artist' => 'Brenda Lee',
             'original' => '_ChLheYjInk',
@@ -442,7 +442,7 @@
             'low' => '8XjmuUhg5wE',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-14.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-14.jpg',
             'song' => "Last Christmas",
             'artist' => 'Wham',
             'original' => '6VVcuhh7QUg',
@@ -450,7 +450,7 @@
             'low' => '5TMxNz2T8Hc',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-15.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-15.jpg',
             'song' => "Mary's Boy Child",
             'artist' => 'Boney M',
             'original' => 'fXp5GpW6VfA',
@@ -458,7 +458,7 @@
             'low' => '8C7Ft1T8AYg',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-16.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-16.jpg',
             'song' => "Merry Christmas Baby",
             'artist' => 'Otis Redding',
             'original' => 'vzsucOmmvXQ',
@@ -466,7 +466,7 @@
             'low' => 'bS5YStkq7mg',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-17.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-17.jpg',
             'song' => "My Favorite Things",
             'artist' => 'Martina McBride',
             'original' => 'GKptQOmAle8',
@@ -474,7 +474,7 @@
             'low' => 'l9hgIAfXl-Q',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-18.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-18.jpg',
             'song' => "Please Come Home For Christmas (Bells Will Be Ringing)",
             'artist' => 'Kelly Clarkson',
             'original' => 'tgmVh6obp6g',
@@ -482,7 +482,7 @@
             'low' => 'UsLOReAiIVo',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-19.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-19.jpg',
             'song' => "Rockin' Around The Christmas Tree",
             'artist' => 'Brenda Lee',
             'original' => 'Itdh5bhBoIc',
@@ -490,7 +490,7 @@
             'low' => 'UI6sNyC932s',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-20.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-20.jpg',
             'song' => "Rudolph The Red Nosed Reindeer",
             'artist' => 'John Denver',
             'original' => 'ea7RUrJJiaQ',
@@ -498,7 +498,7 @@
             'low' => 'Q8-MbvQasAs',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-21.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-21.jpg',
             'song' => "Run Rudolph Run",
             'artist' => 'Chuck Berry',
             'original' => 'n2mGo8qzQWE',
@@ -506,7 +506,7 @@
             'low' => 'j4YrvKOu1gg',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-22.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-22.jpg',
             'song' => "Santa Baby",
             'artist' => 'Eartha Kitt',
             'original' => 'RwfWQD2KsUA',
@@ -514,7 +514,7 @@
             'low' => 'fbB0zF48uI4',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-23.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-23.jpg',
             'song' => "Santa Tell Me ",
             'artist' => 'Ariana Grandé',
             'original' => 'FJdKEykHEOo',
@@ -522,7 +522,7 @@
             'low' => '56G0aqhipz0',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-24.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-24.jpg',
             'song' => "Sleigh Ride",
             'artist' => 'The Ronettes',
             'original' => 'nslCk0VTp48',
@@ -530,7 +530,7 @@
             'low' => '5WrTAqD1nhI',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-25.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-25.jpg',
             'song' => "Step Into Christmas ",
             'artist' => 'Elton John',
             'original' => 'x3DpA3WP2TM',
@@ -538,7 +538,7 @@
             'low' => 'eD0DfkoAIN4',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-26.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-26.jpg',
             'song' => "This Christmas",
             'artist' => 'Donny Hathaway',
             'original' => 'SKBOpBCnhBg',
@@ -546,7 +546,7 @@
             'low' => 'HHOdNhARdik',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-27.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-27.jpg',
             'song' => "What Christmas Means To Me",
             'artist' => 'Stevie Wonder',
             'original' => 'ozzoT-qQzK8',
@@ -554,7 +554,7 @@
             'low' => '_O1uZGbO9co',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-28.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-28.jpg',
             'song' => "What Christmas Means To Me",
             'artist' => 'Cee Lo Green',
             'original' => '0Ppqyxkb2IQ',
@@ -562,7 +562,7 @@
             'low' => 'MNOD0Lgk-xA',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-29.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-29.jpg',
             'song' => "White Christmas ",
             'artist' => 'Bing Crosby',
             'original' => 'RtOM29c2kbI',
@@ -570,7 +570,7 @@
             'low' => '-tpZrbi3GJ8',
             ],
             [
-            'image' => 'https://singeo.s3.amazonaws.com/lead-gen/holiday-karaoke/songs/album-30.jpg',
+            'image' => 'https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/songs/album-30.jpg',
             'song' => "Winter Wonderland",
             'artist' => 'Tony Bennett',
             'original' => 'EE5XRveTYFY',

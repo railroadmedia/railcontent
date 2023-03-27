@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
     <title>Here's a gift | Pianote</title>
-    <meta property="og:image" content="https://pianote.s3.amazonaws.com/sales/2023/share-image-pianote2.jpg" style="display: none;">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg" style="display: none;">
     @include('_partials.layout._fonts')
     @include('_partials.layout.favicons.pianote-favicons')
     @include('_partials.layout._tailwindcdn')
@@ -128,7 +128,7 @@
         We’ll keep sending you free lessons, tips, and tutorials.
         <br><br>
         In the meantime, enjoy this free lesson series and start learning popular songs today!</em></p>
-<a class="inline-block" href="/learn-songs/lessons"><img class="w-full max-w-xl lg:max-w-2xl rounded-xl mx-auto my-5 hover:opacity-90" src="https://pianote.s3.amazonaws.com/lead-gen/learn-3-songs/learn-3-songs-ad.jpg"></a><br>
+<a class="inline-block" href="/learn-songs/lessons"><img class="w-full max-w-xl lg:max-w-2xl rounded-xl mx-auto my-5 hover:opacity-90" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/learn-3-songs/learn-3-songs-ad.jpg"></a><br>
 <a href="/learn-songs/lessons" class="join hover:opacity-90">CLICK HERE &raquo;</a>
 <div class="social-media">
     <a href="https://www.youtube.com/freedrumlessons/" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>

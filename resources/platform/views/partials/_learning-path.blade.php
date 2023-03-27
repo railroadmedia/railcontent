@@ -1,7 +1,7 @@
 @component('partials._header-banner', [
     'hideUser' => true,
     'brand' => $brand,
-    'backgroundImage' => 'https://musora-web-platform.s3.amazonaws.com/method/method-header-'.$brand.'.jpg',
+    'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/method/method-header-'.$brand.'.jpg',
 ])
     @slot('content')
         <div class="flex flex-column pr-1 align-center">
@@ -23,14 +23,14 @@
 
                 <img
                         alt="{{ $parentContent->fetch('title') }} Logo"
-                        src="https://musora-ui.s3.amazonaws.com/logos/{{ $brand }}-method.svg"
+                        src="https://d38h3dn806jqj1.cloudfront.net/logos/{{ $brand }}-method.svg"
                         class="mv-3"
                         style="width:540px;max-width:100%;"
                 >
                 {{-- todo: re-add if requested --}}
                 @if($brand==="drumeo" || $brand==="pianote")
                     <a data-open-modal="surveyModal" class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
-                        WHERE TO BEGIN &nbsp; <i class="fas fa-question-circle tw-text-base"></i> 
+                        WHERE TO BEGIN &nbsp; <i class="fas fa-question-circle tw-text-base"></i>
                     </a>
                 @endif
 
@@ -43,7 +43,7 @@
                                 'guitareo' => '//player.vimeo.com/video/494183465',
                                 'singeo' => '//player.vimeo.com/video/494183465',
                                 'pianote' => '//player.vimeo.com/video/494183465',
-                            );   
+                            );
                             @endphp
                             <div class="video-wrap">
                                 <div class="widescreen">
@@ -53,7 +53,7 @@
                                 </div>
                             </div>
                         @else
-                        <video-player 
+                        <video-player
                             ref="learningPathPreview"
                             theme-color="{{ $brand }}"
                             poster="{{ $parentContent['video_poster_image_url'] ?? '' }}"
@@ -98,9 +98,9 @@
                 <div id="surveyModal" class="modal">
                     <div class="flex flex-column corners-10">
                         @if($brand === "drumeo")
-                            <div class="typeform-widget" data-url="https://form.typeform.com/to/rnPhq70s?typeform-medium=embed-snippet" style="width: 100%; height: 600px;"></div> 
+                            <div class="typeform-widget" data-url="https://form.typeform.com/to/rnPhq70s?typeform-medium=embed-snippet" style="width: 100%; height: 600px;"></div>
                         @elseif($brand === "pianote")
-                            <div class="typeform-widget" data-url="https://form.typeform.com/to/huIKxOSj?typeform-medium=embed-snippet" style="width: 100%; height: 600px;"></div> 
+                            <div class="typeform-widget" data-url="https://form.typeform.com/to/huIKxOSj?typeform-medium=embed-snippet" style="width: 100%; height: 600px;"></div>
                         @endif
                     </div>
                 </div>

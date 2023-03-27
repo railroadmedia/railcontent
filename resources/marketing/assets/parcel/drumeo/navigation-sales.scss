@@ -246,6 +246,9 @@ a {
             font-size: 14px;
             @include tablet {
                 font-size: 15px;
+                padding: 13px 25px 12px;
+            }
+            @include desktop {
                 padding: 13px 30px 12px;
             }
 

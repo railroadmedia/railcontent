@@ -7,10 +7,15 @@
     <meta property="og:title" content="Contact Us">
     <meta property="og:description" content="Musora Media, Inc. is the technology that powers the most popular online social learning communities for musicians.  Learn music from the best teachers in the world at Drumeo, Guitareo, Pianote, and Singeo. ">
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
     <!-- Scripts -->
     <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer></script>
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <style>
+        a {
+            color:inherit!important;
+        }
+    </style>
 @endsection
 
 <!-- Main -->
@@ -19,7 +24,7 @@
 @section('layout-body')
     <section class="py-24 md:py-40 text-white text-center relative">
         <img
-            src="https://cdn.musora.com/image/fetch/w_1500,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/header-about.jpg"
+            src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/header-about.jpg"
             class="absolute object-cover w-full h-full top-0 left-0 z-[-2] transition-opacity opacity-0"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
@@ -47,7 +52,7 @@
                 email-subject="Support Request From Musora"
                 email-type="support-contact"
                 email-endpoint="{{url()->route('mailora.public.send') }}"
-                email-logo="https://cdn.musora.com/image/fetch/w_400,q_auto:best/https://musora-web-platform.s3.amazonaws.com/musora/logo.png"
+                email-logo="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/logo.png"
                 input-label="Report your issue here.."
                 recipient="support@musora.com"
                 success-message="Your email has been sent!"

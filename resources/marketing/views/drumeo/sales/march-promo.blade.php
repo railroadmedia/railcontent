@@ -11,7 +11,7 @@
     @hasSection('share-image')
         @yield('share-image')
     @else
-        <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
+        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
     @endif
 
     @include('_partials.layout._fonts')
@@ -133,7 +133,7 @@
     @endif
 
     <a href="#customize-anchor" class="anchor-slide flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
-        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/logo.png" alt="11th anniversary logo" />
+        <img class="h-8 sm:h-10 mr-4" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/logo.png" alt="11th anniversary logo" />
         <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-none sm:leading-none">
             Celebrate 11 Years Of Drumeo With<br>
             11 FREE Bonuses 🥳 (worth $1198.95)
@@ -143,22 +143,22 @@
     @php
         $features = [
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drum-lessons-icon.svg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drum-lessons-icon.svg',
                 'title' => 'Drum Lessons',
                 'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/artist-course-icon2.svg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/artist-course-icon2.svg',
                 'title' => 'Artist Courses',
                 'desc' => 'Courses and live events<br class="hidden sm:inline"> with drumming heroes. ',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/songs-icon.svg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/songs-icon.svg',
                 'title' => '5000+ Songs',
                 'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/support-icon.svg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/support-icon.svg',
                 'title' => '24/7 Support',
                 'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
             ],
@@ -166,7 +166,7 @@
         $slides = [
             [
                 'desc' => 'Drumeo is the real deal folks - a good place to study and realize one’s dreams.',
-                'thumb' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/new-drummers/billy-cobham.jpg',
+                'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/billy-cobham.jpg',
                 'name' => 'Billy Cobham',
                 'credit' => 'Rolling Stone  Top 100 Drummer',
             ],
@@ -187,12 +187,12 @@
     @include('musora.sales.components.header-section', [
         'header' => 'Online drum lessons for all skill levels.',
         'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
-        'thumb' => 'https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/march-thumb1.png',
-        'thumbM' => 'https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/march-thumb-m2.jpg',
+        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/march-thumb1.png',
+        'thumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/march-thumb-m2.jpg',
         'noThumbShadow' => true,
-        'badge' => 'https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/badge.svg',
-        'promoThumb' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo2.png',
-        'promoThumbM' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/header-thumb-promo-m2.jpg',
+        'badge' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/badge.svg',
+        'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
+        'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo-m2.jpg',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
@@ -202,17 +202,17 @@
 
 
     <div style="background:linear-gradient(30deg, #0a3761, #0c1526);">
-        <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:url(https://drumeo-assets.s3.amazonaws.com/sales/2023/order-bg-tile-2.png) center center/160px;">
+        <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:url(https://dpwjbsxqtam5n.cloudfront.net/sales/2023/order-bg-tile-2.png) center center/160px;">
             <div class="container max-w-6xl mx-auto">
-                <img class="h-18 sm:h-24 mb-6" src="https://cdn.musora.com/image/fetch/w_600,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/logo.png" alt="Anniversary logo" />
+                <img class="h-18 sm:h-24 mb-6" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/logo.png" alt="Anniversary logo" />
                 <h3 class="font-extrabold mb-10">Save 18% on your membership <br class="hidden sm:inline">+ get 11 FREE bonuses worth $1198.95!</h3>
                 <div class="text-left flex flex-wrap sm:flex-nowrap justify-center mb-24 sm:mb-48 lg:mb-72">
-                    <img class="h-48 mb-5 inline sm:hidden transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://cdn.musora.com/image/fetch/w_520,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/promo-collage.png" alt="promo image">
+                    <img class="h-48 mb-5 inline sm:hidden transition-opacity opacity-0" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=520,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/promo-collage.png" alt="promo image">
                    <div>
                        <p class="leading-normal max-w-xl sm:pr-4 mx-0 mb-4">Eleven’s kind of an awkward number.<br><br>More than ten, less than a dozen. So we decided to make it special by celebrating YOU – the students whose passion for drumming keeps us going.<br><br>Join Drumeo in March and you’ll receive 11 free bonuses with your membership. That’s one bonus for every year of Drumeo – including a QuietPad, drumsticks, and digital packs to help you achieve ALL your goals on the drums. And that’s not all…<br><br>To celebrate 11 years of inspiring &amp; informative drum lessons we’ve dropped the price of Drumeo to our first-ever price.<br><br>You’ll time travel back to 2012 to save 18% for this month only.<br><br>Scroll down to see all your bonuses and click the button to lock in your discount and grab a year of unlimited drum lessons!</p>
                        <a href="#customize-anchor" class="w-full sm:w-64 join smaller w-full max-w-sm blue anchor-slide ">SEE YOUR DEAL »</a>
                    </div>
-                    <img class="h-72 lg:h-96 hidden sm:inline transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://cdn.musora.com/image/fetch/w_690,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/promo-collage.png" alt="promo image">
+                    <img class="h-72 lg:h-96 hidden sm:inline transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/promo-collage.png" alt="promo image">
                 </div>
 
             </div>
@@ -222,32 +222,32 @@
     @php
         $gridItems = [
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/10-level-cirriculum.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/10-level-cirriculum.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'The most trusted step-by-step video lessons for every technique, pattern, and style.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/practical-assignments.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'Keep up your progress with clear assignments and handy practice tools for every level.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/guided-workouts.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts.jpg',
                 'title' => 'Guided Workouts',
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/world-class-teachers.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'The best drummers are here -- including Grammy Award winners and touring musicians.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/downloadable-videos.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime.',
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/personalized-support.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global drum community.',
             ],
@@ -271,42 +271,42 @@
                 'title' => 'Learn any style',
                 'images' => [
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Todd-Sucherman.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Todd-Sucherman.jpg',
                         'title' => 'Rock <br>Drumming',
                         'instructor' => 'Todd Sucherman',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dennis-Chambers.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Dennis-Chambers.jpg',
                         'title' => 'Funk <br>Drumming',
                         'instructor' => 'Dennis Chambers',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Domino-Santatonio.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Domino-Santatonio.jpg',
                         'title' => 'Pop <br>Drumming',
                         'instructor' => 'Domino Santantonio',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Steve-Smith.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Steve-Smith.jpg',
                         'title' => 'Jazz <br>Drumming',
                         'instructor' => 'Steve Smith',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Larnell-Lewis.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Larnell-Lewis.jpg',
                         'title' => 'Gospel <br>Drumming',
                         'instructor' => 'Larnell Lewis',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Greyson-Nektrutman.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Greyson-Nektrutman.jpg',
                         'title' => 'Big Band <br>Drumming',
                         'instructor' => 'Greyson Nekrutman',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Gene-Hoglan.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Gene-Hoglan.jpg',
                         'title' => 'Metal <br>Drumming',
                         'instructor' => 'Gene Hoglan',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/John-Wooton.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/John-Wooton.jpg',
                         'title' => 'Latin <br>Drumming',
                         'instructor' => 'John Wooton',
                     ],
@@ -316,42 +316,42 @@
                 'title' => 'Play more creatively',
                 'images' => [
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Anika-Nilles.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Anika-Nilles.jpg',
                         'title' => 'Subdivision<br> Studies',
                         'instructor' => 'Anika Nilles',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dom-Famularo.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Dom-Famularo.jpg',
                         'title' => 'Pedal<br> Control',
                         'instructor' => 'Dom Famularo',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Tommy-Igoe.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Tommy-Igoe.jpg',
                         'title' => 'Groove<br> Essentials',
                         'instructor' => 'Tommy Igoe',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dorothe-Taylor-01.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Dorothe-Taylor-01.jpg',
                         'title' => 'Stick<br> Control',
                         'instructor' => 'Dorothea Taylor',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Bruce-Becker.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Bruce-Becker.jpg',
                         'title' => 'Hand<br> Technique',
                         'instructor' => 'Bruce Becker',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Billy-Cobham.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Billy-Cobham.jpg',
                         'title' => 'Internal<br> Synchronization',
                         'instructor' => 'Billy Cobham',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Emmanuelle-Caplette.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Emmanuelle-Caplette.jpg',
                         'title' => 'Traditional<br> Grip',
                         'instructor' => 'Emmanuelle Caplette',
                     ],
                     [
-                        'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Sarah-Thawer.jpg',
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Sarah-Thawer.jpg',
                         'title' => '4-Way<br> Coordination',
                         'instructor' => 'Sarah Thawer',
                     ],
@@ -361,42 +361,42 @@
                 'title' => 'Find your groove',
                 'images' => [
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Simon-Phillips.jpg',
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Simon-Phillips.jpg',
                     'title' => 'Elevate Your<br> Drum Sound',
                     'instructor' => 'Simon Phillips',
                     ],
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Aaron-Spears.jpg',
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Aaron-Spears.jpg',
                     'title' => 'Drum<br> Chops',
                     'instructor' => 'Aaron Spears',
                     ],
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Hannah-Welton.jpg',
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Hannah-Welton.jpg',
                     'title' => 'Writing<br> Drum Parts',
                     'instructor' => 'Hannah Welton',
                     ],
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Matt-McGuire.jpg',
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Matt-McGuire.jpg',
                     'title' => 'Song<br> Breakdowns',
                     'instructor' => 'Matt McGuire',
                     ],
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Dorothe-Taylor-02.jpg',
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Dorothe-Taylor-02.jpg',
                     'title' => 'Rudiments<br> & Patterns',
                     'instructor' => 'Dorothea Taylor',
                     ],
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Aric-Improta.jpg',
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Aric-Improta.jpg',
                     'title' => 'The Creative<br> Mindset',
                     'instructor' => 'Aric Improta',
                     ],
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Kaz-Rodgriguez.jpg',
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Kaz-Rodgriguez.jpg',
                     'title' => 'Musical<br> Exercises',
                     'instructor' => 'Kaz Rodriguez',
                     ],
                     [
-                    'img' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drummers/Gavin-Harrison.jpg',
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Gavin-Harrison.jpg',
                     'title' => 'Bass Drum<br> Calibration',
                     'instructor' => 'Gavin Harrison',
                     ],
@@ -413,27 +413,27 @@
     @php
         $songItems = [
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/5000-songs-icon.svg',
+                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg',
                 'title' => '5000+ popular songs.',
                 'desc' => 'Get note-for-note song breakdowns for <br class="hidden sm:inline"> every style, era, and skill level.',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/note-for-note-icon.svg',
+                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/note-for-note-icon.svg',
                 'title' => 'Find the perfect tempo.',
                 'desc' => 'Slow down or speed up any section <br class="hidden sm:inline">of a song to hear every note.',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/tempo-icon.svg',
+                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg',
                 'title' => 'Loop the trouble spots.',
                 'desc' => 'No more pausing and rewinding that<br class="hidden sm:inline"> tricky fill. Loop it over and over again!  ',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/no-drums-icon.svg',
+                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/no-drums-icon.svg',
                 'title' => 'Remove the drums <div class="rounded-full ml-2 inline-block bg-promo text-black text-xs px-2">NEW</div>',
                 'desc' => 'Magically remove the original drums<br class="hidden sm:inline"> to make each song uniquely yours. ',
             ],
             [
-                'icon' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices-icon.svg',
+                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices-icon.svg',
                 'title' => 'Take your songs anywhere.',
                 'desc' => 'Accessible on any device, or printable,<br class="hidden sm:inline"> so you can play any song, any time.  ',
             ],
@@ -443,7 +443,7 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
-        'video' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/smells-like-teen-spirit2.mp4',
+        'video' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/smells-like-teen-spirit2.mp4',
         'brandName' => 'Drumeo',
         'bannerDesc' => 'Powered by Musora, Drumeo includes full access to our communities for piano, guitar, and voice.',
     ])
@@ -479,7 +479,7 @@
             'description' => 'Guy had trouble figuring out a song, he reached out and an instructor walked him through it that same day - getting him through the gig that evening.',
             ],
             [
-            'image' => 'https://i.vimeocdn.com/video/1143532818-61ead907372040ae51f23b9d5f05469c271aee744e9cb67e777ae4307f762b23-d_620',
+            'image' => 'https://i.vimeocdn.com/video/1143532818-61ead907372040ae51f23b9d5f05469c271aee744e9cb67e777ae4307f762b23-d_620.jpg',
             'name' => 'Omari Augustine',
             'video' => '553438851',
             'title' => 'Something you can’t get from having a drum teacher.',
@@ -520,7 +520,7 @@
         'instagram' => '966K',
     ])
     @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://drumeo-assets.s3.amazonaws.com/sales/2022/guarantee.png',
+        'badge' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
     ])
@@ -530,69 +530,69 @@
     @php
         $bonuses = [
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/pad.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/pad.jpg',
                 'title' => 'QuietPad',
                 'description' => 'Practice anywhere with two full-size playing surfaces.',
                 'price' => floatval($productPrices['quietpad']->price),
                 'shipping' => true,
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                 'title' => 'Drumeo Drumsticks',
                 'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
                 'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                 'shipping' => true,
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/rdm.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
                 'title' => 'Rock Drumming Masterclass',
                 'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
                 'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/dtme.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
                 'title' => 'Drum Technique Made Easy',
                 'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
                 'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/ime.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
                 'title' => 'Independence Made Easy',
                 'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
                 'price' => floatval($productPrices['independence-made-easy-pack']->price),
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/eyd.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eyd.jpg',
                 'title' => 'Electrify Your Drumming',
                 'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
                 'price' => floatval($productPrices['electrify-your-drumming']->price),
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/sd.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/sd.jpg',
                 'title' => 'Successful Drumming',
                 'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums.',
                 'price' => floatval($productPrices['SD-DIGI']->price),
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/fwtbdf.jpg',
                 'title' => 'Better Drum Fills',
                 'description' => 'The ultimate four-week crash course to playing more creative & musical drum fills.',
                 'price' => floatval($productPrices['four-weeks-to-better-drum-fills']->price),
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/lsf.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/lsf.jpg',
                 'title' => 'Learn Songs Faster',
                 'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
                 'price' => floatval($productPrices['learn-songs-faster-pack']->price),
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/july/tommy_card.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/tommy_card.jpg',
                 'title' => 'Great Hands For A Lifetime',
                 'description' => 'Tommy Igoe helps you improve your hand strength, speed, stamina, comfort, and control in the drums in four hours of video lessons.',
                 'price' => floatval($productPrices['GHFAL-DIGI']->price),
             ],
             [
-                'image' => 'https://drumeo-assets.s3.amazonaws.com/promos/black-friday/bundles/vertical-bg/creative-control.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/creative-control.jpg',
                 'title' => 'Creative Control',
                 'description' => 'Thomas Lang’s innovative system for developing technique so you can play more effectively in any style of music. Includes more than four hours of video.',
                 'price' => floatval($productPrices['CC-DIGI']->price),
@@ -601,17 +601,17 @@
     @endphp
 
     @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/drumeo-annual-2w-card.png',
-        'promoLogo' => 'https://cdn.musora.com/image/fetch/w_650,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/anniversary/2023/logo.png',
+        'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png',
+        'promoLogo' => 'https://www.musora.com/musora-cdn/image/width=650,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/anniversary/2023/logo.png',
         'promoText' => '<h4 class="leading-tight mt-4 sm:mt-5 mb-2 uppercase text-coaches"><strong>SAVE 18% + GET 11 BONUSES <br class="inline sm:hidden">WORTH $1198.95</strong></h4>',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1 &products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&products[learn-songs-faster-pack]=1&products[GHFAL-DIGI]=1&products[CC-DIGI]=1&locked=true',
+        'buttonLink' => '/ecommerce/add-to-cart?locked=true&product-array=DLM-1-year:1,quietpad:1,Drumeo-VaterSticks:1,rock-drumming-masterclass-pack:1,drum-technique-made-easy-pack:1,independence-made-easy-pack:1,electrify-your-drumming:1,SD-DIGI:1,four-weeks-to-better-drum-fills:1,learn-songs-faster-pack:1,GHFAL-DIGI:1,CC-DIGI:1',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
         'bonusWidth' => 'w-1/2 md:w-1/4 lg:w-[16%]',
         'firstYearPrice' => 197,
     ])
 
     @include('musora.sales.components.app-section', [
-        'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/2023/devices.png',
+        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices.png',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone&ppid=d63c2cf3-274f-4441-8444-a5f547b1b4b6',
         'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=drumeo_previews',
     ])
@@ -641,5 +641,7 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
 @stop

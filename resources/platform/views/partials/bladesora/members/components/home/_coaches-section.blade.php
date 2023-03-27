@@ -19,8 +19,8 @@
                     <a href="{{ $coach->fetch('url','') }}"
                         class="tw-no-underline ">
                         <div class="tw-flex tw-bg-cover tw-bg-top tw-relative tw-bg-gray-200 tw-overflow-hidden tw-rounded-lg lg:tw-rounded-xl tw-no-underline tw-text-white">
-                            <img src="https://musora.com/cdn-cgi/image/width=660,height=960,quality=90/{{ $coach->fetch('data.coach_card_image') }}" 
-                                 alt="{{ $coach->fetch('fields.name') }}" 
+                            <img src="https://www.musora.com/musora-cdn/image/width=660,height=960,quality=90/{{ $coach->fetch('data.coach_card_image') }}"
+                                 alt="{{ $coach->fetch('fields.name') }}"
                                  class="tw-w-full"
                             >
                             <div class="tw-flex tw-flex-col tw-mt-auto tw-w-full tw-items-center tw-justify-center tw-h-3/4 tw-text-center tw-absolute tw-bottom-0 tw-left-0 tw-w-full"
@@ -44,9 +44,9 @@
 
                                 @if ($coach->fetch('is_house_coach'))
                                     <div class="tw-text-white tw-items-center tw-leading-none tw-text-xs tw-font-bebas-neue tw-absolute tw-bottom-0 tw-w-full tw-flex tw-mb-2 tw-justify-center tw-items-center">
-                                        <musora-icon 
+                                        <musora-icon
                                             icon-name="whistle-filled"
-                                            height="12px" 
+                                            height="12px"
                                             class="tw-text-white tw-mr-0.5 tw-w-[16px] tw-leading-none"
                                         ></musora-icon>
                                         <span class="tw-mt-1">HOUSE</span>

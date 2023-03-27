@@ -7,12 +7,13 @@
     <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
 
-        <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
+        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
 
@@ -26,10 +27,13 @@
     {{-- Notifications Container --}}
     <div id="notifications-container"></div>
 
+    {{-- Confirmation Modal Container --}}
+    <div id="confirmation-container"></div>
+
     <nav id="nav" class="top-bar row expanded">
         <div class="logo">
             <a href="">
-                <img src="https://musora-ui.s3.amazonaws.com/logos/musora-white.svg" alt="Drumeo">
+                <img src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg" alt="Drumeo">
             </a>
         </div>
 

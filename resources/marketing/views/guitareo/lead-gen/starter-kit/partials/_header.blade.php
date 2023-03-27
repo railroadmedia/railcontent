@@ -1,7 +1,7 @@
 <div class="bgsk-header">
     <div class="container clearfix lg:mx-auto max-w-6xl">
         <div>
-            <a href="/starter-kit/lessons"><img class="bgsk-logo" src="https://guitareo.s3.amazonaws.com/starter-kit/logo-green.png"></a>
+            <a href="/starter-kit/lessons"><img class="bgsk-logo" src="https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png"></a>
         </div>
         @if(empty($noBack))
             <div>

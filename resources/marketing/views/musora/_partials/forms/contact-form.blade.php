@@ -91,7 +91,7 @@
                 'name' => 'attachment',
                 'id' => 'support-file',
                 'accept' => 'video/*,image/*',
-                'megabiteLimit' => '100',
+                'megabiteLimit' => '2',
                 'message' => 'For security reasons, we only accept image and video files.',
                 'darkMode' => true,
             ])@endcomponent

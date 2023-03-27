@@ -11,7 +11,7 @@
     <meta property="og:title" content="9 FREE PLAY-ALONGS | Drumeo">
     <meta name="description" content="Add your drumming to nine high-quality drum play-along tracks. (FREE).">
     <meta property="og:description" content="Add your drumming to nine high-quality drum play-along tracks. (FREE).">
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/free-playalongs/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/free-playalongs/">
 @stop
 

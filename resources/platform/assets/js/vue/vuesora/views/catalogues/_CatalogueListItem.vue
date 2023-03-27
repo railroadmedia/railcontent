@@ -1,11 +1,11 @@
 <template>
   <a class="
-      tw-flex 
+      tw-flex
       tw-flex-row
       tw-relative
-      tw-text-[#3F3F46] 
+      tw-text-[#3F3F46]
       dark:tw-text-[#9EC0DC]
-      tw-border-b 
+      tw-border-b
       tw-border-[#E4E4E7]
       dark:tw-border-[#223457]
       tw-no-underline
@@ -15,11 +15,11 @@
     :href="renderLink ? item.url : null">
     <!-- LESSON NUMBERS -->
     <div v-if="showNumbers" class="
-        tw-flex 
+        tw-flex
         tw-flex-col
         tw-text-[#00101D]
         dark:tw-text-white
-        align-left 
+        align-left
         tw-justify-center
         number-col
         title
@@ -33,7 +33,7 @@
       :class="[thumbnailColumnClass, themeColor]">
       <div class="thumb-wrap corners-10">
         <div class="thumb-img corners-10 thumb-wrap corners-10 bg-grey-2 dark:tw-bg-[#081825]" :class="thumbnailType">
-          <img :src="`https://musora.com/cdn-cgi/image/width=500/${mappedData.thumbnail}`" alt="Lesson Thumbnail"
+          <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail}`" alt="Lesson Thumbnail"
             class="tw-transition-opacity tw-duration-500" loading="lazy"
             :class="mappedData.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'" @load="mappedData.imageLoaded = true" />
 
@@ -132,7 +132,7 @@
     <!-- SHOW ALL OF THE DATA COLUMNS FROM THE DATA MAPPER -->
     <div v-for="(column_data, i) in mappedData.column_data" v-if="!is_search" :key="`${item.id}-mappedData-${i}`" class="
         tw-hidden
-        xl:tw-flex 
+        xl:tw-flex
         tw-uppercase
         tw-items-center
         tw-justify-center
@@ -147,7 +147,7 @@
     <!-- ONLY SHOW TYPE ON SEARCHES -->
     <div v-if="mappedData.column_data && mappedData.column_data.length && is_search" class="
         tw-hidden
-        sm:tw-flex 
+        sm:tw-flex
         tw-flex-col
         tw-uppercase
         tw-justify-center
@@ -159,7 +159,7 @@
     </div>
     <div v-if="is_search" class="
         tw-hidden
-        sm:tw-flex 
+        sm:tw-flex
         tw-flex-col
         tw-uppercase
         tw-justify-center

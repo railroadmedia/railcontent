@@ -8,7 +8,7 @@
     <meta name="description" content="Play guitar like you've always wanted with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee." />
     <meta property="og:description" content="Play guitar like you've always wanted with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee."/>
 
-        <meta property="og:image" content="https://guitareo.s3.amazonaws.com/sales/2023/share-image-guitareo.jpg"/>
+        <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-guitareo.jpg"/>
 
     @include('_partials.layout._fonts')
 
@@ -42,8 +42,8 @@
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @if(empty($month))
         @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
-            "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
+            "plusLogo" => "https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-plus-logo-light.svg",
+            "logo" => "https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo.png",
             "songs" => "1000",
             "firstPoint" => "Unlimited guitar lessons",
             "thirdPoint" => "Direct access to real teachers.",
@@ -54,16 +54,16 @@
             "monthlyLink" => "/ecommerce/add-to-cart?products[guitareo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
         ])
         @include('musora.sales.components.plans-different-section', [
-            "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo.svg",
-            "logo" => "https://musora-center.s3.amazonaws.com/logos/guitareo-logo.png",
+            "plusLogo" => "https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-plus-logo.svg",
+            "logo" => "https://dmmior4id2ysr.cloudfront.net/logos/guitareo-logo.png",
             "secondPoint" => "Artist courses and exclusive events with special guests.",
             "thirdPoint" => "Go beyond guitar with lessons for singing, piano, and drums.",
             "fifthPoint" => "1000+ songs transcribed w/ playback tools for all instruments.",
         ])
     @else
         @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
-            "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
+            "plusLogo" => "https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-plus-logo-light.svg",
+            "logo" => "https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo.png",
             "songs" => "1000",
             "firstPoint" => "Unlimited guitar lessons",
             "thirdPoint" => "Direct access to real teachers.",

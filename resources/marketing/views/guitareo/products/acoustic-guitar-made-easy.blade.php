@@ -476,7 +476,7 @@
     <section class="instructor-bio">
         <div class="row">
             <p class="columns">
-                <span class="first-letter"><img style="border-radius: 5px;" src="https://guitareo.s3.amazonaws.com/gtme/bold-n.png" alt="Bold N"></span>ate Savage always knew he wanted to share his love for playing the guitar with others. After earning his Music Degree at San Jacinto College and playing hundreds of shows across Canada, the USA, and Europe -- he wanted to find a better way to help guitarists around the world. So in 2009, he connected with Musora Media to start GuitarLessons.com -- a massive library of free online guitar lessons that has since helped more than 20 million guitar players.
+                <span class="first-letter"><img style="border-radius: 5px;" src="https://d122ay5chh2hr5.cloudfront.net/gtme/bold-n.png" alt="Bold N"></span>ate Savage always knew he wanted to share his love for playing the guitar with others. After earning his Music Degree at San Jacinto College and playing hundreds of shows across Canada, the USA, and Europe -- he wanted to find a better way to help guitarists around the world. So in 2009, he connected with Musora Media to start GuitarLessons.com -- a massive library of free online guitar lessons that has since helped more than 20 million guitar players.
 
                 <br><br>
                 “I loved playing shows and touring,” Nate said in 2009. “But my heart has always been set on guitar education. I truly believe that playing the guitar can be a life-changing experience, so having the opportunity to create online lessons and help students around the world felt like such a perfect opportunity.”
@@ -496,7 +496,7 @@
             <div class="columns no-padding medium-4 benefit-row practice">
                 <div class="columns float-right">
                     <div class="arrow-outline">
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-gl.png" alt="G">
+                        <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/bubble-gl.png" alt="G">
                     </div>
                 </div>
                 <div class="columns text-wrap">
@@ -507,7 +507,7 @@
             <div class="columns no-padding medium-4 benefit-row play">
                 <div class="column">
                     <div class="arrow-outline">
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-subs.png" alt="Youtube text">
+                        <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/bubble-subs.png" alt="Youtube text">
                     </div>
                 </div>
                 <div class="columns text-wrap">
@@ -518,7 +518,7 @@
             <div class="columns no-padding medium-4 benefit-row support">
                 <div class="columns float-right">
                     <div class="arrow-outline">
-                        <img src="https://guitareo.s3.amazonaws.com/gtme/bubble-views.png" alt="Youtube icon">
+                        <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/bubble-views.png" alt="Youtube icon">
                     </div>
                 </div>
                 <div class="columns text-wrap">
@@ -676,7 +676,7 @@
     <section class="guarantee">
         <div class="row">
             <div class="large-4 medium-5 columns float-right text-center medium-text-right">
-                <img src="https://guitareo.s3.amazonaws.com/gtme/guarantee-green.png" alt="90-Day Money-Back Guarantee">
+                <img src="https://d122ay5chh2hr5.cloudfront.net/gtme/guarantee-green.png" alt="90-Day Money-Back Guarantee">
             </div>
             <div class="large-8 medium-7 columns text-center medium-text-left">
                 <h1>90-Day Money-Back Guarantee.</h1>
@@ -689,7 +689,7 @@
     @yield('final-banner')
     <section class="final">
         <div class="row">
-            <div class="columns logo">{{--<img class="edge" src="https://guitareo.s3.amazonaws.com/sales/promos/cyber-monday/logo.png"><br>--}}
+            <div class="columns logo">{{--<img class="edge" src="https://d122ay5chh2hr5.cloudfront.net/sales/promos/cyber-monday/logo.png"><br>--}}
                 <img src="https://s3.amazonaws.com/guitareo/acoustic-guitar-made-easy/sales/AGME-logo-white.png" alt="AGME logo"></div>
 
             <h1 class="columns">26-Week Online Course <br class="hide-for-medium">

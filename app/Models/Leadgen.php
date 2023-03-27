@@ -34,7 +34,7 @@ class Leadgen extends Model
 
 
             if(gettype($model['meta_img']) === 'object'){
-                $model['meta_img'] = 'https://laravel-nova.s3.us-east-2.amazonaws.com/'.$model->brand->name.'/Lead-gens/Meta-images/'.$uuid.'-'.$model['meta_img']->getClientOriginalName();
+                $model['meta_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$model->brand->name.'/Lead-gens/Meta-images/'.$uuid.'-'.$model['meta_img']->getClientOriginalName();
             }
 
         });

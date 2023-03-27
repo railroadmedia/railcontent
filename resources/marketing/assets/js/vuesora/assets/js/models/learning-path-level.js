@@ -38,7 +38,7 @@ export default class LearningPathLevelContentModel extends ContentModel {
         }
 
         if (this.brand === 'guitareo') {
-            return 'https://musora-ui.s3.amazonaws.com/logos/guitareo_method_logo.svg';
+            return 'https://d38h3dn806jqj1.cloudfront.net/logos/guitareo_method_logo.svg';
         }
 
         if (this.brand === 'pianote') {

@@ -7,7 +7,7 @@
     <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
 
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/sales/2023/share-image-drumeo.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/">
 
     @include('_partials.layout._fonts')
@@ -91,7 +91,7 @@
         "fullSubscriptionVersion" => true,
     ])
 
-    <section class="text-white relative z-10 overflow-hidden px-4 md:px-8 py-8 md:py-40 lg:py-52 bg-cover bg-center lazyload" style="background-color:#163146;" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/about/Header_BG.jpg">
+    <section class="text-white relative z-10 overflow-hidden px-4 md:px-8 py-8 md:py-40 lg:py-52 bg-cover bg-center lazyload" style="background-color:#163146;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Header_BG.jpg">
         <div class="container mx-auto relative z-10 max-w-5xl">
             <p class="text-light-navy mb-1 mx-0 max-w-xs sm:max-w-sm lg:max-w-lg pr-6 sm:pr-0"><em>Marlene Rosen, Drumeo student</em></p>
             <h2><strong>"It’s like having a teacher<br> right in front of you"</strong></h2>
@@ -105,7 +105,7 @@
         <div class="container mx-auto relative z-10 max-w-5xl">
             <div class="flex flex-wrap sm:flex-nowrap lg:items-center">
                 <div class="coaches w-full sm:w-5/12 lg:w-1/2 mb-5 sm:mb-0 sm:pl-5 mx-auto sm:order-1 text-center">
-                    <img class="h-64 sm:h-auto" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/about/Collage_1.png">
+                    <img class="h-64 sm:h-auto" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Collage_1.png">
                 </div>
                 <div class="p-5 sm:p-8 rounded-xl w-full sm:w-7/12 lg:w-1/2" style="background:#1d232f;">
                     <h3 class="mb-3"><strong>Online Drum Lessons For Everyone.</strong></h3>
@@ -128,7 +128,7 @@
 
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="coaches w-full sm:w-1/2 sm:pr-5 mb-5 sm:mb-0 text-center">
-                    <img class="h-52 sm:h-auto" src="https://cdn.musora.com/image/fetch/w_1200,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/about/Collage_2.png">
+                    <img class="h-52 sm:h-auto" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Collage_2.png">
                 </div>
                 <div class="p-6 rounded-xl w-full sm:w-1/2" style="background:#1d232f;">
                     <h3><strong>This is the dream team.</strong></h3>
@@ -154,35 +154,35 @@
                             <div class="timeline-line relative px-1.5 lg:px-2.5">
                                 <div class="relative z-10 rounded-xl text-center py-3" style="background-color:#1d232f;">
                                     <h1 class="font-bebas leading-none">2003</h1>
-                                    <img class="my-2.5" src="https://cdn.musora.com/image/fetch/w_430,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/about/BreakSticks.jpg" alt="timeline">
+                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/BreakSticks.jpg" alt="timeline">
                                     <p class="text-left text-sm px-2 text-light-navy mx-auto leading-tight whitespace-pre-wrap">Drumeo’s founders launched their first online community at BreakSticks.com.</p>
                                 </div>
                             </div>
                             <div class="timeline-line relative px-1.5 lg:px-2.5">
                                 <div class="relative z-10 rounded-xl text-center py-3" style="background-color:#1d232f;">
                                     <h1 class="font-bebas leading-none">2005</h1>
-                                    <img class="my-2.5" src="https://cdn.musora.com/image/fetch/w_430,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/about/RailRoad+Media.jpg" alt="timeline">
+                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/RailRoad+Media.jpg" alt="timeline">
                                     <p class="text-left text-sm px-2 text-light-navy mx-auto leading-tight whitespace-pre-wrap">The company became ‘Railroad Media’, putting out drum lesson DVDs and continuing to support their online community.</p>
                                 </div>
                             </div>
                             <div class="timeline-line relative px-1.5 lg:px-2.5">
                                 <div class="relative z-10 rounded-xl text-center py-3" style="background-color:#1d232f;">
                                     <h1 class="font-bebas leading-none">2007</h1>
-                                    <img class="my-2.5" src="https://cdn.musora.com/image/fetch/w_430,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/about/DrumLesson.jpg" alt="timeline">
+                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/DrumLesson.jpg" alt="timeline">
                                     <p class="text-left text-sm px-2 text-light-navy mx-auto leading-tight whitespace-pre-wrap">The growing team launched FreeDrumLessons.com.</p>
                                 </div>
                             </div>
                             <div class="timeline-line relative px-1.5 lg:px-2.5">
                                 <div class="relative z-10 rounded-xl text-center py-3" style="background-color:#1d232f;">
                                     <h1 class="font-bebas leading-none">2012</h1>
-                                    <img class="my-2.5" src="https://cdn.musora.com/image/fetch/w_430,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/about/Drumeo.jpg" alt="timeline">
+                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Drumeo.jpg" alt="timeline">
                                     <p class="text-left text-sm px-2 text-light-navy mx-auto leading-tight whitespace-pre-wrap">Drumeo was born!</p>
                                 </div>
                             </div>
                             <div class="relative px-1.5 lg:px-2.5">
                                 <div class="relative z-10 rounded-xl text-center py-3" style="background-color:#1d232f;">
                                     <h1 class="font-bebas leading-none">2021</h1>
-                                    <img class="my-2.5" src="https://cdn.musora.com/image/fetch/w_430,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/about/musora.png" alt="timeline">
+                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/musora.png" alt="timeline">
                                     <p class="text-left text-sm px-2 text-light-navy mx-auto leading-tight whitespace-pre-wrap">We started offering similar platforms for other instruments under the Musora brand.</p>
                                 </div>
                             </div>
@@ -201,19 +201,19 @@
             <p class="text-light-navy mt-1.5 mb-6">Drumeo is one brand under <a href="https://www.musora.com/"><u>Musora</u></a>: a group of organizations that help musicians<br class="hidden sm:inline"> develop their skills and connect with others. Let’s make music together!</p>
             <div class="flex flex-wrap sm:flex-nowrap">
                 <div class="mb-4 sm:mb-0 w-full sm:w-1/3 px-3">
-                    <a target="_blank" href="https://www.pianote.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://pianote.s3.amazonaws.com/logo/pianote-logo-red.png"></a>
+                    <a target="_blank" href="https://www.pianote.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png"></a>
                     <p class="leading-tight text-light-navy my-3">An incredible resource<br class="hidden sm:inline lg:hidden"> for learning piano</p>
-                    <img class="h-40 sm:h-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/pianote-graphic.png">
+                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/pianote-graphic.png">
                 </div>
                 <div class="mb-4 sm:mb-0 w-full sm:w-1/3 px-3">
-                    <a target="_blank" href="https://www.guitareo.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://guitareo.s3.amazonaws.com/sales/guitareo-logo-green.png"></a>
+                    <a target="_blank" href="https://www.guitareo.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png"></a>
                     <p class="leading-tight text-light-navy my-3">Where guitar players<br class="hidden sm:inline lg:hidden"> can learn and grow</p>
-                    <img class="h-40 sm:h-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/guitareo-graphic.png">
+                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/guitareo-graphic.png">
                 </div>
                 <div class="w-full sm:w-1/3 px-3">
-                    <a target="_blank" href="https://www.singeo.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://singeo.s3.amazonaws.com/sales/2021/singeo-logo.png"></a>
+                    <a target="_blank" href="https://www.singeo.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png"></a>
                     <p class="leading-tight text-light-navy my-3">A one-stop platform<br class="hidden sm:inline lg:hidden"> for vocalists</p>
-                    <img class="h-40 sm:h-auto lazyload" data-src="https://cdn.musora.com/image/fetch/w_1100,q_auto:best/https://musora-center.s3.amazonaws.com/homepage/2021/singeo-graphic.png">
+                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/singeo-graphic.png">
                 </div>
             </div>
         </div>
@@ -226,32 +226,32 @@
             @php
                 $altSlider = [
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/Aaron_A.jpg',
-                    'image2' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/Aaron_B2.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/Aaron_A.jpg',
+                    'image2' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/Aaron_B2.jpg',
                     'name' => 'AARON<br> EDGAR',
                     'bio' => "Aaron Edgar is a long-time Drumeo instructor who specializes in advanced rhythms and progressive music.<br><br>He is the drummer for Third Ion, a Canadian prog metal supergroup with members of Devin Townsend Project, Mother Mother, Into Eternity and Annihilator.<br><br>His most recent book, Progressive Drumming Essentials is one of the most adventurous texts on advanced rhythm theory.",
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/Brandon_A.jpg',
-                    'image2' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/Brandon_B.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/Brandon_A.jpg',
+                    'image2' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/Brandon_B.jpg',
                     'name' => 'BRANDON<br> TOEWS',
                     'bio' => "Brandon Toews is a drummer, author, educator, and content producer. He is the Drumeo Content Director, author of The Drummer's Toolbox, and co-author of The Best Beginner Drum Book.<br><br>He’s been creating and producing educational content for Drumeo since 2015—much of it in collaboration with the world’s top drummers, including Dennis Chambers, Steve Smith, Simon Phillips, Hannah Welton, and Larnell Lewis. Brandon’s videos have accumulated millions of views online and have been featured in digital publications of Billboard, Rolling Stone, and iHeartRadio. ",
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/Dave_A.jpg',
-                    'image2' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/Dave_B.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/Dave_A.jpg',
+                    'image2' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/Dave_B.jpg',
                     'name' => 'DAVE<br> ATKINSON',
                     'bio' => "Dave Atkinson is a drummer and educator who has been teaching on Drumeo since its inception.<br><br>He has published multiple course packs, helped create the Drumeo Method, and has hosted many of the world's finest drummers from his desk in the Drumeo studio.",
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/Jared_A.jpg',
-                    'image2' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/Jared_B.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/Jared_A.jpg',
+                    'image2' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/Jared_B.jpg',
                     'name' => 'JARED<br> FALK',
                     'bio' => 'Jared Falk has been a trusted source for online drum lessons for 15+ years.<br><br>As the face of Drumeo, Jared helps drummers around the world learn their first beats and beyond.<br><br>His passion, clear explanations, and approachable style have helped him become the most watched drum instructor online. And now you’ll have exclusive access to ask him all of your biggest questions, from getting started to finding your unique voice on the drums.',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/Kyle_A.jpg',
-                    'image2' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/Kyle_B.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/Kyle_A.jpg',
+                    'image2' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/Kyle_B.jpg',
                     'name' => 'KYLE<br> RADOMSKY',
                     'bio' => "Musora’s Community Manager, Kyle has been making music since the age of 5 - first as a piano player, then as a drummer.<br><br>Since picking up the sticks at age 15, there’s been no looking back. Thousands of shows in 15+ countries, playing everything from jazz to country to rock n’ roll on records, jingles, and TV shows - if it needs drums, he can do it!",
                     ],
@@ -264,8 +264,8 @@
                         <div class="flip-div teacher inline-block relative w-full group" style="perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div class="front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="bg-image w-full bg-black bg-top bg-cover absolute left-0 top-0 img-toggle opacity-0 transition-all duration-700 active lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $altSlide['image'] }}"></div>
-                                    <div class="bg-image w-full bg-black bg-top bg-cover absolute left-0 top-0 img-toggle opacity-0 transition-all duration-700 lazyload" data-bg="https://cdn.musora.com/image/fetch/w_1000,q_auto:best/{{ $altSlide['image2'] }}"></div>
+                                    <div class="bg-image w-full bg-black bg-top bg-cover absolute left-0 top-0 img-toggle opacity-0 transition-all duration-700 active lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $altSlide['image'] }}"></div>
+                                    <div class="bg-image w-full bg-black bg-top bg-cover absolute left-0 top-0 img-toggle opacity-0 transition-all duration-700 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $altSlide['image2'] }}"></div>
                                     <div class="absolute uppercase w-full bottom-3 lg:bottom-4 z-10 text-shadow-4">
                                         <h2 class="font-bebas text-3xl mb-0.5" style="line-height:0.85em">{!! $altSlide['name']  !!}</h2>
                                     </div>
@@ -290,83 +290,83 @@
             @php
                 $slider = [
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Aaron.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Aaron.jpg',
                     'name' => 'Aaron Spears',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Anika.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Anika.jpg',
                     'name' => 'Anika Nilles',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Antonio.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Antonio.jpg',
                     'name' => 'Antonio Sanchez',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Benny.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Benny.jpg',
                     'name' => 'Benny Greb',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/David.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/David.jpg',
                     'name' => 'David Garibaldi',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Dennis.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Dennis.jpg',
                     'name' => 'Dennis Chambers',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Dom.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Dom.jpg',
                     'name' => 'Dom Famularo',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Dorothea.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Dorothea.jpg',
                     'name' => 'Dorothea Taylor',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Emmanuelle.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Emmanuelle.jpg',
                     'name' => 'Emmanuelle Caplette',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Gavin.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Gavin.jpg',
                     'name' => 'Gavin Harrison',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Gene.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Gene.jpg',
                     'name' => 'Gene Hoglan',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Glen.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Glen.jpg',
                     'name' => 'Glen Sobel',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Hannah.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Hannah.jpg',
                     'name' => 'Hannah Welton',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Larnell.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Larnell.jpg',
                     'name' => 'Larnell Lewis',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Mark.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Mark.jpg',
                     'name' => 'Mark Guiliana',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Matt.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Matt.jpg',
                     'name' => 'Matt Garstka',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Simon.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Simon.jpg',
                     'name' => 'Simon Phillips',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Steve.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Steve.jpg',
                     'name' => 'Steve Smith',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Todd.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Todd.jpg',
                     'name' => 'Todd Sucherman',
                     ],
                     [
-                    'image' => 'https://drumeo-assets.s3.amazonaws.com/sales/about/instructors/Tommy.jpg',
+                    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/about/instructors/Tommy.jpg',
                     'name' => 'Tommy Igoe',
                     ],
                 ]
@@ -378,7 +378,7 @@
                             <div class="flip-div inline-block relative w-full group" style="perspective: 1000px;">
                                 <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                                     <div class="front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                        <div class="bg-image w-full bg-black bg-top bg-cover lazyload" data-bg="https://cdn.musora.com/image/fetch/w_600,q_auto:best/{{ $slide['image'] }}"></div>
+                                        <div class="bg-image w-full bg-black bg-top bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $slide['image'] }}"></div>
                                         <div class="absolute uppercase w-full bottom-3 lg:bottom-4 z-10 text-shadow-4">
                                             <h2 class="font-bebas text-3xl" style="line-height:0.85em">
                                                 {!! $slide['name']  !!}
@@ -406,7 +406,7 @@
             <a target="_blank" class="transition-opacity duration-300 py-3 w-14 h-14 text-3xl leading-none rounded-full inline-block text-center mx-1.5 hover:opacity-70 social-bubble tiktok text-white" href="https://www.tiktok.com/@drumeoofficial" style="background: #000;"><i class="fab fa-tiktok" style="filter: drop-shadow(2px 2px 0px #fe2b54) drop-shadow(-2px -2px 0px #25f4ee);"></i></a>
         </div>
     </section>
-    <section class="text-white text-center relative z-10 overflow-hidden px-4 md:px-5 py-8 md:py-20 bg-cover bg-center lazyload" data-bg="https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/sales/about/Order_BG.jpg">
+    <section class="text-white text-center relative z-10 overflow-hidden px-4 md:px-5 py-8 md:py-20 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Order_BG.jpg">
         <div class="container mx-auto relative z-10 max-w-4xl">
             <h2 class="mb-7"><strong>Join the party.</strong></h2>
             <div class="flex flex-wrap sm:flex-nowrap w-full">
