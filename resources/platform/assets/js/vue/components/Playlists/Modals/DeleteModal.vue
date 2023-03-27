@@ -116,8 +116,8 @@
     onBeforeMount(()=> {
         // console.log(playlistsStore.playlists.length)
         if(props.mode === "lesson") {
-            const title = props.data.fields.find(field => field.key === 'title');
-            state.title = title.value;
+            const title = props.data.title;
+            state.title = title;
         }
     })
 </script>
