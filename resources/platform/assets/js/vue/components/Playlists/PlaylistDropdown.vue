@@ -191,12 +191,12 @@ const unpinPlaylistModal = () => {
 };
 
 const removeLesson = () => {
-    window.openplaylistmodal({ modalType: 'removeLesson', data: props.data, index: props.index });
+    window.openplaylistmodal({ modalType: 'removeLesson', data: props.data });
     emit('closeDropdown');
 };
 
 const editLessonTime = () => {
-    window.openplaylistmodal({ modalType: 'startEnd', data: props.data, index: props.index });
+    window.openplaylistmodal({ modalType: 'startEnd', data: props.data });
     emit('closeDropdown');
 };
 

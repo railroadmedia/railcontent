@@ -1,16 +1,8 @@
 <script setup>
     import { onBeforeMount, watch, ref, inject, computed, reactive } from 'vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
-    import PlaylistService from '../../../../services/playlists.js';
     import PlaylistDropdown from '../PlaylistDropdown.vue';
     import PlaylistThumbnail from '../PlaylistThumbnail.vue';
-    import { usePlaylistsStore } from '../../../../stores/playlists';
-
-    //Inject
-    const token = inject('csrf_token');
-
-    //Pinia Stores
-    const playlistsStore = usePlaylistsStore();
 
     //-----------Props-----------//
     const props = defineProps({

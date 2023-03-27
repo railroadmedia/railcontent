@@ -61,7 +61,6 @@
                          :brand="brand"
                          mode="lesson"
                          :data="modalProps.data"
-                         :index="modalProps.index"
             />
 
             <NoAccess v-if="modalProps.modalType === 'noAccess'"
@@ -74,7 +73,6 @@
                 <StartEnd @onCloseModal="() => emit('onClosePlaylistsModal')"
                           :brand="brand"
                           :data="modalProps.data"
-                          :index="modalProps.index"
                 />
             </div>
             <div v-if="modalProps.modalType === 'addItem'">
