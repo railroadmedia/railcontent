@@ -120,19 +120,39 @@ class UserPlaylistsController extends BaseController
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
+        $playlistItems = [];
+
         foreach ($items as $index => $item) {
-            $items[$index]['need_access'] = ($user->isPackOwner() && !$user->isAMember());
-            $items[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
-            $items[$index]['url'] = url()->route('platform.user.playlist-item', [
+            $playlistItems[$index]['id'] = $item['id'];
+            $playlistItems[$index]['type'] = $item['type'];
+            $playlistItems[$index]['title'] = $item['title'];
+            $playlistItems[$index]['artist'] = $item['artist'];
+            $playlistItems[$index]['status'] = $item['status'];
+            //            $playlistItems[$index]['fields'] = $item['fields'];
+            //            $playlistItems[$index]['data'] = $item['data'];
+            $playlistItems[$index]['need_access'] = ($user->isPackOwner() && !$user->isAMember());
+            $playlistItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
+            $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
                 'playlistId' => $playlistId,
                 'playlistItemId' => $item['user_playlist_item_id'],
             ]);
+            $playlistItems[$index]['route'] = $item['route'] ?? '';
+            //            $playlistItems[$index]['parent'] = $item['parent']??null;
+            $playlistItems[$index]['instructors'] = $item['instructors'] ?? null;
+            $playlistItems[$index]['user_playlist_item_id'] = $item['user_playlist_item_id'] ?? null;
+            $playlistItems[$index]['user_playlist_item_extra_data'] = $item['user_playlist_item_extra_data'] ?? null;
+            $playlistItems[$index]['user_playlist_item_position'] = $item['user_playlist_item_position'] ?? null;
+            $playlistItems[$index]['set_start_end_time'] = $item['set_start_end_time'] ?? null;
+            $playlistItems[$index]['start_second'] = $item['start_second'] ?? null;
+            $playlistItems[$index]['end_second'] = $item['end_second'] ?? null;
+            $playlistItems[$index]['started'] = $item['started'] ?? false;
+            $playlistItems[$index]['completed'] = $item['completed'] ?? false;
+            $playlistItems[$index]['thumbnail_url'] = $item['thumbnail_url'] ?? '';
+            $playlistItems[$index]['user_progress'] = $item['user_progress'] ?? '';
         }
+
         $items = new ContentFilterResultsEntity([
-                                                    'results' => $items,
-                                                    'total_results' => $this->userPlaylistsService->countUserPlaylistContents(
-                                                        $playlistId
-                                                    ),
+                                                    'results' => $playlistItems
                                                 ]);
 
         return view('account.playlist', [
@@ -141,7 +161,9 @@ class UserPlaylistsController extends BaseController
             'currentUser' => user(),
             "noResultsMessage" => 'Nothing here yet! Start adding videos',
             "brand" => brand(),
-            'totalItems' => $items->totalResults(),
+            'totalItems' => $this->userPlaylistsService->countUserPlaylistContents(
+                $playlistId
+            ),
         ]);
     }
 
@@ -162,7 +184,7 @@ class UserPlaylistsController extends BaseController
 
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AddedToPrimaryPlaylistDecorator::$skip = true;
-        
+
         $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
         $position = $playlistItem['position'];
         $page = ($playlistItem['position'] <= 20) ? 1 : (ceil(($playlistItem['position']) / 20));
