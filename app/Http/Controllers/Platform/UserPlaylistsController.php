@@ -149,6 +149,7 @@ class UserPlaylistsController extends BaseController
             $playlistItems[$index]['completed'] = $item['completed'] ?? false;
             $playlistItems[$index]['thumbnail_url'] = $item['thumbnail_url'] ?? '';
             $playlistItems[$index]['user_progress'] = $item['user_progress'] ?? '';
+            $playlistItems[$index]['parent_title'] = $item['parent_title'] ?? '';
         }
 
         $items = new ContentFilterResultsEntity([
