@@ -253,7 +253,7 @@
                             'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                             'online-ship' => "Free Shipping",
                             'shipping' => true,
-                            'sku' => 'Drumeo-VaterSticks',
+                            'sku' => '&products[Drumeo-VaterSticks]=6',
                         ],
                         [
                             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/pad.jpg',
@@ -261,7 +261,7 @@
                             'description' => 'Practice anywhere with two full-size playing surfaces.',
                             'price' => floatval($productPrices['quietpad']->price),
                             'shipping' => true,
-                            'sku' => 'quietpad',
+                            'sku' => '&products[quietpad]=1',
                         ],
                         [
                             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/quietkick_card.jpg',
@@ -270,7 +270,7 @@
                             'price' => floatval($productPrices['quietkick']->price),
                             'online-ship' => "Free Shipping",
                             'shipping' => true,
-                            'sku' => 'quietkick',
+                            'sku' => '&products[quietkick]=1',
                         ],
                         [
                             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/p4.jpg',
@@ -278,7 +278,7 @@
                             'description' => '',
                             'price' => floatval($productPrices['practicepad']->price),
                             'shipping' => true,
-                            'sku' => 'practicepad',
+                            'sku' => '&products[practicepad]=1',
                         ],
                         [
                             'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
@@ -287,7 +287,7 @@
                             'price' => floatval($productPrices['drumeo-eardrums']->price),
                             'online-ship' => "Free Shipping",
                             'shipping' => true,
-                            'sku' => 'drumeo-eardrums',
+                            'sku' => '&products[drumeo-eardrums]=1',
                         ],
                         [
                             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/shop-image.jpg',
@@ -295,7 +295,7 @@
                             'description' => '',
                             'price' => floatval($productPrices['comfort-cover']->price),
                             'shipping' => true,
-                            'sku' => 'comfort-cover',
+                            'sku' => '&products[comfort-cover]=1',
                         ],
                         [
                             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/bbdb.jpg',
@@ -303,7 +303,7 @@
                             'description' => '',
                             'price' => floatval($productPrices['BeginnerBook']->price),
                             'shipping' => true,
-                            'sku' => 'BeginnerBook',
+                            'sku' => '&products[BeginnerBook]=1',
                         ],
                     ]
                 @endphp
@@ -316,12 +316,12 @@
                         x-on:click="
                             if(bonus <= 3 && selected){
                                 selected = !selected;
-                                query = query.replace('&products[{{ $bonus['sku'] }}]=1', '');
+                                query = query.replace('{{ $bonus['sku'] }}', '');
                                 bonus--;
                             } else if(bonus < 3 && !selected) {
                                 selected = !selected;
                                 bonus++;
-                                query = query + '&products[{{ $bonus['sku'] }}]=1';
+                                query = query + '{{ $bonus['sku'] }}';
                             }
                         "
                     >
