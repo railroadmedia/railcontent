@@ -118,7 +118,7 @@
                 @endif
                 ${{$discountedPrice }}
             </h4>
-            <p class="text-yellow italic font-bold leading-tight">ONLY @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} HEADPHONES LEFT!</p>
+            <p class="text-yellow italic font-bold leading-tight">ONLY @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} HEADPHONES LEFT!</p>
 
         </div>
     </section>
@@ -263,7 +263,7 @@
     <section class="py-12 md:py-20 text-center text-white" style="background: linear-gradient(180deg, #010101 0%, #330606 43.19%)">
         <img class="h-16 md:h-20 mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/concert-headphones/logo-promo.png" alt="headphone logo">
         <p class="text-yellow mb-4 italic font-bold">Enhance your playing experience.</p>
-        <p>ONLY @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} HEADPHONES LEFT!</p>
+        <p>ONLY @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} HEADPHONES LEFT!</p>
         <div class="flex flex-wrap justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-7 mx-auto text-center">
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group"
