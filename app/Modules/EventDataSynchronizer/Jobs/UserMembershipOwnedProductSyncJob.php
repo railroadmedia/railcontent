@@ -5,7 +5,9 @@ namespace App\Modules\EventDataSynchronizer\Jobs;
 use App\Console\Commands\Infrastructure\BatchQueryJob;
 use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\UserManagementSystem\Models\User;
 
 class UserMembershipOwnedProductSyncJob extends BatchQueryJob
 {
@@ -52,6 +54,13 @@ class UserMembershipOwnedProductSyncJob extends BatchQueryJob
         })->toArray();
 
         $userMembershipFieldsService->syncUserIds($userIds);
+
+        foreach($userIds as $userId){
+            $user = new User();
+            $user->id = $userId;
+            dispatch((new CustomerIoSyncUserByUserId($user))
+                ->delay(Carbon::now()->addSeconds(3)));
+        }
         return true;
     }
 }
