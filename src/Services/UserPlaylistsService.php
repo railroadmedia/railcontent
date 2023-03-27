@@ -273,6 +273,9 @@ class UserPlaylistsService
         if ($importAllAssignments) {
             $itemsThatShouldBeAdd = $itemsThatShouldBeAdd + ($assignments['soundslice_assignments_count'] ?? 0);
         }
+        if ($content && (in_array($content['type'], $singularContentTypes))) {
+            $itemsThatShouldBeAdd++;
+        }
 
         foreach ($userPlaylistIds as $userPlaylistId) {
             $playlistItems = $this->countUserPlaylistContents($userPlaylistId);
