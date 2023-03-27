@@ -37,25 +37,28 @@
     });
 
     onMounted(() => {
-        console.log(props.lesson)
+        //console.log(props.lesson)
     })
 
     //-----------Computed Props-----------//
-    
+
     //Thumbnail
     const lessonThumbnail = computed( () => {
-        const thumbnail = props.lesson.data.find(data => data.key === 'original_thumbnail_url');
-        return thumbnail ? thumbnail.value : props.lesson.thumbnail_url;
+        return props.lesson.thumbnail_url;
     })
     //Song Artist
     const artist = computed( () => {
-        const artist = props.lesson?.fields?.length ? props.lesson.fields.find(data => data.key === 'artist') : { value: 'TBD' };
-        return artist.value;
+        return props.lesson.artist;
+    })
+    //Instructor
+    const instructor = computed(() => {
+        const instructorObject = props.lesson?.fields?.length ? props.lesson.fields.find(data => data.key === 'instructor') : { value: null };
+        console.log('instructor', instructorObject)
+        return instructorObject && instructorObject.value ? instructorObject.value : null;
     })
     //Description
     const lessonDescription = computed( () => {
-        const description = props.lesson.fields.find(field => field.key === 'title');
-        return description.value;
+        return props.lesson.title;
     })
     //Show Content Mask
     const showMask = computed( () => {
@@ -98,20 +101,20 @@
     const dateNow = Date.now();
     const lessonDateParsed = props.lesson.published_on_in_timezone ? Date.parse(props.lesson.published_on_in_timezone ) : Date.parse(props.lesson.published_on);
     const lessonDate = props.lesson.published_on_in_timezone ? props.lesson.published_on_in_timezone : props.lesson.published_on ;
-    
+
     //Parse Release Date
     const month = DateTime.fromSQL(lessonDate).toFormat('LLL');
     const day = DateTime.fromSQL(lessonDate).toFormat('ccc');
     const dayNumber = DateTime.fromSQL(lessonDate).toFormat('d');
     const yearNumber = DateTime.fromSQL(lessonDate).toFormat('yy');
     const time = DateTime.fromSQL(lessonDate).toFormat('h:mm a');
-    
+
     //-----------Methods-----------//
 
     const released = () => {
         return lessonDateParsed < dateNow;
     }
-    
+
     //Format Duration (in seconds)
     const duration_formatted = (seconds) => {
         let time = seconds;
@@ -132,7 +135,7 @@
         if(needAccess && !playlistsStore.sortingPlaylist) {
             window.openplaylistmodal({ modalType: 'noAccess', data: props.lesson });
         }
-    }   
+    }
 
     //Check Dropdown Distance
     const GetElementDistance = el => {
@@ -166,7 +169,7 @@
             class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-text-[#0D0D0D] dark:tw-text-white"
             :class="[{ 'tw-grayscale' : needAccess }, !cueVersion ? 'tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)]' : 'tw-w-full' ]"
         >
-            
+
             <div class="tw-inline-flex tw-items-center tw-font-bold tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity"
                  :class="{ 'tw-opacity-0' : playlistsStore.sortingPlaylist }"
             >
@@ -188,9 +191,9 @@
                     />
                     <!-- Image Mask -->
                     <div class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
-                        <img class="tw-h-full tw-object-contain" 
+                        <img class="tw-h-full tw-object-contain"
                              :class="{ '' : needAccess }"
-                             :src="`https://musora.com/cdn-cgi/image/width=330/${lessonThumbnail}`" 
+                             :src="`https://musora.com/cdn-cgi/image/width=330/${lessonThumbnail}`"
                              alt="playlist thumbnail"
                         >
                     </div>
@@ -212,7 +215,7 @@
                 <!--title-->
                 <p class="tw-hidden tw-truncate tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
                    :class="[{'md:tw-block' : !cueVersion }]"
-                >  
+                >
                     <template v-if="lesson.type !== 'assignment' || lesson.type !== 'song'">
                         <span v-for="(instructor, i) in lesson.instructors"
                               :key="i">
@@ -231,10 +234,10 @@
                 </p>
                 <!-- description / Time Stamp-->
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <p class="tw-font-bold tw-leading-tight tw-whitespace-normal tw-line-clamp-2 md:tw-line-clamp-1">{{ lessonDescription }}</p>
+                    <p class="tw-font-bold tw-text-[16px] tw-whitespace-normal tw-line-clamp-2 xl:tw-line-clamp-1">{{ lessonDescription }}</p>
                     <!-- Time Stamp Icon -->
                     <button  v-if="!cueVersion" :title="`Begins ${ duration_formatted(lesson.start_second ) || '0:00:00'}&nbsp; • &nbsp;Ends ${ duration_formatted( lesson.end_second ) || duration_formatted(lesson.duration) || '0:00:00' }`">
-                        <svg v-if="showTimeStamp" 
+                        <svg v-if="showTimeStamp"
                             class="tw-ml-2 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]" width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_225_6622)">
                                 <path d="M12.176 9.005H8.48C8.208 9.005 8 8.797 8 8.525V4.829C8 4.541 8.256 4.317 8.528 4.349C10.688 4.589 12.4 6.301 12.64 8.461C12.688 8.749 12.464 9.005 12.176 9.005Z" fill="currentColor"/>
@@ -251,35 +254,41 @@
                     </button>
                 </div>
                 <!-- Assignment Instructors -->
-                <p v-if="lesson.type === 'assignment' && !cueVersion" class="tw-hidden md:tw-flex tw-text-xs md:tw-text-sm tw-truncate tw-capitalize tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mt-1 md:tw-mt-0">   
+                <p v-if="lesson.type === 'assignment' && !cueVersion" class="tw-hidden md:tw-flex tw-text-xs md:tw-text-sm tw-truncate tw-capitalize tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mt-1 md:tw-mt-0">
                     <span v-for="(instructor, i) in lesson.instructors"
                         :key="i">
                         {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
                     </span>
-                </p>   
+                </p>
                 <!-- Cue Version Data -->
                 <p class="tw-w-full tw-flex tw-items-center tw-text-xs tw-capitalize tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mt-1 tw-mr-1"
                    :class="[{'md:tw-hidden md:tw-mt-0 md:tw-text-sm' : !cueVersion }]"
-                >   
+                >
                     <!-- Instructor / Artist -->
-                    <template v-if="!cueVersion">
-                        <template v-if="lesson.type !== 'songs' ">
+
+                    <template v-if="lesson.type === 'song'">
+                            <span>{{ artist }}</span>
+                    </template>
+                    <template v-else-if="lesson.instructors && lesson.instructors.length">
                             <span v-for="(instructor, i) in lesson.instructors"
                                 class="tw-whitespace-nowrap tw-truncate"
                                 :key="i">
                                 {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
                             </span>
-                        </template>
-                        <template v-if="lesson.type === 'song'">
-                            <span>{{ artist }}</span>
-                        </template>
+                    </template>
+
+                    <template v-else-if="instructor">
+                        <span class="tw-whitespace-nowrap tw-truncate">
+                                {{ instructor.name }}
+                        </span>
                     </template>
                     <!-- Or Lesson Type -->
                     <span v-else>{{ lesson.type }}</span>
-                    <!-- Duration -->
+                    <!-- Duration OR Lesson Type -->
                     <span class="tw-mx-0.5">|</span>
-                    <span>{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>   
-                </p>      
+                    <span v-if="cueVersion">{{ lesson.type }}</span>
+                    <span v-if="!cueVersion">{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>
+                </p>
             </div>
 
             <template v-if="!cueVersion">
@@ -334,7 +343,7 @@
         </div>
 
         <!-- content mask -->
-        <div :class="[{ 'tw-hidden' : !showMask }, playlistsStore.sortingPlaylist ? 'tw-cursor-move' : 'tw-cursor-pointer']" 
+        <div :class="[{ 'tw-hidden' : !showMask }, playlistsStore.sortingPlaylist ? 'tw-cursor-move' : 'tw-cursor-pointer']"
              class="tw-z-[15] tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-border-[#445F74] dark:tw-border-[#7E9AB1]"
              @click="handleNoAccess"
         >

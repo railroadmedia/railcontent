@@ -120,19 +120,40 @@ class UserPlaylistsController extends BaseController
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
+        $playlistItems = [];
+
         foreach ($items as $index => $item) {
-            $items[$index]['need_access'] = ($user->isPackOwner() && !$user->isAMember());
-            $items[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
-            $items[$index]['url'] = url()->route('platform.user.playlist-item', [
+            $playlistItems[$index]['id'] = $item['id'];
+            $playlistItems[$index]['type'] = $item['type'];
+            $playlistItems[$index]['title'] = $item['title'];
+            $playlistItems[$index]['artist'] = $item['artist'];
+            $playlistItems[$index]['status'] = $item['status'];
+            //            $playlistItems[$index]['fields'] = $item['fields'];
+            //            $playlistItems[$index]['data'] = $item['data'];
+            $playlistItems[$index]['need_access'] = ($user->isPackOwner() && !$user->isAMember());
+            $playlistItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
+            $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
                 'playlistId' => $playlistId,
                 'playlistItemId' => $item['user_playlist_item_id'],
             ]);
+            $playlistItems[$index]['route'] = $item['route'] ?? '';
+            //            $playlistItems[$index]['parent'] = $item['parent']??null;
+            $playlistItems[$index]['instructors'] = $item['instructors'] ?? null;
+            $playlistItems[$index]['user_playlist_item_id'] = $item['user_playlist_item_id'] ?? null;
+            $playlistItems[$index]['user_playlist_item_extra_data'] = $item['user_playlist_item_extra_data'] ?? null;
+            $playlistItems[$index]['user_playlist_item_position'] = $item['user_playlist_item_position'] ?? null;
+            $playlistItems[$index]['set_start_end_time'] = $item['set_start_end_time'] ?? null;
+            $playlistItems[$index]['start_second'] = $item['start_second'] ?? null;
+            $playlistItems[$index]['end_second'] = $item['end_second'] ?? null;
+            $playlistItems[$index]['started'] = $item['started'] ?? false;
+            $playlistItems[$index]['completed'] = $item['completed'] ?? false;
+            $playlistItems[$index]['thumbnail_url'] = $item['thumbnail_url'] ?? '';
+            $playlistItems[$index]['user_progress'] = $item['user_progress'] ?? '';
+            $playlistItems[$index]['parent_title'] = $item['parent_title'] ?? '';
         }
+
         $items = new ContentFilterResultsEntity([
-                                                    'results' => $items,
-                                                    'total_results' => $this->userPlaylistsService->countUserPlaylistContents(
-                                                        $playlistId
-                                                    ),
+                                                    'results' => $playlistItems
                                                 ]);
 
         return view('account.playlist', [
@@ -141,7 +162,9 @@ class UserPlaylistsController extends BaseController
             'currentUser' => user(),
             "noResultsMessage" => 'Nothing here yet! Start adding videos',
             "brand" => brand(),
-            'totalItems' => $items->totalResults(),
+            'totalItems' => $this->userPlaylistsService->countUserPlaylistContents(
+                $playlistId
+            ),
         ]);
     }
 
@@ -154,7 +177,7 @@ class UserPlaylistsController extends BaseController
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
         ];
-
+$user = user();
         ContentRepository::$pullFutureContent = true;
 
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
@@ -178,12 +201,40 @@ class UserPlaylistsController extends BaseController
         $nextPlaylistItem = $playlistItems->getMatchOffset($playlistItem, 1);
         $previousPlaylistItem = $playlistItems->getMatchOffset($playlistItem, -1);
 
-        foreach ($playlistItems as $item) {
-            $item['url'] = url()->route('platform.user.playlist-item', [
+        $otherItems = [];
+        foreach ($playlistItems as $index=>$item) {
+            $otherItems[$index]['url'] = url()->route('platform.user.playlist-item', [
                 'playlistId' => $playlistId,
                 'playlistItemId' => $item['user_playlist_item_id'],
             ]);
-            $item['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
+            $otherItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
+            $otherItems[$index]['id'] = $item['id'];
+            $otherItems[$index]['type'] = $item['type'];
+            $otherItems[$index]['title'] = $item->fetch('title');
+            $otherItems[$index]['artist'] = $item->fetch('artist');
+            $otherItems[$index]['status'] = $item['status'];
+            $otherItems[$index]['fields'] = $item['fields'];
+            $otherItems[$index]['data'] = $item['data'];
+            $otherItems[$index]['need_access'] = ($user->isPackOwner() && !$user->isAMember());
+            $otherItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
+            $otherItems[$index]['url'] = url()->route('platform.user.playlist-item', [
+                'playlistId' => $playlistId,
+                'playlistItemId' => $item['user_playlist_item_id'],
+            ]);
+            $otherItems[$index]['route'] = $item['route'] ?? '';
+            //            $playlistItems[$index]['parent'] = $item['parent']??null;
+            $otherItems[$index]['instructors'] = $item['instructors'] ?? null;
+            $otherItems[$index]['user_playlist_item_id'] = $item['user_playlist_item_id'] ?? null;
+            $otherItems[$index]['user_playlist_item_extra_data'] = $item['user_playlist_item_extra_data'] ?? null;
+            $otherItems[$index]['user_playlist_item_position'] = $item['user_playlist_item_position'] ?? null;
+            $otherItems[$index]['set_start_end_time'] = $item['set_start_end_time'] ?? null;
+            $otherItems[$index]['start_second'] = $item['start_second'] ?? null;
+            $otherItems[$index]['end_second'] = $item['end_second'] ?? null;
+            $otherItems[$index]['started'] = $item['started'] ?? false;
+            $otherItems[$index]['completed'] = $item['completed'] ?? false;
+            $otherItems[$index]['thumbnail_url'] = $item['thumbnail_url'] ?? '';
+            $otherItems[$index]['user_progress'] = $item['user_progress'] ?? '';
+            $otherItems[$index]['parent_title'] = $item['parent_title'] ?? '';
         }
 
         $content = $this->contentService->getById($playlistItem['id']);
@@ -215,7 +266,7 @@ class UserPlaylistsController extends BaseController
         $relatedPlaylists = (new ContentFilterResultsEntity(['results' => $playlists]))->toResponseRawJson();
 
         $playlistLessons = (new ContentFilterResultsEntity([
-                                                               'results' => $playlistItems,
+                                                               'results' => $otherItems,
                                                                'total_results' => $this->userPlaylistsService->countUserPlaylistContents(
                                                                    $playlistId
                                                                ),
@@ -243,6 +294,7 @@ class UserPlaylistsController extends BaseController
 
         if (!empty($playlistItem['parent'] ?? []) && (!empty($playlistItem['parent']['parent_content_data']))) {
             $this->routingDecorator->decorate([$playlistItem['parent']]);
+            $playlistItem['parent']['thumbnail_url'] = $playlistItem['parent']->fetch('data.thumbnail_url');
         }
 
         $relatedLesson =

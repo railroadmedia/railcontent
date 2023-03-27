@@ -3,6 +3,7 @@
 namespace App\Decorators\Content;
 
 use Railroad\Railcontent\Decorators\DecoratorInterface;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
@@ -33,18 +34,22 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
 
     protected $instructorDecorator;
 
+    protected ContentRepository $contentRepository;
+
     public function __construct(
         ContentService $contentService,
         UserContentProgressService $userContentProgressService,
         ContentHierarchyService $contentHierarchyService,
         ContentFollowsService $contentFollowsService,
-        InstructorDecorator $instructorDecorator
+        InstructorDecorator $instructorDecorator,
+        ContentRepository $contentRepository
     ) {
         $this->contentService = $contentService;
         $this->userContentProgressService = $userContentProgressService;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentFollowsService = $contentFollowsService;
         $this->instructorDecorator = $instructorDecorator;
+        $this->contentRepository = $contentRepository;
     }
 
     /**
