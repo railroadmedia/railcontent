@@ -87,10 +87,10 @@
     }
 
     const handleDeleteLesson = () => {
+        //Delete from UI first
+        playlistsStore.deletePlaylistItem(props.data);
         //Close Modal
-        emit('onCloseModal')
-        //Delete from UI First
-        setTimeout(playlistsStore.deletePlaylistItem(props.data, props.index), 1000)
+        emit('onCloseModal');
         //Send Request
         PlaylistService.deletePlaylistItem(props.data.user_playlist_item_id, token)
             .then(function(response) {

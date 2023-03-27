@@ -79,7 +79,7 @@ export const usePlaylistsStore = defineStore({
       })
       this.playlistsQuantity--;
     },
-    deletePlaylistItem(item, index) {
+    deletePlaylistItem(item) {
       this.lessons = this.lessons.filter((l,i) => {
         return l.user_playlist_item_id !== item.user_playlist_item_id;
       })
