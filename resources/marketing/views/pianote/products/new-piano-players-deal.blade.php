@@ -299,9 +299,14 @@
             </div>
             <h3 class="mb-8"><strong>ONLY <s class="opacity-60">${{ 240 }}</s> $197</strong></h3>
             <div class="w-2/3 mx-auto">
-                <a
-                    href="/ecommerce/add-to-cart?locked=true&redirect=/order&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,pianote-headphones:1,pianote-practice-planner:1,poster-chords:1,poster-scales:1,the-power-of-chords:1,classical-piano:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1,piano-riffs-and-fills:1,piano-technique-made-easy:1,destupefy-your-left-hand:1,worship-piano:1,faster-fingers:1"
-                    class="join pianote w-full">Claim your offer</a>
+                @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() > 0)
+                    <a
+                        href="/ecommerce/add-to-cart?locked=true&redirect=/order&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,pianote-headphones:1,pianote-practice-planner:1,poster-chords:1,poster-scales:1,the-power-of-chords:1,classical-piano:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1,piano-riffs-and-fills:1,piano-technique-made-easy:1,destupefy-your-left-hand:1,worship-piano:1,faster-fingers:1"
+                        class="join pianote w-full">Claim your offer
+                    </a>
+                @else
+                    <span class="join sold-out w-full">Sold out</span>
+                @endif
             </div>
             <p class="text-center my-8" style="color:#ABB5C2;">
                 <b>Any questions?</b> Call us toll-free at 1-800-439-8921 or directly at 1-604-855-7605.
