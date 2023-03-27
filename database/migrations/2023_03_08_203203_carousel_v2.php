@@ -110,6 +110,7 @@ return new class extends Migration
                 'subtitle' => $carousel['subtitle'],
                 'title' => $carousel['title'],
                 'description' => $carousel['description'],
+                'desc_color' => !empty($carousel['desc_color']) ? $carousel['desc_color'] : null,
                 'primary_cta_text' => $carousel['primary_cta_text'],
                 'primary_cta_text_alt' => $carousel['primary_cta_text_alt'],
                 'secondary_cta_text' => $carousel['secondary_cta_text'],
