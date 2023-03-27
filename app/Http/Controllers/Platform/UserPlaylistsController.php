@@ -265,6 +265,7 @@ class UserPlaylistsController extends BaseController
 
         if (!empty($playlistItem['parent'] ?? []) && (!empty($playlistItem['parent']['parent_content_data']))) {
             $this->routingDecorator->decorate([$playlistItem['parent']]);
+            $playlistItem['parent']['thumbnail_url'] = $playlistItem['parent']->fetch('data.thumbnail_url');
         }
 
         $relatedLesson =

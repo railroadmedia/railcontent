@@ -93,8 +93,8 @@
     //----------Lifecycle Hooks----------//
     onBeforeMount(()=> {
         //Get Playlist Name
-        const title = props.data.fields.find(field => field.key === 'title');
-        state.title = title.value;
+        const title = props.data.title;
+        state.title = title;
         //Format start/end values
         let startTime = props.data.start_second || 0;
         let endTime = props.data.end_second || props.data.duration || 0;
