@@ -57,10 +57,10 @@ const props = defineProps({
     type: Array,
     default: [],
   },
-    mostRecentPlaylists:{
-        type: Array,
-        default: []
-    },
+  mostRecentPlaylists:{
+    type: Array,
+    default: []
+  },
   csrf_token: {
       type: String,
       required: true
@@ -185,6 +185,7 @@ onBeforeMount(() => {
   };
 
   // Initialize playlists pinia store
+  playlistsStore.updateSidebarPlaylists({ sidebarPlaylists: props.mostRecentPlaylists })
   playlistsStore.update({ pinnedPlaylists: props.playlists });
 });
 
@@ -217,7 +218,7 @@ const handleSubmit = () => {
 
 onMounted(() => {
   //Check if Mobile on Resize
-    console.log('most recent ', props.mostRecentPlaylists)
+  //   console.log('most recent ', props.mostRecentPlaylists)
   window.addEventListener("resize", onResize);
 })
 
