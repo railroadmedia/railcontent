@@ -66,7 +66,7 @@ class UserPlaylistsController extends BaseController
             $limit,
             $page,
             $term,
-            $request->get('sortby_val', $request->get('sort', '-created_at'))
+            $request->get('sortby_val', $request->get('sort', 'most_recent'))
         );
 
         $playlistsNumber = $this->userPlaylistsService->countUserPlaylists(
