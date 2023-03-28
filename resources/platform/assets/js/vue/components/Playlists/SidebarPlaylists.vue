@@ -84,27 +84,30 @@ const unpinPlaylist = (item, brand) => {
 }
 
 const pinPlaylist = (item, brand) => {
-    PlaylistService.pinPlaylist(item.id, brand, token)
-        .then((response) => {
-            if (response.status === 200) {
-                //emit event or update pinia
-                playlistsStore.pinPlaylist(item)
-                //show success message
-                window.shownotification({
-                    icon: 'playlist',
-                    text: `'${item.name}' has been pinned within the sidebar.`
-                })
-            }
-        })
-        .catch(function (error) {
-            if (error.response) {
-                //handle error
-                window.shownotification({
-                    icon: 'error',
-                    text: 'Woops! Something wrong happened, please try again later.'
-                })
-            }
-        });
+    if(playlistsStore.pinnedPlaylists.length < 5){
+        PlaylistService.pinPlaylist(item.id, brand, token)
+            .then((response) => {
+                if (response.status === 200) {
+                    //emit event or update pinia
+                    playlistsStore.pinPlaylist(item)
+                    //show success message
+                    window.shownotification({
+                        icon: 'playlist',
+                        text: `'${item.name}' has been pinned within the sidebar.`
+                    })
+                }
+            })
+            .catch(function (error) {
+                if (error.response) {
+                    //handle error
+                    window.shownotification({
+                        icon: 'error',
+                        text: 'Woops! Something wrong happened, please try again later.'
+                    })
+                }
+            });
+    }
+
 }
 
 onBeforeMount(()=> {
