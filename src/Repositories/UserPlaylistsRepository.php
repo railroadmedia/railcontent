@@ -85,12 +85,17 @@ class UserPlaylistsRepository extends RepositoryBase
                 ->skip(($page - 1) * $limit);
         }
 
-        if (!in_array($orderByColumn, ['name', 'id', 'created_at', 'last_progress'])) {
+        if (!in_array($orderByColumn, ['name', 'id', 'created_at', 'last_progress','most_recent'])) {
             $orderByColumn = 'id';
         }
-        $query =
-            $query->orderBy(config('railcontent.table_prefix').'user_playlists.'.$orderByColumn, $orderByDirection);
-
+        if($orderByColumn == 'most_recent'){
+            $query =
+                $query->selectRaw('GREATEST('.config('railcontent.table_prefix').'user_playlists'.'.created_at, COALESCE('.config('railcontent.table_prefix').'user_playlists'.'.updated_at, 0), COALESCE(last_progress, 0)) as datemax ')
+                    ->orderByRaw('datemax desc ');
+        }else {
+            $query =
+                $query->orderBy(config('railcontent.table_prefix').'user_playlists.'.$orderByColumn, $orderByDirection);
+        }
         $data =
             $query->get()
                 ->toArray();
