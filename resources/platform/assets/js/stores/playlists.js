@@ -6,6 +6,7 @@ export const usePlaylistsStore = defineStore({
   state: () => {
     return {
       playlists: [], // For Collection Page
+      sidebarPlaylists: [],
       lessons: [], // For Detail Page
       pinnedPlaylists: [], // [{ id: '', title: '', isPinned: false}]
       activePlaylist: {}, //playlist a user is a currently viewing
@@ -34,6 +35,12 @@ export const usePlaylistsStore = defineStore({
     updatePlaylists({ playlists }) {
       this.$patch({
         playlists,
+      })
+    },
+
+    updateSidebarPlaylists({ sidebarPlaylists }) {
+      this.$patch({
+        sidebarPlaylists,
       })
     },
 
@@ -101,7 +108,7 @@ export const usePlaylistsStore = defineStore({
         playlist.pinned = true;
       }
       //Pin in Sidebar
-      this.pinnedPlaylists.push(list)
+      this.pinnedPlaylists.unshift(list)
     },
     unpinPlaylist(id) {
       //Unpin from Playlist Detail Page
@@ -109,8 +116,10 @@ export const usePlaylistsStore = defineStore({
         this.activePlaylist.pinned = false;
       } else {
         //Unpin from Catalog (wherever there's a catalog)
-        let playlist = this.playlists.find(p => p.id === id)
-        playlist.pinned = false;
+        let playlist = this.playlists.find(p => p.id === id);
+        if(playlist){
+            playlist.pinned = false;
+        }
       }
 
       //Unpin from Sidebar
