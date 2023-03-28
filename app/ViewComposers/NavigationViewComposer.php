@@ -45,7 +45,7 @@ class NavigationViewComposer
             user()->id,
             'user-playlist',
             brand(),
-            5,
+            10,
             1,
             null,
             'most_recent'
