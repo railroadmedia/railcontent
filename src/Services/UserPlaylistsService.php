@@ -764,6 +764,11 @@ class UserPlaylistsService
         if (!$playlist) {
             return null;
         }
+        $playlist['is_liked_by_current_user'] =
+            $this->playlistLikeRepository->query()
+                ->where('playlist_id', $id)
+                ->where('user_id', auth()->id())
+                ->count() > 0;
 
         return Decorator::decorate([$playlist], 'playlist')[0];
     }
