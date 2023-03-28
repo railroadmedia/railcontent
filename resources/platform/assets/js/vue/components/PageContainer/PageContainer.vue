@@ -57,6 +57,10 @@ const props = defineProps({
     type: Array,
     default: [],
   },
+    mostRecentPlaylists:{
+        type: Array,
+        default: []
+    },
   csrf_token: {
       type: String,
       required: true
@@ -213,6 +217,7 @@ const handleSubmit = () => {
 
 onMounted(() => {
   //Check if Mobile on Resize
+    console.log('most recent ', props.mostRecentPlaylists)
   window.addEventListener("resize", onResize);
 })
 
