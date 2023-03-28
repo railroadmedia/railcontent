@@ -36,7 +36,7 @@ const formattedPinnedPlaylists = computed(() => {
     ).filter(n => n)
 });
 const formattedUnpinnedPlaylists = computed(() => {
-    let unpinnedPlaylists = playlistsStore.playlists.filter((pl) => {
+    let unpinnedPlaylists = playlistsStore.sidebarPlaylists.filter((pl) => {
         return playlistsStore.pinnedPlaylists.find((p) => { return p.id === pl.id; }) === undefined;
     })
 
