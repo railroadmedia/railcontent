@@ -58,6 +58,8 @@
         next-lesson-url="{{ $nextPlaylistItemUrl }}" prev-lesson-url="{{ $previousPlaylistItemUrl }}"
         playlist-duration="{{ $playlist['duration'] }}" user-name="{{ user()->display_name }}"
         user-avatar="{{ user()->profile_picture_url }}" user-xp="{{ user()->totalXP() }}"
+        :playlist-item-position="{{ $positionInPlaylist }}"
+        :playlist-item-id="{{ $playlistItem['id'] }}"
         user-access-level="{{ user()->access_level }}">
     </playlist-playback-wrapper>
 @endsection

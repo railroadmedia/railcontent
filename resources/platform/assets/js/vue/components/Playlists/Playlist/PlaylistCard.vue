@@ -28,6 +28,10 @@ const props = defineProps({
     cueVersion: {
         type: Boolean,
         default: false,
+    },
+    cardId: {
+        type: String,
+        default: ''
     }
 });
 
