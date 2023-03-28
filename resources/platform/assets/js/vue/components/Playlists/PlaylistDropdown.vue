@@ -84,8 +84,8 @@ const privateToggle = () => {
             if (response.status === 201) {
                 //show success message
                 window.shownotification({
-                    icon: `${props.data.private === 1 ? 'fa-lock-open' : 'fa-lock'}.`,
-                    text: `Your playlist is now ${props.data.private === 0 ? 'private' : 'public'}.`
+                    icon: state.isPrivate ? 'fa-lock' : 'fa-lock-open',
+                    text: `Your playlist is now ${ state.isPrivate ? 'private' : 'public' }.`
                 })
             }
         })
@@ -249,7 +249,9 @@ onMounted(() => {
                     <template v-if="item.name === 'Private'">
                         {{ state.isPrivate ? 'Private' : 'Public' }}
                         <div
-                            class="tw-relative tw-inline-flex tw-ml-auto tw-w-[27px] tw-h-[12px] tw-rounded-xl tw-bg-[#445F74]">
+                            class="tw-relative tw-inline-flex tw-ml-auto tw-w-[27px] tw-h-[12px] tw-rounded-xl"
+                            :class="state.isPrivate ? 'tw-bg-[#445F74]' : 'tw-bg-drumeo'"
+                        >
                             <div class="tw-rounded-full tw-h-[15px] tw-w-[15px] tw-bg-white tw-flex-inline tw-items-center tw-justify-center tw-drop-shadow-lg tw-absolute tw-top-[-1.5px] tw-transition"
                                 :class="state.isPrivate ? 'tw-left-[-1px]' : 'tw-right-[-1px]'">
                             </div>
