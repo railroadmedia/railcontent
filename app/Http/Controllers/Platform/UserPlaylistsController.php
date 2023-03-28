@@ -66,7 +66,7 @@ class UserPlaylistsController extends BaseController
             $limit,
             $page,
             $term,
-            $request->get('sortby_val', $request->get('sort', '-created_at'))
+            $request->get('sortby_val', $request->get('sort', 'most_recent'))
         );
 
         $playlistsNumber = $this->userPlaylistsService->countUserPlaylists(
@@ -177,7 +177,7 @@ class UserPlaylistsController extends BaseController
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
         ];
-$user = user();
+        $user = user();
         ContentRepository::$pullFutureContent = true;
 
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
@@ -187,6 +187,8 @@ $user = user();
         AddedToPrimaryPlaylistDecorator::$skip = true;
 
         $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
+        throw_if((!($playlistItem)), new NotFoundHttpException());
+
         $position = $playlistItem['position'];
         $page = ($playlistItem['position'] <= 20) ? 1 : (ceil(($playlistItem['position']) / 20));
         $request->merge(['page' => $page]);
@@ -203,7 +205,7 @@ $user = user();
 
         $otherItems = [];
         foreach ($playlistItems as $index=>$item) {
-            $otherItems[$index]['url'] = url()->route('platform.user.playlist-item', [
+            $playlistItems[$index]['url'] = $otherItems[$index]['url'] = url()->route('platform.user.playlist-item', [
                 'playlistId' => $playlistId,
                 'playlistItemId' => $item['user_playlist_item_id'],
             ]);
