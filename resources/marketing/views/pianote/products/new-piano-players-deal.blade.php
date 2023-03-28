@@ -160,7 +160,7 @@
         <div class="max-w-2xl lg:max-w-5xl mx-auto text-center text-white">
             <img class="h-12 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png" alt="pianote logo">
             <h3 class="font-extrabold">Join Pianote today and get 12 free bonuses!</h3>
-            <h5 class="uppercase my-8 text-yellow">Only @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} Headphones left!</h5>
+            <h5 class="uppercase my-8 text-yellow">Only @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} Headphones left!</h5>
             <div class="max-w-md mx-auto mb-10">
                 <img
                     src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/pianote-annual-card.jpg"
@@ -291,7 +291,7 @@
             </div>
             <h3 class="mb-8"><strong>ONLY <s class="opacity-60">${{ 240 }}</s> $197</strong></h3>
             <div class="w-2/3 mx-auto">
-                @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() > 0)
+                @if($products['pianote-headphones']->getPublicStockCount() > 0)
                     <a
                         href="/ecommerce/add-to-cart?locked=true&redirect=/order&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,pianote-headphones:1,pianote-practice-planner:1,poster-chords:1,poster-scales:1,the-power-of-chords:1,classical-piano:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1,piano-riffs-and-fills:1,piano-technique-made-easy:1,destupefy-your-left-hand:1,worship-piano:1,faster-fingers:1"
                         class="join pianote w-full">Claim your offer
