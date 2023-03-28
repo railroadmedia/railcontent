@@ -21497,6 +21497,12 @@ a:visited{
 .tw-top-\[-68px\]{
   top: -68px !important;
 }
+.tw-top-0{
+  top: 0px !important;
+}
+.tw-left-0{
+  left: 0px !important;
+}
 .tw-z-0{
   z-index: 0 !important;
 }
@@ -21535,6 +21541,12 @@ a:visited{
 }
 .tw-z-\[15\]{
   z-index: 15 !important;
+}
+.tw-z-30{
+  z-index: 30 !important;
+}
+.tw-z-10{
+  z-index: 10 !important;
 }
 .tw-order-1{
   order: 1 !important;
@@ -21970,6 +21982,9 @@ a:visited{
 .tw-ml-1\.5{
   margin-left: 0.375rem !important;
 }
+.tw-ml-\[10px\]{
+  margin-left: 10px !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22248,6 +22263,18 @@ a:visited{
 }
 .tw-h-52{
   height: 13rem !important;
+}
+.tw-h-\[37px\]{
+  height: 37px !important;
+}
+.tw-h-full{
+  height: 100% !important;
+}
+.tw-h-\[58px\]{
+  height: 58px !important;
+}
+.tw-h-1\/2{
+  height: 50% !important;
 }
 .tw-max-h-\[100vh\]{
   max-height: 100vh !important;
@@ -22570,6 +22597,15 @@ a:visited{
 }
 .tw-w-9\/12{
   width: 75% !important;
+}
+.tw-w-full{
+  width: 100% !important;
+}
+.tw-w-\[58px\]{
+  width: 58px !important;
+}
+.tw-w-1\/2{
+  width: 50% !important;
 }
 .tw-min-w-\[232px\]{
   min-width: 232px !important;
@@ -23097,6 +23133,9 @@ a:visited{
 .tw-rounded-none{
   border-radius: 0px !important;
 }
+.tw-rounded{
+  border-radius: 0.25rem !important;
+}
 .tw-rounded-t{
   border-top-left-radius: 0.25rem !important;
   border-top-right-radius: 0.25rem !important;
@@ -23112,6 +23151,10 @@ a:visited{
 .tw-rounded-t-lg{
   border-top-left-radius: 0.5rem !important;
   border-top-right-radius: 0.5rem !important;
+}
+.tw-rounded-t{
+  border-top-left-radius: 0.25rem !important;
+  border-top-right-radius: 0.25rem !important;
 }
 .tw-border-\[3px\]{
   border-width: 3px !important;
@@ -23566,6 +23609,25 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity)) !important;
 }
+.tw-bg-\[\#E6E7E9\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(230 231 233 / var(--tw-bg-opacity)) !important;
+}
+.tw-bg-\[\#F9F9F9\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(249 249 249 / var(--tw-bg-opacity)) !important;
+}
+.tw-bg-white{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+}
+.tw-bg-black\/70{
+  background-color: rgb(0 0 0 / 0.7) !important;
+}
+.tw-bg-\[\#3F3F46\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(63 63 70 / var(--tw-bg-opacity)) !important;
+}
 .tw-bg-opacity-75{
   --tw-bg-opacity: 0.75 !important;
 }
@@ -23671,6 +23733,10 @@ a:visited{
 .tw-object-left{
   -o-object-position: left !important;
      object-position: left !important;
+}
+.tw-object-center{
+  -o-object-position: center !important;
+     object-position: center !important;
 }
 .tw-p-4{
   padding: 1rem !important;
@@ -23943,6 +24009,22 @@ a:visited{
 .tw-px-\[64px\]{
   padding-left: 64px !important;
   padding-right: 64px !important;
+}
+.tw-px-6{
+  padding-left: 1.5rem !important;
+  padding-right: 1.5rem !important;
+}
+.tw-py-2{
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+}
+.tw-px-2{
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+}
+.tw-py-4{
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
 }
 .tw-pt-8{
   padding-top: 2rem !important;
@@ -24279,6 +24361,12 @@ a:visited{
 .tw-text-\[22px\]{
   font-size: 22px !important;
 }
+.tw-text-\[16px\]{
+  font-size: 16px !important;
+}
+.tw-text-\[14px\]{
+  font-size: 14px !important;
+}
 .tw-font-bold{
   font-weight: 700 !important;
 }
@@ -24296,6 +24384,12 @@ a:visited{
 }
 .tw-font-semibold{
   font-weight: 600 !important;
+}
+.tw-font-medium{
+  font-weight: 500 !important;
+}
+.tw-font-bold{
+  font-weight: 700 !important;
 }
 .tw-font-medium{
   font-weight: 500 !important;
@@ -24596,6 +24690,14 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(35 46 48 / var(--tw-text-opacity)) !important;
 }
+.tw-text-\[\#0D0D0D\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(13 13 13 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#7E9AB1\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(126 154 177 / var(--tw-text-opacity)) !important;
+}
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
           text-decoration-line: underline !important;
@@ -24633,6 +24735,9 @@ a:visited{
 }
 .tw-opacity-70{
   opacity: 0.7 !important;
+}
+.tw-opacity-0{
+  opacity: 0 !important;
 }
 .tw-shadow{
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !important;
@@ -24721,6 +24826,18 @@ a:visited{
 .tw-transition-none{
   transition-property: none !important;
 }
+.tw-transition-opacity{
+  transition-property: opacity !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
+}
+.tw-transition{
+  transition-property: color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter !important;
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
+}
 .tw-duration-300{
   transition-duration: 300ms !important;
 }
@@ -24732,6 +24849,9 @@ a:visited{
 }
 .tw-duration-200{
   transition-duration: 200ms !important;
+}
+.tw-duration-500{
+  transition-duration: 500ms !important;
 }
 .tw-ease-in-out{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -25276,6 +25396,26 @@ a:visited{
 .tw-dark .dark\:tw-bg-\[\#000c17\]\/80{
   background-color: rgb(0 12 23 / 0.8) !important;
 }
+.tw-dark .dark\:tw-bg-\[\#031d32\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(3 29 50 / var(--tw-bg-opacity)) !important;
+}
+.tw-dark .dark\:tw-bg-\[\#071826\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(7 24 38 / var(--tw-bg-opacity)) !important;
+}
+.tw-dark .dark\:tw-bg-\[\#00101D\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
+}
+.tw-dark .dark\:tw-bg-\[\#081825\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(8 24 37 / var(--tw-bg-opacity)) !important;
+}
+.tw-dark .dark\:tw-bg-\[\#445F74\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(68 95 116 / var(--tw-bg-opacity)) !important;
+}
 .tw-dark .dark\:tw-text-white{
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
@@ -25319,6 +25459,10 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#9ec0dc\]{
   --tw-text-opacity: 1 !important;
   color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
@@ -25551,8 +25695,17 @@ a:visited{
   .sm\:tw-table-cell{
     display: table-cell !important;
   }
+  .sm\:tw-table-cell{
+    display: table-cell !important;
+  }
   .sm\:tw-table-header-group{
     display: table-header-group !important;
+  }
+  .sm\:tw-table-header-group{
+    display: table-header-group !important;
+  }
+  .sm\:tw-hidden{
+    display: none !important;
   }
   .sm\:tw-hidden{
     display: none !important;
@@ -25702,6 +25855,10 @@ a:visited{
     padding-left: 3.5rem !important;
     padding-right: 3.5rem !important;
   }
+  .sm\:tw-px-6{
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
   .sm\:tw-pr-12{
     padding-right: 3rem !important;
   }
@@ -25725,6 +25882,9 @@ a:visited{
   }
   .sm\:tw-pl-4{
     padding-left: 1rem !important;
+  }
+  .sm\:tw-text-left{
+    text-align: left !important;
   }
   .sm\:tw-text-left{
     text-align: left !important;
