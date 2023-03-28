@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Listeners;
 
+use Carbon\Carbon;
 use Railroad\Railcontent\Events\PlaylistItemsUpdated;
 use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
 use Railroad\Railcontent\Services\ContentService;
@@ -39,7 +40,7 @@ class PlaylistListener
 
         $duration = $contents->sumFetched('fields.video.fields.length_in_seconds');
 
-        $this->userPlaylistsService->update($playlistItemsUpdated->playlistId, ['duration' => $duration]);
+        $this->userPlaylistsService->update($playlistItemsUpdated->playlistId, ['duration' => $duration, 'updated_at'=>Carbon::now()->toDateTimeString()]);
     }
 
 }
