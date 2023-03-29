@@ -267,7 +267,7 @@ onBeforeMount(() => {
             </div>
         </div>
 
-        <div class="related-lessons-section">
+        <div class="related-playlists-section">
             <!-- Playback Cue -->
             <div v-if="playlistItems.data && playlistItems.data.length" id="lessonInfo"
                 class="tw-flex tw-flex-row reverse tw-items-start">
@@ -278,8 +278,8 @@ onBeforeMount(() => {
                         :playlist-item-position="playlistItemPosition" />
                 </div>
             </div>
-            <!-- Related Lessons -->
-            <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
+            <!-- Related Playlists -->
+            <div v-if="relatedPlaylists.data && relatedPlaylists.data.length" id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
                 <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
                     <div class="tw-flex tw-flex-col tw-mb-5">
                         <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">

@@ -3,7 +3,6 @@ import { onBeforeMount, onMounted, inject, ref, reactive, computed } from 'vue';
 import PlaylistService from '../../../services/playlists.js';
 import PlaylistCard from './Playlist/PlaylistCard.vue';
 import { usePlaylistsStore } from '../../../stores/playlists';
-import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
 
 //Inject
 const token = inject('csrf_token');
@@ -29,8 +28,12 @@ const props = defineProps({
         default: ""
     },
     playlistItemId: {
-        type: String,
-        default: ""
+        type: [Number, String],
+        default: null
+    },
+    playlistItemPosition: {
+        type: [Number, String],
+        default: null
     },
     playlistId: {
         type: [String, Number],
@@ -54,22 +57,11 @@ const props = defineProps({
     }
 })
 
-//-----------Computed Props-----------//
-const activeItem = computed(() => {
-    //Get index of playlist item
-    const item = props.lessons.data.find((item) => { item.user_playlist_item_id === props.playlistItemId });
-    const itemIndex = props.lessons.data.indexOf(item);
-    console.log(itemIndex)
-    return itemIndex;
-})
-
 //-----------Refs-----------//
 const pageNumberTop = ref(1);
 const pageNumberBottom = ref(1);
 const preventReFetch = ref(false);
 const isLoading = ref(false);
-const loadedLessons = ref(props.lessons?.data ? props.lessons.data : []);
-const computedLessons = computed(() => loadedLessons.value)
 
 //-----------Reactive Data-----------//
 
@@ -96,7 +88,7 @@ const handleScroll = (e) => {
             PlaylistService.getPlaylistLessons(payload, token).then(response => {
                 isLoading.value = false;
                 if (response.data.results.length) {
-                    loadedLessons.value = [...response.data.results, ...loadedLessons.value]
+                    playlistsStore.lessons = [...response.data.results, ...playlistsStore.lessons]
                 }
             }).catch(() => {
                 window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
@@ -115,7 +107,7 @@ const handleScroll = (e) => {
             PlaylistService.getPlaylistLessons(payload, token).then(response => {
                 isLoading.value = false;
                 if (response.data.results.length) {
-                    loadedLessons.value = [...loadedLessons.value, ...response.data.results]
+                    playlistsStore.lessons = [...playlistsStore.lessons, ...response.data.results]
                 } else {
                     preventReFetch.value = true;
                 }
@@ -128,8 +120,8 @@ const handleScroll = (e) => {
 
 //-----------Lifecycle Hooks -----------//
 
-onBeforeMount(() => {
-    console.log(props.lessons.meta);
+onBeforeMount(() => {  
+    playlistsStore.lessons = props.lessons?.data ? props.lessons.data : [];
     pageNumberBottom.value = props.lessons.meta.page;
     pageNumberTop.value = props.lessons.meta.page;
 })
@@ -145,7 +137,7 @@ onBeforeMount(() => {
             </a>
             <!-- Cue Data -->
             <p class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1">
-                <span>{{ activeItem }}/{{ loadedLessons.length }}</span>
+                <span>{{ playlistItemPosition }}/{{ props.lessons?.meta?.totalResults }}</span>
                 <span class="tw-mx-1">•</span>
                 <span>{{ Math.floor(duration / 60) }} min</span>
             </p>
@@ -180,10 +172,10 @@ onBeforeMount(() => {
             </div>
         </div>
         <!-- Items -->
-        <div @scroll="handleScroll" v-if="loadedLessons.length" id="cue-scroll-container"
-            class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-overflow-y-auto tw-relative">
+        <div @scroll="handleScroll" v-if="playlistsStore.lessons.length" id="cue-scroll-container"
+            class="tw-w-full tw-flex tw-flex-col tw-h-[540px] tw-overflow-y-scroll tw-relative">
             <!-- Print Each Card -->
-            <playlist-card v-for="(lesson) in loadedLessons" :key="'playlist-card-cue-'+lesson.id" :lesson="lesson" :token="token"
+            <playlist-card v-for="(lesson) in playlistsStore.lessons" :key="'playlist-card-cue-'+lesson.id" :lesson="lesson" :token="token"
                 :brand="brand" :cue-version="true" />
             <!-- Skeleton Loader For Infinite Scroll -->
             <div v-if="isLoading && infiniteScroll" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">

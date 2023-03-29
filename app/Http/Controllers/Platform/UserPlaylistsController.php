@@ -147,7 +147,7 @@ class UserPlaylistsController extends BaseController
             $playlistItems[$index]['end_second'] = $item['end_second'] ?? null;
             $playlistItems[$index]['started'] = $item['started'] ?? false;
             $playlistItems[$index]['completed'] = $item['completed'] ?? false;
-            $playlistItems[$index]['thumbnail_url'] = $item['thumbnail_url'] ?? '';
+            $playlistItems[$index]['thumbnail_url'] =  $item->fetch('data.original_thumbnail_url', $item->fetch('data.thumbnail_url', $item['thumbnail_url'] ?? ''));
             $playlistItems[$index]['user_progress'] = $item['user_progress'] ?? '';
             $playlistItems[$index]['parent_title'] = $item['parent_title'] ?? '';
         }
@@ -240,6 +240,14 @@ class UserPlaylistsController extends BaseController
         }
 
         $content = $this->contentService->getById($playlistItem['id']);
+
+        if (empty($content)) {
+            // TODO: Replace with Upgrade to View page
+            return view('pages.no-access', [
+                "brand" => brand(),
+            ]);
+        }
+
         $content['user_playlist_item_position'] = $position;
 
         throw_if(empty($playlistItem), new NotFoundHttpException());
@@ -252,12 +260,7 @@ class UserPlaylistsController extends BaseController
         ContentRepository::$availableContentStatues = $oldStatuses;
         ContentRepository::$pullFutureContent = $oldFutureContent;
 
-        if (empty($content)) {
-            // TODO: Replace with Upgrade to View page
-            return view('pages.no-access', [
-                "brand" => brand(),
-            ]);
-        }
+
 
         $playlistItem =
             $this->vimeoVideoSourcesDecorator->decorate(new Collection([$content]))

@@ -39,11 +39,6 @@
             default: false, 
         }
     })
-    
-    //-----------Computed Props-----------//
-    const hasPlaylists = computed(() => {
-        return props.playlistCount && playlistsStore.playlists.length ? true : false;
-    })
 
     //-----------Refs-----------//
     const pageNumber = ref(1);

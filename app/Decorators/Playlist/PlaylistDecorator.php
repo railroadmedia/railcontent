@@ -59,11 +59,12 @@ class PlaylistDecorator extends ModeDecoratorBase
                                 $firstItem['type'] == 'song-tutorial-children' ||
                                 $firstItem['type'] == 'song');
                         $playlists[$index]['thumbnail_url'] = $firstItem->fetch(
-                            'data.original_thumbnail_url',
+                            'data.thumbnail_url',
+                            $firstItem->fetch(
                             ($firstItem->fetch('parent')) ?
                                 $firstItem->fetch('parent')
                                     ->fetch('data.original_thumbnail_url') : ''
-                        );
+                        ));
                     }
                 }
             } else {
