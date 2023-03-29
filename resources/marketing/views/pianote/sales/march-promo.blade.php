@@ -105,7 +105,6 @@
     x-data ='{
         soundslice : false,
         trailer : false,
-        promoTrailer : false,
         unbox : false,
         rolandTrailer : false
     }'
@@ -138,7 +137,7 @@
     @include('._partials.components.sticky-bar',[
         'link' => '#order',
         'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/anniversary/2023/logo.png',
-        'text' => 'SAVE 18% ON YOUR FIRST YEAR OF <br>LESSONS + GET $962 IN FREE BONUSES',
+        'text' => 'SAVE 18% ON YOUR FIRST YEAR OF <br>LESSONS + GET $812 IN FREE BONUSES',
     ])
 
     @php
@@ -203,12 +202,11 @@
                 </span>
             </p>
             <img
-                class="rounded-xl cursor-pointer transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/anniversary/2023/thumb.jpg"
+                class="rounded-xl transition-opacity opacity-0"
+                src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/anniversary/2023/thumb-no-play.jpg"
                 alt="Trailer Thumbnail"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                @click="promoTrailer = true"
             />
         </div>
     </header>
@@ -676,11 +674,6 @@
         'vimeo' => true,
     ])
 
-    @include('_partials.components.video-modal',[
-    'name' => 'promoTrailer',
-    'video' => '803663343',
-    'vimeo' => true,
-    ])
     @include('_partials.components.video-modal',[
         'name' => 'unbox',
         'video' => '774408046',
