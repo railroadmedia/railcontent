@@ -32,7 +32,7 @@
     const dropdownTarget = ref(null)
 
     //-----------Reactive Data-----------//
-    const state = reactive({ 
+    const state = reactive({
         dropdownOpen: false,
         dropdownTop: false,
         isPrivate: 1,
@@ -101,20 +101,22 @@
                 console.log('failed to like')
             });
     }
-    
+
+    //TODO: add unlike function
+
     //Handle Dropdown Trigger
     const dropdownTriggerHandler = event => {
         GetElementDistance(event.target);
         state.dropdownOpen = !state.dropdownOpen;
     }
-    
+
     //---------Lifecycle Methods---------//
 
     onBeforeMount(() => {
-        playlistsStore.setActivePlaylist(props.playlist) 
+        playlistsStore.setActivePlaylist(props.playlist)
         state.isLiked = props.playlist.is_liked_by_current_user;
         state.isPinned = props.playlist.pinned;
-        state.isPrivate = props.playlist.private; 
+        state.isPrivate = props.playlist.private;
     })
 </script>
 <template>
@@ -122,7 +124,7 @@
         :backgroundImage="playlistsStore.activePlaylist.thumbnail_url || 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg'"
         :blurBG="true"
     >
-        <template v-slot:content> 
+        <template v-slot:content>
             <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-w-full lg:tw-w-8/12">
                 <!-- Playlist thumbnail -->
                 <div class="tw-realtive tw-h-[198px] tw-w-[198px] tw-relative tw-rounded tw-shrink-0 tw-overflow-hidden tw-mb-[16px] lg:tw-mb-0">
@@ -153,7 +155,7 @@
                         </svg>
                     </div>
                     <!-- Pinned Icon -->
-                    <div class="tw-inline-flex tw-items-center tw-transition-colors tw-z-20 tw-absolute tw-top-3 tw-right-3" 
+                    <div class="tw-inline-flex tw-items-center tw-transition-colors tw-z-20 tw-absolute tw-top-3 tw-right-3"
                         :class="[`tw-text-${brand}`, { 'tw-opacity-0' : !playlistsStore.activePlaylist.pinned } ]"
                     >
                         <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto tw-hidden md:tw-flex" />
@@ -173,9 +175,9 @@
                         <h1 class="tw-capitalize tw-leading-none tw-mb-2">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.description }}</p>
                     </div>
-                    <a v-if="lessons.data.length" :href="playlistsStore.activePlaylist.playback_url" 
-                        class="tw-w-[50px] tw-inline-flex tw-transition" 
-                        :class="`tw-text-${brand} hover:tw-text-${brand}-600`" 
+                    <a v-if="lessons.data.length" :href="playlistsStore.activePlaylist.playback_url"
+                        class="tw-w-[50px] tw-inline-flex tw-transition"
+                        :class="`tw-text-${brand} hover:tw-text-${brand}-600`"
                         :title="`Go To Player`"
                     >
                         <i class="tw-text-[50px] fas fa-play-circle"></i>
@@ -183,33 +185,33 @@
                 </div>
             </div>
         </template>
-        <template v-slot:ctas> 
+        <template v-slot:ctas>
             <div class="tw-flex tw-items-center tw-justify-center tw ml-0 lg:tw-w-1/2 lg:tw-ml-auto lg:tw-w-4/12 tw-w-full tw-mt-4 lg:tw-justify-end">
                 <!--Share-->
-                <button v-if="!state.isPrivate" class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]" 
-                        @click.prevent="sharePlaylist()" 
+                <button v-if="!state.isPrivate" class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]"
+                        @click.prevent="sharePlaylist()"
                 >
-                    <musora-icon icon-name="share" class="tw-mb-1" />       
+                    <musora-icon icon-name="share" class="tw-mb-1" />
                     <span class="tw-uppercase tw-font-bebas-neue">Share</span>
                 </button>
                 <!--Like-->
                 <button class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]"
-                        @click.prevent="likePlaylist()" 
+                        @click.prevent="likePlaylist()"
                 >
-                    <musora-icon :icon-name="state.isLiked ? 'thumb-like-filled' : 'thumb-like'" class="tw-mb-1" />       
-                    <span class="tw-uppercase tw-font-bebas-neue">Like</span>
+                    <musora-icon :icon-name="state.isLiked ? 'thumb-like-filled' : 'thumb-like'" class="tw-mb-1" />
+                    <span class="tw-uppercase tw-font-bebas-neue">{{ state.isLiked ? 'Liked' : 'Like'}}</span>
                 </button>
-                <!--More-->                
-                <button class="tw-relative  tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]" 
+                <!--More-->
+                <button class="tw-relative  tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]"
                         :class="props.isListView ? 'md:tw-rotate-90' : ''"
                         title="Playlist Options"
-                        @click.prevent="dropdownTriggerHandler($event)" 
+                        @click.prevent="dropdownTriggerHandler($event)"
                         v-click-outside="()=>{ state.dropdownOpen = false }"
                 >
                     <div class="tw-relative tw-w-[32px] tw-flex tw-justify-center tw-items-center tw-h-[35px] tw-mb-1 tw-text-center">
                         <svg class="tw-rotate-90" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12.5 5.20768L12.5 5.2181M12.5 12.4993L12.5 12.5098M12.5 19.791L12.5 19.8014M12.5 6.24935C11.9247 6.24935 11.4583 5.78298 11.4583 5.20768C11.4583 4.63239 11.9247 4.16602 12.5 4.16602C13.0753 4.16602 13.5417 4.63239 13.5417 5.20768C13.5417 5.78298 13.0753 6.24935 12.5 6.24935ZM12.5 13.541C11.9247 13.541 11.4583 13.0746 11.4583 12.4993C11.4583 11.9241 11.9247 11.4577 12.5 11.4577C13.0753 11.4577 13.5417 11.9241 13.5417 12.4993C13.5417 13.0746 13.0753 13.541 12.5 13.541ZM12.5 20.8327C11.9247 20.8327 11.4583 20.3663 11.4583 19.791C11.4583 19.2157 11.9247 18.7493 12.5 18.7493C13.0753 18.7493 13.5417 19.2157 13.5417 19.791C13.5417 20.3663 13.0753 20.8327 12.5 20.8327Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg> 
+                        </svg>
                         <!-- Dropdown-->
                         <PlaylistDropdown
                             :lessons-length="lessons.data.length"
@@ -224,10 +226,10 @@
                             @closeDropdown="state.dropdownOpen = false"
                             @pinItem="playlistsStore.activePlaylist.pinned = $event"
                             @makePublic="(val) => state.isPrivate = val"
-                        />  
-                    </div>  
+                        />
+                    </div>
                     <span class="tw-uppercase tw-font-bebas-neue">More</span>
-                </button>  
+                </button>
             </div>
         </template>
     </platform-header>

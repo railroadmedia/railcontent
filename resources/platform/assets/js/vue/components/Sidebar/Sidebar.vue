@@ -23,10 +23,6 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
-  pinnedPlaylists: {
-    type: Array,
-    default: []
-  },
   forceSidebarHidden: {
     type: Boolean,
     default: false,
@@ -76,8 +72,8 @@ onBeforeMount(() => {
              class="tw-text-sm tw-h-[42px] tw-mb-[5px] tw-flex tw-items-center tw-pl-1 tw-border-l-4 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
              :class="[activePath(link.path) ? `tw-font-bold ${textColor[brand]} ${borderColor[brand]}` : 'tw-border-transparent tw-text-[#00101D] dark:tw-text-white']"
           >
-            <musora-icon 
-              :icon-name="activePath(link.path) ? `${link.icon}-filled` : `${link.icon}`" 
+            <musora-icon
+              :icon-name="activePath(link.path) ? `${link.icon}-filled` : `${link.icon}`"
               class="tw-w-[24px] tw-mx-4"
             />
             <span class="tw-transition tw-whitespace-nowrap" :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']">
@@ -96,11 +92,10 @@ onBeforeMount(() => {
     </section>
 
     <!-- Playlists Section -->
-    <sidebar-playlists 
-      :isSidebarCollapsed="isSidebarCollapsed" 
-      :pinnedPlaylists="pinnedPlaylists"
-      :isActivePath="activePath(`/${brand}/playlists`)" 
-      :brand="brand" 
+    <sidebar-playlists
+      :isSidebarCollapsed="isSidebarCollapsed"
+      :isActivePath="activePath(`/${brand}/playlists`)"
+      :brand="brand"
       :userId="userId"
     >
     </sidebar-playlists>

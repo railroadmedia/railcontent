@@ -165,7 +165,7 @@ onBeforeMount(() => {
             class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-text-[#0D0D0D] dark:tw-text-white"
             :class="[{ 'tw-grayscale': needAccess }, !cueVersion ? 'tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)]' : 'tw-w-full']">
 
-            <div class="tw-inline-flex tw-items-center tw-font-bold tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity"
+            <div class="tw-inline-flex tw-items-center tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity"
                 :class="{ 'tw-opacity-0': playlistsStore.sortingPlaylist }">
                 <template v-if="!cueVersion">{{ props.index + 1 }}</template>
                 <template v-else><i class="fas fa-play"></i></template>
@@ -265,7 +265,7 @@ onBeforeMount(() => {
                         <span>{{ artist }}</span>
                     </template>
                     <template v-else-if="lesson.instructors && lesson.instructors.length">
-                        <span v-for="(instructor, i) in lesson.instructors" class="tw-whitespace-nowrap tw-truncate"
+                        <span v-for="(instructor, i) in lesson.instructors" class="tw-whitespace-nowrap tw-truncate tw-uppercase"
                             :key="i">
                             {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
                         </span>
@@ -287,7 +287,7 @@ onBeforeMount(() => {
                     </span>
                 </div>
                 <!-- Lesson Time -->
-                <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px]"
+                <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px] tw-text-[14px]"
                     :title="lesson.duration">
                     <span>{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>
                 </div>

@@ -36,10 +36,10 @@ const emit = defineEmits(['onActionClick', 'onScroll']);
             <tbody class="tw-text-[14px]">
                 <tr v-for="([firstCol, ...cols], index) in rows" :key="index"
                     :class="`${index % 2 === 0 ? 'tw-bg-[#F9F9F9] dark:tw-bg-[#071826]' : 'dark:tw-bg-[#00101D]'}`">
-                    <th scope="row" class="tw-px-2 sm:tw-px-6 tw-py-4 tw-font-medium tw-whitespace-nowrap dark:text-white">
+                    <th scope="row" class="tw-px-2 sm:tw-px-5 tw-py-2 tw-font-medium tw-whitespace-nowrap dark:text-white">
                         <div class="tw-flex tw-flex-row tw-w-full tw-h-full tw-items-center">
                             <div
-                                class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square tw-h-[48px] tw-w-[48px] tw-rounded tw-shrink-0">
+                                class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square tw-h-[58px] tw-w-[58px] tw-rounded tw-shrink-0">
                                 <!-- Image Conatiner -->
                                 <div class="tw-relative tw-w-full tw-h-full" v-if="firstCol.thumb">
                                     <img :src="`https://musora.com/cdn-cgi/image/width=200/${firstCol.thumb}`"
@@ -82,7 +82,7 @@ const emit = defineEmits(['onActionClick', 'onScroll']);
                             </div>
                         </div>
                     </th>
-                    <td v-for="(col, i) in cols" :key="`table-row-${i}`" :class="`tw-px-2 sm:tw-px-6 tw-py-4 sm:tw-table-cell sm:tw-text-left tw-text-right ${!col.showActionSlot && col.content && 'tw-hidden'}`">
+                    <td v-for="(col, i) in cols" :key="`table-row-${i}`" :class="`tw-px-2 sm:tw-px-5 tw-py-2 sm:tw-table-cell sm:tw-text-left tw-text-right ${!col.showActionSlot && col.content && 'tw-hidden'}`">
                         <span v-if="!col.showActionSlot && col.content">{{ col.content }}</span>
                         <button v-if="col.showActionSlot" @click="() => emit('onActionClick', col.actionPayload, index)">
                             <slot :tableIndex="index" :actionPayload="col.actionPayload" name="actionContent"></slot>
