@@ -145,7 +145,7 @@ onBeforeMount(()=> {
                     >
                         <a :href="item.url"
                             class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-h-[42px] tw-items-center">
-                            <span class="tw-min-w-0 tw-truncate tw-capitalize tw-text-sm group-hover:tw-underline">{{ item.name }}</span>
+                            <span class="tw-min-w-0 group-hover:tw-max-w-[140px] tw-truncate tw-capitalize tw-text-sm group-hover:tw-underline">{{ item.name }}</span>
                         </a>
                         <div class="md:tw-hidden group-hover:tw-inline-flex tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center" :class="`tw-text-${brand}`">
                             <button title="Unpin Playlist" @click="unpinPlaylist(item, brand)">
