@@ -13,6 +13,7 @@
     <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.css" />
+    <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
 
@@ -25,6 +26,9 @@
 @section('global-body')
     {{-- Notifications Container --}}
     <div id="notifications-container"></div>
+
+    {{-- Confirmation Modal Container --}}
+    <div id="confirmation-container"></div>
 
     <nav id="nav" class="top-bar row expanded">
         <div class="logo">

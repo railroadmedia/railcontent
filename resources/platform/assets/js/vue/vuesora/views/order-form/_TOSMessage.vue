@@ -1,11 +1,11 @@
 <template>
     <section>
-        <!-- Test Data 
+        <!-- Test Data
             <p class="tiny">Has Membership Sku: {{hasMembershipSku}} </p>
             <p class="tiny"> Has Lifetime Sku: {{ hasLifetimeMembershipSku }}</p>
             <p class="tiny">Has Interval Type: {{ cartContainsSubscription }}</p>
             <p class="tiny"> Has Interval Count: {{ containsSubscriptionIntervalCount }}</p>
-            <p class="tiny">Has Digital Item: {{ containsDigitalItem }} </p> 
+            <p class="tiny">Has Digital Item: {{ containsDigitalItem }} </p>
         -->
 
         <p class="tiny disclaimer mt-1 text-grey-3">
@@ -15,7 +15,7 @@
                 By completing your order you agree to our <a href="/terms-of-service">Terms Of Service</a>,
                 <a href="/privacy-policy">Privacy Statement</a>, and that <span class="tw-capitalize">{{ brand }}</span> will automatically continue your
                 membership and charge the membership fee (currently ${{ subPrice }}) to your payment plan on
-                an {{ subInterval }} basis until you cancel. You can cancel your subscription at any time by going
+                a {{ subInterval }} basis until you cancel. You can cancel your subscription at any time by going
                 to Settings, Account Details, and then clicking the Cancel Membership button. You have a 90-day
                 guarantee on your subscription to make sure you’re happy with your lessons experience.
             </template>
@@ -35,7 +35,7 @@
                 and <a href="/privacy-policy">Privacy Statement</a>. As a trial user, you will have access for {{ trialDuration }} days. After
                 that, you will have the option to continue your membership at your own discretion
                 by choosing one of our membership service agreements.
-            </template>    
+            </template>
 
             <!-- Else If Pack -->
             <template v-else-if="isPack">
@@ -45,11 +45,11 @@
                 digital product(s). You have a 90-day guarantee on your purchase to make sure you’re happy with your lessons experience.
             </template>
 
-            <!-- Else Fallback --> 
+            <!-- Else Fallback -->
             <template v-else>
                 <!--<span v-if="totalPriceAfterDiscounts <= 0">Your credit card will not be charged for this transaction.</span>-->
                 By completing your order you agree to our <a href="/privacy-policy">Privacy Statement</a>.
-            </template>   
+            </template>
 
         </p>
     </section>
@@ -66,7 +66,7 @@ export default {
             trialDuration: 'the specified number of',
         }
     },
-    
+
     props: {
         brand: {
             type: String,
@@ -124,7 +124,7 @@ export default {
             return this.cartData.items.some(item => this.lifetimeMembershipProductSkus.includes(item.sku));
         },
 
-        
+
 
         //is new recurring subscription --> boolean
         isNewRecurringSub() {
@@ -152,7 +152,7 @@ export default {
         if(this.hasMembershipSku) {
             this.cartData.items.forEach((item) => {
                 this.allMembershipProductSkus.forEach((sku) => {
-                    if( item.sku === sku && item.subscription_renewal_price !== null)  
+                    if( item.sku === sku && item.subscription_renewal_price !== null)
                         this.subPrice = item.subscription_renewal_price.toString();
                 })
             });
@@ -162,7 +162,7 @@ export default {
         if(this.hasMembershipSku) {
             this.cartData.items.forEach((item) => {
                 this.allMembershipProductSkus.forEach((sku) => {
-                    if( item.sku === sku && item.subscription_interval_type !== null)  
+                    if( item.sku === sku && item.subscription_interval_type !== null)
                         this.subInterval = item.subscription_interval_type.toString() + 'ly';
                 })
             });
@@ -179,7 +179,7 @@ export default {
     }
 }
 </script>
-<style lang="scss"> 
+<style lang="scss">
     //Temporary until we include tailwind on all checkout pages
     .tw-capitalize {
         text-transform: capitalize;

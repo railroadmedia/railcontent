@@ -90,7 +90,7 @@ return [
                 [
                     'type' => 'PST',
                     'rate' => 0.07,
-                    'applies_to_shipping_costs' => false,
+                    'applies_to_shipping_costs' => true,
                 ],
             ],
             'manitoba' => [
@@ -368,12 +368,12 @@ return [
     'apple_store_products_map' => [
 
         // live products
-        'drumeo_app_1_year_member' => 'DLM-1-year',
-        'drumeo_app_monthly_member' => 'DLM-1-month',
+        'drumeo_app_1_year_member' => 'DLM-Trial-Annual-7-Day',
+        'drumeo_app_monthly_member' => 'DLM-Trial-1-month',
 
         //2021 products
-        'drumeo_app_1_year_2021' => 'DLM-1-year',
-        'drumeo_app_1_month_2021' => 'DLM-1-month',
+        'drumeo_app_1_year_2021' => 'DLM-Trial-Annual-7-Day',
+        'drumeo_app_1_month_2021' => 'DLM-Trial-1-month',
 
         'pianote_app_1_year_membership' => 'PIANOTE-MEMBERSHIP-1-YEAR',
         'pianote_app_1_month_membership' => 'PIANOTE-MEMBERSHIP-1-MONTH',
@@ -412,8 +412,8 @@ return [
         'test_6month' => '6-MONTH-MEMBERSHIP',
 
         //musora products
-        'musora_app_monthly_member' => 'DLM-1-month',
-        'musora_app_1_year_member' => 'DLM-1-year',
+        'musora_app_monthly_member' => 'DLM-Trial-1-month',
+        'musora_app_1_year_member' => 'DLM-Trial-Annual-7-Day',
     ],
 
     'google_store_products_map' => [

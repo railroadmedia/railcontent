@@ -855,7 +855,13 @@ a {
             }
 
             &.tiktok {
+                background: #000;
                 border-color: #25f4ee;
+            }
+
+            &.podcast {
+                background: linear-gradient(180deg, #d36cfb, #8630c2);
+                border-color: #a945e3;
             }
         }
     }
