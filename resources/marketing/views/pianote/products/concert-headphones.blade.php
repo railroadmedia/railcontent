@@ -97,12 +97,12 @@
         "cartVersion" => true
     ])
     @if(!empty($memberVersion))
-        <div class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-50 fixed" style="background: linear-gradient(180deg, #FFAC00 0%, #FF7A00 100%);">
-            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-none sm:leading-none">
-                SAVE 21% ON PIANOTE HEADPHONES | MEMBERS-ONLY DISCOUNT
-            </p>
-        </div>
-        <div class="w-full block h-7 sm:h-8"></div>
+{{--        <div class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-50 fixed" style="background: linear-gradient(180deg, #FFAC00 0%, #FF7A00 100%);">--}}
+{{--            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-none sm:leading-none">--}}
+{{--                SAVE 21% ON PIANOTE HEADPHONES | MEMBERS-ONLY DISCOUNT--}}
+{{--            </p>--}}
+{{--        </div>--}}
+{{--        <div class="w-full block h-7 sm:h-8"></div>--}}
     @endif
     <section class="py-4 md:py-10 bg-center bg-cover bg-no-repeat header-bg bg-black">
         <div class="max-w-md md:max-w-2xl mx-auto text-center px-2 md:px-0">
@@ -110,7 +110,8 @@
             <h6 class="text-yellow italic font-bold">Enhance your playing experience.</h6>
             <i data-open="trailer" class="fas fa-play play-button autoplay-video text-white smaller my-80 mb-10"></i>
             <br>
-            <a class="join w-full" href="#customize-anchor">Grab your pair</a>
+{{--            <a class="join w-full" href="#customize-anchor">Grab your pair</a>--}}
+            <a class="join sold-out w-full">Sold Out</a>
             <h4 class="text-white font-extrabold my-4">
                 Only
                 @if((floatval($productPrices['pianote-headphones']->price) -$discountedPrice) > 0)
@@ -118,7 +119,7 @@
                 @endif
                 ${{$discountedPrice }}
             </h4>
-            <p class="text-yellow italic font-bold leading-tight">ONLY @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} HEADPHONES LEFT!</p>
+{{--            <p class="text-yellow italic font-bold leading-tight">ONLY @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} HEADPHONES LEFT!</p>--}}
 
         </div>
     </section>
@@ -263,16 +264,16 @@
     <section class="py-12 md:py-20 text-center text-white" style="background: linear-gradient(180deg, #010101 0%, #330606 43.19%)">
         <img class="h-16 md:h-20 mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/concert-headphones/logo-promo.png" alt="headphone logo">
         <p class="text-yellow mb-4 italic font-bold">Enhance your playing experience.</p>
-        <p>ONLY @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} HEADPHONES LEFT!</p>
+{{--        <p>ONLY @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} HEADPHONES LEFT!</p>--}}
         <div class="flex flex-wrap justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-7 mx-auto text-center">
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <a class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group"
 
-                    @if(!empty($memberVersion))
-                        href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'false', 'promo-code' => 'members-special']) }}"
-                    @else
-                        href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"
-                    @endif
+{{--                    @if(!empty($memberVersion))--}}
+{{--                        href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'false', 'promo-code' => 'members-special']) }}"--}}
+{{--                    @else--}}
+{{--                        href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['pianote-headphones' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"--}}
+{{--                    @endif--}}
                 >
                     <p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl font-extrabold uppercase" style="background: linear-gradient(180deg, #F51A30 0%, #9A1120 64.29%);">
                         LAUNCH SPECIAL
@@ -290,7 +291,8 @@
                             @endif
                         </h1>
 
-                        <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Grab your pair</div>
+{{--                        <div class="join smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Grab your pair</div>--}}
+                        <div class="join sold-out smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Sold Out</div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
                         <p class="mb-1">Pianote Concert Series Heaphones</p>
