@@ -101,12 +101,14 @@ class MigrateUserPlaylistToV2 extends Command
             $query->orderBy('id', 'asc')
                 ->chunk(5000,
                     function (Collection $rows) use ($dbConnection, &$parents, &$total, &$migratedPlaylistIds) {
-                        $migratedItems = 0;
+
+
                         foreach ($rows as $row) {
                             $itemsOrdered = [];
                             $newItems = [];
                             $shouldBeRemoved = [];
                             $index = 1;
+                            $migratedItems = 0;
 
                             $playlistsIds = [$row->id];
                             $items =
@@ -118,7 +120,7 @@ class MigrateUserPlaylistToV2 extends Command
                                         'railcontent_content.slug',
                                         'railcontent_user_playlist_content.*'
                                     )
-                                    ->leftJoin(
+                                    ->join(
                                         'railcontent_content',
                                         'railcontent_content.id',
                                         '=',
@@ -184,7 +186,7 @@ class MigrateUserPlaylistToV2 extends Command
                                                 'brand' => $row->brand,
                                                 'type' => 'user-playlist',
                                                 'user_id' => $row->user_id,
-                                                'name' => 'My list-'.$index,
+                                                'name' => 'My list - '.$index,
                                                 'created_at' => $row->created_at,
                                                 'migrated' => 1,
                                             ];
@@ -211,7 +213,7 @@ class MigrateUserPlaylistToV2 extends Command
                                                 'brand' => $row->brand,
                                                 'type' => 'user-playlist',
                                                 'user_id' => $row->user_id,
-                                                'name' => 'My list-'.$index,
+                                                'name' => 'My list - '.$index,
                                                 'created_at' => $row->created_at,
                                                 'migrated' => 1,
                                             ];
@@ -241,27 +243,28 @@ class MigrateUserPlaylistToV2 extends Command
                                                 ->where('parent_id', '=', $item->content_id)
                                                 ->get();
                                         }
-                                        if (($migratedItems + count($parents[$item->content_id])) >=
-                                            (config('railcontent.playlist_items_limit', 300))) {
-                                            $position = 1;
-                                            $migratedItems = 0;
-                                            $insertData = [
-                                                'brand' => $row->brand,
-                                                'type' => 'user-playlist',
-                                                'user_id' => $row->user_id,
-                                                'name' => 'My list-'.$index,
-                                                'created_at' => $row->created_at,
-                                                'migrated' => 1,
-                                            ];
-                                            $playlistId =
-                                                $dbConnection->table('railcontent_user_playlists')
-                                                    ->insertGetId($insertData);
-                                            $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
-                                            $index++;
-                                            $playlistsIds[] = $playlistId;
-                                        }
-                                        $item->user_playlist_id = $playlistId ?? $item->user_playlist_id;
+
                                         foreach ($parents[$item->content_id] as $lesson) {
+                                            if (($migratedItems + 1) >=
+                                                (config('railcontent.playlist_items_limit', 300))) {
+                                                $position = 1;
+                                                $migratedItems = 0;
+                                                $insertData = [
+                                                    'brand' => $row->brand,
+                                                    'type' => 'user-playlist',
+                                                    'user_id' => $row->user_id,
+                                                    'name' => 'My list - '.$index,
+                                                    'created_at' => $row->created_at,
+                                                    'migrated' => 1,
+                                                ];
+                                                $playlistId =
+                                                    $dbConnection->table('railcontent_user_playlists')
+                                                        ->insertGetId($insertData);
+                                                $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
+                                                $index++;
+                                                $playlistsIds[] = $playlistId;
+                                                       }
+                                            $item->user_playlist_id = $playlistId ?? $item->user_playlist_id;
                                             $newItems[] = [
                                                 'content_id' => $lesson->child_id,
                                                 'user_playlist_id' => $item->user_playlist_id,
@@ -271,7 +274,7 @@ class MigrateUserPlaylistToV2 extends Command
                                             ];
                                             $position++;
                                             $migratedItems++;
-                                        }
+                                          }
 
                                         $shouldBeRemoved[] = $item->content_id;
                                     } elseif (($item->type == 'learning-path-level') ||
@@ -294,27 +297,28 @@ class MigrateUserPlaylistToV2 extends Command
                                                     ->orderBy('ch_2.child_position', 'asc')
                                                     ->get();
                                         }
-                                        if (($migratedItems + count($parents[$item->content_id])) >=
-                                            (config('railcontent.playlist_items_limit', 300))) {
-                                            $position = 1;
-                                            $migratedItems = 0;
-                                            $insertData = [
-                                                'brand' => $row->brand,
-                                                'type' => 'user-playlist',
-                                                'user_id' => $row->user_id,
-                                                'name' => 'My list-'.$index,
-                                                'created_at' => $row->created_at,
-                                                'migrated' => 1,
-                                            ];
-                                            $playlistId =
-                                                $dbConnection->table('railcontent_user_playlists')
-                                                    ->insertGetId($insertData);
-                                            $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
-                                            $index++;
-                                            $playlistsIds[] = $playlistId;
-                                        }
-                                        $item->user_playlist_id = $playlistId ?? $item->user_playlist_id;
+
                                         foreach ($parents[$item->content_id] as $lesson) {
+                                            if (($migratedItems + 1) >=
+                                                (config('railcontent.playlist_items_limit', 300))) {
+                                                $position = 1;
+                                                $migratedItems = 0;
+                                                $insertData = [
+                                                    'brand' => $row->brand,
+                                                    'type' => 'user-playlist',
+                                                    'user_id' => $row->user_id,
+                                                    'name' => 'My list - '.$index,
+                                                    'created_at' => $row->created_at,
+                                                    'migrated' => 1,
+                                                ];
+                                                $playlistId =
+                                                    $dbConnection->table('railcontent_user_playlists')
+                                                        ->insertGetId($insertData);
+                                                $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
+                                                $index++;
+                                                $playlistsIds[] = $playlistId;
+                                            }
+                                            $item->user_playlist_id = $playlistId ?? $item->user_playlist_id;
                                             $newItems[] = [
                                                 'content_id' => $lesson->child_id,
                                                 'user_playlist_id' => $item->user_playlist_id,
@@ -322,6 +326,7 @@ class MigrateUserPlaylistToV2 extends Command
                                                 'created_at' => $item->created_at,
                                                 'extra_data' => null,
                                             ];
+
                                             $position++;
                                             $migratedItems++;
                                         }
@@ -349,27 +354,28 @@ class MigrateUserPlaylistToV2 extends Command
                                                     ->orderBy('ch_3.child_position', 'asc')
                                                     ->get();
                                         }
-                                        if (($migratedItems + count($parents[$item->content_id])) >=
-                                            (config('railcontent.playlist_items_limit', 300))) {
-                                            $position = 1;
-                                            $migratedItems = 0;
-                                            $insertData = [
-                                                'brand' => $row->brand,
-                                                'type' => 'user-playlist',
-                                                'user_id' => $row->user_id,
-                                                'name' => 'My list-'.$index,
-                                                'created_at' => $row->created_at,
-                                                'migrated' => 1,
-                                            ];
-                                            $playlistId =
-                                                $dbConnection->table('railcontent_user_playlists')
-                                                    ->insertGetId($insertData);
-                                            $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
-                                            $index++;
-                                            $playlistsIds[] = $playlistId;
-                                        }
-                                        $item->user_playlist_id = $playlistId ?? $item->user_playlist_id;
+
                                         foreach ($parents[$item->content_id] as $lesson) {
+                                            if (($migratedItems + 1) >=
+                                                (config('railcontent.playlist_items_limit', 300))) {
+                                                $position = 1;
+                                                $migratedItems = 0;
+                                                $insertData = [
+                                                    'brand' => $row->brand,
+                                                    'type' => 'user-playlist',
+                                                    'user_id' => $row->user_id,
+                                                    'name' => 'My list - '.$index,
+                                                    'created_at' => $row->created_at,
+                                                    'migrated' => 1,
+                                                ];
+                                                $playlistId =
+                                                    $dbConnection->table('railcontent_user_playlists')
+                                                        ->insertGetId($insertData);
+                                                $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
+                                                $index++;
+                                                $playlistsIds[] = $playlistId;
+                                            }
+                                            $item->user_playlist_id = $playlistId ?? $item->user_playlist_id;
                                             $newItems[] = [
                                                 'content_id' => $lesson->child_id,
                                                 'user_playlist_id' => $item->user_playlist_id,
@@ -377,6 +383,7 @@ class MigrateUserPlaylistToV2 extends Command
                                                 'created_at' => $item->created_at,
                                                 'extra_data' => null,
                                             ];
+
                                             $position++;
                                             $migratedItems++;
                                         }
@@ -476,19 +483,19 @@ class MigrateUserPlaylistToV2 extends Command
                                         $sql,
                                         config('railcontent.table_prefix').'user_playlists',
                                         $duration->duration ?? 0,
-                                        'My List-'.($key + 1),
+                                        'My List - '.($key + 1),
                                         $migrated
                                     );
                                     $dbConnection->statement($statement);
                                 }
                                 $migratedPlaylistIds[] = $row->id;
                             }
-                            if (isset($firstMigratedItemId) && ($firstMigratedItemId > 1)) {
-                                $dbConnection->table(config('railcontent.table_prefix').'user_playlist_content')
-                                    ->where('id', '>=', $firstMigratedItemId)
-                                    ->where('user_playlist_id', '=', $row->id)
-                                    ->delete();
-                            }
+//                            if (isset($firstMigratedItemId) && ($firstMigratedItemId > 1)) {
+//                                $dbConnection->table(config('railcontent.table_prefix').'user_playlist_content')
+//                                    ->where('id', '>=', $firstMigratedItemId)
+//                                    ->where('user_playlist_id', '=', $row->id)
+//                                    ->delete();
+//                            }
                         }
 
                         $total = $total + count($rows);
@@ -585,6 +592,20 @@ class MigrateUserPlaylistToV2 extends Command
             'Deleted '.
             $emptyPlaylists.
             ' empty playlists '.
+            Carbon::now()
+                ->toDateTimeString()
+        );
+
+        //delete items with content_id = 0 from playlist
+        $wrongContent =
+            $dbConnection->table(config('railcontent.table_prefix').'user_playlist_content')
+                ->where('railcontent_user_playlist_content.content_id', '=', 0)
+                ->delete();
+
+        $this->info(
+            'Deleted '.
+            $wrongContent.
+            ' items with content_id = 0 '.
             Carbon::now()
                 ->toDateTimeString()
         );
