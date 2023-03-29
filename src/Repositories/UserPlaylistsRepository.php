@@ -60,10 +60,10 @@ class UserPlaylistsRepository extends RepositoryBase
                                 'c.position',
                                 '=',
                                 \DB::raw(
-                                    '(select min(position) from '.
+                                    '(select position from '.
                                     config('railcontent.table_prefix').
                                     'user_playlist_content'.
-                                    ' where user_playlist_id = c.user_playlist_id)'
+                                    ' where user_playlist_id = c.user_playlist_id order by position asc limit 1)'
                                 )
                             );
                     }
@@ -87,6 +87,9 @@ class UserPlaylistsRepository extends RepositoryBase
 
         if (!in_array($orderByColumn, ['name', 'id', 'created_at', 'last_progress','most_recent'])) {
             $orderByColumn = 'id';
+        }
+        if($orderByColumn == 'name'){
+            $query =  $query->orderByRaw(" name asc");
         }
         if($orderByColumn == 'most_recent'){
             $query =
