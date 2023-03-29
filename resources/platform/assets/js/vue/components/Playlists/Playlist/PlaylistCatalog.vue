@@ -33,10 +33,10 @@
         limit: {
             type: Number,
             default: 20,
-        }, 
+        },
         isCueCatalog: {
-            type: Boolean, 
-            default: false, 
+            type: Boolean,
+            default: false,
         }
     })
 
@@ -45,7 +45,7 @@
     const preventReFetch = ref(false);
 
     //-----------Reactive Data-----------//
-    const state = reactive({ 
+    const state = reactive({
         startID: 0,
         startPosition: 0,
         endPosition: 0,
@@ -65,9 +65,9 @@
         //Update each item in temp array
         state.newSortPositions.forEach(lesson => {
             //Then send update item request
-            PlaylistService.updatePlaylistItem({ 
-                user_playlist_item_id: lesson.id, 
-                position: lesson.position 
+            PlaylistService.updatePlaylistItem({
+                user_playlist_item_id: lesson.id,
+                position: lesson.position
             }, token)
         });
         //show success message
@@ -105,6 +105,7 @@
 
     //Handle Drop Event
     const handleDrop = (event, position) => {
+        console.log('dropped', props.lessons.data)
         // console.log(state.startID, position)
         if(playlistsStore.sortingPlaylist) {
             event.target.classList.remove('tw-border-b');
@@ -122,18 +123,9 @@
     }
 
     //Vertical Scroll
-    const VerticalMaxed = () => { 
+    const VerticalMaxed = () => {
         return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
     }
-
-    //-------------Watchers-------------//
-
-    watch(() => playlistsStore.sortingPlaylist, (isSorting) => {
-        if(isSorting) {
-            initialLessonsArray = playlistsStore.lessons;
-            // console.log('initialArray', initialLessonsArray)
-        }
-    });
 
     //---------Lifecycle Methods---------//
 
@@ -155,7 +147,7 @@
                     } else {
                         return false
                     }
-                } 
+                }
             }
         })
 
@@ -187,29 +179,30 @@
         }
     })
 
-    onBeforeMount(() => {    
-        playlistsStore.lessons = props.lessons.data;
+    onBeforeMount(() => {
+        playlistsStore.lessons = [...props.lessons.data];
+        initialLessonsArray = props.lessons.data;
     });
 </script>
 <template>
     <main class="tw-w-full ">
 
-        <div class="tw-w-full tw-transition-all dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-overflow-hidden" 
+        <div class="tw-w-full tw-transition-all dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-overflow-hidden"
              :class="playlistsStore.sortingPlaylist ? 'tw-max-h-[200px] tw-z-20 tw-sticky tw-top-0 tw-drop-shadow-md' : 'tw-max-h-0'">
             <div class="tw-w-full tw-container tw-mx-auto tw-pt-4 md:tw-pt-0 tw-px-4 md:tw-px-8 dark:tw-text-white tw-flex tw-flex-col md:tw-flex-row tw-items-center">
                 <p class="tw-text-center md:tw-text-left  md:tw-mr-auto">Click <span class="tw-font-bold tw-mx-0.5">save changes</span> to save your changes or <span class="tw-font-bold tw-mx-0.5">cancel</span> to exit re-ordering</p>
                 <div class="tw-ml-6 tw-flex tw-py-[15px]">
-                    <button class="tw-btn-primary tw-btn-small tw-mr-[10px] tw-px-[30px]" :class="`tw-bg-${brand}`" @click.prevent="handleSort">
+                    <button class="tw-btn-primary tw-mr-[10px] tw-px-[30px]" :class="`tw-bg-${brand}`" @click.prevent="handleSort">
                         Save changes
                     </button>
-                    <button class="tw-btn-primary tw-btn-small tw-bg-transparent dark:tw-text-white tw-text-[#00101D] tw-px-[30px] hover:tw-bg-black/10" 
+                    <button class="tw-btn-secondary tw-bg-transparent dark:tw-text-white tw-text-[#00101D] tw-px-[30px] hover:tw-bg-black/10"
                             @click.prevent="handleCancelSort">
                         Cancel
                     </button>
                 </div>
             </div>
         </div>
-        
+
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-[28px]">
             <div class="tw-flex tw-flex-col">
                 <!-- Empty State -->
@@ -225,7 +218,7 @@
                 <div v-if="playlistsStore.lessons.length" class="tw-w-full">
 
                     <!-- List View Header -->
-                    <header class="tw-hidden lg:tw-flex tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-p-4">
+                    <header class="tw-hidden lg:tw-flex tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-p-3">
                         <div class="tw-w-[40px]">#</div>
                         <p class="tw-relative tw-inline-block tw-mr-auto tw-w-full">Name</p>
                         <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[128px]">Type</p>
@@ -234,13 +227,13 @@
                     </header>
 
                     <!-- Cards -->
-                    <section v-if="playlistsStore.lessons.length" 
+                    <section v-if="playlistsStore.lessons.length"
                              class="tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-col"
                     >
                         <!-- Print Each Card -->
-                        <playlist-card 
-                            v-for="(lesson,i) in playlistsStore.lessons" 
-                            :key="i" 
+                        <playlist-card
+                            v-for="(lesson,i) in playlistsStore.lessons"
+                            :key="i"
                             :index="i"
                             :lesson="lesson"
                             :token="token"
@@ -251,20 +244,20 @@
                             @dragover.prevent="handleDragOver($event)"
                             @dragend="handleDragEnd"
                             @drop="handleDrop($event, i)"
-                        /> 
+                        />
                         <!-- Skeleton Loader For Infinite Scroll -->
-                        <div v-if="playlistsStore.loadingLessons && infiniteScroll" 
+                        <div v-if="playlistsStore.loadingLessons && infiniteScroll"
                             class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
-                            <div v-for="n in limit" 
-                                :key="n" 
+                            <div v-for="n in limit"
+                                :key="n"
                                 class="tw-flex tw-w-full tw-h-[90px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]"
                             >
                             </div>
-                        </div>   
+                        </div>
 
                     </section>
 
-                </div>   
+                </div>
             </div>
         </div>
 
