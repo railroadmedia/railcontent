@@ -202,13 +202,8 @@ onBeforeMount(() => {
             <div class="tw-truncate tw-w-full  tw-px-3 lg:tw-pl-[15px]"
                 :class="[{ 'lg:tw-w-[calc(100%-350px)]': !cueVersion }]">
                 <!--title-->
-                <p class="tw-hidden tw-truncate tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
+                <p class="tw-truncate tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
                     :class="[{ 'md:tw-block': !cueVersion }]">
-                    <template v-if="lesson.type !== 'assignment' || lesson.type !== 'song'">
-                        <span v-for="(instructor, i) in lesson.instructors" :key="i">
-                            {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
-                        </span>
-                    </template>
                     <template v-if="lesson.type === 'song'">
                         <span>{{ artist }}</span>
                     </template>
@@ -220,7 +215,7 @@ onBeforeMount(() => {
                 </p>
                 <!-- description / Time Stamp-->
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <p class="tw-font-bold tw-text-[16px] tw-whitespace-normal tw-line-clamp-2 xl:tw-line-clamp-1">{{
+                    <p class="tw-font-bold tw-text-[16px] tw-whitespace-normal tw-line-clamp-1">{{
                         lessonDescription }}</p>
                     <!-- Time Stamp Icon -->
                     <button v-if="!cueVersion"
@@ -249,23 +244,16 @@ onBeforeMount(() => {
                         </svg>
                     </button>
                 </div>
-                <!-- Assignment Instructors -->
-                <p v-if="lesson.type === 'assignment' && !cueVersion"
-                    class="tw-hidden md:tw-flex tw-text-xs md:tw-text-sm tw-truncate tw-capitalize tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mt-1 md:tw-mt-0">
-                    <span v-for="(instructor, i) in lesson.instructors" :key="i">
-                        {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,&nbsp;</span>
-                    </span>
-                </p>
                 <!-- Cue Version Data -->
                 <p class="tw-w-full tw-flex tw-items-center tw-text-xs tw-capitalize tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mt-1 tw-mr-1"
-                    :class="[{ 'md:tw-hidden md:tw-mt-0 md:tw-text-sm': !cueVersion }]">
+                    :class="[{ 'md:tw-mt-0 md:tw-text-sm': !cueVersion }]">
                     <!-- Instructor / Artist -->
 
                     <template v-if="lesson.type === 'song'">
                         <span>{{ artist }}</span>
                     </template>
                     <template v-else-if="lesson.instructors && lesson.instructors.length">
-                        <span v-for="(instructor, i) in lesson.instructors" class="tw-whitespace-nowrap tw-truncate tw-uppercase"
+                        <span v-for="(instructor, i) in lesson.instructors" class="tw-whitespace-nowrap tw-truncate "
                             :key="i">
                             {{ instructor }}<span v-if="i != (lesson.instructors.length - 1)">,</span>
                         </span>
@@ -273,9 +261,8 @@ onBeforeMount(() => {
                     <!-- Or Lesson Type -->
                     <span v-else>{{ lesson.type }}</span>
                     <!-- Duration OR Lesson Type -->
-                    <span class="tw-mx-0.5">|</span>
-                    <span v-if="cueVersion">{{ lesson.type }}</span>
-                    <span v-if="!cueVersion">{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>
+                    <span class="tw-mx-0.5" :class="[{ 'lg:tw-hidden': !cueVersion }]">|</span>
+                    <span :class="[{ 'lg:tw-hidden': !cueVersion }]">{{ lesson.type }}</span>
                 </p>
             </div>
 
