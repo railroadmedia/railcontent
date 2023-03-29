@@ -229,7 +229,6 @@
                 Join Pianote today and you’ll save 18% on your first year of lessons PLUS get 13 incredible bonuses. <br><br>
                 So come party with us! <br><br>
                 <a class="join pianote smaller w-full lg:w-96 mb-2" href="#order">Get Started &raquo;</a>
-                @if($products['pianote-headphones']->getPublicStockCount() > 0)<p class="uppercase"><b>GET IN QUICK!</b> Only @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} Headphones left!</p>@endif
             </div>
             <img
                 class="hidden md:inline-block md:h-96 lg:h-[450px] md:mt-0 lg:-mt-16 md:ml-6 transition-opacity opacity-0"
