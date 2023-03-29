@@ -139,7 +139,7 @@ onBeforeMount(()=> {
                 <ul class="tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px] tw-overflow-hidden tw-border-b dark:tw-border-b-[#223F57]"
                     v-if="formattedPinnedPlaylists.length > 0 && !playlistsStore.loadingPinnedPlaylists">
                     <p class="tw-text-[#9EC0DC] tw-text-xs tw-pl-[24px] tw-font-bold tw-mt-2">PINNED</p>
-                    <!-- Loop through User Playlists -->
+                    <!-- Loop through User Pinned Playlists -->
                     <li class="tw-group tw-w-full tw-flex tw-overflow-hidden dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                         v-for="item in formattedPinnedPlaylists" :key="item.id + '-playlist-li'"
                     >
@@ -171,13 +171,13 @@ onBeforeMount(()=> {
                 <ul class="tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px] tw-overflow-hidden"
                     v-if="formattedUnpinnedPlaylists.length > 0 && !playlistsStore.loadingPlaylists">
 
-                    <!-- Loop through User Playlists -->
+                    <!-- Loop through User Unpinned Playlists -->
                     <li class="tw-group tw-w-full tw-flex tw-overflow-hidden dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                         v-for="item in formattedUnpinnedPlaylists" :key="item.id + '-playlist-li'"
                     >
                         <a :href="item.url"
                            class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-h-[42px] tw-items-center">
-                            <span class="tw-min-w-0 tw-truncate tw-capitalize tw-text-sm group-hover:tw-underline">{{ item.name }}</span>
+                            <span class="tw-min-w-0 group-hover:tw-max-w-[140px] tw-truncate tw-capitalize tw-text-sm group-hover:tw-underline">{{ item.name }}</span>
                         </a>
                         <div class="md:tw-hidden group-hover:tw-inline-flex tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center" :class="`tw-text-${brand}`">
                             <button title="Pin Playlist" @click="pinPlaylist(item, brand)">
