@@ -105,7 +105,6 @@
 
     //Handle Drop Event
     const handleDrop = (event, position) => {
-        console.log('dropped', props.lessons.data)
         // console.log(state.startID, position)
         if(playlistsStore.sortingPlaylist) {
             event.target.classList.remove('tw-border-b');
