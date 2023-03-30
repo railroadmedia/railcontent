@@ -90,7 +90,7 @@
         })
     };
 
-    //Handle Like
+    //Handle Like/Unllike
     const likePlaylist = () => {
         state.isLiked = !state.isLiked;
         if(state.isLiked){
@@ -112,8 +112,6 @@
                 });
         }
     }
-
-    //TODO: add unlike function
 
     //Handle Dropdown Trigger
     const dropdownTriggerHandler = event => {
