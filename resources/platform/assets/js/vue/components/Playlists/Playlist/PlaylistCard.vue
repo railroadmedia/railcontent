@@ -32,6 +32,10 @@ const props = defineProps({
     cardId: {
         type: String,
         default: 'playlist-card-id'
+    },
+    currentItem: {
+        type: [String, Number],
+        default: null
     }
 });
 
@@ -168,7 +172,8 @@ onBeforeMount(() => {
             <div class="tw-inline-flex tw-items-center tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity"
                 :class="{ 'tw-opacity-0': playlistsStore.sortingPlaylist }">
                 <template v-if="!cueVersion">{{ props.index + 1 }}</template>
-                <template v-else><i class="fas fa-play"></i></template>
+                <template v-else-if="cueVersion && Number(lesson.user_playlist_item_position) === Number(currentItem)"><i class="fas fa-play"></i></template>
+                <template v-if="cueVersion && Number(lesson.user_playlist_item_position) !== Number(currentItem)">{{ lesson.user_playlist_item_position }}</template>
             </div>
 
             <!-- Playlist thumbnail -->

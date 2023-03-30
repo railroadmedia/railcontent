@@ -143,11 +143,11 @@ const props = defineProps({
         default: ''
     },
     playlistItemId: {
-        type: String,
+        type: [String, Number],
         default: ''
     },
     playlistItemPosition: {
-        type: String
+        type: [String, Number]
     },
     relatedLesson: {
         type: Object,
