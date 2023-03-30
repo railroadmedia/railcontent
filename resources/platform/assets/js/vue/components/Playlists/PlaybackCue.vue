@@ -1,5 +1,5 @@
 <script setup>
-import { onBeforeMount, onMounted, inject, ref, reactive, computed } from 'vue';
+import { onBeforeMount, onMounted, inject, ref, reactive, computed, nextTick } from 'vue';
 import PlaylistService from '../../../services/playlists.js';
 import PlaylistCard from './Playlist/PlaylistCard.vue';
 import { usePlaylistsStore } from '../../../stores/playlists';
@@ -63,6 +63,17 @@ const pageNumberBottom = ref(1);
 const preventReFetch = ref(false);
 const isLoading = ref(false);
 
+
+//---------Computed--------//
+
+const shouldShowBottomSkeleton = computed(() => {
+    return (isLoading.value && props.infiniteScroll) || (playlistsStore.lessons.length < 20 && !preventReFetch.value);
+});
+
+const shouldShowTopSkeleton = computed(() => {
+    return pageNumberTop.value > 1;
+});
+
 //-----------Reactive Data-----------//
 
 const state = reactive({
@@ -83,12 +94,17 @@ const handleScroll = (e) => {
                 limit: props.limit,
                 playlist_id: props.playlistId
             };
+
             //Get Lessons
             isLoading.value = true;
             PlaylistService.getPlaylistLessons(payload, token).then(response => {
                 isLoading.value = false;
                 if (response.data.results.length) {
-                    playlistsStore.lessons = [...response.data.results, ...playlistsStore.lessons]
+                    playlistsStore.lessons = [...response.data.results, ...playlistsStore.lessons];
+                    nextTick(() => {
+                        const cueScrollContainer = document.getElementById('cue-scroll-container');
+                        cueScrollContainer.scrollTop = 90*20;
+                    })
                 }
             }).catch(() => {
                 window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
@@ -124,7 +140,12 @@ onBeforeMount(() => {
     playlistsStore.lessons = props.lessons?.data ? props.lessons.data : [];
     pageNumberBottom.value = props.lessons.meta.page;
     pageNumberTop.value = props.lessons.meta.page;
-})
+});
+
+onMounted(() => {
+    const cueScrollContainer = document.getElementById('cue-scroll-container');
+    cueScrollContainer.scrollTop = 90;
+});
 </script>
 <template>
     <section
@@ -174,12 +195,18 @@ onBeforeMount(() => {
         <!-- Items -->
         <div @scroll="handleScroll" v-if="playlistsStore.lessons.length" id="cue-scroll-container"
             class="tw-w-full tw-flex tw-flex-col tw-h-[540px] tw-overflow-y-scroll tw-relative">
+            <!-- Top Skeleton for offset For top Infinite Scroll -->
+            <div v-if="shouldShowTopSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
+                <div
+                    class="tw-flex tw-w-full tw-h-[90px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]">
+                </div>
+            </div>
             <!-- Print Each Card -->
-            <playlist-card v-for="(lesson) in playlistsStore.lessons" :key="'playlist-card-cue-'+lesson.id" :lesson="lesson" :token="token"
+            <playlist-card :currentItem="playlistItemPosition" v-for="(lesson) in playlistsStore.lessons" :key="'playlist-card-cue-'+lesson.id" :cardId="'playlist-card-cue-'+lesson.id" :lesson="lesson" :token="token"
                 :brand="brand" :cue-version="true" />
             <!-- Skeleton Loader For Infinite Scroll -->
-            <div v-if="isLoading && infiniteScroll" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
-                <div v-for="n in limit" :key="n"
+            <div v-if="shouldShowBottomSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
+                <div v-for="n in (playlistsStore.lessons.length >= 20 ? limit : 20 - playlistsStore.lessons.length)" :key="n"
                     class="tw-flex tw-w-full tw-h-[90px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]">
                 </div>
             </div>

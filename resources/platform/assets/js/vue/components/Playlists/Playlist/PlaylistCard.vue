@@ -31,7 +31,11 @@ const props = defineProps({
     },
     cardId: {
         type: String,
-        default: ''
+        default: 'playlist-card-id'
+    },
+    currentItem: {
+        type: [String, Number],
+        default: null
     }
 });
 
@@ -158,7 +162,7 @@ onBeforeMount(() => {
 });
 </script>
 <template>
-    <div
+    <div :id="cardId"
         class="draggable tw-group tw-relative tw-min-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4">
         <!-- PLAYLIST INFO: clickable link -->
         <a :href="lesson.url && !showMask ? lesson.url : ''"
@@ -168,7 +172,8 @@ onBeforeMount(() => {
             <div class="tw-inline-flex tw-items-center tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity"
                 :class="{ 'tw-opacity-0': playlistsStore.sortingPlaylist }">
                 <template v-if="!cueVersion">{{ props.index + 1 }}</template>
-                <template v-else><i class="fas fa-play"></i></template>
+                <template v-else-if="cueVersion && Number(lesson.user_playlist_item_position) === Number(currentItem)"><i class="fas fa-play"></i></template>
+                <template v-if="cueVersion && Number(lesson.user_playlist_item_position) !== Number(currentItem)">{{ lesson.user_playlist_item_position }}</template>
             </div>
 
             <!-- Playlist thumbnail -->
