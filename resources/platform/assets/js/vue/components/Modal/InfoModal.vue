@@ -2,7 +2,7 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { XIcon } from "@heroicons/vue/solid";
 const isContainerCreated = ref(false);
-const props = defineProps(["modalId", "title", "selfContained", "classOverride", "overlay"]);
+const props = defineProps(["modalId", "title", "selfContained", "classOverride", "showOverlay"]);
 const emit = defineEmits(["onClose"]);
 
 const onClose = () => {
@@ -50,7 +50,7 @@ onUnmounted(() => {
         tw-items-center
         tw-justify-center
       "
-      :class="overlay && 'tw-bg-[rgba(0,0,0,0.8)] tw-z-30'"
+      :class="showOverlay && 'tw-bg-[rgba(0,0,0,0.8)] tw-z-30'"
     >
       <div
         class="
