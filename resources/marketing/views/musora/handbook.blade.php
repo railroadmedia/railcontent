@@ -241,18 +241,18 @@
                     Below is a list of Musora Media’s statutory holidays.
                 </p>
                 <ul class="mb-4 pl-6 mt-4 list-disc">
-                    <li>New Year's Day (January)</li>
-                    <li>Family Day (February)</li>
-                    <li>Good Friday (April)</li>
-                    <li>Victoria Day (May)</li>
-                    <li>Canada Day (July)</li>
-                    <li>British Columbia Day (August) </li>
-                    <li>Labour Day (September)</li>
-                    <li>National Truth and Reconciliation Day (September 30)</li>
-                    <li>Thanksgiving Day (October)</li>
-                    <li>Remembrance Day (November)</li>
-                    <li>Christmas Day (December)</li>
-                    <li>Boxing Day (December) (although Boxing day is not technically a statutory holiday, we treat it like it is)</li>
+                    <li>New Year's Day (January 1st)</li>
+                    <li>Family Day (February 20th)</li>
+                    <li>Good Friday (April 7th)</li>
+                    <li>Victoria Day (May 22nd)</li>
+                    <li>Canada Day (July 1st)</li>
+                    <li>British Columbia Day (August 7th) </li>
+                    <li>Labour Day (September 4th)</li>
+                    <li>National Truth and Reconciliation Day (September 30th)</li>
+                    <li>Thanksgiving Day (October 9th)</li>
+                    <li>Remembrance Day (November 11th)</li>
+                    <li>Christmas Day (December 25th)</li>
+                    <li>Boxing Day (December 26th) (although Boxing day is not technically a statutory holiday, we treat it like it is)</li>
                 </ul>
                 <p class="no-mb">
                     Please read guidelines outlined in procedure PCPR01A.  Among other things, this procedure explains:
