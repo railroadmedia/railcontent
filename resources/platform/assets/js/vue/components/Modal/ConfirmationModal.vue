@@ -14,6 +14,14 @@ const props = defineProps({
   brand: {
     type: String,
     default: 'drumeo'
+  },
+  submitLabel: {
+    type: String,
+    default: 'Yes'
+  },
+  hideCancel: {
+    type: Boolean,
+    default: false,
   }
 });
 const emit = defineEmits(["onClose", "onCancel", "onSubmit"]);
@@ -57,6 +65,9 @@ onMounted(() => {
   const modalContainer = document.getElementById("confirmation-container");
   modalContainer.classList.remove("tw-hidden");
   modalContainer.classList.add("tw-fixed");
+  modalContainer.classList.add("tw-h-full");
+  modalContainer.classList.add("tw-w-full");
+  modalContainer.classList.add("tw-z-40");
 });
 
 onUnmounted(() => {
@@ -109,15 +120,15 @@ onUnmounted(() => {
                 tw-text-white
                 tw-px-[32px]
               ">
-          <h3 class="tw-text-center tw-text-[20px] tw-text-black dark:tw-text-white">{{ title }}</h3>
+          <h3 class="tw-w-full tw-text-center tw-text-[20px] tw-text-black dark:tw-text-white">{{ title }}</h3>
         </div>
         <div
-          class="tw-text-center tw-text-[#8c9698] dark:tw-text-[#9EC0DC] tw-flex tw-justify-center tw-items-center tw-text-white tw-py-[32px] tw-text-[14px]">
+          class="tw-text-center tw-text-[#8c9698] dark:tw-text-[#9EC0DC] tw-flex tw-justify-center tw-items-center tw-text-black tw-py-[32px] tw-text-[14px]">
           {{ subtitle }}
         </div>
         <div class="tw-flex tw-justify-end tw-px-[32px]">
-          <button @click="onCancel" class="tw-grow tw-btn-secondary tw-text-gray-400">No</button>
-          <button @click="onSubmit" :class="`tw-grow tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-ml-[16px]`">Yes</button>
+          <button v-if="!hideCancel" @click="onCancel" class="tw-grow tw-btn-secondary tw-text-gray-400">No</button>
+          <button @click="onSubmit" :class="`tw-grow tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-ml-[16px]`">{{ submitLabel }}</button>
         </div>
       </div>
     </div>

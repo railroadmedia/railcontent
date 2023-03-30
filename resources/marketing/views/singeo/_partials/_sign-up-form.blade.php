@@ -14,10 +14,10 @@
         ) !!}
     @endif
 
-    <div class="infusion-field w-full px-1 md:px-2 float-left @if(!empty($oneLine)) md:w-7/12 md:text-left md:pl-0 @endif @if(!empty($oneLineLg)) lg:w-7/12 lg:text-left lg:pl-0 @endif">
+    <div class="infusion-field w-full px-1 sm:px-2 float-left @if(!empty($oneLine)) sm:w-7/12 sm:text-left sm:pl-0 @endif @if(!empty($oneLineLg)) lg:w-7/12 lg:text-left lg:pl-0 @endif">
         <input id="sign-up-email" class="w-full" name="email" type="email" placeholder="Email Address..." required/>
     </div>
-    <div class="infusion-submit w-full px-1 md:px-2 float-left @if(!empty($oneLine)) md:w-5/12 md:pr-0 @endif @if(!empty($oneLineLg)) lg:w-5/12 lg:pr-0 @endif">
+    <div class="infusion-submit w-full px-1 sm:px-2 float-left @if(!empty($oneLine)) sm:w-5/12 sm:pr-0 @endif @if(!empty($oneLineLg)) lg:w-5/12 lg:pr-0 @endif">
         @if(!empty($submitArrows))
             <img class="form-arrow arrow-left" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-right-white.png">
             <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png">

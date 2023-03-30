@@ -7,6 +7,7 @@ use App\Modules\EventDataSynchronizer\Console\Commands\ExpiredProductResync;
 use App\Modules\EventDataSynchronizer\Console\Commands\PackBonusExpirationDateResyncTool;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermissionsResyncTool;
+use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipOwnedProductSyncTool;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
@@ -56,6 +57,7 @@ use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
 use Railroad\Railforums\Events\PostCreated;
 use Railroad\Railforums\Events\ThreadCreated;
 use Railroad\Railtracker\Events\MediaPlaybackTracked;
+use Railroad\Referral\Events\ReferralClaimed;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
@@ -193,6 +195,9 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
         AccessCodeClaimed::class => [
             CustomerIoSyncEventListener::class . '@handleAccessCodeClaimed',
         ],
+        ReferralClaimed::class => [
+            CustomerIoSyncEventListener::class . '@handleReferralClaimed',
+        ]
     ];
 
     /**
@@ -217,6 +222,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 SyncCustomerIoOldEvents::class,
                 SyncCustomerIoExistingDevices::class,
                 UserMembershipFieldsResyncTool::class,
+                UserMembershipOwnedProductSyncTool::class,
                 ProductOwnerUserFieldResyncTool::class,
                 SyncUserTotalXp::class,
                 IsDrumeoLifetimeUserFieldResyncTool::class,

@@ -82,9 +82,8 @@
                     onload="this.classList.remove('opacity-0')"
                 />
 {{--                <h1 class="font-bebas leading-none mb-1 text-4xl md:text-6xl">GET A <span class="text-gradient">LIFETIME</span> <br class="inline md:hidden">DRUMEO MEMBERSHIP</h1>--}}
-                <h4 class="text-white uppercase leading-tight mb-4">+ Your Choice of Bonuses & And An Exclusive Masterclass <br class="hidden md:inline lg:hidden">with Anika Nilles!</h4>
-                <p class="uppercase text-promo font-bold">
-                    AVAILABLE UNTIL MARCH 31st AT MIDNIGHT <br>
+                <p class="uppercase text-promo">
+                    <strong class="font-black">AVAILABLE UNTIL MARCH 31st AT MIDNIGHT</strong> <br>
                     Only
                     <span x-cloak x-data="timer()" x-init="countdown()">
                          <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>
@@ -109,40 +108,37 @@
 {{--                        <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/774477396" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>--}}
 {{--                    </div>--}}
                 </div>
-                <div class="text-center">
-                    <a class="join smaller drumeo anchor-slide" href="#customize-anchor">Lifetime Membership &raquo</a>
+                <div class="px-3 mt-5 mx-auto w-full max-w-2xl text-left">
+                    <h3 class="leading-tight"><strong>Will you still be drumming in 5 years?</strong></h3>
+                    <p class="leading-relaxed my-5 text-light-navy">
+                        To celebrate 11 years of Drumeo, Lifetime Memberships are back!
+                        <br><br>
+                        For the price of 5 years Drumeo access, you’ll get:
+                    </p>
+                    <ul class="list-disc leading-5 pl-5 text-light-navy">
+                        <li>Unlimited drum lessons for life</li>
+                        <li>Your choice of 3 bonuses (see below)</li>
+                        <li>An exclusive masterclass with Anika Nilles</li>
+                        <li>Piano, guitar, and singing lessons included</li>
+                        <li>An option to split payments over 1, 2 or 5 installments</li>
+                    </ul>
+                    <p class="leading-relaxed my-5 text-light-navy">
+                    We know this invitation isn’t for everyone… but if you see yourself playing & learning the drums for 5 or more years, a Lifetime Membership gives you the <strong>best value</strong>.
+                        <br><br>
+                        Scroll down to see everything included and click the button to explore payment options.
+                    </p>
+
+                    <div class="text-center">
+                        <a class="join smaller drumeo anchor-slide" href="#customize-anchor">Lifetime Membership &raquo;</a>
+                    </div>
                 </div>
-                <p class="leading-relaxed px-3 my-5 text-left text-light-navy" style="width: 100%;max-width: 650px;">
-                    <em>“My soul is that of a drummer. I didn’t do it to become rich and famous. I did it because it was the love of my life.” – Ringo Starr</em>
-                    <br><br>
-                    Wise words from drumming royalty ^.
-                    <br><br>
-                    If you feel similarly, we want to invite you to make a lifelong commitment to your drumming.
-                    <br><br>
-                    To celebrate 11 years of Drumeo, Lifetime Memberships are back!
-                    <br><br>
-                    This is your chance to make one final payment for your Drumeo Membership and then enjoy unlimited drum lessons, song breakdowns, and LIVE events with your favorite drummers for years to come.
-                    <br><br>
-                    And heads up: You can split the payment for 1, 2, or 5 installments. (You’ll see that option upon checkout.)
-                    <br><br>
-                    You’ll also get your choice of 3 bonuses. You can select a pile of drumsticks, a new practice pad, or whatever you think will fire up the next stage of your drumming journey. PLUS, you’ll have an exclusive Masterclass to get you inspired.
-                    <br><br>
-                    Anika Nilles has agreed to teach a Masterclass to Drumeo Lifetime Members that will help you develop your hand technique and creativity around the kit.
-                    <br><br>
-                    Scroll down to see everything included with your Drumeo Lifetime Membership and we’ll see you with your little infinity badge around your name very soon!
-                </p>
-                            @if($products['DLM-Lifetime']->getPublicStockCount() > 0)
-{{--                                <a class="join blue my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-2xl" href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[DLM-Lifetime]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=12&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&products[TLOD-DIGI]=1&products[MAM-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[AOADS-DIGI]=1&products[ICM-DIGI]=1&products[BTC-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&locked=true">BECOME A LIFETIME MEMBER &raquo;</a>--}}
-                            @else
-                <a class="join sold-out my-4">{{ $products['DLM-Lifetime']->getPublicStockCount() }}</a>
-                            @endif
             </div>
         </section>
 
     <section class="text-center text-white py-10 md:py-20 lg:py-24 px-2 md:px-4 relative overflow-hidden" style="background:linear-gradient(to bottom, #020c1a, #021125);">
         <div class="container mx-auto z-10 relative">
             <h2><strong>The Lifetime Advantage</strong></h2>
-            <p class="text-light-navy mt-2 mb-12">You’ll have a lifetime of unlimited drum lessons for the price of 5 years of access to Drumeo.</p>
+            <p class="text-light-navy mt-2 mb-12">You’ll have a lifetime of unlimited drum lessons for the price of 5 years of access to Drumeo ($1200 total).</p>
 
             <style>
                 .beg-adv-text p {
@@ -176,8 +172,8 @@
     </section>
 
     <section class="text-center text-white py-10 md:py-20 lg:py-24 px-4 md:px-6 relative overflow-hidden" style="background:#01050f;">
-        <div class="container mx-auto z-10 relative max-w-4xl">
-            <h3 class="mb-8 sm:mb-12"><strong>Improve Your Hands and Creativity <br class="inline sm:hidden">With Anika Nilles</strong></h3>
+        <div class="container mx-auto z-10 relative max-w-3xl">
+            <h3 class="mb-8 sm:mb-12"><strong>Improve Your Hands and Creativity <br>With Anika Nilles</strong></h3>
             <div class="flex flex-wrap sm:flex-nowrap items-start lg:items-center justify-center">
                 <div class="order-1 sm:order-0 text-left text-light-navy sm:pr-5 lg:pr-12">
                     <p>
@@ -257,7 +253,7 @@
                             'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                             'online-ship' => "Free Shipping",
                             'shipping' => true,
-                            'sku' => 'Drumeo-VaterSticks',
+                            'sku' => '&products[Drumeo-VaterSticks]=6',
                         ],
                         [
                             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/pad.jpg',
@@ -265,7 +261,7 @@
                             'description' => 'Practice anywhere with two full-size playing surfaces.',
                             'price' => floatval($productPrices['quietpad']->price),
                             'shipping' => true,
-                            'sku' => 'quietpad',
+                            'sku' => '&products[quietpad]=1',
                         ],
                         [
                             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/quietkick_card.jpg',
@@ -274,7 +270,7 @@
                             'price' => floatval($productPrices['quietkick']->price),
                             'online-ship' => "Free Shipping",
                             'shipping' => true,
-                            'sku' => 'quietkick',
+                            'sku' => '&products[quietkick]=1',
                         ],
                         [
                             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/p4.jpg',
@@ -282,7 +278,7 @@
                             'description' => '',
                             'price' => floatval($productPrices['practicepad']->price),
                             'shipping' => true,
-                            'sku' => 'practicepad',
+                            'sku' => '&products[practicepad]=1',
                         ],
                         [
                             'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
@@ -291,7 +287,7 @@
                             'price' => floatval($productPrices['drumeo-eardrums']->price),
                             'online-ship' => "Free Shipping",
                             'shipping' => true,
-                            'sku' => 'drumeo-eardrums',
+                            'sku' => '&products[drumeo-eardrums]=1',
                         ],
                         [
                             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/shop-image.jpg',
@@ -299,7 +295,7 @@
                             'description' => '',
                             'price' => floatval($productPrices['comfort-cover']->price),
                             'shipping' => true,
-                            'sku' => 'comfort-cover',
+                            'sku' => '&products[comfort-cover]=1',
                         ],
                         [
                             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/bbdb.jpg',
@@ -307,7 +303,7 @@
                             'description' => '',
                             'price' => floatval($productPrices['BeginnerBook']->price),
                             'shipping' => true,
-                            'sku' => 'BeginnerBook',
+                            'sku' => '&products[BeginnerBook]=1',
                         ],
                     ]
                 @endphp
@@ -320,12 +316,12 @@
                         x-on:click="
                             if(bonus <= 3 && selected){
                                 selected = !selected;
-                                query = query.replace('&products[{{ $bonus['sku'] }}]=1', '');
+                                query = query.replace('{{ $bonus['sku'] }}', '');
                                 bonus--;
                             } else if(bonus < 3 && !selected) {
                                 selected = !selected;
                                 bonus++;
-                                query = query + '&products[{{ $bonus['sku'] }}]=1';
+                                query = query + '{{ $bonus['sku'] }}';
                             }
                         "
                     >
