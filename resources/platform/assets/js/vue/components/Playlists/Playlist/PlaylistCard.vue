@@ -209,9 +209,6 @@ onBeforeMount(() => {
                 <!--title-->
                 <p class="tw-truncate tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
                     :class="[{ 'md:tw-block': !cueVersion }]">
-                    <template v-if="lesson.type === 'song'">
-                        <span>{{ artist }}</span>
-                    </template>
                     <template v-if="lesson.type === 'assignment'">
                         <span v-for="(route, i) in lesson.route" :key="i">
                             {{ route }}<span v-if="i != (lesson.route.length - 1)" class="tw-px-1">•</span>
