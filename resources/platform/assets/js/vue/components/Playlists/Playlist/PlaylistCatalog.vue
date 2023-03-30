@@ -70,6 +70,8 @@
                 position: lesson.position
             }, token)
         });
+        //Update initial array
+        initialLessonsArray = [...playlistsStore.lessons];
         //show success message
         window.shownotification({
             icon: 'fa-pen-to-square',
@@ -77,8 +79,8 @@
         })
     }
     const handleCancelSort = () => {
-        // console.log(initialLessonsArray)
-        playlistsStore.lessons = initialLessonsArray;
+        //Update array to initial order
+        playlistsStore.lessons = [...initialLessonsArray];
         playlistsStore.sortingPlaylist = false;
     }
     const handleDragStart = (event, position, id) => {
@@ -180,6 +182,7 @@
 
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
+        console.log('check')
         initialLessonsArray = props.lessons.data;
     });
 </script>
