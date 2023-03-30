@@ -193,7 +193,7 @@
                 <div id="travel" class="relative -top-28 md:-top-20"></div>
                 <div class="header">Travel</div>
                 <p>
-                    If you are using personal vehicle for work-related tasks, you are entitled to be paid per kilometer for when it’s being used. You will find an Employee Reimbursement form in the Asana Finance project called “FN Guides and Documents”. Fill in the number of kilometers you drove and multiply it by $0.61. Finance will then reimburse you. For mileage over 5000 km, the rate claimed will be $0.55/km.<br><br>
+                    If you are using personal vehicle for work-related tasks, you are entitled to be paid per kilometer for when it’s being used. You will find an Employee Reimbursement form in the Asana Finance project called “FN Guides and Documents”. Fill in the number of kilometers you drove and multiply it by $0.68. Finance will then reimburse you. For mileage over 5000 km, the rate claimed will be $0.62/km.<br><br>
                     For staff members traveling out of the office for events or seminars, all travel, food, and lodging will be covered by Musora Media Inc. In the event, you have to pay something from your finances, feel free to submit an Employee Reimbursement form.
                 </p>
                 <div id="expenses" class="relative -top-28 md:-top-20"></div>
