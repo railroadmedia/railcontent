@@ -1191,9 +1191,9 @@ class CustomerIoSyncEventListener
                 'musora_membership_non_recurring_access_added',
                 [
                     'brand_source' => $brand,
-                    'access_code' => $accessCode->getCode(),
+                    'access_method' => $accessCode->getCode(),
                     'access_source' => $accessCode->getSource(),
-                    'claim_timestamp' => $accessCode->getUpdatedAt()->timestamp,
+                    'access_added_timestamp' => $accessCode->getUpdatedAt()->timestamp,
                     'code_creation_date' => $accessCode->getCreatedAt()->timestamp,
                     'product_ids' => $accessCode->getProductIdsAsString()
 
@@ -1242,9 +1242,9 @@ class CustomerIoSyncEventListener
                 'musora_membership_non_recurring_access_added',
                 [
                     'brand_source' => $referrer->brand,
-                    'access_code' => $referrer->referral_code,
+                    'access_method' => $referrer->referral_code,
                     'access_source' => 'saasquatch',
-                    'claim_timestamp' => $referrer->updated_at->timestamp,
+                    'access_added_timestamp' => $referrer->updated_at->timestamp,
                     'code_creation_date' => null,
                     'product_ids' => $referralClaimed->getProductId()
                 ],
