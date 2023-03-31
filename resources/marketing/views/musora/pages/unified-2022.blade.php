@@ -423,14 +423,6 @@
                         'description' => 'Roni grew up in a musical family playing “Name That Tune” and enjoying live music performances. She took every musical opportunity growing up including Concert and Jazz band, choir, guitar class, drumline, and even played for the Special Olympics opening ceremony. Roni can be found hanging with family and friends, being crafty, and playing her clarinet. ',
                         ],
                         [
-                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/kaitlyn.jpg',
-                        'first' => 'Kaitlyn ',
-                        'last' => 'C',
-                        'drumeo' => true,
-                        'pianote' => true,
-                        'description' => 'Kaitlyn is a huge music lover and has been jamming along to all genres of music all her life! She is a beginner-level piano player (you may have seen some videos in Pianote!). Kaitlyn loves making people laugh, listening to and finding new music, hiking mountains, and spending time with her friends, family, and cat (Leo). ',
-                        ],
-                        [
                         'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/hannah2.jpg',
                         'first' => 'Hannah ',
                         'last' => 'D',
