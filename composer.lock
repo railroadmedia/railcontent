@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.262.4",
+            "version": "3.263.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "2673d06dd47793c87e8d1616720066030676fa1f"
+                "reference": "a0a528cb8e22dd0113f97ad0df527a6db32fe061"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/2673d06dd47793c87e8d1616720066030676fa1f",
-                "reference": "2673d06dd47793c87e8d1616720066030676fa1f",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a0a528cb8e22dd0113f97ad0df527a6db32fe061",
+                "reference": "a0a528cb8e22dd0113f97ad0df527a6db32fe061",
                 "shasum": ""
             },
             "require": {
@@ -337,9 +337,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.262.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.263.0"
             },
-            "time": "2023-03-29T18:20:24+00:00"
+            "time": "2023-03-30T18:22:31+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8373,12 +8373,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "147130d7f38ba491e471a5d8b2eb8f441056a0a7"
+                "reference": "2ff081f036ca336d19f6b564355471ee6e7d43b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/147130d7f38ba491e471a5d8b2eb8f441056a0a7",
-                "reference": "147130d7f38ba491e471a5d8b2eb8f441056a0a7",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/2ff081f036ca336d19f6b564355471ee6e7d43b0",
+                "reference": "2ff081f036ca336d19f6b564355471ee6e7d43b0",
                 "shasum": ""
             },
             "require": {
@@ -8410,7 +8410,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-playlists"
             },
-            "time": "2023-03-30T15:41:51+00:00"
+            "time": "2023-03-31T06:55:41+00:00"
         },
         {
             "name": "railroad/permissions",
