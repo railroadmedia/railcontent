@@ -2,13 +2,14 @@
     <div class="container max-w-6xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
             <div class="w-full sm:w-7/12 sm:pr-8 text-center lg:text-left">
-                <div x-on:click="trailer = true;" alt="header image" class="mb-5 overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video"
+                <div x-on:click="trailer = true;" alt="header image" class="mb-5 overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video relative"
 {{--                    @if(!empty($promoVersion))--}}
 {{--                        style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{!! $promoThumbM !!});padding-bottom: 60%;"--}}
 {{--                    @else--}}
-                        style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ !empty($thumbM) ? $thumbM : $thumb }});padding-bottom: 75%;"
+                        style="background-image:url();padding-bottom: 75%;"
 {{--                    @endif--}}
                 >
+                    <img class="absolute inset-0 object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ !empty($thumbM) ? $thumbM : $thumb }}" alt="Header thumbnail" />
                     <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                 </div>
                 <div class="px-5 sm:px-0">
