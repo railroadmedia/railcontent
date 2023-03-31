@@ -412,18 +412,18 @@ return [
         'test_6month' => '6-MONTH-MEMBERSHIP',
 
         //musora products
-        'musora_app_monthly_member' => 'DLM-Trial-1-month',
-        'musora_app_1_year_member' => 'DLM-Trial-Annual-7-Day',
+        'musora_app_monthly_member' => 'musora-monthly-recurring-7-day-trial-membership',
+        'musora_app_1_year_member' => 'musora-annual-recurring-7-day-trial-membership',
     ],
 
     'google_store_products_map' => [
 
         // live products
-        'drumeo_app_1_year_member' => 'DLM-1-year',
-        'drumeo_app_1_month_member' => 'DLM-1-month',
+        'drumeo_app_1_year_member' => 'DLM-Trial-Annual-7-Day',
+        'drumeo_app_1_month_member' => 'DLM-Trial-1-month',
 
         //2021 products
-        'drumeo_app_1_year_2021' => 'DLM-1-year',
+        'drumeo_app_1_year_2021' => 'DLM-Trial-Annual-7-Day',
         'drumeo_app_1_month_2021' => 'DLM-1-month',
 
         'anatomy_of_a_drum_solo' => 'AOADS-DIGI',
@@ -464,8 +464,8 @@ return [
         'test.pianote' => 'PIANOTE-MEMBERSHIP-1-YEAR',
 
         //Musora app
-        'musora_monthly_subscription' => 'DLM-1-month',
-        'musora_annual_subscription' => 'DLM-1-year',
+        'musora_monthly_subscription' => 'musora-monthly-recurring-7-day-trial-membership',
+        'musora_annual_subscription' => 'musora-annual-recurring-7-day-trial-membership',
     ],
 
     // paypal

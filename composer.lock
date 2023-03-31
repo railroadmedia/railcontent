@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "62e992e5349e12dbce4f03ba0049c0c8",
+    "content-hash": "bf42ab7dee7d4bdb28987e39b7b32eb9",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.262.3",
+            "version": "3.263.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "f5c8142d43846194bbb3bb40b18e7f6df2788409"
+                "reference": "a0a528cb8e22dd0113f97ad0df527a6db32fe061"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/f5c8142d43846194bbb3bb40b18e7f6df2788409",
-                "reference": "f5c8142d43846194bbb3bb40b18e7f6df2788409",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a0a528cb8e22dd0113f97ad0df527a6db32fe061",
+                "reference": "a0a528cb8e22dd0113f97ad0df527a6db32fe061",
                 "shasum": ""
             },
             "require": {
@@ -337,9 +337,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.262.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.263.0"
             },
-            "time": "2023-03-28T18:18:50+00:00"
+            "time": "2023-03-30T18:22:31+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -5053,16 +5053,16 @@
         },
         {
             "name": "laravel/vapor-core",
-            "version": "v2.28.0",
+            "version": "v2.29.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-core.git",
-                "reference": "f377fc6b49c86064f878a20663909a4158ce8c63"
+                "reference": "e6a7806d73f8c1cd5bf5ba56aed0838bfa284a35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/f377fc6b49c86064f878a20663909a4158ce8c63",
-                "reference": "f377fc6b49c86064f878a20663909a4158ce8c63",
+                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/e6a7806d73f8c1cd5bf5ba56aed0838bfa284a35",
+                "reference": "e6a7806d73f8c1cd5bf5ba56aed0838bfa284a35",
                 "shasum": ""
             },
             "require": {
@@ -5083,6 +5083,7 @@
             "require-dev": {
                 "mockery/mockery": "^1.2",
                 "orchestra/testbench": "^4.0|^5.0|^6.0|^7.0|^8.0",
+                "phpstan/phpstan": "^1.10",
                 "phpunit/phpunit": "^8.0|^9.0"
             },
             "type": "library",
@@ -5118,9 +5119,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-core/tree/v2.28.0"
+                "source": "https://github.com/laravel/vapor-core/tree/v2.29.0"
             },
-            "time": "2023-01-16T17:26:42+00:00"
+            "time": "2023-03-29T13:26:45+00:00"
         },
         {
             "name": "laravel/vapor-ui",
@@ -6800,16 +6801,16 @@
         },
         {
             "name": "openspout/openspout",
-            "version": "v4.13.0",
+            "version": "v4.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openspout/openspout.git",
-                "reference": "e01cab951c04ef184c567a880290997e94386f94"
+                "reference": "dd73318406b1fffdeaa333a32e175149d28224f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openspout/openspout/zipball/e01cab951c04ef184c567a880290997e94386f94",
-                "reference": "e01cab951c04ef184c567a880290997e94386f94",
+                "url": "https://api.github.com/repos/openspout/openspout/zipball/dd73318406b1fffdeaa333a32e175149d28224f7",
+                "reference": "dd73318406b1fffdeaa333a32e175149d28224f7",
                 "shasum": ""
             },
             "require": {
@@ -6877,7 +6878,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openspout/openspout/issues",
-                "source": "https://github.com/openspout/openspout/tree/v4.13.0"
+                "source": "https://github.com/openspout/openspout/tree/v4.13.1"
             },
             "funding": [
                 {
@@ -6889,7 +6890,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-13T14:32:53+00:00"
+            "time": "2023-03-30T15:40:03+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -8164,16 +8165,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "dev-5.0-feature-add-source-column-access-codes-CMT-7",
+            "version": "dev-5.0-no-extra-days-for-trials-BR-662",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "d9feef31b7a7d78e8991fadadf74ad1f5bc442c7"
+                "reference": "6b21b287a37c7747f126fad86747883df756aec7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/d9feef31b7a7d78e8991fadadf74ad1f5bc442c7",
-                "reference": "d9feef31b7a7d78e8991fadadf74ad1f5bc442c7",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/6b21b287a37c7747f126fad86747883df756aec7",
+                "reference": "6b21b287a37c7747f126fad86747883df756aec7",
                 "shasum": ""
             },
             "require": {
@@ -8210,9 +8211,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-feature-add-source-column-access-codes-CMT-7"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-no-extra-days-for-trials-BR-662"
             },
-            "time": "2023-03-14T09:10:12+00:00"
+            "time": "2023-03-31T10:49:51+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -8852,16 +8853,16 @@
         },
         {
             "name": "railroad/referral",
-            "version": "v3.0.2",
+            "version": "v3.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/referral.git",
-                "reference": "d872e1cda4170aeb93e04bcc559d0d2ca0681a08"
+                "reference": "dfa8337744a8d7dd0285a708e80e2ad79073661e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/referral/zipball/d872e1cda4170aeb93e04bcc559d0d2ca0681a08",
-                "reference": "d872e1cda4170aeb93e04bcc559d0d2ca0681a08",
+                "url": "https://api.github.com/repos/railroadmedia/referral/zipball/dfa8337744a8d7dd0285a708e80e2ad79073661e",
+                "reference": "dfa8337744a8d7dd0285a708e80e2ad79073661e",
                 "shasum": ""
             },
             "require": {
@@ -8887,9 +8888,9 @@
             "description": "Musora referral package",
             "support": {
                 "issues": "https://github.com/railroadmedia/referral/issues",
-                "source": "https://github.com/railroadmedia/referral/tree/v3.0.2"
+                "source": "https://github.com/railroadmedia/referral/tree/v3.0.4"
             },
-            "time": "2022-11-14T12:33:34+00:00"
+            "time": "2023-03-30T08:40:35+00:00"
         },
         {
             "name": "railroad/remotestorage",
@@ -16953,9 +16954,9 @@
     "aliases": [
         {
             "package": "railroad/ecommerce",
-            "version": "dev-5.0-feature-add-source-column-access-codes-CMT-7",
-            "alias": "5.0",
-            "alias_normalized": "5.0.0.0"
+            "version": "dev-5.0-no-extra-days-for-trials-BR-662",
+            "alias": "v5.0.72",
+            "alias_normalized": "5.0.72.0"
         },
         {
             "package": "railroad/railanalytics",
