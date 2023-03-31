@@ -375,12 +375,12 @@ return [
         'drumeo_app_1_year_2021' => 'DLM-Trial-Annual-7-Day',
         'drumeo_app_1_month_2021' => 'DLM-Trial-1-month',
 
-        'pianote_app_1_year_membership' => 'PIANOTE-MEMBERSHIP-1-YEAR',
-        'pianote_app_1_month_membership' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+        'pianote_app_1_year_membership' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+        'pianote_app_1_month_membership' => 'PIANOTE-MEMBERSHIP-TRIAL',
 
         //2021 products
-        'pianote_app_1_year_membership_2021' => 'PIANOTE-MEMBERSHIP-1-YEAR',
-        'pianote_app_1_month_membership_2021' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+        'pianote_app_1_year_membership_2021' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+        'pianote_app_1_month_membership_2021' => 'PIANOTE-MEMBERSHIP-TRIAL',
 
         // todo - update stage/local env products apple id => local product sku
         'test' => 'PIANOTE-MEMBERSHIP-1-YEAR',
@@ -450,12 +450,12 @@ return [
         'pack_1' => 'CC-DIGI',
 
         // todo - update production products play store id => local product sku
-        'pianote_app_1_year_member' => 'PIANOTE-MEMBERSHIP-1-YEAR',
-        'pianote_app_1_month_member' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+        'pianote_app_1_year_member' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+        'pianote_app_1_month_member' => 'PIANOTE-MEMBERSHIP-TRIAL',
 
         //2021 products
-        'pianote_app_1_year_2021' => 'PIANOTE-MEMBERSHIP-1-YEAR',
-        'pianote_app_1_month_2021' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+        'pianote_app_1_year_2021' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+        'pianote_app_1_month_2021' => 'PIANOTE-MEMBERSHIP-TRIAL',
 
         // todo - update stage/local env products play store id => local product sku
         '2' => 'PIANOTE-MEMBERSHIP-1-YEAR',
