@@ -385,26 +385,26 @@
                 {{--<p style="max-width: 480px;color: #aaa;padding:0 15px;"><em>All digital bonuses are added to your account IMMEDIATELY  with your membership to Pianote, and they’re yours forever. </em></p>--}}
             </div>
             <div x-data="timer()" x-init="countdown()">
-                <div x-cloak x-show="timeLeft > 0">
-                    <a  href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[classical-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true"
-                        class="join pianote my-4">Become A lifetime Member &raquo;</a>
-                        {{--                <p>Only @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() < 100)<s>100</s>@endif {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} spots remaining!</p>--}}
-                    <p class="text-promo uppercase">
-                         <span x-cloak >
-                             <span>
-                                 Only
-                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                                 Left!
-                             </span>
-                         </span>
-                    </p>
-                </div>
+{{--                <div x-cloak x-show="timeLeft > 0">--}}
+{{--                    <a  href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[classical-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true"--}}
+{{--                        class="join pianote my-4">Become A lifetime Member &raquo;</a>--}}
+{{--                        --}}{{--                <p>Only @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() < 100)<s>100</s>@endif {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} spots remaining!</p>--}}
+{{--                    <p class="text-promo uppercase">--}}
+{{--                         <span x-cloak >--}}
+{{--                             <span>--}}
+{{--                                 Only--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                                 Left!--}}
+{{--                             </span>--}}
+{{--                         </span>--}}
+{{--                    </p>--}}
+{{--                </div>--}}
                 {{--<p>(Or choose a payment plan on the next page.)</p>--}}
-                <span x-cloak x-show="timeLeft < 0" class="join sold-out methodcta my-4">Sold Out</span>
+                <span {{-- x-cloak x-show="timeLeft < 0" --}} class="join sold-out methodcta my-4">Sold Out</span>
             </div>
         </div>
     </section>
