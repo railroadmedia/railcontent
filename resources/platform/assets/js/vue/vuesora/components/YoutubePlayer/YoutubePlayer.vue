@@ -204,10 +204,15 @@ export default {
                         }
 
                         if (event.data === 0) {
-                            vm.$emit('onVideoEnd', {
-                                ...event,
-                                contentId: vm.contentId,
-                            });
+                            const isReplayOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
+                            if (isReplayOn) {
+                                console.log('YOUTUBE PLAY FROM BEGGINING')
+                            } else {
+                                vm.$emit('onVideoEnd', {
+                                    ...event,
+                                    contentId: vm.contentId,
+                                });
+                            }
                         }
 
                     },

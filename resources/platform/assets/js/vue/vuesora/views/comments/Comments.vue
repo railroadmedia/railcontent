@@ -144,7 +144,7 @@ export default {
         },
         collapsable: {
             type: Boolean,
-            default: false,
+            default: true,
         },
     },
     data() {
