@@ -1230,8 +1230,8 @@ class CustomerIoSyncEventListener
         $latestPayment =
             ($mobileOrderEvent->getSubscription()
                 ->getLatestPayment());
-        $amountPaid = $latestPayment->getTotalPaid();
-        $amountDue = $latestPayment->getTotalDue();
+        $amountPaid = ($latestPayment) ? $latestPayment->getTotalPaid() : 0;
+        $amountDue = ($latestPayment) ? $latestPayment->getTotalDue() : 0;
         $productIds =
             [
                 $mobileOrderEvent->getSubscription()
