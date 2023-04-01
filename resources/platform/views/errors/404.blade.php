@@ -113,8 +113,67 @@
             {!! \App\Analytics\Tracker::bodyBottom() !!}
         </body>
 
-    @else
+    @elseif($brand == 'drumeo')
+        <body class="tw-bg-drumeo tw-text-white tw-flex">
+            <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
+                <div class="tw-text-center tw-max-w-md tw-px-6 md:tw-px-0 md:tw-max-w-full">
 
+                    <img src="https://dmmior4id2ysr.cloudfront.net/assets/images/drumeo-404.svg" style="width:100%;" alt="404 - Not Found" class="md:tw-h-60 lg:tw-h-72 tw-mx-auto">
+                    <div class="tw-mb-2 tw-text-xl md:tw-text-2xl lg:tw-text-3xl">Oops, this link is lost in your hardware case.</div>
+                    <div class="tw-font-normal tw-mb-3 md:tw-mb-6 tw-text-sm md:tw-text- tw-text-[#E4E4E7]">The page you're looking for doesn't exist.</div>
+                    <button onclick="history.back()" class="tw-btn-primary tw-bg-white tw-text-black tw-mb-3 md:tw-mb-4">Go Back</button>
+                    <p class="tw-text-sm md:tw-text-base tw-text-[#E4E4E7]">
+                        Go back or <a href="https://www.musora.com/contact"><u class="tw-text-sm md:tw-text-base">contact us</u></a>
+                    </p>
+                </div>
+            </div>
+        </body>
+    @elseif($brand == 'pianote')
+        <body class="tw-bg-pianote tw-text-white tw-flex">
+            <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
+                <div class="tw-text-center tw-max-w-md tw-px-6 md:tw-px-0 md:tw-max-w-full">
+
+                    <img src="https://dmmior4id2ysr.cloudfront.net/assets/images/pianote-404.svg" style="width:100%;" alt="404 - Not Found" class="md:tw-h-60 lg:tw-h-72 tw-mx-auto">
+                    <div class="tw-mb-2 tw-text-xl md:tw-text-2xl lg:tw-text-3xl">Oops, this link is lost in your piano bench.</div>
+                    <div class="tw-font-normal tw-mb-3 md:tw-mb-6 tw-text-sm md:tw-text- tw-text-[#E4E4E7]">The page you're looking for doesn't exist.</div>
+                    <button onclick="history.back()" class="tw-btn-primary tw-bg-white tw-text-black tw-mb-3 md:tw-mb-4">Go Back</button>
+                    <p class="tw-text-sm md:tw-text-base tw-text-[#E4E4E7]">
+                        Go back or <a href="https://www.musora.com/contact"><u class="tw-text-sm md:tw-text-base">contact us</u></a>
+                    </p>
+                </div>
+            </div>
+        </body>
+    @elseif($brand == 'guitareo')
+        <body class="tw-bg-guitareo tw-text-white tw-flex">
+            <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
+                <div class="tw-text-center tw-max-w-md tw-px-6 md:tw-px-0 md:tw-max-w-full">
+
+                    <img src="https://dmmior4id2ysr.cloudfront.net/assets/images/guitareo-404.svg" style="width:100%;" alt="404 - Not Found" class="md:tw-h-60 lg:tw-h-72 tw-mx-auto">
+                    <div class="tw-mb-2 tw-text-xl md:tw-text-2xl lg:tw-text-3xl">Oops, this link is lost in your guitar case.</div>
+                    <div class="tw-font-normal tw-mb-3 md:tw-mb-6 tw-text-sm md:tw-text- tw-text-[#E4E4E7]">The page you're looking for doesn't exist.</div>
+                    <button onclick="history.back()" class="tw-btn-primary tw-bg-white tw-text-black tw-mb-3 md:tw-mb-4">Go Back</button>
+                    <p class="tw-text-sm md:tw-text-base tw-text-[#E4E4E7]">
+                        Go back or <a href="https://www.musora.com/contact"><u class="tw-text-sm md:tw-text-base">contact us</u></a>
+                    </p>
+                </div>
+            </div>
+        </body>
+    @elseif($brand == 'singeo')
+        <body class="tw-bg-singeo tw-text-white tw-flex">
+            <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
+                <div class="tw-text-center tw-max-w-md tw-px-6 md:tw-px-0 md:tw-max-w-full">
+
+                    <img src="https://dmmior4id2ysr.cloudfront.net/logos/404_musora_logo.png" style="width:100%;" alt="404 - Not Found" class="md:tw-h-60 lg:tw-h-72 tw-mx-auto">
+                    <div class="tw-mb-2 tw-text-xl md:tw-text-2xl lg:tw-text-3xl">Oops, look like this link hit the wrong note.</div>
+                    <div class="tw-font-normal tw-mb-3 md:tw-mb-6 tw-text-sm md:tw-text- tw-text-[#E4E4E7]">The page you're looking for doesn't exist.</div>
+                    <button onclick="history.back()" class="tw-btn-primary tw-bg-white tw-text-black tw-mb-3 md:tw-mb-4">Go Back</button>
+                    <p class="tw-text-sm md:tw-text-base tw-text-[#E4E4E7]">
+                        Go back or <a href="https://www.musora.com/contact"><u class="tw-text-sm md:tw-text-base">contact us</u></a>
+                    </p>
+                </div>
+            </div>
+        </body>
+    @else
         <body class="tw-bg-[#000C17] tw-text-white tw-flex">
             <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
                 <div class="tw-text-center tw-max-w-md tw-px-6 md:tw-px-0 md:tw-max-w-full">
@@ -123,11 +182,10 @@
                     <div class="tw-font-normal tw-mb-3 md:tw-mb-6 tw-text-sm md:tw-text- tw-text-[#E4E4E7]">The page you're looking for doesn't exist.</div>
                     <button onclick="history.back()" class="tw-btn-primary tw-bg-white tw-text-black tw-mb-3 md:tw-mb-4">Go Back</button>
                     <p class="tw-text-sm md:tw-text-base tw-text-[#E4E4E7]">
-                        Go back or contact <u class="tw-text-sm md:tw-text-base">support@musora.com</u>
+                        Go back or <a href="https://www.musora.com/contact"><u class="tw-text-sm md:tw-text-base">contact us</u></a>
                     </p>
                 </div>
             </div>
         </body>
-
     @endif
 </html>
