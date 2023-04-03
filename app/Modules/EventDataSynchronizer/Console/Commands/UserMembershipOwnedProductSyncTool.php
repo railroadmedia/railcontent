@@ -9,14 +9,15 @@ class UserMembershipOwnedProductSyncTool extends Command
 {
     protected $name = 'UserMembershipOwnedProductSyncTool';
     protected $description = 'UserMembershipOwnedProductSyncTool';
-    protected $signature = 'user:syncByOwner {productId}';
+    protected $signature = 'user:syncByOwner {productId} {purchasedAfter?}';
 
     public function handle()
     {
         $productId = $this->argument('productId');
+        $purchasedAfter = $this->argument('purchasedAfter');
 
-        $this->runChainQuery(function (int $skip, int $take) use ($productId) {
-            return new UserMembershipOwnedProductSyncJob($skip, $take, $productId);
+        $this->runChainQuery(function (int $skip, int $take) use ($productId, $purchasedAfter) {
+            return new UserMembershipOwnedProductSyncJob($skip, $take, $productId, $purchasedAfter);
         }, chunks: 2000);
     }
 }
