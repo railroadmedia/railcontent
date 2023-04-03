@@ -90,19 +90,28 @@
         })
     };
 
-    //Handle Like
+    //Handle Like/Unllike
     const likePlaylist = () => {
         state.isLiked = !state.isLiked;
-        PlaylistService.likePlaylist({ "brand": props.brand, "playlist_id": props.playlist.id }, token)
-            .then((response) => {
-                console.log('successfully liked')
-            })
-            .catch(function (error) {
-                console.log('failed to like')
-            });
+        if(state.isLiked){
+            PlaylistService.likePlaylist({ "brand": props.brand, "playlist_id": props.playlist.id }, token)
+                .then((response) => {
+                    console.log('successfully liked')
+                })
+                .catch(function (error) {
+                    console.log('failed to like')
+                });
+        }
+        else {
+            PlaylistService.unlikePlaylist(props.playlist.id, token)
+                .then((response) => {
+                    console.log('successfully unliked')
+                })
+                .catch(function (error) {
+                    console.log('failed to unlike')
+                });
+        }
     }
-
-    //TODO: add unlike function
 
     //Handle Dropdown Trigger
     const dropdownTriggerHandler = event => {
