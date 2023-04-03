@@ -1163,16 +1163,16 @@
         },
         {
             "name": "doctrine/data-fixtures",
-            "version": "1.6.3",
+            "version": "1.6.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "c27821d038e64f1bfc852a94064d65d2a75ad01f"
+                "reference": "4892c74dd04a3ec7404b9586272d722325905c58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/c27821d038e64f1bfc852a94064d65d2a75ad01f",
-                "reference": "c27821d038e64f1bfc852a94064d65d2a75ad01f",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/4892c74dd04a3ec7404b9586272d722325905c58",
+                "reference": "4892c74dd04a3ec7404b9586272d722325905c58",
                 "shasum": ""
             },
             "require": {
@@ -1205,7 +1205,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Doctrine\\Common\\DataFixtures\\": "lib/Doctrine/Common/DataFixtures"
+                    "Doctrine\\Common\\DataFixtures\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1225,7 +1225,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/data-fixtures/issues",
-                "source": "https://github.com/doctrine/data-fixtures/tree/1.6.3"
+                "source": "https://github.com/doctrine/data-fixtures/tree/1.6.4"
             },
             "funding": [
                 {
@@ -1241,7 +1241,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-07T15:10:22+00:00"
+            "time": "2023-02-17T10:46:36+00:00"
         },
         {
             "name": "doctrine/dbal",
@@ -8169,12 +8169,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "6b21b287a37c7747f126fad86747883df756aec7"
+                "reference": "624ab4528acb22bdc3ba14acf86a373c9d2f5b0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/6b21b287a37c7747f126fad86747883df756aec7",
-                "reference": "6b21b287a37c7747f126fad86747883df756aec7",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/624ab4528acb22bdc3ba14acf86a373c9d2f5b0a",
+                "reference": "624ab4528acb22bdc3ba14acf86a373c9d2f5b0a",
                 "shasum": ""
             },
             "require": {
@@ -8213,7 +8213,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-no-extra-days-for-trials-BR-662"
             },
-            "time": "2023-03-31T10:49:51+00:00"
+            "time": "2023-04-03T12:43:09+00:00"
         },
         {
             "name": "railroad/lead-tracker",
