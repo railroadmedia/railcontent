@@ -124,7 +124,8 @@ class MusoraApiUserProvider implements UserProviderInterface
             'membership_level' => $user->membership_level,
             'is_drumeo_lifetime_member' => $user->is_drumeo_lifetime_member,
             'is_lifetime_member' => $user->is_lifetime_member,
-            'show_onboarding' => (!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience)
+            'show_onboarding' => (!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience),
+            'access_level' => $user->access_level,
         ];
     }
 

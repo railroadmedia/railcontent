@@ -5,6 +5,7 @@ namespace App\Modules\EventDataSynchronizer\Listeners;
 use App\Maps\ContentTypes;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
 use App\Services\UserMetricsService;
+use Illuminate\Support\Facades\Log;
 use Railroad\Points\Services\UserPointsService;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
@@ -458,6 +459,9 @@ class ContentProgressEventListener
             if ($lengthInSeconds > 0 && $totalTimeWatched < $lengthInSeconds) {
                 $minutes = floor($totalTimeWatched / 60);
                 $totalAmount = 0;
+                $contentId = $content['content_id'];
+                Log::debug("handleMediaPlaybackTracked userId=$mediaPlaybackTracked->userId contentId=$contentId minutes=$minutes");
+                $start = microtime(true);
                 while ($minutes > 0) {
                     $this->userPointsService->setPoints(
                         $mediaPlaybackTracked->userId,
@@ -474,7 +478,8 @@ class ContentProgressEventListener
                     $totalAmount = $totalAmount + config('xp_ranks.per_minute_content_watched');
                     $minutes--;
                 }
-
+                $time = microtime(true) - $start;
+                Log::debug("handleMediaPlaybackTracked finished($time s)");
                 $this->userProvider->saveExperiencePoints(
                     $mediaPlaybackTracked->userId,
                     $this->userPointsService->countUserPointsPerBrand(
@@ -482,6 +487,7 @@ class ContentProgressEventListener
                     )
                 );
             }
+
 
             if ($mediaPlaybackTracked->mediaLengthInSeconds > 0) {
                 $this->userContentProgressService->saveContentProgress(
