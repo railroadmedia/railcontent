@@ -17,6 +17,7 @@ use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SongsUpgradeController;
 use App\Http\Controllers\Platform\SupportController;
 use App\Http\Controllers\Platform\UserListPagesController;
+use App\Http\Controllers\Platform\CohortPackPageController;
 use App\Modules\Brand\Enums\Brand;
 use App\Modules\Content\Controllers\MusoraCenterContentController;
 use Illuminate\Support\Facades\Route;
@@ -34,7 +35,7 @@ Route::domain('{musoraDomain}')
                 Route::get('/{brand}', [HomePageController::class, 'home'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.home');
-                
+
                 Route::get(
                     '/redirect30day',
                     [\App\Http\Controllers\Platform\HomePageController::class, 'redirect30day']
@@ -726,6 +727,10 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', ['drumeo'])
             ->name('books.drummers-toolbox.chapter');
+
+        Route::get('/{brand}/cohort-template', [CohortPackPageController::class, 'cohortPack'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.cohort-template');
     });
 
 
