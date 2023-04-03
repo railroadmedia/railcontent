@@ -142,17 +142,15 @@ class CustomerIoSyncService
             $latestMembershipUserProductToSync = null;
 
             foreach ($eligibleUserProducts as $eligibleUserProductIndex => $eligibleUserProduct) {
-                if (empty($latestMembershipUserProductToSync)) {
+                // if its lifetime, use it
+                if (empty($eligibleUserProduct->getExpirationDate())) {
                     $latestMembershipUserProductToSync = $eligibleUserProduct;
-
-                    continue;
+                    break;
                 }
 
-                // if its lifetime, use it
-                if (!empty($latestMembershipUserProductToSync) && empty($eligibleUserProduct->getExpirationDate())) {
+                if (empty($latestMembershipUserProductToSync)) {
                     $latestMembershipUserProductToSync = $eligibleUserProduct;
-
-                    break;
+                    continue;
                 }
 
                 // if this product expiration date is further in the past than whatever is currently set, skip it
@@ -180,7 +178,8 @@ class CustomerIoSyncService
                 }
             }
 
-            $membershipAccessExpirationDate = !empty($membershipProduct) ? $membershipProduct->getExpirationDate() : null;
+            $membershipAccessExpirationDate = !empty($membershipProduct) ? $membershipProduct->getExpirationDate(
+            ) : null;
 
             if (!empty($latestMembershipUserProductToSync) && !empty($firstMembershipUserProductToSync)) {
                 $membershipLatestAccessStartDate = $latestMembershipUserProductToSync->getCreatedAt();
