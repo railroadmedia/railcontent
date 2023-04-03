@@ -62,6 +62,25 @@ export default {
             });
         },
 
+    /**
+     * Unlike Playlist
+     *
+     * @param {string} token
+     * @param {object} payload -
+     */
+        unlikePlaylist(playlist_id, token) {
+            const headers = {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token
+            };
+            return axios({
+                method: 'DELETE',
+                url: '/railcontent/like-playlist',
+                data: { playlist_id },
+                headers
+            });
+        },
+
     //-------------READ--------------//
 
     /**
@@ -247,7 +266,7 @@ export default {
     },
 
     /**
-     * Update Playlist ITEM 
+     * Update Playlist ITEM
      *
      * @param {object} payload
      * @param {string} csrf_token

@@ -68,8 +68,8 @@
         <section class="tw-w-full tw-relative tw-flex tw-flex-col">
             <!-- Playlist Item -->
             <unpin-item
-                v-for="list in playlistsStore.pinnedPlaylists" 
-                :key="list.id" 
+                v-for="list in playlistsStore.pinnedPlaylists"
+                :key="list.id"
                 :list="list"
                 @onUnpin="storeUnpinnedItem"
             />
@@ -77,8 +77,8 @@
 
         <!-- Modal CTAs -->
         <div class="tw-pt-[30px] tw-flex tw-justify-center">
-            <button @click="() => emit('onCloseModal')" class="tw-w-[150px] tw-btn-primary tw-btn-small tw-text-center tw-justify-center tw-items-center dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10">CANCEL</button>
-            <button @click="() => handleUnpinPlaylists()" :class="`tw-ml-2 tw-btn-primary tw-btn-small tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center tw-p-0 tw-w-[150px] tw-px-[30px]`"><span>CONFIRM</span></button>
+            <button @click="() => emit('onCloseModal')" class="tw-w-[150px] tw-btn-secondary tw-text-center tw-justify-center tw-items-center dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10">CANCEL</button>
+            <button @click="() => handleUnpinPlaylists()" :class="`tw-ml-2 tw-btn-primary tw-bg-${brand} tw-text-center tw-flex tw-justify-center tw-items-center tw-p-0 tw-w-[150px] tw-px-[30px]`"><span>CONFIRM</span></button>
         </div>
     </div>
 </template>
