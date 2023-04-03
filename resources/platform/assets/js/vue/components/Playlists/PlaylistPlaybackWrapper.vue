@@ -1,5 +1,10 @@
 <script setup>
-/* Todo: RE add captions */
+/* Todo:
+    RE add captions
+    fix tracking for videos
+    
+*/
+
 import { onBeforeMount, reactive, ref } from 'vue';
 import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import SoundSlice from '../SoundSlice/SoundSlice.vue';
@@ -11,6 +16,7 @@ import VideoResources from '../../vuesora/components/VideoResources/VideoResourc
 import Comments from '../../vuesora/views/comments/Comments.vue';
 import PlaybackNavButtons from './PlaybackNavButtons.vue';
 import RelatedLesson from './RelatedLesson.vue';
+import { usePlaylistsStore } from '../../../stores/playlists';
 
 //-----------Props-----------//
 const props = defineProps({
@@ -183,8 +189,17 @@ const props = defineProps({
     },
 });
 
+//Pinia Stores
+const playlistsStore = usePlaylistsStore();
+
 const handleGoToNext = () => {
-    if (props.nextLessonUrl && props.nextLessonUrl !== '/') {
+    const isShuffleOn = localStorage.getItem("playbackShuffleOn") ? JSON.parse(localStorage.getItem("playbackShuffleOn")) : false;
+
+    if(isShuffleOn) {
+        const randIndex = Math.floor(Math.random() * playlistsStore.lessons.length);
+        window.location.href = playlistsStore.lessons[randIndex].url;
+    }
+    else if (props.nextLessonUrl && props.nextLessonUrl !== '/') {
         window.location.href = props.nextLessonUrl;
     }
 };
@@ -275,7 +290,8 @@ onBeforeMount(() => {
                     <playback-cue :autoplay="false" :repeat="false" :brand="brand" :lessons="playlistItems"
                         :playlist-name="playlistName" :duration="playlistDuration" :playlist-url="playlistUrl"
                         :playlist-item-id="playlistItemId" :playlist-id="playlistId" :infinite-scroll="true"
-                        :playlist-item-position="playlistItemPosition" />
+                        :playlist-item-position="playlistItemPosition" :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" 
+                     />
                 </div>
             </div>
             <!-- Related Playlists -->

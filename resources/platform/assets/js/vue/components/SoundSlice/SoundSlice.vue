@@ -93,7 +93,12 @@ const handleSoundsliceEvent = (event) => {
                 handlePause();
                 break;
             case 'ssAudioEnd':
-                emit('onAudioEnd');
+                const isReplayOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
+                if (isReplayOn) {
+                    console.log('SOUNDSLICE PLAY FROM BEGGINING')
+                } else {
+                    emit('onAudioEnd');
+                }
                 break;
             case 'ssAudioLoaded':
                 console.log('AUDIO LOADED')

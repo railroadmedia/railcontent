@@ -19,6 +19,14 @@ const props = defineProps({
         type: String,
         default: "drumeo"
     },
+    prevLessonUrl: {
+        type: String,
+        default: ''
+    },
+    nextLessonUrl: {
+        type: String,
+        default: ''
+    },
     playlistName: {
         type: String,
         default: "Playlist"
@@ -62,6 +70,8 @@ const pageNumberTop = ref(1);
 const pageNumberBottom = ref(1);
 const preventReFetch = ref(false);
 const isLoading = ref(false);
+const isPlaybackShuffleOn = ref(false);
+const isPlaybackRepeatOn = ref(false);
 
 
 //---------Computed--------//
@@ -73,13 +83,6 @@ const shouldShowBottomSkeleton = computed(() => {
 const shouldShowTopSkeleton = computed(() => {
     return pageNumberTop.value > 1;
 });
-
-//-----------Reactive Data-----------//
-
-const state = reactive({
-    isShuffle: false,
-    isRepeat: false,
-})
 
 //-----------Methods-----------//
 
@@ -103,7 +106,7 @@ const handleScroll = (e) => {
                     playlistsStore.lessons = [...response.data.results, ...playlistsStore.lessons];
                     nextTick(() => {
                         const cueScrollContainer = document.getElementById('cue-scroll-container');
-                        cueScrollContainer.scrollTop = 90*20;
+                        cueScrollContainer.scrollTop = 90 * 20;
                     })
                 }
             }).catch(() => {
@@ -134,12 +137,27 @@ const handleScroll = (e) => {
     }
 };
 
+const handleShuffleToggle = () => {
+    isPlaybackShuffleOn.value = !isPlaybackShuffleOn.value;
+    localStorage.setItem("playbackShuffleOn", isPlaybackShuffleOn.value);
+};
+
+const handleRepeatToggle = () => {
+    isPlaybackRepeatOn.value = !isPlaybackRepeatOn.value;
+    localStorage.setItem("playbackRepeatOn", isPlaybackRepeatOn.value);
+};
+
 //-----------Lifecycle Hooks -----------//
 
-onBeforeMount(() => {  
+onBeforeMount(() => {
     playlistsStore.lessons = props.lessons?.data ? props.lessons.data : [];
     pageNumberBottom.value = props.lessons.meta.page;
     pageNumberTop.value = props.lessons.meta.page;
+
+
+    if (localStorage.getItem("playbackShuffleOn")) {
+        isPlaybackShuffleOn.value = JSON.parse(localStorage.getItem("playbackShuffleOn"));
+    }
 });
 
 onMounted(() => {
@@ -164,9 +182,20 @@ onMounted(() => {
             </p>
             <!-- CTAs -->
             <div class="tw-flex">
+                <!-- Prev Lesson -->
+                <a class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors tw-mr-3"
+                    :href="prevLessonUrl" title="Shuffle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M1.76712 0.114258C1.23289 0.114258 0.799805 0.529617 0.799805 1.04199V14.958C0.799805 15.4703 1.23289 15.8857 1.76712 15.8857C2.30135 15.8857 2.73443 15.4703 2.73443 14.958V9.81879C2.76226 9.83874 2.79068 9.85829 2.81971 9.87742L11.2617 15.4418C12.0911 15.9885 13.0893 15.9951 13.8701 15.652C14.6531 15.3079 15.3095 14.5629 15.3095 13.5643V2.43561C15.3095 1.43701 14.6531 0.692022 13.8701 0.347956C13.0893 0.00486338 12.0911 0.011484 11.2617 0.558154L2.81971 6.12252C2.79068 6.14165 2.76226 6.1612 2.73443 6.18115V1.04199C2.73443 0.529617 2.30135 0.114258 1.76712 0.114258ZM12.3575 2.08731C12.5716 1.94619 12.8397 1.93608 13.0643 2.0348C13.2867 2.13253 13.3749 2.28788 13.3749 2.43561V13.5643C13.3749 13.7121 13.2867 13.8674 13.0643 13.9651C12.8397 14.0639 12.5716 14.0538 12.3575 13.9126L3.91546 8.34827C3.75312 8.24126 3.70175 8.1085 3.70175 7.99997C3.70175 7.89145 3.75312 7.75868 3.91546 7.65168L12.3575 2.08731Z"
+                            fill="currentColor" />
+                    </svg>
+                </a>
+                <!-- Shuffle -->
                 <button
-                    class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors tw-mr-3"
-                    @click.prevent="state.isShuffe = !state.isShuffe" title="Shuffle">
+                    class="tw-text-[#3F3F46] tw-transition-colors tw-mr-3"
+                    :class="`${isPlaybackShuffleOn ? 'dark:tw-text-white' : 'dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'}`"
+                    @click.prevent="handleShuffleToggle" title="Shuffle">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M20.7447 14.5602L17.1993 12.5479C17.1129 12.5048 17.0174 12.4823 16.9205 12.4823C16.8236 12.4823 16.728 12.5048 16.6417 12.5479C16.4632 12.6353 16.3518 12.8324 16.3518 13.0291V14.4945H14.3225C13.7555 14.4966 13.1995 14.3418 12.7183 14.0478C12.2371 13.7537 11.8504 13.3324 11.6026 12.8324L9.1283 7.99896C8.41297 6.59965 6.98573 5.747 5.40259 5.747H1.50027C1.35244 5.747 1.21066 5.80459 1.10612 5.90711C1.00158 6.00963 0.942856 6.14868 0.942856 6.29366C0.942856 6.43865 1.00158 6.57769 1.10612 6.68021C1.21066 6.78273 1.35244 6.84033 1.50027 6.84033H5.4028C5.96966 6.83821 6.52563 6.99306 7.00675 7.28705C7.48788 7.58105 7.87462 8.00225 8.12249 8.50223L10.5978 13.3356C11.3115 14.7363 12.7387 15.5882 14.3219 15.5882H16.3518V17.0532C16.3518 17.2505 16.4632 17.4251 16.6417 17.5344C16.732 17.5776 16.8311 17.6001 16.9316 17.6001C17.0321 17.6001 17.1313 17.5776 17.2216 17.5344L20.7673 15.5221C20.9457 15.4347 21.0571 15.2378 21.0571 15.0411C21.0571 14.8444 20.9008 14.6694 20.7447 14.5602Z"
@@ -182,14 +211,26 @@ onMounted(() => {
                             stroke="#9EC0DC" stroke-width="0.1" />
                     </svg>
                 </button>
-                <button class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors"
-                    @click.prevent="state.isRepeat = !state.isRepeat" title="Repeat">
+                <!-- Repeat -->
+                <button
+                    class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors tw-mr-3"
+                    @click.prevent="handleRepeatToggle" title="Repeat">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M3.77143 11V8.38092C3.77143 7.6863 4.04737 7.02014 4.53853 6.52897C5.0297 6.0378 5.69586 5.76187 6.39048 5.76187H17.7397M17.7397 5.76187L15.1206 3.14282M17.7397 5.76187L15.1206 8.38092M17.7397 11V13.619C17.7397 14.3136 17.4637 14.9798 16.9726 15.471C16.4814 15.9621 15.8153 16.2381 15.1206 16.2381H3.77143M3.77143 16.2381L6.39048 18.8571M3.77143 16.2381L6.39048 13.619"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </button>
+                <!-- Next Lesson -->
+                <a class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors"
+                    :href="nextLessonUrl" title="Shuffle">
+                    <svg class="tw-rotate-180" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"
+                        fill="none">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M1.76712 0.114258C1.23289 0.114258 0.799805 0.529617 0.799805 1.04199V14.958C0.799805 15.4703 1.23289 15.8857 1.76712 15.8857C2.30135 15.8857 2.73443 15.4703 2.73443 14.958V9.81879C2.76226 9.83874 2.79068 9.85829 2.81971 9.87742L11.2617 15.4418C12.0911 15.9885 13.0893 15.9951 13.8701 15.652C14.6531 15.3079 15.3095 14.5629 15.3095 13.5643V2.43561C15.3095 1.43701 14.6531 0.692022 13.8701 0.347956C13.0893 0.00486338 12.0911 0.011484 11.2617 0.558154L2.81971 6.12252C2.79068 6.14165 2.76226 6.1612 2.73443 6.18115V1.04199C2.73443 0.529617 2.30135 0.114258 1.76712 0.114258ZM12.3575 2.08731C12.5716 1.94619 12.8397 1.93608 13.0643 2.0348C13.2867 2.13253 13.3749 2.28788 13.3749 2.43561V13.5643C13.3749 13.7121 13.2867 13.8674 13.0643 13.9651C12.8397 14.0639 12.5716 14.0538 12.3575 13.9126L3.91546 8.34827C3.75312 8.24126 3.70175 8.1085 3.70175 7.99997C3.70175 7.89145 3.75312 7.75868 3.91546 7.65168L12.3575 2.08731Z"
+                            fill="currentColor" />
+                    </svg>
+                </a>
             </div>
         </div>
         <!-- Items -->
@@ -202,11 +243,13 @@ onMounted(() => {
                 </div>
             </div>
             <!-- Print Each Card -->
-            <playlist-card :currentItem="playlistItemPosition" v-for="(lesson) in playlistsStore.lessons" :key="'playlist-card-cue-'+lesson.id" :cardId="'playlist-card-cue-'+lesson.id" :lesson="lesson" :token="token"
-                :brand="brand" :cue-version="true" />
+            <playlist-card :currentItem="playlistItemPosition" v-for="(lesson) in playlistsStore.lessons"
+                :key="'playlist-card-cue-' + lesson.id" :cardId="'playlist-card-cue-' + lesson.id" :lesson="lesson"
+                :token="token" :brand="brand" :cue-version="true" />
             <!-- Skeleton Loader For Infinite Scroll -->
             <div v-if="shouldShowBottomSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
-                <div v-for="n in (playlistsStore.lessons.length >= 20 ? limit : 20 - playlistsStore.lessons.length)" :key="n"
+                <div v-for="n in (playlistsStore.lessons.length >= 20 ? limit : 20 - playlistsStore.lessons.length)"
+                    :key="n"
                     class="tw-flex tw-w-full tw-h-[90px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]">
                 </div>
             </div>
