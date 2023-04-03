@@ -2,10 +2,8 @@
 /* Todo:
     RE add captions
     fix tracking for videos
-    
 */
-
-import { onBeforeMount, reactive, ref } from 'vue';
+import { onBeforeMount } from 'vue';
 import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import SoundSlice from '../SoundSlice/SoundSlice.vue';
 import PlaybackCue from './PlaybackCue.vue';

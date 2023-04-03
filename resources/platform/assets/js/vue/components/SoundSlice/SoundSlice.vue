@@ -93,9 +93,11 @@ const handleSoundsliceEvent = (event) => {
                 handlePause();
                 break;
             case 'ssAudioEnd':
-                const isReplayOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
-                if (isReplayOn) {
-                    console.log('SOUNDSLICE PLAY FROM BEGGINING')
+                const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
+                if (isRepeatOn) {
+                    var ssiframe = document.getElementById('ssEmbed').contentWindow;
+                    ssiframe.postMessage('{"method": "seek", "arg": 0}', 'https://www.soundslice.com');
+                    ssiframe.postMessage('{"method": "play"}', 'https://www.soundslice.com');
                 } else {
                     emit('onAudioEnd');
                 }
