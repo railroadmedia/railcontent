@@ -490,8 +490,6 @@ class CustomerIoSyncService
             $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
         }
 
-        $packSkusToSync = config('event-data-synchronizer.customer_io_pack_skus_to_sync_ownership');
-
         /**
          * @var $userProducts UserProduct[]
          */
@@ -508,7 +506,7 @@ class CustomerIoSyncService
                     continue;
                 }
 
-                if (in_array($userProduct->getProduct()->getSku(), $packSkusToSync) && $userProduct->isValid()) {
+                if ($userProduct->getProduct()->isDigitalProduct() && $userProduct->isValid()) {
                     $productSkuArray[] = "_" . $userProduct->getProduct()->getSku() . "_";
                     $idArray[] = "_" . $userProduct->getProduct()->getId() . "_";
                 }
