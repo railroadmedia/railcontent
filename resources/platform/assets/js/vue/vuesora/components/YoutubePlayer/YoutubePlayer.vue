@@ -205,8 +205,10 @@ export default {
 
                         if (event.data === 0) {
                             const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
-                            if (isRepeatOn) {
+                            const isInPlaybackMode = window.location.href.includes('playlist-item');
+                            if (isRepeatOn && isInPlaybackMode) {
                                 this.player.seekTo(0);
+                                this.player.playVideo();
                             } else {
                                 vm.$emit('onVideoEnd', {
                                     ...event,

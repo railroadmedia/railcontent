@@ -94,7 +94,9 @@ const handleSoundsliceEvent = (event) => {
                 break;
             case 'ssAudioEnd':
                 const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
-                if (isRepeatOn) {
+                const isInPlaybackMode = window.location.href.includes('playlist-item');
+
+                if (isRepeatOn && isInPlaybackMode) {
                     var ssiframe = document.getElementById('ssEmbed').contentWindow;
                     ssiframe.postMessage('{"method": "seek", "arg": 0}', 'https://www.soundslice.com');
                     ssiframe.postMessage('{"method": "play"}', 'https://www.soundslice.com');
