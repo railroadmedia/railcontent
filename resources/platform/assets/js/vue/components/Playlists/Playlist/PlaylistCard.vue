@@ -124,7 +124,9 @@ const duration_formatted = (seconds) => {
         const hrsFormatted = hrs < 10 ? `${hrs}` : hrs;
         const minFormatted = min < 10 ? `0${min}` : min;
         const secFormatted = sec < 10 ? `0${sec}` : sec;
-        return `${hrsFormatted}:${minFormatted}:${secFormatted}`;
+
+        if(hrsFormatted === 0 && minFormatted === 0 && secFormatted === 0) return false;
+        else return `${hrsFormatted}:${minFormatted}:${secFormatted}`;
     } else {
         return false;
     }
@@ -278,7 +280,7 @@ onBeforeMount(() => {
                 <!-- Lesson Time -->
                 <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px] tw-text-[14px]"
                     :title="lesson.duration">
-                    <span>{{ duration_formatted(lesson.duration) || '0:00:00' }}</span>
+                    <span>{{ duration_formatted(lesson.duration) || '' }}</span>
                 </div>
             </template>
 
