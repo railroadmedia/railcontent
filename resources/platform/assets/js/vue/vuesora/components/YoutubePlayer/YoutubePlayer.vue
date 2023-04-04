@@ -204,9 +204,11 @@ export default {
                         }
 
                         if (event.data === 0) {
-                            const isReplayOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
-                            if (isReplayOn) {
-                                console.log('YOUTUBE PLAY FROM BEGGINING')
+                            const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
+                            const isInPlaybackMode = window.location.href.includes('playlist-item');
+                            if (isRepeatOn && isInPlaybackMode) {
+                                this.player.seekTo(0);
+                                this.player.playVideo();
                             } else {
                                 vm.$emit('onVideoEnd', {
                                     ...event,

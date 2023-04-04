@@ -154,9 +154,11 @@ onBeforeMount(() => {
     pageNumberBottom.value = props.lessons.meta.page;
     pageNumberTop.value = props.lessons.meta.page;
 
-
     if (localStorage.getItem("playbackShuffleOn")) {
         isPlaybackShuffleOn.value = JSON.parse(localStorage.getItem("playbackShuffleOn"));
+    }
+    if (localStorage.getItem("playbackRepeatOn")) {
+        isPlaybackRepeatOn.value = JSON.parse(localStorage.getItem("playbackRepeatOn"));
     }
 });
 
@@ -213,7 +215,8 @@ onMounted(() => {
                 </button>
                 <!-- Repeat -->
                 <button
-                    class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors tw-mr-3"
+                    class="tw-text-[#3F3F46] tw-transition-colors tw-mr-3"
+                    :class="`${isPlaybackRepeatOn ? 'dark:tw-text-white' : 'dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'}`"
                     @click.prevent="handleRepeatToggle" title="Repeat">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
