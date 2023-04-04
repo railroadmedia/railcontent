@@ -795,9 +795,11 @@ class CustomerIoSyncEventListener
             dispatch(
                 (new CustomerIoCreateEventByUserId(
                     $activityEvent->getUserId(),
-                    $activityEvent->getBrand(),
-                    $activityEvent->getBrand() . '_members_area_activity',
-                    [],
+                    config('event-data-syncrhonizer.customer_io_account_to_sync_all_brands'),
+                     'musora_members_area_activity',
+                    [
+                        'brands' => $activityEvent->getBrands()
+                    ],
                     null,
                     Carbon::now()->timestamp
                 ))->delay(

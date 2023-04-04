@@ -12,19 +12,29 @@ class UserActivitySyncMiddleware
     public static function handle($request, Closure $next)
     {
         if (auth()->check()) {
-            $currentUser = auth()->user();
+            $currentUserId = auth()->user()->id;
             $redis =
                 Cache::store('redis')
                     ->connection();
-            $eventName =
-                config('event-data-synchronizer.customer_io_brand_activity_event') .
-                '_members_area_activity_' .
-                $currentuser->id;
+            $brandKeyValues = config('event-data-synchronizer.customer_io_members_area_cached_event_names', []);
+            $brandKeyValue = array_key_exists(brand(), $brandKeyValues) ?
+                $brandKeyValues[brand()] . $currentUserId : null;
 
-            if (!$redis->exists($eventName)) {
+            if (!$redis->exists($brandKeyValue) && $brandKeyValue) {
+
+                // check for existing event keys from brands stored in cache in the last 24 hours for the current user
+                $existingBrandsArray[brand()] = Carbon::now()->toDateTimeString();
+                foreach ($brandKeyValues as  $brandKey => $existingBrandEventName) {
+                    $existingBrandEventName .= $currentUserId;
+                    if ($redis->exists($existingBrandEventName)) {
+                        $existingBrandsArray[$brandKey] = $redis->get($existingBrandEventName);
+                    }
+                }
+                array_multisort($existingBrandsArray, SORT_DESC);
+
                 //store user event key in Redis, ttl=24 hours
                 $redis->set(
-                    $eventName,
+                    $brandKeyValue,
                     Carbon::now()
                         ->toDateTimeString(),
                     'EX',
@@ -34,15 +44,15 @@ class UserActivitySyncMiddleware
                 //customer-io event
                 event(
                     new FirstActivityPerDay(
-                        $currentuser->id,
-                        config('event-data-synchronizer.customer_io_brand_activity_event'),
+                        $currentUserId,
+                        implode(", ", array_keys($existingBrandsArray)),
                         Carbon::now()
                             ->toDateTimeString()
                     )
                 );
             }
         }
-
         return $next($request);
     }
+
 }
