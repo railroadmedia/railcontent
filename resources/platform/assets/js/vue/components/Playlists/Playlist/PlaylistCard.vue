@@ -273,12 +273,12 @@ onBeforeMount(() => {
             <template v-if="!cueVersion">
                 <!-- Lesson Type -->
                 <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[128px]" :title="lesson.type">
-                    <span v-if="lesson.type" class="tw-text-center">
+                    <span v-if="lesson.type" class="tw-text-center tw-text-sm">
                         {{ lesson.type.replace('-', ' ') }}
                     </span>
                 </div>
                 <!-- Lesson Time -->
-                <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px] tw-text-[14px]"
+                <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px] tw-text-sm"
                     :title="lesson.duration">
                     <span>{{ duration_formatted(lesson.duration) || '' }}</span>
                 </div>
