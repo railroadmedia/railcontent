@@ -5,6 +5,8 @@ export const useConfirmationStore = defineStore({
   state: () => ({
     title: null,
     subtitle: null,
+    submitLabel: 'Yes',
+    hideCancel: false,
     callbacks: {
       submit: () => { },
       cancel: () => { },
@@ -15,6 +17,8 @@ export const useConfirmationStore = defineStore({
     update({
       title,
       subtitle,
+      submitLabel,
+      hideCancel,
       callbacks: {
         submit,
         cancel,
@@ -23,6 +27,8 @@ export const useConfirmationStore = defineStore({
       this.$patch({
         title,
         subtitle,
+        submitLabel,
+        hideCancel,
         callbacks: {
           submit: submit ? submit : () => {},
           cancel: cancel ? cancel : () => {},
@@ -33,6 +39,8 @@ export const useConfirmationStore = defineStore({
       this.$patch({
         title: null,
         subtitle: null,
+        submitLabel: 'Yes',
+        hideCancel: false,
         callbacks: {
           submit: () => { },
           cancel: () => { },

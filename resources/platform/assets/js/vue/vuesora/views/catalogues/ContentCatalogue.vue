@@ -47,11 +47,12 @@
             :included-types="includedTypes"
             :selected-types="selected_types"
             :search-term="search_term"
-            :current_page="page"
+            :current-page="page"
             :isCoachesGrid="isCoachesGrid"
             :total-results="total_results"
             :catalogueType="catalogueType"
             :search-bar-title="searchBarTitle"
+            :infiniteScroll="infiniteScroll"
             @typeChange="handleTypeChange"
             @searchChange="handleSearch"
         />

@@ -5,7 +5,6 @@ namespace App\Modules\EventDataSynchronizer\Middleware;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\Cache;
-use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
 use App\Modules\EventDataSynchronizer\Events\UTMLinks;
 
 class UTMEventsMiddleware

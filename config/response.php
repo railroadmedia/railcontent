@@ -1480,6 +1480,7 @@ return [
                 'display_name',
                 'xp_level',
                 'rank',
+                'access_level',
             ],
             'comment',
             'created_on',
@@ -2065,6 +2066,7 @@ return [
             'membership_level',
             'is_lifetime_member',
             'is_drumeo_lifetime_member',
+            'access_level',
         ],
 
         'quick-tips' => [

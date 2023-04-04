@@ -2,8 +2,8 @@
 <browserconfig>
     <msapplication>
         <tile>
-            <square150x150logo src="/favicons/musora/mstile-150x150.png?v=2022"/>
-            <TileColor>#4736e3</TileColor>
+            <square150x150logo src="/mstile-150x150.png"/>
+            <TileColor>#00101D</TileColor>
         </tile>
     </msapplication>
 </browserconfig>
