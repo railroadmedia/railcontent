@@ -129,7 +129,7 @@ onBeforeMount(()=> {
             <button @click="handleCreatePlaylist"
                 class="tw-inline-flex tw-items-center tw-flex-shrink-0 tw-justify-center tw-transition tw-h-full tw-w-[42px] tw-text-[#00101D] dark:tw-text-white dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                 :class="[isSidebarCollapsed ? 'md:tw-opacity-0' : 'tw-opacity-100']" title="Create Playlist">
-                <musora-icon icon-name="plus" class="tw-w-[20px]" />
+                <musora-icon icon-name="plus" class="tw-w-[25px]" />
             </button>
 
         </div>
@@ -138,7 +138,7 @@ onBeforeMount(()=> {
             <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-2">
                 <ul class="tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px] tw-overflow-hidden tw-border-b dark:tw-border-b-[#223F57]"
                     v-if="formattedPinnedPlaylists.length > 0 && !playlistsStore.loadingPinnedPlaylists">
-                    <p class="tw-text-[#9EC0DC] tw-text-xs tw-pl-[24px] tw-font-bold tw-mt-2">PINNED</p>
+                    <p class="tw-text-[#3f3f46] dark:tw-text-[#9EC0DC] tw-text-xs tw-pl-[24px] tw-font-bold tw-mt-2">PINNED</p>
                     <!-- Loop through User Pinned Playlists -->
                     <li class="tw-group tw-w-full tw-flex tw-overflow-hidden dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                         v-for="item in formattedPinnedPlaylists" :key="item.id + '-playlist-li'"
@@ -147,9 +147,9 @@ onBeforeMount(()=> {
                             class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-h-[42px] tw-items-center">
                             <span class="tw-min-w-0 group-hover:tw-max-w-[140px] tw-truncate tw-capitalize tw-text-sm group-hover:tw-underline">{{ item.name }}</span>
                         </a>
-                        <div class="md:tw-hidden group-hover:tw-inline-flex tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center" :class="`tw-text-${brand}`">
+                        <div class="md:tw-hidden group-hover:tw-inline-flex tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center dark:tw-text-white">
                             <button title="Unpin Playlist" @click="unpinPlaylist(item, brand)">
-                                <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto"  />
+                                <musora-icon icon-name="tack-filled" class="tw-w-[24px] tw-h-[24px] tw-mx-auto"  />
                             </button>
                         </div>
                         <div class="md:tw-hidden group-hover:tw-inline-flex dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
@@ -179,7 +179,7 @@ onBeforeMount(()=> {
                            class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-h-[42px] tw-items-center">
                             <span class="tw-min-w-0 group-hover:tw-max-w-[140px] tw-truncate tw-capitalize tw-text-sm group-hover:tw-underline">{{ item.name }}</span>
                         </a>
-                        <div class="md:tw-hidden group-hover:tw-inline-flex tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center" :class="`tw-text-${brand}`">
+                        <div class="md:tw-hidden group-hover:tw-inline-flex tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center dark:tw-text-white">
                             <button title="Pin Playlist" @click="pinPlaylist(item, brand)">
                                 <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto"  />
                             </button>
