@@ -17,6 +17,8 @@ use Railroad\Railcontent\Services\ConfigService as RailcontentConfigService;
 
 class CustomerIoSyncService
 {
+    const AttributeLimit = 1000;
+
     /**
      * @var SubscriptionRepository
      */
@@ -245,9 +247,13 @@ class CustomerIoSyncService
         $contentFollowAttributes = [];
 
         foreach ($brandCoachFollows as $contentBrand => $followContentIdsAndSlugsString) {
-            $contentFollowAttributes[$contentBrand . '_subscribed_coaches'] = implode(
-                ', ',
-                $followContentIdsAndSlugsString
+            $contentFollowAttributes[$contentBrand . '_subscribed_coaches'] = substr(
+                implode(
+                    ', ',
+                    $followContentIdsAndSlugsString
+                ),
+                0,
+                self::AttributeLimit
             );
         }
 
