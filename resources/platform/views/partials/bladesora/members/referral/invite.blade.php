@@ -70,14 +70,21 @@ $cardImage = $cardImages[brand()];
                     />
                 </div>
                 <h3 class="tw-font-normal tw-mb-6">
-                    Refer your friends & family for a chance to <br class="tw-hidden sm:tw-inline"><strong class="tw-font-extrabold">win a $200 Amazon Gift Card.</strong>
+                    Refer your friends & family for a chance to <br class="tw-hidden sm:tw-inline"><strong class="tw-font-extrabold">win a $100 Amazon Gift Card.</strong>
                 </h3>
                 <div class="tw-flex tw-flex-col 2xl:tw-flex-row tw-items-center {{ $containerClass }}">
                     <div
                         class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-lg md:tw-max-w-2xl tw-mx-auto">
                         <p class="tw-mb-6">
-                            Give a friend unlimited access to Pianote, free for 30 days.<br><br>
-                            Every new Musora referral you make from <strong>April 6 to May 8, 2023,</strong> automatically enters you for a chance to win 1 of 4 $200 Amazon gift cards.<br><br>
+                            Give a friend unlimited access to
+
+                            @if($brand == 'drumeo') Drumeo, @endif
+                            @if($brand == 'pianote') Pianote, @endif
+                            @if($brand == 'guitareo') Guitareo, @endif
+                            @if($brand == 'singeo') Singeo, @endif
+
+                             free for 30 days.<br><br>
+                            Every new Musora referral you make from <strong>April 6 to May 8, 2023,</strong> automatically enters you for a chance to win 1 of 10 $100 Amazon gift cards.<br><br>
                             <i class="tw-underline">See Contest Details - Terms & Conditions*</i>
                         </p>
 
@@ -140,7 +147,7 @@ $cardImage = $cardImages[brand()];
                     <i class="fa-light fa-calendar-days tw-text-{{$brand}} tw-text-2xl tw-mr-4"></i> <span>Musora Referral Contest&nbsp;-&nbsp;<b>April 6 to May 8, 2023</b></span>
                 </div>
                 <div class="tw-flex tw-items-center tw-justify-center md:tw-justify-start tw-my-5 tw-text-sm md:tw-text-base">
-                    <i class="fa-regular fa-gift tw-text-{{$brand}} tw-text-2xl tw-mr-4"></i> <span>Refer & Enter to&nbsp;<b>Win a $200 Gift Card to Amazon.</b></span>
+                    <i class="fa-regular fa-gift tw-text-{{$brand}} tw-text-2xl tw-mr-4"></i> <span>Refer & Enter to&nbsp;<b>Win a $100 Gift Card to Amazon.</b></span>
                 </div>
                 <i class="tw-text-sm">
                     Guest passes are for new subscribers only and cannot be redeemed for renewals, extensions, or gift subscriptions.
@@ -158,11 +165,23 @@ $cardImage = $cardImages[brand()];
         <div class="tw-max-w-6xl tw-mx-auto tw-px-6 2xl:tw-px-0 dark:tw-text-white">
             <h4 class="tw-mb-4"><strong>Terms and Conditions</strong></h4>
             <p>
-                Lorem ipsum dolor sit amet consectetur. Ultricies pretium enim vitae consectetur. Nisl tristique mi sed molestie sed. Eu tellus sed tristique cras fames orci in duis turpis. Cras mi eget cursus elementum aliquet. Ultrices tellus morbi lorem egestas non placerat facilisis nisi. Ut nisi bibendum non odio arcu nibh pellentesque nec. <br><br>
-                Mi morbi mollis fusce libero. Donec faucibus faucibus auctor ut nam. Vitae amet viverra et integer faucibus faucibus. Imperdiet sit placerat tempor quis volutpat. Tempor nullam libero quis dui interdum nunc suspendisse. Bibendum cursus duis facilisi elementum scelerisque neque tortor nec. Vitae morbi tortor eu risus.<br><br>
-                Nunc amet sit nisi consectetur gravida imperdiet turpis eget dui. Faucibus amet amet lacus ut. Lectus enim erat hendrerit sit nulla tortor. Massa mauris duis potenti ullamcorper amet feugiat. Maecenas lacus dolor elit vel diam at. Mauris in urna dolor netus viverra odio rhoncus condimentum turpis. Vitae est ultrices euismod pulvinar molestie tempus sollicitudin eu. Felis consectetur id nascetur enim sit integer est odio semper. Purus vitae lobortis a bibendum donec vestibulum tellus. Condimentum dictumst nibh consectetur enim auctor dictumst sit lacus et.<br><br>
-                Justo massa est amet sed. Leo eget fringilla pellentesque et. Ipsum maecenas adipiscing aliquet risus aliquam viverra quam. Sed ante ornare leo tristique ultricies nunc libero. At leo lectus amet curabitur diam nec at et quisque.<br><br>
-                Pellentesque feugiat dignissim diam scelerisque. Id sit ultrices semper mi eu. Commodo risus nisl lacus tristique enim erat imperdiet. Viverra massa nunc id sollicitudin pretium et pulvinar ullamcorper tincidunt. Mauris eu odio est lobortis ultricies. Fringilla venenatis aenean ultricies cursus. In morbi ac mi sed orci est. Ut nunc enim risus nunc ut volutpat at. Quis pharetra aliquam non nulla bibendum platea tempus amet. Ultrices turpis sed cursus cras maecenas orci nunc condimentum. Elementum vulputate elit tristique montes arcu dictumst nec faucibus. Posuere suspendisse eleifend porttitor sagittis mi. In in orci justo amet nisl elementum ut netus. Lacus vitae arcu dictum augue ultrices tortor penatibus orci lectus. Faucibus ut sit lobortis id phasellus id.
+                <strong>Eligibility:</strong> The Musora Referral Contest is open to all Musora students who are 18 years of age or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
+                <br><br>
+                <strong>How to Enter:</strong> The contest period runs from April 6 to May 8, 2023. Participants are automatically entered into the contest by using referral methods on this page. Participants can collect one contest entry by 1) referring a friend or family member or 2) having the referee sign-up for a 30-Day Guest Pass. Each participant has a maximum of 20 contest entries. No purchase is necessary to enter or win.
+                <br><br>
+                <strong>Prize:</strong> One of ten $100 Amazon.com gift cards. The prize is non-transferable and cannot be exchanged for cash.
+                <br><br>
+                <strong>Winner Selection:</strong> The winner will be selected at random from all eligible entries received during the entry period. The winner will be notified by email or direct message within 48 hours of the selection. If the winner does not respond within 48 hours, another winner will be selected.
+                <br><br>
+                <strong>Release:</strong> By entering the contest, participants release and hold harmless the sponsor, their affiliates, and their respective officers, directors, employees, and agents from any and all liability or any injury, loss, or damage of any kind arising from or in connection with the contest or any prize won.
+                <br><br>
+                <strong>General Conditions:</strong> The sponsor reserves the right to cancel, suspend, or modify the contest if fraud, technical failures, or any other factor beyond their control impairs the contest's integrity, as determined by the sponsor in their sole discretion. The sponsor reserves the right to disqualify any individual who violates these Terms and Conditions or interferes with the contest in any way.
+                <br><br>
+                <strong>Governing Law:</strong> The contest shall be governed by and construed in accordance with the laws of the country where the contest is held, without regard to conflicts of law principles.
+                <br><br>
+                <strong>Privacy:</strong> Personal information collected from participants will be used only for the purpose of administering the contest and will not be shared with any third party except as necessary to fulfill the prize.
+                <br><br>
+                By participating in the contest, participants agree to be bound by these Terms and Conditions.
             </p>
         </div>
     </section>
@@ -171,7 +190,11 @@ $cardImage = $cardImages[brand()];
         <div class="tw-flex tw-flex-col tw-bg-white dark:tw-bg-[#081825] dark:tw-border-[#445F74] dark:tw-text-white corners-10 tw-shadow tw-py-10 tw-px-7 tw-text-center">
             <h3 class="tw-mb-4"><strong>Thanks for sharing your love for music!</strong></h3>
             <p class="tw-px-4 tw-mb-6">
-                You've successfully sent [email address] a 30-Day Guest Pass to [brand].
+                You've successfully sent <!--[email address]--> a 30-Day Guest Pass to
+                @if($brand == 'drumeo') Drumeo. @endif
+                @if($brand == 'pianote') Pianote. @endif
+                @if($brand == 'guitareo') Guitareo. @endif
+                @if($brand == 'singeo') Singeo. @endif
             </p>
             <div class="tw-text-center">
                 <span class="tw-btn-secondary tw-text-black dark:tw-text-white sm:tw-flex-1" onclick="closeModal()">Close</span>
