@@ -70,11 +70,13 @@ class PackPagesController extends Controller
     public function index(Request $request, $domain, $brand)
     {
         ContentRepository::$pullFutureContent = true;
+        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         AddedToPrimaryPlaylistDecorator::$skip = true;
         PackDecorator::$skip = true;
         LessonAssignmentDecorator::$skip = true;
         ContentExperienceDecorator::$skip = true;
+        \App\Decorators\Content\ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
 
         $packs = (new PackCollection(
             $this->contentService->getFiltered(1, -1, '-published_on', ['pack', 'semester-pack'],
@@ -89,28 +91,6 @@ class PackPagesController extends Controller
                                                false
             )['results']
         ))->sortByUserActivity(user()->id);
-
-        foreach($packs as $pack){
-            $nextLesson = $this->contentService->getNextContentForParentContentForUser($pack['id'], user()->id);
-            if($nextLesson && $nextLesson['type'] == 'pack-bundle-lesson'){
-                $bundle = $this->contentService->getByChildIdWhereParentTypeIn($nextLesson['id'],['pack-bundle'])->first();
-
-                $nextLesson['url'] = url()->route(
-                    'platform.packs.third-level',
-                    [
-                        "brand" => $brand,
-                        "packSlug" => $pack['slug'],
-                        "packId" => $pack['id'],
-                        "packBundleSlug" => $bundle['slug'],
-                        "packBundleId" => $bundle['id'],
-                        "packBundleLessonSlug" => $nextLesson['slug'],
-                        "packBundleLessonId" => $nextLesson['id'],
-                    ]
-                );
-
-                $pack['next_lesson_url'] = $nextLesson['url'];
-            }
-        }
 
         if (user()->isALifetimeMember() && brand() == 'drumeo') {
             foreach ($packs as $packIndex => $pack) {

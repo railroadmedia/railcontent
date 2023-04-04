@@ -142,17 +142,15 @@ class CustomerIoSyncService
             $latestMembershipUserProductToSync = null;
 
             foreach ($eligibleUserProducts as $eligibleUserProductIndex => $eligibleUserProduct) {
-                if (empty($latestMembershipUserProductToSync)) {
+                // if its lifetime, use it
+                if (empty($eligibleUserProduct->getExpirationDate())) {
                     $latestMembershipUserProductToSync = $eligibleUserProduct;
-
-                    continue;
+                    break;
                 }
 
-                // if its lifetime, use it
-                if (!empty($latestMembershipUserProductToSync) && empty($eligibleUserProduct->getExpirationDate())) {
+                if (empty($latestMembershipUserProductToSync)) {
                     $latestMembershipUserProductToSync = $eligibleUserProduct;
-
-                    break;
+                    continue;
                 }
 
                 // if this product expiration date is further in the past than whatever is currently set, skip it
@@ -180,7 +178,8 @@ class CustomerIoSyncService
                 }
             }
 
-            $membershipAccessExpirationDate = !empty($membershipProduct) ? $membershipProduct->getExpirationDate() : null;
+            $membershipAccessExpirationDate = !empty($membershipProduct) ? $membershipProduct->getExpirationDate(
+            ) : null;
 
             if (!empty($latestMembershipUserProductToSync) && !empty($firstMembershipUserProductToSync)) {
                 $membershipLatestAccessStartDate = $latestMembershipUserProductToSync->getCreatedAt();
@@ -490,8 +489,6 @@ class CustomerIoSyncService
             $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
         }
 
-        $packSkusToSync = config('event-data-synchronizer.customer_io_pack_skus_to_sync_ownership');
-
         /**
          * @var $userProducts UserProduct[]
          */
@@ -508,7 +505,7 @@ class CustomerIoSyncService
                     continue;
                 }
 
-                if (in_array($userProduct->getProduct()->getSku(), $packSkusToSync) && $userProduct->isValid()) {
+                if ($userProduct->getProduct()->isDigitalProduct() && $userProduct->isValid()) {
                     $productSkuArray[] = "_" . $userProduct->getProduct()->getSku() . "_";
                     $idArray[] = "_" . $userProduct->getProduct()->getId() . "_";
                 }
