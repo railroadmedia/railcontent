@@ -165,7 +165,7 @@ onBeforeMount(() => {
 </script>
 <template>
     <div :id="cardId"
-        class="draggable tw-group tw-relative tw-min-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4">
+        class="draggable tw-group tw-relative tw-min-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4">
         <!-- PLAYLIST INFO: clickable link -->
         <a :href="lesson.url && !showMask ? lesson.url : ''"
             class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-text-[#0D0D0D] dark:tw-text-white"
@@ -273,8 +273,8 @@ onBeforeMount(() => {
             <template v-if="!cueVersion">
                 <!-- Lesson Type -->
                 <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[128px]" :title="lesson.type">
-                    <span v-if="lesson.type" class="tw-text-center tw-text-sm">
-                        {{ lesson.type.replace('-', ' ') }}
+                    <span v-if="lesson.type" class="tw-text-center tw-text-sm tw-capitalize">
+                        {{ lesson.type.replaceAll('-', ' ') }}
                     </span>
                 </div>
                 <!-- Lesson Time -->
