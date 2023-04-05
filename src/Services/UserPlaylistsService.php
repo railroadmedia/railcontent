@@ -252,8 +252,11 @@ class UserPlaylistsService
 
         $results = [];
         $added = [];
+        Decorator::$typeDecoratorsEnabled = false;
+        \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
 
         $content = $this->contentService->getById($contentId);
+        Decorator::$typeDecoratorsEnabled = true;
         if (!$content) {
             return $results;
         }
@@ -763,6 +766,9 @@ class UserPlaylistsService
         $playlist = $this->userPlaylistsRepository->getUserPlaylistById($id);
         if (!$playlist) {
             return null;
+        }
+        if ($playlist['user_id'] != auth()->id() && $playlist['private'] == 1) {
+            return -1;
         }
         $playlist['is_liked_by_current_user'] =
             $this->playlistLikeRepository->query()

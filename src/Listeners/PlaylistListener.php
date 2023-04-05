@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Listeners;
 
 use Carbon\Carbon;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Events\PlaylistItemsUpdated;
 use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
 use Railroad\Railcontent\Services\ContentService;
@@ -31,6 +32,7 @@ class PlaylistListener
      */
     public function handlePlaylistItemsUpdated(PlaylistItemsUpdated $playlistItemsUpdated)
     {
+        Decorator::$typeDecoratorsEnabled = false;
         $items = $this->userPlaylistContentRepository->getUserPlaylistContents(
             $playlistItemsUpdated->playlistId
         );
@@ -39,7 +41,7 @@ class PlaylistListener
         $contents = $this->contentService->getByIds($ids);
 
         $duration = $contents->sumFetched('fields.video.fields.length_in_seconds');
-
+        Decorator::$typeDecoratorsEnabled = true;
         $this->userPlaylistsService->update($playlistItemsUpdated->playlistId, ['duration' => $duration, 'updated_at'=>Carbon::now()->toDateTimeString()]);
     }
 

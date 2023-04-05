@@ -2671,14 +2671,15 @@ class ContentService
             $content['type'],
             config('railcontent.content_multiple_level_content_depth_playlist_allowed', [])
         )) {
-            ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
+            ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
             $lessons = $this->getByParentId($content['id']);
             $soundsliceAssingment = 0;
             $assign = [];
             $lessonsCount = 0;
 
             foreach ($lessons as $lesson) {
-                foreach ($lesson['assignments'] ?? [] as $assignment) {
+                $assignments = $this->getByParentIdWhereTypeIn($lesson['id'], ['assignment']);
+                foreach ($assignments ?? [] as $assignment) {
                     if ($assignment->fetch('soundslice_slug')) {
                         $soundsliceAssingment++;
                         $assign[$lesson['id']][] = $assignment;
