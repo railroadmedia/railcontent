@@ -155,7 +155,7 @@ onBeforeMount(()=> {
                         <div class="md:tw-hidden group-hover:tw-inline-flex dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
                             <a :href="item.playback_url"
                                 class="tw-text-[#00101D] dark:tw-text-white"
-                                :class="!item.playback_url ? 'tw-opacity-20 tw-pointer-events-none' : ''"
+                                :class="!item.playback_url ? 'tw-opacity-20 tw-pointer-events-none' : 'hover:tw-opacity-80'"
                                 :title="item.playback_url ? 'Go To Player' : '' "
                             >
                                 <musora-icon icon-name="play-circle-filled" class="tw-w-[24px]" />
@@ -179,15 +179,16 @@ onBeforeMount(()=> {
                            class="tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-h-[42px] tw-items-center">
                             <span class="tw-min-w-0 group-hover:tw-max-w-[140px] tw-truncate tw-capitalize tw-text-sm group-hover:tw-underline">{{ item.name }}</span>
                         </a>
-                        <div class="md:tw-hidden group-hover:tw-inline-flex tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center dark:tw-text-white">
+                        <div class="md:tw-hidden group-hover:tw-inline-flex tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center dark:tw-text-white unpinned-pin-container">
                             <button title="Pin Playlist" @click="pinPlaylist(item, brand)">
-                                <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto"  />
+                                <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto outlined-pin"  />
+                                <musora-icon icon-name="tack-filled" class="tw-w-[24px] tw-h-[24px] tw-mx-auto solid-pin tw-hidden"  />
                             </button>
                         </div>
                         <div class="md:tw-hidden group-hover:tw-inline-flex dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
                             <a :href="item.playback_url"
                                class="tw-text-[#00101D] dark:tw-text-white"
-                               :class="!item.playback_url ? 'tw-opacity-20 tw-pointer-events-none' : ''"
+                               :class="!item.playback_url ? 'tw-opacity-20 tw-pointer-events-none' : 'hover:tw-opacity-80'"
                                :title="item.playback_url ? 'Go To Player' : '' "
                             >
                                 <musora-icon icon-name="play-circle-filled" class="tw-w-[24px]" />
@@ -208,3 +209,12 @@ onBeforeMount(()=> {
 
     </section>
 </template>
+
+<style scoped>
+    .unpinned-pin-container:hover .outlined-pin {
+        display: none !important;
+    }
+    .unpinned-pin-container:hover .solid-pin {
+        display: block !important;
+    }
+</style>
