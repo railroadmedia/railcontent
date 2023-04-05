@@ -107,6 +107,7 @@ class UserPlaylistsController extends BaseController
         $user = user();
 
         $playlist = $this->userPlaylistsService->getUserPlaylistById($playlistId);
+        throw_if(($playlist == -1), new NotFoundHttpException());
         throw_if(empty($playlist), new NotFoundHttpException());
 
         $page = $request->get('page', 1);
@@ -194,7 +195,6 @@ class UserPlaylistsController extends BaseController
         $request->merge(['page' => $page]);
         $request->merge(['limit' => 20]);
 
-        //        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20, $page);
 
         $playlistItem =
@@ -205,11 +205,7 @@ class UserPlaylistsController extends BaseController
 
         $otherItems = [];
         foreach ($playlistItems as $index=>$item) {
-            $playlistItems[$index]['url'] = $otherItems[$index]['url'] = url()->route('platform.user.playlist-item', [
-                'playlistId' => $playlistId,
-                'playlistItemId' => $item['user_playlist_item_id'],
-            ]);
-            $otherItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
+            $otherItems[$index]['url'] = $item['url'];
             $otherItems[$index]['id'] = $item['id'];
             $otherItems[$index]['type'] = $item['type'];
             $otherItems[$index]['title'] = $item->fetch('title');
@@ -219,10 +215,6 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['data'] = $item['data'];
             $otherItems[$index]['need_access'] = ($user->isPackOwner() && !$user->isAMember());
             $otherItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
-            $otherItems[$index]['url'] = url()->route('platform.user.playlist-item', [
-                'playlistId' => $playlistId,
-                'playlistItemId' => $item['user_playlist_item_id'],
-            ]);
             $otherItems[$index]['route'] = $item['route'] ?? '';
             //            $playlistItems[$index]['parent'] = $item['parent']??null;
             $otherItems[$index]['instructors'] = $item['instructors'] ?? null;
@@ -299,7 +291,10 @@ class UserPlaylistsController extends BaseController
 
         if (!empty($playlistItem['parent'] ?? []) && (!empty($playlistItem['parent']['parent_content_data']))) {
             $this->routingDecorator->decorate([$playlistItem['parent']]);
-            $playlistItem['parent']['thumbnail_url'] = $playlistItem['parent']->fetch('data.thumbnail_url');
+            $playlistItem['parent']['thumbnail_url'] = $playlistItem['parent']->fetch('data.original_thumbnail_url', $playlistItem['parent']->fetch('data.thumbnail_url'));
+            if(empty($playlistItem['parent']['thumbnail_url']) && isset($playlistItem['parent']['parent'])) {
+                $playlistItem['parent']['thumbnail_url'] = $playlistItem['parent']['parent']->fetch('data.original_thumbnail_url', $playlistItem['parent']['parent']->fetch('data.thumbnail_url'));
+            }
         }
 
         $relatedLesson =
