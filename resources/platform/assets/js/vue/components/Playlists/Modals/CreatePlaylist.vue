@@ -143,6 +143,15 @@
                     if(playlistsStore.pageHasPlaylistCatalog) {
                         playlistsStore.getPlaylists({ brand: props.brand, page: playlistsStore.resultsPage, limit: null }, token);
                     }
+
+                    //load sidebar playlists
+                    playlistsStore.getSidebarPlaylists({
+                        brand: brand,
+                        page: 1,
+                        limit: 10,
+                        term: '',
+                        sort: 'most_recent',
+                    }, token);
                 }
             })
         }
@@ -173,6 +182,15 @@
                         if( playlistsStore.pageHasPlaylistCatalog ) {
                             playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);
                         }
+
+                        //load sidebar playlists
+                        playlistsStore.getSidebarPlaylists({
+                            brand: brand,
+                            page: 1,
+                            limit: 10,
+                            term: '',
+                            sort: 'most_recent',
+                        }, token);
                     } else {
                         console.log('edit response code', response)
                     }
@@ -195,10 +213,20 @@
                             icon: 'fa-copy',
                             text: `The playlist was successfully duplicated.`
                         })
+
                         //load Playlists
                         if( playlistsStore.pageHasPlaylistCatalog ) {
                             playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);
                         }
+
+                        //load sidebar playlists
+                        playlistsStore.getSidebarPlaylists({
+                            brand: brand,
+                            page: 1,
+                            limit: 10,
+                            term: '',
+                            sort: 'most_recent',
+                        }, token);
                     } else {
                         console.log('duplicate response code', response)
                     }
