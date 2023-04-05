@@ -46,19 +46,16 @@ class LeadGenController extends BaseController
 
     public function faster()
     {
+        return view('drumeo.lead-gen.faster.signup-old');
+    }
+    public function fasterTesting()
+    {
         return view('drumeo.lead-gen.faster.signup');
     }
 
     public function gavinsGrooves()
     {
         return view('drumeo.lead-gen.courses.full.gavins-grooves.signup');
-    }
-
-    public function getFaster()
-    {
-        return view('drumeo.lead-gen.faster.signup-alt');
-
-        throw new NotFoundHttpException();
     }
 
     public function gstd(Request $request, $domain, $page = null)
