@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf42ab7dee7d4bdb28987e39b7b32eb9",
+    "content-hash": "c9cbffb10fe5895d170ff63847b6ce04",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8792,16 +8792,16 @@
         },
         {
             "name": "railroad/railtracker",
-            "version": "v4.0.10",
+            "version": "dev-fix-performance-rwillems-20230405",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railtracker.git",
-                "reference": "d2845e7143db23f9bebccb30f13aef7b7f056860"
+                "reference": "af5433a018d7b5795e6ba06bc2971da65afec97d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/d2845e7143db23f9bebccb30f13aef7b7f056860",
-                "reference": "d2845e7143db23f9bebccb30f13aef7b7f056860",
+                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/af5433a018d7b5795e6ba06bc2971da65afec97d",
+                "reference": "af5433a018d7b5795e6ba06bc2971da65afec97d",
                 "shasum": ""
             },
             "require": {
@@ -8847,9 +8847,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railtracker/issues",
-                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.10"
+                "source": "https://github.com/railroadmedia/railtracker/tree/fix-performance-rwillems-20230405"
             },
-            "time": "2022-10-28T08:23:26+00:00"
+            "time": "2023-04-05T18:52:09+00:00"
         },
         {
             "name": "railroad/referral",
@@ -16966,12 +16966,19 @@
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
             "alias_normalized": "3.0.7.0"
+        },
+        {
+            "package": "railroad/railtracker",
+            "version": "dev-fix-performance-rwillems-20230405",
+            "alias": "4.0.11",
+            "alias_normalized": "4.0.11.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/ecommerce": 20,
-        "railroad/railanalytics": 20
+        "railroad/railanalytics": 20,
+        "railroad/railtracker": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -16980,5 +16987,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
