@@ -8792,16 +8792,16 @@
         },
         {
             "name": "railroad/railtracker",
-            "version": "v4.0.12",
+            "version": "v4.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railtracker.git",
-                "reference": "6a128ec7c9067b641cf2cf28810eb495a760a183"
+                "reference": "858d6920641f0fabbcf34f7382a06f19e5d1acf3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/6a128ec7c9067b641cf2cf28810eb495a760a183",
-                "reference": "6a128ec7c9067b641cf2cf28810eb495a760a183",
+                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/858d6920641f0fabbcf34f7382a06f19e5d1acf3",
+                "reference": "858d6920641f0fabbcf34f7382a06f19e5d1acf3",
                 "shasum": ""
             },
             "require": {
@@ -8847,9 +8847,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railtracker/issues",
-                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.12"
+                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.13"
             },
-            "time": "2023-04-05T21:41:43+00:00"
+            "time": "2023-04-05T22:02:36+00:00"
         },
         {
             "name": "railroad/referral",
