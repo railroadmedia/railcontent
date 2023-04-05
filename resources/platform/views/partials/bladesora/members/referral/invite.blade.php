@@ -63,7 +63,7 @@ $cardImage = $cardImages[brand()];
                 <div class="tw-max-w-sm sm:tw-max-w-none tw-mx-auto">
                     <img
                         class="-tw-mt-40 sm:-tw-mt-52 sm:tw-h-48 md:tw-h-56 tw-mx-auto tw-mb-6 tw-transition-opacity tw-opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/header-collage.png"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/referral/header-collage2.png"
                         alt="header amazon image"
                         onload="this.classList.remove('tw-opacity-0')"
                         loading="lazy"
@@ -152,7 +152,7 @@ $cardImage = $cardImages[brand()];
             <div class="tw-order-1 tw-relative md:tw-pl-5 lg:tw-pl-10 tw-mb-10 md:tw-mb-0">
                 <img
                     class="tw-w-72 md:tw-w-96 tw-mx-auto"
-                    src="https://www.musora.com/musora-cdn/image/width=500,quality=90/https://d3fzm1tzeyr5n3.cloudfront.net/referral/intro-collage.png"
+                    src="https://www.musora.com/musora-cdn/image/width=500,quality=90/https://d3fzm1tzeyr5n3.cloudfront.net/referral/intro-collage2.png"
                     alt="intro"
                 />
             </div>
