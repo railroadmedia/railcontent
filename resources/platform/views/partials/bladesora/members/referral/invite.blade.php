@@ -167,7 +167,7 @@ $cardImage = $cardImages[brand()];
             <p>
                 <strong>Eligibility:</strong> The Musora Referral Contest is open to all Musora students who are 18 years of age or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
                 <br><br>
-                <strong>How to Enter:</strong> The contest period runs from April 6 to May 8, 2023. Participants are automatically entered into the contest by using referral methods on this page. Participants can collect one contest entry by 1) referring a friend or family member or 2) having the referee sign-up for a 30-Day Guest Pass. Each participant has a maximum of 20 contest entries. No purchase is necessary to enter or win.
+                <strong>How to Enter:</strong> The contest period runs from April 6 to May 8, 2023. Participants are automatically entered into the contest by using referral methods on this page. Participants can collect one contest entry by 1) referring a friend or family member or 2) having the referee sign-up for a 30-Day Guest Pass. Each participant has a maximum of 20 contest entries total for all brands. No purchase is necessary to enter or win.
                 <br><br>
                 <strong>Prize:</strong> One of ten $100 Amazon.com gift cards. The prize is non-transferable and cannot be exchanged for cash.
                 <br><br>
