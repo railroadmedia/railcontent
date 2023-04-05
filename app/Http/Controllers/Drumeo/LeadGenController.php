@@ -48,6 +48,11 @@ class LeadGenController extends BaseController
     {
         return view('drumeo.lead-gen.faster.signup-old');
     }
+
+    public function fasterNeon()
+    {
+        return view('drumeo.lead-gen.faster.signup-neon');
+    }
     public function fasterTesting()
     {
         return view('drumeo.lead-gen.faster.signup');

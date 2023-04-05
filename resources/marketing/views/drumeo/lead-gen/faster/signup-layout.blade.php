@@ -3,13 +3,13 @@
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/the-tinder.jpg',
             'title' => 'The Tinder',
-            'desc' => 'The fastest way to go from singles to… well, not singles. This is a deceptively simple exercise that will help you make a seamless transition from single to double strokes.',
+            'desc' => 'The fastest way to go from singles to… well, not singles. This deceptively simple exercise will help you make a seamless transition from single to double strokes.',
             'unlocked' => true,
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/the-swiss-cheese.jpg',
             'title' => 'The Swiss Cheese',
-            'desc' => 'A clever variation of the Swiss Army Triplet, this workout will improve your flams & triplets and ensure both Rights and Lefts develop equally. (No rudiment background required.)',
+            'desc' => 'A clever variation of the Swiss Army Triplet, this workout will improve your flams & triplets and ensure both Rights and Lefts develop equally.',
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/double-trouble.jpg',
@@ -150,7 +150,7 @@
                 x-cloak
                 x-ref="lessons"
                 class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-10 max-w-md mx-auto md:max-w-full overflow-hidden transition-all duration-500 pb-4"
-                :class="showAll ? 'max-h-[4000px]' : 'max-h-[1150px] md:max-h-[790px] lg:max-h-[800px] xl:max-h-[850px]'"
+                :class="showAll ? 'max-h-[6000px]' : 'max-h-[1200px] md:max-h-[740px] lg:max-h-[810px]'"
             >
                 @foreach($lessons as $key => $lesson)
                     <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
