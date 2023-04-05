@@ -85,7 +85,7 @@ $cardImage = $cardImages[brand()];
 
                              free for 30 days.<br><br>
                             Every new Musora referral you make from <strong>April 6 to May 8, 2023,</strong> automatically enters you for a chance to win 1 of 10 $100 Amazon gift cards.<br><br>
-                            <i class="tw-underline">See Contest Details - Terms & Conditions*</i>
+                            <a class="tw-text-white" href="#terms"><i class="tw-underline">See Contest Details - Terms & Conditions*</i></a>
                         </p>
 
                         <div class="tw-flex-shrink-0 tw-w-full tw-max-w-xs sm:tw-max-w-sm tw-my-5 md:tw-my-6 lg:tw-my-0 tw-mx-auto">
@@ -179,6 +179,7 @@ $cardImage = $cardImages[brand()];
             </div>
         </div>
     </section>
+    <div id="terms" class="tw-block tw-relative tw-invisible"></div>
     <section class="tw-py-12 lg:tw-py-20 dark:tw-bg-[#1B1B1B]">
         <div class="tw-max-w-6xl tw-mx-auto tw-px-6 2xl:tw-px-0 dark:tw-text-white">
             <h4 class="tw-mb-4"><strong>Terms and Conditions</strong></h4>
