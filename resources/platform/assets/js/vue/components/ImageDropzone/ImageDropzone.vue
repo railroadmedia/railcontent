@@ -60,7 +60,7 @@ function handleDrop(e) {
 
 <template>
     <div
-        :class="`hover:tw-cursor-pointer tw-relative tw-mx-[40px] tw-border-2 tw-border-dashed tw-border-[#445F74] hover:tw-border-[#9EC0DC] tw-w-auto tw-h-[223px] tw-rounded-[6px] tw-pb-[38px] ${dragged ? 'tw-border-white' : ''}`"
+        :class="`hover:tw-cursor-pointer tw-relative tw-mx-[40px] tw-border-2 tw-border-dashed tw-border-[#445F74] hover:tw-border-[#65656B] dark:hover:tw-border-[#9EC0DC] tw-w-auto tw-h-[223px] tw-rounded-[6px] tw-pb-[38px]  ${dragged ? 'tw-border-white' : ''}`"
     >
         <div
             v-on:drop="handleDrop"
