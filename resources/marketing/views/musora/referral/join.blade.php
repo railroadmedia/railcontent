@@ -78,22 +78,22 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'drumeoTrailer',
-        'video' => 'TODO',
+        'video' => '785314424',
         'vimeo' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'pianoteTrailer',
-        'video' => 'TODO',
+        'video' => '785314388',
         'vimeo' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'guitareoTrailer',
-        'video' => 'TODO',
+        'video' => '785314408',
         'vimeo' => true,
     ])
     @include('_partials.components.video-modal',[
         'name' => 'singeoTrailer',
-        'video' => 'TODO',
+        'video' => '785314379',
         'vimeo' => true,
     ])
 </div>
