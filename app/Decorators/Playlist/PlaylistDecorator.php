@@ -6,6 +6,7 @@ use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
@@ -45,12 +46,16 @@ class PlaylistDecorator extends ModeDecoratorBase
                 if (isset($playlist['user_playlist_item_id'])) {
                     Decorator::$typeDecoratorsEnabled = false;
                     \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
+                    ContentRepository::$pullFutureContent = true;
                     $firstPlaylistItem = $this->userPlaylistsService->getPlaylistItemById($playlist['user_playlist_item_id']);
                     $firstItem = $this->contentService->getById($firstPlaylistItem['content_id']);
-                    $playlists[$index]['thumbnail_url'] = '';
-                    if($firstItem) {
-                        Decorator::$typeDecoratorsEnabled = true;
 
+                    $playlists[$index]['thumbnail_url'] = '';
+                    if ($firstItem) {
+                        $parent =
+                            $this->contentService->getByChildId($firstItem['id'])
+                                ->first();
+                        Decorator::$typeDecoratorsEnabled = true;
                         $playlists[$index]['square_thumbnail'] =
                             (($firstItem['type'] == 'assignment' &&
                                     ($firstItem->fetch('parent')) &&
@@ -58,13 +63,11 @@ class PlaylistDecorator extends ModeDecoratorBase
                                     )) ||
                                 $firstItem['type'] == 'song-tutorial-children' ||
                                 $firstItem['type'] == 'song');
+
                         $playlists[$index]['thumbnail_url'] = $firstItem->fetch(
                             'data.thumbnail_url',
-                            $firstItem->fetch(
-                            ($firstItem->fetch('parent')) ?
-                                $firstItem->fetch('parent')
-                                    ->fetch('data.original_thumbnail_url') : ''
-                        ));
+                            ($parent) ? $parent->fetch('data.original_thumbnail_url') : ''
+                        );
                     }
                 }
             } else {
