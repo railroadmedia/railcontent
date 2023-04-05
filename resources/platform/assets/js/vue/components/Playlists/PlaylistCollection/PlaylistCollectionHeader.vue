@@ -13,30 +13,30 @@
             default: 0
         },
         brand: {
-            type: String, 
+            type: String,
             default: 'drumeo'
         }
     });
 
     //-----------Reactive Data-----------//
-    const state = reactive({ 
+    const state = reactive({
         searchTerm: '',
         sortbyValue: '',
     })
 
     //-----------Methods-----------//
     const handleCreatePlaylist = () => {
-        window.openplaylistmodal({ 
-            modalType: 'create', 
+        window.openplaylistmodal({
+            modalType: 'create',
             brand: props.brand,
-            data: { 
-                name: '', 
-                category: 'My List', 
-                thumbnail_url: null, 
+            data: {
+                name: '',
+                category: 'My List',
+                thumbnail_url: null,
                 description: '',
                 term: state.searchTerm,
                 sort: state.sortbyValue,
-            } 
+            }
         });
     };
 
@@ -66,14 +66,14 @@
         titleIcon="playlist"
         backgroundImage="https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg"
     >
-        <template v-slot:content> 
+        <template v-slot:content>
             <p v-if="playlistsStore.playlistsQuantity" class="tw-uppercase tw-text-sm tw-font-bold tw-text-[#7E9AB1]">
-                {{ playlistsStore.playlistsQuantity }} Playlists    
-            </p> 
+                {{ playlistsStore.playlistsQuantity }} Playlists
+            </p>
         </template>
-        <template v-slot:ctas> 
+        <template v-slot:ctas>
             <div class="tw-flex tw-items-center tw-justify-start tw-ml-auto tw-w-full md:tw-w-auto tw-mt-4">
-                <button class="tw-btn-secondary tw-text-white"
+                <button class="tw-btn-secondary tw-text-white hover:tw-bg-white hover:tw-text-black"
                         @click="handleCreatePlaylist"
                 >
                     <musora-icon icon-name="plus" class="tw-w-[30px] tw-mr-1" />
