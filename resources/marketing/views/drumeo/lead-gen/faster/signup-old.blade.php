@@ -1,8 +1,8 @@
-@extends('drumeo.lead-gen.faster.signup-layout')
+@extends('drumeo.lead-gen.faster.signup-layout2')
 
 @php
-    $formId = "Drumeo - Engagement - Trigger - FWTGF - FB Web Form";
-    $formName = "Fastest Way To Get Faster - Facebook";
+    $formId = "Drumeo - Engagement - Trigger - FWTGF - Web Form";
+    $formName = "Fastest Way To Get Faster";
 @endphp
 
 @section('form1')
@@ -16,7 +16,6 @@
 @section('form2')
     @include("drumeo.lead-gen.partials.sign-up-form-tw", [
             "stacked" => true,
-            "submitArrows" => true,
             "formId" => $formId,
             "formName" => $formName,
         ])
