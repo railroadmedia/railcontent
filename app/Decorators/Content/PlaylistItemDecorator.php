@@ -105,6 +105,12 @@ class PlaylistItemDecorator extends TypeDecoratorBase
             $contentsOfType[$contentIndex]['set_start_end_time'] = ($content['type'] != 'assignment');
             $contentsOfType[$contentIndex]['user_playlist_item_extra_data'] =
                 $content['user_playlist_item_extra_data'] ?? null;
+
+            $contentsOfType[$contentIndex]['url'] =  url()->route('platform.user.playlist-item', [
+                'playlistId' => $content['user_playlist_id'],
+                'playlistItemId' => $content['user_playlist_item_id'],
+            ]);
+
             if (!empty($content['user_playlist_item_extra_data'])) {
                 if ((is_null(json_decode($content['user_playlist_item_extra_data'])))) {
                     error_log($content['user_playlist_item_extra_data']);
@@ -212,14 +218,23 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         $contentsOfType[$contentIndex]['instructors'] =
                             self::$parents[$content['id']]['instructors'] ?? [];
                     }
-
+                    if (empty($contentsOfType[$contentIndex]['thumbnail_url'])) {
+                        $contentsOfType[$contentIndex]['thumbnail_url'] =
+                            self::$parents[$content['id']]->fetch(
+                                'data.original_thumbnail_url',
+                                self::$parents[$content['id']]->fetch('data.thumbnail_url')
+                            );
+                        if (empty($contentsOfType[$contentIndex]['thumbnail_url']) &&
+                            isset(self::$parents[(self::$parents[$content['id']]['id'])])) {
+                            $contentsOfType[$contentIndex]['thumbnail_url'] =
+                                self::$parents[(self::$parents[$content['id']]['id'])]->fetch(
+                                    'data.original_thumbnail_url'
+                                );
+                        }
+                    }
                     if ($content['type'] == 'assignment') {
                         $contentsOfType[$contentIndex]['fields'] =
                             array_merge($content['fields'] ?? [], self::$parents[$content['id']]['fields'] ?? []);
-                        //                            $contentsOfType[$contentIndex]['data'] =
-                        //                                array_merge($content['data'], $parents[$value['id']]['data'] ?? []);
-                        $contentsOfType[$contentIndex]['thumbnail_url'] =
-                            self::$parents[$content['id']]->fetch('data.original_thumbnail_url');
                     }
                 } else{
                     error_log(self::$parents[$content['id']]);
