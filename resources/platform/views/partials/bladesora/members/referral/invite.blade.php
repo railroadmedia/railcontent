@@ -88,6 +88,24 @@ $cardImage = $cardImages[brand()];
                             <i class="tw-underline">See Contest Details - Terms & Conditions*</i>
                         </p>
 
+                        <div class="tw-flex-shrink-0 tw-w-full tw-max-w-xs sm:tw-max-w-sm tw-my-5 md:tw-my-6 lg:tw-my-0 tw-mx-auto">
+                            <div class="tw-flex tw-w-full tw-relative">
+                                <div class="tw-inline-flex tw-w-full ">
+                                    <img class="tw-inline-block tw-w-full tw-transition-opacity tw-opacity-0"
+                                        src="{{ $cardImage }}"
+                                        loading="lazy"
+                                        onload="this.classList.remove('tw-opacity-0')"
+                                    >
+                                </div>
+                                <div class="tw-absolute tw-bottom-0 tw-w-full tw-p-3 tw-text-white">
+                                    <p class="tw-leading-none">PASSES REDEEMED</p>
+                                    <h2 class="tw-leading-none">
+                                        <strong>{{ $userReferralsPerformed }}/{{ $referralsPerUser }}</strong>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+
                         <form id="invite-email-form" name="invite-email-form" onsubmit="sendPass(event)" {{-- method="post"
                             action="{{ $emailInviteUrl }}"--}}>
                             <label class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-2 tw-uppercase tw-text-sm tw-tracking-wide"
