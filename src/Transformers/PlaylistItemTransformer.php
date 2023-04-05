@@ -139,6 +139,7 @@ class PlaylistItemTransformer
                 $content[$itemId]['start_second'] = $row['start_second'] ?? null;
                 $content[$itemId]['end_second'] = $row['end_second'] ?? null;
                 $content[$itemId]['user_playlist_item_id'] = $row['user_playlist_item_id'] ?? null;
+                $content[$itemId]['user_playlist_id'] = $row['user_playlist_id'] ?? null;
                 $content[$itemId]['user_playlist_item_position'] = $row['user_playlist_item_position'] ?? null;
                 $content[$itemId]['user_playlist_item_extra_data'] = $row['user_playlist_item_extra_data'] ?? null;
                 if (!empty($row['user_playlist_item_extra_data'])) {
