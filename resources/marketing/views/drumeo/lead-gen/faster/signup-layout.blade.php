@@ -139,8 +139,8 @@
 {{--        </div>--}}
 {{--    </header>--}}
 
-    <section class="py-12 md:py-20">
-        <div class="container max-w-6xl mx-auto px-4 text-center">
+    <section class="py-12 md:py-20 px-4 text-center">
+        <div class="container max-w-6xl mx-auto">
            <h2 class="font-extrabold mb-4">10 exercises guaranteed to improve your speed.</h2>
             <p class="mb-10">
                 These are the very same exercises Estepario uses to practice his speed <br class="hidden lg:inline">
@@ -150,7 +150,7 @@
                 x-cloak
                 x-ref="lessons"
                 class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-10 max-w-md mx-auto md:max-w-full overflow-hidden transition-all duration-500 pb-4"
-                :class="showAll ? 'max-h-[4000px]' : 'max-h-[1150px] md:max-h-[720px] lg:max-h-[800px]'"
+                :class="showAll ? 'max-h-[4000px]' : 'max-h-[1150px] md:max-h-[790px] lg:max-h-[800px] xl:max-h-[850px]'"
             >
                 @foreach($lessons as $key => $lesson)
                     <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
