@@ -78,6 +78,15 @@ export const usePlaylistsStore = defineStore({
         //hard reload?
       }
     },
+    async getSidebarPlaylists(payload, token) {
+        const response = await PlaylistService.getCurrentUserPlaylists(payload, token);
+      try {
+          this.loadingLoading = false;
+          this.sidebarPlaylists = await response.data.data;
+      } catch {
+          console.log('there was an error with your request');
+      }
+    },
 
     //Static Updates
     deletePlaylist(playlist) {
@@ -130,7 +139,9 @@ export const usePlaylistsStore = defineStore({
     updatePinnedItem(id, name){
       if(this.pinnedPlaylists.length) {
         let pinnedList = this.pinnedPlaylists.find(l => l.id === id);
-        pinnedList.name = name;
+        if(pinnedList){
+            pinnedList.name = name;
+        }
       }
     },
     //Update Set/Time
