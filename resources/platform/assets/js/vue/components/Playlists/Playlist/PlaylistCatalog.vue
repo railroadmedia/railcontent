@@ -182,7 +182,6 @@
 
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
-        console.log('check')
         initialLessonsArray = props.lessons.data;
     });
 </script>
@@ -194,10 +193,10 @@
             <div class="tw-w-full tw-container tw-mx-auto tw-pt-4 md:tw-pt-0 tw-px-4 md:tw-px-8 dark:tw-text-white tw-flex tw-flex-col md:tw-flex-row tw-items-center">
                 <p class="tw-text-center md:tw-text-left  md:tw-mr-auto">Click <span class="tw-font-bold tw-mx-0.5">save changes</span> to save your changes or <span class="tw-font-bold tw-mx-0.5">cancel</span> to exit re-ordering</p>
                 <div class="tw-ml-6 tw-flex tw-py-[15px]">
-                    <button class="tw-btn-primary tw-mr-[10px] tw-px-[30px]" :class="`tw-bg-${brand}`" @click.prevent="handleSort">
+                    <button class="tw-btn-primary tw-mr-[10px] tw-px-[30px] xl:tw-w-[250px]" :class="`tw-bg-${brand}`" @click.prevent="handleSort">
                         Save changes
                     </button>
-                    <button class="tw-btn-secondary tw-bg-transparent dark:tw-text-white tw-text-[#00101D] tw-px-[30px] hover:tw-bg-black/10"
+                    <button class="tw-btn-secondary tw-bg-transparent dark:tw-text-white tw-text-[#00101D] tw-px-[30px] hover:tw-bg-black/10 xl:tw-w-[200px]"
                             @click.prevent="handleCancelSort">
                         Cancel
                     </button>
@@ -210,7 +209,7 @@
                 <!-- Empty State -->
                 <section v-if="playlistsStore.lessons.length === 0" class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
                     <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#3F3F46] dark:tw-bg-[#445F74] tw-mb-6">
-                        <musora-icon icon-name="eigth-notes" width="45" height="45" />
+                        <musora-icon icon-name="playlist" width="45" height="45" />
                     </div>
                     <h1 class="tw-text-3xl tw-font-bold tw-mb-[15px]">No lessons here yet</h1>
                     <p>Go to a lesson and click the plus icon to add to this playlist. </p>

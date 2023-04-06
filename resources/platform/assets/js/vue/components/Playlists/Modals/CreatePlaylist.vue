@@ -143,6 +143,15 @@
                     if(playlistsStore.pageHasPlaylistCatalog) {
                         playlistsStore.getPlaylists({ brand: props.brand, page: playlistsStore.resultsPage, limit: null }, token);
                     }
+
+                    //load sidebar playlists
+                    playlistsStore.getSidebarPlaylists({
+                        brand: brand,
+                        page: 1,
+                        limit: 10,
+                        term: '',
+                        sort: 'most_recent',
+                    }, token);
                 }
             })
         }
@@ -173,6 +182,15 @@
                         if( playlistsStore.pageHasPlaylistCatalog ) {
                             playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);
                         }
+
+                        //load sidebar playlists
+                        playlistsStore.getSidebarPlaylists({
+                            brand: brand,
+                            page: 1,
+                            limit: 10,
+                            term: '',
+                            sort: 'most_recent',
+                        }, token);
                     } else {
                         console.log('edit response code', response)
                     }
@@ -195,10 +213,20 @@
                             icon: 'fa-copy',
                             text: `The playlist was successfully duplicated.`
                         })
+
                         //load Playlists
                         if( playlistsStore.pageHasPlaylistCatalog ) {
                             playlistsStore.getPlaylists({ brand: brand, page: playlistsStore.resultsPage, limit: null }, token);
                         }
+
+                        //load sidebar playlists
+                        playlistsStore.getSidebarPlaylists({
+                            brand: brand,
+                            page: 1,
+                            limit: 10,
+                            term: '',
+                            sort: 'most_recent',
+                        }, token);
                     } else {
                         console.log('duplicate response code', response)
                     }
@@ -254,7 +282,7 @@
                     :initialValue="state.name"
                     placeholder="Playlist Title"
                     :remove-default-input-styles="true"
-                    inputOverride="tw-mb-[20px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-w-full tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px]"
+                    inputOverride="tw-mb-[20px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-w-full dark:tw-bg-[#002039]/90 tw-px-[14px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-h-[42px] tw-rounded-[63px] tw-py-[9px] tw-px-[13px] tw-text-[14px]"
                     @onChange="handleTitleChange"
                 />
                 <Dropdown
@@ -267,7 +295,7 @@
                     id="playlist-description"
                     name="playlistDescription"
                     placeholder="Playlist Description"
-                    class="tw-no-scrollbar tw-text-sm tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white tw-bg-[#eeeeef] dark:tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-py-[9px]"
+                    class="tw-no-scrollbar tw-text-sm tw-h-[93px] tw-rounded-[6px] placeholder:tw-text-[#0D0D0D] dark:placeholder:tw-text-white tw-text-[#0D0D0D] dark:tw-text-white dark:tw-bg-[#002039]/90 tw-mt-[20px] tw-box-border tw-border-[#D4D4D8] dark:tw-border-[#445F74] tw-py-[9px]"
                     v-model="state.description"
                     @change="handleDescriptionChange"
                 ></textarea>

@@ -181,7 +181,7 @@
                         <p class="tw-font-bebas-neue tw-text-white tw-text-xl">{{ playlistsStore.activePlaylist.user.display_name }}</p>
                     </div>
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
-                        <h1 class="tw-capitalize tw-leading-none tw-mb-2">{{ playlistsStore.activePlaylist.name }}</h1>
+                        <h1 class="tw-capitalize tw-leading-none tw-mb-2 tw-font-bold">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.description }}</p>
                     </div>
                     <a v-if="lessons.data.length" :href="playlistsStore.activePlaylist.playback_url"

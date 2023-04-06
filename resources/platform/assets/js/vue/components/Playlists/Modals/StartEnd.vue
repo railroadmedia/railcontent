@@ -137,11 +137,11 @@
         <div class="tw-pt-[30px] tw-flex tw-justify-end tw-w-full">
             <!-- Close Modal -->
             <button @click="() => emit('onCloseModal')"
-                    class="tw-btn-secondary tw-text-base tw-text-[#002039] dark:tw-text-white tw-mr-4 tw-w-[218px]">
+                    class="tw-btn-secondary tw-text-[#002039] dark:tw-text-white tw-mr-4 tw-w-[218px]">
                     CANCEL
             </button>
             <!-- Delete Lesson -->
-            <button :class="`tw-mb-2 tw-ml-auto tw-btn-primary tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"
+            <button :class="`tw-mb-2 tw-ml-auto tw-btn-primary tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"
                     @click.prevent="handleConfirm()"
             >
                 SAVE

@@ -135,20 +135,20 @@
             <p class="dark:tw-text-white tw-text-center">This action cannot be undone</p>
             <div class="tw-pt-8 tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-justify-center tw-w-full">
                 <!-- Delete Playlist -->
-                <button v-if="mode !== 'lesson'" :class="`tw-mb-2 tw-btn-primary tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1`"
+                <button v-if="mode !== 'lesson'" :class="`tw-mb-2 tw-btn-primary tw-bg-${brand} tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1`"
                         @click.prevent="handleDeletePlaylist()"
                 >
                     CONFIRM
                 </button>
                 <!-- Delete Lesson -->
-                <button v-else :class="`tw-mb-2 tw-btn-primary tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1`"
+                <button v-else :class="`tw-mb-2 tw-btn-primary tw-bg-${brand} tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1`"
                         @click.prevent="handleDeleteLesson()"
                 >
                     CONFIRM
                 </button>
                 <!-- Close Modal -->
                 <button @click="() => emit('onCloseModal')"
-                        class="tw-btn-primary tw-text-base dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px] tw-border-[#000C17] dark:tw-border-white sm:tw-mr-2">
+                        class="tw-btn-primary dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px] tw-border-[#000C17] dark:tw-border-white sm:tw-mr-2">
                         CANCEL
                 </button>
             </div>
