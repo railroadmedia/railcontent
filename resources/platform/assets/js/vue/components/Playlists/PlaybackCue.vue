@@ -164,7 +164,9 @@ onBeforeMount(() => {
 
 onMounted(() => {
     const cueScrollContainer = document.getElementById('cue-scroll-container');
-    cueScrollContainer.scrollTop = 90;
+    if (cueScrollContainer) {
+        cueScrollContainer.scrollTop = 90;
+    }
 });
 </script>
 <template>

@@ -1,4 +1,5 @@
 <script setup>
+// TODO: FIX WHEN THE CUE IS BARELY VISIBLE AND YOU OPEN THE DROPDOWN
 import { onBeforeMount, onMounted, inject, reactive, computed } from 'vue';
 import PlaylistService from '../../../services/playlists.js';
 import { usePlaylistsStore } from '../../../stores/playlists';
@@ -243,7 +244,7 @@ onMounted(() => {
             <li v-for="(item, i) in dropdownOptions" :key="i" class="tw-w-full"
                 :class="{ 'tw-hidden': item.name === 'Share' && state.isPrivate }">
                 <button
-                    class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-black/20"
+                    class="tw-flex tw-w-full tw-items-center tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                     :class="[{'tw-pointer-events-none tw-cursor-default tw-opacity-60' : item.name === 'Re-Order' && lessonsLength === 1 }]"
                     @click.prevent="clickHandler(item.action)">
                     <template v-if="item.name === 'Private'">
