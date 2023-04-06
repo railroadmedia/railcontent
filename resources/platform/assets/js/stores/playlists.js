@@ -81,6 +81,7 @@ export const usePlaylistsStore = defineStore({
     async getSidebarPlaylists(payload, token) {
       try {
           const response = await PlaylistService.getCurrentUserPlaylists(payload, token);
+          this.loadingPlaylists = false;
           this.sidebarPlaylists = await response.data.data;
       } catch {
           console.log('there was an error with your request');
