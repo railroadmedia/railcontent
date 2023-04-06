@@ -71,6 +71,7 @@ export const usePlaylistsStore = defineStore({
     async getPlaylistLessons(payload, token) {
       try {
         const response = await PlaylistService.getPlaylistLessons(payload, token);
+        this.loadingLessons = false;
         this.lessons.concat(response.data.data);
       } catch {
         console.log('there was an error with your request');
