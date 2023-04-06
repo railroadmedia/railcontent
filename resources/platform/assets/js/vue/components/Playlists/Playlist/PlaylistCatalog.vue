@@ -210,7 +210,7 @@
                 <!-- Empty State -->
                 <section v-if="playlistsStore.lessons.length === 0" class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
                     <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#3F3F46] dark:tw-bg-[#445F74] tw-mb-6">
-                        <musora-icon icon-name="eigth-notes" width="45" height="45" />
+                        <musora-icon icon-name="playlist" width="45" height="45" />
                     </div>
                     <h1 class="tw-text-3xl tw-font-bold tw-mb-[15px]">No lessons here yet</h1>
                     <p>Go to a lesson and click the plus icon to add to this playlist. </p>
