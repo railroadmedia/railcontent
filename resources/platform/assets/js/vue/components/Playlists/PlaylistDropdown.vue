@@ -1,4 +1,5 @@
 <script setup>
+// TODO: FIX WHEN THE CUE IS BARELY VISIBLE AND YOU OPEN THE DROPDOWN
 import { onBeforeMount, onMounted, inject, reactive, computed } from 'vue';
 import PlaylistService from '../../../services/playlists.js';
 import { usePlaylistsStore } from '../../../stores/playlists';
