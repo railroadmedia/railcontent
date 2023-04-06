@@ -85,7 +85,7 @@ $cardImage = $cardImages[brand()];
 
                              free for 30 days.<br><br>
                             Every new Musora referral you make from <strong>April 6 to May 8, 2023,</strong> automatically enters you for a chance to win 1 of 10 $100 Amazon gift cards.<br><br>
-                            <a class="tw-text-white" href="#terms"><i class="tw-underline">See Contest Details - Terms & Conditions*</i></a>
+                            <a style="color:inherit;" href="#terms"><i class="tw-underline">See Contest Details - Terms & Conditions*</i></a>
                         </p>
 
                         <div class="tw-flex-shrink-0 tw-w-full tw-max-w-xs sm:tw-max-w-sm tw-my-5 md:tw-my-6 lg:tw-my-0 tw-mx-auto">
