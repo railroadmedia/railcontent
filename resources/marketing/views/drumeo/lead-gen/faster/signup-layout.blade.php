@@ -63,7 +63,7 @@
     <meta property="og:description" content="El Estepario Siberiano’s 10 exercise to improve your speed on the drums.">
 
     <meta property="og:url" content="https://www.drumeo.com/faster/">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/the-tinder.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/share-image.jpg" style="display: none;">
 @stop
 
 @section('styles')
