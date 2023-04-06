@@ -84,7 +84,6 @@
 
 @section('body-data')
     x-data="{
-        showAll: false,
         sampleLesson: false,
     }"
 @endsection
@@ -139,47 +138,35 @@
                 These are the very same exercises Estepario uses to practice his speed <br class="hidden sm:inline">
                 & endurance on the kit. Now you can use them to improve yours!
             </p>
-            <div
-                x-cloak
-                x-ref="lessons"
-                class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mb-10 max-w-md mx-auto sm:max-w-full overflow-hidden transition-all duration-500 pb-4"
-                :class="showAll ? 'max-h-[6000px]' : 'max-h-[1200px] md:max-h-[740px] lg:max-h-[810px]'"
-            >
+            <div class="flex flex-wrap justify-center mb-10 max-w-xs mx-auto sm:max-w-full">
                 @foreach($lessons as $key => $lesson)
-                    <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
-                        <div class="relative">
-                            <img
-                                class="transition-opacity opacity-0"
-                                src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['img'] }}"
-                                alt="lesson thumbnail {{ $key+1 }}"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                            />
-                            @if(!empty($lesson['unlocked']))
-                                <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;" @click="sampleLesson = true;"></i>
-                            @else
-                                <div class="absolute inset-0 bg-black opacity-60"></div>
-                                <div class="absolute inset-0 flex justify-center items-center">
-                                    <i class="fa-solid fa-lock-keyhole text-white text-5xl"></i>
-                                </div>
-                            @endif
-                        </div>
-                        <div class="p-4">
-                            <h6 class="font-bold mb-2">{{ $key+1 }}. {{ $lesson['title'] }}</h6>
-                            <p class="text-left">{{ $lesson['desc'] }}</p>
+                    <div class="w-full sm:w-1/3 px-2 lg:px-3 mb-4 lg:mb-6">
+                        <div class="rounded-xl overflow-hidden" style="background: #F6F8FC; box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.1);">
+                            <div class="relative">
+                                <img
+                                    class="transition-opacity opacity-0"
+                                    src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['img'] }}"
+                                    alt="lesson thumbnail {{ $key+1 }}"
+                                    loading="lazy"
+                                    onload="this.classList.remove('opacity-0')"
+                                />
+                                @if(!empty($lesson['unlocked']))
+                                    <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;" @click="sampleLesson = true;"></i>
+                                @else
+                                    <div class="absolute inset-0 bg-black opacity-60"></div>
+                                    <div class="absolute inset-0 flex justify-center items-center">
+                                        <i class="fa-solid fa-lock-keyhole text-white text-5xl"></i>
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="p-4">
+                                <h6 class="font-bold mb-2">{{ $key+1 }}. {{ $lesson['title'] }}</h6>
+                                <p class="text-left">{{ $lesson['desc'] }}</p>
+                            </div>
                         </div>
                     </div>
                 @endforeach
             </div>
-            <span
-                class="btn-secondary text-drumeo transition-opacity duration-300"
-                :class="showAll ? 'opacity-0' : 'opacity-100'"
-                @click="
-                    showAll = true
-                "
-            >
-                    Show all
-            </span>
         </div>
     </section>
 
@@ -240,13 +227,6 @@
         ])
         </div>
     </section>
-
-    <div class="reveal medium" id="signUpModal" data-reveal>
-        <section class="header pop-up">
-            <h1 class="text-center">Enter your email below for 10 free video lessons...</h1>
-            @yield('form2')
-        </section>
-    </div>
 
     <div class="reveal large" id="thankYouModal" data-reveal data-reset-on-close="true">
         <div class="gavin-sign-up">
