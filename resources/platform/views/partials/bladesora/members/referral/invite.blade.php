@@ -148,7 +148,7 @@ $cardImage = $cardImages[brand()];
         </div>
     </section>
     <section class="tw-bg-[#00101D] tw-py-10 lg:tw-py-20">
-        <div class="tw-max-w-5xl tw-mx-auto md:tw-flex md:tw-items-center md:tw-justify-center tw-px-4 sm:tw-px-6 xl:tw-px-0">
+        <div class="tw-max-w-5xl tw-mx-auto md:tw-flex md:tw-items-center md:tw-justify-center tw-px-3 sm:tw-px-6 xl:tw-px-0">
             <div class="tw-order-1 tw-relative md:tw-pl-5 lg:tw-pl-10 tw-mb-10 md:tw-mb-0">
                 <img
                     class="tw-w-72 md:tw-w-96 tw-mx-auto"
@@ -162,10 +162,10 @@ $cardImage = $cardImages[brand()];
                     <strong>You can refer them to @if($brand !== 'drumeo') Drumeo, @endif  @if($brand !== 'pianote') Pianote, @endif @if($brand === 'singeo') and @endif @if($brand !== 'guitareo') Guitareo, @endif @if($brand !== 'singeo') and Singeo, @endif too.</strong>
                 </h3>
                 <div class="tw-flex tw-items-center tw-justify-center md:tw-justify-start tw-my-5 tw-text-sm md:tw-text-base">
-                    <i class="fa-light fa-calendar-days tw-text-{{$brand}} tw-text-2xl tw-mr-4"></i> <span>Musora Referral Contest&nbsp;-&nbsp;<b>April 6 to May 8, 2023</b></span>
+                    <i class="fa-light fa-calendar-days tw-text-{{$brand}} tw-text-lg sm:tw-text-2xl tw-mr-2 sm:tw-mr-4"></i> <span>Musora Referral Contest&nbsp;-&nbsp;<b>April 6 to May 8, 2023</b></span>
                 </div>
                 <div class="tw-flex tw-items-center tw-justify-center md:tw-justify-start tw-my-5 tw-text-sm md:tw-text-base">
-                    <i class="fa-regular fa-gift tw-text-{{$brand}} tw-text-2xl tw-mr-4"></i> <span>Refer & Enter to&nbsp;<b>Win a $100 Gift Card to Amazon.</b></span>
+                    <i class="fa-light fa-gift tw-text-{{$brand}} tw-text-lg sm:tw-text-2xl tw-mr-2 sm:tw-mr-4"></i> <span>Refer to&nbsp;<b>Win a $100 Gift Card to Amazon.</b></span>
                 </div>
                 <i class="tw-text-sm">
                     Guest passes are for new subscribers only and cannot be redeemed for renewals, extensions, or gift subscriptions.
