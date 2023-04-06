@@ -15,7 +15,7 @@ return new class extends Migration
     {
         //
         Schema::table('carousels', function (Blueprint $table) {
-            $table->string('name');
+          //  $table->string('name');
         });
     }
 
@@ -28,7 +28,7 @@ return new class extends Migration
     {
         //
         Schema::table('carousels', function (Blueprint $table) {
-            $table->dropColumn('name');
+            //$table->dropColumn('name');
         });
     }
 };
