@@ -29,13 +29,13 @@ const relatedLessonThumbnail = computed( () => {
 </script>
 <template>
     <div class="tw-flex tw-flex-col tw-py-[32px]">
-        <h3 class="tw-text-[18px] tw-font-bold dark:tw-text-white tw-pb-[12px]">Related Lesson</h3>
+        <h3 class="tw-text-[18px] tw-text-black tw-font-bold dark:tw-text-white tw-pb-[12px]">Related Lesson</h3>
         <div class="tw-flex">
         <div class="tw-h-[70px]">
             <img  :src="`https://musora.com/cdn-cgi/image/width=330/${relatedLessonThumbnail}`" class="tw-h-[70px] tw-rounded" />
         </div>
         <div class="tw-flex tw-flex-col tw-px-[16px]">
-            <div class="tw-text-[12px] dark:tw-text-[#9EC0DC]">
+            <div class="tw-text-[12px] tw-text-black dark:tw-text-[#9EC0DC]">
                 <template v-if="props.relatedLesson.route">
                         <span  v-for="(route, i) in props.relatedLesson.route"
                                :key="i">
@@ -43,10 +43,10 @@ const relatedLessonThumbnail = computed( () => {
                         </span>
                 </template>
             </div>
-            <div class="tw-text-[16px] tw-text-white tw-font-bold">
+            <div class="tw-text-[16px] tw-text-black dark:tw-text-white tw-font-bold">
                 {{ relatedLessonTitle }}
             </div>
-            <div class="tw-text-[12px] dark:tw-text-[#9EC0DC]">
+            <div class="tw-text-[12px] tw-text-black dark:tw-text-[#9EC0DC]">
                 <template v-if="props.relatedLesson.type !== 'assignment' || props.relatedLesson.type !== 'song'">
                         <span v-for="(instructor, i) in props.relatedLesson.instructors"
                               :key="i">

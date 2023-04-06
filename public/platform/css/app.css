@@ -23279,10 +23279,6 @@ a:visited{
   --tw-border-opacity: 1 !important;
   border-color: rgb(229 231 234 / var(--tw-border-opacity)) !important;
 }
-.tw-border-\[\#002039\]{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(0 32 57 / var(--tw-border-opacity)) !important;
-}
 .tw-border-\[\#445f74\]{
   --tw-border-opacity: 1 !important;
   border-color: rgb(68 95 116 / var(--tw-border-opacity)) !important;
@@ -24081,9 +24077,6 @@ a:visited{
 }
 .tw-pt-\[1px\]{
   padding-top: 1px !important;
-}
-.tw-pt-\[7px\]{
-  padding-top: 7px !important;
 }
 .tw-pl-1{
   padding-left: 0.25rem !important;
