@@ -273,7 +273,7 @@ onMounted(() => {
             <button @click="handleSaveItem"
                     :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`"
             >
-                SAVE
+                CONFIRM
             </button>
         </div>
     </div>
