@@ -58,12 +58,12 @@
 
 @section('meta')
     <title>Fastest Way To Get Faster</title>
-    <meta name="description" content="Jared Falk's 10-day routine that will help you rapidly improve your speed around the kit.">
+    <meta property="og:title" content="Fastest Way To Get Faster">
+    <meta name="description" content="El Estepario Siberiano’s 10 exercise to improve your speed on the drums.">
+    <meta property="og:description" content="El Estepario Siberiano’s 10 exercise to improve your speed on the drums.">
 
     <meta property="og:url" content="https://www.drumeo.com/faster/">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/share-image.jpg" style="display: none;">
-    <meta property="og:title" content="Fastest Way To Get Faster">
-    <meta property="og:description" content="Jared Falk's 10-day routine that will help you rapidly improve your speed around the kit.">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/the-tinder.jpg" style="display: none;">
 @stop
 
 @section('styles')
@@ -90,26 +90,26 @@
 @endsection
 
 @section('content')
-    <header class="py-12 md:py-20" style="background: {{ !empty($layoutAlt) ? 'linear-gradient(79.2deg, #FF3DD8 0.06%, #FD6915 100%);' : '#040A20' }};">
-        <div class="max-w-6xl mx-auto md:flex items-center container px-4 text-center md:text-left">
-            <div class="flex-1 text-white max-w-xl mx-auto md:max-w-full">
-                <div class="px-2 md:px-3">
+    <header class="py-12 sm:py-20" style="background: {{ !empty($layoutAlt) ? 'linear-gradient(79.2deg, #FF3DD8 0.06%, #FD6915 100%);' : '#040A20' }};">
+        <div class="max-w-6xl mx-auto sm:flex items-center container px-4 text-center sm:text-left">
+            <div class="w-full sm:w-7/12 lg:w-1/2 text-white max-w-xl mx-auto sm:max-w-full">
+                <div class="px-2 sm:px-3">
                     <img
-                        class="h-12 md:h-14 lg:h-20 mb-3 transition-opacity opacity-0"
+                        class="h-12 sm:h-14 lg:h-20 mb-3 transition-opacity opacity-0"
                         src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg"
                         alt="FWTGF logo"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     />
                     <img
-                        class="rounded-xl md:hidden mb-5 transition-opacity opacity-0"
+                        class="rounded-xl sm:hidden mb-5 transition-opacity opacity-0"
                         src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $headerImageM }}"
                         alt="header hero image mobile"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     />
                     <h2 class="leading-tight mb-5">Improve your speed on the drums with <b class="font-extrabold">10 free workouts.</b></h2>
-                    <p class="mb-4">Enter your email below to grab your lessons.</p>
+                    <h6 class="mb-4">Enter your email below to grab your lessons.</h6>
                 </div>
                 @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "formId" => $formId,
@@ -118,7 +118,7 @@
                     "stacked" => true
                 ])
             </div>
-            <div class="flex-1 pl-12 xl:px-12 hidden md:block">
+            <div class="w-full sm:w-5/12 lg:w-1/2 sm:pl-5 lg:pl-12 xl:px-12 hidden sm:block">
                 <img
                     class="transition-opacity opacity-0"
                     src="https://www.musora.com/musora-cdn/image/width=700,quality=85/{{ $headerImage }}"
@@ -129,27 +129,20 @@
             </div>
         </div>
     </header>
-{{--    <header class="header" style="background-image: url(https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/bg.jpg);">--}}
-{{--        <div class="container max-w-6xl mx-auto px-4">--}}
-{{--            <div class="text-center">--}}
-{{--                <img class="series-logo mx-auto" src="https://dzryyo1we6bm3.cloudfront.net/fastest-way-to-get-faster/logo.png" alt="The Fastest Way To Get Faster">--}}
-{{--                <p>Enter your email below for 10 free video lessons...</p>--}}
-{{--                @yield('form1')--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </header>--}}
 
-    <section class="py-12 md:py-20 px-4 text-center">
+    <section class="py-12 sm:py-20 px-4 text-center">
         <div class="container max-w-6xl mx-auto">
-           <h2 class="font-extrabold mb-4">10 exercises guaranteed to improve your speed.</h2>
+           <h2 class="font-extrabold mb-4">
+               10 exercises guaranteed <br class="inline lg:hidden">
+               to improve your speed.</h2>
             <p class="mb-10">
-                These are the very same exercises Estepario uses to practice his speed <br class="hidden lg:inline">
+                These are the very same exercises Estepario uses to practice his speed <br class="hidden sm:inline">
                 & endurance on the kit. Now you can use them to improve yours!
             </p>
             <div
                 x-cloak
                 x-ref="lessons"
-                class="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6 mb-10 max-w-md mx-auto md:max-w-full overflow-hidden transition-all duration-500 pb-4"
+                class="grid grid-cols-1 sm:grid-cols-3 gap-4 lg:gap-6 mb-10 max-w-md mx-auto sm:max-w-full overflow-hidden transition-all duration-500 pb-4"
                 :class="showAll ? 'max-h-[6000px]' : 'max-h-[1200px] md:max-h-[740px] lg:max-h-[810px]'"
             >
                 @foreach($lessons as $key => $lesson)
@@ -190,7 +183,7 @@
         </div>
     </section>
 
-    <section class="py-12 md:py-20" style="background: radial-gradient(34.53% 68.28% at 31.51% 33.16%, #FFEBDD 0%, #E2E7F0 100%)">
+    <section class="py-12 sm:py-20" style="background: radial-gradient(34.53% 68.28% at 31.51% 33.16%, #FFEBDD 0%, #E2E7F0 100%)">
         <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8 sm:px-4 lg:px-0">
             <img
                 class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-16 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 transition-opacity opacity-0"
@@ -200,7 +193,7 @@
                 onload="this.classList.remove('opacity-0')"
             >
             <div class="h-10 w-full sm:hidden" style="background: linear-gradient(to left top, #00101d calc(50% - 1px), transparent, transparent calc(50% + 1px));"></div>
-            <div class="text-white text-left rounded-none md:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-14 sm:mt-8 w-full sm:w-auto sm:flex-grow lg:max-w-xl" style="background-color:#00101d;">
+            <div class="text-white text-left rounded-none sm:rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-14 sm:mt-8 w-full sm:w-auto sm:flex-grow lg:max-w-xl" style="background-color:#00101d;">
                 <h6 class="uppercase text-drumeo leading-normal">MEET YOUR TEACHER</h6>
                 <h2><strong>El Estepario Siberiano</strong></h2>
                 <h6 class="leading-normal mt-4 lg:mt-6">
@@ -213,17 +206,17 @@
                 <div class="flex justify-between text-center mt-7 lg:mt-10">
                     <div class="">
                         <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
-                        <h3 class="mt-2"><strong>2.2M</strong></h3>
+                        <h3 class="mt-2"><strong>2.5M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">Followers</p>
                     </div>
                     <div class="">
                         <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
-                        <h3 class="mt-2"><strong>948k</strong></h3>
+                        <h3 class="mt-2"><strong>1M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">followers</p>
                     </div>
                     <div class="">
                         <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
-                        <h3 class="mt-2"><strong>224M</strong></h3>
+                        <h3 class="mt-2"><strong>268M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">views</p>
                     </div>
                 </div>
@@ -236,10 +229,10 @@
         'bgColor' => 'white'
     ])
 
-    <section class="py-8 md:py-14 text-center text-white" style="background:{{ !empty($layoutAlt) ? 'linear-gradient(79.2deg, #FF3DD8 0.06%, #FD6915 100%);' : '#040A20' }};">
+    <section class="py-8 sm:py-14 text-center text-white" style="background:{{ !empty($layoutAlt) ? 'linear-gradient(79.2deg, #FF3DD8 0.06%, #FD6915 100%);' : '#040A20' }};">
         <div class="max-w-3xl mx-auto">
-        <img class="h-12 lg:h-14 mb-3" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
-        <p class="mb-5">Enter your email to receive ten free exercises.</p>
+        <img class="h-16 lg:h-20" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
+        <h5 class="my-5 sm:my-7">Enter your email to receive ten free exercises.</h5>
         @include("drumeo.lead-gen.partials.sign-up-form-tw", [
             "formId" => $formId,
             "formName" => $formName,
