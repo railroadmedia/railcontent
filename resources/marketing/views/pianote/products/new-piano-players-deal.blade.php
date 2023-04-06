@@ -147,9 +147,9 @@
                 <br><br>
                 So click below and keep your progress going!<br><br><br>
             </p>
-            <div class="px-3 md:px-0">
-                <a class="join pianote w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">Claim the offer</a>
-            </div>
+{{--            <div class="px-3 md:px-0">--}}
+{{--                <a class="join pianote w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">Claim the offer</a>--}}
+{{--            </div>--}}
         </div>
     </section>
 
@@ -289,11 +289,11 @@
                 </div>
 
             </div>
-            <h3 class="mb-8"><strong>ONLY <s class="opacity-60">${{ 240 }}</s> $197</strong></h3>
+            <h3 class="mb-8"><strong>ONLY <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> ${{ Prices::$plusSubscriptionAnnual }}</strong></h3>
             <div class="w-2/3 mx-auto">
                 <a
-                    href="/ecommerce/add-to-cart?locked=true&redirect=/order&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,pianote-practice-planner:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,the-power-of-chords:1,classical-piano:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1,piano-riffs-and-fills:1,piano-technique-made-easy:1,destupefy-your-left-hand:1,worship-piano:1,faster-fingers:1"
-                    class="join pianote w-full">Claim your offer
+{{--                    href="/ecommerce/add-to-cart?locked=true&redirect=/order&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,pianote-practice-planner:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,the-power-of-chords:1,classical-piano:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1,piano-riffs-and-fills:1,piano-technique-made-easy:1,destupefy-your-left-hand:1,worship-piano:1,faster-fingers:1"--}}
+                    class="join sold-out w-full">Sold Out
                 </a>
             </div>
             <p class="text-center my-8" style="color:#ABB5C2;">
