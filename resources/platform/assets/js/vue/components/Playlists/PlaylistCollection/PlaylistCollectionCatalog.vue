@@ -28,18 +28,18 @@
             default: 0
         },
         miniCatalog: {
-            type: Boolean, 
+            type: Boolean,
             default: false,
         }
     })
-    
+
    //---------Computed Props---------//
     const hasPlaylists = computed(() => {
         return props.playlistCount ? true : false;
     })
 
     //---------Reactive Data---------//
-    const state = reactive({ 
+    const state = reactive({
         isListView: false,
         showControls: true,
         searchTerm: '',
@@ -52,7 +52,7 @@
         //load playlists
         playlistsStore.loadingPlaylists = true;
         playlistsStore.getPlaylists({ brand: props.brand, page: pageNumber, limit: 10 }, token);
-        //update current page number 
+        //update current page number
         playlistsStore.resultsPage = pageNumber;
         //update url
         let url = new URL(window.location.href);
@@ -67,22 +67,26 @@
         if(props.playlistCount <= 10 && props.playlists.length <= 10) {
             playlistsStore.playlists = props.playlists;
         } else {
+            const params = new Proxy(new URLSearchParams(window.location.search), {
+                get: (searchParams, prop) => searchParams.get(prop),
+            });
+
             playlistsStore.loadingPlaylists = true;
             playlistsStore.getPlaylists(
-                { 
-                    brand: brand, 
-                    page: 1, 
+                {
+                    brand: brand,
+                    page: params.page || 1,
                     limit: null,
                     term: state.searchTerm,
                     sort: state.sortValue,
-                }, token); 
+                }, token);
         }
         //For Create Modal to reload Playlists
         playlistsStore.pageHasPlaylistCatalog = true;
     })
 
-    onBeforeMount(() => {  
-        // console.log(props.playlists)    
+    onBeforeMount(() => {
+        // console.log(props.playlists)
         //Get Local Storage Value
         if (!props.miniCatalog) {
             if(localStorage.getItem('playlistIsListView')) {
@@ -94,7 +98,7 @@
         const params = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
         });
-        
+
         //Set resultsPage
         playlistsStore.resultsPage = Number(params.page || 1);
         state.searchTerm = params.search || '';
@@ -123,12 +127,12 @@
 <template>
     <main class="tw-w-full">
         <!-- No Playlists -->
-        <section v-if="playlistsStore.playlists.length === 0 && !playlistsStore.loadingPlaylists && !state.searchTerm.length" 
+        <section v-if="playlistsStore.playlists.length === 0 && !playlistsStore.loadingPlaylists && !state.searchTerm.length"
                  class="tw-w-full tw-flex dark:tw-text-white tw-items-center "
                  :class="miniCatalog ? 'tw-mt-1' : 'tw-mt-[58px] tw-flex-col'"
         >
             <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#3F3F46] dark:tw-bg-[#445F74] "
-                 :class="{'tw-mb-[30px]': !miniCatalog}"   
+                 :class="{'tw-mb-[30px]': !miniCatalog}"
             >
                 <musora-icon icon-name="playlist" class="tw-w-[36px]" />
             </div>
@@ -141,7 +145,7 @@
         <!-- Catalog -->
         <div v-if="playlistsStore.playlists.length !== 0 || state.searchTerm.length" class="tw-w-full">
             <!-- Controls -->
-            <PlaylistCollectionControls 
+            <PlaylistCollectionControls
                 v-if="!props.miniCatalog || state.searchTerm.length"
                 :brand="brand"
                 :isListView="state.isListView"
@@ -174,30 +178,30 @@
             >
                 <!-- Mini Catalog -->
                 <template v-if="miniCatalog">
-                    <playlist-collection-card 
-                        v-for="list in playlistsStore.playlists.slice(0,5)" 
-                        :key="list.id" 
+                    <playlist-collection-card
+                        v-for="list in playlistsStore.playlists.slice(0,5)"
+                        :key="list.id"
                         :list="list"
                         :isListView="false"
                         :token="token"
                         :brand="brand"
-                    />  
+                    />
                 </template>
                 <!-- Full Catalog -->
                 <template v-else>
-                    <playlist-collection-card 
-                        v-for="list in playlistsStore.playlists" 
-                        :key="list.id" 
+                    <playlist-collection-card
+                        v-for="list in playlistsStore.playlists"
+                        :key="list.id"
                         :list="list"
                         :isListView="state.isListView"
                         :token="token"
                         :brand="brand"
-                    />  
+                    />
                 </template>
             </section>
 
             <!-- Pagination -->
-            <Pagination 
+            <Pagination
                 v-if="!miniCatalog && !playlistsStore.loadingPlaylists && playlistsStore.playlistsQuantity > 10"
                 :currentPage="playlistsStore.resultsPage"
                 :pageQuantity="playlistsStore.playlistsQuantity"
@@ -210,14 +214,14 @@
                 <h2 class="tw-text-3xl tw-font-bold tw-mb-[15px]">No results found for <span :class="`tw-text-${brand}`">{{ state.searchTerm }}</span></h2>
             </section>
         </div>
-        
+
         <!-- Skeleton Loader -->
-        <div v-if="playlistsStore.loadingPlaylists" 
-             class="tw-w-full tw-animate-pulse" 
+        <div v-if="playlistsStore.loadingPlaylists"
+             class="tw-w-full tw-animate-pulse"
              :class="state.isListView && !miniCatalog ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 tw-gap-4 tw-mt-4' "
         >
-            <div v-for="(n, index) in (playlistsStore.playlists.length)" 
-                :key="n" 
+            <div v-for="(n, index) in (playlistsStore.playlists.length)"
+                :key="n"
                 class="tw-flex tw-w-full "
                 :class="state.isListView && !miniCatalog ? 'tw-h-[52px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]' : 'tw-flex-col'"
             >
@@ -228,7 +232,7 @@
                     <div :class="state.isListView && !miniCatalog ? 'tw-hidden' : 'tw-mt-2 tw-w-full tw-bg-[#E6E7E9] dark:tw-bg-[#081825] tw-aspect-square tw-h-[44px] tw-rounded-lg' "></div>
                 </template>
             </div>
-        </div>       
+        </div>
 
     </main>
 </template>
