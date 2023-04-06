@@ -171,7 +171,7 @@ onBeforeMount(() => {
             class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-text-[#0D0D0D] dark:tw-text-white"
             :class="[{ 'tw-grayscale': needAccess }, !cueVersion ? 'tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)]' : 'tw-w-full']">
 
-            <div class="tw-inline-flex tw-items-center tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity"
+            <div class="tw-inline-flex tw-items-center tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity tw-text-sm"
                 :class="{ 'tw-opacity-0': playlistsStore.sortingPlaylist }">
                 <template v-if="Number(lesson.user_playlist_item_position) === Number(currentItem)"><i class="fas fa-play"></i></template>
                 <template v-else>{{ props.index + 1 }}</template>
