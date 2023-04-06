@@ -177,7 +177,7 @@ const deletePlaylist = () => {
 
 const addToPlaylist = () => {
     window.openplaylistmodal({
-        modalType: 'addItem', content: props.data
+        modalType: 'addItem', content: { ...props.data, content_id: props.data.id }
     });
 }
 
