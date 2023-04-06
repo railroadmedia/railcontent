@@ -285,10 +285,10 @@ onBeforeMount(() => {
 
             <!-- PLAYBACK CUE OPTIONS DROPDOWN -->
             <div v-if="cueVersion"
-                class="tw-inline-flex tw-items-center tw-justify-end tw-shrink-0 tw-w-[20px] tw-h-[20px] md:tw-justify-center">
+                class="tw-inline-flex tw-items-center tw-justify-end tw-shrink-0 tw-w-[25px] tw-h-[25px] md:tw-justify-center">
                 <div class="tw-relative tw-align-middle" v-click-outside="() => { state.dropdownOpen = false }">
                     <button v-if="!needAccess && !playlistsStore.sortingPlaylist"
-                        class="tw-w-[20px] tw-h-[20px] tw-text-[#445F74] dark:tw-text-[#7E9AB1] tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2"
+                        class="tw-flex tw-justify-center tw-items-center tw-w-[25px] tw-h-[25px] tw-text-[#445F74] dark:tw-text-[#7E9AB1] tw-rounded-full tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2"
                         title="Playlist Options" @click.prevent="dropdownTriggerHandler($event)">
                         <svg width="20" height="20" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
