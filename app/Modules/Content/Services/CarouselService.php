@@ -47,10 +47,11 @@ class CarouselService
             if ($slide->is_featured) {
                 if ($slide->product_id &&
                     $this->userProductService->hasProductNotCached(user()->id, $slide->product_id)) {
-                    $slide->cta_url = $slide->product_url;
-                    $slide->cta_text = "Go to course"; //todo: added for 30-day-drummer remove once CMS handles this case
+                    $slide->primary_cta_text = $slide->primary_cta_text_alt;
+                    $slide->primary_cta_url = $slide->primary_cta_url_alt;
+              //      $slide->cta_text = "Go to course"; //todo: added for 30-day-drummer remove once CMS handles this case
                 } else {
-                    $slide->cta_url = $slide->endpoint;
+                    $slide->primary_cta_url = $slide->primary_cta_url;
                 }
             }
         });

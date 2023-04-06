@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c9cbffb10fe5895d170ff63847b6ce04",
+    "content-hash": "e90f22066f2270921adad1763f500790",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.263.3",
+            "version": "3.263.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "be23e6b278e9a3f4a5b15394f85e9c3f54c9dd7e"
+                "reference": "08e2f243243a9fcdd8909d596e46f81d8c72cb60"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/be23e6b278e9a3f4a5b15394f85e9c3f54c9dd7e",
-                "reference": "be23e6b278e9a3f4a5b15394f85e9c3f54c9dd7e",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/08e2f243243a9fcdd8909d596e46f81d8c72cb60",
+                "reference": "08e2f243243a9fcdd8909d596e46f81d8c72cb60",
                 "shasum": ""
             },
             "require": {
@@ -337,9 +337,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.263.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.263.4"
             },
-            "time": "2023-04-04T18:24:59+00:00"
+            "time": "2023-04-05T18:21:54+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2967,16 +2967,16 @@
         },
         {
             "name": "google/auth",
-            "version": "v1.25.0",
+            "version": "v1.26.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "0865c44ab50378f7b145827dfcbd1e7a238f7759"
+                "reference": "f1f0d0319e2e7750ebfaa523c78819792a9ed9f7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/0865c44ab50378f7b145827dfcbd1e7a238f7759",
-                "reference": "0865c44ab50378f7b145827dfcbd1e7a238f7759",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/f1f0d0319e2e7750ebfaa523c78819792a9ed9f7",
+                "reference": "f1f0d0319e2e7750ebfaa523c78819792a9ed9f7",
                 "shasum": ""
             },
             "require": {
@@ -2989,8 +2989,8 @@
             },
             "require-dev": {
                 "guzzlehttp/promises": "0.1.1|^1.3",
-                "kelvinmo/simplejwt": "^0.2.5|^0.5.1",
-                "phpseclib/phpseclib": "^2.0.31",
+                "kelvinmo/simplejwt": "0.7.0",
+                "phpseclib/phpseclib": "^2.0.31||^3.0",
                 "phpspec/prophecy-phpunit": "^1.1||^2.0",
                 "phpunit/phpunit": "^7.5||^9.0.0",
                 "sebastian/comparator": ">=1.2.3",
@@ -3019,9 +3019,9 @@
             "support": {
                 "docs": "https://googleapis.github.io/google-auth-library-php/main/",
                 "issues": "https://github.com/googleapis/google-auth-library-php/issues",
-                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.25.0"
+                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.26.0"
             },
-            "time": "2023-01-26T22:04:14+00:00"
+            "time": "2023-04-05T15:11:57+00:00"
         },
         {
             "name": "google/cloud-core",
@@ -8369,16 +8369,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.0.12",
+            "version": "dev-header-banner-v2-updates-MT-423",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "b86e1b61ae4135449efefbdd1d252af87160e6b3"
+                "reference": "d4415de5cc16f8320914dcaa5b6f8d7f632e3609"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/b86e1b61ae4135449efefbdd1d252af87160e6b3",
-                "reference": "b86e1b61ae4135449efefbdd1d252af87160e6b3",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/d4415de5cc16f8320914dcaa5b6f8d7f632e3609",
+                "reference": "d4415de5cc16f8320914dcaa5b6f8d7f632e3609",
                 "shasum": ""
             },
             "require": {
@@ -8408,9 +8408,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.0.12"
+                "source": "https://github.com/railroadmedia/musora-api/tree/header-banner-v2-updates-MT-423"
             },
-            "time": "2023-03-22T14:55:10+00:00"
+            "time": "2023-04-06T08:28:03+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -15180,16 +15180,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.17.1",
+            "version": "1.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "d3753fcb3abc6f78f5de6f72153d4b9c99c72dee"
+                "reference": "882eabc9b6a12e25c27091a261397f9c8792e722"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/d3753fcb3abc6f78f5de6f72153d4b9c99c72dee",
-                "reference": "d3753fcb3abc6f78f5de6f72153d4b9c99c72dee",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/882eabc9b6a12e25c27091a261397f9c8792e722",
+                "reference": "882eabc9b6a12e25c27091a261397f9c8792e722",
                 "shasum": ""
             },
             "require": {
@@ -15219,9 +15219,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.17.1"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.18.0"
             },
-            "time": "2023-04-04T11:11:22+00:00"
+            "time": "2023-04-06T07:26:43+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -16956,10 +16956,10 @@
     ],
     "aliases": [
         {
-            "package": "railroad/ecommerce",
-            "version": "dev-5.0-no-extra-days-for-trials-BR-662",
-            "alias": "v5.0.72",
-            "alias_normalized": "5.0.72.0"
+            "package": "railroad/musora-api",
+            "version": "dev-header-banner-v2-updates-MT-423",
+            "alias": "v3.0.12",
+            "alias_normalized": "3.0.12.0"
         },
         {
             "package": "railroad/railanalytics",
@@ -16976,9 +16976,8 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/ecommerce": 20,
-        "railroad/railanalytics": 20,
-        "railroad/railtracker": 20
+        "railroad/musora-api": 20,
+        "railroad/railanalytics": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
