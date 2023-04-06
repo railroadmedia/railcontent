@@ -246,8 +246,8 @@ onMounted(() => {
                 </div>
             </div>
             <!-- Print Each Card -->
-            <playlist-card :currentItem="playlistItemPosition" v-for="(lesson) in playlistsStore.lessons"
-                :key="'playlist-card-cue-' + lesson.id" :cardId="'playlist-card-cue-' + lesson.id" :lesson="lesson"
+            <playlist-card :currentItem="playlistItemPosition" v-for="(lesson, i) in playlistsStore.lessons"
+                :key="'playlist-card-cue-' + lesson.id" :index="i" :cardId="'playlist-card-cue-' + lesson.id" :lesson="lesson"
                 :token="token" :brand="brand" :cue-version="true" />
             <!-- Skeleton Loader For Infinite Scroll -->
             <div v-if="shouldShowBottomSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
