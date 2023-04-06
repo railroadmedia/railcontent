@@ -173,9 +173,8 @@ onBeforeMount(() => {
 
             <div class="tw-inline-flex tw-items-center tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity"
                 :class="{ 'tw-opacity-0': playlistsStore.sortingPlaylist }">
-                <template v-if="!cueVersion">{{ props.index + 1 }}</template>
-                <template v-else-if="cueVersion && Number(lesson.user_playlist_item_position) === Number(currentItem)"><i class="fas fa-play"></i></template>
-                <template v-if="cueVersion && Number(lesson.user_playlist_item_position) !== Number(currentItem)">{{ lesson.user_playlist_item_position }}</template>
+                <template v-if="Number(lesson.user_playlist_item_position) === Number(currentItem)"><i class="fas fa-play"></i></template>
+                <template v-else>{{ props.index + 1 }}</template>
             </div>
 
             <!-- Playlist thumbnail -->
@@ -209,7 +208,7 @@ onBeforeMount(() => {
             <div class="tw-truncate tw-w-full  tw-px-3 lg:tw-pl-[15px]"
                 :class="[{ 'lg:tw-w-[calc(100%-350px)]': !cueVersion }]">
                 <!--title-->
-                <p class="tw-truncate tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm"
+                <p class="tw-truncate tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs"
                     :class="[{ 'md:tw-block': !cueVersion }]">
                     <template v-if="lesson.type === 'assignment'">
                         <span v-for="(route, i) in lesson.route" :key="i">
@@ -219,7 +218,7 @@ onBeforeMount(() => {
                 </p>
                 <!-- description / Time Stamp-->
                 <div class="tw-flex tw-items-center tw-w-full">
-                    <p class="tw-font-bold tw-text-[16px] tw-whitespace-normal tw-line-clamp-1">{{
+                    <p class="tw-font-bold tw-text-sm tw-whitespace-normal tw-line-clamp-1">{{
                         lessonDescription }}</p>
                     <!-- Time Stamp Icon -->
                     <button v-if="!cueVersion"
