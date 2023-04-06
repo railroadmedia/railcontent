@@ -58,8 +58,8 @@ export const usePlaylistsStore = defineStore({
         })
     },
     async getPlaylists(payload, token) {
-      const response = await PlaylistService.getCurrentUserPlaylists(payload, token);
       try {
+        const response = await PlaylistService.getCurrentUserPlaylists(payload, token);
         this.loadingPlaylists = false;
         this.playlists = await response.data.data;
         this.playlistsQuantity = await response.data.meta.totalResults;
@@ -69,9 +69,8 @@ export const usePlaylistsStore = defineStore({
       }
     },
     async getPlaylistLessons(payload, token) {
-      const response = await PlaylistService.getPlaylistLessons(payload, token);
       try {
-        this.loadingLoading = false;
+        const response = await PlaylistService.getPlaylistLessons(payload, token);
         this.lessons.concat(response.data.data);
       } catch {
         console.log('there was an error with your request');
@@ -79,9 +78,8 @@ export const usePlaylistsStore = defineStore({
       }
     },
     async getSidebarPlaylists(payload, token) {
-        const response = await PlaylistService.getCurrentUserPlaylists(payload, token);
       try {
-          this.loadingLoading = false;
+          const response = await PlaylistService.getCurrentUserPlaylists(payload, token);
           this.sidebarPlaylists = await response.data.data;
       } catch {
           console.log('there was an error with your request');
