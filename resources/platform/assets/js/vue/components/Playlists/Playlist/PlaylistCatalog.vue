@@ -182,7 +182,6 @@
 
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
-        console.log('check')
         initialLessonsArray = props.lessons.data;
     });
 </script>
