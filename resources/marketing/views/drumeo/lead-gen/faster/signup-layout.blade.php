@@ -59,8 +59,8 @@
 @section('meta')
     <title>Fastest Way To Get Faster</title>
     <meta property="og:title" content="Fastest Way To Get Faster">
-    <meta name="description" content="El Estepario Siberiano’s 10 exercise to improve your speed on the drums.">
-    <meta property="og:description" content="El Estepario Siberiano’s 10 exercise to improve your speed on the drums.">
+    <meta name="description" content="El Estepario Siberiano’s 10 exercises to improve your speed on the drums.">
+    <meta property="og:description" content="El Estepario Siberiano’s 10 exercises to improve your speed on the drums.">
 
     <meta property="og:url" content="https://www.drumeo.com/faster/">
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/share-image.jpg" style="display: none;">
