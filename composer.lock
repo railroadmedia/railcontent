@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e90f22066f2270921adad1763f500790",
+    "content-hash": "11817f359f0755fd7ffc71ce0d0764a8",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8796,12 +8796,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railtracker.git",
-                "reference": "af5433a018d7b5795e6ba06bc2971da65afec97d"
+                "reference": "570d1727b1e83f98d1cf49626a6f98d2e21cd897"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/af5433a018d7b5795e6ba06bc2971da65afec97d",
-                "reference": "af5433a018d7b5795e6ba06bc2971da65afec97d",
+                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/570d1727b1e83f98d1cf49626a6f98d2e21cd897",
+                "reference": "570d1727b1e83f98d1cf49626a6f98d2e21cd897",
                 "shasum": ""
             },
             "require": {
@@ -8849,7 +8849,7 @@
                 "issues": "https://github.com/railroadmedia/railtracker/issues",
                 "source": "https://github.com/railroadmedia/railtracker/tree/fix-performance-rwillems-20230405"
             },
-            "time": "2023-04-05T18:52:09+00:00"
+            "time": "2023-04-05T20:00:27+00:00"
         },
         {
             "name": "railroad/referral",
@@ -16956,6 +16956,12 @@
     ],
     "aliases": [
         {
+            "package": "railroad/ecommerce",
+            "version": "dev-5.0-no-extra-days-for-trials-BR-662",
+            "alias": "v5.0.72",
+            "alias_normalized": "5.0.72.0"
+        },
+        {
             "package": "railroad/musora-api",
             "version": "dev-header-banner-v2-updates-MT-423",
             "alias": "v3.0.12",
@@ -16976,8 +16982,10 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "railroad/ecommerce": 20,
         "railroad/musora-api": 20,
-        "railroad/railanalytics": 20
+        "railroad/railanalytics": 20,
+        "railroad/railtracker": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -16986,5 +16994,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
