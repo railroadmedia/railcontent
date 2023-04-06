@@ -24953,11 +24953,11 @@ a:visited{
 .hover\:tw-bg-\[\#7E9AB1\]\/20:hover{
   background-color: rgb(126 154 177 / 0.2) !important;
 }
-.hover\:tw-bg-\[\#E6E7E9\]\/40:hover{
-  background-color: rgb(230 231 233 / 0.4) !important;
-}
 .hover\:tw-bg-slate-200\/50:hover{
   background-color: rgb(226 232 240 / 0.5) !important;
+}
+.hover\:tw-bg-\[\#E6E7E9\]\/40:hover{
+  background-color: rgb(230 231 233 / 0.4) !important;
 }
 .hover\:tw-bg-\[\#E7EFF6\]:hover{
   --tw-bg-opacity: 1 !important;
@@ -25423,9 +25423,6 @@ a:visited{
 .tw-dark .hover\:dark\:tw-bg-\[\#102230\]:hover{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(16 34 48 / var(--tw-bg-opacity)) !important;
-}
-.tw-dark .dark\:hover\:tw-bg-black\/20:hover{
-  background-color: rgb(0 0 0 / 0.2) !important;
 }
 .tw-dark .dark\:hover\:tw-bg-gray-300\/40:hover{
   background-color: rgb(209 213 219 / 0.4) !important;
