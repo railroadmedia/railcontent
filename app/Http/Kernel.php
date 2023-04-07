@@ -79,10 +79,10 @@ class Kernel extends HttpKernel
 
         'api_public' => [
 //            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
-            \App\Http\Middleware\EncryptCookies::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+//            \App\Http\Middleware\EncryptCookies::class,
+//            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+//            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Modules\UserManagementSystem\Middleware\AuthenticateIfAvailable::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
@@ -92,10 +92,10 @@ class Kernel extends HttpKernel
 
         'api_authenticated' => [
 //            \App\Http\Middleware\ClearLegacyMusoraCookies::class,
-            \App\Http\Middleware\EncryptCookies::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+//            \App\Http\Middleware\EncryptCookies::class,
+//            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
-            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+//            \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Modules\UserManagementSystem\Middleware\AuthenticatedOnly::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Modules\Brand\Middleware\SetLastUsedBrand::class,

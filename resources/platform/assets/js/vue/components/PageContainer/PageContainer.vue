@@ -1,7 +1,9 @@
 <script setup>
 import { ref, provide, onBeforeMount, onMounted, onUnmounted, onUpdated } from "vue";
+import { storeToRefs  } from 'pinia';
 import { useNotificationStore } from '../../../stores/notification';
 import { useConfirmationStore } from '../../../stores/confirmation';
+import { usePlaylistsStore } from '../../../stores/playlists';
 import NotificationToasts from '../../vuesora/components/NotificationToasts/NotificationToasts.vue';
 import Navbar from "../Navbar/Navbar.vue";
 import ConfirmationModal from "../Modal/ConfirmationModal.vue";
@@ -10,6 +12,7 @@ import Footer from "../Footer/Footer.vue";
 // import { useRouter, useRoute } from "vue-router";
 import SpriteSheet from "../MusoraIcons/SpriteSheet.vue";
 import { setEndpointPrefix } from "../../utils"
+import PlaylistsModal from "../Playlists/Modals/PlaylistsModal.vue";
 
 const props = defineProps({
   brand: {
@@ -50,19 +53,35 @@ const props = defineProps({
       type: Boolean,
       default: true
   },
+  playlists: {
+    type: Array,
+    default: [],
+  },
+  mostRecentPlaylists:{
+    type: Array,
+    default: []
+  },
+  csrf_token: {
+      type: String,
+      required: true
+  }
 });
 
 const notification = useNotificationStore();
 const confirmation = useConfirmationStore();
+const playlistsStore = usePlaylistsStore();
+const { modalOpen: playlistModalProps } = storeToRefs(playlistsStore);
 
 const isSidebarCollapsed = ref(false);
 const isSidebarHidden = ref(false);
 const isDarkModeSelected = ref(false);
+const isPlaylistModalOpen = ref(false);
 
 provide('isDarkModeSelected', isDarkModeSelected);
 provide('userAvatar', props.userAvatar);
 provide('userName', props.userName);
 provide('userId', props.userId);
+provide('csrf_token', props.csrf_token);
 provide('isSidebarCollapsed', isSidebarCollapsed);
 
 const setDarkMode = (isSelected) => {
@@ -154,11 +173,21 @@ onBeforeMount(() => {
     notification.push(n);
   };
 
-// Attach confirmation update to window
-window.showconfirmationmodal = (n) => {
-  confirmation.update(n);
-};
-})
+  // Attach confirmation update to window
+  window.showconfirmationmodal = (n) => {
+    confirmation.update(n);
+  };
+
+  // Attach pinia playlist modal to window
+  window.openplaylistmodal = (modalOpen) => {
+    playlistsStore.openModal(modalOpen);
+    isPlaylistModalOpen.value = true;
+  };
+
+  // Initialize playlists pinia store
+  playlistsStore.updateSidebarPlaylists({ sidebarPlaylists: props.mostRecentPlaylists })
+  playlistsStore.update({ pinnedPlaylists: props.playlists });
+});
 
 const handleCloseConfirmationModal = () => {
   confirmation.callbacks.cancel();
@@ -167,6 +196,11 @@ const handleCloseConfirmationModal = () => {
 
 const handleNotificationClear = () => {
   notification.clear();
+};
+
+const handleClosePlaylistModal = () => {
+  playlistsStore.modalReset();
+  isPlaylistModalOpen.value = false;
 };
 
 const onResize = (e) => {
@@ -184,6 +218,7 @@ const handleSubmit = () => {
 
 onMounted(() => {
   //Check if Mobile on Resize
+  //   console.log('most recent ', props.mostRecentPlaylists)
   window.addEventListener("resize", onResize);
 })
 
@@ -191,12 +226,15 @@ onUnmounted(() => {
   window.removeEventListener("resize", onResize);
 })
 
+onUpdated(() => {
+  // console.log(playlistsStore.modalOpen)
+});
 </script>
 
 <template>
   <main class="tw-min-h-screen tw-w-screen">
     <sprite-sheet></sprite-sheet>
-    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" :slideClass="notification.slideClass" @onClose="handleNotificationClear" />
+    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" :slideClass="notification.slideClass" :isSidebarCollapsed="isSidebarCollapsed" @onClose="handleNotificationClear" />
     <ConfirmationModal
       v-if="confirmation.title"
       :brand="brand"
@@ -209,6 +247,7 @@ onUnmounted(() => {
       @onCancel="handleCloseConfirmationModal"
       @onSubmit="handleSubmit"
     />
+    <PlaylistsModal @onClosePlaylistsModal="handleClosePlaylistModal" key="playlists-modal-key" v-if="isPlaylistModalOpen" :modalProps="playlistModalProps" :brand="brand"></PlaylistsModal>
 
     <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications"
       :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="isSidebarHidden"
@@ -226,7 +265,7 @@ onUnmounted(() => {
       <!-- Sidebar -->
       <Sidebar :brand="brand" :isLive="isLive" :isSidebarCollapsed="isSidebarCollapsed"
         :isSidebarHidden="isSidebarHidden" @onCollapseSidebar="onCollapseSidebar"
-        :forceSidebarHidden="forceSidebarHidden" />
+        :forceSidebarHidden="forceSidebarHidden" :user-id="userId" />
 
       <!-- Content Container -->
       <main class="

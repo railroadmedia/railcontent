@@ -19,6 +19,7 @@ use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
+use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railtracker\Events\MediaPlaybackTracked;
 use Railroad\Railtracker\Repositories\MediaPlaybackRepository;
 use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
@@ -64,6 +65,8 @@ class ContentProgressEventListener
 
     private UserMetricsService $userMetricsService;
 
+    private UserPlaylistsService $userPlaylistsService;
+
     public function __construct(
         UserContentProgressService $userContentProgressService,
         ContentHierarchyService $contentHierarchyService,
@@ -74,7 +77,8 @@ class ContentProgressEventListener
         UserPointsService $userPointsService,
         UserProviderInterface $userProvider,
         MediaPlaybackRepository $mediaPlaybackRepository,
-        UserMetricsService $userMetricsService
+        UserMetricsService $userMetricsService,
+        UserPlaylistsService $userPlaylistsService
     ) {
         $this->userContentProgressService = $userContentProgressService;
         $this->contentService = $contentService;
@@ -85,6 +89,7 @@ class ContentProgressEventListener
         $this->userProvider = $userProvider;
         $this->mediaPlaybackRepository = $mediaPlaybackRepository;
         $this->userMetricsService = $userMetricsService;
+        $this->userPlaylistsService = $userPlaylistsService;
     }
 
     public function handleUserProgressSaved(UserContentProgressSaved $userContentProgressSaved)
@@ -92,6 +97,8 @@ class ContentProgressEventListener
         $content = $this->contentService->getById($userContentProgressSaved->contentId);
 
         if (!empty($content)) {
+            $this->userPlaylistsService->updatePlaylistsLastProgress($content['id'], brand());
+
             $state = ContentHelper::getUserContentProgressState($userContentProgressSaved->userId, $content);
             $percent = ContentHelper::getUserContentProgressPercent($userContentProgressSaved->userId, $content);
 

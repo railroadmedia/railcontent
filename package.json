@@ -22,7 +22,6 @@
     "devDependencies": {
         "@heroicons/vue": "^1.0.5",
         "@parcel/transformer-vue": "2.7.0",
-        "@tailwindcss/aspect-ratio": "^0.4.0",
         "@tailwindcss/forms": "^0.5.0",
         "@tailwindcss/line-clamp": "^0.4.0",
         "@tailwindcss/typography": "^0.5.2",
@@ -59,6 +58,7 @@
         "linkifyjs": "^3.0.0-beta.3",
         "lodash": "^4.17.19",
         "luxon": "^3.0.1",
+        "maska": "^2.1.6",
         "mediaelement": "^4.2.8",
         "mediaelement-plugins": "^2.5.0",
         "mitt": "^3.0.0",
@@ -76,6 +76,7 @@
         "vue": "^3.2.38",
         "vue-advanced-cropper": "^2.8.1",
         "vue-axios": "^3.4.1",
-        "vue-loader": "^16.8.1"
+        "vue-loader": "^16.8.1",
+        "vue3-draggable": "^2.0.9"
     }
 }

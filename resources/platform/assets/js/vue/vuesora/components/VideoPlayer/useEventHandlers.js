@@ -28,6 +28,7 @@ export default function ({
     emit,
     contentId,
     progressState,
+    endCallback,
 }) {
     const eventHandlers = {
         loading: () => {
@@ -163,6 +164,7 @@ export default function ({
 
         ended: () => {
             isPipEnabled.value = false;
+            endCallback();
         },
     };
 

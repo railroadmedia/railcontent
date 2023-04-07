@@ -5,7 +5,7 @@ namespace App\Decorators\Content;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Support\Collection;
 
-class AssignmentXPDecorator extends TypeDecoratorBase
+class AssignmentDecorator extends TypeDecoratorBase
 {
     /**
      * @param Collection|ContentEntity[] $contents
@@ -20,13 +20,11 @@ class AssignmentXPDecorator extends TypeDecoratorBase
         }
 
         foreach ($contentsOfType as $contentIndex => $content) {
-            if (!isset($contentsOfType[$contentIndex]['xp'])) {
-                $contentsOfType[$contentIndex]['xp'] = 0;
+            $parents = $content->getParentContentData();
+            if (!empty($parents)) {
+                $parent = $this->contentService->getById($parents[0]->id);
+                $contentsOfType[$contentIndex]['thumbnail_url'] = $parent ? $parent->fetch('data.thumbnail_url') : '';
             }
-            $contentsOfType[$contentIndex]['xp'] += $content->fetch(
-                'fields.xp',
-                config('xp_ranks.assignment_content_completed')
-            );
         }
 
         return $this->mergeDecorated($contents, $contentsOfType);

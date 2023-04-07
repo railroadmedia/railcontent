@@ -191,6 +191,21 @@ export default {
       default: () => "",
     },
 
+    description: {
+      type: String,
+      default: () => "",
+    },
+
+    lessonType: {
+      type: String,
+      default: () => "",
+    },
+
+    thumbnailUrl: {
+      type: String,
+      default: () => "",
+    },
+
     parentTitle: {
       type: String,
       default: () => null,
@@ -217,7 +232,7 @@ export default {
     },
 
     likeCount: {
-      type: Number,
+      type: [Number, String],
       default: () => 0,
     },
 
@@ -235,6 +250,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    relatedLesson: {
+      type: Object,
+      default: {},
+    }
   },
 
   data() {
@@ -295,14 +314,14 @@ export default {
     toCapitalCase: (string) => Utils.toCapitalCase(string),
 
     addToList() {
-      this.hasAdded = !this.hasAdded;
-
-      this.$nextTick(() => {
-        ContentService.addOrRemoveContentFromList(
-          this.contentId,
-          !this.hasAdded
-        );
-      });
+      const data = {
+        content_id: this.contentId,
+        name: this.title,
+        thumbnail_url: this.thumbnailUrl,
+        description: this.description,
+        type: this.lessonType
+      }
+      window.openplaylistmodal({ modalType: 'addItem', content: data });
     },
 
     getResourceIcon(resource) {

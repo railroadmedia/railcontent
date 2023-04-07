@@ -9,6 +9,8 @@ use Modules\UserManagementSystem\Events\UserEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
+use Railroad\Railcontent\Events\PlaylistItemsUpdated;
+use Railroad\Railcontent\Listeners\PlaylistListener;
 use Railroad\Railforums\EventListeners\PostEventListener;
 use Railroad\Railforums\EventListeners\ThreadEventListener;
 use Railroad\Railforums\Events\PostCreated;
@@ -55,6 +57,7 @@ class EventServiceProvider extends ServiceProvider
         OrderEvent::class => [
             OrderEventListener::class . '@handleOrderPlaced',
         ],
+        PlaylistItemsUpdated::class => [PlaylistListener::class.'@handlePlaylistItemsUpdated']
     ];
 
     /**

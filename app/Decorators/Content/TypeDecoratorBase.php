@@ -3,6 +3,7 @@
 namespace App\Decorators\Content;
 
 use Railroad\Railcontent\Decorators\DecoratorInterface;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
@@ -31,16 +32,24 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
      */
     protected $contentFollowsService;
 
+    protected $instructorDecorator;
+
+    protected ContentRepository $contentRepository;
+
     public function __construct(
         ContentService $contentService,
         UserContentProgressService $userContentProgressService,
         ContentHierarchyService $contentHierarchyService,
-        ContentFollowsService $contentFollowsService
+        ContentFollowsService $contentFollowsService,
+        InstructorDecorator $instructorDecorator,
+        ContentRepository $contentRepository
     ) {
         $this->contentService = $contentService;
         $this->userContentProgressService = $userContentProgressService;
         $this->contentHierarchyService = $contentHierarchyService;
         $this->contentFollowsService = $contentFollowsService;
+        $this->instructorDecorator = $instructorDecorator;
+        $this->contentRepository = $contentRepository;
     }
 
     /**
@@ -52,7 +61,12 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
     {
         foreach ($originalContents as $originalContentIndex => $originalContent) {
             foreach ($decoratedContents as $decoratedContent) {
-                if ($decoratedContent['id'] == $originalContent['id']) {
+                if(isset($decoratedContent['user_playlist_item_id']) && isset($originalContent['user_playlist_item_id'])){
+                    if ($decoratedContent['user_playlist_item_id'] == $originalContent['user_playlist_item_id']) {
+                        $originalContents[$originalContentIndex] = $decoratedContent;
+                    }
+                }
+                elseif ($decoratedContent['id'] == $originalContent['id']) {
                     $originalContents[$originalContentIndex] = $decoratedContent;
                 }
             }

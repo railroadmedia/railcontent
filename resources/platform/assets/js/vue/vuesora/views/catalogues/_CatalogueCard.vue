@@ -74,7 +74,7 @@
                     </div>
 
                     <!-- Video Title -->
-                    <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white"
+                    <h4 class="tw-text-sm tw-leading-snug tw-text-[#00101D] font-compressed tw-font-bold tw-capitalize tw-mb-1 dark:tw-text-white tw-line-clamp-2"
                         :class="{'text-center': isGuitareoChordAndScale}"
                     >
                         {{ mappedData.black_title }}
@@ -99,12 +99,12 @@
                 <!-- Add to My List -->
                 <div class="tw-inline-flex tw-items-start tw-p-1">
                     <button v-if="item.type !== 'pack-bundle' && showMyListAction"
-                        class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-transform-gpu tw-transition"
+                        class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
                         :class="is_added ? 'is-added tw-rotate-45 ' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                         :title="is_added ? 'Remove from My List' : 'Add to My List'"
                         :data-content-id="item.id"
                         :data-content-type="item.type"
-                        @click.stop.prevent="addToList"
+                        @click.stop.prevent="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.color_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })"
                     >
                         <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />

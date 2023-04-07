@@ -18,7 +18,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
         Brand::truncate();
         ProductType::truncate();
         Size::truncate();
@@ -32,7 +31,9 @@ class DatabaseSeeder extends Seeder
             CmsClothingSeeder::class,
             CmsAccessorySeeder::class,
             CmsBundleSeeder::class,
-            BFUpdates::class
+            BFUpdates::class,
+            CmsPlaylistLikesPinsSeeder::class,
+            CmsPlaylistContentSeeder::class,
         ]);
     }
 }

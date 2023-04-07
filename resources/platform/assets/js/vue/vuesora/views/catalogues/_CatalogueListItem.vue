@@ -190,7 +190,7 @@
           @click.stop.prevent="progressReset"></i>
       </div>
       <div v-else class="body">
-        <i class="add-to-list fas fa-plus flex-center dark:hover:tw-text-white hover:tw-text-[#00101D] tw-transform-g"
+        <i v-if="item.type !== 'learning-path-level'" class="add-to-list fas fa-plus flex-center dark:hover:tw-text-white hover:tw-text-[#00101D] tw-transform-g"
           :class="[is_added ? 'is-added tw-rotate-45' + themeTextClass : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC]',
           isBranchPath ? branchPathText : 'text-grey-2 hover-text-black'
           ]" :title="is_added ? 'Remove from My List' : 'Add to My List'" @click.stop.prevent="addToList"></i>
@@ -299,6 +299,9 @@ export default {
 
       return this.index;
     },
+  },
+  mounted(){
+    console.log(this.item.type)
   },
   beforeDestroy() {
     this.contentModel = null;

@@ -1,5 +1,5 @@
 <script>
-import { ref } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import OptionElement from '../AvatarMenu/OptionElement.vue'
 import OptionGroup from '../AvatarMenu/OptionGroup.vue'
 import AvatarMenu from '../AvatarMenu/AvatarMenu.vue'
@@ -11,7 +11,6 @@ import { XIcon } from "@heroicons/vue/solid";
 
 export default {
   name: 'UserIcon',
-  inject: ['userNavigationDropdownLinks'],
   props: {
     userName: {
       type: String
@@ -47,6 +46,7 @@ export default {
   setup(props, context) {
     const isUserMenuOpen = ref(false)
     const isReviewModalOpen = ref(false)
+    const userNavigationDropdownLinks = ref([])
 
     const handleMenuOpen = (val) => {
       if (typeof val === 'boolean') {
@@ -68,12 +68,17 @@ export default {
       window.location.reload()
     }
 
+    onBeforeMount(() => {
+      userNavigationDropdownLinks.value = window.userNavigationDropdownLinks;
+    });
+
     return {
       handleMenuOpen,
       handleLogout,
       isUserMenuOpen,
       isReviewModalOpen,
-      handleReviewOpen
+      handleReviewOpen,
+      userNavigationDropdownLinks
     }
   }
 }
@@ -111,7 +116,7 @@ export default {
         :href="accountUrl.length ? accountUrl : '/profile'"
       />
       <OptionGroup>
-        <OptionElement :href="this.userNavigationDropdownLinks.notificationsPageUrl">
+        <OptionElement :href="userNavigationDropdownLinks.notificationsPageUrl">
           <musora-icon icon-name="bell" class="tw-w-[20px] tw-mr-2"/>
           Notifications
           <!-- Notification Indicator -->
@@ -120,20 +125,24 @@ export default {
             <span class="tw-relative tw-inline-flex tw-rounded-full tw-h-[8px] tw-w-[8px] tw-bg-red-500"></span>
           </span>
         </OptionElement>
-        <!-- <OptionElement :href="this.userNavigationDropdownLinks.playlistsPageUrl">
+        <!-- <OptionElement :href="userNavigationDropdownLinks.playlistsPageUrl">
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
           Playlists
         </OptionElement> -->
 
-        <OptionElement :href="`/${ brand }/lists/my-list`">
+        <OptionElement :href="`/${ brand }/playlists`">
           <musora-icon icon-name="playlist" class="tw-w-[20px] tw-mr-2"/>
-          My List
+          Playlists
+        </OptionElement>
+        <OptionElement :href="`/${ brand }/lesson-history/in-progress`">
+          <musora-icon icon-name="bookmark" class="tw-w-[20px] tw-mr-2"/>
+          Lesson History
         </OptionElement>
         <OptionElement @onOptionClick="() => handleReviewOpen(true)">
           <musora-icon icon-name="board-complete" class="tw-w-[20px] tw-mr-2"/>
           Apply For Review
         </OptionElement>
-        <OptionElement :href="this.userNavigationDropdownLinks.settingsPageUrl">
+        <OptionElement :href="userNavigationDropdownLinks.settingsPageUrl">
           <musora-icon icon-name="settings" class="tw-w-[20px] tw-mr-2"/>
           Settings
         </OptionElement>
@@ -148,17 +157,17 @@ export default {
           <!-- Dark/Light Toggle Placeholder -->
           <div class="tw-ml-auto">
             <div class="tw-relative tw-w-10 tw-h-5 tw-rounded-full tw-border-2 dark:tw-bg-[#002039] tw-bg-[#e5e7ea] dark:tw-border-[#1e3b53] tw-border-[#e5e7ea] tw-box-content">
-              <div class="tw-transition-all tw-w-5 tw-h-5 tw-rounded-full tw-shadow-md tw-bg-white tw-absolute tw-top-0 dark:tw-right-0 dark:tw-left-auto tw-left-0 tw-right-auto"></div>
+              <div class="tw-transition-all tw-w-5 tw-h-5 tw-rounded-full tw-drop-shadow-md tw-bg-white tw-absolute tw-top-0 dark:tw-right-0 dark:tw-left-auto tw-left-0 tw-right-auto"></div>
             </div>
           </div>
         </OptionElement>
-        <OptionElement :href="this.userNavigationDropdownLinks.supportPageUrl">
+        <OptionElement :href="userNavigationDropdownLinks.supportPageUrl">
           <musora-icon icon-name="phone" class="tw-w-[20px] tw-mr-2"/>
             Support
           </OptionElement>
       </OptionGroup>
       <OptionGroup>
-        <OptionElement :href="this.userNavigationDropdownLinks.logoutPageUrl">
+        <OptionElement :href="userNavigationDropdownLinks.logoutPageUrl">
           <musora-icon icon-name="sign-out" class="tw-w-[20px] tw-mr-2"/>
           Logout
         </OptionElement>

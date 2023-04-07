@@ -53,8 +53,8 @@
                 'brand' => brand(),
                 'hasStartedContent' => $startedContentCount > 0,
                 'contentEndpoint' => '/railcontent/content',
-                'continueUrl' => url()->route('platform.lists.in-progress'),
-                'seeAllUrl' => url()->route('platform.lists.in-progress'),
+                'continueUrl' => url()->route('platform.lesson-history.in-progress'),
+                'seeAllUrl' => url()->route('platform.lesson-history.in-progress'),
                 'startedContentJson' => $startedContentJson,
                 ])
             @endcomponent
@@ -104,8 +104,7 @@
         {{-- My Playlists --}}
         @component('partials.bladesora.members.components.home._list-section', [
             'brand' => brand(),
-            'myListUrl' => url()->route('platform.lists.my-list'),
-            'contentEndpoint' => '/railcontent/content',
+            'myListUrl' => url()->route('platform.user.playlists',['brand'=>brand()]),
             'usersList' => $usersList,
             ])
         @endcomponent

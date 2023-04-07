@@ -21,8 +21,3 @@
 
     @include('partials._railanalytics-brand-tracking-iframe')
 @endsection
-
-@section('layout-scripts')
-    @parent
-    <script src="{{ mix('platform/js/vendor~onboarding.js') }}"></script>
-@endsection

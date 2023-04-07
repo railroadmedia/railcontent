@@ -341,6 +341,9 @@ return [
             \App\Decorators\Content\SemesterPackDecorator::class,
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
 
+            \App\Decorators\Content\AssignmentDecorator::class,
+            \App\Decorators\Content\PlaylistItemDecorator::class,
+
             // cant the level rank stuff use the RC updates for user progress label calculated on progress update?
             //            \App\Decorators\Content\DrumeoMethodLearningPathDecorator::class, // REALLY needs optimization
 
@@ -357,6 +360,16 @@ return [
         'content_likes' => [
             \App\Decorators\Content\ContentLikesUserDecorator::class,
         ],
+        'playlist' => [
+           \App\Decorators\Playlist\PlaylistDecorator::class,
+        ],
+        'playlist-item' => [
+            \Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator::class,
+            \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
+
+            \App\Decorators\Content\InstructorDecorator::class,
+            \App\Decorators\Content\PlaylistItemDecorator::class,
+        ]
     ],
 
     // specific decorator configs
@@ -1181,7 +1194,9 @@ return [
         'quick-tips',
         'song-tutorial',
         'song-tutorial-children',
-        'rudiment'
+        'rudiment',
+        "assignment",
+        'unit-part'
     ],
     'hiddenContentTypes' => [
         'ha-oemurd-pmac',
@@ -1614,5 +1629,10 @@ return [
         'qna_video',
     ],
 
-    'compiled_columns_that_should_allow_dups' =>['sbt_exercise_number','sbt_bpm']
+    'compiled_columns_that_should_allow_dups' =>['sbt_exercise_number','sbt_bpm'],
+
+    'content_multiple_level_content_depth_playlist_allowed' => [
+        'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
+    ],
+    'playlist_items_limit' => 300
 ];

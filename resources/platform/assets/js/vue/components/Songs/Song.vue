@@ -1,18 +1,10 @@
 <script setup>
-
-/*
-TODO:
-
-Mark as complete
-
-*/
-import { ref, onMounted, onBeforeUnmount, reactive } from 'vue';
+import { ref } from 'vue';
 import ContentLessonActionButtons from '../../vuesora/components/VideoResources/ContentLessonActionButtons.vue';
 import SoundSlice from "../SoundSlice/SoundSlice.vue"
 import SoundSliceControls from "../SoundSlice/SoundSliceControls.vue";
 import ContentService from "../../vuesora/assets/js/services/content";
 import { ArrowSmLeftIcon } from '@heroicons/vue/solid';
-import ProgressTracker from '../../vuesora/assets/js/classes/progress-tracker';
 
 const props = defineProps({
     brand: {
@@ -99,11 +91,7 @@ const props = defineProps({
 
 const soundsliceObject = ref(props.assignments.length ? props.assignments[0] : {});
 const openSoundslice = ref(null);
-const loading = ref(true);
 const lessonProgressRef = ref(props.lessonProgress);
-const hasBeenPlayed = ref(false);
-const progressTrackerEventListener = ref(null);
-let progressTracker = new ProgressTracker();
 
 const openInstrumentless = () => {
     openSoundslice.value = 'instrumentless';
@@ -111,10 +99,6 @@ const openInstrumentless = () => {
 
 const openFull = () => {
     openSoundslice.value = 'full';
-};
-
-const handleOnLoad = () => {
-    loading.value = false;
 };
 
 const markSongAsComplete = () => {
@@ -179,48 +163,10 @@ const getBrandSpecificParams = () => {
     }[props.brand]);
 };
 
-const sendProgressTracking = () => {
-    progressTracker.send({
-        mediaId: props.contentId,
-        mediaType: 'assignment',
-        mediaCategory: 'soundslice',
-    });
-}
-
-const handlePlay = () => {
-    if (!hasBeenPlayed.value) {
-        hasBeenPlayed.value = true;
-        ContentService.markContentAsStarted(props.contentId);
-    }
-
-    progressTracker.start();
-
-    if (!progressTrackerEventListener.value) {
-        progressTrackerEventListener.value = true;
-
-        window.addEventListener('unload', sendProgressTracking);
-    }
-}
-
-const handlePause = () => {
-    progressTracker.stop();
-}
-
 const handleCloseSoundslice = () => {
     openSoundslice.value = null;
-    loading.value = true;
 
     document.body.classList.remove('no-scroll', 'dim-sidebar');
-
-    progressTracker.sendAsync({
-        mediaId: props.contentId,
-        mediaType: 'assignment',
-        mediaCategory: 'soundslice',
-    });
-
-    progressTracker = null;
-
-    window.removeEventListener('unload', () => sendProgressTracking);
 
     Helpscout.showWidget();
     Intercom.showWidget();
@@ -298,10 +244,10 @@ const handleCloseSoundslice = () => {
                             </div>
 
                             <div class="flex-row content-lesson-action-buttons">
-                                <ContentLessonActionButtons :theme-color="brand" :title="songTitle"
+                                <ContentLessonActionButtons :theme-color="brand" :title="songTitle" :description="songArtist"
                                     :instructors="instructors" :parent-title="parentTitle" :is-liked="isLiked"
-                                    :like-count="likeCount" :is-added="isAdded" :content-id="contentId" :user-id="userId"
-                                    :resources="resources" />
+                                    :like-count="likeCount" :is-added="isAdded" :content-id="contentId"
+                                    :user-id="userId" :resources="resources" content-type="song" :thumbnailUrl="thumbnailUrl" />
                             </div>
                         </div>
                     </div>
@@ -320,10 +266,9 @@ const handleCloseSoundslice = () => {
 
                 <transition name="show-from-bottom">
                     <div v-if="openSoundslice === 'instrumentless'" id="practiceOverlay" class="bg-white">
-                        <SoundSlice :loading="loading" :user-id="userId" :theme-color="brand"
+                        <SoundSlice :user-id="userId" :theme-color="brand"
                             :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=2`"
-                            :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad" @onPlay="handlePlay"
-                            @onPause="handlePause">
+                            :soundslice-slug="soundsliceObject.soundsliceSlug" :contentId="contentId">
                             <template v-slot:soundsliceControls>
                                 <SoundSliceControls :title="`${songTitle} (Instrumentless)`" :disable-next="true"
                                     :disable-prev="true" @onClose="handleCloseSoundslice" />
@@ -334,10 +279,9 @@ const handleCloseSoundslice = () => {
 
                 <transition name="show-from-bottom">
                     <div v-if="openSoundslice === 'full'" id="practiceOverlay" class="bg-white">
-                        <SoundSlice :loading="loading" :user-id="userId" :theme-color="brand"
+                        <SoundSlice :user-id="userId" :theme-color="brand"
                             :additional-params="`${getBrandSpecificParams()}&layout=3&recording_idx=1`"
-                            :soundslice-slug="soundsliceObject.soundsliceSlug" @onLoad="handleOnLoad" @onPlay="handlePlay"
-                            @onPause="handlePause">
+                            :soundslice-slug="soundsliceObject.soundsliceSlug">
                             <template v-slot:soundsliceControls>
                                 <SoundSliceControls :title="`${songTitle} (Full)`" :disable-next="true" :disable-prev="true"
                                     @onClose="handleCloseSoundslice" />
