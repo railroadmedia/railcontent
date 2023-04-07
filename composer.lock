@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "359f6b2a775e9333c83d521e65bfa962",
+    "content-hash": "1506a3fe2a5ec98f38856a4f5b5adb15",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -15174,9 +15174,7 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-==== BASE ====
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.2"
-==== BASE ====
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.7.1"
             },
             "time": "2023-03-27T19:02:04+00:00"
         },
@@ -16965,15 +16963,21 @@
         },
         {
             "package": "railroad/musora-api",
-            "version": "dev-header-banner-v2-updates-MT-423",
-            "alias": "v3.0.12",
-            "alias_normalized": "3.0.12.0"
+            "version": "dev-v2.0-playlists",
+            "alias": "v3.0.4",
+            "alias_normalized": "3.0.4.0"
         },
         {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
             "alias_normalized": "3.0.7.0"
+        },
+        {
+            "package": "railroad/railcontent",
+            "version": "dev-2.0-playlists",
+            "alias": "v2.0.62",
+            "alias_normalized": "2.0.62.0"
         },
         {
             "package": "railroad/railtracker",
@@ -16987,6 +16991,7 @@
         "railroad/ecommerce": 20,
         "railroad/musora-api": 20,
         "railroad/railanalytics": 20,
+        "railroad/railcontent": 20,
         "railroad/railtracker": 20
     },
     "prefer-stable": true,
