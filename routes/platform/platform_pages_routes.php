@@ -34,7 +34,7 @@ Route::domain('{musoraDomain}')
                 Route::get('/{brand}', [HomePageController::class, 'home'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.home');
-                
+
                 Route::get(
                     '/redirect30day',
                     [\App\Http\Controllers\Platform\HomePageController::class, 'redirect30day']
@@ -626,6 +626,19 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', all_brands())
             ->name('platform.request-song');
+
+        Route::get(
+            '/{brand}/{primaryPage}',
+            [\App\Http\Controllers\Platform\CohortPackController::class, 'template']
+        )
+            ->whereIn('brand', ['pianote', 'drumeo'])
+            ->whereIn(
+                'primaryPage',
+                [
+                    '30-day-drummer',
+                ]
+            )
+            ->name('platform.cohort');
     });
 
 /*
