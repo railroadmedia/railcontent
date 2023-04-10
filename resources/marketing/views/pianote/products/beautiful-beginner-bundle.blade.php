@@ -120,9 +120,9 @@
     {{--</div>--}}
     <section class="content-section text-center upgrade-video-header bg-white text-black">
         <div class="container mx-auto">
-            <h1 class="font-bebas uppercase">The Beautiful Beginner <span class="text-coaches">Piano Bundle.</span></h1>
-            <h6 class="uppercase leading-tight"><strong>Because starting out should sound this good.</strong></h6>
-            <div class="w-full mx-auto mt-10 mb-20 px-3" style="max-width:920px;">
+            <h1 class="font-bebas uppercase leading-none mb-1">The Beautiful Beginner<br class="inline sm:hidden"> <span class="text-coaches">Piano Bundle.</span></h1>
+            <h6 class="uppercase leading-tight"><strong>Because starting out <br class="inline sm:hidden"> should sound this good.</strong></h6>
+            <div class="w-full mx-auto mt-5 sm:mt-10 mb-10 sm:mb-20 px-4" style="max-width:920px;">
                 <img
                     class="rounded-xl"
                     src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://pianote.s3.amazonaws.com/shop/products/beautiful-beginner-bundle/banner.jpg"
@@ -130,15 +130,12 @@
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                 />
-{{--                <div class="aspect-16:9 w-full relative">--}}
-{{--                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/803662615" frameborder="0" allowfullscreen allow="autoplay" title="promo video"></iframe>--}}
-{{--                </div>--}}
             </div>
 
             <div class="max-w-md md:max-w-4xl mx-auto px-4 lg:px-0">
 
                 <div class="horizontal-bonuses mx-auto max-w-xs sm:max-w-md md:max-w-6xl" style="font-size: 0;">
-                    <h4><strong>Whats included:</strong></h4>
+                    <h4 class="mb-4"><strong>Whats included:</strong></h4>
                     @php
                         $bonuses = [
                             [
@@ -197,9 +194,9 @@
                     {{--<p style="max-width: 480px;color: #aaa;padding:0 15px;"><em>All digital bonuses are added to your account IMMEDIATELY  with your membership to Pianote, and they’re yours forever. </em></p>--}}
                 </div>
 
-                <div class="{{-- mb-10 md:mb-32--}}">
-                    <h4 class="my-3 sm:my-5"><strong>Lesson for life WITHOUT the long-term commitment.</strong></h4>
-                    <p class="md:text-left">
+                <div class="px-3 {{-- mb-10 md:mb-32--}}">
+                    <h4 class="my-5 sm:my-10 leading-tight"><strong>Lesson for life WITHOUT the <br class="inline sm:hidden"> long-term commitment.</strong></h4>
+                    <p class="text-left">
                         Let’s face it.
                         <br><br>
                         EVERYTHING is more expensive right now. And it doesn’t look like changing anytime soon. So what does that mean for your hobbies? You know -- what you do in your free time?
@@ -217,79 +214,86 @@
                         Grab the Beautiful Beginner Piano Bundle, and start making beautiful music from your first lesson.
                     </p>
                 </div>
-                <div class="pack-details mx-auto mb-7 pb-5 sm:pb-9 lg:pb-11">
+                <div class="pack-details mx-auto px-3">
                     <hr class="my-8">
-                    <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center">
-                        <div class="image-wrap relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
+                    <h3 class="text-left mb-6 leading-tight"><strong>The Beautiful Beginner <br class="inline sm:hidden"> Piano Bundle.</strong></h3>
+                    <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center text-left">
+                        <div class="image-wrap w-32 lg:w-48 flex-shrink-0 relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
                             <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/power-of-chords.jpg" alt="product thumbnail1">
                         </div>
                         <div>
                             <strong>The Power of Chords - <span>Normally $97</span>
                                 <br>
-                                <span style="color:#E69500;">LIFETIME ACCESS</span>
+                                <span class="text-pianote">LIFETIME ACCESS</span>
                             </strong><br>
                             Play the music you love on the piano with the awesome Power of Chords. This fun course will demystify chording and show you how chords are the foundation of ALL music (even classical). When you understand and can play chords -- you’ll be able to play the songs you love easier, with more confidence.
                             <br>
                         </div>
                     </div>
-                    <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center">
-                        <div class="image-wrap relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
+                    <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center text-left">
+                        <div class="image-wrap w-32 lg:w-48 flex-shrink-0 relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
                             <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg" alt="product thumbnail5">
                         </div>
                         <div>
                             <strong>Piano Riffs &amp; Fills - <span>Normally $99</span>
                                 <br>
-                                <span style="color:#E69500;">LIFETIME ACCESS</span>
+                                <span class="text-pianote">LIFETIME ACCESS</span>
                             </strong><br>
                             Anyone can play a chord -- but what happens in the spaces between the chords distinguishes the great players from the mediocre ones. Fill those spaces with piano riffs that will make you sound professional, polished ... and close to perfect. This course is broken down so even complete beginners can start sounding amazing. You’ll be shown exactly how to play the fills -- note for note.
                             <br>
                         </div>
                     </div>
-                    <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center">
-                        <div class="image-wrap relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
+                    <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center text-left">
+                        <div class="image-wrap w-32 lg:w-48 flex-shrink-0 relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
                             <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTPBP.jpg" alt="product thumbnail4">
                         </div>
                         <div>
                             <strong>Playing Beautiful Piano - <span>Normally $7</span>
                                 <br>
 
-                                <span style="color:#E69500;">LIFETIME ACCESS</span>
+                                <span class="text-pianote">LIFETIME ACCESS</span>
                             </strong><br>
                             Start playing beautiful piano music from the very first time you touch the keyboard. The Beginner’s Guide To Playing Beautiful Piano is your introduction to the world of stunning melodies and emotional music. Follow along and play beautiful sounds. But you won’t just be copying what you see… You’ll learn WHY certain chords and melodies sound beautiful. So after the course, you can create your own beautiful piano music.
                             <br>
                         </div>
                     </div>
-                    <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center">
-                        <div class="image-wrap relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
+                    <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center text-left">
+                        <div class="image-wrap w-32 lg:w-48 flex-shrink-0 relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
                             <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg" alt="product thumbnail4">
                         </div>
                         <div>
                             <strong>Piano Chords &amp; Scales - <span>Normally $39</span>
-                                <br class="hidden">
+                                <br>
+
+                                <span class="text-pianote">FREE SHIPPING</span>
                             </strong><br>
                             You need chords to play your favorite songs, but learning them all can be a real challenge. The Piano Chords &amp; Scales book is your go-to reference guide so you’ll never get stuck again. See a chord you don’t know? Simply flip to the relevant page in your book and you’ll see all the inversions and alterations you need to play beautifully and confidently. Don’t let scary-looking chords slow your progress.
                             <br>
                         </div>
                     </div>
-                    <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center">
-                        <div class="image-wrap relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
+                    <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center text-left">
+                        <div class="image-wrap w-32 lg:w-48 flex-shrink-0 relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
                             <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/poster-chords.jpg" alt="product thumbnail5">
                         </div>
                         <div>
                             <strong>Chords Poster - <span>Normally $9</span>
-                                <br class="hidden">
+                                <br>
+
+                                <span class="text-pianote">FREE SHIPPING</span>
                             </strong><br>
                             Chord shapes can be hard to remember, especially when you’re starting out and learning how they work. Luckily we have the Pianote Chords Poster to help you with all those tricky shapes! Get this awesome poster for your practice space and start chording your way through all your favorite songs. If you ever forget your chord shapes, all you have to do is look up!
                             <br>
                         </div>
                     </div>
-                    <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center">
-                        <div class="image-wrap relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
+                    <div class="bonus-pic md:flex md:items-start lg:items-center text-left">
+                        <div class="image-wrap w-32 lg:w-48 flex-shrink-0 relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
                             <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/poster-scales.jpg" alt="product thumbnail6">
                         </div>
                         <div>
                             <strong>Scales Poster - <span>Normally $9</span>
-                                <br class="hidden">
+                                <br>
+
+                                <span class="text-pianote">FREE SHIPPING</span>
                             </strong><br>
                             If you ever find yourself forgetting the notes in a scale (like most of us do), the Pianote Scales Poster is here to help! Remember your scales with this easy-to-read poster, designed to help you quickly recall the right notes at the right time, making your scales (or soloing) a piece of cake. With this up on your wall, you’ll never miss a note again.
                             <br>
@@ -302,57 +306,59 @@
 
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container mx-auto relative z-50">
-            <h2 class="leading-tight mt-2 mb-3 sm:my-3 lg:my-4"><strong>The Beautiful Beginner Piano Bundle.</strong></h2>
+            <h2 class="leading-tight"><strong>The Beautiful Beginner Piano Bundle.</strong></h2>
 
-            <h6 class="leading-normal mb-4">Because starting out should sound this good.</h6>
-            <div class="flex flex-wrap items-center mt-7 sm:mt-10">
-                        <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">
-                            <a href="/ecommerce/add-to-cart?products[30-day-drummer-2]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 mb-7 sm:mb-0 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;">
-                                <h3><strong>The Beautiful Beginner Piano Bundle </strong></h3>
-                                <p class="text-sm mt-2 mb-5">(Digital-Only Verison)</p>
-                                <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">Only</p><br>
-                                <div class="join blue smaller my-4">Get Started</div>
-                                <ul class="list-disc ml-10">
-                                    <li class="text-sm relaxed">The Power of Chords</li>
-                                    <li class="text-sm relaxed">Piano Riffs & Fills</li>
-                                    <li class="text-sm relaxed">Beginner’s Guide to Playing Beautiful Piano</li>
-                                </ul>
-                                <hr class="w-full my-5" style="border-color:#b2cae1">
-                                <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                                    <i class="fas fa-check text-drumeo mr-1"></i> Lifetime access to all 3 courses<br>
-                                    <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Guarantee</p>
-                            </a>
-                            <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-2]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">
-                                <h3><strong>Unlimited Lessons</strong></h3>
-                                <p class="text-sm mt-2 mb-5">1 Year of Drumeo + 5 Bonuses worth $231.89.</p>
-                                <h2 class="inline-block"><strong class="text-4xl">$20</strong>/mo</h2> <p class="inline-block text-xs">Billed annually at $240/yr.</p><br>
-                                <div class="join blue smaller my-4">GET EVERYTHING</div>
-                                <ul class="list-disc ml-10">
-                                    <li class="text-sm leading-relaxed">Drumeo Annual Membership</li>
-                                    <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> 30-Day Drummer</li>
-                                    <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> P4 Practice Pad</li>
-                                    <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> 2 Pairs of Drumsticks</li>
-                                    <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Best Beginner Drum Book</li>
-                                </ul>
-                                <hr class="w-full my-5" style="border-color:#ebf2f8">
-                                <p class="leading-loose text-sm"><strong>Drumeo Membership includes:</strong><br>
-                                    <i class="fas fa-check text-drumeo mr-1"></i> 10-Level Drumeo Method Curriculum<br>
-                                    <i class="fas fa-check text-drumeo mr-1"></i> Play Along To 5000+ Popular Songs.<br>
-                                    <i class="fas fa-check text-drumeo mr-1"></i> Study With 300+ World-Class Drummers.<br>
-                                    <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>
-                            </a>
-                        </div>
+            <h6 class="leading-normal mb-7 sm:mb-10">Because starting out should sound this good.</h6>
+            <div class="flex flex-wrap items-center mb-7 sm:mb-10">
+                <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">
+                    <a class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 mb-7 sm:mb-0 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2 sm:order-1"
+                        href="/ecommerce/add-to-cart?product-array=the-power-of-chords:1,piano-riffs-and-fills:1,play-beautiful-piano:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1&redirect=/order&locked=true"
+                    >
+                        <h4 class="mb-5"><strong>The Beautiful Beginner Piano Bundle </strong></h4>
+                        <h2 class="inline-block"><strong class="text-4xl"><s class="opacity-50">$260</s> ${{ 127 }}</strong></h2> <p class="inline-block text-xs">Only</p><br>
+                        <div class="join blue smaller my-4">Get Started</div>
+                        <ul class="list-disc ml-7">
+                            <li class="text-sm relaxed">The Power of Chords</li>
+                            <li class="text-sm relaxed">Piano Riffs & Fills</li>
+                            <li class="text-sm relaxed">Beginner’s Guide to Playing Beautiful Piano</li>
+                            <li class="text-sm relaxed">Piano Chords & Scales Book</li>
+                            <li class="text-sm relaxed">Piano Chords Poster</li>
+                            <li class="text-sm relaxed">Piano Scales Poster</li>
+                        </ul>
+                        <hr class="w-full my-5 border-pianote">
+                        <p class="leading-loose text-sm"><strong>Key Features</strong><br>
+                            <i class="fas fa-check text-pianote mr-1"></i> Lifetime access to all 3 courses<br>
+                            <i class="fas fa-check text-pianote mr-1"></i> Free worldwide shipping<br>
+                            <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee</p>
+                    </a>
+                    <a class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;"
+                        href="/ecommerce/add-to-cart?product-array=the-power-of-chords:1,piano-riffs-and-fills:1,play-beautiful-piano:1&redirect=/order&locked=true"
+                    >
+                        <h4><strong>The Beautiful Beginner Piano Bundle </strong></h4>
+                        <p class="text-sm mt-2 mb-5">(Digital-Only Verison)</p>
+                        <h2 class="inline-block"><strong class="text-4xl"><s class="opacity-50">$203</s> ${{ 97 }}</strong></h2> <p class="inline-block text-xs">Only</p><br>
+                        <div class="join blue smaller my-4">Get Started</div>
+                        <ul class="list-disc ml-7">
+                            <li class="text-sm relaxed">The Power of Chords</li>
+                            <li class="text-sm relaxed">Piano Riffs & Fills</li>
+                            <li class="text-sm relaxed">Beginner’s Guide to Playing Beautiful Piano</li>
+                        </ul>
+                        <hr class="w-full my-5 border-pianote">
+                        <p class="leading-loose text-sm"><strong>Key Features</strong><br>
+                            <i class="fas fa-check text-pianote mr-1"></i> Lifetime access to all 3 courses<br>
+                            <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee</p>
+                    </a>
+                </div>
                 <div class="flex w-full justify-center xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0">
                     <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1800,quality=85/https://pianote.s3.amazonaws.com/shop/products/beautiful-beginner-bundle/bottom-collage.png" alt="order collage image">
                 </div>
-
             </div>
-            <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
+            <div class="inline-block w-full px-3 md:px-4 my-3 sm:my-5" style="color:#2a2f34;">
                 <p><strong>Any other questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
                     <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
                     <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
             </div>
-            <div class="inline-block w-full px-3 md:px-4 mb-10" style="color:#2a2f34;">
+            <div class="inline-block w-full px-3 md:px-4" style="color:#2a2f34;">
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
