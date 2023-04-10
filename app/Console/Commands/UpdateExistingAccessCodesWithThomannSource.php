@@ -16,13 +16,13 @@ class UpdateExistingAccessCodesWithThomannSource extends Command
         $this->info('###### Starting UpdateExistingAccessCodesWithThomannSource comand....  ######');
 
         $sourceValue = 'thomann-11-2022';
-        $csv = fopen('thomann-access-codes-2022-11-16.csv', 'r');
 
-        while (! feof($csv)) {
-            $thomannAccessCodes[] = fgetcsv($csv, 100, ',')[0];
+        $csv = array_map(function($v){return str_getcsv($v, ",");},
+            file(base_path('thomann-access-codes-2022-11-16.csv')));
+
+        foreach ($csv as $row) {
+            $thomannAccessCodes[] = $row[0];
         }
-
-        fclose($csv);
 
         DB::connection(config('railcontent.database_connection_name'))
             ->table('ecommerce_access_codes')
