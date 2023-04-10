@@ -223,7 +223,7 @@
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer2_logo.png" alt="30DD logo season2 logo">
+                    <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="{{$cohort['logo']??''}}" alt="30DD logo season2 logo">
                     <h1 class="rotater-text overflow-hidden"><strong>
                             <span class="relative nowrap delay-1000 ease-in-out">Learn the drums</span><br>
                             <span class="relative nowrap delay-1000 ease-in-out">Improve your timing</span><br>
@@ -249,7 +249,7 @@
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in Season 2 <br class="inline lg:hidden">starting February 27th.</strong></h6>
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 63%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30DD2_header_thumb_no_badge_m.jpg" data-open="trailer">
+                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 63%;" data-bg="{{$cohort['cohort_image_url']}}" data-open="trailer">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
 
@@ -292,7 +292,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" style="padding-bottom: 105%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30DD2_header_no_badge_thumb.jpg" data-open="trailer">
+                    <div class="rounded-xl overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" style="padding-bottom: 105%;" data-bg="{{$cohort['cohort_image_url']}}" data-open="trailer">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
@@ -301,7 +301,7 @@
             <div class="flex flex-wrap md:flex-nowrap text-center border rounded-lg border-gray-300 mt-6 lg:mt-8 mb-2 lg:mb-4">
                 <div class="w-full md:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 md:py-3 lg:py-4">
                     <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
-                    <h4 class="px-3 lg:px-5"><strong>February 27th</strong></h4>
+                    <h4 class="px-3 lg:px-5"><strong>{{$cohort['start_date']}}</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
 {{--                        Enrollment closes in <span class="tzcd-30DD text-drumeo"></span>--}}
@@ -333,17 +333,10 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
             <img class="h-56 inline sm:hidden lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30DD2_Collage_intro_m.png" alt="collage intro mobile">
-            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.</strong></h2>
+            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>{{$cohort['title']}}</strong></h2>
             <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
-                <h6 class="leading-normal max-w-lg pr-7">It’s all about repetition.
-                    <br><br>
-                    Drumming is simple motions repeated over and over to create, you guessed it, RHYTHM! In this one-month class, you’ll <b>build your musical skills</b> following 10-minute daily guided drum workouts. By focusing on timing & coordination, you’ll learn the skills to play hundreds of your favorite pop & rock songs on the drums.
-                    <br><br>
-                    Plus, you’ll have a weekly LIVE session with your instructor, Domino Santantonio – to ask your questions, stay motivated, and make sure you’re having FUN playing the drums.
-                    <br><br>
-                    Scroll down to watch the trailer and save your seat in the first-ever 30-Day Drummer class.</h6>
-                <img class="h-96 hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30DD2_Collage_intro.png" alt="collage intro">
-            </div>
+                <h6 class="leading-normal max-w-lg pr-7">{{$cohort['description']}}</h6>
+                          </div>
         </div>
     </section>
 

@@ -635,7 +635,7 @@ Route::domain('{musoraDomain}')
             ->whereIn(
                 'primaryPage',
                 [
-                    '30-day-drummer',
+                    'Drumeo-30-day-drummer', 'Drumeo-30-day-drummer4','Pianote-piano','Pianote-Pianote-piano'
                 ]
             )
             ->name('platform.cohort');
