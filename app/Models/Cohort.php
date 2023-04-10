@@ -36,6 +36,17 @@ class Cohort extends Model
         return $this->belongsTo(Brand::class, 'brand_id');
     }
 
+    public function dropdowns()
+    {
+        return $this->hasMany(CohortDropdown::class);
+    }
+
+//    protected function slug(): Attribute
+//    {
+//        return Attribute::make(
+//            get: fn ($value) => str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-', 'Musora-'), '', $value ),
+//        );
+//    }
 
     public static function boot()
     {
@@ -43,9 +54,9 @@ class Cohort extends Model
 
         self::saving(function ($model){
 
-            if(!empty($model['slug'])){
-                $model['slug'] = $model->brand->name.'-'.$model['slug'];
-            }
+//            if(!empty($model['slug'])){
+//                $model['slug'] = $model->brand->name.'-'.$model['slug'];
+//            }
 
 //            if(gettype($model['meta_img']) === 'object'){
 //                $model['meta_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$model->brand->name.'/Meta-images/'.$uuid.'-'.$model['meta_img']->getClientOriginalName();
