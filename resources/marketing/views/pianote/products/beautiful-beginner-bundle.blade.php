@@ -1,13 +1,13 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Lifetime Membership To Pianote | Pianote</title>
-    <meta property="og:title" content="Lifetime Membership To Pianote">
+    <title>The Beautiful Beginner Piano Bundle</title>
+    <meta property="og:title" content="The Beautiful Beginner Piano Bundle">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
-    <meta name="description" content="Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.">
-    <meta property="og:description" content="Two, maybe three times per year you get the chance to become a Pianote Lifetime Member.">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/lifetime-fb-share-image-1.jpg" style="display: none;">
+    <meta name="description" content="Because starting out should sound this good.">
+    <meta property="og:description" content="Because starting out should sound this good.">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://pianote.s3.amazonaws.com/shop/products/beautiful-beginner-bundle/banner.jpg" style="display: none;">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
@@ -89,35 +89,12 @@
     </style>
 @stop
 
-@section('body-data')
-    x-data ='{
-        trailer : false,
-    }'
-@endsection
-
 @section('global-body')
     @include('pianote.sales.partials._nav', [
         "subscriptionVersion" => true,
         "scrollToJoin" => true
     ])
-    {{--<style>--}}
-    {{--.promo-banner-shim{display:block;width:100%;height:40px}--}}
-    {{--.promo-banner{display:block;background:#000 50%/cover;text-align:center;color:#fff;width:100%;transition:opacity .5s;overflow:hidden;position:relative;font:400 13px/1em Roboto Condensed,sans-serif;box-shadow:0 0 10px rgba(0,0,0,.2);white-space:nowrap;z-index:1;margin:-40px auto 0}.promo-banner .noise-wrap{padding:6px 0}.promo-banner.fixed{top:40px;position:fixed;z-index:97;margin:0 auto}@media (min-width:768px){.promo-banner.fixed{top:56px}}.promo-banner:active,.promo-banner:focus,.promo-banner:hover{color:#ccc;text-decoration:none}.promo-banner .row{position:relative;padding:0}.promo-banner .logo{display:inline-block;vertical-align:middle;width:auto;margin-right:10px;height:19px}@media (min-width:768px){.promo-banner .logo{height:28px}}.promo-banner h1{font-family:Oswald,sans-serif;display:inline-block;vertical-align:middle;margin-right:7px;font-size:19px}@media (min-width:768px){.promo-banner h1{margin-right:10px;font-size:25px}}.promo-banner .text,.promo-banner p{display:inline-block;vertical-align:middle}.promo-banner p{font:400 13px/1.1em Open Sans,sans-serif;text-transform:uppercase;margin:0 auto}.promo-banner p strong{font-weight:900}.promo-banner p .permanent{line-height:1em;font-size:19px}@media (min-width:768px){.promo-banner p .permanent{font-size:21px}}.promo-banner .join{outline:none;padding:6px 15px;font-size:12px;margin:3px 0 0}@media (min-width:768px){.promo-banner .join{font-size:13px;margin:0 0 0 7px}}--}}
-    {{--</style>--}}
-    {{--<div class="promo-banner fixed"--}}
-    {{--style="background: #000 center center/250px;">--}}
-    {{--<div class="noise-wrap">--}}
-    {{--<div class="container mx-auto">--}}
-    {{--<div class="text text-left">--}}
-    {{--<img class="logo"--}}
-    {{--src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/march/logo.png">--}}
-    {{--<p>--}}
-    {{--<strong>ONLY <s class='opacity-60'>50</s> {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getStockAvailability()}} SPOTS LEFT</strong>--}}
-    {{--</p>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
+
     <section class="content-section text-center upgrade-video-header bg-white text-black">
         <div class="container mx-auto">
             <h1 class="font-bebas uppercase leading-none mb-1">The Beautiful Beginner<br class="inline sm:hidden"> <span class="text-coaches">Piano Bundle.</span></h1>
@@ -134,7 +111,7 @@
 
             <div class="max-w-md md:max-w-4xl mx-auto px-4 lg:px-0">
 
-                <div class="horizontal-bonuses mx-auto max-w-xs sm:max-w-md md:max-w-6xl" style="font-size: 0;">
+                <div class="horizontal-bonuses mx-auto max-w-xs sm:max-w-xl lg:max-w-2xl" style="font-size: 0;">
                     <h4 class="mb-4"><strong>Whats included:</strong></h4>
                     @php
                         $bonuses = [
@@ -201,11 +178,11 @@
                         <br><br>
                         EVERYTHING is more expensive right now. And it doesn’t look like changing anytime soon. So what does that mean for your hobbies? You know -- what you do in your free time?
                         <br><br>
-                        At Pianote, we believe your hobbies matter. And rising costs should not cost you your musical dreams.
+                        At Pianote, we believe your hobbies matter.
                         <br><br>
                         That’s why we’ve put together the Beautiful Beginner Piano Bundle.
                         <br><br>
-                        For one single payment, you’ll get LIFETIME access to 3 courses that will show you how to play beautiful music on your piano. You’ll get step-by-step lessons and access to real teachers if you need it.
+                        For one single payment, you’ll get LIFETIME access to 3 courses that will show you how to play beautiful music on your piano. You’ll get step-by-step lessons and access to real teachers.
                         <br><br>
                         PLUS you’ll get our Chords & Scales Book and 2 handy posters you can hang up in your practice space to make learning easier and more fun. And don’t worry, we’ll cover the shipping no matter where you live.
                         <br><br>
