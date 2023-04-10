@@ -109,6 +109,7 @@ class MigrateUserPlaylistToV2 extends Command
                             $shouldBeRemoved = [];
                             $index = 1;
                             $migratedItems = 0;
+                            $playlistId = null;
 
                             $playlistsIds = [$row->id];
                             $items =
@@ -133,7 +134,7 @@ class MigrateUserPlaylistToV2 extends Command
                             if ($items->isNotEmpty()) {
                                 $position = 1;
                                 $ids = [];
-                                $firstMigratedItemId = false;
+//                                $firstMigratedItemId = false;
                                 foreach ($items as $item) {
                                     if (in_array($item->type, [
                                         'course-part',
@@ -179,7 +180,8 @@ class MigrateUserPlaylistToV2 extends Command
                                         'song-tutorial-children',
                                         'unit-part',
                                     ])) {
-                                        if ($migratedItems == (config('railcontent.playlist_items_limit', 300))) {
+                                        if (($migratedItems + 1) >=
+                                            (config('railcontent.playlist_items_limit', 300))) {
                                             $position = 1;
                                             $migratedItems = 0;
                                             $insertData = [
@@ -197,16 +199,18 @@ class MigrateUserPlaylistToV2 extends Command
 
                                             $index++;
                                             $playlistsIds[] = $playlistId;
-                                            $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
+//                                            $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
                                         }
                                         $item->position = $position;
-                                        $item->user_playlist_id = $playlistId ?? $item->user_playlist_id;
+                                        $item->user_playlist_id = (isset($playlistId))? $playlistId : $item->user_playlist_id;
+
                                         $item->extra_data = '{}';
                                         $itemsOrdered[] = $item;
                                         $position++;
                                         $migratedItems++;
                                     } elseif ($item->type == 'song') {
-                                        if ($migratedItems == (config('railcontent.playlist_items_limit', 300))) {
+                                        if (($migratedItems + 1) >=
+                                            (config('railcontent.playlist_items_limit', 300))) {
                                             $position = 1;
                                             $migratedItems = 0;
                                             $insertData = [
@@ -220,12 +224,12 @@ class MigrateUserPlaylistToV2 extends Command
                                             $playlistId =
                                                 $dbConnection->table('railcontent_user_playlists')
                                                     ->insertGetId($insertData);
-                                            $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
+//                                            $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
                                             $index++;
                                             $playlistsIds[] = $playlistId;
                                         }
                                         $item->position = $position;
-                                        $item->user_playlist_id = $playlistId ?? $item->user_playlist_id;
+                                        $item->user_playlist_id = (isset($playlistId))? $playlistId : $item->user_playlist_id;
                                         $item->extra_data = json_encode(['is_full_track' => true]);
                                         $itemsOrdered[] = $item;
                                         $position++;
@@ -260,11 +264,11 @@ class MigrateUserPlaylistToV2 extends Command
                                                 $playlistId =
                                                     $dbConnection->table('railcontent_user_playlists')
                                                         ->insertGetId($insertData);
-                                                $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
+//                                                $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
                                                 $index++;
                                                 $playlistsIds[] = $playlistId;
                                                        }
-                                            $item->user_playlist_id = $playlistId ?? $item->user_playlist_id;
+                                            $item->user_playlist_id = (isset($playlistId))? $playlistId : $item->user_playlist_id;
                                             $newItems[] = [
                                                 'content_id' => $lesson->child_id,
                                                 'user_playlist_id' => $item->user_playlist_id,
@@ -314,11 +318,11 @@ class MigrateUserPlaylistToV2 extends Command
                                                 $playlistId =
                                                     $dbConnection->table('railcontent_user_playlists')
                                                         ->insertGetId($insertData);
-                                                $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
+//                                                $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
                                                 $index++;
                                                 $playlistsIds[] = $playlistId;
                                             }
-                                            $item->user_playlist_id = $playlistId ?? $item->user_playlist_id;
+                                            $item->user_playlist_id = (isset($playlistId))? $playlistId : $item->user_playlist_id;
                                             $newItems[] = [
                                                 'content_id' => $lesson->child_id,
                                                 'user_playlist_id' => $item->user_playlist_id,
@@ -371,11 +375,11 @@ class MigrateUserPlaylistToV2 extends Command
                                                 $playlistId =
                                                     $dbConnection->table('railcontent_user_playlists')
                                                         ->insertGetId($insertData);
-                                                $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
+//                                                $firstMigratedItemId = ($index == 1) ? $item->id : $firstMigratedItemId;
                                                 $index++;
                                                 $playlistsIds[] = $playlistId;
                                             }
-                                            $item->user_playlist_id = $playlistId ?? $item->user_playlist_id;
+                                            $item->user_playlist_id = (isset($playlistId))? $playlistId : $item->user_playlist_id;
                                             $newItems[] = [
                                                 'content_id' => $lesson->child_id,
                                                 'user_playlist_id' => $item->user_playlist_id,
