@@ -65,7 +65,7 @@
                         }
                         //show success message
                         window.shownotification({
-                            icon: 'fa-not-equal',
+                            icon: 'fa-trash',
                             text: `'${props.data.name}' was removed from your library.`
                         })
                         //Close Modal
@@ -97,7 +97,7 @@
                 if (response.status === 200) {
                     //show success message
                     window.shownotification({
-                        icon: 'fa-not-equal',
+                        icon: 'fa-trash',
                         text: `'${state.title}' was removed from your playlist.`
                     })
                 }
@@ -135,13 +135,13 @@
             <p class="dark:tw-text-white tw-text-center">This action cannot be undone</p>
             <div class="tw-pt-8 tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-justify-center tw-w-full">
                 <!-- Delete Playlist -->
-                <button v-if="mode !== 'lesson'" :class="`tw-mb-2 tw-btn-primary tw-bg-${brand} tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1`"
+                <button v-if="mode !== 'lesson'" :class="`tw-mb-2 tw-btn-primary tw-bg-${brand} tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1 hover:tw-bg-${brand}-600`"
                         @click.prevent="handleDeletePlaylist()"
                 >
                     CONFIRM
                 </button>
                 <!-- Delete Lesson -->
-                <button v-else :class="`tw-mb-2 tw-btn-primary tw-bg-${brand} tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1`"
+                <button v-else :class="`tw-mb-2 tw-btn-primary tw-bg-${brand} tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1 hover:tw-bg-${brand}-600`"
                         @click.prevent="handleDeleteLesson()"
                 >
                     CONFIRM
