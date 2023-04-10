@@ -39,9 +39,8 @@ class CohortPackController
                 ->where('brand_id', $brandId)
                 ->first();
 
-        return view('content.cohort', [
+        return view('content.cohort-template', [
             'hasProduct' => false,
-            'theme' => brand(),
             'brand' => brand(),
             'cohort' => $cohort,
         ]);
