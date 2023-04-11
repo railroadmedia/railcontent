@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Platform;
 use App\Models\Brand;
 
 use App\Models\Cohort;
+use App\Modules\Ecommerce\Services\UserProductService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Railroad\Ecommerce\Services\UserProductService;
+
 
 class CohortPackController
 {
@@ -39,10 +41,23 @@ class CohortPackController
                 ->where('brand_id', $brandId)
                 ->first();
 
+        $productId = $cohort['pack_id'];
+       // $productId = 516;
+
+        $hasProduct = user() && $this->userProductService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $this->userProductService->getNumberProductOwners($productId);
+        $registerButtonUrl = (!$hasProduct)?'/cohort-packs/register/30-day-drummer-2':'#final';
+        $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $cohort['end_date']);
+        $now = Carbon::now();
+        $enrollmentClosed = $endDate->lessThanOrEqualTo($now);
+
         return view('content.cohort-template', [
-            'hasProduct' => false,
+            'hasProduct' => $hasProduct,
+            'nPackOwners' => $nPackOwners,
+            'registerButtonUrl' => $registerButtonUrl,
             'brand' => brand(),
             'cohort' => $cohort,
+            'enrollmentClosed' => $enrollmentClosed
         ]);
     }
 

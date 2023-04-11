@@ -23,11 +23,16 @@
                             <div class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" x-on:click="trailer = true"><i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div></div>
                         </div>
                         <div class="md:tw-flex md:tw-items-center">
-                            <a class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue tw-mr-2 tw-max-w-[415px] tw-inline-block tw-mb-5 md:tw-mb-0">Enroll Now</a>
+                            @if($hasProduct)
+                                <a class="join sold-out medium w-full">YOU'RE ENROLLED!</a>
+                            @else
+                                <a href="{{ $registerButtonUrl }}" class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue tw-mr-2 tw-max-w-[415px] tw-inline-block tw-mb-5 md:tw-mb-0">Enroll Now</a>
+                            @endif
+
                             <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start">
                                 <img class="tw-h-8 md:tw-h-6 tw-mr-1" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png" alt="joined student profiles">
                                 <p class="tw-text-xs tw-align-middle tw-max-w-[180px] md:tw-max-w-full tw-text-left">
-                                    Join 8,539
+                                    Join {{ number_format($nPackOwners ?? 0) }}
                                     @php
                                         if($brand === 'drumeo'){
                                             echo 'drummers';
@@ -51,7 +56,18 @@
                         <h4 class="tw-px-3 lg:tw-px-5"><strong>{{date('F dS', strtotime($cohort['start_date']))}}</strong></h4>
                         <hr class="tw-border-gray-300 tw-my-4 sm:tw-my-2 lg:tw-my-4">
                         <p class="tw-text-sm tw-px-3 lg:tw-px-5">
-                            Enrollment closed
+                            @if($enrollmentClosed)
+                                Enrollment closed
+                            @else
+                            @php
+                                $startDate = strtotime(now());
+                                $endDate = strtotime($cohort['end_date']);
+                                $diff = abs($endDate - $startDate);
+                                $my_t=getdate($diff);
+
+                            @endphp
+                                Enrollment closes in <strong>{{$my_t['mday']}} days {{$my_t['hours']}} hours {{$my_t['minutes']}} minutes</strong>.
+                            @endif
                         </p>
                     </div>
                     <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-evenly tw-w-full sm:tw-w-auto sm:tw-flex-grow tw-py-4 sm:tw-py-3 lg:tw-py-4 tw-text-left sm:tw-text-center">
@@ -132,12 +148,16 @@
                 <h3 class="tw-font-extrabold tw-text-center tw-mt-10">{{ $cohort['bottom_title'] }}</h3>
                 <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">{{ $cohort['bottom_description'] }}</p>
                 <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4">
+                    @if($hasProduct)
+                        <a class="join sold-out medium w-full">YOU'RE ENROLLED!</a>
+                    @else
                     <a class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue tw-mb-2 md:tw-mb-0">Enroll Now</a>
+                    @endif
                     <a class="tw-uppercase tw-border-2 tw-border-black tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-center tw-font-bebas-neue tw-text-black">Join the conversation</a>
                 </div>
                 <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                     <img class="tw-h-7 sm:tw-mb-1 lg:tw-mb-0 tw-mr-1" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png" alt="joined student profiles">
-                    <p class="tw-text-xs tw-align-middle">Join 8,539 piano players who have already registered.</p>
+                    <p class="tw-text-xs tw-align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
                 </div>
             </div>
         </section>
