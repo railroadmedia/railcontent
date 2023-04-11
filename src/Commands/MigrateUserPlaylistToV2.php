@@ -515,7 +515,7 @@ class MigrateUserPlaylistToV2 extends Command
         if(!empty($migratedPlaylistIds)) {
             $sql = <<<'EOT'
         UPDATE `%s` cs
-        SET cs.`type` = '%s', cs.migrated = %s
+        SET cs.`type` = '%s', cs.migrated = %s, cs.category = '%s'
         where cs.id IN (%s)
         EOT;
 
@@ -524,6 +524,7 @@ class MigrateUserPlaylistToV2 extends Command
                 config('railcontent.table_prefix').'user_playlists',
                 'user-playlist',
                 1,
+                'My List',
                 implode(
                     ", ",
                     $migratedPlaylistIds
