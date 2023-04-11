@@ -18,7 +18,7 @@ return new class extends Migration
             $table->renameColumn('description', 'body_top_description');
             $table->renameColumn('cohort_thrailer', 'cohort_trailer');
             $table->renameColumn('cohort_image_url', 'header_image_url');
-            $table->renameColumn('logo', 'header_logo');
+            $table->renameColumn('logo', 'dark_mode_logo');
             $table->renameColumn('title', 'body_title');
             $table->string('cohort_title')->nullable();
             $table->string('header_description')->nullable();
@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('dropdown_title')->nullable();
             $table->string('bottom_title')->nullable();
             $table->string('bottom_description')->nullable();
+            $table->string('light_mode_logo')->nullable();
         });
 
         Schema::create('cohort_dropdowns', function (Blueprint $table) {
@@ -43,7 +44,7 @@ return new class extends Migration
         $cohorts = [
             [
                 'brand_id' => 1,
-                'header_logo' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer2_logo.png',
+                'dark_mode_logo' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer2_logo.png',
                 'slug' => '30-day-drummer',
                 'headline' => 'Learn the drums',
                 'subheadline' => 'with daily guided workouts.',
@@ -91,7 +92,8 @@ This isn’t a “watch a lesson, go do something else for 10 days, watch anothe
             ],
             [
                 'brand_id' => 2,
-                'header_logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-2+1.png',
+                'dark_mode_logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/Frame+289709.svg',
+                'light_mode_logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-2+1.png',
                 'slug' => 'Pianote-piano',
                 'headline' => 'Online piano lessons',
                 'subheadline' => 'for all skill levels.',
@@ -158,7 +160,8 @@ piano and sound beautiful.',
         foreach ($cohorts as $cohort) {
             $addcohort = \App\Models\Cohort::create([
                 'brand_id' => $cohort['brand_id'],
-                'header_logo' => $cohort['header_logo'],
+                'dark_mode_logo' => $cohort['dark_mode_logo'],
+                'light_mode_logo' => $cohort['light_mode_logo'] ?? null,
                 'slug' => $cohort['slug'],
                 'headline' => $cohort['headline'],
                 'subheadline' => $cohort['subheadline'],
@@ -217,7 +220,7 @@ piano and sound beautiful.',
             $table->renameColumn('body_top_description', 'description');
             $table->renameColumn('cohort_trailer', 'cohort_thrailer');
             $table->renameColumn('header_image_url', 'cohort_image_url');
-            $table->renameColumn('header_logo', 'logo');
+            $table->renameColumn('dark_mode_logo', 'logo');
             $table->renameColumn('body_title', 'title');
             $table->dropColumn('header_description');
             $table->dropColumn('body_image_url');
@@ -227,6 +230,7 @@ piano and sound beautiful.',
             $table->dropColumn('bottom_title');
             $table->dropColumn('bottom_description');
             $table->dropColumn('cohort_title');
+            $table->dropColumn('light_mode_logo');
         });
 
         Schema::dropIfExists('cohort_dropdowns');
