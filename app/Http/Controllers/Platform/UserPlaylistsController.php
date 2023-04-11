@@ -274,11 +274,13 @@ class UserPlaylistsController extends BaseController
         ContentRepository::$availableContentStatues = $oldStatuses;
         ContentRepository::$pullFutureContent = $oldFutureContent;
 
-
-
+        $startSecond = $playlistItem['start_second'] ?? null;
+        $endSecond = $playlistItem['end_second'] ?? null;
         $playlistItem =
             $this->vimeoVideoSourcesDecorator->decorate(new Collection([$content]))
                 ->first();
+        $playlistItem['start_second'] = $startSecond;
+        $playlistItem['end_second'] = $endSecond;
 
         $userPlaylists = collect($this->userPlaylistsService->getUserPlaylist(user()->id, 'user-playlist'));
         $playlists = $userPlaylists->whereNotIn('id', $playlistId);

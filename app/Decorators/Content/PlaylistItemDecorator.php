@@ -109,7 +109,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
 
         foreach ($contentsOfType as $contentIndex => $content) {
             //set start/end time should not be displayed on assignments and song playlist items
-            $contentsOfType[$contentIndex]['set_start_end_time'] = ($content['type'] != 'assignment');
+            $contentsOfType[$contentIndex]['set_start_end_time'] = ($content['type'] != 'assignment' && $content['type'] != 'song');
             $contentsOfType[$contentIndex]['user_playlist_item_extra_data'] =
                 $content['user_playlist_item_extra_data'] ?? null;
 
