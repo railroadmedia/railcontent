@@ -219,7 +219,7 @@
 
         <div id="signupModal" class="modal">
             <div class="tw-flex tw-justify-center tw-items-center">
-                <div class="tw-max-w-xl tw-bg-[#081825] tw-text-center tw-text-white tw-rounded-xl tw-px-8 tw-py-10 tw-border-[#445F74] tw-border">
+                <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-8 tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
                     <img class="tw-h-20 tw-mx-auto tw-mb-5 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['light_mode_logo']??'' }}" alt="modal logo" />
                     <img class="tw-h-20 tw-mx-auto tw-mb-5 tw-hidden dark:tw-inline-block" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['dark_mode_logo']??'' }}" alt="modal logo" />
                     <div class="tw-text-2xl tw-font-bold tw-mb-1">Success, You’re Enrolled!</div>
