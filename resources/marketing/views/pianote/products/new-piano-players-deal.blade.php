@@ -1,14 +1,14 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Get unlimited drum lessons for a year!</title>
-    <meta property="og:title" content="Get unlimited drum lessons for a year!">
+    <title>Keep the momentum going!</title>
+    <meta property="og:title" content="Keep the momentum going!">
 
-    <meta name="description" content="We put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.">
-    <meta property="og:description" content="We put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.">
+    <meta name="description" content="We’ve put together an exclusive offer for New Piano Players Start Here students.">
+    <meta property="og:description" content="We’ve put together an exclusive offer for New Piano Players Start Here students.">
 
-    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-    <meta property="og:image" content="{{ drumeo_cdn('sales/2023/share-image-drumeo.jpg') }}" style="display: none;">
+    <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
 
@@ -121,7 +121,7 @@
                 </li>
                 <li class="flex items-start">
                     <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-pianote"></i></span>
-                    The Chords & Scales Book to help remember everything you’ve learned
+                    Professional over-ear headphones to help you sound better
                 </li>
                 <li class="flex items-start">
                     <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-pianote"></i></span>
@@ -137,15 +137,19 @@
                 </li>
             </ul>
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
-                We’ll also discount your first year by $40 as a special thank you, and you’ll have 90 days to try it risk-free.<br><br>
-
-                But this offer is only available until the end of March.<br><br>
-
+                Plus…
+                <br><br>
+                A special, LIVE Masterclass with Lisa where you’ll learn how to take all the skills you’ve learned in New PIano Players Start Here and apply it to other areas of music.
+                <br><br>
+                We’ll also discount your first year by $43 as a special thank you, and you’ll have 90 days to try it risk-free
+                <br><br>
+                But this offer is only available until the end of March.
+                <br><br>
                 So click below and keep your progress going!<br><br><br>
             </p>
-            <div class="px-3 md:px-0">
-                <a class="join pianote w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">Claim the offer</a>
-            </div>
+{{--            <div class="px-3 md:px-0">--}}
+{{--                <a class="join pianote w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">Claim the offer</a>--}}
+{{--            </div>--}}
         </div>
     </section>
 
@@ -155,8 +159,8 @@
     <section class="py-12 md:py-20 px-4 sm:px-6" style="background:linear-gradient(180deg, #01050F 60.48%, #07132C 100%);">
         <div class="max-w-2xl lg:max-w-5xl mx-auto text-center text-white">
             <img class="h-12 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png" alt="pianote logo">
-            <h3 class="font-extrabold">Join Pianote today and get 12 free bonuses!</h3>
-            <h5 class="uppercase my-8 text-yellow">Only available until October 8, 2022</h5>
+            <h3 class="font-extrabold mb-8">Join Pianote today and get 12 free bonuses!</h3>
+{{--            <h5 class="uppercase my-8 text-yellow">Only @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} Headphones left!</h5>--}}
             <div class="max-w-md mx-auto mb-10">
                 <img
                     src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/pianote-annual-card.jpg"
@@ -166,7 +170,7 @@
                     onload="this.classList.remove('opacity-0')"
                 />
             </div>
-            <div class="flex justify-center lg:mb-10 flex-wrap">
+            <div class="max-w-2xl mx-auto flex justify-center lg:mb-10 flex-wrap">
                 @php
                     $bonuses = [
                         [
@@ -203,58 +207,10 @@
                             'description' => 'Play the music you love using the power of chords.',
                             'price' => floatval($productPrices['the-power-of-chords']->price),
                         ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTCP.jpg',
-                            'title' => 'Classical Piano',
-                            'description' => 'Pieces you can actually play, with lessons that are actually fun.',
-                            'price' => floatval($productPrices['classical-piano']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/improv-musical-freedom.jpg',
-                            'title' => 'Improvisation & Musical Freedom',
-                            'description' => 'Learn to improvise from one of the best piano players in the world, Jesús Molina',
-                            'price' => floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTPBP.jpg',
-                            'title' => 'Play Beautiful Piano',
-                            'description' => 'Start playing beautiful music from your very 1st lesson.',
-                            'price' => floatval($productPrices['play-beautiful-piano']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
-                            'title' => 'Piano Riffs<br> & Fills',
-                            'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                            'price' => floatval($productPrices['piano-riffs-and-fills']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
-                            'title' => 'Piano Technique<br> Made Easy',
-                            'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
-                            'price' => floatval($productPrices['piano-technique-made-easy']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
-                            'title' => 'De-Stupefy Your<br> Left Hand',
-                            'description' => 'Most piano players find their left-hand is weaker. Fix those weaknesses and “de-stupefy” that left hand.',
-                            'price' => floatval($productPrices['destupefy-your-left-hand']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/worship-piano.jpg',
-                            'title' => 'Worship Piano',
-                            'description' => 'Learn hundreds of worship songs and get the skills to start playing in a worship band.',
-                            'price' => floatval($productPrices['worship-piano']->price),
-                        ],
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/faster-fingers.jpg',
-                            'title' => 'Faster Fingers',
-                            'description' => 'Boost your speed and confidence with this guided practice course.',
-                            'price' => floatval($productPrices['faster-fingers']->price),
-                        ],
                     ]
                 @endphp
                 @foreach($bonuses as $bonus)
-                    <div class="bonus-wrap relative inline-block align-top mb-3 px-1 md:px-4 lg:px-1 w-1/2 sm:w-1/3 lg:w-1/5">
+                    <div class="bonus-wrap relative inline-block align-top mb-3 px-1 md:px-4 w-1/2 sm:w-1/3">
                         <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div class="border-2 border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
@@ -273,7 +229,7 @@
                         </div>
 
                         <p class="uppercase w-full leading-normal mt-2">
-                            {{--<strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>--}}
+                            <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
                             <span style="text-transform:uppercase; display:inline-block;">
 
                         @if(!empty($bonus['price']))
@@ -296,12 +252,49 @@
                         </p>
                     </div>
                 @endforeach
+                <div class="bonus-wrap relative inline-block align-top mb-3 px-1 md:px-4 w-1/2 sm:w-1/3">
+                    <div class="flip-div inline-block relative w-full group" style="@if(empty($bonus['bigCard'])) padding-bottom: 133%; @else padding-bottom: 103%; @endif perspective: 1000px;">
+                        <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
+                            <div class="border-2 border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
+                                <div class="overflow-hidden rounded-xl h-full w-full bg-black">
+                                    <div class="flex flex-wrap justify-center">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTCP.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/improv-musical-freedom.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTPBP.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/worship-piano.jpg">
+                                        <img class="w-1/3" src="https://cdn.musora.com/image/fetch/w_120,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/faster-fingers.jpg">
+                                    </div>
+                                </div>
+                                <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                    <i class="fas fa-arrow-right text-4xl"></i><br>
+                                    <p class="text-sm"><strong>DETAILS</strong></p>
+                                </div>
+                            </div>
+                            <div class="back border-2 border-pianote absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                    <p class="leading-normal mx-auto text-sm">Get 8 digital courses for life. Even if you cancel your membership. They’re yours forever.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="uppercase w-full leading-normal mt-2">
+                        <strong class="font-black leading-tight inline-block mb-1">8 Digital Courses</strong><br>
+                        <span style="text-transform:uppercase; display:inline-block;"><s class="opacity-50">$617</s> <strong class="text-promo">FREE</strong></span><br>
+                        <i>Online Access</i>
+                    </p>
+                </div>
+
             </div>
-            <h3 class="mb-8"><strong>ONLY <s class="opacity-60">${{ 240 }}</s> $197</strong></h3>
+            <h3 class="mb-8"><strong>ONLY <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> ${{ Prices::$plusSubscriptionAnnual }}</strong></h3>
             <div class="w-2/3 mx-auto">
                 <a
-                    href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-practice-planner]=1&products[piano-chords-and-scales-guide]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true"
-                    class="join pianote w-full">Claim your offer</a>
+{{--                    href="/ecommerce/add-to-cart?locked=true&redirect=/order&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,pianote-practice-planner:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,the-power-of-chords:1,classical-piano:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1,piano-riffs-and-fills:1,piano-technique-made-easy:1,destupefy-your-left-hand:1,worship-piano:1,faster-fingers:1"--}}
+                    class="join sold-out w-full">Sold Out
+                </a>
             </div>
             <p class="text-center my-8" style="color:#ABB5C2;">
                 <b>Any questions?</b> Call us toll-free at 1-800-439-8921 or directly at 1-604-855-7605.
@@ -322,7 +315,7 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => 'TODO',
+        'video' => '809895671',
         'vimeo' => true,
     ])
 
@@ -340,4 +333,9 @@
 
         })
     </script>
+
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-04-01 00:00:00',
+        'promoVersion' => false
+    ])
 @stop

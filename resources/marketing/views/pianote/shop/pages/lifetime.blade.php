@@ -285,14 +285,14 @@
 @endsection
 
 @section('top')
-    @include('pianote.shop._partials._slider', [
+    @include('_partials.components.shop.slider', [
         "headerText" => "<strong>Lock in a lifetime of piano lessons!</strong>",
         "videoSrc" => "//player.vimeo.com/video/774401520",
         "defaultCover" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/unlimited-lessons-thumb.jpg",
         "noSlider" => true,
     ])
 
-    @include('pianote.shop._partials._sidebar', [
+    @include('_partials.components.shop.sidebar', [
             "bundle" => true,
             "logo" => "https://dpwjbsxqtam5n.cloudfront.net/promos/november/lifetime-bundle-white.png",
             "invert" => true,

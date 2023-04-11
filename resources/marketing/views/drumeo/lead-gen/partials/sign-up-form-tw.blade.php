@@ -14,10 +14,10 @@
         ) !!}
     @endif
 
-    <div class="infusion-field w-full px-2 md:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'md:w-7/12 md:text-left' }}">
+    <div class="infusion-field w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-7/12 sm:text-left' }}">
         <input id='sign-up-email' class="w-full" name="email" type="email" placeholder="Email Address..." required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif />
     </div>
-    <div class="infusion-submit w-full px-2 md:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'md:w-5/12' }}">
+    <div class="infusion-submit w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12' }}">
         @if(!empty($submitArrows))
             <img class="form-arrow arrow-left" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-right-white.png" alt="arrow-right">
             <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png" alt="arrow-left">
@@ -52,7 +52,7 @@
 
 <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl">
     <p><strong><i class="fas fa-check"></i> Success!</strong></p>
-    <h2 class="text-drumeo my-4 md:my-5"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
+    <h2 class="text-drumeo my-4 sm:my-5"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
     <p>
         <em>
             @if(!empty($body)) {{ $body }} @else You should receive an email from team@drumeo.com within 10 minutes.

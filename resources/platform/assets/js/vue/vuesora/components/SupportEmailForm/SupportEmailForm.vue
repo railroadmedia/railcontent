@@ -5,7 +5,7 @@
     >
 
         <!-- Help Dropdown -->
-        <multilevel-dropdown 
+        <multilevel-dropdown
             label="What can we help you with?"
             name="support-options"
             id="support-listbox"
@@ -20,7 +20,7 @@
         />
 
         <!-- Description -->
-        <textarea-input 
+        <textarea-input
             name="description"
             :required="true"
             :invalid="!formValid && !messageFieldValid"
@@ -37,7 +37,7 @@
 
             <div class="sm:tw-w-72">
                 <!-- File Upload Button -->
-                <file-input 
+                <file-input
                     name="attach file"
                     id="support-file"
                     :required="false"
@@ -46,7 +46,7 @@
                     accept="video/*,image/*"
                     :files="formData.attachments"
                     message="For security reasons, we only accept image and video files."
-                    :megabiteLimit="100"
+                    :megabiteLimit="2"
                     @attachFile="attachFile($event)"
                     @removeFile="removeFile($event)"
                     @clearFiles="clearFiles()"
@@ -54,10 +54,10 @@
             </div>
 
             <!-- SUBMIT BUTTON -->
-            <button class="tw-btn-primary tw-self-start tw-mr-auto tw-w-full sm:tw-w-min" 
+            <button class="tw-btn-primary tw-self-start tw-mr-auto tw-w-full sm:tw-w-min"
                     type="submit"
                     :disabled="!formValid"
-                    :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`" 
+                    :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
             >
                     Submit
             </button>
@@ -133,7 +133,7 @@ export default {
             default: () => 'emailFom',
         },
     },
-    
+
     data() {
         return {
             formValid: true,
@@ -302,7 +302,7 @@ export default {
         selectFieldValid() {
             return this.formData.supportOption.length !== 0 ? true : false;
         },
-        
+
         formState() {
             if(this.messageFieldValid && this.selectFieldValid) return true;
         },
@@ -331,7 +331,7 @@ export default {
             this.formData.supportOption = val;
         },
 
-        attachFile(file) {     
+        attachFile(file) {
             this.formData.attachments.push(file);
         },
         removeFile(index) {
@@ -356,8 +356,8 @@ export default {
             //take snapshot
             const message = this.formData.message;
             const supportOption = this.formData.supportOption;
-            let attachment; 
-            //convert file(s) to image blobs 
+            let attachment;
+            //convert file(s) to image blobs
             if(this.formData.attachments[0]) {
                 attachment = this.formData.attachments[0];
             } else {
@@ -392,7 +392,7 @@ export default {
                         this.$emit('formSuccess');
                         window.closeAllModals();
 
-                        //reset option 
+                        //reset option
                         this.formData = {
                             supportOption: '',
                             message: '',
@@ -408,7 +408,7 @@ export default {
                         });
                     }
                 })
-            
+
         },
     },
 

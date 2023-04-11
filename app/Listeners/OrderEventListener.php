@@ -264,6 +264,7 @@ class OrderEventListener
             'claimed_on' => null,
             'brand' => $brand,
             'note' => null,
+            'source' => null,
             'created_at' => $now,
             'updated_at' => $now,
         ];

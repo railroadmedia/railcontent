@@ -14,7 +14,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/student-only', [SalesController::class, 'promo'] );
     Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
     Route::get('/choose-your-trial', [SalesController::class, 'choosePlan'] );
-    Route::get('/anniversary-bundle', [SalesController::class, 'anniversary'] );
+    Route::get('/anniversary-bundle', [SalesController::class, 'home'] );
 
     Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth'] );
     Route::get('/affiliate-trial', [SalesController::class, 'choosePlanMonth'] );
@@ -55,7 +55,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/foundations', [SalesController::class, 'foundations'] );
     Route::get('/new-piano-players', [SalesController::class, 'newPianoPlayers'] );
     Route::get('/shop/new-piano-players', [SalesController::class, 'newPianoPlayers'] );
-    Route::get('/new-piano-players/deal', [SalesController::class, 'newPianoPlayersDeal'] );
+    Route::get('/new-piano-players-deal', [SalesController::class, 'newPianoPlayersDeal'] );
     Route::get('/concert-headphones-members', [SalesController::class, 'concertHeadphonesMember']);
 
     Route::get('/about', [SalesController::class, 'about'] );
@@ -71,6 +71,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/shop/destupefy-your-left-hand', [SalesController::class, 'destupefyyourlefthand'] );
     Route::get('/shop/play-beautiful-piano', [SalesController::class, 'playbeautifulpiano'] );
     Route::get('/shop/beginner-classical-piano', [SalesController::class, 'beginnerclassicalpiano'] );
+    Route::get('/shop/beautiful-beginner-bundle', [SalesController::class, 'beautifulBeginnerBundle'] );
     Route::get('/lifetime', [SalesController::class, 'lifetime'] );
     Route::get('/lifetime-members', [SalesController::class, 'lifetimeMembers'] );
     Route::get('/lisa-recommends', [SalesController::class, 'lisarecommends'] );

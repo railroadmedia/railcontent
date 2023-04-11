@@ -242,10 +242,14 @@
             </div>
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
                 You’ve spent 30 days crushing it on the drums. <br><br>
-                And we want to make it easy for you to keep it up. So we put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses. <br><br>
+                And we want to make it easy for you to keep going. So we put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses. <br><br>
                 <b>Join Drumeo today and you’ll get:</b>
             </p>
             <ul class="pl-4 mx-auto text-left" style="width: 100%; max-width: 700px;">
+                <li class="flex items-start">
+                    <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span>
+                    Step-by-step lessons building on what you learned in 30-Day Drummer
+                </li>
                 <li class="flex items-start">
                     <span class="mr-2"><i class="fas fa-check pt-1 mr-2 text-drumeo"></i></span>
                     Easy access to hundreds of popular songs you can play with your new skills
@@ -265,13 +269,13 @@
             </ul>
             <p class="leading-relaxed px-3 my-5 text-left" style="width: 100%; max-width: 700px;">
                 Plus, you’ll have FREE priority registration for any future 30-Day Drummer events like this one (we’ll be doing more, promise). <br><br>
-                And we’ll also knock $40 off your membership for being one of the first-ever 30-Day Drummer students (because hey, why not?). <br><br>
-                <b>But heads up:</b> This offer is only available until October 8, 2022. <br><br>
+                And we’ll also knock $40 off your membership for being a dedicated 30-Day Drummer student (because hey, why not?). <br><br>
+                <b>But heads up:</b> This offer is only available until March 31, 2023. <br><br>
                 Click below to get started and keep crushing it on the drums for the next year! <br><br>
             </p>
-            {{--            <div class="px-3 md:px-0">--}}
-            {{--                <a class="join blue w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">SEE THE DEAL</a>--}}
-            {{--            </div>--}}
+{{--                        <div class="px-3 md:px-0">--}}
+{{--                            <a class="join blue w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">SEE THE DEAL</a>--}}
+{{--                        </div>--}}
         </div>
     </section>
 
@@ -339,7 +343,7 @@
                         Plus, you’ll have an opportunity to ask your questions and hang with Domino. <br><br>
                         This is an exclusive event for 30-Day Drummer students so you can launch into the next phase of your drumming with enthusiasm. <br><br>
                         You can tune in LIVE when you join Drumeo: <br><br>
-                        October 23 (Time TBD – you’ll get an email!) <br><br>
+                        April 22 at 10am PT (1pm ET). <br><br>
                         See you there!
                     </p>
                 </div>
@@ -447,7 +451,7 @@
     <section class="py-6 md:py-10">
         <div class="md:max-w-3xl lg:max-w-4xl mx-auto text-center px-4 lg:px-0">
             <a target="_blank" href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738">
-                <img class="mx-auto h-10 mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/shopper-approved-logo.png" alt="shopper approved logo">
+                <img class="mx-auto h-10 mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/shopper-approved-icon.svg" alt="shopper approved logo">
             </a>
             <h4 class="font-extrabold leading-tight {{--mb-2 sm:mb-4--}} mb-14">
                 Trusted by {{ number_format(Prices::$students) }} students<br class="inline sm:hidden"> from around the world.
@@ -476,8 +480,16 @@
     <section class="py-12 md:py-20 px-4 sm:px-6" style="background:linear-gradient(180deg, #01050F 60.48%, #07132C 100%);">
         <div class="max-w-2xl lg:max-w-5xl mx-auto text-center text-white">
             <img class="h-12 mb-4" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo">
-            <h3 class="font-extrabold">Start your Drumeo membership <br class="md:hidden">today and get:</h3>
-            <h5 class="uppercase my-8 text-yellow">Only available until October 8, 2022</h5>
+            <h3 class="font-extrabold mb-8">Start your Drumeo membership <br class="md:hidden">today and get:</h3>
+{{--            <h5 class="uppercase my-8 text-yellow">Only--}}
+{{--                <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                     </span>--}}
+{{--                left!</h5>--}}
 
 
 
@@ -488,8 +500,8 @@
                         'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_500,q_auto:good/https://dpwjbsxqtam5n.cloudfront.net/promos/drumeo_annual.jpg',
                         'title' => 'Drumeo Annual Membership',
                         'description' => 'The Ultimate Online Drum Lessons Experience. You’ll get step-by-step drum lessons from the best drummers in the world (and much more).',
-                        'price' => 240,
-                        'priceReal' => "$200",
+                        'price' => '$' . Prices::$plusSubscriptionAnnualFull,
+                        'priceReal' => '$' . Prices::$plusSubscriptionAnnual,
                         ],
                         [
                         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/30DD.jpg',
@@ -563,11 +575,11 @@
                     </div>
                 @endforeach
             </div>
-            <h3 class="text-coaches mb-8"><strong>ONLY <s class="opacity-60">${{ 240 }}</s> $200</strong></h3>
+            <h3 class="text-coaches mb-8"><strong>ONLY <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> ${{ Prices::$plusSubscriptionAnnual }}</strong></h3>
             <div class="w-2/3 mx-auto">
                 <a
-                    {{--                        href="/laravel/public/shopping-cart/api/query?products[DLM]=1,year,1&products[Drumeo-VaterSticks]=1&products[BeginnerBook]=1&products[learn-songs-faster-pack]=1&promo-code=30owner&locked=true" --}}
-                    class="join sold-out blue w-full">Sold Out</a>
+{{--                    href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[BeginnerBook]=1&products[learn-songs-faster-pack]=1&locked=true"--}}
+                    class="join sold-out w-full">Sold Out</a>
             </div>
             <p class="text-center my-8" style="color:#ABB5C2;">
                 <b>Any questions?</b> Call us toll-free at 1-800-439-8921 or directly at 1-604-855-7605.
@@ -586,6 +598,10 @@
             "minimal" => true
         ])
 
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-04-01 00:00:00',
+        'promoVersion' => false
+    ])
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>

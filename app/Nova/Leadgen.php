@@ -39,7 +39,7 @@ class Leadgen extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'title',
     ];
 
     /**
@@ -121,7 +121,9 @@ class Leadgen extends Resource
      */
     public function filters(NovaRequest $request)
     {
-        return [];
+        return [
+            new \App\Nova\Filters\Brand()
+        ];
     }
 
     /**

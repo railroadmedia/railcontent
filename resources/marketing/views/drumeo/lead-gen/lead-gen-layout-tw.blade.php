@@ -5,7 +5,11 @@
 
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
+    @if(!empty($appTailwind))
+        <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    @else
+        @include('_partials.layout._tailwindcdn')
+    @endif
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen.css') }}" rel="stylesheet">

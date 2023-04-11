@@ -38,7 +38,7 @@ $brandColors = $colors[$brand];
     <div class="lg:tw-hidden tw-bg-top tw-bg-cover tw-text-white tw-min-h-[25vh]"
         style="
             background-color: {{ $colors["$brand"]['solidBg'] }};
-            background-image: url(https://musora.com/cdn-cgi/image/quality=100/{{ $backgroundImage }});">
+            background-image: url(https://www.musora.com/musora-cdn/image/quality=100/{{ $backgroundImage }});">
         <div style="width: 100%; height: 100%; background: linear-gradient(180deg,{{ $colors["$brand"]['bgRgbStart'] }} 50%,{{ $colors["$brand"]['solidBg'] }});"></div>
     </div>
     <div class="tw-text-white" style="background-color: {{ $brandColors['solidBg'] }}">
@@ -69,7 +69,7 @@ $brandColors = $colors[$brand];
     <div class="tw-hidden lg:tw-flex tw-bg-top tw-bg-cover tw-text-white"
          style="
             background-color: {{ $colors["$brand"]['solidBg'] }};
-            background-image: url(https://musora.com/cdn-cgi/image/quality=100/{{ !empty($backgroundImage) ? $backgroundImage : 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg' }});">
+            background-image: url(https://www.musora.com/musora-cdn/image/quality=100/{{ !empty($backgroundImage) ? $backgroundImage : 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg' }});">
         <div style="width: 100%; height: 100%; background: linear-gradient(268deg,{{ $colors["$brand"]['bgRgbStart'] }} 50%,{{ $colors["$brand"]['solidBg'] }});"></div>
     </div>
 </section>

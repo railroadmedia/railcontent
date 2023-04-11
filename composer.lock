@@ -15174,7 +15174,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.7.1"
+==== BASE ====
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.2"
+==== BASE ====
             },
             "time": "2023-03-27T19:02:04+00:00"
         },

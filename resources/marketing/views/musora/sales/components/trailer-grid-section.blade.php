@@ -11,13 +11,16 @@
         <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6">
             @foreach ($gridItems as $key => $gridItem)
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
-                    <img
-                        class="w-1/3 sm:w-full rounded-xl mb-3 transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=640,quality=85/{{ $gridItem['image'] }}"
-                        alt="grid{{$key+1}}"
-                        loading="lazy"
-                        onload="this.classList.remove('opacity-0')"
-                    >
+                    <picture class="w-1/3 sm:w-full">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/{{ $gridItem['image'] }}">
+                        <img
+                            class=" rounded-xl mb-3 transition-opacity opacity-0"
+                            src="https://www.musora.com/musora-cdn/image/width=200,quality=85/{{ $gridItem['image'] }}"
+                            alt="grid{{$key+1}}"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                        >
+                    </picture>
                     <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">
                         <strong class="font-black inline-block mb-0.5">{{ $gridItem['title'] }}</strong><br> {{ $gridItem['desc'] }}
                     </p>
