@@ -8,18 +8,35 @@
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
 @endsection
 
+@section('body-data')
+    x-data="{
+        trailer: false
+    }"
+@endsection
+
 @section('content')
-    <div x-data="{ trailer: false }">
         <header class="tw-bg-[#F1F7FE] tw-py-4 md:tw-py-7 tw-px-4">
             <div class="tw-max-w-5xl tw-mx-auto">
                 <div class="md:tw-flex tw-items-center tw-gap-6 tw-mb-12 tw-text-center md:tw-text-left">
                     <div class="md:tw-flex-1">
-                        <img class="tw-h-14 sm:tw-h-18 lg:tw-h-20 tw-mb-2 tw-inline-block" alt="header logo" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['header_logo']??'' }}">
+                        <img
+                            class="tw-h-14 sm:tw-h-18 lg:tw-h-20 tw-mb-2 tw-inline-block tw-transition-opacity tw-opacity-0"
+                            alt="header logo"
+                            src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['header_logo']??'' }}"
+                            loading="lazy"
+                            onload="this.classList.remove('tw-opacity-0')"
+                        />
                         <h1 class="tw-font-extrabold tw-text-3xl lg:tw-text-4xl">{{ $cohort['headline'] }}</h1>
                         <h2 class="tw-font-normal tw-text-2xl lg:tw-text-3xl">{{ $cohort['subheadline'] }}</h2>
                         <p class="tw-font-bold tw-mt-4 lg:tw-mt-6 tw-mb-7 lg:tw-mb-9">{{ $cohort['header_description'] }}</p>
                         <div class="tw-relative md:tw-hidden">
-                            <img class="tw-rounded-xl tw-mb-6" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['header_image_url'] }}" alt="header thumb" />
+                            <img
+                                class="tw-rounded-xl tw-mb-6 tw-transition-opacity tw-opacity-0"
+                                src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['header_image_url'] }}"
+                                alt="header thumb"
+                                loading="lazy"
+                                onload="this.classList.remove('tw-opacity-0')"
+                            />
                             <div class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" x-on:click="trailer = true"><i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div></div>
                         </div>
                         <div class="md:tw-flex md:tw-items-center">
@@ -30,7 +47,13 @@
                             @endif
 
                             <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start">
-                                <img class="tw-h-8 md:tw-h-6 tw-mr-1" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png" alt="joined student profiles">
+                                <img
+                                    class="tw-h-8 md:tw-h-6 tw-mr-1 tw-transition-opacity tw-opacity-0"
+                                    src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
+                                    alt="joined student profiles"
+                                    loading="lazy"
+                                    onload="this.classList.remove('tw-opacity-0')"
+                                />
                                 <p class="tw-text-xs tw-align-middle tw-max-w-[180px] md:tw-max-w-full tw-text-left">
                                     Join {{ number_format($nPackOwners ?? 0) }}
                                     @php
@@ -46,7 +69,13 @@
                         </div>
                     </div>
                     <div class="md:tw-flex-1 tw-hidden md:tw-block tw-relative">
-                        <img class="tw-rounded-xl" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['header_image_url'] }}" alt="header thumb" />
+                        <img
+                            class="tw-rounded-xl tw-transition-opacity tw-opacity-0"
+                            src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['header_image_url'] }}"
+                            alt="header thumb"
+                            loading="lazy"
+                            onload="this.classList.remove('tw-opacity-0')"
+                        />
                         <div class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" x-on:click="trailer = true"><i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div></div>
                     </div>
                 </div>
@@ -56,32 +85,27 @@
                         <h4 class="tw-px-3 lg:tw-px-5"><strong>{{date('F dS', strtotime($cohort['start_date']))}}</strong></h4>
                         <hr class="tw-border-gray-300 tw-my-4 sm:tw-my-2 lg:tw-my-4">
                         <p class="tw-text-sm tw-px-3 lg:tw-px-5">
-                            @if($enrollmentClosed)
-                                Enrollment closed
-                            @else
-                            @php
-                                $startDate = strtotime(now());
-                                $endDate = strtotime($cohort['end_date']);
-                                $diff = abs($endDate - $startDate);
-                                $my_t=getdate($diff);
-
-                            @endphp
-                                Enrollment closes in <strong>{{$my_t['mday']}} days {{$my_t['hours']}} hours {{$my_t['minutes']}} minutes</strong>.
-                            @endif
+                             <span x-cloak x-data="timer()" x-init="countdown()">
+                                 <span x-cloak x-show="timeLeft > 0">Enrollment closes in </span>
+                                 <span class="tw-text-pianote">
+                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span> <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span> <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span> <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                     <span x-cloak x-show="timeLeft < 0">Enrollment closed</span>
+                                 </span>.
+                             </span>
                         </p>
                     </div>
                     <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-evenly tw-w-full sm:tw-w-auto sm:tw-flex-grow tw-py-4 sm:tw-py-3 lg:tw-py-4 tw-text-left sm:tw-text-center">
-                        <div class="tw-flex sm:tw-block tw-w-full sm:tw-w-auto tw-px-4 sm:tw-px-3 tw-mb-4 sm:tw-mb-0">
+                        <div class="tw-flex sm:tw-block tw-w-full sm:tw-w-1/3 tw-px-4 sm:tw-px-3 tw-mb-4 sm:tw-mb-0">
                             <i class="far fa-fw {{ $cohort['icon1'] }} tw-mr-3 sm:tw-mr-0 tw-text-{{ $brand }} tw-text-2xl" aria-hidden="true"></i>
                             <p class="tw-leading-tight tw-mx-0"><strong class="tw-font-black">{{ $cohort['icon1_title'] }}</strong><br>
-                                <span class="tw-text-sm"> February 27th to<br class="tw-hidden sm:tw-inline">{!!$cohort['icon1_copy']!!}</span></p>
+                                <span class="tw-text-sm">{!!$cohort['icon1_copy']!!}</span></p>
                         </div>
-                        <div class="tw-flex sm:tw-block tw-w-full sm:tw-w-auto tw-px-4 sm:tw-px-3 tw-mb-4 sm:tw-mb-0">
+                        <div class="tw-flex sm:tw-block tw-w-full sm:tw-w-1/3 tw-px-4 sm:tw-px-3 tw-mb-4 sm:tw-mb-0">
                             <i class="far fa-fw {{ $cohort['icon2'] }} tw-mr-3 sm:tw-mr-0 tw-text-{{ $brand }} tw-text-2xl" aria-hidden="true"></i>
                             <p class="tw-leading-tight tw-mx-0"><strong class="tw-font-black">{{ $cohort['icon2_title'] }}</strong><br>
-                                <span class="tw-text-sm">10 minutes/day<br class="tw-hidden sm:tw-inline">{{ $cohort['icon2_copy'] }}</span></p>
+                                <span class="tw-text-sm">{{ $cohort['icon2_copy'] }}</span></p>
                         </div>
-                        <div class="tw-flex sm:tw-block tw-w-full sm:tw-w-auto tw-px-4 sm:tw-px-3">
+                        <div class="tw-flex sm:tw-block tw-w-full sm:tw-w-1/3 tw-px-4 sm:tw-px-3">
                             <i class="far fa-fw {{ $cohort['icon3'] }} tw-mr-3 sm:tw-mr-0 tw-text-{{ $brand }} tw-text-2xl" aria-hidden="true"></i>
                             <p class="tw-leading-tight tw-mx-0"><strong class="tw-font-black">{!! $cohort['icon3_title'] !!}</strong><br>
                                 <span class="tw-text-sm">{!! $cohort['icon3_copy'] !!}</span></p>
@@ -97,15 +121,27 @@
                 <p class="md:tw-px-10 tw-mb-52">{!! $cohort['body_top_description'] !!}</p>
             </div>
         </section>
-        <section class="tw-bg-[#F1F7FE] tw-pb-7">
+        <section class="tw-bg-[#F1F7FE] tw-pb-7 ">
             <div class="tw-max-w-5xl tw-mx-auto tw-px-4 md:tw-px-10 -tw-mt-40">
                 <div class="tw-relative tw-cursor-pointer tw-mb-10" x-on:click="trailer = true">
-                    <img class="tw-rounded-xl" src="{{ $cohort['body_image_url'] }}" alt="video thumb" />
+                    <img
+                        class="tw-rounded-xl tw-transition-opacity tw-opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/{{ $cohort['body_image_url'] }}"
+                        alt="video thumb"
+                        loading="lazy"
+                        onload="this.classList.remove('tw-opacity-0')"
+                    />
                     <div class="tw-absolute tw-inset-0 tw-flex tw-justify-center tw-items-center">
                         <i class="fa-regular fa-play tw-z-10 tw-border-white tw-border-4 tw-text-white tw-py-3 md:tw-py-6 tw-pl-5 md:tw-pl-8 tw-pr-4 md:tw-pr-6 tw-rounded-full tw-text-3xl md:tw-text-5xl tw-bg-[rgba(0,0,0,0.2)]"></i>
                     </div>
                 </div>
-                <img class="tw-h-10 sm:tw-h-16 tw-mb-8 tw-mx-auto" alt="just play logo" src="https://www.musora.com/musora-cdn/image/width=1220,quality=85/{{ $cohort['body_logo'] }}">
+                <img
+                    class="tw-h-10 sm:tw-h-16 tw-mb-8 tw-mx-auto tw-transition-opacity tw-opacity-0"
+                    alt="just play logo"
+                    src="https://www.musora.com/musora-cdn/image/width=1220,quality=85/{{ $cohort['body_logo'] }}"
+                    loading="lazy"
+                    onload="this.classList.remove('tw-opacity-0')"
+                />
                 <p class="tw-text-center tw-px-6">{!! $cohort['body_bottom_description'] !!}</p>
             </div>
         </section>
@@ -156,7 +192,13 @@
                     <a class="tw-uppercase tw-border-2 tw-border-black tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-center tw-font-bebas-neue tw-text-black">Join the conversation</a>
                 </div>
                 <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
-                    <img class="tw-h-7 sm:tw-mb-1 lg:tw-mb-0 tw-mr-1" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png" alt="joined student profiles">
+                    <img
+                        class="tw-h-7 sm:tw-mb-1 lg:tw-mb-0 tw-mr-1 tw-transition-opacity tw-opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
+                        alt="joined student profiles"
+                        loading="lazy"
+                        onload="this.classList.remove('tw-opacity-0')"
+                    />
                     <p class="tw-text-xs tw-align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
                 </div>
             </div>
@@ -166,5 +208,11 @@
             'name' => "trailer",
             "video" => $cohort['cohort_trailer'],
         ])
-    </div>
+@endsection
+
+@section('layout-scripts')
+    @include('partials._countdown',[
+            'countdownDate' => $cohort['end_date'],
+            'promoVersion' => false
+        ])
 @endsection
