@@ -20,6 +20,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/lifetime', [SalesController::class, 'salesUpgradeLifetime'] );
     Route::get('/festival/', [SalesController::class, 'Festival'] );
     Route::get('/anniversary', [SalesController::class, 'home'] );
+    Route::get('/faster-feet', [SalesController::class, 'fasterFeet'] );
 
     //    sales pages
     Route::get('/method', [SalesController::class, 'method'] );
