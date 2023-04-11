@@ -39,14 +39,17 @@
                             />
                             <div class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" x-on:click="trailer = true"><i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div></div>
                         </div>
-                        <div class="md:tw-flex md:tw-items-center">
+                        <div class="md:tw-flex @if($hasProduct) md:tw-items-start @else md:tw-items-center @endif">
                             @if($hasProduct)
-                                <a class="join sold-out medium w-full">YOU'RE ENROLLED!</a>
+                                <div class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
+                                    <span class="tw-uppercase tw-bg-[#65656B] tw-rounded-full tw-py-2 tw-w-full tw-text-white tw-text-center tw-font-bebas-neue tw-inline-block">YOU'RE ENROLLED!</span>
+                                    <a class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
+                                </div>
                             @else
-                                <a href="{{ $registerButtonUrl }}" class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue tw-mr-2 tw-max-w-[415px] tw-inline-block tw-mb-5 md:tw-mb-0">Enroll Now</a>
+                                <button href="{{ $registerButtonUrl }}" class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue md:tw-mr-2 tw-max-w-[415px] tw-inline-block tw-mb-5 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600" data-open-modal="signupModal">Enroll Now</button>
                             @endif
 
-                            <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start">
+                            <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start @if($hasProduct) md:tw-mt-1 @endif">
                                 <img
                                     class="tw-h-8 md:tw-h-6 tw-mr-1 tw-transition-opacity tw-opacity-0"
                                     src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
@@ -185,11 +188,11 @@
                 <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">{{ $cohort['bottom_description'] }}</p>
                 <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4">
                     @if($hasProduct)
-                        <a class="join sold-out medium w-full">YOU'RE ENROLLED!</a>
+                        <span class="tw-uppercase tw-bg-[#65656B] tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue tw-mb-2 md:tw-mb-0">YOU'RE ENROLLED!</span>
                     @else
-                    <a class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue tw-mb-2 md:tw-mb-0">Enroll Now</a>
+                        <button class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
                     @endif
-                    <a class="tw-uppercase tw-border-2 tw-border-black tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-center tw-font-bebas-neue tw-text-black">Join the conversation</a>
+                    <a class="tw-uppercase tw-border-2 tw-border-black tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-center tw-font-bebas-neue tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
                 </div>
                 <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                     <img
@@ -199,10 +202,36 @@
                         loading="lazy"
                         onload="this.classList.remove('tw-opacity-0')"
                     />
-                    <p class="tw-text-xs tw-align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
+                    <p class="tw-text-xs tw-align-middle">
+                        Join {{ number_format($nPackOwners ?? 0) }}
+                        @php
+                            if($brand === 'drumeo'){
+                                echo 'drummers';
+                            } else if($brand === 'pianote'){
+                                echo 'piano players';
+                            }
+                        @endphp
+                        who have already registered.
+                    </p>
                 </div>
             </div>
         </section>
+
+        <div id="signupModal" class="modal">
+            <div class="tw-flex tw-justify-center tw-items-center">
+                <div class="tw-max-w-xl tw-bg-[#081825] tw-text-center tw-text-white tw-rounded-xl tw-px-8 tw-py-10">
+                    <img class="tw-h-20 tw-mx-auto tw-mb-5" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['header_logo']??'' }}" alt="modal logo" />
+                    <div class="tw-text-2xl tw-font-bold tw-mb-1">Success, You’re Enrolled!</div>
+                    <p class="tw-mb-5">
+                        The course runs from {{ date('F d', strtotime($cohort['start_date'])) }} - {{ date('F d', strtotime($cohort['end_date'])) }}. We’ll notify you before the course begins.
+                    </p>
+                    <div>
+                        <a class="tw-btn-primary tw-bg-[#000C17] tw-border-white tw-text-white tw-mr-2 hover:tw-bg-white hover:tw-text-[#000C17]">Go home</a>
+                        <a class="tw-btn-primary tw-bg-white tw-text-[#00101D]">Go to course</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         @include('partials.modals._video-modal',[
             'name' => "trailer",
