@@ -32,6 +32,7 @@ class Cohort extends Resource
 
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Text::make('slug')->required(),
+            Text::make('Cohort Title', 'cohort_title')->required(),
 
             Heading::make('Header'),
             Image::make('Header Logo', 'header_logo')
