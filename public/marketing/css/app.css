@@ -1674,12 +1674,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-mt-1 {
   margin-top: -0.25rem !important;
 }
-<<<<<<< HEAD
-=======
 .ml-7 {
   margin-left: 1.75rem !important;
 }
->>>>>>> project-playlists-v2
 .mb-80 {
   margin-bottom: 20rem !important;
 }
@@ -1689,12 +1686,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-0\.5 {
   margin-top: 0.125rem !important;
 }
-<<<<<<< HEAD
-.ml-7 {
-  margin-left: 1.75rem !important;
-}
-=======
->>>>>>> project-playlists-v2
 .mb-64 {
   margin-bottom: 16rem !important;
 }
@@ -1728,8 +1719,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-32 {
   margin-top: 8rem !important;
 }
-<<<<<<< HEAD
-=======
 .-ml-20 {
   margin-left: -5rem !important;
 }
@@ -1739,7 +1728,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-mb-10 {
   margin-bottom: -2.5rem !important;
 }
->>>>>>> project-playlists-v2
 .-mr-5 {
   margin-right: -1.25rem !important;
 }
@@ -2058,12 +2046,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-24 {
   width: 6rem !important;
 }
-<<<<<<< HEAD
-=======
 .w-32 {
   width: 8rem !important;
 }
->>>>>>> project-playlists-v2
 .w-5\/6 {
   width: 83.333333% !important;
 }
@@ -2073,12 +2058,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-72 {
   width: 18rem !important;
 }
-<<<<<<< HEAD
-.w-32 {
-  width: 8rem !important;
-}
-=======
->>>>>>> project-playlists-v2
 .w-56 {
   width: 14rem !important;
 }
@@ -4907,13 +4886,10 @@ li, p {
     height: 16rem !important;
   }
 
-<<<<<<< HEAD
-=======
   .sm\:h-12 {
     height: 3rem !important;
   }
 
->>>>>>> project-playlists-v2
   .sm\:h-56 {
     height: 14rem !important;
   }
@@ -4930,13 +4906,6 @@ li, p {
     height: 1.75rem !important;
   }
 
-<<<<<<< HEAD
-  .sm\:h-12 {
-    height: 3rem !important;
-  }
-
-=======
->>>>>>> project-playlists-v2
   .sm\:h-96 {
     height: 24rem !important;
   }
@@ -5106,24 +5075,14 @@ li, p {
     max-width: 28rem !important;
   }
 
-<<<<<<< HEAD
-  .sm\:max-w-lg {
-    max-width: 32rem !important;
-  }
-
-=======
->>>>>>> project-playlists-v2
   .sm\:max-w-xl {
     max-width: 36rem !important;
   }
 
-<<<<<<< HEAD
-=======
   .sm\:max-w-lg {
     max-width: 32rem !important;
   }
 
->>>>>>> project-playlists-v2
   .sm\:max-w-3xl {
     max-width: 48rem !important;
   }
@@ -5216,13 +5175,10 @@ li, p {
     border-radius: 1rem !important;
   }
 
-<<<<<<< HEAD
-=======
   .sm\:rounded-xl {
     border-radius: 0.75rem !important;
   }
 
->>>>>>> project-playlists-v2
   .sm\:border-8 {
     border-width: 8px !important;
   }
@@ -5382,14 +5338,11 @@ li, p {
     padding-right: 2.25rem !important;
   }
 
-<<<<<<< HEAD
-=======
   .sm\:py-4 {
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
   }
 
->>>>>>> project-playlists-v2
   .sm\:py-5 {
     padding-top: 1.25rem !important;
     padding-bottom: 1.25rem !important;
@@ -5460,14 +5413,6 @@ li, p {
     padding-bottom: 8rem !important;
   }
 
-<<<<<<< HEAD
-  .sm\:py-4 {
-    padding-top: 1rem !important;
-    padding-bottom: 1rem !important;
-  }
-
-=======
->>>>>>> project-playlists-v2
   .sm\:px-16 {
     padding-left: 4rem !important;
     padding-right: 4rem !important;
@@ -5691,27 +5636,16 @@ li, p {
     line-height: 2.5rem !important;
   }
 
-<<<<<<< HEAD
-  .sm\:text-base {
-    font-size: 1rem !important;
-    line-height: 1.5rem !important;
-  }
-
-=======
->>>>>>> project-playlists-v2
   .sm\:text-2xl {
     font-size: 1.5rem !important;
     line-height: 2rem !important;
   }
 
-<<<<<<< HEAD
-=======
   .sm\:text-base {
     font-size: 1rem !important;
     line-height: 1.5rem !important;
   }
 
->>>>>>> project-playlists-v2
   .sm\:text-3xl {
     font-size: 1.875rem !important;
     line-height: 2.25rem !important;
@@ -6126,13 +6060,10 @@ li, p {
     margin-top: -0.5rem !important;
   }
 
-<<<<<<< HEAD
-=======
   .md\:mr-5 {
     margin-right: 1.25rem !important;
   }
 
->>>>>>> project-playlists-v2
   .md\:-ml-10 {
     margin-left: -2.5rem !important;
   }
@@ -6169,13 +6100,6 @@ li, p {
     margin-left: 0.25rem !important;
   }
 
-<<<<<<< HEAD
-  .md\:mr-5 {
-    margin-right: 1.25rem !important;
-  }
-
-=======
->>>>>>> project-playlists-v2
   .md\:mr-2 {
     margin-right: 0.5rem !important;
   }
@@ -7985,24 +7909,14 @@ li, p {
     width: 25% !important;
   }
 
-<<<<<<< HEAD
-  .lg\:w-60 {
-    width: 15rem !important;
-  }
-
-=======
->>>>>>> project-playlists-v2
   .lg\:w-48 {
     width: 12rem !important;
   }
 
-<<<<<<< HEAD
-=======
   .lg\:w-60 {
     width: 15rem !important;
   }
 
->>>>>>> project-playlists-v2
   .lg\:w-4\/12 {
     width: 33.333333% !important;
   }
@@ -8395,14 +8309,11 @@ li, p {
     padding-right: 4rem !important;
   }
 
-<<<<<<< HEAD
-=======
   .lg\:px-14 {
     padding-left: 3.5rem !important;
     padding-right: 3.5rem !important;
   }
 
->>>>>>> project-playlists-v2
   .lg\:py-44 {
     padding-top: 11rem !important;
     padding-bottom: 11rem !important;
@@ -8428,14 +8339,6 @@ li, p {
     padding-bottom: 1.25rem !important;
   }
 
-<<<<<<< HEAD
-  .lg\:px-14 {
-    padding-left: 3.5rem !important;
-    padding-right: 3.5rem !important;
-  }
-
-=======
->>>>>>> project-playlists-v2
   .lg\:py-60 {
     padding-top: 15rem !important;
     padding-bottom: 15rem !important;
@@ -8801,14 +8704,11 @@ li, p {
     padding-bottom: 8rem !important;
   }
 
-<<<<<<< HEAD
-=======
   .xl\:px-12 {
     padding-left: 3rem !important;
     padding-right: 3rem !important;
   }
 
->>>>>>> project-playlists-v2
   .xl\:px-0 {
     padding-left: 0px !important;
     padding-right: 0px !important;
