@@ -22,7 +22,7 @@
                         <img
                             class="tw-h-14 sm:tw-h-18 lg:tw-h-20 tw-mb-2 tw-inline-block tw-transition-opacity tw-opacity-0"
                             alt="header logo"
-                            src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['header_logo']??'' }}"
+                            src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['light_mode_logo']??'' }}"
                             loading="lazy"
                             onload="this.classList.remove('tw-opacity-0')"
                         />
@@ -219,15 +219,16 @@
 
         <div id="signupModal" class="modal">
             <div class="tw-flex tw-justify-center tw-items-center">
-                <div class="tw-max-w-xl tw-bg-[#081825] tw-text-center tw-text-white tw-rounded-xl tw-px-8 tw-py-10">
-                    <img class="tw-h-20 tw-mx-auto tw-mb-5" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['header_logo']??'' }}" alt="modal logo" />
+                <div class="tw-max-w-xl tw-bg-[#081825] tw-text-center tw-text-white tw-rounded-xl tw-px-8 tw-py-10 tw-border-[#445F74] tw-border">
+                    <img class="tw-h-20 tw-mx-auto tw-mb-5 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['light_mode_logo']??'' }}" alt="modal logo" />
+                    <img class="tw-h-20 tw-mx-auto tw-mb-5 tw-hidden dark:tw-inline-block" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['dark_mode_logo']??'' }}" alt="modal logo" />
                     <div class="tw-text-2xl tw-font-bold tw-mb-1">Success, You’re Enrolled!</div>
                     <p class="tw-mb-5">
                         The course runs from {{ date('F d', strtotime($cohort['start_date'])) }} - {{ date('F d', strtotime($cohort['end_date'])) }}. We’ll notify you before the course begins.
                     </p>
                     <div>
                         <a class="tw-btn-primary tw-bg-[#000C17] tw-border-white tw-text-white tw-mr-2 hover:tw-bg-white hover:tw-text-[#000C17]">Go home</a>
-                        <a class="tw-btn-primary tw-bg-white tw-text-[#00101D]">Go to course</a>
+                        <a class="tw-btn-primary tw-bg-white tw-text-[#00101D] hover:tw-bg-[#627F97] hover:tw-text-white">Go to course</a>
                     </div>
                 </div>
             </div>
