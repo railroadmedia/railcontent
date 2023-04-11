@@ -20,6 +20,7 @@ return new class extends Migration
             $table->renameColumn('cohort_image_url', 'header_image_url');
             $table->renameColumn('logo', 'header_logo');
             $table->renameColumn('title', 'body_title');
+            $table->string('cohort_title')->nullable();
             $table->string('header_description')->nullable();
             $table->string('body_image_url')->nullable();
             $table->string('body_logo')->nullable();
@@ -30,6 +31,7 @@ return new class extends Migration
         });
 
         Schema::create('cohort_dropdowns', function (Blueprint $table) {
+            $table->id();
             $table->integer('cohort_id');
             $table->string('title');
             $table->longText('description');
@@ -224,6 +226,7 @@ piano and sound beautiful.',
             $table->dropColumn('dropdown_title');
             $table->dropColumn('bottom_title');
             $table->dropColumn('bottom_description');
+            $table->dropColumn('cohort_title');
         });
 
         Schema::dropIfExists('cohort_dropdowns');

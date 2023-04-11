@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->id();
             $table->integer('brand_id');
             $table->string('slug');
+            $table->string('cohort_title')->nullable();
             $table->string('header_logo')
                 ->nullable();
             $table->string('headline')
@@ -79,6 +80,7 @@ return new class extends Migration {
         });
 
         Schema::create('cohort_dropdowns', function (Blueprint $table) {
+            $table->id();
             $table->integer('cohort_id');
             $table->string('title');
             $table->longText('description');
