@@ -2,7 +2,7 @@
 class Prices
 {
     public static $plusSubscriptionAnnualFull = 240;
-    public static $plusSubscriptionAnnual = 200;
+    public static $plusSubscriptionAnnual = 240;
     public static $plusSubscriptionMonthlyFull = 30;
     public static $plusSubscriptionMonthly = 30;
 

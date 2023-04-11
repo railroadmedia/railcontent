@@ -18,9 +18,8 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/drum-set-maintenance', [LeadGenController::class, 'drumSetMaintenance']);
     Route::get('/drum-technique-made-easy/testimonials', [LeadGenController::class, 'dtmeTestimonials']);
     Route::get('/faster', [LeadGenController::class, 'faster']);
+    Route::get('/fwtgf', [LeadGenController::class, 'fasterNeon']);
     Route::get('/gavins-grooves', [LeadGenController::class, 'gavinsGrooves']);
-    Route::get('/get-faster', [LeadGenController::class, 'getFaster']);
-    Route::get('/get-faster-drums', [LeadGenController::class, 'getFaster']);
     Route::group(['prefix' => 'getting-started'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@gstd')

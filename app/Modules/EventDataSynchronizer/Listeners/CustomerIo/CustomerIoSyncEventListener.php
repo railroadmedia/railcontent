@@ -1198,7 +1198,9 @@ class CustomerIoSyncEventListener
                     'access_source' => $accessCode->getSource(),
                     'access_added_timestamp' => $accessCode->getUpdatedAt()->timestamp,
                     'code_creation_date' => $accessCode->getCreatedAt()->timestamp,
-                    'product_ids' => $accessCode->getProductIdsAsString()
+                    'product_ids' => $accessCode->getProductIdsAsString(),
+                    'referrer_id' => null,
+                    'musora_id' => null
 
                 ], null, Carbon::now()->timestamp
             ))->delay(
@@ -1281,7 +1283,9 @@ class CustomerIoSyncEventListener
                     'access_source' => 'saasquatch',
                     'access_added_timestamp' => $referrer->updated_at->timestamp,
                     'code_creation_date' => null,
-                    'product_ids' => $referralClaimed->getProductId()
+                    'product_ids' => $referralClaimed->getProductId(),
+                    'referrer_id' => $referralClaimed->getUserId(),  // the id of the new user created - MT-438
+                    'musora_id' => $referrer->user_id   // the person who generated the invite code - MT-438
                 ],
                 null,
                 Carbon::now()->timestamp

@@ -43,19 +43,15 @@ class MigrateOldGuitareoDeletedSongs extends Command
             $dbConn->table('railcontent_content')
                 ->select('id', 'type')
                 ->where('brand', 'guitareo')
-              //  ->where('status', 'deleted')
+                ->where('status', 'deleted')
                 ->whereIn(
                     'id',
                     [
                         191465,
                         191466,
-                        191467,
                         191468,
-                        191469,
-                        191470,
                         191481,
                         191484,
-                        198124,
                         216116,
                         222393,
                         222965,
@@ -65,7 +61,6 @@ class MigrateOldGuitareoDeletedSongs extends Command
                         240082,
                         240125,
                         240126,
-                        240127,
                         191362,
                     ]
                 )
@@ -82,12 +77,11 @@ class MigrateOldGuitareoDeletedSongs extends Command
                 ->whereIn('parent_id', $rows->pluck('id'))
                 ->get();
 
-//
-           // dd($childrens->pluck('child_id'));
+
             $dbConn->table('railcontent_content')
                 ->whereIn('id', $childrens->pluck('child_id'))
                 ->update([
-//                             'status' => 'draft',
+                             'status' => 'published',
                              'type' => 'course-part',
                          ]);
             $allIds = array_merge($rows->pluck('id')

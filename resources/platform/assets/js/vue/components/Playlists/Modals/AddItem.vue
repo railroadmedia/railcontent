@@ -255,6 +255,21 @@ onMounted(() => {
                 </fieldset>
             </div>
         </div>
+        <!-- No Playlists -->
+        <section v-if="formattedRows.length === 0" 
+                 class="tw-w-full tw-flex dark:tw-text-white tw-items-center tw-mt-[58px] tw-flex-col"
+        >
+            <div class="tw-h-[84px] tw-w-[84px] tw-mb-[30px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#223F57] dark:tw-bg-[#445F74] "
+            >
+                <musora-icon icon-name="playlist" class="tw-w-[36px]" />
+            </div>
+            <div>
+                <h1 class="tw-text-3xl tw-font-normal tw-font-open-sans tw-text-[16px] tw-mb-2">
+                    You haven't created any playlists yet.
+                </h1>
+            </div>
+        </section>
+        <!-- No Playlists -->
         <Table v-if="formattedRows.length" @onActionClick="handleActionClick" @onScroll="handleScroll"
             classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll" :stickyHeader="true" :rows="formattedRows">
             <template v-slot:actionContent="slotProps">
