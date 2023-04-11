@@ -189,6 +189,7 @@ class MigrateUserPlaylistToV2 extends Command
                                                 'type' => 'user-playlist',
                                                 'user_id' => $row->user_id,
                                                 'name' => 'My list - '.$index,
+                                                'category' => 'My List',
                                                 'created_at' => $row->created_at,
                                                 'migrated' => 1,
                                             ];
@@ -218,6 +219,7 @@ class MigrateUserPlaylistToV2 extends Command
                                                 'type' => 'user-playlist',
                                                 'user_id' => $row->user_id,
                                                 'name' => 'My list - '.$index,
+                                                'category' => 'My List',
                                                 'created_at' => $row->created_at,
                                                 'migrated' => 1,
                                             ];
@@ -258,6 +260,7 @@ class MigrateUserPlaylistToV2 extends Command
                                                     'type' => 'user-playlist',
                                                     'user_id' => $row->user_id,
                                                     'name' => 'My list - '.$index,
+                                                    'category' => 'My List',
                                                     'created_at' => $row->created_at,
                                                     'migrated' => 1,
                                                 ];
@@ -312,6 +315,7 @@ class MigrateUserPlaylistToV2 extends Command
                                                     'type' => 'user-playlist',
                                                     'user_id' => $row->user_id,
                                                     'name' => 'My list - '.$index,
+                                                    'category' => 'My List',
                                                     'created_at' => $row->created_at,
                                                     'migrated' => 1,
                                                 ];
@@ -369,6 +373,7 @@ class MigrateUserPlaylistToV2 extends Command
                                                     'type' => 'user-playlist',
                                                     'user_id' => $row->user_id,
                                                     'name' => 'My list - '.$index,
+                                                    'category' => 'My List',
                                                     'created_at' => $row->created_at,
                                                     'migrated' => 1,
                                                 ];
