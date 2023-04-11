@@ -35,7 +35,7 @@ class Cohort extends Resource
             Text::make('Cohort Title', 'cohort_title')->required(),
 
             Heading::make('Header'),
-            Image::make('Header Logo', 'header_logo')
+            Image::make('Dark Mode Logo', 'dark_mode_logo')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -58,14 +58,45 @@ class Cohort extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('header_logo')->getClientOriginalName();
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('dark_mode_logo')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;
 
                     return $value;
                 }),
-            Text::make('Header Logo', 'header_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Text::make('Dark Mode Logo', 'dark_mode_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Image::make('Light Mode Logo', 'light_mode_logo')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('light_mode_logo')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Light Mode Logo', 'light_mode_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Text::make('Headline')->hideFromIndex(),
             Text::make('Subheadline')->hideFromIndex(),
             Text::make('Header Description', 'header_description')->hideFromIndex(),
