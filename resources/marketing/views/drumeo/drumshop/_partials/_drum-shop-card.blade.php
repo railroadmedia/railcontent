@@ -4,11 +4,11 @@
             <section class="drum-shop">
                 <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url('{{ str_contains($thumbnail, 'cloudfront') ? $thumbnail : 'https://www.musora.com/musora-cdn/image/width=600,quality=85/'.$thumbnail }}')">
                     @if (!empty($badgeText))
-                        <span class="top-left-badge text-white bg-promo">
+                        <span class="top-left-badge bg-promo">
                             {!! $badgeText !!}
                         </span>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <span class="top-left-badge text-white bg-promo">
+                        <span class="top-left-badge bg-promo">
                             Save {{ round(100 - (100 * ($price / $fullPrice))) }}%
                         </span>
                     @endif

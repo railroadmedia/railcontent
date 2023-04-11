@@ -82,7 +82,14 @@
                 "noBreadcrumb" => true
             ])
     <a href="#customize-anchor" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-50 fixed" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
-        <h4 class="font-bebas uppercase mx-0 leading-none">QUIETKICK ANNIVERSARY &nbsp; &nbsp;</h4>
+
+        <img
+            class="h-8 sm:h-10 mr-4 transition-opacity opacity-0"
+            src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/anniversary-logo.png"
+            alt="sticky bar logo"
+            loading="lazy"
+            onload="this.classList.remove('opacity-0')"
+        />
         <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-none sm:leading-none">
             Save up to 25% on the<br>
             ultimate foot practice pad.
@@ -115,8 +122,8 @@
     <section class="text-left text-white px-5 sm:pl-5 sm:pr-0 bg-cover lazyload" style="background-color: #c1c6ca; color: #203e59;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/bg.jpg">
         <div class="container mx-auto max-w-6xl relative pb-8 md:py-10 lg:py-16">
             <div class="mx-auto mb-4 sm:mb-0 sm:absolute sm:top-0 sm:right-0 z-10 max-w-xs sm:max-w-full w-full sm:w-1/2 lg:w-7/12">
-                <img class="w-full img-toggle hidden active" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/quietkick-up2.png" alt="quietkick pedal">
-                <img class="w-full img-toggle hidden" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/quietkick-down2.png" alt="quietkick pedal">
+                <img class="w-full img-toggle hidden active" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Kick-up.png" alt="quietkick pedal">
+                <img class="w-full img-toggle hidden" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Kick-down.png" alt="quietkick pedal">
             </div>
             <div class="w-full sm:w-1/2 lg:w-5/12 z-20">
                 <h2 class="leading-none mb-3 lg:mb-5"><strong>Never skip leg day.</strong></h2>
@@ -191,10 +198,10 @@
             <h2><strong>Finally, a practice pad<br class="inline sm:hidden"> for your feet.</strong></h2>
             <h6 class="mt-2">(Kick pedal not included)</h6>
             <div class="flex flex-wrap my-5 sm:my-10">
-                <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/product-image03.jpg"></div></div>
-                <div class="p-1 w-full sm:w-8/12"><div class="h-32 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/product-image04.jpg"></div></div>
-                <div class="p-1 w-full sm:w-8/12"><div class="h-36 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/product-image02.jpg"></div></div>
-                <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/product-image01.jpg"></div></div>
+                <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Quietkick-gallery-03.jpg"></div></div>
+                <div class="p-1 w-full sm:w-8/12"><div class="h-32 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Quietkick-gallery-04.jpg"></div></div>
+                <div class="p-1 w-full sm:w-8/12"><div class="h-36 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Quietkick-gallery-02.jpg"></div></div>
+                <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Quietkick-gallery-01.jpg"></div></div>
             </div>
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
                 <p class="sm:max-w-md m-0 sm:pr-5 lg:pr-10 text-left mb-5 sm:mb-0">The QuietKick includes everything you need to start working out your foot. You’ll get three strike pads, one QuietKick unit, and one reverse-angle beater (with the option to add a second beater if you play double-kick).</p>

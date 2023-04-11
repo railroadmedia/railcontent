@@ -119,6 +119,7 @@
     x-data ='{
         soundslice : false,
         trailer : false,
+        qkModal: false,
     }'
 @endsection
 
@@ -147,6 +148,12 @@
 
     @endif
 
+    @include('._partials.components.sticky-bar',[
+        'link' => '#customize-anchor',
+        'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/april/faster-feet-logo-dark.png',
+        'text' => 'FREE QUIETKICK + TRAINING<br> PACKS ($754.99 VALUE!)',
+    ])
+    <div class="block w-full h-12 sm:h-14"></div>
 
     @php
         $features = [
@@ -196,14 +203,16 @@
     @include('musora.sales.components.header-section', [
         'header' => 'Online drum lessons for all skill levels.',
         'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
-        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
-        'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
-        'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo-m2.jpg',
+        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/april/header-image2.png',
+        'thumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/april/header-image2-m.jpg',
+        'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/april/header-image2.png',
+        'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/april/header-image2-m.jpg',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
         'students' => number_format(Prices::$students),
+        'noThumbShadow' => true,
     ])
 
     @hasSection('promo-banner')
@@ -550,42 +559,270 @@
             "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
         ])
     @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
-                'title' => 'Drumeo Drumsticks',
-                'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
-                'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
-                'shipping' => true,
-                ],
-                [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
-                'title' => 'Rock Drumming Masterclass',
-                'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
-                'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
-                ],
-                [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
-                'title' => 'Drum Technique Made Easy',
-                'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
-                'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
-                ],
-                [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
-                'title' => 'Independence Made Easy',
-                'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
-                'price' => floatval($productPrices['independence-made-easy-pack']->price),
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png',
-        'header' => 'Online drum lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
-        ])
+        <div style="background:linear-gradient(30deg, #0a3761, #0c1526);">
+            <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6" style="background:url(https://dpwjbsxqtam5n.cloudfront.net/sales/2023/order-bg-tile-2.png) center center/160px;">
+                <div class="container mx-auto max-w-6xl relative z-50">
+                    <div class="w-full">
+                        <div class="text-center">
+                            <img class="h-14 md:h-20 lg:h-24 transition-opacity" src="https://dpwjbsxqtam5n.cloudfront.net/promos/april/faster-feet-logo-light.png" alt="Promo logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        </div>
+                        <h4 class="leading-tight my-4 sm:my-5"><strong>
+                                Improve your kick foot anywhere <br class="inline lg:hidden">with 6 FREE bonuses</strong> <em class="text-coaches">($754.99 value)</em></h4>
+
+                        <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
+                            <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
+                                <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                                    <div class="  front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                        <div class="h-full w-full bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png);"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <p class="leading-tight text-sm  my-4 "><em>$240. Cancel anytime. 90-day guarantee.</em></p>
+                        <a class="join drumeo mb-6 md:mb-10 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" @click="qkModal = true;">GET Started »</a>
+                    </div>
+                    <div class="mx-auto max-w-xs sm:max-w-xl lg:max-w-full" style="font-size:0px">
+                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/5 " x-data="{
+                        flipped: false,
+                    }" x-on:click="
+                        flipped = !flipped;
+                        if(flipped){
+                            $refs.front.classList.add('rotate-y-180');
+                            $refs.back.classList.remove('-rotate-y-180');
+                            $refs.back.classList.add('rotate-y-0');
+                        }
+                        else {
+                            $refs.front.classList.remove('rotate-y-180');
+                            $refs.back.classList.add('-rotate-y-180');
+                            $refs.back.classList.remove('rotate-y-0');
+                        }
+                    ">
+                            <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
+                                <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
+                                    <div x-ref="front" class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
+                                        <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/july/quietkick_card.jpg);"></div>
+                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                            <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
+                                            <p class="text-sm"><strong>DETAILS</strong></p>
+                                        </div>
+                                    </div>
+                                    <div x-ref="back" class="back border-2 border-promo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
+                                        <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                            <p class="leading-normal mx-auto text-sm">Improve your kick foot anywhere with the portable &amp; quiet bass drum workout pad. Attaches to any single OR double pedal (pedal not included).</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="w-full leading-normal mt-2">
+
+                                <span style="text-transform:uppercase; display:inline-block;"><s class="opacity-40">$79</s> <strong class="text-promo">FREE</strong></span><br>
+                                <em>
+                                    Free Shipping
+                                </em>
+                            </p>
+                        </div>
+                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/5 " x-data="{
+                        flipped: false,
+                    }" x-on:click="
+                        flipped = !flipped;
+                        if(flipped){
+                            $refs.front.classList.add('rotate-y-180');
+                            $refs.back.classList.remove('-rotate-y-180');
+                            $refs.back.classList.add('rotate-y-0');
+                        }
+                        else {
+                            $refs.front.classList.remove('rotate-y-180');
+                            $refs.back.classList.add('-rotate-y-180');
+                            $refs.back.classList.remove('rotate-y-0');
+                        }
+                    ">
+                            <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
+                                <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
+                                    <div x-ref="front" class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
+                                        <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg);"></div>
+                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                            <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
+                                            <p class="text-sm"><strong>DETAILS</strong></p>
+                                        </div>
+                                    </div>
+                                    <div x-ref="back" class="back border-2 border-promo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
+                                        <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                            <p class="leading-normal mx-auto text-sm">Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="w-full leading-normal mt-2">
+
+                                <span style="text-transform:uppercase; display:inline-block;"><s class="opacity-40">$197</s> <strong class="text-promo">FREE</strong></span><br>
+                                <em>
+                                    Online Access
+                                </em>
+                            </p>
+                        </div>
+                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/5 " x-data="{
+                        flipped: false,
+                    }" x-on:click="
+                        flipped = !flipped;
+                        if(flipped){
+                            $refs.front.classList.add('rotate-y-180');
+                            $refs.back.classList.remove('-rotate-y-180');
+                            $refs.back.classList.add('rotate-y-0');
+                        }
+                        else {
+                            $refs.front.classList.remove('rotate-y-180');
+                            $refs.back.classList.add('-rotate-y-180');
+                            $refs.back.classList.remove('rotate-y-0');
+                        }
+                    ">
+                            <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
+                                <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
+                                    <div x-ref="front" class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
+                                        <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg);"></div>
+                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                            <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
+                                            <p class="text-sm"><strong>DETAILS</strong></p>
+                                        </div>
+                                    </div>
+                                    <div x-ref="back" class="back border-2 border-promo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
+                                        <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                            <p class="leading-normal mx-auto text-sm">Bruce Becker’s 26-week masterclass to improve your hand &amp; foot technique.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="w-full leading-normal mt-2">
+
+                                <span style="text-transform:uppercase; display:inline-block;"><s class="opacity-40">$197</s> <strong class="text-promo">FREE</strong></span><br>
+                                <em>
+                                    Online Access
+                                </em>
+                            </p>
+                        </div>
+                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/5 " x-data="{
+                        flipped: false,
+                    }" x-on:click="
+                        flipped = !flipped;
+                        if(flipped){
+                            $refs.front.classList.add('rotate-y-180');
+                            $refs.back.classList.remove('-rotate-y-180');
+                            $refs.back.classList.add('rotate-y-0');
+                        }
+                        else {
+                            $refs.front.classList.remove('rotate-y-180');
+                            $refs.back.classList.add('-rotate-y-180');
+                            $refs.back.classList.remove('rotate-y-0');
+                        }
+                    ">
+                            <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
+                                <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
+                                    <div x-ref="front" class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
+                                        <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg);"></div>
+                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                            <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
+                                            <p class="text-sm"><strong>DETAILS</strong></p>
+                                        </div>
+                                    </div>
+                                    <div x-ref="back" class="back border-2 border-promo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
+                                        <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                            <p class="leading-normal mx-auto text-sm">Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="w-full leading-normal mt-2">
+
+                                <span style="text-transform:uppercase; display:inline-block;"><s class="opacity-40">$197</s> <strong class="text-promo">FREE</strong></span><br>
+                                <em>
+                                    Online Access
+                                </em>
+                            </p>
+                        </div>
+                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/5 " x-data="{
+                        flipped: false,
+                    }" x-on:click="
+                        flipped = !flipped;
+                        if(flipped){
+                            $refs.front.classList.add('rotate-y-180');
+                            $refs.back.classList.remove('-rotate-y-180');
+                            $refs.back.classList.add('rotate-y-0');
+                        }
+                        else {
+                            $refs.front.classList.remove('rotate-y-180');
+                            $refs.back.classList.add('-rotate-y-180');
+                            $refs.back.classList.remove('rotate-y-0');
+                        }
+                    ">
+                            <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
+                                <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
+                                    <div x-ref="front" class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
+                                        <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/creative-control.jpg);"></div>
+                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                            <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
+                                            <p class="text-sm"><strong>DETAILS</strong></p>
+                                        </div>
+                                    </div>
+                                    <div x-ref="back" class="back border-2 border-promo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
+                                        <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                            <p class="leading-normal mx-auto text-sm">Thomas Lang’s innovative system for developing technique so you can play more effectively in any style of music. Includes more than four hours of video.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="w-full leading-normal mt-2">
+
+                                <span style="text-transform:uppercase; display:inline-block;"><s class="opacity-40">$29.99</s> <strong class="text-promo">FREE</strong></span><br>
+                                <em>
+                                    Online Access
+                                </em>
+                            </p>
+                        </div>
+                        <div class="flex flex-wrap sm:flex-nowrap justify-center items-start my-2 sm:my-4">
+                            <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
+                                <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/pianote-bonus.jpg">
+                                <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/pianote-bonus-m.jpg">
+                                <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">PIANO LESSONS INCLUDED</p>
+                            </div>
+                            <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
+                                <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guitareo-bonus.jpg">
+                                <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guitareo-bonus-m.jpg">
+                                <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">GUITAR LESSONS INCLUDED</p>
+                            </div>
+                            <div class="relative mb-3 sm:mb-0 mx-1 sm:mx-2 lg:mx-3">
+                                <img alt="brand tile" class="hidden sm:inline-block sm:h-24 md:h-28 lg:h-36 rounded-xl" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/singeo-bonus.jpg">
+                                <img alt="brand tile" class="sm:hidden inline-block h-44 rounded-xl" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/singeo-bonus-m.jpg">
+                                <p class="absolute w-full text-sm lg:text-base uppercase font-bebas" style="bottom: 20%;">SINGING LESSONS INCLUDED</p>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="join drumeo my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" @click="qkModal = true;">GET Started »</a>
+                    <br>
+                    <a class="inline-block text-light-navy mt-2" href="/ecommerce/add-to-cart?products[DLM-1-month]=1&amp;locked=true"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">$30/month. (no bonuses)</em></u></p></a>
+                </div>
+            </section>
+        </div>
+        @component('_partials.components.modal', ['name' => 'qkModal'])
+            @slot('content')
+                <div class="max-w-2xl mx-auto">
+                    <div class="bg-white py-5 md:py-10 px-4 md:px-5 rounded-xl text-center">
+                        <h5 class="leading-tight mb-5">Choose your QuietKick setup<br>
+                            <strong>single or double pedal:</strong></h5>
+                        <a class="join drumeo mb-3 w-full"
+                            href="/ecommerce/add-to-cart?product-array=DLM-1-year:1,quietkick:1,drum-technique-made-easy-pack:1,rock-drumming-masterclass-pack:1,independence-made-easy-pack:1,CC-DIGI:1&locked=true"
+                        >Single Kick &raquo;</a>
+                        <a class="join drumeo w-full"
+                            href="/ecommerce/add-to-cart?product-array=DLM-1-year:1,quietkick:1,quietkick-beater:1,drum-technique-made-easy-pack:1,rock-drumming-masterclass-pack:1,independence-made-easy-pack:1,CC-DIGI:1&locked=true"
+                        >Double Kick &raquo;</a>
+                    </div>
+                </div>
+            @endslot
+        @endcomponent
     @else
         @include('musora.sales.components.order-section-collage', [
         'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
