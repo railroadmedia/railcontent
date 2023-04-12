@@ -34,7 +34,7 @@ class MigrateMinutesWatchedPointsJob extends Job
                 $point->trigger_name = 'minutes_of_content_watched2';
                 $point->trigger_hash = $hash;
                 $point->trigger_hash_data = $data;
-                $point->points_description = 'Awarded points for every minute of video watched.';
+                $point->points_description = null;
                 $point->save();
             } else {
                 $existingPoint->points += $point->points;

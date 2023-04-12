@@ -470,7 +470,7 @@ class ContentProgressEventListener
                     ],
                     'minutes_of_content_watched2', //Change back after migration complete
                     $points,
-                    'Awarded for every minute of video watched.',
+                    null, //unnecessary use of space here, could infer it from trigger name
                     $mediaPlaybackTracked->brand
                 );
 
