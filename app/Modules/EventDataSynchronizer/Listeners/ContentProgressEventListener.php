@@ -465,8 +465,7 @@ class ContentProgressEventListener
                 $this->userPointsService->setPoints(
                     $mediaPlaybackTracked->userId,
                     [
-                        'content_id' => $content['content_id'],
-                        'minutes_watched' => 'all',
+                        'content_id' => $content['content_id']
                     ],
                     'minutes_of_content_watched2', //Change back after migration complete
                     $points,

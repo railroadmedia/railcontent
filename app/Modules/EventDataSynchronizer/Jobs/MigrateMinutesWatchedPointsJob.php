@@ -19,8 +19,7 @@ class MigrateMinutesWatchedPointsJob extends Job
             $unserialized = unserialize($point->trigger_hash_data);
             $contentId = $unserialized["content_id"];
             $data = serialize([
-                'content_id' => $contentId,
-                'minutes_watched' => 'all',
+                'content_id' => $contentId
             ]);
             $hash = md5($data);
 
