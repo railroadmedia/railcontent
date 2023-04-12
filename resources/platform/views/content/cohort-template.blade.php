@@ -19,13 +19,7 @@
             <div class="tw-max-w-5xl tw-mx-auto">
                 <div class="md:tw-flex tw-items-center tw-gap-6 tw-mb-12 tw-text-center md:tw-text-left">
                     <div class="md:tw-flex-1">
-                        <img
-                            class="tw-h-14 sm:tw-h-18 lg:tw-h-20 tw-mb-2 tw-inline-block tw-transition-opacity tw-opacity-0"
-                            alt="header logo"
-                            src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['light_mode_logo']??'' }}"
-                            loading="lazy"
-                            onload="this.classList.remove('tw-opacity-0')"
-                        />
+                        <img class="tw-h-14 sm:tw-h-18 lg:tw-h-20 tw-mb-2 tw-inline-block " alt="header logo" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['light_mode_logo']??'' }}" />
                         <h1 class="tw-font-extrabold tw-text-3xl lg:tw-text-4xl">{{ $cohort['headline'] }}</h1>
                         <h2 class="tw-font-normal tw-text-2xl lg:tw-text-3xl">{{ $cohort['subheadline'] }}</h2>
                         <p class="tw-font-bold tw-mt-4 lg:tw-mt-6 tw-mb-7 lg:tw-mb-9">{{ $cohort['header_description'] }}</p>
@@ -40,23 +34,16 @@
                             <div class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" x-on:click="trailer = true"><i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div></div>
                         </div>
                         <div class="md:tw-flex @if($hasProduct) md:tw-items-start @else md:tw-items-center @endif">
-                            @if($enrollmentClosed)
+                            @if($hasProduct)
                                 <div class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
-                                    <span class="tw-uppercase tw-bg-[#65656B] tw-rounded-full tw-py-2 tw-w-full tw-text-white tw-text-center tw-font-bebas-neue tw-inline-block">JOIN WAITLIST!</span>
-                                </div>
-                            @elseif($hasProduct)
-                                <div class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
-                                    <span class="tw-uppercase tw-bg-[#65656B] tw-rounded-full tw-py-2 tw-w-full tw-text-white tw-text-center tw-font-bebas-neue tw-inline-block">YOU'RE ENROLLED!</span>
+                                    <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
                                     <a href="{{$cohort['course_url']}}" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
                                 </div>
                             @else
-{{--                                <a--}}
-{{--                                    href="{{ $registerButtonUrl }}"--}}
-{{--                                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>--}}
-                                <button onclick="enroll('{{ $registerButtonUrl }}');" class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue md:tw-mr-2 tw-max-w-[415px] tw-inline-block tw-mb-5 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600" data-open-modal="signupModal">Enroll Now</button>
+                                <button onclick="enroll('{{ $registerButtonUrl }}');" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
                             @endif
 
-                            <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start @if($hasProduct) md:tw-mt-1 @endif">
+                            <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start @if($hasProduct) md:tw-mt-2 @endif">
                                 <img
                                     class="tw-h-8 md:tw-h-6 tw-mr-1 tw-transition-opacity tw-opacity-0"
                                     src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
@@ -193,12 +180,12 @@
                 @endforeach
                 <h3 class="tw-font-extrabold tw-text-center tw-mt-10">{{ $cohort['bottom_title'] }}</h3>
                 <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">{{ $cohort['bottom_description'] }}</p>
-                <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4">
+                <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
                     @if($hasProduct)
-                        <span class="tw-uppercase tw-bg-[#65656B] tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue tw-mb-2 md:tw-mb-0">YOU'RE ENROLLED!</span>
+                        <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                     @else
-                        <button onclick="enroll('{{ $registerButtonUrl }}');" class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
-                        <a class="tw-uppercase tw-border-2 tw-border-black tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-center tw-font-bebas-neue tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
+                        <button onclick="enroll('{{ $registerButtonUrl }}');" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
+                        <a class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
                     @endif
                 </div>
                 <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
@@ -234,8 +221,8 @@
                         The course runs from {{ date('F d', strtotime($cohort['start_date'])) }} - {{ date('F d', strtotime($cohort['end_date'])) }}. We’ll notify you before the course begins.
                     </p>
                     <div>
-                        <a href="{{$homeUrl}}" class="tw-btn-primary tw-bg-[#000C17] tw-border-white tw-text-white tw-mr-2 hover:tw-bg-white hover:tw-text-[#000C17]">Go home</a>
-                        <a href="{{$cohort['course_url']}}" class="tw-btn-primary tw-bg-white tw-text-[#00101D] hover:tw-bg-[#627F97] hover:tw-text-white">Go to course</a>
+                        <a href="{{$homeUrl}}" class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]">Go home</a>
+                        <a href="{{$cohort['course_url']}}" class="tw-btn-primary tw-bg-[#00101D] tw-text-white hover:tw-bg-[#3F3F46] dark:tw-bg-white dark:tw-text-[#00101D] dark:hover:tw-bg-[#627F97] dark:hover:tw-text-white">Go to course</a>
                     </div>
                 </div>
             </div>
@@ -262,12 +249,14 @@
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 },
                 referrerPolicy: 'no-referrer',
-                body: JSON.stringify({
-                })
             })
-                .then(response => response.json())
+                .then((response) => {
+                    window.openModal('signupModal');
+                })
                 .catch((e) => {
-                    showErrorToast();
+                    window.shownotification({
+                        isError: true
+                    });
                 });
         }
     </script>
