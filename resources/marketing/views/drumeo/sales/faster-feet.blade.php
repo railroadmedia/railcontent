@@ -151,7 +151,7 @@
     @include('._partials.components.sticky-bar',[
         'link' => '#customize-anchor',
         'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/april/faster-feet-logo-dark.png',
-        'text' => 'FREE QUIETKICK + TRAINING<br> PACKS ($754.99 VALUE!)',
+        'text' => 'FREE QUIETKICK + 5 MORE<br> BONUSES ($754.99 VALUE!)',
     ])
     <div class="block w-full h-12 sm:h-14"></div>
 
@@ -583,7 +583,7 @@
                         <a class="join drumeo mb-6 md:mb-10 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" @click="qkModal = true;">GET Started »</a>
                     </div>
                     <div class="mx-auto max-w-xs sm:max-w-xl lg:max-w-full" style="font-size:0px">
-                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/5 " x-data="{
+                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -623,7 +623,47 @@
                                 </em>
                             </p>
                         </div>
-                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/5 " x-data="{
+                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/6 " x-data="{
+                        flipped: false,
+                    }" x-on:click="
+                        flipped = !flipped;
+                        if(flipped){
+                            $refs.front.classList.add('rotate-y-180');
+                            $refs.back.classList.remove('-rotate-y-180');
+                            $refs.back.classList.add('rotate-y-0');
+                        }
+                        else {
+                            $refs.front.classList.remove('rotate-y-180');
+                            $refs.back.classList.add('-rotate-y-180');
+                            $refs.back.classList.remove('rotate-y-0');
+                        }
+                    ">
+                            <div class="flip-div inline-block relative w-full group" style=" padding-bottom: 133%;  perspective: 1000px;">
+                                <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
+                                    <div x-ref="front" class="border-2 border-promo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style=" backface-visibility: hidden;">
+                                        <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/pad.jpg);"></div>
+                                        <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
+                                            <i class="fas fa-arrow-right text-4xl" aria-hidden="true"></i><br>
+                                            <p class="text-sm"><strong>DETAILS</strong></p>
+                                        </div>
+                                    </div>
+                                    <div x-ref="back" class="back border-2 border-promo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700 -rotate-y-180" style="backface-visibility: hidden;">
+                                        <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
+                                            <p class="leading-normal mx-auto text-sm">Practice anywhere with two full-size playing surfaces.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <p class="w-full leading-normal mt-2">
+
+                                <span style="text-transform:uppercase; display:inline-block;"><s class="opacity-40">$35</s> <strong class="text-promo">FREE</strong></span><br>
+                                <em>
+                                    Free Shipping
+                                </em>
+                            </p>
+                        </div>
+                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -663,7 +703,7 @@
                                 </em>
                             </p>
                         </div>
-                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/5 " x-data="{
+                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -703,7 +743,7 @@
                                 </em>
                             </p>
                         </div>
-                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/5 " x-data="{
+                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -743,7 +783,7 @@
                                 </em>
                             </p>
                         </div>
-                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/5 " x-data="{
+                        <div class="bonus-wrap relative inline-block align-top mx-auto mb-4 px-1 md:px-3  w-1/2 md:w-1/3 lg:w-1/6 " x-data="{
                         flipped: false,
                     }" x-on:click="
                         flipped = !flipped;
@@ -814,10 +854,10 @@
                         <h5 class="leading-tight mb-5">Choose your QuietKick setup<br>
                             <strong>single or double pedal:</strong></h5>
                         <a class="join drumeo mb-3 w-full"
-                            href="/ecommerce/add-to-cart?product-array=DLM-1-year:1,quietkick:1,drum-technique-made-easy-pack:1,rock-drumming-masterclass-pack:1,independence-made-easy-pack:1,CC-DIGI:1&locked=true"
+                            href="/ecommerce/add-to-cart?product-array=DLM-1-year:1,quietkick:1,quietpad:1,drum-technique-made-easy-pack:1,rock-drumming-masterclass-pack:1,independence-made-easy-pack:1,CC-DIGI:1&locked=true"
                         >Single Kick &raquo;</a>
                         <a class="join drumeo w-full"
-                            href="/ecommerce/add-to-cart?product-array=DLM-1-year:1,quietkick:1,quietkick-beater:1,drum-technique-made-easy-pack:1,rock-drumming-masterclass-pack:1,independence-made-easy-pack:1,CC-DIGI:1&locked=true"
+                            href="/ecommerce/add-to-cart?product-array=DLM-1-year:1,quietkick:1,quietkick-beater:1,quietpad:1,drum-technique-made-easy-pack:1,rock-drumming-masterclass-pack:1,independence-made-easy-pack:1,CC-DIGI:1&locked=true"
                         >Double Kick &raquo;</a>
                     </div>
                 </div>
