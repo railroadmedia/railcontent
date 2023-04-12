@@ -18,7 +18,7 @@ class MigrateMinutesWatchedPoints extends Command
         for (
             $i = 0; $i < $n; $i++
         ) {
-            $jobs[] = new MigrateMinutesWatchedPointsJob($this, $i);
+            $jobs[] = new MigrateMinutesWatchedPointsJob($this, $i + 1);
         }
 
         $this->dispatchChainedJobs($jobs);
