@@ -115,6 +115,13 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
     }
+    public function choosePlanVDF()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.pages.vdf', ['products' => $products, 'theme' => 'drumeo']);
+    }
     public function choosePlan()
     {
         $products = $this->productRepository->all();
