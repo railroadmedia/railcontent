@@ -187,13 +187,6 @@ class SalesController extends BaseController
 
         return view('drumeo.products.quietkick', ['products' => $products, 'theme' => 'drumeo']);
     }
-    public function quietKickMembers()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.products.quietkick-members', ['products' => $products, 'theme' => 'drumeo']);
-    }
     public function eardrums()
     {
         $products = $this->productRepository->all();
