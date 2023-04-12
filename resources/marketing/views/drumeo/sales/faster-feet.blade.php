@@ -203,9 +203,9 @@
     @include('musora.sales.components.header-section', [
         'header' => 'Online drum lessons for all skill levels.',
         'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
-        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/april/header-image2.png',
+        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/april/header-image3.png',
         'thumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/april/header-image2-m.jpg',
-        'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/april/header-image2.png',
+        'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/april/header-image3.png',
         'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/april/header-image2-m.jpg',
         'pointOne' => 'Improve Your Skills',
         'pointTwo' => 'World-Class Teachers',
