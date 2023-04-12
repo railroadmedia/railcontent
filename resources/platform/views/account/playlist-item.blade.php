@@ -60,6 +60,8 @@
         user-avatar="{{ user()->profile_picture_url }}" user-xp="{{ user()->totalXP() }}"
         :playlist-item-position="{{ $positionInPlaylist }}"
         :playlist-item-id="{{ $playlistItem['id'] }}"
+        :start-second="{{ $playlistItem['start_second'] }}"
+        :end-second="{{ $playlistItem['end_second'] }}"
         user-access-level="{{ user()->access_level }}">
     </playlist-playback-wrapper>
 @endsection
