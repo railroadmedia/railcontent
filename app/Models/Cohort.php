@@ -26,8 +26,8 @@ class Cohort extends Model
 
 //    protected $revisionForceDeleteEnabled = true;
     protected $casts = [
-        'start_date' => 'datetime',
-        'end_date' => 'datetime',
+        'start_date' => 'datetime:Y-m-d H:i:s',
+        'end_date' => 'datetime:Y-m-d H:i:s',
     ];
 
 

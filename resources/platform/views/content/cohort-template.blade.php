@@ -40,13 +40,20 @@
                             <div class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" x-on:click="trailer = true"><i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div></div>
                         </div>
                         <div class="md:tw-flex @if($hasProduct) md:tw-items-start @else md:tw-items-center @endif">
-                            @if($hasProduct)
+                            @if($enrollmentClosed)
+                                <div class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
+                                    <span class="tw-uppercase tw-bg-[#65656B] tw-rounded-full tw-py-2 tw-w-full tw-text-white tw-text-center tw-font-bebas-neue tw-inline-block">JOIN WAITLIST!</span>
+                                </div>
+                            @elseif($hasProduct)
                                 <div class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
                                     <span class="tw-uppercase tw-bg-[#65656B] tw-rounded-full tw-py-2 tw-w-full tw-text-white tw-text-center tw-font-bebas-neue tw-inline-block">YOU'RE ENROLLED!</span>
-                                    <a class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
+                                    <a href="{{$cohort['course_url']}}" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
                                 </div>
                             @else
-                                <button href="{{ $registerButtonUrl }}" class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue md:tw-mr-2 tw-max-w-[415px] tw-inline-block tw-mb-5 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600" data-open-modal="signupModal">Enroll Now</button>
+{{--                                <a--}}
+{{--                                    href="{{ $registerButtonUrl }}"--}}
+{{--                                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>--}}
+                                <button onclick="enroll('{{ $registerButtonUrl }}');" class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue md:tw-mr-2 tw-max-w-[415px] tw-inline-block tw-mb-5 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600" data-open-modal="signupModal">Enroll Now</button>
                             @endif
 
                             <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start @if($hasProduct) md:tw-mt-1 @endif">
@@ -190,9 +197,9 @@
                     @if($hasProduct)
                         <span class="tw-uppercase tw-bg-[#65656B] tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue tw-mb-2 md:tw-mb-0">YOU'RE ENROLLED!</span>
                     @else
-                        <button class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
+                        <button onclick="enroll('{{ $registerButtonUrl }}');" class="tw-uppercase tw-bg-{{ $brand }} tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-white tw-text-center tw-font-bebas-neue tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
+                        <a class="tw-uppercase tw-border-2 tw-border-black tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-center tw-font-bebas-neue tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
                     @endif
-                    <a class="tw-uppercase tw-border-2 tw-border-black tw-rounded-full tw-py-2 tw-w-full md:tw-w-1/2 tw-text-center tw-font-bebas-neue tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
                 </div>
                 <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                     <img
@@ -227,8 +234,8 @@
                         The course runs from {{ date('F d', strtotime($cohort['start_date'])) }} - {{ date('F d', strtotime($cohort['end_date'])) }}. We’ll notify you before the course begins.
                     </p>
                     <div>
-                        <a class="tw-btn-primary tw-bg-[#000C17] tw-border-white tw-text-white tw-mr-2 hover:tw-bg-white hover:tw-text-[#000C17]">Go home</a>
-                        <a class="tw-btn-primary tw-bg-white tw-text-[#00101D] hover:tw-bg-[#627F97] hover:tw-text-white">Go to course</a>
+                        <a href="{{$homeUrl}}" class="tw-btn-primary tw-bg-[#000C17] tw-border-white tw-text-white tw-mr-2 hover:tw-bg-white hover:tw-text-[#000C17]">Go home</a>
+                        <a href="{{$cohort['course_url']}}" class="tw-btn-primary tw-bg-white tw-text-[#00101D] hover:tw-bg-[#627F97] hover:tw-text-white">Go to course</a>
                     </div>
                 </div>
             </div>
@@ -245,4 +252,23 @@
             'countdownDate' => $cohort['end_date'],
             'promoVersion' => false
         ])
+
+    <script type="application/javascript">
+        function enroll(URL){
+            fetch(URL, {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify({
+                })
+            })
+                .then(response => response.json())
+                .catch((e) => {
+                    showErrorToast();
+                });
+        }
+    </script>
 @endsection

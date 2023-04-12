@@ -2,23 +2,33 @@
 
 namespace App\Http\Controllers\Platform;
 
-use App\Models\Brand;
-
-use App\Models\Cohort;
+use App\Modules\Content\Services\CohortService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use Railroad\Ecommerce\Entities\Product;
+use Railroad\Ecommerce\Entities\User;
+use Railroad\Ecommerce\Repositories\ProductRepository;
+use Railroad\Ecommerce\Services\UserProductService as EcommerceUserProductService;
 
 class CohortPackController
 {
 
+    private ProductRepository $productRepository;
     private UserProductService $userProductService;
+    private EcommerceUserProductService $ecommerceUserProductService;
+    private CohortService $cohortService;
 
     public function __construct(
-        UserProductService $userProductService
+        UserProductService $userProductService,
+        EcommerceUserProductService $ecommerceUserProductService,
+        ProductRepository $productRepository,
+        CohortService $cohortService
     ) {
         $this->userProductService = $userProductService;
+        $this->ecommerceUserProductService = $ecommerceUserProductService;
+        $this->productRepository = $productRepository;
+        $this->cohortService = $cohortService;
     }
 
     /**
@@ -30,26 +40,22 @@ class CohortPackController
      */
     public function template(Request $request, $domain, $brand, $slug)
     {
-        $brandId =
-            Brand::query()
-                ->where('name', brand())
-                ->first()->id;
+        $cohort = $this->cohortService->getCohort($slug);
 
-        $cohort =
-            Cohort::query()
-                ->where('slug', $slug)
-                ->where('brand_id', $brandId)
-                ->first();
-
-        $productId = $cohort['pack_id'];
-       // $productId = 516;
+        $productId = $cohort['product_id'];
+        $product = $this->productRepository->findProduct($productId);
 
         $hasProduct = user() && $this->userProductService->hasProductNotCached(user()?->id, $productId);
         $nPackOwners = $this->userProductService->getNumberProductOwners($productId);
-        $registerButtonUrl = (!$hasProduct)?'/cohort-packs/register/30-day-drummer-2':'#final';
+        $registerButtonUrl =
+            (!$hasProduct) ?
+                url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->getSku()]) :
+                '#final';
+
         $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $cohort['end_date']);
+        $startDate = Carbon::createFromFormat('Y-m-d H:i:s', $cohort['start_date']);
         $now = Carbon::now();
-        $enrollmentClosed = $endDate->lessThanOrEqualTo($now);
+        $enrollmentClosed = $endDate->lessThan($now) || $startDate->greaterThan($now);
 
         return view('content.cohort-template', [
             'hasProduct' => $hasProduct,
@@ -57,8 +63,48 @@ class CohortPackController
             'registerButtonUrl' => $registerButtonUrl,
             'brand' => brand(),
             'cohort' => $cohort,
-            'enrollmentClosed' => $enrollmentClosed
+            'enrollmentClosed' => $enrollmentClosed,
+            'homeUrl' => url()->route('platform.home', ['brand' => brand()]),
         ]);
+    }
+
+    public function register(Request $request, $domain, $brand, $sku)
+    {
+        $successMessage = 'Success! You have registered. Check your email for the details.';
+
+        return $this->registerForProductPack($sku, $successMessage);
+    }
+
+    /**
+     * @param string $sku
+     * @param string $successMessage
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Throwable
+     */
+    private function registerForProductPack(string $sku, string $successMessage)
+    {
+        if (user()?->isAMember()) {
+            $user = new User(user()->id, user()->email);
+
+            /** @var Product $product */
+            $product = $this->productRepository->bySku($sku);
+            $this->ecommerceUserProductService->assignUserProduct($user, $product, null, 1);
+
+            return redirect()
+                ->back()
+                ->with(
+                    'success-message',
+                    $successMessage
+                );
+        }
+
+        $urlParams = [];
+        $urlParams['products'][$sku] = 1;
+        $urlParams['locked'] = true;
+        $queryString = http_build_query($urlParams);
+
+        return redirect()->away('/ecommerce/add-to-cart?'.$queryString);
     }
 
 }

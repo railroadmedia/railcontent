@@ -628,17 +628,19 @@ Route::domain('{musoraDomain}')
             ->name('platform.request-song');
 
         Route::get(
-            '/{brand}/{primaryPage}',
+            '/{brand}/{cohort}',
             [\App\Http\Controllers\Platform\CohortPackController::class, 'template']
         )
             ->whereIn('brand', ['pianote', 'drumeo'])
             ->whereIn(
-                'primaryPage',
+                'cohort',
                 [
-                    'Drumeo-30-day-drummer', '30-day-drummer','Pianote-piano','Pianote-Pianote-piano'
+                    '30-day-drummer','new-piano-players'
                 ]
             )
             ->name('platform.cohort');
+
+        Route::get('{brand}/cohort-packs/register/{product}', [\App\Http\Controllers\Platform\CohortPackController::class, 'register'] )->name('platform.cohort.register');
     });
 
 /*

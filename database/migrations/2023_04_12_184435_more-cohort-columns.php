@@ -4,8 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+
+return new class extends Migration {
     /**
      * Run the migrations.
      *
@@ -13,30 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        //
+        return ;
         Schema::table('cohorts', function (Blueprint $table) {
-            $table->renameColumn('description', 'body_top_description');
-            $table->renameColumn('cohort_thrailer', 'cohort_trailer');
-            $table->renameColumn('cohort_image_url', 'header_image_url');
-            $table->renameColumn('logo', 'dark_mode_logo');
-            $table->renameColumn('title', 'body_title');
-            $table->string('cohort_title')->nullable();
-            $table->string('header_description')->nullable();
-            $table->string('body_image_url')->nullable();
-            $table->string('body_logo')->nullable();
-            $table->longText('body_bottom_description')->nullable();
-            $table->string('dropdown_title')->nullable();
-            $table->string('bottom_title')->nullable();
-            $table->string('bottom_description')->nullable();
-            $table->string('light_mode_logo')->nullable();
-        });
+            $table->renameColumn('pack_id','product_id');
 
-        Schema::create('cohort_dropdowns', function (Blueprint $table) {
-            $table->id();
-            $table->integer('cohort_id');
-            $table->string('title');
-            $table->longText('description');
-            $table->timestamps();
+            $table->string('course_url')
+                ->nullable();
         });
 
         \App\Models\Cohort::truncate();
@@ -88,13 +70,14 @@ This isn’t a “watch a lesson, go do something else for 10 days, watch anothe
                 'icon3_copy' => 'Play your favorite songs with excellent timing & feel.',
                 'cohort_trailer' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/video-reel2.mp4',
 
-                'pack_id' => 190
+                'product_id' => 516,
+                'course_url' => 'https://dev.musora.com:8443/drumeo/packs/30-day-drummer-season-2/383627'
             ],
             [
                 'brand_id' => 2,
                 'dark_mode_logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/Frame+289709.svg',
                 'light_mode_logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-2+1.png',
-                'slug' => 'Pianote-piano',
+                'slug' => 'new-piano-players',
                 'headline' => 'Online piano lessons',
                 'subheadline' => 'for all skill levels.',
                 'body_title' => 'Learn the piano in 30 days.',
@@ -117,8 +100,8 @@ It only takes 10 minutes a day.',
                 'dropdown_title' => 'Still have questions?',
                 'dropdowns' => [
                     [
-                        'title' => 'What is Pianote?',
-                        'description' => 'Pianote is an online platform that offers an organized piano lesson curriculum, artist courses on popular topics, 1000+ songs transcribed note-for-note, and a supportive global community of students and teachers.',
+                      'title' => 'What is Pianote?',
+                      'description' => 'Pianote is an online platform that offers an organized piano lesson curriculum, artist courses on popular topics, 1000+ songs transcribed note-for-note, and a supportive global community of students and teachers.',
                     ],
                     [
                         'title' => 'Is Pianote good for beginners?',
@@ -153,50 +136,52 @@ It only takes 10 minutes a day.',
 piano and sound beautiful.',
                 'cohort_trailer' => '//player.vimeo.com/video/798501810?autoplay=1',
 
-                'pack_id' => 240
+                'product_id' => 517,
+                'course_url' => 'https://dev.musora.com:8443/pianote/packs/new-piano-players-start-here/383674/new-piano-players-start-here/383675'
             ],
         ];
 
         foreach ($cohorts as $cohort) {
             $addcohort = \App\Models\Cohort::create([
-                'brand_id' => $cohort['brand_id'],
-                'dark_mode_logo' => $cohort['dark_mode_logo'],
-                'light_mode_logo' => $cohort['light_mode_logo'] ?? null,
-                'slug' => $cohort['slug'],
-                'headline' => $cohort['headline'],
-                'subheadline' => $cohort['subheadline'],
-                'header_description' => $cohort['header_description'],
-                'header_image_url' => $cohort['header_image_url'],
+                                           'brand_id' => $cohort['brand_id'],
+                                           'dark_mode_logo' => $cohort['dark_mode_logo'],
+                                            'light_mode_logo' => $cohort['light_mode_logo'] ?? null,
+                                           'slug' => $cohort['slug'],
+                                           'headline' => $cohort['headline'],
+                                           'subheadline' => $cohort['subheadline'],
+                                           'header_description' => $cohort['header_description'],
+                                           'header_image_url' => $cohort['header_image_url'],
 
-                'body_title' => $cohort['body_title'],
-                'body_top_description' => $cohort['body_top_description'],
-                'body_image_url' => $cohort['body_image_url'],
-                'body_bottom_description' => $cohort['body_bottom_description'],
-                'body_logo' => $cohort['body_logo'],
+                                            'body_title' => $cohort['body_title'],
+                                           'body_top_description' => $cohort['body_top_description'],
+                                            'body_image_url' => $cohort['body_image_url'],
+                                            'body_bottom_description' => $cohort['body_bottom_description'],
+                                            'body_logo' => $cohort['body_logo'],
 
-                'dropdown_title' => $cohort['dropdown_title'],
+                                            'dropdown_title' => $cohort['dropdown_title'],
 
-                'bottom_title' => $cohort['bottom_title'],
-                'bottom_description' => $cohort['bottom_description'],
+                                            'bottom_title' => $cohort['bottom_title'],
+                                            'bottom_description' => $cohort['bottom_description'],
 
-                'start_date' => $cohort['start_date'],
-                'end_date' => $cohort['end_date'],
+                                           'start_date' => $cohort['start_date'],
+                                           'end_date' => $cohort['end_date'],
 
-                'icon1' => $cohort['icon1'],
-                'icon1_title' => $cohort['icon1_title'],
-                'icon1_copy' => $cohort['icon1_copy'],
+                                           'icon1' => $cohort['icon1'],
+                                           'icon1_title' => $cohort['icon1_title'],
+                                           'icon1_copy' => $cohort['icon1_copy'],
 
-                'icon2' => $cohort['icon2'],
-                'icon2_title' => $cohort['icon2_title'],
-                'icon2_copy' => $cohort['icon2_copy'],
+                                           'icon2' => $cohort['icon2'],
+                                           'icon2_title' => $cohort['icon2_title'],
+                                           'icon2_copy' => $cohort['icon2_copy'],
 
-                'icon3' => $cohort['icon3'],
-                'icon3_title' => $cohort['icon3_title'],
-                'icon3_copy' => $cohort['icon3_copy'],
+                                           'icon3' => $cohort['icon3'],
+                                           'icon3_title' => $cohort['icon3_title'],
+                                           'icon3_copy' => $cohort['icon3_copy'],
 
-                'cohort_trailer' => $cohort['cohort_trailer'],
-                'pack_id' => $cohort['pack_id'],
-            ]);
+                                           'cohort_trailer' => $cohort['cohort_trailer'],
+                                                        'product_id' => $cohort['product_id'],
+                'course_url' => $cohort['course_url']
+                                       ]);
 
             foreach ($cohort['dropdowns'] as $dropdown){
                 \App\Models\CohortDropdown::create([
@@ -215,24 +200,10 @@ piano and sound beautiful.',
      */
     public function down()
     {
-        //
+        return ;
         Schema::table('cohorts', function (Blueprint $table) {
-            $table->renameColumn('body_top_description', 'description');
-            $table->renameColumn('cohort_trailer', 'cohort_thrailer');
-            $table->renameColumn('header_image_url', 'cohort_image_url');
-            $table->renameColumn('dark_mode_logo', 'logo');
-            $table->renameColumn('body_title', 'title');
-            $table->dropColumn('header_description');
-            $table->dropColumn('body_image_url');
-            $table->dropColumn('body_logo');
-            $table->dropColumn('body_bottom_description');
-            $table->dropColumn('dropdown_title');
-            $table->dropColumn('bottom_title');
-            $table->dropColumn('bottom_description');
-            $table->dropColumn('cohort_title');
-            $table->dropColumn('light_mode_logo');
+            $table->renameColumn('product_id', 'pack_id');
+            $table->dropColumn('course_url');
         });
-
-        Schema::dropIfExists('cohort_dropdowns');
     }
 };

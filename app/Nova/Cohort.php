@@ -223,7 +223,9 @@ class Cohort extends Resource
 
             DateTime::make(__('Start Time'), 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             DateTime::make(__('End Time'), 'end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
-            Number::make('Pack ID', 'pack_id')->hideFromIndex(),
+            Number::make('Product ID', 'product_id')->hideFromIndex(),
+
+            Text::make('Course Url','course_url')->hideFromIndex(),
         ];
     }
 

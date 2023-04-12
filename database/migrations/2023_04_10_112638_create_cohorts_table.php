@@ -77,7 +77,10 @@ return new class extends Migration {
             $table->timestamp('end_date')
                 ->nullable();
 
-            $table->integer('pack_id');
+            $table->integer('product_id');
+
+            $table->string('course_url')
+                ->nullable();
             $table->timestamps();
         });
 
@@ -136,13 +139,14 @@ This isn’t a “watch a lesson, go do something else for 10 days, watch anothe
                 'icon3_copy' => 'Play your favorite songs with excellent timing & feel.',
                 'cohort_trailer' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/video-reel2.mp4',
 
-                'pack_id' => 190
+                'product_id' => 516,
+                'course_url' => 'https://dev.musora.com:8443/drumeo/packs/30-day-drummer-season-2/383627'
             ],
             [
                 'brand_id' => 2,
                 'dark_mode_logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/Frame+289709.svg',
                 'light_mode_logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-2+1.png',
-                'slug' => 'Pianote-piano',
+                'slug' => 'new-piano-players',
                 'headline' => 'Online piano lessons',
                 'subheadline' => 'for all skill levels.',
                 'body_title' => 'Learn the piano in 30 days.',
@@ -201,7 +205,8 @@ It only takes 10 minutes a day.',
 piano and sound beautiful.',
                 'cohort_trailer' => '//player.vimeo.com/video/798501810?autoplay=1',
 
-                'pack_id' => 240
+                'product_id' => 517,
+                'course_url' => 'https://dev.musora.com:8443/pianote/packs/new-piano-players-start-here/383674/new-piano-players-start-here/383675'
             ],
         ];
 
@@ -243,7 +248,8 @@ piano and sound beautiful.',
                                            'icon3_copy' => $cohort['icon3_copy'],
 
                                            'cohort_trailer' => $cohort['cohort_trailer'],
-                                            'pack_id' => $cohort['pack_id'],
+                                            'product_id' => $cohort['product_id'],
+                                                        'course_url' => $cohort['course_url']
                                        ]);
 
             foreach ($cohort['dropdowns'] as $dropdown){
