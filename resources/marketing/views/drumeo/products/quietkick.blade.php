@@ -165,6 +165,7 @@
         </div>
     </section>
 
+    <div id="details" class="anchor"></div>
     <section class="text-center text-white px-5 py-10 md:py-20 lg:py-24 bg-musora-black">
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h2><strong>How it works</strong></h2>
