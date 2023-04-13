@@ -10,7 +10,7 @@ class MigrateMinutesWatchedPointsJob extends Job
 {
     public function handleJob()
     {
-        $points = ExperiencePoints::query()->where('trigger_name', '=', 'minutes_of_content_watched')
+        $points = ExperiencePoints::query()->where('trigger_name', '=', 'minutes_of_content_watched2')
             ->limit(
                 10000
             )->get();
@@ -19,26 +19,29 @@ class MigrateMinutesWatchedPointsJob extends Job
             $unserialized = unserialize($point->trigger_hash_data);
             $contentId = $unserialized["content_id"];
             $data = serialize([
-                'content_id' => $contentId
+                'content_id' => $contentId,
+                'minutes_watched' => 'all'
             ]);
             $hash = md5($data);
 
             /** @var ExperiencePoints $existingPoint */
             $existingPoint = ExperiencePoints::query()
                 ->where('user_id', '=', $point->user_id)
-                ->where('trigger_name', '=', 'minutes_of_content_watched2')
+                ->where('trigger_name', '=', 'minutes_of_content_watched_v2')
                 ->where('trigger_hash', '=', $hash)->first();
 
             if ($existingPoint == null) {
-                $point->trigger_name = 'minutes_of_content_watched2';
+                $point->trigger_name = 'minutes_of_content_watched_v2';
                 $point->trigger_hash = $hash;
                 $point->trigger_hash_data = $data;
                 $point->points_description = null;
                 $point->save();
             } else {
-                $existingPoint->points += $point->points;
-                $existingPoint->updated_at = Carbon::now();
-                $existingPoint->save();
+                if ($point->trigger_name != 'minutes_of_content_watched2') {
+                    $existingPoint->points += $point->points;
+                    $existingPoint->updated_at = Carbon::now();
+                    $existingPoint->save();
+                }
                 $point->delete();
             }
         }
