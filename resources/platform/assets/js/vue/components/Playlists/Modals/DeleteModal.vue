@@ -126,7 +126,8 @@
     <div class="tw-h-full tw-w-full tw-flex tw-flex-col tw-items-center tw-justify-center">
         <template v-if="!state.isLoading">
             <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-4">
-                Delete
+                <span v-if="mode === 'lesson'">Remove </span>
+                <span v-else>Delete </span>
                 <span :class="`tw-text-${brand}`" class="tw-mr-0.5">
                     <span v-if="mode === 'lesson'">{{ state.title }}</span>
                     <span v-else>{{ data.name }}</span>
