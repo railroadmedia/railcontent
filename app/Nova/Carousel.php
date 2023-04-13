@@ -249,7 +249,7 @@ class Carousel extends Resource
                 ),
             //duplicated fields for displaying index page purpose
             Number::make('Display order', 'display_order')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating(),
-            Boolean::make('visible')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating(),
+            Boolean::make('visible')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating()->sortable(),
         ];
     }
 
