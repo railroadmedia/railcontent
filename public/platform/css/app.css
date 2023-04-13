@@ -24739,6 +24739,10 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
+.hover\:tw-bg-\[\#000C17\]:hover{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 12 23 / var(--tw-bg-opacity)) !important;
+}
 .hover\:tw-bg-\[\#7E9AB1\]\/100:hover{
   background-color: rgb(126 154 177 / 1) !important;
 }
@@ -26731,6 +26735,12 @@ a:visited{
     display: -webkit-box !important;
     -webkit-box-orient: vertical !important;
     -webkit-line-clamp: 3 !important;
+  }
+  .tw-dark .dark\:xl\:tw-inline-block{
+    display: inline-block !important;
+  }
+  .tw-dark .dark\:xl\:tw-hidden{
+    display: none !important;
   }
 }
 @media (min-width: 1536px){
