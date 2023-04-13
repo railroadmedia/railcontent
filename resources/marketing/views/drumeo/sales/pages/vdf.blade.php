@@ -52,8 +52,8 @@
                         <h3 class="leading-tight sm:mt-2 mb-4"><strong>Want to check out what I played today? </strong></h3>
                         <p class="leading-relaxed">Simply click below to download the three sheet music scores played at the Victoria Drum Fest. Also get access to the full audio track by Kaz Rodriguez. Happy playing and listening!</p>
                         <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 lg:mt-10">
-                            <div class="w-full sm:w-1/2 px-1 mb-2 sm:mb-0"><a class="w-full join bg-drumeo smaller" href="">PDF <i class="far fa-arrow-down-to-bracket" style="line-height: 0;" aria-hidden="true"></i></a></div>
-                            <div class="w-full sm:w-1/2 px-1"><a class="w-full join bg-drumeo smaller" href="">AUDIO TRACK <i class="far fa-arrow-down-to-bracket" style="line-height: 0;" aria-hidden="true"></i></a></div>
+                            <div class="w-full sm:w-1/2 px-1 mb-2 sm:mb-0"><a class="w-full join bg-drumeo smaller" href="https://dpwjbsxqtam5n.cloudfront.net/festival/vdf/Victoria+Drum+Fest+Clinic.pdf">PDF <i class="far fa-arrow-down-to-bracket" style="line-height: 0;" aria-hidden="true"></i></a></div>
+                            <div class="w-full sm:w-1/2 px-1"><a class="w-full join bg-drumeo smaller" href="https://dpwjbsxqtam5n.cloudfront.net/festival/vdf/vdf-mp3s.zip">AUDIO TRACK <i class="far fa-arrow-down-to-bracket" style="line-height: 0;" aria-hidden="true"></i></a></div>
                         </div>
                     </div>
                 </div>

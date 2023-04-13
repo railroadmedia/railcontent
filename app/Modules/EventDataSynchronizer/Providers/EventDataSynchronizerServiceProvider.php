@@ -4,6 +4,7 @@ namespace App\Modules\EventDataSynchronizer\Providers;
 
 use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
 use App\Modules\EventDataSynchronizer\Console\Commands\ExpiredProductResync;
+use App\Modules\EventDataSynchronizer\Console\Commands\MigrateMinutesWatchedPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\PackBonusExpirationDateResyncTool;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermissionsResyncTool;
@@ -228,6 +229,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 IsDrumeoLifetimeUserFieldResyncTool::class,
                 CustomerIOSyncUser::class,
                 ExpiredProductResync::class,
+                MigrateMinutesWatchedPoints::class,
             ]
         );
         $this->mergeConfigFrom(
