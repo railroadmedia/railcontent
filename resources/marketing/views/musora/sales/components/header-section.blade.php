@@ -39,7 +39,7 @@
                                 @if(!empty($cta))
                                     {!! $cta !!}
                                 @else
-                                    Get Started &raquo;
+                                    SEE YOUR DEAL &raquo;
                                 @endif
                             @else
                                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
