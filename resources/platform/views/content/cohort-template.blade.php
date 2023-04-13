@@ -34,7 +34,9 @@
                             <div class="tw-absolute tw-bottom-4 tw-left-4 tw-bg-white tw-rounded-full tw-uppercase tw-font-bebas-neue tw-px-5 tw-py-1 tw-flex tw-items-center tw-cursor-pointer" x-on:click="trailer = true"><i class="fas fa-play tw-mr-2" aria-hidden="true"></i> <div class="tw-mt-1">Watch Trailer</div></div>
                         </div>
                         <div class="md:tw-flex @if($hasProduct) md:tw-items-start @else md:tw-items-center @endif">
-                            @if($hasProduct)
+                            @if($enrollmentClosed)
+                                <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
+                            @elseif($hasProduct)
                                 <div class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
                                     <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
                                     <a href="{{$cohort['course_url']}}" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
@@ -181,7 +183,9 @@
                 <h3 class="tw-font-extrabold tw-text-center tw-mt-10">{{ $cohort['bottom_title'] }}</h3>
                 <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">{{ $cohort['bottom_description'] }}</p>
                 <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
-                    @if($hasProduct)
+                    @if($enrollmentClosed)
+                        <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
+                    @elseif($hasProduct)
                         <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                     @else
                         <button onclick="enroll('{{ $registerButtonUrl }}');" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
