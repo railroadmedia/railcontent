@@ -95,7 +95,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
             'registerButtonUrl' => $registerButtonUrl,
-            'cohort' => $cohort->toArray(),
+            'cohort' => $cohort,
             'faq' => $cohort->dropdowns->toArray(),
             'enrollmentClosed' => $enrollmentClosed,
         ];

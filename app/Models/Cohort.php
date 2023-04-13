@@ -26,10 +26,16 @@ class Cohort extends Model
 
 //    protected $revisionForceDeleteEnabled = true;
     protected $casts = [
-        'start_date' => 'datetime:Y-m-d H:i:s',
-        'end_date' => 'datetime:Y-m-d H:i:s',
+        'start_date' => 'datetime',
+        'end_date' => 'datetime',
     ];
-
+    /**
+     * Prepare a date for array / JSON serialization.
+     */
+    protected function serializeDate(\DateTimeInterface $date): string
+    {
+        return $date->format('Y-m-d H:d:i');
+    }
 
     public function brand()
     {
