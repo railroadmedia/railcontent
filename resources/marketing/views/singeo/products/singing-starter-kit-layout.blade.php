@@ -250,12 +250,12 @@
                     SAVE {{ round(100 - (100 * ($productPrice / floatval($productPrices['singing-starter-kit']->price)))) }}% <br>
                 @endif
                 <span class="text-white">** 90-DAY GUARANTEE**</span></h6>
-            <div class="mt-5 md:mt-10 inline-block w-full px-3 md:px-4 credit-cards opacity-60">
-                <i class="fab fa-cc-visa"></i>
-                <i class="fab fa-cc-mastercard"></i>
-                <i class="fab fa-cc-amex"></i>
-                <i class="fab fa-cc-paypal"></i>
-                <i class="fab fa-cc-discover"></i>
+            <div class="mt-5 md:mt-10 inline-block w-full px-3 md:px-4 opacity-60" style="margin-top: 0;">
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
+                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
             </div>
             <div class="inline-block w-full px-3 md:px-4 mt-3 md:mt-4 opacity-60">
                 <p class="leading-normal"><strong>Any questions?</strong><br class="inline-block md:hidden"> Call us toll-free at

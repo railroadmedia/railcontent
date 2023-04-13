@@ -10,7 +10,7 @@
             <a :href="renderLink ? item.url : null"
                class="no-decoration flex flex-column"
                :class="[
-                    {'thumbnail-col tw-mr-3': displayInline}, 
+                    {'thumbnail-col tw-mr-3': displayInline},
                     item.type + '-thumbnail'
                 ]"
             >
@@ -18,9 +18,9 @@
                      :class="[thumbnailType]"
                 >
                     <!-- Video Thumbnail -->
-                    <img :src="`https://musora.com/cdn-cgi/image/width=500/${mappedData.thumbnail} `"
+                    <img :src="`https://www.musora.com/musora-cdn/image/width=500/${mappedData.thumbnail} `"
                          class="tw-transition-opacity tw-duration-500"
-                         :class="[ 
+                         :class="[
                             item.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0',
                             item.type === 'song' ? 'tw-blur-sm' : ''
                          ]"
@@ -62,7 +62,7 @@
 
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
-                <a :href="renderLink ? item.url : null" 
+                <a :href="renderLink ? item.url : null"
                    class="card-info flex flex-column tw-p-1 tw-rounded-lg"
                    :class="displayInline ? 'align-v-center' : 'tw-py-2'"
                 >

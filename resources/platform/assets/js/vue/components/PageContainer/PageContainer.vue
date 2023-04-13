@@ -242,6 +242,8 @@ onUpdated(() => {
       @onClose="handleCloseConfirmationModal"
       :title="confirmation.title"
       :subtitle="confirmation.subtitle"
+      :submitLabel="confirmation.submitLabel"
+      :hideCancel="confirmation.hideCancel"
       @onCancel="handleCloseConfirmationModal"
       @onSubmit="handleSubmit"
     />

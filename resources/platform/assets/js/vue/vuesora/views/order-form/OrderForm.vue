@@ -8,6 +8,11 @@
             @onClose="handleNotificationClear"
         />
 
+                <ConfirmationModal v-if="confirmation.title" :brand="brand" modalId="confirmation-modal"
+            @onClose="handleCloseConfirmationModal" :title="confirmation.title" :subtitle="confirmation.subtitle"
+            :submitLabel="confirmation.submitLabel" :hideCancel="confirmation.hideCancel"
+            @onCancel="handleCloseConfirmationModal" @onSubmit="handleConfirmationSubmit" />
+            
         <!-- Payment SVG -->
         <payment-svg></payment-svg>
 
@@ -229,7 +234,9 @@ import OrderFormShipping from './_OrderFormShipping.vue';
 import OrderFormTotals from './_OrderFormTotals.vue';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import { useNotificationStore } from '../../../../stores/notification';
+import { useConfirmationStore } from '../../../../stores/confirmation';
 import NotificationToasts from '../../components/NotificationToasts/NotificationToasts.vue';
+import ConfirmationModal from '../../../components/Modal/ConfirmationModal.vue';
 import Toasts from '../../assets/js/classes/toasts';
 import LoadingAnimation from '../../components/LoadingAnimation/LoadingAnimation.vue';
 import PaymentSVG from '../../components/SVGSprites/_PaymentSVG.vue';
@@ -240,6 +247,7 @@ import TOSMessage from './_TOSMessage.vue';
 export default {
     name: 'OrderForm',
     components: {
+        ConfirmationModal,
         'NotificationToasts': NotificationToasts,
         'order-form-account': OrderFormAccount,
         'order-form-cart': OrderFormCart,
@@ -351,6 +359,7 @@ export default {
     data() {
         return {
             notification: useNotificationStore(),
+            confirmation: useConfirmationStore(),
             newAddress: false,
             newPayment: false,
             selectedPaymentMethod: null,
@@ -465,9 +474,24 @@ export default {
             this.notification.push(n);
         };
 
+        // Attach confirmation push to window
+        window.showconfirmationmodal = (n) => {
+            this.confirmation.update(n);
+        };
+
     },
 
     methods: {
+        handleCloseConfirmationModal() {
+            this.confirmation.callbacks.cancel();
+            this.confirmation.reset();
+        },
+
+        handleConfirmationSubmit() {
+            this.confirmation.callbacks.submit();
+            this.confirmation.reset();
+        },
+
         handleNotificationClear() {
             this.notification.clear();
         },
@@ -712,28 +736,41 @@ export default {
         },
 
         orderFailure(response) {
+            console.log(response)
             this.formSuccess = false;
 
-            let title = 'Oops, something went wrong';
-            let message = 'An error happened on the server, please contact support using the '
+            if (response.data && response.data['modal-show-redirect-with-message']) {
+                window.showconfirmationmodal({
+                    title: response.data['modal-header'],
+                    subtitle: response.data['modal-message'],
+                    submitLabel: response.data['modal-button-text'],
+                    hideCancel: true,
+                    callbacks: {
+                        submit: () => window.location.href = response.data['modal-button-url']
+                    },
+                });
+            } else {
+                let title = 'Oops, something went wrong';
+                let message = 'An error happened on the server, please contact support using the '
                     + 'chat widget at the bottom of your screen';
 
-            if (response.data.errors) {
-                title = response.data.errors[0].title;
-                message = response.data.errors[0].detail;
+                if (response.data.errors) {
+                    title = response.data.errors[0].title;
+                    message = response.data.errors[0].detail;
+                }
+
+                Toasts.push({
+                    icon: 'sad',
+                    themeColor: this.themeColor,
+                    title,
+                    message,
+                    timeout: 7500,
+                });
             }
 
-            Toasts.push({
-                icon: 'sad',
-                themeColor: this.themeColor,
-                title,
-                message,
-                timeout: 7500,
-            });
-
             setTimeout(() => {
-                this.loading = false;
-            }, 500);
+                    this.loading = false;
+                }, 500);
         },
     },
 };

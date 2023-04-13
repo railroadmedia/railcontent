@@ -2,8 +2,11 @@
 
 namespace App\Decorators\Content;
 
+use Google\Service\Script\Content;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
+use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
@@ -35,6 +38,8 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
     protected $instructorDecorator;
 
     protected ContentRepository $contentRepository;
+    protected ContentPermissionRepository $contentPermissionRepository;
+    protected UserPermissionsRepository $userPermissionsRepository;
 
     public function __construct(
         ContentService $contentService,
@@ -42,7 +47,9 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
         ContentHierarchyService $contentHierarchyService,
         ContentFollowsService $contentFollowsService,
         InstructorDecorator $instructorDecorator,
-        ContentRepository $contentRepository
+        ContentRepository $contentRepository,
+        ContentPermissionRepository $contentPermissionRepository,
+       UserPermissionsRepository $userPermissionsRepository
     ) {
         $this->contentService = $contentService;
         $this->userContentProgressService = $userContentProgressService;
@@ -50,6 +57,8 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
         $this->contentFollowsService = $contentFollowsService;
         $this->instructorDecorator = $instructorDecorator;
         $this->contentRepository = $contentRepository;
+        $this->contentPermissionRepository = $contentPermissionRepository;
+        $this->userPermissionsRepository = $userPermissionsRepository;
     }
 
     /**

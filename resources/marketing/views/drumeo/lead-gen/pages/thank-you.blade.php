@@ -99,10 +99,10 @@
     </style>
 </head>
 <body>
-<p><strong><i class="fas fa-check"></i> Success!</strong></p>
-<h2>Check your email</h2>
-<p><em>You should receive an email from team@drumeo.com within 10 minutes.
-        <br class="show-for-medium"> If you don’t, then check your spam folder or re-enter your email address again.</em>
+<p><strong>Thanks for sticking around</strong></p>
+<h2>WE’RE SO GLAD YOU’RE HERE!</h2>
+<p><em>You’ll continue to get free lessons and tips from<br class="show-for-medium">
+        Drumeo in your inbox. You can unsubscribe any time.</em>
 </p>
 <div class="social-media">
     <a href="https://www.youtube.com/freedrumlessons/" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>

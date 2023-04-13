@@ -76,6 +76,10 @@
             </div>
         </div>
     </div>
+
+    @if($theme === 'drumeo')
+        @include('drumeo.lead-gen.partials.free-trial')
+    @endif
 @endsection
 
 @section('layout-footer')

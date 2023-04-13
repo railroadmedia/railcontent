@@ -26,4 +26,15 @@ Route::domain('{musoraDomain}')
         Route::get('redeem-thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
         Route::get('pianote/redeem', [CodeRedemptionController::class, 'showPianoteRedeemPageForNewUsers']);
         Route::get('pianote/redeem/existing', [CodeRedemptionController::class, 'showPianoteRedeemPageForExistingUsers']);
+
+        Route::get('drumeo/sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewDrumeo']);
+        Route::get('drumeo/sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingDrumeo']);
+        Route::get('pianote/sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewPianote']);
+        Route::get('pianote/sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingPianote']);
+        Route::get('guitareo/sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewGuitareo']);
+        Route::get('guitareo/sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingGuitareo']);
+        Route::get('singeo/sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewSingeo']);
+        Route::get('singeo/sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingSingeo']);
+        Route::get('sweetwater', [CodeRedemptionController::class, 'sweetwaterRedeemNewMusora']);
+        Route::get('sweetwater/existing', [CodeRedemptionController::class, 'sweetwaterRedeemExistingMusora']);
     });

@@ -34,7 +34,7 @@
                         dusk="{{$lessonType['type']}}">
                             <div class="show-index-card square corners-10 bg-grey-2 dark:tw-bg-[#081825] relative">
                                 <img
-                                    src="https://musora.com/cdn-cgi/image/width=650,height=650,quality=90/{{ $lessonType['thumbnail'] }}"
+                                    src="https://www.musora.com/musora-cdn/image/width=650,height=650,quality=90/{{ $lessonType['thumbnail'] }}"
                                     class="corners-10 tw-transition-opacity tw-opacity-0"
                                     alt="{{ $lessonType['type'] }} Show Card"
                                     loading="lazy"

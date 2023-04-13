@@ -23,6 +23,7 @@ export default {
         icon,
         title,
         message,
+        hideCancel,
     }) {
         const iconMap = {
             happy: 'check',
@@ -60,6 +61,8 @@ export default {
     confirm({
         title,
         subtitle = 'This cannot be undone',
+        hideCancel,
+        submitLabel,
         submitButton = {
             callback: null,
         },
@@ -70,6 +73,8 @@ export default {
         window.showconfirmationmodal({
             title,
             subtitle,
+            hideCancel,
+            submitLabel,
             callbacks: {
                 submit: submitButton.callback,
                 cancel: cancelButton.callback

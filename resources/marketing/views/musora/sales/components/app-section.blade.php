@@ -3,13 +3,16 @@
 <section class="relative text-center px-6 pb-10 md:pb-0" style="background-color:#f6f8fc;">
     <div class="container mx-auto max-w-5xl relative z-20">
         <div class="text-center md:text-left md:flex justify-center items-center">
-            <img
-                class="lg:-mt-11 lg:-mb-4 max-w-md lg:max-w-2xl transition-opacity opacity-0 order-1 mb-6 md:mb-0 w-full"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-                src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/{!! $image !!}"
-                alt="device image"
-            >
+            <picture>
+                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1300,quality=85/{!! $image !!}">
+                <img
+                    class="lg:-mt-11 lg:-mb-4 max-w-md lg:max-w-2xl transition-opacity opacity-0 order-1 mb-6 md:mb-0 w-full"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{!! $image !!}"
+                    alt="device image"
+                >
+            </picture>
             <div class="pr-4 lg:pr-7">
                 <h4 class="leading-normal mb-3 lg:mb-7"><strong>Available across web,<br> tablet, & mobile.</strong></h4>
                 <a class="inline-block" href="https://itunes.apple.com/us/app/musora/id1619053766?ls=1" target="_blank">

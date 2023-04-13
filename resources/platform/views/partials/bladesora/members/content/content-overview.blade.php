@@ -4,7 +4,7 @@
             <a @if((empty($noLink) || $noLink === false) && $isOwned) href="{{ $lessonsUrl }}" @endif>
                 <div class="thumb-img bg-center corners-10 bg-grey-2 dark:tw-bg-[#081825] {{ $forceSquareThumb === true ? 'square' : 'widescreen' }}">
                     <img
-                        src="https://musora.com/cdn-cgi/image/width=280,height=280,quality=90/{{ $itemThumbnail }}"
+                        src="https://www.musora.com/musora-cdn/image/width=280,height=280,quality=90/{{ $itemThumbnail }}"
                         alt="{{ $itemTitle }} Thumbnail"
                         class="tw-transition-opacity tw-opacity-0"
                         loading="lazy"

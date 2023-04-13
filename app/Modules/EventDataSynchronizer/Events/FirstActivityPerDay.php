@@ -12,7 +12,7 @@ class FirstActivityPerDay
     /**
      * @var string
      */
-    private $brand;
+    private $brands;
 
     /**
      * @var string
@@ -21,13 +21,13 @@ class FirstActivityPerDay
 
     /**
      * @param $userId
-     * @param $brand
+     * @param $brands
      * @param $dateTimeString
      */
-    public function __construct($userId, $brand, $dateTimeString)
+    public function __construct($userId, $brands, $dateTimeString)
     {
         $this->userId = $userId;
-        $this->brand = $brand;
+        $this->brands = $brands;
         $this->dateTimeString = $dateTimeString;
     }
 
@@ -42,9 +42,9 @@ class FirstActivityPerDay
     /**
      * @return string
      */
-    public function getBrand()
+    public function getBrands()
     {
-        return $this->brand;
+        return $this->brands;
     }
 
     /**

@@ -9,6 +9,7 @@ use App\Console\Commands\AssignSongsPermissionsToProducts;
 use App\Console\Commands\CreateSongs24Jan2023;
 use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
+use App\Console\Commands\MigrateOldGuitareoDeletedSongs;
 use App\Console\Commands\MigratePianoteSongTutorial;
 use App\Console\Commands\RemoveTemporarySongsAccessForLifetimeMembersJanuary2023;
 use App\Console\Commands\RepairUserProgressOn30DD;
@@ -69,6 +70,7 @@ class Kernel extends ConsoleKernel
         UpdateRoutinesFebruary2023::class,
         RepairUserProgressOn30DD::class,
         RepairUserProgressOnNPPSH::class,
+        MigrateOldGuitareoDeletedSongs::class,
     ];
 
     /**
@@ -79,23 +81,32 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
+        //All times are in UTC
         $schedule->command('ProcessTrackings')->everyMinute();
 
         $schedule->command('forums:rebuildSearchIndexes')->hourly();
 
-        $schedule->command('notifications:dailySummary')->dailyAt('12:00');
+        $schedule->command('notifications:dailySummary')->dailyAt('12:00');//4am PST
 
-        $schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00');
+        $schedule->command('content:rebuildSearchIndexes')->dailyAt('2:00');//6am PST
         $schedule->command('content:updatePopularity')->cron('0 */8 * * *'); //every 8 hours
         $schedule->command('content:CreateVimeoVideoContentRecords', [50])->everyThirtyMinutes();
-        $schedule->command('content:CreateYoutubeVideoContentRecordsViaClientAPI', [1])->cron("0 */6 * * *");
+        $schedule->command('content:CreateYoutubeVideoContentRecordsViaClientAPI', [1])->cron(
+            "0 */6 * * *"
+        );//4am, 10am, 4pm, 10pm PST
 
-        $schedule->command('ecommerce:renewalDueSubscriptions')->cron("15 */8 * * *"); // every 8 hours
-        $schedule->command('ecommerce:ProcessAppleExpiredSubscriptionsQueued')->cron("30 */8 * * *"); // every 8 hours
+        $schedule->command('ecommerce:renewalDueSubscriptions 200')->cron(
+            "15 */2 * * *"
+        );
+        $schedule->command('ecommerce:ProcessAppleExpiredSubscriptionsQueued')->cron(
+            "30 */8 * * *"
+        ); // every 8 hours: 12am, 8am, 4pm PST
 
-        $schedule->command('mentors:verify')->daily();
+        $schedule->command('mentors:verify')->daily(); //4pm
         //temporary measure to assign mentors until ecommerce is integrated with MWP
         $schedule->command('mentors:assign')->hourly();
+
+        $schedule->command('user:resyncExpiredProducts')->dailyAt('10:00');//2am PST
     }
 
     /**

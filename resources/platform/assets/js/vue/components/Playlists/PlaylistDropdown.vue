@@ -224,7 +224,6 @@ const clickHandler = (fnstring) => {
 
 //---------Lifecycle Methods---------//
 onBeforeMount(() => {
-    console.log(props.lessonsLength)
     state.isPrivate = props.data.private ? 1 : 0;
 });
 

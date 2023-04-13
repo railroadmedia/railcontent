@@ -131,14 +131,15 @@
                  class="tw-w-full tw-flex dark:tw-text-white tw-items-center "
                  :class="miniCatalog ? 'tw-mt-1' : 'tw-mt-[58px] tw-flex-col'"
         >
-            <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#3F3F46] dark:tw-bg-[#445F74] "
+            <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#223F57] dark:tw-bg-[#445F74] "
                  :class="{'tw-mb-[30px]': !miniCatalog}"
             >
                 <musora-icon icon-name="playlist" class="tw-w-[36px]" />
             </div>
             <div :class="{'tw-ml-4': miniCatalog}">
-                <h1 class="tw-text-3xl tw-font-bold" :class="!miniCatalog ? 'tw-mb-[15px]' : 'tw-mb-2' ">No Playlists here yet</h1>
-                <p>Go ahead and create your first playlist!</p>
+                <h1 class="tw-text-3xl tw-font-normal tw-font-open-sans tw-text-[16px]" :class="!miniCatalog ? 'tw-mb-[15px]' : 'tw-mb-2' ">
+                    You haven't created any playlists yet.
+                </h1>
             </div>
         </section>
 

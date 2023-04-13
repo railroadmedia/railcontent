@@ -185,6 +185,14 @@ const props = defineProps({
         type: String,
         default: '/'
     },
+    startSecond: {
+        type: [String, Number],
+        default: 0
+    },
+    endSecond: {
+        type: [String, Number],
+        default: null
+    }
 });
 
 //Pinia Stores
@@ -244,7 +252,8 @@ onBeforeMount(() => {
                             </VideoMediaElement>
                         </transition>
                         <transition v-else appear name="fade">
-                            <VideoPlayer ref="mediaElementVueInstance" :theme-color="brand" :brand="brand"
+                            <VideoPlayer ref="mediaElementVueInstance"
+                                :start-second="startSecond" :end-second="endSecond" :theme-color="brand" :brand="brand"
                                 :poster="videoPosterImageUrl" :sources="videoMediaSources" :ranges="songRanges"
                                 :ranges-video-ids="rangesVideoIds" :show-range-buttons="true"
                                 :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters" :current-second="currentSecond"

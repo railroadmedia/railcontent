@@ -36,6 +36,7 @@ class PlaylistDecorator extends ModeDecoratorBase
     {
         $playlists = $playlists->toArray();
         $userIds = [];
+        ContentRepository::$bypassPermissions = true;
 
         foreach ($playlists as $index => $playlist) {
             $userIds[] = $playlist['user_id'];
@@ -118,6 +119,7 @@ class PlaylistDecorator extends ModeDecoratorBase
             $playlists[$index]['user']['display_name'] = $playlistAuthor['display_name'];
             $playlists[$index]['user']['fields.profile_picture_image_url'] = $playlistAuthor['profile_picture_url'];
         }
+        ContentRepository::$bypassPermissions = false;
 
         return $playlists;
     }

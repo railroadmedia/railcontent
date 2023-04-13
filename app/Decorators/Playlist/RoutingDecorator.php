@@ -65,7 +65,7 @@ class RoutingDecorator extends TypeDecoratorBase
                     \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
                     $this->instructorDecorator->decorate(new Collection(self::$parents));
-                    $contents[$contentIndex]['instructors'] += self::$parents[$value['id']]['instructors'] ?? [];
+                    $contents[$contentIndex]['instructors'] = $contents[$contentIndex]['instructors']??[] + self::$parents[$value['id']]['instructors'] ?? [];
                 }
             }
             $contents[$contentIndex]['route'] = $route;

@@ -13,8 +13,10 @@ use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
+use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection;
@@ -24,7 +26,8 @@ class UserPlaylistsController extends BaseController
 {
     private UserPlaylistsService $userPlaylistsService;
     private ContentService $contentService;
-    private UserContentProgressRepository $userContentRepository;
+    private ContentPermissionRepository $contentPermissionRepository;
+    private UserPermissionsRepository $userPermissionsRepository;
     private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
     private LessonAssignmentDecorator $lessonAssignmentDecorator;
     private RoutingDecorator $routingDecorator;
@@ -41,6 +44,8 @@ class UserPlaylistsController extends BaseController
         UserPlaylistsService $userPlaylistsService,
         ContentService $contentService,
         UserContentProgressRepository $userContentProgressRepository,
+        ContentPermissionRepository $contentPermissionRepository,
+        UserPermissionsRepository $userPermissionsRepository,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
         LessonAssignmentDecorator $lessonAssignmentDecorator,
         RoutingDecorator $routingDecorator
@@ -48,6 +53,8 @@ class UserPlaylistsController extends BaseController
         $this->userPlaylistsService = $userPlaylistsService;
         $this->contentService = $contentService;
         $this->userContentRepository = $userContentProgressRepository;
+        $this->contentPermissionRepository = $contentPermissionRepository;
+        $this->userPermissionsRepository = $userPermissionsRepository;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
         $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
         $this->routingDecorator = $routingDecorator;
@@ -119,9 +126,17 @@ class UserPlaylistsController extends BaseController
         );
 
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-
+        ContentRepository::$bypassPermissions = true;
         $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
+        ContentRepository::$bypassPermissions = false;
         $playlistItems = [];
+
+        $contentPermissionRows = collect($this->contentPermissionRepository->getByContentIdsOrTypes(
+            $items->pluck('id')->toArray(),
+            $items->pluck('type')->toArray()
+        ));
+        $grupedPermissions = $contentPermissionRows->groupBy('content_id');
+        $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
 
         foreach ($items as $index => $item) {
             $playlistItems[$index]['id'] = $item['id'];
@@ -129,16 +144,15 @@ class UserPlaylistsController extends BaseController
             $playlistItems[$index]['title'] = $item['title'];
             $playlistItems[$index]['artist'] = $item['artist'];
             $playlistItems[$index]['status'] = $item['status'];
-            //            $playlistItems[$index]['fields'] = $item['fields'];
-            //            $playlistItems[$index]['data'] = $item['data'];
-            $playlistItems[$index]['need_access'] = ($user->isPackOwner() && !$user->isAMember());
+            $playlistItems[$index]['need_access'] = empty(array_intersect(\Arr::pluck($userPermissions,'permission_id'),
+                (isset($grupedPermissions[$item['id']]))?$grupedPermissions[$item['id']]->pluck('permission_id')->toArray():[]));
+
             $playlistItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
             $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
                 'playlistId' => $playlistId,
                 'playlistItemId' => $item['user_playlist_item_id'],
             ]);
             $playlistItems[$index]['route'] = $item['route'] ?? '';
-            //            $playlistItems[$index]['parent'] = $item['parent']??null;
             $playlistItems[$index]['instructors'] = $item['instructors'] ?? null;
             $playlistItems[$index]['user_playlist_item_id'] = $item['user_playlist_item_id'] ?? null;
             $playlistItems[$index]['user_playlist_item_extra_data'] = $item['user_playlist_item_extra_data'] ?? null;
@@ -195,17 +209,24 @@ class UserPlaylistsController extends BaseController
         $request->merge(['page' => $page]);
         $request->merge(['limit' => 20]);
 
+        ContentRepository::$bypassPermissions = true;
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20, $page);
-
+        ContentRepository::$bypassPermissions = false;
         $playlistItem =
             $playlistItems->where('user_playlist_item_id', '=', $playlistItemId)
                 ->first();
         $nextPlaylistItem = $playlistItems->getMatchOffset($playlistItem, 1);
         $previousPlaylistItem = $playlistItems->getMatchOffset($playlistItem, -1);
+        $contentPermissionRows = collect($this->contentPermissionRepository->getByContentIdsOrTypes(
+            $playlistItems->pluck('id')->toArray(),
+            $playlistItems->pluck('type')->toArray()
+        ));
+        $grupedPermissions = $contentPermissionRows->groupBy('content_id');
+        $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
 
         $otherItems = [];
         foreach ($playlistItems as $index=>$item) {
-            $otherItems[$index]['url'] = $item['url'];
+            $otherItems[$index]['url'] = $item['url']??'';
             $otherItems[$index]['id'] = $item['id'];
             $otherItems[$index]['type'] = $item['type'];
             $otherItems[$index]['title'] = $item->fetch('title');
@@ -213,7 +234,8 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['status'] = $item['status'];
             $otherItems[$index]['fields'] = $item['fields'];
             $otherItems[$index]['data'] = $item['data'];
-            $otherItems[$index]['need_access'] = ($user->isPackOwner() && !$user->isAMember());
+            $otherItems[$index]['need_access'] = empty(array_intersect(\Arr::pluck($userPermissions,'permission_id'),
+                                                                         (isset($grupedPermissions[$item['id']]))?$grupedPermissions[$item['id']]->pluck('permission_id')->toArray():[]));
             $otherItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
             $otherItems[$index]['route'] = $item['route'] ?? '';
             //            $playlistItems[$index]['parent'] = $item['parent']??null;
@@ -226,7 +248,7 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['end_second'] = $item['end_second'] ?? null;
             $otherItems[$index]['started'] = $item['started'] ?? false;
             $otherItems[$index]['completed'] = $item['completed'] ?? false;
-            $otherItems[$index]['thumbnail_url'] = $item['thumbnail_url'] ?? '';
+            $otherItems[$index]['thumbnail_url'] = $item->fetch('thumbnail_url', $item->fetch('data.original_thumbnail_url',$item->fetch('data.thumbnail_url','')));
             $otherItems[$index]['user_progress'] = $item['user_progress'] ?? '';
             $otherItems[$index]['parent_title'] = $item['parent_title'] ?? '';
         }
@@ -252,11 +274,13 @@ class UserPlaylistsController extends BaseController
         ContentRepository::$availableContentStatues = $oldStatuses;
         ContentRepository::$pullFutureContent = $oldFutureContent;
 
-
-
+        $startSecond = $playlistItem['start_second'] ?? null;
+        $endSecond = $playlistItem['end_second'] ?? null;
         $playlistItem =
             $this->vimeoVideoSourcesDecorator->decorate(new Collection([$content]))
                 ->first();
+        $playlistItem['start_second'] = $startSecond;
+        $playlistItem['end_second'] = $endSecond;
 
         $userPlaylists = collect($this->userPlaylistsService->getUserPlaylist(user()->id, 'user-playlist'));
         $playlists = $userPlaylists->whereNotIn('id', $playlistId);

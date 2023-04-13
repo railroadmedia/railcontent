@@ -81,8 +81,7 @@ const state = reactive({
     dropdownTop: false,
 });
 
-//-----------Static Data-----------//
-const dropdownOptions = [
+const dropdownOptions = ref([
     {
         name: "Remove",
         action: "removeLesson"
@@ -91,11 +90,7 @@ const dropdownOptions = [
         name: "Add to List",
         action: "addToPlaylist"
     },
-    {
-        name: "Start/End Time",
-        action: "editLessonTime"
-    }
-]
+]);
 
 const dateNow = Date.now();
 const lessonDateParsed = props.lesson.published_on_in_timezone ? Date.parse(props.lesson.published_on_in_timezone) : Date.parse(props.lesson.published_on);
@@ -125,7 +120,7 @@ const duration_formatted = (seconds) => {
         const minFormatted = min < 10 ? `0${min}` : min;
         const secFormatted = sec < 10 ? `0${sec}` : sec;
 
-        if(hrsFormatted === 0 && minFormatted === 0 && secFormatted === 0) return false;
+        if (hrsFormatted === 0 && minFormatted === 0 && secFormatted === 0) return false;
         else return `${hrsFormatted}:${minFormatted}:${secFormatted}`;
     } else {
         return false;
@@ -161,6 +156,12 @@ onBeforeMount(() => {
     // console.log(props.lesson)
     state.isPinned = props.lesson.pinned;
     state.isPrivate = props.lesson.private;
+    if (props.lesson.type !== 'assignment' && props.lesson.type !== 'song') {
+        dropdownOptions.value = [...dropdownOptions.value, {
+            name: "Start/End Time",
+            action: "editLessonTime"
+        }]
+    }
 });
 </script>
 <template>
@@ -173,7 +174,8 @@ onBeforeMount(() => {
 
             <div class="tw-inline-flex tw-items-center tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity tw-text-sm"
                 :class="{ 'tw-opacity-0': playlistsStore.sortingPlaylist }">
-                <template v-if="Number(lesson.user_playlist_item_position) === Number(currentItem)"><i class="fas fa-play"></i></template>
+                <template v-if="Number(lesson.user_playlist_item_position) === Number(currentItem)"><i
+                        class="fas fa-play"></i></template>
                 <template v-else>{{ props.index + 1 }}</template>
             </div>
 
