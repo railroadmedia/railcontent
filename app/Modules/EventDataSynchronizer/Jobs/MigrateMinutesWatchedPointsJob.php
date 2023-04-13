@@ -47,8 +47,7 @@ class MigrateMinutesWatchedPointsJob extends Job
                     $point->delete();
                 }
             } catch (\Throwable $e) {
-                Log::error("Error migrating point $point->id");
-                Log::error($e);
+                Log::error("Error migrating point $point->id $hash");
             }
         }
     }
