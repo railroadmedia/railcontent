@@ -143,7 +143,7 @@
             </div>
             <!-- Pinned Icon -->
             <div class="tw-inline-flex tw-items-center tw-transition-colors"
-                 :class="[ !props.isListView ? 'tw-z-20 tw-absolute tw-top-2 tw-right-2 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5' : 'tw-px-4 xl:tw-px-8',`dark:tw-text-white`, { 'tw-opacity-0' : !state.isPinned } ]"
+                 :class="[ !props.isListView ? 'tw-z-20 tw-absolute tw-top-2 tw-right-2 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5' : 'tw-px-4 xl:tw-px-8',`tw-text-white`, { 'tw-opacity-0' : !state.isPinned } ]"
             >
                 <musora-icon icon-name="tack" class="tw-w-[20px] tw-h-[20px] tw-mx-auto tw-hidden md:tw-flex" />
             </div>
@@ -156,7 +156,7 @@
             <div class="tw-relative "
                     v-click-outside="()=>{ state.dropdownOpen = false }"
             >
-                <button class="tw-btn-primary tw-btn-small tw-btn-circle tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2 tw-rotate-0"
+                <button class="tw-btn-primary tw-btn-small tw-btn-circle tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#E0E0E1] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2 tw-rotate-0"
                         :class="props.isListView ? 'md:tw-rotate-90' : ''"
                         title="Playlist Options"
                         @click.prevent="dropdownTriggerHandler($event)"
