@@ -207,8 +207,8 @@ onMounted(() => {
 
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
-        <AddDuplicate v-if="duplicateProps.show" :title="duplicateProps.title"
-            @onConfirm="() => handleDuplicateConfirm(duplicateProps.id)" @onClose="handleDuplicateCancel" />
+        <AddDuplicate v-if="duplicateProps.show" :title="duplicateProps.title" :brand="brand"
+            @onConfirm="() => handleDuplicateConfirm(duplicateProps.id)" @onClose="handleDuplicateCancel"  />
         <div v-if="isLoadingAssignments || isLoadingPlaylists"
             class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-items-center tw-justify-center tw-bg-black/40">
             <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
@@ -256,7 +256,7 @@ onMounted(() => {
             </div>
         </div>
         <!-- No Playlists -->
-        <section v-if="formattedRows.length === 0" 
+        <section v-if="formattedRows.length === 0"
                  class="tw-w-full tw-flex dark:tw-text-white tw-items-center tw-mt-[58px] tw-flex-col"
         >
             <div class="tw-h-[84px] tw-w-[84px] tw-mb-[30px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#223F57] dark:tw-bg-[#445F74] "
