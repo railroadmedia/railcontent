@@ -13,8 +13,10 @@ class MigrateMinutesWatchedPointsJob extends Job
     {
         $points = ExperiencePoints::query()->where('trigger_name', '=', 'minutes_of_content_watched')
             ->limit(
-                1000
+                10000
             )->get();
+
+        $pointCache = [];
         foreach ($points as $point) {
             try {
                 /** @var ExperiencePoints $point */
@@ -26,11 +28,14 @@ class MigrateMinutesWatchedPointsJob extends Job
                 ]);
                 $hash = md5($data);
 
-                /** @var ExperiencePoints $existingPoint */
-                $existingPoint = ExperiencePoints::query()
-                    ->where('user_id', '=', $point->user_id)
-                    ->where('trigger_name', '=', 'minutes_of_content_watched_v2')
-                    ->where('trigger_hash', '=', $hash)->first();
+                $existingPoint = $pointCache[$point->user_id . $hash] ?? null;
+                if (!$existingPoint) {
+                    /** @var ExperiencePoints $existingPoint */
+                    $existingPoint = ExperiencePoints::query()
+                        ->where('user_id', '=', $point->user_id)
+                        ->where('trigger_name', '=', 'minutes_of_content_watched_v2')
+                        ->where('trigger_hash', '=', $hash)->first();
+                }
 
                 if ($existingPoint == null) {
                     $point->trigger_name = 'minutes_of_content_watched_v2';
@@ -38,6 +43,7 @@ class MigrateMinutesWatchedPointsJob extends Job
                     $point->trigger_hash_data = $data;
                     $point->points_description = null;
                     $point->save();
+                    $pointCache[$point->user_id . $hash] = $point;
                 } else {
                     if ($point->trigger_name != 'minutes_of_content_watched2') {
                         $existingPoint->points += $point->points;
@@ -46,7 +52,6 @@ class MigrateMinutesWatchedPointsJob extends Job
                     }
                     $point->delete();
                 }
-                usleep(100000);
             } catch (\Throwable $e) {
                 Log::error("Error migrating point $point->id $hash");
             }
