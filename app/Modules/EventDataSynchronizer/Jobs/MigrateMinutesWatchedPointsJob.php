@@ -13,7 +13,7 @@ class MigrateMinutesWatchedPointsJob extends Job
     {
         $points = ExperiencePoints::query()->where('trigger_name', '=', 'minutes_of_content_watched')
             ->limit(
-                10000
+                1000
             )->get();
         foreach ($points as $point) {
             try {
@@ -46,6 +46,7 @@ class MigrateMinutesWatchedPointsJob extends Job
                     }
                     $point->delete();
                 }
+                usleep(100000);
             } catch (\Throwable $e) {
                 Log::error("Error migrating point $point->id $hash");
             }
