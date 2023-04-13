@@ -27,14 +27,14 @@ const props = defineProps({
             </h2>
 
             <p class="dark:tw-text-white tw-text-center">
-                Lesson with the title <span class="tw-text-[#9EC0DC]">{{ title }}</span> already exists in this playlist.
+                Lesson with the title <span class="tw-font-bold dark:tw-text-[#9EC0DC]">{{ title }}</span> already exists in this playlist.
                 <br />
                 Add anyway?
             </p>
 
             <div class="tw-pt-8 tw-flex tw-flex-col tw-items-center tw-justify-center tw-w-full">
                 <!-- Delete Lesson -->
-                <button :class="`tw-mb-2 tw-btn-primary tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"
+                <button :class="`tw-mb-2 tw-btn-primary tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px] hover:tw-bg-${brand}-600`"
                     @click.prevent="() => emit('onConfirm')">
                     CONFIRM
                 </button>
