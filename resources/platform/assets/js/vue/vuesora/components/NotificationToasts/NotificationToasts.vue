@@ -4,8 +4,8 @@
       <div class="tw-text-center tw-pb-6">
           <div class="lg:tw-flex">
               <div class="tw-hidden lg:tw-block" :class="isSidebarCollapsed ? 'lg:tw-w-[68px]' : 'lg:tw-w-[256px]'"></div>
-              <div class="lg:tw-flex-1">
-                  <div class="lg:tw-container lg:tw-mx-auto lg:tw-pl-7 lg:tw-pr-9">
+              <div class="lg:tw-flex-1 tw-flex tw-justify-center">
+                  <div class="lg:tw-max-w-[1280px] lg:tw-w-full lg:tw-container lg:tw-mx-auto lg:tw-pl-7 lg:tw-pr-9">
                     <div :class="`
                               tw-px-[16px]
                               tw-py-2
