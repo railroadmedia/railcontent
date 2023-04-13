@@ -19,8 +19,6 @@
         >
         </header-carousel>
 
-        <cohort-banner></cohort-banner>
-
         {{-- Invite Email Message --}}
         @if(session()->has('email-invite-message'))
             <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
@@ -155,9 +153,4 @@
 @endsection
 
 
-<script>
-    import CohortBanner from "../../assets/js/vue/components/CohortBanner/CohortBanner";
-    export default {
-        components: {CohortBanner}
-    }
-</script>
+
