@@ -10,7 +10,7 @@ class MigrateMinutesWatchedPointsJob extends Job
 {
     public function handleJob()
     {
-        $points = ExperiencePoints::query()->where('trigger_name', '=', 'minutes_of_content_watched2')
+        $points = ExperiencePoints::query()->where('trigger_name', '=', 'minutes_of_content_watched')
             ->limit(
                 10000
             )->get();
