@@ -237,9 +237,6 @@
     };
 
     //----------Lifecycle Hooks----------//
-    onMounted(()=> {
-        console.log(props.playlist)
-    })
     onBeforeMount(()=> {
         //Load Data
         state.thumb = props.playlist.thumbnail_url;

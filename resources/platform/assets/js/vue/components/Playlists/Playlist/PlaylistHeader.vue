@@ -4,7 +4,7 @@
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue'
     import PlaylistDropdown from '../PlaylistDropdown.vue';
     import { usePlaylistsStore } from '../../../../stores/playlists';
-    import { onBeforeMount, ref, inject, reactive } from 'vue';
+    import { onBeforeMount, ref, inject, reactive, onMounted } from 'vue';
 
     //Inject
     const token = inject('csrf_token');
@@ -134,7 +134,10 @@
         :blurBG="true"
     >
         <template v-slot:content>
-            <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-w-full lg:tw-w-8/12">
+            <div
+                class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-w-full lg:tw-w-8/12"
+                :class="`${ playlistsStore.activePlaylist.name.indexOf(' ') === -1 && 'tw-break-all' }`"
+            >
                 <!-- Playlist thumbnail -->
                 <div class="tw-realtive tw-h-[198px] tw-w-[198px] tw-relative tw-rounded tw-shrink-0 tw-overflow-hidden tw-mb-[16px] lg:tw-mb-0">
                     <!-- Image Conatiner -->
@@ -229,7 +232,7 @@
                             :is-private="state.isPrivate"
                             :is-pinned="playlistsStore.activePlaylist.pinned"
                             :dropdownOptions="dropdownOptions"
-                            :data="playlist"
+                            :data="playlistsStore.activePlaylist"
                             :is-open="state.dropdownOpen"
                             type="playlist"
                             @closeDropdown="state.dropdownOpen = false"
