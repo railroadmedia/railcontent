@@ -301,7 +301,9 @@ class HomePageController extends BaseController
                 $cohortBanner = [
                     'course_url' => $activeCohort['course_url'],
                     'light_mode_logo' => $activeCohort['light_mode_logo'],
-                    'dark_mode_logo' => $activeCohort['dark_mode_logo']
+                    'dark_mode_logo' => $activeCohort['dark_mode_logo'],
+                    'continue_visible' => false,
+                    'close_visible' => false,
                 ];
 
                 $nextLesson = $this->contentService->getNextContentForParentContentForUser($courseId, user()->id);
