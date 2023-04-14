@@ -153,6 +153,11 @@
                         sort: 'most_recent',
                     }, token);
                 }
+            }).catch((error)=>{
+                window.shownotification({
+                    icon: 'error',
+                    text: 'Woops! Something wrong happened, please try again later.'
+                })
             })
         }
         if(props.mode === "edit") {
@@ -195,6 +200,12 @@
                         console.log('edit response code', response)
                     }
                 })
+            .catch((error)=>{
+                window.shownotification({
+                    icon: 'error',
+                    text: 'Woops! Something wrong happened, please try again later.'
+                })
+            })
         }
         if(props.mode === "duplicate") {
             const duplicateData = {
@@ -230,6 +241,12 @@
                     } else {
                         console.log('duplicate response code', response)
                     }
+                })
+                .catch((error)=>{
+                    window.shownotification({
+                        icon: 'error',
+                        text: 'Woops! Something wrong happened, please try again later.'
+                    })
                 })
         }
         //Close Modal
