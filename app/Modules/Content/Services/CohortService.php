@@ -34,8 +34,8 @@ class CohortService
 
         return Cohort::query()
             ->where('brand_id', $brandId)
-            ->where('start_date','<=', Carbon::now()->toDateTimeString())
-            ->where('end_date','>=', Carbon::now()->subWeeks(2)->toDateTimeString())
+            ->where('cohort_start_date','<=', Carbon::now()->toDateTimeString())
+            ->where('cohort_end_date','>=', Carbon::now()->subWeeks(2)->toDateTimeString())
             ->first();
     }
 }

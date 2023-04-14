@@ -221,9 +221,11 @@ class Cohort extends Resource
             Text::make('Title','bottom_title')->hideFromIndex(),
             Text::make('Description','bottom_description')->hideFromIndex(),
 
-            DateTime::make(__('Start Time'), 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
-            DateTime::make(__('End Time'), 'end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
+            DateTime::make(__('Enrollment Start Time'), 'enrollment_start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
+            DateTime::make(__('Enrollment End Time'), 'enrollment_end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             Number::make('Product ID', 'product_id')->hideFromIndex(),
+            DateTime::make(__('Cohort Start Time'), 'cohort_start_date')->hideFromIndex()->help("Controls whether cohort is currently active.  Cohort banners/pinned packs are a couple of functions tied to this."),
+            DateTime::make(__('Cohort End Time'), 'cohort_end_date')->hideFromIndex()->help("Controls whether cohort is currently active.  Cohort banners/pinned packs are a couple of functions tied to this."),
 
             Text::make('Course Url','course_url')->hideFromIndex(),
         ];

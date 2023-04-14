@@ -26,8 +26,10 @@ class Cohort extends Model
 
 //    protected $revisionForceDeleteEnabled = true;
     protected $casts = [
-        'start_date' => 'datetime',
-        'end_date' => 'datetime',
+        'enrollment_start_date' => 'datetime',
+        'enrollment_end_date' => 'datetime',
+        'cohort_start_date' => 'datetime',
+        'cohort_end_date' => 'datetime',
     ];
     /**
      * Prepare a date for array / JSON serialization.
