@@ -259,7 +259,7 @@ onMounted(() => {
             classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll" :stickyHeader="true" :rows="formattedRows">
             <template v-slot:actionContent="slotProps">
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
-                    class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]" />
+                    class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-white" />
                 <CheckCircleIcon v-if="selectedPlaylists.includes(String(slotProps.actionPayload))"
                     :class="`tw-w-[30px] tw-h-[30px] tw-text-[#4ADE80]`" />
             </template>
@@ -271,9 +271,10 @@ onMounted(() => {
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
             <button @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600`"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-${brand}-600 tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600`"
+                    :disabled="selectedPlaylists.length === 0"
             >
-                CONFIRM
+                SAVE
             </button>
         </div>
     </div>
