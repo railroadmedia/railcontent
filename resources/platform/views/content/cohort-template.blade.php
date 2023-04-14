@@ -35,7 +35,7 @@
                         </div>
                         <div class="md:tw-flex @if($hasProduct) md:tw-items-start @else md:tw-items-center @endif">
                             @if($enrollmentClosed)
-                                <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
+                                <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white tw-cursor-default">Enrollment Closed</span>
                             @elseif($hasProduct)
                                 <div class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
                                     <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
@@ -81,7 +81,7 @@
                 <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-text-center tw-border tw-rounded-lg tw-border-gray-300 tw-mb-2 lg:tw-mb-4">
                     <div class="tw-w-full sm:tw-w-auto tw-border-b sm:tw-border-b-0 sm:tw-border-r tw-border-gray-300 tw-py-4 sm:tw-py-3 lg:tw-py-4">
                         <p class="tw-tracking-wide tw-opacity-70 tw-text-sm">STARTS ON</p>
-                        <h4 class="tw-px-3 lg:tw-px-5"><strong>{{date('F dS', strtotime($cohort['start_date']))}}</strong></h4>
+                        <h4 class="tw-px-3 lg:tw-px-5"><strong>{{date('F dS', strtotime($cohort['enrollment_start_date']))}}</strong></h4>
                         <hr class="tw-border-gray-300 tw-my-4 sm:tw-my-2 lg:tw-my-4">
                         <p class="tw-text-sm tw-px-3 lg:tw-px-5">
                              <span x-cloak x-data="timer()" x-init="countdown()">
@@ -222,7 +222,7 @@
                     <img class="tw-h-20 tw-mx-auto tw-mb-5 tw-hidden dark:tw-inline-block" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['dark_mode_logo']??'' }}" alt="modal logo" />
                     <div class="tw-text-2xl tw-font-bold tw-mb-1">Success, You’re Enrolled!</div>
                     <p class="tw-mb-5">
-                        The course runs from {{ date('F d', strtotime($cohort['start_date'])) }} - {{ date('F d', strtotime($cohort['end_date'])) }}. We’ll notify you before the course begins.
+                        The course runs from {{ date('F d', strtotime($cohort['cohort_start_date'])) }} - {{ date('F d', strtotime($cohort['cohort_end_date'])) }}. We’ll notify you before the course begins.
                     </p>
                     <div>
                         <a href="{{$homeUrl}}" class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]">Go home</a>
@@ -240,7 +240,7 @@
 
 @section('layout-scripts')
     @include('partials._countdown',[
-            'countdownDate' => $cohort['end_date'],
+            'countdownDate' => $cohort['enrollment_end_date'],
             'promoVersion' => false
         ])
 
