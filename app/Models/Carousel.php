@@ -28,6 +28,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $product_url
  * @property string $endpoint
  * @property string $video_src
+ * @property string $primary_cta_text
+ * @property string $primary_cta_text_alt
+ * @property string $primary_cta_url
+ * @property string $primary_cta_url_alt
+ * @property string $secondary_cta_text
+ * @property string $secondary_cta_url
  */
 class Carousel extends Model
 {
