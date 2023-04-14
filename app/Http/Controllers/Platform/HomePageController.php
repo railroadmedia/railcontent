@@ -303,7 +303,7 @@ class HomePageController extends BaseController
                     'light_mode_logo' => $activeCohort['light_mode_logo'],
                     'dark_mode_logo' => $activeCohort['dark_mode_logo'],
                     'continue_visible' => false,
-                    'close_visible' => false,
+                    'close_visible' => $activeCohort['cohort_end_time'] < Carbon::now(),
                 ];
 
                 $nextLesson = $this->contentService->getNextContentForParentContentForUser($courseId, user()->id);
