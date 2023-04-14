@@ -57,14 +57,15 @@ onBeforeMount(() => {
             <div>
                 <img class="tw-h-[54px] tw-hidden xl:tw-inline-block dark:xl:tw-hidden" :src="preloadedBanner.light_mode_logo" alt="cohort logo" />
                 <img class="tw-h-[54px] tw-hidden dark:xl:tw-inline-block" :src="preloadedBanner.dark_mode_logo" alt="cohort logo" />
-                <div class="tw-font-bold tw-text-xl xl:tw-text-2xl">Next Lesson: {{ preloadedBanner.title }}</div>
+                <div class="tw-font-bold tw-text-xl xl:tw-text-2xl"><span v-if="preloadedBanner.continue_visible">Next Lesson: </span>{{ preloadedBanner.title }}</div>
             </div>
         </div>
         <div class="tw-flex tw-gap-4 md:tw-block">
             <a :href="preloadedBanner.course_url" class="tw-btn-primary tw-text-[#000C17] tw-border-[#000C17] hover:tw-bg-[#000C17] hover:tw-text-white dark:tw-text-white dark:tw-border-white dark:tw-bg-[#000C17] dark:hover:tw-text-[#000C17] dark:hover:tw-bg-white tw-px-8 md:tw-mr-2 xl:tw-mr-4 tw-text-lg xl:tw-text-xl tw-flex-1 tw-inline-block tw-text-center">Go to Course</a>
-            <a v-if="preloadedBanner.completed !== true" :href="preloadedBanner.lesson_url" class="tw-btn-primary tw-bg-[#00101D] tw-text-white hover:tw-bg-[#3F3F46] dark:tw-text-[#00101D] dark:tw-bg-white dark:hover:tw-text-white dark:hover:tw-bg-[#00101D] tw-px-8 tw-text-lg xl:tw-text-xl tw-flex-1 tw-inline-block tw-text-center">Continue</a>
+            <a v-if="preloadedBanner.continue_visible" :href="preloadedBanner.lesson_url" class="tw-btn-primary tw-bg-[#00101D] tw-text-white hover:tw-bg-[#3F3F46] dark:tw-text-[#00101D] dark:tw-bg-white dark:hover:tw-text-white dark:hover:tw-bg-[#00101D] tw-px-8 tw-text-lg xl:tw-text-xl tw-flex-1 tw-inline-block tw-text-center">Continue</a>
         </div>
         <button
+            v-if="preloadedBanner.close_visible"
             class="
                 tw-absolute
                 dark:tw-text-white
