@@ -23,7 +23,7 @@ const props = defineProps({
         :selfContained="false" :showOverlay="true">
         <div class="tw-h-full tw-w-full tw-flex tw-flex-col tw-items-center tw-justify-center">
             <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-4">
-                Already added
+                Already Added
             </h2>
 
             <p class="dark:tw-text-white tw-text-center">
@@ -32,15 +32,15 @@ const props = defineProps({
                 Add anyway?
             </p>
 
-            <div class="tw-pt-8 tw-flex tw-flex-col tw-items-center tw-justify-center tw-w-full">
+            <div class="tw-pt-8 tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-justify-center tw-w-full">
                 <!-- Delete Lesson -->
-                <button :class="`tw-mb-2 tw-btn-primary tw-text-base tw-bg-${brand} tw-px-[30px] tw-w-[218px] hover:tw-bg-${brand}-600`"
+                <button :class="`tw-mb-2 sm:tw-mb-0 sm:tw-order-1 tw-btn-primary tw-bg-${brand} tw-px-[30px] tw-w-[218px] hover:tw-bg-${brand}-600`"
                     @click.prevent="() => emit('onConfirm')">
                     CONFIRM
                 </button>
                 <!-- Close Modal -->
                 <button @click="() => emit('onClose')"
-                    class="tw-btn-secondary tw-text-base dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px]">
+                    class="tw-btn-secondary dark:tw-text-white tw-text-[#0D0D0D] hover:tw-bg-slate-200/50 dark:hover:tw-bg-white/10 tw-w-[218px] sm:tw-mr-2">
                     CANCEL
                 </button>
             </div>
