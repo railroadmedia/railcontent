@@ -35,16 +35,16 @@
             "subscriptionVersion" => true,
             "fullSubscriptionVersion" => true,
         ])
-    <section class="text-center text-white px-4 sm:px-6 py-4 sm:py-6 lg:py-8" style="background: linear-gradient(to right, #111a2e, #0c75d9);">
+    <section class="text-center text-white px-4 sm:px-6 py-2 sm:py-6 lg:py-8 bg-cover bg-center" style="background-color: #0f4783;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/festival/vdf/header-banner.jpg);">
         <div class="container max-w-6xl mx-auto">
-            <h3><strong>VICTORIA DRUM FEST<br>2023<br>CANADA</strong></h3>
+            <img class="h-28 sm:h-40 lg:h-48" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/festival/vdf/VDF-logo.png">
         </div>
     </section>
-    <section class="text-center px-6 sm:px-8 py-10 sm:py-20 lg:py-28">
+    <section class="text-center px-6 sm:px-8 py-10 sm:py-16 lg:py-20">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-5/12">
-                    <div class="bg-cover rounded-xl aspect-1:1 overflow-hidden relative bg-top cursor-pointer" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg);"></div>
+                    <div class="bg-cover rounded-xl aspect-1:1 overflow-hidden relative bg-top cursor-pointer" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dpwjbsxqtam5n.cloudfront.net/festival/vdf/intro-side.png);"></div>
                 </div>
                 <div class="w-full sm:w-7/12 sm:pl-5 lg:pl-10 mt-5 sm:mt-0 text-center lg:text-left">
                     <div class="px-5 sm:px-0">
