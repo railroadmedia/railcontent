@@ -1,10 +1,10 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=981919cc63f42ed9ddb0cde75ec8643b",
+    "/platform/js/app.js": "/platform/js/app.js?id=93df479af5571ab5a3a3e5bef406b087",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=4b7847a72af066f99f389f025e90aa08",
-    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=e6952d0c08d541fe53ba54d2e99ef07d",
+    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=3ab85d12f31924cb7f700762229d574d",
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=cfa6db90963274cb484c817f9be184a0",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=e1ffd5c9f64e7739d834a415aba059fc",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=26ba2bb391babd9dcfbc6e1e9cf80ffd",
@@ -28,12 +28,12 @@
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=d8e4ffb070f05d53478bd161da77aaef",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=61a6d589345461d93bb4435042381619",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=cfa09b0b222991cacf388f79469aaec9",
-    "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=08560205b522e720a0183cec46955a48",
-    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=47399466396069ec01fa6c26e369b7c8",
+    "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=934b70e220940a9f5f5ad822933a3f19",
+    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=946cbda4fdae164c2cb0dd3d05486d1d",
     "/platform/js/playlist-collection-header.js": "/platform/js/playlist-collection-header.js?id=5a59849c7be66e9ba999365f7e435e4c",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=26d03238e24769866d21704f9c052fd4",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
-    "/platform/css/app.css": "/platform/css/app.css?id=3d74c7889788623bb34478cd5fe3c6fc",
+    "/platform/css/app.css": "/platform/css/app.css?id=f5641db924d4e1b9bf7abf10a63a7bbb",
     "/marketing/css/app.css": "/marketing/css/app.css?id=af9dc498195203afe7ff18583d149c28",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=0af8a8633b0dbc492f5bb94b1b16d789"
 }

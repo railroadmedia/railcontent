@@ -70,6 +70,15 @@
                         })
                         //Close Modal
                         emit('onCloseModal')
+
+                        //load sidebar playlists
+                        playlistsStore.getSidebarPlaylists({
+                            brand: brand,
+                            page: 1,
+                            limit: 10,
+                            term: '',
+                            sort: 'most_recent',
+                        }, token);
                     }
                 }
             })
