@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Heading;
+use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Markdown;
@@ -32,6 +33,7 @@ class Cohort extends Resource
 
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Text::make('slug')->required(),
+            Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('Cohort Title', 'cohort_title')->required(),
 
             Heading::make('Header'),
