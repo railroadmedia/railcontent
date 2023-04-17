@@ -27,7 +27,7 @@ class CohortService
             ->first();
     }
 
-    public function getActiveCohort(): Cohort
+    public function getActiveCohort(): ?Cohort
     {
         if (!$this->activeCohort) {
             $brandId =
