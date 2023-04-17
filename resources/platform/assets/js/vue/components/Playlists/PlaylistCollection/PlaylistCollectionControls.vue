@@ -70,10 +70,10 @@
 <template>
     <nav class="tw-flex tw-my-4 tw-w-full tw-items-center tw-flex-wrap md:tw-flex-nowrap">
         <!--Sort -->
-        <div class="tw-w-full tw-max-w-[calc(100%-68px)] tw-pr-3 md:tw-pr-0 md:tw-max-w-[290px] tw-mr-auto tw-order-2 md:tw-order-1">
+        <div class="tw-w-full tw-max-w-[calc(100%-68px)] tw-pr-3 md:tw-pr-0 md:tw-max-w-[290px] tw-mr-auto tw-order-2 md:tw-order-1 form-group">
             <select name="playlist-sort"
                     id="playlist-sort"
-                    class="tw-transition-colors tw-w-full tw-h-[42px] tw-rounded-3xl tw-text-[#00101D] focus:tw-ring-0 dark:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-text-sm dark:tw-bg-transparent"
+                    class="tw-transition-colors tw-w-full tw-rounded-3xl tw-text-[#00101D] focus:tw-ring-0 dark:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-bg-white dark:tw-bg-transparent"
                     v-model="state.sortValue"
                     @change="loadPlaylists"
             >
@@ -86,10 +86,10 @@
         <div class="tw-relative tw-w-full md:tw-max-w-[465px] md:tw-mx-4 tw-mb-[20px] md:tw-mb-0 xl:tw-ml-[30px] xl:tw-mr-[26px] tw-order-1 md:tw-order-2">
             <MusoraIcon
                 icon-name="search"
-                class="tw-absolute tw-top-4 tw-left-[26px] dark:tw-text-[#9EC0DC] tw-z-0"
+                class="tw-absolute tw-top-5 tw-left-[26px] dark:tw-text-[#9EC0DC] tw-z-0"
             />
             <input type="text"
-                   class="tw-pl-[50px] tw-w-full focus:tw-ring-0 tw-rounded-lg tw-text-[#00101D] tw-h-[42px] tw-text-sm dark:tw-text-[#9EC0DC] dark:focus:tw-bg-[#00101D] dark:placeholder:tw-text-[#9EC0DC] dark:tw-border-[#445F74] dark:tw-bg-transparent"
+                   class="tw-pl-[50px] tw-w-full tw-h-[50px] focus:tw-ring-0 tw-text-[#00101D] dark:tw-text-[#9EC0DC] dark:focus:tw-bg-[#00101D] dark:placeholder:tw-text-white dark:tw-border-[#445F74] tw-bg-white dark:tw-bg-transparent tw-rounded-full focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#D4D4D8]"
                    placeholder="Search"
                    v-model="state.searchTerm"
                    @keyup.enter="loadPlaylists"

@@ -124,6 +124,14 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
+    startSecond: {
+        type: [String, Number],
+        default: 0
+    },
+    endSecond: {
+        type: [String, Number],
+        default: null
+    }
 });
 
 const emit = defineEmits('onVideoEnd', 'play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state');
@@ -745,7 +753,6 @@ function handleOverlayClick() {
 };
 
 onMounted(() => {
-    console.log('VIDEO PLAYER')
     const supportsMSE = false;
 
     currentRange.value = window.localStorage.getItem('currentRange') || 'original';
@@ -793,7 +800,12 @@ onMounted(() => {
                 return loadSource();
             })
             .then(() => {
-                initializePlayer();
+                if (props.startSecond !== null) {
+                    initializePlayer(props.startSecond);
+
+                } else {
+                    initializePlayer();
+                }
             })
             .catch((error) => {
                 if (error.severity === 2) {
@@ -889,10 +901,21 @@ const currentProgress = computed(() => {
     if (isChromeCastConnected.value) {
         const progress = (chromeCast.value.Player.currentTime / totalDuration.value) * 100;
 
+
+        if ((currentTime.value < totalDuration.value) && currentTime.value > props.endSecond) {
+            playPause();
+            endCallback();
+        }
+
         return isNaN(progress) ? 0 : progress;
     }
 
     const progress = (currentTime.value / totalDuration.value) * 100;
+
+    if ((currentTime.value < totalDuration.value) && currentTime.value > props.endSecond) {
+        playPause();
+        endCallback();
+    }
 
     return isNaN(progress) ? 0 : progress;
 });
@@ -1022,9 +1045,13 @@ const endCallback = () => {
     const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
     const isInPlaybackMode = window.location.href.includes('playlist-item');
     if (isRepeatOn && isInPlaybackMode) {
-        seek(0);
+        if (props.startSecond !== null) {
+            seek(props.startSecond);
+        } else {
+            seek(0);
+        }
         playPause();
-     } else {
+    } else {
         emit('onVideoEnd');
     }
 };

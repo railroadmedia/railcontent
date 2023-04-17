@@ -12,7 +12,7 @@ const token = inject('csrf_token');
 const playlistsStore = usePlaylistsStore();
 
 //Emits
-const emit = defineEmits(['closeDropdown', 'pinItem', 'makePublic']);
+const emit = defineEmits(['closeDropdown', 'pinItem', 'makePublic', 'updatePinned']);
 
 //-----------Props-----------//
 const props = defineProps({
@@ -119,6 +119,7 @@ const pinPlaylist = () => {
                             icon: 'playlist',
                             text: `'${props.data.name}' has been pinned within the sidebar.`
                         })
+                        emit('updatePinned', true);
                     }
                 })
                 .catch(function (error) {
@@ -160,6 +161,7 @@ const pinPlaylist = () => {
                     })
                 }
             });
+        emit('updatePinned', false);
     }
     //close after click
     emit('closeDropdown');
@@ -177,7 +179,7 @@ const deletePlaylist = () => {
 
 const addToPlaylist = () => {
     window.openplaylistmodal({
-        modalType: 'addItem', content: props.data
+        modalType: 'addItem', content: { ...props.data, content_id: props.data.id }
     });
 }
 
@@ -224,7 +226,6 @@ const clickHandler = (fnstring) => {
 
 //---------Lifecycle Methods---------//
 onBeforeMount(() => {
-    console.log(props.lessonsLength)
     state.isPrivate = props.data.private ? 1 : 0;
 });
 
