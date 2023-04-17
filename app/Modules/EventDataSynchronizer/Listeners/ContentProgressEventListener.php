@@ -474,21 +474,6 @@ class ContentProgressEventListener
                     $mediaPlaybackTracked->brand
                 );
 
-                //******************************************************************************************//
-                //Remove this after migration completed
-                while ($minutes > 0) {
-                    $this->userPointsService->deletePoints(
-                        $mediaPlaybackTracked->userId,
-                        [
-                            'content_id' => $content['content_id'],
-                            'minutes_watched' => $minutes,
-                        ],
-                        $mediaPlaybackTracked->brand
-                    );
-                    $minutes--;
-                }
-                //******************************************************************************************//
-
                 $this->userProvider->saveExperiencePoints(
                     $mediaPlaybackTracked->userId,
                     $this->userPointsService->countUserPointsPerBrand(
