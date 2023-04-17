@@ -88,7 +88,7 @@ class PackPagesController extends Controller
                                                false,
                                                false
             )['results']
-        ))->sortByUserActivity(user()->id);
+        ))->sortPacks(user()->id);
 
         foreach($packs as $pack){
             $nextLesson = $this->contentService->getNextContentForParentContentForUser($pack['id'], user()->id);
@@ -134,11 +134,11 @@ class PackPagesController extends Controller
     public function packBundles(Request $request, $domain, $brand, $packSlug, $packId)
     {
         ContentRepository::$pullFutureContent = true;
-        
+
         Decorator::$typeDecoratorsEnabled = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-        
+
         $pack = $this->contentService->getById($packId);
 
         if (empty($pack)) {

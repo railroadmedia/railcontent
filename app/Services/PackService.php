@@ -54,7 +54,7 @@ class PackService
 
         $packs = (new PackCollection(
             $this->contentService->getFiltered(1, -1, '-published_on', ['pack', 'semester-pack'])['results']
-        ))->sortByUserActivity($user->id);
+        ))->sortPacks($user->id);
 
         ContentRepository::$pullFutureContent = $oldPullFutureContent;
         ContentRepository::$availableContentStatues = $oldAvailableContentStatues;

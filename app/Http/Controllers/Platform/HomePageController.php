@@ -294,10 +294,9 @@ class HomePageController extends BaseController
 
         if ($activeCohort && $hasProduct) {
 
-            if (isset($activeCohort['course_url']) && (filter_var($activeCohort['course_url'], FILTER_VALIDATE_URL))) {
-                $initialRequest = \Request::create($activeCohort['course_url']);
-                $segments = $initialRequest->segments();
-                $courseId = last($segments);
+            $contentId = $activeCohort->getContentId();
+            if ($contentId > 0) {
+
                 $cohortBanner = [
                     'course_url' => $activeCohort['course_url'],
                     'light_mode_logo' => $activeCohort['light_mode_logo'],
@@ -306,13 +305,13 @@ class HomePageController extends BaseController
                     'close_visible' => $activeCohort['cohort_end_time'] < Carbon::now(),
                 ];
 
-                $nextLesson = $this->contentService->getNextContentForParentContentForUser($courseId, user()->id);
+                $nextLesson = $this->contentService->getNextContentForParentContentForUser($contentId, user()->id);
                 if($nextLesson) {
                     $cohortBanner['lesson_url']= $nextLesson->fetch('url');
                     $cohortBanner['title']= $nextLesson->fetch('title');
                     $cohortBanner['thumbnail'] = $nextLesson->fetch('data.thumbnail_url');
                 }else{
-                    $course = $this->contentService->getById($courseId);
+                    $course = $this->contentService->getById($contentId);
                     if($course['completed']){
                         $cohortBanner['completed'] = true;
                         $cohortBanner['thumbnail'] = $course->fetch('data.thumbnail_url');

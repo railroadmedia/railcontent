@@ -25,7 +25,7 @@ class CohortService
             ->first();
     }
 
-    public function getActiveCohort()
+    public function getActiveCohort() : Cohort
     {
         $brandId =
             Brand::query()
