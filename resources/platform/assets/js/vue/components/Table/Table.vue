@@ -34,7 +34,24 @@ const emit = defineEmits(['onActionClick', 'onScroll']);
                 </tr>
             </thead>
             <tbody class="tw-text-[14px]">
-                <tr v-for="([firstCol, ...cols], index) in rows" :key="index"
+                <tr v-if="rows.length === 0">
+                    <td colspan="4">
+                        <div
+                            class="tw-w-full tw-flex dark:tw-text-white tw-items-center tw-py-7 tw-flex-col tw-bg-[#F9F9F9] dark:tw-bg-[#00101D]"
+                        >
+                            <div class="tw-h-[55px] tw-w-[55px] tw-mb-[30px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#223F57] dark:tw-bg-[#445F74] "
+                            >
+                                <musora-icon icon-name="playlist" class="tw-w-[36px]" />
+                            </div>
+                            <div>
+                                <h1 class="tw-font-normal tw-font-open-sans tw-text-sm tw-mb-2">
+                                    You haven't created any playlists yet.
+                                </h1>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr v-else v-for="([firstCol, ...cols], index) in rows" :key="index"
                     :class="`${index % 2 === 0 ? 'tw-bg-[#F9F9F9] dark:tw-bg-[#071826]' : 'dark:tw-bg-[#00101D]'}`">
                     <th scope="row" class="tw-px-2 sm:tw-px-5 tw-py-2 tw-font-medium tw-whitespace-nowrap dark:text-white">
                         <div class="tw-flex tw-flex-row tw-w-full tw-h-full tw-items-center">

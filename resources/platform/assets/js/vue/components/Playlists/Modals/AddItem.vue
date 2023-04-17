@@ -207,8 +207,8 @@ onMounted(() => {
 
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
-        <AddDuplicate v-if="duplicateProps.show" :title="duplicateProps.title"
-            @onConfirm="() => handleDuplicateConfirm(duplicateProps.id)" @onClose="handleDuplicateCancel" />
+        <AddDuplicate v-if="duplicateProps.show" :title="duplicateProps.title" :brand="brand"
+            @onConfirm="() => handleDuplicateConfirm(duplicateProps.id)" @onClose="handleDuplicateCancel"  />
         <div v-if="isLoadingAssignments || isLoadingPlaylists"
             class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-items-center tw-justify-center tw-bg-black/40">
             <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
@@ -255,26 +255,11 @@ onMounted(() => {
                 </fieldset>
             </div>
         </div>
-        <!-- No Playlists -->
-        <section v-if="formattedRows.length === 0" 
-                 class="tw-w-full tw-flex dark:tw-text-white tw-items-center tw-mt-[58px] tw-flex-col"
-        >
-            <div class="tw-h-[84px] tw-w-[84px] tw-mb-[30px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#223F57] dark:tw-bg-[#445F74] "
-            >
-                <musora-icon icon-name="playlist" class="tw-w-[36px]" />
-            </div>
-            <div>
-                <h1 class="tw-text-3xl tw-font-normal tw-font-open-sans tw-text-[16px] tw-mb-2">
-                    You haven't created any playlists yet.
-                </h1>
-            </div>
-        </section>
-        <!-- No Playlists -->
-        <Table v-if="formattedRows.length" @onActionClick="handleActionClick" @onScroll="handleScroll"
+        <Table @onActionClick="handleActionClick" @onScroll="handleScroll"
             classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll" :stickyHeader="true" :rows="formattedRows">
             <template v-slot:actionContent="slotProps">
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
-                    class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-[#7E9AB1]" />
+                    class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-white" />
                 <CheckCircleIcon v-if="selectedPlaylists.includes(String(slotProps.actionPayload))"
                     :class="`tw-w-[30px] tw-h-[30px] tw-text-[#4ADE80]`" />
             </template>
@@ -286,9 +271,10 @@ onMounted(() => {
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
             <button @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white tw-bg-${brand} tw-h-[35px]`"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-${brand}-600 tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600`"
+                    :disabled="selectedPlaylists.length === 0"
             >
-                CONFIRM
+                SAVE
             </button>
         </div>
     </div>
