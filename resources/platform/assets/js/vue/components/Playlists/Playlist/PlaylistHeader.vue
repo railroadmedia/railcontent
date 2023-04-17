@@ -36,7 +36,7 @@
         dropdownOpen: false,
         dropdownTop: false,
         isPrivate: 1,
-        isPinned: true,
+        isPinned: playlistsStore.pinnedPlaylists.find((p)=>{ return p.id === props.playlist.id }),
         isLiked: false,
     })
 
@@ -59,7 +59,7 @@
             action: "reorderPlaylist"
         },
         {
-            name: "Pin To Sidebar",
+            name: state.isPinned ? 'Unpin from Sidebar' : "Pin To Sidebar",
             action: "pinPlaylist"
         },
         {
@@ -124,8 +124,13 @@
     onBeforeMount(() => {
         playlistsStore.setActivePlaylist(props.playlist)
         state.isLiked = props.playlist.is_liked_by_current_user;
-        state.isPinned = props.playlist.pinned;
+        state.isPinned = playlistsStore.pinnedPlaylists.find((p)=>{ return p.id === props.playlist.id });
         state.isPrivate = props.playlist.private;
+    })
+
+    onMounted(()=>{
+        // console.log(playlistsStore.pinnedPlaylists.find((p)=>{ return p.id === props.playlist.id }))
+        state.isPinned = playlistsStore.pinnedPlaylists.find((p)=>{ return p.id === props.playlist.id });
     })
 </script>
 <template>
@@ -167,8 +172,8 @@
                         </svg>
                     </div>
                     <!-- Pinned Icon -->
-                    <div class="tw-inline-flex tw-items-center tw-transition-colors tw-z-20 tw-absolute tw-top-3 tw-right-3"
-                        :class="[`tw-text-${brand}`, { 'tw-opacity-0' : !playlistsStore.activePlaylist.pinned } ]"
+                    <div class="tw-inline-flex tw-items-center tw-transition-colors tw-z-20 tw-absolute tw-top-3 tw-right-3 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5"
+                        :class="[`tw-text-white`, { 'tw-opacity-0' : !state.isPinned } ]"
                     >
                         <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto tw-hidden md:tw-flex" />
                     </div>
@@ -230,12 +235,13 @@
                             :brand="brand"
                             :dropdownTop="state.dropdownTop"
                             :is-private="state.isPrivate"
-                            :is-pinned="playlistsStore.activePlaylist.pinned"
+                            :is-pinned="state.isPinned"
                             :dropdownOptions="dropdownOptions"
                             :data="playlistsStore.activePlaylist"
                             :is-open="state.dropdownOpen"
                             type="playlist"
                             @closeDropdown="state.dropdownOpen = false"
+                            @updatePinned="(val) => state.isPinned = val"
                             @pinItem="playlistsStore.activePlaylist.pinned = $event"
                             @makePublic="(val) => state.isPrivate = val"
                         />
