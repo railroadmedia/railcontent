@@ -4,7 +4,8 @@ namespace App\Providers;
 
 use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
-use App\Nova\Cohort;
+use App\Modules\Ecommerce\Services\UserProductService;
+use App\Services\PackService;
 use Carbon\Carbon;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
@@ -12,29 +13,32 @@ use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 class MusoraApiProductProvider implements ProductProviderInterface
 {
     private CarouselService $carouselService;
-    private \App\Modules\Ecommerce\Services\UserProductService $userProductService;
+    private UserProductService $userProductService;
     private ProductRepository $productRepository;
     private CohortService $cohortService;
+    private PackService $packService;
 
     public function __construct(
         CarouselService $carouselService,
-        \App\Modules\Ecommerce\Services\UserProductService $userProductService,
+        UserProductService $userProductService,
         ProductRepository $productRepository,
-        CohortService $cohortService
+        CohortService $cohortService,
+        PackService $packService,
     ) {
         $this->carouselService = $carouselService;
         $this->userProductService = $userProductService;
         $this->productRepository = $productRepository;
         $this->cohortService = $cohortService;
+        $this->packService = $packService;
     }
 
-    public function getPackPrice($slug)
-    : array {
+    public function getPackPrice($slug): array
+    {
         return [];
     }
 
-    public function getAppleProductId($slug)
-    : string {
+    public function getAppleProductId($slug): string
+    {
         $productSkuToPackSlugArray = config('event-data-synchronizer.pack_ecommerce_product_sku_to_content_slug') ?? [];
 
         $productSKU = array_flip($productSkuToPackSlugArray)[$slug] ?? null;
@@ -42,8 +46,8 @@ class MusoraApiProductProvider implements ProductProviderInterface
         return array_flip(config('ecommerce.apple_store_products_map', []))[$productSKU] ?? '';
     }
 
-    public function getGoogleProductId($slug)
-    : string {
+    public function getGoogleProductId($slug): string
+    {
         $productSkuToPackSlugArray = config('event-data-synchronizer.pack_ecommerce_product_sku_to_content_slug');
 
         $productSKU = array_flip($productSkuToPackSlugArray)[$slug] ?? null;
@@ -51,13 +55,12 @@ class MusoraApiProductProvider implements ProductProviderInterface
         return array_flip(config('ecommerce.google_store_products_map'))[$productSKU] ?? '';
     }
 
-    public function currentUserOwnsPack($id)
-    : bool {
+    public function currentUserOwnsPack($id): bool
+    {
         return true;
     }
 
-    public function getMembershipProductIds()
-    : array
+    public function getMembershipProductIds(): array
     {
         return [];
     }
@@ -75,7 +78,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
      * @return array
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getCohortTemplate($slug) :array
+    public function getCohortTemplate($slug): array
     {
         $cohort = $this->cohortService->getCohort($slug);
 
@@ -99,5 +102,10 @@ class MusoraApiProductProvider implements ProductProviderInterface
             'faq' => $cohort->dropdowns->toArray(),
             'enrollmentClosed' => $enrollmentClosed,
         ];
+    }
+
+    public function getPacks()
+    {
+        return $this->packService->getPacks();
     }
 }

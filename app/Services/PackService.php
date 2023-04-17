@@ -3,7 +3,11 @@
 namespace App\Services;
 
 use App\Collections\PackCollection;
+use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
+use App\Decorators\Content\ContentExperienceDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
+use App\Decorators\Content\LessonAssignmentDecorator;
+use App\Decorators\Content\PackDecorator;
 use Carbon\Carbon;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Services\UserProductService;
@@ -39,7 +43,7 @@ class PackService
      * @return PackCollection
      * @throws \Doctrine\ORM\ORMException
      */
-    public function getPacks(User $user, $getAll = false)
+    public function getPacksForHome(User $user, $getAll = false)
     {
         Decorator::$typeDecoratorsEnabled = true;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
@@ -50,7 +54,10 @@ class PackService
         $oldAvailableContentStatues = ContentRepository::$availableContentStatues;
 
         ContentRepository::$pullFutureContent = true;
-        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
+        ContentRepository::$availableContentStatues = [
+            ContentService::STATUS_PUBLISHED,
+            ContentService::STATUS_SCHEDULED
+        ];
 
         $packs = (new PackCollection(
             $this->contentService->getFiltered(1, -1, '-published_on', ['pack', 'semester-pack'])['results']
@@ -77,7 +84,7 @@ class PackService
             foreach ($packs as $packIndex => $pack) {
                 foreach ($userProducts as $userProduct) {
                     if (($productSkuToPackSlugArray[$userProduct->getProduct()
-                                ->getSku()] ?? null) == $pack['slug']
+                            ->getSku()] ?? null) == $pack['slug']
                         && $userProduct->getCreatedAt() > Carbon::now()
                             ->subDays(3)
                     ) {
@@ -90,5 +97,35 @@ class PackService
 
             return new PackCollection(array_slice($packsToShow, 0, 3));
         }
+    }
+
+
+    public function getPacks()
+    {
+        ContentRepository::$pullFutureContent = true;
+        AddedToPrimaryPlaylistDecorator::$skip = true;
+        PackDecorator::$skip = true;
+        LessonAssignmentDecorator::$skip = true;
+        ContentExperienceDecorator::$skip = true;
+
+        $packs = (new PackCollection(
+            $this->contentService->getFiltered(
+                1,
+                -1,
+                '-published_on',
+                ['pack', 'semester-pack'],
+                [],
+                [],
+                [],
+                [],
+                [],
+                [],
+                false,
+                false,
+                false
+            )['results']
+        ))->sortPacks(user()?->id);
+
+        return $packs;
     }
 }

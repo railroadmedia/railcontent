@@ -371,7 +371,7 @@ class HomePageController extends BaseController
      */
     public function homePackOnly(Request $request, $brand)
     {
-        $packs = $this->getPacks();
+        $packs = $this->packService->getPacksForHome(user());;
         $hotForumTopics = $this->getHotForumTopics();
         $member = user();
 
@@ -398,15 +398,7 @@ class HomePageController extends BaseController
             "startedContentCount" => 0 //TODO: replace with real data
         ]);
     }
-
-    /**
-     * @return PackCollection
-     */
-    private function getPacks()
-    {
-        return $this->packService->getPacks(user());
-    }
-
+    
     /**
      * singeo only
      *
