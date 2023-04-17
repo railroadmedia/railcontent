@@ -78,7 +78,7 @@ class PackPagesController extends Controller
 
         foreach ($packs as $pack) {
             if ($pack['id'] == $activePack) {
-                $pack['status_text'] = 1;
+                $pack['status_text'] = "In Progress";
             }
             $nextLesson = $this->contentService->getNextContentForParentContentForUser($pack['id'], user()->id);
             if ($nextLesson && $nextLesson['type'] == 'pack-bundle-lesson') {
