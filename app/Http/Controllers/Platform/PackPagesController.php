@@ -9,6 +9,7 @@ use App\Decorators\Content\PackDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\ContentLikesDecorator;
+use App\Modules\Content\Services\CohortService;
 use App\Services\PackService;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -50,6 +51,7 @@ class PackPagesController extends Controller
 
     private LessonAssignmentDecorator $lessonAssignmentDecorator;
     private PackService $packService;
+    private CohortService $cohortService;
 
     public function __construct(
         ContentService $contentService,
@@ -58,6 +60,7 @@ class PackPagesController extends Controller
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
         LessonAssignmentDecorator $lessonAssignmentDecorator,
         PackService $packService,
+        CohortService $cohortService,
     ) {
         $this->contentService = $contentService;
         $this->userContentProgressService = $userContentProgressService;
@@ -65,13 +68,18 @@ class PackPagesController extends Controller
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
         $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
         $this->packService = $packService;
+        $this->cohortService = $cohortService;
     }
 
     public function index(Request $request, $domain, $brand)
     {
         $packs = $this->packService->getPacks();
+        $activePack = $this->cohortService->getActiveCohort()->getContentId() ?? 0;
 
         foreach ($packs as $pack) {
+            if ($pack['id'] == $activePack) {
+                $pack['status_text'] = 1;
+            }
             $nextLesson = $this->contentService->getNextContentForParentContentForUser($pack['id'], user()->id);
             if ($nextLesson && $nextLesson['type'] == 'pack-bundle-lesson') {
                 $bundle = $this->contentService->getByChildIdWhereParentTypeIn($nextLesson['id'], ['pack-bundle']

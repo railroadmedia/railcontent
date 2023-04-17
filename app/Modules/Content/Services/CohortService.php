@@ -8,6 +8,8 @@ use Carbon\Carbon;
 
 class CohortService
 {
+    private ?Cohort $activeCohort = null;
+
     /**
      * @param $slug
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|object|null
@@ -25,17 +27,20 @@ class CohortService
             ->first();
     }
 
-    public function getActiveCohort() : Cohort
+    public function getActiveCohort(): Cohort
     {
-        $brandId =
-            Brand::query()
-                ->where('name', brand())
-                ->first()->id;
+        if (!$this->activeCohort) {
+            $brandId =
+                Brand::query()
+                    ->where('name', brand())
+                    ->first()->id;
 
-        return Cohort::query()
-            ->where('brand_id', $brandId)
-            ->where('cohort_start_date','<=', Carbon::now()->toDateTimeString())
-            ->where('cohort_end_date','>=', Carbon::now()->subWeeks(2)->toDateTimeString())
-            ->first();
+            $this->activeCohort = Cohort::query()
+                ->where('brand_id', $brandId)
+                ->where('cohort_start_date', '<=', Carbon::now()->toDateTimeString())
+                ->where('cohort_end_date', '>=', Carbon::now()->subWeeks(2)->toDateTimeString())
+                ->first();
+        }
+        return $this->activeCohort;
     }
 }
