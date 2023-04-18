@@ -1,10 +1,9 @@
 <script setup>
-    import platformHeader from "../../PlatformHeader/platform-header.vue";
     import PlaylistService from '../../../../services/playlists.js';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue'
     import PlaylistDropdown from '../PlaylistDropdown.vue';
     import { usePlaylistsStore } from '../../../../stores/playlists';
-    import { onBeforeMount, ref, inject, reactive, onMounted } from 'vue';
+    import { onBeforeMount, ref, inject, reactive, onMounted, onUpdated } from 'vue';
 
     //Inject
     const token = inject('csrf_token');
@@ -59,7 +58,7 @@
             action: "reorderPlaylist"
         },
         {
-            name: state.isPinned ? 'Unpin from Sidebar' : "Pin To Sidebar",
+            name: "Pin To Sidebar",
             action: "pinPlaylist"
         },
         {
@@ -130,6 +129,11 @@
 
     onMounted(()=>{
         // console.log(playlistsStore.pinnedPlaylists.find((p)=>{ return p.id === props.playlist.id }))
+        state.isPinned = playlistsStore.pinnedPlaylists.find((p)=>{ return p.id === props.playlist.id });
+    })
+
+    onUpdated(()=>{
+        console.log(playlistsStore.pinnedPlaylists)
         state.isPinned = playlistsStore.pinnedPlaylists.find((p)=>{ return p.id === props.playlist.id });
     })
 </script>
