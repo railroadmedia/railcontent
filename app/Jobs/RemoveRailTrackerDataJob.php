@@ -13,11 +13,12 @@ class RemoveRailTrackerDataJob extends Job
     public function handleJob()
     {
         $paths = ['/railtracker/media-playback-session', '/musora-api/v1/media'];
+        //Requests::query()->where('url_path', 'like', '/musora-api/v1/media/%')->orWhereIn('url_path', $paths)
 
-        for ($i = 0; $i < 100; $i++) {
-            Requests::query()->where('url_path', 'like', '/musora-api/v1/media/%')->orWhereIn('url_path', $paths)
+        for ($i = 0; $i < 200; $i++) {
+            Requests::query()->where('url_path', '=', '/railtracker/media-playback-session')
                 ->limit(
-                    1000
+                    100
                 )->delete();
             usleep(100000);
         }
