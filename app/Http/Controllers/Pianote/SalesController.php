@@ -145,6 +145,11 @@ class SalesController extends BaseController
         return view('pianote.products.beautiful-beginner-bundle', [ 'theme' => 'pianote' ]);
     }
 
+    public function buildYourBundle()
+    {
+        return view('pianote.products.build-your-bundle', [ 'theme' => 'pianote' ]);
+    }
+
     public function lifetime()
     {
         return view('pianote.shop.pages.lifetime', [ 'theme' => 'pianote' ]);
