@@ -205,7 +205,7 @@
         class="content-section text-center customize relative z-50 bg-top bg-no-repeat lazyload"
         style="background-color:#01050f;"
         x-data="{
-            bonus: 0,
+            selectedNum: 0,
             query: '',
         }"
     >
@@ -314,13 +314,13 @@
                             selected: false,
                         }"
                         x-on:click="
-                            if(bonus <= 3 && selected){
+                            if (selected){
                                 selected = !selected;
                                 query = query.replace('{{ $bonus['sku'] }}', '');
-                                bonus--;
-                            } else if(bonus < 3 && !selected) {
+                                selectedNum--;
+                            } else if(!selected) {
                                 selected = !selected;
-                                bonus++;
+                                selectedNum++;
                                 query = query + '{{ $bonus['sku'] }}';
                             }
                         "
@@ -330,7 +330,7 @@
                                 <div
                                     x-ref="front"
                                     class="border-drumeo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
-                                    :class="selected ? 'border-4' : !selected && bonus !==3 && 'hover:border-2'"
+                                    :class="selected ? 'border-4' : !selected && 'hover:border-2'"
                                     style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
                                     @if(!empty($bonus['badge']))
                                         <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
@@ -339,7 +339,6 @@
                                     <div
                                         class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover"
                                         style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/{{ $bonus['image'] }});"
-                                        :class="!selected && bonus === 3 && 'grayscale'"
                                     ></div>
                                 </div>
                             </div>
@@ -371,16 +370,18 @@
                             <h2 class="uppercase font-bold font-bebas tracking-widest">Anika Nilles</h2>
                         </div>
                     </div>
+                    <p x-show="selectedNum !== 0">$<s class="text-gray" x-text="selectedNum * 39"></s> <span x-text="selectedNum === 1 ? 29 : selectedNum === 2 ? 49 : selectedNum === 3 && 59"></span></p>
+                    <p class="uppercase" x-show="selectedNum !== 0"><i>This bundle saves you <span x-text="selectedNum === 1 ? 26 : selectedNum === 2 ? 37 : selectedNum === 3 && 50"></span>%</i></p>
                 </div>
             </div>
 
             {{--            @if($products['DLM-Lifetime']->getStockAvailability() > 0)--}}
-{{--            <a--}}
-{{--                class="join blue bigger my-4 md:my-8 w-full max-w-xs md:max-w-lg lg:max-w-3xl"--}}
-{{--                style="padding: 20px 10px;"--}}
-{{--                :class="bonus !== 3 && 'sold-out'"--}}
-{{--                :href="bonus === 3 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'"--}}
-{{--                x-text="bonus === 3 ? 'BECOME A LIFETIME MEMBER &raquo;' : 'Choose 3 products above'"></a>--}}
+            <a
+                class="join blue bigger my-4 md:my-8 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
+                style="padding: 20px 10px;"
+                :class="selectedNum === 0 && 'sold-out'"
+                :href="selectedNum !== 0 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'"
+                x-text="selectedNum !== 0 ? 'BECOME A LIFETIME MEMBER &raquo;' : 'Choose products'"></a>
 {{--            <p class="text-promo">--}}
 {{--                AVAILABLE UNTIL MARCH 31st AT MIDNIGHT <br>--}}
 {{--                <b>--}}
@@ -396,7 +397,7 @@
 {{--                </b>--}}
 {{--            </p>--}}
             {{--            @else--}}
-            <a class="join sold-out my-4">Sold Out</a>
+{{--            <a class="join sold-out my-4">Sold Out</a>--}}
             {{--            @endif--}}
         </div>
     </section>
