@@ -87,7 +87,7 @@
                 <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-text-center tw-border tw-rounded-lg tw-border-gray-300 tw-mb-2 lg:tw-mb-4">
                     <div class="tw-w-full sm:tw-w-auto tw-border-b sm:tw-border-b-0 sm:tw-border-r tw-border-gray-300 tw-py-4 sm:tw-py-3 lg:tw-py-4">
                         <p class="tw-tracking-wide tw-opacity-70 tw-text-sm">STARTS ON</p>
-                        <h4 class="tw-px-3 lg:tw-px-5"><strong>{{date('F dS', strtotime($cohort['enrollment_start_date']))}}</strong></h4>
+                        <h4 class="tw-px-3 lg:tw-px-5"><strong>{{date('F dS', strtotime($cohort['cohort_start_date']))}}</strong></h4>
                         <hr class="tw-border-gray-300 tw-my-4 sm:tw-my-2 lg:tw-my-4">
                         <p class="tw-text-sm tw-px-3 lg:tw-px-5">
                             {{--  Countdown  --}}
