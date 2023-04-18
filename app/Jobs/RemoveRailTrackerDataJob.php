@@ -20,7 +20,7 @@ class RemoveRailTrackerDataJob extends Job
                 ->limit(
                     100
                 )->delete();
-            usleep(100000);
+            usleep(200000);
         }
     }
 }
