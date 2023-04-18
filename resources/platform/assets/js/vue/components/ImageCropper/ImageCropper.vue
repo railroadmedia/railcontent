@@ -9,13 +9,18 @@ import { Cropper } from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
 import MusoraIcon from "../../components/MusoraIcons/MusoraIcon.vue"
 
-import Stencil from "./Stencil.vue";
+import CircleStencil from "./CircleStencil.vue";
+import SquareStencil from "./SquareStencil.vue";
 
 const props = defineProps({
   selectedImage: {
     type: Blob,
     default: null,
   },
+  type: {
+    type: String,
+    default: 'circle'
+  }
 });
  
 const emit = defineEmits(['onCrop']);
@@ -58,7 +63,7 @@ function rotate() {
       ref="cropper"
       class="musora-cropper"
       :src="selectedImage"
-      :stencil-component="Stencil"
+      :stencil-component="type === 'circle' ? CircleStencil : SquareStencil"
     />
     <div
       class="

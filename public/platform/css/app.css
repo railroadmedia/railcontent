@@ -22324,11 +22324,11 @@ a:visited{
 .tw-min-h-\[105px\]{
   min-height: 105px !important;
 }
-.tw-min-h-\[90px\]{
-  min-height: 90px !important;
-}
 .tw-min-h-\[200px\]{
   min-height: 200px !important;
+}
+.tw-min-h-\[90px\]{
+  min-height: 90px !important;
 }
 .tw-w-full{
   width: 100% !important;
@@ -23685,9 +23685,6 @@ a:visited{
 .tw-bg-center{
   background-position: center !important;
 }
-.tw-bg-top{
-  background-position: top !important;
-}
 .tw-bg-no-repeat{
   background-repeat: no-repeat !important;
 }
@@ -24826,14 +24823,8 @@ a:visited{
   .tw-container{
     max-width: 1815px !important;
   }
-  .tw-container{
-    max-width: 1815px !important;
-  }
 }
 @media (min-width: 2256px){
-  .tw-container{
-    max-width: 2256px !important;
-  }
   .tw-container{
     max-width: 2256px !important;
   }
@@ -26364,10 +26355,6 @@ a:visited{
   .md\:tw-py-10{
     padding-top: 2.5rem !important;
     padding-bottom: 2.5rem !important;
-  }
-  .md\:tw-px-8{
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
   }
   .md\:tw-pt-8{
     padding-top: 2rem !important;
