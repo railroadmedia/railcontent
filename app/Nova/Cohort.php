@@ -229,7 +229,9 @@ class Cohort extends Resource
             DateTime::make(__('Cohort Start Time'), 'cohort_start_date')->hideFromIndex()->help("Controls whether cohort is currently active.  Cohort banners/pinned packs are a couple of functions tied to this."),
             DateTime::make(__('Cohort End Time'), 'cohort_end_date')->hideFromIndex()->help("Controls whether cohort is currently active.  Cohort banners/pinned packs are a couple of functions tied to this."),
 
-            Text::make('Course Url','course_url')->hideFromIndex(),
+            Number::make('Course ID','content_id')->hideFromIndex()->required(),
+
+            Number::make('Conversation Thread ID','conversation_thread_id')->hideFromIndex(),
         ];
     }
 

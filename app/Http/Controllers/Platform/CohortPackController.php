@@ -10,6 +10,7 @@ use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\User;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Services\UserProductService as EcommerceUserProductService;
+use Railroad\Railcontent\Services\ContentService;
 
 class CohortPackController
 {
@@ -18,17 +19,20 @@ class CohortPackController
     private UserProductService $userProductService;
     private EcommerceUserProductService $ecommerceUserProductService;
     private CohortService $cohortService;
+    private ContentService $contentService;
 
     public function __construct(
         UserProductService $userProductService,
         EcommerceUserProductService $ecommerceUserProductService,
         ProductRepository $productRepository,
-        CohortService $cohortService
+        CohortService $cohortService,
+        ContentService $contentService
     ) {
         $this->userProductService = $userProductService;
         $this->ecommerceUserProductService = $ecommerceUserProductService;
         $this->productRepository = $productRepository;
         $this->cohortService = $cohortService;
+        $this->contentService = $contentService;
     }
 
     /**
@@ -56,6 +60,12 @@ class CohortPackController
         $startDate = Carbon::createFromFormat('Y-m-d H:i:s', $cohort['enrollment_start_date']);
         $now = Carbon::now();
         $enrollmentClosed = $endDate->lessThan($now) || $startDate->greaterThan($now);
+
+        $content = $this->contentService->getById($cohort['content_id']);
+        $cohort['course_url'] = ($content) ? $content->fetch('url', '') : '';
+        $cohort['conversation_url'] =
+            $cohort['conversation_thread_id'] ?
+                url()->route('forums.jump-to-thread', ['threadId' => $cohort['conversation_thread_id']]) : '';
 
         return view('content.cohort-template', [
             'hasProduct' => $hasProduct,

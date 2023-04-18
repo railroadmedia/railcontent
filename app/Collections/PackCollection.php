@@ -19,7 +19,7 @@ class PackCollection extends Collection
 
     public function sortPacks($userId, $direction = 'desc')
     {
-        $activeContentId = $this->cohortService->getActiveCohort()?->getContentId() ?? 0;
+        $activeContentId = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
 
         return $this->sort(
             function (ContentEntity $a, ContentEntity $b) use ($direction, $userId, $activeContentId) {

@@ -271,11 +271,11 @@ class HomePageController extends BaseController
             $eventCoachId = $currentEvent->fetch('fields.instructor.id');
             if (!empty($eventCoachSlug) && !empty($eventCoachId)) {
                 $eventCoachUrl = url()->route('platform.content.first-level', [
-                                                                                'brand' => brand(),
-                                                                                'primaryPage' => 'coaches',
-                                                                                'firstContentSlug' => $eventCoachSlug,
-                                                                                'firstContentId' => $eventCoachId,
-                                                                            ]);
+                    'brand' => brand(),
+                    'primaryPage' => 'coaches',
+                    'firstContentSlug' => $eventCoachSlug,
+                    'firstContentId' => $eventCoachId,
+                ]);
                 $currentEventCalendarId = config('addevent.uniquekeys.by-coach')[$currentEvent->fetch(
                         'fields.instructor.slug'
                     )] ?? config('addevent.uniquekeys.brand-overview');
@@ -293,12 +293,11 @@ class HomePageController extends BaseController
             user() && $this->userProductService->hasProductNotCached(user()?->id, $activeCohort['product_id'] ?? 0);
 
         if ($activeCohort && $hasProduct) {
-
-            $contentId = $activeCohort->getContentId();
+            $contentId = $activeCohort['content_id'];
             if ($contentId > 0) {
-
+                $content = $this->contentService->getById($contentId);
                 $cohortBanner = [
-                    'course_url' => $activeCohort['course_url'],
+                    'course_url' => ($content) ? $content->fetch('url', '') : '',
                     'light_mode_logo' => $activeCohort['light_mode_logo'],
                     'dark_mode_logo' => $activeCohort['dark_mode_logo'],
                     'continue_visible' => false,
@@ -306,13 +305,14 @@ class HomePageController extends BaseController
                 ];
 
                 $nextLesson = $this->contentService->getNextContentForParentContentForUser($contentId, user()->id);
-                if($nextLesson) {
-                    $cohortBanner['lesson_url']= $nextLesson->fetch('url');
-                    $cohortBanner['title']= $nextLesson->fetch('title');
+                if ($nextLesson) {
+                    $cohortBanner['lesson_url'] = $nextLesson->fetch('url');
+                    $cohortBanner['title'] = $nextLesson->fetch('title');
                     $cohortBanner['thumbnail'] = $nextLesson->fetch('data.thumbnail_url');
-                }else{
+                    $cohortBanner['continue_visible'] = true;
+                } else {
                     $course = $this->contentService->getById($contentId);
-                    if($course['completed']){
+                    if ($course['completed']) {
                         $cohortBanner['completed'] = true;
                         $cohortBanner['thumbnail'] = $course->fetch('data.thumbnail_url');
                     }
@@ -398,7 +398,7 @@ class HomePageController extends BaseController
             "startedContentCount" => 0 //TODO: replace with real data
         ]);
     }
-    
+
     /**
      * singeo only
      *
@@ -426,7 +426,8 @@ class HomePageController extends BaseController
         ContentRepository::$pullFutureContent = true;
 
         return (new ContentFilterResultsEntity(
-            ['results' => $content['results'], 'total_results' => $content['results']]))->toResponseRawJson();
+            ['results' => $content['results'], 'total_results' => $content['results']]
+        ))->toResponseRawJson();
     }
 
     /**
@@ -615,23 +616,22 @@ class HomePageController extends BaseController
         }
         $myListId = $userPrimaryPlaylist['id'];
         ContentRepository::$includedInPlaylistsIds = [$myListId];
-        $results =
-            $this->contentService->getFiltered(
-                1,
-                6,
-                '-published_on',
-                $this->parseContentTypes($contentTypes),
-                [],
-                [],
-                [],
-                [],
-                [],
-                [],
-                false,
-                false,
-                false,
-                false
-            );
+        $results = $this->contentService->getFiltered(
+            1,
+            6,
+            '-published_on',
+            $this->parseContentTypes($contentTypes),
+            [],
+            [],
+            [],
+            [],
+            [],
+            [],
+            false,
+            false,
+            false,
+            false
+        );
         ContentRepository::$includedInPlaylistsIds = false;
 
         return $results;
@@ -659,7 +659,8 @@ class HomePageController extends BaseController
         );
 
         return (new ContentFilterResultsEntity(
-            ['results' => $songs['results'], 'total_results' => $songs['total_results']]))->toResponseRawJson();
+            ['results' => $songs['results'], 'total_results' => $songs['total_results']]
+        ))->toResponseRawJson();
     }
 
     /**
@@ -684,7 +685,8 @@ class HomePageController extends BaseController
         );
 
         return (new ContentFilterResultsEntity(
-            ['results' => $courses['results'], 'total_results' => $courses['total_results']]))->toResponseRawJson();
+            ['results' => $courses['results'], 'total_results' => $courses['total_results']]
+        ))->toResponseRawJson();
     }
 
     /**

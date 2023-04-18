@@ -74,7 +74,7 @@ class PackPagesController extends Controller
     public function index(Request $request, $domain, $brand)
     {
         $packs = $this->packService->getPacks();
-        $activePack = $this->cohortService->getActiveCohort()?->getContentId() ?? 0;
+        $activePack = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
 
         foreach ($packs as $pack) {
             if ($pack['id'] == $activePack) {
