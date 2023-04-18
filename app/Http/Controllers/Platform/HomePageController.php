@@ -310,12 +310,9 @@ class HomePageController extends BaseController
                     $cohortBanner['title'] = $nextLesson->fetch('title');
                     $cohortBanner['thumbnail'] = $nextLesson->fetch('data.thumbnail_url');
                     $cohortBanner['continue_visible'] = true;
-                } else {
-                    $course = $this->contentService->getById($contentId);
-                    if ($course['completed']) {
-                        $cohortBanner['completed'] = true;
-                        $cohortBanner['thumbnail'] = $course->fetch('data.thumbnail_url');
-                    }
+                } elseif ($content['completed']) {
+                    $cohortBanner['completed'] = true;
+                    $cohortBanner['thumbnail'] = $content->fetch('data.thumbnail_url');
                 }
             }
         }

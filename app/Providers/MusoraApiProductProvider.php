@@ -108,4 +108,14 @@ class MusoraApiProductProvider implements ProductProviderInterface
     {
         return $this->packService->getPacks();
     }
+
+    public function getActiveCohort()
+    {
+        return $this->cohortService->getActiveCohort();
+    }
+
+    public function userOwnProduct($productId)
+    {
+        return $this->userProductService->hasProductNotCached(user()?->id, $productId ?? 0);
+    }
 }
