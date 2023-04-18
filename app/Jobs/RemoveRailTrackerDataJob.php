@@ -15,7 +15,7 @@ class RemoveRailTrackerDataJob extends Job
         $paths = ['/railtracker/media-playback-session', '/musora-api/v1/media'];
 
         for ($i = 0; $i < 100; $i++) {
-            Requests::query()->where('url_path', 'like', '')->orWhereIn('url_path', $paths)
+            Requests::query()->where('url_path', 'like', '/musora-api/v1/media/%')->orWhereIn('url_path', $paths)
                 ->limit(
                     1000
                 )->delete();
