@@ -57,7 +57,7 @@ onBeforeMount(() => {
             <div>
                 <img class="tw-h-[54px] tw-hidden xl:tw-inline-block dark:xl:tw-hidden" :src="preloadedBanner.light_mode_logo" alt="cohort logo" />
                 <img class="tw-h-[54px] tw-hidden dark:xl:tw-inline-block" :src="preloadedBanner.dark_mode_logo" alt="cohort logo" />
-                <div class="tw-font-bold tw-text-xl xl:tw-text-2xl"><span v-if="preloadedBanner.continue_visible">Next Lesson: </span>{{ preloadedBanner.title }}</div>
+                <div class="tw-font-bold tw-text-xl xl:tw-text-2xl"><span v-if="!preloadedBanner.continue_visible">Next Lesson: </span>{{ preloadedBanner.title }}</div>
             </div>
         </div>
         <div class="tw-flex tw-gap-4 md:tw-block">
