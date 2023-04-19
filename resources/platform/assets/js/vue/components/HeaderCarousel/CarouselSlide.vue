@@ -115,7 +115,7 @@ const closeModal = () => {
 
 <template>
   <div v-if="showSlide || isPrevSlide"
-      :class="`tw-overflow-hidden tw-rounded-[10px] tw-absolute tw-w-full tw-h-full
+      :class="`tw-overflow-hidden tw-rounded-[10px] tw-absolute tw-w-full tw-h-full tw-bg-[#000C17]
         ${ showSlide ? `tw-z-20 ${showSlide ? `slide-in-${animateDirection}` : ''}` : 'tw-z-0' }
       `"
   >
@@ -132,7 +132,6 @@ const closeModal = () => {
                     loading="lazy"
                 />
             </picture>
-
         </div>
       <!-- Text Content -->
       <div class="tw-absolute tw-bottom-0 tw-w-full md:tw-relative tw-text-white tw-h-4/5 md:tw-h-full">
