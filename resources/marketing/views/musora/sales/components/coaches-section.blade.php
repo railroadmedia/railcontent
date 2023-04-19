@@ -99,7 +99,7 @@
                                         <li class="splide__slide flex flex-col items-center justify-center px-1">
                                             <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 120%;">
                                                 <picture>
-                                                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$image['img']}}">
+                                                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=450,quality=85/{{$image['img']}}">
                                                     <img class="absolute inset-0 object-cover" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/{{$image['img']}}" alt="{{ $image['instructor'] }}" />
                                                 </picture>
                                                 <div class="rounded-b-xl absolute w-full bottom-0 h-full text-white text-center flex justify-end flex-col pb-3 lg:pb-6" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 50%, #01050F 100%);">
