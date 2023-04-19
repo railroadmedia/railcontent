@@ -281,7 +281,7 @@ function setRange({ range }) {
 function initializePlayer(time) {
     const urlParams = new URLSearchParams(window.location.search);
     const timeToSeekTo = time || (urlParams.get('time') || window.localStorage.getItem(`${contentCurrentTimeStorageKey.value}_currentTime`) || props.currentSecond);
-
+console.log(timeToSeekTo);
     if (parseInt(timeToSeekTo) !== parseInt(currentTime.value)) {
         seek(timeToSeekTo);
     }
