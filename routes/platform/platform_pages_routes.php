@@ -13,6 +13,7 @@ use App\Http\Controllers\Platform\PackPagesController;
 use App\Http\Controllers\Platform\PaymentMethodUpdateController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
+use App\Http\Controllers\Platform\RedirectController;
 use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SongsUpgradeController;
 use App\Http\Controllers\Platform\SupportController;
@@ -277,6 +278,10 @@ Route::domain('{musoraDomain}')
         Route::get('/members/notifications', [HomePageController::class, 'notificationsRedirect'])
             ->whereIn('brand', all_brands())
             ->name('platform.notifications-redirect');
+
+        Route::get('/purchase-redirect/{brand}', [RedirectController::class, 'redirectPurchase'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.purchase-redirect');
 
         /*
         * Onboarding
