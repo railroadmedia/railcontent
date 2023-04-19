@@ -148,7 +148,7 @@
                 :class="`${ playlistsStore.activePlaylist.name.indexOf(' ') === -1 && 'tw-break-all' }`"
             >
                 <!-- Playlist thumbnail -->
-                <div class="tw-realtive tw-h-[198px] tw-w-[198px] tw-relative tw-rounded tw-shrink-0 tw-overflow-hidden tw-mb-[16px] lg:tw-mb-0">
+                <div class="tw-realtive tw-h-[140px] tw-w-[140px] tw-relative tw-rounded tw-shrink-0 tw-overflow-hidden tw-mb-[16px] lg:tw-mb-0">
                     <!-- Image Conatiner -->
                     <div v-if="playlistsStore.activePlaylist.thumbnail_url" class="tw-relative tw-w-full tw-h-full">
                         <img
@@ -176,10 +176,10 @@
                         </svg>
                     </div>
                     <!-- Pinned Icon -->
-                    <div class="tw-inline-flex tw-items-center tw-transition-colors tw-z-20 tw-absolute tw-top-3 tw-right-3 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5"
+                    <div class="tw-inline-flex tw-items-center tw-transition-colors tw-z-20 tw-absolute tw-top-1 tw-right-1 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5"
                         :class="[`tw-text-white`, { 'tw-opacity-0' : !state.isPinned } ]"
                     >
-                        <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto tw-hidden md:tw-flex" />
+                        <musora-icon icon-name="tack" class="tw-w-[20px] tw-h-[20px] tw-mx-auto tw-hidden md:tw-flex" />
                     </div>
                 </div>
 
@@ -193,15 +193,15 @@
                         <p class="tw-font-bebas-neue tw-text-white tw-text-xl">{{ playlistsStore.activePlaylist.user.display_name }}</p>
                     </div>
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
-                        <h1 class="tw-capitalize tw-leading-none tw-mb-2 tw-font-bold">{{ playlistsStore.activePlaylist.name }}</h1>
+                        <h1 class="tw-capitalize tw-leading-none tw-font-bold">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.description }}</p>
                     </div>
                     <a v-if="lessons.data.length" :href="playlistsStore.activePlaylist.playback_url"
-                        class="tw-w-[50px] tw-inline-flex tw-transition"
+                        class="tw-w-[39px] tw-inline-flex tw-transition"
                         :class="`tw-text-${brand} hover:tw-text-${brand}-600`"
                         :title="`Go To Player`"
                     >
-                        <i class="tw-text-[50px] fas fa-play-circle"></i>
+                        <i class="tw-text-[39px] fas fa-play-circle"></i>
                     </a>
                 </div>
             </div>
