@@ -804,7 +804,7 @@ onMounted(() => {
                     initializePlayer(props.startSecond);
 
                 } else {
-                    initializePlayer(0);
+                    initializePlayer();
                 }
             })
             .catch((error) => {
