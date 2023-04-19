@@ -249,6 +249,9 @@
             })
                 .then((response) => {
                     window.openModal('signupModal');
+                    @php
+                        $hasProduct = true;
+                    @endphp
                 })
                 .catch((e) => {
                     window.shownotification({
