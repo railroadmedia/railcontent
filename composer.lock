@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "92b30f4454efe49a4c97020e98b42f84",
+    "content-hash": "947d32e892cbe64e6a120b56e44c3f4d",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8362,12 +8362,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "ade969664779b751c52638cf04c185c8b36cff45"
+                "reference": "5a3cf29886f708aac9c0c068e457c4d65fb1b4eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/ade969664779b751c52638cf04c185c8b36cff45",
-                "reference": "ade969664779b751c52638cf04c185c8b36cff45",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/5a3cf29886f708aac9c0c068e457c4d65fb1b4eb",
+                "reference": "5a3cf29886f708aac9c0c068e457c4d65fb1b4eb",
                 "shasum": ""
             },
             "require": {
@@ -8399,7 +8399,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-cohort-optimizations"
             },
-            "time": "2023-04-12T14:40:07+00:00"
+            "time": "2023-04-18T14:09:48+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8592,16 +8592,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.77",
+            "version": "dev-2.0-cohort-optimizations",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "09d274f237a68f33b8ca4d1cd9ff8d159904060f"
+                "reference": "1fde1fe188a10af254ac1e5c1ef78a40d0563a8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/09d274f237a68f33b8ca4d1cd9ff8d159904060f",
-                "reference": "09d274f237a68f33b8ca4d1cd9ff8d159904060f",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/1fde1fe188a10af254ac1e5c1ef78a40d0563a8f",
+                "reference": "1fde1fe188a10af254ac1e5c1ef78a40d0563a8f",
                 "shasum": ""
             },
             "require": {
@@ -8655,9 +8655,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.77"
+                "source": "https://github.com/railroadmedia/railcontent/tree/2.0-cohort-optimizations"
             },
-            "time": "2023-03-13T17:36:04+00:00"
+            "time": "2023-04-19T08:45:58+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16964,12 +16964,19 @@
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
             "alias_normalized": "3.0.7.0"
+        },
+        {
+            "package": "railroad/railcontent",
+            "version": "dev-2.0-cohort-optimizations",
+            "alias": "v2.0.77",
+            "alias_normalized": "2.0.77.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/musora-api": 20,
-        "railroad/railanalytics": 20
+        "railroad/railanalytics": 20,
+        "railroad/railcontent": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

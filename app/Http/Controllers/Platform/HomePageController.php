@@ -304,15 +304,19 @@ class HomePageController extends BaseController
                     'close_visible' => $activeCohort['cohort_end_time'] < Carbon::now(),
                 ];
 
-                $nextLesson = $this->contentService->getNextContentForParentContentForUser($contentId, user()->id);
+                $nextLesson = $this->contentService->getNextCohortLesson($contentId, user()->id);
+
                 if ($nextLesson) {
                     $cohortBanner['lesson_url'] = $nextLesson->fetch('url');
+                    $cohortBanner['published_on'] = $nextLesson->fetch('published_on');
+                    $cohortBanner['published_on_in_timezone'] = $nextLesson->fetch('published_on_in_timezone');
                     $cohortBanner['title'] = $nextLesson->fetch('title');
                     $cohortBanner['thumbnail'] = $nextLesson->fetch('data.thumbnail_url');
                     $cohortBanner['continue_visible'] = true;
-                } elseif ($content['completed']) {
+                }
+                if ($content['completed']) {
                     $cohortBanner['completed'] = true;
-                    $cohortBanner['thumbnail'] = $content->fetch('data.thumbnail_url');
+                    $cohortBanner['continue_visible'] = false;
                 }
             }
         }
