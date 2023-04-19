@@ -31,16 +31,15 @@
         "subscriptionVersion" => true,
         "scrollToJoin" => true
     ])
-
-    <section class="content-section text-center upgrade-video-header text-black" style="background-color:#EFF7FF;overflow:visible">
+    <section class="pt-6 sm:pt-10 lg:pt-12 relative text-center px-4 lg:px-6 relative" style="background: #EFF7FF;">
         <div class="container mx-auto">
-            <img class="h-20 mb-2" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/books-bundle-logo.png">
-            <h6 class="leading-tight">Build your own bundle and save up to 50% on Pianote books! Simply select the books <br class="hidden sm:inline">
+            <img class="h-12 sm:h-20 lg:h-24 mb-2" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/books-bundle-logo.png">
+            <h6 class="leading-relaxed">Build your own bundle and <strong>save up to 50% on Pianote books!</strong> Simply select the books <br class="hidden sm:inline">
                     you want at the bottom of this page and the discount will automatically be applied.</h6>
-            <a href="#customize-anchor" class="join smaller pianote anchor-slide mt-7 mb-5 sm:mb-10">START BUILDING MY BUNDLE</a>
-            <div class="w-full mx-auto px-4 max-w-2xl">
+            <a href="#customize-anchor" class="join smaller pianote anchor-slide mt-4 sm:mt-7 mb-5 sm:mb-10">START BUILDING MY BUNDLE</a>
+            <div class="w-full mx-auto px-4 max-w-xl lg:max-w-3xl">
                 <img
-                    class="relative z-10 -mb-32"
+                    class="relative z-10 sm:-mb-12 lg:-mb-16"
                     src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/books.png"
                     alt="Video thumbnail"
                     loading="lazy"
@@ -49,12 +48,13 @@
             </div>
         </div>
     </section>
-    <section class="content-section text-center upgrade-video-header bg-white text-black">
+    <section class="py-14 sm:py-20 lg:py-32 relative overflow-hidden text-center customize px-4 sm:px-6 relative overflow-hidden">
         <div class="container mx-auto max-w-6xl">
-            <div class="text-left flex flex-wrap items-center mb-20">
-                <div class="w-1/2 pr-10">
+            <div class="text-left flex flex-wrap items-start lg:items-center mb-12 sm:mb-20 lg:mb-28">
+                <img class="w-full sm:w-1/2 sm:order-1" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/chords-scales-collage.png">
+                <div class="w-full sm:w-1/2 mt-5 sm:mt-0 sm:pr-5 lg:pr-10">
                     <h3><strong>Piano Chords & Scales The Ultimate Guide</strong></h3>
-                    <p class="leading-normal mt-2">Master Every Chord. Every Scale. In Every Key.
+                    <p class="leading-normal mt-3">Master Every Chord. Every Scale. In Every Key.
                         <br><br>
                         This book will help you learn every chord shape, chord variation, and scale in EVERY key.
                         <br><br>
@@ -62,13 +62,12 @@
                         <br><br>
                         The handy tabs on the side will make it easy to look up any key signature and quickly find all the different scales and chords you need when it comes time to practice or learn a new song.</p>
                 </div>
-                <img class="w-1/2" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/chords-scales-collage.png">
             </div>
-            <div class="text-right flex flex-wrap items-center mb-20">
-                <img class="w-1/2" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/classical-collage.png">
-                <div class="w-1/2 pl-10">
+            <div class="text-left flex flex-wrap items-start lg:items-center mb-12 sm:mb-20 lg:mb-28">
+                <img class="w-full sm:w-1/2" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/classical-collage.png">
+                <div class="w-full sm:w-1/2 mt-5 sm:mt-0 sm:pl-5 lg:pl-10">
                     <h3><strong>Classical Piano Pieces (You Can Actually Play)</strong></h3>
-                    <p class="leading-normal mt-2">Let’s be honest…
+                    <p class="leading-normal mt-3">Let’s be honest…
                         <br><br>
                         Classical piano can seem a little elitist, even snobby. And that’s a shame. Because classical music is so beautiful.
                         <br><br>
@@ -88,10 +87,11 @@
                     </p>
                 </div>
             </div>
-            <div class="text-left flex flex-wrap items-center">
-                <div class="w-1/2 pr-10">
+            <div class="text-left flex flex-wrap items-start lg:items-center">
+                <img class="w-full sm:w-1/2 sm:order-1" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/planner-collage.png">
+                <div class="w-full sm:w-1/2 mt-5 sm:mt-0 sm:pr-5 lg:pr-10">
                     <h3><strong>The Pianote Practice Planner</strong></h3>
-                    <p class="leading-normal mt-2">They say practice makes perfect.
+                    <p class="leading-normal mt-3">They say practice makes perfect.
                         <br><br>
                         It’s a cliche – but it’s not entirely true. Because if you’re not practicing the RIGHT things – the RIGHT way....
                         <br><br>
@@ -104,7 +104,6 @@
                         This is Lisa Witt’s personal practice guide. Written by her, exclusively for piano players.
                     </p>
                 </div>
-                <img class="w-1/2" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/planner-collage.png">
             </div>
         </div>
     </section>
@@ -118,8 +117,8 @@
         }"
     >
         <div class="container mx-auto max-w-6xl relative z-50">
-            <img class="h-20" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/books-bundle-logo.png">
-            <h5 class="mt-1 sm:mt-3 mb-6" style="line-height: 1.4em;"><strong>Select the books that you would <br class="inline lg:hidden"> like to add to your bundle below.</strong><br>
+            <img class="h-12 sm:h-20" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/books-bundle-logo.png">
+            <h5 class="mt-1 sm:mt-3 mb-7" style="line-height: 1.4em;"><strong>Select the books that you would <br class="inline sm:hidden"> like to add to your bundle below.</strong><br>
                 <em class="text-coaches">(the more books you add – the more you’ll save!)</em>
             </h5>
 
@@ -192,22 +191,20 @@
                         </p>
                     </div>
                 @endforeach
-
-                <div class="text-center">
-                    <h2 class="leading-tight">
-                        <s class="opacity-40" x-show="selectedNum > 0">$<span x-text="selectedNum * 39"></span></s>
-                        <strong>$<span x-text="selectedNum === 0 ? 0 : selectedNum === 1 ? 29 : selectedNum === 2 ? 49 : selectedNum === 3 && 59"></span></strong>
-                    </h2>
-                    <h5 class="leading-tight uppercase text-pianote">
-                        <em x-show="selectedNum === 0">Choose a product to see your savings</em>
-                        <em x-show="selectedNum > 0">This bundle saves you <span x-text="selectedNum === 0 ? 0 : selectedNum === 1 ? 26 : selectedNum === 2 ? 37 : selectedNum === 3 && 50"></span>%</em>
-                    </h5>
-                </div>
+            </div>
+            <div class="text-center">
+                <h2 class="leading-tight">
+                    <s class="opacity-40" x-show="selectedNum > 0">$<span x-text="selectedNum * 39"></span></s>
+                    <strong>$<span x-text="selectedNum === 0 ? 0 : selectedNum === 1 ? 29 : selectedNum === 2 ? 49 : selectedNum === 3 && 59"></span></strong>
+                </h2>
+                <h5 class="leading-tight uppercase text-pianote">
+                    <em x-show="selectedNum === 0">Choose a product to see your savings</em>
+                    <em x-show="selectedNum > 0">This bundle saves you <span x-text="selectedNum === 0 ? 0 : selectedNum === 1 ? 26 : selectedNum === 2 ? 37 : selectedNum === 3 && 50"></span>%</em>
+                </h5>
             </div>
 
             <a
-                class="join pianote bigger my-4 md:my-8 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
-                style="padding: 20px 10px;"
+                class="join pianote my-4 md:my-8 w-full max-w-xs sm:max-w-md lg:max-w-xl"
                 :class="selectedNum === 0 && 'sold-out'"
                 :href="selectedNum !== 0 ? '/ecommerce/add-to-cart?locked=true'+query : '#customize-anchor'"
                 x-text="selectedNum !== 0 ? 'CLICK HERE TO CHECKOUT' : 'Choose a product'"></a>

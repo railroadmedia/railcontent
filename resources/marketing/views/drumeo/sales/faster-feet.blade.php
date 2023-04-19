@@ -857,7 +857,7 @@
                             href="/ecommerce/add-to-cart?product-array=DLM-1-year:1,quietkick:1,quietpad:1,drum-technique-made-easy-pack:1,rock-drumming-masterclass-pack:1,independence-made-easy-pack:1,CC-DIGI:1&locked=true"
                         >Single Kick &raquo;</a>
                         <a class="join drumeo w-full"
-                            href="/ecommerce/add-to-cart?product-array=DLM-1-year:1,quietkick:1,quietkick-beater:1,quietpad:1,drum-technique-made-easy-pack:1,rock-drumming-masterclass-pack:1,independence-made-easy-pack:1,CC-DIGI:1&locked=true"
+                            href="/ecommerce/add-to-cart?product-array=DLM-1-year:1,quietkick-double-bass:1,quietpad:1,drum-technique-made-easy-pack:1,rock-drumming-masterclass-pack:1,independence-made-easy-pack:1,CC-DIGI:1&locked=true"
                         >Double Kick &raquo;</a>
                     </div>
                 </div>
