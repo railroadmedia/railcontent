@@ -313,6 +313,10 @@ class HomePageController extends BaseController
                     $cohortBanner['title'] = $nextLesson->fetch('title');
                     $cohortBanner['thumbnail'] = $nextLesson->fetch('data.thumbnail_url');
                     $cohortBanner['continue_visible'] = true;
+                    if(Carbon::parse($nextLesson->fetch('published_on')) > Carbon::now()){
+                        $cohortBanner['continue_visible'] = false;
+                        $cohortBanner['close_visible'] = false;
+                    }
                 }
                 if ($content['completed']) {
                     $cohortBanner['completed'] = true;
