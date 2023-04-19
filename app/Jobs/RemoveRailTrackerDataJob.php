@@ -22,9 +22,7 @@ class RemoveRailTrackerDataJob extends Job
                 )->get();
            foreach ($requests as $request){
                $request->delete();
-               usleep(1000);
            }
-            usleep(200000);
         }
     }
 }
