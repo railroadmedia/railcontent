@@ -72,7 +72,7 @@ Route::domain('{pianoteDomain}')
     Route::get('/shop/play-beautiful-piano', [SalesController::class, 'playbeautifulpiano'] );
     Route::get('/shop/beginner-classical-piano', [SalesController::class, 'beginnerclassicalpiano'] );
     Route::get('/shop/beautiful-beginner-bundle', [SalesController::class, 'beautifulBeginnerBundle'] );
-    Route::get('/shop/build-you-bundle', [SalesController::class, 'buildYourBundle'] );
+    Route::get('/shop/build-your-bundle', [SalesController::class, 'buildYourBundle'] );
     Route::get('/lifetime', [SalesController::class, 'lifetime'] );
     Route::get('/lifetime-members', [SalesController::class, 'lifetimeMembers'] );
     Route::get('/lisa-recommends', [SalesController::class, 'lisarecommends'] );
