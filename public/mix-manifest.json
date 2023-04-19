@@ -1,10 +1,14 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=c959b8182472ebbd32d8ae57660283eb",
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=fb82cd486a8b1358c8d788f7af1be843",
+>>>>>>> project-playlists-v2
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=4b7847a72af066f99f389f025e90aa08",
-    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=3ab85d12f31924cb7f700762229d574d",
+    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=9c7fdfef8685c6d892e68a1ce49872b7",
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=2e3e6c28f1932714d0e98eea3fa181b4",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=e1ffd5c9f64e7739d834a415aba059fc",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=26ba2bb391babd9dcfbc6e1e9cf80ffd",
