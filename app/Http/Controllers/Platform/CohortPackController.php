@@ -42,7 +42,7 @@ class CohortPackController
      * @param $slug
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
      */
-    public function template(Request $request, $domain, $brand, $slug)
+    public function template(Request $request, $domain, $brand, $slug, $purchased = false)
     {
         $cohort = $this->cohortService->getCohort($slug);
 
@@ -75,7 +75,13 @@ class CohortPackController
             'cohort' => $cohort,
             'enrollmentClosed' => $enrollmentClosed,
             'homeUrl' => url()->route('platform.home', ['brand' => brand()]),
+            'purchased' => $purchased
         ]);
+    }
+
+    public function purchased(Request $request, $domain, $brand, $slug)
+    {
+        return $this->template($request, $domain, $brand, $slug, purchased: true);
     }
 
     public function register(Request $request, $domain, $brand, $sku)
@@ -114,7 +120,7 @@ class CohortPackController
         $urlParams['locked'] = true;
         $queryString = http_build_query($urlParams);
 
-        return redirect()->away('/ecommerce/add-to-cart?'.$queryString);
+        return redirect()->away('/ecommerce/add-to-cart?' . $queryString);
     }
 
 }

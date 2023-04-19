@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Platform\CoachPagesController;
+use App\Http\Controllers\Platform\CohortPackController;
 use App\Http\Controllers\Platform\ContentPagesController;
 use App\Http\Controllers\Platform\ExpiredMemberController;
 use App\Http\Controllers\Platform\ForumPagesController;
@@ -632,20 +633,18 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.request-song');
 
-        Route::get(
-            '/{brand}/{cohort}',
-            [\App\Http\Controllers\Platform\CohortPackController::class, 'template']
-        )
+        Route::get('/{brand}/{cohort}', [CohortPackController::class, 'template'])
             ->whereIn('brand', ['pianote', 'drumeo'])
-            ->whereIn(
-                'cohort',
-                [
-                    '30-day-drummer','new-piano-players'
-                ]
-            )
+            ->whereIn('cohort', ['30-day-drummer','new-piano-players'])
             ->name('platform.cohort');
 
-        Route::get('{brand}/cohort-packs/register/{product}', [\App\Http\Controllers\Platform\CohortPackController::class, 'register'] )->name('platform.cohort.register');
+        Route::get('/{brand}/{cohort}/purchased', [CohortPackController::class, 'purchased'])
+            ->whereIn('brand', ['pianote', 'drumeo'])
+            ->whereIn('cohort', ['30-day-drummer','new-piano-players'])
+            ->name('platform.cohort.purchased');
+
+        Route::get('{brand}/cohort-packs/register/{product}', [CohortPackController::class, 'register'] )
+            ->name('platform.cohort.register');
     });
 
 /*
