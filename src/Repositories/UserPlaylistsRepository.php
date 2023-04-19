@@ -85,13 +85,16 @@ class UserPlaylistsRepository extends RepositoryBase
                 ->skip(($page - 1) * $limit);
         }
 
-        if (!in_array($orderByColumn, ['name', 'id', 'created_at', 'last_progress','most_recent'])) {
+        if (!in_array($orderByColumn, ['name', 'id', 'created_at', 'last_progress','most_recent','pinned'])) {
             $orderByColumn = 'id';
         }
         if($orderByColumn == 'name'){
             $query =  $query->orderByRaw(" name asc");
         }
-        if($orderByColumn == 'most_recent'){
+        elseif($orderByColumn == 'pinned'){
+            $query =  $query->orderByRaw(" pinned desc, id desc");
+        }
+        elseif($orderByColumn == 'most_recent'){
             $query =
                 $query->selectRaw('GREATEST('.config('railcontent.table_prefix').'user_playlists'.'.created_at, COALESCE('.config('railcontent.table_prefix').'user_playlists'.'.updated_at, 0), COALESCE(last_progress, 0)) as datemax ')
                     ->orderByRaw('datemax desc ');
