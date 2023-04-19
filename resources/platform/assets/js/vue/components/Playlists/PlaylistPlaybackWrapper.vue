@@ -211,7 +211,7 @@ const handleGoToNext = () => {
 };
 
 onBeforeMount(() => {
-    //console.log(props)
+    console.log(props)
 });
 </script>
 
@@ -297,7 +297,7 @@ onBeforeMount(() => {
                     <playback-cue :autoplay="false" :repeat="false" :brand="brand" :lessons="playlistItems"
                         :playlist-name="playlistName" :duration="playlistDuration" :playlist-url="playlistUrl"
                         :playlist-item-id="playlistItemId" :playlist-id="playlistId" :infinite-scroll="true"
-                        :playlist-item-position="playlistItemPosition" :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" 
+                        :playlist-item-position="playlistItemPosition" :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl"
                      />
                 </div>
             </div>
