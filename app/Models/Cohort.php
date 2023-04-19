@@ -15,6 +15,7 @@ use Venturecraft\Revisionable\RevisionableTrait;
  *
  * @property int $id
  * @property int $brand_id
+ * @property int $content_id
  */
 class Cohort extends Model
 {
@@ -100,14 +101,4 @@ class Cohort extends Model
     protected $guarded = [
         'id'
     ];
-
-    public function getContentId(): int
-    {
-        if (isset($this['course_url']) && (filter_var($this['course_url'], FILTER_VALIDATE_URL))) {
-            $initialRequest = \Request::create($this['course_url']);
-            $segments = $initialRequest->segments();
-            return intval(last($segments));
-        }
-        return 0;
-    }
 }
