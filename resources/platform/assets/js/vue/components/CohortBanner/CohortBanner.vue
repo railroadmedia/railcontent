@@ -62,7 +62,7 @@ onBeforeMount(() => {
         </div>
         <div class="tw-flex tw-gap-4 md:tw-block">
             <a :href="preloadedBanner.course_url" class="tw-btn-primary tw-text-[#000C17] tw-border-[#000C17] hover:tw-bg-[#000C17] hover:tw-text-white dark:tw-text-white dark:tw-border-white dark:tw-bg-[#000C17] dark:hover:tw-text-[#000C17] dark:hover:tw-bg-white tw-px-8 md:tw-mr-2 xl:tw-mr-4 tw-text-lg xl:tw-text-xl tw-flex-1 tw-inline-block tw-text-center">Go to Course</a>
-            <a v-if="preloadedBanner.continue_visible" :href="preloadedBanner.lesson_url" class="tw-btn-primary tw-bg-[#00101D] tw-text-white hover:tw-bg-[#3F3F46] dark:tw-text-[#00101D] dark:tw-bg-white dark:hover:tw-text-white dark:hover:tw-bg-[#00101D] tw-px-8 tw-text-lg xl:tw-text-xl tw-flex-1 tw-inline-block tw-text-center">Continue</a>
+            <a v-if="preloadedBanner.continue_visible" :href="preloadedBanner.lesson_url" class="tw-btn-primary tw-bg-[#00101D] tw-text-white hover:tw-bg-[#3F3F46] dark:tw-text-[#00101D] dark:tw-bg-white dark:hover:tw-text-white dark:hover:tw-bg-[#627F97] tw-px-8 tw-text-lg xl:tw-text-xl tw-flex-1 tw-inline-block tw-text-center">Continue</a>
         </div>
         <button
             v-if="preloadedBanner.close_visible"

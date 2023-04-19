@@ -25185,10 +25185,6 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(16 34 48 / var(--tw-bg-opacity)) !important;
 }
-.tw-dark .dark\:hover\:tw-bg-\[\#00101D\]:hover{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
-}
 .tw-dark .hover\:dark\:tw-bg-\[\#102230\]:hover{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(16 34 48 / var(--tw-bg-opacity)) !important;
