@@ -125,8 +125,7 @@ abstract class Command extends CommandBase
         }
 
         if ($isChain) {
-            $jobs[] = new FinishedCommandJob($this->name);
-            Bus::chain($jobs)->dispatch();
+            $this->dispatchChainedJobs($jobs);
         } else {
             $batch = Bus::batch($jobs)->name(class_basename($this))->dispatch();
         }
@@ -155,6 +154,12 @@ abstract class Command extends CommandBase
         }
 
         return true;
+    }
+
+    public function dispatchChainedJobs($jobs)
+    {
+        $jobs[] = new FinishedCommandJob($this->name);
+        Bus::chain($jobs)->dispatch();
     }
 
     public function withExecutionTime(callable $function)

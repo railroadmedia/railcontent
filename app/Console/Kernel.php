@@ -11,6 +11,7 @@ use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
 use App\Console\Commands\MigrateOldGuitareoDeletedSongs;
 use App\Console\Commands\MigratePianoteSongTutorial;
+use App\Console\Commands\RemoveRailTrackerData;
 use App\Console\Commands\RemoveTemporarySongsAccessForLifetimeMembersJanuary2023;
 use App\Console\Commands\RepairUserProgressOn30DD;
 use App\Console\Commands\RepairUserProgressOnNPPSH;
@@ -71,6 +72,7 @@ class Kernel extends ConsoleKernel
         RepairUserProgressOn30DD::class,
         RepairUserProgressOnNPPSH::class,
         MigrateOldGuitareoDeletedSongs::class,
+        RemoveRailTrackerData::class,
     ];
 
     /**
