@@ -2637,4 +2637,126 @@ class ContentService
     {
         return $this->contentVideoRepository->getContentWithExternalVideoId($videoId);
     }
+
+    public function getNextCohortLesson($parentContentId, $userId)
+    {
+        $isParentComplete =
+            RepositoryBase::$connectionMask->table('railcontent_user_content_progress')
+                ->where(['content_id' => $parentContentId, 'user_id' => $userId, 'state' => 'completed'])
+                ->exists();
+
+        $contentHierarchyDataQuery =
+            RepositoryBase::$connectionMask->table('railcontent_content_hierarchy AS ch_1')
+                ->leftJoin('railcontent_content_hierarchy AS ch_2', 'ch_2.parent_id', '=', 'ch_1.child_id')
+                ->leftJoin('railcontent_content_hierarchy AS ch_3', 'ch_3.parent_id', '=', 'ch_2.child_id')
+                ->leftJoin('railcontent_content_hierarchy AS ch_4', 'ch_4.parent_id', '=', 'ch_3.child_id')
+                ->leftJoin('railcontent_content AS ch_1_child', function (JoinClause $joinClause) {
+                    return $joinClause->on('ch_1_child.id', '=', 'ch_1.child_id')
+                        ->whereNot('ch_1_child.type', 'assignment');
+                })
+                ->leftJoin('railcontent_content AS ch_2_child', function (JoinClause $joinClause) {
+                    return $joinClause->on('ch_2_child.id', '=', 'ch_2.child_id')
+                        ->whereNot('ch_2_child.type', 'assignment');
+                })
+                ->leftJoin('railcontent_content AS ch_3_child', function (JoinClause $joinClause) {
+                    return $joinClause->on('ch_3_child.id', '=', 'ch_3.child_id')
+                        ->whereNot('ch_3_child.type', 'assignment');
+                })
+                ->leftJoin('railcontent_content AS ch_4_child', function (JoinClause $joinClause) {
+                    return $joinClause->on('ch_4_child.id', '=', 'ch_4.child_id')
+                        ->whereNot('ch_4_child.type', 'assignment');
+                })
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_1',
+                    function (JoinClause $joinClause) use ($userId) {
+                        return $joinClause->on('ucp_1.content_id', '=', 'ch_1.child_id')
+                            ->where('ucp_1.user_id', $userId);
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_2',
+                    function (JoinClause $joinClause) use ($userId) {
+                        return $joinClause->on('ucp_2.content_id', '=', 'ch_2.child_id')
+                            ->where('ucp_2.user_id', $userId);
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_3',
+                    function (JoinClause $joinClause) use ($userId) {
+                        return $joinClause->on('ucp_3.content_id', '=', 'ch_3.child_id')
+                            ->where('ucp_3.user_id', $userId);
+                    }
+                )
+                ->leftJoin(
+                    'railcontent_user_content_progress AS ucp_4',
+                    function (JoinClause $joinClause) use ($userId) {
+                        return $joinClause->on('ucp_4.content_id', '=', 'ch_4.child_id')
+                            ->where('ucp_4.user_id', $userId);
+                    }
+                )
+                ->select([
+                             'ch_1.parent_id AS ch_1_parent_id',
+                             'ch_2.parent_id AS ch_2_parent_id',
+                             'ch_3.parent_id AS ch_3_parent_id',
+                             'ch_4.parent_id AS ch_4_parent_id',
+                             'ch_1.child_id AS ch_1_child_id',
+                             'ch_2.child_id AS ch_2_child_id',
+                             'ch_3.child_id AS ch_3_child_id',
+                             'ch_4.child_id AS ch_4_child_id',
+                             'ch_1.child_position AS ch_1_child_position',
+                             'ch_2.child_position AS ch_2_child_position',
+                             'ch_3.child_position AS ch_3_child_position',
+                             'ch_4.child_position AS ch_4_child_position',
+                             'ch_1_child.slug AS ch_1_child_slug',
+                             'ch_2_child.slug AS ch_2_child_slug',
+                             'ch_3_child.slug AS ch_3_child_slug',
+                             'ch_4_child.slug AS ch_4_child_slug',
+                             'ucp_1.state AS ucp_1_state',
+                             'ucp_2.state AS ucp_2_state',
+                             'ucp_3.state AS ucp_3_state',
+                             'ucp_4.state AS ucp_4_state',
+                         ])
+                ->where('ch_1.parent_id', $parentContentId)
+                ->orderBy('ch_1.child_position')
+                ->orderBy('ch_2.child_position')
+                ->orderBy('ch_3.child_position')
+                ->orderBy('ch_4.child_position')
+                ->limit(1);
+
+        // if the parent is complete, then just return the first lesson, otherwise get the next uncomplete lesson
+        if (!$isParentComplete) {
+            $contentHierarchyDataQuery->where($this->databaseManager->raw('IFNULL(ucp_1.state, "")'), '!=', 'completed')
+                ->where($this->databaseManager->raw('IFNULL(ucp_2.state, "")'), '!=', 'completed')
+                ->where($this->databaseManager->raw('IFNULL(ucp_3.state, "")'), '!=', 'completed')
+                ->where($this->databaseManager->raw('IFNULL(ucp_4.state, "")'), '!=', 'completed');
+        }
+
+        $contentHierarchyDataRow =
+            $contentHierarchyDataQuery->get()
+                ->first();
+
+        $contentId = null;
+
+        if (!empty($contentHierarchyDataRow)) {
+            if (!empty($contentHierarchyDataRow['ch_4_child_slug'])) {
+                $contentId = $contentHierarchyDataRow['ch_4_child_id'];
+            } elseif (!empty($contentHierarchyDataRow['ch_3_child_slug'])) {
+                $contentId = $contentHierarchyDataRow['ch_3_child_id'];
+            } elseif (!empty($contentHierarchyDataRow['ch_2_child_slug'])) {
+                $contentId = $contentHierarchyDataRow['ch_2_child_id'];
+            } elseif (!empty($contentHierarchyDataRow['ch_1_child_slug'])) {
+                $contentId = $contentHierarchyDataRow['ch_1_child_id'];
+            }
+        }
+
+        if (!empty($contentId)) {
+            $pullFutureContent = ContentRepository::$pullFutureContent;
+            ContentRepository::$pullFutureContent = true;
+            $content = $this->getById($contentId);
+            ContentRepository::$pullFutureContent = $pullFutureContent;
+            return $content;
+        }
+
+        return null;
+    }
 }
