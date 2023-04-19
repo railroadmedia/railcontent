@@ -22252,8 +22252,8 @@ a:visited{
 .tw-h-\[84px\]{
   height: 84px !important;
 }
-.tw-h-\[198px\]{
-  height: 198px !important;
+.tw-h-\[140px\]{
+  height: 140px !important;
 }
 .tw-h-\[56px\]{
   height: 56px !important;
@@ -22324,8 +22324,8 @@ a:visited{
 .tw-min-h-\[105px\]{
   min-height: 105px !important;
 }
-.tw-min-h-\[200px\]{
-  min-height: 200px !important;
+.tw-min-h-\[140px\]{
+  min-height: 140px !important;
 }
 .tw-min-h-\[90px\]{
   min-height: 90px !important;
@@ -22580,17 +22580,17 @@ a:visited{
 .tw-w-\[84px\]{
   width: 84px !important;
 }
-.tw-w-\[198px\]{
-  width: 198px !important;
-}
-.tw-w-\[50px\]{
-  width: 50px !important;
+.tw-w-\[39px\]{
+  width: 39px !important;
 }
 .tw-w-52{
   width: 13rem !important;
 }
 .tw-w-\[82px\]{
   width: 82px !important;
+}
+.tw-w-\[50px\]{
+  width: 50px !important;
 }
 .tw-w-\[116px\]{
   width: 116px !important;
@@ -24319,6 +24319,9 @@ a:visited{
 }
 .tw-text-\[40px\]{
   font-size: 40px !important;
+}
+.tw-text-\[39px\]{
+  font-size: 39px !important;
 }
 .tw-text-\[22px\]{
   font-size: 22px !important;
