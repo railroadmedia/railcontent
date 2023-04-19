@@ -231,13 +231,19 @@
         ])
 @endsection
 
-@section('layout-scripts')
+@section('inject-components')
     @include('partials._countdown',[
             'countdownDate' => $cohort['enrollment_end_date'],
             'promoVersion' => false
         ])
 
-    <script type="application/javascript">
+    <script>
+        @if(!empty($purchased) && $purchased)
+            document.addEventListener('DOMContentLoaded', function () {
+                window.openModal('signupModal');
+            })
+        @endif
+
         function enroll(URL){
             fetch(URL, {
                 method: 'GET',
@@ -247,14 +253,14 @@
                 },
                 referrerPolicy: 'no-referrer',
             })
-                .then((response) => {
-                    window.openModal('signupModal');
-                })
-                .catch((e) => {
-                    window.shownotification({
-                        isError: true
-                    });
+            .then((response) => {
+                window.openModal('signupModal');
+            })
+            .catch((e) => {
+                window.shownotification({
+                    isError: true
                 });
+            });
         }
     </script>
 @endsection
