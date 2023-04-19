@@ -251,31 +251,31 @@ onBeforeMount(() => {
                                 </div>
                             </VideoMediaElement>
                         </transition>
-                        <transition v-else appear name="fade">
-                            <VideoPlayer ref="mediaElementVueInstance"
-                                :start-second="startSecond" :end-second="endSecond" :theme-color="brand" :brand="brand"
-                                :poster="videoPosterImageUrl" :sources="videoMediaSources" :ranges="songRanges"
-                                :ranges-video-ids="rangesVideoIds" :show-range-buttons="true"
-                                :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters" :current-second="currentSecond"
-                                :content-id="contentId" :user-id="userId" :video-id="vimeoVideoId"
-                                :video-length="videoLength" :total-duration="totalDuration" :cast-title="castTitle"
-                                :use-intersection-observer="true" @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
-                                <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
-                            </VideoPlayer>
-                        </transition>
+<!--                        <transition v-else appear name="fade">-->
+<!--&lt;!&ndash;                            <VideoPlayer ref="mediaElementVueInstance"&ndash;&gt;-->
+<!--&lt;!&ndash;                                :start-second="startSecond" :end-second="endSecond" :theme-color="brand" :brand="brand"&ndash;&gt;-->
+<!--&lt;!&ndash;                                :poster="videoPosterImageUrl" :sources="videoMediaSources" :ranges="songRanges"&ndash;&gt;-->
+<!--&lt;!&ndash;                                :ranges-video-ids="rangesVideoIds" :show-range-buttons="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                                :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters" :current-second="currentSecond"&ndash;&gt;-->
+<!--&lt;!&ndash;                                :content-id="contentId" :user-id="userId" :video-id="vimeoVideoId"&ndash;&gt;-->
+<!--&lt;!&ndash;                                :video-length="videoLength" :total-duration="totalDuration" :cast-title="castTitle"&ndash;&gt;-->
+<!--&lt;!&ndash;                                :use-intersection-observer="true" @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </VideoPlayer>&ndash;&gt;-->
+<!--                        </transition>-->
                     </div>
                 </div>
                 <!-- Video Resources -->
                 <div class="tw-container tw-mx-auto lean">
-                    <VideoResources :theme-color="brand" :brand="brand" :title="castTitle" :lesson-type="lessonType"
-                        :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
-                        :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
-                        :user-id="userId" :resources="videoResources" :show-add-to-list="true"
-                        :relatedLesson="relatedLesson" />
-                    <RelatedLesson
-                        v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
-                        :relatedLesson="relatedLesson.data[0]" />
-                    <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
+<!--                    <VideoResources :theme-color="brand" :brand="brand" :title="castTitle" :lesson-type="lessonType"-->
+<!--                        :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"-->
+<!--                        :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"-->
+<!--                        :user-id="userId" :resources="videoResources" :show-add-to-list="true"-->
+<!--                        :relatedLesson="relatedLesson" />-->
+<!--                    <RelatedLesson-->
+<!--                        v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"-->
+<!--                        :relatedLesson="relatedLesson.data[0]" />-->
+<!--                    <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />-->
                 </div>
             </div>
 
