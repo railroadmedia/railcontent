@@ -256,7 +256,7 @@ onMounted(() => {
             </div>
         </div>
         <Table @onActionClick="handleActionClick" @onScroll="handleScroll"
-            classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-scroll" :stickyHeader="true" :rows="formattedRows">
+            classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-auto" :stickyHeader="true" :rows="formattedRows">
             <template v-slot:actionContent="slotProps">
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
                     class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-white" />
