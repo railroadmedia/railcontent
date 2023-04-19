@@ -252,7 +252,8 @@ onBeforeMount(() => {
                             </VideoMediaElement>
                         </transition>
                         <transition v-else appear name="fade">
-                            <VideoPlayer ref="mediaElementVueInstance" :theme-color="brand" :brand="brand"
+                            <VideoPlayer ref="mediaElementVueInstance"
+                                :start-second="startSecond" :end-second="endSecond" :theme-color="brand" :brand="brand"
                                 :poster="videoPosterImageUrl" :sources="videoMediaSources" :ranges="songRanges"
                                 :ranges-video-ids="rangesVideoIds" :show-range-buttons="true"
                                 :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters" :current-second="currentSecond"
@@ -296,7 +297,7 @@ onBeforeMount(() => {
                     <playback-cue :autoplay="false" :repeat="false" :brand="brand" :lessons="playlistItems"
                         :playlist-name="playlistName" :duration="playlistDuration" :playlist-url="playlistUrl"
                         :playlist-item-id="playlistItemId" :playlist-id="playlistId" :infinite-scroll="true"
-                        :playlist-item-position="playlistItemPosition" :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl"
+                        :playlist-item-position="playlistItemPosition" :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" 
                      />
                 </div>
             </div>
