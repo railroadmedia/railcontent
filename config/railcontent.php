@@ -155,7 +155,7 @@ return [
 
     'search_index_values' => [
         'high_value' => [
-            'content_attributes' => ['slug','title',],
+            'content_attributes' => ['slug','title','type'],
             'field_keys' => ['instructor:name', 'artist', 'album'],
             'data_keys' => [],
         ],
