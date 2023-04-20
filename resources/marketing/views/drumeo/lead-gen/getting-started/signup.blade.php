@@ -61,10 +61,11 @@
                 @include("drumeo.lead-gen.partials.sign-up-form-rc", [
                     "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                     "formName" => 'Getting Started On The Drums',
-                    "buttonText" => "Get started for free ",
+                    "buttonText" => "Get started for free",
                     'stacked' => true,
                     'inputBorder' => '1px solid #7A8491',
-                    "redirectURL" => "/getting-started/thank-you/"
+                    "redirectURL" => "/getting-started/thank-you/",
+                    "recaptchaKey" => $recaptchaKey
                 ])
             </div>
             <div class="w-full sm:w-5/12 lg:w-1/2">
