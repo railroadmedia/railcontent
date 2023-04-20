@@ -22252,8 +22252,8 @@ a:visited{
 .tw-h-\[84px\]{
   height: 84px !important;
 }
-.tw-h-\[198px\]{
-  height: 198px !important;
+.tw-h-\[140px\]{
+  height: 140px !important;
 }
 .tw-h-\[56px\]{
   height: 56px !important;
@@ -22324,8 +22324,8 @@ a:visited{
 .tw-min-h-\[105px\]{
   min-height: 105px !important;
 }
-.tw-min-h-\[200px\]{
-  min-height: 200px !important;
+.tw-min-h-\[140px\]{
+  min-height: 140px !important;
 }
 .tw-w-full{
   width: 100% !important;
@@ -22577,17 +22577,17 @@ a:visited{
 .tw-w-\[84px\]{
   width: 84px !important;
 }
-.tw-w-\[198px\]{
-  width: 198px !important;
-}
-.tw-w-\[50px\]{
-  width: 50px !important;
+.tw-w-\[39px\]{
+  width: 39px !important;
 }
 .tw-w-52{
   width: 13rem !important;
 }
 .tw-w-\[82px\]{
   width: 82px !important;
+}
+.tw-w-\[50px\]{
+  width: 50px !important;
 }
 .tw-w-\[116px\]{
   width: 116px !important;
@@ -24317,6 +24317,9 @@ a:visited{
 .tw-text-\[40px\]{
   font-size: 40px !important;
 }
+.tw-text-\[39px\]{
+  font-size: 39px !important;
+}
 .tw-text-\[22px\]{
   font-size: 22px !important;
 }
@@ -25331,6 +25334,10 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(3 3 3 / var(--tw-bg-opacity)) !important;
 }
+.tw-dark .dark\:tw-bg-\[\#0A2847\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(10 40 71 / var(--tw-bg-opacity)) !important;
+}
 .tw-dark .dark\:tw-bg-gray-700{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(55 65 81 / var(--tw-bg-opacity)) !important;
@@ -25381,13 +25388,13 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(161 161 169 / var(--tw-text-opacity)) !important;
 }
-.tw-dark .dark\:tw-text-\[\#000C17\]{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 12 23 / var(--tw-text-opacity)) !important;
-}
 .tw-dark .dark\:tw-text-\[\#445F74\]{
   --tw-text-opacity: 1 !important;
   color: rgb(68 95 116 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-\[\#000C17\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 12 23 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-text-\[\#9ec0dc\]{
   --tw-text-opacity: 1 !important;
@@ -26768,6 +26775,9 @@ a:visited{
   }
   .lg\:tw-justify-center{
     justify-content: center !important;
+  }
+  .lg\:tw-overflow-y-hidden{
+    overflow-y: hidden !important;
   }
   .lg\:tw-rounded-xl{
     border-radius: 0.75rem !important;
