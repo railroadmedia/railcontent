@@ -145,7 +145,8 @@ class UserPlaylistsController extends BaseController
             $playlistItems[$index]['artist'] = $item['artist'];
             $playlistItems[$index]['status'] = $item['status'];
             $playlistItems[$index]['need_access'] = empty(array_intersect(\Arr::pluck($userPermissions,'permission_id'),
-                (isset($grupedPermissions[$item['id']]))?$grupedPermissions[$item['id']]->pluck('permission_id')->toArray():[]));
+                (isset($grupedPermissions[$item['id']]))?$grupedPermissions[$item['id']]->pluck('permission_id')->toArray():[])) &&
+                (isset($grupedPermissions[$item['id']]));
 
             $playlistItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
             $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
@@ -235,7 +236,9 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['fields'] = $item['fields'];
             $otherItems[$index]['data'] = $item['data'];
             $otherItems[$index]['need_access'] = empty(array_intersect(\Arr::pluck($userPermissions,'permission_id'),
-                                                                         (isset($grupedPermissions[$item['id']]))?$grupedPermissions[$item['id']]->pluck('permission_id')->toArray():[]));
+                                                                         (isset($grupedPermissions[$item['id']]))?$grupedPermissions[$item['id']]->pluck('permission_id')->toArray():[]))
+                &&
+                (isset($grupedPermissions[$item['id']]));
             $otherItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
             $otherItems[$index]['route'] = $item['route'] ?? '';
             //            $playlistItems[$index]['parent'] = $item['parent']??null;
