@@ -51,7 +51,17 @@
     <section class="py-14 sm:py-20 lg:py-32 relative overflow-hidden text-center customize px-4 sm:px-6 relative overflow-hidden">
         <div class="container mx-auto max-w-6xl">
             <div class="text-left flex flex-wrap items-start lg:items-center mb-12 sm:mb-20 lg:mb-28">
-                <img class="w-full sm:w-1/2 sm:order-1" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/chords-scales-collage.png">
+                <div class="flex w-full justify-center sm:justify-start sm:w-1/2 sm:order-1">
+                    <picture>
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/chords-scales-collage.png">
+                        <img class="max-w-sm sm:max-w-lg lg:max-w-xl xl:max-w-3xl transition-opacity opacity-0"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/chords-scales-collage.png"
+                            alt="collage image"
+                        >
+                    </picture>
+                </div>
                 <div class="w-full sm:w-1/2 mt-5 sm:mt-0 sm:pr-5 lg:pr-10">
                     <h3><strong>Piano Chords & Scales The Ultimate Guide</strong></h3>
                     <p class="leading-normal mt-3">Master Every Chord. Every Scale. In Every Key.
@@ -64,7 +74,17 @@
                 </div>
             </div>
             <div class="text-left flex flex-wrap items-start lg:items-center mb-12 sm:mb-20 lg:mb-28">
-                <img class="w-full sm:w-1/2" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/classical-collage.png">
+                <div class="flex w-full justify-center sm:justify-end sm:w-1/2">
+                    <picture>
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/classical-collage.png">
+                        <img class="max-w-sm sm:max-w-lg lg:max-w-xl xl:max-w-3xl transition-opacity opacity-0"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/classical-collage.png"
+                            alt="collage image"
+                        >
+                    </picture>
+                </div>
                 <div class="w-full sm:w-1/2 mt-5 sm:mt-0 sm:pl-5 lg:pl-10">
                     <h3><strong>Classical Piano Pieces (You Can Actually Play)</strong></h3>
                     <p class="leading-normal mt-3">Let’s be honest…
@@ -88,7 +108,17 @@
                 </div>
             </div>
             <div class="text-left flex flex-wrap items-start lg:items-center">
-                <img class="w-full sm:w-1/2 sm:order-1" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/planner-collage.png">
+                <div class="flex w-full justify-center sm:justify-start sm:w-1/2 sm:order-1">
+                    <picture>
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/planner-collage.png">
+                        <img class="max-w-sm sm:max-w-lg lg:max-w-xl xl:max-w-3xl transition-opacity opacity-0"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/planner-collage.png"
+                            alt="collage image"
+                        >
+                    </picture>
+                </div>
                 <div class="w-full sm:w-1/2 mt-5 sm:mt-0 sm:pr-5 lg:pr-10">
                     <h3><strong>The Pianote Practice Planner</strong></h3>
                     <p class="leading-normal mt-3">They say practice makes perfect.
