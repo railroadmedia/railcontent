@@ -25,6 +25,6 @@ class ReCaptcha implements Rule
 
     public function message()
     {
-        return 'The google recaptcha failed.';
+        return 'Google recaptcha verification failed.';
     }
 }
