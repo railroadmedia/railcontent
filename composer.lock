@@ -8363,12 +8363,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "9d52b83828f16a752b602613fa75e8fd925bef00"
+                "reference": "f4660e52ddf6da21cec49570c8f90791e5c36d19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/9d52b83828f16a752b602613fa75e8fd925bef00",
-                "reference": "9d52b83828f16a752b602613fa75e8fd925bef00",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/f4660e52ddf6da21cec49570c8f90791e5c36d19",
+                "reference": "f4660e52ddf6da21cec49570c8f90791e5c36d19",
                 "shasum": ""
             },
             "require": {
@@ -8400,7 +8400,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-cohort-optimizations"
             },
-            "time": "2023-04-20T10:34:25+00:00"
+            "time": "2023-04-20T10:47:42+00:00"
         },
         {
             "name": "railroad/permissions",
