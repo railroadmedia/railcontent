@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Drumeo\LeadGenController;
 
-Route::domain('{drumeoDomain}')->group(function () {
+Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::group(['prefix' => '100-songs'],
         function () {
 

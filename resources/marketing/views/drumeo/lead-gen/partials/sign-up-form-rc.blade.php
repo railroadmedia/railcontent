@@ -6,6 +6,15 @@
         $cleanFormId = "ajaxForm";
 @endphp
 
+@if (!empty($errors) && $errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
 <form id="{{$cleanFormId}}"
       accept-charset="UTF-8" action="{{ url()->route('customer-io.submit-email-form') }}"
