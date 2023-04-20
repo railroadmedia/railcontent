@@ -273,7 +273,7 @@ onMounted(() => {
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
             <button @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-${brand}-600 tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600`"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-${brand}-600 tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600 ${selectedPlaylists.length === 0 && 'dark:tw-bg-[#0A2847] dark:tw-text-[#445F74]'}`"
                     :disabled="selectedPlaylists.length === 0"
             >
                 SAVE
