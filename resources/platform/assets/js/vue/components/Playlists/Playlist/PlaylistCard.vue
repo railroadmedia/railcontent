@@ -164,7 +164,7 @@ onBeforeMount(() => {
         }]
     }
 
-    console.log('needs access:', props.lesson.need_accessd)
+    console.log('needs access:', props.lesson.need_access)
 });
 </script>
 <template>
