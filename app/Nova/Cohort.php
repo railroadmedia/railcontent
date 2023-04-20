@@ -34,10 +34,11 @@ class Cohort extends Resource
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Text::make('slug')->required(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
-            Text::make('Cohort Title', 'cohort_title')->required(),
+            Text::make('Cohort Title', 'cohort_title')->required()->help("For easy reference to this banner in the CMS. This info won't show on the banner."),
 
             Heading::make('Header'),
             Image::make('Dark Mode Logo', 'dark_mode_logo')
+                ->help('The logo should be 545 x 103px or a comparable aspect ratio.')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -67,8 +68,9 @@ class Cohort extends Resource
 
                     return $value;
                 }),
-            Text::make('Dark Mode Logo', 'dark_mode_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Text::make('Dark Mode Logo', 'dark_mode_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted logo link. (Google Drive links will NOT work.)'),
             Image::make('Light Mode Logo', 'light_mode_logo')
+                ->help('The logo should be 545 x 103px or a comparable aspect ratio.')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -98,12 +100,12 @@ class Cohort extends Resource
 
                     return $value;
                 }),
-            Text::make('Light Mode Logo', 'light_mode_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Text::make('Light Mode Logo', 'light_mode_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted logo link. (Google Drive links will NOT work.)'),
             Text::make('Headline')->hideFromIndex(),
             Text::make('Subheadline')->hideFromIndex(),
             Text::make('Header Description', 'header_description')->hideFromIndex(),
             Image::make('Header Image Url', 'header_image_url')
-                ->help('The image should be 1128  x 276px or a comparable aspect ratio.')
+                ->help('The image should be 464 x 464px or a comparable aspect ratio.')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -149,7 +151,7 @@ class Cohort extends Resource
             Text::make('Body Title','body_title')->hideFromIndex(),
             Markdown::make('Body Top Description', 'body_top_description')->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.<br> Use &lt;br&gt; for a line break, &lt;i&gt;&lt;/i&gt; for italics, and &lt;b&gt;&lt;/b&gt; for bold. <br> Limited to three lines of text.')->hideFromIndex(),
             Image::make('Body Image Url', 'body_image_url')
-                ->help('The image should be 1128  x 276px or a comparable aspect ratio.')
+                ->help('The image should be 896 x 504px or a comparable aspect ratio.')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -181,6 +183,7 @@ class Cohort extends Resource
                 }),
             Text::make('Body image url', 'body_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Image::make('Body Logo', 'body_logo')
+                ->help('The logo should be 896 x 100px or a comparable aspect ratio.')
                 ->disk('nova_s3')
                 ->prunable()
                 ->hideFromIndex()
@@ -210,7 +213,7 @@ class Cohort extends Resource
 
                     return $value;
                 }),
-            Text::make('Body Logo', 'body_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Text::make('Body Logo', 'body_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted logo link. (Google Drive links will NOT work.)'),
             Markdown::make('Body Bottom Description','body_bottom_description')->hideFromIndex(),
 
             Heading::make('Dropdown'),
