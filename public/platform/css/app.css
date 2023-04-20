@@ -26380,12 +26380,9 @@ a:visited{
     padding-top: 2.5rem !important;
     padding-bottom: 2.5rem !important;
   }
-<<<<<<< HEAD
   .md\:tw-pb-10{
     padding-bottom: 2.5rem !important;
   }
-=======
->>>>>>> project-playlists-v2
   .md\:tw-pt-8{
     padding-top: 2rem !important;
   }
@@ -26947,12 +26944,9 @@ a:visited{
     -webkit-box-orient: vertical !important;
     -webkit-line-clamp: 2 !important;
   }
-<<<<<<< HEAD
   .lg\:tw-line-clamp-none{
     -webkit-line-clamp: unset !important;
   }
-=======
->>>>>>> project-playlists-v2
   @media (min-width: 1815px){
     .lg\:tw-container{
       max-width: 1815px !important;
