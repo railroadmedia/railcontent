@@ -457,9 +457,8 @@ class ContentProgressEventListener
                 $mediaPlaybackTracked->mediaId,
                 $mediaPlaybackTracked->typeId
             );
-
-            if ($lengthInSeconds > 0) {
-                $minutes = floor(min($totalTimeWatchedSeconds, $lengthInSeconds) / 60);
+            $minutes = floor(min($totalTimeWatchedSeconds, $lengthInSeconds) / 60);
+            if ($minutes > 0) {
                 $points = $minutes * config('xp_ranks.per_minute_content_watched');
 
                 $this->userPointsService->setPoints(
