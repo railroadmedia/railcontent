@@ -211,7 +211,7 @@ const handleGoToNext = () => {
 };
 
 onBeforeMount(() => {
-    console.log(props)
+    console.log('PlaylistPlaybackWrapper .......... ')
 });
 </script>
 
