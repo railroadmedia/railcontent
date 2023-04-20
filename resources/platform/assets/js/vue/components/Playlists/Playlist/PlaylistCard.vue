@@ -71,6 +71,21 @@ const needAccess = computed(() => {
 const showTimeStamp = computed(() => {
     return props.lesson.start_second !== null && props.lesson.end_second !== null;
 })
+//Need Access
+const instrument = computed(() => {
+    switch (props.brand) {
+        case 'drumeo':
+            return 'Drum'
+        case 'pianote':
+            return 'Piano'
+        case 'guitareo':
+            return 'Guitar'
+        case 'singeo':
+            return 'Song'
+        default: 
+            return 'Instrument'
+    }
+})
 
 //-----------Refs-----------//
 const dropdownTarget = ref(null)
@@ -79,6 +94,7 @@ const dropdownTarget = ref(null)
 const state = reactive({
     dropdownOpen: false,
     dropdownTop: false,
+    isFullTrack: true,
 });
 
 const dropdownOptions = ref([
@@ -128,7 +144,7 @@ const duration_formatted = (seconds) => {
 }
 
 const handleNoAccess = (e) => {
-    if (needAccess) {
+    if (props.lesson.need_access) {
         e.preventDefault
         window.openplaylistmodal({ modalType: 'noAccess', data: props.lesson });
     }
@@ -164,12 +180,19 @@ onBeforeMount(() => {
         }]
     }
 
-    console.log('needs access:', props.lesson.need_access)
+    //Check if it's a full track
+    if(JSON.parse(props.lesson.user_playlist_item_extra_data)) {
+        let instrumentData = JSON.parse(props.lesson.user_playlist_item_extra_data);
+        if(instrumentData.is_instrumentless_track) {
+            state.isFullTrack = false;
+        }
+    }
+
 });
 </script>
 <template>
     <div :id="cardId"
-        class="draggable tw-group tw-relative tw-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4 tw-group">
+        class="draggable tw-group tw-relative tw-h-[90px] tw-min-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4 tw-group">
         <!-- PLAYLIST INFO: clickable link -->
         <component :is="needAccess ? 'div' : 'a' " :href="lesson.url && !showMask && !needAccess ? lesson.url : ''"
             class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-text-[#0D0D0D] dark:tw-text-white tw-cursor-pointer"
@@ -216,10 +239,15 @@ onBeforeMount(() => {
                 <!--title-->
                 <p class="tw-truncate tw-uppercase tw-mr-1 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs"
                     :class="[{ 'md:tw-block': !cueVersion }]">
+                    <!-- Breadcrumb -->
                     <template v-if="lesson.type === 'assignment'">
                         <span v-for="(route, i) in lesson.route" :key="i">
                             {{ route }}<span v-if="i != (lesson.route.length - 1)" class="tw-px-1">•</span>
                         </span>
+                    </template>
+                    <!-- if instrumentless -->
+                    <template v-if="lesson.type === 'song' && !state.isFullTrack">
+                        <span>{{ instrument }}less</span>
                     </template>
                 </p>
                 <!-- description / Time Stamp-->
