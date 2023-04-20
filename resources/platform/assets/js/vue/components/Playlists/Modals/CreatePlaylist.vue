@@ -49,47 +49,24 @@
         description: '',
     })
 
-    //------------Static Data------------//
+    //------------Static Data------------//Practice
+
     const sortedOptions = [
         {
-            value: 'Rock',
-            label: 'Rock'
+            value: 'Technique',
+            label: 'Technique'
         },
         {
-            value: 'Pop',
-            label: 'Pop'
+            value: 'Genre',
+            label: 'Genre'
         },
         {
-            value: 'Jazz',
-            label: 'Jazz'
+            value: 'Style',
+            label: 'Style'
         },
         {
-            value: 'Blues',
-            label: 'Blues'
-        },
-        {
-            value: 'Country',
-            label: 'Country'
-        },
-        {
-            value: 'Metal',
-            label: 'Metal'
-        },
-        {
-            value: 'Funk',
-            label: 'Funk'
-        },
-        {
-            value: 'Soul',
-            label: 'Soul'
-        },
-        {
-            value: 'CCM/Worship',
-            label: 'CCM/Worship'
-        },
-        {
-            value: 'Hip-Hop/Rap',
-            label: 'Hip-Hop/Rap'
+            value: 'Instrument',
+            label: 'Instrument'
         },
         {
             value: 'My List',
