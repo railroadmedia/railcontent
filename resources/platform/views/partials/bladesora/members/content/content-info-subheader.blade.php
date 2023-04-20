@@ -1,7 +1,7 @@
 <div id="subHeader" class="collapsed-h fluid bg-grey-5 pv-1">
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-flex">
         <div class="tw-flex tw-flex-row tw-w-full align-center nmh-1">
-            
+
             <div class="tw-flex tw-flex-col tw-w-full tw-justify-center tw-text-white ph-1 meta-info-col hide-xs-only">
                 <div class="tw-flex tw-flex-row tw-items-center">
                     @foreach($infoData as $key => $value)
@@ -11,22 +11,6 @@
                     @endforeach
                 </div>
             </div>
-
-            @if(!empty($addToList) && $addToList === true)
-                <div class="flex flex-column align-center sq-btn-col ml-1">
-                    <button class="addToList btn {{ $isAdded ? 'added' : '' }}"
-                            data-tooltip="Add To List"
-                        data-content-id="{{ $contentId }}">
-                        <span class="un-added bg-{{ $brand }} inverted text-{{ $brand }}">
-                            <i class="fas fa-plus"></i>
-                        </span>
-
-                        <span class="is-added bg-{{ $brand }} text-white">
-                            <i class="fas fa-plus rotate-45"></i>
-                        </span>
-                    </button>
-                </div>
-            @endif
 
             @if(!empty($downloadableResources))
                 <div class="tw-flex tw-flex-col button-col">

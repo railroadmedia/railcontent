@@ -37,6 +37,7 @@ const preventReFetch = ref(false);
 const duplicatedIDs = ref([]);
 const duplicateProps = ref({ show: false, id: null });
 const duplicatedItemIdNameMap = ref({});
+const playlistNum = ref(0);
 
 const handleOnToggleAssignments = (val) => {
     importAll.value = val;
@@ -179,6 +180,7 @@ const getUserPlaylists = () => {
             });
             duplicatedIDs.value = duplicatedItemIDs;
             formattedRows.value = [...formattedRows.value, ...formattedTable];
+            playlistNum.value = data.length;
         } else {
             preventReFetch.value = true;
         }
@@ -256,7 +258,7 @@ onMounted(() => {
             </div>
         </div>
         <Table @onActionClick="handleActionClick" @onScroll="handleScroll"
-            classOverride="tw-mt-[24px] tw-max-h-[350px] tw-overflow-auto" :stickyHeader="true" :rows="formattedRows">
+            :classOverride="`tw-mt-[24px] tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" :stickyHeader="true" :rows="formattedRows">
             <template v-slot:actionContent="slotProps">
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
                     class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-white" />
@@ -271,7 +273,7 @@ onMounted(() => {
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
             <button @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-${brand}-600 tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600`"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-${brand}-600 tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600 ${selectedPlaylists.length === 0 && 'dark:tw-bg-[#0A2847] dark:tw-text-[#445F74]'}`"
                     :disabled="selectedPlaylists.length === 0"
             >
                 SAVE

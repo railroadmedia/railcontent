@@ -61,7 +61,7 @@ const lessonDescription = computed(() => {
 })
 //Show Content Mask
 const showMask = computed(() => {
-    return playlistsStore.sortingPlaylist || props.lesson.need_access;
+    return playlistsStore.sortingPlaylist;
 })
 //Need Access
 const needAccess = computed(() => {
@@ -127,8 +127,9 @@ const duration_formatted = (seconds) => {
     }
 }
 
-const handleNoAccess = () => {
-    if (needAccess && !playlistsStore.sortingPlaylist) {
+const handleNoAccess = (e) => {
+    if (needAccess) {
+        e.preventDefault
         window.openplaylistmodal({ modalType: 'noAccess', data: props.lesson });
     }
 }
@@ -162,16 +163,19 @@ onBeforeMount(() => {
             action: "editLessonTime"
         }]
     }
+
+    console.log('needs access:', props.lesson.need_access)
 });
 </script>
 <template>
     <div :id="cardId"
-        class="draggable tw-group tw-relative tw-min-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4 tw-group">
+        class="draggable tw-group tw-relative tw-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4 tw-group">
         <!-- PLAYLIST INFO: clickable link -->
-        <a :href="lesson.url && !showMask ? lesson.url : ''"
-            class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-text-[#0D0D0D] dark:tw-text-white"
-            :class="[{ 'tw-grayscale': needAccess }, !cueVersion ? 'tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)]' : 'tw-w-full']">
-
+        <component :is="needAccess ? 'div' : 'a' " :href="lesson.url && !showMask && !needAccess ? lesson.url : ''"
+            class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-text-[#0D0D0D] dark:tw-text-white tw-cursor-pointer"
+            :class="[{ 'tw-grayscale': needAccess }, !cueVersion ? 'tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)]' : 'tw-w-full']"
+            @click="handleNoAccess"
+        >
             <div class="tw-inline-flex tw-items-center tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity tw-text-sm"
                 :class="{ 'tw-opacity-0': playlistsStore.sortingPlaylist }">
                 <template v-if="Number(lesson.user_playlist_item_position) === Number(currentItem)"><i
@@ -275,7 +279,7 @@ onBeforeMount(() => {
                 <!-- Lesson Type -->
                 <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[128px]" :title="lesson.type">
                     <span v-if="lesson.type" class="tw-text-center tw-text-sm tw-capitalize">
-                        {{ lesson.type.replaceAll('-', ' ') }}
+                        {{ lesson.type }}
                     </span>
                 </div>
                 <!-- Lesson Time -->
@@ -305,13 +309,13 @@ onBeforeMount(() => {
                         @closeDropdown="state.dropdownOpen = false" @pinItem="(val) => state.isPinned = val" />
                 </div>
             </div>
-        </a>
+        </component>
 
         <!-- PLAYLISTS OPTIONS DROPDOWN -->
         <div v-if="!cueVersion"
             class="tw-inline-flex tw-items-center tw-justify-end tw-shrink-0 tw-w-[35px] lg:tw-w-[100px] md:tw-justify-center">
             <div class="tw-relative " v-click-outside="() => { state.dropdownOpen = false }">
-                <button v-if="!needAccess && !playlistsStore.sortingPlaylist"
+                <button v-if="!playlistsStore.sortingPlaylist"
                     class="tw-btn-primary tw-btn-small tw-btn-circle tw-text-[#445F74] dark:tw-text-[#7E9AB1] tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2 tw-rotate-0 lg:tw-rotate-90"
                     title="Playlist Options" @click.prevent="dropdownTriggerHandler($event)">
                     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -321,13 +325,13 @@ onBeforeMount(() => {
                     </svg>
                 </button>
                 <!-- Info Icon -->
-                <svg v-else-if="needAccess && !playlistsStore.sortingPlaylist"
+                <!-- <svg v-else-if="needAccess && !playlistsStore.sortingPlaylist"
                     class="tw-text-[#445F74] dark:tw-text-[#7E9AB1]" width="30" height="29" viewBox="0 0 30 29" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M16.4583 20.3333H15V14.5H13.5417M15 8.66667H15.0146M28.125 14.5C28.125 21.7487 22.2487 27.625 15 27.625C7.75126 27.625 1.875 21.7487 1.875 14.5C1.875 7.25126 7.75126 1.375 15 1.375C22.2487 1.375 28.125 7.25126 28.125 14.5Z"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
+                </svg> -->
                 <!-- Sort Icon -->
                 <svg v-else class="tw-text-[#445F74] dark:tw-text-[#9EC0DC]" width="25" height="14" viewBox="0 0 25 14"
                     fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -345,7 +349,7 @@ onBeforeMount(() => {
         <!-- content mask -->
         <div :class="[{ 'tw-hidden': !showMask }, playlistsStore.sortingPlaylist ? 'tw-cursor-move' : 'tw-cursor-pointer']"
             class="tw-z-[15] tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-border-[#445F74] dark:tw-border-[#7E9AB1]"
-            @click="handleNoAccess">
+        >
         </div>
     </div>
 </template>
