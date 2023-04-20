@@ -61,7 +61,7 @@
         :playlist-item-position="{{ $positionInPlaylist }}"
         :playlist-item-id="{{ $playlistItem['id'] }}"
         :start-second="{{ $playlistItem['start_second'] }}"
-        :end-second="{{ $playlistItem['end_second'] }}"
+        :end-second="{{ $playlistItem['end_second'] ?? $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
         user-access-level="{{ user()->access_level }}">
     </playlist-playback-wrapper>
 @endsection
