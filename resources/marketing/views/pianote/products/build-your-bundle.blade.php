@@ -149,7 +149,7 @@
         <div class="container mx-auto max-w-6xl relative z-50">
             <img class="h-12 sm:h-20" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/books-bundle-logo.png">
             <h5 class="mt-1 sm:mt-3 mb-7" style="line-height: 1.4em;"><strong>Select the books that you would <br class="inline sm:hidden"> like to add to your bundle below.</strong><br>
-                <em class="text-coaches">(the more books you add – the more you’ll save!)</em>
+                <em class="text-coaches">(The more books you add – the more you’ll save!)</em>
             </h5>
 
             <div class="mx-auto max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-3xl" style="font-size: 0;">
