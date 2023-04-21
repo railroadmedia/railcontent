@@ -457,9 +457,8 @@ class ContentProgressEventListener
                 $mediaPlaybackTracked->mediaId,
                 $mediaPlaybackTracked->typeId
             );
-
-            if ($lengthInSeconds > 0) {
-                $minutes = floor(min($totalTimeWatchedSeconds, $lengthInSeconds) / 60);
+            $minutes = floor(min($totalTimeWatchedSeconds, $lengthInSeconds) / 60);
+            if ($minutes > 0) {
                 $points = $minutes * config('xp_ranks.per_minute_content_watched');
 
                 $this->userPointsService->setPoints(
@@ -473,21 +472,6 @@ class ContentProgressEventListener
                     null, //unnecessary use of space here, could infer it from trigger name
                     $mediaPlaybackTracked->brand
                 );
-
-                //******************************************************************************************//
-                //Remove this after migration completed
-                while ($minutes > 0) {
-                    $this->userPointsService->deletePoints(
-                        $mediaPlaybackTracked->userId,
-                        [
-                            'content_id' => $content['content_id'],
-                            'minutes_watched' => $minutes,
-                        ],
-                        $mediaPlaybackTracked->brand
-                    );
-                    $minutes--;
-                }
-                //******************************************************************************************//
 
                 $this->userProvider->saveExperiencePoints(
                     $mediaPlaybackTracked->userId,
