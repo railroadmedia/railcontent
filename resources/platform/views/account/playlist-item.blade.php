@@ -13,7 +13,7 @@
     }
     $soundsliceAdditionalParams = $brandParams[$brand] . '&layout=3&recording_idx=' . $recordingIdx;
     if(user()->id == 149628){
-    dd($playlistItem['end_second'] );
+        dd($playlistItem['end_second'] ?? $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) );
     }
 @endphp
 
