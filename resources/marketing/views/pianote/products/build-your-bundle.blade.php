@@ -33,7 +33,12 @@
     ])
     <section class="pt-6 sm:pt-10 lg:pt-12 relative text-center px-4 lg:px-6 relative" style="background: #EFF7FF;">
         <div class="container mx-auto">
-            <img class="h-12 sm:h-20 lg:h-24 mb-2" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/books-bundle-logo.png">
+            <img
+                class="h-12 sm:h-20 lg:h-24 mb-2"
+                src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/books-bundle-logo.png"
+                alt="books bundle logo"
+                fetchpriority="high"
+            >
             <h6 class="leading-relaxed">Build your own bundle and <strong>save up to 50% on Pianote books!</strong> Simply select the books <br class="hidden sm:inline">
                     you want at the bottom of this page and the discount will automatically be applied.</h6>
             <a href="#customize-anchor" class="join smaller pianote anchor-slide mt-4 sm:mt-7 mb-5 sm:mb-10">START BUILDING MY BUNDLE</a>
@@ -42,8 +47,7 @@
                     class="relative z-10 sm:-mb-12 lg:-mb-16"
                     src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/books.png"
                     alt="Video thumbnail"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
+                    fetchpriority="high"
                 />
             </div>
         </div>
@@ -54,11 +58,10 @@
                 <div class="flex w-full justify-center sm:justify-start sm:w-1/2 sm:order-1">
                     <picture>
                         <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/chords-scales-collage.png">
-                        <img class="max-w-sm sm:max-w-lg lg:max-w-xl xl:max-w-3xl transition-opacity opacity-0"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
+                        <img class="max-w-sm sm:max-w-lg lg:max-w-xl xl:max-w-3xl"
                             src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/chords-scales-collage.png"
-                            alt="collage image"
+                            alt="collage image 1"
+                             fetchpriority="high"
                         >
                     </picture>
                 </div>
@@ -81,7 +84,7 @@
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/classical-collage.png"
-                            alt="collage image"
+                            alt="collage image 2"
                         >
                     </picture>
                 </div>
@@ -115,7 +118,7 @@
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/planner-collage.png"
-                            alt="collage image"
+                            alt="collage image 3"
                         >
                     </picture>
                 </div>
@@ -147,7 +150,7 @@
         }"
     >
         <div class="container mx-auto max-w-6xl relative z-50">
-            <img class="h-12 sm:h-20" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/books-bundle-logo.png">
+            <img class="h-12 sm:h-20" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/build-your-bundle/books-bundle-logo.png" alt="books bundle logo">
             <h5 class="mt-1 sm:mt-3 mb-7" style="line-height: 1.4em;"><strong>Select the books that you would <br class="inline sm:hidden"> like to add to your bundle below.</strong><br>
                 <em class="text-coaches">(The more books you add – the more you’ll save!)</em>
             </h5>
@@ -204,7 +207,7 @@
                                 <div
                                     x-ref="front"
                                     class="border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
-                                    :class="selected ? 'border-4' : !selected && bonus !==3 && 'hover:border-2'"
+                                    :class="selected && 'border-4'"
                                     style="backface-visibility: hidden;">
                                     @if(!empty($bonus['badge']))
                                         <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
