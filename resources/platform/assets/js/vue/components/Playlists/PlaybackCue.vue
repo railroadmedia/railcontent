@@ -62,6 +62,10 @@ const props = defineProps({
     limit: {
         type: Number,
         default: 20,
+    },
+    isMyPlaylist: {
+        type: Boolean,
+        default: true,
     }
 })
 
@@ -248,9 +252,18 @@ onMounted(() => {
                 </div>
             </div>
             <!-- Print Each Card -->
-            <playlist-card :currentItem="playlistItemPosition" v-for="(lesson, i) in playlistsStore.lessons"
-                :key="'playlist-card-cue-' + lesson.id" :index="i" :cardId="'playlist-card-cue-' + lesson.id" :lesson="lesson"
-                :token="token" :brand="brand" :cue-version="true" />
+            <playlist-card 
+                :currentItem="playlistItemPosition" 
+                v-for="(lesson, i) in playlistsStore.lessons"
+                :key="'playlist-card-cue-' + lesson.id" 
+                :index="i" :cardId="'playlist-card-cue-' + lesson.id" 
+                :lesson="lesson"
+                :token="token" 
+                :brand="brand" 
+                :cue-version="true" 
+                :in-playback-cue="true"
+                :is-my-playlist="isMyPlaylist"
+            />
             <!-- Skeleton Loader For Infinite Scroll -->
             <div v-if="shouldShowBottomSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
                 <div v-for="n in (playlistsStore.lessons.length >= 20 ? limit : 20 - playlistsStore.lessons.length)"
