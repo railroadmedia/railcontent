@@ -13,6 +13,6 @@ class SyncPoints extends Command
     {
         $this->runChainQuery(function (int $skip, int $take) {
             return new SyncPointsJob($skip, $take);
-        }, chunks: 1000);
+        }, chunks: 2000);
     }
 }
