@@ -24256,10 +24256,6 @@ a:visited{
   font-size: 32px !important;
   line-height: 1.5 !important;
 }
-.tw-text-xl{
-  font-size: 1.25rem !important;
-  line-height: 1.75rem !important;
-}
 .tw-text-3xl{
   font-size: 1.875rem !important;
   line-height: 2.25rem !important;
@@ -24273,6 +24269,10 @@ a:visited{
 .tw-text-5xl{
   font-size: 3rem !important;
   line-height: 1 !important;
+}
+.tw-text-xl{
+  font-size: 1.25rem !important;
+  line-height: 1.75rem !important;
 }
 .tw-text-\[16px\]{
   font-size: 16px !important;
