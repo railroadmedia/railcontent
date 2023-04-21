@@ -12,6 +12,9 @@
         $recordingIdx = 2;
     }
     $soundsliceAdditionalParams = $brandParams[$brand] . '&layout=3&recording_idx=' . $recordingIdx;
+    if(user()->id == 149628){
+    dd($playlistItem['end_second'] );
+    }
 @endphp
 
 @extends('partials.layout', ['forceHideSidebar' => false])
