@@ -104,9 +104,9 @@
                     <div class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-evenly tw-w-full sm:tw-w-auto sm:tw-flex-grow tw-py-4 sm:tw-py-3 lg:tw-py-4 tw-text-left sm:tw-text-center">
                         <div class="tw-flex sm:tw-block tw-w-full sm:tw-w-1/3 tw-px-4 sm:tw-px-3 tw-mb-4 sm:tw-mb-0">
                             <img
-                                class="far fa-fw tw-mr-3 sm:tw-mr-0 tw-text-2xl"
-                                alt="just play logo"
-                                src="https://www.musora.com/musora-cdn/image/width=1220,quality=85/{{ $cohort['icon1_url'] }}"
+                                class="tw-mr-3 tw-h-[30px] sm:tw-mb-1 sm:tw-mx-auto"
+                                alt="icon 1"
+                                src="https://www.musora.com/musora-cdn/image/width=60,quality=85/{{ $cohort['icon1_url'] }}"
                                 loading="lazy"
                                 onload="this.classList.remove('tw-opacity-0')"
                             />
@@ -117,9 +117,9 @@
                         <div class="tw-flex sm:tw-block tw-w-full sm:tw-w-1/3 tw-px-4 sm:tw-px-3 tw-mb-4 sm:tw-mb-0">
 {{--                            <i class="far fa-fw {{ $cohort['icon2'] }} tw-mr-3 sm:tw-mr-0 tw-text-{{ $brand }} tw-text-2xl" aria-hidden="true"></i>--}}
                             <img
-                                class="far fa-fw tw-mr-3 sm:tw-mr-0 tw-text-2xl"
-                                alt="just play logo"
-                                src="https://www.musora.com/musora-cdn/image/width=1220,quality=85/{{ $cohort['icon2_url'] }}"
+                                class="tw-mr-3 tw-h-[30px] sm:tw-mb-1 sm:tw-mx-auto"
+                                alt="icon 2"
+                                src="https://www.musora.com/musora-cdn/image/width=60,quality=85/{{ $cohort['icon2_url'] }}"
                                 loading="lazy"
                                 onload="this.classList.remove('tw-opacity-0')"
                             />
@@ -129,9 +129,9 @@
                         <div class="tw-flex sm:tw-block tw-w-full sm:tw-w-1/3 tw-px-4 sm:tw-px-3" >
 {{--                            <i class="far fa-fw {{ $cohort['icon3'] }} tw-mr-3 sm:tw-mr-0 tw-text-{{ $brand }} tw-text-2xl" aria-hidden="true"></i>--}}
                             <img
-                                class="far fa-fw tw-mr-3 sm:tw-mr-0 tw-text-2xl"
-                                alt="just play logo"
-                                src="https://www.musora.com/musora-cdn/image/width=1220,quality=85/{{ $cohort['icon3_url'] }}"
+                                class="tw-mr-3 tw-h-[30px] sm:tw-mb-1 sm:tw-mx-auto"
+                                alt="icon 3"
+                                src="https://www.musora.com/musora-cdn/image/width=60,quality=85/{{ $cohort['icon3_url'] }}"
                                 loading="lazy"
                                 onload="this.classList.remove('tw-opacity-0')"
                             />
