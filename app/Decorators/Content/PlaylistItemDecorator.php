@@ -245,9 +245,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         $contentsOfType[$contentIndex]['fields'] =
                             array_merge($content['fields'] ?? [], self::$parents[$content['id']]['fields'] ?? []);
                     }
-                } else{
-                    error_log(self::$parents[$content['id']]);
-                }
+                } 
             }
 
             $contentsOfType[$contentIndex]['route'] = $route;
