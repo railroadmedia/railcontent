@@ -12,9 +12,6 @@
         $recordingIdx = 2;
     }
     $soundsliceAdditionalParams = $brandParams[$brand] . '&layout=3&recording_idx=' . $recordingIdx;
-    if(user()->id == 149628){
-        dd($playlistItem['end_second'] ?? $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) );
-    }
 @endphp
 
 @extends('partials.layout', ['forceHideSidebar' => false])
@@ -63,7 +60,7 @@
         user-avatar="{{ user()->profile_picture_url }}" user-xp="{{ user()->totalXP() }}"
         :playlist-item-position="{{ $positionInPlaylist }}"
         :playlist-item-id="{{ $playlistItem['id'] }}"
-        :start-second="{{ $playlistItem['start_second'] }}"
+        :start-second="{{ $playlistItem['start_second'] ?? 0 }}"
         :end-second="{{ $playlistItem['end_second'] ?? $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
         user-access-level="{{ user()->access_level }}">
     </playlist-playback-wrapper>
