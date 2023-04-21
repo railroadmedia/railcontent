@@ -137,13 +137,109 @@ class Cohort extends Resource
                 }),
             Text::make('Header image url', 'header_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Text::make('Trailer', 'cohort_trailer')->hideFromIndex(),
-            Text::make('icon1')->hideFromIndex(),
+            Image::make('Icon 1', 'icon1_url')
+                ->help('The icon should be 545 x 103px or a comparable aspect ratio.')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('icon1_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Icon 1', 'icon1_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted logo link. (Google Drive links will NOT work.)'),
+
             Text::make('Icon1 Title', 'icon1_title')->hideFromIndex(),
             Text::make('Icon1 Copy', 'icon1_copy')->hideFromIndex(),
-            Text::make('icon2')->hideFromIndex(),
+            Image::make('Icon 2', 'icon2_url')
+                ->help('The icon should be 545 x 103px or a comparable aspect ratio.')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('icon2_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Icon 2 Image', 'icon2_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted logo link. (Google Drive links will NOT work.)'),
+
             Text::make('Icon2 Title', 'icon2_title')->hideFromIndex(),
             Text::make('Icon2 Copy', 'icon2_copy')->hideFromIndex(),
-            Text::make('icon3')->hideFromIndex(),
+            Image::make('Icon 3', 'icon3_url')
+                ->help('The icon should be 545 x 103px or a comparable aspect ratio.')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('icon3_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Icon 3', 'icon3_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted logo link. (Google Drive links will NOT work.)'),
+
             Text::make('Icon3 Title', 'icon3_title')->hideFromIndex(),
             Text::make('Icon3 Copy', 'icon3_copy')->hideFromIndex(),
 

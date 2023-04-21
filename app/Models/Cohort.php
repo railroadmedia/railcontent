@@ -95,6 +95,21 @@ class Cohort extends Model
                 $model['body_logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . $model['body_logo']->getClientOriginalName(
                     );
             }
+
+            if (gettype($model['icon1_url']) === 'object') {
+                $model['icon1_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . $model['icon1_url']->getClientOriginalName(
+                    );
+            }
+
+            if (gettype($model['icon2_url']) === 'object') {
+                $model['icon2_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . $model['icon2_url']->getClientOriginalName(
+                    );
+            }
+
+            if (gettype($model['icon3_url']) === 'object') {
+                $model['icon3_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . $model['icon3_url']->getClientOriginalName(
+                    );
+            }
         });
     }
 
