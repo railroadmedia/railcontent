@@ -192,6 +192,9 @@ const props = defineProps({
     endSecond: {
         type: [String, Number],
         default: null
+    },
+    isMyPlaylist: {
+        type: Number,
     }
 });
 
@@ -294,10 +297,22 @@ onBeforeMount(() => {
             <div v-if="playlistItems.data && playlistItems.data.length" id="lessonInfo"
                 class="tw-flex tw-flex-row reverse tw-items-start">
                 <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
-                    <playback-cue :autoplay="false" :repeat="false" :brand="brand" :lessons="playlistItems"
-                        :playlist-name="playlistName" :duration="playlistDuration" :playlist-url="playlistUrl"
-                        :playlist-item-id="playlistItemId" :playlist-id="playlistId" :infinite-scroll="true"
-                        :playlist-item-position="playlistItemPosition" :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl"
+                    <playback-cue 
+                        :autoplay="false" 
+                        :repeat="false" 
+                        :brand="brand" 
+                        :lessons="playlistItems"
+                        :playlist-name="playlistName" 
+                        :duration="playlistDuration" 
+                        :playlist-url="playlistUrl"
+                        :playlist-item-id="playlistItemId" 
+                        :playlist-id="playlistId" 
+                        :infinite-scroll="true"
+                        :playlist-item-position="playlistItemPosition" 
+                        :next-lesson-url="nextLessonUrl" 
+                        :prev-lesson-url="prevLessonUrl" 
+                        :is-my-playlist="isMyPlaylist ? true : false"
+                        :is-playback-cue="true"
                      />
                 </div>
             </div>

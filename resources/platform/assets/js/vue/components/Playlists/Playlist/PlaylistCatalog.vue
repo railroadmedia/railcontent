@@ -37,7 +37,7 @@
         isCueCatalog: {
             type: Boolean,
             default: false,
-        }
+        },
     })
 
     //-----------Refs-----------//
@@ -183,6 +183,8 @@
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
         initialLessonsArray = props.lessons.data;
+
+        console.log()
     });
 </script>
 <template>

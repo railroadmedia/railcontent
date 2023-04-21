@@ -36,6 +36,14 @@ const props = defineProps({
     currentItem: {
         type: [String, Number],
         default: null
+    },
+    isMyPlaylist: {
+        type: Boolean,
+        default: true,
+    },
+    inPlaybackCue: {
+        type: Boolean,
+        default: false,  
     }
 });
 
@@ -71,7 +79,7 @@ const needAccess = computed(() => {
 const showTimeStamp = computed(() => {
     return props.lesson.start_second !== null && props.lesson.end_second !== null;
 })
-//Need Access
+//Get Instrument Name
 const instrument = computed(() => {
     switch (props.brand) {
         case 'drumeo':
@@ -334,7 +342,10 @@ onBeforeMount(() => {
                     <!-- Dropdown-->
                     <PlaylistDropdown :brand="brand" :dropdownTop="state.dropdownTop" :is-open="state.dropdownOpen"
                         :dropdownOptions="dropdownOptions" :data="lesson" :index="index" type="lesson"
-                        @closeDropdown="state.dropdownOpen = false" @pinItem="(val) => state.isPinned = val" />
+                        @closeDropdown="state.dropdownOpen = false" @pinItem="(val) => state.isPinned = val"
+                        :in-playback-cue="inPlaybackCue"
+                        :is-my-playlist="isMyPlaylist"
+                     />
                 </div>
             </div>
         </component>
@@ -368,9 +379,19 @@ onBeforeMount(() => {
                 </svg>
 
                 <!-- Dropdown-->
-                <PlaylistDropdown :brand="brand" :dropdownTop="state.dropdownTop" :is-open="state.dropdownOpen"
-                    :dropdownOptions="dropdownOptions" :data="lesson" :index="index" type="lesson"
-                    @closeDropdown="state.dropdownOpen = false" @pinItem="(val) => state.isPinned = val" />
+                <PlaylistDropdown 
+                    :brand="brand" 
+                    :dropdownTop="state.dropdownTop" 
+                    :is-open="state.dropdownOpen"
+                    :dropdownOptions="dropdownOptions" 
+                    :data="lesson" 
+                    :index="index" 
+                    :in-playback-cue="inPlaybackCue"
+                    :is-my-playlist="isMyPlaylist"
+                    type="lesson"
+                    @closeDropdown="state.dropdownOpen = false" 
+                    @pinItem="(val) => state.isPinned = val" 
+                />
             </div>
         </div>
 

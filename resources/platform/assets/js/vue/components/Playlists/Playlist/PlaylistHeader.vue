@@ -243,6 +243,8 @@
                             :dropdownOptions="dropdownOptions"
                             :data="playlistsStore.activePlaylist"
                             :is-open="state.dropdownOpen"
+                            :is-my-playlist="props.playlist.is_my_playlist"
+                            :in-playlist-header="true"
                             type="playlist"
                             @closeDropdown="state.dropdownOpen = false"
                             @updatePinned="(val) => state.isPinned = val"
