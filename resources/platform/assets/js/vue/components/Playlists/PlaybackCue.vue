@@ -77,7 +77,11 @@ const isPlaybackRepeatOn = ref(false);
 //---------Computed--------//
 
 const shouldShowBottomSkeleton = computed(() => {
-    return (isLoading.value && props.infiniteScroll) || (playlistsStore.lessons.length < 20 && !preventReFetch.value);
+    return (
+        (isLoading.value && props.infiniteScroll)
+            || (playlistsStore.lessons.length < 20
+            && !preventReFetch.value)
+        ) && props.lessons?.meta?.totalResults > 20
 });
 
 const shouldShowTopSkeleton = computed(() => {
