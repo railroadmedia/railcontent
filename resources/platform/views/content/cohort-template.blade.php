@@ -101,8 +101,8 @@
                         </p>
                     </div>
                     {{--  Icons/Title/Copies  --}}
-                    <div class="tw-flex tw-items-center">
-                        <div class="tw-flex tw-flex-wrap tw-justify-evenly tw-w-full sm:tw-w-auto sm:tw-flex-grow tw-py-4 sm:tw-py-3 lg:tw-py-4 tw-text-left sm:tw-text-center">
+                    <div class="tw-flex tw-items-center sm:tw-justify-center sm:tw-flex-grow">
+                        <div class="tw-flex tw-flex-wrap tw-justify-evenly tw-w-full sm:tw-w-auto tw-py-4 sm:tw-py-3 lg:tw-py-4 tw-text-left sm:tw-text-center">
                             <div class="tw-flex sm:tw-flex-col sm:tw-flex-1 tw-w-full sm:tw-w-1/3 tw-px-4 sm:tw-px-3 tw-mb-4 sm:tw-mb-0">
                                 <div class="tw-text-center">
                                     <i class="far fa-fw fa-calendar-day tw-mr-3 sm:tw-mr-0 tw-text-{{ $brand }} tw-text-3xl sm:tw-mb-1" aria-hidden="true"></i>
