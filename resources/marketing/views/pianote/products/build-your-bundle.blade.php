@@ -204,7 +204,7 @@
                                 <div
                                     x-ref="front"
                                     class="border-pianote front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700"
-                                    :class="selected ? 'border-4' : !selected && bonus !==3 && 'hover:border-2'"
+                                    :class="selected && 'border-4'"
                                     style="backface-visibility: hidden;">
                                     @if(!empty($bonus['badge']))
                                         <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
