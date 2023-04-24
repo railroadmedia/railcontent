@@ -270,7 +270,7 @@ onMounted(() => {
             </div>
         </div>
         <!-- Items -->
-        <div @scroll="handleScroll" v-if="playlistsStore.lessons.length" id="cue-scroll-container"
+        <div v-if="playlistsStore.lessons.length" id="cue-scroll-container"
             class="tw-w-full tw-flex tw-flex-col tw-h-[540px] tw-overflow-y-auto tw-relative">
             <!-- Top Skeleton for offset For top Infinite Scroll -->
             <div v-if="shouldShowTopSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
