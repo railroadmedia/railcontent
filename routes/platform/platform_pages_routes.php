@@ -633,14 +633,10 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.request-song');
 
-        Route::get('/{brand}/{cohort}', [CohortPackController::class, 'template'])
-            ->whereIn('brand', ['pianote', 'drumeo'])
-            ->whereIn('cohort', ['30-day-drummer','new-piano-players'])
+        Route::get('/{brand}/enrollment/{cohort}', [CohortPackController::class, 'template'])
             ->name('platform.cohort');
 
-        Route::get('/{brand}/{cohort}/purchased', [CohortPackController::class, 'purchased'])
-            ->whereIn('brand', ['pianote', 'drumeo'])
-            ->whereIn('cohort', ['30-day-drummer','new-piano-players'])
+        Route::get('/{brand}/enrollment/{cohort}/purchased', [CohortPackController::class, 'purchased'])
             ->name('platform.cohort.purchased');
 
         Route::get('{brand}/cohort-packs/register/{product}', [CohortPackController::class, 'register'] )

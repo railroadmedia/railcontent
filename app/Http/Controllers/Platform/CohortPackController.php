@@ -45,6 +45,9 @@ class CohortPackController
     public function template(Request $request, $domain, $brand, $slug, $purchased = false)
     {
         $cohort = $this->cohortService->getCohort($slug);
+        if (!$cohort) {
+            abort(404);
+        }
 
         $productId = $cohort['product_id'];
         $product = $this->productRepository->findProduct($productId);
@@ -110,7 +113,8 @@ class CohortPackController
                 return response()->json(
                     [
                         'success' => true,
-                        'message' => $successMessage],
+                        'message' => $successMessage
+                    ],
                     200
                 );
             }
