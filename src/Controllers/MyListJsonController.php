@@ -245,7 +245,10 @@ class MyListJsonController extends Controller
     public function getPlaylist(Request $request)
     {
         $playlist = $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
-        throw_if(($playlist == -1), new NotFoundException("You don’t have access to this playlist", 'Private Playlist'));
+        throw_if(
+            ($playlist == -1),
+            new NotFoundException("You don’t have access to this playlist", 'Private Playlist')
+        );
         throw_if(!$playlist, new NotFoundException("Playlist not exists."));
 
         return reply()->json([$playlist], [
@@ -399,6 +402,10 @@ class MyListJsonController extends Controller
     {
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
         throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
+        throw_if(
+            ($playlist == -1 || (!$playlist['is_my_playlist'])),
+            new NotFoundException("You don’t have access to update this playlist", 'Private Playlist')
+        );
 
         $playlist = $this->userPlaylistsService->update(
             $playlistId,
@@ -552,6 +559,13 @@ the pin icon on or off.',
         $playlistContent = $this->userPlaylistsService->getPlaylistItemById($request->get('user_playlist_item_id'));
         throw_if(!$playlistContent, new NotFoundException('Playlist item not exists.'));
 
+        $playlist = $this->userPlaylistsService->getPlaylist($playlistContent['user_playlist_id']);
+        throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
+        throw_if(
+            ($playlist == -1 || (!$playlist['is_my_playlist'])),
+            new NotFoundException("You don’t have access to update items from this playlist", 'Private Playlist')
+        );
+
         return $this->userPlaylistsService->changePlaylistContent(
             $request->get('user_playlist_item_id'),
             $request->get('position'),
@@ -564,9 +578,18 @@ the pin icon on or off.',
     /**
      * @param Request $request
      * @return mixed
+     * @throws NotFoundException
+     * @throws \Throwable
      */
     public function deletePlaylist(Request $request)
     {
+        $playlist = $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
+        throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
+        throw_if(
+            ($playlist == -1 || (!$playlist['is_my_playlist'])),
+            new NotFoundException("You don’t have access to delete this playlist", 'Private Playlist')
+        );
+
         $deleted = $this->userPlaylistsService->deletePlaylist($request->get('playlist_id'));
 
         return reply()->json([[$deleted > 0]], [
@@ -603,6 +626,16 @@ the pin icon on or off.',
      */
     public function removeItemFromPlaylist(Request $request)
     {
+        $playlistContent = $this->userPlaylistsService->getPlaylistItemById($request->get('user_playlist_item_id'));
+        throw_if(!$playlistContent, new NotFoundException('Playlist item not exists.'));
+
+        $playlist = $this->userPlaylistsService->getPlaylist($playlistContent['user_playlist_id']);
+        throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
+        throw_if(
+            ($playlist == -1 || (!$playlist['is_my_playlist'])),
+            new NotFoundException("You don’t have access to remove items from this playlist", 'Private Playlist')
+        );
+
         $deleted = $this->userPlaylistsService->removeItemFromPlaylist($request->get('user_playlist_item_id'));
 
         return reply()->json([[$deleted > 0]], [
