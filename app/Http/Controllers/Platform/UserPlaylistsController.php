@@ -225,6 +225,50 @@ class UserPlaylistsController extends BaseController
         $grupedPermissions = $contentPermissionRows->groupBy('content_id');
         $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
 
+//        $needLifetime = (count($contentPermissionRows) == 1) && array_intersect(
+//                ['Drumeo Lifetime Member'],
+//                (isset($grupedPermissions[$playlistItem['id']])) ?
+//                    $grupedPermissions[$playlistItem['id']]->pluck('name')
+//                        ->toArray() : []
+//            );
+//        $needMusoraBasic = array_intersect(
+//            ['Musora Basic Membership'],
+//            (isset($grupedPermissions[$playlistItem['id']])) ?
+//                $grupedPermissions[$playlistItem['id']]->pluck('name')
+//                    ->toArray() : []
+//        );
+//
+//        $message = '';
+//        if (!empty($needLifetime)) {
+//            $message = 'This Masterclass is part of our exclusive <b>Lifetime Membership</b>.';
+//        } elseif (!empty($needMusoraBasic)) {
+//            $message = 'This lesson is part of our <b>Musora Membership</b>.';
+//        } elseif ($playlistItem['type'] == 'song') {
+//            $message = 'This Song content is part of our <b>Musora+ Membership</b>.';
+//        } else {
+//            $parentContentData = array_reverse(json_decode($playlistItem['parent_content_data'], true));
+//            $parent = $parentContentData[0] ?? null;
+//            $title = '';
+//            if ($parent) {
+//                ContentRepository::$bypassPermissions = true;
+//                $parentData = $this->contentService->getById($parent['id']);
+//
+//                $title = $parentData['title'];
+//
+//                ContentRepository::$bypassPermissions = false;
+//            }
+//            $message = $playlistItem['title'].' is part of our <b>'.$title.'</b> Pack.';
+//        }
+//
+//        $extraData = [
+//            "item_title" => $playlistItem['title'],
+//            "item_type" => $playlistItem['type'],
+//            "thumbnail_url" => $playlistItem['thumbnail_url'] ?? '',
+//            "parent" => $playlistItem['parent'] ?? null,
+//            "learn_more_link" => "https://musora.helpscoutdocs.com/article/1034-musora-membership-options#membershiptype",
+//        ];
+//        throw new \Exception($message, 403);
+
         $otherItems = [];
         foreach ($playlistItems as $index=>$item) {
             $otherItems[$index]['url'] = $item['url']??'';
