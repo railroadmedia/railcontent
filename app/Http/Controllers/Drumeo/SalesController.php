@@ -87,6 +87,13 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo']);
     }
+    public function fasterFeet()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.faster-feet', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true]);
+    }
     public function homeMonth()
     {
         $products = $this->productRepository->all();
@@ -107,6 +114,13 @@ class SalesController extends BaseController
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
+    }
+    public function choosePlanVDF()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.pages.vdf', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function choosePlan()
     {
@@ -179,13 +193,6 @@ class SalesController extends BaseController
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         return view('drumeo.products.quietkick', ['products' => $products, 'theme' => 'drumeo']);
-    }
-    public function quietKickMembers()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.products.quietkick-members', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function eardrums()
     {

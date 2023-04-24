@@ -32,7 +32,7 @@
             @endif
         >
             @if(!empty($promoVersion) && empty($trialVersion))
-                Get Started &raquo;
+                SEE YOUR DEAL &raquo;
             @else
                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
             @endif

@@ -36,11 +36,9 @@
         <div class="relative py-12 md:py-24">
             <div class="absolute inset-0 z-10">
                 <img
-                    src="@if($theme === 'drumeo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/drumeo-header.jpg @elseif($theme === 'pianote') https://d3fzm1tzeyr5n3.cloudfront.net/headers/pianote-header.jpg @elseif($theme === 'guitareo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/guitareo-header.jpg @elseif($theme === 'singeo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/singeo-header.jpg @endif"
-                    class="h-full w-full object-top object-cover transition-opacity opacity-0"
+                    src="@if(!empty($leadgen->bg_img)) {{ $leadgen->bg_img }} @elseif($theme === 'drumeo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/drumeo-header.jpg @elseif($theme === 'pianote') https://d3fzm1tzeyr5n3.cloudfront.net/headers/pianote-header.jpg @elseif($theme === 'guitareo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/guitareo-header.jpg @elseif($theme === 'singeo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/singeo-header.jpg @endif"
+                    class="h-full w-full object-top object-cover"
                     alt="{{ $theme }} background"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
                 />
             </div>
             <div class="absolute inset-0 z-20" style="background: @if($theme === 'drumeo')linear-gradient(180deg,rgba(0,0,0,.05) 55%,rgba(9,92,170,.7)); @elseif($theme === 'pianote') linear-gradient(180deg,rgba(0,0,0,.05) 55%,rgba(213,8,29,.7)); @elseif($theme === 'guitareo') linear-gradient(180deg,rgba(0,0,0,.05) 55%,rgba(0,150,128,.7)); @elseif($theme === 'singeo') linear-gradient(180deg,rgba(0,0,0,.05) 55%,rgba(102,0,182,.7)); @endif">
@@ -48,11 +46,9 @@
             <div class="text-center">
                 @if(!empty($leadgen->logo))
                     <img
-                        class="transition-opacity opacity-0 h-16 md:h-24 lg:h-40 z-30 relative"
+                        class="h-16 md:h-24 lg:h-40 z-30 relative"
                         src="{{$leadgen->logo}}"
                         alt="leadgen logo"
-                        loading="lazy"
-                        onload="this.classList.remove('opacity-0')"
                     />
                 @else
                     <h1 class="text-white z-30 relative font-bold">

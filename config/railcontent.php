@@ -155,12 +155,12 @@ return [
 
     'search_index_values' => [
         'high_value' => [
-            'content_attributes' => ['slug','title',],
+            'content_attributes' => ['slug','title'],
             'field_keys' => ['instructor:name', 'artist', 'album'],
             'data_keys' => [],
         ],
         'medium_value' => [
-            'content_attributes' => [],
+            'content_attributes' => ['type'],
             'field_keys' => ['*'],
             'data_keys' => [],
         ],

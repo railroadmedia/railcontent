@@ -89,10 +89,73 @@ class Leadgen extends Resource
                     return $value;
                 }),
             Text::make('Meta Image', 'meta_img')->hideFromIndex()->hideFromDetail(),
+            //To display in the index page
             Text::make('Index Slug','slug', function(){
                 return '<a class="link-default" target="_blank" href="'.get_legacy_brand_base_url(strtolower($this->brand->name)).'/'.$this->slug.'">'.$this->slug.'</a>';
             })->asHtml()->hideWhenCreating()->hideWhenUpdating(),
             Text::make('Index Slug', 'slug')->hideFromIndex()->hideFromDetail(),
+            Image::make('logo')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
+                ->deletable(false)
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/Lead-gens/Logos/'.$request->uuid.'-'.$request->file('logo')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('logo')->hideFromIndex()->hideFromDetail(),
+            Image::make('Header Background Image', 'bg_img')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->disableDownload()
+                ->deletable(false)
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/Lead-gens/Background-images/'.$request->uuid.'-'.$request->file('bg_img')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Header Background Image', 'bg_img')->hideFromIndex()->hideFromDetail(),
             Flexible::make('Assets')
                 ->addLayout(LeadgenLessonAssetLayout::class)
                 ->preset(LeadgenLessonAssetPreset::class),

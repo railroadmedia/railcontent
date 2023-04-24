@@ -48,7 +48,7 @@ return [
 
     // post purchase redirect
     'post_purchase_redirect_digital_items' => '/members',
-    'order_form_post_purchase_redirect_path_without_brand' => '/',
+    'order_form_post_purchase_redirect_path_without_brand' => '/purchase-redirect/',
     'post_purchase_redirect_customer_order' => '/thankyou',
     'post_add_to_cart_redirect' => '/order',
 
