@@ -97,8 +97,18 @@
 
     <section class="content-section text-center upgrade-video-header bg-white text-black">
         <div class="container mx-auto">
-            <h1 class="font-bebas uppercase leading-none mb-1">The Beautiful Beginner<br class="inline sm:hidden"> <span class="text-coaches">Piano Bundle.</span></h1>
-            <h6 class="uppercase leading-tight"><strong>Because starting out <br class="inline sm:hidden"> should sound this good.</strong></h6>
+            <h1 class="font-bebas uppercase leading-none mb-3">The Beautiful Beginner<br class="inline sm:hidden"> <span class="text-coaches">Piano Bundle.</span></h1>
+            <h6 class="uppercase leading-tight"><strong>Because starting out <br class="inline sm:hidden"> should sound this good.<br>
+            <span class="text-promo">ONLY
+                <span x-cloak x-data="timer()" x-init="countdown()">
+                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                 </span>
+                LEFT</span>
+                </strong></h6>
             <div class="w-full mx-auto mt-5 sm:mt-10 mb-10 sm:mb-20 px-4" style="max-width:920px;">
                 <img
                     class="rounded-xl"
@@ -358,4 +368,9 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
+
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-05-01 00:00:00',
+        'promoVersion' => false
+    ])
 @stop
