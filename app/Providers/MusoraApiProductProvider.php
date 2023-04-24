@@ -32,13 +32,13 @@ class MusoraApiProductProvider implements ProductProviderInterface
         $this->packService = $packService;
     }
 
-    public function getPackPrice($slug): array
-    {
+    public function getPackPrice($slug)
+    : array {
         return [];
     }
 
-    public function getAppleProductId($slug): string
-    {
+    public function getAppleProductId($slug)
+    : string {
         $productSkuToPackSlugArray = config('event-data-synchronizer.pack_ecommerce_product_sku_to_content_slug') ?? [];
 
         $productSKU = array_flip($productSkuToPackSlugArray)[$slug] ?? null;
@@ -46,8 +46,8 @@ class MusoraApiProductProvider implements ProductProviderInterface
         return array_flip(config('ecommerce.apple_store_products_map', []))[$productSKU] ?? '';
     }
 
-    public function getGoogleProductId($slug): string
-    {
+    public function getGoogleProductId($slug)
+    : string {
         $productSkuToPackSlugArray = config('event-data-synchronizer.pack_ecommerce_product_sku_to_content_slug');
 
         $productSKU = array_flip($productSkuToPackSlugArray)[$slug] ?? null;
@@ -55,12 +55,13 @@ class MusoraApiProductProvider implements ProductProviderInterface
         return array_flip(config('ecommerce.google_store_products_map'))[$productSKU] ?? '';
     }
 
-    public function currentUserOwnsPack($id): bool
-    {
+    public function currentUserOwnsPack($id)
+    : bool {
         return true;
     }
 
-    public function getMembershipProductIds(): array
+    public function getMembershipProductIds()
+    : array
     {
         return [];
     }
@@ -78,10 +79,13 @@ class MusoraApiProductProvider implements ProductProviderInterface
      * @return array
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
-    public function getCohortTemplate($slug): array
-    {
+    public function getCohortTemplate($slug)
+    : array {
         $cohort = $this->cohortService->getCohort($slug);
 
+        foreach (config('railcontent.cohort_icons')[brand()] ?? [] as $key => $value) {
+            $cohort[$key] = $value;
+        }
         $product = $this->productRepository->findProduct($cohort['product_id']);
         $hasProduct = user() && $this->userProductService->hasProductNotCached(user()?->id, $cohort['product_id']);
         $nPackOwners = $this->userProductService->getNumberProductOwners($cohort['product_id']);
