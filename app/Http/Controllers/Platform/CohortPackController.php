@@ -88,7 +88,7 @@ class CohortPackController
     {
         $successMessage = 'Success! You have registered. Check your email for the details.';
 
-        return $this->registerForProductPack($sku, $successMessage);
+        return $this->registerForProductPack($sku, $successMessage, $request);
     }
 
     /**
@@ -98,7 +98,7 @@ class CohortPackController
      * @throws \Doctrine\ORM\ORMException
      * @throws \Throwable
      */
-    private function registerForProductPack(string $sku, string $successMessage)
+    private function registerForProductPack(string $sku, string $successMessage, Request $request)
     {
         if (user()?->isAMember()) {
             $user = new User(user()->id, user()->email);
@@ -106,7 +106,14 @@ class CohortPackController
             /** @var Product $product */
             $product = $this->productRepository->bySku($sku);
             $this->ecommerceUserProductService->assignUserProduct($user, $product, null, 1);
-
+            if ($request->expectsJson()) {
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => $successMessage],
+                    200
+                );
+            }
             return redirect()
                 ->back()
                 ->with(
