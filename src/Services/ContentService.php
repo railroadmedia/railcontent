@@ -2664,6 +2664,7 @@ class ContentService
             if ($content['type'] == 'song') {
                 if ($content['instrumentless']) {
                     $results['song_instrumentless_assignment'] = $assign;
+                    $results['soundslice_assignments_count'] = 2;
                 }
                 $results['song_full_assignment'] = $assign;
             }
