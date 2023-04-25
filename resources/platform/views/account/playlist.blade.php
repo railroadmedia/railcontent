@@ -9,12 +9,14 @@
     {{-- Playlist Header --}}
     <playlist-header
         :playlist="{{ json_encode($playlist) }}"
+        :has-access="false"
         :lessons="{{ $listLessons }}"
         brand="{{ $brand }}"
     /></playlist-header>
 
     {{-- Playlist Catalog --}}
     <playlist-catalog
+        :has-access="false"
         :is-my-playlist="{{$playlist['is_my_playlist']}}"
         :lessons="{{ $listLessons }}"
         brand="{{ $brand }}"
