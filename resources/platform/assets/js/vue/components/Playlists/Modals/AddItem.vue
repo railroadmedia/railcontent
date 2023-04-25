@@ -193,7 +193,8 @@ onMounted(() => {
     if (props.content.type === 'song') {
         showSongToggle.value = true;
         addFullSongToggle.value = true;
-    } else if (props.content.type !== 'Assignments') {
+    } 
+    if (props.content.type !== 'Assignments') {
         isLoadingAssignments.value = true;
         PlaylistService.getAssignmentsForContent({ token, contentId: props.content.content_id, brand: props.brand }).then((r) => {
             const { data: { soundslice_assignments_count } } = r;
@@ -217,7 +218,7 @@ onMounted(() => {
         </div>
         <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
 
-        <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-4" v-if="additionalItems > 0">
+        <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-4" v-if="additionalItems > 0 && content.type !== 'song'">
             <p class="tw-text-center tw-text-[14px] tw-mb-3">
                 Your selected videos contain {{
                     additionalItems
@@ -249,7 +250,7 @@ onMounted(() => {
                     </p>
                     <Toggle :initialValue="addFullSongToggle" id="toggle-full-song" @onToggle="handleOnToggleFullSong" />
                 </fieldset>
-                <fieldset class="tw-flex tw-flex-row tw-items-center">
+                <fieldset v-if="additionalItems > 0" class="tw-flex tw-flex-row tw-items-center">
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">{{ instrumentless }}
                             TRACK</strong></p>
                     <Toggle :initialValue="addInstrumentlessToggle" id="toggle-instrumentless-song"
