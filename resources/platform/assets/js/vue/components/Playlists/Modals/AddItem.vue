@@ -31,6 +31,7 @@ const isLoadingPlaylists = ref(false);
 const isLoadingAssignments = ref(false);
 const selectedPlaylists = ref([]);
 const showSongToggle = ref(false);
+const showVocalRoutineToggles = ref(false);
 const addFullSongToggle = ref(false);
 const addInstrumentlessToggle = ref(false);
 const preventReFetch = ref(false);
@@ -193,7 +194,10 @@ onMounted(() => {
     if (props.content.type === 'song') {
         showSongToggle.value = true;
         addFullSongToggle.value = true;
-    } 
+    }
+    //If Adding a Routine 
+    showVocalRoutineToggles.value = props.content.type === 'routine' ? true : false ;
+
     if (props.content.type !== 'Assignments') {
         isLoadingAssignments.value = true;
         PlaylistService.getAssignmentsForContent({ token, contentId: props.content.content_id, brand: props.brand }).then((r) => {
@@ -241,16 +245,17 @@ onMounted(() => {
             </button>
         </div>
 
+        <!-- Song Instrument Toggles -->
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-pt-[18px]" v-if="showSongToggle">
             <p class="tw-text-[16px] tw-text-center tw-w-full tw-pb-[20px]">This song contains both full and {{
                 instrumentless }} tracks. Choose which tracks you want to Import into your Playlist.</p>
-            <div class="tw-flex tw-justify-around tw-w-full">
-                <fieldset class="tw-flex tw-flex-row tw-items-center">
+            <div class="tw-flex tw-justify-center tw-w-full">
+                <fieldset class="tw-flex tw-flex-row tw-items-center tw-mx-4">
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">FULL TRACK</strong>
                     </p>
                     <Toggle :initialValue="addFullSongToggle" id="toggle-full-song" @onToggle="handleOnToggleFullSong" />
                 </fieldset>
-                <fieldset v-if="additionalItems > 0" class="tw-flex tw-flex-row tw-items-center">
+                <fieldset v-if="additionalItems > 0" class="tw-flex tw-flex-row tw-items-center tw-mx-4">
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">{{ instrumentless }}
                             TRACK</strong></p>
                     <Toggle :initialValue="addInstrumentlessToggle" id="toggle-instrumentless-song"
@@ -258,6 +263,35 @@ onMounted(() => {
                 </fieldset>
             </div>
         </div>
+
+        <!-- Vocal Routine Toggles -->
+        <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-pt-[18px]" v-if="showVocalRoutineToggles">
+            <p class="tw-text-[16px] tw-text-center tw-w-full tw-pb-[20px]">
+                This routine contains variants for high and low voices. <br>
+                Choose which variants you want to Import into your Playlist.
+            </p>
+            <div class="tw-flex tw-justify-center tw-w-full">
+                <fieldset class="tw-flex tw-flex-row tw-items-center tw-mx-4">
+                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">High</strong></p>
+                    <Toggle 
+                        id="toggle-high-voice" 
+                        :brand="brand"
+                        :initialValue="addFullSongToggle" 
+                        @onToggle="handleOnToggleFullSong" 
+                    />
+                </fieldset>
+                <fieldset class="tw-flex tw-flex-row tw-items-center tw-mx-4">
+                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">Low</strong></p>
+                    <Toggle 
+                        id="toggle-low-voice" 
+                        :brand="brand"
+                        :initialValue="addInstrumentlessToggle" 
+                        @onToggle="handleOnToggleInstrumentlessSong" 
+                    />
+                </fieldset>
+            </div>
+        </div>
+
         <Table @onActionClick="handleActionClick" @onScroll="handleScroll"
             :classOverride="`tw-mt-[24px] tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" :stickyHeader="true" :rows="formattedRows">
             <template v-slot:actionContent="slotProps">

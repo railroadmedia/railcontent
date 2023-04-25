@@ -90,7 +90,6 @@ export default {
                 <div class="tw-inline-flex md:tw-items-center tw-p-1 tw-ml-auto">
                     <button 
                         class="tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-[#9EC0DC]"
-                        :class="is_added ? 'is-added tw-rotate-45 ' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                         title="Add to Playlist"
                         :data-content-id="item.id"
                         :data-content-type="item.type"
