@@ -13,15 +13,11 @@ return new class extends Migration {
     public function up()
     {
         $connections = [
-            //'drumeo_laravel_mysql_writer_only',
+            'drumeo_laravel_mysql_writer_only',
             'pianote_laravel_mysql_writer_only',
             'guitareo_laravel_mysql_writer_only',
             'singeo_laravel_mysql_writer_only'
         ];
-
-        Schema::connection('drumeo_laravel_mysql_writer_only')->table('railtracker4_url_queries', function (Blueprint $table) {
-            $table->dropIndex('url_query_index');
-        });
 
         foreach ($connections as $connection) {
             Schema::connection($connection)->table('railtracker4_requests', function (Blueprint $table) {
