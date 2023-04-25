@@ -69,10 +69,15 @@ const props = defineProps({
     }
 })
 
+//-----------Reactive-----------//
+const state = reactive({
+    collapsed: false,
+})
+
 //-----------Refs-----------//
 const pageNumberTop = ref(1);
 const pageNumberBottom = ref(1);
-const preventReFetch = ref(false);
+// const preventReFetch = ref(false);
 const isLoading = ref(false);
 const isPlaybackShuffleOn = ref(false);
 const isPlaybackRepeatOn = ref(false);
@@ -80,6 +85,9 @@ const isPlaybackRepeatOn = ref(false);
 
 //---------Computed--------//
 
+const shouldShowBottomSkeleton = computed(() => isLoading.value);
+
+/*
 const shouldShowBottomSkeleton = computed(() => {
     return (
         (isLoading.value && props.infiniteScroll)
@@ -91,9 +99,9 @@ const shouldShowBottomSkeleton = computed(() => {
 const shouldShowTopSkeleton = computed(() => {
     return pageNumberTop.value > 1;
 });
-
+*/
 //-----------Methods-----------//
-
+/*
 const handleScroll = (e) => {
     //Handle infinite Scroll
     if (props.infiniteScroll) {
@@ -144,6 +152,7 @@ const handleScroll = (e) => {
         }
     }
 };
+*/
 
 const handleShuffleToggle = () => {
     isPlaybackShuffleOn.value = !isPlaybackShuffleOn.value;
@@ -175,6 +184,27 @@ onMounted(() => {
     if (cueScrollContainer) {
         cueScrollContainer.scrollTop = 90;
     }
+
+    const payload = {
+        page: 1,
+        limit: 300,
+        playlist_id: props.playlistId
+    };
+
+    //Get Lessons
+    isLoading.value = true;
+    PlaylistService.getPlaylistLessons(payload, token).then(response => {
+        isLoading.value = false;
+        if (response.data.results.length) {
+            playlistsStore.lessons = response.data.results;
+            nextTick(() => {
+                const cueScrollContainer = document.getElementById('cue-scroll-container');
+                // cueScrollContainer.scrollTop = 90 * 20;
+            })
+        }
+    }).catch(() => {
+        window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
+    });
 });
 </script>
 <template>
@@ -182,10 +212,18 @@ onMounted(() => {
         class="tw-z-10 tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-mb-4">
         <!-- Header -->
         <div class="tw-flex tw-flex-col dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-py-[17px] tw-px-[10px]">
-            <a :href="playlistUrl"
-                class="tw-inline-flex tw-mr-auto tw-pb-1 tw-large tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent hover:tw-border-current">
-                {{ playlistName }}
-            </a>
+            <div class="tw-flex">
+                <a :href="playlistUrl"
+                    class="tw-inline-flex tw-mr-auto tw-pb-1 tw-large tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent hover:tw-border-current">
+                    {{ playlistName }}
+                </a>
+                <button class="tw-px-1 lg:tw-hidden" 
+                    :title="state.collapsed ? 'Show Playback Cue' : 'Hide Playback Cue'"
+                    :class="state.collapsed ? 'tw-rotate-180' : ''" 
+                    @click=" state.collapsed = !state.collapsed ">
+                    <i class="fas fa-chevron-down tw-text-[#00101D] dark:tw-text-white"></i>
+                </button>
+            </div>
             <!-- Cue Data -->
             <p class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1">
                 <span>{{ playlistItemPosition }}/{{ props.lessons?.meta?.totalResults }}</span>
@@ -204,8 +242,7 @@ onMounted(() => {
                     </svg>
                 </a>
                 <!-- Shuffle -->
-                <button
-                    class="tw-text-[#3F3F46] tw-transition-colors tw-mr-3"
+                <button class="tw-text-[#3F3F46] tw-transition-colors tw-mr-3"
                     :class="`${isPlaybackShuffleOn ? 'dark:tw-text-white' : 'dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'}`"
                     @click.prevent="handleShuffleToggle" title="Shuffle">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -224,8 +261,7 @@ onMounted(() => {
                     </svg>
                 </button>
                 <!-- Repeat -->
-                <button
-                    class="tw-text-[#3F3F46] tw-transition-colors tw-mr-3"
+                <button class="tw-text-[#3F3F46] tw-transition-colors tw-mr-3"
                     :class="`${isPlaybackRepeatOn ? 'dark:tw-text-white' : 'dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'}`"
                     @click.prevent="handleRepeatToggle" title="Loop">
                     <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -247,8 +283,10 @@ onMounted(() => {
             </div>
         </div>
         <!-- Items -->
-        <div @scroll="handleScroll" v-if="playlistsStore.lessons.length" id="cue-scroll-container"
-            class="tw-w-full tw-flex tw-flex-col tw-h-[540px] tw-overflow-y-auto tw-relative">
+        <div v-if="playlistsStore.lessons.length" id="cue-scroll-container"
+            class="tw-w-full tw-flex tw-flex-col tw-h-[540px] tw-overflow-y-auto tw-relative"
+            :class="state.collapsed ? 'tw-hidden lg:tw-block' : '' "
+        >
             <!-- Top Skeleton for offset For top Infinite Scroll -->
             <div v-if="shouldShowTopSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
                 <div
@@ -256,18 +294,10 @@ onMounted(() => {
                 </div>
             </div>
             <!-- Print Each Card -->
-            <playlist-card 
-                :currentItem="playlistItemPosition" 
-                v-for="(lesson, i) in playlistsStore.lessons"
-                :key="'playlist-card-cue-' + lesson.id" 
-                :index="i" :cardId="'playlist-card-cue-' + lesson.id" 
-                :lesson="lesson"
-                :token="token" 
-                :brand="brand" 
-                :cue-version="true" 
-                :in-playback-cue="true"
-                :is-my-playlist="isMyPlaylist"
-            />
+            <playlist-card :currentItem="playlistItemPosition" v-for="(lesson, i) in playlistsStore.lessons"
+                :key="'playlist-card-cue-' + lesson.id" :index="i" :cardId="'playlist-card-cue-' + lesson.id"
+                :lesson="lesson" :token="token" :brand="brand" :cue-version="true" :in-playback-cue="true"
+                :is-my-playlist="isMyPlaylist" />
             <!-- Skeleton Loader For Infinite Scroll -->
             <div v-if="shouldShowBottomSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
                 <div v-for="n in (playlistsStore.lessons.length >= 20 ? limit : 20 - playlistsStore.lessons.length)"
