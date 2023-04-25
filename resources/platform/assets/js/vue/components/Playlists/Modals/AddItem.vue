@@ -32,8 +32,10 @@ const isLoadingAssignments = ref(false);
 const selectedPlaylists = ref([]);
 const showSongToggle = ref(false);
 const showVocalRoutineToggles = ref(false);
-const addFullSongToggle = ref(false);
+const addFullSongToggle = ref(true);
 const addInstrumentlessToggle = ref(false);
+const includeHighRoutine = ref(true);
+const includeLowRoutine = ref(true);
 const preventReFetch = ref(false);
 const duplicatedIDs = ref([]);
 const duplicateProps = ref({ show: false, id: null });
@@ -44,14 +46,23 @@ const handleOnToggleAssignments = (val) => {
     importAll.value = val;
 };
 
+//Handle Instrument Toggles
 const handleOnToggleFullSong = (val) => {
     addFullSongToggle.value = val;
 };
-
 const handleOnToggleInstrumentlessSong = (val) => {
     addInstrumentlessToggle.value = val;
 };
 
+//Handle Routine Toggles
+const handleLowRoutine = (val) => {
+    includeLowRoutine.value = val;
+}
+const handleHighRoutine = (val) => {
+    includeHighRoutine.value = val;
+}
+
+//Instrument Value
 const instrumentless = computed(() => {
     return {
         drumeo: 'drumless',
@@ -88,15 +99,26 @@ const handleCancel = () => {
 };
 
 const saveData = (playlistId) => {
-    return PlaylistService.addToPlaylist({
-        brand: props.brand,
-        contentId: props.content.content_id,
-        importAssignments: importAll.value,
-        playlistIds: playlistId ? [playlistId] : selectedPlaylists.value,
-        addFull: addFullSongToggle.value,
-        addInstrumentless: addInstrumentlessToggle.value,
-        token,
-    })
+    if(showVocalRoutineToggles.value) {
+        return PlaylistService.addToPlaylist({
+            brand: props.brand,
+            contentId: props.content.content_id,
+            playlistIds: playlistId ? [playlistId] : selectedPlaylists.value,
+            addLowRoutine: includeLowRoutine.value,
+            addHighRoutine: includeHighRoutine.value,
+            token,
+        })
+    } else {
+        return PlaylistService.addToPlaylist({
+            brand: props.brand,
+            contentId: props.content.content_id,
+            importAssignments: importAll.value,
+            playlistIds: playlistId ? [playlistId] : selectedPlaylists.value,
+            addFull: addFullSongToggle.value,
+            addInstrumentless: addInstrumentlessToggle.value,
+            token,
+        })
+    }
 };
 
 const handleSaveItem = () => {
@@ -114,6 +136,7 @@ const handleSaveItem = () => {
         handleCancel();
     }
 };
+
 const handleCreate = () => {
     emit('onCancel');
     window.openplaylistmodal({
@@ -126,6 +149,7 @@ const handleCreate = () => {
         window.addItemCallback = null;
     }
 }
+
 const handleScroll = (e) => {
     if ((e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 1) && !preventReFetch.value) {
         pageNumber.value = pageNumber.value + 1;
@@ -189,12 +213,15 @@ const getUserPlaylists = () => {
         window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
     });
 }
+
 onMounted(() => {
     isLoadingPlaylists.value = true;
+
     if (props.content.type === 'song') {
         showSongToggle.value = true;
         addFullSongToggle.value = true;
     }
+
     //If Adding a Routine 
     showVocalRoutineToggles.value = props.content.type === 'routine' ? true : false ;
 
@@ -251,15 +278,26 @@ onMounted(() => {
                 instrumentless }} tracks. Choose which tracks you want to Import into your Playlist.</p>
             <div class="tw-flex tw-justify-center tw-w-full">
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-mx-4">
-                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">FULL TRACK</strong>
+                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]">
+                        <strong class="tw-uppercase">FULL TRACK</strong>
                     </p>
-                    <Toggle :initialValue="addFullSongToggle" id="toggle-full-song" @onToggle="handleOnToggleFullSong" />
+                    <Toggle 
+                        :initialValue="addFullSongToggle" 
+                        :brand="brand" 
+                        id="toggle-full-song" 
+                        @onToggle="handleOnToggleFullSong" 
+                    />
                 </fieldset>
                 <fieldset v-if="additionalItems > 0" class="tw-flex tw-flex-row tw-items-center tw-mx-4">
-                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">{{ instrumentless }}
-                            TRACK</strong></p>
-                    <Toggle :initialValue="addInstrumentlessToggle" id="toggle-instrumentless-song"
-                        @onToggle="handleOnToggleInstrumentlessSong" />
+                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]">
+                        <strong class="tw-uppercase">{{ instrumentless }} TRACK</strong>
+                    </p>
+                    <Toggle 
+                        :initialValue="addInstrumentlessToggle" 
+                        :brand="brand" 
+                        id="toggle-instrumentless-song"
+                        @onToggle="handleOnToggleInstrumentlessSong" 
+                    />
                 </fieldset>
             </div>
         </div>
@@ -276,8 +314,8 @@ onMounted(() => {
                     <Toggle 
                         id="toggle-high-voice" 
                         :brand="brand"
-                        :initialValue="addFullSongToggle" 
-                        @onToggle="handleOnToggleFullSong" 
+                        :initialValue="includeHighRoutine" 
+                        @onToggle="handleHighRoutine" 
                     />
                 </fieldset>
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-mx-4">
@@ -285,8 +323,8 @@ onMounted(() => {
                     <Toggle 
                         id="toggle-low-voice" 
                         :brand="brand"
-                        :initialValue="addInstrumentlessToggle" 
-                        @onToggle="handleOnToggleInstrumentlessSong" 
+                        :initialValue="includeLowRoutine" 
+                        @onToggle="handleLowRoutine" 
                     />
                 </fieldset>
             </div>
@@ -308,8 +346,8 @@ onMounted(() => {
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
             <button @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-${brand}-600 tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600 ${selectedPlaylists.length === 0 && 'dark:tw-bg-[#0A2847] dark:tw-text-[#445F74]'}`"
-                    :disabled="selectedPlaylists.length === 0"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-[#0A2847] dark:disabled:tw-text-[#445F74] tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600`"
+                    :disabled="selectedPlaylists.length === 0 || (addInstrumentlessToggle === false && addFullSongToggle === false) || (includeHighRoutine === false && includeLowRoutine === false)"
             >
                 SAVE
             </button>
