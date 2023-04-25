@@ -2529,6 +2529,7 @@ class ContentRepository extends RepositoryBase
                     $publishedOnComparisonOperator,
                     $publishedOnValue
                 )
+                ->distinct()
                 ->orderBy($orderByColumn, $orderByDirection);
 
         if (!empty($limit)) {
@@ -2625,7 +2626,8 @@ class ContentRepository extends RepositoryBase
             })
                 ->groupBy('railcontent_content.id');
         }
-        return $contentRows->count();
+
+        return $contentRows->count(DB::raw('DISTINCT '.ConfigService::$tableContent . '.id'));
     }
 
 }
