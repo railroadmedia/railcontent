@@ -69,6 +69,11 @@ const props = defineProps({
     }
 })
 
+//-----------Reactive-----------//
+const state = reactive({
+    collapsed: false,
+})
+
 //-----------Refs-----------//
 const pageNumberTop = ref(1);
 const pageNumberBottom = ref(1);
@@ -207,10 +212,18 @@ onMounted(() => {
         class="tw-z-10 tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-mb-4">
         <!-- Header -->
         <div class="tw-flex tw-flex-col dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-py-[17px] tw-px-[10px]">
-            <a :href="playlistUrl"
-                class="tw-inline-flex tw-mr-auto tw-pb-1 tw-large tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent hover:tw-border-current">
-                {{ playlistName }}
-            </a>
+            <div class="tw-flex">
+                <a :href="playlistUrl"
+                    class="tw-inline-flex tw-mr-auto tw-pb-1 tw-large tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent hover:tw-border-current">
+                    {{ playlistName }}
+                </a>
+                <button class="tw-px-1 lg:tw-hidden" 
+                    :title="state.collapsed ? 'Show Playback Cue' : 'Hide Playback Cue'"
+                    :class="state.collapsed ? 'tw-rotate-180' : ''" 
+                    @click=" state.collapsed = !state.collapsed ">
+                    <i class="fas fa-chevron-down tw-text-[#00101D] dark:tw-text-white"></i>
+                </button>
+            </div>
             <!-- Cue Data -->
             <p class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1">
                 <span>{{ playlistItemPosition }}/{{ props.lessons?.meta?.totalResults }}</span>
@@ -271,7 +284,9 @@ onMounted(() => {
         </div>
         <!-- Items -->
         <div v-if="playlistsStore.lessons.length" id="cue-scroll-container"
-            class="tw-w-full tw-flex tw-flex-col tw-h-[540px] tw-overflow-y-auto tw-relative">
+            class="tw-w-full tw-flex tw-flex-col tw-h-[540px] tw-overflow-y-auto tw-relative"
+            :class="state.collapsed ? 'tw-hidden lg:tw-block' : '' "
+        >
             <!-- Top Skeleton for offset For top Infinite Scroll -->
             <div v-if="shouldShowTopSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
                 <div
