@@ -41,7 +41,7 @@
     >
         <div class="container mx-auto max-w-4xl relative z-50">
             <h3><strong>Thank You!</strong></h3>
-            <h5 class="mt-2 mb-7 sm:mb-10" style="line-height: 1.4em;">Save 60% On The Following Products:</h5>
+            <h5 class="mt-2 mb-7 sm:mb-10" style="line-height: 1.4em;">Save 60% on the Following Products (You can choose more than one!)</h5>
 
             <div class="mx-auto max-w-xs sm:max-w-full" style="font-size: 0;">
                 @php
