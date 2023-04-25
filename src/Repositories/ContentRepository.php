@@ -1093,6 +1093,7 @@ class ContentRepository extends RepositoryBase
                     $publishedOnComparisonOperator,
                     $publishedOnValue
                 )
+                ->distinct()
                 ->orderBy($orderByColumn, $orderByDirection);
 
         if (!empty($limit)) {
