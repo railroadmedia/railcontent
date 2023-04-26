@@ -84,7 +84,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         //All times are in UTC
-        $schedule->command('ProcessTrackings')->everyMinute();
+        //$schedule->command('ProcessTrackings')->everyMinute();
 
         $schedule->command('forums:rebuildSearchIndexes')->hourly();
 
