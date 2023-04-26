@@ -250,7 +250,7 @@ onMounted(() => {
                     </p>
                     <Toggle :initialValue="addFullSongToggle" id="toggle-full-song" @onToggle="handleOnToggleFullSong" />
                 </fieldset>
-                <fieldset v-if="additionalItems > 0" class="tw-flex tw-flex-row tw-items-center">
+                <fieldset v-if="additionalItems > 1" class="tw-flex tw-flex-row tw-items-center">
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">{{ instrumentless }}
                             TRACK</strong></p>
                     <Toggle :initialValue="addInstrumentlessToggle" id="toggle-instrumentless-song"
