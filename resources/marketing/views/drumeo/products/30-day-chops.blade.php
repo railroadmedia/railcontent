@@ -337,7 +337,6 @@
             <p class="opacity-50 text-center"><em>Flexible lesson times to fit any schedule<br class="inline sm:hidden"> PLUS you get lifetime access!</em></p>
         </div>
     </header>
-
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
             <img class="h-56 inline sm:hidden lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image.png" alt="collage intro mobile">
@@ -358,7 +357,6 @@
             </div>
         </div>
     </section>
-
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-4xl mx-auto">
@@ -737,7 +735,6 @@
 
         </div>
     </section>
-
     <div id="final" class="anchor"></div>
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container max-w-6xl mx-auto relative z-50">
@@ -813,13 +810,11 @@
             </div>
         </div>
     </section>
-
     <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
         <p class="max-w-2xl px-4 md:px-2 leading-loose">
             <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your sticks might not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
         </p>
     </section>
-
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h2><strong>Still have questions?</strong></h2>
@@ -872,28 +867,11 @@
         </div>
     </section>
 
-{{--        <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="waitlistModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">--}}
-{{--            <div class="p-5 sm:p-7">--}}
-{{--                <img class="h-24 sm:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="logo">--}}
-{{--                <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>--}}
-{{--                <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">--}}
-{{--                    next edition of 30-Day Drummer is announced. </p>--}}
-{{--                @include("drumeo.lead-gen.partials.sign-up-form-tw", [--}}
-{{--                    "formName" => '30 Day Drummer Waitlist',--}}
-{{--                    "formId" => "Drumeo - Engagement - Trigger - 30 Day Drummer Waitlist - Web Form",--}}
-{{--                    "buttonText" => "Let Me Know ",--}}
-{{--                    "stacked" => true,--}}
-{{--                    "noSocial" => true,--}}
-{{--                ])--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
         "video" => '//player.vimeo.com/video/796456383?autoplay=1',
         "title" => 'trailer'
     ])
-
 
     @include('_partials.components.countdown',[
         'countdownDate' => '2023-06-05 00:00:00',
@@ -988,9 +966,6 @@
         }
     </script>
 
-
-
-
     @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -1018,12 +993,6 @@
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('private');
             });
-
-            // var showModal = location.search.substr(1).includes('member-email');
-            //
-            // if (showModal) {
-            //     $('#loginModal').foundation('open');
-            // }
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
