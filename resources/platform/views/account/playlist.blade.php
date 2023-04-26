@@ -15,7 +15,6 @@
 
     {{-- Playlist Catalog --}}
     <playlist-catalog
-        :is-my-playlist="{{ $playlist['is_my_playlist'] }}"
         :lessons="{{ $listLessons }}"
         brand="{{ $brand }}"
     ></playlist-catalog>
