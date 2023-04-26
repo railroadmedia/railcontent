@@ -220,8 +220,19 @@ class UserPlaylistsController extends BaseController
         $user = user();
         ContentRepository::$pullFutureContent = true;
 
-        $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
+        $playlist = $this->userPlaylistsService->getPlaylist($playlistId, false);
         throw_if((empty($playlist) || ($playlist == -1)), new NotFoundHttpException());
+
+        $playlist['has_access'] = ($playlist['private'] == false || $playlist['is_my_playlist'] == true);
+        if(!$playlist['has_access']){
+            $items = new ContentFilterResultsEntity([
+                                               'results' => []
+                                           ]);
+            return view('account.playlist', [
+                "listLessons" => $items->toResponseRawJson(),
+                "playlist" => $playlist
+            ]);
+        }
 
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AddedToPrimaryPlaylistDecorator::$skip = true;
