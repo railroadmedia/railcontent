@@ -41,8 +41,8 @@
             default: false,
         },
         hasAccess: {
-            type: Boolean,
-            default: true,
+            type: Number,
+            default: 1,
         }
     })
 

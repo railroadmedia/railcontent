@@ -28,8 +28,8 @@
             }
         },
         hasAccess: {
-            type: Boolean,
-            default: true,
+            type: Number,
+            default: 1,
         }
     })
 
@@ -41,7 +41,7 @@
         dropdownOpen: false,
         dropdownTop: false,
         isPrivate: 1,
-        isPinned: playlistsStore.pinnedPlaylists.find((p)=>{ return p.id === props.playlist.id }),
+        isPinned: false,
         isLiked: false,
     })
 
@@ -129,18 +129,13 @@
     onBeforeMount(() => {
         playlistsStore.setActivePlaylist(props.playlist)
         state.isLiked = props.playlist.is_liked_by_current_user;
-        state.isPinned = playlistsStore.pinnedPlaylists.find((p)=>{ return p.id === props.playlist.id });
+        state.isPinned = playlistsStore.pinnedPlaylists.find((p)=>{ if(p.id === props.playlist.id) return true });
         state.isPrivate = props.playlist.private;
-    })
-
-    onMounted(()=>{
-        // console.log(playlistsStore.pinnedPlaylists.find((p)=>{ return p.id === props.playlist.id }))
-        state.isPinned = playlistsStore.pinnedPlaylists.find((p)=>{ return p.id === props.playlist.id });
+        console.log(playlistsStore.pinnedPlaylists.find((p)=>{ if(p.id === props.playlist.id) return true }))
     })
 
     onUpdated(()=>{
-        console.log(playlistsStore.pinnedPlaylists)
-        state.isPinned = playlistsStore.pinnedPlaylists.find((p)=>{ return p.id === props.playlist.id });
+        state.isPinned = playlistsStore.pinnedPlaylists.find((p)=>{ if(p.id === props.playlist.id) return true });
     })
 </script>
 <template>
@@ -245,7 +240,7 @@
                             :brand="brand"
                             :dropdownTop="state.dropdownTop"
                             :is-private="state.isPrivate"
-                            :is-pinned="state.isPinned"
+                            :is-pinned="state.isPinned ? true : false"
                             :dropdownOptions="dropdownOptions"
                             :data="playlistsStore.activePlaylist"
                             :is-open="state.dropdownOpen"
