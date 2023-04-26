@@ -6,8 +6,18 @@
 
 @section('content')
 
-    <p class="tw-font-bold dark:tw-text-white"> Playlist Data: <br> {{ json_encode($playlist) }}</p>
-    <p class="tw-font-bold dark:tw-text-white"> Has Access: {{ $playlist['has_access'] ?? false }}</p>
-    <p class="tw-font-bold tw-text-white"> Lessons Data: <br>{{ $listLessons }}</p>
+    {{-- Playlist Header --}}
+    <playlist-header
+        :playlist="{{ json_encode($playlist) }}"
+        :lessons="{{ $listLessons }}"
+        brand="{{ $brand }}"
+    /></playlist-header>
+
+    {{-- Playlist Catalog --}}
+    <playlist-catalog
+        :is-my-playlist="{{$playlist['is_my_playlist'] ?? 0}}"
+        :lessons="{{ $listLessons }}"
+        brand="{{ $brand }}"
+    ></playlist-catalog>
 
 @endsection
