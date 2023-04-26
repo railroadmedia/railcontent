@@ -2869,6 +2869,10 @@ return [
             'is_instrumentless_track',
             'route',
             'is_song_assignment',
+            'is_high_routine',
+            'is_low_routine',
+            'high_soundslice_slug',
+            'low_soundslice_slug',
             'set_start_end_time',
             'parent',
             'related_lessons' => [

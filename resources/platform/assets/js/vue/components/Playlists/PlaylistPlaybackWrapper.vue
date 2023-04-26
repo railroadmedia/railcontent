@@ -225,7 +225,7 @@ onBeforeMount(() => {
             <!--Player Wrapper -->
             <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
                 <!-- Soundslice Player -->
-                <div v-if="lessonType === 'song' || lessonType === 'assignment'"
+                <div v-if="lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
                     class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
                     <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
                         :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext">
@@ -240,7 +240,7 @@ onBeforeMount(() => {
                             :theme-color="brand" @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
                         </YoutubePlayer>
                     </div>
-                    <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment'" id="lessonVideoWrap">
+                    <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'" id="lessonVideoWrap">
                         <transition v-if="useLegacyVideoPlayer" appear name="fade">
                             <VideoMediaElement ref="mediaElementVueInstance" element-id="lessonPlayer" :brand="brand"
                                 :theme-color="brand" :poster="videoPosterImageUrl" :sources="videoMediaSources"
