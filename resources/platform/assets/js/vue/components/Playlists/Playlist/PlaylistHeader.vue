@@ -24,6 +24,10 @@
         lessons: {
             type: Object,
             default: {}
+        },
+        hasAccess: {
+            type: Boolean,
+            default: true,
         }
     })
 
@@ -193,10 +197,11 @@
                         <p class="tw-font-bebas-neue tw-text-white tw-text-xl">{{ playlistsStore.activePlaylist.user.display_name }}</p>
                     </div>
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
-                        <h1 class="tw-capitalize tw-leading-none tw-font-bold">{{ playlistsStore.activePlaylist.name }}</h1>
+                        <h1 class="tw-capitalize tw-leading-none tw-font-bold tw-mb-2">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.description }}</p>
                     </div>
-                    <a v-if="lessons.data.length" :href="playlistsStore.activePlaylist.playback_url"
+                    <!-- Go to Playback -->
+                    <a v-if="lessons.data.length && hasAccess" :href="playlistsStore.activePlaylist.playback_url"
                         class="tw-w-[39px] tw-inline-flex tw-transition"
                         :class="`tw-text-${brand} hover:tw-text-${brand}-600`"
                         :title="`Go To Player`"
@@ -207,7 +212,7 @@
             </div>
         </template>
         <template v-slot:ctas>
-            <div class="tw-flex tw-items-center tw-justify-center tw ml-0 lg:tw-w-1/2 lg:tw-ml-auto lg:tw-w-4/12 tw-w-full tw-mt-4 lg:tw-justify-end">
+            <div v-if="hasAccess" class="tw-flex tw-items-center tw-justify-center tw ml-0 lg:tw-w-1/2 lg:tw-ml-auto lg:tw-w-4/12 tw-w-full tw-mt-4 lg:tw-justify-end">
                 <!--Share-->
                 <button v-if="!state.isPrivate" class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]"
                         @click.prevent="sharePlaylist()"
