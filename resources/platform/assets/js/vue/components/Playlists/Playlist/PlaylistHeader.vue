@@ -23,7 +23,9 @@
         },
         lessons: {
             type: Object,
-            default: {}
+            default: {
+                data: []
+            }
         },
         hasAccess: {
             type: Boolean,
@@ -147,10 +149,7 @@
         :blurBG="true"
     >
         <template v-slot:content>
-            <div
-                class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-w-full lg:tw-w-8/12"
-                :class="`${ playlistsStore.activePlaylist.name.indexOf(' ') === -1 && 'tw-break-all' }`"
-            >
+            <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-w-full lg:tw-w-8/12">
                 <!-- Playlist thumbnail -->
                 <div class="tw-realtive tw-h-[140px] tw-w-[140px] tw-relative tw-rounded tw-shrink-0 tw-overflow-hidden tw-mb-[16px] lg:tw-mb-0">
                     <!-- Image Conatiner -->
@@ -192,9 +191,11 @@
                     <!-- Avatar -->
                     <div class="tw-hidden lg:tw-flex tw-items-center tw-mb-2">
                         <div class="tw-h-[40px] tw-w-[40px] tw-rounded-full tw-overflow-hidden tw-mr-[9px]">
-                            <img :src="playlistsStore.activePlaylist.user['fields.profile_picture_image_url']" alt="">
+                            <img :src="playlistsStore.activePlaylist.user ? playlistsStore.activePlaylist.user['fields.profile_picture_image_url'] : ''" alt="">
                         </div>
-                        <p class="tw-font-bebas-neue tw-text-white tw-text-xl">{{ playlistsStore.activePlaylist.user.display_name }}</p>
+                        <p class="tw-font-bebas-neue tw-text-white tw-text-xl">
+                            {{ playlistsStore.activePlaylist.user ? playlistsStore.activePlaylist.user.display_name : '' }}
+                        </p>
                     </div>
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
                         <h1 class="tw-capitalize tw-leading-none tw-font-bold tw-mb-2">{{ playlistsStore.activePlaylist.name }}</h1>
