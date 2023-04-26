@@ -21,19 +21,16 @@
         var email = document.getElementById('sign-up-email').value;
         var hashedEmail = sha1(email);
         var hashedOrderId = md5('drumeo_'.concat(email))
-        /*
-        TODO: Uncomment when impact provider is installed properly
 
-            ire('trackConversion', getSignUpActionTrackerId('{{ config('app.env') }}'), {
-                    orderId: hashedOrderId,
-                    customerId: hashedOrderId,
-                    customerEmail: hashedEmail
-                },
-                {
-                    verifySiteDefinitionMatch:true
-                }
-            );
-          */
+        ire('trackConversion', getSignUpActionTrackerId('{{ config('app.env') }}'), {
+                orderId: hashedOrderId,
+                customerId: hashedOrderId,
+                customerEmail: hashedEmail
+            },
+            {
+                verifySiteDefinitionMatch:true
+            }
+        );
     }
 
 </script>
