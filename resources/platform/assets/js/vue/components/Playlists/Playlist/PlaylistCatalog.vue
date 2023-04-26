@@ -20,7 +20,9 @@
         },
         lessons: {
             type: Object,
-            default: {}
+            default: {
+                data: []
+            }
         },
         playlistCount: {
             type: Number,
@@ -269,7 +271,7 @@
                 </div>
             </div>
         </template>
-        
+
         <!-- No Access -->
         <template v-else>
             <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14 tw-pt-[80px]">
