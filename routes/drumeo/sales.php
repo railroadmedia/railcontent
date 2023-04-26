@@ -45,8 +45,6 @@ Route::domain('{drumeoDomain}')
     Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
     Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
 
-    Route::get('/30-day-drummer', [SalesController::class, 'thirtyDayDrummer']);
-
     Route::get('/{pageT?}', SalesController::class . '@trialPages')
         ->whereIn('pageT', [
             'bestbook-trial',

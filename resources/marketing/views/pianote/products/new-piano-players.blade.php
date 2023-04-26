@@ -198,17 +198,6 @@
             background-color:#eb1a2f;
 
         }
-
-
-        .timeline-container .timeline:after {
-            left: -16px !important;
-        }
-
-        @media (min-width: 768px) {
-            .timeline-container .timeline:after {
-                left: 50% !important;
-            }
-        }
     </style>
 @stop()
 
