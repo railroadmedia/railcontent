@@ -14,6 +14,9 @@
     /></playlist-header>
 
     {{-- Playlist Catalog --}}
-
+    <playlist-catalog
+        :lessons="{{ $listLessons }}"
+        brand="{{ $brand }}"
+    ></playlist-catalog>
 
 @endsection
