@@ -226,7 +226,9 @@ class UserPlaylistsService
      * @param false $importAllAssignments
      * @param false $importFullSoundsliceAssignment
      * @param false $importInstrumentlessSoundsliceAssignment
-     * @return bool
+     * @param false $importHighRoutine
+     * @param false $importLowRoutine
+     * @return array
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function addItemToPlaylist(
@@ -238,7 +240,9 @@ class UserPlaylistsService
         $endSecond = null,
         $importAllAssignments = false,
         $importFullSoundsliceAssignment = false,
-        $importInstrumentlessSoundsliceAssignment = false
+        $importInstrumentlessSoundsliceAssignment = false,
+        $importHighRoutine = false,
+        $importLowRoutine = false
     ) {
         $oldStatuses = ContentRepository::$availableContentStatues;
         $oldFutureContent = ContentRepository::$pullFutureContent;
@@ -277,6 +281,12 @@ class UserPlaylistsService
             $itemsThatShouldBeAdd = $itemsThatShouldBeAdd + ($assignments['soundslice_assignments_count'] ?? 0);
         }
         if ($content && (in_array($content['type'], $singularContentTypes))) {
+            $itemsThatShouldBeAdd++;
+        }
+        if($importHighRoutine){
+            $itemsThatShouldBeAdd++;
+        }
+        if($importLowRoutine){
             $itemsThatShouldBeAdd++;
         }
 
@@ -343,6 +353,36 @@ class UserPlaylistsService
                         $added[$userPlaylistId] = array_merge($added[$userPlaylistId] ?? [], $itemIds);
                     }
                 }
+            }
+
+            if ($importHighRoutine) {
+                $assignmentInput = [
+                    'content_id' => $contentId,
+                    'user_playlist_id' => $userPlaylistId,
+                    'created_at' => Carbon::now()
+                        ->toDateTimeString(),
+                    'extra_data' => json_encode(['is_high_routine' => true]),
+                ];
+                $itemId = $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+                    null,
+                    $assignmentInput
+                );
+                $added[$userPlaylistId][] = $itemId;
+            }
+
+            if ($importLowRoutine) {
+                $assignmentInput = [
+                    'content_id' => $contentId,
+                    'user_playlist_id' => $userPlaylistId,
+                    'created_at' => Carbon::now()
+                        ->toDateTimeString(),
+                    'extra_data' => json_encode(['is_low_routine' => true]),
+                ];
+                $itemId = $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(
+                    null,
+                    $assignmentInput
+                );
+                $added[$userPlaylistId][] = $itemId;
             }
 
             if (!empty($assignments['lessons'])) {
@@ -761,13 +801,13 @@ class UserPlaylistsService
      * @param $id
      * @return mixed|null
      */
-    public function getUserPlaylistById($id)
+    public function getUserPlaylistById($id, $checkPermission = true)
     {
         $playlist = $this->userPlaylistsRepository->getUserPlaylistById($id);
         if (!$playlist) {
             return null;
         }
-        if ($playlist['user_id'] != auth()->id() && $playlist['private'] == 1) {
+        if ($checkPermission && $playlist['user_id'] != auth()->id() && $playlist['private'] == 1) {
             return -1;
         }
         $playlist['is_liked_by_current_user'] =

@@ -386,7 +386,9 @@ class MyListJsonController extends Controller
             $request->get('end_second'),
             $request->get('import_all_assignments', false),
             $request->get('import_full_soundslice_assignment', false),
-            $request->get('import_instrumentless_soundslice_assignment', false)
+            $request->get('import_instrumentless_soundslice_assignment', false),
+            $request->get('import_high_routine', false),
+            $request->get('import_low_routine', false)
         );
 
         return response()->json($added);
