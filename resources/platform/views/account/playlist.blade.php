@@ -6,8 +6,8 @@
 
 @section('content')
 
-    <p class="tw-font-bold tw-text-white">{{ json_encode($playlist) }}</p>
-    <p class="tw-font-bold tw-text-white">{{$playlist['has_access'] ?? 0}}</p>
-    <p class="tw-font-bold tw-text-white">{{ $listLessons }}</p>
+    <p class="tw-font-bold dark:tw-text-white"> Playlist Data: <br> {{ json_encode($playlist) }}</p>
+    <p class="tw-font-bold dark:tw-text-white"> Has Access: <br> {{$playlist['has_access'] ?? 0}}</p>
+    <p class="tw-font-bold tw-text-white"> Lessons Data: <br>{{ $listLessons }}</p>
 
 @endsection
