@@ -257,6 +257,13 @@ onBeforeMount(() => {
                     <template v-if="lesson.type === 'song' && !state.isFullTrack">
                         <span>{{ instrument }}less</span>
                     </template>
+                    <!-- if routine -->
+                    <template v-if="lesson.type === 'routine' && lesson.is_high_routine === true">
+                        <span>High Voice</span>
+                    </template>
+                    <template v-if="lesson.type === 'routine' && lesson.is_low_routine === true">
+                        <span>Low Voice</span>
+                    </template>
                 </p>
                 <!-- description / Time Stamp-->
                 <div class="tw-flex tw-items-center tw-w-full">
