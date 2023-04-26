@@ -31,8 +31,11 @@ const isLoadingPlaylists = ref(false);
 const isLoadingAssignments = ref(false);
 const selectedPlaylists = ref([]);
 const showSongToggle = ref(false);
-const addFullSongToggle = ref(false);
+const showVocalRoutineToggles = ref(false);
+const addFullSongToggle = ref(true);
 const addInstrumentlessToggle = ref(false);
+const includeHighRoutine = ref(true);
+const includeLowRoutine = ref(true);
 const preventReFetch = ref(false);
 const duplicatedIDs = ref([]);
 const duplicateProps = ref({ show: false, id: null });
@@ -43,14 +46,23 @@ const handleOnToggleAssignments = (val) => {
     importAll.value = val;
 };
 
+//Handle Instrument Toggles
 const handleOnToggleFullSong = (val) => {
     addFullSongToggle.value = val;
 };
-
 const handleOnToggleInstrumentlessSong = (val) => {
     addInstrumentlessToggle.value = val;
 };
 
+//Handle Routine Toggles
+const handleLowRoutine = (val) => {
+    includeLowRoutine.value = val;
+}
+const handleHighRoutine = (val) => {
+    includeHighRoutine.value = val;
+}
+
+//Instrument Value
 const instrumentless = computed(() => {
     return {
         drumeo: 'drumless',
@@ -87,15 +99,26 @@ const handleCancel = () => {
 };
 
 const saveData = (playlistId) => {
-    return PlaylistService.addToPlaylist({
-        brand: props.brand,
-        contentId: props.content.content_id,
-        importAssignments: importAll.value,
-        playlistIds: playlistId ? [playlistId] : selectedPlaylists.value,
-        addFull: addFullSongToggle.value,
-        addInstrumentless: addInstrumentlessToggle.value,
-        token,
-    })
+    if(showVocalRoutineToggles.value) {
+        return PlaylistService.addToPlaylist({
+            brand: props.brand,
+            contentId: props.content.content_id,
+            playlistIds: playlistId ? [playlistId] : selectedPlaylists.value,
+            addLowRoutine: includeLowRoutine.value,
+            addHighRoutine: includeHighRoutine.value,
+            token,
+        })
+    } else {
+        return PlaylistService.addToPlaylist({
+            brand: props.brand,
+            contentId: props.content.content_id,
+            importAssignments: importAll.value,
+            playlistIds: playlistId ? [playlistId] : selectedPlaylists.value,
+            addFull: addFullSongToggle.value,
+            addInstrumentless: addInstrumentlessToggle.value,
+            token,
+        })
+    }
 };
 
 const handleSaveItem = () => {
@@ -113,6 +136,7 @@ const handleSaveItem = () => {
         handleCancel();
     }
 };
+
 const handleCreate = () => {
     emit('onCancel');
     window.openplaylistmodal({
@@ -125,6 +149,7 @@ const handleCreate = () => {
         window.addItemCallback = null;
     }
 }
+
 const handleScroll = (e) => {
     if ((e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight < 1) && !preventReFetch.value) {
         pageNumber.value = pageNumber.value + 1;
@@ -188,12 +213,18 @@ const getUserPlaylists = () => {
         window.shownotification({ icon: 'error', text: 'An error ocurred while fetching your data, please try again later.' });
     });
 }
+
 onMounted(() => {
     isLoadingPlaylists.value = true;
+
     if (props.content.type === 'song') {
         showSongToggle.value = true;
         addFullSongToggle.value = true;
-    } 
+    }
+
+    //If Adding a Routine 
+    showVocalRoutineToggles.value = props.content.type === 'routine' ? true : false ;
+
     if (props.content.type !== 'Assignments') {
         isLoadingAssignments.value = true;
         PlaylistService.getAssignmentsForContent({ token, contentId: props.content.content_id, brand: props.brand }).then((r) => {
@@ -241,23 +272,64 @@ onMounted(() => {
             </button>
         </div>
 
+        <!-- Song Instrument Toggles -->
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-pt-[18px]" v-if="showSongToggle">
             <p class="tw-text-[16px] tw-text-center tw-w-full tw-pb-[20px]">This song contains both full and {{
                 instrumentless }} tracks. Choose which tracks you want to Import into your Playlist.</p>
-            <div class="tw-flex tw-justify-around tw-w-full">
-                <fieldset class="tw-flex tw-flex-row tw-items-center">
-                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">FULL TRACK</strong>
+            <div class="tw-flex tw-justify-center tw-w-full">
+                <fieldset class="tw-flex tw-flex-row tw-items-center tw-mx-4">
+                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]">
+                        <strong class="tw-uppercase">FULL TRACK</strong>
                     </p>
-                    <Toggle :initialValue="addFullSongToggle" id="toggle-full-song" @onToggle="handleOnToggleFullSong" />
+                    <Toggle 
+                        :initialValue="addFullSongToggle" 
+                        :brand="brand" 
+                        id="toggle-full-song" 
+                        @onToggle="handleOnToggleFullSong" 
+                    />
                 </fieldset>
-                <fieldset v-if="additionalItems > 1" class="tw-flex tw-flex-row tw-items-center">
-                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">{{ instrumentless }}
-                            TRACK</strong></p>
-                    <Toggle :initialValue="addInstrumentlessToggle" id="toggle-instrumentless-song"
-                        @onToggle="handleOnToggleInstrumentlessSong" />
+                <fieldset v-if="additionalItems > 1" class="tw-flex tw-flex-row tw-items-center tw-mx-4">
+                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]">
+                        <strong class="tw-uppercase">{{ instrumentless }} TRACK</strong>
+                    </p>
+                    <Toggle 
+                        :initialValue="addInstrumentlessToggle" 
+                        :brand="brand" 
+                        id="toggle-instrumentless-song"
+                        @onToggle="handleOnToggleInstrumentlessSong" 
+                    />
                 </fieldset>
             </div>
         </div>
+
+        <!-- Vocal Routine Toggles -->
+        <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-pt-[18px]" v-if="showVocalRoutineToggles">
+            <p class="tw-text-[16px] tw-text-center tw-w-full tw-pb-[20px]">
+                This routine contains variants for high and low voices. <br>
+                Choose which variants you want to Import into your Playlist.
+            </p>
+            <div class="tw-flex tw-justify-center tw-w-full">
+                <fieldset class="tw-flex tw-flex-row tw-items-center tw-mx-4">
+                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">High</strong></p>
+                    <Toggle 
+                        id="toggle-high-voice" 
+                        :brand="brand"
+                        :initialValue="includeHighRoutine" 
+                        @onToggle="handleHighRoutine" 
+                    />
+                </fieldset>
+                <fieldset class="tw-flex tw-flex-row tw-items-center tw-mx-4">
+                    <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">Low</strong></p>
+                    <Toggle 
+                        id="toggle-low-voice" 
+                        :brand="brand"
+                        :initialValue="includeLowRoutine" 
+                        @onToggle="handleLowRoutine" 
+                    />
+                </fieldset>
+            </div>
+        </div>
+
         <Table @onActionClick="handleActionClick" @onScroll="handleScroll"
             :classOverride="`tw-mt-[24px] tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" :stickyHeader="true" :rows="formattedRows">
             <template v-slot:actionContent="slotProps">
@@ -274,8 +346,8 @@ onMounted(() => {
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
             <button @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-${brand}-600 tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600 ${selectedPlaylists.length === 0 && 'dark:tw-bg-[#0A2847] dark:tw-text-[#445F74]'}`"
-                    :disabled="selectedPlaylists.length === 0"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-[#0A2847] dark:disabled:tw-text-[#445F74] tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600`"
+                    :disabled="selectedPlaylists.length === 0 || (addInstrumentlessToggle === false && addFullSongToggle === false) || (includeHighRoutine === false && includeLowRoutine === false)"
             >
                 SAVE
             </button>

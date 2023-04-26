@@ -292,14 +292,16 @@ export default {
      * @param {number} contentId -
      * @param {string} token
      */
-    addToPlaylist({ brand = "drumeo", token, contentId, playlistIds, importAssignments, addFull, addInstrumentless }) {
+    addToPlaylist({ brand = "drumeo", token, contentId, playlistIds, importAssignments, addFull, addInstrumentless, addLowRoutine, addHighRoutine }) {
         const payload = {
             brand: brand,
             playlist_id: playlistIds,
             content_id: contentId,
             import_all_assignments: importAssignments,
             import_full_soundslice_assignment: addFull,
-            import_instrumentless_soundslice_assignment: addInstrumentless
+            import_instrumentless_soundslice_assignment: addInstrumentless,
+            import_low_routine:addLowRoutine,
+            import_high_routine:addHighRoutine
         }
         const headers = {
             'Content-Type': 'application/json',

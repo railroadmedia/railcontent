@@ -71,7 +71,7 @@ const props = defineProps({
 
 //-----------Reactive-----------//
 const state = reactive({
-    collapsed: false,
+    collapsed: true,
 })
 
 //-----------Refs-----------//
@@ -284,7 +284,7 @@ onMounted(() => {
         </div>
         <!-- Items -->
         <div v-if="playlistsStore.lessons.length" id="cue-scroll-container"
-            class="tw-w-full tw-flex tw-flex-col tw-h-[540px] tw-overflow-y-auto tw-relative"
+            class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-overflow-y-auto tw-relative"
             :class="state.collapsed ? 'tw-hidden lg:tw-block' : '' "
         >
             <!-- Top Skeleton for offset For top Infinite Scroll -->

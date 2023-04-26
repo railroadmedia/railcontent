@@ -113,61 +113,85 @@ class UserPlaylistsController extends BaseController
 
         $user = user();
 
-        $playlist = $this->userPlaylistsService->getUserPlaylistById($playlistId);
-        throw_if(($playlist == -1), new NotFoundHttpException());
+        $playlist = $this->userPlaylistsService->getUserPlaylistById($playlistId, false);
         throw_if(empty($playlist), new NotFoundHttpException());
+
+        $playlist['has_access'] = ($playlist['private'] == false || $playlist['is_my_playlist'] == true);
 
         $page = $request->get('page', 1);
         $limit = $request->get('limit');
 
         $contentTypes = array_merge(
             config('railcontent.appUserListContentTypes', []),
-            array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? [])
+            array_values(config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []),
+            ['routine']
         );
 
-        ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-        ContentRepository::$bypassPermissions = true;
-        $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
-        ContentRepository::$bypassPermissions = false;
         $playlistItems = [];
+        if($playlist['has_access']) {
+            ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+            ContentRepository::$bypassPermissions = true;
+            $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
+            ContentRepository::$bypassPermissions = false;
 
-        $contentPermissionRows = collect($this->contentPermissionRepository->getByContentIdsOrTypes(
-            $items->pluck('id')->toArray(),
-            $items->pluck('type')->toArray()
-        ));
-        $grupedPermissions = $contentPermissionRows->groupBy('content_id');
-        $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
+            $contentPermissionRows = collect(
+                $this->contentPermissionRepository->getByContentIdsOrTypes(
+                    $items->pluck('id')
+                        ->toArray(),
+                    $items->pluck('type')
+                        ->toArray()
+                )
+            );
+            $grupedPermissions = $contentPermissionRows->groupBy('content_id');
+            $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
+            $userPermissionIds =  \Arr::pluck($userPermissions, 'permission_id');
+            $membershipPermissionIds = [1, 52, 73, 77,];
+            if(!empty(array_intersect($userPermissionIds, $membershipPermissionIds))){
+                $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
+            }
 
-        foreach ($items as $index => $item) {
-            $playlistItems[$index]['id'] = $item['id'];
-            $playlistItems[$index]['type'] = $item['type'];
-            $playlistItems[$index]['title'] = $item['title'];
-            $playlistItems[$index]['artist'] = $item['artist'];
-            $playlistItems[$index]['status'] = $item['status'];
-            $playlistItems[$index]['need_access'] = empty(array_intersect(\Arr::pluck($userPermissions,'permission_id'),
-                (isset($grupedPermissions[$item['id']]))?$grupedPermissions[$item['id']]->pluck('permission_id')->toArray():[])) &&
-                (isset($grupedPermissions[$item['id']]));
+            foreach ($items as $index => $item) {
+                $playlistItems[$index]['id'] = $item['id'];
+                $playlistItems[$index]['type'] = $item['type'];
+                $playlistItems[$index]['title'] = $item['title'];
+                $playlistItems[$index]['artist'] = $item['artist'];
+                $playlistItems[$index]['status'] = $item['status'];
+                $playlistItems[$index]['need_access'] = empty(
+                    array_intersect(
+                        $userPermissionIds,
+                        (isset($grupedPermissions[$item['id']])) ?
+                            $grupedPermissions[$item['id']]->pluck('permission_id')
+                                ->toArray() : []
+                    )
+                    ) && (isset($grupedPermissions[$item['id']]));
 
-            $playlistItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
-            $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
-                'playlistId' => $playlistId,
-                'playlistItemId' => $item['user_playlist_item_id'],
-            ]);
-            $playlistItems[$index]['route'] = $item['route'] ?? '';
-            $playlistItems[$index]['instructors'] = $item['instructors'] ?? null;
-            $playlistItems[$index]['user_playlist_item_id'] = $item['user_playlist_item_id'] ?? null;
-            $playlistItems[$index]['user_playlist_item_extra_data'] = $item['user_playlist_item_extra_data'] ?? null;
-            $playlistItems[$index]['user_playlist_item_position'] = $item['user_playlist_item_position'] ?? null;
-            $playlistItems[$index]['set_start_end_time'] = $item['set_start_end_time'] ?? null;
-            $playlistItems[$index]['start_second'] = $item['start_second'] ?? null;
-            $playlistItems[$index]['end_second'] = $item['end_second'] ?? null;
-            $playlistItems[$index]['started'] = $item['started'] ?? false;
-            $playlistItems[$index]['completed'] = $item['completed'] ?? false;
-            $playlistItems[$index]['thumbnail_url'] =  $item->fetch('data.original_thumbnail_url', $item->fetch('data.thumbnail_url', $item['thumbnail_url'] ?? ''));
-            $playlistItems[$index]['user_progress'] = $item['user_progress'] ?? '';
-            $playlistItems[$index]['parent_title'] = $item['parent_title'] ?? '';
+                $playlistItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
+                $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
+                    'playlistId' => $playlistId,
+                    'playlistItemId' => $item['user_playlist_item_id'],
+                ]);
+                $playlistItems[$index]['route'] = $item['route'] ?? '';
+                $playlistItems[$index]['instructors'] = $item['instructors'] ?? null;
+                $playlistItems[$index]['user_playlist_item_id'] = $item['user_playlist_item_id'] ?? null;
+                $playlistItems[$index]['user_playlist_item_extra_data'] =
+                    $item['user_playlist_item_extra_data'] ?? null;
+                $playlistItems[$index]['user_playlist_item_position'] = $item['user_playlist_item_position'] ?? null;
+                $playlistItems[$index]['set_start_end_time'] = $item['set_start_end_time'] ?? null;
+                $playlistItems[$index]['start_second'] = $item['start_second'] ?? null;
+                $playlistItems[$index]['end_second'] = $item['end_second'] ?? null;
+                $playlistItems[$index]['started'] = $item['started'] ?? false;
+                $playlistItems[$index]['completed'] = $item['completed'] ?? false;
+                $playlistItems[$index]['thumbnail_url'] =
+                    $item->fetch(
+                        'data.original_thumbnail_url',
+                        $item->fetch('data.thumbnail_url', $item['thumbnail_url'] ?? '')
+                    );
+                $playlistItems[$index]['user_progress'] = $item['user_progress'] ?? '';
+                $playlistItems[$index]['parent_title'] = $item['parent_title'] ?? '';
+                $playlistItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
+                $playlistItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
+            }
         }
-
         $items = new ContentFilterResultsEntity([
                                                     'results' => $playlistItems
                                                 ]);
@@ -196,8 +220,19 @@ class UserPlaylistsController extends BaseController
         $user = user();
         ContentRepository::$pullFutureContent = true;
 
-        $playlist = $this->userPlaylistsService->getPlaylist($playlistId);
+        $playlist = $this->userPlaylistsService->getPlaylist($playlistId, false);
         throw_if((empty($playlist) || ($playlist == -1)), new NotFoundHttpException());
+
+        $playlist['has_access'] = ($playlist['private'] == false || $playlist['is_my_playlist'] == true);
+        if(!$playlist['has_access']){
+            $items = new ContentFilterResultsEntity([
+                                               'results' => []
+                                           ]);
+            return view('account.playlist', [
+                "listLessons" => $items->toResponseRawJson(),
+                "playlist" => $playlist
+            ]);
+        }
 
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AddedToPrimaryPlaylistDecorator::$skip = true;
@@ -224,6 +259,11 @@ class UserPlaylistsController extends BaseController
         ));
         $grupedPermissions = $contentPermissionRows->groupBy('content_id');
         $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
+        $userPermissionIds =  \Arr::pluck($userPermissions, 'permission_id');
+        $membershipPermissionIds = [1, 52, 73, 77,];
+        if(!empty(array_intersect($userPermissionIds, $membershipPermissionIds))){
+            $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
+        }
 
 //        $needLifetime = (count($contentPermissionRows) == 1) && array_intersect(
 //                ['Drumeo Lifetime Member'],
@@ -279,7 +319,7 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['status'] = $item['status'];
             $otherItems[$index]['fields'] = $item['fields'];
             $otherItems[$index]['data'] = $item['data'];
-            $otherItems[$index]['need_access'] = empty(array_intersect(\Arr::pluck($userPermissions,'permission_id'),
+            $otherItems[$index]['need_access'] = empty(array_intersect($userPermissionIds,
                                                                          (isset($grupedPermissions[$item['id']]))?$grupedPermissions[$item['id']]->pluck('permission_id')->toArray():[]))
                 &&
                 (isset($grupedPermissions[$item['id']]));
@@ -298,6 +338,8 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['thumbnail_url'] = $item->fetch('thumbnail_url', $item->fetch('data.original_thumbnail_url',$item->fetch('data.thumbnail_url','')));
             $otherItems[$index]['user_progress'] = $item['user_progress'] ?? '';
             $otherItems[$index]['parent_title'] = $item['parent_title'] ?? '';
+            $otherItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
+            $otherItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
         }
 
         $content = $this->contentService->getById($playlistItem['id']);
@@ -323,11 +365,15 @@ class UserPlaylistsController extends BaseController
 
         $startSecond = $playlistItem['start_second'] ?? null;
         $endSecond = $playlistItem['end_second'] ?? null;
+        $initialItem = clone $playlistItem;
+
         $playlistItem =
             $this->vimeoVideoSourcesDecorator->decorate(new Collection([$content]))
                 ->first();
         $playlistItem['start_second'] = $startSecond;
         $playlistItem['end_second'] = $endSecond;
+        $playlistItem['is_high_routine'] = $initialItem['is_high_routine'] ?? false;
+        $playlistItem['is_low_routine'] = $initialItem['is_low_routine'] ?? false;
 
         $userPlaylists = collect($this->userPlaylistsService->getUserPlaylist(user()->id, 'user-playlist'));
         $playlists = $userPlaylists->whereNotIn('id', $playlistId);
@@ -354,6 +400,14 @@ class UserPlaylistsController extends BaseController
             $playlistItem['soundslice_slug'] =
                 (isset($lessonAssignments[0])) ? $lessonAssignments[0]->fetch('fields.soundslice_slug') :
                     $playlistItem['soundslice_slug'];
+        }
+
+        if ($playlistItem['type'] == 'routine' && $playlistItem['is_high_routine']) {
+            $playlistItem['soundslice_slug'] = $playlistItem['high_soundslice_slug'];
+        }
+
+        if ($playlistItem['type'] == 'routine' && $playlistItem['is_low_routine']) {
+            $playlistItem['soundslice_slug'] = $playlistItem['low_soundslice_slug'];
         }
 
         if ($playlistItem['type'] == 'assignment') {

@@ -23,7 +23,13 @@
         },
         lessons: {
             type: Object,
-            default: {}
+            default: {
+                data: []
+            }
+        },
+        hasAccess: {
+            type: Boolean,
+            default: true,
         }
     })
 
@@ -143,10 +149,7 @@
         :blurBG="true"
     >
         <template v-slot:content>
-            <div
-                class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-w-full lg:tw-w-8/12"
-                :class="`${ playlistsStore.activePlaylist.name.indexOf(' ') === -1 && 'tw-break-all' }`"
-            >
+            <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-w-full lg:tw-w-8/12">
                 <!-- Playlist thumbnail -->
                 <div class="tw-realtive tw-h-[140px] tw-w-[140px] tw-relative tw-rounded tw-shrink-0 tw-overflow-hidden tw-mb-[16px] lg:tw-mb-0">
                     <!-- Image Conatiner -->
@@ -188,15 +191,18 @@
                     <!-- Avatar -->
                     <div class="tw-hidden lg:tw-flex tw-items-center tw-mb-2">
                         <div class="tw-h-[40px] tw-w-[40px] tw-rounded-full tw-overflow-hidden tw-mr-[9px]">
-                            <img :src="playlistsStore.activePlaylist.user['fields.profile_picture_image_url']" alt="">
+                            <img :src="playlistsStore.activePlaylist.user ? playlistsStore.activePlaylist.user['fields.profile_picture_image_url'] : ''" alt="">
                         </div>
-                        <p class="tw-font-bebas-neue tw-text-white tw-text-xl">{{ playlistsStore.activePlaylist.user.display_name }}</p>
+                        <p class="tw-font-bebas-neue tw-text-white tw-text-xl">
+                            {{ playlistsStore.activePlaylist.user ? playlistsStore.activePlaylist.user.display_name : '' }}
+                        </p>
                     </div>
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
-                        <h1 class="tw-capitalize tw-leading-none tw-font-bold">{{ playlistsStore.activePlaylist.name }}</h1>
+                        <h1 class="tw-capitalize tw-leading-none tw-font-bold tw-mb-2">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.description }}</p>
                     </div>
-                    <a v-if="lessons.data.length" :href="playlistsStore.activePlaylist.playback_url"
+                    <!-- Go to Playback -->
+                    <a v-if="lessons.data.length && hasAccess" :href="playlistsStore.activePlaylist.playback_url"
                         class="tw-w-[39px] tw-inline-flex tw-transition"
                         :class="`tw-text-${brand} hover:tw-text-${brand}-600`"
                         :title="`Go To Player`"
@@ -207,7 +213,7 @@
             </div>
         </template>
         <template v-slot:ctas>
-            <div class="tw-flex tw-items-center tw-justify-center tw ml-0 lg:tw-w-1/2 lg:tw-ml-auto lg:tw-w-4/12 tw-w-full tw-mt-4 lg:tw-justify-end">
+            <div v-if="hasAccess" class="tw-flex tw-items-center tw-justify-center tw ml-0 lg:tw-w-1/2 lg:tw-ml-auto lg:tw-w-4/12 tw-w-full tw-mt-4 lg:tw-justify-end">
                 <!--Share-->
                 <button v-if="!state.isPrivate" class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]"
                         @click.prevent="sharePlaylist()"
