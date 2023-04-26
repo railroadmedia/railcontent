@@ -170,7 +170,7 @@
                     :brand="brand"
                     :dropdownTop="state.dropdownTop"
                     :is-private="state.isPrivate"
-                    :is-pinned="state.isPinned"
+                    :is-pinned="state.isPinned ? true : false"
                     :dropdownOptions="dropdownOptions"
                     :data="list"
                     :is-open="state.dropdownOpen"
