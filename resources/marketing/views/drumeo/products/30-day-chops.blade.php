@@ -789,7 +789,7 @@
                             <h3><strong>Join Drumeo + Get<br class="hidden sm:inline"> 30-Day Chops FREE</strong></h3>
                             <p class="text-sm mt-2 mb-5">Unlimited Drum Lessons + 6 Pairs Of Sticks and more:</p>
                             <h2 class="inline-block"><s class="opacity-40">$240</s> <strong class="text-4xl">$200</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>
-                            <div class="join blue smaller my-4 w-full">ENROLL NOW</div>
+                            <div class="join blue smaller my-4 w-full">GET EVERYTHING</div>
                             <ul class="list-disc ml-6">
                                 <li class="text-sm leading-relaxed">Annual Drumeo Membership</li>
                                 <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> QuietPad Practice Pad</li>

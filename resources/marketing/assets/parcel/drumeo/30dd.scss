@@ -164,6 +164,7 @@ img {
         }
 
     }
+
     &::after {
         content: '';
         position: absolute;
@@ -188,7 +189,7 @@ img {
         z-index: 1;
         left: -16px;
         @include tablet {
-            left:50%;
+            left: 50%;
         }
     }
 }
