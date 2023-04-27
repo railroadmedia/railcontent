@@ -14,8 +14,8 @@ import VideoResources from '../../vuesora/components/VideoResources/VideoResourc
 import Comments from '../../vuesora/views/comments/Comments.vue';
 import PlaybackNavButtons from './PlaybackNavButtons.vue';
 import RelatedLesson from './RelatedLesson.vue';
+import Breadcrumb from './Breadcrumb.vue';
 import { usePlaylistsStore } from '../../../stores/playlists';
-import { HomeIcon } from '@heroicons/vue/solid';
 
 //-----------Props-----------//
 const props = defineProps({
@@ -222,11 +222,7 @@ onBeforeMount(() => {
 <template>
     <div class="tw-w-full tw-h-full">
         <!-- Breadcrumbs -->
-        <div class="tw-text-black dark:tw-text-white tw-flex tw-justify-center tw-items-center tw-w-full tw-h-[40px] dark:tw-bg-black tw-bg-[#e5e7eb] tw-text-center tw-font-open-sans">
-            <a :href="`/${brand}`" class="tw-text-black dark:tw-text-white"><HomeIcon class="tw-w-[12px] tw-h-[12px]" /></a>
-            &nbsp;/&nbsp;<a class="tw-text-black dark:tw-text-white tw-font-normal" :href="`/${brand}/playlists`">PLAYLISTS</a>
-            &nbsp;/&nbsp;<a class="tw-font-bold tw-text-[#A1A1A9]" :href="`/${brand}/playlist/${playlistId}`">{{ playlistName }}</a>
-        </div>
+        <Breadcrumb :brand="brand" :playlistId="playlistId" :playlistName="playlistName" />
         <div
             class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row tw-mb-4">
             <div class="tw-flex tw-flex-col tw-w-full">
