@@ -464,7 +464,7 @@
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-bg.jpg);">
         <h3 class="leading-tight"><strong>Go on, give it a try</strong></h3>
         <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">Curious? <strong>Try a snippet from Day 1</strong> and<br class="inline sm:hidden"> see if Easy Chords is right for you.</p>
-        <div class="relative">
+        <div class="relative cursor-pointer autoplay-video" data-open="demoVid">
             <img class="inline-block sm:hidden w-full" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-m.png">
             <img class="hidden sm:inline-block w-full" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano.png">
             <p class="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-2/3 px-3 py-1 z-10 rounded-xl text-white inline-block mx-auto text-sm whitespace-nowrap" style="background-color:#c20000;"><i class="fas fa-play-circle mr-1 text-xl sm:text-3xl align-middle"></i> <strong>At your piano?</strong> Hit play and try<br class="inline sm:hidden"> some of the lesson from your first day.</p>
@@ -931,6 +931,11 @@
         'modalId' => "dayThirty",
         "video" => '//player.vimeo.com/video/798501810?autoplay=1',
         "title" => 'dayThirty'
+    ])
+    @include('drumeo.sales.partials._video-modal',[
+        'modalId' => "demoVid",
+        "video" => '//player.vimeo.com/video/798501810?autoplay=1',
+        "title" => 'demoVid'
     ])
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
