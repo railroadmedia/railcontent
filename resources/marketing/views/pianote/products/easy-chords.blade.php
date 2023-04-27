@@ -232,7 +232,13 @@
         <a href="#final" class="anchor-slide flex items-end justify-center px-2 sm:px-0 fixed w-full z-[100]" style="background: #d6e8fd;">
             <p class="font-bebas uppercase mx-0 py-2 leading-none">
                 GET A FREE CHORDS & SCALES BOOK UNTIL JUNE 5.
-                <br><span class="text-pianote"><span class="tzcd-nppsh2">a limited time</span> left!</span>
+                <br><span class="text-pianote"><span x-cloak x-data="timer2()" x-init="countdown2()">
+                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+{{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+                        {{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                                 </span> left!</span>
             </p>
             <img class="h-10 ml-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/sticky_bar_chords_scales.png" alt="30 day drummer logo" />
         </a>
@@ -243,9 +249,9 @@
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-14 sm:h-18 lg:h-20 -mb-2 sm:mb-0 lg:mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="new piano players start here logo">
-                    <h1 class=""><strong>30 Days to</strong></h1>
-                    <h2 class="-mt-3 sm:-mt-1 lg:mt-0">Better Piano Chords</h2>
+                    <img class="h-14 sm:h-18 lg:h-20 mb-1 sm:mb-0 lg:mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="new piano players start here logo">
+                    <h1 class=""><strong>30 days to</strong></h1>
+                    <h2 class="sm:-mt-1 lg:mt-0">better piano chords.</h2>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting June 5th.</strong></h6>
 
@@ -304,7 +310,14 @@
                     <h4 class="px-3 lg:px-5"><strong>June 5th</strong></h4>
                     <hr class="border-gray-300 my-4 sm:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-                        Enrollment closes in<br class="inline lg:hidden"> <span class="tzcd-nppsh text-pianote">a limited time</span>.
+                        Enrollment closes in<br class="inline lg:hidden">
+                        <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">
+                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                         </span>
 {{--                        Enrollment closed--}}
                     </p>
                 </div>
@@ -329,32 +342,32 @@
             <p class="opacity-50 text-center"><em>Flexible lesson times to fit any schedule<br class="inline sm:hidden"> PLUS you get lifetime access!</em></p>
         </div>
     </header>
-
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>You’ll sound like THIS <br class="inline sm:hidden"> after just 30 days.</strong></h2>
-            <h6 class="leading-normal mt-3 sm:mt-5 lg:mt-7 mb-5 sm:mb-7 lg:mb-10">Hear the difference between your first and final lesson. And it only takes 10 minutes a day.</h6>
-            <img src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/timeline.png">
-            <div class="flex flex-wrap">
-                <div class="w-1/2 px-3">
-                    <img src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/day-1-thumb.jpg">
-                    <p>We’ll start slow. Here’s what you’ll be playing in your first lesson.</p>
+            <h2 class="text-center"><strong>You’ll sound like THIS <br class="inline sm:hidden"> after just 30 days.</strong></h2>
+            <h6 class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">Hear the difference between your first and final lesson. And it only takes 10 minutes a day.</h6>
+            <img class="sm:h-7" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/timeline.png">
+            <div class="flex flex-wrap text-left max-w-3xl mx-auto mt-5 sm:mt-7 mb-10 sm:mb-14 lg:mb-20">
+                <div class="w-1/2 pr-2 sm:px-4">
+                    <div class="rounded-xl overflow-hidden shadow-md cursor-pointer autoplay-video" data-open="dayOne">
+                        <img src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/day-1-thumb.jpg">
+                        <p class="p-2 sm:p-5 text-sm">We’ll start slow. Here’s what you’ll be playing in your first lesson.</p>
+                    </div>
                 </div>
-                <div class="w-1/2 px-3">
-                    <img src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/day-30-thumb.jpg">
-                    <p>After 30 days, you’ll be playing this beautiful song. All you have to do is follow along.</p>
+                <div class="w-1/2 sm:px-4">
+                    <div class="rounded-xl overflow-hidden shadow-md cursor-pointer autoplay-video" data-open="dayThirty">
+                        <img src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/day-30-thumb.jpg">
+                        <p class="p-2 sm:p-5 text-sm">After 30 days, you’ll be playing this beautiful song. All you have to do is follow along.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container max-w-4xl mx-auto">
+
             <img class="h-56 inline sm:hidden lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/intro-image.png" alt="collage intro">
-            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Why chords?</strong></h2>
-            <h6 class="leading-normal mt-3 sm:mt-5 lg:mt-7 mb-5 sm:mb-7 lg:mb-10 uppercase text-pianote">We’re so glad you asked…</h6>
+            <h2 class="text-center mt-5 sm:mt-0"><strong>Why chords?</strong></h2>
+            <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7 lg:mb-10 uppercase text-pianote">We’re so glad you asked…</p>
 
             <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
-                <h6 class="leading-normal max-w-lg pr-7">Chords are the foundation of music.
+                <p class="leading-normal max-w-lg pr-7">Chords are the foundation of music.
                     <br><br>
                     All music (even classical) is made from chords. The songs you love to listen to and play are little more than chord progressions with a melody on top. When you know how to play beautiful chord progressions, your playing will sound better, you’ll be more confident, and you’ll have more fun.
                     <br><br>
@@ -364,7 +377,7 @@
                     <br><br>
                     And it only takes 10 minutes a day, 5 days a week.
                     <br><br>
-                    That’s less time than it takes for a trip to the grocery store.</h6>
+                    That’s less time than it takes for a trip to the grocery store.</p>
                 <img class="h-96 hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/intro-image.png" alt="collage intro">
             </div>
         </div>
@@ -448,21 +461,22 @@
             </div>
         </div>
     </section>
-    <section class="text-center text-white px-5 sm:px-0 pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-bg.jpg);">
+    <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-bg.jpg);">
         <h3 class="leading-tight"><strong>Go on, give it a try</strong></h3>
-        <h6 class="leading-normal mt-3 sm:mt-5 lg:mt-7 mb-5 sm:mb-7 lg:mb-10">Curious? Try a snippet from Day 1 and see if Easy Chords is right for you.</h6>
-
-        <img class="inline-block sm:hidden" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-m.png">
-        <img class="hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano.png">
-        <p class="p-3 rounded-xl text-white inline-block mx-auto" style="background-color:#c20000;">At your piano? Hit play and try some of the lesson from your first day.</p>
+        <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">Curious? <strong>Try a snippet from Day 1</strong> and<br class="inline sm:hidden"> see if Easy Chords is right for you.</p>
+        <div class="relative">
+            <img class="inline-block sm:hidden w-full" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-m.png">
+            <img class="hidden sm:inline-block w-full" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano.png">
+            <p class="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-2/3 px-3 py-1 z-10 rounded-xl text-white inline-block mx-auto text-sm whitespace-nowrap" style="background-color:#c20000;"><i class="fas fa-play-circle mr-1 text-xl sm:text-3xl align-middle"></i> <strong>At your piano?</strong> Hit play and try<br class="inline sm:hidden"> some of the lesson from your first day.</p>
+        </div>
     </section>
     <section class="text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#2a2f34;">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
-                <img class="w-48 sm:w-64 lg:w-80 -mt-12 mb-4 sm:-mb-24 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/live-screen.png" alt="screen">
+                <img class="w-48 sm:w-64 lg:w-80 sm:-mt-12 mb-4 sm:-mb-24 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/live-screen.png" alt="screen">
                 <div class="flex-grow sm:pl-7">
                     <h3 class="leading-tight text-center sm:text-left"><strong>Get LIVE support<br> every step of the way.</strong></h3>
-                    <h6 class="leading-normal mt-3 sm:mt-5 lg:mt-7 mb-5 sm:mb-7 lg:mb-10">If you have questions about your lessons, you can ask your instructor at each week’s LIVE Q&A event. Lisa will be there to answer your questions, help you through any sticking points, and keep you motivated to complete the full course.</h6>
+                    <p class="leading-normal mt-3 sm:mt-5 lg:mt-7 mb-5 sm:mb-7 lg:mb-10">If you have questions about your lessons, you can ask your instructor at each week’s LIVE Q&A event. Lisa will be there to answer your questions, help you through any sticking points, and keep you motivated to complete the full course.</p>
                     <div class=" text-center sm:text-left">
                         <h6 class="inline-block uppercase mb-2 lg:mb-0"><strong>Join Lisa LIVE: <i class="fas fa-arrow-down text-pianote mx-2 inline lg:hidden"></i> <i class="fas fa-arrow-right text-pianote mx-2 hidden lg:inline"></i></strong></h6><br class="inline lg:hidden">
 
@@ -489,9 +503,9 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-6xl mx-auto">
-            <h2 class="mb-3"><strong>Play More = Get Better.</strong></h2>
-            <h6 class="leading-normal mt-3 sm:mt-5 lg:mt-7 mb-5 sm:mb-7 lg:mb-10 uppercase text-pianote">It’s not rocket science.</h6>
-            <h6 class="leading-normal mb-11">The more you play, the better you’ll get. And it won’t cost the earth. For less than the cost of 2 private piano lessons, you’ll get 30 days of guided training to improve your playing. And once the course is over, the lessons are yours for life.</h6>
+            <h2 class="leading-tight"><strong>Play More = Get Better.</strong></h2>
+            <p class="leading-tight mt-2 sm:mt-3 mb-5 sm:mb-7 uppercase text-pianote">It’s not rocket science.</p>
+            <p class="leading-normal mb-11 max-w-2xl">The more you play, the better you’ll get. And it won’t cost the earth. For less than the cost of 2 private piano lessons, you’ll get 30 days of guided training to improve your playing. And once the course is over, the lessons are yours for life.</p>
             <div class="relative mb-20 lg:mb-24">
                 <p class="inline sm:hidden leading-tight text-xs absolute top-0 right-0 -mt-8 w-2/5 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
                 <table class="w-full mx-auto comparison max-w-4xl mx-auto mb-10 private">
@@ -553,25 +567,25 @@
                 </table>
             </div>
 
-            <h2 class="mb-6 sm:mb-10 lg:mb-14"><img class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom  lazyload" data-src="https://www.musora.com/musora-cdn/image/width=380,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="new piano players start here logo"> <strong>...is perfect for:</strong></h2>
-            <div class="flex flex-wrap text-left">
+            <h2 class="mb-6 sm:mb-10 lg:mb-14"><img class="h-14 sm:h-16 align-bottom  lazyload" data-src="https://www.musora.com/musora-cdn/image/width=380,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="new piano players start here logo"> <strong>...is perfect for:</strong></h2>
+            <div class="flex flex-wrap text-left max-w-4xl mx-auto">
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/beginner-player.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br>Beginner <br class="hidden sm:inline lg:hidden"> piano players</strong></h6>
+                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br>Beginner <br class="hidden sm:inline"> piano players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Know a few chords, but struggling to feel confident playing them? Or are you wondering what chord inversions are and how to practice them? With Easy Chords, you’ll move past the beginner stage and start sounding better.</p>
                 </div>
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/intermediate-player.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br>Intermediate<br class="hidden sm:inline lg:hidden"> Piano Players</strong></h6>
+                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br>Intermediate<br class="hidden sm:inline"> piano players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Chord progressions sound better using inversions. Master your 1st and 2nd inversions to help you change chords more smoothly and sound more professional. Train your ear to hear more common chord progressions used in music.</p>
                 </div>
                 <div class="w-full sm:w-1/3 px-2">
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/classical-player.jpg">
-                        <h6 class="leading-tight lg:leading-relaxed absolute bottom-3 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br> Classical<br class="hidden sm:inline lg:hidden"> Piano Players</strong></h6>
+                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br> Classical<br class="hidden sm:inline"> piano players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Scared to break away from the safety of sheet music? Easy Chords will transform your understanding of composition and song structure. You don’t need notes on the page to play beautiful music. This will change everything.</p>
@@ -593,13 +607,13 @@
     <section class="text-center px-5 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
-                <div class="w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
+                <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
                     <img class="inline-block sm:hidden w-full relative z-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/coach-profile-m.png" alt="profile picture">
                     <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/coach-profile.png" alt="profile picture">
                     <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 lazyload" style="width: 150%;transform: translate(-44%, -7%);" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture">
                 </div>
 
-                <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
+                <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
                     <h6 class="uppercase text-pianote leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
                     <h2 class="text-center sm:text-left"><strong>Lisa Witt</strong></h2>
                     <p class="leading-normal mt-4 lg:mt-6">Piano chords changed my life.
@@ -628,7 +642,7 @@
                 </div>
             </div>
 
-            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What students are saying about Lisa and her teaching style.</strong></h3>
+            <h3 class="leading-tight mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What students are saying about<br class="inline lg:hidden"> Lisa and her teaching style.</strong></h3>
             <div class="flex flex-wrap text-left">
 
                 @php
@@ -719,49 +733,52 @@
 {{--    </section>--}}
     <div class="h-10 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
     <section class="text-white text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2a2f34;">
-        <div class="container max-w-4xl mx-auto">
+        <div class="container max-w-3xl mx-auto">
             <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=410,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" alt="guarantee badge">
-            <h2 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br> longer than the course.</strong></h2>
-            <h6 class="leading-normal">Easy Chords will make you a better piano player in just 30 days. And we’re so confident that you’ll love the results, you’ll have 90 days to put us to the test.
-                <br><br>
+            <h3 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br class="inline sm:hidden"> longer than the course.</strong></h3>
+            <p class="leading-normal">Easy Chords will make you a better piano player in just 30 days. And we’re so confident that you’ll love the results, you’ll have 90 days to put us to the test.
                 That’s enough time to go through the course 3x over before deciding it’s worth the money.
-                <br><br>
                 Because if you’re not happy with the results, then you shouldn’t have to pay.
-                <br><br>
                 Simply let us know within 90 days and you’ll receive all your hard-earned money back. It’s our promise.
-            </h6>
+            </p>
 
         </div>
     </section>
 
-    @if(!is_current_user_a_member())
-        <section class="px-4 sm:px-6 py-10 sm:py-20 lg:py-28 relative" style="background: linear-gradient(180deg, #F61A30 0%, #910000 122.85%);">
-            <div class="max-w-5xl mx-auto md:flex relative z-40">
-                <div class="flex-1 text-white md:pr-4 lg:pr-0 mb-3 md:mb-0 max-w-md md:max-w-auto mx-auto">
-                    <h5 class="uppercase mb-2 text-center md:text-left" style="color: #FFAE00;">
-                        AVAILABLE UNTIL June 20TH<br> only <span class="tzcd-nppsh2">a limited time</span> left!
-                    </h5>
-                    <h2 class="font-extrabold mb-4 text-center md:text-left">
-                        Master every chord & <br class="hidden lg:inline">scale with this guide.
-                    </h2>
-                    <p>
-                        <span class="font-extrabold">Every Chord. Every Scale. Every Key.</span>
-                        <br><br> This essential resource will help you learn the most important chord shapes, chord variations, and scales in EVERY key.
-                        <br><br> Regular ${{ floatval($productPrices['piano-chords-and-scales-guide']->price) }}. It’s yours FREE when you get New Piano Players Start Here. (And we’ll cover the shipping.)
-                        <br><br>
-                    </p>
-                </div>
-                <div class="flex-1 relative sm:w-2/3 md:w-auto mx-auto text-center sm:pl-10">
-                    <div class="relative md:max-w-md mx-auto">
-                        <img
-                            class="md:absolute md:w-full h-80 md:h-auto md:left-0 -top-10 lg:-top-20 scales-book cursor-pointer lazyload"
-                            data-src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/piano_scales_book.png"
-                            alt="scales book" data-open="seeInside1">
-                    </div>
+    <section class="px-4 sm:px-6 py-10 sm:py-20 lg:py-28 relative" style="background: linear-gradient(180deg, #F61A30 0%, #910000 122.85%);">
+        <div class="max-w-5xl mx-auto md:flex relative z-40">
+            <div class="flex-1 text-white md:pr-4 lg:pr-0 mb-3 md:mb-0 max-w-md md:max-w-auto mx-auto">
+                <h5 class="uppercase mb-2 text-center md:text-left" style="color: #FFAE00;">
+                    AVAILABLE UNTIL June 20TH<br> only
+                    <span x-cloak x-data="timer2()" x-init="countdown2()">
+                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+{{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+                        {{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                             </span>
+                    left!
+                </h5>
+                <h2 class="font-extrabold mb-4 text-center md:text-left">
+                    Master every chord & <br class="hidden lg:inline">scale with this guide.
+                </h2>
+                <p>
+                    <span class="font-extrabold">Every Chord. Every Scale. Every Key.</span>
+                    <br><br> This essential resource will help you learn the most important chord shapes, chord variations, and scales in EVERY key.
+                    <br><br> Regular ${{ floatval($productPrices['piano-chords-and-scales-guide']->price) }}. It’s yours FREE when you get New Piano Players Start Here. (And we’ll cover the shipping.)
+                    <br><br>
+                </p>
+            </div>
+            <div class="flex-1 relative sm:w-2/3 md:w-auto mx-auto text-center sm:pl-10">
+                <div class="relative md:max-w-md mx-auto">
+                    <img
+                        class="md:absolute md:w-full h-80 md:h-auto md:left-0 -top-10 lg:-top-20 scales-book cursor-pointer lazyload"
+                        data-src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/piano_scales_book.png"
+                        alt="scales book" data-open="seeInside1">
                 </div>
             </div>
-        </section>
-    @endif
+        </div>
+    </section>
     <div id="final" class="anchor"></div>
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container max-w-6xl mx-auto relative z-50">
@@ -906,6 +923,16 @@
 {{--    </div>--}}
 
     @include('drumeo.sales.partials._video-modal',[
+        'modalId' => "dayOne",
+        "video" => '//player.vimeo.com/video/798501810?autoplay=1',
+        "title" => 'dayOne'
+    ])
+    @include('drumeo.sales.partials._video-modal',[
+        'modalId' => "dayThirty",
+        "video" => '//player.vimeo.com/video/798501810?autoplay=1',
+        "title" => 'dayThirty'
+    ])
+    @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
         "video" => '//player.vimeo.com/video/798501810?autoplay=1',
         "title" => 'trailer'
@@ -918,6 +945,98 @@
         ])
     @endforeach
 
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-06-05 00:00:00',
+        'promoVersion' => false
+    ])
+    <script>
+        function timer2(){
+            return {
+                day: '00',
+                dayText: ' days',
+                hour: '00',
+                hourText: ' hours',
+                minute: '00',
+                minuteText: ' minutes',
+                second: '00',
+                secondText: ' seconds',
+                endTime: new Date('2023-05-22 00:00:00').getTime(),
+                startTime: new Date().getTime(),
+                timeLeft: 0,
+                smallScreen: false,
+                countdown2: function (){
+                    let _this = this;
+                    this.startTime = new Date().getTime();
+                    this.timeLeft = (this.endTime - this.startTime) / 1000;
+
+                    this.startTime = new Date().getTime();
+                    this.timeLeft = (this.endTime - this.startTime) / 1000;
+                    this.day = this.formatTime(this.timeLeft / (60 * 60 * 24));
+                    this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
+                    this.minute = this.formatTime(this.timeLeft / 60) % 60;
+                    this.second = this.formatTime(this.timeLeft % 60);
+
+                    if ( !this.smallScreen ){
+                        this.dayText = formatText(this.day, ' days');
+                        this.hourText = formatText(this.hour, ' hours');
+                        this.minuteText = formatText(this.minute, ' minutes');
+                        this.secondText = formatText(this.second, ' seconds');
+                    }
+
+                    if(this.timeLeft > 0){
+                        setInterval(() => {
+                            this.startTime = new Date().getTime();
+                            this.timeLeft = (this.endTime - this.startTime) / 1000;
+                            this.day = this.formatTime(this.timeLeft / (60 * 60 * 24));
+                            this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
+                            this.minute = this.formatTime(this.timeLeft / 60) % 60;
+                            this.second = this.formatTime(this.timeLeft % 60);
+
+                            if ( !this.smallScreen ){
+                                this.dayText = formatText(this.day, ' days');
+                                this.hourText = formatText(this.hour, ' hours');
+                                this.minuteText = formatText(this.minute, ' minutes');
+                                this.secondText = formatText(this.second, ' seconds');
+                            }
+
+                        }, 1000);
+                    }
+
+                    const bodyWidth = window.innerWidth;
+
+                    if ( bodyWidth < 768 ){
+                        this.dayText = 'D';
+                        this.hourText = 'H';
+                        this.minuteText = 'M';
+                        this.secondText = 'S';
+                        this.smallScreen = true;
+                    }
+
+                    window.addEventListener('resize', function(event){
+                        const bodyWidth = window.innerWidth;
+
+                        if ( bodyWidth < 768 ){
+                            _this.smallScreen = true;
+                            _this.dayText = 'D';
+                            _this.hourText = 'H';
+                            _this.minuteText = 'M';
+                            _this.secondText = 'S';
+                        }
+                        else {
+                            _this.smallScreen = false;
+                            _this.dayText = ' days';
+                            _this.hourText = ' hours';
+                            _this.minuteText = ' minutes';
+                            _this.secondText = ' seconds';
+                        }
+                    });
+                },
+                formatTime: function (value){
+                    return Math.floor(value);
+                },
+            }
+        }
+    </script>
     @include("pianote.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
