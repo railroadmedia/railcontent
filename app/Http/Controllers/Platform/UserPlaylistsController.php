@@ -15,6 +15,7 @@ use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ContentService;
@@ -31,14 +32,18 @@ class UserPlaylistsController extends BaseController
     private VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator;
     private LessonAssignmentDecorator $lessonAssignmentDecorator;
     private RoutingDecorator $routingDecorator;
+    private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
 
     /**
      * @param UserPlaylistsService $userPlaylistsService
      * @param ContentService $contentService
      * @param UserContentProgressRepository $userContentProgressRepository
+     * @param ContentPermissionRepository $contentPermissionRepository
+     * @param UserPermissionsRepository $userPermissionsRepository
      * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
      * @param LessonAssignmentDecorator $lessonAssignmentDecorator
      * @param RoutingDecorator $routingDecorator
+     * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
      */
     public function __construct(
         UserPlaylistsService $userPlaylistsService,
@@ -48,7 +53,8 @@ class UserPlaylistsController extends BaseController
         UserPermissionsRepository $userPermissionsRepository,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
         LessonAssignmentDecorator $lessonAssignmentDecorator,
-        RoutingDecorator $routingDecorator
+        RoutingDecorator $routingDecorator,
+        PinnedPlaylistsRepository $pinnedPlaylistsRepository
     ) {
         $this->userPlaylistsService = $userPlaylistsService;
         $this->contentService = $contentService;
@@ -58,6 +64,7 @@ class UserPlaylistsController extends BaseController
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
         $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
         $this->routingDecorator = $routingDecorator;
+        $this->pinnedPlaylistsRepository = $pinnedPlaylistsRepository;
     }
 
     public function index(Request $request)
@@ -194,7 +201,8 @@ class UserPlaylistsController extends BaseController
         $items = new ContentFilterResultsEntity([
                                                     'results' => $playlistItems,
                                                 ]);
-
+        $pinnedPlaylists = $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
+        $playlist['pinned'] = in_array($playlist['id'], \Arr::pluck($pinnedPlaylists, 'id'));
         return view('account.playlist', [
             "listLessons" => $items->toResponseRawJson(),
             "playlist" => $playlist,

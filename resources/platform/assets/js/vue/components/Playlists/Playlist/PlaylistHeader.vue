@@ -129,13 +129,13 @@
     onBeforeMount(() => {
         playlistsStore.setActivePlaylist(props.playlist)
         state.isLiked = props.playlist.is_liked_by_current_user;
-        state.isPinned = playlistsStore.pinnedPlaylists.find((p)=>{ if(p.id === props.playlist.id) return true });
+        state.isPinned = props.playlist.pinned ? true : false;
         state.isPrivate = props.playlist.private;
-        console.log(playlistsStore.pinnedPlaylists.find((p)=>{ if(p.id === props.playlist.id) return true }))
     })
 
     onUpdated(()=>{
-        state.isPinned = playlistsStore.pinnedPlaylists.find((p)=>{ if(p.id === props.playlist.id) return true });
+        // console.log(playlistsStore.pinnedPlaylists)
+        state.isPinned = props.playlist.pinned ? true : false;
     })
 </script>
 <template>
@@ -194,7 +194,7 @@
                     </div>
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
                         <h1 class="tw-capitalize tw-leading-none tw-font-bold tw-mb-2">{{ playlistsStore.activePlaylist.name }}</h1>
-                        <p class="lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.description }}</p>
+                        <p class="lg:tw-line-clamp-2" v-html="playlistsStore.activePlaylist.description"></p>
                     </div>
                     <!-- Go to Playback -->
                     <a v-if="lessons.data.length && hasAccess" :href="playlistsStore.activePlaylist.playback_url"

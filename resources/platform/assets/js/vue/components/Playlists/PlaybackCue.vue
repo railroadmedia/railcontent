@@ -64,8 +64,8 @@ const props = defineProps({
         default: 20,
     },
     isMyPlaylist: {
-        type: Boolean,
-        default: true,
+        type: Number,
+        default: 1,
     }
 })
 
