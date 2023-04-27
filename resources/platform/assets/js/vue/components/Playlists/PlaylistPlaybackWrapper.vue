@@ -15,6 +15,7 @@ import Comments from '../../vuesora/views/comments/Comments.vue';
 import PlaybackNavButtons from './PlaybackNavButtons.vue';
 import RelatedLesson from './RelatedLesson.vue';
 import { usePlaylistsStore } from '../../../stores/playlists';
+import { HomeIcon } from '@heroicons/vue/solid';
 
 //-----------Props-----------//
 const props = defineProps({
@@ -204,7 +205,7 @@ const playlistsStore = usePlaylistsStore();
 const handleGoToNext = () => {
     const isShuffleOn = localStorage.getItem("playbackShuffleOn") ? JSON.parse(localStorage.getItem("playbackShuffleOn")) : false;
 
-    if(isShuffleOn) {
+    if (isShuffleOn) {
         const randIndex = Math.floor(Math.random() * playlistsStore.lessons.length);
         window.location.href = playlistsStore.lessons[randIndex].url;
     }
@@ -219,112 +220,112 @@ onBeforeMount(() => {
 </script>
 
 <template>
-    <div
-        class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row tw-mb-4">
-        <div class="tw-flex tw-flex-col tw-w-full">
-            <!--Player Wrapper -->
-            <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
-                <!-- Soundslice Player -->
-                <div v-if="lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
-                    class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
-                    <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
-                        :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext">
-                    </SoundSlice>
-                </div>
-                <!-- Video Players -->
-                <div class="p-lg-only lean">
-                    <div v-if="youtubeVideoId && String(youtubeVideoId).length" class="widescreen mb-2 bg-black">
-                        <YoutubePlayer ref="mediaElementVueInstance" :brand="brand" :video-id="youtubeVideoId"
-                            :current-second="currentSecond" :total-duration="totalDuration" :video-length="videoLength"
-                            :progress-state="progressState" :content-id="contentId" :use-intersection-observer="true"
-                            :theme-color="brand" @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
-                        </YoutubePlayer>
-                    </div>
-                    <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'" id="lessonVideoWrap">
-                        <transition v-if="useLegacyVideoPlayer" appear name="fade">
-                            <VideoMediaElement ref="mediaElementVueInstance" element-id="lessonPlayer" :brand="brand"
-                                :theme-color="brand" :poster="videoPosterImageUrl" :sources="videoMediaSources"
-                                :hls-manifest-url="hlsManifestUrl" :video-id="vimeoVideoId" :content-id="contentId"
-                                :current-second="currentSecond" :progress-state="progressState" :video-length="videoLength"
-                                :chapters="videoChapters" :user-id="userId" :like-count="likeCount" :is-liked="isLiked"
-                                :check-for-timecode="true" @playing="handleVideoPlay" @pause="handleVideoPause" @ended="handleGoToNext">
-
-                                <div :class="`widescreen title tw-text-${brand}`">
-                                    <i class="fas fa-spinner fa-spin absolute-center"></i>
-                                </div>
-                            </VideoMediaElement>
-                        </transition>
-                        <transition v-else appear name="fade">
-                            <VideoPlayer ref="mediaElementVueInstance"
-                                :start-second="startSecond" :end-second="endSecond" :theme-color="brand" :brand="brand"
-                                :poster="videoPosterImageUrl" :sources="videoMediaSources" :ranges="songRanges"
-                                :ranges-video-ids="rangesVideoIds" :show-range-buttons="true"
-                                :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters" :current-second="currentSecond"
-                                :content-id="contentId" :user-id="userId" :video-id="vimeoVideoId"
-                                :video-length="videoLength" :total-duration="totalDuration" :cast-title="castTitle"
-                                :use-intersection-observer="true" @play="handleVideoPlay" @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
-                                <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
-                            </VideoPlayer>
-                        </transition>
-                    </div>
-                </div>
-                <!-- Video Resources -->
-                <div class="tw-container tw-mx-auto lean">
-                    <VideoResources :theme-color="brand" :brand="brand" :title="castTitle" :lesson-type="lessonType"
-                        :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
-                        :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
-                        :user-id="userId" :resources="videoResources" :show-add-to-list="true"
-                        :relatedLesson="relatedLesson" />
-                    <RelatedLesson
-                        v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
-                        :relatedLesson="relatedLesson.data[0]" />
-                    <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
-                </div>
-            </div>
-
-            <!-- Comments Section -->
-            <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full tw-mb-4">
-                <div class="tw-flex tw-flex-col tw-w-full">
-                    <Comments :collapsable="true" :theme-color="brand" :brand="brand" :content-id="contentId"
-                        :user-id="userId" :user-name="userName" :user-avatar="userAvatar" :user-xp="userXp"
-                        :user-access-level="userAccessLevel" profile-base-route="/profile/" :is-admin="false" />
-                </div>
-            </div>
+    <div class="tw-w-full tw-h-full">
+        <!-- Breadcrumbs -->
+        <div class="tw-text-black dark:tw-text-white tw-flex tw-justify-center tw-items-center tw-w-full tw-h-[40px] dark:tw-bg-black tw-bg-[#e5e7eb] tw-text-center tw-font-open-sans">
+            <a :href="`/${brand}`" class="tw-text-black dark:tw-text-white"><HomeIcon class="tw-w-[12px] tw-h-[12px]" /></a>
+            &nbsp;/&nbsp;<a class="tw-text-black dark:tw-text-white tw-font-normal" :href="`/${brand}/playlists`">PLAYLISTS</a>
+            &nbsp;/&nbsp;<a class="tw-font-bold tw-text-[#A1A1A9]" :href="`/${brand}/playlist/${playlistId}`">{{ playlistName }}</a>
         </div>
+        <div
+            class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row tw-mb-4">
+            <div class="tw-flex tw-flex-col tw-w-full">
+                <!--Player Wrapper -->
+                <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
+                    <!-- Soundslice Player -->
+                    <div v-if="lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
+                        class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
+                        <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
+                            :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext">
+                        </SoundSlice>
+                    </div>
+                    <!-- Video Players -->
+                    <div class="p-lg-only lean">
+                        <div v-if="youtubeVideoId && String(youtubeVideoId).length" class="widescreen mb-2 bg-black">
+                            <YoutubePlayer ref="mediaElementVueInstance" :brand="brand" :video-id="youtubeVideoId"
+                                :current-second="currentSecond" :total-duration="totalDuration" :video-length="videoLength"
+                                :progress-state="progressState" :content-id="contentId" :use-intersection-observer="true"
+                                :theme-color="brand" @play="handleVideoPlay" @pause="handleVideoPause"
+                                @onVideoEnd="handleGoToNext">
+                            </YoutubePlayer>
+                        </div>
+                        <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'"
+                            id="lessonVideoWrap">
+                            <transition v-if="useLegacyVideoPlayer" appear name="fade">
+                                <VideoMediaElement ref="mediaElementVueInstance" element-id="lessonPlayer" :brand="brand"
+                                    :theme-color="brand" :poster="videoPosterImageUrl" :sources="videoMediaSources"
+                                    :hls-manifest-url="hlsManifestUrl" :video-id="vimeoVideoId" :content-id="contentId"
+                                    :current-second="currentSecond" :progress-state="progressState"
+                                    :video-length="videoLength" :chapters="videoChapters" :user-id="userId"
+                                    :like-count="likeCount" :is-liked="isLiked" :check-for-timecode="true"
+                                    @playing="handleVideoPlay" @pause="handleVideoPause" @ended="handleGoToNext">
 
-        <div class="related-playlists-section">
-            <!-- Playback Cue -->
-            <div v-if="playlistItems.data && playlistItems.data.length" id="lessonInfo"
-                class="tw-flex tw-flex-row reverse tw-items-start">
-                <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
-                    <playback-cue 
-                        :autoplay="false" 
-                        :repeat="false" 
-                        :brand="brand" 
-                        :lessons="playlistItems"
-                        :playlist-name="playlistName" 
-                        :duration="playlistDuration" 
-                        :playlist-url="playlistUrl"
-                        :playlist-item-id="playlistItemId" 
-                        :playlist-id="playlistId" 
-                        :infinite-scroll="true"
-                        :playlist-item-position="playlistItemPosition" 
-                        :next-lesson-url="nextLessonUrl" 
-                        :prev-lesson-url="prevLessonUrl" 
-                        :is-my-playlist="isMyPlaylist"
-                        :is-playback-cue="true"
-                     />
+                                    <div :class="`widescreen title tw-text-${brand}`">
+                                        <i class="fas fa-spinner fa-spin absolute-center"></i>
+                                    </div>
+                                </VideoMediaElement>
+                            </transition>
+                            <transition v-else appear name="fade">
+                                <VideoPlayer ref="mediaElementVueInstance" :start-second="startSecond"
+                                    :end-second="endSecond" :theme-color="brand" :brand="brand"
+                                    :poster="videoPosterImageUrl" :sources="videoMediaSources" :ranges="songRanges"
+                                    :ranges-video-ids="rangesVideoIds" :show-range-buttons="true"
+                                    :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters"
+                                    :current-second="currentSecond" :content-id="contentId" :user-id="userId"
+                                    :video-id="vimeoVideoId" :video-length="videoLength" :total-duration="totalDuration"
+                                    :cast-title="castTitle" :use-intersection-observer="true" @play="handleVideoPlay"
+                                    @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
+                                    <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
+                                </VideoPlayer>
+                            </transition>
+                        </div>
+                    </div>
+                    <!-- Video Resources -->
+                    <div class="tw-container tw-mx-auto lean">
+                        <VideoResources :theme-color="brand" :brand="brand" :title="castTitle" :lesson-type="lessonType"
+                            :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
+                            :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
+                            :user-id="userId" :resources="videoResources" :show-add-to-list="true"
+                            :relatedLesson="relatedLesson" />
+                        <RelatedLesson v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
+                            :relatedLesson="relatedLesson.data[0]" />
+                        <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
+                    </div>
+                </div>
+
+                <!-- Comments Section -->
+                <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full tw-mb-4">
+                    <div class="tw-flex tw-flex-col tw-w-full">
+                        <Comments :collapsable="true" :theme-color="brand" :brand="brand" :content-id="contentId"
+                            :user-id="userId" :user-name="userName" :user-avatar="userAvatar" :user-xp="userXp"
+                            :user-access-level="userAccessLevel" profile-base-route="/profile/" :is-admin="false" />
+                    </div>
                 </div>
             </div>
-            <!-- Related Playlists -->
-            <div v-if="relatedPlaylists.data && relatedPlaylists.data.length" id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
-                <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
-                    <div class="tw-flex tw-flex-col tw-mb-5">
-                        <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
-                            Related Playlists
-                        </h6>
+
+            <div class="related-playlists-section">
+                <!-- Playback Cue -->
+                <div v-if="playlistItems.data && playlistItems.data.length" id="lessonInfo"
+                    class="tw-flex tw-flex-row reverse tw-items-start">
+                    <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
+                        <playback-cue :autoplay="false" :repeat="false" :brand="brand" :lessons="playlistItems"
+                            :playlist-name="playlistName" :duration="playlistDuration" :playlist-url="playlistUrl"
+                            :playlist-item-id="playlistItemId" :playlist-id="playlistId" :infinite-scroll="true"
+                            :playlist-item-position="playlistItemPosition" :next-lesson-url="nextLessonUrl"
+                            :prev-lesson-url="prevLessonUrl" :is-my-playlist="isMyPlaylist" :is-playback-cue="true" />
                     </div>
-                    <RelatedPlaylists :playlists="relatedPlaylists" :brand="brand" />
+                </div>
+                <!-- Related Playlists -->
+                <div v-if="relatedPlaylists.data && relatedPlaylists.data.length" id="lessonInfo"
+                    class="tw-flex tw-flex-row reverse tw-items-start">
+                    <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
+                        <div class="tw-flex tw-flex-col tw-mb-5">
+                            <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
+                                Related Playlists
+                            </h6>
+                        </div>
+                        <RelatedPlaylists :playlists="relatedPlaylists" :brand="brand" />
+                    </div>
                 </div>
             </div>
         </div>
