@@ -8,7 +8,7 @@
 
     {{-- Playlist Header --}}
     <playlist-collection-header
-        :brand="{{ $brand }}"
+        brand="{{ $brand }}"
         :playlist-count="{{ $playlistsNumber }}"
     /></playlist-collection-header>
 

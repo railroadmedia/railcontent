@@ -38,8 +38,8 @@ const props = defineProps({
         default: null
     },
     isMyPlaylist: {
-        type: Boolean,
-        default: true,
+        type: Number,
+        default: 1,
     },
     inPlaybackCue: {
         type: Boolean,

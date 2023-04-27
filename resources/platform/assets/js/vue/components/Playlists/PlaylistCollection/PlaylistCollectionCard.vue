@@ -92,7 +92,7 @@
 
     onBeforeMount(() => {
         //check if it's pinned with request? Or prerender?
-        state.isPinned = props.list.pinned;
+        state.isPinned = props.list.pinned ? true : false;
         state.isPrivate = props.list.private;
     });
 
@@ -153,9 +153,7 @@
         <div class="tw-inline-flex tw-items-center tw-justify-end"
              :class="props.isListView ? 'tw-w-[100px] md:tw-justify-center md:tw-pr-[22px]' : 'tw-col-span-1'"
         >
-            <div class="tw-relative "
-                    v-click-outside="()=>{ state.dropdownOpen = false }"
-            >
+            <div class="tw-relative " v-click-outside="()=>{ state.dropdownOpen = false }">
                 <button class="tw-btn-primary tw-btn-small tw-btn-circle tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-bg-transparent dark:hover:tw-bg-[#102230] hover:tw-bg-[#E0E0E1] tw-transition-colors tw-p-0 tw-mb-0 focus-visible:tw-outline focus-visible:tw-outline-[#111827] dark:focus:tw-outline-[#9EC0DC] focus-visible:tw-outline-2 tw-rotate-0"
                         :class="props.isListView ? 'md:tw-rotate-90' : ''"
                         title="Playlist Options"
