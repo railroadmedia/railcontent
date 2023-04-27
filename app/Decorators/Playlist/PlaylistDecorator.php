@@ -48,7 +48,8 @@ class PlaylistDecorator extends ModeDecoratorBase
                     Decorator::$typeDecoratorsEnabled = false;
                     \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
                     ContentRepository::$pullFutureContent = true;
-                    $firstPlaylistItem = $this->userPlaylistsService->getPlaylistItemById($playlist['user_playlist_item_id']);
+                    $firstPlaylistItem =
+                        $this->userPlaylistsService->getPlaylistItemById($playlist['user_playlist_item_id']);
                     $firstItem = $this->contentService->getById($firstPlaylistItem['content_id']);
 
                     $playlists[$index]['thumbnail_url'] = '';
@@ -75,7 +76,7 @@ class PlaylistDecorator extends ModeDecoratorBase
                 $playlists[$index]['uploaded_thumbnail'] = true;
             }
             $date_info = getdate($playlists[$index]['duration'] ?? 0);
-            $format = ( $date_info['hours'] > 1) ? 'H:i:s' : 'i:s';
+            $format = ($date_info['hours'] > 1) ? 'H:i:s' : 'i:s';
             $playlists[$index]['duration_formated'] = gmdate($format, $playlists[$index]['duration'] ?? 0);
 
             if (isset($playlist['user_playlist_item_id'])) {
@@ -113,7 +114,7 @@ class PlaylistDecorator extends ModeDecoratorBase
              * @var $user User
              */
             $playlistAuthor = $keyedUsers[$playlist['user_id']];
-            $playlists[$index]['is_my_playlist'] = $playlist['user_id'] == user()->id;
+            $playlists[$index]['is_my_playlist'] = ($playlist['user_id'] == user()->id) ? 1 : 0;
             $playlists[$index]['user'] = [];
             $playlists[$index]['user']['id'] = $playlistAuthor['id'];
             $playlists[$index]['user']['display_name'] = $playlistAuthor['display_name'];
