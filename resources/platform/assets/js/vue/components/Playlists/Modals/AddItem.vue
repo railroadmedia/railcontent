@@ -288,7 +288,7 @@ onMounted(() => {
                         @onToggle="handleOnToggleFullSong" 
                     />
                 </fieldset>
-                <fieldset v-if="additionalItems > 0" class="tw-flex tw-flex-row tw-items-center tw-mx-4">
+                <fieldset v-if="additionalItems > 1" class="tw-flex tw-flex-row tw-items-center tw-mx-4">
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]">
                         <strong class="tw-uppercase">{{ instrumentless }} TRACK</strong>
                     </p>
