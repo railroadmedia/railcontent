@@ -52,8 +52,8 @@ const props = defineProps({
         type: Number
     },
     isMyPlaylist: {
-        type: Boolean,
-        default: true
+        type: Number,
+        default: 1
     },
     inPlaylistHeader: {
         type: Boolean,

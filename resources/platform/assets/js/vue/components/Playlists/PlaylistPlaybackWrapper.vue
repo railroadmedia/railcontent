@@ -311,7 +311,7 @@ onBeforeMount(() => {
                         :playlist-item-position="playlistItemPosition" 
                         :next-lesson-url="nextLessonUrl" 
                         :prev-lesson-url="prevLessonUrl" 
-                        :is-my-playlist="isMyPlaylist ? true : false"
+                        :is-my-playlist="isMyPlaylist"
                         :is-playback-cue="true"
                      />
                 </div>
