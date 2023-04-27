@@ -64,7 +64,9 @@ class PlaylistDecorator extends ModeDecoratorBase
                                     in_array($firstItem->fetch('parent')['type'], ['song', 'song-tutorial-children']
                                     )) ||
                                 $firstItem['type'] == 'song-tutorial-children' ||
-                                $firstItem['type'] == 'song');
+                                $firstItem['type'] == 'song' ||
+                                $firstItem['type'] == 'routine'
+                            );
 
                         $playlists[$index]['thumbnail_url'] = $firstItem->fetch(
                             'data.thumbnail_url',
