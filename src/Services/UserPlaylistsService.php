@@ -443,13 +443,13 @@ class UserPlaylistsService
      * @param $playlistId
      * @return array
      */
-    public function getPlaylist($playlistId)
+    public function getPlaylist($playlistId, $checkPermission = true)
     {
         $playlist = $this->userPlaylistsRepository->getById($playlistId);
         if (!$playlist) {
             return null;
         }
-        if ($playlist['user_id'] != auth()->id() && $playlist['private'] == 1) {
+        if ($checkPermission && $playlist['user_id'] != auth()->id() && $playlist['private'] == 1) {
             return -1;
         }
 
