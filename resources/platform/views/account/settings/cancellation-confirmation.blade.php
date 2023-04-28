@@ -7,9 +7,9 @@
 
 @section('content')
 
-    <div class="tw-bg-[#000C17] tw-text-white tw-min-h-screen tw-flex tw-flex-col tw-justify-center tw-items-center">    
+    <div class="tw-bg-[#000C17] tw-text-white tw-min-h-screen tw-flex tw-flex-col tw-justify-center tw-items-center">
         <div class="tw-w-full tw-max-w-3xl tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white dark:tw-text-white tw-pt-8 tw-pb-14 tw-text-center">
-            
+
             <div class="tw-text-white tw-mt-10 tw-mb-8">
                 <svg class="tw-w-[140px] md:tw-w-56 tw-transition tw-mx-auto"
                     alt="Musora logo"
@@ -24,10 +24,10 @@
                 </svg>
             </div>
 
-            <h2 class="tw-font-bold tw-text-2xl tw-mb-6">Your account is cancelled</h2>
-            
+            <h2 class="tw-font-bold tw-text-2xl tw-mb-6">Your subscription is cancelled</h2>
+
             <div class="tw-border tw-border-[#445F74] tw-bg-[#081825] tw-rounded-lg tw-p-6 tw-max-w-md tw-mx-auto tw-w-full">
-                
+
                 <p class="tw-mb-4">Is there anything we can do better?</p>
                 <p class="tw-mb-6">Submit your feedback and let us know how we can improve!</p>
 
@@ -42,14 +42,14 @@
                     >
                         Tell us how to improve
                     </a>
-     
+
                      <a href="{{ url()->route('platform.home') }}"
                         class="tw-btn-secondary tw-text-white tw-mb-6 "
                      >
                          Go to dashboard
-                     </a>  
+                     </a>
                 </div>
-        
+
             </div>
 
         </div>

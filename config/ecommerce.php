@@ -48,7 +48,7 @@ return [
 
     // post purchase redirect
     'post_purchase_redirect_digital_items' => '/members',
-    'order_form_post_purchase_redirect_path_without_brand' => '/',
+    'order_form_post_purchase_redirect_path_without_brand' => '/purchase-redirect/',
     'post_purchase_redirect_customer_order' => '/thankyou',
     'post_add_to_cart_redirect' => '/order',
 
@@ -679,19 +679,11 @@ return [
     ],
 
     // this is displayed on all invoices to canadian customers
-    'canada_gst_hst_number' => [
-        'drumeo' => '81428 3149 RT0001',
-        'pianote' => '76853 3879 RT0001',
-        'guitareo' => '82759 8434 RT0001',
-        'singeo' => '76853 3879 RT0001',
-    ],
+    'musora_canada_gst_number' => '81428 3149 RT0001',
 
-    'company_name_on_invoice' => [
-        'drumeo' => 'Musora Media Inc',
-        'pianote' => 'Pianote Media Inc.',
-        'guitareo' => 'Guitareo Media Inc.',
-        'singeo' => 'Singeo Media Inc.',
-    ],
+
+    // displayed on invoices
+    'musora_company_name_on_invoice' => 'Musora Media Inc',
 
     // constants
     'billing_address' => 'billing',

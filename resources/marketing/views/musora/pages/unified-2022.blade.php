@@ -423,14 +423,6 @@
                         'description' => 'Roni grew up in a musical family playing “Name That Tune” and enjoying live music performances. She took every musical opportunity growing up including Concert and Jazz band, choir, guitar class, drumline, and even played for the Special Olympics opening ceremony. Roni can be found hanging with family and friends, being crafty, and playing her clarinet. ',
                         ],
                         [
-                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/kaitlyn.jpg',
-                        'first' => 'Kaitlyn ',
-                        'last' => 'C',
-                        'drumeo' => true,
-                        'pianote' => true,
-                        'description' => 'Kaitlyn is a huge music lover and has been jamming along to all genres of music all her life! She is a beginner-level piano player (you may have seen some videos in Pianote!). Kaitlyn loves making people laugh, listening to and finding new music, hiking mountains, and spending time with her friends, family, and cat (Leo). ',
-                        ],
-                        [
                         'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/hannah2.jpg',
                         'first' => 'Hannah ',
                         'last' => 'D',
@@ -457,7 +449,7 @@
                     ]
                 @endphp
                 @foreach($bonuses as $bonus)
-                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 px-3 md:px-1.5 w-full sm:w-1/3 lg:w-1/4" style="max-width:250px;">
+                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 px-3 sm:px-1.5 w-full sm:w-1/3" style="max-width:250px;">
                         <div class="flip-div inline-block relative w-full group" style="padding-bottom: 120%; perspective: 1000px;" onclick="this.classList.toggle('flipped')">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div class="shadow-sm front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="@if(!empty($bonus['special'])) overflow: visible;border-color: #cda880; @endif backface-visibility: hidden;">
@@ -476,7 +468,7 @@
                                 </div>
                                 <div class="shadow-sm back absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
                                     <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">
-                                        <p class="leading-normal mx-auto text-xs">{!! $bonus['description'] !!}</p>
+                                        <p class="leading-normal mx-auto text-xs lg:text-sm">{!! $bonus['description'] !!}</p>
                                     </div>
                                 </div>
                             </div>
@@ -486,6 +478,7 @@
             </div>
         </div>
     </section>
+    <div id="musoraapp" class="anchor"></div>
     <div class="h-5 sm:h-10 -mb-5 sm:-mb-10 relative z-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #f9f9fb calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:linear-gradient(45deg, #e6fffb, #e6f2ff, #f6e6ff, #ffe6e8);">
         <div class="container max-w-2xl mx-auto">

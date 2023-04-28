@@ -32,6 +32,13 @@ return [
 
     'customer_io_account_to_sync_all_brands' => 'musora',
 
+    'customer_io_members_area_cached_event_names' => [
+        'drumeo' => 'drumeo_members_area_activity_',
+        'pianote' => 'pianote_members_area_activity_',
+        'guitareo' => 'guitareo_members_area_activity_',
+        'singeo' => 'singeo_members_area_activity_'
+    ],
+
     'customer_io_pack_skus_to_sync_ownership' => [
         '30-day-drummer',
         '30-day-drummer-2',
