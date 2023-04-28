@@ -138,7 +138,7 @@ onBeforeMount(()=> {
             <div v-if="!isSidebarCollapsed" class="tw-text-sm tw-transition tw-pb-2">
                 <ul class="tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px] tw-overflow-hidden tw-border-b dark:tw-border-b-[#223F57]"
                     v-if="formattedPinnedPlaylists.length > 0 && !playlistsStore.loadingPinnedPlaylists">
-                    <p class="tw-text-[#3f3f46] dark:tw-text-[#9EC0DC] tw-text-xs tw-pl-[24px] tw-font-bold tw-mt-2">PINNED</p>
+                    <p class="tw-text-[#3f3f46] dark:tw-text-[#9EC0DC] tw-text-xs tw-pl-[24px] tw-font-bold tw-mt-2 tw-uppercase">Pinned</p>
                     <!-- Loop through User Pinned Playlists -->
                     <li class="tw-group tw-w-full tw-flex tw-overflow-hidden dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                         v-for="item in formattedPinnedPlaylists" :key="item.id + '-playlist-li'"
@@ -170,7 +170,7 @@ onBeforeMount(()=> {
 
                 <ul class="tw-font-open-sans tw-text-[#00101D] dark:tw-text-white tw-text-[14px] tw-overflow-hidden"
                     v-if="formattedUnpinnedPlaylists.length > 0 && !playlistsStore.loadingPlaylists">
-
+                    <p class="tw-text-[#3f3f46] dark:tw-text-[#9EC0DC] tw-text-xs tw-pl-[24px] tw-font-bold tw-mt-2 tw-uppercase">Most Recent</p>
                     <!-- Loop through User Unpinned Playlists -->
                     <li class="tw-group tw-w-full tw-flex tw-overflow-hidden dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                         v-for="item in formattedUnpinnedPlaylists" :key="item.id + '-playlist-li'"
