@@ -143,7 +143,7 @@
             </div>
             <!-- Pinned Icon -->
             <div class="tw-inline-flex tw-items-center tw-transition-colors"
-                 :class="[ !props.isListView ? 'tw-z-20 tw-absolute tw-top-2 tw-right-2 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5' : 'tw-px-4 xl:tw-px-8',`tw-text-white`, { 'tw-opacity-0' : !state.isPinned } ]"
+                 :class="[ !props.isListView ? 'tw-z-20 tw-absolute tw-top-2 tw-right-2 tw-bg-[rgba(0,12,23,0.5)] tw-rounded-full tw-p-1.5' : 'tw-px-4 xl:tw-px-8',`dark:tw-text-white`, { 'tw-opacity-0' : !state.isPinned } ]"
             >
                 <musora-icon icon-name="tack" class="tw-w-[20px] tw-h-[20px] tw-mx-auto tw-hidden md:tw-flex" />
             </div>
