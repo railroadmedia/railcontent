@@ -55,8 +55,9 @@ Route::domain('{pianoteDomain}')
     Route::get('/foundations', [SalesController::class, 'foundations'] );
     Route::get('/new-piano-players', [SalesController::class, 'newPianoPlayers'] );
     Route::get('/shop/new-piano-players', [SalesController::class, 'newPianoPlayers'] );
-    Route::get('/new-piano-players-deal', [SalesController::class, 'newPianoPlayersDeal'] );
-    Route::get('/concert-headphones-members', [SalesController::class, 'concertHeadphonesMember']);
+        Route::get('/new-piano-players-deal', [SalesController::class, 'newPianoPlayersDeal'] );
+        Route::get('/shop/easy-chords', [SalesController::class, 'easyChords'] );
+        Route::get('/concert-headphones-members', [SalesController::class, 'concertHeadphonesMember']);
 
     Route::get('/about', [SalesController::class, 'about'] );
     Route::get('/app', [SalesController::class, 'app'] );
@@ -72,7 +73,8 @@ Route::domain('{pianoteDomain}')
     Route::get('/shop/play-beautiful-piano', [SalesController::class, 'playbeautifulpiano'] );
     Route::get('/shop/beginner-classical-piano', [SalesController::class, 'beginnerclassicalpiano'] );
     Route::get('/shop/beautiful-beginner-bundle', [SalesController::class, 'beautifulBeginnerBundle'] );
-    Route::get('/shop/build-you-bundle', [SalesController::class, 'buildYourBundle'] );
+    Route::get('/shop/build-your-bundle', [SalesController::class, 'buildYourBundle'] );
+    Route::get('/survey-offer', [SalesController::class, 'surveyOffer'] );
     Route::get('/lifetime', [SalesController::class, 'lifetime'] );
     Route::get('/lifetime-members', [SalesController::class, 'lifetimeMembers'] );
     Route::get('/lisa-recommends', [SalesController::class, 'lisarecommends'] );

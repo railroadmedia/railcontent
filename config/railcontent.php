@@ -155,12 +155,12 @@ return [
 
     'search_index_values' => [
         'high_value' => [
-            'content_attributes' => ['slug', 'title',],
+            'content_attributes' => ['slug','title'],
             'field_keys' => ['instructor:name', 'artist', 'album'],
             'data_keys' => [],
         ],
         'medium_value' => [
-            'content_attributes' => [],
+            'content_attributes' => ['type'],
             'field_keys' => ['*'],
             'data_keys' => [],
         ],
@@ -494,7 +494,7 @@ return [
                 'sortBy' => '-published_on',
             ],
             'quick-tips' => [
-                'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/show-quick-tips.jpg',
+                'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/78e68540-2b93-4445-882c-a19eef6b5d00/public',
                 'name' => 'Quick Tips',
                 'icon' => 'icon-shows',
                 'description' => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice. ",
@@ -733,7 +733,7 @@ return [
             ],
             'quick-tips' => [
                 'name' => 'Quick Tips',
-                'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/quick-tips-red.jpg',
+                'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/7979495d-d06a-4f78-161f-2f670f6f9800/public',
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Quick Tips',
@@ -861,7 +861,7 @@ return [
                 "allowableFilters" => ['difficulty', 'topic', 'progress', 'instructor'],
             ],
             'quick-tips' => [
-                'thumbnailUrl' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/guitareo-header.jpg',
+                'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/297dc5b4-e878-4238-d5b5-ed0588ee0b00/public',
                 "name" => "Quick Tips",
                 "shortname" => "quick-tips",
                 "icon" => "icon-shows",
@@ -922,7 +922,7 @@ return [
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
             ],
             'quick-tips' => [
-                'thumbnailUrl' => 'https://musora-web-platform.s3.amazonaws.com/headers/singeo-header.jpg',
+                'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/8464033e-9b4e-458e-d613-e89fb47e2a00/public',
                 "name" => "Quick Tips",
                 "icon" => "icon-shows",
                 "description" => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice.",
