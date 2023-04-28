@@ -2,6 +2,7 @@
 
 namespace App\Modules\CustomerIO\Controllers;
 
+use App\Rules\ReCaptcha;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -31,6 +32,7 @@ class CustomerIoController extends Controller
             [
                 'email' => 'required|email',
                 'form_name' => 'required|in:'.implode(',', $allConfiguredFormNames),
+                'g-recaptcha-response' => ['required', new ReCaptcha]
             ]
         );
 
