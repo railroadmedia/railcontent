@@ -312,7 +312,7 @@ onBeforeMount(() => {
                     </div>
                 </div>
                 <!-- Related Playlists -->
-                <div v-if="relatedPlaylists.data && relatedPlaylists.data.length" id="lessonInfo"
+                <!-- <div v-if="relatedPlaylists.data && relatedPlaylists.data.length" id="lessonInfo"
                     class="tw-flex tw-flex-row reverse tw-items-start">
                     <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
                         <div class="tw-flex tw-flex-col tw-mb-5">
@@ -322,7 +322,7 @@ onBeforeMount(() => {
                         </div>
                         <RelatedPlaylists :playlists="relatedPlaylists" :brand="brand" />
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
