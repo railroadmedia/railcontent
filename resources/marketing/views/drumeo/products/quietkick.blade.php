@@ -122,8 +122,8 @@
     <section class="text-left text-white px-5 sm:pl-5 sm:pr-0 bg-cover lazyload" style="background-color: #c1c6ca; color: #203e59;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/bg.jpg">
         <div class="container mx-auto max-w-6xl relative pb-8 md:py-10 lg:py-16">
             <div class="mx-auto mb-4 sm:mb-0 sm:absolute sm:top-0 sm:right-0 z-10 max-w-xs sm:max-w-full w-full sm:w-1/2 lg:w-7/12">
-                <img class="w-full img-toggle hidden active" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Kick-up.png" alt="quietkick pedal">
-                <img class="w-full img-toggle hidden" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Kick-down.png" alt="quietkick pedal">
+                <img class="w-full img-toggle hidden active" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Kick-up2.png" alt="quietkick pedal">
+                <img class="w-full img-toggle hidden" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Kick-down2.png" alt="quietkick pedal">
             </div>
             <div class="w-full sm:w-1/2 lg:w-5/12 z-20">
                 <h2 class="leading-none mb-3 lg:mb-5"><strong>Never skip leg day.</strong></h2>
