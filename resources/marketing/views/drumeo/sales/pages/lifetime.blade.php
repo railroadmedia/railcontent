@@ -82,18 +82,17 @@
                     onload="this.classList.remove('opacity-0')"
                 />
 {{--                <h1 class="font-bebas leading-none mb-1 text-4xl md:text-6xl">GET A <span class="text-gradient">LIFETIME</span> <br class="inline md:hidden">DRUMEO MEMBERSHIP</h1>--}}
-                <h4 class="text-white uppercase leading-tight mb-4">+ Your Choice of Bonuses & And An Exclusive Masterclass <br class="hidden md:inline lg:hidden">with Anika Nilles!</h4>
-                <p class="uppercase text-promo font-bold">
-                    AVAILABLE UNTIL MARCH 31st AT MIDNIGHT <br>
-                    Only
-                    <span x-cloak x-data="timer()" x-init="countdown()">
-                         <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0 && hour !== '00'"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                     </span>
-                    Left!
+                <p class="uppercase text-promo">
+                    <strong class="font-black">AVAILABLE UNTIL MARCH 31st AT MIDNIGHT</strong>
+{{--                    <br> Only--}}
+{{--                    <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                     </span>--}}
+{{--                    Left!--}}
                 </p>
 
                 <div class="w-full mx-auto my-10 px-3" style="max-width:920px;">
@@ -109,40 +108,37 @@
 {{--                        <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/774477396" frameborder="0" allowfullscreen allow="autoplay" title="Lifetime Video"></iframe>--}}
 {{--                    </div>--}}
                 </div>
-                <div class="text-center">
-                    <a class="join smaller drumeo anchor-slide" href="#customize-anchor">Lifetime Membership &raquo</a>
+                <div class="px-3 mt-5 mx-auto w-full max-w-2xl text-left">
+                    <h3 class="leading-tight"><strong>Will you still be drumming in 5 years?</strong></h3>
+                    <p class="leading-relaxed my-5 text-light-navy">
+                        To celebrate 11 years of Drumeo, Lifetime Memberships are back!
+                        <br><br>
+                        For the price of 5 years Drumeo access, you’ll get:
+                    </p>
+                    <ul class="list-disc leading-5 pl-5 text-light-navy">
+                        <li>Unlimited drum lessons for life</li>
+                        <li>Your choice of 3 bonuses (see below)</li>
+                        <li>An exclusive masterclass with Anika Nilles</li>
+                        <li>Piano, guitar, and singing lessons included</li>
+                        <li>An option to split payments over 1, 2 or 5 installments</li>
+                    </ul>
+                    <p class="leading-relaxed my-5 text-light-navy">
+                    We know this invitation isn’t for everyone… but if you see yourself playing & learning the drums for 5 or more years, a Lifetime Membership gives you the <strong>best value</strong>.
+                        <br><br>
+                        Scroll down to see everything included and click the button to explore payment options.
+                    </p>
+
+{{--                    <div class="text-center">--}}
+{{--                        <a class="join smaller drumeo anchor-slide" href="#customize-anchor">Lifetime Membership &raquo;</a>--}}
+{{--                    </div>--}}
                 </div>
-                <p class="leading-relaxed px-3 my-5 text-left text-light-navy" style="width: 100%;max-width: 650px;">
-                    <em>“My soul is that of a drummer. I didn’t do it to become rich and famous. I did it because it was the love of my life.” – Ringo Starr</em>
-                    <br><br>
-                    Wise words from drumming royalty ^.
-                    <br><br>
-                    If you feel similarly, we want to invite you to make a lifelong commitment to your drumming.
-                    <br><br>
-                    To celebrate 11 years of Drumeo, Lifetime Memberships are back!
-                    <br><br>
-                    This is your chance to make one final payment for your Drumeo Membership and then enjoy unlimited drum lessons, song breakdowns, and LIVE events with your favorite drummers for years to come.
-                    <br><br>
-                    And heads up: You can split the payment for 1, 2, or 5 installments. (You’ll see that option upon checkout.)
-                    <br><br>
-                    You’ll also get your choice of 3 bonuses. You can select a pile of drumsticks, a new practice pad, or whatever you think will fire up the next stage of your drumming journey. PLUS, you’ll have an exclusive Masterclass to get you inspired.
-                    <br><br>
-                    Anika Nilles has agreed to teach a Masterclass to Drumeo Lifetime Members that will help you develop your hand technique and creativity around the kit.
-                    <br><br>
-                    Scroll down to see everything included with your Drumeo Lifetime Membership and we’ll see you with your little infinity badge around your name very soon!
-                </p>
-                            @if($products['DLM-Lifetime']->getPublicStockCount() > 0)
-{{--                                <a class="join blue my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-2xl" href="{{ URL::Route('shopping-cart.to-cart.api') }}?products[DLM-Lifetime]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=12&products[drum-technique-made-easy-pack]=1&products[four-weeks-to-better-drum-fills]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[electrify-your-drumming]=1&products[learn-songs-faster-pack]=1&products[TLOD-DIGI]=1&products[MAM-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[AOADS-DIGI]=1&products[ICM-DIGI]=1&products[BTC-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&locked=true">BECOME A LIFETIME MEMBER &raquo;</a>--}}
-                            @else
-                <a class="join sold-out my-4">{{ $products['DLM-Lifetime']->getPublicStockCount() }}</a>
-                            @endif
             </div>
         </section>
 
     <section class="text-center text-white py-10 md:py-20 lg:py-24 px-2 md:px-4 relative overflow-hidden" style="background:linear-gradient(to bottom, #020c1a, #021125);">
         <div class="container mx-auto z-10 relative">
             <h2><strong>The Lifetime Advantage</strong></h2>
-            <p class="text-light-navy mt-2 mb-12">You’ll have a lifetime of unlimited drum lessons for the price of 5 years of access to Drumeo.</p>
+            <p class="text-light-navy mt-2 mb-12">You’ll have a lifetime of unlimited drum lessons for the price of 5 years of access to Drumeo ($1200 total).</p>
 
             <style>
                 .beg-adv-text p {
@@ -176,8 +172,8 @@
     </section>
 
     <section class="text-center text-white py-10 md:py-20 lg:py-24 px-4 md:px-6 relative overflow-hidden" style="background:#01050f;">
-        <div class="container mx-auto z-10 relative max-w-4xl">
-            <h3 class="mb-8 sm:mb-12"><strong>Improve Your Hands and Creativity <br class="inline sm:hidden">With Anika Nilles</strong></h3>
+        <div class="container mx-auto z-10 relative max-w-3xl">
+            <h3 class="mb-8 sm:mb-12"><strong>Improve Your Hands and Creativity <br>With Anika Nilles</strong></h3>
             <div class="flex flex-wrap sm:flex-nowrap items-start lg:items-center justify-center">
                 <div class="order-1 sm:order-0 text-left text-light-navy sm:pr-5 lg:pr-12">
                     <p>
@@ -350,47 +346,6 @@
                         </div>
                     </div>
                 @endforeach
-{{--                @foreach($bonuses as $bonus)--}}
-{{--                    <div class="bonus-wrap relative inline-block align-top mx-auto mb-3 px-1 md:px-3 w-1/2 sm:w-1/3 lg:w-1/5">--}}
-{{--                        <div class="flip-div inline-block relative w-full group" style="padding-bottom: 133%;perspective: 1000px;">--}}
-{{--                            <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">--}}
-{{--                                <div class="border-2 border-drumeo front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">--}}
-{{--                                    @if(!empty($bonus['shipping']))--}}
-{{--                                        <p class="absolute text-white top-0 left-0 w-full pb-0.5 text-sm bg-drumeo"><strong>Free Shipping</strong></p>--}}
-{{--                                    @endif--}}
-{{--                                    @if(!empty($bonus['live']))--}}
-{{--                                        <p class="absolute text-white top-0 left-0 w-full pb-0.5 text-sm bg-drumeo"><strong>Exclusive</strong></p>--}}
-{{--                                    @endif--}}
-{{--                                    <div class="h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=460,quality=85/{{ $bonus['image'] }}"></div>--}}
-{{--                                    <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">--}}
-{{--                                        <i class="fas fa-arrow-right text-4xl"></i><br>--}}
-{{--                                        <p class="text-sm"><strong>DETAILS</strong></p>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                                <div class="back border-2 border-drumeo absolute z-40 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">--}}
-{{--                                    <div class="w-full h-full mx-auto text-center text-white flex flex-wrap justify-center items-center content-center p-2 md:p-3" style="background:linear-gradient(to bottom, #01050f, #021225);">--}}
-{{--                                        <p class="leading-normal mx-auto text-sm">{!! $bonus['description'] !!}</p>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-
-{{--                        <p class="uppercase w-full leading-normal mt-2">--}}
-{{--                            <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>--}}
-{{--                            <span class="text-gradient" style="text-transform:uppercase; display:inline-block;">--}}
-{{--                                @if($bonus['price'] > 0) <s>${{ $bonus['price'] }}</s> @endif <strong>FREE</strong><br>--}}
-
-{{--                                @if(!empty($bonus['shipping']))--}}
-{{--                                    Free Shipping--}}
-{{--                                @elseif(!empty($bonus['live']))--}}
-{{--                                    Live Event--}}
-{{--                                @else--}}
-{{--                                    Instant Access--}}
-{{--                                @endif--}}
-{{--                            </span>--}}
-{{--                        </p>--}}
-{{--                    </div>--}}
-{{--                @endforeach--}}
 
                 <h4 class="text-center py-5">
                     <i class="text-promo font-bold">PLUS</i> AN EXCLUSIVE MASTERCLASS WITH...
@@ -420,28 +375,28 @@
             </div>
 
             {{--            @if($products['DLM-Lifetime']->getStockAvailability() > 0)--}}
-            <a
-                class="join blue bigger my-4 md:my-8 w-full max-w-xs md:max-w-lg lg:max-w-3xl"
-                style="padding: 20px 10px;"
-                :class="bonus !== 3 && 'sold-out'"
-                :href="bonus === 3 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'"
-                x-text="bonus === 3 ? 'BECOME A LIFETIME MEMBER &raquo;' : 'Choose 3 products above'"></a>
-            <p class="text-promo">
-                AVAILABLE UNTIL MARCH 31st AT MIDNIGHT <br>
-                <b>
-                    Only
-                    <span x-cloak x-data="timer()" x-init="countdown()">
-                         <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0 && hour !== '00'"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                     </span>
-                    Left!
-                </b>
-            </p>
+{{--            <a--}}
+{{--                class="join blue bigger my-4 md:my-8 w-full max-w-xs md:max-w-lg lg:max-w-3xl"--}}
+{{--                style="padding: 20px 10px;"--}}
+{{--                :class="bonus !== 3 && 'sold-out'"--}}
+{{--                :href="bonus === 3 ? '/ecommerce/add-to-cart?products[DLM-Lifetime]=1'+query+'&locked=true' : '#customize-anchor'"--}}
+{{--                x-text="bonus === 3 ? 'BECOME A LIFETIME MEMBER &raquo;' : 'Choose 3 products above'"></a>--}}
+{{--            <p class="text-promo">--}}
+{{--                AVAILABLE UNTIL MARCH 31st AT MIDNIGHT <br>--}}
+{{--                <b>--}}
+{{--                    Only--}}
+{{--                    <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                     </span>--}}
+{{--                    Left!--}}
+{{--                </b>--}}
+{{--            </p>--}}
             {{--            @else--}}
-{{--            <a class="join sold-out my-4">Sold Out</a>--}}
+            <a class="join sold-out my-4">Sold Out</a>
             {{--            @endif--}}
         </div>
     </section>

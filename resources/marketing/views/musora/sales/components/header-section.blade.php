@@ -2,13 +2,14 @@
     <div class="container max-w-6xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
             <div class="w-full sm:w-7/12 sm:pr-8 text-center lg:text-left">
-                <div x-on:click="trailer = true;" alt="header image" class="mb-5 overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video"
-{{--                    @if(!empty($promoVersion))--}}
-{{--                        style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{!! $promoThumbM !!});padding-bottom: 60%;"--}}
-{{--                    @else--}}
-                        style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ !empty($thumbM) ? $thumbM : $thumb }});padding-bottom: 75%;"
-{{--                    @endif--}}
+                <div x-on:click="trailer = true;" alt="header image" class="mb-5 overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video relative"
+                    @if(!empty($promoVersion))
+                        style="background-image:url();padding-bottom: 60%;"
+                    @else
+                        style="background-image:url();padding-bottom: 75%;"
+                    @endif
                 >
+                    <img class="absolute inset-0 object-cover w-full" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ !empty($thumbM) ? $thumbM : $thumb }}" alt="Header thumbnail" />
                     <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                 </div>
                 <div class="px-5 sm:px-0">
@@ -38,7 +39,7 @@
                                 @if(!empty($cta))
                                     {!! $cta !!}
                                 @else
-                                    Get Started &raquo;
+                                    SEE YOUR DEAL &raquo;
                                 @endif
                             @else
                                 START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
@@ -60,7 +61,7 @@
 {{--                        @if(!empty($promoVersion))--}}
 {{--                            class="relative bg-contain bg-top bg-no-repeat cursor-pointer autoplay-video" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{!! $promoThumb !!});padding-bottom: 108%;"--}}
 {{--                        @else--}}
-                            class="@if(empty($noThumbShadow)) shadow-2xl @endif rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-top cursor-pointer autoplay-video" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{!! $thumb !!});"
+                            class="bg-no-repeat @if(empty($noThumbShadow)) shadow-2xl bg-cover @else bg-contain @endif rounded-xl aspect-1:1 overflow-hidden relative bg-top cursor-pointer autoplay-video" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{!! $thumb !!});"
 {{--                        @endif--}}
                         >
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>

@@ -147,9 +147,9 @@
                 <br><br>
                 So click below and keep your progress going!<br><br><br>
             </p>
-            <div class="px-3 md:px-0">
-                <a class="join pianote w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">Claim the offer</a>
-            </div>
+{{--            <div class="px-3 md:px-0">--}}
+{{--                <a class="join pianote w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">Claim the offer</a>--}}
+{{--            </div>--}}
         </div>
     </section>
 
@@ -159,8 +159,8 @@
     <section class="py-12 md:py-20 px-4 sm:px-6" style="background:linear-gradient(180deg, #01050F 60.48%, #07132C 100%);">
         <div class="max-w-2xl lg:max-w-5xl mx-auto text-center text-white">
             <img class="h-12 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png" alt="pianote logo">
-            <h3 class="font-extrabold">Join Pianote today and get 12 free bonuses!</h3>
-            <h5 class="uppercase my-8 text-yellow">Only @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} Headphones left!</h5>
+            <h3 class="font-extrabold mb-8">Join Pianote today and get 12 free bonuses!</h3>
+{{--            <h5 class="uppercase my-8 text-yellow">Only @if($products['pianote-headphones']->getPublicStockCount() < 500)<s>500</s>@endif {{ $products['pianote-headphones']->getPublicStockCount() }} Headphones left!</h5>--}}
             <div class="max-w-md mx-auto mb-10">
                 <img
                     src="https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/pianote-annual-card.jpg"
@@ -174,17 +174,17 @@
                 @php
                     $bonuses = [
                         [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/headphones-cart.jpg',
-                            'title' => 'Pianote Headphones',
-                            'description' => 'Hear your piano the way it was meant to sound.',
-                            'price' => floatval($productPrices['pianote-headphones']->price),
-                            'shipping' => true,
-                        ],
-                        [
                             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Pianote_Planner_Card.jpg',
                             'title' => 'Practice Planner',
                             'description' => 'Always know exactly what to practice.',
                             'price' => floatval($productPrices['pianote-practice-planner']->price),
+                            'shipping' => true,
+                        ],
+                        [
+                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
+                            'title' => 'Chords & <br>Scales Book',
+                            'description' => 'Your encyclopedia of piano chords & scales.',
+                            'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
                             'shipping' => true,
                         ],
                         [
@@ -289,16 +289,12 @@
                 </div>
 
             </div>
-            <h3 class="mb-8"><strong>ONLY <s class="opacity-60">${{ 240 }}</s> $197</strong></h3>
+            <h3 class="mb-8"><strong>ONLY <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> ${{ Prices::$plusSubscriptionAnnual }}</strong></h3>
             <div class="w-2/3 mx-auto">
-                @if($products['pianote-headphones']->getPublicStockCount() > 0)
-                    <a
-                        href="/ecommerce/add-to-cart?locked=true&redirect=/order&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,pianote-headphones:1,pianote-practice-planner:1,poster-chords:1,poster-scales:1,the-power-of-chords:1,classical-piano:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1,piano-riffs-and-fills:1,piano-technique-made-easy:1,destupefy-your-left-hand:1,worship-piano:1,faster-fingers:1"
-                        class="join pianote w-full">Claim your offer
-                    </a>
-                @else
-                    <span class="join sold-out w-full">Sold out</span>
-                @endif
+                <a
+{{--                    href="/ecommerce/add-to-cart?locked=true&redirect=/order&product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,pianote-practice-planner:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,the-power-of-chords:1,classical-piano:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1,piano-riffs-and-fills:1,piano-technique-made-easy:1,destupefy-your-left-hand:1,worship-piano:1,faster-fingers:1"--}}
+                    class="join sold-out w-full">Sold Out
+                </a>
             </div>
             <p class="text-center my-8" style="color:#ABB5C2;">
                 <b>Any questions?</b> Call us toll-free at 1-800-439-8921 or directly at 1-604-855-7605.

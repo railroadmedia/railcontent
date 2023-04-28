@@ -20,13 +20,14 @@ class LessonAssignmentDecorator extends TypeDecoratorBase
             ContentTypes::singularContentTypes()
         );
 
+        $initialDecorationMode = \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode;
         \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode = \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
 
         $childHierarchyRows = $this->contentHierarchyService->getByParentIds(
             $contentsOfTypes->pluck('id')
                 ->toArray()
         );
-
+        \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode = $initialDecorationMode;
 
         if (empty($childHierarchyRows)) {
             return $contents;

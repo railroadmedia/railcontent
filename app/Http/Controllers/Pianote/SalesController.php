@@ -37,10 +37,6 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'promoVersion' => 'true']);
     }
-    public function anniversary()
-    {
-        return view('pianote.sales.march-promo', ['theme' => 'pianote', 'promoVersion' => 'true']);
-    }
     public function choosePlan()
     {
         return view('pianote.sales.choose-plan', ['theme' => 'pianote']);
@@ -144,6 +140,21 @@ class SalesController extends BaseController
         return view('pianote.products.beginner-classical-piano');
     }
 
+    public function beautifulBeginnerBundle()
+    {
+        return view('pianote.products.beautiful-beginner-bundle', [ 'theme' => 'pianote' ]);
+    }
+
+    public function buildYourBundle()
+    {
+        return view('pianote.products.build-your-bundle', [ 'theme' => 'pianote' ]);
+    }
+
+    public function surveyOffer()
+    {
+        return view('pianote.products.survey-offer', [ 'theme' => 'pianote' ]);
+    }
+
     public function lifetime()
     {
         return view('pianote.shop.pages.lifetime', [ 'theme' => 'pianote' ]);
@@ -226,6 +237,20 @@ class SalesController extends BaseController
     public function newPianoPlayersDeal()
     {
         return view('pianote.products.new-piano-players-deal', ['theme' => 'pianote']);
+    }
+    public function easyChords()
+    {
+        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
+        $productId = 734;
+        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
+        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+
+        return view('pianote.products.easy-chords', [
+            'theme' => 'pianote',
+            'hasProduct' => $hasProduct,
+            'nPackOwners' => $nPackOwners,
+        ]);
     }
 
 

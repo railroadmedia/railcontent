@@ -132,7 +132,6 @@
                     @click="trailer = true"
                 />
 {{--                <div class="aspect-16:9 w-full relative">--}}
-{{--                    --}}{{-- TODO swap vimeo when headphones are sold out: 803663213--}}
 {{--                    <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/803662615" frameborder="0" allowfullscreen allow="autoplay" title="promo video"></iframe>--}}
 {{--                </div>--}}
             </div>
@@ -162,45 +161,47 @@
             </p> --}}
 
             <div class="max-w-md md:max-w-4xl mx-auto px-4 lg:px-0">
-                <div class="flex items-center mb-10 md:mb-32 flex-col md:flex-row">
-                    <div class="md:w-1/2 md:pl-10 md:order-1 mb-6 md:mb-0">
-                        <img class="rounded-xl" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/lifetime/lifetime-headphones-collage.jpg" alt="lifetime headphones 1">
-                    </div>
+                <div class="flex items-center flex-col md:flex-row {{-- mb-10 md:mb-32--}}">
+{{--                    <div class="md:w-1/2 md:pl-10 md:order-1 mb-6 md:mb-0">--}}
+{{--                        <img class="rounded-xl" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/lifetime/lifetime-headphones-collage.jpg" alt="lifetime headphones 1">--}}
+{{--                    </div>--}}
                     <p class="md:text-left md:w-1/2" style="color:#A4AFC7;">
                         Two, maybe three times per year you get the chance to become a Pianote Lifetime Member. <br><br>
 
                         You’ll make one final payment for your membership, and then enjoy a lifetime of piano lessons and support from Pianote. <br><br>
 
-                        It’s not for everyone, but if you know the piano will be part of your life for the next 5 years (at least), then it makes so much sense. And when you get your Lifetime Membership, we’ll send you some amazing bonuses, including our NEW Pianote Concert Series over-ear headphones. <br><br>
+                        It’s not for everyone, but if you know the piano will be part of your life for the next 5 years (at least), then it makes so much sense. And when you get your Lifetime Membership, we’ll send you some amazing bonuses.
+{{--                        , including our NEW Pianote Concert Series over-ear headphones--}}
+                        <br><br>
 
                         Payment plans are available, and you’ll have 90 days to try it risk-free.
                     </p>
                 </div>
-                <div class="flex items-center mb-10 flex-col md:flex-row">
-                    <div class="md:w-1/2 md:pr-10 mb-6 md:mb-0">
-                        <img class="rounded-xl" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/lifetime/lifetime-headphones-feature.jpg" alt="lifetime headphones 2">
-                    </div>
-                    <div class="md:text-left md:w-1/2">
-                        <h4 class="font-extrabold mb-4">Hear your piano the way it was meant to sound</h4>
-                        <p  style="color:#A4AFC7;">
-                            Introducing the NEW Pianote Concert Series over-ear headphones. <br><br>
+{{--                <div class="flex items-center mb-10 flex-col md:flex-row">--}}
+{{--                    <div class="md:w-1/2 md:pr-10 mb-6 md:mb-0">--}}
+{{--                        <img class="rounded-xl" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/lifetime/lifetime-headphones-feature.jpg" alt="lifetime headphones 2">--}}
+{{--                    </div>--}}
+{{--                    <div class="md:text-left md:w-1/2">--}}
+{{--                        <h4 class="font-extrabold mb-4">Hear your piano the way it was meant to sound</h4>--}}
+{{--                        <p  style="color:#A4AFC7;">--}}
+{{--                            Introducing the NEW Pianote Concert Series over-ear headphones. <br><br>--}}
 
-                            These beautifully designed hi-end headphones are designed by piano players for piano players. Lightweight with comfortable ear padding for extended playing sessions and unrivalled sound definitition and bass response. <br><br>
+{{--                            These beautifully designed hi-end headphones are designed by piano players for piano players. Lightweight with comfortable ear padding for extended playing sessions and unrivalled sound definitition and bass response. <br><br>--}}
 
-                            Your playing has never sounded so good. <br><br>
+{{--                            Your playing has never sounded so good. <br><br>--}}
 
-                            Valued at $189, these headphones are FREE with your Lifetime Membership.
+{{--                            Valued at $189, these headphones are FREE with your Lifetime Membership.--}}
 
-                        </p>
-                    </div>
-                </div>
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
 
-            <div class="max-w-4xl mx-auto px-4">
-                <div class="flex flex-wrap mb-2">
-                    <img class="w-full rounded-xl mb-2 cursor-pointer autoplay-video lazyloaded" data-src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/concert-headphones/montage-04.png" alt="montage 4" data-open="unbox" aria-haspopup="true" tabindex="0" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/concert-headphones/montage-04.png">
-                </div>
-            </div>
+{{--            <div class="max-w-4xl mx-auto px-4">--}}
+{{--                <div class="flex flex-wrap mb-2">--}}
+{{--                    <img class="w-full rounded-xl mb-2 cursor-pointer autoplay-video lazyloaded" data-src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/concert-headphones/montage-04.png" alt="montage 4" data-open="unbox" aria-haspopup="true" tabindex="0" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/concert-headphones/montage-04.png">--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     </section>
     <section class="text-center text-white py-10 md:py-20 lg:py-24 px-4 md:px-6 relative overflow-hidden" style="background:#020610;">
@@ -260,13 +261,6 @@
 
                 @php
                     $bonuses = [
-                        [
-                            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/headphones-cart.jpg',
-                            'title' => 'Pianote Headphones',
-                            'description' => 'Hi-end, lightweight over-ear headphones for beautiful private practice sessions.',
-                            'price' => 189,
-                            'feature' => "Free Shipping",
-                        ],
                         [
                             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
                             'title' => 'Chords & <br>Scales Book',
@@ -384,15 +378,28 @@
 
                 {{--<p style="max-width: 480px;color: #aaa;padding:0 15px;"><em>All digital bonuses are added to your account IMMEDIATELY  with your membership to Pianote, and they’re yours forever. </em></p>--}}
             </div>
-
-            @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() > 0)
-                <a  href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[pianote-headphones]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[classical-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true"
-                    class="join pianote my-4">Become A lifetime Member &raquo;</a>
-                <p>Only @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() < 100)<s>100</s>@endif {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} spots remaining!</p>
-            {{--<p>(Or choose a payment plan on the next page.)</p>--}}
-            @else
-                <span class="join sold-out methodcta my-4">Sold Out</span>
-            @endif
+            <div x-data="timer()" x-init="countdown()">
+                <div x-cloak x-show="timeLeft > 0">
+                    <a  href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-LIFETIME]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&products[classical-book]=1&products[christmas-song-book-digital]=1&products[poster-chords]=1&products[poster-scales]=1&products[the-power-of-chords]=1&products[classical-piano]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&products[piano-riffs-and-fills]=1&products[piano-technique-made-easy]=1&products[destupefy-your-left-hand]=1&products[worship-piano]=1&products[faster-fingers]=1&redirect=/order&locked=true"
+                        class="join pianote my-4">Become A lifetime Member &raquo;</a>
+                        {{--                <p>Only @if($products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() < 100)<s>100</s>@endif {{ $products['PIANOTE-MEMBERSHIP-LIFETIME']->getPublicStockCount() }} spots remaining!</p>--}}
+                    <p class="text-promo uppercase">
+                         <span x-cloak >
+                             <span>
+                                 Only
+                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                                 Left!
+                             </span>
+                         </span>
+                    </p>
+                </div>
+                {{--<p>(Or choose a payment plan on the next page.)</p>--}}
+                <span x-cloak x-show="timeLeft < 0" class="join sold-out methodcta my-4">Sold Out</span>
+            </div>
         </div>
     </section>
     @php
@@ -443,18 +450,22 @@
         </div>
     </section>
 
-    @include('pianote.lead-gen.partials.video-player',[
-        "name" => "unbox",
-        "vimeoId" => "774408046",
-    ])
+{{--    @include('pianote.lead-gen.partials.video-player',[--}}
+{{--        "name" => "unbox",--}}
+{{--        "vimeoId" => "774408046",--}}
+{{--    ])--}}
 
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
-        'video' => '803662615',
+        'video' => '803663213',
         'vimeo' => true,
     ])
     @include('pianote.sales.partials._footer')
 
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-03-31 23:59:59',
+        'promoVersion' => false
+    ])
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 {{--    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>--}}
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>

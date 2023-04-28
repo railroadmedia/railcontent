@@ -26,7 +26,7 @@
           
           <!-- Share Button -->
           <div class="flex flex-column resource-button ph-1">
-            <button class="btn stacked" data-open-modal="shareVideoModal">
+            <button @click="handleOpenModal" class="btn stacked" data-open-modal="shareVideoModal">
               <span class="tw-shadow-none tw-text-[#3F3F46] dark:tw-text-white tw-text-lg" style="padding: 0 8px">
                 <musora-icon icon-name="share"  class="tw-w-6 tw-h-6 tw-mb-1" />
                 Share
@@ -109,7 +109,7 @@
       </div>
 
       <div id="shareVideoModal" class="modal">
-        <div class="flex flex-column bg-white corners-10 shadow pa-3">
+        <div v-if="showModalContent" class="flex flex-column bg-white corners-10 shadow pa-3">
           <h1 class="heading mb-2">Share Video Link</h1>
 
           <div class="form-group mb-2">
@@ -168,6 +168,7 @@
 </template>
 
 <script>
+// TODO: REFACTOR THE MODAL OF THIS COMPONENT!
 import Utils from '../../assets/js/helper-functions/utils.js';
 import ThemeClasses from "../../mixins/ThemeClasses";
 import Toasts from "../../assets/js/classes/toasts";
@@ -244,25 +245,16 @@ export default {
       totalLikes: this.likeCount,
       hasAdded: this.isAdded,
       useTimecode: true,
+      showModalContent: false,
     };
   },
 
   computed: {
-    currentTime() {
-      const { mediaElementVueInstance } = this.$root.$refs;
-
-      if (mediaElementVueInstance) {
-        return mediaElementVueInstance.currentTimeInSeconds;
-      }
-
-      return 0;
-    },
-
     shareUrl() {
       if (this.useTimecode) {
         return `${location.protocol}//${location.host}${
           location.pathname
-        }?time=${Math.floor(this.currentTime)}`;
+        }?time=${Math.floor(this.getCurrentTime())}`;
       }
 
       return `${location.protocol}//${location.host}${location.pathname}`;
@@ -276,6 +268,16 @@ export default {
     });
   },
   methods: {
+    getCurrentTime() {
+      if (this.$root.$refs?.mediaElementVueInstance) {
+        return this.$root.$refs.mediaElementVueInstance.currentTime;
+      }
+
+      return 0;
+    },
+    handleOpenModal() {
+      this.showModalContent = !this.showModalContent;
+    },
     likeContent() {
       this.hasLiked = !this.hasLiked;
 

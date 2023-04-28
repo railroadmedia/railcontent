@@ -49,6 +49,7 @@ use Railroad\Railforums\Repositories\PostRepository;
 use Railroad\Railforums\Repositories\ThreadRepository;
 use Railroad\Railforums\Services\ConfigService;
 use Railroad\Referral\Events\EmailInvite;
+use Railroad\Referral\Events\ReferralClaimed;
 use Throwable;
 
 class CustomerIoSyncEventListener
@@ -794,9 +795,11 @@ class CustomerIoSyncEventListener
             dispatch(
                 (new CustomerIoCreateEventByUserId(
                     $activityEvent->getUserId(),
-                    $activityEvent->getBrand(),
-                    $activityEvent->getBrand() . '_members_area_activity',
-                    [],
+                    config('event-data-syncrhonizer.customer_io_account_to_sync_all_brands'),
+                     'musora_members_area_activity',
+                    [
+                        'brands' => $activityEvent->getBrands()
+                    ],
                     null,
                     Carbon::now()->timestamp
                 ))->delay(
@@ -1187,14 +1190,16 @@ class CustomerIoSyncEventListener
             (new CustomerIoCreateEventByUserId(
                 $accessCodeClaimed->getUser()->getId(),
                 $brand,
-                'musora_membership_access_code_redemption',
+                'musora_membership_non_recurring_access_added',
                 [
                     'brand_source' => $brand,
-                    'access_code' => $accessCode->getCode(),
+                    'access_method' => $accessCode->getCode(),
                     'access_source' => $accessCode->getSource(),
-                    'claim_timestamp' => $accessCode->getUpdatedAt()->timestamp,
+                    'access_added_timestamp' => $accessCode->getUpdatedAt()->timestamp,
                     'code_creation_date' => $accessCode->getCreatedAt()->timestamp,
-                    'product_ids' => $accessCode->getProductIdsAsString()
+                    'product_ids' => $accessCode->getProductIdsAsString(),
+                    'referrer_id' => null,
+                    'musora_id' => null
 
                 ],
                 null,
@@ -1226,6 +1231,37 @@ class CustomerIoSyncEventListener
 //                        ->addSeconds(3)
 //                )
 //        );
+    }
+
+    /**
+     * @param ReferralClaimed $referralClaimed
+     */
+    public function handleReferralClaimed(ReferralClaimed $referralClaimed) {
+
+        $referrer = $referralClaimed->getReferrer();
+        dispatch(
+            (new CustomerIoCreateEventByUserId(
+                $referralClaimed->getUserId(),
+                $referrer->brand,
+                'musora_membership_non_recurring_access_added',
+                [
+                    'brand_source' => $referrer->brand,
+                    'access_method' => $referrer->referral_code,
+                    'access_source' => 'saasquatch',
+                    'access_added_timestamp' => $referrer->updated_at->timestamp,
+                    'code_creation_date' => null,
+                    'product_ids' => $referralClaimed->getProductId(),
+                    'referrer_id' => $referralClaimed->getUserId(),  // the id of the new user created - MT-438
+                    'musora_id' => $referrer->user_id   // the person who generated the invite code - MT-438
+                ],
+                null,
+                Carbon::now()->timestamp
+            ))
+                ->delay(
+                    Carbon::now()
+                        ->addSeconds(3)
+                )
+        );
     }
 
 }
