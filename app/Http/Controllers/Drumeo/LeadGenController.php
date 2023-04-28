@@ -63,7 +63,9 @@ class LeadGenController extends BaseController
     {
         switch ($page) {
             case null:
-                return view('drumeo.lead-gen.getting-started.signup', ['recaptchaKey'=>config('recaptcha.key')]);
+                return view('drumeo.lead-gen.getting-started.signup');
+            case 'recap':
+                return view('drumeo.lead-gen.getting-started.signup-recap', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
                 return view('drumeo.lead-gen.getting-started.thank-you');
             case '10-practice':

@@ -24,7 +24,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
         function () {
             Route::get('/{page?}', LeadGenController::class . '@gstd')
                 ->whereIn('page', [
-                    null, 'thank-you', '10-practice'
+                    null, 'recap', 'thank-you', '10-practice'
                 ]);
         }
     );
