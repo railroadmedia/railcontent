@@ -157,6 +157,7 @@ export default {
             loading: false,
             commentsCollapsed: true,
             flattenedProfilePics: [],
+            commentsCollapsed : false,
         };
     },
     computed: {
