@@ -100,25 +100,39 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 ->whereIn('rch1.child_id', $contentIds)
                 ->get();
 
-        $contentPermissionRows = collect($this->contentPermissionRepository->getByContentIdsOrTypes(
-            $contentIds,
-            \Arr::pluck($contentsOfType, 'type')
-        ));
+        $contentPermissionRows = collect(
+            $this->contentPermissionRepository->getByContentIdsOrTypes(
+                $contentIds,
+                \Arr::pluck($contentsOfType, 'type')
+            )
+        );
         $grupedPermissions = $contentPermissionRows->groupBy('content_id');
         $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
 
         foreach ($contentsOfType as $contentIndex => $content) {
             //set start/end time should not be displayed on assignments and song playlist items
-            $contentsOfType[$contentIndex]['set_start_end_time'] = ($content['type'] != 'assignment' && $content['type'] != 'song');
+            $contentsOfType[$contentIndex]['set_start_end_time'] =
+                ($content['type'] != 'assignment' && $content['type'] != 'song');
             $contentsOfType[$contentIndex]['user_playlist_item_extra_data'] =
                 $content['user_playlist_item_extra_data'] ?? null;
 
-            $contentsOfType[$contentIndex]['url'] =  url()->route('platform.user.playlist-item', [
-                'playlistId' => $content['user_playlist_id'],
+            $userPlaylistId =
+                $content['user_playlist_id']
+                ??
+                $this->userPlaylistContentRepository->getById($content['user_playlist_item_id'])['user_playlist_id'];
+
+            $contentsOfType[$contentIndex]['url'] = url()->route('platform.user.playlist-item', [
+                'playlistId' => $userPlaylistId,
                 'playlistItemId' => $content['user_playlist_item_id'],
             ]);
-            $contentsOfType[$contentIndex]['need_access']  = empty(array_intersect(\Arr::pluck($userPermissions,'permission_id'),
-                                                                         (isset($grupedPermissions[$content['id']]))?$grupedPermissions[$content['id']]->pluck('permission_id')->toArray():[]));
+            $contentsOfType[$contentIndex]['need_access'] = empty(
+            array_intersect(
+                \Arr::pluck($userPermissions, 'permission_id'),
+                (isset($grupedPermissions[$content['id']])) ?
+                    $grupedPermissions[$content['id']]->pluck('permission_id')
+                        ->toArray() : []
+            )
+            );
 
             if (!empty($content['user_playlist_item_extra_data'])) {
                 if ((is_null(json_decode($content['user_playlist_item_extra_data'])))) {
@@ -215,24 +229,24 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                     Decorator::$typeDecoratorsEnabled = true;
                 }
 
-
-                if (isset(self::$parents[$content['id']]) && ( self::$parents[$content['id']] instanceof ContentEntity)) {
-
+                if (isset(self::$parents[$content['id']]) &&
+                    (self::$parents[$content['id']] instanceof ContentEntity)) {
                     $contentsOfType[$contentIndex]['parent'] = self::$parents[$content['id']] ?? null;
                     $contentsOfType[$contentIndex]['parent_title'] = self::$parents[$content['id']]['title'] ?? null;
                     if (empty($contentsOfType[$contentIndex]['instructors'])) {
                         InstructorDecorator::$decorationMode =
                             \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
-                        self::$parents[$content['id']] = $this->instructorDecorator->decorate(new Collection([self::$parents[$content['id']]]))->first();
+                        self::$parents[$content['id']] =
+                            $this->instructorDecorator->decorate(new Collection([self::$parents[$content['id']]]))
+                                ->first();
                         $contentsOfType[$contentIndex]['instructors'] =
                             self::$parents[$content['id']]['instructors'] ?? [];
                     }
                     if (empty($contentsOfType[$contentIndex]['thumbnail_url'])) {
-                        $contentsOfType[$contentIndex]['thumbnail_url'] =
-                            self::$parents[$content['id']]->fetch(
-                                'data.original_thumbnail_url',
-                                self::$parents[$content['id']]->fetch('data.thumbnail_url')
-                            );
+                        $contentsOfType[$contentIndex]['thumbnail_url'] = self::$parents[$content['id']]->fetch(
+                            'data.original_thumbnail_url',
+                            self::$parents[$content['id']]->fetch('data.thumbnail_url')
+                        );
                         if (empty($contentsOfType[$contentIndex]['thumbnail_url']) &&
                             isset(self::$parents[(self::$parents[$content['id']]['id'])])) {
                             $contentsOfType[$contentIndex]['thumbnail_url'] =
@@ -245,7 +259,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         $contentsOfType[$contentIndex]['fields'] =
                             array_merge($content['fields'] ?? [], self::$parents[$content['id']]['fields'] ?? []);
                     }
-                } 
+                }
             }
 
             $contentsOfType[$contentIndex]['route'] = $route;

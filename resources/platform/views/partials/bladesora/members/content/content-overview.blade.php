@@ -6,7 +6,7 @@
     $payload->name = $itemTitle;
     $payload->thumbnail_url = $itemThumbnail;
     $payload->description = $itemDescription;
-
+    
     $parsedPayload = json_encode($payload);
 @endphp
 
@@ -47,12 +47,13 @@
         <div
             class="flex flex-row align-v-center tw-relative
                     {{ !$isOwned && \Carbon\Carbon::parse($releaseDate) < \Carbon\Carbon::now() ? 'flex-wrap-xs-only' : '' }}">
-            <button id="addToPlaylistBtn" data-payload="{{ $parsedPayload }}"
-                class="tw-w-[25px] tw-h-[25px] tw-block lg:tw-hidden">
-                <i
-                    class="fas fa-plus flex-center tw-w-[25px] tw-h-[25px] text-grey-2 dark:tw-text-[#9EC0DC] rounded"></i>
-            </button>
             <div class="flex flex-column align-v-center grow ph p-sm-up">
+                <button id="addToPlaylistBtn" data-payload="{{ $parsedPayload }}"
+                    class="tw-w-[25px] tw-h-[25px] icon-col tw-block lg:tw-hidden tw-absolute tw-top-0 tw-right-0 md:tw-mr-[6rem]">
+                    <i
+                        class="fas fa-plus flex-center tw-w-[25px] tw-h-[25px] text-grey-2 dark:tw-text-[#9EC0DC] rounded"></i>
+                </button>
+
                 @if (\Carbon\Carbon::parse($releaseDate) > \Carbon\Carbon::now())
                     <p class="tiny text-{{ $themeColor }} uppercase">
                         Opening {{ \Carbon\Carbon::parse($releaseDate)->format('l, F j \a\t g:i A') }}
