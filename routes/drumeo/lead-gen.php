@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Drumeo\LeadGenController;
 
-Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
+Route::domain('{drumeoDomain}')->group(function () {
     Route::group(['prefix' => '100-songs'],
         function () {
 
@@ -24,7 +24,7 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
         function () {
             Route::get('/{page?}', LeadGenController::class . '@gstd')
                 ->whereIn('page', [
-                    null, 'recap', 'thank-you', '10-practice'
+                    null, 'thank-you', '10-practice'
                 ]);
         }
     );
