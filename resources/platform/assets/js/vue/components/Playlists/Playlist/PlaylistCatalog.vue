@@ -96,6 +96,12 @@
             state.startPosition = position;
         }
     }
+    const handleTouchMove = (event) => {
+        if(playlistsStore.sortingPlaylist) {
+            event.targetTouches[0].target.classList.add('tw-border-b');
+
+        }
+    }
     const handleDragOver = (event) => {
         // console.log('drag over: ')
         if(playlistsStore.sortingPlaylist) {
@@ -189,8 +195,6 @@
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
         initialLessonsArray = props.lessons.data;
-
-        console.log()
     });
 </script>
 <template>
@@ -249,11 +253,15 @@
                                 :token="token"
                                 :brand="brand"
                                 :draggable="playlistsStore.sortingPlaylist"
-                                @dragstart="handleDragStart($event, i,lesson.user_playlist_item_id)"
-                                @dragleave="handleDragLeave($event)"
+                                @dragstart="handleDragStart($event, i, lesson.user_playlist_item_id)"
+                                @touchstart="handleDragStart($event, i, lesson.user_playlist_item_id)"
                                 @dragover.prevent="handleDragOver($event)"
+                                @touchmove="handleTouchMove($event)"
+                                @dragleave="handleDragLeave($event)"
+                                @touchleave="handleDragLeave($event)"
                                 @dragend="handleDragEnd"
                                 @drop="handleDrop($event, i)"
+                                @touchend="handleDrop($event, i)"
                             />
                             <!-- Skeleton Loader For Infinite Scroll -->
                             <div v-if="playlistsStore.loadingLessons && infiniteScroll"

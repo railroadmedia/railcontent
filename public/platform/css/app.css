@@ -25950,8 +25950,8 @@ a:visited{
   .md\:tw-order-none{
     order: 0 !important;
   }
-  .md\:tw-col-span-2{
-    grid-column: span 2 / span 2 !important;
+  .md\:tw-col-span-7{
+    grid-column: span 7 / span 7 !important;
   }
   .md\:tw-col-span-3{
     grid-column: span 3 / span 3 !important;
@@ -26944,6 +26944,12 @@ a:visited{
 @media (min-width: 1280px){
   .xl\:tw-static{
     position: static !important;
+  }
+  .xl\:tw-col-span-2{
+    grid-column: span 2 / span 2 !important;
+  }
+  .xl\:tw-col-span-5{
+    grid-column: span 5 / span 5 !important;
   }
   .xl\:tw-my-0{
     margin-top: 0px !important;

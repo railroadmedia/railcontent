@@ -35,7 +35,8 @@
     const sortOptions =[
         { text: 'Newest First', value: '-created_at' },
         { text: 'Alphabetical', value: 'name' },
-        { text: 'Recently Viewed', value: '-last_progress' }
+        { text: 'Recently Viewed', value: '-last_progress' },
+        { text: 'Pinned', value: 'pinned' }
     ]
 
     //----------Methods----------//
