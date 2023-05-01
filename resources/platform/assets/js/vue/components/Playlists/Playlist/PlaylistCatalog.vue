@@ -96,6 +96,12 @@
             state.startPosition = position;
         }
     }
+    const handleTouchMove = (event) => {
+        if(playlistsStore.sortingPlaylist) {
+            event.targetTouches[0].target.classList.add('tw-border-b');
+
+        }
+    }
     const handleDragOver = (event) => {
         // console.log('drag over: ')
         if(playlistsStore.sortingPlaylist) {
@@ -247,10 +253,10 @@
                                 :token="token"
                                 :brand="brand"
                                 :draggable="playlistsStore.sortingPlaylist"
-                                @dragstart="handleDragStart($event, i,lesson.user_playlist_item_id)"
-                                @touchstart="handleDragStart($event, i,lesson.user_playlist_item_id)"
+                                @dragstart="handleDragStart($event, i, lesson.user_playlist_item_id)"
+                                @touchstart="handleDragStart($event, i, lesson.user_playlist_item_id)"
                                 @dragover.prevent="handleDragOver($event)"
-                                @touchmove.prevent="handleDragOver($event)"
+                                @touchmove="handleTouchMove($event)"
                                 @dragleave="handleDragLeave($event)"
                                 @touchleave="handleDragLeave($event)"
                                 @dragend="handleDragEnd"
