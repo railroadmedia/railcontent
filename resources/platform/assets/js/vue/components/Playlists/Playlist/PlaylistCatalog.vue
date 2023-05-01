@@ -89,6 +89,7 @@
         playlistsStore.lessons = [...initialLessonsArray];
         playlistsStore.sortingPlaylist = false;
     }
+    //EVENTS
     const handleDragStart = (event, position, id) => {
         if(playlistsStore.sortingPlaylist) {
             //save start position
@@ -98,8 +99,11 @@
     }
     const handleTouchMove = (event) => {
         if(playlistsStore.sortingPlaylist) {
-            event.targetTouches[0].target.classList.add('tw-border-b');
+            event.preventDefault();
 
+            const touchPosition =  event.targetTouches[0];
+            
+            touchPosition.target.classList.add('tw-border-b');
         }
     }
     const handleDragOver = (event) => {
