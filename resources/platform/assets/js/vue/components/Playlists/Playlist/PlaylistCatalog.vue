@@ -125,7 +125,12 @@
     const handleDrop = (event, position) => {
         // console.log(state.startID, position)
         if(playlistsStore.sortingPlaylist) {
-            event.target.classList.remove('tw-border-b');
+            event.preventDefault();
+
+            const touchPosition =  event.targetTouches[0];
+            
+            touchPosition.classList.remove('tw-border-b');
+            
             state.endPosition = position;
             //Reorder UI
             playlistsStore.lessons.splice(state.endPosition, 0, playlistsStore.lessons.splice(state.startPosition, 1)[0])
