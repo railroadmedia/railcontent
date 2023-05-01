@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex flex-row flex-wrap align-v-center">
+    <div class="flex flex-row flex-wrap align-v-center tw-mb-2">
       <div class="flex flex-column tw-text-[#00101D] dark:tw-text-white">
         <h1 class="heading">
           {{ title }}
