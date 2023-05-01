@@ -60,7 +60,7 @@ const artist = computed(() => {
 //Instructor
 const instructor = computed(() => {
     const instructorObject = props.lesson?.fields?.length ? props.lesson.fields.find(data => data.key === 'instructor') : { value: null };
-    console.log('instructor', instructorObject)
+    // console.log('instructor', instructorObject)
     return instructorObject && instructorObject.value ? instructorObject.value : null;
 })
 //Description

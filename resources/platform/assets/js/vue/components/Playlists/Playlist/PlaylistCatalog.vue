@@ -189,8 +189,6 @@
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
         initialLessonsArray = props.lessons.data;
-
-        console.log()
     });
 </script>
 <template>
@@ -250,10 +248,14 @@
                                 :brand="brand"
                                 :draggable="playlistsStore.sortingPlaylist"
                                 @dragstart="handleDragStart($event, i,lesson.user_playlist_item_id)"
-                                @dragleave="handleDragLeave($event)"
+                                @touchstart="handleDragStart($event, i,lesson.user_playlist_item_id)"
                                 @dragover.prevent="handleDragOver($event)"
+                                @touchmove.prevent="handleDragOver($event)"
+                                @dragleave="handleDragLeave($event)"
+                                @touchleave="handleDragLeave($event)"
                                 @dragend="handleDragEnd"
                                 @drop="handleDrop($event, i)"
+                                @touchend="handleDrop($event, i)"
                             />
                             <!-- Skeleton Loader For Infinite Scroll -->
                             <div v-if="playlistsStore.loadingLessons && infiniteScroll"
