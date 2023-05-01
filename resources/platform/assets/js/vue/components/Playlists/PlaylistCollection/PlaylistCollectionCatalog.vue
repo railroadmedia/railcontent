@@ -161,7 +161,9 @@
                     <p class="tw-col-span-2 tw-relative">
                         <span class="tw-ml-[-24px] tw-inline-block">Name</span>
                     </p>
-                    <p class="tw-col-span-5 tw-pl-2">Description</p>
+                    <p class="tw-col-span-5 tw-pl-2">
+                        <span class="tw-hidden xl:tw-block">Description</span>
+                    </p>
                     <div class="tw-col-span-3 tw-w-full tw-flex">
                         <p class="tw-w-1/2 tw-text-center">Category</p>
                         <p class="tw-w-1/2 tw-text-center">
