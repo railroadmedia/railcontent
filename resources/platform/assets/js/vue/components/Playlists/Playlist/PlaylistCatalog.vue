@@ -135,6 +135,24 @@
         }
     }
 
+    //Handle Drop Event
+    const handleTouchEnd = (event, position) => {
+        // console.log(state.startID, position)
+        if(playlistsStore.sortingPlaylist) {
+            event.targetTouches[0].target.classList.remove('tw-border-b')
+            state.endPosition = position;
+            //Reorder UI
+            playlistsStore.lessons.splice(state.endPosition, 0, playlistsStore.lessons.splice(state.startPosition, 1)[0])
+            //Update Array
+            const index = state.newSortPositions.findIndex(object => object.id === state.startID);
+            if(index == -1) {
+                state.newSortPositions.push({ id: state.startID, position: state.endPosition + 1 })
+            } else {
+                state.newSortPositions[index].position =  state.endPosition + 1;
+            }
+        }
+    }
+
     //Vertical Scroll
     const VerticalMaxed = () => {
         return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
@@ -261,7 +279,7 @@
                                 @touchleave="handleDragLeave($event)"
                                 @dragend="handleDragEnd"
                                 @drop="handleDrop($event, i)"
-                                @touchend="handleDrop($event, i)"
+                                @touchend="handleTouchEnd($event, i)"
                             />
                             <!-- Skeleton Loader For Infinite Scroll -->
                             <div v-if="playlistsStore.loadingLessons && infiniteScroll"
