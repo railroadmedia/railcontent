@@ -81,20 +81,6 @@
                 "price" => $memberPrice,
                 "noBreadcrumb" => true
             ])
-    <a href="#customize-anchor" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-50 fixed" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
-
-        <img
-            class="h-8 sm:h-10 mr-4 transition-opacity opacity-0"
-            src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/anniversary-logo.png"
-            alt="sticky bar logo"
-            loading="lazy"
-            onload="this.classList.remove('opacity-0')"
-        />
-        <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-none sm:leading-none">
-            Save up to 25% on the<br>
-            ultimate foot practice pad.
-        </p>
-    </a>
     <div class="w-full h-10 sm:h-12"></div>
     <header class="header text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">

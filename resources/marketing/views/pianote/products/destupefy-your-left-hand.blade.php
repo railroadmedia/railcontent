@@ -402,29 +402,29 @@
         </div>
     </section>
 
-    <section class="faqs">
-        <div class="container no-padding">
-            <h2 class="col-xs-12"><strong>Still Have Questions?</strong></h2>
-            <div class="col-xs-12">
-                @include('pianote.products.partials._week-breakdown', [
-                "question" => true,
-                "weekTitle" => "Is this course for beginners?",
-                "weekDescription" => "Yes! This course is designed for beginners to show them the best way to start building a strong left-hand. But if you’re more advanced, that’s ok too. You can skip ahead in the course to the exercises that "
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container mx-auto relative z-10 max-w-5xl">
+            <h2><strong>Still have questions?</strong></h2>
+            <div class="max-w-6xl mt-4 sm:mt-10 px-4 mx-auto">
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
+                "title" => "Is this course for beginners?",
+                "desc" => "Yes! This course is designed for beginners to show them the best way to start building a strong left-hand. But if you’re more advanced, that’s ok too. You can skip ahead in the course to the exercises that "
                 ])
-                @include('pianote.products.partials._week-breakdown', [
-                "question" => true,
-                "weekTitle" => "How long until I see results?",
-                "weekDescription" => "You might notice a change after your first lesson! If you commit to putting in the work and following the practice exercises, you’ll see real results in just a few days. With regular practice, it should take about a month to complete the entire course."
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
+                "title" => "How long until I see results?",
+                "desc" => "You might notice a change after your first lesson! If you commit to putting in the work and following the practice exercises, you’ll see real results in just a few days. With regular practice, it should take about a month to complete the entire course."
                 ])
-                @include('pianote.products.partials._week-breakdown', [
-                "question" => true,
-                "weekTitle" => " Do I need a special keyboard or cables?",
-                "weekDescription" => "No! The lessons and practice exercises work on any computer, smartphone, or tablet with an internet connection. And it works with ANY piano or keyboard. You don’t have to plug anything in."
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
+                "title" => " Do I need a special keyboard or cables?",
+                "desc" => "No! The lessons and practice exercises work on any computer, smartphone, or tablet with an internet connection. And it works with ANY piano or keyboard. You don’t have to plug anything in."
                 ])
-                @include('pianote.products.partials._week-breakdown', [
-                "question" => true,
-                "weekTitle" => " What about the right hand?",
-                "weekDescription" => "EVERY exercise in this course for the left hand can also be applied to your right hand as well. Just switch up the fingering and you’ll be getting twice the value!"
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
+                "title" => " What about the right hand?",
+                "desc" => "EVERY exercise in this course for the left hand can also be applied to your right hand as well. Just switch up the fingering and you’ll be getting twice the value!"
                 ])
             </div>
         </div>

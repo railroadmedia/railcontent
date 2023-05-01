@@ -584,21 +584,21 @@
             <h2 class="mt-20 lg:mt-24 mb-6 sm:mb-10 lg:mb-14"><img class="h-16 sm:h-24 -mb-2 sm:-mb-4 align-bottom  lazyload" data-src="https://www.musora.com/musora-cdn/image/width=380,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/logo.svg" alt="logo"> <strong>...is designed for:</strong></h2>
             <div class="flex flex-wrap text-left">
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intermediate-drummer.jpg">
+                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-top relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intermediate-drummer.jpg">
                         <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg" alt="plus icon"><br>Intermediate<br class="hidden sm:inline lg:hidden"> Drummers</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-relaxed mt-3">30-Day Chops will help you take your drumming to the next level by studying rudiment applications on the drums. This is the perfect course to start expressing yourself creatively on the drums.</p>
                 </div>
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/advanced-drummer.jpg">
+                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-top relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/advanced-drummer.jpg">
                         <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg" alt="plus icon"><br>Advanced<br class="hidden sm:inline lg:hidden"> Drummers</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-relaxed mt-3">You’ve been playing for a while, holding down gigs and feeling confident in your drumming. 30-Day Chops will help you enter the world of linear chops and make you an even greater asset to any band or recording session. </p>
                 </div>
                 <div class="w-full sm:w-1/3 px-2">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/ambitious-beginner.jpg">
+                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-top relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/ambitious-beginner.jpg">
                         <h6 class="leading-tight lg:leading-relaxed absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/plus.svg" alt="plus icon"><br> Ambitious <br class="hidden sm:inline lg:hidden"> Beginners</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>

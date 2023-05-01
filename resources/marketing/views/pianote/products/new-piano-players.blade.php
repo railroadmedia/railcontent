@@ -835,7 +835,7 @@
                 ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "Do I need a digital piano or software?",
-                "desc" => "No! This course works with all pianos and keyboards. You don’t have to plug anything or need any fancy plugins or software. Simply click play on your lesson, and follow along!",
+                "desc" => "No! This course works with all pianos and keyboards. You don’t have to plug anything in and you don't need any fancy plugins or software. Simply click play on your lesson, and follow along!",
                 "num" => '?',
                 ])
                 @include('_partials.components.question-dropdown', [
