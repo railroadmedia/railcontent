@@ -1,5 +1,5 @@
 @php
-    //dd($playlistItem);
+    //dd($playlist);
     //dd(get_defined_vars()['__data']);
     $brandParams = [
         'drumeo' => '&show_chords=0',
@@ -60,6 +60,8 @@
         user-avatar="{{ user()->profile_picture_url }}" user-xp="{{ user()->totalXP() }}"
         :playlist-item-position="{{ $positionInPlaylist }}"
         :playlist-item-id="{{ $playlistItem['id'] }}"
+        :playlist-item-title="{{ json_encode($playlistItem['title']) }}"
+        :playlist-name="{{ $playlist['name'] }}"
         :start-second="{{ $playlistItem['start_second'] ?? 0 }}"
         :is-my-playlist="{{ $playlist['is_my_playlist'] }}"
         :end-second="{{ $playlistItem['end_second'] ?? $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"

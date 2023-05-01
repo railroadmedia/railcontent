@@ -22174,6 +22174,9 @@ a:visited{
 .tw-h-\[40px\]{
   height: 40px !important;
 }
+.tw-h-\[14px\]{
+  height: 14px !important;
+}
 .tw-h-\[90px\]{
   height: 90px !important;
 }
@@ -22489,6 +22492,9 @@ a:visited{
 }
 .tw-w-\[12px\]{
   width: 12px !important;
+}
+.tw-w-\[14px\]{
+  width: 14px !important;
 }
 .tw-w-\[162px\]{
   width: 162px !important;
