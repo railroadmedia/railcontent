@@ -49,6 +49,7 @@
                     "themeColor" => $brand,
                     "hideBorder" => $index === 0,
                     "itemThumbnail" => $pack->fetch('data.thumbnail_url'),
+                    'itemId' => $pack->fetch('id'),
                     "itemTitle" => $pack->fetch('fields.title'),
                     "itemDescription" => $pack->fetch('data.description'),
                     "itemProgress" => $pack->fetch('progress_state'),
