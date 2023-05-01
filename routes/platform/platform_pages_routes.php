@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Platform\CoachPagesController;
+use App\Http\Controllers\Platform\CohortPackController;
 use App\Http\Controllers\Platform\ContentPagesController;
 use App\Http\Controllers\Platform\ExpiredMemberController;
 use App\Http\Controllers\Platform\ForumPagesController;
@@ -632,7 +633,15 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.request-song');
 
-        // New playlists
+        Route::get('/{brand}/enrollment/{cohort}', [CohortPackController::class, 'template'])
+            ->name('platform.cohort');
+
+        Route::get('/{brand}/enrollment/{cohort}/purchased', [CohortPackController::class, 'purchased'])
+            ->name('platform.cohort.purchased');
+
+        Route::get('{brand}/cohort-packs/register/{product}', [CohortPackController::class, 'register'] )
+            ->name('platform.cohort.register');
+   // New playlists
         Route::get('/{brand}/playlists', [\App\Http\Controllers\Platform\UserPlaylistsController::class, 'index'])
             ->whereIn('brand', all_brands())
             ->name('platform.user.playlists');
@@ -644,9 +653,6 @@ Route::domain('{musoraDomain}')
         Route::get('/{brand}/playlist/{id}', [\App\Http\Controllers\Platform\UserPlaylistsController::class, 'playlist'])
             ->whereIn('brand', all_brands())
             ->name('platform.user.playlist');
-
-
-
     });
 
 /*

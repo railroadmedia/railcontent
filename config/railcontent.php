@@ -4,7 +4,7 @@ use Railroad\Railcontent\Services\ContentService;
 
 return [
     'cache_duration' => 60 * 12,
-    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY','musora_laravel_mysql_writer_only'),
+    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY', 'musora_laravel_mysql_writer_only'),
     'connection_mask_prefix' => 'railcontent_',
     'data_mode' => env('RAILCONTENT_DATA_MODE', 'host'),
 
@@ -696,7 +696,7 @@ return [
                 "name" => "Play Alongs",
                 "icon" => "icon-play-alongs",
                 "description" => "Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.",
-                "allowableFilters" => ['bpm', 'style','difficulty'],
+                "allowableFilters" => ['bpm', 'style', 'difficulty'],
             ],
         ],
         'pianote' => [
@@ -1312,7 +1312,7 @@ return [
         'soundslice_xml_file_url',
         'original_video',
         'low_video',
-        'high_video'
+        'high_video',
     ],
 
     // field key => column name
@@ -1387,7 +1387,7 @@ return [
         'published_on' => 'published_on',
         'created_on' => 'created_on',
         'archived_on' => 'archived_on',
-        'instrument' => 'instrument'
+        'instrument' => 'instrument',
     ],
     'content_hierarchy' => [
         'drumeo' => [
@@ -1634,5 +1634,17 @@ return [
     'content_multiple_level_content_depth_playlist_allowed' => [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
     ],
-    'playlist_items_limit' => 300
+    'playlist_items_limit' => 300,
+ 'cohort_icons' => [
+        'pianote' => [
+            "icon1_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/dd1c5c5b-c7c1-47d1-ecfb-9f05a548f200/public",
+            "icon2_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/17b5c92a-3e61-41d1-f282-e75d54888500/public",
+            "icon3_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/2cb4f469-9554-428d-47c9-97f4cd2fd900/public",
+        ],
+        'drumeo' => [
+            "icon1_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/3aa8f78e-332c-4afa-00e9-ab4eeb8c2900/public",
+            "icon2_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/0d3970c5-8a64-4276-4fff-dda0bcfb0900/public",
+            "icon3_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/60a5d4c0-6dce-4f12-b1cb-a47996be1500/public",
+        ],
+    ]
 ];

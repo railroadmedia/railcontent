@@ -8,6 +8,8 @@ use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Http\Controllers\BaseController;
 use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
+use App\Modules\Content\Services\CohortService;
+use App\Modules\Ecommerce\Services\UserProductService;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
@@ -44,6 +46,8 @@ class HomePageController extends BaseController
     private DatabaseManager $databaseManager;
     private UserContentProgressService $userContentProgressService;
     private CarouselService $carouselService;
+    private CohortService $cohortService;
+    private UserProductService $userProductService;
 
     /**
      * @param ContentService $contentService
@@ -64,7 +68,9 @@ class HomePageController extends BaseController
         PackService $packService,
         DatabaseManager $databaseManager,
         UserContentProgressService $userContentProgressService,
-        CarouselService $carouselService
+        CarouselService $carouselService,
+        CohortService $cohortService,
+        UserProductService $userProductService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -75,6 +81,8 @@ class HomePageController extends BaseController
         $this->databaseManager = $databaseManager;
         $this->userContentProgressService = $userContentProgressService;
         $this->carouselService = $carouselService;
+        $this->cohortService = $cohortService;
+        $this->userProductService = $userProductService;
     }
 
     public function homeRedirect()
@@ -256,23 +264,21 @@ class HomePageController extends BaseController
             ->slice(0, 4)
             ->values();
         $upcomingEvents = new ContentFilterResultsEntity([
-            'results' => $upcomingEvents,
-            'total_results' => $upcomingEventsCount,
-        ]);
+                                                             'results' => $upcomingEvents,
+                                                             'total_results' => $upcomingEventsCount,
+                                                         ]);
 
         if ($currentEvent) {
             $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
             $eventCoachSlug = $currentEvent->fetch('fields.instructor.slug');
             $eventCoachId = $currentEvent->fetch('fields.instructor.id');
             if (!empty($eventCoachSlug) && !empty($eventCoachId)) {
-                $eventCoachUrl = url()->route('platform.content.first-level',
-                    [
-                        'brand' => brand(),
-                        'primaryPage' => 'coaches',
-                        'firstContentSlug' => $eventCoachSlug,
-                        'firstContentId' => $eventCoachId,
-                    ]
-                );
+                $eventCoachUrl = url()->route('platform.content.first-level', [
+                    'brand' => brand(),
+                    'primaryPage' => 'coaches',
+                    'firstContentSlug' => $eventCoachSlug,
+                    'firstContentId' => $eventCoachId,
+                ]);
                 $currentEventCalendarId = config('addevent.uniquekeys.by-coach')[$currentEvent->fetch(
                         'fields.instructor.slug'
                     )] ?? config('addevent.uniquekeys.brand-overview');
@@ -282,6 +288,46 @@ class HomePageController extends BaseController
         }
 
         $carousel = $this->carouselService->getCarouselSlides();
+
+        $cohortBanner = [];
+        $activeCohort = $this->cohortService->getActiveCohort();
+
+        $hasProduct =
+            user() && $this->userProductService->hasProductNotCached(user()?->id, $activeCohort['product_id'] ?? 0);
+
+        if ($activeCohort && $hasProduct) {
+            $contentId = $activeCohort['content_id'];
+            if ($contentId > 0) {
+                $content = $this->contentService->getById($contentId);
+                $cohortBanner = [
+                    'cohort_id' => $activeCohort['id'],
+                    'course_url' => ($content) ? $content->fetch('url', '') : '',
+                    'light_mode_logo' => $activeCohort['light_mode_logo'],
+                    'dark_mode_logo' => $activeCohort['dark_mode_logo'],
+                    'continue_visible' => false,
+                    'close_visible' => Carbon::parse($activeCohort['cohort_end_date']) < Carbon::now(),
+                ];
+
+                $nextLesson = $this->contentService->getNextCohortLesson($contentId, user()->id);
+
+                if ($nextLesson) {
+                    $cohortBanner['lesson_url'] = $nextLesson->fetch('url');
+                    $cohortBanner['published_on'] = $nextLesson->fetch('published_on');
+                    $cohortBanner['published_on_in_timezone'] = $nextLesson->fetch('published_on_in_timezone');
+                    $cohortBanner['title'] = $nextLesson->fetch('title');
+                    $cohortBanner['thumbnail'] = $nextLesson->fetch('data.thumbnail_url');
+                    $cohortBanner['continue_visible'] = true;
+                    if(Carbon::parse($nextLesson->fetch('published_on')) > Carbon::now()){
+                        $cohortBanner['continue_visible'] = false;
+                        $cohortBanner['close_visible'] = false;
+                    }
+                }
+                if ($content['completed']) {
+                    $cohortBanner['completed'] = true;
+                    $cohortBanner['continue_visible'] = false;
+                }
+            }
+        }
 
         return view('home.index', [
             'brand' => $brand,
@@ -317,9 +363,10 @@ class HomePageController extends BaseController
             'methodUrl' => url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
             'completedLevelsUrl' => $methodContent['url'] ?? '',
             'carousel' => $carousel,
+            'cohortBanner' => json_encode($cohortBanner),
+            'existsCohortBanner' => !empty($cohortBanner),
         ]);
     }
-
 
     public function onboarding(Request $request)
     {
@@ -327,13 +374,13 @@ class HomePageController extends BaseController
     }
 
     /**
-     * @param  Request  $request
+     * @param Request $request
      * @param $brand
      * @return string
      */
     public function homePackOnly(Request $request, $brand)
     {
-        $packs = $this->getPacks();
+        $packs = $this->packService->getPacksForHome(user());;
         $hotForumTopics = $this->getHotForumTopics();
         $member = user();
 
@@ -362,15 +409,8 @@ class HomePageController extends BaseController
     }
 
     /**
-     * @return PackCollection
-     */
-    private function getPacks()
-    {
-        return $this->packService->getPacks(user());
-    }
-
-    /**
      * singeo only
+     *
      * @return ContentFilterResultsEntity
      */
     private function getCoursesContent()
@@ -404,7 +444,11 @@ class HomePageController extends BaseController
      */
     private function getHotForumTopics()
     {
-        PostRepository::$blockedUserIds =  BlockedUser::where('blocker_id','=',user()->id)->get()->pluck('user_id')->toArray();
+        PostRepository::$blockedUserIds =
+            BlockedUser::where('blocker_id', '=', user()->id)
+                ->get()
+                ->pluck('user_id')
+                ->toArray();
 
         // latest forum posts
         $forumPosts =
@@ -420,7 +464,15 @@ class HomePageController extends BaseController
                 ->orderBy('forum_threads.last_post_id', 'desc')
                 ->get();
 
-        $usersIndexed = User::query()->whereIn('id', $forumPosts->pluck('author_id')->toArray())->get()->keyBy('id');
+        $usersIndexed =
+            User::query()
+                ->whereIn(
+                    'id',
+                    $forumPosts->pluck('author_id')
+                        ->toArray()
+                )
+                ->get()
+                ->keyBy('id');
 
         foreach ($forumPosts as $forumPostIndex => $forumPost) {
             if (isset($usersIndexed[$forumPost->author_id])) {
@@ -430,7 +482,7 @@ class HomePageController extends BaseController
                 $forumPosts[$forumPostIndex]->content = preg_replace(
                     "~<blockquote(.*?)>(.*)</blockquote>~si",
                     "",
-                    ' ' . $forumPosts[$forumPostIndex]->content . ' '
+                    ' '.$forumPosts[$forumPostIndex]->content.' '
                 );
 
                 $forumPosts[$forumPostIndex]->user_xp = $user->getBrandTotalXp();
@@ -544,8 +596,12 @@ class HomePageController extends BaseController
 
         $startedProgressRows = $this->userContentProgressService->getForUserStateContentTypes(
             auth()->id(),
-            $contentTypes, 'started',
-                                                                                             'updated_on', 'desc', 6);
+            $contentTypes,
+            'started',
+            'updated_on',
+            'desc',
+            6
+        );
         $lessons = $this->contentService->getByIds(array_column($startedProgressRows, 'content_id'));
 
         return (new ContentFilterResultsEntity(['results' => $lessons]));
@@ -776,11 +832,13 @@ class HomePageController extends BaseController
     {
         $host = $request->host();
         Mail::raw('Hello World!', function ($msg) use ($host) {
-            $msg->to('robert@musora.com')->subject("Test Email: $host");
+            $msg->to('robert@musora.com')
+                ->subject("Test Email: $host");
         });
     }
 
-    public function redirect30day(){
+    public function redirect30day()
+    {
         return view('pages.redirect30day');
     }
 }
