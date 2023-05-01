@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e90f22066f2270921adad1763f500790",
+    "content-hash": "d73b182204646a7f9844a0e337040411",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -2923,16 +2923,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.297.0",
+            "version": "v0.298.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "a00a70ed5c425ba94bb7c6e4bb918ee5844d84a8"
+                "reference": "68710abd2b921f5df4ae99412fc05bac268acddc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/a00a70ed5c425ba94bb7c6e4bb918ee5844d84a8",
-                "reference": "a00a70ed5c425ba94bb7c6e4bb918ee5844d84a8",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/68710abd2b921f5df4ae99412fc05bac268acddc",
+                "reference": "68710abd2b921f5df4ae99412fc05bac268acddc",
                 "shasum": ""
             },
             "require": {
@@ -2961,9 +2961,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.297.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.298.0"
             },
-            "time": "2023-04-22T00:54:12+00:00"
+            "time": "2023-05-01T01:06:14+00:00"
         },
         {
             "name": "google/auth",
@@ -8356,16 +8356,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "dev-header-banner-v2-updates-MT-423",
+            "version": "v3.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "c9cb932910be33f828e49b46b02253f357314629"
+                "reference": "e153f69bceb4dd0d6d315a28629c102763abf94c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/c9cb932910be33f828e49b46b02253f357314629",
-                "reference": "c9cb932910be33f828e49b46b02253f357314629",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/e153f69bceb4dd0d6d315a28629c102763abf94c",
+                "reference": "e153f69bceb4dd0d6d315a28629c102763abf94c",
                 "shasum": ""
             },
             "require": {
@@ -8395,9 +8395,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/header-banner-v2-updates-MT-423"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.1"
             },
-            "time": "2023-04-18T08:32:03+00:00"
+            "time": "2023-05-01T15:27:42+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -16952,12 +16952,6 @@
     ],
     "aliases": [
         {
-            "package": "railroad/musora-api",
-            "version": "dev-header-banner-v2-updates-MT-423",
-            "alias": "v3.0.12",
-            "alias_normalized": "3.0.12.0"
-        },
-        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
@@ -16966,7 +16960,6 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/musora-api": 20,
         "railroad/railanalytics": 20
     },
     "prefer-stable": true,
