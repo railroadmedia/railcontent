@@ -61,7 +61,6 @@ Route::domain('{pianoteDomain}')
 
     Route::get('/about', [SalesController::class, 'about'] );
     Route::get('/app', [SalesController::class, 'app'] );
-    Route::get('/giveaway', [SalesController::class, 'giveaway'] );
     Route::get('/{page?}', SalesController::class . '@products')
         ->whereIn('page', [
             '500-songs-fb', '500-songs-discount', '500-songs-carols-discount', '500-songs-chord-discount', '500-songs-elton-john', '500-songs-alicia-keys', '500-songs-sam-smith', '500-songs-taylor-swift', '500-songs-the-beatles', '500-songs-free-lesson'
