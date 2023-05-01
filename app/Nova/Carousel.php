@@ -58,12 +58,12 @@ class Carousel extends Resource
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Text::make('name')->sortable()->help('For easy reference to this banner in the CMS. This info won\'t show on the banner.')->required(),
             Boolean::make('visible')->hideFromIndex()->default(true),
-            Number::make('Display order', 'display_order')->hideFromIndex(),
+            Number::make('Display Order', 'display_order')->hideFromIndex(),
             DateTime::make('Start Time', 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             DateTime::make(__('End Time'), 'end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             Heading::make('BANNER COPY & IMAGES'),
-            Text::make('Subtitle')->hideFromIndex()->sortable()->help('This is visible only if there is no logo uploaded.'),
-            Text::make('Title')->hideFromIndex()->sortable()->help('This is visible only if there is no logo uploaded.'),
+            Text::make('Subtitle')->hideFromIndex()->sortable()->help('This is visible only if there is no logo uploaded or supported. Older app versions do not support the logo and will only see this text.'),
+            Text::make('Title')->hideFromIndex()->sortable()->help('This is visible only if there is no logo uploaded or supported. Older app versions do not support the logo and will only see this text.'),
             Image::make('logo')
                 ->help("The logo will replace the 'Title' and 'Subtitle'.")
                 ->disk('nova_s3')
@@ -248,8 +248,8 @@ class Carousel extends Resource
                     }
                 ),
             //duplicated fields for displaying index page purpose
-            Number::make('Display order', 'display_order')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating(),
-            Boolean::make('visible')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating(),
+            Number::make('Display Order', 'display_order')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating(),
+            Boolean::make('visible')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating()->sortable(),
         ];
     }
 
