@@ -62,7 +62,7 @@ class VimeoTrailerDecorator extends ModeDecoratorBase
                 3000
             );
         }
-
+        $contentResults = null;
         if (!empty($response['body']['files'])) {
             $contentResults['vimeo_video_id'] = $vimeoId;
             $contentResults['length_in_seconds'] = $response['body']['duration'];
