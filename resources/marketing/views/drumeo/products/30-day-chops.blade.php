@@ -340,39 +340,15 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
             <img class="h-56 inline sm:hidden lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image.png" alt="collage intro mobile">
-            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Unlock your creativity<br class="hidden sm:inline"> & speed around the drums.</strong></h2>
-            <div class="text-left flex flex-wrap sm:flex-nowrap mb-32 sm:mb-56 lg:mb-72">
-                <p class="leading-normal max-w-lg sm:pr-4 lg:pr-7">Chops aren’t as complicated as you think.
+            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Unlock your creativity<br class="hidden sm:inline"> and speed around the drums.</strong></h2>
+            <div class="text-left flex flex-wrap sm:flex-nowrap items-center mb-12 sm:mb-18 lg:mb-24">
+                <h6 class="leading-normal max-w-lg sm:pr-4 lg:pr-7">Learning the drums is hard enough. Knowing what to practice shouldn’t be.
                     <br><br>
-                    When you hear great drummers like Aaron Spears or Eric Moore let loose in a flurry of power & precision, it’s actually simple rudiments applied around the drum set. And you can learn these patterns, too – all you need is repetition.
+                    30-Day Chops is a new style of learning where you’ll play along with your instructor every day – no thinking required. Just press play and hit every note with Zack.
                     <br><br>
-                    30-Day Chops will teach you drum chops in the simplest possible way: By practicing every day, duh.
-                    <br><br>
-                    With ZackGrooves custom workouts, you’ll build your chops with 10-minute workouts every day. By the end of the month, you’ll have hundreds of new combinations you can apply around the kit – with tasty new grooves & fills and unlimited creativity.
-                    <br><br>
-                    You’ll be able to play faster, cleaner and smoother – whether it’s in a band, online, or at home.
-                    <br><br>
-                    Scroll down to save your seat in the first-ever 30-Day Chops.</p>
+                    At the end of each week, you’ll have a chance to ask your questions in an exclusive LIVE lesson. It’s like getting the best of private & online lessons in one.</h6>
                 <img class="h-72 lg:h-96 hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image.png" alt="collage intro">
             </div>
-        </div>
-    </section>
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
-        <div class="container max-w-4xl mx-auto">
-            <img class="cursor-pointer rounded-xl autoplay-video overflow-hidden w-full -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/video-thumbnail.jpg">
-{{--            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">--}}
-{{--                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>--}}
-{{--                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/video-reel2.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
-{{--            </div>--}}
-
-            <img class="h-10 sm:h-20 mt-10 sm:mt-16 lg:mt-24 mb-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1220,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Just_Press_Play_logo.png" alt="just press play logo">
-            <h6 class="leading-normal mb-20 lg:mb-28 mx-auto max-w-3xl">Learning the drums is hard enough. Knowing what to practice shouldn’t be.
-                <br><br>
-                30-Day Chops is a new style of learning where you’ll play along with your instructor every day – no thinking required. Just press play and hit every note with Zack.
-                <br><br>
-                At the end of each week, you’ll have a chance to ask your questions in an exclusive LIVE lesson. It’s like getting the best of private & online lessons in one.</h6>
-
 
             @php
                 $gettings = [
@@ -409,7 +385,7 @@
                     ],
                 ];
 //            @endphp
-            <div class="timeline-container dc30 max-w-3xl lg:max-w-4xl mx-auto relative px-4 sm:pb-14 lg:pb-20 mt-5">
+            <div class="timeline-container dc30 max-w-3xl lg:max-w-4xl mx-auto relative px-4 sm:pb-14 lg:pb-20">
                 @foreach ($gettings as $key => $getting)
                     @if($getting['position'] === 'right')
                         <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-28">
@@ -456,7 +432,7 @@
             </div>
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#EFF7FF;">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
                 <img class="h-28 sm:h-36 lg:h-48 mb-3 sm:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=760,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/logo.svg" alt="logo">
@@ -608,7 +584,17 @@
 
         </div>
     </section>
-    <div class="h-5 sm:h-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #d70b3b calc(50% + 1px));"></div>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#EFF7FF;">
+        <div class="container max-w-4xl mx-auto mb-10">
+            <img class="h-10 sm:h-20 mb-8 sm:mb-10 lg:mb-12 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1220,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Just_Press_Play_logo.png" alt="just press play logo">
+            <img class="cursor-pointer rounded-xl autoplay-video overflow-hidden w-full" data-open="trailer" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/video-thumbnail.jpg">
+            {{--            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">--}}
+            {{--                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>--}}
+            {{--                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/video-reel2.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
+            {{--            </div>--}}
+        </div>
+    </section>
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #d70b3b calc(50% + 1px));"></div>
     <section class="text-white text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:linear-gradient(to bottom, #d70b3b, #9d1032);">
         <div class="container max-w-2xl mx-auto">
             <div class="-mt-14 sm:-mt-20 lg:-mt-28 mb-7">
@@ -627,7 +613,7 @@
             </h4>
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-5xl mx-auto mb-14 lg:mb-16">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
