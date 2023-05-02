@@ -50,9 +50,11 @@ class CarouselService
                     $slide->primary_cta_text = $slide->primary_cta_text_alt;
                     $slide->primary_cta_url = $slide->primary_cta_url_alt;
                     $slide->secondary_cta_text = null;
+                    $slide->is_enrolled = true;
               //      $slide->cta_text = "Go to course"; //todo: added for 30-day-drummer remove once CMS handles this case
                 } else {
                     $slide->primary_cta_url = $slide->primary_cta_url;
+                    $slide->is_enrolled = false;
                 }
             }
         });
