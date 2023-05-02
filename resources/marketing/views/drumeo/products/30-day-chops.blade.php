@@ -339,7 +339,7 @@
     </header>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-56 inline sm:hidden lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image.png" alt="collage intro mobile">
+            <img class="h-56 inline sm:hidden lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image2.png" alt="collage intro mobile">
             <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Unlock your creativity<br class="hidden sm:inline"> and speed around the drums.</strong></h2>
             <div class="text-left flex flex-wrap sm:flex-nowrap items-center mb-12 sm:mb-18 lg:mb-24">
                 <h6 class="leading-normal max-w-lg sm:pr-4 lg:pr-7">Learning the drums is hard enough. Knowing what to practice shouldn’t be.
@@ -347,7 +347,7 @@
                     30-Day Chops is a new style of learning where you’ll play along with your instructor every day – no thinking required. Just press play and hit every note with Zack.
                     <br><br>
                     At the end of each week, you’ll have a chance to ask your questions in an exclusive LIVE lesson. It’s like getting the best of private & online lessons in one.</h6>
-                <img class="h-72 lg:h-96 hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image.png" alt="collage intro">
+                <img class="h-72 lg:h-96 hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image2.png" alt="collage intro">
             </div>
 
             @php
