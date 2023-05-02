@@ -12,8 +12,8 @@
     @parent
     <title>Easy Chords | Pianote</title>
     <meta property="og:title" content="Easy Chords | Pianote">
-    <meta name="description" content="30 days to">
-    <meta property="og:description" content="better piano chords.">
+    <meta name="description" content="30 days to better piano chords.">
+    <meta property="og:description" content="30 days to better piano chords.">
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
@@ -469,7 +469,7 @@
                     [
                     'position' => 'right',
                     'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/live-support.jpg',
-                    'title' => 'Live support from REAL teachers.',
+                    'title' => 'Support from REAL teachers.',
                     'desc' => 'At every step, you’ll have REAL teachers helping you. Ask questions, get feedback, and connect with other students. You’re never alone.',
                     ],
                     [
