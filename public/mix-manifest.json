@@ -1,5 +1,13 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=e26af0a7911fc41c2c3dc7bb00525344",
+=======
+<<<<<<< HEAD
+    "/platform/js/app.js": "/platform/js/app.js?id=0e4e60f977e7545d2333a4794fff8481",
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=f1208a9992bd6b6786e7a10c9ee32c66",
+>>>>>>> project-cohort-optimizations
+>>>>>>> cohort-and-banner
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
@@ -32,8 +40,20 @@
     "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=c7b6df46ae603f0549e5314b7022c3b9",
     "/platform/js/playlist-collection-header.js": "/platform/js/playlist-collection-header.js?id=b5f95d0bf8c5ba0c9b2d457569bdb473",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=09903bb6c8a5633f9a2f593d996f848f",
+<<<<<<< HEAD
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=e6100dbb3c4921cdbe31b79260c28a65",
     "/platform/css/app.css": "/platform/css/app.css?id=e68abd1aac89da9a5906839076b30ab8",
     "/marketing/css/app.css": "/marketing/css/app.css?id=9f46ebf7ebffacab6917486f2c484025",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=3766175a5865e1de4a345a47659e0aa1"
+=======
+    "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=5aad33f7b22ce615bece2e8b857b7381",
+<<<<<<< HEAD
+    "/platform/css/app.css": "/platform/css/app.css?id=0c09c41127c91c5e7cfb0cf428aca306",
+=======
+    "/platform/css/app.css": "/platform/css/app.css?id=26bcab35f03bf6107f8b14677737b72e",
+>>>>>>> project-cohort-optimizations
+    "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=95b61f73a67fc65546a81e742dda8905",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=ad7ad5755fe5bd401c2dde1cfb3b24cc",
+    "/platform/js/vendor.js": "/platform/js/vendor.js?id=49f0817b99cd1af9df9cbd7fcee415f7"
+>>>>>>> cohort-and-banner
 }

@@ -127,7 +127,7 @@ class SalesController extends BaseController
 
     public function destupefyyourlefthand()
     {
-        return view('pianote.products.destupefy-your-left-hand');
+        return view('pianote.products.destupefy-your-left-hand', ['theme' => 'pianote']);
     }
 
     public function playbeautifulpiano()
@@ -177,7 +177,7 @@ class SalesController extends BaseController
 
     public function jesusMolina()
     {
-        return view('pianote.products.improvisation-with-jesus-molina');
+        return view('pianote.products.improvisation-with-jesus-molina', ['theme' => 'pianote']);
     }
 
     public function roland()

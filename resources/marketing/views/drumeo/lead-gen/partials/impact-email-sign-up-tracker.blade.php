@@ -5,15 +5,15 @@
 <script>
     function getSignUpActionTrackerId(environment) {
         var signUpActionTrackerId =
-            "{{ config('railanalytics.production.providers.impact.sign-up-action-tracker-id') }}"
-        if (environment == "development") {
-            signUpActionTrackerId =
-                "{{ config('railanalytics.development.providers.impact.sign-up-action-tracker-id') }}"
-        } else if (environment == "staging") {
-            signUpActionTrackerId = "{{ config('railanalytics.staging.providers.impact.sign-up-action-tracker-id') }}"
-        } else if (environment == "testing") {
-            signUpActionTrackerId = "{{ config('railanalytics.testing.providers.impact.sign-up-action-tracker-id') }}"
-        }
+            "{{ config('railanalytics.drumeo.production.providers.impact.sign-up-action-tracker-id') }}"
+        {{--if (environment == "development") {--}}
+        {{--    signUpActionTrackerId =--}}
+        {{--        "{{ config('railanalytics.drumeo.local.providers.impact.sign-up-action-tracker-id') }}"--}}
+        {{--} else if (environment == "staging") {--}}
+        {{--    signUpActionTrackerId = "{{ config('railanalytics.drumeo.beta-testing.providers.impact.sign-up-action-tracker-id') }}"--}}
+        {{--} else if (environment == "testing") {--}}
+        {{--    signUpActionTrackerId = "{{ config('railanalytics.drumeo.beta-testing.providers.impact.sign-up-action-tracker-id') }}"--}}
+        {{--}--}}
         return signUpActionTrackerId;
     }
 
@@ -21,7 +21,10 @@
         var email = document.getElementById('sign-up-email').value;
         var hashedEmail = sha1(email);
         var hashedOrderId = md5('drumeo_'.concat(email))
-
+//todo: to be deleted
+console.log('{{ config('app.env') }}')
+console.log(hashedOrderId);
+console.log(hashedEmail);
         ire('trackConversion', getSignUpActionTrackerId('{{ config('app.env') }}'), {
                 orderId: hashedOrderId,
                 customerId: hashedOrderId,

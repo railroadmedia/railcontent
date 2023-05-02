@@ -17,11 +17,11 @@ use Railroad\MusoraApi\Contracts\ProductProviderInterface;
 class MusoraApiProductProvider implements ProductProviderInterface
 {
     private CarouselService $carouselService;
-    private VimeoTrailerDecorator $vimeoTrailerDecorator;
     private UserProductService $userProductService;
     private ProductRepository $productRepository;
     private CohortService $cohortService;
     private PackService $packService;
+    private VimeoTrailerDecorator $vimeoTrailerDecorator;
 
     public function __construct(
         CarouselService $carouselService,
