@@ -5,15 +5,15 @@
 <script>
     function getSignUpActionTrackerId(environment) {
         var signUpActionTrackerId =
-            "{{ config('railanalytics.production.providers.impact.sign-up-action-tracker-id') }}"
-        if (environment == "development") {
-            signUpActionTrackerId =
-                "{{ config('railanalytics.development.providers.impact.sign-up-action-tracker-id') }}"
-        } else if (environment == "staging") {
-            signUpActionTrackerId = "{{ config('railanalytics.staging.providers.impact.sign-up-action-tracker-id') }}"
-        } else if (environment == "testing") {
-            signUpActionTrackerId = "{{ config('railanalytics.testing.providers.impact.sign-up-action-tracker-id') }}"
-        }
+            "{{ config('railanalytics.drumeo.production.providers.impact.sign-up-action-tracker-id') }}"
+        {{--if (environment == "development") {--}}
+        {{--    signUpActionTrackerId =--}}
+        {{--        "{{ config('railanalytics.drumeo.local.providers.impact.sign-up-action-tracker-id') }}"--}}
+        {{--} else if (environment == "staging") {--}}
+        {{--    signUpActionTrackerId = "{{ config('railanalytics.drumeo.beta-testing.providers.impact.sign-up-action-tracker-id') }}"--}}
+        {{--} else if (environment == "testing") {--}}
+        {{--    signUpActionTrackerId = "{{ config('railanalytics.drumeo.beta-testing.providers.impact.sign-up-action-tracker-id') }}"--}}
+        {{--}--}}
         return signUpActionTrackerId;
     }
 
