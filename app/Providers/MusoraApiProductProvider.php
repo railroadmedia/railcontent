@@ -102,6 +102,10 @@ class MusoraApiProductProvider implements ProductProviderInterface
         foreach (config('railcontent.cohort_icons')[brand()] ?? [] as $key => $value) {
             $cohort[$key] = $value;
         }
+        if($cohort['cohort_trailer']){
+            $vimeoId =  (int) substr(parse_url($cohort['cohort_trailer'], PHP_URL_PATH), 7);
+            $cohort['trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId);
+        }
         $product = $this->productRepository->findProduct($cohort['product_id']);
         $hasProduct = user() && $this->userProductService->hasProductNotCached(user()?->id, $cohort['product_id']);
         $nPackOwners = $this->userProductService->getNumberProductOwners($cohort['product_id']);
