@@ -64,6 +64,8 @@ class VimeoTrailerDecorator extends ModeDecoratorBase
         }
 
         if (!empty($response['body']['files'])) {
+            $contentResults['vimeo_video_id'] = $vimeoId;
+            $contentResults['length_in_seconds'] = $response['body']['duration'];
             foreach ($response['body']['files'] as $fileData) {
                 if (isset($fileData['height'])) {
                     $contentResults
@@ -108,6 +110,7 @@ class VimeoTrailerDecorator extends ModeDecoratorBase
 
                 $contentResults['captions'] = $captions;
             }
+
 
             $contentResults
             [$prefix.'video_playback_endpoints'] = array_values(
