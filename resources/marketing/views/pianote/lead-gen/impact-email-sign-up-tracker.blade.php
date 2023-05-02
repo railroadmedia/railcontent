@@ -5,15 +5,16 @@
 <script>
     function getSignUpActionTrackerId(environment) {
         var signUpActionTrackerId =
-            "{{ config('railanalytics.production.providers.impact.sign-up-action-tracker-id') }}"
-        if (environment == "development") {
-            signUpActionTrackerId =
-                "{{ config('railanalytics.development.providers.impact.sign-up-action-tracker-id') }}"
-        } else if (environment == "staging") {
-            signUpActionTrackerId = "{{ config('railanalytics.staging.providers.impact.sign-up-action-tracker-id') }}"
-        } else if (environment == "testing") {
-            signUpActionTrackerId = "{{ config('railanalytics.testing.providers.impact.sign-up-action-tracker-id') }}"
-        }
+            "{{ config('railanalytics.pianote.production.providers.impact.sign-up-action-tracker-id') }}"
+        {{--if (environment == "development" || environment == "local") {--}}
+        {{--    signUpActionTrackerId =--}}
+        {{--        "{{ config('railanalytics.pianote.local.providers.impact.sign-up-action-tracker-id') }}"--}}
+        {{--} else if (environment == "staging") {--}}
+        {{--    signUpActionTrackerId = "{{ config('railanalytics.pianote.beta-testing.providers.impact.sign-up-action-tracker-id') }}"--}}
+        {{--} else if (environment == "testing") {--}}
+        {{--    signUpActionTrackerId = "{{ config('railanalytics.pianote.beta-testing.providers.impact.sign-up-action-tracker-id') }}"--}}
+        {{--}--}}
+
         return signUpActionTrackerId;
     }
 
@@ -21,8 +22,6 @@
         var email = document.getElementById('inf_field_Email').value;
         var hashedEmail = sha1(email);
         var hashedOrderId = md5('pianote_'.concat(email))
-        /*
-    TODO: Uncomment when impact provider is installed properly
 
         ire('trackConversion', getSignUpActionTrackerId('{{ config('app.env') }}'), {
                 orderId: hashedOrderId,
@@ -33,7 +32,6 @@
                 verifySiteDefinitionMatch:true
             }
         );
-    */
 
     }
 </script>
