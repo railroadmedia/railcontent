@@ -21,10 +21,7 @@
         var email = document.getElementById('sign-up-email').value;
         var hashedEmail = sha1(email);
         var hashedOrderId = md5('drumeo_'.concat(email))
-//todo: to be deleted
-console.log('{{ config('app.env') }}')
-console.log(hashedOrderId);
-console.log(hashedEmail);
+
         ire('trackConversion', getSignUpActionTrackerId('{{ config('app.env') }}'), {
                 orderId: hashedOrderId,
                 customerId: hashedOrderId,
