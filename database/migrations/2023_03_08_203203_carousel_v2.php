@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('name');
         });
 
-        Carousel::where('brand_id', 1)->update(['visible' => false]);
+        Carousel::truncate();
 
         $carousels = [
             //Drumeo
