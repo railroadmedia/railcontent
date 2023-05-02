@@ -468,7 +468,7 @@
                     ],
                     [
                     'position' => 'right',
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/live-support.jpg',
+                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/live-support2.jpg',
                     'title' => 'Support from REAL teachers.',
                     'desc' => 'At every step, you’ll have REAL teachers helping you. Ask questions, get feedback, and connect with other students. You’re never alone.',
                     ],
@@ -785,7 +785,7 @@
                     <img class="h-20 md:h-24 lg:h-28 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=380,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo">
                     <h4 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
                             20 Guided Play-Along Lessons.<br>
-                            4 Live Q&A Sessions.<br>
+                            Feedback From Real Teachers.<br>
                             Lifetime Course Access.
                         </strong></h4>
                     <div class="w-full mx-auto sm:mx-0">
