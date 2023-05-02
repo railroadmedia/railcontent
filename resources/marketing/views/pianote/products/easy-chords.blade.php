@@ -268,7 +268,7 @@
 
     @php
         if (is_current_user_a_member()) {
-            $registerButtonUrl = '/cohort-packs/register/new-piano-players-start-here';
+            $registerButtonUrl = 'https://www.musora.com/pianote/enrollment/easy-chords';
         } else {
             $registerButtonUrl = "#final";
         }

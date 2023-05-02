@@ -213,7 +213,7 @@
             ])
     @php
         if (is_current_user_a_member()) {
-            $registerButtonUrl = '/cohort-packs/register/30-day-chops';
+            $registerButtonUrl = 'https://www.musora.com/drumeo/enrollment/30-day-chops';
         } else {
             $registerButtonUrl = "#final";
         }
@@ -282,7 +282,7 @@
 
                             @if(!auth()->check())
                                 <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
-                                    <a href="{{ get_musora_brand_base_url() }}/30-day-chops">Drumeo Members register for free here.</a>
+                                    <a href="https://www.musora.com/drumeo/enrollment/30-day-chops">Drumeo Members register for free here.</a>
                                 </p>
                             @endif
                         </div>
