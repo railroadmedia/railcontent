@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Decorators\Content\VimeoTrailerDecorator;
 use App\Maps\ProductAccessMap;
 use App\Models\Brand;
 use App\Models\Carousel;
@@ -16,10 +17,12 @@ use Railroad\Railcontent\Services\UserPermissionsService;
 class MusoraApiProductProvider implements ProductProviderInterface
 {
     private CarouselService $carouselService;
+    private VimeoTrailerDecorator $vimeoTrailerDecorator;
 
-    public function __construct(CarouselService $carouselService)
+    public function __construct(CarouselService $carouselService, VimeoTrailerDecorator $vimeoTrailerDecorator)
     {
         $this->carouselService = $carouselService;
+        $this->vimeoTrailerDecorator = $vimeoTrailerDecorator;
     }
 
     public function getPackPrice($slug): array
@@ -63,6 +66,15 @@ class MusoraApiProductProvider implements ProductProviderInterface
      */
     public function carousel()
     {
-        return $this->carouselService->getCarouselSlides();
+        $slides =  $this->carouselService->getCarouselSlides();
+
+        foreach ($slides as $slide){
+            if($slide['video_src'] && ($slide['is_enrolled'] != true)){
+                $vimeoId =  (int) substr(parse_url($slide['video_src'], PHP_URL_PATH), 7);
+                $slide['trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId);
+            }
+        }
+
+        return $slides;
     }
 }
