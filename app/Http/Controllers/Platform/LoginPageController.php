@@ -9,8 +9,6 @@ class LoginPageController extends BaseController
 {
     public function show(Request $request)
     {
-        dd(config('app.env') );  // todo: to be deleted
-
         if (!empty(user())) {
             return redirect()->route('platform.home-redirect');
         }
