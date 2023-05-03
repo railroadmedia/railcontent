@@ -1,9 +1,13 @@
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=0e4e60f977e7545d2333a4794fff8481",
 =======
     "/platform/js/app.js": "/platform/js/app.js?id=f1208a9992bd6b6786e7a10c9ee32c66",
 >>>>>>> project-cohort-optimizations
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=790ba8c295134e170a522ef94b1ec181",
+>>>>>>> feature-carousel-v2
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
@@ -38,6 +42,6 @@
     "/platform/css/app.css": "/platform/css/app.css?id=26bcab35f03bf6107f8b14677737b72e",
 >>>>>>> project-cohort-optimizations
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=95b61f73a67fc65546a81e742dda8905",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=ad7ad5755fe5bd401c2dde1cfb3b24cc",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=d3007ca3c26f0d652a1447533424a0a5",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=49f0817b99cd1af9df9cbd7fcee415f7"
 }
