@@ -115,7 +115,15 @@ class MusoraApiProductProvider implements ProductProviderInterface
             $initialBypassPermissions = ContentRepository::$bypassPermissions;
             ContentRepository::$bypassPermissions = true;
             $content = $this->contentService->getById($cohort['content_id']);
-            $cohort['content_type'] = $content['type'];
+            if ($content) {
+                $cohort['content'] = [
+                    'page_type' => 'PackOverview',
+                    'page_params' => [
+                        'id' => $cohort['content_id'],
+                        'type' => (($content['bundle_count'] ?? 0) > 1) ? 'Bundles' : 'Lesson',
+                    ],
+                ];
+            }
             ContentRepository::$bypassPermissions  =$initialBypassPermissions;
         }
 
