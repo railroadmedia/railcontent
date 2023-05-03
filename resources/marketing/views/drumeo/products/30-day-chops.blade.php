@@ -373,15 +373,11 @@
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
                             </div>
-                            <img class="-mt-7 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
+                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
                         </div>
                     @else
                         <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-0 @if($key !== 4) md:mb-28 @endif">
-                            @if(empty($getting['special']))
-                                <img class="-mt-7 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
-                            @else
-                                <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
-                            @endif
+                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
