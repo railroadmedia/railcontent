@@ -13,6 +13,8 @@ use App\Services\PackService;
 use Carbon\Carbon;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
+use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Services\ContentService;
 
 class MusoraApiProductProvider implements ProductProviderInterface
 {
@@ -22,6 +24,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
     private CohortService $cohortService;
     private PackService $packService;
     private VimeoTrailerDecorator $vimeoTrailerDecorator;
+    private ContentService $contentService;
 
     public function __construct(
         CarouselService $carouselService,
@@ -29,7 +32,8 @@ class MusoraApiProductProvider implements ProductProviderInterface
         ProductRepository $productRepository,
         CohortService $cohortService,
         PackService $packService,
-        VimeoTrailerDecorator $vimeoTrailerDecorator
+        VimeoTrailerDecorator $vimeoTrailerDecorator,
+        ContentService $contentService
     ) {
         $this->carouselService = $carouselService;
         $this->userProductService = $userProductService;
@@ -37,6 +41,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
         $this->cohortService = $cohortService;
         $this->packService = $packService;
         $this->vimeoTrailerDecorator = $vimeoTrailerDecorator;
+        $this->contentService = $contentService;
     }
 
     public function getPackPrice($slug)
@@ -106,6 +111,14 @@ class MusoraApiProductProvider implements ProductProviderInterface
             $vimeoId =  (int) substr(parse_url($cohort['cohort_trailer'], PHP_URL_PATH), 7);
             $cohort['trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId);
         }
+        if($cohort['content_id']){
+            $initialBypassPermissions = ContentRepository::$bypassPermissions;
+            ContentRepository::$bypassPermissions = true;
+            $content = $this->contentService->getById($cohort['content_id']);
+            $cohort['content_type'] = $content['type'];
+            ContentRepository::$bypassPermissions  =$initialBypassPermissions;
+        }
+
         $product = $this->productRepository->findProduct($cohort['product_id']);
         $hasProduct = user() && $this->userProductService->hasProductNotCached(user()?->id, $cohort['product_id']);
         $nPackOwners = $this->userProductService->getNumberProductOwners($cohort['product_id']);
