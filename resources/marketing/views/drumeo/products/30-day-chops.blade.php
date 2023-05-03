@@ -708,7 +708,7 @@
                             <p class="border border-drumeo text-drumeo inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">EARLY BIRD BUNDLE</p>
                             <h3><strong>30-Day Chops</strong></h3>
                             <p class="text-sm mt-2 mb-5">Improve your drum chops in 30 days. </p>
-                            <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
+                            <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>
                             <div class="join blue smaller my-4 w-full">ENROLL NOW</div>
                             <ul class="list-disc ml-6">
                                 <li class="text-sm relaxed"><span class="text-drumeo">Free</span> QuietPad Practice Pad</li>
