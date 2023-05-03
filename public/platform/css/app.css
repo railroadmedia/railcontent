@@ -22177,6 +22177,9 @@ a:visited{
 .tw-h-\[14px\]{
   height: 14px !important;
 }
+.tw-h-\[22px\]{
+  height: 22px !important;
+}
 .tw-h-\[90px\]{
   height: 90px !important;
 }
@@ -22206,9 +22209,6 @@ a:visited{
 }
 .tw-h-12{
   height: 3rem !important;
-}
-.tw-h-\[22px\]{
-  height: 22px !important;
 }
 .tw-h-\[128px\]{
   height: 128px !important;
@@ -22496,6 +22496,9 @@ a:visited{
 .tw-w-\[14px\]{
   width: 14px !important;
 }
+.tw-w-\[22px\]{
+  width: 22px !important;
+}
 .tw-w-\[162px\]{
   width: 162px !important;
 }
@@ -22525,9 +22528,6 @@ a:visited{
 }
 .tw-w-12{
   width: 3rem !important;
-}
-.tw-w-\[22px\]{
-  width: 22px !important;
 }
 .tw-w-\[55px\]{
   width: 55px !important;
