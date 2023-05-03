@@ -211,13 +211,6 @@
                 "price" => floatval($productPrices['30-day-drummer-2']->discounted_price),
                 "noBreadcrumb" => true
             ])
-    @php
-        if (is_current_user_a_member()) {
-            $registerButtonUrl = 'https://www.musora.com/drumeo/enrollment/30-day-chops';
-        } else {
-            $registerButtonUrl = "#final";
-        }
-    @endphp
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
         <div class="container max-w-5xl mx-auto">
@@ -263,28 +256,15 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Play complex<br> patterns</p>
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Boost your<br> creativity</p>
                     </div>
-                    @if(session()->has('success-message'))
-                        <p class="mb-3 lg:-mb-7 mt-3 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Chops.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-                    @endif
-
-                    @if(!$hasProduct && is_current_user_a_member())
-                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-drumeo text-left"><strong>You are a Drumeo member! <br>Enroll for free by clicking on the button below.</strong></p>
-                    @endif
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
 {{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-                            @if($hasProduct)
-                                <a class="join sold-out medium w-full">YOU'RE ENROLLED!</a>
-                            @else
-                                <a href="{{ $registerButtonUrl }}" class="join blue medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>
-                            @endif
+                                <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
 
-                            @if(!auth()->check())
                                 <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
                                     <a href="https://www.musora.com/drumeo/enrollment/30-day-chops">Drumeo Members register for free here.</a>
                                 </p>
-                            @endif
                         </div>
                         <div class="w-full sm:w-1/2 pt-4 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/drummers.png" alt="joined student profiles">
@@ -443,17 +423,9 @@
                     <i class="fas fa-check text-drumeo mr-5"></i> Ongoing motivation & support<br>
                     <i class="fas fa-check text-drumeo mr-5"></i> Guaranteed results</h4>
             </div>
-            @if(session()->has('success-message'))
-                <p class="-mb-2 sm:-mb-8 mt-5 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Chops.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-            @endif
 {{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>--}}
-            @if($hasProduct)
-                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
-            @else
-                <a
-                    href="{{ $registerButtonUrl }}"
-                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
-            @endif
+            <a href="#final"
+                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
             <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/drummers.png" alt="joined student profiles">
             <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
 
@@ -544,11 +516,7 @@
                     </tr>
                     <tr>
                         <td>Investment</td>
-                        @if(is_current_user_a_member())
-                            <td class="rounded-b-xl"><strong>FREE</strong><br> for Drumeo<br class="inline lg:hidden"> Members</td>
-                        @else
-                            <td class="rounded-b-xl"><strong>${{ floatval($productPrices['30-day-drummer-2']->discounted_price) }}</strong></td>
-                        @endif
+                        <td class="rounded-b-xl"><strong>${{ floatval($productPrices['30-day-drummer-2']->discounted_price) }}</strong></td>
                         <td class="rounded-bl-xl"><strong>$30-$100</strong><br> per lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
                         <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
@@ -691,18 +659,12 @@
 {{--            </div>--}}
 
 
-        @if(session()->has('success-message'))
-                <p class="-mb-2 sm:-mb-8 mt-5 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Chops.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-            @endif
 {{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>--}}
 
-            @if($hasProduct)
-                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
-            @else
                 <a
-                    href="{{ $registerButtonUrl }}"
-                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
-            @endif
+                    href="#final"
+                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+
             <img class="h-7 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/drummers.png" alt="joined student profiles">
             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
         </div>
@@ -805,13 +767,11 @@
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h2><strong>Still have questions?</strong></h2>
             <div class="max-w-6xl mt-4 sm:mt-10 px-4">
-                @if(is_current_user_a_member())
-                    @include('_partials.components.question-dropdown', [
-                    "num" => "?",
-                    "title" => "Why do I need to register if I get it for free as a member?",
-                    "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",
-                    ])
-                @endif
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Why do I need to register if I get it for free as a member?",
+                "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",
+                ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "Do I need to attend the lessons live?",
                 "desc" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are totally optional, and they’ll also include a recording that you can watch or re-watch anytime.",
