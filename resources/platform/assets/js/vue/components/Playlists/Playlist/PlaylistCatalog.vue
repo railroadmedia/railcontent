@@ -1,5 +1,6 @@
 <script setup>
     import { onBeforeMount, onMounted, watch, inject, ref, reactive, computed } from 'vue';
+    import { VueDraggableNext } from 'vue-draggable-next';
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
     import PlaylistCard from './PlaylistCard.vue';
@@ -52,6 +53,7 @@
 
     //-----------Reactive Data-----------//
     const state = reactive({
+        initialLessonsArray: [],
         startID: 0,
         startPosition: 0,
         endPosition: 0,
@@ -60,8 +62,6 @@
     })
 
     //-----------Static Data-----------//
-
-    let initialLessonsArray = [];
     const scrollContainer = document.querySelector('#content-container');
 
     //-------------Methods-------------//
@@ -77,29 +77,27 @@
             }, token)
         });
         //Update initial array
-        initialLessonsArray = [...playlistsStore.lessons];
+        state.initialLessonsArray = [...playlistsStore.lessons];
         //show success message
         window.shownotification({
             icon: 'fa-pen-to-square',
             text: `You have successfully re-ordered your playlist items`
         })
     }
+    //Cancel Sort
     const handleCancelSort = () => {
+        console.log('handle cancel sort')
         //Update array to initial order
-        playlistsStore.lessons = [...initialLessonsArray];
+        state.initialLessonsArray = playlistsStore.lessons;
         playlistsStore.sortingPlaylist = false;
     }
+
+    
     const handleDragStart = (event, position, id) => {
         if(playlistsStore.sortingPlaylist) {
             //save start position
             state.startID = id;
             state.startPosition = position;
-        }
-    }
-    const handleTouchMove = (event) => {
-        if(playlistsStore.sortingPlaylist) {
-            event.targetTouches[0].target.classList.add('tw-border-b');
-
         }
     }
     const handleDragOver = (event) => {
@@ -194,8 +192,15 @@
 
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
-        initialLessonsArray = props.lessons.data;
+        state.initialLessonsArray = [...props.lessons.data];
     });
+</script>
+<script>
+    export default {
+        components: {
+            draggable: VueDraggableNext,
+        },
+    };
 </script>
 <template>
     <main class="tw-w-full ">
@@ -244,25 +249,28 @@
                         <section v-if="playlistsStore.lessons.length"
                                 class="tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-col"
                         >
-                            <!-- Print Each Card -->
-                            <playlist-card
-                                v-for="(lesson,i) in playlistsStore.lessons"
-                                :key="i"
-                                :index="i"
-                                :lesson="lesson"
-                                :token="token"
-                                :brand="brand"
-                                :draggable="playlistsStore.sortingPlaylist"
-                                @dragstart="handleDragStart($event, i, lesson.user_playlist_item_id)"
-                                @touchstart="handleDragStart($event, i, lesson.user_playlist_item_id)"
-                                @dragover.prevent="handleDragOver($event)"
-                                @touchmove="handleTouchMove($event)"
-                                @dragleave="handleDragLeave($event)"
-                                @touchleave="handleDragLeave($event)"
-                                @dragend="handleDragEnd"
-                                @drop="handleDrop($event, i)"
-                                @touchend="handleDrop($event, i)"
-                            />
+                            <draggable 
+                                class="list-group"
+                                :v-model="state.initialLessonsArray" 
+                                :dragoverBubble="playlistsStore.sortingPlaylist" 
+                                :sort="playlistsStore.sortingPlaylist"
+                                :animation="0"
+                                ghostClass="ghost"
+                            >
+                                <transition-group type="transition" name="flip-list">
+                                    <!-- Print Each Card -->
+                                    <playlist-card
+                                        v-for="(lesson,i) in state.initialLessonsArray"
+                                        class="list-group-item"
+                                        :key="i"
+                                        :index="i"
+                                        :lesson="lesson"
+                                        :token="token"
+                                        :brand="brand"
+                                    />
+                                </transition-group>
+                            </draggable>
+
                             <!-- Skeleton Loader For Infinite Scroll -->
                             <div v-if="playlistsStore.loadingLessons && infiniteScroll"
                                 class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
@@ -292,3 +300,25 @@
 
     </main>
 </template>
+
+<style>
+.flip-list-move {
+  transition: transform 0.5s;
+}
+.no-move {
+  transition: transform 0s;
+}
+.ghost {
+  opacity: 0.5;
+  background: #c8ebfb;
+}
+.list-group {
+  min-height: 20px;
+}
+.list-group-item {
+  cursor: move;
+}
+.list-group-item i {
+  cursor: pointer;
+}
+</style>
