@@ -1,7 +1,7 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>Cohort Template | Musora</title>
+    <title>Cohort Enrollment | Musora</title>
 @endsection
 
 @section('styles')
