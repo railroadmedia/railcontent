@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.269.4",
+            "version": "3.269.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1f9661f019cb4173e527f0c30fdd6efe190a413e"
+                "reference": "343f7088f246d4667172e69d5f2bf440496bb708"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1f9661f019cb4173e527f0c30fdd6efe190a413e",
-                "reference": "1f9661f019cb4173e527f0c30fdd6efe190a413e",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/343f7088f246d4667172e69d5f2bf440496bb708",
+                "reference": "343f7088f246d4667172e69d5f2bf440496bb708",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.269.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.269.6"
             },
-            "time": "2023-05-02T18:22:12+00:00"
+            "time": "2023-05-04T18:22:48+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4617,17 +4617,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.23.0",
+            "version": "4.24.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "6a14d83663f0484889a7f73ffaed7262bba7a26a"
+                "reference": "3eb93de325760bdc232814c978521d2444097221"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-6a14d83663f0484889a7f73ffaed7262bba7a26a-zip-1df780.zip",
-                "reference": "6a14d83663f0484889a7f73ffaed7262bba7a26a",
-                "shasum": "fd7c3f363f0a6f28c7aaac5cf5ea06193d8be9aa"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-3eb93de325760bdc232814c978521d2444097221-zip-0a31af.zip",
+                "reference": "3eb93de325760bdc232814c978521d2444097221",
+                "shasum": "f6315b4d009ad86db447934efb69637d1b18ff2a"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0|^0.8.0",
@@ -4652,7 +4652,7 @@
                 "mockery/mockery": "^1.4.4",
                 "nunomaduro/larastan": "^1.0.1|^2.5.1",
                 "orchestra/testbench-dusk": "^6.24|^7.21|^8.0",
-                "phpunit/phpunit": "^9.6|^10.0",
+                "phpunit/phpunit": "^9.6|^10.1",
                 "predis/predis": "^1.1.9|^2.0"
             },
             "suggest": {
@@ -4720,9 +4720,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.23.0"
+                "source": "https://github.com/laravel/nova/tree/v4.24.0"
             },
-            "time": "2023-04-07T18:14:13+00:00"
+            "time": "2023-05-04T17:25:48+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -6635,20 +6635,20 @@
         },
         {
             "name": "nova-kit/nova-packages-tool",
-            "version": "v1.8.0",
+            "version": "v1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nova-kit/nova-packages-tool.git",
-                "reference": "a7ba9b0db31ea22d30a405a7dd8999128896e0c1"
+                "reference": "ccd6f998c10b0413f27eda9b01b08ebe5b8a6111"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/a7ba9b0db31ea22d30a405a7dd8999128896e0c1",
-                "reference": "a7ba9b0db31ea22d30a405a7dd8999128896e0c1",
+                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/ccd6f998c10b0413f27eda9b01b08ebe5b8a6111",
+                "reference": "ccd6f998c10b0413f27eda9b01b08ebe5b8a6111",
                 "shasum": ""
             },
             "require": {
-                "laravel/nova": ">=4.23.0 <4.24.0",
+                "laravel/nova": ">=4.24.0 <4.25.0",
                 "php": "^7.3 || ^8.0"
             },
             "require-dev": {
@@ -6679,9 +6679,9 @@
             ],
             "description": "Tool for Laravel Nova Packages Development",
             "support": {
-                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.8.0"
+                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.9.0"
             },
-            "time": "2023-04-07T22:37:10+00:00"
+            "time": "2023-05-04T22:15:24+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -8163,12 +8163,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "624ab4528acb22bdc3ba14acf86a373c9d2f5b0a"
+                "reference": "a649c33dca18f9efbf582a8b9e402ddf3a42baa5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/624ab4528acb22bdc3ba14acf86a373c9d2f5b0a",
-                "reference": "624ab4528acb22bdc3ba14acf86a373c9d2f5b0a",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/a649c33dca18f9efbf582a8b9e402ddf3a42baa5",
+                "reference": "a649c33dca18f9efbf582a8b9e402ddf3a42baa5",
                 "shasum": ""
             },
             "require": {
@@ -8207,7 +8207,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-no-extra-days-for-trials-BR-662"
             },
-            "time": "2023-04-03T12:43:09+00:00"
+            "time": "2023-05-05T10:00:35+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -9979,16 +9979,16 @@
         },
         {
             "name": "spatie/laravel-markdown",
-            "version": "2.3.0",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-markdown.git",
-                "reference": "066cdc0828a4d549e6913b4d84dd9c5726a0e7f9"
+                "reference": "1cdde7aafd638c6df2ee12868635399968035b08"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-markdown/zipball/066cdc0828a4d549e6913b4d84dd9c5726a0e7f9",
-                "reference": "066cdc0828a4d549e6913b4d84dd9c5726a0e7f9",
+                "url": "https://api.github.com/repos/spatie/laravel-markdown/zipball/1cdde7aafd638c6df2ee12868635399968035b08",
+                "reference": "1cdde7aafd638c6df2ee12868635399968035b08",
                 "shasum": ""
             },
             "require": {
@@ -10043,7 +10043,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-markdown/tree/2.3.0"
+                "source": "https://github.com/spatie/laravel-markdown/tree/2.3.1"
             },
             "funding": [
                 {
@@ -10051,7 +10051,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-03T09:01:23+00:00"
+            "time": "2023-05-05T08:09:13+00:00"
         },
         {
             "name": "spatie/laravel-package-tools",
