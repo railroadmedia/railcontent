@@ -11,7 +11,10 @@
 @section('content')
     {{-- Playlist Breadcrumb --}}
     <playlist-breadcrumb
-        home-url="{{ '/' . $brand . '/playlists' }}" last-level-title="{{ $playlist['name'] }}"
+        brand="{{ $brand }}"
+        first-level-url="/{{ $brand }}/playlists" 
+        first-level-title="Playlists"
+        last-level-title="{{ $playlist['name'] }}"
     >
     </playlist-breadcrumb>
 

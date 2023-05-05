@@ -195,7 +195,7 @@ onBeforeMount(() => {
             state.isFullTrack = false;
         }
     }
-
+    
 });
 </script>
 <template>

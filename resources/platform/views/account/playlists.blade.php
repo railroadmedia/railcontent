@@ -6,6 +6,13 @@
 
 @section('content')
 
+    <playlist-breadcrumb
+        brand="{{ $brand }}"
+        last-level-url="/{{ $brand }}/playlists" 
+        last-level-title="Playlists"
+    >
+    </playlist-breadcrumb>
+
     {{-- Playlist Header --}}
     <playlist-collection-header
         brand="{{ $brand }}"
