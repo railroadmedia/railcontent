@@ -17,14 +17,14 @@
 @endif
 
 <form id="{{$cleanFormId}}"
-      accept-charset="UTF-8" action="{{ url()->route('customer-io.submit-email-form') }}"
+      accept-charset="UTF-8" action="{{ url()->route('customer-io.submit-email-form-rc') }}"
       class="@if(empty($redirectURL)) ajax-form @endif clearfix infusion-form facebook-track-lead mx-auto" method="POST"
       onsubmit="emailSignUpConversionTrackerForImpactProvider()">
 
     @if(!empty($formName))
         {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(
             $formName,
-            route('customer-io.submit-email-form', [], false),
+            route('customer-io.submit-email-form-rc', [], false),
             'post',
             null,
             null,
