@@ -82,10 +82,12 @@
         //Update each item in temp array
         lessonsCopy.value.forEach(lesson => {
             //Then send update item request
-            PlaylistService.updatePlaylistItem({
-                user_playlist_item_id: lesson.id,
-                position: lesson.user_playlist_item_position
-            }, token)
+            if (lesson.hasChanged) {
+                PlaylistService.updatePlaylistItem({
+                    user_playlist_item_id: lesson.id,
+                    position: lesson.user_playlist_item_position
+                }, token)
+            }
         });
 
         //Update store and computed array
@@ -117,6 +119,7 @@
         const newUserItemPosition = newObj.user_playlist_item_position;
         oldObj.user_playlist_item_position = newUserItemPosition;
         newObj.user_playlist_item_position = oldUserItemPosition;
+        newObj.hasChanged = true;
 
         lessonsCopy.value[e.oldIndex] = newObj;
         lessonsCopy.value[e.newIndex] = oldObj;
