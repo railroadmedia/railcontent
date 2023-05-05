@@ -52,7 +52,7 @@
                         <p class="description">{!! $cardDescription  !!}</p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p><strong>{{  floatVal($specialPrice)  }}</strong><br><br></p>
+                        <p><strong class="text-promo">{{  $specialPrice  }}</strong><br><br></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <p class="price"><s>${{ floatVal($fullPrice) }}</s> <strong class="text-promo">
                                 @if(number_format($price, 2) == intval($price))
