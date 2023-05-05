@@ -542,7 +542,7 @@
             "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
             "songs" => "5000",
             "firstPoint" => "The world’s best drum lessons.",
-            "thirdPoint" => "Unlimited personal support",
+            "thirdPoint" => "Unlimited personal support.",
             "fifthPoint" => "Lesson access for piano, guitar, and singing.",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
             "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
