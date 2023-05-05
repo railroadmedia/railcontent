@@ -22,7 +22,7 @@
                     ">
                       <div class="tw-flex tw-justify-between tw-items-center tw-text-sm">
                         <div class="tw-flex tw-items-center">
-                          <musora-icon v-if="SVGIcon.length" :icon-name="SVGIcon" class="tw-w-[24px] tw-mr-2 tw-inline-flex" />
+                          <musora-icon v-if="SVGIcon.length" width="24" height="24" viewBox="0 0 24 24" :icon-name="SVGIcon" class="tw-w-[24px] tw-h-[24px] tw-mr-2 tw-inline-flex" />
                           <i v-else class="fas tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
                           <span class="tw-font-bold tw-text-sm">{{ notificationText }}</span>
                         </div>
@@ -42,6 +42,13 @@
 
 <script>
 import MusoraIcon from '../../../../vue/components/MusoraIcons/MusoraIcon.vue'
+
+const iconAllowList = {
+  playlist: true,
+  shuffle: true,
+  repeat: true,
+};
+
 export default {
   name: "NotificationToasts",
   props: {
@@ -105,7 +112,7 @@ export default {
     },
     icon(val) {
       //Check if it's a Musora Icon
-       if (val === 'playlist') {
+      if (iconAllowList[val]) {
         this.SVGIcon = val;
       } else {
         this.SVGIcon = '';

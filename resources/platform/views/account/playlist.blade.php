@@ -1,10 +1,19 @@
 @extends('partials.layout')
-
+@php
+    //dd($playlist['name']);
+    //dd(get_defined_vars()['__data']);
+    //dd($brand . '/playlists')
+@endphp
 @section('meta')
     <title>Playlists | Musora</title>
 @endsection
 
 @section('content')
+    {{-- Playlist Breadcrumb --}}
+    <playlist-breadcrumb
+        home-url="{{ '/' . $brand . '/playlists' }}" last-level-title="{{ $playlist['name'] }}"
+    >
+    </playlist-breadcrumb>
 
     {{-- Playlist Header --}}
     <playlist-header
