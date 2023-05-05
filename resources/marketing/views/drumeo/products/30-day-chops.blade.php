@@ -4,8 +4,8 @@
     @parent
     <title>30-Day Chops | Drumeo</title>
     <meta property="og:title" content="30-Day Chops | Drumeo">
-    <meta name="description" content="Improve your chops in just 30-days.">
-    <meta property="og:description" content="Improve your chops in just 30-days.">
+    <meta name="description" content="Learn drum chops in just 30-days.">
+    <meta property="og:description" content="Learn drum chops in just 30-days.">
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
@@ -218,25 +218,25 @@
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/logo.svg" alt="logo">
                     <h1 class="rotater-text overflow-hidden"><strong>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Play complex patterns</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Play complex patterns</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Play complex patterns</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Play complex patterns</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Play complex patterns</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">in just 30 days.</h2>
 
@@ -248,13 +248,13 @@
                     </div>
 
                     <p class="hidden lg:inline">
-                        <i class="fas fa-check text-drumeo"></i> Improve your chops
-                        <i class="ml-2 fas fa-check text-drumeo"></i> Play complex patterns
-                        <i class="ml-2 fas fa-check text-drumeo"></i> Boost your creativity</p>
+                        <i class="fas fa-check text-drumeo"></i> Learn by doing
+                        <i class="ml-2 fas fa-check text-drumeo"></i> Play every day
+                        <i class="ml-2 fas fa-check text-drumeo"></i> Guaranteed results</p>
                     <div class="flex inline lg:hidden">
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Improve your<br> chops</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Play complex<br> patterns</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Boost your<br> creativity</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Learn by  <br> doing</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Play every  <br> day</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Guaranteed <br> results</p>
                     </div>
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
@@ -320,14 +320,21 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
             <img class="h-56 inline sm:hidden lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image2.png" alt="collage intro mobile">
-            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Unlock your creativity<br class="hidden sm:inline"> and speed around the drums.</strong></h2>
-            <div class="text-left flex flex-wrap sm:flex-nowrap items-center mb-12 sm:mb-18 lg:mb-24">
-                <h6 class="leading-normal max-w-lg sm:pr-4 lg:pr-7">Learning the drums is hard enough. Knowing what to practice shouldn’t be.
+            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Unlock your speed<br class="hidden sm:inline"> & creativity around the drums.</strong></h2>
+            <div class="text-left flex flex-wrap sm:flex-nowrap mb-16 sm:mb-24">
+                <p class="leading-normal max-w-xl sm:pr-4">Drum chops–
                     <br><br>
-                    30-Day Chops is a new style of learning where you’ll play along with your instructor every day – no thinking required. Just press play and hit every note with Zack.
+                    Everybody wants them, but nobody knows exactly what they are… until now.
                     <br><br>
-                    At the end of each week, you’ll have a chance to ask your questions in an exclusive LIVE lesson. It’s like getting the best of private & online lessons in one.</h6>
-                <img class="h-72 lg:h-96 hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image2.png" alt="collage intro">
+                    30-Day Chops is the first-ever course that teaches you tasty linear drum chops one note at a time. You’ll play along with Zack Graybeal (aka “ZackGrooves”) every day for thirty days until you’re playing blistering groove & fill chops like your favorite drummers.
+                    <br><br>
+                    Plus, you’ll have a live lesson every Saturday to ask questions and get yourself “unstuck.”
+                    <br><br>
+                    By the end of the month, you’ll have 60+ new chops in your bag and the skills to start creating your own patterns around the kit.
+                    <br><br>
+                    Scroll down to save your seat in the first-ever class, June 5th - July 5th.
+                </p>
+                <img class="h-64 lg:h-80 hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image2.png" alt="collage intro">
             </div>
 
             @php
@@ -336,32 +343,32 @@
                     [
                     'position' => 'left',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/never-feel-lost.jpg',
-                    'title' => 'Never feel lost.',
-                    'desc' => 'Knowing what and how to practice is half the battle of getting better. But you’ll never have to worry, because all the lessons ARE your practice sessions. Every day just press play and follow along.',
+                    'title' => 'Know exactly what to practice. ',
+                    'desc' => 'The biggest mystery to learning chops has been knowing WHAT to practice. 30-Day Chops is foolproof because the lessons ARE your practice. You’ll play along each day with Zack – just do what he does! ',
                     ],
                     [
                     'position' => 'right',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/stop-wasting-time.jpg',
-                    'title' => 'Stop wasting time.',
-                    'desc' => 'It’s precious, so don’t waste it. Each lesson is only 10 minutes and there’s a handy countdown timer so you can stay focused and get more results in a shorter time.',
+                    'title' => 'Fits any schedule. ',
+                    'desc' => 'We know how it is trying to cram your drum practice in between work, school, and family. 30-Day Chops fits any schedule because you only need 10-minutes per day to learn tasty chops. You’ll even find you practice more by sticking to the process!',
                     ],
                     [
                     'position' => 'left',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/practice-thats-actually.jpg',
-                    'title' => 'Practice that’s actually fun.',
-                    'desc' => 'You won’t be playing the same boring exercises over and over. From day one, you’ll be applying chops to REAL music – and slowly building patterns over the 30 days. ',
+                    'title' => 'Play with real music.',
+                    'desc' => 'No more painfully dry exercises set to MIDI playalongs. 30-Day Chops includes custom-made music by acclaimed drum composer, Kaz Rodriguez. He’s crafted the perfect song for you to chop out with!',
                     ],
                     [
                     'position' => 'right',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/live-support.jpg',
                     'title' => 'Live support from REAL teachers.',
-                    'desc' => 'Each week you’ll have a 60-minute live lesson with Zack. Ask questions, get feedback, and connect with other students. You’re never alone.',
+                    'desc' => 'Each week you’ll have a 60-minute live lesson with Zack. Ask questions, get feedback, and connect with other students. Grab a cup of coffee and hang with your drum teacher? Yes please. ',
                     ],
                     [
                     'position' => 'left',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/lifetime-access.jpg',
                     'title' => 'Lifetime access.',
-                    'desc' => '30-Day Chops is yours for life. Even though we’ll be going through the course as a community, you’ll keep access to ALL the lessons forever. So you can return to your favorite workouts over and over.',
+                    'desc' => 'You can return to your favorite chops over and over with lifetime access. That means you can access ALL playalongs, charts, and lessons for as long as you like. And it helps if you have trouble keeping up with the class!',
                     ],
                 ];
 //            @endphp
@@ -396,14 +403,17 @@
                 This is your chance to keep your playing on the cutting edge by immersing yourself in the world of chops for 30 days. Below are three drummers who exemplify this style of playing – click the buttons to see short examples of each playing linear chops.</h6>
 
             <div class="flex flex-wrap max-w-xs sm:max-w-full mx-auto">
-                <div class="w-full sm:w-1/3 px-2 mb-4 sm:mb-0">
-                    <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=760,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/aaron-spears-chops.jpg">
+                <div class="relative w-full sm:w-1/3 px-2 mb-4 sm:mb-0 cursor-hover autoplay-video" data-open="aaron">
+                    <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-20"></i>
+                    <img class="rounded-xl relative z-10" src="https://i.vimeocdn.com/video/1665544113-6ae072e9d0652bdfcd726f650d7208211eaec7245bead7abc8a44032fcc7993d-d_560">
                 </div>
-                <div class="w-full sm:w-1/3 px-2 mb-4 sm:mb-0">
-                    <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=760,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/anika-nilles-chops.jpg">
+                <div class="relative w-full sm:w-1/3 px-2 mb-4 sm:mb-0 cursor-hover autoplay-video" data-open="anika">
+                    <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-20"></i>
+                    <img class="rounded-xl relative z-10" src="https://i.vimeocdn.com/video/1665543766-0b53f480e98b9420f71219fe5ef7729f238a9f69f56e1e56cbc84e703930e96d-d_560">
                 </div>
-                <div class="w-full sm:w-1/3 px-2">
-                    <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=760,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/estepario-chops.jpg">
+                <div class="relative w-full sm:w-1/3 px-2 cursor-hover autoplay-video" data-open="larnell">
+                    <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-20"></i>
+                    <img class="rounded-xl relative z-10" src="https://i.vimeocdn.com/video/1665537466-98255352b2fe7e092811c665a39a7272ce9a23721135bc8907ae4c9afbdf5aa1-d_560">
                 </div>
             </div>
         </div>
@@ -703,7 +713,7 @@
                             class="z-10 relative px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-lg w-full sm:w-5/12">
                             <p class="border border-drumeo text-drumeo inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">EARLY BIRD BUNDLE</p>
                             <h3><strong>30-Day Chops</strong></h3>
-                            <p class="text-sm mt-2 mb-5">Improve your drum chops in 30 days. </p>
+                            <p class="text-sm mt-2 mb-5">Learn drum chops in 30 days. </p>
                             <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>
                             <div class="join blue smaller my-4 w-full">ENROLL NOW</div>
                             <ul class="list-disc ml-6">
@@ -813,6 +823,21 @@
         'modalId' => "trailer",
         "video" => '//player.vimeo.com/video/796456383?autoplay=1',
         "title" => 'trailer'
+    ])
+    @include('drumeo.sales.partials._video-modal',[
+        'modalId' => "aaron",
+        "video" => '//player.vimeo.com/video/823878266?h=c6a0279ff5&autoplay=1',
+        "title" => 'aaron'
+    ])
+    @include('drumeo.sales.partials._video-modal',[
+        'modalId' => "anika",
+        "video" => '//player.vimeo.com/video/823878240?h=9d697640d7&autoplay=1',
+        "title" => 'anika'
+    ])
+    @include('drumeo.sales.partials._video-modal',[
+        'modalId' => "larnell",
+        "video" => '//player.vimeo.com/video/823878300?h=dec74dc718&autoplay=1',
+        "title" => 'larnell'
     ])
 
     @include('_partials.components.countdown',[
