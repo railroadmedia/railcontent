@@ -95,7 +95,25 @@ class MusoraApiUserProvider implements UserProviderInterface
             $isGoogleAppSubscriber = $membershipSubscription->getType() == Subscription::TYPE_GOOGLE_SUBSCRIPTION;
         }
 
+        try {
+            $customerIoData = $this->customerIoService->getCustomerByUserId(
+                config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
+                $user->id
+            );
+        } catch (ModelNotFoundException $exception) {
+            $customerIoData = null;
+        }
+
+        $user['cio_id'] = null;
+        $user['customer_io_id'] = null;
+
+        if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
+            $user['cio_id'] = $externalAttributes['cio_id'];
+            $user['customer_io_id'] = $externalAttributes['id'];
+        }
+
         return [
+            'user' => $user,
             'isEdge' => $user->isAMember(),
             'isEdgeExpired' => $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,
