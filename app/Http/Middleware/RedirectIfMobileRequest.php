@@ -102,6 +102,11 @@ class RedirectIfMobileRequest
                     'brand' => $brand,
                     'id' => last(request()->segments()),
                 ]);
+            }elseif($request->routeIs('platform.cohort')){
+                $route = route('v1.mobile.musora-api.cohort.template', [
+                    'brand' => $brand,
+                    'slug' => last(request()->segments()),
+                ]);
             }
 
             if ($route) {
