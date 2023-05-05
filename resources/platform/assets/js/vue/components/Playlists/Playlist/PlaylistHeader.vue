@@ -193,7 +193,7 @@
                         </p>
                     </div>
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
-                        <h1 class="tw-capitalize tw-leading-none tw-font-bold tw-mb-2">{{ playlistsStore.activePlaylist.name }}</h1>
+                        <h1 class="tw-capitalize tw-leading-tight tw-font-bold tw-mb-2 lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2" v-html="playlistsStore.activePlaylist.description"></p>
                     </div>
                     <!-- Go to Playback -->

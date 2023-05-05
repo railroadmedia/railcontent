@@ -196,6 +196,7 @@ onBeforeMount(() => {
         }
     }
 
+    console.log(lessonDateParsed, lessonDateParsed < dateNow)
 });
 </script>
 <template>
