@@ -186,7 +186,7 @@ onMounted(() => {
         <div class="tw-flex tw-flex-col dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-py-[17px] tw-px-[10px]">
             <div class="tw-flex">
                 <a :href="playlistUrl"
-                    class="tw-inline-flex tw-mr-auto tw-pb-1 tw-large tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent hover:tw-border-current">
+                    class="tw-inline-flex tw-mr-auto tw-pb-1 tw-large tw-leading-tight tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent hover:tw-border-current">
                     {{ playlistName }}
                 </a>
                 <button class="tw-px-1 lg:tw-hidden" :title="state.collapsed ? 'Show Playback Cue' : 'Hide Playback Cue'"

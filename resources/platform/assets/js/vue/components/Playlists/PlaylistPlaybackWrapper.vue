@@ -234,7 +234,15 @@ onBeforeMount(() => {
 <template>
     <div class="tw-w-full tw-h-full">
         <!-- Breadcrumbs -->
-        <Breadcrumb :homeUrl="homeUrl" :secondLevelUrl="secondLevelUrl" :secondLevelTitle="playlistName" :lastLevelTitle="playlistItemTitle" />
+        <Breadcrumb 
+            :brand="brand" 
+            :first-level-url="`/${brand}/playlists`" 
+            first-level-title="Playlists"
+            :secondLevelUrl="secondLevelUrl" 
+            :secondLevelTitle="playlistName" 
+            :lastLevelTitle="playlistItemTitle" 
+        />
+
         <div
             class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row tw-mb-4">
             <div class="tw-flex tw-flex-col tw-w-full">
