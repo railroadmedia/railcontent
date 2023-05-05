@@ -58,7 +58,7 @@
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
                         <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
                         <p class="text-sm mb-1"><strong>{{ $songs }}+ popular songs.</strong></p>
-                        <p class="text-sm mb-1"><strong>{{ $thirdPoint }}.</strong></p>
+                        <p class="text-sm mb-1"><strong>{{ $thirdPoint }}</strong></p>
                         <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
                         <p class="text-sm mb-1">{{ $fifthPoint }}</p>
                         <p class="text-sm">90-day money back guarantee.</p>
