@@ -549,7 +549,7 @@
             "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
             "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
             "songs" => "1000",
-            "firstPoint" => "Unlimited piano lessons",
+            "firstPoint" => "Unlimited piano lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, guitar, and drums.",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",

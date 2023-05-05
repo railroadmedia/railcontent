@@ -149,15 +149,15 @@ img {
     &.smaller {
         border-width: 2px;
         font-size: 24px;
-        padding: 17px;
+        padding: 15px 17px;
     }
 }
 
 .timeline-container {
     &.dc30::after {
-        bottom: 18%;
+        bottom: 17%;
         @include tablet {
-            bottom: 16.5%;
+            bottom: 15.5%;
         }
         @include desktop {
             bottom: 17%;

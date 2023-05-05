@@ -12,8 +12,8 @@
     @parent
     <title>Easy Chords | Pianote</title>
     <meta property="og:title" content="Easy Chords | Pianote">
-    <meta name="description" content="30 days to">
-    <meta property="og:description" content="better piano chords.">
+    <meta name="description" content="30 days to better piano chords.">
+    <meta property="og:description" content="30 days to better piano chords.">
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
@@ -266,30 +266,20 @@
         "noBreadcrumb" => true
     ])
 
-    @php
-        if (is_current_user_a_member()) {
-            $registerButtonUrl = '/cohort-packs/register/new-piano-players-start-here';
-        } else {
-            $registerButtonUrl = "#final";
-        }
-    @endphp
-
-    @if(!is_current_user_a_member())
-        <a href="#final" class="anchor-slide flex items-end justify-center px-2 sm:px-0 fixed w-full z-[100]" style="background: #d6e8fd;">
-            <p class="font-bebas uppercase mx-0 py-2 leading-none">
-                GET A FREE CHORDS & SCALES BOOK UNTIL MAY 21.
-                <br><span class="text-pianote"><span x-cloak x-data="timer2()" x-init="countdown2()">
-                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+    <a href="#final" class="anchor-slide flex items-end justify-center px-2 sm:px-0 fixed w-full z-[100]" style="background: #d6e8fd;">
+        <p class="font-bebas uppercase mx-0 py-2 leading-none">
+            GET A FREE CHORDS & SCALES BOOK UNTIL MAY 21.
+            <br><span class="text-pianote"><span x-cloak x-data="timer2()" x-init="countdown2()">
+                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
 {{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-                        {{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                                 </span> left!</span>
-            </p>
-            <img class="h-10 ml-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/sticky_bar_chords_scales.png" alt="30 day drummer logo" />
-        </a>
-        <div class="w-full block h-10 sm:h-11"></div>
-    @endif
+                    {{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                             </span> left!</span>
+        </p>
+        <img class="h-10 ml-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/sticky_bar_chords_scales.png" alt="30 day drummer logo" />
+    </a>
+    <div class="w-full block h-10 sm:h-11"></div>
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
         <div class="container max-w-5xl mx-auto">
@@ -315,27 +305,13 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> No theory <br> required</p>
                     </div>
 
-                    @if(session()->has('success-message'))
-                        <p class="mb-3 lg:-mb-7 mt-3 text-pianote text-center"><strong>Congrats! You have registered for Easy Chords.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-                    @endif
-
-                    @if(!$hasProduct && is_current_user_a_member())
-                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-pianote text-left"><strong>You are a Pianote member! <br>Enroll for free by clicking on the button below.</strong></p>
-                    @endif
-
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
 {{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-                        @if($hasProduct)
-                                <a class="join sold-out medium w-full">YOU'RE ENROLLED</a>
-                            @else
-                                <a href="{{ $registerButtonUrl }}" class="join medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>
-                            @endif
-                            @if(!auth()->check())
-                                <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
-                                    <a href="{{ get_musora_brand_base_url() }}/new-piano-players">Pianote Members register for free here.</a>
-                                </p>
-                            @endif
+                                <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>
+                            <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
+                                <a href="{{ get_musora_brand_base_url() }}/new-piano-players">Pianote Members register for free here.</a>
+                            </p>
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles">
@@ -468,8 +444,8 @@
                     ],
                     [
                     'position' => 'right',
-                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/live-support.jpg',
-                    'title' => 'Live support from REAL teachers.',
+                    'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/live-support2.jpg',
+                    'title' => 'Support from REAL teachers.',
                     'desc' => 'At every step, you’ll have REAL teachers helping you. Ask questions, get feedback, and connect with other students. You’re never alone.',
                     ],
                     [
@@ -562,11 +538,7 @@
                     </tr>
                     <tr>
                         <td>Investment</td>
-                        @if(is_current_user_a_member())
-                            <td class="rounded-b-xl"><strong>FREE</strong><br> for Pianote<br class="inline lg:hidden"> Members</td>
-                        @else
-                            <td class="rounded-b-xl"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></td>
-                        @endif
+                        <td class="rounded-b-xl"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></td>
                         <td class="rounded-bl-xl"><strong>$50-$100</strong><br> per lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
                         <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
@@ -690,19 +662,12 @@
                 @endforeach
             </div>
 
-
-            @if(session()->has('success-message'))
-                <p class="-mb-2 sm:-mb-8 mt-5 text-pianote text-center"><strong>Congrats! You have registered for Easy Chords.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-            @endif
-
 {{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>--}}
-        @if($hasProduct)
-                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
-            @else
+
                 <a
-                    href="{{ $registerButtonUrl }}"
-                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
-            @endif
+                    href="#final"
+                    class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+
             <img class="h-7 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles">
             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
         </div>
@@ -785,7 +750,7 @@
                     <img class="h-20 md:h-24 lg:h-28 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=380,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo">
                     <h4 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
                             20 Guided Play-Along Lessons.<br>
-                            4 Live Q&A Sessions.<br>
+                            Feedback From Real Teachers.<br>
                             Lifetime Course Access.
                         </strong></h4>
                     <div class="w-full mx-auto sm:mx-0">
@@ -802,7 +767,7 @@
                         <p class="border border-pianote text-pianote inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">EARLY BIRD BUNDLE</p>
                         <h3><strong>Easy Chords</strong></h3>
                         <p class="text-sm mt-2 mb-5">Play better piano in just 30 days.</p>
-                        <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
+                        <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>
                         <div class="join blue smaller my-4 w-full">ENROLL NOW</div>
                         <ul class="list-disc ml-6">
                             <li class="text-sm relaxed"><span class="text-pianote">Free</span> Chords & Scales Book</li>
@@ -855,13 +820,11 @@
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h2><strong>Still have questions?</strong></h2>
             <div class="max-w-6xl mt-4 sm:mt-10 px-4">
-                @if(is_current_user_a_member())
-                    @include('_partials.components.question-dropdown', [
-                    "num" => "?",
-                    "title" => "Why do I need to register if I get it for free as a member?",
-                    "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",
-                    ])
-                @endif
+                @include('_partials.components.question-dropdown', [
+                "num" => "?",
+                "title" => "Why do I need to register if I get it for free as a member?",
+                "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",
+                ])
                 @include('_partials.components.question-dropdown', [
                 "title" => "What if I miss a day (or two)?",
                 "desc" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",

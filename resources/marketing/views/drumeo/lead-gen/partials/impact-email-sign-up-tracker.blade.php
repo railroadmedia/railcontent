@@ -4,27 +4,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.6.0/sha1.min.js"></script>
 <script>
     function getSignUpActionTrackerId(environment) {
-        var signUpActionTrackerId =
-            "{{ config('railanalytics.drumeo.production.providers.impact.sign-up-action-tracker-id') }}"
-        {{--if (environment == "development") {--}}
-        {{--    signUpActionTrackerId =--}}
-        {{--        "{{ config('railanalytics.drumeo.local.providers.impact.sign-up-action-tracker-id') }}"--}}
-        {{--} else if (environment == "staging") {--}}
-        {{--    signUpActionTrackerId = "{{ config('railanalytics.drumeo.beta-testing.providers.impact.sign-up-action-tracker-id') }}"--}}
-        {{--} else if (environment == "testing") {--}}
-        {{--    signUpActionTrackerId = "{{ config('railanalytics.drumeo.beta-testing.providers.impact.sign-up-action-tracker-id') }}"--}}
-        {{--}--}}
-        return signUpActionTrackerId;
+        return (environment == 'production') ?
+            "{{ config('railanalytics.drumeo.production.providers.impact.sign-up-action-tracker-id') }}" :
+            "{{ config('railanalytics.drumeo.local.providers.impact.sign-up-action-tracker-id') }}";
     }
 
     function emailSignUpConversionTrackerForImpactProvider() {
         var email = document.getElementById('sign-up-email').value;
         var hashedEmail = sha1(email);
         var hashedOrderId = md5('drumeo_'.concat(email))
-//todo: to be deleted
-console.log('{{ config('app.env') }}')
-console.log(hashedOrderId);
-console.log(hashedEmail);
+
         ire('trackConversion', getSignUpActionTrackerId('{{ config('app.env') }}'), {
                 orderId: hashedOrderId,
                 customerId: hashedOrderId,
