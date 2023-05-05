@@ -23075,6 +23075,9 @@ a:visited{
   text-overflow: ellipsis !important;
   white-space: nowrap !important;
 }
+.tw-text-ellipsis{
+  text-overflow: ellipsis !important;
+}
 .tw-whitespace-normal{
   white-space: normal !important;
 }
@@ -26601,6 +26604,9 @@ a:visited{
   .lg\:tw-block{
     display: block !important;
   }
+  .lg\:tw-inline{
+    display: inline !important;
+  }
   .lg\:tw-flex{
     display: flex !important;
   }
@@ -26917,6 +26923,9 @@ a:visited{
   .lg\:tw-text-2xl{
     font-size: 1.5rem !important;
     line-height: 2rem !important;
+  }
+  .lg\:tw-font-normal{
+    font-weight: 400 !important;
   }
   .lg\:tw-leading-none{
     line-height: 1 !important;
