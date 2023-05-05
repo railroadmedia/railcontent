@@ -116,85 +116,12 @@
 @endsection
 
 @section('layout-body')
-
-
-    @php
-        $features = [
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drum-lessons-icon.svg',
-                'title' => 'Drum Lessons',
-                'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
-            ],
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/artist-course-icon2.svg',
-                'title' => 'Artist Courses',
-                'desc' => 'Courses and live events<br class="hidden sm:inline"> with drumming heroes. ',
-            ],
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/songs-icon.svg',
-                'title' => '5000+ Songs',
-                'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
-            ],
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/support-icon.svg',
-                'title' => '24/7 Support',
-                'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
-            ],
-        ];
-        $slides = [
-            [
-                'desc' => 'Drumeo is the real deal folks - a good place to study and realize one’s dreams.',
-                'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/billy-cobham.jpg',
-                'name' => 'Billy Cobham',
-                'credit' => 'Rolling Stone  Top 100 Drummer',
-            ],
-            [
-                'desc' => 'A world-class site for continuing education and insight into the world of drumming!',
-                'thumb' => 'https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/redmond.jpg',
-                'name' => 'Rich Redmond',
-                'credit' => '3x Country Drummer Of The Year',
-            ],
-            [
-                'desc' => 'The Drumeo standard is one of the highest quality and is THE place to go for the best in drum education.',
-                'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/drummer-david-garibaldi.jpg',
-                'name' => 'David Garibaldi',
-                'credit' => 'Rolling Stone Top 100 Drummer',
-            ],
-        ];
-    @endphp
-
-    @include('musora.sales.components.header-section', [
-        'header' => 'Online drum lessons for all skill levels.',
-        'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
-        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
-        'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
-        'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo-m2.jpg',
-        'pointOne' => 'Improve Your Skills',
-        'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
-        'students' => number_format(Prices::$students),
-    ])
-
-    @hasSection('promo-banner')
-        @yield('promo-banner')
-    @endif
-    {{--    @if(!empty($promoVersion))--}}
-    {{--        @include('musora.sales.components.promo-section', [--}}
-    {{--        'promoLogo' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs.svg',--}}
-    {{--           'promoLogoM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs-m.png',--}}
-    {{--        'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',--}}
-    {{--           'text' => 'The NEW Drumeo Songs is here.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have <strong>the ultimate tool for learning songs on the drums.</strong> <br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',--}}
-    {{--           'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/collage3.png',--}}
-    {{--           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $1342.94',--}}
-    {{--       ])--}}
-    {{--    @else--}}
     @include('musora.sales.components.learn-by-playing-section', [
         'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
         'desc' => 'It’s the best feeling in the world –<br><br>Nailing that fill in your favorite song, slamming out the chorus of an all-time classic, or writing your own drum part that locks in with the music… but it’s a process.<br><br>And it starts with learning the skills & techniques you need to play the drums.<br><br>Drumeo makes learning the drums easier by giving you step-by-step lessons anytime & anywhere it fits your schedule. Plus, the groundbreaking NEW Drumeo Songs tool makes playing your favorite songs a reality – with note-for-note breakdowns of 5,000 popular songs.<br><br>You’ll play more. You’ll fall in love with your progress. And you’ll have personalized support every step of the way.<br><br>Scroll down to watch the trailer, see more details, and learn to play like you’ve always wanted!',
         'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/collage2.png',
     ])
-    {{--    @endif--}}
+
 
     @php
         $gridItems = [
