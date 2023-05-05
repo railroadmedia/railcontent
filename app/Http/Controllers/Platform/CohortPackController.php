@@ -10,6 +10,7 @@ use Railroad\Ecommerce\Entities\Product;
 use Railroad\Ecommerce\Entities\User;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Services\UserProductService as EcommerceUserProductService;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 
 class CohortPackController
@@ -63,8 +64,17 @@ class CohortPackController
         $startDate = Carbon::createFromFormat('Y-m-d H:i:s', $cohort['enrollment_start_date']);
         $now = Carbon::now();
         $enrollmentClosed = $endDate->lessThan($now) || $startDate->greaterThan($now);
-
+        $initialBypassPermissions = ContentRepository::$bypassPermissions;
+        $initialPullFutureContent = ContentRepository::$pullFutureContent;
+        $initialContentStatuses = ContentRepository::$availableContentStatues;
+        ContentRepository::$bypassPermissions = true;
+        ContentRepository::$pullFutureContent = true;
+        ContentRepository::$availableContentStatues = false;
         $content = $this->contentService->getById($cohort['content_id']);
+        ContentRepository::$bypassPermissions  = $initialBypassPermissions;
+        ContentRepository::$pullFutureContent = $initialPullFutureContent;
+        ContentRepository::$availableContentStatues = $initialContentStatuses;
+
         $cohort['course_url'] = ($content) ? $content->fetch('url', '') : '';
         $cohort['conversation_url'] =
             $cohort['conversation_thread_id'] ?
