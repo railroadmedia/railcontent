@@ -29,7 +29,11 @@
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=94e4f2ebf472d31f9e0a89c474023880",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=cfa09b0b222991cacf388f79469aaec9",
     "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=ec28d3551e0bd4b43b6946a87f305198",
+<<<<<<< HEAD
     "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=87c90de1b0be9a6e35c44629e335fde2",
+=======
+    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=bbbf1fe34926a22e67492bd84972a915",
+>>>>>>> project-playlists-v2
     "/platform/js/playlist-breadcrumb.js": "/platform/js/playlist-breadcrumb.js?id=95e0c94659bcecbcfc02a6f1ab5ade5f",
     "/platform/js/playlist-collection-header.js": "/platform/js/playlist-collection-header.js?id=ee900c84f0d4cc0858e725de34ae2360",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=26d03238e24769866d21704f9c052fd4",

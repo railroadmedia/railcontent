@@ -84,7 +84,7 @@
             //Then send update item request
             if (lesson.hasChanged) {
                 PlaylistService.updatePlaylistItem({
-                    user_playlist_item_id: lesson.id,
+                    user_playlist_item_id: lesson.user_playlist_item_id,
                     position: lesson.user_playlist_item_position
                 }, token)
             }
