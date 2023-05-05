@@ -93,6 +93,21 @@
                         Piano Lessons
                     </h1>
                 </li>
+                @include('drumeo.drumshop._partials._drum-shop-card', [
+                     "itemURL" => "/",
+                     "sku" => null,
+                     "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/header.jpg",
+                     "packLogo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',
+                     "title" => "Pianote Membership",
+                     "packAuthor" => "Lisa Witt",
+                     "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",
+                     "specialPrice" => "7-Day Free Trial",
+                     "fullPrice" => 240,
+                     "price" => 240,
+                     "category" => "lessons",
+                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
+                     'soldOut' => false,
+                ])
 
                 @foreach($lessons as $lesson)
                     @include('drumeo.drumshop._partials._drum-shop-card', [
