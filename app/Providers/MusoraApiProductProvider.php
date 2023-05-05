@@ -113,8 +113,16 @@ class MusoraApiProductProvider implements ProductProviderInterface
         }
         if($cohort['content_id']){
             $initialBypassPermissions = ContentRepository::$bypassPermissions;
+            $initialPullFutureContent = ContentRepository::$pullFutureContent;
+            $initialContentStatuses = ContentRepository::$availableContentStatues;
             ContentRepository::$bypassPermissions = true;
+            ContentRepository::$pullFutureContent = true;
+            ContentRepository::$availableContentStatues = false;
             $content = $this->contentService->getById($cohort['content_id']);
+            ContentRepository::$bypassPermissions  = $initialBypassPermissions;
+            ContentRepository::$pullFutureContent = $initialPullFutureContent;
+            ContentRepository::$availableContentStatues = $initialContentStatuses;
+
             if ($content) {
                 $cohort['content'] = [
                     'page_type' => 'PackOverview',
@@ -124,7 +132,6 @@ class MusoraApiProductProvider implements ProductProviderInterface
                     ],
                 ];
             }
-            ContentRepository::$bypassPermissions  =$initialBypassPermissions;
         }
 
         $product = $this->productRepository->findProduct($cohort['product_id']);
