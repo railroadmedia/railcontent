@@ -5,7 +5,6 @@
     import { usePlaylistsStore } from '../../../../stores/playlists';
     import PlaylistCard from './PlaylistCard.vue';
     import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
-    import Pagination from '../../../components/Pagination/Pagination.vue';
 
     //Inject
     const token = inject('csrf_token');
@@ -50,15 +49,24 @@
     //-----------Refs-----------//
     const pageNumber = ref(1);
     const preventReFetch = ref(false);
+    const lessonsArray = ref([]);
+    const lessonsCopy = ref([]);
 
     //-----------Reactive Data-----------//
     const state = reactive({
-        initialLessonsArray: [],
-        startID: 0,
-        startPosition: 0,
-        endPosition: 0,
-        newSortPositions: [],
         stopScroll: true,
+        lessonsContainerKey: Math.round(Math.random() * 100000)
+    })
+
+    //-----------Computed Data-----------//
+    const computedLessons = computed({
+        get: () => {
+            return lessonsArray.value;
+        },
+        set: (val) => {
+            console.log(val)
+            lessonsArray.value = val;
+        }
     })
 
     //-----------Static Data-----------//
@@ -68,16 +76,24 @@
 
     const handleSort = () => {
         playlistsStore.sortingPlaylist = false;
+
+        console.log('trying to save:', lessonsCopy.value)
+
         //Update each item in temp array
-        state.newSortPositions.forEach(lesson => {
+        lessonsCopy.value.forEach(lesson => {
             //Then send update item request
             PlaylistService.updatePlaylistItem({
                 user_playlist_item_id: lesson.id,
-                position: lesson.position
+                position: lesson.user_playlist_item_position
             }, token)
         });
-        //Update initial array
-        state.initialLessonsArray = [...playlistsStore.lessons];
+
+        //Update store and computed array
+        playlistsStore.lessons = lessonsCopy.value;
+        computedLessons.value = lessonsCopy.value;
+
+        state.lessonsContainerKey = Math.round(Math.random() * 100000);
+
         //show success message
         window.shownotification({
             icon: 'fa-pen-to-square',
@@ -88,49 +104,22 @@
     const handleCancelSort = () => {
         console.log('handle cancel sort')
         //Update array to initial order
-        state.initialLessonsArray = playlistsStore.lessons;
+        computedLessons.value = playlistsStore.lessons;
+        lessonsCopy.value = playlistsStore.lessons;
         playlistsStore.sortingPlaylist = false;
+        state.lessonsContainerKey = Math.round(Math.random() * 100000);
     }
 
-    
-    const handleDragStart = (event, position, id) => {
-        if(playlistsStore.sortingPlaylist) {
-            //save start position
-            state.startID = id;
-            state.startPosition = position;
-        }
-    }
-    const handleDragOver = (event) => {
-        // console.log('drag over: ')
-        if(playlistsStore.sortingPlaylist) {
-            event.target.classList.add('tw-border-b');
-        }
-    }
-    const handleDragLeave = (event) => {
-        // console.log('drag leave: ')
-        if(playlistsStore.sortingPlaylist) {
-            event.target.classList.remove('tw-border-b');
-        }
-    }
+    const handleDragChange = (e) => {
+        const oldObj = lessonsCopy.value[e.oldIndex];
+        const oldUserItemPosition = oldObj.user_playlist_item_position;
+        const newObj = lessonsCopy.value[e.newIndex];
+        const newUserItemPosition = newObj.user_playlist_item_position;
+        oldObj.user_playlist_item_position = newUserItemPosition;
+        newObj.user_playlist_item_position = oldUserItemPosition;
 
-    const handleDragEnd = () => { state.stopScroll = true };
-
-    //Handle Drop Event
-    const handleDrop = (event, position) => {
-        // console.log(state.startID, position)
-        if(playlistsStore.sortingPlaylist) {
-            event.target.classList.remove('tw-border-b');
-            state.endPosition = position;
-            //Reorder UI
-            playlistsStore.lessons.splice(state.endPosition, 0, playlistsStore.lessons.splice(state.startPosition, 1)[0])
-            //Update Array
-            const index = state.newSortPositions.findIndex(object => object.id === state.startID);
-            if(index == -1) {
-                state.newSortPositions.push({ id: state.startID, position: state.endPosition + 1 })
-            } else {
-                state.newSortPositions[index].position =  state.endPosition + 1;
-            }
-        }
+        lessonsCopy.value[e.oldIndex] = newObj;
+        lessonsCopy.value[e.newIndex] = oldObj;
     }
 
     //Vertical Scroll
@@ -192,15 +181,9 @@
 
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
-        state.initialLessonsArray = [...props.lessons.data];
+        lessonsCopy.value = [...props.lessons.data];
+        computedLessons.value = [...props.lessons.data];
     });
-</script>
-<script>
-    export default {
-        components: {
-            draggable: VueDraggableNext,
-        },
-    };
 </script>
 <template>
     <main class="tw-w-full ">
@@ -249,18 +232,19 @@
                         <section v-if="playlistsStore.lessons.length"
                                 class="tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-col"
                         >
-                            <draggable 
+                            <VueDraggableNext 
                                 class="list-group"
-                                :v-model="state.initialLessonsArray" 
+                                :v-model="computedLessons" 
                                 :dragoverBubble="playlistsStore.sortingPlaylist" 
                                 :sort="playlistsStore.sortingPlaylist"
                                 :animation="0"
                                 ghostClass="ghost"
+                                :key="state.lessonsContainerKey"
+                                @update="handleDragChange"
                             >
-                                <transition-group type="transition" name="flip-list">
                                     <!-- Print Each Card -->
                                     <playlist-card
-                                        v-for="(lesson,i) in state.initialLessonsArray"
+                                        v-for="(lesson,i) in computedLessons"
                                         class="list-group-item"
                                         :key="i"
                                         :index="i"
@@ -268,8 +252,7 @@
                                         :token="token"
                                         :brand="brand"
                                     />
-                                </transition-group>
-                            </draggable>
+                            </VueDraggableNext>
 
                             <!-- Skeleton Loader For Infinite Scroll -->
                             <div v-if="playlistsStore.loadingLessons && infiniteScroll"
