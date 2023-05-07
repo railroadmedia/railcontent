@@ -32,7 +32,7 @@ export default (function () {
 
             closeModal();
 
-            event.stopPropagation();
+            //event.stopPropagation();
 
             if (modalToOpen) {
                 window.appendBackgroundOverlay();
@@ -114,5 +114,8 @@ export default (function () {
                 document.body.style.paddingRight = `${Utils.getScrollBarWidth()}px`;
             }
         };
+
+        window.openModal = openModal;
+        window.closeModal = closeModal;
     });
 }());

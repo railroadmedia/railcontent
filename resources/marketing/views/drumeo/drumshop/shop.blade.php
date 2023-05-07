@@ -126,7 +126,22 @@
                         Online Drum Lessons
                     </h1>
                 </li>
-                @foreach($lessons as $key => $lesson)
+                @include('drumeo.drumshop._partials._drum-shop-card', [
+                     "itemURL" => "/",
+                     "sku" => null,
+                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/dcb-01.jpg",
+                     "packLogo" => 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
+                     "title" => "Drumeo Membership",
+                     "packAuthor" => "Award-Winning Membership",
+                     "cardDescription" => "The Ultimate Online Drum Lessons Experience. You’ll get step-by-step drum lessons from the best drummers in the world (and much more).",
+                     "specialPrice" => "7-Day Free Trial",
+                     "fullPrice" => 240,
+                     "price" => 240,
+                     "category" => "lessons",
+                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
+                     'soldOut' => false,
+                ])
+                @foreach($lessons as $lesson)
                     @include('drumeo.drumshop._partials._drum-shop-card', [
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                         "sku" => $lesson->sku === 'drumeo' ? null : $lesson->sku,

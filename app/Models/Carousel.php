@@ -28,6 +28,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $product_url
  * @property string $endpoint
  * @property string $video_src
+ * @property string $primary_cta_text
+ * @property string $primary_cta_text_alt
+ * @property string $primary_cta_url
+ * @property string $primary_cta_url_alt
+ * @property string $secondary_cta_text
+ * @property string $secondary_cta_url
  */
 class Carousel extends Model
 {
@@ -55,8 +61,16 @@ class Carousel extends Model
             $uuid = $model['uuid'];
             unset($model['uuid']);
 
-            if (gettype($model['img']) === 'object') {
-                $model['img'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' . $model['img']->getClientOriginalName();
+            if (gettype($model['desktop_img']) === 'object') {
+                $model['desktop_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' . $model['desktop_img']->getClientOriginalName();
+            }
+
+            if (gettype($model['tablet_img']) === 'object') {
+                $model['tablet_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' . $model['tablet_img']->getClientOriginalName();
+            }
+
+            if (gettype($model['mobile_img']) === 'object') {
+                $model['mobile_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' . $model['mobile_img']->getClientOriginalName();
             }
 
             if (gettype($model['logo']) === 'object') {

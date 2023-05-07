@@ -1,5 +1,5 @@
 <div id="coaches" class="anchor"></div>
-<section class="py-12 md:py-20 text-center">
+<section class="py-12 md:py-20 text-center" @if(!empty($split)) style="background-color:#f4f8fb;" @endif>
     <div class="max-w-3xl mx-auto">
         <h2 class="font-extrabold">{!! $header !!}</h2>
         <p class="px-4 md:px-0 mt-3 mb-4 md:mb-0 max-w-md">{!! $desc !!}</p>

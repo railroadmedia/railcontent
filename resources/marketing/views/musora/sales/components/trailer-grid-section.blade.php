@@ -1,11 +1,13 @@
 <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
 <div id="method" class="anchor"></div>
-<section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+<section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" @if(!empty($vid)) style="background-color:#f4f8fb;" @endif>
     <div class="container max-w-6xl mx-auto">
-        <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96 mb-6 sm:mb-20" x-on:click="trailer = true;">
-            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-            <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="{{ $vid }}" type="video/mp4" autoplay muted loop playsinline></video>
-        </div>
+        @if(!empty($vid))
+            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96 mb-6 sm:mb-20" x-on:click="trailer = true;">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="{{ $vid }}" type="video/mp4" autoplay muted loop playsinline></video>
+            </div>
+        @endif
         <h2><strong>{!! $header !!}</strong></h2>
         <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">{!! $desc !!}</p>
         <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6">
