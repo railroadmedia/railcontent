@@ -141,7 +141,7 @@
                      "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
                      'soldOut' => false,
                 ])
-                @foreach($lessons as $lesson)
+                @foreach($lessons as $key => $lesson)
                     @include('drumeo.drumshop._partials._drum-shop-card', [
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                         "sku" => $lesson->sku === 'drumeo' ? null : $lesson->sku,
