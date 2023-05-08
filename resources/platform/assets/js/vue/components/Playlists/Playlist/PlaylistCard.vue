@@ -57,6 +57,11 @@ const lessonThumbnail = computed(() => {
 const artist = computed(() => {
     return props.lesson.artist;
 })
+
+const released = computed(() => {
+    return lessonDateParsed < dateNow;
+})
+
 //Instructor
 const instructor = computed(() => {
     const instructorObject = props.lesson?.fields?.length ? props.lesson.fields.find(data => data.key === 'instructor') : { value: null };
@@ -129,10 +134,6 @@ const time = DateTime.fromSQL(lessonDate).toFormat('h:mm a');
 
 //-----------Methods-----------//
 
-const released = () => {
-    return lessonDateParsed < dateNow;
-}
-
 //Format Duration (in seconds)
 const duration_formatted = (seconds) => {
     let time = seconds;
@@ -147,7 +148,7 @@ const duration_formatted = (seconds) => {
         if (hrsFormatted === 0 && minFormatted === 0 && secFormatted === 0) return false;
         else return `${hrsFormatted}:${minFormatted}:${secFormatted}`;
     } else {
-        return false;
+        return '0:00';
     }
 }
 
@@ -178,7 +179,8 @@ const dropdownTriggerHandler = target => {
 //-----------Lifecycle Methods-----------//
 
 onBeforeMount(() => {
-    // console.log(props.lesson)
+    console.log(props.lesson)
+
     state.isPinned = props.lesson.pinned;
     state.isPrivate = props.lesson.private;
     if (props.lesson.type !== 'assignment' && props.lesson.type !== 'song') {
