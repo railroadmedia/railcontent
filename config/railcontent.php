@@ -368,6 +368,7 @@ return [
 
             \App\Decorators\Content\InstructorDecorator::class,
             \App\Decorators\Content\PlaylistItemDecorator::class,
+            \App\Decorators\Content\ContentTimezoneDecorator::class,
         ]
     ],
 
