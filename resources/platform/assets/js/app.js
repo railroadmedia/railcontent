@@ -24,6 +24,7 @@ import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
 import InfoModal from './vue/components/Modal/InfoModal';
 import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
+import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -252,21 +253,22 @@ app.component('AppContainer', AppContainer)
     .component('AddEventModal', AddEventModal)
     .component('InfoModal', InfoModal)
     .component('SoundSlice', SoundSlice)
+    .component('CohortBanner', CohortBanner)
 
-    .component('PlaylistPlaybackWrapper', defineAsyncComponent(() => 
+    .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-playback-wrapper" */
             `./vue/components/Playlists/PlaylistPlaybackWrapper.vue`
         )
     ))
 
-    .component('PlatformHeader', defineAsyncComponent(() => 
+    .component('PlatformHeader', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "platform-header" */
             `./vue/components/PlatformHeader/platform-header.vue`
         )
     ))
-    
+
     .component('MembershipUpdate', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "membership-update-" */
@@ -435,31 +437,31 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
-    .component('PlaylistHeader', defineAsyncComponent(() => 
+    .component('PlaylistHeader', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-header" */
             `./vue/components/Playlists/Playlist/PlaylistHeader.vue`
         )
     ))
-    .component('PlaylistCatalog', defineAsyncComponent(() => 
+    .component('PlaylistCatalog', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-collection-catalog" */
             `./vue/components/Playlists/Playlist/PlaylistCatalog.vue`
         )
     ))
-    .component('PlaylistBreadcrumb', defineAsyncComponent(() => 
+    .component('PlaylistBreadcrumb', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-breadcrumb" */
             `./vue/components/Playlists/Breadcrumb.vue`
         )
     ))
-    .component('PlaylistCollectionHeader', defineAsyncComponent(() => 
+    .component('PlaylistCollectionHeader', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-collection-header" */
             `./vue/components/Playlists/PlaylistCollection/PlaylistCollectionHeader.vue`
         )
     ))
-    .component('PlaylistCollectionCatalog', defineAsyncComponent(() => 
+    .component('PlaylistCollectionCatalog', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "playlist-collection-catalog" */
             `./vue/components/Playlists/PlaylistCollection/PlaylistCollectionCatalog.vue`

@@ -100,5 +100,5 @@ return [
     ],
 
     // urls
-    'app_notifications_deep_link_url' => 'https://www.pianote.com/api/profile',
+    'app_notifications_deep_link_url' => 'https://www.musora.com/drumeo/notifications',
 ];
