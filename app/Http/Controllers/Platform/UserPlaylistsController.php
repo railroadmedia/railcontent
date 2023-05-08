@@ -163,6 +163,8 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['title'] = $item['title'];
                 $playlistItems[$index]['artist'] = $item['artist'];
                 $playlistItems[$index]['status'] = $item['status'];
+                $playlistItems[$index]['published_on'] = $item['published_on'];
+                $playlistItems[$index]['published_on_in_timezone'] = $item['published_on_in_timezone'] ?? null;
                 $playlistItems[$index]['need_access'] = empty(
                     array_intersect(
                         $userPermissionIds,
