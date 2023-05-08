@@ -16,7 +16,11 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header" style="background-color:#080e1e;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/shop-header.jpg);">
+    <header class="drum-shop-header relative">
+        <picture>
+            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/shop-header.jpg">
+            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/shop-header.jpg" alt="header background image" fetchpriority="high" />
+        </picture>
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
                 <img class="logo" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="singeo logo">
@@ -130,7 +134,7 @@
 
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards">
-                @foreach($items as $item)
+                @foreach($items as $key => $item)
                     @include('drumeo.drumshop._partials._drum-shop-card', [
                             "sku" => $item->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
@@ -147,6 +151,7 @@
                             "sizes" => $item->sizes,
                             "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
                             "size_case_sensitive" => $item->size_case_sensitive,
+                            'FCP' => $key < 4 ? true : null,
                     ])
                 @endforeach
 

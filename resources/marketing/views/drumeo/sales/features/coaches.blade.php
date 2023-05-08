@@ -53,12 +53,10 @@
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
-                                            class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
+                                            class="rounded-xl w-full absolute w-full h-full object-cover object-top"
                                             src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
                                             alt="{{$slide['title']}} img"
-                                            loading="lazy"
-                                            onload="this.classList.remove('opacity-0')"
-                                            style="object-position: top;"
+                                            fetchpriority="high"
                                         >
                                     </div>
                                     <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
@@ -100,12 +98,11 @@
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
-                                            class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
+                                            class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover object-top"
                                             src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
                                             alt="{{$slide['title']}} img"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
-                                            style="object-position: top;"
                                         >
                                     </div>
                                     <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
@@ -147,12 +144,11 @@
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
-                                            class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
+                                            class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover object-top"
                                             src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
                                             alt="{{$slide['title']}} img"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
-                                            style="object-position: top;"
                                         >
                                     </div>
                                     <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
@@ -194,12 +190,11 @@
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
-                                            class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
+                                            class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover object-top"
                                             src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
                                             alt="{{$slide['title']}} img"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
-                                            style="object-position: top;"
                                         >
                                     </div>
                                     <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
@@ -241,12 +236,11 @@
                                 <div>
                                     <div class="relative mb-2" style="padding-bottom: 56.25%;">
                                         <img
-                                            class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover"
+                                            class="rounded-xl transition-opacity opacity-0 w-full absolute w-full h-full object-cover object-top"
                                             src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
                                             alt="{{$slide['title']}} img"
                                             loading="lazy"
                                             onload="this.classList.remove('opacity-0')"
-                                            style="object-position: top;"
                                         >
                                     </div>
                                     <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
