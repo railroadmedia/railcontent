@@ -108,6 +108,13 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
     }
+    public function trialSplit()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.subscription-split', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
+    }
     public function promo()
     {
         $products = $this->productRepository->all();
@@ -210,6 +217,20 @@ class SalesController extends BaseController
         $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-drummer', [
+            'nPackOwners' => $nPackOwners,
+            'theme' => 'drumeo',
+            'hasProduct' => $hasProduct
+        ]);
+    }
+    public function thirtyDayChops()
+    {
+        $productId = 733;
+        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
+        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
+        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+
+        return view('drumeo.products.30-day-chops', [
             'nPackOwners' => $nPackOwners,
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct

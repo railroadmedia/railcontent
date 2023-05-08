@@ -386,75 +386,64 @@
             </div>
             <div class="tab-content opacity-0 invisible transition-opacity duration-1000 h-0">
                 <div class="lesson-descriptions mx-auto max-w-4xl px-6">
-                    @include('pianote.products._week-breakdown-2', [
-                    "navyBorder" => true,
-                    "defaultOpen" => true,
-                    "book" => "1",
+                    @include('_partials.components.question-dropdown', [
+                    "num" => "1",
                     "title" => "Welcome To The Keyboard",
-                    "description" => 'Everything You Need To Know To Get Started <span class="float-right">1</span><br> Welcome to the keyboard <span class="float-right">19</span><br> The Five Finger Scale <span class="float-right">25</span><br> Rhythm 101 <span class="float-right">31</span><br> Scales <span class="float-right">43</span><br> Chords <span class="float-right">49</span><br> Your First Chord Progression <span class="float-right">53</span><br> Your First Song <span class="float-right">57</span><br> Conclusion <span class="float-right">63</span>',
+                    "desc" => 'Everything You Need To Know To Get Started <span class="float-right">1</span><br> Welcome to the keyboard <span class="float-right">19</span><br> The Five Finger Scale <span class="float-right">25</span><br> Rhythm 101 <span class="float-right">31</span><br> Scales <span class="float-right">43</span><br> Chords <span class="float-right">49</span><br> Your First Chord Progression <span class="float-right">53</span><br> Your First Song <span class="float-right">57</span><br> Conclusion <span class="float-right">63</span>',
                     ])
 
-                    @include('pianote.products._week-breakdown-2', [
-                    "navyBorder" => true,
-                    "book" => "2",
+                    @include('_partials.components.question-dropdown', [
+                    "num" => "2",
                     "title" => "The Staff & Sight-Reading",
-                    "description" => 'Introduction <span class="float-right">1</span><br> Invervals - Your Color Palatte <span class="float-right">3</span><br> The Treble Clef <span class="float-right">13</span><br> The Bass Clef <span class="float-right">23</span><br> Intervals On The Staff <span class="float-right">29</span><br> The Grand Staff <span class="float-right">37</span><br> Suspended Chords <span class="float-right">43</span><br> Rhythmic 5ths <span class="float-right">51</span><br> Bringing It All Together In Song <span class="float-right">55</span><br> Conclusion <span class="float-right">63</span>',
+                    "desc" => 'Introduction <span class="float-right">1</span><br> Invervals - Your Color Palatte <span class="float-right">3</span><br> The Treble Clef <span class="float-right">13</span><br> The Bass Clef <span class="float-right">23</span><br> Intervals On The Staff <span class="float-right">29</span><br> The Grand Staff <span class="float-right">37</span><br> Suspended Chords <span class="float-right">43</span><br> Rhythmic 5ths <span class="float-right">51</span><br> Bringing It All Together In Song <span class="float-right">55</span><br> Conclusion <span class="float-right">63</span>',
                     ])
 
-                    @include('pianote.products._week-breakdown-2', [
-                    "navyBorder" => true,
-                    "book" => "3",
+                    @include('_partials.components.question-dropdown', [
+                    "num" => "3",
                     "title" => "Diving Deeper Into Core Skills",
-                    "description" => 'Introduction <span class="float-right">1</span><br> Your First Minor Scale <span class="float-right">3</span><br> Sight Reading In A Minor <span class="float-right">9</span><br> The Most Important Chord Progression <span class="float-right">13</span><br> The Minor i-iv-v <span class="float-right">17</span><br> Eighth Notes Expanded <span class="float-right">21</span><br> Arpeggios <span class="float-right">25</span><br> Dynamics <span class="float-right">29</span><br> Bringing It All Together In Song <span class="float-right">35</span><br> Conclusion <span class="float-right">43</span>',
+                    "desc" => 'Introduction <span class="float-right">1</span><br> Your First Minor Scale <span class="float-right">3</span><br> Sight Reading In A Minor <span class="float-right">9</span><br> The Most Important Chord Progression <span class="float-right">13</span><br> The Minor i-iv-v <span class="float-right">17</span><br> Eighth Notes Expanded <span class="float-right">21</span><br> Arpeggios <span class="float-right">25</span><br> Dynamics <span class="float-right">29</span><br> Bringing It All Together In Song <span class="float-right">35</span><br> Conclusion <span class="float-right">43</span>',
                     ])
 
-                    @include('pianote.products._week-breakdown-2', [
-                    "navyBorder" => true,
-                    "book" => "4",
+                    @include('_partials.components.question-dropdown', [
+                    "num" => "4",
                     "title" => "Key Signatures & Inversions",
-                    "description" => 'Introduction <span class="float-right">1</span><br> Chromatic Scales <span class="float-right">3</span><br> G Major Scale <span class="float-right">9</span><br> Accidentals <span class="float-right">13</span><br> Inversions <span class="float-right">17</span><br> Broken Inversions <span class="float-right">23</span><br> The Big Chords Of G <span class="float-right">27</span><br> The Spider Walk <span class="float-right">31</span><br> Bringing It All Together In Song <span class="float-right">35</span><br> Conclusion <span class="float-right">41</span>',
+                    "desc" => 'Introduction <span class="float-right">1</span><br> Chromatic Scales <span class="float-right">3</span><br> G Major Scale <span class="float-right">9</span><br> Accidentals <span class="float-right">13</span><br> Inversions <span class="float-right">17</span><br> Broken Inversions <span class="float-right">23</span><br> The Big Chords Of G <span class="float-right">27</span><br> The Spider Walk <span class="float-right">31</span><br> Bringing It All Together In Song <span class="float-right">35</span><br> Conclusion <span class="float-right">41</span>',
                     ])
 
-                    @include('pianote.products._week-breakdown-2', [
-                    "navyBorder" => true,
-                    "book" => "5",
+                    @include('_partials.components.question-dropdown', [
+                    "num" => "5",
                     "title" => "Flats & Chord Shortcuts",
-                    "description" => 'Introduction <span class="float-right">1</span><br> Flat Notes <span class="float-right">3</span><br> Flat Obstacle Course <span class="float-right">7</span><br> Intro To Chord Shortcuts <span class="float-right">11</span><br> Classic Chord Progression In F Major <span class="float-right">17</span><br> Rhythmioc Rests <span class="float-right">21</span><br> Staccato Vs. Legato Playing <span class="float-right">27</span><br> Contrary Motion <span class="float-right">31</span><br> Bringing It All Together In Song <span class="float-right">35</span><br> Conclusion <span class="float-right">43</span>',
+                    "desc" => 'Introduction <span class="float-right">1</span><br> Flat Notes <span class="float-right">3</span><br> Flat Obstacle Course <span class="float-right">7</span><br> Intro To Chord Shortcuts <span class="float-right">11</span><br> Classic Chord Progression In F Major <span class="float-right">17</span><br> Rhythmioc Rests <span class="float-right">21</span><br> Staccato Vs. Legato Playing <span class="float-right">27</span><br> Contrary Motion <span class="float-right">31</span><br> Bringing It All Together In Song <span class="float-right">35</span><br> Conclusion <span class="float-right">43</span>',
                     ])
 
-                    @include('pianote.products._week-breakdown-2', [
-                    "navyBorder" => true,
-                    "book" => "6",
+                    @include('_partials.components.question-dropdown', [
+                    "num" => "6",
                     "title" => "Understanding Minor Keys",
-                    "description" => 'Introduction <span class="float-right">1</span><br> Harmonic Minor Scales <span class="float-right">3</span><br> Your First Minor Chord Progression <span class="float-right">7</span><br> Harmonic Minor Song <span class="float-right">13</span><br> Dotted Half Note Dance <span class="float-right">17</span><br> Melodic Minor Scales <span class="float-right">21</span><br> First Waltz <span class="float-right">25</span><br> The Sustain Pedal <span class="float-right">29</span><br> Bringing It All Together In Song <span class="float-right">33</span><br> Conclusion <span class="float-right">37</span>',
+                    "desc" => 'Introduction <span class="float-right">1</span><br> Harmonic Minor Scales <span class="float-right">3</span><br> Your First Minor Chord Progression <span class="float-right">7</span><br> Harmonic Minor Song <span class="float-right">13</span><br> Dotted Half Note Dance <span class="float-right">17</span><br> Melodic Minor Scales <span class="float-right">21</span><br> First Waltz <span class="float-right">25</span><br> The Sustain Pedal <span class="float-right">29</span><br> Bringing It All Together In Song <span class="float-right">33</span><br> Conclusion <span class="float-right">37</span>',
                     ])
 
-                    @include('pianote.products._week-breakdown-2', [
-                    "navyBorder" => true,
-                    "book" => "7",
+                    @include('_partials.components.question-dropdown', [
+                    "num" => "7",
                     "title" => "The Circle Of 5ths",
-                    "description" => 'Introduction <span class="float-right">1</span><br> What Is The Circle Of 5ths? <span class="float-right">3</span><br> The Symmetry Of 4ths And 5ths <span class="float-right">7</span><br> The Sharped Circle: The Right Side <span class="float-right">11</span><br> The Flattened Circle: The Left Side <span class="float-right">15</span><br> The Major Chords Of The Circle <span class="float-right">19</span><br> The Minor Chords Of The Circle <span class="float-right">25</span><br> Working With The Circle In Major Keys <span class="float-right">29</span><br> Bringing It All Together In Song <span class="float-right">35</span><br> Conclusion <span class="float-right">43</span>',
+                    "desc" => 'Introduction <span class="float-right">1</span><br> What Is The Circle Of 5ths? <span class="float-right">3</span><br> The Symmetry Of 4ths And 5ths <span class="float-right">7</span><br> The Sharped Circle: The Right Side <span class="float-right">11</span><br> The Flattened Circle: The Left Side <span class="float-right">15</span><br> The Major Chords Of The Circle <span class="float-right">19</span><br> The Minor Chords Of The Circle <span class="float-right">25</span><br> Working With The Circle In Major Keys <span class="float-right">29</span><br> Bringing It All Together In Song <span class="float-right">35</span><br> Conclusion <span class="float-right">43</span>',
                     ])
 
-                    @include('pianote.products._week-breakdown-2', [
-                    "navyBorder" => true,
-                    "book" => "8",
+                    @include('_partials.components.question-dropdown', [
+                    "num" => "8",
                     "title" => "Learning To Improvise",
-                    "description" => 'Introduction <span class="float-right">1</span><br> Broken Chord Inversion Patterns <span class="float-right">3</span><br> Arpeggio Melodies <span class="float-right">7</span><br> Chord Embellishments <span class="float-right">11</span><br> Left Hand Rhythm Engine <span class="float-right">15</span><br> The Safe Notes <span class="float-right">21</span><br> The Two Moods Of The Perfect 5th <span class="float-right">25</span><br> Improv Flow State <span class="float-right">29</span><br> Bringing It All Together In Song <span class="float-right">31</span><br> Conclusion <span class="float-right">39</span>',
+                    "desc" => 'Introduction <span class="float-right">1</span><br> Broken Chord Inversion Patterns <span class="float-right">3</span><br> Arpeggio Melodies <span class="float-right">7</span><br> Chord Embellishments <span class="float-right">11</span><br> Left Hand Rhythm Engine <span class="float-right">15</span><br> The Safe Notes <span class="float-right">21</span><br> The Two Moods Of The Perfect 5th <span class="float-right">25</span><br> Improv Flow State <span class="float-right">29</span><br> Bringing It All Together In Song <span class="float-right">31</span><br> Conclusion <span class="float-right">39</span>',
                     ])
 
-                    @include('pianote.products._week-breakdown-2', [
-                    "navyBorder" => true,
-                    "book" => "9",
+                    @include('_partials.components.question-dropdown', [
+                    "num" => "9",
                     "title" => "7th Chords & The Blues",
-                    "description" => 'Introduction <span class="float-right">1</span><br> 7th Chords <span class="float-right">3</span><br> 12-Bar Blues <span class="float-right">13</span><br> The Minor Pentatonic Scale <span class="float-right">17</span><br> The Blues Scale <span class="float-right">23</span><br> Blues Basslines <span class="float-right">27</span><br> Blues Rhythm Pattern <span class="float-right">31</span><br> Blues Fills And Tricks <span class="float-right">35</span><br> Bringing It All Together In Song <span class="float-right">41</span><br> Conclusion <span class="float-right">49</span>',
+                    "desc" => 'Introduction <span class="float-right">1</span><br> 7th Chords <span class="float-right">3</span><br> 12-Bar Blues <span class="float-right">13</span><br> The Minor Pentatonic Scale <span class="float-right">17</span><br> The Blues Scale <span class="float-right">23</span><br> Blues Basslines <span class="float-right">27</span><br> Blues Rhythm Pattern <span class="float-right">31</span><br> Blues Fills And Tricks <span class="float-right">35</span><br> Bringing It All Together In Song <span class="float-right">41</span><br> Conclusion <span class="float-right">49</span>',
                     ])
 
-                    @include('pianote.products._week-breakdown-2', [
-                    "navyBorder" => true,
-                    "book" => "10",
+                    @include('_partials.components.question-dropdown', [
+                    "num" => "10",
                     "title" => "Intro To Jazz",
-                    "description" => 'Introduction <span class="float-right">1</span><br> Applying 7th Chords <span class="float-right">3</span><br> Chord Modifiers <span class="float-right">11</span><br> A Jazz Chord Progression <span class="float-right">19</span><br> Walking Basslines <span class="float-right">23</span><br> Piano Modes - A New Way To See Scales <span class="float-right">27</span><br> “Autumn Leaves” - The A Section <span class="float-right">33</span><br> “Autumn Leaves” - The B & C Sections <span class="float-right">37</span><br> Bringing It All Together In Song <span class="float-right">41</span><br> Conclusion <span class="float-right">51</span>',
+                    "desc" => 'Introduction <span class="float-right">1</span><br> Applying 7th Chords <span class="float-right">3</span><br> Chord Modifiers <span class="float-right">11</span><br> A Jazz Chord Progression <span class="float-right">19</span><br> Walking Basslines <span class="float-right">23</span><br> Piano Modes - A New Way To See Scales <span class="float-right">27</span><br> “Autumn Leaves” - The A Section <span class="float-right">33</span><br> “Autumn Leaves” - The B & C Sections <span class="float-right">37</span><br> Bringing It All Together In Song <span class="float-right">41</span><br> Conclusion <span class="float-right">51</span>',
                     ])
                 </div>
             </div>
@@ -465,14 +454,15 @@
         <div class="container mx-auto">
             <h1 class="font-bold mb-10 sm:mb-16 leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>What students are saying about Lisa &<br class="hidden sm:inline"> the Pianote Foundations book set.</strong></h1>
             <div class="testimonials px-6">
-                @include('pianote.products._testimonial-2', [
-                    "image" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/testimonials/dominic.jpg",
-                    "heading" => "I've felt motivated to learn because of them.",
-                    "testimonial" => "The idea of having tangible course material to accompany the online lessons was such an appealing prospect; especially as I love to learn from books.<br><br>I have noticed a considerable improvement in both my practical skills and theoretical knowledge.<br><br>I cannot recommend them highly enough; they've brought structure and understanding to the whole process of learning the foundations of the piano. Most importantly though, they're a joy to follow. I've felt motivated to learn because of them.",
-                    "name" => "Dominic Morgan",
-                    "location" => "United Kingdom"
-                ])
-
+                <div class="sm:flex items-start justify-center mb-10 sm:mb-16">
+                    <img class="rounded-full border-4 bg-pianote border-pianote w-24 sm:w-32 md:w-40 mb-3 sm:mb-0" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/testimonials/dominic.jpg">
+                    <div class="text-left sm:pl-4 md:pl-6">
+                        <h3 class="text-sm sm:text-lg md:text-xl font-extrabold">"I've felt motivated to learn because of them."</h3>
+                        <p class="text-xs sm:text-sm mt-3 mb-5 max-w-2xl">The idea of having tangible course material to accompany the online lessons was such an appealing prospect; especially as I love to learn from books.<br><br>I have noticed a considerable improvement in both my practical skills and theoretical knowledge.<br><br>I cannot recommend them highly enough; they've brought structure and understanding to the whole process of learning the foundations of the piano. Most importantly though, they're a joy to follow. I've felt motivated to learn because of them.</p>
+                        <p class="text-xs sm:text-sm font-extrabold text-pianote">Dominic Morgan</p>
+                        <p class="text-xs sm:text-sm">United Kingdom</p>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -509,41 +499,35 @@
         <div class="container mx-auto">
             <h1 class="font-bold mb-8 sm:mb-10 leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>Still have questions?</strong></h1>
             <div class="px-6 mx-auto max-w-4xl">
-                @include('pianote.products._week-breakdown-2', [
-                "navyBorder" => true,
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "Are these books for me?",
-                "description" => "Yes! Ok, we can’t say for sure. But if you’ve made it this far we’re going to assume you want to learn the piano, and play it beautifully. That’s what these books are designed to help you do."
+                "desc" => "Yes! Ok, we can’t say for sure. But if you’ve made it this far we’re going to assume you want to learn the piano, and play it beautifully. That’s what these books are designed to help you do."
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                "navyBorder" => true,
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "Do I need to be a Pianote member to buy the books?",
-                "description" => "No! You can buy and learn from these books on their own. BUT they were designed to work hand-in-hand with a Pianote membership."
+                "desc" => "No! You can buy and learn from these books on their own. BUT they were designed to work hand-in-hand with a Pianote membership."
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                "navyBorder" => true,
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "How long will it take me to go through all 10 books?",
-                "description" => "How long is a piece of string? Joking aside, that really depends on how much practice and time you’re able to put in!<br>But if you were able to commit to daily practice and took advantage of all the extra resources you could reasonably expect to go through all books within a year. That means you’re only 12 months (or less) away from playing beautifully the way that you want.<br>Learning the piano is a lifelong process, so you’ll probably want to return to these books, again and again, to keep your skills sharp!<br>"
+                "desc" => "How long is a piece of string? Joking aside, that really depends on how much practice and time you’re able to put in!<br>But if you were able to commit to daily practice and took advantage of all the extra resources you could reasonably expect to go through all books within a year. That means you’re only 12 months (or less) away from playing beautifully the way that you want.<br>Learning the piano is a lifelong process, so you’ll probably want to return to these books, again and again, to keep your skills sharp!<br>"
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                "navyBorder" => true,
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "Are the books sold separately or together?",
-                "description" => "These books are presented in a beautiful box-set. The curriculum is designed to be followed from the first page to the last, so all 10 books are included."
+                "desc" => "These books are presented in a beautiful box-set. The curriculum is designed to be followed from the first page to the last, so all 10 books are included."
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                "navyBorder" => true,
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "How much does shipping cost?",
-                "description" => "Shipping rates will vary depending on the shipping location. Check to see your location:<br>US - $9<br>Canada, UK, Germany $15<br>Everywhere else $40<br>Unfortunately, international shipping is much higher than we’d like and there’s no quick way for us to lower the cost. We’ll be looking at finding local distribution centers in the future"
+                "desc" => "Shipping rates will vary depending on the shipping location. Check to see your location:<br>US - $9<br>Canada, UK, Germany $15<br>Everywhere else $40<br>Unfortunately, international shipping is much higher than we’d like and there’s no quick way for us to lower the cost. We’ll be looking at finding local distribution centers in the future"
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                "navyBorder" => true,
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "How long will it take for the books to arrive?",
-                "description" => "Here are the general shipping guidelines:<br>US 2-10 Business Days<br>Everywhere Else: 7-20 Business Days"
+                "desc" => "Here are the general shipping guidelines:<br>US 2-10 Business Days<br>Everywhere Else: 7-20 Business Days"
                 ])
             </div>
         </div>

@@ -6,6 +6,7 @@ use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
 use App\Modules\EventDataSynchronizer\Console\Commands\ExpiredProductResync;
 use App\Modules\EventDataSynchronizer\Console\Commands\MigrateMinutesWatchedPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\PackBonusExpirationDateResyncTool;
+use App\Modules\EventDataSynchronizer\Console\Commands\SyncPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermissionsResyncTool;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipOwnedProductSyncTool;
@@ -230,6 +231,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 CustomerIOSyncUser::class,
                 ExpiredProductResync::class,
                 MigrateMinutesWatchedPoints::class,
+                SyncPoints::class,
             ]
         );
         $this->mergeConfigFrom(

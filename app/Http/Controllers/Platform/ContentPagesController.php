@@ -154,7 +154,7 @@ class ContentPagesController extends BaseController
             ]);
         }
 
-        if ($contentTypeName == 'songs' && ($brand == 'singeo' || $brand == 'pianote')) {
+        if ($contentTypeName == 'songs') {
             $listLessons = $this->contentService->getFiltered(
                 $request->get('page', 1),
                 $request->get('limit', $defaultPage),
