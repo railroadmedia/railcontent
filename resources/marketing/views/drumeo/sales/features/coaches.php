@@ -359,7 +359,7 @@
             'artist' => 'Stan Bicknell',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/characteristics.jpg',
             'title' => 'The Characteristics of Feel',
             'artist' => 'Josh Dion',
         ],
