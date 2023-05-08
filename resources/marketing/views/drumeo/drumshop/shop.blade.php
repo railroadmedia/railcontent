@@ -10,7 +10,7 @@
 @endsection
 
 @section('x-data')
-        filter: '{{ $category !== 'drumshop' ? $category : 'all' }}',
+    filter: '{{ $category !== 'drumshop' ? $category : 'all' }}',
 @endsection
 
 @section('layout-header')
@@ -20,10 +20,15 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg);">
+    <header class="drum-shop-header relative">
+        <picture>
+            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg">
+            <img class="absolute w-full h-full left-0 top-0 object-cover object-center" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg" alt="header background" fetchpriority="high" />
+        </picture>
+
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                <img class="h-6 md:h-9" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo">
+                <img class="h-6 md:h-9" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo" fetchpriority="high">
                 <h1><strong>DRUM SHOP</strong></h1>
                 <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>
             </div>
@@ -113,7 +118,6 @@
         {{--        </section>--}}
 
         {{--  LESSONS  --}}
-
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
@@ -137,7 +141,7 @@
                      "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
                      'soldOut' => false,
                 ])
-                @foreach($lessons as $lesson)
+                @foreach($lessons as $key => $lesson)
                     @include('drumeo.drumshop._partials._drum-shop-card', [
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                         "sku" => $lesson->sku === 'drumeo' ? null : $lesson->sku,
@@ -154,6 +158,7 @@
                         "soldOut" => $lesson->sold_out,
                         "includedEdge" => $lesson->included_edge,
                         "sizes" => $lesson->sizes,
+                        'FCP' => $key < 4 ? true : null,
                     ])
                 @endforeach
 
