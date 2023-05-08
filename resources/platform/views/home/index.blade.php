@@ -19,6 +19,12 @@
         >
         </header-carousel>
 
+        @if($existsCohortBanner)
+            <cohort-banner
+            :preloaded-banner="{{$cohortBanner}}"
+            ></cohort-banner>
+            @endif
+
         {{-- Invite Email Message --}}
         @if(session()->has('email-invite-message'))
             <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
@@ -150,6 +156,13 @@
     @include('partials._railanalytics-brand-tracking-iframe')
 
 @endsection
+
+<script>
+    import CohortBanner from "../../assets/js/vue/components/CohortBanner/CohortBanner";
+    export default {
+        components: {CohortBanner}
+    }
+</script>
 
 
 

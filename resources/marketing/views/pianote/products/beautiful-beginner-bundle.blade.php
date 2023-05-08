@@ -97,8 +97,18 @@
 
     <section class="content-section text-center upgrade-video-header bg-white text-black">
         <div class="container mx-auto">
-            <h1 class="font-bebas uppercase leading-none mb-1">The Beautiful Beginner<br class="inline sm:hidden"> <span class="text-coaches">Piano Bundle.</span></h1>
-            <h6 class="uppercase leading-tight"><strong>Because starting out <br class="inline sm:hidden"> should sound this good.</strong></h6>
+            <h1 class="font-bebas uppercase leading-none mb-3">The Beautiful Beginner<br class="inline sm:hidden"> <span class="text-coaches">Piano Bundle.</span></h1>
+            <h6 class="uppercase leading-tight"><strong>Because starting out <br class="inline sm:hidden"> should sound this good.<br>
+            <span class="text-promo">ONLY
+                <span x-cloak x-data="timer()" x-init="countdown()">
+                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                 </span>
+                LEFT</span>
+                </strong></h6>
             <div class="w-full mx-auto mt-5 sm:mt-10 mb-10 sm:mb-20 px-4" style="max-width:920px;">
                 <img
                     class="rounded-xl"
@@ -289,11 +299,12 @@
             <div class="flex flex-wrap items-center mb-7 sm:mb-10">
                 <div class="flex flex-wrap sm:flex-nowrap items-center text-left w-full max-w-3xl mx-auto xl:w-7/12">
                     <a class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 mb-7 sm:mb-0 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2 sm:order-1"
-                        href="/ecommerce/add-to-cart?product-array=the-power-of-chords:1,piano-riffs-and-fills:1,play-beautiful-piano:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1&redirect=/order&locked=true"
+{{--                        href="/ecommerce/add-to-cart?product-array=the-power-of-chords:1,piano-riffs-and-fills:1,play-beautiful-piano:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1&redirect=/order&locked=true"--}}
                     >
                         <h4 class="mb-5"><strong>The Beautiful Beginner Piano Bundle </strong></h4>
                         <h2 class="inline-block"><strong class="text-4xl"><s class="opacity-50">$260</s> ${{ 127 }}</strong></h2> <p class="inline-block text-xs">Only</p><br>
-                        <div class="join blue smaller my-4">Get Started</div>
+                        <div class="join sold-out smaller my-4">Sold Out</div>
+{{--                        <div class="join blue smaller my-4">Get Started</div>--}}
                         <ul class="list-disc ml-7">
                             <li class="text-sm relaxed">The Power of Chords</li>
                             <li class="text-sm relaxed">Piano Riffs & Fills</li>
@@ -309,12 +320,13 @@
                             <i class="fas fa-check text-pianote mr-1"></i> 90-Day Guarantee</p>
                     </a>
                     <a class="px-5 sm:px-7 lg:px-9 py-7 sm:py-9 rounded-xl shadow-lg w-full sm:w-1/2" style="background-color:#d4eaff;"
-                        href="/ecommerce/add-to-cart?product-array=the-power-of-chords:1,piano-riffs-and-fills:1,play-beautiful-piano:1&redirect=/order&locked=true"
+{{--                        href="/ecommerce/add-to-cart?product-array=the-power-of-chords:1,piano-riffs-and-fills:1,play-beautiful-piano:1&redirect=/order&locked=true"--}}
                     >
                         <h4><strong>The Beautiful Beginner Piano Bundle </strong></h4>
                         <p class="text-sm mt-2 mb-5">(Digital-Only Verison)</p>
                         <h2 class="inline-block"><strong class="text-4xl"><s class="opacity-50">$203</s> ${{ 97 }}</strong></h2> <p class="inline-block text-xs">Only</p><br>
-                        <div class="join blue smaller my-4">Get Started</div>
+{{--                        <div class="join blue smaller my-4">Get Started</div>--}}
+                        <div class="join sold-out smaller my-4">Sold Out</div>
                         <ul class="list-disc ml-7">
                             <li class="text-sm relaxed">The Power of Chords</li>
                             <li class="text-sm relaxed">Piano Riffs & Fills</li>
@@ -358,4 +370,9 @@
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
+
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-05-01 00:00:00',
+        'promoVersion' => false
+    ])
 @stop

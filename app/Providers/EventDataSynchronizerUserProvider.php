@@ -9,8 +9,8 @@ use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
 
 class EventDataSynchronizerUserProvider implements UserProviderInterface
 {
-    public function isAdministrator(int $userId)
-    : bool {
+    public function isAdministrator(int $userId): bool
+    {
         if (!empty(user()) && $userId == user()->id) {
             return user()->isAdmin();
         }
@@ -40,8 +40,7 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
         bool $isPackOwner,
         ?string $membershipLevel,
         bool $isDrumeoLifetimeMember
-    )
-    : bool {
+    ): bool {
         $user =
             User::query()
                 ->find($userId);
@@ -72,16 +71,14 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
         return false;
     }
 
-    public function saveExperiencePoints(int $userId, array $totalXpPerBrands, $shouldRevert = false)
-    : bool {
-        $user =
-            User::query()
-                ->find($userId);
+    public function saveExperiencePoints(int $userId, array $totalXpPerBrands, $shouldRevert = false): bool
+    {
+        $user = User::query()->find($userId);
 
         if (!empty($user) && $user) {
             $userBrandXP = $user->brand_total_xp;
             $totalXp = 0;
-            foreach ($totalXpPerBrands as $brand => $totalXpPerBrand){
+            foreach ($totalXpPerBrands as $brand => $totalXpPerBrand) {
                 $userBrandXP[$brand] = $totalXpPerBrand;
                 $totalXp += $totalXpPerBrand;
             }
@@ -96,8 +93,8 @@ class EventDataSynchronizerUserProvider implements UserProviderInterface
         return false;
     }
 
-    public function savePackOwnerData(int $userId, bool $isPackOwner)
-    : bool {
+    public function savePackOwnerData(int $userId, bool $isPackOwner): bool
+    {
         // TODO: Implement savePackOwnerData() method.
     }
 }

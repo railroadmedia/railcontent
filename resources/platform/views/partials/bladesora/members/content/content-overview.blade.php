@@ -72,13 +72,12 @@
                         Included With Edge
                     </p>
                 @endif
+                    
+                @if(!empty($statusText))
+                        <div class="tw-mb-2"><p class="tw-text-white tw-bg-{{ $brand }} tw-uppercase tiny tw-rounded-lg tw-font-bold tw-py-1 tw-px-2.5 tw-inline-block">{{ $statusText }}</p></div>
+                @endif
 
-                @if ($itemTitle === '30 Day Drummer: Season 2' || $itemTitle === 'New Piano Players Start Here')
-                    <div class="tw-mb-2">
-                        <p
-                            class="tw-text-white tw-bg-{{ $brand }} tw-uppercase tiny tw-rounded-lg tw-font-bold tw-py-1 tw-px-2.5 tw-inline-block">
-                            In Progress</p>
-                    </div>
+                @if($itemTitle === '30 Day Drummer: Season 2')<div class="tw-mb-2"><p class="tw-uppercase tiny tw-rounded-lg tw-font-bold tw-py-1 tw-px-2.5 tw-inline-block tw-bg-[#000C17] tw-text-white dark:tw-bg-white dark:tw-text-black">March 2023</p></div>
                 @endif
 
                 @if ($itemTitle === '30-Day Drummer')

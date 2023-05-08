@@ -529,7 +529,7 @@
             "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
             "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
             "songs" => "1000",
-            "firstPoint" => "Unlimited guitar lessons",
+            "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, piano, and drums.",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",

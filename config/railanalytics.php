@@ -178,7 +178,7 @@ return [
                         'campaign-id' => '14652',
                         'tag-action-tracker-id' => '27554',
                         'api-action-tracker-id' => '27555',
-                        'sign-up-action-tracker-id' => '28350'
+                        'sign-up-action-tracker-id' => ''
                     ]
             ]
         ],
@@ -219,7 +219,7 @@ return [
                         'campaign-id' => '14652',
                         'tag-action-tracker-id' => '27554',
                         'api-action-tracker-id' => '27555',
-                        'sign-up-action-tracker-id' => '28350'
+                        'sign-up-action-tracker-id' => ''
                     ]
             ]
         ],
@@ -260,7 +260,7 @@ return [
                         'campaign-id' => '14652',
                         'tag-action-tracker-id' => '27554',
                         'api-action-tracker-id' => '27555',
-                        'sign-up-action-tracker-id' => '28350'
+                        'sign-up-action-tracker-id' => ''
                     ]
             ]
         ],
@@ -344,7 +344,7 @@ return [
                         'campaign-id' => '14651',
                         'tag-action-tracker-id' => '27558',
                         'api-action-tracker-id' => '27559',
-                        'sign-up-action-tracker-id' => '28349',
+                        'sign-up-action-tracker-id' => '',
                     ]
             ]
         ],
@@ -384,7 +384,7 @@ return [
                         'campaign-id' => '14651',
                         'tag-action-tracker-id' => '27558',
                         'api-action-tracker-id' => '27559',
-                        'sign-up-action-tracker-id' => '28349',
+                        'sign-up-action-tracker-id' => '',
                     ]
             ]
         ],
@@ -464,7 +464,7 @@ return [
                         'campaign-id' => '14650',
                         'tag-action-tracker-id' => '27560',
                         'api-action-tracker-id' => '27561',
-                        'sign-up-action-tracker-id' => '28352'
+                        'sign-up-action-tracker-id' => ''
                     ]
             ]
         ],
@@ -500,7 +500,7 @@ return [
                         'campaign-id' => '14650',
                         'tag-action-tracker-id' => '27560',
                         'api-action-tracker-id' => '27561',
-                        'sign-up-action-tracker-id' => '28352'
+                        'sign-up-action-tracker-id' => ''
                     ]
             ]
         ],
@@ -563,7 +563,7 @@ return [
                         'campaign-id' => '14834',
                         'tag-action-tracker-id' => '27792',
                         'api-action-tracker-id' => '27793',
-                        'sign-up-action-tracker-id' => '28353'
+                        'sign-up-action-tracker-id' => ''
                     ]
             ]
         ],
@@ -583,7 +583,7 @@ return [
                         'campaign-id' => '14834',
                         'tag-action-tracker-id' => '27792',
                         'api-action-tracker-id' => '27793',
-                        'sign-up-action-tracker-id' => '28353'
+                        'sign-up-action-tracker-id' => ''
                     ]
             ]
         ],

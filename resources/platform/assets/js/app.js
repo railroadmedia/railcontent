@@ -23,7 +23,11 @@ import ResetPassForm from './vue/components/ResetPassForm/ResetPassForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
 import InfoModal from './vue/components/Modal/InfoModal';
+<<<<<<< HEAD
 import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
+=======
+import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
+>>>>>>> master
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -251,7 +255,11 @@ app.component('AppContainer', AppContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
     .component('InfoModal', InfoModal)
+<<<<<<< HEAD
     .component('SoundSlice', SoundSlice)
+=======
+    .component('CohortBanner', CohortBanner)
+>>>>>>> master
 
     .component('PlaylistPlaybackWrapper', defineAsyncComponent(() => 
         import(

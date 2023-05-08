@@ -218,9 +218,15 @@
                 </div>
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
                     <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">2</h6>
+                    <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
+                        Sometimes there’s a short assignment or test (role dependent). The order of the hiring process may be impacted by this.
+                    </p>
+                </div>
+                <div class="flex items-start relative z-10 mb-5 sm:mb-7">
+                    <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">3</h6>
                     <div class="pl-4 sm:pl-7 mt-4">
                         <p class="m-0 text-gray-500">
-                            If you are selected from the application phase, our Talent Acquisition Team will set up a 30-minute phone or video interview. Here are a few things we might ask:
+                            If you are selected, our Talent Acquisition Team will set up a 30-minute phone or video interview. Here are a few things we might ask:
                         </p>
                         <ul class="list-disc list-outside pl-10 text-gray-500">
                             <li>How would you describe yourself in three words? How would others describe you? Provide an example of why for each.</li>
@@ -230,21 +236,15 @@
                     </div>
                 </div>
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
-                    <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">3</h6>
+                    <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">4</h6>
                     <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
                         At least one additional 30-60 minute Interview with the hiring manager. To prepare for this, we suggest reading through the job description to understand how your experience relates to the role.  We also want to know why you want to work here.
                     </p>
                 </div>
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
-                    <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">4</h6>
-                    <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
-                        Reference checks (we ask for three professional references) - these are collected earlier on but are only used if the candidate is in the final stages of the hiring process.
-                    </p>
-                </div>
-                <div class="flex items-start relative z-10 mb-5 sm:mb-7">
                     <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">5</h6>
                     <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
-                        Sometimes there’s a short assignment or test (role dependent).
+                        Reference checks (we ask for three professional references) - these are collected earlier on but are only used if the candidate is in the final stages of the hiring process.
                     </p>
                 </div>
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">

@@ -1,6 +1,6 @@
-@include($theme.'._partials.holiday-logo',[
-    'styles' => 'h-14 sm:h-16 lg:h-20'
-])
+{{--@include($theme.'._partials.holiday-logo',[--}}
+{{--    'styles' => 'h-14 sm:h-16 lg:h-20'--}}
+{{--])--}}
 <h1><strong>{{ strtoupper($theme) }} SHOP</strong></h1>
 <h5>{!! $text !!}</h5>
 {{--<div class="rounded-xl px-6 py-2 inline-flex flex-wrap mx-auto mt-5 justify-center items-center" style="background-color:#181515;">--}}

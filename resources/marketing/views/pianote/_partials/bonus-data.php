@@ -104,4 +104,10 @@ $bonuses = [
         'description' => 'Learn to improvise from one of the best piano players in the world, Jesús Molina',
         'price' => floatval($productPrices['jesus-molina-improvisation-and-musical-freedom-pack']->price),
     ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/classical-piano-book.jpg',
+        'title' => 'Classical <br>Book',
+        'description' => '92 pages full of beautiful pieces by famous classical composers that you can actually play!',
+        'price' => floatval($productPrices['classical-book']->price),
+    ],
 ];

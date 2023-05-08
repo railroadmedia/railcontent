@@ -1,4 +1,4 @@
-<a href="{{ $link }}" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] fixed" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
+<a href="{{ $link }}" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100] fixed anchor-slide" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
     @if(!empty($logo))
     <img
         class="h-8 sm:h-10 mr-4 transition-opacity opacity-0"

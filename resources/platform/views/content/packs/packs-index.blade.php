@@ -60,6 +60,7 @@
                     'forceSquareThumb' => true,
                     'releaseDate' => $pack->fetch('published_on_in_timezone'),
                     'isOwned' => true,
+                    "statusText" => $pack->fetch('status_text')
                 ])
             @endforeach
         </div>
