@@ -120,27 +120,6 @@
     //---------Lifecycle Methods---------//
 
     onMounted(()=> {
-        //Handle drag Event
-        document.addEventListener('drag', function(e) {
-            if(playlistsStore.sortingPlaylist) {
-                const { clientHeight } = scrollContainer;
-                if (e.target.classList.contains('draggable')) {
-                    //Scroll Container on Drag
-                    state.stopScroll = true;
-                    //Scroll Down
-                    if ( (e.clientY > ( clientHeight - 200) ) && !VerticalMaxed() ) {
-                        state.stopScroll = false;
-                        scrollContainer.scrollBy(0, 1);
-                    } else if ( e.clientY < 175 ) {
-                        state.stopScroll = false;
-                        scrollContainer.scrollBy(0, -90);
-                    } else {
-                        return false
-                    }
-                }
-            }
-        })
-
         //Handle infinite Scroll
         if(props.infiniteScroll) {
             scrollContainer.onscroll = () => {
@@ -222,17 +201,15 @@
                                 class="tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-col"
                         >
                             <VueDraggableNext 
-                                class="list-group"
+                                :ghost-class="playlistsStore.sortingPlaylist ? 'ghost' : ''"
                                 :v-model="playlistsStore.lessons" 
                                 :sort="playlistsStore.sortingPlaylist"
-                                :animation="0"
                                 :key="state.lessonsContainerKey"
                                 @update="handleDragChange"
                             >
                                 <!-- Print Each Card -->
                                 <playlist-card
                                     v-for="(lesson,i) in playlistsStore.lessons"
-                                    class="list-group-item"
                                     :key="i"
                                     :index="i"
                                     :lesson="lesson"
@@ -270,3 +247,12 @@
 
     </main>
 </template>
+<style>
+    .ghost {
+        border-bottom: 1px solid black;
+        width: 100%;
+    }
+    body.tw-dark .ghost {
+        border-bottom: 1px solid white;
+    }
+</style>
