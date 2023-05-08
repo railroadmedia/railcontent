@@ -57,6 +57,11 @@ const lessonThumbnail = computed(() => {
 const artist = computed(() => {
     return props.lesson.artist;
 })
+
+const released = computed(() => {
+    return lessonDateParsed < dateNow;
+})
+
 //Instructor
 const instructor = computed(() => {
     const instructorObject = props.lesson?.fields?.length ? props.lesson.fields.find(data => data.key === 'instructor') : { value: null };
@@ -129,10 +134,6 @@ const time = DateTime.fromSQL(lessonDate).toFormat('h:mm a');
 
 //-----------Methods-----------//
 
-const released = () => {
-    return lessonDateParsed < dateNow;
-}
-
 //Format Duration (in seconds)
 const duration_formatted = (seconds) => {
     let time = seconds;
@@ -178,7 +179,8 @@ const dropdownTriggerHandler = target => {
 //-----------Lifecycle Methods-----------//
 
 onBeforeMount(() => {
-    // console.log(props.lesson)
+    console.log(props.lesson)
+
     state.isPinned = props.lesson.pinned;
     state.isPrivate = props.lesson.private;
     if (props.lesson.type !== 'assignment' && props.lesson.type !== 'song') {
@@ -328,7 +330,7 @@ onBeforeMount(() => {
                 <!-- Lesson Time -->
                 <div class="tw-hidden lg:tw-inline-flex tw-justify-center tw-shrink-0 tw-w-[100px] tw-text-sm"
                     :title="lesson.duration">
-                    <span>{{ duration_formatted(lesson.duration) || '' }}</span>
+                    <span>{{ duration_formatted(lesson.duration) || '0:00' }}</span>
                 </div>
             </template>
 
