@@ -193,7 +193,7 @@
             'artist' => 'Steve Smith',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/independence.jpg',
             'title' => 'Independence',
             'artist' => 'Thomas Lang',
         ],
@@ -221,72 +221,72 @@
 
     $grooves = [
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/dcb-55.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/michael-jackson.jpg',
             'title' => 'The Grooves of Michael Jackson',
             'artist' => 'Jonathan Moffett',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/0-Course Thumb-1667467919.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/styx.jpg',
             'title' => 'The Grooves of Styx',
             'artist' => 'Todd Sucherman',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/276247-card-thumbnail-maxres-1607363530.png',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/snarky-puppy.jpg',
             'title' => 'The Grooves of Snarky Puppy',
             'artist' => 'Larnell Lewis',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/The+Grooves+of+John+Bonham.jpeg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/john-boham.jpg',
             'title' => 'The Grooves of John Bonham',
             'artist' => 'Brian Tichy',
         ],
         [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dci-111.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/porcupine-tree.jpg',
             'title' => 'The Grooves of Porcupine Tree',
             'artist' => 'Gavin Harrison',
         ],
         [
-            'img' => 'https://dzryyo1we6bm3.cloudfront.net/card-thumbnails/courses/550/dci-72.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/chicago.jpg',
             'title' => 'The Grooves of Chicago',
             'artist' => 'Danny Seraphine',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/254195-card-thumbnail-maxres-1591373535.png',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/death-cab-for-cutie.jpg',
             'title' => 'The Grooves of Death Cab For Cutie	',
             'artist' => 'Jason McGerr',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/247400-card-thumbnail-maxres-1584796503.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/alice-cooper.jpg',
             'title' => 'The Grooves of Alice Cooper	',
             'artist' => 'Glen Sobel',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/230226-card-thumbnail-maxres-1566639432.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/steely-dan.jpg',
             'title' => 'The Grooves of Steely Dan',
             'artist' => 'Keith Carlock',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/dcb-57-1.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/harvey-mason.jpg',
             'title' => 'The Grooves of Harvey Mason',
             'artist' => 'Harvey Mason',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/262502-card-thumbnail-maxres-1595862611.png',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/daru-jones.jpg',
             'title' => 'The Grooves of Daru Jones',
             'artist' => 'Daru Jones',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/title-grooves-of-shawn-mendes-1637590609.png',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/shawn-mendes.jpg',
             'title' => 'The Grooves of Shawn Mendez',
             'artist' => 'Mike Sleath',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/231916-card-thumbnail-maxres-1567867073.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/tool.jpg',
             'title' => 'The Polyrhythms of Tool',
             'artist' => 'Aaron Edgar',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/dci-120.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/gene-hoglan.jpg',
             'title' => 'The Grooves of Gene Hoglan',
             'artist' => 'Gene Hoglan',
         ],
