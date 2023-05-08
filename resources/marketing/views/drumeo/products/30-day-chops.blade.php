@@ -218,25 +218,25 @@
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/logo.svg" alt="logo">
                     <h1 class="rotater-text overflow-hidden"><strong>
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">in just 30 days.</h2>
 
