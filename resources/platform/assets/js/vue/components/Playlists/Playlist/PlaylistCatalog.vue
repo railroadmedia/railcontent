@@ -236,7 +236,7 @@
                                 class="tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-col"
                         >
                             <VueDraggableNext 
-                                class="list-group"
+                                class="tw-relative"
                                 :v-model="computedLessons" 
                                 :sort="playlistsStore.sortingPlaylist"
                                 :animation="0"
