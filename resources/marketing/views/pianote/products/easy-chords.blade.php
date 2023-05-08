@@ -555,7 +555,7 @@
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
                     <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl">
                         <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/beginner-player.jpg" alt="classical player" loading="lazy" onload="this.classList.remove('opacity-0')" />
-                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br>Beginner <br class="hidden sm:inline"> piano players</strong></h6>
+                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon" loading="lazy" onload="this.classList.remove('opacity-0')"><br>Beginner <br class="hidden sm:inline"> piano players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Know a few chords, but struggling to feel confident playing them? Or are you wondering what chord inversions are and how to practice them? With Easy Chords, you’ll move past the beginner stage and start sounding better.</p>
@@ -869,22 +869,22 @@
 
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "dayOne",
-        "video" => '//player.vimeo.com/video/823805392/bbd23aa655?autoplay=1',
+        "video" => '//player.vimeo.com/video/823805392?h=bbd23aa655&autoplay=1',
         "title" => 'dayOne'
     ])
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "dayThirty",
-        "video" => '//player.vimeo.com/video/823805719/722d7f7336?autoplay=1',
+        "video" => '//player.vimeo.com/video/823805719?h=722d7f7336&autoplay=1',
         "title" => 'dayThirty'
     ])
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "demoVid",
-        "video" => '//player.vimeo.com/video/823806000/457fb12951?autoplay=1',
+        "video" => '//player.vimeo.com/video/823806000?h=457fb12951&autoplay=1',
         "title" => 'demoVid'
     ])
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/823788317/b2955e3bc7?autoplay=1',
+        "video" => '//player.vimeo.com/video/823788317?h=b2955e3bc7&autoplay=1',
         "title" => 'trailer'
     ])
     @foreach ($modalImages as $key => $img)
