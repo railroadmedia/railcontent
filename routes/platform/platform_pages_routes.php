@@ -641,7 +641,8 @@ Route::domain('{musoraDomain}')
 
         Route::get('{brand}/cohort-packs/register/{product}', [CohortPackController::class, 'register'] )
             ->name('platform.cohort.register');
-   // New playlists
+
+        // New playlists
         Route::get('/{brand}/playlists', [\App\Http\Controllers\Platform\UserPlaylistsController::class, 'index'])
             ->whereIn('brand', all_brands())
             ->name('platform.user.playlists');

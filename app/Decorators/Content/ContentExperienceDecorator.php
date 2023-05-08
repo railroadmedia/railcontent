@@ -3,6 +3,7 @@
 namespace App\Decorators\Content;
 
 use App\Maps\ContentTypes;
+use Illuminate\Support\Facades\Log;
 use Railroad\Railcontent\Support\Collection;
 
 class ContentExperienceDecorator extends TypeDecoratorBase
@@ -47,6 +48,12 @@ class ContentExperienceDecorator extends TypeDecoratorBase
                     config('xp_ranks.difficulty_xp_map.all');
 
                 $pointAmount = $content->fetch('fields.xp', $defaultPointAmount);
+
+                if (!is_int($pointAmount)) {
+                    $contentID = $content['id'];
+                    Log::warning("Content $contentID XP field is set to '$pointAmount' and is not an integer.");
+                    $pointAmount = $defaultPointAmount;
+                }
 
                 foreach ($content['assignments'] ?? [] as $assignment) {
                     $pointAmount += $assignment->fetch('xp', 0);

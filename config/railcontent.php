@@ -1628,7 +1628,7 @@ return [
         'qna_video',
     ],
 
-    'compiled_columns_that_should_allow_dups' =>['sbt_exercise_number','sbt_bpm'],
+    'compiled_columns_that_should_allow_dups' => ['sbt_exercise_number', 'sbt_bpm'],
 
     'content_multiple_level_content_depth_playlist_allowed' => [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'

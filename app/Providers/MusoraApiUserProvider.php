@@ -376,4 +376,9 @@ class MusoraApiUserProvider implements UserProviderInterface
 
         return $user;
     }
+
+    public function getAuthKey()
+    {
+        return generate_musora_cross_platform_login_key(user()->id, user()->password);
+    }
 }

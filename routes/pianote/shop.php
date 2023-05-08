@@ -23,6 +23,7 @@ Route::domain('{pianoteDomain}')
                 Route::get('/riffs-and-fills', [LeadGenController::class, 'riffsAndFills']);
                 Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
                 Route::get('/worship-piano', [SalesController::class, 'worshippiano'] );
+                Route::get('/beautiful-beginner-bundle', [SalesController::class, 'beautifulBeginnerBundle'] );
             }
         );
 
