@@ -58,17 +58,6 @@
         lessonsContainerKey: Math.round(Math.random() * 100000)
     })
 
-    //-----------Computed Data-----------//
-    const computedLessons = computed({
-        get: () => {
-            return lessonsArray.value;
-        },
-        set: (val) => {
-            console.log(val)
-            lessonsArray.value = val;
-        }
-    })
-
     //-----------Static Data-----------//
     const scrollContainer = document.querySelector('#content-container');
 
@@ -92,7 +81,6 @@
 
         //Update store and computed array
         playlistsStore.lessons = lessonsCopy.value;
-        computedLessons.value = lessonsCopy.value;
 
         state.lessonsContainerKey = Math.round(Math.random() * 100000);
 
@@ -106,7 +94,6 @@
     const handleCancelSort = () => {
         console.log('handle cancel sort')
         //Update array to initial order
-        computedLessons.value = playlistsStore.lessons;
         lessonsCopy.value = playlistsStore.lessons;
         playlistsStore.sortingPlaylist = false;
         state.lessonsContainerKey = Math.round(Math.random() * 100000);
@@ -185,7 +172,6 @@
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
         lessonsCopy.value = [...props.lessons.data];
-        computedLessons.value = [...props.lessons.data];
     });
 </script>
 <template>
@@ -237,7 +223,7 @@
                         >
                             <VueDraggableNext 
                                 class="list-group"
-                                :v-model="computedLessons" 
+                                :v-model="playlistsStore.lessons" 
                                 :sort="playlistsStore.sortingPlaylist"
                                 :animation="0"
                                 :key="state.lessonsContainerKey"
@@ -245,7 +231,7 @@
                             >
                                 <!-- Print Each Card -->
                                 <playlist-card
-                                    v-for="(lesson,i) in computedLessons"
+                                    v-for="(lesson,i) in playlistsStore.lessons"
                                     class="list-group-item"
                                     :key="i"
                                     :index="i"
