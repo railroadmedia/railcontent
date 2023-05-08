@@ -4,7 +4,7 @@
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=d8dfdf5c5bceea18578ef8fab600ce44",
-    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=90f283259689456ed04f7dd46769e4bc",
+    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=e4cb41766e262a8f06997e921b1a29df",
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=af3d16381543901859e9e955ed9e2cd0",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=e1ffd5c9f64e7739d834a415aba059fc",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=26ba2bb391babd9dcfbc6e1e9cf80ffd",
@@ -29,11 +29,7 @@
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=94e4f2ebf472d31f9e0a89c474023880",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=cfa09b0b222991cacf388f79469aaec9",
     "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=ec28d3551e0bd4b43b6946a87f305198",
-<<<<<<< HEAD
-    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=6d450d7daced7671440a0209045e7a1c",
-=======
-    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=742da1c4918bc4f5a5fbce290677c1df",
->>>>>>> ec3f8e8bb4f923904c5097367d69737fd2305966
+    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=f00d1b54e3fa6a5bb6f0f322a63983b0",
     "/platform/js/playlist-breadcrumb.js": "/platform/js/playlist-breadcrumb.js?id=95e0c94659bcecbcfc02a6f1ab5ade5f",
     "/platform/js/playlist-collection-header.js": "/platform/js/playlist-collection-header.js?id=ee900c84f0d4cc0858e725de34ae2360",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=26d03238e24769866d21704f9c052fd4",
