@@ -238,23 +238,21 @@
                             <VueDraggableNext 
                                 class="list-group"
                                 :v-model="computedLessons" 
-                                :dragoverBubble="playlistsStore.sortingPlaylist" 
                                 :sort="playlistsStore.sortingPlaylist"
                                 :animation="0"
-                                ghostClass="ghost"
                                 :key="state.lessonsContainerKey"
                                 @update="handleDragChange"
                             >
-                                    <!-- Print Each Card -->
-                                    <playlist-card
-                                        v-for="(lesson,i) in computedLessons"
-                                        class="list-group-item"
-                                        :key="i"
-                                        :index="i"
-                                        :lesson="lesson"
-                                        :token="token"
-                                        :brand="brand"
-                                    />
+                                <!-- Print Each Card -->
+                                <playlist-card
+                                    v-for="(lesson,i) in computedLessons"
+                                    class="list-group-item"
+                                    :key="i"
+                                    :index="i"
+                                    :lesson="lesson"
+                                    :token="token"
+                                    :brand="brand"
+                                />
                             </VueDraggableNext>
 
                             <!-- Skeleton Loader For Infinite Scroll -->
@@ -286,25 +284,3 @@
 
     </main>
 </template>
-
-<style>
-.flip-list-move {
-  transition: transform 0.5s;
-}
-.no-move {
-  transition: transform 0s;
-}
-.ghost {
-  opacity: 0.5;
-  background: #c8ebfb;
-}
-.list-group {
-  min-height: 20px;
-}
-.list-group-item {
-  cursor: move;
-}
-.list-group-item i {
-  cursor: pointer;
-}
-</style>
