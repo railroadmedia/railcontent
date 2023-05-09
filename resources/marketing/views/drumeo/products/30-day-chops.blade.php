@@ -330,7 +330,7 @@
                     <br><br>
                     Plus, you’ll have a live lesson every Saturday to ask questions and get yourself “unstuck.”
                     <br><br>
-                    By the end of the month, you’ll have 60+ new chops in your bag and the skills to start creating your own patterns around the kit.
+                    By the end of the month, you’ll have hundreds of new chops in your bag and the skills to start creating your own patterns around the kit.
                     <br><br>
                     Scroll down to save your seat in the first-ever class, June 5th - July 5th.
                 </p>
