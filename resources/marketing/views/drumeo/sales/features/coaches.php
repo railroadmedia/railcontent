@@ -221,17 +221,17 @@
 
     $grooves = [
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/michael-jackson.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/michael-jackson1.jpg',
             'title' => 'The Grooves of Michael Jackson',
             'artist' => 'Jonathan Moffett',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/styx.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/styx1.jpg',
             'title' => 'The Grooves of Styx',
             'artist' => 'Todd Sucherman',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/snarky-puppy.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/snarky-puppy1.jpg',
             'title' => 'The Grooves of Snarky Puppy',
             'artist' => 'Larnell Lewis',
         ],
@@ -241,22 +241,22 @@
             'artist' => 'Brian Tichy',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/porcupine-tree.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/porcupine-tree1.jpg',
             'title' => 'The Grooves of Porcupine Tree',
             'artist' => 'Gavin Harrison',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/chicago.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/chicago1.jpg',
             'title' => 'The Grooves of Chicago',
             'artist' => 'Danny Seraphine',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/death-cab-for-cutie.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/death-cab-for-cutie1.jpg',
             'title' => 'The Grooves of Death Cab For Cutie	',
             'artist' => 'Jason McGerr',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/alice-cooper.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/alice-cooper1.jpg',
             'title' => 'The Grooves of Alice Cooper	',
             'artist' => 'Glen Sobel',
         ],
@@ -266,27 +266,27 @@
             'artist' => 'Keith Carlock',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/harvey-mason.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/harvey-mason1.jpg',
             'title' => 'The Grooves of Harvey Mason',
             'artist' => 'Harvey Mason',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/daru-jones.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/daru-jones1.jpg',
             'title' => 'The Grooves of Daru Jones',
             'artist' => 'Daru Jones',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/shawn-mendes.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/shawn-mendes1.jpg',
             'title' => 'The Grooves of Shawn Mendez',
             'artist' => 'Mike Sleath',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/tool.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/tool1.jpg',
             'title' => 'The Polyrhythms of Tool',
             'artist' => 'Aaron Edgar',
         ],
         [
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/gene-hoglan.jpg',
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/gene-hoglan1.jpg',
             'title' => 'The Grooves of Gene Hoglan',
             'artist' => 'Gene Hoglan',
         ],
