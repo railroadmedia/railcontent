@@ -96,6 +96,9 @@ class ContentUserWatchPositionDecorator extends \Railroad\Railcontent\Decorators
                     $contents[$index]['last_watch_position_in_seconds'] = 0;
                 }
             }
+
+            $contents[$index]['last_watch_position_in_seconds'] = 51;
+
         }
 
         return new Collection($contents);

@@ -64,6 +64,7 @@ export default class ProgressTracker {
         brand
     }) {
         const data = new FormData();
+        debugger;
 
         if(this.running){
             this.calculateSecondsWatched();
@@ -107,6 +108,7 @@ export default class ProgressTracker {
         totalDuration,
         sessionToken,
     }) {
+        debugger;
         if (this.secondsWatched == null) {
             return new Promise.resolve(false);
         }

@@ -4,6 +4,7 @@ namespace App\Modules\EventDataSynchronizer\Listeners;
 
 use App\Maps\ContentTypes;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
+use App\Modules\RailTracker\Services\ContentEngagementService;
 use App\Services\UserMetricsService;
 use Illuminate\Support\Facades\Log;
 use Railroad\Points\Services\UserPointsService;
@@ -64,6 +65,7 @@ class ContentProgressEventListener
     private UserProviderInterface $userProvider;
 
     private UserMetricsService $userMetricsService;
+    private ContentEngagementService $contentEngagementService;
 
     private UserPlaylistsService $userPlaylistsService;
 
@@ -78,7 +80,8 @@ class ContentProgressEventListener
         UserProviderInterface $userProvider,
         MediaPlaybackRepository $mediaPlaybackRepository,
         UserMetricsService $userMetricsService,
-        UserPlaylistsService $userPlaylistsService
+        UserPlaylistsService $userPlaylistsService,
+        ContentEngagementService $contentEngagementService,
     ) {
         $this->userContentProgressService = $userContentProgressService;
         $this->contentService = $contentService;
@@ -90,6 +93,7 @@ class ContentProgressEventListener
         $this->mediaPlaybackRepository = $mediaPlaybackRepository;
         $this->userMetricsService = $userMetricsService;
         $this->userPlaylistsService = $userPlaylistsService;
+        $this->contentEngagementService = $contentEngagementService;
     }
 
     public function handleUserProgressSaved(UserContentProgressSaved $userContentProgressSaved)
@@ -355,6 +359,12 @@ class ContentProgressEventListener
 
     public function handleMediaPlaybackTracked(MediaPlaybackTracked $mediaPlaybackTracked)
     {
+        $this->contentEngagementService->update(
+            $mediaPlaybackTracked->userId,
+            $mediaPlaybackTracked->contentId ?? $mediaPlaybackTracked->mediaId,
+            $mediaPlaybackTracked->currentSecond
+        );
+
         $assignmentTypeIds = $this->mediaPlaybackRepository->getAssignmentTypeIds();
         if (in_array($mediaPlaybackTracked->typeId, $assignmentTypeIds)) {
             $min = $this->userMetricsService->getTotalMinutesPracticed(

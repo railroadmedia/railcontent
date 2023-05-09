@@ -188,7 +188,6 @@ class ContentPagesController extends BaseController
                 false,
                 $futureScheduledContentOnly
             );
-
         }
 
         ContentRepository::$pullFilterResultsOptionsAndCount = false;

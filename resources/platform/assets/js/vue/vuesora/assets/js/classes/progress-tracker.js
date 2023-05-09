@@ -61,10 +61,10 @@ export default class ProgressTracker {
         watchPosition,
         totalDuration,
         sessionToken,
-        brand
+        brand,
+        contentId = null
     }) {
         const data = new FormData();
-
         if(this.running){
             this.calculateSecondsWatched();
         }
@@ -77,6 +77,7 @@ export default class ProgressTracker {
         data.append('media_category', mediaCategory);
         data.append('session_id', sessionToken);
         data.append('brand', brand);
+        data.append('content_id', contentId);
 
         if (watchPosition && totalDuration) {
             data.append('current_second', watchPosition);
@@ -107,6 +108,7 @@ export default class ProgressTracker {
         totalDuration,
         sessionToken,
     }) {
+        debugger;
         if (this.secondsWatched == null) {
             return new Promise.resolve(false);
         }
