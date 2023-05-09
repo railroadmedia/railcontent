@@ -472,7 +472,7 @@
                             @if(empty($getting['special']))
                                 <img class="-mt-7 rounded-lg transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                             @else
-                                <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9">
+                                <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 overflow-hidden">
                                     <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}img" loading="lazy" onload="this.classList.remove('opacity-0')" />
                                 </div>
                             @endif
