@@ -150,7 +150,7 @@ const closeModal = () => {
             {{ title }}
           </h2>
             <!-- Logo -->
-            <img v-if="logo" class="tw-h-24 md:tw-h-28 lg:tw-h-32 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
+            <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
           <p :class="`tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
           <!-- CTA -->
             <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
