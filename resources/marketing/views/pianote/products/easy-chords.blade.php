@@ -311,7 +311,7 @@
 {{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
                                 <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>
                             <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
-                                <a href="{{ get_musora_brand_base_url() }}/new-piano-players">Pianote Members register for free here.</a>
+                                <a href="https://www.musora.com/pianote/enrollment/easy-chords">Pianote Members register for free here.</a>
                             </p>
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
