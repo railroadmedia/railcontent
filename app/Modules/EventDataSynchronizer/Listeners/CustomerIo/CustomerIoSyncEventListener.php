@@ -1256,7 +1256,7 @@ class CustomerIoSyncEventListener
                 $mobileOrderEvent->getSubscription()->getUser()
                     ->getId(),
                 $mobileOrderEvent->getSubscription()->getBrand(),
-                $mobileOrderEvent->getSubscription()->getBrand().'_user_order',
+                $mobileOrderEvent->getSubscription()->getBrand().'_user_order_mobile',
                 $data,
                 null,
                 $mobileOrderEvent->getSubscription()->getCreatedAt()->timestamp
