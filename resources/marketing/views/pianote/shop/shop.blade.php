@@ -20,11 +20,15 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header" style="background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg);">
+    <header class="drum-shop-header">
+        <picture>
+            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">
+            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg" alt="header background image" fetchpriority="high" />
+        </picture>
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
                 <div class="float-left px-2 md:px-3 w-full">
-                    <img class="h-12 sm:h-14 md:h-24 lg:h-28 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/pianote-shop-logo.png" alt="pianote logo">
+                    <img class="h-12 sm:h-14 md:h-24 lg:h-28 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/pianote-shop-logo.png" alt="pianote logo" fetchpriority="high">
                     <h3>GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>
                 </div>
             </div>
@@ -109,7 +113,7 @@
                      'soldOut' => false,
                 ])
 
-                @foreach($lessons as $lesson)
+                @foreach($lessons as $key => $lesson)
                     @include('drumeo.drumshop._partials._drum-shop-card', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
@@ -124,6 +128,7 @@
                             "soldOut" => $lesson->sold_out,
                             "includedMembership" => $lesson->included_edge,
                             "badgeText" => $lesson->badge_text,
+                            'FCP' => $key < 4 ? true : null,
                     ])
                 @endforeach
             </ul>

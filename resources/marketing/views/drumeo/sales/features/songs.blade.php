@@ -63,11 +63,10 @@
                             <li class="splide__slide px-1">
                                 <div>
                                     <img
-                                        class="rounded-xl mb-1 transition-opacity opacity-0"
+                                        class="rounded-xl mb-1"
                                         src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
-                                        loading="lazy"
-                                        onload="this.classList.remove('opacity-0')"
+                                        fetchpriority="high"
                                     >
                                     <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
                                     <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>

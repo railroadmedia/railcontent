@@ -24,7 +24,7 @@
     @if(!empty($formName))
         {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(
             $formName,
-            route('customer-io.submit-email-form-rc', [], false),
+            route('customer-io.submit-email-form', [], false),
             'post',
             null,
             null,

@@ -148,7 +148,7 @@ const markSongAsComplete = () => {
 const getInstrumentlessLabel = () => {
     return ({
         drumeo: 'PLAY DRUMLESS TRACK',
-        singeo: 'PLAY VOCALLES TRACK',
+        singeo: 'PLAY VOICELESS TRACK',
         guitareo: 'PLAY GUITARLESS TRACK',
         pianote: 'PLAY PIANOLESS TRACK'
     }[props.brand]);
