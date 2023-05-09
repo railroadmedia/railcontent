@@ -25,6 +25,7 @@ use Railroad\Ecommerce\Events\AccessCodeClaimed;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
 use Railroad\Ecommerce\Events\MobileOrderEvent;
+use Railroad\Ecommerce\Events\MobilePaymentEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
 use Railroad\Ecommerce\Events\PaymentEvent;
 use Railroad\Ecommerce\Events\PaymentMethods\PaymentMethodCreated;
@@ -1230,7 +1231,7 @@ class CustomerIoSyncEventListener
         //        );
     }
 
-    public function handleMobileOrderPlaced(MobileOrderEvent $mobileOrderEvent)
+    public function handleMobilePaymentPlaced(MobilePaymentEvent $mobileOrderEvent)
     {
         $latestPayment =
             ($mobileOrderEvent->getSubscription()

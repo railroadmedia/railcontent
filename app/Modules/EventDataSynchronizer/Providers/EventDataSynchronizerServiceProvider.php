@@ -17,6 +17,7 @@ use Railroad\Ecommerce\Events\AccessCodeClaimed;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
 use Railroad\Ecommerce\Events\MobileOrderEvent;
+use Railroad\Ecommerce\Events\MobilePaymentEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
 use Railroad\Ecommerce\Events\PaymentEvent;
 use Railroad\Ecommerce\Events\PaymentMethods\PaymentMethodCreated;
@@ -202,7 +203,10 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
             CustomerIoSyncEventListener::class . '@handleReferralClaimed',
         ],
         MobileOrderEvent::class => [
-            CustomerIoSyncEventListener::class . '@handleMobileOrderPlaced',
+
+        ],
+        MobilePaymentEvent::class => [
+            CustomerIoSyncEventListener::class . '@handleMobilePaymentPlaced',
         ]
     ];
 
