@@ -21,10 +21,15 @@ class CohortService
                 ->where('name', brand())
                 ->first()->id;
 
-        return Cohort::query()
+        $cohort = Cohort::query()
             ->where('slug', $slug)
             ->where('brand_id', $brandId)
+            ->select(['*'])
+            ->selectRaw('enrollment_start_date <= "'.Carbon::now('PST')->toDateTimeString().'"  as start_compare')
+            ->selectRaw('enrollment_start_date > "'.Carbon::now('PST')->toDateTimeString() .'" or enrollment_end_date < "'.Carbon::now('PST')->subWeeks(2)->toDateTimeString().'" as enrollmentClosed')
             ->first();
+
+        return $cohort;
     }
 
     public function getActiveCohort(): ?Cohort
@@ -37,10 +42,11 @@ class CohortService
 
             $this->activeCohort = Cohort::query()
                 ->where('brand_id', $brandId)
-                ->where('cohort_start_date', '<=', Carbon::now()->toDateTimeString())
-                ->where('cohort_end_date', '>=', Carbon::now()->subWeeks(2)->toDateTimeString())
+                ->where('cohort_start_date', '<=', Carbon::now('PST')->toDateTimeString())
+                ->where('cohort_end_date', '>=', Carbon::now('PST')->subWeeks(2)->toDateTimeString())
                 ->first();
         }
+
         return $this->activeCohort;
     }
 }
