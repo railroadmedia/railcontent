@@ -240,7 +240,7 @@ class Carousel extends Resource
                 ->hideFromDetail(function (NovaRequest $request, $resource) {
                     return !$this->is_featured;
                 })
-                ->help('Automatically replaces the second button URL with the pop-up video player.')
+                ->help('Automatically replaces the second button URL with the pop-up video player. Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1')
                 ->dependsOn(
                     ['is_featured'],
                     function (Text $field, NovaRequest $request, FormData $formData) {
