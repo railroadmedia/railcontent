@@ -8163,12 +8163,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "58102a5f619d5c5559fc7ba1a1b1e2f976866875"
+                "reference": "5235ae7c5c726736c054bb3769ed11af1c936274"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/58102a5f619d5c5559fc7ba1a1b1e2f976866875",
-                "reference": "58102a5f619d5c5559fc7ba1a1b1e2f976866875",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/5235ae7c5c726736c054bb3769ed11af1c936274",
+                "reference": "5235ae7c5c726736c054bb3769ed11af1c936274",
                 "shasum": ""
             },
             "require": {
@@ -8207,7 +8207,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-no-extra-days-for-trials-BR-662"
             },
-            "time": "2023-05-09T11:10:49+00:00"
+            "time": "2023-05-09T13:52:18+00:00"
         },
         {
             "name": "railroad/lead-tracker",
