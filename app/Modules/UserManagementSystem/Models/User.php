@@ -835,6 +835,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
 
     public function getMembershipExpirationDate(): ?Carbon
     {
+        if ($this->membership_expiration_date == null) {
+            return null;
+        }
         return Carbon::parse($this->membership_expiration_date);
     }
 }
