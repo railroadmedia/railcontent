@@ -624,45 +624,27 @@
                     </div>
                 </div>
             </div>
-{{--            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What drummers are saying:</strong></h3>--}}
-{{--            <div class="flex flex-wrap text-left">--}}
-{{--                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">--}}
-{{--                    <div class="flex items-start p-5 bg-white rounded-lg">--}}
-{{--                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/LARNELL-LEWIS-HEAD-1641315158.jpg" alt="Larnell lewis">--}}
-{{--                        <p class="pl-4"><strong>Larnell Lewis</strong><br>--}}
-{{--                            <em class="leading-tight inline-block mb-1 opacity-60">Grammy-winner, Snarky Puppy</em><br>--}}
-{{--                            “Domino’s passion for drumming is infectious! It’s a great reminder that all we need is a love for music and drums to get started!”--}}
-{{--                        </p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">--}}
-{{--                    <div class="flex items-start p-5 bg-white rounded-lg">--}}
-{{--                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/281911-avatar-1609277722.png" alt="Matt Mcguire">--}}
-{{--                        <p class="pl-4"><strong>Matt McGuire</strong><br>--}}
-{{--                            <em class="leading-tight inline-block mb-1 opacity-60">The Chainsmokers</em><br>--}}
-{{--                            “I genuinely enjoy watching Domino play, you can see the pure love for what she does. This program not only provides education, I'm sure you'll be entertained throughout the process.”--}}
-{{--                        </p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">--}}
-{{--                    <div class="flex items-start p-5 bg-white rounded-lg">--}}
-{{--                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/dorothea-thumb-1656515788.jpg" alt="Dorothea Taylor">--}}
-{{--                        <p class="pl-4"><strong>Dorothea Taylor</strong><br>--}}
-{{--                            <em class="leading-tight inline-block mb-1 opacity-60">The Godmother Of Drumming,<br> Educator for 50+ years</em><br>--}}
-{{--                            “Domino plays drums with high energy & passion which shows how much fun playing drums can be.”--}}
-{{--                        </p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">--}}
-{{--                    <div class="flex items-start p-5 bg-white rounded-lg">--}}
-{{--                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/31880-avatar-1557351774.jpg" alt="Jared Falk">--}}
-{{--                        <p class="pl-4"><strong>Jared Falk</strong><br>--}}
-{{--                            <em class="leading-tight inline-block mb-1 opacity-60">Drumeo Co-Founder</em><br>--}}
-{{--                            “Every-time I watch and listen to Domino Santantonio play drums I smile. She plays with joy, teaches with passion, and inspires drummers to take action.”--}}
-{{--                        </p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What drummers are saying:</strong></h3>
+            <div class="flex flex-wrap text-left">
+                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
+                    <div class="flex items-start p-5 bg-white rounded-lg">
+                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/232650-avatar-1568629179.jpg" alt="Larnell lewis">
+                        <p class="pl-4"><strong>Gregg Bissonnette</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Legendary Session Drummer</em><br>
+                            “Zack is a great friend and amazing drummer in every style. He’s a musical inspiration to me and I know he’ll do the same for you. Too bad he doesn’t have a good sense of humor though…”
+                        </p>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
+                    <div class="flex items-start p-5 bg-white rounded-lg">
+                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/31880-avatar-1557351774.jpg" alt="Jared Falk">
+                        <p class="pl-4"><strong>Jared Falk</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Drumeo Co-Founder</em><br>
+                            "Zack makes me want to sit down and improve my drumming, an essential quality of a great teacher – plus, you’re always entertained throughout the process."
+                        </p>
+                    </div>
+                </div>
+            </div>
 
 
 {{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>--}}
