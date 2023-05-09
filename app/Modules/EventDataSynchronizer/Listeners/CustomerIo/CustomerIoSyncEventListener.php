@@ -1255,7 +1255,7 @@ class CustomerIoSyncEventListener
             (new CustomerIoCreateEventByUserId(
                 $mobileOrderEvent->getSubscription()->getUser()
                     ->getId(),
-                $mobileOrderEvent->getSubscription()->getBrand(),
+                'drumeo',
                 $mobileOrderEvent->getSubscription()->getBrand().'_user_order_mobile',
                 $data,
                 null,
