@@ -242,11 +242,11 @@ onMounted(() => {
             class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-overflow-y-auto tw-relative"
             :class="state.collapsed ? 'tw-hidden lg:tw-block' : ''">
             <!-- Top Skeleton for offset For top Infinite Scroll -->
-            <div v-if="shouldShowTopSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
+            <!-- <div v-if="shouldShowTopSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
                 <div
                     class="tw-flex tw-w-full tw-h-[90px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]">
                 </div>
-            </div>
+            </div> -->
             <!-- Print Each Card -->
             <playlist-card :currentItem="playlistItemPosition" v-for="(lesson, i) in playlistsStore.lessons"
                 :key="'playlist-card-cue-' + lesson.id" :index="i" :cardId="'playlist-card-cue-' + lesson.id"

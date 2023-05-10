@@ -121,6 +121,7 @@ const dropdownOptions = ref([
     },
 ]);
 
+//Get Dates
 const dateNow = Date.now();
 const lessonDateParsed = props.lesson.published_on_in_timezone ? Date.parse(props.lesson.published_on_in_timezone) : Date.parse(props.lesson.published_on);
 const lessonDate = props.lesson.published_on_in_timezone ? props.lesson.published_on_in_timezone : props.lesson.published_on;
@@ -216,7 +217,6 @@ onBeforeMount(() => {
                             class="fas fa-play"></i></template>
                     <template v-else>{{ props.index + 1 }}</template>
                 </div>
-
                 <!-- Playlist thumbnail -->
                 <div
                     class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-w-[110px] tw-rounded tw-shrink-0">
@@ -303,7 +303,6 @@ onBeforeMount(() => {
                     <p class="tw-w-full tw-flex tw-items-center tw-text-xs tw-capitalize tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mt-1 tw-mr-1"
                         :class="[{ 'md:tw-mt-0 md:tw-text-sm': !cueVersion }]">
                         <!-- Instructor / Artist -->
-
                         <template v-if="lesson.type === 'song'">
                             <span>{{ artist }}</span>
                         </template>
