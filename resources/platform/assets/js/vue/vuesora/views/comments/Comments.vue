@@ -157,7 +157,7 @@ export default {
             loading: false,
             commentsCollapsed: true,
             flattenedProfilePics: [],
-            commentsCollapsed : false,
+            commentsCollapsed: false,
         };
     },
     computed: {
@@ -227,9 +227,6 @@ export default {
             return this.userExpValue != null && (['team', 'pack'].indexOf(this.currentUser.access_level) === -1);
         },
     },
-    created() {
-        this.getComments(this.requestParams);
-    },
     mounted() {
         // Check the URI Params if 'goToComment' exists
         const uriParams = QueryString.parse(window.location.search);
@@ -238,7 +235,8 @@ export default {
             this.goToComment(uriParams.goToComment);
         }
 
-        window.addEventListener('scroll', () => {
+        const contentContainer = document.getElementById('content-container');
+        contentContainer.addEventListener('scroll', () => {
             const scrollPosition = window.pageYOffset + window.innerHeight;
             const bodyHeight = document.body.scrollHeight;
 
@@ -250,6 +248,8 @@ export default {
                 }
             }
         });
+
+        this.getComments(this.requestParams);
     },
     methods: {
         handleReplyOpened({ id }) {
@@ -258,9 +258,13 @@ export default {
         getComments(params, replace = false) {
             this.requestingData = true;
 
+            console.log('GETTING COMMENTSSSS')
+
             CommentService.getComments(params)
                 .then((resolved) => {
                     this.requestingData = false;
+
+                    console.log(resolved)
 
                     if (resolved) {
                         this.totalComments = resolved.meta ? resolved.meta.totalResults : resolved.total_results;
@@ -278,7 +282,7 @@ export default {
                         this.comments.forEach(({ user, replies }) => {
                             this.flattenedProfilePics.push(user['fields.profile_picture_image_url']);
                             if (replies && replies.length) {
-                                replies.forEach(({user: replyUser}) => {
+                                replies.forEach(({ user: replyUser }) => {
                                     this.flattenedProfilePics.push(replyUser['fields.profile_picture_image_url']);
                                 })
                             }
@@ -339,9 +343,9 @@ export default {
                         const commentsSection = document.getElementById('postComment');
 
                         this.pinnedComment = resolved.data.find(result => result.id == id);
-                        
+
                         if (this.pinnedComment) {
-                            this.pinnedComment.showAllReplies = true;   
+                            this.pinnedComment.showAllReplies = true;
                         }
 
                         /*
