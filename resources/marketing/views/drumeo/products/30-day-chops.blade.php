@@ -218,25 +218,25 @@
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/logo.svg" alt="logo">
                     <h1 class="rotater-text overflow-hidden"><strong>
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Learn Drum Chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve Your Speed</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Boost Your Creativity</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">in just 30 days.</h2>
 
@@ -372,7 +372,7 @@
                     ],
                 ];
 //            @endphp
-            <div class="timeline-container dc30 max-w-3xl lg:max-w-4xl mx-auto relative px-4 sm:pb-14 lg:pb-20">
+            <div class="timeline-container dc30 max-w-3xl lg:max-w-4xl mx-auto relative px-4">
                 @foreach ($gettings as $key => $getting)
                     @if($getting['position'] === 'right')
                         <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-28">
@@ -383,7 +383,7 @@
                             <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
                         </div>
                     @else
-                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-0 @if($key !== 4) md:mb-28 @endif">
+                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if($key !== 4) mb-16 md:mb-0 md:mb-28 @endif">
                             <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
@@ -709,7 +709,7 @@
                     </div>
 
                     <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
-                        <a href="/ecommerce/add-to-cart?products[30-day-chops]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true"
+                        <a href="/ecommerce/add-to-cart?products[30-day-chops]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&locked=true"
                             class="z-10 relative px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-lg w-full sm:w-5/12">
                             <p class="border border-drumeo text-drumeo inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">EARLY BIRD BUNDLE</p>
                             <h3><strong>30-Day Chops</strong></h3>
@@ -821,7 +821,7 @@
 
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/796456383?autoplay=1',
+        "video" => '//player.vimeo.com/video/825206369?h=e8d828248a&autoplay=1',
         "title" => 'trailer'
     ])
     @include('drumeo.sales.partials._video-modal',[

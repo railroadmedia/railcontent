@@ -21,10 +21,6 @@ const props = defineProps({
     type: String,
     default: ""
   },
-  logo: {
-    type: String,
-    default: "",
-  },
   ctaText: {
     type: String,
     default: "",
@@ -34,14 +30,6 @@ const props = defineProps({
     default: "",
   },
   ctaUrl: {
-    type: String,
-    default: "",
-  },
-  registerUrl: {
-    type: String,
-    default: "",
-  },
-  video: {
     type: String,
     default: "",
   },
@@ -67,33 +55,12 @@ const props = defineProps({
   },
 });
 
-const learnMoreModal = ref(false);
-const screenSize = ref(window.innerWidth);
-
 const goToUrl = (url) => {
   if (url) {
       if(props.video && screenSize.value > 1279) return;
       window.location.href = url;
   }
 };
-
-const detectScreenSize = () => {
-    window.addEventListener("resize", ()=>{
-        screenSize.value = window.innerWidth;
-    });
-};
-
-const openModal = () => {
-    learnMoreModal.value = true;
-};
-
-const closeModal = () => {
-    learnMoreModal.value = false;
-};
-
-onMounted(() => {
-    detectScreenSize();
-});
 </script>
 
 <template>
@@ -122,25 +89,17 @@ onMounted(() => {
               tw-leading-none
             "
             :class="titleClasses"
-              v-if="title && !logo"
+              v-if="title"
             >
             {{ title }}
           </h2>
-            <!-- Logo -->
-            <img v-if="logo" class="tw-h-24 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
           <p class="tw-text-sm tw-mb-3 tw-hidden xl:tw-block xl:tw-line-clamp-3" v-html="description"></p>
           <!-- CTA -->
           <span
-              :class="`tw-text-white tw-font-bebas-neue tw-text-lg ${(ctaText && logo) && 'xl:tw-hidden'}`"
+              :class="`tw-text-white tw-font-bebas-neue tw-text-lg`"
           >{{ ctaText }}
             <ArrowSmRightIcon class="tw-inline tw-w-[20px] tw-h-[18px]" />
           </span>
-            <div v-if="registerUrl || video" class="tw-gap-2 tw-mt-2 tw-hidden xl:tw-flex tw-flex-wrap">
-                <a v-if="registerUrl" :href="ctaUrl" :class="`tw-btn-primary tw-bg-${brand} tw-text-xl go-to-button tw-w-[200px]`">
-                    {{ ctaText }}
-                </a>
-                <span v-if="video && registerUrl === ctaUrl" @click="openModal()" class="tw-btn-secondary tw-text-white tw-text-xl tw-w-[200px] tw-z-100 tw-relative">Learn More</span>
-            </div>
         </div>
       </div>
       <!-- Desktop Image -->
@@ -150,16 +109,6 @@ onMounted(() => {
       </div>
     </section>
   </div>
-
-    <ModalRenderer v-if="learnMoreModal">
-        <button @click="closeModal"
-                class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
-            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
-        </button>
-        <div class="tw-w-full tw-mx-6 lg:tw-mx-0 lg:tw-w-1/2 tw-relative" style="padding-bottom: 56.25%;">
-            <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close" :src="video" frameborder="0" allowfullscreen allow="autoplay" title="learn more video"></iframe>
-        </div>
-    </ModalRenderer>
 </template>
 
 <style type="text/css">

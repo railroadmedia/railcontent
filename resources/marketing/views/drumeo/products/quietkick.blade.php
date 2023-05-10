@@ -269,7 +269,7 @@
                         </a>
                     </div>
                 </div>
-                <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/faster-feet"><h4><strong><u>Or get it FREE when you join Drumeo.</u></strong></h4></a>
+                <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[quietkick]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo.</u></strong></h4></a>
             @else
                 <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
             @endif

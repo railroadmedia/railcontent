@@ -39,7 +39,7 @@
 
 
         <div class="button-wrap">
-            <a href="/merch" class="join outline-button">Shop</a>
+            <a href="/merch" class="join outline-button text-white hover:text-black">Shop</a>
         </div>
     </nav>
 

@@ -1,12 +1,12 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=958b886f0c84626ec59196dbc8f4c0ad",
+    "/platform/js/app.js": "/platform/js/app.js?id=1803ff1b9c92c386bd67b7b697caccb0",
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=f80976802dca57a9a104209e635a08f7",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=78a3e62625c9e55bcfc10da3569c3bb0",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=3860fb4ae3ffc685837d9e39a7495859",
-    "/platform/js/song.js": "/platform/js/song.js?id=dcb4c46ce6dd1dfbbe75ee859be4fee8",
+    "/platform/js/song.js": "/platform/js/song.js?id=c2888a36c746ab517aad95a92fc35aca",
     "/platform/js/song-request.js": "/platform/js/song-request.js?id=61470a81a376202a85a7c2a791bbc046",
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=a121116bf28ae9fddf985bb2860bc9a9",
     "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=2cb6cdf4d68ab4ce703cbb67c210ec2e",
@@ -28,8 +28,8 @@
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=6a2c51699bce35f9f2370ad3d5a1691f",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=09903bb6c8a5633f9a2f593d996f848f",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=5aad33f7b22ce615bece2e8b857b7381",
-    "/platform/css/app.css": "/platform/css/app.css?id=e6c73e908b46d7b5278de6b48b7eff51",
+    "/platform/css/app.css": "/platform/css/app.css?id=cd78bd81fc8c66082b176700fe55f9e9",
     "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=95b61f73a67fc65546a81e742dda8905",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=cdaa5a1836065b157d631367acab4571",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=85bea69d2a16b39571409c8ad7047cf2",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=49f0817b99cd1af9df9cbd7fcee415f7"
 }

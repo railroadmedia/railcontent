@@ -128,6 +128,7 @@
             "subscriptionVersion" => true,
             "scrollToJoin" => true,
             "hideMenu" => true,
+            "logoUrl" => Request::path(),
         ])
     @elseif(!empty($month))
         @include("drumeo.sales.partials._nav", [
