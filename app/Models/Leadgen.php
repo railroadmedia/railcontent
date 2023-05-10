@@ -34,15 +34,15 @@ class Leadgen extends Model
 
 
             if(gettype($model['meta_img']) === 'object'){
-                $model['meta_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$model->brand->name.'/Lead-gens/Meta-images/'.$uuid.'-'.$model['meta_img']->getClientOriginalName();
+                $model['meta_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$model->brand->name.'/Lead-gens/Meta-images/'.$uuid.'-'.str_replace(' ', '+', $model['meta_img']->getClientOriginalName());
             }
 
             if(gettype($model['logo']) === 'object'){
-                $model['logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$model->brand->name.'/Lead-gens/Logos/'.$uuid.'-'.$model['logo']->getClientOriginalName();
+                $model['logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$model->brand->name.'/Lead-gens/Logos/'.$uuid.'-'.str_replace(' ', '+', $model['logo']->getClientOriginalName());
             }
 
             if(gettype($model['bg_img']) === 'object'){
-                $model['bg_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$model->brand->name.'/Lead-gens/Background-images/'.$uuid.'-'.$model['bg_img']->getClientOriginalName();
+                $model['bg_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$model->brand->name.'/Lead-gens/Background-images/'.$uuid.'-'.str_replace(' ', '+', $model['bg_img']->getClientOriginalName());
             }
         });
 
