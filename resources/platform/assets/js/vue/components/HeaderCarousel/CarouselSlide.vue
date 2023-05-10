@@ -122,7 +122,7 @@ const closeModal = () => {
     <section class="tw-w-full tw-h-full tw-rounded-[10px] tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 tw-gap-0 relative">
         <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
             <picture>
-                <source media="(min-width:1024px)" :srcset="`${desktopImg}`">
+                <source media="(min-width:1280px)" :srcset="`${desktopImg}`">
                 <source media="(min-width:768px)" :srcset="`${tabletImg}`">
                 <img
                     class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0 tw-z-50"
