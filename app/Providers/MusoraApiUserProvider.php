@@ -64,7 +64,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         return null;
     }
 
-    public function getCurrentUserMembershipData(?string $brand = null)
+    public function getCurrentUserMembershipData(?string $app = null)
     : array {
         $user = user();
         $productsIds = [];
@@ -114,7 +114,26 @@ class MusoraApiUserProvider implements UserProviderInterface
                 })
             ) > 0;
 
+	try {
+            $accountName = ($app)?strtolower($app):config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
+            $customerIoData = $this->customerIoService->getCustomerByUserId(
+                $accountName,
+                $user->id
+            );
+        } catch (ModelNotFoundException $exception) {
+            $customerIoData = null;
+        }
+
+        $user['cio_id'] = null;
+        $user['customer_io_id'] = null;
+
+        if ($customerIoData && !empty($externalAttributes = $customerIoData->getExternalAttributes())) {
+            $user['cio_id'] = $externalAttributes['cio_id'];
+            $user['customer_io_id'] = $externalAttributes['id'];
+        }
+
         return [
+            'user' => $user,
             'isEdge' => $user->isAMember(),
             'isEdgeExpired' => $user->isAnExpiredMember(),
             'edgeExpirationDate' => $user->membership_expiration_date,
@@ -129,7 +148,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         ];
     }
 
-    public function getCurrentUserProfileData()
+    public function getCurrentUserProfileData(?string $app = null)
     : array
     {
         $user = user();
@@ -160,8 +179,9 @@ class MusoraApiUserProvider implements UserProviderInterface
         }
 
         try {
+            $accountName = ($app)?strtolower($app):config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
             $customerIoData = $this->customerIoService->getCustomerByUserId(
-                config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
+                $accountName,
                 $user->id
             );
         } catch (ModelNotFoundException $exception) {
