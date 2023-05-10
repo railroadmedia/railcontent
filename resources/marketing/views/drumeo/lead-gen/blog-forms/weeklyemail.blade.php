@@ -110,7 +110,7 @@
 <section class="text-center absolute top-1/2 left-1/2 w-full px-5" style="transform:translate(-50%,-50%)">
     <h5 class="leading-normal mb-3 md:mb-4">Enjoying this article? Enter your email address to get free drum lessons, <br class="hidden sm:inline">
         interviews, and updates from around the drumming world:</h5>
-    <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form"
+    <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form"
           method="POST" class="ajax-form clearfix infusion-form max-w-3xl mx-auto" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
         <input type="hidden" name="form_name" value="Blog Signup">
 
