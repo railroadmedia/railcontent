@@ -65,7 +65,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         return null;
     }
 
-    public function getCurrentUserMembershipData(?string $brand = null)
+    public function getCurrentUserMembershipData(?string $app = null)
     : array {
         $user = user();
         $productsIds = [];
@@ -96,8 +96,9 @@ class MusoraApiUserProvider implements UserProviderInterface
         }
 
         try {
+            $accountName = ($app)?strtolower($app):config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
             $customerIoData = $this->customerIoService->getCustomerByUserId(
-                config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
+                $accountName,
                 $user->id
             );
         } catch (ModelNotFoundException $exception) {
@@ -127,7 +128,7 @@ class MusoraApiUserProvider implements UserProviderInterface
         ];
     }
 
-    public function getCurrentUserProfileData()
+    public function getCurrentUserProfileData(?string $app = null)
     : array
     {
         $user = user();
@@ -158,8 +159,11 @@ class MusoraApiUserProvider implements UserProviderInterface
         }
 
         try {
-            $customerIoData = $this->customerIoService->getCustomerByUserId(config('event-data-synchronizer.customer_io_account_to_sync_all_brands'),
-                                                                            $user->id);
+            $accountName = ($app)?strtolower($app):config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
+            $customerIoData = $this->customerIoService->getCustomerByUserId(
+                $accountName,
+                $user->id
+            );
         } catch (ModelNotFoundException $exception) {
             $customerIoData = null;
         }
