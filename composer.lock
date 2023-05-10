@@ -4981,16 +4981,16 @@
         },
         {
             "name": "laravel/vapor-cli",
-            "version": "v1.55.3",
+            "version": "v1.56.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-cli.git",
-                "reference": "562c28004f8609e728e2b5d1e85e46d2df006d2d"
+                "reference": "9a28dc6fb37902fe423edbfd936cd683a22a86fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/562c28004f8609e728e2b5d1e85e46d2df006d2d",
-                "reference": "562c28004f8609e728e2b5d1e85e46d2df006d2d",
+                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/9a28dc6fb37902fe423edbfd936cd683a22a86fd",
+                "reference": "9a28dc6fb37902fe423edbfd936cd683a22a86fd",
                 "shasum": ""
             },
             "require": {
@@ -5044,22 +5044,22 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-cli/tree/v1.55.3"
+                "source": "https://github.com/laravel/vapor-cli/tree/v1.56.0"
             },
-            "time": "2023-04-17T14:07:59+00:00"
+            "time": "2023-05-10T10:06:04+00:00"
         },
         {
             "name": "laravel/vapor-core",
-            "version": "v2.30.0",
+            "version": "v2.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-core.git",
-                "reference": "83fe61ad0b0f93ed5fcc115a63eff667de718840"
+                "reference": "4f8b57db2ed99dc5f87584c9a641ef6542c8c882"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/83fe61ad0b0f93ed5fcc115a63eff667de718840",
-                "reference": "83fe61ad0b0f93ed5fcc115a63eff667de718840",
+                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/4f8b57db2ed99dc5f87584c9a641ef6542c8c882",
+                "reference": "4f8b57db2ed99dc5f87584c9a641ef6542c8c882",
                 "shasum": ""
             },
             "require": {
@@ -5095,6 +5095,9 @@
                 }
             },
             "autoload": {
+                "files": [
+                    "src/debug.php"
+                ],
                 "psr-4": {
                     "Laravel\\Vapor\\": "src"
                 }
@@ -5116,9 +5119,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-core/tree/v2.30.0"
+                "source": "https://github.com/laravel/vapor-core/tree/v2.31.0"
             },
-            "time": "2023-04-25T08:47:32+00:00"
+            "time": "2023-05-10T10:11:27+00:00"
         },
         {
             "name": "laravel/vapor-ui",
@@ -8367,12 +8370,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "f909b57ba532080e37d80906541f010df9501c61"
+                "reference": "928b0b83596c14b4cc8541056456241184d8a311"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/f909b57ba532080e37d80906541f010df9501c61",
-                "reference": "f909b57ba532080e37d80906541f010df9501c61",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/928b0b83596c14b4cc8541056456241184d8a311",
+                "reference": "928b0b83596c14b4cc8541056456241184d8a311",
                 "shasum": ""
             },
             "require": {
@@ -8404,7 +8407,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-playlists"
             },
-            "time": "2023-05-08T09:11:26+00:00"
+            "time": "2023-05-10T10:05:53+00:00"
         },
         {
             "name": "railroad/permissions",
