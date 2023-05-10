@@ -16,6 +16,7 @@ return new class extends Migration
         //
         Schema::table('leadgens', function (Blueprint $table) {
             $table->timestamp('start_date')->nullable();
+            $table->timestamp('end_date')->nullable();
             $table->boolean('visible')->default(true);
         });
     }
@@ -30,6 +31,7 @@ return new class extends Migration
         //
         Schema::table('leadgens', function (Blueprint $table) {
             $table->dropColumn('start_date');
+            $table->dropColumn('end_date');
             $table->dropColumn('visible');
         });
     }
