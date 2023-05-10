@@ -294,11 +294,18 @@ class LeadGenController extends BaseController
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)
     {
-        $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->where('leadgens.visible', true)->where(function ($query) {
-            return $query
-                ->whereNull('start_date')
-                ->orWhere('start_date', '<=', Carbon::now('PST')->toDateTimeString());
-        })->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Drumeo')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
+        $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->where('leadgens.visible', true)
+            ->where(function ($query) {
+                return $query
+                    ->whereNull('leadgens.start_date')
+                    ->orWhere('leadgens.start_date', '<=', Carbon::now('PST')->toDateTimeString());
+            })
+            ->where(function ($query) {
+                return $query
+                    ->whereNull('leadgens.end_date')
+                    ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
+            })
+            ->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Drumeo')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
         if(!is_null($currentLesson)){
             if(!$currentLesson->one_off){
                 $lessons = LeadgenLesson::where([['leadgen_id', $currentLesson->leadgen_id], ['one_off', 0]])->get();
@@ -322,11 +329,16 @@ class LeadGenController extends BaseController
             ]);
         }
         else {
-            $leadgen = Leadgen::join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Drumeo')->where('slug', $leadgenSlug)->select('leadgens.*')->where('leadgens.visible', true)->where(function ($query) {
-                return $query
-                    ->whereNull('start_date')
-                    ->orWhere('start_date', '<=', Carbon::now('PST')->toDateTimeString());
-            })->first();
+            $leadgen = Leadgen::where(function ($query) {
+                    return $query
+                        ->whereNull('start_date')
+                        ->orWhere('start_date', '<=', Carbon::now('PST')->toDateTimeString());
+                })
+                ->where(function ($query) {
+                    return $query
+                        ->whereNull('leadgens.end_date')
+                        ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
+                })->join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Drumeo')->where('slug', $leadgenSlug)->select('leadgens.*')->where('leadgens.visible', true)->first();
             if(!is_null($leadgen)){
                 $lessons = LeadgenLesson::where([['leadgen_id', $leadgen->id], ['one_off', 0]])->get();
 
