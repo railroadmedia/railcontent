@@ -240,10 +240,12 @@ const secondLevelUrl = computed(() => `/${props.brand}/playlist/${props.playlist
 const released = computed(() => {
     return lessonDateParsed < dateNow;
 })
+const needAccess = computed(() => {
+    return activeItem.need_access;
+})
 
 onBeforeMount(() => {
-    console.log('video Poster', props.thumbnailUrl)
-    console.log('active', activeItem)
+    console.log(props.playlistItems)
 });
 </script>
 
@@ -284,14 +286,14 @@ onBeforeMount(() => {
                         <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'"
                             id="lessonVideoWrap" class="tw-relative">
                             
-                            <!-- Unreleased Content -->
-                            <div v-if="!released" class="tw-w-full tw-aspect-video tw-absolute tw-z-30">
+                            <!-- Unreleased/No Access Content -->
+                            <div v-if="!released || needAccess" class="tw-w-full tw-aspect-video tw-absolute tw-z-30">
                                 <img :src="`https://musora.com/cdn-cgi/image/width=1000/${thumbnailUrl}`"  
                                      class="tw-transition-opacity tw-opacity-0 tw-duration-300 tw-grayscale tw-w-full tw-object-cover" title="Image Photo"
                                      loading="lazy" 
                                      onload="this.classList.remove('tw-opacity-0')"
                                 />
-                                <div class="tw-absolute tw-bg-black/60 tw-top-0 tw-left-0 tw-w-full tw-h-full tw-text-white tw-font-bold tw-text-lg tw-flex tw-flex-col tw-items-center tw-justify-center">
+                                <div v-if="!needAccess" class="tw-absolute tw-bg-black/60 tw-top-0 tw-left-0 tw-w-full tw-h-full tw-text-white tw-font-bold tw-text-lg tw-flex tw-flex-col tw-items-center tw-justify-center">
                                     <i class="fas fa-clock tw-text-3xl tw-mb-1"></i>
                                     <p class="tw-text-2xl">
                                         Available on 
