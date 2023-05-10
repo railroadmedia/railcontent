@@ -108,6 +108,13 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
     }
+    public function trialSplit()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.subscription-split', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
+    }
     public function promo()
     {
         $products = $this->productRepository->all();
@@ -317,6 +324,11 @@ class SalesController extends BaseController
     public function sonor()
     {
         return view('drumeo.sales.pages.sonor');
+    }
+
+    public function alesis()
+    {
+        return view('drumeo.pages.redeem.redeem-page', ['newAccount' => true]);
     }
 
     public function coachTrial(Request $request, $domain, $pageC = null)

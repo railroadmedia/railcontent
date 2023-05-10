@@ -4,18 +4,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha1/0.6.0/sha1.min.js"></script>
 <script>
     function getSignUpActionTrackerId(environment) {
-        var signUpActionTrackerId =
-            "{{ config('railanalytics.pianote.production.providers.impact.sign-up-action-tracker-id') }}"
-        {{--if (environment == "development" || environment == "local") {--}}
-        {{--    signUpActionTrackerId =--}}
-        {{--        "{{ config('railanalytics.pianote.local.providers.impact.sign-up-action-tracker-id') }}"--}}
-        {{--} else if (environment == "staging") {--}}
-        {{--    signUpActionTrackerId = "{{ config('railanalytics.pianote.beta-testing.providers.impact.sign-up-action-tracker-id') }}"--}}
-        {{--} else if (environment == "testing") {--}}
-        {{--    signUpActionTrackerId = "{{ config('railanalytics.pianote.beta-testing.providers.impact.sign-up-action-tracker-id') }}"--}}
-        {{--}--}}
-
-        return signUpActionTrackerId;
+        return (environment == 'production') ?
+            "{{ config('railanalytics.pianote.production.providers.impact.sign-up-action-tracker-id') }}" :
+            "{{ config('railanalytics.pianote.local.providers.impact.sign-up-action-tracker-id') }}";
     }
 
     function emailSignUpConversionTrackerForImpactProvider() {

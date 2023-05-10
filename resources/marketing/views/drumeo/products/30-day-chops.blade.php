@@ -4,8 +4,8 @@
     @parent
     <title>30-Day Chops | Drumeo</title>
     <meta property="og:title" content="30-Day Chops | Drumeo">
-    <meta name="description" content="Improve your chops in just 30-days.">
-    <meta property="og:description" content="Improve your chops in just 30-days.">
+    <meta name="description" content="Learn drum chops in just 30-days.">
+    <meta property="og:description" content="Learn drum chops in just 30-days.">
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
@@ -211,13 +211,6 @@
                 "price" => floatval($productPrices['30-day-drummer-2']->discounted_price),
                 "noBreadcrumb" => true
             ])
-    @php
-        if (is_current_user_a_member()) {
-            $registerButtonUrl = 'https://www.musora.com/drumeo/enrollment/30-day-chops';
-        } else {
-            $registerButtonUrl = "#final";
-        }
-    @endphp
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
         <div class="container max-w-5xl mx-auto">
@@ -225,24 +218,24 @@
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-28 -mb-3 sm:mb-0 lg:mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/logo.svg" alt="logo">
                     <h1 class="rotater-text overflow-hidden"><strong>
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Play complex patterns</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
                             <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Play complex patterns</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
                             <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Play complex patterns</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
                             <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Play complex patterns</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
                             <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
 
-                            <span class="relative nowrap delay-1000 ease-in-out">Improve your chops</span><br>
-                            <span class="relative nowrap delay-1000 ease-in-out">Play complex patterns</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Learn drum chops</span><br>
+                            <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
                             <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">in just 30 days.</h2>
@@ -255,36 +248,23 @@
                     </div>
 
                     <p class="hidden lg:inline">
-                        <i class="fas fa-check text-drumeo"></i> Improve your chops
-                        <i class="ml-2 fas fa-check text-drumeo"></i> Play complex patterns
-                        <i class="ml-2 fas fa-check text-drumeo"></i> Boost your creativity</p>
+                        <i class="fas fa-check text-drumeo"></i> Learn by doing
+                        <i class="ml-2 fas fa-check text-drumeo"></i> Play every day
+                        <i class="ml-2 fas fa-check text-drumeo"></i> Guaranteed results</p>
                     <div class="flex inline lg:hidden">
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Improve your<br> chops</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Play complex<br> patterns</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Boost your<br> creativity</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Learn by  <br> doing</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Play every  <br> day</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Guaranteed <br> results</p>
                     </div>
-                    @if(session()->has('success-message'))
-                        <p class="mb-3 lg:-mb-7 mt-3 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Chops.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-                    @endif
-
-                    @if(!$hasProduct && is_current_user_a_member())
-                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-drumeo text-left"><strong>You are a Drumeo member! <br>Enroll for free by clicking on the button below.</strong></p>
-                    @endif
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
 {{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-                            @if($hasProduct)
-                                <a class="join sold-out medium w-full">YOU'RE ENROLLED!</a>
-                            @else
-                                <a href="{{ $registerButtonUrl }}" class="join blue medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>
-                            @endif
+                                <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
 
-                            @if(!auth()->check())
                                 <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
                                     <a href="https://www.musora.com/drumeo/enrollment/30-day-chops">Drumeo Members register for free here.</a>
                                 </p>
-                            @endif
                         </div>
                         <div class="w-full sm:w-1/2 pt-4 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/drummers.png" alt="joined student profiles">
@@ -340,14 +320,21 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
             <img class="h-56 inline sm:hidden lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image2.png" alt="collage intro mobile">
-            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Unlock your creativity<br class="hidden sm:inline"> and speed around the drums.</strong></h2>
-            <div class="text-left flex flex-wrap sm:flex-nowrap items-center mb-12 sm:mb-18 lg:mb-24">
-                <h6 class="leading-normal max-w-lg sm:pr-4 lg:pr-7">Learning the drums is hard enough. Knowing what to practice shouldn’t be.
+            <h2 class="text-center my-5 sm:mt-0 sm:mb-7"><strong>Unlock your speed<br class="hidden sm:inline"> & creativity around the drums.</strong></h2>
+            <div class="text-left flex flex-wrap sm:flex-nowrap mb-16 sm:mb-24">
+                <p class="leading-normal max-w-xl sm:pr-4">Drum chops–
                     <br><br>
-                    30-Day Chops is a new style of learning where you’ll play along with your instructor every day – no thinking required. Just press play and hit every note with Zack.
+                    Everybody wants them, but nobody knows exactly what they are… until now.
                     <br><br>
-                    At the end of each week, you’ll have a chance to ask your questions in an exclusive LIVE lesson. It’s like getting the best of private & online lessons in one.</h6>
-                <img class="h-72 lg:h-96 hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image2.png" alt="collage intro">
+                    30-Day Chops is the first-ever course that teaches you tasty linear drum chops one note at a time. You’ll play along with Zack Graybeal (aka “ZackGrooves”) every day for thirty days until you’re playing blistering groove & fill chops like your favorite drummers.
+                    <br><br>
+                    Plus, you’ll have a live lesson every Saturday to ask questions and get yourself “unstuck.”
+                    <br><br>
+                    By the end of the month, you’ll have hundreds of new chops in your bag and the skills to start creating your own patterns around the kit.
+                    <br><br>
+                    Scroll down to save your seat in the first-ever class, June 5th - July 5th.
+                </p>
+                <img class="h-64 lg:h-80 hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/intro-image2.png" alt="collage intro">
             </div>
 
             @php
@@ -356,36 +343,36 @@
                     [
                     'position' => 'left',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/never-feel-lost.jpg',
-                    'title' => 'Never feel lost.',
-                    'desc' => 'Knowing what and how to practice is half the battle of getting better. But you’ll never have to worry, because all the lessons ARE your practice sessions. Every day just press play and follow along.',
+                    'title' => 'Know exactly what to practice. ',
+                    'desc' => 'The biggest mystery to learning chops has been knowing WHAT to practice. 30-Day Chops is foolproof because the lessons ARE your practice. You’ll play along each day with Zack – just do what he does! ',
                     ],
                     [
                     'position' => 'right',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/stop-wasting-time.jpg',
-                    'title' => 'Stop wasting time.',
-                    'desc' => 'It’s precious, so don’t waste it. Each lesson is only 10 minutes and there’s a handy countdown timer so you can stay focused and get more results in a shorter time.',
+                    'title' => 'Fits any schedule. ',
+                    'desc' => 'We know how it is trying to cram your drum practice in between work, school, and family. 30-Day Chops fits any schedule because you only need 10-minutes per day to learn tasty chops. You’ll even find you practice more by sticking to the process!',
                     ],
                     [
                     'position' => 'left',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/practice-thats-actually.jpg',
-                    'title' => 'Practice that’s actually fun.',
-                    'desc' => 'You won’t be playing the same boring exercises over and over. From day one, you’ll be applying chops to REAL music – and slowly building patterns over the 30 days. ',
+                    'title' => 'Play with real music.',
+                    'desc' => 'No more painfully dry exercises set to MIDI playalongs. 30-Day Chops includes custom-made music by acclaimed drum composer, Kaz Rodriguez. He’s crafted the perfect song for you to chop out with!',
                     ],
                     [
                     'position' => 'right',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/live-support.jpg',
                     'title' => 'Live support from REAL teachers.',
-                    'desc' => 'Each week you’ll have a 60-minute live lesson with Zack. Ask questions, get feedback, and connect with other students. You’re never alone.',
+                    'desc' => 'Each week you’ll have a 60-minute live lesson with Zack. Ask questions, get feedback, and connect with other students. Grab a cup of coffee and hang with your drum teacher? Yes please. ',
                     ],
                     [
                     'position' => 'left',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/lifetime-access.jpg',
                     'title' => 'Lifetime access.',
-                    'desc' => '30-Day Chops is yours for life. Even though we’ll be going through the course as a community, you’ll keep access to ALL the lessons forever. So you can return to your favorite workouts over and over.',
+                    'desc' => 'You can return to your favorite chops over and over with lifetime access. That means you can access ALL playalongs, charts, and lessons for as long as you like. And it helps if you have trouble keeping up with the class!',
                     ],
                 ];
 //            @endphp
-            <div class="timeline-container dc30 max-w-3xl lg:max-w-4xl mx-auto relative px-4 sm:pb-14 lg:pb-20">
+            <div class="timeline-container dc30 max-w-3xl lg:max-w-4xl mx-auto relative px-4">
                 @foreach ($gettings as $key => $getting)
                     @if($getting['position'] === 'right')
                         <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-28">
@@ -393,15 +380,11 @@
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
                             </div>
-                            <img class="-mt-7 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
+                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
                         </div>
                     @else
-                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-0 @if($key !== 4) md:mb-28 @endif">
-                            @if(empty($getting['special']))
-                                <img class="-mt-7 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
-                            @else
-                                <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
-                            @endif
+                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if($key !== 4) mb-16 md:mb-0 md:mb-28 @endif">
+                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
@@ -420,14 +403,17 @@
                 This is your chance to keep your playing on the cutting edge by immersing yourself in the world of chops for 30 days. Below are three drummers who exemplify this style of playing – click the buttons to see short examples of each playing linear chops.</h6>
 
             <div class="flex flex-wrap max-w-xs sm:max-w-full mx-auto">
-                <div class="w-full sm:w-1/3 px-2 mb-4 sm:mb-0">
-                    <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=760,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/aaron-spears-chops.jpg">
+                <div class="relative w-full sm:w-1/3 px-2 mb-4 sm:mb-0 cursor-hover autoplay-video" data-open="aaron">
+                    <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-20"></i>
+                    <img class="rounded-xl relative z-10" src="https://i.vimeocdn.com/video/1665544113-6ae072e9d0652bdfcd726f650d7208211eaec7245bead7abc8a44032fcc7993d-d_560">
                 </div>
-                <div class="w-full sm:w-1/3 px-2 mb-4 sm:mb-0">
-                    <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=760,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/anika-nilles-chops.jpg">
+                <div class="relative w-full sm:w-1/3 px-2 mb-4 sm:mb-0 cursor-hover autoplay-video" data-open="anika">
+                    <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-20"></i>
+                    <img class="rounded-xl relative z-10" src="https://i.vimeocdn.com/video/1665543766-0b53f480e98b9420f71219fe5ef7729f238a9f69f56e1e56cbc84e703930e96d-d_560">
                 </div>
-                <div class="w-full sm:w-1/3 px-2">
-                    <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=760,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/estepario-chops.jpg">
+                <div class="relative w-full sm:w-1/3 px-2 cursor-hover autoplay-video" data-open="larnell">
+                    <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-20"></i>
+                    <img class="rounded-xl relative z-10" src="https://i.vimeocdn.com/video/1665537466-98255352b2fe7e092811c665a39a7272ce9a23721135bc8907ae4c9afbdf5aa1-d_560">
                 </div>
             </div>
         </div>
@@ -443,17 +429,9 @@
                     <i class="fas fa-check text-drumeo mr-5"></i> Ongoing motivation & support<br>
                     <i class="fas fa-check text-drumeo mr-5"></i> Guaranteed results</h4>
             </div>
-            @if(session()->has('success-message'))
-                <p class="-mb-2 sm:-mb-8 mt-5 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Chops.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-            @endif
 {{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>--}}
-            @if($hasProduct)
-                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
-            @else
-                <a
-                    href="{{ $registerButtonUrl }}"
-                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
-            @endif
+            <a href="#final"
+                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
             <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/drummers.png" alt="joined student profiles">
             <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
 
@@ -544,11 +522,7 @@
                     </tr>
                     <tr>
                         <td>Investment</td>
-                        @if(is_current_user_a_member())
-                            <td class="rounded-b-xl"><strong>FREE</strong><br> for Drumeo<br class="inline lg:hidden"> Members</td>
-                        @else
-                            <td class="rounded-b-xl"><strong>${{ floatval($productPrices['30-day-drummer-2']->discounted_price) }}</strong></td>
-                        @endif
+                        <td class="rounded-b-xl"><strong>${{ floatval($productPrices['30-day-drummer-2']->discounted_price) }}</strong></td>
                         <td class="rounded-bl-xl"><strong>$30-$100</strong><br> per lesson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
                         <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
@@ -650,59 +624,35 @@
                     </div>
                 </div>
             </div>
-{{--            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What drummers are saying:</strong></h3>--}}
-{{--            <div class="flex flex-wrap text-left">--}}
-{{--                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">--}}
-{{--                    <div class="flex items-start p-5 bg-white rounded-lg">--}}
-{{--                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/LARNELL-LEWIS-HEAD-1641315158.jpg" alt="Larnell lewis">--}}
-{{--                        <p class="pl-4"><strong>Larnell Lewis</strong><br>--}}
-{{--                            <em class="leading-tight inline-block mb-1 opacity-60">Grammy-winner, Snarky Puppy</em><br>--}}
-{{--                            “Domino’s passion for drumming is infectious! It’s a great reminder that all we need is a love for music and drums to get started!”--}}
-{{--                        </p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">--}}
-{{--                    <div class="flex items-start p-5 bg-white rounded-lg">--}}
-{{--                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/281911-avatar-1609277722.png" alt="Matt Mcguire">--}}
-{{--                        <p class="pl-4"><strong>Matt McGuire</strong><br>--}}
-{{--                            <em class="leading-tight inline-block mb-1 opacity-60">The Chainsmokers</em><br>--}}
-{{--                            “I genuinely enjoy watching Domino play, you can see the pure love for what she does. This program not only provides education, I'm sure you'll be entertained throughout the process.”--}}
-{{--                        </p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">--}}
-{{--                    <div class="flex items-start p-5 bg-white rounded-lg">--}}
-{{--                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/dorothea-thumb-1656515788.jpg" alt="Dorothea Taylor">--}}
-{{--                        <p class="pl-4"><strong>Dorothea Taylor</strong><br>--}}
-{{--                            <em class="leading-tight inline-block mb-1 opacity-60">The Godmother Of Drumming,<br> Educator for 50+ years</em><br>--}}
-{{--                            “Domino plays drums with high energy & passion which shows how much fun playing drums can be.”--}}
-{{--                        </p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">--}}
-{{--                    <div class="flex items-start p-5 bg-white rounded-lg">--}}
-{{--                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/31880-avatar-1557351774.jpg" alt="Jared Falk">--}}
-{{--                        <p class="pl-4"><strong>Jared Falk</strong><br>--}}
-{{--                            <em class="leading-tight inline-block mb-1 opacity-60">Drumeo Co-Founder</em><br>--}}
-{{--                            “Every-time I watch and listen to Domino Santantonio play drums I smile. She plays with joy, teaches with passion, and inspires drummers to take action.”--}}
-{{--                        </p>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What drummers are saying:</strong></h3>
+            <div class="flex flex-wrap text-left">
+                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
+                    <div class="flex items-start p-5 bg-white rounded-lg">
+                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/232650-avatar-1568629179.jpg" alt="Larnell lewis">
+                        <p class="pl-4"><strong>Gregg Bissonnette</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Legendary Session Drummer</em><br>
+                            “Zack is a great friend and amazing drummer in every style. He’s a musical inspiration to me and I know he’ll do the same for you. Too bad he doesn’t have a good sense of humor though…”
+                        </p>
+                    </div>
+                </div>
+                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
+                    <div class="flex items-start p-5 bg-white rounded-lg">
+                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/31880-avatar-1557351774.jpg" alt="Jared Falk">
+                        <p class="pl-4"><strong>Jared Falk</strong><br>
+                            <em class="leading-tight inline-block mb-1 opacity-60">Drumeo Co-Founder</em><br>
+                            "Zack makes me want to sit down and improve my drumming, an essential quality of a great teacher – plus, you’re always entertained throughout the process."
+                        </p>
+                    </div>
+                </div>
+            </div>
 
 
-        @if(session()->has('success-message'))
-                <p class="-mb-2 sm:-mb-8 mt-5 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Chops.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-            @endif
 {{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>--}}
 
-            @if($hasProduct)
-                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
-            @else
                 <a
-                    href="{{ $registerButtonUrl }}"
-                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
-            @endif
+                    href="#final"
+                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+
             <img class="h-7 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/drummers.png" alt="joined student profiles">
             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
         </div>
@@ -741,12 +691,12 @@
                     </div>
 
                     <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
-                        <a href="/ecommerce/add-to-cart?products[30-day-chops]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&products[drumeo_access_30-days]=1&locked=true"
+                        <a href="/ecommerce/add-to-cart?products[30-day-chops]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&locked=true"
                             class="z-10 relative px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-lg w-full sm:w-5/12">
                             <p class="border border-drumeo text-drumeo inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">EARLY BIRD BUNDLE</p>
                             <h3><strong>30-Day Chops</strong></h3>
-                            <p class="text-sm mt-2 mb-5">Improve your drum chops in 30 days. </p>
-                            <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">one time payment.</p><br>
+                            <p class="text-sm mt-2 mb-5">Learn drum chops in 30 days. </p>
+                            <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>
                             <div class="join blue smaller my-4 w-full">ENROLL NOW</div>
                             <ul class="list-disc ml-6">
                                 <li class="text-sm relaxed"><span class="text-drumeo">Free</span> QuietPad Practice Pad</li>
@@ -805,184 +755,203 @@
         <div class="container mx-auto relative z-10 max-w-5xl">
             <h2><strong>Still have questions?</strong></h2>
             <div class="max-w-6xl mt-4 sm:mt-10 px-4">
-                @if(is_current_user_a_member())
-                    @include('_partials.components.question-dropdown', [
-                    "num" => "?",
-                    "title" => "Why do I need to register if I get it for free as a member?",
-                    "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",
-                    ])
-                @endif
-                @include('_partials.components.question-dropdown', [
-                "title" => "Do I need to attend the lessons live?",
-                "desc" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are totally optional, and they’ll also include a recording that you can watch or re-watch anytime.",
-                'num' => '?'
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "What if I’m going to miss a day (or two, or more)?",
-                "desc" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
-                'num' => '?'
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "Do I need a full drum set to complete the course?",
-                "desc" => "The lessons work on both electric and acoustic drum sets. While you can even get value with just a practice pad & sticks, it’s recommended that you have access to a drum set to get the most from this course.",
-                'num' => '?'
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "How much time per week will this course require?",
-                "desc" => "30-Day Chops gives you guided daily drum workouts for thirty days – with flex days built in for when life happens. With each workout being 10-15 minutes, you can miss a workout and make it up the next day or later in the week.",
-                'num' => '?'
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "What devices can I access the course on?",
-                "desc" => "30-Day Chops is available on your laptop, tablet, or phone. You’ll also have access through the Musora app after you’ve completed your purchase of the course.",
-                'num' => '?'
-                ])
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
-                <p><strong>Any other questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
-                    <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
-                    <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
-            </div>
-            <div class="inline-block w-full px-3 md:px-4 mb-10" style="color:#2a2f34;">
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
-                <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
-            </div>
-        </div>
-    </section>
 
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/796456383?autoplay=1',
-        "title" => 'trailer'
-    ])
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "Do I need to attend the lessons live?",
+            "desc" => "The weekday workouts are pre-recorded videos you can access on your own schedule – and the weekly live Q&A sessions are optional. Plus, you’ll be sent a recording so you can watch anytime.",
+            ])
 
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-06-05 00:00:00',
-        'promoVersion' => false
-    ])
-    <script>
-        function timer2(){
-            return {
-                day: '00',
-                dayText: ' days',
-                hour: '00',
-                hourText: ' hours',
-                minute: '00',
-                minuteText: ' minutes',
-                second: '00',
-                secondText: ' seconds',
-                endTime: new Date('2023-05-22 00:00:00').getTime(),
-                startTime: new Date().getTime(),
-                timeLeft: 0,
-                smallScreen: false,
-                countdown2: function (){
-                    let _this = this;
-                    this.startTime = new Date().getTime();
-                    this.timeLeft = (this.endTime - this.startTime) / 1000;
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "What if I’m going to miss a day (or two, or more)?",
+            "desc" => "That’s totally fine. The course is meant to be flexible – there are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session to catch up.",
+            ])
 
-                    this.startTime = new Date().getTime();
-                    this.timeLeft = (this.endTime - this.startTime) / 1000;
-                    this.day = this.formatTime(this.timeLeft / (60 * 60 * 24));
-                    this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
-                    this.minute = this.formatTime(this.timeLeft / 60) % 60;
-                    this.second = this.formatTime(this.timeLeft % 60);
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "How much time per week will this course require?",
+            "desc" => "30-Day Chops gives you guided daily chop workouts for thirty days. The minimum time required adds up to 60 minutes per week – but you can spend 2+ hours or more including the live session if you’re feeling motivated.",
+            ])
 
-                    if ( !this.smallScreen ){
-                        this.dayText = formatText(this.day, ' days');
-                        this.hourText = formatText(this.hour, ' hours');
-                        this.minuteText = formatText(this.minute, ' minutes');
-                        this.secondText = formatText(this.second, ' seconds');
-                    }
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "Does it work on acoustic AND electronic drums?",
+            "desc" => "Yes. 30-Day Chops is built for the intermediate-to-advanced drummer looking to improve their skills. You can complete all Zack’s exercises on either acoustic or electronic and see the full effects on your playing.",
+            ])
 
-                    if(this.timeLeft > 0){
-                        setInterval(() => {
-                            this.startTime = new Date().getTime();
-                            this.timeLeft = (this.endTime - this.startTime) / 1000;
-                            this.day = this.formatTime(this.timeLeft / (60 * 60 * 24));
-                            this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
-                            this.minute = this.formatTime(this.timeLeft / 60) % 60;
-                            this.second = this.formatTime(this.timeLeft % 60);
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "Is this a continuation of 30-Day Drummer?",
+            "desc" => "Not exactly. 30-Day Drummer was our first-ever thirty day cohort designed to help beginners establish a solid groove. 30-Day Chops moves on to complex linear patterns around the kit. It’s very possible for an ambitious beginner to work through it – but the curriculums are not related.",
+            ])
 
-                            if ( !this.smallScreen ){
-                                this.dayText = formatText(this.day, ' days');
-                                this.hourText = formatText(this.hour, ' hours');
-                                this.minuteText = formatText(this.minute, ' minutes');
-                                this.secondText = formatText(this.second, ' seconds');
-                            }
+            @include('_partials.components.question-dropdown', [
+            "num" => "?",
+            "title" => "What devices can I access the course on?",
+            "desc" => "30-Day Chops is available on your laptop, tablet, or phone. You’ll also have access through the Musora app after you’ve completed your purchase online.",
+            ])
+</div>
+<div class="inline-block w-full px-3 md:px-4 my-5" style="color:#2a2f34;">
+    <p><strong>Any other questions?</strong><br class="inline-block md:hidden"> Call us toll-free at
+        <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
+        <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
+</div>
+<div class="inline-block w-full px-3 md:px-4 mb-10" style="color:#2a2f34;">
+    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
+    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
+    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
+    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
+    <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
+</div>
+</div>
+</section>
 
-                        }, 1000);
-                    }
+@include('drumeo.sales.partials._video-modal',[
+'modalId' => "trailer",
+"video" => '//player.vimeo.com/video/825206369?h=e8d828248a&autoplay=1',
+"title" => 'trailer'
+])
+@include('drumeo.sales.partials._video-modal',[
+'modalId' => "aaron",
+"video" => '//player.vimeo.com/video/823878266?h=c6a0279ff5&autoplay=1',
+"title" => 'aaron'
+])
+@include('drumeo.sales.partials._video-modal',[
+'modalId' => "anika",
+"video" => '//player.vimeo.com/video/823878240?h=9d697640d7&autoplay=1',
+"title" => 'anika'
+])
+@include('drumeo.sales.partials._video-modal',[
+'modalId' => "larnell",
+"video" => '//player.vimeo.com/video/823878300?h=dec74dc718&autoplay=1',
+"title" => 'larnell'
+])
 
-                    const bodyWidth = window.innerWidth;
+@include('_partials.components.countdown',[
+'countdownDate' => '2023-06-05 00:00:00',
+'promoVersion' => false
+])
+<script>
+function timer2(){
+return {
+    day: '00',
+    dayText: ' days',
+    hour: '00',
+    hourText: ' hours',
+    minute: '00',
+    minuteText: ' minutes',
+    second: '00',
+    secondText: ' seconds',
+    endTime: new Date('2023-05-22 00:00:00').getTime(),
+    startTime: new Date().getTime(),
+    timeLeft: 0,
+    smallScreen: false,
+    countdown2: function (){
+        let _this = this;
+        this.startTime = new Date().getTime();
+        this.timeLeft = (this.endTime - this.startTime) / 1000;
 
-                    if ( bodyWidth < 768 ){
-                        this.dayText = 'D';
-                        this.hourText = 'H';
-                        this.minuteText = 'M';
-                        this.secondText = 'S';
-                        this.smallScreen = true;
-                    }
+        this.startTime = new Date().getTime();
+        this.timeLeft = (this.endTime - this.startTime) / 1000;
+        this.day = this.formatTime(this.timeLeft / (60 * 60 * 24));
+        this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
+        this.minute = this.formatTime(this.timeLeft / 60) % 60;
+        this.second = this.formatTime(this.timeLeft % 60);
 
-                    window.addEventListener('resize', function(event){
-                        const bodyWidth = window.innerWidth;
-
-                        if ( bodyWidth < 768 ){
-                            _this.smallScreen = true;
-                            _this.dayText = 'D';
-                            _this.hourText = 'H';
-                            _this.minuteText = 'M';
-                            _this.secondText = 'S';
-                        }
-                        else {
-                            _this.smallScreen = false;
-                            _this.dayText = ' days';
-                            _this.hourText = ' hours';
-                            _this.minuteText = ' minutes';
-                            _this.secondText = ' seconds';
-                        }
-                    });
-                },
-                formatTime: function (value){
-                    return Math.floor(value);
-                },
-            }
+        if ( !this.smallScreen ){
+            this.dayText = formatText(this.day, ' days');
+            this.hourText = formatText(this.hour, ' hours');
+            this.minuteText = formatText(this.minute, ' minutes');
+            this.secondText = formatText(this.second, ' seconds');
         }
-    </script>
 
-    @include("drumeo.sales.partials._footer")
+        if(this.timeLeft > 0){
+            setInterval(() => {
+                this.startTime = new Date().getTime();
+                this.timeLeft = (this.endTime - this.startTime) / 1000;
+                this.day = this.formatTime(this.timeLeft / (60 * 60 * 24));
+                this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
+                this.minute = this.formatTime(this.timeLeft / 60) % 60;
+                this.second = this.formatTime(this.timeLeft % 60);
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+                if ( !this.smallScreen ){
+                    this.dayText = formatText(this.day, ' days');
+                    this.hourText = formatText(this.hour, ' hours');
+                    this.minuteText = formatText(this.minute, ' minutes');
+                    this.secondText = formatText(this.second, ' seconds');
+                }
 
-    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+            }, 1000);
+        }
 
+        const bodyWidth = window.innerWidth;
 
-    <script>
-        $(document).ready(function () {
-            $(document).foundation();
-            $('.comparison tr td:nth-child(3)').on('click', function(){
-                $(this).parents().find('table').removeClass('private books online');
-                $(this).parents().find('table').addClass('online');
-            });
-            $('.comparison tr td:nth-child(4)').on('click', function(){
-                $(this).parents().find('table').removeClass('private books online');
-                $(this).parents().find('table').addClass('books');
-            });
-            $('.comparison tr td:nth-child(5)').on('click', function(){
-                $(this).parents().find('table').removeClass('private books online');
-                $(this).parents().find('table').addClass('private');
-            });
+        if ( bodyWidth < 768 ){
+            this.dayText = 'D';
+            this.hourText = 'H';
+            this.minuteText = 'M';
+            this.secondText = 'S';
+            this.smallScreen = true;
+        }
+
+        window.addEventListener('resize', function(event){
+            const bodyWidth = window.innerWidth;
+
+            if ( bodyWidth < 768 ){
+                _this.smallScreen = true;
+                _this.dayText = 'D';
+                _this.hourText = 'H';
+                _this.minuteText = 'M';
+                _this.secondText = 'S';
+            }
+            else {
+                _this.smallScreen = false;
+                _this.dayText = ' days';
+                _this.hourText = ' hours';
+                _this.minuteText = ' minutes';
+                _this.secondText = ' seconds';
+            }
         });
-    </script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+    },
+    formatTime: function (value){
+        return Math.floor(value);
+    },
+}
+}
+</script>
+
+@include("drumeo.sales.partials._footer")
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+
+<script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
+<script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
+<script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
+<script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+
+
+<script>
+$(document).ready(function () {
+$(document).foundation();
+$('.comparison tr td:nth-child(3)').on('click', function(){
+    $(this).parents().find('table').removeClass('private books online');
+    $(this).parents().find('table').addClass('online');
+});
+$('.comparison tr td:nth-child(4)').on('click', function(){
+    $(this).parents().find('table').removeClass('private books online');
+    $(this).parents().find('table').addClass('books');
+});
+$('.comparison tr td:nth-child(5)').on('click', function(){
+    $(this).parents().find('table').removeClass('private books online');
+    $(this).parents().find('table').addClass('private');
+});
+});
+</script>
+<script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
 @stop
