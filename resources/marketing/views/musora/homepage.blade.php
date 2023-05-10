@@ -116,9 +116,24 @@
 @endsection
 
 @section('layout-body')
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container max-w-6xl mx-auto">
+            Musicians start here.
+
+            Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support.
+
+            [ START FOR FREE ]
+        </div>
+    </section>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container max-w-6xl mx-auto">
+            PIANO // GUITAR // DRUMS // SINGING
+        </div>
+    </section>
+
     @include('musora.sales.components.learn-by-playing-section', [
-        'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
-        'desc' => 'It’s the best feeling in the world –<br><br>Nailing that fill in your favorite song, slamming out the chorus of an all-time classic, or writing your own drum part that locks in with the music… but it’s a process.<br><br>And it starts with learning the skills & techniques you need to play the drums.<br><br>Drumeo makes learning the drums easier by giving you step-by-step lessons anytime & anywhere it fits your schedule. Plus, the groundbreaking NEW Drumeo Songs tool makes playing your favorite songs a reality – with note-for-note breakdowns of 5,000 popular songs.<br><br>You’ll play more. You’ll fall in love with your progress. And you’ll have personalized support every step of the way.<br><br>Scroll down to watch the trailer, see more details, and learn to play like you’ve always wanted!',
+        'header' => 'The easier way to<br class="inline sm:hidden"> learn <u>any instrument</u>.',
+        'desc' => 'If you’ve ever tried learning an instrument, you know the feeling: it’s hard. And you don’t always know where to start or where to go next.<br><br>But rest assured:<br><br>We believe anyone can play music. No matter your age, skill, or free time. And over the past 15 years, we’ve seen students like you achieve their goals by following a simple formula: learn, practice, play, connect.',
         'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/collage2.png',
     ])
 
@@ -128,41 +143,40 @@
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/10-level-cirriculum.jpg',
                 'title' => '10-Level Curriculum',
-                'desc' => 'The most trusted step-by-step video lessons for every technique, pattern, and style.',
+                'desc' => 'The most trusted step-by-step video lessons for piano, guitar, drums, and singing. ',
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
-                'desc' => 'Keep up your progress with clear assignments and handy practice tools for every level.',
-            ],
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts.jpg',
-                'title' => 'Guided Workouts',
-                'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
+                'desc' => 'Keep up your progress with clear assignments and handy practice tools for every level. ',
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
-                'desc' => 'The best drummers are here -- including Grammy Award winners and touring musicians.',
+                'desc' => 'Study with 100+ music authorities including Grammy Award winners and touring musicians. ',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts.jpg',
+                'title' => 'On-Demand Courses',
+                'desc' => 'Boost any skill, anytime with topic-based courses to guide you towards any goal. ',
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
-                'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime.',
+                'desc' => 'Stream your lesson OR download your videos so you can practice anywhere, anytime. ',
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
-                'desc' => 'Get weekly live streams, student lesson plans, and access to a global drum community.',
+                'desc' => 'Get weekly live streams, student lesson plans, and access to a global music community. ',
             ],
         ];
     @endphp
 
     @include('musora.sales.components.trailer-grid-section', [
         'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314560/rendition/540p/file.mp4?loc=external&signature=1549cce1dacabad80dd416b5a439f6639d3b7b30c7e4d70d46245bf70c6d5102',
-        'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
-        'desc' => '
-        Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum featuring many of the world’s best teachers. ',
+        'header' => 'Your musical goals<br class="inline sm:hidden"> start here.',
+        'desc' => 'Always know <em>exactly</em> what to practice with a step-by-step curriculum for each instrument <br class="hidden sm:inline">plus exclusive courses on any topic you’d ever want to learn!',
     ])
 
     @php
