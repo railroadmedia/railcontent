@@ -4,22 +4,24 @@
     fix tracking for videos
 */
 import { onBeforeMount, computed } from 'vue';
-import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
+import { usePlaylistsStore } from '../../../stores/playlists';
+import { DateTime } from 'luxon';
+import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
 import SoundSlice from '../SoundSlice/SoundSlice.vue';
 import PlaybackCue from './PlaybackCue.vue';
 import RelatedPlaylists from './RelatedPlaylists.vue';
-import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
-import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
-import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
 import Comments from '../../vuesora/views/comments/Comments.vue';
 import PlaybackNavButtons from './PlaybackNavButtons.vue';
 import RelatedLesson from './RelatedLesson.vue';
 import Breadcrumb from './Breadcrumb.vue';
-import { usePlaylistsStore } from '../../../stores/playlists';
+import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
+import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
+import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
+import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 
 //-----------Props-----------//
 const props = defineProps({
-    lessonType: {
+    additionalSoundsliceParams: {
         type: String,
         default: ''
     },
@@ -27,19 +29,7 @@ const props = defineProps({
         type: String,
         default: ''
     },
-    userId: {
-        type: [String, Number],
-        default: ''
-    },
-    playlistId: {
-        type: [String, Number],
-        default: ''
-    },
-    additionalSoundsliceParams: {
-        type: String,
-        default: ''
-    },
-    soundsliceSlug: {
+    castTitle: {
         type: String,
         default: ''
     },
@@ -47,75 +37,19 @@ const props = defineProps({
         type: [Number, String],
         default: ''
     },
-    youtubeVideoId: {
-        type: [Number, String],
-        default: ''
-    },
-    vimeoVideoId: {
-        type: [Number, String],
-        default: ''
-    },
     currentSecond: {
         type: [Number, String],
         default: ''
     },
-    totalDuration: {
-        type: [Number, String],
-        default: ''
-    },
-    videoLength: {
-        type: [Number, String],
-        default: ''
-    },
-    progressState: {
-        type: [Number, String],
-        default: ''
-    },
-    useLegacyVideoPlayer: {
-        type: Boolean,
-        default: false,
-    },
-    videoPosterImageUrl: {
+    description: {
         type: String,
         default: ''
     },
-    videoMediaSources: {
-        type: [Array, Object],
-        default: {}
+    endSecond: {
+        type: [String, Number],
+        default: null
     },
     hlsManifestUrl: {
-        type: String,
-        default: ''
-    },
-    videoChapters: {
-        type: Array,
-        default: []
-    },
-    likeCount: {
-        type: [Number, String],
-        default: ''
-    },
-    isLiked: {
-        type: Boolean,
-        default: false
-    },
-    songRanges: {
-        type: Array,
-        default: []
-    },
-    rangesVideoIds: {
-        type: Array,
-        default: []
-    },
-    castTitle: {
-        type: String,
-        default: ''
-    },
-    thumbnailUrl: {
-        type: String,
-        default: ''
-    },
-    description: {
         type: String,
         default: ''
     },
@@ -123,13 +57,24 @@ const props = defineProps({
         type: Array,
         default: []
     },
-    parentTitle: {
+    isMyPlaylist: {
+        type: Number,
+    },
+    isLiked: {
+        type: Boolean,
+        default: false
+    },
+    lessonType: {
         type: String,
         default: ''
     },
-    videoResources: {
-        type: Array,
-        default: []
+    likeCount: {
+        type: [Number, String],
+        default: ''
+    },
+    nextLessonUrl: {
+        type: String,
+        default: '/'
     },
     playlistName: {
         type: String,
@@ -151,6 +96,10 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    playlistId: {
+        type: [String, Number],
+        default: ''
+    },
     playlistItemId: {
         type: [String, Number],
         default: ''
@@ -162,6 +111,22 @@ const props = defineProps({
     playlistItemPosition: {
         type: [String, Number]
     },
+    progressState: {
+        type: [Number, String],
+        default: ''
+    },
+    parentTitle: {
+        type: String,
+        default: ''
+    },
+    prevLessonUrl: {
+        type: String,
+        default: '/'
+    },
+    rangesVideoIds: {
+        type: Array,
+        default: []
+    },
     relatedLesson: {
         type: Object,
         default: {}
@@ -169,6 +134,30 @@ const props = defineProps({
     relatedPlaylists: {
         type: Object,
         default: {}
+    },
+    startSecond: {
+        type: [String, Number],
+        default: 0
+    },
+    songRanges: {
+        type: Array,
+        default: []
+    },
+    soundsliceSlug: {
+        type: String,
+        default: ''
+    },
+    totalDuration: {
+        type: [Number, String],
+        default: ''
+    },
+    thumbnailUrl: {
+        type: String,
+        default: ''
+    },
+    userId: {
+        type: [String, Number],
+        default: ''
     },
     userName: {
         type: String,
@@ -186,25 +175,38 @@ const props = defineProps({
         type: [String, Number],
         default: ''
     },
-    nextLessonUrl: {
+    useLegacyVideoPlayer: {
+        type: Boolean,
+        default: false,
+    },
+    videoPosterImageUrl: {
         type: String,
-        default: '/'
+        default: ''
     },
-    prevLessonUrl: {
-        type: String,
-        default: '/'
+    videoMediaSources: {
+        type: [Array, Object],
+        default: {}
     },
-    startSecond: {
-        type: [String, Number],
-        default: 0
+    videoChapters: {
+        type: Array,
+        default: []
     },
-    endSecond: {
-        type: [String, Number],
-        default: null
+    videoLength: {
+        type: [Number, String],
+        default: ''
     },
-    isMyPlaylist: {
-        type: Number,
-    }
+    vimeoVideoId: {
+        type: [Number, String],
+        default: ''
+    },
+    videoResources: {
+        type: Array,
+        default: []
+    },
+    youtubeVideoId: {
+        type: [Number, String],
+        default: ''
+    },
 });
 
 //Pinia Stores
@@ -222,12 +224,26 @@ const handleGoToNext = () => {
     }
 };
 
+//Constants
+const activeItem = props.playlistItems.data.find(l => l.id === props.playlistItemId);
+const dateNow = Date.now();
+const lessonDateParsed = activeItem.published_on_in_timezone ? Date.parse(activeItem.published_on_in_timezone) : Date.parse(activeItem.published_on);
+const lessonDate = activeItem.published_on_in_timezone ? activeItem.published_on_in_timezone : activeItem.published_on;
+//Parse Release Date
+const month = DateTime.fromSQL(lessonDate).toFormat('LLL');
+const dayNumber = DateTime.fromSQL(lessonDate).toFormat('d');
+const yearNumber = DateTime.fromSQL(lessonDate).toFormat('yy');
+
 //computed
 const homeUrl = computed(() => `/${props.brand}/playlists`);
 const secondLevelUrl = computed(() => `/${props.brand}/playlist/${props.playlistId}`);
+const released = computed(() => {
+    return lessonDateParsed < dateNow;
+})
 
 onBeforeMount(() => {
-    console.log(props.playlistName)
+    console.log('video Poster', props.thumbnailUrl)
+    console.log('active', activeItem)
 });
 </script>
 
@@ -266,7 +282,24 @@ onBeforeMount(() => {
                             </YoutubePlayer>
                         </div>
                         <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'"
-                            id="lessonVideoWrap">
+                            id="lessonVideoWrap" class="tw-relative">
+                            
+                            <!-- Unreleased Content -->
+                            <div v-if="!released" class="tw-w-full tw-aspect-video tw-absolute tw-z-30">
+                                <img :src="`https://musora.com/cdn-cgi/image/width=1000/${thumbnailUrl}`"  
+                                     class="tw-transition-opacity tw-opacity-0 tw-duration-300 tw-grayscale tw-w-full tw-object-cover" title="Image Photo"
+                                     loading="lazy" 
+                                     onload="this.classList.remove('tw-opacity-0')"
+                                />
+                                <div class="tw-absolute tw-bg-black/60 tw-top-0 tw-left-0 tw-w-full tw-h-full tw-text-white tw-font-bold tw-text-lg tw-flex tw-flex-col tw-items-center tw-justify-center">
+                                    <i class="fas fa-clock tw-text-3xl tw-mb-1"></i>
+                                    <p class="tw-text-2xl">
+                                        Available on 
+                                        <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            
                             <transition v-if="useLegacyVideoPlayer" appear name="fade">
                                 <VideoMediaElement ref="mediaElementVueInstance" element-id="lessonPlayer" :brand="brand"
                                     :theme-color="brand" :poster="videoPosterImageUrl" :sources="videoMediaSources"
@@ -275,7 +308,6 @@ onBeforeMount(() => {
                                     :video-length="videoLength" :chapters="videoChapters" :user-id="userId"
                                     :like-count="likeCount" :is-liked="isLiked" :check-for-timecode="true"
                                     @playing="handleVideoPlay" @pause="handleVideoPause" @ended="handleGoToNext">
-
                                     <div :class="`widescreen title tw-text-${brand}`">
                                         <i class="fas fa-spinner fa-spin absolute-center"></i>
                                     </div>
