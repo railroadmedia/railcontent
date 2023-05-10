@@ -9,6 +9,14 @@ class Leadgen extends Model
 {
     use HasFactory;
 
+    protected $guarded = [
+        'id'
+    ];
+
+    protected $casts = [
+        'start_date' => 'datetime',
+    ];
+
     public function brand()
     {
         return $this->belongsTo(Brand::class, 'brand_id');
