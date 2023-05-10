@@ -103,14 +103,16 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
             }
 
             // events always sync to the brand specific workspace and the primary all synced workspace
-            $customerIoService->createEventForUserId(
-                $user->id,
-                $accountNameToSyncAllBrand,
-                $this->eventName,
-                $this->eventData,
-                $this->eventType,
-                $this->eventTimestamp
-            );
+            if($this->accountName !== $accountNameToSyncAllBrand) {
+                $customerIoService->createEventForUserId(
+                    $user->id,
+                    $accountNameToSyncAllBrand,
+                    $this->eventName,
+                    $this->eventData,
+                    $this->eventType,
+                    $this->eventTimestamp
+                );
+            }
 
             try {
                 $customerIoService->createEventForUserId(
