@@ -2,19 +2,28 @@
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
             <section class="drum-shop">
-                <div class="top-image @if(!empty($packLogo)) with-logo @endif" style="background-image:url('{{ str_contains($thumbnail, 'cloudfront') ? $thumbnail : 'https://www.musora.com/musora-cdn/image/width=600,quality=85/'.$thumbnail }}')">
+                <div class="top-image @if(!empty($packLogo)) with-logo @endif">
+                    <picture>
+                        <source media="(min-width: 640px)" srcset="{{ 'https://www.musora.com/musora-cdn/image/width=600,quality=85/'.$thumbnail }}">
+                        <img class="absolute w-full h-full top-0 left-0 object-top object-cover" src="{{ 'https://www.musora.com/musora-cdn/image/width=400,quality=85/'.$thumbnail }}" alt="{{ $title }} thumbnail" @if(!empty($FCP)) fetchpriority="high" @endif />
+                    </picture>
+
                     @if (!empty($badgeText))
-                        <span class="top-left-badge text-white bg-promo">
+                        <span class="top-left-badge bg-promo">
                             {!! $badgeText !!}
                         </span>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <span class="top-left-badge text-white bg-promo">
+                        <span class="top-left-badge bg-promo">
                             Save {{ round(100 - (100 * ($price / $fullPrice))) }}%
                         </span>
                     @endif
                     @if(!empty($packLogo))
                         <div class="logo">
-                            <img @if($sku === '30-day-drummer-2') class="max-h-full h-24" @endif src="{{ str_contains($packLogo, 'cloudfront') ? $packLogo : 'https://www.musora.com/musora-cdn/image/width=600,quality=85/'.$packLogo }}" alt="{{ $title }} logo">
+                            <picture>
+                                <source media="(min-width: 640px)" srcset="{{ 'https://www.musora.com/musora-cdn/image/width=600,quality=85/'.$packLogo }}">
+                                <img @if($sku === '30-day-drummer-2') class="max-h-full h-24" @endif src="{{ 'https://www.musora.com/musora-cdn/image/width=300,quality=85/'.$packLogo }}" alt="{{ $title }} logo" @if(!empty($FCP)) fetchpriority="high" @endif >
+                            </picture>
+
                         </div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>
@@ -52,7 +61,7 @@
                         <p class="description">{!! $cardDescription  !!}</p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p><strong>{{  floatVal($specialPrice)  }}</strong><br><br></p>
+                        <p><strong class="text-promo">{{  $specialPrice  }}</strong><br><br></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <p class="price"><s>${{ floatVal($fullPrice) }}</s> <strong class="text-promo">
                                 @if(number_format($price, 2) == intval($price))

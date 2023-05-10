@@ -37,6 +37,13 @@ class Leadgen extends Model
                 $model['meta_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$model->brand->name.'/Lead-gens/Meta-images/'.$uuid.'-'.$model['meta_img']->getClientOriginalName();
             }
 
+            if(gettype($model['logo']) === 'object'){
+                $model['logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$model->brand->name.'/Lead-gens/Logos/'.$uuid.'-'.$model['logo']->getClientOriginalName();
+            }
+
+            if(gettype($model['bg_img']) === 'object'){
+                $model['bg_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/'.$model->brand->name.'/Lead-gens/Background-images/'.$uuid.'-'.$model['bg_img']->getClientOriginalName();
+            }
         });
 
     }

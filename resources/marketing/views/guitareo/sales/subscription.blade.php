@@ -529,7 +529,7 @@
             "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
             "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
             "songs" => "1000",
-            "firstPoint" => "Unlimited guitar lessons",
+            "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, piano, and drums.",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
@@ -566,7 +566,7 @@
         'header' => 'Online guitar lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 3 bonuses<br class="inline sm:hidden"> worth $333',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true',
+        'buttonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&products[guitarists-survival-kit]=1&products[guitar-quest]=1&products[rhythm-and-groove]=1&redirect=/order&locked=true&promo-code=special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[GUITAREO-1-MONTH-MEMBERSHIP]=1&redirect=/order&locked=true',
         ])
     @else

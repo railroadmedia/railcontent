@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "bf42ab7dee7d4bdb28987e39b7b32eb9",
+    "content-hash": "a455eeb67bb9351ff5321957b3b91f42",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8363,16 +8363,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.0.13",
+            "version": "v3.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "f6c5135e87016bac4cec25d732374144616130ab"
+                "reference": "096cddae45134dc7e3d750b33721d4be8716ddc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/f6c5135e87016bac4cec25d732374144616130ab",
-                "reference": "f6c5135e87016bac4cec25d732374144616130ab",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/096cddae45134dc7e3d750b33721d4be8716ddc8",
+                "reference": "096cddae45134dc7e3d750b33721d4be8716ddc8",
                 "shasum": ""
             },
             "require": {
@@ -8381,7 +8381,7 @@
                 "php": "^8.1",
                 "railroad/ecommerce": "^5.0",
                 "railroad/permissions": "^2.0",
-                "railroad/railcontent": "2.0.*",
+                "railroad/railcontent": "2.1.*",
                 "railroad/response": "2.0.x-dev"
             },
             "require-dev": {
@@ -8402,9 +8402,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.0.13"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.4"
             },
-            "time": "2023-04-06T10:54:30+00:00"
+            "time": "2023-05-08T08:40:32+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8597,16 +8597,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.0.79",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "5cdeb00c360f5378c39bfc0c6b47aad43e70a262"
+                "reference": "2d80332ba4a8f06b34ab304988b5230ab87003ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/5cdeb00c360f5378c39bfc0c6b47aad43e70a262",
-                "reference": "5cdeb00c360f5378c39bfc0c6b47aad43e70a262",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/2d80332ba4a8f06b34ab304988b5230ab87003ad",
+                "reference": "2d80332ba4a8f06b34ab304988b5230ab87003ad",
                 "shasum": ""
             },
             "require": {
@@ -8660,9 +8660,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.0.79"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.1"
             },
-            "time": "2023-04-25T13:38:53+00:00"
+            "time": "2023-05-01T15:53:50+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16979,5 +16979,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

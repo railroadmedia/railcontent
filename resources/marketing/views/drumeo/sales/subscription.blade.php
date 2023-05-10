@@ -128,6 +128,7 @@
             "subscriptionVersion" => true,
             "scrollToJoin" => true,
             "hideMenu" => true,
+            "logoUrl" => Request::path(),
         ])
     @elseif(!empty($month))
         @include("drumeo.sales.partials._nav", [
@@ -520,11 +521,11 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
         'reviewText' => 'Drumeo is rated 5-stars for price, satisfaction,<br class="inline sm:hidden"> and customer service.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
-        'youtube' => '2.5M',
+        'youtube' => '2.6M',
         'facebookLink' => 'https://facebook.com/drumeo/',
         'facebook' => '1.2M',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
-        'instagram' => '966K',
+        'instagram' => '1M',
     ])
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png',
@@ -542,7 +543,7 @@
             "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
             "songs" => "5000",
             "firstPoint" => "The world’s best drum lessons.",
-            "thirdPoint" => "Unlimited personal support",
+            "thirdPoint" => "Unlimited personal support.",
             "fifthPoint" => "Lesson access for piano, guitar, and singing.",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
             "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
@@ -583,7 +584,7 @@
         'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png',
         'header' => 'Online drum lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
         ])
     @else

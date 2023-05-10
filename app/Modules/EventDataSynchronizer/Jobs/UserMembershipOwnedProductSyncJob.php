@@ -14,12 +14,16 @@ class UserMembershipOwnedProductSyncJob extends BatchQueryJob
     private int $skip;
     private int $take;
     private int $productId;
+    private bool $syncCustomerIO;
+    private ?Carbon $purchasedAfter;
 
-    public function __construct(int $skip, int $take, int $productId)
+    public function __construct(int $skip, int $take, int $productId, bool $syncCustomerIO, ?string $purchasedAfter)
     {
         $this->skip = $skip;
         $this->take = $take;
         $this->productId = $productId;
+        $this->syncCustomerIO = $syncCustomerIO;
+        $this->purchasedAfter = !empty($purchasedAfter) ? new Carbon($purchasedAfter) : null;
     }
 
     function getSkip(): int
@@ -38,6 +42,9 @@ class UserMembershipOwnedProductSyncJob extends BatchQueryJob
         if ($this->productId) {
             $query = $query->where('product_id', '=', $this->productId);
         }
+        if ($this->purchasedAfter) {
+            $query = $query->where('created_at', '>', $this->purchasedAfter);
+        }
         return $query;
     }
 
@@ -55,11 +62,15 @@ class UserMembershipOwnedProductSyncJob extends BatchQueryJob
 
         $userMembershipFieldsService->syncUserIds($userIds);
 
-        foreach($userIds as $userId){
-            $user = new User();
-            $user->id = $userId;
-            dispatch((new CustomerIoSyncUserByUserId($user))
-                ->delay(Carbon::now()->addSeconds(3)));
+        if ($this->syncCustomerIO) {
+            foreach ($userIds as $userId) {
+                $user = new User();
+                $user->id = $userId;
+                dispatch(
+                    (new CustomerIoSyncUserByUserId($user))
+                        ->delay(Carbon::now()->addSeconds(3))
+                );
+            }
         }
         return true;
     }

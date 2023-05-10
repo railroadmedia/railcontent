@@ -33,10 +33,9 @@
     <section class="py-24 md:py-40 text-white text-center relative">
         <img
             src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/header-about.jpg"
-            loading="lazy"
-            class="transition-opacity opacity-0 absolute w-full h-full object-cover top-0 left-0 z-[-2]"
-            onload="this.classList.remove('opacity-0')"
+            class="absolute w-full h-full object-cover top-0 left-0 z-[-2]"
             alt="header about"
+            fetchpriority="high"
         />
         <div class="container mx-auto relative z-0">
             <h1><strong>Making the world a better<br> place through music!</strong></h1>
@@ -59,18 +58,14 @@
             </p>
             <div class="flex items-center mt-8">
                 <img
-                    class="h-32 rounded-full transition-opacity opacity-0"
+                    class="h-32 rounded-full"
                     src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/jared-falk.jpg"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
                     alt="jared falk"
                 >
                 <div class="pl-5">
                     <img
-                        class="h-14 mb-1 transition-opacity opacity-0"
+                        class="h-14 mb-1"
                         src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/signature.png"
-                        loading="lazy"
-                        onload="this.classList.remove('opacity-0')"
                         alt="jared falk signature"
                     >
                     <p class="text-[#a1afc9]">Jared Falk</p>
@@ -86,10 +81,8 @@
                 millions of students around the globe for the past 15 years.
             </p>
             <img
-                class="timeline px-3 md:px-0 transition-opacity opacity-0"
+                class="timeline px-3 md:px-0"
                 src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/meet-musora.png"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
                 alt="meet musora diagram"
             >
 
@@ -102,10 +95,8 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="jared = true; modal = true">
                         <img
-                            class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
+                            class="w-full rounded-lg overflow-hidden standard-pic"
                             src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jared-falk.jpg"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
                             alt="jared falk"
                         >
                     </div>
@@ -115,10 +106,8 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="james = true; modal = true">
                         <img
-                            class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
+                            class="w-full rounded-lg overflow-hidden standard-pic"
                             src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/jame-falk.jpg"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
                             alt="jame falk"
                         >
                     </div>
@@ -128,10 +117,8 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="dave = true; modal = true">
                         <img
-                            class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
+                            class="w-full rounded-lg overflow-hidden standard-pic"
                             src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/dave-atkinson.jpg"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
                             alt="dave atkinson"
                         >
                     </div>
@@ -141,10 +128,8 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="pam = true; modal = true">
                         <img
-                            class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
+                            class="w-full rounded-lg overflow-hidden standard-pic"
                             src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/pam-black.jpg"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
                             alt="pam black"
                         >
                     </div>
@@ -154,10 +139,8 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="mary = true; modal = true">
                         <img
-                            class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
+                            class="w-full rounded-lg overflow-hidden standard-pic"
                             src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/mary-liz-borseth.jpg"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
                             alt="mary liz borseth"
                         >
                     </div>
@@ -167,10 +150,8 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="caleb = true; modal = true">
                         <img
-                            class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
+                            class="w-full rounded-lg overflow-hidden standard-pic"
                             src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/caleb-favo.jpg"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
                             alt="caleb favo"
                         >
                     </div>
@@ -180,10 +161,8 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="victor = true; modal = true">
                         <img
-                            class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
+                            class="w-full rounded-lg overflow-hidden standard-pic"
                             src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/victor-guidera.jpg"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
                             alt="victor guidera"
                         >
                     </div>
@@ -193,10 +172,8 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="chad = true; modal = true">
                         <img
-                            class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
+                            class="w-full rounded-lg overflow-hidden standard-pic"
                             src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/chad-kettner.jpg"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
                             alt="chad kettner"
                         >
                     </div>
@@ -206,10 +183,8 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="amy = true; modal = true">
                         <img
-                            class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
+                            class="w-full rounded-lg overflow-hidden standard-pic"
                             src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/amy-malcomson.jpg"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
                             alt="amy malcomson"
                         >
                     </div>
@@ -219,10 +194,8 @@
                 <div class="w-full md:w-1/3 lg:w-1/4 px-2.5 mb-5 md:mb-8 team-tile">
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="jordan = true; modal = true">
                         <img
-                            class="w-full rounded-lg overflow-hidden standard-pic transition-opacity opacity-0"
+                            class="w-full rounded-lg overflow-hidden standard-pic"
                             src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jord-paul.jpg"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
                             alt="jord paul"
                         >
                     </div>
@@ -237,10 +210,8 @@
                         <div x-show="jared" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px] opacity-30"></i>
                             <img
-                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
+                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
                                 src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jared-falk.jpg"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
                                 alt="Jared Falk"
                             >
                             <h5><strong>Jared Falk</strong></h5>
@@ -254,10 +225,8 @@
                         <div x-show="james" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="jared = true; james = false"></i>
                             <img
-                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
+                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
                                 src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/jame-falk.jpg"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
                                 alt="James Falk"
                             >
                             <h5><strong>James Falk</strong></h5>
@@ -271,10 +240,8 @@
                         <div x-show="dave" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="james = true; dave = false"></i>
                             <img
-                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
+                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
                                 src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/dave-atkinson.jpg"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
                                 alt="Dave Atkinson"
                             >
                             <h5><strong>Dave Atkinson</strong></h5>
@@ -288,10 +255,8 @@
                         <div x-show="pam" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="dave = true; pam = false "></i>
                             <img
-                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
+                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
                                 src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/pam-black.jpg"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
                                 alt="Pam Black"
                             >
                             <h5><strong>Pam Black</strong></h5>
@@ -305,10 +270,8 @@
                         <div x-show="mary" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="pam = true; mary = false "></i>
                             <img
-                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
+                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
                                 src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/mary-liz-borseth.jpg"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
                                 alt="Mary-Liz Borseth"
                             >
                             <h5><strong>Mary-Liz Borseth</strong></h5>
@@ -322,10 +285,8 @@
                         <div x-show="caleb" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="mary = true; caleb = false "></i>
                             <img
-                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
+                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
                                 src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/caleb-favo.jpg"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
                                 alt="Caleb Favor"
                             >
                             <h5><strong>Caleb Favor</strong></h5>
@@ -339,10 +300,8 @@
                         <div x-show="victor" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="caleb = true; victor = false "></i>
                             <img
-                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
+                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
                                 src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/victor-guidera.jpg"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
                                 alt="Victor Guidera"
                             >
                             <h5><strong>Victor Guidera</strong></h5>
@@ -356,10 +315,8 @@
                         <div x-show="chad" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="victor = true; chad = false "></i>
                             <img
-                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
+                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
                                 src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/chad-kettner.jpg"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
                                 alt="Chad Kettner"
                             >
                             <h5><strong>Chad Kettner</strong></h5>
@@ -373,10 +330,8 @@
                         <div x-show="amy" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="chad = true; amy = false "></i>
                             <img
-                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
+                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
                                 src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/amy-malcomson.jpg"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
                                 alt="Amy Malcomson"
                             >
                             <h5><strong>Amy Malcolmson</strong></h5>
@@ -390,10 +345,8 @@
                         <div x-show="jordan" class="relative overflow-y-visible max-w-xs md:max-w-lg px-5 md:px-12 pb-5 md:pb-12 text-black bg-white mx-auto rounded-xl shadow-lg">
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="amy = true; jordan = false "></i>
                             <img
-                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block transition-opacity opacity-0"
+                                class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
                                 src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jord-paul.jpg"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
                                 alt="Jordan Paul"
                             >
                             <h5><strong>Jordan Paul</strong></h5>

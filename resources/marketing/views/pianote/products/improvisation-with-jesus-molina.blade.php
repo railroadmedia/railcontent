@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/jesus-molina/fb_share_image.jpg" style="display: none;">
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
@@ -59,28 +59,6 @@
 
         .text-navy {
             color: #a1afc9;
-        }
-
-        .dropdowns .dropdown .bg-pianote {
-            min-width: 32px;
-        }
-        @media (min-width: 40em) {
-            .dropdowns .dropdown .bg-pianote {
-                min-width: 83px;
-            }
-        }
-        .dropdowns .dropdown .description {
-            height: 0;
-            max-height: 0;
-            visibility: hidden;
-            opacity: 0;
-            overflow: hidden;
-        }
-        .dropdowns .dropdown.active .description {
-            visibility: visible;
-            opacity: 1;
-            height: auto;
-            max-height: 400px;
         }
     </style>
 @stop
@@ -520,34 +498,34 @@
         </div>
     </section>
 
-    <section class="text-white px-6 sm:px-8 py-8 sm:py-12 relative z-20 text-center" style="background:linear-gradient(to bottom, #01050f 60%, #021124);">
+    <section class="px-6 sm:px-8 py-8 sm:py-12 relative z-20 text-center">
         <div class="container mx-auto max-w-4xl">
             <h2 class="font-bold mb-8 sm:mb-10 leading-tight text-lg sm:text-2xl md:text-3xl lg:text-4xl"><strong>Still have questions?</strong></h2>
             <div class="dropdowns">
-                @include('pianote.products._week-breakdown-2', [
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "How good do I have to be to take this course?",
-                "description" => "You’ll need to have a basic understanding of the notes on the piano, and a bit of knowledge on how to read music. But if you have those skills, then you’ll learn so much from Jesús. Each lesson starts simply, before building more complexity. It’s the type of course you can come back to over and over as you grow. You’ll learn something new each time."
+                "desc" => "You’ll need to have a basic understanding of the notes on the piano, and a bit of knowledge on how to read music. But if you have those skills, then you’ll learn so much from Jesús. Each lesson starts simply, before building more complexity. It’s the type of course you can come back to over and over as you grow. You’ll learn something new each time."
                 ])
-                {{--@include('pianote.products._week-breakdown-2', [--}}
-                {{--"question" => true,--}}
+                {{--@include('_partials.components.question-dropdown', [--}}
+                {{--"num" => '?',--}}
                 {{--"title" => "What do I get when I join?",--}}
-                {{--"description" => "You’ll have complete access to every lesson, download, and practice assignment from Jesús Molina. Plus, as a Pianote member, you’ll have access to a complete piano curriculum to help you develop into a better player. You’ll also have a huge song library at your fingertips, and access to courses from other world-class pianists on styles like Gospel and Classical Piano."--}}
+                {{--"desc" => "You’ll have complete access to every lesson, download, and practice assignment from Jesús Molina. Plus, as a Pianote member, you’ll have access to a complete piano curriculum to help you develop into a better player. You’ll also have a huge song library at your fingertips, and access to courses from other world-class pianists on styles like Gospel and Classical Piano."--}}
                 {{--])--}}
-                {{--@include('pianote.products._week-breakdown-2', [--}}
-                {{--"question" => true,--}}
+                {{--@include('_partials.components.question-dropdown', [--}}
+                {{--"num" => '?',--}}
                 {{--"title" => "Can I buy the course on its own?",--}}
-                {{--"description" => "Right now, the course is only available inside the Pianote membership. We want to make sure our students have an incredible experience and are supported as they progress through the lessons."--}}
+                {{--"desc" => "Right now, the course is only available inside the Pianote membership. We want to make sure our students have an incredible experience and are supported as they progress through the lessons."--}}
                 {{--])--}}
-                @include('pianote.products._week-breakdown-2', [
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "How do I download the bonus resources?",
-                "description" => "Under every lesson there’s a handy little download button. You’ll get all the sheet music, assignments and plans in PDF form so you can save and print them."
+                "desc" => "Under every lesson there’s a handy little download button. You’ll get all the sheet music, assignments and plans in PDF form so you can save and print them."
                 ])
-                @include('pianote.products._week-breakdown-2', [
-                "question" => true,
+                @include('_partials.components.question-dropdown', [
+                "num" => '?',
                 "title" => "What if I don’t like it?",
-                "description" => "That’s what our 90-day guarantee is for. You’ll have 90 days to try everything from this course before you need to decide if it’s worth your money. If you don’t think it is (for any reason), simply email support@pianote.com or call 1-800-439-8921 to speak with a real human who will fully refund your purchase."
+                "desc" => "That’s what our 90-day guarantee is for. You’ll have 90 days to try everything from this course before you need to decide if it’s worth your money. If you don’t think it is (for any reason), simply email support@pianote.com or call 1-800-439-8921 to speak with a real human who will fully refund your purchase."
                 ])
             </div>
         </div>
@@ -578,11 +556,6 @@
     <script>
         $(document).ready(function () {
             $(document).foundation();
-
-            $('.dropdown').on('click', function(){
-                $(this).toggleClass('active');
-                $(this).find('i').toggleClass('rotate-180');
-            });
 
             $('.flip-div').click(function (e) {
                 $(this).toggleClass('flipped');

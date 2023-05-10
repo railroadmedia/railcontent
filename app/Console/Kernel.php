@@ -9,7 +9,9 @@ use App\Console\Commands\AssignSongsPermissionsToProducts;
 use App\Console\Commands\CreateSongs24Jan2023;
 use App\Console\Commands\CreateSongsDecember2022;
 use App\Console\Commands\FixSongsTemp;
+use App\Console\Commands\MigrateOldGuitareoDeletedSongs;
 use App\Console\Commands\MigratePianoteSongTutorial;
+use App\Console\Commands\RemoveRailTrackerData;
 use App\Console\Commands\RemoveTemporarySongsAccessForLifetimeMembersJanuary2023;
 use App\Console\Commands\RepairUserProgressOn30DD;
 use App\Console\Commands\RepairUserProgressOnNPPSH;
@@ -30,6 +32,7 @@ use App\Console\Commands\MembershipFieldsSync;
 use App\Console\Commands\UpdateRoutinesFebruary2023;
 use App\Console\Commands\VaporEnvManager;
 use App\Console\Commands\UpdateRoutines;
+use App\Console\Commands\YouTrackGenerateChangeList;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -69,6 +72,9 @@ class Kernel extends ConsoleKernel
         UpdateRoutinesFebruary2023::class,
         RepairUserProgressOn30DD::class,
         RepairUserProgressOnNPPSH::class,
+        MigrateOldGuitareoDeletedSongs::class,
+        RemoveRailTrackerData::class,
+        YouTrackGenerateChangeList::class,
     ];
 
     /**

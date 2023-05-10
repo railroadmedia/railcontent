@@ -273,9 +273,9 @@
                 <b>But heads up:</b> This offer is only available until March 31, 2023. <br><br>
                 Click below to get started and keep crushing it on the drums for the next year! <br><br>
             </p>
-                        <div class="px-3 md:px-0">
-                            <a class="join blue w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">SEE THE DEAL</a>
-                        </div>
+{{--                        <div class="px-3 md:px-0">--}}
+{{--                            <a class="join blue w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">SEE THE DEAL</a>--}}
+{{--                        </div>--}}
         </div>
     </section>
 
@@ -480,16 +480,16 @@
     <section class="py-12 md:py-20 px-4 sm:px-6" style="background:linear-gradient(180deg, #01050F 60.48%, #07132C 100%);">
         <div class="max-w-2xl lg:max-w-5xl mx-auto text-center text-white">
             <img class="h-12 mb-4" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo">
-            <h3 class="font-extrabold">Start your Drumeo membership <br class="md:hidden">today and get:</h3>
-            <h5 class="uppercase my-8 text-yellow">Only
-                <span x-cloak x-data="timer()" x-init="countdown()">
-                         <span x-cloak x-show="timeLeft > 0 && day !== '00'"><span x-text="day"></span><span x-text="dayText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0 && hour !== '00'"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                     </span>
-                left!</h5>
+            <h3 class="font-extrabold mb-8">Start your Drumeo membership <br class="md:hidden">today and get:</h3>
+{{--            <h5 class="uppercase my-8 text-yellow">Only--}}
+{{--                <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                     </span>--}}
+{{--                left!</h5>--}}
 
 
 
@@ -500,8 +500,8 @@
                         'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_500,q_auto:good/https://dpwjbsxqtam5n.cloudfront.net/promos/drumeo_annual.jpg',
                         'title' => 'Drumeo Annual Membership',
                         'description' => 'The Ultimate Online Drum Lessons Experience. You’ll get step-by-step drum lessons from the best drummers in the world (and much more).',
-                        'price' => 240,
-                        'priceReal' => "$197",
+                        'price' => '$' . Prices::$plusSubscriptionAnnualFull,
+                        'priceReal' => '$' . Prices::$plusSubscriptionAnnual,
                         ],
                         [
                         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/30DD.jpg',
@@ -575,10 +575,11 @@
                     </div>
                 @endforeach
             </div>
-            <h3 class="text-coaches mb-8"><strong>ONLY <s class="opacity-60">${{ 240 }}</s> $197</strong></h3>
+            <h3 class="text-coaches mb-8"><strong>ONLY <s class="opacity-60">${{ Prices::$plusSubscriptionAnnualFull }}</s> ${{ Prices::$plusSubscriptionAnnual }}</strong></h3>
             <div class="w-2/3 mx-auto">
-                <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[BeginnerBook]=1&products[learn-songs-faster-pack]=1&locked=true"
-                    class="join blue w-full">Get The Deal</a>
+                <a
+{{--                    href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[BeginnerBook]=1&products[learn-songs-faster-pack]=1&locked=true"--}}
+                    class="join sold-out w-full">Sold Out</a>
             </div>
             <p class="text-center my-8" style="color:#ABB5C2;">
                 <b>Any questions?</b> Call us toll-free at 1-800-439-8921 or directly at 1-604-855-7605.

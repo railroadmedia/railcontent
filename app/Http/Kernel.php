@@ -6,7 +6,9 @@ use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsAuthenticated;
 use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsPublic;
 use App\Http\Middleware\ExpiredMemberRedirect;
 use App\Http\Middleware\RedirectIfMobileRequest;
+use App\Modules\UserManagementSystem\Middleware\AuthenticatedAdmin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
+use Railroad\EventDataSynchronizer\Middleware\UserActivitySyncMiddleware;
 use Railroad\LeadTracker\Middleware\LeadTrackerMiddleware;
 use Railroad\MusoraApi\Middleware\BrandMiddleware;
 
@@ -69,6 +71,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\SetContentPermissions::class,
             RedirectIfMobileRequest::class,
             LeadTrackerMiddleware::class,
+            \App\Modules\EventDataSynchronizer\Middleware\UserActivitySyncMiddleware::class,
         ],
 
         'web_member_only' => [
@@ -109,6 +112,10 @@ class Kernel extends HttpKernel
 
         'web_or_api_authenticated' => [
             DynamicWebOrAppMiddlewareGroupsAuthenticated::class,
+        ],
+
+        'web_authenticated_admin' => [
+            AuthenticatedAdmin::class,
         ],
     ];
 

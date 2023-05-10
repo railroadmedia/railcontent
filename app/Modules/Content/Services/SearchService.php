@@ -170,7 +170,7 @@ class SearchService
             $values[$valueIndex] = str_replace('/', '_', $value);
         }
 
-        return substr(preg_replace("/[^A-Za-z0-9 ]/", '', implode(' ', array_unique($values))), 0, 245);
+        return substr(preg_replace("/[^A-Za-z0-9_ ]/", '', implode(' ', array_unique($values))), 0, 245);
     }
 
 }

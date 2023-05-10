@@ -104,7 +104,8 @@ class MusoraApiUserProvider implements UserProviderInterface
             'isGoogleAppSubscriber' => $isGoogleAppSubscriber,
             'membership_level' => $user->membership_level,
             'is_drumeo_lifetime_member' => $user->is_drumeo_lifetime_member,
-            'is_lifetime_member' => $user->is_lifetime_member
+            'is_lifetime_member' => $user->is_lifetime_member,
+            'access_level' => $user->access_level,
         ];
     }
 
@@ -341,5 +342,10 @@ class MusoraApiUserProvider implements UserProviderInterface
         $user->save();
 
         return $user;
+    }
+
+    public function getAuthKey()
+    {
+        return generate_musora_cross_platform_login_key(user()->id, user()->password);
     }
 }

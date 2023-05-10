@@ -510,7 +510,7 @@
             "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
             "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
             "songs" => "1000",
-            "firstPoint" => "Unlimited singing lessons",
+            "firstPoint" => "Unlimited singing lessons.",
             "thirdPoint" => "Direct access to vocal coaches.",
             "fifthPoint" => "Lesson access for guitar, piano, and drums.",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
@@ -540,7 +540,7 @@
         'topImage' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-annual-2w-card.png',
         'header' => 'Online singing lessons for all skill levels.',
         'subDescription' => 'Save 17% + get 2 bonuses<br class="inline sm:hidden"> worth $46',
-        'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&locked=true&redirect=/order',
+        'buttonLink' => '/ecommerce/add-to-cart?products[singeo-annual-recurring-membership]=1&products[singing-starter-kit]=1&products[the-essential-guide-to-beautiful-harmonies]=1&locked=true&redirect=/order&promo-code=special',
         'altButtonLink' => '/ecommerce/add-to-cart?products[singeo-monthly-recurring-membership]=1&redirect=/order&locked=true',
         ])
     @else

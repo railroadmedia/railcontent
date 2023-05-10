@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Drumeo\LeadGenController;
 
-Route::domain('{drumeoDomain}')->group(function () {
+Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::group(['prefix' => '100-songs'],
         function () {
 
@@ -18,14 +18,13 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/drum-set-maintenance', [LeadGenController::class, 'drumSetMaintenance']);
     Route::get('/drum-technique-made-easy/testimonials', [LeadGenController::class, 'dtmeTestimonials']);
     Route::get('/faster', [LeadGenController::class, 'faster']);
+    Route::get('/fwtgf', [LeadGenController::class, 'fasterNeon']);
     Route::get('/gavins-grooves', [LeadGenController::class, 'gavinsGrooves']);
-    Route::get('/get-faster', [LeadGenController::class, 'getFaster']);
-    Route::get('/get-faster-drums', [LeadGenController::class, 'getFaster']);
     Route::group(['prefix' => 'getting-started'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@gstd')
                 ->whereIn('page', [
-                    null, 'thank-you', '10-practice'
+                    null, 'recap', 'thank-you', '10-practice'
                 ]);
         }
     );
@@ -69,7 +68,7 @@ Route::domain('{drumeoDomain}')->group(function () {
     Route::get('/christmas-gift-guide/', [LeadGenController::class, 'christmasGift']);
     Route::get('/{page?}', LeadGenController::class . '@pages')
         ->whereIn('page', [
-            'lifetime-members-masterclass', 'click', 'free-drum-lessons', 'quick-drummer-survey', 'teach-a-beginner', 'thankyou', 'thank-you', '30-day-drummer-unsubscribe', '30-day-drummer-subscribe', 'subscribed', 'confirming', 'lets-stay-together', 'welcome-party', 'awards-giveaway', 'recitals', '30-day-drummer-live', 'awards', 'fwtgf-blog', '40s-blog', 'gsd-blog', 'gojb-blog', 'fpa-blog'
+            'lifetime-members-masterclass', 'click', 'free-drum-lessons', 'quick-drummer-survey', 'teach-a-beginner', 'thankyou', 'thank-you', '30-day-drummer-unsubscribe', '30-day-drummer-subscribe', 'subscribed', 'confirming', 'lets-stay-together', 'welcome-party', 'recitals', '30-day-drummer-live', 'awards', 'fwtgf-blog', '40s-blog', 'gsd-blog', 'gojb-blog', 'fpa-blog'
         ]);
     Route::get('/druminar/coming-back-to-the-drums', [LeadGenController::class, 'druminarCBTTD']);
     Route::get('/druminar/coming-back-to-the-drums/june-12-live-event', [LeadGenController::class, 'druminarEvent']);

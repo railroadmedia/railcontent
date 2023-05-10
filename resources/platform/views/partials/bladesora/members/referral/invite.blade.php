@@ -1,28 +1,28 @@
 @php
-$titleLineOne = $canRefer ? 'Share a free 30-day pass' : 'Thank you for your';
-$titleLineTwo = $canRefer ? 'with up to five friends.' : 'referrals & support!';
-$footerLineOne = $canRefer ? 'Guest passes are for new subscribers only and cannot be' : 'You have referred the maximum of five guests.';
-$footerLineTwo = $canRefer ? 'redeemed for renewals, extensions, or gift subscriptions.' : 'You\'ll have access to more invites soon!';
+    $titleLineOne = $canRefer ? 'Share a free 30-day pass' : 'Thank you for your';
+    $titleLineTwo = $canRefer ? 'with up to five friends.' : 'referrals & support!';
+    $footerLineOne = $canRefer ? 'Guest passes are for new subscribers only and cannot be' : 'You have referred the maximum of five guests.';
+    $footerLineTwo = $canRefer ? 'redeemed for renewals, extensions, or gift subscriptions.' : 'You\'ll have access to more invites soon!';
 
-$containerClass = $canRefer ? '' : 'tw-justify-center';
+    $containerClass = $canRefer ? '' : 'tw-justify-center';
 
-$cardImages = [
-    'drumeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/30-day-guest-pass.png',
-    'pianote' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/pianote-guest-pass.png',
-    'singeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/singeo-guest-pass.png',
-    'guitareo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/guitareo-guest-pass.png',
-];
+    $cardImages = [
+        'drumeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/30-day-guest-pass.png',
+        'pianote' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/pianote-guest-pass.png',
+        'singeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/singeo-guest-pass.png',
+        'guitareo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/guitareo-guest-pass.png',
+    ];
 
-$cardImage = $cardImages[brand()];
+    $cardImage = $cardImages[brand()];
 
 @endphp
 
 <div class="referral-sections tw-h-full">
     @if (isset($showToast) && $showToast)
         <div class="tw-bottom-0 tw-text-center" id="emailSentToast"
-        style="z-index: 2000; position: fixed !important; width: 100%">
-        <div
-            class="
+            style="z-index: 2000; position: fixed !important; width: 100%">
+            <div
+                class="
                 tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600
                 tw-px-3
                 tw-py-2
@@ -30,15 +30,15 @@ $cardImage = $cardImages[brand()];
                 tw-justify-self-center
                 tw-mx-auto
                 tw-rounded-md">
-            <div class="tw-flex tw-justify-between tw-text-white tw-text-small">
-                <div><i class="fas fa-envelope tw-mr-2"></i>{{ $toastMessage ?? 'Your invite has been sent!' }}
+                <div class="tw-flex tw-justify-between tw-text-white tw-text-small">
+                    <div><i class="fas fa-envelope tw-mr-2"></i>{{ $toastMessage ?? 'Your invite has been sent!' }}
+                    </div>
+                    <button class="tw-bg-transparent tw-border-none" onclick="hideToast();">
+                        <i class="far fa-times-circle tw-text-white"></i>
+                    </button>
                 </div>
-                <button class="tw-bg-transparent tw-border-none" onclick="hideToast();">
-                    <i class="far fa-times-circle tw-text-white"></i>
-                </button>
             </div>
         </div>
-    </div>
     @endif
     <section class="tw-text-center tw-text-[#00101D] dark:tw-text-white tw-transition-colors tw-py-6 md:tw-py-10 lg:tw-pt-12 lg:tw-pb-16">
         <div class="tw-max-w-7xl tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3">
@@ -78,7 +78,7 @@ $cardImage = $cardImages[brand()];
                                 <input type="hidden" name="_token" class="sort-input"
                                     value="{{ csrf_token() }}" />
                                 <input type="hidden" name="brand" class="sort-input"
-                                       value="{{ $brand }}" />
+                                    value="{{ $brand }}" />
                                 <input
                                     class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
                                     type="email" id="email" name="email" placeholder="Email address..." value="">
