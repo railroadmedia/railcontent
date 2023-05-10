@@ -21,6 +21,7 @@ use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection;
+use Railroad\Railtracker\Events\EngageContent;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserPlaylistsController extends BaseController
@@ -456,6 +457,8 @@ class UserPlaylistsController extends BaseController
 
         $relatedLesson =
             (new ContentFilterResultsEntity(['results' => $playlistItem['parent'] ?? []]))->toResponseRawJson();
+
+        event(new EngageContent($playlistItemId, user()->id,null,$playlistId));
 
         return view('account.playlist-item', [
             "lessonContent" => $playlistItem,
