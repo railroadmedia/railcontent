@@ -235,12 +235,18 @@ export default {
             this.goToComment(uriParams.goToComment);
         }
 
-        const contentContainer = document.getElementById('content-container');
-        contentContainer.addEventListener('scroll', () => {
-            const scrollPosition = window.pageYOffset + window.innerHeight;
-            const bodyHeight = document.body.scrollHeight;
+        const elem = document.getElementById('content-container');
 
-            if ((scrollPosition > bodyHeight - 200) && (this.comments.length !== this.totalComments)) {
+        elem.addEventListener('scroll', () => {
+            const elemHeight = elem.offsetHeight;
+            const elemScrollHeight = elem.scrollHeight;
+
+            // Get the current scroll position
+            const currentScroll = elem.scrollTop;
+
+            const relatedLessons = document.getElementById('lessonInfo');
+
+            if ((elemScrollHeight - currentScroll - elemHeight < (relatedLessons.offsetHeight + 200)) && (this.comments.length !== this.totalComments)) {
                 if (!this.requestingData) {
                     this.currentPage += 1;
 
