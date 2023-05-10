@@ -326,6 +326,11 @@ class SalesController extends BaseController
         return view('drumeo.sales.pages.sonor');
     }
 
+    public function alesis()
+    {
+        return view('drumeo.pages.redeem.redeem-page', ['newAccount' => true]);
+    }
+
     public function coachTrial(Request $request, $domain, $pageC = null)
     {
         return view('drumeo.sales.affiliate.coaches.'.$pageC, ['theme' => 'drumeo', 'month' => true]);
