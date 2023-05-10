@@ -430,6 +430,22 @@
                         'pianote' => true,
                         'description' => 'Joy is passionate about everything music and loves helping people find their unique rhythm and style.  She plays drums, dabbles at the piano, and is learning bass. Sax was her first instrument, but the drums are what feed her soul. Joy has been a die-hard Raptors fan since Day 1, screaming her coaching advice at the TV! ',
                         ],
+                        [
+                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/ale.jpg',
+                        'first' => 'Ale ',
+                        'last' => 'S',
+                        'drumeo' => true,
+                        'pianote' => true,
+                        'description' => "Ale has been playing the drums for almost 25 years now! He's been fortunate enough to travel, tour and jam with some big names in the music biz. Right now, he's rockin' out with two international bands that keep him busy on the road. On top of all that, Ale has a degree in sound engineering, music, and video production. He just loves music, and nothing makes him happier than helping others find their own groove.",
+                        ],
+                        [
+                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/jessica.jpg',
+                        'first' => 'Jessica ',
+                        'last' => 'C',
+                        'drumeo' => true,
+                        'pianote' => true,
+                        'description' => "Jessica is extremely passionate about music having grown up in a household of professional musicians! She is a trained vocalist with experience playing piano, and she absolutely loves performing songs from musicals. In her free time, Jessica doubles as a Film & TV actor,  so you just might see her pop up on your TV screen one of these days!",
+                        ],
                     ]
                 @endphp
                 @foreach($bonuses as $bonus)
