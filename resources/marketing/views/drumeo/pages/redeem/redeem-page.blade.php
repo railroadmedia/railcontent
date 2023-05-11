@@ -1,11 +1,12 @@
-@extends('musora._partials.layout')
+@extends('drumeo._partials.global-layout')
 
-@section('head-includes')
-
+@section('global-head')
     <title>Access Pass Redeem | Drumeo</title>
     <meta name="description" content="To redeem your access pass enter your code below!">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <style>
         [placeholder]:focus::-webkit-input-placeholder {
             color:transparent;
@@ -161,7 +162,14 @@
 @endsection
 
 <!-- Main -->
-@section('layout-body')
+@section('global-body')
+    @include("drumeo.sales.partials._nav", [
+        "subscriptionVersion" => true,
+        "fullSubscriptionVersion" => true,
+        "trialVersion" => true,
+        "joinUrl" => '/choose-plan',
+    ])
+
     <div class="py-8 sm:py-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
             @if(empty($thomann))
@@ -217,8 +225,7 @@
                 @endforeach
 
                 @include('musora.pages.redeem._redeem-form', [
-                    "existing" => true,
-                    "accessCodeArray" => $accessCodeArray
+                    "existing" => true
                 ])
              @endif
 
@@ -235,6 +242,8 @@
             </p>
         </div>
     </div>
+
+    @include("drumeo.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript">

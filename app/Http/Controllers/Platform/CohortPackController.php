@@ -69,7 +69,7 @@ class CohortPackController
         ContentRepository::$pullFutureContent = true;
         ContentRepository::$availableContentStatues = false;
         $content = $this->contentService->getById($cohort['content_id']);
-        ContentRepository::$bypassPermissions  = $initialBypassPermissions;
+        ContentRepository::$bypassPermissions = $initialBypassPermissions;
         ContentRepository::$pullFutureContent = $initialPullFutureContent;
         ContentRepository::$availableContentStatues = $initialContentStatuses;
 
@@ -112,7 +112,7 @@ class CohortPackController
     private function registerForProductPack(string $sku, string $successMessage, Request $request)
     {
         if (user()?->isAMember()) {
-            $user = new User(user()->id, user()->email);
+            $user = new User(user()->id, user()->email, user()->getMembershipExpirationDate());
 
             /** @var Product $product */
             $product = $this->productRepository->bySku($sku);

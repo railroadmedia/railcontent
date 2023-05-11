@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 
 use Railroad\Ecommerce\Entities\User;
+use Railroad\Ecommerce\Services\AccessCodeService;
 use Railroad\Ecommerce\Services\UserProductService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -63,21 +64,31 @@ class SalesController extends BaseController
      */
     private $orderEventListener;
 
+    private AccessCodeService $accessCodeService;
+
+    /**
+     * @param AccessCodeService $accessCodeService
+     */
+
     /**
      * MarketingController constructor.
      *
      * @param  DatabaseManager $databaseManager
      * @param  ProductRepository $productRepository
      * @param  OrderEventListener $orderEventListener
+     * @param  AccessCodeService $accessCodeService
      */
     public function __construct(
         DatabaseManager $databaseManager,
         ProductRepository $productRepository,
-        OrderEventListener $orderEventListener
+        OrderEventListener $orderEventListener,
+        AccessCodeService $accessCodeService
     ) {
         $this->databaseManager = $databaseManager;
         $this->productRepository = $productRepository;
         $this->orderEventListener = $orderEventListener;
+        $this->accessCodeService = $accessCodeService;
+
     }
 
     public function home()
@@ -324,6 +335,14 @@ class SalesController extends BaseController
     public function sonor()
     {
         return view('drumeo.sales.pages.sonor');
+    }
+
+    public function alesis(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
 
     public function coachTrial(Request $request, $domain, $pageC = null)

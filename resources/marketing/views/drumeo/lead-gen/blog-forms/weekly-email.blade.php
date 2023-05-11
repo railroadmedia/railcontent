@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {!! \App\Analytics\Tracker::headTop() !!}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
-    @include('_partials.layout.favicons.drumeo-favicons')
 
     <meta name="robots" content="noindex">
     <title>Weekly Email | Drumeo</title>
     <meta name="description" content="Enter your email to get fresh drumming lessons, interviews, and content delivered to your inbox every week!">
 
-    @include('_partials.layout._fonts')
+    <link rel="preconnect" href="https://fonts.gstatic.com/" />
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Roboto+Condensed:wght@300;400;700" rel="stylesheet">
+
     <base target="_parent">
-    @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <style>
         body {
             height:100vh;
@@ -74,17 +74,12 @@
             background:#258ff4
         }
     </style>
-
-{!! \App\Analytics\Tracker::trackPageView() !!}
-
-{!! \App\Analytics\Tracker::headBottom() !!}
 </head>
 
 <body>
-{!! \App\Analytics\Tracker::bodyTop() !!}
 
 <section class="text-center absolute top-1/2 left-1/2 w-full px-5" style="transform:translate(-50%,-50%)">
-    <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form"
+    <form id="DrumeoEngagementTriggerBlogSignupWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form"
           method="POST" class="ajax-form clearfix infusion-form max-w-3xl mx-auto"  onsubmit="emailSignUpConversionTrackerForImpactProvider()">
         <input type="hidden" name="form_name" value="Blog Signup">
 
@@ -103,11 +98,5 @@
         <h5 class="mx-auto text-xl font-bold"><strong><i class="fas fa-check"></i> Success, Check your email!</strong></h5>
     </div>
 </section>
-
-{!! \App\Analytics\Tracker::bodyBottom() !!}
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 </body>
-@include("drumeo.lead-gen.partials.impact-email-sign-up-tracker")
 </html>

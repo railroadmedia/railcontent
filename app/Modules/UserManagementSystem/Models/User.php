@@ -832,4 +832,12 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->isAPlusMember() ||
             ($brand == 'drumeo' && $this->is_drumeo_lifetime_member);
     }
+
+    public function getMembershipExpirationDate(): ?Carbon
+    {
+        if ($this->membership_expiration_date == null) {
+            return null;
+        }
+        return Carbon::parse($this->membership_expiration_date);
+    }
 }
