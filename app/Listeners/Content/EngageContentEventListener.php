@@ -6,6 +6,7 @@ use App\Maps\ContentTypes;
 use Carbon\Carbon;
 use Railroad\Points\Events\UserPointsUpdated;
 use Railroad\Points\Services\UserPointsService;
+use Railroad\Railcontent\Events\PlaylistItemDeleted;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Events\UserContentProgressStarted;
 use Railroad\Railcontent\Events\UserContentsProgressReset;
@@ -37,8 +38,8 @@ class EngageContentEventListener
         $this->contentLastEngagedService->engageContent($event->userId, $event->contentId, $event->parentPlaylistId, $event->parentContentId);
     }
 
-    public function handleRemoveEngageContent(EngageContent $event)
+    public function handleRemoveEngageContent(PlaylistItemDeleted $event)
     {
-        $this->contentLastEngagedService->deleteEngagedContent($event->userId, $event->contentId, $event->parentPlaylistId, $event->parentContentId);
+        $this->contentLastEngagedService->deleteEngagedContent(user()->id, $event->playlistId, null);
     }
 }
