@@ -6,22 +6,4 @@
        "sha256_cert_fingerprints":
          ["C3:AE:CF:1F:CA:F4:16:0C:E3:9E:EF:D2:77:CF:53:CE:65:E4:C9:7B:43:EB:E1:88:4B:FC:6B:96:A3:A8:D0:11"]
      }
-   },
-  {
-     "relation": ["delegate_permission/common.handle_all_urls"],
-     "target": {
-       "namespace": "android_app",
-       "package_name": "com.drumeo",
-       "sha256_cert_fingerprints":
-         ["41:6B:3E:60:6F:BF:64:88:2F:30:B1:4D:54:97:6E:15:65:10:7D:80:D1:66:33:C2:34:EE:AA:D8:37:90:0E:CF"]
-     }
-   },
-   {
-       "relation": ["delegate_permission/common.handle_all_urls"],
-       "target": {
-         "namespace": "android_app",
-         "package_name": "com.pianote2",
-         "sha256_cert_fingerprints":
-           ["03:2B:7A:5D:56:00:05:5C:9A:5B:55:49:0E:0E:D2:51:23:01:EA:D1:47:0E:A8:A2:15:49:43:41:16:19:DC:06"]
-       }
-}]
+   }]
