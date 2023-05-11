@@ -4,8 +4,8 @@
     @parent
     <title>30-Day Chops | Drumeo</title>
     <meta property="og:title" content="30-Day Chops | Drumeo">
-    <meta name="description" content="Learn drum chops in just 30-days.">
-    <meta property="og:description" content="Learn drum chops in just 30-days.">
+    <meta name="description" content="Learn drum chops with daily guided workouts.">
+    <meta property="og:description" content="Learn drum chops with daily guided workouts.">
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
@@ -238,7 +238,7 @@
                             <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
                             <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
                         </strong></h1>
-                    <h2 class="-mt-3 sm:-mt-1 lg:mt-0">in just 30 days.</h2>
+                    <h2 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h2>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>
                             Save your seat in the first-ever <br class="inline lg:hidden">class starting June 5th.</strong></h6>
@@ -624,27 +624,27 @@
                     </div>
                 </div>
             </div>
-            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What drummers are saying:</strong></h3>
-            <div class="flex flex-wrap text-left">
-                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
-                    <div class="flex items-start p-5 bg-white rounded-lg">
-                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/232650-avatar-1568629179.jpg" alt="Larnell lewis">
-                        <p class="pl-4"><strong>Gregg Bissonnette</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">Legendary Session Drummer</em><br>
-                            “Zack is a great friend and amazing drummer in every style. He’s a musical inspiration to me and I know he’ll do the same for you. Too bad he doesn’t have a good sense of humor though…”
-                        </p>
-                    </div>
-                </div>
-                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
-                    <div class="flex items-start p-5 bg-white rounded-lg">
-                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/31880-avatar-1557351774.jpg" alt="Jared Falk">
-                        <p class="pl-4"><strong>Jared Falk</strong><br>
-                            <em class="leading-tight inline-block mb-1 opacity-60">Drumeo Co-Founder</em><br>
-                            "Zack makes me want to sit down and improve my drumming, an essential quality of a great teacher – plus, you’re always entertained throughout the process."
-                        </p>
-                    </div>
-                </div>
-            </div>
+{{--            <h3 class="mt-12 sm:mt-16 lg:mt-20 mb-5 sm:mb-8 lg:mb-10"><strong>What drummers are saying:</strong></h3>--}}
+{{--            <div class="flex flex-wrap text-left">--}}
+{{--                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">--}}
+{{--                    <div class="flex items-start p-5 bg-white rounded-lg">--}}
+{{--                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/232650-avatar-1568629179.jpg" alt="Larnell lewis">--}}
+{{--                        <p class="pl-4"><strong>Gregg Bissonnette</strong><br>--}}
+{{--                            <em class="leading-tight inline-block mb-1 opacity-60">Legendary Session Drummer</em><br>--}}
+{{--                            “Zack is a great friend and amazing drummer in every style. He’s a musical inspiration to me and I know he’ll do the same for you. Too bad he doesn’t have a good sense of humor though…”--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">--}}
+{{--                    <div class="flex items-start p-5 bg-white rounded-lg">--}}
+{{--                        <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/https://d1923uyy6spedc.cloudfront.net/31880-avatar-1557351774.jpg" alt="Jared Falk">--}}
+{{--                        <p class="pl-4"><strong>Jared Falk</strong><br>--}}
+{{--                            <em class="leading-tight inline-block mb-1 opacity-60">Drumeo Co-Founder</em><br>--}}
+{{--                            "Zack makes me want to sit down and improve my drumming, an essential quality of a great teacher – plus, you’re always entertained throughout the process."--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
 
 {{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>--}}
