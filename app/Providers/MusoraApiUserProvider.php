@@ -67,7 +67,7 @@ class MusoraApiUserProvider implements UserProviderInterface
 
     public function getCurrentUserMembershipData(?string $app = null)
     : array {
-        $user = user();
+        $user = clone user();
         $productsIds = [];
         $products = [];
         foreach (config('ecommerce.available_brands', []) as $availableBrand) {
