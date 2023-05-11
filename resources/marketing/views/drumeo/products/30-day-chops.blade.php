@@ -717,14 +717,14 @@
                                 <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>
                                 <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>
                         </a>
-                        <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=6&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&locked=true&promo-code=special"
+                        <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=6&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&locked=true"
                             class="px-5 sm:px-10 py-7 sm:py-11 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"
                         style="background-color:#dde9f9;background-image:url(https://www.musora.com/musora-cdn/image/width=380,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/order-bg.jpg);"
                         >
                             <p class="border border-drumeo text-drumeo inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">LAUNCH MEMBERSHIP SPECIAL</p>
                             <h3><strong>Join Drumeo + Get<br class="hidden sm:inline"> 30-Day Chops FREE</strong></h3>
                             <p class="text-sm mt-2 mb-5">Unlimited Drum Lessons + 6 Pairs Of Sticks and more:</p>
-                            <h2 class="inline-block"><s class="opacity-40">$240</s> <strong class="text-4xl">$200</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>
+                            <h2 class="inline-block"><!--<s class="opacity-40">$240</s>--> <strong class="text-4xl">$240</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>
                             <div class="join blue smaller my-4 w-full">GET EVERYTHING</div>
                             <ul class="list-disc ml-6">
                                 <li class="text-sm leading-relaxed">Annual Drumeo Membership</li>
