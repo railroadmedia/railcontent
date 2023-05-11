@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
     <meta name="robots" content="noindex">
-    <title>@yield('title') | Pianote</title>
+    <title>@yield('title') | {{ ucfirst($brand) }}</title>
 
     <base target="_parent">
     @include('_partials.layout._tailwindcdn')
