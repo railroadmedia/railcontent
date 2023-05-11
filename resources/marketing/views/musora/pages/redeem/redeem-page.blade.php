@@ -1,6 +1,7 @@
 @extends('musora._partials.layout')
 
 @section('head-includes')
+
     <title>Access Pass Redeem | Drumeo</title>
     <meta name="description" content="To redeem your access pass enter your code below!">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
@@ -216,7 +217,8 @@
                 @endforeach
 
                 @include('musora.pages.redeem._redeem-form', [
-                    "existing" => true
+                    "existing" => true,
+                    "accessCodeArray" => $accessCodeArray
                 ])
              @endif
 

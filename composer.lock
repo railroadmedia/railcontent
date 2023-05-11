@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.269.8",
+            "version": "3.269.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "9e9dc24c3c748c91ee5a8c9e058b5ce95fa19dc4"
+                "reference": "8b571e9caf4f6f984d95149f4be73275ff86bb55"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/9e9dc24c3c748c91ee5a8c9e058b5ce95fa19dc4",
-                "reference": "9e9dc24c3c748c91ee5a8c9e058b5ce95fa19dc4",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/8b571e9caf4f6f984d95149f4be73275ff86bb55",
+                "reference": "8b571e9caf4f6f984d95149f4be73275ff86bb55",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.269.8"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.269.10"
             },
-            "time": "2023-05-08T18:20:53+00:00"
+            "time": "2023-05-10T18:20:01+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4617,17 +4617,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.24.1",
+            "version": "4.24.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "e7e314906c1eb78db237fe41e88501bdb493c391"
+                "reference": "02d139e4e768a3b29e9328596a9892a4b0a6976a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-e7e314906c1eb78db237fe41e88501bdb493c391-zip-8ca479.zip",
-                "reference": "e7e314906c1eb78db237fe41e88501bdb493c391",
-                "shasum": "0b5d908eb9ae6be049b625060ab459ec933342da"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-02d139e4e768a3b29e9328596a9892a4b0a6976a-zip-38bbf0.zip",
+                "reference": "02d139e4e768a3b29e9328596a9892a4b0a6976a",
+                "shasum": "1756c3238fb86c7c81e5c215023289313552d6c8"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0|^0.8.0",
@@ -4720,9 +4720,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.24.1"
+                "source": "https://github.com/laravel/nova/tree/v4.24.2"
             },
-            "time": "2023-05-05T14:09:37+00:00"
+            "time": "2023-05-10T16:02:17+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4981,16 +4981,16 @@
         },
         {
             "name": "laravel/vapor-cli",
-            "version": "v1.55.3",
+            "version": "v1.56.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-cli.git",
-                "reference": "562c28004f8609e728e2b5d1e85e46d2df006d2d"
+                "reference": "9a28dc6fb37902fe423edbfd936cd683a22a86fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/562c28004f8609e728e2b5d1e85e46d2df006d2d",
-                "reference": "562c28004f8609e728e2b5d1e85e46d2df006d2d",
+                "url": "https://api.github.com/repos/laravel/vapor-cli/zipball/9a28dc6fb37902fe423edbfd936cd683a22a86fd",
+                "reference": "9a28dc6fb37902fe423edbfd936cd683a22a86fd",
                 "shasum": ""
             },
             "require": {
@@ -5044,22 +5044,22 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-cli/tree/v1.55.3"
+                "source": "https://github.com/laravel/vapor-cli/tree/v1.56.0"
             },
-            "time": "2023-04-17T14:07:59+00:00"
+            "time": "2023-05-10T10:06:04+00:00"
         },
         {
             "name": "laravel/vapor-core",
-            "version": "v2.30.0",
+            "version": "v2.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/vapor-core.git",
-                "reference": "83fe61ad0b0f93ed5fcc115a63eff667de718840"
+                "reference": "4f8b57db2ed99dc5f87584c9a641ef6542c8c882"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/83fe61ad0b0f93ed5fcc115a63eff667de718840",
-                "reference": "83fe61ad0b0f93ed5fcc115a63eff667de718840",
+                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/4f8b57db2ed99dc5f87584c9a641ef6542c8c882",
+                "reference": "4f8b57db2ed99dc5f87584c9a641ef6542c8c882",
                 "shasum": ""
             },
             "require": {
@@ -5095,6 +5095,9 @@
                 }
             },
             "autoload": {
+                "files": [
+                    "src/debug.php"
+                ],
                 "psr-4": {
                     "Laravel\\Vapor\\": "src"
                 }
@@ -5116,9 +5119,9 @@
                 "vapor"
             ],
             "support": {
-                "source": "https://github.com/laravel/vapor-core/tree/v2.30.0"
+                "source": "https://github.com/laravel/vapor-core/tree/v2.31.0"
             },
-            "time": "2023-04-25T08:47:32+00:00"
+            "time": "2023-05-10T10:11:27+00:00"
         },
         {
             "name": "laravel/vapor-ui",
@@ -8159,16 +8162,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.76",
+            "version": "v5.0.77",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "39e3c7076ff19d1182f964686e4dfa6a19351a48"
+                "reference": "242b84d8ee734af285ae6fdc132eaf47e631722d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/39e3c7076ff19d1182f964686e4dfa6a19351a48",
-                "reference": "39e3c7076ff19d1182f964686e4dfa6a19351a48",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/242b84d8ee734af285ae6fdc132eaf47e631722d",
+                "reference": "242b84d8ee734af285ae6fdc132eaf47e631722d",
                 "shasum": ""
             },
             "require": {
@@ -8205,9 +8208,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.76"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.77"
             },
-            "time": "2023-05-09T23:25:01+00:00"
+            "time": "2023-05-11T11:05:23+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -8363,16 +8366,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.4",
+            "version": "v3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "096cddae45134dc7e3d750b33721d4be8716ddc8"
+                "reference": "efd2ff194cdbde103c4d1e180da84be18db7aa5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/096cddae45134dc7e3d750b33721d4be8716ddc8",
-                "reference": "096cddae45134dc7e3d750b33721d4be8716ddc8",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/efd2ff194cdbde103c4d1e180da84be18db7aa5b",
+                "reference": "efd2ff194cdbde103c4d1e180da84be18db7aa5b",
                 "shasum": ""
             },
             "require": {
@@ -8402,9 +8405,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.4"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.5"
             },
-            "time": "2023-05-08T08:40:32+00:00"
+            "time": "2023-05-10T09:13:05+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -14598,23 +14601,23 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.21.5",
+            "version": "v1.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "27af207bb1c53faddcba34c7528b3e969f6a646d"
+                "reference": "923e1e112b6a8598664dbb0ee79dd3137f1c9d56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/27af207bb1c53faddcba34c7528b3e969f6a646d",
-                "reference": "27af207bb1c53faddcba34c7528b3e969f6a646d",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/923e1e112b6a8598664dbb0ee79dd3137f1c9d56",
+                "reference": "923e1e112b6a8598664dbb0ee79dd3137f1c9d56",
                 "shasum": ""
             },
             "require": {
                 "illuminate/console": "^8.0|^9.0|^10.0",
                 "illuminate/contracts": "^8.0|^9.0|^10.0",
                 "illuminate/support": "^8.0|^9.0|^10.0",
-                "php": "^7.3|^8.0",
+                "php": "^8.0",
                 "symfony/yaml": "^6.0"
             },
             "require-dev": {
@@ -14659,7 +14662,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2023-04-24T13:29:38+00:00"
+            "time": "2023-05-04T14:52:56+00:00"
         },
         {
             "name": "maximebf/debugbar",
@@ -15533,16 +15536,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "9.6.7",
+            "version": "9.6.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c993f0d3b0489ffc42ee2fe0bd645af1538a63b2"
+                "reference": "17d621b3aff84d0c8b62539e269e87d8d5baa76e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c993f0d3b0489ffc42ee2fe0bd645af1538a63b2",
-                "reference": "c993f0d3b0489ffc42ee2fe0bd645af1538a63b2",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/17d621b3aff84d0c8b62539e269e87d8d5baa76e",
+                "reference": "17d621b3aff84d0c8b62539e269e87d8d5baa76e",
                 "shasum": ""
             },
             "require": {
@@ -15616,7 +15619,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.7"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/9.6.8"
             },
             "funding": [
                 {
@@ -15632,7 +15635,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-14T08:58:40+00:00"
+            "time": "2023-05-11T05:14:45+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -16972,5 +16975,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
