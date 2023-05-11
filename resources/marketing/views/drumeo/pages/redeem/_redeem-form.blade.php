@@ -10,22 +10,22 @@
     <div class="flex flex-wrap">
         <p class="w-full input-describer">Code</p>
         <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[0]}}" @else value="{{-- Input::old('code1') --}}" @endif>
+            <input class="code-input w-full" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code1') --}}">
         </div>
         <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[1]}}" @else value="{{-- Input::old('code2') --}}" @endif>
+            <input class="code-input w-full" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code2') --}}">
         </div>
         <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[2]}}" @else value="{{-- Input::old('code3') --}}" @endif>
+            <input class="code-input w-full" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code3') --}}">
         </div>
         <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[3]}}" @else value="{{-- Input::old('code4') --}}" @endif>
+            <input class="code-input w-full" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code4') --}}">
         </div>
         <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[4]}}" @else value="{{-- Input::old('code5') --}}" @endif>
+            <input class="code-input w-full" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code5') --}}">
         </div>
         <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[5]}}" @else value="{{-- Input::old('code6') --}}" @endif>
+            <input class="code-input w-full" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code6') --}}">
         </div>
     </div>
     @if(empty($existing))
