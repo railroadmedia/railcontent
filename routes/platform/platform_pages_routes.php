@@ -674,7 +674,7 @@ Route::get(
     ->name('platform.apple-association-file');
 
 Route::get(
-    '/assetlinks',
+    '/.well-known/assetlinks.json',
     [\App\Http\Controllers\Misc\ManifestFilesController::class, 'androidAssociationFile']
 )
     ->name('platform.android-association-file');
