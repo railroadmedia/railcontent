@@ -4,8 +4,8 @@
     @parent
     <title>30-Day Chops | Drumeo</title>
     <meta property="og:title" content="30-Day Chops | Drumeo">
-    <meta name="description" content="Learn drum chops in just 30-days.">
-    <meta property="og:description" content="Learn drum chops in just 30-days.">
+    <meta name="description" content="Learn drum chops with daily guided workouts.">
+    <meta property="og:description" content="Learn drum chops with daily guided workouts.">
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
@@ -238,7 +238,7 @@
                             <span class="relative nowrap delay-1000 ease-in-out">Improve your speed</span><br>
                             <span class="relative nowrap delay-1000 ease-in-out">Boost your creativity</span><br>
                         </strong></h1>
-                    <h2 class="-mt-3 sm:-mt-1 lg:mt-0">in just 30 days.</h2>
+                    <h2 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h2>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>
                             Save your seat in the first-ever <br class="inline lg:hidden">class starting June 5th.</strong></h6>
