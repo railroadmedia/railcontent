@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {!! \App\Analytics\Tracker::headTop() !!}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
+    @include('_partials.layout.favicons.'.$brand.'-favicons')
 
     <meta name="robots" content="noindex">
     <title>@yield('title') | {{ ucfirst($brand) }}</title>
@@ -50,7 +52,6 @@
         .infusion-form input, .infusion-form button {
             font:400 18px/45px "Open Sans", sans-serif;
             height:45px;
-            background:#eee;
             color:#999;
             border-radius:100px;
             padding:7px 20px;
@@ -86,11 +87,6 @@
             width:100%;
             padding:0;
             color:#fff;
-            background:#f61a30
-        }
-
-        .infusion-form button:hover {
-            background:#f73346
         }
         form input, form button {
             line-height:40px;
@@ -119,6 +115,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&family=Roboto+Condensed:wght@300;400;700&family=Bebas+Neue&display=swap" rel="stylesheet">
 
+    {!! \App\Analytics\Tracker::trackPageView() !!}
+
+    {!! \App\Analytics\Tracker::headBottom() !!}
 </head>
 
 <body
@@ -126,13 +125,15 @@
         class="bg-musora-black text-white"
     @endif
 >
+{!! \App\Analytics\Tracker::bodyTop() !!}
 
-<section class="text-center absolute top-1/2 left-1/2 w-full px-3 sm:px-4" style="transform:translate(-50%,-50%)">
-    <div class="max-w-4xl mx-auto">
-        @yield('subtitle')
-        @yield('form')
-    </div>
-</section>
+    <section class="text-center absolute top-1/2 left-1/2 w-full px-3 sm:px-4" style="transform:translate(-50%,-50%)">
+        <div class="max-w-4xl mx-auto">
+            @yield('subtitle')
+            @yield('form')
+        </div>
+    </section>
 
+{!! \App\Analytics\Tracker::bodyBottom() !!}
 </body>
 </html>
