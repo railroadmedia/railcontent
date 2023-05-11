@@ -274,8 +274,10 @@ onBeforeMount(() => {
                         </SoundSlice>
                     </div>
                     <!-- Video Players -->
-                    <div class="p-lg-only lean">
-                        <div v-if="youtubeVideoId && String(youtubeVideoId).length" class="widescreen mb-2 bg-black">
+                    <div class="p-lg-only lean tw-relative">
+                        <div v-if="youtubeVideoId && String(youtubeVideoId).length" 
+                             class="widescreen mb-2 bg-black"
+                        >
                             <YoutubePlayer ref="mediaElementVueInstance" :brand="brand" :video-id="youtubeVideoId"
                                 :current-second="currentSecond" :total-duration="totalDuration" :video-length="videoLength"
                                 :progress-state="progressState" :content-id="contentId" :use-intersection-observer="true"
@@ -284,24 +286,8 @@ onBeforeMount(() => {
                             </YoutubePlayer>
                         </div>
                         <div v-else-if="lessonType !== 'song' && lessonType !== 'assignment' && lessonType !== 'routine'"
-                            id="lessonVideoWrap" class="tw-relative">
-                            
-                            <!-- Unreleased/No Access Content -->
-                            <div v-if="!released || needAccess" class="tw-w-full tw-aspect-video tw-absolute tw-z-30">
-                                <img :src="`https://musora.com/cdn-cgi/image/width=1000/${thumbnailUrl}`"  
-                                     class="tw-transition-opacity tw-opacity-0 tw-duration-300 tw-grayscale tw-w-full tw-object-cover" title="Image Photo"
-                                     loading="lazy" 
-                                     onload="this.classList.remove('tw-opacity-0')"
-                                />
-                                <div v-if="!needAccess" class="tw-absolute tw-bg-black/60 tw-top-0 tw-left-0 tw-w-full tw-h-full tw-text-white tw-font-bold tw-text-lg tw-flex tw-flex-col tw-items-center tw-justify-center">
-                                    <i class="fas fa-clock tw-text-3xl tw-mb-1"></i>
-                                    <p class="tw-text-2xl">
-                                        Available on 
-                                        <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber}}</span>
-                                    </p>
-                                </div>
-                            </div>
-                            
+                            id="lessonVideoWrap"
+                        >
                             <transition v-if="useLegacyVideoPlayer" appear name="fade">
                                 <VideoMediaElement ref="mediaElementVueInstance" element-id="lessonPlayer" :brand="brand"
                                     :theme-color="brand" :poster="videoPosterImageUrl" :sources="videoMediaSources"
@@ -330,6 +316,22 @@ onBeforeMount(() => {
                             </transition>
                         </div>
                     </div>
+                    <!-- Unreleased/No Access Content -->
+                    <div v-if="!released || needAccess" class="tw-w-full tw-top-0 tw-left-0 tw-aspect-video tw-absolute tw-z-30">
+                        <img :src="`https://musora.com/cdn-cgi/image/width=1000/${thumbnailUrl}`"  
+                                class="tw-transition-opacity tw-opacity-0 tw-duration-300 tw-grayscale tw-w-full tw-object-cover" title="Image Photo"
+                                loading="lazy" 
+                                onload="this.classList.remove('tw-opacity-0')"
+                        />
+                        <div v-if="!needAccess" class="tw-absolute tw-bg-black/60 tw-top-0 tw-left-0 tw-w-full tw-h-full tw-text-white tw-font-bold tw-text-lg tw-flex tw-flex-col tw-items-center tw-justify-center">
+                            <i class="fas fa-clock tw-text-3xl tw-mb-1"></i>
+                            <p class="tw-text-2xl">
+                                Available on 
+                                <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber}}</span>
+                            </p>
+                        </div>
+                    </div>
+                    
                     <!-- Video Resources -->
                     <div class="tw-container tw-mx-auto lean">
                         <VideoResources :theme-color="brand" :brand="brand" :title="castTitle" :lesson-type="lessonType"
