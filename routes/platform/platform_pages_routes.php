@@ -673,7 +673,11 @@ Route::get(
 )
     ->name('platform.apple-association-file');
 
-
+Route::get(
+    '/assetlinks',
+    [\App\Http\Controllers\Misc\ManifestFilesController::class, 'androidAssociationFile']
+)
+    ->name('platform.android-association-file');
 
     Route::domain('{musoraDomain}')
     ->middleware(['web_authenticated'])

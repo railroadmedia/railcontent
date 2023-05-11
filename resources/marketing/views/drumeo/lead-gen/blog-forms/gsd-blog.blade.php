@@ -84,7 +84,7 @@
 {!! \App\Analytics\Tracker::bodyTop() !!}
 
 <section class="text-center absolute top-1/2 left-1/2 w-full px-5" style="transform:translate(-50%,-50%)">
-    <form id="DrumeoEngagementTriggerSuchermanSoundWebForm" accept-charset="UTF-8" action="/laravel/public/customer-io/submit-email-form"
+    <form id="DrumeoEngagementTriggerSuchermanSoundWebForm" accept-charset="UTF-8" action="/customer-io/submit-email-form"
           method="POST" class="ajax-form clearfix infusion-form max-w-3xl mx-auto" onsubmit="emailSignUpConversionTrackerForImpactProvider()">
         <input type="hidden" name="form_name" value="Sucherman Sound">
 
