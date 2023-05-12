@@ -63,7 +63,7 @@ class EventServiceProvider extends ServiceProvider
         ],
         PlaylistItemsUpdated::class => [PlaylistListener::class.'@handlePlaylistItemsUpdated'],
         EngageContent::class => [EngageContentEventListener::class.'@handleEngageContent'],
-        RemoveEngagedContent::class => [EngageContentEventListener::class.'@handleRemoveEngageContent'],
+        PlaylistDeleted::class => [EngageContentEventListener::class.'@handleRemoveEngageContent'],
         PlaylistItemDeleted::class =>  [EngageContentEventListener::class.'@handleRemoveEngageContent'],
     ];
 

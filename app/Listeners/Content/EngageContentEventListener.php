@@ -2,35 +2,22 @@
 
 namespace App\Listeners\Content;
 
-use App\Maps\ContentTypes;
-use Carbon\Carbon;
-use Railroad\Points\Events\UserPointsUpdated;
-use Railroad\Points\Services\UserPointsService;
-use Railroad\Railcontent\Events\PlaylistItemDeleted;
-use Railroad\Railcontent\Events\UserContentProgressSaved;
-use Railroad\Railcontent\Events\UserContentProgressStarted;
-use Railroad\Railcontent\Events\UserContentsProgressReset;
-use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Repositories\ContentRepository;
-use Railroad\Railcontent\Services\ContentHierarchyService;
-use Railroad\Railcontent\Services\ContentService;
-use Railroad\Railcontent\Services\UserContentProgressService;
+use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railtracker\Events\EngageContent;
-use Railroad\Railtracker\Events\MediaPlaybackTracked;
-use Railroad\Railtracker\Repositories\MediaPlaybackRepository;
 use Railroad\Railtracker\Services\ContentLastEngagedService;
-use Throwable;
 
 class EngageContentEventListener
 {
     private ContentLastEngagedService $contentLastEngagedService;
+    private UserPlaylistsService $userPlaylistService;
 
     /**
      * @param ContentLastEngagedService $contentLastEngagedService
      */
-    public function __construct(ContentLastEngagedService $contentLastEngagedService)
+    public function __construct(ContentLastEngagedService $contentLastEngagedService, UserPlaylistsService $userPlaylistService)
     {
         $this->contentLastEngagedService = $contentLastEngagedService;
+        $this->userPlaylistService = $userPlaylistService;
     }
 
     public function handleEngageContent(EngageContent $event)
@@ -38,8 +25,12 @@ class EngageContentEventListener
         $this->contentLastEngagedService->engageContent($event->userId, $event->contentId, $event->parentPlaylistId, $event->parentContentId);
     }
 
-    public function handleRemoveEngageContent(PlaylistItemDeleted $event)
+    public function handleRemoveEngageContent($event)
     {
-        $this->contentLastEngagedService->deleteEngagedContent(user()->id, $event->playlistId, null);
+        $deleted = $this->contentLastEngagedService->deleteEngagedContent(user()->id, $event->playlistId, null);
+        if(isset($event->playlistItemId) && ($deleted == 1) && ($event->position > 1)){
+            $previousPlaylistItem = $this->userPlaylistService->getItemWithPositionInPlaylist($event->playlistId, ($event->position -1));
+            $this->contentLastEngagedService->engageContent(user()->id, $previousPlaylistItem['id'], $event->playlistId, null);
+        }
     }
 }
