@@ -180,7 +180,7 @@ const dropdownTriggerHandler = target => {
 //-----------Lifecycle Methods-----------//
 
 onBeforeMount(() => {
-    console.log(props.lesson)
+    console.log('Needs access', props.lesson.need_access)
 
     state.isPinned = props.lesson.pinned;
     state.isPrivate = props.lesson.private;
@@ -206,10 +206,11 @@ onBeforeMount(() => {
         class="tw-group tw-h-[90px] tw-min-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4">
         <div class="tw-relative tw-h-full tw-w-full">
             <!-- PLAYLIST INFO: clickable link -->
-            <component :is="needAccess ? 'div' : 'a' " :href="lesson.url && !showMask && !needAccess ? lesson.url : ''"
-                class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-text-[#0D0D0D] dark:tw-text-white tw-cursor-pointer"
-                :class="[{ 'tw-grayscale': needAccess }, !cueVersion ? 'tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)]' : 'tw-w-full']"
-                @click="handleNoAccess"
+            <component :is="needAccess ? 'div' : 'a' " 
+                       :href="lesson.url && !showMask && !needAccess ? lesson.url : ''"
+                       class="tw-inline-flex tw-items-center tw-flex tw-h-full tw-text-[#0D0D0D] dark:tw-text-white tw-cursor-pointer"
+                       :class="[{ 'tw-grayscale': needAccess }, !cueVersion ? 'tw-w-[calc(100%-35px)] lg:tw-w-[calc(100%-100px)]' : 'tw-w-full']"
+                       @click="handleNoAccess"
             >
                 <div class="tw-inline-flex tw-items-center tw-shrink-0 tw-min-w-[40px] tw-px-4 tw-transition-opacity tw-text-sm"
                     :class="{ 'tw-opacity-0': playlistsStore.sortingPlaylist }">
