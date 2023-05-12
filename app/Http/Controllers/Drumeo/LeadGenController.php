@@ -329,7 +329,8 @@ class LeadGenController extends BaseController
             ]);
         }
         else {
-            $leadgen = Leadgen::where(function ($query) {
+            $leadgen = Leadgen::where('leadgens.visible', true)
+                ->where(function ($query) {
                     return $query
                         ->whereNull('start_date')
                         ->orWhere('start_date', '<=', Carbon::now('PST')->toDateTimeString());

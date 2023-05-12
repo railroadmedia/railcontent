@@ -225,7 +225,7 @@ class LeadGenController extends BaseController
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)
     {
-        $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')
+        $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->where('leadgens.visible', true)
             ->where(function ($query) {
                 return $query
                     ->whereNull('leadgens.start_date')
@@ -260,7 +260,8 @@ class LeadGenController extends BaseController
             ]);
         }
         else {
-            $leadgen = Leadgen::where(function ($query) {
+            $leadgen = Leadgen::where('leadgens.visible', true)
+                ->where(function ($query) {
                     return $query
                         ->whereNull('leadgens.start_date')
                         ->orWhere('leadgens.start_date', '<=', Carbon::now('PST')->toDateTimeString());
