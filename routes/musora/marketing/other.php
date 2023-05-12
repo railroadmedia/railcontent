@@ -20,6 +20,7 @@ Route::domain('{musoraDomain}')
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
         Route::get('recitals', [MarketingController::class, 'recitals']);
         Route::get('gift-card', [MarketingController::class, 'giftcard']);
+        Route::get('method', [MarketingController::class, 'method']);
 
         Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
         Route::get('pass', [CodeRedemptionController::class, 'passRedeem']);

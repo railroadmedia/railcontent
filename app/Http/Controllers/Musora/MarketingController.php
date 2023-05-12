@@ -56,4 +56,8 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.giftcard-page');
     }
+    public function method()
+    {
+        return view('musora.pages.method', [ 'theme' => 'musora', 'page' => 'method' ]);
+    }
 }
