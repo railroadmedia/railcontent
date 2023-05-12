@@ -8,13 +8,17 @@ class PlaylistItemDeleted extends Event
 {
     public $playlistId;
     public $playlistItemId;
+    public $position;
 
     /**
      * @param $playlistId
+     * @param $playlistItemId
+     * @param $position
      */
-    public function __construct($playlistId, $playlistItemId)
+    public function __construct($playlistId, $playlistItemId, $position)
     {
         $this->playlistId = $playlistId;
         $this->playlistItemId = $playlistItemId;
+        $this->position = $position;
     }
 }

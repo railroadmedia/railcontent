@@ -362,4 +362,16 @@ class UserPlaylistContentRepository extends RepositoryBase
             ->orderBy('position', 'asc')
             ->first();
     }
+
+    /**
+     * @param $playlistId
+     * @return array|mixed[]
+     */
+    public function getItemWithPositionInPlaylist($playlistId, $position)
+    {
+        return $this->query()
+            ->where('user_playlist_id', $playlistId)
+            ->where('position', $position)
+            ->first();
+    }
 }

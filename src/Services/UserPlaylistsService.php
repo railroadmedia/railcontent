@@ -651,7 +651,7 @@ class UserPlaylistsService
 
         $deleted = $this->userPlaylistContentRepository->deletePlaylistItemAndReposition(['id' => $itemPlaylist['id']]);
 
-        event(new PlaylistItemDeleted($itemPlaylist['user_playlist_id'], $itemPlaylistId));
+        event(new PlaylistItemDeleted($itemPlaylist['user_playlist_id'], $itemPlaylistId, $itemPlaylist['position']));
         event(new PlaylistItemsUpdated($itemPlaylist['user_playlist_id']));
 
         return $deleted;
@@ -830,5 +830,14 @@ class UserPlaylistsService
                 ->count() > 0;
 
         return Decorator::decorate([$playlist], 'playlist')[0];
+    }
+
+    /**
+     * @param $playlistId
+     * @return array|mixed[]
+     */
+    public function getItemWithPositionInPlaylist($playlistId, $position)
+    {
+        return $this->userPlaylistContentRepository->getItemWithPositionInPlaylist($playlistId, $position);
     }
 }
