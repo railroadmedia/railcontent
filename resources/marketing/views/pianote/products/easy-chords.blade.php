@@ -268,7 +268,7 @@
 
     <a href="#final" class="anchor-slide flex items-end justify-center px-2 sm:px-0 fixed w-full z-[100]" style="background: #d6e8fd;">
         <p class="font-bebas uppercase mx-0 py-2 leading-none">
-            GET A FREE CHORDS & SCALES BOOK UNTIL MAY 21.
+            GET A FREE CHORDS & SCALES BOOK UNTIL MAY 22.
             <br><span class="text-pianote"><span x-cloak x-data="timer2()" x-init="countdown2()"><span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                  <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                                  <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
@@ -712,7 +712,7 @@
         <div class="max-w-5xl mx-auto md:flex relative z-40">
             <div class="flex-1 text-white md:pr-4 lg:pr-0 mb-3 md:mb-0 max-w-md md:max-w-auto mx-auto">
                 <h5 class="uppercase mb-2 text-center md:text-left" style="color: #FFAE00;">
-                    AVAILABLE UNTIL May 21st<br>
+                    AVAILABLE UNTIL May 22nd<br>
                     <span x-cloak x-data="timer2()" x-init="countdown2()">
                                  <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                  <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
@@ -904,7 +904,7 @@
                 minuteText: ' minutes',
                 second: '00',
                 secondText: ' seconds',
-                endTime: new Date('2023-05-22 00:00:00').getTime(),
+                endTime: new Date('2023-05-23 00:00:00').getTime(),
                 startTime: new Date().getTime(),
                 timeLeft: 0,
                 smallScreen: false,
