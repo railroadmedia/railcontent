@@ -273,7 +273,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" style="padding-bottom: 105%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/header-image3.png" data-open="trailer">
+                    <div class="rounded-xl overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" style="padding-bottom: 105%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/header-image.jpg" data-open="trailer">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
