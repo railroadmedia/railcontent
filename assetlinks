@@ -1,15 +1,39 @@
 [
-  {
-    "relation": [
-      "delegate_permission/common.handle_all_urls"
-    ],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.musoraapp",
-      "sha256_cert_fingerprints": [
-        "FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C",
-        "C3:AE:CF:1F:CA:F4:16:0C:E3:9E:EF:D2:77:CF:53:CE:65:E4:C9:7B:43:EB:E1:88:4B:FC:6B:96:A3:A8:D0:11"
-      ]
-    }
-  }
+   {
+      "relation":[
+         "delegate_permission/common.handle_all_urls"
+      ],
+      "target":{
+         "namespace":"android_app",
+         "package_name":"com.musoraapp",
+         "sha256_cert_fingerprints":[
+            "FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C",
+            "C3:AE:CF:1F:CA:F4:16:0C:E3:9E:EF:D2:77:CF:53:CE:65:E4:C9:7B:43:EB:E1:88:4B:FC:6B:96:A3:A8:D0:11"
+         ]
+      }
+   },
+   {
+      "relation":[
+         "delegate_permission/common.handle_all_urls"
+      ],
+      "target":{
+         "namespace":"android_app",
+         "package_name":"com.drumeo",
+         "sha256_cert_fingerprints":[
+            "14:37:3F:52:7D:04:0E:71:77:06:97:F1:79:B9:5B:69:9D:D6:C2:61:21:88:E9:2E:3A:52:F7:8B:75:03:B5:97"
+         ]
+      }
+   },
+   {
+      "relation":[
+         "delegate_permission/common.handle_all_urls"
+      ],
+      "target":{
+         "namespace":"android_app",
+         "package_name":"com.pianote2",
+         "sha256_cert_fingerprints":[
+            "FA:C6:17:45:DC:09:03:78:6F:B9:ED:E6:2A:96:2B:39:9F:73:48:F0:BB:6F:89:9B:83:32:66:75:91:03:3B:9C"
+         ]
+      }
+   }
 ]
