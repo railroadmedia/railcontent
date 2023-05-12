@@ -4,6 +4,9 @@ namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
 use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Events\PlaylistDeleted;
+use Railroad\Railcontent\Events\PlaylistItemCreated;
+use Railroad\Railcontent\Events\PlaylistItemDeleted;
 use Railroad\Railcontent\Events\PlaylistItemsUpdated;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
@@ -343,6 +346,8 @@ class UserPlaylistsService
                     $itemId =
                         $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
 
+                    event(new PlaylistItemCreated($userPlaylistId, $itemId));
+
                     $added[$userPlaylistId][] = $itemId;
 
                     if ($importAllAssignments) {
@@ -367,6 +372,7 @@ class UserPlaylistsService
                     null,
                     $assignmentInput
                 );
+                event(new PlaylistItemCreated($userPlaylistId, $itemId));
                 $added[$userPlaylistId][] = $itemId;
             }
 
@@ -382,6 +388,7 @@ class UserPlaylistsService
                     null,
                     $assignmentInput
                 );
+                event(new PlaylistItemCreated($userPlaylistId, $itemId));
                 $added[$userPlaylistId][] = $itemId;
             }
 
@@ -401,6 +408,7 @@ class UserPlaylistsService
                     $itemId =
                         $this->userPlaylistContentRepository->createOrUpdatePlaylistContentAndReposition(null, $input);
                     $added[$userPlaylistId][] = $itemId;
+                    event(new PlaylistItemCreated($userPlaylistId, $itemId));
 
                     if ($importAllAssignments) {
                         $itemIds = $this->addSounsliceAssignments(
@@ -597,12 +605,16 @@ class UserPlaylistsService
             ->delete();
 
         //delete playlist
-        return $this->userPlaylistsRepository->query()
+        $delete =  $this->userPlaylistsRepository->query()
             ->where([
                         'id' => $userPlaylistId,
                         'user_id' => auth()->id(),
                     ])
             ->delete();
+
+        event(new PlaylistDeleted($userPlaylistId));
+
+        return $delete;
     }
 
     /**
@@ -639,6 +651,7 @@ class UserPlaylistsService
 
         $deleted = $this->userPlaylistContentRepository->deletePlaylistItemAndReposition(['id' => $itemPlaylist['id']]);
 
+        event(new PlaylistItemDeleted($itemPlaylist['user_playlist_id'], $itemPlaylistId));
         event(new PlaylistItemsUpdated($itemPlaylist['user_playlist_id']));
 
         return $deleted;
