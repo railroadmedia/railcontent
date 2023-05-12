@@ -40,4 +40,11 @@ class ManifestFilesController extends BaseController
         return response($json, 200)
                 ->header('Content-Type', 'application/json');
     }
+
+    public function androidAssociationFile()
+    {
+        $json = file_get_contents(base_path('assetlinks'));
+        return response($json, 200)
+            ->header('Content-Type', 'application/json');
+    }
 }
