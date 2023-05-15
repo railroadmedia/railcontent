@@ -1,0 +1,544 @@
+@extends('musora._partials.layout')
+
+@section('head-includes')
+    <title>Musora - Social Learning Communities For Musicians</title>
+    <meta property="og:title" content="Musora - Social Learning Communities For Musicians">
+
+    <meta name="description" content="Musora Media, Inc. is the technology that powers the most popular online social learning communities for musicians.  Learn music from the best teachers in the world at Drumeo, Guitareo, and Pianote. ">
+    <meta property="og:description" content="Musora Media, Inc. is the technology that powers the most popular online social learning communities for musicians.  Learn music from the best teachers in the world at Drumeo, Guitareo, and Pianote.">
+
+    <meta property="og:url" content="https://www.musora.com">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
+
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+
+    <style>
+        .tool:after, .tool:before {
+            position: absolute;
+            transform: translate(-50%, 0);
+            height: auto;
+            max-height: 0;
+            visibility: hidden;
+            opacity: 0;
+            transition: all .3s;
+            overflow: hidden;
+            font-size: 14px;
+        }
+        .tool:before {
+            z-index: 100;
+            content: "";
+            bottom: 23px;
+            left: 50%;
+            border-right: 7px transparent solid;
+            border-left: 7px transparent solid;
+            border-top: 7px solid #fff;
+        }
+        .tool:after {
+            padding: 5px 8px;
+            content: attr(tip);
+            font-size: 14px;
+            text-align: left;
+            color: #000;
+            width: 220px;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0 0 15px #000;
+            bottom: 30px;
+            left: -300%;
+        }
+        .tool:hover, .tool:active, .tool:focus {
+            z-index: 100;
+        }
+        .tool:hover:after, .tool:hover:before, .tool:active:after, .tool:active:before, .tool:focus:after, .tool:focus:before {
+            max-height: 1000px;
+            visibility: visible;
+            opacity: 1;
+            display: block;
+        }
+        .splide__pagination__page.is-active {
+            background: #01050F;
+            transform: none !important;
+        }
+
+        .splide__pagination__page {
+            margin: 3px 10px !important;
+            opacity: 1 !important;
+        }
+
+        @media (min-width: 768px) {
+            .splide__pagination__page {
+                margin: 3px 6px !important;
+            }
+        }
+
+        .splide__arrow svg {
+            fill: #0B76DB !important;
+        }
+
+        .bubble:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border: 5px solid transparent;
+            border-top-color: black;
+            border-bottom: 0;
+            margin-left: -5px;
+            margin-bottom: -5px;
+        }
+
+        @if(!empty($trialVersion))
+            .option-buttons.active {
+            border-color:#0b76db!important;
+            background-color:#0c2949!important;
+        }
+        .option-buttons.active .radio-check {
+            border-color:#0b76db!important;
+            background-color:#0b76db!important;
+        }
+        .option-buttons.active .radio-check i {
+            display:block!important;
+        }
+        @endif
+    </style>
+@stop
+
+@section('body-data')
+    x-data ='{
+    soundslice : false,
+    trailer : false,
+    }'
+@endsection
+
+@section('layout-body')
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container max-w-6xl mx-auto">
+            Musicians start here.
+
+            Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support.
+
+            [ START FOR FREE ]
+        </div>
+    </section>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container max-w-6xl mx-auto">
+            PIANO // GUITAR // DRUMS // SINGING
+        </div>
+    </section>
+
+    @include('musora.sales.components.learn-by-playing-section', [
+        'header' => 'The easier way to<br class="inline sm:hidden"> learn <u>any instrument</u>.',
+        'desc' => 'If you’ve ever tried learning an instrument, you know the feeling: it’s hard. And you don’t always know where to start or where to go next.<br><br>But rest assured:<br><br>We believe anyone can play music. No matter your age, skill, or free time. And over the past 15 years, we’ve seen students like you achieve their goals by following a simple formula: learn, practice, play, connect.',
+        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/collage2.png',
+    ])
+
+
+    @php
+        $gridItems = [
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/10-level-cirriculum.jpg',
+                'title' => '10-Level Curriculum',
+                'desc' => 'The most trusted step-by-step video lessons for piano, guitar, drums, and singing. ',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/practical-assignments.jpg',
+                'title' => 'Practical Assignments',
+                'desc' => 'Keep up your progress with clear assignments and handy practice tools for every level. ',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/world-class-teachers.jpg',
+                'title' => 'World-Class Teachers',
+                'desc' => 'Study with 100+ music authorities including Grammy Award winners and touring musicians. ',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts.jpg',
+                'title' => 'On-Demand Courses',
+                'desc' => 'Boost any skill, anytime with topic-based courses to guide you towards any goal. ',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/downloadable-videos.jpg',
+                'title' => 'Downloadable Videos',
+                'desc' => 'Stream your lesson OR download your videos so you can practice anywhere, anytime. ',
+            ],
+            [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/personalized-support.jpg',
+                'title' => 'Personalized Support',
+                'desc' => 'Get weekly live streams, student lesson plans, and access to a global music community. ',
+            ],
+        ];
+    @endphp
+
+    @include('musora.sales.components.trailer-grid-section', [
+        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314560/rendition/540p/file.mp4?loc=external&signature=1549cce1dacabad80dd416b5a439f6639d3b7b30c7e4d70d46245bf70c6d5102',
+        'header' => 'Your musical goals<br class="inline sm:hidden"> start here.',
+        'desc' => 'Always know <em>exactly</em> what to practice with a step-by-step curriculum for each instrument <br class="hidden sm:inline">plus exclusive courses on any topic you’d ever want to learn!',
+    ])
+
+    @php
+        $buttons = [
+            'Styles', 'Creativity', 'Grooves'
+        ];
+
+        $courses = [
+            [
+                'title' => 'Learn any style',
+                'images' => [
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Todd-Sucherman.jpg',
+                        'title' => 'Rock <br>Drumming',
+                        'instructor' => 'Todd Sucherman',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Dennis-Chambers.jpg',
+                        'title' => 'Funk <br>Drumming',
+                        'instructor' => 'Dennis Chambers',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Domino-Santatonio.jpg',
+                        'title' => 'Pop <br>Drumming',
+                        'instructor' => 'Domino Santantonio',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Steve-Smith.jpg',
+                        'title' => 'Jazz <br>Drumming',
+                        'instructor' => 'Steve Smith',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Larnell-Lewis.jpg',
+                        'title' => 'Gospel <br>Drumming',
+                        'instructor' => 'Larnell Lewis',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Greyson-Nektrutman.jpg',
+                        'title' => 'Big Band <br>Drumming',
+                        'instructor' => 'Greyson Nekrutman',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Gene-Hoglan.jpg',
+                        'title' => 'Metal <br>Drumming',
+                        'instructor' => 'Gene Hoglan',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/John-Wooton.jpg',
+                        'title' => 'Latin <br>Drumming',
+                        'instructor' => 'John Wooton',
+                    ],
+                ]
+            ],
+            [
+                'title' => 'Play more creatively',
+                'images' => [
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Anika-Nilles.jpg',
+                        'title' => 'Subdivision<br> Studies',
+                        'instructor' => 'Anika Nilles',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Dom-Famularo.jpg',
+                        'title' => 'Pedal<br> Control',
+                        'instructor' => 'Dom Famularo',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Tommy-Igoe.jpg',
+                        'title' => 'Groove<br> Essentials',
+                        'instructor' => 'Tommy Igoe',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Dorothe-Taylor-01.jpg',
+                        'title' => 'Stick<br> Control',
+                        'instructor' => 'Dorothea Taylor',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Bruce-Becker.jpg',
+                        'title' => 'Hand<br> Technique',
+                        'instructor' => 'Bruce Becker',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Billy-Cobham.jpg',
+                        'title' => 'Internal<br> Synchronization',
+                        'instructor' => 'Billy Cobham',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Emmanuelle-Caplette.jpg',
+                        'title' => 'Traditional<br> Grip',
+                        'instructor' => 'Emmanuelle Caplette',
+                    ],
+                    [
+                        'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Sarah-Thawer.jpg',
+                        'title' => '4-Way<br> Coordination',
+                        'instructor' => 'Sarah Thawer',
+                    ],
+                ]
+            ],
+            [
+                'title' => 'Find your groove',
+                'images' => [
+                    [
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Simon-Phillips.jpg',
+                    'title' => 'Elevate Your<br> Drum Sound',
+                    'instructor' => 'Simon Phillips',
+                    ],
+                    [
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Aaron-Spears.jpg',
+                    'title' => 'Drum<br> Chops',
+                    'instructor' => 'Aaron Spears',
+                    ],
+                    [
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Hannah-Welton.jpg',
+                    'title' => 'Writing<br> Drum Parts',
+                    'instructor' => 'Hannah Welton',
+                    ],
+                    [
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Matt-McGuire.jpg',
+                    'title' => 'Song<br> Breakdowns',
+                    'instructor' => 'Matt McGuire',
+                    ],
+                    [
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Dorothe-Taylor-02.jpg',
+                    'title' => 'Rudiments<br> & Patterns',
+                    'instructor' => 'Dorothea Taylor',
+                    ],
+                    [
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Aric-Improta.jpg',
+                    'title' => 'The Creative<br> Mindset',
+                    'instructor' => 'Aric Improta',
+                    ],
+                    [
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Kaz-Rodgriguez.jpg',
+                    'title' => 'Musical<br> Exercises',
+                    'instructor' => 'Kaz Rodriguez',
+                    ],
+                    [
+                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Gavin-Harrison.jpg',
+                    'title' => 'Bass Drum<br> Calibration',
+                    'instructor' => 'Gavin Harrison',
+                    ],
+                ]
+            ],
+        ];
+    @endphp
+
+    @include('musora.sales.components.coaches-section', [
+        'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
+        'desc' => 'Amplify your skills with 200+ artist courses + <br class="hidden md:inline">access exclusive live events with drumming legends.'
+    ])
+
+    @php
+        $songItems = [
+            [
+                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg',
+                'title' => '5000+ popular songs.',
+                'desc' => 'Get note-for-note song breakdowns for <br class="hidden sm:inline"> every style, era, and skill level.',
+            ],
+            [
+                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/note-for-note-icon.svg',
+                'title' => 'Find the perfect tempo.',
+                'desc' => 'Slow down or speed up any section <br class="hidden sm:inline">of a song to hear every note.',
+            ],
+            [
+                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg',
+                'title' => 'Loop the trouble spots.',
+                'desc' => 'No more pausing and rewinding that<br class="hidden sm:inline"> tricky fill. Loop it over and over again!  ',
+            ],
+            [
+                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/no-drums-icon.svg',
+                'title' => 'Remove the drums <div class="rounded-full ml-2 inline-block bg-promo text-black text-xs px-2">NEW</div>',
+                'desc' => 'Magically remove the original drums<br class="hidden sm:inline"> to make each song uniquely yours. ',
+            ],
+            [
+                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices-icon.svg',
+                'title' => 'Take your songs anywhere.',
+                'desc' => 'Accessible on any device, or printable,<br class="hidden sm:inline"> so you can play any song, any time.  ',
+            ],
+
+        ];
+    @endphp
+    @include('musora.sales.components.songs-section', [
+        'header' => 'Play your favorite songs.',
+        'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
+        'video' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/smells-like-teen-spirit2.mp4',
+        'brandName' => 'Drumeo',
+        'bannerDesc' => 'Powered by Musora, Drumeo includes full access to our communities for piano, guitar, and voice.',
+    ])
+
+    @php
+        $testimonials = [
+            [
+            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/ed-koop.jpg',
+            'name' => 'Ed Koop',
+            'video' => '342059271',
+            'title' => 'I’m loving music more than I ever did before!',
+            'description' => 'After 20 years away from the drums, Ed says he’s loving music more than ever. He nailed his first audition and has now played at the venues of his dreams.',
+            ],
+            [
+            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/barry-lisle.jpg',
+            'name' => 'Barry Lisle',
+            'video' => '342066433',
+            'title' => 'They walk you through, step-by-step, for any goal.',
+            'description' => 'Barry wanted something to keep his mind busy, so he revisited the instrument he’d loved as a kid: the drums. Now he’s playing in bands and recording an album.',
+            ],
+            [
+            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/lisa-aragon.jpg',
+            'name' => 'Lisa Aragon',
+            'video' => '373252004',
+            'title' => 'I was able to play drums on stage!',
+            'description' => 'Lisa got interested in the drums by playing Rock Band. She had no idea she’d be performing with strangers in Nashville just a few years later.',
+            ],
+            [
+            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/guy-dobbins.jpg',
+            'name' => 'Guy Dobbins',
+            'video' => '373445704',
+            'title' => 'Drummers from all around the world helping you out.',
+            'description' => 'Guy had trouble figuring out a song, he reached out and an instructor walked him through it that same day - getting him through the gig that evening.',
+            ],
+            [
+            'image' => 'https://i.vimeocdn.com/video/1143532818-61ead907372040ae51f23b9d5f05469c271aee744e9cb67e777ae4307f762b23-d_620.jpg',
+            'name' => 'Omari Augustine',
+            'video' => '553438851',
+            'title' => 'Something you can’t get from having a drum teacher.',
+            'description' => 'Omari had big shoes to fill. His father was already an accomplished drummer in Trinidad & Tobago when Omari decided to take his drumming to the next level.',
+            ],
+            [
+            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/marlene-rosen.jpg',
+            'name' => 'Marlene Rosen',
+            'video' => '373446024',
+            'title' => 'I’m rediscovering music again.',
+            'description' => 'Marlene, a cancer survivor, filled her recovery time with drumming and was able to progress at a pace that worked for her.',
+            ],
+            [
+            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/jay-damberg-2.jpg',
+            'name' => 'Jay Damberg',
+            'video' => '373445466',
+            'title' => 'Anytime, day or night, I can access the lessons I need.',
+            'description' => 'With a full-time job and a family, Jay often can’t practice drums until late at night, which is why he loves being able to access Drumeo whenever he wants.',
+            ],
+            [
+            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/ivy-elizondo-2.jpg',
+            'name' => 'Ivy Elizondo',
+            'video' => '373445819',
+            'title' => 'Now we have a band and we’re recording an album!',
+            'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead -- she’s used Drumeo to build a foundation and formed a band.',
+            ],
+        ]
+    @endphp
+    @include('musora.sales.components.testimonials-section', [
+        'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
+        'reviewText' => 'Drumeo is rated 5-stars for price, satisfaction,<br class="inline sm:hidden"> and customer service.',
+        'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
+        'youtube' => '2.6M',
+        'facebookLink' => 'https://facebook.com/drumeo/',
+        'facebook' => '1.2M',
+        'instagramLink' => 'https://instagram.com/drumeoofficial/',
+        'instagram' => '1M',
+    ])
+    @include('musora.sales.components.guarantee-section', [
+        'badge' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png',
+        'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
+        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
+    ])
+    <div class="unstick-trigger block"></div>
+    <div id="customize-anchor" class="anchor"></div>
+    <div id="order" class="anchor"></div>
+    @hasSection('final')
+        @yield('final')
+    @elseif(!empty($trialVersion))
+        @include('musora.sales.components.card-selection-section', [
+            "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
+            "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
+            "songs" => "5000",
+            "firstPoint" => "The world’s best drum lessons.",
+            "thirdPoint" => "Unlimited personal support",
+            "fifthPoint" => "Lesson access for piano, guitar, and singing.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
+            "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
+            "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+        ])
+    @elseif(!empty($promoVersion))
+        @php
+            $bonuses = [
+                [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
+                'title' => 'Drumeo Drumsticks',
+                'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
+                'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
+                'shipping' => true,
+                ],
+                [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
+                'title' => 'Rock Drumming Masterclass',
+                'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
+                'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
+                ],
+                [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
+                'title' => 'Drum Technique Made Easy',
+                'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
+                'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
+                ],
+                [
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
+                'title' => 'Independence Made Easy',
+                'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
+                'price' => floatval($productPrices['independence-made-easy-pack']->price),
+                ],
+            ]
+        @endphp
+        @include('musora.sales.components.order-section-bonuses', [
+        'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png',
+        'header' => 'Online drum lessons for all skill levels.',
+        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special',
+        'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
+        ])
+    @else
+        @include('musora.sales.components.order-section-collage', [
+        'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
+        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
+                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
+        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-spread.png',
+        ])
+    @endif
+
+    @include('musora.sales.components.app-section', [
+        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices.png',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone&ppid=d63c2cf3-274f-4441-8444-a5f547b1b4b6',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=drumeo_previews',
+    ])
+
+    @include('drumeo._partials.faq')
+
+    @include('_partials.components.video-modal',[
+        'name' => 'soundslice',
+        'video' => '1D6Vc',
+        'soundslice' => true,
+    ])
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '785314424',
+        'vimeo' => true,
+    ])
+
+    @if(!empty($promoVersion))
+        @include("drumeo.sales.partials._footer", [
+            "minimal" => true
+        ])
+    @else
+        @include("drumeo.sales.partials._footer")
+    @endif
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+    @yield('scripts')
+@stop
