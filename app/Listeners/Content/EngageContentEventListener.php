@@ -2,6 +2,7 @@
 
 namespace App\Listeners\Content;
 
+use Railroad\Railcontent\Events\PlaylistItemLoaded;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railtracker\Events\EngageContent;
 use Railroad\Railtracker\Services\ContentLastEngagedService;
@@ -20,9 +21,9 @@ class EngageContentEventListener
         $this->userPlaylistService = $userPlaylistService;
     }
 
-    public function handleEngageContent(EngageContent $event)
+    public function handleEngageContent(PlaylistItemLoaded $event)
     {
-        $this->contentLastEngagedService->engageContent($event->userId, $event->contentId, $event->parentPlaylistId, $event->parentContentId);
+        $this->contentLastEngagedService->engageContent(user()->id, $event->playlistItemId, $event->playlistId);
     }
 
     public function handleRemoveEngageContent($event)

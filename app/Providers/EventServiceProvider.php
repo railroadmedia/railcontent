@@ -12,6 +12,7 @@ use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\PlaylistDeleted;
 use Railroad\Railcontent\Events\PlaylistItemDeleted;
+use Railroad\Railcontent\Events\PlaylistItemLoaded;
 use Railroad\Railcontent\Events\PlaylistItemsUpdated;
 use Railroad\Railcontent\Listeners\PlaylistListener;
 use Railroad\Railforums\EventListeners\PostEventListener;
@@ -62,7 +63,7 @@ class EventServiceProvider extends ServiceProvider
             OrderEventListener::class . '@handleOrderPlaced',
         ],
         PlaylistItemsUpdated::class => [PlaylistListener::class.'@handlePlaylistItemsUpdated'],
-        EngageContent::class => [EngageContentEventListener::class.'@handleEngageContent'],
+        PlaylistItemLoaded::class => [EngageContentEventListener::class.'@handleEngageContent'],
         PlaylistDeleted::class => [EngageContentEventListener::class.'@handleRemoveEngageContent'],
         PlaylistItemDeleted::class =>  [EngageContentEventListener::class.'@handleRemoveEngageContent'],
     ];

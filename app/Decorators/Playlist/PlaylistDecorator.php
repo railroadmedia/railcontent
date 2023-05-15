@@ -84,19 +84,9 @@ class PlaylistDecorator extends ModeDecoratorBase
             $date_info = getdate($playlists[$index]['duration'] ?? 0);
             $format = ($date_info['hours'] > 1) ? 'H:i:s' : 'i:s';
             $playlists[$index]['duration_formated'] = gmdate($format, $playlists[$index]['duration'] ?? 0);
-            $lastEngagedContent = $this->contentLastEngagedService->getLastEngagedContentForPlaylistId(user()->id, $playlist['id']);
-            if (isset($lastEngagedContent)) {
-                $playlists[$index]['playback_url'] = url()->route('platform.user.playlist-item', [
-                    'playlistId' => $playlist['id'],
-                    'playlistItemId' => $lastEngagedContent->content_id,
+            $playlists[$index]['playback_url'] = url()->route('platform.play.playlist', [
+                    'playlistId' => $playlist['id']
                 ]);
-            }
-            elseif (isset($playlist['user_playlist_item_id'])) {
-                $playlists[$index]['playback_url'] = url()->route('platform.user.playlist-item', [
-                    'playlistId' => $playlist['id'],
-                    'playlistItemId' => $playlist['user_playlist_item_id'],
-                ]);
-            }
         }
 
         $userIds = array_unique($userIds);
