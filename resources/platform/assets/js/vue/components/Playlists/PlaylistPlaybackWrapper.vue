@@ -214,10 +214,13 @@ const playlistsStore = usePlaylistsStore();
 
 const handleGoToNext = () => {
     const isShuffleOn = localStorage.getItem("playbackShuffleOn") ? JSON.parse(localStorage.getItem("playbackShuffleOn")) : false;
+    const isPlaylistRepeatOn = localStorage.getItem("isPlaybackPlaylistRepeatOn") ? JSON.parse(localStorage.getItem("isPlaybackPlaylistRepeatOn")) : false;
 
     if (isShuffleOn) {
         const randIndex = Math.floor(Math.random() * playlistsStore.lessons.length);
         window.location.href = playlistsStore.lessons[randIndex].url;
+    } else if (isPlaylistRepeatOn && (String(props.playlistItemPosition) === String(props.playlistItems?.meta?.totalResults))) {
+        window.location.href = playlistsStore.lessons[0].url;
     }
     else if (props.nextLessonUrl && props.nextLessonUrl !== '/') {
         window.location.href = props.nextLessonUrl;
@@ -229,6 +232,7 @@ const activeItem = props.playlistItems.data.find(l => l.id === props.playlistIte
 const dateNow = Date.now();
 const lessonDateParsed = activeItem.published_on_in_timezone ? Date.parse(activeItem.published_on_in_timezone) : Date.parse(activeItem.published_on);
 const lessonDate = activeItem.published_on_in_timezone ? activeItem.published_on_in_timezone : activeItem.published_on;
+
 //Parse Release Date
 const month = DateTime.fromSQL(lessonDate).toFormat('LLL');
 const dayNumber = DateTime.fromSQL(lessonDate).toFormat('d');
@@ -245,7 +249,7 @@ const needAccess = computed(() => {
 })
 
 onBeforeMount(() => {
-    console.log(props.playlistItems)
+    //console.log(props.playlistItems)
 });
 </script>
 

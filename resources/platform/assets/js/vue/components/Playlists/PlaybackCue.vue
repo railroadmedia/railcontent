@@ -121,6 +121,7 @@ const handleShuffleToggle = () => {
 };
 
 const handleRepeatToggle = () => {
+    localStorage.setItem("playbackShuffleOn", false);
     isPlaybackRepeatOn.value = false;
     localStorage.setItem("playbackRepeatOn", isPlaybackRepeatOn.value);
 
@@ -132,6 +133,8 @@ const handleRepeatToggle = () => {
 };
 
 const handlePlaylistRepeatToggle = () => {
+    localStorage.setItem("playbackShuffleOn", false);
+
     if (isPlaybackPlaylistRepeatOn.value) {
         isPlaybackRepeatOn.value = true;
         localStorage.setItem("playbackRepeatOn", isPlaybackRepeatOn.value);
@@ -171,9 +174,9 @@ onBeforeMount(() => {
 
     if (localStorage.getItem("playbackShuffleOn")) {
         isPlaybackShuffleOn.value = JSON.parse(localStorage.getItem("playbackShuffleOn"));
-    }
-    if (localStorage.getItem("playbackPlaylistRepeatOn")) {
-        isPlaybackPlaylistRepeatOn.value = JSON.parse(localStorage.getItem("playbackPlaylistRepeatOn"));
+    } 
+    if (localStorage.getItem("isPlaybackPlaylistRepeatOn")) {
+        isPlaybackPlaylistRepeatOn.value = JSON.parse(localStorage.getItem("isPlaybackPlaylistRepeatOn"));
     }
 
     localStorage.setItem("playbackRepeatOn", false);
