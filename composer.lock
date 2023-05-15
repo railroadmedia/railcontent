@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1506a3fe2a5ec98f38856a4f5b5adb15",
+    "content-hash": "6c587466cee9fcd69f6119b232b80bfb",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8786,16 +8786,16 @@
         },
         {
             "name": "railroad/railtracker",
-            "version": "dev-fix-performance-rwillems-20230405",
+            "version": "dev-v4.0-playlist-progress",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railtracker.git",
-                "reference": "570d1727b1e83f98d1cf49626a6f98d2e21cd897"
+                "reference": "186f821a98c7e5d0e891baad9d5106546e8ce7c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/570d1727b1e83f98d1cf49626a6f98d2e21cd897",
-                "reference": "570d1727b1e83f98d1cf49626a6f98d2e21cd897",
+                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/186f821a98c7e5d0e891baad9d5106546e8ce7c2",
+                "reference": "186f821a98c7e5d0e891baad9d5106546e8ce7c2",
                 "shasum": ""
             },
             "require": {
@@ -8841,9 +8841,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railtracker/issues",
-                "source": "https://github.com/railroadmedia/railtracker/tree/fix-performance-rwillems-20230405"
+                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0-playlist-progress"
             },
-            "time": "2023-04-05T20:00:27+00:00"
+            "time": "2023-05-12T14:37:35+00:00"
         },
         {
             "name": "railroad/referral",
@@ -16980,9 +16980,9 @@
         },
         {
             "package": "railroad/railtracker",
-            "version": "dev-fix-performance-rwillems-20230405",
-            "alias": "4.0.11",
-            "alias_normalized": "4.0.11.0"
+            "version": "dev-v4.0-playlist-progress",
+            "alias": "v4.0.16",
+            "alias_normalized": "4.0.16.0"
         }
     ],
     "minimum-stability": "dev",

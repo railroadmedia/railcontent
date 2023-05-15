@@ -37,7 +37,7 @@
         "railroad/railcontent": "dev-2.0-playlists as v2.0.62",
         "railroad/railforums": "2.0.*",
         "railroad/railnotifications": "3.0.*",
-        "railroad/railtracker": "dev-fix-performance-rwillems-20230405 as 4.0.11",
+        "railroad/railtracker": "dev-v4.0-playlist-progress as v4.0.16",
         "railroad/referral": "3.0.*",
         "railroad/usora": "3.0.*",
         "railroadmedia/helpscout-api-php": "~3.7",

@@ -10,6 +10,7 @@ use App\Modules\Content\Services\CarouselService;
 use App\Modules\Content\Services\CohortService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use App\Services\PackService;
+use App\Services\PlaylistService;
 use Carbon\Carbon;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\MusoraApi\Contracts\ProductProviderInterface;
@@ -25,7 +26,18 @@ class MusoraApiProductProvider implements ProductProviderInterface
     private PackService $packService;
     private VimeoTrailerDecorator $vimeoTrailerDecorator;
     private ContentService $contentService;
+    private PlaylistService $playlistService;
 
+    /**
+     * @param CarouselService $carouselService
+     * @param UserProductService $userProductService
+     * @param ProductRepository $productRepository
+     * @param CohortService $cohortService
+     * @param PackService $packService
+     * @param VimeoTrailerDecorator $vimeoTrailerDecorator
+     * @param ContentService $contentService
+     * @param PlaylistService $playlistService
+     */
     public function __construct(
         CarouselService $carouselService,
         UserProductService $userProductService,
@@ -33,7 +45,8 @@ class MusoraApiProductProvider implements ProductProviderInterface
         CohortService $cohortService,
         PackService $packService,
         VimeoTrailerDecorator $vimeoTrailerDecorator,
-        ContentService $contentService
+        ContentService $contentService,
+        PlaylistService $playlistService
     ) {
         $this->carouselService = $carouselService;
         $this->userProductService = $userProductService;
@@ -42,6 +55,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
         $this->packService = $packService;
         $this->vimeoTrailerDecorator = $vimeoTrailerDecorator;
         $this->contentService = $contentService;
+        $this->playlistService = $playlistService;
     }
 
     public function getPackPrice($slug)
@@ -170,6 +184,6 @@ class MusoraApiProductProvider implements ProductProviderInterface
 
     public function getPlaybackItemId($playlistId)
     {
-        // TODO: Implement getPlaybackItemId() method.
+        return $this->playlistService->getPlaylistNextItem($playlistId);
     }
 }
