@@ -183,7 +183,7 @@ onMounted(() => {
     <section
         class="tw-z-10 tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-mb-4">
         <!-- Header -->
-        <div class="tw-flex tw-flex-col dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-py-[17px] tw-px-[10px]">
+        <div class="tw-flex tw-flex-col dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-py-[17px] tw-px-[10px] tw-sticky tw-top-0 tw-z-50 tw-min-h-[40px] tw-w-full ">
             <div class="tw-flex">
                 <a :href="playlistUrl"
                     class="tw-inline-flex tw-mr-auto tw-pb-1 tw-large tw-leading-tight tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent hover:tw-border-current">
@@ -242,11 +242,11 @@ onMounted(() => {
             class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-overflow-y-auto tw-relative"
             :class="state.collapsed ? 'tw-hidden lg:tw-block' : ''">
             <!-- Top Skeleton for offset For top Infinite Scroll -->
-            <div v-if="shouldShowTopSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
+            <!-- <div v-if="shouldShowTopSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
                 <div
                     class="tw-flex tw-w-full tw-h-[90px] tw-flex-row tw-items-center tw-transition-colors tw-py-0.5 even:tw-bg-[#E6E7E9] dark:even:tw-bg-[#081825]">
                 </div>
-            </div>
+            </div> -->
             <!-- Print Each Card -->
             <playlist-card :currentItem="playlistItemPosition" v-for="(lesson, i) in playlistsStore.lessons"
                 :key="'playlist-card-cue-' + lesson.id" :index="i" :cardId="'playlist-card-cue-' + lesson.id"
