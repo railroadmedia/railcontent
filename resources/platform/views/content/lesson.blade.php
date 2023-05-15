@@ -276,7 +276,7 @@
                         content-id="{{ $lessonContent->fetch('id') }}" user-id="{{ user()->id }}"
                         user-name="{{ user()->display_name }}" user-avatar="{{ user()->profile_picture_url }}"
                         user-xp="{{ user()->totalXP() }}" user-access-level="{{ user()->access_level }}"
-                        profile-base-route="/profile/" :is-admin="false">
+                        profile-base-route="/profile/" :is-admin="{{ json_encode(user()->isAdmin()) }}">
                     </comments>
                 </div>
             </div>
