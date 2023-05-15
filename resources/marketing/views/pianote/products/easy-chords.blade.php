@@ -480,6 +480,7 @@
             </div>
         </div>
     </section>
+    <div id="demo" class="anchor"></div>
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-bg.jpg);">
         <h3 class="leading-tight"><strong>Go on, give it a try</strong></h3>
         <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">Curious? <strong>Try a snippet from Day 1</strong> and<br class="inline sm:hidden"> see if Easy Chords is right for you.</p>
