@@ -1593,9 +1593,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mb-8 {
   margin-bottom: 2rem !important;
 }
-.-mt-36 {
-  margin-top: -9rem !important;
-}
 .-mt-14 {
   margin-top: -3.5rem !important;
 }
@@ -1616,6 +1613,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mb-32 {
   margin-bottom: 8rem !important;
+}
+.-mt-36 {
+  margin-top: -9rem !important;
 }
 .mb-20 {
   margin-bottom: 5rem !important;
@@ -4630,10 +4630,6 @@ li, p {
     margin-bottom: -1rem !important;
   }
 
-  .sm\:-mt-64 {
-    margin-top: -16rem !important;
-  }
-
   .sm\:-mt-20 {
     margin-top: -5rem !important;
   }
@@ -4672,6 +4668,10 @@ li, p {
 
   .sm\:mb-56 {
     margin-bottom: 14rem !important;
+  }
+
+  .sm\:-mt-64 {
+    margin-top: -16rem !important;
   }
 
   .sm\:-mb-8 {
@@ -7604,10 +7604,6 @@ li, p {
     margin-bottom: 3rem !important;
   }
 
-  .lg\:-mt-96 {
-    margin-top: -24rem !important;
-  }
-
   .lg\:-mt-28 {
     margin-top: -7rem !important;
   }
@@ -7630,6 +7626,10 @@ li, p {
 
   .lg\:mb-72 {
     margin-bottom: 18rem !important;
+  }
+
+  .lg\:-mt-96 {
+    margin-top: -24rem !important;
   }
 
   .lg\:mb-28 {

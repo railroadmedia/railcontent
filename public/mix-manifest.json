@@ -4,11 +4,7 @@
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=d8dfdf5c5bceea18578ef8fab600ce44",
-<<<<<<< HEAD
-    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=4237dd5c3c795c2c4f46b2d34dce68d9",
-=======
     "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=3cbaa7460287ff1520a0d75066d35595",
->>>>>>> project-playlists-v2
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=af3d16381543901859e9e955ed9e2cd0",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=e1ffd5c9f64e7739d834a415aba059fc",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=26ba2bb391babd9dcfbc6e1e9cf80ffd",
@@ -32,23 +28,13 @@
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=d8e4ffb070f05d53478bd161da77aaef",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=94e4f2ebf472d31f9e0a89c474023880",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=cfa09b0b222991cacf388f79469aaec9",
-<<<<<<< HEAD
     "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=7a23afe39f8e1bebb4ce197f3cfbee12",
-    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=36ae5492963b1be77e6a9b7efde34df9",
-=======
-    "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=ec28d3551e0bd4b43b6946a87f305198",
-    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=4bab2bb730fef2902d71a0bce4457c74",
->>>>>>> project-playlists-v2
+    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=60d5708466848e8f81e212d47e0c86db",
     "/platform/js/playlist-breadcrumb.js": "/platform/js/playlist-breadcrumb.js?id=95e0c94659bcecbcfc02a6f1ab5ade5f",
     "/platform/js/playlist-collection-header.js": "/platform/js/playlist-collection-header.js?id=ee900c84f0d4cc0858e725de34ae2360",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=26d03238e24769866d21704f9c052fd4",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
-<<<<<<< HEAD
     "/platform/css/app.css": "/platform/css/app.css?id=82d25c07fde15babb9e8db945ca46de3",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=6ac2226262458988b6d0e4d63b49dbc9",
-=======
-    "/platform/css/app.css": "/platform/css/app.css?id=324d3c9382090f536c91d9ecd24c45d5",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=064a614aac52376f64b835f970a16662",
->>>>>>> project-playlists-v2
+    "/marketing/css/app.css": "/marketing/css/app.css?id=ea10a3402ca5f36cc6b0dbe5797e2f2d",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=d37fd160055488c1d05ef7fbe3177f31"
 }
