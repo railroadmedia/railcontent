@@ -167,4 +167,9 @@ class MusoraApiProductProvider implements ProductProviderInterface
     {
         return $this->userProductService->hasProductNotCached(user()?->id, $productId ?? 0);
     }
+
+    public function getPlaybackItemId($playlistId)
+    {
+        // TODO: Implement getPlaybackItemId() method.
+    }
 }
