@@ -82,6 +82,7 @@ const pageNumberBottom = ref(1);
 const isLoading = ref(false);
 const isPlaybackShuffleOn = ref(false);
 const isPlaybackRepeatOn = ref(false);
+const isPlaybackPlaylistRepeatOn = ref(false);
 
 
 //---------Computed--------//
@@ -120,19 +121,47 @@ const handleShuffleToggle = () => {
 };
 
 const handleRepeatToggle = () => {
-    isPlaybackRepeatOn.value = !isPlaybackRepeatOn.value;
+    localStorage.setItem("playbackShuffleOn", false);
+    isPlaybackRepeatOn.value = false;
     localStorage.setItem("playbackRepeatOn", isPlaybackRepeatOn.value);
 
-    if (isPlaybackRepeatOn.value) {
+    window.shownotification({
+        icon: 'repeat',
+        text: `Video looping has been disabled.`
+    });
+
+};
+
+const handlePlaylistRepeatToggle = () => {
+    localStorage.setItem("playbackShuffleOn", false);
+
+    if (isPlaybackPlaylistRepeatOn.value) {
+        isPlaybackRepeatOn.value = true;
+        localStorage.setItem("playbackRepeatOn", isPlaybackRepeatOn.value);
+
+        isPlaybackPlaylistRepeatOn.value = false;
+        localStorage.setItem("isPlaybackPlaylistRepeatOn", isPlaybackPlaylistRepeatOn.value);
+
+
         window.shownotification({
             icon: 'repeat',
-            text: `Awesome! Looping has been enabled.`
+            text: `Awesome! Video looping has been enabled.`
         });
     } else {
-        window.shownotification({
-            icon: 'repeat',
-            text: `Looping has been disabled.`
-        });
+        isPlaybackPlaylistRepeatOn.value = !isPlaybackPlaylistRepeatOn.value;
+        localStorage.setItem("isPlaybackPlaylistRepeatOn", isPlaybackPlaylistRepeatOn.value);
+
+        if (isPlaybackPlaylistRepeatOn.value) {
+            window.shownotification({
+                icon: 'repeat',
+                text: `Awesome! Playlist looping has been enabled.`
+            });
+        } else {
+            window.shownotification({
+                icon: 'repeat',
+                text: `Playlist looping has been disabled.`
+            });
+        }
     }
 };
 
@@ -145,10 +174,12 @@ onBeforeMount(() => {
 
     if (localStorage.getItem("playbackShuffleOn")) {
         isPlaybackShuffleOn.value = JSON.parse(localStorage.getItem("playbackShuffleOn"));
+    } 
+    if (localStorage.getItem("isPlaybackPlaylistRepeatOn")) {
+        isPlaybackPlaylistRepeatOn.value = JSON.parse(localStorage.getItem("isPlaybackPlaylistRepeatOn"));
     }
-    if (localStorage.getItem("playbackRepeatOn")) {
-        isPlaybackRepeatOn.value = JSON.parse(localStorage.getItem("playbackRepeatOn"));
-    }
+
+    localStorage.setItem("playbackRepeatOn", false);
 });
 
 onMounted(() => {
@@ -183,7 +214,8 @@ onMounted(() => {
     <section
         class="tw-z-10 tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-mb-4">
         <!-- Header -->
-        <div class="tw-flex tw-flex-col dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-py-[17px] tw-px-[10px] tw-sticky tw-top-0 tw-z-50 tw-min-h-[40px] tw-w-full ">
+        <div
+            class="tw-flex tw-flex-col dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-py-[17px] tw-px-[10px] tw-sticky tw-top-0 tw-z-50 tw-min-h-[40px] tw-w-full ">
             <div class="tw-flex">
                 <a :href="playlistUrl"
                     class="tw-inline-flex tw-mr-auto tw-pb-1 tw-large tw-leading-tight tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent hover:tw-border-current">
@@ -218,10 +250,17 @@ onMounted(() => {
                     <MusoraIcon icon-name="shuffle" class="tw-h-[22px] tw-w-[22px]" width="22" height="22"
                         viewBox="0 0 22 22" />
                 </button>
-                <!-- Repeat -->
-                <button class="tw-text-[#3F3F46] tw-transition-colors tw-mr-3"
-                    :class="`${isPlaybackRepeatOn ? 'dark:tw-text-white' : 'dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'}`"
-                    @click.prevent="handleRepeatToggle" title="Loop">
+                <!-- Repeat Video -->
+                <button v-if="!isPlaybackPlaylistRepeatOn && isPlaybackRepeatOn"
+                    class="tw-text-[#3F3F46] tw-transition-colors tw-mr-3 dark:tw-text-white"
+                    @click.prevent="handleRepeatToggle" title="Loop Video">
+                    <MusoraIcon icon-name="repeat-video" class="tw-h-[22px] tw-w-[22px]" width="22" height="22"
+                        viewBox="0 0 22 22" />
+                </button>
+                <!-- Repeat Playlist -->
+                <button v-if="!isPlaybackRepeatOn" class="tw-text-[#3F3F46] tw-transition-colors tw-mr-3"
+                    :class="`${isPlaybackPlaylistRepeatOn ? 'dark:tw-text-white' : 'dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'}`"
+                    @click.prevent="handlePlaylistRepeatToggle" title="Loop Playlist">
                     <MusoraIcon icon-name="repeat" class="tw-h-[22px] tw-w-[22px]" width="22" height="22"
                         viewBox="0 0 22 22" />
                 </button>
