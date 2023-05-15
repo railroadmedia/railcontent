@@ -26,7 +26,7 @@
                 />
             </div>
             <h2 class="font-extrabold mb-4">@yield('header')</h2>
-            <p class="md:mb-10">@yield('desc')</p>
+            <p class="md:mb-10 px-4 lg:px-0">@yield('desc')</p>
         </div>
         <picture>
             <source media="(min-width: 500px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/@yield('header-img')">
