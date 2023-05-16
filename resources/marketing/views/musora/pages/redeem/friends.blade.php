@@ -60,16 +60,16 @@
         }
 
         .apply {
-            background:#00060B;
-            border-radius:70px;
-            color:#FFF;
-            font:400 28px/60px "Bebas Neue", sans-serif;
-            text-transform:uppercase;
-            height:60px;
-            width:100%;
-            margin:20px auto 0;
-            border:none;
-            cursor:pointer;
+            background: #00060B;
+            border-radius: 70px;
+            color: #FFF;
+            font: 400 20px/1em "Bebas Neue", sans-serif;
+            text-transform: uppercase;
+            width: 100%;
+            margin: 20px auto 0;
+            border: none;
+            cursor: pointer;
+            padding: 16px 0;
         }
 
         input[type="text"],
@@ -223,7 +223,7 @@
                             <a class="w-full join bg-black smaller mb-2 text-[22px] font-bebas text-center font-normal tracking-widest py-4 anchor-slide" href="#redeem">
                                 Redeem your pass
                             </a>
-                            <p class="text-sm"><i>No credit card required.</i></p>
+                            <p class="text-xs"><i>Try it for free. No credit card is required.</i></p>
                         </div>
                     </div>
                 </div>
@@ -469,11 +469,13 @@
                         <p class="input-describer">Confirm Password</p>
                         <input class="default-form-field" type="password" id="password_confirmation" name="password_confirmation" placeholder="Confirm Password" value="">
                         <div class="text-center">
-                            <input name="button" type="submit" id="button" class="apply hover:opacity-80 bg-white text-black lg:w-1/2 mb-5" value="Redeem your pass"/>
-                            <p>
-                                <b>** Musora 30-Day Access passes are for new students only. ** </b><br>
-                                Cannot be redeemed for renewals, upgrades, or extensions.
+                            <input name="button" type="submit" id="button" class="apply hover:opacity-80 transition-opacity bg-white text-black lg:w-2/3" value="Redeem your pass"/>
+                            <p class="text-xs mt-3 mb-5">
+                                <em>No purchase is required. Try it for free.</em>
                             </p>
+                            <p class="leading-tight opacity-60"><em>
+                                    <b>** 30-Day Access Passes are for new students only. **</b><br>
+                                    Cannot be redeemed for renewals, upgrades, or extensions.</em></p>
                         </div>
                     </form>
                 </div>
