@@ -56,10 +56,12 @@
         const title = props.data.title;
         const album = props.data.album;
         const thumbnail = props.data.thumbnail_url;
+        const message = props.data.need_access_message;
         state.thumbnail = props.data.type === 'assignment' ? props.data.thumbnail_url : thumbnail;
         state.title = title ? title : '';
         state.album = album ? album : '';
         state.packTitle = props.data.type === 'song' ? '' : props.data.parent_title;
+        state.message = message ? message: '';
     })
 </script>
 
@@ -68,18 +70,21 @@
         <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-3">
             Content Unavailable
         </h2>
-        <template v-if="!isSong">
-            <p class="dark:tw-text-white tw-text-center tw-mb-4">
-                <span class="tw-font-bold tw-whitespace-nowrap">{{ state.title }}</span>
-                is part of a premium pack
-                <span class="tw-font-bold tw-whitespace-nowrap">{{ state.packTitle }}</span>.
-            </p>
-        </template>
-        <template v-else>
-            <p class="dark:tw-text-white tw-text-center tw-mb-4">
-                This Song content is part of our Musora+ Membership
-            </p>
-        </template>
+        <p class="dark:tw-text-white tw-text-center tw-mb-4">
+        <span class="lg:tw-line-clamp-2" v-html="state.message"></span>
+        </p>
+<!--        <template v-if="!isSong">-->
+<!--            <p class="dark:tw-text-white tw-text-center tw-mb-4">-->
+
+
+<!--                <span class="tw-font-bold tw-whitespace-nowrap">{! state.message !}</span>-->
+<!--            </p>-->
+<!--        </template>-->
+<!--        <template v-else>-->
+<!--            <p class="dark:tw-text-white tw-text-center tw-mb-4">-->
+<!--                This Song content is part of our Musora+ Membership-->
+<!--            </p>-->
+<!--        </template>-->
         <!-- Lesson Thumbnail -->
         <div class="tw-relative tw-inline-flex tw-overflow-hidden tw-rounded tw-shrink-0 tw-mb-8"
              :class="!isSong ? 'tw-aspect-video tw-w-[175px]' : 'tw-aspect-square tw-w-[120px]'"
