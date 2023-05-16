@@ -955,7 +955,10 @@ class CustomerIoSyncEventListener
                     'subscription_type' => $subscription ? $subscription->getType() : null,
                     'payment_plan_id' => $payment->getId(),
                     'status' => $payment->getStatus(),
-                    'brand' => $payment->getGatewayName()
+                    'brand' => $payment->getGatewayName(),
+                    'payment_source' => $payment->getExternalProvider(),
+                    'payment_info' => $payment->getMessage(),
+                    'payment_timestamp' => $payment->getCreatedAt()->timestamp
                 ];
                 if ($userId) {
                     dispatch(
