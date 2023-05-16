@@ -143,8 +143,8 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 )
                 ) && (isset($grupedPermissions[$content['id']]));
 
-            $needLifetime = (count($contentPermissionRows) == 1) && array_intersect(
-                    ['Drumeo Lifetime Member'],
+            $needLifetime = (count($grupedPermissions[$content['id']]??[]) == 1) && array_intersect(
+                    ['Drumeo Lifetime Member','Pianote Lifetime Member','Guitareo Lifetime Member','Singeo Lifetime Member'],
                     (isset($grupedPermissions[$content['id']])) ?
                         $grupedPermissions[$content['id']]->pluck('name')
                             ->toArray() : []
