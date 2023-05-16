@@ -5,14 +5,14 @@
 @extends('musora._partials._features-layout')
 
 @section('head-includes')
-    <title></title>
-    <meta property="og:title" content="TODO">
+    <title>Musora - Your musical goals start here.</title>
+    <meta property="og:title" content="Musora - Your musical goals start here.">
 
-    <meta name="description" content="TODO">
-    <meta property="og:description" content="TODO">
+    <meta name="description" content="Always know exactly what to practice with structured video lessons and courses featuring many of the world’s best teachers.">
+    <meta property="og:description" content="Always know exactly what to practice with structured video lessons and courses featuring many of the world’s best teachers.">
 
-    <meta property="og:url" content="https://www.musora.com/method">
-    <meta property="og:image" content="TODO">
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/method/header-image.jpg">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
@@ -113,7 +113,9 @@
 
 @section('header', 'Your musical goals start here.')
 
-@section('desc', 'Always know exactly what to practice with structured video lessons and courses featuring many of the world’s best teachers.')
+@section('desc')
+    Always know exactly what to practice with structured video lessons<br class="hidden sm:inline"> and courses featuring many of the world’s best teachers.
+@endsection
 
 <!-- Main -->
 @section('page-body')
@@ -327,7 +329,7 @@
                                             onload="this.classList.remove('opacity-0')"
                                             alt="lesson{{$key+1}} img"
                                         >
-                                        <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:TODO"></div>
+                                        <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:linear-gradient(180deg, #703d99 0%, rgba(0, 0, 0, 0.5) 100%);"></div>
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
                                                 <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-white.png" alt="singeo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
@@ -351,7 +353,7 @@
     <section class="py-10 sm:py-14 lg:py-20" x-data="{ category: 'all', }">
         <div class="container max-w-6xl lg:ml-auto lg:mr-0 xl:mx-auto px-6 xl:px-0">
             <h3 class="text-center leading-tight mb-5"><strong>Learn every technique, style & pattern.</strong></h3>
-            <div class="text-center">
+            <div class="text-center mb-6">
                 <span class="uppercase btn-primary btn-small mr-1 md:mr-2 px-5 sm:px-8 md:px-12" :class="category.includes('all') ? 'bg-black text-white' : 'text-black border-black'" @click="category = 'all'">all</span>
                 <span class="uppercase btn-primary btn-small md:mr-2 mb-2 md:mb-0 px-8 md:px-12" :class="category.includes('drumeo') ? 'bg-black text-white' : 'text-black border-black'" @click="category = 'drumeo'">drums</span> <br class="md:hidden">
                 <span class="uppercase btn-primary btn-small mr-1 md:mr-2 px-5 sm:px-8 md:px-12" :class="category.includes('pianote') ? 'bg-black text-white' : 'text-black border-black'" @click="category = 'pianote'">piano</span>
@@ -1261,7 +1263,7 @@
     ])
 
     @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
+            "plusLogo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
             "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
             "songs" => "5000",
             "firstPoint" => "The world’s best drum lessons.",

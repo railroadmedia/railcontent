@@ -7,7 +7,7 @@
             onload="this.classList.remove('opacity-0')"
             src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{!! $badge !!}" alt="guarantee-badge">
         <h3 class="leading-tight">{!! $header !!}</h3>
-        <p class="leading-normal md:leading-loose my-4 sm:my-7">{!! $desc !!}</p>
+        <p class="leading-normal md:leading-loose my-4 sm:my-7 max-w-4xl mx-auto">{!! $desc !!}</p>
         <div class="flex flex-wrap items-start justify-center">
             <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
                 <h5 class="@if($theme === 'musora') text-black border-black @else text-{{ $theme }} border-{{ $theme }} @endif border-2 rounded-full inline-block @if($theme === 'musora') py-1 @else py-2 @endif px-3 mb-1">1</h5>
