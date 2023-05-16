@@ -6,13 +6,13 @@
 
 @section('head-includes')
     <title></title>
-    <meta property="og:title" content="">
+    <meta property="og:title" content="TODO">
 
-    <meta name="description" content="">
-    <meta property="og:description" content="">
+    <meta name="description" content="TODO">
+    <meta property="og:description" content="TODO">
 
     <meta property="og:url" content="https://www.musora.com/method">
-    <meta property="og:image" content="">
+    <meta property="og:image" content="TODO">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
@@ -109,7 +109,7 @@
     </style>
 @endsection
 
-@section('header-img', 'https://musora-center.s3.amazonaws.com/method/header-image.jpg')
+@section('header-img', 'https://dmmior4id2ysr.cloudfront.net/method/header-image.jpg')
 
 @section('header', 'Your musical goals start here.')
 
@@ -162,7 +162,7 @@
                                         <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:linear-gradient(180deg, #85001E 0%, rgba(0, 0, 0, 0.5) 100%);"></div>
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
-                                                <img class="h-4 -mr-2" src="https://musora-center.s3.amazonaws.com/logos/pianote-logo-white.png" alt="pianote logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
+                                                <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/pianote-logo-white.png" alt="pianote logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
                                             </div>
                                             LEVEL {{ $key+1 }}
                                         </div>
@@ -218,7 +218,7 @@
                                         <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:linear-gradient(180deg, #05816F 0%, rgba(0, 0, 0, 0.5) 100%);"></div>
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
-                                                <img class="h-4 -mr-2" src="https://musora-center.s3.amazonaws.com/logos/guitareo-logo-white.png" alt="guitareo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
+                                                <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/guitareo-logo-white.png" alt="guitareo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
                                             </div>
                                             LEVEL {{ $key+1 }}
                                         </div>
@@ -274,7 +274,7 @@
                                         <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:linear-gradient(180deg, #095399 0%, rgba(0, 0, 0, 0.5) 100%);"></div>
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
-                                                <img class="h-4 -mr-2" src="https://musora-center.s3.amazonaws.com/logos/drumeo-logo-white.png" alt="drumeo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
+                                                <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/drumeo-logo-white.png" alt="drumeo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
                                             </div>
                                             LEVEL {{ $key+1 }}
                                         </div>
@@ -330,7 +330,7 @@
                                         <div class="absolute inset-0 rotate-180 rounded-b-xl" style="background:TODO"></div>
                                         <div class="absolute inset-0 flex flex-col justify-center items-center text-white text-5xl font-extrabold">
                                             <div>
-                                                <img class="h-4 -mr-2" src="https://musora-center.s3.amazonaws.com/logos/singeo-logo-white.png" alt="singeo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
+                                                <img class="h-4 -mr-2" src="https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-white.png" alt="singeo logo" /> <img class="h-4" src="https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method logo" style="filter:brightness(0) invert(1)" />
                                             </div>
                                             LEVEL {{ $key+1 }}
                                         </div>
@@ -586,7 +586,7 @@
     </section>
 
     @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://musora-center.s3.amazonaws.com/logos/guarantee.jpg',
+        'badge' => 'https://dmmior4id2ysr.cloudfront.net/logos/guarantee.jpg',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
     ])
