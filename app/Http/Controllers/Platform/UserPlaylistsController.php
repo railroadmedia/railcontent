@@ -70,7 +70,7 @@ class UserPlaylistsController extends BaseController
     public function index(Request $request)
     {
         $page = $request->get('page', 1);
-        $limit = $request->get('limit', 10);
+        $limit = $request->get('limit', 12);
         $term = $request->get('search');
 
         $lessons = $this->userPlaylistsService->getUserPlaylist(
@@ -200,6 +200,12 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
             }
         }
+        $totalItems = $this->userPlaylistsService->countUserPlaylistContents(
+            $playlistId
+        );
+        $playlist['completed_items'] = $items->where('completed',true)->count();
+        $playlist['total_items'] = $totalItems;
+
         $items = new ContentFilterResultsEntity([
                                                     'results' => $playlistItems,
                                                 ]);
@@ -211,9 +217,7 @@ class UserPlaylistsController extends BaseController
             'currentUser' => user(),
             "noResultsMessage" => 'Nothing here yet! Start adding videos',
             "brand" => brand(),
-            'totalItems' => $this->userPlaylistsService->countUserPlaylistContents(
-                $playlistId
-            ),
+            'totalItems' => $totalItems
         ]);
     }
 
