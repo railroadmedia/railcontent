@@ -2,16 +2,38 @@
 
 namespace App\Collections;
 
+use App\Modules\Content\Services\CohortService;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Railroad\Railcontent\Entities\ContentEntity;
 
 class PackCollection extends Collection
 {
-    public function sortByUserActivity($userId, $direction = 'desc')
+    private CohortService $cohortService;
+
+    public function __construct($items = [])
     {
+        parent::__construct($items);
+        $this->cohortService = $cohortService = app()->make(CohortService::class);
+    }
+
+    public function sortPacks($userId, $direction = 'desc')
+    {
+        $activeContentId = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
+
         return $this->sort(
-            function (ContentEntity $a, ContentEntity $b) use ($direction, $userId) {
+            function (ContentEntity $a, ContentEntity $b) use ($direction, $userId, $activeContentId) {
+                //active cohort sort
+                if ($activeContentId > 0) {
+                    if ($a['id'] == $activeContentId) {
+                        return -1;
+                    }
+                    if ($b['id'] == $activeContentId) {
+                        return 1;
+                    }
+                }
+
+                //user activity sort
                 if (!empty($a['user_progress'][$userId]['updated_on'])
                     && !empty($b['user_progress'][$userId]['updated_on'])
                 ) {

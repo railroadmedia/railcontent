@@ -4,7 +4,7 @@ use Railroad\Railcontent\Services\ContentService;
 
 return [
     'cache_duration' => 60 * 12,
-    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY','musora_laravel_mysql_writer_only'),
+    'database_connection_name' => env('DB_MUSORA_LARAVEL_MYSQL_WRITER_ONLY', 'musora_laravel_mysql_writer_only'),
     'connection_mask_prefix' => 'railcontent_',
     'data_mode' => env('RAILCONTENT_DATA_MODE', 'host'),
 
@@ -155,12 +155,12 @@ return [
 
     'search_index_values' => [
         'high_value' => [
-            'content_attributes' => ['slug','title',],
+            'content_attributes' => ['slug','title'],
             'field_keys' => ['instructor:name', 'artist', 'album'],
             'data_keys' => [],
         ],
         'medium_value' => [
-            'content_attributes' => [],
+            'content_attributes' => ['type'],
             'field_keys' => ['*'],
             'data_keys' => [],
         ],
@@ -494,7 +494,7 @@ return [
                 'sortBy' => '-published_on',
             ],
             'quick-tips' => [
-                'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/show-quick-tips.jpg',
+                'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/78e68540-2b93-4445-882c-a19eef6b5d00/public',
                 'name' => 'Quick Tips',
                 'icon' => 'icon-shows',
                 'description' => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice. ",
@@ -683,7 +683,7 @@ return [
                 "name" => "Play Alongs",
                 "icon" => "icon-play-alongs",
                 "description" => "Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.",
-                "allowableFilters" => ['bpm', 'style','difficulty'],
+                "allowableFilters" => ['bpm', 'style', 'difficulty'],
             ],
         ],
         'pianote' => [
@@ -733,7 +733,7 @@ return [
             ],
             'quick-tips' => [
                 'name' => 'Quick Tips',
-                'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/pianote/quick-tips-red.jpg',
+                'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/7979495d-d06a-4f78-161f-2f670f6f9800/public',
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
                 'shortname' => 'Quick Tips',
@@ -861,7 +861,7 @@ return [
                 "allowableFilters" => ['difficulty', 'topic', 'progress', 'instructor'],
             ],
             'quick-tips' => [
-                'thumbnailUrl' => 'https://dmmior4id2ysr.cloudfront.net/assets/images/guitareo-header.jpg',
+                'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/297dc5b4-e878-4238-d5b5-ed0588ee0b00/public',
                 "name" => "Quick Tips",
                 "shortname" => "quick-tips",
                 "icon" => "icon-shows",
@@ -922,7 +922,7 @@ return [
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
             ],
             'quick-tips' => [
-                'thumbnailUrl' => 'https://musora-web-platform.s3.amazonaws.com/headers/singeo-header.jpg',
+                'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/8464033e-9b4e-458e-d613-e89fb47e2a00/public',
                 "name" => "Quick Tips",
                 "icon" => "icon-shows",
                 "description" => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice.",
@@ -1181,7 +1181,7 @@ return [
         'quick-tips',
         'song-tutorial',
         'song-tutorial-children',
-        'rudiment'
+        'rudiment',
     ],
     'hiddenContentTypes' => [
         'ha-oemurd-pmac',
@@ -1297,7 +1297,7 @@ return [
         'soundslice_xml_file_url',
         'original_video',
         'low_video',
-        'high_video'
+        'high_video',
     ],
 
     // field key => column name
@@ -1372,7 +1372,7 @@ return [
         'published_on' => 'published_on',
         'created_on' => 'created_on',
         'archived_on' => 'archived_on',
-        'instrument' => 'instrument'
+        'instrument' => 'instrument',
     ],
     'content_hierarchy' => [
         'drumeo' => [
@@ -1614,5 +1614,17 @@ return [
         'qna_video',
     ],
 
-    'compiled_columns_that_should_allow_dups' =>['sbt_exercise_number','sbt_bpm']
-];
+    'compiled_columns_that_should_allow_dups' => ['sbt_exercise_number', 'sbt_bpm'],
+
+    'cohort_icons' => [
+        'pianote' => [
+            "icon1_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/dd1c5c5b-c7c1-47d1-ecfb-9f05a548f200/public",
+            "icon2_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/17b5c92a-3e61-41d1-f282-e75d54888500/public",
+            "icon3_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/2cb4f469-9554-428d-47c9-97f4cd2fd900/public",
+        ],
+        'drumeo' => [
+            "icon1_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/3aa8f78e-332c-4afa-00e9-ab4eeb8c2900/public",
+            "icon2_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/0d3970c5-8a64-4276-4fff-dda0bcfb0900/public",
+            "icon3_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/60a5d4c0-6dce-4f12-b1cb-a47996be1500/public",
+        ],
+    ]];

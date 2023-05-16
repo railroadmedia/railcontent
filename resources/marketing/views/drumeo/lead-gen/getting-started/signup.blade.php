@@ -61,7 +61,7 @@
                 @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                     "formName" => 'Getting Started On The Drums',
-                    "buttonText" => "Get started for free ",
+                    "buttonText" => "Get started for free",
                     'stacked' => true,
                     'inputBorder' => '1px solid #7A8491',
                     "redirectURL" => "/getting-started/thank-you/"

@@ -194,18 +194,33 @@
     @endphp
 
     @if(empty($hideHeader) || !$hideHeader)
-        @include('musora.sales.components.header-section', [
-            'header' => 'Online piano lessons for all skill levels.',
-            'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
-            'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
-            'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
-            'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
-            'pointOne' => 'Improve Your Skills',
-            'pointTwo' => 'World-Class Teachers',
-            'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
-            'students' => number_format(Prices::$students),
-        ])
+        @if(!empty($beginnerVersion))
+            @include('musora.sales.components.header-section', [
+                'header' => 'Online piano lessons tailored for beginners.',
+                'desc' => 'Learn the piano faster with step-by-step lessons, friendly teachers, and songs perfect for your skill level.',
+                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
+                'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
+                'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
+                'pointOne' => 'Perfect for Beginners',
+                'pointTwo' => 'Super-Friendly Teachers',
+                'pointThree' => 'Fun Lessons',
+                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
+                'students' => number_format(Prices::$students),
+            ])
+        @else
+            @include('musora.sales.components.header-section', [
+                'header' => 'Online piano lessons for all skill levels.',
+                'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
+                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
+                'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
+                'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
+                'pointOne' => 'Improve Your Skills',
+                'pointTwo' => 'World-Class Teachers',
+                'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
+                'students' => number_format(Prices::$students),
+            ])
+        @endif
     @endif
 
     @hasSection('promo-banner')
@@ -549,7 +564,7 @@
             "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
             "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
             "songs" => "1000",
-            "firstPoint" => "Unlimited piano lessons",
+            "firstPoint" => "Unlimited piano lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, guitar, and drums.",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",

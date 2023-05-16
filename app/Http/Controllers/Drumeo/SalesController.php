@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 
 use Railroad\Ecommerce\Entities\User;
+use Railroad\Ecommerce\Services\AccessCodeService;
 use Railroad\Ecommerce\Services\UserProductService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -63,21 +64,31 @@ class SalesController extends BaseController
      */
     private $orderEventListener;
 
+    private AccessCodeService $accessCodeService;
+
+    /**
+     * @param AccessCodeService $accessCodeService
+     */
+
     /**
      * MarketingController constructor.
      *
      * @param  DatabaseManager $databaseManager
      * @param  ProductRepository $productRepository
      * @param  OrderEventListener $orderEventListener
+     * @param  AccessCodeService $accessCodeService
      */
     public function __construct(
         DatabaseManager $databaseManager,
         ProductRepository $productRepository,
-        OrderEventListener $orderEventListener
+        OrderEventListener $orderEventListener,
+        AccessCodeService $accessCodeService
     ) {
         $this->databaseManager = $databaseManager;
         $this->productRepository = $productRepository;
         $this->orderEventListener = $orderEventListener;
+        $this->accessCodeService = $accessCodeService;
+
     }
 
     public function home()
@@ -86,6 +97,13 @@ class SalesController extends BaseController
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo']);
+    }
+    public function fasterFeet()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.faster-feet', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true]);
     }
     public function homeMonth()
     {
@@ -101,12 +119,26 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
     }
+    public function trialSplit()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.subscription-split', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
+    }
     public function promo()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
+    }
+    public function choosePlanVDF()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.pages.vdf', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function choosePlan()
     {
@@ -180,13 +212,6 @@ class SalesController extends BaseController
 
         return view('drumeo.products.quietkick', ['products' => $products, 'theme' => 'drumeo']);
     }
-    public function quietKickMembers()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.products.quietkick-members', ['products' => $products, 'theme' => 'drumeo']);
-    }
     public function eardrums()
     {
         $products = $this->productRepository->all();
@@ -203,6 +228,20 @@ class SalesController extends BaseController
         $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-drummer', [
+            'nPackOwners' => $nPackOwners,
+            'theme' => 'drumeo',
+            'hasProduct' => $hasProduct
+        ]);
+    }
+    public function thirtyDayChops()
+    {
+        $productId = 733;
+        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
+        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
+        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+
+        return view('drumeo.products.30-day-chops', [
             'nPackOwners' => $nPackOwners,
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct
@@ -296,6 +335,14 @@ class SalesController extends BaseController
     public function sonor()
     {
         return view('drumeo.sales.pages.sonor');
+    }
+
+    public function alesis(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
 
     public function coachTrial(Request $request, $domain, $pageC = null)

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Platform\CoachPagesController;
+use App\Http\Controllers\Platform\CohortPackController;
 use App\Http\Controllers\Platform\ContentPagesController;
 use App\Http\Controllers\Platform\ExpiredMemberController;
 use App\Http\Controllers\Platform\ForumPagesController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\Platform\PackPagesController;
 use App\Http\Controllers\Platform\PaymentMethodUpdateController;
 use App\Http\Controllers\Platform\ProfilePublicPagesController;
 use App\Http\Controllers\Platform\ProfileSettingsPagesController;
+use App\Http\Controllers\Platform\RedirectController;
 use App\Http\Controllers\Platform\ReferralPagesController;
 use App\Http\Controllers\Platform\SongsUpgradeController;
 use App\Http\Controllers\Platform\SupportController;
@@ -34,7 +36,7 @@ Route::domain('{musoraDomain}')
                 Route::get('/{brand}', [HomePageController::class, 'home'])
                     ->whereIn('brand', all_brands())
                     ->name('platform.home');
-                
+
                 Route::get(
                     '/redirect30day',
                     [\App\Http\Controllers\Platform\HomePageController::class, 'redirect30day']
@@ -277,6 +279,10 @@ Route::domain('{musoraDomain}')
         Route::get('/members/notifications', [HomePageController::class, 'notificationsRedirect'])
             ->whereIn('brand', all_brands())
             ->name('platform.notifications-redirect');
+
+        Route::get('/purchase-redirect/{brand}', [RedirectController::class, 'redirectPurchase'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.purchase-redirect');
 
         /*
         * Onboarding
@@ -626,6 +632,15 @@ Route::domain('{musoraDomain}')
         )
             ->whereIn('brand', all_brands())
             ->name('platform.request-song');
+
+        Route::get('/{brand}/enrollment/{cohort}', [CohortPackController::class, 'template'])
+            ->name('platform.cohort');
+
+        Route::get('/{brand}/enrollment/{cohort}/purchased', [CohortPackController::class, 'purchased'])
+            ->name('platform.cohort.purchased');
+
+        Route::get('{brand}/cohort-packs/register/{product}', [CohortPackController::class, 'register'] )
+            ->name('platform.cohort.register');
     });
 
 /*
@@ -645,7 +660,11 @@ Route::get(
 )
     ->name('platform.apple-association-file');
 
-
+Route::get(
+    '/.well-known/assetlinks.json',
+    [\App\Http\Controllers\Misc\ManifestFilesController::class, 'androidAssociationFile']
+)
+    ->name('platform.android-association-file');
 
     Route::domain('{musoraDomain}')
     ->middleware(['web_authenticated'])

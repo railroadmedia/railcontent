@@ -27,7 +27,7 @@
         {!! \App\Analytics\Tracker::headBottom() !!}
     </head>
 
-    <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative">
+    <body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative" @yield('body-data')>
         {!! \App\Analytics\Tracker::bodyTop() !!}
         {{-- Notifications Container --}}
         <div id="notifications-container"></div>

@@ -18,7 +18,7 @@
         ],
         [
             'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/clavediddle.jpg',
-            'title' => 'Clavedidle',
+            'title' => 'Clavediddle',
             'desc' => 'This is one of Estepario’s favorites. This exercise incorporates a basic clave rhythm combined with double strokes to help you improve your speed with a musical twist.',
         ],
         [

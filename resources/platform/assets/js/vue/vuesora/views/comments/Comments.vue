@@ -1,25 +1,81 @@
 <template>
-    <div
-        id="commentsSection"
-        class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full"
-    >
-        <div class="tw-flex tw-flex-row tw-flex-wrap pt-3 tw-items-center">
-            <div class="tw-flex tw-flex-col xs-12 sm-9 tw-mb-3">
-                <h1 class="heading">
-                    {{ totalCommentsAndReplies }} Comments
-                </h1>
+    <div id="commentsSection" class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full">
+        <div class="tw-flex tw-flex-row tw-w-full tw-flex-wrap pt-3 tw-items-center">
+            <div class="tw-w-full tw-text-[#00101D] dark:tw-text-white tw-flex tw-items-center">
+                <!-- Preview Cards -->
+                <div class="tw-mr-4 tw-flex">
+                    <div v-if="comments.length > 0" class="tw-relative tw-h-[40px] tw-hidden lg:tw-block"
+                        :style="`${flattenedProfilePics.length > 1 ? 'width: 100px;' : 'width: 60px;'}`">
+                        <div class="tw-h-[40px] tw-absolute" v-for="(src, index) in (flattenedProfilePics.slice(0, 3))"
+                            :style="`margin-left: ${index * 20}px`">
+                            <img :src="src"
+                                :class="`tw-h-[40px] tw-w-[40px] tw-rounded-full tw-border-[1px] tw-border-${brand} tw-box-border`" />
+                        </div>
+                    </div>
+                </div>
+                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mr-auto">
+                    <span>{{ totalCommentsAndReplies }}</span>
+                    Comments
+                </h2>
+                <button v-if="collapsable" class="tw-uppercase tw-font-bebas-neue tw-flex tw-items-center tw-leading-none"
+                    @click="commentsCollapsed = !commentsCollapsed">
+                    Expand Comment Section
+                    <svg class="tw-ml-3 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
+                        :class="[{ 'tw-rotate-180': !commentsCollapsed }]" width="15" height="16" viewBox="0 0 15 16"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M13.0492 8.33329L7.21583 14.1666L1.38249 8.33329M13.0492 1.66663L7.21583 7.49996L1.38249 1.66663"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div v-if="!commentsCollapsed && collapsable" class="tw-flex tw-flex-col tw-w-full">
+            <!-- Post a Comment -->
+            <div id="postComment" class="tw-flex tw-flex-row comment-post mv-3">
+                <div class="tw-flex-col avatar-column tw-mr-[15px] tw-hidden md:tw-flex">
+                    <div class="user-avatar smaller" :class="avatarClassObject">
+                        <!-- User Avatar -->
+                        <img :src="currentUser.avatar" loading="lazy"
+                            class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                            :class="currentUser.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                            @load="currentUser.imageLoaded = true">
+                    </div>
+                    <p v-if="showUserExp" class="tw-text-sm dense tw-uppercase tw-text-center mt-1">
+                        {{ userExpRank }}
+                    </p>
+                    <p v-if="showUserExp" class="tw-text-sm dense tw-text-center font-compressed">
+                        {{ userExpValue }} XP
+                    </p>
+                </div>
+
+                <div class="tw-flex tw-flex-col tw-grow tw-w-full">
+                    <text-editor :fieldKey="contentId + '-comment-text-editor'" ref="textEditor" v-model="commentInterface"
+                        @input="handleInput" :height="150"></text-editor>
+
+                    <div class="tw-flex tw-flex-row tw-justify-end mv-1">
+                        <button class="btn collapse-150" :disabled="loading" dusk="submit-comment" @click="postComment">
+                            <span class="tw-text-white short" :class="themeBgClass">
+                                Comment
+                            </span>
+                        </button>
+                    </div>
+
+                    <div :class="loading ? 'tw-flex' : 'tw-hidden'"
+                        class="loading-reply tw-z-10 dark:tw-bg-[#000c17]/80 tw-flex-col tw-justify-center tw-items-center">
+                        <i class="fas fa-spinner fa-spin tw-mb-2" :class="themeTextClass"></i>
+                        <p class="tw-text-sm text-grey-3 dark:tw-text-white tw-font-bold">
+                            loading...
+                        </p>
+                    </div>
+                </div>
             </div>
 
-            <div class="tw-flex tw-flex-col xs-12 sm-4 md-3 tw-mb-3">
-                <div
-                    class="form-group xs-12"
-                    style="width:100%;"
-                >
-                    <select
-                        id="commentSort"
-                        class="dark:tw-text-white tw-pb-0 has-input"
-                        v-model="sortInterface"
-                    >
+            <!-- Sort -->
+            <div class="tw-ml-auto tw-mb-3">
+                <div class="form-group xs-12" style="width:100%;">
+                    <select id="commentSort" class="dark:tw-text-white tw-pb-0 has-input" v-model="sortInterface">
                         <option class="tw-text-[#00101D]" value="-like_count">
                             Popular
                         </option>
@@ -33,131 +89,29 @@
                             My Comments
                         </option>
                     </select>
-                    <label
-                        for="commentSort"
-                        :class="brandTextColor"
-                    >Sort By</label>
+                    <label for="commentSort" :class="brandTextColor">Sort By</label>
                 </div>
             </div>
+
+            <!-- Comments -->
+            <comment-post v-if="pinnedComment != null" :comment="pinnedComment" :brand="brand" :current-user="currentUser"
+                :pinned="true" :theme-color="themeColor" :profile-base-route="profileBaseRoute"
+                :has-public-profiles="hasPublicProfiles" :opened-comment-id="openedCommentId"
+                @likeComment="handleCommentLike" @likeReply="handleReplyLike" @deleteComment="handleCommentDelete"
+                @deleteReply="handleReplyDelete" @openLikes="addLikeUsersToModal"
+                @replyOpened="handleReplyOpened"></comment-post>
+
+            <comment-post v-for="(comment, i) in comments" :key="i" :comment="comment" :brand="brand"
+                :current-user="currentUser" :theme-color="themeColor" :profile-base-route="profileBaseRoute"
+                :has-public-profiles="hasPublicProfiles" :opened-comment-id="openedCommentId"
+                @likeComment="handleCommentLike" @likeReply="handleReplyLike" @deleteComment="handleCommentDelete"
+                @deleteReply="handleReplyDelete" @openLikes="addLikeUsersToModal"
+                @replyOpened="handleReplyOpened"></comment-post>
+
+            <comment-likes-modal :theme-color="themeColor" :brand="brand" :comment-id="currentLikeUsersId"
+                :like-users="likeUsers" :total-like-users="totalLikeUsers" :loading-like-users="loadingLikeUsers"
+                :requesting-like-users="requestingLikeUsers" @loadMoreLikeUsers="addLikeUsersToModal"></comment-likes-modal>
         </div>
-
-        <div
-            id="postComment"
-            class="tw-flex tw-flex-row comment-post mv-3"
-        >
-            <div class="tw-flex-col avatar-column tw-mr-[15px] tw-hidden md:tw-flex">
-                <div
-                    class="user-avatar smaller"
-                    :class="avatarClassObject"
-                >   
-                    <!-- User Avatar -->
-                    <img :src="currentUser.avatar"
-                         loading="lazy"
-                         class="tw-rounded-full tw-transition-opacity tw-duration-500"
-                         :class="currentUser.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
-                         @load="currentUser.imageLoaded = true"
-                    >
-                </div>
-                <p
-                    v-if="showUserExp"
-                    class="tw-text-sm dense tw-uppercase tw-text-center mt-1"
-                >
-                    {{ userExpRank }}
-                </p>
-                <p
-                    v-if="showUserExp"
-                    class="tw-text-sm dense tw-text-center font-compressed"
-                >
-                    {{ userExpValue }} XP
-                </p>
-            </div>
-
-            <div class="tw-flex tw-flex-col tw-grow tw-w-full">
-                <text-editor
-                    :fieldKey="contentId + '-comment-text-editor'"
-                    ref="textEditor"
-                    v-model="commentInterface"
-                    @input="handleInput"
-                    :height="150"
-                ></text-editor>
-
-                <div class="tw-flex tw-flex-row tw-justify-end mv-1">
-                    <button
-                        class="btn collapse-150"
-                        :disabled="loading"
-                        dusk="submit-comment"
-                        @click="postComment"
-                    >
-                        <span
-                            class="tw-text-white short"
-                            :class="themeBgClass"
-                        >
-                            Comment
-                        </span>
-                    </button>
-                </div>
-
-                <div
-                    :class="loading ? 'tw-flex' : 'tw-hidden' "
-                    class="loading-reply tw-z-10 dark:tw-bg-[#000c17]/80 tw-flex-col tw-justify-center tw-items-center"
-                >
-                    <i
-                        class="fas fa-spinner fa-spin tw-mb-2"
-                        :class="themeTextClass"
-                    ></i>
-                    <p class="tw-text-sm text-grey-3 dark:tw-text-white tw-font-bold">
-                        loading...
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <comment-post
-            v-if="pinnedComment != null"
-            :comment="pinnedComment"
-            :brand="brand"
-            :current-user="currentUser"
-            :pinned="true"
-            :theme-color="themeColor"
-            :profile-base-route="profileBaseRoute"
-            :has-public-profiles="hasPublicProfiles"
-            :opened-comment-id="openedCommentId"
-            @likeComment="handleCommentLike"
-            @likeReply="handleReplyLike"
-            @deleteComment="handleCommentDelete"
-            @deleteReply="handleReplyDelete"
-            @openLikes="addLikeUsersToModal"
-            @replyOpened="handleReplyOpened"
-        ></comment-post>
-
-        <comment-post
-            v-for="(comment, i) in comments"
-            :key="i"
-            :comment="comment"
-            :brand="brand"
-            :current-user="currentUser"
-            :theme-color="themeColor"
-            :profile-base-route="profileBaseRoute"
-            :has-public-profiles="hasPublicProfiles"
-            :opened-comment-id="openedCommentId"
-            @likeComment="handleCommentLike"
-            @likeReply="handleReplyLike"
-            @deleteComment="handleCommentDelete"
-            @deleteReply="handleReplyDelete"
-            @openLikes="addLikeUsersToModal"
-            @replyOpened="handleReplyOpened"
-        ></comment-post>
-
-        <comment-likes-modal
-            :theme-color="themeColor"
-            :brand="brand"
-            :comment-id="currentLikeUsersId"
-            :like-users="likeUsers"
-            :total-like-users="totalLikeUsers"
-            :loading-like-users="loadingLikeUsers"
-            :requesting-like-users="requestingLikeUsers"
-            @loadMoreLikeUsers="addLikeUsersToModal"
-        ></comment-likes-modal>
     </div>
 </template>
 <script>
@@ -185,8 +139,12 @@ export default {
     mixins: [ThemeClasses, CommentMixin],
     props: {
         contentId: {
-            type: Number,
+            type: [Number, String],
             default: () => '',
+        },
+        collapsable: {
+            type: Boolean,
+            default: true,
         },
     },
     data() {
@@ -197,6 +155,9 @@ export default {
             sortOption: '-like_count',
             comment: '',
             loading: false,
+            commentsCollapsed: true,
+            flattenedProfilePics: [],
+            commentsCollapsed: false,
         };
     },
     computed: {
@@ -266,9 +227,6 @@ export default {
             return this.userExpValue != null && (['team', 'pack'].indexOf(this.currentUser.access_level) === -1);
         },
     },
-    created() {
-        this.getComments(this.requestParams);
-    },
     mounted() {
         // Check the URI Params if 'goToComment' exists
         const uriParams = QueryString.parse(window.location.search);
@@ -277,11 +235,18 @@ export default {
             this.goToComment(uriParams.goToComment);
         }
 
-        window.addEventListener('scroll', () => {
-            const scrollPosition = window.pageYOffset + window.innerHeight;
-            const bodyHeight = document.body.scrollHeight;
+        const elem = document.getElementById('content-container');
 
-            if ((scrollPosition > bodyHeight - 200) && (this.comments.length !== this.totalComments)) {
+        elem.addEventListener('scroll', () => {
+            const elemHeight = elem.offsetHeight;
+            const elemScrollHeight = elem.scrollHeight;
+
+            // Get the current scroll position
+            const currentScroll = elem.scrollTop;
+
+            const relatedLessons = document.getElementById('lessonInfo');
+
+            if ((elemScrollHeight - currentScroll - elemHeight < (relatedLessons.offsetHeight + 200)) && (this.comments.length !== this.totalComments)) {
                 if (!this.requestingData) {
                     this.currentPage += 1;
 
@@ -289,17 +254,23 @@ export default {
                 }
             }
         });
+
+        this.getComments(this.requestParams);
     },
     methods: {
-        handleReplyOpened({id}) {
+        handleReplyOpened({ id }) {
             this.openedCommentId = id;
         },
         getComments(params, replace = false) {
             this.requestingData = true;
 
+            console.log('GETTING COMMENTSSSS')
+
             CommentService.getComments(params)
                 .then((resolved) => {
                     this.requestingData = false;
+
+                    console.log(resolved)
 
                     if (resolved) {
                         this.totalComments = resolved.meta ? resolved.meta.totalResults : resolved.total_results;
@@ -312,6 +283,16 @@ export default {
                                 (resolved.data || resolved.results),
                             );
                         }
+
+                        // Flatten comment profile pics
+                        this.comments.forEach(({ user, replies }) => {
+                            this.flattenedProfilePics.push(user['fields.profile_picture_image_url']);
+                            if (replies && replies.length) {
+                                replies.forEach(({ user: replyUser }) => {
+                                    this.flattenedProfilePics.push(replyUser['fields.profile_picture_image_url']);
+                                })
+                            }
+                        });
 
                         if (this.pinnedComment != null) {
                             this.comments = this.comments.filter(comment => comment.id !== this.pinnedComment.id);
@@ -368,7 +349,10 @@ export default {
                         const commentsSection = document.getElementById('postComment');
 
                         this.pinnedComment = resolved.data.find(result => result.id == id);
-                        this.pinnedComment.showAllReplies = true;
+
+                        if (this.pinnedComment) {
+                            this.pinnedComment.showAllReplies = true;
+                        }
 
                         /*
                             * Check intermittently for the DOM Element, it could possibly take a couple

@@ -9,6 +9,14 @@
             'shipping' => "no-shipping"
         ],
         [
+            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/quietkick_card.jpg',
+            'title' => 'Drumeo QuietKick',
+            'description' => 'Improve your kick foot anywhere with the portable & quiet bass drum workout pad. Attaches to any single OR double pedal (pedal not included).',
+            'price' => floatval($productPrices['quietkick']->price),
+            'online-ship' => "Free Shipping",
+            'shipping' => true,
+        ],
+        [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/pad.jpg',
             'title' => 'QuietPad',
             'description' => 'Practice anywhere with two full-size playing surfaces.',

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Musora;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Railroad\Ecommerce\Entities\AccessCode;
 use Railroad\Ecommerce\Services\AccessCodeService;
 
 class CodeRedemptionController extends BaseController
@@ -89,9 +90,17 @@ class CodeRedemptionController extends BaseController
             ->with(['success' => 'Your code has been sent to your email!']);
     }
 
-    public function renderNewAccountRedeemPage()
+    public function renderNewAccountRedeemPage(Request $request)
     {
-        return view('musora.pages.redeem.redeem-page', ['newAccount' => true]);
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function passRedeem()
+    {
+        return view('musora.pages.redeem.pass', ['newAccount' => true, 'theme' => 'black']);
     }
 
     public function renderNewAccountThomannRedeemPage()
@@ -99,9 +108,12 @@ class CodeRedemptionController extends BaseController
         return view('musora.pages.redeem.redeem-page', ['newAccount' => true, 'thomann' => true]);
     }
 
-    public function renderExistingAccountRedeemPage()
+    public function renderExistingAccountRedeemPage(Request $request)
     {
-        return view('musora.pages.redeem.redeem-page', ['newAccount' => false]);
+        return view('musora.pages.redeem.redeem-page', [
+            'newAccount' => false,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
 
     public function sweetwaterRedeemNewDrumeo()

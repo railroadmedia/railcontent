@@ -1,11 +1,17 @@
 <nav id="nav" class="top-bar row expanded">
     <div class="logo">
-        <a href="{{ get_legacy_brand_base_url('drumeo') }}">
+        <a
+            @if(!empty($logoUrl))
+                href="{{ $logoUrl }}"
+            @else
+                href="{{ get_legacy_brand_base_url('drumeo') }}"
+            @endif
+        >
             <img src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo">
         </a>
     </div>
 
-    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
+    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-1 w-0 @endif">
         <span></span>
         <span></span>
         <span></span>

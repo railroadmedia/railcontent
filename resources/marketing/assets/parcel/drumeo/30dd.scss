@@ -149,11 +149,22 @@ img {
     &.smaller {
         border-width: 2px;
         font-size: 24px;
-        padding: 17px;
+        padding: 15px 17px;
     }
 }
 
 .timeline-container {
+    &.dc30::after {
+        bottom: 17%;
+        @include tablet {
+            bottom: 11%;
+        }
+        @include desktop {
+            bottom: 12.5%;
+        }
+
+    }
+
     &::after {
         content: '';
         position: absolute;
@@ -176,7 +187,10 @@ img {
         top: 0;
         border-radius: 50%;
         z-index: 1;
-        left: 50%;
+        left: -16px;
+        @include tablet {
+            left: 50%;
+        }
     }
 }
 
