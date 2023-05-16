@@ -211,7 +211,7 @@
 {{--                        <div class="join white smaller absolute bottom-[38px] left-1 bg-white text-black text-sm py-2 px-4 font-normal font-bebas tracking-widest"><i class="fas fa-play"></i> Watch Trailer</div>--}}
                     </div>
                     <div class="px-5 sm:px-0">
-                        <h1 class="leading-tight">
+                        <h1 class="text-3xl sm:text-4xl lg:text-5xl">
                             <strong>Free music lessons</strong><br>
                             for 30 days.
                         </h1>
@@ -256,16 +256,18 @@
                     </div>
                     <div class="absolute inset-0 z-0 bg-black" style="opacity: 0.07;"></div>
                 </div>
+                <p class="mt-3 lg:mt-5 text-center"><em>Join <strong>{{ number_format(Prices::$students) }} active students</strong> worldwide in learning music.</em></p>
+
             </div>
         </div>
     </header>
 
     <section class="py-10 sm:py-14 lg:py-20 px-4 sm:px-6">
         <div class="container max-w-5xl mx-auto">
-            <h2 class="max-w-3xl mx-auto text-center mb-10"><strong>
-                    Here’s what you can expect with <br class="inline lg:hidden">
-                    your Musora 30-Day Access Pass:</strong></h2>
-            <div class="flex flex-wrap sm:items-start sm:justify-center text-left mb-2 sm:mb-6">
+            <h2 class="max-w-4xl mx-auto text-center mb-3"><strong>
+                    Unlock drums, piano, singing and guitar lessons today with your Musora 30-Day Access Pass.</strong></h2>
+            <p class="text-center mb-10">Here’s what you can expect:</p>
+            <div class="flex flex-wrap sm:items-start sm:justify-center text-left">
                 @php
                     $gridItems = [
                         [
