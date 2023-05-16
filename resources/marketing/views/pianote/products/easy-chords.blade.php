@@ -268,7 +268,7 @@
 
     <a href="#final" class="anchor-slide flex items-end justify-center px-2 sm:px-0 fixed w-full z-[100]" style="background: #d6e8fd;">
         <p class="font-bebas uppercase mx-0 py-2 leading-none">
-            GET A FREE CHORDS & SCALES BOOK UNTIL MAY 21.
+            GET A FREE CHORDS & SCALES BOOK UNTIL MAY 22.
             <br><span class="text-pianote"><span x-cloak x-data="timer2()" x-init="countdown2()"><span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                  <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
                                  <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
@@ -480,6 +480,7 @@
             </div>
         </div>
     </section>
+    <div id="demo" class="anchor"></div>
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-bg.jpg);">
         <h3 class="leading-tight"><strong>Go on, give it a try</strong></h3>
         <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">Curious? <strong>Try a snippet from Day 1</strong> and<br class="inline sm:hidden"> see if Easy Chords is right for you.</p>
@@ -712,7 +713,7 @@
         <div class="max-w-5xl mx-auto md:flex relative z-40">
             <div class="flex-1 text-white md:pr-4 lg:pr-0 mb-3 md:mb-0 max-w-md md:max-w-auto mx-auto">
                 <h5 class="uppercase mb-2 text-center md:text-left" style="color: #FFAE00;">
-                    AVAILABLE UNTIL May 21st<br>
+                    AVAILABLE UNTIL May 22nd<br>
                     <span x-cloak x-data="timer2()" x-init="countdown2()">
                                  <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                  <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
@@ -904,7 +905,7 @@
                 minuteText: ' minutes',
                 second: '00',
                 secondText: ' seconds',
-                endTime: new Date('2023-05-22 00:00:00').getTime(),
+                endTime: new Date('2023-05-23 00:00:00').getTime(),
                 startTime: new Date().getTime(),
                 timeLeft: 0,
                 smallScreen: false,

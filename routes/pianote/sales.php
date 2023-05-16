@@ -8,6 +8,7 @@ Route::domain('{pianoteDomain}')
     ->group(function () {
         Route::get('/', [SalesController::class, 'home'] );
         Route::get('/trial', [SalesController::class, 'trial'] );
+        Route::get('/trial-beginner', [SalesController::class, 'trialBeginner'] );
         Route::get('/trial-month', [SalesController::class, 'homeMonth'] );
         Route::get('/new-year', [SalesController::class, 'promo'] );
         Route::get('/lp', [SalesController::class, 'promo'] );
