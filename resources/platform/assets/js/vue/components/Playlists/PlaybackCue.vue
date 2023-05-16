@@ -3,6 +3,7 @@ import { onBeforeMount, onMounted, inject, ref, reactive, computed, nextTick } f
 import PlaylistService from '../../../services/playlists.js';
 import PlaylistCard from './Playlist/PlaylistCard.vue';
 import { usePlaylistsStore } from '../../../stores/playlists';
+import { usePageContainerStore } from '../../../stores/pageContainer';
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue'
 
 //Inject
@@ -10,6 +11,7 @@ const token = inject('csrf_token');
 
 //Pinia Stores
 const playlistsStore = usePlaylistsStore();
+const pageContainerStore = usePageContainerStore();
 
 //Emits
 const emit = defineEmits(['closeDropdown', 'pinItem', 'makePublic']);
@@ -212,28 +214,43 @@ onMounted(() => {
 </script>
 <template>
     <section
-        class="tw-z-10 tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] tw-mb-4">
+        class="tw-z-10 tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] "
+        :class="playlistsStore.playerExpanded ? 'tw-mb-0': 'tw-mb-4'"
+    >
         <!-- Header -->
-        <div
-            class="tw-flex tw-flex-col dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-py-[17px] tw-px-[10px] tw-sticky tw-top-0 tw-z-50 tw-min-h-[40px] tw-w-full ">
-            <div class="tw-flex">
-                <a :href="playlistUrl"
-                    class="tw-inline-flex tw-mr-auto tw-pb-1 tw-large tw-leading-tight tw-font-bold tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent hover:tw-border-current">
-                    {{ playlistName }}
-                </a>
-                <button class="tw-px-1 lg:tw-hidden" :title="state.collapsed ? 'Show Playback Cue' : 'Hide Playback Cue'"
-                    :class="state.collapsed ? 'tw-rotate-180' : ''" @click="state.collapsed = !state.collapsed">
-                    <i class="fas fa-chevron-down tw-text-[#00101D] dark:tw-text-white"></i>
-                </button>
+        <div class="tw-flex dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-px-[10px] tw-sticky lg:tw-relative tw-top-0 tw-z-50 tw-min-h-[40px] tw-w-full"
+             :class="playlistsStore.playerExpanded ? 'tw-flex-row tw-py-[10px] tw-items-center' : 'tw-flex-col tw-py-[17px]' "
+        >
+            <div>
+                <div class="tw-flex tw-items-start">
+                    <a :href="playlistUrl"
+                        class="tw-inline-flex tw-mr-auto tw-pb-1 tw-large tw-leading-tight tw-font-bold tw-text-[#00101D] dark:tw-text-white hover:tw-underline">
+                        {{ playlistName }}
+                    </a>
+                    <!-- Expand/Collapse -->
+                    <button class="tw-px-1 lg:tw-hidden" :title="state.collapsed ? 'Show Playback Cue' : 'Hide Playback Cue'"
+                        :class="state.collapsed ? 'tw-rotate-180' : ''" @click="state.collapsed = !state.collapsed">
+                        <i class="fas fa-chevron-down tw-text-[#00101D] dark:tw-text-white"></i>
+                    </button>
+                    <!-- Fullscreen -->
+                    <button class="tw-px-1 tw-hidden tw-text-[#445F74] hover:tw-text-black dark:hover:tw-text-white dark:tw-text-[#7E9AB1] tw-ml-1" 
+                            :class="{ 'lg:tw-inline-block' : !playlistsStore.playerExpanded }" 
+                            @click="pageContainerStore.isSidebarCollapsed = !pageContainerStore.isSidebarCollapsed; playlistsStore.playerExpanded = !playlistsStore.playerExpanded"
+                    >
+                        <i class="fas fa-up-right-and-down-left-from-center"></i>
+                    </button>
+                </div>
+                <!-- Cue Data -->
+                <p class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1">
+                    <span>{{ playlistItemPosition }}/{{ props.lessons?.meta?.totalResults }}</span>
+                    <span class="tw-mx-1">•</span>
+                    <span>{{ Math.floor(duration / 60) }} min</span>
+                </p>
             </div>
-            <!-- Cue Data -->
-            <p class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-mb-1">
-                <span>{{ playlistItemPosition }}/{{ props.lessons?.meta?.totalResults }}</span>
-                <span class="tw-mx-1">•</span>
-                <span>{{ Math.floor(duration / 60) }} min</span>
-            </p>
             <!-- CTAs -->
-            <div class="tw-flex">
+            <div class="tw-flex"
+                 :class="playlistsStore.playerExpanded ? 'tw-w-full tw-justify-center' : ''"
+            >
                 <!-- Prev Lesson -->
                 <a class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors tw-mr-3"
                     :href="prevLessonUrl" title="Previous">
@@ -275,9 +292,16 @@ onMounted(() => {
                     </svg>
                 </a>
             </div>
+            <!-- Exit Fullscreen -->
+            <button class="tw-px-1 tw-text-[#00101D] dark:tw-text-white tw-ml-1 tw-font-bebas-neue tw-flex tw-flex-nowrap tw-items-center" 
+                    :class="{ 'tw-hidden' : !playlistsStore.playerExpanded }" 
+                    @click="pageContainerStore.isSidebarCollapsed = !pageContainerStore.isSidebarCollapsed; playlistsStore.playerExpanded = !playlistsStore.playerExpanded"
+            >
+                Exit <i class="fas fa-xmark tw-ml-2"></i>
+            </button>
         </div>
         <!-- Items -->
-        <div v-if="playlistsStore.lessons.length" id="cue-scroll-container"
+        <div v-if="playlistsStore.lessons.length && !playlistsStore.playerExpanded" id="cue-scroll-container"
             class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-overflow-y-auto tw-relative"
             :class="state.collapsed ? 'tw-hidden lg:tw-block' : ''">
             <!-- Top Skeleton for offset For top Infinite Scroll -->

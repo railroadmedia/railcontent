@@ -257,6 +257,7 @@ onBeforeMount(() => {
     <div class="tw-w-full tw-h-full">
         <!-- Breadcrumbs -->
         <Breadcrumb 
+            :class="{'lg:tw-hidden': playlistsStore.playerExpanded }"
             :brand="brand" 
             :first-level-url="`/${brand}/playlists`" 
             first-level-title="Playlists"
@@ -266,10 +267,13 @@ onBeforeMount(() => {
         />
 
         <div
-            class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-flex-col 2xl:tw-flex-row tw-mb-4">
+            class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-mb-4 tw-flex-col "
+            :class="playlistsStore.playerExpanded ? '2xl:tw-flex-col-reverse' : '2xl:tw-flex-row' "
+        >
+            
             <div class="tw-flex tw-flex-col tw-w-full">
                 <!--Player Wrapper -->
-                <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
+                <div class="fluid tw-pb-3">                    
                     <!-- Soundslice Player -->
                     <div v-if="lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
                         class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
@@ -351,7 +355,9 @@ onBeforeMount(() => {
                 </div>
 
                 <!-- Comments Section -->
-                <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full tw-mb-4">
+                <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full tw-mb-4"
+                     :class="playlistsStore.playerExpanded ? 'lg:tw-hidden': ''"
+                >
                     <div class="tw-flex tw-flex-col tw-w-full">
                         <Comments :collapsable="true" :theme-color="brand" :brand="brand" :content-id="contentId"
                             :user-id="userId" :user-name="userName" :user-avatar="userAvatar" :user-xp="userXp"
@@ -364,7 +370,9 @@ onBeforeMount(() => {
                 <!-- Playback Cue -->
                 <div v-if="playlistItems.data && playlistItems.data.length" id="lessonInfo"
                     class="tw-flex tw-flex-row reverse tw-items-start">
-                    <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
+                    <div class="tw-flex tw-flex-col tw-w-full tw-my-4"
+                         :class="playlistsStore.playerExpanded ? 'tw-mb-0' : '2xl:tw-w-[420px] 2xl:tw-mt-0 2xl:tw-ml-4' "
+                    >
                         <playback-cue :autoplay="false" :repeat="false" :brand="brand" :lessons="playlistItems"
                             :playlist-name="playlistName" :duration="playlistDuration" :playlist-url="playlistUrl"
                             :playlist-item-id="playlistItemId" :playlist-id="playlistId" :infinite-scroll="true"
@@ -372,6 +380,7 @@ onBeforeMount(() => {
                             :prev-lesson-url="prevLessonUrl" :is-my-playlist="isMyPlaylist" :is-playback-cue="true" />
                     </div>
                 </div>
+
                 <!-- Related Playlists -->
                 <!-- <div v-if="relatedPlaylists.data && relatedPlaylists.data.length" id="lessonInfo"
                     class="tw-flex tw-flex-row reverse tw-items-start">
