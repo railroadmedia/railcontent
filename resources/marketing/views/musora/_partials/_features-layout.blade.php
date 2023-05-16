@@ -1,7 +1,7 @@
 @extends('musora._partials.layout')
 
 @section('layout-body')
-    <header class="pb-12 md:pb-0 md:pt-20 bg-[#111729] text-center text-white" @if($page === 'songs') x-data="{ brand: 'drumeo', drumeoSoundslice: false, pianoteSoundslice: false, guitareoSoundslice: false, singeoSoundsolice: false, } @endif">
+    <header class="pb-12 md:pb-0 md:pt-20 bg-[#111729] text-center text-white" @if($page === 'songs') x-data="{ brand: 'drumeo', drumeoSoundslice: false, pianoteSoundslice: false, guitareoSoundslice: false, singeoSoundslice: false, } @endif">
         @if($page === 'songs')
             @yield('header-mobileImg')
         @else
