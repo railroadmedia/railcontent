@@ -264,25 +264,25 @@
     </div>
 
     @include('_partials.components.video-modal',[
-        'name' => 'soundslice',
+        'name' => 'drumeoSoundslice',
         'video' => 'TODO',
         'soundslice' => true,
     ])
 
     @include('_partials.components.video-modal',[
-        'name' => 'soundslice',
+        'name' => 'pianoteSoundslice',
         'video' => 'TODO',
         'soundslice' => true,
     ])
 
     @include('_partials.components.video-modal',[
-        'name' => 'soundslice',
+        'name' => 'guitareoSoundslice',
         'video' => 'TODO',
         'soundslice' => true,
     ])
 
     @include('_partials.components.video-modal',[
-        'name' => 'soundslice',
+        'name' => 'singeoSoundslice',
         'video' => 'TODO',
         'soundslice' => true,
     ])
