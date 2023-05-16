@@ -582,6 +582,675 @@
                     @endcomponent
                 </div>
             </div>
+            <div class="mb-6">
+                <h4 class="font-extrabold mb-4">Essential Techniques</h4>
+                <div x-show="category === 'all'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($essentialAll as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+                <div x-show="category === 'drumeo'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($essentialDrumeo as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+                <div x-show="category === 'pianote'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($essentialPianote as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+                <div x-show="category === 'guitareo'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($essentialGuitareo as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+                <div x-show="category === 'singeo'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($essentialSingeo as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+            </div>
+            <div class="mb-6">
+                <h4 class="font-extrabold mb-4">Play More Creatively</h4>
+                <div x-show="category === 'all'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($playAll as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+                <div x-show="category === 'drumeo'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($playDrumeo as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+                <div x-show="category === 'pianote'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($playPianote as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+                <div x-show="category === 'guitareo'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($playGuitareo as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+                <div x-show="category === 'singeo'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($playSingeo as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+            </div>
+            <div class="mb-6">
+                <h4 class="font-extrabold mb-4">Or... Anything Else!</h4>
+                <div x-show="category === 'all'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($anythingAll as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+                <div x-show="category === 'drumeo'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($anythingDrumeo as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+                <div x-show="category === 'pianote'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($anythingPianote as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+                <div x-show="category === 'guitareo'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($anythingGuitareo as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+                <div x-show="category === 'singeo'">
+                    @component('_partials.components.carousel',[
+                        'xdata' => "
+                            classes: {
+                                arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11 top-[38%]',
+                                prev: 'hidden',
+                                next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
+                                pagination: 'hidden',
+                            },
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            gap: '0.5rem',
+                            interval: 2000,
+                            breakpoints: {
+                                900: {
+                                    perPage: 3.5,
+                                },
+                                700: {
+                                    perPage: 1.5,
+                                },
+                            },
+                        ",
+                    ])
+                        @slot('content')
+                            @foreach ($anythingSingeo as $slide)
+                                <li class="splide__slide" >
+                                    <div>
+                                        <div class="relative mb-2" style="padding-bottom: 56.25%;">
+                                            <img
+                                                class="rounded-xl w-full absolute w-full h-full object-cover object-top"
+                                                src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{$slide['img']}}"
+                                                alt="{{$slide['title']}} img"
+                                                fetchpriority="high"
+                                            >
+                                        </div>
+                                        <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
+                                        <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endslot
+                    @endcomponent
+                </div>
+            </div>
         </div>
     </section>
 
