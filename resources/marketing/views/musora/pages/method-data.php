@@ -506,3 +506,793 @@
             'artist' => 'Hailey Benedict',
         ],
     ];
+
+    $essentialAll = [
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/groove-essentials.jpg',
+            'title' => 'Groove Essentials',
+            'artist' => 'Tommy Igoe',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/222675-card-thumbnail-maxres-1553776379.jpg',
+            'title' => 'Looping',
+            'artist' => 'David Becker',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/270990-card-thumbnail-1601585477.png',
+            'title' => 'De-Stupefy Your Left Hand',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/pedal-control.jpg',
+            'title' => 'Pedal Control',
+            'artist' => 'Dom Famularo',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/altered-open-tunings.jpg',
+            'title' => 'Altered & Open Tunings',
+            'artist' => 'Don Ross',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/251493-card-thumbnail-1590085415.png',
+            'title' => 'Piano Technique Made Easy',
+            'artist' => 'Cassi Falk',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/294635-card-thumbnail-maxres-1617276103.png',
+            'title' => 'Getting Started On The Acoustic Guitar',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1665673710.jpg',
+            'title' => 'Beautiful Harmonies',
+            'artist' => 'Julia Ziegler',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/1920x1080-YT-1636217358.png',
+            'title' => 'Sing With Vibrato',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/hit-high-note-YT-1-1639770086.jpg',
+            'title' => 'Hit The High Notes',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/2022-10-7-days-QTmember-thumb-1920x1080 copy 2-1665700162.jpg',
+            'title' => '7 Days To Sight Reading',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/stick-control.jpg',
+            'title' => 'Stick Control',
+            'artist' => 'Dorothea Taylor',
+        ],
+    ];
+
+    $essentialDrumeo = [
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/subdivision-studies.jpg',
+            'title' => 'Subdivision Studies',
+            'artist' => 'Anika Nilles',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/pedal-control.jpg',
+            'title' => 'Pedal Control',
+            'artist' => 'Dom Famularo',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/groove-essentials.jpg',
+            'title' => 'Groove Essentials',
+            'artist' => 'Tommy Igoe',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/stick-control.jpg',
+            'title' => 'Stick Control',
+            'artist' => 'Dorothea Taylor',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/hand-technique.jpg',
+            'title' => 'Hand Technique',
+            'artist' => 'Bruce Becker',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/foot-technique.jpg',
+            'title' => 'Foot Technique',
+            'artist' => 'Gil Sharone',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/traditional-grip.jpg',
+            'title' => 'Traditional Grip',
+            'artist' => 'Emmanuelle Caplette',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/internal-synchronization.jpg',
+            'title' => 'Internal Synchronization',
+            'artist' => 'Billy Cobham',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/4-way-coordination.jpg',
+            'title' => '4-Way Coordination',
+            'artist' => 'Sarah Thawer',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/moeller-technique.jpg',
+            'title' => 'Moeller Technique',
+            'artist' => 'Henrique De Almeida',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/open-handed-drumming.jpg',
+            'title' => 'Open Handed Drumming',
+            'artist' => 'Claus Hessler',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/brush-technique.jpg',
+            'title' => 'Brush Technique',
+            'artist' => 'Steve Lyman',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/body-fulcrum.jpg',
+            'title' => 'The Body Fulcrum',
+            'artist' => 'Rodney Holmes',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/blast-beats.jpg',
+            'title' => 'Blast Beats',
+            'artist' => 'Ash Pearson',
+        ],
+    ];
+
+    $essentialPianote = [
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/251493-card-thumbnail-1590085415.png',
+            'title' => 'Piano Technique Made Easy',
+            'artist' => 'Cassi Falk',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/2022-10-7-days-QTmember-thumb-1920x1080 copy 2-1665700162.jpg',
+            'title' => '7 Days To Sight Reading',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/235188-card-thumbnail-maxres-1571671097.jpg',
+            'title' => 'Hanon Exercises',
+            'artist' => 'Cassi Falk',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/270990-card-thumbnail-1601585477.png',
+            'title' => 'De-Stupefy Your Left Hand',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080-17-1662344338.jpg',
+            'title' => 'Beautifully Simple Piano Arpeggios',
+            'artist' => 'Sangah Noona',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/235981-card-thumbnail-1572970416.jpg',
+            'title' => 'Faster Fingers',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/254040-card-thumbnail-1588192946.png',
+            'title' => 'Riffs & Fills',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/Screen-Shot-2018-12-28-at-9.23.47-AM-1.png',
+            'title' => 'Dexterity & Finger Strength',
+            'artist' => 'Cassi Falk',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/Db-Major-Bb-Minor-1667939903.jpg',
+            'title' => 'Adding Articulation',
+            'artist' => 'Cassi Falk',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/235004-card-thumbnail-maxres-1571237531.jpg',
+            'title' => 'Hand Independence',
+            'artist' => 'Lisa Witt',
+        ],
+    ];
+
+    $essentialGuitareo = [
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/294635-card-thumbnail-maxres-1617276103.png',
+            'title' => 'Getting Started On The Acoustic Guitar',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/290985-card-thumbnail-maxres-1614867316.png',
+            'title' => 'Getting Started On The Electric Guitar',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/altered-open-tunings.jpg',
+            'title' => 'Altered & Open Tunings',
+            'artist' => 'Don Ross',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/222675-card-thumbnail-maxres-1553776379.jpg',
+            'title' => 'Looping',
+            'artist' => 'David Becker',
+        ],
+        [
+            'img' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons/212a52c-picking-card-scaled@2x.jpg',
+            'title' => 'Picking',
+            'artist' => 'Nate Savage',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/qa-feb22-2022-1644338778.jpg',
+            'title' => 'Legato',
+            'artist' => 'Kent Shores',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/YT-thumb-1920x1080_2-1659614695.jpg',
+            'title' => 'Strumming Workouts',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/303027-card-thumbnail-maxres-1621854579.png',
+            'title' => 'Bending & Vibrato',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+    ];
+
+    $essentialSingeo = [
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/1920x1080-YT-1636217358.png',
+            'title' => 'Sing With Vibrato',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/hit-high-note-YT-1-1639770086.jpg',
+            'title' => 'Hit The High Notes',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1665673710.jpg',
+            'title' => 'Beautiful Harmonies',
+            'artist' => 'Julia Ziegler',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080-1658514141.jpg',
+            'title' => 'How To Sing A Duet',
+            'artist' => 'Tony Lindsay & Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080-1643857943.png',
+            'title' => 'Singing Runs',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/increase-vocal-range-YT-1-1633725013.png',
+            'title' => 'Increase Your Vocal Range',
+            'artist' => 'Lisa Witt',
+        ],
+    ];
+
+    $playAll = [
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/jazz-flow.jpg',
+            'title' => 'Improving Your Jazz Flow',
+            'artist' => 'Rob Brown',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/301043-card-thumbnail-maxres-1621412323.png',
+            'title' => 'Solo In An Hour',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-chops.jpg',
+            'title' => 'Drum Chops',
+            'artist' => 'Aaron Spears',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-solos.jpg',
+            'title' => 'Supercharged Drum Solos',
+            'artist' => 'Larnell Lewis',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/222675-card-thumbnail-maxres-1553776379.jpg',
+            'title' => 'Timing & Feel',
+            'artist' => 'David Becker',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-5-songwriting-cheatcodes-1640922846.png',
+            'title' => 'Songwriting Cheat Codes',
+            'artist' => 'Rob Scallon',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1645806170.jpg',
+            'title' => 'Find Your True Voice',
+            'artist' => 'Sheléa',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/lesson-1-1661895645.jpg',
+            'title' => 'The Power of Movement',
+            'artist' => 'Chris Johnson',
+        ],
+        [
+            'img' => 'https://i.vimeocdn.com/video/1540766373-8e1433a79d30a9370a8ec8b2d8c2995943f62fd039797a782e46567383b0a3ab-d_1280x720?r=pad',
+            'title' => 'Songwriting For Singers',
+            'artist' => 'Hailey Benedict',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/card-1661796221.jpg',
+            'title' => 'Musical Freedom & Improvisation',
+            'artist' => 'Jesús Molina',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1661753306.jpg',
+            'title' => 'The Perfect Arrangement',
+            'artist' => 'Summer Swee-Singh',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/card-1660318769.jpg',
+            'title' => 'The Power of Chords',
+            'artist' => 'Lisa Witt',
+        ],
+    ];
+
+    $playDrumeo = [
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-sound.jpg',
+            'title' => 'Elevate Your Drum Sound',
+            'artist' => 'Simon Phillips',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-chops.jpg',
+            'title' => 'Drum Chops',
+            'artist' => 'Aaron Spears',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/writing-drum-parts.jpg',
+            'title' => 'Writing Drum Parts',
+            'artist' => 'Hannah Welton',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/song-breakdowns.jpg',
+            'title' => 'Song Breakdowns',
+            'artist' => 'Matt McGuire',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/rudiments-patterns.jpg',
+            'title' => 'Rudiments & Patterns',
+            'artist' => 'Dorothea Taylor',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/creative-mindset.jpg',
+            'title' => 'The Creative Mindset',
+            'artist' => 'Aric Improta',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/musical-exercises.jpg',
+            'title' => 'Musical Exercises',
+            'artist' => 'Kaz Rodriguez',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-callibration.jpg',
+            'title' => 'Bass Drum Calibration',
+            'artist' => 'Gavin Harrison',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/crafting-drum-solos.jpg',
+            'title' => 'Crafting Drum Solos',
+            'artist' => 'Steve Smith',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/independence.jpg',
+            'title' => 'Independence',
+            'artist' => 'Thomas Lang',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/building-grooves.jpg',
+            'title' => 'Building Grooves',
+            'artist' => 'Taylor Gordon',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/timing.jpg',
+            'title' => 'Master Your Timing',
+            'artist' => 'Michael Schack',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/drum-solos.jpg',
+            'title' => 'Supercharged Drum Solos',
+            'artist' => 'Larnell Lewis',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/jazz-flow.jpg',
+            'title' => 'Improving Your Jazz Flow',
+            'artist' => 'Rob Brown',
+        ],
+    ];
+
+    $playPianote = [
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/313494-card-thumbnail-1628021741.png',
+            'title' => 'Playing Piano Beautifully',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/card-1661796221.jpg',
+            'title' => 'Musical Freedom & Improvisation',
+            'artist' => 'Jesús Molina',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1661753306.jpg',
+            'title' => 'The Perfect Arrangement',
+            'artist' => 'Summer Swee-Singh',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/257692-card-thumbnail-maxres-1591799927.png',
+            'title' => 'Creative Composition',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/223592-card-thumbnail-maxres-1555346439.jpg',
+            'title' => 'Pillars of Improvisation',
+            'artist' => 'Jordan Leibel',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/card-1660318769.jpg',
+            'title' => 'The Power of Chords',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/Creative+Songwriting.jpeg',
+            'title' => 'Creative Songwriting',
+            'artist' => 'Josh Dion',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/239133-card-thumbnail-maxres-1576165713.jpg',
+            'title' => 'Rhythmic Playing',
+            'artist' => 'Jay Oliver',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080-9-1656305766.jpg',
+            'title' => 'Improvise A Beautiful Melody',
+            'artist' => 'Jesús Molina',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/thumbnail_207814_279869259.jpeg',
+            'title' => 'How To Write A Song',
+            'artist' => 'Lisa Witt',
+        ],
+    ];
+
+    $playGuitareo = [
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/301043-card-thumbnail-maxres-1621412323.png',
+            'title' => 'Solo In An Hour',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-5-songwriting-cheatcodes-1640922846.png',
+            'title' => 'Songwriting Cheat Codes',
+            'artist' => 'Rob Scallon',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1648717349.jpg',
+            'title' => 'Rhythm & Groove',
+            'artist' => 'Sami Ghawi',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/222675-card-thumbnail-maxres-1553776379.jpg',
+            'title' => 'Timing & Feel',
+            'artist' => 'David Becker',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1664263514.jpg',
+            'title' => 'Musical Lanes',
+            'artist' => 'Mark Lettieri',
+        ],
+        [
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/add-power-to-your-playing-thumb.jpg',
+            'title' => 'Add Power To Your Playing',
+            'artist' => 'Dave Weiner',
+        ],
+        [
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/unlock-your-creativity-thumb.jpg',
+            'title' => 'Unlock Your Creativity',
+            'artist' => 'Yvette Young',
+        ],
+        [
+            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/the-anatomy-of-a-song-thumb.jpg',
+            'title' => 'The Anatomy of a Song',
+            'artist' => 'Pete Thorn',
+        ],
+    ];
+
+    $playSingeo = [
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080-1651618522.jpg',
+            'title' => 'How To Start Writing Songs',
+            'artist' => 'Cate Canning',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1661356818.jpg',
+            'title' => 'Composing Lyrics',
+            'artist' => 'Tony Lindsay',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/Members-1667579350.jpg',
+            'title' => 'Songwriting For Singers',
+            'artist' => 'Hailey Benedict',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/4-singer-types-YT-3-1637351288.jpg',
+            'title' => 'What Kind of Singer Are You?',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/the-right-mic-YT-1-1634326474.png',
+            'title' => 'How To Choose Your Microphone',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/Cate - The Easy Way To Record Your Voice-1651076365.jpg',
+            'title' => 'The Easy Way To Record Your Voice	',
+            'artist' => 'Cate Canning',
+        ],
+    ];
+
+    $anythingAll = [
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/Member-thumb-1920x1080-20-1663462925.jpg',
+            'title' => '4 Piano Songs For Beginners',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/Member-thumb-1920x1080-19-1663006709.jpg',
+            'title' => 'The Ultimate Guide To Ear Training',
+            'artist' => 'Kevin Castro',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080-7-1655093863.jpg',
+            'title' => 'How To Play A Walking Bass Line',
+            'artist' => 'Sangah Noona',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/294633-card-thumbnail-maxres-1616664547.png',
+            'title' => 'Beginner Guitar Chords',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/235823-card-thumbnail-maxres-1573750575.jpg',
+            'title' => 'Learn Songs By Ear',
+            'artist' => 'Nate Savage',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/shaping-up-the-neck-main-high.jpg',
+            'title' => 'Shaping Up The Neck',
+            'artist' => 'David Becker',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/start-end-songs.jpg',
+            'title' => 'How To Start & End Songs',
+            'artist' => 'Gregg Bissonette',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/double-bass.jpg',
+            'title' => 'Creative Double Bass',
+            'artist' => 'Ryan Van Poederooyen',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/hybrid-rudiments.jpg',
+            'title' => 'Hybrid Rudiments',
+            'artist' => 'Juan Mendoza',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/singing-starter-kit-thumb-1-1631644401.png',
+            'title' => 'Singing Starter Kit',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080-1655154442.jpg',
+            'title' => '7 Days To A Beautiful Voice',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080(1)-1654034666.jpg',
+            'title' => 'Ear Training For Singers',
+            'artist' => 'Julia Ziegler',
+        ],
+    ];
+
+    $anythingDrumeo = [
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/mindset.jpg',
+            'title' => 'The Drummer’s Mindset',
+            'artist' => 'Jared Falk',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/double-bass.jpg',
+            'title' => 'Creative Double Bass',
+            'artist' => 'Ryan Van Poederooyen',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/herta-madness.jpg',
+            'title' => 'Herta Madness',
+            'artist' => 'Glen Sobel',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/rhythmic-confidence.jpg',
+            'title' => 'Rhythmic Confidence',
+            'artist' => 'Mark Guiliana',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/tuning.jpg',
+            'title' => 'Drum Tuning',
+            'artist' => 'David Raouf',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/maintenance.jpg',
+            'title' => 'Maintenance & Repair',
+            'artist' => 'David Raouf',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/linear-singles.jpg',
+            'title' => 'Linear Singles',
+            'artist' => 'Alex Rüdinger',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/start-end-songs.jpg',
+            'title' => 'How To Start & End Songs',
+            'artist' => 'Gregg Bissonette',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/hybrid-rudiments.jpg',
+            'title' => 'Hybrid Rudiments',
+            'artist' => 'Juan Mendoza',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/by-ear.jpg',
+            'title' => 'Learn Songs By Ear',
+            'artist' => 'Rashid Williams',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/using-combinations.jpg',
+            'title' => 'Using Combinations',
+            'artist' => 'Marco Minnemann',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/tasty-combinations.jpg',
+            'title' => 'Tasty Combinations',
+            'artist' => 'Brian Frasier-Moore',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/moeller.jpg',
+            'title' => 'Moeller For Your Foot',
+            'artist' => 'Stan Bicknell',
+        ],
+        [
+            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/coaches/characteristics.jpg',
+            'title' => 'The Characteristics of Feel',
+            'artist' => 'Josh Dion',
+        ],
+    ];
+
+    $anythingPianote = [
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/Member-thumb-1920x1080-20-1663462925.jpg',
+            'title' => '4 Piano Songs For Beginners',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/Member-thumb-1920x1080-19-1663006709.jpg',
+            'title' => 'The Ultimate Guide To Ear Training',
+            'artist' => 'Kevin Castro',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080-7-1655093863.jpg',
+            'title' => 'How To Play A Walking Bass Line',
+            'artist' => 'Sangah Noona',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080-3-1653275943.jpg',
+            'title' => 'Speed Challenge',
+            'artist' => 'Jesús Molina',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080-2-1652426562.jpg',
+            'title' => 'Epic Intros & Outros',
+            'artist' => 'Jesús Molina',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080-2-1648147477.jpg',
+            'title' => 'Classical Piano Exercises',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/BeginnerPianistPracticeRoutine-02-1639597240.jpg',
+            'title' => 'Beginner Pianist Practice Routine',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/261376-card-thumbnail-maxres-1593428862.jpg',
+            'title' => 'Proper Posture At The Piano',
+            'artist' => 'Dr. Sean Kilgannon',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/240141-card-thumbnail-maxres-1575467562.jpg',
+            'title' => 'Don’t Think Like A Pianist',
+            'artist' => 'Jay Oliver',
+        ],
+    ];
+
+    $anythingGuitareo = [
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/sweep picking-1651731867.jpg',
+            'title' => 'Sweep Picking',
+            'artist' => 'Dean Lamb',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/303028-card-thumbnail-maxres-1622191902.jpg',
+            'title' => 'How To Quickly Learn A Song',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/294633-card-thumbnail-maxres-1616664547.png',
+            'title' => 'Beginner Guitar Chords',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/caged-thumb.jpg',
+            'title' => 'The CAGED System',
+            'artist' => 'Nate Savage',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/298219-card-thumbnail-maxres-1619082725.png',
+            'title' => 'Changing Chords',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/287255-card-thumbnail-maxres-1615194945.png',
+            'title' => 'Rock Guitar Licks',
+            'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/235823-card-thumbnail-maxres-1573750575.jpg',
+            'title' => 'Learn Songs By Ear',
+            'artist' => 'Nate Savage',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/shaping-up-the-neck-main-high.jpg',
+            'title' => 'Shaping Up The Neck',
+            'artist' => 'David Becker',
+        ],
+    ];
+
+    $anythingSingeo = [
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/singing-starter-kit-thumb-1-1631644401.png',
+            'title' => 'Singing Starter Kit',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-thumb-1647988307.png',
+            'title' => 'Stop Hating Your Voice ',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/how-your-voice-works-thumb-1640561830.jpg',
+            'title' => 'How Your Voice Works',
+            'artist' => 'Darcy D',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080-1655154442.jpg',
+            'title' => '7 Days To A Beautiful Voice',
+            'artist' => 'Lisa Witt',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/member-thumb-1920x1080(1)-1654034666.jpg',
+            'title' => 'Ear Training For Singers',
+            'artist' => 'Julia Ziegler',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/305335-card-thumbnail-maxres-1622551470.png',
+            'title' => 'The Most Important Vocal Exercise',
+            'artist' => 'Lisa Witt',
+        ],
+    ];
