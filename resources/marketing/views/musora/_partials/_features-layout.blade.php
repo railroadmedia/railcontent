@@ -1,14 +1,18 @@
 @extends('musora._partials.layout')
 
 @section('layout-body')
-    <header class="pb-12 md:pb-0 md:pt-20 bg-[#111729] text-center text-white">
-        <img
-            class="md:hidden mb-16 @if($page === 'songs') cursor-pointer @endif"
-            src="https://www.musora.com/musora-cdn/image/width=900,quality=85/@yield('header-img')"
-            alt="{{$page}} thumb"
-            @if($page === 'songs') x-on:click="soundslice = true" @endif
-            fetchpriority="high"
-        />
+    <header class="pb-12 md:pb-0 md:pt-20 bg-[#111729] text-center text-white" @if($page === 'songs') x-data="{ brand: 'drumeo', drumeoSoundslice: false, pianoteSoundslice: false, guitareoSoundslice: false, singeoSoundsolice: false, } @endif">
+        @if($page === 'songs')
+            @yield('header-mobileImg')
+        @else
+            <img
+                class="md:hidden mb-16"
+                src="https://www.musora.com/musora-cdn/image/width=900,quality=85/@yield('header-img')"
+                alt="{{$page}} thumb"
+                fetchpriority="high"
+            />
+        @endif
+
         <div class="px-4 md:px-0">
             <div class="mb-6">
                 <img
@@ -28,16 +32,20 @@
             <h2 class="font-extrabold mb-4">@yield('header')</h2>
             <p class="md:mb-10 px-4 lg:px-0">@yield('desc')</p>
         </div>
-        <picture>
-            <source media="(min-width: 500px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/@yield('header-img')">
-            <img
-                class="rounded-t-xl md:h-72 lg:h-80 hidden md:inline-block @if($page === 'songs') cursor-pointer @endif"
-                src="https://www.musora.com/musora-cdn/image/width=550,quality=85/@yield('header-img')"
-                alt="{{$page}} thumb"
-                @if($page === 'songs') x-on:click="soundslice = true" @endif
-                fetchpriority="high"
-            />
-        </picture>
+            @if($page === 'songs')
+                @yield('header-img')
+            @else
+                <picture>
+                    <source media="(min-width: 500px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/@yield('header-img')">
+                    <img
+                        class="rounded-t-xl md:h-72 lg:h-80 hidden md:inline-block @if($page === 'songs') cursor-pointer @endif"
+                        src="https://www.musora.com/musora-cdn/image/width=550,quality=85/@yield('header-img')"
+                        alt="{{$page}} thumb"
+                        @if($page === 'songs') x-on:click="soundslice = true" @endif
+                        fetchpriority="high"
+                    />
+                </picture>
+            @endif
     </header>
 
     @yield('page-body')
