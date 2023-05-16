@@ -788,14 +788,14 @@
                             <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>
                             <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>
                     </a>
-                    <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,easy-chords:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,100-days-of-practice-poster:1,the-power-of-chords:1,piano-riffs-and-fills:1&redirect=/order&locked=true&promo-code=special"
+                    <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,easy-chords:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,100-days-of-practice-poster:1,the-power-of-chords:1,piano-riffs-and-fills:1&redirect=/order&locked=true"
                         class="px-5 sm:px-10 py-7 sm:py-11 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"
                         style="background-color:#dde9f9;background-image:url(https://www.musora.com/musora-cdn/image/width=380,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/order-bg.jpg);"
                     >
                         <p class="border border-pianote text-pianote inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">LAUNCH MEMBERSHIP SPECIAL</p>
                         <h3><strong>Join Pianote + Get <br class="hidden sm:inline"> Easy Chords FREE</strong></h3>
                         <p class="text-sm mt-2 mb-5">The Ultimate Online Lessons Experience.</p>
-                        <h2 class="inline-block"><s class="opacity-40">$240</s> <strong class="text-4xl">$200</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>
+                        <h2 class="inline-block"><!--<s class="opacity-40">$240</s>--> <strong class="text-4xl">$240</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>
                         <div class="join blue smaller my-4 w-full">GET EVERYTHING</div>
                         <ul class="list-disc ml-6">
                             <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Chords & Scales Book</li>
