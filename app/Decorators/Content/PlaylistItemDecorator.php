@@ -298,7 +298,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
 
                     if ($contentsOfType[$contentIndex]['need_access'] && (empty($contentsOfType[$contentIndex]['need_access_message']))) {
                         $parent = self::$parents[$content['id']] ?? null;
-                        $contentsOfType[$contentIndex]['need_access_message'] =
+                        $contentsOfType[$contentIndex]['need_access_message'] = self::$noAccessMessages[$content['id']] =
                             $content['title'].' is part of our <b>'.$parent['title'].'</b> Pack.';
                     }
 
@@ -316,7 +316,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                             ) && (isset($grupedPermissions[self::$parents[$content['id']]['id']]));
                         if ($contentsOfType[$contentIndex]['need_access']) {
                             $contentsOfType[$contentIndex]['need_access_message'] =
-                                self::$noAccessMessages[self::$parents[$content['id']]['id']];
+                                self::$noAccessMessages[self::$parents[$content['id']]['id']]??'';
                         }
                     }
                 }
