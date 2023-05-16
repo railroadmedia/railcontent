@@ -214,10 +214,13 @@ const playlistsStore = usePlaylistsStore();
 
 const handleGoToNext = () => {
     const isShuffleOn = localStorage.getItem("playbackShuffleOn") ? JSON.parse(localStorage.getItem("playbackShuffleOn")) : false;
+    const isPlaylistRepeatOn = localStorage.getItem("isPlaybackPlaylistRepeatOn") ? JSON.parse(localStorage.getItem("isPlaybackPlaylistRepeatOn")) : false;
 
     if (isShuffleOn) {
         const randIndex = Math.floor(Math.random() * playlistsStore.lessons.length);
         window.location.href = playlistsStore.lessons[randIndex].url;
+    } else if (isPlaylistRepeatOn && (String(props.playlistItemPosition) === String(props.playlistItems?.meta?.totalResults))) {
+        window.location.href = playlistsStore.lessons[0].url;
     }
     else if (props.nextLessonUrl && props.nextLessonUrl !== '/') {
         window.location.href = props.nextLessonUrl;
@@ -229,6 +232,7 @@ const activeItem = props.playlistItems.data.find(l => l.id === props.playlistIte
 const dateNow = Date.now();
 const lessonDateParsed = activeItem.published_on_in_timezone ? Date.parse(activeItem.published_on_in_timezone) : Date.parse(activeItem.published_on);
 const lessonDate = activeItem.published_on_in_timezone ? activeItem.published_on_in_timezone : activeItem.published_on;
+
 //Parse Release Date
 const month = DateTime.fromSQL(lessonDate).toFormat('LLL');
 const dayNumber = DateTime.fromSQL(lessonDate).toFormat('d');
@@ -245,7 +249,7 @@ const needAccess = computed(() => {
 })
 
 onBeforeMount(() => {
-    console.log(props.playlistItems)
+    //console.log(props.playlistItems)
 });
 </script>
 
@@ -315,20 +319,21 @@ onBeforeMount(() => {
                                 </VideoPlayer>
                             </transition>
                         </div>
-                    </div>
-                    <!-- Unreleased/No Access Content -->
-                    <div v-if="!released || needAccess" class="tw-w-full tw-top-0 tw-left-0 tw-aspect-video tw-absolute tw-z-30">
-                        <img :src="`https://musora.com/cdn-cgi/image/width=1000/${thumbnailUrl}`"  
-                                class="tw-transition-opacity tw-opacity-0 tw-duration-300 tw-grayscale tw-w-full tw-object-cover" title="Image Photo"
-                                loading="lazy" 
-                                onload="this.classList.remove('tw-opacity-0')"
-                        />
-                        <div v-if="!needAccess" class="tw-absolute tw-bg-black/60 tw-top-0 tw-left-0 tw-w-full tw-h-full tw-text-white tw-font-bold tw-text-lg tw-flex tw-flex-col tw-items-center tw-justify-center">
-                            <i class="fas fa-clock tw-text-3xl tw-mb-1"></i>
-                            <p class="tw-text-2xl">
-                                Available on 
-                                <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber}}</span>
-                            </p>
+                        
+                        <!-- Unreleased/No Access Content -->
+                        <div v-if="!released || needAccess" class="tw-w-full tw-top-0 tw-left-0 tw-aspect-video tw-absolute tw-z-30">
+                            <img :src="`https://musora.com/cdn-cgi/image/width=1000/${thumbnailUrl}`"  
+                                    class="tw-transition-opacity tw-opacity-0 tw-duration-300 tw-grayscale tw-w-full tw-object-cover" title="Image Photo"
+                                    loading="lazy" 
+                                    onload="this.classList.remove('tw-opacity-0')"
+                            />
+                            <div v-if="!needAccess" class="tw-absolute tw-bg-black/60 tw-top-0 tw-left-0 tw-w-full tw-h-full tw-text-white tw-font-bold tw-text-lg tw-flex tw-flex-col tw-items-center tw-justify-center">
+                                <i class="fas fa-clock tw-text-3xl tw-mb-1"></i>
+                                <p class="tw-text-2xl">
+                                    Available on 
+                                    <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber}}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                     
