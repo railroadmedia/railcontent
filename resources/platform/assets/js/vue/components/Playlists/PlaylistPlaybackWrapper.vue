@@ -319,20 +319,21 @@ onBeforeMount(() => {
                                 </VideoPlayer>
                             </transition>
                         </div>
-                    </div>
-                    <!-- Unreleased/No Access Content -->
-                    <div v-if="!released || needAccess" class="tw-w-full tw-top-0 tw-left-0 tw-aspect-video tw-absolute tw-z-30">
-                        <img :src="`https://musora.com/cdn-cgi/image/width=1000/${thumbnailUrl}`"  
-                                class="tw-transition-opacity tw-opacity-0 tw-duration-300 tw-grayscale tw-w-full tw-object-cover" title="Image Photo"
-                                loading="lazy" 
-                                onload="this.classList.remove('tw-opacity-0')"
-                        />
-                        <div v-if="!needAccess" class="tw-absolute tw-bg-black/60 tw-top-0 tw-left-0 tw-w-full tw-h-full tw-text-white tw-font-bold tw-text-lg tw-flex tw-flex-col tw-items-center tw-justify-center">
-                            <i class="fas fa-clock tw-text-3xl tw-mb-1"></i>
-                            <p class="tw-text-2xl">
-                                Available on 
-                                <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber}}</span>
-                            </p>
+                        
+                        <!-- Unreleased/No Access Content -->
+                        <div v-if="!released || needAccess" class="tw-w-full tw-top-0 tw-left-0 tw-aspect-video tw-absolute tw-z-30">
+                            <img :src="`https://musora.com/cdn-cgi/image/width=1000/${thumbnailUrl}`"  
+                                    class="tw-transition-opacity tw-opacity-0 tw-duration-300 tw-grayscale tw-w-full tw-object-cover" title="Image Photo"
+                                    loading="lazy" 
+                                    onload="this.classList.remove('tw-opacity-0')"
+                            />
+                            <div v-if="!needAccess" class="tw-absolute tw-bg-black/60 tw-top-0 tw-left-0 tw-w-full tw-h-full tw-text-white tw-font-bold tw-text-lg tw-flex tw-flex-col tw-items-center tw-justify-center">
+                                <i class="fas fa-clock tw-text-3xl tw-mb-1"></i>
+                                <p class="tw-text-2xl">
+                                    Available on 
+                                    <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber}}</span>
+                                </p>
+                            </div>
                         </div>
                     </div>
                     
