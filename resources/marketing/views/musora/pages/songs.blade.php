@@ -637,102 +637,102 @@
                     @endslot
                 @endcomponent
             </div>
-            <div class="mb-6">
-                <h4 class="font-extrabold mb-4">Musicals</h4>
-                @component('_partials.components.carousel',[
-                    'xdata' => "
-                        classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
-                            prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
-                            pagination: 'hidden',
-                        },
-                        perPage: 6.5,
-                        perMove: 1,
-                        type: 'loop',
-                        interval: 2000,
-                        breakpoints: {
-                            1160: {
-                                perPage: 5.5,
-                            },
-                            900: {
-                                perPage: 4.5,
-                            },
-                            760: {
-                                perPage: 3.5,
-                            },
-                            590: {
-                                perPage: 2.5,
-                            },
-                        },
-                    ",
-                ])
-                    @slot('content')
-                        @foreach ($musicals as $slide)
-                            <li class="splide__slide px-1">
-                                <div>
-                                    <img
-                                        class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
-                                        alt="{{$slide['title']}} img"
-                                        fetchpriority="high"
-                                    >
-                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
-                                    <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
-                                </div>
-                            </li>
-                        @endforeach
-                    @endslot
-                @endcomponent
-            </div>
-            <div class="mb-6">
-                <h4 class="font-extrabold mb-4">Worship</h4>
-                @component('_partials.components.carousel',[
-                    'xdata' => "
-                        classes: {
-                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
-                            prev: 'hidden',
-                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',
-                            pagination: 'hidden',
-                        },
-                        perPage: 6.5,
-                        perMove: 1,
-                        type: 'loop',
-                        interval: 2000,
-                        breakpoints: {
-                            1160: {
-                                perPage: 5.5,
-                            },
-                            900: {
-                                perPage: 4.5,
-                            },
-                            760: {
-                                perPage: 3.5,
-                            },
-                            590: {
-                                perPage: 2.5,
-                            },
-                        },
-                    ",
-                ])
-                    @slot('content')
-                        @foreach ($worship as $slide)
-                            <li class="splide__slide px-1">
-                                <div>
-                                    <img
-                                        class="rounded-xl mb-1"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
-                                        alt="{{$slide['title']}} img"
-                                        fetchpriority="high"
-                                    >
-                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>
-                                    <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>
-                                </div>
-                            </li>
-                        @endforeach
-                    @endslot
-                @endcomponent
-            </div>
+{{--            <div class="mb-6">--}}
+{{--                <h4 class="font-extrabold mb-4">Musicals</h4>--}}
+{{--                @component('_partials.components.carousel',[--}}
+{{--                    'xdata' => "--}}
+{{--                        classes: {--}}
+{{--                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',--}}
+{{--                            prev: 'hidden',--}}
+{{--                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',--}}
+{{--                            pagination: 'hidden',--}}
+{{--                        },--}}
+{{--                        perPage: 6.5,--}}
+{{--                        perMove: 1,--}}
+{{--                        type: 'loop',--}}
+{{--                        interval: 2000,--}}
+{{--                        breakpoints: {--}}
+{{--                            1160: {--}}
+{{--                                perPage: 5.5,--}}
+{{--                            },--}}
+{{--                            900: {--}}
+{{--                                perPage: 4.5,--}}
+{{--                            },--}}
+{{--                            760: {--}}
+{{--                                perPage: 3.5,--}}
+{{--                            },--}}
+{{--                            590: {--}}
+{{--                                perPage: 2.5,--}}
+{{--                            },--}}
+{{--                        },--}}
+{{--                    ",--}}
+{{--                ])--}}
+{{--                    @slot('content')--}}
+{{--                        @foreach ($musicals as $slide)--}}
+{{--                            <li class="splide__slide px-1">--}}
+{{--                                <div>--}}
+{{--                                    <img--}}
+{{--                                        class="rounded-xl mb-1"--}}
+{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"--}}
+{{--                                        alt="{{$slide['title']}} img"--}}
+{{--                                        fetchpriority="high"--}}
+{{--                                    >--}}
+{{--                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>--}}
+{{--                                    <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                        @endforeach--}}
+{{--                    @endslot--}}
+{{--                @endcomponent--}}
+{{--            </div>--}}
+{{--            <div class="mb-6">--}}
+{{--                <h4 class="font-extrabold mb-4">Worship</h4>--}}
+{{--                @component('_partials.components.carousel',[--}}
+{{--                    'xdata' => "--}}
+{{--                        classes: {--}}
+{{--                            arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',--}}
+{{--                            prev: 'hidden',--}}
+{{--                            next: 'splide__arrow--next your-class-next hidden sm:flex z-50 -right-1',--}}
+{{--                            pagination: 'hidden',--}}
+{{--                        },--}}
+{{--                        perPage: 6.5,--}}
+{{--                        perMove: 1,--}}
+{{--                        type: 'loop',--}}
+{{--                        interval: 2000,--}}
+{{--                        breakpoints: {--}}
+{{--                            1160: {--}}
+{{--                                perPage: 5.5,--}}
+{{--                            },--}}
+{{--                            900: {--}}
+{{--                                perPage: 4.5,--}}
+{{--                            },--}}
+{{--                            760: {--}}
+{{--                                perPage: 3.5,--}}
+{{--                            },--}}
+{{--                            590: {--}}
+{{--                                perPage: 2.5,--}}
+{{--                            },--}}
+{{--                        },--}}
+{{--                    ",--}}
+{{--                ])--}}
+{{--                    @slot('content')--}}
+{{--                        @foreach ($worship as $slide)--}}
+{{--                            <li class="splide__slide px-1">--}}
+{{--                                <div>--}}
+{{--                                    <img--}}
+{{--                                        class="rounded-xl mb-1"--}}
+{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"--}}
+{{--                                        alt="{{$slide['title']}} img"--}}
+{{--                                        fetchpriority="high"--}}
+{{--                                    >--}}
+{{--                                    <p class="font-bold mb-1 leading-tight">{{$slide['title']}}</p>--}}
+{{--                                    <p class="text-[#838C98] leading-tight">{{$slide['artist']}}</p>--}}
+{{--                                </div>--}}
+{{--                            </li>--}}
+{{--                        @endforeach--}}
+{{--                    @endslot--}}
+{{--                @endcomponent--}}
+{{--            </div>--}}
             <div class="mb-6">
                 <h4 class="font-extrabold mb-4">Hip Hop & Rap</h4>
                 @component('_partials.components.carousel',[
@@ -785,7 +785,7 @@
 
         <div class="text-center">
             <h3 class="font-extrabold mb-6">Plus thousands more popular songs.</h3>
-            <a href="/choose-plan" class="mx-1 join blue smaller font-bebas">Get started <i class="fas fa-arrow-right" style="line-height: 0;"></i> </a>
+            <a href="/TODO" class="mx-1 join blue smaller font-bebas">Get started <i class="fas fa-arrow-right" style="line-height: 0;"></i> </a>
         </div>
     </section>
 

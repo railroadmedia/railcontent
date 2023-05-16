@@ -106,11 +106,11 @@
     ];
 
     $modernRock = [
-        [
-            'img' => '',
-            'title' => 'Don\'t Wanna Fight',
-            'artist' => 'Alabama Shakes',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Don\'t Wanna Fight',
+//            'artist' => 'Alabama Shakes',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/arctic-monkeys-do-i-wanna-know.jpg',
             'title' => 'Do I Wanna Know?',
@@ -131,11 +131,11 @@
             'title' => 'Pumped Up Kicks',
             'artist' => 'Foster The People',
         ],
-        [
-            'img' => '',
-            'title' => 'Highway Tune',
-            'artist' => 'Greta Van Fleet',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Highway Tune',
+//            'artist' => 'Greta Van Fleet',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-november/album-art/imagine-dragons-Believer.jpg',
             'title' => 'Believer',
@@ -146,19 +146,24 @@
             'title' => 'Take Me To Church',
             'artist' => 'Hozier',
         ],
-        [
-            'img' => '',
-            'title' => 'The Night We Met',
-            'artist' => 'Lord Huron',
-        ],
-        [
-            'img' => '',
-            'title' => 'Little Lion Man',
-            'artist' => 'Mumford & Sons',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'The Night We Met',
+//            'artist' => 'Lord Huron',
+//        ],
+//        [
+//            'img' => '',
+//            'title' => 'Little Lion Man',
+//            'artist' => 'Mumford & Sons',
+//        ],
     ];
 
     $jazz = [
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/duke-ellington-manny-kurtz-irving-mills-.jpg',
+            'title' => 'In A Sentimental Mood',
+            'artist' => 'Duke Ellington, Manny Kurtz, Irving Mills',
+        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/art-blakey-moanin.jpg',
             'title' => 'Moanin\'',
@@ -203,11 +208,6 @@
             'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/milt-gabler-duke-ellington-.jpg',
             'title' => 'In A Mellow Tone',
             'artist' => 'Milt Gabler, Duke Ellington',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/duke-ellington-manny-kurtz-irving-mills-.jpg',
-            'title' => 'In A Sentimental Mood',
-            'artist' => 'Duke Ellington, Manny Kurtz, Irving Mills',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/judy-garland-over-the-rainbow-1629605191.jpg',
@@ -358,11 +358,11 @@
             'title' => 'Tennessey Whiskey',
             'artist' => 'Chris Stapleton',
         ],
-        [
-            'img' => '',
-            'title' => 'Tequila',
-            'artist' => 'Dan + Shay',
-        ],
+//        [
+//            'img' => '',
+//            'title' => 'Tequila',
+//            'artist' => 'Dan + Shay',
+//        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/florida-georgia-line-heres-to-the-good-times.jpg',
             'title' => 'Cruise',
