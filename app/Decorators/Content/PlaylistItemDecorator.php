@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Entities\ContentEntity;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Support\Collection;
 
 class PlaylistItemDecorator extends TypeDecoratorBase
 {
     private static $parents = [];
+    private static $noAccessMessages = [];
 
     /**
      * @param Collection $contents
@@ -125,15 +127,50 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 'playlistId' => $userPlaylistId,
                 'playlistItemId' => $content['user_playlist_item_id'],
             ]);
-            $contentsOfType[$contentIndex]['need_access'] = empty(
-            array_intersect(
-                \Arr::pluck($userPermissions, 'permission_id'),
+
+            $userPermissionIds = \Arr::pluck($userPermissions, 'permission_id');
+            $membershipPermissionIds = [1, 52, 73, 77,];
+            if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
+                $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
+            }
+
+            $contentsOfType[$contentIndex]['need_access']  = empty(
+                array_intersect(
+                    $userPermissionIds,
+                    (isset($grupedPermissions[$content['id']])) ?
+                        $grupedPermissions[$content['id']]->pluck('permission_id')
+                            ->toArray() : []
+                )
+                ) && (isset($grupedPermissions[$content['id']]));
+
+            $needLifetime = (count($contentPermissionRows) == 1) && array_intersect(
+                    ['Drumeo Lifetime Member'],
+                    (isset($grupedPermissions[$content['id']])) ?
+                        $grupedPermissions[$content['id']]->pluck('name')
+                            ->toArray() : []
+                );
+            $needMusoraBasic = array_intersect(
+                ['Musora Basic Membership'],
                 (isset($grupedPermissions[$content['id']])) ?
-                    $grupedPermissions[$content['id']]->pluck('permission_id')
+                    $grupedPermissions[$content['id']]->pluck('name')
                         ->toArray() : []
-            )
             );
 
+            $message = '';
+            if (!empty($needLifetime)) {
+                $message = 'This Masterclass is part of our exclusive <b>Lifetime Membership</b>.';
+                self::$noAccessMessages[$content['id']] = $message;
+            } elseif (!empty($needMusoraBasic)) {
+                $message = 'This lesson is part of our <b>Musora Membership</b>.';
+                self::$noAccessMessages[$content['id']] = $message;
+            } elseif ($content['type'] == 'song') {
+                $message = 'This Song content is part of our <b>Musora+ Membership</b>.';
+                self::$noAccessMessages[$content['id']] = $message;
+             }
+
+            if($contentsOfType[$contentIndex]['need_access']) {
+                $contentsOfType[$contentIndex]['need_access_message'] = $message;
+            }
             if (!empty($content['user_playlist_item_extra_data'])) {
                 if ((is_null(json_decode($content['user_playlist_item_extra_data'])))) {
                     error_log($content['user_playlist_item_extra_data']);
@@ -150,7 +187,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
             $route = [];
 
             if (!empty($content['parent_content_data'])) {
-                $hierarchyData =
+                 $hierarchyData =
                     $hierarchyRows->where('rch1_child_id', $content['id'])
                         ->first();
                 $parentContentDataForDatabase = [];
@@ -222,9 +259,12 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 if (isset($parent) && (!isset(self::$parents[$content['id']]))) {
                     Decorator::$typeDecoratorsEnabled = false;
                     \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
+                    $initialByPassPermission = ContentRepository::$bypassPermissions;
+                    ContentRepository::$bypassPermissions = true;
                     $parentContent[$content['id']] =
                         $this->contentService->getByIds([$parent->id])
                             ->first();
+                    ContentRepository::$bypassPermissions = $initialByPassPermission;
                     self::$parents = $parentContent + self::$parents;
                     Decorator::$typeDecoratorsEnabled = true;
                 }
@@ -255,9 +295,29 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                                 );
                         }
                     }
+
+                    if ($contentsOfType[$contentIndex]['need_access'] && (empty($contentsOfType[$contentIndex]['need_access_message']))) {
+                        $parent = self::$parents[$content['id']] ?? null;
+                        $contentsOfType[$contentIndex]['need_access_message'] =
+                            $content['title'].' is part of our <b>'.$parent['title'].'</b> Pack.';
+                    }
+
                     if ($content['type'] == 'assignment') {
                         $contentsOfType[$contentIndex]['fields'] =
                             array_merge($content['fields'] ?? [], self::$parents[$content['id']]['fields'] ?? []);
+
+                        $contentsOfType[$contentIndex]['need_access'] = empty(
+                            array_intersect(
+                                $userPermissionIds,
+                                (isset($grupedPermissions[self::$parents[$content['id']]['id']])) ?
+                                    $grupedPermissions[self::$parents[$content['id']]['id']]->pluck('permission_id')
+                                        ->toArray() : []
+                            )
+                            ) && (isset($grupedPermissions[self::$parents[$content['id']]['id']]));
+                        if ($contentsOfType[$contentIndex]['need_access']) {
+                            $contentsOfType[$contentIndex]['need_access_message'] =
+                                self::$noAccessMessages[self::$parents[$content['id']]['id']];
+                        }
                     }
                 }
             }

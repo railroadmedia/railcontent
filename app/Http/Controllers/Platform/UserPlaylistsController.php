@@ -177,14 +177,8 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['status'] = $item['status'];
                 $playlistItems[$index]['published_on'] = $item['published_on'];
                 $playlistItems[$index]['published_on_in_timezone'] = $item['published_on_in_timezone'] ?? null;
-                $playlistItems[$index]['need_access'] = empty(
-                    array_intersect(
-                        $userPermissionIds,
-                        (isset($grupedPermissions[$item['id']])) ?
-                            $grupedPermissions[$item['id']]->pluck('permission_id')
-                                ->toArray() : []
-                    )
-                    ) && (isset($grupedPermissions[$item['id']]));
+                $playlistItems[$index]['need_access'] = $item['need_access'];
+                $playlistItems[$index]['need_access_message'] = $item['need_access_message'] ?? '';
 
                 $playlistItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
                 $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
@@ -267,6 +261,23 @@ class UserPlaylistsController extends BaseController
         $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
         throw_if((!($playlistItem)), new NotFoundHttpException());
 
+        $content = $this->contentService->getById($playlistItem['content_id']);
+
+        if (empty($content)) {
+            ContentRepository::$bypassPermissions = true;
+            $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id']);
+
+            ContentRepository::$bypassPermissions = false;
+            $items = new ContentFilterResultsEntity([
+                                                        'results' => $playlistItems,
+                                                    ]);
+
+            return view('account.playlist', [
+                "listLessons" => $items->toResponseRawJson(),
+                "playlist" => $playlist,
+            ]);
+        }
+
         $position = $playlistItem['position'];
         $page = ($playlistItem['position'] <= 20) ? 1 : (ceil(($playlistItem['position']) / 20));
         $request->merge(['page' => $page]);
@@ -280,65 +291,7 @@ class UserPlaylistsController extends BaseController
                 ->first();
         $nextPlaylistItem = $playlistItems->getMatchOffset($playlistItem, 1);
         $previousPlaylistItem = $playlistItems->getMatchOffset($playlistItem, -1);
-        $contentPermissionRows = collect(
-            $this->contentPermissionRepository->getByContentIdsOrTypes(
-                $playlistItems->pluck('id')
-                    ->toArray(),
-                $playlistItems->pluck('type')
-                    ->toArray()
-            )
-        );
-        $grupedPermissions = $contentPermissionRows->groupBy('content_id');
-        $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
-        $userPermissionIds = \Arr::pluck($userPermissions, 'permission_id');
-        $membershipPermissionIds = [1, 52, 73, 77,];
-        if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
-            $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
-        }
-
-        //        $needLifetime = (count($contentPermissionRows) == 1) && array_intersect(
-        //                ['Drumeo Lifetime Member'],
-        //                (isset($grupedPermissions[$playlistItem['id']])) ?
-        //                    $grupedPermissions[$playlistItem['id']]->pluck('name')
-        //                        ->toArray() : []
-        //            );
-        //        $needMusoraBasic = array_intersect(
-        //            ['Musora Basic Membership'],
-        //            (isset($grupedPermissions[$playlistItem['id']])) ?
-        //                $grupedPermissions[$playlistItem['id']]->pluck('name')
-        //                    ->toArray() : []
-        //        );
-        //
-        //        $message = '';
-        //        if (!empty($needLifetime)) {
-        //            $message = 'This Masterclass is part of our exclusive <b>Lifetime Membership</b>.';
-        //        } elseif (!empty($needMusoraBasic)) {
-        //            $message = 'This lesson is part of our <b>Musora Membership</b>.';
-        //        } elseif ($playlistItem['type'] == 'song') {
-        //            $message = 'This Song content is part of our <b>Musora+ Membership</b>.';
-        //        } else {
-        //            $parentContentData = array_reverse(json_decode($playlistItem['parent_content_data'], true));
-        //            $parent = $parentContentData[0] ?? null;
-        //            $title = '';
-        //            if ($parent) {
-        //                ContentRepository::$bypassPermissions = true;
-        //                $parentData = $this->contentService->getById($parent['id']);
-        //
-        //                $title = $parentData['title'];
-        //
-        //                ContentRepository::$bypassPermissions = false;
-        //            }
-        //            $message = $playlistItem['title'].' is part of our <b>'.$title.'</b> Pack.';
-        //        }
-        //
-        //        $extraData = [
-        //            "item_title" => $playlistItem['title'],
-        //            "item_type" => $playlistItem['type'],
-        //            "thumbnail_url" => $playlistItem['thumbnail_url'] ?? '',
-        //            "parent" => $playlistItem['parent'] ?? null,
-        //            "learn_more_link" => "https://musora.helpscoutdocs.com/article/1034-musora-membership-options#membershiptype",
-        //        ];
-        //        throw new \Exception($message, 403);
+        $content['user_playlist_item_position'] = $position;
 
         $otherItems = [];
         foreach ($playlistItems as $index => $item) {
@@ -352,17 +305,10 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['data'] = $item['data'];
             $otherItems[$index]['published_on'] = $item['published_on'];
             $otherItems[$index]['published_on_in_timezone'] = $item['published_on_in_timezone'] ?? null;
-            $otherItems[$index]['need_access'] = empty(
-                array_intersect(
-                    $userPermissionIds,
-                    (isset($grupedPermissions[$item['id']])) ?
-                        $grupedPermissions[$item['id']]->pluck('permission_id')
-                            ->toArray() : []
-                )
-                ) && (isset($grupedPermissions[$item['id']]));
+            $otherItems[$index]['need_access'] = $item['need_access'];
+            $otherItems[$index]['need_access_message'] = $item['need_access_message'] ?? '';
             $otherItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
             $otherItems[$index]['route'] = $item['route'] ?? '';
-            //            $playlistItems[$index]['parent'] = $item['parent']??null;
             $otherItems[$index]['instructors'] = $item['instructors'] ?? null;
             $otherItems[$index]['user_playlist_item_id'] = $item['user_playlist_item_id'] ?? null;
             $otherItems[$index]['user_playlist_item_extra_data'] = $item['user_playlist_item_extra_data'] ?? null;
@@ -381,17 +327,6 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
             $otherItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
         }
-
-        $content = $this->contentService->getById($playlistItem['id']);
-
-        if (empty($content)) {
-            // TODO: Replace with Upgrade to View page
-            return view('pages.no-access', [
-                "brand" => brand(),
-            ]);
-        }
-
-        $content['user_playlist_item_position'] = $position;
 
         throw_if(empty($playlistItem), new NotFoundHttpException());
 
@@ -417,7 +352,6 @@ class UserPlaylistsController extends BaseController
 
         $userPlaylists = collect($this->userPlaylistsService->getUserPlaylist(user()->id, 'user-playlist'));
         $playlists = $userPlaylists->whereNotIn('id', $playlistId);
-        $relatedPlaylists = (new ContentFilterResultsEntity(['results' => $playlists]))->toResponseRawJson();
 
         $playlistLessons = (new ContentFilterResultsEntity([
                                                                'results' => $otherItems,
@@ -426,6 +360,7 @@ class UserPlaylistsController extends BaseController
                                                                ),
                                                            ]))->toResponseRawJson();
 
+        $relatedPlaylists = (new ContentFilterResultsEntity(['results' => $playlists]))->toResponseRawJson();
         if (empty($playlistItem['assignments'] ?? [])) {
             LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
             $this->lessonAssignmentDecorator->decorate(new Collection([$playlistItem]))
