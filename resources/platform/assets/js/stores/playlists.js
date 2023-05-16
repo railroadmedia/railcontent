@@ -13,6 +13,7 @@ export const usePlaylistsStore = defineStore({
       modalOpen: {
         modalType: null,
       },
+      playerExpanded: false,
       pageHasPlaylistCatalog: false,
       loadingPlaylists: false,
       loadingLessons: false,
