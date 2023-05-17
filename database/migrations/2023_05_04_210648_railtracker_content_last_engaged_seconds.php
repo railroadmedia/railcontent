@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->integer('content_id');
             $table->integer('resume_time_seconds');
             $table->timestamps();
-            $table->index(['user_id', 'content_id'], 'railtracker_content_last_engaged_seconds_user_content_index');
+            $table->unique(['user_id', 'content_id'], 'railtracker_content_last_engaged_seconds_user_content_index');
         });
     }
 
