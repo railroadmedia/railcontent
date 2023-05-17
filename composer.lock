@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.269.12",
+            "version": "3.269.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "fb6e7d09d901757ad485e38295ea6b44acb05b15"
+                "reference": "84f5f9c4f9c4cd7997ca3b7f91fabaf7cc73b0bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fb6e7d09d901757ad485e38295ea6b44acb05b15",
-                "reference": "fb6e7d09d901757ad485e38295ea6b44acb05b15",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/84f5f9c4f9c4cd7997ca3b7f91fabaf7cc73b0bc",
+                "reference": "84f5f9c4f9c4cd7997ca3b7f91fabaf7cc73b0bc",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.269.12"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.269.13"
             },
-            "time": "2023-05-15T18:25:49+00:00"
+            "time": "2023-05-16T18:24:42+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2288,16 +2288,16 @@
         },
         {
             "name": "fakerphp/faker",
-            "version": "v1.21.0",
+            "version": "v1.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FakerPHP/Faker.git",
-                "reference": "92efad6a967f0b79c499705c69b662f738cc9e4d"
+                "reference": "f85772abd508bd04e20bb4b1bbe260a68d0066d2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/92efad6a967f0b79c499705c69b662f738cc9e4d",
-                "reference": "92efad6a967f0b79c499705c69b662f738cc9e4d",
+                "url": "https://api.github.com/repos/FakerPHP/Faker/zipball/f85772abd508bd04e20bb4b1bbe260a68d0066d2",
+                "reference": "f85772abd508bd04e20bb4b1bbe260a68d0066d2",
                 "shasum": ""
             },
             "require": {
@@ -2350,9 +2350,9 @@
             ],
             "support": {
                 "issues": "https://github.com/FakerPHP/Faker/issues",
-                "source": "https://github.com/FakerPHP/Faker/tree/v1.21.0"
+                "source": "https://github.com/FakerPHP/Faker/tree/v1.22.0"
             },
-            "time": "2022-12-13T13:54:32+00:00"
+            "time": "2023-05-14T12:31:37+00:00"
         },
         {
             "name": "fig/http-message-util",
@@ -4614,17 +4614,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.24.2",
+            "version": "4.24.3",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "02d139e4e768a3b29e9328596a9892a4b0a6976a"
+                "reference": "9bcec63448f951cc30384ca8cda5548e78e936ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-02d139e4e768a3b29e9328596a9892a4b0a6976a-zip-38bbf0.zip",
-                "reference": "02d139e4e768a3b29e9328596a9892a4b0a6976a",
-                "shasum": "1756c3238fb86c7c81e5c215023289313552d6c8"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-9bcec63448f951cc30384ca8cda5548e78e936ea-zip-9bc748.zip",
+                "reference": "9bcec63448f951cc30384ca8cda5548e78e936ea",
+                "shasum": "bb50d12b5d66a6ec6343ddf931289bab4c07931f"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0|^0.8.0",
@@ -4717,9 +4717,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.24.2"
+                "source": "https://github.com/laravel/nova/tree/v4.24.3"
             },
-            "time": "2023-05-10T16:02:17+00:00"
+            "time": "2023-05-16T14:21:21+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -4916,16 +4916,16 @@
         },
         {
             "name": "laravel/ui",
-            "version": "v4.2.1",
+            "version": "v4.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/ui.git",
-                "reference": "05ff7ac1eb55e2dfd10edcfb18c953684d693907"
+                "reference": "a58ec468db4a340b33f3426c778784717a2c144b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/ui/zipball/05ff7ac1eb55e2dfd10edcfb18c953684d693907",
-                "reference": "05ff7ac1eb55e2dfd10edcfb18c953684d693907",
+                "url": "https://api.github.com/repos/laravel/ui/zipball/a58ec468db4a340b33f3426c778784717a2c144b",
+                "reference": "a58ec468db4a340b33f3426c778784717a2c144b",
                 "shasum": ""
             },
             "require": {
@@ -4972,9 +4972,9 @@
                 "ui"
             ],
             "support": {
-                "source": "https://github.com/laravel/ui/tree/v4.2.1"
+                "source": "https://github.com/laravel/ui/tree/v4.2.2"
             },
-            "time": "2023-02-17T09:17:24+00:00"
+            "time": "2023-05-09T19:47:28+00:00"
         },
         {
             "name": "laravel/vapor-cli",
@@ -6635,20 +6635,20 @@
         },
         {
             "name": "nova-kit/nova-packages-tool",
-            "version": "v1.9.1",
+            "version": "v1.9.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nova-kit/nova-packages-tool.git",
-                "reference": "b25b382dd00bfb7a959c974dcef77faf92fbcd8a"
+                "reference": "9903ff1ef8999ed2476a6df0dbd156e3d9773e8e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/b25b382dd00bfb7a959c974dcef77faf92fbcd8a",
-                "reference": "b25b382dd00bfb7a959c974dcef77faf92fbcd8a",
+                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/9903ff1ef8999ed2476a6df0dbd156e3d9773e8e",
+                "reference": "9903ff1ef8999ed2476a6df0dbd156e3d9773e8e",
                 "shasum": ""
             },
             "require": {
-                "laravel/nova": ">=4.24.1 <4.25.0",
+                "laravel/nova": ">=4.24.3 <4.25.0",
                 "php": "^7.3 || ^8.0"
             },
             "require-dev": {
@@ -6679,9 +6679,9 @@
             ],
             "description": "Tool for Laravel Nova Packages Development",
             "support": {
-                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.9.1"
+                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.9.2"
             },
-            "time": "2023-05-08T03:04:39+00:00"
+            "time": "2023-05-16T14:24:34+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -8367,12 +8367,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "7ee18185709e755a3435d620915ebe484fd072ff"
+                "reference": "525a5d67be27880302ff23e791821a9e618f3ca2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/7ee18185709e755a3435d620915ebe484fd072ff",
-                "reference": "7ee18185709e755a3435d620915ebe484fd072ff",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/525a5d67be27880302ff23e791821a9e618f3ca2",
+                "reference": "525a5d67be27880302ff23e791821a9e618f3ca2",
                 "shasum": ""
             },
             "require": {
@@ -8404,7 +8404,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-playlists"
             },
-            "time": "2023-05-16T08:21:36+00:00"
+            "time": "2023-05-17T07:41:13+00:00"
         },
         {
             "name": "railroad/permissions",
