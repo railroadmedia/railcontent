@@ -52,7 +52,7 @@ class LeadgenLessonLayout extends Layout
             Text::make('slug')->required(),
             Text::make('title')->required(),
             Text::make('caption'),
-            Text::make('Description', 'desc'),
+            Text::make('Description', 'desc')->help('Markup is supported!'),
             Image::make('Thumbnail', 'thumbnail_file')
                 ->disk('nova_s3')
                 ->prunable()
@@ -68,7 +68,7 @@ class LeadgenLessonLayout extends Layout
                     return $value;
                 }),
             Text::make('Thumbnail','thumbnail_text')->hideFromIndex()->hideFromDetail(),
-            Text::make('Video Src', 'video_src')->hideFromIndex()->required(),
+            Text::make('Video Src', 'video_src')->hideFromIndex()->required()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
             Number::make('duration')->help('In minutes')->required(),
             Flexible::make('Assignments')
                 ->addLayout(LeadgenLessonAssignmentLayout::class)
