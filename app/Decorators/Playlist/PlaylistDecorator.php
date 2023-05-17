@@ -116,7 +116,7 @@ class PlaylistDecorator extends ModeDecoratorBase
              * @var $user User
              */
             $playlistAuthor = $keyedUsers[$playlist['user_id']];
-            $playlists[$index]['is_my_playlist'] = ($playlist['user_id'] == user()->id) ? 1 : 0;
+            $playlists[$index]['is_my_playlist'] = user()?(($playlist['user_id'] == user()->id) ? 1 : 0):0;
             $playlists[$index]['user'] = [];
             $playlists[$index]['user']['id'] = $playlistAuthor['id'];
             $playlists[$index]['user']['display_name'] = $playlistAuthor['display_name'];

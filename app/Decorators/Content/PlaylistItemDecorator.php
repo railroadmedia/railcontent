@@ -143,8 +143,8 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 )
                 ) && (isset($grupedPermissions[$content['id']]));
 
-            $needLifetime = (count($contentPermissionRows) == 1) && array_intersect(
-                    ['Drumeo Lifetime Member'],
+            $needLifetime = (count($grupedPermissions[$content['id']]??[]) == 1) && array_intersect(
+                    ['Drumeo Lifetime Member','Pianote Lifetime Member','Guitareo Lifetime Member','Singeo Lifetime Member'],
                     (isset($grupedPermissions[$content['id']])) ?
                         $grupedPermissions[$content['id']]->pluck('name')
                             ->toArray() : []
@@ -298,7 +298,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
 
                     if ($contentsOfType[$contentIndex]['need_access'] && (empty($contentsOfType[$contentIndex]['need_access_message']))) {
                         $parent = self::$parents[$content['id']] ?? null;
-                        $contentsOfType[$contentIndex]['need_access_message'] =
+                        $contentsOfType[$contentIndex]['need_access_message'] = self::$noAccessMessages[$content['id']] =
                             $content['title'].' is part of our <b>'.$parent['title'].'</b> Pack.';
                     }
 
@@ -316,7 +316,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                             ) && (isset($grupedPermissions[self::$parents[$content['id']]['id']]));
                         if ($contentsOfType[$contentIndex]['need_access']) {
                             $contentsOfType[$contentIndex]['need_access_message'] =
-                                self::$noAccessMessages[self::$parents[$content['id']]['id']];
+                                self::$noAccessMessages[self::$parents[$content['id']]['id']]??'';
                         }
                     }
                 }

@@ -21521,6 +21521,12 @@ a:visited{
 .tw-top-\[-68px\]{
   top: -68px !important;
 }
+.tw-top-0{
+  top: 0px !important;
+}
+.tw-left-0{
+  left: 0px !important;
+}
 .tw-z-0{
   z-index: 0 !important;
 }
@@ -21559,6 +21565,9 @@ a:visited{
 }
 .tw-z-\[15\]{
   z-index: 15 !important;
+}
+.tw-z-30{
+  z-index: 30 !important;
 }
 .tw-order-1{
   order: 1 !important;
@@ -21699,6 +21708,14 @@ a:visited{
 .tw-mx-8{
   margin-left: 2rem !important;
   margin-right: 2rem !important;
+}
+.tw-mx-auto{
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.tw-my-4{
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
 }
 .tw-mb-5{
   margin-bottom: 1.25rem !important;
@@ -22009,6 +22026,24 @@ a:visited{
 .tw-ml-1\.5{
   margin-left: 0.375rem !important;
 }
+.tw-mt-3{
+  margin-top: 0.75rem !important;
+}
+.tw-mb-4{
+  margin-bottom: 1rem !important;
+}
+.tw-mb-2{
+  margin-bottom: 0.5rem !important;
+}
+.tw-mb-1{
+  margin-bottom: 0.25rem !important;
+}
+.tw-mb-0{
+  margin-bottom: 0px !important;
+}
+.tw-mb-5{
+  margin-bottom: 1.25rem !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22050,6 +22085,9 @@ a:visited{
 }
 .tw-aspect-square{
   aspect-ratio: 1 / 1 !important;
+}
+.tw-aspect-video{
+  aspect-ratio: 16 / 9 !important;
 }
 .tw-h-\[26px\]{
   height: 26px !important;
@@ -22302,6 +22340,9 @@ a:visited{
 }
 .tw-h-52{
   height: 13rem !important;
+}
+.tw-h-full{
+  height: 100% !important;
 }
 .tw-max-h-0{
   max-height: 0px !important;
@@ -22652,6 +22693,9 @@ a:visited{
 .tw-w-9\/12{
   width: 75% !important;
 }
+.tw-w-full{
+  width: 100% !important;
+}
 .tw-min-w-0{
   min-width: 0px !important;
 }
@@ -22786,6 +22830,12 @@ a:visited{
 }
 .tw-max-w-full{
   max-width: 100% !important;
+}
+.tw-max-w-\[1703px\]{
+  max-width: 1703px !important;
+}
+.tw-max-w-\[1280px\]{
+  max-width: 1280px !important;
 }
 .tw-flex-1{
   flex: 1 1 0% !important;
@@ -23700,6 +23750,9 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity)) !important;
 }
+.tw-bg-black\/60{
+  background-color: rgb(0 0 0 / 0.6) !important;
+}
 .tw-bg-opacity-75{
   --tw-bg-opacity: 0.75 !important;
 }
@@ -24064,13 +24117,17 @@ a:visited{
   padding-top: 1.25rem !important;
   padding-bottom: 1.25rem !important;
 }
-.tw-py-\[17px\]{
-  padding-top: 17px !important;
-  padding-bottom: 17px !important;
-}
 .tw-px-\[10px\]{
   padding-left: 10px !important;
   padding-right: 10px !important;
+}
+.tw-py-\[10px\]{
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+}
+.tw-py-\[17px\]{
+  padding-top: 17px !important;
+  padding-bottom: 17px !important;
 }
 .tw-px-\[3px\]{
   padding-left: 3px !important;
@@ -24095,6 +24152,10 @@ a:visited{
 .tw-px-\[50px\]{
   padding-left: 50px !important;
   padding-right: 50px !important;
+}
+.tw-px-4{
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
 }
 .tw-pt-8{
   padding-top: 2rem !important;
@@ -24327,6 +24388,9 @@ a:visited{
 .tw-pt-1{
   padding-top: 0.25rem !important;
 }
+.tw-pb-3{
+  padding-bottom: 0.75rem !important;
+}
 .tw-text-left{
   text-align: left !important;
 }
@@ -24446,6 +24510,18 @@ a:visited{
 .tw-text-\[22px\]{
   font-size: 22px !important;
 }
+.tw-text-lg{
+  font-size: 1.125rem !important;
+  line-height: 1.75rem !important;
+}
+.tw-text-3xl{
+  font-size: 1.875rem !important;
+  line-height: 2.25rem !important;
+}
+.tw-text-2xl{
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
 .tw-font-bold{
   font-weight: 700 !important;
 }
@@ -24466,6 +24542,9 @@ a:visited{
 }
 .tw-font-medium{
   font-weight: 500 !important;
+}
+.tw-font-bold{
+  font-weight: 700 !important;
 }
 .tw-uppercase{
   text-transform: uppercase !important;
@@ -24523,6 +24602,9 @@ a:visited{
 }
 .tw-leading-\[26px\]{
   line-height: 26px !important;
+}
+.tw-leading-none{
+  line-height: 1 !important;
 }
 .tw-tracking-wide{
   letter-spacing: 0.025em !important;
@@ -24779,6 +24861,14 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(35 46 48 / var(--tw-text-opacity)) !important;
 }
+.tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#00101D\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 16 29 / var(--tw-text-opacity)) !important;
+}
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
           text-decoration-line: underline !important;
@@ -24816,6 +24906,9 @@ a:visited{
 }
 .tw-opacity-30{
   opacity: 0.3 !important;
+}
+.tw-opacity-0{
+  opacity: 0 !important;
 }
 .tw-shadow{
   --tw-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1) !important;
@@ -24904,6 +24997,11 @@ a:visited{
 .tw-transition-none{
   transition-property: none !important;
 }
+.tw-transition-opacity{
+  transition-property: opacity !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
+}
 .tw-duration-100{
   transition-duration: 100ms !important;
 }
@@ -24918,6 +25016,9 @@ a:visited{
 }
 .tw-duration-500{
   transition-duration: 500ms !important;
+}
+.tw-duration-300{
+  transition-duration: 300ms !important;
 }
 .tw-ease-in-out{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
@@ -24960,8 +25061,14 @@ a:visited{
   .tw-container{
     max-width: 1815px !important;
   }
+  .tw-container{
+    max-width: 1815px !important;
+  }
 }
 @media (min-width: 2256px){
+  .tw-container{
+    max-width: 2256px !important;
+  }
   .tw-container{
     max-width: 2256px !important;
   }
@@ -25563,6 +25670,10 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#9ec0dc\]{
   --tw-text-opacity: 1 !important;
   color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
@@ -26671,6 +26782,10 @@ a:visited{
     padding-top: 2.5rem !important;
     padding-bottom: 2.5rem !important;
   }
+  .md\:tw-px-8{
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
   .md\:tw-pl-8{
     padding-left: 2rem !important;
   }
@@ -26915,6 +27030,9 @@ a:visited{
   .lg\:tw-block{
     display: block !important;
   }
+  .lg\:tw-inline-block{
+    display: inline-block !important;
+  }
   .lg\:tw-inline{
     display: inline !important;
   }
@@ -26923,6 +27041,9 @@ a:visited{
   }
   .lg\:tw-inline-flex{
     display: inline-flex !important;
+  }
+  .lg\:tw-hidden{
+    display: none !important;
   }
   .lg\:tw-hidden{
     display: none !important;
@@ -27102,6 +27223,9 @@ a:visited{
   }
   .lg\:tw-flex-row{
     flex-direction: row !important;
+  }
+  .lg\:tw-flex-col-reverse{
+    flex-direction: column-reverse !important;
   }
   .lg\:tw-flex-nowrap{
     flex-wrap: nowrap !important;
@@ -27525,6 +27649,12 @@ a:visited{
   .\32xl\:tw-ml-4{
     margin-left: 1rem !important;
   }
+  .\32xl\:tw-mt-0{
+    margin-top: 0px !important;
+  }
+  .\32xl\:tw-ml-4{
+    margin-left: 1rem !important;
+  }
   .\32xl\:tw-hidden{
     display: none !important;
   }
@@ -27537,6 +27667,9 @@ a:visited{
   .\32xl\:tw-w-screen{
     width: 100vw !important;
   }
+  .\32xl\:tw-w-\[420px\]{
+    width: 420px !important;
+  }
   .\32xl\:tw-grid-cols-5{
     grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
   }
@@ -27548,6 +27681,9 @@ a:visited{
   }
   .\32xl\:tw-grid-cols-4{
     grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+  .\32xl\:tw-flex-row{
+    flex-direction: row !important;
   }
   .\32xl\:tw-flex-row{
     flex-direction: row !important;
