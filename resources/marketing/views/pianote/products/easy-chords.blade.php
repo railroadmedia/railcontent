@@ -268,14 +268,14 @@
 
     <a href="#final" class="anchor-slide flex items-end justify-center px-2 sm:px-0 fixed w-full z-[100]" style="background: #d6e8fd;">
         <p class="font-bebas uppercase mx-0 py-2 leading-none">
-            GET A FREE CHORDS & SCALES BOOK UNTIL MAY 21.
-            <br><span class="text-pianote"><span x-cloak x-data="timer2()" x-init="countdown2()">
-                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+            GET A FREE CHORDS & SCALES BOOK UNTIL MAY 22.
+            <br><span class="text-pianote"><span x-cloak x-data="timer2()" x-init="countdown2()"><span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                  <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-{{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-                    {{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
                                  <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                             </span> left!</span>
+                             </span>
+                left!</span>
         </p>
         <img class="h-10 ml-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/sticky_bar_chords_scales.png" alt="chords & scales book" fetchpriority="high" />
     </a>
@@ -338,8 +338,8 @@
                         <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">
                              <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                              <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
                              <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                          </span>
 {{--                        Enrollment closed--}}
@@ -480,6 +480,7 @@
             </div>
         </div>
     </section>
+    <div id="demo" class="anchor"></div>
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-bg.jpg);">
         <h3 class="leading-tight"><strong>Go on, give it a try</strong></h3>
         <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">Curious? <strong>Try a snippet from Day 1</strong> and<br class="inline sm:hidden"> see if Easy Chords is right for you.</p>
@@ -712,12 +713,12 @@
         <div class="max-w-5xl mx-auto md:flex relative z-40">
             <div class="flex-1 text-white md:pr-4 lg:pr-0 mb-3 md:mb-0 max-w-md md:max-w-auto mx-auto">
                 <h5 class="uppercase mb-2 text-center md:text-left" style="color: #FFAE00;">
-                    AVAILABLE UNTIL May 21st<br> only
+                    AVAILABLE UNTIL May 22nd<br>
                     <span x-cloak x-data="timer2()" x-init="countdown2()">
                                  <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                  <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-{{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-                        {{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+                                 <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="second"></span><span x-text="secondText"></span></span>
                                  <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                              </span>
                     left!
@@ -771,12 +772,12 @@
                         <div class="join blue smaller my-4 w-full">ENROLL NOW</div>
                         <ul class="list-disc ml-6">
                             <li class="text-sm relaxed"><span class="text-pianote">Free</span> Chords & Scales Book</li>
-                            <li class="text-sm relaxed"><span class="text-pianote">Free bonus ends<br class="hidden sm:inline">  in
+                            <li class="text-sm relaxed"><span class="text-pianote">Free bonus ends in<br class="hidden sm:inline">
                                     <span x-cloak x-data="timer2()" x-init="countdown2()">
                                      <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                      <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-{{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-                                        {{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                     <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="second"></span><span x-text="secondText"></span></span>
                                      <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                                  </span>
                                     </span></li>
@@ -787,14 +788,14 @@
                             <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>
                             <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>
                     </a>
-                    <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,easy-chords:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,100-days-of-practice-poster:1,the-power-of-chords:1,piano-riffs-and-fills:1&redirect=/order&locked=true&promo-code=special"
+                    <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,easy-chords:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,100-days-of-practice-poster:1,the-power-of-chords:1,piano-riffs-and-fills:1&redirect=/order&locked=true"
                         class="px-5 sm:px-10 py-7 sm:py-11 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"
                         style="background-color:#dde9f9;background-image:url(https://www.musora.com/musora-cdn/image/width=380,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/order-bg.jpg);"
                     >
                         <p class="border border-pianote text-pianote inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">LAUNCH MEMBERSHIP SPECIAL</p>
                         <h3><strong>Join Pianote + Get <br class="hidden sm:inline"> Easy Chords FREE</strong></h3>
                         <p class="text-sm mt-2 mb-5">The Ultimate Online Lessons Experience.</p>
-                        <h2 class="inline-block"><s class="opacity-40">$240</s> <strong class="text-4xl">$200</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>
+                        <h2 class="inline-block"><!--<s class="opacity-40">$240</s>--> <strong class="text-4xl">$240</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>
                         <div class="join blue smaller my-4 w-full">GET EVERYTHING</div>
                         <ul class="list-disc ml-6">
                             <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Chords & Scales Book</li>
@@ -904,7 +905,7 @@
                 minuteText: ' minutes',
                 second: '00',
                 secondText: ' seconds',
-                endTime: new Date('2023-05-22 00:00:00').getTime(),
+                endTime: new Date('2023-05-23 00:00:00').getTime(),
                 startTime: new Date().getTime(),
                 timeLeft: 0,
                 smallScreen: false,

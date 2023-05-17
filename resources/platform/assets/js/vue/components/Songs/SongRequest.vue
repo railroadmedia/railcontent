@@ -7,6 +7,13 @@ const showModal = ref(false);
 const handleShowModal = () => {
     showModal.value = !showModal.value;
 };
+
+const props = defineProps({
+    brand: {
+        type: String,
+        default: 'drumeo'
+    }
+});
 </script>
 <template>
     <div class="tw-flex tw-items-center tw-justify-center">
@@ -20,6 +27,6 @@ const handleShowModal = () => {
             </svg>
             <div class="tw-pt-[20px]">REQUEST A SONG</div>
         </button>
-        <RequestSongModal v-if="showModal" @onCloseModal="handleShowModal" />
+        <RequestSongModal v-if="showModal" :brand="props.brand" @onCloseModal="handleShowModal" />
     </div>
 </template>

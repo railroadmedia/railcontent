@@ -38,6 +38,7 @@ Route::domain('{drumeoDomain}')
     Route::get('/drumfest', [SalesController::class, 'drumFest']);
     Route::get('/awards/', [SalesController::class, 'awards']);
     Route::get('/sonor/', [SalesController::class, 'sonor']);
+    Route::get('/alesis', [SalesController::class, 'alesis']);
 
     Route::get('/trial', [SalesController::class, 'trial']);
     Route::get('/trial2', [SalesController::class, 'trialSplit'] );
