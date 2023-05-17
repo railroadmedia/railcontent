@@ -23733,6 +23733,9 @@ a:visited{
 .tw-bg-gradient-to-t{
   background-image: linear-gradient(to top, var(--tw-gradient-stops)) !important;
 }
+.tw-bg-\[url\(\'\$\{bgImgUrl\}\'\)\]{
+  background-image: url('${bgImgUrl}') !important;
+}
 .tw-from-singeo{
   --tw-gradient-from: #8300E9 !important;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(131 0 233 / 0)) !important;

@@ -249,7 +249,7 @@ const needAccess = computed(() => {
 })
 
 onBeforeMount(() => {
-    //console.log(props.playlistItems)
+    console.log('released', props.released, 'need access', props.needAccess)
 });
 </script>
 
