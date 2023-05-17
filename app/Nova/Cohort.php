@@ -136,7 +136,7 @@ class Cohort extends Resource
                     return $value;
                 }),
             Text::make('Header image url', 'header_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            Text::make('Trailer', 'cohort_trailer')->hideFromIndex()->help('Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
+            Text::make('Trailer', 'cohort_trailer')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
 //            Image::make('Icon 1', 'icon1_url')
 //                ->help('The icon should be 545 x 103px or a comparable aspect ratio.')
 //                ->disk('nova_s3')
