@@ -8159,16 +8159,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.81",
+            "version": "dev-5.0-no-extra-days-for-trials-BR-662",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "54b7d14601ee1ab0b32419016b81b250f4820c04"
+                "reference": "cf94f220a96844df724f207bd07b5164fcbf466e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/54b7d14601ee1ab0b32419016b81b250f4820c04",
-                "reference": "54b7d14601ee1ab0b32419016b81b250f4820c04",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/cf94f220a96844df724f207bd07b5164fcbf466e",
+                "reference": "cf94f220a96844df724f207bd07b5164fcbf466e",
                 "shasum": ""
             },
             "require": {
@@ -8205,9 +8205,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.81"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-no-extra-days-for-trials-BR-662"
             },
-            "time": "2023-05-17T09:42:10+00:00"
+            "time": "2023-05-10T06:54:00+00:00"
         },
         {
             "name": "railroad/lead-tracker",
