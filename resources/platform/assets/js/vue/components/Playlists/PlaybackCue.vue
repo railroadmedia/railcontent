@@ -215,11 +215,11 @@ onMounted(() => {
 <template>
     <section
         class="tw-z-10 tw-border dark:tw-border-[#002039] tw-border-[#e5e7ea] dark:tw-bg-[#000C17] tw-bg-[#F9F9F9] "
-        :class="playlistsStore.playerExpanded ? 'tw-mb-0': 'tw-mb-4'"
+        :class="playlistsStore.playerExpanded ? 'lg:tw-mb-0 lg:tw-mb-4': 'tw-mb-4'"
     >
         <!-- Header -->
-        <div class="tw-flex dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-px-[10px] tw-sticky lg:tw-relative tw-top-0 tw-z-50 tw-min-h-[40px] tw-w-full"
-             :class="playlistsStore.playerExpanded ? 'tw-flex-row tw-py-[10px] tw-items-center' : 'tw-flex-col tw-py-[17px]' "
+        <div class="tw-flex dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-px-[10px] tw-sticky lg:tw-relative tw-top-0 tw-z-50 tw-min-h-[40px] tw-w-full tw-flex-col tw-py-[17px]"
+             :class="playlistsStore.playerExpanded ? 'lg:tw-flex-row lg:tw-py-[10px] lg:tw-items-center' : '' "
         >
             <div>
                 <div class="tw-flex tw-items-start">
@@ -249,7 +249,7 @@ onMounted(() => {
             </div>
             <!-- CTAs -->
             <div class="tw-flex"
-                 :class="playlistsStore.playerExpanded ? 'tw-w-full tw-justify-center' : ''"
+                 :class="playlistsStore.playerExpanded ? 'lg:tw-w-full lg:tw-justify-center' : ''"
             >
                 <!-- Prev Lesson -->
                 <a class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white tw-transition-colors tw-mr-3"
@@ -293,8 +293,8 @@ onMounted(() => {
                 </a>
             </div>
             <!-- Exit Fullscreen -->
-            <button class="tw-px-1 tw-text-[#00101D] dark:tw-text-white tw-ml-1 tw-font-bebas-neue tw-flex tw-flex-nowrap tw-items-center" 
-                    :class="{ 'tw-hidden' : !playlistsStore.playerExpanded }" 
+            <button class="tw-px-1 tw-text-[#00101D] dark:tw-text-white tw-ml-1 tw-font-bebas-neue tw-flex tw-flex-nowrap tw-items-center tw-leading-[21px] tw-hidden" 
+                    :class="{ 'lg:tw-inline-flex' : playlistsStore.playerExpanded }" 
                     @click="pageContainerStore.isSidebarCollapsed = !pageContainerStore.isSidebarCollapsed; playlistsStore.playerExpanded = !playlistsStore.playerExpanded"
             >
                 Exit <i class="fas fa-xmark tw-ml-2"></i>
@@ -314,7 +314,8 @@ onMounted(() => {
             <playlist-card :currentItem="playlistItemPosition" v-for="(lesson, i) in playlistsStore.lessons"
                 :key="'playlist-card-cue-' + lesson.id" :index="i" :cardId="'playlist-card-cue-' + lesson.id"
                 :lesson="lesson" :token="token" :brand="brand" :cue-version="true" :in-playback-cue="true"
-                :is-my-playlist="isMyPlaylist" />
+                :is-my-playlist="isMyPlaylist" 
+            />
             <!-- Skeleton Loader For Infinite Scroll -->
             <div v-if="shouldShowBottomSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
                 <div v-for="n in (playlistsStore.lessons.length >= 20 ? limit : 20 - playlistsStore.lessons.length)"
