@@ -1,7 +1,7 @@
 <header class="sm:px-6 pb-10 sm:py-14 lg:py-20" style="background:#f6f8fc;">
     <div class="container max-w-6xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
-            <div class="w-full sm:w-7/12 sm:pr-8 text-center lg:text-left">
+            <div class="w-full sm:w-7/12 sm:pr-6 text-center lg:text-left">
                 <div x-on:click="trailer = true;" alt="header image" class="mb-5 overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video relative"
                     @if(!empty($promoVersion))
                         style="background-image:url();padding-bottom: 60%;"

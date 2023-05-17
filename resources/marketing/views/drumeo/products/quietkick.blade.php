@@ -81,7 +81,6 @@
                 "price" => $memberPrice,
                 "noBreadcrumb" => true
             ])
-    <div class="w-full h-10 sm:h-12"></div>
     <header class="header text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-6xl">
