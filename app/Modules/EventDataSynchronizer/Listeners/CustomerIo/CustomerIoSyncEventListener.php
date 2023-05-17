@@ -1245,6 +1245,7 @@ class CustomerIoSyncEventListener
             'product_id' => $productIds,
             'amount_paid' => $amountPaid,
             'amount_due' => $amountDue,
+            'timestamp' => $mobileOrderEvent->getSubscription()->getUpdatedAt()->timestamp
         ];
 
         dispatch(
