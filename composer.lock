@@ -8159,16 +8159,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.80",
+            "version": "v5.0.81",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "253ba68ad375e785e7712cd7adacdf091f27a659"
+                "reference": "54b7d14601ee1ab0b32419016b81b250f4820c04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/253ba68ad375e785e7712cd7adacdf091f27a659",
-                "reference": "253ba68ad375e785e7712cd7adacdf091f27a659",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/54b7d14601ee1ab0b32419016b81b250f4820c04",
+                "reference": "54b7d14601ee1ab0b32419016b81b250f4820c04",
                 "shasum": ""
             },
             "require": {
@@ -8205,9 +8205,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.80"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.81"
             },
-            "time": "2023-05-17T09:26:49+00:00"
+            "time": "2023-05-17T09:42:10+00:00"
         },
         {
             "name": "railroad/lead-tracker",
