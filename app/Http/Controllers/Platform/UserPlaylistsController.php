@@ -225,7 +225,6 @@ class UserPlaylistsController extends BaseController
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
         ];
-        $user = user();
         ContentRepository::$pullFutureContent = true;
 
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId, false);
@@ -249,31 +248,16 @@ class UserPlaylistsController extends BaseController
         $playlistItem = $this->userPlaylistsService->getPlaylistItemById($playlistItemId);
         throw_if((!($playlistItem)), new NotFoundHttpException());
 
-        $content = $this->contentService->getById($playlistItem['content_id']);
-
-        if (empty($content)) {
-            ContentRepository::$bypassPermissions = true;
-            $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id']);
-
-            ContentRepository::$bypassPermissions = false;
-            $items = new ContentFilterResultsEntity([
-                                                        'results' => $playlistItems,
-                                                    ]);
-
-            return view('account.playlist', [
-                "listLessons" => $items->toResponseRawJson(),
-                "playlist" => $playlist,
-            ]);
-        }
-
         $position = $playlistItem['position'];
         $page = ($playlistItem['position'] <= 20) ? 1 : (ceil(($playlistItem['position']) / 20));
         $request->merge(['page' => $page]);
         $request->merge(['limit' => 20]);
 
         ContentRepository::$bypassPermissions = true;
+        $content = $this->contentService->getById($playlistItem['content_id']);
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20, $page);
         ContentRepository::$bypassPermissions = false;
+
         $playlistItem =
             $playlistItems->where('user_playlist_item_id', '=', $playlistItemId)
                 ->first();
@@ -306,18 +290,15 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['end_second'] = $item['end_second'] ?? null;
             $otherItems[$index]['started'] = $item['started'] ?? false;
             $otherItems[$index]['completed'] = $item['completed'] ?? false;
-            $otherItems[$index]['thumbnail_url'] =
-                $item->fetch(
-                    'thumbnail_url',
-                    $item->fetch('data.original_thumbnail_url', $item->fetch('data.thumbnail_url', ''))
-                );
+            $otherItems[$index]['thumbnail_url'] = $item->fetch(
+                'thumbnail_url',
+                $item->fetch('data.original_thumbnail_url', $item->fetch('data.thumbnail_url', ''))
+            );
             $otherItems[$index]['user_progress'] = $item['user_progress'] ?? '';
             $otherItems[$index]['parent_title'] = $item['parent_title'] ?? '';
             $otherItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
             $otherItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
         }
-
-        throw_if(empty($playlistItem), new NotFoundHttpException());
 
         if (!empty($content['parent_content_data'] ?? [])) {
             $content['parent'] =
@@ -338,6 +319,8 @@ class UserPlaylistsController extends BaseController
         $playlistItem['end_second'] = $endSecond;
         $playlistItem['is_high_routine'] = $initialItem['is_high_routine'] ?? false;
         $playlistItem['is_low_routine'] = $initialItem['is_low_routine'] ?? false;
+        $playlistItem['need_access'] = $initialItem['need_access'] ?? false;
+        $playlistItem['need_access_message'] = $initialItem['need_access_message'] ?? false;
 
         $userPlaylists = collect($this->userPlaylistsService->getUserPlaylist(user()->id, 'user-playlist'));
         $playlists = $userPlaylists->whereNotIn('id', $playlistId);
@@ -380,17 +363,15 @@ class UserPlaylistsController extends BaseController
 
         if (!empty($playlistItem['parent'] ?? []) && (!empty($playlistItem['parent']['parent_content_data']))) {
             $this->routingDecorator->decorate([$playlistItem['parent']]);
-            $playlistItem['parent']['thumbnail_url'] =
-                $playlistItem['parent']->fetch(
-                    'data.original_thumbnail_url',
-                    $playlistItem['parent']->fetch('data.thumbnail_url')
-                );
+            $playlistItem['parent']['thumbnail_url'] = $playlistItem['parent']->fetch(
+                'data.original_thumbnail_url',
+                $playlistItem['parent']->fetch('data.thumbnail_url')
+            );
             if (empty($playlistItem['parent']['thumbnail_url']) && isset($playlistItem['parent']['parent'])) {
-                $playlistItem['parent']['thumbnail_url'] =
-                    $playlistItem['parent']['parent']->fetch(
-                        'data.original_thumbnail_url',
-                        $playlistItem['parent']['parent']->fetch('data.thumbnail_url')
-                    );
+                $playlistItem['parent']['thumbnail_url'] = $playlistItem['parent']['parent']->fetch(
+                    'data.original_thumbnail_url',
+                    $playlistItem['parent']['parent']->fetch('data.thumbnail_url')
+                );
             }
         }
 
