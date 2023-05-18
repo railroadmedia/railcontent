@@ -368,7 +368,7 @@
                     'position' => 'left',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/lifetime-access.jpg',
                     'title' => 'Lifetime access.',
-                    'desc' => 'You can access ALL playalongs, charts, and lessons from 30-Day Chops for life. That means you can return to your favorite chop workouts over and over – plus, it means you can work at your own pace. Comment end  ',
+                    'desc' => 'You can access ALL playalongs, charts, and lessons from 30-Day Chops for life. That means you can return to your favorite chop workouts over and over – plus, it means you can work at your own pace.',
                     ],
                 ];
 //            @endphp
