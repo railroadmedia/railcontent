@@ -200,12 +200,12 @@ class CustomerIoSyncService
                     $membershipFirstAccessStartDate->timestamp : null,
                 $brand . '_membership_is_lifetime' => !empty($latestMembershipUserProductToSync) ?
                     empty($latestMembershipUserProductToSync->getExpirationDate()) : null,
-//                $brand . '_membership_latest-access-type' => !empty($latestSubscription) ?
-//                    $latestSubscription->getIntervalType() : null,
-//                $brand . '_membership_status' => !empty($latestSubscription) ?
-//                    $latestSubscription->getIsActive() : null,
-//                $brand . '_membership_latest-access-product-id' => !empty($latestSubscription) ?
-//                    $latestSubscription->getProduct()->getId() : null,
+                $brand . '_membership_latest-access-type' => !empty($latestSubscription) ?
+                    $latestSubscription->getIntervalType() : null,
+                $brand . '_membership_status' => !empty($latestSubscription) ?
+                    $latestSubscription->getIsActive() : null,
+                $brand . '_membership_latest-access-product-id' => !empty($latestSubscription) ?
+                    $latestSubscription->getProduct()->getId() : null,
 
             ];
 
