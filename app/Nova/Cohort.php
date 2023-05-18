@@ -32,7 +32,7 @@ class Cohort extends Resource
             ID::make()->sortable(),
 
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
-            Text::make('slug')->required(),
+            Text::make('slug')->required()->rules('required', 'max:255'),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('Cohort Title', 'cohort_title')->required()->help("For easy reference to this banner in the CMS. This info won't show on the banner."),
 
