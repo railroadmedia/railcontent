@@ -268,7 +268,7 @@ onBeforeMount(() => {
 
         <div
             class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-mb-4 tw-flex-col "
-            :class="playlistsStore.playerExpanded ? 'tw-flex-col-reverse' : '2xl:tw-flex-row' "
+            :class="playlistsStore.playerExpanded ? 'lg:tw-flex-col-reverse' : '2xl:tw-flex-row' "
         >
             
             <div class="tw-flex tw-flex-col tw-w-full">
