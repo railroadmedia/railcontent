@@ -221,7 +221,7 @@ onMounted(() => {
         <div class="tw-flex dark:tw-bg-[#002039] tw-bg-[#e5e7ea] tw-px-[10px] tw-sticky lg:tw-relative tw-top-0 tw-z-50 tw-min-h-[40px] tw-w-full tw-flex-col tw-py-[17px]"
              :class="playlistsStore.playerExpanded ? 'lg:tw-flex-row lg:tw-py-[10px] lg:tw-items-center' : '' "
         >
-            <div :class="playlistsStore.playerExpanded ? 'tw-w-1/3' : '' ">
+            <div class="tw-w-full" :class="playlistsStore.playerExpanded ? 'lg:tw-w-1/3' : '' ">
                 <div class="tw-flex tw-items-start">
                     <a :href="playlistUrl"
                         class="tw-inline-flex tw-mr-auto tw-pb-1 tw-large tw-leading-tight tw-font-bold tw-text-[#00101D] dark:tw-text-white hover:tw-underline">
@@ -304,9 +304,9 @@ onMounted(() => {
             </div>
         </div>
         <!-- Items -->
-        <div v-if="playlistsStore.lessons.length && !playlistsStore.playerExpanded" id="cue-scroll-container"
+        <div v-if="playlistsStore.lessons.length" id="cue-scroll-container"
             class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-overflow-y-auto tw-relative"
-            :class="state.collapsed ? 'tw-hidden lg:tw-block' : ''">
+            :class="[{ 'tw-hidden lg:tw-block' : state.collapsed  }, { 'lg:tw-hidden' : playlistsStore.playerExpanded } ]">
             <!-- Top Skeleton for offset For top Infinite Scroll -->
             <!-- <div v-if="shouldShowTopSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
                 <div
