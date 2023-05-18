@@ -56,7 +56,7 @@ class Carousel extends Resource
             ID::make()->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
-            Text::make('name')->sortable()->help('For easy reference to this banner in the CMS. This info won\'t show on the banner.')->required(),
+            Text::make('name')->sortable()->help('For easy reference to this banner in the CMS. This info won\'t show on the banner.')->required()->rules('required'),
             Boolean::make('visible')->hideFromIndex()->default(true),
             Number::make('Display Order', 'display_order')->hideFromIndex(),
             DateTime::make('Start Time', 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),

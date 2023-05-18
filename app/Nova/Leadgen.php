@@ -57,8 +57,8 @@ class Leadgen extends Resource
             ID::make()->sortable(),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
-            Text::make('title')->required(),
-            Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
+            Text::make('title')->required()->rules('required'),
+            Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required()->rules('required'),
             Image::make('Meta Image', 'meta_img')
                 ->disk('nova_s3')
                 ->prunable()
