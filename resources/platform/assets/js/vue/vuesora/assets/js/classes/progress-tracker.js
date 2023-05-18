@@ -108,7 +108,6 @@ export default class ProgressTracker {
         totalDuration,
         sessionToken,
     }) {
-        debugger;
         if (this.secondsWatched == null) {
             return new Promise.resolve(false);
         }
