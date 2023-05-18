@@ -88,6 +88,15 @@ export default {
                 return this.currentTime;
             },
         },
+        contentCurrentTimeStorageKey:{
+            get(){
+                if (this.videoId) {
+                    return this.videoId;
+                } else {
+                    return this.contentId;
+                }
+            },
+        }
     },
     mounted() {
         const youtubeIframeApi = document.getElementById('youtubeIframeApi');
@@ -140,10 +149,25 @@ export default {
             firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
         },
 
+        getTimeToSeekTo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            let seconds = urlParams.get('time');
+            if (seconds) {
+                return seconds;
+            }
+            seconds = window.localStorage.getItem(`${this.contentCurrentTimeStorageKey}_currentTime`);
+            if (seconds) {
+                window.localStorage.removeItem(`${this.contentCurrentTimeStorageKey}_currentTime`);
+                return seconds;
+            }
+
+            return window.sessionStorage.getItem(`${this.contentCurrentTimeStorageKey}_currentTime`) || this.currentSecond;
+        },
+
         initPlayer() {
             const { youtubeIframe } = this.$refs;
-            const urlParams = new URLSearchParams(window.location.search);
-            const timeToSeekTo = urlParams.get('time') || this.currentSecond;
+
+            const timeToSeekTo = this.getTimeToSeekTo();
             const vm = this;
             var videoId = this.videoId;
 
@@ -220,6 +244,11 @@ export default {
                     },
                 },
             });
+
+            setInterval(() => {
+                window.sessionStorage.setItem(`${this.contentCurrentTimeStorageKey}_currentTime`, this.player.getCurrentTime());
+            }, 2500);
+
         },
 
         enableIntersectionObserver() {
