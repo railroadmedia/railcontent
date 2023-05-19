@@ -66,7 +66,7 @@
                         //show success message
                         window.shownotification({
                             icon: 'fa-trash',
-                            text: `'${props.data.name}' was removed from your library.`
+                            text: `The playlist has been deleted from your library.`
                         })
                         //Close Modal
                         emit('onCloseModal')
@@ -107,7 +107,7 @@
                     //show success message
                     window.shownotification({
                         icon: 'fa-trash',
-                        text: `'${state.title}' was removed from your playlist.`
+                        text: `${state.title} was removed from your playlist.`
                     })
                 }
             })
@@ -135,14 +135,13 @@
     <div class="tw-h-full tw-w-full tw-flex tw-flex-col tw-items-center tw-justify-center">
         <template v-if="!state.isLoading">
             <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center tw-mb-4">
-                <span v-if="mode === 'lesson'">Remove </span>
-                <span v-else>Delete </span>
-                <span :class="`tw-text-${brand}`" class="tw-mr-0.5">
-                    <span v-if="mode === 'lesson'">{{ state.title }}</span>
-                    <span v-else>{{ data.name }}</span>
-                </span>?
+                <span v-if="mode === 'lesson'">Remove from playlist?</span>
+                <span v-else>Delete <span :class="`tw-text-${brand}`" class="tw-mr-0.5">{{ data.name }}</span>?</span>
             </h2>
-            <p class="dark:tw-text-white tw-text-center">This action cannot be undone</p>
+            <p class="dark:tw-text-white tw-text-center">
+                <span v-if="mode === 'lesson'">Are you sure? This action can not be undone.</span>
+                <span v-else>Warning: this action can not be undone.</span>
+            </p>
             <div class="tw-pt-8 tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-justify-center tw-w-full">
                 <!-- Delete Playlist -->
                 <button v-if="mode !== 'lesson'" :class="`tw-mb-2 tw-btn-primary tw-bg-${brand} tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1 hover:tw-bg-${brand}-600`"

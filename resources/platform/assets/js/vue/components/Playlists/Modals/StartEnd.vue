@@ -76,11 +76,11 @@
         //Send Request
         PlaylistService.updatePlaylistItem(payload, token)
             .then(function(response) {
-                if (response.status === 201) {
+                if (response.status === 200) {
                     //show success message
                     window.shownotification({
                         icon: 'fa-pen-to-square',
-                        text: `You have successfully set the Start and End time of '${state.title}'`
+                        text: `You have successfully set the start and end time for '${state.title}'.`
                     })
                 } else {
                     console.log('edit response code', response)

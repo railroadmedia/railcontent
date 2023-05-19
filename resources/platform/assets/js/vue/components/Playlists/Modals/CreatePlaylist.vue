@@ -110,10 +110,10 @@
                     //show success message
                     window.shownotification({
                         icon: 'playlist',
-                        text: `'${payload.name}' was added to your library.`
+                        text: `${payload.name} was been successfully created.`
                     })
                     if (props.playlist.hasAddItemCallback) {
-                        console.log('has add item callback', response.data)
+                        // console.log('has add item callback', response.data)
                         window.addItemCallback(response.data.data[0].id)
                     }
                     //load Playlists (if collection catalog exists)
@@ -158,7 +158,7 @@
                         //show success message
                         window.shownotification({
                             icon: 'fa-pen-to-square',
-                            text: `Your playlist was successfully edited`
+                            text: `${state.name} has been successfully edited.`
                         })
                         //load Playlists (if collection catalog exists)
                         if( playlistsStore.pageHasPlaylistCatalog ) {

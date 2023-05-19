@@ -251,10 +251,10 @@ onMounted(() => {
 
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-4" v-if="additionalItems > 0 && content.type !== 'song'">
             <p class="tw-text-center tw-text-[14px] tw-mb-3">
-                Your selected videos contain {{
+                Your selected video(s) also contain(s) {{
                     additionalItems
                 }} additional
-                assignment items. Would you like to also import them into your playlist?
+                assignment items. Would you like to import them into your playlist?
             </p>
             <div class="tw-flex tw-w-full">
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-justify-between tw-w-full">
@@ -275,7 +275,7 @@ onMounted(() => {
         <!-- Song Instrument Toggles -->
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-pt-[18px]" v-if="showSongToggle">
             <p class="tw-text-[16px] tw-text-center tw-w-full tw-pb-[20px]">This song contains both full and {{
-                instrumentless }} tracks. Choose which tracks you want to Import into your Playlist.</p>
+                instrumentless }} tracks. Choose which tracks you want to add.</p>
             <div class="tw-flex tw-justify-center tw-w-full">
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-mx-4">
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]">
@@ -306,7 +306,7 @@ onMounted(() => {
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-pt-[18px]" v-if="showVocalRoutineToggles">
             <p class="tw-text-[16px] tw-text-center tw-w-full tw-pb-[20px]">
                 This routine contains variants for high and low voices. <br>
-                Choose which variants you want to Import into your Playlist.
+                Choose which variant(s) you want to import.
             </p>
             <div class="tw-flex tw-justify-center tw-w-full">
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-mx-4">

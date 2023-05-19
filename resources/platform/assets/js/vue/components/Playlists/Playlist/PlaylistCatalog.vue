@@ -87,7 +87,7 @@
         //show success message
         window.shownotification({
             icon: 'fa-pen-to-square',
-            text: `You have successfully re-ordered your playlist items`
+            text: `You have successfully re-ordered your playlist items.`
         })
     }
     //Cancel Sort
