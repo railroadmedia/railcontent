@@ -44,7 +44,7 @@ if(!empty($user)){
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
             <div class="flex flex-row align-v-center flex-wrap">
                 <div class="flex flex-column ph xs-12 sm-8 mb-2">
-                    <h1 class="heading mb-1 text-white">The Best Beginner Drum Book</h1>
+                    <h1 class="tw-font-bold tw-text-5xl mb-1 text-white tw-font-bebas-neue">The Best Beginner Drum Book</h1>
                     <p class="body mb-2 text-white">
                         Here are some lessons and resources that were hand-picked from Drumeo because
                         they go great with The Best Beginner Drum Book material.
