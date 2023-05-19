@@ -194,6 +194,7 @@ return [
         App\Modules\Content\Providers\ContentServiceProvider::class,
         App\Modules\Notifications\Providers\NotificationServiceProvider::class,
         App\Modules\Reporting\Providers\ReportingServiceProvider::class,
+        App\Modules\AddEventCalendars\Providers\AddEventCalendarsServiceProvider::class,
 
         /*
          * Application Service Providers...
