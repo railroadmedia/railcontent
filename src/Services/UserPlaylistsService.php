@@ -840,4 +840,20 @@ class UserPlaylistsService
     {
         return $this->userPlaylistContentRepository->getItemWithPositionInPlaylist($playlistId, $position);
     }
+
+    /**
+     * @param $playlistId
+     * @return int
+     */
+    public function countCompletedUserPlaylistContents($playlistIds)
+    {
+        $results = $this->userPlaylistContentRepository->countCompletedUserPlaylistContents($playlistIds);
+
+        return $results;
+    }
+
+    public function countUserPlaylistItems($playlistIds)
+    {
+        return $this->userPlaylistContentRepository->countUserPlaylistItems($playlistIds);
+    }
 }

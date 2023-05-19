@@ -374,4 +374,57 @@ class UserPlaylistContentRepository extends RepositoryBase
             ->where('position', $position)
             ->first();
     }
+
+    /**
+     * @param $playlistId
+     * @param array $contentType
+     * @return int
+     */
+    public function countCompletedUserPlaylistContents($playlistIds)
+    {
+        $query =
+            $this->query()->selectRaw('user_playlist_id, count(*) as completed_items')
+                ->join(
+                    config('railcontent.table_prefix').'user_content_progress',
+                    config('railcontent.table_prefix').'user_playlist_content.content_id',
+                    '=',
+                    config('railcontent.table_prefix').'user_content_progress.content_id'
+                )
+                ->whereIn('user_playlist_id', $playlistIds)
+                ->where('user_id', '=', auth()->id())
+                ->where('state', 'LIKE','completed')
+        ->groupBy('user_playlist_id');
+
+        $results = $query->get()->toArray();
+
+        return array_combine(array_column($results, 'user_playlist_id'), array_column($results, 'completed_items'));
+    }
+
+    /**
+     * @param $playlistIds
+     * @return int
+     */
+    public function countUserPlaylistItems($playlistIds)
+    {
+        $query =
+            $this->query()->selectRaw('user_playlist_id, count(*) as items')
+                ->join(
+                    config('railcontent.table_prefix').'content',
+                    config('railcontent.table_prefix').'user_playlist_content.content_id',
+                    '=',
+                    config('railcontent.table_prefix').'content.id'
+                )
+                ->whereIn('user_playlist_id', $playlistIds);
+
+        if (is_array(ContentRepository::$availableContentStatues)) {
+            $query->whereIn(
+                config('railcontent.table_prefix').'content.status',
+                ContentRepository::$availableContentStatues
+            );
+        }
+
+        $results = $query->groupBy('user_playlist_id')->get()->toArray();
+
+        return array_combine(array_column($results, 'user_playlist_id'), array_column($results, 'items'));
+    }
 }
