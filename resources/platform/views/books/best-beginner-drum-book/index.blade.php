@@ -40,8 +40,8 @@ if(!empty($user)){
 @endsection
 
 @section('content')
-    <header id="bestBookHeader" class="container fluid bb-grey-1-1 pv-5 shadow">
-        <div class="container">
+    <header id="bestBookHeader" class="container fluid pv-5 shadow">
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
             <div class="flex flex-row align-v-center flex-wrap">
                 <div class="flex flex-column ph xs-12 sm-8 mb-2">
                     <h1 class="heading mb-1 text-white">The Best Beginner Drum Book</h1>
@@ -130,7 +130,7 @@ if(!empty($user)){
     @include('books.best-beginner-drum-book.partials.redeem-modal', ['formSubmitUrl' => URL::route('access-codes.form-claim')])
 
     <div class="container mv-3">
-        <div class="flex flex-column bg-white corners-3 shadow content-table">
+        <div class="flex flex-column shadow content-table">
             @foreach($chapters as $index => $chapter)
                 @include('books.best-beginner-drum-book.partials.chapter', [
                     "chapterNumber" => $index + 1,
