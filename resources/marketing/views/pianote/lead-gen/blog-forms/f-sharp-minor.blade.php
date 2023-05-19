@@ -1,4 +1,6 @@
-@extends('pianote.lead-gen.blog-forms.blog-form-layout')
+@extends('_partials.components.forms.blog-form-layout',[
+    'brand' => 'pianote',
+])
 
 @section('title', 'F#m')
 
