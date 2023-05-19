@@ -155,10 +155,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
             (!$hasProduct) ?
                 url()->route('platform.cohort.register', ['brand' => brand(), 'product' => $product->getSku()]) : '';
 
-        $endDate = Carbon::createFromFormat('Y-m-d H:i:s', $cohort['enrollment_end_date']);
-        $startDate = Carbon::createFromFormat('Y-m-d H:i:s', $cohort['enrollment_start_date']);
-        $now = Carbon::now();
-        $enrollmentClosed = $endDate->lessThan($now) || $startDate->greaterThan($now);
+        $enrollmentClosed = $cohort['enrollmentClosed'];
 
         return [
             'hasProduct' => $hasProduct,

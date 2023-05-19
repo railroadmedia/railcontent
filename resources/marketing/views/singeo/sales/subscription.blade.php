@@ -190,18 +190,34 @@
             ],
         ];
     @endphp
-    @include('musora.sales.components.header-section', [
-        'header' => 'Get the singing voice you’ve always wanted.',
-        'desc' => 'Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.',
-        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/header-thumb2.jpg',
-        'promoThumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb.png',
-        'promoThumbM' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb-m.png',
-        'pointOne' => 'Improve Your Voice',
-        'pointTwo' => 'Helpful Vocal Coaches',
-        'pointThree' => 'Sing Popular Songs',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
-        'students' => number_format(Prices::$students),
-    ])
+
+    @if(!empty($beginnerVersion))
+        @include('musora.sales.components.header-section', [
+            'header' => 'Singing lessons that fit your schedule. ',
+            'desc' => 'Learn to sing from home, anytime, with bite-sized video lessons and unlimited personal support. ',
+            'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/header-thumb2.jpg',
+            'promoThumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb.png',
+            'promoThumbM' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb-m.png',
+            'pointOne' => 'Improve Your Voice',
+            'pointTwo' => 'Helpful Vocal Coaches',
+            'pointThree' => 'Sing Popular Songs',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
+            'students' => number_format(Prices::$students),
+        ])
+    @else
+        @include('musora.sales.components.header-section', [
+            'header' => 'Get the singing voice you’ve always wanted.',
+            'desc' => 'Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.',
+            'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/header-thumb2.jpg',
+            'promoThumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb.png',
+            'promoThumbM' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb-m.png',
+            'pointOne' => 'Improve Your Voice',
+            'pointTwo' => 'Helpful Vocal Coaches',
+            'pointThree' => 'Sing Popular Songs',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
+            'students' => number_format(Prices::$students),
+        ])
+    @endif
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif

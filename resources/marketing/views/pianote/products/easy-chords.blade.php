@@ -268,16 +268,16 @@
 
     <a href="#final" class="anchor-slide flex items-end justify-center px-2 sm:px-0 fixed w-full z-[100]" style="background: #d6e8fd;">
         <p class="font-bebas uppercase mx-0 py-2 leading-none">
-            GET A FREE CHORDS & SCALES BOOK UNTIL MAY 21.
-            <br><span class="text-pianote"><span x-cloak x-data="timer2()" x-init="countdown2()">
-                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+            GET A FREE CHORDS & SCALES BOOK UNTIL MAY 22.
+            <br><span class="text-pianote"><span x-cloak x-data="timer2()" x-init="countdown2()"><span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                  <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-{{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-                    {{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
                                  <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                             </span> left!</span>
+                             </span>
+                left!</span>
         </p>
-        <img class="h-10 ml-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/sticky_bar_chords_scales.png" alt="30 day drummer logo" />
+        <img class="h-10 ml-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/sticky_bar_chords_scales.png" alt="chords & scales book" fetchpriority="high" />
     </a>
     <div class="w-full block h-10 sm:h-11"></div>
 
@@ -285,13 +285,14 @@
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-14 sm:h-18 lg:h-20 mb-1 sm:mb-0 lg:mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo">
+                    <img class="h-14 sm:h-18 lg:h-20 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo" fetchpriority="high">
                     <h1 class=""><strong>30 days to</strong></h1>
                     <h2 class="sm:-mt-1 lg:mt-0">better piano chords.</h2>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting June 5th.</strong></h6>
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 75%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/header-image-m.png" data-open="trailer">
+                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
+                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/header-image-m.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
 
@@ -310,17 +311,18 @@
 {{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
                                 <a href="#final" class="join medium w-full anchor-slide">ENROLL NOW</a>
                             <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-pianote">
-                                <a href="{{ get_musora_brand_base_url() }}/new-piano-players">Pianote Members register for free here.</a>
+                                <a href="https://www.musora.com/pianote/enrollment/easy-chords">Pianote Members register for free here.</a>
                             </p>
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
-                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles">
+                            <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles" fetchpriority="high">
                             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
                         </div>
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/header-image.png" data-open="trailer">
+                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video" data-open="trailer">
+                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/header-image.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
@@ -336,8 +338,8 @@
                         <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">
                              <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                              <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
                              <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                          </span>
 {{--                        Enrollment closed--}}
@@ -368,23 +370,23 @@
         <div class="container max-w-4xl mx-auto">
             <h2 class="text-center"><strong>You’ll sound like THIS <br class="inline sm:hidden"> after just 30 days.</strong></h2>
             <h6 class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">Hear the difference between your first and final lesson. And it only takes 10 minutes a day.</h6>
-            <img class="sm:h-7" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/timeline.png">
+            <img class="sm:h-7 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/timeline.png" alt="timeline" loading="lazy" onload="this.classList.remove('opacity-0')">
             <div class="flex flex-wrap text-left max-w-3xl mx-auto mt-5 sm:mt-7 mb-10 sm:mb-14 lg:mb-20">
                 <div class="w-1/2 pr-2 sm:px-4">
                     <div class="rounded-xl overflow-hidden shadow-md cursor-pointer autoplay-video" data-open="dayOne">
-                        <img src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/day-1-thumb.jpg">
+                        <img class="transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/day-1-thumb.jpg" alt="day1 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
                         <p class="p-2 sm:p-5 text-sm">We’ll start slow. Here’s what you’ll be playing in your first lesson.</p>
                     </div>
                 </div>
                 <div class="w-1/2 sm:px-4">
                     <div class="rounded-xl overflow-hidden shadow-md cursor-pointer autoplay-video" data-open="dayThirty">
-                        <img src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/day-30-thumb.jpg">
+                        <img class="transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/day-30-thumb.jpg" alt="day 30 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
                         <p class="p-2 sm:p-5 text-sm">After 30 days, you’ll be playing this beautiful song. All you have to do is follow along.</p>
                     </div>
                 </div>
             </div>
 
-            <img class="h-56 inline sm:hidden lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/intro-image.png" alt="collage intro">
+            <img class="h-56 inline sm:hidden transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/intro-image.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
             <h2 class="text-center mt-5 sm:mt-0"><strong>Why chords?</strong></h2>
             <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7 lg:mb-10 uppercase text-pianote">We’re so glad you asked…</p>
 
@@ -400,7 +402,7 @@
                     And it only takes 10 minutes a day, 5 days a week.
                     <br><br>
                     That’s less time than it takes for a trip to the grocery store.</p>
-                <img class="h-96 hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/intro-image.png" alt="collage intro">
+                <img class="h-96 hidden sm:inline transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/intro-image.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
         </div>
     </section>
@@ -408,13 +410,12 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-4xl mx-auto">
-            <div class="{{-- aspect-16:9 --}} cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
-{{--                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>--}}
-                <img class="rounded-2xl" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/video-thumbnail.jpg" alt="trailer image" />
-{{--                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" poster="https://i.vimeocdn.com/video/1488646391-d2694ba3d38847b00d9fcd70c946d3c45efe1202cedf305361a253a275ef5f90-d_890" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/trailer.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
+            <div class=" aspect-16:9  cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96" data-open="trailer">
+                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
+                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/trailer.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
             </div>
 
-            <img class="h-10 sm:h-20 mt-10 sm:mt-16 lg:mt-24 mb-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1220,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/press-of-a-button.svg" alt="just play logo">
+            <img class="h-10 sm:h-20 mt-10 sm:mt-16 lg:mt-24 mb-8 transition-all opacity-0"src="https://www.musora.com/musora-cdn/image/width=1220,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/press-of-a-button.svg" alt="just play logo" loading="lazy" onload="this.classList.remove('opacity-0')">
             <h6 class="leading-normal mb-20 lg:mb-28 max-w-lg">Log in. Press play. Follow along.
                 <br><br>
                 It really is that simple. In just 10 minutes a day, you’ll build the skills and muscle memory to play beautiful music.
@@ -464,15 +465,11 @@
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
                             </div>
-                            <img class="-mt-7 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
+                            <img class="-mt-7 rounded-lg overflow-hidden transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                         </div>
                     @else
                         <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-0 @if($key !== 4) md:mb-28 @endif">
-                            @if(empty($getting['special']))
-                                <img class="-mt-7 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" />
-                            @else
-                                <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
-                            @endif
+                            <img class="-mt-7 rounded-lg overflow-hidden transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
@@ -483,12 +480,13 @@
             </div>
         </div>
     </section>
+    <div id="demo" class="anchor"></div>
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-bg.jpg);">
         <h3 class="leading-tight"><strong>Go on, give it a try</strong></h3>
         <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">Curious? <strong>Try a snippet from Day 1</strong> and<br class="inline sm:hidden"> see if Easy Chords is right for you.</p>
         <div class="relative cursor-pointer autoplay-video" data-open="demoVid">
-            <img class="inline-block sm:hidden w-full" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-m.png">
-            <img class="hidden sm:inline-block w-full" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano.png">
+            <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-m-lisa.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-lisa.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             <p class="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-2/3 px-3 py-1 z-10 rounded-xl text-white inline-block mx-auto text-sm whitespace-nowrap" style="background-color:#c20000;"><i class="fas fa-play-circle mr-1 text-xl sm:text-3xl align-middle"></i> <strong>At your piano?</strong> Hit play and try<br class="inline sm:hidden"> some of the lesson from your first day.</p>
         </div>
     </section>
@@ -503,7 +501,7 @@
                     <tbody>
                     <tr style="background-color:transparent!important;">
                         <td></td>
-                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=220,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo-light.png" alt="logo"></td>
+                        <td class="rounded-t-xl"><img class="h-8 sm:h-14 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=220,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo-light.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')"></td>
                         <td class="cursor-pointer sm:cursor-default rounded-tl-xl"><strong>Private<br> Lessons</strong></td>
                         <td class="cursor-pointer sm:cursor-default"><strong>Online<br> Courses</strong></td>
                         <td class="cursor-pointer sm:cursor-default rounded-tr-xl"><strong>Piano<br> Books</strong></td>
@@ -547,25 +545,28 @@
                 </table>
             </div>
 
-            <h2 class="mb-6 sm:mb-10 lg:mb-14"><img class="h-14 sm:h-16 align-bottom  lazyload" data-src="https://www.musora.com/musora-cdn/image/width=380,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo"> <strong>...is perfect for:</strong></h2>
+            <h2 class="mb-6 sm:mb-10 lg:mb-14"><img class="h-14 sm:h-16 align-bottom opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" loading="lazy" onload="this.classList.remove('opacity-0')" alt="logo"> <strong>...is perfect for:</strong></h2>
             <div class="flex flex-wrap text-left max-w-4xl mx-auto">
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/beginner-player.jpg">
-                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br>Beginner <br class="hidden sm:inline"> piano players</strong></h6>
+                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl">
+                        <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/beginner-player.jpg" alt="classical player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon" loading="lazy" onload="this.classList.remove('opacity-0')"><br>Beginner <br class="hidden sm:inline"> piano players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Know a few chords, but struggling to feel confident playing them? Or are you wondering what chord inversions are and how to practice them? With Easy Chords, you’ll move past the beginner stage and start sounding better.</p>
                 </div>
                 <div class="w-full sm:w-1/3 px-2 mb-6 sm:mb-0">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/intermediate-player.jpg">
-                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br>Intermediate<br class="hidden sm:inline"> piano players</strong></h6>
+                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl">
+                        <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/intermediate-player.jpg" alt="classical player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon" loading="lazy" onload="this.classList.remove('opacity-0')"><br>Intermediate<br class="hidden sm:inline"> piano players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Chord progressions sound better using inversions. Master your 1st and 2nd inversions to help you change chords more smoothly and sound more professional. Train your ear to hear more common chord progressions used in music.</p>
                 </div>
                 <div class="w-full sm:w-1/3 px-2">
-                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/classical-player.jpg">
-                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon"><br> Classical<br class="hidden sm:inline"> piano players</strong></h6>
+                    <div class="pb-44 sm:pb-36 lg:pb-52 text-center text-white bg-cover bg-center relative overflow-hidden rounded-xl">
+                        <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=530,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/classical-player.jpg" alt="classical player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                        <h6 class="leading-tight absolute bottom-1 w-full z-10"><strong><img class="h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/plus.svg" alt="check icon" loading="lazy" onload="this.classList.remove('opacity-0')"><br> Classical<br class="hidden sm:inline"> piano players</strong></h6>
                         <div class="absolute inset-0 z-0" style="background:linear-gradient(to bottom, transparent 40%, rgba(0,0,0,0.8));"></div>
                     </div>
                     <p class="leading-normal mt-3">Scared to break away from the safety of sheet music? Easy Chords will transform your understanding of composition and song structure. You don’t need notes on the page to play beautiful music. This will change everything.</p>
@@ -574,13 +575,13 @@
 
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
+    <section class="text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
                 <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
-                    <img class="inline-block sm:hidden w-full relative z-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/coach-profile-m2.png" alt="profile picture">
-                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/coach-profile.png" alt="profile picture">
-                    <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 lazyload" style="width: 150%;transform: translate(-44%, -7%);" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture">
+                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/coach-profile-m2.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/coach-profile.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
 
                 <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
@@ -608,7 +609,7 @@
                         <br><br>
                         Come join me.
                     </p>
-                    <img class="float-right h-12" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/lisa-witt-signature.png">
+                    <img class="float-right h-12 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/lisa-witt-signature.png" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
             </div>
 
@@ -651,9 +652,9 @@
 //                @endphp
                 @foreach ($testimonials as $key => $testimonial)
                     <div class="w-full lg:w-1/2 py-2 sm:px-2 lg:p-3">
-                        <div class="flex items-start p-5 bg-white rounded-lg">
-                            <img class="h-16 lg:h-20 rounded-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=85/{{ $testimonial['image'] }}" alt="testimonial {{ $key }}">
-                            <p class="pl-4"><strong>{{ $testimonial['name'] }}</strong><br>
+                        <div class="sm:flex items-start p-5 bg-white rounded-lg">
+                            <img class="h-14 sm:h-16 lg:h-20 rounded-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=160,quality=85/{{ $testimonial['image'] }}" alt="testimonial {{ $key }}" loading="lazy" onload="this.classList.remove('opacity-0')">
+                            <p class="sm:pl-4"><strong>{{ $testimonial['name'] }}</strong><br>
                                 <em class="leading-tight inline-block mb-1 opacity-60">{{ $testimonial['location'] }}</em><br>
                                 “{!! $testimonial['description']  !!}”
                             </p>
@@ -668,7 +669,7 @@
                     href="#final"
                     class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
 
-            <img class="h-7 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles">
+            <img class="h-7 mr-1 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/piano-players.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
         </div>
     </section>
@@ -697,7 +698,7 @@
     <div class="h-10 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
     <section class="text-white text-center px-5 sm:px-6 pb-10 sm:pb-14 lg:pb-20 py-10 sm:py-14 lg:pt-32" style="background-color:#2a2f34;">
         <div class="container max-w-3xl mx-auto">
-            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=410,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" alt="guarantee badge">
+            <img class="h-28 sm:h-40 lg:h-52 block mx-auto -mt-24 sm:-mt-36 lg:-mt-48 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=410,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png" alt="guarantee badge" loading="lazy" onload="this.classList.remove('opacity-0')">
             <h3 class="my-4 sm:my-6 lg:my-8"><strong>The guarantee that lasts<br class="inline sm:hidden"> longer than the course.</strong></h3>
             <p class="leading-normal">Easy Chords will make you a better piano player in just 30 days. And we’re so confident that you’ll love the results, you’ll have 90 days to put us to the test.
                 That’s enough time to go through the course 3x over before deciding if it’s worth the money.
@@ -712,12 +713,12 @@
         <div class="max-w-5xl mx-auto md:flex relative z-40">
             <div class="flex-1 text-white md:pr-4 lg:pr-0 mb-3 md:mb-0 max-w-md md:max-w-auto mx-auto">
                 <h5 class="uppercase mb-2 text-center md:text-left" style="color: #FFAE00;">
-                    AVAILABLE UNTIL May 21st<br> only
+                    AVAILABLE UNTIL May 22nd<br>
                     <span x-cloak x-data="timer2()" x-init="countdown2()">
                                  <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                  <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-{{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-                        {{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+                                 <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="second"></span><span x-text="secondText"></span></span>
                                  <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                              </span>
                     left!
@@ -735,9 +736,9 @@
             <div class="flex-1 relative sm:w-2/3 md:w-auto mx-auto text-center sm:pl-10">
                 <div class="relative md:max-w-md mx-auto">
                     <img
-                        class="md:absolute md:w-full h-80 md:h-auto md:left-0 -top-10 lg:-top-20 scales-book cursor-pointer lazyload"
-                        data-src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/piano_scales_book.png"
-                        alt="scales book" data-open="seeInside1">
+                        class="md:absolute md:w-full h-80 md:h-auto md:left-0 -top-10 lg:-top-20 scales-book cursor-pointer z-50 transition-all opacity-0"
+                        src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/piano_scales_book.png"
+                        alt="scales book" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
         </div>
@@ -746,8 +747,8 @@
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center">
-                <div class="text-center lg:text-left w-full lg:w-1/3 mb-7 lg:mb-0">
-                    <img class="h-20 md:h-24 lg:h-28 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=380,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo">
+                <div class="text-center lg:text-left w-full lg:w-1/3 mb-7 lg:mb-0 relative">
+                    <img class="h-20 md:h-24 lg:h-28 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h4 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
                             20 Guided Play-Along Lessons.<br>
                             Feedback From Real Teachers.<br>
@@ -771,12 +772,12 @@
                         <div class="join blue smaller my-4 w-full">ENROLL NOW</div>
                         <ul class="list-disc ml-6">
                             <li class="text-sm relaxed"><span class="text-pianote">Free</span> Chords & Scales Book</li>
-                            <li class="text-sm relaxed"><span class="text-pianote">Free bonus ends<br class="hidden sm:inline">  in
+                            <li class="text-sm relaxed"><span class="text-pianote">Free bonus ends in<br class="hidden sm:inline">
                                     <span x-cloak x-data="timer2()" x-init="countdown2()">
                                      <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                      <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-{{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-                                        {{--                                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                     <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="second"></span><span x-text="secondText"></span></span>
                                      <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                                  </span>
                                     </span></li>
@@ -787,14 +788,14 @@
                             <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>
                             <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>
                     </a>
-                    <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,easy-chords:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,100-days-of-practice-poster:1,the-power-of-chords:1,piano-riffs-and-fills:1&redirect=/order&locked=true&promo-code=special"
+                    <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,easy-chords:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,100-days-of-practice-poster:1,the-power-of-chords:1,piano-riffs-and-fills:1&redirect=/order&locked=true"
                         class="px-5 sm:px-10 py-7 sm:py-11 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"
                         style="background-color:#dde9f9;background-image:url(https://www.musora.com/musora-cdn/image/width=380,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/order-bg.jpg);"
                     >
                         <p class="border border-pianote text-pianote inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">LAUNCH MEMBERSHIP SPECIAL</p>
                         <h3><strong>Join Pianote + Get <br class="hidden sm:inline"> Easy Chords FREE</strong></h3>
                         <p class="text-sm mt-2 mb-5">The Ultimate Online Lessons Experience.</p>
-                        <h2 class="inline-block"><s class="opacity-40">$240</s> <strong class="text-4xl">$200</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>
+                        <h2 class="inline-block"><!--<s class="opacity-40">$240</s>--> <strong class="text-4xl">$240</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>
                         <div class="join blue smaller my-4 w-full">GET EVERYTHING</div>
                         <ul class="list-disc ml-6">
                             <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Chords & Scales Book</li>
@@ -863,22 +864,22 @@
 
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "dayOne",
-        "video" => '//player.vimeo.com/video/798501810?autoplay=1',
+        "video" => '//player.vimeo.com/video/823805392?h=bbd23aa655&autoplay=1',
         "title" => 'dayOne'
     ])
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "dayThirty",
-        "video" => '//player.vimeo.com/video/798501810?autoplay=1',
+        "video" => '//player.vimeo.com/video/823805719?h=722d7f7336&autoplay=1',
         "title" => 'dayThirty'
     ])
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "demoVid",
-        "video" => '//player.vimeo.com/video/798501810?autoplay=1',
+        "video" => '//player.vimeo.com/video/823806000?h=457fb12951&autoplay=1',
         "title" => 'demoVid'
     ])
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/798501810?autoplay=1',
+        "video" => '//player.vimeo.com/video/823788317?h=b2955e3bc7&autoplay=1',
         "title" => 'trailer'
     ])
     @foreach ($modalImages as $key => $img)
@@ -904,7 +905,7 @@
                 minuteText: ' minutes',
                 second: '00',
                 secondText: ' seconds',
-                endTime: new Date('2023-05-22 00:00:00').getTime(),
+                endTime: new Date('2023-05-23 00:00:00').getTime(),
                 startTime: new Date().getTime(),
                 timeLeft: 0,
                 smallScreen: false,
@@ -987,10 +988,10 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
-    <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
-    <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
+        <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
+        <script src="{{ asset('/marketing/js/drumeo/vendor.js') }}"></script>
+        <script src="{{ asset('/marketing/js/drumeo/cart-sidebar.js') }}"></script>
+        <script src="{{ asset('/marketing/js/drumeo/app.js') }}"></script>
 
 
     <script>

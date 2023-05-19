@@ -1,9 +1,9 @@
 @extends('musora._partials.layout')
 
 @section('head-includes')
-
     <title>Access Pass Redeem | Drumeo</title>
     <meta name="description" content="To redeem your access pass enter your code below!">
+    @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <style>
@@ -136,9 +136,6 @@
                 width:95%;
             }
         }
-    </style>
-    @if(!empty($thomann))
-        <style>
             .apply {
                 background:#0b76db;
             }
@@ -147,53 +144,105 @@
                 background:#258ff4;
             }
         </style>
-    @else
-        <style>
-            .apply {
-                background:#000C17;
-            }
-
-            .apply:hover {
-                background:#001930;
-            }
-        </style>
-    @endif
 @endsection
 
 <!-- Main -->
 @section('layout-body')
-    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+    <div class="pt-8 sm:pt-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
-            @if(empty($thomann))
-                <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
-                <div class="aspect-16:9 w-full relative border-2 rounded-xl overflow-hidden">
-                    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/113327941" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
-                </div>
+            @if($theme == 'drumeo')
+                <style>
+                .apply {
+                background:#0b76db;
+                }
+
+                .apply:hover {
+                background:#258ff4;
+                }
+                </style>
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/drumeo-sweetwater.svg') }}">
+                <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Drumeo.</strong></h3>
+                <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Drumeo Student through Sweetwater!<br class="hidden sm:inline">
+                Please enter the code that they provided you in the form below.</h6>
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
+            @elseif($theme == 'pianote')
+                <style>
+                .apply {
+                background:#F61A30;
+                }
+
+                .apply:hover {
+                background:#f53347;
+                }
+                </style>
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/pianote-sweetwater.svg') }}">
+                <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Pianote.</strong></h3>
+                <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Pianote Student through Sweetwater!<br class="hidden sm:inline">
+                Please enter the code that they provided you in the form below.</h6>
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/pianote-spread.png') }}">
+            @elseif($theme == 'guitareo')
+                <style>
+                .apply {
+                background:#00C9AC;
+                }
+
+                .apply:hover {
+                background:#00e3c5;
+                }
+                </style>
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/guitareo-sweetwater.svg') }}">
+                <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Guitareo.</strong></h3>
+                <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Guitareo Student through Sweetwater!<br class="hidden sm:inline">
+                Please enter the code that they provided you in the form below.</h6>
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/guitareo-spread.png') }}">
+            @elseif($theme == 'singeo')
+                <style>
+                .apply {
+                background:#8300E9;
+                }
+
+                .apply:hover {
+                background:#9000ff;
+                }
+                </style>
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/singeo-sweetwater.svg') }}">
+                <h3 class="leading-tight mt-4 mb-3"><strong>Redeem your membership to Singeo.</strong></h3>
+                <h6 class="leading-normal mb-6 sm:mb-10">Thank you for choosing to become a Singeo Student through Sweetwater!<br class="hidden sm:inline">
+                Please enter the code that they provided you in the form below.</h6>
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/singeo-spread.png') }}">
             @else
-                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="filter  h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/thomann-logo.png">
-                <h3 class="leading-tight mt-4 mb-6 sm:mb-10"><strong>Redeem your membership to Drumeo.</strong></h3>
+                <style>
+                .apply {
+                background:#000C17;
+                }
+
+                .apply:hover {
+                background:#001930;
+                }
+                </style>
+                <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="{{ musora_cdn('redeem/sweetwater/musora-sweetwater.svg') }}">
+                <h3 class="leading-tight mt-4 mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
                 <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
             @endif
         </div>
     </div>
-    <div class="py-8 sm:py-12 px-4 sm:px-6">
+    <div class="py-8 sm:py-12 px-3 sm:px-6">
         <div class="container mx-auto max-w-3xl">
-            @if(!empty($thomann))
-                <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
-                    <strong class="text-pianote"> These access codes can only be <br class="inline sm:hidden"> redeemed for new accounts</strong>
-                </div>
-            @endif
              @if($newAccount)
-                @if(empty($thomann))
-                    <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
-                        <strong><b>Existing Member?</b>
-                            <br>
-                            <a class="text-drumeo underline" href="/redeem/existing">Click here to add to your account.</a>
-                        </strong>
+                <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
+                    <strong><b>Existing Member?</b>
                         <br>
-                        <em>(The form below is only for new accounts)</em>
-                    </div>
-                @endif
+                        <a
+                            @if($theme == 'musora')
+                                class="text-drumeo underline" href="/sweetwater/existing"
+                            @else
+                                class="text-{{ $theme }} underline" href="/{{ $theme }}/sweetwater/existing"
+                            @endif
+                        >Click here to add to your account.</a>
+                    </strong>
+                    <br>
+                    <em>(The form below is only for new accounts)</em>
+                </div>
 
                 @foreach ($errors->all() as $error)
                     <br>
@@ -205,7 +254,13 @@
                 <div class="redeem-switcher rounded-xl py-4" style="background:#E3E8EC;">
                     <strong> <b>Not already a member?</b>
                         <br>
-                        <a class="text-drumeo underline" href="/redeem">Click here to redeem on a new account.</a>
+                        <a
+                            @if($theme == 'musora')
+                                class="text-drumeo underline" href="/sweetwater"
+                            @else
+                                class="text-{{ $theme }} underline" href="/{{ $theme }}/sweetwater"
+                            @endif
+                        >Click here to redeem on a new account.</a>
                     </strong>
                     <br>
                     <em>(The form below is only for existing members)</em>
@@ -217,14 +272,11 @@
                 @endforeach
 
                 @include('musora.pages.redeem._redeem-form', [
-                    "existing" => true,
-                    "accessCodeArray" => $accessCodeArray
+                    "existing" => true
                 ])
              @endif
-
-
             <br>
-            @if(!$newAccount)
+             @if(!$newAccount)
                 <p class="help-message">
                     ** If you apply your code to an account that already has an active Membership subscription, your subscription will be extended based on the time associated with your card.
                 </p>

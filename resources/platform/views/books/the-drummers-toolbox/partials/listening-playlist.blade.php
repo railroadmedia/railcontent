@@ -1,4 +1,4 @@
-<div class="content-table-row flex flex-row pa-1 bt-grey-1-1">
+<div class="content-table-row flex flex-row pa-1 tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457]">
 {{--    <div class="flex flex-column thumbnail-col">--}}
 {{--        <div class="thumb-wrap corners-3 overflow">--}}
 {{--            <div class="thumb-img widescreen bg-center"--}}
@@ -9,7 +9,7 @@
     <div class="flex flex-column grow">
         <div class="flex flex-row">
             <div class="flex flex-column align-v-center grow pa-1">
-                <h6 class="body font-bold text-black text-truncate">{{ $title }}</h6>
+                <h6 class="body font-bold dark:tw-text-white tw-font-bold text-truncate">{{ $title }}</h6>
             </div>
         </div>
     </div>
@@ -46,7 +46,7 @@
             </div>
             <div class="flex flex-column xs-4 pl-1">
                 <a
-                    href="{{ $apple_url }}" class="btn short bg-black text-black inverted"
+                    href="{{ $apple_url }}" class="btn short bg-black text-black tw-bg-white inverted"
                     target="_blank"
                 >
                     <img

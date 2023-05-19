@@ -41,7 +41,7 @@
                         </svg>
                         <div class="tw-pt-[20px]">ABOUT MOISES</div>
                     </a> -->
-                    <song-request></song-request>
+                    <song-request brand="{{ $brand }}"></song-request>
                 </div>
             </div>
         @endslot

@@ -22,7 +22,7 @@ Route::domain('{musoraDomain}')
         Route::get('gift-card', [MarketingController::class, 'giftcard']);
 
         Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
-        Route::get('pass', [CodeRedemptionController::class, 'passRedeem']);
+        Route::get('friends', [CodeRedemptionController::class, 'friends']);
         Route::get('redeem/existing', [CodeRedemptionController::class, 'renderExistingAccountRedeemPage']);
         Route::get('redeem-thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
         Route::get('pianote/redeem', [CodeRedemptionController::class, 'showPianoteRedeemPageForNewUsers']);
