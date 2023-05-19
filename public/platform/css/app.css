@@ -26085,6 +26085,9 @@ a:visited{
   .md\:tw-pl-6{
     padding-left: 1.5rem !important;
   }
+  .md\:tw-pt-0{
+    padding-top: 0px !important;
+  }
   .md\:tw-pb-10{
     padding-bottom: 2.5rem !important;
   }

@@ -11,7 +11,7 @@ if(!empty($user)){
 @endsection
 
 @section('content')
-    <header id="bestBookHeader" class="container fluid bb-grey-1-1 pv-5 shadow">
+    <header id="bestBookHeader" class="fluid pv-5 shadow">
         <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
             <div class="flex flex-row align-v-center flex-wrap">
                 <div class="flex flex-column ph xs-12 sm-8 mb-2">

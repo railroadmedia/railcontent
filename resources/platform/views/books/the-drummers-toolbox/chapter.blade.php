@@ -15,15 +15,15 @@ if(!empty($user)){
 @endsection
 
 @section('content')
-    <header id="bestBookHeader" class="container fluid bb-grey-1-1 pb-5 pt-2 shadow">
-        
+    <header id="bestBookHeader" class="fluid pb-5 pt-2 shadow">
+        <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8">  
             <div class="flex flex-row">
                 <a
                     href="{{ url()->route(
                         $isDigital ? 'books.digital.drummers-toolbox' : 'books.drummers-toolbox'
                     ) }}"
                     aria-label="Back to All"
-                    class="text-white no-decoration tiny uppercase pa-1"
+                    class="tw-text-white no-decoration tiny uppercase pa-1"
                 >
                     <i class="fas fa-arrow-left mr-1"></i> Back to All
                 </a>
@@ -106,6 +106,7 @@ if(!empty($user)){
                     </div>
                 </div>
             </div>
+        </div>
     </header>
 
     @include('books.the-drummers-toolbox.partials.login-modal', [
@@ -133,7 +134,7 @@ if(!empty($user)){
     </div>
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
-        <div class="tw-w-full flex flex-column bg-white corners-3 shadow mb-3">
+        <div class="tw-w-full flex flex-column corners-3 shadow mb-3">
             <div class="flex flex-row ph-1 pv-3">
                 <h1 class="heading">Related Lessons</h1>
             </div>
@@ -155,7 +156,7 @@ if(!empty($user)){
             </div>
         </div>
 
-        <div class="tw-w-full flex flex-column bg-white corners-3 shadow mb-3">
+        <div class="tw-w-full flex flex-column corners-3 shadow mb-3">
             <div class="flex flex-row ph-1 pv-3">
                 <h1 class="heading">Play-Alongs</h1>
             </div>
@@ -179,7 +180,7 @@ if(!empty($user)){
         </div>
 
         @if(!empty($chapterData['loops']))
-        <div class="flex flex-column bg-white corners-3 shadow mb-3">
+        <div class="flex flex-column corners-3 shadow mb-3">
             <div class="flex flex-row ph-1 pv-3">
                 <h1 class="heading">Loops</h1>
             </div>
@@ -191,7 +192,7 @@ if(!empty($user)){
         </div>
         @endif
 
-        <div class="flex flex-column bg-white corners-3 shadow">
+        <div class="flex flex-column corners-3 shadow mb-3">
             <div class="flex flex-row ph-1 pv-3">
                 <h1 class="heading">Recommended Listening Playlists</h1>
             </div>
