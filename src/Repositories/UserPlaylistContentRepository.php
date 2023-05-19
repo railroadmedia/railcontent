@@ -401,6 +401,31 @@ class UserPlaylistContentRepository extends RepositoryBase
     }
 
     /**
+     * @param $playlistId
+     * @param array $contentType
+     * @return int
+     */
+    public function countStartedUserPlaylistContents($playlistIds)
+    {
+        $query =
+            $this->query()->selectRaw('user_playlist_id, count(*) as completed_items')
+                ->join(
+                    config('railcontent.table_prefix').'user_content_progress',
+                    config('railcontent.table_prefix').'user_playlist_content.content_id',
+                    '=',
+                    config('railcontent.table_prefix').'user_content_progress.content_id'
+                )
+                ->whereIn('user_playlist_id', $playlistIds)
+                ->where('user_id', '=', auth()->id())
+                ->where('state', 'LIKE','started')
+                ->groupBy('user_playlist_id');
+
+        $results = $query->get()->toArray();
+
+        return array_combine(array_column($results, 'user_playlist_id'), array_column($results, 'completed_items'));
+    }
+
+    /**
      * @param $playlistIds
      * @return int
      */

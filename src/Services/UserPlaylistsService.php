@@ -852,6 +852,17 @@ class UserPlaylistsService
         return $results;
     }
 
+    /**
+     * @param $playlistId
+     * @return int
+     */
+    public function countStartedUserPlaylistContents($playlistIds)
+    {
+        $results = $this->userPlaylistContentRepository->countStartedUserPlaylistContents($playlistIds);
+
+        return $results;
+    }
+
     public function countUserPlaylistItems($playlistIds)
     {
         return $this->userPlaylistContentRepository->countUserPlaylistItems($playlistIds);
