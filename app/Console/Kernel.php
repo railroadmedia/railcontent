@@ -111,6 +111,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('mentors:assign')->hourly();
 
         $schedule->command('user:resyncExpiredProducts')->dailyAt('10:00');//2am PST
+
+        $schedule->command('addevent:syncMusora')->hourlyAt(50);
     }
 
     /**
