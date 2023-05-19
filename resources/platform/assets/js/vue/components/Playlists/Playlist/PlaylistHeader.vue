@@ -142,11 +142,12 @@
     <platform-header
         :backgroundImage="playlistsStore.activePlaylist.thumbnail_url || 'https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg'"
         :blurBG="true"
+        class="!tw-py-6"
     >
         <template v-slot:content>
             <div class="tw-flex tw-flex-col lg:tw-flex-row tw-items-center tw-w-full lg:tw-w-8/12">
                 <!-- Playlist thumbnail -->
-                <div class="tw-realtive tw-h-[140px] tw-w-[140px] tw-relative tw-rounded tw-shrink-0 tw-overflow-hidden tw-mb-[16px] lg:tw-mb-0">
+                <div class="tw-realtive tw-h-[200px] tw-w-[200px] tw-relative tw-rounded tw-shrink-0 tw-overflow-hidden tw-mb-[16px] lg:tw-mb-0">
                     <!-- Image Conatiner -->
                     <div v-if="playlistsStore.activePlaylist.thumbnail_url" class="tw-relative tw-w-full tw-h-full">
                         <img
@@ -185,7 +186,7 @@
                 <div class="tw-flex-col tw-text-center lg:tw-text-left lg:tw-pl-[20px]">
                     <!-- Avatar -->
                     <div class="tw-hidden lg:tw-flex tw-items-center tw-mb-2">
-                        <div class="tw-h-[40px] tw-w-[40px] tw-rounded-full tw-overflow-hidden tw-mr-[9px]">
+                        <div class="tw-h-[30px] tw-w-[30px] tw-rounded-full tw-overflow-hidden tw-mr-[9px]">
                             <img :src="playlistsStore.activePlaylist.user ? playlistsStore.activePlaylist.user['fields.profile_picture_image_url'] : ''" alt="">
                         </div>
                         <p class="tw-font-bebas-neue tw-text-white tw-text-xl">
@@ -208,7 +209,7 @@
             </div>
         </template>
         <template v-slot:ctas>
-            <div v-if="hasAccess" class="tw-flex tw-items-center tw-justify-center tw ml-0 lg:tw-w-1/2 lg:tw-ml-auto lg:tw-w-4/12 tw-w-full tw-mt-4 lg:tw-justify-end">
+            <div v-if="hasAccess" class="tw-flex tw-items-end tw-justify-center tw ml-0 lg:tw-w-1/2 lg:tw-ml-auto lg:tw-w-4/12 tw-w-full tw-mt-4 lg:tw-justify-end">
                 <!--Share-->
                 <button v-if="!state.isPrivate" class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]"
                         @click.prevent="sharePlaylist()"

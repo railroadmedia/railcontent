@@ -65,6 +65,7 @@
         title="Playlists"
         titleIcon="playlist"
         backgroundImage="https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg"
+        class="tw-min-h-[180px]"
     >
         <template v-slot:content>
             <p v-if="playlistsStore.playlistsQuantity" class="tw-uppercase tw-text-sm tw-font-bold tw-text-[#7E9AB1]">
