@@ -4,15 +4,16 @@ namespace App\Http\Controllers\Platform;
 
 use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
-use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
+use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Playlist\RoutingDecorator;
 use App\Http\Controllers\BaseController;
+use App\Services\PlaylistService;
 use Illuminate\Http\Request;
-use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
+use Railroad\Railcontent\Events\PlaylistItemLoaded;
 use Railroad\Railcontent\Repositories\ContentPermissionRepository;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
@@ -21,6 +22,8 @@ use Railroad\Railcontent\Repositories\UserPermissionsRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection;
+use Railroad\Railtracker\Events\EngageContent;
+use Railroad\Railtracker\Services\ContentLastEngagedService;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserPlaylistsController extends BaseController
@@ -33,38 +36,43 @@ class UserPlaylistsController extends BaseController
     private LessonAssignmentDecorator $lessonAssignmentDecorator;
     private RoutingDecorator $routingDecorator;
     private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
+    private ContentLastEngagedService $contentLastEngagedService;
+    private PlaylistService $playlistService;
 
     /**
      * @param UserPlaylistsService $userPlaylistsService
      * @param ContentService $contentService
-     * @param UserContentProgressRepository $userContentProgressRepository
      * @param ContentPermissionRepository $contentPermissionRepository
      * @param UserPermissionsRepository $userPermissionsRepository
      * @param VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator
      * @param LessonAssignmentDecorator $lessonAssignmentDecorator
      * @param RoutingDecorator $routingDecorator
      * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
+     * @param ContentLastEngagedService $contentLastEngagedService
+     * @param PlaylistService $playlistService
      */
     public function __construct(
         UserPlaylistsService $userPlaylistsService,
         ContentService $contentService,
-        UserContentProgressRepository $userContentProgressRepository,
         ContentPermissionRepository $contentPermissionRepository,
         UserPermissionsRepository $userPermissionsRepository,
         VimeoVideoSourcesDecorator $vimeoVideoSourcesDecorator,
         LessonAssignmentDecorator $lessonAssignmentDecorator,
         RoutingDecorator $routingDecorator,
-        PinnedPlaylistsRepository $pinnedPlaylistsRepository
+        PinnedPlaylistsRepository $pinnedPlaylistsRepository,
+        ContentLastEngagedService $contentLastEngagedService,
+        PlaylistService $playlistService
     ) {
         $this->userPlaylistsService = $userPlaylistsService;
         $this->contentService = $contentService;
-        $this->userContentRepository = $userContentProgressRepository;
         $this->contentPermissionRepository = $contentPermissionRepository;
         $this->userPermissionsRepository = $userPermissionsRepository;
         $this->vimeoVideoSourcesDecorator = $vimeoVideoSourcesDecorator;
         $this->lessonAssignmentDecorator = $lessonAssignmentDecorator;
         $this->routingDecorator = $routingDecorator;
         $this->pinnedPlaylistsRepository = $pinnedPlaylistsRepository;
+        $this->contentLastEngagedService = $contentLastEngagedService;
+        $this->playlistService = $playlistService;
     }
 
     public function index(Request $request)
@@ -114,6 +122,15 @@ class UserPlaylistsController extends BaseController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $domain
+     * @param $brand
+     * @param $playlistId
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Throwable
+     */
     public function playlist(Request $request, $domain, $brand, $playlistId)
     {
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
@@ -128,11 +145,14 @@ class UserPlaylistsController extends BaseController
         $page = $request->get('page', 1);
         $limit = $request->get('limit');
 
-        $contentTypes = array_merge(config('railcontent.appUserListContentTypes', []),
-                                    array_values(
-                                        config('railcontent.showTypes', [])[config('railcontent.brand')] ?? []
-                                    ),
-                                    ['routine']);
+        $contentTypes = array_merge(config('railcontent.appUserListContentTypes', []), array_values(
+                                                                                         config(
+                                                                                             'railcontent.showTypes',
+                                                                                             []
+                                                                                         )[config(
+                                                                                             'railcontent.brand'
+                                                                                         )] ?? []
+                                                                                     ), ['routine']);
 
         $playlistItems = [];
         if ($playlist['has_access'] == 1) {
@@ -140,22 +160,6 @@ class UserPlaylistsController extends BaseController
             ContentRepository::$bypassPermissions = true;
             $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
             ContentRepository::$bypassPermissions = false;
-
-            $contentPermissionRows = collect(
-                $this->contentPermissionRepository->getByContentIdsOrTypes(
-                    $items->pluck('id')
-                        ->toArray(),
-                    $items->pluck('type')
-                        ->toArray()
-                )
-            );
-            $grupedPermissions = $contentPermissionRows->groupBy('content_id');
-            $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
-            $userPermissionIds = \Arr::pluck($userPermissions, 'permission_id');
-            $membershipPermissionIds = [1, 52, 73, 77,];
-            if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
-                $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
-            }
 
             foreach ($items as $index => $item) {
                 $playlistItems[$index]['id'] = $item['id'];
@@ -193,29 +197,35 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
                 $playlistItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
             }
-
-            $playlist['completed_items'] = $items->where('completed',true)->count();
         }
-        $totalItems = $this->userPlaylistsService->countUserPlaylistContents(
-            $playlistId
-        );
-        $playlist['total_items'] = $totalItems;
 
         $items = new ContentFilterResultsEntity([
                                                     'results' => $playlistItems,
                                                 ]);
         $pinnedPlaylists = $this->pinnedPlaylistsRepository->getMyPinnedPlaylists();
         $playlist['pinned'] = in_array($playlist['id'], \Arr::pluck($pinnedPlaylists, 'id'));
+
         return view('account.playlist', [
             "listLessons" => $items->toResponseRawJson(),
             "playlist" => $playlist,
             'currentUser' => user(),
             "noResultsMessage" => 'Nothing here yet! Start adding videos',
             "brand" => brand(),
-            'totalItems' => $totalItems
+            'totalItems' => $playlist['total_items']
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $domain
+     * @param $brand
+     * @param $playlistId
+     * @param $playlistItemId
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Throwable
+     */
     public function playlistItem(Request $request, $domain, $brand, $playlistId, $playlistItemId)
     {
         $oldStatuses = ContentRepository::$availableContentStatues;
@@ -378,6 +388,8 @@ class UserPlaylistsController extends BaseController
         $relatedLesson =
             (new ContentFilterResultsEntity(['results' => $playlistItem['parent'] ?? []]))->toResponseRawJson();
 
+        event(new PlaylistItemLoaded($playlistId, $playlistItemId, $position));
+
         return view('account.playlist-item', [
             "lessonContent" => $playlistItem,
             "playlist" => $playlist,
@@ -392,5 +404,32 @@ class UserPlaylistsController extends BaseController
             "previousPlaylistItemUrl" => $previousPlaylistItem['url'] ?? '',
             "brand" => brand(),
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param $domain
+     * @param $brand
+     * @param $playlistId
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|void
+     */
+    public function playback(Request $request, $domain, $brand, $playlistId)
+    {
+       $item = $this->playlistService->getPlaylistNextItem($playlistId);
+
+        if (isset($item)) {
+            return redirect(
+                url()->route('platform.user.playlist-item', [
+                    'playlistId' => $playlistId,
+                    'playlistItemId' => $item,
+                ])
+            );
+        } else {
+            return redirect(
+                url()->route('platform.user.playlist', [
+                    'id' => $playlistId
+                ])
+            );
+        }
     }
 }

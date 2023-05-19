@@ -3,12 +3,16 @@
 namespace App\Providers;
 
 use App\Listeners\Authentication\AuthenticationEventListener;
+use App\Listeners\Content\EngageContentEventListener;
 use App\Listeners\OrderEventListener;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 use Modules\UserManagementSystem\Events\UserEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
+use Railroad\Railcontent\Events\PlaylistDeleted;
+use Railroad\Railcontent\Events\PlaylistItemDeleted;
+use Railroad\Railcontent\Events\PlaylistItemLoaded;
 use Railroad\Railcontent\Events\PlaylistItemsUpdated;
 use Railroad\Railcontent\Listeners\PlaylistListener;
 use Railroad\Railforums\EventListeners\PostEventListener;
@@ -19,7 +23,8 @@ use Railroad\Railforums\Events\PostLiked;
 use Railroad\Railforums\Events\ThreadCreated;
 use Railroad\Railforums\Events\ThreadDeleted;
 use Railroad\Railnotifications\Listeners\NotificationEventListener;
-
+use Railroad\Railtracker\Events\EngageContent;
+use Railroad\Railtracker\Events\RemoveEngagedContent;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -57,7 +62,10 @@ class EventServiceProvider extends ServiceProvider
         OrderEvent::class => [
             OrderEventListener::class . '@handleOrderPlaced',
         ],
-        PlaylistItemsUpdated::class => [PlaylistListener::class.'@handlePlaylistItemsUpdated']
+        PlaylistItemsUpdated::class => [PlaylistListener::class.'@handlePlaylistItemsUpdated'],
+        PlaylistItemLoaded::class => [EngageContentEventListener::class.'@handleEngageContent'],
+        PlaylistDeleted::class => [EngageContentEventListener::class.'@handleRemoveEngageContent'],
+        PlaylistItemDeleted::class =>  [EngageContentEventListener::class.'@handleRemoveEngageContent'],
     ];
 
     /**
