@@ -82,7 +82,7 @@ const sharePlaylist = () => {
     navigator.clipboard.writeText(props.data.url)
     window.shownotification({
         icon: 'fa-link',
-        text: `${props.data.name} link copied to clipboard.`
+        text: `Link copied to clipboard.`
     })
     //close after click
     emit('closeDropdown');
@@ -98,7 +98,7 @@ const privateToggle = () => {
                 //show success message
                 window.shownotification({
                     icon: state.isPrivate ? 'fa-lock' : 'fa-lock-open',
-                    text: `Your playlist is now ${ state.isPrivate ? 'private' : 'public' }.`
+                    text: `${props.data.name} is now ${ state.isPrivate ? 'private' : 'public' }.`
                 })
             }
         })
@@ -129,7 +129,7 @@ const pinPlaylist = () => {
                         //show success message
                         window.shownotification({
                             icon: 'playlist',
-                            text: `'${props.data.name}' has been pinned within the sidebar.`
+                            text: `${props.data.name} has been successfully pinned to the menu.`
                         })
                         emit('updatePinned', true);
                     }
@@ -159,7 +159,7 @@ const pinPlaylist = () => {
                     //show success message
                     window.shownotification({
                         icon: 'playlist',
-                        text: `'${props.data.name}' has been unpinned from the sidebar.`
+                        text: `${props.data.name} has been successfully unpinned from the menu.`
                     })
                 }
             })
