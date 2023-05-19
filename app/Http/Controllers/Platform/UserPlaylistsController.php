@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Platform;
 
 use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
-use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
+use App\Decorators\Content\VimeoVideoSourcesDecorator;
 use App\Decorators\Playlist\RoutingDecorator;
 use App\Http\Controllers\BaseController;
 use App\Services\PlaylistService;
 use Illuminate\Http\Request;
-use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -123,6 +122,15 @@ class UserPlaylistsController extends BaseController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $domain
+     * @param $brand
+     * @param $playlistId
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Throwable
+     */
     public function playlist(Request $request, $domain, $brand, $playlistId)
     {
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
@@ -152,22 +160,6 @@ class UserPlaylistsController extends BaseController
             ContentRepository::$bypassPermissions = true;
             $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
             ContentRepository::$bypassPermissions = false;
-
-            $contentPermissionRows = collect(
-                $this->contentPermissionRepository->getByContentIdsOrTypes(
-                    $items->pluck('id')
-                        ->toArray(),
-                    $items->pluck('type')
-                        ->toArray()
-                )
-            );
-            $grupedPermissions = $contentPermissionRows->groupBy('content_id');
-            $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
-            $userPermissionIds = \Arr::pluck($userPermissions, 'permission_id');
-            $membershipPermissionIds = [1, 52, 73, 77,];
-            if (!empty(array_intersect($userPermissionIds, $membershipPermissionIds))) {
-                $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
-            }
 
             foreach ($items as $index => $item) {
                 $playlistItems[$index]['id'] = $item['id'];
@@ -229,6 +221,17 @@ class UserPlaylistsController extends BaseController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param $domain
+     * @param $brand
+     * @param $playlistId
+     * @param $playlistItemId
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\View\View
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     * @throws \Throwable
+     */
     public function playlistItem(Request $request, $domain, $brand, $playlistId, $playlistItemId)
     {
         $oldStatuses = ContentRepository::$availableContentStatues;

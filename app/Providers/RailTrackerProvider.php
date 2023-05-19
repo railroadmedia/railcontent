@@ -7,7 +7,7 @@ use Railroad\Railtracker\Trackers\MediaPlaybackTracker;
 
 class RailTrackerProvider implements RailTrackerProviderInterface
 {
-private MediaPlaybackTracker $mediaPlaybackTracker;
+    private MediaPlaybackTracker $mediaPlaybackTracker;
 
     /**
      * @param MediaPlaybackTracker $mediaPlaybackTracker
@@ -17,8 +17,8 @@ private MediaPlaybackTracker $mediaPlaybackTracker;
         $this->mediaPlaybackTracker = $mediaPlaybackTracker;
     }
 
-    public function trackMediaType($type, $category)
-    : string {
+    public function trackMediaType($type, $category): string
+    {
         $mediaTypeId = $this->mediaPlaybackTracker->trackMediaType(
             $type,
             $category
@@ -34,10 +34,9 @@ private MediaPlaybackTracker $mediaPlaybackTracker;
         $typeId,
         $currentSecond = 0,
         $secondsPlayed = 0,
-        $startedOn = null
-    )
-    : array {
-
+        $startedOn = null,
+        $contentId = null
+    ): array {
         return $this->mediaPlaybackTracker->trackMediaPlaybackStart(
             $mediaId,
             $mediaLengthSeconds,
@@ -46,18 +45,25 @@ private MediaPlaybackTracker $mediaPlaybackTracker;
             $currentSecond,
             $secondsPlayed,
             brand(),
-            $startedOn
+            $startedOn,
+            $contentId
         );
     }
 
-    public function trackMediaPlaybackProgress($sessionId, $secondsPlayed, $currentSecond, $lastUpdatedOn = null):bool|array|null
-    {
-        return  $this->mediaPlaybackTracker->trackMediaPlaybackProgress(
+    public function trackMediaPlaybackProgress(
+        $sessionId,
+        $secondsPlayed,
+        $currentSecond,
+        $lastUpdatedOn = null,
+        $contentId = null
+    ): bool|array|null {
+        return $this->mediaPlaybackTracker->trackMediaPlaybackProgress(
             $sessionId,
             $secondsPlayed,
             $currentSecond,
             $lastUpdatedOn,
-            brand()
+            brand(),
+            $contentId
         );
     }
 }
