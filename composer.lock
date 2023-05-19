@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "359f6b2a775e9333c83d521e65bfa962",
+    "content-hash": "6c587466cee9fcd69f6119b232b80bfb",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8785,16 +8785,16 @@
         },
         {
             "name": "railroad/railtracker",
-            "version": "v4.0.16",
+            "version": "dev-v4.0-playlist-progress",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railtracker.git",
-                "reference": "eef78e3366f5ab627dba056cd216b7c5eaa1960d"
+                "reference": "186f821a98c7e5d0e891baad9d5106546e8ce7c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/eef78e3366f5ab627dba056cd216b7c5eaa1960d",
-                "reference": "eef78e3366f5ab627dba056cd216b7c5eaa1960d",
+                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/186f821a98c7e5d0e891baad9d5106546e8ce7c2",
+                "reference": "186f821a98c7e5d0e891baad9d5106546e8ce7c2",
                 "shasum": ""
             },
             "require": {
@@ -8840,9 +8840,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railtracker/issues",
-                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.16"
+                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0-playlist-progress"
             },
-            "time": "2023-04-06T19:07:40+00:00"
+            "time": "2023-05-12T14:37:35+00:00"
         },
         {
             "name": "railroad/referral",
@@ -16971,13 +16971,20 @@
             "version": "dev-2.0-playlists",
             "alias": "v2.0.62",
             "alias_normalized": "2.0.62.0"
+        },
+        {
+            "package": "railroad/railtracker",
+            "version": "dev-v4.0-playlist-progress",
+            "alias": "v4.0.16",
+            "alias_normalized": "4.0.16.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/musora-api": 20,
         "railroad/railanalytics": 20,
-        "railroad/railcontent": 20
+        "railroad/railcontent": 20,
+        "railroad/railtracker": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

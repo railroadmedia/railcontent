@@ -10,6 +10,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
+use Railroad\Railtracker\Services\ContentLastEngagedService;
 
 class PlaylistDecorator extends ModeDecoratorBase
 {
@@ -17,6 +18,7 @@ class PlaylistDecorator extends ModeDecoratorBase
     private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
     private UserPlaylistsService $userPlaylistsService;
     private ContentService $contentService;
+    private ContentLastEngagedService $contentLastEngagedService;
 
     /**
      * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
@@ -25,11 +27,13 @@ class PlaylistDecorator extends ModeDecoratorBase
     public function __construct(
         PinnedPlaylistsRepository $pinnedPlaylistsRepository,
         UserPlaylistsService $userPlaylistsService,
-        ContentService $contentService
+        ContentService $contentService,
+        ContentLastEngagedService $contentLastEngagedService
     ) {
         $this->pinnedPlaylistsRepository = $pinnedPlaylistsRepository;
         $this->userPlaylistsService = $userPlaylistsService;
         $this->contentService = $contentService;
+        $this->contentLastEngagedService = $contentLastEngagedService;
     }
 
     public function decorate($playlists)
@@ -80,13 +84,9 @@ class PlaylistDecorator extends ModeDecoratorBase
             $date_info = getdate($playlists[$index]['duration'] ?? 0);
             $format = ($date_info['hours'] > 1) ? 'H:i:s' : 'i:s';
             $playlists[$index]['duration_formated'] = gmdate($format, $playlists[$index]['duration'] ?? 0);
-
-            if (isset($playlist['user_playlist_item_id'])) {
-                $playlists[$index]['playback_url'] = url()->route('platform.user.playlist-item', [
-                    'playlistId' => $playlist['id'],
-                    'playlistItemId' => $playlist['user_playlist_item_id'],
+            $playlists[$index]['playback_url'] = url()->route('platform.play.playlist', [
+                    'playlistId' => $playlist['id']
                 ]);
-            }
         }
 
         $userIds = array_unique($userIds);
