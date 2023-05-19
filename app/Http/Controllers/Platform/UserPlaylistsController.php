@@ -197,13 +197,7 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
                 $playlistItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
             }
-
-            $playlist['completed_items'] = $items->where('completed',true)->count();
         }
-        $totalItems = $this->userPlaylistsService->countUserPlaylistContents(
-            $playlistId
-        );
-        $playlist['total_items'] = $totalItems;
 
         $items = new ContentFilterResultsEntity([
                                                     'results' => $playlistItems,
@@ -217,7 +211,7 @@ class UserPlaylistsController extends BaseController
             'currentUser' => user(),
             "noResultsMessage" => 'Nothing here yet! Start adding videos',
             "brand" => brand(),
-            'totalItems' => $totalItems
+            'totalItems' => $playlist['total_items']
         ]);
     }
 
@@ -438,7 +432,4 @@ class UserPlaylistsController extends BaseController
             );
         }
     }
-
-
-
 }

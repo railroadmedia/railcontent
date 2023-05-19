@@ -40,9 +40,11 @@ class PlaylistDecorator extends ModeDecoratorBase
     {
         $playlists = $playlists->toArray();
         $userIds = [];
+        $playlistIds = [];
         ContentRepository::$bypassPermissions = true;
 
         foreach ($playlists as $index => $playlist) {
+            $playlistIds[] = $playlist['id'];
             $userIds[] = $playlist['user_id'];
             $playlists[$index]['url'] =
                 url()->route('platform.user.playlist', ["id" => $playlist['id'], "brand" => brand()]);
@@ -69,8 +71,7 @@ class PlaylistDecorator extends ModeDecoratorBase
                                     )) ||
                                 $firstItem['type'] == 'song-tutorial-children' ||
                                 $firstItem['type'] == 'song' ||
-                                $firstItem['type'] == 'routine'
-                            );
+                                $firstItem['type'] == 'routine');
 
                         $playlists[$index]['thumbnail_url'] = $firstItem->fetch(
                             'data.thumbnail_url',
@@ -85,8 +86,8 @@ class PlaylistDecorator extends ModeDecoratorBase
             $format = ($date_info['hours'] > 1) ? 'H:i:s' : 'i:s';
             $playlists[$index]['duration_formated'] = gmdate($format, $playlists[$index]['duration'] ?? 0);
             $playlists[$index]['playback_url'] = url()->route('platform.play.playlist', [
-                    'playlistId' => $playlist['id']
-                ]);
+                'playlistId' => $playlist['id'],
+            ]);
         }
 
         $userIds = array_unique($userIds);
@@ -116,13 +117,42 @@ class PlaylistDecorator extends ModeDecoratorBase
              * @var $user User
              */
             $playlistAuthor = $keyedUsers[$playlist['user_id']];
-            $playlists[$index]['is_my_playlist'] = user()?(($playlist['user_id'] == user()->id) ? 1 : 0):0;
+            $playlists[$index]['is_my_playlist'] = user() ? (($playlist['user_id'] == user()->id) ? 1 : 0) : 0;
             $playlists[$index]['user'] = [];
             $playlists[$index]['user']['id'] = $playlistAuthor['id'];
             $playlists[$index]['user']['display_name'] = $playlistAuthor['display_name'];
             $playlists[$index]['user']['fields.profile_picture_image_url'] = $playlistAuthor['profile_picture_url'];
         }
         ContentRepository::$bypassPermissions = false;
+
+        if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
+            return $playlists;
+        }
+
+        $completedItems = $this->userPlaylistsService->countCompletedUserPlaylistContents(
+            $playlistIds
+        );
+
+        $startedItems = $this->userPlaylistsService->countStartedUserPlaylistContents(
+            $playlistIds
+        );
+
+        $totalItems = $this->userPlaylistsService->countUserPlaylistItems(
+            $playlistIds
+        );
+
+        foreach ($playlists as $index => $playlist) {
+            $playlists[$index]['progress_percent'] = 0;
+            $playlists[$index]['completed_items'] = $completedItems[$playlist['id']] ?? 0;
+            $playlists[$index]['started_items'] = $startedItems[$playlist['id']] ?? 0;
+            $playlists[$index]['total_items'] = $totalItems[$playlist['id']] ?? 0;
+            $playlists[$index]['state'] =
+                ($playlists[$index]['completed_items'] > 0 || $playlists[$index]['started_items'] > 0) ? 'started' :
+                    (($playlists[$index]['completed_items'] == $playlists[$index]['total_items']) ? 'completed' : '');
+            if($playlists[$index]['total_items'] > 0){
+                $playlists[$index]['progress_percent'] = $playlists[$index]['completed_items']/$playlists[$index]['total_items'];
+            }
+        }
 
         return $playlists;
     }
