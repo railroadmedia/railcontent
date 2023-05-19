@@ -22,7 +22,7 @@
             <img class="form-arrow arrow-left" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-right-white.png">
             <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png">
         @endif
-        <button class="submit @if(!empty($outline)) outline @endif" type="submit" @if(!empty($buttonBorder)) style="border: 2px solid {{ $buttonBorder }};" @endif>
+        <button class="submit bg-pianote hover:opacity-80 @if(!empty($outline)) outline @endif" type="submit" @if(!empty($buttonBorder)) style="border: 2px solid {{ $buttonBorder }};" @endif>
             <span class="pre-add">@if(!empty($buttonText)) {!!  $buttonText  !!} @else Get Started @endif <i class="fad fa-paper-plane"></i></span>
             <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
             <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
