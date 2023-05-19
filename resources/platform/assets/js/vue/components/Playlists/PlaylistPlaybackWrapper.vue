@@ -18,6 +18,7 @@ import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElemen
 import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
 import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
 import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
+import ContentUnavailable from './ContentUnavailable.vue';
 
 //-----------Props-----------//
 const props = defineProps({
@@ -273,16 +274,18 @@ onBeforeMount(() => {
             
             <div class="tw-flex tw-flex-col tw-w-full">
                 <!--Player Wrapper -->
-                <div class="fluid tw-pb-3">                    
+                <div class="fluid tw-pb-3">
+                    <!-- Content Unavailable -->
+                    <ContentUnavailable />                  
                     <!-- Soundslice Player -->
-                    <div v-if="lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
+                    <div v-if="false && lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
                         class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
                         <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
                             :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext">
                         </SoundSlice>
                     </div>
                     <!-- Video Players -->
-                    <div class="p-lg-only lean tw-relative">
+                    <div v-if="false" class="p-lg-only lean tw-relative">
                         <div v-if="youtubeVideoId && String(youtubeVideoId).length" 
                              class="widescreen mb-2 bg-black"
                         >
