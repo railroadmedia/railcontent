@@ -1,6 +1,6 @@
 <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
 <div id="method" class="anchor"></div>
-<section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" @if(!empty($vid)) style="background-color:#f4f8fb;" @endif>
+<section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" @if(!empty($vid) ||!empty($bg)) style="background-color:#f4f8fb;" @endif>
     <div class="container max-w-6xl mx-auto">
         @if(!empty($vid))
             <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative -mt-36 sm:-mt-64 lg:-mt-96 mb-6 sm:mb-20" x-on:click="trailer = true;">
