@@ -22,25 +22,69 @@
 @section('body-class', 'dark')
 
 @section('layout-body')
-    <section class="py-24 md:py-40 text-white text-center relative">
-        <img
-            src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/header-about.jpg"
-            class="absolute object-cover w-full h-full top-0 left-0 z-[-2] transition-opacity opacity-0"
-            loading="lazy"
-            onload="this.classList.remove('opacity-0')"
-            alt="header bg"
-        />
+    <section class="py-16 md:py-20 text-white text-center relative bg-[#030814]">
         <div class="container mx-auto relative z-0">
-            <h1><strong>Contact Us</strong></h1>
+            <h2><strong>Advice and answers from the Drumeo team</strong></h2>
+            <p class="my-4">Find an answer on your own or get in touch with your dedicated Musora Mentor.</p>
+            <div>
+                <input class="rounded-full py-3 pl-4 text-black max-w-lg w-full mr-2" placeholder="Search the knowledgebase" /> <span class="rounded-full border border-white uppercase font-bebas py-3 px-8 text-xl tracking-wide">Search</span>
+            </div>
+        </div>
+    </section>
+    <section class="py-10 md:py-12 bg-[#F2F3F5]">
+        <div class="max-w-5xl mx-auto px-4">
+            <h2 class="text-center mb-6"><strong>Frequently asked questions</strong></h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                    <i class="fa-regular fa-comments text-5xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Instructor Support</p>
+                    <p class="text-sm">How can I get personalized feedback from my instructor?</p>
+                </div>
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                    <i class="fa-sharp fa-regular fa-download text-5xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Downloading Lessons</p>
+                    <p class="text-sm">Can I download lessons and replay them later without using data?</p>
+                </div>
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                    <i class="fa-regular fa-file-music text-5xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Downloading Sheet Music</p>
+                    <p class="text-sm">How do I download or print sheet music and chord charts?</p>
+                </div>
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                    <i class="fa-sharp fa-regular fa-truck-fast text-5xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Shipment Tracking</p>
+                    <p class="text-sm">I ordered a product from you, how can I track my shipment?</p>
+                </div>
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                    <i class="fa-regular fa-file-invoice-dollar text-5xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Billing Information</p>
+                    <p class="text-sm">Where can I find my billing history and invoices?</p>
+                </div>
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                    <i class="fa-sharp fa-regular fa-circle-pause text-5xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Pause Subscription</p>
+                    <p class="text-sm">I need a short break, can I pause my account?</p>
+                </div>
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                    <i class="fa-light fa-circle-xmark text-5xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Cancel Subscription</p>
+                    <p class="text-sm">How can I make sure my subscription doesn't renew?</p>
+                </div>
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                    <i class="fa-regular fa-circle-dollar text-5xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Request a Refund</p>
+                    <p class="text-sm">I purchased less than 90 days ago and I would like a refund.</p>
+                </div>
+            </div>
         </div>
     </section>
 
     <div class="pt-20 pb-10 text-white bg-musora-black">
         <div class="container mx-auto text-center px-4 lg:px-8">
-            <h2 class="font-bold text-xl md:text-3xl">We'd love to hear from you!</h2>
-            <p class="mt-5 text-sm md:text-base text-[#a1afc9] max-w-3xl mx-auto">Whether your question is about membership, shipping, technical troubles or anything else, our amazing support team is ready to answer any and all of your questions!
-                <br><br>
-                You may find your response in our <a href="https://help.drumeo.com/" class="tw-font-bold tw-no-underline tw-text-drumeo" title="go to help center"><u>Help Center here</u></a>, but if not, fill out the below.</p>
+            <h2 class="font-bold text-xl md:text-3xl">Reach out directly</h2>
+            <p class="mt-5 text-sm md:text-base text-[#a1afc9] max-w-3xl mx-auto">
+                Get in touch with your dedicated Musora Mentor, [dynamic]!
+            </p>
         </div>
     </div>
 
