@@ -22,7 +22,7 @@
             <img class="form-arrow arrow-left" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-right-white.png" alt="arrow-right">
             <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png" alt="arrow-left">
         @endif
-        <button class="submit @if(!empty($outline)) outline @endif" type="submit">
+        <button class="submit bg-drumeo hover:opacity-80 @if(!empty($outline)) outline @endif" type="submit">
             <span class="pre-add">@if(!empty($buttonText)) {!!  $buttonText  !!} @else Get Started @endif <i class="fad fa-paper-plane"></i></span>
             <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
             <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
@@ -45,26 +45,32 @@
         <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png" alt="arrow-left">
     @endif
 </form>
-<div class="disclaimer opacity-70 mx-auto flex items-center justify-center" @if(!empty($disclaimerColor)) style="color: {{$disclaimerColor}};" @endif>
-    <i class="fal fa-info-circle leading-none mr-2"></i>
-    <span class="text-left leading-tight text-xs max-w-lg">By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>
-</div>
+@if(empty($minimalForm))
+    <div class="disclaimer opacity-70 mx-auto flex items-center justify-center" @if(!empty($disclaimerColor)) style="color: {{$disclaimerColor}};" @endif>
+        <i class="fal fa-info-circle leading-none mr-2"></i>
+        <span class="text-left leading-tight text-xs max-w-lg">By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>
+    </div>
 
-<div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl">
-    <p><strong><i class="fas fa-check"></i> Success!</strong></p>
-    <h2 class="text-drumeo my-4 sm:my-5"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
-    <p>
-        <em>
-            @if(!empty($body)) {{ $body }} @else You should receive an email from team@drumeo.com within 10 minutes.
-            If you don’t, then check your spam folder or re-enter your email address again.
-            @endif
-        </em>
-    </p>
-    @if(empty($noSocial))
-        <div class="social-media">
-            <a href="https://www.youtube.com/freedrumlessons/" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
-            <a href="https://facebook.com/drumeo/" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="https://instagram.com/drumeoofficial/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
-        </div>
-    @endif
-</div>
+    <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl">
+        <p><strong><i class="fas fa-check"></i> Success!</strong></p>
+        <h2 class="text-drumeo my-4 sm:my-5"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
+        <p>
+            <em>
+                @if(!empty($body)) {{ $body }} @else You should receive an email from team@drumeo.com within 10 minutes.
+                If you don’t, then check your spam folder or re-enter your email address again.
+                @endif
+            </em>
+        </p>
+        @if(empty($noSocial))
+            <div class="social-media">
+                <a href="https://www.youtube.com/freedrumlessons/" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
+                <a href="https://facebook.com/drumeo/" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://instagram.com/drumeoofficial/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        @endif
+    </div>
+@else
+    <div class="thank-you-box bg-white rounded-full w-full mx-auto text-center text-green-300 max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
+        <h5 class="mx-auto text-xl font-bold"><strong><i class="fas fa-check"></i> Success, Check your email!</strong></h5>
+    </div>
+@endif

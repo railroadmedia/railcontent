@@ -593,7 +593,7 @@ return [
             'providers' => [
                 'google-tag-manager' =>
                     [
-                        'tracking-id' => 'GTM-KFF3NW7'
+                        'tracking-id' => 'GTM-N2HMTTQ'
                     ],
                 'google-analytics-v4' =>
                     [
