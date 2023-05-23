@@ -266,20 +266,6 @@
         "noBreadcrumb" => true
     ])
 
-    <a href="#final" class="anchor-slide flex items-end justify-center px-2 sm:px-0 fixed w-full z-[100]" style="background: #d6e8fd;">
-        <p class="font-bebas uppercase mx-0 py-2 leading-none">
-            GET A FREE CHORDS & SCALES BOOK UNTIL MAY 22.
-            <br><span class="text-pianote"><span x-cloak x-data="timer2()" x-init="countdown2()"><span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                             </span>
-                left!</span>
-        </p>
-        <img class="h-10 ml-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://pianote.s3.amazonaws.com/products/new-piano-players/sticky_bar_chords_scales.png" alt="chords & scales book" fetchpriority="high" />
-    </a>
-    <div class="w-full block h-10 sm:h-11"></div>
 
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
         <div class="container max-w-5xl mx-auto">
@@ -715,40 +701,6 @@
         </div>
     </section>
 
-    <section class="px-4 sm:px-6 py-10 sm:py-20 lg:py-28 relative" style="background: linear-gradient(180deg, #F61A30 0%, #910000 122.85%);">
-        <div class="max-w-5xl mx-auto md:flex relative z-40">
-            <div class="flex-1 text-white md:pr-4 lg:pr-0 mb-3 md:mb-0 max-w-md md:max-w-auto mx-auto">
-                <h5 class="uppercase mb-2 text-center md:text-left" style="color: #FFAE00;">
-                    AVAILABLE UNTIL May 22nd<br>
-                    <span x-cloak x-data="timer2()" x-init="countdown2()">
-                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                             </span>
-                    left!
-                </h5>
-                <h2 class="font-extrabold mb-4 text-center md:text-left">
-                    Master every chord & <br class="hidden lg:inline">scale with this guide.
-                </h2>
-                <p>
-                    <span class="font-extrabold">Every Chord. Every Scale. Every Key.</span>
-                    <br><br> This essential resource will help you learn the most important chord shapes, chord variations, and scales in EVERY key.
-                    <br><br> Regular ${{ floatval($productPrices['piano-chords-and-scales-guide']->price) }}. It’s yours FREE when you get Easy Chords. (And we’ll cover the shipping.)
-                    <br><br>
-                </p>
-            </div>
-            <div class="flex-1 relative sm:w-2/3 md:w-auto mx-auto text-center sm:pl-10">
-                <div class="relative md:max-w-md mx-auto">
-                    <img
-                        class="md:absolute md:w-full h-80 md:h-auto md:left-0 -top-10 lg:-top-20 scales-book cursor-pointer z-50 transition-all opacity-0"
-                        src="https://pianote.s3.amazonaws.com/products/the-power-of-chords/piano_scales_book.png"
-                        alt="scales book" loading="lazy" onload="this.classList.remove('opacity-0')" />
-                </div>
-            </div>
-        </div>
-    </section>
     <div id="final" class="anchor"></div>
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container max-w-6xl mx-auto relative z-50">
@@ -769,33 +721,19 @@
                 </div>
 
                 <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
-                    <a href="/ecommerce/add-to-cart?products[easy-chords]=1&products[piano-chords-and-scales-guide]=1&locked=true"
+                    <a href="/ecommerce/add-to-cart?products[easy-chords]=1&locked=true"
                         class="z-10 relative px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-lg w-full sm:w-5/12">
-                        <p class="border border-pianote text-pianote inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">EARLY BIRD BUNDLE</p>
+                        <p class="border border-pianote text-pianote inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">COURSE ONLY</p>
                         <h3><strong>Easy Chords</strong></h3>
                         <p class="text-sm mt-2 mb-5">Play better piano in just 30 days.</p>
                         <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>
                         <div class="join blue smaller my-4 w-full">ENROLL NOW</div>
-                        <ul class="list-disc ml-6">
-                            <li class="text-sm relaxed"><span class="text-pianote">Free</span> Chords & Scales Book</li>
-                            <li class="text-sm relaxed"><span class="text-pianote">Free bonus ends in<br class="hidden sm:inline">
-                                    <span x-cloak x-data="timer2()" x-init="countdown2()">
-                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                     <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                                 </span>
-                                    </span></li>
-
-                        </ul>
-                        <hr class="w-full my-5" style="border-color:#b2cae1">
                         <p class="leading-loose text-sm"><strong>Key Features</strong><br>
                             <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>
                             <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee</p>
                     </a>
                     <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,easy-chords:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,100-days-of-practice-poster:1,the-power-of-chords:1,piano-riffs-and-fills:1&redirect=/order&locked=true"
-                        class="px-5 sm:px-10 py-7 sm:py-11 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"
+                        class="px-5 sm:px-10 py-5 sm:py-7 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"
                         style="background-color:#dde9f9;background-image:url(https://www.musora.com/musora-cdn/image/width=380,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/order-bg.jpg);"
                     >
                         <p class="border border-pianote text-pianote inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">LAUNCH MEMBERSHIP SPECIAL</p>
@@ -900,94 +838,6 @@
         'countdownDate' => '2023-06-05 00:00:00',
         'promoVersion' => false
     ])
-    <script>
-        function timer2(){
-            return {
-                day: '00',
-                dayText: ' days',
-                hour: '00',
-                hourText: ' hours',
-                minute: '00',
-                minuteText: ' minutes',
-                second: '00',
-                secondText: ' seconds',
-                endTime: new Date('2023-05-23 00:00:00').getTime(),
-                startTime: new Date().getTime(),
-                timeLeft: 0,
-                smallScreen: false,
-                countdown2: function (){
-                    let _this = this;
-                    this.startTime = new Date().getTime();
-                    this.timeLeft = (this.endTime - this.startTime) / 1000;
-
-                    this.startTime = new Date().getTime();
-                    this.timeLeft = (this.endTime - this.startTime) / 1000;
-                    this.day = this.formatTime(this.timeLeft / (60 * 60 * 24));
-                    this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
-                    this.minute = this.formatTime(this.timeLeft / 60) % 60;
-                    this.second = this.formatTime(this.timeLeft % 60);
-
-                    if ( !this.smallScreen ){
-                        this.dayText = formatText(this.day, ' days');
-                        this.hourText = formatText(this.hour, ' hours');
-                        this.minuteText = formatText(this.minute, ' minutes');
-                        this.secondText = formatText(this.second, ' seconds');
-                    }
-
-                    if(this.timeLeft > 0){
-                        setInterval(() => {
-                            this.startTime = new Date().getTime();
-                            this.timeLeft = (this.endTime - this.startTime) / 1000;
-                            this.day = this.formatTime(this.timeLeft / (60 * 60 * 24));
-                            this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
-                            this.minute = this.formatTime(this.timeLeft / 60) % 60;
-                            this.second = this.formatTime(this.timeLeft % 60);
-
-                            if ( !this.smallScreen ){
-                                this.dayText = formatText(this.day, ' days');
-                                this.hourText = formatText(this.hour, ' hours');
-                                this.minuteText = formatText(this.minute, ' minutes');
-                                this.secondText = formatText(this.second, ' seconds');
-                            }
-
-                        }, 1000);
-                    }
-
-                    const bodyWidth = window.innerWidth;
-
-                    if ( bodyWidth < 768 ){
-                        this.dayText = 'D';
-                        this.hourText = 'H';
-                        this.minuteText = 'M';
-                        this.secondText = 'S';
-                        this.smallScreen = true;
-                    }
-
-                    window.addEventListener('resize', function(event){
-                        const bodyWidth = window.innerWidth;
-
-                        if ( bodyWidth < 768 ){
-                            _this.smallScreen = true;
-                            _this.dayText = 'D';
-                            _this.hourText = 'H';
-                            _this.minuteText = 'M';
-                            _this.secondText = 'S';
-                        }
-                        else {
-                            _this.smallScreen = false;
-                            _this.dayText = ' days';
-                            _this.hourText = ' hours';
-                            _this.minuteText = ' minutes';
-                            _this.secondText = ' seconds';
-                        }
-                    });
-                },
-                formatTime: function (value){
-                    return Math.floor(value);
-                },
-            }
-        }
-    </script>
     @include("pianote.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
