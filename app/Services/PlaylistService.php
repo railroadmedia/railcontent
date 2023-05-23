@@ -23,17 +23,21 @@ class PlaylistService
 {
 private ContentLastEngagedService $contentLastEngagedService;
 private UserPlaylistsService $userPlaylistsService;
+private ContentService $contentService;
 
     /**
      * @param ContentLastEngagedService $contentLastEngagedService
      * @param UserPlaylistsService $userPlaylistsService
+     * @param ContentService $contentService
      */
     public function __construct(
         ContentLastEngagedService $contentLastEngagedService,
-        UserPlaylistsService $userPlaylistsService
+        UserPlaylistsService $userPlaylistsService,
+        ContentService $contentService
     ) {
         $this->contentLastEngagedService = $contentLastEngagedService;
         $this->userPlaylistsService = $userPlaylistsService;
+        $this->contentService = $contentService;
     }
 
     /**
@@ -48,6 +52,13 @@ private UserPlaylistsService $userPlaylistsService;
         $nextItem = null;
         if($lastEngagedContent){
             $nextItem = $lastEngagedContent->content_id;
+            $playlistItem = $this->userPlaylistsService->getPlaylistItemById($nextItem);
+            $content = $this->contentService->getById($playlistItem['content_id']);
+            if ($content['completed'] == true) {
+                $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId);
+                $nextIncompleteItem = $items->where('completed', false)->first() ?? $items->first() ;
+                $nextItem = $nextIncompleteItem['user_playlist_item_id'] ?? null;
+            }
         }elseif(isset($userPlaylist['user_playlist_item_id'])){
             $nextItem = $userPlaylist['user_playlist_item_id'];
         }
