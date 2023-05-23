@@ -167,6 +167,15 @@ const handlePlaylistRepeatToggle = () => {
     }
 };
 
+const handleExpandedView = () => {
+    //set to oposite value
+    localStorage.setItem("playerExpanded", !playlistsStore.playerExpanded);
+    localStorage.setItem("isSidebarCollapsed", !pageContainerStore.isSidebarCollapsed);
+
+    pageContainerStore.isSidebarCollapsed = !pageContainerStore.isSidebarCollapsed; 
+    playlistsStore.playerExpanded = !playlistsStore.playerExpanded
+}
+
 //-----------Lifecycle Hooks -----------//
 
 onBeforeMount(() => {
@@ -179,6 +188,10 @@ onBeforeMount(() => {
     } 
     if (localStorage.getItem("isPlaybackPlaylistRepeatOn")) {
         isPlaybackPlaylistRepeatOn.value = JSON.parse(localStorage.getItem("isPlaybackPlaylistRepeatOn"));
+    }
+    if (localStorage.getItem("playerExpanded")) {
+        console.log('playerExpanded', JSON.parse(localStorage.getItem("playerExpanded")) )
+        playlistsStore.playerExpanded = JSON.parse(localStorage.getItem("playerExpanded"));
     }
 
     localStorage.setItem("playbackRepeatOn", false);
@@ -235,7 +248,7 @@ onMounted(() => {
                     <!-- Fullscreen -->
                     <button class="tw-px-1 tw-hidden tw-text-[#445F74] hover:tw-text-black dark:hover:tw-text-white dark:tw-text-[#7E9AB1] tw-ml-1" 
                             :class="{ 'lg:tw-inline-block' : !playlistsStore.playerExpanded }" 
-                            @click="pageContainerStore.isSidebarCollapsed = !pageContainerStore.isSidebarCollapsed; playlistsStore.playerExpanded = !playlistsStore.playerExpanded"
+                            @click.prevent="handleExpandedView"
                     >
                         <i class="fas fa-up-right-and-down-left-from-center"></i>
                     </button>
@@ -297,7 +310,7 @@ onMounted(() => {
             <div class="tw-hidden" :class="{ 'lg:tw-inline-flex lg:tw-w-1/3 lg:tw-justify-end' : playlistsStore.playerExpanded }" >
                 <!-- Exit Fullscreen -->
                 <button class="tw-px-1 tw-text-[#00101D] dark:tw-text-white tw-ml-1 tw-font-bebas-neue tw-flex tw-flex-nowrap tw-items-center tw-leading-[21px]" 
-                        @click="pageContainerStore.isSidebarCollapsed = !pageContainerStore.isSidebarCollapsed; playlistsStore.playerExpanded = !playlistsStore.playerExpanded"
+                        @click.prevent="handleExpandedView"
                 >
                     Exit <i class="fas fa-xmark tw-ml-2"></i>
                 </button>

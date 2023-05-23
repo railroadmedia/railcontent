@@ -276,7 +276,9 @@ onBeforeMount(() => {
                 <div class="fluid tw-pb-3">                    
                     <!-- Soundslice Player -->
                     <div v-if="lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
-                        class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
+                        class="tw-w-full tw-aspect-video"
+                        :class="{ 'tw-max-w-[1280px]' : !playlistsStore.playerExpanded }"
+                    >
                         <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
                             :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext">
                         </SoundSlice>
