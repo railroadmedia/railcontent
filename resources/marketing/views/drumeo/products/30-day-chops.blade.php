@@ -698,14 +698,14 @@
                     </div>
 
                     <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
-                        <a href="/ecommerce/add-to-cart?products[30-day-chops]=1&locked=true"
+                        <a href="/ecommerce/add-to-cart?products[30-day-chops]=1&products[Drumeo-VaterSticks]=1&locked=true"
                             class="z-10 relative px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-lg w-full sm:w-5/12">
-                            <p class="border border-drumeo text-drumeo inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">COURSE ONLY</p>
                             <h3><strong>30-Day Chops</strong></h3>
                             <p class="text-sm mt-2 mb-5">Learn drum chops in 30 days. </p>
                             <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>
                             <div class="join blue smaller my-4 w-full">ENROLL NOW</div>
                             <ul class="list-disc ml-6">
+                                <li class="text-sm relaxed"><span class="text-drumeo">Free</span> 5A Drumsticks</li>
                                 <li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumeo Access</li>
                             </ul>
                             <hr class="w-full my-5" style="border-color:#b2cae1">
