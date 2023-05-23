@@ -1,9 +1,9 @@
 <div class="cookie-notice hide">
     <div class="text-wrap">
-        <p>We use cookies to store information on your computer. Some of these cookies are essential, while others are used to help our efforts in improving your experience while using the site. By clicking "Accept All Cookies" you agree to the storing of cookies on your device.</p>
+        <p>We use cookies for traffic data and advertising. <a href="/cookie">learn more</a></p>
         <div class="text-center">
-            <div id="accept-cookies">ACCEPT ALL COOKIES</div>
-            <a href="/cookie">Cookie Policy</a>
+            <div id="accept-cookies">OKAY GOT IT</div>
+
         </div>
     </div>
 </div>
