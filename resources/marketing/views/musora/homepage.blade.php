@@ -668,7 +668,7 @@
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/guarantee-musora.png',
         'header' => '<strong>Happy student guarantee.</strong><br>7-days free + <strong>90-days to fall in love.</strong>',
-        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with a 7-day trial PLUS our 90-day guarantee, to make sure you’re seeing results and enjoying a fresh, positive start to your musical journey. ',
+        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with a <strong>7-day trial PLUS our 90-day guarantee</strong> to make sure you’re seeing results and enjoying a fresh, positive start to your musical journey.',
     ])
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
