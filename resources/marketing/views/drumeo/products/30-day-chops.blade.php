@@ -698,26 +698,15 @@
                     </div>
 
                     <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
-                        <a href="/ecommerce/add-to-cart?products[30-day-chops]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=1&locked=true"
+                        <a href="/ecommerce/add-to-cart?products[30-day-chops]=1&locked=true"
                             class="z-10 relative px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-lg w-full sm:w-5/12">
-                            <p class="border border-drumeo text-drumeo inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">EARLY BIRD BUNDLE</p>
+                            <p class="border border-drumeo text-drumeo inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">COURSE ONLY</p>
                             <h3><strong>30-Day Chops</strong></h3>
                             <p class="text-sm mt-2 mb-5">Learn drum chops in 30 days. </p>
                             <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>
                             <div class="join blue smaller my-4 w-full">ENROLL NOW</div>
                             <ul class="list-disc ml-6">
-                                <li class="text-sm relaxed"><span class="text-drumeo">Free</span> QuietPad Practice Pad</li>
-                                <li class="text-sm relaxed"><span class="text-drumeo">Free</span> 5A Drumsticks</li>
                                 <li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumeo Access</li>
-                                <li class="text-sm relaxed"><span class="text-drumeo">Free Pad & Sticks ends in<br class="hidden sm:inline">
-                                    <span x-cloak x-data="timer2()" x-init="countdown2()">
-                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                     <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                                 </span>
-                                    </span></li>
                             </ul>
                             <hr class="w-full my-5" style="border-color:#b2cae1">
                             <p class="leading-loose text-sm"><strong>Key Features</strong><br>
@@ -725,12 +714,13 @@
                                 <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>
                         </a>
                         <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=6&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&locked=true"
-                            class="px-5 sm:px-10 py-7 sm:py-11 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"
+                            class="px-5 sm:px-10 py-5 sm:py-7 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"
                         style="background-color:#dde9f9;background-image:url(https://www.musora.com/musora-cdn/image/width=380,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/order-bg.jpg);"
                         >
                             <p class="border border-drumeo text-drumeo inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">LAUNCH MEMBERSHIP SPECIAL</p>
                             <h3><strong>Join Drumeo + Get<br class="hidden sm:inline"> 30-Day Chops FREE</strong></h3>
-                            <p class="text-sm mt-2 mb-5">Unlimited Drum Lessons + 6 Pairs Of Sticks and more:</p>
+                            <p class="text-sm my-2">
+                                Unlimited Drum Lessons + 6 Pairs Of Sticks and more:</p>
                             <h2 class="inline-block"><!--<s class="opacity-40">$240</s>--> <strong class="text-4xl">$240</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>
                             <div class="join blue smaller my-4 w-full">GET EVERYTHING</div>
                             <ul class="list-disc ml-6">
@@ -839,101 +829,6 @@
 'countdownDate' => '2023-06-05 00:00:00',
 'promoVersion' => false
 ])
-<script>
-function timer2(){
-return {
-    day: '00',
-    dayText: ' days',
-    hour: '00',
-    hourText: ' hours',
-    minute: '00',
-    minuteText: ' minutes',
-    second: '00',
-    secondText: ' seconds',
-    endTime: new Date('2023-05-23 00:00:00').getTime(),
-    startTime: new Date().getTime(),
-    timeLeft: 0,
-    smallScreen: false,
-    countdown2: function (){
-        let _this = this;
-        this.startTime = new Date().getTime();
-        this.timeLeft = (this.endTime - this.startTime) / 1000;
-
-        this.startTime = new Date().getTime();
-        this.timeLeft = (this.endTime - this.startTime) / 1000;
-        this.day = this.formatTime(this.timeLeft / (60 * 60 * 24));
-        this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
-        this.minute = this.formatTime(this.timeLeft / 60) % 60;
-        this.second = this.formatTime(this.timeLeft % 60);
-
-        if ( !this.smallScreen ){
-            this.dayText = formatText(this.day, ' days');
-            this.hourText = formatText(this.hour, ' hours');
-            this.minuteText = formatText(this.minute, ' minutes');
-            this.secondText = formatText(this.second, ' seconds');
-        }
-
-        if(this.timeLeft > 0){
-            setInterval(() => {
-                this.startTime = new Date().getTime();
-                this.timeLeft = (this.endTime - this.startTime) / 1000;
-                this.day = this.formatTime(this.timeLeft / (60 * 60 * 24));
-                this.hour = this.formatTime(this.timeLeft / (60 * 60)) % 24;
-                this.minute = this.formatTime(this.timeLeft / 60) % 60;
-                this.second = this.formatTime(this.timeLeft % 60);
-
-                if ( !this.smallScreen ){
-                    this.dayText = formatText(this.day, ' days');
-                    this.hourText = formatText(this.hour, ' hours');
-                    this.minuteText = formatText(this.minute, ' minutes');
-                    this.secondText = formatText(this.second, ' seconds');
-                }
-
-            }, 1000);
-        }
-
-        const bodyWidth = window.innerWidth;
-
-        if ( bodyWidth < 768 ){
-            this.dayText = 'D';
-            this.hourText = 'H';
-            this.minuteText = 'M';
-            this.secondText = 'S';
-            this.smallScreen = true;
-        }
-
-        window.addEventListener('resize', function(event){
-            const bodyWidth = window.innerWidth;
-
-            if ( bodyWidth < 768 ){
-                _this.smallScreen = true;
-                _this.dayText = 'D';
-                _this.hourText = 'H';
-                _this.minuteText = 'M';
-                _this.secondText = 'S';
-            }
-            else {
-                _this.smallScreen = false;
-                _this.dayText = ' days';
-                _this.hourText = ' hours';
-                _this.minuteText = ' minutes';
-                _this.secondText = ' seconds';
-            }
-        });
-                            _this.smallScreen = false;
-                            _this.dayText = ' days';
-                            _this.hourText = ' hours';
-                            _this.minuteText = ' minutes';
-                            _this.secondText = ' seconds';
-                        }
-                    });
-                },
-                formatTime: function (value){
-                    return Math.floor(value);
-                },
-            }
-        }
-    </script>
 
     @include("drumeo.sales.partials._footer")
 
