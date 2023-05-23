@@ -61,7 +61,7 @@ class RedirectController extends BaseController
 
             $registerButtonUrl = url()->route(
                 'platform.cohort.purchased',
-                ['brand' => brand(), 'cohort' => $product->getSku()]
+                ['brand' => $brand, 'cohort' => $product->getSku()]
             );
             if ($registerButtonUrl) {
                 return redirect($registerButtonUrl);

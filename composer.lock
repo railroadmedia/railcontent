@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "359f6b2a775e9333c83d521e65bfa962",
+    "content-hash": "6c587466cee9fcd69f6119b232b80bfb",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -249,6 +249,18 @@
         },
         {
             "name": "aws/aws-sdk-php",
+<<<<<<< HEAD
+            "version": "3.269.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aws/aws-sdk-php.git",
+                "reference": "7ca74fdf63fa6b0ef8120485c97e753658eb4d8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/7ca74fdf63fa6b0ef8120485c97e753658eb4d8a",
+                "reference": "7ca74fdf63fa6b0ef8120485c97e753658eb4d8a",
+=======
             "version": "3.269.13",
             "source": {
                 "type": "git",
@@ -259,6 +271,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/84f5f9c4f9c4cd7997ca3b7f91fabaf7cc73b0bc",
                 "reference": "84f5f9c4f9c4cd7997ca3b7f91fabaf7cc73b0bc",
+>>>>>>> master
                 "shasum": ""
             },
             "require": {
@@ -338,9 +351,15 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
+<<<<<<< HEAD
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.269.14"
+            },
+            "time": "2023-05-18T18:20:30+00:00"
+=======
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.269.13"
             },
             "time": "2023-05-16T18:24:42+00:00"
+>>>>>>> master
         },
         {
             "name": "behat/transliterator",
@@ -1828,16 +1847,16 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "3.1.4",
+            "version": "3.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "8bf8ab15960787f1a49d405f6eb8c787b4841119"
+                "reference": "63fee8c33bef740db6730eb2a750cd3da6495603"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/8bf8ab15960787f1a49d405f6eb8c787b4841119",
-                "reference": "8bf8ab15960787f1a49d405f6eb8c787b4841119",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/63fee8c33bef740db6730eb2a750cd3da6495603",
+                "reference": "63fee8c33bef740db6730eb2a750cd3da6495603",
                 "shasum": ""
             },
             "require": {
@@ -1906,7 +1925,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/persistence/issues",
-                "source": "https://github.com/doctrine/persistence/tree/3.1.4"
+                "source": "https://github.com/doctrine/persistence/tree/3.2.0"
             },
             "funding": [
                 {
@@ -1922,7 +1941,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-03T11:13:07+00:00"
+            "time": "2023-05-17T18:32:04+00:00"
         },
         {
             "name": "dragonmantank/cron-expression",
@@ -2853,6 +2872,18 @@
         },
         {
             "name": "google/apiclient",
+<<<<<<< HEAD
+            "version": "v2.15.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/googleapis/google-api-php-client.git",
+                "reference": "49787fa30b8d8313146a61efbf77ed1fede723c2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/49787fa30b8d8313146a61efbf77ed1fede723c2",
+                "reference": "49787fa30b8d8313146a61efbf77ed1fede723c2",
+=======
             "version": "v2.14.0",
             "source": {
                 "type": "git",
@@ -2863,28 +2894,28 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/789c8b07cad97f420ac0467c782036f955a2ad89",
                 "reference": "789c8b07cad97f420ac0467c782036f955a2ad89",
+>>>>>>> master
                 "shasum": ""
             },
             "require": {
-                "firebase/php-jwt": "~2.0||~3.0||~4.0||~5.0||~6.0",
+                "firebase/php-jwt": "~6.0",
                 "google/apiclient-services": "~0.200",
-                "google/auth": "^1.10",
-                "guzzlehttp/guzzle": "~5.3.3||~6.0||~7.0",
+                "google/auth": "^1.28",
+                "guzzlehttp/guzzle": "~6.5||~7.0",
                 "guzzlehttp/psr7": "^1.8.4||^2.2.1",
-                "monolog/monolog": "^1.17||^2.0||^3.0",
-                "php": "^5.6|^7.0|^8.0",
-                "phpseclib/phpseclib": "~2.0||^3.0.2"
+                "monolog/monolog": "^2.9||^3.0",
+                "php": "^7.4|^8.0",
+                "phpseclib/phpseclib": "^3.0.2"
             },
             "require-dev": {
-                "cache/filesystem-adapter": "^0.3.2|^1.1",
+                "cache/filesystem-adapter": "^1.1",
                 "composer/composer": "^1.10.22",
                 "phpcompatibility/php-compatibility": "^9.2",
-                "phpspec/prophecy-phpunit": "^1.1||^2.0",
-                "phpunit/phpunit": "^5.7.21 || ^6.0 || ^7.0 || ^8.0 || ^9.0",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.5",
                 "squizlabs/php_codesniffer": "^3.0",
                 "symfony/css-selector": "~2.1",
-                "symfony/dom-crawler": "~2.1",
-                "yoast/phpunit-polyfills": "^1.0"
+                "symfony/dom-crawler": "~2.1"
             },
             "suggest": {
                 "cache/filesystem-adapter": "For caching certs and tokens (using Google\\Client::setCache)"
@@ -2917,9 +2948,15 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client/issues",
+<<<<<<< HEAD
+                "source": "https://github.com/googleapis/google-api-php-client/tree/v2.15.0"
+            },
+            "time": "2023-05-18T13:51:33+00:00"
+=======
                 "source": "https://github.com/googleapis/google-api-php-client/tree/v2.14.0"
             },
             "time": "2023-05-11T21:54:55+00:00"
+>>>>>>> master
         },
         {
             "name": "google/apiclient-services",
@@ -5047,6 +5084,18 @@
         },
         {
             "name": "laravel/vapor-core",
+<<<<<<< HEAD
+            "version": "v2.31.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/vapor-core.git",
+                "reference": "7a42ef1e02b1b20198d939cb92f08f648cee41e0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/vapor-core/zipball/7a42ef1e02b1b20198d939cb92f08f648cee41e0",
+                "reference": "7a42ef1e02b1b20198d939cb92f08f648cee41e0",
+=======
             "version": "v2.31.0",
             "source": {
                 "type": "git",
@@ -5057,6 +5106,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/vapor-core/zipball/4f8b57db2ed99dc5f87584c9a641ef6542c8c882",
                 "reference": "4f8b57db2ed99dc5f87584c9a641ef6542c8c882",
+>>>>>>> master
                 "shasum": ""
             },
             "require": {
@@ -5116,9 +5166,15 @@
                 "vapor"
             ],
             "support": {
+<<<<<<< HEAD
+                "source": "https://github.com/laravel/vapor-core/tree/v2.31.1"
+            },
+            "time": "2023-05-19T08:32:20+00:00"
+=======
                 "source": "https://github.com/laravel/vapor-core/tree/v2.31.0"
             },
             "time": "2023-05-10T10:11:27+00:00"
+>>>>>>> master
         },
         {
             "name": "laravel/vapor-ui",
@@ -8159,16 +8215,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.78",
+            "version": "v5.0.81",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "4c6354f1950e3f38ef8bcde0a581e682f814f23a"
+                "reference": "54b7d14601ee1ab0b32419016b81b250f4820c04"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/4c6354f1950e3f38ef8bcde0a581e682f814f23a",
-                "reference": "4c6354f1950e3f38ef8bcde0a581e682f814f23a",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/54b7d14601ee1ab0b32419016b81b250f4820c04",
+                "reference": "54b7d14601ee1ab0b32419016b81b250f4820c04",
                 "shasum": ""
             },
             "require": {
@@ -8205,9 +8261,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.78"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.81"
             },
-            "time": "2023-05-15T12:30:48+00:00"
+            "time": "2023-05-17T09:42:10+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -8363,6 +8419,7 @@
         },
         {
             "name": "railroad/musora-api",
+<<<<<<< HEAD
             "version": "dev-v2.0-playlists",
             "source": {
                 "type": "git",
@@ -8373,6 +8430,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/525a5d67be27880302ff23e791821a9e618f3ca2",
                 "reference": "525a5d67be27880302ff23e791821a9e618f3ca2",
+=======
+            "version": "v3.1.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/railroadmedia/musora-api.git",
+                "reference": "a345a937005d90bfa097f394f12d6eadce1759bb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/a345a937005d90bfa097f394f12d6eadce1759bb",
+                "reference": "a345a937005d90bfa097f394f12d6eadce1759bb",
+>>>>>>> master
                 "shasum": ""
             },
             "require": {
@@ -8402,9 +8471,15 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-playlists"
             },
             "time": "2023-05-17T07:41:13+00:00"
+=======
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.7"
+            },
+            "time": "2023-05-12T12:57:31+00:00"
+>>>>>>> master
         },
         {
             "name": "railroad/permissions",
@@ -8601,12 +8676,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "b3269c1be79ad2d8ff254b7308f5590e1b02ec74"
+                "reference": "e2d0933798758b3ebf46ac3b31afce8e6a9fc64d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b3269c1be79ad2d8ff254b7308f5590e1b02ec74",
-                "reference": "b3269c1be79ad2d8ff254b7308f5590e1b02ec74",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/e2d0933798758b3ebf46ac3b31afce8e6a9fc64d",
+                "reference": "e2d0933798758b3ebf46ac3b31afce8e6a9fc64d",
                 "shasum": ""
             },
             "require": {
@@ -8662,7 +8737,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists"
             },
-            "time": "2023-05-15T13:50:47+00:00"
+            "time": "2023-05-19T13:11:10+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -8786,16 +8861,16 @@
         },
         {
             "name": "railroad/railtracker",
-            "version": "v4.0.16",
+            "version": "dev-v4.0-playlist-progress",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railtracker.git",
-                "reference": "eef78e3366f5ab627dba056cd216b7c5eaa1960d"
+                "reference": "186f821a98c7e5d0e891baad9d5106546e8ce7c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/eef78e3366f5ab627dba056cd216b7c5eaa1960d",
-                "reference": "eef78e3366f5ab627dba056cd216b7c5eaa1960d",
+                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/186f821a98c7e5d0e891baad9d5106546e8ce7c2",
+                "reference": "186f821a98c7e5d0e891baad9d5106546e8ce7c2",
                 "shasum": ""
             },
             "require": {
@@ -8841,9 +8916,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railtracker/issues",
-                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.16"
+                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0-playlist-progress"
             },
-            "time": "2023-04-06T19:07:40+00:00"
+            "time": "2023-05-12T14:37:35+00:00"
         },
         {
             "name": "railroad/referral",
@@ -15170,22 +15245,23 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.20.4",
+            "version": "1.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "7d568c87a9df9c5f7e8b5f075fc469aa8cb0a4cd"
+                "reference": "6df62b08faef4f899772bc7c3bbabb93d2b7a21c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/7d568c87a9df9c5f7e8b5f075fc469aa8cb0a4cd",
-                "reference": "7d568c87a9df9c5f7e8b5f075fc469aa8cb0a4cd",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/6df62b08faef4f899772bc7c3bbabb93d2b7a21c",
+                "reference": "6df62b08faef4f899772bc7c3bbabb93d2b7a21c",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2 || ^8.0"
             },
             "require-dev": {
+                "nikic/php-parser": "^4.15",
                 "php-parallel-lint/php-parallel-lint": "^1.2",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^1.5",
@@ -15209,9 +15285,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.20.4"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.21.0"
             },
-            "time": "2023-05-02T09:19:37+00:00"
+            "time": "2023-05-17T13:13:44+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -16971,13 +17047,20 @@
             "version": "dev-2.0-playlists",
             "alias": "v2.0.62",
             "alias_normalized": "2.0.62.0"
+        },
+        {
+            "package": "railroad/railtracker",
+            "version": "dev-v4.0-playlist-progress",
+            "alias": "v4.0.16",
+            "alias_normalized": "4.0.16.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/musora-api": 20,
         "railroad/railanalytics": 20,
-        "railroad/railcontent": 20
+        "railroad/railcontent": 20,
+        "railroad/railtracker": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

@@ -180,6 +180,7 @@ const app = createApp({
                                 || mediaElementVueInstance.totalDuration,
                             sessionToken: sessionTokenElement.value || null,
                             brand:mediaElementVueInstance.brand,
+                            contentId: mediaElementVueInstance.contentId
                         });
                     });
                 }

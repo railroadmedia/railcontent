@@ -68,7 +68,7 @@ const unpinPlaylist = (item, brand) => {
                 //Confirmation
                 window.shownotification({
                     icon: 'playlist',
-                    text: `${item.name} has been unpinned from the sidebar.`
+                    text: `${item.name} has been successfully unpinned from the menu.`
                 })
             }
         })
@@ -93,7 +93,7 @@ const pinPlaylist = (item, brand) => {
                     //show success message
                     window.shownotification({
                         icon: 'playlist',
-                        text: `'${item.name}' has been pinned within the sidebar.`
+                        text: `${item.name} has been successfully pinned to the menu.`
                     })
                 }
             })

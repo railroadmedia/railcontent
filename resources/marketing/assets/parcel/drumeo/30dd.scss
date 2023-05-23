@@ -157,10 +157,10 @@ img {
     &.dc30::after {
         bottom: 17%;
         @include tablet {
-            bottom: 15.5%;
+            bottom: 11%;
         }
         @include desktop {
-            bottom: 17%;
+            bottom: 12.5%;
         }
 
     }

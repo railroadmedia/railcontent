@@ -27,7 +27,7 @@ const props = defineProps({
             </h2>
 
             <p class="dark:tw-text-white tw-text-center">
-                Lesson with the title <span class="tw-font-bold dark:tw-text-[#9EC0DC]">{{ title }}</span> already exists in this playlist.
+                <span class="tw-font-bold dark:tw-text-[#9EC0DC] tw-capitalize">{{ title }}</span> already exists in this playlist.
                 <br />
                 Add anyway?
             </p>

@@ -87,7 +87,7 @@
         //show success message
         window.shownotification({
             icon: 'fa-pen-to-square',
-            text: `You have successfully re-ordered your playlist items`
+            text: `You have successfully re-ordered your playlist items.`
         })
     }
     //Cancel Sort
@@ -188,10 +188,10 @@
                     <div v-if="playlistsStore.lessons.length" class="tw-w-full">
 
                         <!-- List View Header -->
-                        <header class="tw-hidden lg:tw-flex tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-p-3">
+                        <header class="tw-hidden lg:tw-flex tw-w-full tw-font-bold tw-items-center tw-transition-colors tw-bg-[#E6E7E9] dark:tw-bg-[#002039] tw-text-[#0D0D0D] dark:tw-text-white tw-mb-1 tw-rounded-t-md tw-px-3 tw-py-2">
                             <div class="tw-w-[40px]">#</div>
                             <p class="tw-relative tw-inline-block tw-mr-auto tw-w-full">Name</p>
-                            <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[128px]">Type</p>
+                            <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[140px]">Type</p>
                             <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[100px]">Time</p>
                             <p class="tw-inline-flex tw-shrink-0 tw-justify-center tw-w-[100px]">Actions</p>
                         </header>

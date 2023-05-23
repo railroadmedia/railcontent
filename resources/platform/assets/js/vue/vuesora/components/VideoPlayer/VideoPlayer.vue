@@ -278,9 +278,23 @@ function setRange({ range }) {
     }
 }
 
-function initializePlayer(time) {
+function getTimeToSeekTo() {
     const urlParams = new URLSearchParams(window.location.search);
-    const timeToSeekTo = time || (urlParams.get('time') || window.localStorage.getItem(`${contentCurrentTimeStorageKey.value}_currentTime`) || props.currentSecond);
+    let seconds = urlParams.get('time');
+    if (seconds) {
+        return seconds;
+    }
+    seconds = window.localStorage.getItem(`${contentCurrentTimeStorageKey.value}_currentTime`);
+    if (seconds) {
+        window.localStorage.removeItem(`${contentCurrentTimeStorageKey.value}_currentTime`);
+        return seconds;
+    }
+
+    return window.sessionStorage.getItem(`${contentCurrentTimeStorageKey.value}_currentTime`) || props.currentSecond;
+}
+
+function initializePlayer(time) {
+    const timeToSeekTo = time || getTimeToSeekTo();
 
     if (parseInt(timeToSeekTo) !== parseInt(currentTime.value)) {
         seek(timeToSeekTo);
@@ -324,7 +338,7 @@ function initializePlayer(time) {
     }, 100);
 
     setInterval(() => {
-        window.localStorage.setItem(`${contentCurrentTimeStorageKey.value}_currentTime`, currentTime.value);
+        window.sessionStorage.setItem(`${contentCurrentTimeStorageKey.value}_currentTime`, currentTime.value);
     }, 2500);
 }
 

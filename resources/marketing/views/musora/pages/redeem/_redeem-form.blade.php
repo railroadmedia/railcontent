@@ -1,6 +1,11 @@
 <form id="commentform" name="drumeo" method="post"
     @if(empty($existing)) action="{{ get_musora_brand_base_url() }}/ecommerce/access-codes/redeem" @else action="{{ URL::route('access-codes.form-claim') }}" @endif
 >
+    @php
+        if (empty($accessCodeArray)) {
+            $accessCodeArray = null;
+        }
+    @endphp
     @if(empty($existing))
         <input type="hidden" name="credentials_type" value="new">
     @else
@@ -10,22 +15,22 @@
     <div class="flex flex-wrap">
         <p class="w-full input-describer">Code</p>
         <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code1') --}}">
+            <input class="code-input w-full" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[0]}}" @else value="{{-- Input::old('code1') --}}" @endif>
         </div>
         <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code2') --}}">
+            <input class="code-input w-full" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[1]}}" @else value="{{-- Input::old('code2') --}}" @endif>
         </div>
         <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code3') --}}">
+            <input class="code-input w-full" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[2]}}" @else value="{{-- Input::old('code3') --}}" @endif>
         </div>
         <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code4') --}}">
+            <input class="code-input w-full" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[3]}}" @else value="{{-- Input::old('code4') --}}" @endif>
         </div>
         <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code5') --}}">
+            <input class="code-input w-full" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[4]}}" @else value="{{-- Input::old('code5') --}}" @endif>
         </div>
         <div class="w-1/6 px-0.5">
-            <input class="code-input w-full" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code6') --}}">
+            <input class="code-input w-full" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[5]}}" @else value="{{-- Input::old('code6') --}}" @endif>
         </div>
     </div>
     @if(empty($existing))

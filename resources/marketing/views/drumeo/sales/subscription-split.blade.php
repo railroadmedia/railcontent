@@ -579,68 +579,61 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @hasSection('final')
-        @yield('final')
-    @elseif(!empty($trialVersion))
-        @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
-            "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-            "songs" => "5000",
-            "firstPoint" => "The world’s best drum lessons.",
-            "thirdPoint" => "Unlimited personal support.",
-            "fifthPoint" => "Lesson access for piano, guitar, and singing.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
-        ])
-    @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
-                'title' => 'Drumeo Drumsticks',
-                'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
-                'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
-                'shipping' => true,
-                ],
-                [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
-                'title' => 'Rock Drumming Masterclass',
-                'description' => 'Todd Sucherman’s 26-week masterclass to help you improve your rock drumming.',
-                'price' => floatval($productPrices['rock-drumming-masterclass-pack']->price),
-                ],
-                [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
-                'title' => 'Drum Technique Made Easy',
-                'description' => 'Bruce Becker’s 26-week masterclass to improve your hand & foot technique.',
-                'price' => floatval($productPrices['drum-technique-made-easy-pack']->price),
-                ],
-                [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
-                'title' => 'Independence Made Easy',
-                'description' => 'Jared Falk’s 26-week masterclass to unlock your musicality and freedom on the drums.',
-                'price' => floatval($productPrices['independence-made-easy-pack']->price),
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png',
-        'header' => 'Online drum lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $603.95',
-        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[Drumeo-VaterSticks]=1&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&locked=true&promo-code=special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[DLM-1-month]=1&locked=true',
-        ])
-    @else
-        @include('musora.sales.components.order-section-collage', [
-        'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
-                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
-        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-spread.png',
-        ])
-    @endif
+    <section class="text-center text-white px-4 sm:px-6 py-12 sm:py-16 lg:py-24 bg-[#0c1524]"
+        x-data="{ plusMembershipSelected: true }"
+    >
+        <div class="container max-w-6xl mx-auto">
+            <h1><strong>@if(!empty($headline)) {{ $headline }} @else Your first @if(empty($month)) week @else month @endif <br class="inline sm:hidden"> is free. @endif</strong></h1>
+            <h5 class="mt-2 md:mt-4 mb-5">Choose the plan that will continue on <br class="inline lg:hidden">
+                @if(empty($month)) {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} @else {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }} @endif
+            (after your free trial). Cancel anytime.</h5>
+
+            <div id="plusOptions"
+                class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto"
+                x-bind:class="{ 'hidden': !plusMembershipSelected }"
+            >
+                <div class="w-full md:w-1/2 px-2 md:px-3 relative">
+                    <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-black text-sm rounded-full bg-[#ffac00]" >SAVE 33%</p>
+                    <a href="/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        <div class="bg-white px-3 py-6 md:py-9">
+                            <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
+                            <h4 class="inline-block leading-none"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12) }}/month</strong></h4>
+                            <p class="text-sm mb-6"><em>Billed at ${{Prices::$plusSubscriptionAnnualFull}} per year.</em></p>
+                            <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
+                        </div>
+                        <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
+                            <p class="text-sm mb-1"><strong>The world’s best drum lessons.</strong></p>
+                            <p class="text-sm mb-1"><strong>5000+ popular songs.</strong></p>
+                            <p class="text-sm mb-1"><strong>Unlimited personal support.</strong></p>
+                            <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
+                            <p class="text-sm mb-1">Lesson access for piano, guitar, and singing.</p>
+                            <p class="text-sm">90-day money back guarantee.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="w-full md:w-1/2 px-2 md:px-3 relative">
+                    <a href="/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        <div class="bg-white px-3 py-6 md:py-9">
+                            <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
+                            <h4 class="inline-block leading-none"><strong>${{ Prices::$plusSubscriptionMonthly }}/month</strong></h4>
+                            <p class="text-sm mb-6"><em>Pay as you go.</em></p>
+                            <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
+                        </div>
+                        <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
+                            <p class="text-sm mb-1"><strong>The world’s best drum lessons.</strong></p>
+                            <p class="text-sm mb-1"><strong>5000+ popular songs.</strong></p>
+                            <p class="text-sm mb-1"><strong>Unlimited personal support.</strong></p>
+                            <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
+                            <p class="text-sm mb-1">Lesson access for piano, guitar, and singing.</p>
+                            <p class="text-sm">90-day money back guarantee.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <p><em>All prices listed in USD.</em></p>
+        </div>
+    </section>
+
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices.png',
