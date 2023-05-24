@@ -25,7 +25,7 @@
                     {{ csrf_field() }}
 
                     <input type="hidden" name="credentials_type" value="new">
-                    <input type="hidden" name="redirect" value="/bestbook">
+                    <input type="hidden" name="redirect" value="/drumeo/bestbook">
 
                     <input type="hidden" name="book-title" value="Best Beginner Drum Book">
                     <input type="hidden" name="context" value="best-book">
@@ -99,7 +99,7 @@
                     {{ method_field('POST') }}
                     {{ csrf_field() }}
                     <input type="hidden" name="credentials_type" value="existing">
-                    <input type="hidden" name="redirect" value="/bestbook">
+                    <input type="hidden" name="redirect" value="/drumeo/bestbook">
 
                     <input type="hidden" name="book-title" value="Best Beginner Drum Book">
                     <input type="hidden" name="context" value="best-book">

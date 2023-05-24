@@ -263,7 +263,7 @@ class SalesController extends BaseController
     public function claimRoland90DaysAccess(Request $request)
     {
         // create access code
-        $accessCode = $this->accessCodeService->generateAccessCode([408], 'pianote');
+        $accessCode = $this->accessCodeService->generateAccessCode([408], 'pianote', 'roland-piano-promo');
 
         // create the customer and send the email
         dispatch(
