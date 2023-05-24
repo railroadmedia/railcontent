@@ -2375,7 +2375,7 @@ class ContentRepository extends RepositoryBase
         }
 
         foreach ($filterOptionsArray as $index=>$value){
-            if(!in_array($index, $filterOptions)){
+            if(!in_array($index, $filterOptions) && ($index != 'type')){
                 unset($filterOptionsArray[$index]);
             }
         }
