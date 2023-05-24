@@ -422,6 +422,7 @@ return [
                 'description' => "Here's a list of all lessons recently added to Drumeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
                 'sortBy' => '-published_on',
             ],
             'subscribed' => [
@@ -436,7 +437,8 @@ return [
                 'name' => 'Coaches',
                 'icon' => 'icon-coach',
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
-                'allowableFilters' => ['progress','focus'],
+                'allowableFilters' => ['progress'],
+                'allowableFiltersMobile' => ['focus', 'style'],
                 'sortBy' => '-published_on',
             ],
             'courses' => [
@@ -444,13 +446,15 @@ return [
                 'icon' => 'icon-courses',
                 'description' => "Tackle your next drumming goal with bite-sized courses from many of the world's best drummers. ",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
             ],
             'songs' => [
                 'name' => 'Songs',
                 'icon' => 'icon-songs',
                 'description' => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
-                'allowableFilters' => ['style', 'artist', 'progress'],
+                'allowableFilters' => ['difficulty', 'style', 'artist', 'progress'],
+                'allowableFiltersMobile' => ['difficulty',  'style', 'artist', 'progress'],
                 'sortBy' => 'slug',
             ],
             'student-focus' => [
@@ -458,6 +462,7 @@ return [
                 'icon' => 'icon-student-focus',
                 'description' => "Submit your playing for personalized and direct feedback, or look at the archive to see what challenges our instructors have already addressed.",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic'],
+                'allowableFiltersMobile' => ['difficulty',  'instructor', 'topic'],
                 'sortBy' => '-published_on',
             ],
             'rudiments' => [
@@ -465,6 +470,7 @@ return [
                 'icon' => 'icon-drums',
                 'description' => "The 40 drum rudiments are essential for any drummer, no matter the style, genre, or scenario. You can use the videos below to help you learn, practice, and perfect every single one.",
                 'allowableFilters' => ['topic', 'progress', 'instrument'],
+                'allowableFiltersMobile' => ['topic',  'instrument','progress'],
                 'sortBy' => 'sort',
             ],
             'spotlight' => [
@@ -474,6 +480,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "We're standing on the shoulders of giants. Those who came before us paved the way for everyone who came after by developing most of what we take for granted today, in the world of drum-set playing. Learning about these giants and their contributions to our craft is essential to fully appreciate and understand what we do as musicians. This is the journey Todd Sucherman is inviting you to take on with him, as he navigates the incredible world of Spotlight.",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
                 'amountOfFutureLessonsToShow' => 10,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
@@ -485,6 +492,7 @@ return [
                 'description' => "Drummers love their gear - and in here you will find videos on gear demos,
                     reviews, maintenance, tuning tips and much more.",
                 'allowableFilters' => ['instructor', 'progress'],
+                'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
             'challenges' => [
@@ -495,6 +503,7 @@ return [
                     more brain power and practice to get down. They are a great way to motivate you to get behind
                     the kit or pad to practice, and cover the entire gamut of drumming skill level.",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
             'boot-camps' => [
@@ -504,6 +513,7 @@ return [
                 'description' => "Grab your sticks and practice along while watching a lesson! These boot camps
                     are designed like workout videos so you can follow along and push your drumming at the same time.",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
             ],
             'quick-tips' => [
@@ -512,6 +522,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice. ",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
                 'sortBy' => '-published_on',
             ],
             'podcasts' => [
@@ -523,6 +534,7 @@ return [
                     about drum topics or interviews with the greats you are looking for, these are an entertaining
                     and educational way to pass the time.",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => '-sort',
             ],
             'on-the-road' => [
@@ -534,6 +546,7 @@ return [
                     some of the biggest drum/music events in the world, as well as factory tours of your favorite
                     drum brands.",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
             'behind-the-scenes' => [
@@ -544,6 +557,7 @@ return [
                 'description' => "Have you ever wondered what it’s like to work at the Drumeo office?
                     This is your behind the scenes look at what we do and all the shenanigans that happen day to day.",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => '-sort',
             ],
             'study-the-greats' => [
@@ -554,6 +568,7 @@ return [
                 'description' => "Study the greats with Austin Burcham! These lessons break down the beats,
                     licks, and ideas of some of the most famous drummers we have had out on Drumeo.",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
             'live-streams' => [
@@ -563,6 +578,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Practice sessions, Q&A, celebrations, and more are available during Drumeo live lessons. Subscribe to an event or the whole calendar, so you don’t miss out!",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
             'solos' => [
@@ -572,6 +588,7 @@ return [
                 'description' => "Watch drum solos performed by the many different artists we have had out
                     on Drumeo! A great way to be entertained, motivated, and to learn through amazing performances.",
                 'allowableFilters' => ['instructor', 'progress'],
+                'allowableFiltersMobile' => ['instructor'],
                 'sortBy' => '-published_on',
             ],
             'performances' => [
@@ -581,6 +598,7 @@ return [
                 'description' => "Watch the world's best drummers perform songs, duets, and other inspirational
                     pieces. Sit back, relax, and get ready to be inspired by these amazing performances!",
                 'allowableFilters' => ['instructor', 'progress'],
+                'allowableFiltersMobile' => ['instructor'],
                 'sortBy' => '-published_on',
             ],
             'exploring-beats' => [
@@ -589,6 +607,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Join Carson and his extraterrestrial roommate Gary as they travel through time and space exploring some of earth's greatest hip-hop beats and delicious snacks.",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
             'sonor-drums' => [
@@ -598,6 +617,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Take a closer look at Sonor Drums with Jared as he explores the Sonor Factory in Bad Berleburg Germany and interviews the people behind the amazing brand.",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => 'published_on',
             ],
             'paiste-cymbals' => [
@@ -607,6 +627,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Take a closer look at Paiste Cymbals with Jared as he explores the Paiste factory in Switzerland and interviews the people behind the amazing brand.",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => 'published_on',
             ],
             'rhythms-from-another-planet' => [
@@ -616,6 +637,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Flying Saucers Over Canada! Aliens from the Horsehead Nebula are here glitching humans! Aaron assembles an assortment of numerically nimble nerds to save the day! Tag along for the adventure, Glitchings, Quintuplet Panteradies, and save the world to learn some phenomenally fancy fives!",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
             'tama-drums' => [
@@ -625,6 +647,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Take a closer look at Tama Drums with Jared as he explores the Tama factory in Japan, learns about Japanese Culture, experiments with traditional Taiko drummers,  and interviews the people behind the amazing brand.",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => 'published_on',
             ],
             'question-and-answer' => [
@@ -633,7 +656,8 @@ return [
                 'shortname' => 'Lessons',
                 'icon' => 'icon-shows',
                 'description' => "Get any drum related question answered by a Drumeo instructor on our weekly Q&A episodes! You can submit as many questions as you like by clicking the button below, and either join us live for the next episode, or check for your answer in the archived videos below!",
-                'allowableFilters' => ['instructor'],
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => ['instructor'],
                 'sortBy' => '-published_on',
             ],
             'student-collaborations' => [
@@ -643,6 +667,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Collaborate with the community with Drumeo Monthly Collaborations! Each month a new Play-Along is chosen and members are tasked to submit their videos playing along to the song. At the end of each month, every video is joined together to create a single performance!",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
             ],
             'diy-drum-experiments' => [
@@ -652,6 +677,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Step into David Raouf’s workshop where he will show you how to repurpose old and broken drum gear into usable and functional items! Whether you are a handyman or not, this show will give you unique and creative ideas and drum hacks that you have never seen before!",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
             'rhythmic-adventures-of-captain-carson' => [
@@ -661,6 +687,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "In The Rhythmic Adventures of Captain Carson, kids will join Captain Carson and his best friends Ricky (the robot) and Gary (the alien) as they fly through space and learn fun musical grooves. But they’ve got to be quick, because the tricky Groove Troll is trying to steal their groove!",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
             'in-rhythm' => [
@@ -679,6 +706,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "Join the roadies of Rush and get a firsthand look at what it's like to be part of one of our favorite bands. You’re going on an exciting, behind-the-scenes journey to their 2008 Snakes & Arrows Concert Tour - an exclusive invitation to witness the reveal of all of the band’s backstage secrets. Roadies are the unsung heroes of any band - and being a roadie with a top-rated, world-famous rock and roll band is a highly coveted job. It may appear to be all glamour and adventure, but it can be a grueling marathon of 18-hour workdays!",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
             ],
             'the-history-of-electronic-drums' => [
@@ -688,6 +716,7 @@ return [
                 'icon' => 'icon-shows',
                 'description' => "The music industry is dominated by electronic music and electronic drums. For the first time ever, we’ve gathered 14 of the most innovative electronic drum kits to learn more about how they were made, how they work, and most importantly, how they sound.",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
                 'sortBy' => 'sort',
                 'amountOfFutureLessonsToShow' => 10,
                 'showFutureLessonAtTopOrBottom' => 'bottom',
@@ -697,6 +726,7 @@ return [
                 "icon" => "icon-play-alongs",
                 "description" => "Add your drumming to high-quality drumless play-along tracks - with handy playback tools to help you create the perfect performance.",
                 "allowableFilters" => ['bpm', 'style', 'difficulty'],
+                'allowableFiltersMobile' => ['difficulty', 'bpm','style','artist'],
             ],
         ],
         'pianote' => [
