@@ -348,7 +348,7 @@ onBeforeMount(() => {
                         <VideoResources :theme-color="brand" :brand="brand" :title="castTitle" :lesson-type="lessonType"
                             :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
                             :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
-                            :user-id="userId" :resources="videoResources" :show-add-to-list="true"
+                            :user-id="userId" :resources="videoResources" :show-add-to-list="true" :show-complete-button="true"
                             :relatedLesson="relatedLesson" />
                         <RelatedLesson v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
                             :relatedLesson="relatedLesson.data[0]" />
