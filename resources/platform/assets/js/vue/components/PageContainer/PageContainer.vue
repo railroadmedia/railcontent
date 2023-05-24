@@ -165,6 +165,7 @@ onBeforeMount(() => {
   } else if (props.forceSidebarHidden) {
     pageContainerStore.isSidebarCollapsed = true;
   }
+
   setEndpointPrefix();
 
   // Attach notification push to window
@@ -207,6 +208,11 @@ const onResize = (e) => {
   if (smallBreakpoint.matches) {
     pageContainerStore.isSidebarHidden = true;
     pageContainerStore.isSidebarCollapsed = false;
+  } else {
+    if(playlistsStore.playerExpanded) {
+      pageContainerStore.isSidebarHidden = false;
+      pageContainerStore.isSidebarCollapsed = true;
+    }
   }
 }
 

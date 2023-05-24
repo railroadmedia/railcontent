@@ -264,8 +264,6 @@ export default {
         getComments(params, replace = false) {
             this.requestingData = true;
 
-            console.log('GETTING COMMENTSSSS')
-
             CommentService.getComments(params)
                 .then((resolved) => {
                     this.requestingData = false;
