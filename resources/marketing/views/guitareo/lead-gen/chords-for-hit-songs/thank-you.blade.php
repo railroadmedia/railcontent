@@ -11,7 +11,7 @@
     <meta property="og:title" content="Play Your First Song On The Guitar | Guitar Chords for Hit Songs">
     <meta property="og:url" content="https://www.guitareo.com/chords-for-hit-songs/thank-you">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}">
     <style>
         .hero-header:after {
             content:none;

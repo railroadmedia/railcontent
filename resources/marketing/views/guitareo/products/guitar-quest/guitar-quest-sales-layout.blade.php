@@ -19,15 +19,15 @@
             background-color:#FFB500!important;
         }
     </style>
-    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/fonts.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/guitar-quest.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/fonts.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/guitar-quest.css') }}" rel="stylesheet">
 
 @stop()
 
 @section('scripts')
     @parent
-    <script src="{{ asset('/marketing/parcel/guitareo/svg-polyfil.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/svg-polyfil.js') }}"></script>
     <script>
         // Polyfill that alows template elements in svgs for alpine js
         // https://github.com/alpinejs/alpine/issues/637

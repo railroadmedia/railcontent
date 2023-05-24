@@ -10,8 +10,8 @@
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/solo-in-an-hour/">
 
-    <link rel="preload" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}"></noscript>
+    <link rel="preload" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}"></noscript>
 
     <style>
         .infusion-form button {
