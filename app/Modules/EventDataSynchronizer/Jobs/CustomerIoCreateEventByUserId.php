@@ -128,7 +128,7 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
                     $exception->getMessage(),
                     'Customer not found'
                 )) {
-                    Log::warning("User $user->id does not exist in the customer io $this->accountName workspace");
+                    //Log::warning("User $user->id does not exist in the customer io $this->accountName workspace");
                 } else {
                     throw $exception;
                 }
