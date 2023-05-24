@@ -10,11 +10,159 @@
     <meta property="og:url" content="https://www.musora.com">
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
 
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+<style>
+    .join {
+        display: inline-block;
+        font: 500 22px/1em 'Bebas Neue', sans-serif;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: #0c1524;
+        border-radius: 50px;
+        color: #fff;
+        padding: 17px 7%;
+        outline: none;
+        cursor: pointer;
+        text-align: center;
+        user-select: none;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s, opacity 0.3s;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.35);
+    }
+    @media (min-width: 768px) {
+        .join {
+            font-size: 30px;
+        }
+    }
+    .join:hover, .join:focus {
+        color: #fff;
+        background:#14233d;
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.35);
+    }
+    .join.green {
+        background: #10d05f;
+    }
+    .join.green:hover, .join.green:focus {
+        background: #25ee78;
+    }
+    .join.white {
+        background: #fff;
+        color: #000;
+    }
+    .join.white:hover, .join.white:focus {
+        background: #eee;
+    }
+    .join.sold-out {
+        background: #777;
+    }
+    .join.sold-out:hover, .join.sold-out:focus {
+        background: #919191;
+    }
+    .join.smaller {
+        padding: 10px 30px 6px;
+        font-size: 16px;
+    }
+    @media (min-width: 768px) {
+        .join.smaller {
+            font-size: 18px;
+            padding: 12px 30px 10px;
+        }
+    }
+    .join.smaller.outline {
+        padding: 8px 28px 6px;
+        font-size: 16px;
+    }
+    @media (min-width: 768px) {
+        .join.smaller.outline {
+            font-size: 18px;
+            padding: 10px 28px 8px;
+        }
+    }
+    .join.coaches {
+        background-color: #fe9f13;
+        color: #000;
+    }
+    .join.coaches:hover, .join.coaches:focus {
+        background: #feb446;
+        color: #000;
+    }
+    .join.promo {
+        background: #ffac00;
+        color: #000;
+    }
+    .join.promo:hover, .join.promo:focus {
+        background: #ffbd33;
+        color: #000;
+    }
+    .join.outline {
+        background: transparent;
+        outline-style: none !important;
+        border: 1px solid #fff;
+        color: #fff;
+        padding: 6px 12px;
+    }
+    @media (min-width: 768px) {
+        .join.outline {
+            border-width: 2px;
+            padding: 11px 30px;
+        }
+    }
+    .join.outline:hover, .join.outline:focus {
+        background: #fff;
+        color: #000;
+    }
+    .join.outline.light-navy {
+        border-color: #a1afc9;
+        color: #a1afc9;
+    }
+    .join.outline.light-navy:hover, .join.outline.light-navy:focus {
+        background: #a1afc9;
+        color: #000;
+    }
+    .join.outline.method, .join.outline.pianote {
+        border-color: #f61a30;
+        color: #f61a30;
+    }
+    .join.outline.method:hover, .join.outline.pianote:hover, .join.outline.method:focus, .join.outline.pianote:focus {
+        background: #f61a30;
+        color: #fff;
+    }
+    .join.outline.songs {
+        border-color: #17d1fa;
+        color: #17d1fa;
+    }
+    .join.outline.songs:hover, .join.outline.songs:focus {
+        background: #17d1fa;
+        color: #fff;
+    }
+    .join.outline.coaches {
+        border-color: #fe9f13;
+        color: #fe9f13;
+    }
+    .join.outline.coaches:hover, .join.outline.coaches:focus {
+        background: #fe9f13;
+        color: #fff;
+    }
+    .join.outline.promo {
+        border-color: #ffac00;
+        color: #ffac00;
+    }
+    .join.outline.promo:hover, .join.outline.promo:focus {
+        background: #ffac00;
+        color: #fff;
+    }
 
+    .text-musora {
+        color: #0c1524;
+        -webkit-text-fill-color: #0c1524 !important;
+    }
+
+    .bg-musora {
+        background:#0c1524 !important;
+    }
+</style>
     <style>
         .tool:after, .tool:before {
             position: absolute;
@@ -155,27 +303,7 @@
         <img class="absolute z-10 h-48" style="top:9%;left: 78%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-06.png">
         <img class="absolute z-10 h-20" style="top:66%;left: 97%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-02.png">
     </section>
-    <section class="text-center px-5 sm:px-6 py-5 sm:py-6 lg:py-8" style="    background: linear-gradient(45deg, #e6fffb, #e6f2ff, #f6e6ff, #ffe6e8);">
-        <div class="container max-w-6xl mx-auto">
-            <div class="inline-block px-5">
-                <img class="h-32 mb-2" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/piano.png">
-                <p>PIANO</p>
-            </div>
-            <div class="inline-block px-5">
-                <img class="h-32 mb-2" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/guitar.png">
-                <p>GUITAR</p>
-            </div>
-            <div class="inline-block px-5">
-                <img class="h-32 mb-2" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/drums.png">
-                <p>DRUMS</p>
-            </div>
-            <div class="inline-block px-5">
-                <img class="h-32 mb-2" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/mic.png">
-                <p>SINGING</p>
-            </div>
-        </div>
-    </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
             <h2 class="text-center sm:mb-10"><strong>The easier way to<br class="inline sm:hidden"> learn <u>any instrument</u>.</strong></h2>
             <img class="my-5 h-64 inline sm:hidden transition-opacity opacity-0"
@@ -195,6 +323,7 @@
             </div>
         </div>
     </section>
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10 relative z-20" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
 
 
     @php
@@ -233,7 +362,6 @@
     @endphp
 
     @include('musora.sales.components.trailer-grid-section', [
-        'bg' => true,
         'header' => 'Where musical dreams <br class="inline sm:hidden"> <u>come true.</u> ',
         'desc' => 'Always know <em>exactly</em> what to practice with a step-by-step curriculum for each  <br class="hidden sm:inline">instrument plus exclusive courses on any topic you’d ever want to learn!',
     ])
@@ -248,42 +376,42 @@
                 'title' => 'Piano',
                 'images' => [
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/classical-piano.jpg',
                     'title' => 'Classical Piano',
                     'instructor' => 'Victoria Theodore',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/improvisational-jazz.jpg',
                     'title' => 'Improvisational Jazz',
                     'instructor' => 'Jesús Molina',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/beautifully-simple-piano-arpeggios.jpg',
                     'title' => 'Simple Piano Arpeggios',
                     'instructor' => 'Sangah Noona',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/the-perfect-arrangement.jpg',
                     'title' => 'The Perfect Arrangement',
                     'instructor' => 'Summer Swee-Singh',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/creative-song-writing.jpg',
                     'title' => 'Creative Songwriting',
                     'instructor' => 'Josh Dion',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/rhythmic-playing.jpg',
                     'title' => 'Rhythmic Playing',
                     'instructor' => 'Jay Oliver',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/gospel-piano.jpg',
                     'title' => 'Gospel Piano',
                     'instructor' => 'Erskine Hawkins',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/latin-essentials.jpg',
                     'title' => 'Latin Essentials',
                     'instructor' => 'Kevin Castro',
                     ],
@@ -293,42 +421,42 @@
                 'title' => 'Guitar',
                 'images' => [
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/solo-in-an-hour.jpg',
                     'title' => 'Solo In An Hour',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/songwriting-cheat-codes.jpg',
                     'title' => 'Songwriting Cheat Codes',
                     'instructor' => 'Rob Scallon',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/rhythm-groove.jpg',
                     'title' => 'Rhythm & Groove',
                     'instructor' => 'Sami Ghawi',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/shred-guitar.jpg',
                     'title' => 'Shred Guitar',
                     'instructor' => 'Dean Lamb',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/unlock-your-creativity.jpg',
                     'title' => 'Unlock Your Creativity',
                     'instructor' => 'Yvette Young',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/musical-lanes.jpg',
                     'title' => 'Musical Lanes',
                     'instructor' => 'Mark Lettieri',
                     ],
                     [
-                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Dennis-Chambers.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/add-power-to-your-playing.jpg',
                     'title' => 'Add Power To Your Playing',
                     'instructor' => 'Dave Weiner',
                     ],
                     [
-                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Dennis-Chambers.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/the-anatomy-of-a-song.jpg',
                     'title' => 'The Anatomy of a Song',
                     'instructor' => 'Pete Thorn',
                     ],
@@ -343,37 +471,37 @@
                     'instructor' => 'Aaron Spears',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Hannah-Welton.jpg',
                     'title' => 'Writing Drum Parts',
                     'instructor' => 'Hannah Welton',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Todd-Sucherman.jpg',
                     'title' => 'Rock Drumming',
                     'instructor' => 'Todd Sucherman',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Matt-McGuire.jpg',
                     'title' => 'Song Breakdowns',
                     'instructor' => 'Matt McGuire',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Dorothe-Taylor-01.jpg',
                     'title' => 'Rudiments & Patterns',
                     'instructor' => 'Dorothea Taylor',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aric-Improta.jpg',
                     'title' => 'The Creative Mindset',
                     'instructor' => 'Aric Improta',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Kaz-Rodgriguez.jpg',
                     'title' => 'Musical Exercises',
                     'instructor' => 'Kaz Rodriguez',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Sarah-Thawer.jpg',
                     'title' => '4-Way Coordination',
                     'instructor' => 'Sarah Thawer',
                     ]
@@ -383,42 +511,42 @@
                 'title' => 'Singing',
                 'images' => [
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/find-your-true-voice.jpg',
                     'title' => 'Find Your True Voice',
                     'instructor' => 'Sheléa',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/The-power-of-movement.jpg',
                     'title' => 'The Power of Movement',
                     'instructor' => 'Chris Johnson',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/singing-with-soul.jpg',
                     'title' => 'Singing With Soul',
                     'instructor' => 'Tony Lindsay',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/define-your-singing.jpg',
                     'title' => 'Define Your Singing',
                     'instructor' => 'Cate Canning',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/the-science-of-singing-better.jpg',
                     'title' => 'The Science of Singing Better',
                     'instructor' => 'Darcy D',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/songwriting-for-singers.jpg',
                     'title' => 'Songwriting For Singers',
                     'instructor' => 'Hailey Benedict',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/hit-the-high-notes.jpg',
                     'title' => 'Hit The High Notes',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/beautiful-harmonies.jpg',
                     'title' => 'Beautiful Harmonies',
                     'instructor' => 'Julia Ziegler',
                     ],

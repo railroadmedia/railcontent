@@ -22,7 +22,7 @@ module.exports = {
     },
     extend: {
       fontFamily: stylesoraTheme.fontFamily,
-      fontSize: stylesoraTheme.fontSize, 
+      fontSize: stylesoraTheme.fontSize,
       //New Breakpoints
       screens: {
         '3xl': '1815px',
@@ -66,11 +66,6 @@ module.exports = {
     //New Utilities
     plugin(function({ addUtilities }) {
       addUtilities({
-        '.text-musora': {
-          background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
-          '-webkit-background-clip': 'text',
-          '-webkit-text-fill-color': 'transparent',
-        },
         '.bg-musora': {
           background: 'linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30)',
         },
@@ -87,9 +82,9 @@ module.exports = {
           display: 'none'
         },
         '.no-scrollbar': {
-          '-ms-overflow-style': 'none',  
+          '-ms-overflow-style': 'none',
           'scrollbar-width': 'none'
-        }, 
+        },
         '.container': {
           '@media (min-width: 1815px)': {
             maxWidth: '1815px',

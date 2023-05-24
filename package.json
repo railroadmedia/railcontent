@@ -14,10 +14,11 @@
         "pw": "yarn platform-watch",
         "marketing-production": "yarn mrkd && yarn mrkp && yarn mrkg && yarn mrks",
         "mp": "yarn marketing-production",
-        "mrkd": "parcel build resources/marketing/assets/parcel/drumeo/* --dist-dir public/marketing/parcel/drumeo --no-cache --log-level verbose",
-        "mrkp": "parcel build resources/marketing/assets/parcel/pianote/* --dist-dir public/marketing/parcel/pianote --no-cache --log-level verbose",
-        "mrkg": "parcel build resources/marketing/assets/parcel/guitareo/* --dist-dir public/marketing/parcel/guitareo --no-cache --log-level verbose",
-        "mrks": "parcel build resources/marketing/assets/parcel/singeo/* --dist-dir public/marketing/parcel/singeo --no-cache --log-level verbose"
+        "mrkd": "parcel build resources/marketing/assets/parcel/drumeo/*.css --dist-dir public/marketing/parcel/drumeo --no-cache --log-level verbose",
+        "mrkp": "parcel build resources/marketing/assets/parcel/pianote/*.css --dist-dir public/marketing/parcel/pianote --no-cache --log-level verbose",
+        "mrkg": "parcel build resources/marketing/assets/parcel/guitareo/*.css --dist-dir public/marketing/parcel/guitareo --no-cache --log-level verbose",
+        "mrks": "parcel build resources/marketing/assets/parcel/singeo/*.css --dist-dir public/marketing/parcel/singeo --no-cache --log-level verbose",
+        "mjs": "parcel build resources/marketing/assets/parcel/drumeo/*.js --dist-dir public/marketing/parcel/drumeo --no-cache --log-level verbose"
     },
     "devDependencies": {
         "@heroicons/vue": "^1.0.5",
