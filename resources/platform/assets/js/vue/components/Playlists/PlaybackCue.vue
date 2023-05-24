@@ -190,7 +190,6 @@ onBeforeMount(() => {
         isPlaybackPlaylistRepeatOn.value = JSON.parse(localStorage.getItem("isPlaybackPlaylistRepeatOn"));
     }
     if (localStorage.getItem("playerExpanded")) {
-        console.log('playerExpanded', JSON.parse(localStorage.getItem("playerExpanded")) )
         playlistsStore.playerExpanded = JSON.parse(localStorage.getItem("playerExpanded"));
     }
 

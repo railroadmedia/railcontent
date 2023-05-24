@@ -105,7 +105,6 @@ const handleSoundsliceEvent = (event) => {
                 }
                 break;
             case 'ssAudioLoaded':
-                console.log('AUDIO LOADED')
                 if (false && props.autoplay) {
                     console.log('autoplay code')
                     setTimeout(() => {

@@ -180,8 +180,6 @@ const dropdownTriggerHandler = target => {
 //-----------Lifecycle Methods-----------//
 
 onBeforeMount(() => {
-    console.log('Needs access', props.lesson.need_access)
-
     state.isPinned = props.lesson.pinned;
     state.isPrivate = props.lesson.private;
     if (props.lesson.type !== 'assignment' && props.lesson.type !== 'song') {
