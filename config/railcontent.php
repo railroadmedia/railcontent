@@ -436,7 +436,7 @@ return [
                 'name' => 'Coaches',
                 'icon' => 'icon-coach',
                 'description' => "Your drumming journey is unique. You need personalized coaching that helps you reach your goals. Learn from some of the best drummers in the world!",
-                'allowableFilters' => ['progress'],
+                'allowableFilters' => ['progress','focus'],
                 'sortBy' => '-published_on',
             ],
             'courses' => [
@@ -450,7 +450,7 @@ return [
                 'name' => 'Songs',
                 'icon' => 'icon-songs',
                 'description' => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
-                'allowableFilters' => ['difficulty', 'style', 'artist', 'progress'],
+                'allowableFilters' => ['style', 'artist', 'progress'],
                 'sortBy' => 'slug',
             ],
             'student-focus' => [
@@ -633,7 +633,7 @@ return [
                 'shortname' => 'Lessons',
                 'icon' => 'icon-shows',
                 'description' => "Get any drum related question answered by a Drumeo instructor on our weekly Q&A episodes! You can submit as many questions as you like by clicking the button below, and either join us live for the next episode, or check for your answer in the archived videos below!",
-                'allowableFilters' => [],
+                'allowableFilters' => ['instructor'],
                 'sortBy' => '-published_on',
             ],
             'student-collaborations' => [
