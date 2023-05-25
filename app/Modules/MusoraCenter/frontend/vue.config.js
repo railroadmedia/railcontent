@@ -1,0 +1,18 @@
+module.exports = {
+    publicPath: '/dist/',
+    outputDir: process.env.NODE_ENV === 'production'
+        ? '../public/dist/'
+        : '../public/dist/js',
+    productionSourceMap: false,
+    filenameHashing: true,
+    css: {
+        extract: false,
+    },
+    chainWebpack: config => {
+        config.plugins.delete('html');
+        config.plugins.delete('preload');
+        config.plugins.delete('prefetch');
+        config.plugins.delete('hmr');
+        config.optimization.delete('splitChunks');
+    }
+};
