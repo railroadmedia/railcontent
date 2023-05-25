@@ -38,6 +38,7 @@
 
     //-----------Reactive Data-----------//
     const state = reactive({
+        completed: [],
         dropdownOpen: false,
         dropdownTop: false,
         isPrivate: 1,
@@ -196,10 +197,10 @@
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
                         <h1 class="tw-capitalize tw-leading-tight tw-font-bold tw-mb-2 lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2" v-html="playlistsStore.activePlaylist.description"></p>
-                        <p v-if="playlistsStore.lessons.length && hasAccess" 
-                          class="tw-font-bebas-neue tw-text-white tw-mt-1"
-                        >
-                          {{ 0 }}/{{ playlistsStore.lessons.length }} Items Complete
+                        <p  class="tw-font-bebas-neue tw-text-white tw-mt-1 tw-text-lg">
+                            <template v-if="playlistsStore.lessons.length && hasAccess">
+                                {{ state.completed.length }}/{{ playlistsStore.lessons.length }} Items Complete
+                            </template>
                         </p>
                     </div>
                     <!-- Go to Playback -->
