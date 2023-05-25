@@ -196,6 +196,11 @@
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
                         <h1 class="tw-capitalize tw-leading-tight tw-font-bold tw-mb-2 lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2" v-html="playlistsStore.activePlaylist.description"></p>
+                        <p v-if="playlistsStore.lessons.length && hasAccess" 
+                          class="tw-font-bebas-neue tw-text-white tw-mt-1"
+                        >
+                          {{ 0 }}/{{ playlistsStore.lessons.length }} Items Complete
+                        </p>
                     </div>
                     <!-- Go to Playback -->
                     <a v-if="lessons.data.length && hasAccess" :href="playlistsStore.activePlaylist.playback_url"
