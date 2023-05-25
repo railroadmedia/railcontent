@@ -101,10 +101,14 @@ export const usePlaylistsStore = defineStore({
       this.playlistsQuantity--;
     },
     deletePlaylistItem(item) {
+      //update duration from active playlist
+      this.activePlaylist.duration = this.activePlaylist.duration - item.duration;
+      //filter out item from lessons
       this.lessons = this.lessons.filter((l,i) => {
         return l.user_playlist_item_id !== item.user_playlist_item_id;
       })
     },
+
     //Set/Update Playlist Data for Playlist page
     setActivePlaylist(list) {
       this.activePlaylist = list;
