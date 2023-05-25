@@ -180,6 +180,7 @@ const dropdownTriggerHandler = target => {
 //-----------Lifecycle Methods-----------//
 
 onBeforeMount(() => {
+    console.log(props.lesson.user_progress)
     state.isPinned = props.lesson.pinned;
     state.isPrivate = props.lesson.private;
     if (props.lesson.type !== 'assignment' && props.lesson.type !== 'song') {
@@ -241,6 +242,11 @@ onBeforeMount(() => {
                             }}</span>
                         </p>
                         <p class="tw-text-xs text-white">{{ time }}</p>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="tw-z-10 tw-absolute tw-flex tw-bottom-0 tw-left-0 tw-h-1 tw-w-full">
+                        <span class="tw-h-full tw-absolute tw-left-0 tw-bottom-0" :class="[`tw-bg-${brand}`, `tw-w-[50%]`]"></span>
                     </div>
                 </div>
 
