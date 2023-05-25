@@ -494,23 +494,21 @@ a {
     }
 }
 
+
 .cookie-notice {
-    background: #00162a;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-    color: #fff;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    color: #000;
     z-index: 2147483002;
+    background: #fff;
+    padding: 10px 10px 10px 15px;
     transition: all .3s;
-    padding: 15px;
-    @include tablet {
-        padding: 20px;
-    }
-    @include desktopOld {
-        padding: 27px;
-    }
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    box-shadow: 0 0 10px #00000080;
+    transform: translate(-50%, 0);
+    border-radius: 12px;
+    width: 100%;
+    max-width:380px;
 
     &.hide {
         bottom: -275px;
@@ -519,40 +517,19 @@ a {
         }
     }
 
-    .close-cookie {
-        font-size: 20px;
-        opacity: 0.4;
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 7px 11px 0 0;
-        cursor: pointer;
-    }
-
     .text-wrap {
         display: flex;
         align-items: center;
-        max-width: 680px;
+        flex-direction: row;
         margin: 0 auto;
-        flex-direction: column;
-        @include tablet {
-            flex-direction: row;
-        }
-        @include desktopOld {
-            max-width: 860px;
-        }
     }
 
     p {
         line-height: 1.2em;
         font-size: 15px;
         margin: 0 auto;
-        @include tablet {
-            padding-right: 15px;
-        }
-        @include desktopOld {
+        @include desktop {
             line-height: 1.5em;
-            padding-right: 20px;
         }
     }
 
@@ -561,7 +538,6 @@ a {
     }
 
     a {
-        font-size: 15px;
         color: $pianoteRed;
         white-space: nowrap;
         cursor: pointer;
@@ -574,7 +550,8 @@ a {
     #accept-cookies {
         white-space: nowrap;
         cursor: pointer;
-        font: 700 16px/1em $robotocondensed;
+        font: 400 16px/1em $bebas;
+        letter-spacing: 0.1em;
         background: $pianoteRed;
         color: #fff;
         border-radius: 200px;
@@ -585,7 +562,7 @@ a {
             margin: 0 auto 2px;
             padding: 15px 20px;
         }
-        @include desktopOld {
+        @include desktop {
             margin: 0 auto;
             padding: 15px 25px;
         }

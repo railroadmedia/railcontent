@@ -440,106 +440,83 @@ body {
   }
 }
 
+
 .cookie-notice {
-  background: #00162a;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  color: #fff;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 2147483002;
-  transition: all .3s;
-  padding: 15px;
-  @include tablet {
-    padding: 20px;
-  }
-  @include desktop {
-    padding: 27px;
-  }
-
-  &.hide {
-    bottom: -275px;
-    @include tablet {
-      bottom: -175px;
-    }
-  }
-
-  .close-cookie {
-    font-size: 20px;
-    opacity: 0.4;
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 7px 11px 0 0;
-    cursor: pointer;
-  }
-
-  .text-wrap {
-    display: flex;
-    align-items: center;
-    max-width: 680px;
-    margin: 0 auto;
-    flex-direction: column;
-    @include tablet {
-      flex-direction: row;
-    }
-    @include desktop {
-      max-width: 860px;
-    }
-  }
-
-  p {
-    line-height: 1.2em;
-    font-size: 15px;
-    margin: 0 auto;
-    @include tablet {
-      padding-right: 15px;
-    }
-    @include desktop {
-      line-height: 1.5em;
-      padding-right: 20px;
-    }
-  }
-
-  .text-center {
-    text-align: center;
-  }
-
-  a {
-    font-size: 15px;
-    color: $guitareoGreen;
-    white-space: nowrap;
-    cursor: pointer;
-
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-
-  #accept-cookies {
-    white-space: nowrap;
-    cursor: pointer;
-    font: 700 16px/1em $robotocondensed;
-    background: $guitareoGreen;
     color: #000;
-    border-radius: 200px;
-    transition: background .3s;
-    padding: 10px 25px;
-    margin: 10px auto 4px;
-    @include tablet {
-      margin: 0 auto 2px;
-      padding: 15px 20px;
-    }
-    @include desktop {
-      margin: 0 auto;
-      padding: 15px 25px;
+    z-index: 2147483002;
+    background: #fff;
+    padding: 10px 10px 10px 15px;
+    transition: all .3s;
+    position: fixed;
+    bottom: 15px;
+    left: 50%;
+    box-shadow: 0 0 10px #00000080;
+    transform: translate(-50%, 0);
+    border-radius: 12px;
+    width: 100%;
+    max-width:380px;
+
+    &.hide {
+        bottom: -275px;
+        @include tablet {
+            bottom: -175px;
+        }
     }
 
-    &:hover {
-      background: lighten($guitareoGreen, 10%);
+    .text-wrap {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+        margin: 0 auto;
     }
-  }
+
+    p {
+        line-height: 1.2em;
+        font-size: 15px;
+        margin: 0 auto;
+        @include desktop {
+            line-height: 1.5em;
+        }
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    a {
+        color: $guitareoGreen;
+        white-space: nowrap;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    #accept-cookies {
+        white-space: nowrap;
+        cursor: pointer;
+        font: 400 16px/1em $bebas;
+        letter-spacing: 0.1em;
+        background: $guitareoGreen;
+        color: #fff;
+        border-radius: 200px;
+        transition: background .3s;
+        padding: 10px 25px;
+        margin: 10px auto 4px;
+        @include tablet {
+            margin: 0 auto 2px;
+            padding: 15px 20px;
+        }
+        @include desktop {
+            margin: 0 auto;
+            padding: 15px 25px;
+        }
+
+        &:hover {
+            background: lighten($guitareoGreen, 10%);
+        }
+    }
 }
 
 .bottom-footer {
