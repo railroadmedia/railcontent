@@ -2,7 +2,7 @@
   <div>
     <div class="flex flex-row flex-wrap align-v-center tw-mb-2">
       <div class="flex flex-column tw-text-[#00101D] dark:tw-text-white">
-        <h1 class="heading">
+        <h1 class="heading tw-py-2">
           {{ title }}
         </h1>
       </div>
@@ -105,6 +105,28 @@
               </span>
             </button>
           </div>
+          
+          <!-- Completed Button -->
+          <div
+            class="flex flex-column resource-button ph-1"
+            v-if="showCompleteButton"
+          >
+            <button class="btn stacked" @click="handleCompleteLesson">
+              <span
+                class="tw-shadow-none tw-text-lg"
+                style="padding: 0 8px"
+                :class="hasAdded ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white'"
+              >
+                <musora-icon v-if="completed" icon-name="circle-check-filled" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all"/>
+                <musora-icon v-else icon-name="circle-check" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all"/>
+
+                <span>
+                  {{ completed ? "Completed" : "Complete" }}
+                </span>
+              </span>
+            </button>
+          </div>
+          
         </div>
       </div>
 
@@ -232,6 +254,11 @@ export default {
       default: () => true,
     },
 
+    showCompleteButton: {
+      type: Boolean,
+      default: () => false, 
+    },
+
     likeCount: {
       type: [Number, String],
       default: () => 0,
@@ -251,7 +278,13 @@ export default {
       type: Array,
       default: () => [],
     },
+
     relatedLesson: {
+      type: Object,
+      default: {},
+    },
+
+    lesson: {
       type: Object,
       default: {},
     }
@@ -265,6 +298,7 @@ export default {
       hasAdded: this.isAdded,
       useTimecode: true,
       showModalContent: false,
+      completed: this.lesson.completed,
     };
   },
 
@@ -324,6 +358,43 @@ export default {
         type: this.lessonType
       }
       window.openplaylistmodal({ modalType: 'addItem', content: data });
+    },
+
+    handleCompleteLesson() {
+        //Send Request
+        if (this.completed) {
+            ContentService.resetContentProgress(this.contentId)
+                .then((resolved) => {
+                    if (resolved) {
+                        window.shownotification({
+                            icon: 'check',
+                            text: `Your progress has been reset.`
+                        })
+                    }
+                }).catch(() => {
+                window.shownotification({
+                    icon: 'error',
+                    text: 'Woops! Something wrong happened, please try again later.'
+                })
+            });
+        } else {
+            ContentService.markContentAsComplete(this.contentId).then(() => {
+                if(this.completed) {
+                    window.shownotification({
+                        icon: 'check',
+                        text: `You've completed this lesson!`
+                    })
+                }
+            }).catch(() => {
+                window.shownotification({
+                    icon: 'error',
+                    text: 'Woops! Something wrong happened, please try again later.'
+                })
+            })
+
+        }
+
+        this.completed = !this.completed;
     },
 
     getResourceIcon(resource) {

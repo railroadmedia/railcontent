@@ -193,6 +193,7 @@ class UserPlaylistsController extends BaseController
                     $item->fetch('data.thumbnail_url', $item['thumbnail_url'] ?? '')
                 );
                 $playlistItems[$index]['user_progress'] = $item['user_progress'] ?? '';
+                $playlistItems[$index]['progress_percent'] = $item['progress_percent']??0;
                 $playlistItems[$index]['parent_title'] = $item['parent_title'] ?? '';
                 $playlistItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
                 $playlistItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
@@ -265,12 +266,14 @@ class UserPlaylistsController extends BaseController
 
         ContentRepository::$bypassPermissions = true;
         $content = $this->contentService->getById($playlistItem['content_id']);
+        ModeDecoratorBase::$decorationMode =   DecoratorInterface::DECORATION_MODE_MAXIMUM;
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20, $page);
         ContentRepository::$bypassPermissions = false;
 
         $playlistItem =
             $playlistItems->where('user_playlist_item_id', '=', $playlistItemId)
                 ->first();
+       // dd($playlistItem);
         $nextPlaylistItem = $playlistItems->getMatchOffset($playlistItem, 1);
         $previousPlaylistItem = $playlistItems->getMatchOffset($playlistItem, -1);
         $content['user_playlist_item_position'] = $position;
@@ -300,6 +303,7 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['end_second'] = $item['end_second'] ?? null;
             $otherItems[$index]['started'] = $item['started'] ?? false;
             $otherItems[$index]['completed'] = $item['completed'] ?? false;
+            $otherItems[$index]['progress_percent'] = $item['progress_percent']??0;
             $otherItems[$index]['thumbnail_url'] = $item->fetch(
                 'thumbnail_url',
                 $item->fetch('data.original_thumbnail_url', $item->fetch('data.thumbnail_url', ''))
@@ -389,7 +393,7 @@ class UserPlaylistsController extends BaseController
             (new ContentFilterResultsEntity(['results' => $playlistItem['parent'] ?? []]))->toResponseRawJson();
 
         event(new PlaylistItemLoaded($playlistId, $playlistItemId, $position));
-
+//dd($playlistItem);
         return view('account.playlist-item', [
             "lessonContent" => $playlistItem,
             "playlist" => $playlist,

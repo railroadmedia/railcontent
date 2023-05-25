@@ -182,13 +182,14 @@ const dropdownTriggerHandler = target => {
 onBeforeMount(() => {
     state.isPinned = props.lesson.pinned;
     state.isPrivate = props.lesson.private;
+
     if (props.lesson.type !== 'assignment' && props.lesson.type !== 'song') {
         dropdownOptions.value = [...dropdownOptions.value, {
             name: "Start/End Time",
             action: "editLessonTime"
         }]
     }
-
+    
     //Check if it's a full track
     if(JSON.parse(props.lesson.user_playlist_item_extra_data)) {
         let instrumentData = JSON.parse(props.lesson.user_playlist_item_extra_data);
@@ -232,15 +233,28 @@ onBeforeMount(() => {
                         </div>
                     </div>
 
-                    <!-- Release Date -->
-                    <div v-if="!released"
-                        class="tw-z-10 tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/80 tw-flex tw-flex-col tw-items-center tw-justify-center">
-                        <p class="tw-text-xs text-white font-bold">
-                            {{ day }},
-                            <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber
-                            }}</span>
-                        </p>
-                        <p class="tw-text-xs text-white">{{ time }}</p>
+                    <!-- Overlay -->
+                    <div v-if="lesson.progress_percent === 100 || !released" class="tw-z-10 tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/80 tw-flex tw-flex-col tw-items-center tw-justify-center">
+                        <template v-if="!released">
+                            <p class="tw-text-xs text-white font-bold">
+                                {{ day }},
+                                <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber
+                                }}</span>
+                            </p>
+                            <p class="tw-text-xs text-white">{{ time }}</p>
+                        </template>
+                        <template v-if="lesson.progress_percent === 100">
+                            <musora-icon icon-name="circle-check-filled" class="tw-w-6 tw-h-6"/>
+                        </template>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="tw-z-[15] tw-absolute tw-flex tw-bottom-0 tw-left-0 tw-h-1 tw-w-full">
+                        <span class="tw-h-full tw-absolute tw-left-0 tw-bottom-0" 
+                              :class="[`tw-bg-${brand}`]"
+                              :style="`width: ${lesson.progress_percent}%;`"
+                        >
+                        </span>
                     </div>
                 </div>
 

@@ -39,6 +39,8 @@
     //-----------Reactive Data-----------//
     const state = reactive({
         dropdownOpen: false,
+        durationHours: '0',
+        durationMinutes: '0',
         dropdownTop: false,
         isPrivate: 1,
         isPinned: false,
@@ -124,6 +126,14 @@
         state.dropdownOpen = !state.dropdownOpen;
     }
 
+    const formatDuration = duration => {
+        let time = duration;
+        if (time) { //does it exist
+            state.durationHours = Math.floor(time / 3600);
+            state.durationMinutes = Math.floor(time % 60);
+        }
+    }
+
     //---------Lifecycle Methods---------//
 
     onBeforeMount(() => {
@@ -131,11 +141,15 @@
         state.isLiked = props.playlist.is_liked_by_current_user;
         state.isPinned = props.playlist.pinned ? true : false;
         state.isPrivate = props.playlist.private;
+        
+        //Get Duration Hours and Seconds
+        formatDuration(playlistsStore.activePlaylist.duration)
     })
 
     onUpdated(()=>{
-        // console.log(playlistsStore.pinnedPlaylists)
         state.isPinned = props.playlist.pinned ? true : false;
+        //Recalculate Duration
+        formatDuration(playlistsStore.activePlaylist.duration)
     })
 </script>
 <template>
@@ -196,6 +210,13 @@
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
                         <h1 class="tw-capitalize tw-leading-tight tw-font-bold tw-mb-2 lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2" v-html="playlistsStore.activePlaylist.description"></p>
+                        <p  v-if="playlistsStore.lessons.length" class="tw-font-bebas-neue tw-text-white tw-mt-1 tw-text-lg tw-leading-none tw-flex tw-items-center">
+                            <span>{{ state.durationHours }}H {{ state.durationMinutes }}M</span>
+                            <template v-if="playlist.is_my_playlist">
+                                <span class="tw-mx-1 tw-text-base">|</span>
+                                {{ playlistsStore.completedLessons.length }}/{{ playlistsStore.lessons.length }} Items Complete
+                            </template>
+                        </p>
                     </div>
                     <!-- Go to Playback -->
                     <a v-if="lessons.data.length && hasAccess" :href="playlistsStore.activePlaylist.playback_url"
@@ -245,7 +266,7 @@
                             :dropdownOptions="dropdownOptions"
                             :data="playlistsStore.activePlaylist"
                             :is-open="state.dropdownOpen"
-                            :is-my-playlist="props.playlist.is_my_playlist"
+                            :is-my-playlist="playlist.is_my_playlist"
                             :in-playlist-header="true"
                             type="playlist"
                             @closeDropdown="state.dropdownOpen = false"

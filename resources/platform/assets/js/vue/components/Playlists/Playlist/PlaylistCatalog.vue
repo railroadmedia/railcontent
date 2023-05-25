@@ -55,7 +55,7 @@
     //-----------Reactive Data-----------//
     const state = reactive({
         stopScroll: true,
-        lessonsContainerKey: Math.round(Math.random() * 100000)
+        lessonsContainerKey: Math.round(Math.random() * 100000),
     })
 
     //-----------Static Data-----------//
@@ -90,6 +90,7 @@
             text: `You have successfully re-ordered your playlist items.`
         })
     }
+
     //Cancel Sort
     const handleCancelSort = () => {
         console.log('handle cancel sort')
@@ -151,6 +152,7 @@
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
         lessonsCopy.value = [...props.lessons.data];
+        console.log(playlistsStore.lessons)
     });
 </script>
 <template>
