@@ -18,9 +18,6 @@
     </style>
 @endsection
 
-<!-- Main -->
-@section('body-class', 'dark')
-
 @section('layout-body')
     <section class="py-16 md:py-20 text-white text-center relative bg-[#030814]">
         <div class="container mx-auto relative z-0 max-w-xl md:max-w-none px-4 md:px-0">
@@ -79,7 +76,7 @@
         </div>
     </section>
 
-    <div class="pt-20 pb-10 text-white bg-musora-black">
+    <div class="pt-20 pb-10">
         <div class="container mx-auto text-center px-4 lg:px-8">
             <h2 class="font-bold text-xl md:text-3xl">Reach out directly</h2>
             <p class="mt-5 text-sm md:text-base text-[#a1afc9] max-w-3xl mx-auto">
@@ -88,7 +85,7 @@
         </div>
     </div>
 
-    <section class="bg-musora-black">
+    <section>
         <div class="max-w-3xl mx-auto px-4 lg:px-8" id="contactPageApp">
             <contact-email-form-marketing
                 brand="drumeo"
