@@ -210,7 +210,10 @@
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
                         <h1 class="tw-capitalize tw-leading-tight tw-font-bold tw-mb-2 lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2" v-html="playlistsStore.activePlaylist.description"></p>
-                        <p  v-if="playlistsStore.lessons.length" class="tw-font-bebas-neue tw-text-white tw-mt-1 tw-text-lg tw-leading-none tw-flex tw-items-center">
+                        
+                        <p  v-if="playlistsStore.lessons.length" 
+                            class="tw-justify-center lg:tw-justify-start tw-font-bebas-neue tw-text-white tw-mt-1 tw-text-lg tw-leading-none tw-flex tw-items-center"
+                        >
                             <span>{{ state.durationHours }}H {{ state.durationMinutes }}M</span>
                             <template v-if="playlist.is_my_playlist">
                                 <span class="tw-mx-1 tw-text-base">|</span>
