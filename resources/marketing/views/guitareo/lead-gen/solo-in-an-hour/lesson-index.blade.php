@@ -8,7 +8,7 @@
     <meta property="og:description" content="Play your first solo in less than 60 minutes">
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/solo-in-an-hour/">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-guitareo.css') }}">
     @parent
 @stop
 

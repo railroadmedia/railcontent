@@ -12,7 +12,7 @@
 
     @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-singeo.css') }}" rel="stylesheet">
 
     <style>
 

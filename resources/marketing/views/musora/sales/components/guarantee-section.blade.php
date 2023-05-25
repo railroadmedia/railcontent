@@ -7,18 +7,18 @@
             onload="this.classList.remove('opacity-0')"
             src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{!! $badge !!}" alt="guarantee-badge">
         <h3 class="leading-tight">{!! $header !!}</h3>
-        <p class="leading-normal md:leading-loose my-4 sm:my-7">{!! $desc !!}</p>
+        <p class="leading-normal md:leading-loose my-4 sm:my-7 max-w-4xl mx-auto">{!! $desc !!}</p>
         <div class="flex flex-wrap items-start justify-center">
             <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
-                <h5 class="text-{{ $theme }} border-{{ $theme }} border-2 rounded-full inline-block py-2 px-3 mb-1">1</h5>
+                <h5 class="@if($theme === 'musora') text-black border-black @else text-{{ $theme }} border-{{ $theme }} @endif border-2 rounded-full inline-block @if($theme === 'musora') py-1 @else py-2 @endif px-3 mb-1">1</h5>
                 <h6 class="leading-normal">Start your<br> lessons today.</h6>
             </div>
             <div class="w-full sm:w-1/3 px-2 mb-3 sm:mb-0">
-                <h5 class="text-{{ $theme }} border-{{ $theme }} border-2 rounded-full inline-block py-2 px-3 mb-1">2</h5>
+                <h5 class="@if($theme === 'musora') text-black border-black @else text-{{ $theme }} border-{{ $theme }} @endif border-2 rounded-full inline-block @if($theme === 'musora') py-1 @else py-2 @endif px-3 mb-1">2</h5>
                 <h6 class="leading-normal">Enjoy them for <br>90-days, risk-free.</h6>
             </div>
             <div class="w-full sm:w-1/3 px-2">
-                <h5 class="text-{{ $theme }} border-{{ $theme }} border-2 rounded-full inline-block py-2 px-3 mb-1">3</h5>
+                <h5 class="@if($theme === 'musora') text-black border-black @else text-{{ $theme }} border-{{ $theme }} @endif border-2 rounded-full inline-block @if($theme === 'musora') py-1 @else py-2 @endif px-3 mb-1">3</h5>
                 <h6 class="leading-normal">Change your mind?<br> Get a refund. <div class="ml-2 tool absolute inline-block cursor-pointer" tip="If it’s not for you, simply cancel your membership within 90 days and contact us for a full refund. (If your membership includes any bonuses, your refund will deduct the value of hard goods that were shipped to you.)"><i class="fas fa-info-circle"></i></div></h6>
             </div>
         </div>

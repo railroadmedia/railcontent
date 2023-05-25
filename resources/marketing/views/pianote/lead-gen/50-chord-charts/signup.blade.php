@@ -14,7 +14,7 @@
     <style>
         .lazyload {opacity: 0;}  .lazyloading {opacity: 1;transition: opacity 300ms;}
     </style>
-    <link href="{{ asset('/marketing/parcel/pianote/lead-gen-50-charts.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-50-charts.css') }}" rel="stylesheet">
 @endsection
 @section('scripts')
     @parent

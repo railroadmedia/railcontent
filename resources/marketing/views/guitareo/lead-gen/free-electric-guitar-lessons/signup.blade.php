@@ -12,8 +12,8 @@
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/free-electric-guitar-lessons/">
 
-    <link rel="preload" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}"></noscript>
+    <link rel="preload" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}"></noscript>
 
     <style>
         .hero-header img {

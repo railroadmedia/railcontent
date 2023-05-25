@@ -11,6 +11,10 @@ class HomePageController extends BaseController
     {
         return view('musora.home');
     }
+    public function homepage()
+    {
+        return view('musora.homepage', ['theme' => 'musora']);
+    }
 
     public function handbook()
     {

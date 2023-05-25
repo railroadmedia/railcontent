@@ -9,7 +9,7 @@
     <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/holiday-karaoke/">
 
-    <link href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-singeo.css') }}" rel="stylesheet">
     <style>
         .edge-pitch {top:40px;}
         @media (min-width: 768px) {  .edge-pitch {top:56px;}  }

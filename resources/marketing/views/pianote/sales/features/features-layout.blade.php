@@ -1,9 +1,9 @@
 @extends('_partials.layout.features-layout')
 
 @section('page-styles')
-    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/pianote/sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}" rel="stylesheet">
     <style>
         .splide__arrow svg {
             fill: #F61A30 !important;

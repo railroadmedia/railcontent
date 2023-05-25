@@ -42,8 +42,8 @@
     @parent
 
     @include('_partials.layout._tailwindcdn')
-    <link rel="preload" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}"></noscript>
+    <link rel="preload" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}"></noscript>
     <style>
         body {
             counter-reset: timeline;

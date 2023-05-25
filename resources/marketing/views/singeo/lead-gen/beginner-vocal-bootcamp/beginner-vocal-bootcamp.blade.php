@@ -44,7 +44,7 @@
     <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/lead-gen/beginner-vocal-bootcamp/og_image.jpg">
     <meta property="og:url" content="https://www.singeo.com/beginner-vocal-bootcamp/">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-singeo.css') }}">
 
     <style>
         body {
