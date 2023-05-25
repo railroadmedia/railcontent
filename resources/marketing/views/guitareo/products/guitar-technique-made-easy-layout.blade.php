@@ -25,8 +25,8 @@
             display:none;
         }
     </style>
-    <link href="{{ asset('/marketing/parcel/guitareo/gtme-sales.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
+    <link href="{{ asset('/marketing/parcel/drumeo/gtme-sales.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}">
 @stop()
 
 @section('scripts')
