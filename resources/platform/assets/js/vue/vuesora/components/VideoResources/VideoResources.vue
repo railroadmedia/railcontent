@@ -278,7 +278,13 @@ export default {
       type: Array,
       default: () => [],
     },
+
     relatedLesson: {
+      type: Object,
+      default: {},
+    },
+
+    lesson: {
       type: Object,
       default: {},
     }
@@ -292,7 +298,7 @@ export default {
       hasAdded: this.isAdded,
       useTimecode: true,
       showModalContent: false,
-      completed: false,
+      completed: this.lesson.completed,
     };
   },
 
@@ -358,10 +364,12 @@ export default {
       this.completed = !this.completed;
         //Send Request
         ContentService.markContentAsComplete(this.contentId).then(() => {
-            window.shownotification({
-                icon: 'check',
-                text: `You completed this lesson!`
-            })
+            if(this.completed) {
+              window.shownotification({
+                  icon: 'check',
+                  text: `You've completed this lesson!`
+              })
+            }
         }).catch(() => {
             window.shownotification({
                 icon: 'error',

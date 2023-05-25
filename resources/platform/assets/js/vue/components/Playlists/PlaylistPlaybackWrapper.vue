@@ -249,7 +249,7 @@ const needAccess = computed(() => {
 })
 
 onBeforeMount(() => {
-    //console.log(props.playlistItems)
+   console.log('lesson', props.playlistItems.data[props.playlistItemPosition-1]);
 });
 </script>
 
@@ -349,7 +349,7 @@ onBeforeMount(() => {
                             :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
                             :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                             :user-id="userId" :resources="videoResources" :show-add-to-list="true" :show-complete-button="true"
-                            :relatedLesson="relatedLesson" />
+                            :relatedLesson="relatedLesson" :lesson="playlistItems.data[props.playlistItemPosition-1]"/>
                         <RelatedLesson v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
                             :relatedLesson="relatedLesson.data[0]" />
                         <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
