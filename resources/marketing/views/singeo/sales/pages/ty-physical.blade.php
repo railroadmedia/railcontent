@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2022/og-image.jpg" style="display: none;">
 
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-singeo.css') }}" rel="stylesheet">
 
     <style>
         body {

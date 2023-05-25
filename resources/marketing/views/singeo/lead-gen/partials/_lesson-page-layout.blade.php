@@ -4,7 +4,7 @@
     <meta name="robots" content="noindex">
     <title>@yield('subtitle') | @yield('title')</title>
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-singeo.css') }}">
 @stop
 
 @section('scripts')

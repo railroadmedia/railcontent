@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/free-electric-guitar-lessons/">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-guitareo.css') }}">
     @parent
 @stop
 
