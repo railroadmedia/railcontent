@@ -412,6 +412,9 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
                 'sortBy' => '-published_on',
             ],
+            'in-progress' => [
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
+            ],
             'subscribed' => [
                 'name' => 'Subscribed',
                 'shortname' => 'Content',
