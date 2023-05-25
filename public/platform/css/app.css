@@ -22601,8 +22601,8 @@ a:visited{
 .tw-w-\[110px\]{
   width: 110px !important;
 }
-.tw-w-\[50\%\]{
-  width: 50% !important;
+.tw-w-\[\$\{Object\.values\(lesson\.user_progress\)\[0\]\.progress_percent\}\%\]{
+  width: ${Object.values(lesson.user progress)[0].progress percent}% !important;
 }
 .tw-w-\[35px\]{
   width: 35px !important;

@@ -246,7 +246,11 @@ onBeforeMount(() => {
 
                     <!-- Progress Bar -->
                     <div class="tw-z-10 tw-absolute tw-flex tw-bottom-0 tw-left-0 tw-h-1 tw-w-full">
-                        <span class="tw-h-full tw-absolute tw-left-0 tw-bottom-0" :class="[`tw-bg-${brand}`, `tw-w-[50%]`]"></span>
+                        <span class="tw-h-full tw-absolute tw-left-0 tw-bottom-0" 
+                              :class="[`tw-bg-${brand}`]"
+                              :style="`width: ${Object.values(lesson.user_progress)[0].progress_percent}%;`"
+                        >
+                        </span>
                     </div>
                 </div>
 
