@@ -9,12 +9,16 @@ class ContentTypes
      */
     public static function searchableContentTypes()
     {
-        return array_merge(
-            array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
-            config('railcontent.topLevelContentTypes'),
-            config('railcontent.searchable_content_types', []),
-            config('railcontent.liveContentTypes')
+        $types = array_unique(
+            array_merge(
+                array_values(config('railcontent.showTypes')[config('railcontent.brand')] ?? []),
+                config('railcontent.topLevelContentTypes'),
+                config('railcontent.searchable_content_types', []),
+                config('railcontent.liveContentTypes')
+            )
         );
+        sort($types);
+        return $types;
     }
 
     /**
