@@ -368,7 +368,7 @@ export default {
                     if (resolved) {
                         window.shownotification({
                             icon: 'check',
-                            text: `Removed! Your progress has been reset.`
+                            text: `Your progress has been reset.`
                         })
                     }
                 }).catch(() => {
