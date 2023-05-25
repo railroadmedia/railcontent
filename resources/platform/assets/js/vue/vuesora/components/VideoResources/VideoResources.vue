@@ -356,8 +356,20 @@ export default {
 
     handleCompleteLesson() {
       this.completed = !this.completed;
-      //Send Request
-    },  
+        //Send Request
+        ContentService.markContentAsComplete(this.contentId).then(() => {
+            window.shownotification({
+                icon: 'check',
+                text: `You completed this lesson!`
+            })
+        }).catch(() => {
+            window.shownotification({
+                icon: 'error',
+                text: 'Woops! Something wrong happened, please try again later.'
+            })
+        })
+
+    },
 
     getResourceIcon(resource) {
       const urlParts = resource.split(".");
