@@ -18,56 +18,59 @@
     </style>
 @endsection
 
+<!-- Main -->
+@section('body-class', 'light')
+
 @section('layout-body')
-    <section class="py-16 md:py-20 text-white text-center relative bg-[#030814]">
-        <div class="container mx-auto relative z-0 max-w-xl md:max-w-none px-4 md:px-0">
-            <h2><strong>Advice and answers from the Drumeo team</strong></h2>
+    <section class="py-16 md:py-20 text-white text-center relative bg-[#030814] px-4 md:px-0">
+        <div class="container mx-auto relative z-0 max-w-xl md:max-w-none">
+            <h3><strong>Advice and answers from the Drumeo team</strong></h3>
             <p class="my-4">Find an answer on your own or get in touch with your dedicated Musora Mentor.</p>
-            <div>
-                <input class="rounded-full py-3 pl-4 text-black md:max-w-lg w-full mr-2 md:mr-0 mb-2 md:mb-0" placeholder="Search the knowledgebase" /> <br class="md:hidden"><span class="rounded-full border-2 border-white uppercase font-bebas py-3 px-10 text-xl tracking-wide w-full md:w-auto inline-block">Search</span>
+            <div x-data="{ search: '' }">
+                <input class="rounded-full py-3 pl-4 text-black md:max-w-lg w-full mr-2 md:mr-0 mb-2 md:mb-0" placeholder="Search the knowledgebase" x-model="search" /> <br class="md:hidden"><a x-bind:href="`https://help.drumeo.com/search?query=` + search" class="rounded-full border-2 border-white uppercase font-bebas py-2.5 px-10 text-xl tracking-wide w-full md:w-auto inline-block">Search</a>
             </div>
         </div>
     </section>
-    <section class="py-10 md:py-12 bg-[#F2F3F5]">
-        <div class="max-w-5xl mx-auto px-4">
-            <h2 class="text-center mb-6"><strong>Frequently asked questions</strong></h2>
+    <section class="py-14 md:py-20 bg-[#F2F3F5]">
+        <div class="max-w-4xl mx-auto px-4">
+            <h2 class="text-center mb-10"><strong>Frequently Asked Questions</strong></h2>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-5">
-                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-regular fa-comments text-4xl md:text-5xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Instructor Support</p>
                     <p class="text-sm">How can I get personalized feedback from my instructor?</p>
                 </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-sharp fa-regular fa-download text-4xl md:text-5xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Downloading Lessons</p>
                     <p class="text-sm">Can I download lessons and replay them later without using data?</p>
                 </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-regular fa-file-music text-4xl md:text-5xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Downloading Sheet Music</p>
                     <p class="text-sm">How do I download or print sheet music and chord charts?</p>
                 </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-sharp fa-regular fa-truck-fast text-4xl md:text-5xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Shipment Tracking</p>
                     <p class="text-sm">I ordered a product from you, how can I track my shipment?</p>
                 </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-regular fa-file-invoice-dollar text-4xl md:text-5xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Billing Information</p>
                     <p class="text-sm">Where can I find my billing history and invoices?</p>
                 </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-sharp fa-regular fa-circle-pause text-4xl md:text-5xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Pause Subscription</p>
                     <p class="text-sm">I need a short break, can I pause my account?</p>
                 </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-light fa-circle-xmark text-4xl md:text-5xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Cancel Subscription</p>
                     <p class="text-sm">How can I make sure my subscription doesn't renew?</p>
                 </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10">
+                <div class="bg-[#030814] text-white text-center rounded-xl px-5 py-6 sm:py-10" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-regular fa-circle-dollar text-4xl md:text-5xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Request a Refund</p>
                     <p class="text-sm">I purchased less than 90 days ago and I would like a refund.</p>
@@ -78,8 +81,8 @@
 
     <div class="pt-20 pb-10">
         <div class="container mx-auto text-center px-4 lg:px-8">
-            <h2 class="font-bold text-xl md:text-3xl">Reach out directly</h2>
-            <p class="mt-5 text-sm md:text-base text-[#a1afc9] max-w-3xl mx-auto">
+            <h2 class="font-bold text-xl md:text-3xl">Reach Out Directly</h2>
+            <p class="mt-5 text-sm md:text-base max-w-3xl mx-auto">
                 Get in touch with your dedicated Musora Mentor, [dynamic]!
             </p>
         </div>
@@ -101,9 +104,9 @@
         </div>
     </section>
 
-    <section class="bg-[#F6F8FC] py-10 md:py-12">
-        <div class="max-w-5xl mx-auto px-4">
-            <h2 class="text-center mb-10"><strong>Have a more urgent request? Give us a shout.</strong></h2>
+    <section class="bg-[#F6F8FC] py-12 md:py-16">
+        <div class="max-w-4xl mx-auto px-4">
+            <h3 class="text-center mb-10"><strong>Have a more urgent request? Give us a shout.</strong></h3>
             <div class="md:grid md:grid-cols-3 md:gap-6 max-w-sm mx-auto md:max-w-none">
                 <div class="md:border md:border-[#AAACAA] md:rounded-xl flex items-center md:justify-center py-4 md:py-6 px-2">
                     <i class="fa-regular fa-phone-volume text-3xl mr-6"></i>
