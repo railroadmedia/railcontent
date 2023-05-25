@@ -361,22 +361,40 @@ export default {
     },
 
     handleCompleteLesson() {
-      this.completed = !this.completed;
         //Send Request
-        ContentService.markContentAsComplete(this.contentId).then(() => {
-            if(this.completed) {
-              window.shownotification({
-                  icon: 'check',
-                  text: `You've completed this lesson!`
-              })
-            }
-        }).catch(() => {
-            window.shownotification({
-                icon: 'error',
-                text: 'Woops! Something wrong happened, please try again later.'
+        if (this.completed) {
+            ContentService.resetContentProgress(this.contentId)
+                .then((resolved) => {
+                    if (resolved) {
+                        window.shownotification({
+                            icon: 'check',
+                            text: `Removed! Your progress has been reset.`
+                        })
+                    }
+                }).catch(() => {
+                window.shownotification({
+                    icon: 'error',
+                    text: 'Woops! Something wrong happened, please try again later.'
+                })
+            });
+        } else {
+            ContentService.markContentAsComplete(this.contentId).then(() => {
+                if(this.completed) {
+                    window.shownotification({
+                        icon: 'check',
+                        text: `You've completed this lesson!`
+                    })
+                }
+            }).catch(() => {
+                window.shownotification({
+                    icon: 'error',
+                    text: 'Woops! Something wrong happened, please try again later.'
+                })
             })
-        })
 
+        }
+
+        this.completed = !this.completed;
     },
 
     getResourceIcon(resource) {
