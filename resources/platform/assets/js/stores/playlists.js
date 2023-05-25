@@ -25,6 +25,10 @@ export const usePlaylistsStore = defineStore({
   },
   getters: {
     pinnedQuantity: (state) => state.pinnedPlaylists.length,
+
+    //Get Completed Lessons
+    completedLessons: (state) => state.lessons.filter(l => l.progress_percent === 100),
+
   },
   actions: {
     update({ pinnedPlaylists }) {
