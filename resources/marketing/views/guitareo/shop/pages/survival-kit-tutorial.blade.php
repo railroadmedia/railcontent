@@ -8,7 +8,7 @@
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/shop/survival-kit/survival-kit-fb-share.jpg" style="display: none;">
     <meta property="og:url" content="https://www.guitareo.com/{{ Request::path() }}">
 
-    <link href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-page-guitareo.css.css') }}" rel="stylesheet">
 @stop()
 @section('scripts')
     @parent

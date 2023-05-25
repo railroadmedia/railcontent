@@ -12,7 +12,7 @@
     <meta property="og:url" content="https://www.singeo.com/improve-any-voice/">
 
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-singeo.css') }}">
 
     <style>
         .hero-header {

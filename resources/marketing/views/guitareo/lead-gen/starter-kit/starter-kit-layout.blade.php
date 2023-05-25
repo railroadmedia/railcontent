@@ -12,8 +12,8 @@
 @section('styles')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css">
     @include('_partials.layout._tailwindcdn')
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/lead-gen-lessons.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-lessons.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}">
 @endsection
 
 @section('content')
