@@ -5,7 +5,6 @@
 */
 import { onBeforeMount, computed } from 'vue';
 import { usePlaylistsStore } from '../../../stores/playlists';
-import { DateTime } from 'luxon';
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
 import SoundSlice from '../SoundSlice/SoundSlice.vue';
 import PlaybackCue from './PlaybackCue.vue';
@@ -234,11 +233,6 @@ const dateNow = Date.now();
 const lessonDateParsed = activeItem.published_on_in_timezone ? Date.parse(activeItem.published_on_in_timezone) : Date.parse(activeItem.published_on);
 const lessonDate = activeItem.published_on_in_timezone ? activeItem.published_on_in_timezone : activeItem.published_on;
 
-//Parse Release Date
-const month = DateTime.fromSQL(lessonDate).toFormat('LLL');
-const dayNumber = DateTime.fromSQL(lessonDate).toFormat('d');
-const yearNumber = DateTime.fromSQL(lessonDate).toFormat('yy');
-
 //computed
 const homeUrl = computed(() => `/${props.brand}/playlists`);
 const secondLevelUrl = computed(() => `/${props.brand}/playlist/${props.playlistId}`);
@@ -248,9 +242,26 @@ const released = computed(() => {
 const needAccess = computed(() => {
     return activeItem.need_access;
 })
+const unavailableType = computed(() => {
+    if (!released) {
+        return 'unreleased';
+    }
+    if (needAccess) {
+        if (props.lessonType === 'song') {
+            return 'song';
+        }
+        if (props.lessonType === 'pack') {
+            return 'pack';
+        }
+        return 'unreleased';
+    }
+    return null;
+});
 
 onBeforeMount(() => {
     console.log('released', props.released, 'need access', props.needAccess)
+    console.log(activeItem.published_on_in_timezone ? activeItem.published_on_in_timezone : activeItem.published_on)
+    console.log(activeItem)
 });
 </script>
 
@@ -271,12 +282,11 @@ onBeforeMount(() => {
             class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-3 tw-mb-4 tw-flex-col "
             :class="playlistsStore.playerExpanded ? 'lg:tw-flex-col-reverse' : '2xl:tw-flex-row' "
         >
-            
             <div class="tw-flex tw-flex-col tw-w-full">
                 <!--Player Wrapper -->
                 <div class="fluid tw-pb-3">
                     <!-- Content Unavailable -->
-                    <ContentUnavailable />                  
+                    <ContentUnavailable v-if="false" :bgImgUrl="thumbnailUrl" :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle" :needAccessMessage="activeItem.need_access_message" />                  
                     <!-- Soundslice Player -->
                     <div v-if="false && lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
                         class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
@@ -325,22 +335,6 @@ onBeforeMount(() => {
                                     <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                                 </VideoPlayer>
                             </transition>
-                        </div>
-                        
-                        <!-- Unreleased/No Access Content -->
-                        <div v-if="!released || needAccess" class="tw-w-full tw-top-0 tw-left-0 tw-aspect-video tw-absolute tw-z-30">
-                            <img :src="`https://musora.com/cdn-cgi/image/width=1000/${thumbnailUrl}`"  
-                                    class="tw-transition-opacity tw-opacity-0 tw-duration-300 tw-grayscale tw-w-full tw-object-cover" title="Image Photo"
-                                    loading="lazy" 
-                                    onload="this.classList.remove('tw-opacity-0')"
-                            />
-                            <div v-if="!needAccess" class="tw-absolute tw-bg-black/60 tw-top-0 tw-left-0 tw-w-full tw-h-full tw-text-white tw-font-bold tw-text-lg tw-flex tw-flex-col tw-items-center tw-justify-center">
-                                <i class="fas fa-clock tw-text-3xl tw-mb-1"></i>
-                                <p class="tw-text-2xl">
-                                    Available on 
-                                    <span class="tw-capitalize">{{ month }}</span> <span class="">{{ dayNumber }}/{{ yearNumber}}</span>
-                                </p>
-                            </div>
                         </div>
                     </div>
                     
