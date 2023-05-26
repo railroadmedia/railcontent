@@ -22,7 +22,7 @@
 
     //-----------Computed Props-----------//
     const duration_formated = computed(()=> {
-        return props.list.duration_formated.replace(/^0(?:0:0?)?/, '');;
+        return props.list.duration_formated === '00:00' ? '0:00' : props.list.duration_formated.replace(/^0(?:0:0?)?/, '');
     })
 
     //-------------Refs-------------//

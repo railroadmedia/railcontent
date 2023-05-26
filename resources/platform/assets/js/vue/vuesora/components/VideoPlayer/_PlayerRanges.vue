@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row nmh-1 mt-3" style="justify-content: space-between;">
+    <div v-if="ranges.length" class="flex flex-row nmh-1 mt-3" style="justify-content: space-between;">
         <template v-for="range in ['lower', 'low', 'original', 'high', 'higher']">
             <div
                 class="flex flex-column ph-1"
