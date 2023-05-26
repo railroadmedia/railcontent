@@ -258,10 +258,13 @@ const unavailableType = computed(() => {
         if (props.lessonType === 'song') {
             return 'song';
         }
-        if (props.lessonType === 'pack') {
+        if (needAccessMessage && needAccessMessage.toLowerCase().includes('pack')) {
             return 'pack';
         }
-        return 'unreleased';
+        if (needAccessMessage && needAccessMessage.toLowerCase().includes('lifetime')) {
+            return 'lifetime';
+        }
+        return 'expired';
     }
     return null;
 });
@@ -295,7 +298,7 @@ onBeforeMount(() => {
                     <!-- Content Unavailable -->
                     <ContentUnavailable v-if="!released || needAccess" :bgImgUrl="thumbnailUrl" :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle" :message="needAccessMessage" />                  
                     <!-- Soundslice Player -->
-                    <div v-if="lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
+                    <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && released && !needAccess"
                         class="tw-w-full tw-aspect-video"
                         :class="{ 'tw-max-w-[1280px]' : !playlistsStore.playerExpanded }"
                     >
@@ -304,7 +307,7 @@ onBeforeMount(() => {
                         </SoundSlice>
                     </div>
                     <!-- Video Players -->
-                    <div class="p-lg-only lean tw-relative">
+                    <div v-if="released && !needAccess" class="p-lg-only lean tw-relative">
                         <div v-if="youtubeVideoId && String(youtubeVideoId).length"
                              class="widescreen mb-2 bg-black"
                         >
