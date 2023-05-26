@@ -2,16 +2,6 @@
 
 namespace App\Services;
 
-use App\Collections\PackCollection;
-use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
-use App\Decorators\Content\ContentExperienceDecorator;
-use App\Decorators\Content\ContentLikesDecorator;
-use App\Decorators\Content\LessonAssignmentDecorator;
-use App\Decorators\Content\PackDecorator;
-use Carbon\Carbon;
-use Modules\UserManagementSystem\Models\User;
-use Railroad\Ecommerce\Services\UserProductService;
-use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Repositories\ContentRepository;
@@ -21,9 +11,9 @@ use Railroad\Railtracker\Services\ContentLastEngagedService;
 
 class PlaylistService
 {
-private ContentLastEngagedService $contentLastEngagedService;
-private UserPlaylistsService $userPlaylistsService;
-private ContentService $contentService;
+    private ContentLastEngagedService $contentLastEngagedService;
+    private UserPlaylistsService $userPlaylistsService;
+    private ContentService $contentService;
 
     /**
      * @param ContentLastEngagedService $contentLastEngagedService
@@ -44,24 +34,44 @@ private ContentService $contentService;
      * @param $playlistId
      * @return mixed|null
      */
-    public function getPlaylistNextItem($playlistId){
+    public function getPlaylistNextItem($playlistId)
+    {
         $userPlaylist = $this->userPlaylistsService->getPlaylist($playlistId);
         $lastEngagedContent =
             $this->contentLastEngagedService->getLastEngagedContentForPlaylistId(user()->id, $playlistId);
 
         $nextItem = null;
-        if($lastEngagedContent){
+        if ($lastEngagedContent) {
             $nextItem = $lastEngagedContent->content_id;
             $playlistItem = $this->userPlaylistsService->getPlaylistItemById($nextItem);
-            $content = $this->contentService->getById($playlistItem['content_id']);
-            if ($content['completed'] == true) {
+            if ($playlistItem) {
+                $page = ($playlistItem['position'] <= 20) ? 1 : (ceil(($playlistItem['position']) / 20));
+
+                ContentRepository::$bypassPermissions = true;
+                ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+                $playlistItems =
+                    $this->userPlaylistsService->getUserPlaylistContents(
+                        $playlistItem['user_playlist_id'],
+                        [],
+                        20,
+                        $page
+                    );
+                ContentRepository::$bypassPermissions = false;
+                $playlistItem =
+                    $playlistItems->where('user_playlist_item_id', '=', $nextItem)
+                        ->first();
+            }
+            if (!$playlistItem || ($playlistItem['completed'] == true)) {
                 $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId);
-                $nextIncompleteItem = $items->where('completed', false)->first() ?? $items->first() ;
+                $nextIncompleteItem =
+                    $items->where('completed', false)
+                        ->first() ?? $items->first();
                 $nextItem = $nextIncompleteItem['user_playlist_item_id'] ?? null;
             }
-        }elseif(isset($userPlaylist['user_playlist_item_id'])){
+        } elseif (isset($userPlaylist['user_playlist_item_id'])) {
             $nextItem = $userPlaylist['user_playlist_item_id'];
         }
+
         return $nextItem;
     }
 }

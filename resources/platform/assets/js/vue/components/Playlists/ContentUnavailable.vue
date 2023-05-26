@@ -12,6 +12,15 @@ const props = defineProps({
         type: String,
         default: 'unavailable'
     },
+    message: String,
+    brand: {
+        type: String,
+        default: 'drumeo'
+    },
+    isSong: {
+        type: Boolean,
+        default: false
+    },
 });
 
 const cta = computed(() => {
@@ -63,10 +72,23 @@ const handleClick = () => {
                 <LockClosedIcon v-if="icon !== 'unreleased'" />
             </div>
             <h2>Content Unavailable</h2>
-            <p>{{ subtitle }}</p>
-            <button type="button" class="tw-mb-[20px] tw-mx-4 tw-btn-secondary tw-bg-[#00101D] tw-text-white"
-                dusk="cta-button" @click="handleClick">
-            </button>
+            <p>{{ props.message }}</p>
+            <div class="tw-flex tw-flex-col tw-items-center tw-justify-center tw-w-full">
+                <!-- Go To Shop -->
+                <a v-if="!isSong"
+                   :href="`https://${brand}.com/shop`"
+                   target="_blank"
+                   class="tw-btn-secondary tw-text-[#0D0D0D] dark:tw-text-white">
+                    Click Here To Learn More
+                </a>
+                <!-- Go To Songs -->
+                <a v-else :href="`/${brand}/songs`" class="tw-btn-secondary tw-text-[#0D0D0D] dark:tw-text-white">
+                    Click Here To Learn More and Upgrade
+                </a>
+            </div>
+<!--            <button type="button" class="tw-mb-[20px] tw-mx-4 tw-btn-secondary tw-bg-[#00101D] tw-text-white"-->
+<!--                dusk="cta-button" @click="handleClick">-->
+<!--            </button>-->
         </div>
     </div>
 </template>
