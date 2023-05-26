@@ -234,7 +234,9 @@ onBeforeMount(() => {
                     </div>
 
                     <!-- Overlay -->
-                    <div v-if="lesson.progress_percent === 100 || !released" class="tw-z-10 tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/80 tw-flex tw-flex-col tw-items-center tw-justify-center">
+                    <div v-if="lesson.progress_percent === 100 || !released" 
+                         class="tw-z-10 tw-absolute tw-top-0 tw-w-full tw-h-full tw-left-0 tw-bg-black/70 tw-flex tw-flex-col tw-items-center tw-justify-center"
+                    >
                         <template v-if="!released">
                             <p class="tw-text-xs text-white font-bold">
                                 {{ day }},
