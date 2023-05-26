@@ -140,8 +140,8 @@ const duration_formatted = (seconds) => {
     let time = seconds;
     if (time) { //does it exist
         const hrs = Math.floor(time / 3600);
-        const min = Math.floor(time / 60);
-        const sec = time - min * 60;
+        const min = Math.floor( (time % 3600) / 60);
+        const sec = time % 60;
         const hrsFormatted = hrs < 10 ? `${hrs}` : hrs;
         const minFormatted = min < 10 ? `0${min}` : min;
         const secFormatted = sec < 10 ? `0${sec}` : sec;

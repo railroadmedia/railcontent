@@ -130,7 +130,7 @@
         let time = duration;
         if (time) { //does it exist
             state.durationHours = Math.floor(time / 3600);
-            state.durationMinutes = Math.floor(time % 60);
+            state.durationMinutes = Math.floor( (time % 3600) / 60);
         }
     }
 
@@ -265,7 +265,7 @@
                             :brand="brand"
                             :dropdownTop="state.dropdownTop"
                             :is-private="state.isPrivate"
-                            :is-pinned="state.isPinned"
+                            :is-pinned="state.isPinned ? true : false"
                             :dropdownOptions="dropdownOptions"
                             :data="playlistsStore.activePlaylist"
                             :is-open="state.dropdownOpen"

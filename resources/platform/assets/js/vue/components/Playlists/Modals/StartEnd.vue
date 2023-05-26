@@ -47,8 +47,8 @@
     const splitSeconds = (seconds) => {
         let time = seconds || 0;
         const hrs = Math.floor(time / 3600);
-        const min = Math.floor(time / 60);
-        const sec = time - min * 60;
+        const min = Math.floor( (time % 3600) / 60);
+        const sec = time % 60;
         //Formatted
         const hrsFormatted = hrs < 10 ? `0${hrs}` : hrs;
         const minFormatted = min < 10 ? `0${min}` : min;
