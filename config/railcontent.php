@@ -873,7 +873,11 @@ return [
                 'description' => "Here's a list of all lessons recently added to Guitareo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
                 'sortBy' => '-published_on',
+            ],
+            'in-progress' => [
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
             ],
             'courses' => [
                 "name" => "Courses",
