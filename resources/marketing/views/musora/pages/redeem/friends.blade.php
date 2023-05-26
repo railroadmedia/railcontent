@@ -171,28 +171,32 @@
 @section('layout-body')
 
     @php
-        $features = [
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/music-lessons-icon.svg',
-                'title' => 'Music Lessons',
-                'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
-            ],
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/artist-courses-icon.svg',
-                'title' => 'Artist Courses',
-                'desc' => 'Courses and live events<br class="hidden sm:inline"> with inspiring musicians ',
-            ],
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/songs-icon.svg',
-                'title' => '1000+ Songs',
-                'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
-            ],
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/24-7-support-icon.svg',
-                'title' => '24/7 Support',
-                'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
-            ],
-        ];
+        if (empty($accessCodeArray)) {
+           $accessCodeArray = null;
+       }
+
+       $features = [
+           [
+               'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/music-lessons-icon.svg',
+               'title' => 'Music Lessons',
+               'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
+           ],
+           [
+               'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/artist-courses-icon.svg',
+               'title' => 'Artist Courses',
+               'desc' => 'Courses and live events<br class="hidden sm:inline"> with inspiring musicians ',
+           ],
+           [
+               'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/songs-icon.svg',
+               'title' => '1000+ Songs',
+               'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
+           ],
+           [
+               'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/24-7-support-icon.svg',
+               'title' => '24/7 Support',
+               'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
+           ],
+       ];
     @endphp
 
     <header class="sm:px-6 pb-10 sm:py-14 lg:py-20 bg-[#f6f8fc]">
@@ -445,22 +449,22 @@
                         <div class="flex flex-wrap">
                             <p class="w-full input-describer">Code</p>
                             <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code1') --}}">
+                                <input class="code-input w-full" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[0]}}" @else value="{{-- Input::old('code1') --}}" @endif>
                             </div>
                             <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code2') --}}">
+                                <input class="code-input w-full" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[1]}}" @else value="{{-- Input::old('code2') --}}" @endif>
                             </div>
                             <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code3') --}}">
+                                <input class="code-input w-full" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[2]}}" @else value="{{-- Input::old('code3') --}}" @endif>
                             </div>
                             <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code4') --}}">
+                                <input class="code-input w-full" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[3]}}" @else value="{{-- Input::old('code4') --}}" @endif>
                             </div>
                             <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code5') --}}">
+                                <input class="code-input w-full" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[4]}}" @else value="{{-- Input::old('code5') --}}" @endif>
                             </div>
                             <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code6') --}}">
+                                <input class="code-input w-full" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[5]}}" @else value="{{-- Input::old('code6') --}}" @endif>
                             </div>
                         </div>
                         <p class="input-describer">Email Address</p>
