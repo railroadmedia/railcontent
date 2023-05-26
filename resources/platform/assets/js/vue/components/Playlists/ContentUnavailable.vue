@@ -34,6 +34,15 @@ const props = defineProps({
         type: String,
         default: 'unreleased'
     },
+    message: String,
+    brand: {
+        type: String,
+        default: 'drumeo'
+    },
+    isSong: {
+        type: Boolean,
+        default: false
+    },
 });
 
 const cta = computed(() => {

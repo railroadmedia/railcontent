@@ -242,6 +242,14 @@ const released = computed(() => {
 const needAccess = computed(() => {
     return activeItem.need_access;
 })
+
+const needAccessMessage = computed(() => {
+    return activeItem.need_access_message;
+})
+const isSong = computed( ()=> {
+    return activeItem.type === 'song';
+})
+
 const unavailableType = computed(() => {
     if (!released) {
         return 'unreleased';
@@ -259,23 +267,22 @@ const unavailableType = computed(() => {
 });
 
 onBeforeMount(() => {
-    console.log('released', props.released, 'need access', props.needAccess)
-    console.log(activeItem.published_on_in_timezone ? activeItem.published_on_in_timezone : activeItem.published_on)
     console.log(activeItem)
+    console.log('released', props.released, 'need access', activeItem.need_access, 'no access message', activeItem.need_access_message)
 });
 </script>
 
 <template>
     <div class="tw-w-full tw-h-full">
         <!-- Breadcrumbs -->
-        <Breadcrumb 
+        <Breadcrumb
             :class="{'lg:tw-hidden': playlistsStore.playerExpanded }"
-            :brand="brand" 
-            :first-level-url="`/${brand}/playlists`" 
+            :brand="brand"
+            :first-level-url="`/${brand}/playlists`"
             first-level-title="Playlists"
-            :secondLevelUrl="secondLevelUrl" 
-            :secondLevelTitle="playlistName" 
-            :lastLevelTitle="playlistItemTitle" 
+            :secondLevelUrl="secondLevelUrl"
+            :secondLevelTitle="playlistName"
+            :lastLevelTitle="playlistItemTitle"
         />
 
         <div
@@ -286,7 +293,7 @@ onBeforeMount(() => {
                 <!--Player Wrapper -->
                 <div class="fluid tw-pb-3">
                     <!-- Content Unavailable -->
-                    <ContentUnavailable v-if="false" :bgImgUrl="thumbnailUrl" :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle" :needAccessMessage="activeItem.need_access_message" />                  
+                    <ContentUnavailable v-if="false" :bgImgUrl="thumbnailUrl" :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle" :message="needAccessMessage" />                  
                     <!-- Soundslice Player -->
                     <div v-if="false && lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
                         class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
@@ -296,7 +303,7 @@ onBeforeMount(() => {
                     </div>
                     <!-- Video Players -->
                     <div v-if="false" class="p-lg-only lean tw-relative">
-                        <div v-if="youtubeVideoId && String(youtubeVideoId).length" 
+                        <div v-if="youtubeVideoId && String(youtubeVideoId).length"
                              class="widescreen mb-2 bg-black"
                         >
                             <YoutubePlayer ref="mediaElementVueInstance" :brand="brand" :video-id="youtubeVideoId"
@@ -337,7 +344,6 @@ onBeforeMount(() => {
                             </transition>
                         </div>
                     </div>
-                    
                     <!-- Video Resources -->
                     <div class="tw-container tw-mx-auto lean">
                         <VideoResources :theme-color="brand" :brand="brand" :title="castTitle" :lesson-type="lessonType"
