@@ -886,31 +886,39 @@ return [
                 'description' => "Here's a list of all lessons recently added to Guitareo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
                 'sortBy' => '-published_on',
+            ],
+            'in-progress' => [
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
             ],
             'courses' => [
                 "name" => "Courses",
                 "icon" => "icon-courses",
                 "description" => "These jam-packed training courses cover various lesson topics in detail. Find one that suits your guitar goals, and get started!",
                 "allowableFilters" => ['difficulty', 'topic', 'instructor', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'songs' => [
                 "name" => "Songs",
                 "icon" => "icon-songs",
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
+                'allowableFiltersMobile' => ['difficulty',  'style', 'artist', 'progress'],
             ],
             'play-alongs' => [
                 "name" => "Play Alongs",
                 "icon" => "icon-play-alongs",
                 "description" => "Our play-along feature teaches you chords, strumming patterns, riffs, and song layouts -- with handy playback tools to help you create the perfect performance.",
                 "allowableFilters" => ['difficulty', 'style', 'topic', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'topic','style'],
             ],
             'chords-scales' => [
                 "name" => "Chords",
                 "icon" => "icon-chords-scales-guitareo",
                 "description" => "Chords are one of the building blocks of playing the guitar. This is an excellent reference for expanding your chords vocabulary!",
                 "allowableFilters" => [],
+                'allowableFiltersMobile' => [],
             ],
             'archives' => [
                 "name" => "Archives",
@@ -918,6 +926,7 @@ return [
                 "icon" => "icon-library",
                 "description" => "Miss a live event or just want to watch a particular episode again? This is the place to do it. All of the Guitareo live broadcasts are archived here for you to watch at your leisure. If you have any questions or want to discuss the topics mentioned in the videos you can always post in the forum.",
                 "allowableFilters" => ['difficulty', 'topic', 'progress', 'instructor'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'quick-tips' => [
                 'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/297dc5b4-e878-4238-d5b5-ed0588ee0b00/public',
@@ -926,6 +935,7 @@ return [
                 "icon" => "icon-shows",
                 "description" => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice.",
                 "allowableFilters" => ['difficulty', 'topic', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'question-and-answer' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/question-answer-singeo.png',
@@ -933,6 +943,7 @@ return [
                 "icon" => "fas fa-question-circle",
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
+                'allowableFiltersMobile' => ['instructor', 'progress'],
             ],
             'student-reviews' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews-singeo.png',
@@ -940,6 +951,7 @@ return [
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your playing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic'],
+                'allowableFiltersMobile' => [],
             ],
             'subscribed' => [
                 'name' => 'Subscribed',
@@ -958,7 +970,11 @@ return [
                 'description' => "Here's a list of all lessons recently added to Singeo. Browse on your
                 own or use search to find whatever it is you'd like to learn!",
                 'allowableFilters' => [],
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
                 'sortBy' => '-published_on',
+            ],
+            'in-progress' => [
+                'allowableFiltersMobile' => ['difficulty', 'type', 'instructor'],
             ],
             'subscribed' => [
                 'name' => 'Subscribed',
@@ -973,12 +989,14 @@ return [
                 "icon" => "icon-courses",
                 "description" => "Tackle your next singing goal with bite-sized courses from many of the world's best vocalists.",
                 "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'songs' => [
                 "name" => "Songs",
                 "icon" => "icon-songs",
                 "description" => "Play the songs you love with note-for-note transcriptions and handy practice tools.",
                 "allowableFilters" => ['difficulty', 'style', 'artist', 'progress'],
+                'allowableFiltersMobile' => ['difficulty',  'style', 'artist', 'progress'],
             ],
             'quick-tips' => [
                 'thumbnailUrl' => 'https://imagedelivery.net/0Hon__GSkIjm-B_W77SWCA/8464033e-9b4e-458e-d613-e89fb47e2a00/public',
@@ -986,6 +1004,7 @@ return [
                 "icon" => "icon-shows",
                 "description" => "Only have 10 minutes? These short lessons are designed to inspire you with quick tips and exercises, even if you don’t have lots of time to practice.",
                 "allowableFilters" => ['difficulty', 'instructor', 'topic', 'progress'],
+                'allowableFiltersMobile' => ['difficulty', 'instructor', 'topic', 'progress'],
             ],
             'question-and-answer' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/question-answer.png',
@@ -993,6 +1012,7 @@ return [
                 "icon" => "fas fa-question-circle",
                 "description" => "Each week we go live to answer your questions. Submit your questions in advance using the button below, in the Q&A thread in the forums, or live in the community chat.",
                 "allowableFilters" => [],
+                'allowableFiltersMobile' => ['instructor'],
             ],
             'student-reviews' => [
                 'thumbnailUrl' => 'https://d1923uyy6spedc.cloudfront.net/student-reviews.png',
@@ -1000,12 +1020,14 @@ return [
                 "icon" => "icon-student-focus",
                 "description" => "Want feedback on your singing? Submit a video for student review. We will watch your submission and then provide helpful encouragement and feedback. This is a great way to build accountability and benefit from the expertise of our teachers.",
                 'allowableFilters' => ['difficulty', 'instructor', 'topic'],
+                'allowableFiltersMobile' => [],
             ],
             'routines' => [
                 "name" => "Routines",
                 "icon" => "icon-shows",
                 "description" => "Warm up your voice for any occasion with our bite-sized routines - ranging from 5 to 20 minutes - perfect for busy days or when you need motivation.",
                 "allowableFilters" => [],
+                'allowableFiltersMobile' => [],
             ],
         ],
     ],
