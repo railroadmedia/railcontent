@@ -17,7 +17,7 @@
                         x-on:click="plusMembershipSelected = true"
                     >
                         <div class="text-left">
-                            <img class="h-5 sm:h-6" src="{{ $plusLogo }}">
+                            <img class="h-5 sm:h-6" src="{{ $plusLogo }}" alt="{{$theme}} plus logo">
                             <p class="opacity-60 text-xs no-select mt-0.5"><em>Lessons + Songs</em></p>
                         </div>
                         <div class="radio-check ml-3 sm:ml-10 w-7 h-7 flex content-center justify-center border-2 rounded-full border-gray-500 text-gray-500">
@@ -31,7 +31,7 @@
                         x-on:click="plusMembershipSelected = false"
                     >
                         <div class="text-left">
-                            <img class="h-5 sm:h-6" src="{{ $logo }}">
+                            <img class="h-5 sm:h-6" src="{{ $logo }}" alt="{{$theme}} logo">
                             <p class="opacity-60 text-xs no-select mt-0.5"><em>Lessons only.</em></p>
                         </div>
                         <div class="radio-check ml-3 sm:ml-14 w-7 h-7 flex content-center justify-center border-2 rounded-full border-gray-500 text-gray-500">
