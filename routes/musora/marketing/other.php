@@ -22,6 +22,7 @@ Route::domain('{musoraDomain}')
         Route::get('gift-card', [MarketingController::class, 'giftcard']);
         Route::get('method', [MarketingController::class, 'method']);
         Route::get('songs', [MarketingController::class, 'songs']);
+        Route::get('community', [MarketingController::class, 'community']);
 
         Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
         Route::get('friends', [CodeRedemptionController::class, 'friends']);
