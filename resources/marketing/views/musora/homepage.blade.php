@@ -287,8 +287,12 @@
 
 @section('body-data')
     x-data ='{
-    soundslice : false,
-    trailer : false,
+        brand: "drumeo",
+        drumeoSoundslice: false,
+        pianoteSoundslice: false,
+        guitareoSoundslice: false,
+        singeoSoundslice: false,
+        trailer: false,
     }'
 @endsection
 
@@ -744,24 +748,56 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
             <h2><strong>Play <u>1000+</u> popular songs.</strong></h2>
-            <p class="leading-tight mt-2 sm:mt-3">You’ll have <strong>all the tools you need</strong> to play the songs you love. <strong class="cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo &raquo;</u></strong></p>
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto">
-                <div style="padding-bottom:62.4%;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png)" class="mt-4 sm:mt-6 lg:my-6 bg-cover bg-center" x-on:click="soundslice = true;" ></div>
+            <p class="leading-tight mt-2 sm:mt-3">You’ll have <strong>all the tools you need</strong> to play the songs you love. <strong><u>Try the demo</u></strong></p>
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'drumeo'">
+                <div style="padding-bottom:62.4%;" class="mt-4 sm:mt-6 lg:my-6 relative" x-on:click="drumeoSoundslice = true;" >
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png" alt="drumeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                </div>
             </div>
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto  hidden">
-                <div style="padding-bottom:62.4%;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png)" class="mt-4 sm:mt-6 lg:my-6 bg-cover bg-center" x-on:click="soundslice = true;" ></div>
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'pianote'">
+                <div style="padding-bottom:62.4%;" class="mt-4 sm:mt-6 lg:my-6 relative" x-on:click="pianoteSoundslice = true;" >
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/pianote-player.png" alt="pianote player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                </div>
             </div>
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto hidden">
-                <div style="padding-bottom:62.4%;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png)" class="mt-4 sm:mt-6 lg:my-6 bg-cover bg-center" x-on:click="soundslice = true;" ></div>
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'guitareo'">
+                <div style="padding-bottom:62.4%" class="mt-4 sm:mt-6 lg:my-6 relative" x-on:click="guitareoSoundslice = true;" >
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guitareo-player.png" alt="guitareo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                </div>
             </div>
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto  hidden">
-                <div style="padding-bottom:62.4%;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png)" class="mt-4 sm:mt-6 lg:my-6 bg-cover bg-center" x-on:click="soundslice = true;" ></div>
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'singeo'">
+                <div style="padding-bottom:62.4%" class="mt-4 sm:mt-6 lg:my-6 relative" x-on:click="singeoSoundslice = true;" >
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/singeo-player.png" alt="singeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                </div>
             </div>
             <div class="">
-                <div class="inline-block border-2 rounded-full border-drumeo py-1 px-10 mx-2"><img class="h-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/drum-button-icon-color.svg" alt="instrument icon"></div>
-                <div class="inline-block border-2 rounded-full border-pianote py-1 px-10 mx-2"><img class="h-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/piano-button-icon-color.svg" alt="instrument icon"></div>
-                <div class="inline-block border-2 rounded-full border-guitareo py-1 px-10 mx-2"><img class="h-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/guitar-button-icon-color.svg" alt="instrument icon"></div>
-                <div class="inline-block border-2 rounded-full border-singeo py-1 px-10 mx-2"><img class="h-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/mic-button-icon-color.svg" alt="instrument icon"></div>
+                <div
+                    class="inline-block border-2 rounded-full py-1 px-10 mx-2 cursor-pointer border-drumeo border text-xl"
+                    :class="brand === 'drumeo' ? 'text-white bg-drumeo' : 'text-drumeo'"
+                    @click="brand = 'drumeo'"
+                >
+                    <i class="fa-regular fa-drum"></i>
+                </div>
+                <div
+                    class="inline-block border-2 rounded-full py-1 px-10 mx-2 cursor-pointer border-pianote border text-xl"
+                    :class="brand === 'pianote' ? 'text-white bg-pianote' : 'text-pianote'"
+                    @click="brand = 'pianote'"
+                >
+                    <i class="fa-regular fa-piano-keyboard"></i>
+                </div>
+                <div
+                    class="inline-block border-2 rounded-full py-1 px-10 mx-2 cursor-pointer border-guitareo border text-xl"
+                    :class="brand === 'guitareo' ? 'text-white bg-guitareo' : 'text-guitareo'"
+                    @click="brand = 'guitareo'"
+                >
+                    <i class="fa-light fa-guitar"></i>
+                </div>
+                <div
+                    class="inline-block border-2 rounded-full py-1 px-10 mx-2 cursor-pointer border-singeo border text-xl"
+                    :class="brand === 'singeo' ? 'text-white bg-singeo' : 'text-singeo'"
+                    @click="brand = 'singeo'"
+                >
+                    <i class="fa-light fa-microphone-stand"></i>
+                </div>
             </div>
             <div class="text-center w-full sm:w-auto mt-6 lg:mt-10 mx-auto">
                 <div class="flex flex-wrap">
@@ -919,10 +955,29 @@
     @include('musora._partials._faq')
 
     @include('_partials.components.video-modal',[
-        'name' => 'soundslice',
+        'name' => 'drumeoSoundslice',
         'video' => '1D6Vc',
         'soundslice' => true,
     ])
+
+    @include('_partials.components.video-modal',[
+        'name' => 'pianoteSoundslice',
+        'video' => '77f4c',
+        'soundslice' => true,
+    ])
+
+    @include('_partials.components.video-modal',[
+        'name' => 'guitareoSoundslice',
+        'video' => 'Mnmkc',
+        'soundslice' => true,
+    ])
+
+    @include('_partials.components.video-modal',[
+        'name' => 'singeoSoundslice',
+        'video' => 'ZsC4c',
+        'soundslice' => true,
+    ])
+
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '785314424',
