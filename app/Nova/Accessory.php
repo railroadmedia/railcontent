@@ -113,7 +113,6 @@ class Accessory extends Resource
                 }),
             Text::make('Shop Card Thumbnail', 'thumbnail')->hideFromIndex()->hideFromDetail(),
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
-
             Number::make('Display order', 'display_order')->sortable()
                 ->help('Display order should be 0 if set to invisible on shop page.')
                 ->required()
@@ -133,6 +132,7 @@ class Accessory extends Resource
             Boolean::make('Visible On Shop Page','shop_card_visible')->default(true)->hideFromIndex(),
             DateTime::make('Shop Card Start Time', 'shop_card_start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             DateTime::make('Shop Card End Time', 'shop_card_end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
+
             Heading::make('Product page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),
