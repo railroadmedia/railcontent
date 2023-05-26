@@ -26,15 +26,14 @@ const props = defineProps({
         type: String,
         default: ''
     },
-    needAccessMessage: {
-        type: String,
-        default: ''
-    },
     unavailableType: {
         type: String,
         default: 'unreleased'
     },
-    message: String,
+    message: {
+        type: String,
+        default: ''
+    },
     brand: {
         type: String,
         default: 'drumeo'
@@ -107,7 +106,7 @@ onMounted(() => {
                 <br />
                 Please check back after the content is released.
             </p>
-            <p v-if="unavailableType !== 'unreleased'" class="lg:tw-line-clamp-2" v-html="state.message"></p>
+            <p v-if="unavailableType !== 'unreleased' && message" class="lg:tw-line-clamp-2" v-html="message"></p>
             <button v-if="unavailableType === 'unreleased'" data-open-modal="addToCalendarModal" @click="addEvent" type="button" class="tw-mt-[20px] tw-mx-4 tw-btn-secondary tw-bg-[#00101D] tw-text-white" dusk="cta-button">
                 {{ cta.text }}
             </button>
