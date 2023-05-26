@@ -130,7 +130,8 @@
         let time = duration;
         if (time) { //does it exist
             state.durationHours = Math.floor(time / 3600);
-            state.durationMinutes = Math.floor(time % 60);
+            state.durationMinutes = Math.floor( (time % 3600) / 60);
+            
         }
     }
 
