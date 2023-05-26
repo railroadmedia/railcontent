@@ -15,7 +15,7 @@
     @parent
     @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
     <style>
         .expired {
             padding:30px 0 70px;

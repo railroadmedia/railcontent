@@ -19,15 +19,40 @@
             background-color:#FFB500!important;
         }
     </style>
-    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/fonts.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/guitar-quest.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/fonts.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/guitar-quest.css') }}" rel="stylesheet">
 
 @stop()
 
 @section('scripts')
     @parent
-    <script src="{{ asset('/marketing/parcel/guitareo/svg-polyfil.js') }}"></script>
+    <script src="{{ asset('/marketing/parcel/drumeo/svg-polyfil.js') }}"></script>
+    <script>
+        // Polyfill that alows template elements in svgs for alpine js
+        // https://github.com/alpinejs/alpine/issues/637
+        (function(){
+            var templates = document.querySelectorAll('svg template');
+            var el, template, attribs, attrib, count, child, content;
+            for (var i=0; i<templates.length; i++) {
+                el = templates[i];
+                template = el.ownerDocument.createElement('template');
+                el.parentNode.insertBefore(template, el);
+                attribs = el.attributes;
+                count = attribs.length;
+                while (count-- > 0) {
+                    attrib = attribs[count];
+                    template.setAttribute(attrib.name, attrib.value);
+                    el.removeAttribute(attrib.name);
+                }
+                el.parentNode.removeChild(el);
+                content = template.content;
+                while ((child = el.firstChild)) {
+                    content.appendChild(child);
+                }
+            }
+        })();
+    </script>
     <script src="{{ asset('/marketing/js/app.js') }}"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script>

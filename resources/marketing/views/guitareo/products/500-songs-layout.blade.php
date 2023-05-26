@@ -12,10 +12,10 @@
 
 @section('styles')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}">
     @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/500-songs.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/500-songs.css') }}">
     <style>
 
         .join.smaller {

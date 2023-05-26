@@ -13,7 +13,7 @@
     <meta name="google-site-verification" content="jBgu6Dd2U4OfaZ_90eIjxuPWIJ1qIVBuO5nEp2xvhbE"/>
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
 
     <style>
         body {

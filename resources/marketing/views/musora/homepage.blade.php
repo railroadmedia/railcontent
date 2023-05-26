@@ -10,11 +10,165 @@
     <meta property="og:url" content="https://www.musora.com">
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
 
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+<style>
+    .join {
+        display: inline-block;
+        font: 500 22px/1em 'Bebas Neue', sans-serif;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        background: #0c1524;
+        border-radius: 50px;
+        color: #fff;
+        padding: 17px 7%;
+        outline: none;
+        cursor: pointer;
+        text-align: center;
+        user-select: none;
+        text-decoration: none;
+        transition: background-color 0.3s, color 0.3s, opacity 0.3s;
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0.35);
+    }
+    @media (min-width: 768px) {
+        .join {
+            font-size: 30px;
+        }
+    }
+    .join:hover, .join:focus {
+        color: #fff;
+        background:#14233d;
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.35);
+    }
+    .join.green {
+        background: #10d05f;
+    }
+    .join.green:hover, .join.green:focus {
+        background: #25ee78;
+    }
+    .join.white {
+        background: #fff;
+        color: #000;
+    }
+    .join.white:hover, .join.white:focus {
+        background: #eee;
+    }
+    .join.sold-out {
+        background: #777;
+    }
+    .join.sold-out:hover, .join.sold-out:focus {
+        background: #919191;
+    }
+    .join.smaller {
+        padding: 10px 30px 6px;
+        font-size: 16px;
+    }
+    @media (min-width: 768px) {
+        .join.smaller {
+            font-size: 18px;
+            padding: 12px 30px 10px;
+        }
+    }
+    .join.smaller.outline {
+        padding: 8px 28px 6px;
+        font-size: 16px;
+    }
+    @media (min-width: 768px) {
+        .join.smaller.outline {
+            font-size: 18px;
+            padding: 10px 28px 8px;
+        }
+    }
+    .join.coaches {
+        background-color: #fe9f13;
+        color: #000;
+    }
+    .join.coaches:hover, .join.coaches:focus {
+        background: #feb446;
+        color: #000;
+    }
+    .join.promo {
+        background: #ffac00;
+        color: #000;
+    }
+    .join.promo:hover, .join.promo:focus {
+        background: #ffbd33;
+        color: #000;
+    }
+    .join.outline {
+        background: transparent;
+        outline-style: none !important;
+        border: 1px solid #fff;
+        color: #fff;
+        padding: 6px 12px;
+    }
+    @media (min-width: 768px) {
+        .join.outline {
+            border-width: 2px;
+            padding: 11px 30px;
+        }
+    }
+    .join.outline:hover, .join.outline:focus {
+        background: #fff;
+        color: #000;
+    }
+    .join.outline.light-navy {
+        border-color: #a1afc9;
+        color: #a1afc9;
+    }
+    .join.outline.light-navy:hover, .join.outline.light-navy:focus {
+        background: #a1afc9;
+        color: #000;
+    }
+    .join.outline.method, .join.outline.pianote {
+        border-color: #f61a30;
+        color: #f61a30;
+    }
+    .join.outline.method:hover, .join.outline.pianote:hover, .join.outline.method:focus, .join.outline.pianote:focus {
+        background: #f61a30;
+        color: #fff;
+    }
+    .join.outline.songs {
+        border-color: #17d1fa;
+        color: #17d1fa;
+    }
+    .join.outline.songs:hover, .join.outline.songs:focus {
+        background: #17d1fa;
+        color: #fff;
+    }
+    .join.outline.coaches {
+        border-color: #fe9f13;
+        color: #fe9f13;
+    }
+    .join.outline.coaches:hover, .join.outline.coaches:focus {
+        background: #fe9f13;
+        color: #fff;
+    }
+    .join.outline.promo {
+        border-color: #ffac00;
+        color: #ffac00;
+    }
+    .join.outline.promo:hover, .join.outline.promo:focus {
+        background: #ffac00;
+        color: #fff;
+    }
 
+    .text-musora {
+        color: #0c1524;
+        -webkit-text-fill-color: #0c1524 !important;
+    }
+
+    .bg-musora {
+        background:#0c1524 !important;
+    }
+    .border-musora {
+        border-color:#0c1524!important;
+    }
+    .border-musora::before {
+        content:none!important;
+    }
+</style>
     <style>
         .tool:after, .tool:before {
             position: absolute;
@@ -112,22 +266,23 @@
         }
         .full-line {
             left:0;
-            bottom: 29.5%;
+            bottom:0;
+            /*bottom: 29.5%;*/
         }
         @media (min-width:640px) {
             .dot,
             .full-line {
                 left:50%;
             }
-            .full-line {
-                bottom: 21.5%;
-            }
+            /*.full-line {*/
+            /*    bottom: 21.5%;*/
+            /*}*/
         }
-        @media (min-width:1024px) {
-            .full-line {
-                bottom: 23%;
-            }
-        }
+        /*@media (min-width:1024px) {*/
+        /*    .full-line {*/
+        /*        bottom: 23%;*/
+        /*    }*/
+        /*}*/
     </style>
 @stop
 
@@ -139,43 +294,36 @@
 @endsection
 
 @section('layout-body')
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-56 relative overflow-hidden">
+    <section class="text-center px-5 sm:px-6 py-32 sm:py-56 relative overflow-hidden">
         <div class="container max-w-6xl mx-auto relative z-20">
-            <img class="h-24" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-title.png" alt="Your New Community musicians start here.">
-            <h6 class="leading-relaxed mt-4 mb-7">Learn your favorite instruments with step-by-step lessons, thousands<br>
+            <h1 class="relative w-auto inline-block text-4xl sm:text-5xl lg:text-6xl">
+                <strong>Musicians<br class="inline sm:hidden"> start here.</strong>
+                <img class="w-72 lg:w-96 absolute -bottom-1 -right-6 px-7" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png">
+            </h1>
+            <h6 class="leading-relaxed mt-6 mb-7">Learn your favorite instruments with step-by-step lessons, thousands<br>
                 of songs, and unlimited personal support.</h6>
-            <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller anchor-slide" href="#customize-anchor">START FOR FREE</a>
-        </div>
-        <img class="absolute z-10 h-20" style="top:43%;left: 2%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-04.png">
-        <img class="absolute z-10 h-36" style="top:8%;left: 6%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-05.png">
-        <img class="absolute z-10 h-52" style="top:62%;left: 7%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-07.png">
-        <img class="absolute z-10 h-16" style="top:9%;left: 29%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-01.png">
-        <img class="absolute z-10 h-16" style="top:4%;left: 56%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-03.png">
-        <img class="absolute z-10 h-40" style="top:65%;left: 74%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-08.png">
-        <img class="absolute z-10 h-48" style="top:9%;left: 78%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-06.png">
-        <img class="absolute z-10 h-20" style="top:66%;left: 97%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-02.png">
-    </section>
-    <section class="text-center px-5 sm:px-6 py-5 sm:py-6 lg:py-8" style="    background: linear-gradient(45deg, #e6fffb, #e6f2ff, #f6e6ff, #ffe6e8);">
-        <div class="container max-w-6xl mx-auto">
-            <div class="inline-block px-5">
-                <img class="h-32 mb-2" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/piano.png">
-                <p>PIANO</p>
-            </div>
-            <div class="inline-block px-5">
-                <img class="h-32 mb-2" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/guitar.png">
-                <p>GUITAR</p>
-            </div>
-            <div class="inline-block px-5">
-                <img class="h-32 mb-2" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/drums.png">
-                <p>DRUMS</p>
-            </div>
-            <div class="inline-block px-5">
-                <img class="h-32 mb-2" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/mic.png">
-                <p>SINGING</p>
+            <a class="sm:mx-1 w-full sm:w-56 join {{ $theme }} smaller anchor-slide" href="#customize-anchor">START FOR FREE</a>
+            <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
+                <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738', 'newwindow', 'width=750, height=550'); return false;">
+                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                </a>
+                <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by 70,145 active students.</em></p>
             </div>
         </div>
+        <img class="absolute z-10 h-12 sm:h-14 lg:h-20" style="top:43%;left: 2%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-04.png">
+        <img class="absolute z-10 h-24 sm:h-28 lg:h-36" style="top:8%;left: 6%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-05.png">
+        <img class="absolute z-10 h-40 sm:h-44 lg:h-52" style="top:62%;left: 7%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-07.png">
+        <img class="absolute z-10 h-10 sm:h-12 lg:h-16" style="top:9%;left: 29%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-01.png">
+        <img class="absolute z-10 h-10 sm:h-12 lg:h-16" style="top:4%;left: 56%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-03.png">
+        <img class="absolute z-10 h-28 sm:h-32 lg:h-40" style="top:65%;left: 74%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-08.png">
+        <img class="absolute z-10 h-36 sm:h-40 lg:h-48" style="top:9%;left: 78%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-06.png">
+        <img class="absolute z-10 h-12 sm:h-14 lg:h-20" style="top:66%;left: 97%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-02.png">
     </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
             <h2 class="text-center sm:mb-10"><strong>The easier way to<br class="inline sm:hidden"> learn <u>any instrument</u>.</strong></h2>
             <img class="my-5 h-64 inline sm:hidden transition-opacity opacity-0"
@@ -195,6 +343,7 @@
             </div>
         </div>
     </section>
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10 relative z-20" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
 
 
     @php
@@ -232,11 +381,54 @@
         ];
     @endphp
 
-    @include('musora.sales.components.trailer-grid-section', [
-        'bg' => true,
-        'header' => 'Where musical dreams <br class="inline sm:hidden"> <u>come true.</u> ',
-        'desc' => 'Always know <em>exactly</em> what to practice with a step-by-step curriculum for each  <br class="hidden sm:inline">instrument plus exclusive courses on any topic you’d ever want to learn!',
-    ])
+
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
+    <div id="method" class="anchor"></div>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container max-w-5xl mx-auto">
+            <h2><strong>Where musical dreams <br class="inline sm:hidden"> <u>come true.</u> </strong></h2>
+            <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">Always know <em>exactly</em> what to practice with a step-by-step curriculum for each  <br class="hidden sm:inline">instrument plus exclusive courses on any topic you’d ever want to learn!</p>
+            <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6">
+                @foreach ($gridItems as $key => $gridItem)
+                    <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                        <picture class="w-1/3 sm:w-full">
+                            <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/{{ $gridItem['image'] }}">
+                            <img
+                                class=" rounded-xl mb-3 transition-opacity opacity-0"
+                                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/{{ $gridItem['image'] }}"
+                                alt="grid{{$key+1}}"
+                                loading="lazy"
+                                onload="this.classList.remove('opacity-0')"
+                            >
+                        </picture>
+                        <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">
+                            <strong class="font-black inline-block mb-0.5">{{ $gridItem['title'] }}</strong><br> {{ $gridItem['desc'] }}
+                        </p>
+                    </div>
+                @endforeach
+            </div>
+            @if(empty($promoVersion))
+                <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">EXPLORE THE METHOD <i class="fas fa-info-circle"></i> </a>
+            @endif
+            <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+                @if(!empty($promoVersion))
+                    href="#customize-anchor"
+                @elseif(!empty($month))
+                    href="/choose-your-trial-month"
+                @else
+                    href="/choose-plan"
+                @endif
+            >
+                @if(!empty($promoVersion) && empty($trialVersion))
+                    SEE YOUR DEAL &raquo;
+                @else
+                    START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                @endif
+            </a>
+        </div>
+    </section>
+
+
 
     @php
         $buttons = [
@@ -248,42 +440,42 @@
                 'title' => 'Piano',
                 'images' => [
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/classical-piano.jpg',
                     'title' => 'Classical Piano',
                     'instructor' => 'Victoria Theodore',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/improvisational-jazz.jpg',
                     'title' => 'Improvisational Jazz',
                     'instructor' => 'Jesús Molina',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/beautifully-simple-piano-arpeggios.jpg',
                     'title' => 'Simple Piano Arpeggios',
                     'instructor' => 'Sangah Noona',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/the-perfect-arrangement.jpg',
                     'title' => 'The Perfect Arrangement',
                     'instructor' => 'Summer Swee-Singh',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/creative-song-writing.jpg',
                     'title' => 'Creative Songwriting',
                     'instructor' => 'Josh Dion',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/rhythmic-playing.jpg',
                     'title' => 'Rhythmic Playing',
                     'instructor' => 'Jay Oliver',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/gospel-piano.jpg',
                     'title' => 'Gospel Piano',
                     'instructor' => 'Erskine Hawkins',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/latin-essentials.jpg',
                     'title' => 'Latin Essentials',
                     'instructor' => 'Kevin Castro',
                     ],
@@ -293,42 +485,42 @@
                 'title' => 'Guitar',
                 'images' => [
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/solo-in-an-hour.jpg',
                     'title' => 'Solo In An Hour',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/songwriting-cheat-codes.jpg',
                     'title' => 'Songwriting Cheat Codes',
                     'instructor' => 'Rob Scallon',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/rhythm-groove.jpg',
                     'title' => 'Rhythm & Groove',
                     'instructor' => 'Sami Ghawi',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/shred-guitar.jpg',
                     'title' => 'Shred Guitar',
                     'instructor' => 'Dean Lamb',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/unlock-your-creativity.jpg',
                     'title' => 'Unlock Your Creativity',
                     'instructor' => 'Yvette Young',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/musical-lanes.jpg',
                     'title' => 'Musical Lanes',
                     'instructor' => 'Mark Lettieri',
                     ],
                     [
-                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Dennis-Chambers.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/add-power-to-your-playing.jpg',
                     'title' => 'Add Power To Your Playing',
                     'instructor' => 'Dave Weiner',
                     ],
                     [
-                    'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drummers/Dennis-Chambers.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/the-anatomy-of-a-song.jpg',
                     'title' => 'The Anatomy of a Song',
                     'instructor' => 'Pete Thorn',
                     ],
@@ -343,37 +535,37 @@
                     'instructor' => 'Aaron Spears',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Hannah-Welton.jpg',
                     'title' => 'Writing Drum Parts',
                     'instructor' => 'Hannah Welton',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Todd-Sucherman.jpg',
                     'title' => 'Rock Drumming',
                     'instructor' => 'Todd Sucherman',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Matt-McGuire.jpg',
                     'title' => 'Song Breakdowns',
                     'instructor' => 'Matt McGuire',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Dorothe-Taylor-01.jpg',
                     'title' => 'Rudiments & Patterns',
                     'instructor' => 'Dorothea Taylor',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aric-Improta.jpg',
                     'title' => 'The Creative Mindset',
                     'instructor' => 'Aric Improta',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Kaz-Rodgriguez.jpg',
                     'title' => 'Musical Exercises',
                     'instructor' => 'Kaz Rodriguez',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Sarah-Thawer.jpg',
                     'title' => '4-Way Coordination',
                     'instructor' => 'Sarah Thawer',
                     ]
@@ -383,42 +575,42 @@
                 'title' => 'Singing',
                 'images' => [
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/find-your-true-voice.jpg',
                     'title' => 'Find Your True Voice',
                     'instructor' => 'Sheléa',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/The-power-of-movement.jpg',
                     'title' => 'The Power of Movement',
                     'instructor' => 'Chris Johnson',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/singing-with-soul.jpg',
                     'title' => 'Singing With Soul',
                     'instructor' => 'Tony Lindsay',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/define-your-singing.jpg',
                     'title' => 'Define Your Singing',
                     'instructor' => 'Cate Canning',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/the-science-of-singing-better.jpg',
                     'title' => 'The Science of Singing Better',
                     'instructor' => 'Darcy D',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/songwriting-for-singers.jpg',
                     'title' => 'Songwriting For Singers',
                     'instructor' => 'Hailey Benedict',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/hit-the-high-notes.jpg',
                     'title' => 'Hit The High Notes',
                     'instructor' => 'Lisa Witt',
                     ],
                     [
-                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
+                    'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/beautiful-harmonies.jpg',
                     'title' => 'Beautiful Harmonies',
                     'instructor' => 'Julia Ziegler',
                     ],
@@ -427,9 +619,11 @@
         ];
     @endphp
 
+    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
     @include('musora.sales.components.coaches-section', [
         'header' => 'Study with the world’s <br class="md:hidden"><u>best musicians.</u>',
-        'desc' => 'Amplify your skills with artist courses and live events.'
+        'desc' => 'Amplify your skills with artist courses and live events.',
+        'split' => true
     ])
 
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #0c1524 calc(50% + 1px));"></div>
@@ -462,7 +656,7 @@
                     ],
                 ];
 //            @endphp
-            <div class="max-w-3xl lg:max-w-4xl mx-auto relative px-4 mt-7">
+            <div class="max-w-3xl lg:max-w-4xl mx-auto relative px-4 mt-7 pb-20">
                 @foreach ($gettings as $key => $getting)
                     @if($getting['position'] === 'right')
                         <div class="relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-28">
@@ -474,7 +668,7 @@
                             <div class="dot absolute bg-white top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px;height:20px"></div>
                         </div>
                     @else
-                        <div class="relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-28">
+                        <div class="relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if($key !== 2) mb-16 md:mb-28 @endif">
                             <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
@@ -484,8 +678,28 @@
                         </div>
                     @endif
                 @endforeach
-                <div class="full-line absolute bg-white top-0 z-0 transform -translate-x-1/2" style="width: 3px;"></div>
+                <div class="full-line absolute bg-white top-0 z-0 transform -translate-x-1/2" style="width: 2px;"></div>
             </div>
+            <div class="text-left sm:text-center mb-5">
+                <img class="h-24 mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=190,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guarantee-musora-line.png" alt="bonus icon">
+                <h5><strong>* BETTER PRACTICE GUARANTEE *</strong></h5>
+                <p class="max-w-sm leading-normal mt-3">You’ll get 7 days free PLUS a 90-day guarantee<br> to make sure you love your improvements!</p>
+            </div>
+            <a class="sm:mx-1 w-full sm:w-64 join white smaller @if(!empty($promoVersion)) anchor-slide @endif"
+                @if(!empty($promoVersion))
+                    href="#customize-anchor"
+                @elseif(!empty($month))
+                    href="/choose-your-trial-month"
+                @else
+                    href="/choose-plan"
+                @endif
+            >
+                @if(!empty($promoVersion) && empty($trialVersion))
+                    SEE YOUR DEAL &raquo;
+                @else
+                    START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                @endif
+            </a>
         </div>
     </section>
 
@@ -531,6 +745,15 @@
             <h2><strong>Play <u>1000+</u> popular songs.</strong></h2>
             <p class="leading-tight mt-2 sm:mt-3">You’ll have <strong>all the tools you need</strong> to play the songs you love. <strong class="cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo &raquo;</u></strong></p>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto">
+                <div style="padding-bottom:62.4%;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png)" class="mt-4 sm:mt-6 lg:my-6 bg-cover bg-center" x-on:click="soundslice = true;" ></div>
+            </div>
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto  hidden">
+                <div style="padding-bottom:62.4%;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png)" class="mt-4 sm:mt-6 lg:my-6 bg-cover bg-center" x-on:click="soundslice = true;" ></div>
+            </div>
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto hidden">
+                <div style="padding-bottom:62.4%;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png)" class="mt-4 sm:mt-6 lg:my-6 bg-cover bg-center" x-on:click="soundslice = true;" ></div>
+            </div>
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto  hidden">
                 <div style="padding-bottom:62.4%;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png)" class="mt-4 sm:mt-6 lg:my-6 bg-cover bg-center" x-on:click="soundslice = true;" ></div>
             </div>
             <div class="">
@@ -705,13 +928,6 @@
         'vimeo' => true,
     ])
 
-    @if(!empty($promoVersion))
-        @include("drumeo.sales.partials._footer", [
-            "minimal" => true
-        ])
-    @else
-        @include("drumeo.sales.partials._footer")
-    @endif
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 

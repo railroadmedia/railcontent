@@ -23,6 +23,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -394,6 +395,13 @@ class ContentPagesController extends BaseController
                 $previewVideo = $video['file'];
             }
         }
+        $collectionForDecoration = new Collection();
+        $collectionForDecoration = $collectionForDecoration->merge([$firstLevelContent]);
+
+        Decorator::$typeDecoratorsEnabled = true;
+        $collectionForDecoration = $collectionForDecoration->filter();
+        \App\Decorators\Content\ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
+        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
         $noProgress = empty($firstLevelContent->fetch('higher_key_progress'));
         $progressLevel = 'Level - ' . (($noProgress) ? '1.1' : $firstLevelContent->fetch('higher_key_progress', '1.1'));
