@@ -103,14 +103,16 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
             }
 
             // events always sync to the brand specific workspace and the primary all synced workspace
-            $customerIoService->createEventForUserId(
-                $user->id,
-                $accountNameToSyncAllBrand,
-                $this->eventName,
-                $this->eventData,
-                $this->eventType,
-                $this->eventTimestamp
-            );
+            if($this->accountName !== $accountNameToSyncAllBrand) {
+                $customerIoService->createEventForUserId(
+                    $user->id,
+                    $accountNameToSyncAllBrand,
+                    $this->eventName,
+                    $this->eventData,
+                    $this->eventType,
+                    $this->eventTimestamp
+                );
+            }
 
             try {
                 $customerIoService->createEventForUserId(
@@ -126,7 +128,7 @@ class CustomerIoCreateEventByUserId extends CustomerIoBaseJob
                     $exception->getMessage(),
                     'Customer not found'
                 )) {
-                    Log::warning("User $user->id does not exist in the customer io $this->accountName workspace");
+                    //Log::warning("User $user->id does not exist in the customer io $this->accountName workspace");
                 } else {
                     throw $exception;
                 }

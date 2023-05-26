@@ -25,7 +25,7 @@
                     {{ csrf_field() }}
 
                     <input type="hidden" name="credentials_type" value="new">
-                    <input type="hidden" name="redirect" value="/drummers-toolbox">
+                    <input type="hidden" name="redirect" value="/drumeo/drummers-toolbox">
 
                     <input type="hidden" name="book-title" value="The Drummer's Toolbox">
                     <input type="hidden" name="context" value="drummers-toolbox">
@@ -99,7 +99,7 @@
                     {{ method_field('POST') }}
                     {{ csrf_field() }}
                     <input type="hidden" name="credentials_type" value="existing">
-                    <input type="hidden" name="redirect" value="/drummers-toolbox">
+                    <input type="hidden" name="redirect" value="/drumeo/drummers-toolbox">
 
                     <input type="hidden" name="book-title" value="The Drummer's Toolbox">
 

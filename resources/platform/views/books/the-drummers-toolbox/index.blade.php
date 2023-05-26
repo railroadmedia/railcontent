@@ -50,11 +50,11 @@ if(!empty($user)){
 @endsection
 
 @section('content')
-    <header id="bestBookHeader" class="container fluid bb-grey-1-1 pv-5 shadow">
-        <div class="container">
+    <header id="bestBookHeader" class="fluid pv-5 shadow">
+        <div class="tw-w-full tw-container tw-mx-auto tw-pt-4 md:tw-pt-0 tw-px-4 md:tw-px-8">
             <div class="flex flex-row align-v-center flex-wrap">
                 <div class="flex flex-column ph xs-12 sm-8 mb-2">
-                    <h1 class="heading mb-1 text-white">The Drummer's Toolbox</h1>
+                    <h1 class="tw-font-bold tw-text-5xl mb-1 text-white tw-font-bebas-neue">The Drummer's Toolbox</h1>
                     <p class="body mb-2 text-white">
                         Here you will find all the digital resources that pair with the material in The Drummer’s
                         Toolbox. These include pre-built Recommended Listening playlists, drumless play-along
@@ -132,7 +132,8 @@ if(!empty($user)){
 
     @include('books.the-drummers-toolbox.partials.redeem-modal', ['formSubmitUrl' => url()->route('access-codes.form-claim')])
 
-    <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 4xl:tw-grid-cols-6 tw-mb-8">
+    <section class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+        <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 4xl:tw-grid-cols-6 tw-mb-8">
             @foreach($chapters as $index => $chapter)
                     <div class="flex flex-column chapter-thumb pa-1">
                     <a
@@ -155,6 +156,7 @@ if(!empty($user)){
                     </a>
                 </div>
             @endforeach
-    </div>
+        </div>
+    </section>
 @endsection
 

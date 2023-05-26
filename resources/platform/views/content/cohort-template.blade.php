@@ -260,6 +260,8 @@
             'name' => "trailer",
             "video" => $cohort['cohort_trailer'],
         ])
+
+        @include('partials._railanalytics-brand-tracking-iframe')
 @endsection
 
 @section('inject-components')

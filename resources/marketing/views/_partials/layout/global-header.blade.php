@@ -1,4 +1,4 @@
-<header class="flex-none z-40">
+<header class="flex-none z-[99]">
     <!-- Nav -->
     @if(!empty($promoVersion))
         @include('_partials.layout._top-nav', [

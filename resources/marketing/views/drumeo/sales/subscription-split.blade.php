@@ -417,7 +417,7 @@
             [
                 'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/loop-icon.svg',
                 'title' => 'Loop the trouble spots.',
-                'desc' => 'No more pausing and rewinding thattricky fill. Loop it over and over again!',
+                'desc' => 'No more pausing and rewinding that tricky fill. Loop it over and over again!',
             ],
             [
                 'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/no-drums-icon.svg',

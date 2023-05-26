@@ -429,6 +429,7 @@ return [
             'banner_button_url',
             'is_liked_by_current_user',
             'like_count',
+            'resources',
             'current_lesson' => [
                 'id',
                 'type',
