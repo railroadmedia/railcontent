@@ -295,14 +295,14 @@ onBeforeMount(() => {
                     <!-- Content Unavailable -->
                     <ContentUnavailable v-if="false" :bgImgUrl="thumbnailUrl" :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle" :message="needAccessMessage" />                  
                     <!-- Soundslice Player -->
-                    <div v-if="false && lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
+                    <div v-if="lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
                         class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
                         <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
                             :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext">
                         </SoundSlice>
                     </div>
                     <!-- Video Players -->
-                    <div v-if="false" class="p-lg-only lean tw-relative">
+                    <div class="p-lg-only lean tw-relative">
                         <div v-if="youtubeVideoId && String(youtubeVideoId).length"
                              class="widescreen mb-2 bg-black"
                         >
