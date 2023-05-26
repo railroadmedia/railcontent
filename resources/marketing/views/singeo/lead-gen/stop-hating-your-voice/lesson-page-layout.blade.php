@@ -9,7 +9,7 @@
     <meta property="og:description" content="Learn to love your voice in 3 easy lessons!">
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/fb-share-image.jpg">
     <meta property="og:url" content="https://www.singeo.com/stop-hating-your-voice/">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-singeo.css') }}">
 @stop
 
 @section('title', 'How To Stop Hating Your Voice')

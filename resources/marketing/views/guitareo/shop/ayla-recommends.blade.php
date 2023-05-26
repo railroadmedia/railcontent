@@ -17,8 +17,8 @@
     @parent
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/guitareo/shop.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/shop-guitareo.css') }}" rel="stylesheet">
 @stop()
 
 @section('scripts')
