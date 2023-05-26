@@ -293,7 +293,7 @@ onBeforeMount(() => {
                 <!--Player Wrapper -->
                 <div class="fluid tw-pb-3">
                     <!-- Content Unavailable -->
-                    <ContentUnavailable v-if="false" :bgImgUrl="thumbnailUrl" :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle" :message="needAccessMessage" />                  
+                    <ContentUnavailable v-if="!released || needAccess" :bgImgUrl="thumbnailUrl" :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle" :message="needAccessMessage" />                  
                     <!-- Soundslice Player -->
                     <div v-if="lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
                         class="tw-w-full tw-max-w-[1280px] tw-aspect-video">
