@@ -13,7 +13,15 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  topSubtitleColor: {
+    type: String,
+    default: "",
+  },
   title: {
+    type: String,
+    default: "",
+  },
+  titleColor: {
     type: String,
     default: "",
   },
@@ -25,19 +33,15 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  btnLightMode: {
+    type: Boolean,
+    default: false,
+  },
   primaryCtaText: {
     type: String,
     default: "",
   },
-  primaryCtaTextAlt: {
-    type: String,
-    default: "",
-  },
   primaryCtaUrl: {
-    type: String,
-    default: "",
-  },
-  primaryCtaUrlAlt: {
     type: String,
     default: "",
   },
@@ -122,7 +126,7 @@ const closeModal = () => {
     <section class="tw-w-full tw-h-full tw-rounded-[10px] tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 tw-gap-0 relative">
         <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
             <picture>
-                <source media="(min-width:1024px)" :srcset="`${desktopImg}`">
+                <source media="(min-width:1280px)" :srcset="`${desktopImg}`">
                 <source media="(min-width:768px)" :srcset="`${tabletImg}`">
                 <img
                     class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0 tw-z-50"
@@ -136,7 +140,7 @@ const closeModal = () => {
       <!-- Text Content -->
       <div class="tw-absolute tw-bottom-0 tw-w-full md:tw-relative tw-text-white tw-h-4/5 md:tw-h-full">
         <div class="tw-flex tw-flex-col tw-flex-wrap tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[26px] tw-font-open-sans tw-pb-12 sm:tw-pb-[38px] md:tw-pb-10 lg:tw-pb-0">
-          <h4 class="tw-font-bold tw-text-sm tw-uppercase tw-leading-none tw-mb-3" v-if="topSubtitle && !logo">{{ topSubtitle }}</h4>
+          <h4 class="tw-font-bold tw-text-sm tw-uppercase tw-leading-none tw-mb-3" :class="`${ topSubtitleColor && `tw-text-${topSubtitleColor}` }`" v-if="topSubtitle && !logo">{{ topSubtitle }}</h4>
           <h2 class="
               tw-font-bebas-neue
               tw-text-[50px]
@@ -144,27 +148,27 @@ const closeModal = () => {
               tw-uppercase
               tw-leading-none
             "
-            :class="titleClasses"
+            :class="`${ titleColor && `tw-text-${titleColor}` }`"
               v-if="title && !logo"
             >
             {{ title }}
           </h2>
             <!-- Logo -->
-            <img v-if="logo" class="tw-h-24 md:tw-h-28 lg:tw-h-32 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
+            <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
           <p :class="`tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
           <!-- CTA -->
             <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
                 <a
                     v-if="primaryCtaText"
                     :href="primaryCtaUrl"
-                    :class="`tw-bg-white tw-text-[#000C17] tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block hover:tw-bg-[#627F97] hover:tw-text-white tw-text-xl`"
+                    :class="`tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'}`"
                 >
                     {{ primaryCtaText }}
                 </a>
                 <a
                     v-if="secondaryCtaText && (!isFeatured || isFeatured && !video)"
                     :href="secondaryCtaUrl"
-                    :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block hover:tw-bg-white hover:tw-text-[#000C17] tw-text-xl`"
+                    :class="`tw-border-2  tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'}`"
                 >
                     {{ secondaryCtaText }}
                 </a>
