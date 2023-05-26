@@ -152,7 +152,6 @@
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
         lessonsCopy.value = [...props.lessons.data];
-        console.log(playlistsStore.lessons)
     });
 </script>
 <template>

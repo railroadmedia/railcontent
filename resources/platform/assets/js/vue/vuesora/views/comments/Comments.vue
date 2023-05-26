@@ -268,8 +268,6 @@ export default {
                 .then((resolved) => {
                     this.requestingData = false;
 
-                    console.log(resolved)
-
                     if (resolved) {
                         this.totalComments = resolved.meta ? resolved.meta.totalResults : resolved.total_results;
                         this.totalCommentsAndReplies = resolved.meta ? resolved.meta.totalCommentsAndReplies : this.totalComments;
