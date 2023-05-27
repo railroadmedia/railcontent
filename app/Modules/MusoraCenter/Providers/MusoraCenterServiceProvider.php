@@ -28,6 +28,10 @@ class MusoraCenterServiceProvider extends ServiceProvider
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/musora_center_routes.php');
         $this->loadViewsFrom(__DIR__ . '/../views', 'musora-center');
+
+        $this->publishes([
+            __DIR__.'/../public' => public_path('vendor/musora-center'),
+        ], 'public');
     }
 
     /**

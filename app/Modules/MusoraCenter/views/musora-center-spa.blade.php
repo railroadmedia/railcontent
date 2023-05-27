@@ -7,8 +7,9 @@
     <title>Musora Center</title>
     <link rel="icon" href="/dist/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100:300,400,500,700,900|Material+Icons" rel="stylesheet">
-    @foreach(glob('dist/js/*.js') as $asset)
-        <link href="{{ $asset }}" rel="preload" as="script">
+
+    @foreach(glob(app_path() . '/Modules/MusoraCenter/public/dist/js/*.js') as $assetPath)
+        <link href="vendor/musora-center/dist/js/{{ basename($assetPath) }}" rel="preload" as="script">
     @endforeach
 </head>
 <body>
@@ -18,7 +19,7 @@
 
 <input id="userInfoDataElement"
        type="hidden"
-       data-user="{{ json_encode($user) }}">
+       data-user="{{ json_encode($userMappedInfo) }}">
 
 <input id="countryList"
        type="hidden"
@@ -32,9 +33,9 @@
 
 <script src="https://js.stripe.com/v3/"></script>
 
-<!-- built files will be auto injected -->
-@foreach(glob('dist/js/*.js') as $asset)
-    <script type="text/javascript" src="{{ $asset }}"></script>
+<!-- built files will be auto-injected -->
+@foreach(glob(app_path() . '/Modules/MusoraCenter/public/dist/js/*.js') as $assetPath)
+    <script type="text/javascript" src="vendor/musora-center/dist/js/{{ basename($assetPath) }}"></script>
 @endforeach
 
 </body>

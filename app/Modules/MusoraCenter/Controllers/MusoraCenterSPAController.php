@@ -29,56 +29,21 @@ class MusoraCenterSPAController extends Controller
         $user = user();
         $userIsSuperAdmin = $this->permissionService->is($user->id, 'super_administrator');
 
-        $permissions = [];
-
-        if ($this->permissionService->is($user->id, 'administrator')) {
-            $permissions = [
-                'content',
-                'users',
-                'customers',
-                'products',
-                'permissions',
-                'orders',
-                'access-codes',
-                'failed-billing',
-                'discounts',
-                'shipping',
-                'shipping-fulfillment',
-                'mentors'
-            ];
-        }
-
-        if ($this->permissionService->is($user->id, 'view_daily_stats')) {
-            $permissions[] = 'daily-stats';
-        }
-
-        if ($this->permissionService->is($user->id, 'shipping_fulfillment')) {
-            $permissions[] = 'shipping-fulfillment';
-        }
-
-        if ($this->permissionService->is($user->id, 'mentors')) {
-            $permissions[] = 'mentors';
-        }
-
-        if ($this->permissionService->is($user->id, 'payment_recovery')) {
-            $permissions[] = 'failed-billing';
-        }
-
-        if ($this->permissionService->is($user->id, 'accounting')) {
-            $permissions[] = 'accounting-reporting';
-        }
-
-        if ($this->permissionService->is($user->id, 'membership_stats')) {
-            $permissions[] = 'membership-stats';
-        }
-
-        if ($this->permissionService->is($user->id, 'retention_stats')) {
-            $permissions[] = 'retention-stats';
-        }
-
-        if ($this->permissionService->is($user->id, 'it')) {
-            $permissions[] = 'it';
-        }
+        $permissions = [
+            'content',
+            'users',
+            'customers',
+            'products',
+            'permissions',
+            'orders',
+            'access-codes',
+            'failed-billing',
+            'discounts',
+            'shipping',
+            'shipping-fulfillment',
+            'mentors',
+            'it',
+        ];
 
         $userMappedInfo = [
             "id" => $user->id,
@@ -95,7 +60,7 @@ class MusoraCenterSPAController extends Controller
         return view(
             'musora-center::musora-center-spa',
             [
-                "user" => $userMappedInfo,
+                "userMappedInfo" => $userMappedInfo,
                 "musoraWebAppURL" => $musoraWebAppURL,
             ]
         );

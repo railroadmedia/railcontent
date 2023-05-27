@@ -11,6 +11,7 @@ const actions = {
         const userInfoDataElement = document.getElementById('userInfoDataElement');
 
         if (userInfoDataElement) {
+            console.log(userInfoDataElement);
             commit('setCurrentUser', { currentUser: JSON.parse(userInfoDataElement.dataset.user) });
             userInfoDataElement.parentNode.removeChild(userInfoDataElement);
         }

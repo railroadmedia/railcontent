@@ -340,6 +340,7 @@ return [
 
             \App\Decorators\Content\SemesterPackDecorator::class,
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
+            \App\Modules\MusoraCenter\Decorators\UrlDecorator::class,
 
             // cant the level rank stuff use the RC updates for user progress label calculated on progress update?
             //            \App\Decorators\Content\DrumeoMethodLearningPathDecorator::class, // REALLY needs optimization
