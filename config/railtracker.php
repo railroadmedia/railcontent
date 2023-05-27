@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'global_is_active' => env('RAILTRACKER_ENABLED', true),
+    'global_is_active' => false,
 
     'brand' => 'musora',
 
