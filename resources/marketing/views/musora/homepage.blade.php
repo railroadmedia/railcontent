@@ -301,7 +301,7 @@
         <div class="container max-w-6xl mx-auto relative z-20">
             <h1 class="relative w-auto inline-block text-4xl sm:text-5xl lg:text-6xl">
                 <strong>Musicians<br class="inline sm:hidden"> start here.</strong>
-                <img class="w-72 lg:w-96 absolute -bottom-1 -right-6 px-7" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png" alt="underline">
+                <img class="w-72 lg:w-96 absolute -bottom-1 -right-6 px-7" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png" alt="underline" fetchpriority="high">
             </h1>
             <h6 class="leading-relaxed mt-6 mb-7">Learn your favorite instruments with step-by-step lessons, thousands<br>
                 of songs, and unlimited personal support.</h6>
@@ -317,23 +317,22 @@
                 <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by 70,145 active students.</em></p>
             </div>
         </div>
-        <img class="absolute z-10 h-12 sm:h-14 lg:h-20" style="top:43%;left: 2%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-04.png" alt="header circle image">
-        <img class="absolute z-10 h-24 sm:h-28 lg:h-36" style="top:8%;left: 6%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-05.png" alt="header circle image">
-        <img class="absolute z-10 h-40 sm:h-44 lg:h-52" style="top:62%;left: 7%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-07.png" alt="header circle image">
-        <img class="absolute z-10 h-10 sm:h-12 lg:h-16" style="top:9%;left: 29%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-01.png" alt="header circle image">
-        <img class="absolute z-10 h-10 sm:h-12 lg:h-16" style="top:4%;left: 56%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-03.png" alt="header circle image">
-        <img class="absolute z-10 h-28 sm:h-32 lg:h-40" style="top:65%;left: 74%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-08.png" alt="header circle image">
-        <img class="absolute z-10 h-36 sm:h-40 lg:h-48" style="top:9%;left: 78%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-06.png" alt="header circle image">
-        <img class="absolute z-10 h-12 sm:h-14 lg:h-20" style="top:66%;left: 97%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-02.png" alt="header circle image">
+        <img class="absolute z-10 h-12 sm:h-14 lg:h-20" style="top:43%;left: 2%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-04.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-24 sm:h-28 lg:h-36" style="top:8%;left: 6%;" src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-05.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-40 sm:h-44 lg:h-52" style="top:62%;left: 7%;" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-07.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-10 sm:h-12 lg:h-16" style="top:9%;left: 29%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-01.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-10 sm:h-12 lg:h-16" style="top:4%;left: 56%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-03.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-28 sm:h-32 lg:h-40" style="top:65%;left: 74%;" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-08.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-36 sm:h-40 lg:h-48" style="top:9%;left: 78%;" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-06.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-12 sm:h-14 lg:h-20" style="top:66%;left: 97%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-02.png" alt="header circle image" fetchpriority="high">
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
             <h2 class="text-center sm:mb-10"><strong>The easier way to<br class="inline sm:hidden"> learn <u>any instrument</u>.</strong></h2>
-            <img class="my-5 h-64 inline sm:hidden transition-opacity opacity-0"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
+            <img class="my-5 h-64 inline sm:hidden"
                 src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage.png"
                 alt="learn playing image"
+                fetchpriority="high"
             >
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center">
                 <p class="leading-normal max-w-xl pr-7 mx-0">Learning an instrument can be frustrating. So we’ve made the most helpful music lessons on the planet –<br><br>Guided video lessons from great teachers, interactive exercises that transform practice into play, and <strong>thousands of popular songs</strong> for every style, era, and skill level. PLUS unlimited personal support from real teachers.<br><br>You’ll play more. You’ll fall in love with the process. And we’re so confident you’ll love your new skills that you’ll get a 7-day free trial PLUS a 90-day guarantee (just to make sure!).</p>
@@ -632,7 +631,7 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #0c1524 calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background:#0c1524;">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-20" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/just-press-play-title.png" alt="collage intro mobile">
+            <img class="h-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/just-press-play-title.png" alt="collage intro mobile" loading="lazy" onload="this.classList.remove('opacity-0')">
             <p class="text-center mt-5 mb-16 sm:mt-5 sm:mb-20">Musora is loaded with practice tools and guided workouts
                 <br class="hidden sm:inline"> to help you learn music by actually playing.</p>
 
@@ -667,12 +666,16 @@
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
                             </div>
-                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
+                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9">
+                                <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="workout {{ $key+1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                            </div>
                             <div class="dot absolute bg-white top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px;height:20px"></div>
                         </div>
                     @else
                         <div class="relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if($key !== 2) mb-16 md:mb-28 @endif">
-                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
+                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9">
+                                <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="workout {{ $key+1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                            </div>
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
@@ -688,7 +691,7 @@
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=190,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guarantee-musora-line.png" alt="bonus icon">
                 <h5><strong>* BETTER PRACTICE GUARANTEE *</strong></h5>
-                <p class="max-w-sm leading-normal mt-3">You’ll get 7 days free PLUS a 90-day guarantee<br> to make sure you love your improvements!</p>
+                <p class="max-w-sm mx-auto leading-normal mt-3">You’ll get 7 days free PLUS a 90-day guarantee<br> to make sure you love your improvements!</p>
             </div>
             <a class="sm:mx-1 w-full sm:w-64 join white smaller @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
@@ -988,7 +991,5 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     @yield('scripts')
 @stop
