@@ -158,6 +158,8 @@
 @endsection
 
 @section('layout-scripts')
+    @parent
+    
     @if(str_contains(Request::url(), 'create-playlist-window'))
         <script>
             document.addEventListener('DOMContentLoaded', function () {
