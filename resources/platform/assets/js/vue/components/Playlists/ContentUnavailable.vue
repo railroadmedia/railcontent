@@ -83,7 +83,7 @@ onMounted(() => {
 
 <template>
     <div
-        :class="`tw-flex tw-items-center tw-justify-center tw-text-center tw-text-white tw-w-full tw-aspect-video tw-relative`">
+        :class="`tw-flex tw-items-center tw-justify-center tw-text-center tw-text-white tw-w-full tw-aspect-video tw-relative tw-overflow-hidden`">
         <img :src="bgImgUrl" />
         <div class="tw-absolute tw-bg-[#000000]/80 tw-w-full tw-h-full"></div>
         <div class="tw-absolute tw-flex tw-flex-col tw-items-center tw-justify-center">
