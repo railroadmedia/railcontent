@@ -265,25 +265,25 @@
 
     @include('_partials.components.video-modal',[
         'name' => 'drumeoSoundslice',
-        'video' => 'TODO',
+        'video' => '1D6Vc',
         'soundslice' => true,
     ])
 
     @include('_partials.components.video-modal',[
         'name' => 'pianoteSoundslice',
-        'video' => 'TODO',
+        'video' => '77f4c',
         'soundslice' => true,
     ])
 
     @include('_partials.components.video-modal',[
         'name' => 'guitareoSoundslice',
-        'video' => 'TODO',
+        'video' => 'Mnmkc',
         'soundslice' => true,
     ])
 
     @include('_partials.components.video-modal',[
         'name' => 'singeoSoundslice',
-        'video' => 'TODO',
+        'video' => 'ZsC4c',
         'soundslice' => true,
     ])
 @endsection
@@ -790,7 +790,7 @@
     </section>
 
     @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://musora-center.s3.amazonaws.com/logos/guarantee.jpg',
+        'badge' => 'https://dmmior4id2ysr.cloudfront.net/logos/guarantee+1.png',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
     ])

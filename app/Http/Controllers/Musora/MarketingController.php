@@ -64,4 +64,8 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.songs', [ 'theme' => 'musora', 'page' => 'songs' ]);
     }
+    public function community()
+    {
+        return view('musora.pages.community', [ 'theme' => 'musora', ]);
+    }
 }
