@@ -157,6 +157,14 @@
 
 @endsection
 
+@section('layout-scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            window.openplaylistmodal({ modalType: 'create', brand: props.brand, data: { name: '', category: 'My List', thumbnail_url: null, description: ''} });
+        })
+    </script>
+@endsection
+
 <script>
     import CohortBanner from "../../assets/js/vue/components/CohortBanner/CohortBanner";
     export default {
