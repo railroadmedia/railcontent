@@ -162,7 +162,8 @@ class Leadgen extends Resource
             DateTime::make('End Time', 'end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             Flexible::make('Assets')
                 ->addLayout(LeadgenLessonAssetLayout::class)
-                ->preset(LeadgenLessonAssetPreset::class),
+                ->preset(LeadgenLessonAssetPreset::class)
+                ->help('PNG, JPEG, JPG, SVG, ZIP, and MP3'),
             Flexible::make('Lessons')
                 ->addLayout(LeadgenLessonLayout::class)
                 ->preset(LeadgenLessonPreset::class),
