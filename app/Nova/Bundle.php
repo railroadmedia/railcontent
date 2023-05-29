@@ -12,6 +12,7 @@ use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
@@ -41,6 +42,10 @@ class Bundle extends Resource
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Hidden::make('prodcut_type_id', 'product_type_id')->default(ProductType::where('name', 'Bundles')->first()->id),
             Text::make('Name')->required()->sortable(),
+            Boolean::make('Sales Page Visible?','sales_page_visible')->default(true)->hideFromIndex(),
+            DateTime::make('Sales Page Start Time', 'sales_page_start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
+            DateTime::make('Sales Page End Time', 'sales_page_end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
+
             //slug field for displaying to use a tag
             Text::make('Slug', function(){
                 return '<a class="link-default" target="_blank" href="'.get_legacy_brand_base_url(strtolower($this->brand->name)).($this->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').$this->slug.'">'.$this->slug.'</a>';

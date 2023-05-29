@@ -68,14 +68,15 @@ class LeadgenLessonLayout extends Layout
                     return $value;
                 }),
             Text::make('Thumbnail','thumbnail_text')->hideFromIndex()->hideFromDetail(),
-            Text::make('Video Src', 'video_src')->hideFromIndex()->required()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
+            Text::make('Video Src', 'video_src')->hideFromIndex()->required()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted" (unless YT embed). <br> e.g. //player.vimeo.com/video/798501810?autoplay=1 and https://www.youtube.com/embed/bNpiCbY2y0c?rel=0&showinfo=0'),
             Number::make('duration')->help('In minutes')->required(),
             Flexible::make('Assignments')
                 ->addLayout(LeadgenLessonAssignmentLayout::class)
                 ->preset(LeadgenLessonAssignmentPreset::class),
             Flexible::make('Assets')
                 ->addLayout(LeadgenLessonAssetLayout::class)
-                ->preset(LeadgenLessonAssetPreset::class),
+                ->preset(LeadgenLessonAssetPreset::class)
+                ->help('PNG, JPEG, JPG, SVG, ZIP, and MP3'),
             Boolean::make('One off page', 'one_off')->default(false)->hideFromIndex(),
             Hidden::make('id', 'id'),
             Hidden::make('uuid')->withMeta(["value" => $uuid]),
