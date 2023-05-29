@@ -158,11 +158,13 @@
 @endsection
 
 @section('layout-scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            window.openplaylistmodal({ modalType: 'create', brand: props.brand, data: { name: '', category: 'My List', thumbnail_url: null, description: ''} });
-        })
-    </script>
+    @if(str_contains(Request::url(), 'create-playlist-window'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                window.openplaylistmodal({ modalType: 'create', brand: '{{ $brand }}', data: { name: '', category: 'My List', thumbnail_url: null, description: ''} });
+            })
+        </script>
+    @endif
 @endsection
 
 <script>
