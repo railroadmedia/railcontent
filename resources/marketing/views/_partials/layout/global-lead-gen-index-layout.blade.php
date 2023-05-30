@@ -39,7 +39,8 @@
                 @if(!empty($leadgen->bg_img))
                     <div class="absolute inset-0 z-20 hidden md:block" style="background:linear-gradient(90deg, #000c17 0%, #0000 10% 90%, #000c17 100%)"></div>
                 @else
-
+                    <div class="absolute inset-0 z-20" style="background: @if($theme === 'drumeo')linear-gradient(180deg,rgba(0,0,0,.05) 55%,rgba(9,92,170,.7)); @elseif($theme === 'pianote') linear-gradient(180deg,rgba(0,0,0,.05) 55%,rgba(213,8,29,.7)); @elseif($theme === 'guitareo') linear-gradient(180deg,rgba(0,0,0,.05) 55%,rgba(0,150,128,.7)); @elseif($theme === 'singeo') linear-gradient(180deg,rgba(0,0,0,.05) 55%,rgba(102,0,182,.7)); @endif">
+                    </div>
                 @endif
 {{--                <div class="absolute inset-0 z-20" style="background:linear-gradient(#0000 50%,#000c17 85%);"></div>--}}
                 <div class="text-center absolute inset-0 flex justify-center items-center">
