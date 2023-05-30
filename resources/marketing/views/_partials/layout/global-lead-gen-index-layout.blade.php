@@ -34,7 +34,7 @@
     @endif
     <div class="flex-1">
         <div class="bg-[#000c17]">
-            <div class="@if(!empty($leadgen->bg_img)) max-w-[1200px] @endif h-[350px] relative mx-auto">
+            <div class="@if(!empty($leadgen->bg_img)) max-w-[1200px] @endif h-[150px] md:h-[350px] relative mx-auto">
                 <img class="w-full h-full object-cover object-top" src="@if(!empty($leadgen->bg_img)) {{ $leadgen->bg_img }} @elseif($theme === 'drumeo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/drumeo-header.jpg @elseif($theme === 'pianote') https://d3fzm1tzeyr5n3.cloudfront.net/headers/pianote-header.jpg @elseif($theme === 'guitareo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/guitareo-header.jpg @elseif($theme === 'singeo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/singeo-header.jpg @endif" alt="{{ $theme }} background" />
                 @if(!empty($leadgen->bg_img))
                     <div class="absolute inset-0 z-20 hidden md:block" style="background:linear-gradient(90deg, #000c17 0%, #0000 10% 90%, #000c17 100%)"></div>
@@ -43,10 +43,10 @@
                     </div>
                 @endif
 {{--                <div class="absolute inset-0 z-20" style="background:linear-gradient(#0000 50%,#000c17 85%);"></div>--}}
-                <div class="text-center absolute inset-0 flex justify-center items-center">
+                <div class="text-center absolute inset-0 flex justify-center @if(!empty($leadgen->bg_img)) items-end @else items-center @endif">
                     @if(!empty($leadgen->logo))
                         <img
-                            class="h-16 md:h-24 lg:h-40 z-30 relative"
+                            class="h-16 md:h-24 @if(!empty($leadgen->bg_img)) lg:h-32 mb-4 @else lg:h-40 @endif z-30 relative"
                             src="{{$leadgen->logo}}"
                             alt="leadgen logo"
                         />
