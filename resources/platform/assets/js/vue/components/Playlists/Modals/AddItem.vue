@@ -104,6 +104,11 @@ const handleCancel = () => {
     emit('onCancel');
 };
 
+const searchPlaylists = () => {
+    isLoadingPlaylists.value = true;
+    getUserPlaylists();
+}
+
 const saveData = (playlistId) => {
     if(showVocalRoutineToggles.value) {
         return PlaylistService.addToPlaylist({
@@ -174,17 +179,25 @@ const handleDuplicateCancel = () => {
 };
 
 const getUserPlaylists = () => {
-    PlaylistService.getCurrentUserPlaylists({ brand: props.brand, page: pageNumber.value, limit: 10, content_id: props.content.content_id }, token).then(r => {
+    PlaylistService.getCurrentUserPlaylists({ 
+        brand: props.brand, 
+        page: pageNumber.value, 
+        limit: 10, 
+        term: state.searchTerm, 
+        content_id: props.content.content_id 
+    }, token).then(r => {
         isLoadingPlaylists.value = false;
         const duplicatedItemIDs = [];
         const { data: { data } } = r;
         if (data.length) {
+            console.log(data.length)
             const formattedTable = data.map((item) => {
                 const { name, thumbnail_url, duration_formated, id, created_at, user_playlist_item_id, is_added_to_playlist } = item;
                 const dateCreated = new Date(created_at);
                 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 const month = months[dateCreated.getMonth()];
                 const formattedDate = `${month} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`;
+                
                 if (is_added_to_playlist) {
                     duplicatedItemIDs.push(String(id));
                     duplicatedItemIdNameMap.value = {
@@ -211,8 +224,8 @@ const getUserPlaylists = () => {
             });
             duplicatedIDs.value = duplicatedItemIDs;
             formattedRows.value = [...formattedRows.value, ...formattedTable];
-            console.log('rows', formattedRows.value)
             playlistNum.value = data.length;
+            console.log(formattedTable)
         } else {
             preventReFetch.value = true;
         }
@@ -347,7 +360,7 @@ onMounted(() => {
                    class="tw-px-[50px] tw-w-full tw-h-[50px] focus:tw-ring-0 tw-text-[#00101D] dark:tw-text-white dark:focus:tw-bg-[#00101D] dark:placeholder:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-bg-white dark:tw-bg-transparent tw-rounded-full focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#D4D4D8]"
                    placeholder="Search"
                    v-model="state.searchTerm"
-                   @keyup.enter="loadPlaylists"
+                   @keyup.enter="searchPlaylists"
             >
             <button v-if="state.searchTerm.length" class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0" @click="state.searchTerm = ''">
                 <XIcon class="" />
@@ -355,6 +368,7 @@ onMounted(() => {
         </div>
 
         <Table @onActionClick="handleActionClick" 
+            @onScroll="handleScroll"
             :classOverride="`tw-mt-[24px] tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" 
             :stickyHeader="true" 
             :rows="formattedRows"
