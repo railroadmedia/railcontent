@@ -264,13 +264,16 @@
         }
         .full-line {
             left:0;
-            bottom:0;
             /*bottom: 29.5%;*/
+            bottom: 31%;
         }
         @media (min-width:640px) {
             .dot,
             .full-line {
                 left:50%;
+            }
+            .full-line {
+                bottom:0;
             }
             /*.full-line {*/
             /*    bottom: 21.5%;*/
@@ -391,7 +394,7 @@
             <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">Always know <em>exactly</em> what to practice with a step-by-step curriculum for each  <br class="hidden sm:inline">instrument plus exclusive courses on any topic you’d ever want to learn!</p>
             <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6">
                 @foreach ($gridItems as $key => $gridItem)
-                    <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0 max-w-xs">
                         <picture class="w-1/3 sm:w-full">
                             <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/{{ $gridItem['image'] }}">
                             <img
@@ -630,7 +633,7 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #0c1524 calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background:#0c1524;">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/just-press-play-title.png" alt="collage intro mobile" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="h-10 sm:h-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/just-press-play-title.png" alt="collage intro mobile" loading="lazy" onload="this.classList.remove('opacity-0')">
             <p class="text-center mt-5 mb-16 sm:mt-5 sm:mb-20">Musora is loaded with practice tools and guided workouts
                 <br class="hidden sm:inline"> to help you learn music by actually playing.</p>
 
@@ -657,7 +660,7 @@
                     ],
                 ];
 //            @endphp
-            <div class="max-w-3xl lg:max-w-4xl mx-auto relative px-4 mt-7 pb-20">
+            <div class="max-w-3xl lg:max-w-4xl mx-auto relative px-4 mt-7 pb-10 sm:pb-20">
                 @foreach ($gettings as $key => $getting)
                     @if($getting['position'] === 'right')
                         <div class="relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-28">
@@ -685,7 +688,7 @@
                 @endforeach
                 <div class="full-line absolute bg-white top-0 z-0 transform -translate-x-1/2" style="width: 2px;"></div>
             </div>
-            <div class="text-left sm:text-center mb-5">
+            <div class="text-center sm:text-left sm:text-center mb-5">
                 <img class="h-24 mb-4 transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=190,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guarantee-musora-line.png" alt="bonus icon">
@@ -758,49 +761,49 @@
             <h2><strong>Play <u>1000+</u> popular songs.</strong></h2>
             <p class="leading-tight mt-2 sm:mt-3">You’ll have <strong>all the tools you need</strong> to play the songs you love. <strong><u>Try the demo</u></strong></p>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'drumeo'">
-                <div style="padding-bottom:62.4%;" class="mt-4 sm:mt-6 lg:my-6 relative" x-on:click="drumeoSoundslice = true;" >
+                <div style="padding-bottom:62.4%;" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="drumeoSoundslice = true;" >
                     <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png" alt="drumeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'pianote'">
-                <div style="padding-bottom:62.4%;" class="mt-4 sm:mt-6 lg:my-6 relative" x-on:click="pianoteSoundslice = true;" >
+                <div style="padding-bottom:62.4%;" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="pianoteSoundslice = true;" >
                     <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/pianote-player.png" alt="pianote player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'guitareo'">
-                <div style="padding-bottom:62.4%" class="mt-4 sm:mt-6 lg:my-6 relative" x-on:click="guitareoSoundslice = true;" >
+                <div style="padding-bottom:62.4%" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="guitareoSoundslice = true;" >
                     <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guitareo-player.png" alt="guitareo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'singeo'">
-                <div style="padding-bottom:62.4%" class="mt-4 sm:mt-6 lg:my-6 relative" x-on:click="singeoSoundslice = true;" >
+                <div style="padding-bottom:62.4%" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="singeoSoundslice = true;" >
                     <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/singeo-player.png" alt="singeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="">
                 <div
-                    class="inline-block border-2 rounded-full py-1 px-10 mx-2 cursor-pointer border-drumeo border text-xl"
+                    class="inline-block border-2 rounded-full py-1 px-5 sm:px-10 mx-1 sm:mx-2 mb-2 cursor-pointer border-drumeo border text-xl"
                     :class="brand === 'drumeo' ? 'text-white bg-drumeo' : 'text-drumeo'"
                     @click="brand = 'drumeo'"
                 >
                     <i class="fa-regular fa-drum"></i>
                 </div>
                 <div
-                    class="inline-block border-2 rounded-full py-1 px-10 mx-2 cursor-pointer border-pianote border text-xl"
+                    class="inline-block border-2 rounded-full py-1 px-5 sm:px-10 mx-1 sm:mx-2 mb-2 cursor-pointer border-pianote border text-xl"
                     :class="brand === 'pianote' ? 'text-white bg-pianote' : 'text-pianote'"
                     @click="brand = 'pianote'"
                 >
                     <i class="fa-regular fa-piano-keyboard"></i>
                 </div>
                 <div
-                    class="inline-block border-2 rounded-full py-1 px-10 mx-2 cursor-pointer border-guitareo border text-xl"
+                    class="inline-block border-2 rounded-full py-1 px-5 sm:px-10 mx-1 sm:mx-2 mb-2 cursor-pointer border-guitareo border text-xl"
                     :class="brand === 'guitareo' ? 'text-white bg-guitareo' : 'text-guitareo'"
                     @click="brand = 'guitareo'"
                 >
                     <i class="fa-light fa-guitar"></i>
                 </div>
                 <div
-                    class="inline-block border-2 rounded-full py-1 px-10 mx-2 cursor-pointer border-singeo border text-xl"
+                    class="inline-block border-2 rounded-full py-1 px-5 sm:px-10 mx-1 sm:mx-2 mb-2 cursor-pointer border-singeo border text-xl"
                     :class="brand === 'singeo' ? 'text-white bg-singeo' : 'text-singeo'"
                     @click="brand = 'singeo'"
                 >

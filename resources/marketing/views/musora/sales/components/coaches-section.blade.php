@@ -97,7 +97,7 @@
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)
                                         <li class="splide__slide flex flex-col items-center justify-center px-1">
-                                            <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 120%;">
+                                            <div class="relative w-full rounded-xl overflow-hidden pb-44 sm:pb-52 lg:pb-72">
                                                 <picture>
                                                     <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=450,quality=85/{{$image['img']}}">
                                                     <img class="absolute inset-0 object-cover" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/{{$image['img']}}" alt="{{ $image['instructor'] }}" />
