@@ -2,11 +2,13 @@
 /*
 TODO: Open Create Playlist and on close open the addItem again with the right props
 */
-import { ref, onMounted, inject, computed } from 'vue';
+import { ref, onMounted, inject, computed, reactive } from 'vue';
 import PlaylistService from '../../../../services/playlists';
-import Toggle from '../../Toggle/Toggle.vue'
-import Table from '../../Table/Table.vue'
+import Toggle from '../../Toggle/Toggle.vue';
+import Table from '../../Table/Table.vue';
+import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
 import { PlusCircleIcon, PlusIcon, CheckCircleIcon } from '@heroicons/vue/outline';
+import { XIcon } from "@heroicons/vue/solid";
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.vue';
 import AddDuplicate from './AddDuplicate.vue';
 
@@ -20,6 +22,10 @@ const props = defineProps({
         default: {}
     },
 });
+
+const state = reactive({
+    searchTerm: '',
+})
 
 const emit = defineEmits(['onCancel']);
 const token = inject('csrf_token');
@@ -205,6 +211,7 @@ const getUserPlaylists = () => {
             });
             duplicatedIDs.value = duplicatedItemIDs;
             formattedRows.value = [...formattedRows.value, ...formattedTable];
+            console.log('rows', formattedRows.value)
             playlistNum.value = data.length;
         } else {
             preventReFetch.value = true;
@@ -330,8 +337,28 @@ onMounted(() => {
             </div>
         </div>
 
-        <Table @onActionClick="handleActionClick" @onScroll="handleScroll"
-            :classOverride="`tw-mt-[24px] tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" :stickyHeader="true" :rows="formattedRows">
+        <!-- Search -->
+        <div v-if="formattedRows.length" class="tw-relative tw-w-full tw-mt-5">
+            <MusoraIcon
+                icon-name="search"
+                class="tw-absolute tw-top-5 tw-left-[26px] dark:tw-text-[#9EC0DC] tw-z-0"
+            />
+            <input type="text"
+                   class="tw-px-[50px] tw-w-full tw-h-[50px] focus:tw-ring-0 tw-text-[#00101D] dark:tw-text-white dark:focus:tw-bg-[#00101D] dark:placeholder:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-bg-white dark:tw-bg-transparent tw-rounded-full focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#D4D4D8]"
+                   placeholder="Search"
+                   v-model="state.searchTerm"
+                   @keyup.enter="loadPlaylists"
+            >
+            <button v-if="state.searchTerm.length" class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0" @click="state.searchTerm = ''">
+                <XIcon class="" />
+            </button>
+        </div>
+
+        <Table @onActionClick="handleActionClick" 
+            :classOverride="`tw-mt-[24px] tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" 
+            :stickyHeader="true" 
+            :rows="formattedRows"
+        >
             <template v-slot:actionContent="slotProps">
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
                     class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-white" />
