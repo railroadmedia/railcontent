@@ -34,25 +34,29 @@
     @endif
     <div class="flex-1">
         <div class="bg-[#000c17]">
-            <div class="max-w-[1200px] h-[350px] relative mx-auto">
+            <div class="@if(!empty($leadgen->bg_img)) max-w-[1200px] @endif h-[350px] relative mx-auto">
                 <img class="w-full h-full object-cover object-top" src="@if(!empty($leadgen->bg_img)) {{ $leadgen->bg_img }} @elseif($theme === 'drumeo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/drumeo-header.jpg @elseif($theme === 'pianote') https://d3fzm1tzeyr5n3.cloudfront.net/headers/pianote-header.jpg @elseif($theme === 'guitareo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/guitareo-header.jpg @elseif($theme === 'singeo') https://d3fzm1tzeyr5n3.cloudfront.net/headers/singeo-header.jpg @endif" alt="{{ $theme }} background" />
-                <div class="absolute inset-0 z-20 hidden md:block" style="background:linear-gradient(90deg, #000c17 0%, #0000 10% 90%, #000c17 100%)">
-                </div>
+                @if(!empty($leadgen->bg_img))
+                    <div class="absolute inset-0 z-20 hidden md:block" style="background:linear-gradient(90deg, #000c17 0%, #0000 10% 90%, #000c17 100%)"></div>
+                @else
+
+                @endif
 {{--                <div class="absolute inset-0 z-20" style="background:linear-gradient(#0000 50%,#000c17 85%);"></div>--}}
+                <div class="text-center absolute inset-0 flex justify-center items-center">
+                    @if(!empty($leadgen->logo))
+                        <img
+                            class="h-16 md:h-24 lg:h-40 z-30 relative"
+                            src="{{$leadgen->logo}}"
+                            alt="leadgen logo"
+                        />
+                    @else
+                        <h1 class="text-white z-30 relative font-bold">
+                            {{ $leadgen->title }}
+                        </h1>
+                    @endif
+                </div>
             </div>
-{{--            <div class="text-center">--}}
-{{--                @if(!empty($leadgen->logo))--}}
-{{--                    <img--}}
-{{--                        class="h-16 md:h-24 lg:h-40 z-30 relative"--}}
-{{--                        src="{{$leadgen->logo}}"--}}
-{{--                        alt="leadgen logo"--}}
-{{--                    />--}}
-{{--                @else--}}
-{{--                    <h1 class="text-white z-30 relative font-bold">--}}
-{{--                        {{ $leadgen->title }}--}}
-{{--                    </h1>--}}
-{{--                @endif--}}
-{{--            </div>--}}
+
         </div>
         <div class="lesson-catalogue max-w-5xl mx-auto py-7 md:py-12">
             <div class="list-wrapper px-2 sm:px-4">
