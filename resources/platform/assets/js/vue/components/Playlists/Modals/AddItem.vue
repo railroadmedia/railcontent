@@ -25,6 +25,7 @@ const props = defineProps({
 
 const state = reactive({
     searchTerm: '',
+    formattedTable: [],
 })
 
 const emit = defineEmits(['onCancel']);
@@ -106,6 +107,7 @@ const handleCancel = () => {
 
 const searchPlaylists = () => {
     isLoadingPlaylists.value = true;
+    pageNumber.value = 1;
     getUserPlaylists();
 }
 
@@ -223,9 +225,12 @@ const getUserPlaylists = () => {
                 ])
             });
             duplicatedIDs.value = duplicatedItemIDs;
-            formattedRows.value = [...formattedRows.value, ...formattedTable];
+            if(state.searchTerm.length) {
+                state.formattedTable = [...formattedTable]
+            } else {
+                state.formattedTable = [...state.formattedTable, ...formattedTable]
+            }
             playlistNum.value = data.length;
-            console.log(formattedTable)
         } else {
             preventReFetch.value = true;
         }
@@ -351,7 +356,7 @@ onMounted(() => {
         </div>
 
         <!-- Search -->
-        <div v-if="formattedRows.length" class="tw-relative tw-w-full tw-mt-5">
+        <div v-if="state.formattedTable.length" class="tw-relative tw-w-full tw-mt-5">
             <MusoraIcon
                 icon-name="search"
                 class="tw-absolute tw-top-5 tw-left-[26px] dark:tw-text-[#9EC0DC] tw-z-0"
@@ -371,7 +376,7 @@ onMounted(() => {
             @onScroll="handleScroll"
             :classOverride="`tw-mt-[24px] tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" 
             :stickyHeader="true" 
-            :rows="formattedRows"
+            :rows="state.formattedTable"
         >
             <template v-slot:actionContent="slotProps">
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
