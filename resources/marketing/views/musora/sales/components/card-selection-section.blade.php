@@ -17,7 +17,7 @@
                         x-on:click="plusMembershipSelected = true"
                     >
                         <div class="text-left">
-                            <img class="h-5 sm:h-6" src="{{ $plusLogo }}">
+                            <img class="h-5 sm:h-6" src="{{ $plusLogo }}" alt="{{$theme}} plus logo">
                             <p class="opacity-60 text-xs no-select mt-0.5"><em>Lessons + Songs</em></p>
                         </div>
                         <div class="radio-check ml-3 sm:ml-10 w-7 h-7 flex content-center justify-center border-2 rounded-full border-gray-500 text-gray-500">
@@ -31,7 +31,7 @@
                         x-on:click="plusMembershipSelected = false"
                     >
                         <div class="text-left">
-                            <img class="h-5 sm:h-6" src="{{ $logo }}">
+                            <img class="h-5 sm:h-6" src="{{ $logo }}" alt="{{$theme}} logo">
                             <p class="opacity-60 text-xs no-select mt-0.5"><em>Lessons only.</em></p>
                         </div>
                         <div class="radio-check ml-3 sm:ml-14 w-7 h-7 flex content-center justify-center border-2 rounded-full border-gray-500 text-gray-500">
@@ -53,7 +53,7 @@
                         <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12) }}/month</strong></h4>
                         <p class="text-sm mb-6"><em>Billed at ${{Prices::$plusSubscriptionAnnualFull}} per year.</em></p>
-                        <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
+                        <div class="font-bebas join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
                         <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
@@ -71,7 +71,7 @@
                         <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ Prices::$plusSubscriptionMonthly }}/month</strong></h4>
                         <p class="text-sm mb-6"><em>Pay as you go.</em></p>
-                        <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
+                        <div class="font-bebas join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
                     </div>
                     <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
                         <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
@@ -97,7 +97,7 @@
                         <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ number_format(200 / 12, 2) }}/month</strong></h4>
                         <p class="text-sm mb-6"><em>Billed at ${{200}} per year.</em></p>
-                        <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
+                        <div class="font-bebas join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
                     </div>
                 </a>
                 <div class="text-black overflow-hidden rounded-b-2xl block mx-auto group px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
@@ -114,7 +114,7 @@
                         <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ 25 }}/month</strong></h4>
                         <p class="text-sm mb-6"><em>Pay as you go.</em></p>
-                        <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
+                        <div class="font-bebas join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
                     </div>
                 </a>
                 <div class="text-black overflow-hidden rounded-b-2xl block mx-auto group px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">

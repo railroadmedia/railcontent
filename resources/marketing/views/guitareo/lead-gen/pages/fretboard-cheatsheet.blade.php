@@ -10,7 +10,7 @@
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/lead-gen/Fretboard+Cheatsheet/share-image.png">
     <meta property="og:url" content="https://www.guitareo.com/fretboard-cheatsheet/">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}">
     <style>
         .hero-header img {
             width:auto;

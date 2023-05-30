@@ -11,8 +11,8 @@
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/pianote/play-beautiful-piano.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/play-beautiful-piano.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
     <style>

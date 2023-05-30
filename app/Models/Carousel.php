@@ -62,19 +62,19 @@ class Carousel extends Model
             unset($model['uuid']);
 
             if (gettype($model['desktop_img']) === 'object') {
-                $model['desktop_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' . $model['desktop_img']->getClientOriginalName();
+                $model['desktop_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' . str_replace(' ', '+', $model['desktop_img']->getClientOriginalName());
             }
 
             if (gettype($model['tablet_img']) === 'object') {
-                $model['tablet_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' . $model['tablet_img']->getClientOriginalName();
+                $model['tablet_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' . str_replace(' ', '+', $model['tablet_img']->getClientOriginalName());
             }
 
             if (gettype($model['mobile_img']) === 'object') {
-                $model['mobile_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' . $model['mobile_img']->getClientOriginalName();
+                $model['mobile_img'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' .str_replace(' ', '+', $model['mobile_img']->getClientOriginalName());
             }
 
             if (gettype($model['logo']) === 'object') {
-                $model['logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' . $model['logo']->getClientOriginalName();
+                $model['logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' .str_replace(' ', '+', $model['logo']->getClientOriginalName());
             }
         });
     }

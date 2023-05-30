@@ -1,6 +1,5 @@
 @extends('_partials.components.forms.blog-form-layout', [
     'brand' => 'drumeo',
-    'darkBg' => true
 ])
 
 @section('title', 'Weekly Email')

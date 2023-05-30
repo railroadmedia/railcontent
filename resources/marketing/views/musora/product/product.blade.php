@@ -9,7 +9,7 @@
     @endif
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet"><link href="{{ asset('/marketing/parcel/pianote/shop-product.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet"><link href="{{ asset('/marketing/parcel/drumeo/shop-product-pianote.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
 
     @parent
