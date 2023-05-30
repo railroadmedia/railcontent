@@ -715,31 +715,37 @@
         $songItems = [
             [
                 'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/popular-song-icon.svg',
+                'fa-icon' => 'fa-user-music',
                 'title' => '1000+ popular songs.',
                 'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
             ],
             [
                 'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/isolate-icon.svg',
+                'fa-icon' => 'fa-sliders-up',
                 'title' => 'Ditch the distractions',
                 'desc' => 'Isolate the piano, guitar, or drums so you always know exactly what to play.',
             ],
             [
                 'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/loop-icon.svg',
+                'fa-icon' => 'fa-arrows-repeat',
                 'title' => 'Simplify the tricky parts',
                 'desc' => 'Learn songs faster with perfect notation, practice loops, and tempo control.',
             ],
             [
                 'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/metronome-icon.svg',
+                'fa-icon' => 'fa-timer',
                 'title' => 'Improve your timing',
                 'desc' => 'Use built-in metronome - your new best friend to get the timing just right. ',
             ],
             [
                 'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/notation-icon.svg',
+                'fa-icon' => 'fa-list-music',
                 'title' => 'Play it right the first time.',
                 'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
             ],
             [
                 'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/devices-icon.svg',
+                'fa-icon' => 'fa-laptop-mobile',
                 'title' => 'Take your songs anywhere.',
                 'desc' => 'Accessible on any device, or printable,so you can play any song, any time.',
             ],
@@ -807,7 +813,8 @@
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">
+                                    <i class="fad {!! $songItem['fa-icon'] !!} text-4xl text-musora-black"></i>
+{{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
                                     <p class="mb-1 sm:my-2"><strong>{!!$songItem['title']!!}</strong></p>
@@ -939,9 +946,8 @@
         "plusLogo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
         "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
         "songs" => "5000",
-        "firstPoint" => "The world’s best drum lessons.",
+        "firstPoint" => "Piano, Drums, Guitar, Singing.",
         "thirdPoint" => "Unlimited personal support",
-        "fifthPoint" => "Lesson access for piano, guitar, and singing.",
         "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
         "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
         "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
