@@ -3,7 +3,9 @@ import { computed, onMounted } from 'vue';
 import { DateTime } from 'luxon';
 import { LockClosedIcon, ClockIcon } from '@heroicons/vue/outline';
 
+// todo: add progress bar for the 3 seconds thing
 // todo: add to calendar modal (what to do here?)
+// calendar in process, still need to find why the calendar buttons are not showing up
 
 const props = defineProps({
     brand: {
@@ -42,6 +44,10 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
+    subscriptionCalendarId: {
+        type: String,
+        default: ''
+    }
 });
 
 const cta = computed(() => {
@@ -83,7 +89,7 @@ onMounted(() => {
 
 <template>
     <div
-        :class="`tw-flex tw-items-center tw-justify-center tw-text-center tw-text-white tw-w-full tw-aspect-video tw-relative`">
+        :class="`tw-flex tw-items-center tw-justify-center tw-text-center tw-text-white tw-w-full tw-aspect-video tw-relative tw-overflow-hidden`">
         <img :src="bgImgUrl" />
         <div class="tw-absolute tw-bg-[#000000]/80 tw-w-full tw-h-full"></div>
         <div class="tw-absolute tw-flex tw-flex-col tw-items-center tw-justify-center">
@@ -92,14 +98,6 @@ onMounted(() => {
                 <LockClosedIcon v-if="unavailableType !== 'unreleased'" />
             </div>
             <h2 class="tw-mb-[2px]">Content Unavailable</h2>
-            <!--
-            <p v-if="unavailableType === 'pack'"><strong>{{ itemName }}</strong> is part of our <strong>{{ packName
-            }}</strong></p>
-            <p v-if="unavailableType === 'song'">This song is part of <strong>Musora+ Membership.</strong></p>
-            <p v-if="unavailableType === 'expired'">This lesson is part of our <strong>Musora Membership.</strong></p>
-            <p v-if="unavailableType === 'lifetime'">This masterclass is part of our exclusive <strong>Lifetime
-                    Membership.</strong></p>
-            -->
             <p v-if="unavailableType === 'unreleased'">
                 <strong>{{ itemName }}</strong> is scheduled for release on <strong><span class="tw-capitalize">{{ month
                 }}</span> <span class="">{{ dayNumber }}/{{ yearNumber }}</span></strong>
@@ -107,11 +105,18 @@ onMounted(() => {
                 Please check back after the content is released.
             </p>
             <p v-if="unavailableType !== 'unreleased' && message" class="lg:tw-line-clamp-2" v-html="message"></p>
-            <button v-if="unavailableType === 'unreleased'" data-open-modal="addToCalendarModal" @click="addEvent" type="button" class="tw-mt-[20px] tw-mx-4 tw-btn-secondary tw-bg-[#00101D] tw-text-white" dusk="cta-button">
+            <button v-if="unavailableType === 'unreleased'" data-open-modal="addToCalendarModal" @click="addEvent"
+                type="button" class="tw-mt-[20px] tw-mx-4 tw-btn-secondary tw-bg-[#00101D] tw-text-white" dusk="cta-button">
                 {{ cta.text }}
             </button>
-            <a v-else :href="cta.url" type="button" class="tw-mt-[20px] tw-mx-4 tw-btn-secondary tw-bg-[#00101D] tw-text-white" dusk="cta-button">
+            <a v-else :href="cta.url" type="button"
+                class="tw-mt-[20px] tw-mx-4 tw-btn-secondary tw-bg-[#00101D] tw-text-white" dusk="cta-button">
                 {{ cta.text }}
             </a>
         </div>
-</div></template>
+        <AddEventModal v-if="unavailableType === 'unreleased'" modal-id="addToCalendarModal"
+            :subscription-calendar-id="subscriptionCalendarId"
+            :theme-color="brand" toggleSubscribe="toggleSubscribe">
+        </AddEventModal>
+    </div>
+</template>

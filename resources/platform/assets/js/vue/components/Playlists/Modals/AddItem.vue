@@ -2,11 +2,13 @@
 /*
 TODO: Open Create Playlist and on close open the addItem again with the right props
 */
-import { ref, onMounted, inject, computed } from 'vue';
+import { ref, onMounted, inject, computed, reactive } from 'vue';
 import PlaylistService from '../../../../services/playlists';
-import Toggle from '../../Toggle/Toggle.vue'
-import Table from '../../Table/Table.vue'
+import Toggle from '../../Toggle/Toggle.vue';
+import Table from '../../Table/Table.vue';
+import MusoraIcon from '../../MusoraIcons/MusoraIcon.vue';
 import { PlusCircleIcon, PlusIcon, CheckCircleIcon } from '@heroicons/vue/outline';
+import { XIcon } from "@heroicons/vue/solid";
 import LoadingSpinner from '../../LoadingSpinner/LoadingSpinner.vue';
 import AddDuplicate from './AddDuplicate.vue';
 
@@ -20,6 +22,11 @@ const props = defineProps({
         default: {}
     },
 });
+
+const state = reactive({
+    searchTerm: '',
+    formattedTable: [],
+})
 
 const emit = defineEmits(['onCancel']);
 const token = inject('csrf_token');
@@ -98,6 +105,12 @@ const handleCancel = () => {
     emit('onCancel');
 };
 
+const searchPlaylists = () => {
+    isLoadingPlaylists.value = true;
+    pageNumber.value = 1;
+    getUserPlaylists();
+}
+
 const saveData = (playlistId) => {
     if(showVocalRoutineToggles.value) {
         return PlaylistService.addToPlaylist({
@@ -168,17 +181,25 @@ const handleDuplicateCancel = () => {
 };
 
 const getUserPlaylists = () => {
-    PlaylistService.getCurrentUserPlaylists({ brand: props.brand, page: pageNumber.value, limit: 10, content_id: props.content.content_id }, token).then(r => {
+    PlaylistService.getCurrentUserPlaylists({ 
+        brand: props.brand, 
+        page: pageNumber.value, 
+        limit: 10, 
+        term: state.searchTerm, 
+        content_id: props.content.content_id 
+    }, token).then(r => {
         isLoadingPlaylists.value = false;
         const duplicatedItemIDs = [];
         const { data: { data } } = r;
         if (data.length) {
+            console.log(data.length)
             const formattedTable = data.map((item) => {
                 const { name, thumbnail_url, duration_formated, id, created_at, user_playlist_item_id, is_added_to_playlist } = item;
                 const dateCreated = new Date(created_at);
                 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 const month = months[dateCreated.getMonth()];
                 const formattedDate = `${month} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`;
+                
                 if (is_added_to_playlist) {
                     duplicatedItemIDs.push(String(id));
                     duplicatedItemIdNameMap.value = {
@@ -204,7 +225,11 @@ const getUserPlaylists = () => {
                 ])
             });
             duplicatedIDs.value = duplicatedItemIDs;
-            formattedRows.value = [...formattedRows.value, ...formattedTable];
+            if(state.searchTerm.length) {
+                state.formattedTable = [...formattedTable]
+            } else {
+                state.formattedTable = [...state.formattedTable, ...formattedTable]
+            }
             playlistNum.value = data.length;
         } else {
             preventReFetch.value = true;
@@ -330,8 +355,29 @@ onMounted(() => {
             </div>
         </div>
 
-        <Table @onActionClick="handleActionClick" @onScroll="handleScroll"
-            :classOverride="`tw-mt-[24px] tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" :stickyHeader="true" :rows="formattedRows">
+        <!-- Search -->
+        <div v-if="state.formattedTable.length" class="tw-relative tw-w-full tw-mt-5">
+            <MusoraIcon
+                icon-name="search"
+                class="tw-absolute tw-top-5 tw-left-[26px] dark:tw-text-[#9EC0DC] tw-z-0"
+            />
+            <input type="text"
+                   class="tw-px-[50px] tw-w-full tw-h-[50px] focus:tw-ring-0 tw-text-[#00101D] dark:tw-text-white dark:focus:tw-bg-[#00101D] dark:placeholder:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-bg-white dark:tw-bg-transparent tw-rounded-full focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#D4D4D8]"
+                   placeholder="Search"
+                   v-model="state.searchTerm"
+                   @keyup.enter="searchPlaylists"
+            >
+            <button v-if="state.searchTerm.length" class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0" @click="state.searchTerm = ''">
+                <XIcon class="" />
+            </button>
+        </div>
+
+        <Table @onActionClick="handleActionClick" 
+            @onScroll="handleScroll"
+            :classOverride="`tw-mt-[24px] tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" 
+            :stickyHeader="true" 
+            :rows="state.formattedTable"
+        >
             <template v-slot:actionContent="slotProps">
                 <PlusCircleIcon v-if="!selectedPlaylists.includes(String(slotProps.actionPayload))"
                     class="tw-w-[30px] tw-h-[30px] tw-text-[#3F3F46] dark:tw-text-white" />
