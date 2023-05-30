@@ -8,7 +8,7 @@
         <title>Server Error | Musora</title>
 
         {{-- Icons --}}
-        <script defer src="https://pro.fontawesome.com/releases/v5.15.4/js/all.js" integrity="sha384-8nTbev/iV1sg3ESYOAkRPRDMDa5s0sknqroAe9z4DiM+WDr1i/VKi5xLWsn87Car" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
         <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
 
         {{-- Fonts --}}
