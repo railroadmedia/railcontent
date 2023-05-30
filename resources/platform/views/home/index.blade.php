@@ -157,6 +157,18 @@
 
 @endsection
 
+@section('layout-scripts')
+    @parent
+    
+    @if(str_contains(Request::url(), 'create-playlist-window'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                window.openplaylistmodal({ modalType: 'create', brand: '{{ $brand }}', data: { name: '', category: 'My List', thumbnail_url: null, description: ''} });
+            })
+        </script>
+    @endif
+@endsection
+
 <script>
     import CohortBanner from "../../assets/js/vue/components/CohortBanner/CohortBanner";
     export default {
