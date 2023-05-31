@@ -210,7 +210,9 @@
                         <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                     @else
                         <button onclick="enroll('{{ $registerButtonUrl }}');" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
-                        <a href="{{$cohort['conversation_url']}}" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
+                        @if(!empty($cohort['conversation_url']))
+                            <a href="{{$cohort['conversation_url']}}" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
+                        @endif
                     @endif
                 </div>
                 <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">

@@ -2,7 +2,9 @@
 <section class="py-12 md:py-20 text-center" @if(!empty($split)) style="background-color:#f4f8fb;" @endif>
     <div class="max-w-3xl mx-auto">
         <h2 class="font-extrabold">{!! $header !!}</h2>
-        <p class="px-4 md:px-0 mt-3 mb-4 md:mb-0 max-w-md">{!! $desc !!}</p>
+        @if(!empty($desc))
+            <p class="px-4 md:px-0 mt-3 mb-4 md:mb-0 max-w-md mx-auto">{!! $desc !!}</p>
+        @endif
     </div>
 
     <!-- Tabs -->
@@ -97,7 +99,7 @@
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)
                                         <li class="splide__slide flex flex-col items-center justify-center px-1">
-                                            <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 120%;">
+                                            <div class="relative w-full rounded-xl overflow-hidden pb-44 sm:pb-52 lg:pb-72">
                                                 <picture>
                                                     <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=450,quality=85/{{$image['img']}}">
                                                     <img class="absolute inset-0 object-cover" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/{{$image['img']}}" alt="{{ $image['instructor'] }}" />
