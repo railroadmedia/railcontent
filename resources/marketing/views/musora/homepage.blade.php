@@ -245,19 +245,18 @@
             margin-bottom: -5px;
         }
 
-        @if(!empty($trialVersion))
             .option-buttons.active {
-            border-color:#0b76db!important;
-            background-color:#0c2949!important;
-        }
-        .option-buttons.active .radio-check {
-            border-color:#0b76db!important;
-            background-color:#0b76db!important;
-        }
-        .option-buttons.active .radio-check i {
-            display:block!important;
-        }
-        @endif
+                border-color:#fff!important;
+                background:linear-gradient(45deg, #0a3f48, #122753, #2b1054, #3e1033)!important;
+            }
+            .option-buttons.active .radio-check {
+                border-color:#fff!important;
+                background-color:#fff!important;
+            }
+            .option-buttons.active .radio-check i {
+                display:block!important;
+                color:#000!important;
+            }
     </style>
     <style>
         .dot {
@@ -297,13 +296,13 @@
 @endsection
 
 @section('layout-body')
-    <section class="text-center px-5 sm:px-6 py-32 sm:py-56 relative overflow-hidden">
-        <div class="container max-w-6xl mx-auto relative z-20">
+    <section class="text-center px-5 sm:px-6 py-40 sm:py-56 relative overflow-hidden">
+        <div class="container max-w-xs sm:max-w-6xl mx-auto relative z-20">
             <h1 class="relative w-auto inline-block text-4xl sm:text-5xl lg:text-6xl">
                 <strong>Musicians<br class="inline sm:hidden"> start here.</strong>
                 <img class="w-72 lg:w-96 absolute -bottom-1 -right-6 px-7" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png" alt="underline" fetchpriority="high">
             </h1>
-            <h6 class="leading-relaxed mt-6 mb-7">Learn your favorite instruments with step-by-step lessons, thousands<br>
+            <h6 class="leading-relaxed mt-6 mb-7">Learn your favorite instruments with step-by-step lessons, thousands<br class="hidden sm:inline">
                 of songs, and unlimited personal support.</h6>
             <a class="sm:mx-1 w-full sm:w-56 join {{ $theme }} smaller anchor-slide" href="#customize-anchor">START FOR FREE</a>
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
@@ -318,12 +317,12 @@
             </div>
         </div>
         <img class="absolute z-10 h-12 sm:h-14 lg:h-20" style="top:43%;left: 2%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-04.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-24 sm:h-28 lg:h-36" style="top:8%;left: 6%;" src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-05.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-40 sm:h-44 lg:h-52" style="top:62%;left: 7%;" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-07.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-20 sm:h-28 lg:h-36" style="top:8%;left: 6%;" src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-05.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-24 sm:h-40 lg:h-52" style="top:62%;left: 7%;" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-07.png" alt="header circle image" fetchpriority="high">
         <img class="absolute z-10 h-10 sm:h-12 lg:h-16" style="top:9%;left: 29%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-01.png" alt="header circle image" fetchpriority="high">
         <img class="absolute z-10 h-10 sm:h-12 lg:h-16" style="top:4%;left: 56%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-03.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-28 sm:h-32 lg:h-40" style="top:65%;left: 74%;" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-08.png" alt="header circle image" fetchpriority="high">
-        <img class="absolute z-10 h-36 sm:h-40 lg:h-48" style="top:9%;left: 78%;" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-06.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-24 sm:h-32 lg:h-40" style="top:65%;left: 74%;" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-08.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-24 sm:h-40 lg:h-44" style="top:9%;left: 78%;" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-06.png" alt="header circle image" fetchpriority="high">
         <img class="absolute z-10 h-12 sm:h-14 lg:h-20" style="top:66%;left: 97%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-02.png" alt="header circle image" fetchpriority="high">
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
@@ -663,7 +662,7 @@
                     @if($getting['position'] === 'right')
                         <div class="relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-28">
                             <div class="content relative text-left sm:pl-10 md:pl-0">
-                                <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
+                                <h5 class="mb-2 md:mb-4 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h5>
                                 <p>{{ $getting['desc'] }}</p>
                             </div>
                             <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9">
@@ -677,7 +676,7 @@
                                 <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="workout {{ $key+1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                             </div>
                             <div class="content relative text-left sm:pl-10 md:pl-0">
-                                <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
+                                <h5 class="mb-2 md:mb-4 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h5>
                                 <p>{{ $getting['desc'] }}</p>
                             </div>
                             <div class="dot absolute bg-white top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px;height:20px"></div>
@@ -946,8 +945,8 @@
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
     @include('musora.sales.components.card-selection-section', [
-        "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
-        "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
+        "plusLogo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
         "songs" => "5000",
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support",
