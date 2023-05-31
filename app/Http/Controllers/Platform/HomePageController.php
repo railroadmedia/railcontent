@@ -322,7 +322,7 @@ class HomePageController extends BaseController
                         $cohortBanner['close_visible'] = false;
                     }
                 }
-                if ($content['completed']) {
+                if ($content && $content['completed']) {
                     $cohortBanner['completed'] = true;
                     $cohortBanner['continue_visible'] = false;
                 }
