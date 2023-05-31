@@ -1,9 +1,8 @@
 <script setup>
-import { ArrowSmRightIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "../Modal/ModalRenderer";
 import { XIcon } from "@heroicons/vue/solid";
-import { onMounted, ref } from "vue";
-import {testCarousel} from "../../../constants/carousel_data";
+import { ref } from "vue";
+
 const props = defineProps({
   brand: {
     type: String,
