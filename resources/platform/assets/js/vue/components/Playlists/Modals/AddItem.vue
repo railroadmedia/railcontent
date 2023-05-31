@@ -111,6 +111,13 @@ const searchPlaylists = () => {
     getUserPlaylists();
 }
 
+const clearSearch = () => {
+    state.searchTerm = '';
+    state.formattedTable = [];
+    pageNumber.value = 1;
+    getUserPlaylists();
+}
+
 const saveData = (playlistId) => {
     if(showVocalRoutineToggles.value) {
         return PlaylistService.addToPlaylist({
@@ -367,7 +374,10 @@ onMounted(() => {
                    v-model="state.searchTerm"
                    @keyup.enter="searchPlaylists"
             >
-            <button v-if="state.searchTerm.length" class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0" @click="state.searchTerm = ''">
+            <button v-if="state.searchTerm.length" 
+                    class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0" 
+                    @click="clearSearch"
+            >
                 <XIcon class="" />
             </button>
         </div>
