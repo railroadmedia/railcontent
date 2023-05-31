@@ -23,7 +23,7 @@
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
     </head>
 
-    <body class="flex flex-col w-full min-h-screen pt-[40px] lg:pt-[56px] @yield('body-class')"
+    <body class="flex flex-col w-full min-h-screen pt-[40px] md:pt-[56px] @yield('body-class')"
         x-data="{ sidebarOpen: false, showOverlay: false }"
         @yield('body-data')
     >
