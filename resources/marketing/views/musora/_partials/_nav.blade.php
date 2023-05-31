@@ -477,7 +477,7 @@
 <div class="top-bar">
     <div class="logo">
         <a href="/">
-            <img src="https://dmmior4id2ysr.cloudfront.net/logos/musora-logo-white.png" alt="Musora">
+            <img src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png" alt="Musora">
         </a>
     </div>
     <div class="menu-toggle">
