@@ -225,10 +225,9 @@ const handleGoToNext = () => {
         window.location.href = playlistsStore.lessons[randIndex].url;
     } else if (isPlaylistRepeatOn && (String(props.playlistItemPosition) === String(props.playlistItems?.meta?.totalResults))) {
         window.location.href = playlistsStore.lessons[0].url;
-    }
-    else if (props.nextLessonUrl && props.nextLessonUrl !== '/') {
+    } else if (isPlaylistRepeatOn && props.nextLessonUrl && props.nextLessonUrl !== '/') {
         window.location.href = props.nextLessonUrl;
-    }
+    } 
 };
 
 //Constants
@@ -300,7 +299,7 @@ onBeforeMount(() => {
                 <!--Player Wrapper -->
                 <div class="fluid tw-pb-3">
                     <!-- Content Unavailable -->
-                    <ContentUnavailable v-if="!released || needAccess" :subscriptionCalendarId="subscriptionCalendarId" :bgImgUrl="thumbnailUrl" :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle" :message="needAccessMessage" />                  
+                    <ContentUnavailable v-if="!released || needAccess" @goToNext="handleGoToNext" :subscriptionCalendarId="subscriptionCalendarId" :bgImgUrl="thumbnailUrl" :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle" :message="needAccessMessage" />                  
                     <!-- Soundslice Player -->
                     <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && released && !needAccess"
                         class="tw-w-full tw-aspect-video"

@@ -199,7 +199,6 @@ const getUserPlaylists = () => {
         const duplicatedItemIDs = [];
         const { data: { data } } = r;
         if (data.length) {
-            console.log(data.length)
             const formattedTable = data.map((item) => {
                 const { name, thumbnail_url, duration_formated, id, created_at, user_playlist_item_id, is_added_to_playlist } = item;
                 const dateCreated = new Date(created_at);

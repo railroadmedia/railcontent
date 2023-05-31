@@ -1,11 +1,10 @@
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed, onMounted, ref } from 'vue';
 import { DateTime } from 'luxon';
 import { LockClosedIcon, ClockIcon } from '@heroicons/vue/outline';
+import AddEventModal from '../../vuesora/components/AddEvent/AddEventModal.vue';
 
-// todo: add progress bar for the 3 seconds thing
-// todo: add to calendar modal (what to do here?)
-// calendar in process, still need to find why the calendar buttons are not showing up
+// todo: calendar in progress, still need to find why the calendar buttons are not showing up
 
 const props = defineProps({
     brand: {
@@ -50,6 +49,8 @@ const props = defineProps({
     }
 });
 
+const emit = defineEmits(['goToNext']);
+
 const cta = computed(() => {
     return {
         lifetime: {
@@ -81,9 +82,42 @@ const month = DateTime.fromSeconds(props.releaseDate).toFormat('LLL');
 const dayNumber = DateTime.fromSeconds(props.releaseDate).toFormat('d');
 const yearNumber = DateTime.fromSeconds(props.releaseDate).toFormat('yy');
 
+// refs
+
+const ctaClicked = ref(false);
+
+// Methods
+
+const handleCalendarCtaClick = (e) => {
+    addEvent(e);
+    ctaClicked.value = true;
+};
+
+const handleCtaClick = () => {
+    ctaClicked.value = true;
+    window.location.href = cta.value.url;
+};
+
+const handleGoToNext = () => {
+    if (!ctaClicked.value) {
+        emit('goToNext');
+    }
+};
+
+// lifecycle methods
+
 onMounted(() => {
-    console.log(props.releaseDate)
-})
+    const isPlaylistRepeatOn = localStorage.getItem("isPlaybackPlaylistRepeatOn") ? JSON.parse(localStorage.getItem("isPlaybackPlaylistRepeatOn")) : false;
+    if (isPlaylistRepeatOn) {
+        setTimeout(() => {
+            document.getElementById('content-unavailable-blue-bar').style.width = '100%';
+        }, 300);
+
+        setTimeout(() => {
+            handleGoToNext();
+        }, 3300);
+    }
+});
 
 </script>
 
@@ -105,18 +139,27 @@ onMounted(() => {
                 Please check back after the content is released.
             </p>
             <p v-if="unavailableType !== 'unreleased' && message" class="lg:tw-line-clamp-2" v-html="message"></p>
-            <button v-if="unavailableType === 'unreleased'" data-open-modal="addToCalendarModal" @click="addEvent"
-                type="button" class="tw-mt-[20px] tw-mx-4 tw-btn-secondary tw-bg-[#00101D] tw-text-white" dusk="cta-button">
-                {{ cta.text }}
-            </button>
-            <a v-else :href="cta.url" type="button"
+            <button v-if="unavailableType === 'unreleased'" data-open-modal="addToCalendarModal"
+                @click="handleCalendarCtaClick" type="button"
                 class="tw-mt-[20px] tw-mx-4 tw-btn-secondary tw-bg-[#00101D] tw-text-white" dusk="cta-button">
                 {{ cta.text }}
-            </a>
+            </button>
+            <button v-else @click="handleCtaClick" type="button"
+                class="tw-mt-[20px] tw-mx-4 tw-btn-secondary tw-bg-[#00101D] tw-text-white" dusk="cta-button">
+                {{ cta.text }}
+            </button>
+        </div>
+        <div class="tw-absolute tw-w-full tw-h-[8px] tw-bottom-0">
+            <div id="content-unavailable-blue-bar" class="tw-h-full tw-bg-[#0B76DB]" style="width: 0"></div>
         </div>
         <AddEventModal v-if="unavailableType === 'unreleased'" modal-id="addToCalendarModal"
-            :subscription-calendar-id="subscriptionCalendarId"
-            :theme-color="brand" toggleSubscribe="toggleSubscribe">
+            :subscription-calendar-id="subscriptionCalendarId" :theme-color="brand" toggleSubscribe="toggleSubscribe">
         </AddEventModal>
     </div>
 </template>
+
+<style>
+#content-unavailable-blue-bar {
+    transition: width 3s;
+}
+</style>
