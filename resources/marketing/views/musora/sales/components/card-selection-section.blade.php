@@ -60,7 +60,9 @@
                         <p class="text-sm mb-1"><strong>{{ $songs }}+ popular songs.</strong></p>
                         <p class="text-sm mb-1"><strong>{{ $thirdPoint }}</strong></p>
                         <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
-                        <p class="text-sm mb-1">{{ $fifthPoint }}</p>
+                        @if(!empty($fifthPoint))
+                            <p class="text-sm mb-1">{{ $fifthPoint }}</p>
+                        @endif
                         <p class="text-sm">90-day money back guarantee.</p>
                     </div>
                 </a>
@@ -78,7 +80,9 @@
                         <p class="text-sm mb-1"><strong>{{ $songs }}+ popular songs.</strong></p>
                         <p class="text-sm mb-1"><strong>{{ $thirdPoint }}</strong></p>
                         <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
-                        <p class="text-sm mb-1">{{ $fifthPoint }}</p>
+                        @if(!empty($fifthPoint))
+                            <p class="text-sm mb-1">{{ $fifthPoint }}</p>
+                        @endif
                         <p class="text-sm">90-day money back guarantee.</p>
                     </div>
                 </a>
@@ -103,7 +107,9 @@
                 <div class="text-black overflow-hidden rounded-b-2xl block mx-auto group px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
                     <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
                     <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
-                    <p class="text-sm mb-1">{{ $fifthPoint }}</p>
+                    @if(!empty($fifthPoint))
+                        <p class="text-sm mb-1">{{ $fifthPoint }}</p>
+                    @endif
                     <p class="text-sm mb-2">90-day money back guarantee.</p>
                     <a class="cursor-pointer" x-on:click="plusMembershipSelected = true"><p class="text-sm text-{{ $theme }}">You can add {{ $songs }}+ popular songs<br> for just $40/year. <u>Click Here.</u></p></a>
                 </div>
@@ -120,7 +126,9 @@
                 <div class="text-black overflow-hidden rounded-b-2xl block mx-auto group px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
                     <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
                     <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
-                    <p class="text-sm mb-1">{{ $fifthPoint }}</p>
+                    @if(!empty($fifthPoint))
+                        <p class="text-sm mb-1">{{ $fifthPoint }}</p>
+                    @endif
                     <p class="text-sm mb-2">90-day money back guarantee.</p>
                     <a class="cursor-pointer" x-on:click="plusMembershipSelected = true"><p class="text-sm text-{{ $theme }}">You can add {{ $songs }}+ popular songs<br> for just $40/year. <u>Click Here.</u></p></a>
                 </div>

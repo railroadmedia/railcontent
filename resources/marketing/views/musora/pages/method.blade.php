@@ -1257,68 +1257,30 @@
     </section>
 
     @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://dmmior4id2ysr.cloudfront.net/logos/guarantee+1.png',
-        'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
-        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
+        'badge' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/guarantee-musora.png',
+        'header' => '<strong>Happy student guarantee.</strong><br>7-days free + <strong>90-days to fall in love.</strong>',
+        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with a <strong>7-day trial PLUS our 90-day guarantee</strong> to make sure you’re seeing results and enjoying a fresh, positive start to your musical journey.',
     ])
-
     @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
-            "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
-            "songs" => "5000",
-            "firstPoint" => "The world’s best drum lessons.",
-            "thirdPoint" => "Unlimited personal support.",
-            "fifthPoint" => "Lesson access for piano, guitar, and singing.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
-        ])
+        "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
+        "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
+        "songs" => "5000",
+        "firstPoint" => "Piano, Guitar, Drums, Singing.",
+        "thirdPoint" => "Unlimited personal support",
+        "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
+        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
+        "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
+        "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+    ])
 
 
     @include('musora.sales.components.app-section', [
-        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices.png',
-        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone&ppid=d63c2cf3-274f-4441-8444-a5f547b1b4b6',
-        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp&listing=drumeo_previews',
+        'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/devices2.png',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
     ])
 
-    @php
-        $faqs = [
-            [
-            "title" => "What is Drumeo?",
-            "desc" => 'Drumeo is an online platform that offers an organized drum curriculum, artist courses on popular topics, 5000+ songs transcribed note-for-note, and a supportive global community of students and teachers. ',
-            ],
-            [
-            "title" => "Is Drumeo good for beginners?",
-            "desc" => 'Yes! You’ll always know what to practice with step-by-step video lessons – plus have fun applying your new skills to your favorite songs, sorted by skill level. And if you ever need help, you’ll have unlimited personal support through live Q&A sessions, student reviews, and a helpful community. ',
-            ],
-            [
-            "title" => "Does Drumeo have anything for advanced drummers?",
-            "desc" => 'Drumeo is the perfect companion for advanced drummers, giving you access to artist courses so you can gain insights and inspiration from the legends – with 200+ artist courses on a variety of topics. Plus, you’ll get note-for-note transcriptions for thousands of songs and practical playback tools, so you can take on any new challenge with confidence. ',
-            ],
-            [
-            "title" => "Am I too old to learn the drums?",
-            "desc" => 'You’re never too old to learn the drums. Drumeo has a community of students of all ages, from all around the world. Whether you’re 40, 50, 60, 70, or beyond – you’ll connect with drummers just like you who are learning and applying their skills to music. ',
-            ],
-            [
-            "title" => "Do I need to be tech-savvy to learn through your app?",
-            "desc" => 'Not at all! Technology is here to make your life easier, and Drumeo is designed to help you find lessons and songs easily. And if you ever get stuck, you can contact our Student Experience team by phone or email for prompt and helpful support. ',
-            ],
-        ]
-    @endphp
-
-    <section class="py-12 md:py-20">
-        <div class="container mx-auto max-w-5xl px-6">
-            <h2 class="font-extrabold mb-10 text-center">Frequently Asked Questions</h2>
-            @foreach($faqs as $faq)
-                @include('_partials.components.question-dropdown', [
-                    'num' => '?',
-                    "title" => $faq['title'],
-                    "desc" => $faq['desc'],
-                ])
-            @endforeach
-        </div>
-    </section>
+    @include('musora._partials._faq')
 
 @endsection
 

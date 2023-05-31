@@ -17,7 +17,7 @@
             <div class="mb-6">
                 <img
                     class="h-5 md:h-7 mr-2"
-                    src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg"
+                    src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png"
                     alt="musora logo"
                     fetchpriority="high"
                 />
