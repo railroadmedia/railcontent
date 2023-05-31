@@ -39,7 +39,7 @@ Route::domain('{musoraDomain}')
 
                 Route::get('/{brand}/create-playlist-window', [HomePageController::class, 'home'])
                     ->whereIn('brand', all_brands())
-                    ->name('platform.home');
+                    ->name('platform.home.create-playlist-window');
 
                 Route::get(
                     '/redirect30day',
