@@ -178,7 +178,7 @@
             <h3 class="mb-5 sm:mb-10"><strong>Join our team:</strong></h3>
             <div class="max-w-4xl mx-auto mb-14 sm:mb-20">
                 <div class="w-full relative" style="height:700px;">
-                    <iframe style="filter: invert(1) hue-rotate(200deg);" class="absolute w-full h-full rounded-lg" src="https://musoramediainc.bamboohr.com/jobs/" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
+                    <iframe style="filter: invert(1) hue-rotate(200deg);" class="absolute w-full h-full rounded-lg" src="https://musoramediainc.bamboohr.com/careers" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
                 </div>
             </div>
 
