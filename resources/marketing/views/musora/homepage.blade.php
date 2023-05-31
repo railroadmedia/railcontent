@@ -158,6 +158,10 @@
         -webkit-text-fill-color: #0c1524 !important;
     }
 
+    .text-musora-gold {
+        color: #FFAE00;
+    }
+
     .bg-musora {
         background:#0c1524 !important;
     }
@@ -824,7 +828,7 @@
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <i class="fad {!! $songItem['fa-icon'] !!} text-4xl text-musora-black"></i>
+                                    <i class="fad {!! $songItem['fa-icon'] !!} text-5xl text-musora-gold"></i>
 {{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
