@@ -386,6 +386,8 @@ return [
     'singeo_membership_product_skus' => [
         'singeo-annual-recurring-30-day-trial-membership',
         'singeo-monthly-recurring-30-day-trial-membership',
+        'singeo-monthly-recurring-7-day-trial-membership',
+        'singeo-annual-recurring-7-day-trial-membership',
         'singeo-lifetime-membership-access',
         'singeo-1-year-membership-access',
         'singeo-annual-recurring-membership',

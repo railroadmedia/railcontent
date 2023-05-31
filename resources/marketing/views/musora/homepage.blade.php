@@ -11,7 +11,6 @@
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
 
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 <style>
     .join {
@@ -288,8 +287,12 @@
 
 @section('body-data')
     x-data ='{
-    soundslice : false,
-    trailer : false,
+        brand: "drumeo",
+        drumeoSoundslice: false,
+        pianoteSoundslice: false,
+        guitareoSoundslice: false,
+        singeoSoundslice: false,
+        trailer: false,
     }'
 @endsection
 
@@ -298,7 +301,7 @@
         <div class="container max-w-6xl mx-auto relative z-20">
             <h1 class="relative w-auto inline-block text-4xl sm:text-5xl lg:text-6xl">
                 <strong>Musicians<br class="inline sm:hidden"> start here.</strong>
-                <img class="w-72 lg:w-96 absolute -bottom-1 -right-6 px-7" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png">
+                <img class="w-72 lg:w-96 absolute -bottom-1 -right-6 px-7" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png" alt="underline" fetchpriority="high">
             </h1>
             <h6 class="leading-relaxed mt-6 mb-7">Learn your favorite instruments with step-by-step lessons, thousands<br>
                 of songs, and unlimited personal support.</h6>
@@ -314,23 +317,22 @@
                 <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by 70,145 active students.</em></p>
             </div>
         </div>
-        <img class="absolute z-10 h-12 sm:h-14 lg:h-20" style="top:43%;left: 2%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-04.png">
-        <img class="absolute z-10 h-24 sm:h-28 lg:h-36" style="top:8%;left: 6%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-05.png">
-        <img class="absolute z-10 h-40 sm:h-44 lg:h-52" style="top:62%;left: 7%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-07.png">
-        <img class="absolute z-10 h-10 sm:h-12 lg:h-16" style="top:9%;left: 29%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-01.png">
-        <img class="absolute z-10 h-10 sm:h-12 lg:h-16" style="top:4%;left: 56%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-03.png">
-        <img class="absolute z-10 h-28 sm:h-32 lg:h-40" style="top:65%;left: 74%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-08.png">
-        <img class="absolute z-10 h-36 sm:h-40 lg:h-48" style="top:9%;left: 78%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-06.png">
-        <img class="absolute z-10 h-12 sm:h-14 lg:h-20" style="top:66%;left: 97%;" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-02.png">
+        <img class="absolute z-10 h-12 sm:h-14 lg:h-20" style="top:43%;left: 2%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-04.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-24 sm:h-28 lg:h-36" style="top:8%;left: 6%;" src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-05.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-40 sm:h-44 lg:h-52" style="top:62%;left: 7%;" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-07.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-10 sm:h-12 lg:h-16" style="top:9%;left: 29%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-01.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-10 sm:h-12 lg:h-16" style="top:4%;left: 56%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-03.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-28 sm:h-32 lg:h-40" style="top:65%;left: 74%;" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-08.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-36 sm:h-40 lg:h-48" style="top:9%;left: 78%;" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-06.png" alt="header circle image" fetchpriority="high">
+        <img class="absolute z-10 h-12 sm:h-14 lg:h-20" style="top:66%;left: 97%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header-02.png" alt="header circle image" fetchpriority="high">
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
             <h2 class="text-center sm:mb-10"><strong>The easier way to<br class="inline sm:hidden"> learn <u>any instrument</u>.</strong></h2>
-            <img class="my-5 h-64 inline sm:hidden transition-opacity opacity-0"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
+            <img class="my-5 h-64 inline sm:hidden"
                 src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage.png"
                 alt="learn playing image"
+                fetchpriority="high"
             >
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center">
                 <p class="leading-normal max-w-xl pr-7 mx-0">Learning an instrument can be frustrating. So we’ve made the most helpful music lessons on the planet –<br><br>Guided video lessons from great teachers, interactive exercises that transform practice into play, and <strong>thousands of popular songs</strong> for every style, era, and skill level. PLUS unlimited personal support from real teachers.<br><br>You’ll play more. You’ll fall in love with the process. And we’re so confident you’ll love your new skills that you’ll get a 7-day free trial PLUS a 90-day guarantee (just to make sure!).</p>
@@ -629,7 +631,7 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #0c1524 calc(50% + 1px));"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background:#0c1524;">
         <div class="container max-w-4xl mx-auto">
-            <img class="h-20" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/just-press-play-title.png" alt="collage intro mobile">
+            <img class="h-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/just-press-play-title.png" alt="collage intro mobile" loading="lazy" onload="this.classList.remove('opacity-0')">
             <p class="text-center mt-5 mb-16 sm:mt-5 sm:mb-20">Musora is loaded with practice tools and guided workouts
                 <br class="hidden sm:inline"> to help you learn music by actually playing.</p>
 
@@ -664,12 +666,16 @@
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
                             </div>
-                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
+                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9">
+                                <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="workout {{ $key+1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                            </div>
                             <div class="dot absolute bg-white top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px;height:20px"></div>
                         </div>
                     @else
                         <div class="relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if($key !== 2) mb-16 md:mb-28 @endif">
-                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}"></div>
+                            <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9">
+                                <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="workout {{ $key+1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                            </div>
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h4 class="mb-2 md:mb-5 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h4>
                                 <p>{{ $getting['desc'] }}</p>
@@ -681,9 +687,11 @@
                 <div class="full-line absolute bg-white top-0 z-0 transform -translate-x-1/2" style="width: 2px;"></div>
             </div>
             <div class="text-left sm:text-center mb-5">
-                <img class="h-24 mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=190,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guarantee-musora-line.png" alt="bonus icon">
+                <img class="h-24 mb-4 transition-opacity opacity-0"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=190,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guarantee-musora-line.png" alt="bonus icon">
                 <h5><strong>* BETTER PRACTICE GUARANTEE *</strong></h5>
-                <p class="max-w-sm leading-normal mt-3">You’ll get 7 days free PLUS a 90-day guarantee<br> to make sure you love your improvements!</p>
+                <p class="max-w-sm mx-auto leading-normal mt-3">You’ll get 7 days free PLUS a 90-day guarantee<br> to make sure you love your improvements!</p>
             </div>
             <a class="sm:mx-1 w-full sm:w-64 join white smaller @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
@@ -743,9 +751,26 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
             <h2><strong>Play <u>1000+</u> popular songs.</strong></h2>
-            <p class="leading-tight mt-2 sm:mt-3">You’ll have <strong>all the tools you need</strong> to play the songs you love. <strong class="cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo &raquo;</u></strong></p>
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto">
-                <div style="padding-bottom:62.4%;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png)" class="mt-4 sm:mt-6 lg:my-6 bg-cover bg-center" x-on:click="soundslice = true;" ></div>
+            <p class="leading-tight mt-2 sm:mt-3">You’ll have <strong>all the tools you need</strong> to play the songs you love. <strong><u>Try the demo</u></strong></p>
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'drumeo'">
+                <div style="padding-bottom:62.4%;" class="mt-4 sm:mt-6 lg:my-6 relative" x-on:click="drumeoSoundslice = true;" >
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png" alt="drumeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                </div>
+            </div>
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'pianote'">
+                <div style="padding-bottom:62.4%;" class="mt-4 sm:mt-6 lg:my-6 relative" x-on:click="pianoteSoundslice = true;" >
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/pianote-player.png" alt="pianote player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                </div>
+            </div>
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'guitareo'">
+                <div style="padding-bottom:62.4%" class="mt-4 sm:mt-6 lg:my-6 relative" x-on:click="guitareoSoundslice = true;" >
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guitareo-player.png" alt="guitareo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                </div>
+            </div>
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'singeo'">
+                <div style="padding-bottom:62.4%" class="mt-4 sm:mt-6 lg:my-6 relative" x-on:click="singeoSoundslice = true;" >
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/singeo-player.png" alt="singeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                </div>
             </div>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto  hidden">
                 <div style="padding-bottom:62.4%;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png)" class="mt-4 sm:mt-6 lg:my-6 bg-cover bg-center" x-on:click="soundslice = true;" ></div>
@@ -757,10 +782,34 @@
                 <div style="padding-bottom:62.4%;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png)" class="mt-4 sm:mt-6 lg:my-6 bg-cover bg-center" x-on:click="soundslice = true;" ></div>
             </div>
             <div class="">
-                <div class="inline-block border-2 rounded-full border-drumeo py-1 px-10 mx-2"><img class="h-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/drum-button-icon-color.svg"></div>
-                <div class="inline-block border-2 rounded-full border-pianote py-1 px-10 mx-2"><img class="h-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/piano-button-icon-color.svg"></div>
-                <div class="inline-block border-2 rounded-full border-guitareo py-1 px-10 mx-2"><img class="h-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/guitar-button-icon-color.svg"></div>
-                <div class="inline-block border-2 rounded-full border-singeo py-1 px-10 mx-2"><img class="h-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/mic-button-icon-color.svg"></div>
+                <div
+                    class="inline-block border-2 rounded-full py-1 px-10 mx-2 cursor-pointer border-drumeo border text-xl"
+                    :class="brand === 'drumeo' ? 'text-white bg-drumeo' : 'text-drumeo'"
+                    @click="brand = 'drumeo'"
+                >
+                    <i class="fa-regular fa-drum"></i>
+                </div>
+                <div
+                    class="inline-block border-2 rounded-full py-1 px-10 mx-2 cursor-pointer border-pianote border text-xl"
+                    :class="brand === 'pianote' ? 'text-white bg-pianote' : 'text-pianote'"
+                    @click="brand = 'pianote'"
+                >
+                    <i class="fa-regular fa-piano-keyboard"></i>
+                </div>
+                <div
+                    class="inline-block border-2 rounded-full py-1 px-10 mx-2 cursor-pointer border-guitareo border text-xl"
+                    :class="brand === 'guitareo' ? 'text-white bg-guitareo' : 'text-guitareo'"
+                    @click="brand = 'guitareo'"
+                >
+                    <i class="fa-light fa-guitar"></i>
+                </div>
+                <div
+                    class="inline-block border-2 rounded-full py-1 px-10 mx-2 cursor-pointer border-singeo border text-xl"
+                    :class="brand === 'singeo' ? 'text-white bg-singeo' : 'text-singeo'"
+                    @click="brand = 'singeo'"
+                >
+                    <i class="fa-light fa-microphone-stand"></i>
+                </div>
             </div>
             <div class="text-center w-full sm:w-auto mt-6 lg:mt-10 mx-auto">
                 <div class="flex flex-wrap">
@@ -918,10 +967,29 @@
     @include('musora._partials._faq')
 
     @include('_partials.components.video-modal',[
-        'name' => 'soundslice',
+        'name' => 'drumeoSoundslice',
         'video' => '1D6Vc',
         'soundslice' => true,
     ])
+
+    @include('_partials.components.video-modal',[
+        'name' => 'pianoteSoundslice',
+        'video' => '77f4c',
+        'soundslice' => true,
+    ])
+
+    @include('_partials.components.video-modal',[
+        'name' => 'guitareoSoundslice',
+        'video' => 'Mnmkc',
+        'soundslice' => true,
+    ])
+
+    @include('_partials.components.video-modal',[
+        'name' => 'singeoSoundslice',
+        'video' => 'ZsC4c',
+        'soundslice' => true,
+    ])
+
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '785314424',
@@ -932,7 +1000,5 @@
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
     @yield('scripts')
 @stop

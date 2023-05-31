@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Image;
@@ -56,8 +57,8 @@ class Leadgen extends Resource
             ID::make()->sortable(),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
-            Text::make('title')->required(),
-            Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required(),
+            Text::make('title')->required()->rules('required'),
+            Text::make('Meta Description', 'meta_desc')->hideFromIndex()->required()->rules('required'),
             Image::make('Meta Image', 'meta_img')
                 ->disk('nova_s3')
                 ->prunable()
@@ -156,9 +157,13 @@ class Leadgen extends Resource
                     return $value;
                 }),
             Text::make('Header Background Image', 'bg_img')->hideFromIndex()->hideFromDetail(),
+            Boolean::make('visible')->default(true),
+            DateTime::make('Start Time', 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
+            DateTime::make('End Time', 'end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             Flexible::make('Assets')
                 ->addLayout(LeadgenLessonAssetLayout::class)
-                ->preset(LeadgenLessonAssetPreset::class),
+                ->preset(LeadgenLessonAssetPreset::class)
+                ->help('PNG, JPEG, JPG, SVG, ZIP, and MP3'),
             Flexible::make('Lessons')
                 ->addLayout(LeadgenLessonLayout::class)
                 ->preset(LeadgenLessonPreset::class),
