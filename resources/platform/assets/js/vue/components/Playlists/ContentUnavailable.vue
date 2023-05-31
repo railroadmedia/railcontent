@@ -50,6 +50,8 @@ const props = defineProps({
     }
 });
 
+const emit = defineEmits(['goToNext']);
+
 const cta = computed(() => {
     return {
         lifetime: {
@@ -82,8 +84,14 @@ const dayNumber = DateTime.fromSeconds(props.releaseDate).toFormat('d');
 const yearNumber = DateTime.fromSeconds(props.releaseDate).toFormat('yy');
 
 onMounted(() => {
-    console.log(props.releaseDate)
-})
+    setTimeout(() => {
+        document.getElementById('content-unavailable-blue-bar').style.width = '100%';
+    }, 300);
+
+    setTimeout(() => {
+        emit('goToNext');
+    }, 3300);
+});
 
 </script>
 
@@ -114,9 +122,18 @@ onMounted(() => {
                 {{ cta.text }}
             </a>
         </div>
+        <div class="tw-absolute tw-w-full tw-h-[8px] tw-bottom-0">
+            <div id="content-unavailable-blue-bar" class="tw-h-full tw-bg-[#0B76DB]" style="width: 0"></div>
+        </div>
         <AddEventModal v-if="unavailableType === 'unreleased'" modal-id="addToCalendarModal"
             :subscription-calendar-id="subscriptionCalendarId"
             :theme-color="brand" toggleSubscribe="toggleSubscribe">
         </AddEventModal>
     </div>
 </template>
+
+<style>
+#content-unavailable-blue-bar {
+  transition: width 3s;
+}
+</style>

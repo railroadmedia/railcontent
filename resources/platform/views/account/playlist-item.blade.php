@@ -2,10 +2,7 @@
     //dd($playlist);
     //dd(get_defined_vars()['__data']);
     //dd(isset($playlistItem['instrumentless']));
-    $lessonTypeForCalendar = $lessonType;
-    if ($lessonType === 'course-part') {
-        $lessonTypeForCalendar = 'course';
-    }
+
     $brandParams = [
         'drumeo' => '&show_chords=0',
         'singeo' => '&show_staff_t1=0&show_staff_t2=0&show_chords=0',
@@ -82,7 +79,7 @@
         :start-second="{{ $playlistItem['start_second'] ?? 0 }}"
         :is-my-playlist="{{ $playlist['is_my_playlist'] }}"
         :end-second="{{ $playlistItem['end_second'] ?? $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
-        :subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['by-type'][$lessonTypeForCalendar] }}"
+        :subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] }}"
     >
     </playlist-playback-wrapper>
 @endsection
