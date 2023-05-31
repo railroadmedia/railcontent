@@ -34,7 +34,7 @@ class Cohort extends Resource
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
             Text::make('slug')->required()->rules('required', 'max:255'),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
-            Text::make('Cohort Title', 'cohort_title')->required()->help("For easy reference to this banner in the CMS. This info won't show on the banner."),
+            Text::make('Cohort Title', 'cohort_title')->required()->rules('required')->help("For easy reference to this banner in the CMS. This info won't show on the banner."),
 
             Heading::make('Header'),
             Image::make('Dark Mode Logo', 'dark_mode_logo')
@@ -136,7 +136,7 @@ class Cohort extends Resource
                     return $value;
                 }),
             Text::make('Header image url', 'header_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            Text::make('Trailer', 'cohort_trailer')->hideFromIndex(),
+            Text::make('Trailer', 'cohort_trailer')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
 //            Image::make('Icon 1', 'icon1_url')
 //                ->help('The icon should be 545 x 103px or a comparable aspect ratio.')
 //                ->disk('nova_s3')
@@ -324,11 +324,11 @@ class Cohort extends Resource
 
             DateTime::make(__('Enrollment Start Time'), 'enrollment_start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             DateTime::make(__('Enrollment End Time'), 'enrollment_end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
-            Text::make('Product ID', 'product_id')->hideFromIndex()->required(),
+            Text::make('Product ID', 'product_id')->hideFromIndex()->required()->rules('required'),
             DateTime::make(__('Cohort Start Time'), 'cohort_start_date')->hideFromIndex()->help("Controls whether cohort is currently active.  Cohort banners/pinned packs are a couple of functions tied to this."),
             DateTime::make(__('Cohort End Time'), 'cohort_end_date')->hideFromIndex()->help("Controls whether cohort is currently active.  Cohort banners/pinned packs are a couple of functions tied to this."),
 
-            Text::make('Course ID','content_id')->hideFromIndex()->required(),
+            Text::make('Course ID','content_id')->hideFromIndex()->required()->rules('required'),
 
             Text::make('Conversation Thread ID','conversation_thread_id')->hideFromIndex(),
         ];

@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Currency;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Fields\Heading;
 use Laravel\Nova\Fields\Hidden;
@@ -49,6 +50,10 @@ class Lesson extends Resource
             Hidden::make('product_type_id', 'product_type_id')->default(ProductType::where('name', '=', 'Lessons')->first()->id),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             Text::make('Name')->required()->sortable(),
+            Boolean::make('Sales Page Visible?','sales_page_visible')->default(true)->hideFromIndex(),
+            DateTime::make('Sales Page Start Time', 'sales_page_start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
+            DateTime::make('Sales Page End Time', 'sales_page_end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
+
             //slug field for displaying to use a tag
             Text::make('Slug', function(){
                 return '<a class="link-default" target="_blank" href="'.get_legacy_brand_base_url(strtolower($this->brand->name)).($this->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').$this->slug.'">'.$this->slug.'</a>';
@@ -83,6 +88,7 @@ class Lesson extends Resource
             Currency::make('Discounted Price', 'discounted_price')->help('If discounted price is the same as the price, no discount will show on the sales page.'),
             Boolean::make('Sold Out', 'sold_out')->default(false)->hideFromIndex(),
             Boolean::make('Is Seasonal ?', 'is_seasonal')->default(false)->hideFromIndex(),
+
             Heading::make('Shop Card'),
             Text::make('Badge Text', 'badge_text')->hideFromIndex(),
             Image::make('Shop Card Thumbnail', 'thumbnail')
@@ -128,7 +134,6 @@ class Lesson extends Resource
                 }),
             Text::make('Shop Card Logo', 'thumbnail_logo')->hideFromIndex()->hideFromDetail(),
             Text::make('Shop Card Description', 'short_desc')->hideFromIndex(),
-            Boolean::make('Visible On Shop Page','visible')->default(true)->hideFromIndex(),
             Boolean::make('Included Edge', 'included_edge')->default(false)->hideFromIndex(),
             Number::make('Display order', 'display_order')->sortable()
                 ->help('Display order should be 0 if set to invisible on shop page.')
@@ -146,6 +151,10 @@ class Lesson extends Resource
                         else $field->default(1);
                     }
                 }),
+            Boolean::make('Visible On Shop Page','shop_card_visible')->default(true)->hideFromIndex(),
+            DateTime::make('Shop Card Start Time', 'shop_card_start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
+            DateTime::make('Shop Card End Time', 'shop_card_end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
+
             Heading::make('Product page'),
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),
