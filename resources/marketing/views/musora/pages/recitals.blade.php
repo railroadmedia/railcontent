@@ -41,7 +41,7 @@
                 </div>
                 <div class="text-left md:pr-3 lg:pr-8 w-full md:w-3/5 lg:w-7/12">
                     <p class="mx-auto">
-                        What are you submitting for our annual Summer Recital? With {{ number_format(Prices::$students) }} Musora students, we’re sure to see a variety of talents shared.<br><br>
+                        What are you submitting for our annual Summer Recital? With over {{ number_format(round (Prices::$students, -3)) }} Musora students, we’re sure to see a variety of talents shared.<br><br>
                         It’s always a great way for our community - from beginners through to advanced players - to share their progress with each other and celebrate how far they’ve come together.<br><br>
                         It’s super easy to make your submission. You can choose ANY video of yourself playing your instrument.<br><br>
                         It could be a song, a beat, a riff, or a fill!<br><br>
@@ -52,10 +52,10 @@
             </div>
         </div>
     </section>
-    <section class="py-5 md:py-10 lg:py-16" style="background:linear-gradient(74.85deg, rgba(0, 201, 172, 0.1) 0%, rgba(11, 118, 219, 0.1) 32.1%, rgba(131, 0, 233, 0.1) 64.2%, rgba(246, 26, 48, 0.1) 90.64%);">
+    <section class="py-5 md:py-6 lg:py-8" style="background:linear-gradient(74.85deg, rgba(0, 201, 172, 0.1) 0%, rgba(11, 118, 219, 0.1) 32.1%, rgba(131, 0, 233, 0.1) 64.2%, rgba(246, 26, 48, 0.1) 90.64%);">
         <div class="container mx-auto max-w-3xl">
             <div id="form" class="anchor"></div>
-            <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLSe1OVOvfpYBC16bvflk_bB8rCv1GQ42DjgmyF73woI1RqnO0Q/viewform?embedded=true" height="1110" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
+            <iframe class="google-form w-full" src="https://docs.google.com/forms/d/e/1FAIpQLSdCE27g48yJ4MECweLJD5RZl5TUSid_N-2WMK6Q4G4DFEy2iA/viewform?embedded=true" height="690" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>
         </div>
     </section>
 @stop

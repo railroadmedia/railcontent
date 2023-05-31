@@ -178,7 +178,7 @@
             <h3 class="mb-5 sm:mb-10"><strong>Join our team:</strong></h3>
             <div class="max-w-4xl mx-auto mb-14 sm:mb-20">
                 <div class="w-full relative" style="height:700px;">
-                    <iframe style="filter: invert(1) hue-rotate(200deg);" class="absolute w-full h-full rounded-lg" src="https://musoramediainc.bamboohr.com/jobs/" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
+                    <iframe style="filter: invert(1) hue-rotate(200deg);" class="absolute w-full h-full rounded-lg" src="https://musoramediainc.bamboohr.com/careers/" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
                 </div>
             </div>
 
@@ -188,7 +188,7 @@
                 right time, or there’s not an opening for what you do best -- just click the <br class="hidden md:inline">
                 link below to join our talent pool for future opportunities.
             </p>
-            <a class="join gradient-outline smaller rounded-full relative bg-musora-black py-2 px-5 md:py-3 md:px-7 hover:bg-musora border-musora" target="_blank" href="https://musoramediainc.bamboohr.com/jobs/view.php?id=58">JOIN TALENT POOL <i class="fal fa-smile-plus"></i></a>
+            <a class="join gradient-outline smaller rounded-full relative bg-musora-black py-2 px-5 md:py-3 md:px-7 hover:bg-musora border-musora" target="_blank" href="https://musoramediainc.bamboohr.com/careers/view.php?id=58">JOIN TALENT POOL <i class="fal fa-smile-plus"></i></a>
         </div>
     </section>
     <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-5 relative">
