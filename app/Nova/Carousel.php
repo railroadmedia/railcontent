@@ -239,17 +239,8 @@ class Carousel extends Resource
             Text::make('Secondary Button Text', 'secondary_cta_text')->hideFromIndex(),
             Text::make('Secondary Button URL', 'secondary_cta_url')->hideFromIndex(),
             Text::make('Video Source', 'video_src')->hideFromIndex()
-                ->hide()
-                ->hideFromDetail(function (NovaRequest $request, $resource) {
-                    return !$this->is_featured;
-                })
-                ->help('Automatically replaces the second button URL with the pop-up video player. Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1. In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted".')
-                ->dependsOn(
-                    ['is_featured'],
-                    function (Text $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->is_featured) $field->show();
-                    }
-                ),
+                ->hideFromDetail()
+                ->help('Automatically replaces the second button URL with the pop-up video player. Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1. In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted".'),
             //duplicated fields for displaying index page purpose
             Number::make('Display Order', 'display_order')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating(),
             Boolean::make('visible')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating()->sortable(),
