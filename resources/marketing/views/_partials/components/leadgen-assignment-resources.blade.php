@@ -86,7 +86,7 @@ class="assignment-row border-gray-100 border-b-2 py-4 sm:px-3 @if(!empty($defaul
 @if(!empty($soundslice))
     @include('_partials.components.video-modal',[
         'name' => 'soundsliceModal'.$num,
-        'video' => $soundslice,
+        'video' => str_contains($soundslice, 'https') ? $soundslice : 'https://www.soundslice.com/slices/'.$soundslice.'/embed/',
         'styles' => 'pb-[66vh] bg-white',
         'soundslice' => null
     ])
