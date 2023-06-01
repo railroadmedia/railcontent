@@ -134,6 +134,10 @@
         }
     }
 
+    const duplicatePlaylist = () => {
+        window.openplaylistmodal({ modalType: 'duplicate', data: props.playlist });
+    };
+
     //---------Lifecycle Methods---------//
 
     onBeforeMount(() => {
@@ -249,7 +253,7 @@
                     <span class="tw-uppercase tw-font-bebas-neue">{{ state.isLiked ? 'Liked' : 'Like'}}</span>
                 </button>
                 <!--More-->
-                <button class="tw-relative  tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]"
+                <button v-if="playlist.is_my_playlist" class="tw-relative  tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]"
                         :class="props.isListView ? 'md:tw-rotate-90' : ''"
                         title="Playlist Options"
                         @click.prevent="dropdownTriggerHandler($event)"
@@ -279,6 +283,15 @@
                         />
                     </div>
                     <span class="tw-uppercase tw-font-bebas-neue">More</span>
+                </button>
+                <!--Like-->
+                <button v-else class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px] tw-box-content"
+                        @click.prevent="duplicatePlaylist"
+                >
+                    <musora-icon icon-name="copy-clipboard" class="tw-mb-1" />
+                    <span class="tw-uppercase tw-whitespace-nowrap tw-font-bebas-neue ">
+                        Copy To My Library
+                    </span>
                 </button>
             </div>
         </template>
