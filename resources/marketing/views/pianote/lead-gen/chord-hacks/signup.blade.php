@@ -520,10 +520,10 @@
             <div class="max-w-lg mx-auto text-center sm:text-left w-full md:w-1/2 sm:pl-5">
                 <img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/logo.svg" alt="logo">
                 <h2 class="pt-4 md:pt-5 leading-7 md:leading-9 mb-6">
-                    <strong>5 days of piano lessons</strong> to show you how easy and fun learning the piano can be.
+                    <strong>5 play-along lessons</strong> to show you how easy and fun learning the piano can be.
                 </h2>
                 <p class="text-left mb-4 sm:mb-5 mx-auto inline-block sm:leading-loose">
-                    <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> FREE Lifetime Access<br>
+                    <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> FREE lifetime access<br>
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> Play-along with a REAL teacher<br>
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> No music theory knowledge required<br>
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> FREE Chord Poster download
@@ -539,7 +539,7 @@
                 </div>
             </div>
             <div class="flex justify-center md:justify-start w-full md:w-1/2 sm:order-1 md:pl-6 mt-7 md:mt-0 relative">
-                <img class="max-w-2xl md:max-w-4xl lg:max-w-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/collage.png" alt="collage">
+                <img class="max-w-2xl md:max-w-4xl lg:max-w-6xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/collage.png" alt="collage">
             </div>
         </div>
     </section>
