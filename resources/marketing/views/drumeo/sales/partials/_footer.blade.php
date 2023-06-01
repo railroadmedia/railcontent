@@ -1,6 +1,6 @@
 <div class="cookie-notice hide">
     <div class="text-wrap">
-        <p>We use cookies for traffic data and advertising. <a href="/cookie">learn more</a></p>
+        <p>We use cookies for traffic data and advertising. <a href="/cookie">Cookie Policy &raquo;</a></p>
         <div class="text-center">
             <div id="accept-cookies">OKAY GOT IT</div>
 
