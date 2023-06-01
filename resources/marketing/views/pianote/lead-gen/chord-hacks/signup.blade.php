@@ -55,8 +55,8 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video" data-open="trailer" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/header-image-m.png);">
-{{--                        <img class="absolute inset-0" src="" alt="header image" fetchpriority="high" />--}}
+                    <div class="relative bg-contain bg-top cursor-hover autoplay-video" style="padding-bottom: 102%;" data-open="trailer">
+                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/header-image.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
