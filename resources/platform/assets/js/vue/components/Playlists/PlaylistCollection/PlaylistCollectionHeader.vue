@@ -62,7 +62,7 @@
 </script>
 <template>
     <platform-header
-        title="Playlists"
+        title="Playlist Library"
         titleIcon="playlist"
         backgroundImage="https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg"
         class="tw-min-h-[180px]"
