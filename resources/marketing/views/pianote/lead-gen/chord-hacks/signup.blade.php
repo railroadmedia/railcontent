@@ -7,303 +7,12 @@
 
 @section('head')
     @parent
-    <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
     <style>
-
-        [placeholder]:focus::-webkit-input-placeholder {
-            color:transparent
-        }
-
-        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
-            color:#777
-        }
-
-        form {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        @media (min-width: 768px) {
-            form {
-                margin: 0 auto 10px;
-            }
-        }
-
-        form input, form button {
-            font: 400 18px/50px 'Open Sans', sans-serif;
-            height: 50px;
-            color: #999;
-            border-radius: 100px;
-            text-align: left;
-            padding: 7px 20px;
-            margin: 0 auto 15px;
-        }
-        @media (min-width: 768px) {
-            form input, form button {
-                font-size: 22px;
-                height: 65px;
-                line-height: 65px;
-            }
-        }
-        form input[type="submit"], form button[type="submit"], form input button, form button button {
-            font-family: 'Roboto Condensed', sans-serif;
-            font-weight: 700;
-            color: #fff;
-            background: #F61A30;
-            text-transform: uppercase;
-            margin: 0 auto 15px;
-            display: block;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-            text-align: center;
-            padding: 0;
-        }
-        form input[type="submit"]:hover, form button[type="submit"]:hover, form input button:hover, form button button:hover {
-            background:#ff5454;
-        }
         header .disclaimer {
             display: none;
             margin: 0 auto;
             opacity: 0.9;
             max-width: 500px;
-        }
-
-        .thank-you-box {
-            width:100%;
-            max-width:960px;
-            border-radius:5px;
-            height:auto;
-            max-height:0;
-            visibility:hidden;
-            opacity:0;
-            transition:all .4s ease-in;
-            display:block;
-            margin:0 auto;
-            background:#FFF;
-            text-align:center;
-            overflow:hidden;
-            color:#000
-        }
-
-        .thank-you-box.active {
-            max-height:1000px;
-            visibility:visible;
-            opacity:1;
-            padding:15px
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box.active {
-                padding:20px
-            }
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box.active {
-                padding:30px
-            }
-        }
-
-        .thank-you-box p {
-            font:400 15px/1.4em "Open Sans", sans-serif;
-            margin:0 auto
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box p {
-                font-size:19px
-            }
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box p {
-                font-size:23px
-            }
-        }
-
-        .thank-you-box p em {
-            line-height:1.4em;
-            max-width:550px;
-            display:inline-block;
-            font-size:12px
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box p em {
-                font-size:14px
-            }
-        }
-
-        .thank-you-box h2 {
-            font:700 30px/1em "Roboto Condensed", sans-serif;
-            margin:15px auto;
-            text-transform:uppercase;
-            color:#F61A30
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box h2 {
-                font-size:37px;
-                margin:20px auto
-            }
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box h2 {
-                font-size:44px
-            }
-        }
-
-        .thank-you-box .social-media a {
-            background:#000;
-            color:#fff;
-            border-radius:50%;
-            display:inline-block;
-            text-align:center;
-            margin:20px 3px 0;
-            width:50px;
-            height:50px;
-            line-height:50px;
-            font-size:26px
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box .social-media a {
-                width:70px;
-                height:70px;
-                line-height:70px;
-                font-size:35px;
-                margin:25px 10px 0
-            }
-        }
-
-    </style>
-    <style>
-        h1, h2, h3, h4, h5, h6, li, p {
-            line-height:1em;
-            margin:0 auto
-        }
-
-        h1 sup, h2 sup, h3 sup, h4 sup, h5 sup, h6 sup, li sup, p sup {
-            font-size:50%;
-            top:-.75em
-        }
-
-        h1 {
-            font-size:24px;
-            line-height:1.2em
-        }
-
-        @media (min-width:768px) {
-            h1 {
-                font-size:36px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h1 {
-                font-size:48px
-            }
-        }
-
-        h2 {
-            font-size:20px;
-            line-height:1.2em
-        }
-
-        @media (min-width:768px) {
-            h2 {
-                font-size:30px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h2 {
-                font-size:36px
-            }
-        }
-
-        h4 {
-            font-size:16px
-        }
-
-        @media (min-width:768px) {
-            h4 {
-                font-size:20px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h4 {
-                font-size:24px
-            }
-        }
-
-        h5 {
-            font-size:15px
-        }
-
-        @media (min-width:768px) {
-            h5 {
-                font-size:18px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h5 {
-                font-size:20px
-            }
-        }
-
-        h6 {
-            font-size:15px
-        }
-
-        @media (min-width:768px) {
-            h6 {
-                font-size:16px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h6 {
-                font-size:18px
-            }
-        }
-
-        li, p {
-            font-size:15px;
-            line-height:1.6em
-        }
-
-        @media (min-width:1024px) {
-            li, p {
-                font-size:16px
-            }
-        }
-
-        h3 {
-            font-size:21px;
-        }
-
-        input {
-            color:#8D8D8D !important;
-            font-size:16px !important;
-        }
-
-        @media (min-width:768px) {
-
-            h3 {
-                font-size:24px;
-            }
-        }
-
-        @media (min-width:1024px) {
-            h3 {
-                font-size:30px;
-            }
         }
     </style>
 @endsection
@@ -450,7 +159,6 @@
             </div>
         </div>
     </section>
-
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-5xl mx-auto">
             <img class="h-56 inline sm:hidden transition-all opacity-0 mb-5" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
@@ -543,10 +251,6 @@
             </div>
         </div>
     </section>
-
-
-
-
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "demoVid",
         "video" => '//player.vimeo.com/video/830711083?h=701c01c83f&autoplay=1',
@@ -561,7 +265,6 @@
 
 @section('scripts')
     @parent
-
     <script>
         $(document).ready(function () {
             $(document).foundation();
