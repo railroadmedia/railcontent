@@ -33,7 +33,7 @@ class LeadgenLessonAssetLayout extends Layout
             // Define the layout's fields.
             Text::make('title')->required(),
             Text::make('Source', 'src'),
-            Text::make('Sound Slice', 'soundslice'),
+            Text::make('Sound Slice ID', 'soundslice'),
         ];
     }
 
