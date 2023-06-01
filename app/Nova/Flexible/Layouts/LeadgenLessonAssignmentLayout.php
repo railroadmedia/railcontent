@@ -33,7 +33,7 @@ class LeadgenLessonAssignmentLayout extends Layout
             Text::make('title')->required(),
             Text::make('Sub Title','subtitle'),
             Text::make('Source', 'src'),
-            Text::make('Sound Slice', 'soundslice'),
+            Text::make('Sound Slice ID', 'soundslice'),
         ];
     }
 
