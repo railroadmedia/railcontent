@@ -270,8 +270,8 @@ const unavailableType = computed(() => {
 });
 
 onBeforeMount(() => {
-    console.log(activeItem)
-    console.log('released', props.released, 'need access', activeItem.need_access, 'no access message', activeItem.need_access_message)
+    //console.log(activeItem)
+    //console.log('released', props.released, 'need access', activeItem.need_access, 'no access message', activeItem.need_access_message)
 });
 </script>
 

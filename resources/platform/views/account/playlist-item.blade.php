@@ -79,7 +79,7 @@
         :start-second="{{ $playlistItem['start_second'] ?? 0 }}"
         :is-my-playlist="{{ $playlist['is_my_playlist'] }}"
         :end-second="{{ $playlistItem['end_second'] ?? $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
-        :subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] }}"
+        subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] }}"
     >
     </playlist-playback-wrapper>
 @endsection
