@@ -44,7 +44,7 @@
     //------------Reactive Data------------//
     const state = reactive({
         name: '',
-        category: 'My List',
+        category: 'General',
         thumb: null,
         description: '',
     })
@@ -83,11 +83,7 @@
         {
             value: 'Songs',
             label: 'Songs'
-        },
-        {
-            value: 'My List',
-            label: 'My-List'
-        },
+        }
     ];
 
     //-------------Methods-------------//
@@ -252,7 +248,7 @@
         state.thumb = props.playlist.thumbnail_url;
         state.name = props.mode === 'duplicate' ? props.playlist.name + ' (Duplicate)' : props.playlist.name;
         state.description = props.playlist.description;
-        state.category = props.playlist.category || 'My List';
+        state.category = props.playlist.category || 'General';
 
     })
     onBeforeUnmount(() => {

@@ -51,7 +51,7 @@
                     <button v-if="soundsliceSlug"
                             title="Add To Playlist" 
                             class="tw-btn-secondary tw-btn-circle dark:tw-text-white tw-text-[#00101D]"
-                            @click.stop.prevent="addToPlaylist({ content_id: id, brand: this.brand, type: 'My List', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail })"
+                            @click.stop.prevent="addToPlaylist({ content_id: id, brand: this.brand, type: 'General', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail })"
                     >
                         <musora-icon icon-name="plus" class="tw-h-7 tw-w-7" />
                     </button>
