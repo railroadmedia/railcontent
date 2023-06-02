@@ -22,11 +22,8 @@
     @parent
     <script type="text/javascript">
         $(document).ready(function () {
-            $(document).foundation();
-
             // hide + show buy button
             var buyButton = $('.hidden-buy-slice');
-
 
             $(window).on("scroll", function () {
                 var buyDisplay = $('.three-benefits').offset().top - 60;
@@ -55,8 +52,11 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
+
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
 
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
@@ -67,7 +67,7 @@
     ])
     <header class="hero-header">
         <div class="container clearfix lg:mx-auto max-w-6xl">
-            <div class="video-wrap autoplay-video" data-open="trailer">
+            <div class="video-wrap autoplay-video" @click="trailer = true;">
                 <div class="play-icon"><i class="fas fa-play"></i></div>
                 <img class="logo" src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/logo-white.png" alt="Drum Technique Made Easy Logo" fetchpriority="high">
             </div>
@@ -87,15 +87,20 @@
                 <br>
                 <strong class="text-yellow">** 90-Day Guarantee **</strong>
             </p>
-            <div class="reveal large trailer" id="trailer" data-reveal data-reset-on-close="false">
-                <div class="flex-video widescreen vimeo">
-                    <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400749789?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-                </div>
-                <br>
-                <a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>
-            </div>
         </div>
     </header>
+
+    @component('_partials.components.video-modal',[
+                'name' => 'trailer',
+                'video' => '400749789',
+                'vimeo' => true,
+            ])
+        @slot('button')
+            <div class="text-center py-4">
+                <a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>
+            </div>
+        @endslot
+    @endcomponent
 
     <section class="three-benefits">
         <div class="container clearfix lg:mx-auto max-w-6xl">

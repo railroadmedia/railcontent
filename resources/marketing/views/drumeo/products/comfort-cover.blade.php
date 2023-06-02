@@ -23,8 +23,6 @@
     @parent
     <script>
         $(document).ready(function () {
-            $(document).foundation();
-
             // featured post header slider
             var $thumbNav = $('.slide-button'),
                 $imageSwap = $('.swapper-container .large-image');
@@ -159,6 +157,10 @@
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
 
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
+
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
         "name" => "Comfort Cover",
@@ -176,7 +178,7 @@
                 WATCH<br> THE DEMO
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
-            <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
+            <i @click="trailer = true;" class="fas fa-play play-button autoplay-video"></i>
             <br>
             <h1><strong>Upgrade your drum<br class="hide-for-medium"> throne in seconds.</strong></h1>
             {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
@@ -195,16 +197,19 @@
                 @endif
             </p>
         </div>
-        <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/510872818?autoplay=1"
-                    frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-            {{--            @if($products['comfort-cover']->getStockAvailability() > 0)--}}
-            <a href="/ecommerce/add-to-cart?products[comfort-cover]=1" class="join blue">Get Comfy &raquo;</a>
-            {{--@endif--}}
-        </div>
     </header>
+
+    @component('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '510872818',
+        'vimeo' => true,
+    ])
+        @slot('button')
+            <div class="text-center bg-white rounded-b-xl py-4">
+                <a href="/ecommerce/add-to-cart?products[comfort-cover]=1" class="join blue">Get Comfy »</a>
+            </div>
+        @endslot
+    @endcomponent
 
     <section class="content-section coaches-info text-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/spread-background.jpg">
         <div class="container mx-auto relative z-10">
@@ -397,4 +402,18 @@
             </div>
         </div>
     </section>
+
+    @php
+        if(!empty($vimeo)){
+            $video = '//player.vimeo.com/video/'.$video.'?autoplay=1';
+        }
+        elseif(!empty($soundslice)){
+            if(!empty($score)){
+                $video = 'https://www.soundslice.com/scores/'.$video.'/embed/?api=1&scroll_type=2&branding=0&top_controls=1&show_chords=0&layout=3&recording_idx=1&enable_metronome=0';
+            }
+            else{
+                $video = 'https://www.soundslice.com/slices/'.$video.'/embed/?api=1&scroll_type=2&branding=0&top_controls=1&show_chords=0&layout=3&recording_idx=1&enable_metronome=0';
+            }
+        }
+    @endphp
 @stop

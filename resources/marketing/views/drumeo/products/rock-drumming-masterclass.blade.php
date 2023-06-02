@@ -80,6 +80,12 @@
         </div>
     </header>
 
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '400735162',
+        'vimeo' => true,
+    ])
+
     <div id="lessons" class="anchor"></div>
     <section class="lesson-breakdown">
         <div class="row">
@@ -690,10 +696,4 @@
             </div>
         </div>
     </section>
-
-    @include('_partials.components.video-modal',[
-        'name' => 'trailer',
-        'video' => '400735162',
-        'vimeo' => true,
-    ])
 @stop

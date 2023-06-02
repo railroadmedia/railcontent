@@ -53,6 +53,10 @@
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
 
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
+
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
         "name" => "Independence Made Easy",
@@ -69,7 +73,7 @@
                 <span>WATCH<br> PREVIEW</span>
                 <img src="https://www.musora.com/musora-cdn/image/width=180,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Arrow right" fetchpriority="high">
             </div>
-            <img data-open="trailer" class="play-button autoplay-video" src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button" fetchpriority="high">
+            <img @click="trailer = true;" class="play-button autoplay-video" src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button" fetchpriority="high">
 
             {{--<img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" aria-controls="previewModal" aria-haspopup="true" tabindex="0">--}}
             {{--<div class="columns video-container">--}}
@@ -96,14 +100,13 @@
                 </p>
             </div>
         </div>
-        <div class="reveal large trailer" id="trailer" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/401069316?autoplay=1" frameborder="0" allowfullscreen allow="autoplay" title="Trailer"></iframe>
-            </div>
-            <br>
-            <a href="/ecommerce/add-to-cart?products[independence-made-easy-pack]=1" class="join">Get Started &raquo;</a>
-        </div>
     </header>
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '401069316',
+        'vimeo' => true,
+    ])
 
     <div id="triple-benefit">
         <div class="row">

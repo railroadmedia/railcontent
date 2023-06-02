@@ -16,18 +16,11 @@
     <link href="{{ asset('/marketing/parcel/drumeo/learn-songs-faster.css') }}" rel="stylesheet">
 @stop()
 
-@section('scripts')
-    @parent
-    <script>
-        $(document).ready(function () {
-            $(document).foundation();
-        });
-    </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-@stop()
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
 
 @section('content')
-
     @include('drumeo.products.partials.promo-banner', [
         "name" => "Learn Songs Faster",
         "fullPrice" => floatval($productPrices['learn-songs-faster-pack']->price),
@@ -38,7 +31,7 @@
     <header class="header text-center">
         <div class="row">
             <img class="logo" src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/learn-songs-faster-logo.png" alt="Learn Songs Faster Logo" fetchpriority="high"><br>
-            <img data-open="previewModal" class="play-button autoplay-video" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play Button" fetchpriority="high">
+            <img @click="trailer = true;" class="play-button autoplay-video" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play Button" fetchpriority="high">
             <h1><strong>Your guide to learning MORE songs in  <br class="show-for-medium">
                     less time with Jared Falk & Dave Atkinson.</strong></h1>
             <h3 class="dense"><strong>
@@ -63,11 +56,11 @@
         </div>
     </header>
 
-    <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-        <div class="flex-video widescreen vimeo">
-            <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/422880447?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-    </div>
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '422880447',
+        'vimeo' => true,
+    ])
 
     <section class="content-section benefits text-center">
         <div class="row">

@@ -22,8 +22,6 @@
     @parent
     <script>
         $(document).ready(function () {
-            $(document).foundation();
-
             // Dropdown for FAQ section
             $('.question-dropdown').on('click', questionDropdown);
 
@@ -36,6 +34,10 @@
     </script>
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
+
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
 
 @section('content')
 
@@ -54,7 +56,7 @@
                 <span>WATCH<br> PREVIEW</span>
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Arrow right">
             </div>
-            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
+            <img @click="trailer = true;" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
             <h1>The ultimate crash course to playing <strong>more creative &<br class="show-for-medium"> more musical drum fills</strong> your audience will love!</h1>
             <a href="/ecommerce/add-to-cart?products[four-weeks-to-better-drum-fills]=1" class="join blue">Get Started &raquo;</a>
             <p>
@@ -74,12 +76,17 @@
         </div>
     </header>
 
-    <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-        <div class="flex-video widescreen vimeo">
-            <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/424843063?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-        <a href="/ecommerce/add-to-cart?products[four-weeks-to-better-drum-fills]=1" class="join blue">Get Started &raquo;</a>
-    </div>
+    @component('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '424843063',
+        'vimeo' => true,
+    ])
+        @slot('button')
+            <div class="text-center bg-white rounded-b-xl py-4">
+                <a href="/ecommerce/add-to-cart?products[four-weeks-to-better-drum-fills]=1" class="join blue">Get Started »</a>
+            </div>
+        @endslot
+    @endcomponent
 
     <section class="one-common text-center">
         <div class="row">
