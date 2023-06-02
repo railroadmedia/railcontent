@@ -128,11 +128,9 @@ const closeModal = () => {
                 <source media="(min-width:1280px)" :srcset="`${desktopImg}`">
                 <source media="(min-width:768px)" :srcset="`${tabletImg}`">
                 <img
-                    class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0 tw-z-50"
+                    class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-z-50"
                     :src="`${mobileImg}`"
                     alt="banner background image"
-                    onload="this.classList.remove('tw-opacity-0')"
-                    loading="lazy"
                 />
             </picture>
         </div>
