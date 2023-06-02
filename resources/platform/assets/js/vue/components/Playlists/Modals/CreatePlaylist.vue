@@ -49,7 +49,7 @@
         description: '',
     })
 
-    //------------Static Data------------//Practice
+    //------------Static Data------------//
 
     const sortedOptions = [
         {
@@ -57,11 +57,11 @@
             label: 'Watch-Later'
         },
         {
-            value: 'Favorites*',
+            value: 'Favorites',
             label: 'Favorites'
         },
         {
-            value: 'General*',
+            value: 'General',
             label: 'General'
         },
         {
