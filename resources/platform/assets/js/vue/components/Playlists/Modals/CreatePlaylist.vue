@@ -53,20 +53,36 @@
 
     const sortedOptions = [
         {
-            value: 'Technique',
-            label: 'Technique'
+            value: 'Watch Later',
+            label: 'Watch-Later'
         },
         {
-            value: 'Genre',
-            label: 'Genre'
+            value: 'Favorites*',
+            label: 'Favorites'
         },
         {
-            value: 'Style',
-            label: 'Style'
+            value: 'General*',
+            label: 'General'
         },
         {
-            value: 'Instrument',
-            label: 'Instrument'
+            value: 'Practice',
+            label: 'Practice'
+        },
+        {
+            value: 'Learning',
+            label: 'Learning'
+        },
+        {
+            value: 'Entertainment',
+            label: 'Entertainment'
+        },
+        {
+            value: 'Warm-Up',
+            label: 'Warm-Up'
+        },
+        {
+            value: 'Songs',
+            label: 'Songs'
         },
         {
             value: 'My List',
