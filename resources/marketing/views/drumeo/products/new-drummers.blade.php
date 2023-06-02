@@ -637,7 +637,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script>
         $(document).ready(function () {
-            $(document).foundation();
             $('.slick-1').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,

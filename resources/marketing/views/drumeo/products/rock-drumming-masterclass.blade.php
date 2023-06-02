@@ -23,8 +23,6 @@
 
     <script>
         $(function () {
-            $(document).foundation();
-
             // Dropdown for FAQ section
             $('.question-dropdown').on('click', questionDropdown);
 
@@ -42,6 +40,10 @@
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
 
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
+
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
         "name" => "Rock Drumming Masterclass",
@@ -51,7 +53,7 @@
     ])
     <header class="hero-header">
         <div class="row">
-            <div class="columns video-wrap autoplay-video" data-open="trailer">
+            <div class="columns video-wrap autoplay-video" @click="trailer = true;">
                 <div class="play-icon"><i class="fas fa-play"></i></div>
                 <div class="logo">
                     <p><em>Todd Sucherman's</em></p>
@@ -75,13 +77,6 @@
                 <br>
                 <strong class="text-yellow">** 90-Day Guarantee **</strong>
             </p>
-            <div class="reveal large trailer" id="trailer" data-reveal data-reset-on-close="false">
-                <div class="flex-video widescreen vimeo">
-                    <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400735162?autoplay=1" frameborder="0" allowfullscreen allow="autoplay" title="Trailer"></iframe>
-                </div>
-                <br>
-                <a href="/ecommerce/add-to-cart?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a>
-            </div>
         </div>
     </header>
 
@@ -695,4 +690,10 @@
             </div>
         </div>
     </section>
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '400735162',
+        'vimeo' => true,
+    ])
 @stop
