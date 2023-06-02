@@ -10,7 +10,8 @@
 
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
+{{--    @include('_partials.layout._tailwindcdn')--}}
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/ndsh.css') }}" rel="stylesheet">
@@ -54,6 +55,10 @@
     </style>
 @stop
 
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
+
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
@@ -68,7 +73,7 @@
     <header class="text-center text-white py-5 md:py-8 bg-top bg-no-repeat relative" style="background-color:#020d1f;background-image: url(https://www.musora.com/musora-cdn/image/width=3000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/header.jpg);">
         <div class="container mx-auto relative z-10">
             <img class="logo" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo"><br>
-            <i class="fas fa-play play-button autoplay-video mt-40 md:mt-72 mb-16 md:mb-24" data-open="trailer"></i>
+            <i class="fas fa-play play-button autoplay-video mt-40 md:mt-72 mb-16 md:mb-24" @click="trailer = true;"></i>
             <h2><strong>Crush your first 90 days<br class="inline md:hidden"> on the drums.</strong></h2>
             <h5 class="my-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
             <h4 class="text-yellow-400 mb-3 md:mb-5"><strong>ONLY
@@ -77,12 +82,6 @@
             <a class="join ndsh" href="/ecommerce/add-to-cart?products[new-drummers-start-here]=1">Start Drumming &raquo;</a>
         </div>
     </header>
-
-    <div class="reveal large" id="trailer" data-reveal data-reset-on-close="false">
-        <div class="aspect-16:9 w-full relative">
-            <iframe class="absolute w-full h-full reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/543324037?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-    </div>
 
     <section class="text-center text-white py-10 md:py-20 lg:py-24 relative overflow-hidden" style="background:#000a1e;">
         <div class="container mx-auto z-10 relative">
@@ -623,9 +622,14 @@
 
     @include("drumeo.sales.partials._footer")
 
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '543324037',
+        'vimeo' => true,
+    ])
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
