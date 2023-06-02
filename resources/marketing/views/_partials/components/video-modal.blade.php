@@ -42,6 +42,9 @@
             >
                 <iframe class="z-10 absolute w-full h-full reset-on-close" x-bind:src="{{ $name }} && '{{ $video }}'" frameborder="0" allowfullscreen allow="autoplay" title="{{ $name }}"></iframe>
             </div>
+            @if(!empty($button))
+                {!! $button !!}
+            @endif
         </div>
     </div>
 </div>
