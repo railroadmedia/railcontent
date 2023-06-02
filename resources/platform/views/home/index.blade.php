@@ -163,7 +163,7 @@
     @if(str_contains(Request::url(), 'create-playlist-window'))
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                window.openplaylistmodal({ modalType: 'create', brand: '{{ $brand }}', data: { name: '', category: 'My List', thumbnail_url: null, description: ''} });
+                window.openplaylistmodal({ modalType: 'create', brand: '{{ $brand }}', data: { name: '', category: 'General', thumbnail_url: null, description: ''} });
             })
         </script>
     @endif

@@ -31,7 +31,7 @@
             brand: props.brand,
             data: {
                 name: '',
-                category: 'My List',
+                category: 'General',
                 thumbnail_url: null,
                 description: '',
                 term: state.searchTerm,

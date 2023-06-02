@@ -56,7 +56,7 @@ const formattedUnpinnedPlaylists = computed(() => {
 });
 
 const handleCreatePlaylist = () => {
-    window.openplaylistmodal({ modalType: 'create', brand: props.brand, data: { name: '', category: 'My List', thumbnail_url: null, description: ''} });
+    window.openplaylistmodal({ modalType: 'create', brand: props.brand, data: { name: '', category: 'General', thumbnail_url: null, description: ''} });
 };
 
 const unpinPlaylist = (item, brand) => {
