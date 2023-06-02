@@ -126,9 +126,16 @@ class LeadGenController extends BaseController
         throw new NotFoundHttpException();
     }
 
-    public function chordHacks()
+    public function chordHacks(Request $request, $domain, $page = null, $lesson = null)
     {
-        return view('pianote.lead-gen.chord-hacks.signup');
+        switch($page){
+            case null:
+                return view('pianote.lead-gen.chord-hacks.signup');
+            case 'thank-you':
+                return view('pianote.lead-gen.chord-hacks.thank-you');
+        }
+
+        throw new NotFoundHttpException();
     }
 
     public function riffsAndFills()
