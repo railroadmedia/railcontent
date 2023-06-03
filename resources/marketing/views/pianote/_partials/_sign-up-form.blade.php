@@ -15,7 +15,7 @@
     @endif
 
     <div class="infusion-field w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-7/12 sm:text-left' }}">
-        <input class="w-full" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required/>
+        <input @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif class="w-full" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required/>
     </div>
     <div class="infusion-submit w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12' }}">
         @if(!empty($submitArrows))

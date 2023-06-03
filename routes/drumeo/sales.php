@@ -42,6 +42,7 @@ Route::domain('{drumeoDomain}')
 
     Route::get('/trial', [SalesController::class, 'trial']);
     Route::get('/trial2', [SalesController::class, 'trialSplit'] );
+    Route::get('/trial-beginner', [SalesController::class, 'trialBeginner'] );
     Route::get('/30-day-trial', [SalesController::class, 'homeMonth']);
     Route::get('/choose-your-trial', [SalesController::class, 'choosePlan']);
     Route::get('/choose-your-trial-month', [SalesController::class, 'choosePlanMonth']);
