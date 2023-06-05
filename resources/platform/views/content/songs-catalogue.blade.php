@@ -101,7 +101,7 @@
                 content-endpoint="{{ $endpointOverride ?? '/railcontent/content' }}" :use-theme-color="true"
                 :pre-loaded-content="{{ $listLessons }}" :is-admin="{{ json_encode(user()->isAdmin()) }}"
                 :statuses="{{ json_encode($statuses ?? ['published']) }}"
-                :include-future-scheduled-content-only = "{{ $futureScheduledContentOnly ?? true }}"
+                :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"
                 :use-url-params="true" :lock-unowned="true" :show-loading-animation="true"
                 no-results-message="There are no songs that match those filters. Please remove some filters."
                 catalogue-type="list" :infinite-scroll="true" limit="20"

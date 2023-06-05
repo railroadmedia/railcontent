@@ -161,7 +161,7 @@ const handleCreate = () => {
     emit('onCancel');
     window.openplaylistmodal({
         modalType: 'create',
-        data: { ...props.content, brand: props.brand, hasAddItemCallback: true, additionalItems: additionalItems.value },
+        data: { ...props.content, brand: props.brand, hasAddItemCallback: true, additionalItems: additionalItems.value, importAssignments: importAll.value },
     });
     window.addItemCallback = function (playlistId) {
         console.log('callback called')

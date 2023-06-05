@@ -244,6 +244,7 @@
 
     //----------Lifecycle Hooks----------//
     onBeforeMount(()=> {
+        console.log('additional items', typeof props.playlist.additionalItems, props.playlist.additionalItems)
         //Load Data
         state.thumb = props.playlist.thumbnail_url;
         state.name = props.mode === 'duplicate' ? props.playlist.name + ' (Duplicate)' : props.playlist.name;
@@ -265,7 +266,7 @@
             <span v-if="mode === 'edit'">Edit Playlist</span>
             <span v-if="mode === 'duplicate'">Duplicate Playlist</span>
         </h2>
-        <div v-if="playlist.hasAddItemCallback" class="tw-pt-[24px]">
+        <div v-if="playlist.hasAddItemCallback && playlist.importAssignments" class="tw-pt-[24px]">
             <p v-if="playlist.additionalItems > 0">
                 <strong>{{ playlist.name }}</strong> with <strong>{{ playlist.additionalItems }}</strong> assignment items will be added to your new playlist
             </p>
