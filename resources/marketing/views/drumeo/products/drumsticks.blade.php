@@ -21,7 +21,6 @@
     @parent
     <script>
         $(document).ready(function () {
-            $(document).foundation();
             $('.instructors .instructor').click(function () {
                 if($(this).hasClass('active')) {
                     $('.instructors .instructor').removeClass('active');
@@ -35,6 +34,10 @@
     </script>
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
+
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
 
 @section('content')
 
@@ -56,7 +59,7 @@
                 Challenge
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
-            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
+            <img @click="trailer = true;" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
             <br>
             <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
             {{--<a class="join sold-out">Sold Out</a>--}}
@@ -70,13 +73,18 @@
                 @endif
             </p>
         </div>
-        <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/436834726?autoplay=1"
-                        frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-            <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
-        </div>
+
+        @component('_partials.components.video-modal',[
+            'name' => 'trailer',
+            'video' => '436834726',
+            'vimeo' => true,
+        ])
+            @slot('button')
+                <div class="text-center bg-white rounded-b-xl py-4">
+                    <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
+                </div>
+            @endslot
+        @endcomponent
     </header>
 
 

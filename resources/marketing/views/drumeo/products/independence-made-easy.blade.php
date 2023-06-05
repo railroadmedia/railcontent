@@ -24,8 +24,6 @@
     @parent
     <script type="text/javascript">
         $(document).ready(function () {
-            $(document).foundation();
-
             // var stickyBar = $('.promo-banner');
             // $(window).scroll(function () {
             //     var orderSection = $('.final').offset().top;

@@ -39,16 +39,6 @@
     </style>
 @stop()
 
-@section('scripts')
-    @parent
-    <script>
-        $(document).ready(function () {
-            $(document).foundation();
-        });
-    </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-@stop()
-
 @section('content')
     <header class="header text-center">
         <video poster="" src="https://dpwjbsxqtam5n.cloudfront.net/festival/2020-pack/drumeo-festival-2020-banner.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
