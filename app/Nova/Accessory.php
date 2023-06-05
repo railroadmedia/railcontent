@@ -137,6 +137,7 @@ class Accessory extends Resource
             Text::make('Header Text', 'header_text')->hideFromIndex(),
             Text::make('Subheader Text', 'subheader_text')->hideFromIndex(),
             Text::make('Special Text', 'special_text')->hideFromIndex(),
+            Text::make('Video Link', 'video_src')->hideFromIndex(),
             Flexible::make('Slide Images', 'images')
                 ->addLayout(ImageLayout::class)
                 ->preset(ImagePreset::class),
