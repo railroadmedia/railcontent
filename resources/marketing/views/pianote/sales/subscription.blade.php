@@ -226,22 +226,7 @@
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
-{{--    @if(!empty($promoVersion))--}}
-{{--        @include('musora.sales.components.promo-section', [--}}
-{{--        'promoLogo' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs.svg',--}}
-{{--           'promoLogoM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs-m.png',--}}
-{{--        'desc' => 'One membership. All instruments. 1000s of songs.',--}}
-{{--           'text' => 'This is your year.<br><br>Experience the NEW Pianote membership in 2023 and make the best investment in yourself. You’ll get guided lessons from world-class piano teachers to help you reach any goal this year.<br><br>And best of all…<br><br>You’ll have unlimited access to our brand new song library, complete with 1000 note-for-note transcriptions from our partners at Hal Leonard. Play your favorite songs the way they were written, complete with professional backing tracks so you’ll feel like a star.<br><br>And it gets better.<br><br>Because your Pianote membership now comes fully-loaded with all instruments. You can learn to sing, play guitar, or even rock out on the drums. All for no extra cost.<br><br>Join today and you’ll also get a set of Pianote professional over-ear headphones. Valued at $189, they’re yours free. Start the year off right. Click below to begin.',--}}
-{{--           'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/january/jan-launch-collage.png',--}}
-{{--           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $905',--}}
-{{--       ])--}}
-{{--    @else--}}
-        @include('musora.sales.components.learn-by-playing-section', [
-            'header' => 'Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.',
-            'desc' => 'It’s not rocket science.<br><br>If you don’t play your piano, you won’t get better. At Pianote, our mission is to get you playing more so you get better, faster (while having FUN!).<br><br>In short, you’ll learn piano <u>by playing piano</u>.<br><br>These are short, fun lessons from world-class teachers. But the real magic happens when you practice ALONG with your coaches.<br><br>You’ll play more, you’ll get better faster, and you’ll fall in love with your progress. Plus you’ll have access to a library of thousands of popular songs with sheet music and backing tracks.<br><br>Scroll down to watch the trailer, see more details, and start playing like you’ve always wanted!',
-            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/collage-evergreen.png',
-        ])
-{{--    @endif--}}
+
 
     @php
         $gridItems = [
@@ -279,7 +264,6 @@
     @endphp
 
     @include('musora.sales.components.trailer-grid-section', [
-        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314572/rendition/540p/file.mp4?loc=external&signature=b8d6bc7c80a784c2cc9473ae9e1389b3f9e005fbbce2568d7bd6b7d548a4c19e',
         'header' => 'Your piano goals<br class="inline sm:hidden"> start here.',
         'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum and direct access to real teachers. ',
     ])
@@ -471,6 +455,12 @@
         'brandName' => 'Pianote',
         'bannerDesc' => 'Powered by Musora, Pianote includes full access to our communities for drums, guitar, and voice.',
     ])
+    @include('musora.sales.components.learn-by-playing-section', [
+        'header' => 'Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.',
+        'desc' => 'With Pianote, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
+                'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314572/rendition/540p/file.mp4?loc=external&signature=b8d6bc7c80a784c2cc9473ae9e1389b3f9e005fbbce2568d7bd6b7d548a4c19e',
+
+    ])
 
 {{--    @include('pianote.sales.headphones-section')--}}
 
@@ -561,6 +551,7 @@
         @yield('final')
     @elseif(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
+            "noSelector" => true,
             "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
             "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
             "songs" => "1000",
