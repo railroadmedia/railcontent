@@ -5,7 +5,7 @@ export const initialSteps = [
     { label: 'EXPERIENCE', checked: false },
     { label: 'GENRES', checked: false },
     { label: 'TOPICS', checked: false },
-    { label: 'COACHES', checked: false }
+    //{ label: 'COACHES', checked: false }
 ];
 
 export const instrumentBrand = {
