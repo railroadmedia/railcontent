@@ -10,8 +10,11 @@
 
 @section('body-data')
     x-data="{
-        trailer: false
+        ...timer(),
+        trailer: false,
     }"
+
+    x-init="countdown()"
 @endsection
 
 @section('content')
@@ -40,15 +43,14 @@
                         </div>
                         <div class="md:tw-flex @if($hasProduct) md:tw-items-start @else md:tw-items-center @endif">
                             {{--  Buttons  --}}
-                            @if($enrollmentClosed)
-                                <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white tw-cursor-default">Enrollment Closed</span>
-                            @elseif($hasProduct)
+                            @if($hasProduct)
                                 <div class="tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-center">
                                     <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">YOU'RE ENROLLED!</span>
                                     <a href="{{$cohort['course_url']}}" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
                                 </div>
                             @else
-                                <button onclick="enroll('{{ $registerButtonUrl }}');" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
+                                <span x-show="timeLeft < 0" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white tw-cursor-default">Enrollment Closed</span>
+                                <button x-show="timeLeft > 0" onclick="enroll('{{ $registerButtonUrl }}');" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
                             @endif
                             <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start @if($hasProduct) md:tw-mt-2 @endif">
                                 <img
@@ -91,7 +93,7 @@
                         <hr class="tw-border-gray-300 tw-my-4 sm:tw-my-2 lg:tw-my-4">
                         <p class="tw-text-sm tw-px-3 lg:tw-px-5">
                             {{--  Countdown  --}}
-                             <span x-cloak x-data="timer()" x-init="countdown()">
+                             <span x-cloak>
                                  <span x-cloak x-show="timeLeft > 0">Enrollment closes in </span>
                                  <span class="tw-text-pianote">
                                      <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span> <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span> <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span> <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
@@ -204,12 +206,11 @@
                 <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">{{ $cohort['bottom_description'] }}</p>
                 <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
                     {{--  Buttons  --}}
-                    @if($enrollmentClosed)
-                        <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
-                    @elseif($hasProduct)
+                    @if($hasProduct)
                         <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                     @else
-                        <button onclick="enroll('{{ $registerButtonUrl }}');" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
+                        <span x-show="timeLeft < 0" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
+                        <button x-show="timeLeft > 0" onclick="enroll('{{ $registerButtonUrl }}');" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
                         @if(!empty($cohort['conversation_url']))
                             <a href="{{$cohort['conversation_url']}}" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
                         @endif
