@@ -49,8 +49,8 @@
                                     <a href="{{$cohort['course_url']}}" class="tw-text-[#65656B] tw-underline tw-italic tw-text-sm tw-inline-block tw-mb-2 md:tw-mb-0">View the course now!</a>
                                 </div>
                             @else
-                                <span x-show="timeLeft < 0" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white tw-cursor-default">Enrollment Closed</span>
-                                <button x-show="timeLeft > 0" onclick="enroll('{{ $registerButtonUrl }}');" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
+                                <span x-cloak x-show="timeLeft < 0" class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-text-white tw-cursor-default">Enrollment Closed</span>
+                                <button x-cloak x-show="timeLeft > 0" onclick="enroll('{{ $registerButtonUrl }}');" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 md:tw-mr-2 tw-max-w-[415px] tw-mb-5 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
                             @endif
                             <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start @if($hasProduct) md:tw-mt-2 @endif">
                                 <img
@@ -209,8 +209,8 @@
                     @if($hasProduct)
                         <span class="tw-btn-primary tw-bg-[#65656B] tw-w-full md:tw-w-1/2 tw-mb-2 md:tw-mb-0 tw-cursor-default">YOU'RE ENROLLED!</span>
                     @else
-                        <span x-show="timeLeft < 0" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
-                        <button x-show="timeLeft > 0" onclick="enroll('{{ $registerButtonUrl }}');" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
+                        <span x-cloak x-show="timeLeft < 0" class="tw-btn-primary tw-bg-[#65656B] tw-w-full tw-text-white tw-cursor-default">Enrollment Closed</span>
+                        <button x-cloak x-show="timeLeft > 0" onclick="enroll('{{ $registerButtonUrl }}');" class="tw-btn-primary tw-bg-{{ $brand }} tw-w-full md:tw-w-1/2 tw-text-white tw-mb-2 md:tw-mb-0 hover:tw-bg-{{ $brand }}-600">Enroll Now</button>
                         @if(!empty($cohort['conversation_url']))
                             <a href="{{$cohort['conversation_url']}}" class="tw-btn-secondary tw-border-black tw-w-full md:tw-w-1/2 tw-text-black hover:tw-bg-black hover:tw-text-white">Join the conversation</a>
                         @endif
