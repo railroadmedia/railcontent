@@ -1,9 +1,5 @@
 {
-<<<<<<< HEAD
-    "/platform/js/app.js": "/platform/js/app.js?id=290fec241c366aa9ee01176a85004b69",
-=======
-    "/platform/js/app.js": "/platform/js/app.js?id=262b0c2b0b8c1af4bd64451c54a5e466",
->>>>>>> master
+    "/platform/js/app.js": "/platform/js/app.js?id=951bcda006a0da403b9cbe8526514370",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
@@ -37,16 +33,8 @@
     "/platform/js/playlist-breadcrumb.js": "/platform/js/playlist-breadcrumb.js?id=95e0c94659bcecbcfc02a6f1ab5ade5f",
     "/platform/js/playlist-collection-header.js": "/platform/js/playlist-collection-header.js?id=507c3e33eec7223d21a56d606eac5f22",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=26d03238e24769866d21704f9c052fd4",
-<<<<<<< HEAD
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
     "/platform/css/app.css": "/platform/css/app.css?id=29d4b3399d49bd14b98056457b268859",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=d5d4b798c717f873fdb98a38a26e59be",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=93b50d7c81941edaa3e2f5f09692d1f0",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=0fc5faf861ed4e3c9c047d9bd7411cce"
-=======
-    "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=0df4335d3aea0ff9557a18099ca5e06c",
-    "/platform/css/app.css": "/platform/css/app.css?id=cf3630b97ea3b8a5518410befbee914d",
-    "/platform/js/vendor~onboarding.js": "/platform/js/vendor~onboarding.js?id=56868ea369faf90d0978a204535ee2e6",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=1b1b8e00a0e4e418bcb2857db1f2d909",
-    "/platform/js/vendor.js": "/platform/js/vendor.js?id=05dd83ebb4f3d065d57fc2d6da2069b0"
->>>>>>> master
 }
