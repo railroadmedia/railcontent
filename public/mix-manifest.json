@@ -1,18 +1,10 @@
 {
-<<<<<<< HEAD
-    "/platform/js/app.js": "/platform/js/app.js?id=2d5d59d3c97b6a29fcc647e93af8d91a",
-=======
     "/platform/js/app.js": "/platform/js/app.js?id=951bcda006a0da403b9cbe8526514370",
->>>>>>> project-playlists-v2
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=d8dfdf5c5bceea18578ef8fab600ce44",
-<<<<<<< HEAD
-    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=a564cfc03cf606612003595c8c327d5c",
-=======
-    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=239a710325d7bb5fdd396102a045e5f5",
->>>>>>> project-playlists-v2
+    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=fd21683e3f4d1f225e3f43129b0e1d18",
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=af3d16381543901859e9e955ed9e2cd0",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=e1ffd5c9f64e7739d834a415aba059fc",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=26ba2bb391babd9dcfbc6e1e9cf80ffd",
@@ -43,10 +35,6 @@
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=26d03238e24769866d21704f9c052fd4",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
     "/platform/css/app.css": "/platform/css/app.css?id=29d4b3399d49bd14b98056457b268859",
-<<<<<<< HEAD
     "/marketing/css/app.css": "/marketing/css/app.css?id=5b006a43fef84ccb3628606dc4c7b035",
-=======
-    "/marketing/css/app.css": "/marketing/css/app.css?id=93b50d7c81941edaa3e2f5f09692d1f0",
->>>>>>> project-playlists-v2
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=0fc5faf861ed4e3c9c047d9bd7411cce"
 }
