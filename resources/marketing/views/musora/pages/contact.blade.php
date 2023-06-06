@@ -27,7 +27,7 @@
             <h3><strong>Advice and answers from the Musora team</strong></h3>
             <p class="my-4">Find an answer on your own or get in touch with your dedicated Musora Mentor.</p>
             <div x-data="{ search: '' }">
-                <input class="border-2 border-white rounded-full py-3 pl-4 text-black md:max-w-lg w-full mr-2 md:mr-0 mb-2 md:mb-0" placeholder="Search the knowledgebase" x-model="search" /> <br class="md:hidden"><a x-bind:href="`https://help.drumeo.com/search?query=` + search" class="rounded-full border-2 border-white uppercase font-bebas py-2.5 px-10 text-xl tracking-wide w-full md:w-auto inline-block">Search</a>
+                <input class="border-2 border-white rounded-full py-3 pl-4 text-black md:max-w-lg w-full mr-2 md:mr-0 mb-2 md:mb-0" placeholder="Search the knowledgebase" x-model="search" /> <br class="md:hidden"><a x-bind:href="`https://help.musora.com/search?query=` + search" class="rounded-full border-2 border-white uppercase font-bebas py-2.5 px-10 text-xl tracking-wide w-full md:w-auto inline-block">Search</a>
             </div>
         </div>
     </section>
