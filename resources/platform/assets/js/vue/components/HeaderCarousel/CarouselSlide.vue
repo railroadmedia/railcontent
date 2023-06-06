@@ -122,7 +122,7 @@ const closeModal = () => {
         ${ showSlide ? `tw-z-20 ${showSlide ? `slide-in-${animateDirection}` : ''}` : 'tw-z-0' }
       `"
   >
-    <section class="tw-w-full tw-h-full tw-rounded-[10px] tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 tw-gap-0 relative">
+    <section class="tw-w-full tw-h-full tw-rounded-[10px] relative">
         <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
             <picture>
                 <source media="(min-width:1280px)" :srcset="`${desktopImg}`">
@@ -152,7 +152,7 @@ const closeModal = () => {
           </h2>
             <!-- Logo -->
             <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
-          <p :class="`tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
+          <p :class="`tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg tw-max-w-[520px] ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
           <!-- CTA -->
             <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
                 <a
