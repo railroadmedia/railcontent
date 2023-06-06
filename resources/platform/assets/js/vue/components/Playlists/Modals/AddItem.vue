@@ -161,7 +161,7 @@ const handleCreate = () => {
     emit('onCancel');
     window.openplaylistmodal({
         modalType: 'create',
-        data: { ...props.content, brand: props.brand, hasAddItemCallback: true, additionalItems: additionalItems.value },
+        data: { ...props.content, brand: props.brand, hasAddItemCallback: true, additionalItems: additionalItems.value, importAssignments: importAll.value },
     });
     window.addItemCallback = function (playlistId) {
         console.log('callback called')
@@ -396,7 +396,9 @@ onMounted(() => {
         </Table>
         <div class="tw-w-full tw-flex tw-flex-col sm:tw-flex-row sm:tw-justify-between tw-pt-[25px] tw-max-w-xs sm:tw-max-w-none tw-mx-auto">
             <button @click="handleCreate"
-                class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-white tw-min-w-[167px] tw-h-[35px] tw-hidden sm:tw-inline-flex">
+                class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-white tw-min-w-[167px] tw-h-[35px] tw-hidden sm:tw-inline-flex"
+                :disabled="selectedPlaylists.length === 0"
+            >
                 <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>

@@ -90,7 +90,8 @@ const ctaClicked = ref(false);
 // Methods
 
 const handleCalendarCtaClick = (e) => {
-    addEvent(e);
+    //Commenting this out until is needed, I think in other instances this creates an object to show the single event button. This could be replaced with a different pattern.
+    //addEvent(e);
     ctaClicked.value = true;
 };
 

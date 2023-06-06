@@ -644,6 +644,7 @@ export default {
 
   },
   mounted() {
+    console.log('includeFutureScheduledContentOnly',this.includeFutureScheduledContentOnly)
     if (!this.preLoadedContent && !this.preLoadedContent.results.length) {
       this.getContent();
     }
