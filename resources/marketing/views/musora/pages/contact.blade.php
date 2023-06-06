@@ -35,46 +35,46 @@
         <div class="max-w-4xl mx-auto px-4">
             <h3 class="text-center mb-10"><strong>Frequently Asked Questions</strong></h3>
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-regular fa-comments text-3xl md:text-4xl mb-3"></i>
-                    <p class="font-bold mb-1 text-sm">Instructor Support</p>
-                    <p class="text-sm">How can I get personalized feedback from my instructor?</p>
-                </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-sharp fa-regular fa-download text-3xl md:text-4xl mb-3"></i>
-                    <p class="font-bold mb-1 text-sm">Downloading Lessons</p>
-                    <p class="text-sm">Can I download lessons and replay them later without using data?</p>
-                </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-regular fa-file-music text-3xl md:text-4xl mb-3"></i>
-                    <p class="font-bold mb-1 text-sm">Downloading Sheet Music</p>
-                    <p class="text-sm">How do I download or print sheet music and chord charts?</p>
-                </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                <a href="https://help.musora.com/article/1034-musora-membership-options" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Membership options</p>
+                    <p class="text-sm">What different types of memberships are available? </p>
+                </a>
+                <a href="https://help.musora.com/article/981-do-you-have-a-curriculum" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Lesson curriculum</p>
+                    <p class="text-sm">Do you have a specific lesson curriculum?</p>
+                </a>
+                <a href="https://help.musora.com/article/946-how-do-i-track-my-shipment" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-sharp fa-regular fa-truck-fast text-3xl md:text-4xl mb-3"></i>
-                    <p class="font-bold mb-1 text-sm">Shipment Tracking</p>
+                    <p class="font-bold mb-1 text-sm">Shipment tracking</p>
                     <p class="text-sm">I ordered a product from you, how can I track my shipment?</p>
-                </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-regular fa-file-invoice-dollar text-3xl md:text-4xl mb-3"></i>
-                    <p class="font-bold mb-1 text-sm">Billing Information</p>
-                    <p class="text-sm">Where can I find my billing history and invoices?</p>
-                </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-sharp fa-regular fa-circle-pause text-3xl md:text-4xl mb-3"></i>
-                    <p class="font-bold mb-1 text-sm">Pause Subscription</p>
-                    <p class="text-sm">I need a short break, can I pause my account?</p>
-                </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-light fa-circle-xmark text-3xl md:text-4xl mb-3"></i>
-                    <p class="font-bold mb-1 text-sm">Cancel Subscription</p>
-                    <p class="text-sm">How can I make sure my subscription doesn't renew?</p>
-                </div>
-                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-regular fa-circle-dollar text-3xl md:text-4xl mb-3"></i>
-                    <p class="font-bold mb-1 text-sm">Request a Refund</p>
-                    <p class="text-sm">I purchased less than 90 days ago and I would like a refund.</p>
-                </div>
+                </a>
+                <a href="https://help.musora.com/article/1061-what-is-the-difference-between-your-free-and-paid-content" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Free and paid</p>
+                    <p class="text-sm">What’s the difference between free and paid content?</p>
+                </a>
+                <a href="https://help.musora.com/article/1062-what-are-the-terms-for-your-refund-policy" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">90-day guarantee</p>
+                    <p class="text-sm">What are the terms for your refund guarantee? </p>
+                </a>
+                <a href="https://help.musora.com/article/1063-do-you-cover-customs-fees" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Customs fees</p>
+                    <p class="text-sm">Does Musora cover customs fees?</p>
+                </a>
+                <a href="TODO" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm"> Learning outcomes</p>
+                    <p class="text-sm">TODO</p>
+                </a>
+                <a href="TODO" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
+                    <p class="font-bold mb-1 text-sm">Online or in-person lessons?</p>
+                    <p class="text-sm">TODO</p>
+                </a>
             </div>
         </div>
     </section>
