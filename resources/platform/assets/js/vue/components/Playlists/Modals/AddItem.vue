@@ -396,8 +396,8 @@ onMounted(() => {
         </Table>
         <div class="tw-w-full tw-flex tw-flex-col sm:tw-flex-row sm:tw-justify-between tw-pt-[25px] tw-max-w-xs sm:tw-max-w-none tw-mx-auto">
             <button @click="handleCreate"
-                class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-white tw-min-w-[167px] tw-h-[35px] tw-hidden sm:tw-inline-flex"
-                :disabled="selectedPlaylists.length === 0"
+                class="tw-btn-secondary tw-uppercase tw-text-[#3F3F46] dark:tw-text-white tw-min-w-[167px] tw-h-[35px] tw-hidden sm:tw-inline-flex disabled:tw-opacity-40"
+                :disabled="props.content.type === 'song' && (addInstrumentlessToggle === false && addFullSongToggle === false) || (includeHighRoutine === false && includeLowRoutine === false)"
             >
                 <PlusIcon class="tw-w-[15px] tw-h-[15px]" />
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
