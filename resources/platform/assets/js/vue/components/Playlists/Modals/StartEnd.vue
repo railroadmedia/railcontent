@@ -31,7 +31,31 @@
     });
 
     //--------Computed Props--------//
-
+    const sliderMin = computed({
+        get: () =>  {
+            return state.startTime;
+        },
+        set: (val) => {
+            val = parseInt(val);
+            if (val > state.endTime) {
+                state.endTime = val;
+            }
+            state.startTime = val;
+        }
+    })   
+    
+    const sliderMax = computed({
+        get: () =>  {
+            return state.endTime;
+        },
+        set: (val) => {
+            val = parseInt(val);
+            if (val < state.startTime) {
+                state.startTime = val;
+            }
+            state.endTime = val;
+        }
+    })
 
     //--------Reactive Data--------//
     const state = reactive({
@@ -115,24 +139,30 @@
             <div class="tw-w-full tw-flex-col tw-px-3">
                 <p class="tw-text-sm tw-pb-[5px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Start Time</p>
                 <h3 class="tw-mb-2 dark:tw-text-white tw-text-3xl">{{ splitSeconds(state.startTime ) }}</h3>
-                <input type="range"
-                       class="tw-w-full tw-h-2 tw-bg-gray-200 tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
-                       v-model="state.startTime"
-                       :min="0"
-                       :max="state.endTime"
-                >
+
             </div>
             <!-- End Time -->
             <div class="tw-w-full tw-flex-col tw-px-3">
                 <p class="tw-text-sm tw-pb-[5px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]">End Time</p>
                 <h3 class="tw-mb-2 dark:tw-text-white tw-text-3xl">{{ splitSeconds(state.endTime ) }}</h3>
-                <input type="range"
-                    class="tw-w-full tw-h-2 tw-bg-gray-200 tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
-                    v-model="state.endTime"
-                    :min="state.startTime"
-                    :max="state.durationTime"
-                >
             </div>
+        </div>
+        <!-- Slider -->
+        <div class="tw-relative tw-w-full">
+            <input type="range"
+                class="tw-absolute tw-w-full tw-h-2 tw-bg-transparent tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
+                v-model="sliderMin"
+                step="1"
+                :min="0"
+                :max="state.durationTime"
+            >
+            <input type="range"
+                class="tw-absolute tw-w-full tw-h-2 tw-bg-transparent tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
+                v-model="sliderMax"
+                step="1"
+                :min="0"
+                :max="state.durationTime"
+            >
         </div>
         <div class="tw-pt-[30px] tw-flex tw-justify-end tw-w-full">
             <!-- Close Modal -->
@@ -149,3 +179,9 @@
         </div>
     </div>
 </template>
+<style>
+    input[type=range]::-webkit-slider-thumb {
+        z-index: 2;
+        position: relative;
+    }
+</style>
