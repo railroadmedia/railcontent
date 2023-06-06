@@ -815,8 +815,8 @@
                 edition of Easy Chords is announced. </p>
 
             @include("pianote._partials._sign-up-form", [
-                "formName" => 'NPPSH Waitlist',
-                "formId" => "Pianote - Engagement - Trigger - NPPSH Waitlist - Web Form",
+                "formName" => 'Easy Chords Waitlist',
+                "formId" => "Pianote - Engagement - Trigger - Easy Chords Waitlist - Web Form",
                 "buttonText" => "Let Me Know ",
                 "stacked" => true,
                 "noSocial" => true,
