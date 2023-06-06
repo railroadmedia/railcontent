@@ -115,13 +115,13 @@
         >
             <div class="tw-w-full" :class="props.isListView ? 'tw-grid tw-grid-cols-10 tw-items-center' : '' ">
                 <!--name-->
-                <p class="tw-font-bold tw-capitalize tw-truncate tw-w-full"
+                <p class="tw-font-bold tw-truncate tw-w-full"
                    :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-7 xl:tw-col-span-2 tw-pl-2 md:tw-pl-[19px] tw-pr-2' : '' "
                 >
                     {{ list.name }}
                 </p>
                 <!--description-->
-                <p class="tw-capitalize tw-truncate tw-hidden"
+                <p class="tw-truncate tw-hidden"
                     :class=" props.isListView ? 'tw-hidden xl:tw-inline-flex  xl:tw-col-span-5' : '' "
                 >
                     <span class="tw-truncate tw-max-w-[512px] tw-pl-2 tw-pr-4 ">{{ list.description }}</span>
