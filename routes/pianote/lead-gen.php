@@ -43,7 +43,14 @@ Route::domain('{pianoteDomain}')
                 ]);
         }
     );
-    Route::get('/chord-hacks', [LeadGenController::class, 'chordHacks']);
+    Route::group(['prefix' => 'chord-hacks'],
+        function () {
+            Route::get('/{page?}', LeadGenController::class . '@chordHacks')
+                ->whereIn('page', [
+                    null,'thank-you'
+                ]);
+        }
+    );
 
     Route::group(['prefix' => 'method'],
         function () {

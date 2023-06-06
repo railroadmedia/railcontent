@@ -57,7 +57,7 @@ class="assignment-row border-gray-100 border-b-2 py-4 sm:px-3 @if(!empty($defaul
                     data="{{ $pdfURL }}"
                     type="application/pdf"
                     width="100%"
-                    height="250px"
+                    height="700px"
                 >
                     <p>
                         Your browser does not support PDFs.
