@@ -66,8 +66,6 @@
     const handleSort = () => {
         playlistsStore.sortingPlaylist = false;
 
-        console.log('trying to save:', lessonsCopy.value)
-
         //Update each item in temp array
         lessonsCopy.value.forEach(lesson => {
             //Then send update item request
@@ -103,14 +101,20 @@
     const handleDragChange = (e) => {
         const oldObj = lessonsCopy.value[e.oldIndex];
         const oldUserItemPosition = oldObj.user_playlist_item_position;
+        console.log('oldUserItemPosition', oldUserItemPosition)
         const newObj = lessonsCopy.value[e.newIndex];
         const newUserItemPosition = newObj.user_playlist_item_position;
+        console.log('newUserItemPosition', newUserItemPosition)
+
         oldObj.user_playlist_item_position = newUserItemPosition;
         newObj.user_playlist_item_position = oldUserItemPosition;
+        
         newObj.hasChanged = true;
 
         lessonsCopy.value[e.oldIndex] = newObj;
         lessonsCopy.value[e.newIndex] = oldObj;
+
+        console.log(lessonCopy.value);
     }
 
     //Vertical Scroll
