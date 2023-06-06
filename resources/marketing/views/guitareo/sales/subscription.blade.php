@@ -198,22 +198,6 @@
         'students' => number_format(Prices::$students),
     ])
 
-{{--    @if(!empty($promoVersion))--}}
-{{--        @include('musora.sales.components.promo-section', [--}}
-{{--        'promoLogo' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs.svg',--}}
-{{--           'promoLogoM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs-m.png',--}}
-{{--        'desc' => 'Unlock step-by-step lessons & 1000+ songs to reach your guitar goals in 2023. ',--}}
-{{--           'text' => 'Learning songs has <u>never</u> been easier.<br><br>Introducing NEW Guitareo Songs – <strong>the ultimate tool for learning songs faster and better</strong> with note-for-note sheet music, tempo adjustments, and a looping feature.<br><br>And unlike other song tools, every song is perfectly transcribed and professionally proofed to guarantee its accuracy. Because playing songs should be fun, not frustrating.<br><br>PLUS you’ll have access to step-by-step video lessons on every topic, artist courses and exclusive events, and unlimited personal support to reach all of your guitar goals in 2023.<br><br>When you join today, you\'ll receive a Guitarist\'s Survival Kit for free (valued at $89) to help you sound even better on guitar.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Guitareo Songs.',--}}
-{{--           'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/jan-launch-collage.png',--}}
-{{--           'belowButton' => 'SAVE 17% + GET 5 BONUSES WORTH $835',--}}
-{{--       ])--}}
-{{--    @else--}}
-        @include('musora.sales.components.learn-by-playing-section', [
-            'header' => 'Learn the guitar by<br class="inline sm:hidden"> <u>playing the guitar</u>.',
-            'desc' => 'Most new guitarists learn a chord or two – and then hit some sort of roadblock. Life gets in the way. Your calluses become soft. Or even worse, you lose motivation.<br><br>But playing guitar should never feel like a chore.<br><br>And it’s our mission to help you make progress faster by playing music that inspires you – with 1000+ popular songs – and conquer new styles, skills, and techniques to play like you’ve always wanted.<br><br>Whether you want to play your favorite songs, express your creativity over a backing track, or follow inspirational coaches – you’ll have it all in the Guitareo membership. You’ll get step-by-step lessons, interactive tools, and unlimited support to play your guitar better and faster.<br><br>So give the trailer a watch, and hear how you can achieve your guitar goals today.',
-            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/collage-evergreen.png',
-        ])
-{{--    @endif--}}
 
     @php
         $gridItems = [
@@ -251,7 +235,6 @@
     @endphp
 
     @include('musora.sales.components.trailer-grid-section', [
-        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314551/rendition/540p/file.mp4?loc=external&signature=49333e2b437f90a4af69eb5b19468b68f5185729516f735cd390a6ce8b673516',
         'header' => 'Your guitar goals<br class="inline sm:hidden"> start here.',
         'desc' => 'Learn to play guitar online with a fluff-free curriculum that’ll<br class="hidden sm:inline">  take your skills from zero to guitar hero – with step-by-step<br class="hidden sm:inline">  lessons designed around playing songs faster. ',
     ])
@@ -411,27 +394,32 @@
             [
                 'icon' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/songs-icon.svg',
                 'title' => '1000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for  <br class="hidden sm:inline"> every style, era, and skill level. ',
+                'desc' => 'Get note-for-note song breakdowns for   every style, era, and skill level. ',
             ],
             [
                 'icon' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/tempo-icon.svg',
                 'title' => 'Find the perfect tempo.',
-                'desc' => 'Slow down any section of a song  <br class="hidden sm:inline">to make those tricky bars easier. ',
+                'desc' => 'Slow down any section of a song  to make those tricky bars easier. ',
             ],
             [
                 'icon' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/loop-icon.svg',
                 'title' => 'Loop the hard parts.',
-                'desc' => 'Create practice loops to play-through <br class="hidden sm:inline"> those difficult parts over and over.   ',
+                'desc' => 'Create practice loops to play-through  those difficult parts over and over.   ',
             ],
             [
                 'icon' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/timing-icon.svg',
                 'title' => 'Improve your timing.',
-                'desc' => 'Use the built-in-metronome – your new <br class="hidden sm:inline"> best friend for difficult rhythms.  ',
+                'desc' => 'Use the built-in-metronome – your new  best friend for difficult rhythms.  ',
+            ],
+            [
+                'icon' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/play-it-right-icon.svg',
+                'title' => 'Play it right the first time.',
+                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
             ],
             [
                 'icon' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/devices-icon.svg',
                 'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable, <br class="hidden sm:inline"> so you can play any song, any time.    ',
+                'desc' => 'Accessible on any device, or printable,  so you can play any song, any time.    ',
             ],
 
         ];
@@ -440,9 +428,14 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note.',
-        'video' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/blackbird.mp4',
+        'video' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/device.png',
         'brandName' => 'Guitareo',
         'bannerDesc' => 'Powered by Musora, Guitareo includes full access to our communities for voice, piano, and drums.',
+    ])
+    @include('musora.sales.components.learn-by-playing-section', [
+        'header' => 'Learn the guitar by<br class="inline sm:hidden"> <u>playing the guitar</u>.',
+        'desc' => 'With Guitareo, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
+                'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314551/rendition/540p/file.mp4?loc=external&signature=49333e2b437f90a4af69eb5b19468b68f5185729516f735cd390a6ce8b673516',
     ])
 
     @php
@@ -526,6 +519,7 @@
     <div id="order" class="anchor"></div>
     @if(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
+            "noSelector" => true,
             "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
             "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
             "songs" => "1000",

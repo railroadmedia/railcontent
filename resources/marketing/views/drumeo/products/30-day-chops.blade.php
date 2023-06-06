@@ -812,8 +812,8 @@
             <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
                 next edition of 30-Day Chops is announced. </p>
             @include("drumeo.lead-gen.partials.sign-up-form-tw", [
-                "formName" => '30 Day Drummer Waitlist',
-                "formId" => "Drumeo - Engagement - Trigger - 30 Day Drummer Waitlist - Web Form",
+                "formName" => '30 Day Chops Waitlist',
+                "formId" => "Drumeo - Engagement - Trigger - 30 Day Chops Waitlist - Web Form",
                 "buttonText" => "Let Me Know ",
                 "stacked" => true,
                 "noSocial" => true,
