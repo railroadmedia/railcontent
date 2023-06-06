@@ -30,33 +30,6 @@
         }
     });
 
-    //--------Computed Props--------//
-    const sliderMin = computed({
-        get: () =>  {
-            return state.startTime;
-        },
-        set: (val) => {
-            val = parseInt(val);
-            if (val > state.endTime) {
-                state.endTime = val;
-            }
-            state.startTime = val;
-        }
-    })   
-    
-    const sliderMax = computed({
-        get: () =>  {
-            return state.endTime;
-        },
-        set: (val) => {
-            val = parseInt(val);
-            if (val < state.startTime) {
-                state.startTime = val;
-            }
-            state.endTime = val;
-        }
-    })
-
     //--------Reactive Data--------//
     const state = reactive({
         title: '',
@@ -129,6 +102,26 @@
         state.endTime = endTime;
     })
 
+    const handleStartTime = (e) => {
+        let val = parseInt(e.target.value);
+
+        if (val >= state.endTime) {
+            e.target.value = state.endTime;
+            return;
+        }
+        state.startTime = val;
+    }
+
+    const handleEndTime = (e) => {
+        let val = parseInt(e.target.value);
+
+        if (val <= state.startTime) {
+            e.target.value = state.startTime;
+            return;
+        }
+        state.endTime = val;
+    }
+
 </script>
 <template>
     <div class="tw-h-full tw-w-full">
@@ -151,14 +144,16 @@
         <div class="tw-relative tw-w-full">
             <input type="range"
                 class="tw-absolute tw-w-full tw-h-2 tw-bg-transparent tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
-                v-model="sliderMin"
+                @input="handleStartTime"
+                   :value="state.startTime"
                 step="1"
                 :min="0"
                 :max="state.durationTime"
             >
             <input type="range"
                 class="tw-absolute tw-w-full tw-h-2 tw-bg-transparent tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
-                v-model="sliderMax"
+                @input="handleEndTime"
+                   :value="state.endTime"
                 step="1"
                 :min="0"
                 :max="state.durationTime"
