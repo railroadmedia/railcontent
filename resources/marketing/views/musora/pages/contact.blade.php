@@ -34,47 +34,49 @@
     <section class="py-14 md:py-20 bg-[#f6f8fc]">
         <div class="max-w-4xl mx-auto px-4">
             <h3 class="text-center mb-10"><strong>Frequently Asked Questions</strong></h3>
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+            <div class="grid grid-cols-2 md:grid-cols-3
+{{--            lg:grid-cols-4 --}}
+            gap-3 sm:gap-4">
                 <a href="https://help.musora.com/article/1034-musora-membership-options" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
+                    <i class="fal fa-toggle-on text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Membership options</p>
                     <p class="text-sm">What different types of memberships are available? </p>
                 </a>
                 <a href="https://help.musora.com/article/981-do-you-have-a-curriculum" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
+                    <i class="fal fa-book-open text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Lesson curriculum</p>
                     <p class="text-sm">Do you have a specific lesson curriculum?</p>
                 </a>
                 <a href="https://help.musora.com/article/946-how-do-i-track-my-shipment" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fa-sharp fa-regular fa-truck-fast text-3xl md:text-4xl mb-3"></i>
+                    <i class="fal fa-truck-fast text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Shipment tracking</p>
                     <p class="text-sm">I ordered a product from you, how can I track my shipment?</p>
                 </a>
                 <a href="https://help.musora.com/article/1061-what-is-the-difference-between-your-free-and-paid-content" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
+                    <i class="fal fa-tag text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Free and paid</p>
                     <p class="text-sm">What’s the difference between free and paid content?</p>
                 </a>
                 <a href="https://help.musora.com/article/1062-what-are-the-terms-for-your-refund-policy" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
+                    <i class="fal fa-badge-check text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">90-day guarantee</p>
                     <p class="text-sm">What are the terms for your refund guarantee? </p>
                 </a>
                 <a href="https://help.musora.com/article/1063-do-you-cover-customs-fees" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
+                    <i class="fal fa-hand-holding-dollar text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Customs fees</p>
                     <p class="text-sm">Does Musora cover customs fees?</p>
                 </a>
-                <a href="TODO" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
-                    <p class="font-bold mb-1 text-sm"> Learning outcomes</p>
-                    <p class="text-sm">TODO</p>
-                </a>
-                <a href="TODO" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="TODO text-3xl md:text-4xl mb-3"></i>
-                    <p class="font-bold mb-1 text-sm">Online or in-person lessons?</p>
-                    <p class="text-sm">TODO</p>
-                </a>
+{{--                <a href="TODO" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">--}}
+{{--                    <i class="fal fa-trophy text-3xl md:text-4xl mb-3"></i>--}}
+{{--                    <p class="font-bold mb-1 text-sm"> Learning outcomes</p>--}}
+{{--                    <p class="text-sm">TODO</p>--}}
+{{--                </a>--}}
+{{--                <a href="TODO" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">--}}
+{{--                    <i class="fal fa-desktop text-3xl md:text-4xl mb-3"></i>--}}
+{{--                    <p class="font-bold mb-1 text-sm">Online or in-person lessons?</p>--}}
+{{--                    <p class="text-sm">TODO</p>--}}
+{{--                </a>--}}
             </div>
         </div>
     </section>
