@@ -122,7 +122,7 @@ const closeModal = () => {
         ${ showSlide ? `tw-z-20 ${showSlide ? `slide-in-${animateDirection}` : ''}` : 'tw-z-0' }
       `"
   >
-    <section class="tw-w-full tw-h-full tw-rounded-[10px] tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 tw-gap-0 relative">
+    <section class="tw-w-full tw-h-full tw-rounded-[10px] relative">
         <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
             <picture>
                 <source media="(min-width:1280px)" :srcset="`${desktopImg}`">
@@ -152,27 +152,27 @@ const closeModal = () => {
           </h2>
             <!-- Logo -->
             <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
-          <p :class="`tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
+          <p :class="`tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg tw-max-w-[520px] ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
           <!-- CTA -->
             <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
                 <a
                     v-if="primaryCtaText"
                     :href="primaryCtaUrl"
-                    :class="`tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'}`"
+                    :class="`tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2`"
                 >
                     {{ primaryCtaText }}
                 </a>
                 <a
                     v-if="secondaryCtaText && !video"
                     :href="secondaryCtaUrl"
-                    :class="`tw-border-2  tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'}`"
+                    :class="`tw-border-2  tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2`"
                 >
                     {{ secondaryCtaText }}
                 </a>
                 <span
                     v-if="secondaryCtaText && video"
                     @click="openModal()"
-                    :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block tw-cursor-pointer hover:tw-bg-white hover:tw-text-[#000C17] tw-text-xl`"
+                    :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block tw-cursor-pointer hover:tw-bg-white hover:tw-text-[#000C17] tw-text-xl md:tw-mb-2`"
                 >
                     {{ secondaryCtaText }}
                 </span>
