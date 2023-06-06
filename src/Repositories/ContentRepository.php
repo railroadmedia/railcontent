@@ -2374,11 +2374,6 @@ class ContentRepository extends RepositoryBase
             usort($filterOptionsArray[$filterOptionName], [$this, 'sortByAlphaThenNumeric']);
         }
 
-        foreach ($filterOptionsArray as $index=>$value){
-            if(!in_array($index, $filterOptions) && ($index != 'type')){
-                unset($filterOptionsArray[$index]);
-            }
-        }
         return $filterOptionsArray;
     }
 
