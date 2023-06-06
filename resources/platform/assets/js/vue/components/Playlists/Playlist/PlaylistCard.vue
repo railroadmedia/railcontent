@@ -203,7 +203,9 @@ onBeforeMount(() => {
 <template>
     <div :id="cardId"
         class="tw-group tw-h-[90px] tw-min-h-[90px] tw-flex tw-w-full tw-items-center tw-transition-colors hover:tw-bg-[#E0E0E1] dark:hover:tw-bg-[#102230] even:tw-bg-white dark:even:tw-bg-[#081825] tw-pr-4">
-        <div class="tw-flex tw-items-center tw-h-full tw-w-full">
+        <div class="tw-flex tw-items-center tw-h-full tw-w-full"
+             :class="{ 'tw-relative' : playlistsStore.sortingPlaylist }"
+        >
             <!-- PLAYLIST INFO: clickable link -->
             <component :is="needAccess ? 'div' : 'a' " 
                        :href="lesson.url && !showMask && !needAccess ? lesson.url : ''"
