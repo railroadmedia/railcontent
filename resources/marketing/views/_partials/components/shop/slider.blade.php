@@ -22,9 +22,11 @@
                 @endif
                 @if (!empty($images))
                     @foreach ($images as $key => $image)
-                        <div style="display: none;">
-                            <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{$image->path}}" alt="slide image {{ $key+1 }}">
-                        </div>
+                        @if((!empty($videoSrc) && $key !== 0) || empty($videoSrc) )
+                            <div style="display: none;">
+                                <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{$image->path}}" alt="slide image {{ $key+1 }}">
+                            </div>
+                        @endif
                     @endforeach
                 @endif
             </div>

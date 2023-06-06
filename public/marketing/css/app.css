@@ -1791,9 +1791,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mb-96 {
   margin-bottom: 24rem !important;
 }
-.mt-80 {
-  margin-top: 20rem !important;
-}
 .mt-48 {
   margin-top: 12rem !important;
 }
@@ -1811,6 +1808,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mt-44 {
   margin-top: 11rem !important;
+}
+.mt-80 {
+  margin-top: 20rem !important;
 }
 .box-border {
   box-sizing: border-box !important;
@@ -3373,6 +3373,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pb-60 {
   padding-bottom: 15rem !important;
+}
+.pr-0 {
+  padding-right: 0px !important;
 }
 .pt-44 {
   padding-top: 11rem !important;
@@ -5685,6 +5688,10 @@ li, p {
     padding-top: 3rem !important;
   }
 
+  .sm\:pr-7 {
+    padding-right: 1.75rem !important;
+  }
+
   .sm\:pr-20 {
     padding-right: 5rem !important;
   }
@@ -7984,6 +7991,10 @@ li, p {
 
   .lg\:h-11 {
     height: 2.75rem !important;
+  }
+
+  .lg\:h-7 {
+    height: 1.75rem !important;
   }
 
   .lg\:h-64 {

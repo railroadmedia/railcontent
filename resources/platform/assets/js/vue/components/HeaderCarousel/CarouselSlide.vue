@@ -128,11 +128,9 @@ const closeModal = () => {
                 <source media="(min-width:1280px)" :srcset="`${desktopImg}`">
                 <source media="(min-width:768px)" :srcset="`${tabletImg}`">
                 <img
-                    class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0 tw-z-50"
+                    class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-z-50"
                     :src="`${mobileImg}`"
                     alt="banner background image"
-                    onload="this.classList.remove('tw-opacity-0')"
-                    loading="lazy"
                 />
             </picture>
         </div>
@@ -165,14 +163,14 @@ const closeModal = () => {
                     {{ primaryCtaText }}
                 </a>
                 <a
-                    v-if="secondaryCtaText && (!isFeatured || isFeatured && !video)"
+                    v-if="secondaryCtaText && !video"
                     :href="secondaryCtaUrl"
                     :class="`tw-border-2  tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'}`"
                 >
                     {{ secondaryCtaText }}
                 </a>
                 <span
-                    v-if="secondaryCtaText && isFeatured && video"
+                    v-if="secondaryCtaText && video"
                     @click="openModal()"
                     :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block tw-cursor-pointer hover:tw-bg-white hover:tw-text-[#000C17] tw-text-xl`"
                 >

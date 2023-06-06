@@ -1,6 +1,10 @@
 @php
     $faqs = [
         [
+        "title" => "Do I get free access to Pianote, Singeo, and Guitareo with my Drumeo Membership?",
+        "desc" => "Absolutely! As a Drumeo member, you'll receive free access to Pianote, Singeo, and Guitareo as well. Elevate your musical journey with us by exploring additional instruments and expanding your musical horizons!",
+        ],
+        [
         "title" => "What is Drumeo?",
         "desc" => 'Drumeo is an online platform that offers an organized drum curriculum, artist courses on popular topics, 5000+ songs transcribed note-for-note, and a supportive global community of students and teachers. ',
         ],
