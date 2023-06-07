@@ -62,7 +62,10 @@ const handleNextStep = (selection) => {
     emit("onCheckStep", 3, true);
     emit("onChangeStep", 4);
   }).catch(() => {
-    showErrorNotification.value = true;
+    window.shownotification({
+      icon: 'error',
+      text: 'There was an error saving your experience, please try again later.'
+    });
   });
 };
 

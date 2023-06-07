@@ -260,8 +260,8 @@
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-{{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-                                <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
+                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>
+{{--                                <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>--}}
 
                                 <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
                                     <a href="https://www.musora.com/drumeo/enrollment/30-day-chops">Drumeo Members register for free here.</a>
@@ -287,15 +287,15 @@
                     <h4 class="px-3 lg:px-5"><strong>June 5th</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-                        Enrollment closes in<br class="inline lg:hidden">
-                        <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
-                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                         </span>
-{{--                        Enrollment closed--}}
+{{--                        Enrollment closes in<br class="inline lg:hidden">--}}
+{{--                        <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                         </span>--}}
+                        Enrollment closed
                     </p>
                 </div>
                 <div class="flex flex-wrap md:flex-nowrap items-center justify-evenly w-full md:w-auto md:flex-grow py-4 md:py-3 lg:py-4 text-left md:text-center">
@@ -433,9 +433,9 @@
                     <i class="fas fa-check text-drumeo mr-5"></i> Ongoing motivation & support<br>
                     <i class="fas fa-check text-drumeo mr-5"></i> Guaranteed results</h4>
             </div>
-{{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>--}}
-            <a href="#final"
-                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>
+{{--            <a href="#final"--}}
+{{--                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>--}}
             <img class="h-7 mr-1 mb-5 sm:mb-10 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/drummers.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
             <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
 
@@ -583,15 +583,15 @@
             </div>
             <h1 class="font-bebas text-5xl sm:text-6xl lg:text-7xl">FAIR WARNING</h1>
             <h6 class="leading-normal  mt-4 mb-8">30-Day Chops is a daily guided workout program for drummers — where you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this, students will not be able to join midway — and you need to register before the course begins. {{--on September 5th.--}}</h6>
-            <h4 class="py-1.5 w-full font-bebas uppercase inline-block mx-auto" style="background-color:#fd5;color:#9d1032;">REGISTRATION CLOSES IN<br class="inline sm:hidden">
-                <span x-cloak x-data="timer()" x-init="countdown()">
-                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                         </span>
-            </h4>
+{{--            <h4 class="py-1.5 w-full font-bebas uppercase inline-block mx-auto" style="background-color:#fd5;color:#9d1032;">REGISTRATION CLOSES IN<br class="inline sm:hidden">--}}
+{{--                <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                             <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                         </span>--}}
+{{--            </h4>--}}
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
@@ -654,11 +654,11 @@
 {{--            </div>--}}
 
 
-{{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>--}}
+            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>
 
-                <a
-                    href="#final"
-                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
+{{--                <a--}}
+{{--                    href="#final"--}}
+{{--                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>--}}
 
             <img class="h-7 mr-1 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/drummers.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
@@ -681,8 +681,8 @@
     <div id="final" class="anchor"></div>
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
         <div class="container max-w-6xl mx-auto relative z-50">
-            <div class="flex flex-wrap items-center">
-                    <div class="text-center lg:text-left w-full lg:w-1/3 mb-7 lg:mb-0">
+            <div class="flex flex-wrap items-center justify-center">
+                    <div class="text-center w-full sm:w-7/12 lg:w-1/3 mb-7 lg:mb-0">
                         <img class="h-20 md:h-24 lg:h-28 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/logo.svg" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                         <h4 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
                                 20 Guided Play-Along Lessons.<br>
@@ -695,50 +695,51 @@
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i> Course runs June 5 to July 5.</p>
                             <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-drumeo mr-1"></i>  Choose your best option to get started.</p>
                         </div>
+                        <span class="join sold-out medium w-full align-middle" data-open="waitlistModal">JOIN WAITLIST</span>
                     </div>
 
-                    <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">
-                        <a href="/ecommerce/add-to-cart?products[30-day-chops]=1&products[Drumeo-VaterSticks]=1&locked=true"
-                            class="z-10 relative px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-lg w-full sm:w-5/12">
-                            <h3><strong>30-Day Chops</strong></h3>
-                            <p class="text-sm mt-2 mb-5">Learn drum chops in 30 days. </p>
-                            <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>
-                            <div class="join blue smaller my-4 w-full">ENROLL NOW</div>
-                            <ul class="list-disc ml-6">
-                                <li class="text-sm relaxed"><span class="text-drumeo">Free</span> 5A Drumsticks</li>
-                                <li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumeo Access</li>
-                            </ul>
-                            <hr class="w-full my-5" style="border-color:#b2cae1">
-                            <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                                <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>
-                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>
-                        </a>
-                        <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=6&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&locked=true"
-                            class="px-5 sm:px-10 py-5 sm:py-7 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"
-                        style="background-color:#dde9f9;background-image:url(https://www.musora.com/musora-cdn/image/width=380,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/order-bg.jpg);"
-                        >
-                            <p class="border border-drumeo text-drumeo inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">LAUNCH MEMBERSHIP SPECIAL</p>
-                            <h3><strong>Join Drumeo + Get<br class="hidden sm:inline"> 30-Day Chops FREE</strong></h3>
-                            <p class="text-sm my-2">
-                                Unlimited Drum Lessons + 6 Pairs Of Sticks and more:</p>
-                            <h2 class="inline-block"><!--<s class="opacity-40">$240</s>--> <strong class="text-4xl">$240</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>
-                            <div class="join blue smaller my-4 w-full">GET EVERYTHING</div>
-                            <ul class="list-disc ml-6">
-                                <li class="text-sm leading-relaxed">Annual Drumeo Membership</li>
-                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> QuietPad Practice Pad</li>
-                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> 6x Drumsticks</li>
-                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Drum Technique Made Easy</li>
-                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Rock Drumming Masterclass</li>
-                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Independence Made Easy</li>
-                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Successful Drumming</li>
-                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Better Drum Fills</li>
-                            </ul>
-                            <hr class="w-full my-5" style="border-color:#b2cae1">
-                            <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                                <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>
-                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>
-                        </a>
-                    </div>
+{{--                    <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10">--}}
+{{--                        <a href="/ecommerce/add-to-cart?products[30-day-chops]=1&products[Drumeo-VaterSticks]=1&locked=true"--}}
+{{--                            class="z-10 relative px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-lg w-full sm:w-5/12">--}}
+{{--                            <h3><strong>30-Day Chops</strong></h3>--}}
+{{--                            <p class="text-sm mt-2 mb-5">Learn drum chops in 30 days. </p>--}}
+{{--                            <h2 class="inline-block"><strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>--}}
+{{--                            <div class="join blue smaller my-4 w-full">ENROLL NOW</div>--}}
+{{--                            <ul class="list-disc ml-6">--}}
+{{--                                <li class="text-sm relaxed"><span class="text-drumeo">Free</span> 5A Drumsticks</li>--}}
+{{--                                <li class="text-sm relaxed"><span class="text-drumeo">Free</span> Drumeo Access</li>--}}
+{{--                            </ul>--}}
+{{--                            <hr class="w-full my-5" style="border-color:#b2cae1">--}}
+{{--                            <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
+{{--                                <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>--}}
+{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
+{{--                        </a>--}}
+{{--                        <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=6&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&locked=true"--}}
+{{--                            class="px-5 sm:px-10 py-5 sm:py-7 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"--}}
+{{--                        style="background-color:#dde9f9;background-image:url(https://www.musora.com/musora-cdn/image/width=380,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/order-bg.jpg);"--}}
+{{--                        >--}}
+{{--                            <p class="border border-drumeo text-drumeo inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">LAUNCH MEMBERSHIP SPECIAL</p>--}}
+{{--                            <h3><strong>Join Drumeo + Get<br class="hidden sm:inline"> 30-Day Chops FREE</strong></h3>--}}
+{{--                            <p class="text-sm my-2">--}}
+{{--                                Unlimited Drum Lessons + 6 Pairs Of Sticks and more:</p>--}}
+{{--                            <h2 class="inline-block"><!--<s class="opacity-40">$240</s>--> <strong class="text-4xl">$240</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>--}}
+{{--                            <div class="join blue smaller my-4 w-full">GET EVERYTHING</div>--}}
+{{--                            <ul class="list-disc ml-6">--}}
+{{--                                <li class="text-sm leading-relaxed">Annual Drumeo Membership</li>--}}
+{{--                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> QuietPad Practice Pad</li>--}}
+{{--                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> 6x Drumsticks</li>--}}
+{{--                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Drum Technique Made Easy</li>--}}
+{{--                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Rock Drumming Masterclass</li>--}}
+{{--                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Independence Made Easy</li>--}}
+{{--                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Successful Drumming</li>--}}
+{{--                                <li class="text-sm leading-relaxed"><span class="text-drumeo">Free</span> Better Drum Fills</li>--}}
+{{--                            </ul>--}}
+{{--                            <hr class="w-full my-5" style="border-color:#b2cae1">--}}
+{{--                            <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
+{{--                                <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>--}}
+{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
 
             </div>
         </div>
@@ -804,6 +805,21 @@
 </div>
 </section>
 
+    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="waitlistModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
+        <div class="p-5 sm:p-7">
+{{--            <img class="h-24 sm:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD logo">--}}
+            <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
+            <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
+                next edition of 30-Day Chops is announced. </p>
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                "formName" => '30 Day Chops Waitlist',
+                "formId" => "Drumeo - Engagement - Trigger - 30 Day Chops Waitlist - Web Form",
+                "buttonText" => "Let Me Know ",
+                "stacked" => true,
+                "noSocial" => true,
+            ])
+        </div>
+    </div>
 @include('drumeo.sales.partials._video-modal',[
 'modalId' => "trailer",
 "video" => '//player.vimeo.com/video/825206369?h=e8d828248a&autoplay=1',
