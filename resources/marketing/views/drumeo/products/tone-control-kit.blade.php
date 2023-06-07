@@ -22,7 +22,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.event.move/1.3.6/jquery.event.move.min.js"></script>
     <script>
         (function($){
-
             $.fn.twentytwenty = function(options) {
                 var options = $.extend({
                     default_offset_pct: 0.5,
@@ -174,7 +173,6 @@
     </script>
     <script>
         $(document).ready(function () {
-            $(document).foundation();
             setTimeout(function() {
                 $(".comparer").twentytwenty();
             }, 300);
@@ -299,8 +297,11 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
+
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
 
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
@@ -320,7 +321,7 @@
                 WATCH<br> THE DEMO
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
-            <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
+            <i @click="trailer = true;" class="fas fa-play play-button autoplay-video"></i>
             <br>
             <h1><strong>Better drum sounds<br class="hide-for-medium"> in seconds.</strong></h1>
 
@@ -346,13 +347,13 @@
                 {{--<br>LIMITED QUANTITIES--}}
             </p>
         </div>
-        <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/475135304?autoplay=1"
-                        frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-        </div>
     </header>
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '475135304',
+        'vimeo' => true,
+    ])
 
     <section class="four-tones text-center">
         <div class="row">

@@ -19,8 +19,6 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
-            $(document).foundation();
-
             $('.pad-toggle').click(function (e) {
                 e.stopPropagation();
                 $('.pad-flipper').toggleClass('flipped');
@@ -115,8 +113,11 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
+
+@section('body-data')
+    x-data="{ trailerOne: false, trailerTwo: false, }"
+@endsection
 
 @section('content')
 
@@ -137,7 +138,7 @@
                 <span>WATCH<br> THE DEMO</span>
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
-            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
+            <img @click="trailerOne = true;" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
             <br class="hide-for-medium">
             <img class="logo hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png" alt="Quietpad logo">
             <h2><strong style="font-weight: 900;">Practice anywhere</strong> with two<br class="hide-for-medium"> full-size playing surfaces.</h2>
@@ -145,13 +146,19 @@
             <p class="dense" style="opacity: 0;"><strong class="text-yellow">LAUNCH SPECIAL</strong><br>
                 <s>NORMALLY ${{ floatval($productPrices['quietpad']->price) }}.</s> <strong>ONLY ${{ floatval($productPrices['quietpad']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['quietpad']->discounted_price) / floatval($productPrices['quietpad']->price)))) }}%)</p>
         </div>
-        <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/395000347?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
-        </div>
     </header>
+
+    @component('_partials.components.video-modal',[
+        'name' => 'trailerOne',
+        'video' => '395000347',
+        'vimeo' => true,
+    ])
+        @slot('button')
+            <div class="text-center bg-white rounded-b-xl py-4">
+                <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            </div>
+        @endslot
+    @endcomponent
 
     <section class="content-section two-sides text-center">
         <div class="row">
@@ -198,7 +205,7 @@
             <div class="thumb img-modal"><div style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/pad-quiet-jord-over-shoulder.jpg);"></div></div>
             <div class="thumb size-16-9 img-modal"><div style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/pad-snare-jared-2.jpg);"></div></div>
             <div class="thumb size-16-9 img-modal float-right"><div style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/pad-quiet-dub.jpg);"></div></div>
-            <div class="video-pop autoplay-video" data-open="blindModal">
+            <div class="video-pop autoplay-video" @click="trailerTwo = true;">
                 <div class="watch-badge">
                     <span>WATCH<br> BLIND TEST</span>
                     <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
@@ -207,13 +214,19 @@
                 <img class="bg" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/blindfold-test-thumb.jpg" alt="Thumnail">
             </div>
         </div>
-        <div class="reveal large text-center" id="blindModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/394999066?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
-        </div>
     </section>
+
+    @component('_partials.components.video-modal',[
+        'name' => 'trailerTwo',
+        'video' => '394999066',
+        'vimeo' => true,
+    ])
+        @slot('button')
+            <div class="text-center bg-white rounded-b-xl py-4">
+                <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            </div>
+        @endslot
+    @endcomponent
 
     <div class="slider-overlay">
         <div class="slider-lightbox">
