@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=abfd8fcd62b975f13965943757f96bf8",
+    "/platform/js/app.js": "/platform/js/app.js?id=a0c080c212856d45ccd2af25b150b2d0",
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
@@ -29,7 +29,7 @@
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=e4cf672092ea0067157f2c62d9733b29",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=6a2c51699bce35f9f2370ad3d5a1691f",
     "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=e188f1b3bd1141c9cd450e8b88d819ad",
-    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=8da416ee2614e8dcf5d62afdee90343d",
+    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=ed42c91ad0fa261a266d2a4a51f73e48",
     "/platform/js/playlist-breadcrumb.js": "/platform/js/playlist-breadcrumb.js?id=783ff25bfcb4b25bb7c92411841014a3",
     "/platform/js/playlist-collection-header.js": "/platform/js/playlist-collection-header.js?id=978226c61374a7bc302452e97900f872",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=09903bb6c8a5633f9a2f593d996f848f",

@@ -1,5 +1,6 @@
 <script setup>
     import { onBeforeMount, onMounted, watch, inject, ref, reactive, computed } from 'vue';
+    import { storeToRefs  } from 'pinia';
     import { VueDraggableNext } from 'vue-draggable-next';
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
@@ -11,6 +12,7 @@
 
     //Pinia Stores
     const playlistsStore = usePlaylistsStore();
+    const { sortingPlaylist } = storeToRefs(playlistsStore)
 
     //-----------Props-----------//
     const props = defineProps({
@@ -49,7 +51,6 @@
     //-----------Refs-----------//
     const pageNumber = ref(1);
     const preventReFetch = ref(false);
-    const lessonsArray = ref([]);
     const lessonsCopy = ref([]);
 
     //-----------Reactive Data-----------//
@@ -113,6 +114,11 @@
         return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
     }
 
+    watch(sortingPlaylist, () => {
+        //Update Lessons Copy only when Sorting
+        lessonsCopy.value = [...playlistsStore.lessons];
+    })
+
     //---------Lifecycle Methods---------//
 
     onMounted(()=> {
@@ -146,8 +152,9 @@
 
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
-        lessonsCopy.value = [...props.lessons.data];
     });
+
+
 </script>
 <template>
     <main class="tw-w-full ">
