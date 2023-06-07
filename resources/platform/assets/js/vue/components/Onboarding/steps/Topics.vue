@@ -66,7 +66,10 @@ const handleRedirect = () => {
   }).then(() => {
     window.location.href = '/members';
   }).catch(() => {
-    showErrorNotification.value = true;
+    window.shownotification({
+      icon: 'error',
+      text: 'There was an error saving your topics preferences, please try again later.'
+    });
   });
 };
 </script>
