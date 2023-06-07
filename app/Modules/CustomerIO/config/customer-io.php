@@ -288,6 +288,16 @@ return [
                     'drumeo',
                 ],
             ],
+            '30 Day Chops Waitlist' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_30dc-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
         ],
         'pianote' => [
             'Chord Hacks' => [
@@ -355,6 +365,16 @@ return [
                 ],
                 'events' => [
                     'pianote_prospect_nppsh-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Easy Chords Waitlist' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_easy-chords-waitlist',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
