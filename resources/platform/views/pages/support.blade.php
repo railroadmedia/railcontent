@@ -4,10 +4,6 @@
     <title>Support | Musora</title>
 @endsection
 
-@section('styles')
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.12.0/cdn.min.js"></script>
-@endsection
-
 @section('content')
 
     {{--  SEARCH BAR  --}}
@@ -15,8 +11,11 @@
         <div class="tw-container tw-mx-auto tw-relative tw-z-0 tw-max-w-xl md:tw-max-w-none">
             <h3 class="tw-text-[32px]"><strong>Advice and answers from the Musora team</strong></h3>
             <p class="tw-mt-2 tw-mb-10 tw-text-lg">Find an answer on your own or get in touch with your dedicated Musora Mentor.</p>
-            <div x-data="{ search: '' }">
-                <input class="tw-border tw-border-[#D1D5DB] tw-rounded-full tw-py-3 tw-pl-4 tw-text-black md:tw-max-w-lg tw-w-full tw-mr-2 md:tw-mr-0 tw-mb-2 md:tw-mb-0" placeholder="Search the knowledgebase" x-model="search" /> <br class="md:tw-hidden"><a x-bind:href="`https://help.{{ $brand }}.com/search?query=` + search" class="tw-btn-primary tw-bg-[#00101D]">Search</a>
+            <div>
+                <form onsubmit="handleSearch(event)">
+                    <input class="tw-border tw-border-[#D1D5DB] tw-rounded-full tw-py-3 tw-pl-4 tw-text-black md:tw-max-w-lg tw-w-full tw-mr-2 md:tw-mr-0 tw-mb-2 md:tw-mb-0" placeholder="Search the knowledgebase" id="searchInput" /> <br class="md:tw-hidden">
+                    <button type="submit" class="tw-btn-primary tw-bg-[#00101D]">Search</button>
+                </form>
             </div>
         </div>
     </section>
@@ -126,4 +125,16 @@
             </div>
         </div>
     </section>
+@endsection
+
+@section('layout-scripts')
+    <script>
+        function handleSearch(e) {
+            e.preventDefault();
+            const keyword = document.getElementById('searchInput').value;
+            if(keyword){
+                window.location = `https://help.{{ $brand }}.com/search?query=${keyword}`;
+            }
+        }
+    </script>
 @endsection
