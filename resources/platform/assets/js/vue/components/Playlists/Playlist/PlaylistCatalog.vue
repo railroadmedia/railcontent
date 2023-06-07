@@ -91,7 +91,6 @@
 
     //Cancel Sort
     const handleCancelSort = () => {
-        console.log('handle cancel sort')
         //Update array to initial order
         lessonsCopy.value = playlistsStore.lessons;
         playlistsStore.sortingPlaylist = false;
@@ -99,22 +98,14 @@
     }
 
     const handleDragChange = (e) => {
-        const oldObj = lessonsCopy.value[e.oldIndex];
-        const oldUserItemPosition = oldObj.user_playlist_item_position;
-        console.log('oldUserItemPosition', oldUserItemPosition)
-        const newObj = lessonsCopy.value[e.newIndex];
-        const newUserItemPosition = newObj.user_playlist_item_position;
-        console.log('newUserItemPosition', newUserItemPosition)
+        const dragObj = lessonsCopy.value[e.oldIndex];
+        lessonsCopy.value.splice(e.oldIndex, 1);
+        lessonsCopy.value.splice(e.newIndex, 0, dragObj );
 
-        oldObj.user_playlist_item_position = newUserItemPosition;
-        newObj.user_playlist_item_position = oldUserItemPosition;
-        
-        newObj.hasChanged = true;
+        dragObj.user_playlist_item_position = e.newIndex + 1;
+        dragObj.hasChanged = true;
 
-        lessonsCopy.value[e.oldIndex] = newObj;
-        lessonsCopy.value[e.newIndex] = oldObj;
-
-        console.log(lessonCopy.value);
+        lessonsCopy.value[e.newIndex] = dragObj;
     }
 
     //Vertical Scroll
