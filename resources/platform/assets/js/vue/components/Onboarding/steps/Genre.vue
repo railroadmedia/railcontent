@@ -56,7 +56,10 @@ const handleNextStep = () => {
     emit('onChangeStep', 5);
     emit('onCheckStep', 4, true);
   }).catch(() => {
-    showErrorNotification.value = true;
+    window.shownotification({
+      icon: 'error',
+      text: 'There was an error saving your genre preferences, please try again later.'
+    });
   });
 };
 
