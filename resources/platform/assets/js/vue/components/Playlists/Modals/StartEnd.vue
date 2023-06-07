@@ -104,7 +104,6 @@
 
     const handleStartTime = (e) => {
         let val = parseInt(e.target.value);
-
         if (val >= state.endTime) {
             e.target.value = state.endTime;
             return;
@@ -114,7 +113,6 @@
 
     const handleEndTime = (e) => {
         let val = parseInt(e.target.value);
-
         if (val <= state.startTime) {
             e.target.value = state.startTime;
             return;
@@ -145,7 +143,7 @@
             <input type="range"
                 class="tw-absolute tw-w-full tw-h-2 tw-bg-transparent tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
                 @input="handleStartTime"
-                   :value="state.startTime"
+                :value="state.startTime"
                 step="1"
                 :min="0"
                 :max="state.durationTime"
@@ -153,7 +151,7 @@
             <input type="range"
                 class="tw-absolute tw-w-full tw-h-2 tw-bg-transparent tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
                 @input="handleEndTime"
-                   :value="state.endTime"
+                :value="state.endTime"
                 step="1"
                 :min="0"
                 :max="state.durationTime"
