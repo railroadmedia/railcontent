@@ -238,7 +238,7 @@ class UserPlaylistsService
         $userPlaylistIds,
         $contentId,
         $position = null,
-        $extraData = [],
+        $extraData = null,
         $startSecond = null,
         $endSecond = null,
         $importAllAssignments = false,

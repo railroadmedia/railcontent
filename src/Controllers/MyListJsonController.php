@@ -70,20 +70,25 @@ class MyListJsonController extends Controller
 
         $userPrimaryPlaylists =
             $this->userPlaylistsService->getUserPlaylist($userId, 'primary-playlist', $request->get('brand'));
+        if(empty($userPrimaryPlaylists)){
+            $userPrimaryPlaylists =
+                $this->userPlaylistsService->getUserPlaylist($userId, 'user-playlist', $request->get('brand'));
+        }
 
         if (empty($userPrimaryPlaylists)) {
             $userPrimaryPlaylist = $this->userPlaylistsService->updateOrCeate([
                                                                                   'user_id' => $userId,
-                                                                                  'type' => 'primary-playlist',
+                                                                                  'type' => 'user-playlist',
                                                                                   'brand' => $request->get('brand')
                                                                                       ??
                                                                                       config('railcontent.brand'),
                                                                               ], [
                                                                                   'user_id' => $userId,
-                                                                                  'type' => 'primary-playlist',
+                                                                                  'type' => 'user-playlist',
                                                                                   'brand' => $request->get('brand')
                                                                                       ??
                                                                                       config('railcontent.brand'),
+                                                                                  'name' => 'My List',
                                                                                   'created_at' => Carbon::now()
                                                                                       ->toDateTimeString(),
                                                                               ]);
@@ -91,7 +96,9 @@ class MyListJsonController extends Controller
             $userPrimaryPlaylist = Arr::first($userPrimaryPlaylists);
         }
 
-        $this->userPlaylistsService->addContentToUserPlaylist($userPrimaryPlaylist['id'], $request->get('content_id'));
+        $this->userPlaylistsService->addItemToPlaylist(
+            [$userPrimaryPlaylist['id']], $request->get('content_id'), null, null);
+        //addContentToUserPlaylist($userPrimaryPlaylist['id'], $request->get('content_id'));
 
         return response()->json(['success']);
     }
