@@ -1,6 +1,8 @@
 <script setup>
+// todo: there is a syntax error message when selecting the pill, I still can't find the root cause, but vue does not break
 import { ref } from 'vue'
 import Pill from './Pill.vue'
+
 const props = defineProps({
     options: {
         type: Array,
@@ -30,6 +32,8 @@ function handleSelection(value) {
     selectedValues.value = newSelectedValues
     emit('onChangeSelection', newSelectedValues)
 }
+
+//A function that receives a string and removes empty spaces and special characters 
 </script>
 
 <template>
@@ -39,7 +43,7 @@ function handleSelection(value) {
     >
         <Pill
             v-for="option in options"
-            v-bind:key="`${option.value}-pill`"
+            :key="`${option.value.replace(/\s/g, '')}-pill${!!selectedValues[option.value] ? '__active' : ''}}`"
             :text="option.text"
             :value="option.value"
             :active="!!selectedValues[option.value]"

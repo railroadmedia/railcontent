@@ -122,8 +122,9 @@ export default {
             const parsedArray = [];
 
             this.includedTypes.forEach((type) => {
+                let displayName = type.replace(/-/g, ' ').replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
                 parsedArray.push({
-                    key: type.replace(/-/g, ' '),
+                    key: displayName,
                     value: type,
                 });
             });

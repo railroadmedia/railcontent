@@ -14,5 +14,7 @@ class ReportingServiceProvider extends ServiceProvider
                 RecentRequestStats::class,
             ]
         );
+
+        $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
     }
 }

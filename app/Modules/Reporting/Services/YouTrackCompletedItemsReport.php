@@ -1,13 +1,14 @@
 <?php
 
-namespace App\Console\Commands;
+namespace App\Modules\Reporting\Services;
 
-use Illuminate\Console\Command;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 
-class YouTrackGenerateChangeList extends Command
+class YouTrackCompletedItemsReport
 {
+
     private $agiles = [
         "UX" => "121-5",
         "FEW" => "121-22",
@@ -38,22 +39,26 @@ class YouTrackGenerateChangeList extends Command
                 'state' => 'QA State'
             ]
         ];
-    protected $signature = 'reporting:generateChangeList';
 
-    protected $description = '';
+    private string $report = "";
 
-    public function handle()
+    private function info(string $text)
     {
-        $start = '2023-02-01';
-        $end = '2023-04-04';
+        if ($this->report) {
+            $text = '<br>' . $text;
+        }
+        $this->report .= $text;
+    }
 
-        $startTicks = strtotime($start) * 1000;
-        $endTicks = strtotime($end) * 1000;
+    public function generate($startDate, $endDate)
+    {
+        $startTicks = strtotime($startDate) * 1000;
+        $endTicks = strtotime($endDate) * 1000;
 
-        $this->info("Report generated for $start to $end");
+        $this->info("Report generated for $startDate to $endDate");
 
         foreach ($this->agiles as $name => $agileId) {
-            $json = $this->getJson("agiles/$agileId/sprints", ['fields' => 'id,name,start,finish']);
+            $json = $this->getJson("agiles/$agileId/sprints", ['fields' => 'id,name,start,finish', '$top' => 1000]);
             $data = collect($json);
 
             $sprints = $data->where('finish', '>', $startTicks)->where('finish', '<', $endTicks);
@@ -64,12 +69,10 @@ class YouTrackGenerateChangeList extends Command
                 $this->sprintReport($agileId, $sprint, $name);
             }
         }
+
+        return $this->report;
     }
 
-    /**
-     * @param array $queryData
-     * @return array|mixed
-     */
     public function getJson(string $url, array $queryData): mixed
     {
         $queryString = Arr::query($queryData);
@@ -82,10 +85,6 @@ class YouTrackGenerateChangeList extends Command
         return $json;
     }
 
-    /**
-     * @param string $sprint
-     * @return void
-     */
     public function sprintReport($agileId, $sprint, $teamName): void
     {
         $sprintName = $sprint['name'];
@@ -123,5 +122,6 @@ class YouTrackGenerateChangeList extends Command
         $this->info("");
         $this->info("");
     }
+
 
 }
