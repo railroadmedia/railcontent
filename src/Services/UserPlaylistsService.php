@@ -181,7 +181,7 @@ class UserPlaylistsService
             return true;
         }
 
-        return $this->userPlaylistContentRepository->delete($userPlaylistContent[0]['id']);
+        return $this->removeItemFromPlaylist($userPlaylistContent[0]['id']);
     }
 
     /**

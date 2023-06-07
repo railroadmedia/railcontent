@@ -121,6 +121,11 @@ class MyListJsonController extends Controller
         $userPrimaryPlaylist =
             $this->userPlaylistsService->getUserPlaylist($userId, 'primary-playlist', $request->get('brand'));
 
+        if(empty($userPrimaryPlaylist)){
+            $userPrimaryPlaylist =
+                $this->userPlaylistsService->getUserPlaylist($userId, 'user-playlist', $request->get('brand'));
+        }
+
         if (!empty($userPrimaryPlaylist)) {
             $userPrimaryPlaylistId = Arr::first($userPrimaryPlaylist)['id'];
             $this->userPlaylistsService->removeContentFromUserPlaylist(
