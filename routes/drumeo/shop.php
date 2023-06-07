@@ -23,6 +23,7 @@ Route::domain('{drumeoDomain}')
             Route::get('/30-day-chops', [SalesController::class, 'thirtyDayChops'] );
             Route::get('/30-day-drummer/deal', [SalesController::class, 'thirtyDayDrummerDeal'] );
             Route::get('/eardrums', [SalesController::class, 'eardrums'] );
+            Route::get('/eardrums-members', [SalesController::class, 'eardrumsMembers'] );
             Route::get('/quietkick', [SalesController::class, 'quietKick'] );
             Route::get('/tone-control-kit', [SalesController::class, 'toneControl'] );
 
