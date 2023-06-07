@@ -41,8 +41,10 @@
                                 @else
                                     SEE YOUR DEAL &raquo;
                                 @endif
+                            @elseif(!empty($month))
+                                30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                             @else
-                                START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                                7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                             @endif
                         </a>
                         <a aria-label="Review" class="inline-block" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
