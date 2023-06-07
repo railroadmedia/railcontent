@@ -141,7 +141,7 @@
         <!-- Slider -->
         <div class="tw-relative tw-w-full">
             <input type="range"
-                class="tw-absolute tw-w-full tw-h-2 tw-bg-transparent tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
+                class="tw-absolute tw-w-full tw-h-2 tw-bg-transparent tw-rounded-lg tw-appearance-none tw-cursor-pointer tw-bg-gray-300 dark:tw-bg-gray-700"
                 @input="handleStartTime"
                 :value="state.startTime"
                 step="1"
@@ -149,7 +149,7 @@
                 :max="state.durationTime"
             >
             <input type="range"
-                class="tw-absolute tw-w-full tw-h-2 tw-bg-transparent tw-rounded-lg tw-appearance-none tw-cursor-pointer dark:tw-bg-gray-700"
+                class="tw-absolute tw-w-full tw-h-2 tw-bg-transparent tw-rounded-lg tw-appearance-none tw-cursor-pointer tw-bg-gray-300 dark:tw-bg-gray-700"
                 @input="handleEndTime"
                 :value="state.endTime"
                 step="1"

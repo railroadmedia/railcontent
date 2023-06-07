@@ -23660,6 +23660,10 @@ a:visited{
 .tw-bg-\[\#002039\]\/90{
   background-color: rgb(0 32 57 / 0.9) !important;
 }
+.tw-bg-gray-300{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(209 213 219 / var(--tw-bg-opacity)) !important;
+}
 .tw-bg-\[rgba\(0\,12\,23\,0\.5\)\]{
   background-color: rgba(0,12,23,0.5) !important;
 }
