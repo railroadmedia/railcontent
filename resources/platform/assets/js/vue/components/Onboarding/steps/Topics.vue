@@ -39,7 +39,17 @@ function handleMultiSelection(selection) {
   currentSelection.value = selection;
 }
 
-const handleNextStep = () => {
+function goBack() {
+  emit('onChangeStep', 4);
+}
+
+const isNextButtonDisabled = () => {
+  return !Object.values(currentSelection.value).filter(val => {
+    return val;
+  }).length;
+};
+
+const handleRedirect = () => {
   const data = [];
 
   emit("onChangeInfo", { ...props.info, topics: { ...props.info.topics, [props.brand]: currentSelection.value } });
@@ -54,21 +64,13 @@ const handleNextStep = () => {
     data,
     brand: props.brand
   }).then(() => {
-    emit('onChangeStep', 6);
-    emit('onCheckStep', 5, true);
+    window.location.href = '/members';
   }).catch(() => {
-    showErrorNotification.value = true;
+    window.shownotification({
+      icon: 'error',
+      text: 'There was an error saving your topics preferences, please try again later.'
+    });
   });
-};
-
-function goBack() {
-  emit('onChangeStep', 4);
-}
-
-const isNextButtonDisabled = () => {
-  return !Object.values(currentSelection.value).filter(val => {
-    return val;
-  }).length;
 };
 </script>
 
@@ -83,6 +85,7 @@ const isNextButtonDisabled = () => {
         title="Okay, and what topics would you like to study?"
         subtitle="You can select more than one topic and change your settings in your profile at any time."
         @onGoBack="goBack"
+        :hideCloseButton="true"
       />
       <MultiSelect :options="options" :initialSelection="currentSelection" classOverride="md:tw-mb-[52px]"
         @onChangeSelection="handleMultiSelection" />
@@ -91,11 +94,11 @@ const isNextButtonDisabled = () => {
         tw-flex tw-flex-col tw-items-center tw-pt-[20px] tw-pb-[20px]
         xl:tw-pb-0
       ">
-        <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
-          classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Next</Button>
+        <Button :brand="brand" @onButtonClick="handleRedirect" :isDisabled="isNextButtonDisabled()"
+          classOverride="tw-mx-[16px] tw-w-[90vw] tw-mb-[20px] md:tw-hidden tw-block">Complete Your Account</Button>
         <ProgressBar :brand="brand" :currentStep="5" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
-        <Button :brand="brand" @onButtonClick="handleNextStep" :isDisabled="isNextButtonDisabled()"
-          classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Next</Button>
+        <Button :brand="brand" @onButtonClick="handleRedirect" :isDisabled="isNextButtonDisabled()"
+          classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Complete Your Account</Button>
         <SkipStep :brand="brand" classOverride="tw-mt-[20px] md:tw-mt-0" />
       </div>
     </div>

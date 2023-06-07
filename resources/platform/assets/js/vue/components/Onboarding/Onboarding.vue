@@ -152,15 +152,5 @@ onMounted(() => {
             :info="info"
             :config-options="configOptions"
         />
-        <Coaches
-            :brand="brand"
-            v-if="currentStep === 6"
-            @onChangeStep="changeStep"
-            @onChangeInfo="changeInfo"
-            @onCheckStep="checkStepToggle"
-            :steps="steps"
-            :info="info"
-            :config-options="configOptions"
-        />
     </ModalRenderer>
 </template>
