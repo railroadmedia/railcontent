@@ -52,6 +52,11 @@ class AddedToPrimaryPlaylistDecorator extends ModeDecoratorBase
         $userPlaylist =
             \Arr::first($this->userPlaylistsRepository->getUserPlaylist(user()->id, 'primary-playlist', brand()));
 
+        if (empty($userPlaylist)) {
+            $userPlaylist =
+                \Arr::first($this->userPlaylistsRepository->getUserPlaylist(user()->id, 'user-playlist', brand()));
+        }
+
         foreach ($contentsOfType as $index => $content) {
             $contentsOfType[$index]['user_playlists'][user()->id] = [];
             $contentsOfType[$index]['is_added_to_primary_playlist'] = false;
