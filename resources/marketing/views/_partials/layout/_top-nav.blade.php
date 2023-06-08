@@ -80,6 +80,10 @@
 
     </div>
 
+    <div class="hidden lg:block py-4">
+        <a href="{{ get_legacy_brand_base_url('musora') }}/login" class="border-2 border-white rounded-full text-[15px] text-white hover:text-black hover:bg-white uppercase font-bebas tracking-widest pt-[9px] px-[30px] pb-[8px] transition-all duration-200">Login</a>
+    </div>
+
     <!-- Sidebar Toggle -->
     <button class="text-white w-10 h-10 md:w-14 md:h-14 relative focus:outline-none" x-on:click="sidebarOpen = !sidebarOpen, showOverlay = !showOverlay">
         <span class="sr-only">Open main menu</span>
