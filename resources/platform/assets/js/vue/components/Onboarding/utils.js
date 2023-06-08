@@ -53,7 +53,7 @@ export const getInitialInfo = ({ userId, userName, userAvatar, selectedGear, sel
   })
 };
 
-export const getCheckedSteps = ({selectedGear, selectedTopics, selectedGenres, selectedExperience, brand, steps }) => {
+export const getCheckedSteps = ({ selectedGear, selectedTopics, selectedGenres, selectedExperience, brand, steps }) => {
   const newSteps = steps.map((step, index) => {
     if (index > 1) {
       return {...step, checked: false };
@@ -88,7 +88,6 @@ export const getCheckedSteps = ({selectedGear, selectedTopics, selectedGenres, s
   }
   if (hasTopics) {
     newSteps[5].checked = true;
-    newSteps[6].checked = true;
   }
   return newSteps;
 };

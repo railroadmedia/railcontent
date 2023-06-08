@@ -58,7 +58,7 @@ class YouTrackCompletedItemsReport
         $this->info("Report generated for $startDate to $endDate");
 
         foreach ($this->agiles as $name => $agileId) {
-            $json = $this->getJson("agiles/$agileId/sprints", ['fields' => 'id,name,start,finish']);
+            $json = $this->getJson("agiles/$agileId/sprints", ['fields' => 'id,name,start,finish', '$top' => 1000]);
             $data = collect($json);
 
             $sprints = $data->where('finish', '>', $startTicks)->where('finish', '<', $endTicks);
