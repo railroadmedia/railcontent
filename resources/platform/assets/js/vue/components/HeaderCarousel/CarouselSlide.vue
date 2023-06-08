@@ -44,6 +44,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  primaryVideo: {
+    type: String,
+    default: "",
+  },
   secondaryCtaText: {
     type: String,
     default: "",
@@ -52,15 +56,15 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  secondaryVideo: {
+    type: String,
+    default: "",
+  },
   description: {
     type: String,
     default: "",
   },
   descriptionColor: {
-    type: String,
-    default: "",
-  },
-  video: {
     type: String,
     default: "",
   },
@@ -98,22 +102,9 @@ const props = defineProps({
   },
 });
 
-const learnMoreModal = ref(false);
+const primaryVideoModal = ref(false);
+const secondaryVideoModal = ref(false);
 
-const goToUrl = (url) => {
-  if (url) {
-      if(props.video && screenSize.value > 1279) return;
-      window.location.href = url;
-  }
-};
-
-const openModal = () => {
-    learnMoreModal.value = true;
-};
-
-const closeModal = () => {
-    learnMoreModal.value = false;
-};
 </script>
 
 <template>
@@ -156,45 +147,64 @@ const closeModal = () => {
           <!-- CTA -->
             <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
                 <a
-                    v-if="primaryCtaText"
+                    v-if="primaryCtaText && primaryCtaUrl && !primaryVideo"
                     :href="primaryCtaUrl"
                     :class="`tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2`"
                 >
                     {{ primaryCtaText }}
                 </a>
+                <span
+                    v-if="primaryCtaText && primaryVideo"
+                    @click="primaryVideoModal = true"
+                    :class="`tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2 tw-cursor-pointer`"
+                >
+                    {{ primaryCtaText }}
+                </span>
                 <a
-                    v-if="secondaryCtaText && !video"
+                    v-if="secondaryCtaText && secondaryCtaUrl && !secondaryVideo"
                     :href="secondaryCtaUrl"
-                    :class="`tw-border-2  tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2`"
+                    :class="`tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2`"
                 >
                     {{ secondaryCtaText }}
                 </a>
                 <span
-                    v-if="secondaryCtaText && video"
-                    @click="openModal()"
-                    :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block tw-cursor-pointer hover:tw-bg-white hover:tw-text-[#000C17] tw-text-xl md:tw-mb-2`"
+                    v-if="secondaryCtaText && secondaryVideo"
+                    @click="secondaryVideoModal = true"
+                    :class="`tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2 tw-cursor-pointer`"
                 >
                     {{ secondaryCtaText }}
                 </span>
             </div>
-<!--            <div v-if="registerUrl || video" class="tw-gap-2 tw-mt-2 tw-hidden xl:tw-flex tw-flex-wrap">-->
+<!--            <div v-if="registerUrl || secondaryVideo" class="tw-gap-2 tw-mt-2 tw-hidden xl:tw-flex tw-flex-wrap">-->
 <!--                <a v-if="registerUrl" :href="ctaUrl" :class="`tw-btn-primary tw-bg-${brand} tw-text-xl go-to-button tw-w-[200px]`">-->
 <!--                    {{ ctaText }}-->
 <!--                </a>-->
-<!--                <span v-if="video" @click="openModal()" class="tw-btn-secondary tw-text-white tw-text-xl tw-w-[200px] tw-z-100 tw-relative">Learn More</span>-->
+<!--                <span v-if="secondaryVideo" @click="openModal()" class="tw-btn-secondary tw-text-white tw-text-xl tw-w-[200px] tw-z-100 tw-relative">Learn More</span>-->
 <!--            </div>-->
         </div>
       </div>
     </section>
   </div>
 
-    <ModalRenderer v-if="learnMoreModal">
-        <button @click="closeModal"
+    <!--  Primary Video Modal  -->
+    <ModalRenderer v-if="primaryVideoModal">
+        <button @click="primaryVideoModal = false;"
                 class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
             <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
         </button>
         <div class="tw-w-full tw-mx-6 lg:tw-mx-0 lg:tw-w-1/2 tw-relative" style="padding-bottom: 56.25%;">
-            <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close" :src="video" frameborder="0" allowfullscreen allow="autoplay" title="learn more video"></iframe>
+            <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close" :src="primaryVideo" frameborder="0" allowfullscreen allow="autoplay" title="primaryVideo"></iframe>
+        </div>
+    </ModalRenderer>
+
+    <!--  Secondary Video modal  -->
+    <ModalRenderer v-if="secondaryVideoModal">
+        <button @click="secondaryVideoModal = false;"
+                class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
+            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
+        </button>
+        <div class="tw-w-full tw-mx-6 lg:tw-mx-0 lg:tw-w-1/2 tw-relative" style="padding-bottom: 56.25%;">
+            <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close" :src="secondaryVideo" frameborder="0" allowfullscreen allow="autoplay" title="secondaryVideo"></iframe>
         </div>
     </ModalRenderer>
 </template>

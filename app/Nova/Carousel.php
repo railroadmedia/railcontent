@@ -236,10 +236,11 @@ class Carousel extends Resource
                         if ($formData->is_featured) $field->show()->rules(['required']);
                     }
                 ),
+            Text::make('Primary Video Source', 'primary_video_src')->hideFromIndex()
+                ->help('Automatically replaces the primary button URL with the pop-up video player. Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1. In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted".'),
             Text::make('Secondary Button Text', 'secondary_cta_text')->hideFromIndex(),
             Text::make('Secondary Button URL', 'secondary_cta_url')->hideFromIndex(),
-            Text::make('Video Source', 'video_src')->hideFromIndex()
-                ->hideFromDetail()
+            Text::make('Secondary Video Source', 'video_src')->hideFromIndex()
                 ->help('Automatically replaces the second button URL with the pop-up video player. Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1. In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted".'),
             //duplicated fields for displaying index page purpose
             Number::make('Display Order', 'display_order')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating(),
