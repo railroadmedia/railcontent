@@ -1383,17 +1383,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 1.25rem !important;
   margin-bottom: 1.25rem !important;
 }
-.mx-2 {
-  margin-left: 0.5rem !important;
-  margin-right: 0.5rem !important;
+.my-4 {
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
 }
 .my-2 {
   margin-top: 0.5rem !important;
   margin-bottom: 0.5rem !important;
 }
-.my-4 {
-  margin-top: 1rem !important;
-  margin-bottom: 1rem !important;
+.mx-2 {
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
 }
 .my-8 {
   margin-top: 2rem !important;
@@ -3055,9 +3055,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 0.25rem !important;
   padding-bottom: 0.25rem !important;
 }
-.py-40 {
-  padding-top: 10rem !important;
-  padding-bottom: 10rem !important;
+.py-32 {
+  padding-top: 8rem !important;
+  padding-bottom: 8rem !important;
 }
 .px-7 {
   padding-left: 1.75rem !important;
@@ -3067,9 +3067,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 2.5rem !important;
   padding-bottom: 2.5rem !important;
 }
-.px-10 {
-  padding-left: 2.5rem !important;
-  padding-right: 2.5rem !important;
+.py-40 {
+  padding-top: 10rem !important;
+  padding-bottom: 10rem !important;
 }
 .py-4 {
   padding-top: 1rem !important;
@@ -3131,6 +3131,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 2rem !important;
   padding-right: 2rem !important;
 }
+.px-10 {
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+}
 .py-16 {
   padding-top: 4rem !important;
   padding-bottom: 4rem !important;
@@ -3167,10 +3171,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 3rem !important;
   padding-right: 3rem !important;
 }
-.py-32 {
-  padding-top: 8rem !important;
-  padding-bottom: 8rem !important;
-}
 .px-9 {
   padding-left: 2.25rem !important;
   padding-right: 2.25rem !important;
@@ -3202,9 +3202,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pl-3 {
   padding-left: 0.75rem !important;
-}
-.pb-20 {
-  padding-bottom: 5rem !important;
 }
 .pb-\[66vh\] {
   padding-bottom: 66vh !important;
@@ -3280,6 +3277,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pt-32 {
   padding-top: 8rem !important;
+}
+.pb-20 {
+  padding-bottom: 5rem !important;
 }
 .pb-6 {
   padding-bottom: 1.5rem !important;
@@ -3443,16 +3443,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 0.75rem !important;
   line-height: 1rem !important;
 }
+.text-5xl {
+  font-size: 3rem !important;
+  line-height: 1 !important;
+}
 .text-2xl {
   font-size: 1.5rem !important;
   line-height: 2rem !important;
 }
 .text-\[28px\] {
   font-size: 28px !important;
-}
-.text-5xl {
-  font-size: 3rem !important;
-  line-height: 1 !important;
 }
 .text-base {
   font-size: 1rem !important;
@@ -4085,7 +4085,7 @@ h1 sup, h2 sup, h3 sup, h4 sup, h5 sup, h6 sup, li sup, p sup {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 30px;
 }
 @media (min-width: 768px) {
   h1 {
@@ -4099,7 +4099,7 @@ h1 {
 }
 
 h2 {
-  font-size: 20px;
+  font-size: 24px;
 }
 @media (min-width: 768px) {
   h2 {
@@ -4113,7 +4113,7 @@ h2 {
 }
 
 h3 {
-  font-size: 18px;
+  font-size: 20px;
 }
 @media (min-width: 768px) {
   h3 {
@@ -4127,7 +4127,7 @@ h3 {
 }
 
 h4 {
-  font-size: 16px;
+  font-size: 18px;
 }
 @media (min-width: 768px) {
   h4 {
@@ -4141,7 +4141,7 @@ h4 {
 }
 
 h5 {
-  font-size: 15px;
+  font-size: 16px;
 }
 @media (min-width: 768px) {
   h5 {
@@ -4526,6 +4526,16 @@ li, p {
     margin-right: 0.25rem !important;
   }
 
+  .sm\:my-6 {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .sm\:mx-2 {
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
+  }
+
   .sm\:my-2 {
     margin-top: 0.5rem !important;
     margin-bottom: 0.5rem !important;
@@ -4534,11 +4544,6 @@ li, p {
   .sm\:my-7 {
     margin-top: 1.75rem !important;
     margin-bottom: 1.75rem !important;
-  }
-
-  .sm\:my-6 {
-    margin-top: 1.5rem !important;
-    margin-bottom: 1.5rem !important;
   }
 
   .sm\:my-4 {
@@ -4569,11 +4574,6 @@ li, p {
   .sm\:my-8 {
     margin-top: 2rem !important;
     margin-bottom: 2rem !important;
-  }
-
-  .sm\:mx-2 {
-    margin-left: 0.5rem !important;
-    margin-right: 0.5rem !important;
   }
 
   .sm\:my-0 {
@@ -4945,20 +4945,20 @@ li, p {
     height: 8rem !important;
   }
 
-  .sm\:h-10 {
-    height: 2.5rem !important;
-  }
-
-  .sm\:h-24 {
-    height: 6rem !important;
-  }
-
   .sm\:h-36 {
     height: 9rem !important;
   }
 
+  .sm\:h-10 {
+    height: 2.5rem !important;
+  }
+
   .sm\:h-20 {
     height: 5rem !important;
+  }
+
+  .sm\:h-24 {
+    height: 6rem !important;
   }
 
   .sm\:h-9 {
@@ -5351,9 +5351,9 @@ li, p {
     padding-right: 1.5rem !important;
   }
 
-  .sm\:py-56 {
-    padding-top: 14rem !important;
-    padding-bottom: 14rem !important;
+  .sm\:py-52 {
+    padding-top: 13rem !important;
+    padding-bottom: 13rem !important;
   }
 
   .sm\:py-14 {
@@ -5364,6 +5364,16 @@ li, p {
   .sm\:px-3 {
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
+  }
+
+  .sm\:px-4 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+
+  .sm\:px-10 {
+    padding-left: 2.5rem !important;
+    padding-right: 2.5rem !important;
   }
 
   .sm\:px-2 {
@@ -5386,11 +5396,6 @@ li, p {
     padding-bottom: 0.25rem !important;
   }
 
-  .sm\:px-4 {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-  }
-
   .sm\:py-10 {
     padding-top: 2.5rem !important;
     padding-bottom: 2.5rem !important;
@@ -5409,11 +5414,6 @@ li, p {
   .sm\:py-9 {
     padding-top: 2.25rem !important;
     padding-bottom: 2.25rem !important;
-  }
-
-  .sm\:px-10 {
-    padding-left: 2.5rem !important;
-    padding-right: 2.5rem !important;
   }
 
   .sm\:py-16 {
@@ -5536,6 +5536,10 @@ li, p {
 
   .sm\:pl-0 {
     padding-left: 0px !important;
+  }
+
+  .sm\:pb-20 {
+    padding-bottom: 5rem !important;
   }
 
   .sm\:pl-10 {
@@ -5692,6 +5696,10 @@ li, p {
 
   .sm\:pt-12 {
     padding-top: 3rem !important;
+  }
+
+  .sm\:pb-52 {
+    padding-bottom: 13rem !important;
   }
 
   .sm\:pr-20 {
@@ -7903,28 +7911,20 @@ li, p {
     height: 20rem !important;
   }
 
-  .lg\:h-20 {
-    height: 5rem !important;
+  .lg\:h-16 {
+    height: 4rem !important;
   }
 
-  .lg\:h-36 {
-    height: 9rem !important;
+  .lg\:h-44 {
+    height: 11rem !important;
   }
 
   .lg\:h-52 {
     height: 13rem !important;
   }
 
-  .lg\:h-16 {
-    height: 4rem !important;
-  }
-
-  .lg\:h-40 {
-    height: 10rem !important;
-  }
-
-  .lg\:h-44 {
-    height: 11rem !important;
+  .lg\:h-48 {
+    height: 12rem !important;
   }
 
   .lg\:h-96 {
@@ -7935,12 +7935,16 @@ li, p {
     height: 8rem !important;
   }
 
+  .lg\:h-40 {
+    height: 10rem !important;
+  }
+
   .lg\:h-28 {
     height: 7rem !important;
   }
 
-  .lg\:h-48 {
-    height: 12rem !important;
+  .lg\:h-20 {
+    height: 5rem !important;
   }
 
   .lg\:h-24 {
@@ -7953,6 +7957,10 @@ li, p {
 
   .lg\:h-72 {
     height: 18rem !important;
+  }
+
+  .lg\:h-36 {
+    height: 9rem !important;
   }
 
   .lg\:h-60 {
@@ -8288,6 +8296,11 @@ li, p {
     padding-right: 1rem !important;
   }
 
+  .lg\:py-56 {
+    padding-top: 14rem !important;
+    padding-bottom: 14rem !important;
+  }
+
   .lg\:py-20 {
     padding-top: 5rem !important;
     padding-bottom: 5rem !important;
@@ -8421,11 +8434,6 @@ li, p {
   .lg\:px-10 {
     padding-left: 2.5rem !important;
     padding-right: 2.5rem !important;
-  }
-
-  .lg\:py-56 {
-    padding-top: 14rem !important;
-    padding-bottom: 14rem !important;
   }
 
   .lg\:px-2 {
