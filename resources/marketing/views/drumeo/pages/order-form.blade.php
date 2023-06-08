@@ -33,7 +33,7 @@
     <nav id="nav" class="top-bar row expanded">
         <div class="logo">
             <a href="">
-                <img src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg" alt="Drumeo">
+                <img src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white_new.svg" alt="Drumeo">
             </a>
         </div>
 

@@ -11,7 +11,7 @@ export const whiteLogos = {
   singeo:'https://d38h3dn806jqj1.cloudfront.net/logos/singeo-white.svg',
   guitareo:'https://d38h3dn806jqj1.cloudfront.net/logos/guitareo-white.svg',
   pianote:'https://d38h3dn806jqj1.cloudfront.net/logos/pianote-white.svg',
-  musora: 'https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg'
+  musora: 'https://d38h3dn806jqj1.cloudfront.net/logos/musora-white_new.svg'
 }
 
 export const bgColor = {
