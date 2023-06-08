@@ -207,7 +207,7 @@
                 'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
                 'students' => number_format(Prices::$students),
             ])
-        @else
+        @elseif(!empty($songsVersion))
             @include('musora.sales.components.header-section', [
                 'header' => 'Learn piano from real teachers. Play your favorite songs.',
                 'desc' => 'Find and play the songs you love. Download, print, and play 1000+ songs. Plus get flexible, fun lessons and unlimited personal support from real teachers.',
@@ -217,6 +217,19 @@
                 'pointOne' => '1000+ popular songs',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Learn anywhere, anytime',
+                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
+                'students' => number_format(Prices::$students),
+            ])
+        @else
+            @include('musora.sales.components.header-section', [
+                'header' => 'Online piano lessons for all skill levels.',
+                'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
+                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
+                'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
+                'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
+                'pointOne' => 'Improve Your Skills',
+                'pointTwo' => 'World-Class Teachers',
+                'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
                 'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
                 'students' => number_format(Prices::$students),
             ])
