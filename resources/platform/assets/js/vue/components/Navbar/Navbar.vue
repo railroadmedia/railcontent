@@ -111,7 +111,6 @@ const toggleSearchModal = (val) => {
       <!-- Invite a Friend -->
       <a v-if="canReferNewStudents"
         :href="`/${ brand }/referral/invite-a-friend`"
-        @click="() => toggleSearchModal(true)"
         class="tw-shrink-0 tw-w-[40px] sm:tw-w-[58px] tw-h-full tw-flex tw-items-center tw-mr-1 tw-justify-center hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
         title="Invite a Friend"
       >

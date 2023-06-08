@@ -34,7 +34,7 @@
                 <a
                     v-for="user in likeUsers"
                     :key="user.id"
-                    :href="baseProfileRoute + user.user_id"
+                    :href="`${baseProfileRoute}${user.user_id}/dashboard`"
                     class="tw-flex tw-flex-row comment-like-user bt-grey-1-1 tw-no-underline tw-text-[#00101D] ph-3 pv-1 tw-items-center"
                 >
                     <div class="tw-flex tw-flex-row">
@@ -96,7 +96,7 @@ export default {
     },
     computed: {
         baseProfileRoute() {
-            return '/members/profile/';
+            return `/${this.brand}/profile/`;
         },
     },
     mounted() {
