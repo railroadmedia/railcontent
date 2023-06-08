@@ -26,8 +26,12 @@
         <div class="container mx-auto relative z-0 max-w-xl md:max-w-none">
             <h3><strong>Advice and answers from the Musora team</strong></h3>
             <p class="my-4">Find an answer on your own or get in touch with your dedicated Musora Mentor.</p>
-            <div x-data="{ search: '' }">
-                <input class="border-2 border-white rounded-full py-3 pl-4 text-black md:max-w-lg w-full mr-2 md:mr-0 mb-2 md:mb-0" placeholder="Search the knowledgebase" x-model="search" /> <br class="md:hidden"><a x-bind:href="`https://help.musora.com/search?query=` + search" class="rounded-full border-2 border-white uppercase font-bebas py-2.5 px-10 text-xl tracking-wide w-full md:w-auto inline-block">Search</a>
+            <div>
+                <form onsubmit="handleSearch(event)">
+                    <input class="border-2 border-white rounded-full py-3 pl-4 text-black md:max-w-lg w-full mr-2 md:mr-0 mb-2 md:mb-0" placeholder="Search the knowledgebase" id="searchInput" />
+                    <br class="md:hidden">
+                    <button type="submit" class="rounded-full border-2 border-white uppercase font-bebas py-2.5 px-10 text-xl tracking-wide w-full md:w-auto inline-block">Search</button>
+                </form>
             </div>
         </div>
     </section>
@@ -141,6 +145,15 @@
 
 @section('layout-scripts')
     @parent
+    <script>
+        function handleSearch(e) {
+            e.preventDefault();
+            const keyword = document.getElementById('searchInput').value;
+            if(keyword){
+                window.location = `https://help.{{ $brand }}.com/search?query=${keyword}`;
+            }
+        }
+    </script>
     <script src="{{ mix('platform/js/manifest.js') }}"></script>
     <script src="{{ mix('platform/js/vendor.js') }}"></script>
     <script src="{{ mix('platform/js/app.js') }}"></script>
