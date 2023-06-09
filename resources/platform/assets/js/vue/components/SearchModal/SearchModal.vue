@@ -53,7 +53,7 @@ const handleSearch = () => {
         :action="`/${brand}/search`" 
         class="tw-relative tw-h-[62px] tw-flex tw-items-center tw-w-full"
       >
-        <MusoraIcon icon-name="search" class="tw-absolute tw-top-6 tw-left-6 dark:tw-text-[#9EC0DC] tw-z-0" />
+        <MusoraIcon icon-name="search" class="tw-absolute tw-top-6 tw-left-6 dark:tw-text-[#9EC0DC] tw-z-10" />
         <InputLabel 
           :showClearButton="true" 
           ref="searchInput"
@@ -75,6 +75,7 @@ const handleSearch = () => {
             tw-shadow-none
             tw-pl-[48px]
             tw-pr-[36px]
+            tw-mx-2
             focus:tw-ring-0`" 
             @keyup.enter="handleSearch"
         />
