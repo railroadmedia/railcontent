@@ -21,7 +21,7 @@
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
                     <a class=" w-full sm:w-64 join smaller bg-{{$theme}} w-full my-3"
                     @if(!empty($month))
-                        href="choose-your-trial-month"
+                        href="/choose-your-trial-month"
                     @else
                         href="/choose-plan"
                     @endif
@@ -33,7 +33,8 @@
                         @endif
                     </a>
                     @if(!empty($variant))
-                        <p class="text-xs leading-normal mt-4 sm:mt-5"><em>
+                        <br><a class="text-sm text-pianote mb-5 sm:mb-7 w-full inline-block" href="{{ $variant }}"><em><u>Or start a monthly trial (no prize entry).</u></em></a>
+                        <p class="text-xs leading-normal"><em>
                         You’ll be billed $240 on
                                 @if(empty($month))
                                     {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }}
