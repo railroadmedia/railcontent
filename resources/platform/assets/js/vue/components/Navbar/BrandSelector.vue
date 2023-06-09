@@ -1,5 +1,5 @@
-<script>
-import { ref } from 'vue'
+<script setup>
+import { ref, onUpdated } from 'vue'
 import ModalRenderer from '../Modal/ModalRenderer.vue'
 import SquaredCard from '../SquaredCard/SquaredCard.vue'
 import SquaresContainer from "../SquaredCard/SquaresContainer.vue";
@@ -7,57 +7,49 @@ import InstrumentCardContent from "../SquaredCard/InstrumentCardContent.vue";
 import { textColor, bgImgCard, brandUrl } from '../../../constants/brands.js';
 import { XIcon } from "@heroicons/vue/solid";
 import LoadingSpinner from '../LoadingSpinner/LoadingSpinner.vue';
+import { trapFocus } from '../../../utils.js';
 
-
-const brandNames = ['drumeo', 'pianote', 'guitareo', 'singeo'];
-
-export default {
-    name: 'BrandSelector',
-    components: { ModalRenderer, SquaredCard, SquaresContainer, InstrumentCardContent, XIcon, LoadingSpinner },
-    props: {
-        brand: {
-            type: String,
-            default: 'drumeo'
-        },
-        onBrandSelect: {
-            type: String
-        }
+const props = defineProps({
+    brand: {
+        type: String,
+        default: 'drumeo'
     },
-    emits: ['onBrandSelect'],
-    setup(_props, context) {
-        const isSelectorOpen = ref(false);
-        const isLoading = ref(false);
+    onBrandSelect: {
+        type: String
+    }
+});
 
-        const handleBrandOpen = (val) => {
-            if (typeof val === 'boolean') {
-                isSelectorOpen.value = val
-            }
-        }
+const emit = defineEmits(['onBrandSelect']);
 
-        const handleSelect = (brand) => {
-            isLoading.value = true;
-            //Refresh the Page with new brand
-            const host = window.location.host;
-            window.location.href = `/${brand}`;
-        }
+const isSelectorOpen = ref(false);
+const isLoading = ref(false);
 
-        const handleClose = () => {
-            isSelectorOpen.value = false;
-        }
-
-        return {
-            isSelectorOpen,
-            handleBrandOpen,
-            handleSelect,
-            textColor,
-            bgImgCard,
-            brandUrl,
-            brandNames,
-            handleClose,
-            isLoading
-        }
+const handleBrandOpen = (val) => {
+    if (typeof val === 'boolean') {
+        isSelectorOpen.value = val
     }
 }
+
+const handleSelect = (brand) => {
+    isLoading.value = true;
+    //Refresh the Page with new brand
+    const host = window.location.host;
+    window.location.href = `/${brand}`;
+}
+
+const handleClose = () => {
+    isSelectorOpen.value = false;
+}
+
+onUpdated(() => {
+    if (isSelectorOpen.value) {
+      const modalRoot = document.getElementById('modal-container');
+      trapFocus(modalRoot);
+    } else {
+      const pageRoot = document.getElementById('app');
+      trapFocus(pageRoot);
+    }
+});
 </script>
 
 <template>
@@ -69,7 +61,7 @@ export default {
                 <LoadingSpinner classOverride="tw-w-[48px] tw-h-[48px]" />
             </div>
             <div v-if="!isLoading" class="tw-flex tw-w-full tw-h-full tw-justify-center tw-items-center">
-                <button @click="handleClose"
+                <button @click="handleClose" aria-label="Close brand selector modal"
                     class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
                     <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
                 </button>

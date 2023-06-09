@@ -33,7 +33,7 @@
         <div id="notifications-container"></div>
 
         {{-- Modal Container --}}
-        <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
+        <div role="dialog" aria-labelledby="dialog-modal" aria-describedby="dialog-modal-container" id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
 
         <!-- Confirmation Modal Container -->
         <div id="confirmation-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>

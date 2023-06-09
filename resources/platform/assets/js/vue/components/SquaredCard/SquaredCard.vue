@@ -26,6 +26,7 @@ export default {
 
 <template>
   <button
+    tabindex="0"
     class="SquaredCard tw-rounded-lg md:tw-mx-2 tw-my-2 xl:tw-my-0 tw-w-full tw-h-[128px] md:tw-w-[250px] md:tw-h-[250px]"
     :style="{
       background: backgroundUrl ? `url(${backgroundUrl})` : bgColor,
