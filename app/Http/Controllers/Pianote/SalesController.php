@@ -25,6 +25,14 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote']);
     }
+    public function homeJune()
+    {
+        return view('pianote.sales.subscription-june', ['theme' => 'pianote', 'month' => true, 'promoVersion' => true, 'trialVersion' => true]);
+    }
+    public function homeJune2()
+    {
+        return view('pianote.sales.subscription-june2', ['theme' => 'pianote', 'month' => true, 'promoVersion' => true, 'trialVersion' => true]);
+    }
     public function homeMonth()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'month' => true]);
@@ -32,6 +40,10 @@ class SalesController extends BaseController
     public function trial()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
+    }
+    public function trialSongs()
+    {
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true', 'songsVersion' => 'true']);
     }
     public function trialBeginner()
     {
