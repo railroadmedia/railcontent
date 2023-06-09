@@ -602,6 +602,7 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Flexible lessons that fit your life.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-pianote max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
+        'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-30-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true',
         'variant' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-30-DAY]=1&redirect=/order&locked=true',
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-spread.png',
         ])

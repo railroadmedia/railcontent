@@ -20,7 +20,9 @@
                 </ul>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
                     <a class=" w-full sm:w-64 join smaller bg-{{$theme}} w-full my-3"
-                    @if(!empty($month))
+                    @if(!empty($orderUrl))
+                        href="{{ $orderUrl }}"
+                    @elseif(!empty($month))
                         href="/choose-your-trial-month"
                     @else
                         href="/choose-plan"
