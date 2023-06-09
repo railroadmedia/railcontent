@@ -200,8 +200,8 @@
     @endphp
 
     @include('musora.sales.components.header-section', [
-        'header' => 'Learn piano with 30 Days of FREE lessons.',
-        'desc' => 'Learn the piano by playing the songs you love. Flexible, fun lessons that fit around your life and unlimited personal support.',
+        'header' => 'Play your favorite songs with 30 days of FREE piano lessons.',
+        'desc' => 'Find and play the songs you love. Download, print, and play 1000+ songs. Plus get flexible, fun lessons and unlimited personal support from real teachers.',
         'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-thumb.png',
         'thumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-thumb-m.png',
                 'pointOne' => '1000+ popular songs',
@@ -595,6 +595,7 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
+
         @include('musora.sales.components.order-section-collage', [
         'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.<br> <span class="inline-block" style="background: linear-gradient(330deg, #05937C, #007DD8, #9AFF89);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">Chance to win a FREE piano.</span>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>

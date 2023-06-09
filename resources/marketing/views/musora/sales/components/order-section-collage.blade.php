@@ -32,6 +32,20 @@
                             7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                         @endif
                     </a>
+                    @if(!empty($variant))
+                        <p class="text-xs leading-normal mt-4 sm:mt-5"><em>
+                        You’ll be billed $240 on
+                                @if(empty($month))
+                                    {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }}
+                                @else
+                                    {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }}
+                                @endif
+                        &nbsp;(after your free trial).<br>
+                        Don’t worry, you can cancel anytime!<br>
+                        <strong>Normally 7 days. 30 days free access only valid for June 2023.</strong></em></p>
+
+
+                    @endif
                 </div>
             </div>
         </div>
