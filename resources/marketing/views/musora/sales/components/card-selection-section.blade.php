@@ -7,7 +7,7 @@
             @if(empty($month)) {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} @else {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }} @endif
             (after your free trial). Cancel anytime.</h5>
 
-        @if(empty($month))
+        @if(empty($month) && empty($noSelector))
             <div class="flex items-end justify-center mb-5">
                 <div class="px-1 sm:px-2">
                     <p class="inline-block relative -bottom-1 mb-1 px-3 py-0.5 z-10 leading-tight text-black text-xs rounded-full bg-[#00c9ac]">MOST POPULAR</p>
@@ -88,7 +88,7 @@
                 </a>
             </div>
         </div>
-        @if(empty($month))
+        @if(empty($month) && empty($noSelector))
         <div id="nonPlusOptions"
             class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto"
             x-cloak

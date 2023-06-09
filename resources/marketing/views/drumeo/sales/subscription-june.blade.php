@@ -1,7 +1,6 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <meta name="robots" content="noindex">
     <title>Drumeo | Reach your drumming goals.</title>
     <meta property="og:title" content="Drumeo | Reach your drumming goals.">
     <meta property="og:url" content="https://www.drumeo.com/">
@@ -120,6 +119,7 @@
     x-data ='{
         soundslice : false,
         trailer : false,
+        keyTrailer : false,
     }'
 @endsection
 
@@ -148,6 +148,13 @@
         ])
 
     @endif
+    <a href="#customize-anchor" class="anchor-slide flex items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(330deg, #79EE9A, #12E3FF, #79EE9A);">
+        <h4 class="inline-block ml-0 mr-4 bg-white rounded-md font-bebas py-0.5 px-2 leading-none text-black">JUNE ONLY</h4>
+        <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight text-black">
+            Get a FREE Drum Key when you try Drumeo <br class="inline sm:hidden">
+            for 7 days. | While quantities last.
+        </p>
+    </a>
 
 
     @php
@@ -194,24 +201,38 @@
             ],
         ];
     @endphp
+        @include('musora.sales.components.header-section', [
+            'header' => 'Unlimited drum lessons + a free drum key. ',
+            'desc' => 'You’ll get a free limited edition pewter drum key when you try Drumeo for 7 days ($15 value)!',
+        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/june-thumb.png',
+        'thumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/june-thumb-m.jpg',
+            'pointOne' => 'Improve Your Skills',
+            'pointTwo' => 'World-Class Teachers',
+            'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+        'shortHeader' => true,
+        'noThumbShadow' => true,
+        'specialBadge' => '<strong>ONLY</strong> <s>5000</s> <strong>' . $products['Drumeo-Key']->getStockAvailability() . ' LEFT</strong>',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
+            'students' => number_format(Prices::$students),
+        ])
 
-    @include('musora.sales.components.header-section', [
-        'header' => 'Online drum lessons for all skill levels.',
-        'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
-        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
-        'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
-        'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo-m2.jpg',
-        'pointOne' => 'Improve Your Skills',
-        'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
-        'students' => number_format(Prices::$students),
-    ])
+    <section class="text-center px-5 sm:px-6 pb-6 sm:py-0 text-black" style="background: linear-gradient(330deg, #79EE9A, #12E3FF, #79EE9A);">
+        <div class="container max-w-4xl mx-auto">
+            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
+                <img class="h-48 sm:h-72 lg:h-96 sm:order-1" src="https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/drum-key.png">
+                <div class="text-left w-full sm:w-auto">
+                    <h2><strong>Free Drum Key</strong></h2>
+                    <h5 class="leading-tight mt-2 sm:mt-3 mb-6 sm:mb-8">Grab a <strong>NEW</strong> Limited Edition pewter drum key when<br class="hidden lg:inline"> you start a 7-day trial of Drumeo.</h5>
+                    <a class="sm:mx-1 join smaller black anchor-slide sm:w-7/12" href="#customize-anchor">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+                    <div class="sm:mx-1 join smaller outline black" x-on:click="keyTrailer = true;">WATCH VIDEO</div>
+                    <p class="text-sm mt-2"><em>Free worldwide shipping!</em></p>
+                </div>
 
-    @hasSection('promo-banner')
-        @yield('promo-banner')
-    @endif
+            </div>
+        </div>
+    </section>
 
+    <div class="h-5 sm:h-10 relative z-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
     @php
         $gridItems = [
             [
@@ -395,9 +416,8 @@
             ],
         ];
     @endphp
-    <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
+
     @include('musora.sales.components.coaches-section', [
-        'split' => true,
         'header' => 'Study with the world’s <br class="md:hidden">best drummers.',
         'desc' => 'Amplify your skills with 200+ artist courses + <br class="hidden md:inline">access exclusive live events with drumming legends.'
     ])
@@ -437,68 +457,18 @@
 
         ];
     @endphp
-    <div id="songs" class="anchor"></div>
-    <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
-        <div class="container max-w-4xl mx-auto">
-            <h2><strong>Play your favorite songs.</strong></h2>
-            <p class="leading-tight mt-2 sm:mt-3">You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat. <strong class="cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo &raquo;</u></strong></p>
-            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto">
-                <div style="padding-bottom:62.4%" class="mt-4 sm:mt-6 lg:my-6 bg-cover bg-center lazyload" x-on:click="soundslice = true;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png"></div>
-            </div>
-            <div class="text-center w-full sm:w-auto mt-6 lg:mt-0 mx-auto">
-                <div class="flex flex-wrap">
-                    @foreach ($songItems as $songItem)
-                        <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
-                            <div class="flex sm:inline-block">
-                                <div class="w-14 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">
-                                </div>
-                                <div class="text-left sm:text-center">
-                                    <p class="mb-1 sm:my-2"><strong>{!!$songItem['title']!!}</strong></p>
-                                    <p class="text-sm">{!! $songItem['desc'] !!}</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-            @if(empty($promoVersion))
-                <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
-            @endif
-            <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
-                @if(!empty($promoVersion))
-                    href="#customize-anchor"
-                @elseif(!empty($month))
-                    href="/choose-your-trial-month"
-                @else
-                    href="/choose-plan"
-                @endif
-            >
-                @if(!empty($promoVersion) && empty($trialVersion))
-                    SEE YOUR DEAL &raquo;
-                @else
-                    START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
-                @endif
-            </a>
-            @if(empty($promoVersion))
-                <p class="text-light-navy text-sm mt-5"><em>Songs included with Drumeo+</em></p>
-            @endif
-        </div>
-    </section>
+    @include('musora.sales.components.songs-section', [
+        'header' => 'Play your favorite songs.',
+        'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
+        'video' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png',
+        'brandName' => 'Drumeo',
+    ])
 
-    <section class="text-center px-5 sm:px-6 pt-10 sm:pt-14 lg:pt-20" style="background-color:#f4f8fb;">
-        <div class="container max-w-5xl mx-auto">
-            <h2><strong>Learn the drums by playing the drums.</strong></h2>
-            <p class="leading-tight mt-2 sm:mt-3 mb-8 sm:mb-10">
-                With Drumeo, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden">
-                and you’ll have personalized support every step of the way.</p>
-            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative z-20 -mb-10" x-on:click="trailer = true;">
-                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="https://player.vimeo.com/progressive_redirect/playback/785314560/rendition/540p/file.mp4?loc=external&signature=1549cce1dacabad80dd416b5a439f6639d3b7b30c7e4d70d46245bf70c6d5102" type="video/mp4" autoplay muted loop playsinline></video>
-            </div>
-        </div>
-    </section>
-    <div class="h-5 sm:h-10 relative z-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
+    @include('musora.sales.components.learn-by-playing-section', [
+        'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
+        'desc' => 'With Drumeo, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
+        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314560/rendition/540p/file.mp4?loc=external&signature=1549cce1dacabad80dd416b5a439f6639d3b7b30c7e4d70d46245bf70c6d5102',
+    ])
 
     @php
         $testimonials = [
@@ -579,61 +549,25 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    <section class="text-center text-white px-4 sm:px-6 py-12 sm:py-16 lg:py-24 bg-[#0c1524]"
-        x-data="{ plusMembershipSelected: true }"
-    >
-        <div class="container max-w-6xl mx-auto">
-            <h1><strong>@if(!empty($headline)) {{ $headline }} @else Your first @if(empty($month)) week @else month @endif <br class="inline sm:hidden"> is free. @endif</strong></h1>
-            <h5 class="mt-2 md:mt-4 mb-5">Choose the plan that will continue on <br class="inline lg:hidden">
-                @if(empty($month)) {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} @else {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }} @endif
-            (after your free trial). Cancel anytime.</h5>
 
-            <div id="plusOptions"
-                class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto"
-                x-bind:class="{ 'hidden': !plusMembershipSelected }"
-            >
-                <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                    <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-black text-sm rounded-full bg-[#ffac00]" >SAVE 33%</p>
-                    <a href="/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
-                        <div class="bg-white px-3 py-6 md:py-9">
-                            <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
-                            <h4 class="inline-block leading-none"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12) }}/month</strong></h4>
-                            <p class="text-sm mb-6"><em>Billed at ${{Prices::$plusSubscriptionAnnualFull}} per year.</em></p>
-                            <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
-                        </div>
-                        <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
-                            <p class="text-sm mb-1"><strong>The world’s best drum lessons.</strong></p>
-                            <p class="text-sm mb-1"><strong>5000+ popular songs.</strong></p>
-                            <p class="text-sm mb-1"><strong>Unlimited personal support.</strong></p>
-                            <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
-                            <p class="text-sm mb-1">Lesson access for piano, guitar, and singing.</p>
-                            <p class="text-sm">90-day money back guarantee.</p>
-                        </div>
-                    </a>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-black" style="background: linear-gradient(330deg, #79EE9A, #12E3FF, #79EE9A);">
+        <div class="container mx-auto">
+            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
+                <img class="hidden sm:inline-block sm:h-64 lg:h-96 order-1" src="https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/drum-key-free-shipping.png">
+                <img class="h-48 inline-block sm:hidden" src="https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/drum-key-free-shipping-m.png">
+                <div class="text-center w-full sm:w-auto">
+                    <h2><strong>Try Drumeo for 7 days<br class="hidden sm:inline"> & get a free drum key.</strong></h2>
+                    <p class="leading-tight my-4 sm:my-5">Click below to start your plan that will continue on {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} (after your free trial). Cancel anytime. </p>
+                    <div class="flex items-center justify-center mx-auto">
+                        <h5 class="inline-block leading-tight mx-0 py-1 px-2 rounded-md inline-block w-auto text-white bg-black"><strong>ONLY</strong> <s>5000</s> <strong>{{ $products['Drumeo-Key']->getStockAvailability() }}  LEFT</strong></h5>
+                    </div>
+                    <a class="join drumeo w-full my-6" href="/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&products[Drumeo-Key]=1&promo-code=special&locked=true">7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+                    <a class="text-sm" href="/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true"><em><u>OR start a Monthly membership (no free bonuses).</u></em></a>
                 </div>
-                <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                    <a href="/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
-                        <div class="bg-white px-3 py-6 md:py-9">
-                            <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
-                            <h4 class="inline-block leading-none"><strong>${{ Prices::$plusSubscriptionMonthly }}/month</strong></h4>
-                            <p class="text-sm mb-6"><em>Pay as you go.</em></p>
-                            <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
-                        </div>
-                        <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
-                            <p class="text-sm mb-1"><strong>The world’s best drum lessons.</strong></p>
-                            <p class="text-sm mb-1"><strong>5000+ popular songs.</strong></p>
-                            <p class="text-sm mb-1"><strong>Unlimited personal support.</strong></p>
-                            <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
-                            <p class="text-sm mb-1">Lesson access for piano, guitar, and singing.</p>
-                            <p class="text-sm">90-day money back guarantee.</p>
-                        </div>
-                    </a>
-                </div>
+
             </div>
-            <p><em>All prices listed in USD.</em></p>
         </div>
     </section>
-
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices.png',
@@ -651,6 +585,11 @@
     @include('_partials.components.video-modal',[
         'name' => 'trailer',
         'video' => '785314424',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
+        'name' => 'keyTrailer',
+        'video' => '834810213',
         'vimeo' => true,
     ])
 

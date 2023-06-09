@@ -6,7 +6,7 @@
         <!-- Post Header -->
         <div class="tw-flex tw-items-center">
             <!-- Avatar -->
-            <div class="tw-w-20 tw-h-20 tw-mr-4"> 
+            <div class="tw-w-20 tw-h-20 tw-mr-4">
                 <div class="user-avatar tw-w-20 tw-h-20"
                     :class="[avatarClassObject, brand]">
                     <a :href="post.authorProfileUrl"
@@ -44,7 +44,7 @@
                     class="tw-text-[#00101D] dark:tw-text-white tw-w-full tw-flex tw-flex-col"
                     :class="['post-body', brand]"
                 >
-                    <div v-html="post.postBody" 
+                    <div v-html="post.postBody"
                         :id="'post-body'+post.id"
                         class="tw-text-base"
                         :ref="'post-body'+post.id"
@@ -63,7 +63,7 @@
                             name="_method"
                             value="patch"
                         >
-                        <text-editor 
+                        <text-editor
                             :initial-value="post.postBody"
                         />
 
@@ -131,10 +131,10 @@
                             class="tw-text-lg tw-text-[#00101D] dark:tw-text-white sm:ml-3 tw-uppercase dense tw-cursor-pointer"
                             @click="reportPost"
                         >
-                            Report
+                            Report 
                         </p>
                         <p
-                            v-if="index !== 0 && canEdit"
+                            v-if="!(currentPage === 1 && index === 0) && canEdit"
                             class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
                             @click="deletePost"
                         >
@@ -150,7 +150,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Signature -->
             <div class="tw-flex tw-flex-row body">
                 <div
@@ -422,12 +422,12 @@ export default {
     },
     mounted() {
         //Hide Blockquotes (TEMPORARY FIX! NEEDS REFACTORING)
-        if(this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote').length > 0) { 
+        if(this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote').length > 0) {
             //Get Top Quote
             let topQuote = this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0];
             //Get Quote Count
             let quoteCount = topQuote.getElementsByTagName('blockquote').length + 1; //Only Counts blockquotes within first blockquote element
-            
+
             //Add ShowHide Button if there are multiple quotes
             if(topQuote.querySelectorAll('blockquote')[0]) {
                 //Hide Multiple Quotes By Default
@@ -447,13 +447,13 @@ export default {
                         </div>
                     </div>
                 `;
-                
+
                 //Add Button
                 if(topQuote.querySelector('.quote-heading')) {
-                    topQuote.querySelector('.quote-heading').insertAdjacentHTML("beforeend", buttonHTML ); 
+                    topQuote.querySelector('.quote-heading').insertAdjacentHTML("beforeend", buttonHTML );
                 } else {
-                    topQuote.getElementsByTagName('blockquote')[0].insertAdjacentHTML("beforebegin", buttonHTML ); 
-                } 
+                    topQuote.getElementsByTagName('blockquote')[0].insertAdjacentHTML("beforebegin", buttonHTML );
+                }
 
                 //HideShow Function
                 window.hideShow = function(postID) {
@@ -463,23 +463,23 @@ export default {
                     childQuote.classList.toggle('tw-hidden');
                     QuoteToggleIcon.classList.toggle('tw-rotate-180')
                 };
-                
+
             }
-        } 
+        }
     }
 };
 </script>
 <style>
     /* Post Body Specific Styles */
-    .post-body ul, 
+    .post-body ul,
     .post-body ol {
         list-style: revert;
         padding-left: 40px;
         margin: 15px 0;
     }
     .post-body p:empty { display: none; }
-    .post-body blockquote { 
-        margin: 15px 0; 
+    .post-body blockquote {
+        margin: 15px 0;
         width: 100%;
     }
     .forumSignature p {

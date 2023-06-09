@@ -15,15 +15,19 @@ use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Ecommerce\Entities\Payment;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Events\AccessCodeClaimed;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
+use Railroad\Ecommerce\Events\MobileOrderEvent;
+use Railroad\Ecommerce\Events\MobilePaymentEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
 use Railroad\Ecommerce\Events\PaymentEvent;
 use Railroad\Ecommerce\Events\PaymentMethods\PaymentMethodCreated;
@@ -917,10 +921,7 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param PaymentEvent $paymentEvent
-     */
-    public function syncPayment($payment)
+    public function syncPayment(Payment $payment)
     {
         try {
             if (!empty($payment)) {
@@ -960,6 +961,11 @@ class CustomerIoSyncEventListener
                     'payment_info' => $payment->getMessage(),
                     'payment_timestamp' => $payment->getCreatedAt()->timestamp
                 ];
+
+                $paymentId = $payment->getId();
+                Log::debug("CustomerIoSyncEventListener::syncPayment paymentId:$paymentId userId:$userId");
+                Log::debug(print_r($data, true));
+
                 if ($userId) {
                     dispatch(
                         (new CustomerIoCreateEventByUserId(
@@ -1197,36 +1203,69 @@ class CustomerIoSyncEventListener
                     'referrer_id' => null,
                     'musora_id' => null
 
-                ],
-                null,
-                Carbon::now()->timestamp
-            ))
-                ->delay(
-                Carbon::now()
-                    ->addSeconds(3)
-            )
+                ], null, Carbon::now()->timestamp
+            ))->delay(
+                    Carbon::now()
+                        ->addSeconds(3)
+                )
         );
 
+        //        dispatch(
+        //            (new CustomerIoCreateEventByUserId(
+        //                $accessCodeClaimed->getUser()->getId(),
+        //                $brand,
+        //                'musora_membership_access',
+        //                [
+        //                    'access_type' => 'manual_access_type',
+        //                    'access_start_date' => '',
+        //                    'access_expiration_date' => '',
+        //
+        //                ],
+        //                null,
+        //                Carbon::now()->timestamp
+        //            ))
+        //                ->delay(
+        //                    Carbon::now()
+        //                        ->addSeconds(3)
+        //                )
+        //        );
+    }
 
-//        dispatch(
-//            (new CustomerIoCreateEventByUserId(
-//                $accessCodeClaimed->getUser()->getId(),
-//                $brand,
-//                'musora_membership_access',
-//                [
-//                    'access_type' => 'manual_access_type',
-//                    'access_start_date' => '',
-//                    'access_expiration_date' => '',
-//
-//                ],
-//                null,
-//                Carbon::now()->timestamp
-//            ))
-//                ->delay(
-//                    Carbon::now()
-//                        ->addSeconds(3)
-//                )
-//        );
+    public function handleMobilePaymentPlaced(MobilePaymentEvent $mobileOrderEvent)
+    {
+        $latestPayment =
+            ($mobileOrderEvent->getSubscription()
+                ->getLatestPayment());
+        $amountPaid = ($latestPayment) ? $latestPayment->getTotalPaid() : 0;
+        $amountDue = ($latestPayment) ? $latestPayment->getTotalDue() : 0;
+        $productIds =
+            [
+                $mobileOrderEvent->getSubscription()
+                    ->getProduct()
+                    ->getId(),
+            ];
+
+        $data = [
+            'product_id' => $productIds,
+            'amount_paid' => $amountPaid,
+            'amount_due' => $amountDue,
+            'timestamp' => $mobileOrderEvent->getSubscription()->getUpdatedAt()->timestamp
+        ];
+
+        dispatch(
+            (new CustomerIoCreateEventByUserId(
+                $mobileOrderEvent->getSubscription()->getUser()
+                    ->getId(),
+                $mobileOrderEvent->getSubscription()->getBrand(),
+                $mobileOrderEvent->getSubscription()->getBrand().'_user_order',
+                $data,
+                null,
+                $mobileOrderEvent->getSubscription()->getCreatedAt()->timestamp
+            ))->delay(
+                Carbon::now()
+                    ->addSeconds(30)
+            )
+        );
     }
 
     /**

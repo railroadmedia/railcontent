@@ -23,7 +23,7 @@
                             content-endpoint="{{ $contentEndpoint ? $contentEndpoint : '/railcontent/content' }}"
                             catalogue-type="grid"
                             no-results-icon="happy"
-                            no-results-message="You haven't started any lessons yet, once you start a lesson it will show up here for you to access later."
+                            no-results-message="You don’t have any lessons in progress. Any lessons you have started but not completed will show up here for you to access later."
                             limit="16"
                             :lock-unowned="true"
                             :six-wide="true"
