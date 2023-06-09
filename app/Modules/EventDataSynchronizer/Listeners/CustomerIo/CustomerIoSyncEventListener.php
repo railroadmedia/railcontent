@@ -15,10 +15,12 @@ use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Ecommerce\Entities\Payment;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Events\AccessCodeClaimed;
@@ -919,10 +921,7 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param PaymentEvent $paymentEvent
-     */
-    public function syncPayment($payment)
+    public function syncPayment(Payment $payment)
     {
         try {
             if (!empty($payment)) {
@@ -962,6 +961,11 @@ class CustomerIoSyncEventListener
                     'payment_info' => $payment->getMessage(),
                     'payment_timestamp' => $payment->getCreatedAt()->timestamp
                 ];
+
+                $paymentId = $payment->getId();
+                Log::debug("CustomerIoSyncEventListener::syncPayment paymentId:$paymentId userId:$userId");
+                Log::debug(print_r($data, true));
+
                 if ($userId) {
                     dispatch(
                         (new CustomerIoCreateEventByUserId(
