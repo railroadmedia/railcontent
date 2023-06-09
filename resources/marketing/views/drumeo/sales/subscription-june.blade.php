@@ -561,7 +561,7 @@
                     <div class="flex items-center justify-center mx-auto">
                         <h5 class="inline-block leading-tight mx-0 py-1 px-2 rounded-md inline-block w-auto text-white bg-black"><strong>ONLY</strong> <s>5000</s> <strong>{{ $products['Drumeo-Key']->getStockAvailability() }}  LEFT</strong></h5>
                     </div>
-                    <a class="join drumeo w-full my-6" href="/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&products[Drumeo-Key]=1&locked=true">7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+                    <a class="join drumeo w-full my-6" href="/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&products[Drumeo-Key]=1&promo-code=special&locked=true">7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
                     <a class="text-sm" href="/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true"><em><u>OR start a Monthly membership (no free bonuses).</u></em></a>
                 </div>
 
