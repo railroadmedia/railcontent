@@ -42,21 +42,21 @@ function goBack() {
         xl:tw-justify-center
       ">
       <StepHeader title="What instrument would you like to learn?" subtitle="Want to learn more than one instument? You can change your instrument at any
-    time in your profile or by using the instrument selector in the navigation." @onGoBack="goBack" />
+    time in your profile or by using the instrument selector in the navigation." @onGoBack="goBack" :hideCloseButton="steps[1].checked" />
       <SquaresContainer>
-        <SquaredCard :backgroundUrl="bgImgCard.drumeo" type="drumeo" :active="info.instrument === 'drums'"
+        <SquaredCard :backgroundUrl="bgImgCard.drumeo" type="drumeo" :active="info.instrument === 'drums' && steps[1].checked"
           @onSelect="() => onInstrumentSelection('drums')">
           <InstrumentCardContent instrumentText="DRUMS" :logoUrl="brandUrl.drumeo" logoAltText="Drumeo Logo" />
         </SquaredCard>
-        <SquaredCard :backgroundUrl="bgImgCard.pianote" :active="info.instrument === 'piano'" type="pianote"
+        <SquaredCard :backgroundUrl="bgImgCard.pianote" :active="info.instrument === 'piano' && steps[1].checked" type="pianote"
           @onSelect="() => onInstrumentSelection('piano')">
           <InstrumentCardContent instrumentText="PIANO" :logoUrl="brandUrl.pianote" logoAltText="Pianote Logo" />
         </SquaredCard>
-        <SquaredCard :backgroundUrl="bgImgCard.guitareo" :active="info.instrument === 'guitar'" type="guitareo"
+        <SquaredCard :backgroundUrl="bgImgCard.guitareo" :active="info.instrument === 'guitar' && steps[1].checked" type="guitareo"
           @onSelect="() => onInstrumentSelection('guitar')">
           <InstrumentCardContent instrumentText="GUITAR" :logoUrl="brandUrl.guitareo" logoAltText="Guitareo Logo" />
         </SquaredCard>
-        <SquaredCard :backgroundUrl="bgImgCard.singeo" :active="info.instrument === 'singing'" type="singeo"
+        <SquaredCard :backgroundUrl="bgImgCard.singeo" :active="info.instrument === 'singing' && steps[1].checked" type="singeo"
           @onSelect="() => onInstrumentSelection('singing')">
           <InstrumentCardContent instrumentText="SINGING" :logoUrl="brandUrl.singeo" logoAltText="Singeo Logo" />
         </SquaredCard>

@@ -57,7 +57,10 @@ const handleNextStep = () => {
     emit('onChangeStep', 3);
     emit('onCheckStep', 2, true);
   }).catch(() => {
-    showErrorNotification.value = true;
+    window.shownotification({
+      icon: 'error',
+      text: 'There was an error saving your gear preferences, please try again later.'
+    });
   });
 };
 
