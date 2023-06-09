@@ -32,7 +32,6 @@ use App\Console\Commands\MembershipFieldsSync;
 use App\Console\Commands\UpdateRoutinesFebruary2023;
 use App\Console\Commands\VaporEnvManager;
 use App\Console\Commands\UpdateRoutines;
-use App\Console\Commands\YouTrackGenerateChangeList;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -74,7 +73,6 @@ class Kernel extends ConsoleKernel
         RepairUserProgressOnNPPSH::class,
         MigrateOldGuitareoDeletedSongs::class,
         RemoveRailTrackerData::class,
-        YouTrackGenerateChangeList::class,
     ];
 
     /**
@@ -111,6 +109,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('mentors:assign')->hourly();
 
         $schedule->command('user:resyncExpiredProducts')->dailyAt('10:00');//2am PST
+
+        $schedule->command('addevent:syncMusora')->hourlyAt(50);
     }
 
     /**

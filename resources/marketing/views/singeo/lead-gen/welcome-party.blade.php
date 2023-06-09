@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2022/og-image.jpg"/>
 
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-singeo.css') }}" rel="stylesheet">
     <style>
         .title-wrap h1 {
             font-size:27px;

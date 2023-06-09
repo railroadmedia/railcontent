@@ -9,7 +9,7 @@
     <meta property="og:title" content="You Can Be A Singer – Let’s Sing A Song!">
     <meta property="og:description" content="There is no better way to start singing than by actually singing something!">
     <meta property="og:url" content="https://www.singeo.com/lets-sing-a-song/">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-singeo.css') }}">
 @stop
 
 @section('scripts')

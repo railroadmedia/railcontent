@@ -10,7 +10,7 @@
     <meta property="og:title" content="Play Your First Song On The Guitar | 1-Hour Challenge">
     <meta property="og:description" content="Play your first song on the guitar, start to finish, in an hour -- even if you’ve never played before.">
     <meta property="og:url" content="https://www.guitareo.com/song-in-an-hour/">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}">
     <style>
         .reveal-overlay {background: linear-gradient(180deg, rgba(1, 7, 19, 0.9), #10052b);}
     </style>

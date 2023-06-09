@@ -17,7 +17,7 @@
     @endif
     @if(!empty($cartVersion))
         <div class="button-wrap" id="app">
-            <a href="{{ !empty($product) && $product->is_seasonal ? get_legacy_brand_base_url('musora').'/merch' : get_legacy_brand_base_url('guitareo').'/shop' }}" class="join outline-button">Shop</a>
+            <a href="{{ get_legacy_brand_base_url('guitareo').'/shop' }}" class="join outline-button">Shop</a>
 
             <nav-cart-button
                     {{-- cart-data='{{ $cartData }}' --}}

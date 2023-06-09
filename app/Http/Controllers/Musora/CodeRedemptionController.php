@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Musora;
 use App\Http\Controllers\BaseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
-use Railroad\Ecommerce\Entities\AccessCode;
 use Railroad\Ecommerce\Services\AccessCodeService;
 
 class CodeRedemptionController extends BaseController
@@ -98,9 +97,23 @@ class CodeRedemptionController extends BaseController
         ]);
     }
 
-    public function friends()
+    public function friends(Request $request)
     {
-        return view('musora.pages.redeem.friends', ['newAccount' => true, 'theme' => 'black']);
+        return view('musora.pages.redeem.friends', [
+            'newAccount' => true,
+            'theme' => 'black',
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+
+    public function friends2(Request $request)
+    {
+        return view('musora.pages.redeem.friends', [
+            'newAccount' => true,
+            'theme' => 'black',
+            'omit' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
     }
 
     public function renderNewAccountThomannRedeemPage()

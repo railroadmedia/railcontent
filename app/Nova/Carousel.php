@@ -56,14 +56,16 @@ class Carousel extends Resource
             ID::make()->sortable(),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
-            Text::make('name')->sortable()->help('For easy reference to this banner in the CMS. This info won\'t show on the banner.')->required(),
+            Text::make('name')->sortable()->help('For easy reference to this banner in the CMS. This info won\'t show on the banner.')->required()->rules('required'),
             Boolean::make('visible')->hideFromIndex()->default(true),
             Number::make('Display Order', 'display_order')->hideFromIndex(),
             DateTime::make('Start Time', 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             DateTime::make(__('End Time'), 'end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             Heading::make('BANNER COPY & IMAGES'),
             Text::make('Subtitle')->hideFromIndex()->sortable()->help('This is visible only if there is no logo uploaded or supported. Older app versions do not support the logo and will only see this text.'),
+            Text::make('Subtitle Color', 'subtitle_color')->hideFromIndex()->help('Leave blank for white text. Otherwise, type "black".'),
             Text::make('Title')->hideFromIndex()->sortable()->help('This is visible only if there is no logo uploaded or supported. Older app versions do not support the logo and will only see this text.'),
+            Text::make('Title Color', 'title_color')->hideFromIndex()->help('Leave blank for white text. Otherwise, type "black".'),
             Image::make('logo')
                 ->help("The logo will replace the 'Title' and 'Subtitle'.")
                 ->disk('nova_s3')
@@ -97,7 +99,7 @@ class Carousel extends Resource
                 }),
             Text::make('logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Markdown::make('Description')->help('If a description exceeds 316 the last three characters will be replaced with an ellipses.<br> Use &lt;br&gt; for a line break, &lt;i&gt;&lt;/i&gt; for italics, and &lt;b&gt;&lt;/b&gt; for bold. <br> Limited to three lines of text.'),
-            Text::make('Description Color', 'desc_color')->hideFromIndex()->help('Leave blank for white text. Otherwise, type "black" or the desired colour hex code.'),
+            Text::make('Description Color', 'desc_color')->hideFromIndex()->help('Leave blank for white text. Otherwise, type "black".'),
             Image::make('Desktop Image', 'desktop_img')
                 ->help('The image should be 1536 x 370px or a comparable aspect ratio.')
                 ->disk('nova_s3')
@@ -207,6 +209,7 @@ class Carousel extends Resource
                         if ($formData->is_featured) $field->show()->rules(['required']);
                     }
                 ),
+            Boolean::make('Button Light Mode', 'btn_light_mode')->hideFromIndex()->default(false),
             Text::make('Primary Button Text', 'primary_cta_text')->hideFromIndex(),
             Text::make('Primary Button Text Alt', 'primary_cta_text_alt')->hideFromIndex()
                 ->hide()
@@ -236,17 +239,8 @@ class Carousel extends Resource
             Text::make('Secondary Button Text', 'secondary_cta_text')->hideFromIndex(),
             Text::make('Secondary Button URL', 'secondary_cta_url')->hideFromIndex(),
             Text::make('Video Source', 'video_src')->hideFromIndex()
-                ->hide()
-                ->hideFromDetail(function (NovaRequest $request, $resource) {
-                    return !$this->is_featured;
-                })
-                ->help('Automatically replaces the second button URL with the pop-up video player.')
-                ->dependsOn(
-                    ['is_featured'],
-                    function (Text $field, NovaRequest $request, FormData $formData) {
-                        if ($formData->is_featured) $field->show();
-                    }
-                ),
+                ->hideFromDetail()
+                ->help('Automatically replaces the second button URL with the pop-up video player. Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1. In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted".'),
             //duplicated fields for displaying index page purpose
             Number::make('Display Order', 'display_order')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating(),
             Boolean::make('visible')->hideFromDetail()->hideWhenUpdating()->hideWhenCreating()->sortable(),

@@ -171,28 +171,32 @@
 @section('layout-body')
 
     @php
-        $features = [
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/music-lessons-icon.svg',
-                'title' => 'Music Lessons',
-                'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
-            ],
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/artist-courses-icon.svg',
-                'title' => 'Artist Courses',
-                'desc' => 'Courses and live events<br class="hidden sm:inline"> with inspiring musicians ',
-            ],
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/songs-icon.svg',
-                'title' => '1000+ Songs',
-                'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
-            ],
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/24-7-support-icon.svg',
-                'title' => '24/7 Support',
-                'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
-            ],
-        ];
+        if (empty($accessCodeArray)) {
+           $accessCodeArray = null;
+       }
+
+       $features = [
+           [
+               'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/music-lessons-icon.svg',
+               'title' => 'Music Lessons',
+               'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
+           ],
+           [
+               'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/artist-courses-icon.svg',
+               'title' => 'Artist Courses',
+               'desc' => 'Courses and live events<br class="hidden sm:inline"> with inspiring musicians ',
+           ],
+           [
+               'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/songs-icon.svg',
+               'title' => '1000+ Songs',
+               'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
+           ],
+           [
+               'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/24-7-support-icon.svg',
+               'title' => '24/7 Support',
+               'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
+           ],
+       ];
     @endphp
 
     <header class="sm:px-6 pb-10 sm:py-14 lg:py-20 bg-[#f6f8fc]">
@@ -204,7 +208,7 @@
                     " style="padding-bottom: 65%;">
                         <img
                             class="absolute inset-0 object-cover w-full"
-                            src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dmmior4id2ysr.cloudfront.net/redeem/header-image-m.png"
+                            src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dmmior4id2ysr.cloudfront.net/redeem/header-image-m-2.png"
                             alt="Header thumbnail"
                             fetchpriority="high"
                         />
@@ -231,7 +235,7 @@
                     <div x-on:click="trailer = true;"
                          class="bg-no-repeat bg-contain rounded-xl aspect-1:1 overflow-auto relative bg-top
 {{--                         cursor-pointer autoplay-video--}}
-                         " style="background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dmmior4id2ysr.cloudfront.net/redeem/header-image.png');"
+                         " style="background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dmmior4id2ysr.cloudfront.net/redeem/header-image-2.png');"
                     >
 {{--                        <div class="join white smaller absolute bottom-1 md:bottom-2 left-[24px] md:left-2 lg:left-3 bg-white text-black text-sm py-2 px-4 font-normal font-bebas tracking-widest"><i class="fas fa-play"></i> &nbsp; Watch Trailer</div>--}}
                     </div>
@@ -262,63 +266,64 @@
         </div>
     </header>
 
-    <section class="py-10 sm:py-14 lg:py-20 px-4 sm:px-6">
-        <div class="container max-w-5xl mx-auto">
-            <h2 class="max-w-4xl mx-auto text-center mb-3"><strong>
-                    Unlock drums, piano, singing and guitar lessons today with your Musora 30-Day Access Pass.</strong></h2>
-            <p class="text-center mb-10">Here’s what you can expect:</p>
-            <div class="flex flex-wrap sm:items-start sm:justify-center text-left">
-                @php
-                    $gridItems = [
-                        [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/step-by-step.jpg',
-                            'desc' => '<b>Step-by-step curriculum</b> to advance your core skills, technique, and musicality.',
-                        ],
-                        [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/interactivce-songs.jpg',
-                            'desc' => '<b>Interactive songs</b> to solidify your learning with your favorite tunes.',
-                        ],
-                        [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/exclusive-live.jpg',
-                            'desc' => '<b>Exclusive live events and courses</b> from world-class instructors.',
-                        ],
-                        [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/lessons-anywhere.jpg',
-                            'desc' => '<b>Lessons anywhere, anytime,</b> with any mobile device and downloadable content.',
-                        ],
-                        [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/on-screen-assignments.jpg',
-                            'desc' => '<b>On-screen assignments and practice tools</b> to help you see results faster.',
-                        ],
-                        [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/access-community.jpg',
-                            'desc' => '<b>PLUS access to our vibrant community of musicians,</b> who share tips and support each other’s progress.',
-                        ],
-                    ];
-                @endphp
+    @if(!isset($omit))
+        <section class="py-10 sm:py-14 lg:py-20 px-4 sm:px-6">
+            <div class="container max-w-5xl mx-auto">
+                <h2 class="max-w-4xl mx-auto text-center mb-3"><strong>
+                        Unlock drums, piano, singing and guitar lessons today with your Musora 30-Day Access Pass.</strong></h2>
+                <div class="flex flex-wrap sm:items-start sm:justify-center text-left">
+                    @php
+                        $gridItems = [
+                            [
+                                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/step-by-step.jpg',
+                                'desc' => '<b>Step-by-step curriculum</b> to advance your core skills, technique, and musicality.',
+                            ],
+                            [
+                                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/interactivce-songs.jpg',
+                                'desc' => '<b>Interactive songs</b> to solidify your learning with your favorite tunes.',
+                            ],
+                            [
+                                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/exclusive-live.jpg',
+                                'desc' => '<b>Exclusive live events and courses</b> from world-class instructors.',
+                            ],
+                            [
+                                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/lessons-anywhere.jpg',
+                                'desc' => '<b>Lessons anywhere, anytime,</b> with any mobile device and downloadable content.',
+                            ],
+                            [
+                                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/on-screen-assignments.jpg',
+                                'desc' => '<b>On-screen assignments and practice tools</b> to help you see results faster.',
+                            ],
+                            [
+                                'image' => 'https://dmmior4id2ysr.cloudfront.net/redeem/access-community.jpg',
+                                'desc' => '<b>PLUS access to our vibrant community of musicians,</b> who share tips and support each other’s progress.',
+                            ],
+                        ];
+                    @endphp
 
-                @foreach ($gridItems as $key => $gridItem)
-                    <div class="sm:flex sm:flex-wrap sm:items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 px-2 lg:px-4 mb-4 sm:mb-8 border-b sm:border-b-0">
-                        <picture>
-                            <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/{{ $gridItem['image'] }}">
-                            <img
-                                class="w-full rounded-xl mb-3 transition-opacity opacity-0"
-                                src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $gridItem['image'] }}"
-                                alt="grid{{$key+1}}"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                            >
-                        </picture>
-                        <p class="leading-normal">
-                            {!! $gridItem['desc'] !!}
-                        </p>
-                    </div>
-                @endforeach
+                    @foreach ($gridItems as $key => $gridItem)
+                        <div class="sm:flex sm:flex-wrap sm:items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 px-2 lg:px-4 mb-4 sm:mb-8 border-b sm:border-b-0">
+                            <picture>
+                                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/{{ $gridItem['image'] }}">
+                                <img
+                                    class="w-full rounded-xl mb-3 transition-opacity opacity-0"
+                                    src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $gridItem['image'] }}"
+                                    alt="grid{{$key+1}}"
+                                    loading="lazy"
+                                    onload="this.classList.remove('opacity-0')"
+                                >
+                            </picture>
+                            <p class="leading-normal">
+                                {!! $gridItem['desc'] !!}
+                            </p>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @endif
 
-    <section class="py-10 sm:py-14 lg:py-20 px-4 sm:px-6 bg-[#f6f8fc]">
+    <section class="py-10 sm:py-14 lg:py-20 px-4 sm:px-6 @if(!isset($omit)) bg-[#f6f8fc] @endif">
         <div class="container max-w-5xl mx-auto">
             <h2 class="text-center mb-3"><strong>Start achieving <br class="inline sm:hidden"> your musical dreams.</strong></h2>
             <p class="max-w-2xl mx-auto text-center mb-7">
@@ -444,22 +449,22 @@
                         <div class="flex flex-wrap">
                             <p class="w-full input-describer">Code</p>
                             <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code1') --}}">
+                                <input class="code-input w-full" type="text" name="code1" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[0]}}" @else value="{{-- Input::old('code1') --}}" @endif>
                             </div>
                             <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code2') --}}">
+                                <input class="code-input w-full" type="text" name="code2" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[1]}}" @else value="{{-- Input::old('code2') --}}" @endif>
                             </div>
                             <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code3') --}}">
+                                <input class="code-input w-full" type="text" name="code3" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[2]}}" @else value="{{-- Input::old('code3') --}}" @endif>
                             </div>
                             <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code4') --}}">
+                                <input class="code-input w-full" type="text" name="code4" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[3]}}" @else value="{{-- Input::old('code4') --}}" @endif>
                             </div>
                             <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code5') --}}">
+                                <input class="code-input w-full" type="text" name="code5" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[4]}}" @else value="{{-- Input::old('code5') --}}" @endif>
                             </div>
                             <div class="w-1/6 px-0.5">
-                                <input class="code-input w-full" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX" value="{{-- Input::old('code6') --}}">
+                                <input class="code-input w-full" type="text" name="code6" size="5" maxlength="4" placeholder="XXXX" @if($accessCodeArray) value="{{$accessCodeArray[5]}}" @else value="{{-- Input::old('code6') --}}" @endif>
                             </div>
                         </div>
                         <p class="input-describer">Email Address</p>

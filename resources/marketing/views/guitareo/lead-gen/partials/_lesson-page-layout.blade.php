@@ -11,7 +11,7 @@
     <meta property="og:image" content="@yield('image')">
     <meta property="og:url" content="@yield('url')">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}">
 @stop
 
 @section('scripts')

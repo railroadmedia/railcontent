@@ -1070,6 +1070,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .left-1\/2 {
   left: 50% !important;
 }
+.-bottom-1 {
+  bottom: -1rem !important;
+}
+.-right-6 {
+  right: -1.5rem !important;
+}
 .top-0 {
   top: 0 !important;
 }
@@ -1118,9 +1124,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-left-3 {
   left: -3rem !important;
 }
-.-bottom-1 {
-  bottom: -1rem !important;
-}
 .bottom-4 {
   bottom: 4rem !important;
 }
@@ -1138,6 +1141,21 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .left-6 {
   left: 1.5rem !important;
+}
+.left-\[2\%\] {
+  left: 2% !important;
+}
+.left-\[35\%\] {
+  left: 35% !important;
+}
+.right-\[35\%\] {
+  right: 35% !important;
+}
+.top-\[38\%\] {
+  top: 38% !important;
+}
+.-right-1 {
+  right: -1rem !important;
 }
 .bottom-3 {
   bottom: 3rem !important;
@@ -1159,9 +1177,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .top-2\/3 {
   top: 66.666667% !important;
-}
-.-top-10 {
-  top: -2.5rem !important;
 }
 .-top-3 {
   top: -3rem !important;
@@ -1208,6 +1223,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-top-\[8px\] {
   top: -8px !important;
 }
+.-top-10 {
+  top: -2.5rem !important;
+}
 .top-28 {
   top: 7rem !important;
 }
@@ -1217,20 +1235,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .left-\[24px\] {
   left: 24px !important;
 }
-.top-\[38\%\] {
-  top: 38% !important;
-}
-.-right-1 {
-  right: -1rem !important;
-}
 .left-8 {
   left: 2rem !important;
 }
 .-left-6 {
   left: -1.5rem !important;
-}
-.-right-6 {
-  right: -1.5rem !important;
 }
 .-left-8 {
   left: -2rem !important;
@@ -1301,6 +1310,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .z-40 {
   z-index: 40 !important;
 }
+.z-\[99\] {
+  z-index: 99 !important;
+}
 .z-\[-2\] {
   z-index: -2 !important;
 }
@@ -1367,6 +1379,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
+.my-5 {
+  margin-top: 1.25rem !important;
+  margin-bottom: 1.25rem !important;
+}
+.mx-2 {
+  margin-left: 0.5rem !important;
+  margin-right: 0.5rem !important;
+}
 .my-2 {
   margin-top: 0.5rem !important;
   margin-bottom: 0.5rem !important;
@@ -1375,10 +1395,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 1rem !important;
   margin-bottom: 1rem !important;
 }
-.mx-2 {
-  margin-left: 0.5rem !important;
-  margin-right: 0.5rem !important;
-}
 .my-8 {
   margin-top: 2rem !important;
   margin-bottom: 2rem !important;
@@ -1386,10 +1402,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-3 {
   margin-top: 0.75rem !important;
   margin-bottom: 0.75rem !important;
-}
-.my-5 {
-  margin-top: 1.25rem !important;
-  margin-bottom: 1.25rem !important;
 }
 .my-1 {
   margin-top: 0.25rem !important;
@@ -1519,20 +1531,41 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-5 {
   margin-top: 1.25rem !important;
 }
-.mr-auto {
-  margin-right: auto !important;
+.-ml-4 {
+  margin-left: -1rem !important;
+}
+.-mt-5 {
+  margin-top: -1.25rem !important;
+}
+.mb-8 {
+  margin-bottom: 2rem !important;
+}
+.mb-3 {
+  margin-bottom: 0.75rem !important;
+}
+.mb-0\.5 {
+  margin-bottom: 0.125rem !important;
+}
+.mb-0 {
+  margin-bottom: 0px !important;
+}
+.mt-7 {
+  margin-top: 1.75rem !important;
 }
 .mt-1 {
   margin-top: 0.25rem !important;
+}
+.-mt-7 {
+  margin-top: -1.75rem !important;
+}
+.mr-auto {
+  margin-right: auto !important;
 }
 .mr-2 {
   margin-right: 0.5rem !important;
 }
 .ml-auto {
   margin-left: auto !important;
-}
-.mb-3 {
-  margin-bottom: 0.75rem !important;
 }
 .mr-4 {
   margin-right: 1rem !important;
@@ -1548,9 +1581,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mr-1\.5 {
   margin-right: 0.375rem !important;
-}
-.mb-0 {
-  margin-bottom: 0px !important;
 }
 .mb-10 {
   margin-bottom: 2.5rem !important;
@@ -1573,14 +1603,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mr-3 {
   margin-right: 0.75rem !important;
 }
-.-mt-7 {
-  margin-top: -1.75rem !important;
-}
 .mr-5 {
   margin-right: 1.25rem !important;
-}
-.-mt-5 {
-  margin-top: -1.25rem !important;
 }
 .-mt-12 {
   margin-top: -3rem !important;
@@ -1597,17 +1621,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-mb-2 {
   margin-bottom: -0.5rem !important;
 }
-.mb-8 {
-  margin-bottom: 2rem !important;
-}
 .-mt-14 {
   margin-top: -3.5rem !important;
 }
 .-mb-8 {
   margin-bottom: -2rem !important;
-}
-.mt-7 {
-  margin-top: 1.75rem !important;
 }
 .mt-12 {
   margin-top: 3rem !important;
@@ -1648,12 +1666,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-72 {
   margin-top: 18rem !important;
 }
-.mb-0\.5 {
-  margin-bottom: 0.125rem !important;
-}
-.-mb-10 {
-  margin-bottom: -2.5rem !important;
-}
 .mt-56 {
   margin-top: 14rem !important;
 }
@@ -1687,6 +1699,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 .-mt-4 {
   margin-top: -1rem !important;
 }
+.-mb-\[108px\] {
+  margin-bottom: -108px !important;
+}
+.-mr-2 {
+  margin-right: -0.5rem !important;
+}
+.mr-0\.5 {
+  margin-right: 0.125rem !important;
+}
+.mr-0 {
+  margin-right: 0px !important;
+}
 .-mb-5 {
   margin-bottom: -1.25rem !important;
 }
@@ -1705,9 +1729,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-0\.5 {
   margin-top: 0.125rem !important;
 }
-.ml-4 {
-  margin-left: 1rem !important;
-}
 .mb-64 {
   margin-bottom: 16rem !important;
 }
@@ -1723,11 +1744,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-16 {
   margin-top: 4rem !important;
 }
-.-mt-20 {
-  margin-top: -5rem !important;
-}
 .mb-44 {
   margin-bottom: 11rem !important;
+}
+.ml-4 {
+  margin-left: 1rem !important;
 }
 .-mb-px {
   margin-bottom: -1px !important;
@@ -1743,6 +1764,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .-mr-28 {
   margin-right: -7rem !important;
+}
+.-mb-10 {
+  margin-bottom: -2.5rem !important;
 }
 .-mb-4 {
   margin-bottom: -1rem !important;
@@ -1768,14 +1792,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mr-8 {
   margin-right: 2rem !important;
 }
-.mr-0 {
-  margin-right: 0px !important;
-}
 .mb-96 {
   margin-bottom: 24rem !important;
-}
-.mt-80 {
-  margin-top: 20rem !important;
 }
 .mt-48 {
   margin-top: 12rem !important;
@@ -1795,8 +1813,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-44 {
   margin-top: 11rem !important;
 }
-.mr-0\.5 {
-  margin-right: 0.125rem !important;
+.mt-80 {
+  margin-top: 20rem !important;
 }
 .box-border {
   box-sizing: border-box !important;
@@ -1855,11 +1873,23 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-40 {
   height: 10rem !important;
 }
-.h-\[calc\(100vh-40px\)\] {
-  height: calc(100vh - 40px) !important;
+.h-12 {
+  height: 3rem !important;
+}
+.h-24 {
+  height: 6rem !important;
 }
 .h-10 {
   height: 2.5rem !important;
+}
+.h-64 {
+  height: 16rem !important;
+}
+.h-72 {
+  height: 18rem !important;
+}
+.h-\[calc\(100vh-40px\)\] {
+  height: calc(100vh - 40px) !important;
 }
 .h-0\.5 {
   height: 0.125rem !important;
@@ -1873,6 +1903,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-screen {
   height: 100vh !important;
 }
+.h-\[150px\] {
+  height: 150px !important;
+}
 .h-16 {
   height: 4rem !important;
 }
@@ -1885,20 +1918,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-56 {
   height: 14rem !important;
 }
-.h-64 {
-  height: 16rem !important;
-}
 .h-28 {
   height: 7rem !important;
 }
 .h-96 {
   height: 24rem !important;
-}
-.h-24 {
-  height: 6rem !important;
-}
-.h-12 {
-  height: 3rem !important;
 }
 .h-44 {
   height: 11rem !important;
@@ -1912,26 +1936,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-2 {
   height: 0.5rem !important;
 }
-.h-72 {
-  height: 18rem !important;
-}
-.h-3 {
-  height: 0.75rem !important;
-}
-.h-60 {
-  height: 15rem !important;
-}
-.h-80 {
-  height: 20rem !important;
-}
-.h-1\/2 {
-  height: 50% !important;
+.h-52 {
+  height: 13rem !important;
 }
 .h-48 {
   height: 12rem !important;
 }
-.h-52 {
-  height: 13rem !important;
+.h-3 {
+  height: 0.75rem !important;
+}
+.h-1\/2 {
+  height: 50% !important;
+}
+.h-80 {
+  height: 20rem !important;
 }
 .h-1\/3 {
   height: 33.333333% !important;
@@ -1987,6 +2005,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-9 {
   width: 2.25rem !important;
 }
+.w-72 {
+  width: 18rem !important;
+}
+.w-1\/3 {
+  width: 33.333333% !important;
+}
+.w-2\/3 {
+  width: 66.666667% !important;
+}
+.w-14 {
+  width: 3.5rem !important;
+}
 .w-7 {
   width: 1.75rem !important;
 }
@@ -2017,9 +2047,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-1\/2 {
   width: 50% !important;
 }
-.w-1\/3 {
-  width: 33.333333% !important;
-}
 .w-3\/4 {
   width: 75% !important;
 }
@@ -2038,14 +2065,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-1\/4 {
   width: 25% !important;
 }
-.w-2\/3 {
-  width: 66.666667% !important;
-}
-.w-14 {
-  width: 3.5rem !important;
-}
 .w-12 {
   width: 3rem !important;
+}
+.w-\[620px\] {
+  width: 620px !important;
 }
 .w-2\/12 {
   width: 16.666667% !important;
@@ -2067,9 +2091,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-8 {
   width: 2rem !important;
-}
-.w-72 {
-  width: 18rem !important;
 }
 .w-24 {
   width: 6rem !important;
@@ -2137,32 +2158,32 @@ Ensure the default browser behavior of the `hidden` attribute.
 .max-w-6xl {
   max-width: 72rem !important;
 }
-.max-w-2xl {
-  max-width: 42rem !important;
-}
-.max-w-\[77px\] {
-  max-width: 77px !important;
-}
-.max-w-5xl {
-  max-width: 64rem !important;
-}
 .max-w-4xl {
   max-width: 56rem !important;
 }
 .max-w-xl {
   max-width: 36rem !important;
 }
+.max-w-5xl {
+  max-width: 64rem !important;
+}
+.max-w-sm {
+  max-width: 24rem !important;
+}
+.max-w-2xl {
+  max-width: 42rem !important;
+}
+.max-w-\[77px\] {
+  max-width: 77px !important;
+}
+.max-w-\[1200px\] {
+  max-width: 1200px !important;
+}
 .max-w-none {
   max-width: none !important;
 }
 .max-w-lg {
   max-width: 32rem !important;
-}
-.max-w-sm {
-  max-width: 24rem !important;
-}
-.max-w-\[230px\] {
-  max-width: 230px !important;
 }
 .max-w-\[210px\] {
   max-width: 210px !important;
@@ -2172,6 +2193,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .max-w-screen-xl {
   max-width: 1280px !important;
+}
+.max-w-\[230px\] {
+  max-width: 230px !important;
 }
 .max-w-\[75rem\] {
   max-width: 75rem !important;
@@ -2404,11 +2428,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .justify-evenly {
   justify-content: space-evenly !important;
 }
-.gap-2 {
-  gap: 0.5rem !important;
-}
 .gap-4 {
   gap: 1rem !important;
+}
+.gap-2 {
+  gap: 0.5rem !important;
 }
 .gap-6 {
   gap: 1.5rem !important;
@@ -2577,23 +2601,23 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border-2 {
   border-width: 2px !important;
 }
+.border {
+  border-width: 1px !important;
+}
 .border-4 {
   border-width: 4px !important;
 }
 .border-0 {
   border-width: 0px !important;
 }
-.border {
-  border-width: 1px !important;
-}
 .border-8 {
   border-width: 8px !important;
 }
-.border-b-2 {
-  border-bottom-width: 2px !important;
-}
 .border-b {
   border-bottom-width: 1px !important;
+}
+.border-b-2 {
+  border-bottom-width: 2px !important;
 }
 .border-l {
   border-left-width: 1px !important;
@@ -2627,6 +2651,22 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1 !important;
   border-color: rgb(0 0 0 / var(--tw-border-opacity)) !important;
 }
+.border-drumeo {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(11 118 219 / var(--tw-border-opacity)) !important;
+}
+.border-pianote {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(246 26 48 / var(--tw-border-opacity)) !important;
+}
+.border-guitareo {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(0 201 172 / var(--tw-border-opacity)) !important;
+}
+.border-singeo {
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(131 0 233 / var(--tw-border-opacity)) !important;
+}
 .border-gray-100 {
   --tw-border-opacity: 1 !important;
   border-color: rgb(243 244 246 / var(--tw-border-opacity)) !important;
@@ -2651,10 +2691,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1 !important;
   border-color: rgb(107 114 128 / var(--tw-border-opacity)) !important;
 }
-.border-drumeo {
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(11 118 219 / var(--tw-border-opacity)) !important;
-}
 .border-gray-300 {
   --tw-border-opacity: 1 !important;
   border-color: rgb(209 213 219 / var(--tw-border-opacity)) !important;
@@ -2667,21 +2703,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1 !important;
   border-color: rgb(12 74 110 / var(--tw-border-opacity)) !important;
 }
-.border-guitareo {
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(0 201 172 / var(--tw-border-opacity)) !important;
-}
 .border-gray-400 {
   --tw-border-opacity: 1 !important;
   border-color: rgb(156 163 175 / var(--tw-border-opacity)) !important;
-}
-.border-pianote {
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(246 26 48 / var(--tw-border-opacity)) !important;
-}
-.border-singeo {
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(131 0 233 / var(--tw-border-opacity)) !important;
 }
 .border-transparent {
   border-color: transparent !important;
@@ -2726,6 +2750,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 0 0 / var(--tw-bg-opacity)) !important;
 }
+.bg-white {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
+}
+.bg-drumeo {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(11 118 219 / var(--tw-bg-opacity)) !important;
+}
 .bg-pianote {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(246 26 48 / var(--tw-bg-opacity)) !important;
@@ -2733,10 +2765,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-singeo {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(131 0 233 / var(--tw-bg-opacity)) !important;
-}
-.bg-white {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(255 255 255 / var(--tw-bg-opacity)) !important;
 }
 .bg-\[\#838C98\] {
   --tw-bg-opacity: 1 !important;
@@ -2757,37 +2785,29 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1 !important;
   background-color: rgb(17 23 41 / var(--tw-bg-opacity)) !important;
 }
-.bg-drumeo {
+.bg-\[\#000c17\] {
   --tw-bg-opacity: 1 !important;
-  background-color: rgb(11 118 219 / var(--tw-bg-opacity)) !important;
+  background-color: rgb(0 12 23 / var(--tw-bg-opacity)) !important;
 }
 .bg-\[\#DEEFFF\] {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(222 239 255 / var(--tw-bg-opacity)) !important;
 }
-.bg-\[\#0c1524\] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(12 21 36 / var(--tw-bg-opacity)) !important;
-}
-.bg-\[\#ffac00\] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(255 172 0 / var(--tw-bg-opacity)) !important;
-}
-.bg-\[\#e7edf4\] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(231 237 244 / var(--tw-bg-opacity)) !important;
-}
 .bg-\[\#031627\] {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(3 22 39 / var(--tw-bg-opacity)) !important;
 }
+.bg-\[\#000C17\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 12 23 / var(--tw-bg-opacity)) !important;
+}
+.bg-\[\#F6F8FC\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(246 248 252 / var(--tw-bg-opacity)) !important;
+}
 .bg-gray-100 {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity)) !important;
-}
-.bg-\[\#0C1524\] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(12 21 36 / var(--tw-bg-opacity)) !important;
 }
 .bg-\[\#FEF2F2\] {
   --tw-bg-opacity: 1 !important;
@@ -2812,16 +2832,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1 !important;
   background-color: rgb(246 248 252 / var(--tw-bg-opacity)) !important;
 }
-.bg-\[\#F6F8FC\] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(246 248 252 / var(--tw-bg-opacity)) !important;
-}
 .bg-\[\#0009\] {
   background-color: #0009 !important;
-}
-.bg-\[\#000C17\] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 12 23 / var(--tw-bg-opacity)) !important;
 }
 .bg-\[\#FFA800\] {
   --tw-bg-opacity: 1 !important;
@@ -2839,6 +2851,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1 !important;
   background-color: rgb(119 119 119 / var(--tw-bg-opacity)) !important;
 }
+.bg-\[\#0c1524\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(12 21 36 / var(--tw-bg-opacity)) !important;
+}
 .bg-\[\#00c9ac\] {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(0 201 172 / var(--tw-bg-opacity)) !important;
@@ -2846,6 +2862,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-\[\#273040\] {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(39 48 64 / var(--tw-bg-opacity)) !important;
+}
+.bg-\[\#ffac00\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(255 172 0 / var(--tw-bg-opacity)) !important;
+}
+.bg-\[\#e7edf4\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(231 237 244 / var(--tw-bg-opacity)) !important;
 }
 .bg-\[\#01050F\] {
   --tw-bg-opacity: 1 !important;
@@ -3028,6 +3052,18 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 10rem !important;
   padding-bottom: 10rem !important;
 }
+.px-7 {
+  padding-left: 1.75rem !important;
+  padding-right: 1.75rem !important;
+}
+.py-10 {
+  padding-top: 2.5rem !important;
+  padding-bottom: 2.5rem !important;
+}
+.px-10 {
+  padding-left: 2.5rem !important;
+  padding-right: 2.5rem !important;
+}
 .py-4 {
   padding-top: 1rem !important;
   padding-bottom: 1rem !important;
@@ -3044,10 +3080,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 0.75rem !important;
   padding-bottom: 0.75rem !important;
 }
-.px-7 {
-  padding-left: 1.75rem !important;
-  padding-right: 1.75rem !important;
-}
 .py-7 {
   padding-top: 1.75rem !important;
   padding-bottom: 1.75rem !important;
@@ -3055,10 +3087,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-1 {
   padding-left: 0.25rem !important;
   padding-right: 0.25rem !important;
-}
-.py-10 {
-  padding-top: 2.5rem !important;
-  padding-bottom: 2.5rem !important;
 }
 .py-6 {
   padding-top: 1.5rem !important;
@@ -3092,6 +3120,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 6rem !important;
   padding-bottom: 6rem !important;
 }
+.px-8 {
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+}
 .py-16 {
   padding-top: 4rem !important;
   padding-bottom: 4rem !important;
@@ -3100,10 +3132,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 4rem !important;
   padding-right: 4rem !important;
 }
-.px-8 {
-  padding-left: 2rem !important;
-  padding-right: 2rem !important;
-}
 .py-2\.5 {
   padding-top: 0.625rem !important;
   padding-bottom: 0.625rem !important;
@@ -3111,10 +3139,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-3\.5 {
   padding-left: 0.875rem !important;
   padding-right: 0.875rem !important;
-}
-.px-10 {
-  padding-left: 2.5rem !important;
-  padding-right: 2.5rem !important;
 }
 .py-56 {
   padding-top: 14rem !important;
@@ -3160,8 +3184,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pl-2 {
   padding-left: 0.5rem !important;
 }
+.pl-1 {
+  padding-left: 0.25rem !important;
+}
+.pr-7 {
+  padding-right: 1.75rem !important;
+}
+.pb-4 {
+  padding-bottom: 1rem !important;
+}
 .pl-3 {
   padding-left: 0.75rem !important;
+}
+.pb-20 {
+  padding-bottom: 5rem !important;
 }
 .pb-\[66vh\] {
   padding-bottom: 66vh !important;
@@ -3174,9 +3210,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pl-8 {
   padding-left: 2rem !important;
-}
-.pb-4 {
-  padding-bottom: 1rem !important;
 }
 .pt-3 {
   padding-top: 0.75rem !important;
@@ -3223,9 +3256,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pt-14 {
   padding-top: 3.5rem !important;
 }
-.pr-7 {
-  padding-right: 1.75rem !important;
-}
 .pt-2 {
   padding-top: 0.5rem !important;
 }
@@ -3244,9 +3274,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pt-32 {
   padding-top: 8rem !important;
 }
-.pb-20 {
-  padding-bottom: 5rem !important;
-}
 .pb-6 {
   padding-bottom: 1.5rem !important;
 }
@@ -3264,6 +3291,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pl-10 {
   padding-left: 2.5rem !important;
+}
+.pb-32 {
+  padding-bottom: 8rem !important;
 }
 .pb-64 {
   padding-bottom: 16rem !important;
@@ -3300,9 +3330,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pr-1 {
   padding-right: 0.25rem !important;
-}
-.pl-1 {
-  padding-left: 0.25rem !important;
 }
 .pb-56 {
   padding-bottom: 14rem !important;
@@ -3348,6 +3375,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pb-60 {
   padding-bottom: 15rem !important;
+}
+.pr-0 {
+  padding-right: 0px !important;
 }
 .pt-44 {
   padding-top: 11rem !important;
@@ -3401,10 +3431,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1.25rem !important;
   line-height: 1.75rem !important;
 }
-.text-2xl {
-  font-size: 1.5rem !important;
-  line-height: 2rem !important;
-}
 .text-4xl {
   font-size: 2.25rem !important;
   line-height: 2.5rem !important;
@@ -3412,6 +3438,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-xs {
   font-size: 0.75rem !important;
   line-height: 1rem !important;
+}
+.text-2xl {
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
 }
 .text-\[28px\] {
   font-size: 28px !important;
@@ -3623,6 +3653,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1 !important;
   color: rgb(156 163 175 / var(--tw-text-opacity)) !important;
 }
+.text-\[\#C0C0C0\] {
+  --tw-text-opacity: 1 !important;
+  color: rgb(192 192 192 / var(--tw-text-opacity)) !important;
+}
 .text-green-500 {
   --tw-text-opacity: 1 !important;
   color: rgb(34 197 94 / var(--tw-text-opacity)) !important;
@@ -3744,6 +3778,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1) !important;
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color) !important;
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
+}
+.shadow-\[0px_4px_4px_rgba\(0\2c 0\2c 0\2c 0\.25\)\] {
+  --tw-shadow: 0px 4px 4px rgba(0,0,0,0.25) !important;
+  --tw-shadow-colored: 0px 4px 4px var(--tw-shadow-color) !important;
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow) !important;
 }
 .shadow-sm {
@@ -3896,11 +3935,6 @@ body {
 }
 .text-navy {
   color: #a1afc9 !important;
-}
-.text-musora {
-  background: linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
 }
 .bg-musora {
   background: linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30) !important;
@@ -4483,6 +4517,16 @@ li, p {
     float: left !important;
   }
 
+  .sm\:mx-1 {
+    margin-left: 0.25rem !important;
+    margin-right: 0.25rem !important;
+  }
+
+  .sm\:my-2 {
+    margin-top: 0.5rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+
   .sm\:my-7 {
     margin-top: 1.75rem !important;
     margin-bottom: 1.75rem !important;
@@ -4523,21 +4567,6 @@ li, p {
     margin-bottom: 2rem !important;
   }
 
-  .sm\:mx-2 {
-    margin-left: 0.5rem !important;
-    margin-right: 0.5rem !important;
-  }
-
-  .sm\:my-2 {
-    margin-top: 0.5rem !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  .sm\:mx-1 {
-    margin-left: 0.25rem !important;
-    margin-right: 0.25rem !important;
-  }
-
   .sm\:my-0 {
     margin-top: 0px !important;
     margin-bottom: 0px !important;
@@ -4563,8 +4592,45 @@ li, p {
     margin-right: auto !important;
   }
 
+  .sm\:mx-2 {
+    margin-left: 0.5rem !important;
+    margin-right: 0.5rem !important;
+  }
+
   .sm\:mb-0 {
     margin-bottom: 0px !important;
+  }
+
+  .sm\:mt-3 {
+    margin-top: 0.75rem !important;
+  }
+
+  .sm\:mb-10 {
+    margin-bottom: 2.5rem !important;
+  }
+
+  .sm\:-mt-10 {
+    margin-top: -2.5rem !important;
+  }
+
+  .sm\:mb-6 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .sm\:mb-8 {
+    margin-bottom: 2rem !important;
+  }
+
+  .sm\:mt-5 {
+    margin-top: 1.25rem !important;
+  }
+
+  .sm\:mb-20 {
+    margin-bottom: 5rem !important;
+  }
+
+  .sm\:mt-6 {
+    margin-top: 1.5rem !important;
   }
 
   .sm\:mt-2 {
@@ -4573,10 +4639,6 @@ li, p {
 
   .sm\:mr-6 {
     margin-right: 1.5rem !important;
-  }
-
-  .sm\:mt-6 {
-    margin-top: 1.5rem !important;
   }
 
   .sm\:mb-7 {
@@ -4599,10 +4661,6 @@ li, p {
     margin-bottom: 0.5rem !important;
   }
 
-  .sm\:mt-5 {
-    margin-top: 1.25rem !important;
-  }
-
   .sm\:mb-1 {
     margin-bottom: 0.25rem !important;
   }
@@ -4621,14 +4679,6 @@ li, p {
 
   .sm\:mt-12 {
     margin-top: 3rem !important;
-  }
-
-  .sm\:mb-10 {
-    margin-bottom: 2.5rem !important;
-  }
-
-  .sm\:-mt-10 {
-    margin-top: -2.5rem !important;
   }
 
   .sm\:-mb-24 {
@@ -4659,10 +4709,6 @@ li, p {
     margin-top: 4rem !important;
   }
 
-  .sm\:mb-8 {
-    margin-bottom: 2rem !important;
-  }
-
   .sm\:-mt-36 {
     margin-top: -9rem !important;
   }
@@ -4687,10 +4733,6 @@ li, p {
     margin-bottom: -2rem !important;
   }
 
-  .sm\:mb-20 {
-    margin-bottom: 5rem !important;
-  }
-
   .sm\:mb-5 {
     margin-bottom: 1.25rem !important;
   }
@@ -4705,14 +4747,6 @@ li, p {
 
   .sm\:mb-16 {
     margin-bottom: 4rem !important;
-  }
-
-  .sm\:mb-6 {
-    margin-bottom: 1.5rem !important;
-  }
-
-  .sm\:mt-3 {
-    margin-top: 0.75rem !important;
   }
 
   .sm\:ml-0 {
@@ -4759,6 +4793,10 @@ li, p {
     margin-top: -2.25rem !important;
   }
 
+  .sm\:-mb-\[135px\] {
+    margin-bottom: -135px !important;
+  }
+
   .sm\:mr-5 {
     margin-right: 1.25rem !important;
   }
@@ -4785,10 +4823,6 @@ li, p {
 
   .sm\:mb-1\.5 {
     margin-bottom: 0.375rem !important;
-  }
-
-  .sm\:-mt-14 {
-    margin-top: -3.5rem !important;
   }
 
   .sm\:mr-4 {
@@ -4839,12 +4873,12 @@ li, p {
     margin-left: 3.5rem !important;
   }
 
-  .sm\:mb-44 {
-    margin-bottom: 11rem !important;
-  }
-
   .sm\:mb-11 {
     margin-bottom: 2.75rem !important;
+  }
+
+  .sm\:mb-44 {
+    margin-bottom: 11rem !important;
   }
 
   .sm\:mr-1 {
@@ -4887,6 +4921,22 @@ li, p {
     height: 7rem !important;
   }
 
+  .sm\:h-14 {
+    height: 3.5rem !important;
+  }
+
+  .sm\:h-40 {
+    height: 10rem !important;
+  }
+
+  .sm\:h-12 {
+    height: 3rem !important;
+  }
+
+  .sm\:h-32 {
+    height: 8rem !important;
+  }
+
   .sm\:h-10 {
     height: 2.5rem !important;
   }
@@ -4899,10 +4949,6 @@ li, p {
     height: 9rem !important;
   }
 
-  .sm\:h-14 {
-    height: 3.5rem !important;
-  }
-
   .sm\:h-20 {
     height: 5rem !important;
   }
@@ -4911,16 +4957,8 @@ li, p {
     height: 2.25rem !important;
   }
 
-  .sm\:h-40 {
-    height: 10rem !important;
-  }
-
   .sm\:h-8 {
     height: 2rem !important;
-  }
-
-  .sm\:h-32 {
-    height: 8rem !important;
   }
 
   .sm\:h-16 {
@@ -4947,8 +4985,8 @@ li, p {
     height: 1.75rem !important;
   }
 
-  .sm\:h-12 {
-    height: 3rem !important;
+  .sm\:h-80 {
+    height: 20rem !important;
   }
 
   .sm\:h-96 {
@@ -4957,10 +4995,6 @@ li, p {
 
   .sm\:h-11 {
     height: 2.75rem !important;
-  }
-
-  .sm\:h-80 {
-    height: 20rem !important;
   }
 
   .sm\:h-72 {
@@ -4983,6 +5017,30 @@ li, p {
     width: 66.666667% !important;
   }
 
+  .sm\:w-56 {
+    width: 14rem !important;
+  }
+
+  .sm\:w-1\/2 {
+    width: 50% !important;
+  }
+
+  .sm\:w-full {
+    width: 100% !important;
+  }
+
+  .sm\:w-64 {
+    width: 16rem !important;
+  }
+
+  .sm\:w-auto {
+    width: auto !important;
+  }
+
+  .sm\:w-1\/3 {
+    width: 33.333333% !important;
+  }
+
   .sm\:w-9 {
     width: 2.25rem !important;
   }
@@ -4991,28 +5049,12 @@ li, p {
     width: 9rem !important;
   }
 
-  .sm\:w-1\/3 {
-    width: 33.333333% !important;
-  }
-
-  .sm\:w-auto {
-    width: auto !important;
-  }
-
   .sm\:w-7\/12 {
     width: 58.333333% !important;
   }
 
-  .sm\:w-1\/2 {
-    width: 50% !important;
-  }
-
   .sm\:w-5\/12 {
     width: 41.666667% !important;
-  }
-
-  .sm\:w-64 {
-    width: 16rem !important;
   }
 
   .sm\:w-72 {
@@ -5043,10 +5085,6 @@ li, p {
     width: 66.666667% !important;
   }
 
-  .sm\:w-full {
-    width: 100% !important;
-  }
-
   .sm\:w-14 {
     width: 3.5rem !important;
   }
@@ -5065,10 +5103,6 @@ li, p {
 
   .sm\:w-3\/5 {
     width: 60% !important;
-  }
-
-  .sm\:w-56 {
-    width: 14rem !important;
   }
 
   .sm\:w-2\/4 {
@@ -5104,6 +5138,14 @@ li, p {
     width: 25% !important;
   }
 
+  .sm\:max-w-6xl {
+    max-width: 72rem !important;
+  }
+
+  .sm\:max-w-xl {
+    max-width: 36rem !important;
+  }
+
   .sm\:max-w-full {
     max-width: 100% !important;
   }
@@ -5116,16 +5158,12 @@ li, p {
     max-width: 28rem !important;
   }
 
-  .sm\:max-w-xl {
-    max-width: 36rem !important;
+  .sm\:max-w-3xl {
+    max-width: 48rem !important;
   }
 
   .sm\:max-w-lg {
     max-width: 32rem !important;
-  }
-
-  .sm\:max-w-3xl {
-    max-width: 48rem !important;
   }
 
   .sm\:max-w-4xl {
@@ -5300,9 +5338,29 @@ li, p {
     padding: 0px !important;
   }
 
+  .sm\:px-6 {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
+  .sm\:py-56 {
+    padding-top: 14rem !important;
+    padding-bottom: 14rem !important;
+  }
+
+  .sm\:py-14 {
+    padding-top: 3.5rem !important;
+    padding-bottom: 3.5rem !important;
+  }
+
   .sm\:px-3 {
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
+  }
+
+  .sm\:px-2 {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
   }
 
   .sm\:py-6 {
@@ -5335,21 +5393,6 @@ li, p {
     padding-bottom: 1.75rem !important;
   }
 
-  .sm\:px-6 {
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-  }
-
-  .sm\:py-14 {
-    padding-top: 3.5rem !important;
-    padding-bottom: 3.5rem !important;
-  }
-
-  .sm\:px-2 {
-    padding-left: 0.5rem !important;
-    padding-right: 0.5rem !important;
-  }
-
   .sm\:px-7 {
     padding-left: 1.75rem !important;
     padding-right: 1.75rem !important;
@@ -5365,14 +5408,14 @@ li, p {
     padding-right: 2.5rem !important;
   }
 
-  .sm\:py-11 {
-    padding-top: 2.75rem !important;
-    padding-bottom: 2.75rem !important;
-  }
-
   .sm\:py-16 {
     padding-top: 4rem !important;
     padding-bottom: 4rem !important;
+  }
+
+  .sm\:py-11 {
+    padding-top: 2.75rem !important;
+    padding-bottom: 2.75rem !important;
   }
 
   .sm\:px-5 {
@@ -5385,14 +5428,14 @@ li, p {
     padding-bottom: 0.75rem !important;
   }
 
-  .sm\:py-24 {
-    padding-top: 6rem !important;
-    padding-bottom: 6rem !important;
-  }
-
   .sm\:py-20 {
     padding-top: 5rem !important;
     padding-bottom: 5rem !important;
+  }
+
+  .sm\:px-8 {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
   }
 
   .sm\:px-9 {
@@ -5435,11 +5478,6 @@ li, p {
     padding-bottom: 3rem !important;
   }
 
-  .sm\:px-8 {
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
-  }
-
   .sm\:py-48 {
     padding-top: 12rem !important;
     padding-bottom: 12rem !important;
@@ -5453,6 +5491,11 @@ li, p {
   .sm\:py-8 {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
+  }
+
+  .sm\:py-24 {
+    padding-top: 6rem !important;
+    padding-bottom: 6rem !important;
   }
 
   .sm\:px-20 {
@@ -5477,6 +5520,18 @@ li, p {
 
   .sm\:pl-6 {
     padding-left: 1.5rem !important;
+  }
+
+  .sm\:pb-0 {
+    padding-bottom: 0px !important;
+  }
+
+  .sm\:pl-0 {
+    padding-left: 0px !important;
+  }
+
+  .sm\:pl-10 {
+    padding-left: 2.5rem !important;
   }
 
   .sm\:pl-4 {
@@ -5531,10 +5586,6 @@ li, p {
     padding-right: 1rem !important;
   }
 
-  .sm\:pl-10 {
-    padding-left: 2.5rem !important;
-  }
-
   .sm\:pl-7 {
     padding-left: 1.75rem !important;
   }
@@ -5559,24 +5610,16 @@ li, p {
     padding-right: 0px !important;
   }
 
-  .sm\:pb-0 {
-    padding-bottom: 0px !important;
-  }
-
-  .sm\:pl-0 {
-    padding-left: 0px !important;
-  }
-
-  .sm\:pt-14 {
-    padding-top: 3.5rem !important;
-  }
-
   .sm\:pb-32 {
     padding-bottom: 8rem !important;
   }
 
   .sm\:pt-40 {
     padding-top: 10rem !important;
+  }
+
+  .sm\:pt-14 {
+    padding-top: 3.5rem !important;
   }
 
   .sm\:pb-80 {
@@ -5643,6 +5686,10 @@ li, p {
     padding-top: 3rem !important;
   }
 
+  .sm\:pr-7 {
+    padding-right: 1.75rem !important;
+  }
+
   .sm\:pr-20 {
     padding-right: 5rem !important;
   }
@@ -5663,6 +5710,11 @@ li, p {
     text-align: right !important;
   }
 
+  .sm\:text-5xl {
+    font-size: 3rem !important;
+    line-height: 1 !important;
+  }
+
   .sm\:text-sm {
     font-size: 0.875rem !important;
     line-height: 1.25rem !important;
@@ -5675,11 +5727,6 @@ li, p {
 
   .sm\:text-6xl {
     font-size: 3.75rem !important;
-    line-height: 1 !important;
-  }
-
-  .sm\:text-5xl {
-    font-size: 3rem !important;
     line-height: 1 !important;
   }
 
@@ -5760,6 +5807,13 @@ li, p {
     position: relative !important;
   }
 
+  .md\:inset-0 {
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 0 !important;
+  }
+
   .md\:-top-20 {
     top: -5rem !important;
   }
@@ -5776,12 +5830,20 @@ li, p {
     top: 50% !important;
   }
 
-  .md\:left-7 {
-    left: 1.75rem !important;
+  .md\:top-\[50\%\] {
+    top: 50% !important;
   }
 
-  .md\:left-0 {
-    left: 0 !important;
+  .md\:left-1 {
+    left: 1rem !important;
+  }
+
+  .md\:-right-1 {
+    right: -1rem !important;
+  }
+
+  .md\:left-7 {
+    left: 1.75rem !important;
   }
 
   .md\:bottom-5 {
@@ -5790,6 +5852,10 @@ li, p {
 
   .md\:bottom-3 {
     bottom: 3rem !important;
+  }
+
+  .md\:left-0 {
+    left: 0 !important;
   }
 
   .md\:top-60 {
@@ -5953,11 +6019,6 @@ li, p {
     margin-bottom: 1.5rem !important;
   }
 
-  .md\:my-7 {
-    margin-top: 1.75rem !important;
-    margin-bottom: 1.75rem !important;
-  }
-
   .md\:my-96 {
     margin-top: 24rem !important;
     margin-bottom: 24rem !important;
@@ -5966,6 +6027,11 @@ li, p {
   .md\:my-64 {
     margin-top: 16rem !important;
     margin-bottom: 16rem !important;
+  }
+
+  .md\:my-7 {
+    margin-top: 1.75rem !important;
+    margin-bottom: 1.75rem !important;
   }
 
   .md\:my-8 {
@@ -6025,6 +6091,10 @@ li, p {
     margin-top: 1.75rem !important;
   }
 
+  .md\:mb-28 {
+    margin-bottom: 7rem !important;
+  }
+
   .md\:mb-2 {
     margin-bottom: 0.5rem !important;
   }
@@ -6043,10 +6113,6 @@ li, p {
 
   .md\:mr-0 {
     margin-right: 0px !important;
-  }
-
-  .md\:mb-28 {
-    margin-bottom: 7rem !important;
   }
 
   .md\:mb-5 {
@@ -6085,10 +6151,6 @@ li, p {
     margin-top: -1rem !important;
   }
 
-  .md\:mt-4 {
-    margin-top: 1rem !important;
-  }
-
   .md\:-mt-20 {
     margin-top: -5rem !important;
   }
@@ -6097,16 +6159,20 @@ li, p {
     margin-top: 4rem !important;
   }
 
+  .md\:-mr-10 {
+    margin-right: -2.5rem !important;
+  }
+
   .md\:mt-2 {
     margin-top: 0.5rem !important;
   }
 
-  .md\:mt-14 {
-    margin-top: 3.5rem !important;
+  .md\:mr-2 {
+    margin-right: 0.5rem !important;
   }
 
-  .md\:mt-10 {
-    margin-top: 2.5rem !important;
+  .md\:mt-4 {
+    margin-top: 1rem !important;
   }
 
   .md\:mb-20 {
@@ -6149,8 +6215,8 @@ li, p {
     margin-bottom: -4rem !important;
   }
 
-  .md\:ml-6 {
-    margin-left: 1.5rem !important;
+  .md\:mt-10 {
+    margin-top: 2.5rem !important;
   }
 
   .md\:mt-56 {
@@ -6159,10 +6225,6 @@ li, p {
 
   .md\:ml-1 {
     margin-left: 0.25rem !important;
-  }
-
-  .md\:mr-2 {
-    margin-right: 0.5rem !important;
   }
 
   .md\:mb-1 {
@@ -6185,10 +6247,6 @@ li, p {
     margin-right: -0.5rem !important;
   }
 
-  .md\:-mr-10 {
-    margin-right: -2.5rem !important;
-  }
-
   .md\:-mr-16 {
     margin-right: -4rem !important;
   }
@@ -6203,6 +6261,10 @@ li, p {
 
   .md\:-mt-5 {
     margin-top: -1.25rem !important;
+  }
+
+  .md\:mt-14 {
+    margin-top: 3.5rem !important;
   }
 
   .md\:mb-9 {
@@ -6243,6 +6305,10 @@ li, p {
 
   .md\:mt-48 {
     margin-top: 12rem !important;
+  }
+
+  .md\:ml-6 {
+    margin-left: 1.5rem !important;
   }
 
   .md\:mt-64 {
@@ -6321,16 +6387,16 @@ li, p {
     height: 18rem !important;
   }
 
+  .md\:h-\[350px\] {
+    height: 350px !important;
+  }
+
   .md\:h-9 {
     height: 2.25rem !important;
   }
 
   .md\:h-20 {
     height: 5rem !important;
-  }
-
-  .md\:h-28 {
-    height: 7rem !important;
   }
 
   .md\:h-16 {
@@ -6349,6 +6415,10 @@ li, p {
     height: 11rem !important;
   }
 
+  .md\:h-56 {
+    height: 14rem !important;
+  }
+
   .md\:h-auto {
     height: auto !important;
   }
@@ -6365,16 +6435,16 @@ li, p {
     height: 100% !important;
   }
 
-  .md\:h-96 {
-    height: 24rem !important;
-  }
-
-  .md\:h-56 {
-    height: 14rem !important;
+  .md\:h-28 {
+    height: 7rem !important;
   }
 
   .md\:h-64 {
     height: 16rem !important;
+  }
+
+  .md\:h-96 {
+    height: 24rem !important;
   }
 
   .md\:h-11 {
@@ -6521,6 +6591,14 @@ li, p {
     width: 83.333333% !important;
   }
 
+  .md\:min-w-\[290px\] {
+    min-width: 290px !important;
+  }
+
+  .md\:min-w-\[600px\] {
+    min-width: 600px !important;
+  }
+
   .md\:max-w-md {
     max-width: 28rem !important;
   }
@@ -6638,10 +6716,6 @@ li, p {
     justify-content: flex-start !important;
   }
 
-  .md\:justify-center {
-    justify-content: center !important;
-  }
-
   .md\:justify-between {
     justify-content: space-between !important;
   }
@@ -6684,6 +6758,10 @@ li, p {
 
   .md\:gap-5 {
     gap: 1.25rem !important;
+  }
+
+  .md\:rounded-lg {
+    border-radius: 0.5rem !important;
   }
 
   .md\:rounded-md {
@@ -6830,11 +6908,6 @@ li, p {
     padding-bottom: 1.5rem !important;
   }
 
-  .md\:py-24 {
-    padding-top: 6rem !important;
-    padding-bottom: 6rem !important;
-  }
-
   .md\:py-12 {
     padding-top: 3rem !important;
     padding-bottom: 3rem !important;
@@ -6875,14 +6948,9 @@ li, p {
     padding-bottom: 3.5rem !important;
   }
 
-  .md\:px-5 {
-    padding-left: 1.25rem !important;
-    padding-right: 1.25rem !important;
-  }
-
-  .md\:py-9 {
-    padding-top: 2.25rem !important;
-    padding-bottom: 2.25rem !important;
+  .md\:py-24 {
+    padding-top: 6rem !important;
+    padding-bottom: 6rem !important;
   }
 
   .md\:py-4 {
@@ -6903,6 +6971,11 @@ li, p {
   .md\:py-32 {
     padding-top: 8rem !important;
     padding-bottom: 8rem !important;
+  }
+
+  .md\:px-5 {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
   }
 
   .md\:px-7 {
@@ -6935,6 +7008,11 @@ li, p {
     padding-right: 2.25rem !important;
   }
 
+  .md\:py-9 {
+    padding-top: 2.25rem !important;
+    padding-bottom: 2.25rem !important;
+  }
+
   .md\:py-44 {
     padding-top: 11rem !important;
     padding-bottom: 11rem !important;
@@ -6963,6 +7041,10 @@ li, p {
     padding-left: 2.5rem !important;
   }
 
+  .md\:pl-0 {
+    padding-left: 0px !important;
+  }
+
   .md\:pl-6 {
     padding-left: 1.5rem !important;
   }
@@ -6975,16 +7057,16 @@ li, p {
     padding-top: 5rem !important;
   }
 
+  .md\:pt-\[56px\] {
+    padding-top: 56px !important;
+  }
+
   .md\:pb-12 {
     padding-bottom: 3rem !important;
   }
 
   .md\:pt-64 {
     padding-top: 16rem !important;
-  }
-
-  .md\:pl-0 {
-    padding-left: 0px !important;
   }
 
   .md\:pt-8 {
@@ -7031,12 +7113,28 @@ li, p {
     padding-right: 3rem !important;
   }
 
+  .md\:pb-40 {
+    padding-bottom: 10rem !important;
+  }
+
+  .md\:pl-20 {
+    padding-left: 5rem !important;
+  }
+
   .md\:pt-9 {
     padding-top: 2.25rem !important;
   }
 
   .md\:pr-3 {
     padding-right: 0.75rem !important;
+  }
+
+  .md\:pt-12 {
+    padding-top: 3rem !important;
+  }
+
+  .md\:pb-32 {
+    padding-bottom: 8rem !important;
   }
 
   .md\:pl-14 {
@@ -7127,10 +7225,6 @@ li, p {
     padding-right: 2.25rem !important;
   }
 
-  .md\:pb-40 {
-    padding-bottom: 10rem !important;
-  }
-
   .md\:pb-60 {
     padding-bottom: 15rem !important;
   }
@@ -7167,16 +7261,8 @@ li, p {
     padding-right: 5rem !important;
   }
 
-  .md\:pl-20 {
-    padding-left: 5rem !important;
-  }
-
   .md\:pl-7 {
     padding-left: 1.75rem !important;
-  }
-
-  .md\:pb-32 {
-    padding-bottom: 8rem !important;
   }
 
   .md\:pr-24 {
@@ -7189,10 +7275,6 @@ li, p {
 
   .md\:pt-7 {
     padding-top: 1.75rem !important;
-  }
-
-  .md\:pt-12 {
-    padding-top: 3rem !important;
   }
 
   .md\:pl-16 {
@@ -7378,10 +7460,6 @@ li, p {
     left: 4rem !important;
   }
 
-  .lg\:-top-20 {
-    top: -5rem !important;
-  }
-
   .lg\:bottom-4 {
     bottom: 4rem !important;
   }
@@ -7470,16 +7548,17 @@ li, p {
     left: 17rem !important;
   }
 
-  .lg\:order-1 {
-    order: 1 !important;
-  }
-
   .lg\:order-none {
     order: 0 !important;
   }
 
   .lg\:-m-12 {
     margin: -3rem !important;
+  }
+
+  .lg\:my-6 {
+    margin-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
   }
 
   .lg\:my-4 {
@@ -7502,19 +7581,9 @@ li, p {
     margin-right: auto !important;
   }
 
-  .lg\:my-6 {
-    margin-top: 1.5rem !important;
-    margin-bottom: 1.5rem !important;
-  }
-
   .lg\:my-10 {
     margin-top: 2.5rem !important;
     margin-bottom: 2.5rem !important;
-  }
-
-  .lg\:mx-3 {
-    margin-left: 0.75rem !important;
-    margin-right: 0.75rem !important;
   }
 
   .lg\:my-16 {
@@ -7547,6 +7616,11 @@ li, p {
     margin-bottom: 1.75rem !important;
   }
 
+  .lg\:mx-3 {
+    margin-left: 0.75rem !important;
+    margin-right: 0.75rem !important;
+  }
+
   .lg\:mx-20 {
     margin-left: 5rem !important;
     margin-right: 5rem !important;
@@ -7561,12 +7635,12 @@ li, p {
     margin-bottom: 3.5rem !important;
   }
 
-  .lg\:mr-8 {
-    margin-right: 2rem !important;
-  }
-
   .lg\:mt-10 {
     margin-top: 2.5rem !important;
+  }
+
+  .lg\:mr-8 {
+    margin-right: 2rem !important;
   }
 
   .lg\:mb-3 {
@@ -7673,6 +7747,14 @@ li, p {
     margin-bottom: 0.5rem !important;
   }
 
+  .lg\:ml-auto {
+    margin-left: auto !important;
+  }
+
+  .lg\:mr-0 {
+    margin-right: 0px !important;
+  }
+
   .lg\:mt-14 {
     margin-top: 3.5rem !important;
   }
@@ -7707,10 +7789,6 @@ li, p {
 
   .lg\:-mb-28 {
     margin-bottom: -7rem !important;
-  }
-
-  .lg\:-mt-16 {
-    margin-top: -4rem !important;
   }
 
   .lg\:mt-3 {
@@ -7751,14 +7829,6 @@ li, p {
 
   .lg\:-mt-12 {
     margin-top: -3rem !important;
-  }
-
-  .lg\:ml-auto {
-    margin-left: auto !important;
-  }
-
-  .lg\:mr-0 {
-    margin-right: 0px !important;
   }
 
   .lg\:mt-96 {
@@ -7817,8 +7887,36 @@ li, p {
     height: 20rem !important;
   }
 
+  .lg\:h-20 {
+    height: 5rem !important;
+  }
+
+  .lg\:h-36 {
+    height: 9rem !important;
+  }
+
+  .lg\:h-52 {
+    height: 13rem !important;
+  }
+
+  .lg\:h-16 {
+    height: 4rem !important;
+  }
+
   .lg\:h-40 {
     height: 10rem !important;
+  }
+
+  .lg\:h-44 {
+    height: 11rem !important;
+  }
+
+  .lg\:h-96 {
+    height: 24rem !important;
+  }
+
+  .lg\:h-32 {
+    height: 8rem !important;
   }
 
   .lg\:h-28 {
@@ -7829,20 +7927,8 @@ li, p {
     height: 12rem !important;
   }
 
-  .lg\:h-20 {
-    height: 5rem !important;
-  }
-
-  .lg\:h-52 {
-    height: 13rem !important;
-  }
-
   .lg\:h-24 {
     height: 6rem !important;
-  }
-
-  .lg\:h-16 {
-    height: 4rem !important;
   }
 
   .lg\:h-14 {
@@ -7851,10 +7937,6 @@ li, p {
 
   .lg\:h-72 {
     height: 18rem !important;
-  }
-
-  .lg\:h-36 {
-    height: 9rem !important;
   }
 
   .lg\:h-60 {
@@ -7871,22 +7953,6 @@ li, p {
 
   .lg\:h-auto {
     height: auto !important;
-  }
-
-  .lg\:h-44 {
-    height: 11rem !important;
-  }
-
-  .lg\:h-96 {
-    height: 24rem !important;
-  }
-
-  .lg\:h-32 {
-    height: 8rem !important;
-  }
-
-  .lg\:h-\[450px\] {
-    height: 450px !important;
   }
 
   .lg\:h-full {
@@ -7909,12 +7975,24 @@ li, p {
     height: 2.75rem !important;
   }
 
+  .lg\:h-7 {
+    height: 1.75rem !important;
+  }
+
   .lg\:h-64 {
     height: 16rem !important;
   }
 
   .lg\:h-2\/5 {
     height: 40% !important;
+  }
+
+  .lg\:w-96 {
+    width: 24rem !important;
+  }
+
+  .lg\:w-1\/3 {
+    width: 33.333333% !important;
   }
 
   .lg\:w-1\/4 {
@@ -7929,16 +8007,8 @@ li, p {
     width: 20rem !important;
   }
 
-  .lg\:w-96 {
-    width: 24rem !important;
-  }
-
   .lg\:w-1\/2 {
     width: 50% !important;
-  }
-
-  .lg\:w-1\/3 {
-    width: 33.333333% !important;
   }
 
   .lg\:w-1\/6 {
@@ -8053,24 +8123,16 @@ li, p {
     max-width: 42rem !important;
   }
 
-  .lg\:max-w-none {
-    max-width: none !important;
-  }
-
   .lg\:max-w-4xl {
     max-width: 56rem !important;
   }
 
+  .lg\:max-w-none {
+    max-width: none !important;
+  }
+
   .lg\:max-w-3xl {
     max-width: 48rem !important;
-  }
-
-  .lg\:max-w-xl {
-    max-width: 36rem !important;
-  }
-
-  .lg\:max-w-full {
-    max-width: 100% !important;
   }
 
   .lg\:max-w-5xl {
@@ -8081,12 +8143,20 @@ li, p {
     max-width: 28rem !important;
   }
 
+  .lg\:max-w-xl {
+    max-width: 36rem !important;
+  }
+
   .lg\:max-w-lg {
     max-width: 32rem !important;
   }
 
   .lg\:max-w-6xl {
     max-width: 72rem !important;
+  }
+
+  .lg\:max-w-full {
+    max-width: 100% !important;
   }
 
   .lg\:max-w-sm {
@@ -8202,6 +8272,16 @@ li, p {
     padding-right: 1rem !important;
   }
 
+  .lg\:py-20 {
+    padding-top: 5rem !important;
+    padding-bottom: 5rem !important;
+  }
+
+  .lg\:px-6 {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+
   .lg\:py-72 {
     padding-top: 18rem !important;
     padding-bottom: 18rem !important;
@@ -8220,11 +8300,6 @@ li, p {
   .lg\:py-8 {
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
-  }
-
-  .lg\:py-20 {
-    padding-top: 5rem !important;
-    padding-bottom: 5rem !important;
   }
 
   .lg\:py-4 {
@@ -8262,11 +8337,6 @@ li, p {
     padding-right: 0px !important;
   }
 
-  .lg\:px-6 {
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-  }
-
   .lg\:px-3 {
     padding-left: 0.75rem !important;
     padding-right: 0.75rem !important;
@@ -8295,11 +8365,6 @@ li, p {
   .lg\:py-3 {
     padding-top: 0.75rem !important;
     padding-bottom: 0.75rem !important;
-  }
-
-  .lg\:py-32 {
-    padding-top: 8rem !important;
-    padding-bottom: 8rem !important;
   }
 
   .lg\:py-10 {
@@ -8337,9 +8402,19 @@ li, p {
     padding-right: 2.5rem !important;
   }
 
+  .lg\:py-56 {
+    padding-top: 14rem !important;
+    padding-bottom: 14rem !important;
+  }
+
   .lg\:px-2 {
     padding-left: 0.5rem !important;
     padding-right: 0.5rem !important;
+  }
+
+  .lg\:py-32 {
+    padding-top: 8rem !important;
+    padding-bottom: 8rem !important;
   }
 
   .lg\:py-0 {
@@ -8424,10 +8499,6 @@ li, p {
     padding-left: 3rem !important;
   }
 
-  .lg\:pt-\[56px\] {
-    padding-top: 56px !important;
-  }
-
   .lg\:pb-16 {
     padding-bottom: 4rem !important;
   }
@@ -8474,10 +8545,6 @@ li, p {
 
   .lg\:pb-10 {
     padding-bottom: 2.5rem !important;
-  }
-
-  .lg\:pt-20 {
-    padding-top: 5rem !important;
   }
 
   .lg\:pr-24 {
@@ -8528,6 +8595,10 @@ li, p {
     padding-bottom: 10rem !important;
   }
 
+  .lg\:pt-20 {
+    padding-top: 5rem !important;
+  }
+
   .lg\:pl-16 {
     padding-left: 4rem !important;
   }
@@ -8538,10 +8609,6 @@ li, p {
 
   .lg\:pt-32 {
     padding-top: 8rem !important;
-  }
-
-  .lg\:pr-0 {
-    padding-right: 0px !important;
   }
 
   .lg\:pr-20 {
@@ -8562,6 +8629,10 @@ li, p {
 
   .lg\:pb-32 {
     padding-bottom: 8rem !important;
+  }
+
+  .lg\:pr-0 {
+    padding-right: 0px !important;
   }
 
   .lg\:pr-7 {
@@ -8634,6 +8705,11 @@ li, p {
     line-height: 1 !important;
   }
 
+  .lg\:text-6xl {
+    font-size: 3.75rem !important;
+    line-height: 1 !important;
+  }
+
   .lg\:text-base {
     font-size: 1rem !important;
     line-height: 1.5rem !important;
@@ -8651,11 +8727,6 @@ li, p {
 
   .lg\:text-9xl {
     font-size: 8rem !important;
-    line-height: 1 !important;
-  }
-
-  .lg\:text-6xl {
-    font-size: 3.75rem !important;
     line-height: 1 !important;
   }
 
@@ -8771,6 +8842,11 @@ li, p {
     justify-content: flex-start !important;
   }
 
+  .xl\:px-0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+
   .xl\:py-32 {
     padding-top: 8rem !important;
     padding-bottom: 8rem !important;
@@ -8779,11 +8855,6 @@ li, p {
   .xl\:px-12 {
     padding-left: 3rem !important;
     padding-right: 3rem !important;
-  }
-
-  .xl\:px-0 {
-    padding-left: 0px !important;
-    padding-right: 0px !important;
   }
 
   .xl\:pl-10 {
@@ -8801,5 +8872,11 @@ li, p {
   .xl\:text-xl {
     font-size: 1.25rem !important;
     line-height: 1.75rem !important;
+  }
+}
+@media (min-width: 1536px) {
+
+  .\32xl\:left-\[12\%\] {
+    left: 12% !important;
   }
 }

@@ -194,38 +194,37 @@
         ];
     @endphp
 
-    @include('musora.sales.components.header-section', [
-        'header' => 'Online drum lessons for all skill levels.',
-        'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
-        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
-        'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
-        'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo-m2.jpg',
-        'pointOne' => 'Improve Your Skills',
-        'pointTwo' => 'World-Class Teachers',
-        'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
-        'students' => number_format(Prices::$students),
-    ])
+    @if(!empty($beginnerVersion))
+        @include('musora.sales.components.header-section', [
+            'header' => 'Learn beginner beats, fills and songs on the drums.',
+            'desc' => 'Try Drumeo’s award-winning online drum lessons for 7 days FREE:',
+            'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
+            'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
+            'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo-m2.jpg',
+            'pointOne' => 'Learn New Skills',
+            'pointTwo' => 'Study With Legends',
+            'pointThree' => 'Play Real Songs',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
+            'students' => number_format(Prices::$students),
+        ])
+    @else
+        @include('musora.sales.components.header-section', [
+            'header' => 'Online drum lessons for all skill levels.',
+            'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
+            'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
+            'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
+            'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo-m2.jpg',
+            'pointOne' => 'Improve Your Skills',
+            'pointTwo' => 'World-Class Teachers',
+            'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
+            'students' => number_format(Prices::$students),
+        ])
+    @endif
 
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
-{{--    @if(!empty($promoVersion))--}}
-{{--        @include('musora.sales.components.promo-section', [--}}
-{{--        'promoLogo' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs.svg',--}}
-{{--           'promoLogoM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs-m.png',--}}
-{{--        'desc' => 'Loop, learn, and remove the drums from 5,000+ drumming anthems. ',--}}
-{{--           'text' => 'The NEW Drumeo Songs is here.<br><br>You can now magically remove the drums from 5,000+ popular drumming anthems. And with note-for-note sheet music, tempo adjustment, and a looping feature you’ll have <strong>the ultimate tool for learning songs on the drums.</strong> <br><br>And to make your goals easier in 2023 – you’ll also get a FREE pair of Drumeo’s in-ear headphones when you join Drumeo. So you can enjoy unlimited drum lessons, note-for-note song breakdowns, AND protect your ears while playing your favorite songs.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Drumeo Songs.',--}}
-{{--           'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/collage3.png',--}}
-{{--           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $1342.94',--}}
-{{--       ])--}}
-{{--    @else--}}
-        @include('musora.sales.components.learn-by-playing-section', [
-            'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
-            'desc' => 'It’s the best feeling in the world –<br><br>Nailing that fill in your favorite song, slamming out the chorus of an all-time classic, or writing your own drum part that locks in with the music… but it’s a process.<br><br>And it starts with learning the skills & techniques you need to play the drums.<br><br>Drumeo makes learning the drums easier by giving you step-by-step lessons anytime & anywhere it fits your schedule. Plus, the groundbreaking NEW Drumeo Songs tool makes playing your favorite songs a reality – with note-for-note breakdowns of 5,000 popular songs.<br><br>You’ll play more. You’ll fall in love with your progress. And you’ll have personalized support every step of the way.<br><br>Scroll down to watch the trailer, see more details, and learn to play like you’ve always wanted!',
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/collage2.png',
-        ])
-{{--    @endif--}}
 
     @php
         $gridItems = [
@@ -263,10 +262,8 @@
     @endphp
 
     @include('musora.sales.components.trailer-grid-section', [
-        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314560/rendition/540p/file.mp4?loc=external&signature=1549cce1dacabad80dd416b5a439f6639d3b7b30c7e4d70d46245bf70c6d5102',
         'header' => 'Your drumming goals<br class="inline sm:hidden"> start here.',
-        'desc' => '
-        Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum featuring many of the world’s best teachers. ',
+        'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum featuring many of the world’s best teachers. ',
     ])
 
     @php
@@ -423,27 +420,32 @@
             [
                 'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg',
                 'title' => '5000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for <br class="hidden sm:inline"> every style, era, and skill level.',
-            ],
-            [
-                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/note-for-note-icon.svg',
-                'title' => 'Find the perfect tempo.',
-                'desc' => 'Slow down or speed up any section <br class="hidden sm:inline">of a song to hear every note.',
+                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
             ],
             [
                 'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg',
+                'title' => 'Find the perfect tempo.',
+                'desc' => 'Slow down or speed up any section of a song to hear every note.',
+            ],
+            [
+                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/loop-icon.svg',
                 'title' => 'Loop the trouble spots.',
-                'desc' => 'No more pausing and rewinding that<br class="hidden sm:inline"> tricky fill. Loop it over and over again!  ',
+                'desc' => 'No more pausing and rewinding that tricky fill. Loop it over and over again!',
             ],
             [
                 'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/no-drums-icon.svg',
-                'title' => 'Remove the drums <div class="rounded-full ml-2 inline-block bg-promo text-black text-xs px-2">NEW</div>',
-                'desc' => 'Magically remove the original drums<br class="hidden sm:inline"> to make each song uniquely yours. ',
+                'title' => 'Remove the drums.',
+                'desc' => 'Magically remove the original drums to make each song uniquely yours.',
+            ],
+            [
+                'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/play-it-right-icon.svg',
+                'title' => 'Play it right the first time.',
+                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
             ],
             [
                 'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices-icon.svg',
                 'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable,<br class="hidden sm:inline"> so you can play any song, any time.  ',
+                'desc' => 'Accessible on any device, or printable,so you can play any song, any time.',
             ],
 
         ];
@@ -451,9 +453,14 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat.',
-        'video' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/smells-like-teen-spirit2.mp4',
+        'video' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png',
         'brandName' => 'Drumeo',
-        'bannerDesc' => 'Powered by Musora, Drumeo includes full access to our communities for piano, guitar, and voice.',
+    ])
+
+    @include('musora.sales.components.learn-by-playing-section', [
+        'header' => 'Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.',
+        'desc' => 'With Drumeo, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
+        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314560/rendition/540p/file.mp4?loc=external&signature=1549cce1dacabad80dd416b5a439f6639d3b7b30c7e4d70d46245bf70c6d5102',
     ])
 
     @php
@@ -539,6 +546,7 @@
         @yield('final')
     @elseif(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
+            "noSelector" => true,
             "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
             "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
             "songs" => "5000",

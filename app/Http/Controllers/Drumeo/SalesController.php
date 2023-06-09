@@ -98,13 +98,6 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo']);
     }
-    public function fasterFeet()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.faster-feet', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true]);
-    }
     public function homeMonth()
     {
         $products = $this->productRepository->all();
@@ -119,12 +112,12 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
     }
-    public function trialSplit()
+    public function trialBeginner()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.subscription-split', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
+        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true, 'beginnerVersion' => true ]);
     }
     public function promo()
     {
@@ -218,6 +211,13 @@ class SalesController extends BaseController
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         return view('drumeo.products.eardrums', ['products' => $products]);
+    }
+    public function eardrumsMembers()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.products.eardrums-members', ['products' => $products]);
     }
     public function thirtyDayDrummer()
     {

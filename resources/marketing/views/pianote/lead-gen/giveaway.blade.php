@@ -12,9 +12,9 @@
 
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/pianote/lead-gen-learn-songs.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
     <style>
         header {
             background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/header-m.jpg');

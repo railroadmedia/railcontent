@@ -196,6 +196,11 @@ class NavigationService
                         'icon' => 'calendar',
                     ],
                     [
+                        'name' => 'Song Tutorials',
+                        'path' => '/'.brand().'/song-tutorials',
+                        'icon' => 'play-progress',
+                    ],
+                    [
                         'name' => 'Podcast',
                         'path' => '/'.brand().'/podcasts',
                         'icon' => 'podcast',
@@ -204,11 +209,6 @@ class NavigationService
                         'name' => 'Bootcamps',
                         'path' => '/'.brand().'/bootcamps',
                         'icon' => 'keys',
-                    ],
-                    [
-                        'name' => 'Song Tutorials',
-                        'path' => '/'.brand().'/song-tutorials',
-                        'icon' => 'play-progress',
                     ],
                 ],
                 [ // section

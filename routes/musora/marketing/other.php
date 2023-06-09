@@ -20,9 +20,13 @@ Route::domain('{musoraDomain}')
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
         Route::get('recitals', [MarketingController::class, 'recitals']);
         Route::get('gift-card', [MarketingController::class, 'giftcard']);
+        Route::get('method', [MarketingController::class, 'method']);
+        Route::get('songs', [MarketingController::class, 'songs']);
+        Route::get('community', [MarketingController::class, 'community']);
 
         Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
         Route::get('friends', [CodeRedemptionController::class, 'friends']);
+        Route::get('friends2', [CodeRedemptionController::class, 'friends2']);
         Route::get('redeem/existing', [CodeRedemptionController::class, 'renderExistingAccountRedeemPage']);
         Route::get('redeem-thomann', [CodeRedemptionController::class, 'renderNewAccountThomannRedeemPage']);
         Route::get('pianote/redeem', [CodeRedemptionController::class, 'showPianoteRedeemPageForNewUsers']);

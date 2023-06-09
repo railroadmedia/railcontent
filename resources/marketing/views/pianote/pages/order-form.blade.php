@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"> -->
 @stop

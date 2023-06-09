@@ -1,2 +1,0 @@
-!function(){for(var e,t,r,n,o,l,a,i=document.querySelectorAll("svg template"),m=0;m<i.length;m++){for(t=(e=i[m]).ownerDocument.createElement("template"),e.parentNode.insertBefore(t,e),o=(r=e.attributes).length;o-- >0;)n=r[o],t.setAttribute(n.name,n.value),e.removeAttribute(n.name);for(e.parentNode.removeChild(e),a=t.content;l=e.firstChild;)a.appendChild(l)}}();
-//# sourceMappingURL=svg-polyfil.js.map

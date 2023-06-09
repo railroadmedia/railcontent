@@ -18,8 +18,8 @@
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-singeo.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-page-singeo.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <style>
@@ -190,38 +190,38 @@
             ],
         ];
     @endphp
-    @include('musora.sales.components.header-section', [
-        'header' => 'Get the singing voice you’ve always wanted.',
-        'desc' => 'Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.',
-        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/header-thumb2.jpg',
-        'promoThumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb.png',
-        'promoThumbM' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb-m.png',
-        'pointOne' => 'Improve Your Voice',
-        'pointTwo' => 'Helpful Vocal Coaches',
-        'pointThree' => 'Sing Popular Songs',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
-        'students' => number_format(Prices::$students),
-    ])
+
+    @if(!empty($beginnerVersion))
+        @include('musora.sales.components.header-section', [
+            'header' => 'Singing lessons that fit your schedule. ',
+            'desc' => 'Learn to sing from home, anytime, with bite-sized video lessons and unlimited personal support. ',
+            'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/header-thumb2.jpg',
+            'promoThumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb.png',
+            'promoThumbM' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb-m.png',
+            'pointOne' => 'Improve Your Voice',
+            'pointTwo' => 'Helpful Vocal Coaches',
+            'pointThree' => 'Sing Popular Songs',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
+            'students' => number_format(Prices::$students),
+        ])
+    @else
+        @include('musora.sales.components.header-section', [
+            'header' => 'Get the singing voice you’ve always wanted.',
+            'desc' => 'Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.',
+            'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/header-thumb2.jpg',
+            'promoThumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb.png',
+            'promoThumbM' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb-m.png',
+            'pointOne' => 'Improve Your Voice',
+            'pointTwo' => 'Helpful Vocal Coaches',
+            'pointThree' => 'Sing Popular Songs',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
+            'students' => number_format(Prices::$students),
+        ])
+    @endif
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
-{{--    @if(!empty($promoVersion))--}}
-{{--        @include('musora.sales.components.promo-section', [--}}
-{{--        'promoLogo' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs.svg',--}}
-{{--           'promoLogoM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs-m.png',--}}
-{{--        'desc' => 'Vocal lessons, personal coaches, and 1000+ songs to reach your singing goals.',--}}
-{{--           'text' => 'If you’ve tried online singing lessons, you know the struggle: spending months, even years, going around in circles – never <em>actually</em> singing like you’ve wished.<br><br>With videos alone, you’re all alone.<br><br>And that’s why Singeo doubles down on the personal touch – with direct and unlimited access to vocal coaches to give you personal feedback, tailored for your voice.<br><br>You’ll boost your skills with step-by-step video lessons, warmups, artist courses, video reviews, live Q&A sessions with real vocal coaches, and 1000+ songs with playback tools to help you practice and hit every note! PLUS you’ll get unlimited access to our communities for guitar lessons, piano lessons, and drum lessons to reach all of your musical goals.<br><br>Just click the link to make 2023 the year you FINALLY sing like you’ve always wanted.',--}}
-{{--           'img' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-launch-collage2.png',--}}
-{{--           'belowButton' => 'SAVE 17% + GET 3 BONUSES WORTH $58',--}}
-{{--       ])--}}
-{{--    @else--}}
-        @include('musora.sales.components.learn-by-playing-section', [
-            'header' => 'Learning to sing made easy with <u>personal coaching</u>.',
-            'desc' => 'If you’ve tried online singing lessons, you know the struggle: spending months, even years, going around in circles – never actually singing like you’ve wished.<br><br>With videos alone, you’re all alone.<br><br>And that’s why Singeo doubles down on the personal touch – with direct and unlimited access to vocal coaches to give you personal feedback, tailored for your voice.<br><br>You’ll get the convenience of step-by-step video lessons, warmups, artist courses, and song tools so you can improve your vocals anywhere, anytime. PLUS you’ll also enjoy personalized video reviews, live Q&A sessions, community recitals, and technique-boosting bootcamps.<br><br>If you’ve dreamed of hitting higher notes, finding the perfect pitch, and delivering confident performances – we’d love to help. Click any of the big buttons to try Singeo risk-free and start your journey to becoming the singer you’ve always wanted to be.',
-            'img' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/collage-evergreen.png',
-        ])
 
-{{--    @endif--}}
 
 
     @php
@@ -260,7 +260,6 @@
     @endphp
 
     @include('musora.sales.components.trailer-grid-section', [
-        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314557/rendition/540p/file.mp4?loc=external&signature=e1db56d3f22044707be08bbb02d7327bdf4bee7a07bc705017de56ef45bf1ed4',
         'header' => 'Your singing goals start here.',
         'desc' => 'An organized curriculum to help you understand your voice, how it functions, how to strengthen it, and sing with confidence.',
     ])
@@ -389,27 +388,32 @@
             [
                 'icon' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/1000-songs-icon.svg',
                 'title' => '1000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns<br class="hidden sm:inline"> for every style, era, and skill level.',
+                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
             ],
             [
                 'icon' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/find-tempo-icon.svg',
                 'title' => 'Find the perfect tempo.',
-                'desc' => 'Slow down any section of a song to<br class="hidden sm:inline">  hear the cadence and intricacies.',
+                'desc' => 'Slow down any section of a song to  hear the cadence and intricacies.',
             ],
             [
                 'icon' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/loop-icon.svg',
                 'title' => 'Loop the hard parts.',
-                'desc' => 'Working on the chorus? Simply create<br class="hidden sm:inline">  a loop to sing it over and over!',
+                'desc' => 'Working on the chorus? Simply create  a loop to sing it over and over!',
             ],
             [
                 'icon' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/personal-feedback-icon.svg',
                 'title' => 'Personal feedback, anytime.',
-                'desc' => 'Share a video and you’ll get helpful<br class="hidden sm:inline">  feedback from our singing community.',
+                'desc' => 'Share a video and you’ll get helpful  feedback from our singing community.',
+            ],
+            [
+                'icon' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/sing-it-right-icon.svg',
+                'title' => 'Play it right the first time.',
+                'desc' => 'Get perfect notation and learn to sing accurately from the get-go.',
             ],
             [
                 'icon' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/device-icon.svg',
                 'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable,<br class="hidden sm:inline">  so you can sing any song, any time.',
+                'desc' => 'Accessible on any device, or printable,  so you can sing any song, any time.',
             ],
 
         ];
@@ -418,9 +422,14 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Sing your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note. ',
-        'video' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/dont-stop-believin.mp4',
+        'video' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/device.png',
         'brandName' => 'Singeo',
         'bannerDesc' => 'Powered by Musora, Singeo includes full access to our communities for drums, piano, and guitar.',
+    ])
+    @include('musora.sales.components.learn-by-playing-section', [
+        'header' => 'Learning to sing made easy with <u>personal coaching</u>.',
+        'desc' => 'With Singeo, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
+                'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314557/rendition/540p/file.mp4?loc=external&signature=e1db56d3f22044707be08bbb02d7327bdf4bee7a07bc705017de56ef45bf1ed4',
     ])
 
     @php
@@ -507,6 +516,7 @@
 
     @if(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
+            "noSelector" => true,
             "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
             "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
             "songs" => "1000",

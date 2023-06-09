@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://www.singeo.com/stop-hating-your-voice/">
 
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-singeo.css') }}">
     <style>
 
         .header {
