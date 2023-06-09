@@ -9,7 +9,7 @@
                         style="background-image:url();padding-bottom: 75%;"
                     @endif
                 >
-                    <img class="absolute inset-0 object-cover w-full" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ !empty($thumbM) ? $thumbM : $thumb }}" alt="Header thumbnail" />
+                    <img class="absolute inset-0 object-cover w-full" src="https://www.musora.com/musora-cdn/image/width=700,quality=85/{{ !empty($thumbM) ? $thumbM : $thumb }}" alt="Header thumbnail" />
                     <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                 </div>
                 <div class="px-5 sm:px-0">

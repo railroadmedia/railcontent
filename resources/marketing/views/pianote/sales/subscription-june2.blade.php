@@ -8,11 +8,7 @@
     <meta name="description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
 
-    @hasSection('share-image')
-        @yield('share-image')
-    @else
-        <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg" style="display: none;">
-    @endif
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/share-blue.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
 
@@ -147,7 +143,7 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
-    <a href="/choose-your-trial-month" class="flex items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(330deg, #05937C 0%, #007DD8, #9AFF89 100%);">
+    <a href="#customize-anchor" class="anchor-slide flex items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(330deg, #05937C 0%, #007DD8, #9AFF89 100%);">
         <h4 class="inline-block ml-0 mr-4 bg-white rounded-md font-bebas py-0.5 px-2 leading-none" style="color:#1f97c8">JUNE ONLY</h4>
         <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight text-white">
             GET 30 DAYS FREE ACCESS (INSTEAD OF 7) | WIN A FREE PIANO
@@ -215,37 +211,37 @@
     ])
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background: linear-gradient(330deg, #05937C 0%, #007DD8, #9AFF89 100%);">
         <div class="container max-w-5xl mx-auto">
-            <h2>Learn the piano. <strong>Then WIN one.</strong></h2>
+            <h2>Learn the piano.<br class="inline sm:hidden"> <strong>Then WIN one.</strong></h2>
             <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">
                 At Pianote, we want to create more piano players. And that’s why, for this month only, you’ll be entered<br class="hidden lg:inline">
                 to win some amazing prizes when you start a free 30-day trial (and choose the annual membership).</p>
             <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 max-w-xs sm:max-w-full">
-                <div class="flex flex-wrap items-start w-full sm:w-1/3  px-7 sm:px-3 mb-4">
+                <div class="flex flex-wrap items-start justify-center w-full sm:w-1/3  px-7 sm:px-3 mb-4">
                     <img
-                        class=" rounded-xl transition-opacity opacity-0"
+                        class="h-40 sm:h-40 lg:h-56 rounded-xl transition-opacity opacity-0"
                         src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/1st-place.png"
                         alt="grid"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     >
                 </div>
-                <div class="flex flex-wrap items-start w-full sm:w-1/3  px-7 sm:px-3 mb-4">
-                        <img
-                            class=" rounded-xl transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/2nd-place.png"
-                            alt="grid"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
-                        >
+                <div class="flex flex-wrap items-start justify-center w-full sm:w-1/3  px-7 sm:px-3 mb-4">
+                    <img
+                        class="h-40 sm:h-40 lg:h-56 rounded-xl transition-opacity opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/2nd-place.png"
+                        alt="grid"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                    >
                 </div>
-                <div class="flex flex-wrap items-start w-full sm:w-1/3  px-7 sm:px-3 mb-4">
-                        <img
-                            class=" rounded-xl transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/3rd-place.png"
-                            alt="grid"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
-                        >
+                <div class="flex flex-wrap items-start justify-center w-full sm:w-1/3  px-7 sm:px-3 mb-4">
+                    <img
+                        class="h-40 sm:h-40 lg:h-56 rounded-xl transition-opacity opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/3rd-place.png"
+                        alt="grid"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                    >
                 </div>
             </div>
             <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">There’s no purchase needed. You can cancel your free trial at any time and you’ll still be in the running.<br><strong><em>The winner will be announced July 10th.</em></strong></p>
