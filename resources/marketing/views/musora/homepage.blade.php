@@ -8,7 +8,7 @@
     <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
 
     <meta property="og:url" content="https://www.musora.com">
-    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image.jpg">
 
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
@@ -303,7 +303,7 @@
 @endsection
 
 @section('layout-body')
-    <section class="text-center px-5 sm:px-6 py-32 sm:py-52 lg:py-56 relative overflow-hidden">
+    <section class="text-center px-5 sm:px-6 py-32 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to bottom, #fff 40%, #F1EFED);">
         <div class="container max-w-xs sm:max-w-6xl mx-auto relative z-20">
             <h1 class="relative w-auto inline-block text-4xl sm:text-5xl lg:text-6xl">
                 <strong>Musicians<br class="inline sm:hidden"> start here.</strong>
@@ -336,7 +336,7 @@
         <div class="container max-w-4xl mx-auto">
             <h2 class="text-center sm:mb-10"><strong>The easier way to<br class="inline sm:hidden"> learn <u>any instrument</u>.</strong></h2>
             <img class="my-5 h-64 inline sm:hidden"
-                src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage2.png"
+                src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage3.png"
                 alt="learn playing image"
                 fetchpriority="high"
             >
@@ -345,7 +345,7 @@
                 <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage2.png"
+                    src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage3.png"
                     alt="learn playing image"
                 >
             </div>
@@ -695,7 +695,7 @@
                 <img class="h-24 mb-4 transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=190,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guarantee-musora-line.png" alt="bonus icon">
-                <h5><strong>* BETTER PRACTICE GUARANTEE *</strong></h5>
+                <h5><strong><i class="fas fa-star text-musora-gold"></i> BETTER PRACTICE GUARANTEE <i class="fas fa-star text-musora-gold"></i></strong></h5>
                 <p class="max-w-sm mx-auto leading-normal mt-3">You’ll get 7 days free PLUS a 90-day guarantee<br> to make sure you love your improvements!</p>
             </div>
             <a class="sm:mx-1 w-full sm:w-64 join white smaller @if(!empty($promoVersion)) anchor-slide @endif"

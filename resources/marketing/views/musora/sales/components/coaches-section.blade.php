@@ -122,7 +122,7 @@
 
     <div class="text-center my-10 px-4 sm:px-0">
         @if(empty($promoVersion))
-            <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">EXPLORE THE COURSES <i class="fas fa-info-circle"></i> </a>
+            <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">EXPLORE THE COURSES</a>
         @endif
         <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
