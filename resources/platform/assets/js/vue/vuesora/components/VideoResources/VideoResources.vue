@@ -9,7 +9,7 @@
 
       <div class="flex flex-column pv-2">
         <div class="flex flex-row nmh-1 flex-wrap resource-buttons">
-          
+
           <!-- Like Button -->
           <div class="flex flex-column resource-button ph-1">
             <button class="btn stacked" @click="likeContent">
@@ -23,7 +23,7 @@
               </span>
             </button>
           </div>
-          
+
           <!-- Share Button -->
           <div class="flex flex-column resource-button ph-1">
             <button @click="handleOpenModal" class="btn stacked" data-open-modal="shareVideoModal">
@@ -47,8 +47,8 @@
                 :class="resourceDropdown ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white tw-text-lg'"
                 style="padding: 0 8px"
               >
-                <musora-icon icon-name="download"  class="tw-w-6 tw-h-6 tw-mb-1" />
-                Downloads
+                <musora-icon icon-name="file"  class="tw-w-6 tw-h-6 tw-mb-1" />
+                Resources
               </span>
             </button>
 
