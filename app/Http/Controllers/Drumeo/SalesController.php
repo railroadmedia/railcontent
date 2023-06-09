@@ -212,6 +212,13 @@ class SalesController extends BaseController
 
         return view('drumeo.products.eardrums', ['products' => $products]);
     }
+    public function eardrumsMembers()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.products.eardrums-members', ['products' => $products]);
+    }
     public function thirtyDayDrummer()
     {
         $productId = 516;
