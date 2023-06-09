@@ -13,6 +13,7 @@
                 </picture>
             </div>
             <div class="text-center sm:text-left w-full sm:w-1/2 sm:pl-5">
+                <h6 class="uppercase text-{{ $theme }}"><strong>YOUR FIRST @if(!empty($month)) 30 Days @else 7 Days @endif ARE FREE.</strong></h6>
                 <h3 class="leading-normal"><strong>{!! $header !!}</strong></h3>
                 <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
                     {!! $list !!}
@@ -24,7 +25,27 @@
                     @else
                         href="/choose-plan"
                     @endif
-                    >START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+                    >
+                        @if(!empty($month))
+                            30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                        @else
+                            7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                        @endif
+                    </a>
+                    @if(!empty($variant))
+                        <p class="text-xs leading-normal mt-4 sm:mt-5"><em>
+                        You’ll be billed $240 on
+                                @if(empty($month))
+                                    {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }}
+                                @else
+                                    {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }}
+                                @endif
+                        &nbsp;(after your free trial).<br>
+                        Don’t worry, you can cancel anytime!<br>
+                        <strong>Normally 7 days. 30 days free access only valid for June 2023.</strong></em></p>
+
+
+                    @endif
                 </div>
             </div>
         </div>
