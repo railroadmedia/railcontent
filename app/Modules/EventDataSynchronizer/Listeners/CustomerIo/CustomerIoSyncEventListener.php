@@ -963,8 +963,8 @@ class CustomerIoSyncEventListener
                 ];
 
                 $paymentId = $payment->getId();
-                Log::debug("CustomerIoSyncEventListener::syncPayment paymentId:$paymentId userId:$userId");
-                Log::debug(print_r($data, true));
+                //Log::debug("CustomerIoSyncEventListener::syncPayment paymentId:$paymentId userId:$userId");
+                //Log::debug(print_r($data, true));
 
                 if ($userId) {
                     dispatch(
