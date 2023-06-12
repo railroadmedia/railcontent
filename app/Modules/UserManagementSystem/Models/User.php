@@ -490,7 +490,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             case $this->total_xp >= 250000 && $this->total_xp < 500000:
                 return 'Drumeo Legend';
             case $this->total_xp >= 500000 && $this->total_xp < 1000000:
-                return 'Legends: Star';
+                return 'Legends: Starr';
             case $this->total_xp >= 1000000 && $this->total_xp < 1500000:
                 return 'Legends: Erskine';
             case $this->total_xp >= 1500000 && $this->total_xp < 2000000:
@@ -542,7 +542,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             case $brandXp >= 250000 && $this->total_xp < 500000:
                 return 'Drumeo Legend';
             case $brandXp >= 500000 && $this->total_xp < 1000000:
-                return 'Legends: Star';
+                return 'Legends: Starr';
             case $brandXp >= 1000000 && $this->total_xp < 1500000:
                 return 'Legends: Erskine';
             case $brandXp >= 1500000 && $this->total_xp < 2000000:
