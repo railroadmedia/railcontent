@@ -184,44 +184,44 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f9f9fb;">
         <div class="container max-w-3xl mx-auto">
             <h3 class=""><strong>What are Playlists? </strong></h3>
-            <p class="leading-normal mt-3 mb-10 max-w-2xl mx-auto">Playlists are great for curating personalized lists of videos and content that matter most to you. With Playlists, you can create customized collections of music lessons from world-class instructors, practice routines to elevate your skills, and even songs from your favorite genres. The possibilities are endless!</p>
+            <p class="leading-normal mt-3 mb-10 sm:mb-14 max-w-2xl mx-auto">Playlists are great for curating personalized lists of videos and content that matter most to you. With Playlists, you can create customized collections of music lessons from world-class instructors, practice routines to elevate your skills, and even songs from your favorite genres. The possibilities are endless!</p>
 
-            <div class="text-center w-full sm:w-auto mt-6 lg:mt-10 mx-auto">
+            <div class="text-center w-full sm:w-auto mx-auto">
                 <div class="flex flex-wrap">
                     @php
                         $songItems = [
                             [
                                 'fa-icon' => 'fa-heart',
-                                'title' => 'My Favorite Lessons',
+                                'title' => 'My Favorite<br> Lessons',
                                 'desc' => 'Add your favorite lessons to a custom playlist for easy access.',
                             ],
                             [
                                 'fa-icon' => 'fa-music',
-                                'title' => 'Play-Along Songs',
+                                'title' => 'Play-Along<br> Songs',
                                 'desc' => 'Spend hours jamming along to a playlist of your favorite songs.',
                             ],
                             [
                                 'fa-icon' => 'fa-user',
-                                'title' => 'Personal Practice Routines',
+                                'title' => 'Personal<br> Practice Routines',
                                 'desc' => 'Create a practice playlist – and rehearse daily to grow your skills.',
                             ],
                             [
                                 'fa-icon' => 'fa-bookmark',
-                                'title' => 'Watch Later',
+                                'title' => 'Watch<br> Later',
                                 'desc' => 'Busy now? Save lessons to a playlist and watch when you’re free.',
                             ],
 
                         ];
                     @endphp
                     @foreach ($songItems as $songItem)
-                        <div class="w-1/2 sm:w-1/4 sm:px-2 lg:px-3 mb-6 lg:my-6">
+                        <div class="w-1/2 sm:w-1/4 sm:px-2 lg:px-3 mb-6 sm:mb-0">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
                                     <i class="fal {!! $songItem['fa-icon'] !!} text-4xl text-musora-gold"></i>
                                     {{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
-                                    <p class="mb-1 sm:my-3 leading-tight"><strong class="font-black">{!!$songItem['title']!!}</strong></p>
+                                    <p class="mb-1 sm:mt-2 leading-tight"><strong class="font-black">{!!$songItem['title']!!}</strong></p>
                                     <p class="text-sm">{!! $songItem['desc'] !!}</p>
                                 </div>
                             </div>
@@ -234,7 +234,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background:#0c1524;">
         <div class="container max-w-4xl mx-auto">
             <h3 class=""><strong>How do I create my own playlists?</strong></h3>
-            <p class="leading-normal mt-3 mb-10 max-w-2xl mx-auto">Creating playlists is easy. You can do it in three simple steps:</p>
+            <p class="leading-normal mt-3 mb-10 sm:mb-14 max-w-2xl mx-auto">Creating playlists is easy. You can do it in three simple steps:</p>
 
             @php
                 $gettings = [
@@ -288,7 +288,7 @@
                 <div class="full-line hidden sm:block absolute bg-musora-gold top-0 z-0 transform -translate-x-1/2" style="width: 2px;"></div>
             </div>
             <div class="text-center sm:text-left sm:text-center">
-                <img class="h-16 my-4 transition-opacity opacity-0"
+                <img class="h-12 mt-4 mb-2 transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=190,quality=85/https://dmmior4id2ysr.cloudfront.net/sales/playlist-launch/party.png" alt="bonus icon">
                 <h5><strong>That’s it!</strong></h5>
@@ -300,130 +300,130 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-3xl mx-auto">
             <h3 class=""><strong>Musora Playlists </strong></h3>
-            <p class="leading-normal mt-3 mb-10 max-w-2xl mx-auto">Our talented team created some fantastic playlists to get Musora members started. Click one of the playlists below to check it out!</p>
+            <p class="leading-normal mt-3 mb-10 sm:mb-14 max-w-2xl mx-auto">Our talented team created some fantastic playlists to get Musora members started. Click one of the playlists below to check it out!</p>
 
             <div class="text-center w-full sm:w-auto mt-6 lg:mt-10 mx-auto">
                 @php
                     $DplaylistItems = [
                         [
-                        'title' => 'Top Daily Warmups',
-                        'url' => 'todo',
-                        'thumb' => 'todo',
-                        ],
-                        [
                         'title' => 'Krad’s Favorite Fills',
                         'url' => 'todo',
-                        'thumb' => 'todo',
+                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        ],
+                        [
+                        'title' => '5 lessons to develop the Moeller Stroke',
+                        'url' => 'todo',
+                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
                         ],
                         [
                         'title' => 'Brandon’s Top 10 Songs Of 2023',
                         'url' => 'todo',
-                        'thumb' => 'todo',
+                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
                         ],
                     ];
                     $PplaylistItems = [
                         [
-                        'title' => 'Easy Song Tutorials For Beginners',
-                        'url' => 'todo',
-                        'thumb' => 'todo',
-                        ],
-                        [
-                        'title' => 'Practice Like A Pro',
-                        'url' => 'todo',
-                        'thumb' => 'todo',
-                        ],
-                        [
                         'title' => 'Lisa’s Beautiful Arpeggios',
                         'url' => 'todo',
-                        'thumb' => 'todo',
+                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        ],
+                        [
+                        'title' => 'Easy Song Tutorials For Beginners',
+                        'url' => 'todo',
+                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        ],
+                        [
+                        'title' => 'Songs For Sight Reading',
+                        'url' => 'todo',
+                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
                         ],
                     ];
                     $GplaylistItems = [
                         [
                         'title' => 'Guitareo Method Practice Challenges',
                         'url' => 'todo',
-                        'thumb' => 'todo',
+                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        ],
+                        [
+                        'title' => 'Jimi Hendrix Lessons',
+                        'url' => 'todo',
+                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
                         ],
                         [
                         'title' => '10 Songs For Beginner Guitarists',
                         'url' => 'todo',
-                        'thumb' => 'todo',
-                        ],
-                        [
-                        'title' => 'Ayla’s 5 Favorite Beatles Songs',
-                        'url' => 'todo',
-                        'thumb' => 'todo',
+                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
                         ],
                     ];
                     $SplaylistItems = [
                         [
-                        'title' => '10 Easy Songs for Beginners',
-                        'url' => 'todo',
-                        'thumb' => 'todo',
-                        ],
-                        [
                         'title' => 'Lisa’s Favorite Sing-Alongs',
                         'url' => 'todo',
-                        'thumb' => 'todo',
+                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
                         ],
                         [
-                        'title' => 'Define and Expand Your Vocal Range',
+                        'title' => '10 Easy Songs for Beginners',
                         'url' => 'todo',
-                        'thumb' => 'todo',
+                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        ],
+                        [
+                        'title' => 'Pitch Perfect Lessons and Exercises',
+                        'url' => 'todo',
+                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
                         ],
                     ];
                 @endphp
-                <div class="rounded-xl p-2 w-full flex flex-wrap mb-2" style="background-color:#f2f8fd;">
+                <div class="rounded-xl p-4 w-full flex flex-wrap mb-4" style="background-color:#f2f8fd;">
                     @foreach ($DplaylistItems as $playlistItem)
-                        <div class="w-1/2 sm:w-1/3 sm:px-2 lg:px-3 mb-6 lg:my-6">
+                        <div class="w-1/2 sm:w-1/3 sm:px-2 lg:px-3 mb-6 sm:mb-0">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-16 sm:h-24">
+                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-16 sm:h-32 rounded-xl">
                                 </div>
                                 <div class="text-left">
-                                    <p class="mb-1 sm:my-3 leading-tight"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
+                                    <p class="mb-1 sm:mt-2 leading-tight"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
-                <div class="rounded-xl p-2 w-full flex flex-wrap mb-2" style="background-color:#fef3f4;">
+                <div class="rounded-xl p-4 w-full flex flex-wrap mb-4" style="background-color:#fef3f4;">
                     @foreach ($PplaylistItems as $playlistItem)
-                        <div class="w-1/2 sm:w-1/3 sm:px-2 lg:px-3 mb-6 lg:my-6">
+                        <div class="w-1/2 sm:w-1/3 sm:px-2 lg:px-3 mb-6 sm:mb-0">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-16 sm:h-24">
+                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-16 sm:h-32 rounded-xl">
                                 </div>
                                 <div class="text-left">
-                                    <p class="mb-1 sm:my-3 leading-tight"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
+                                    <p class="mb-1 sm:mt-2 leading-tight"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
-                <div class="rounded-xl p-2 w-full flex flex-wrap mb-2" style="background-color:#f2fcfb;">
+                <div class="rounded-xl p-4 w-full flex flex-wrap mb-4" style="background-color:#f2fcfb;">
                     @foreach ($GplaylistItems as $playlistItem)
-                        <div class="w-1/2 sm:w-1/3 sm:px-2 lg:px-3 mb-6 lg:my-6">
+                        <div class="w-1/2 sm:w-1/3 sm:px-2 lg:px-3 mb-6 sm:mb-0">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-16 sm:h-24">
+                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-16 sm:h-32 rounded-xl">
                                 </div>
                                 <div class="text-left">
-                                    <p class="mb-1 sm:my-3 leading-tight"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
+                                    <p class="mb-1 sm:mt-2 leading-tight"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                 </div>
-                <div class="rounded-xl p-2 w-full flex flex-wrap" style="background-color:#f9f2fe;">
+                <div class="rounded-xl p-4 w-full flex flex-wrap" style="background-color:#f9f2fe;">
                     @foreach ($SplaylistItems as $playlistItem)
-                        <div class="w-1/2 sm:w-1/3 sm:px-2 lg:px-3 mb-6 lg:my-6">
+                        <div class="w-1/2 sm:w-1/3 sm:px-2 lg:px-3 mb-6 sm:mb-0">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-16 sm:h-24">
+                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-16 sm:h-32 rounded-xl">
                                 </div>
                                 <div class="text-left">
-                                    <p class="mb-1 sm:my-3 leading-tight"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
+                                    <p class="mb-1 sm:mt-2 leading-tight"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
                                 </div>
                             </div>
                         </div>
