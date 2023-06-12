@@ -3,13 +3,13 @@
         <div class="flex flex-wrap sm:flex-nowrap items-center">
             <div class="w-full sm:w-7/12 sm:pr-6 text-center lg:text-left">
                 <div x-on:click="trailer = true;" alt="header image" class="mb-5 overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video relative"
-                    @if(!empty($promoVersion))
+                    @if(!empty($promoVersion) || !empty($shortHeader))
                         style="background-image:url();padding-bottom: 60%;"
                     @else
                         style="background-image:url();padding-bottom: 75%;"
                     @endif
                 >
-                    <img class="absolute inset-0 object-cover w-full" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ !empty($thumbM) ? $thumbM : $thumb }}" alt="Header thumbnail" />
+                    <img class="absolute inset-0 object-cover w-full" src="https://www.musora.com/musora-cdn/image/width=700,quality=85/{{ !empty($thumbM) ? $thumbM : $thumb }}" alt="Header thumbnail" />
                     <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                 </div>
                 <div class="px-5 sm:px-0">
@@ -25,6 +25,16 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointTwo !!}</p>
                         <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointThree !!}</p>
                     </div>
+                    @if(!empty($specialBadge))
+                        <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 lg:mt-10 -mb-6 sm:-mb-5 lg:-mb-10 pb-4">
+                            <h5 class="inline-block leading-tight mx-0 py-1 px-2 rounded-md inline-block w-auto" style="background: linear-gradient(330deg, #79EE9A, #12E3FF, #79EE9A);">{!! $specialBadge !!}</h5>
+                        </div>
+                    @endif
+                    @if(!empty($specialText))
+                        <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 lg:mt-10 -mb-6 sm:-mb-5 lg:-mb-10 pb-4">
+                            <p class="inline-block leading-tight text-sm mx-0"><em>{!! $specialText !!}</em></p>
+                        </div>
+                    @endif
                     <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 lg:mt-10 sm:max-w-xs">
                         <a class="w-full join bg-{{ $theme }} smaller mb-2 @if(!empty($promoVersion)) anchor-slide @endif"
                             @if(!empty($promoVersion))
@@ -41,8 +51,10 @@
                                 @else
                                     SEE YOUR DEAL &raquo;
                                 @endif
+                            @elseif(!empty($month))
+                                30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                             @else
-                                START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                                7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
                             @endif
                         </a>
                         <a aria-label="Review" class="inline-block" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
