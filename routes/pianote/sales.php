@@ -7,10 +7,12 @@ Route::domain('{pianoteDomain}')
     ->middleware(['web_public'])
     ->group(function () {
         Route::get('/', [SalesController::class, 'home'] );
+        Route::get('/june', [SalesController::class, 'homeJune'] );
+        Route::get('/june-songs', [SalesController::class, 'homeJune2'] );
         Route::get('/trial', [SalesController::class, 'trial'] );
+        Route::get('/trial-songs', [SalesController::class, 'trialSongs'] );
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner'] );
         Route::get('/trial-month', [SalesController::class, 'homeMonth'] );
-        Route::get('/new-year', [SalesController::class, 'promo'] );
         Route::get('/lp', [SalesController::class, 'promo'] );
         Route::get('/student-only', [SalesController::class, 'promo'] );
         Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
