@@ -30,13 +30,6 @@ const handleBrandOpen = (val) => {
     }
 }
 
-const handleSelect = (brand) => {
-    isLoading.value = true;
-    //Refresh the Page with new brand
-    const host = window.location.host;
-    window.location.href = `/${brand}`;
-}
-
 const handleClose = () => {
     isSelectorOpen.value = false;
 }
@@ -73,22 +66,22 @@ onUpdated(() => {
                     </h2>
                     <SquaresContainer>
                         <SquaredCard :backgroundUrl="bgImgCard.drumeo" type="drumeo" :active="brand === 'drumeo'"
-                            @onSelect="() => handleSelect('drumeo')">
+                            url="/drumeo">
                             <InstrumentCardContent instrumentText="DRUMS" :logoUrl="brandUrl.drumeo"
                                 logoAltText="Drumeo Logo" />
                         </SquaredCard>
                         <SquaredCard :backgroundUrl="bgImgCard.pianote" :active="brand === 'pianote'" type="pianote"
-                            @onSelect="() => handleSelect('pianote')">
+                            url="/pianote">
                             <InstrumentCardContent instrumentText="PIANO" :logoUrl="brandUrl.pianote"
                                 logoAltText="Pianote Logo" />
                         </SquaredCard>
-                        <SquaredCard :backgroundUrl="bgImgCard.guitareo" :active="brand === 'guitareo'" type="guitareo"
-                            @onSelect="() => handleSelect('guitareo')">
+                        <SquaredCard  :backgroundUrl="bgImgCard.guitareo" :active="brand === 'guitareo'" type="guitareo"
+                            url="/guitareo">
                             <InstrumentCardContent instrumentText="GUITAR" :logoUrl="brandUrl.guitareo"
                                 logoAltText="Guitareo Logo" />
                         </SquaredCard>
                         <SquaredCard :backgroundUrl="bgImgCard.singeo" :active="brand === 'singeo'" type="singeo"
-                            @onSelect="() => handleSelect('singeo')">
+                            url="/singeo">
                             <InstrumentCardContent instrumentText="SINGING" :logoUrl="brandUrl.singeo"
                                 logoAltText="Singeo Logo" />
                         </SquaredCard>

@@ -9,6 +9,8 @@ export default {
     "onSelect",
     "bgColor",
     "defaultBorderColor",
+    "url",
+    "tabIndex"
   ],
   emits: ["onSelect"],
   setup(props) {
@@ -25,30 +27,40 @@ export default {
 </script>
 
 <template>
-  <button
-    tabindex="0"
+  <button v-if="!url" :tabindex="tabIndex || 0"
     class="SquaredCard tw-rounded-lg md:tw-mx-2 tw-my-2 xl:tw-my-0 tw-w-full tw-h-[128px] md:tw-w-[250px] md:tw-h-[250px]"
     :style="{
       background: backgroundUrl ? `url(${backgroundUrl})` : bgColor,
       backgroundSize: 'cover',
       backgroundPosition: 'center',
-    }"
-    v-on:click="$emit('onSelect')"
-  >
+    }" v-on:click="$emit('onSelect')">
     <div
-      :class="`SquaredCard__overlay SquaredCard__overlay--${type} ${
-        active
+      :class="`SquaredCard__overlay SquaredCard__overlay--${type} ${active
           ? `${getBorderColor(type)} SquaredCard__overlay--active`
-          : `${
-              defaultBorderColor ? defaultBorderColor : 'tw-border-transparent'
-            }`
-      } ${
-        borderColor[type] ? `hover:${borderColor[type]}` : ''
-      } tw-border-box tw-column tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-rounded-lg tw-border-[3px] tw-bg-cover`"
-    >
+          : `${defaultBorderColor ? defaultBorderColor : 'tw-border-transparent'
+          }`
+        } ${borderColor[type] ? `hover:${borderColor[type]}` : ''
+        } tw-border-box tw-column tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-rounded-lg tw-border-[3px] tw-bg-cover`">
       <slot />
     </div>
   </button>
+  <a v-if="url" :tabindex="tabIndex || 0"
+    class="SquaredCard tw-rounded-lg md:tw-mx-2 tw-my-2 xl:tw-my-0 tw-w-full tw-h-[128px] md:tw-w-[250px] md:tw-h-[250px]"
+    :style="{
+      background: backgroundUrl ? `url(${backgroundUrl})` : bgColor,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }" :href="url">
+    <div
+      :class="`SquaredCard__overlay SquaredCard__overlay--${type} ${active
+          ? `${getBorderColor(type)} SquaredCard__overlay--active`
+          : `${defaultBorderColor ? defaultBorderColor : 'tw-border-transparent'
+          }`
+        } ${borderColor[type] ? `hover:${borderColor[type]}` : ''
+        } tw-border-box tw-column tw-flex tw-h-full tw-w-full tw-items-center tw-justify-center tw-rounded-lg tw-border-[3px] tw-bg-cover`">
+      <slot />
+    </div>
+  </a>
 </template>
 
 <style type="text/css">
