@@ -162,15 +162,21 @@
 
     @if($hasStartedLessons && $lessonType !== 'routine')
         <section class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
-            <div class="flex flex-row tw-pt-4">
-                <h1 class="heading capitalize pointer noselect tw-text-[#00101D] dark:tw-text-white tw-border-b-2 tw-border-{{ $brand }}"
-                    data-toggle-catalogue="inProgress">
-                    In Progress
-                </h1>
+            <!-- Section Title -->
+            <div class="tw-flex tw-items-center tw-mt-5 tw-mb-4 tw-w-full tw-justify-between">
+                <a href="/{{ $brand }}/lists/in-progress" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
+                    <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">In Progress</h2>
+                </a>
+                <a href="/{{ $brand }}/lists/in-progress"
+                    aria-label="See All Subscribed Lessons"
+                    class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
+                >
+                    See All
+                </a>
             </div>
 
             <div id="inProgress"
-                class="tw-flex tw-flex-row tw-pt-5 tw-pb-2 tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] feature-catalogue six-cards-row">
+                class="tw-flex tw-flex-row tw-pb-2 tw-border-b tw-border-[#E4E4E7] dark:tw-border-[#223457] feature-catalogue six-cards-row">
                 <transition appear name="fade">
                     <content-catalogue
                         catalogue-type="grid"

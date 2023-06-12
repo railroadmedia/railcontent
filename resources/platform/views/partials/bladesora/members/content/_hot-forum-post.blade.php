@@ -37,9 +37,9 @@
             </h5>
             <h6 class="tw-text-xs tw-text-gray-400 dark:tw-text-[#9EC0DC] tw-text-[#3F3F46] tw-uppercase dark:tw-text-white tw-text-[#00101D] tw-mb-1">
                 Posted
-                <strong class="tw-text-{{ $brand }}">{{ $date }}</strong>
+                <strong>{{ $date }}</strong>
                 by
-                <strong class="tw-text-{{ $brand }}">{{ $author }}</strong>
+                <strong>{{ $author }}</strong>
             </h6>
             <p class="tw-text-xs dark:tw-text-white tw-text-[#00101D]" style="overflow-wrap: anywhere;">
                 {!! str_replace('&nbsp;', '', $post) !!}...
