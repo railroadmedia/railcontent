@@ -183,18 +183,16 @@
 <!-- Main -->
 @section('layout-body')
 
-    <header class="text-white px-5 sm:px-6 py-12 sm:py-16 lg:py-24" style="background-color:#020f1a;">
+    <header class="px-5 sm:px-6 py-12 sm:py-16 lg:py-24" style="background:linear-gradient(to bottom, #fff, #ddd);">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap items-center">
                 <div class="header-pic sm:order-1 pb-64 sm:pb-80 mb-7 sm:mb-0 w-full sm:w-auto rounded-xl flex-grow relative bg-center bg-cover cursor-pointer autoplay-video" x-on:click="trailer = true;">
                     <div class="join white smaller absolute bottom-3 sm:bottom-7 right-3 sm:right-7"><i class="fas fa-play"></i>&nbsp; PLAY TRAILER</div>
                 </div>
                 <div class="w-full sm:w-5/12 sm:pr-4 text-center sm:text-left">
-                    <img class="h-14 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/musora_brands_logo.png">
-                    <img class="h-10 inline-block sm:hidden" src="https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/musora_brands_logo_m.png">
-                    <h2 class="leading-tight mt-5 sm:mt-10 mb-2 sm:mb-5"><strong>Your membership just got a massive upgrade.</strong></h2>
-                    <p>You now have an all-access pass to <br class="hidden md:inline-block">
-                        learn drums, piano, vocals, and guitar.</p>
+                    <img class="h-10 sm:h-14" src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/musora_brands_logo.png">
+                    <h2 class="leading-tight mt-5 sm:mt-10 mb-2 sm:mb-5"><strong><strong>Introducing Playlists.</strong><br> Learning music just got easier.</strong></h2>
+                    <p>Playlists give you ultimate control over how you learn the music you love. Organize videos, songs, and lessons YOUR way – and share your journey with students worldwide.</p>
                 </div>
             </div>
         </div>
@@ -202,7 +200,7 @@
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f9f9fb;">
         <div class="container max-w-4xl mx-auto">
-            <h3 style="display:inline-block;background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>The Ultimate Music Lessons Experience</strong></h3>
+            <h3 class="text-musora-gold"><strong>The Ultimate Music Lessons Experience</strong></h3>
             <p class="leading-tight mt-3 mb-10 max-w-2xl mx-auto">You now have access to all of our lessons and practice tools for drums, piano, guitar, and singing – at no extra cost to you – PLUS the unified platform allows us to upgrade your experience easier with shared technology. Here are a few things you’ll notice:</p>
 
             <div class="flex flex-wrap items-start text-left">
@@ -360,11 +358,11 @@
                 <div class="w-full sm:w-5/12 text-left py-7 px-6 sm:px-9 sm:mr-5 rounded-xl bg-white border border-gray-300">
                     <p><strong>You’ll get personal guidance for a better music lessons experience, including:</strong></p>
                     <ul class="fa-ul mt-4 sm:mt-7 ml-6">
-                        <li><i class="fa-li fas fa-check" style="background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> Finding the right lesson</li>
-                        <li><i class="fa-li fas fa-check" style="background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> Troubleshooting the tech</li>
-                        <li><i class="fa-li fas fa-check" style="background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> Choosing songs to play next</li>
-                        <li><i class="fa-li fas fa-check" style="background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> Answering music-related questions</li>
-                        <li><i class="fa-li fas fa-check" style="background: -webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"></i> Or… whatever else gets in the way.</li>
+                        <li><i class="fa-li fas fa-checktext-musora-gold"></i> Finding the right lesson</li>
+                        <li><i class="fa-li fas fa-checktext-musora-gold"></i> Troubleshooting the tech</li>
+                        <li><i class="fa-li fas fa-checktext-musora-gold"></i> Choosing songs to play next</li>
+                        <li><i class="fa-li fas fa-checktext-musora-gold"></i> Answering music-related questions</li>
+                        <li><i class="fa-li fas fa-checktext-musora-gold"></i> Or… whatever else gets in the way.</li>
                     </ul>
                 </div>
             </div>
@@ -475,23 +473,6 @@
                         </div>
                     </div>
                 @endforeach
-            </div>
-        </div>
-    </section>
-    <div id="musoraapp" class="anchor"></div>
-    <div class="h-5 sm:h-10 -mb-5 sm:-mb-10 relative z-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #f9f9fb calc(50% + 1px));"></div>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:linear-gradient(45deg, #e6fffb, #e6f2ff, #f6e6ff, #ffe6e8);">
-        <div class="container max-w-2xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="h-72 sm:h-96 mb-5 sm:mb-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/ui.png">
-                <div class="flex-grow pl-8 sm:text-left">
-                    <h3 class="leading-tight"><strong>The app for learning<br> the music you love.</strong></h3>
-                    <p class="leading-tight my-5">Access the member’s area for Drumeo, Pianote, Singeo, and Guitareo all in one place. Our brand new Musora app has improved functionality and added features with full access to all four brands.</p>
-                    <a class="inline-block" href="https://itunes.apple.com/us/app/musora/id1619053766?ls=1" target="_blank">
-                        <img class="h-10 m-1" src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png"></a>
-                    <a class="inline-block" href="https://play.google.com/store/apps/details?id=com.musoraapp" target="_blank">
-                        <img class="h-10 m-1" src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png"></a>
-                </div>
             </div>
         </div>
     </section>
