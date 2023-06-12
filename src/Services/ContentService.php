@@ -2793,7 +2793,7 @@ class ContentService
         } elseif (in_array(
             $content['type'],
             config('railcontent.content_multiple_level_content_depth_playlist_allowed', [])
-        )) {
+        ) || (in_array($content['brand'] ,['singeo', 'guitareo']) && $content['type'] == 'learning-path-level')) {
             ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
             $lessons = $this->getByParentId($content['id']);
             $soundsliceAssingment = 0;
