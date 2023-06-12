@@ -105,7 +105,7 @@
 
         dragObj.user_playlist_item_position = e.newIndex + 1;
         dragObj.hasChanged = true;
-
+        console.log(e.oldIndex, e.newIndex)
         lessonsCopy.value[e.newIndex] = dragObj;
     }
 
