@@ -44,7 +44,12 @@ class MarketingController extends BaseController
 
     public function unified2022()
     {
-        return view('musora.pages.unified-2022');
+        return view('musora.pages.unified-2022', [ 'theme' => 'musora']);
+    }
+
+    public function playlists()
+    {
+        return view('musora.pages.playlists', [ 'theme' => 'musora']);
     }
 
     public function recitals()
@@ -54,7 +59,7 @@ class MarketingController extends BaseController
 
     public function giftcard()
     {
-        return view('musora.pages.giftcard-page');
+        return view('musora.pages.gift-card');
     }
     public function method()
     {
