@@ -11,8 +11,175 @@
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
 
+    <style>
+        .join {
+            display: inline-block;
+            font: 500 22px/1em 'Bebas Neue', sans-serif;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: #0c1524;
+            border-radius: 50px;
+            color: #fff;
+            padding: 17px 7%;
+            outline: none;
+            cursor: pointer;
+            text-align: center;
+            user-select: none;
+            text-decoration: none;
+            transition: background-color 0.3s, color 0.3s, opacity 0.3s;
+            box-shadow: 0 0 0 rgba(0, 0, 0, 0.35);
+        }
+        @media (min-width: 768px) {
+            .join {
+                font-size: 30px;
+            }
+        }
+        .join:hover, .join:focus {
+            color: #fff;
+            background:#14233d;
+            box-shadow: 0 0 7px rgba(0, 0, 0, 0.35);
+        }
+        .join.green {
+            background: #10d05f;
+        }
+        .join.green:hover, .join.green:focus {
+            background: #25ee78;
+        }
+        .join.white {
+            background: #fff;
+            color: #000;
+        }
+        .join.white:hover, .join.white:focus {
+            background: #eee;
+        }
+        .join.sold-out {
+            background: #777;
+        }
+        .join.sold-out:hover, .join.sold-out:focus {
+            background: #919191;
+        }
+        .join.smaller {
+            padding: 10px 30px 6px;
+            font-size: 16px;
+        }
+        @media (min-width: 768px) {
+            .join.smaller {
+                font-size: 18px;
+                padding: 12px 30px 10px;
+            }
+        }
+        .join.smaller.outline {
+            padding: 8px 28px 6px;
+            font-size: 16px;
+        }
+        @media (min-width: 768px) {
+            .join.smaller.outline {
+                font-size: 18px;
+                padding: 10px 28px 8px;
+            }
+        }
+        .join.coaches {
+            background-color: #fe9f13;
+            color: #000;
+        }
+        .join.coaches:hover, .join.coaches:focus {
+            background: #feb446;
+            color: #000;
+        }
+        .join.promo {
+            background: #ffac00;
+            color: #000;
+        }
+        .join.promo:hover, .join.promo:focus {
+            background: #ffbd33;
+            color: #000;
+        }
+        .join.outline {
+            background: transparent;
+            outline-style: none !important;
+            border: 1px solid #fff;
+            color: #fff;
+            padding: 6px 12px;
+        }
+        @media (min-width: 768px) {
+            .join.outline {
+                border-width: 2px;
+                padding: 11px 30px;
+            }
+        }
+        .join.outline:hover, .join.outline:focus {
+            background: #fff;
+            color: #000;
+        }
+        .join.outline.light-navy {
+            border-color: #a1afc9;
+            color: #a1afc9;
+        }
+        .join.outline.light-navy:hover, .join.outline.light-navy:focus {
+            background: #a1afc9;
+            color: #000;
+        }
+        .join.outline.method, .join.outline.pianote {
+            border-color: #f61a30;
+            color: #f61a30;
+        }
+        .join.outline.method:hover, .join.outline.pianote:hover, .join.outline.method:focus, .join.outline.pianote:focus {
+            background: #f61a30;
+            color: #fff;
+        }
+        .join.outline.songs {
+            border-color: #17d1fa;
+            color: #17d1fa;
+        }
+        .join.outline.songs:hover, .join.outline.songs:focus {
+            background: #17d1fa;
+            color: #fff;
+        }
+        .join.outline.coaches {
+            border-color: #fe9f13;
+            color: #fe9f13;
+        }
+        .join.outline.coaches:hover, .join.outline.coaches:focus {
+            background: #fe9f13;
+            color: #fff;
+        }
+        .join.outline.promo {
+            border-color: #ffac00;
+            color: #ffac00;
+        }
+        .join.outline.promo:hover, .join.outline.promo:focus {
+            background: #ffac00;
+            color: #fff;
+        }
+
+        .text-musora {
+            color: #0c1524;
+            -webkit-text-fill-color: #0c1524 !important;
+        }
+
+        .text-musora-gold {
+            color: #FFAE00!important;
+        }
+
+        .bg-musora {
+            background:#0c1524 !important;
+        }
+        .border-musora {
+            border-color:#0c1524!important;
+        }
+        .border-musora-gold {
+            border-color:#FFAE00!important;
+        }
+        .border-musora::before {
+            content:none!important;
+        }
+        .bg-musora-gold {
+            background:#FFAE00 !important;
+        }
+    </style>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
 @endsection
 
 @section('body-data')
@@ -32,13 +199,13 @@
             <div class="guitar"  style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-guitar.jpg);"></div>
         </div>
         <div class="container mx-auto max-w-6xl relative z-10">
-            <img class="w-full mx-auto max-w-xs md:max-w-sm lg:max-w-md mb-10 md:mb-14 lg:mb-20" src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/musora-logos.png" alt="musora logos" fetchpriority="high">
+            <img class="mx-auto h-16 sm:h-32 lg:h-40 mb-5 md:mb-10" src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://musora-center.s3.amazonaws.com/affiliate/Musora-AllBrands.png" alt="musora logos" fetchpriority="high">
 
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
             <h4 class="mt-3 mb-5 md:mb-10 leading-normal">Get paid to promote world-class<br class="inline md:hidden"> online music lessons.</h4>
 
-            <span class="join smaller gradient-outline mb-3 md:mb-0 md:mx-2 cursor-pointer bg-[#031627] border-musora hover:bg-musora" x-on:click="modal = true">Guidelines</span>
-            <a class="join smaller gradient md:mx-2 bg-musora" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
+            <span class="join smaller mb-3 md:mb-0 md:mx-2 cursor-pointer border-2 text-musora-gold border-musora-gold hover:bg-musora-gold" x-on:click="modal = true">Guidelines</span>
+            <a class="join smaller md:mx-2 bg-musora-gold" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
         </div>
     </header>
     <section class="text-white py-8 md:py-10 lg:py-12 px-4 bg-musora-black">
@@ -58,14 +225,14 @@
         <div class="container mx-auto max-w-6xl">
             <h3 class="text-center mb-8 md:mb-16"><strong>Program Benefits</strong></h3>
             <ul class="fa-ul flex flex-wrap">
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora text-4xl"></i><strong class="font-black">Built For Creators</strong><br> If you’re a publisher, influencer, or content creator -- this program is designed for you! You have an audience who cares about music, and we’d love to support their educational journeys!</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora text-4xl"></i><strong class="font-black">Get Paid Consistently & On Time</strong><br> We always put our students first. After that, it’s you! You’ll be paid consistently and on-time -- with a clear breakdown of your earnings so you can attribute your efforts and successes.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora text-4xl"></i><strong class="font-black">World-Class Student Experience</strong><br> You’ll always have confidence that you’re promoting meaningful products and services. Students are always supported with world-class platforms, teachers, and communities.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora text-4xl"></i><strong class="font-black">Free Membership For Active Partners</strong><br> If you’re promoting our memberships, we want you to be a part of the community so you see the impact it makes! You’ll receive a free membership for as long as you remain an ambassador.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora text-4xl"></i><strong class="font-black">Unique Offers & Creatives</strong><br> Depending on the partnership, you’ll have access to a dedicated storefront page and custom creatives to support your goals as an ambassador.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora text-4xl"></i><strong class="font-black">Sponsored Content & Giveaways</strong><br> Have an idea? We’re all ears. We want to support your community and help you find the best ways to promote the partnership with your audience.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-0"><i class="far fa-li fa-check-circle text-musora text-4xl"></i><strong class="font-black">Monthly Newsletter</strong><br> You’ll get a monthly newsletter about opportunities, initiatives, and Musora events. We want to help spark ideas for collaborating on exciting campaigns.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed"><i class="far fa-li fa-check-circle text-musora text-4xl"></i><strong class="font-black">Dedicated & Responsive Support</strong><br> You’ll have an account manager to support your campaigns -- brainstorm what’s working, what’s not, and how we can work together to reach the goal of supporting and inspiring musicians.</li>
+                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Built For Creators</strong><br> If you’re a publisher, influencer, or content creator -- this program is designed for you! You have an audience who cares about music, and we’d love to support their educational journeys!</li>
+                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Get Paid Consistently & On Time</strong><br> We always put our students first. After that, it’s you! You’ll be paid consistently and on-time -- with a clear breakdown of your earnings so you can attribute your efforts and successes.</li>
+                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">World-Class Student Experience</strong><br> You’ll always have confidence that you’re promoting meaningful products and services. Students are always supported with world-class platforms, teachers, and communities.</li>
+                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Free Membership For Active Partners</strong><br> If you’re promoting our memberships, we want you to be a part of the community so you see the impact it makes! You’ll receive a free membership for as long as you remain an ambassador.</li>
+                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Unique Offers & Creatives</strong><br> Depending on the partnership, you’ll have access to a dedicated storefront page and custom creatives to support your goals as an ambassador.</li>
+                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Sponsored Content & Giveaways</strong><br> Have an idea? We’re all ears. We want to support your community and help you find the best ways to promote the partnership with your audience.</li>
+                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-0"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Monthly Newsletter</strong><br> You’ll get a monthly newsletter about opportunities, initiatives, and Musora events. We want to help spark ideas for collaborating on exciting campaigns.</li>
+                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Dedicated & Responsive Support</strong><br> You’ll have an account manager to support your campaigns -- brainstorm what’s working, what’s not, and how we can work together to reach the goal of supporting and inspiring musicians.</li>
             </ul>
         </div>
     </section>
@@ -79,17 +246,17 @@
             <h3><strong>How Do I Start?</strong></h3>
             <div class="flex flex-wrap my-8 md:my-12 lg:my-16">
                 <div class="w-full md:w-1/3 px-2 mb-8 md:mb-0">
-                    <div class="inline-block rounded-full p-3 text-center border-musora before:m-[-6px] relative" style="background-color:#091724;width: 78px;"><h1 class="text-5xl text-musora"><strong>1</strong></h1></div>
+                    <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="background-color:#091724;width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>1</strong></h1></div>
                     <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Read The Guidelines</strong></h4>
                     <p><em><span class="cursor-pointer" x-on:click="modal = true"><u>Click here to open &raquo;</u></span></em></p>
                 </div>
                 <div class="w-full md:w-1/3 px-2 mb-8 md:mb-0">
-                    <div class="inline-block rounded-full p-3 text-center border-musora before:m-[-6px] relative" style="background-color:#161e29;width: 78px;"><h1 class="text-5xl text-musora"><strong>2</strong></h1></div>
+                    <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="background-color:#161e29;width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>2</strong></h1></div>
                     <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Apply For The Program</strong></h4>
                     <p><em><a href="https://airtable.com/shr086ixt4K8JIQpi"><u>Just fill out the short form &raquo;</u></a></em></p>
                 </div>
                 <div class="w-full md:w-1/3 px-2">
-                    <div class="inline-block rounded-full p-3 text-center border-musora before:m-[-6px] relative" style="background-color:#020e1a;width: 78px;"><h1 class="text-5xl text-musora"><strong>3</strong></h1></div>
+                    <div class="inline-block rounded-full p-3 text-center border-4 border-musora-gold relative" style="background-color:#020e1a;width: 78px;"><h1 class="text-5xl text-musora-gold leading-none"><strong>3</strong></h1></div>
                     <h4 class="leading-normal mt-4 lg:mt-5 mb-2 lg:mb-4"><strong>Review & Processing</strong></h4>
                     <p><em>We’ll reach out if you’re approved.</em></p>
                 </div>
@@ -232,7 +399,7 @@
         />
         <div class="container mx-auto max-w-6xl">
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
-            <a class="join bg-musora my-8 md:my-10 inline-block" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
+            <a class="join bg-musora-gold my-8 md:my-10 inline-block" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
             <p class="leading-normal">Have any questions? Please email <a href="mailto:natalie@musora.com"><u>natalie@musora.com</u></a> after<br class="hidden md:inline">
                 reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <a href="https://airtable.com/shr086ixt4K8JIQpi"><u>application page</u></a>.</p>
         </div>
