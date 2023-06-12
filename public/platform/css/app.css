@@ -21645,10 +21645,6 @@ a:visited{
   margin-left: 2rem !important;
   margin-right: 2rem !important;
 }
-.tw-mx-auto{
-  margin-left: auto !important;
-  margin-right: auto !important;
-}
 .tw-mb-5{
   margin-bottom: 1.25rem !important;
 }
@@ -21696,6 +21692,9 @@ a:visited{
 }
 .tw-mt-0{
   margin-top: 0px !important;
+}
+.tw-mt-5{
+  margin-top: 1.25rem !important;
 }
 .tw-mt-\[10px\]{
   margin-top: 10px !important;
@@ -21939,45 +21938,6 @@ a:visited{
 }
 .tw-ml-1\.5{
   margin-left: 0.375rem !important;
-}
-.tw-mb-2{
-  margin-bottom: 0.5rem !important;
-}
-.tw-mr-2{
-  margin-right: 0.5rem !important;
-}
-.tw-mb-4{
-  margin-bottom: 1rem !important;
-}
-.tw-mt-4{
-  margin-top: 1rem !important;
-}
-.tw-ml-1{
-  margin-left: 0.25rem !important;
-}
-.tw-mt-0\.5{
-  margin-top: 0.125rem !important;
-}
-.tw-mt-0{
-  margin-top: 0px !important;
-}
-.tw-mt-5{
-  margin-top: 1.25rem !important;
-}
-.tw-mt-\[10px\]{
-  margin-top: 10px !important;
-}
-.tw-mt-3{
-  margin-top: 0.75rem !important;
-}
-.tw-mb-3{
-  margin-bottom: 0.75rem !important;
-}
-.tw-mr-auto{
-  margin-right: auto !important;
-}
-.tw-mb-0{
-  margin-bottom: 0px !important;
 }
 .tw-box-border{
   box-sizing: border-box !important;
@@ -22493,15 +22453,6 @@ a:visited{
 .tw-w-9\/12{
   width: 75% !important;
 }
-.tw-w-full{
-  width: 100% !important;
-}
-.tw-w-\[36px\]{
-  width: 36px !important;
-}
-.tw-w-\[33px\]{
-  width: 33px !important;
-}
 .tw-min-w-0{
   min-width: 0px !important;
 }
@@ -22609,9 +22560,6 @@ a:visited{
 }
 .tw-max-w-full{
   max-width: 100% !important;
-}
-.tw-max-w-4xl{
-  max-width: 56rem !important;
 }
 .tw-flex-1{
   flex: 1 1 0% !important;
@@ -23027,11 +22975,11 @@ a:visited{
 .tw-border-b{
   border-bottom-width: 1px !important;
 }
-.tw-border-b-2{
-  border-bottom-width: 2px !important;
-}
 .tw-border-t{
   border-top-width: 1px !important;
+}
+.tw-border-b-2{
+  border-bottom-width: 2px !important;
 }
 .tw-border-t-\[1px\]{
   border-top-width: 1px !important;
@@ -23040,9 +22988,6 @@ a:visited{
   border-left-width: 4px !important;
 }
 .tw-border-b-\[1px\]{
-  border-bottom-width: 1px !important;
-}
-.tw-border-b{
   border-bottom-width: 1px !important;
 }
 .tw-border-solid{
@@ -23192,13 +23137,6 @@ a:visited{
 .tw-border-gray-800{
   --tw-border-opacity: 1 !important;
   border-color: rgb(31 41 55 / var(--tw-border-opacity)) !important;
-}
-.tw-border-transparent{
-  border-color: transparent !important;
-}
-.tw-border-\[\#E4E4E7\]{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(228 228 231 / var(--tw-border-opacity)) !important;
 }
 .tw-border-b-\[\#223F57\]{
   --tw-border-opacity: 1 !important;
@@ -23834,10 +23772,6 @@ a:visited{
   padding-top: 1.25rem !important;
   padding-bottom: 1.25rem !important;
 }
-.tw-px-4{
-  padding-left: 1rem !important;
-  padding-right: 1rem !important;
-}
 .tw-pt-8{
   padding-top: 2rem !important;
 }
@@ -23858,12 +23792,6 @@ a:visited{
 }
 .tw-pr-12{
   padding-right: 3rem !important;
-}
-.tw-pt-4{
-  padding-top: 1rem !important;
-}
-.tw-pt-5{
-  padding-top: 1.25rem !important;
 }
 .tw-pb-2{
   padding-bottom: 0.5rem !important;
@@ -23886,6 +23814,9 @@ a:visited{
 .tw-pt-\[20px\]{
   padding-top: 20px !important;
 }
+.tw-pt-5{
+  padding-top: 1.25rem !important;
+}
 .tw-pt-\[30px\]{
   padding-top: 30px !important;
 }
@@ -23900,6 +23831,9 @@ a:visited{
 }
 .tw-pl-4{
   padding-left: 1rem !important;
+}
+.tw-pt-4{
+  padding-top: 1rem !important;
 }
 .tw-pl-8{
   padding-left: 2rem !important;
@@ -24039,18 +23973,6 @@ a:visited{
 .tw-pt-1{
   padding-top: 0.25rem !important;
 }
-.tw-pr-4{
-  padding-right: 1rem !important;
-}
-.tw-pr-12{
-  padding-right: 3rem !important;
-}
-.tw-pb-1{
-  padding-bottom: 0.25rem !important;
-}
-.tw-pb-2{
-  padding-bottom: 0.5rem !important;
-}
 .tw-text-left{
   text-align: left !important;
 }
@@ -24071,9 +23993,6 @@ a:visited{
 }
 .tw-font-primary{
   font-family: "Open Sans", Century Gothic, sans-serif !important;
-}
-.tw-font-bebas-neue{
-  font-family: Bebas Neue, cursive !important;
 }
 .tw-text-xs{
   font-size: 0.75rem !important;
@@ -24170,22 +24089,6 @@ a:visited{
 .tw-text-\[22px\]{
   font-size: 22px !important;
 }
-.tw-text-2xl{
-  font-size: 1.5rem !important;
-  line-height: 2rem !important;
-}
-.tw-text-32{
-  font-size: 32px !important;
-  line-height: 1.5 !important;
-}
-.tw-text-base{
-  font-size: 1rem !important;
-  line-height: 1.5rem !important;
-}
-.tw-text-4xl{
-  font-size: 2.25rem !important;
-  line-height: 2.5rem !important;
-}
 .tw-font-bold{
   font-weight: 700 !important;
 }
@@ -24203,9 +24106,6 @@ a:visited{
 }
 .tw-font-semibold{
   font-weight: 600 !important;
-}
-.tw-font-bold{
-  font-weight: 700 !important;
 }
 .tw-uppercase{
   text-transform: uppercase !important;
@@ -24263,9 +24163,6 @@ a:visited{
 }
 .tw-leading-\[26px\]{
   line-height: 26px !important;
-}
-.tw-leading-none{
-  line-height: 1 !important;
 }
 .tw-tracking-wide{
   letter-spacing: 0.025em !important;
@@ -24504,14 +24401,6 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(0 32 57 / var(--tw-text-opacity)) !important;
 }
-.tw-text-white{
-  --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
-}
-.tw-text-\[\#00101D\]{
-  --tw-text-opacity: 1 !important;
-  color: rgb(0 16 29 / var(--tw-text-opacity)) !important;
-}
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
           text-decoration-line: underline !important;
@@ -24630,11 +24519,6 @@ a:visited{
 .tw-transition-none{
   transition-property: none !important;
 }
-.tw-transition-all{
-  transition-property: all !important;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition-duration: 150ms !important;
-}
 .tw-duration-100{
   transition-duration: 100ms !important;
 }
@@ -24691,14 +24575,8 @@ a:visited{
   .tw-container{
     max-width: 1815px !important;
   }
-  .tw-container{
-    max-width: 1815px !important;
-  }
 }
 @media (min-width: 2256px){
-  .tw-container{
-    max-width: 2256px !important;
-  }
   .tw-container{
     max-width: 2256px !important;
   }
@@ -24812,9 +24690,6 @@ a:visited{
 .hover\:tw-border-\[\#002039\]:hover{
   --tw-border-opacity: 1 !important;
   border-color: rgb(0 32 57 / var(--tw-border-opacity)) !important;
-}
-.hover\:tw-border-current:hover{
-  border-color: currentColor !important;
 }
 .hover\:tw-bg-black:hover{
   --tw-bg-opacity: 1 !important;
@@ -25090,10 +24965,6 @@ a:visited{
 .tw-dark .dark\:tw-border-white\/\[0\.15\]{
   border-color: rgb(255 255 255 / 0.15) !important;
 }
-.tw-dark .dark\:tw-border-\[\#223457\]{
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(34 52 87 / var(--tw-border-opacity)) !important;
-}
 .tw-dark .dark\:tw-border-b-\[\#1E364A\]{
   --tw-border-opacity: 1 !important;
   border-bottom-color: rgb(30 54 74 / var(--tw-border-opacity)) !important;
@@ -25217,10 +25088,6 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#9ec0dc\]{
   --tw-text-opacity: 1 !important;
   color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
-}
-.tw-dark .dark\:tw-text-white{
-  --tw-text-opacity: 1 !important;
-  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
@@ -25880,9 +25747,6 @@ a:visited{
   .md\:tw-ml-auto{
     margin-left: auto !important;
   }
-  .md\:tw-mb-0{
-    margin-bottom: 0px !important;
-  }
   .md\:tw-block{
     display: block !important;
   }
@@ -26251,10 +26115,6 @@ a:visited{
   .md\:tw-py-8{
     padding-top: 2rem !important;
     padding-bottom: 2rem !important;
-  }
-  .md\:tw-px-8{
-    padding-left: 2rem !important;
-    padding-right: 2rem !important;
   }
   .md\:tw-pl-8{
     padding-left: 2rem !important;
@@ -26750,13 +26610,6 @@ a:visited{
     font-size: 1.5rem !important;
     line-height: 2rem !important;
   }
-  .lg\:tw-text-3xl{
-    font-size: 1.875rem !important;
-    line-height: 2.25rem !important;
-  }
-  .lg\:tw-leading-none{
-    line-height: 1 !important;
-  }
   .lg\:tw-leading-none{
     line-height: 1 !important;
   }
@@ -26944,13 +26797,6 @@ a:visited{
   }
   .xl\:tw-text-5xl{
     font-size: 3rem !important;
-    line-height: 1 !important;
-  }
-  .xl\:tw-text-lg{
-    font-size: 1.125rem !important;
-    line-height: 1.75rem !important;
-  }
-  .xl\:tw-leading-none{
     line-height: 1 !important;
   }
   .xl\:tw-leading-none{
