@@ -89,7 +89,7 @@
         <div class="container max-w-3xl mx-auto text-center">
             <h3><strong>Reach Out Directly</strong></h3>
             <p class="mt-4 mb-5 text-sm md:text-base max-w-3xl mx-auto">
-                Get in touch with your dedicated Musora Mentor, [dynamic]!
+                Get in touch with your dedicated Musora Mentor!
             </p>
             <div class="text-left">
                 <contact-email-form-marketing
@@ -150,7 +150,7 @@
             e.preventDefault();
             const keyword = document.getElementById('searchInput').value;
             if(keyword){
-                window.location = `https://help.{{ $brand }}.com/search?query=${keyword}`;
+                window.location = `https://help.musora.com/search?query=${keyword}`;
             }
         }
     </script>
