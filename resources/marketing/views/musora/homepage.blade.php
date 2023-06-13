@@ -92,6 +92,15 @@
             }
         }
 
+        .join.musora-gold {
+            background-color:#FFAE00;
+            color:#000;
+        }
+
+        .join.musora-gold:hover, .join.musora-gold:focus {
+            background:#FFAE00;
+            color:#000;
+        }
         .join.coaches {
             background-color:#fe9f13;
             color:#000;
@@ -348,13 +357,14 @@
 @section('layout-body')
     <section class="text-center px-5 sm:px-6 py-32 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to bottom, #fff 40%, #F1EFED);">
         <div class="container max-w-xs sm:max-w-6xl mx-auto relative z-20">
-            <h1 class="relative w-auto inline-block text-4xl sm:text-5xl lg:text-6xl">
-                <strong>Musicians<br class="inline sm:hidden"> start here.</strong>
-                <img class="w-72 lg:w-96 absolute -bottom-1 -right-6 px-7" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png" alt="underline" fetchpriority="high">
+            <h1 class="relative w-auto inline-block text-3xl sm:text-4xl lg:text-5xl">
+                <strong>Your musical goals <br class="inline sm:hidden"> start here.</strong>
+                <img class="w-64 lg:w-80 sm:absolute sm:-bottom-1 sm:-right-6 px-7" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png" alt="underline" fetchpriority="high">
             </h1>
-            <h6 class="leading-relaxed mt-6 mb-7">Learn your favorite instruments with step-by-step lessons, thousands<br class="hidden sm:inline">
-                of songs, and unlimited personal support.</h6>
-            <a class="sm:mx-1 w-full sm:w-56 join {{ $theme }} smaller anchor-slide" href="#customize-anchor">START FOR FREE</a>
+            <h6 class="leading-relaxed mt-2 sm:mt-6 mb-4 sm:mb-7">
+                Find your musical flow with step-by-step lessons, <br class="hidden sm:inline">
+                thousands of songs, and unlimited personal support.</h6>
+            <a class="sm:mx-1 w-full sm:w-56 join musora-gold smaller anchor-slide" href="#customize-anchor">START FOR FREE <i class="fal fa-arrow-right" style="line-height: 0;"></i></a>
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738', 'newwindow', 'width=750, height=550'); return false;">
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
