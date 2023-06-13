@@ -156,7 +156,7 @@
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/artist-course-icon.svg',
                 'title' => 'Artist Courses',
-                'desc' => 'Courses and live events<br class="hidden sm:inline"> with drumming heroes. ',
+                'desc' => 'Courses and live events<br class="hidden sm:inline"> with singing heroes. ',
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/songs-icon.svg',
