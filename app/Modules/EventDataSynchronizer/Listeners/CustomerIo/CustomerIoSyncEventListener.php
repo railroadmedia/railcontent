@@ -930,7 +930,7 @@ class CustomerIoSyncEventListener
     public function syncPayment(Payment $payment)
     {
         try {
-            if (!empty($payment)) {
+            if (!empty($payment) && $payment->getStatus() == Payment::STATUS_PAID) {
                 $order = $payment->getOrder();
                 $subscription = $payment->getSubscription();
                 $productIds = [];
