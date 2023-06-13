@@ -387,14 +387,19 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="text-center sm:mb-10"><strong>The easier way to<br class="inline sm:hidden"> learn <u>any instrument</u>.</strong></h2>
+            <img class="text-center mx-auto sm:mb-10 h-14 sm:h-20 lg:h-24" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play.png">
             <img class="my-5 h-64 inline sm:hidden"
                 src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage3.png"
                 alt="learn playing image"
                 fetchpriority="high"
             >
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center">
-                <p class="leading-normal max-w-xl pr-7 mx-0">Learning an instrument can be frustrating. So we’ve made the most helpful music lessons on the planet –<br><br>Guided video lessons from great teachers, interactive exercises that transform practice into play, and <strong>thousands of popular songs</strong> for every style, era, and skill level. PLUS unlimited personal support from real teachers.<br><br>You’ll play more. You’ll fall in love with the process. And we’re so confident you’ll love your new skills that you’ll get a 7-day free trial PLUS a 90-day guarantee (just to make sure!).</p>
+                <p class="leading-normal max-w-xl pr-7 mx-0">Learning an instrument can be frustrating. So we’ve made the most helpful music lessons on the planet –
+                    <br><br>
+                    Guided video lessons from great teachers, interactive exercises that transform practice into play, and <strong>thousands of popular songs</strong> for every style, era, and skill level. PLUS unlimited personal support from real teachers.
+                    <br><br>
+                    You’ll play more. You’ll fall in love with the process. And we’re so confident you’ll love your new skills that you’ll get a 7-day free trial PLUS a 90-day guarantee (just to make sure!).
+                </p>
                 <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -407,49 +412,50 @@
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10 relative z-20" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
 
 
-    @php
-        $gridItems = [
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/10-level-cirriculum.jpg',
-                'title' => '10-Level Curriculum',
-                'desc' => 'The most trusted step-by-step video lessons for piano, guitar, drums, and singing. ',
-            ],
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/practical-assignments.jpg',
-                'title' => 'Practical Assignments',
-                'desc' => 'Keep up your progress with clear assignments and handy practice tools for every level. ',
-            ],
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/world-class-teachers.jpg',
-                'title' => 'World-Class Teachers',
-                'desc' => 'Study with 100+ music authorities including Grammy Award winners and touring musicians. ',
-            ],
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/on-demand-courses.jpg',
-                'title' => 'On-Demand Courses',
-                'desc' => 'Boost any skill, anytime with topic-based courses to guide you towards any goal. ',
-            ],
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/downloadable-videos.jpg',
-                'title' => 'Downloadable Videos',
-                'desc' => 'Stream your lesson OR download your videos so you can practice anywhere, anytime. ',
-            ],
-            [
-                'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/personalized-support.jpg',
-                'title' => 'Personalized Support',
-                'desc' => 'Get weekly live streams, student lesson plans, and access to a global music community. ',
-            ],
-        ];
-    @endphp
 
 
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
     <div id="method" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-5xl mx-auto">
-            <h2><strong>Where musical dreams <br class="inline sm:hidden"> <u>come true.</u> </strong></h2>
-            <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">Always know <em>exactly</em> what to practice with a step-by-step curriculum for each  <br class="hidden sm:inline">instrument plus exclusive courses on any topic you’d ever want to learn!</p>
+            <h2><strong><span class="border border-musora-gold rounded-full px-4 inline-block mr-1">6</span> reasons why you’ll <br class="inline sm:hidden">love learning here.</strong></h2>
+            <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">Level up your skills with the lessons, teachers, and practice tools <strong class="font-black">trusted by {{ Prices::$students }} active students</strong>. </p>
             <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6">
+
+                @php
+                    $gridItems = [
+                        [
+                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/10-level-cirriculum.jpg',
+                            'title' => 'Step-By-Step Clarity',
+                            'desc' => 'Learn the right skills in the right order with our 10-level curriculum for each instrument. ',
+                        ],
+                        [
+                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/practical-assignments.jpg',
+                            'title' => 'Handy Practice Tools',
+                            'desc' => 'Gain momentum with interactive exercises, speed control, looping, and progress tracking.',
+                        ],
+                        [
+                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/world-class-teachers.jpg',
+                            'title' => 'World-Class Teachers',
+                            'desc' => 'Study with 100+ music authorities including Grammy Award winners and touring musicians. ',
+                        ],
+                        [
+                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/on-demand-courses.jpg',
+                            'title' => 'On-Demand Courses',
+                            'desc' => 'Prefer to jump around? Boost any skill, anytime with topic-based courses for any musical goal. ',
+                        ],
+                        [
+                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/downloadable-videos.jpg',
+                            'title' => 'Downloadable Videos',
+                            'desc' => 'Stream your lesson OR download your videos so you can learn and practice anywhere, anytime. ',
+                        ],
+                        [
+                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/personalized-support.jpg',
+                            'title' => 'Powered By Humans',
+                            'desc' => 'Get weekly live streams, student lesson plans, and access to a global music community. ',
+                        ],
+                    ];
+                @endphp
                 @foreach ($gridItems as $key => $gridItem)
                     <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0 max-w-xs">
                         <picture class="w-1/3 sm:w-full">
@@ -469,7 +475,7 @@
                 @endforeach
             </div>
             @if(empty($promoVersion))
-                <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">EXPLORE THE METHOD <i class="fas fa-info-circle"></i> </a>
+                <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">EXPLORE THE METHOD</a>
             @endif
             <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
