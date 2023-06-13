@@ -460,7 +460,7 @@
             @include('_partials.components.question-dropdown', [
             'num' => '?',
             "title" => "How do I save a section of a video into my playlist?",
-            "desc" => "You can set a video’s start and end time once added to a playlist. To do this, go into the playlist containing the video and click on the “...” button. Click “Set Start and End Time” from there.",
+            "desc" => "You can set a video’s start and end time once added to a playlist. To do this, go into the playlist containing the video and click on the “...” button under “Actions”. Click “Start/End Time” from there.",
             ])
             @include('_partials.components.question-dropdown', [
             'num' => '?',
