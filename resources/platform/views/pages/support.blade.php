@@ -74,7 +74,7 @@
         <div class="tw-container tw-max-w-3xl tw-mx-auto tw-text-center">
             <h3><strong>Reach Out Directly</strong></h3>
             <p class="tw-mt-4 tw-mb-5 tw-text-sm md:tw-text-base tw-max-w-3xl tw-mx-auto">
-                Get in touch with your dedicated Musora Mentor, [dynamic]!
+                Get in touch with your dedicated Musora Mentor!
             </p>
             <div class="tw-text-left">
                 @include('partials.bladesora.members.partials._support', [

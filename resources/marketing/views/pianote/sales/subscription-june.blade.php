@@ -8,11 +8,7 @@
     <meta name="description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
     <meta property="og:description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
 
-    @hasSection('share-image')
-        @yield('share-image')
-    @else
-        <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg" style="display: none;">
-    @endif
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/share-blue.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
 
@@ -147,6 +143,12 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
+    <a href="#customize-anchor" class="anchor-slide flex items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(330deg, #05937C 0%, #007DD8, #9AFF89 100%);">
+        <h4 class="inline-block ml-0 mr-4 bg-white rounded-md font-bebas py-0.5 px-2 leading-none" style="color:#1f97c8">JUNE ONLY</h4>
+        <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight text-white">
+            GET 30 DAYS FREE ACCESS (INSTEAD OF 7) | WIN A FREE PIANO
+        </p>
+    </a>
 
     @php
         $features = [
@@ -193,53 +195,93 @@
         ];
     @endphp
 
-    @if(empty($hideHeader) || !$hideHeader)
-        @if(!empty($beginnerVersion))
-            @include('musora.sales.components.header-section', [
-                'header' => 'Online piano lessons tailored for beginners.',
-                'desc' => 'Learn the piano faster with step-by-step lessons, friendly teachers, and songs perfect for your skill level.',
-                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
-                'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
-                'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
-                'pointOne' => 'Perfect for Beginners',
-                'pointTwo' => 'Super-Friendly Teachers',
-                'pointThree' => 'Fun Lessons',
-                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
-                'students' => number_format(Prices::$students),
-            ])
-        @elseif(!empty($songsVersion))
-            @include('musora.sales.components.header-section', [
-                'header' => 'Learn piano from real teachers. Play your favorite songs.',
-                'desc' => 'Find and play the songs you love. Download, print, and play 1000+ songs. Plus get flexible, fun lessons and unlimited personal support from real teachers.',
-                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
-                'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
-                'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
+    @include('musora.sales.components.header-section', [
+        'header' => 'Learn piano with 30 days of FREE lessons.',
+        'desc' => 'Learn the piano by playing the songs you love. Flexible, fun lessons that fit around your life and unlimited personal support.',
+        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-thumb.png',
+        'thumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-thumb-m.png',
                 'pointOne' => '1000+ popular songs',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Learn anywhere, anytime',
-                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
-                'students' => number_format(Prices::$students),
-            ])
-        @else
-            @include('musora.sales.components.header-section', [
-                'header' => 'Online piano lessons for all skill levels.',
-                'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
-                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
-                'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
-                'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
-                'pointOne' => 'Improve Your Skills',
-                'pointTwo' => 'World-Class Teachers',
-                'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
-                'students' => number_format(Prices::$students),
-            ])
-        @endif
-    @endif
-
-    @hasSection('promo-banner')
-        @yield('promo-banner')
-    @endif
-
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
+        'students' => number_format(Prices::$students),
+        'shortHeader' => true,
+        'noThumbShadow' => true,
+        'specialText' => 'This month only. <span class="text-pianote">Get 30 days of free lessons</span> (Normally 7 days). ',
+    ])
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background: linear-gradient(330deg, #05937C 0%, #007DD8, #9AFF89 100%);">
+        <div class="container max-w-5xl mx-auto">
+            <h2>Learn the piano.<br class="inline sm:hidden"> <strong>Then WIN one.</strong></h2>
+            <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">
+                At Pianote, we want to create more piano players. And that’s why, for this month only, you’ll be entered<br class="hidden lg:inline">
+                to win some amazing prizes when you start a free 30-day trial (and choose the annual membership).</p>
+            <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 max-w-xs sm:max-w-full">
+                <div class="flex flex-wrap items-start justify-center w-full sm:w-1/3  px-7 sm:px-3 mb-4">
+                    <img
+                        class="h-40 sm:h-40 lg:h-56 rounded-xl transition-opacity opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/1st-place.png"
+                        alt="grid"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                    >
+                </div>
+                <div class="flex flex-wrap items-start justify-center w-full sm:w-1/3  px-7 sm:px-3 mb-4">
+                        <img
+                            class="h-40 sm:h-40 lg:h-56 rounded-xl transition-opacity opacity-0"
+                            src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/2nd-place.png"
+                            alt="grid"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                        >
+                </div>
+                <div class="flex flex-wrap items-start justify-center w-full sm:w-1/3  px-7 sm:px-3 mb-4">
+                        <img
+                            class="h-40 sm:h-40 lg:h-56 rounded-xl transition-opacity opacity-0"
+                            src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/3rd-place.png"
+                            alt="grid"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                        >
+                </div>
+            </div>
+            <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">There’s no purchase needed. You can cancel your free trial at any time and you’ll still be in the running.<br><strong><em>The winner will be announced July 10th.</em></strong></p>
+            <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+                @if(!empty($promoVersion))
+                    href="#customize-anchor"
+                @elseif(!empty($month))
+                    href="/choose-your-trial-month"
+                @else
+                    href="/choose-plan"
+                @endif
+            >
+                @if(!empty($promoVersion) && empty($trialVersion))
+                    SEE YOUR DEAL &raquo;
+                @else
+                    START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+                @endif
+            </a>
+        </div>
+    </section>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+        <div class="container max-w-5xl mx-auto">
+            <h2><strong>30 days that could change your life.</strong></h2>
+            <img class="my-5 h-64 inline sm:hidden transition-opacity opacity-0"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+                src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-collage.png"
+                alt="learn playing image"
+            >
+            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center mt-2 sm:mt-8">
+                <p class="leading-normal max-w-xl pr-7 mx-0">You learn the piano by <u>playing the piano</u>. It’s not rocket science.<br><br>If you don’t play your piano, you won’t get better. At Pianote, our mission is to get your playing more so you get better, faster (while having FUN!).<br><br>And we all know, the first step is always the hardest.<br><br>That’s why, for this month only, you’ll get 30 days of FREE piano lessons from Pianote. Because the best way to know if Pianote is right for you…<br><br><strong>Is to try it.</strong><br><br>Start a free trial in June and you’ll get an entire month of access, instead of the usual 7 days. That gives you more than 4x the free lessons, songs, and personal support.<br><br>Because who knows…<br><br>This next month could change your life.</p>
+                <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-collage.png"
+                    alt="learn playing image"
+                >
+            </div>
+        </div>
+    </section>
 
     @php
         $gridItems = [
@@ -565,69 +607,16 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @hasSection('final')
-        @yield('final')
-    @elseif(!empty($trialVersion))
-        @include('musora.sales.components.card-selection-section', [
-            "noSelector" => true,
-            "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
-            "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
-            "songs" => "1000",
-            "firstPoint" => "Unlimited piano lessons.",
-            "thirdPoint" => "Direct access to real teachers.",
-            "fifthPoint" => "Lesson access for singing, guitar, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[pianote-base-annual-recurring-7-day-trial-membership]=1&promo-code=annual-trial&redirect=/order&locked=true",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[pianote-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
-        ])
-    @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
-                    'title' => 'Chords & <br>Scales Book',
-                    'description' => 'Your encyclopedia of piano chords & scales.',
-                    'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                    'shipping' => 'true'
-                ],
-                [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
-                'title' => 'Piano Technique<br> Made Easy',
-                'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
-                'price' => floatval($productPrices['piano-technique-made-easy']->price),
-                ],
-                [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
-                'title' => 'Piano Riffs<br> & Fills',
-                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/faster-fingers.jpg',
-                    'title' => '',
-                    'description' => 'Boost your speed and confidence with this guided practice course.',
-                    'price' => floatval($productPrices['faster-fingers']->price),
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png',
-        'header' => 'Online piano lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
-        ])
-    @else
         @include('musora.sales.components.order-section-collage', [
-        'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
+        'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.<br> <span class="inline-block" style="background: linear-gradient(330deg, #05937C, #007DD8, #9AFF89);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">Chance to win a FREE piano.</span>',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
+                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Flexible lessons that fit your life.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
-                    <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
+                    <li class="leading-tight text-pianote max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
+        'orderUrl' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-30-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true',
+        'variant' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-30-DAY]=1&redirect=/order&locked=true',
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-spread.png',
         ])
-    @endif
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/devices.png',

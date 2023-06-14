@@ -15,15 +15,19 @@ use App\Modules\EventDataSynchronizer\Jobs\CustomerIoTriggerEvent;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use App\Modules\UserManagementSystem\Services\UserService;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Events\MobileAppLogin;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Events\User\UserUpdated;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Ecommerce\Entities\Payment;
 use Railroad\Ecommerce\Entities\Subscription;
 use Railroad\Ecommerce\Entities\User as EcommerceUser;
 use Railroad\Ecommerce\Events\AccessCodeClaimed;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
+use Railroad\Ecommerce\Events\MobileOrderEvent;
+use Railroad\Ecommerce\Events\MobilePaymentEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
 use Railroad\Ecommerce\Events\PaymentEvent;
 use Railroad\Ecommerce\Events\PaymentMethods\PaymentMethodCreated;
@@ -35,6 +39,7 @@ use Railroad\Ecommerce\Events\Subscriptions\SubscriptionUpdated;
 use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
 use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
 use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
+use Railroad\Ecommerce\Repositories\PaymentRepository;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
 use Railroad\Railcontent\Events\ContentFollow;
@@ -92,6 +97,7 @@ class CustomerIoSyncEventListener
      * @var array
      */
     public static $alreadyQueuedUserIds = [];
+    private PaymentRepository $paymentRepository;
 
     /**
      * CustomerIoSyncEventListener constructor.
@@ -108,7 +114,8 @@ class CustomerIoSyncEventListener
         CategoryRepository $categoryRepository,
         ThreadRepository $threadRepository,
         PostRepository $postRepository,
-        ContentService $contentService
+        ContentService $contentService,
+        PaymentRepository $paymentRepository
     ) {
         $this->userService = $userService;
         $this->commentRepository = $commentRepository;
@@ -116,6 +123,7 @@ class CustomerIoSyncEventListener
         $this->threadRepository = $threadRepository;
         $this->postRepository = $postRepository;
         $this->contentService = $contentService;
+        $this->paymentRepository = $paymentRepository;
     }
 
     /**
@@ -772,7 +780,9 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            $this->syncPayment($paymentEvent->getPayment());
+            //inefficient but reload payment to get all data
+            $payment = $this->paymentRepository->find($paymentEvent->getPayment()->getId());
+            $this->syncPayment($payment);
         } catch (Throwable $throwable) {
             error_log($throwable);
         }
@@ -792,7 +802,7 @@ class CustomerIoSyncEventListener
                 (new CustomerIoCreateEventByUserId(
                     $activityEvent->getUserId(),
                     config('event-data-syncrhonizer.customer_io_account_to_sync_all_brands'),
-                     'musora_members_area_activity',
+                    'musora_members_area_activity',
                     [
                         'brands' => $activityEvent->getBrands()
                     ],
@@ -917,10 +927,7 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param PaymentEvent $paymentEvent
-     */
-    public function syncPayment($payment)
+    public function syncPayment(Payment $payment)
     {
         try {
             if (!empty($payment)) {
@@ -939,7 +946,9 @@ class CustomerIoSyncEventListener
                     // membership renewal payment
                     $productIds[] = $subscription->getProduct()->getId();
                     $userId = $subscription->getUser()->getId();
-                } elseif (!empty($subscription) && empty($subscription->getProduct()) && !empty($subscription->getOrder())
+                } elseif (!empty($subscription) && empty($subscription->getProduct()) && !empty(
+                    $subscription->getOrder()
+                    )
                     && $subscription->getType() == Subscription::TYPE_PAYMENT_PLAN) {
                     // payment plan renewal payment
                     foreach ($subscription->getOrder()->getOrderItems() as $orderItem) {
@@ -960,6 +969,11 @@ class CustomerIoSyncEventListener
                     'payment_info' => $payment->getMessage(),
                     'payment_timestamp' => $payment->getCreatedAt()->timestamp
                 ];
+
+                $paymentId = $payment->getId();
+                //Log::debug("CustomerIoSyncEventListener::syncPayment paymentId:$paymentId userId:$userId");
+                //Log::debug(print_r($data, true));
+
                 if ($userId) {
                     dispatch(
                         (new CustomerIoCreateEventByUserId(
@@ -974,6 +988,8 @@ class CustomerIoSyncEventListener
                                 ->addSeconds(3)
                         )
                     );
+                } else {
+                    Log::error("syncPayment: Unable to get userId from payment $paymentId");
                 }
             }
         } catch (Throwable $throwable) {
@@ -1084,7 +1100,9 @@ class CustomerIoSyncEventListener
                     $emailInvite->getBrand(),
                     $emailInvite->getReceiversEmail(),
                     null,
-                    $emailInvite->getBrand() . config('event-data-synchronizer.customer_io_saasquatch_email_invite_event_name')
+                    $emailInvite->getBrand() . config(
+                        'event-data-synchronizer.customer_io_saasquatch_email_invite_event_name'
+                    )
                 ))->delay(
                     Carbon::now()
                         ->addSeconds(10)
@@ -1166,8 +1184,10 @@ class CustomerIoSyncEventListener
         }
 
         try {
-            dispatch((new CustomerIoSyncMentor($studentMentorsUpdated->mentorStudentData))
-                ->delay(Carbon::now()->addSeconds(3)));
+            dispatch(
+                (new CustomerIoSyncMentor($studentMentorsUpdated->mentorStudentData))
+                    ->delay(Carbon::now()->addSeconds(3))
+            );
         } catch (Throwable $throwable) {
             error_log($throwable);
         }
@@ -1197,43 +1217,76 @@ class CustomerIoSyncEventListener
                     'referrer_id' => null,
                     'musora_id' => null
 
-                ],
-                null,
-                Carbon::now()->timestamp
-            ))
-                ->delay(
+                ], null, Carbon::now()->timestamp
+            ))->delay(
                 Carbon::now()
                     ->addSeconds(3)
             )
         );
 
+        //        dispatch(
+        //            (new CustomerIoCreateEventByUserId(
+        //                $accessCodeClaimed->getUser()->getId(),
+        //                $brand,
+        //                'musora_membership_access',
+        //                [
+        //                    'access_type' => 'manual_access_type',
+        //                    'access_start_date' => '',
+        //                    'access_expiration_date' => '',
+        //
+        //                ],
+        //                null,
+        //                Carbon::now()->timestamp
+        //            ))
+        //                ->delay(
+        //                    Carbon::now()
+        //                        ->addSeconds(3)
+        //                )
+        //        );
+    }
 
-//        dispatch(
-//            (new CustomerIoCreateEventByUserId(
-//                $accessCodeClaimed->getUser()->getId(),
-//                $brand,
-//                'musora_membership_access',
-//                [
-//                    'access_type' => 'manual_access_type',
-//                    'access_start_date' => '',
-//                    'access_expiration_date' => '',
-//
-//                ],
-//                null,
-//                Carbon::now()->timestamp
-//            ))
-//                ->delay(
-//                    Carbon::now()
-//                        ->addSeconds(3)
-//                )
-//        );
+    public function handleMobilePaymentPlaced(MobilePaymentEvent $mobileOrderEvent)
+    {
+        $latestPayment =
+            ($mobileOrderEvent->getSubscription()
+                ->getLatestPayment());
+        $amountPaid = ($latestPayment) ? $latestPayment->getTotalPaid() : 0;
+        $amountDue = ($latestPayment) ? $latestPayment->getTotalDue() : 0;
+        $productIds =
+            [
+                $mobileOrderEvent->getSubscription()
+                    ->getProduct()
+                    ->getId(),
+            ];
+
+        $data = [
+            'product_id' => $productIds,
+            'amount_paid' => $amountPaid,
+            'amount_due' => $amountDue,
+            'timestamp' => $mobileOrderEvent->getSubscription()->getUpdatedAt()->timestamp
+        ];
+
+        dispatch(
+            (new CustomerIoCreateEventByUserId(
+                $mobileOrderEvent->getSubscription()->getUser()
+                    ->getId(),
+                $mobileOrderEvent->getSubscription()->getBrand(),
+                $mobileOrderEvent->getSubscription()->getBrand() . '_user_order',
+                $data,
+                null,
+                $mobileOrderEvent->getSubscription()->getCreatedAt()->timestamp
+            ))->delay(
+                Carbon::now()
+                    ->addSeconds(30)
+            )
+        );
     }
 
     /**
      * @param ReferralClaimed $referralClaimed
      */
-    public function handleReferralClaimed(ReferralClaimed $referralClaimed) {
-
+    public function handleReferralClaimed(ReferralClaimed $referralClaimed)
+    {
         $referrer = $referralClaimed->getReferrer();
         dispatch(
             (new CustomerIoCreateEventByUserId(

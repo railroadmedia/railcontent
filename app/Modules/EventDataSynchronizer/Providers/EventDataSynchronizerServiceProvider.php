@@ -6,6 +6,7 @@ use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
 use App\Modules\EventDataSynchronizer\Console\Commands\ExpiredProductResync;
 use App\Modules\EventDataSynchronizer\Console\Commands\MigrateMinutesWatchedPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\PackBonusExpirationDateResyncTool;
+use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoPayments;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermissionsResyncTool;
@@ -16,6 +17,8 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Railroad\Ecommerce\Events\AccessCodeClaimed;
 use Railroad\Ecommerce\Events\AppSignupFinishedEvent;
 use Railroad\Ecommerce\Events\AppSignupStartedEvent;
+use Railroad\Ecommerce\Events\MobileOrderEvent;
+use Railroad\Ecommerce\Events\MobilePaymentEvent;
 use Railroad\Ecommerce\Events\OrderEvent;
 use Railroad\Ecommerce\Events\PaymentEvent;
 use Railroad\Ecommerce\Events\PaymentMethods\PaymentMethodCreated;
@@ -199,6 +202,12 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
         ],
         ReferralClaimed::class => [
             CustomerIoSyncEventListener::class . '@handleReferralClaimed',
+        ],
+        MobileOrderEvent::class => [
+
+        ],
+        MobilePaymentEvent::class => [
+            CustomerIoSyncEventListener::class . '@handleMobilePaymentPlaced',
         ]
     ];
 
@@ -232,6 +241,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 ExpiredProductResync::class,
                 MigrateMinutesWatchedPoints::class,
                 SyncPoints::class,
+                SyncCustomerIoPayments::class
             ]
         );
         $this->mergeConfigFrom(
