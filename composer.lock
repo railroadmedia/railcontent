@@ -8370,12 +8370,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "dac0ff2521d8b78aa999cd83175f6ae98744fc1e"
+                "reference": "4a541ceb1c06d66916dba1d5086e71cde8f718e2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/dac0ff2521d8b78aa999cd83175f6ae98744fc1e",
-                "reference": "dac0ff2521d8b78aa999cd83175f6ae98744fc1e",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/4a541ceb1c06d66916dba1d5086e71cde8f718e2",
+                "reference": "4a541ceb1c06d66916dba1d5086e71cde8f718e2",
                 "shasum": ""
             },
             "require": {
@@ -8407,7 +8407,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/v2.0-playlists"
             },
-            "time": "2023-06-14T11:28:32+00:00"
+            "time": "2023-06-14T12:34:19+00:00"
         },
         {
             "name": "railroad/permissions",
