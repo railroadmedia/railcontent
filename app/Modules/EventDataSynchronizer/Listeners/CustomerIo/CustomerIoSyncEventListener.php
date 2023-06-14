@@ -989,7 +989,7 @@ class CustomerIoSyncEventListener
                         )
                     );
                 } else {
-                    Log::error("syncPayment: Unable to get $userId from payment $paymentId");
+                    Log::error("syncPayment: Unable to get userId from payment $paymentId");
                 }
             }
         } catch (Throwable $throwable) {
