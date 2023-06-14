@@ -5,21 +5,20 @@
         @endforeach
     }">
 
-    <div class="container mx-auto max-w-6xl mb-12">
+    <div class="container mx-auto max-w-6xl">
         <h2 class="leading-tight mb-4"><strong>{!! $header !!}</strong></h2>
         @if(!empty($subheadline))
             <p class="mx-auto mb-6">{!!  $subheadline  !!}</p>
         @endif
-
-        <img
-            alt="shopper approved image"
-            class="h-8 sm:h-9 lg:h-11 mb-2 mx-auto transition-opacity opacity-0"
-            src="https://www.musora.com/musora-cdn/image/width=320,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/shopper-approved-icon.svg"
-            loading="lazy"
-            onload="this.classList.remove('opacity-0')"
-        >
-        <a class="inline-block w-full @if(empty($youtube)) mb-10 sm:mb-16 @endif" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
-            <p class="mx-auto">{!!  $reviewText  !!} <span class="inline-block @if($theme != 'musora') text-{{ $theme }} @else text-drumeo @endif">See The Reviews »</span></p>
+        <a class="inline-block w-full" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
+            <img
+                alt="shopper approved image"
+                class="h-8 sm:h-9 lg:h-11 mb-2 mx-auto transition-opacity opacity-0"
+                src="https://www.musora.com/musora-cdn/image/width=320,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/shopper-approved-icon.svg"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            >
+            <p class="mx-auto @if(empty($youtube)) mb-10 sm:mb-16 @endif">{!!  $reviewText  !!} <span class="inline-block @if($theme != 'musora') text-{{ $theme }} @else text-drumeo @endif">See the reviews »</span></p>
 
         </a>
         @if(!empty($youtube))

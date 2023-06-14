@@ -209,6 +209,9 @@
         .border-musora {
             border-color:#0c1524 !important;
         }
+        .border-musora-gold {
+            border-color:#FFAE00 !important;
+        }
 
         .border-musora::before {
             content:none !important;
@@ -279,7 +282,7 @@
         }
 
         .splide__arrow svg {
-            fill:#0B76DB !important;
+            fill:#FFAE00 !important;
         }
 
         .bubble:after {
@@ -366,7 +369,7 @@
             <h6 class="leading-relaxed mt-2 sm:mt-6 mb-4 sm:mb-7">
                 Find your musical flow with step-by-step lessons, <br class="hidden sm:inline">
                 thousands of songs, and unlimited personal support.</h6>
-            <a class="sm:mx-1 w-full sm:w-56 join musora-gold smaller anchor-slide" href="#customize-anchor">START FOR FREE <i class="fal fa-arrow-right" style="line-height: 0;"></i></a>
+            <a class="sm:mx-1 w-full sm:w-56 join musora-gold smaller anchor-slide" href="#customize-anchor">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -431,8 +434,8 @@
     <div id="method" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-5xl mx-auto">
-            <h2 class="leading-tight"><strong><span class="border border-musora-gold rounded-full px-4 inline-block mr-1">6</span> reasons why you’ll <br class="inline sm:hidden">love learning here.</strong></h2>
-            <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">Level up your skills with the lessons, teachers, and practice tools <strong class="font-black">trusted by {{ Prices::$students }} active students</strong>. </p>
+            <h2 class="leading-tight"><strong><span class="border-2 border-musora-gold rounded-full px-3 sm:px-4 py-1 inline-block">6</span> reasons why you’ll <br class="inline sm:hidden">love learning here.</strong></h2>
+            <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">Level up your skills with the lessons, teachers, and<br class="hidden sm:inline lg:hidden">  practice tools <strong class="font-black">trusted by <span class="text-musora-gold">{{ number_format(Prices::$students) }}</span> active students</strong>. </p>
             <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 hidden sm:flex">
 
                 @php
@@ -500,7 +503,7 @@
                     ];
                 @endphp
                 @foreach ($gridItems as $key => $gridItem)
-                    <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0 max-w-xs">
+                    <div class="flex flex-wrap items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0 max-w-xs sm:max-w-full">
                         <picture class="w-1/3 sm:w-full">
                             <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/{{ $gridItem['image'] }}">
                             <img
@@ -511,9 +514,10 @@
                                 onload="this.classList.remove('opacity-0')"
                             >
                         </picture>
-                        <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">
-                            <strong class="font-black inline-block mb-0.5">{{ $gridItem['title'] }}</strong><br> {{ $gridItem['desc'] }}
-                        </p>
+                        <div class="w-2/3 sm:w-full pl-3 sm:pl-0">
+                            <p class="leading-tight mb-0.5"><strong class="font-black"><span class="border border-musora-gold rounded-full px-2 py-0.5 inline-block">{{$key+1}}</span> {{ $gridItem['title'] }}</strong></p>
+                            <p class="leading-normal text-sm">{{ $gridItem['desc'] }}</p>
+                        </div>
                     </div>
                 @endforeach
             </div>
@@ -531,7 +535,7 @@
             @if(empty($promoVersion))
                 <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">{{ $theme }} METHOD</a>
             @endif
-            <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+            <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }}-gold smaller @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
                     href="#customize-anchor"
                 @elseif(!empty($month))
@@ -813,7 +817,7 @@
                 <h5><strong><i class="fas fa-star text-musora-gold"></i> BETTER PRACTICE GUARANTEE <i class="fas fa-star text-musora-gold"></i></strong></h5>
                 <p class="max-w-sm mx-auto leading-normal mt-3">You’ll get 7 days free PLUS a 90-day guarantee<br> to make sure you love your improvements!</p>
             </div>
-            <a class="sm:mx-1 w-full sm:w-64 join white smaller @if(!empty($promoVersion)) anchor-slide @endif"
+            <a class="sm:mx-1 w-full sm:w-64 join musora-gold smaller @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
                     href="#customize-anchor"
                 @elseif(!empty($month))
@@ -859,28 +863,28 @@
             </div>
             <div class="">
                 <div
-                    class="inline-block border-2 rounded-full py-1 px-5 sm:px-10 mx-1 sm:mx-2 mb-2 cursor-pointer border-pianote border text-xl"
+                    class="inline-block border-2 rounded-full py-1 px-5 sm:px-10 mx-1 sm:mx-2 mb-2 cursor-pointer border-pianote text-xl"
                     :class="brand === 'pianote' ? 'text-white bg-pianote' : 'text-pianote'"
                     @click="brand = 'pianote'"
                 >
                     <i class="fa-regular fa-piano-keyboard"></i>
                 </div>
                 <div
-                    class="inline-block border-2 rounded-full py-1 px-5 sm:px-10 mx-1 sm:mx-2 mb-2 cursor-pointer border-guitareo border text-xl"
+                    class="inline-block border-2 rounded-full py-1 px-5 sm:px-10 mx-1 sm:mx-2 mb-2 cursor-pointer border-guitareo text-xl"
                     :class="brand === 'guitareo' ? 'text-white bg-guitareo' : 'text-guitareo'"
                     @click="brand = 'guitareo'"
                 >
                     <i class="fa-light fa-guitar"></i>
                 </div>
                 <div
-                    class="inline-block border-2 rounded-full py-1 px-5 sm:px-10 mx-1 sm:mx-2 mb-2 cursor-pointer border-drumeo border text-xl"
+                    class="inline-block border-2 rounded-full py-1 px-5 sm:px-10 mx-1 sm:mx-2 mb-2 cursor-pointer border-drumeo text-xl"
                     :class="brand === 'drumeo' ? 'text-white bg-drumeo' : 'text-drumeo'"
                     @click="brand = 'drumeo'"
                 >
                     <i class="fa-regular fa-drum"></i>
                 </div>
                 <div
-                    class="inline-block border-2 rounded-full py-1 px-5 sm:px-10 mx-1 sm:mx-2 mb-2 cursor-pointer border-singeo border text-xl"
+                    class="inline-block border-2 rounded-full py-1 px-5 sm:px-10 mx-1 sm:mx-2 mb-2 cursor-pointer border-singeo text-xl"
                     :class="brand === 'singeo' ? 'text-white bg-singeo' : 'text-singeo'"
                     @click="brand = 'singeo'"
                 >
@@ -893,7 +897,7 @@
                         $songItems = [
                             [
                                 'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/popular-song-icon.svg',
-                                'fa-icon' => 'fa-user-music',
+                                'fa-icon' => 'fa-music',
                                 'title' => '1000+ popular songs.',
                                 'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
                             ],
@@ -934,7 +938,7 @@
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <i class="fad {!! $songItem['fa-icon'] !!} text-5xl text-musora-gold"></i>
+                                    <i class="fal {!! $songItem['fa-icon'] !!} text-4xl text-musora"></i>
 {{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
@@ -949,7 +953,7 @@
             @if(empty($promoVersion))
                 <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">SEE SONGS LIST</a>
             @endif
-            <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+            <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }}-gold smaller @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
                     href="#customize-anchor"
                 @elseif(!empty($month))
@@ -1043,7 +1047,7 @@
     'logo' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png',
     'header' => 'Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.',
     'list' => '
-                <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold"></i> Trusted by ' . Prices::$students . ' happy students.</li>
+                <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold"></i> Trusted by ' . number_format(Prices::$students) . ' happy students.</li>
                 <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold"></i> Online lessons on every topic.</li>
                 <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold"></i> Personalized feedback from real teachers.</li>
                 <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold"></i> Includes access to Musora’s lessons for piano, guitar, and voice. </li>',

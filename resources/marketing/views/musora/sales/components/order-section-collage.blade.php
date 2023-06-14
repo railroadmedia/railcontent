@@ -19,7 +19,7 @@
             </div>
             <div class="text-center sm:text-left w-full sm:w-1/2 sm:pl-5">
                 @if(!empty($logo))
-                    <img class="h-12 mb-2" src="{{ $logo }}">
+                    <img class="h-6 mb-8" src="{{ $logo }}">
                 @endif
                 <h6 class="uppercase @if($theme == 'musora') text-musora-gold @else text-{{ $theme }} @endif "><strong>YOUR FIRST @if(!empty($month)) 30 Days @else 7 Days @endif ARE FREE.</strong></h6>
                 <h3 class="leading-normal"><strong>{!! $header !!}</strong></h3>
