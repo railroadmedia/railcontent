@@ -128,53 +128,6 @@
         }
     </style>
     <style>
-        .tool:after, .tool:before {
-            position:absolute;
-            transform:translate(-50%, 0);
-            height:auto;
-            max-height:0;
-            visibility:hidden;
-            opacity:0;
-            transition:all .3s;
-            overflow:hidden;
-            font-size:14px;
-        }
-
-        .tool:before {
-            z-index:100;
-            content:"";
-            bottom:23px;
-            left:50%;
-            border-right:7px transparent solid;
-            border-left:7px transparent solid;
-            border-top:7px solid #fff;
-        }
-
-        .tool:after {
-            padding:5px 8px;
-            content:attr(tip);
-            font-size:14px;
-            text-align:left;
-            color:#000;
-            width:220px;
-            border-radius:8px;
-            background:#fff;
-            box-shadow:0 0 15px #000;
-            bottom:30px;
-            left:-300%;
-        }
-
-        .tool:hover, .tool:active, .tool:focus {
-            z-index:100;
-        }
-
-        .tool:hover:after, .tool:hover:before, .tool:active:after, .tool:active:before, .tool:focus:after, .tool:focus:before {
-            max-height:1000px;
-            visibility:visible;
-            opacity:1;
-            display:block;
-        }
-
         .splide__pagination__page.is-active {
             background:#01050F;
             transform:none !important;
@@ -195,43 +148,12 @@
             fill:#FFAE00 !important;
         }
 
-        .bubble:after {
-            content:'';
-            position:absolute;
-            bottom:0;
-            left:50%;
-            width:0;
-            height:0;
-            border:5px solid transparent;
-            border-top-color:black;
-            border-bottom:0;
-            margin-left:-5px;
-            margin-bottom:-5px;
-        }
-
-        .option-buttons.active {
-            border-color:#fff !important;
-            background:linear-gradient(45deg, #0a3f48, #122753, #2b1054, #3e1033) !important;
-        }
-
-        .option-buttons.active .radio-check {
-            border-color:#fff !important;
-            background-color:#fff !important;
-        }
-
-        .option-buttons.active .radio-check i {
-            display:block !important;
-            color:#000 !important;
-        }
-    </style>
-    <style>
         .dot {
             left:-16px;
         }
 
         .full-line {
             left:0;
-            /*bottom: 29.5%;*/
             bottom:31%;
         }
 
@@ -244,17 +166,7 @@
             .full-line {
                 bottom:0;
             }
-
-            /*.full-line {*/
-            /*    bottom: 21.5%;*/
-            /*}*/
         }
-
-        /*@media (min-width:1024px) {*/
-        /*    .full-line {*/
-        /*        bottom: 23%;*/
-        /*    }*/
-        /*}*/
     </style>
 @stop
 
@@ -802,7 +714,7 @@
                     <i class="fa-light fa-microphone-stand"></i>
                 </div>
             </div>
-            <div class="text-center w-full sm:w-auto mt-6 lg:mt-10 mx-auto">
+            <div class="text-center w-full sm:w-auto mt-6 sm:mt-12 mx-auto mb-5 sm:mb-10">
                 <div class="flex flex-wrap">
                     @php
                         $songItems = [
@@ -846,10 +758,10 @@
                         ];
                     @endphp
                     @foreach ($songItems as $songItem)
-                        <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
+                        <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 sm:mb-4">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <i class="fal {!! $songItem['fa-icon'] !!} text-4xl text-musora-black"></i>
+                                    <i class="fal {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-musora-black"></i>
 {{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
@@ -957,37 +869,7 @@
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
         'reviewText' => 'Rated <strong>4.8</strong> / 5 based on 6,550 student reviews.',
     ])
-    <div class="unstick-trigger block"></div>
-    <div id="customize-anchor" class="anchor"></div>
-    <div id="order" class="anchor"></div>
-    <section class="pb-14 sm:pb-20 relative text-white text-center customize px-4 sm:px-6 lg:px-8 relative" style="background: #0c1524;">
-        <div class="container mx-auto max-w-6xl lg:mb-14">
-            <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="flex w-full justify-center sm:justify-start sm:w-auto sm:order-1 mb-7 sm:mb-0 -mt-4">
-                    <picture class="max-w-xs sm:max-w-full">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team2.png">
-                        <img class="transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team2.png" alt="musora collage image">
-                    </picture>
-                </div>
-                <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0 flex-col flex items-center sm:items-start">
-                    <img class="h-6 mb-3 sm:my-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-gold.png">
-                    <h6 class="uppercase  text-musora inline-block mb-2"><strong>YOUR FIRST  7 Days  ARE FREE.</strong></h6>
-                    <h3 class="leading-tight inline-block"><strong>Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.</strong></h3>
-                    <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-0 inline-block">
-
-                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora" aria-hidden="true"></i> Trusted by {{ number_format(Prices::$students) }} happy students.</li>
-                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora" aria-hidden="true"></i> Personalized feedback from real teachers.</li>
-                        <li class="leading-tight text-musora"><i class="fa-li fas fa-check" aria-hidden="true"></i> All-access for piano, guitar,<br class="lg:hidden"> drums, and singing. </li>
-                    </ul>
-                    <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                        <a class=" w-full sm:w-64 join smaller  musora-gold  w-full my-3" href="/choose-plan">
-                            7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('musora._partials.order-section-collage')
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/devices2.png',

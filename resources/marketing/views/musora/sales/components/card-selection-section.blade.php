@@ -148,9 +148,9 @@
 
         @if(empty($month) && empty($noSelector))
             <p x-bind:class="{ 'hidden': !plusMembershipSelected }">Or choose
-                <u class="text-drumeo" x-bind:class="{ 'active': !plusMembershipSelected }" x-on:click="plusMembershipSelected = false">lessons only</u>
+                <u class="text-drumeo cursor-pointer" x-bind:class="{ 'active': !plusMembershipSelected }" x-on:click="plusMembershipSelected = false">lessons only</u>
                 to save 20%. (no songs)</p>
-            <p class="text-drumeo" x-cloak x-bind:class="{ 'hidden': plusMembershipSelected }">
+            <p class="text-drumeo cursor-pointer" x-cloak x-bind:class="{ 'hidden': plusMembershipSelected }">
                 <u x-bind:class="{ 'active': plusMembershipSelected }" x-on:click="plusMembershipSelected = true">Click here to add songs.</u></p>
         @endif
 

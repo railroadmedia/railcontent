@@ -98,13 +98,10 @@
             }
         }
 
-        .text-musora {
-            color: black;
-            -webkit-text-fill-color: black !important;
-        }
 
-        .bg-musora {
-            background:black !important;
+        .text-musora,
+        .text-musora-gold {
+            color:#FFAE00;
         }
     </style>
 @endsection
@@ -788,23 +785,7 @@
             <a href="/TODO" class="mx-1 join blue smaller font-bebas">Get started <i class="fas fa-arrow-right" style="line-height: 0;"></i> </a>
         </div>
     </section>
-
-    @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/guarantee-musora.png',
-        'header' => '<strong>Happy student guarantee.</strong><br>7-days free + <strong>90-days to fall in love.</strong>',
-        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with a <strong>7-day trial PLUS our 90-day guarantee</strong> to make sure you’re seeing results and enjoying a fresh, positive start to your musical journey.',
-    ])
-    @include('musora.sales.components.card-selection-section', [
-        "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
-        "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
-        "songs" => "Thousands of popular songs.",
-        "firstPoint" => "Learn piano, guitar, drums, & singing.",
-        "thirdPoint" => "Unlimited personal support",
-        "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
-        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-7-day-trial-membership]=1&locked=true",
-        "annualLink" => "/ecommerce/add-to-cart?products[musora-base-annual-recurring-7-day-trial-membership]=1&locked=true",
-        "monthlyLink" => "/ecommerce/add-to-cart?products[musora-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
-    ])
+    @include('musora._partials.order-section-collage')
 
 
     @include('musora.sales.components.app-section', [
