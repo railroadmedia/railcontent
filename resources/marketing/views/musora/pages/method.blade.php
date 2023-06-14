@@ -1422,6 +1422,7 @@
         </p>
         <div class="container max-w-6xl lg:ml-auto lg:mr-0 xl:mx-auto px-6 xl:px-0">
             <div class="mb-10">
+                <div id="courses" class="anchor"></div>
                 <h4 class="font-extrabold mb-4">Piano</h4>
                 @component('_partials.components.carousel',[
                     'xdata' => "

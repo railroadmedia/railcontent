@@ -1,4 +1,6 @@
-@extends('musora._partials.layout')
+@extends('musora._partials.layout', [
+    'whiteNav' => true,
+])
 
 @section('head-includes')
     <title>Musora | Musicians start here. </title>
@@ -475,7 +477,7 @@
                 @endforeach
             </div>
             @if(empty($promoVersion))
-                <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">EXPLORE THE METHOD</a>
+                <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">{{ $theme }} METHOD</a>
             @endif
             <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
@@ -688,7 +690,8 @@
 
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
     @include('musora.sales.components.coaches-section', [
-        'header' => 'Study with the world’s <br class="md:hidden"><u>best musicians.</u>',
+        'header' => 'Study with the world’s <br class="md:hidden"><u>best teachers.</u>',
+        'desc' => 'Amplify your skills with artist courses and live events.',
         'split' => true
     ])
 
@@ -776,51 +779,10 @@
     </section>
 
 
-    @php
-        $songItems = [
-            [
-                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/popular-song-icon.svg',
-                'fa-icon' => 'fa-user-music',
-                'title' => '1000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
-            ],
-            [
-                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/isolate-icon.svg',
-                'fa-icon' => 'fa-sliders-up',
-                'title' => 'Ditch the distractions',
-                'desc' => 'Isolate the piano, guitar, or drums so you always know exactly what to play.',
-            ],
-            [
-                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/loop-icon.svg',
-                'fa-icon' => 'fa-arrows-repeat',
-                'title' => 'Simplify the tricky parts',
-                'desc' => 'Learn songs faster with perfect notation, practice loops, and tempo control.',
-            ],
-            [
-                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/metronome-icon.svg',
-                'fa-icon' => 'fa-timer',
-                'title' => 'Improve your timing',
-                'desc' => 'Use built-in metronome - your new best friend to get the timing just right. ',
-            ],
-            [
-                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/notation-icon.svg',
-                'fa-icon' => 'fa-list-music',
-                'title' => 'Play it right the first time.',
-                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
-            ],
-            [
-                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/devices-icon.svg',
-                'fa-icon' => 'fa-laptop-mobile',
-                'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable,so you can play any song, any time.',
-            ],
-
-        ];
-    @endphp
     <div id="songs" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-4xl mx-auto">
-            <h2><strong>Play <u>1000+</u> popular songs.</strong></h2>
+            <h2><strong><u>1000+</u> popular songs.</strong></h2>
             <p class="leading-tight mt-2 sm:mt-3">You’ll have <strong>all the tools you need</strong> to play the songs you love.</p>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'drumeo'">
                 <div style="padding-bottom:62.4%;" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="drumeoSoundslice = true;" >
@@ -883,6 +845,47 @@
             </div>
             <div class="text-center w-full sm:w-auto mt-6 lg:mt-10 mx-auto">
                 <div class="flex flex-wrap">
+                    @php
+                        $songItems = [
+                            [
+                                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/popular-song-icon.svg',
+                                'fa-icon' => 'fa-user-music',
+                                'title' => '1000+ popular songs.',
+                                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
+                            ],
+                            [
+                                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/isolate-icon.svg',
+                                'fa-icon' => 'fa-sliders-up',
+                                'title' => 'Ditch the distractions',
+                                'desc' => 'Isolate the piano, guitar, or drums so you always know exactly what to play.',
+                            ],
+                            [
+                                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/loop-icon.svg',
+                                'fa-icon' => 'fa-arrows-repeat',
+                                'title' => 'Simplify the tricky parts',
+                                'desc' => 'Learn songs faster with perfect notation, practice loops, and tempo control.',
+                            ],
+                            [
+                                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/metronome-icon.svg',
+                                'fa-icon' => 'fa-timer',
+                                'title' => 'Improve your timing',
+                                'desc' => 'Use built-in metronome - your new best friend to get the timing just right. ',
+                            ],
+                            [
+                                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/notation-icon.svg',
+                                'fa-icon' => 'fa-list-music',
+                                'title' => 'Play it right the first time.',
+                                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
+                            ],
+                            [
+                                'icon' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/devices-icon.svg',
+                                'fa-icon' => 'fa-laptop-mobile',
+                                'title' => 'Take your songs anywhere.',
+                                'desc' => 'Accessible on any device, or printable,so you can play any song, any time.',
+                            ],
+
+                        ];
+                    @endphp
                     @foreach ($songItems as $songItem)
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
                             <div class="flex sm:inline-block">
@@ -900,7 +903,7 @@
                 </div>
             </div>
             @if(empty($promoVersion))
-                <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">SEE SONGS LIST <i class="fas fa-list-music"></i> </a>
+                <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">SEE SONGS LIST</a>
             @endif
             <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
@@ -981,14 +984,10 @@
         ]
     @endphp
     @include('musora.sales.components.testimonials-section', [
-        'header' => 'A home for <u>every</u> musician.',
+        'header' => 'Your new musical home. ',
+        'subheadline' => 'Music students everywhere are reaching their goals with Musora.<br class="hidden sm:inline"> Check out the reviews and meet some of our friendly students. ',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
-        'reviewText' => 'Don’t take it from us. Musora is trusted by ' . number_format(Prices::$students) . ' students & is rated 5-stars<br> for price, satisfaction, and customer service.',
-    ])
-    @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/guarantee-musora.png',
-        'header' => '<strong>Happy student guarantee.</strong><br>7-days free + <strong>90-days to fall in love.</strong>',
-        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with a <strong>7-day trial PLUS our 90-day guarantee</strong> to make sure you’re seeing results and enjoying a fresh, positive start to your musical journey.',
+        'reviewText' => 'Rated <strong>4.8</strong> / 5 based on 6,547 student reviews.',
     ])
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>

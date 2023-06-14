@@ -8,37 +8,18 @@
     <div class="container mx-auto max-w-6xl mb-12">
         <h2 class="leading-tight mb-4"><strong>{!! $header !!}</strong></h2>
         @if(!empty($subheadline))
-            <p class="mx-auto mb-2">{!!  $subheadline  !!}</p>
-        @endif
-        @if(!empty($testimonialFeats))
-            <div class="text-center w-full sm:w-auto mt-6 lg:mt-0 mx-auto max-w-4xl">
-                <div class="flex flex-wrap">
-                    @foreach ($testimonialFeats as $testimonialFeat)
-                        <div class="w-full sm:w-1/4 sm:px-2 lg:px-4 mb-6 lg:mt-6 lg:mb-14">
-                            <div class="flex sm:inline-block">
-                                <div class="w-14 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $testimonialFeat['icon'] }}" class="h-6 sm:h-10">
-                                </div>
-                                <div class="text-left sm:text-center">
-                                    <p class="mb-1 sm:mt-2"><strong>{!!$testimonialFeat['title']!!}</strong></p>
-                                    <p class="text-sm">{!! $testimonialFeat['desc'] !!}</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
+            <p class="mx-auto mb-6">{!!  $subheadline  !!}</p>
         @endif
 
-        <a class="inline-block @if(empty($youtube)) mb-10 sm:mb-16 @endif" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
-            <p class="mx-auto mb-2">{!!  $reviewText  !!} <u>See The Reviews »</u></p>
         <img
             alt="shopper approved image"
-            class="h-6 sm:h-8 mb-2 md:mb-0 mx-auto sm:mr-1 transition-opacity opacity-0"
+            class="h-8 sm:h-9 lg:h-11 mb-2 mx-auto transition-opacity opacity-0"
             src="https://www.musora.com/musora-cdn/image/width=320,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/shopper-approved-icon.svg"
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
         >
+        <a class="inline-block w-full @if(empty($youtube)) mb-10 sm:mb-16 @endif" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
+            <p class="mx-auto">{!!  $reviewText  !!} <span class="inline-block @if($theme != 'musora') text-{{ $theme }} @else text-drumeo @endif">See The Reviews »</span></p>
 
         </a>
         @if(!empty($youtube))
