@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Services;
 
+use App\Providers\RailcontentProvider;
 use Carbon\Carbon;
 use Railroad\Mailora\Services\MailService;
 use Railroad\Railcontent\Decorators\Decorator;
@@ -27,6 +28,7 @@ class UserPlaylistsService
     private ReportedPlaylistsRepository $reportedPlaylistsRepository;
     private ContentService $contentService;
     private MailService $mailService;
+    protected RailcontentProvider $railcontentProvider;
 
     /**
      * @param UserPlaylistsRepository $userPlaylistRepository
@@ -36,6 +38,7 @@ class UserPlaylistsService
      * @param ReportedPlaylistsRepository $reportedPlaylistsRepository
      * @param ContentService $contentService
      * @param MailService $mailService
+     * @param RailcontentProvider $railcontentProvider
      */
     public function __construct(
         UserPlaylistsRepository $userPlaylistRepository,
@@ -44,7 +47,8 @@ class UserPlaylistsService
         PlaylistLikeRepository $playlistLikeRepository,
         ReportedPlaylistsRepository $reportedPlaylistsRepository,
         ContentService $contentService,
-        MailService $mailService
+        MailService $mailService,
+        RailcontentProvider $railcontentProvider
     ) {
         $this->userPlaylistsRepository = $userPlaylistRepository;
         $this->userPlaylistContentRepository = $userPlaylistContentRepository;
@@ -53,6 +57,7 @@ class UserPlaylistsService
         $this->reportedPlaylistsRepository = $reportedPlaylistsRepository;
         $this->contentService = $contentService;
         $this->mailService = $mailService;
+        $this->railcontentProvider = $railcontentProvider;
     }
 
     /**
@@ -471,7 +476,10 @@ class UserPlaylistsService
         if ($checkPermission && $playlist['user_id'] != auth()->id() && $playlist['private'] == 1) {
             return -1;
         }
-
+        $blockedUsers = $this->railcontentProvider->getBlockedUsers();
+        if($checkPermission && in_array($playlist['user_id'], $blockedUsers)){
+            return -2;
+        }
         //        $playlist['like_count'] =
         //            $this->playlistLikeRepository->query()
         //                ->where('playlist_id', $playlistId)
@@ -833,6 +841,10 @@ class UserPlaylistsService
         }
         if ($checkPermission && $playlist['user_id'] != auth()->id() && $playlist['private'] == 1) {
             return -1;
+        }
+        $blockedUsers = $this->railcontentProvider->getBlockedUsers();
+        if($checkPermission && in_array($playlist['user_id'], $blockedUsers)){
+            return -2;
         }
         $playlist['is_liked_by_current_user'] =
             $this->playlistLikeRepository->query()

@@ -261,6 +261,10 @@ class MyListJsonController extends Controller
             ($playlist == -1),
             new NotFoundException("You don’t have access to this playlist", 'Private Playlist')
         );
+        throw_if(
+            ($playlist == -2),
+            new NotFoundException("You don’t have access to this playlist. Unblock the playlist owner to access the playlist.  ", 'Blocked Playlist')
+        );
         throw_if(!$playlist, new NotFoundException("Playlist not exists."));
 
         return reply()->json([$playlist], [
