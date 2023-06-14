@@ -57,11 +57,6 @@ class MarketingController extends BaseController
         return view('musora.pages.recitals');
     }
 
-    public function playlists()
-    {
-        return view('musora.pages.playlists', [ 'theme' => 'musora', ]);
-    }
-
     public function giftcard()
     {
         return view('musora.pages.gift-card');
