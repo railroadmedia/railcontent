@@ -279,7 +279,7 @@ class MyListJsonController extends Controller
      */
     public function copyPlaylist(Request $request)
     {
-        $playlist = $this->userPlaylistsService->getPlaylist($request->get('playlist_id'));
+        $playlist = $this->userPlaylistsService->getPlaylist($request->get('playlist_id'), false);
         throw_if(!$playlist, new NotFoundException('Playlist not exists.'));
 
         $playlist = $this->userPlaylistsService->create([
