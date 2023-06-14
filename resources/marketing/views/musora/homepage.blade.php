@@ -45,14 +45,6 @@
             box-shadow:0 0 7px rgba(0, 0, 0, 0.35);
         }
 
-        .join.green {
-            background:#10d05f;
-        }
-
-        .join.green:hover, .join.green:focus {
-            background:#25ee78;
-        }
-
         .join.white {
             background:#fff;
             color:#000;
@@ -60,14 +52,6 @@
 
         .join.white:hover, .join.white:focus {
             background:#eee;
-        }
-
-        .join.sold-out {
-            background:#777;
-        }
-
-        .join.sold-out:hover, .join.sold-out:focus {
-            background:#919191;
         }
 
         .join.smaller {
@@ -103,25 +87,6 @@
             background:#FFAE00;
             color:#000;
         }
-        .join.coaches {
-            background-color:#fe9f13;
-            color:#000;
-        }
-
-        .join.coaches:hover, .join.coaches:focus {
-            background:#feb446;
-            color:#000;
-        }
-
-        .join.promo {
-            background:#ffac00;
-            color:#000;
-        }
-
-        .join.promo:hover, .join.promo:focus {
-            background:#ffbd33;
-            color:#000;
-        }
 
         .join.outline {
             background:transparent;
@@ -143,78 +108,23 @@
             color:#000;
         }
 
-        .join.outline.light-navy {
-            border-color:#a1afc9;
-            color:#a1afc9;
-        }
-
-        .join.outline.light-navy:hover, .join.outline.light-navy:focus {
-            background:#a1afc9;
-            color:#000;
-        }
-
-        .join.outline.method, .join.outline.pianote {
-            border-color:#f61a30;
-            color:#f61a30;
-        }
-
-        .join.outline.method:hover, .join.outline.pianote:hover, .join.outline.method:focus, .join.outline.pianote:focus {
-            background:#f61a30;
-            color:#fff;
-        }
-
-        .join.outline.songs {
-            border-color:#17d1fa;
-            color:#17d1fa;
-        }
-
-        .join.outline.songs:hover, .join.outline.songs:focus {
-            background:#17d1fa;
-            color:#fff;
-        }
-
-        .join.outline.coaches {
-            border-color:#fe9f13;
-            color:#fe9f13;
-        }
-
-        .join.outline.coaches:hover, .join.outline.coaches:focus {
-            background:#fe9f13;
-            color:#fff;
-        }
-
-        .join.outline.promo {
-            border-color:#ffac00;
-            color:#ffac00;
-        }
-
-        .join.outline.promo:hover, .join.outline.promo:focus {
-            background:#ffac00;
-            color:#fff;
-        }
-
-        .text-musora {
+        .join.outline.musora {
+            border-color:#0c1524;
             color:#0c1524;
-            -webkit-text-fill-color:#0c1524 !important;
         }
 
+        .join.outline.musora:hover, .join.outline.musora:focus {
+            background:#0c1524;
+            color:#fff;
+        }
+
+        .text-musora-black {
+            color:#0c1524;
+        }
+
+        .text-musora,
         .text-musora-gold {
             color:#FFAE00;
-        }
-
-        .bg-musora {
-            background:#0c1524 !important;
-        }
-
-        .border-musora {
-            border-color:#0c1524 !important;
-        }
-        .border-musora-gold {
-            border-color:#FFAE00 !important;
-        }
-
-        .border-musora::before {
-            content:none !important;
         }
     </style>
     <style>
@@ -403,7 +313,8 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
-            <img class="text-center mx-auto sm:mb-10 h-14 sm:h-20 lg:h-24" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play.png">
+            <img class="text-center mx-auto sm:h-20 lg:h-24 mb-10 hidden sm:inline-block" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play.png">
+            <img class="text-center mx-auto h-24 inline-block sm:hidden" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play-m.png">
             <img class="my-5 h-64 inline sm:hidden"
                 src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/intro-collage3.png"
                 alt="learn playing image"
@@ -434,7 +345,7 @@
     <div id="method" class="anchor"></div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-5xl mx-auto">
-            <h2 class="leading-tight"><strong><span class="border-2 border-musora-gold rounded-full px-3 sm:px-4 py-1 inline-block">6</span> reasons why you’ll <br class="inline sm:hidden">love learning here.</strong></h2>
+            <h2 class="leading-tight"><strong><span class="border-2 border-musora rounded-full px-3 sm:px-4 py-1 inline-block">6</span> reasons why you’ll <br class="inline sm:hidden">love learning here.</strong></h2>
             <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">Level up your skills with the lessons, teachers, and<br class="hidden sm:inline lg:hidden">  practice tools <strong class="font-black">trusted by <span class="text-musora-gold">{{ number_format(Prices::$students) }}</span> active students</strong>. </p>
             <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 hidden sm:flex">
 
@@ -533,7 +444,7 @@
                 @endforeach
             </div>
             @if(empty($promoVersion))
-                <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">{{ $theme }} METHOD</a>
+                <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }} smaller">{{ $theme }} METHOD</a>
             @endif
             <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }}-gold smaller @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
@@ -814,7 +725,7 @@
                 <img class="h-24 mb-4 transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=190,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guarantee-musora-line.png" alt="bonus icon">
-                <h5><strong><i class="fas fa-star text-musora-gold"></i> BETTER PRACTICE GUARANTEE <i class="fas fa-star text-musora-gold"></i></strong></h5>
+                <h5><strong><i class="fas fa-star text-musora"></i> BETTER PRACTICE GUARANTEE <i class="fas fa-star text-musora"></i></strong></h5>
                 <p class="max-w-sm mx-auto leading-normal mt-3">You’ll get 7 days free PLUS a 90-day guarantee<br> to make sure you love your improvements!</p>
             </div>
             <a class="sm:mx-1 w-full sm:w-64 join musora-gold smaller @if(!empty($promoVersion)) anchor-slide @endif"
@@ -938,7 +849,7 @@
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <i class="fal {!! $songItem['fa-icon'] !!} text-4xl text-musora"></i>
+                                    <i class="fal {!! $songItem['fa-icon'] !!} text-4xl text-musora-black"></i>
 {{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
@@ -951,7 +862,7 @@
                 </div>
             </div>
             @if(empty($promoVersion))
-                <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">SEE SONGS LIST</a>
+                <a href="/songs" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }} smaller">SEE SONGS LIST</a>
             @endif
             <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }}-gold smaller @if(!empty($promoVersion)) anchor-slide @endif"
                 @if(!empty($promoVersion))
@@ -1041,18 +952,35 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
+    <section class="py-14 sm:pt-0 sm:pb-20 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative overflow-hidden" style="background: #0c1524;">
+        <div class="container mx-auto max-w-6xl sm:mb-16">
+            <div class="flex flex-wrap items-center">
+                <div class="flex w-full justify-center sm:justify-start sm:w-1/2 sm:order-1 sm:pl-5 lg:pl-10 mb-7 sm:mb-0">
+                    <picture>
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team.png">
+                        <img class="max-w-xl sm:max-w-2xl lg:max-w-4xl transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team.png" alt="musora collage image">
+                    </picture>
+                </div>
+                <div class="text-center sm:text-left w-full sm:w-1/2 sm:pl-5">
+                    <img class="h-6 mb-8" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png">
+                    <h6 class="uppercase  text-musora-gold  "><strong>YOUR FIRST  7 Days  ARE FREE.</strong></h6>
+                    <h3 class="leading-normal"><strong>Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.</strong></h3>
+                    <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
 
-    @include('musora.sales.components.order-section-collage', [
-    'bgColor' => '#0c1524',
-    'logo' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png',
-    'header' => 'Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.',
-    'list' => '
-                <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold"></i> Trusted by ' . number_format(Prices::$students) . ' happy students.</li>
-                <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold"></i> Online lessons on every topic.</li>
-                <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold"></i> Personalized feedback from real teachers.</li>
-                <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold"></i> Includes access to Musora’s lessons for piano, guitar, and voice. </li>',
-    'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-spread.png',
-    ])
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold" aria-hidden="true"></i> Trusted by {{ number_format(Prices::$students) }} happy students.</li>
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold" aria-hidden="true"></i> Online lessons on every topic.</li>
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold" aria-hidden="true"></i> Personalized feedback from real teachers.</li>
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold" aria-hidden="true"></i> Includes access to Musora’s lessons for piano, guitar, and voice. </li>
+                    </ul>
+                    <div class="w-72 lg:w-96 mx-auto sm:mx-0">
+                        <a class=" w-full sm:w-64 join smaller  musora-gold  w-full my-3" href="/choose-plan">
+                            7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/devices2.png',

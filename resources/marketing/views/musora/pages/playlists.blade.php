@@ -120,29 +120,10 @@
             color:#000;
         }
 
-        .text-musora {
-            color:#0c1524;
-            -webkit-text-fill-color:#0c1524 !important;
-        }
-
         .text-musora-gold {
             color:#FFAE00;
         }
 
-        .bg-musora-gold {
-            background:#FFAE00 !important;
-        }
-        .bg-musora {
-            background:#0c1524 !important;
-        }
-
-        .border-musora {
-            border-color:#0c1524 !important;
-        }
-
-        .border-musora::before {
-            content:none !important;
-        }
     </style>
 @endsection
 
@@ -264,7 +245,7 @@
                             <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9">
                                 <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="workout {{ $key+1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                             </div>
-                            <div class="dot hidden sm:block absolute bg-musora-gold top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px;height:20px"></div>
+                            <div class="dot hidden sm:block absolute bg-musora top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px;height:20px"></div>
                         </div>
                     @else
                         <div class="relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if($key !== 2) mb-16 md:mb-28 @endif">
@@ -275,11 +256,11 @@
                                 <h5 class="mb-2 md:mb-4 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h5>
                                 <p>{{ $getting['desc'] }}</p>
                             </div>
-                            <div class="dot hidden sm:block absolute bg-musora-gold top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px;height:20px"></div>
+                            <div class="dot hidden sm:block absolute bg-musora top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px;height:20px"></div>
                         </div>
                     @endif
                 @endforeach
-                <div class="full-line hidden sm:block absolute bg-musora-gold top-0 z-0 transform -translate-x-1/2" style="width: 2px;"></div>
+                <div class="full-line hidden sm:block absolute bg-musora top-0 z-0 transform -translate-x-1/2" style="width: 2px;"></div>
             </div>
             <div class="text-center sm:text-left sm:text-center">
                 <img class="h-12 mt-4 mb-2 transition-opacity opacity-0"
