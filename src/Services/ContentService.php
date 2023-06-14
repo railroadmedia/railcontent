@@ -8,6 +8,7 @@ use Illuminate\Database\Query\JoinClause;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Railroad\Railcontent\Decorators\Decorator;
+use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Events\ContentCreated;
@@ -1214,7 +1215,7 @@ class ContentService
                                                    'status' => $status ?? self::STATUS_DRAFT,
                                                    'language' => $language ?? ConfigService::$defaultLanguage,
                                                    'brand' => $brand ?? ConfigService::$brand,
-//                                                   'instrumentless' => ($type === 'song') ? false : null,
+                                                   //                                                   'instrumentless' => ($type === 'song') ? false : null,
                                                    'total_xp' => $this->getDefaultXP($type, 0),
                                                    'user_id' => $userId,
                                                    'published_on' => $publishedOn,
@@ -2112,14 +2113,12 @@ class ContentService
     public function getNextContentForParentContentForUser($parentContentId, $userId)
     {
         $isParentComplete =
-            RepositoryBase::$connectionMask
-                ->table('railcontent_user_content_progress')
+            RepositoryBase::$connectionMask->table('railcontent_user_content_progress')
                 ->where(['content_id' => $parentContentId, 'user_id' => $userId, 'state' => 'complete'])
                 ->exists();
 
         $contentHierarchyDataQuery =
-            RepositoryBase::$connectionMask
-                ->table('railcontent_content_hierarchy AS ch_1')
+            RepositoryBase::$connectionMask->table('railcontent_content_hierarchy AS ch_1')
                 ->leftJoin('railcontent_content_hierarchy AS ch_2', 'ch_2.parent_id', '=', 'ch_1.child_id')
                 ->leftJoin('railcontent_content_hierarchy AS ch_3', 'ch_3.parent_id', '=', 'ch_2.child_id')
                 ->leftJoin('railcontent_content_hierarchy AS ch_4', 'ch_4.parent_id', '=', 'ch_3.child_id')
@@ -2282,24 +2281,21 @@ class ContentService
          * coach_focus_text
          */
         $contentRowsById =
-            RepositoryBase::$connectionMask
-                ->table('railcontent_content')
+            RepositoryBase::$connectionMask->table('railcontent_content')
                 ->whereIn('id', $contentIds)
                 ->get()
                 ->keyBy('id');
 
         // content fields are the source of truth at the moment but that will change eventually
         $contentsFieldRows =
-            RepositoryBase::$connectionMask
-                ->table('railcontent_content_fields')
+            RepositoryBase::$connectionMask->table('railcontent_content_fields')
                 ->whereIn('content_id', $contentIds)
                 ->get();
 
         $contentsFieldRowsByContentId = $contentsFieldRows->groupBy('content_id');
 
         $contentsDataRowsByContentId =
-            RepositoryBase::$connectionMask
-                ->table('railcontent_content_data')
+            RepositoryBase::$connectionMask->table('railcontent_content_data')
                 ->whereIn('content_id', $contentIds)
                 ->get()
                 ->groupBy('content_id');
@@ -2316,22 +2312,19 @@ class ContentService
 
         if (!empty($linkedContentIds)) {
             $contentsFieldLinkedContentRowsById =
-                RepositoryBase::$connectionMask
-                    ->table('railcontent_content')
+                RepositoryBase::$connectionMask->table('railcontent_content')
                     ->whereIn('id', $linkedContentIds)
                     ->get()
                     ->keyBy('id');
 
             $contentsFieldLinkedContentsFieldRowsById =
-                RepositoryBase::$connectionMask
-                    ->table('railcontent_content_fields')
+                RepositoryBase::$connectionMask->table('railcontent_content_fields')
                     ->whereIn('content_id', $linkedContentIds)
                     ->get()
                     ->groupBy('content_id');
 
             $contentsFieldLinkedContentsDataRowsById =
-                RepositoryBase::$connectionMask
-                    ->table('railcontent_content_data')
+                RepositoryBase::$connectionMask->table('railcontent_content_data')
                     ->whereIn('content_id', $linkedContentIds)
                     ->get()
                     ->groupBy('content_id');
@@ -2475,7 +2468,7 @@ class ContentService
                     continue;
                 }
 
-               if(!isset($compiledData[$key])) {
+                if (!isset($compiledData[$key])) {
                     $compiledData[$key] = $row['value'];
                 } elseif (isset($compiledData[$key]) && !is_array($compiledData[$key])) {
                     $existingValue = $compiledData[$key];
@@ -2485,7 +2478,8 @@ class ContentService
                 }
 
                 // remove dupes
-                if (is_array($compiledData[$key]) && (!in_array($key, config('railcontent.compiled_columns_that_should_allow_dups', [])))) {
+                if (is_array($compiledData[$key]) &&
+                    (!in_array($key, config('railcontent.compiled_columns_that_should_allow_dups', [])))) {
                     $compiledData[$key] = array_unique($compiledData[$key]);
                 }
 
@@ -2569,9 +2563,9 @@ class ContentService
         ContentRepository::$pullFutureContent = $oldFutureContent;
 
         $results = new ContentFilterResultsEntity([
-                                                  'results' => $scheduleEvents,
-                                                  'total_results' => $countEvents,
-                                              ]);
+                                                      'results' => $scheduleEvents,
+                                                      'total_results' => $countEvents,
+                                                  ]);
 
         return Decorator::decorate($results, 'content');
     }
@@ -2614,19 +2608,18 @@ class ContentService
             'content'
         );
         $countEvents = $this->contentRepository->countByTypeInAndStatusInAndPublishedOn($types,
-                                                                                        [ContentService::STATUS_SCHEDULED],
-                                                                                        Carbon::now()
+            [ContentService::STATUS_SCHEDULED],
+            Carbon::now()
                                                                                             ->toDateTimeString(),
-                                                                                        '>',
-                                                                                        'published_on',
-                                                                                        'asc',
-                                                                                        []);
+            '>',
+            'published_on',
+            'asc',
+            []);
 
         return new ContentFilterResultsEntity([
                                                   'results' => $scheduleEvents,
                                                   'total_results' => $countEvents,
                                               ]);
-
     }
 
     /**
@@ -2758,5 +2751,96 @@ class ContentService
         }
 
         return null;
+    }
+
+   /**
+     * @param $contentId
+     * @return array
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function countLessonsAndAssignments($contentId)
+    {
+        $singularContentTypes = array_merge(
+            config('railcontent.showTypes')[config('railcontent.brand')] ?? [],
+            config('railcontent.singularContentTypes')
+        );
+        $results = [];
+        $lessons = [];
+
+        $content = $this->getById($contentId);
+        if (!$content) {
+            return $results;
+        }
+        if (in_array($content['type'], $singularContentTypes)) {
+            $soundsliceAssingment = 0;
+            $assign = [];
+            $assignments = $this->contentRepository->getByParentId($content['id']);
+            foreach ($assignments as $assignment) {
+                if (isset($assignment['soundslice_slug'])) {
+                    $soundsliceAssingment++;
+                    $assign[] = $assignment;
+                }
+            }
+            $results['soundslice_assignments_count'] = $soundsliceAssingment;
+            $results['soundslice_assignments'][$content['id']] = $assign;
+            if ($content['type'] == 'song') {
+                if ($content['instrumentless']) {
+                    $results['song_instrumentless_assignment'] = $assign;
+                    $results['soundslice_assignments_count'] = 2;
+                }
+                $results['song_full_assignment'] = $assign;
+            }
+        } elseif (in_array(
+            $content['type'],
+            config('railcontent.content_multiple_level_content_depth_playlist_allowed', [])
+        ) || (in_array($content['brand'] ,['singeo', 'guitareo']) && $content['type'] == 'learning-path-level')) {
+            ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+            $lessons = $this->getByParentId($content['id']);
+            $soundsliceAssingment = 0;
+            $assign = [];
+            $lessonsCount = 0;
+
+            foreach ($lessons as $lesson) {
+                $assignments = $this->getByParentIdWhereTypeIn($lesson['id'], ['assignment']);
+                foreach ($assignments ?? [] as $assignment) {
+                    if ($assignment->fetch('soundslice_slug')) {
+                        $soundsliceAssingment++;
+                        $assign[$lesson['id']][] = $assignment;
+                    }
+                }
+                $lessonsCount++;
+            }
+
+            $results['lessons_count'] = $lessonsCount;
+            $results['lessons'] = $lessons;
+            $results['soundslice_assignments_count'] = $soundsliceAssingment;
+            $results['soundslice_assignments'] = $assign;
+        } elseif (in_array($content['type'], ['pack'])) {
+            $soundsliceAssingment = 0;
+            $assign = [];
+            $lessonsCount = 0;
+            $allLessons = [];
+            $bundles = $this->contentRepository->getByParentId($content['id']);
+            foreach ($bundles as $bundle) {
+                $lessons = $this->contentRepository->getByParentId($bundle['id']);
+                foreach ($lessons as $lesson) {
+                    $lessonsCount++;
+                    array_push($allLessons, $lesson);
+                    $assignments = $this->contentRepository->getByParentId($lesson['id']);
+                    foreach ($assignments ?? [] as $lessonAssignment) {
+                        if (isset($lessonAssignment['soundslice_slug'])) {
+                            $soundsliceAssingment++;
+                            $assign[$lesson['id']][] = $lessonAssignment;
+                        }
+                    }
+                }
+            }
+            $results['lessons_count'] = $lessonsCount;
+            $results['lessons'] = $allLessons;
+            $results['soundslice_assignments_count'] = $soundsliceAssingment;
+            $results['soundslice_assignments'] = $assign;
+        }
+
+        return $results;
     }
 }

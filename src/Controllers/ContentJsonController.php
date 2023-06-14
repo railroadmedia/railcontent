@@ -516,4 +516,14 @@ class ContentJsonController extends Controller
 
         return (new ContentFilterResultsEntity(['results' => $results]))->toJsonResponse();
     }
+
+    /**
+     * @param $contentId
+     * @return array
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function countLessonsAndAssignments($contentId)
+    {
+        return $this->contentService->countLessonsAndAssignments($contentId);
+    }
 }

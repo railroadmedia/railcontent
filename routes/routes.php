@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Railroad\Railcontent\Controllers\MyListJsonController;
 
 Route::group(
     [
@@ -203,6 +204,30 @@ Route::group(
                     '/request-song',
                     Railroad\Railcontent\Controllers\RequestedSongsJsonController::class . '@requestSong'
                 )->name('request.song');
+
+                /**
+                 * Playlists v2 Routes
+                 */
+                Route::post('/playlist', MyListJsonController::class . '@createPlaylist')->name('create.playlist');
+                Route::get('/playlists', MyListJsonController::class . '@getUserPlaylists')->name('user.playlists');
+                Route::get('/playlist', MyListJsonController::class . '@getPlaylist')->name('show.playlist');
+                Route::put('/copy-playlist', MyListJsonController::class . '@copyPlaylist')->name('copy.playlist');
+                Route::patch('/playlist/{id}', MyListJsonController::class . '@updatePlaylist')->name('update.playlist');
+                Route::get('/public-playlists', MyListJsonController::class . '@getPublicPlaylists')->name('public.playlists');
+                Route::put('/add-item-to-list', MyListJsonController::class . '@addItemToPlaylist')->name('add.item.to.playlist');
+                Route::put('/pin-playlist',MyListJsonController::class . '@pinPlaylist')->name('pin.playlist');
+                Route::get('/my-pinned-playlists', MyListJsonController::class . '@getPinnedPlaylists')->name('my.pinned.playlists');
+                Route::put('/unpin-playlist',MyListJsonController::class . '@unpinPlaylist')->name('unpin.playlist');
+                Route::put('/like-playlist', MyListJsonController::class . '@likePlaylist')->name('like.playlist');
+                Route::delete('/like-playlist',MyListJsonController::class . '@deletePlaylistLike')->name('delete.playlist.like');
+                Route::get('/liked-playlists', MyListJsonController::class . '@getLikedPlaylists')->name('user.liked.playlists');
+                Route::get('/playlist-lessons', MyListJsonController::class . '@getPlaylistLessons')->name('playlist.items');
+                Route::put('/change-playlist-content', MyListJsonController::class . '@changePlaylistContent')->name('update.playlist.item');
+                Route::get('/lessons-and-assignments-count/{contentId}', \Railroad\Railcontent\Controllers\ContentJsonController::class . '@countLessonsAndAssignments')->name('content.assignments.count');
+                Route::delete('/playlist',MyListJsonController::class . '@deletePlaylist')->name('delete.playlist');
+                Route::get('/search-playlist',MyListJsonController::class . '@searchPlaylist')->name('search.playlist');
+                Route::delete('/remove-item-from-list', MyListJsonController::class . '@removeItemFromPlaylist')->name('remove.playlist.item');
+                Route::post('/upload-playlist-thumb',MyListJsonController::class . '@uploadPlaylistThumbnail');
             }
         );
 

@@ -229,9 +229,12 @@ class ContentTransformer
                         $content[$row['id']]['parent_id'] = $row['parent_id'];
                         $content[$row['id']]['position'] = $row['child_position'] ?? null;
                     }
-
-
                 }
+
+                $content[$row['id']]['start_second'] = $row['start_second'] ?? null;
+                $content[$row['id']]['end_second'] = $row['end_second'] ?? null;
+                $content[$row['id']]['user_playlist_item_id'] = $row['user_playlist_item_id'] ?? null;
+                $content[$row['id']]['user_playlist_item_position'] = $row['user_playlist_item_position'] ?? null;
             }
             $results = array_values($content);
         }

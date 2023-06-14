@@ -2,35 +2,31 @@
 
 namespace Railroad\Railcontent\Repositories;
 
-use Railroad\Railcontent\Helpers\ContentHelper;
-use Railroad\Railcontent\Transformers\ContentTransformer;
-use Railroad\Railcontent\Repositories\ContentRepository;
+use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Arr;
+use Railroad\Railcontent\Transformers\ContentCompiledColumnTransformer;
+use Railroad\Railcontent\Transformers\PlaylistItemTransformer;
 
 class UserPlaylistContentRepository extends RepositoryBase
 {
-    /**
-     * @var ContentDatumRepository
-     */
-    private $datumRepository;
-    /**
-     * @var ContentInstructorRepository
-     */
-    private $contentInstructorRepository;
+
+    private ContentCompiledColumnTransformer $contentCompiledColumnTransformer;
 
     /**
-     * @param ContentDatumRepository $datumRepository
-     * @param ContentInstructorRepository $contentInstructorRepository
+     * @param ContentCompiledColumnTransformer $contentCompiledColumnTransformer
      */
     public function __construct(
-        ContentDatumRepository $datumRepository,
-        ContentInstructorRepository $contentInstructorRepository
+        ContentCompiledColumnTransformer $contentCompiledColumnTransformer
     ) {
         parent::__construct();
 
-        $this->datumRepository = $datumRepository;
-        $this->contentInstructorRepository = $contentInstructorRepository;
+        $this->contentCompiledColumnTransformer = $contentCompiledColumnTransformer;
     }
 
+    /**
+     * @return \Illuminate\Database\Query\Builder
+     */
     public function query()
     {
         return $this->connection()
@@ -42,14 +38,30 @@ class UserPlaylistContentRepository extends RepositoryBase
      * @param array $contentType
      * @param null $limit
      * @param int $page
+     * @param string $sort
      * @return mixed
      * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
-    public function getUserPlaylistContents($playlistId, $contentType = [], $limit = null, $page = 1)
-    {
+    public function getUserPlaylistContents(
+        $playlistId,
+        $contentType = [],
+        $limit = null,
+        $page = 1,
+        $sort = "position"
+    ) {
         $query =
             $this->query()
-                ->select(config('railcontent.table_prefix').'content.*')
+                ->select(
+                    config('railcontent.table_prefix').'content.*',
+                    config('railcontent.table_prefix').'user_playlist_content.start_second',
+                    config('railcontent.table_prefix').'user_playlist_content.end_second',
+                    config('railcontent.table_prefix').'user_playlist_content.position as user_playlist_item_position',
+                    config('railcontent.table_prefix').'user_playlist_content.id as user_playlist_item_id',
+                    config('railcontent.table_prefix').
+                    'user_playlist_content.user_playlist_id as user_playlist_id',
+                    config('railcontent.table_prefix').
+                    'user_playlist_content.extra_data as user_playlist_item_extra_data'
+                )
                 ->join(
                     config('railcontent.table_prefix').'content',
                     config('railcontent.table_prefix').'user_playlist_content.content_id',
@@ -62,7 +74,21 @@ class UserPlaylistContentRepository extends RepositoryBase
         }
 
         if (is_array(ContentRepository::$availableContentStatues)) {
-            $query->whereIn(config('railcontent.table_prefix').'content.status',  ContentRepository::$availableContentStatues);
+            $query->whereIn(
+                config('railcontent.table_prefix').'content.status',
+                ContentRepository::$availableContentStatues
+            );
+        }
+
+
+
+        $orderByColumn = trim($sort, '-');
+        if ($orderByColumn == 'random') {
+            $query = $query->inRandomOrder();
+            $limit = null;
+
+        } else {
+            $query = $query->orderBy(config('railcontent.table_prefix').'user_playlist_content.position', 'asc');
         }
 
         if ($limit) {
@@ -71,13 +97,16 @@ class UserPlaylistContentRepository extends RepositoryBase
         }
 
         $contentRows =
-            $query->orderBy(config('railcontent.table_prefix').'user_playlist_content.id', 'desc')
-                ->get()
+            $query->get()
                 ->toArray();
+        if (!empty($contentRows)) {
+            return $this->contentCompiledColumnTransformer->transform(Arr::wrap($contentRows)) ?? [];
+        }
 
         $extraData = $this->geExtraDataInOldStyle(['data', 'instructor', 'video'], $contentRows);
 
-        $parser = $this->setPresenter(ContentTransformer::class);
+        $parser = $this->setPresenter(PlaylistItemTransformer::class);
+
         $parser->presenter->addParam($extraData);
 
         return $this->parserResult($contentRows);
@@ -103,7 +132,10 @@ class UserPlaylistContentRepository extends RepositoryBase
             $query->whereIn(config('railcontent.table_prefix').'content.type', $contentType);
         }
         if (is_array(ContentRepository::$availableContentStatues)) {
-            $query->whereIn(config('railcontent.table_prefix').'content.status',  ContentRepository::$availableContentStatues);
+            $query->whereIn(
+                config('railcontent.table_prefix').'content.status',
+                ContentRepository::$availableContentStatues
+            );
         }
 
         return $query->count();
@@ -129,19 +161,21 @@ class UserPlaylistContentRepository extends RepositoryBase
      *    content_id_2 => true/false,
      *    etc...
      * ]
-     * @param  array  $contentIds
+     *
+     * @param array $contentIds
      * @param $playlistId
      * @return array
      */
     public function areContentIdsInPlaylist(array $contentIds, $playlistId)
     {
-        $playlistContentIdLinkRows = $this->query()
-            ->select(['content_id'])
-            ->where('user_playlist_id', $playlistId)
-            ->whereIn('content_id', $contentIds)
-            ->get()
-            ->pluck('content_id')
-            ->toArray();
+        $playlistContentIdLinkRows =
+            $this->query()
+                ->select(['content_id'])
+                ->where('user_playlist_id', $playlistId)
+                ->whereIn('content_id', $contentIds)
+                ->get()
+                ->pluck('content_id')
+                ->toArray();
 
         $contentIdsInPlaylistBooleans = [];
 
@@ -150,5 +184,272 @@ class UserPlaylistContentRepository extends RepositoryBase
         }
 
         return $contentIdsInPlaylistBooleans;
+    }
+
+    /**
+     * @param $playlistId
+     * @return array|mixed[]
+     */
+    public function getByPlaylistId($playlistId)
+    {
+        return $this->query()
+            ->where('user_playlist_id', $playlistId)
+            ->get()
+            ->toArray();
+    }
+
+    /**
+     * @param null $dataId
+     * @param $data
+     * @return bool|int
+     */
+    public function createOrUpdatePlaylistContentAndReposition($dataId = null, $data)
+    {
+        $existingData =
+            $this->query()
+                ->where('id', $dataId)
+                ->get()
+                ->first();
+
+        $userPlaylistId = $existingData['user_playlist_id'] ?? $data['user_playlist_id'];
+
+        $dataCount =
+            $this->query()
+                ->where([
+                            'user_playlist_id' => $userPlaylistId,
+                        ])
+                ->count();
+
+        $data['position'] = $this->recalculatePosition(
+            $data['position'] ?? $existingData['position'] ?? null,
+            $dataCount,
+            $existingData
+        );
+
+        if (empty($existingData)) {
+            $this->incrementOtherPlaylistItemsPosition(
+                null,
+                $userPlaylistId,
+                $data['position'],
+                null
+            );
+
+            return $this->query()
+                ->insertGetId($data);
+        } elseif ($data['position'] > $existingData['position']) {
+            $this->query()
+                ->where('id', $dataId)
+                ->update($data);
+
+            return $this->decrementOtherPlaylistItemsPosition(
+                $dataId,
+                $userPlaylistId,
+                $existingData['position'],
+                $data['position']
+            );
+        } elseif ($data['position'] < $existingData['position']) {
+            $updated =
+                $this->query()
+                    ->where('id', $dataId)
+                    ->update($data);
+
+            $this->incrementOtherPlaylistItemsPosition(
+                $dataId,
+                $userPlaylistId,
+                $data['position'],
+                $existingData['position']
+            );
+
+            return $updated;
+        } else {
+            return $this->query()
+                ->where('id', $dataId)
+                ->update($data);
+        }
+    }
+
+    /**
+     * @param null $excludedEntityId
+     * @param $playlistId
+     * @param $startPosition
+     * @param null $endPosition
+     * @return bool
+     */
+    private function incrementOtherPlaylistItemsPosition(
+        $excludedEntityId = null,
+        $playlistId,
+        $startPosition,
+        $endPosition = null
+    ) {
+        $query =
+            $this->query()
+                ->where('user_playlist_id', $playlistId)
+                ->where('position', '>=', $startPosition);
+
+        if ($excludedEntityId) {
+            $query->where('id', '!=', $excludedEntityId);
+        }
+
+        if ($endPosition) {
+            $query->where('position', '<', $endPosition);
+        }
+
+        return $query->increment('position') > 0;
+    }
+
+    /**
+     * @param $excludedEntityId
+     * @param $playlistId
+     * @param $startPosition
+     * @param $endPosition
+     * @return bool
+     */
+    private function decrementOtherPlaylistItemsPosition(
+        $excludedEntityId,
+        $playlistId,
+        $startPosition,
+        $endPosition
+    ) {
+        return $this->query()
+                ->where('user_playlist_id', $playlistId)
+                ->where('id', '!=', $excludedEntityId)
+                ->where('position', '>', $startPosition)
+                ->where('position', '<=', $endPosition)
+                ->decrement('position') > 0;
+    }
+
+    /**
+     * @param $entity
+     * @param string $positionColumnPrefix
+     * @return bool
+     */
+    public function deletePlaylistItemAndReposition($entity, $positionColumnPrefix = '')
+    {
+        $existingLink =
+            $this->query()
+                ->where($entity)
+                ->first();
+
+        if (empty($existingLink)) {
+            return true;
+        }
+
+        $query =
+            $this->query()
+                ->where('user_playlist_id', $existingLink['user_playlist_id'])
+                ->where(
+            $positionColumnPrefix.'position',
+            '>',
+            $existingLink[$positionColumnPrefix."position"]
+        )->decrement($positionColumnPrefix.'position');
+
+        $deleted =
+            $this->query()
+                ->where(['id' => $existingLink['id']])
+                ->delete();
+
+        return $deleted > 0;
+    }
+
+    /**
+     * @param $playlistId
+     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
+     */
+    public function getFirstContentByPlaylistId($playlistId)
+    {
+        return $this->query()
+            ->where('user_playlist_id', $playlistId)
+            ->orderBy('position', 'asc')
+            ->first();
+    }
+
+    /**
+     * @param $playlistId
+     * @return array|mixed[]
+     */
+    public function getItemWithPositionInPlaylist($playlistId, $position)
+    {
+        return $this->query()
+            ->where('user_playlist_id', $playlistId)
+            ->where('position', $position)
+            ->first();
+    }
+
+    /**
+     * @param $playlistId
+     * @param array $contentType
+     * @return int
+     */
+    public function countCompletedUserPlaylistContents($playlistIds)
+    {
+        $query =
+            $this->query()->selectRaw('user_playlist_id, count(*) as completed_items')
+                ->join(
+                    config('railcontent.table_prefix').'user_content_progress',
+                    config('railcontent.table_prefix').'user_playlist_content.content_id',
+                    '=',
+                    config('railcontent.table_prefix').'user_content_progress.content_id'
+                )
+                ->whereIn('user_playlist_id', $playlistIds)
+                ->where('user_id', '=', auth()->id())
+                ->where('state', 'LIKE','completed')
+        ->groupBy('user_playlist_id');
+
+        $results = $query->get()->toArray();
+
+        return array_combine(array_column($results, 'user_playlist_id'), array_column($results, 'completed_items'));
+    }
+
+    /**
+     * @param $playlistId
+     * @param array $contentType
+     * @return int
+     */
+    public function countStartedUserPlaylistContents($playlistIds)
+    {
+        $query =
+            $this->query()->selectRaw('user_playlist_id, count(*) as completed_items')
+                ->join(
+                    config('railcontent.table_prefix').'user_content_progress',
+                    config('railcontent.table_prefix').'user_playlist_content.content_id',
+                    '=',
+                    config('railcontent.table_prefix').'user_content_progress.content_id'
+                )
+                ->whereIn('user_playlist_id', $playlistIds)
+                ->where('user_id', '=', auth()->id())
+                ->where('state', 'LIKE','started')
+                ->groupBy('user_playlist_id');
+
+        $results = $query->get()->toArray();
+
+        return array_combine(array_column($results, 'user_playlist_id'), array_column($results, 'completed_items'));
+    }
+
+    /**
+     * @param $playlistIds
+     * @return int
+     */
+    public function countUserPlaylistItems($playlistIds)
+    {
+        $query =
+            $this->query()->selectRaw('user_playlist_id, count(*) as items')
+                ->join(
+                    config('railcontent.table_prefix').'content',
+                    config('railcontent.table_prefix').'user_playlist_content.content_id',
+                    '=',
+                    config('railcontent.table_prefix').'content.id'
+                )
+                ->whereIn('user_playlist_id', $playlistIds);
+
+        if (is_array(ContentRepository::$availableContentStatues)) {
+            $query->whereIn(
+                config('railcontent.table_prefix').'content.status',
+                ContentRepository::$availableContentStatues
+            );
+        }
+
+        $results = $query->groupBy('user_playlist_id')->get()->toArray();
+
+        return array_combine(array_column($results, 'user_playlist_id'), array_column($results, 'items'));
     }
 }

@@ -28,6 +28,7 @@ use Railroad\Railcontent\Commands\MigrateContentToElasticsearch;
 use Railroad\Railcontent\Commands\MigrateContentToNewStructure;
 use Railroad\Railcontent\Commands\MigrateContentVideos;
 use Railroad\Railcontent\Commands\MigrateUserPlaylist;
+use Railroad\Railcontent\Commands\MigrateUserPlaylistToV2;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
 use Railroad\Railcontent\Commands\SyncContentRowFromRelatedTables;
 use Railroad\Railcontent\Events\CommentCreated;
@@ -44,10 +45,12 @@ use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\ElasticDataShouldUpdate;
 use Railroad\Railcontent\Events\HierarchyUpdated;
+use Railroad\Railcontent\Events\PlaylistItemsUpdated;
 use Railroad\Railcontent\Events\UserContentProgressSaved;
 use Railroad\Railcontent\Listeners\AssignCommentEventListener;
 use Railroad\Railcontent\Listeners\ContentEventListener;
 use Railroad\Railcontent\Listeners\ContentTotalXPListener;
+use Railroad\Railcontent\Listeners\PlaylistListener;
 use Railroad\Railcontent\Listeners\RailcontentV2DataSyncingEventListener;
 use Railroad\Railcontent\Listeners\SyncElasticsearchListener;
 use Railroad\Railcontent\Listeners\UnassignCommentEventListener;
@@ -106,7 +109,8 @@ class RailcontentServiceProvider extends ServiceProvider
             ContentTotalXPListener::class . '@handleHierarchyUpdated',
             RailcontentV2DataSyncingEventListener::class . '@handleHierarchyUpdated',
         ],
-        ElasticDataShouldUpdate::class => [SyncElasticsearchListener::class . '@handleSync']
+        ElasticDataShouldUpdate::class => [SyncElasticsearchListener::class . '@handleSync'],
+        PlaylistItemsUpdated::class => [PlaylistListener::class.'@handlePlaylistItemsUpdated']
     ];
 
     /**
@@ -158,6 +162,7 @@ class RailcontentServiceProvider extends ServiceProvider
             SyncContentRowFromRelatedTables::class,
             FillContentParentContentDataColumnFromHierarchy::class,
             FillContentCompiledViewData::class,
+            MigrateUserPlaylistToV2::class
         ]);
 
         Validator::extend(

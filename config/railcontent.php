@@ -868,4 +868,8 @@ return [
         'original_video',
         'qna_video',
     ],
+
+    'content_multiple_level_content_depth_playlist_allowed' => [
+        'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
+    ]
 ];

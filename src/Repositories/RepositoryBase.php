@@ -353,7 +353,7 @@ abstract class RepositoryBase
      * @param $existingData
      * @return mixed
      */
-    private function recalculatePosition($position, $dataCount, $existingData)
+    public function recalculatePosition($position, $dataCount, $existingData)
     {
         if ($position === null || $position > $dataCount) {
             if (empty($existingData)) {
@@ -648,5 +648,4 @@ abstract class RepositoryBase
 
         return $results;
     }
-
 }
