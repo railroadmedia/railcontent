@@ -382,12 +382,12 @@
                             ]
                         ],
                         [
-                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/on-demand-courses.jpg',
+                            'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/on-demand-courses2.jpg',
                             'title' => 'On-Demand Courses',
                             'desc' => 'Prefer to jump around? Boost any skill, anytime with topic-based courses for any musical goal. ',
                             'lessonInfo' => [
                                 [
-                                    'thumb' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/on-demand-courses.jpg',
+                                    'thumb' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/on-demand-courses2.jpg',
                                 ],
                             ]
                         ],
@@ -960,24 +960,24 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    <section class="py-14 sm:pt-0 sm:pb-20 relative text-white text-center customize px-4 lg:px-6 relative" style="background: #0c1524;">
-        <div class="container mx-auto max-w-6xl sm:mb-14">
-            <div class="flex items-center">
+    <section class="pb-14 sm:pb-20 relative text-white text-center customize px-4 sm:px-6 lg:px-8 relative" style="background: #0c1524;">
+        <div class="container mx-auto max-w-6xl lg:mb-14">
+            <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="flex w-full justify-center sm:justify-start sm:w-auto sm:order-1 mb-7 sm:mb-0 -mt-4">
-                    <picture>
+                    <picture class="max-w-xs sm:max-w-full">
                         <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team2.png">
                         <img class="transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team2.png" alt="musora collage image">
                     </picture>
                 </div>
-                <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0 flex-col flex items-start">
-                    <img class="h-6 mb-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png">
-                    <h6 class="uppercase  text-musora inline-block "><strong>YOUR FIRST  7 Days  ARE FREE.</strong></h6>
-                    <h3 class="leading-normal inline-block"><strong>Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.</strong></h3>
+                <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0 flex-col flex items-center sm:items-start">
+                    <img class="h-6 mb-3 sm:my-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-gold.png">
+                    <h6 class="uppercase  text-musora inline-block mb-2"><strong>YOUR FIRST  7 Days  ARE FREE.</strong></h6>
+                    <h3 class="leading-tight inline-block"><strong>Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.</strong></h3>
                     <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-0 inline-block">
 
                         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora" aria-hidden="true"></i> Trusted by {{ number_format(Prices::$students) }} happy students.</li>
                         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora" aria-hidden="true"></i> Personalized feedback from real teachers.</li>
-                        <li class="leading-tight mb-3 text-musora"><i class="fa-li fas fa-check" aria-hidden="true"></i> All-access for piano, guitar, drums, and singing. </li>
+                        <li class="leading-tight text-musora"><i class="fa-li fas fa-check" aria-hidden="true"></i> All-access for piano, guitar,<br class="lg:hidden"> drums, and singing. </li>
                     </ul>
                     <div class="w-72 lg:w-96 mx-auto sm:mx-0">
                         <a class=" w-full sm:w-64 join smaller  musora-gold  w-full my-3" href="/choose-plan">
