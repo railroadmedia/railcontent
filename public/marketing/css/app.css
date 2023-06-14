@@ -1706,6 +1706,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .mt-24 {
   margin-top: 6rem !important;
+<<<<<<< HEAD
+=======
+}
+.mr-0\.5 {
+  margin-right: 0.125rem !important;
+}
+.mr-0 {
+  margin-right: 0px !important;
+>>>>>>> project-playlists-v2
 }
 .-mb-5 {
   margin-bottom: -1.25rem !important;
@@ -1779,6 +1788,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mt-2\.5 {
   margin-top: 0.625rem !important;
 }
+<<<<<<< HEAD
+=======
+.mr-8 {
+  margin-right: 2rem !important;
+}
+>>>>>>> project-playlists-v2
 .-mb-6 {
   margin-bottom: -1.5rem !important;
 }
@@ -5639,6 +5654,13 @@ li, p {
     padding-right: 1.5rem !important;
   }
 
+<<<<<<< HEAD
+=======
+  .sm\:pb-20 {
+    padding-bottom: 5rem !important;
+  }
+
+>>>>>>> project-playlists-v2
   .sm\:pb-80 {
     padding-bottom: 20rem !important;
   }
