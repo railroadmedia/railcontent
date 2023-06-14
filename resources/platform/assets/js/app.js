@@ -4,6 +4,7 @@ import { createApp, defineAsyncComponent } from 'vue';
 
 //Libraries
 import axios from 'axios'
+import { vMaska } from "maska"
 import VueAxios from 'vue-axios'
 import 'simplebar';
 import 'simplebar/dist/simplebar.css';
@@ -22,6 +23,7 @@ import ResetPassForm from './vue/components/ResetPassForm/ResetPassForm.vue';
 import MusoraIcon from './vue/components/MusoraIcons/MusoraIcon.vue'
 import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
 import InfoModal from './vue/components/Modal/InfoModal';
+import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
 import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
 
 //Vuesora Assets
@@ -178,6 +180,7 @@ const app = createApp({
                                 || mediaElementVueInstance.totalDuration,
                             sessionToken: sessionTokenElement.value || null,
                             brand:mediaElementVueInstance.brand,
+                            contentId: mediaElementVueInstance.contentId
                         });
                     });
                 }
@@ -221,6 +224,8 @@ app.config.unwrapInjectedRef = true;
 //Temporary Emitter for Chatsora
 app.config.globalProperties.eventBus = eventBus;
 
+app.config.productionTip = false;
+
 //Register Global Components
 
 app.component('AppContainer', AppContainer)
@@ -248,7 +253,22 @@ app.component('AppContainer', AppContainer)
     .component('ContentAssignment', ContentAssignment)
     .component('AddEventModal', AddEventModal)
     .component('InfoModal', InfoModal)
+    .component('SoundSlice', SoundSlice)
     .component('CohortBanner', CohortBanner)
+
+    .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "playlist-playback-wrapper" */
+            `./vue/components/Playlists/PlaylistPlaybackWrapper.vue`
+        )
+    ))
+
+    .component('PlatformHeader', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "platform-header" */
+            `./vue/components/PlatformHeader/platform-header.vue`
+        )
+    ))
 
     .component('MembershipUpdate', defineAsyncComponent(() =>
         import(
@@ -355,7 +375,6 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
-
     .component('ContactEmailFormMarketing', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "contact-email-form-marketing" */
@@ -419,6 +438,37 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('PlaylistHeader', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "playlist-header" */
+            `./vue/components/Playlists/Playlist/PlaylistHeader.vue`
+        )
+    ))
+    .component('PlaylistCatalog', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "playlist-collection-catalog" */
+            `./vue/components/Playlists/Playlist/PlaylistCatalog.vue`
+        )
+    ))
+    .component('PlaylistBreadcrumb', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "playlist-breadcrumb" */
+            `./vue/components/Playlists/Breadcrumb.vue`
+        )
+    ))
+    .component('PlaylistCollectionHeader', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "playlist-collection-header" */
+            `./vue/components/Playlists/PlaylistCollection/PlaylistCollectionHeader.vue`
+        )
+    ))
+    .component('PlaylistCollectionCatalog', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "playlist-collection-catalog" */
+            `./vue/components/Playlists/PlaylistCollection/PlaylistCollectionCatalog.vue`
+        )
+    ))
+
 app.directive('click-outside', {
     mounted(el, binding, vnode) {
         setTimeout(() => {
@@ -434,6 +484,8 @@ app.directive('click-outside', {
         document.body.removeEventListener('click', el.clickOutsideEvent)
     }
 })
+
+app.directive("maska", vMaska)
 
 const pinia = createPinia();
 // app.use(router);

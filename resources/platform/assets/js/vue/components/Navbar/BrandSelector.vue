@@ -51,7 +51,7 @@ onUpdated(() => {
             key="ModalRendererKeyToMakeItDestroyByVif">
             <div v-if="isLoading"
                 class="tw-absolute tw-z-[500] tw-w-full tw-h-full tw-flex tw-items-center tw-justify-center tw-bg-black/50">
-                <LoadingSpinner classOverride="tw-w-[48px] tw-h-[48px]" />
+                <LoadingSpinner classOverride="tw-w-[48px] tw-h-[48px] tw-text-white" />
             </div>
             <div v-if="!isLoading" class="tw-flex tw-w-full tw-h-full tw-justify-center tw-items-center">
                 <button @click="handleClose" aria-label="Close brand selector modal"

@@ -5,12 +5,12 @@
                data-tooltip="Previous Lesson"
                class="tw-btn-secondary tw-text-{{ $brand }}">
                 <i class="fas fa-chevron-left"></i>
-                <span class="hide-xs-only ml-1">Previous Lesson</span>
+                <span class="hide-xs-only ml-1">{{ isset($prevLabel) ? $prevLabel : 'Previous Lesson' }}</span>
             </a>
         @else
             <a class="tw-btn-secondary tw-text-gray-400 dark:tw-text-[#7E9AB1] no-events">
                 <i class="fas fa-chevron-left"></i>
-                <span class="hide-xs-only ml-1">Previous Lesson</span>
+                <span class="hide-xs-only ml-1">{{ isset($prevLabel) ? $prevLabel : 'Previous Lesson' }}</span>
             </a>
         @endif
     </div>
@@ -41,12 +41,12 @@
             <a href="{{ $nextLessonUrl }}"
                class="tw-btn-secondary tw-text-{{ $brand }}"
                data-tooltip="Next Lesson">
-                <span class="hide-xs-only mr-1">Next Lesson</span>
+                <span class="hide-xs-only mr-1">{{ isset($nextLabel) ? $nextLabel : 'Next Lesson' }}</span>
                 <i class="fas fa-chevron-right"></i>
             </a>
         @else
             <a class="tw-btn-secondary tw-text-gray-400 dark:tw-text-[#7E9AB1] no-events">
-                <span class="hide-xs-only mr-1">Next Lesson</span>
+                <span class="hide-xs-only mr-1">{{ isset($nextLabel) ? $nextLabel : 'Next Lesson' }}</span>
                 <i class="fas fa-chevron-right"></i>
             </a>
         @endif

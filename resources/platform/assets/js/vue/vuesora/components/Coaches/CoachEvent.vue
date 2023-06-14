@@ -121,9 +121,9 @@
             :class="{ 'tw-pt-3': showWatch }"
             v-if="!eventIsLive && !showWatch"
           >
-            <!-- Add to My List -->
+            <!-- Add to Playlist -->
             <button
-              class="tw-cursor-pointer tw-with-tooltip tw-tooltip-top tw-tooltip-center tw-border-0 tw-bg-transparent tw-transition tw-text-3xl tw-mr-6"
+              class="tw-cursor-pointer tw-border-0 tw-bg-transparent tw-transition tw-text-3xl tw-mr-6"
               @click.stop.prevent="toggleMyList"
               :class="[
                 is_added ? 'is-added ' + brandTextColor : 'tw-text-gray-400',
@@ -134,15 +134,6 @@
                 :class="[is_added ? 'tw-rotate-45' : 'tw-rotate-0']"
               >
               </i>
-              <!-- Tooltip -->
-              <div
-                role="tooltip"
-                class="tw-tooltip tw-tooltip-dark"
-                :class="[is_added ? brandBGColor : 'tw-bg-gray-400']"
-                id="tooltip-#"
-              >
-                {{ is_added ? "Added to My List" : "Add to My List" }}
-              </div>
             </button>
 
             <!-- Subscribe to Calendar -->

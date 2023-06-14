@@ -9,6 +9,7 @@ return [
             'difficulty_string',
             'type',
             'instrument',
+            'instrumentless',
             'published_on',
             'status',
             'fields.title',
@@ -43,6 +44,11 @@ return [
             'coach_top_banner_image',
             'coach_profile_image',
             'coach_featured_image',
+            'start_second',
+            'end_second',
+            'thumbnail_url',
+            'user_playlist_item_id',
+            'user_playlist_item_position'
         ],
 
         'instructor' => [
@@ -182,6 +188,7 @@ return [
             'apple_product_id',
             'google_product_id',
             'lesson_count',
+            'child_count',
             'lessons' => [
                 'id',
                 'type',
@@ -373,6 +380,8 @@ return [
                 'data.thumbnail_url',
             ],
             'parent',
+            'lesson_count',
+            'child_count',
             'next_content_type',
             'total_comments',
             'comments',
@@ -404,7 +413,8 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
-            'resources'
+            'resources',
+            'route'
         ],
 
         'course' => [
@@ -442,6 +452,8 @@ return [
                 'length_in_seconds',
                 'data.thumbnail_url',
             ],
+            'lesson_count',
+            'child_count',
             'lessons' => [
                 'id',
                 'type',
@@ -549,12 +561,14 @@ return [
             'last_watch_position_in_seconds',
             'fields.video.fields.length_in_seconds',
             'parent',
+            'child_count',
             'coaches' => [
                 'id',
                 'fields.name',
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'route'
         ],
 
         'play-along' => [
@@ -651,6 +665,7 @@ return [
                 'current_user_is_subscribed',
             ],
             'lesson_count',
+            'child_count',
             'lessons' => [
                 'id',
                 'type',
@@ -759,6 +774,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'route'
         ],
 
         'song-tutorial' => [
@@ -821,6 +837,7 @@ return [
             'fields.artist',
             'fields.style',
             'lesson_count',
+            'child_count',
             'lessons' => [
                 'id',
                 'type',
@@ -841,6 +858,7 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'route'
         ],
         'song-tutorial-children' => [
             'ranges',
@@ -908,7 +926,8 @@ return [
                 'current_user_is_subscribed',
             ],
             'artist',
-            'parent'
+            'parent',
+            'route'
         ],
         'song' => [
             'ranges',
@@ -973,6 +992,7 @@ return [
             'fields.artist',
             'fields.style',
             'lesson_count',
+            'child_count',
             'lessons' => [
                 'id',
                 'type',
@@ -993,6 +1013,8 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'start_second',
+            'end_second'
         ],
         'song-part' => [
             'ranges',
@@ -1059,7 +1081,8 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
-            'artist'
+            'artist',
+            'route'
         ],
 
 
@@ -1145,6 +1168,7 @@ return [
             'video_playback_endpoints',
             'last_watch_position_in_seconds',
             'parent',
+            'child_count',
             'fields.artist',
             'fields.style',
             'live_event_start_time_in_timezone',
@@ -1299,6 +1323,8 @@ return [
                 'mobile_app_url',
                 'fields.video.fields.length_in_seconds',
             ],
+            'lesson_count',
+            'child_count',
             'coaches' => [
                 'id',
                 'fields.name',
@@ -1336,6 +1362,8 @@ return [
                 'is_added_to_primary_playlist',
             ],
             "current_lesson_index",
+            'lesson_count',
+            'child_count',
             "next_lesson" => [
                 'fields.title',
                 'fields.artist',
@@ -1455,18 +1483,25 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
-            'resources'
+            'resources',
+            'route'
         ],
 
         'assignment' => [
             'id',
             'xp',
+            'type',
+            'like_count',
+            'is_liked_by_current_user',
             'user_progress',
             'fields.title',
             'fields.soundslice_slug',
             'data.description',
             '*data.sheet_music_image_url',
             'data.timecode',
+            'parent',
+            'url',
+            'route'
         ],
 
         'comment' => [
@@ -1609,6 +1644,8 @@ return [
                 'data.thumbnail_url',
                 'mobile_app_url',
             ],
+            'lesson_count',
+            'child_count',
             'coaches' => [
                 'id',
                 'fields.name',
@@ -1668,6 +1705,8 @@ return [
                 'data.thumbnail_url',
                 'mobile_app_url',
             ],
+            'lesson_count',
+            'child_count',
             'coaches' => [
                 'id',
                 'fields.name',
@@ -1773,6 +1812,8 @@ return [
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'parent',
+            'route'
         ],
 
         'student-focus' => [
@@ -2545,6 +2586,8 @@ return [
             'like_count',
             'total_length_in_seconds',
             'level_position',
+            'lesson_count',
+            'child_count',
             'course_position',
             '*fields.instructor',
             'lessons' => [
@@ -2688,12 +2731,14 @@ return [
             'last_incomplete_lesson_from_course',
             'is_last_incomplete_course_from_level',
             'resources',
+            'parent',
             'coaches' => [
                 'id',
                 'fields.name',
                 'coach_profile_image',
                 'current_user_is_subscribed',
             ],
+            'route'
         ],
         'recording' => [
             'id',
@@ -2782,6 +2827,150 @@ return [
                 'fields.name',
                 'coach_profile_image',
                 'current_user_is_subscribed',
+            ],
+        ],
+        'routine' => [
+            'id',
+            'type',
+            'url',
+            'published_on',
+            'completed',
+            'started',
+            'progress_percent',
+            'fields.title',
+            'fields.video.fields.length_in_seconds',
+            'data.thumbnail_url',
+            'total_comments',
+            'comments',
+            'xp',
+            'xp_bonus',
+            '*fields.instructor',
+            'fields.video.fields.vimeo_video_id',
+            'fields.video.fields.youtube_video_id',
+            'data.description',
+            'data.captions',
+            'like_count',
+            'is_liked_by_current_user',
+            'chapters',
+            'user_progress',
+            'resources',
+            'related_lessons' => [
+                'id',
+                'type',
+                'published_on',
+                'completed',
+                'started',
+                'progress_percent',
+                'is_added_to_primary_playlist',
+                'fields.title',
+                'fields.video.fields.length_in_seconds',
+                'data.thumbnail_url',
+                'status',
+            ],
+            'next_lesson' => [
+                'id',
+                'type',
+                'published_on',
+                'completed',
+                'started',
+                'progress_percent',
+                'is_added_to_primary_playlist',
+                'fields.title',
+                'fields.video.fields.length_in_seconds',
+                'data.thumbnail_url',
+                'instructor' => [
+                    'id',
+                    'fields.name',
+                    'data.biography',
+                    'data.head_shot_picture_url',
+                ],
+            ],
+            'previous_lesson' => [
+                'id',
+                'type',
+                'published_on',
+                'completed',
+                'started',
+                'progress_percent',
+                'is_added_to_primary_playlist',
+                'fields.title',
+                'fields.video.fields.length_in_seconds',
+                'data.thumbnail_url',
+            ],
+            'video_playback_endpoints',
+            'last_watch_position_in_seconds',
+            'high_soundslice_slug',
+            'low_soundslice_slug',
+            'coaches' => [
+                'id',
+                'fields.name',
+                'coach_profile_image',
+                'current_user_is_subscribed',
+            ],
+        ],
+
+        'playlist-item' => [
+            'id',
+            'fields.video.fields.vimeo_video_id',
+            'fields.video.fields.youtube_video_id',
+            'data.thumbnail_url',
+            'data.sheet_music_thumbnail_url',
+            'difficulty_string',
+            'type',
+            'instrument',
+            'instrumentless',
+            'published_on',
+            'status',
+            'fields.title',
+            'completed',
+            'started',
+            'progress_percent',
+            'is_added_to_primary_playlist',
+            'instructors',
+            'fields.artist',
+            'fields.style',
+            'fields.video.fields.length_in_seconds',
+            'parent_id',
+            'fields.name',
+            'data.head_shot_picture_url',
+            'isLive',
+            'is_liked_by_current_user',
+            'like_count',
+            'pdf',
+            'pdf_in_g',
+            'data.description',
+            'published_on_in_timezone',
+            'start_second',
+            'end_second',
+            'thumbnail_url',
+            'user_playlist_item_id',
+            'user_playlist_item_position',
+            'is_full_track',
+            'is_instrumentless_track',
+            'route',
+            'is_song_assignment',
+            'is_high_routine',
+            'is_low_routine',
+            'high_soundslice_slug',
+            'low_soundslice_slug',
+            'set_start_end_time',
+            'parent',
+            'related_lessons' => [
+                'id',
+                'type',
+                'fields.title',
+                'fields.artist',
+                'fields.style',
+                'data.thumbnail_url',
+                'status',
+                'published_on',
+                'completed',
+                'progress_percent',
+                'is_added_to_primary_playlist',
+                'mobile_app_url',
+                'fields.video.fields.length_in_seconds',
+                'is_liked_by_current_user',
+                'parent_id',
             ],
         ],
     ],

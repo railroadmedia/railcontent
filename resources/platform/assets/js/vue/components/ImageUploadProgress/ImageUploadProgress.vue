@@ -3,8 +3,6 @@ import UploadProgress from "../UploadProgress/UploadProgress.vue";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 
-const FILE_UPLOAD_SERVICE = "/user-management-system/picture/upload-from-s3-front-end";
-
 const props = defineProps({
   image: {
     type: Blob,
@@ -13,6 +11,22 @@ const props = defineProps({
     type: String,
     default: 'random-uuid'
   },
+  uploadService: {
+    type: String,
+    default: ''
+  },
+  token: {
+    type: String,
+    default: null
+  },
+  fieldKey: {
+    type: String,
+    default: null
+  },
+  successMessage: {
+    type: String,
+    default: null
+  }
 });
 
 const emit = defineEmits(['onUploadDone', 'onUploadError']);
@@ -47,7 +61,7 @@ onMounted(() => {
   formData.append('file', dataURItoBlob(props.image), newFileName);
   formData.append('target', newFileName);
   formData.append('_method', 'POST');
-  formData.append('fieldKey', 'profile_picture_url');
+  formData.append('fieldKey', props.fieldKey);
 
   Vapor.store(formData.get('file'), {
     visibility: 'public-read',
@@ -55,14 +69,19 @@ onMounted(() => {
       percentCompleted.value = progress * 100;
     }
   }).then(response => {
-    axios.post(FILE_UPLOAD_SERVICE, {
+    const options = props.token ? {
+      headers: {
+        'X-CSRF-TOKEN': props.token
+      }
+    } : {};
+    axios.post(props.uploadService, {
       uuid: response.uuid,
       s3_bucket_path: response.key,
       bucket: response.bucket,
-      fieldKey: 'profile_picture_url'
-    }).then((resolved) => {
+      fieldKey: props.fieldKey
+    }, options).then((resolved) => {
       if (resolved) {
-        emit('onUploadDone', resolved.data.profile_picture_url);
+        emit('onUploadDone', resolved.data);
       }
     }).catch(() => {
       emit('onUploadError');
@@ -79,7 +98,7 @@ onMounted(() => {
       <img class="tw-w-[100px] tw-h-[100px] tw-rounded-full" :src="image" alty="Profile picture thumbnail" />
       <div class="tw-w-full tw-text-center tw-text-white tw-mt-[20px] tw-pb-[20px]" style="font-family: Open Sans">
         <h2 class="tw-text-bold tw-mb-[12px] tw-text-[16px]">
-          {{ percentCompleted === 100 ? 'Your profile image has successfully uploaded' : 'Uploading in progress' }}
+          {{ percentCompleted === 100 ? props.successMessage : 'Uploading in progress' }}
         </h2>
         <p class="tw-italic tw-text-[14px] tw-text-[#E5E5E5]">
           {{ percentCompleted === 100 ? '' : 'This will take a few short seconds' }}

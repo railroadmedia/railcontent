@@ -3,18 +3,18 @@
         <div class="flex flex-column tw-w-fit tw-shrink-0">
             <div class="flex flex-row flex-wrap filter-tabs align-v-center">
                 <!-- Added Tab -->
-                <div class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit">
-                    <a :href="'/' + brand + '/lists/my-list'">
+                <!-- <div class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit">
+                    <a :href="'/' + brand + '/lesson-history/my-list'">
                         <h3 class="tw-text-2xl md:tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white tw-leading-none"
                             :class="selected_tab === 'my-list' ? ('tw-text-[#00101D] dark:tw-text-white') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                         >
                             Added
                         </h3>
                     </a>
-                </div>
+                </div> -->
                 <!-- In Progress Tab -->
                 <div class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit">
-                    <a :href="'/' + brand + '/lists/in-progress'">
+                    <a :href="'/' + brand + '/lesson-history/in-progress'">
                         <h3 class="tw-text-2xl md:tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white tw-leading-none"
                             :class="selected_tab === 'started' ? ('tw-text-[#00101D] dark:tw-text-white') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                         >
@@ -24,7 +24,7 @@
                 </div>
                 <!-- Completed Tab -->
                 <div class="heading-tab pointer tw-mr-5 tw-mb-2 md:tw-mb-3 tw-flex tw-w-fit">
-                    <a :href="'/' + brand + '/lists/completed'">
+                    <a :href="'/' + brand + '/lesson-history/completed'">
                         <h3 class="tw-text-2xl md:tw-text-3xl tw-font-bold hover:tw-text-[#00101D] dark:hover:tw-text-white tw-leading-none"
                             :class="selected_tab === 'completed' ? ('tw-text-[#00101D] dark:tw-text-white') : 'tw-text-[#A1A1A9] dark:tw-text-[#445F74] '"
                         >
@@ -140,12 +140,10 @@ export default {
     mounted() {
         const urlPath = window.location.pathname;
 
-        if (urlPath.includes('my-list')) {
-            this.selected_tab = 'my-list';
-        } else if (urlPath.includes('in-progress')) {
-            this.selected_tab = 'started';
-        } else if (urlPath.includes('completed')) {
+        if(urlPath.includes('completed')) {
             this.selected_tab = 'completed';
+        } else {
+            this.selected_tab = 'started';
         }
     },
 };

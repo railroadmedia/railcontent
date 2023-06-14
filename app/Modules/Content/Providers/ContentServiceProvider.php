@@ -5,6 +5,7 @@ namespace App\Modules\Content\Providers;
 use App\Modules\Content\Console\Commands\CoachBulkDataUpdate;
 use App\Modules\Content\Console\Commands\CoachBulkImageUpdate;
 use App\Modules\Content\Console\Commands\FixProgressOnUnpublishedContent;
+use App\Modules\Content\Console\Commands\PredefinedPlaylists;
 use App\Modules\Content\Console\Commands\RebuildSearchIndexes;
 use App\Modules\Content\Models\ContentField;
 use App\Modules\Content\Observers\ContentFieldObserver;
@@ -29,6 +30,7 @@ class ContentServiceProvider extends ServiceProvider
             CoachBulkImageUpdate::class,
             RebuildSearchIndexes::class,
             FixProgressOnUnpublishedContent::class,
+            PredefinedPlaylists::class,
         ]);
     }
 }

@@ -1,45 +1,36 @@
 @extends('partials.layout')
 
 @section('meta')
-    <title>My Lists | Musora</title>
+    <title>Playlists | Musora</title>
 @endsection
 
 @section('content')
 
-    @include('partials.bladesora.members.partials._account-header', [
-        'backgroundImage' => 'https://d3fzm1tzeyr5n3.cloudfront.net/headers/'.$brand.'-header.jpg',
-        'userAvatar' => user()->profile_picture_url,
-        'userName' => user()->display_name,
-        'appName' => 'Musora',
-        'memberSince' => user()->created_at,
-    ])
+    <playlist-breadcrumb
+        brand="{{ $brand }}"
+        last-level-url="/{{ $brand }}/playlists" 
+        last-level-title="Playlists"
+    >
+    </playlist-breadcrumb>
 
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pb-14">
+    {{-- Playlist Header --}}
+    <playlist-collection-header
+        brand="{{ $brand }}"
+        :playlist-count="{{ $playlistsNumber }}"
+    /></playlist-collection-header>
+
+    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white tw-pt-2 tw-pb-14">
         <div class="tw-flex tw-flex-col">
             <div class="tw-flex tw-flex-row">
-                <content-catalogue
-                    catalogue-type="list"
+
+                {{-- Playlist Catalog --}}
+                <playlist-collection-catalog
                     brand="{{ $brand }}"
-                    theme-color="{{ $brand }}"
-                    limit="20"
-                    :included-types="{{ json_encode($allowedTypes) }}"
-                    :use-theme-color="true"
-                    :pre-loaded-content="{{ $listLessons }}"
-                    user-id="{{ auth()->id() }}"
-                    :is-playlists="true"
-                    :paginate="true"
-                    no-results-message="{{ $noResultsMessage }}"
-                    no-results-icon="happy"
-                    :destroy-on-list-removal="true"
-                    initial-page="{{ $initialPage }}"
-                    :force-wide-thumbs="true"
-                    :lock-unowned="true"
-                    :is-admin="<?php echo e(json_encode(user()->isAdmin())); ?>"
-                    @if($resetProgress)
-                    :reset-progress="true"
-                    @endif
-                    :show-loading-animation="true"
-                />
+                    :playlists="{{ json_encode($playlists) }}"
+                    :playlist-count="{{ $playlistsNumber }}"
+                    {{-- :search-term="{{ $searchTerm }}" --}}
+                ></playlist-collection-catalog>
+
             </div>
         </div>
     </div>

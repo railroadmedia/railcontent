@@ -840,4 +840,9 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         }
         return Carbon::parse($this->membership_expiration_date);
     }
+
+    public function isDeleted(): bool
+    {
+        return preg_match("/musora\+deleted_[\d]+@musora\.com/", $this->email);
+    }
 }

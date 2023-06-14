@@ -219,7 +219,6 @@ class HomePageController extends BaseController
             $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
         }
         $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
-        $collectionForDecoration = $collectionForDecoration->merge($usersList->results());
         $collectionForDecoration = $collectionForDecoration->merge($upcomingEvents);
         $collectionForDecoration = $collectionForDecoration->merge($newContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
@@ -228,6 +227,10 @@ class HomePageController extends BaseController
         Decorator::$typeDecoratorsEnabled = true;
         $collectionForDecoration = $collectionForDecoration->filter();
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
+
+        $collectionForDecoration = new RailcontentCollection();
+        $collectionForDecoration = $collectionForDecoration->merge($usersList->results());
+        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'playlist');
 
         $hasGear = count(
                 user()->onboardingGear->filter(function ($item) {
@@ -332,7 +335,7 @@ class HomePageController extends BaseController
             "newContentJson" => $newContent->toResponseRawJson(),
             "startedContentJson" => $startedLessons->toResponseRawJson(),
             "startedContentCount" => count($startedLessons),
-            "usersList" => $usersList->toResponseRawJson(),
+            "usersList" => $usersList,
             "userMetrics" => $userMetrics,
             "nextLearningPathLevel" => $nextLearningPathLevel,
             "nextLearningPathProgressPercent" => $nextLearningPathProgressPercent,
@@ -609,36 +612,22 @@ class HomePageController extends BaseController
      */
     public function getUsersList()
     {
-        $contentTypes = ContentTypes::inProgressContentTypes();
-        $userPrimaryPlaylist = \Arr::first(
-            $this->userPlaylistsService->getUserPlaylist(
-                user()->id,
-                'primary-playlist',
-                brand()
-            )
+        $playlists = $this->userPlaylistsService->getUserPlaylist(
+            user()->id,
+            'user-playlist',
+            brand(),
+            5
         );
-        if (empty($userPrimaryPlaylist)) {
-            return (new ContentFilterResultsEntity(['results' => []]));
-        }
-        $myListId = $userPrimaryPlaylist['id'];
-        ContentRepository::$includedInPlaylistsIds = [$myListId];
-        $results = $this->contentService->getFiltered(
-            1,
-            6,
-            '-published_on',
-            $this->parseContentTypes($contentTypes),
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            false,
-            false,
-            false,
-            false
+
+        $playlistsNumber = $this->userPlaylistsService->countUserPlaylists(
+            user()->id,
+            'user-playlist',
+            brand()
         );
-        ContentRepository::$includedInPlaylistsIds = false;
+
+        $results =
+            new ContentFilterResultsEntity(['results' => $playlists, 'total_results' => $playlistsNumber]
+            );
 
         return $results;
     }

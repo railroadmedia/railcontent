@@ -102,7 +102,10 @@ class SaltedSessionGuard extends SessionGuard
 
             if (!empty($user)) {
                 $this->user = $user;
-
+                if ($user->isDeleted()) {
+                    $this->logout();
+                    return null;
+                }
                 return $this->user;
             }
         }

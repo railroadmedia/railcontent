@@ -107,6 +107,16 @@ class RedirectIfMobileRequest
                     'brand' => $brand,
                     'slug' => last(request()->segments()),
                 ]);
+            }  elseif ($request->routeIs('platform.user.playlist')) {
+                $route = route('v1.mobile.musora-api.get.playlist', [
+                    'brand' => $brand,
+                    'playlist_id' => last(request()->segments()),
+                ]);
+            } elseif ($request->routeIs('platform.user.playlist-item')) {
+                $route = route('v1.mobile.musora-api.deeplink.playlist.item', [
+                    'brand' => $brand,
+                    'user_playlist_item_id' => last(request()->segments())
+                ]);
             }
 
             if ($route) {
