@@ -7,13 +7,25 @@
         "theme_text" => "text-musora",
         "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
         "links" => [
+            "Member Login" => [
+                "iconClass" => "fas fa-sign-in",
+                "url" => get_musora_brand_base_url() . '/login',
+            ],
             "Home" => [
                 "iconClass" => "fas fa-home",
                 "url" => "/",
             ],
-            "Member Login" => [
-                "iconClass" => "fas fa-sign-in",
-                "url" => get_musora_brand_base_url() . '/login',
+            "Method" => [
+                "iconClass" => "fas fa-star",
+                "url" => get_musora_brand_base_url().'/method',
+            ],
+            "Songs" => [
+                "iconClass" => "fas fa-star",
+                "url" => get_musora_brand_base_url().'/songs',
+            ],
+            "Pricing" => [
+                "iconClass" => "fas fa-money-bill-wave",
+                "url" => get_musora_brand_base_url().'/choose-plan',
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",
