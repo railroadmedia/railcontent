@@ -133,7 +133,7 @@
             e.preventDefault();
             const keyword = document.getElementById('searchInput').value;
             if(keyword){
-                window.location = `https://help.{{ $brand }}.com/search?query=${keyword}`;
+                window.location = `https://help.musora.com/search?query=${keyword}`;
             }
         }
     </script>
