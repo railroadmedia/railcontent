@@ -7,13 +7,13 @@
             <a href="{{ $packsUrl }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                 <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">Your Training Packs</h2>
             </a>
-            <a href="{{ $packsUrl }}"  
+            <a href="{{ $packsUrl }}"
                 aria-label="See All Packs"
                 class="tw-text-base xl:tw-text-lg xl:tw-leading-none tw-uppercase tw-leading-none tw-font-bebas-neue tw-text-[#00101D] dark:tw-text-white tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current"
             >
                 See All
             </a>
-        </div> 
+        </div>
 
         <div class="tw-flex tw-flex-row tw-flex-wrap">
             @if(count($packs) === 0)
@@ -27,6 +27,7 @@
                 @include('partials.bladesora.members.content.content-overview', [
                     "themeColor" => $brand,
                     "hideBorder" => $index === 0,
+                    'itemId' => $pack->fetch('id'),
                     "itemThumbnail" => $pack->fetch('data.thumbnail_url'),
                     "itemTitle" => $pack->fetch('fields.title'),
                     "itemDescription" => $pack->fetch('data.description'),
@@ -41,7 +42,7 @@
                 ])
             @endforeach
         </div>
-        
+
     </div>
 </section>
 @endif

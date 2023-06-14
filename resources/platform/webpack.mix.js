@@ -45,7 +45,6 @@ mix.js('resources/platform/assets/js/app.js', 'public/platform/js')
     })
     .extract(['alpinejs', 'fast-glob'], 'vendor~unused.js')
     .extract(['shaka-player', 'screenful', 'mux.js', 'mediaelement', 'mediaelement-plugins'], 'vendor~player.js')
-    .extract(['vue-advanced-cropper'], 'vendor~onboarding.js')
     .extract()
     .sourceMaps()
     .version();

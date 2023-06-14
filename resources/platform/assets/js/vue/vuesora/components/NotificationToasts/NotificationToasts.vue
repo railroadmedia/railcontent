@@ -2,37 +2,55 @@
   <teleport v-if="showNotification" to="#notifications-container">
     <div style="position: fixed; left: 0; width: 100vw; z-index: 10000; bottom: 40px;">
       <div class="tw-text-center tw-pb-6">
-        <div :class="`
-                  tw-px-[16px]
-                  tw-py-[20px]
-                  tw-w-4/6
-                  tw-justify-self-center
-                  tw-mx-auto
-                  tw-rounded-md
-                  tw-drop-shadow-md
-                  dark:tw-text-black
-                  tw-text-white
-                  dark:tw-bg-white
-                  tw-bg-[#081825]
-                  ${slideClassData}`
-        ">
-          <div class="tw-flex tw-justify-between tw-items-center tw-text-small">
-            <div>
-              <i class="fas tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
-              {{ notificationText }}
-            </div>
-            <button class="tw-ml-2 dark:tw-bg-[#E4E4E7] tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-flex-shrink-0 tw-border-none tw-rounded-full"
-              v-on:click="handleOnClose">
-              <i class="far fa-times dark:tw-text-black tw-text-white"></i>
-            </button>
+          <div class="lg:tw-flex">
+              <div class="tw-hidden lg:tw-block" :class="isSidebarCollapsed ? 'lg:tw-w-[68px]' : 'lg:tw-w-[256px]'"></div>
+              <div class="lg:tw-flex-1 tw-flex tw-justify-center">
+                  <div class="lg:tw-max-w-[1280px] tw-w-full lg:tw-container lg:tw-mx-auto lg:tw-pl-7 lg:tw-pr-9">
+                    <div :class="`
+                              tw-px-[16px]
+                              tw-py-2
+                              tw-w-4/6 lg:tw-w-full
+                              tw-justify-self-center
+                              tw-mx-auto
+                              tw-rounded-md
+                              tw-drop-shadow-md
+                              dark:tw-text-black
+                              tw-text-white
+                              dark:tw-bg-white
+                              tw-bg-[#081825]
+                              ${slideClassData}`
+                    ">
+                      <div class="tw-flex tw-justify-between tw-items-center tw-text-sm">
+                        <div class="tw-flex tw-items-center">
+                          <musora-icon v-if="SVGIcon.length" 
+                                      :icon-name="SVGIcon" 
+                                      class="tw-w-[24px] tw-h-[24px] tw-mr-2 tw-inline-flex" />
+                          <i v-else class="fas tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
+                          <span class="tw-font-bold tw-text-sm">{{ notificationText }}</span>
+                        </div>
+                        <button class="tw-ml-2 dark:tw-bg-[#E4E4E7] tw-bg-[#223F57] tw-w-[40px] tw-h-[40px] tw-flex-shrink-0 tw-border-none tw-rounded-full"
+                          v-on:click="handleOnClose">
+                          <i class="far fa-times dark:tw-text-black tw-text-white"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+              </div>
           </div>
-        </div>
       </div>
     </div>
   </teleport>
 </template>
 
 <script>
+import MusoraIcon from '../../../../vue/components/MusoraIcons/MusoraIcon.vue'
+
+const iconAllowList = {
+  playlist: true,
+  shuffle: true,
+  repeat: true,
+};
+
 export default {
   name: "NotificationToasts",
   props: {
@@ -44,11 +62,19 @@ export default {
       type: String,
       default: () => "",
     },
+    isSVGIcon: {
+      type: Boolean,
+      default: () => false,
+    },
     icon: {
       type: String,
       default: () => "",
     },
     isError: {
+      type: Boolean,
+      default: () => false,
+    },
+    isSidebarCollapsed: {
       type: Boolean,
       default: () => false,
     },
@@ -65,11 +91,18 @@ export default {
         this.$emit('onClose');
         this.slideClassData = 'slide-in-bottom';
       }, 500);
+    },
+
+    //Capitalize Helper
+    capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
     }
+
   },
   data() {
     return {
       showNotification: false,
+      SVGIcon: '',
       notificationIcon: this.icon,
       notificationText: this.text,
       slideClassData: this.slideClass,
@@ -80,6 +113,13 @@ export default {
       this.slideClassData = val;
     },
     icon(val) {
+      //Check if it's a Musora Icon
+      if (iconAllowList[val]) {
+        this.SVGIcon = val;
+      } else {
+        this.SVGIcon = '';
+      }
+      //Check Fontawesome Icons
       if (val === 'error') {
         this.notificationIcon = 'fa-exclamation-circle tw-text-[#ef4444]';
       } else if (val === 'warning') {
@@ -103,7 +143,7 @@ export default {
       } else {
         this.showNotification = false;
       }
-      this.notificationText = val;
+      this.notificationText = this.capitalizeFirstLetter(val);
     },
     isError(val) {
       if (val) {

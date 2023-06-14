@@ -2,6 +2,7 @@
 
 namespace App\Decorators\Content;
 
+use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Services\ContentFollowsService;
 use Railroad\Railcontent\Support\Collection;
 //use Railroad\Railnotifications\Contracts\RailforumProviderInterface;
@@ -34,6 +35,21 @@ class InstructorDecorator extends ModeDecoratorBase
     public function decorate(Collection $contents)
     {
         if (self::$decorationMode !== self::DECORATION_MODE_MAXIMUM) {
+            foreach ($contents as $contentIndex => $content) {
+                if ($content instanceof ContentEntity) {
+                    $contents[$contentIndex]['instructors'] = [];
+                    foreach ($content['fields'] as $field) {
+                        if ($field['key'] === 'instructor') {
+                            $coachName = $field['value']->fetch('fields.name');
+
+                            if (!in_array($coachName, $contents[$contentIndex]['instructors'] ?? [])) {
+                                $contents[$contentIndex]['instructors'][] = $coachName;
+                            }
+                        }
+                    }
+                }
+            }
+
             return $contents;
         }
 
@@ -55,7 +71,9 @@ class InstructorDecorator extends ModeDecoratorBase
             foreach ($content['fields'] as $field) {
                 if ($field['key'] === 'instructor') {
                     $coachName = $field['value']->fetch('fields.name');
-                    $contents[$contentIndex]['instructors'][] = $coachName;
+                    if(!in_array($coachName, $contents[$contentIndex]['instructors'])) {
+                        $contents[$contentIndex]['instructors'][] = $coachName;
+                    }
 
                     $coach = $field['value']->getArrayCopy();
                     $coach['current_user_is_subscribed'] = in_array($coach['id'], $userSubscribedContents);

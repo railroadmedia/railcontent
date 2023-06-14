@@ -123,7 +123,7 @@ onBeforeMount(() => {
             class="tw-relative tw-flex tw-justify-center tw-items-start tw-h-full tw-w-full tw-overflow-auto tw-max-h-[100vh] tw-p-2">
             <div v-if="isLoading"
                 class="tw-absolute tw-flex tw-flex-col xl:tw-flex-row tw-justify-center tw-items-center tw-h-full tw-w-full tw-z-30 tw-bg-black tw-opacity-50">
-                <LoadingSpinner classOverride="tw-h-[36px] tw-w-[36px]" />
+                <LoadingSpinner classOverride="tw-h-[36px] tw-w-[36px] tw-text-white" />
             </div>
             <div v-if="!isLifetimeMember"
                 class="tw-table tw-mt-2 md:tw-mt-4 lg:tw-mt-6 sm:tw-block tw-my-auto tw-text-center tw-text-white tw-mx-2 tw-px-2 sm:tw-px-6 tw-py-10 sm:tw-py-14 lg:tw-py-20 tw-bg-[#081825] tw-border-[#445F74] tw-rounded-[10px] tw-border-[1px] tw-relative md:tw-static">

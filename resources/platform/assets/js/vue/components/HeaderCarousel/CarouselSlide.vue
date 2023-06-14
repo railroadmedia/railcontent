@@ -65,7 +65,7 @@ const props = defineProps({
     default: "",
   },
   isFeatured: {
-    type: Boolean,
+    type: [Boolean, Number],
     default: false,
   },
   desktopImg: {

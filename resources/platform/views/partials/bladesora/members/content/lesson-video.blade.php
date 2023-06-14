@@ -42,7 +42,7 @@
             <div class="flex flex-column align-center sq-btn-col ml-1">
                 <button class="addToList btn {{ $isAdded ? 'added' : '' }}"
                         data-tooltip="Add To List"
-                     data-content-id="{{ $contentId }}">
+                        data-content-id="{{ $contentId }}">
                     <span class="un-added bg-{{ $themeColor }} inverted text-{{ $themeColor }}">
                         <i class="fas fa-plus"></i>
                     </span>

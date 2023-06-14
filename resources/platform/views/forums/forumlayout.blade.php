@@ -46,8 +46,10 @@
                 @endif
 
                 <page-container 
+                    csrf_token="{{ csrf_token() }}"
                     brand="{{ $brand }}" 
                     :is-live="{{ !empty($coachEvent) }}"
+                    :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
                     user-name="{{ user()->display_name }}"
                     user-avatar="{{ user()->profile_picture_url }}"
                     user-id="{{ user()->id }}"

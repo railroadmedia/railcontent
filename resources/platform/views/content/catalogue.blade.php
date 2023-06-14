@@ -292,7 +292,7 @@
                     :pre-loaded-content="{{ $listLessons }}"
                     :is-admin="{{ json_encode(user()->isAdmin()) }}"
                     :statuses="{{ json_encode($statuses ?? ['published']) }}"
-                    :include-future-scheduled-content-only = "{{ $futureScheduledContentOnly ?? true }}"
+                    :include-future-scheduled-content-only = "{{ json_encode(boolval($futureScheduledContentOnly ?? true)) }}"
                     :use-url-params="true"
                     :lock-unowned="true"
                     :show-loading-animation="true"

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Platform;
 
 use App\DataMappers\Views\Railcontent\ShowDataMapper;
 use App\Decorators\Content\ContentLikesDecorator;
+use App\Decorators\Content\ContentUserWatchPositionDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Content\ResourceDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
@@ -189,7 +190,6 @@ class ContentPagesController extends BaseController
                 false,
                 $futureScheduledContentOnly
             );
-
         }
 
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
@@ -683,6 +683,7 @@ class ContentPagesController extends BaseController
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
         ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AppModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+        ContentUserWatchPositionDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
 
         $this->contentService->idContentCache = [];
 
