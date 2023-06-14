@@ -45,9 +45,12 @@
                 brand="{{ $brand }}"
             >
                 <page-container
+                    csrf_token="{{ csrf_token() }}"
                     brand="{{ $brand }}"
                     :is-live="{{ isLive() ? 'true':'false' }}"
                     search-url=""
+                    :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}mostRecentPlaylists
+                    :most-recent-playlists="{{ json_encode($mostRecentPlaylists) }}" {{-- Preloaded Content --}}
                     @if(!empty( user() ))
                         user-name="{{ user()->display_name }}"
                         user-avatar="{{ user()->profile_picture_url }}"

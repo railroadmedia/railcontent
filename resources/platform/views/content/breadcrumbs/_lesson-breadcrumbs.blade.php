@@ -38,16 +38,16 @@
     @include('partials.bladesora.members.navigation.breadcrumbs', [
         "pages" => [
            [
-                        "title" => 'Coaches',
-                        "url" => url()->route('platform.coaches'),
-                    ],
-                      [
-                        "title" => !empty($coach->fetch('fields.title')) ? $coach->fetch('fields.title') : $coach->fetch('fields.name'),
-                        "url" => $coach->fetch('url')
-                    ],
-                    [
-                        "title" => $lessonContent->fetch('fields.title')
-                    ]
+                "title" => 'Coaches',
+                "url" => url()->route('platform.coaches'),
+            ],
+                [
+                "title" => !empty($coach->fetch('fields.title')) ? $coach->fetch('fields.title') : $coach->fetch('fields.name'),
+                "url" => $coach->fetch('url')
+            ],
+            [
+                "title" => $lessonContent->fetch('fields.title')
+            ]
         ]
     ])
 @elseif(!empty($pack))

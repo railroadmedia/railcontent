@@ -35,6 +35,15 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
+        $this->renderable(function (Throwable $e) {
+            if (request()->wantsJson()) {
+                return response()->json([
+                                            'message' => $e->getMessage(),
+                                            'trace' => ' File::'.$e->getFile().' Line::'.$e->getLine(),
+                                        ], 500);
+            }
+        });
+
         $this->reportable(function (Throwable $e) {
             Log::info(request()->url());
         });

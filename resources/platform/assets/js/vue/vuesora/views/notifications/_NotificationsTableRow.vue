@@ -4,7 +4,6 @@
         :class="isRead ? 'tw-bg-[#e4e4e7] dark:tw-bg-[#102230]' : ''">
         <div class="tw-flex">
             <div class="tw-flex tw-flex-col md:tw-justify-center">
-                
                 <div class="tw-rounded-full tw-w-[82px] tw-h-[82px] tw-border-[2px] tw-mr-[12px]" :class="borderColor[brand]">
                     <!-- User Avatar -->
                     <img :src="userAvatar"

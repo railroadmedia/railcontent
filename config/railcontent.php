@@ -340,6 +340,8 @@ return [
 
             \App\Decorators\Content\SemesterPackDecorator::class,
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
+            
+            \App\Decorators\Content\PlaylistItemDecorator::class,
 
             // cant the level rank stuff use the RC updates for user progress label calculated on progress update?
             //            \App\Decorators\Content\DrumeoMethodLearningPathDecorator::class, // REALLY needs optimization
@@ -357,6 +359,17 @@ return [
         'content_likes' => [
             \App\Decorators\Content\ContentLikesUserDecorator::class,
         ],
+        'playlist' => [
+           \App\Decorators\Playlist\PlaylistDecorator::class,
+        ],
+        'playlist-item' => [
+            \Railroad\Railcontent\Decorators\UserProgress\ContentUserProgressDecorator::class,
+            \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
+
+            \App\Decorators\Content\InstructorDecorator::class,
+            \App\Decorators\Content\PlaylistItemDecorator::class,
+            \App\Decorators\Content\ContentTimezoneDecorator::class,
+        ]
     ],
 
     // specific decorator configs
@@ -1250,6 +1263,8 @@ return [
         'song-tutorial',
         'song-tutorial-children',
         'rudiment',
+        "assignment",
+        'unit-part'
     ],
     'hiddenContentTypes' => [
         'ha-oemurd-pmac',
@@ -1695,4 +1710,9 @@ return [
             "icon2_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/0d3970c5-8a64-4276-4fff-dda0bcfb0900/public",
             "icon3_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/60a5d4c0-6dce-4f12-b1cb-a47996be1500/public",
         ],
-    ]];
+    ],
+    'content_multiple_level_content_depth_playlist_allowed' => [
+        'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
+    ],
+    'playlist_items_limit' => 300
+];

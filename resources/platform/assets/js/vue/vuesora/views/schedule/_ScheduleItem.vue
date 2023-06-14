@@ -56,7 +56,7 @@
                 <i
                     class="add-to-list fas fa-plus flex-center pointer"
                     :class="is_added ? 'is-added ' + themeTextClass : 'tw-text-[#52525A] dark:tw-text-[#9EC0DC]'"
-                    :title="is_added ? 'Remove from My List' : 'Add to My List'"
+                    :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
                     @click.stop.prevent="addToList"
                 ></i>
             </div>

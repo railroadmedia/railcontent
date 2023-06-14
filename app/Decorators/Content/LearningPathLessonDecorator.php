@@ -32,6 +32,7 @@ class LearningPathLessonDecorator extends TypeDecoratorBase
                     '.' .
                     $content->getParentContentData()[1]->position;
             }
+            $contentsOfType[$contentIndex]['lesson_count'] = $content['child_count'];
         }
 
         return $this->mergeDecorated($contents, $contentsOfType);

@@ -54,7 +54,6 @@ module.exports = {
     require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
     require('@tailwindcss/line-clamp'),
-    require('@tailwindcss/aspect-ratio'),
     //Stylesora's Base Styles
     require("stylesora/base")(),
     //Stylesora's Attributes
@@ -106,6 +105,19 @@ module.exports = {
         },
         '.break-words': {
           wordBreak: 'break-word',
+        },
+        //Vue Transitions
+        '.fade-enter-active, .fade-leave-active ': {
+          transition: 'opacity 150ms ease'
+        },
+        '.fade-enter-from, .fade-leave-to': {
+          opacity: 0,
+        },
+        '.v-enter-active, .v-leave-active': {
+          transition: 'opacity 0.5s ease'
+        },
+        '.v-enter-from,.v-leave-to': {
+          opacity: 0,
         }
       })
     })

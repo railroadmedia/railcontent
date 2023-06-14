@@ -501,7 +501,7 @@ export default {
       page: this.initialPage || 1,
       content: this.preLoadedContent ? this.preLoadedContent.data : [],
       filters: this.preLoadedContent ? ContentHelpers.flattenFilters( this.preLoadedContent?.meta?.filterOptions || [] ): {},
-      total_results: this.totalResults ? this.totalResults : (this.preLoadedContent ? this.preLoadedContent.data.length : (this.totalResults || 0)),
+      total_results: this.totalResults ? this.totalResults : (this.preLoadedContent?.data ? this.preLoadedContent.data.length : (this.totalResults || 0)),
       total_pages: this.preLoadedContent
         ? Math.ceil(this.preLoadedContent.meta.totalResults / this.limit)
         : 0,
@@ -639,7 +639,12 @@ export default {
       return this.noResultsMessage;
     },
   },
+  beforeMount() {
+    console.log('preloaded content', this.preloadedContent)
+
+  },
   mounted() {
+    console.log('includeFutureScheduledContentOnly',this.includeFutureScheduledContentOnly)
     if (!this.preLoadedContent && !this.preLoadedContent.results.length) {
       this.getContent();
     }

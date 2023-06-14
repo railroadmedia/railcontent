@@ -41,11 +41,7 @@ class NavigationService
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
-                    [
-                        'name' => 'My List',
-                        'path' => '/'.brand().'/lists/my-list',
-                        'icon' => 'playlist',
-                    ],
+                    
                 ],
             ];
         }
@@ -127,11 +123,7 @@ class NavigationService
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
-                    [
-                        'name' => 'My List',
-                        'path' => '/'.brand().'/lists/my-list',
-                        'icon' => 'playlist',
-                    ],
+                    
                     [
                         'name' => 'Shop',
                         'path' => get_legacy_brand_base_url() . '/shop',
@@ -217,11 +209,7 @@ class NavigationService
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
-                    [
-                        'name' => 'My List',
-                        'path' => '/'.brand().'/lists/my-list',
-                        'icon' => 'playlist',
-                    ],
+                    
                     [
                         'name' => 'Shop',
                         'path' => get_legacy_brand_base_url() . '/shop',
@@ -317,11 +305,7 @@ class NavigationService
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
-                    [
-                        'name' => 'My List',
-                        'path' => '/'.brand().'/lists/my-list',
-                        'icon' => 'playlist',
-                    ],
+                    
                     [
                         'name' => 'Shop',
                         'path' => get_legacy_brand_base_url() . '/shop',
@@ -392,11 +376,7 @@ class NavigationService
                         'path' => '/'.brand().'/forums',
                         'icon' => 'messages',
                     ],
-                    [
-                        'name' => 'My List',
-                        'path' => '/'.brand().'/lists/my-list',
-                        'icon' => 'playlist',
-                    ],
+                    
                     [
                         'name' => 'Shop',
                         'path' => get_legacy_brand_base_url() . '/shop',
