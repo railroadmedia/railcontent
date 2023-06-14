@@ -24,12 +24,12 @@ export default {
         },
 
         currentSecond: {
-            type: Number,
+            type: [Number, String],
             default: () => 0,
         },
 
         totalDuration: {
-            type: Number,
+            type: [Number, String],
             default: () => 0,
         },
 
@@ -65,6 +65,10 @@ export default {
             default: () => 'singeo',
         },
         endSecond: {
+            type: [Number, String],
+            default: null
+        },
+        startSecond: {
             type: [Number, String],
             default: 0
         }
@@ -104,6 +108,8 @@ export default {
         }
     },
     mounted() {
+
+    console.log(this.startSecond, this.endSecond)
         const youtubeIframeApi = document.getElementById('youtubeIframeApi');
 
         if (youtubeIframeApi == null) {
@@ -189,6 +195,10 @@ export default {
                     rel: 0,
                     enablejsapi: 1,
                     playsinline: 1,
+                    ...this.startSecond && this.endSecond ? {
+                        start: this.startSecond,
+                        end: this.endSecond,
+                    } : {},
                 },
                 events: {
                     onReady() {
