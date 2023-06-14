@@ -915,10 +915,23 @@ const currentProgress = computed(() => {
     if (isChromeCastConnected.value) {
         const progress = (chromeCast.value.Player.currentTime / totalDuration.value) * 100;
 
+
+        if (totalDuration.value && props.endSecond &&
+            (currentTime.value < totalDuration.value) && currentTime.value > props.endSecond) {
+            playPause();
+            endCallback();
+        }
+
         return isNaN(progress) ? 0 : progress;
     }
 
     const progress = (currentTime.value / totalDuration.value) * 100;
+
+    if (totalDuration.value && props.endSecond &&
+        (currentTime.value < totalDuration.value) && currentTime.value > props.endSecond) {
+        playPause();
+        endCallback();
+    }
 
     return isNaN(progress) ? 0 : progress;
 });
