@@ -82,9 +82,11 @@ class PlaylistDecorator extends ModeDecoratorBase
             } else {
                 $playlists[$index]['uploaded_thumbnail'] = true;
             }
-            $date_info = getdate($playlists[$index]['duration'] ?? 0);
-            $format = ($date_info['hours'] > 1) ? 'H:i:s' : 'i:s';
-            $playlists[$index]['duration_formated'] = gmdate($format, $playlists[$index]['duration'] ?? 0);
+
+            $minsec = gmdate("i:s", $playlists[$index]['duration'] ?? 0);
+            $hours = (gmdate("d", $playlists[$index]['duration'] ?? 0)-1)*24 + gmdate("H", $playlists[$index]['duration'] ?? 0);
+            $playlists[$index]['duration_formated'] = $hours.':'.$minsec;
+
             $playlists[$index]['playback_url'] = url()->route('platform.play.playlist', [
                 'playlistId' => $playlist['id'],
             ]);
