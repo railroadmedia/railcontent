@@ -346,7 +346,7 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-5xl mx-auto">
             <h2 class="leading-tight"><strong><span class="border-2 border-musora rounded-full px-3 sm:px-4 py-1 inline-block">6</span> reasons why you’ll <br class="inline sm:hidden">love learning here.</strong></h2>
-            <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">Level up your skills with the lessons, teachers, and<br class="hidden sm:inline lg:hidden">  practice tools <strong class="font-black">trusted by <span class="text-musora-gold">{{ number_format(Prices::$students) }}</span> active students</strong>. </p>
+            <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">Level up your skills with the lessons, teachers, and<br class="hidden sm:inline lg:hidden">  practice tools <strong class="font-black">trusted by <span class="text-musora">{{ number_format(Prices::$students) }}</span> active students</strong>. </p>
             <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 hidden sm:flex">
 
                 @php
@@ -960,25 +960,24 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    <section class="py-14 sm:pt-0 sm:pb-20 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative overflow-hidden" style="background: #0c1524;">
-        <div class="container mx-auto max-w-6xl sm:mb-16">
-            <div class="flex flex-wrap items-center">
-                <div class="flex w-full justify-center sm:justify-start sm:w-1/2 sm:order-1 sm:pl-5 lg:pl-10 mb-7 sm:mb-0">
+    <section class="py-14 sm:pt-0 sm:pb-20 relative text-white text-center customize px-4 lg:px-6 relative" style="background: #0c1524;">
+        <div class="container mx-auto max-w-6xl sm:mb-14">
+            <div class="flex items-center">
+                <div class="flex w-full justify-center sm:justify-start sm:w-auto sm:order-1 mb-7 sm:mb-0 -mt-4">
                     <picture>
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team.png">
-                        <img class="max-w-xl sm:max-w-2xl lg:max-w-4xl transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team.png" alt="musora collage image">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team2.png">
+                        <img class="transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team2.png" alt="musora collage image">
                     </picture>
                 </div>
-                <div class="text-center sm:text-left w-full sm:w-1/2 sm:pl-5">
-                    <img class="h-6 mb-8" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png">
-                    <h6 class="uppercase  text-musora-gold  "><strong>YOUR FIRST  7 Days  ARE FREE.</strong></h6>
-                    <h3 class="leading-normal"><strong>Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.</strong></h3>
-                    <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
+                <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0 flex-col flex items-start">
+                    <img class="h-6 mb-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png">
+                    <h6 class="uppercase  text-musora inline-block "><strong>YOUR FIRST  7 Days  ARE FREE.</strong></h6>
+                    <h3 class="leading-normal inline-block"><strong>Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.</strong></h3>
+                    <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-0 inline-block">
 
-                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold" aria-hidden="true"></i> Trusted by {{ number_format(Prices::$students) }} happy students.</li>
-                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold" aria-hidden="true"></i> Online lessons on every topic.</li>
-                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold" aria-hidden="true"></i> Personalized feedback from real teachers.</li>
-                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora-gold" aria-hidden="true"></i> Includes access to Musora’s lessons for piano, guitar, and voice. </li>
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora" aria-hidden="true"></i> Trusted by {{ number_format(Prices::$students) }} happy students.</li>
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-musora" aria-hidden="true"></i> Personalized feedback from real teachers.</li>
+                        <li class="leading-tight mb-3 text-musora"><i class="fa-li fas fa-check" aria-hidden="true"></i> All-access for piano, guitar, drums, and singing. </li>
                     </ul>
                     <div class="w-72 lg:w-96 mx-auto sm:mx-0">
                         <a class=" w-full sm:w-64 join smaller  musora-gold  w-full my-3" href="/choose-plan">

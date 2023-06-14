@@ -15,13 +15,33 @@
                 "iconClass" => "fas fa-home",
                 "url" => "/",
             ],
-            "Method" => [
+            "Features" => [
                 "iconClass" => "fas fa-star",
-                "url" => get_musora_brand_base_url().'/method',
+                "children" => [
+                    "Method" => [
+                        "url" => get_musora_brand_base_url().'/method',
+                    ],
+                    "Songs" => [
+                        "url" => get_musora_brand_base_url().'/songs',
+                    ],
+                ],
             ],
-            "Songs" => [
-                "iconClass" => "fas fa-star",
-                "url" => get_musora_brand_base_url().'/songs',
+            "Instruments" => [
+                "iconClass" => "fas fa-piano-keyboard",
+                "children" => [
+                    "Piano" => [
+                        "url" => 'https://www.pianote.com',
+                    ],
+                    "Guitar" => [
+                        "url" => 'https://www.guitareo.com',
+                    ],
+                    "Drums" => [
+                        "url" => 'https://www.drumeo.com',
+                    ],
+                    "Singing" => [
+                        "url" => 'https://www.singeo.com',
+                    ],
+                ],
             ],
             "Pricing" => [
                 "iconClass" => "fas fa-money-bill-wave",
@@ -51,22 +71,18 @@
         "external_links" => [
             "Drumeo" => [
                 "iconClass" => "fas fa-external-link",
-                "themeClass" => "text-musora",
                 "url" => get_legacy_brand_base_url("drumeo")
             ],
             "Pianote" => [
                 "iconClass" => "fas fa-external-link",
-                "themeClass" => "text-musora",
                 "url" => get_legacy_brand_base_url("pianote")
             ],
             "Guitareo" => [
                 "iconClass" => "fas fa-external-link",
-                "themeClass" => "text-musora",
                 "url" => get_legacy_brand_base_url("guitareo")
             ],
             "Singeo" => [
                 "iconClass" => "fas fa-external-link",
-                "themeClass" => "text-musora",
                 "url" => get_legacy_brand_base_url("singeo")
             ]
         ]
