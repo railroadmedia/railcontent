@@ -85,7 +85,7 @@ class PlaylistDecorator extends ModeDecoratorBase
 
             $minsec = gmdate("i:s", $playlists[$index]['duration'] ?? 0);
             $hours = (gmdate("d", $playlists[$index]['duration'] ?? 0)-1)*24 + gmdate("H", $playlists[$index]['duration'] ?? 0);
-            $playlists[$index]['duration_formated'] = $hours.':'.$minsec;
+            $playlists[$index]['duration_formated'] = ($hours == 0)? $minsec : $hours.':'.$minsec ;
 
             $playlists[$index]['playback_url'] = url()->route('platform.play.playlist', [
                 'playlistId' => $playlist['id'],
