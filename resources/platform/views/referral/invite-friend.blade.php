@@ -44,7 +44,7 @@
                             <div class="tw-flex tw-flex-col lg:tw-h-full tw-w-full tw-mx-auto">
                                 <p class="tw-mb-6 md:tw-mb-8 tw-text-sm md:tw-text-lg">
                                     Give a friend unlimited access to Pianote free for 30 days. Every new Pianote referral you make from <b class="tw-font-extrabold">June 19 to 30, 2023</b> instantly enters you for a chance to win one of three prizes! <br><br>
-                                    <a href="#terms"><i class="tw-underline tw-text-sm md:tw-text-lg">See Contest Details - Terms & Conditions*</i></a>
+                                    <a href="#terms"><i class="tw-underline tw-text-sm md:tw-text-lg tw-text-black dark:tw-text-white">See Contest Details - Terms & Conditions*</i></a>
                                 </p>
 
                                 <div class="tw-flex tw-flex-col lg:tw-h-full tw-w-full tw-max-w-lg 2xl:tw-max-w-none tw-mx-auto">
@@ -89,7 +89,7 @@
 
         <section class="tw-bg-[#00101D] tw-py-10 lg:tw-py-20">
             <div class="tw-max-w-5xl tw-mx-auto tw-px-3 sm:tw-px-6 xl:tw-px-0 tw-text-white tw-text-center">
-                <h3 class="tw-mb-10"><strong>You can win...</strong></h3>
+                <h3 class="tw-mb-10 tw-text-xl sm:tw-text-2xl md:tw-text-3xl"><strong>You can win...</strong></h3>
                 <div class="md:tw-grid md:tw-grid-cols-3 md:tw-gap-4 tw-mb-14 tw-max-w-sm sm:tw-max-w-none tw-mx-auto">
                      <img class="tw-mx-auto tw-mb-6 sm:tw-mb-0" src="https://musora-web-platform.s3.amazonaws.com/referral/pianote_1st+Prize.png" alt="1st prize" />
                      <img class="tw-mx-auto tw-mb-6 sm:tw-mb-0" src="https://musora-web-platform.s3.amazonaws.com/referral/pianote_2nd+Prize.png" alt="2nd prize" />
