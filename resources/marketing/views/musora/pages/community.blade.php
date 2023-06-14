@@ -262,7 +262,7 @@
             </strong>
         </h3>
         <p class="text-center mt-5 mb-16 sm:mt-5 sm:mb-20 max-w-2xl mx-auto mb-14 px-4">
-            Musora is trusted by over 70,000 students. And has been rated 5-stars for price, satisfaction, and customer service. Check out all the success storeis and reviews here.
+            Musora is trusted by over {{ number_format(round (Prices::$students, -3)) }} students. And has been rated 5-stars for price, satisfaction, and customer service. Check out all the success storeis and reviews here.
         </p>
         <div class="max-w-4xl mx-auto">
             @component('_partials.components.carousel',[
@@ -365,10 +365,10 @@
         "songs" => "5000",
         "firstPoint" => "Piano, Guitar, Drums, Singing.",
         "thirdPoint" => "Unlimited personal support",
-        "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
-        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
-        "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
-        "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+        "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
+        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-7-day-trial-membership]=1&locked=true",
+        "annualLink" => "/ecommerce/add-to-cart?products[musora-base-annual-recurring-7-day-trial-membership]=1&locked=true",
+        "monthlyLink" => "/ecommerce/add-to-cart?products[musora-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
     ])
 
 

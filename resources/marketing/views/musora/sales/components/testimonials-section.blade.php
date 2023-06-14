@@ -86,14 +86,29 @@
                                     <div class="w-full text-center">
                                         <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
                                         <p class="text-sm">{{ $testimonial['name'] }}</p>
-
-                                            <p class="mt-1 text-xs text-{{ $theme }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
-                                                @if(!empty($testimonial['video']))
-                                                    Watch video
+                                            @if(!empty($testimonial['brand']))
+                                                <p class="mt-1 text-xs cursor-pointer
+                                                @if($testimonial['brand'] == 'Drummer')
+                                                text-drumeo
+                                                @elseif($testimonial['brand'] == 'Pianist')
+                                                text-pianote
+                                                @elseif($testimonial['brand'] == 'Guitarist')
+                                                text-guitareo
                                                 @else
-                                                    Read more
+                                                text-singeo
                                                 @endif
-                                            </p>
+                                                " x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
+                                                    {{ $testimonial['brand'] }}
+                                                </p>
+                                            @else
+                                                <p class="mt-1 text-xs text-{{ $theme }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
+                                                    @if(!empty($testimonial['video']))
+                                                        Watch video
+                                                    @else
+                                                        Read more
+                                                    @endif
+                                                </p>
+                                            @endif
                                     </div>
                                 </li>
                             @endforeach
@@ -105,7 +120,7 @@
         @if(!empty($desktopGrid))
             <div class=" hidden sm:flex flex-wrap">
                 @foreach ($testimonials as $testimonial)
-                    <div class="flex flex-col items-start px-1 w-1/4">
+                    <div class="flex flex-col items-start px-1 w-1/4 mb-3">
                         <div class="relative mb-2 w-full overflow-hidden rounded-xl cursor-pointer" style="padding-bottom: 66%;"
                             x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                         >
@@ -117,14 +132,29 @@
                         <div class="w-full text-center">
                             <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
                             <p class="text-sm">{{ $testimonial['name'] }}</p>
-
-                            <p class="mt-1 text-xs @if($theme == 'musora') text-musora-gold @else text-{{ $theme }} @endif cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
-                                @if(!empty($testimonial['video']))
-                                    Watch video
-                                @else
-                                    Read more
-                                @endif
-                            </p>
+                            @if(!empty($testimonial['brand']))
+                                <p class="mt-1 text-xs cursor-pointer
+                                                @if($testimonial['brand'] == 'Drummer')
+                                                text-drumeo
+                                                @elseif($testimonial['brand'] == 'Pianist')
+                                                text-pianote
+                                                @elseif($testimonial['brand'] == 'Guitarist')
+                                                text-guitareo
+                                                @else
+                                                text-singeo
+                                                @endif
+                                                " x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
+                                    {{ $testimonial['brand'] }}
+                                </p>
+                            @else
+                                <p class="mt-1 text-xs text-{{ $theme }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
+                                    @if(!empty($testimonial['video']))
+                                        Watch video
+                                    @else
+                                        Read more
+                                    @endif
+                                </p>
+                            @endif
                         </div>
                     </div>
                 @endforeach

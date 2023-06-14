@@ -279,7 +279,7 @@
             <h6 class="leading-relaxed mt-2 sm:mt-6 mb-4 sm:mb-7">
                 Find your musical flow with step-by-step lessons, <br class="hidden sm:inline">
                 thousands of songs, and unlimited personal support.</h6>
-            <a class="sm:mx-1 w-full sm:w-56 join musora-gold smaller anchor-slide" href="#customize-anchor">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+            <a class="sm:mx-1 w-full sm:w-56 join musora-gold smaller" href="/choose-plan">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
             <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
@@ -288,7 +288,7 @@
                     <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
                     <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
                 </a>
-                <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by 70,145 active students.</em></p>
+                <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
             </div>
         </div>
         <img class="absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2" style="top:53%;left: 4%;" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/header4.png" alt="header circle image" fetchpriority="high">
@@ -426,7 +426,7 @@
                             >
                         </picture>
                         <div class="w-2/3 sm:w-full pl-3 sm:pl-0">
-                            <p class="leading-tight mb-0.5"><strong class="font-black"><span class="border border-musora-gold rounded-full px-2 py-0.5 inline-block">{{$key+1}}</span> {{ $gridItem['title'] }}</strong></p>
+                            <p class="leading-tight mb-0.5"><strong class="font-black"><span class="border border-musora rounded-full px-2 py-0.5 inline-block">{{$key+1}}</span> {{ $gridItem['title'] }}</strong></p>
                             <p class="leading-normal text-sm">{{ $gridItem['desc'] }}</p>
                         </div>
                     </div>
@@ -887,6 +887,7 @@
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/ed-koop.jpg',
             'name' => 'Ed Koop',
+            'brand' => 'Drummer',
             'video' => '342059271',
             'title' => 'I’m loving music more than I ever did before!',
             'description' => 'After 20 years away from the drums, Ed says he’s loving music more than ever. He nailed his first audition and has now played at the venues of his dreams.',
@@ -894,6 +895,7 @@
             [
             'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/testimonials/lisa-aragon.jpg',
             'name' => 'Lisa Aragon',
+            'brand' => 'Drummer',
             'video' => '373252004',
             'title' => 'I was able to play drums on stage!',
             'description' => 'Lisa got interested in the drums by playing Rock Band. She had no idea she’d be performing with strangers in Nashville just a few years later.',
@@ -903,6 +905,7 @@
             'title' => "If I was taught this way as a child, I would have never quit.",
             'description' => "I decided to sign up with Pianote not only to re-learn how to play the piano, but also because my mental health was really suffering and I needed something positive to focus on that was just for ME. I knew almost immediately that this was the answer I had been looking for. It felt like the heaviness on my shoulders got a bit lighter after every piano session.  And even though the lessons are virtual, it was like Lisa was right there beside me cheering me on.<br><br>I was blown away by how quickly I progressed with a few tutorials from Lisa. My overall confidence improved, especially with improvisation. Now I know all these little tricks (fills & riffs) and how to play inversions and practice chords in ways that sound so lovely.  If I had been taught this way as a child, I probably never would have quit.",
             'name' => 'Serena Dorward',
+            'brand' => 'Pianist',
             'location' => 'Ontario, Canada',
             ],
             [
@@ -910,12 +913,14 @@
             'title' => "I’m blown away by the program you’ve created.",
             'description' => "Pianote is an insanely encouraging and supportive community run by an insanely encouraging and supportive team. Sincerely, I’m blown away by the program you’ve created.<br><br>I sat down one day and it just clicked. From then on, I’ve felt VERY encouraged to keep learning and practicing. It’s fulfilling and fun to see myself progress and achieve goals. Now I’m playing with both hands at the same time with confidence – and I’ve started playing along with more backing tracks and making up my own songs.",
             'name' => 'Jess Ripley',
+            'brand' => 'Pianist',
             'location' => 'California, USA',
             ],
             [
             'title' => "I’m lightyears ahead of where I was.",
             'description' => "I’ve come so far in such a short period of time. I’ve gone from not even knowing what palm muting was to noodling with the E & A string pentatonic shapes and creating melodies with it – and using it to work on my vibrato, slides, and bends. And I’ve gained priceless info like knowing where to place chords, start power chords, and scale shapes.<br><br>Having the breakthroughs I’ve had so far has brought me confidence and kept me sane while the world is seemingly not – and made me believe there is still a bright future ahead. As I progress, I feel supported towards achieving my goals of jamming with others and using my love for writing to start telling stories through music. All in due time.<br><br>I’m lightyears ahead of where I was at. And no matter where I go, or however tough things get, I’ll always have one of my guitars in the passenger seat and we’ll always be there for each other. The life long journey has begun!",
             'name' => 'Ërlik Sörensen',
+            'brand' => 'Guitarist',
             'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2022/testimonials/erliksorensen.jpg',
             'location' => 'British Columbia, Canada',
             ],
@@ -923,12 +928,14 @@
             'title' => "I’ve never felt so much JOY playing the guitar.",
             'description' => "When I finished the first lesson, I had a feeling of joy that I’ve never had before when playing guitar. I'm experimenting a lot more and improving my technique. The goal-based learning makes each set of lessons more entertaining and a feeling of accomplishment when completed.",
             'name' => 'Jamie K',
+            'brand' => 'Guitarist',
             'image' => 'https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/jamie-nova-scotia.jpg',
             'location' => 'Nova Scotia, Canada',
             ],
             [
             'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2022/testimonials/OriannaSells.jpg',
             'name' => 'Orianna Sells',
+            'brand' => 'Singer',
             'title' => 'It felt like the chains finally fell off my voice.',
             'description' => 'I was concerned that my singing style was too different to truly learn what I needed – and I wanted to strengthen my voice and stretch my range in a healthy manner.<br><br>With Singeo, I started practicing my songs more meticulously and it paid off – stronger high notes were available and it felt like the chains finally fell off my voice!',
             'location' => 'South Carolina, USA',
@@ -936,6 +943,7 @@
             [
             'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2022/testimonials/DamienGiven3.jpg',
             'name' => 'Damien Given',
+            'brand' => 'Singer',
             'title' => 'I’m getting back some of my old confidence.',
             'description' => 'Thirty-five years ago, I sang professionally in a group. And now at 74 years old, I’d given up the idea of ever singing properly again. But when tendonitis put a stop to my piano playing for several months, I decided to give Singeo a try – and boy, what a great choice!<br><br>I’m getting back some of my old confidence through the lessons and feedback – and I’m now keen to regain more pitch and breathing control, even though physiologically I’ve probably lost about one and a half steps at the top of my range. But that doesn’t bother me as much as I thought it would after a few months with Singeo. I’ve received a great deal of positive feedback from my classmates - and great tips from Lisa, Julia, and the team. What a find, what a course, and what great tutors!',
             'location' => 'Northern Ireland',
