@@ -1,10 +1,10 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=2bebde5f6071e228be4afbf4ea9c2a65",
+    "/platform/js/app.js": "/platform/js/app.js?id=4d4ce72ba8762a286d60409877e88c3b",
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=d8dfdf5c5bceea18578ef8fab600ce44",
-    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=0786f48fd36fbaee145435d2f08fec63",
+    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=60a78f76215373ed7d72b8fd7777fd70",
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=af3d16381543901859e9e955ed9e2cd0",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=e1ffd5c9f64e7739d834a415aba059fc",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=26ba2bb391babd9dcfbc6e1e9cf80ffd",
@@ -23,7 +23,7 @@
     "/platform/js/contact-email-form.js": "/platform/js/contact-email-form.js?id=b229465f2954d9bb8472d0e3693055b5",
     "/platform/js/youtube-player-component.js": "/platform/js/youtube-player-component.js?id=96ac93375b394da5a0ef77b86b12f811",
     "/platform/js/onboarding-component.js": "/platform/js/onboarding-component.js?id=81b546d670f43c69504dc3c02f5816ce",
-    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=5bedcd248fc89aca576a5770b5d5de35",
+    "/platform/js/video-player-component.js": "/platform/js/video-player-component.js?id=f51a82411ca37da57eccc2bd807563d0",
     "/platform/js/video-media-element-component.js": "/platform/js/video-media-element-component.js?id=81ae53c4bc6c08628d7c2b6710c14975",
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=d8e4ffb070f05d53478bd161da77aaef",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=29c8cb890913b17d044be75e54783d09",
@@ -35,6 +35,6 @@
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=26d03238e24769866d21704f9c052fd4",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=b06c413be0cbc92f51079e8948ccc276",
     "/platform/css/app.css": "/platform/css/app.css?id=09b7df50bbab33cddfd1f1574ad84c15",
-    "/marketing/css/app.css": "/marketing/css/app.css?id=fcce4534fc5bdb943959eeb7ceef485d",
+    "/marketing/css/app.css": "/marketing/css/app.css?id=549a51acac82533d0c0d68772debfa9f",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=0fc5faf861ed4e3c9c047d9bd7411cce"
 }

@@ -403,10 +403,17 @@ onMounted(() => {
                 <span class="tw-pl-[6px]">CREATE PLAYLIST</span>
             </button>
             <!--Save Buttons -->
-            <button v-if="props.content.type === 'song' || props.content.type === 'routine'"
+            <button v-if="props.content.type === 'song'"
                     @click="handleSaveItem"
                     :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-[#0A2847] dark:disabled:tw-text-[#445F74] tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600`"
-                    :disabled="selectedPlaylists.length === 0 && (addInstrumentlessToggle === false && addFullSongToggle === false) || (includeHighRoutine === false && includeLowRoutine === false)"
+                    :disabled="selectedPlaylists.length === 0 || (addInstrumentlessToggle === false && addFullSongToggle === false) "
+            >
+                SAVE
+            </button>
+            <button v-else-if="props.content.type === 'routine'"
+                    @click="handleSaveItem"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:disabled:tw-bg-[#0A2847] dark:disabled:tw-text-[#445F74] tw-bg-${brand} tw-h-[35px] hover:tw-bg-${brand}-600`"
+                    :disabled="selectedPlaylists.length === 0 || (includeHighRoutine === false && includeLowRoutine === false)"
             >
                 SAVE
             </button>

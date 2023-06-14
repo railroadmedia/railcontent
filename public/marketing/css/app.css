@@ -1424,6 +1424,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 0px !important;
   margin-bottom: 0px !important;
 }
+.mx-5 {
+  margin-left: 1.25rem !important;
+  margin-right: 1.25rem !important;
+}
 .my-20 {
   margin-top: 5rem !important;
   margin-bottom: 5rem !important;
@@ -1447,10 +1451,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mx-3 {
   margin-left: 0.75rem !important;
   margin-right: 0.75rem !important;
-}
-.mx-5 {
-  margin-left: 1.25rem !important;
-  margin-right: 1.25rem !important;
 }
 .my-0\.5 {
   margin-top: 0.125rem !important;
@@ -2064,8 +2064,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-12 {
   width: 3rem !important;
 }
-.w-16 {
-  width: 4rem !important;
+.w-24 {
+  width: 6rem !important;
 }
 .w-\[620px\] {
   width: 620px !important;
@@ -2091,9 +2091,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-8 {
   width: 2rem !important;
 }
-.w-24 {
-  width: 6rem !important;
-}
 .w-56 {
   width: 14rem !important;
 }
@@ -2102,6 +2099,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-4 {
   width: 1rem !important;
+}
+.w-16 {
+  width: 4rem !important;
 }
 .w-40 {
   width: 10rem !important;
@@ -3306,6 +3306,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pb-32 {
   padding-bottom: 8rem !important;
 }
+.pb-72 {
+  padding-bottom: 18rem !important;
+}
 .pb-64 {
   padding-bottom: 16rem !important;
 }
@@ -3344,9 +3347,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pb-56 {
   padding-bottom: 14rem !important;
-}
-.pb-72 {
-  padding-bottom: 18rem !important;
 }
 .pt-48 {
   padding-top: 12rem !important;
@@ -4471,14 +4471,6 @@ li, p {
     right: 0 !important;
   }
 
-  .sm\:bottom-3 {
-    bottom: 3rem !important;
-  }
-
-  .sm\:left-3 {
-    left: 3rem !important;
-  }
-
   .sm\:bottom-7 {
     bottom: 1.75rem !important;
   }
@@ -5340,10 +5332,6 @@ li, p {
     padding: 3.5rem !important;
   }
 
-  .sm\:p-4 {
-    padding: 1rem !important;
-  }
-
   .sm\:p-9 {
     padding: 2.25rem !important;
   }
@@ -5477,6 +5465,11 @@ li, p {
     padding-right: 2rem !important;
   }
 
+  .sm\:py-5 {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+
   .sm\:px-9 {
     padding-left: 2.25rem !important;
     padding-right: 2.25rem !important;
@@ -5495,11 +5488,6 @@ li, p {
   .sm\:py-4 {
     padding-top: 1rem !important;
     padding-bottom: 1rem !important;
-  }
-
-  .sm\:py-5 {
-    padding-top: 1.25rem !important;
-    padding-bottom: 1.25rem !important;
   }
 
   .sm\:py-2 {
