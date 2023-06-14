@@ -169,7 +169,7 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['status'] = $item['status'];
                 $playlistItems[$index]['published_on'] = $item['published_on'];
                 $playlistItems[$index]['published_on_in_timezone'] = $item['published_on_in_timezone'] ?? null;
-                $playlistItems[$index]['need_access'] = $item['need_access'];
+                $playlistItems[$index]['need_access'] = $item['need_access'] ?? false;
                 $playlistItems[$index]['need_access_message'] = $item['need_access_message'] ?? '';
 
                 $playlistItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
@@ -290,7 +290,7 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['data'] = $item['data'];
             $otherItems[$index]['published_on'] = $item['published_on'];
             $otherItems[$index]['published_on_in_timezone'] = $item['published_on_in_timezone'] ?? null;
-            $otherItems[$index]['need_access'] = $item['need_access'];
+            $otherItems[$index]['need_access'] = $item['need_access'] ?? false;
             $otherItems[$index]['need_access_message'] = $item['need_access_message'] ?? '';
             $otherItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
             $otherItems[$index]['route'] = $item['route'] ?? '';
