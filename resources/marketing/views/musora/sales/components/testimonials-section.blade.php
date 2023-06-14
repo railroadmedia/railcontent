@@ -5,21 +5,20 @@
         @endforeach
     }">
 
-    <div class="container mx-auto max-w-6xl mb-12">
+    <div class="container mx-auto max-w-6xl">
         <h2 class="leading-tight mb-4"><strong>{!! $header !!}</strong></h2>
         @if(!empty($subheadline))
             <p class="mx-auto mb-6">{!!  $subheadline  !!}</p>
         @endif
-
-        <img
-            alt="shopper approved image"
-            class="h-8 sm:h-9 lg:h-11 mb-2 mx-auto transition-opacity opacity-0"
-            src="https://www.musora.com/musora-cdn/image/width=320,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/shopper-approved-icon.svg"
-            loading="lazy"
-            onload="this.classList.remove('opacity-0')"
-        >
-        <a class="inline-block w-full @if(empty($youtube)) mb-10 sm:mb-16 @endif" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
-            <p class="mx-auto">{!!  $reviewText  !!} <span class="inline-block @if($theme != 'musora') text-{{ $theme }} @else text-drumeo @endif">See The Reviews »</span></p>
+        <a class="inline-block w-full" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
+            <img
+                alt="shopper approved image"
+                class="h-8 sm:h-9 lg:h-11 mb-2 mx-auto transition-opacity opacity-0"
+                src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            >
+            <p class="mx-auto @if(empty($youtube)) mb-10 sm:mb-16 @endif">{!!  $reviewText  !!} <span class="inline-block @if($theme != 'musora') text-{{ $theme }} @else text-drumeo @endif">See the reviews »</span></p>
 
         </a>
         @if(!empty($youtube))
@@ -103,33 +102,35 @@
                 </section>
             </div>
         </div>
-        <div class="@if(!empty($desktopGrid)) hidden sm:flex flex-wrap @endif">
-            @foreach ($testimonials as $testimonial)
-                <div class="flex flex-col items-start px-1 w-1/4">
-                    <div class="relative mb-2 w-full overflow-hidden rounded-xl cursor-pointer" style="padding-bottom: 66%;"
-                        x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
-                    >
-                        <div class="absolute inset-0 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=500,quality=85/{{$testimonial['image']}});"></div>
-                        <div class="absolute inset-0 flex justify-center align-center">
-                            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
+        @if(!empty($desktopGrid))
+            <div class=" hidden sm:flex flex-wrap">
+                @foreach ($testimonials as $testimonial)
+                    <div class="flex flex-col items-start px-1 w-1/4">
+                        <div class="relative mb-2 w-full overflow-hidden rounded-xl cursor-pointer" style="padding-bottom: 66%;"
+                            x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
+                        >
+                            <div class="absolute inset-0 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=500,quality=85/{{$testimonial['image']}});"></div>
+                            <div class="absolute inset-0 flex justify-center align-center">
+                                <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
+                            </div>
+                        </div>
+                        <div class="w-full text-center">
+                            <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
+                            <p class="text-sm">{{ $testimonial['name'] }}</p>
+
+                            <p class="mt-1 text-xs @if($theme == 'musora') text-musora-gold @else text-{{ $theme }} @endif cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
+                                @if(!empty($testimonial['video']))
+                                    Watch video
+                                @else
+                                    Read more
+                                @endif
+                            </p>
                         </div>
                     </div>
-                    <div class="w-full text-center">
-                        <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
-                        <p class="text-sm">{{ $testimonial['name'] }}</p>
+                @endforeach
 
-                        <p class="mt-1 text-xs @if($theme == 'musora') text-musora-gold @else text-{{ $theme }} @endif cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
-                            @if(!empty($testimonial['video']))
-                                Watch video
-                            @else
-                                Read more
-                            @endif
-                        </p>
-                    </div>
-                </div>
-            @endforeach
-
-        </div>
+            </div>
+        @endif
     </div>
     @foreach($testimonials as $testimonial)
         @if(!empty($testimonial['video']))
