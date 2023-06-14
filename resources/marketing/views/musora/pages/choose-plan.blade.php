@@ -39,6 +39,14 @@
             background:#FFAE00;
             color:#000;
         }
+        .join.musora-black {
+            background-color:#0c1524;
+        }
+
+        .join.musora-black:hover,
+        .join.musora-black:focus {
+            background:#0c1524;
+        }
     </style>
 @stop
 
@@ -50,8 +58,8 @@
         "whiteBg" => true,
         "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
         "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
-        "songs" => "5000",
-        "firstPoint" => "Piano, Guitar, Drums, Singing.",
+        "songs" => "Thousands of popular songs.",
+        "firstPoint" => "Learn piano, guitar, drums, & singing.",
         "thirdPoint" => "Unlimited personal support",
         "plusAnnualLink" => "/ecommerce/add-to-cart?products[musora-annual-recurring-7-day-trial-membership]=1&locked=true",
         "plusMonthlyLink" => "/ecommerce/add-to-cart?products[musora-monthly-recurring-7-day-trial-membership]=1&locked=true",
