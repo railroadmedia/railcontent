@@ -21,6 +21,11 @@
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"> -->
+    <style>
+        .top-bar .button-wrap .join.outline-button {
+            color:#fff;
+        }
+    </style>
 @stop
 
 @section('global-body')
@@ -30,18 +35,9 @@
     {{-- Confirmation Modal Container --}}
     <div id="confirmation-container"></div>
 
-    <nav id="nav" class="top-bar row expanded">
-        <div class="logo">
-            <a href="">
-                <img src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white_new.svg" alt="Drumeo">
-            </a>
-        </div>
-
-
-        <div class="button-wrap">
-            <a href="/drumshop" class="join outline-button text-white hover:text-black">Shop</a>
-        </div>
-    </nav>
+    @include("drumeo.sales.partials._nav", [
+        "checkoutVersion" => true,
+    ])
 
     <div id="app">
         @if(!empty(user()))
