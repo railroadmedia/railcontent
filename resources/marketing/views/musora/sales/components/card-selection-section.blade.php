@@ -1,4 +1,10 @@
-<section class="text-center text-white px-4 sm:px-6 py-10 sm:py-14 lg:py-20 bg-[#0c1524]"
+<section class="text-center @if(empty($whiteBg)) text-white @endif px-4 sm:px-6 py-10 sm:py-14 lg:py-20"
+    @if(!empty($whiteBg))
+        style="background:linear-gradient(to bottom, #fff 40%, #F1EFED);"
+    @else
+        style="background:#0c1524;"
+    @endif
+
     x-data="{ plusMembershipSelected: true }"
 >
     <div class="container max-w-6xl mx-auto">
@@ -12,7 +18,7 @@
                 <div class="px-1 sm:px-2">
                     <p class="inline-block relative -bottom-1 mb-1 px-3 py-0.5 z-10 leading-tight text-black text-xs rounded-full bg-[#00c9ac]">MOST POPULAR</p>
                     <div id="plusButton"
-                        class="active option-buttons hover:opacity-90 cursor-pointer border-2 flex items-center rounded-xl py-3 sm:py-4 px-3 sm:px-5 bg-[#273040] border-[#0c1524]"
+                        class="active option-buttons text-white hover:opacity-90 cursor-pointer border-2 flex items-center rounded-xl py-3 sm:py-4 px-3 sm:px-5 bg-[#273040] border-[#0c1524]"
                         x-bind:class="{ 'active': plusMembershipSelected }"
                         x-on:click="plusMembershipSelected = true"
                     >
@@ -26,7 +32,7 @@
                     </div>
                 </div>
                 <div class="px-1 sm:px-2">
-                    <div id="nonPlusButton" class="option-buttons hover:opacity-90 cursor-pointer border-2 flex items-center rounded-xl py-3 sm:py-4 px-3 sm:px-5 bg-[#273040] border-[#0c1524]"
+                    <div id="nonPlusButton" class="option-buttons text-white hover:opacity-90 cursor-pointer border-2 flex items-center rounded-xl py-3 sm:py-4 px-3 sm:px-5 bg-[#273040] border-[#0c1524]"
                         x-bind:class="{ 'active': !plusMembershipSelected }"
                         x-on:click="plusMembershipSelected = false"
                     >
@@ -48,14 +54,14 @@
         >
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-black text-sm rounded-full bg-[#ffac00]" >SAVE 33%</p>
-                <a href="{{$plusAnnualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                <a href="{{$plusAnnualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group @if(!empty($whiteBg)) border-2 border-{{ $theme }} @endif">
                     <div class="bg-white px-3 py-6 md:py-9">
                         <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12) }}/month</strong></h4>
                         <p class="text-sm mb-6"><em>Billed at ${{Prices::$plusSubscriptionAnnualFull}} per year.</em></p>
-                        <div class="font-bebas join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
+                        <div class="font-bebas join {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
                     </div>
-                    <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
+                    <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 @if(!empty($whiteBg)) bg-white @else bg-[#e7edf4] @endif">
                         <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
                         <p class="text-sm mb-1"><strong>{{ $songs }}+ popular songs.</strong></p>
                         <p class="text-sm mb-1"><strong>{{ $thirdPoint }}</strong></p>
@@ -68,14 +74,14 @@
                 </a>
             </div>
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                <a href="{{$plusMonthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                <a href="{{$plusMonthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group @if(!empty($whiteBg)) border-2 border-{{ $theme }} @endif">
                     <div class="bg-white px-3 py-6 md:py-9">
                         <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ Prices::$plusSubscriptionMonthly }}/month</strong></h4>
                         <p class="text-sm mb-6"><em>Pay as you go.</em></p>
-                        <div class="font-bebas join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
+                        <div class="font-bebas join {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
                     </div>
-                    <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
+                    <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10 @if(!empty($whiteBg)) bg-white @else bg-[#e7edf4] @endif">
                         <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
                         <p class="text-sm mb-1"><strong>{{ $songs }}+ popular songs.</strong></p>
                         <p class="text-sm mb-1"><strong>{{ $thirdPoint }}</strong></p>
@@ -96,15 +102,15 @@
         >
             <div class="w-full md:w-1/2 px-2 md:px-3 mb-4 md:mb-0 relative">
                 <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-black text-sm rounded-full bg-[#ffac00]">SAVE 33%</p>
-                <a href="{{$annualLink}}" class="text-black overflow-hidden rounded-t-2xl block mx-auto group">
+                <a href="{{$annualLink}}" class="text-black overflow-hidden rounded-t-2xl block mx-auto group @if(!empty($whiteBg)) border-2 border-{{ $theme }} @endif">
                     <div class="bg-white px-3 py-6 md:py-9">
                         <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ number_format(200 / 12, 2) }}/month</strong></h4>
                         <p class="text-sm mb-6"><em>Billed at ${{200}} per year.</em></p>
-                        <div class="font-bebas join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
+                        <div class="font-bebas join {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
                     </div>
                 </a>
-                <div class="text-black overflow-hidden rounded-b-2xl block mx-auto group px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
+                <div class="text-black overflow-hidden rounded-b-2xl block mx-auto group px-3 pt-5 md:pt-6 pb-9 md:pb-10 @if(!empty($whiteBg)) bg-white @else bg-[#e7edf4] @endif">
                     <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
                     <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
                     @if(!empty($fifthPoint))
@@ -115,15 +121,15 @@
                 </div>
             </div>
             <div class="w-full md:w-1/2 px-2 md:px-3 mb-4 md:mb-0 relative">
-                <a href="{{$monthlyLink}}" class="text-black overflow-hidden rounded-t-2xl block mx-auto group">
+                <a href="{{$monthlyLink}}" class="text-black overflow-hidden rounded-t-2xl block mx-auto group @if(!empty($whiteBg)) border-2 border-{{ $theme }} @endif">
                     <div class="bg-white px-3 py-6 md:py-9">
                         <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ 25 }}/month</strong></h4>
                         <p class="text-sm mb-6"><em>Pay as you go.</em></p>
-                        <div class="font-bebas join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
+                        <div class="font-bebas join {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
                     </div>
                 </a>
-                <div class="text-black overflow-hidden rounded-b-2xl block mx-auto group px-3 pt-5 md:pt-6 pb-9 md:pb-10 bg-[#e7edf4]">
+                <div class="text-black overflow-hidden rounded-b-2xl block mx-auto group px-3 pt-5 md:pt-6 pb-9 md:pb-10 @if(!empty($whiteBg)) bg-white @else bg-[#e7edf4] @endif">
                     <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
                     <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
                     @if(!empty($fifthPoint))

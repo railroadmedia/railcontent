@@ -43,72 +43,92 @@
                 </div>
             </div>
         @endif
-        <div
-            x-data="{
-                init() {
-                    new Splide(this.$refs.splide, {
-                        classes: {
-                                arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
-                                prev: 'hidden',
-                                next: 'splide__arrow--next your-class-next hidden sm:flex -right-1 mb-16',
-                                pagination: 'splide__pagination -bottom-10',
-                        },
-                        perPage: 4.5,
-                        perMove: 1,
-                        type: 'loop',
-                        focus: 0,
-                        interval: 2000,
-                        breakpoints: {
-                            1000: {
-                                perPage: 3.5,
+        <div class=" @if(!empty($desktopGrid)) block sm:hidden @endif">
+            <div
+                x-data="{
+                    init() {
+                        new Splide(this.$refs.splide, {
+                            classes: {
+                                    arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
+                                    prev: 'hidden',
+                                    next: 'splide__arrow--next your-class-next hidden sm:flex -right-1 mb-16',
+                                    pagination: 'splide__pagination -bottom-10',
                             },
-                            620: {
-                                perPage: 1.5,
+                            perPage: 4.5,
+                            perMove: 1,
+                            type: 'loop',
+                            focus: 0,
+                            interval: 2000,
+                            breakpoints: {
+                                1000: {
+                                    perPage: 3.5,
+                                },
+                                620: {
+                                    perPage: 1.5,
+                                },
                             },
-                        },
-                    }).mount()
-                },
-            }"
-        >
-            <section x-ref="splide" class="splide mb-20" aria-label="Splide/Alpine.js Carousel Example">
-                <div class="splide__track">
-                    <ul class="splide__list">
-                        @foreach ($testimonials as $testimonial)
-                            <li class="splide__slide flex flex-col items-start px-1">
-                                <div class="relative mb-2 overflow-hidden cursor-pointer"
-                                     x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
-                                >
-                                    <picture>
-                                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{$testimonial['image']}}">
-                                        <img
-                                            class="rounded-xl transition-opacity opacity-0"
-                                            src="https://www.musora.com/musora-cdn/image/width=350,quality=85/{{$testimonial['image']}}"
-                                            alt="{{$testimonial['name']}} testimonial"
-                                            loading="lazy"
-                                            onload="this.classList.remove('opacity-0')"
-                                        >
-                                    </picture>
-                                    <div class="absolute inset-0 flex justify-center align-center">
-                                        <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
+                        }).mount()
+                    },
+                }"
+            >
+                <section x-ref="splide" class="splide mb-20" aria-label="Splide/Alpine.js Carousel Example">
+                    <div class="splide__track">
+                        <ul class="splide__list">
+                            @foreach ($testimonials as $testimonial)
+                                <li class="splide__slide flex flex-col items-start px-1">
+                                    <div class="relative mb-2 w-full overflow-hidden rounded-xl cursor-pointer" style="padding-bottom: 66%;"
+                                        x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
+                                    >
+                                        <div class="absolute inset-0 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=500,quality=85/{{$testimonial['image']}});"></div>
+                                        <div class="absolute inset-0 flex justify-center align-center">
+                                            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="w-full text-center">
-                                    <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
-                                    <p class="text-sm">{{ $testimonial['name'] }}</p>
+                                    <div class="w-full text-center">
+                                        <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
+                                        <p class="text-sm">{{ $testimonial['name'] }}</p>
 
-                                        <p class="mt-1 text-xs text-{{ $theme }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
-                                            @if(!empty($testimonial['video']))
-                                                Watch video
-                                            @else
-                                                Read more
-                                            @endif
-                                        </p>
-                                </div>
-                            </li>
-                        @endforeach
-                    </ul>
+                                            <p class="mt-1 text-xs text-{{ $theme }} cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
+                                                @if(!empty($testimonial['video']))
+                                                    Watch video
+                                                @else
+                                                    Read more
+                                                @endif
+                                            </p>
+                                    </div>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <div class="@if(!empty($desktopGrid)) hidden sm:flex flex-wrap @endif">
+            @foreach ($testimonials as $testimonial)
+                <div class="flex flex-col items-start px-1 w-1/4">
+                    <div class="relative mb-2 w-full overflow-hidden rounded-xl cursor-pointer" style="padding-bottom: 66%;"
+                        x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
+                    >
+                        <div class="absolute inset-0 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=500,quality=85/{{$testimonial['image']}});"></div>
+                        <div class="absolute inset-0 flex justify-center align-center">
+                            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
+                        </div>
+                    </div>
+                    <div class="w-full text-center">
+                        <div class="font-bold text-sm leading-snug mb-2">{!! $testimonial['title'] !!}</div>
+                        <p class="text-sm">{{ $testimonial['name'] }}</p>
+
+                        <p class="mt-1 text-xs @if($theme == 'musora') text-musora-gold @else text-{{ $theme }} @endif cursor-pointer" x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;">
+                            @if(!empty($testimonial['video']))
+                                Watch video
+                            @else
+                                Read more
+                            @endif
+                        </p>
+                    </div>
                 </div>
-            </section>
+            @endforeach
+
         </div>
     </div>
     @foreach($testimonials as $testimonial)

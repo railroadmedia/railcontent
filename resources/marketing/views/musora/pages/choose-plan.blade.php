@@ -1,0 +1,69 @@
+@extends('musora._partials.layout', [
+    'whiteNav' => true,
+])
+
+@section('head-includes')
+    <title>Musora | Musicians start here. </title>
+    <meta property="og:title" content="Musora | Musicians start here. ">
+
+    <meta name="description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
+    <meta property="og:description" content="Learn your favorite instruments with step-by-step lessons, thousands of songs, and unlimited personal support. ">
+
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image.jpg">
+
+    @include('_partials.layout._fonts')
+
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <style>
+        .option-buttons.active {
+            border-color:#FFAE00!important;
+            background-color:#0c1524!important;
+        }
+        .option-buttons.active .radio-check {
+            border-color:#FFAE00!important;
+            background-color:#FFAE00!important;
+        }
+        .option-buttons.active .radio-check i {
+            display:block!important;
+        }
+        .join.musora {
+            background-color:#FFAE00;
+            color:#000;
+        }
+
+        .join.musora:hover, .join.musora:focus {
+            background:#FFAE00;
+            color:#000;
+        }
+    </style>
+@stop
+
+@section('layout-body')
+
+    <div id="customize-anchor" class="anchor anchor-slide"></div>
+
+    @include('musora.sales.components.card-selection-section', [
+        "whiteBg" => true,
+        "plusLogo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_plus_logo.png",
+        "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
+        "songs" => "5000",
+        "firstPoint" => "Piano, Guitar, Drums, Singing.",
+        "thirdPoint" => "Unlimited personal support",
+        "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
+        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
+        "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
+        "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+    ])
+
+    @include('musora.sales.components.app-section', [
+        'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/devices2.png',
+        'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone',
+        'googleUrl' => 'https://play.google.com/store/apps/details?id=com.musoraapp',
+    ])
+    @include('musora._partials._faq')
+
+@stop

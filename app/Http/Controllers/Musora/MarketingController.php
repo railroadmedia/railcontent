@@ -73,4 +73,8 @@ class MarketingController extends BaseController
     {
         return view('musora.pages.community', [ 'theme' => 'musora', ]);
     }
+    public function choosePlan()
+    {
+        return view('musora.pages.choose-plan', ['theme' => 'musora']);
+    }
 }
