@@ -3,6 +3,7 @@
 namespace Railroad\Railcontent\Services;
 
 use Carbon\Carbon;
+use Railroad\Mailora\Services\MailService;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Events\PlaylistDeleted;
 use Railroad\Railcontent\Events\PlaylistItemCreated;
@@ -11,8 +12,10 @@ use Railroad\Railcontent\Events\PlaylistItemsUpdated;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Repositories\PlaylistLikeRepository;
+use Railroad\Railcontent\Repositories\ReportedPlaylistsRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
 use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserPlaylistsService
 {
@@ -21,27 +24,35 @@ class UserPlaylistsService
     private UserPlaylistContentRepository $userPlaylistContentRepository;
     private PinnedPlaylistsRepository $pinnedPlaylistsRepository;
     private PlaylistLikeRepository $playlistLikeRepository;
+    private ReportedPlaylistsRepository $reportedPlaylistsRepository;
     private ContentService $contentService;
+    private MailService $mailService;
 
     /**
      * @param UserPlaylistsRepository $userPlaylistRepository
      * @param UserPlaylistContentRepository $userPlaylistContentRepository
      * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
      * @param PlaylistLikeRepository $playlistLikeRepository
+     * @param ReportedPlaylistsRepository $reportedPlaylistsRepository
      * @param ContentService $contentService
+     * @param MailService $mailService
      */
     public function __construct(
         UserPlaylistsRepository $userPlaylistRepository,
         UserPlaylistContentRepository $userPlaylistContentRepository,
         PinnedPlaylistsRepository $pinnedPlaylistsRepository,
         PlaylistLikeRepository $playlistLikeRepository,
-        ContentService $contentService
+        ReportedPlaylistsRepository $reportedPlaylistsRepository,
+        ContentService $contentService,
+        MailService $mailService
     ) {
         $this->userPlaylistsRepository = $userPlaylistRepository;
         $this->userPlaylistContentRepository = $userPlaylistContentRepository;
         $this->pinnedPlaylistsRepository = $pinnedPlaylistsRepository;
         $this->playlistLikeRepository = $playlistLikeRepository;
+        $this->reportedPlaylistsRepository = $reportedPlaylistsRepository;
         $this->contentService = $contentService;
+        $this->mailService = $mailService;
     }
 
     /**
@@ -866,5 +877,66 @@ class UserPlaylistsService
     public function countUserPlaylistItems($playlistIds)
     {
         return $this->userPlaylistContentRepository->countUserPlaylistItems($playlistIds);
+    }
+
+    /**
+     * @param $playlistId
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function reportPlaylist($playlistId)
+    {
+        $currentUser = auth()->user();
+        $playlist = $this->userPlaylistsRepository->query()
+            ->where('id', $playlistId)
+            ->first();
+        if (!$playlist) {
+            throw new NotFoundHttpException();
+        }
+
+        $this->reportedPlaylistsRepository->query()
+            ->updateOrInsert([
+                                 'reporter_id' => auth()->id(),
+                                 'playlist_id' => $playlistId,
+                             ], [
+                                 'created_on' => Carbon::now()
+                                     ->toDateTimeString(),
+                             ]);
+
+        $input['subject'] =
+            'Playlist reported by '.
+            $currentUser['display_name'].
+            " (".
+            $currentUser['email'].
+            ")";
+        $input['sender-address'] = config('mailora.report-sender-address');
+        $input['sender-name'] = config('mailora.report-sender-name');
+        $input['lines'] = ['The following playlist has been reported:'];
+        $input['lines'][] = url()->route('platform.user.playlist',['id' => $playlistId, 'brand' => $playlist['brand']]);
+
+        $input['unsubscribeLink'] = '';
+        $input['alert'] =
+            'Playlist reported by '.
+            $currentUser['display_name'].
+            " (".
+            $currentUser['email'].
+            ")";
+
+        $input['logo'] = config('mailora.'.$playlist['brand'].'.logo-link');
+        $input['type'] = 'layouts/inline/alert';
+        $input['recipient'] =  config('mailora.'.$playlist['brand'].'.report-comment-recipient');
+
+        try {
+            $this->mailService->sendSecure($input);
+        } catch (\Exception $exception) {
+            return response()->json([
+                                        "success" => false,
+                                        "message" => $exception->getMessage()
+                                    ], 500);
+        }
+
+        return response()->json([
+                                    "success" => true,
+                                    "message" => "The playlist was reported"
+                                ], 200);
     }
 }
