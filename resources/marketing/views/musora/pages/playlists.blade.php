@@ -192,35 +192,35 @@
                         $songItems = [
                             [
                                 'fa-icon' => 'fa-heart',
-                                'title' => 'My Favorite<br> Lessons',
+                                'title' => 'My Favorite<br class="hidden sm:inline"> Lessons',
                                 'desc' => 'Add your favorite lessons to a custom playlist for easy access.',
                             ],
                             [
                                 'fa-icon' => 'fa-music',
-                                'title' => 'Play-Along<br> Songs',
+                                'title' => 'Play-Along<br class="hidden sm:inline"> Songs',
                                 'desc' => 'Spend hours jamming along to a playlist of your favorite songs.',
                             ],
                             [
                                 'fa-icon' => 'fa-user',
-                                'title' => 'Personal<br> Practice Routines',
+                                'title' => 'Personal<br class="hidden sm:inline"> Practice Routines',
                                 'desc' => 'Create a practice playlist – and rehearse daily to grow your skills.',
                             ],
                             [
                                 'fa-icon' => 'fa-bookmark',
-                                'title' => 'Watch<br> Later',
+                                'title' => 'Watch<br class="hidden sm:inline"> Later',
                                 'desc' => 'Busy now? Save lessons to a playlist and watch when you’re free.',
                             ],
 
                         ];
                     @endphp
                     @foreach ($songItems as $songItem)
-                        <div class="w-1/2 sm:w-1/4 sm:px-2 lg:px-3 mb-6 sm:mb-0">
+                        <div class="w-full sm:w-1/4 sm:px-2 lg:px-3 mb-4 sm:mb-0">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
                                     <i class="fal {!! $songItem['fa-icon'] !!} text-4xl text-musora-gold"></i>
                                     {{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
-                                <div class="text-left sm:text-center">
+                                <div class="pl-3 sm:pl-0 text-left sm:text-center">
                                     <p class="mb-1 sm:mt-2 leading-tight"><strong class="font-black">{!!$songItem['title']!!}</strong></p>
                                     <p class="text-sm">{!! $songItem['desc'] !!}</p>
                                 </div>
@@ -307,125 +307,125 @@
                     $DplaylistItems = [
                         [
                         'title' => 'Krad’s Favorite Fills',
-                        'url' => 'todo',
-                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        'url' => '/drumeo/playlists',
+                        'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/2-KrRadsFaveFills.jpg',
                         ],
                         [
                         'title' => '5 lessons to develop the Moeller Stroke',
-                        'url' => 'todo',
-                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        'url' => '/drumeo/playlists',
+                        'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/3-MoellerStroke.jpg',
                         ],
                         [
                         'title' => 'Brandon’s Top 10 Songs Of 2023',
-                        'url' => 'todo',
-                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        'url' => '/drumeo/playlists',
+                        'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/4-Top10Songs.jpg',
                         ],
                     ];
                     $PplaylistItems = [
                         [
                         'title' => 'Lisa’s Beautiful Arpeggios',
-                        'url' => 'todo',
-                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        'url' => '/pianote/playlists',
+                        'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/1-BeautifulArpeggios.jpg',
                         ],
                         [
                         'title' => 'Easy Song Tutorials For Beginners',
-                        'url' => 'todo',
-                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        'url' => '/pianote/playlists',
+                        'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/3-EasySongs.jpg',
                         ],
                         [
                         'title' => 'Songs For Sight Reading',
-                        'url' => 'todo',
-                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        'url' => '/pianote/playlists',
+                        'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/5-Sightreading.jpg',
                         ],
                     ];
                     $GplaylistItems = [
                         [
                         'title' => 'Guitareo Method Practice Challenges',
-                        'url' => 'todo',
-                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        'url' => '/guitareo/playlists',
+                        'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/2-GuitareoMethodChallenges.jpg',
                         ],
                         [
                         'title' => 'Jimi Hendrix Lessons',
-                        'url' => 'todo',
-                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        'url' => '/guitareo/playlists',
+                        'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/3-JimiHendrix.jpg',
                         ],
                         [
                         'title' => '10 Songs For Beginner Guitarists',
-                        'url' => 'todo',
-                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        'url' => '/guitareo/playlists',
+                        'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/4-10SongsForBeginners.jpg',
                         ],
                     ];
                     $SplaylistItems = [
                         [
                         'title' => 'Lisa’s Favorite Sing-Alongs',
-                        'url' => 'todo',
-                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        'url' => '/singeo/playlists',
+                        'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/1-LisasFavouriteSingAlongs.jpg',
                         ],
                         [
                         'title' => '10 Easy Songs for Beginners',
-                        'url' => 'todo',
-                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        'url' => '/singeo/playlists',
+                        'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/3-10Songs.jpg',
                         ],
                         [
                         'title' => 'Pitch Perfect Lessons and Exercises',
-                        'url' => 'todo',
-                        'thumb' => 'https://d1923uyy6spedc.cloudfront.net/drum-chops-course-card-1646062165.png',
+                        'url' => '/singeo/playlists',
+                        'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/5-PitchPerfect.jpg',
                         ],
                     ];
                 @endphp
-                <div class="rounded-xl p-4 w-full flex flex-wrap mb-4" style="background-color:#f2f8fd;">
+                <div class="rounded-xl p-2 sm:p-4 w-full flex flex-wrap mb-4" style="background-color:#f2f8fd;">
                     @foreach ($DplaylistItems as $playlistItem)
-                        <div class="w-1/2 sm:w-1/3 sm:px-2 lg:px-3 mb-6 sm:mb-0">
-                            <div class="flex sm:inline-block">
-                                <div class="w-14 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-16 sm:h-32 rounded-xl">
+                        <div class="w-full sm:w-1/3 sm:px-2 lg:px-3 mb-3 sm:mb-0">
+                            <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block">
+                                <div class="w-16 sm:w-full flex-shrink-0">
+                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-auto sm:h-40 lg:h-48 rounded-xl">
                                 </div>
-                                <div class="text-left">
-                                    <p class="mb-1 sm:mt-2 leading-tight"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
+                                <div class="pl-3 sm:pl-0 text-left sm:text-center">
+                                    <p class="mb-1 sm:mt-2 leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>
-                <div class="rounded-xl p-4 w-full flex flex-wrap mb-4" style="background-color:#fef3f4;">
+                <div class="rounded-xl p-2 sm:p-4 w-full flex flex-wrap mb-4" style="background-color:#fef3f4;">
                     @foreach ($PplaylistItems as $playlistItem)
-                        <div class="w-1/2 sm:w-1/3 sm:px-2 lg:px-3 mb-6 sm:mb-0">
-                            <div class="flex sm:inline-block">
-                                <div class="w-14 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-16 sm:h-32 rounded-xl">
+                        <div class="w-full sm:w-1/3 sm:px-2 lg:px-3 mb-3 sm:mb-0">
+                            <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block">
+                                <div class="w-16 sm:w-full flex-shrink-0">
+                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-auto sm:h-40 lg:h-48 rounded-xl">
                                 </div>
-                                <div class="text-left">
-                                    <p class="mb-1 sm:mt-2 leading-tight"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
+                                <div class="pl-3 sm:pl-0 text-left sm:text-center">
+                                    <p class="mb-1 sm:mt-2 leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>
-                <div class="rounded-xl p-4 w-full flex flex-wrap mb-4" style="background-color:#f2fcfb;">
+                <div class="rounded-xl p-2 sm:p-4 w-full flex flex-wrap mb-4" style="background-color:#f2fcfb;">
                     @foreach ($GplaylistItems as $playlistItem)
-                        <div class="w-1/2 sm:w-1/3 sm:px-2 lg:px-3 mb-6 sm:mb-0">
-                            <div class="flex sm:inline-block">
-                                <div class="w-14 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-16 sm:h-32 rounded-xl">
+                        <div class="w-full sm:w-1/3 sm:px-2 lg:px-3 mb-3 sm:mb-0">
+                            <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block">
+                                <div class="w-16 sm:w-full flex-shrink-0">
+                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-auto sm:h-40 lg:h-48 rounded-xl">
                                 </div>
-                                <div class="text-left">
-                                    <p class="mb-1 sm:mt-2 leading-tight"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
+                                <div class="pl-3 sm:pl-0 text-left sm:text-center">
+                                    <p class="mb-1 sm:mt-2 leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>
-                <div class="rounded-xl p-4 w-full flex flex-wrap" style="background-color:#f9f2fe;">
+                <div class="rounded-xl p-2 sm:p-4 w-full flex flex-wrap" style="background-color:#f9f2fe;">
                     @foreach ($SplaylistItems as $playlistItem)
-                        <div class="w-1/2 sm:w-1/3 sm:px-2 lg:px-3 mb-6 sm:mb-0">
-                            <div class="flex sm:inline-block">
-                                <div class="w-14 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-16 sm:h-32 rounded-xl">
+                        <div class="w-full sm:w-1/3 sm:px-2 lg:px-3 mb-3 sm:mb-0">
+                            <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block">
+                                <div class="w-16 sm:w-full flex-shrink-0">
+                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-auto sm:h-40 lg:h-48 rounded-xl">
                                 </div>
-                                <div class="text-left">
-                                    <p class="mb-1 sm:mt-2 leading-tight"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
+                                <div class="pl-3 sm:pl-0 text-left sm:text-center">
+                                    <p class="mb-1 sm:mt-2 leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
                                 </div>
-                            </div>
+                            </a>
                         </div>
                     @endforeach
                 </div>
@@ -460,7 +460,7 @@
             @include('_partials.components.question-dropdown', [
             'num' => '?',
             "title" => "How do I save a section of a video into my playlist?",
-            "desc" => "You can set a video’s start and end time once added to a playlist. To do this, go into the playlist containing the video and click on the “...” button. Click “Set Start and End Time” from there.",
+            "desc" => "You can set a video’s start and end time once added to a playlist. To do this, go into the playlist containing the video and click on the “...” button under “Actions”. Click “Start/End Time” from there.",
             ])
             @include('_partials.components.question-dropdown', [
             'num' => '?',
