@@ -64,6 +64,10 @@ export default {
             type: String,
             default: () => 'singeo',
         },
+        endSecond: {
+            type: [Number, String],
+            default: 0
+        }
     },
     data() {
         return {
@@ -85,6 +89,7 @@ export default {
         currentTimeInSeconds: {
             cache: false,
             get() {
+                console.log(this.currentTime, this.endSecond)
                 return this.currentTime;
             },
         },

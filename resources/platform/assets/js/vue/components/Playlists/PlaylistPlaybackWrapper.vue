@@ -312,7 +312,7 @@ onBeforeMount(() => {
                              class="widescreen mb-2 bg-black"
                         >
                             <YoutubePlayer ref="mediaElementVueInstance" :brand="brand" :video-id="youtubeVideoId"
-                                :current-second="currentSecond" :total-duration="totalDuration" :video-length="videoLength"
+                                :current-second="currentSecond" :end-second="endSecond" :total-duration="totalDuration" :video-length="videoLength"
                                 :progress-state="progressState" :content-id="contentId" :use-intersection-observer="true"
                                 :theme-color="brand" @play="handleVideoPlay" @pause="handleVideoPause"
                                 @onVideoEnd="handleGoToNext">
