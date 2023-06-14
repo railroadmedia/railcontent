@@ -522,7 +522,7 @@
             "noSelector" => true,
             "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
             "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
-            "songs" => "1000",
+            "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, piano, and drums.",

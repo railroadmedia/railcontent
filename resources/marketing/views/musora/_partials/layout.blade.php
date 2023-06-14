@@ -5,15 +5,47 @@
     @include('_partials.layout.global-header', [
         "theme_bg" => "bg-musora",
         "theme_text" => "text-musora",
-        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
+        "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
         "links" => [
+            "Member Login" => [
+                "iconClass" => "fas fa-sign-in",
+                "url" => get_musora_brand_base_url() . '/login',
+            ],
             "Home" => [
                 "iconClass" => "fas fa-home",
                 "url" => "/",
             ],
-            "Member Login" => [
-                "iconClass" => "fas fa-sign-in",
-                "url" => get_musora_brand_base_url() . '/login',
+            "Features" => [
+                "iconClass" => "fas fa-star",
+                "children" => [
+                    "Method" => [
+                        "url" => get_musora_brand_base_url().'/method',
+                    ],
+                    "Songs" => [
+                        "url" => get_musora_brand_base_url().'/songs',
+                    ],
+                ],
+            ],
+            "Instruments" => [
+                "iconClass" => "fas fa-piano-keyboard",
+                "children" => [
+                    "Piano" => [
+                        "url" => 'https://www.pianote.com',
+                    ],
+                    "Guitar" => [
+                        "url" => 'https://www.guitareo.com',
+                    ],
+                    "Drums" => [
+                        "url" => 'https://www.drumeo.com',
+                    ],
+                    "Singing" => [
+                        "url" => 'https://www.singeo.com',
+                    ],
+                ],
+            ],
+            "Pricing" => [
+                "iconClass" => "fas fa-money-bill-wave",
+                "url" => get_musora_brand_base_url().'/choose-plan',
             ],
             "Contact" => [
                 "iconClass" => "fas fa-phone",
@@ -39,22 +71,18 @@
         "external_links" => [
             "Drumeo" => [
                 "iconClass" => "fas fa-external-link",
-                "themeClass" => "text-musora",
                 "url" => get_legacy_brand_base_url("drumeo")
             ],
             "Pianote" => [
                 "iconClass" => "fas fa-external-link",
-                "themeClass" => "text-musora",
                 "url" => get_legacy_brand_base_url("pianote")
             ],
             "Guitareo" => [
                 "iconClass" => "fas fa-external-link",
-                "themeClass" => "text-musora",
                 "url" => get_legacy_brand_base_url("guitareo")
             ],
             "Singeo" => [
                 "iconClass" => "fas fa-external-link",
-                "themeClass" => "text-musora",
                 "url" => get_legacy_brand_base_url("singeo")
             ]
         ]
@@ -71,6 +99,6 @@
 @section('layout-footer')
     @include('_partials.layout.global-footer', [
         "brand" => "musora",
-        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg"
+        "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png"
     ])
 @stop
