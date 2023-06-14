@@ -71,6 +71,7 @@ class PackBundleLessonDecorator extends TypeDecoratorBase
             }
 
             $contentsOfType[$contentIndex]['ds2Stbs'] = $ds2Exercises;
+            $contentsOfType[$contentIndex]['lesson_count'] = $content['child_count'];
         }
             return $this->mergeDecorated($contents, $contentsOfType);
 

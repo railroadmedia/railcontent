@@ -11,6 +11,9 @@ class CommentLikesUserDecorator extends ModeDecoratorBase
     public function decorate(Collection $content)
     {
         $userIds = [];
+        if ($content->isEmpty()) {
+            return $content;
+        }
 
         foreach ($content as $commentIndex => $comment) {
             $userIds = array_merge($userIds, $comment['like_users'] ?? []);
@@ -25,7 +28,10 @@ class CommentLikesUserDecorator extends ModeDecoratorBase
         /**
          * @var $users User[]
          */
-        $users = User::query()->whereIn('id', $userIds)->get();
+        $users =
+            User::query()
+                ->whereIn('id', $userIds)
+                ->get();
         $keyedUsers = [];
 
         foreach ($users as $userIndex => $user) {
@@ -57,7 +63,6 @@ class CommentLikesUserDecorator extends ModeDecoratorBase
                         'avatar_url' => $keyedUsers[$userLikerId]->profile_picture_url,
                     ];
                 }
-
             }
         }
 

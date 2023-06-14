@@ -8,7 +8,7 @@
             'active' => Route::currentRouteNamed('members.profile.dashboard')
         ],
         [
-            'title' => 'My List',
+            'title' => 'Playlists',
             'icon' => 'fas fa-list-ul',
             'url' => url()->route('members.profile.lists'),
             'active' => Route::currentRouteNamed('members.profile.lists')

@@ -95,7 +95,7 @@ class UserListPagesController extends BaseController
             "xp_rank" => user()->getXpRank(),
         ];
 
-        return view('account.playlists', [
+        return view('account.lesson-history', [
             "listLessons" => $listLessons,
             "allowedTypes" => $allowedTypes,
             "resetProgress" => false,
@@ -156,7 +156,7 @@ class UserListPagesController extends BaseController
             "xp_rank" => user()->getXpRank(),
         ];
 
-        return view('account.playlists', [
+        return view('account.lesson-history', [
             "listLessons" => $listLessons,
             "allowedTypes" => $allowedTypes,
             "resetProgress" => true,
@@ -218,7 +218,7 @@ class UserListPagesController extends BaseController
             "xp_rank" => user()->getXpRank(),
         ];
 
-        return view('account.playlists', [
+        return view('account.lesson-history', [
             "listLessons" => $listLessons,
             "allowedTypes" => $allowedTypes,
             "resetProgress" => true,

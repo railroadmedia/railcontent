@@ -3,6 +3,8 @@
         <div v-for="(assignment, index) in assignments" :key="assignment.id" class="flex flex-row" dusk="assignments">
             <div class="flex flex-column grow tw-w-full">
                 <ContentAssignment
+                    :lesson-thumbnail="lessonThumbnail"
+                    :lesson-title="lessonTitle"
                     :theme-color="assignment.themeColor"
                     :brand="assignment.themeColor"
                     :timecode="assignment.timecode"
@@ -39,11 +41,29 @@ export default {
             type: Array,
             default: () => [],
         },
+        lessonData: {
+            type: Object,
+        },
     },
     data() {
         return {
             forceIndex: null,
         };
     },
+    mounted() {
+        console.log('lessonData: ', this.lessonData)
+    },
+    computed: {
+        //Thumbnail
+        lessonThumbnail() {
+            const thumbnail = this.lessonData['data'].find(data => data.key === 'thumbnail_url');
+            return thumbnail.value;
+        },
+        lessonTitle() {
+            const title = this.lessonData['fields'].find(data => data.key === 'title');
+            return title.value;
+        },
+    }
+
 };
 </script>
