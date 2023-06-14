@@ -6,7 +6,7 @@
         <div
             id="likeUsersContainer"
             ref="likeUsersContainer"
-            class="tw-flex tw-flex-col tw-bg-white corners-10 tw-shadow"
+            class="tw-flex tw-flex-col tw-bg-white dark:tw-bg-[#081825] corners-10 tw-shadow tw-rounded-lg"
             style="max-height:500px;"
         >
             <div
@@ -24,18 +24,16 @@
                 v-else
                 class="tw-flex tw-flex-col"
             >
-                <h1 class="heading tw-flex tw-items-center pa-3">
-                    <div class="tw-flex tw-items-center tw-justify-center tw-rounded tw-text-white tw-mr-2 big likes-icon" :class="themeBgClass">
-                        <musora-icon icon-name="thumb-like-filled" class="tw-w-7 tw-h-7 tw-mb-1" />
-                    </div>
-                    {{ totalLikeUsers }} Like{{ totalLikeUsers == 1 ? '' : 's' }}
+                <h1 class="tw-text-2xl tw-flex tw-items-center tw-p-3 tw-items-center tw-justify-center tw-font-bold tw-text-black dark:tw-text-white tw-sticky tw-top-0 tw-bg-white dark:tw-bg-[#081825] tw-border-b tw-border-b-[#E5E7EB] dark:tw-border-b-[#1E364A] tw-z-50 -tw-mb-[1px]">
+                    <musora-icon icon-name="thumb-like-filled" class="tw-w-7 tw-h-7 tw-mr-2" />
+                    <div>All Likes</div>
                 </h1>
 
                 <a
                     v-for="user in likeUsers"
                     :key="user.id"
                     :href="`${baseProfileRoute}${user.user_id}/dashboard`"
-                    class="tw-flex tw-flex-row comment-like-user bt-grey-1-1 tw-no-underline tw-text-[#00101D] ph-3 pv-1 tw-items-center"
+                    class="tw-flex tw-flex-row comment-like-user hover:tw-bg-[#E7EFF6] dark:hover:tw-bg-[#002039] tw-border-t tw-border-t-[#E5E7EB] dark:tw-border-t-[#1E364A] tw-no-underline tw-text-[#00101D] dark:tw-text-white pv-1 tw-items-center tw-mx-7"
                 >
                     <div class="tw-flex tw-flex-row">
                         <div class="tw-flex tw-flex-col avatar-column">
