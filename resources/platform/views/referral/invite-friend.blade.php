@@ -26,7 +26,7 @@
                         alt="background image"
                     />
                 </div>
-                <div class="tw-flex tw-justify-center tw-px-4 md:tw-px-0 dark:tw-bg-[#1B1B1B]">
+                <div class="tw-flex tw-justify-center tw-px-4 dark:tw-bg-[#1B1B1B]">
                     <div class="tw-max-w-3xl tw-mx-auto tw-px-4 md:tw-px-8 tw-rounded-xl tw-bg-white -tw-mt-60 tw-mb-16 tw-py-12 sm:tw-py-20 tw-relative tw-z-30 dark:tw-bg-[#303030] dark:tw-text-white" style="box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.25);">
                         <div class="tw-max-w-sm sm:tw-max-w-none tw-mx-auto">
                             <img
@@ -90,7 +90,7 @@
         <section class="tw-bg-[#00101D] tw-py-10 lg:tw-py-20">
             <div class="tw-max-w-5xl tw-mx-auto tw-px-3 sm:tw-px-6 xl:tw-px-0 tw-text-white tw-text-center">
                 <h3 class="tw-mb-10 tw-text-xl sm:tw-text-2xl md:tw-text-3xl"><strong>You can win...</strong></h3>
-                <div class="md:tw-grid md:tw-grid-cols-3 md:tw-gap-4 tw-mb-14 tw-max-w-sm sm:tw-max-w-none tw-mx-auto">
+                <div class="md:tw-grid md:tw-grid-cols-3 md:tw-gap-4 tw-mb-14 tw-max-w-xs sm:tw-max-w-none tw-mx-auto">
                      <img class="tw-mx-auto tw-mb-6 sm:tw-mb-0" src="https://musora-web-platform.s3.amazonaws.com/referral/pianote_1st+Prize.png" alt="1st prize" />
                      <img class="tw-mx-auto tw-mb-6 sm:tw-mb-0" src="https://musora-web-platform.s3.amazonaws.com/referral/pianote_2nd+Prize.png" alt="2nd prize" />
                      <img class="tw-mx-auto" src="https://musora-web-platform.s3.amazonaws.com/referral/pianote_3rd+Prize.png" alt="3rd prize" />
