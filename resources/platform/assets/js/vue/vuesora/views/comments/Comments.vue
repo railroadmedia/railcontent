@@ -5,11 +5,11 @@
                 <!-- Preview Cards -->
                 <div class="tw-mr-4 tw-flex">
                     <div v-if="comments.length > 0" class="tw-relative tw-h-[40px] tw-hidden lg:tw-block"
-                        :style="`${flattenedProfilePics.length > 1 ? 'width: 100px;' : 'width: 60px;'}`">
+                         :style="`${flattenedProfilePics.length > 1 ? 'width: 100px;' : 'width: 60px;'}`">
                         <div class="tw-h-[40px] tw-absolute" v-for="(src, index) in (flattenedProfilePics.slice(0, 3))"
-                            :style="`margin-left: ${index * 20}px`">
+                             :style="`margin-left: ${index * 20}px`">
                             <img :src="src"
-                                :class="`tw-h-[40px] tw-w-[40px] tw-rounded-full tw-border-[1px] tw-border-${brand} tw-box-border`" />
+                                 :class="`tw-h-[40px] tw-w-[40px] tw-rounded-full tw-border-[1px] tw-border-${brand} tw-box-border`" />
                         </div>
                     </div>
                 </div>
@@ -18,11 +18,11 @@
                     Comments
                 </h2>
                 <button v-if="collapsable" class="tw-uppercase tw-font-bebas-neue tw-flex tw-items-center tw-leading-none"
-                    @click="commentsCollapsed = !commentsCollapsed">
+                        @click="commentsCollapsed = !commentsCollapsed">
                     Expand Comment Section
                     <svg class="tw-ml-3 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
-                        :class="[{ 'tw-rotate-180': !commentsCollapsed }]" width="15" height="16" viewBox="0 0 15 16"
-                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                         :class="[{ 'tw-rotate-180': !commentsCollapsed }]" width="15" height="16" viewBox="0 0 15 16"
+                         fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M13.0492 8.33329L7.21583 14.1666L1.38249 8.33329M13.0492 1.66663L7.21583 7.49996L1.38249 1.66663"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
@@ -38,9 +38,9 @@
                     <div class="user-avatar smaller" :class="avatarClassObject">
                         <!-- User Avatar -->
                         <img :src="currentUser.avatar" loading="lazy"
-                            class="tw-rounded-full tw-transition-opacity tw-duration-500"
-                            :class="currentUser.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
-                            @load="currentUser.imageLoaded = true">
+                             class="tw-rounded-full tw-transition-opacity tw-duration-500"
+                             :class="currentUser.imageLoaded ? 'tw-opacity-1' : 'tw-opacity-0'"
+                             @load="currentUser.imageLoaded = true">
                     </div>
                     <p v-if="showUserExp" class="tw-text-sm dense tw-uppercase tw-text-center mt-1">
                         {{ userExpRank }}
@@ -52,7 +52,7 @@
 
                 <div class="tw-flex tw-flex-col tw-grow tw-w-full">
                     <text-editor :fieldKey="contentId + '-comment-text-editor'" ref="textEditor" v-model="commentInterface"
-                        @input="handleInput" :height="150"></text-editor>
+                                 @input="handleInput" :height="150"></text-editor>
 
                     <div class="tw-flex tw-flex-row tw-justify-end mv-1">
                         <button class="btn collapse-150" :disabled="loading" dusk="submit-comment" @click="postComment">
@@ -63,7 +63,7 @@
                     </div>
 
                     <div :class="loading ? 'tw-flex' : 'tw-hidden'"
-                        class="loading-reply tw-z-10 dark:tw-bg-[#000c17]/80 tw-flex-col tw-justify-center tw-items-center">
+                         class="loading-reply tw-z-10 dark:tw-bg-[#000c17]/80 tw-flex-col tw-justify-center tw-items-center">
                         <i class="fas fa-spinner fa-spin tw-mb-2" :class="themeTextClass"></i>
                         <p class="tw-text-sm text-grey-3 dark:tw-text-white tw-font-bold">
                             loading...
@@ -95,22 +95,22 @@
 
             <!-- Comments -->
             <comment-post v-if="pinnedComment != null" :comment="pinnedComment" :brand="brand" :current-user="currentUser"
-                :pinned="true" :theme-color="themeColor" :profile-base-route="profileBaseRoute"
-                :has-public-profiles="hasPublicProfiles" :opened-comment-id="openedCommentId"
-                @likeComment="handleCommentLike" @likeReply="handleReplyLike" @deleteComment="handleCommentDelete"
-                @deleteReply="handleReplyDelete" @openLikes="addLikeUsersToModal"
-                @replyOpened="handleReplyOpened"></comment-post>
+                          :pinned="true" :theme-color="themeColor" :profile-base-route="profileBaseRoute"
+                          :has-public-profiles="hasPublicProfiles" :opened-comment-id="openedCommentId"
+                          @likeComment="handleCommentLike" @likeReply="handleReplyLike" @deleteComment="handleCommentDelete"
+                          @deleteReply="handleReplyDelete" @openLikes="addLikeUsersToModal"
+                          @replyOpened="handleReplyOpened"></comment-post>
 
             <comment-post v-for="(comment, i) in comments" :key="i" :comment="comment" :brand="brand"
-                :current-user="currentUser" :theme-color="themeColor" :profile-base-route="profileBaseRoute"
-                :has-public-profiles="hasPublicProfiles" :opened-comment-id="openedCommentId"
-                @likeComment="handleCommentLike" @likeReply="handleReplyLike" @deleteComment="handleCommentDelete"
-                @deleteReply="handleReplyDelete" @openLikes="addLikeUsersToModal"
-                @replyOpened="handleReplyOpened"></comment-post>
+                          :current-user="currentUser" :theme-color="themeColor" :profile-base-route="profileBaseRoute"
+                          :has-public-profiles="hasPublicProfiles" :opened-comment-id="openedCommentId"
+                          @likeComment="handleCommentLike" @likeReply="handleReplyLike" @deleteComment="handleCommentDelete"
+                          @deleteReply="handleReplyDelete" @openLikes="addLikeUsersToModal"
+                          @replyOpened="handleReplyOpened"></comment-post>
 
             <comment-likes-modal :theme-color="themeColor" :brand="brand" :comment-id="currentLikeUsersId"
-                :like-users="likeUsers" :total-like-users="totalLikeUsers" :loading-like-users="loadingLikeUsers"
-                :requesting-like-users="requestingLikeUsers" @loadMoreLikeUsers="addLikeUsersToModal"></comment-likes-modal>
+                                 :like-users="likeUsers" :total-like-users="totalLikeUsers" :loading-like-users="loadingLikeUsers"
+                                 :requesting-like-users="requestingLikeUsers" @loadMoreLikeUsers="addLikeUsersToModal"></comment-likes-modal>
         </div>
     </div>
 </template>
@@ -362,7 +362,7 @@ export default {
                                 this.comments = this.comments.filter(comment => comment.id !== this.pinnedComment.id);
 
                                 setTimeout(() => {
-                                    window.scrollTo(0, ((commentsSection.offsetTop + commentsSection.clientHeight) - 150));
+                                    document.getElementById(`pinnedComment${this.pinnedComment.id}`).scrollIntoView({ behavior: 'smooth' });
                                 }, 200);
 
                                 clearInterval(checkInterval);
@@ -374,3 +374,9 @@ export default {
     },
 };
 </script>
+
+<style scoped>
+.pinned {
+    scroll-margin-top: 80px;
+}
+</style>

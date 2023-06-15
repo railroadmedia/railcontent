@@ -359,12 +359,18 @@ class ContentProgressEventListener
 
     public function handleMediaPlaybackTracked(MediaPlaybackTracked $mediaPlaybackTracked)
     {
-        $this->contentEngagementService->update(
-            $mediaPlaybackTracked->userId,
-            $mediaPlaybackTracked->contentId ?? $mediaPlaybackTracked->mediaId,
-            $mediaPlaybackTracked->currentSecond
-        );
-
+        $contentId = intval($mediaPlaybackTracked->contentId ?? $mediaPlaybackTracked->mediaId);
+        if ($contentId) {
+            $this->contentEngagementService->update(
+                $mediaPlaybackTracked->userId,
+                $contentId,
+                $mediaPlaybackTracked->currentSecond
+            );
+        } else {
+            $userId = user()->id;
+            Log::error("handleMediaPlaybackTracked $userId");
+            Log::debug(print_r($mediaPlaybackTracked, true));
+        }
         $assignmentTypeIds = $this->mediaPlaybackRepository->getAssignmentTypeIds();
         if (in_array($mediaPlaybackTracked->typeId, $assignmentTypeIds)) {
             $min = $this->userMetricsService->getTotalMinutesPracticed(

@@ -13,13 +13,7 @@
         .reveal-overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483002;display:none;overflow-y:auto;background-color:rgba(0,0,0,0.8)}.reveal-overlay:after{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family:"Font Awesome 5 Pro";font-weight:900;font-style:normal;font-variant:normal;text-rendering:auto;content:"\f00d";color:#fff;z-index:1;opacity:0.8;position:absolute;margin:0;line-height:1em;text-align:center;display:inline-block;outline:none;top:0;right:0;font-size:35px;width:35px}@media (min-width: 768px){.reveal-overlay:after{top:7px;right:7px;font-size:50px;width:50px}}.reveal-overlay .reveal{z-index:1006;-webkit-backface-visibility:hidden;backface-visibility:hidden;display:none;background-color:#fefefe;position:relative;top:100px;margin-right:auto;margin-left:auto;overflow-y:auto;width:90%;height:inherit;min-height:0;outline:none;padding:0;border:none;border-radius:7px}@media (min-width: 768px){.reveal-overlay .reveal{right:auto;left:auto;margin:0 auto}}
 
         .header-pic {
-            background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dmmior4id2ysr.cloudfront.net/sales/playlist-launch/header-3.jpg);
-        }
-        @media (min-width: 64em) {
-            .header-pic {
-                background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dmmior4id2ysr.cloudfront.net/sales/playlist-launch/header-3.jpg);
-            }
-
+            background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dmmior4id2ysr.cloudfront.net/sales/playlist-launch/header-5.png);
         }
         .dot {
             left:-16px;
@@ -169,10 +163,10 @@
     <header class="px-5 sm:px-6 py-12 sm:py-16 lg:py-24" style="background:linear-gradient(to bottom, #fff, #F1EFED);">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap items-center">
-                <div class="header-pic sm:order-1 pb-64 sm:pb-96 mb-7 sm:mb-0 w-full sm:w-auto rounded-xl flex-grow relative bg-center bg-cover cursor-pointer autoplay-video" x-on:click="trailer = true;">
-                    <div class="join musora-gold smaller absolute bottom-1 sm:bottom-3 left-1 sm:left-3"><i class="fas fa-play"></i>&nbsp; PLAY TRAILER</div>
+                <div class="header-pic sm:order-1 pb-72 sm:pb-96 mb-7 sm:mb-0 w-full sm:w-auto rounded-xl flex-grow relative bg-top bg-cover cursor-pointer autoplay-video" x-on:click="trailer = true;">
+                    <div class="join musora-gold smaller absolute bottom-0 left-0 mx-5 my-5"><i class="fas fa-play"></i>&nbsp; PLAY TRAILER</div>
                 </div>
-                <div class="w-full sm:w-7/12 sm:pr-6 text-center sm:text-left">
+                <div class="w-full sm:w-1/2 lg:w-7/12 sm:pr-6 text-center sm:text-left">
                     <img class="h-10 sm:h-20" src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/sales/playlist-launch/logos.png">
                     <h3 class="leading-tight my-3 sm:my-5"><strong>Introducing Playlists.</strong><br> Learning music just got easier.</h3>
                     <p>Playlists give you ultimate control over how you learn the music you love. Organize videos, songs, and lessons YOUR way – and share your journey with students worldwide.</p>
@@ -300,7 +294,8 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-3xl mx-auto">
             <h3 class=""><strong>Musora Playlists </strong></h3>
-            <p class="leading-normal mt-3 mb-10 sm:mb-14 max-w-2xl mx-auto">Our talented team created some fantastic playlists to get Musora members started. Click one of the playlists below to check it out!</p>
+            <p class="leading-normal mt-3 mb-10 sm:mb-14 mx-auto">Our talented team created some fantastic playlists to get Musora <br class="hidden sm:inline">
+                members started. Click one of the playlists below to check it out!</p>
 
             <div class="text-center w-full sm:w-auto mt-6 lg:mt-10 mx-auto">
                 @php
@@ -373,57 +368,57 @@
                         ],
                     ];
                 @endphp
-                <div class="rounded-xl p-2 sm:p-4 w-full flex flex-wrap mb-4" style="background-color:#f2f8fd;">
+                <div class="rounded-xl py-3 sm:py-5 px-3 sm:px-2 w-full flex flex-wrap mb-4" style="background-color:#f2f8fd;">
                     @foreach ($DplaylistItems as $playlistItem)
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-3 mb-3 sm:mb-0">
-                            <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block">
-                                <div class="w-16 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-auto sm:h-40 lg:h-48 rounded-xl">
+                            <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block items-center">
+                                <div class="w-24 sm:w-full flex-shrink-0">
+                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="w-full rounded-xl">
                                 </div>
-                                <div class="pl-3 sm:pl-0 text-left sm:text-center">
-                                    <p class="mb-1 sm:mt-2 leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
+                                <div class="pl-4 sm:pl-0 text-left sm:text-center">
+                                    <p class="mb-1 sm:mb-0 sm:mt-2 leading-normal sm:leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
                                 </div>
                             </a>
                         </div>
                     @endforeach
                 </div>
-                <div class="rounded-xl p-2 sm:p-4 w-full flex flex-wrap mb-4" style="background-color:#fef3f4;">
+                <div class="rounded-xl py-3 sm:py-5 px-3 sm:px-2 w-full flex flex-wrap mb-4" style="background-color:#fef3f4;">
                     @foreach ($PplaylistItems as $playlistItem)
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-3 mb-3 sm:mb-0">
-                            <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block">
-                                <div class="w-16 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-auto sm:h-40 lg:h-48 rounded-xl">
+                            <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block items-center">
+                                <div class="w-24 sm:w-full flex-shrink-0">
+                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="w-full rounded-xl">
                                 </div>
-                                <div class="pl-3 sm:pl-0 text-left sm:text-center">
-                                    <p class="mb-1 sm:mt-2 leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
+                                <div class="pl-4 sm:pl-0 text-left sm:text-center">
+                                    <p class="mb-1 sm:mb-0 sm:mt-2 leading-normal sm:leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
                                 </div>
                             </a>
                         </div>
                     @endforeach
                 </div>
-                <div class="rounded-xl p-2 sm:p-4 w-full flex flex-wrap mb-4" style="background-color:#f2fcfb;">
+                <div class="rounded-xl py-3 sm:py-5 px-3 sm:px-2 w-full flex flex-wrap mb-4" style="background-color:#f2fcfb;">
                     @foreach ($GplaylistItems as $playlistItem)
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-3 mb-3 sm:mb-0">
-                            <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block">
-                                <div class="w-16 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-auto sm:h-40 lg:h-48 rounded-xl">
+                            <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block items-center">
+                                <div class="w-24 sm:w-full flex-shrink-0">
+                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="w-full rounded-xl">
                                 </div>
-                                <div class="pl-3 sm:pl-0 text-left sm:text-center">
-                                    <p class="mb-1 sm:mt-2 leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
+                                <div class="pl-4 sm:pl-0 text-left sm:text-center">
+                                    <p class="mb-1 sm:mb-0 sm:mt-2 leading-normal sm:leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
                                 </div>
                             </a>
                         </div>
                     @endforeach
                 </div>
-                <div class="rounded-xl p-2 sm:p-4 w-full flex flex-wrap" style="background-color:#f9f2fe;">
+                <div class="rounded-xl py-3 sm:py-5 px-3 sm:px-2 w-full flex flex-wrap" style="background-color:#f9f2fe;">
                     @foreach ($SplaylistItems as $playlistItem)
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-3 mb-3 sm:mb-0">
-                            <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block">
-                                <div class="w-16 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="h-auto sm:h-40 lg:h-48 rounded-xl">
+                            <a href="{{ $playlistItem['url'] }}" class="flex sm:inline-block items-center">
+                                <div class="w-24 sm:w-full flex-shrink-0">
+                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $playlistItem['thumb'] }}" class="w-full rounded-xl">
                                 </div>
-                                <div class="pl-3 sm:pl-0 text-left sm:text-center">
-                                    <p class="mb-1 sm:mt-2 leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
+                                <div class="pl-4 sm:pl-0 text-left sm:text-center">
+                                    <p class="mb-1 sm:mb-0 sm:mt-2 leading-normal sm:leading-tight text-sm"><strong class="font-black">{!!$playlistItem['title']!!}</strong></p>
                                 </div>
                             </a>
                         </div>
