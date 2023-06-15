@@ -682,6 +682,7 @@ class ContentRepository extends RepositoryBase
             ->count();
     }
 
+
     /**
      * @param int $id
      * @param string $type
@@ -690,6 +691,56 @@ class ContentRepository extends RepositoryBase
      * @param int $siblingPairLimit
      * @param string $orderColumn
      * @param string $orderDirection
+     * @param int $contentId
+     * @param string $operator
+     * @param string $direction
+     * @param int $limit
+     * @return array
+     */
+    private function getSubqueryForNeighbouringSiblings(
+        $type,
+        $columnName,
+        $columnValue,
+        $orderColumn,
+        $contentId,
+        $operator,
+        $direction,
+        $limit
+    )
+    {
+        $subquery['subqueryOne'] = $this
+            ->query()
+            ->selectRaw(
+                DB::raw(
+                    'ROW_NUMBER() OVER (order by railcontent_content.' . $orderColumn . ' ' . $direction . ', railcontent_content.id ' . $direction . ') AS rowNumber'
+                )
+            )
+            ->selectPrimaryColumns()
+            ->restrictByUserAccess()
+            ->where(ConfigService::$tableContent . '.type', $type)
+            ->where(ConfigService::$tableContent . '.' . $columnName, $operator, $columnValue)
+            ->limit($limit);
+
+        $subquery['subqueryTwo'] = $this->query()
+            ->selectRaw(DB::raw('rowNumber'))
+            ->fromSub($subquery['subqueryOne'], 'sub')
+            ->where('id', $contentId)
+            ->get()
+            ->value('rowNumber');
+
+        return $subquery;
+    }
+
+
+    /**
+     * @param int $id
+     * @param string $type
+     * @param string $columnName
+     * @param string $columnValue
+     * @param int $siblingPairLimit
+     * @param string $orderColumn
+     * @param string $orderDirection
+     * @param int $contentId
      * @return array
      */
     public function getTypeNeighbouringSiblings(
@@ -702,60 +753,36 @@ class ContentRepository extends RepositoryBase
         $contentId = null
     ) {
         if ($contentId) {
-            $beforeSubqueryOne = $this
-                ->query()
-                ->selectRaw(
-                    DB::raw(
-                        'ROW_NUMBER() OVER (order by railcontent_content.' . $orderColumn . ' desc, railcontent_content.id desc) AS rowNumber'
-                    )
-                )
-                ->selectPrimaryColumns()
-                ->restrictByUserAccess()
-                ->where(ConfigService::$tableContent . '.type', $type)
-                ->where(ConfigService::$tableContent . '.' . $columnName, '<=', $columnValue)
-                ->limit(50);
 
-            $beforeSubqueryTwo = $this->query()
-                ->selectRaw(DB::raw('rowNumber'))
-                ->fromSub($beforeSubqueryOne, 'sub')
-                ->where('id', $contentId)
-                ->get()
-                ->value('rowNumber');
+            $beforeSubquery = $this->getSubqueryForNeighbouringSiblings($type, $columnName, $columnValue,
+                $orderColumn, $contentId, '<=', 'desc', 10);
+
+            if (!$beforeSubquery['subqueryTwo']) {
+                $beforeSubquery = $this->getSubqueryForNeighbouringSiblings($type, $columnName, $columnValue,
+                    $orderColumn, $contentId, '<=', 'desc', 200);
+            }
 
             $beforeContents =
                 $this->query()
                     ->select('*')
-                    ->fromSub($beforeSubqueryOne, 'sub')
-                    ->where('rowNumber', '>', $beforeSubqueryTwo)
+                    ->fromSub($beforeSubquery['subqueryOne'], 'sub')
+                    ->where('rowNumber', '>', $beforeSubquery['subqueryTwo'])
                     ->limit($siblingPairLimit)
                     ->getToArray();
 
-            $afterSubqueryOne = $this
-                ->query()
-                ->selectRaw(
-                    DB::raw(
-                        'ROW_NUMBER() OVER (order by railcontent_content.' . $orderColumn . ' asc, railcontent_content.id asc) AS rowNumber'
-                    )
-                )
-                ->selectPrimaryColumns()
-                ->restrictByUserAccess()
-                ->where(ConfigService::$tableContent . '.type', $type)
-                ->where(ConfigService::$tableContent . '.' . $columnName, '>=', $columnValue)
-                ->limit(70);
+            $afterSubquery = $this->getSubqueryForNeighbouringSiblings($type, $columnName, $columnValue,
+                $orderColumn, $contentId, '>=', 'asc', 10);
+            if (!$afterSubquery['subqueryTwo']) {
+                $afterSubquery = $this->getSubqueryForNeighbouringSiblings($type, $columnName, $columnValue,
+                    $orderColumn, $contentId, '>=', 'asc', 200);
+            }
 
-            $afterSubqueryTwo = $this->query()
-                ->selectRaw(DB::raw('rowNumber'))
-                ->fromSub($afterSubqueryOne, 'sub')
-                ->where('id', $contentId)
-                ->get()
-                ->value('rowNumber');
-
-            if ($afterSubqueryTwo) {
+            if ($afterSubquery['subqueryTwo']) {
                 $afterContents =
                     $this->query()
                         ->select('*')
-                        ->fromSub($afterSubqueryOne, 'sub')
-                        ->where('rowNumber', '>', $afterSubqueryTwo)
+                        ->fromSub($afterSubquery['subqueryOne'], 'sub')
+                        ->where('rowNumber', '>', $afterSubquery['subqueryTwo'])
                         ->limit($siblingPairLimit)
                         ->getToArray();
             } else {
