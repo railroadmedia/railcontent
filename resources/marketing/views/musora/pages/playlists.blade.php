@@ -67,14 +67,14 @@
         }
 
         .join.smaller {
-            padding:10px 30px 6px;
+            padding:8px 30px;
             font-size:16px;
         }
 
         @media (min-width:768px) {
             .join.smaller {
                 font-size:18px;
-                padding:12px 30px 10px;
+                padding:11px 30px;
             }
         }
 

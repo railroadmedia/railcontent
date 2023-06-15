@@ -7,7 +7,6 @@
     <!-- link-wrapper -->
     <div class="flex flex-1">
 
-        @if(!empty($subscriptionVersion))
             @if(!empty($fullSubscriptionVersion))
 
                 {{-- Nav Links --}}
@@ -29,26 +28,7 @@
 
             @endif
 
-            {{-- CTA Button --}}
-            <div class="ml-auto flex items-center">
-                <a @if(!empty($scrollToJoin))
-                        href="#customize-anchor"
-                        class="anchor-slide btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
-                    @elseif(!empty($joinUrl))
-                        href="{{ $joinUrl }}" class="btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
-                    @else
-                        href="/#customize-anchor" class="btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
-                    @endif
-                >
-                    @if(!empty($emptyPromoVersion))
-                        Start Trial
-                    @else
-                        Join<span class="show-for-medium"> {{ $brand }}</span>
-                    @endif
-                </a>
-            </div>
 
-        @endif
 
         {{-- Cart and Shop CTA buttons --}}
         @if(!empty($checkoutVersion))
@@ -80,8 +60,14 @@
 
     </div>
 
-    <div class="hidden lg:block py-4">
+    <div class="hidden lg:block py-4 mr-1">
         <a href="{{ get_legacy_brand_base_url('musora') }}/login" class="@if(!empty($whiteNav)) invert @endif border-2 border-white rounded-full text-[15px] text-white hover:text-black hover:bg-white uppercase font-bebas tracking-widest pt-[9px] px-[30px] pb-[8px] transition-all duration-200">Login</a>
+    </div>
+
+    <div class="ml-auto flex items-center">
+        <a href="/choose-plan" class="btn-primary btn-small text-base leading-none text-black bg-musora border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial">
+            Start for free &nbsp; <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
+        </a>
     </div>
 
     <!-- Sidebar Toggle -->
