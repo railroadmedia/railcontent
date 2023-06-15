@@ -67,14 +67,14 @@
         }
 
         .join.smaller {
-            padding:10px 30px 6px;
+            padding:8px 30px;
             font-size:16px;
         }
 
         @media (min-width:768px) {
             .join.smaller {
                 font-size:18px;
-                padding:12px 30px 10px;
+                padding:11px 30px;
             }
         }
 
@@ -283,68 +283,68 @@
                     $DplaylistItems = [
                         [
                         'title' => 'Krad’s Favorite Fills',
-                        'url' => '/drumeo/playlists',
+                        'url' => '/drumeo/playlist/300236',
                         'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/2-KrRadsFaveFills.jpg',
                         ],
                         [
                         'title' => '5 lessons to develop the Moeller Stroke',
-                        'url' => '/drumeo/playlists',
+                        'url' => '/drumeo/playlist/300244',
                         'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/3-MoellerStroke.jpg',
                         ],
                         [
                         'title' => 'Brandon’s Top 10 Songs Of 2023',
-                        'url' => '/drumeo/playlists',
+                        'url' => '/drumeo/playlist/300238',
                         'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/4-Top10Songs.jpg',
                         ],
                     ];
                     $PplaylistItems = [
                         [
                         'title' => 'Lisa’s Beautiful Arpeggios',
-                        'url' => '/pianote/playlists',
+                        'url' => '/pianote/playlist/300247',
                         'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/1-BeautifulArpeggios.jpg',
                         ],
                         [
                         'title' => 'Easy Song Tutorials For Beginners',
-                        'url' => '/pianote/playlists',
+                        'url' => '/pianote/playlist/300252',
                         'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/3-EasySongs.jpg',
                         ],
                         [
                         'title' => 'Songs For Sight Reading',
-                        'url' => '/pianote/playlists',
+                        'url' => '/pianote/playlist/300253',
                         'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/5-Sightreading.jpg',
                         ],
                     ];
                     $GplaylistItems = [
                         [
                         'title' => 'Guitareo Method Practice Challenges',
-                        'url' => '/guitareo/playlists',
+                        'url' => '/guitareo/playlist/300275',
                         'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/2-GuitareoMethodChallenges.jpg',
                         ],
                         [
                         'title' => 'Jimi Hendrix Lessons',
-                        'url' => '/guitareo/playlists',
+                        'url' => '/guitareo/playlist/300276',
                         'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/3-JimiHendrix.jpg',
                         ],
                         [
                         'title' => '10 Songs For Beginner Guitarists',
-                        'url' => '/guitareo/playlists',
+                        'url' => '/guitareo/playlist/300278',
                         'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/4-10SongsForBeginners.jpg',
                         ],
                     ];
                     $SplaylistItems = [
                         [
                         'title' => 'Lisa’s Favorite Sing-Alongs',
-                        'url' => '/singeo/playlists',
+                        'url' => '/singeo/playlist/300267',
                         'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/1-LisasFavouriteSingAlongs.jpg',
                         ],
                         [
                         'title' => '10 Easy Songs for Beginners',
-                        'url' => '/singeo/playlists',
+                        'url' => '/singeo/playlist/300265',
                         'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/3-10Songs.jpg',
                         ],
                         [
                         'title' => 'Pitch Perfect Lessons and Exercises',
-                        'url' => '/singeo/playlists',
+                        'url' => '/singeo/playlist/300266',
                         'thumb' => 'https://musora-center.s3.amazonaws.com/sales/playlist-launch/5-PitchPerfect.jpg',
                         ],
                     ];

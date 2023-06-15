@@ -1,4 +1,4 @@
-<aside id="navSideBar" 
+<aside id="navSideBar"
        x-cloak
        class="z-[1000] fixed w-80 right-0 top-10 md:top-14 h-[calc(100vh-40px)] md:h-[calc(100vh-56px)] bg-white border-l border-gray-200 shadow-lg transition duration-300 ease-in-out"
        x-bind:class="sidebarOpen? 'translate-x-0' : 'translate-x-full'"
@@ -29,16 +29,16 @@
             <ul class="py-3 px-5">
                 @foreach($external_links as $page => $info)
                     <li class="mb-1">
-                        <a href="{{ $info['url'] }}" 
+                        <a href="{{ $info['url'] }}"
                             @if(@isset($info['target']))
                                 target="{{$info['target']}}"
                             @else
-                                target="_blank" 
-                            @endif 
+                                target="_blank"
+                            @endif
                             class="text-base text-black py-2 w-full"
                         >
                             <i class="{{ $info['iconClass'] }} mr-1 @if(@isset($info['themeClass'])){{$info['themeClass']}}@endif" aria-hidden="true"></i>
-                            {{ $page }} 
+                            {{ $page }}
                         </a>
                     </li>
                 @endforeach

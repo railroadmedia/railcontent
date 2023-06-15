@@ -31,7 +31,7 @@
         x-on:resize.window="isMobile = (window.innerWidth < 768) ? true : false"
     >
         <!-- Tab List -->
-        <div class="relative mx-auto max-w-md lg:max-w-xl">
+        <div class="relative mx-auto max-w-lg lg:max-w-xl">
             <ul
                 x-ref="tablist"
                 class="hidden md:flex mt-8 mb-10 rounded-full bg-[#F5F8FC]"
@@ -67,7 +67,7 @@
                     x-show="isMobile || (!isMobile && isSelected($id('tab', whichChild($el, $el.parentElement))))"
                     class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0"
                 >
-                    <h4 class="font-extrabold text-left mb-2 md:hidden">{{ $course['title'] }}</h4>
+                    <h4 class="font-extrabold text-left mb-2 md:hidden">{!!  $course['title']  !!}</h4>
                     <div
                         x-data="{
                                 init() {

@@ -1,20 +1,8 @@
 <header class="flex-none z-[99]">
     <!-- Nav -->
-    @if(!empty($promoVersion))
-        @include('_partials.layout._top-nav', [
-            "subscriptionVersion" => true,
-            "scrollToJoin" => true,
-            "hideMenu" => true,
-            "logo" => $logo,
-            "links" => $nav_links,
-            "cartVersion" => false,
-            "checkoutVersion" => false,
-        ])
-    @else
-        @include('_partials.layout._top-nav', [
-            "logo" => $logo,
-        ])
-    @endif
+    @include('_partials.layout._top-nav', [
+        "logo" => $logo,
+    ])
 
     <!-- Sidebar -->
     @include('_partials.layout._sidebar', [

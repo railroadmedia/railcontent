@@ -916,7 +916,8 @@ const currentProgress = computed(() => {
         const progress = (chromeCast.value.Player.currentTime / totalDuration.value) * 100;
 
 
-        if ((currentTime.value < totalDuration.value) && currentTime.value > props.endSecond) {
+        if (totalDuration.value && props.endSecond &&
+            (currentTime.value < totalDuration.value) && currentTime.value > props.endSecond) {
             playPause();
             endCallback();
         }
@@ -926,7 +927,8 @@ const currentProgress = computed(() => {
 
     const progress = (currentTime.value / totalDuration.value) * 100;
 
-    if ((currentTime.value < totalDuration.value) && currentTime.value > props.endSecond) {
+    if (totalDuration.value && props.endSecond &&
+        (currentTime.value < totalDuration.value) && currentTime.value > props.endSecond) {
         playPause();
         endCallback();
     }
