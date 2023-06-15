@@ -44,30 +44,8 @@ class UserPlaylistsRepository extends RepositoryBase
         $query =
             $this->query()
                 ->select(
-                    config('railcontent.table_prefix').'user_playlists.*',
-                    'c.id as user_playlist_item_id'
-                )
+                    config('railcontent.table_prefix').'user_playlists.*')
                 ->selectRaw('IF( pp.id IS NULL, FALSE, TRUE) as  pinned')
-                ->leftjoin(
-                    config('railcontent.table_prefix').'user_playlist_content as c',
-                    function (JoinClause $join) {
-                        $join->on(
-                            config('railcontent.table_prefix').'user_playlists'.'.id',
-                            '=',
-                            'c.user_playlist_id'
-                        )
-                            ->on(
-                                'c.position',
-                                '=',
-                                \DB::raw(
-                                    '(select position from '.
-                                    config('railcontent.table_prefix').
-                                    'user_playlist_content'.
-                                    ' where user_playlist_id = c.user_playlist_id order by position asc limit 1)'
-                                )
-                            );
-                    }
-                )
                 ->leftjoin(
                     config('railcontent.table_prefix').'pinned_playlists as pp',
                     config('railcontent.table_prefix').'user_playlists'.'.id',
