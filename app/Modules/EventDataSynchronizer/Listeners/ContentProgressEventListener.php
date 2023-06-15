@@ -373,6 +373,18 @@ class ContentProgressEventListener
             return $contentId;
         }
 
+        $videoContentId = Content::query()->select('id')
+            ->where('vimeo_video_id', '=', $mediaPlaybackTracked->mediaId)
+            ->orWhere('youtube_video_id', '=', $mediaPlaybackTracked->mediaId)
+            ->first()?->id;
+        if ($videoContentId) {
+            $contentId = Content::query()->select('id')
+                ->where('video', '=', $videoContentId)
+                ->first()?->id;
+            if ($contentId) {
+                return $contentId;
+            }
+        }
         $contentId = intval($mediaPlaybackTracked->mediaId);
         if ($contentId && $contentId < 100000000) {
             //assume these ids are content id and not vimeo ids
