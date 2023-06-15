@@ -8,6 +8,7 @@ use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
+use Railroad\Railcontent\Repositories\UserPlaylistContentRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railtracker\Services\ContentLastEngagedService;
@@ -19,6 +20,7 @@ class PlaylistDecorator extends ModeDecoratorBase
     private UserPlaylistsService $userPlaylistsService;
     private ContentService $contentService;
     private ContentLastEngagedService $contentLastEngagedService;
+    private UserPlaylistContentRepository $userPlaylistContentRepository;
 
     /**
      * @param PinnedPlaylistsRepository $pinnedPlaylistsRepository
@@ -28,12 +30,14 @@ class PlaylistDecorator extends ModeDecoratorBase
         PinnedPlaylistsRepository $pinnedPlaylistsRepository,
         UserPlaylistsService $userPlaylistsService,
         ContentService $contentService,
-        ContentLastEngagedService $contentLastEngagedService
+        ContentLastEngagedService $contentLastEngagedService,
+        UserPlaylistContentRepository  $userPlaylistContentRepository
     ) {
         $this->pinnedPlaylistsRepository = $pinnedPlaylistsRepository;
         $this->userPlaylistsService = $userPlaylistsService;
         $this->contentService = $contentService;
         $this->contentLastEngagedService = $contentLastEngagedService;
+        $this->userPlaylistContentRepository = $userPlaylistContentRepository;
     }
 
     public function decorate($playlists)
@@ -50,13 +54,12 @@ class PlaylistDecorator extends ModeDecoratorBase
                 url()->route('platform.user.playlist', ["id" => $playlist['id'], "brand" => brand()]);
             if (!$playlist['thumbnail_url']) {
                 $playlists[$index]['uploaded_thumbnail'] = false;
-                if (isset($playlist['user_playlist_item_id'])) {
+                $firstItem = $this->userPlaylistContentRepository->getFirstContentByPlaylistId($playlist['id']);
+                if (isset($firstItem)) {
                     Decorator::$typeDecoratorsEnabled = false;
                     \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
                     ContentRepository::$pullFutureContent = true;
-                    $firstPlaylistItem =
-                        $this->userPlaylistsService->getPlaylistItemById($playlist['user_playlist_item_id']);
-                    $firstItem = $this->contentService->getById($firstPlaylistItem['content_id']);
+                    $firstItem = $this->contentService->getById($firstItem['content_id']);
 
                     $playlists[$index]['thumbnail_url'] = '';
                     if ($firstItem) {

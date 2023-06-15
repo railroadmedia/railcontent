@@ -8366,16 +8366,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.15",
+            "version": "v3.1.17",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "39155a6ee21358fc8fe3cb7753b6fb340b52b37a"
+                "reference": "8aebd73680ba2b4760c2e234249b59bbbab1de7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/39155a6ee21358fc8fe3cb7753b6fb340b52b37a",
-                "reference": "39155a6ee21358fc8fe3cb7753b6fb340b52b37a",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/8aebd73680ba2b4760c2e234249b59bbbab1de7e",
+                "reference": "8aebd73680ba2b4760c2e234249b59bbbab1de7e",
                 "shasum": ""
             },
             "require": {
@@ -8405,9 +8405,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.15"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.17"
             },
-            "time": "2023-06-14T16:32:26+00:00"
+            "time": "2023-06-15T13:07:39+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8600,16 +8600,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.4",
+            "version": "v2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "379a7cffb10898c34baaeaf78d17ed88e7383aac"
+                "reference": "c290bce4d525e2a17c93402b2896fce07453698a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/379a7cffb10898c34baaeaf78d17ed88e7383aac",
-                "reference": "379a7cffb10898c34baaeaf78d17ed88e7383aac",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c290bce4d525e2a17c93402b2896fce07453698a",
+                "reference": "c290bce4d525e2a17c93402b2896fce07453698a",
                 "shasum": ""
             },
             "require": {
@@ -8663,9 +8663,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.4"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.6"
             },
-            "time": "2023-06-14T16:34:26+00:00"
+            "time": "2023-06-15T11:48:47+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -8789,16 +8789,16 @@
         },
         {
             "name": "railroad/railtracker",
-            "version": "v4.0.17",
+            "version": "v4.0.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railtracker.git",
-                "reference": "5a92a231a0ba3eabd72cd6a45eb129b9ca32230c"
+                "reference": "affa280c2637a8e2bcb36df6cfa39adb02f5e52d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/5a92a231a0ba3eabd72cd6a45eb129b9ca32230c",
-                "reference": "5a92a231a0ba3eabd72cd6a45eb129b9ca32230c",
+                "url": "https://api.github.com/repos/railroadmedia/railtracker/zipball/affa280c2637a8e2bcb36df6cfa39adb02f5e52d",
+                "reference": "affa280c2637a8e2bcb36df6cfa39adb02f5e52d",
                 "shasum": ""
             },
             "require": {
@@ -8844,9 +8844,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railtracker/issues",
-                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.17"
+                "source": "https://github.com/railroadmedia/railtracker/tree/v4.0.18"
             },
-            "time": "2023-06-14T16:28:59+00:00"
+            "time": "2023-06-15T16:17:31+00:00"
         },
         {
             "name": "railroad/referral",
@@ -17027,5 +17027,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }

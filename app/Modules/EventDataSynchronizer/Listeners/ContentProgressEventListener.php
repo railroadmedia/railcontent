@@ -3,6 +3,7 @@
 namespace App\Modules\EventDataSynchronizer\Listeners;
 
 use App\Maps\ContentTypes;
+use App\Modules\Content\Models\Content;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
 use App\Modules\RailTracker\Services\ContentEngagementService;
 use App\Services\UserMetricsService;
@@ -357,9 +358,45 @@ class ContentProgressEventListener
         }
     }
 
+    private function getContentId(MediaPlaybackTracked $mediaPlaybackTracked)
+    {
+        $contentId = intval($mediaPlaybackTracked->contentId);
+        if ($contentId) {
+            return $contentId;
+        }
+
+        //Sometimes contentId is not provided and we need to look up id from media id
+        $contentId = Content::query()->select('id')
+            ->where('external_video_id', '=', $mediaPlaybackTracked->mediaId)
+            ->first()?->id;
+        if ($contentId) {
+            return $contentId;
+        }
+
+        $videoContentId = Content::query()->select('id')
+            ->where('vimeo_video_id', '=', $mediaPlaybackTracked->mediaId)
+            ->orWhere('youtube_video_id', '=', $mediaPlaybackTracked->mediaId)
+            ->first()?->id;
+        if ($videoContentId) {
+            $contentId = Content::query()->select('id')
+                ->where('video', '=', $videoContentId)
+                ->first()?->id;
+            if ($contentId) {
+                return $contentId;
+            }
+        }
+        $contentId = intval($mediaPlaybackTracked->mediaId);
+        if ($contentId && $contentId < 100000000) {
+            //assume these ids are content id and not vimeo ids
+            return $contentId;
+        }
+        return null;
+    }
+
     public function handleMediaPlaybackTracked(MediaPlaybackTracked $mediaPlaybackTracked)
     {
-        $contentId = intval($mediaPlaybackTracked->contentId ?? $mediaPlaybackTracked->mediaId);
+        $contentId = $this->getContentId($mediaPlaybackTracked);
+
         if ($contentId) {
             $this->contentEngagementService->update(
                 $mediaPlaybackTracked->userId,
