@@ -121,7 +121,7 @@
         </div>
     </div>
 
-    <div class="text-center my-10 px-4 sm:px-0">
+    <div class="text-center mt-10 px-4 sm:px-0">
         @if(empty($promoVersion))
             <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }} smaller">EXPLORE COURSES</a>
         @endif
