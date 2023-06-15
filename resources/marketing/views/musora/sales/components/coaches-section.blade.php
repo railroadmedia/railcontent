@@ -2,8 +2,10 @@
 <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
 <section class="py-12 md:py-20 text-center" style="background-color:#f4f8fb;">
     <div class="max-w-3xl mx-auto">
-        <h2 class="font-extrabold">{!! $header !!}</h2>
-        <p class="px-4 md:px-0 mt-3 mb-4 md:mb-0 max-w-md">{!! $desc !!}</p>
+        <h2 class="leading-tight font-extrabold">{!! $header !!}</h2>
+        @if(!empty($desc))
+            <p class="leading-tight px-4 md:px-0 mt-3 mb-5 md:mb-0 max-w-md mx-auto">{!! $desc !!}</p>
+        @endif
     </div>
 
     <!-- Tabs -->
@@ -29,7 +31,7 @@
         x-on:resize.window="isMobile = (window.innerWidth < 768) ? true : false"
     >
         <!-- Tab List -->
-        <div class="relative mx-auto max-w-md lg:max-w-xl">
+        <div class="relative mx-auto max-w-lg lg:max-w-xl">
             <ul
                 x-ref="tablist"
                 class="hidden md:flex mt-8 mb-10 rounded-full bg-[#F5F8FC]"
@@ -47,7 +49,7 @@
                             :class="isSelected($el.id) ? 'text-white bg-[#01050F] border-[#01050F] bubble' : 'border-transparent'"
                             class="px-5 py-2 lg:py-2.5 w-full relative rounded-full relative z-20"
                         >
-                            {{ $button }}
+                            {!!  $button  !!}
                         </button>
                     </li>
                 @endforeach
@@ -65,7 +67,7 @@
                     x-show="isMobile || (!isMobile && isSelected($id('tab', whichChild($el, $el.parentElement))))"
                     class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0"
                 >
-                    <h4 class="font-extrabold text-center mb-2 md:hidden">{{ $course['title'] }}</h4>
+                    <h4 class="font-extrabold text-left mb-2 md:hidden">{!!  $course['title']  !!}</h4>
                     <div
                         x-data="{
                                 init() {
@@ -98,14 +100,14 @@
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)
                                         <li class="splide__slide flex flex-col items-center justify-center px-1">
-                                            <div class="relative w-full rounded-xl overflow-hidden" style="padding-bottom: 120%;">
+                                            <div class="relative w-full rounded-xl overflow-hidden pb-48 sm:pb-52 lg:pb-72">
                                                 <picture>
                                                     <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=450,quality=85/{{$image['img']}}">
                                                     <img class="absolute inset-0 object-cover" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/{{$image['img']}}" alt="{{ $image['instructor'] }}" />
                                                 </picture>
                                                 <div class="rounded-b-xl absolute w-full bottom-0 h-full text-white text-center flex justify-end flex-col pb-3 lg:pb-6" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 50%, #01050F 100%);">
-                                                    <h4 class="font-extrabold mb-1 lg:mb-2">{!! $image['title'] !!}</h4>
-                                                    <p class="leading-none">{{ $image['instructor'] }}</p>
+                                                    <h4 class="leading-none font-extrabold mb-2 lg:mb-2">{!! $image['title'] !!}</h4>
+                                                    <p class="leading-none text-sm">{{ $image['instructor'] }}</p>
                                                 </div>
                                             </div>
                                         </li>
@@ -121,9 +123,9 @@
 
     <div class="text-center my-10 px-4 sm:px-0">
         @if(empty($promoVersion))
-            <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline text-{{ $theme }} border-{{ $theme }} smaller">EXPLORE THE COURSES <i class="fas fa-info-circle"></i> </a>
+            <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }} smaller">EXPLORE COURSES</a>
         @endif
-        <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+        <a class="sm:mx-1 w-full sm:w-64 join @if($theme != 'musora') {{ $theme }} @else musora-gold @endif smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))
                 href="#customize-anchor"
             @elseif(!empty($month))

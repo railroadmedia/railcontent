@@ -7,8 +7,8 @@
     <meta name="description" content="Learn the songs you love; now on drums, piano, guitar, or vocals.">
     <meta property="og:description" content="Learn the songs you love; now on drums, piano, guitar, or vocals.">
 
-    <meta property="og:url" content="https://www.musora.com/unified-2022">
-    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image.jpg">
     <style>
         .reveal-overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483002;display:none;overflow-y:auto;background-color:rgba(0,0,0,0.8)}.reveal-overlay:after{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family:"Font Awesome 5 Pro";font-weight:900;font-style:normal;font-variant:normal;text-rendering:auto;content:"\f00d";color:#fff;z-index:1;opacity:0.8;position:absolute;margin:0;line-height:1em;text-align:center;display:inline-block;outline:none;top:0;right:0;font-size:35px;width:35px}@media (min-width: 768px){.reveal-overlay:after{top:7px;right:7px;font-size:50px;width:50px}}.reveal-overlay .reveal{z-index:1006;-webkit-backface-visibility:hidden;backface-visibility:hidden;display:none;background-color:#fefefe;position:relative;top:100px;margin-right:auto;margin-left:auto;overflow-y:auto;width:90%;height:inherit;min-height:0;outline:none;padding:0;border:none;border-radius:7px}@media (min-width: 768px){.reveal-overlay .reveal{right:auto;left:auto;margin:0 auto}}
         .join.smaller {
@@ -498,46 +498,40 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
             <h3 class="mb-4 sm:mb-10"><strong>Still have questions?</strong></h3>
-            @include('musora._partials._dropdown', [
-            "customClass" => "sm:rounded-full",
-            "question" => true,
+            @include('_partials.components.question-dropdown', [
+            'num' => '?',
             "title" => "What happens to my progress inside the new platform?",
-            "description" => "Any progress you’ve made so far within our learning platforms will be saved and migrated to Musora. Your current Method level, your XP, your account information, everything will follow you!",
+            "desc" => "Any progress you’ve made so far within our learning platforms will be saved and migrated to Musora. Your current Method level, your XP, your account information, everything will follow you!",
             ])
-            @include('musora._partials._dropdown', [
-            "customClass" => "sm:rounded-full",
-            "question" => true,
+            @include('_partials.components.question-dropdown', [
+            'num' => '?',
             "title" => "Which mobile app should I use?",
-            "description" => "We’ve launched a brand new Musora mobile app with improved functionality and added features with access to all four brands. The Drumeo and Pianote mobile apps will remain accessible, but will not be updated with new content and features. Download the new app here:
+            "desc" => "We’ve launched a brand new Musora mobile app with improved functionality and added features with access to all four brands. The Drumeo and Pianote mobile apps will remain accessible, but will not be updated with new content and features. Download the new app here:
             <a href='https://play.google.com/store/apps/details?id=com.musoraapp' target='_blank'><u>GOOGLE PLAY</u></a> / <a href='https://itunes.apple.com/us/app/musora/id1619053766?ls=1' target='_blank'><u>APPLE STORE</u></a>",
             ])
-            @include('musora._partials._dropdown', [
-            "customClass" => "sm:rounded-full",
-            "question" => true,
+            @include('_partials.components.question-dropdown', [
+            'num' => '?',
             "title" => "What is the price for Musora?",
-            "description" => "Good news! To thank you for supporting our business, we’re grandfathering in all existing membership prices. New students will pay a higher premium to become a part of Musora.",
+            "desc" => "Good news! To thank you for supporting our business, we’re grandfathering in all existing membership prices. New students will pay a higher premium to become a part of Musora.",
             ])
-            @include('musora._partials._dropdown', [
-            "customClass" => "sm:rounded-full",
-            "question" => true,
+            @include('_partials.components.question-dropdown', [
+            'num' => '?',
             "title" => "What if I currently pay for two memberships?",
-            "description" => "Moving forward, you’ll only pay for the first membership you signed up for. For example, if you signed up for Pianote, then joined Singeo, your recurring annual membership will only be billed for Pianote, while giving you access to the three other platforms for free.",
+            "desc" => "Moving forward, you’ll only pay for the first membership you signed up for. For example, if you signed up for Pianote, then joined Singeo, your recurring annual membership will only be billed for Pianote, while giving you access to the three other platforms for free.",
             ])
-            @include('musora._partials._dropdown', [
-            "customClass" => "sm:rounded-full",
-            "question" => true,
+            @include('_partials.components.question-dropdown', [
+            'num' => '?',
             "title" => "What changes have been made to this new platform to improve functionality?",
-            "description" => "By combining our four member’s areas into one unified platform, we’re able to make changes and update features faster than ever. With this product update we’re launching the following features:
+            "desc" => "By combining our four member’s areas into one unified platform, we’re able to make changes and update features faster than ever. With this product update we’re launching the following features:
             A unified mobile app for easy brand switching;
             Updated navigation;
             Faster load times;
             Dark mode.",
             ])
-            @include('musora._partials._dropdown', [
-            "customClass" => "sm:rounded-full",
-            "question" => true,
+            @include('_partials.components.question-dropdown', [
+            'num' => '?',
             "title" => "Do you have a multi-user plan that I can share with my family, friends, or bandmates?",
-            "description" => "While we don’t have multi-user accounts built out (we’re working on it!), feel free to share your account with others! Our goal is to create more musicians around the world, and you can help us!",
+            "desc" => "While we don’t have multi-user accounts built out (we’re working on it!), feel free to share your account with others! Our goal is to create more musicians around the world, and you can help us!",
             ])
         </div>
     </section>

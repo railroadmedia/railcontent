@@ -75,7 +75,6 @@
         :playlist-item-position="{{ $positionInPlaylist }}"
         :playlist-item-id="{{ $playlistItem['id'] }}"
         :playlist-item-title="{{ json_encode($playlistItem['title']) }}"
-        :playlist-name="{{ $playlist['name'] }}"
         :start-second="{{ $playlistItem['start_second'] ?? 0 }}"
         :is-my-playlist="{{ $playlist['is_my_playlist'] }}"
         :end-second="{{ $playlistItem['end_second'] ?? $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"

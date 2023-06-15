@@ -10,7 +10,7 @@
     <meta property="og:description" content="This Employee Handbook outlines some basic guidelines for all staff working at Musora Media Inc.">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://musora-center.s3.amazonaws.com/homepage/2021/share-image.jpg">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image.jpg">
 
     <style>
         html {

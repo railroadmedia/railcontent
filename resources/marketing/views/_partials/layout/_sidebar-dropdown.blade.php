@@ -6,10 +6,10 @@
     {{-- Dropdown Trigger --}}
      <div class="flex py-2 px-5 border-b border-gray-100 md:text-[17px] items-center leading-none cursor-pointer"
           dusk="parent-button-{{ strtolower(str_replace(' ', '-', $page)) }}"
-          x-on:click.prevent="dropdown_{{ $id }} = !dropdown_{{ $id }}"      
+          x-on:click.prevent="dropdown_{{ $id }} = !dropdown_{{ $id }}"
     >
         @if(!empty($iconClass))
-            <i class="no-events {{ $iconClass }} text-{{ $brand }} mr-2.5 text-lg"></i>
+            <i class="no-events {{ $iconClass }} text-musora mr-2.5 text-lg"></i>
             {{ $page }}
         @elseif(!empty($iconSvg))
             <svg class="mr-2.5" width="20" height="20" aria-hidden="true" focusable="false"><use xlink:href="#{{ $iconSvg }}"></use></svg>
@@ -17,8 +17,8 @@
         @else
             {{ $page }}
         @endif
-        <i class="no-events far fa-chevron-down arrow ml-auto transition-all transform-gpu origin-center text-{{ $brand }}"
-           x-bind:class="dropdown_{{ $id }} ? '-rotate-180' : 'rotate-0'" 
+        <i class="no-events far fa-chevron-down arrow ml-auto transition-all transform-gpu origin-center text-musora"
+           x-bind:class="dropdown_{{ $id }} ? '-rotate-180' : 'rotate-0'"
         ></i>
     </div>
 
