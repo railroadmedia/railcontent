@@ -373,6 +373,11 @@ class ContentProgressEventListener
             return $contentId;
         }
 
+        $contentId = intval($mediaPlaybackTracked->mediaId);
+        if ($contentId && $contentId < 100000000) {
+            //assume these ids are content id and not vimeo ids
+            return $contentId;
+        }
         return null;
     }
 
