@@ -2100,6 +2100,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-4 {
   width: 1rem !important;
 }
+.w-16 {
+  width: 4rem !important;
+}
 .w-40 {
   width: 10rem !important;
 }
@@ -4468,14 +4471,6 @@ li, p {
     right: 0 !important;
   }
 
-  .sm\:bottom-3 {
-    bottom: 3rem !important;
-  }
-
-  .sm\:left-3 {
-    left: 3rem !important;
-  }
-
   .sm\:bottom-7 {
     bottom: 1.75rem !important;
   }
@@ -5335,10 +5330,6 @@ li, p {
 
   .sm\:p-14 {
     padding: 3.5rem !important;
-  }
-
-  .sm\:p-4 {
-    padding: 1rem !important;
   }
 
   .sm\:p-9 {

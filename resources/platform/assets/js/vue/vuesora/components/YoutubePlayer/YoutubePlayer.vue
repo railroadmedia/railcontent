@@ -93,7 +93,6 @@ export default {
         currentTimeInSeconds: {
             cache: false,
             get() {
-                console.log(this.currentTime, this.endSecond)
                 return this.currentTime;
             },
         },
@@ -108,8 +107,7 @@ export default {
         }
     },
     mounted() {
-
-    console.log(this.startSecond, this.endSecond)
+        console.log(this.startSecond, this.endSecond);
         const youtubeIframeApi = document.getElementById('youtubeIframeApi');
 
         if (youtubeIframeApi == null) {
