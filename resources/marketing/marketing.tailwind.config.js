@@ -48,32 +48,8 @@ module.exports = {
         '.text-navy': {
           color: '#a1afc9'
         },
-        '.bg-musora': {
-          background: 'linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
-        },
-        // '.bg-promo': {
-        //     backgroundColor: '#ab000d',
-        // },
-        // '.text-promo': {
-        //     color: '#ab000d',
-        // },
-        // '.border-promo': {
-        //     borderColor: '#ab000d',
-        // },
         '.font-bebas': {
           fontFamily: '"Bebas Neue", sans-serif'
-        },
-        '.border-musora::before':{
-          content:"' '",
-          position: 'absolute',
-          top: '0',
-          right: '0',
-          bottom: '0',
-          left: '0',
-          zIndex: '-1',
-          borderRadius: 'inherit',
-          background: 'linear-gradient(20deg,#03c8ac, #0976db, #9a01ee, #f61a30)',
-          margin: '-2px',
         },
         'img': {
           display: 'inline-block'

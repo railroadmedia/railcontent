@@ -1,4 +1,9 @@
-<section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative overflow-hidden" style="background: linear-gradient(45deg, #07233e, #0c1524);">
+<section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative overflow-hidden"
+    @if(!empty($bgColor))
+        style="background: {{ $bgColor }};"
+    @else
+        style="background: linear-gradient(45deg, #07233e, #0c1524);"
+  @endif >
     <div class="container mx-auto max-w-6xl sm:mb-16">
         <div class="flex flex-wrap items-center">
             <div class="flex w-full justify-center sm:justify-start sm:w-1/2 sm:order-1 sm:pl-5 lg:pl-10 mb-7 sm:mb-0">
@@ -13,13 +18,16 @@
                 </picture>
             </div>
             <div class="text-center sm:text-left w-full sm:w-1/2 sm:pl-5">
-                <h6 class="uppercase text-{{ $theme }}"><strong>YOUR FIRST @if(!empty($month)) 30 Days @else 7 Days @endif ARE FREE.</strong></h6>
+                @if(!empty($logo))
+                    <img class="h-6 mb-8" src="{{ $logo }}">
+                @endif
+                <h6 class="uppercase @if($theme == 'musora') text-musora-gold @else text-{{ $theme }} @endif "><strong>YOUR FIRST @if(!empty($month)) 30 Days @else 7 Days @endif ARE FREE.</strong></h6>
                 <h3 class="leading-normal"><strong>{!! $header !!}</strong></h3>
                 <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
                     {!! $list !!}
                 </ul>
                 <div class="w-72 lg:w-96 mx-auto sm:mx-0">
-                    <a class=" w-full sm:w-64 join smaller bg-{{$theme}} w-full my-3"
+                    <a class=" w-full sm:w-64 join smaller @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif w-full my-3"
                     @if(!empty($orderUrl))
                         href="{{ $orderUrl }}"
                     @elseif(!empty($month))
@@ -46,8 +54,6 @@
                         &nbsp;(after your free trial).<br>
                         Don’t worry, you can cancel anytime!<br>
                         <strong>Normally 7 days. 30 days free access only valid for June 2023.</strong></em></p>
-
-
                     @endif
                 </div>
             </div>

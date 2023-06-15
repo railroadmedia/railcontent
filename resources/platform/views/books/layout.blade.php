@@ -26,7 +26,7 @@
         <nav id="nav" class="bg-[#020815] fixed w-full top-0 left-0 flex items-center h-10 md:h-14">
             <!-- Logo/Home Link -->
             <a href="/" class="h-full px-2 md:px-4 inline-flex items-center mr-auto">
-                <img src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg" alt="Musora Logo" class="w-full max-w-[77px] md:max-w-[144px] max-h-9">
+                <img src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white_new.svg" alt="Musora Logo" class="w-full max-w-[77px] md:max-w-[144px] max-h-9">
             </a>
 
             <!-- link-wrapper -->
@@ -58,6 +58,6 @@
 {{-- @section('layout-footer')
     @include('_partials.layout.global-footer', [
         "brand" => "musora",
-        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg"
+        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white_new.svg"
     ])
 @stop  --}}

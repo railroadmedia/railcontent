@@ -4,60 +4,69 @@
 
 /* Tailwind CSS */
 .bg-promo {
-    background-color:#FFAC00;
+    background-color: #FFAC00;
 }
 
 .text-promo {
-    color:#FFAC00;
+    color: #FFAC00;
 }
 
 .border-promo {
-    border-color:#FFAC00;
+    border-color: #FFAC00;
 }
 
 /*backgrounds*/
 .bg-drumeo {
-    background-color:#0B76DB;
+    background-color: #0B76DB;
 }
 
 .bg-guitareo {
-    background-color:#00C9AC;
+    background-color: #00C9AC;
 }
 
 .bg-pianote {
-    background-color:#F61A30;
+    background-color: #F61A30;
 }
 
 .bg-singeo {
-    background-color:#8300E9;
+    background-color: #8300E9;
+}
+
+.bg-musora {
+    background-color: #FFAE00;
 }
 
 .bg-musora-black {
-    background-color:#000C17;
+    background-color: #000C17;
 }
 
 /*borders*/
 .border-drumeo {
-    border-color:#0B76DB;
+    border-color: #0B76DB;
 }
 
 .border-guitareo {
-    border-color:#00C9AC;
+    border-color: #00C9AC;
 }
 
 .border-pianote {
-    border-color:#F61A30;
+    border-color: #F61A30;
 }
 
 .border-singeo {
-    border-color:#8300E9;
+    border-color: #8300E9;
 }
 
 .border-sky-900 {
-    border-color:#0c4a6e;
+    border-color: #0c4a6e;
 }
+
+.border-musora {
+    border-color: #FFAE00;
+}
+
 .border-musora-black {
-    border-color:#000C17;
+    border-color: #000C17;
 }
 
 .font-roboto {
@@ -125,7 +134,7 @@ h1 sup, h2 sup, h3 sup, h4 sup, h5 sup, h6 sup, li sup, p sup {
 }
 
 h1 {
-    font-size: 24px;
+    font-size: 30px;
 
     @media (min-width: 768px) {
         font-size: 36px;
@@ -137,7 +146,7 @@ h1 {
 }
 
 h2 {
-    font-size: 20px;
+    font-size: 24px;
 
     @media (min-width: 768px) {
         font-size: 30px;
@@ -149,7 +158,7 @@ h2 {
 }
 
 h3 {
-    font-size: 18px;
+    font-size: 20px;
     @media (min-width: 768px) {
         font-size: 24px;
     }
@@ -160,7 +169,7 @@ h3 {
 }
 
 h4 {
-    font-size: 16px;
+    font-size: 18px;
     @media (min-width: 768px) {
         font-size: 20px;
     }
@@ -171,7 +180,7 @@ h4 {
 }
 
 h5 {
-    font-size: 15px;
+    font-size: 16px;
 
     @media (min-width: 768px) {
         font-size: 18px;
