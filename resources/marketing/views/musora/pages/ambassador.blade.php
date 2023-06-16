@@ -281,7 +281,7 @@
                     perMove: 1,
                     classes: {
                         arrow: 'splide__arrow bg-white',
-                        pagination: 'splide__pagination hidden',
+                        pagination: 'hidden',
                     },
                     breakpoints: {
                         767: {

@@ -1,4 +1,4 @@
-<div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
+<div class="h-5 sm:h-10 mt-10 md:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
 <div id="guarantee" class="anchor"></div>
 <section class="pb-10 sm:pb-14 lg:pb-20 relative text-center px-6" style="background-color:#f6f8fc;">
     <div class="container mx-auto max-w-6xl">

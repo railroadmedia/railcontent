@@ -275,7 +275,7 @@
                         arrow: 'splide__arrow bg-pianote',
                         prev  : 'splide__arrow--prev your-class-prev',
                         next  : 'splide__arrow--next your-class-next',
-                        pagination: 'splide__pagination force-hidden',
+                        pagination: 'force-hidden',
                     },
                     breakpoints: {
                         768: {
