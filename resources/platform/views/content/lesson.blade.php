@@ -111,6 +111,9 @@
                 <div class="tw-container tw-mx-auto lean">
                     <video-resources theme-color="{{ $brand }}" brand="{{ $brand }}"
                         title="{{ $lessonContent->fetch('fields.title') }}"
+                        lesson-type="{{ $lessonType }}"
+                        thumbnail-url="{{ $lessonContent->fetch('data.thumbnail_url') }}"
+                        description="{{ $lessonContent->fetch('data.description') }}"
                         :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
                         parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
                         :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
@@ -247,10 +250,13 @@
                                 $content['userId'] = auth()->id();
                                 $content['position'] = $index;
                                 $formattedAssignments[] = $content;
-                            }
+                            }                            
                         @endphp
                         <div class="tw-flex tw-flex-row tw-w-full">
-                            <assignments-container :assignments="{{ json_encode($formattedAssignments) }}">
+                            <assignments-container 
+                                :lesson-data="{{ json_encode($lessonContent) }}"
+                                :assignments="{{ json_encode($formattedAssignments) }}"
+                            >
                                 <template slot="completion-bonus">
                                     @include('partials.bladesora.members.partials._completion-bonus', [
                                         'xpBonus' => $lessonContent->fetch('xp_bonus', 0),

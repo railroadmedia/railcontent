@@ -11,7 +11,7 @@ export const whiteLogos = {
   singeo:'https://d38h3dn806jqj1.cloudfront.net/logos/singeo-white.svg',
   guitareo:'https://d38h3dn806jqj1.cloudfront.net/logos/guitareo-white.svg',
   pianote:'https://d38h3dn806jqj1.cloudfront.net/logos/pianote-white.svg',
-  musora: 'https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg'
+  musora: 'https://d38h3dn806jqj1.cloudfront.net/logos/musora-white_new.svg'
 }
 
 export const bgColor = {
@@ -70,6 +70,10 @@ const __usedVars = [
   'hover:tw-bg-pianote-600',
   'hover:tw-bg-guitareo-600',
   'hover:tw-bg-singeo-600',
+  'hover:tw-text-drumeo-600',
+  'hover:tw-text-pianote-600',
+  'hover:tw-text-guitareo-600',
+  'hover:tw-text-singeo-600',
   'hover:tw-border-drumeo',
   'hover:tw-border-pianote',
   'hover:tw-border-singeo',

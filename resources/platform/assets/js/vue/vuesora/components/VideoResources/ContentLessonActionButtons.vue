@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row flex-wrap align-v-center pv-2">
+    <div class="flex flex-row flex-wrap align-v-center tw-mb-2">
         <div class="flex flex-column pv-2">
             <div
                 class="flex flex-row nmh-1 flex-wrap"
@@ -161,6 +161,11 @@ export default {
             default: () => 'drumeo',
         },
 
+        thumbnailUrl: {
+            type: String,
+            default: ''
+        },
+
         title: {
             type: String,
             default: () => '',
@@ -201,10 +206,20 @@ export default {
             default: () => null,
         },
 
+        contentType: {
+            type: String,
+            default: () => 'not-song',
+        },
+
         resources: {
             type: Array,
             default: () => [],
         },
+
+        description: {
+            type: String,
+            default: '',
+        }
     },
 
     data() {
@@ -267,9 +282,14 @@ export default {
         toCapitalCase: string => Utils.toCapitalCase(string),
 
         addToList() {
-            this.hasAdded = !this.hasAdded;
-
-            this.$nextTick(() => { ContentService.addOrRemoveContentFromList(this.contentId, !this.hasAdded); });
+            //this.hasAdded = !this.hasAdded;
+            window.openplaylistmodal({ modalType: 'addItem', content: {
+                content_id: this.contentId,
+                type: this.contentType,
+                name: this.title,
+                thumbnail_url: this.thumbnailUrl,
+                description: this.description,
+            } });
         },
 
         getResourceIcon(resource) {

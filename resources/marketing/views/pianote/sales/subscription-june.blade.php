@@ -262,8 +262,26 @@
             </a>
         </div>
     </section>
-
-    <div class="h-5 sm:h-10 relative z-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+        <div class="container max-w-5xl mx-auto">
+            <h2><strong>30 days that could change your life.</strong></h2>
+            <img class="my-5 h-64 inline sm:hidden transition-opacity opacity-0"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+                src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-collage.png"
+                alt="learn playing image"
+            >
+            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center mt-2 sm:mt-8">
+                <p class="leading-normal max-w-xl pr-7 mx-0">You learn the piano by <u>playing the piano</u>. It’s not rocket science.<br><br>If you don’t play your piano, you won’t get better. At Pianote, our mission is to get your playing more so you get better, faster (while having FUN!).<br><br>And we all know, the first step is always the hardest.<br><br>That’s why, for this month only, you’ll get 30 days of FREE piano lessons from Pianote. Because the best way to know if Pianote is right for you…<br><br><strong>Is to try it.</strong><br><br>Start a free trial in June and you’ll get an entire month of access, instead of the usual 7 days. That gives you more than 4x the free lessons, songs, and personal support.<br><br>Because who knows…<br><br>This next month could change your life.</p>
+                <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-collage.png"
+                    alt="learn playing image"
+                >
+            </div>
+        </div>
+    </section>
 
     @php
         $gridItems = [
@@ -498,10 +516,8 @@
         'bannerDesc' => 'Powered by Musora, Pianote includes full access to our communities for drums, guitar, and voice.',
     ])
     @include('musora.sales.components.learn-by-playing-section', [
-        'header' => '30 days that could<br class="inline sm:hidden"> <strong>change your life</strong>.',
-        'desc' => 'You learn the piano by <u>playing the piano</u>. It’s not rocket science.<br><br>If you don’t play your piano, you won’t get better. At Pianote, our mission is to get your playing more so you get better, faster (while having FUN!).<br><br>And we all know, the first step is always the hardest.<br><br>That’s why, for this month only, you’ll get 30 days of FREE piano lessons from Pianote. Because the best way to know if Pianote is right for you…<br><br><strong>Is to try it.</strong><br><br>Start a free trial in June and you’ll get an entire month of access, instead of the usual 7 days. That gives you more than 4x the free lessons, songs, and personal support.<br><br>Because who knows…<br><br>This next month could change your life.',
-                'variant' => true,
-                'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-collage.png',
+        'header' => 'Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.',
+        'desc' => 'With Pianote, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
                 'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314572/rendition/540p/file.mp4?loc=external&signature=b8d6bc7c80a784c2cc9473ae9e1389b3f9e005fbbce2568d7bd6b7d548a4c19e',
 
     ])

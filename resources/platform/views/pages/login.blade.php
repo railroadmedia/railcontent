@@ -16,7 +16,7 @@
     <div class="tw-absolute tw-flex tw-w-full tw-min-h-screen tw-flex-col tw-justify-center tw-items-center tw-text-white tw-z-20">
         <section id="logoContainer" class="tw-flex-col tw-flex tw-items-center tw-text-center">
             <img class="logo tw-max-w-[280px] tw-mb-6"
-                src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg" alt="Musora Logo">
+                src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white_new.svg" alt="Musora Logo">
             <p class="tw-font-bold tw-text-center tw-text-white tw-text-lg tw-mb-6">Home of <span class="tw-text-drumeo">Drumeo</span>, <span class="tw-text-pianote">Pianote</span>, <br> <span class="tw-text-guitareo">Guitareo</span>, and <span class="tw-text-singeo">Singeo</span></p>
         </section>
 

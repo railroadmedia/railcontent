@@ -3,7 +3,9 @@
 namespace App\Modules\EventDataSynchronizer\Listeners;
 
 use App\Maps\ContentTypes;
+use App\Modules\Content\Models\Content;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
+use App\Modules\RailTracker\Services\ContentEngagementService;
 use App\Services\UserMetricsService;
 use Illuminate\Support\Facades\Log;
 use Railroad\Points\Services\UserPointsService;
@@ -19,6 +21,7 @@ use Railroad\Railcontent\Services\CommentService;
 use Railroad\Railcontent\Services\ContentHierarchyService;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserContentProgressService;
+use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railtracker\Events\MediaPlaybackTracked;
 use Railroad\Railtracker\Repositories\MediaPlaybackRepository;
 use Railroad\Railcontent\Events\HigherKeyProgressUpdated;
@@ -63,6 +66,9 @@ class ContentProgressEventListener
     private UserProviderInterface $userProvider;
 
     private UserMetricsService $userMetricsService;
+    private ContentEngagementService $contentEngagementService;
+
+    private UserPlaylistsService $userPlaylistsService;
 
     public function __construct(
         UserContentProgressService $userContentProgressService,
@@ -74,7 +80,9 @@ class ContentProgressEventListener
         UserPointsService $userPointsService,
         UserProviderInterface $userProvider,
         MediaPlaybackRepository $mediaPlaybackRepository,
-        UserMetricsService $userMetricsService
+        UserMetricsService $userMetricsService,
+        UserPlaylistsService $userPlaylistsService,
+        ContentEngagementService $contentEngagementService,
     ) {
         $this->userContentProgressService = $userContentProgressService;
         $this->contentService = $contentService;
@@ -85,6 +93,8 @@ class ContentProgressEventListener
         $this->userProvider = $userProvider;
         $this->mediaPlaybackRepository = $mediaPlaybackRepository;
         $this->userMetricsService = $userMetricsService;
+        $this->userPlaylistsService = $userPlaylistsService;
+        $this->contentEngagementService = $contentEngagementService;
     }
 
     public function handleUserProgressSaved(UserContentProgressSaved $userContentProgressSaved)
@@ -92,6 +102,8 @@ class ContentProgressEventListener
         $content = $this->contentService->getById($userContentProgressSaved->contentId);
 
         if (!empty($content)) {
+            $this->userPlaylistsService->updatePlaylistsLastProgress($content['id'], brand());
+
             $state = ContentHelper::getUserContentProgressState($userContentProgressSaved->userId, $content);
             $percent = ContentHelper::getUserContentProgressPercent($userContentProgressSaved->userId, $content);
 
@@ -346,8 +358,56 @@ class ContentProgressEventListener
         }
     }
 
+    private function getContentId(MediaPlaybackTracked $mediaPlaybackTracked)
+    {
+        $contentId = intval($mediaPlaybackTracked->contentId);
+        if ($contentId) {
+            return $contentId;
+        }
+
+        //Sometimes contentId is not provided and we need to look up id from media id
+        $contentId = Content::query()->select('id')
+            ->where('external_video_id', '=', $mediaPlaybackTracked->mediaId)
+            ->first()?->id;
+        if ($contentId) {
+            return $contentId;
+        }
+
+        $videoContentId = Content::query()->select('id')
+            ->where('vimeo_video_id', '=', $mediaPlaybackTracked->mediaId)
+            ->orWhere('youtube_video_id', '=', $mediaPlaybackTracked->mediaId)
+            ->first()?->id;
+        if ($videoContentId) {
+            $contentId = Content::query()->select('id')
+                ->where('video', '=', $videoContentId)
+                ->first()?->id;
+            if ($contentId) {
+                return $contentId;
+            }
+        }
+        $contentId = intval($mediaPlaybackTracked->mediaId);
+        if ($contentId && $contentId < 100000000) {
+            //assume these ids are content id and not vimeo ids
+            return $contentId;
+        }
+        return null;
+    }
+
     public function handleMediaPlaybackTracked(MediaPlaybackTracked $mediaPlaybackTracked)
     {
+        $contentId = $this->getContentId($mediaPlaybackTracked);
+
+        if ($contentId) {
+            $this->contentEngagementService->update(
+                $mediaPlaybackTracked->userId,
+                $contentId,
+                $mediaPlaybackTracked->currentSecond
+            );
+        } else {
+            $userId = user()->id;
+            Log::error("handleMediaPlaybackTracked $userId");
+            Log::debug(print_r($mediaPlaybackTracked, true));
+        }
         $assignmentTypeIds = $this->mediaPlaybackRepository->getAssignmentTypeIds();
         if (in_array($mediaPlaybackTracked->typeId, $assignmentTypeIds)) {
             $min = $this->userMetricsService->getTotalMinutesPracticed(

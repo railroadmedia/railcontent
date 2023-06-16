@@ -31,7 +31,7 @@
             <div id="notifications-container"></div>
 
             {{-- Modal Container --}}
-            <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
+            <div role="dialog" aria-labelledby="dialog-modal" aria-describedby="dialog-modal-container" id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full" tabindex="0"></div>
 
             <!-- Confirmation Modal Container -->
             <div id="confirmation-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
@@ -46,6 +46,7 @@
                         brand="{{ $brand }}"
                         :is-live="{{ isLive() ? 'true':'false' }}"
                         search-url=""
+                        :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
                         @if(!empty( user() ))
                             user-name="{{ user()->display_name }}"
                             user-avatar="{{ user()->profile_picture_url }}"

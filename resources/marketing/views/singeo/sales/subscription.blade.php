@@ -156,7 +156,7 @@
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/artist-course-icon.svg',
                 'title' => 'Artist Courses',
-                'desc' => 'Courses and live events<br class="hidden sm:inline"> with drumming heroes. ',
+                'desc' => 'Courses and live events<br class="hidden sm:inline"> with singing heroes. ',
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/songs-icon.svg',
@@ -519,7 +519,7 @@
             "noSelector" => true,
             "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
             "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-            "songs" => "1000",
+            "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited singing lessons.",
             "thirdPoint" => "Direct access to vocal coaches.",
             "fifthPoint" => "Lesson access for guitar, piano, and drums.",

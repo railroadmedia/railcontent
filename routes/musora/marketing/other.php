@@ -17,12 +17,15 @@ Route::domain('{musoraDomain}')
         Route::get('ambassador', [MarketingController::class, 'ambassador']);
         Route::get('brand', [MarketingController::class, 'brand']);
         Route::get('unified-2022', [MarketingController::class, 'unified2022']);
+        Route::get('playlists', [MarketingController::class, 'playlists']);
         Route::get('referral-join', [ReferralJoinController::class, 'join']);
         Route::get('recitals', [MarketingController::class, 'recitals']);
+        Route::get('playlists', [MarketingController::class, 'playlists']);
         Route::get('gift-card', [MarketingController::class, 'giftcard']);
         Route::get('method', [MarketingController::class, 'method']);
         Route::get('songs', [MarketingController::class, 'songs']);
         Route::get('community', [MarketingController::class, 'community']);
+        Route::get('choose-plan', [MarketingController::class, 'choosePlan'] );
 
         Route::get('redeem', [CodeRedemptionController::class, 'renderNewAccountRedeemPage']);
         Route::get('friends', [CodeRedemptionController::class, 'friends']);

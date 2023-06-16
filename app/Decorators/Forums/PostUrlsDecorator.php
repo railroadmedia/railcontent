@@ -93,6 +93,11 @@ class PostUrlsDecorator
         if (!isset($segments[1]) || $segments[1] == null) {
             return config('app.url').'/'.$segments[0];
         }
+
+        if (isset($segments[1]) && $segments[1] == 'playlist') {
+            return $url;
+        }
+
         $lastSegment = last($segments);
         $numberOfSegments = count($segments);
 

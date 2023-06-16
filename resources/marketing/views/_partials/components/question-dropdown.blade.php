@@ -41,19 +41,21 @@
             x-bind:class="open ? 'max-h-[2000px]' : 'max-h-0'">
             <div class="py-4 sm:py-6 pl-4 sm:pl-5 pr-8 sm:pr-12">
             @foreach($lessonInfo as $key => $info)
-                <div class="bg-white p-4 rounded-xl flex flex-col md:flex-row mb-2 @if(empty($info['desc'])) md:items-center @endif">
+                <div class="bg-white @if(!empty($info['desc'])) p-4 @endif rounded-xl flex flex-col md:flex-row mb-2 @if(empty($info['desc'])) md:items-center @endif">
                     <img
-                        class="rounded-xl @if(empty($info['desc'])) md:h-24 @else md:h-32 @endif mb-6 md:mb-0 transition-opacity opacity-0"
+                        class="rounded-xl @if(empty($info['desc'])) md:h-24 @else mb-6 md:mb-0 md:h-32 @endif transition-opacity opacity-0"
                         src="https://www.musora.com/musora-cdn/image/width=650,quality=85/{{$info['thumb']}}"
                         alt="lesson{{$key+1}} thumb"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     />
-                    <div class="md:pl-6">
-                        <h5 class="font-black">{{$info['title']}}</h5>
-                        @if(!empty($info['desc']))<p class="my-2">{{$info['desc']}}</p>@endif
-                        @if(!empty($info['lessonNum']))<p class="text-[#838C98]">{{ $info['lessonNum'] }} lessons</p>@endif
-                    </div>
+                    @if(!empty($info['desc']))
+                        <div class="md:pl-6">
+                            <h5 class="font-black">{{$info['title']}}</h5>
+                            @if(!empty($info['desc']))<p class="my-2">{{$info['desc']}}</p>@endif
+                            @if(!empty($info['lessonNum']))<p class="text-[#838C98]">{{ $info['lessonNum'] }} lessons</p>@endif
+                        </div>
+                    @endif
                 </div>
             @endforeach
             </div>

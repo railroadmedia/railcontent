@@ -17,7 +17,7 @@
             class="btn short collapse-square page-button"
             @click="goToPage(1)"
         >
-            <span class="flat tw-font-primary tw-text-lg tw-font-semibold tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
+            <span class="flat tw-font-primary tw-text-lg tw-font-semibold tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
                 1
             </span>
         </button>
@@ -28,7 +28,7 @@
             disabled
             class="btn short collapse-square page-button"
         >
-            <span class="flat tw-font-primary tw-text-lg tw-font-semibold tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
+            <span class="flat tw-font-primary tw-text-lg tw-font-semibold tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
                 ...
             </span>
         </button>
@@ -40,7 +40,7 @@
             class="btn short collapse-square page-button"
             @click="goToPage(i)"
         >
-            <span class="tw-font-primary tw-text-lg tw-font-semibold tw-shadow-none"
+            <span class="tw-font-primary tw-text-lg tw-font-semibold"
                 :class="currentPage === i ? 'tw-text-white tw-bg-[#52525A] dark:tw-bg-[#002039]' : 'tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]'"
             >
                 {{ i }}
@@ -52,7 +52,7 @@
             disabled
             class="btn short collapse-square page-button"
         >
-            <span class="flat tw-font-primary tw-text-lg tw-font-semibold tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
+            <span class="flat tw-font-primary tw-text-lg tw-font-semibold tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
                 ...
             </span>
         </button>
@@ -62,7 +62,7 @@
             class="btn short collapse-square page-button"
             @click="goToPage(totalPages)"
         >
-            <span class="flat tw-font-primary tw-text-lg tw-font-semibold tw-shadow-none tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
+            <span class="flat tw-font-primary tw-text-lg tw-font-semibold tw-text-[#A1A1A9] dark:tw-text-[#7E9AB1]">
                 {{ totalPages }}
             </span>
         </button>
