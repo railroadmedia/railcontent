@@ -11,21 +11,8 @@
     <!-- Tabs -->
     <div
         x-data="{
-                selectedId: null,
+                selectedId: 1,
                 isMobile: window.innerWidth < 768 ? true : false,
-                init() {
-                    // Set the first available tab on the page on page load.
-                    this.$nextTick(() => this.select(this.$id('tab', 1)))
-                },
-                select(id) {
-                    this.selectedId = id
-                },
-                isSelected(id) {
-                    return this.selectedId === id
-                },
-                whichChild(el, parent) {
-                    return Array.from(parent.children).indexOf(el) + 1
-                }
             }"
         x-id="['tab']"
         x-on:resize.window="isMobile = (window.innerWidth < 768) ? true : false"
@@ -37,16 +24,14 @@
                 class="hidden md:flex mt-8 mb-10 rounded-full bg-[#F5F8FC]"
             >
                 <!-- Tab -->
-                @foreach ($buttons as $button)
+                @foreach ($buttons as $key => $button)
                     <li class="w-full">
                         <button
-                            :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
-                            @click="select($el.id)"
+                            @click="selectedId = {{ $key+1 }}"
                             @mousedown.prevent
-                            @focus="select($el.id)"
+                            @focus="selectedId = {{ $key+1 }}"
                             type="button"
-                            :tabindex="isSelected($el.id) ? 0 : -1"
-                            :class="isSelected($el.id) ? 'text-white bg-[#01050F] border-[#01050F] bubble' : 'border-transparent'"
+                            :class="selectedId === {{ $key+1 }} ? 'text-white bg-[#01050F] border-[#01050F] bubble' : 'border-transparent'"
                             class="px-5 py-2 lg:py-2.5 w-full relative rounded-full relative z-20"
                         >
                             {!!  $button  !!}
@@ -60,12 +45,12 @@
         </div>
 
         <!-- Panels -->
-        <div>
+        <div class="md:pb-56 lg:pb-96 relative">
             <!-- Panel -->
-            @foreach ($courses as $course)
+            @foreach ($courses as $key => $course)
                 <section
-                    x-show="isMobile || (!isMobile && isSelected($id('tab', whichChild($el, $el.parentElement))))"
-                    class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0"
+                    class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0 md:absolute md:inset-0"
+                    :class="!(isMobile || (!isMobile && selectedId === {{ $key+1 }})) && 'opacity-0'"
                 >
                     <h4 class="font-extrabold text-left mb-2 md:hidden">{!!  $course['title']  !!}</h4>
                     <div
