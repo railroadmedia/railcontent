@@ -86,6 +86,8 @@
                                         breakpoints: {
                                             720: {
                                                 perPage: 3.5,
+                                                drag   : 'free',
+                                                snap   : false,
                                             },
                                             620: {
                                                 perPage: 2.5,
@@ -95,7 +97,7 @@
                                 },
                             }"
                     >
-                        <section x-ref="splide" class="splide mb-20 h-44 sm:h-48 lg:h-72" aria-label="Splide/Alpine.js Carousel Example">
+                        <section x-ref="splide" class="splide mb-20 h-44 sm:h-48 lg:h-72">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)

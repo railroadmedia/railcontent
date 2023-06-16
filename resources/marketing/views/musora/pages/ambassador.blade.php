@@ -297,7 +297,7 @@
         }"
         class="bg-musora-black"
     >
-        <div x-ref="splide" class="splide text-white px-7 py-8 md:py-14 lg:py-20 mx-auto max-w-6xl" aria-label="Splide/Alpine.js Carousel Example">
+        <div x-ref="splide" class="splide text-white px-7 py-8 md:py-14 lg:py-20 mx-auto max-w-6xl">
             <div class="splide__track relative">
                 <ul class="splide__list">
                     <li class="splide__slide flex flex-col items-center justify-center">
