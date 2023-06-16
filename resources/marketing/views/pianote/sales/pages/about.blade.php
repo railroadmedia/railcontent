@@ -278,11 +278,11 @@
                         pagination: 'splide__pagination force-hidden',
                     },
                     breakpoints: {
-                        640: {
-                            perPage: 1,
-                        },
                         768: {
                             perPage: 3,
+                        },
+                        640: {
+                            perPage: 1,
                         }
                     },
                 }).mount()

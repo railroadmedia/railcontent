@@ -64,6 +64,8 @@
                                 },
                                 620: {
                                     perPage: 1.5,
+                                    drag   : 'free',
+                                    snap   : false,
                                 },
                             },
                         }).mount()
