@@ -76,7 +76,7 @@
                                                 arrow: 'splide__arrow bg-white opacity-100 shadow-lg h-11 w-11',
                                                 prev: 'hidden',
                                                 next: 'splide__arrow--next your-class-next hidden sm:flex -right-1',
-                                                pagination: 'splide__pagination -bottom-10',
+                                                pagination: 'splide__pagination hidden md:flex -bottom-10',
                                         },
                                         perPage: 4.5,
                                         perMove: 1,
@@ -86,6 +86,8 @@
                                         breakpoints: {
                                             720: {
                                                 perPage: 3.5,
+                                                drag   : 'free',
+                                                snap   : false,
                                             },
                                             620: {
                                                 perPage: 2.5,
@@ -95,7 +97,7 @@
                                 },
                             }"
                     >
-                        <section x-ref="splide" class="splide mb-20 h-44 sm:h-48 lg:h-72" aria-label="Splide/Alpine.js Carousel Example">
+                        <section x-ref="splide" class="splide mb-10 md:mb-20 h-44 sm:h-48 lg:h-72">
                             <div class="splide__track">
                                 <ul class="splide__list">
                                     @foreach ($course['images'] as $image)
@@ -106,8 +108,8 @@
                                                     <img class="absolute inset-0 object-cover" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/{{$image['img']}}" alt="{{ $image['instructor'] }}" />
                                                 </picture>
                                                 <div class="rounded-b-xl absolute w-full bottom-0 h-full text-white text-center flex justify-end flex-col pb-3 lg:pb-6" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 50%, #01050F 100%);">
-                                                    <h4 class="leading-none font-extrabold mb-2 lg:mb-2">{!! $image['title'] !!}</h4>
-                                                    <p class="leading-none text-sm">{{ $image['instructor'] }}</p>
+                                                    <h4 class="leading-none font-extrabold mb-1.5 lg:mb-2">{!! $image['title'] !!}</h4>
+                                                    <p class="leading-none text-xs sm:text-sm">{{ $image['instructor'] }}</p>
                                                 </div>
                                             </div>
                                         </li>
@@ -121,7 +123,7 @@
         </div>
     </div>
 
-    <div class="text-center my-10 px-4 sm:px-0">
+    <div class="text-center mt-10 px-4 sm:px-0">
         @if(empty($promoVersion))
             <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }} smaller">EXPLORE COURSES</a>
         @endif

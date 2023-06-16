@@ -1,4 +1,4 @@
-<nav id="nav" class="@if(!empty($whiteNav)) bg-white @else bg-[#020815] @endif fixed w-full top-0 left-0 flex items-center h-10 md:h-14 top-bar z-50">
+<nav id="nav" class="@if(!empty($whiteNav)) bg-white @else bg-[#020815] @endif shadow-md fixed w-full top-0 left-0 flex items-center h-10 md:h-14 top-bar z-50">
     <!-- Logo/Home Link -->
     <a href="{{ $homeUrl ?? '/' }}" class="h-full px-2 md:px-4 flex items-center mr-4 lg:mr-8">
         <img src="{{ $logo }}" alt="Musora Logo" class="@if(!empty($whiteNav)) invert @endif w-full max-w-[77px] md:max-w-[144px] max-h-9">

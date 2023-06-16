@@ -51,7 +51,7 @@
                                     arrow: 'splide__arrow bg-white opacity-100 top-[38%] shadow-lg h-11 w-11',
                                     prev: 'hidden',
                                     next: 'splide__arrow--next your-class-next hidden sm:flex -right-1 mb-16',
-                                    pagination: 'splide__pagination -bottom-10',
+                                    pagination: 'splide__pagination hidden md:flex -bottom-10',
                             },
                             perPage: 4.5,
                             perMove: 1,
@@ -64,13 +64,15 @@
                                 },
                                 620: {
                                     perPage: 1.5,
+                                    drag   : 'free',
+                                    snap   : false,
                                 },
                             },
                         }).mount()
                     },
                 }"
             >
-                <section x-ref="splide" class="splide mb-20" aria-label="Splide/Alpine.js Carousel Example">
+                <section x-ref="splide" class="splide md:mb-12">
                     <div class="splide__track">
                         <ul class="splide__list">
                             @foreach ($testimonials as $testimonial)
