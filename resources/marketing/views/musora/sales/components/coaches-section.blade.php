@@ -11,21 +11,8 @@
     <!-- Tabs -->
     <div
         x-data="{
-                selectedId: null,
+                selectedId: 1,
                 isMobile: window.innerWidth < 768 ? true : false,
-                init() {
-                    // Set the first available tab on the page on page load.
-                    this.$nextTick(() => this.select(this.$id('tab', 1)))
-                },
-                select(id) {
-                    this.selectedId = id
-                },
-                isSelected(id) {
-                    return this.selectedId === id
-                },
-                whichChild(el, parent) {
-                    return Array.from(parent.children).indexOf(el) + 1
-                }
             }"
         x-id="['tab']"
         x-on:resize.window="isMobile = (window.innerWidth < 768) ? true : false"
@@ -37,16 +24,14 @@
                 class="hidden md:flex mt-8 mb-10 rounded-full bg-[#F5F8FC]"
             >
                 <!-- Tab -->
-                @foreach ($buttons as $button)
+                @foreach ($buttons as $key => $button)
                     <li class="w-full">
                         <button
-                            :id="$id('tab', whichChild($el.parentElement, $refs.tablist))"
-                            @click="select($el.id)"
+                            @click="selectedId = {{ $key+1 }}"
                             @mousedown.prevent
-                            @focus="select($el.id)"
+                            @focus="selectedId = {{ $key+1 }}"
                             type="button"
-                            :tabindex="isSelected($el.id) ? 0 : -1"
-                            :class="isSelected($el.id) ? 'text-white bg-[#01050F] border-[#01050F] bubble' : 'border-transparent'"
+                            :class="selectedId === {{ $key+1 }} ? 'text-white bg-[#01050F] border-[#01050F] bubble' : 'border-transparent'"
                             class="px-5 py-2 lg:py-2.5 w-full relative rounded-full relative z-20"
                         >
                             {!!  $button  !!}
@@ -60,12 +45,12 @@
         </div>
 
         <!-- Panels -->
-        <div>
+        <div class="md:pb-56 lg:pb-96 relative">
             <!-- Panel -->
-            @foreach ($courses as $course)
+            @foreach ($courses as $key => $course)
                 <section
-                    x-show="isMobile || (!isMobile && isSelected($id('tab', whichChild($el, $el.parentElement))))"
-                    class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0"
+                    class="max-w-6xl mx-auto px-4 lg:px-6 mb-6 md:mb-0 md:absolute md:inset-0"
+                    :class="!(isMobile || (!isMobile && selectedId === {{ $key+1 }})) && 'opacity-0'"
                 >
                     <h4 class="font-extrabold text-left mb-2 md:hidden">{!!  $course['title']  !!}</h4>
                     <div
@@ -105,7 +90,7 @@
                                             <div class="relative w-full rounded-xl overflow-hidden pb-48 sm:pb-52 lg:pb-72">
                                                 <picture>
                                                     <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=450,quality=85/{{$image['img']}}">
-                                                    <img class="absolute inset-0 object-cover" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/{{$image['img']}}" alt="{{ $image['instructor'] }}" />
+                                                    <img class="absolute top-0 left-0 w-full h-full object-cover" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/{{$image['img']}}" alt="{{ $image['instructor'] }}" />
                                                 </picture>
                                                 <div class="rounded-b-xl absolute w-full bottom-0 h-full text-white text-center flex justify-end flex-col pb-3 lg:pb-6" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 50%, #01050F 100%);">
                                                     <h4 class="leading-none font-extrabold mb-1.5 lg:mb-2">{!! $image['title'] !!}</h4>
