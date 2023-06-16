@@ -285,7 +285,7 @@ Route::domain('{musoraDomain}')
             ->name('platform.notifications-redirect');
 
         Route::get('/purchase-redirect/{brand}', [RedirectController::class, 'redirectPurchase'])
-            ->whereIn('brand', all_brands())
+            ->whereIn('brand', all_brands_and_musora())
             ->name('platform.purchase-redirect');
 
         /*
