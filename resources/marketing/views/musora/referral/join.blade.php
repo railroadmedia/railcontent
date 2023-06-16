@@ -102,7 +102,7 @@
                     <br><br>
                     <strong>How to Enter:</strong> Musora students automatically receive (1) entry to the contest when a referred friend signs up for a 30-Day Guest Pass between June 19 to 30, 2023. Musora students may collect up to (5) contest entries by having 5 successful referrals within this timeframe. New students who sign-up for a 30-Day Guest Pass within this period will have (1) entry to the contest. No purchase is necessary to enter or win.
                     <br><br>
-                    <strong>Prize:</strong> The first prize is a Casio PXS3100BK Digital piano with a retail value of $250 USD. The second prize is a Pianote Book Bundle & a VIP lesson with a total value of [$$] USD. The third prize is a Pianote Book Bundle with a retail value of $117 USD. The prizes are non-transferable and cannot be exchanged for cash.
+                    <strong>Prize:</strong> The first prize is a Casio PXS3100BK Digital Piano with a retail value of US$879.99. The second prize is a Pianote Book Bundle & a VIP lesson with an estimated value of US$250. The third prize is a Pianote Book Bundle with a retail value of US$117. The prizes are non-transferable and cannot be exchanged for cash.
                     <br><br>
                     <strong>Winner Selection:</strong> The winner will be selected randomly from all eligible entries received during the entry period. The winner will be notified by email or direct message within 48 hours of the selection. If the winner does not respond within 48 hours, another winner will be selected.
                     <br><br>
