@@ -16,7 +16,7 @@ class MigrateUserPlaylistToV2 extends Command
      *
      * @var string
      */
-    protected $signature = 'MigrateUserPlaylistToV2 {brand=all} {startingUserId=0} {endingUserId=9999999} ';
+    protected $signature = 'MigrateUserPlaylistToV2 {brand=all} {startingUserId=0} {endingUserId=9999999} {playlistId=0}';
 
     /**
      * The console command description.
@@ -93,7 +93,9 @@ class MigrateUserPlaylistToV2 extends Command
         if (!empty($this->argument('endingUserId'))) {
             $query->where('user_id', '<=', $this->argument('endingUserId'));
         }
-
+        if (!empty($this->argument('playlistId')) && $this->argument('playlistId') != "0") {
+            $query->where('id', '=', $this->argument('playlistId'));
+        }
         $parents = [];
         $migratedPlaylistIds = [];
 
@@ -498,6 +500,14 @@ class MigrateUserPlaylistToV2 extends Command
                                     $dbConnection->statement($statement);
                                 }
                                 $migratedPlaylistIds[] = $row->id;
+                            }
+                            else{
+                                $dbConnection->table(config('railcontent.table_prefix').'user_playlist_content')
+                                    ->where('user_playlist_id','=', $row->id)
+                                    ->delete();
+                                $dbConnection->table(config('railcontent.table_prefix').'user_playlists')
+                                    ->where('id','=', $row->id)
+                                    ->delete();
                             }
 //                            if (isset($firstMigratedItemId) && ($firstMigratedItemId > 1)) {
 //                                $dbConnection->table(config('railcontent.table_prefix').'user_playlist_content')
