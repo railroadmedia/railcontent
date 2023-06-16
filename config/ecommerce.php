@@ -333,6 +333,10 @@ return [
                 'stripe_api_secret' => env('SINGEO_STRIPE_API_SECRET'),
                 'stripe_publishable_key' => env('SINGEO_STRIPE_PUBLISHABLE_KEY'),
             ],
+            'musora' => [
+                'stripe_api_secret' => env('DRUMEO_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('DRUMEO_STRIPE_PUBLISHABLE_KEY'),
+            ],
         ],
 
         'apple_store_kit' => [
