@@ -235,6 +235,7 @@ class UserPlaylistsController extends BaseController
         ContentRepository::$availableContentStatues = [
             ContentService::STATUS_PUBLISHED,
             ContentService::STATUS_SCHEDULED,
+            ContentService::STATUS_ARCHIVED
         ];
         ContentRepository::$pullFutureContent = true;
 
@@ -273,7 +274,7 @@ class UserPlaylistsController extends BaseController
         $playlistItem =
             $playlistItems->where('user_playlist_item_id', '=', $playlistItemId)
                 ->first();
-       // dd($playlistItem);
+
         $nextPlaylistItem = $playlistItems->getMatchOffset($playlistItem, 1);
         $previousPlaylistItem = $playlistItems->getMatchOffset($playlistItem, -1);
         $content['user_playlist_item_position'] = $position;
