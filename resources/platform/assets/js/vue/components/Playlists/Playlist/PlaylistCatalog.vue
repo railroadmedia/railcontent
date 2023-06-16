@@ -98,10 +98,6 @@
         state.lessonsContainerKey = Math.round(Math.random() * 100000);
     }
 
-    const isDraggable = () => {
-        return playlistsStore.sortingPlaylist;
-    }
-
     const handleDragChange = (e) => {
         const dragObj = lessonsCopy.value[e.oldIndex];
         lessonsCopy.value.splice(e.oldIndex, 1);
@@ -206,8 +202,6 @@
                         <!-- Cards -->
                         <section v-if="playlistsStore.lessons.length"
                                 class="tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-col"
-                                :ondragstart="isDraggable"     
-                                :ondrop="isDraggable"
                         >
                             <VueDraggableNext 
                                 :ghost-class="playlistsStore.sortingPlaylist ? 'ghost' : ''"
@@ -215,6 +209,7 @@
                                 :sort="playlistsStore.sortingPlaylist"
                                 :key="state.lessonsContainerKey"
                                 @update="handleDragChange"
+                                handle=".drag-handle"
                             >
                                 <!-- Print Each Card -->
                                 <playlist-card
