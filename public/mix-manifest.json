@@ -1,10 +1,18 @@
 {
+<<<<<<< HEAD
     "/platform/js/app.js": "/platform/js/app.js?id=4171a807cffcb409ba9c7473aefded47",
+=======
+    "/platform/js/app.js": "/platform/js/app.js?id=ba1a6285a243379f6ce8c86a307c5d8b",
+>>>>>>> feature-carousel-primary-video
     "/platform/js/profile.js": "/platform/js/profile.js?id=c7e869f012d1252699ff65de1e5e0547",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=24098ec7990ff98a565fd1e4693746ed",
     "/platform/js/books.js": "/platform/js/books.js?id=d4fa837307a14d7ee0ce9065b5e5e8e0",
     "/platform/js/manifest.js": "/platform/js/manifest.js?id=d8dfdf5c5bceea18578ef8fab600ce44",
+<<<<<<< HEAD
     "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=54df03ee06f2ee4e935d881582922506",
+=======
+    "/platform/js/playlist-playback-wrapper.js": "/platform/js/playlist-playback-wrapper.js?id=8235d934cd71f492f36199774268e19e",
+>>>>>>> feature-carousel-primary-video
     "/platform/js/platform-header.js": "/platform/js/platform-header.js?id=af3d16381543901859e9e955ed9e2cd0",
     "/platform/js/membership-update-.js": "/platform/js/membership-update-.js?id=e1ffd5c9f64e7739d834a415aba059fc",
     "/platform/js/membership-update-page.js": "/platform/js/membership-update-page.js?id=26ba2bb391babd9dcfbc6e1e9cf80ffd",
@@ -28,8 +36,13 @@
     "/platform/js/image-cropper-component.js": "/platform/js/image-cropper-component.js?id=d8e4ffb070f05d53478bd161da77aaef",
     "/platform/js/comments-component.js": "/platform/js/comments-component.js?id=29c8cb890913b17d044be75e54783d09",
     "/platform/js/email-form-component.js": "/platform/js/email-form-component.js?id=cfa09b0b222991cacf388f79469aaec9",
+<<<<<<< HEAD
     "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=b347e73eb5afadd636cf98ee238b91c5",
     "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=c85844d0d509f411dcf8fc3bef24545d",
+=======
+    "/platform/js/playlist-header.js": "/platform/js/playlist-header.js?id=a08606e729ddf161dad6bc9b926cf6ad",
+    "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=86e9ac1290b23e25ff9ec22c560fa0a2",
+>>>>>>> feature-carousel-primary-video
     "/platform/js/playlist-breadcrumb.js": "/platform/js/playlist-breadcrumb.js?id=95e0c94659bcecbcfc02a6f1ab5ade5f",
     "/platform/js/playlist-collection-header.js": "/platform/js/playlist-collection-header.js?id=507c3e33eec7223d21a56d606eac5f22",
     "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=26d03238e24769866d21704f9c052fd4",

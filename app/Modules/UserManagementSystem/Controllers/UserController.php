@@ -136,16 +136,16 @@ class UserController extends Controller
         }
         try {
             $request->validate([
-                                   'display_name' => [
-                                       Rule::unique(
-                                           config('user_management_system.database_connection_name').'.usora_users'
-                                       )
-                                           ->ignore($id),
-                                       'string',
-                                       'max:64',
-                                       'min:2',
-                                   ],
-                               ]);
+               'display_name' => [
+                   Rule::unique(
+                       config('user_management_system.database_connection_name').'.usora_users'
+                   )
+                       ->ignore($id),
+                   'string',
+                   'max:64',
+                   'min:2',
+               ],
+           ]);
         } catch (ValidationException $e) {
             $messagesByField =
                 $e->validator->getMessageBag()
@@ -172,6 +172,10 @@ class UserController extends Controller
 
         if (!empty($request->input('data.attributes.email'))) {
             $this->authorize('update-users-email-without-confirmation');
+        }
+
+        if (!empty($request->input('use_legacy_video_player')) && $request->get('use_legacy_video_player') == 'on') {
+            $request->merge(['use_legacy_video_player' => 1]);
         }
 
         //todo: create exception and add error message if user is not found
