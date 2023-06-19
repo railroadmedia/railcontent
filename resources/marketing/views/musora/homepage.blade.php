@@ -239,7 +239,7 @@
                 fetchpriority="high"
             >
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center mb-5">
-                <p class="leading-normal max-w-xl pr-7 mx-0">Learning an instrument can be frustrating. So we’ve made the most helpful music lessons on the planet –
+                <p class="leading-normal max-w-xl pr-7 mx-0">Learning an instrument can be frustrating. So we’ve made the most helpful music lessons on the planet:
                     <br><br>
                     Guided video lessons from great teachers, interactive exercises that transform practice into play, and <strong>thousands of popular songs</strong> for every style, era, and skill level. PLUS unlimited personal support from real teachers.
                     <br><br>
