@@ -1,6 +1,6 @@
 <section class="text-center @if(empty($whiteBg)) text-white @endif px-4 sm:px-6 py-10 sm:py-14 lg:py-20"
     @if(!empty($whiteBg))
-        style="background:linear-gradient(to bottom, #fff 40%, #F1EFED);"
+        style="background:linear-gradient(to bottom, #fff 33%, #e9eaec);"
     @else
         style="background:#0c1524;"
     @endif
