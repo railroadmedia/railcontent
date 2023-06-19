@@ -1,78 +1,87 @@
 @import "../_variables";
 
 body {
-  font-family: $opensans;
-  padding-top: 40px;
-  @include tablet {
-    padding-top: 56px;
-  }
-
-  &.cart-sidebar-active {
-    overflow: hidden;
+    font-family: $opensans;
+    padding-top: 40px;
     @include tablet {
-      margin-right: 14px;
+        padding-top: 56px;
     }
 
-    .top-bar {
-      z-index: 2147483002;
+    &.cart-sidebar-active {
+        overflow: hidden;
+        @include tablet {
+            margin-right: 14px;
+        }
+
+        .top-bar {
+            z-index: 2147483002;
+        }
     }
-  }
 }
 
 .anchor {
-  display: block;
-  position: relative;
-  top: -86px;
-  visibility: hidden;
-  @include tablet {
-    top: -105px;
-  }
+    display: block;
+    position: relative;
+    top: -86px;
+    visibility: hidden;
+    @include tablet {
+        top: -105px;
+    }
 }
 
 .join {
-  display: inline-block;
-  font: 500 22px/1em $bebas;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: $guitareoGreen;
-  border-radius: 50px;
-  color: #FFF;
-  padding: 17px 7%;
-  outline: none;
-  cursor: pointer;
-  text-align: center;
-  user-select: none;
-  text-decoration: none;
-  transition: background-color .3s, color .3s, opacity .3s;
-  box-shadow: 0 0 0 hsla(0, 0%, 0%, 0.35);
-  @include tablet {
-    font-size: 30px;
-  }
-
-  &:hover,
-  &:focus {
+    display: inline-block;
+    font: 500 22px/1em $bebas;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: $guitareoGreen;
+    border-radius: 50px;
     color: #FFF;
-    background: lighten($guitareoGreen, 10%);
-    box-shadow: 0 0 7px hsla(0, 0%, 0%, 0.35);
-  }
-
-  &.green {
-    background: #10D05F;
+    padding: 17px 7%;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    user-select: none;
+    text-decoration: none;
+    transition: background-color .3s, color .3s, opacity .3s;
+    box-shadow: 0 0 0 hsla(0, 0%, 0%, 0.35);
+    @include tablet {
+        font-size: 30px;
+    }
 
     &:hover,
     &:focus {
-      background: lighten(#10D05F, 10%);
+        color: #FFF;
+        background: lighten($guitareoGreen, 10%);
+        box-shadow: 0 0 7px hsla(0, 0%, 0%, 0.35);
     }
-  }
 
-  &.sold-out {
-    background: #777;
+    &.green {
+        background: #10D05F;
 
-    &:hover,
-    &:focus {
-      background: lighten(#777, 10%);
+        &:hover,
+        &:focus {
+            background: lighten(#10D05F, 10%);
+        }
     }
-  }
+
+    &.musora-black {
+        background: $musoraBlack;
+
+        &:hover,
+        &:focus {
+            background: lighten($musoraBlack, 10%);
+        }
+    }
+
+    &.sold-out {
+        background: #777;
+
+        &:hover,
+        &:focus {
+            background: lighten(#777, 10%);
+        }
+    }
 }
 
 .top-bar {
@@ -169,9 +178,10 @@ body {
     @media (max-width: 767px) {
         .features-dd,
         .instruments-dd {
-            display: none!important;
+            display: none !important;
         }
     }
+
     .button-wrap {
         display: inline-block;
         box-sizing: border-box;
@@ -285,159 +295,159 @@ body {
 }
 
 .nav-side-bar {
-  position: fixed;
-  right: -100%;
-  top: 40px;
-  height: calc(100% - 40px);
-  width: 90%;
-  max-width: 400px;
-  background: #FFF;
-  z-index: 101;
-  transition: all .1s;
-  overflow: auto;
-  overflow-x: hidden;
-  @include tablet {
-    top: 56px;
-    height: calc(100% - 56px);
-  }
-
-  &.active {
-    right: 0;
-  }
-
-  .has-drop-down {
-    cursor: pointer;
-  }
-
-  .nav-link {
-    width: 100%;
-    padding: 15px 20px;
-    font: 400 18px/1em $opensans;
-    color: #333;
-    position: relative;
-    border-bottom: 1px solid #ededed;
-    display: inline-block;
-    user-select: none;
-    box-sizing: border-box;
-
-    &:hover {
-      background: #fafafa;
-    }
-
-    i {
-      color: $guitareoGreen;
-      margin-right: 5px;
-      position: relative;
-      top: 3px;
-      width: 25px;
-      text-align: center;
-      display: inline-block;
-
-      &.fa,
-      &.far,
-      &.fas,
-      &.fal,
-      &.fab {
-        top: 0;
-      }
-
-      &.fa-external-link {
-        color: #000;
-        font-size: 16px;
-      }
-    }
-
-    .drop-down-arrow {
-      padding: 7px;
-      float: right;
-      cursor: pointer;
-      user-select: none;
-
-      span {
-        background-color: $guitareoGreen;
-        display: block;
-        transition: all .3s;
-        border-radius: 25px;
-        width: 12px;
-        height: 3px;
-
-        &:nth-child(1) {
-          transform: translate(-4px, 2px) rotate(45deg);
-        }
-
-        &:nth-child(2) {
-          transform: translate(4px, -1px) rotate(-45deg);
-        }
-      }
-
-      &.active span {
-        &:nth-child(1) {
-          transform: translate(-4px, 2px) rotate(-45deg);
-        }
-
-        &:nth-child(2) {
-          transform: translate(4px, -1px) rotate(45deg);
-        }
-      }
-    }
-  }
-
-  .lesson-links {
-    max-height: 0;
-    overflow: hidden;
+    position: fixed;
+    right: -100%;
+    top: 40px;
+    height: calc(100% - 40px);
+    width: 90%;
+    max-width: 400px;
+    background: #FFF;
+    z-index: 101;
     transition: all .1s;
-    transform: translateZ(0);
+    overflow: auto;
+    overflow-x: hidden;
+    @include tablet {
+        top: 56px;
+        height: calc(100% - 56px);
+    }
 
     &.active {
-      max-height: 1400px;
+        right: 0;
+    }
+
+    .has-drop-down {
+        cursor: pointer;
     }
 
     .nav-link {
-      background: #ededed;
-      font-size: 17px;
+        width: 100%;
+        padding: 15px 20px;
+        font: 400 18px/1em $opensans;
+        color: #333;
+        position: relative;
+        border-bottom: 1px solid #ededed;
+        display: inline-block;
+        user-select: none;
+        box-sizing: border-box;
 
-      &:hover {
-        background: #f0f0f0;
-      }
+        &:hover {
+            background: #fafafa;
+        }
 
-      i {
-        font-size: 17px;
+        i {
+            color: $guitareoGreen;
+            margin-right: 5px;
+            position: relative;
+            top: 3px;
+            width: 25px;
+            text-align: center;
+            display: inline-block;
+
+            &.fa,
+            &.far,
+            &.fas,
+            &.fal,
+            &.fab {
+                top: 0;
+            }
+
+            &.fa-external-link {
+                color: #000;
+                font-size: 16px;
+            }
+        }
+
+        .drop-down-arrow {
+            padding: 7px;
+            float: right;
+            cursor: pointer;
+            user-select: none;
+
+            span {
+                background-color: $guitareoGreen;
+                display: block;
+                transition: all .3s;
+                border-radius: 25px;
+                width: 12px;
+                height: 3px;
+
+                &:nth-child(1) {
+                    transform: translate(-4px, 2px) rotate(45deg);
+                }
+
+                &:nth-child(2) {
+                    transform: translate(4px, -1px) rotate(-45deg);
+                }
+            }
+
+            &.active span {
+                &:nth-child(1) {
+                    transform: translate(-4px, 2px) rotate(-45deg);
+                }
+
+                &:nth-child(2) {
+                    transform: translate(4px, -1px) rotate(45deg);
+                }
+            }
+        }
+    }
+
+    .lesson-links {
+        max-height: 0;
+        overflow: hidden;
+        transition: all .1s;
+        transform: translateZ(0);
+
+        &.active {
+            max-height: 1400px;
+        }
+
+        .nav-link {
+            background: #ededed;
+            font-size: 17px;
+
+            &:hover {
+                background: #f0f0f0;
+            }
+
+            i {
+                font-size: 17px;
+                color: #000;
+            }
+        }
+    }
+
+    .secondary-link {
+        font: 400 16px/1em $opensans;
         color: #000;
-      }
+        padding: 10px 20px;
+
+        &:hover {
+            text-decoration: underline;
+        }
     }
-  }
 
-  .secondary-link {
-    font: 400 16px/1em $opensans;
-    color: #000;
-    padding: 10px 20px;
-
-    &:hover {
-      text-decoration: underline;
+    .shim {
+        display: block;
+        height: 15px;
     }
-  }
-
-  .shim {
-    display: block;
-    height: 15px;
-  }
 }
 
 .menu-overlay {
-  position: fixed;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background: rgba(0, 0, 0, .2);
-  z-index: 99;
-  visibility: hidden;
-  opacity: 0;
-  transition: all .3s;
+    position: fixed;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .2);
+    z-index: 99;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .3s;
 
-  &.active {
-    visibility: visible;
-    opacity: 1;
-  }
+    &.active {
+        visibility: visible;
+        opacity: 1;
+    }
 }
 
 
@@ -454,7 +464,7 @@ body {
     transform: translate(-50%, 0);
     border-radius: 12px;
     width: 100%;
-    max-width:380px;
+    max-width: 380px;
 
     &.hide {
         bottom: -275px;
@@ -830,6 +840,6 @@ body {
 }
 
 .FabButtonFramecss__FabButtonFrameUI-sc-y1b4md-0.iCEwMd.BeaconFabButtonFrame {
-    bottom:5px!important;
-    right:3px!important;
+    bottom: 5px !important;
+    right: 3px !important;
 }
