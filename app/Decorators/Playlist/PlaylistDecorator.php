@@ -59,6 +59,15 @@ class PlaylistDecorator extends ModeDecoratorBase
                     Decorator::$typeDecoratorsEnabled = false;
                     \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
                     ContentRepository::$pullFutureContent = true;
+                    $oldStatuses = ContentRepository::$availableContentStatues;
+                    $oldFutureContent = ContentRepository::$pullFutureContent;
+
+                    ContentRepository::$availableContentStatues = [
+                        ContentService::STATUS_PUBLISHED,
+                        ContentService::STATUS_SCHEDULED,
+                        ContentService::STATUS_ARCHIVED
+                    ];
+
                     $firstItem = $this->contentService->getById($firstItem['content_id']);
 
                     $playlists[$index]['thumbnail_url'] = '';
@@ -81,6 +90,9 @@ class PlaylistDecorator extends ModeDecoratorBase
                             ($parent) ? $parent->fetch('data.original_thumbnail_url') : ''
                         );
                     }
+
+                    ContentRepository::$availableContentStatues = $oldStatuses;
+                    ContentRepository::$pullFutureContent = $oldFutureContent;
                 }
             } else {
                 $playlists[$index]['uploaded_thumbnail'] = true;
