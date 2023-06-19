@@ -1,4 +1,4 @@
-<nav id="nav" class="top-bar row expanded">
+<nav id="nav" class="top-bar row expanded @if(!empty($whiteNav)) bg-white @else bg-[#020815] @endif">
     <div class="logo">
         <a
             @if(!empty($logoUrl))
@@ -7,11 +7,11 @@
                 href="{{ get_legacy_brand_base_url('drumeo') }}"
             @endif
         >
-            <img src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png" alt="Drumeo">
+            <img class="@if(!empty($whiteNav)) invert @endif" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png" alt="Drumeo">
         </a>
     </div>
 
-    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-1 w-0 @endif">
+    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-1 w-0 @endif @if(!empty($whiteNav)) invert @endif">
         <span></span>
         <span></span>
         <span></span>

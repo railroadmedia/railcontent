@@ -77,6 +77,7 @@
 
 @include("musora._partials._nav", [
     "checkoutVersion" => true,
+    "whiteNav" => true,
 ])
 
 <div id="app">
