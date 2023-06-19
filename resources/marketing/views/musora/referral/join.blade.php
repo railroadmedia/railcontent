@@ -88,7 +88,6 @@
                     <img class="mx-auto mb-6 sm:mb-0" src="https://musora-web-platform.s3.amazonaws.com/referral/pianote_2nd+Prize.png" alt="2nd prize" />
                     <img class="mx-auto" src="https://musora-web-platform.s3.amazonaws.com/referral/pianote_3rd+Prize.png" alt="3rd prize" />
                 </div>
-                <b class="italic">PLUS your referred friend gets one entry for a chance to win these prizes, too!</b>
             </div>
         </section>
 
