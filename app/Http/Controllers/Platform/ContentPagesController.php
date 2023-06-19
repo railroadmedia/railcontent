@@ -954,6 +954,13 @@ class ContentPagesController extends BaseController
                 ->first();
 
         ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MAXIMUM;
+
+        Decorator::$typeDecoratorsEnabled = true;
+        $collectionForDecoration = new Collection();
+        $collectionForDecoration = $collectionForDecoration->merge([$lessonContent]);
+        $collectionForDecoration = $collectionForDecoration->filter();
+        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
+
         $lessonContent = $this->resourceDecorator->decorate(new Collection([$lessonContent]))->first();
         ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MINIMUM;
 

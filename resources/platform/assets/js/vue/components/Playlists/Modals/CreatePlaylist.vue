@@ -77,7 +77,7 @@
             label: 'Entertainment'
         },
         {
-            value: 'Warm-Up',
+            value: 'Warm Up',
             label: 'Warm-Up'
         },
         {

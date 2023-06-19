@@ -209,6 +209,7 @@
                                 :sort="playlistsStore.sortingPlaylist"
                                 :key="state.lessonsContainerKey"
                                 @update="handleDragChange"
+                                handle=".drag-handle"
                             >
                                 <!-- Print Each Card -->
                                 <playlist-card
@@ -218,7 +219,7 @@
                                     :lesson="lesson"
                                     :token="token"
                                     :brand="brand"
-                                />
+                                ></playlist-card>
                             </VueDraggableNext>
 
                             <!-- Skeleton Loader For Infinite Scroll -->
