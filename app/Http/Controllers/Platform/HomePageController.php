@@ -25,6 +25,7 @@ use Railroad\Points\Services\UserPointsService;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
+use Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
@@ -116,6 +117,7 @@ class HomePageController extends BaseController
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
+        AddedToPrimaryPlaylistDecorator::$skip = true;
 
         switch (brand()) {
             case 'drumeo':
@@ -619,14 +621,8 @@ class HomePageController extends BaseController
             5
         );
 
-        $playlistsNumber = $this->userPlaylistsService->countUserPlaylists(
-            user()->id,
-            'user-playlist',
-            brand()
-        );
-
         $results =
-            new ContentFilterResultsEntity(['results' => $playlists, 'total_results' => $playlistsNumber]
+            new ContentFilterResultsEntity(['results' => $playlists]
             );
 
         return $results;

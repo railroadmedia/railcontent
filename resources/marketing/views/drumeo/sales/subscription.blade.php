@@ -204,7 +204,7 @@
             'pointOne' => 'Learn New Skills',
             'pointTwo' => 'Study With Legends',
             'pointThree' => 'Play Real Songs',
-            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
             'students' => number_format(Prices::$students),
         ])
     @else
@@ -217,7 +217,7 @@
             'pointOne' => 'Improve Your Skills',
             'pointTwo' => 'World-Class Teachers',
             'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
             'students' => number_format(Prices::$students),
         ])
     @endif
@@ -525,8 +525,8 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738',
-        'reviewText' => 'Drumeo is rated 5-stars for price, satisfaction,<br class="inline sm:hidden"> and customer service.',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
+        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
         'youtube' => '2.6M',
         'facebookLink' => 'https://facebook.com/drumeo/',
@@ -549,7 +549,7 @@
             "noSelector" => true,
             "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
             "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-            "songs" => "5000",
+            "songs" => "5000+ popular songs.",
             "firstPoint" => "The world’s best drum lessons.",
             "thirdPoint" => "Unlimited personal support.",
             "fifthPoint" => "Lesson access for piano, guitar, and singing.",

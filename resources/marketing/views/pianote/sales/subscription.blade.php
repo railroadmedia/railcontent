@@ -204,7 +204,7 @@
                 'pointOne' => 'Perfect for Beginners',
                 'pointTwo' => 'Super-Friendly Teachers',
                 'pointThree' => 'Fun Lessons',
-                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
+                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
                 'students' => number_format(Prices::$students),
             ])
         @elseif(!empty($songsVersion))
@@ -217,7 +217,7 @@
                 'pointOne' => '1000+ popular songs',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Learn anywhere, anytime',
-                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
+                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
                 'students' => number_format(Prices::$students),
             ])
         @else
@@ -230,7 +230,7 @@
                 'pointOne' => 'Improve Your Skills',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
+                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
                 'students' => number_format(Prices::$students),
             ])
         @endif
@@ -548,8 +548,8 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
-        'reviewText' => 'Rated 5 stars by Pianote students of all skill levels!',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
+        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
         'youtube' => '1.2M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
@@ -572,7 +572,7 @@
             "noSelector" => true,
             "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
             "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
-            "songs" => "1000",
+            "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited piano lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, guitar, and drums.",

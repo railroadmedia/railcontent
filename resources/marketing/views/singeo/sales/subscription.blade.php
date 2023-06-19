@@ -201,7 +201,7 @@
             'pointOne' => 'Improve Your Voice',
             'pointTwo' => 'Helpful Vocal Coaches',
             'pointThree' => 'Sing Popular Songs',
-            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
             'students' => number_format(Prices::$students),
         ])
     @else
@@ -214,7 +214,7 @@
             'pointOne' => 'Improve Your Voice',
             'pointTwo' => 'Helpful Vocal Coaches',
             'pointThree' => 'Sing Popular Songs',
-            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
+            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
             'students' => number_format(Prices::$students),
         ])
     @endif
@@ -494,8 +494,8 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by singers everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
-        'reviewText' => 'Rated 5 stars by Singeo students from around the world!',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
+        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
         'youtube' => '29,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
@@ -519,7 +519,7 @@
             "noSelector" => true,
             "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
             "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
-            "songs" => "1000",
+            "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited singing lessons.",
             "thirdPoint" => "Direct access to vocal coaches.",
             "fifthPoint" => "Lesson access for guitar, piano, and drums.",

@@ -1,13 +1,12 @@
-<nav id="nav" class="bg-[#020815] fixed w-full top-0 left-0 flex items-center h-10 md:h-14 top-bar z-50">
+<nav id="nav" class="@if(!empty($whiteNav)) bg-white @else bg-[#020815] @endif shadow-md fixed w-full top-0 left-0 flex items-center h-10 md:h-14 top-bar z-50">
     <!-- Logo/Home Link -->
     <a href="{{ $homeUrl ?? '/' }}" class="h-full px-2 md:px-4 flex items-center mr-4 lg:mr-8">
-        <img src="{{ $logo }}" alt="Musora Logo" class="w-full max-w-[77px] md:max-w-[144px] max-h-9">
+        <img src="{{ $logo }}" alt="Musora Logo" class="@if(!empty($whiteNav)) invert @endif w-full max-w-[77px] md:max-w-[144px] max-h-9">
     </a>
 
     <!-- link-wrapper -->
     <div class="flex flex-1">
 
-        @if(!empty($subscriptionVersion))
             @if(!empty($fullSubscriptionVersion))
 
                 {{-- Nav Links --}}
@@ -29,26 +28,7 @@
 
             @endif
 
-            {{-- CTA Button --}}
-            <div class="ml-auto flex items-center">
-                <a @if(!empty($scrollToJoin))
-                        href="#customize-anchor"
-                        class="anchor-slide btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
-                    @elseif(!empty($joinUrl))
-                        href="{{ $joinUrl }}" class="btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
-                    @else
-                        href="/#customize-anchor" class="btn-primary btn-small text-base leading-none bg-{{ $brand }} border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial"
-                    @endif
-                >
-                    @if(!empty($emptyPromoVersion))
-                        Start Trial
-                    @else
-                        Join<span class="show-for-medium"> {{ $brand }}</span>
-                    @endif
-                </a>
-            </div>
 
-        @endif
 
         {{-- Cart and Shop CTA buttons --}}
         @if(!empty($checkoutVersion))
@@ -80,12 +60,18 @@
 
     </div>
 
-    <div class="hidden lg:block py-4">
-        <a href="{{ get_legacy_brand_base_url('musora') }}/login" class="border-2 border-white rounded-full text-[15px] text-white hover:text-black hover:bg-white uppercase font-bebas tracking-widest pt-[9px] px-[30px] pb-[8px] transition-all duration-200">Login</a>
+    <div class="hidden lg:block py-4 mr-1">
+        <a href="{{ get_legacy_brand_base_url('musora') }}/login" class="@if(!empty($whiteNav)) invert @endif border-2 border-white rounded-full text-[15px] text-white hover:text-black hover:bg-white uppercase font-bebas tracking-widest pt-[9px] px-[30px] pb-[8px] transition-all duration-200">Login</a>
+    </div>
+
+    <div class="ml-auto flex items-center">
+        <a href="/choose-plan" class="btn-primary btn-small text-base leading-none text-black bg-musora border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial">
+            Start for free &nbsp; <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
+        </a>
     </div>
 
     <!-- Sidebar Toggle -->
-    <button class="text-white w-10 h-10 md:w-14 md:h-14 relative focus:outline-none" x-on:click="sidebarOpen = !sidebarOpen, showOverlay = !showOverlay">
+    <button class="@if(!empty($whiteNav)) invert @endif text-white w-10 h-10 md:w-14 md:h-14 relative focus:outline-none" x-on:click="sidebarOpen = !sidebarOpen, showOverlay = !showOverlay">
         <span class="sr-only">Open main menu</span>
         <div class="block w-5 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2">
             <span aria-hidden="true" class="block absolute h-0.5 w-5 bg-current transform transition duration-300 ease-in-out" x-bind:class="{'rotate-45': sidebarOpen,' -translate-y-1.5': !sidebarOpen }"></span>

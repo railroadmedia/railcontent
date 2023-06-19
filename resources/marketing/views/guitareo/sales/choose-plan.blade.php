@@ -44,7 +44,7 @@
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-plus-logo-light.svg",
             "logo" => "https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo.png",
-            "songs" => "1000",
+            "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, piano, and drums.",
@@ -64,7 +64,7 @@
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-plus-logo-light.svg",
             "logo" => "https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo.png",
-            "songs" => "1000",
+            "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, piano, and drums.",
