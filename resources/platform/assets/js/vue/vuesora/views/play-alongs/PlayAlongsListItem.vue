@@ -69,6 +69,25 @@
         >
             {{ item }}
         </div>
+        
+        <!-- ADD TO FAVORITES -->
+        <div
+            v-if="showUserActions"
+            class="flex flex-column icon-col tw-items-center"
+        >
+            <button 
+                class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
+                :class="is_added ? 'is-added tw-rotate-45 ' + themeTextClass : 'tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]'"
+                :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
+                :data-content-id="item.id"
+                :data-content-type="item.type"
+                @click.stop.prevent="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.color_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+            </button>
+        </div>
 
         <!-- VIEW LESSON VIDEO -->
         <div
@@ -85,23 +104,6 @@
                     title="Watch Lesson Video"
                 ></i>
             </a>
-        </div>
-
-        <!-- ADD TO FAVORITES -->
-        <div
-            v-if="showUserActions"
-            class="flex flex-column icon-col align-v-center"
-        >
-            <div
-                class="body"
-                @click.stop.prevent="addToList"
-            >
-                <i
-                    class="add-to-list fa-star flex-center tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
-                    :class="addedToListClasses"
-                    :title="is_added ? 'Remove from Favorites' : 'Add to Favorites'"
-                ></i>
-            </div>
         </div>
 
         <!-- MARK AS COMPLETE -->
