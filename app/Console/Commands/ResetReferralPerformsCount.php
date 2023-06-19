@@ -10,14 +10,17 @@ class ResetReferralPerformsCount extends Command
 
     protected $signature = 'ResetReferralPerformsCount';
 
-    protected $description = 'Reset the referral count for all users';
+    protected $description = 'Reset the referral count for pianote referrals';
 
     public function handle()
     {
         $this->info('###### Starting ResetReferralPerformsCount...  ######');
 
         DB::connection(config('railcontent.database_connection_name'))
-            ->update('update referral_referrers set referrals_performed = 0');
+            ->table('referral_referrers')
+            ->where('brand', 'pianote')
+            ->update(['referrals_performed' => 0])
+            ;
 
         $this->info('###### Command ResetReferralPerformsCount has finished ###### ');
 
