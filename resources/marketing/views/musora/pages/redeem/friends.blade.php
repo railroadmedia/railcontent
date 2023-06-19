@@ -438,7 +438,7 @@
                     <h2 class="leading-tight mb-4"><strong>Redeem 30 days of free music lessons with Musora.</strong></h2>
                     <p class="mb-5 sm:mb-10 lg:mb-14">Enter the unique code on your pass to create your Musora account and get started. Once you press submit, you'll have instant access to our vast library of lessons and track your progress as you learn.
                     </p>
-                    <img src="https://dmmior4id2ysr.cloudfront.net/redeem/musora-card.png" alt="musora card" />
+                    <img src="https://dmmior4id2ysr.cloudfront.net/redeem/musora-card-new.png" alt="musora card" />
                 </div>
                 <div class="w-full sm:w-7/12 lg:w-1/2">
                     <h5 class="mt-5 sm:mt-0 font-black text-left md:text-center lg:text-left">Begin your musical journey today <i class="fas fa-arrow-down"></i> </h5>
