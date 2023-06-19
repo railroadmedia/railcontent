@@ -158,8 +158,20 @@ class UserPlaylistsController extends BaseController
         if ($playlist['has_access'] == 1) {
             ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
             ContentRepository::$bypassPermissions = true;
+            $oldStatuses = ContentRepository::$availableContentStatues;
+            $oldFutureContent = ContentRepository::$pullFutureContent;
+
+            ContentRepository::$availableContentStatues = [
+                ContentService::STATUS_PUBLISHED,
+                ContentService::STATUS_SCHEDULED,
+                ContentService::STATUS_ARCHIVED
+            ];
+            ContentRepository::$pullFutureContent = true;
             $items = $this->userPlaylistsService->getUserPlaylistContents($playlistId, $contentTypes, $limit, $page);
+
             ContentRepository::$bypassPermissions = false;
+            ContentRepository::$availableContentStatues = $oldStatuses;
+            ContentRepository::$pullFutureContent = $oldFutureContent;
 
             foreach ($items as $index => $item) {
                 $playlistItems[$index]['id'] = $item['id'];
