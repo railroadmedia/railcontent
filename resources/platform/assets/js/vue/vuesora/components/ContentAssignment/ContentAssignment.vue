@@ -111,7 +111,7 @@
         <transition name="show-from-bottom">
             <div v-if="open" id="practiceOverlay" class="bg-white">
                 <SoundSlice :user-id="userId" :theme-color="themeColor" :additional-params="additionalParams"
-                    :soundslice-slug="soundsliceSlug" :loading="loading" @onLoad="loading = false" @onPlay="handlePlay"
+                    :soundslice-slug="soundsliceSlug" :content-id="lessonId" :loading="loading" @onLoad="loading = false" @onPlay="handlePlay"
                     @onPause="handlePause">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="title" :disable-next="disableNext" :disable-prev="disablePrev"
@@ -149,6 +149,10 @@ export default {
         lessonTitle: {
             type: String,
             default: () => '',
+        },
+        lessonId: {
+            type: [Number, String],
+            default: () => 0,
         },
         brand: {
             type: String,
