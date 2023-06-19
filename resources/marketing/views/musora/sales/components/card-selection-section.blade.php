@@ -23,7 +23,7 @@
                         <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ Prices::$plusSubscriptionMonthly }}/month</strong></h4>
                         <p class="text-sm mb-6"><em>Pay as you go.</em></p>
-                        <div class="font-bebas join @if(!empty($whiteBg)) musora-black @else {{ $theme }} @endif smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
+                        <div class="font-bebas join musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
                     </div>
                     <div class="px-3 pb-7 md:pb-8 bg-white">
                         <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
@@ -39,7 +39,7 @@
                 </a>
             </div>
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-black text-xs rounded-full bg-[#ffac00]" >MOST POPULAR</p>
+                <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{ $theme }} @if($theme == 'musora') text-black @endif" >MOST POPULAR</p>
                 <a href="{{$plusAnnualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-{{ $theme }}">
                     <div class="bg-white px-3 py-6 md:py-9">
                         <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
@@ -73,7 +73,7 @@
                         <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ 25 }}/month</strong></h4>
                         <p class="text-sm mb-6"><em>Pay as you go.</em></p>
-                        <div class="font-bebas join @if(!empty($whiteBg)) musora-black @else {{ $theme }} @endif smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
+                        <div class="font-bebas join musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
                     </div>
                     <div class="px-3 pb-7 md:pb-8 bg-white">
                         <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
@@ -88,7 +88,7 @@
                 </a>
             </div>
             <div class="w-full md:w-1/2 px-2 md:px-3 mb-4 md:mb-0 relative">
-                <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-black text-xs rounded-full bg-[#ffac00]">MOST POPULAR</p>
+                <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{ $theme }} @if($theme == 'musora') text-black @endif">MOST POPULAR</p>
                 <a href="{{$annualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto group @if(!empty($whiteBg)) border-2 border-{{ $theme }} @endif">
                     <div class="bg-white px-3 py-6 md:py-9">
                         <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
