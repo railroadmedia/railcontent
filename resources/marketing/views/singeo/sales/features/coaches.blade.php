@@ -43,6 +43,8 @@
                             },
                             700: {
                                 perPage: 1.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                         },
                     ",
@@ -90,6 +92,8 @@
                             },
                             700: {
                                 perPage: 1.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                         },
                     ",
@@ -137,6 +141,8 @@
                             },
                             700: {
                                 perPage: 1.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                         },
                     ",
@@ -184,6 +190,8 @@
                             },
                             700: {
                                 perPage: 1.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                         },
                     ",
@@ -230,6 +238,8 @@
                             },
                             700: {
                                 perPage: 1.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                         },
                     ",
@@ -277,6 +287,8 @@
                             },
                             700: {
                                 perPage: 1.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                         },
                     ",

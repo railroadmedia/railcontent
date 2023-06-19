@@ -229,7 +229,7 @@
             </div>
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
+    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f6f8fc;">
         <div class="container max-w-4xl mx-auto">
             <img class="text-center mx-auto sm:h-20 lg:h-24 mb-10 hidden sm:inline-block" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play.png">
             <img class="text-center mx-auto h-24 inline-block sm:hidden" src="https://musora-center.s3.amazonaws.com/homepage/2023/learn-practice-play-m.png">
@@ -582,7 +582,7 @@
     ])
 
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #0c1524 calc(50% + 1px));"></div>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background:#0c1524;">
+    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white" style="background:#0c1524;">
         <div class="container max-w-4xl mx-auto">
             <img class="h-10 sm:h-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/just-press-play-title2.png" alt="collage intro mobile" loading="lazy" onload="this.classList.remove('opacity-0')">
             <p class="text-center mt-5 mb-16 sm:mt-5 sm:mb-20">Musora is loaded with practice tools and guided workouts
@@ -662,28 +662,28 @@
 
 
     <div id="songs" class="anchor"></div>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-4xl mx-auto">
             <h2 class="leading-tight"><strong><u>1000+</u> popular songs.</strong></h2>
-            <p class="leading-tight mt-2 sm:mt-3">You’ll have <strong>all the tools you need</strong> to play the songs you love.</p>
+            <p class="leading-tight mt-2 sm:mt-3 mb-7">You’ll have <strong>all the tools you need</strong><br class="inline sm:hidden"> to play the songs you love.</p>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'pianote'">
                 <div style="padding-bottom:62.4%;" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="pianoteSoundslice = true;" >
-                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/pianote-player.png" alt="pianote player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/pianote-player2.png" alt="pianote player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'guitareo'">
                 <div style="padding-bottom:62.4%" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="guitareoSoundslice = true;" >
-                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guitareo-player.png" alt="guitareo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/guitareo-player2.png" alt="guitareo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'drumeo'">
                 <div style="padding-bottom:62.4%;" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="drumeoSoundslice = true;" >
-                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png" alt="drumeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/drumeo-player2.png" alt="drumeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto" x-show="brand === 'singeo'">
                 <div style="padding-bottom:62.4%" class="my-4 sm:my-6 lg:my-6 relative" x-on:click="singeoSoundslice = true;" >
-                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/singeo-player.png" alt="singeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                    <img class="absolute inset-0 transition-all opacity-0 cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/singeo-player2.png" alt="singeo player" loading="lazy" onload="this.classList.remove('opacity-0')" />
                 </div>
             </div>
             <div class="">
@@ -867,9 +867,8 @@
     @include('musora.sales.components.testimonials-section', [
         'desktopGrid' => true,
         'header' => 'Your new musical home. ',
-        'subheadline' => 'Music students everywhere are reaching their goals with Musora.<br class="hidden sm:inline"> Check out the reviews and meet some of our friendly students. ',
+        'reviewText' => 'Music students everywhere are reaching their goals with Musora.<br class="hidden sm:inline"> Check out the reviews and meet some of our friendly students. ',
         'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
-        'reviewText' => 'Rated <strong>4.8</strong> / 5 based on 6,550 student reviews.',
     ])
     @include('musora._partials.order-section-collage')
 

@@ -1496,16 +1496,16 @@
         },
         {
             "name": "doctrine/inflector",
-            "version": "2.0.7",
+            "version": "2.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/inflector.git",
-                "reference": "27c555ebd2ae8fde9e6e8cb84e6fbea57d067634"
+                "reference": "f9301a5b2fb1216b2b08f02ba04dc45423db6bff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/inflector/zipball/27c555ebd2ae8fde9e6e8cb84e6fbea57d067634",
-                "reference": "27c555ebd2ae8fde9e6e8cb84e6fbea57d067634",
+                "url": "https://api.github.com/repos/doctrine/inflector/zipball/f9301a5b2fb1216b2b08f02ba04dc45423db6bff",
+                "reference": "f9301a5b2fb1216b2b08f02ba04dc45423db6bff",
                 "shasum": ""
             },
             "require": {
@@ -1567,7 +1567,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/inflector/issues",
-                "source": "https://github.com/doctrine/inflector/tree/2.0.7"
+                "source": "https://github.com/doctrine/inflector/tree/2.0.8"
             },
             "funding": [
                 {
@@ -1583,7 +1583,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-16T10:07:19+00:00"
+            "time": "2023-06-16T13:40:37+00:00"
         },
         {
             "name": "doctrine/instantiator",
@@ -8600,16 +8600,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.17",
+            "version": "v2.1.18",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "aef405e03f523337d29a8887d33262fc473f4818"
+                "reference": "f812854e7d8d2077dbcd1ccf403be3032223acc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/aef405e03f523337d29a8887d33262fc473f4818",
-                "reference": "aef405e03f523337d29a8887d33262fc473f4818",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/f812854e7d8d2077dbcd1ccf403be3032223acc8",
+                "reference": "f812854e7d8d2077dbcd1ccf403be3032223acc8",
                 "shasum": ""
             },
             "require": {
@@ -8663,9 +8663,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.17"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.18"
             },
-            "time": "2023-06-16T10:30:03+00:00"
+            "time": "2023-06-16T14:43:46+00:00"
         },
         {
             "name": "railroad/railforums",
