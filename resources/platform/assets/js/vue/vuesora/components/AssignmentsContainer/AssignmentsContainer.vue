@@ -5,6 +5,7 @@
                 <ContentAssignment
                     :lesson-thumbnail="lessonThumbnail"
                     :lesson-title="lessonTitle"
+                    :lesson-id="lessonId"
                     :theme-color="assignment.themeColor"
                     :brand="assignment.themeColor"
                     :timecode="assignment.timecode"
@@ -62,6 +63,9 @@ export default {
         lessonTitle() {
             const title = this.lessonData['fields'].find(data => data.key === 'title');
             return title.value;
+        },
+        lessonId() {
+            return this.lessonData['id'];
         },
     }
 
