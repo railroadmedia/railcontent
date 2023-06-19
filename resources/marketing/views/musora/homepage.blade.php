@@ -43,6 +43,14 @@
             background:#14233d;
             box-shadow:0 0 7px rgba(0, 0, 0, 0.35);
         }
+        .join i {
+            transition:all .3s;
+            position:relative;
+            right:0px;
+        }
+        .join:hover i {
+            right:-3px;
+        }
 
         .join.white {
             background:#fff;
@@ -351,6 +359,7 @@
             <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 flex sm:hidden">
                 @foreach ($gridItems as $key => $gridItem)
                     @include('_partials.components.question-dropdown', [
+                        'variant' => true,
                         'num' => $key+1,
                         "title" => $gridItem['title'],
                         "desc" => $gridItem['desc'],
@@ -715,7 +724,7 @@
                 </div>
             </div>
             <div class="text-center w-full sm:w-auto mt-6 sm:mt-12 mx-auto mb-5 sm:mb-10">
-                <div class="flex flex-wrap">
+                <div class="hidden sm:flex flex-wrap">
                     @php
                         $songItems = [
                             [
@@ -770,6 +779,17 @@
                                 </div>
                             </div>
                         </div>
+                    @endforeach
+                </div>
+
+                <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 flex sm:hidden">
+                    @foreach ($songItems as $key => $songItem)
+                        @include('_partials.components.question-dropdown', [
+                            'variant' => true,
+                            "title" => '<i class="fal ' . $songItem['fa-icon'] . ' text-xl mr-1.5 text-musora-black"></i>' . $songItem['title'],
+                            "desc" => $songItem['desc'],
+                            'open' => $key === 0 ? true : false
+                        ])
                     @endforeach
                 </div>
             </div>
