@@ -712,7 +712,7 @@
 {{--                            <hr class="w-full my-5" style="border-color:#b2cae1">--}}
 {{--                            <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
 {{--                                <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>--}}
-{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
+{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money-Back Guarantee</p>--}}
 {{--                        </a>--}}
 {{--                        <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=6&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&locked=true"--}}
 {{--                            class="px-5 sm:px-10 py-5 sm:py-7 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"--}}
@@ -737,7 +737,7 @@
 {{--                            <hr class="w-full my-5" style="border-color:#b2cae1">--}}
 {{--                            <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
 {{--                                <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>--}}
-{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
+{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money-Back Guarantee</p>--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 

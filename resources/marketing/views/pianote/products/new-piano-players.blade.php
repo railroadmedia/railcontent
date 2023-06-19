@@ -800,7 +800,7 @@
 {{--                                <i class="fas fa-check text-pianote mr-1"></i> 20 Guided Play-Along Lessons.<br>--}}
 {{--                                <i class="fas fa-check text-pianote mr-1"></i> 4 Live Q&A Sessions.<br>--}}
 {{--                                <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access.<br>--}}
-{{--                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money Back Guarantee.</p>--}}
+{{--                                <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money-Back Guarantee.</p>--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 {{--                @endif--}}

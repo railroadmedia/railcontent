@@ -800,7 +800,7 @@
 {{--                                <i class="fas fa-check text-drumeo mr-1"></i> 24 Guided Workouts<br>--}}
 {{--                                <i class="fas fa-check text-drumeo mr-1"></i> 4 Live Q&A Sessions<br>--}}
 {{--                                <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>--}}
-{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
+{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money-Back Guarantee</p>--}}
 {{--                        </a>--}}
 {{--                        <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-drummer-2]=1&products[practicepad]=1&products[Drumeo-VaterSticks]=2&products[BeginnerBook]=1&locked=true" class="px-5 sm:px-7 lg:px-9 py-7 sm:py-11 sm:-ml-5 z-10 relative rounded-xl bg-white shadow-lg w-full sm:w-1/2">--}}
 {{--                            <h3><strong>Unlimited Lessons</strong></h3>--}}
@@ -819,7 +819,7 @@
 {{--                                <i class="fas fa-check text-drumeo mr-1"></i> 10-Level Drumeo Method Curriculum<br>--}}
 {{--                                <i class="fas fa-check text-drumeo mr-1"></i> Play Along To 5000+ Popular Songs.<br>--}}
 {{--                                <i class="fas fa-check text-drumeo mr-1"></i> Study With 300+ World-Class Drummers.<br>--}}
-{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
+{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money-Back Guarantee</p>--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 
