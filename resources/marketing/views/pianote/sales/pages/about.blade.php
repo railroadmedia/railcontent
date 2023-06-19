@@ -275,14 +275,14 @@
                         arrow: 'splide__arrow bg-pianote',
                         prev  : 'splide__arrow--prev your-class-prev',
                         next  : 'splide__arrow--next your-class-next',
-                        pagination: 'splide__pagination force-hidden',
+                        pagination: 'force-hidden',
                     },
                     breakpoints: {
-                        640: {
-                            perPage: 1,
-                        },
                         768: {
                             perPage: 3,
+                        },
+                        640: {
+                            perPage: 1,
                         }
                     },
                 }).mount()
@@ -294,7 +294,7 @@
         <div class="absolute w-full top-0 h-5 sm:h-7" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, white calc(50% + 1px));"></div>
         <h4 class="text-center font-extrabold mb-8">Our Story</h4>
         <div class="max-w-5xl mx-auto relative px-12">
-            <div x-ref="splide" class="splide" aria-label="Splide/Alpine.js Carousel Example">
+            <div x-ref="splide" class="splide">
                 <div class="splide__track relative" style="z-index: 10">
                     <ul class="splide__list">
                         @foreach ($slider as $slide)

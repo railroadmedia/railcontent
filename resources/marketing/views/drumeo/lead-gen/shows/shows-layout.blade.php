@@ -174,7 +174,7 @@
                     <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-modern-drummer.png">
                 </div>
                 <div class="columns small-4">
-                    <a target="_blank" href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738', 'newwindow', 'width=750, height=550'); return false;"><img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-shopper-approved.png"></a>
+                    <a target="_blank" href="https://www.shopperapproved.com/reviews/Musora.com" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;"><img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-shopper-approved.png"></a>
                 </div>
                 <div class="columns small-4">
                     <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-drummies.png">

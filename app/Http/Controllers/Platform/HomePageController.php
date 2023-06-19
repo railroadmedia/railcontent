@@ -362,7 +362,8 @@ class HomePageController extends BaseController
             'hasGenres' => $hasGenres,
             'hasTopics' => $hasTopics,
             'hasExperience' => $hasExperience,
-            'methodUrl' => url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
+            'methodUrl' => ($hasCompletedMethod)? url()->route('platform.content.first-level', ['method', $methodContent['slug'], $methodContent['id']]):
+                url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
             'completedLevelsUrl' => $methodContent['url'] ?? '',
             'carousel' => $carousel,
             'cohortBanner' => json_encode($cohortBanner),

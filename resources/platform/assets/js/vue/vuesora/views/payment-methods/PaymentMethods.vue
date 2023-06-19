@@ -48,12 +48,12 @@
                     class="flex flex-column body tw-text-[#00101D] dark:tw-text-white"
                 >
                     {{ getRelatedAttributesByTypeAndId(
-                        paymentMethod.relationships.method.data
-                    ).attributes.company_name || 'N/A' }}
+                    paymentMethod.relationships.method.data
+                ).attributes.company_name || 'N/A' }}
                     -
                     {{ getRelatedAttributesByTypeAndId(
-                        paymentMethod.relationships.method.data
-                    ).attributes.last_four_digits || 'N/A' }}
+                    paymentMethod.relationships.method.data
+                ).attributes.last_four_digits || 'N/A' }}
                 </div>
 
                 <div
@@ -289,6 +289,13 @@ export default {
                 this.$refs.paymentForm.fetchStripeToken()
                     .then(({ token, error }) => {
                         if (error) {
+                            this.loading = false;
+                            Toasts.push({
+                                icon: 'sad',
+                                title: 'Oops, something went wrong!',
+                                themeColor: this.themeColor,
+                                message: 'Check your credit card information and try again.',
+                            });
                             return;
                         }
 
@@ -335,6 +342,9 @@ export default {
                     setTimeout(() => {
                         this.loading = false;
                     }, 1000);
+                })
+                .catch((error)=>{
+                    console.log(error);
                 });
         },
 
@@ -453,53 +463,53 @@ export default {
 </script>
 
 <style lang="scss">
-    @import '../../assets/sass/partials/_variables.scss';
+@import '../../assets/sass/partials/_variables.scss';
 
-    .form-loading {
-        position:fixed;
-        top:50%;
-        left:50%;
-        z-index:200;
-        transform:translate(-50%, -50%);
-        width:250px;
+.form-loading {
+    position:fixed;
+    top:50%;
+    left:50%;
+    z-index:200;
+    transform:translate(-50%, -50%);
+    width:250px;
 
-        i {
-            font-size:72px;
-        }
-
-        .success-message {
-            position:absolute;
-            top:0;
-            left:0;
-            bottom:0;
-            right:0;
-        }
+    i {
+        font-size:72px;
     }
-    .loading-overlay {
-        content: '';
-        position:fixed;
+
+    .success-message {
+        position:absolute;
         top:0;
         left:0;
         bottom:0;
         right:0;
-        z-index:199;
-        background:rgba(0,0,0,.4);
     }
+}
+.loading-overlay {
+    content: '';
+    position:fixed;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    z-index:199;
+    background:rgba(0,0,0,.4);
+}
 
-    .radio-col {
-        flex:0 0 30px;
-        max-width:30px;
-    }
-    .default-col {
-        flex:0 0 60px;
-        max-width:60px;
-    }
-    .expiry-col {
-        flex:0 0 120px;
-        max-width:120px;
-    }
-    .actions-col {
-        flex:0 0 70px;
-        max-width:70px;
-    }
+.radio-col {
+    flex:0 0 30px;
+    max-width:30px;
+}
+.default-col {
+    flex:0 0 60px;
+    max-width:60px;
+}
+.expiry-col {
+    flex:0 0 120px;
+    max-width:120px;
+}
+.actions-col {
+    flex:0 0 70px;
+    max-width:70px;
+}
 </style>

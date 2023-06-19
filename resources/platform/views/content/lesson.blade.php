@@ -19,7 +19,7 @@
 
         <div class="tw-flex tw-flex-col tw-w-full">
 
-            <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
+            <div class="fluid tw-pb-3 @if(count(json_decode($relatedLessons)->data) > 1 && $lessonContent['id'] === json_decode($relatedLessons)->data[0]->id) tw-max-w-[1280px] @endif tw-w-full tw-mx-auto">
 
                 <div class="p-lg-only lean">
                     {{-- Video Player --}}
@@ -79,8 +79,8 @@
                                 </transition>
                             @else
                                 <transition appear name="fade">
-                                    <video-player 
-                                        ref="mediaElementVueInstance" 
+                                    <video-player
+                                        ref="mediaElementVueInstance"
                                         theme-color="{{ $brand }}"
                                         brand="{{ $brand }}"
                                         poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
@@ -97,7 +97,7 @@
                                         video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
                                         :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
                                         cast-title="{{ $lessonContent->fetch('fields.title') }}"
-                                        :use-intersection-observer="true" 
+                                        :use-intersection-observer="true"
                                         @play="handleVideoPlay"
                                         @pause="handleVideoPause">
                                         <div class="widescreen title tw-text-{{ $brand }} tw-mb-2"></div>
@@ -290,30 +290,32 @@
         </div>
 
         {{-- Related Lessons Section --}}
-        <div class="">
-            <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
-                <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
-                    <div class="tw-flex tw-flex-col tw-mb-5">
-                        @if ($parent && ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) === 'Song')
-                            <p class="tw-text-{{ $brand }} tw-text-sm tw-mb-1 tw-uppercase">
-                                {{ ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) }}</p>
-                            <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
-                                {{ $parent->fetch('fields.title') }}
-                            </h6>
-                        @else
-                            <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
-                                Related Lessons
-                            </h6>
-                        @endif
-                    </div>
+        @if(count(json_decode($relatedLessons)->data) > 1 && $lessonContent['id'] === json_decode($relatedLessons)->data[0]->id)
+            <div class="">
+                <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
+                    <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
+                        <div class="tw-flex tw-flex-col tw-mb-5">
+                            @if ($parent && ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) === 'Song')
+                                <p class="tw-text-{{ $brand }} tw-text-sm tw-mb-1 tw-uppercase">
+                                    {{ ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) }}</p>
+                                <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
+                                    {{ $parent->fetch('fields.title') }}
+                                </h6>
+                            @else
+                                <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
+                                    Related Lessons
+                                </h6>
+                            @endif
+                        </div>
 
-                    <content-catalogue catalogue-type="grid" theme-color="{{ $brand }}" :use-theme-color="true"
-                        brand="{{ brand() }}" :pre-loaded-content="{{ $relatedLessons }}"
-                        @if (!empty($lockUnowned)) :lock-unowned="true" @endif :display-inline="true"
-                        user-id="{{ auth()->id() }}"></content-catalogue>
+                        <content-catalogue catalogue-type="grid" theme-color="{{ $brand }}" :use-theme-color="true"
+                            brand="{{ brand() }}" :pre-loaded-content="{{ $relatedLessons }}"
+                            @if (!empty($lockUnowned)) :lock-unowned="true" @endif :display-inline="true"
+                            user-id="{{ auth()->id() }}"></content-catalogue>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
     </div>
 
 @endsection

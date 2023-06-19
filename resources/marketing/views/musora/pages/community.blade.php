@@ -284,8 +284,8 @@
                         <div class="md:flex md:items-center">
                             <div class="relative md:-mr-10 z-40 sm:h-80 md:min-w-[290px] -mb-[108px] sm:-mb-[135px] md:mb-0">
                                 <picture>
-                                    <source media="(min-width: 768px)" srcset="https://musora-center.s3.amazonaws.com/community/review-01.png">
-                                    <img class="md:absolute md:inset-0 transition-all opacity-0 h-64 sm:h-80" src="https://musora-center.s3.amazonaws.com/community/review-01-m.png" alt="review 1" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                                    <source media="(min-width: 768px)" srcset="https://dmmior4id2ysr.cloudfront.net/community/review-01.png">
+                                    <img class="md:absolute md:inset-0 transition-all opacity-0 h-64 sm:h-80" src="https://dmmior4id2ysr.cloudfront.net/community/review-01-m.png" alt="review 1" loading="lazy" onload="this.classList.remove('opacity-0')" />
                                 </picture>
                             </div>
                             <div class="bg-[#000C17] rounded-xl pb-10 pt-32 md:py-8 px-4 md:pl-20 md:pr-10 text-white text-left md:min-w-[600px]">
@@ -301,8 +301,8 @@
                         <div class="md:flex md:items-center">
                             <div class="relative md:-mr-10 z-40 sm:h-80 md:min-w-[290px] -mb-[108px] sm:-mb-[135px] md:mb-0">
                                 <picture>
-                                    <source media="(min-width: 768px)" srcset="https://musora-center.s3.amazonaws.com/community/review-02.png">
-                                    <img class="md:absolute md:inset-0 transition-all opacity-0 h-64 sm:h-80" src="https://musora-center.s3.amazonaws.com/community/review-02-m.png" alt="review 2" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                                    <source media="(min-width: 768px)" srcset="https://dmmior4id2ysr.cloudfront.net/community/review-02.png">
+                                    <img class="md:absolute md:inset-0 transition-all opacity-0 h-64 sm:h-80" src="https://dmmior4id2ysr.cloudfront.net/community/review-02-m.png" alt="review 2" loading="lazy" onload="this.classList.remove('opacity-0')" />
                                 </picture>
                             </div>
                             <div class="bg-[#000C17] rounded-xl pb-10 pt-32 md:py-8 px-4 md:pl-20 md:pr-10 text-white text-left md:min-w-[600px]">
@@ -317,8 +317,8 @@
                         <div class="md:flex md:items-center">
                             <div class="relative md:-mr-10 z-40 sm:h-80 md:min-w-[290px] -mb-[108px] sm:-mb-[135px] md:mb-0">
                                 <picture>
-                                    <source media="(min-width: 768px)" srcset="https://musora-center.s3.amazonaws.com/community/review-04.png">
-                                    <img class="md:absolute md:inset-0 transition-all opacity-0 h-64 sm:h-80" src="https://musora-center.s3.amazonaws.com/community/review-04-m.png" alt="review 3" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                                    <source media="(min-width: 768px)" srcset="https://dmmior4id2ysr.cloudfront.net/community/review-04.png">
+                                    <img class="md:absolute md:inset-0 transition-all opacity-0 h-64 sm:h-80" src="https://dmmior4id2ysr.cloudfront.net/community/review-04-m.png" alt="review 3" loading="lazy" onload="this.classList.remove('opacity-0')" />
                                 </picture>
                             </div>
                             <div class="bg-[#000C17] rounded-xl pb-10 pt-32 md:py-8 px-4 md:pl-20 md:pr-10 text-white text-left md:min-w-[600px]">
@@ -335,8 +335,8 @@
                         <div class="md:flex md:items-center">
                             <div class="relative md:-mr-10 z-40 sm:h-80 md:min-w-[290px] -mb-[108px] sm:-mb-[135px] md:mb-0">
                                 <picture>
-                                    <source media="(min-width: 768px)" srcset="https://musora-center.s3.amazonaws.com/community/review-03.png">
-                                        <img class="md:absolute md:inset-0 transition-all opacity-0 h-64 sm:h-80" src="https://musora-center.s3.amazonaws.com/community/review-03-m.png" alt="review 4" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                                    <source media="(min-width: 768px)" srcset="https://dmmior4id2ysr.cloudfront.net/community/review-03.png">
+                                        <img class="md:absolute md:inset-0 transition-all opacity-0 h-64 sm:h-80" src="https://dmmior4id2ysr.cloudfront.net/community/review-03-m.png" alt="review 4" loading="lazy" onload="this.classList.remove('opacity-0')" />
                                 </picture>
                             </div>
                             <div class="bg-[#000C17] rounded-xl pb-10 pt-32 md:py-8 px-4 md:pl-20 md:pr-10 text-white text-left md:min-w-[600px]">

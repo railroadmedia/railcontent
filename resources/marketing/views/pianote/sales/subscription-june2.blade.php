@@ -203,7 +203,7 @@
                 'pointOne' => '1000+ popular songs',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Learn anywhere, anytime',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
         'students' => number_format(Prices::$students),
         'shortHeader' => true,
         'noThumbShadow' => true,
@@ -592,8 +592,8 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
-        'reviewText' => 'Rated 5 stars by Pianote students of all skill levels!',
+        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
+        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
         'youtube' => '1.2M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',

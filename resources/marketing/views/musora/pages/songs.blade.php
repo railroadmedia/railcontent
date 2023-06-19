@@ -320,6 +320,8 @@
                             },
                             760: {
                                 perPage: 3.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                             590: {
                                 perPage: 2.5,
@@ -369,6 +371,8 @@
                             },
                             760: {
                                 perPage: 3.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                             590: {
                                 perPage: 2.5,
@@ -417,6 +421,8 @@
                             },
                             760: {
                                 perPage: 3.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                             590: {
                                 perPage: 2.5,
@@ -465,6 +471,8 @@
                             },
                             760: {
                                 perPage: 3.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                             590: {
                                 perPage: 2.5,
@@ -513,6 +521,8 @@
                             },
                             760: {
                                 perPage: 3.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                             590: {
                                 perPage: 2.5,
@@ -561,6 +571,8 @@
                             },
                             760: {
                                 perPage: 3.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                             590: {
                                 perPage: 2.5,
@@ -609,6 +621,8 @@
                             },
                             760: {
                                 perPage: 3.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                             590: {
                                 perPage: 2.5,
@@ -753,6 +767,8 @@
                             },
                             760: {
                                 perPage: 3.5,
+                                drag   : 'free',
+                                snap   : false,
                             },
                             590: {
                                 perPage: 2.5,
