@@ -13,47 +13,12 @@
             @if(empty($month)) {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} @else {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }} @endif
             (after your free trial). Cancel anytime.</h5>
 
-{{--        @if(empty($month) && empty($noSelector))--}}
-{{--            <div class="flex items-end justify-center mb-5">--}}
-{{--                <div class="px-1 sm:px-2">--}}
-{{--                    <p class="inline-block relative -bottom-1 mb-1 px-3 py-0.5 z-10 leading-tight text-black text-xs rounded-full bg-[#00c9ac]">MOST POPULAR</p>--}}
-{{--                    <div id="plusButton"--}}
-{{--                        class="active option-buttons text-white hover:opacity-90 cursor-pointer border-2 flex items-center rounded-xl py-3 sm:py-4 px-3 sm:px-5 bg-[#273040] border-[#0c1524]"--}}
-{{--                        x-bind:class="{ 'active': plusMembershipSelected }"--}}
-{{--                        x-on:click="plusMembershipSelected = true"--}}
-{{--                    >--}}
-{{--                        <div class="text-left">--}}
-{{--                            <img class="h-5 sm:h-6" src="{{ $plusLogo }}" alt="{{$theme}} plus logo">--}}
-{{--                            <p class="opacity-60 text-xs no-select mt-0.5"><em>Lessons + Songs</em></p>--}}
-{{--                        </div>--}}
-{{--                        <div class="radio-check ml-3 sm:ml-10 w-7 h-7 flex content-center justify-center border-2 rounded-full border-gray-500 text-gray-500">--}}
-{{--                            <i class="fas fa-check text-base text-white hidden"></i>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="px-1 sm:px-2">--}}
-{{--                    <div id="nonPlusButton" class="option-buttons text-white hover:opacity-90 cursor-pointer border-2 flex items-center rounded-xl py-3 sm:py-4 px-3 sm:px-5 bg-[#273040] border-[#0c1524]"--}}
-{{--                        x-bind:class="{ 'active': !plusMembershipSelected }"--}}
-{{--                        x-on:click="plusMembershipSelected = false"--}}
-{{--                    >--}}
-{{--                        <div class="text-left">--}}
-{{--                            <img class="h-5 sm:h-6" src="{{ $logo }}" alt="{{$theme}} logo">--}}
-{{--                            <p class="opacity-60 text-xs no-select mt-0.5"><em>Lessons only.</em></p>--}}
-{{--                        </div>--}}
-{{--                        <div class="radio-check ml-3 sm:ml-14 w-7 h-7 flex content-center justify-center border-2 rounded-full border-gray-500 text-gray-500">--}}
-{{--                            <i class="fas fa-check text-base text-white hidden"></i>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-
-{{--            </div>--}}
-{{--        @endif--}}
         <div id="plusOptions"
             class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto"
             x-bind:class="{ 'hidden': !plusMembershipSelected }"
         >
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                <a href="{{$plusMonthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group @if(!empty($whiteBg)) border-2 border-musora-black @endif">
+                <a href="{{$plusMonthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif">
                     <div class="bg-white px-3 py-5 md:py-7">
                         <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ Prices::$plusSubscriptionMonthly }}/month</strong></h4>
@@ -75,7 +40,7 @@
             </div>
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-black text-xs rounded-full bg-[#ffac00]" >MOST POPULAR</p>
-                <a href="{{$plusAnnualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group @if(!empty($whiteBg)) border-2 border-{{ $theme }} @endif">
+                <a href="{{$plusAnnualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-{{ $theme }}">
                     <div class="bg-white px-3 py-6 md:py-9">
                         <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12) }}/month</strong></h4>
@@ -103,7 +68,7 @@
             x-bind:class="{ 'hidden': plusMembershipSelected }"
         >
             <div class="w-full md:w-1/2 px-2 md:px-3 mb-4 md:mb-0 relative">
-                <a href="{{$monthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto group @if(!empty($whiteBg)) border-2 border-musora-black @endif">
+                <a href="{{$monthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif">
                     <div class="bg-white px-3 py-5 md:py-7">
                         <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-none"><strong>${{ 25 }}/month</strong></h4>

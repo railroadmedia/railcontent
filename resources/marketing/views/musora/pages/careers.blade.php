@@ -10,7 +10,7 @@
     <meta property="og:description" content="We are looking for exceptional people who believe in the power of music and can contribute on a daily basis to the growth of our brands">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image.jpg">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
 
     <style>
          .join.gradient-outline.fill-white {
