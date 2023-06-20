@@ -22319,6 +22319,12 @@ a:visited{
 .tw-h-52{
   height: 13rem !important;
 }
+.tw-h-7{
+  height: 1.75rem !important;
+}
+.tw-h-9{
+  height: 2.25rem !important;
+}
 .tw-max-h-0{
   max-height: 0px !important;
 }
@@ -22664,6 +22670,12 @@ a:visited{
 }
 .tw-w-9\/12{
   width: 75% !important;
+}
+.tw-w-7{
+  width: 1.75rem !important;
+}
+.tw-w-9{
+  width: 2.25rem !important;
 }
 .tw-min-w-0{
   min-width: 0px !important;
@@ -23218,6 +23230,9 @@ a:visited{
 .tw-rounded-none{
   border-radius: 0px !important;
 }
+.tw-rounded-full{
+  border-radius: 9999px !important;
+}
 .tw-rounded-t{
   border-top-left-radius: 0.25rem !important;
   border-top-right-radius: 0.25rem !important;
@@ -23275,6 +23290,9 @@ a:visited{
 }
 .tw-border-t-\[1px\]{
   border-top-width: 1px !important;
+}
+.tw-border-b{
+  border-bottom-width: 1px !important;
 }
 .tw-border-solid{
   border-style: solid !important;
@@ -23431,6 +23449,10 @@ a:visited{
 .tw-border-gray-800{
   --tw-border-opacity: 1 !important;
   border-color: rgb(31 41 55 / var(--tw-border-opacity)) !important;
+}
+.tw-border-\[\#E4E4E7\]{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(228 228 231 / var(--tw-border-opacity)) !important;
 }
 .tw-border-b-\[\#E5E7EB\]{
   --tw-border-opacity: 1 !important;
@@ -23735,6 +23757,10 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity)) !important;
 }
+.tw-bg-\[\#E7EFF6\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(231 239 246 / var(--tw-bg-opacity)) !important;
+}
 .tw-bg-opacity-75{
   --tw-bg-opacity: 0.75 !important;
 }
@@ -23891,6 +23917,12 @@ a:visited{
 }
 .tw-p-\[3px\]{
   padding: 3px !important;
+}
+.tw-p-0\.5{
+  padding: 0.125rem !important;
+}
+.tw-p-0{
+  padding: 0px !important;
 }
 .tw-px-4{
   padding-left: 1rem !important;
@@ -24481,6 +24513,14 @@ a:visited{
 .tw-text-\[22px\]{
   font-size: 22px !important;
 }
+.tw-text-sm{
+  font-size: 0.875rem !important;
+  line-height: 1.25rem !important;
+}
+.tw-text-base{
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
 .tw-font-bold{
   font-weight: 700 !important;
 }
@@ -24816,6 +24856,14 @@ a:visited{
 .tw-text-\[\#232e30\]{
   --tw-text-opacity: 1 !important;
   color: rgb(35 46 48 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#00101D\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 16 29 / var(--tw-text-opacity)) !important;
+}
+.tw-text-\[\#3F3F46\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(63 63 70 / var(--tw-text-opacity)) !important;
 }
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
@@ -25452,6 +25500,10 @@ a:visited{
 .tw-dark .dark\:tw-border-white\/\[0\.15\]{
   border-color: rgb(255 255 255 / 0.15) !important;
 }
+.tw-dark .dark\:tw-border-\[\#223457\]{
+  --tw-border-opacity: 1 !important;
+  border-color: rgb(34 52 87 / var(--tw-border-opacity)) !important;
+}
 .tw-dark .dark\:tw-border-b-\[\#223F57\]{
   --tw-border-opacity: 1 !important;
   border-bottom-color: rgb(34 63 87 / var(--tw-border-opacity)) !important;
@@ -25564,6 +25616,14 @@ a:visited{
 .tw-dark .dark\:tw-bg-\[\#000c17\]\/80{
   background-color: rgb(0 12 23 / 0.8) !important;
 }
+.tw-dark .dark\:tw-bg-\[\#081825\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(8 24 37 / var(--tw-bg-opacity)) !important;
+}
+.tw-dark .dark\:tw-bg-\[\#002039\]{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 32 57 / var(--tw-bg-opacity)) !important;
+}
 .tw-dark .dark\:tw-text-white{
   --tw-text-opacity: 1 !important;
   color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
@@ -25607,6 +25667,14 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#9ec0dc\]{
   --tw-text-opacity: 1 !important;
   color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-\[\#9EC0DC\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(158 192 220 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-white{
+  --tw-text-opacity: 1 !important;
+  color: rgb(255 255 255 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-placeholder-\[\#9EC0DC\]::-moz-placeholder{
   --tw-placeholder-opacity: 1 !important;
@@ -25725,6 +25793,10 @@ a:visited{
 }
 .tw-dark .dark\:hover\:tw-bg-\[\#002039\]\/50:hover{
   background-color: rgb(0 32 57 / 0.5) !important;
+}
+.tw-dark .dark\:hover\:tw-bg-\[\#002039\]:hover{
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 32 57 / var(--tw-bg-opacity)) !important;
 }
 .tw-dark .dark\:hover\:tw-text-\[\#000C17\]:hover{
   --tw-text-opacity: 1 !important;
