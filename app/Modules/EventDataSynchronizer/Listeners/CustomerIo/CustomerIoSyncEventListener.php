@@ -1277,7 +1277,7 @@ class CustomerIoSyncEventListener
                 $mobileOrderEvent->getSubscription()->getCreatedAt()->timestamp
             ))->delay(
                 Carbon::now()
-                    ->addSeconds(30)
+                    ->addSeconds(3)
             )
         );
     }
