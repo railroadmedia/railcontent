@@ -16,7 +16,8 @@
             {!! $headLine !!}
         @endif
 
-        @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+        @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formId" => $formId,
                 "formName" => $formName,
                 "redirectURL" => isset($redirectURL) ? $redirectURL : '',

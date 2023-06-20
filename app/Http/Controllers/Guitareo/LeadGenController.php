@@ -36,14 +36,14 @@ class LeadGenController extends BaseController
         return view('guitareo.lead-gen.pages.recitals');
     }
     public function fretboardcheatsheet() {
-        return view('guitareo.lead-gen.pages.fretboard-cheatsheet');
+        return view('guitareo.lead-gen.pages.fretboard-cheatsheet', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function backToBasics(Request $request, $domain, $page = null)
     {
         switch ($page) {
             case null:
-                return view('guitareo.lead-gen.back-to-basics.back-to-basics');
+                return view('guitareo.lead-gen.back-to-basics.back-to-basics', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'zoom':
                 return view('guitareo.lead-gen.back-to-basics.zoom');
         }
@@ -55,7 +55,7 @@ class LeadGenController extends BaseController
     {
         switch ($page) {
             case null:
-                return view('guitareo.lead-gen.clean-up-your-chord-changes.clean-up-your-chord-changes');
+                return view('guitareo.lead-gen.clean-up-your-chord-changes.clean-up-your-chord-changes', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'zoom':
                 return view('guitareo.lead-gen.clean-up-your-chord-changes.zoom');
         }
@@ -67,7 +67,7 @@ class LeadGenController extends BaseController
     {
         switch ($page) {
             case null:
-                return view('guitareo.lead-gen.song-in-an-hour.signup');
+                return view('guitareo.lead-gen.song-in-an-hour.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
                 return view('guitareo.lead-gen.song-in-an-hour.thank-you');
             case 'success':
@@ -94,19 +94,19 @@ class LeadGenController extends BaseController
 
     public function fagl()
     {
-        return view('guitareo.lead-gen.free-acoustic-guitar-lessons.signup');
+        return view('guitareo.lead-gen.free-acoustic-guitar-lessons.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function fegl()
     {
-        return view('guitareo.lead-gen.free-electric-guitar-lessons.signup');
+        return view('guitareo.lead-gen.free-electric-guitar-lessons.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function hitSongs(Request $request, $domain, $page = null, $lesson = null)
     {
         switch ($page) {
             case null:
-                return view('guitareo.lead-gen.chords-for-hit-songs.signup');
+                return view('guitareo.lead-gen.chords-for-hit-songs.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
                 return view('guitareo.lead-gen.chords-for-hit-songs.thank-you');
         }
@@ -116,24 +116,24 @@ class LeadGenController extends BaseController
 
     public function tricks()
     {
-        return view('guitareo.lead-gen.guitar-tricks.signup');
+        return view('guitareo.lead-gen.guitar-tricks.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function soloInAnHour()
     {
-        return view('guitareo.lead-gen.solo-in-an-hour.signup');
+        return view('guitareo.lead-gen.solo-in-an-hour.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function jumpstart()
     {
-        return view('guitareo.lead-gen.acoustic-guitar-jumpstart.signup');
+        return view('guitareo.lead-gen.acoustic-guitar-jumpstart.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function starterKit(Request $request, $domain, $page = null, $lesson = null, $num = null)
     {
         switch ($page) {
             case null:
-                return view('guitareo.lead-gen.starter-kit.signup');
+                return view('guitareo.lead-gen.starter-kit.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'lessons' && is_null($lesson):
                 return view('guitareo.lead-gen.starter-kit.lesson-grid');
             case 'lessons' && $lesson === 'using-a-tuner':
@@ -177,7 +177,7 @@ class LeadGenController extends BaseController
     {
         switch ($page){
             case null:
-                return view('guitareo.lead-gen.toolbox.signup');
+                return view('guitareo.lead-gen.toolbox.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'lessons':
                 return view('guitareo.lead-gen.toolbox.lesson-grid');
         }

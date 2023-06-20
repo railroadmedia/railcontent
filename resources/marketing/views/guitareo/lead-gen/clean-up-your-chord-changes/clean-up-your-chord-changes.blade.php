@@ -188,7 +188,8 @@
 {{--                        </p>--}}
                     </div>
                     <div class="md:max-w-md lg:max-w-auto lg:w-2/3">
-                        @include('guitareo.lead-gen.partials._sign-up-form-tw', [
+                        @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+                    "recaptchaKey" => $recaptchaKey,
                             "formId" => "Guitareo - Engagement - Trigger - Website Signup - Web Form",
                             "formName" => 'Blog Signup',
                             "buttonText" => "Notify Me!",
@@ -356,7 +357,8 @@
                  <strong class="text-yellow uppercase md:mt-2 mb-6">SIGN UP FOR NOTICE ON THE NEXT EVENT</strong>
             </h6>
 
-            @include('guitareo.lead-gen.partials._sign-up-form-tw', [
+            @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formId" => "Guitareo - Engagement - Trigger - Website Signup - Web Form",
                             "formName" => 'Blog Signup',
                             "buttonText" => "Notify Me!",

@@ -40,7 +40,8 @@
                 </div>
                 <div class="px-2 sm:px-8 sm:w-7/12">
                     <h2>Enter your email below to get my <br> free collection of guitar courses!</h2>
-                    @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+                    @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+                    "recaptchaKey" => $recaptchaKey,
                     "stacked" => true,
                         "formId" => "Guitareo - Engagement - Trigger - Toolbox - Web Form",
                         "formName" => 'The Guitarists Toolbox',
@@ -141,7 +142,8 @@
             <p>
                 Enter your email below to get <br class="lg:hidden"> a free beginner guitar course!</p>
 
-            @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+            @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formId" => "Guitareo - Engagement - Trigger - Toolbox - Web Form",
                 "formName" => 'The Guitarists Toolbox',
                 "submitButtonColor" => "#408beb",
@@ -152,7 +154,8 @@
     <div class="reveal large blue" id="getAccess" data-reveal data-reset-on-close="true" style="background:#1a1c1d;">
         <p>Enter your email below to get a free beginner guitar <br
                     class="sm:hidden"> course and start learning music theory.</p>
-        @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+        @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+                    "recaptchaKey" => $recaptchaKey,
            "stacked" => true,
             "formId" => "Guitareo - Engagement - Trigger - Toolbox - Web Form",
             "formName" => 'The Guitarists Toolbox',

@@ -5,13 +5,15 @@
         {!! $text !!}
 
         @if(!empty($submitButtonColor))
-            @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+            @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formId" => $formId,
                 "formName" => $formName,
                 "submitButtonColor" => $submitButtonColor,
             ])
         @else
-            @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+            @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formId" => $formId,
                 "formName" => $formName,
             ])
