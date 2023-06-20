@@ -51,7 +51,7 @@
     const handlePageChange = (pageNumber) => {
         //load playlists
         playlistsStore.loadingPlaylists = true;
-        playlistsStore.getPlaylists({ brand: props.brand, page: pageNumber, limit: 10 }, token);
+        playlistsStore.getPlaylists({ brand: props.brand, page: pageNumber, term: state.searchTerm, sort: state.sortValue, limit: 10 }, token);
         //update current page number
         playlistsStore.resultsPage = pageNumber;
         //update url
