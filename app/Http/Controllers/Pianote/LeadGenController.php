@@ -236,7 +236,7 @@ class LeadGenController extends BaseController
 
     public function sevenDaysSightReading()
     {
-        return view('pianote.lead-gen.7-days-to-sight-reading.signup', ['theme' => 'pianote']);
+        return view('pianote.lead-gen.7-days-to-sight-reading.signup', ['recaptchaKey'=>config('recaptcha.key'), 'theme' => 'pianote']);
     }
 
     public function personalityQuiz(Request $request, $domain, $page = null)
