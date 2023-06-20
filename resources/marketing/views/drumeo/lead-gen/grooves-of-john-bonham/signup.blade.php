@@ -33,7 +33,8 @@
 
             <h5 class="leading-normal my-3 md:my-5">Learn 10 of Led Zeppelin’s most famous <br class="inline md:hidden"> grooves in this FREE Drumeo series.</h5>
             <div class="mx-auto text-center max-w-3xl">
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formName" => 'Grooves Of John Bonham',
                     "formId" => "Drumeo - Engagement - Trigger - Grooves Of John Bonham - Web Form",
                     "buttonText" => "Hook Me Up ",
@@ -117,7 +118,8 @@
 
             <h5 class="leading-normal my-3 md:my-5">Learn 10 of Led Zeppelin’s most famous <br class="inline md:hidden"> grooves in this FREE Drumeo series.</h5>
             <div class="mx-auto text-center max-w-3xl">
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formName" => 'Grooves Of John Bonham',
                     "formId" => "Drumeo - Engagement - Trigger - Grooves Of John Bonham - Web Form",
                     "buttonText" => "Hook Me Up ",
@@ -149,4 +151,5 @@
     <script src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 @stop
