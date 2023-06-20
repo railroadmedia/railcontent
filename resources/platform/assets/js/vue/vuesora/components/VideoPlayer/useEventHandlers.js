@@ -120,6 +120,7 @@ export default function ({
         },
 
         timeupdate: (event) => {
+            console.log('timeupdate')
             totalDuration.value = mediaElement.value.duration;
             currentTime.value = mediaElement.value.currentTime;
             emit('timeupdate', event);
@@ -163,6 +164,7 @@ export default function ({
         },
 
         ended: () => {
+            console.log('ended called in event handlers')
             isPipEnabled.value = false;
             endCallback();
         },
