@@ -105,8 +105,7 @@
                     </h6>
                 </div>
                 <div class="md:pr-20">
-                    @include("drumeo.lead-gen.partials.sign-up-form-rc", [
-                    "recaptchaKey" => $recaptchaKey,
+                    @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                         "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                         "formName" => 'Getting Started On The Drums',
                         "buttonText" => "Get started",
@@ -421,8 +420,7 @@
                     <i class="text-drumeo fas fa-check sm:mr-2 text-xl"></i> 100% free -- lifetime access!
                 </p>
                 <div class="max-w-md md:max-w-auto lg:w-96 mx-auto md:mx-0">
-                    @include("drumeo.lead-gen.partials.sign-up-form-rc", [
-                    "recaptchaKey" => $recaptchaKey,
+                    @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                         "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                     "formName" => 'Getting Started On The Drums',
                         "buttonText" => "Get started ",
@@ -488,8 +486,7 @@
     <div class="reveal max-w-xl text-center" id="signUpModal" data-reveal data-reset-on-close="false">
         <div class="p-4">
             <h2 class="mb-2"><strong>Enter your email address<br class="inline sm:hidden"> below to get started:</strong></h2>
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
-                    "recaptchaKey" => $recaptchaKey,
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "stacked" => true,
                 "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                 "formName" => 'Getting Started On The Drums',
@@ -514,5 +511,4 @@
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script src="{{ asset('/marketing/js/pre-form-submit-facebook-lead.js') }}"></script>
     <script src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
 @stop

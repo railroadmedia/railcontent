@@ -84,8 +84,7 @@
                 <p>
                     Enter your email to receive <br class="sm:hidden">this FREE Drumeo course.
                 </p>
-                @include("drumeo.lead-gen.partials.sign-up-form-rc", [
-                    "recaptchaKey" => $recaptchaKey,
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "formId" => "Drumeo - Engagement - Trigger - Must Know - Web Form",
                     "formName" => 'Must-Know Drum Grooves',
                     "buttonText" => 'Send The Videos&nbsp;'
@@ -128,8 +127,7 @@
             </div>
             <p>Enter your email to receive <br class="sm:hidden">this FREE Drumeo course.</p>
             <br><br class="show-for-medium">
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
-                    "recaptchaKey" => $recaptchaKey,
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "formId" => "Drumeo - Engagement - Trigger - Must Know - Web Form",
                 "formName" => 'Must-Know Drum Grooves',
                 "buttonText" => 'Send The Videos&nbsp;'

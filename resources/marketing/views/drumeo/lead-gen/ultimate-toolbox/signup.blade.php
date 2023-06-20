@@ -30,8 +30,7 @@
                 <img class="series-logo mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/tudt/tudt-logo.png" alt="The Ultimate Drumming Toolbox">
                 <h1 class="hidden">The Ultimate Drumming Toolbox</h1>
                 <p>Enter your email below to open your toolbox...</p>
-                @include("drumeo.lead-gen.partials.sign-up-form-rc", [
-                    "recaptchaKey" => $recaptchaKey,
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                            "submitArrows" => true,
                            "formId" => "Drumeo - Engagement - Trigger - Ultimate Toolbox - Web Form",
                            "formName" => 'The Ultimate Drumming Toolbox',
@@ -103,8 +102,7 @@
     <div class="reveal medium" id="signUpModal" data-reveal>
         <section class="header pop-up">
             <h1 class="text-center">Enter your email below to open your toolbox...</h1>
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
-                    "recaptchaKey" => $recaptchaKey,
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "stacked" => true,
                 "formId" => "Drumeo - Engagement - Trigger - Ultimate Toolbox - Web Form",
                 "formName" => 'The Ultimate Drumming Toolbox',

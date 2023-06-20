@@ -39,8 +39,7 @@
                 <h1 class="hidden">Linear Drumming</h1>
                 <p>Enter your email below for 5 free <br class="hidden lg:inline">
                     video lessons on linear drumming.</p>
-                @include("drumeo.lead-gen.partials.sign-up-form-rc", [
-                    "recaptchaKey" => $recaptchaKey,
+                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                     "stacked" => true,
                     "formId" => "Drumeo - Engagement - Trigger - CC Linear - Web Form",
                     "formName" => 'Linear Drumming',
@@ -105,8 +104,7 @@
             <h1 class="text-center">Enter your email below for 5 free <br class="show-for-medium">
                 video lessons on linear drumming.</h1>
 
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
-                    "recaptchaKey" => $recaptchaKey,
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                 "stacked" => true,
                 "formId" => "Drumeo - Engagement - Trigger - CC Linear - Web Form",
                 "formName" => 'Linear Drumming',

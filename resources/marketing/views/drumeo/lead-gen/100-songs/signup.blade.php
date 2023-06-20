@@ -58,8 +58,7 @@
                         <s class="opacity-50">40</s> <strong class="text-coaches">100</strong> of drumming’s biggest songs FREE.
                     </h6>
                     <div class="mx-auto sm:mx-0 text-center" style="max-width:470px">
-                        @include("drumeo.lead-gen.partials.sign-up-form-rc", [
-                    "recaptchaKey" => $recaptchaKey,
+                        @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                                 "formName" => '40 Songs',
                                 "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
                                 "buttonText" => "Get It Now ",
@@ -160,8 +159,7 @@
                     <em>Enter your email to grab note-for-note sheet music & handy playalong tools.</em>
                 </h5>
                 <div class="mx-auto" style="max-width:700px">
-                    @include("drumeo.lead-gen.partials.sign-up-form-rc", [
-                    "recaptchaKey" => $recaptchaKey,
+                    @include("drumeo.lead-gen.partials.sign-up-form-tw", [
                             "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
                                 "buttonText" => "Get It Now ",
                             "formName" => '40 Songs',
@@ -180,8 +178,7 @@
                     100 of drumming’s biggest songs FREE.
                 </strong>
             </h4>
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
-                    "recaptchaKey" => $recaptchaKey,
+            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
             "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
                                 "buttonText" => "Get It Now ",
             "formName" => '40 Songs',
@@ -234,5 +231,4 @@
     <script src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
 @stop
