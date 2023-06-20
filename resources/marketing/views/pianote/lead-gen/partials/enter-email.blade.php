@@ -8,7 +8,8 @@
             {!! $content !!}
         @endif
         <div class="mx-auto" style="max-width:700px">
-            @include('pianote._partials._sign-up-form', [
+            @include('pianote._partials._sign-up-form-rc', [
+                    "recaptchaKey" => $recaptchaKey,
                 "formId" => $formId,
                 "formName" => $formName,
                 "buttonBorder" => $buttonBorder,

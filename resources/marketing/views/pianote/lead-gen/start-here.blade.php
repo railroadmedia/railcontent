@@ -463,7 +463,8 @@
                     Go from absolute beginner to playing<br class="hidden sm:inline-block">
                     your first song in four easy lessons!
                 </div>
-                @include('pianote._partials._sign-up-form', [
+                @include('pianote._partials._sign-up-form-rc', [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => 'Pianote - Engagement - Trigger - GSOTP - Web Form',
                     "formName" => 'Getting Started On The Piano',
                 ])
@@ -694,7 +695,8 @@
                 Subscribe to The Note for free lessons, song tutorials, interviews, interesting <br class="hidden sm:inline">
                 articles, and more delivered to your inbox every week. Unsubscribe anytime.
             </p>
-            @include('pianote._partials._sign-up-form', [
+            @include('pianote._partials._sign-up-form-rc', [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => 'Pianote - Engagement - Trigger - Website Signup - Web Form',
                     "formName" => 'Pianote General',
                 'buttonText'=> 'Subscribe to the note',

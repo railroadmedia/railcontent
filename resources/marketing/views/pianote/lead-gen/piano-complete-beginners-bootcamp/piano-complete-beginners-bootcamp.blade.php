@@ -314,12 +314,6 @@
                                 LIVE support from a professional teacher</em>
                         </p>
                     </div>
-                    {{--@include('pianote._partials._sign-up-form', [--}}
-                            {{--"formId" => 'Pianote - Engagement - Trigger - Complete Beginners Bootcamp - Web Form',--}}
-                            {{--"formName" => 'Piano For Complete Beginners Bootcamp',--}}
-                            {{--"buttonText" => "Save my spot!",--}}
-                            {{--"stacked" => true--}}
-                        {{--])--}}
                 </div>
             </div>
         </div>
@@ -451,13 +445,6 @@
                 Transform your piano playing in 90 minutes <br class="inline sm:hidden">
                 with LIVE support from a professional teacher
             </p>
-
-            {{--@include('pianote._partials._sign-up-form', [--}}
-                {{--"formId" => 'Pianote - Engagement - Trigger - Complete Beginners Bootcamp - Web Form',--}}
-                {{--"formName" => 'Piano For Complete Beginners Bootcamp',--}}
-                {{--"buttonText" => "Save my spot!",--}}
-                {{--"oneLineLg" => true,--}}
-            {{--])--}}
         </div>
     </section>
 
