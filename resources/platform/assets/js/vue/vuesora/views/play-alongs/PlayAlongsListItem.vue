@@ -69,39 +69,41 @@
         >
             {{ item }}
         </div>
+        
+        <!-- ADD TO FAVORITES -->
+        <div
+            v-if="showUserActions"
+            class="flex flex-column icon-col tw-items-center"
+        >
+            <button 
+                class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
+                :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]'"
+                :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
+                :data-content-id="item.id"
+                :data-content-type="item.type"
+                @click.stop.prevent="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.color_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+                </svg>
+            </button>
+        </div>
 
         <!-- VIEW LESSON VIDEO -->
         <div
             v-if="showUserActions"
-            class="flex flex-column icon-col align-v-center"
+            class="flex flex-column icon-col tw-items-center"
         >
             <a
                 :href="item.url"
-                class="body no-decoration"
+                class="body no-decoration tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
+                title="Watch Lesson Video"
                 @click.stop
             >
-                <i
-                    class="fas fa-video flex-center tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
-                    title="Watch Lesson Video"
-                ></i>
+                <svg width="35" height="35" class="tw-h-9 tw-w-9" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21.875 14.5833L28.5145 11.2636C29.4841 10.7788 30.625 11.4839 30.625 12.568V22.432C30.625 23.5161 29.4841 24.2212 28.5145 23.7364L21.875 20.4167M7.29167 26.25H18.9583C20.5692 26.25 21.875 24.9442 21.875 23.3333V11.6667C21.875 10.0558 20.5692 8.75 18.9583 8.75H7.29167C5.68084 8.75 4.375 10.0558 4.375 11.6667V23.3333C4.375 24.9442 5.68084 26.25 7.29167 26.25Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </a>
-        </div>
-
-        <!-- ADD TO FAVORITES -->
-        <div
-            v-if="showUserActions"
-            class="flex flex-column icon-col align-v-center"
-        >
-            <div
-                class="body"
-                @click.stop.prevent="addToList"
-            >
-                <i
-                    class="add-to-list fa-star flex-center tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-[#0B76DB]"
-                    :class="addedToListClasses"
-                    :title="is_added ? 'Remove from Favorites' : 'Add to Favorites'"
-                ></i>
-            </div>
         </div>
 
         <!-- MARK AS COMPLETE -->

@@ -105,6 +105,8 @@ class PlaylistDecorator extends ModeDecoratorBase
             $playlists[$index]['playback_url'] = url()->route('platform.play.playlist', [
                 'playlistId' => $playlist['id'],
             ]);
+
+            $playlists[$index]['description'] = ($playlist['description']) ? $playlist['description'] : ' ';
         }
 
         $userIds = array_unique($userIds);
