@@ -296,8 +296,10 @@ onBeforeMount(() => {
                         :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle"
                         :message="needAccessMessage" />
                     <!-- Soundslice Player -->
-                    <div v-if="lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine'"
-                        class="tw-w-full tw-aspect-video" :class="{ 'tw-max-w-[1280px]': !playlistsStore.playerExpanded }">
+                    <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && !needAccess"
+                        class="tw-w-full tw-aspect-video"
+                        :class="{ 'tw-max-w-[1280px]' : !playlistsStore.playerExpanded }"
+                    >
                         <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
                             :soundslice-slug="soundsliceSlug" :content-id="contentId" @onAudioEnd="handleGoToNext">
                         </SoundSlice>

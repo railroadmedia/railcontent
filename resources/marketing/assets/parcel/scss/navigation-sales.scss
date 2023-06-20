@@ -121,6 +121,15 @@ a {
         }
     }
 
+    &.musora-black {
+        background: $musoraBlack;
+
+        &:hover,
+        &:focus {
+            background: lighten($musoraBlack, 10%);
+        }
+    }
+
     &.sold-out {
         background: #777;
 
@@ -225,9 +234,10 @@ a {
     @media (max-width: 767px) {
         .features-dd,
         .instruments-dd {
-            display: none!important;
+            display: none !important;
         }
     }
+
     .button-wrap {
         display: inline-block;
         box-sizing: border-box;
@@ -510,7 +520,7 @@ a {
     transform: translate(-50%, 0);
     border-radius: 12px;
     width: 100%;
-    max-width:380px;
+    max-width: 380px;
 
     &.hide {
         bottom: -275px;
@@ -875,6 +885,6 @@ iframe[name='google_conversion_frame'] {
 }
 
 .FabButtonFramecss__FabButtonFrameUI-sc-y1b4md-0.iCEwMd.BeaconFabButtonFrame {
-    bottom:5px!important;
-    right:3px!important;
+    bottom: 5px !important;
+    right: 3px !important;
 }
