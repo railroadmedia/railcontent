@@ -202,12 +202,6 @@
                         <i class="fas fa-check" style="color:#eb4ef7"></i> No location restrictions.<br class="inline sm:hidden"> &nbsp; <i class="fas fa-check" style="color:#eb4ef7"></i> No sneaky shipping fees.
                             <br><br>
                             <strong>The winner will be announced<br class="inline sm:hidden"> on February 1st!</strong></p>
-                    @include("singeo._partials._sign-up-form", [
-                    "formId" => "Singeo - Engagement - Trigger - Eikon Giveaway - Web Form",
-                    "formName" => 'Eikon Giveaway',
-                        "buttonText" => "I WANT TO WIN!",
-                        "stacked" => true
-                        ])
                 </div>
             </div>
         </div>
@@ -336,12 +330,6 @@
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/footer_giveaway.jpg">
         <div class="container mx-auto max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-52 lazyload mb-4 sm:mb-6" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/logo_giveaway.png" alt="title image">
-            @include("singeo._partials._sign-up-form", [
-                "formId" => "Singeo - Engagement - Trigger - Eikon Giveaway - Web Form",
-                "formName" => 'Eikon Giveaway',
-                "buttonText" => "I WANT TO WIN!",
-                "oneLineLg" => true,
-                ])
         </div>
     </section>
     <section class="flex items-center text-center text-white" style="background:linear-gradient(180deg, #8300E9 0%, #3F0071 100%);">
