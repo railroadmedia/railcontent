@@ -30,9 +30,9 @@ class BenefitLayout extends Layout
     {
         return [
             // Define the layout's fields.
-            Text::make('Icon')->required(),
-            Text::make('Heading')->required(),
-            Text::make('Description', 'desc')->required(),
+            Text::make('Icon')->required()->rules('required'),
+            Text::make('Heading')->required()->rules('required'),
+            Text::make('Description', 'desc')->required()->rules('required'),
             Text::make('Id')->hide()->hideFromDetail(),
         ];
     }
