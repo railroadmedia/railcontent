@@ -2752,10 +2752,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-border-opacity: 1 !important;
   border-color: rgb(221 221 221 / var(--tw-border-opacity)) !important;
 }
-.border-\[\#0c1524\] {
-  --tw-border-opacity: 1 !important;
-  border-color: rgb(12 21 36 / var(--tw-border-opacity)) !important;
-}
 .border-\[\#01050F\] {
   --tw-border-opacity: 1 !important;
   border-color: rgb(1 5 15 / var(--tw-border-opacity)) !important;
@@ -2835,6 +2831,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-bg-opacity: 1 !important;
   background-color: rgb(246 248 252 / var(--tw-bg-opacity)) !important;
 }
+.bg-\[\#00101D\] {
+  --tw-bg-opacity: 1 !important;
+  background-color: rgb(0 16 29 / var(--tw-bg-opacity)) !important;
+}
 .bg-gray-100 {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(243 244 246 / var(--tw-bg-opacity)) !important;
@@ -2872,18 +2872,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-\[\#777\] {
   --tw-bg-opacity: 1 !important;
   background-color: rgb(119 119 119 / var(--tw-bg-opacity)) !important;
-}
-.bg-\[\#00c9ac\] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 201 172 / var(--tw-bg-opacity)) !important;
-}
-.bg-\[\#273040\] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(39 48 64 / var(--tw-bg-opacity)) !important;
-}
-.bg-\[\#ffac00\] {
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(255 172 0 / var(--tw-bg-opacity)) !important;
 }
 .bg-\[\#01050F\] {
   --tw-bg-opacity: 1 !important;
@@ -4946,14 +4934,6 @@ li, p {
     margin-bottom: 7rem !important;
   }
 
-  .sm\:ml-10 {
-    margin-left: 2.5rem !important;
-  }
-
-  .sm\:ml-14 {
-    margin-left: 3.5rem !important;
-  }
-
   .sm\:-mb-5 {
     margin-bottom: -1.25rem !important;
   }
@@ -5086,12 +5066,12 @@ li, p {
     height: auto !important;
   }
 
-  .sm\:h-6 {
-    height: 1.5rem !important;
-  }
-
   .sm\:h-48 {
     height: 12rem !important;
+  }
+
+  .sm\:h-6 {
+    height: 1.5rem !important;
   }
 
   .sm\:w-2\/3 {
@@ -5236,6 +5216,10 @@ li, p {
 
   .sm\:max-w-3xl {
     max-width: 48rem !important;
+  }
+
+  .sm\:max-w-none {
+    max-width: none !important;
   }
 
   .sm\:max-w-lg {
@@ -7861,16 +7845,16 @@ li, p {
     margin-right: 0px !important;
   }
 
+  .lg\:mb-6 {
+    margin-bottom: 1.5rem !important;
+  }
+
   .lg\:mt-14 {
     margin-top: 3.5rem !important;
   }
 
   .lg\:ml-8 {
     margin-left: 2rem !important;
-  }
-
-  .lg\:mb-6 {
-    margin-bottom: 1.5rem !important;
   }
 
   .lg\:-mt-3 {
@@ -8996,5 +8980,10 @@ li, p {
 
   .\32xl\:left-\[12\%\] {
     left: 12% !important;
+  }
+
+  .\32xl\:px-0 {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
   }
 }

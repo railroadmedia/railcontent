@@ -8,7 +8,7 @@
     <meta property="og:description" content="Learn the songs you love; now on drums, piano, guitar, or vocals.">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image.jpg">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
     <style>
         [placeholder]:focus::-webkit-input-placeholder {
             color: transparent;

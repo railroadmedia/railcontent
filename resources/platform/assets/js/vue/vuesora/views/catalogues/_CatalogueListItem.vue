@@ -189,15 +189,16 @@
           :class="isBranchPath ? branchPathText : 'text-grey-2 hover-text-black'" title="Reset Progress"
           @click.stop.prevent="progressReset"></i>
       </div>
-      <div v-else class="body">
-        <i v-if="item.type !== 'learning-path-level'" class="add-to-list fas fa-plus flex-center dark:hover:tw-text-white hover:tw-text-[#00101D] tw-transform-g"
-          :class="[is_added ? 'is-added tw-rotate-45' + themeTextClass : 'tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC]',
-              isBranchPath ? branchPathText : 'text-grey-2 hover-text-black'
-          ]" 
-          :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" 
-          @click.stop.prevent="addToList">
-        </i>
-      </div>
+      <button 
+          class="add-to-list tw-inline-flex tw-rounded-full tw-justify-center tw-px-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white"
+          :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'"
+          :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
+          @click.stop.prevent="addToList"
+      >
+          <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
+          </svg>
+      </button>
     </div>
 
     <div v-if="is_search && item.type === 'learning-path'" class="flex tw-flex-col icon-col tw-justify-center"></div>
