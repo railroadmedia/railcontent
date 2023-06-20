@@ -155,7 +155,6 @@ export default {
             sortOption: '-like_count',
             comment: '',
             loading: false,
-            commentsCollapsed: true,
             flattenedProfilePics: [],
             commentsCollapsed: false,
         };
@@ -244,9 +243,7 @@ export default {
             // Get the current scroll position
             const currentScroll = elem.scrollTop;
 
-            const relatedLessons = document.getElementById('lessonInfo');
-
-            if ((elemScrollHeight - currentScroll - elemHeight < (relatedLessons.offsetHeight + 200)) && (this.comments.length !== this.totalComments)) {
+            if ((elemScrollHeight - currentScroll - elemHeight < 1000) && (this.comments.length !== this.totalComments)) {
                 if (!this.requestingData) {
                     this.currentPage += 1;
 
