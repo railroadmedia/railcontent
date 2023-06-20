@@ -23,7 +23,7 @@ class CarouselService
             ->where('name', brand())
             ->first()->id;
 
-        $carousel = Carousel::query()
+        $query = Carousel::query()
             ->where('brand_id', $brandId)
             ->where('visible', true)
             ->where(
@@ -39,8 +39,16 @@ class CarouselService
                         ->whereNull('end_date')
                         ->orWhere('end_date', '>', Carbon::now('PST')->toDateTimeString());
                 }
-            )
-            ->orderBy('display_order')
+            );
+
+        if(!is_null(user()) && !user()->isAdmin()) {
+            $query = $query->where(function ($query) {
+                return $query->whereNull('draft')
+                    ->orWhere('draft', '=', 0);
+            });
+        }
+
+            $carousel = $query->orderBy('display_order')
             ->get();
 
         $carousel->each(function (Carousel $slide) {
