@@ -163,7 +163,8 @@ class PlaylistItemDecorator extends TypeDecoratorBase
             } elseif (!empty($needMusoraBasic)) {
                 $message = 'This lesson is part of our <b>Musora Membership</b>.';
                 self::$noAccessMessages[$content['id']] = $message;
-            } elseif ($content['type'] == 'song') {
+            } elseif ($content['type'] == 'song' && !user()->hasSongsAccess($content['brand'])) {
+                $contentsOfType[$contentIndex]['need_access'] = true;
                 $message = 'This Song content is part of our <b>Musora+ Membership</b>.';
                 self::$noAccessMessages[$content['id']] = $message;
              }
