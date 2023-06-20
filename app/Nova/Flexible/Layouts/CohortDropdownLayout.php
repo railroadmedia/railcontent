@@ -30,8 +30,8 @@ class CohortDropdownLayout extends Layout
     {
         return [
             // Define the layout's fields.
-            Text::make('title')->required(),
-            Text::make('description')->required(),
+            Text::make('title')->required()->rules('required'),
+            Text::make('description')->required()->rules('required'),
             Text::make('id')->hide()->hideFromDetail(),
         ];
     }

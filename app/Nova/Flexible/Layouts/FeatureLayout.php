@@ -29,7 +29,7 @@ class FeatureLayout extends Layout
     public function fields()
     {
         return [
-            Text::make('Description', 'desc')->required(),
+            Text::make('Description', 'desc')->required()->rules('required'),
             Text::make('Id','id')->hide()->hideFromDetail(),
         ];
     }

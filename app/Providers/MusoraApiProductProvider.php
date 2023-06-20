@@ -104,6 +104,10 @@ class MusoraApiProductProvider implements ProductProviderInterface
                 $vimeoId =  (int) substr(parse_url($slide['video_src'], PHP_URL_PATH), 7);
                 $slide['trailer'] = $this->vimeoTrailerDecorator->decorate($vimeoId);
             }
+            if($slide['primary_video_src']){
+                $vimeoId =  (int) substr(parse_url($slide['primary_video_src'], PHP_URL_PATH), 7);
+                $slide['trailer_button_1'] = $this->vimeoTrailerDecorator->decorate($vimeoId);
+            }
         }
 
         return $slides;
