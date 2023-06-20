@@ -403,7 +403,6 @@ function playPause() {
         chromeCast.value.playOrPause();
     } else if (isPlaying.value) {
         mediaElement.value.pause();
-        console.log('PAUSE WAS TRIGGERED')
         isPlaying.value = false;
     } else {
         mediaElement.value.play();
@@ -917,7 +916,7 @@ const currentProgress = computed(() => {
 
 
         if (totalDuration.value && props.endSecond &&
-            (currentTime.value < totalDuration.value) && currentTime.value > props.endSecond) {
+            (currentTime.value < totalDuration.value) && Math.round(currentTime.value) === Math.round(props.endSecond)) {
             playPause();
             endCallback();
         }
@@ -927,8 +926,7 @@ const currentProgress = computed(() => {
 
     const progress = (currentTime.value / totalDuration.value) * 100;
 
-    if (totalDuration.value && props.endSecond &&
-        (currentTime.value < totalDuration.value) && currentTime.value > props.endSecond) {
+    if (totalDuration.value && props.endSecond && (currentTime.value < totalDuration.value) && Math.round(currentTime.value) === Math.round(props.endSecond)) {
         playPause();
         endCallback();
     }
@@ -1056,7 +1054,7 @@ const currentTimeInSeconds = computed({
         return currentTime.value;
     },
 });
-
+  
 const endCallback = () => {
     const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
     const isInPlaybackMode = window.location.href.includes('playlist-item');

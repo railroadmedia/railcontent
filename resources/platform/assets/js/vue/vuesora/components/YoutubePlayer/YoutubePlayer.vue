@@ -24,12 +24,12 @@ export default {
         },
 
         currentSecond: {
-            type: Number,
+            type: [Number, String],
             default: () => 0,
         },
 
         totalDuration: {
-            type: Number,
+            type: [Number, String],
             default: () => 0,
         },
 
@@ -64,6 +64,14 @@ export default {
             type: String,
             default: () => 'singeo',
         },
+        endSecond: {
+            type: [Number, String],
+            default: null
+        },
+        startSecond: {
+            type: [Number, String],
+            default: 0
+        }
     },
     data() {
         return {
@@ -72,6 +80,7 @@ export default {
             currentTime: 0,
             isPipEnabled: false,
             currentRange: 'original',
+            hasBeenPlayed: false,
         };
     },
     computed: {
@@ -128,7 +137,6 @@ export default {
         clearInterval(this.syncInterval);
     },
     methods: {
-
         setRange({ range }) {
             if (this.rangesVideoIds[range]) {
                 this.currentRange = range;
@@ -164,6 +172,10 @@ export default {
             return window.sessionStorage.getItem(`${this.contentCurrentTimeStorageKey}_currentTime`) || this.currentSecond;
         },
 
+        setHasBeenPlayed() {
+            this.hasBeenPlayed = true;
+        },
+
         initPlayer() {
             const { youtubeIframe } = this.$refs;
 
@@ -184,6 +196,10 @@ export default {
                     rel: 0,
                     enablejsapi: 1,
                     playsinline: 1,
+                    ...(this.startSecond !== 0) || (this.endSecond !== this.totalDuration) ? {
+                        start: vm.startSecond,
+                        end: vm.endSecond,
+                    } : {},
                 },
                 events: {
                     onReady() {
@@ -212,6 +228,10 @@ export default {
                     },
                     onStateChange(event) {
                         if (event.data === 1) {
+                            if (((vm.startSecond !== 0) || (vm.endSecond !== vm.totalDuration)) && !vm.hasBeenPlayed) {
+                                vm.player.seekTo(vm.startSecond);
+                                vm.setHasBeenPlayed();
+                            }
                             vm.$emit('play', {
                                 ...event,
                                 contentId: vm.contentId,
@@ -228,16 +248,18 @@ export default {
                         }
 
                         if (event.data === 0) {
-                            const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
-                            const isInPlaybackMode = window.location.href.includes('playlist-item');
-                            if (isRepeatOn && isInPlaybackMode) {
-                                vm.player.seekTo(0);
-                                vm.player.playVideo();
-                            } else {
-                                vm.$emit('onVideoEnd', {
-                                    ...event,
-                                    contentId: vm.contentId,
-                                });
+                            if (vm.hasBeenPlayed) {
+                                const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
+                                const isInPlaybackMode = window.location.href.includes('playlist-item');
+                                if (isRepeatOn && isInPlaybackMode) {
+                                    vm.player.seekTo(0);
+                                    vm.player.playVideo();
+                                } else {
+                                    vm.$emit('onVideoEnd', {
+                                        ...event,
+                                        contentId: vm.contentId,
+                                    });
+                                }
                             }
                         }
 
