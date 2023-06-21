@@ -88,7 +88,7 @@ const handleError = () => {
     <div
       class="tw-w-full tw-flex tw-flex-col tw-items-center md:tw-justify-center md:tw-mt-0">
       <StepHeader title="Just a few quick questions to set up your account" subtitle="Your musical journey is personalized to you. Tell us a little bit
-            about yourself so that we can get it right." :hideBackButton="true" />
+            about yourself so that we can get it right." :hideBackButton="true" :hide-close-button="true" />
       <AvatarUpload :imgUrl="info.user.avatarUrl" :userName="info.user.name" @onError="handleError"
         :userId="info.user.id" />
       <InputLabel labelOverride="tw-text-white" wrapperOverride="tw-items-center"
