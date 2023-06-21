@@ -34,7 +34,7 @@
                     </p>
                 </div>
 
-                @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                     "formId" => "Drumeo - Engagement - Trigger - Hand Technique - Web Form",
                     "formName" => 'Hand Technique',
@@ -94,7 +94,7 @@
             <h3 class="leading-tight font-extrabold my-10">
                 Enter your email address<br class="inline sm:hidden"> below to get started:
             </h3>
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                 "formId" => "Drumeo - Engagement - Trigger - Hand Technique - Web Form",
                 "formName" => 'Hand Technique',

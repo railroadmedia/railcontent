@@ -16,7 +16,7 @@
             {!! $headLine !!}
         @endif
 
-        @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+        @include("guitareo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                 "formId" => $formId,
                 "formName" => $formName,

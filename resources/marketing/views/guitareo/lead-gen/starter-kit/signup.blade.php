@@ -44,7 +44,7 @@
             <div>
                 <h2>Enter your email below to get <br class="sm:hidden"> a free beginner guitar course!</h2>
 
-                @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+                @include("guitareo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                     "formId" => "Guitareo - Engagement - Trigger - Starter Kit - Web Form",
                     "formName" => 'The Beginner Guitar Starter',
@@ -144,7 +144,7 @@
             <p>
                 Enter your email below to get <br class="lg:hidden">
                 a free beginner guitar course!</p>
-            @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+            @include("guitareo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                 "formId" => "Guitareo - Engagement - Trigger - Starter Kit - Web Form",
                 "formName" => 'The Beginner Guitar Starter',
@@ -159,7 +159,7 @@
     <div class="reveal w-full text-center" id="getAccess" data-reveal data-reset-on-close="true">
         <p>Enter your email below to get a free beginner guitar <br class="hidden sm:inline">
             course and start learning music theory.</p>
-        @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+        @include("guitareo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
             "stacked" => true,
             "outline" => true,

@@ -5,7 +5,8 @@
 @section('title', 'The Minor Blues Made Easy')
 
 @section('form')
-@include("pianote._partials._sign-up-form", [
+@include("pianote._partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
     "formName" => 'The Minor Blues Made Easy',
     "formId" => "Pianote - Engagement - Trigger - The Minor Blues Made Easy - Web Form",
     "buttonText" => "Master the Blues",

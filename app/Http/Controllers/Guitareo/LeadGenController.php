@@ -27,10 +27,10 @@ class LeadGenController extends BaseController
         return view('guitareo.lead-gen.pages.subscribed');
     }
     public function weeklyemail() {
-        return view('guitareo.lead-gen.pages.weekly-email');
+        return view('guitareo.lead-gen.pages.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);
     }
     public function weeklyemail2() {
-        return view('guitareo.lead-gen.pages.weekly-email-2');
+        return view('guitareo.lead-gen.pages.weekly-email-2', ['recaptchaKey'=>config('recaptcha.key')]);
     }
     public function recitals() {
         return view('guitareo.lead-gen.pages.recitals');

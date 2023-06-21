@@ -15,7 +15,7 @@
             <h4 class="leading-tight mt-3 md:mt-4 mb-4 md:mb-7"><em><strong>Because it doesn’t take months<br class="inline sm:hidden"> to play beautiful music</strong><br>
             <span class="opacity-70">Enter your email below for<br class="inline sm:hidden"> your free song tutorials.</span></em></h4>
             <div class="max-w-3xl mx-auto">
-                @include('pianote._partials._sign-up-form-rc', [
+                @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
                     "formId" => "Pianote - Engagement - Trigger - Learn 3 Songs - Web Form",
                     "formName" => 'Learn 3 Songs On Piano',
@@ -124,7 +124,7 @@
                 <h4 class="mt-5 lg:mt-4 mb-6 lg:mb-8 leading-normal"><em><strong>Because it doesn’t take months<br class="inline sm:hidden"> to play beautiful music</strong><br>
                         <span class="opacity-70">Enter your email below<br class="inline sm:hidden"> for your free song tutorials.</span></em></h4>
                 <div class="mx-auto" style="max-width:700px">
-                    @include('pianote._partials._sign-up-form-rc', [
+                    @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
                         "formId" => "Pianote - Engagement - Trigger - Learn 3 Songs - Web Form",
                         "formName" => 'Learn 3 Songs On Piano',

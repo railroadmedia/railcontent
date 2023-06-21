@@ -38,7 +38,7 @@
                     Click the button below for free <br class="inline sm:hidden">
                     lifetime access to this online course.
                 </p>
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                 "formId" => "Drumeo - Engagement - Trigger - Gavins Grooves - Web Form",
                 "formName" => 'Gavins Grooves',
@@ -115,7 +115,7 @@
                 lifetime access to this online course.
             </p>
             <br><br>
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                 "formId" => "Drumeo - Engagement - Trigger - Gavins Grooves - Web Form",
                 "formName" => 'Gavins Grooves',

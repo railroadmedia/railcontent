@@ -110,7 +110,7 @@
                     <h2 class="leading-tight mb-5">Improve your speed on the drums with <b class="font-extrabold">10 free workouts.</b></h2>
                     <h6 class="mb-4">Enter your email below to grab your lessons.</h6>
                 </div>
-                @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                     "formId" => $formId,
                     "formName" => $formName,
@@ -221,7 +221,7 @@
         <div class="max-w-3xl mx-auto">
         <img class="h-16 lg:h-20" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
         <h5 class="my-5 sm:my-7">Enter your email to receive ten free exercises.</h5>
-        @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+        @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
             "formId" => $formId,
             "formName" => $formName,

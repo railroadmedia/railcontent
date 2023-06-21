@@ -53,7 +53,7 @@
                 <div class="sm:w-7/12">
                     <h2>Enter your email below to get my
                         <br> free beginner acoustic guitar course!</h2>
-                    @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+                    @include("guitareo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                         "stacked" => true,
                         "formId" => "Guitareo - Engagement - Trigger - AGJS - Web Form",
@@ -176,7 +176,7 @@
         </div>
         <p>Enter your email below to get my free  <br class="hidden sm:inline lg:hidden">
             beginner acoustic guitar course!</p>
-        @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+        @include("guitareo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
             "formId" => "Guitareo - Engagement - Trigger - AGJS - Web Form",
             "formName" => 'Acoustic Guitar Jump Start',

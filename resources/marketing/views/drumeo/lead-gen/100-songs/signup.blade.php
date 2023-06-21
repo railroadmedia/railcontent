@@ -58,7 +58,7 @@
                         <s class="opacity-50">40</s> <strong class="text-coaches">100</strong> of drumming’s biggest songs FREE.
                     </h6>
                     <div class="mx-auto sm:mx-0 text-center" style="max-width:470px">
-                        @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+                        @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                                 "formName" => '40 Songs',
                                 "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
@@ -160,7 +160,7 @@
                     <em>Enter your email to grab note-for-note sheet music & handy playalong tools.</em>
                 </h5>
                 <div class="mx-auto" style="max-width:700px">
-                    @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+                    @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                             "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
                                 "buttonText" => "Get It Now ",
@@ -180,7 +180,7 @@
                     100 of drumming’s biggest songs FREE.
                 </strong>
             </h4>
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
             "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
                                 "buttonText" => "Get It Now ",

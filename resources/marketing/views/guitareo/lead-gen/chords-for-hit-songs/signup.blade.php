@@ -96,7 +96,7 @@
                 <img class="h-24 md:h-40 md:mb-8 md:pl-3 inline-block lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
                 <h6 class="font-extrabold text-white mb-6 pl-2 md:pl-3">Sign-up for your free online lessons today!</h6>
                 <div class="md:max-w-md lg:max-w-auto lg:w-3/4">
-                    @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+                    @include("guitareo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                         "formId" => "Guitareo - Engagement - Trigger - Guitar Chords for Hit Songs - Web Form",
                         "formName" => 'Guitar Chords for Hit Songs',
@@ -174,7 +174,7 @@
                 </div>
 
                 <div class="md:max-w-md lg:max-w-auto lg:w-3/4">
-                    @include("guitareo.lead-gen.partials._sign-up-form-rc", [
+                    @include("guitareo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                         "formId" => "Guitareo - Engagement - Trigger - Guitar Chords for Hit Songs - Web Form",
                         "formName" => 'Guitar Chords for Hit Songs',

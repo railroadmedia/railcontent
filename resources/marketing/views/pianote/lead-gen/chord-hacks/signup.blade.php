@@ -44,7 +44,7 @@
                     </div>
 
                     <div class="mt-6 sm:mt-5 lg:mt-10">
-                        @include('pianote._partials._sign-up-form-rc', [
+                        @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
                         "formId" => "Pianote - Engagement - Trigger - Chord Hacks - Web Form",
                         "formName" => 'Chord Hacks',
@@ -239,7 +239,7 @@
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> FREE Chord Poster download
                 </p>
                 <div class="max-w-md md:max-w-auto mx-auto md:mx-0">
-                    @include('pianote._partials._sign-up-form-rc', [
+                    @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
                     "formId" => "Pianote - Engagement - Trigger - Chord Hacks - Web Form",
                     "formName" => 'Chord Hacks',

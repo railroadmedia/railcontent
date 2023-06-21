@@ -28,7 +28,7 @@
             <img class="h-16 md:h-28 lg:h-36" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/logo.svg" alt="play-along-logo">
             <h6 class="leading-normal my-5">Add your drumming to nine high-quality drumless play-along tracks.</h6>
             <div class="mx-auto text-center max-w-2xl">
-                @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                         "formName" => 'Free Play-Alongs',
                         "formId" => "Drumeo - Engagement - Trigger - Free Play-Alongs - Web Form",
@@ -178,7 +178,7 @@
             <img class="h-16 md:h-28 lg:h-36" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/logo.svg" alt="free-playalongs-icon">
             <h6 class="leading-normal my-5">Add your drumming to nine high-quality drumless play-along tracks.</h6>
             <div class="mx-auto text-center max-w-2xl">
-                @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                         "formName" => 'Free Play-Alongs',
                         "formId" => "Drumeo - Engagement - Trigger - Free Play-Alongs - Web Form",
@@ -194,7 +194,7 @@
                     Add your drumming to nine high-quality <br class="inline md:hidden">
                     drumless play-along tracks.
                 </strong></h4>
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                 "formName" => 'Free Play-Alongs',
                 "formId" => "Drumeo - Engagement - Trigger - Free Play-Alongs - Web Form",

@@ -58,7 +58,7 @@
                     </h6>
                 </div>
 
-                @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
                     "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                     "formName" => 'Getting Started On The Drums',
                     "buttonText" => "Get started for free",
@@ -141,7 +141,7 @@
             <h3 class="leading-tight font-extrabold my-10">
                 Enter your email address<br class="inline sm:hidden"> below to get started:
             </h3>
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
                 "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                 "formName" => 'Getting Started On The Drums',
                 "buttonText" => "Get started for free ",
@@ -155,7 +155,7 @@
     <div class="reveal max-w-xl text-center" id="signUpModal" data-reveal data-reset-on-close="false">
         <div class="p-4">
             <h2 class="mb-2"><strong>Enter your email address<br class="inline sm:hidden"> below to get started:</strong></h2>
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
                 "stacked" => true,
                 "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                 "formName" => 'Getting Started On The Drums',

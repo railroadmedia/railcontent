@@ -11,7 +11,7 @@
             {!! $text !!}
         @endif
         <div class="max-w-3xl mx-auto">
-            @include('pianote._partials._sign-up-form-rc', [
+            @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
                 "formId" => $formId,
                 "formName" => $formName,

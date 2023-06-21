@@ -82,7 +82,7 @@
                     <h2>Michael Jackson</h2>
                 </div>
                 <p>Enter your email below <br class="inline sm:hidden"> for 10 free video lessons...</p>
-                @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                     "formId" => "Drumeo - Engagement - Trigger - Grooves of MJ - Web Form",
                     "formName" => 'Grooves Of Michael Jackson',
@@ -121,7 +121,7 @@
             </div>
             <p>Enter your email below <br class="sm:hidden"> for 10 free video lessons...</p>
             <br><br class="hidden sm:inlin">
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                 "formId" => "Drumeo - Engagement - Trigger - Grooves of MJ - Web Form",
                 "formName" => 'Grooves Of Michael Jackson',

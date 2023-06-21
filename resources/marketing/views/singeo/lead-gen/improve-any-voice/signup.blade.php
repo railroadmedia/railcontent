@@ -50,7 +50,7 @@
                     <h1 class="leading-tight"><strong>4 Exercises Guaranteed<br class="inline sm:hidden lg:inline"> To Improve ANY Voice!</strong></h1>
                     <h3 class="mt-2 md:mt-5 mb-3 md:mb-7 lg:mb-10" style="text-shadow: 0 0 5px #000;"><em>You CAN sing! We'll show you how.</em></h3>
                     <h5 class="mb-3 md:mb-5 leading-tight">Simply enter your email to<br class="inline lg:hidden"> unlock your FREE videos!</h5>
-                    @include("singeo._partials._sign-up-form-rc", [
+                    @include("singeo._partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                     "formId" => "Singeo - Engagement - Trigger - 4 Exercises - Web Form",
                     "formName" => 'Improve Any Voice',
@@ -127,7 +127,7 @@
         <div class="container mx-auto">
             <h3 class="mb-5 md:mb-8 lg:mb-10"><strong>Simply enter your email to<br class="inline lg:hidden"> unlock your FREE videos!</strong></h3>
             <div class="w-full mx-auto max-w-lg lg:max-w-3xl">
-                @include("singeo._partials._sign-up-form-rc", [
+                @include("singeo._partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                     "formId" => "Singeo - Engagement - Trigger - 4 Exercises - Web Form",
                     "formName" => 'Improve Any Voice',

@@ -252,7 +252,7 @@ class LeadGenController extends BaseController
     public function pages(Request $request, $domain, $page = null)
     {
         if(str_contains($page, 'blog')){
-            return view('drumeo.lead-gen.blog-forms.'.$page);
+            return view('drumeo.lead-gen.blog-forms.'.$page, ['recaptchaKey'=>config('recaptcha.key')]);
         }
         else {
             return view('drumeo.lead-gen.pages.'.$page);
@@ -283,11 +283,11 @@ class LeadGenController extends BaseController
 
     public function weeklyEmail()
     {
-        return view('drumeo.lead-gen.blog-forms.weekly-email');
+        return view('drumeo.lead-gen.blog-forms.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);
     }
     public function weeklyMail()
     {
-        return view('drumeo.lead-gen.blog-forms.weeklyemail');
+        return view('drumeo.lead-gen.blog-forms.weeklyemail', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)

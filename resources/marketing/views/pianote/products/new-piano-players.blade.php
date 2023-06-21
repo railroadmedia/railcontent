@@ -886,7 +886,8 @@
                 Enter your email below to get notified when the next <br class="hidden sm:inline">
                 edition of New Piano Players Start Here is announced. </p>
 
-            @include("pianote._partials._sign-up-form", [
+            @include("pianote._partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formName" => 'NPPSH Waitlist',
                 "formId" => "Pianote - Engagement - Trigger - NPPSH Waitlist - Web Form",
                 "buttonText" => "Let Me Know ",

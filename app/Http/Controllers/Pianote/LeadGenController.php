@@ -39,32 +39,32 @@ class LeadGenController extends BaseController
 
     public function weeklyemail()
     {
-        return view('pianote.lead-gen.blog-forms.weekly-email');
+        return view('pianote.lead-gen.blog-forms.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function weeklyemail2()
     {
-        return view('pianote.lead-gen.blog-forms.weekly-email-2');
+        return view('pianote.lead-gen.blog-forms.weekly-email-2', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function minorBlues()
     {
-        return view('pianote.lead-gen.blog-forms.minor-blues');
+        return view('pianote.lead-gen.blog-forms.minor-blues', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function fSharpMinor()
     {
-        return view('pianote.lead-gen.blog-forms.f-sharp-minor');
+        return view('pianote.lead-gen.blog-forms.f-sharp-minor', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function pentatonicScale()
     {
-        return view('pianote.lead-gen.blog-forms.pentatonic-scale');
+        return view('pianote.lead-gen.blog-forms.pentatonic-scale', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function chordInversions()
     {
-        return view('pianote.lead-gen.blog-forms.chord-inversions');
+        return view('pianote.lead-gen.blog-forms.chord-inversions', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function recitals()

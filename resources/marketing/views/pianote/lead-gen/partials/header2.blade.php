@@ -7,7 +7,7 @@
 
         @if(!empty($form) && $form)
             <div class="email-form">
-                @include('pianote._partials._sign-up-form-rc', [
+                @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
                     "formId" => $formId,
                     "formName" => $formName,

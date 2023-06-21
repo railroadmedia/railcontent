@@ -65,7 +65,7 @@
                     <h4 class="text-yellow">WITH DAVID RAOUF</h4>
                 </div>
                 <div class="condensed uppercase mb-2 text-xl sm:text-3xl">Keep your kit <strong><em>sparkling</em></strong><br class="sm:hidden"> with this free series</div>
-                @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                     "formId" => "Drumeo - Engagement - Trigger - Drum Maintenance - Web Form",
                     "formName" => 'Drum Set Maintenance',
@@ -96,7 +96,7 @@
             </div>
             <p>Enter your email and receive <br class="sm:hidden"> the seven video series, FREE.</p>
             <br><br class="hidden sm:inline">
-            @include("drumeo.lead-gen.partials.sign-up-form-rc", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                 "formId" => "Drumeo - Engagement - Trigger - Drum Maintenance - Web Form",
                 "formName" => 'Drum Set Maintenance',

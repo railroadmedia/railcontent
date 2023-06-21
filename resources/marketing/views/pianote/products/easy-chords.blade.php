@@ -814,7 +814,8 @@
                 Enter your email below to get notified when the next <br class="hidden sm:inline">
                 edition of Easy Chords is announced. </p>
 
-            @include("pianote._partials._sign-up-form", [
+            @include("pianote._partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formName" => 'Easy Chords Waitlist',
                 "formId" => "Pianote - Engagement - Trigger - Easy Chords Waitlist - Web Form",
                 "buttonText" => "Let Me Know ",
