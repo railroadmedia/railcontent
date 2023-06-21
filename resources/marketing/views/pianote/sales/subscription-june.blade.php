@@ -203,8 +203,6 @@
                 'pointOne' => '1000+ popular songs',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Learn anywhere, anytime',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
-        'students' => number_format(Prices::$students),
         'shortHeader' => true,
         'noThumbShadow' => true,
         'specialText' => 'This month only. <span class="text-pianote">Get 30 days of free lessons</span> (Normally 7 days). ',
@@ -590,7 +588,6 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
         'youtube' => '1.2M',

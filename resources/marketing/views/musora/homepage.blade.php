@@ -886,7 +886,6 @@
         'desktopGrid' => true,
         'header' => 'Your new musical home. ',
         'reviewText' => 'Music students everywhere are reaching their goals with Musora.<br class="hidden sm:inline"> Check out the reviews and meet some of our friendly students. ',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
     ])
     @include('musora._partials.order-section-collage')
 
