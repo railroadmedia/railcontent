@@ -281,7 +281,7 @@ onMounted(() => {
         <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
 
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-2 lg:tw-mt-4" v-if="additionalItems > 0 && content.type !== 'song'">
-            <p class="tw-text-center tw-text-[12px] md:tw-text-[14px] tw-mb-1 lg:tw-mb-3">
+            <p class="tw-text-center tw-text-[14px] tw-mb-1 lg:tw-mb-3">
                 Your selected video(s) also contain(s) {{
                     additionalItems
                 }} additional
