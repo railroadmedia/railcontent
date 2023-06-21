@@ -1,10 +1,10 @@
 <template>
-    <div id="commentsSection" class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full">
-        <div class="tw-flex tw-flex-row tw-w-full tw-flex-wrap pt-3 tw-items-center">
-            <div class="tw-w-full tw-text-[#00101D] dark:tw-text-white tw-flex tw-items-center">
+    <div id="commentsSection" class="tw-flex tw-flex-col tw-flex-grow comments-container dark:tw-text-white tw-w-full lg:tw-mb-6">
+        <div class="tw-flex tw-flex-row tw-w-full tw-flex-wrap tw-py-6 tw-items-center">
+            <div class="tw-w-full tw-flex-wrap tw-text-[#00101D] dark:tw-text-white tw-flex tw-items-center">
                 <!-- Preview Cards -->
-                <div class="tw-mr-4 tw-flex">
-                    <div v-if="comments.length > 0" class="tw-relative tw-h-[40px] tw-hidden lg:tw-block"
+                <div v-if="comments.length > 0" class="lg:tw-mr-4 tw-flex">
+                    <div class="tw-relative tw-h-[40px] tw-hidden lg:tw-block"
                          :style="`${flattenedProfilePics.length > 1 ? 'width: 100px;' : 'width: 60px;'}`">
                         <div class="tw-h-[40px] tw-absolute" v-for="(src, index) in (flattenedProfilePics.slice(0, 3))"
                              :style="`margin-left: ${index * 20}px`">
@@ -13,13 +13,13 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mr-auto">
+                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mr-auto tw-mb-2 lg:tw-mb-0 tw-whitespace-nowrap">
                     <span>{{ totalCommentsAndReplies }}</span>
                     Comments
                 </h2>
-                <button v-if="collapsable" class="tw-uppercase tw-font-bebas-neue tw-flex tw-items-center tw-leading-none"
+                <button v-if="collapsable" class="tw-btn-primary tw-transparent tw-px-3 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
                         @click="commentsCollapsed = !commentsCollapsed">
-                    Expand Comment Section
+                    {{ !commentsCollapsed ? 'Hide Comments' : 'Show Comments' }}
                     <svg class="tw-ml-3 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
                          :class="[{ 'tw-rotate-180': !commentsCollapsed }]" width="15" height="16" viewBox="0 0 15 16"
                          fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -33,7 +33,7 @@
 
         <div v-if="!commentsCollapsed && collapsable" class="tw-flex tw-flex-col tw-w-full">
             <!-- Post a Comment -->
-            <div id="postComment" class="tw-flex tw-flex-row comment-post mv-3">
+            <div id="postComment" class="tw-flex tw-flex-row comment-post tw-mb-6">
                 <div class="tw-flex-col avatar-column tw-mr-[15px] tw-hidden md:tw-flex">
                     <div class="user-avatar smaller" :class="avatarClassObject">
                         <!-- User Avatar -->
