@@ -23,7 +23,7 @@ const props = defineProps({
 const emit = defineEmits(['onGoBack'])
 
 const goToPrevPage = () => {
-  if (history.back) {
+  if (history.back && !document.referrer.includes('login')) {
     history.back();
   } else {
     window.location.href = '/members'

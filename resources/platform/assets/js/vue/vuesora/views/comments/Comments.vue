@@ -7,7 +7,7 @@
                     <div class="tw-relative tw-h-[40px] tw-hidden lg:tw-block"
                          :style="`${flattenedProfilePics.length > 1 ? 'width: 100px;' : 'width: 60px;'}`">
                         <div class="tw-h-[40px] tw-absolute" v-for="(src, index) in (flattenedProfilePics.slice(0, 3))"
-                             :style="`margin-left: ${index * 20}px`">
+                             :style="`margin-left: ${index * 20}px`" :key="index">
                             <img :src="src"
                                  :class="`tw-h-[40px] tw-w-[40px] tw-rounded-full tw-border-[1px] tw-border-${brand} tw-box-border`" />
                         </div>

@@ -386,7 +386,7 @@ onMounted(() => {
 
         <Table @onActionClick="handleActionClick" 
             @onScroll="handleScroll"
-            :classOverride="`tw-mt-[24px] tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" 
+            :classOverride="`tw-mt-[24px] tw-max-h-[150px] lg:tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" 
             :stickyHeader="true" 
             :rows="state.formattedTable"
         >

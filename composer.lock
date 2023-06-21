@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.273.3",
+            "version": "3.273.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "fc2995defbfa0e113a30d02b7b0ff52d8056841c"
+                "reference": "36a039d5dfcaa7dc9101b121cf1dfb6ca2abd605"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/fc2995defbfa0e113a30d02b7b0ff52d8056841c",
-                "reference": "fc2995defbfa0e113a30d02b7b0ff52d8056841c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/36a039d5dfcaa7dc9101b121cf1dfb6ca2abd605",
+                "reference": "36a039d5dfcaa7dc9101b121cf1dfb6ca2abd605",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.273.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.273.4"
             },
-            "time": "2023-06-19T18:21:47+00:00"
+            "time": "2023-06-20T19:54:39+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2416,16 +2416,16 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v6.7.0",
+            "version": "v6.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "71278f20b0a623389beefe87a641d03948a38870"
+                "reference": "48b0210c51718d682e53210c24d25c5a10a2299b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/71278f20b0a623389beefe87a641d03948a38870",
-                "reference": "71278f20b0a623389beefe87a641d03948a38870",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/48b0210c51718d682e53210c24d25c5a10a2299b",
+                "reference": "48b0210c51718d682e53210c24d25c5a10a2299b",
                 "shasum": ""
             },
             "require": {
@@ -2473,9 +2473,9 @@
             ],
             "support": {
                 "issues": "https://github.com/firebase/php-jwt/issues",
-                "source": "https://github.com/firebase/php-jwt/tree/v6.7.0"
+                "source": "https://github.com/firebase/php-jwt/tree/v6.8.0"
             },
-            "time": "2023-06-14T15:29:26+00:00"
+            "time": "2023-06-20T16:45:35+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -8162,16 +8162,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.87",
+            "version": "v5.0.88",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "ab85c66ab7b8f91fbed95bab9c6ff1ea91c0d8d4"
+                "reference": "d283236b7ea817d6c530980fab7373d9dfa02f53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/ab85c66ab7b8f91fbed95bab9c6ff1ea91c0d8d4",
-                "reference": "ab85c66ab7b8f91fbed95bab9c6ff1ea91c0d8d4",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/d283236b7ea817d6c530980fab7373d9dfa02f53",
+                "reference": "d283236b7ea817d6c530980fab7373d9dfa02f53",
                 "shasum": ""
             },
             "require": {
@@ -8208,9 +8208,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.87"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.88"
             },
-            "time": "2023-06-20T13:51:37+00:00"
+            "time": "2023-06-21T12:27:56+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -14645,16 +14645,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.22.0",
+            "version": "v1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "923e1e112b6a8598664dbb0ee79dd3137f1c9d56"
+                "reference": "a2e046f748e87d3ef8b2b381e0e5c5a11f34e46b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/923e1e112b6a8598664dbb0ee79dd3137f1c9d56",
-                "reference": "923e1e112b6a8598664dbb0ee79dd3137f1c9d56",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/a2e046f748e87d3ef8b2b381e0e5c5a11f34e46b",
+                "reference": "a2e046f748e87d3ef8b2b381e0e5c5a11f34e46b",
                 "shasum": ""
             },
             "require": {
@@ -14706,7 +14706,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2023-05-04T14:52:56+00:00"
+            "time": "2023-06-16T21:20:12+00:00"
         },
         {
             "name": "maximebf/debugbar",
@@ -17027,5 +17027,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
