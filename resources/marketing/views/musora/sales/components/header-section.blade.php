@@ -63,8 +63,8 @@
                             <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
                             <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
                             <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
-                        </a>Prices::$students
-                        <p class="inline-block leading-tight text-sm align-middle pl-2 m-0"><em>Trusted by {{ number_format() }} active students.</em></p>
+                        </a>
+                        <p class="inline-block leading-tight text-sm align-middle pl-2 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
                     </div>
                 </div>
             </div>
