@@ -20,7 +20,7 @@
 
                 <input type="hidden" name="leadtracker_form_name" value="Pianote General">
                 <div class="infusion-field col-xs-12 form-group text-center medium-text-left lg:w-7/12 lg:pr-1">
-                    <input class="medium-body infusion-field-input-container" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required="">
+                    <input class="medium-body infusion-field-input-container" id="sign-up-email" name="email" type="email" placeholder="Email Address..." required="">
                 </div>
                 <div class="infusion-submit col-xs-12 form-group lg:w-5/12">
                     <button class="submit button-red infusion-recaptcha join-form-button border-pianote text-pianote hover:bg-pianote hover:text-black" type="submit">

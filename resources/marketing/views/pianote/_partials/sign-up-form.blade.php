@@ -33,7 +33,7 @@
     @endif
 
     <div class="infusion-field w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-7/12 sm:text-left' }}">
-        <input @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif class="w-full" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required/>
+        <input @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif class="w-full" id="sign-up-email" name="email" type="email" placeholder="Email Address..." required/>
     </div>
     <div class="infusion-submit w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12' }}">
         <button class="submit g-recaptcha bg-pianote hover:opacity-80 @if(!empty($outline)) outline @endif" type="submit"

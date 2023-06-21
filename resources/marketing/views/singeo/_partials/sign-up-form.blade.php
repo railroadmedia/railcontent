@@ -54,7 +54,7 @@
     @if(!empty($redirectURL))
         <input name="success_redirect" type="hidden" value="{{ $redirectURL }}"/>
     @else
-        <input name="success_redirect" type="hidden" value="/thank-you-white"/>
+        <input name="success_redirect" type="hidden" value="/thank-you"/>
     @endif
 </form>
 <div class="disclaimer opacity-70 mx-auto inline-block">

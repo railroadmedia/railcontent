@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LeadGenController extends BaseController
 {
-    public function thankyouwhite() {
+    public function thankyou() {
         return view('guitareo.lead-gen.pages.thank-you');
     }
     public function welcomeparty() {
