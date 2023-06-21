@@ -8673,12 +8673,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "da2567aa12807e9790d18f52d3612fe466a2f3b9"
+                "reference": "636e22fffa1cacb988d4a19335662cfe87ba5cd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/da2567aa12807e9790d18f52d3612fe466a2f3b9",
-                "reference": "da2567aa12807e9790d18f52d3612fe466a2f3b9",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/636e22fffa1cacb988d4a19335662cfe87ba5cd2",
+                "reference": "636e22fffa1cacb988d4a19335662cfe87ba5cd2",
                 "shasum": ""
             },
             "require": {
@@ -8719,7 +8719,7 @@
                 "issues": "https://github.com/railroadmedia/railforums/issues",
                 "source": "https://github.com/railroadmedia/railforums/tree/v2.0.18-fix-xss-vulnerability"
             },
-            "time": "2023-06-21T23:26:44+00:00"
+            "time": "2023-06-21T23:55:32+00:00"
         },
         {
             "name": "railroad/railnotifications",
