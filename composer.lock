@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a455eeb67bb9351ff5321957b3b91f42",
+    "content-hash": "631bfc9e3b663fb1ad41aa2b110f5667",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.273.4",
+            "version": "3.273.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "36a039d5dfcaa7dc9101b121cf1dfb6ca2abd605"
+                "reference": "dbb8640e651351b47f50548c26abbe316d36632b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/36a039d5dfcaa7dc9101b121cf1dfb6ca2abd605",
-                "reference": "36a039d5dfcaa7dc9101b121cf1dfb6ca2abd605",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/dbb8640e651351b47f50548c26abbe316d36632b",
+                "reference": "dbb8640e651351b47f50548c26abbe316d36632b",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.273.4"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.273.5"
             },
-            "time": "2023-06-20T19:54:39+00:00"
+            "time": "2023-06-21T18:22:15+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8669,16 +8669,16 @@
         },
         {
             "name": "railroad/railforums",
-            "version": "v2.0.18",
+            "version": "dev-v2.0.18-fix-xss-vulnerability",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railforums.git",
-                "reference": "c3b9e85ddb5eaa0dddcd9d847d64590f6a701af1"
+                "reference": "cd7a365f6277549e416220b2a861b2839bbe5327"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/c3b9e85ddb5eaa0dddcd9d847d64590f6a701af1",
-                "reference": "c3b9e85ddb5eaa0dddcd9d847d64590f6a701af1",
+                "url": "https://api.github.com/repos/railroadmedia/railforums/zipball/cd7a365f6277549e416220b2a861b2839bbe5327",
+                "reference": "cd7a365f6277549e416220b2a861b2839bbe5327",
                 "shasum": ""
             },
             "require": {
@@ -8717,9 +8717,9 @@
             "description": "Laravel forum system using entities",
             "support": {
                 "issues": "https://github.com/railroadmedia/railforums/issues",
-                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.18"
+                "source": "https://github.com/railroadmedia/railforums/tree/v2.0.18-fix-xss-vulnerability"
             },
-            "time": "2023-03-03T13:37:55+00:00"
+            "time": "2023-06-21T18:03:57+00:00"
         },
         {
             "name": "railroad/railnotifications",
@@ -17014,11 +17014,18 @@
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
             "alias_normalized": "3.0.7.0"
+        },
+        {
+            "package": "railroad/railforums",
+            "version": "dev-v2.0.18-fix-xss-vulnerability",
+            "alias": "v2.0.19",
+            "alias_normalized": "2.0.19.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/railanalytics": 20
+        "railroad/railanalytics": 20,
+        "railroad/railforums": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
@@ -17027,5 +17034,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
