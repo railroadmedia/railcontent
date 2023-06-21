@@ -16,10 +16,10 @@
     </div>
 @endif
 
-<form id="{{$cleanFormId}}"
-        accept-charset="UTF-8" action="{{ url()->route('customer-io.submit-email-form-rc') }}"
-        class="@if(empty($redirectURL)) ajax-form @endif clearfix infusion-form facebook-track-lead mx-auto" method="POST"
-        onsubmit="emailSignUpConversionTrackerForImpactProvider()">
+<form id="{{$cleanFormId}}" accept-charset="UTF-8" method="POST"
+    action="{{ url()->route('customer-io.submit-email-form-rc') }}"
+    class="@if(empty($redirectURL)) ajax-form @endif clearfix infusion-form facebook-track-lead mx-auto"
+    onsubmit="emailSignUpConversionTrackerForImpactProvider()">
 
     @if(!empty($formName))
         {!! \Railroad\LeadTracker\Services\LeadTrackerService::getRequestTrackingInputsHtmlFromRequest(
@@ -36,11 +36,10 @@
         <input @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif class="w-full" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required/>
     </div>
     <div class="infusion-submit w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12' }}">
-        @if(!empty($submitArrows))
-            <img class="form-arrow arrow-left" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-right-white.png">
-            <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png">
-        @endif
-        <button class="submit g-recaptcha bg-pianote hover:opacity-80 @if(!empty($outline)) outline @endif" type="submit" @if(!empty($buttonBorder)) style="border: 2px solid {{ $buttonBorder }};" @endif>
+        <button class="submit g-recaptcha bg-pianote hover:opacity-80 @if(!empty($outline)) outline @endif" type="submit"
+            data-sitekey="{{$recaptchaKey}}"
+            data-callback='recaptchaSubmit{{$cleanFormId}}'
+            data-action='submit'>
             <span class="pre-add">@if(!empty($buttonText)) {!!  $buttonText  !!} @else Get Started @endif <i class="fad fa-paper-plane"></i></span>
             <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
             <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
@@ -56,11 +55,6 @@
         <input name="success_redirect" type="hidden" value="{{ $redirectURL }}"/>
     @else
         <input name="success_redirect" type="hidden" value="/thank-you"/>
-    @endif
-
-    @if(!empty($formArrows))
-        <img class="form-arrow arrow-left" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-right-white.png">
-        <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png">
     @endif
 </form>
 @if(empty($minimalForm))

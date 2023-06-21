@@ -4,7 +4,6 @@
 
         @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-            "submitArrows" => true,
             "formId" => $formId,
             "formName" => $formName,
         ])

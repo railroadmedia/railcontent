@@ -16,9 +16,9 @@
     </div>
 @endif
 
-<form id="{{$cleanFormId}}" accept-charset="UTF-8"
+<form id="{{$cleanFormId}}" accept-charset="UTF-8" method="POST"
     action="{{ url()->route('customer-io.submit-email-form-rc') }}"
-    class="@if(empty($redirectURL)) ajax-form @endif clearfix infusion-form facebook-track-lead mx-auto" method="POST"
+    class="@if(empty($redirectURL)) ajax-form @endif clearfix infusion-form facebook-track-lead mx-auto"
     onsubmit="emailSignUpConversionTrackerForImpactProvider()">
 
     @if(!empty($formName))
@@ -36,10 +36,6 @@
         <input id="sign-up-email" class="w-full" name="email" type="email" placeholder="Email Address..." required/>
     </div>
     <div class="infusion-submit w-full px-1 sm:px-2 float-left @if(!empty($oneLine)) sm:w-5/12 sm:pr-0 @endif @if(!empty($oneLineLg)) lg:w-5/12 lg:pr-0 @endif">
-        @if(!empty($submitArrows))
-            <img class="form-arrow arrow-left" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-right-white.png">
-            <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png">
-        @endif
         <button class="submit g-recaptcha @if(!empty($outline)) outline @endif" type="submit"
             data-sitekey="{{$recaptchaKey}}"
             data-callback='recaptchaSubmit{{$cleanFormId}}'
@@ -59,11 +55,6 @@
         <input name="success_redirect" type="hidden" value="{{ $redirectURL }}"/>
     @else
         <input name="success_redirect" type="hidden" value="/thank-you-white"/>
-    @endif
-
-    @if(!empty($formArrows))
-        <img class="form-arrow arrow-left" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-right-white.png">
-        <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png">
     @endif
 </form>
 <div class="disclaimer opacity-70 mx-auto inline-block">

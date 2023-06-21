@@ -32,7 +32,6 @@
                 <p>Enter your email below to open your toolbox...</p>
                 @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                           "submitArrows" => true,
                            "formId" => "Drumeo - Engagement - Trigger - Ultimate Toolbox - Web Form",
                            "formName" => 'The Ultimate Drumming Toolbox',
                        ])
