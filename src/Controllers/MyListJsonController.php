@@ -10,6 +10,7 @@ use Intervention\Image\ImageManager;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Exceptions\NotFoundException;
 use Railroad\Railcontent\Repositories\ContentRepository;
+use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
 use Railroad\Railcontent\Requests\AddItemToPlaylistRequest;
 use Railroad\Railcontent\Requests\PlaylistCreateRequest;
 use Railroad\Railcontent\Services\ConfigService;
@@ -329,6 +330,7 @@ class MyListJsonController extends Controller
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 10);
         $sort = $request->get('sort', '-created_at');
+        UserPlaylistsRepository::$availableCategories = $request->get('categories', false);
 
         $playlists = $this->userPlaylistsService->getUserPlaylist(
             auth()->id(),

@@ -7,6 +7,14 @@ use Illuminate\Database\Query\JoinClause;
 class UserPlaylistsRepository extends RepositoryBase
 {
     /**
+     * If this is false playlists with any category will be pulled. If its an array, only playlists with those
+     * categories will be pulled.
+     *
+     * @var array|bool
+     */
+    public static $availableCategories = false;
+
+    /**
      * @return \Illuminate\Database\Query\Builder
      */
     public function query()
@@ -57,6 +65,9 @@ class UserPlaylistsRepository extends RepositoryBase
                 ->where('type', $playlistType);
         if ($term) {
             $query->where('name', 'LIKE', '%'.$term.'%');
+        }
+        if(self::$availableCategories){
+            $query->whereIn('category', self::$availableCategories);
         }
         if ($limit) {
             $query->limit($limit)
@@ -157,6 +168,10 @@ class UserPlaylistsRepository extends RepositoryBase
 
         if ($term) {
             $query->where('name', 'LIKE', '%'.$term.'%');
+        }
+
+        if(self::$availableCategories){
+            $query->whereIn('category', self::$availableCategories);
         }
 
         return $query->count();
