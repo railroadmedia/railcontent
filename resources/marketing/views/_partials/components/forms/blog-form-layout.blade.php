@@ -59,7 +59,7 @@
             transition:all .2s ease-in;
             box-shadow:none;
             text-align:inherit;
-            border:none
+            border: 1px solid;
         }
 
         @media (min-width:640px) {
