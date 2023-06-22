@@ -23,18 +23,14 @@ const props = defineProps({
 const emit = defineEmits(['onGoBack'])
 
 const goToPrevPage = () => {
-  if (history.back && !document.referrer.includes('login')) {
-    history.back();
-  } else {
     window.location.href = '/members'
-  }
 }
 </script>
 
 <template>
   <div class="tw-flex tw-flex-col tw-w-full tw-items-center tw-relative xl:tw-static tw-justify-center">
     <button @click="() => emit('onGoBack')" v-if="!hideBackButton" class="tw-text-white tw-absolute tw-left-[12px] lg:tw-top-[32px] tw-top-0 md:tw-left-[32px]"><ArrowSmLeftIcon class="tw-w-[32px] tw-h-[32px] md:tw-w-[54px] md:tw-h-[54px]" /></button>
-    <button v-if="!hideCloseButton" @click="goToPrevPage" class="tw-text-white tw-absolute lg:tw-top-[32px] tw-top-0 tw-right-[12px]  md:tw-right-[32px]"><XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" /></button> 
+    <button v-if="!hideCloseButton" @click="goToPrevPage" class="tw-text-white tw-absolute lg:tw-top-[32px] tw-top-0 tw-right-[12px]  md:tw-right-[32px]"><XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" /></button>
     <h2
       class="
         md:tw-mb-[5px]
