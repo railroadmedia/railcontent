@@ -44,9 +44,9 @@
     @include("drumeo.sales.partials._nav")
 
     <header class="py-12 sm:py-20" style="background: linear-gradient(225deg, #15C5FD 0%, #BBFFEF 100%);">
-        <div class="max-w-6xl mx-auto sm:flex items-center container px-4 text-center sm:text-left">
+        <div class="max-w-5xl mx-auto sm:flex items-center container px-4 text-center sm:text-left">
             <div class="w-full sm:w-1/2 max-w-xl mx-auto sm:max-w-full">
-                <div class="px-2 sm:pl-3 lg:pr-20 xl:pr-28">
+                <div class="px-2 sm:pl-3 lg:pr-6 xl:pr-20">
                     <img
                         class="h-20 lg:h-24 mb-3"
                         src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://drumeo-assets.s3.amazonaws.com/lead-gen/gsotd/updated/GSOTD-dark-blue.png"
@@ -63,7 +63,7 @@
                     </div>
                     <h6 class="mb-4">Enter your email below for your 12 free lessons:</h6>
                 </div>
-                <div class="lg:pr-20 xl:pr-28">
+                <div class="lg:pr-6 xl:pr-20">
                 @include("drumeo.lead-gen.partials.sign-up-form", [
                     "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                     "formName" => 'Getting Started On The Drums',
@@ -87,7 +87,7 @@
     </header>
 
     <section class="py-12 sm:py-20 px-4 text-center">
-        <div class="container max-w-6xl mx-auto">
+        <div class="container max-w-5xl mx-auto">
             <h2 class="font-extrabold mb-4">Get started even if you don’t have drums yet.</h2>
             <p class="mb-10">
                 Getting Started On The Drums includes <b>3 learning paths</b> to help you start <br class="hidden md:inline">without drums, help you buy drums, AND start playing on a full kit.
