@@ -42,7 +42,7 @@ function goBack() {
         xl:tw-justify-center
       ">
       <StepHeader title="What instrument would you like to learn?" subtitle="Want to learn more than one instument? You can change your instrument at any
-    time in your profile or by using the instrument selector in the navigation." @onGoBack="goBack" :hideCloseButton="steps[1].checked" />
+    time in your profile or by using the instrument selector in the navigation." @onGoBack="goBack" :hideCloseButton="!steps[1].checked" />
       <SquaresContainer>
         <SquaredCard :backgroundUrl="bgImgCard.drumeo" type="drumeo" :active="info.instrument === 'drums' && steps[1].checked"
           @onSelect="() => onInstrumentSelection('drums')">

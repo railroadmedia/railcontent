@@ -76,7 +76,7 @@ export default {
                         icon.classList.remove('fa-undo');
                         icon.classList.add('fa-spin', 'fa-spinner');
 
-                        this.emitResetProgess({
+                        this.emitResetProgress({
                             content_id: this.item.id,
                             icon,
                         });

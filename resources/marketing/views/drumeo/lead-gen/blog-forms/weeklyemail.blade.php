@@ -12,8 +12,9 @@
 
 @section('form')
 
-    @include("drumeo.lead-gen.partials.sign-up-form-tw", [
-        "formId" => "Drumeo- Engagement - Trigger - Blog Signup - WebForm",
+    @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
+        "formId" => "Drumeo - Engagement - Trigger - Blog Signup - WebForm",
         "buttonText" => "Join The Drum Club &raquo;",
         "minimalForm" => true,
     ])

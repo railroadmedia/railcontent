@@ -245,6 +245,7 @@ class SalesController extends BaseController
         $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('pianote.products.new-piano-players', [
+            'recaptchaKey'=>config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
@@ -263,6 +264,7 @@ class SalesController extends BaseController
         $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('pianote.products.easy-chords', [
+            'recaptchaKey'=>config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,

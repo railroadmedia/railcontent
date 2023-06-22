@@ -20,7 +20,8 @@
             <img class="py-1 md:py-0 h-28 md:h-48 lg:h-60" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/logo.png">
             <h6 class="mt-3 md:mt-4 lg:mt-6 mb-5 md:mb-6 leading-tight">Simply enter your email to unlock<br class="inline md:hidden"> your holiday karaoke library!</h6>
             <div class="mx-auto text-center max-w-2xl">
-                @include("singeo._partials._sign-up-form", [
+                @include("singeo._partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formName" => 'Holiday Karaoke',
                 "formId" => "Singeo - Engagement - Trigger - Holiday Karaoke - Web Form",
                 "buttonText" => "Send My Songs ",
@@ -304,7 +305,8 @@
             <img class="py-1 md:py-0 h-28 md:h-48 lg:h-60" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/logo.png">
             <h6 class="mt-2 md:mt-4 lg:mt-6 mb-4 md:mb-6 leading-tight">Simply enter your email to unlock<br class="inline md:hidden"> your holiday karaoke library!</h6>
             <div class="mx-auto text-center max-w-2xl">
-                @include("singeo._partials._sign-up-form", [
+                @include("singeo._partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formName" => 'Holiday Karaoke',
                 "formId" => "Singeo - Engagement - Trigger - Holiday Karaoke - Web Form",
                 "buttonText" => "Send My Songs ",
@@ -326,7 +328,8 @@
     <div class="reveal text-center max-w-xl text-white lazyload" id="signUpModal" data-reveal style="background: #6d7894 right center/cover;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/final.jpg">
         <div class="py-5 px-3 md:px-9 md:py-9">
             <h4 class="leading-normal mb-4"><strong>Simply enter your email to unlock<br class="inline lg:hidden"> your holiday karaoke library!</strong></h4>
-            @include("singeo._partials._sign-up-form", [
+            @include("singeo._partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
             "formId" => "Singeo - Engagement - Trigger - Holiday Karaoke - Web Form",
             "formName" => 'Holiday Karaoke',
             "oneLine" => true,

@@ -66,7 +66,8 @@
             <h2 class="leading-tight text-shadow-4"><strong>Your All-In-One Guide To<br class="hidden md:inline"> Understand The Fretboard</strong></h2>
             <h6 class="px-4 sm:px-0 mt-1 mb-5 text-guitareo leading-normal max-w-xs md:max-w-full">Download your free PDF and easily navigate the fretboard<br class="hidden sm:inline">
                  to unlock new possibilities in your playing</h6>
-            @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+            @include("guitareo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => "Guitareo - Engagement - Trigger - Fretboard Cheatsheet - Web Form",
                     "formName" => 'Fretboard Cheatsheet',
                     "buttonText" => "Get It Now",

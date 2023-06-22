@@ -21,7 +21,7 @@
 
                 <div class="tw-flex tw-flex-row tw-flex-auto tw-mt-3 tw-p-3 tw-text-[#00101D] dark:tw-text-white">
                     <h2 class="tw-font-bold tw-text-lg">
-                        What type of notifications would you like to receive from 
+                        What type of notifications would you like to receive from
                         <span class="tw-capitalize">{{ $selectedBrand }}</span>?
                     </h2>
                 </div>
@@ -36,7 +36,7 @@
                                 "checked" => (boolean) ($userNotificationsSettings['send_email'] ?? user()->send_email_notifications)
                             ])
                         </div>
-        
+
                         <div class="tw-flex tw-flex-row tw-mb-2">
                             @include('partials.bladesora.members.inputs.toggle-input', [
                                 "inputID" => "sendMobileAppPushNotifications",
@@ -44,12 +44,12 @@
                                 "inputLabel" => "Send mobile push notifications.",
                                 "checked" => (boolean) ($userNotificationsSettings['send_in_app_push_notification'] ?? user()->send_mobile_app_push_notifications)
                             ])
-                        </div> 
+                        </div>
                     </div>
-                </div> 
+                </div>
 
                 <div class="tw-flex tw-flex-row tw-flex-auto tw-p-3 tw-text-[#00101D] dark:tw-text-white">
-                    <h2 class="tw-font-bold tw-text-lg">When would you like to receive email notifications?</h2>
+                    <h2 class="tw-font-bold tw-text-lg">When would you like to receive notifications?</h2>
                 </div>
 
                 <div class="tw-flex tw-flex-row ph-3 tw-pb-3 tw-mb-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
@@ -59,7 +59,8 @@
                                 "inputID" => "weeklyUpdates",
                                 "inputName" => "notify_weekly_update",
                                 "inputLabel" => "Weekly Community Updates.",
-                                "checked" => (boolean) ($userNotificationsSettings['notify_weekly_update'] ?? user()->notify_weekly_update)
+                                "checked" => (boolean) ($userNotificationsSettings['notify_weekly_update'] ?? user()->notify_weekly_update),
+                                "disabledOption" => true,
                             ])
                         </div>
                         <div class="tw-flex tw-flex-row tw-mb-2">
@@ -67,7 +68,8 @@
                                 "inputID" => "repliesComment",
                                 "inputName" => "notify_on_lesson_comment_reply",
                                 "inputLabel" => "When a member replies to my lesson comment.",
-                                "checked" => (boolean) ($userNotificationsSettings['notify_on_lesson_comment_reply'] ?? user()->notify_on_lesson_comment_reply)
+                                "checked" => (boolean) ($userNotificationsSettings['notify_on_lesson_comment_reply'] ?? user()->notify_on_lesson_comment_reply),
+                                "disabledOption" => true,
                             ])
                         </div>
                         <div class="tw-flex tw-flex-row tw-mb-2">
@@ -75,7 +77,8 @@
                                 "inputID" => "likesComment",
                                 "inputName" => "notify_on_lesson_comment_like",
                                 "inputLabel" => "When a member likes my lesson comment.",
-                                "checked" => (boolean) ($userNotificationsSettings['notify_on_lesson_comment_like'] ?? user()->notify_on_lesson_comment_like)
+                                "checked" => (boolean) ($userNotificationsSettings['notify_on_lesson_comment_like'] ?? user()->notify_on_lesson_comment_like),
+                                "disabledOption" => true,
                             ])
                         </div>
                         <div class="tw-flex tw-flex-row tw-mb-2">
@@ -83,7 +86,8 @@
                                 "inputID" => "repliesForum",
                                 "inputName" => "notify_on_forum_followed_thread_reply",
                                 "inputLabel" => "When a member posts in a forum thread I created or follow.",
-                                "checked" => (boolean) ($userNotificationsSettings['notify_on_forum_followed_thread_reply'] ?? user()->notify_on_forum_followed_thread_reply)
+                                "checked" => (boolean) ($userNotificationsSettings['notify_on_forum_followed_thread_reply'] ?? user()->notify_on_forum_followed_thread_reply),
+                                "disabledOption" => true,
                             ])
                         </div>
                         <div class="tw-flex tw-flex-row tw-mb-2">
@@ -91,14 +95,15 @@
                                 "inputID" => "likesForum",
                                 "inputName" => "notify_on_forum_post_like",
                                 "inputLabel" => "When a member likes my forum posts",
-                                "checked" => (boolean) ($userNotificationsSettings['notify_on_forum_post_like'] ?? user()->notify_on_forum_post_like)
+                                "checked" => (boolean) ($userNotificationsSettings['notify_on_forum_post_like'] ?? user()->notify_on_forum_post_like),
+                                "disabledOption" => true,
                             ])
                         </div>
                     </div>
                 </div>
 
                 <div class="tw-flex tw-flex-row tw-flex-auto tw-text-[#00101D] dark:tw-text-white tw-p-3">
-                    <h2 class="tw-font-bold tw-text-lg">How often would you like to receive email notifications?</h2>
+                    <h2 class="tw-font-bold tw-text-lg">How often would you like to receive notifications?</h2>
                 </div>
 
                 <div class="tw-flex tw-flex-row ph-3 tw-pb-3 tw-mb-6 tw-border-b tw-border-gray-300 dark:tw-border-[#223F57]">
@@ -160,4 +165,76 @@
             </form>
         </div>
     </div>
+@endsection
+
+@section('layout-scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', ()=>{
+            const emailToggle = document.getElementsByName('send_email')[1];
+            const emailValue = document.getElementsByName('send_email')[0];
+            const mobileToggle = document.getElementsByName('send_in_app_push_notification')[1];
+            const mobileValue = document.getElementsByName('send_in_app_push_notification')[0];
+            const originals = document.getElementsByClassName('original-toggle');
+            const disables = document.getElementsByClassName('disabled-toggle');
+
+            // email and mobile notification toggle handler
+            const handleToggle = (toggleValue, otherToggleValue) => {
+                if(toggleValue === '1' && otherToggleValue === '0'){
+                    for(const original of originals){
+                        original.classList.add('tw-hidden');
+                    }
+
+                    for(const disable of disables){
+                        disable.classList.remove('tw-hidden');
+                    }
+                } else {
+                    for(const original of originals){
+                        original.classList.remove('tw-hidden');
+                    }
+
+                    for(const disable of disables){
+                        disable.classList.add('tw-hidden');
+                    }
+                }
+            }
+
+            // run after the page loads
+            handleToggle(emailValue.value === '1' ? '0' : '1', mobileValue.value);
+
+            // notification toggle event listeners
+            emailToggle.addEventListener('change', ()=>{
+                handleToggle(emailValue.value, mobileValue.value);
+            });
+            mobileToggle.addEventListener('change', ()=>{
+                handleToggle(mobileValue.value, emailValue.value);
+            });
+
+            // disabled toggle handler
+            const clickDisabledToggle = (name) => {
+                emailToggle.checked = true;
+                emailValue.value = '1';
+                mobileToggle.checked = true;
+                mobileValue.value = '1';
+
+                for(const original of originals){
+                    const inputs = original.getElementsByTagName('input');
+
+                    original.classList.remove('tw-hidden');
+                    inputs[0].value = '0';
+                    inputs[1].checked = false;
+                }
+
+                for(const disable of disables){
+                    disable.classList.add('tw-hidden');
+                }
+            }
+
+            // disabled toggle event listeners
+            for(const disable of disables){
+                disable.addEventListener('click', ()=>{
+                    clickDisabledToggle();
+                })
+            }
+        });
+    </script>
 @endsection

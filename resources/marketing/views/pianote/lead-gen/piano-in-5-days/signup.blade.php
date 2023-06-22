@@ -209,7 +209,8 @@
                         </h6>
                     </div>
                     <div class="sm:pr-20">
-                        @include("pianote._partials._sign-up-form", [
+                        @include('pianote._partials.sign-up-form', [
+                    "recaptchaKey" => $recaptchaKey,
                             "formId" => "Pianote - Engagement - Trigger - Piano In 5 Days - Web Form",
                             "formName" => 'Piano In 5 Days',
                             "buttonText" => "Get started for free",
@@ -551,7 +552,8 @@
                     <p class="mb-2">
                         Enter your email below for your 5 free lessons.
                     </p>
-                    @include("pianote._partials._sign-up-form", [
+                    @include('pianote._partials.sign-up-form', [
+                    "recaptchaKey" => $recaptchaKey,
                         "formId" => "Pianote - Engagement - Trigger - Piano In 5 Days - Web Form",
                         "formName" => 'Piano In 5 Days',
                         "buttonText" => "Get started for free",

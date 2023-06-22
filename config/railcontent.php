@@ -1288,7 +1288,8 @@ return [
         'song-tutorial-children',
         'rudiment',
         "assignment",
-        'unit-part'
+        'unit-part',
+        'boot-camps',
     ],
     'hiddenContentTypes' => [
         'ha-oemurd-pmac',

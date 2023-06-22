@@ -180,11 +180,6 @@
                         Learn how to sing beautiful harmonies with <br>this FREE singing lesson from a vocal coach.
                     </h6>
                     <div class="md:max-w-sm lg:max-w-full">
-                        @include("singeo._partials._sign-up-form", [
-                            "formId" => 'Singeo - Engagement - Trigger - Harmony Bootcamp - Web Form',
-                            "formName" => 'Harmony Bootcamp',
-                            "buttonText" => "Save my spot!",
-                        ])
                     </div>
                 </div>
             </div>
@@ -338,12 +333,6 @@
             <h5 class="mb-2">
                 <strong class="font-extrabold">Get free LIVE vocal training</strong> with Lisa Witt
             </h5>
-            @include("singeo._partials._sign-up-form", [
-                "formId" => 'Singeo - Engagement - Trigger - Harmony Bootcamp - Web Form',
-                "formName" => 'Harmony Bootcamp',
-                "buttonText" => "Save my spot!",
-                "oneLineLg" => true,
-            ])
         </div>
     </section>
 

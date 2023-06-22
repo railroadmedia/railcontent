@@ -10,6 +10,7 @@ use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
 use App\Modules\Content\Services\CohortService;
 use App\Modules\Ecommerce\Services\UserProductService;
+use App\Modules\UserManagementSystem\Services\OnboardingService;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
@@ -71,7 +72,8 @@ class HomePageController extends BaseController
         UserContentProgressService $userContentProgressService,
         CarouselService $carouselService,
         CohortService $cohortService,
-        UserProductService $userProductService
+        UserProductService $userProductService,
+        OnboardingService $onboardingService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -84,6 +86,7 @@ class HomePageController extends BaseController
         $this->carouselService = $carouselService;
         $this->cohortService = $cohortService;
         $this->userProductService = $userProductService;
+        $this->onboardingService = $onboardingService;
     }
 
     public function homeRedirect()
@@ -146,6 +149,10 @@ class HomePageController extends BaseController
 
         if (empty($methodContent)) {
             return $this->homePackOnly($request, $brand);
+        }
+
+        if (!$this->onboardingService->getBrand(user()->id)) {
+            return redirect()->route('platform.onboarding');
         }
 
         $startedLessons = $this->getUsersStartedContent();

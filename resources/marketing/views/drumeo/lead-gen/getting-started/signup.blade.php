@@ -58,13 +58,14 @@
                     </h6>
                 </div>
 
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
                     "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                     "formName" => 'Getting Started On The Drums',
                     "buttonText" => "Get started for free",
                     'stacked' => true,
                     'inputBorder' => '1px solid #7A8491',
-                    "redirectURL" => "/getting-started/thank-you/"
+                    "redirectURL" => "/getting-started/thank-you/",
+                    "recaptchaKey" => $recaptchaKey
                 ])
             </div>
             <div class="w-full sm:w-5/12 lg:w-1/2">
@@ -140,12 +141,13 @@
             <h3 class="leading-tight font-extrabold my-10">
                 Enter your email address<br class="inline sm:hidden"> below to get started:
             </h3>
-            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
                 "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                 "formName" => 'Getting Started On The Drums',
                 "buttonText" => "Get started for free ",
                 'inputBorder' => '1px solid #7A8491',
-                    "redirectURL" => "/getting-started/thank-you/"
+                    "redirectURL" => "/getting-started/thank-you/",
+                    "recaptchaKey" => $recaptchaKey
             ])
         </div>
     </section>
@@ -153,11 +155,12 @@
     <div class="reveal max-w-xl text-center" id="signUpModal" data-reveal data-reset-on-close="false">
         <div class="p-4">
             <h2 class="mb-2"><strong>Enter your email address<br class="inline sm:hidden"> below to get started:</strong></h2>
-            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
                 "stacked" => true,
                 "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                 "formName" => 'Getting Started On The Drums',
-                    "redirectURL" => "/getting-started/thank-you/"
+                    "redirectURL" => "/getting-started/thank-you/",
+                    "recaptchaKey" => $recaptchaKey
             ])
         </div>
     </div>
@@ -177,4 +180,5 @@
     <script defer src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js"></script>
 @stop

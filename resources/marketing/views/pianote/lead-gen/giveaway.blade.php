@@ -54,13 +54,6 @@
                         <p class="mb-4" style="color:#D0E2E7;">
                             Want a free piano? Simply enter your email address before <span class="text-white font-extrabold">November 21st</span> to secure your chance to win. No purchase necessary. No age restrictions. No location restrictions.
                         </p>
-{{--                        @include('pianote._partials._sign-up-form', [--}}
-{{--                            "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',--}}
-{{--                            "formName" => 'FP30 Giveaway',--}}
-{{--                            'buttonText' => 'I WANT TO WIN!',--}}
-{{--                            'stacked' => true,--}}
-{{--                            'disclaimerColor' => '#B3B3B9'--}}
-{{--                        ])--}}
                     </div>
                 </div>
             </div>
@@ -192,13 +185,7 @@
     <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/footer.jpg">
         <div class="mx-auto max-w-md md:max-w-2xl">
             <img class="h-32 sm:h-36 md:h-44 lg:h-52 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/giveaways/logo.png" alt="title image">
-{{--            @include("pianote._partials._sign-up-form", [--}}
-{{--                    "formId" => 'Pianote - Engagement - Trigger - FP30 Giveaway - Web Form',--}}
-{{--                    "formName" => 'FP30 Giveaway',--}}
-{{--                "buttonText" => "I WANT TO WIN!",--}}
-{{--                "oneLineLg" => true,--}}
-{{--                'disclaimerColor' => '#B3B3B9'--}}
-{{--            ])--}}
+
         </div>
     </section>
 

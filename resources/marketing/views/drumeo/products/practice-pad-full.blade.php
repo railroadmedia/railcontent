@@ -1307,7 +1307,7 @@
             <div class="medium-2 columns"><img src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://s3.amazonaws.com/drumeo-packs/practice-pad/guarantee.png" alt="Guarantee Badge" />
             </div>
             <div class="medium-10 columns text-left show-for-medium">
-                <p>We’re so confident that you’ll LOVE the Drumeo P4 Practice Pad that you’ll get a full 90 day 100% money back guarantee, so you can try it risk-free for three full months. If it’s not for you, simply send it back to us for a full refund. </p>
+                <p>We’re so confident that you’ll LOVE the Drumeo P4 Practice Pad that you’ll get a full 90 day 100% money-back guarantee, so you can try it risk-free for three full months. If it’s not for you, simply send it back to us for a full refund. </p>
             </div>
         </div>
     </div>
