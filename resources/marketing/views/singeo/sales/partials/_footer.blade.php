@@ -20,7 +20,7 @@
 
                 <input type="hidden" name="leadtracker_form_name" value="Singeo General">
                 <div class="infusion-field col-xs-12 form-group text-center medium-text-left lg:w-7/12 lg:pr-1">
-                    <input class="medium-body infusion-field-input-container" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required="">
+                    <input class="medium-body infusion-field-input-container" id="sign-up-email" name="email" type="email" placeholder="Email Address..." required="">
                 </div>
                 <div class="infusion-submit col-xs-12 form-group lg:w-5/12">
                     <button class="submit button-red infusion-recaptcha join-form-button border-singeo text-singeo hover:bg-singeo hover:text-black" type="submit">
@@ -33,7 +33,7 @@
                 <input name="inf_form_xid" type="hidden" value="SingeoEngagementTriggerWebsiteSignupWebForm">
                 <input name="tag_names_to_add[]" type="hidden" value="Singeo - Engagement - Trigger - Website Signup - Web Form">
                 <input name="list_ids_to_subscribe_to[]" type="hidden" value="33">
-                <input name="success_redirect" type="hidden" value="/thank-you-white">
+                <input name="success_redirect" type="hidden" value="/thank-you">
             </form>
             <div class="thank-you-box">
                 <p><em>You should receive an email from team@singeo.com within 10 minutes.</em></p>

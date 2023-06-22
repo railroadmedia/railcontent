@@ -52,6 +52,10 @@ class RedirectController extends BaseController
 
     public function redirectPurchase(Request $request, $domain, $brand)
     {
+        if ($brand == 'musora') {
+            return redirect()->route('platform.onboarding');
+        }
+
         $products = explode(',', $request->get('products'));
 
         /** @var Cohort $cohort */

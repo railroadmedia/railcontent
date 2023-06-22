@@ -545,7 +545,7 @@
                     <td><i class="fas fa-minus"></i></td>
                 </tr>
                 <tr>
-                    <td>Money Back Guarantee</td>
+                    <td>Money-Back Guarantee</td>
                     <td><i class="fas fa-check"></i></td>
                     <td><i class="fas fa-minus"></i></td>
                 </tr>

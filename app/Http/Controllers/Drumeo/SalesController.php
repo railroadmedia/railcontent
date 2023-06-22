@@ -235,6 +235,7 @@ class SalesController extends BaseController
         $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-drummer', [
+            'recaptchaKey'=>config('recaptcha.key'),
             'nPackOwners' => $nPackOwners,
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct
@@ -249,6 +250,7 @@ class SalesController extends BaseController
         $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-chops', [
+            'recaptchaKey'=>config('recaptcha.key'),
             'nPackOwners' => $nPackOwners,
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct

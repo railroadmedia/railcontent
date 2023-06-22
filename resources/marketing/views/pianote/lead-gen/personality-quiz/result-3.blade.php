@@ -33,7 +33,8 @@
                 personality type, please enter your email address. Don’t worry, we won’t <br class="hidden md:inline">
                 share your email with anyone, and you can unsubscribe at any time.
             </p>
-            @include('pianote._partials._sign-up-form', [
+            @include('pianote._partials.sign-up-form', [
+                    "recaptchaKey" => $recaptchaKey,
                 "formName" => 'Personality Quiz Explorer',
                 "formId" => "Pianote - Engagement - Trigger - Personality Quiz Explorer - Web Form",
                 'buttonText' => 'Show my results',
