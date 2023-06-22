@@ -1,5 +1,5 @@
 <script setup>
-    import { onBeforeMount, onMounted, watch, inject, ref, reactive, computed } from 'vue';
+import {onBeforeMount, onMounted, watch, inject, ref, reactive, computed, onUpdated} from 'vue';
     import { storeToRefs  } from 'pinia';
     import { VueDraggableNext } from 'vue-draggable-next';
     import PlaylistService from '../../../../services/playlists.js';
@@ -64,11 +64,11 @@
 
     //-------------Methods-------------//
 
-    const handleSort = () => {
+    const handleSort = async() => {
         playlistsStore.sortingPlaylist = false;
 
         //Update each item in temp array
-        lessonsCopy.value.forEach(lesson => {
+        await lessonsCopy.value.forEach(lesson => {
             //Then send update item request
             if (lesson.hasChanged) {
                 PlaylistService.updatePlaylistItem({
@@ -154,7 +154,9 @@
         playlistsStore.lessons = [...props.lessons.data];
     });
 
-
+    onUpdated(()=>{
+        playlistsStore.getPlaylist({ playlist_id: playlistsStore.activePlaylist.id }, token)
+    })
 </script>
 <template>
     <main class="tw-w-full ">
@@ -203,9 +205,9 @@
                         <section v-if="playlistsStore.lessons.length"
                                 class="tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-col"
                         >
-                            <VueDraggableNext 
+                            <VueDraggableNext
                                 :ghost-class="playlistsStore.sortingPlaylist ? 'ghost' : ''"
-                                :v-model="playlistsStore.lessons" 
+                                :v-model="playlistsStore.lessons"
                                 :sort="playlistsStore.sortingPlaylist"
                                 :key="state.lessonsContainerKey"
                                 @update="handleDragChange"
