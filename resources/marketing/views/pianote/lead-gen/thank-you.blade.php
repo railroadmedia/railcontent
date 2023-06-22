@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {!! \App\Analytics\Tracker::headTop() !!}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
+    {!! \App\Analytics\Tracker::trackPageView() !!}
+    <script src="https://www.googleoptimize.com/optimize.js?id=GTM-NJR7J6C"></script>
     <title>Check your email | Pianote</title>
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg" style="display: none;">
     @include('_partials.layout._fonts')
@@ -98,8 +101,10 @@
             }
         }
     </style>
+    {!! \App\Analytics\Tracker::headBottom() !!}
 </head>
 <body>
+{!! \App\Analytics\Tracker::bodyTop() !!}
 <p><strong>You're Almost There!</strong></p>
 <h2>Check your email</h2>
 <p><em>You should receive an email from team@pianote.com within 10 minutes.
@@ -110,5 +115,6 @@
     <a href="https://facebook.com/pianoteofficial" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
     <a href="https://instagram.com/pianoteofficial" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
 </div>
+{!! \App\Analytics\Tracker::bodyBottom() !!}
 </body>
 </html>

@@ -295,7 +295,8 @@
                 We’ll email you the access link within 5 minutes.
             </div>
             <div class="max-w-lg px-4 mx-auto">
-                @include('pianote._partials._sign-up-form', [
+                @include('pianote._partials.sign-up-form', [
+                    "recaptchaKey" => $recaptchaKey,
                     "stacked" => true,
                     "formId" => "Pianote - Engagement - Trigger - Sight Reading - Web Form",
                     "formName" => 'Sight Reading Made Simple',

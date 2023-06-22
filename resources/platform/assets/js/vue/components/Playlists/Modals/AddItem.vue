@@ -47,7 +47,6 @@ const preventReFetch = ref(false);
 const duplicatedIDs = ref([]);
 const duplicateProps = ref({ show: false, id: null });
 const duplicatedItemIdNameMap = ref({});
-const playlistNum = ref(0);
 
 const handleOnToggleAssignments = (val) => {
     importAll.value = val;
@@ -236,7 +235,6 @@ const getUserPlaylists = () => {
             } else {
                 state.formattedTable = [...state.formattedTable, ...formattedTable]
             }
-            playlistNum.value = data.length;
         } else {
             preventReFetch.value = true;
         }
@@ -386,7 +384,7 @@ onMounted(() => {
 
         <Table @onActionClick="handleActionClick" 
             @onScroll="handleScroll"
-            :classOverride="`tw-max-h-[150px] lg:tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" 
+            :classOverride="`tw-max-h-[150px] lg:tw-max-h-[350px] ${ state.formattedTable.length < 4 && 'lg:tw-overflow-y-hidden'}`" 
             :stickyHeader="true" 
             :rows="state.formattedTable"
         >

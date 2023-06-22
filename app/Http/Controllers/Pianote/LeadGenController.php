@@ -39,32 +39,32 @@ class LeadGenController extends BaseController
 
     public function weeklyemail()
     {
-        return view('pianote.lead-gen.blog-forms.weekly-email');
+        return view('pianote.lead-gen.blog-forms.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function weeklyemail2()
     {
-        return view('pianote.lead-gen.blog-forms.weekly-email-2');
+        return view('pianote.lead-gen.blog-forms.weekly-email-2', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function minorBlues()
     {
-        return view('pianote.lead-gen.blog-forms.minor-blues');
+        return view('pianote.lead-gen.blog-forms.minor-blues', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function fSharpMinor()
     {
-        return view('pianote.lead-gen.blog-forms.f-sharp-minor');
+        return view('pianote.lead-gen.blog-forms.f-sharp-minor', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function pentatonicScale()
     {
-        return view('pianote.lead-gen.blog-forms.pentatonic-scale');
+        return view('pianote.lead-gen.blog-forms.pentatonic-scale', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function chordInversions()
     {
-        return view('pianote.lead-gen.blog-forms.chord-inversions');
+        return view('pianote.lead-gen.blog-forms.chord-inversions', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function recitals()
@@ -130,7 +130,7 @@ class LeadGenController extends BaseController
     {
         switch($page){
             case null:
-                return view('pianote.lead-gen.chord-hacks.signup');
+                return view('pianote.lead-gen.chord-hacks.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
                 return view('pianote.lead-gen.chord-hacks.thank-you');
         }
@@ -175,7 +175,7 @@ class LeadGenController extends BaseController
     {
         switch($page){
             case null:
-                return view('pianote.lead-gen.getting-started.pages.signup');
+                return view('pianote.lead-gen.getting-started.pages.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
                 return view('pianote.lead-gen.getting-started.thank-you');
         }
@@ -185,14 +185,14 @@ class LeadGenController extends BaseController
 
     public function sightReading()
     {
-        return view('pianote.lead-gen.sight-reading-made-simple.signup');
+        return view('pianote.lead-gen.sight-reading-made-simple.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function learnSongs(Request $request, $domain, $page = null,)
     {
         switch($page){
             case null:
-                return view('pianote.lead-gen.learn-songs.signup');
+                return view('pianote.lead-gen.learn-songs.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
                 return view('pianote.lead-gen.learn-songs.thank-you');
         }
@@ -202,18 +202,18 @@ class LeadGenController extends BaseController
 
     public function carols()
     {
-        return view('pianote.lead-gen.christmas-carols.signup');
+        return view('pianote.lead-gen.christmas-carols.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function classicalPiano()
     {
-        return view('pianote.lead-gen.classical-piano.signup');
+        return view('pianote.lead-gen.classical-piano.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function chordCharts(Request $request, $domain, $page = null)
     {
         if(is_null($page)){
-            return view('pianote.lead-gen.50-chord-charts.signup');
+            return view('pianote.lead-gen.50-chord-charts.signup', ['recaptchaKey'=>config('recaptcha.key')]);
         }
         else {
             return view('pianote.lead-gen.50-chord-charts.unlocked');
@@ -224,19 +224,19 @@ class LeadGenController extends BaseController
 
     public function fiveDays()
     {
-        return view('pianote.lead-gen.piano-in-5-days.signup');
+        return view('pianote.lead-gen.piano-in-5-days.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function startHere(Request $request, $domain)
     {
-        return view('pianote.lead-gen.start-here');
+        return view('pianote.lead-gen.start-here', ['recaptchaKey'=>config('recaptcha.key')]);
 
         throw new NotFoundHttpException();
     }
 
     public function sevenDaysSightReading()
     {
-        return view('pianote.lead-gen.7-days-to-sight-reading.signup', ['theme' => 'pianote']);
+        return view('pianote.lead-gen.7-days-to-sight-reading.signup', ['recaptchaKey'=>config('recaptcha.key'), 'theme' => 'pianote']);
     }
 
     public function personalityQuiz(Request $request, $domain, $page = null)
@@ -245,7 +245,7 @@ class LeadGenController extends BaseController
             case null:
                 return view('pianote.lead-gen.personality-quiz.personality-quiz');
             default:
-                return view('pianote.lead-gen.personality-quiz.'.$page);
+                return view('pianote.lead-gen.personality-quiz.'.$page, ['recaptchaKey'=>config('recaptcha.key')]);
         }
 
         throw new NotFoundHttpException();

@@ -19,6 +19,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
+use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection;
@@ -80,6 +81,7 @@ class UserPlaylistsController extends BaseController
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 12);
         $term = $request->get('search');
+        UserPlaylistsRepository::$availableCategories = $request->get('categories', false);
 
         $lessons = $this->userPlaylistsService->getUserPlaylist(
             user()->id,

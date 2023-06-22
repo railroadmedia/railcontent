@@ -204,8 +204,6 @@
             'pointOne' => 'Learn New Skills',
             'pointTwo' => 'Study With Legends',
             'pointThree' => 'Play Real Songs',
-            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
-            'students' => number_format(Prices::$students),
         ])
     @else
         @include('musora.sales.components.header-section', [
@@ -217,8 +215,6 @@
             'pointOne' => 'Improve Your Skills',
             'pointTwo' => 'World-Class Teachers',
             'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
-            'students' => number_format(Prices::$students),
         ])
     @endif
 
@@ -525,7 +521,6 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
         'youtube' => '2.6M',

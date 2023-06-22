@@ -3,7 +3,7 @@
         <div class="w-full px-2 md:px-3 text-center">
             <img class="h-10 sm:h-20 lg:h-24 mb-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1300,q_60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png">
             <h3><strong>Start your free 7-day trial.</strong></h3>
-            <h5 class="leading-normal"><em class="opacity-70">Cancel anytime. 90-Day Money Back Guarantee</em></h5>
+            <h5 class="leading-normal"><em class="opacity-70">Cancel anytime. 90-Day Money-Back Guarantee</em></h5>
             <a class="join my-5 md:my-7" href="/choose-plan">Get Started &raquo;</a>
         </div>
     </div>

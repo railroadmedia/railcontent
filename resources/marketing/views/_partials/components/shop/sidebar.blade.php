@@ -114,7 +114,7 @@
                         echo 'https://d21xeg6s76swyd.cloudfront.net/sales/2021/guarantee.png';
                     }
                 @endphp" alt="guarantee badge">
-                <p class="text-sm text-left my-0 text-{{ $theme }}"><em>Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</em></p>
+                <p class="text-sm text-left my-0 text-{{ $theme }}"><em>Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money-Back <br class="lg:hidden" /> Guarantee.</em></p>
             </div>
         @endif
     </div>

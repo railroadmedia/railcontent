@@ -257,7 +257,7 @@
         "bgImg" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/order-background.jpg",
         "img" => '<img class="h-14 sm:h-20 lg:h-28 mx-auto" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/logo-purple.png" alt="song-in-an-hour-logo" />',
         "text" => '<div class="leading-tight text-lg my-5 md:my-8 md:text-2xl lg:text-3xl">Enter your email below<br class="inline md:hidden"> to get started!</div>',
-        "formId" => "Guitareo1 - Engagement - Trigger - Song Hour - Web Form",
+        "formId" => "Guitareo - Engagement - Trigger - Song Hour - Web Form",
         "formName" => 'Song Hour',
         "redirectURL" => "/song-in-an-hour/thank-you",
         "submitButtonColor" => 'linear-gradient(180deg,#ffd500,#ffb600)',

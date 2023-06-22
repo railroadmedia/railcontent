@@ -204,8 +204,6 @@
                 'pointOne' => 'Perfect for Beginners',
                 'pointTwo' => 'Super-Friendly Teachers',
                 'pointThree' => 'Fun Lessons',
-                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
-                'students' => number_format(Prices::$students),
             ])
         @elseif(!empty($songsVersion))
             @include('musora.sales.components.header-section', [
@@ -217,8 +215,6 @@
                 'pointOne' => '1000+ popular songs',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Learn anywhere, anytime',
-                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
-                'students' => number_format(Prices::$students),
             ])
         @else
             @include('musora.sales.components.header-section', [
@@ -230,8 +226,6 @@
                 'pointOne' => 'Improve Your Skills',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
-                'students' => number_format(Prices::$students),
             ])
         @endif
     @endif
@@ -548,7 +542,6 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
         'youtube' => '1.2M',

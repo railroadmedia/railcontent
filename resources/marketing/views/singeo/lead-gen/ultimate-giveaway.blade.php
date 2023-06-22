@@ -215,12 +215,7 @@
                         </p>
                     </div>
                     <p class="leading-tight sm:leading-normal my-2 sm:my-5" style="color:#d0e2e7"><strong>You’ll also get instructions via email on how to get a TON more bonus entries!</strong></p>
-                    @include("lead-gen.partials._sign-up-form-cio", [
-                    "formId" => "Singeo - Engagement - Trigger - Ultimate Giveaway - Web Form",
-                    "formName" => 'Ultimate Giveaway',
-                        "buttonText" => "I WANT TO WIN THE $2,000 PRIZE",
-                        "stacked" => true
-                        ])
+
                 </div>
             </div>
         </div>
@@ -320,12 +315,7 @@
     <section class="text-center text-white py-8 md:py-14 lg:py-20 px-5 md:px-7 bg-center bg-cover final-bg">
         <div class="container mx-auto max-w-2xl">
             <img class="h-24 sm:h-28 lg:h-44 lazyload mb-4 sm:mb-6" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/ultimate/logo_center_align.svg" alt="title image">
-            @include("lead-gen.partials._sign-up-form-cio", [
-                "formId" => "Singeo - Engagement - Trigger - Ultimate Giveaway - Web Form",
-                "formName" => 'Ultimate Giveaway',
-                "buttonText" => "I WANT TO WIN!",
-                "oneLineLg" => true,
-                ])
+
         </div>
     </section>
     <section class="flex items-center text-center text-white" style="background:linear-gradient(180deg, #8300E9 0%, #3F0071 100%);">

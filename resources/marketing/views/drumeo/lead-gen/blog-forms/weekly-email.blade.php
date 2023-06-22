@@ -5,7 +5,8 @@
 @section('title', 'Weekly Email')
 
 @section('form')
-    @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+    @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
         "formId" => "Drumeo - Engagement - Trigger - Blog Signup - WebForm",
         "buttonText" => "Join The Drum Club &raquo;",
         "minimalForm" => true,

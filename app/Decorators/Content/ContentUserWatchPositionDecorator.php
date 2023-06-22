@@ -34,11 +34,13 @@ class ContentUserWatchPositionDecorator extends \Railroad\Railcontent\Decorators
             return $item['id'];
         })->toArray();
 
-        $lastEngagedLookup = LastEngagedSeconds::query()->whereIn('content_id', $contentIds)->get()->groupBy(
-            function ($item) {
-                return $item['content_id'];
-            }
-        );
+        $lastEngagedLookup = LastEngagedSeconds::query()
+            ->where('user_id', '=', $userId)
+            ->whereIn('content_id', $contentIds)->get()->groupBy(
+                function ($item) {
+                    return $item['content_id'];
+                }
+            );
 
         foreach ($contents as $index => $content) {
             /** @var LastEngagedSeconds $lastEngaged */

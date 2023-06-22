@@ -8,7 +8,7 @@
     <div class="container mx-auto max-w-6xl">
         <h2 class="leading-tight mb-4"><strong>{!! $header !!}</strong></h2>
         <p class="mx-auto mb-7">{!!  $reviewText  !!}</p>
-        <a class="inline-block w-full" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
+        <a class="inline-block w-full" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
             <img
                 alt="shopper approved image"
                 class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
