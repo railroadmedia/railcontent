@@ -64,12 +64,14 @@
                     <h6 class="mb-4">Enter your email below for your 12 free lessons:</h6>
                 </div>
                 <div class="lg:pr-20 xl:pr-28">
-                    @include("drumeo.lead-gen.partials.sign-up-form-tw", [
-                        "formId" => 'TODO',
-                        "formName" => 'TODO',
-                        "buttonText" => "Start for free",
-                        "stacked" => true
-                    ])
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
+                    "formName" => 'Getting Started On The Drums',
+                    "buttonText" => "Get started for free",
+                    'stacked' => true,
+                    "redirectURL" => "/getting-started/thank-you/",
+                    "recaptchaKey" => $recaptchaKey
+                ])
                 </div>
             </div>
             <div class="w-full sm:w-1/2 hidden sm:block">
@@ -164,11 +166,13 @@
             <img class="h-16 lg:h-24 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://drumeo-assets.s3.amazonaws.com/lead-gen/gsotd/updated/GSOTD-dark-blue.png" alt="GSTOD logo" loading="lazy" onload="this.classList.remove('opacity-0')" />
             <h5 class="my-5 sm:my-7 font-bold">Enter your email to receive 12 free lessons.</h5>
             <div class="max-w-sm mx-auto sm:max-w-none">
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
-                    "formId" => 'TODO',
-                    "formName" => 'TODO',
-                    "buttonText" => "Send videos",
-                ])
+            @include("drumeo.lead-gen.partials.sign-up-form", [
+                "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
+                "formName" => 'Getting Started On The Drums',
+                "buttonText" => "Get started for free ",
+                    "redirectURL" => "/getting-started/thank-you/",
+                    "recaptchaKey" => $recaptchaKey
+            ])
             </div>
         </div>
     </section>
