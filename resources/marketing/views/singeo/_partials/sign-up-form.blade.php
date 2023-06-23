@@ -1,4 +1,5 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
+<style> .grecaptcha-badge {display:none;right:0!important;} </style>
 @php
     if (!empty($formId))
         $cleanFormId = str_replace('-', '', (str_replace(' ', '', $formId)));

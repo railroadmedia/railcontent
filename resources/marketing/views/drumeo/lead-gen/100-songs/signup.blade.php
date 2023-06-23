@@ -157,7 +157,7 @@
                 <p class="text-coaches my-2 sm:my-3">EXPANDED EDITION</p>
                 <h5 class="mb-6 lg:mb-9 leading-normal">
                     <strong>For a LIMITED TIME, you’ll get 100 Drumeo Songs totally FREE.</strong><br>
-                    <em>Enter your email to grab note-for-note sheet music & handy playalong tools.</em>
+                    <em>Enter your email to grab note-for-note sheet music & handy play-along tools.</em>
                 </h5>
                 <div class="mx-auto" style="max-width:700px">
                     @include("drumeo.lead-gen.partials.sign-up-form", [
@@ -234,5 +234,4 @@
     <script src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js"></script>
 @stop
