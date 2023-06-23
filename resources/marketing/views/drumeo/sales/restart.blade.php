@@ -1,12 +1,12 @@
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
-    <title>Drumeo | Reach your drumming goals.</title>
-    <meta property="og:title" content="Drumeo | Reach your drumming goals.">
-    <meta property="og:url" content="https://www.drumeo.com/">
+    <title>Save 50% On Your First Year</title>
+    <meta property="og:title" content="Save 50% On Your First Year">
+    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
-    <meta name="description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
-    <meta property="og:description" content="Learn the drums faster with organized video lessons, legendary teachers, and better practice tools. 90-Day Guarantee.">
+    <meta name="description" content="We want you back – so you’ll get a 50% discount on your first year with Drumeo.">
+    <meta property="og:description" content="We want you back – so you’ll get a 50% discount on your first year with Drumeo.">
 
     @hasSection('share-image')
         @yield('share-image')
@@ -114,13 +114,6 @@
         @endif
     </style>
 @stop
-
-@section('body-data')
-    x-data ='{
-        soundslice : false,
-        trailer : false,
-    }'
-@endsection
 
 @section('global-body')
         @include("drumeo.sales.partials._nav", [
@@ -232,7 +225,7 @@
                             <i class="text-4xl align-middle icon-songs text-songs"></i>
                             <img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
                             <p class="mt-2">
-                                Easy access to 5000+ famous drum songs with playalong tools.
+                                Easy access to 5000+ famous drum songs with play-along tools.
                             </p>
                         </div>
                     </div>
@@ -376,7 +369,7 @@
                         </div>
                     </div>
                     <br>
-                    <h3 class="leading-tight mt-4 sm:mt-5"><strong>Restart your <span class="hidden sm:inline">Drumeo</span> Membership<br class="inline sm:hidden">  today and save 50%.</strong></h3>
+                    <h3 class="leading-tight mt-4 sm:mt-5"><strong>Restart your <span class="hidden sm:inline">Drumeo</span> Membership<br class="hidden sm:inline">  today and save 50%.</strong></h3>
                     <p class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until June 30th.
                                 <span x-cloak x-data="timer()" x-init="countdown()">
                                                                      <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
@@ -393,12 +386,6 @@
                 <a class="join green" href="https://www.musora.com/ecommerce/add-to-cart?products[musora-access-1-year]=1&promo-code=win-back&locked=true">GET Started »</a>
             </div>
         </section>
-
-    @include('_partials.components.video-modal',[
-        'name' => 'trailer',
-        'video' => '785314424',
-        'vimeo' => true,
-    ])
 
         @include("drumeo.sales.partials._footer")
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

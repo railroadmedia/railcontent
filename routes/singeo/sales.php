@@ -8,6 +8,7 @@ Route::domain('{singeoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
     Route::get('/', [SalesController::class, 'home'] );
+    Route::get('/restart', [SalesController::class, 'restart'] );
     Route::get('/trial', [SalesController::class, 'trial']);
     Route::get('/trial-a', [SalesController::class, 'trial1']);
     Route::get('/trial-b', [SalesController::class, 'trial2']);
