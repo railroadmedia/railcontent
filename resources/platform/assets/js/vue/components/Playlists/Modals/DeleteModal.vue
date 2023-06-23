@@ -104,6 +104,8 @@
         PlaylistService.deletePlaylistItem(props.data.user_playlist_item_id, token)
             .then(function(response) {
                 if (response.status === 200) {
+                    if(props.data.index === 0) playlistsStore.getPlaylist({ playlist_id: playlistsStore.activePlaylist.id }, token);
+
                     //show success message
                     window.shownotification({
                         icon: 'fa-trash',
