@@ -405,8 +405,8 @@ class ContentProgressEventListener
             );
         } else {
             $userId = user()->id;
-            Log::error("handleMediaPlaybackTracked $userId");
-            Log::debug(print_r($mediaPlaybackTracked, true));
+            Log::info("handleMediaPlaybackTracked $userId");
+            //Log::debug(print_r($mediaPlaybackTracked, true));
         }
         $assignmentTypeIds = $this->mediaPlaybackRepository->getAssignmentTypeIds();
         if (in_array($mediaPlaybackTracked->typeId, $assignmentTypeIds)) {
