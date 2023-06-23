@@ -1266,6 +1266,8 @@ return [
         "assignment",
         'unit-part',
         'boot-camps',
+        'podcasts',
+        'chord-and-scale'
     ],
     'hiddenContentTypes' => [
         'ha-oemurd-pmac',
