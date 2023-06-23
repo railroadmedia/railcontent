@@ -62,7 +62,7 @@ const props = defineProps({
     inPlaybackCue: {
         type: Boolean,
         default: false,
-    },                         
+    },
 })
 
 //---------Computed Props---------//
@@ -206,7 +206,7 @@ const unpinPlaylistModal = () => {
 };
 
 const removeLesson = () => {
-    window.openplaylistmodal({ modalType: 'removeLesson', data: props.data });
+    window.openplaylistmodal({ modalType: 'removeLesson', data: { ...props.data, index: props.index } });
     emit('closeDropdown');
 };
 

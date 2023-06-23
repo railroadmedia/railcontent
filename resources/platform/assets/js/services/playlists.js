@@ -89,6 +89,28 @@ export default {
      * @param {object} payload
      * @param {string} token
      */
+    getPlaylist(payload, token) {
+        const playlistParams = {
+            "playlist_id": 1,
+        }
+        const headers = {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': token
+        };
+        return axios({
+            method: 'GET',
+            url: '/railcontent/playlist',
+            params: payload ? payload : playlistParams,
+            headers
+        });
+    },
+
+    /**
+     * GET Playlists
+     *
+     * @param {object} payload
+     * @param {string} token
+     */
     getCurrentUserPlaylists(payload, token) {
         const playlistParams = {
             "limit": null,
