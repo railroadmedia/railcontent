@@ -130,15 +130,24 @@
             "logoUrl" => Request::path(),
         ])
 
-        <header class="sm:px-6 pb-10 sm:pt-14 sm:pb-28 lg:pt-20 lg:pb-40 text-white" style="background:linear-gradient(to left, #0B76DB, #6500B4);">
+        <header class="sm:px-6 pb-14 pt-6 sm:pt-14 sm:pb-28 lg:pt-20 lg:pb-36 text-white" style="background:linear-gradient(to left, #0B76DB, #6500B4);">
             <div class="container max-w-6xl mx-auto">
                 <div class="flex flex-wrap sm:flex-nowrap items-center">
                     <div class="w-full text-center">
                         <div class="px-5 sm:px-0">
-                            <img src="">
-                            <h1 class="rotater-text"><strong>Save 50% On Your First Year</strong></h1>
-                            <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2">We want you back – so you’ll get a <strong>50% discount</strong> on your first year with Drumeo.<br>
-                                <strong class="text-musora"><em>Only available until June 30th. -- days -- hours -- minutes -- seconds left!</em></strong></h6>
+                            <img class="h-20 sm:h-36" src="https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/header-collage.png">
+                            <h1 class="rotater-text my-4 lg:my-5"><strong>Save 50% On <br class="inline sm:hidden"> Your First Year</strong></h1>
+                            <h6 class="leading-normal mb-4 sm:mb-2">We want you back – so you’ll get a <strong>50% discount</strong> on your first year with Drumeo.<br>
+                                <strong class="text-musora"><em>Only available until June 30th.
+
+                                                        <span x-cloak x-data="timer()" x-init="countdown()">
+                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                                                                 </span>
+                                        left!</em></strong></h6>
                             <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 lg:mt-10 mx-auto sm:max-w-xs">
                                 <a class="w-full join green smaller mb-2 anchor-slide" href="#customize-anchor">SEE YOUR DEAL &raquo;</a>
                                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
@@ -204,8 +213,8 @@
 
         <section class="pt-12 md:pt-20">
             <div class="max-w-md md:max-w-4xl mx-auto px-4 lg:px-2">
-                <h3 class="font-extrabold text-center">Drumeo membership special pricing.</h3>
-                <p class="text-center mt-3 mb-6">You’ll have one year of unlimited drum lessons, including:</p>
+                <h3 class="font-extrabold text-center">Drumeo membership<br class="inline sm:hidden"> special pricing.</h3>
+                <p class="text-center mt-3 mb-6">You’ll have one year of unlimited<br class="inline sm:hidden">  drum lessons, including:</p>
                 <div class="md:grid md:grid-cols-3 md:gap-4">
                     <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#F6F8FC;">
                         <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-method.jpg"></div>
@@ -218,7 +227,7 @@
                         </div>
                     </div>
                     <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#F6F8FC;">
-                        <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-songs2.jpg"></div>
+                        <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/drumeo-songs.jpg"></div>
                         <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
                             <i class="text-4xl align-middle icon-songs text-songs"></i>
                             <img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
@@ -228,7 +237,7 @@
                         </div>
                     </div>
                     <div class="relative rounded-xl overflow-hidden" style="background-color:#F6F8FC;">
-                        <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-coaches2.jpg"></div>
+                        <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/drumeo-coaches.jpg"></div>
                         <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
                             <img class="h-8 icon imgfilter-coaches lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon">
                             <img class="h-5 ml-2 imgfilter-coaches lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">
@@ -354,26 +363,34 @@
         <div class="unstick-trigger block"></div>
         <div id="customize-anchor" class="anchor"></div>
         <div id="order" class="anchor"></div>
-        <section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6" style="background:linear-gradient(to left, #0B76DB, #6500B4);">
+        <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6" style="background:linear-gradient(to left, #0B76DB, #6500B4);">
             <div class="container mx-auto max-w-6xl relative z-50">
                 <div class="w-full">
-                    <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
-                        <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
+                    <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-xs">
+                        <div class=" inline-block relative w-full group" style="padding-bottom: 62%;perspective: 1000px;">
                             <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                                 <div class="  front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="h-full w-full bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png);"></div>
+                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/membership-badge.png);"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <br>
-                    <h3 class="leading-tight mt-4 sm:mt-5"><strong>Restart your Drumeo Membership<br class="hidden sm:inline-block"> today and save 50%.</strong></h3>
-                    <h5 class="leading-tight my-3 sm:my-4 text-musora"><strong><em>Only available until June 30th. -- days -- hours -- minutes -- seconds left!</em></strong></h5>
+                    <h3 class="leading-tight mt-4 sm:mt-5"><strong>Restart your <span class="hidden sm:inline">Drumeo</span> Membership<br class="inline sm:hidden">  today and save 50%.</strong></h3>
+                    <p class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until June 30th.
+                                <span x-cloak x-data="timer()" x-init="countdown()">
+                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                                                                 </span>
+                                left!</em></strong></p>
 
                     <h3 class="leading-tight mb-1"><strong>Only</strong> <s class="opacity-50">$240</s> <strong>$120</strong></h3>
                     <p class="leading-tight text-sm mb-5"><em>Renews at $240 after your first year.</em></p>
                 </div>
-                <a class="join green" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&amp;products[Drumeo-VaterSticks]=1&amp;products[drum-technique-made-easy-pack]=1&amp;products[rock-drumming-masterclass-pack]=1&amp;products[independence-made-easy-pack]=1&amp;locked=true&amp;promo-code=special">GET Started »</a>
+                <a class="join green" href="https://www.musora.com/ecommerce/add-to-cart?products[musora-access-1-year]=1&promo-code=win-back&locked=true">GET Started »</a>
             </div>
         </section>
 
@@ -390,5 +407,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    @yield('scripts')
+
+        @include('_partials.components.countdown',[
+        'countdownDate' => '2023-07-01 00:00:00',
+        'promoVersion' => false
+        ])
 @stop
