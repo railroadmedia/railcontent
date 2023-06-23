@@ -25,6 +25,11 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote']);
     }
+
+    public function restart()
+    {
+        return view('pianote.sales.restart', ['theme' => 'pianote']);
+    }
     public function homeJune()
     {
         return view('pianote.sales.subscription-june', ['theme' => 'pianote', 'month' => true, 'promoVersion' => true, 'trialVersion' => true]);

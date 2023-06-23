@@ -110,7 +110,7 @@
             description: state.description,
             category: state.category,
             private: props.playlist.private,
-            thumbnail_url: state.thumb,
+            thumbnail_url: state.thumb !== props.playlist.thumbnail_url ? state.thumb : null,
         };
         if(props.mode === "create") {
             PlaylistService.createUserPlaylist({

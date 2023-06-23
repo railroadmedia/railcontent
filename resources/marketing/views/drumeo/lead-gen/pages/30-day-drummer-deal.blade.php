@@ -304,7 +304,7 @@
                         <i class="text-4xl align-middle icon-songs text-songs"></i>
                         <img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
                         <p class="mt-2" style="color:#A3AEC6;">
-                            Easy access to 3100+ famous drum songs with playalong tools.
+                            Easy access to 3100+ famous drum songs with play-along tools.
                         </p>
                     </div>
                 </div>

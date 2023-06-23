@@ -4,7 +4,13 @@
             <div class="-ml-20 -mr-28 mt-10 mb-6 md:hidden">
                 <img class="w-full" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/albums-m.png" alt="albums mobile" />
             </div>
-            <h3 class="font-extrabold">Test your speed out with real music.</h3>
+            <h3 class="font-extrabold">
+                @if(!empty($gsotd))
+                    Start playing your favorite songs
+                @else
+                    Test your speed out with real music.
+                @endif
+            </h3>
             <p class="uppercase text-promo tracking-widest py-3">
                 Try Drumeo’s Songs section <br class="sm:hidden">free for 7 days.
             </p>
