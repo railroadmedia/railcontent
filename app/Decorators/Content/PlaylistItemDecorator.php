@@ -112,6 +112,8 @@ class PlaylistItemDecorator extends TypeDecoratorBase
         $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
 
         foreach ($contentsOfType as $contentIndex => $content) {
+            $contentsOfType[$contentIndex]['type'] = $this->convertContentType($content['type']);
+
             //set start/end time should not be displayed on assignments and song playlist items
             $contentsOfType[$contentIndex]['set_start_end_time'] =
                 ($content['type'] != 'assignment' && $content['type'] != 'song');
@@ -134,7 +136,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 $userPermissionIds = array_merge($userPermissionIds, $membershipPermissionIds);
             }
 
-            $contentsOfType[$contentIndex]['need_access']  = empty(
+            $contentsOfType[$contentIndex]['need_access'] = empty(
                 array_intersect(
                     $userPermissionIds,
                     (isset($grupedPermissions[$content['id']])) ?
@@ -143,8 +145,13 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 )
                 ) && (isset($grupedPermissions[$content['id']]));
 
-            $needLifetime = (count($grupedPermissions[$content['id']]??[]) == 1) && array_intersect(
-                    ['Drumeo Lifetime Member','Pianote Lifetime Member','Guitareo Lifetime Member','Singeo Lifetime Member'],
+            $needLifetime = (count($grupedPermissions[$content['id']] ?? []) == 1) && array_intersect(
+                    [
+                        'Drumeo Lifetime Member',
+                        'Pianote Lifetime Member',
+                        'Guitareo Lifetime Member',
+                        'Singeo Lifetime Member',
+                    ],
                     (isset($grupedPermissions[$content['id']])) ?
                         $grupedPermissions[$content['id']]->pluck('name')
                             ->toArray() : []
@@ -167,9 +174,9 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 $contentsOfType[$contentIndex]['need_access'] = true;
                 $message = 'This Song content is part of our <b>Musora+ Membership</b>.';
                 self::$noAccessMessages[$content['id']] = $message;
-             }
+            }
 
-            if($contentsOfType[$contentIndex]['need_access']) {
+            if ($contentsOfType[$contentIndex]['need_access']) {
                 $contentsOfType[$contentIndex]['need_access_message'] = $message;
             }
             if (!empty($content['user_playlist_item_extra_data'])) {
@@ -188,7 +195,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
             $route = [];
 
             if (!empty($content['parent_content_data'])) {
-                 $hierarchyData =
+                $hierarchyData =
                     $hierarchyRows->where('rch1_child_id', $content['id'])
                         ->first();
                 $parentContentDataForDatabase = [];
@@ -297,9 +304,11 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                         }
                     }
 
-                    if ($contentsOfType[$contentIndex]['need_access'] && (empty($contentsOfType[$contentIndex]['need_access_message']))) {
+                    if ($contentsOfType[$contentIndex]['need_access'] &&
+                        (empty($contentsOfType[$contentIndex]['need_access_message']))) {
                         $parent = self::$parents[$content['id']] ?? null;
-                        $contentsOfType[$contentIndex]['need_access_message'] = self::$noAccessMessages[$content['id']] =
+                        $contentsOfType[$contentIndex]['need_access_message'] =
+                        self::$noAccessMessages[$content['id']] =
                             $content['title'].' is part of our <b>'.$parent['title'].'</b> Pack.';
                     }
 
@@ -317,7 +326,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                             ) && (isset($grupedPermissions[self::$parents[$content['id']]['id']]));
                         if ($contentsOfType[$contentIndex]['need_access']) {
                             $contentsOfType[$contentIndex]['need_access_message'] =
-                                self::$noAccessMessages[self::$parents[$content['id']]['id']]??'';
+                                self::$noAccessMessages[self::$parents[$content['id']]['id']] ?? '';
                         }
                     }
                 }
@@ -335,5 +344,28 @@ class PlaylistItemDecorator extends TypeDecoratorBase
     private function railcontentDB()
     {
         return DB::connection(config('railcontent.database_connection_name'));
+    }
+
+    private function convertContentType($contentType)
+    {
+        $modifiedType = $contentType;
+
+        if ($contentType === 'learning-path-lesson') {
+            return 'Method Lesson';
+        }
+        if ($contentType === 'song-tutorial-children') {
+            return 'Song Tutorial';
+        }
+        if ($contentType === 'play-along') {
+            return 'Play-Along';
+        }
+
+        try {
+            $modifiedType = str_replace('-', ' ', $contentType);
+        } catch (e) {
+            return '';
+        }
+
+        return $modifiedType;
     }
 }

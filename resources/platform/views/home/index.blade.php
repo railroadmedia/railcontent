@@ -168,13 +168,3 @@
         </script>
     @endif
 @endsection
-
-<script>
-    import CohortBanner from "../../assets/js/vue/components/CohortBanner/CohortBanner";
-    export default {
-        components: {CohortBanner}
-    }
-</script>
-
-
-

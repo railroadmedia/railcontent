@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {!! \App\Analytics\Tracker::headTop() !!}
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-N2HMTTQ');</script>
+    <!-- End Google Tag Manager -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
+    {!! \App\Analytics\Tracker::trackPageView() !!}
+
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-NV2LHJP"></script>
     @include('_partials.layout._fonts')
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/css/foundation-float.min.css"/>
     <!-- Facebook Pixel Code -->
@@ -113,8 +125,16 @@
             }
         }
     </style>
+    {!! \App\Analytics\Tracker::headBottom() !!}
 </head>
 <body>
+{!! \App\Analytics\Tracker::bodyTop() !!}
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N2HMTTQ"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 <p><strong>Success!</strong></p>
 <h2>Check your email</h2>
 <p><em>You should receive an email from team@singeo.com within 10 minutes.
@@ -125,5 +145,6 @@
     <a href="https://www.facebook.com/singeoofficial/" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
     <a href="https://www.instagram.com/singeoofficial/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
 </div>
+{!! \App\Analytics\Tracker::bodyBottom() !!}
 </body>
 </html>
