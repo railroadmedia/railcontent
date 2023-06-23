@@ -104,8 +104,8 @@
                  background: #10D05F;
 
         }
-        .join:hover,
-        .join:focus {
+        .join.green:hover,
+        .join.green:focus {
              background: #13eb6d;
          }
     </style>
@@ -137,7 +137,7 @@
                                                                  </span>
                                         left!</em></strong></h6>
                             <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 lg:mt-10 mx-auto sm:max-w-xs">
-                                <a class="w-full join green smaller mb-2 anchor-slide" href="#customize-anchor">SEE YOUR DEAL &raquo;</a>
+                                <a class="w-full join green smaller mb-2" href="/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&locked=true&promo-code=restart">SEE YOUR DEAL &raquo;</a>
                                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>
                                     <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #0088ad;color: #ffac00;"></i>
@@ -336,7 +336,7 @@
                     <h3 class="leading-tight mb-1"><strong>Only</strong> <s class="opacity-50">$240</s> <strong>$120</strong></h3>
                     <p class="leading-tight text-sm mb-5"><em>Renews at $240 after your first year.</em></p>
                 </div>
-                <a class="join green" href="https://www.musora.com/ecommerce/add-to-cart?products[musora-access-1-year]=1&promo-code=win-back&locked=true">GET Started »</a>
+                <a class="join green" href="/ecommerce/add-to-cart?products[GUITAREO-1-YEAR-MEMBERSHIP]=1&locked=true&promo-code=restart">GET Started »</a>
             </div>
         </section>
 
