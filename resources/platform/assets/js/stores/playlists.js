@@ -77,7 +77,6 @@ export const usePlaylistsStore = defineStore({
       try {
           const response = await PlaylistService.getPlaylist(payload, token);
           this.loadingPlaylists = false;
-          console.log(response.data.data[0])
           this.activePlaylist = response.data.data[0];
       } catch {
           console.log('there was an error with your request');
