@@ -68,6 +68,8 @@ import {onBeforeMount, onMounted, watch, inject, ref, reactive, computed, onUpda
         let hasFirstChanged = false;
         playlistsStore.sortingPlaylist = false;
 
+        if(playlistsStore.lessons[0].id !== lessonsCopy.value[0].id) hasFirstChanged = true;
+
         //Update store and computed array
         playlistsStore.lessons = lessonsCopy.value;
 
@@ -82,8 +84,6 @@ import {onBeforeMount, onMounted, watch, inject, ref, reactive, computed, onUpda
                 }, token)
 
                 lessonsCopy.value[i].hasChanged = false;
-
-                if(i === 0) hasFirstChanged = true;
             }
         }
 
