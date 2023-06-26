@@ -33,12 +33,6 @@ class PausedMemberRedirect
                 empty($this->userPermissionsService->getUserPermissions(user()->id))) {
                 return redirect()->route('platform.membership-paused');
             }
-
-//            $service = app()->make(UserPermissionsService::class);
-//            if ($service->userHasPermissionsWithFutureStartDate(user()->id) &&
-//                empty($service->getUserPermissions(user()->id))) {
-//                return redirect()->route('platform.membership-paused');
-//            }
         }
 
         return $next($request);
