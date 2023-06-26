@@ -34,6 +34,31 @@ a.text-yellow:hover {
   }
 }
 
+.play-button {
+    cursor: pointer;
+    outline: none;
+    transition: opacity .3s;
+    background: rgba(0, 0, 0, 0.6);
+    border: 3px solid #fff;
+    border-radius: 200px;
+    line-height: 1em;
+    font-size: 29px;
+    padding: 18px 22px;
+    @include tablet {
+        font-size: 35px;
+        padding: 22px 27px;
+        border-width: 4px;
+    }
+    @include desktop {
+        font-size: 39px;
+        padding: 25px 30px;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
 .header {
   background: $musoraBlack center top/cover no-repeat;
   position: relative;
@@ -127,21 +152,9 @@ a.text-yellow:hover {
   }
 
   .play-button {
-    cursor: pointer;
-    outline: none;
-    transition: opacity .3s;
-    width: 70px;
     margin: 180px auto 80px;
     @include tablet {
-      width: 90px;
       margin: 180px auto 130px;
-    }
-    @include desktop {
-      width: 120px;
-    }
-
-    &:hover {
-      opacity: 0.9;
     }
   }
 

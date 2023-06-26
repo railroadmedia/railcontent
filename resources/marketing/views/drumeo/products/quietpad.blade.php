@@ -137,11 +137,11 @@
                 <span>WATCH<br> THE DEMO</span>
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
-            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
+            <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
             <br class="hide-for-medium">
             <img class="logo hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png" alt="Quietpad logo">
             <h2><strong style="font-weight: 900;">Practice anywhere</strong> with two<br class="hide-for-medium"> full-size playing surfaces.</h2>
-            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue max-w-xl">Get Yours &raquo;</a>
             <p class="dense" style="opacity: 0;"><strong class="text-yellow">LAUNCH SPECIAL</strong><br>
                 <s>NORMALLY ${{ floatval($productPrices['quietpad']->price) }}.</s> <strong>ONLY ${{ floatval($productPrices['quietpad']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['quietpad']->discounted_price) / floatval($productPrices['quietpad']->price)))) }}%)</p>
         </div>
@@ -361,7 +361,7 @@
                     <strong>ONLY ${{ floatval($productPrices['quietpad']->discounted_price) }}</strong>
                 @endif
             </h3>
-            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue max-w-xl">Get Yours &raquo;</a>
 
             <div class="credit-cards columns">
                 <i class="fab fa-cc-visa"></i>
