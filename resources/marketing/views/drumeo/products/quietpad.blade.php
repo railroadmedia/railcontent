@@ -153,28 +153,28 @@
         </div>
     </header>
 
-    <section class="content-section two-sides text-center">
+    <section class="content-section two-sides text-center" style="background-color: #f4f8fb; color:#000;">
         <div class="row">
             <h2><strong>One traditional side.<br class="hide-for-medium"> One quiet side.</strong></h2>
             <h5>The portable, double-sided practice pad<br class="hide-for-medium"> with different <br class="show-for-medium-only">volumes so you can<br class="hide-for-medium"> practice late into the night.</h5>
             <div class="pad-toggle">
                 <div class="pad-details traditional active">
                     <img class="pad-icon" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/icon-sticks.png" alt="Stick icon">
-                    <img class="mobile-pad hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad-regular.png" alt="Quiet pad">
+                    <img class="mobile-pad hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/flipper.png" alt="Quiet pad">
                     <h5><strong>Traditional Surface</strong></h5>
                     <p>Durable. Realistic. Portable. The blue side offers a 12” playing surface, snare-like rebound, and everything you’d expect for every day practice. (You’ll love the hand-assembled quality.)</p>
                     <img class="arrow active show-for-medium" style="transform: scaleX(-1);" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/left-arrow.png" alt="Left arrow">
                 </div>
                 <div class="pad-details quiet">
                     <img class="pad-icon" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/icon-moon.png" alt="Moon icon">
-                    <img class="mobile-pad hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad.png" alt="Quietpad">
+                    <img class="mobile-pad hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/flipper-black.png" alt="Quietpad">
                     <h5><strong>Quiet Surface</strong></h5>
                     <p>Shhhhhh. Avoid the tap-tappidy-tap complaints with our quiet side, up to 50% quieter than traditional pads and ideal for developing strength, endurance, and control. (You’ll love the way it feels.)</p>
                     <img class="arrow active show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/left-arrow.png" alt="Left arrow">
                 </div>
-                <div class="pad-flipper flipped show-for-medium">
-                    <div style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad-regular.png);"><i class="fad fa-repeat hover-icon"></i></div>
-                    <div style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad.png);"><i class="fad fa-repeat hover-icon"></i></div>
+                <div class="pad-flipper flipped show-for-medium text-white">
+                    <div style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/flipper.png);"><i class="fad fa-repeat hover-icon"></i></div>
+                    <div style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/flipper-black.png);"><i class="fad fa-repeat hover-icon"></i></div>
                 </div>
             </div>
         </div>
@@ -257,7 +257,7 @@
         </div>
     </div>
 
-    <section class="content-section text-center comparison">
+    <section class="content-section text-center comparison" style="background-color: #f4f8fb; color:#000;">
         <div class="row">
             <h2><strong>The everyday practice<br class="hide-for-medium"> pad for drummers.</strong></h2>
             <table>
