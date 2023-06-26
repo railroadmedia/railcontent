@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsAuthenticated;
 use App\Http\Middleware\DynamicWebOrAppMiddlewareGroupsPublic;
 use App\Http\Middleware\ExpiredMemberRedirect;
+use App\Http\Middleware\PausedMemberRedirect;
 use App\Http\Middleware\RedirectIfMobileRequest;
 use App\Modules\UserManagementSystem\Middleware\AuthenticatedAdmin;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
@@ -76,6 +77,7 @@ class Kernel extends HttpKernel
 
         'web_member_only' => [
             ExpiredMemberRedirect::class,
+            PausedMemberRedirect::class
         ],
 
         'api_public' => [
