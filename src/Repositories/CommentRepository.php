@@ -163,7 +163,6 @@ class CommentRepository extends RepositoryBase
                     ->restrictByConversationStatus()
                     ->restrictByVisibility()
                     ->restrictByAssignedUserId()
-                    ->selectCommentLikeCounts()
                     ->orderByRaw('replied_on ' . ($this->orderDirection))
                     ->groupBy(['child_comment.created_on', 'child_comment.id'])
                     ->directPaginate($this->page, 25);
@@ -182,7 +181,6 @@ class CommentRepository extends RepositoryBase
                 ->restrictByVisibility()
                 ->restrictByAssignedUserId()
                 ->onlyComments()
-                ->selectCommentLikeCounts()
                 ->orderBy($this->orderBy, $this->orderDirection, $this->orderTable)
                 ->orderBy('created_on', 'desc', ConfigService::$tableComments)
                 ->directPaginate($this->page, $this->limit);
@@ -218,7 +216,6 @@ class CommentRepository extends RepositoryBase
                 $this->orderDirection,
                 ConfigService::$tableComments
             )
-            ->selectCommentLikeCounts()
             ->onlyComments()
             ->orderBy('created_on', 'desc', ConfigService::$tableComments)
             ->directPaginate($this->page, $this->limit);
@@ -248,6 +245,10 @@ class CommentRepository extends RepositoryBase
      */
     public function countComments()
     {
+        if (empty(CommentRepository::$availableContentId)) {
+            return 999;
+        }
+
         $query = $this->query()
             ->selectColumns()
             ->restrictByBrand()
@@ -267,6 +268,10 @@ class CommentRepository extends RepositoryBase
      */
     public function countCommentsAndReplies()
     {
+        if (empty(CommentRepository::$availableContentId)) {
+            return 999;
+        }
+
         $query = $this->query()
             ->selectColumns()
             ->restrictByBrand()
