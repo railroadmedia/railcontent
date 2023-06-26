@@ -1,4 +1,5 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
+<style> .grecaptcha-badge {display:none;right:0!important;} </style>
 @php
     if (!empty($formId))
         $cleanFormId = str_replace('-', '', (str_replace(' ', '', $formId)));
@@ -33,10 +34,10 @@
     @endif
 
     <div class="infusion-field w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-7/12 sm:text-left' }}">
-        <input id='sign-up-email' class="w-full" name="email" type="email" placeholder="Email Address..." required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif />
+        <input id='sign-up-email' class="w-full" name="email" type="email" placeholder="Your Email" required @if(!empty($inputBorder)) style="border: {{$inputBorder}};" @endif />
     </div>
     <div class="infusion-submit w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12' }}">
-        <button class="submit g-recaptcha @if(!empty($outline)) outline @endif" type="submit"
+        <button class="submit g-recaptcha bg-{{$brand}} @if(!empty($outline)) outline @endif" type="submit"
                 data-sitekey="{{$recaptchaKey}}"
                 data-callback='recaptchaSubmit{{$cleanFormId}}'
                 data-action='submit'>
@@ -57,16 +58,16 @@
         <input name="success_redirect" type="hidden" value="{{ $success_redirect }}"/>
     @endif
 </form>
-<div class="disclaimer opacity-70 mx-auto flex items-center justify-center" @if(!empty($disclaimerColor)) style="color: {{$disclaimerColor}};" @endif>
-    <i class="fal fa-info-circle leading-none mr-2"></i>
-    <span class="text-left leading-tight text-xs max-w-lg">By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>
-</div>
 
-@if(empty($noTy))
+@if(empty($noTy) && empty($minimalForm))
+    <div class="disclaimer opacity-70 mx-auto flex items-center justify-center" @if(!empty($disclaimerColor)) style="color: {{$disclaimerColor}};" @endif>
+        <i class="fal fa-info-circle leading-none mr-2"></i>
+        <span class="text-left leading-tight text-xs max-w-lg">By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>
+    </div>
     <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl">
         <p><strong><i class="fas fa-check"></i> Success!</strong></p>
         <h2 class="text-{{ $brand }} my-4 sm:my-5 font-roboto"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
-        <p><em>@if(!empty($body)) {{ $body }} @else You should receive an email from team@{{ $brand }}.com within 10 minutes.
+        <p><em>@if(!empty($body)) {{ $body }} @else You should receive an email from {{ 'team@' . $brand . '.com' }} within 10 minutes.
                 If you don’t, then check your spam folder or re-enter your email address again. @endif
             </em>
         </p>
@@ -77,6 +78,10 @@
                 <a href="https://instagram.com/{{ $ig }}/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
             </div>
         @endif
+    </div>
+@else
+    <div class="thank-you-box bg-white rounded-full w-full mx-auto text-center text-green-300 max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
+        <h5 class="mx-auto text-xl font-bold"><strong><i class="fas fa-check"></i> Success, Check your email!</strong></h5>
     </div>
 @endif
 

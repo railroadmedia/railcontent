@@ -302,6 +302,14 @@ Route::domain('{musoraDomain}')
             ->whereIn('brand', all_brands())
             ->name('platform.membership-expired');
 
+
+        /*
+         * Paused Members
+         */
+        Route::get('/membership-paused', [ExpiredMemberController::class, 'showPausedMemberPage'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.membership-paused');
+
         /*
          * Primary Content Pages
          */

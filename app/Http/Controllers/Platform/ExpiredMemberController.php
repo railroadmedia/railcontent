@@ -11,4 +11,10 @@ class ExpiredMemberController extends BaseController
     {
         return view('pages.upgrade');
     }
+
+
+    public function showPausedMemberPage(Request $request)
+    {
+        return view('pages.paused');
+    }
 }
