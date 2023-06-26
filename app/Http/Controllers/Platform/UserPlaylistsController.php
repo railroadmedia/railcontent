@@ -350,6 +350,9 @@ class UserPlaylistsController extends BaseController
         $playlistItem['is_low_routine'] = $initialItem['is_low_routine'] ?? false;
         $playlistItem['need_access'] = $initialItem['need_access'] ?? false;
         $playlistItem['need_access_message'] = $initialItem['need_access_message'] ?? false;
+        $playlistItem['content_name'] = $initialItem['content_name'] ?? false;
+        $playlistItem['playlist_item_name'] = $initialItem['playlist_item_name'] ?? false;
+
 
         $userPlaylists = collect($this->userPlaylistsService->getUserPlaylist(user()->id, 'user-playlist'));
         $playlists = $userPlaylists->whereNotIn('id', $playlistId);
@@ -408,7 +411,7 @@ class UserPlaylistsController extends BaseController
             (new ContentFilterResultsEntity(['results' => $playlistItem['parent'] ?? []]))->toResponseRawJson();
 
         event(new PlaylistItemLoaded($playlistId, $playlistItemId, $position));
-//dd($playlistItem);
+
         return view('account.playlist-item', [
             "lessonContent" => $playlistItem,
             "playlist" => $playlist,
