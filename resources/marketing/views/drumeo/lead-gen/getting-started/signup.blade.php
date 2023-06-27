@@ -247,7 +247,7 @@ $lessons = [
             <h5 class="my-5 sm:my-7 font-bold">Enter your email to receive 12 free lessons.</h5>
             <div class="max-w-sm mx-auto sm:max-w-none">
             @include("drumeo.lead-gen.partials.sign-up-form", [
-                "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
+                "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form2",
                 "formName" => 'Getting Started On The Drums',
                 "buttonText" => "Get started for free ",
                     "redirectURL" => "/getting-started/thank-you/",
@@ -256,23 +256,6 @@ $lessons = [
             </div>
         </div>
     </section>
-
-    <div class="reveal large" id="thankYouModal" data-reveal data-reset-on-close="true">
-        <div class="gavin-sign-up">
-            <h2>Success!</h2>
-            <p>We're emailing you the link to your lessons.
-                <br><br>
-                <em>
-                    If you don't receive the email within 10 minutes, check your spam<br class="hidden sm:inline">
-                    folder or refresh this page to re-enter your email address again.</em>
-            </p>
-            <div class="social-links">
-                <a href="https://www.youtube.com/freedrumlessons/" target="_blank" class="youtube"><i class="fab fa-youtube"></i></a>
-                <a href="https://facebook.com/drumeo/" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://instagram.com/drumeoofficial/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
-            </div>
-        </div>
-    </div>
 
     @include("drumeo.sales.partials._footer", [
             "minimal" => true
