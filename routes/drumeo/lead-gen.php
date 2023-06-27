@@ -24,11 +24,10 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
         function () {
             Route::get('/{page?}', LeadGenController::class . '@gstd')
                 ->whereIn('page', [
-                    null, 'recap', 'thank-you', '10-practice'
+                    null, 'thank-you', '10-practice'
                 ]);
         }
     );
-    Route::get('/getting-started-drums', [LeadGenController::class, 'gtsdAlt']);
     Route::get('/free-playalongs', [LeadGenController::class, 'freePlayalongs']);
     Route::get('/metal-playalongs', [LeadGenController::class, 'metalPlayalongs']);
     Route::get('/grooves-of-john-bonham', [LeadGenController::class, 'johnGrooves']);
