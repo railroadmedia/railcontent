@@ -1,5 +1,5 @@
 <script setup>
-    import { onBeforeMount, onMounted, watch, inject, ref, reactive, computed } from 'vue';
+import {onBeforeMount, onMounted, watch, inject, ref, reactive, computed, onUpdated} from 'vue';
     import { storeToRefs  } from 'pinia';
     import { VueDraggableNext } from 'vue-draggable-next';
     import PlaylistService from '../../../../services/playlists.js';
@@ -64,24 +64,30 @@
 
     //-------------Methods-------------//
 
-    const handleSort = () => {
+    const handleSort = async() => {
+        let hasFirstChanged = false;
         playlistsStore.sortingPlaylist = false;
 
-        //Update each item in temp array
-        lessonsCopy.value.forEach(lesson => {
-            //Then send update item request
-            if (lesson.hasChanged) {
-                PlaylistService.updatePlaylistItem({
-                    user_playlist_item_id: lesson.user_playlist_item_id,
-                    position: lesson.user_playlist_item_position
-                }, token)
-            }
-        });
+        if(playlistsStore.lessons[0].id !== lessonsCopy.value[0].id) hasFirstChanged = true;
 
         //Update store and computed array
         playlistsStore.lessons = lessonsCopy.value;
 
         state.lessonsContainerKey = Math.round(Math.random() * 100000);
+
+        //Update each item in temp array
+        for(let i = 0; i < lessonsCopy.value.length; i++) {
+            if (lessonsCopy.value[i].hasChanged) {
+                await PlaylistService.updatePlaylistItem({
+                    user_playlist_item_id: lessonsCopy.value[i].user_playlist_item_id,
+                    position: lessonsCopy.value[i].user_playlist_item_position
+                }, token)
+
+                lessonsCopy.value[i].hasChanged = false;
+            }
+        }
+
+        if(hasFirstChanged) playlistsStore.getPlaylist({ playlist_id: playlistsStore.activePlaylist.id }, token)
 
         //show success message
         window.shownotification({
@@ -153,8 +159,6 @@
     onBeforeMount(() => {
         playlistsStore.lessons = [...props.lessons.data];
     });
-
-
 </script>
 <template>
     <main class="tw-w-full ">
@@ -203,9 +207,9 @@
                         <section v-if="playlistsStore.lessons.length"
                                 class="tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-col"
                         >
-                            <VueDraggableNext 
+                            <VueDraggableNext
                                 :ghost-class="playlistsStore.sortingPlaylist ? 'ghost' : ''"
-                                :v-model="playlistsStore.lessons" 
+                                :v-model="playlistsStore.lessons"
                                 :sort="playlistsStore.sortingPlaylist"
                                 :key="state.lessonsContainerKey"
                                 @update="handleDragChange"

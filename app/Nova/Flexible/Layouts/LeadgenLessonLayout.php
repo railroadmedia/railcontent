@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -52,7 +53,7 @@ class LeadgenLessonLayout extends Layout
             Text::make('slug')->required()->rules('required'),
             Text::make('title')->required()->rules('required'),
             Text::make('caption'),
-            Text::make('Description', 'desc')->help('Markup is supported!'),
+            Markdown::make('Description', 'desc')->help('Markup is supported!'),
             Image::make('Thumbnail', 'thumbnail_file')
                 ->disk('nova_s3')
                 ->prunable()

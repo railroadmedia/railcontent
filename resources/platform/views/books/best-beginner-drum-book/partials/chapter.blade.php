@@ -18,8 +18,8 @@
             <div class="flex flex-row">
                 <div class="flex flex-column align-v-center grow pa-1">
                     <p class="tiny text-drumeo uppercase">Chapter {{ $chapterNumber }} - {{ $chapterTitle }}</p>
-                    <h6 class="body font-bold text-black">{{ $title }}</h6>
-                    <p class="tiny text-black">{{ $description }}</p>
+                    <h6 class="body font-bold text-black dark:tw-text-white">{{ $title }}</h6>
+                    <p class="tiny text-black dark:tw-text-white">{{ $description }}</p>
                 </div>
             </div>
         </div>
@@ -38,7 +38,7 @@
                         style="white-space:nowrap;"
                         title="Login To Drumeo"
                         data-open-modal="loginModal">
-                    
+
                         <span class="text-grey-2 bg-grey-2 inverted ph-2 short">
                             <i class="fas fa-sign-in mr-1"></i> Login To Drumeo
                         </span>

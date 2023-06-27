@@ -34,6 +34,31 @@ a.text-yellow:hover {
   }
 }
 
+.play-button {
+    cursor: pointer;
+    outline: none;
+    transition: opacity .3s;
+    background: rgba(0, 0, 0, 0.6);
+    border: 3px solid #fff;
+    border-radius: 200px;
+    line-height: 1em;
+    font-size: 29px;
+    padding: 18px 22px;
+    @include tablet {
+        font-size: 35px;
+        padding: 22px 27px;
+        border-width: 4px;
+    }
+    @include desktop {
+        font-size: 39px;
+        padding: 25px 30px;
+    }
+
+    &:hover {
+        opacity: 0.8;
+    }
+}
+
 .header {
   background: $musoraBlack center top/cover no-repeat;
   position: relative;
@@ -127,21 +152,9 @@ a.text-yellow:hover {
   }
 
   .play-button {
-    cursor: pointer;
-    outline: none;
-    transition: opacity .3s;
-    width: 70px;
     margin: 180px auto 80px;
     @include tablet {
-      width: 90px;
       margin: 180px auto 130px;
-    }
-    @include desktop {
-      width: 120px;
-    }
-
-    &:hover {
-      opacity: 0.9;
     }
   }
 
@@ -325,10 +338,10 @@ a.text-yellow:hover {
       &:hover {
         .pad-details {
 
-          color: lighten(#22435e, 10%);
+          color: #ddd;
 
           &.active {
-            color: #fff;
+            color: #000;
             z-index: 1;
 
             .pad-icon,
@@ -367,7 +380,7 @@ a.text-yellow:hover {
     padding: 0 15px;
     @include tablet {
       padding: 0;
-      color: #22435e;
+      color: #ddd;
       position: absolute;
       top: 60%;
       transform: translate(0, -50%);
@@ -399,10 +412,9 @@ a.text-yellow:hover {
       top: -60px;
       margin: -35px;
       z-index: 1;
-      filter: brightness(0.39);
+      filter: brightness(0.8);
 
       @include tablet {
-        filter: sepia(1) saturate(15) brightness(0.25) hue-rotate(137deg);
         width: 35px;
         margin: 0 auto 10px;
         position: unset;
@@ -452,7 +464,7 @@ a.text-yellow:hover {
     &.active {
       @include tablet {
 
-        color: #fff;
+        color: #000;
         z-index: 1;
 
         .pad-icon,
@@ -467,7 +479,7 @@ a.text-yellow:hover {
         &.quiet {
           .pad-icon,
           .arrow.active {
-            filter: brightness(0.39);
+            filter: brightness(0.8);
           }
         }
       }
@@ -483,13 +495,13 @@ a.text-yellow:hover {
     width: 300px;
     height: 300px;
     @include tablet {
-      width: 400px;
-      height: 400px;
+        width: 340px;
+        height: 340px;
       margin: 0 20px 0 0;
     }
     @include desktop {
-      width: 600px;
-      height: 600px;
+      width: 500px;
+      height: 500px;
       margin: 0 30px 0 0;
     }
 
@@ -974,6 +986,7 @@ a.text-yellow:hover {
           &:nth-child(3),
           &:nth-child(4),
           &:nth-child(5) {
+            background-color: #274b6b;
             border: 1px solid #22435f;
             border-width: 0 5px;
           }

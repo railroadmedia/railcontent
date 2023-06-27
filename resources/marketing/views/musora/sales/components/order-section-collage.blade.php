@@ -12,7 +12,7 @@
                     <img class="max-w-xl sm:max-w-2xl lg:max-w-4xl transition-opacity opacity-0"
                          loading="lazy"
                          onload="this.classList.remove('opacity-0')"
-                         src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{!! $image !!}"
+                         src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{!! $image !!}"
                          alt="{{$theme}} collage image"
                     >
                 </picture>
