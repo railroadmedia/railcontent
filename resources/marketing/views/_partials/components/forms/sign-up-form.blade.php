@@ -19,7 +19,7 @@
 
 <form id="{{$cleanFormId}}" accept-charset="UTF-8" method="POST"
     action="{{ url()->route('customer-io.submit-email-form-rc') }}"
-    class="@if(empty($redirectURL)) ajax-form @endif clearfix infusion-form facebook-track-lead mx-auto"
+    class="@if(empty($redirectURL)) ajax-form @else rc-form @endif clearfix infusion-form facebook-track-lead mx-auto"
     onsubmit="emailSignUpConversionTrackerForImpactProvider()">
 
     @if(!empty($formName))
