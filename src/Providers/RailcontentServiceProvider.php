@@ -30,6 +30,7 @@ use Railroad\Railcontent\Commands\MigrateContentVideos;
 use Railroad\Railcontent\Commands\MigrateUserPlaylist;
 use Railroad\Railcontent\Commands\MigrateUserPlaylistToV2;
 use Railroad\Railcontent\Commands\RepairMissingDurations;
+use Railroad\Railcontent\Commands\SyncContentNameOnPlaylistItems;
 use Railroad\Railcontent\Commands\SyncContentRowFromRelatedTables;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentDeleted;
@@ -162,7 +163,8 @@ class RailcontentServiceProvider extends ServiceProvider
             SyncContentRowFromRelatedTables::class,
             FillContentParentContentDataColumnFromHierarchy::class,
             FillContentCompiledViewData::class,
-            MigrateUserPlaylistToV2::class
+            MigrateUserPlaylistToV2::class,
+            SyncContentNameOnPlaylistItems::class
         ]);
 
         Validator::extend(

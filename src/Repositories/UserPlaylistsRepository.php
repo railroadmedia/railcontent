@@ -2,6 +2,8 @@
 
 namespace Railroad\Railcontent\Repositories;
 
+use Carbon\Carbon;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\JoinClause;
 
 class UserPlaylistsRepository extends RepositoryBase
@@ -64,7 +66,47 @@ class UserPlaylistsRepository extends RepositoryBase
                 ->where(config('railcontent.table_prefix').'user_playlists'.'.brand', $brand)
                 ->where('type', $playlistType);
         if ($term) {
-            $query->where('name', 'LIKE', '%'.$term.'%');
+            if(config('railcontent.search_in_playlist_items_name', false)) {
+                $query->where(function (Builder $builder) use ($term) {
+                    return $builder->where(function (Builder $builder) use ($term) {
+                        return $builder->where(
+                            'name',
+                            'LIKE',
+                            '%'.$term.'%'
+                        );
+                    })
+                        ->orWhere(function (Builder $builder) use ($term) {
+                            return $builder->whereExists(function (Builder $builder) use ($term) {
+                                    return $builder->select(
+                                            config('railcontent.table_prefix').'user_playlist_content.user_playlist_id'
+                                        )
+                                        ->from(config('railcontent.table_prefix').'user_playlist_content')
+                                        ->whereRaw(
+                                            config('railcontent.table_prefix').
+                                            'user_playlist_content.user_playlist_id = '.
+                                            config('railcontent.table_prefix').
+                                            'user_playlists.id'
+                                        )
+                                        ->where(function (Builder $builder) use ($term) {
+                                            return $builder->where(
+                                                    'content_name',
+                                                    'LIKE',
+                                                    '%'.$term.'%'
+                                                )
+                                                ->orWhere(function (Builder $builder) use ($term) {
+                                                    return $builder->where(
+                                                            'playlist_item_name',
+                                                            'LIKE',
+                                                            '%'.$term.'%'
+                                                        );
+                                                });
+                                        });
+                                });
+                        });
+                });
+            }else{
+                $query->where('name', 'LIKE', '%'.$term.'%');
+            }
         }
         if(self::$availableCategories){
             $query->whereIn('category', self::$availableCategories);
@@ -167,7 +209,47 @@ class UserPlaylistsRepository extends RepositoryBase
                 ->where('type', $playlistType);
 
         if ($term) {
-            $query->where('name', 'LIKE', '%'.$term.'%');
+            if(config('railcontent.search_in_playlist_items_name', false)) {
+                $query->where(function (Builder $builder) use ($term) {
+                    return $builder->where(function (Builder $builder) use ($term) {
+                        return $builder->where(
+                            'name',
+                            'LIKE',
+                            '%'.$term.'%'
+                        );
+                    })
+                        ->orWhere(function (Builder $builder) use ($term) {
+                            return $builder->whereExists(function (Builder $builder) use ($term) {
+                                return $builder->select(
+                                    config('railcontent.table_prefix').'user_playlist_content.user_playlist_id'
+                                )
+                                    ->from(config('railcontent.table_prefix').'user_playlist_content')
+                                    ->whereRaw(
+                                        config('railcontent.table_prefix').
+                                        'user_playlist_content.user_playlist_id = '.
+                                        config('railcontent.table_prefix').
+                                        'user_playlists.id'
+                                    )
+                                    ->where(function (Builder $builder) use ($term) {
+                                        return $builder->where(
+                                            'content_name',
+                                            'LIKE',
+                                            '%'.$term.'%'
+                                        )
+                                            ->orWhere(function (Builder $builder) use ($term) {
+                                                return $builder->where(
+                                                    'playlist_item_name',
+                                                    'LIKE',
+                                                    '%'.$term.'%'
+                                                );
+                                            });
+                                    });
+                            });
+                        });
+                });
+            }else{
+                $query->where('name', 'LIKE', '%'.$term.'%');
+            }
         }
 
         if(self::$availableCategories){

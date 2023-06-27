@@ -321,6 +321,7 @@ class UserPlaylistsService
                 if ($importFullSoundsliceAssignment) {
                     $assignmentInput = [
                         'content_id' => $contentId,
+                        'content_name' => $content['title'],
                         'user_playlist_id' => $userPlaylistId,
                         'created_at' => Carbon::now()
                             ->toDateTimeString(),
@@ -336,6 +337,7 @@ class UserPlaylistsService
                 if ($importInstrumentlessSoundsliceAssignment) {
                     $assignmentInput = [
                         'content_id' => $contentId,
+                        'content_name' => $content['title'],
                         'user_playlist_id' => $userPlaylistId,
                         'created_at' => Carbon::now()
                             ->toDateTimeString(),
@@ -351,6 +353,7 @@ class UserPlaylistsService
                 if ($content['type'] != 'song') {
                     $input = [
                         'content_id' => $contentId,
+                        'content_name' => $content['title'],
                         'user_playlist_id' => $userPlaylistId,
                         'position' => $position,
                         'extra_data' => $extraData,
@@ -380,6 +383,7 @@ class UserPlaylistsService
             if ($importHighRoutine) {
                 $assignmentInput = [
                     'content_id' => $contentId,
+                    'content_name' => $content['title'],
                     'user_playlist_id' => $userPlaylistId,
                     'created_at' => Carbon::now()
                         ->toDateTimeString(),
@@ -396,6 +400,7 @@ class UserPlaylistsService
             if ($importLowRoutine) {
                 $assignmentInput = [
                     'content_id' => $contentId,
+                    'content_name' => $content['title'],
                     'user_playlist_id' => $userPlaylistId,
                     'created_at' => Carbon::now()
                         ->toDateTimeString(),
@@ -413,6 +418,7 @@ class UserPlaylistsService
                 foreach ($assignments['lessons'] ?? [] as $lesson) {
                     $input = [
                         'content_id' => $lesson['id'],
+                        'content_name' => $lesson['title'],
                         'user_playlist_id' => $userPlaylistId,
                         'position' => $position,
                         'extra_data' => $extraData,
@@ -581,7 +587,8 @@ class UserPlaylistsService
         $position = null,
         $extraData = [],
         $startSecond = null,
-        $endSecond = null
+        $endSecond = null,
+        $playlistItemName = null
     ) {
         $playlistContent = $this->getPlaylistItemById($playlistItemId);
 
@@ -592,6 +599,7 @@ class UserPlaylistsService
             'extra_data' => !empty($extraData) ? $extraData : $playlistContent['extra_data'],
             'start_second' => $startSecond,
             'end_second' => $endSecond,
+            'playlist_item_name' => $playlistItemName,
             'updated_at' => Carbon::now()
                 ->toDateTimeString(),
         ];
@@ -761,6 +769,7 @@ class UserPlaylistsService
         foreach ($assignments ?? [] as $assignment) {
             $assignmentInput = [
                 'content_id' => $assignment['id'],
+                'content_name' => $assignment['title'],
                 'user_playlist_id' => $userPlaylistId,
                 'created_at' => Carbon::now()
                     ->toDateTimeString(),
