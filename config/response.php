@@ -2973,6 +2973,8 @@ return [
                 'is_liked_by_current_user',
                 'parent_id',
             ],
+            'content_name',
+            'playlist_item_name'
         ],
     ],
 ];
