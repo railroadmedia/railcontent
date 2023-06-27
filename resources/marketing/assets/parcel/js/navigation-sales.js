@@ -126,15 +126,4 @@ $(document).ready(function (){
             });
         }
     });
-    $(".rc-form").submit(function(e) {
-        if(e.originalEvent != null) {
-            var formId = $(this).find("input[name='inf_form_xid']").val();
-
-            dataLayer.push({
-                "event": "gtm.formSubmit",
-                "formId": formId,
-                "formSuccess": true
-            });
-        }
-    });
 });
