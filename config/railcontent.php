@@ -1726,11 +1726,7 @@ return [
 
     'compiled_columns_that_should_allow_dups' => ['sbt_exercise_number', 'sbt_bpm'],
 
-    'content_multiple_level_content_depth_playlist_allowed' => [
-        'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
-    ],
-    'playlist_items_limit' => 300,
- 'cohort_icons' => [
+    'cohort_icons' => [
         'pianote' => [
             "icon1_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/dd1c5c5b-c7c1-47d1-ecfb-9f05a548f200/public",
             "icon2_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/17b5c92a-3e61-41d1-f282-e75d54888500/public",

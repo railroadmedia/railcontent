@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.273.7",
+            "version": "3.273.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "1d3e7ae37f31dfe1d4e9d9e361fd8e6702074fbe"
+                "reference": "4013e1fd2e84ebba548c0158fd3e7ca0c0346b43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/1d3e7ae37f31dfe1d4e9d9e361fd8e6702074fbe",
-                "reference": "1d3e7ae37f31dfe1d4e9d9e361fd8e6702074fbe",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4013e1fd2e84ebba548c0158fd3e7ca0c0346b43",
+                "reference": "4013e1fd2e84ebba548c0158fd3e7ca0c0346b43",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.273.7"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.273.8"
             },
-            "time": "2023-06-23T18:19:24+00:00"
+            "time": "2023-06-26T18:21:57+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8604,12 +8604,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "b00bfa1200d1e9700a2e247850191ae688c959e6"
+                "reference": "c208ea512e9d7f96ea7b8673833da9f315154e36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/b00bfa1200d1e9700a2e247850191ae688c959e6",
-                "reference": "b00bfa1200d1e9700a2e247850191ae688c959e6",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/c208ea512e9d7f96ea7b8673833da9f315154e36",
+                "reference": "c208ea512e9d7f96ea7b8673833da9f315154e36",
                 "shasum": ""
             },
             "require": {
@@ -8665,7 +8665,7 @@
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
                 "source": "https://github.com/railroadmedia/railcontent/tree/2.0-fix-paused-members-page-MT-532"
             },
-            "time": "2023-06-26T11:53:24+00:00"
+            "time": "2023-06-27T06:47:49+00:00"
         },
         {
             "name": "railroad/railforums",
