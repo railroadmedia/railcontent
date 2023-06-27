@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $end_second
  * @property integer $parent_id
  * @property Carbon $last_progress
+ * @property string $content_name
+ * @property string $playlist_item_name
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
