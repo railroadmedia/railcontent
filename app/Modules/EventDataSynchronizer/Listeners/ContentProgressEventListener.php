@@ -6,6 +6,7 @@ use App\Maps\ContentTypes;
 use App\Modules\Content\Models\Content;
 use App\Modules\EventDataSynchronizer\Providers\UserProviderInterface;
 use App\Modules\RailTracker\Services\ContentEngagementService;
+use App\Modules\Tracker\Models\MediaPlaybackTypes;
 use App\Services\UserMetricsService;
 use Illuminate\Support\Facades\Log;
 use Railroad\Points\Services\UserPointsService;
@@ -409,21 +410,29 @@ class ContentProgressEventListener
             //Log::debug(print_r($mediaPlaybackTracked, true));
         }
         $assignmentTypeIds = $this->mediaPlaybackRepository->getAssignmentTypeIds();
-        if (in_array($mediaPlaybackTracked->typeId, $assignmentTypeIds)) {
-            $min = $this->userMetricsService->getTotalMinutesPracticed(
-                $mediaPlaybackTracked->userId,
-                $assignmentTypeIds
-            );
+
+        if (in_array($mediaPlaybackTracked->typeId, $assignmentTypeIds) && $mediaPlaybackTracked->secondsPlayed > 0) {
+//            $min = $this->userMetricsService->getTotalMinutesPracticed(
+//                $mediaPlaybackTracked->userId,
+//                $assignmentTypeIds
+//            );
             $userBrandMinutesPracticed = user()->brand_minutes_practiced;
             $brand = config('railcontent.brand');
+            $initialValue = $userBrandMinutesPracticed[$brand] ?? 0;
+            $min = ($initialValue + round( $mediaPlaybackTracked->secondsPlayed/60, 0));
             $userBrandMinutesPracticed[$brand] = $min;
-
             user()->brand_minutes_practiced = $userBrandMinutesPracticed;
             user()->save();
         }
 
+        $media = new MediaPlaybackTypes();
+        $dbCon = config('railtracker.database_connection_name');
+        $media->setConnection($dbCon);
+        $soundslice = $media->where('category', '=', 'soundslice')->first();
+        $playAlong = $media->where('category', '=', 'play-alongs')->first();
+
         // sound slice assignment
-        if ($mediaPlaybackTracked->typeId == 4) {
+        if ($mediaPlaybackTracked->typeId == $soundslice->id) {
             $maxMinutesToTrack = 600;
 
             $totalTimeWatchedSeconds = (integer)$this->mediaPlaybackRepository->sumTotalPlayed(
@@ -464,7 +473,7 @@ class ContentProgressEventListener
         }
 
         // play along song
-        if ($mediaPlaybackTracked->typeId == 5) {
+        if ($mediaPlaybackTracked->typeId == $playAlong->id) {
             $maxMinutesToTrack = 600;
 
             $totalTimeWatchedSeconds = (integer)$this->mediaPlaybackRepository->sumTotalPlayed(
