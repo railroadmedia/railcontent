@@ -1742,5 +1742,5 @@ return [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
     ],
     'playlist_items_limit' => 300,
-    'search_in_playlist_items_name' => false
+    'search_in_playlist_items_name' => true
 ];
