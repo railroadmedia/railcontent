@@ -88,8 +88,8 @@ $lessons = [
     <title>Getting Started On The Drums | Drumeo</title>
     <meta property="og:title" content="Getting Started On The Drums | Drumeo">
 
-    <meta name="description" content="Just starting out on the drums? Want to rebuild your foundation? Try Jared Falk's free video series!">
-    <meta property="og:description" content="Just starting out on the drums? Want to rebuild your foundation? Try Jared Falk's free video series!">
+    <meta name="description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
+    <meta property="og:description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
 
     <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/gsotd/updated/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/getting-started/">

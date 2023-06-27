@@ -45,8 +45,7 @@
             <div class="text-center sm:px-3">
                 <img class="h-12 sm:h-14" src="https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Lead-gens/Logos/5207cf19-6510-427e-8f23-8255e931edf0-GSOTD-BannerLogo.svg">
                 <h3 class="my-4"><strong>
-                        Your free drum lessons<br class="inline sm:hidden">
-                        are on the way.</strong></h3>
+                        Check your email for<br class="inline sm:hidden"> your free drum lessons.</strong></h3>
                 <p class="leading-normal mb-8">
                     Before you get started, here’s a <br class="inline sm:hidden">
                     message from Domino Santantonio!</p>
