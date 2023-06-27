@@ -11,6 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 @stop
 
+@section('body-data')
+    x-data ='{
+    trailer : false,
+    }'
+@endsection
+
 @section('content')
     <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12" style="background-color:#000a1e;">
         <div class="container mx-auto max-w-3xl clearfix">
@@ -186,4 +192,9 @@
         'instrument' => 'drumming',
     ])
     @include('drumeo._partials.faq')
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '785314424',
+        'vimeo' => true,
+    ])
 @stop
