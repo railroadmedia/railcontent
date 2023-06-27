@@ -47,45 +47,52 @@
                 $songItems = [
                     [
                         'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg',
-                        'title' => '5000+ popular songs.',
-                        'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
+                        'fa-icon' => 'fa-music',
+                        'title' => 'Play your favorite songs.',
+                        'desc' => 'Get 5000+ note-for-note song breakdowns for every style, era, and skill level.',
                     ],
                     [
                         'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg',
-                        'title' => 'Find the perfect tempo.',
-                        'desc' => 'Slow down or speed up any section of a song to hear every note.',
+                        'fa-icon' => 'fa-drum',
+                        'title' => 'Know what to practice.',
+                        'desc' => 'An organized 10-level curriculum featuring many of the world’s best teachers.',
                     ],
                     [
                         'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/loop-icon.svg',
-                        'title' => 'Loop the trouble spots.',
-                        'desc' => 'No more pausing and rewinding that tricky fill. Loop it over and over again!',
+                        'fa-icon' => 'fa-users',
+                        'title' => 'Study with the best.',
+                        'desc' => '200+ artist courses +access exclusive live events with drumming legends.',
                     ],
                     [
                         'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/no-drums-icon.svg',
-                        'title' => 'Remove the drums.',
-                        'desc' => 'Magically remove the original drums to make each song uniquely yours.',
+                        'fa-icon' => 'fa-video',
+                        'title' => 'Track & share your progress.',
+                        'desc' => 'Start your own personal progress thread to track & share how far you’ve come!',
                     ],
                     [
                         'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/play-it-right-icon.svg',
-                        'title' => 'Play it right the first time.',
-                        'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
+                        'fa-icon' => 'fa-whistle',
+                        'title' => 'Get personal feedback.',
+                        'desc' => 'A real teacher will be there to review your videos and answer your questions.',
                     ],
                     [
                         'icon' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices-icon.svg',
-                        'title' => 'Take your songs anywhere.',
-                        'desc' => 'Accessible on any device, or printable,so you can play any song, any time.',
+                        'fa-icon' => 'fa-heart',
+                        'title' => 'Happy student guarantee.',
+                        'desc' => 'If Drumeo is not working for you, cancel your membership and get a refund. Zero questions.',
                     ],
 
                 ];
             @endphp
 
-            <div class="text-center w-full sm:w-auto mt-6 lg:mt-0 mx-auto mb-5">
+            <div class="text-center w-full max-w-4xl sm:w-auto mt-6 lg:mt-0 mx-auto mb-5">
                 <div class="flex flex-wrap">
                     @foreach ($songItems as $songItem)
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">
+                                    <i class="fal {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-drumeo"></i>
+{{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
                                     <p class="mb-1 sm:my-2"><strong>{!!$songItem['title']!!}</strong></p>
