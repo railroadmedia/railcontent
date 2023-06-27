@@ -223,6 +223,7 @@ import {onBeforeMount, onMounted, watch, inject, ref, reactive, computed, onUpda
                                     :lesson="lesson"
                                     :token="token"
                                     :brand="brand"
+                                    :is-my-playlist="playlistsStore.activePlaylist.is_my_playlist"
                                 ></playlist-card>
                             </VueDraggableNext>
 
