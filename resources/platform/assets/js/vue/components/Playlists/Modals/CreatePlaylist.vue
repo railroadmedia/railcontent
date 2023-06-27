@@ -47,6 +47,7 @@
         category: 'General',
         thumb: null,
         description: '',
+        sortValue: '-created_at' //Default
     })
 
     //------------Static Data------------//
@@ -130,7 +131,12 @@
                     }
                     //load Playlists (if collection catalog exists)
                     if(playlistsStore.pageHasPlaylistCatalog) {
-                        playlistsStore.getPlaylists({ brand: props.brand, page: playlistsStore.resultsPage, limit: null }, token);
+                        playlistsStore.getPlaylists({ 
+                            brand: props.brand, 
+                            page: playlistsStore.resultsPage, 
+                            sort: state.sortValue, 
+                            limit: null 
+                        }, token);
                     }
 
                     //load sidebar playlists
@@ -251,6 +257,12 @@
         state.description = props.playlist.description;
         state.category = props.playlist.category || 'General';
 
+        //get url params
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        //Set state props
+        state.sortValue = params.sortby_val || '-created_at';
     })
     onBeforeUnmount(() => {
         //Reset Modal Data
