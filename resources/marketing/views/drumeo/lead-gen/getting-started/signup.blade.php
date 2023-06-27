@@ -5,17 +5,17 @@ $lessons = [
         'lessonNum' => 3,
         'lessonInfo' => [
             [
-                'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/efe2fb6c-00be-40f5-a912-01c027b0ede5-GettingStartedOnTheDrums-01.jpg',
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-01-1687630623.jpg',
                 'title' => ' Listening For The Drums In Music',
                 'desc' => 'Domino shows you how to identify the key pieces of a drum set in a real song so that you can start learning how to play them.',
             ],
             [
-                'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/efe2fb6c-00be-40f5-a912-01c027b0ede5-GettingStartedOnTheDrums-02.jpg',
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-02-1687630735.jpg',
                 'title' => 'Drumming Coordination',
                 'desc' => 'Domino shows you how to learn basic drumming coordination by tapping on your legs – this one skill will help you play hundreds of songs.',
             ],
             [
-                'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/efe2fb6c-00be-40f5-a912-01c027b0ede5-GettingStartedOnTheDrums-03.jpg',
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-03-1687630937.jpg',
                 'title' => 'Adding Your Foot',
                 'desc' => 'In this video, you’ll learn how to add your foot into a real drum beat simply by tapping on the floor. You’ll be playing 3 things at once!',
             ],
@@ -26,22 +26,22 @@ $lessons = [
         'lessonNum' => 4,
         'lessonInfo' => [
             [
-                'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/d7b38fa6-81b1-4dda-ad69-bbc90a59a582-GettingStartedOnTheDrums-04.jpg',
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-04-1687630952.jpg',
                 'title' => 'Practice Pad',
                 'desc' => 'A practice pad is a practical, inexpensive option to help you get started on the drums. Domino discusses how to use one and where you can find your first practice pad.',
             ],
             [
-                'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/f2c80abe-d94f-458b-9f30-172a51e6c8a9-GettingStartedOnTheDrums-05.jpg',
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-05-1687631003.jpg',
                 'title' => 'Electronic Drum Set',
                 'desc' => 'If you’re ready for your first E-Kit, Domino will help you navigate the pros and cons of using an electronic drum set. If you’re in an apartment or townhouse, this is for you!',
             ],
             [
-                'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/4c2dcbb9-11dd-41cf-b9a9-69d0ce385196-GettingStartedOnTheDrums-06.jpg',
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-06-1687631022.jpg',
                 'title' => 'Acoustic Drum Set',
                 'desc' => 'Every drummer’s dream! In this video, you’ll learn how to shop for an acoustic drum set – what to look for and how much you can expect to pay for your first kit.',
             ],
             [
-                'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/4c2dcbb9-11dd-41cf-b9a9-69d0ce385196-GettingStartedOnTheDrums-07.jpg',
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-07-1687631041.jpg',
                 'title' => 'Setting Up Your Kit',
                 'desc' => 'Domino gives you a simple overview of how to set up and position your drums. These tips will help you ensure you’re comfortable sitting behind the drums.',
             ],
