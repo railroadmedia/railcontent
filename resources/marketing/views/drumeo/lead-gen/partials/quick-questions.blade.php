@@ -1,4 +1,4 @@
-<section class="text-{{ $textColor }} py-8 md:py-14" style="background-color:{{ $bgColor }};">
+<section class="text-{{ $textColor }} py-8 md:py-14" style="background:{{ $bgColor }};">
     <div class="container mx-auto">
         <div class="flex flex-wrap max-w-6xl mx-auto px-2 lg:px-3">
             <div class="px-3 md:px-4 w-full md:w-5/12 lg:w-5/12">
