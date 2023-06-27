@@ -5,20 +5,52 @@
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+    <style>
+        .splide__pagination__page.is-active {
+            background:#01050F;
+            transform:none !important;
+        }
+
+        .splide__pagination__page {
+            margin:3px 10px !important;
+            opacity:1 !important;
+        }
+
+        @media (min-width:768px) {
+            .splide__pagination__page {
+                margin:3px 6px !important;
+            }
+        }
+
+        .splide__arrow svg {
+            fill:#FFAE00 !important;
+        }
+    </style>
 @stop
 
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
 @stop
 
+@section('body-data')
+    x-data ='{
+    trailer : false,
+    }'
+@endsection
+
 @section('content')
     <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12" style="background-color:#000a1e;">
         <div class="container mx-auto max-w-3xl clearfix">
             <div class="text-center sm:px-3">
                 <img class="h-12 sm:h-14" src="https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Lead-gens/Logos/5207cf19-6510-427e-8f23-8255e931edf0-GSOTD-BannerLogo.svg">
-                <h3 class="my-4"><strong>Your free drum lessons are on the way.</strong></h3>
-                <p class="leading-normal mb-8">Before you get started, here’s a message from Domino Santantonio!</p>
-                <div class="max-w-xs mx-auto px-7 relative">
+                <h3 class="my-4"><strong>
+                        Your free drum lessons<br class="inline sm:hidden">
+                        are on the way.</strong></h3>
+                <p class="leading-normal mb-8">
+                    Before you get started, here’s a <br class="inline sm:hidden">
+                    message from Domino Santantonio!</p>
+                <div class="max-w-xs mx-auto px-10 sm:px-7 relative">
                     <img class="absolute top-0 right-0 -mx-14 -my-3 h-14" src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" style="filter: sepia()saturate(20)brightness(.8)hue-rotate(-17deg);">
                     <div class="w-full relative rounded-xl overflow-hidden border-4 border-white" style="padding-bottom: 172%;">
                         <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/840152363" frameborder="0" allowfullscreen title="intro-video"></iframe>
@@ -29,7 +61,9 @@
     </div>
     <section class="text-center px-3 py-5 sm:py-7" style="background-color:#FFAC00;">
         <div class="container mx-auto max-w-5xl">
-            <h5 class="mb-4">Start playing the drums with a free 30-day trial to Drumeo.</h5>
+            <h5 class="mb-4">
+                Start playing the drums with a <br class="inline sm:hidden">
+                free 30-day trial to Drumeo.</h5>
             <a class="join blue smaller" href="/choose-your-trial-month">FREE FOR 30 DAYS <i class="fas fa-arrow-right"></i></a>
         </div>
     </section>
@@ -186,4 +220,9 @@
         'instrument' => 'drumming',
     ])
     @include('drumeo._partials.faq')
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '785314424',
+        'vimeo' => true,
+    ])
 @stop

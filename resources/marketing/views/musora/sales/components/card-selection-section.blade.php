@@ -20,7 +20,7 @@
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <a href="{{$plusMonthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif">
                     <div class="bg-white px-3 py-5 md:py-7">
-                        <h2 class="leading-none mb-5"><strong>Monthly</strong></h2>
+                        <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-tight"><strong>${{ Prices::$plusSubscriptionMonthly }}/month</strong></h4>
                         <p class="text-sm"><em>Pay as you go.</em></p>
                         <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
@@ -40,7 +40,7 @@
                 <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{ $theme }} @if($theme == 'musora') text-black @endif" >MOST POPULAR</p>
                 <a href="{{$plusAnnualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-{{ $theme }}">
                     <div class="bg-white px-3 py-6 md:py-9">
-                        <h2 class="leading-none mb-5"><strong>Annual</strong></h2>
+                        <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl"><strong>Annual</strong></h2>
                         <h4 class="inline-block leading-tight"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12) }}/month</strong></h4>
                         <p class="text-sm"><em>Save 33%. Billed at ${{Prices::$plusSubscriptionAnnualFull}} per year.</em></p>
                         <div class="join my-5 {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
@@ -66,7 +66,7 @@
             <div class="w-full md:w-1/2 px-2 md:px-3 mb-4 md:mb-0 relative">
                 <a href="{{$monthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif">
                     <div class="bg-white px-3 py-5 md:py-7">
-                        <h2 class="leading-none mb-5"><strong>Monthly</strong></h2>
+                        <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl"><strong>Monthly</strong></h2>
                         <h4 class="inline-block leading-tight"><strong>${{ 25 }}/month</strong></h4>
                         <p class="text-sm"><em>Pay as you go.</em></p>
                         <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
@@ -85,7 +85,7 @@
                 <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{ $theme }} @if($theme == 'musora') text-black @endif">MOST POPULAR</p>
                 <a href="{{$annualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto group border-2 border-{{ $theme }}">
                     <div class="bg-white px-3 py-6 md:py-9">
-                        <h2 class="leading-none mb-5"><strong>Annual</strong></h2>
+                        <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl"><strong>Annual</strong></h2>
                         <h4 class="inline-block leading-tight"><strong>${{ number_format(200 / 12, 2) }}/month</strong></h4>
                         <p class="text-sm"><em>Save 33%. Billed at ${{200}} per year.</em></p>
                         <div class="join my-5 {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
