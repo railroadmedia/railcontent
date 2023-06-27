@@ -130,7 +130,6 @@
             <div class="tw-w-full tw-flex-col tw-px-3">
                 <p class="tw-text-sm tw-pb-[5px] tw-text-[#00101D] dark:tw-text-[#9EC0DC]">Start Time</p>
                 <h3 class="tw-mb-2 dark:tw-text-white tw-text-3xl">{{ splitSeconds(state.startTime ) }}</h3>
-
             </div>
             <!-- End Time -->
             <div class="tw-w-full tw-flex-col tw-px-3">

@@ -432,7 +432,7 @@ class ContentProgressEventListener
         $playAlong = $media->where('category', '=', 'play-alongs')->first();
 
         // sound slice assignment
-        if ($mediaPlaybackTracked->typeId == $soundslice->id) {
+        if ($soundslice && ($mediaPlaybackTracked->typeId == $soundslice->id)) {
             $maxMinutesToTrack = 600;
 
             $totalTimeWatchedSeconds = (integer)$this->mediaPlaybackRepository->sumTotalPlayed(
@@ -473,7 +473,7 @@ class ContentProgressEventListener
         }
 
         // play along song
-        if ($mediaPlaybackTracked->typeId == $playAlong->id) {
+        if ($playAlong && ($mediaPlaybackTracked->typeId == $playAlong->id)) {
             $maxMinutesToTrack = 600;
 
             $totalTimeWatchedSeconds = (integer)$this->mediaPlaybackRepository->sumTotalPlayed(
