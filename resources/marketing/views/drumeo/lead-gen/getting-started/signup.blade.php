@@ -3,6 +3,7 @@ $lessons = [
     [
         "title" => "Pre-beginner",
         'lessonNum' => 3,
+        'bgHex' => '#03c9ae',
         'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-01-1687630623.jpg',
@@ -24,6 +25,7 @@ $lessons = [
     [
         "title" => "Buying guide for drummers",
         'lessonNum' => 4,
+        'bgHex' => '#ffae0c',
         'lessonInfo' => [
             [
                 'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-04-1687630952.jpg',
@@ -50,6 +52,7 @@ $lessons = [
     [
         "title" => "Beginner drummer",
         'lessonNum' => 5,
+        'bgHex' => '#0072df',
         'lessonInfo' => [
             [
                 'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/4c2dcbb9-11dd-41cf-b9a9-69d0ce385196-GettingStartedOnTheDrums-08.jpg',
@@ -175,6 +178,7 @@ $lessons = [
             <div class="flex flex-wrap justify-center mb-10 max-w-sm mx-auto md:max-w-full">
                 @foreach($lessons as $key => $lesson)
                     @include('drumeo.lead-gen.getting-started.dropdown',[
+                        'bgHex' => $lesson['bgHex'],
                         'title' => $lesson['title'],
                         'lessonNum' => $lesson['lessonNum'],
                         'key' => $key,

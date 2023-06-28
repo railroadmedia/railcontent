@@ -15,7 +15,7 @@
                     <div>
                         <span class="text-lg">LEVEL</span>
                         <div class="md:inline-block">
-                            <div class="ml-2 mr-6 rounded-full w-8 h-8 flex items-center justify-center font-black text-lg" style="background:linear-gradient(225deg, #15C5FD 0%, #BBFFEF 100%);">{{ $key+1 }}
+                            <div class="ml-2 mr-6 rounded-full w-8 h-8 flex items-center justify-center font-black text-lg text-white" style="background:{{ $bgHex }}">{{ $key+1 }}
                             </div>
                         </div>
                     </div>
