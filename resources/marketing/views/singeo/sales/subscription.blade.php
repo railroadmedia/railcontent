@@ -514,7 +514,7 @@
     @if(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
-            "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
+            "plusLogo" => "https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-plus-logo-light.svg",
             "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
             "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited singing lessons.",
