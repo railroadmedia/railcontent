@@ -2,8 +2,6 @@
     import { inject, onBeforeMount, computed, reactive } from 'vue';
     import PlaylistService from '../../../../services/playlists.js';
     import { usePlaylistsStore } from '../../../../stores/playlists';
-    import InputLabel from '../../InputLabel/InputLabel.vue';
-    import { vMaska } from 'maska';
 
     //Emits
     const emit = defineEmits(['onCloseModal']);
