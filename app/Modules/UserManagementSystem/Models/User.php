@@ -187,6 +187,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereBrandMethodLevels($value)
  * @method static Builder|User whereTotalXp($value)
  * @property string|null $membership_expiration_date
+ * @property string|null $membership_start_date
  * @property int $is_lifetime_member
  * @property int $is_drumeo_lifetime_member
  * @method static Builder|User whereIsLifetimeMember($value)
@@ -845,4 +846,10 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return preg_match("/musora\+deleted_[\d]+@musora\.com/", $this->email);
     }
+
+    public function isAPausedMember(): bool
+    {
+        return !empty($this->membership_start_date) && $this->membership_start_date > Carbon::now();
+    }
+
 }
