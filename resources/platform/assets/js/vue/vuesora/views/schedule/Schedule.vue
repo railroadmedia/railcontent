@@ -82,6 +82,9 @@ export default {
             }
         });
     },
+    beforeMount() {
+        console.log(this.item);
+    },
     methods: {
         addEventToDropdown(payload) {
             this.singleEvent = payload;
