@@ -1,5 +1,16 @@
 @extends('drumeo.lead-gen.lead-gen-layout-tw')
 
+@section('meta')
+    <title>Getting Started On The Drums | Drumeo</title>
+    <meta property="og:title" content="Getting Started On The Drums | Drumeo">
+
+    <meta name="description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
+    <meta property="og:description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
+
+    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/gsotd/updated/share-image.jpg" style="display: none;">
+    <meta property="og:url" content="https://www.drumeo.com/getting-started/">
+@stop
+
 @section('styles')
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
@@ -63,7 +74,7 @@
             <h5 class="mb-4">
                 Start playing the drums with a <br class="inline sm:hidden">
                 free 30-day trial to Drumeo.</h5>
-            <a class="join blue smaller" href="/choose-your-trial-month">FREE FOR 30 DAYS <i class="fas fa-arrow-right"></i></a>
+            <a class="join blue smaller anchor-slide" href="#customize-anchor">FREE FOR 30 DAYS <i class="fas fa-arrow-right"></i></a>
         </div>
     </section>
 
@@ -205,6 +216,7 @@
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
     ])
+    <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",

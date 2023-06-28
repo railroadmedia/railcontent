@@ -33,7 +33,7 @@
             class="ml-auto text-black pt-4 md:pt-7 lg:pt-8 pr-4 sm:pr-5 cursor-pointer"
             x-on:click="open = !open"
         >
-            <i class="fas text-2xl lg:text-3xl" x-bind:class="open ? 'fa-minus' : 'fa-plus'"></i>
+            <i class="fas fa-plus transform transition-all duration-300 text-lg md:text-2xl lg:text-3xl" x-bind:class="{ 'rotate-45': open }"></i>
         </div>
     </div>
     <div
@@ -44,7 +44,7 @@
             @foreach($lessonInfo as $key => $info)
                 <div class="@if(!empty($info['desc'])) p-4 @endif rounded-xl flex flex-col md:flex-row mb-2 md:items-center">
                     <img
-                        class="rounded-xl @if(empty($info['desc'])) md:h-24 @else mb-6 md:mb-0 md:h-48 @endif transition-opacity opacity-0"
+                        class="rounded-xl @if(empty($info['desc'])) md:h-24 @else mb-6 md:mb-0 md:h-36 lg:h-48 @endif transition-opacity opacity-0"
                         src="https://www.musora.com/musora-cdn/image/width=650,quality=85/{{$info['thumb']}}"
                         alt="lesson{{$key+1}} thumb"
                         loading="lazy"
