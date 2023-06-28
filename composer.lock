@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.273.8",
+            "version": "3.274.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4013e1fd2e84ebba548c0158fd3e7ca0c0346b43"
+                "reference": "b2f37a49ca40bce633323a6988477c22be562c37"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4013e1fd2e84ebba548c0158fd3e7ca0c0346b43",
-                "reference": "4013e1fd2e84ebba548c0158fd3e7ca0c0346b43",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b2f37a49ca40bce633323a6988477c22be562c37",
+                "reference": "b2f37a49ca40bce633323a6988477c22be562c37",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.273.8"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.274.0"
             },
-            "time": "2023-06-26T18:21:57+00:00"
+            "time": "2023-06-27T18:32:17+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4414,16 +4414,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v9.52.9",
+            "version": "v9.52.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "c512ece7b1ee393eac5893f37cb2b029a5413b97"
+                "reference": "858add225ce88a76c43aec0e7866288321ee0ee9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/c512ece7b1ee393eac5893f37cb2b029a5413b97",
-                "reference": "c512ece7b1ee393eac5893f37cb2b029a5413b97",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/858add225ce88a76c43aec0e7866288321ee0ee9",
+                "reference": "858add225ce88a76c43aec0e7866288321ee0ee9",
                 "shasum": ""
             },
             "require": {
@@ -4608,21 +4608,21 @@
                 "issues": "https://github.com/laravel/framework/issues",
                 "source": "https://github.com/laravel/framework"
             },
-            "time": "2023-06-08T20:06:23+00:00"
+            "time": "2023-06-27T13:25:54+00:00"
         },
         {
             "name": "laravel/nova",
-            "version": "4.25.1",
+            "version": "4.26.0",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "b7537f667ef4ee6a1c9581995d438a6fe214625b"
+                "reference": "0496c6c27114c99e3e7b9d56002da1f6861ffd50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-b7537f667ef4ee6a1c9581995d438a6fe214625b-zip-ae794f.zip",
-                "reference": "b7537f667ef4ee6a1c9581995d438a6fe214625b",
-                "shasum": "29a7eccd46fd5933fffa7ae45a5e6495b46f702f"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-0496c6c27114c99e3e7b9d56002da1f6861ffd50-zip-fa8999.zip",
+                "reference": "0496c6c27114c99e3e7b9d56002da1f6861ffd50",
+                "shasum": "0ff5369972c16b74efd4e9ce915519f46ae9e244"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0|^0.8.0",
@@ -4698,8 +4698,8 @@
                 ],
                 "test:local": [
                     "./vendor/bin/testbench-dusk package:dusk-purge",
-                    "./vendor/bin/phpunit -c phpunit.xml --group local-time,external-network --testdox",
-                    "./vendor/bin/phpunit -c phpunit.dusk.xml --group local-time,external-network --testdox"
+                    "./vendor/bin/phpunit -c phpunit.xml --group date-field,datetime-field,external-network --testdox",
+                    "./vendor/bin/phpunit -c phpunit.dusk.xml --group date-field,datetime-field,external-network --testdox"
                 ],
                 "dusk:filter": [
                     "./vendor/bin/testbench-dusk package:dusk-purge && ./vendor/bin/phpunit -c phpunit.dusk.xml --filter"
@@ -4720,9 +4720,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.25.1"
+                "source": "https://github.com/laravel/nova/tree/v4.26.0"
             },
-            "time": "2023-06-06T18:29:19+00:00"
+            "time": "2023-06-27T18:03:34+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -6638,20 +6638,20 @@
         },
         {
             "name": "nova-kit/nova-packages-tool",
-            "version": "v1.10.0",
+            "version": "v1.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nova-kit/nova-packages-tool.git",
-                "reference": "05591b3589ed70886dbeb7cd43c2abdbb99ae020"
+                "reference": "b1286a662527c8e030145103e92fdc0762393e1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/05591b3589ed70886dbeb7cd43c2abdbb99ae020",
-                "reference": "05591b3589ed70886dbeb7cd43c2abdbb99ae020",
+                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/b1286a662527c8e030145103e92fdc0762393e1e",
+                "reference": "b1286a662527c8e030145103e92fdc0762393e1e",
                 "shasum": ""
             },
             "require": {
-                "laravel/nova": ">=4.25.0 <4.26.0",
+                "laravel/nova": ">=4.26.0 <4.27.0",
                 "php": "^7.3 || ^8.0"
             },
             "require-dev": {
@@ -6682,9 +6682,9 @@
             ],
             "description": "Tool for Laravel Nova Packages Development",
             "support": {
-                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.10.0"
+                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.11.0"
             },
-            "time": "2023-06-06T21:50:42+00:00"
+            "time": "2023-06-27T21:32:23+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -8366,16 +8366,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.22",
+            "version": "v3.1.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "182ea39fb2dea72346a6ccc9979c2111b47e7f30"
+                "reference": "3e5175fc1a4799e227816efa0db951ba711147c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/182ea39fb2dea72346a6ccc9979c2111b47e7f30",
-                "reference": "182ea39fb2dea72346a6ccc9979c2111b47e7f30",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/3e5175fc1a4799e227816efa0db951ba711147c0",
+                "reference": "3e5175fc1a4799e227816efa0db951ba711147c0",
                 "shasum": ""
             },
             "require": {
@@ -8405,9 +8405,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.22"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.23"
             },
-            "time": "2023-06-27T08:30:37+00:00"
+            "time": "2023-06-28T08:56:56+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -14006,19 +14006,20 @@
         },
         {
             "name": "whitecube/nova-flexible-content",
-            "version": "v1.0.7",
+            "version": "v1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whitecube/nova-flexible-content.git",
-                "reference": "8805c7ddabd9c8f3d1716ed5478a85b5b9108639"
+                "reference": "274dc385e0e26abab3f47de3256d162bae3304c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/8805c7ddabd9c8f3d1716ed5478a85b5b9108639",
-                "reference": "8805c7ddabd9c8f3d1716ed5478a85b5b9108639",
+                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/274dc385e0e26abab3f47de3256d162bae3304c6",
+                "reference": "274dc385e0e26abab3f47de3256d162bae3304c6",
                 "shasum": ""
             },
             "require": {
+                "ext-json": "*",
                 "laravel/framework": "^8.0|^9.0|^10.0",
                 "laravel/nova": "^4.0",
                 "nova-kit/nova-packages-tool": "^1.3.1",
@@ -14026,7 +14027,8 @@
             },
             "require-dev": {
                 "laravel/pint": "^1.2",
-                "phpunit/phpunit": "^9.5"
+                "phpunit/phpunit": "^9.5",
+                "psalm/plugin-laravel": "^2.0"
             },
             "type": "library",
             "extra": {
@@ -14063,7 +14065,7 @@
             ],
             "support": {
                 "issues": "https://github.com/whitecube/nova-flexible-content/issues",
-                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.7"
+                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.8"
             },
             "funding": [
                 {
@@ -14071,7 +14073,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-15T07:11:20+00:00"
+            "time": "2023-06-27T13:05:52+00:00"
         }
     ],
     "packages-dev": [
