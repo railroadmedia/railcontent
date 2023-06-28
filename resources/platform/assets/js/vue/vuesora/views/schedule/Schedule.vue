@@ -73,6 +73,7 @@ export default {
 
     },
     mounted() {
+        console.log('schedule content', this.content);
         const monthsSelector = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
         monthsSelector.forEach((month) => {
