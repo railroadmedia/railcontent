@@ -31,7 +31,7 @@
             'fullPrice' => '$1200',
             'priceColor' => 'black',
             'discountedPrice' => 0,
-            'desc' => "Get better, faster with Drumeo’s award-winning online drum lessons taught by the world’s greatest drummers. You’ll always know what to practice with step-by-step lessons, 5000+ note-for-note song breakdowns, hundreds of drum-less playalongs, and ongoing support & motivation from pro drummers.",
+            'desc' => "Get better, faster with Drumeo’s award-winning online drum lessons taught by the world’s greatest drummers. You’ll always know what to practice with step-by-step lessons, 5000+ note-for-note song breakdowns, hundreds of drum-less play-alongs, and ongoing support & motivation from pro drummers.",
             'freeBonus' => false,
             'lifetimeAccess' => false,
             'freeShipping' => false,

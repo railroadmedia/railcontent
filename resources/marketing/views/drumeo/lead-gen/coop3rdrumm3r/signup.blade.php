@@ -38,7 +38,8 @@
                 <img class="series-logo mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/coop3r/coop3r-logo2.png" alt="How To Start Playing Drums">
                 <p>Enter your email below for 5 free <br class="hidden lg:inline">
                     video lessons for getting started.</p>
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "stacked" => true,
                     "formId" => "Drumeo - Engagement - Trigger - CC HTSPD - Web Form",
                     "formName" => 'COOP3RDRUMM3R - CC HTSPD - Lead Gen',
@@ -105,7 +106,8 @@
                 video lessons for getting started.
             </h1>
 
-            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                 "stacked" => true,
                 "formId" => "Drumeo - Engagement - Trigger - CC HTSPD - Web Form",
                 "formName" => 'COOP3RDRUMM3R - CC HTSPD - Lead Gen',

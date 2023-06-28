@@ -1,6 +1,25 @@
-<form id="@if(!empty($formId)) {{ str_replace('-', '', (str_replace(' ', '', $formId))) }} @else ajaxForm @endif" accept-charset="UTF-8"
-    action="{{ url()->route('customer-io.submit-email-form') }}"
-    class="@if(empty($redirectURL)) ajax-form @endif clearfix infusion-form facebook-track-lead mx-auto" method="POST"
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<style> .grecaptcha-badge {display:none;right:0!important;} </style>
+@php
+    if (!empty($formId))
+        $cleanFormId = str_replace('-', '', (str_replace(' ', '', $formId)));
+    else
+        $cleanFormId = "ajaxForm";
+@endphp
+
+@if (!empty($errors) && $errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
+<form id="{{$cleanFormId}}" accept-charset="UTF-8" method="POST"
+    action="{{ url()->route('customer-io.submit-email-form-rc') }}"
+    class="@if(empty($redirectURL)) ajax-form @endif clearfix infusion-form facebook-track-lead mx-auto"
     onsubmit="emailSignUpConversionTrackerForImpactProvider()">
 
     @if(!empty($formName))
@@ -18,11 +37,10 @@
         <input class="w-full" name="email" type="email" placeholder="Email Address..." required/>
     </div>
     <div class="infusion-submit w-full px-2 sm:px-3 float-left {{ (!empty($stacked) && $stacked) ? '' : 'sm:w-5/12' }}">
-        @if(!empty($submitArrows))
-            <img class="form-arrow arrow-left" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-right-white.png">
-            <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png">
-        @endif
-        <button class="submit hover:opacity-100 @if(!empty($outline)) outline @endif" type="submit" style="background:@if(!empty($submitButtonColor)) {{ $submitButtonColor }} @else #00c9ac @endif ; color: @if(!empty($buttonTextColor)) {{$buttonTextColor}} @else white @endif ; opacity:0.93;">
+        <button class="submit g-recaptcha hover:opacity-100 @if(!empty($outline)) outline @endif" type="submit" style="background:@if(!empty($submitButtonColor)) {{ $submitButtonColor }} @else #00c9ac @endif ; color: @if(!empty($buttonTextColor)) {{$buttonTextColor}} @else white @endif ; opacity:0.93;"
+            data-sitekey="{{$recaptchaKey}}"
+            data-callback='recaptchaSubmit{{$cleanFormId}}'
+            data-action='submit'>
             <span class="pre-add">@if(!empty($buttonText)) {!!  $buttonText  !!} @else Get Started @endif <i class="fad fa-paper-plane"></i></span>
             <span class="pending hidden">Sending <i class="fad fa-spinner-third fa-spin"></i></span>
             <span class="success hidden">Sent <i class="fad fa-thumbs-up"></i></span>
@@ -37,12 +55,7 @@
     @if(!empty($redirectURL))
         <input name="success_redirect" type="hidden" value="{{ $redirectURL }}"/>
     @else
-        <input name="success_redirect" type="hidden" value="/thank-you-white"/>
-    @endif
-
-    @if(!empty($formArrows))
-        <img class="form-arrow arrow-left" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-right-white.png">
-        <img class="form-arrow arrow-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/arrow-left-white.png">
+        <input name="success_redirect" type="hidden" value="/thank-you"/>
     @endif
 </form>
 <br>
@@ -65,3 +78,9 @@
     </div>
 </div>
 @include("guitareo.lead-gen.partials.impact-email-sign-up-tracker")
+
+<script>
+    function recaptchaSubmit{{$cleanFormId}}(token) {
+        document.getElementById("{{$cleanFormId}}").submit();
+    }
+</script>

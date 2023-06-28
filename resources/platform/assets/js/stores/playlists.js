@@ -73,6 +73,16 @@ export const usePlaylistsStore = defineStore({
         //hard reload?
       }
     },
+    async getPlaylist(payload, token) {
+      try {
+          const response = await PlaylistService.getPlaylist(payload, token);
+          this.loadingPlaylists = false;
+          this.activePlaylist = response.data.data[0];
+      } catch {
+          console.log('there was an error with your request');
+          //hard reload?
+      }
+    },
     async getPlaylistLessons(payload, token) {
       try {
         const response = await PlaylistService.getPlaylistLessons(payload, token);

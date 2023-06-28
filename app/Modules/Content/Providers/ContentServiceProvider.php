@@ -11,6 +11,7 @@ use App\Modules\Content\Models\ContentField;
 use App\Modules\Content\Observers\ContentFieldObserver;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use App\Modules\Content\Console\Commands\MigrateMissingPlaylistsItems;
 
 class ContentServiceProvider extends ServiceProvider
 {
@@ -26,11 +27,12 @@ class ContentServiceProvider extends ServiceProvider
         ContentField::observe(ContentFieldObserver::class);
 
         $this->commands([
-            CoachBulkDataUpdate::class,
-            CoachBulkImageUpdate::class,
-            RebuildSearchIndexes::class,
-            FixProgressOnUnpublishedContent::class,
-            PredefinedPlaylists::class,
-        ]);
+                            CoachBulkDataUpdate::class,
+                            CoachBulkImageUpdate::class,
+                            RebuildSearchIndexes::class,
+                            FixProgressOnUnpublishedContent::class,
+                            PredefinedPlaylists::class,
+                            MigrateMissingPlaylistsItems::class,
+                        ]);
     }
 }

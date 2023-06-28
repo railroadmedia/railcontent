@@ -212,8 +212,6 @@
         'shortHeader' => true,
         'noThumbShadow' => true,
         'specialBadge' => '<strong>ONLY</strong> <s>5000</s> <strong>' . $products['Drumeo-Key']->getStockAvailability() . ' LEFT</strong>',
-            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
-            'students' => number_format(Prices::$students),
         ])
 
     <section class="text-center px-5 sm:px-6 pb-6 sm:py-0 text-black" style="background: linear-gradient(330deg, #79EE9A, #12E3FF, #79EE9A);">
@@ -532,7 +530,6 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
         'youtube' => '2.6M',

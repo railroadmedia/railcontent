@@ -340,7 +340,8 @@
                     </h3>
                     <img class="rounded-xl md:hidden mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/7-days-to-sight-reading/header_m.jpg" alt="lisa header image">
                     <p class="mb-8" style="color:#D0E2E7;">7 days of guided lessons and practices to help you learn the language of music.</p>
-                    @include('pianote._partials._sign-up-form', [
+                    @include('pianote._partials.sign-up-form', [
+                    "recaptchaKey" => $recaptchaKey,
                             "formId" => 'Pianote - Engagement - Trigger - 7 Days To Sight Reading - Web Form',
                             "formName" => '7 Days To Sight Reading',
                         "buttonText" => "Get it now",
@@ -486,7 +487,8 @@
                 7 days of guided lessons and practices to help you learn the language of music.
             </p>
             <div class="max-w-2xl mx-auto">
-                @include('pianote._partials._sign-up-form', [
+                @include('pianote._partials.sign-up-form', [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => 'Pianote - Engagement - Trigger - 7 Days To Sight Reading - Web Form',
                     "formName" => '7 Days To Sight Reading',
                     "buttonText" => "Get it now",

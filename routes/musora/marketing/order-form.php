@@ -7,7 +7,7 @@ Route::domain('{musoraDomain}')
     ->middleware(['web_public'])
     ->group(function () {
         Route::get('/order/{brand}', [\App\Http\Controllers\Ecommerce\OrderController::class, 'showOrderForm'])
-            ->name('order-form');
+            ->name('musora.order-form');
 
         Route::get('/thankyou', [\App\Http\Controllers\Ecommerce\OrderController::class, 'thankYouPageForCustomerOrder'])
             ->name('order-thank-you');

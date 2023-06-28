@@ -180,6 +180,8 @@ const dropdownTriggerHandler = target => {
 //-----------Lifecycle Methods-----------//
 
 onBeforeMount(() => {
+    console.log('Is My Playlist', props.isMyPlaylist)
+
     state.isPinned = props.lesson.pinned;
     state.isPrivate = props.lesson.private;
 
@@ -366,9 +368,16 @@ onBeforeMount(() => {
                         </button>
 
                         <!-- Dropdown-->
-                        <PlaylistDropdown :brand="brand" :dropdownTop="state.dropdownTop" :is-open="state.dropdownOpen"
-                            :dropdownOptions="dropdownOptions" :data="lesson" :index="index" type="lesson"
-                            @closeDropdown="state.dropdownOpen = false" @pinItem="(val) => state.isPinned = val"
+                        <PlaylistDropdown 
+                            :brand="brand" 
+                            :dropdownTop="state.dropdownTop" 
+                            :is-open="state.dropdownOpen"
+                            :dropdownOptions="dropdownOptions" 
+                            :data="lesson" 
+                            :index="index" 
+                            type="lesson"
+                            @closeDropdown="state.dropdownOpen = false" 
+                            @pinItem="(val) => state.isPinned = val"
                             :in-playback-cue="inPlaybackCue"
                             :is-my-playlist="isMyPlaylist"
                         />

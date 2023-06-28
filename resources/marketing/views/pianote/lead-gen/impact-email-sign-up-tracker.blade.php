@@ -10,7 +10,7 @@
     }
 
     function emailSignUpConversionTrackerForImpactProvider() {
-        var email = document.getElementById('inf_field_Email').value;
+        var email = document.getElementById('sign-up-email').value;
         var hashedEmail = sha1(email);
         var hashedOrderId = md5('pianote_'.concat(email))
 

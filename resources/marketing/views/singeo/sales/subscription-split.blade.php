@@ -200,8 +200,6 @@
             'pointOne' => 'Improve Your Voice',
             'pointTwo' => 'Helpful Vocal Coaches',
             'pointThree' => 'Sing Popular Songs',
-            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
-            'students' => number_format(Prices::$students),
         ])
 
     @include('_partials.components.video-modal',[

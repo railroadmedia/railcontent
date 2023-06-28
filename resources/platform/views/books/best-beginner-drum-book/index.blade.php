@@ -35,6 +35,10 @@ if(!empty($user)){
                 thisButton.classList.add('active', 'font-bold');
                 formToToggleTo.classList.remove('hide');
             }
+
+            @if(count($errors))
+                window.openModal('redeemModal')
+            @endif
         });
     </script>
 @endsection

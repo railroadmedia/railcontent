@@ -340,7 +340,7 @@ return [
 
             \App\Decorators\Content\SemesterPackDecorator::class,
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
-            
+
             \App\Decorators\Content\PlaylistItemDecorator::class,
 
             // cant the level rank stuff use the RC updates for user progress label calculated on progress update?
@@ -1264,7 +1264,10 @@ return [
         'song-tutorial-children',
         'rudiment',
         "assignment",
-        'unit-part'
+        'unit-part',
+        'boot-camps',
+        'podcasts',
+        'chord-and-scale'
     ],
     'hiddenContentTypes' => [
         'ha-oemurd-pmac',
@@ -1714,5 +1717,6 @@ return [
     'content_multiple_level_content_depth_playlist_allowed' => [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
     ],
-    'playlist_items_limit' => 300
+    'playlist_items_limit' => 300,
+    'search_in_playlist_items_name' => false
 ];

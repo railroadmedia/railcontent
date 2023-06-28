@@ -46,6 +46,9 @@
     background-color:#8300E9;
 }
 
+.bg-musora {
+    background-color:#ffae00;
+}
 .bg-musora-black {
     background-color:#000C17;
 }
@@ -69,6 +72,9 @@
 
 .border-sky-900 {
     border-color:#0c4a6e;
+}
+.border-musora {
+    border-color:#ffae00;
 }
 .border-musora-black {
     border-color:#000C17;
@@ -98,6 +104,10 @@
 
 .text-singeo {
     color:#8300E9;
+}
+
+.text-musora {
+    color:#ffae00;
 }
 
 .text-sky-900 {

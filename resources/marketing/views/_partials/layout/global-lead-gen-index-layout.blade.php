@@ -76,7 +76,13 @@
     </div>
 
     @if($theme === 'drumeo')
-        @include('drumeo.lead-gen.partials.free-trial')
+        @if($leadgen->slug === 'getting-started/lessons')
+            @include('drumeo.lead-gen.partials.free-trial', [
+                'gsotd' => true,
+            ])
+        @else
+            @include('drumeo.lead-gen.partials.free-trial')
+        @endif
     @endif
 @endsection
 

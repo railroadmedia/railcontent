@@ -19,6 +19,7 @@ use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\PinnedPlaylistsRepository;
 use Railroad\Railcontent\Repositories\UserContentProgressRepository;
 use Railroad\Railcontent\Repositories\UserPermissionsRepository;
+use Railroad\Railcontent\Repositories\UserPlaylistsRepository;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\UserPlaylistsService;
 use Railroad\Railcontent\Support\Collection;
@@ -80,6 +81,7 @@ class UserPlaylistsController extends BaseController
         $page = $request->get('page', 1);
         $limit = $request->get('limit', 12);
         $term = $request->get('search');
+        UserPlaylistsRepository::$availableCategories = $request->get('categories', false);
 
         $lessons = $this->userPlaylistsService->getUserPlaylist(
             user()->id,
@@ -348,6 +350,9 @@ class UserPlaylistsController extends BaseController
         $playlistItem['is_low_routine'] = $initialItem['is_low_routine'] ?? false;
         $playlistItem['need_access'] = $initialItem['need_access'] ?? false;
         $playlistItem['need_access_message'] = $initialItem['need_access_message'] ?? false;
+        $playlistItem['content_name'] = $initialItem['content_name'] ?? false;
+        $playlistItem['playlist_item_name'] = $initialItem['playlist_item_name'] ?? false;
+
 
         $userPlaylists = collect($this->userPlaylistsService->getUserPlaylist(user()->id, 'user-playlist'));
         $playlists = $userPlaylists->whereNotIn('id', $playlistId);
@@ -406,7 +411,7 @@ class UserPlaylistsController extends BaseController
             (new ContentFilterResultsEntity(['results' => $playlistItem['parent'] ?? []]))->toResponseRawJson();
 
         event(new PlaylistItemLoaded($playlistId, $playlistItemId, $position));
-//dd($playlistItem);
+
         return view('account.playlist-item', [
             "lessonContent" => $playlistItem,
             "playlist" => $playlist,

@@ -91,16 +91,15 @@
           >
             <button class="btn stacked" @click="addToList">
               <span
-                class="tw-shadow-none tw-text-lg"
+                class="tw-shadow-none tw-text-lg tw-text-[#3F3F46] dark:tw-text-white"
                 style="padding: 0 8px"
-                :class="hasAdded ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white'"
               >
-                <musora-icon icon-name="plus" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" :class="hasAdded ? 'tw-rotate-45' : 'tw-rotate-0'" />
+                <musora-icon icon-name="plus" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" />
                 <span class="hide-xs-only">
-                  {{ hasAdded ? "Added" : "Add to List" }}
+                  Add to List
                 </span>
                 <span class="hide-sm-up">
-                  {{ hasAdded ? "Added" : "Add" }}
+                  Add
                 </span>
               </span>
             </button>
@@ -113,9 +112,8 @@
           >
             <button class="btn stacked" @click="handleCompleteLesson">
               <span
-                class="tw-shadow-none tw-text-lg"
+                class="tw-shadow-none tw-text-lg tw-text-[#3F3F46] dark:tw-text-white"
                 style="padding: 0 8px"
-                :class="hasAdded ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white'"
               >
                 <musora-icon v-if="completed" icon-name="circle-check-filled" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all"/>
                 <musora-icon v-else icon-name="circle-check" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all"/>

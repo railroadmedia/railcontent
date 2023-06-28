@@ -51,7 +51,7 @@
             </div>
 
         <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
-        <div class="tw-hidden md:tw-flex tw-flex-col icon-col tw-justify-center hide-xs-only">
+        <div class="tw-hidden md:tw-flex tw-flex-col icon-col tw-justify-center hide-xs-only">  
             <div class="body">
                 <i
                     class="add-to-list fas fa-plus flex-center pointer"
