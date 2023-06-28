@@ -19,11 +19,10 @@ return new class extends Migration
             $table->boolean('visible_on_mobile')->default(true);
         });
 
-        \App\Models\Carousel::query()->where('visible',0)->delete();
-
-        Schema::table('carousels', function (Blueprint $table) {
-            $table->dropColumn('visible');
-        });
+        \App\Models\Carousel::query()->where('visible',0)->update([
+            'visible_on_desktop' => false,
+            'visible_on_mobile' => false,
+        ]);
     }
 
     /**
@@ -37,10 +36,6 @@ return new class extends Migration
         Schema::table('carousels', function (Blueprint $table) {
             $table->dropColumn('visible_on_desktop');
             $table->dropColumn('visible_on_mobile');
-        });
-
-        Schema::table('carousels', function (Blueprint $table) {
-            $table->boolean('visible')->default(true);
         });
     }
 };
