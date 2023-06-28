@@ -18,14 +18,14 @@
         </div>
     </div>
     <div class="flex mr-auto overflow mt-2">
-        <div class="mr-1">
+        <div class="mr-1 md:mr-2">
             <p class="inline-block font-black rounded-full border border-black px-2 ">{{ $lessonNumber }}</p>
         </div>
         <div>
-            <p class=" font-black text-sm lg:text-base mt-1 lg:mt-0.5">
+            <p class="font-black text-sm lg:text-base mt-1 lg:mt-0.5 leading-tight lg:leading-tight">
                 {{ $lessonTitle }}
             </p>
-            <p class="text-xs text-[#848484] uppercase mt-0.5">
+            <p class="text-xs text-[#848484] uppercase mt-1 mb-4 md:mb-0">
                 <span>{{ $duration }} @if($duration > 1) Mins @else Min @endif</span>
             </p>
         </div>
