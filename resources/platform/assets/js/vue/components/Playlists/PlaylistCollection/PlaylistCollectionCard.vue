@@ -24,6 +24,9 @@
     const duration_formated = computed(()=> {
         return props.list.duration_formated === '00:00' ? '0:00' : props.list.duration_formated.replace(/^0(?:0:0?)?/, '');
     })
+    const description = computed(() => {
+        return props.list.description.replace(/(<([^>]+)>)/gi, "");
+    })
 
     //-------------Refs-------------//
     const dropdownTarget = ref(null)
@@ -124,7 +127,7 @@
                 <p class="tw-truncate tw-hidden"
                     :class=" props.isListView ? 'tw-hidden xl:tw-inline-flex  xl:tw-col-span-5' : '' "
                 >
-                    <span class="tw-truncate tw-max-w-[512px] tw-pl-2 tw-pr-4 ">{{ list.description }}</span>
+                    <span class="tw-truncate tw-max-w-[512px] tw-pl-2 tw-pr-4 ">{{ description }}</span>
                 </p>
                 <!--category / duration -->
                 <div class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-sm tw-flex"
