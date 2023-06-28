@@ -60,9 +60,9 @@
 
         </div>
         <div class="lesson-catalogue max-w-5xl mx-auto py-12 md:py-20">
-            <div class="list-wrapper px-2 sm:px-4 grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4">
+            <div class="list-wrapper px-2 sm:px-4 @if(!$leadgen->index_tile_view) grid grid-cols-2 md:grid-cols-3 gap-2 md:gap-4 @endif">
                 @foreach($lessons as $key => $lesson)
-                    @include('_partials.components.leadgen-lesson',[
+                    @include($leadgen->index_tile_view ? '_partials.components.leadgen-lesson-tile' : '_partials.components.leadgen-lesson-grid',[
                         'lessonURL' => $lesson->slug,
                         'lessonNumber' => $key + 1,
                         'lessonImg' => $lesson->thumbnail,
