@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.274.0",
+            "version": "3.275.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "b2f37a49ca40bce633323a6988477c22be562c37"
+                "reference": "a0dfb094d3f94da2ebc86ed9583e14fdc9000f06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b2f37a49ca40bce633323a6988477c22be562c37",
-                "reference": "b2f37a49ca40bce633323a6988477c22be562c37",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a0dfb094d3f94da2ebc86ed9583e14fdc9000f06",
+                "reference": "a0dfb094d3f94da2ebc86ed9583e14fdc9000f06",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.274.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.275.0"
             },
-            "time": "2023-06-27T18:32:17+00:00"
+            "time": "2023-06-29T19:21:55+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4612,17 +4612,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.26.0",
+            "version": "4.26.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "0496c6c27114c99e3e7b9d56002da1f6861ffd50"
+                "reference": "cc7cf55d16f78abe049a1a131835a9558f54b301"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-0496c6c27114c99e3e7b9d56002da1f6861ffd50-zip-fa8999.zip",
-                "reference": "0496c6c27114c99e3e7b9d56002da1f6861ffd50",
-                "shasum": "0ff5369972c16b74efd4e9ce915519f46ae9e244"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-cc7cf55d16f78abe049a1a131835a9558f54b301-zip-196a11.zip",
+                "reference": "cc7cf55d16f78abe049a1a131835a9558f54b301",
+                "shasum": "734d685f3b2775a46c12a22c2236f9bc719a290a"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0|^0.8.0",
@@ -4720,9 +4720,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.26.0"
+                "source": "https://github.com/laravel/nova/tree/v4.26.1"
             },
-            "time": "2023-06-27T18:03:34+00:00"
+            "time": "2023-06-28T19:37:42+00:00"
         },
         {
             "name": "laravel/sanctum",
