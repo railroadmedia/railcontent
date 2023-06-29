@@ -73,6 +73,8 @@ export default {
 
     },
     mounted() {
+        console.log('preloaded content', this.preloadedContent);
+
         const monthsSelector = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
         monthsSelector.forEach((month) => {
@@ -81,6 +83,9 @@ export default {
                 firstElement.classList.add('show-month');
             }
         });
+    },
+    beforeMount() {
+        console.log('preloaded content', this.preloadedContent);
     },
     methods: {
         addEventToDropdown(payload) {
