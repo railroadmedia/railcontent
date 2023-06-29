@@ -277,7 +277,7 @@ export default {
         },
 
         saveMessageEdit() {
-            this.eventBus.on
+            this.eventBus
                 .emit(
                     'updateMessage',
                     {
