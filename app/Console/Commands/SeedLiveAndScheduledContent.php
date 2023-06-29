@@ -7,6 +7,7 @@ use App\Modules\Brand\Enums\Brand;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
+use Railroad\Railcontent\Services\ContentService;
 
 class SeedLiveAndScheduledContent extends Command
 {
@@ -29,7 +30,7 @@ class SeedLiveAndScheduledContent extends Command
      *
      * @return int
      */
-    public function handle()
+    public function handle(ContentService $contentService)
     {
         $dbConnection = DB::connection(config('railcontent.database_connection_name'));
 
@@ -104,6 +105,7 @@ class SeedLiveAndScheduledContent extends Command
                             'value' => $liveEnd->toDateTimeString(),
                             'type' => 'datetime',
                         ]);
+                    $contentService->fillCompiledViewContentDataColumnForContentIds([$contentRow->id]);
                 }
             }
 
