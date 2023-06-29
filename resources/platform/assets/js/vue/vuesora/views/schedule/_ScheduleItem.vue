@@ -109,7 +109,7 @@ export default {
 
         formatted_time() {
             console.log(this.time_to_display)
-            return new Date(this.time_to_display + 'Z').toISOString().slice(0, 19).replace('T', ' ')
+            return new Date(this.time_to_display + 'Z').replace(/-/g, "/").toISOString().slice(0, 19).replace('T', ' ')
         },
 
         month() {
