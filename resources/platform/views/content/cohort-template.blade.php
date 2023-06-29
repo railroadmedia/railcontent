@@ -153,29 +153,43 @@
             </div>
         </header>
 
-        <section class="tw-bg-white tw-pt-7">
+        <section class="tw-bg-white tw-py-12">
             <div class="tw-max-w-5xl tw-mx-auto tw-px-4 md:tw-px-10">
                 {{--  Body title  --}}
                 <h3 class="tw-font-extrabold tw-text-center tw-mb-7">{{ $cohort['body_title'] }}</h3>
                 {{--  Body top description  --}}
-                <p class="md:tw-px-10 tw-mb-52">{!! $cohort['body_top_description'] !!}</p>
-            </div>
-        </section>
-        <section class="tw-bg-[#F1F7FE] tw-pb-7 ">
-            <div class="tw-max-w-5xl tw-mx-auto tw-px-4 md:tw-px-10 -tw-mt-40">
-                <div class="tw-relative tw-cursor-pointer tw-mb-10" x-on:click="trailer = true">
-                    {{--  Body Image  --}}
-                    <img
-                        class="tw-rounded-xl tw-transition-opacity tw-opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/{{ $cohort['body_image_url'] }}"
-                        alt="video thumb"
-                        loading="lazy"
-                        onload="this.classList.remove('tw-opacity-0')"
-                    />
-                    <div class="tw-absolute tw-inset-0 tw-flex tw-justify-center tw-items-center">
-                        <i class="fa-regular fa-play tw-z-10 tw-border-white tw-border-4 tw-text-white tw-py-3 md:tw-py-6 tw-pl-5 md:tw-pl-8 tw-pr-4 md:tw-pr-6 tw-rounded-full tw-text-3xl md:tw-text-5xl tw-bg-[rgba(0,0,0,0.2)]"></i>
+                <p class="md:tw-px-10 tw-mb-7">{!! $cohort['body_top_description'] !!}</p>
+                <img class="sm:tw-h-7 tw-mx-auto" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/timeline.png" alt="timeline">
+                <div class="tw-flex tw-flex-wrap tw-text-left tw-max-w-3xl tw-mx-auto tw-mt-5 sm:tw-mt-7 tw-mb-10 sm:tw-mb-14 lg:tw-mb-20">
+                    <div class="tw-w-1/2 tw-pr-2 sm:tw-px-4">
+                        <div class="tw-rounded-xl tw-overflow-hidden tw-shadow-md tw-cursor-pointer autoplay-video" data-open="dayOne" aria-controls="dayOne" aria-haspopup="true" tabindex="0">
+                            <img src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/day-1-thumb.jpg" alt="day1 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
+                            <p class="tw-p-2 sm:tw-p-5 tw-text-sm">We’ll start slow. Here’s what you’ll be playing in your first lesson.</p>
+                        </div>
+                    </div>
+                    <div class="tw-w-1/2 sm:tw-px-4">
+                        <div class="tw-rounded-xl tw-overflow-hidden tw-shadow-md tw-cursor-pointer autoplay-video" data-open="dayThirty" aria-controls="dayThirty" aria-haspopup="true" tabindex="0">
+                            <img src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/day-30-thumb.jpg" alt="day 30 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
+                            <p class="tw-p-2 sm:tw-p-5 tw-text-sm">After 30 days, you’ll be playing this beautiful song. All you have to do is follow along.</p>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
+        <section class="tw-text-center tw-text-white  tw-bg-cover tw-bg-center" style="background-color:#2a2f34;background-image:url();">
+            <div class="tw-max-w-[1600px] tw-mx-auto tw-relative tw-pt-10 sm:tw-pt-14 lg:tw-pt-20">
+                <img class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-object-cover" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-bg.jpg" alt="bg" />
+                <h3 class="tw-leading-tight"><strong>Go on, give it a try</strong></h3>
+                <p class="tw-leading-normal tw-mt-2 sm:tw-mt-3 tw-mb-5 sm:tw-mb-7">Curious? <strong>Try a snippet from Day 1</strong> and<br class="tw-inline sm:tw-hidden"> see if Easy Chords is right for you.</p>
+                <div class="tw-relative tw-cursor-pointer autoplay-video" data-open="demoVid" aria-controls="demoVid" aria-haspopup="true" tabindex="0">
+                    <img class="tw-inline-block sm:tw-hidden tw-w-full tw-transition-all" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-m-lisa.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="tw-hidden sm:tw-inline-block tw-w-full tw-transition-all" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-lisa.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <p class="tw-absolute tw-transform -tw-translate-x-1/2 -tw-translate-y-1/2 tw-left-1/2 tw-top-2/3 tw-px-3 tw-py-1 tw-z-10 tw-rounded-xl tw-text-white tw-inline-block tw-mx-auto tw-text-sm tw-whitespace-nowrap" style="background-color:#c20000;"><i class="fas fa-play-circle tw-mr-1 tw-text-xl sm:tw-text-3xl tw-align-middle" aria-hidden="true"></i> <strong>At your piano?</strong> Hit play and try<br class="tw-inline sm:tw-hidden"> some of the lesson from your first day.</p>
+                </div>
+            </div>
+        </section>
+        <section class="tw-py-12">
+            <div class="tw-max-w-5xl tw-mx-auto tw-px-4 md:tw-px-10">
                 {{--  Body logo  --}}
                 <img
                     class="tw-h-10 sm:tw-h-16 tw-mb-8 tw-mx-auto tw-transition-opacity tw-opacity-0"
@@ -184,26 +198,28 @@
                     loading="lazy"
                     onload="this.classList.remove('tw-opacity-0')"
                 />
-                {{--  Body bottom description  --}}
+                {{--Body bottom description--}}
                 <p class="tw-text-center tw-px-6">{!! $cohort['body_bottom_description'] !!}</p>
             </div>
         </section>
 
         {{--  Dropdown  --}}
-        <section class="tw-bg-white tw-py-7">
-            <div class="tw-max-w-4xl tw-mx-auto tw-pl-6 tw-pr-4">
-                <h3 class="tw-font-extrabold tw-text-center tw-mb-7">{{ $cohort['dropdown_title'] }}</h3>
-                @foreach($cohort->dropdowns as $dropdown)
-                    @include('partials._question-dropdown', [
-                        'num' => '?',
-                        "title" => $dropdown['title'],
-                        "desc" => $dropdown['description'],
-                    ])
-                @endforeach
-                {{--  Bottom title  --}}
-                <h3 class="tw-font-extrabold tw-text-center tw-mt-10">{{ $cohort['bottom_title'] }}</h3>
-                {{--  Bottom description  --}}
-                <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">{{ $cohort['bottom_description'] }}</p>
+        <section class="tw-bg-white tw-py-12">
+            <div class="tw-max-w-5xl tw-mx-auto tw-pl-6 tw-pr-4">
+                <div class="tw-text-center tw-mb-3">
+                    <img class="tw-h-20 md:tw-h-24 lg:tw-h-28 tw-transition-all tw-mx-auto" src="https://www.musora.com/musora-cdn/image/width=380,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <h4 class="tw-leading-tight tw-mt-2 tw-mb-4 sm:tw-my-4 lg:tw-my-5"><strong>
+                            20 Guided Play-Along Lessons.<br>
+                            Feedback From Real Teachers.<br>
+                            Lifetime Course Access.
+                        </strong></h4>
+                    <div class="tw-w-full tw-mx-auto sm:tw-mx-0">
+                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Master your chord changes &amp; inversions.</p>
+                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Join 9,381 piano players who have already registered.</p>
+                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Course runs June 5 to July 5.</p>
+                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Choose your best option to get started.</p>
+                    </div>
+                </div>
                 <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
                     {{--  Buttons  --}}
                     @if($hasProduct)
@@ -216,7 +232,7 @@
                         @endif
                     @endif
                 </div>
-                <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
+                <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center tw-mb-12">
                     <img
                         class="tw-h-7 sm:tw-mb-1 lg:tw-mb-0 tw-mr-1 tw-transition-opacity tw-opacity-0"
                         src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
@@ -236,6 +252,14 @@
                         who have already registered.
                     </p>
                 </div>
+                <h3 class="tw-font-extrabold tw-text-center tw-mb-7">{{ $cohort['dropdown_title'] }}</h3>
+                @foreach($cohort->dropdowns as $dropdown)
+                    @include('partials._question-dropdown', [
+                        'num' => '?',
+                        "title" => $dropdown['title'],
+                        "desc" => $dropdown['description'],
+                    ])
+                @endforeach
             </div>
         </section>
 
