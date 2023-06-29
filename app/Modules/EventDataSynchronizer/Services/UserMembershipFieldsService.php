@@ -92,8 +92,7 @@ class UserMembershipFieldsService
                 $representingUserProduct->getProduct()->getDigitalAccessTimeType() ==
                 Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME;
             $isDrumeoLifetimeMember = (is_null($membershipExpirationDate) && ($representingUserProduct->getProduct()->getId() == 141));
-            $membershipStartDate = ($representingUserProduct->getStartDate() > Carbon::now()) ?
-                $representingUserProduct->getStartDate() : null;
+            $membershipStartDate = $representingUserProduct->getStartDate();
         } else {
             $membershipExpirationDate = null;
             $isLifetimeMember = false;
