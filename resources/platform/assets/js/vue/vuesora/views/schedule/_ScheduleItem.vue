@@ -108,6 +108,7 @@ export default {
         },
 
         formatted_time() {
+            console.log(this.time_to_display)
             return new Date(this.time_to_display + 'Z').toISOString().slice(0, 19).replace('T', ' ')
         },
 
@@ -145,6 +146,9 @@ export default {
     },
     beforeDestroy() {
         this.mappedData = null;
+    },
+    beforeMount() {
+        console.log(this.item.live_event_start_time_in_timezone ? this.item.live_event_start_time_in_timezone : this.item.published_on_in_timezone);
     },
     methods: {
 
