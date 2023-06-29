@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up()
     {
         Schema::table('usora_users', function (Blueprint $table) {
-            $table->timestamp('membership_start_date')->after('membership_level ')->nullable();
+            $table->timestamp('membership_start_date')->after('membership_level')->nullable();
         });
     }
 
