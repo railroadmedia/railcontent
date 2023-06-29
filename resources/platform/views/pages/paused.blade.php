@@ -15,6 +15,3 @@
         />
     </div>
 @endsection
-{{--Route::get('/{brand}/profile/settings/account', [ProfileSettingsPagesController::class, 'account'])--}}
-{{--->whereIn('brand', all_brands())--}}
-{{--->name('platform.profile.settings.account');--}}

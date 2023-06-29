@@ -3,7 +3,6 @@
 namespace Modules\UserManagementSystem\Models;
 
 use App\Modules\Ecommerce\Models\Subscription;
-use App\Modules\Ecommerce\Models\UserProduct;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
 use App\Modules\Notifications\Models\NotificationSettings;
@@ -188,6 +187,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static Builder|User whereBrandMethodLevels($value)
  * @method static Builder|User whereTotalXp($value)
  * @property string|null $membership_expiration_date
+ * @property string|null $membership_start_date
  * @property int $is_lifetime_member
  * @property int $is_drumeo_lifetime_member
  * @method static Builder|User whereIsLifetimeMember($value)
@@ -213,7 +213,6 @@ use Spatie\Permission\Traits\HasRoles;
  * @property ?MentorStudent $mentorStudent
  * @property mixed|null $brand_total_xp
  * @property Collection $subscriptions
- * @property Collection $userProducts
  * @property mixed|null $brand_minutes_practiced
  * @property Collection $notificationSettings
  * @property string|null $membership_level // can be 'basic' or 'plus'
@@ -310,11 +309,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     public function subscriptions(): HasMany
     {
         return $this->hasMany(Subscription::class, 'user_id');
-    }
-
-    public function userProducts(): HasMany
-    {
-        return $this->hasMany(UserProduct::class, 'user_id');
     }
 
     public function notificationSettings(): HasMany
@@ -853,18 +847,8 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return preg_match("/musora\+deleted_[\d]+@musora\.com/", $this->email);
     }
 
-    public function checkIfUserProductsStartInFuture()
+    public function isAPausedMember(): bool
     {
-        if (empty($this->userProducts)) {
-            return false;
-        }
-
-        foreach ($this->userProducts as $userProduct) {
-            if ($userProduct->start_date < Carbon::now()) {
-                return false;
-            }
-        }
-
-        return true;
+        return !empty($this->membership_start_date) && $this->membership_start_date > Carbon::now();
     }
 }
