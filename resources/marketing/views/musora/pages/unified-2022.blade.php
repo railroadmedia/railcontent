@@ -391,14 +391,6 @@
                         'description' => 'Carlos began classical guitar studies through a conservatory in Venezuela. At 11, he learned to hold the drumsticks and play his first beat using Drumeo! Aside from spending time with friends and family, personal training, and traveling, Carlos will soon release his debut album: Inner Child, featuring drummer Matt Garstka. ',
                         ],
                         [
-                        'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/sara.jpg',
-                        'first' => 'Sara ',
-                        'last' => 'T',
-                        'pianote' => true,
-                        'singeo' => true,
-                        'description' => 'When she’s not chatting with students, Sara spends her free time wandering the forests of the West Coast. You might find her practicing vocal exercises during her adventures (so she doesn’t encounter bears, of course. She’s a great singer - we promise!) Having spent most of her life singing, Sara credits her passion to the happiness and fulfillment of learning music. ',
-                        ],
-                        [
                         'image' => 'https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/emily.jpg',
                         'first' => 'Emily ',
                         'last' => 'J',
