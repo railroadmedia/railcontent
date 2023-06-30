@@ -273,7 +273,7 @@ onUpdated(() => {
         :forceSidebarHidden="forceSidebarHidden" :user-id="userId" />
 
       <!-- Content Container -->
-      <main class="
+      <section class="
           tw-flex
           tw-w-full
           tw-h-full
@@ -289,10 +289,7 @@ onUpdated(() => {
           {{ adminMessage }}
         </h2>
         <!-- Content -->
-        <section class="tw-flex tw-flex-col tw-grow tw-w-full">
-          <slot :is-dark-mode="isDarkModeSelected" />
-        </section>
-
+        <slot :is-dark-mode="isDarkModeSelected" />
         <!-- Footer -->
         <Footer :brand="brand" />
 
@@ -304,7 +301,7 @@ onUpdated(() => {
               tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10 tw-bg-black/30
             "></div>
         </Transition>
-      </main>
+      </section>
     </div>
   </main>
 </template>
