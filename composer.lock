@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a455eeb67bb9351ff5321957b3b91f42",
+    "content-hash": "091777e6a2f0bf97fac0afc0289f6aab",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.274.1",
+            "version": "3.275.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "92907084c3b71859672ef6399194ef9c1f772b1a"
+                "reference": "a0dfb094d3f94da2ebc86ed9583e14fdc9000f06"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/92907084c3b71859672ef6399194ef9c1f772b1a",
-                "reference": "92907084c3b71859672ef6399194ef9c1f772b1a",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a0dfb094d3f94da2ebc86ed9583e14fdc9000f06",
+                "reference": "a0dfb094d3f94da2ebc86ed9583e14fdc9000f06",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.274.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.275.0"
             },
-            "time": "2023-06-28T18:21:54+00:00"
+            "time": "2023-06-29T19:21:55+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -4612,17 +4612,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.26.1",
+            "version": "4.25.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "cc7cf55d16f78abe049a1a131835a9558f54b301"
+                "reference": "b7537f667ef4ee6a1c9581995d438a6fe214625b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-cc7cf55d16f78abe049a1a131835a9558f54b301-zip-196a11.zip",
-                "reference": "cc7cf55d16f78abe049a1a131835a9558f54b301",
-                "shasum": "734d685f3b2775a46c12a22c2236f9bc719a290a"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-b7537f667ef4ee6a1c9581995d438a6fe214625b-zip-ae794f.zip",
+                "reference": "b7537f667ef4ee6a1c9581995d438a6fe214625b",
+                "shasum": "29a7eccd46fd5933fffa7ae45a5e6495b46f702f"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0|^0.8.0",
@@ -4698,8 +4698,8 @@
                 ],
                 "test:local": [
                     "./vendor/bin/testbench-dusk package:dusk-purge",
-                    "./vendor/bin/phpunit -c phpunit.xml --group date-field,datetime-field,external-network --testdox",
-                    "./vendor/bin/phpunit -c phpunit.dusk.xml --group date-field,datetime-field,external-network --testdox"
+                    "./vendor/bin/phpunit -c phpunit.xml --group local-time,external-network --testdox",
+                    "./vendor/bin/phpunit -c phpunit.dusk.xml --group local-time,external-network --testdox"
                 ],
                 "dusk:filter": [
                     "./vendor/bin/testbench-dusk package:dusk-purge && ./vendor/bin/phpunit -c phpunit.dusk.xml --filter"
@@ -4720,9 +4720,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.26.1"
+                "source": "https://github.com/laravel/nova/tree/v4.25.1"
             },
-            "time": "2023-06-28T19:37:42+00:00"
+            "time": "2023-06-06T18:29:19+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -6638,20 +6638,20 @@
         },
         {
             "name": "nova-kit/nova-packages-tool",
-            "version": "v1.11.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nova-kit/nova-packages-tool.git",
-                "reference": "b1286a662527c8e030145103e92fdc0762393e1e"
+                "reference": "05591b3589ed70886dbeb7cd43c2abdbb99ae020"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/b1286a662527c8e030145103e92fdc0762393e1e",
-                "reference": "b1286a662527c8e030145103e92fdc0762393e1e",
+                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/05591b3589ed70886dbeb7cd43c2abdbb99ae020",
+                "reference": "05591b3589ed70886dbeb7cd43c2abdbb99ae020",
                 "shasum": ""
             },
             "require": {
-                "laravel/nova": ">=4.26.0 <4.27.0",
+                "laravel/nova": ">=4.25.0 <4.26.0",
                 "php": "^7.3 || ^8.0"
             },
             "require-dev": {
@@ -6682,9 +6682,9 @@
             ],
             "description": "Tool for Laravel Nova Packages Development",
             "support": {
-                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.11.0"
+                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.10.0"
             },
-            "time": "2023-06-27T21:32:23+00:00"
+            "time": "2023-06-06T21:50:42+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -14309,22 +14309,22 @@
         },
         {
             "name": "composer/class-map-generator",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/class-map-generator.git",
-                "reference": "1e1cb2b791facb2dfe32932a7718cf2571187513"
+                "reference": "953cc4ea32e0c31f2185549c7d216d7921f03da9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/class-map-generator/zipball/1e1cb2b791facb2dfe32932a7718cf2571187513",
-                "reference": "1e1cb2b791facb2dfe32932a7718cf2571187513",
+                "url": "https://api.github.com/repos/composer/class-map-generator/zipball/953cc4ea32e0c31f2185549c7d216d7921f03da9",
+                "reference": "953cc4ea32e0c31f2185549c7d216d7921f03da9",
                 "shasum": ""
             },
             "require": {
-                "composer/pcre": "^2 || ^3",
+                "composer/pcre": "^2.1 || ^3.1",
                 "php": "^7.2 || ^8.0",
-                "symfony/finder": "^4.4 || ^5.3 || ^6"
+                "symfony/finder": "^4.4 || ^5.3 || ^6 || ^7"
             },
             "require-dev": {
                 "phpstan/phpstan": "^1.6",
@@ -14362,7 +14362,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/class-map-generator/issues",
-                "source": "https://github.com/composer/class-map-generator/tree/1.0.0"
+                "source": "https://github.com/composer/class-map-generator/tree/1.1.0"
             },
             "funding": [
                 {
@@ -14378,7 +14378,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-19T11:31:27+00:00"
+            "time": "2023-06-30T13:58:57+00:00"
         },
         {
             "name": "composer/pcre",
@@ -17030,5 +17030,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
