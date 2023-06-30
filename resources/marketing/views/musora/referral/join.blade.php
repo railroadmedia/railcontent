@@ -26,7 +26,8 @@
             @if ($canRefer && !$errors->has('email-invite-message'))
                 <h1 class="leading-tight @if($brand === 'pianote') mb-4 lg:mb-6 @else lg:mb-14 @endif"><strong>{{ $referredByUserName }} gifted you 30 days<br class="hidden lg:inline"> of free lessons!</strong></h1>
                 <p class="lg:mb-10 max-w-3xl mx-auto">
-                    Redeem your 30-Day Guest Pass for a chance to win a piano, a VIP lesson, and more! This contest runs between June 19 and 30, 2023. <a href="#terms" class="font-bold underline text-white">See contest details*</a>
+                    Redeem your 30-Day Guest Pass for a chance to win a piano, a VIP lesson, and more! This contest runs between June 19 and 30, 2023. <br><br>
+                    <a href="#terms" class="font-bold underline text-white">See contest details*</a>
                 </p>
                 <div class="flex flex-wrap lg:flex-nowrap items-center sm:px-4">
                     <div class="flex-shrink-0 w-full lg:w-auto my-5 md:my-6 lg:my-0">
