@@ -15,7 +15,7 @@ class AddPlaylistsDataToPlaylistsTable extends Migration
     {
         Schema::connection(config('railcontent.database_connection_name'))
             ->table(config('railcontent.table_prefix') . 'user_playlists', function (Blueprint $table) {
-                $table->string('name')->index();
+                $table->string('name')->nullable()->index();
                 $table->text('description')->nullable();
                 $table->string('thumbnail_url')->nullable();
                 $table->string('category')->index()->nullable();
@@ -25,7 +25,7 @@ class AddPlaylistsDataToPlaylistsTable extends Migration
 
         Schema::connection(config('railcontent.database_connection_name'))
             ->table(config('railcontent.table_prefix') . 'user_playlist_content', function (Blueprint $table) {
-                $table->integer('position')->index();
+                $table->integer('position')->nullable()->index();
                 $table->json('extra_data')
                     ->after('position')
                     ->nullable();

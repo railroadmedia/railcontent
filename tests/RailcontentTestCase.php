@@ -2,6 +2,7 @@
 
 namespace Railroad\Railcontent\Tests;
 
+use App\Providers\RailcontentURLProvider;
 use Carbon\Carbon;
 use Dotenv\Dotenv;
 use Faker\Generator;
@@ -16,7 +17,9 @@ use Illuminate\Support\Facades\Event;
 use Orchestra\Testbench\TestCase as BaseTestCase;
 use PDO;
 use Railroad\Railcontent\Middleware\ContentPermissionsMiddleware;
+use Railroad\Railcontent\Providers\RailcontentProviderInterface;
 use Railroad\Railcontent\Providers\RailcontentServiceProvider;
+use Railroad\Railcontent\Providers\RailcontentURLProviderInterface;
 use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Services\ElasticService;
 use Railroad\Railcontent\Services\RemoteStorageService;
@@ -133,8 +136,6 @@ class RailcontentTestCase extends BaseTestCase
         $this->elasticService->deleteIndex(config('railcontent.elastic_index_name', 'content'));
 
         $this->elasticService->createContentIndex();
-
-        RepositoryBase::$connectionMask = null;
 
         Carbon::setTestNow(Carbon::now());
 
@@ -310,6 +311,10 @@ class RailcontentTestCase extends BaseTestCase
         // register provider
         $app->register(RailcontentServiceProvider::class);
         $app->register(ResponseServiceProvider::class);
+
+        $app->singleton(RailcontentURLProviderInterface::class, function ($app) {
+            return $app->make(\Railroad\Railcontent\Tests\RailcontentURLProvider::class);
+        });
     }
 
     public function getConnectionType()

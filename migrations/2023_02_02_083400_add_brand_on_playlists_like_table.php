@@ -16,7 +16,7 @@ class AddBrandOnPlaylistsLikeTable extends Migration
         Schema::connection(config('railcontent.database_connection_name'))->table(
             config('railcontent.table_prefix') . 'playlist_likes',
             function(Blueprint $table) {
-                $table->string('brand')->index();
+                $table->string('brand')->nullable()->index();
                 $table->index(['user_id', 'brand'], 'plub');
             });
     }

@@ -15,8 +15,8 @@ class RemoveParentIdFromPlaylistsTable extends Migration
     {
         Schema::connection(config('railcontent.database_connection_name'))
             ->table(config('railcontent.table_prefix') . 'user_playlist_content', function (Blueprint $table) {
-                $table->dropColumn('parent_id');
                 $table->dropIndex('cp');
+                $table->dropColumn('parent_id');
             });
     }
 

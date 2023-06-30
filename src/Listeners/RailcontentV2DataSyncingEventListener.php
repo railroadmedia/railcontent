@@ -16,6 +16,7 @@ use Railroad\Railcontent\Events\ContentFieldUpdated;
 use Railroad\Railcontent\Events\ContentSoftDeleted;
 use Railroad\Railcontent\Events\ContentUpdated;
 use Railroad\Railcontent\Events\HierarchyUpdated;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Services\ContentService;
 use Railroad\Railcontent\Services\RailcontentV2DataSyncingService;
@@ -37,14 +38,21 @@ class RailcontentV2DataSyncingEventListener
      */
     private $railcontentV2DataSyncingService;
 
+    /**
+     * @var ContentRepository
+     */
+    private $contentRepository;
+
     public function __construct(
         ContentService $contentService,
         DatabaseManager $databaseManager,
-        RailcontentV2DataSyncingService $railcontentV2DataSyncingService
+        RailcontentV2DataSyncingService $railcontentV2DataSyncingService,
+        ContentRepository $contentRepository
     ) {
         $this->contentService = $contentService;
         $this->databaseManager = $databaseManager;
         $this->railcontentV2DataSyncingService = $railcontentV2DataSyncingService;
+        $this->contentRepository = $contentRepository;
     }
 
     public function handleContentCreated(ContentCreated $contentCreated)
@@ -158,7 +166,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function updateContentsThatLinkToContentViaField($contentId)
     {
-        RepositoryBase::$connectionMask
+        $this->contentRepository->connectionMask()
             ->table('railcontent_content_fields')
             ->whereIn('key', ['instructor', 'video'])
             ->where('value', $contentId)
@@ -172,7 +180,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function updateAllContentsChildrenParentDataColumns($contentId)
     {
-        $hierarchyRows = RepositoryBase::$connectionMask
+        $hierarchyRows = $this->contentRepository->connectionMask()
             ->table(config('railcontent.table_prefix') . 'content_hierarchy as rch1')
             ->leftJoin(
                 config('railcontent.table_prefix') . 'content as rcp1',
@@ -269,7 +277,7 @@ class RailcontentV2DataSyncingEventListener
 
     public function fillCompiledViewContentDataColumnForAllParentsAndChildren($contentId)
     {
-        $childHierarchyRows = RepositoryBase::$connectionMask
+        $childHierarchyRows = $this->contentRepository->connectionMask()
             ->table(config('railcontent.table_prefix') . 'content_hierarchy as rch1')
             ->leftJoin(
                 config('railcontent.table_prefix') . 'content as rcp1',
@@ -361,7 +369,7 @@ class RailcontentV2DataSyncingEventListener
             }
         }
 
-        $parentHierarchyRows = RepositoryBase::$connectionMask
+        $parentHierarchyRows = $this->contentRepository->connectionMask()
             ->table(config('railcontent.table_prefix') . 'content_hierarchy as rch1')
             ->leftJoin(
                 config('railcontent.table_prefix') . 'content as rcp1',

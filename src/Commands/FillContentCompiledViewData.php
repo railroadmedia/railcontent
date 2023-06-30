@@ -5,6 +5,7 @@ namespace Railroad\Railcontent\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Collection;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Services\ContentService;
 
@@ -34,11 +35,11 @@ class FillContentCompiledViewData extends Command
      *
      * @return mixed
      */
-    public function handle(DatabaseManager $databaseManager, ContentService $contentService)
+    public function handle(DatabaseManager $databaseManager, ContentService $contentService, ContentRepository $contentRepository)
     {
         $this->info('Starting FillContentCompiledViewData...');
 
-        $dbConnection = RepositoryBase::$connectionMask;
+        $dbConnection = $contentRepository->connectionMask();
         $dbConnection->disableQueryLog();
 
         $totalProcessed = 0;

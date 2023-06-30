@@ -30,6 +30,7 @@
     "predis/predis": "^1.1",
     "google/apiclient":"^2.2",
     "railroad/response": "^2.0",
+    "railroad/mailora": "^3.0",
     "elasticsearch/elasticsearch": "~7.0",
     "ext-pdo": "*",
     "iksaku/laravel-mass-update": "^1.0"
@@ -51,7 +52,8 @@
   "autoload-dev": {
     "psr-4": {
       "Railroad\\Railcontent\\Tests\\": "tests/"
-    }
+    },
+    "classmap": ["tests/RailcontentProvider.php"]
   },
   "config": {
     "allow-plugins": {

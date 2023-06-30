@@ -4,15 +4,24 @@ namespace Railroad\Railcontent\Decorators\Hierarchy;
 
 use Illuminate\Database\Query\JoinClause;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
+use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Repositories\RepositoryBase;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Support\Collection;
 
 class ContentSlugHierarchyDecorator implements DecoratorInterface
 {
+
+    private ContentRepository $contentRepository;
+
+    public function __construct(ContentRepository $contentRepository)
+    {
+        $this->contentRepository = $contentRepository;
+    }
+
     public function decorate(Collection $contentResults)
     {
-        $query = RepositoryBase::$connectionMask->table(ConfigService::$tableContent . ' as parent_content_0')
+        $query = $this->contentRepository->connectionMask()->table(ConfigService::$tableContent . ' as parent_content_0')
             ->whereIn('parent_content_0.id', $contentResults->pluck('id'));
 
         for ($i = 0; $i < ConfigService::$contentHierarchyMaxDepth; $i++) {

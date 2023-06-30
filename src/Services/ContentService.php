@@ -2113,12 +2113,12 @@ class ContentService
     public function getNextContentForParentContentForUser($parentContentId, $userId)
     {
         $isParentComplete =
-            RepositoryBase::$connectionMask->table('railcontent_user_content_progress')
+            $this->contentRepository->connectionMask()->table('railcontent_user_content_progress')
                 ->where(['content_id' => $parentContentId, 'user_id' => $userId, 'state' => 'complete'])
                 ->exists();
 
         $contentHierarchyDataQuery =
-            RepositoryBase::$connectionMask->table('railcontent_content_hierarchy AS ch_1')
+            $this->contentRepository->connectionMask()->table('railcontent_content_hierarchy AS ch_1')
                 ->leftJoin('railcontent_content_hierarchy AS ch_2', 'ch_2.parent_id', '=', 'ch_1.child_id')
                 ->leftJoin('railcontent_content_hierarchy AS ch_3', 'ch_3.parent_id', '=', 'ch_2.child_id')
                 ->leftJoin('railcontent_content_hierarchy AS ch_4', 'ch_4.parent_id', '=', 'ch_3.child_id')
@@ -2281,21 +2281,21 @@ class ContentService
          * coach_focus_text
          */
         $contentRowsById =
-            RepositoryBase::$connectionMask->table('railcontent_content')
+            $this->contentRepository->connectionMask()->table('railcontent_content')
                 ->whereIn('id', $contentIds)
                 ->get()
                 ->keyBy('id');
 
         // content fields are the source of truth at the moment but that will change eventually
         $contentsFieldRows =
-            RepositoryBase::$connectionMask->table('railcontent_content_fields')
+            $this->contentRepository->connectionMask()->table('railcontent_content_fields')
                 ->whereIn('content_id', $contentIds)
                 ->get();
 
         $contentsFieldRowsByContentId = $contentsFieldRows->groupBy('content_id');
 
         $contentsDataRowsByContentId =
-            RepositoryBase::$connectionMask->table('railcontent_content_data')
+            $this->contentRepository->connectionMask()->table('railcontent_content_data')
                 ->whereIn('content_id', $contentIds)
                 ->get()
                 ->groupBy('content_id');
@@ -2312,19 +2312,19 @@ class ContentService
 
         if (!empty($linkedContentIds)) {
             $contentsFieldLinkedContentRowsById =
-                RepositoryBase::$connectionMask->table('railcontent_content')
+                $this->contentRepository->connectionMask()->table('railcontent_content')
                     ->whereIn('id', $linkedContentIds)
                     ->get()
                     ->keyBy('id');
 
             $contentsFieldLinkedContentsFieldRowsById =
-                RepositoryBase::$connectionMask->table('railcontent_content_fields')
+                $this->contentRepository->connectionMask()->table('railcontent_content_fields')
                     ->whereIn('content_id', $linkedContentIds)
                     ->get()
                     ->groupBy('content_id');
 
             $contentsFieldLinkedContentsDataRowsById =
-                RepositoryBase::$connectionMask->table('railcontent_content_data')
+                $this->contentRepository->connectionMask()->table('railcontent_content_data')
                     ->whereIn('content_id', $linkedContentIds)
                     ->get()
                     ->groupBy('content_id');
@@ -2634,12 +2634,12 @@ class ContentService
     public function getNextCohortLesson($parentContentId, $userId)
     {
         $isParentComplete =
-            RepositoryBase::$connectionMask->table('railcontent_user_content_progress')
+            $this->contentRepository->connectionMask()->table('railcontent_user_content_progress')
                 ->where(['content_id' => $parentContentId, 'user_id' => $userId, 'state' => 'completed'])
                 ->exists();
 
         $contentHierarchyDataQuery =
-            RepositoryBase::$connectionMask->table('railcontent_content_hierarchy AS ch_1')
+            $this->contentRepository->connectionMask()->table('railcontent_content_hierarchy AS ch_1')
                 ->leftJoin('railcontent_content_hierarchy AS ch_2', 'ch_2.parent_id', '=', 'ch_1.child_id')
                 ->leftJoin('railcontent_content_hierarchy AS ch_3', 'ch_3.parent_id', '=', 'ch_2.child_id')
                 ->leftJoin('railcontent_content_hierarchy AS ch_4', 'ch_4.parent_id', '=', 'ch_3.child_id')
