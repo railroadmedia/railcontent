@@ -48,14 +48,12 @@
 @endphp
 
 @section('global-head')
-    <title>Get unlimited drum lessons for a year!</title>
-    <meta property="og:title" content="Get unlimited drum lessons for a year!">
-
-    <meta name="description" content="We put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.">
-    <meta property="og:description" content="We put together an exclusive offer for 30-Day Drummer students to get unlimited drum lessons for a year + some extra special bonuses.">
-
+    <title>30-Day Chops | Drumeo</title>
+    <meta property="og:title" content="30-Day Chops | Drumeo">
+    <meta name="description" content="Learn drum chops with daily guided workouts.">
+    <meta property="og:description" content="Learn drum chops with daily guided workouts.">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/share-image2.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg" style="display: none;">
 
     @include('_partials.layout._fonts')
 
