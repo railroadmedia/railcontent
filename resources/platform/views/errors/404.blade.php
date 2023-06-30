@@ -120,10 +120,16 @@
         t.setAttribute('data-use-array-params', 'true');
         t.setAttribute('data-use-in-app', 'true');
         t.src = 'https://assets.customer.io/assets/track.js';
-        //If your account is in the EU, use:
-        //t.src = 'https://assets.customer.io/assets/track-eu.js'
         s.parentNode.insertBefore(t, s);
     })();
+    _cio.identify({
+        id: {{ user()->id }},
+        created_at: "{{ user()->created_at }}",   
+        email: "{{ user()->email }}",
+        first_name: "{{ user()->first_name }}",
+        last_name: "{{ user()->last_name }}",
+        plan_name: "{{ user()->access_level }}"
+    });
 </script>
 
 {{-- Helpscout Beacon --}}

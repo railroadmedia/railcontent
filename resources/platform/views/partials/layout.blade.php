@@ -120,7 +120,6 @@
             });
         </script>
 
-
         {{-- Helpscout Beacon --}}
         @include('partials.third-party.helpscout-tracking-beacon-script', [
             'email' => !empty(user()) ? user()->email : null,
