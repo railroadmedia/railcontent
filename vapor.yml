@@ -21,7 +21,6 @@ environments:
         timeout: 120
         tmp-storage: 2048
         cli-tmp-storage: 2048
-        queue-database-session-persist: true
         queue-tmp-storage: 2048
         queue-concurrency: 30
         cache: musora-production-redis-cache
