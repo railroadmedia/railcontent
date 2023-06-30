@@ -240,6 +240,10 @@ class SalesController extends BaseController
     {
         return view('pianote.products.foundation-books');
     }
+    public function easyChordsDeal()
+    {
+        return view('pianote.sales.pages.easy-chords-deal', ['theme' => 'pianote']);
+    }
 
     public function newPianoPlayers()
     {
