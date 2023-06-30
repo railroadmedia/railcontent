@@ -87,6 +87,12 @@
             window.userNavigationDropdownLinks = {!! $userNavigationDropdownLinksJson ?? '' !!};
         </script>
 
+        @yield('layout-scripts')
+            <script src="{{ mix('platform/js/manifest.js') }}"></script>
+            <script src="{{ mix('platform/js/vendor.js') }}"></script>
+            <script src="{{ mix('platform/js/app.js') }}"></script>
+        @yield('inject-components')
+
         {{-- Customer.io --}}
         <script type="text/javascript">
             var _cio = _cio || [];
@@ -98,7 +104,7 @@
                     s = document.getElementsByTagName('script')[0];
                 t.async = true;
                 t.id    = 'cio-tracker';
-                t.setAttribute('data-site-id', 'YOUR_SITE_ID');
+                t.setAttribute('data-site-id', 'fa24b9733327116040c7');
                 t.setAttribute('data-use-array-params', 'true');
                 t.setAttribute('data-use-in-app', 'true');
                 t.src = 'https://assets.customer.io/assets/track.js';
@@ -107,12 +113,6 @@
                 s.parentNode.insertBefore(t, s);
             })();
         </script>
-
-        @yield('layout-scripts')
-            <script src="{{ mix('platform/js/manifest.js') }}"></script>
-            <script src="{{ mix('platform/js/vendor.js') }}"></script>
-            <script src="{{ mix('platform/js/app.js') }}"></script>
-        @yield('inject-components')
 
         {{-- Helpscout Beacon --}}
         @include('partials.third-party.helpscout-tracking-beacon-script', [
