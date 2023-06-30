@@ -176,13 +176,13 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
-    <section class="py-7 sm:py-12 text-center" style="background:#f1f7fe;">
+    <section class="px-4 py-7 sm:py-12 text-center" style="background:#f1f7fe;">
         <div class="container mx-auto max-w-2xl">
             <h3 class="leading-tight mb-3">
-                Congratulations!<br>
+                Congratulations!<br class="hidden sm:inline">
                 <strong>You’ve improved your chops. Now what?</strong>
             </h3>
-            <h6 class="uppercase text-drumeo"><strong>GET UNLIMITED DRUM LESSONS FOR A YEAR + 5 FREE BONUSES</strong><br>
+            <h6 class="uppercase text-drumeo"><strong>GET UNLIMITED DRUM LESSONS FOR A YEAR + 5 FREE BONUSES</strong><br class="hidden sm:inline">
                 <span x-cloak x-data="timer()" x-init="countdown()">
                                                                      <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                                                      <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
@@ -192,7 +192,7 @@
                                                                  </span>
                 left!
             </h6>
-            <div class="w-full mx-auto my-10 px-3">
+            <div class="w-full mx-auto my-5 sm:my-10 px-3">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
                     <iframe class="absolute w-full h-full reset-on-close" src="//player.vimeo.com/video/840552968" frameborder="0" allowfullscreen allow="autoplay"></iframe>
                 </div>
@@ -223,7 +223,7 @@
                 <br><br>
                 But heads up: This offer is only available until July 9 at midnight.
                 <br><br>
-                Click below to get started and keep crushing it on the drums for the next year!<br><br>
+                Click below to get started and keep crushing it on the drums for the next year!
             </p>
             <div class="px-3 md:px-0">
                 <a class="join blue smaller w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">Claim Your Offer</a>
@@ -240,7 +240,7 @@
                 Drumeo membership special <br class="sm:hidden">pricing <br class="hidden sm:inline">
                 + FREE bonuses.
             </h3>
-            <p class="text-center mb-6">You’ll have one year of unlimited drum lessons, including:</p>
+            <p class="text-center mb-6">You’ll have one year of unlimited<br class="inline sm:hidden"> drum lessons, including:</p>
             <div class="md:grid md:grid-cols-3 md:gap-4">
                 <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#F6F8FC;">
                     <div class="w-full aspect-16:9 bg-cover bg-center lazyloaded" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-method.jpg" style="background-image: url(&quot;https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-method.jpg&quot;);"></div>
@@ -317,7 +317,7 @@
             crushing it on the drums.
         </h3>
         <p class="text-center mb-10">
-            Join a thriving community of drummers of ALL skill-levels <br class="inline sm:hidden">learning the world’s greatest instrument.
+            Join a thriving community of drummers of ALL <br class="inline sm:hidden">skill-levels learning the world’s greatest instrument.
         </p>
         <div class="mx-auto md:max-w-3xl lg:max-w-4xl grid grid-cols-1 sm:grid-cols-3 gap-6 px-4 lg:px-0">
             <div class="max-w-xs mx-auto">
@@ -427,8 +427,9 @@
     @endphp
     @include('musora.sales.components.order-section-bonuses', [
     'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png',
-        'header' => 'Online drum lessons for all skill levels.',
+        'header' => 'Online drum lessons<br class="inline sm:hidden"> for all skill levels.',
         'subDescription' => 'Start your Drumeo membership today and get:',
+        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
     'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[the-drummers-toolbox-book]=1&products[rudiments-poster]=1&locked=true&promo-code=special',
     ])
 
