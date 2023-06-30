@@ -1,12 +1,12 @@
 @extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>Save 50% On Your First Year</title>
-    <meta property="og:title" content="Save 50% On Your First Year">
+    <title>Learn the piano anytime with real teachers. | Pianote</title>
+    <meta property="og:title" content="Pianote - Learn the piano anytime with real teachers.">
     <meta property="og:url" content="https://www.pianote.com/">
 
-    <meta name="description" content="We want you back – so you’ll get a 50% discount on your first year with Pianote.">
-    <meta property="og:description" content="We want you back – so you’ll get a 50% discount on your first year with Pianote.">
+    <meta name="description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
+    <meta property="og:description" content="Learn the piano anytime with step-by-step video lessons, world-class teachers, and unlimited personal support. 90-Day Guarantee.">
 
     @hasSection('share-image')
         @yield('share-image')
@@ -236,7 +236,7 @@
         'header' => 'Online piano lessons<br class="inline sm:hidden"> for all skill levels.',
         'subDescription' => 'Join Pianote today and get 5 free bonuses!',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=special',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-practice-planner]=1&products[poster-chords]=1&products[poster-scales]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&redirect=/order&locked=true&promo-code=special',
     ])
 
     @include("pianote.sales.partials._footer", [
