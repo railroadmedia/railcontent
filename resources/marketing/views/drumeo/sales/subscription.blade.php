@@ -529,11 +529,13 @@
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
         'instagram' => '1M',
     ])
-    @include('musora.sales.components.guarantee-section', [
-        'badge' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png',
-        'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
-        'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
-    ])
+    @if(empty($trialVersion))
+        @include('musora.sales.components.guarantee-section', [
+            'badge' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png',
+            'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
+            'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the drums.',
+        ])
+    @endif
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
@@ -552,6 +554,9 @@
             "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
             "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
             "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+        ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'drumming',
         ])
     @elseif(!empty($promoVersion))
         @php
