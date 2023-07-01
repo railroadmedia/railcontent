@@ -175,7 +175,7 @@ class LeadGenController extends BaseController
     {
         switch($page){
             case null:
-                return view('pianote.lead-gen.getting-started.pages.signup', ['recaptchaKey'=>config('recaptcha.key')]);
+                return view('pianote.lead-gen.getting-started.signup', ['recaptchaKey'=>config('recaptcha.key'), 'theme' => 'pianote']);
             case 'thank-you':
                 return view('pianote.lead-gen.getting-started.thank-you');
         }
