@@ -1,4 +1,4 @@
-id,type,brand,id,soundslice_slug,length_in_seconds
+id,type,brand,assignment_id,soundslice_slug,length_in_seconds
 378451,song,pianote,378452,Fs34c,221
 378455,song,pianote,378456,Ks34c,234
 378459,song,pianote,378460,KvR4c,189
