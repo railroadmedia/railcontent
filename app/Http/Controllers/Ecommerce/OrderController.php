@@ -95,6 +95,9 @@ class OrderController extends Controller
 
         $this->cartService->refreshCart();
 
+        //todo: to be deleted
+        $this->cartService->addToCart('DLM-1-year', 1);
+
         $cart = $this->cartService->getCart();
         $cartDataArray = $this->cartService->toArray();
 
