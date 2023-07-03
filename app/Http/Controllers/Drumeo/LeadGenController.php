@@ -66,7 +66,7 @@ class LeadGenController extends BaseController
             case null:
                 return view('drumeo.lead-gen.getting-started.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
-                return view('drumeo.lead-gen.getting-started.thank-you');
+                return view('drumeo.lead-gen.getting-started.thank-you', ['theme'=> 'drumeo', 'month' => true]);
             case '10-practice':
                 $currentLesson = (object) array(
                     'title' => 'Building Your Practice Routine',
@@ -101,13 +101,6 @@ class LeadGenController extends BaseController
                     'currentLessonNum' => 10,
                 ]);
         }
-
-        throw new NotFoundHttpException();
-    }
-
-    public function gtsdAlt()
-    {
-        return view('drumeo.lead-gen.getting-started.signup-alt', ['recaptchaKey'=>config('recaptcha.key')]);
 
         throw new NotFoundHttpException();
     }
