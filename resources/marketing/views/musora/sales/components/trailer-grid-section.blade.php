@@ -11,7 +11,7 @@
                         <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/{{ $gridItem['image'] }}">
                         <img
                             class=" rounded-xl mb-3 transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=200,quality=85/{{ $gridItem['image'] }}"
+                            src="https://www.musora.com/musora-cdn/image/width=220,quality=85/{{ $gridItem['image'] }}"
                             alt="grid{{$key+1}}"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"

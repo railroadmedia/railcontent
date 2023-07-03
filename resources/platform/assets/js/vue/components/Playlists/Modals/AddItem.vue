@@ -288,7 +288,7 @@ onMounted(() => {
             <div class="tw-flex tw-w-full">
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-justify-between tw-w-full">
                     <b class="tw-uppercase tw-text-sm">Additional Playlist Items</b>
-                    <Toggle :initialValue="props.content.type === 'play-along' ? true : addFullSongToggle" 
+                    <Toggle :initialValue="addFullSongToggle" 
                             id="import-all-toggle" 
                             @onToggle="handleOnToggleAssignments" 
                     />

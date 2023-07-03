@@ -67,6 +67,9 @@
         "monthlyLink" => "/ecommerce/add-to-cart?products[musora-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
     ])
 
+    @include('musora.sales.components.trial-explanation', [
+        'instrument' => 'musical',
+    ])
     @include('musora.sales.components.app-section', [
         'image' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/devices2.png',
         'appleUrl' => 'https://apps.apple.com/us/app/musora/id1619053766?platform=iphone',
