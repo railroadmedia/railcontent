@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "48c2f642f251c0e803d446f6fb8a6200",
+    "content-hash": "05c7bd82440fcf155fbf307487743879",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8366,16 +8366,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.23",
+            "version": "dev-2.0-playlists-v15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "3e5175fc1a4799e227816efa0db951ba711147c0"
+                "reference": "2aca2ccc1dfa4403efdb9059f1c94e7a916a7973"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/3e5175fc1a4799e227816efa0db951ba711147c0",
-                "reference": "3e5175fc1a4799e227816efa0db951ba711147c0",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/2aca2ccc1dfa4403efdb9059f1c94e7a916a7973",
+                "reference": "2aca2ccc1dfa4403efdb9059f1c94e7a916a7973",
                 "shasum": ""
             },
             "require": {
@@ -8405,9 +8405,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.23"
+                "source": "https://github.com/railroadmedia/musora-api/tree/2.0-playlists-v15"
             },
-            "time": "2023-06-28T08:56:56+00:00"
+            "time": "2023-07-03T10:59:23+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -17014,6 +17014,12 @@
     ],
     "aliases": [
         {
+            "package": "railroad/musora-api",
+            "version": "dev-2.0-playlists-v15",
+            "alias": "v3.1.23",
+            "alias_normalized": "3.1.23.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
@@ -17028,6 +17034,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "railroad/musora-api": 20,
         "railroad/railanalytics": 20,
         "railroad/railcontent": 20
     },
