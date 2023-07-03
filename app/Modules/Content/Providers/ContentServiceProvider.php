@@ -5,8 +5,10 @@ namespace App\Modules\Content\Providers;
 use App\Modules\Content\Console\Commands\CoachBulkDataUpdate;
 use App\Modules\Content\Console\Commands\CoachBulkImageUpdate;
 use App\Modules\Content\Console\Commands\FixProgressOnUnpublishedContent;
+use App\Modules\Content\Console\Commands\ImportSongsDuration;
 use App\Modules\Content\Console\Commands\PredefinedPlaylists;
 use App\Modules\Content\Console\Commands\RebuildSearchIndexes;
+use App\Modules\Content\Console\Commands\SongDuration;
 use App\Modules\Content\Models\ContentField;
 use App\Modules\Content\Observers\ContentFieldObserver;
 use Illuminate\Console\Scheduling\Schedule;
@@ -33,6 +35,8 @@ class ContentServiceProvider extends ServiceProvider
                             FixProgressOnUnpublishedContent::class,
                             PredefinedPlaylists::class,
                             MigrateMissingPlaylistsItems::class,
+                            SongDuration::class,
+                            ImportSongsDuration::class,
                         ]);
     }
 }

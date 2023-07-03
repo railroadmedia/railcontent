@@ -309,6 +309,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                     }
 
                     if ($content['type'] == 'assignment') {
+                        // TODO: check how to get the assignment duration
                         $contentsOfType[$contentIndex]['fields'] =
                             array_merge($content['fields'] ?? [], self::$parents[$content['id']]['fields'] ?? []);
 
