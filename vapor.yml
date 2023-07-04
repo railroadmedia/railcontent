@@ -22,7 +22,7 @@ environments:
         tmp-storage: 2048
         cli-tmp-storage: 2048
         queue-tmp-storage: 2048
-        queue-concurrency: 50
+        queue-concurrency: 30
         cache: musora-production-redis-cache
         build:
             - 'COMPOSER_MIRROR_PATH_REPOS=1 composer install --no-dev'

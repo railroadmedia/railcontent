@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a455eeb67bb9351ff5321957b3b91f42",
+    "content-hash": "05c7bd82440fcf155fbf307487743879",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.274.0",
+            "version": "3.275.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "b2f37a49ca40bce633323a6988477c22be562c37"
+                "reference": "6cf6aacecda1dec52bf4a70d8e1503b5bc56e924"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/b2f37a49ca40bce633323a6988477c22be562c37",
-                "reference": "b2f37a49ca40bce633323a6988477c22be562c37",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/6cf6aacecda1dec52bf4a70d8e1503b5bc56e924",
+                "reference": "6cf6aacecda1dec52bf4a70d8e1503b5bc56e924",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.274.0"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.275.1"
             },
-            "time": "2023-06-27T18:32:17+00:00"
+            "time": "2023-06-30T18:23:40+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -2926,16 +2926,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.306.0",
+            "version": "v0.307.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "eb778b9e1f7a9020d258f4dde7af776fc81ef8d9"
+                "reference": "5f7d451aa912355dda61aa29ac3a4afa8b252467"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/eb778b9e1f7a9020d258f4dde7af776fc81ef8d9",
-                "reference": "eb778b9e1f7a9020d258f4dde7af776fc81ef8d9",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/5f7d451aa912355dda61aa29ac3a4afa8b252467",
+                "reference": "5f7d451aa912355dda61aa29ac3a4afa8b252467",
                 "shasum": ""
             },
             "require": {
@@ -2964,9 +2964,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.306.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.307.0"
             },
-            "time": "2023-06-26T00:52:13+00:00"
+            "time": "2023-07-01T01:02:13+00:00"
         },
         {
             "name": "google/auth",
@@ -4612,17 +4612,17 @@
         },
         {
             "name": "laravel/nova",
-            "version": "4.26.0",
+            "version": "4.25.1",
             "source": {
                 "type": "git",
                 "url": "git@github.com:laravel/nova.git",
-                "reference": "0496c6c27114c99e3e7b9d56002da1f6861ffd50"
+                "reference": "b7537f667ef4ee6a1c9581995d438a6fe214625b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-0496c6c27114c99e3e7b9d56002da1f6861ffd50-zip-fa8999.zip",
-                "reference": "0496c6c27114c99e3e7b9d56002da1f6861ffd50",
-                "shasum": "0ff5369972c16b74efd4e9ce915519f46ae9e244"
+                "url": "https://nova.laravel.com/dist/laravel/nova/laravel-nova-b7537f667ef4ee6a1c9581995d438a6fe214625b-zip-ae794f.zip",
+                "reference": "b7537f667ef4ee6a1c9581995d438a6fe214625b",
+                "shasum": "29a7eccd46fd5933fffa7ae45a5e6495b46f702f"
             },
             "require": {
                 "brick/money": "^0.5.0|^0.6.0|^0.7.0|^0.8.0",
@@ -4698,8 +4698,8 @@
                 ],
                 "test:local": [
                     "./vendor/bin/testbench-dusk package:dusk-purge",
-                    "./vendor/bin/phpunit -c phpunit.xml --group date-field,datetime-field,external-network --testdox",
-                    "./vendor/bin/phpunit -c phpunit.dusk.xml --group date-field,datetime-field,external-network --testdox"
+                    "./vendor/bin/phpunit -c phpunit.xml --group local-time,external-network --testdox",
+                    "./vendor/bin/phpunit -c phpunit.dusk.xml --group local-time,external-network --testdox"
                 ],
                 "dusk:filter": [
                     "./vendor/bin/testbench-dusk package:dusk-purge && ./vendor/bin/phpunit -c phpunit.dusk.xml --filter"
@@ -4720,9 +4720,9 @@
                 "laravel"
             ],
             "support": {
-                "source": "https://github.com/laravel/nova/tree/v4.26.0"
+                "source": "https://github.com/laravel/nova/tree/v4.25.1"
             },
-            "time": "2023-06-27T18:03:34+00:00"
+            "time": "2023-06-06T18:29:19+00:00"
         },
         {
             "name": "laravel/sanctum",
@@ -6331,16 +6331,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.67.0",
+            "version": "2.68.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "c1001b3bc75039b07f38a79db5237c4c529e04c8"
+                "reference": "4f991ed2a403c85efbc4f23eb4030063fdbe01da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/c1001b3bc75039b07f38a79db5237c4c529e04c8",
-                "reference": "c1001b3bc75039b07f38a79db5237c4c529e04c8",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4f991ed2a403c85efbc4f23eb4030063fdbe01da",
+                "reference": "4f991ed2a403c85efbc4f23eb4030063fdbe01da",
                 "shasum": ""
             },
             "require": {
@@ -6429,7 +6429,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-25T22:09:47+00:00"
+            "time": "2023-06-20T18:29:04+00:00"
         },
         {
             "name": "nette/schema",
@@ -6638,20 +6638,20 @@
         },
         {
             "name": "nova-kit/nova-packages-tool",
-            "version": "v1.11.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nova-kit/nova-packages-tool.git",
-                "reference": "b1286a662527c8e030145103e92fdc0762393e1e"
+                "reference": "05591b3589ed70886dbeb7cd43c2abdbb99ae020"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/b1286a662527c8e030145103e92fdc0762393e1e",
-                "reference": "b1286a662527c8e030145103e92fdc0762393e1e",
+                "url": "https://api.github.com/repos/nova-kit/nova-packages-tool/zipball/05591b3589ed70886dbeb7cd43c2abdbb99ae020",
+                "reference": "05591b3589ed70886dbeb7cd43c2abdbb99ae020",
                 "shasum": ""
             },
             "require": {
-                "laravel/nova": ">=4.26.0 <4.27.0",
+                "laravel/nova": ">=4.25.0 <4.26.0",
                 "php": "^7.3 || ^8.0"
             },
             "require-dev": {
@@ -6682,9 +6682,9 @@
             ],
             "description": "Tool for Laravel Nova Packages Development",
             "support": {
-                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.11.0"
+                "source": "https://github.com/nova-kit/nova-packages-tool/tree/v1.10.0"
             },
-            "time": "2023-06-27T21:32:23+00:00"
+            "time": "2023-06-06T21:50:42+00:00"
         },
         {
             "name": "nunomaduro/termwind",
@@ -8366,16 +8366,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.23",
+            "version": "dev-2.0-playlists-v15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "3e5175fc1a4799e227816efa0db951ba711147c0"
+                "reference": "2aca2ccc1dfa4403efdb9059f1c94e7a916a7973"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/3e5175fc1a4799e227816efa0db951ba711147c0",
-                "reference": "3e5175fc1a4799e227816efa0db951ba711147c0",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/2aca2ccc1dfa4403efdb9059f1c94e7a916a7973",
+                "reference": "2aca2ccc1dfa4403efdb9059f1c94e7a916a7973",
                 "shasum": ""
             },
             "require": {
@@ -8405,9 +8405,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.23"
+                "source": "https://github.com/railroadmedia/musora-api/tree/2.0-playlists-v15"
             },
-            "time": "2023-06-28T08:56:56+00:00"
+            "time": "2023-07-03T10:59:23+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8600,16 +8600,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.23",
+            "version": "dev-2.0-playlists-v15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "6a72ba0f191f3948fec3e73ca8a97471c199ebab"
+                "reference": "f0fcaee523b4f5d878e7b56dbbd1f27948705999"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/6a72ba0f191f3948fec3e73ca8a97471c199ebab",
-                "reference": "6a72ba0f191f3948fec3e73ca8a97471c199ebab",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/f0fcaee523b4f5d878e7b56dbbd1f27948705999",
+                "reference": "f0fcaee523b4f5d878e7b56dbbd1f27948705999",
                 "shasum": ""
             },
             "require": {
@@ -8625,6 +8625,7 @@
                 "league/flysystem-aws-s3-v3": "^3.0",
                 "php": "^8.1",
                 "predis/predis": "^1.1",
+                "railroad/mailora": "^3.0",
                 "railroad/response": "^2.0",
                 "ramsey/uuid": "^4.3",
                 "vimeo/vimeo-api": "^3.0"
@@ -8663,9 +8664,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.23"
+                "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists-v15"
             },
-            "time": "2023-06-26T21:09:59+00:00"
+            "time": "2023-07-03T10:48:32+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -14309,22 +14310,22 @@
         },
         {
             "name": "composer/class-map-generator",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/class-map-generator.git",
-                "reference": "1e1cb2b791facb2dfe32932a7718cf2571187513"
+                "reference": "953cc4ea32e0c31f2185549c7d216d7921f03da9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/class-map-generator/zipball/1e1cb2b791facb2dfe32932a7718cf2571187513",
-                "reference": "1e1cb2b791facb2dfe32932a7718cf2571187513",
+                "url": "https://api.github.com/repos/composer/class-map-generator/zipball/953cc4ea32e0c31f2185549c7d216d7921f03da9",
+                "reference": "953cc4ea32e0c31f2185549c7d216d7921f03da9",
                 "shasum": ""
             },
             "require": {
-                "composer/pcre": "^2 || ^3",
+                "composer/pcre": "^2.1 || ^3.1",
                 "php": "^7.2 || ^8.0",
-                "symfony/finder": "^4.4 || ^5.3 || ^6"
+                "symfony/finder": "^4.4 || ^5.3 || ^6 || ^7"
             },
             "require-dev": {
                 "phpstan/phpstan": "^1.6",
@@ -14362,7 +14363,7 @@
             ],
             "support": {
                 "issues": "https://github.com/composer/class-map-generator/issues",
-                "source": "https://github.com/composer/class-map-generator/tree/1.0.0"
+                "source": "https://github.com/composer/class-map-generator/tree/1.1.0"
             },
             "funding": [
                 {
@@ -14378,7 +14379,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-19T11:31:27+00:00"
+            "time": "2023-06-30T13:58:57+00:00"
         },
         {
             "name": "composer/pcre",
@@ -15225,16 +15226,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.22.0",
+            "version": "1.22.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "ec58baf7b3c7f1c81b3b00617c953249fb8cf30c"
+                "reference": "65c39594fbd8c67abfc68bb323f86447bab79cc0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/ec58baf7b3c7f1c81b3b00617c953249fb8cf30c",
-                "reference": "ec58baf7b3c7f1c81b3b00617c953249fb8cf30c",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/65c39594fbd8c67abfc68bb323f86447bab79cc0",
+                "reference": "65c39594fbd8c67abfc68bb323f86447bab79cc0",
                 "shasum": ""
             },
             "require": {
@@ -15266,9 +15267,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.22.0"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.22.1"
             },
-            "time": "2023-06-01T12:35:21+00:00"
+            "time": "2023-06-29T20:46:06+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -16657,16 +16658,16 @@
         },
         {
             "name": "spatie/backtrace",
-            "version": "1.4.1",
+            "version": "1.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/backtrace.git",
-                "reference": "47794d19e3215ace9e005a8f200cd7cc7be52572"
+                "reference": "483f76a82964a0431aa836b6ed0edde0c248e3ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/backtrace/zipball/47794d19e3215ace9e005a8f200cd7cc7be52572",
-                "reference": "47794d19e3215ace9e005a8f200cd7cc7be52572",
+                "url": "https://api.github.com/repos/spatie/backtrace/zipball/483f76a82964a0431aa836b6ed0edde0c248e3ab",
+                "reference": "483f76a82964a0431aa836b6ed0edde0c248e3ab",
                 "shasum": ""
             },
             "require": {
@@ -16703,7 +16704,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/backtrace/tree/1.4.1"
+                "source": "https://github.com/spatie/backtrace/tree/1.5.3"
             },
             "funding": [
                 {
@@ -16715,26 +16716,27 @@
                     "type": "other"
                 }
             ],
-            "time": "2023-06-13T14:35:04+00:00"
+            "time": "2023-06-28T12:59:17+00:00"
         },
         {
             "name": "spatie/flare-client-php",
-            "version": "1.3.6",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/flare-client-php.git",
-                "reference": "530ac81255af79f114344286e4275f8869c671e2"
+                "reference": "82138174d5fe2829a7f085a6bdb2a06f6def9f7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/530ac81255af79f114344286e4275f8869c671e2",
-                "reference": "530ac81255af79f114344286e4275f8869c671e2",
+                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/82138174d5fe2829a7f085a6bdb2a06f6def9f7a",
+                "reference": "82138174d5fe2829a7f085a6bdb2a06f6def9f7a",
                 "shasum": ""
             },
             "require": {
                 "illuminate/pipeline": "^8.0|^9.0|^10.0",
+                "nesbot/carbon": "^2.62.1",
                 "php": "^8.0",
-                "spatie/backtrace": "^1.2",
+                "spatie/backtrace": "^1.5.2",
                 "symfony/http-foundation": "^5.0|^6.0",
                 "symfony/mime": "^5.2|^6.0",
                 "symfony/process": "^5.2|^6.0",
@@ -16751,7 +16753,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-main": "1.1.x-dev"
+                    "dev-main": "1.3.x-dev"
                 }
             },
             "autoload": {
@@ -16776,7 +16778,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/flare-client-php/issues",
-                "source": "https://github.com/spatie/flare-client-php/tree/1.3.6"
+                "source": "https://github.com/spatie/flare-client-php/tree/1.4.0"
             },
             "funding": [
                 {
@@ -16784,28 +16786,28 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-12T07:57:12+00:00"
+            "time": "2023-06-28T11:08:09+00:00"
         },
         {
             "name": "spatie/ignition",
-            "version": "1.8.1",
+            "version": "1.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/ignition.git",
-                "reference": "d8eb8ea1ed27f48a694405cff363746ffd37f13e"
+                "reference": "de24ff1e01814d5043bd6eb4ab36a5a852a04973"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/ignition/zipball/d8eb8ea1ed27f48a694405cff363746ffd37f13e",
-                "reference": "d8eb8ea1ed27f48a694405cff363746ffd37f13e",
+                "url": "https://api.github.com/repos/spatie/ignition/zipball/de24ff1e01814d5043bd6eb4ab36a5a852a04973",
+                "reference": "de24ff1e01814d5043bd6eb4ab36a5a852a04973",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "php": "^8.0",
-                "spatie/backtrace": "^1.4",
-                "spatie/flare-client-php": "^1.1",
+                "spatie/backtrace": "^1.5.3",
+                "spatie/flare-client-php": "^1.4.0",
                 "symfony/console": "^5.4|^6.0",
                 "symfony/var-dumper": "^5.4|^6.0"
             },
@@ -16817,7 +16819,7 @@
                 "phpstan/phpstan-deprecation-rules": "^1.0",
                 "phpstan/phpstan-phpunit": "^1.0",
                 "psr/simple-cache-implementation": "*",
-                "symfony/cache": "^6.2",
+                "symfony/cache": "^6.0",
                 "symfony/process": "^5.4|^6.0",
                 "vlucas/phpdotenv": "^5.5"
             },
@@ -16867,7 +16869,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-06-06T14:14:58+00:00"
+            "time": "2023-06-28T13:24:59+00:00"
         },
         {
             "name": "spatie/laravel-ignition",
@@ -17012,15 +17014,29 @@
     ],
     "aliases": [
         {
+            "package": "railroad/musora-api",
+            "version": "dev-2.0-playlists-v15",
+            "alias": "v3.1.23",
+            "alias_normalized": "3.1.23.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
             "alias_normalized": "3.0.7.0"
+        },
+        {
+            "package": "railroad/railcontent",
+            "version": "dev-2.0-playlists-v15",
+            "alias": "v2.1.24",
+            "alias_normalized": "2.1.24.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/railanalytics": 20
+        "railroad/musora-api": 20,
+        "railroad/railanalytics": 20,
+        "railroad/railcontent": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
