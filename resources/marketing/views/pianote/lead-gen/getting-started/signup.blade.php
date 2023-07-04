@@ -8,118 +8,6 @@
 @section('head')
     @parent
     <style>
-        h1, h2, h3, h4, h5, h6, li, p {
-            line-height:1em;
-            margin:0 auto
-        }
-
-        h1 sup, h2 sup, h3 sup, h4 sup, h5 sup, h6 sup, li sup, p sup {
-            font-size:50%;
-            top:-.75em
-        }
-
-        h1 {
-            font-size:24px;
-            line-height:1.2em
-        }
-
-        @media (min-width:768px) {
-            h1 {
-                font-size:36px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h1 {
-                font-size:48px
-            }
-        }
-
-        h2 {
-            font-size:20px;
-            line-height:1.2em
-        }
-
-        @media (min-width:768px) {
-            h2 {
-                font-size:30px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h2 {
-                font-size:36px
-            }
-        }
-
-        h4 {
-            font-size:16px
-        }
-
-        @media (min-width:768px) {
-            h4 {
-                font-size:20px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h4 {
-                font-size:24px
-            }
-        }
-
-        h5 {
-            font-size:15px
-        }
-
-        @media (min-width:768px) {
-            h5 {
-                font-size:18px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h5 {
-                font-size:20px
-            }
-        }
-
-        h6 {
-            font-size:15px
-        }
-
-        @media (min-width:768px) {
-            h6 {
-                font-size:16px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h6 {
-                font-size:18px
-            }
-        }
-
-        li, p {
-            font-size:15px;
-            line-height:1.6em
-        }
-
-        @media (min-width:1024px) {
-            li, p {
-                font-size:16px
-            }
-        }
-
-        header {
-            background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started-2022/header-m.jpg');
-            background-size:cover;
-        }
-
-        h3 {
-            font-size:21px;
-        }
-
         .join.smaller {
             font-size:18px;
             padding:16px 25px;
@@ -137,23 +25,9 @@
         }
 
         @media (min-width:768px) {
-            header {
-                background-image:url('https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started-2022/header.jpg');
-                background-size:cover;
-            }
-
-            h3 {
-                font-size:24px;
-            }
 
             .join.smaller {
                 padding:16px 30px;
-            }
-        }
-
-        @media (min-width:1024px) {
-            h3 {
-                font-size:30px;
             }
         }
     </style>
@@ -165,7 +39,7 @@
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-14 sm:h-18 lg:h-20 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg" alt="logo" fetchpriority="high">
-                    <h2 class=""><strong class="font-black">Start learning piano </strong><br>
+                    <h2 class="leading-tight"><strong class="font-black">Start learning piano </strong><br>
                         the easy and fun way.</h2>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Sign up for 5 FREE play-along lessons</strong></h6>
@@ -193,7 +67,8 @@
                                 "buttonText" => "Get started for free",
                                 'stacked' => true,
                                 'inputBorder' => '1px solid #7A8491',
-                            "redirectURL" => "/getting-started/thank-you/"
+                            "redirectURL" => "/getting-started/thank-you/",
+                            "minimalForm" => true
                             ])
                     </div>
                 </div>
@@ -207,7 +82,7 @@
     </header>
     <div style="background:#eff7ff;">
 
-    <div class="container max-w-4xl mx-auto -mt-10 sm:-mt-14 lg:-mt-20">
+    <div class="container max-w-4xl mx-auto -mb-10 -mt-10">
         <div class="px-5 sm:px-0">
             <div class="flex flex-wrap sm:flex-nowrap text-center shadow-lg rounded-xl relative" style="background:linear-gradient(to bottom, #fff, #F1F7FE);">
                 <div class="z-10 flex flex-wrap sm:flex-nowrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 lg:px-5 text-left sm:text-center">

@@ -1,4 +1,4 @@
-@extends('pianote.lead-gen.lead-gen-layout-tw')
+@extends('pianote.lead-gen.lead-gen-layout-tw',[ 'appTailwind' => true, ])
 
 @section('meta')
     @parent
