@@ -108,7 +108,11 @@
 
                     <p class="w-full leading-normal mt-2">
                         {{--<strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>--}}
-                        <span style="text-transform:uppercase; display:inline-block;"><s class="opacity-40">${{ $bonus['price'] }}</s> <strong class="text-promo">FREE</strong></span><br>
+                        <span style="text-transform:uppercase; display:inline-block;">
+                            @if(!empty($bonus['price']))
+                            <s class="opacity-40">${{ $bonus['price'] }}</s>
+                            @endif
+                            <strong class="text-promo">FREE</strong></span><br>
                         <em>
                             @if(!empty($bonus['shipping']))
                                 Free Shipping
@@ -159,8 +163,10 @@
             </div>
         </div>
         <a class="join {{ $theme }} my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-3xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-        <br>
-        <a class="inline-block text-light-navy mt-2" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
+        @if(!empty($altButtonLink))
+            <br>
+            <a class="inline-block text-light-navy mt-2" href="{{ $altButtonLink }}"><p><u><em>Or start a monthly membership for <br class="inline-block md:hidden">${{ Prices::$plusSubscriptionMonthly }}/month. (no bonuses)</em></u></p></a>
+        @endif
     </div>
 </section>
 </div>

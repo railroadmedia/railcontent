@@ -148,14 +148,6 @@
         ])
 
     @endif
-    <a href="#customize-anchor" class="anchor-slide flex items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(330deg, #79EE9A, #12E3FF, #79EE9A);">
-        <h4 class="inline-block ml-0 mr-4 bg-white rounded-md font-bebas py-0.5 px-2 leading-none text-black">JUNE ONLY</h4>
-        <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight text-black">
-            Get a FREE Drum Key when you try Drumeo <br class="inline sm:hidden">
-            for 7 days. | While quantities last.
-        </p>
-    </a>
-
 
     @php
         $features = [
@@ -201,6 +193,23 @@
             ],
         ];
     @endphp
+
+    @if(Carbon\Carbon::create(2023, 7, 1, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <a href="#customize-anchor" class="anchor-slide flex items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(330deg, #79EE9A, #12E3FF, #79EE9A);">
+            <h4 class="inline-block ml-0 mr-4 bg-white rounded-md font-bebas py-0.5 px-2 leading-none text-black">JUNE ONLY</h4>
+            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-none sm:leading-none text-black">
+                Get a FREE Drum Key when you try Drumeo for 7 days.<br>
+                ONLY
+                <span x-cloak x-data="timer()" x-init="countdown()">
+                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                     </span>
+                LEFT
+            </p>
+        </a>
         @include('musora.sales.components.header-section', [
             'header' => 'Unlimited drum lessons + a free drum key. ',
             'desc' => 'You’ll get a free limited edition pewter drum key when you try Drumeo for 7 days ($15 value)!',
@@ -211,24 +220,34 @@
             'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
         'shortHeader' => true,
         'noThumbShadow' => true,
-        'specialBadge' => '<strong>ONLY</strong> <s>5000</s> <strong>' . $products['Drumeo-Key']->getStockAvailability() . ' LEFT</strong>',
         ])
+        <section class="text-center px-5 sm:px-6 pb-6 sm:py-0 text-black" style="background: linear-gradient(330deg, #79EE9A, #12E3FF, #79EE9A);">
+            <div class="container max-w-4xl mx-auto">
+                <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
+                    <img class="h-48 sm:h-72 lg:h-96 sm:order-1" src="https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/drum-key.png">
+                    <div class="text-left w-full sm:w-auto">
+                        <h2><strong>Free Drum Key</strong></h2>
+                        <h5 class="leading-tight mt-2 sm:mt-3 mb-6 sm:mb-8">Grab a <strong>NEW</strong> Limited Edition pewter drum key when<br class="hidden lg:inline"> you start a 7-day trial of Drumeo.</h5>
+                        <a class="sm:mx-1 join smaller black anchor-slide sm:w-7/12" href="#customize-anchor">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+                        <div class="sm:mx-1 join smaller outline black" x-on:click="keyTrailer = true;">WATCH VIDEO</div>
+                        <p class="text-sm mt-2"><em>Free worldwide shipping!</em></p>
+                    </div>
 
-    <section class="text-center px-5 sm:px-6 pb-6 sm:py-0 text-black" style="background: linear-gradient(330deg, #79EE9A, #12E3FF, #79EE9A);">
-        <div class="container max-w-4xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="h-48 sm:h-72 lg:h-96 sm:order-1" src="https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/drum-key.png">
-                <div class="text-left w-full sm:w-auto">
-                    <h2><strong>Free Drum Key</strong></h2>
-                    <h5 class="leading-tight mt-2 sm:mt-3 mb-6 sm:mb-8">Grab a <strong>NEW</strong> Limited Edition pewter drum key when<br class="hidden lg:inline"> you start a 7-day trial of Drumeo.</h5>
-                    <a class="sm:mx-1 join smaller black anchor-slide sm:w-7/12" href="#customize-anchor">START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
-                    <div class="sm:mx-1 join smaller outline black" x-on:click="keyTrailer = true;">WATCH VIDEO</div>
-                    <p class="text-sm mt-2"><em>Free worldwide shipping!</em></p>
                 </div>
-
             </div>
-        </div>
-    </section>
+        </section>
+    @else
+        @include('musora.sales.components.header-section', [
+            'header' => 'Online drum lessons for all skill levels.',
+            'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
+            'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
+            'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
+            'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo-m2.jpg',
+            'pointOne' => 'Improve Your Skills',
+            'pointTwo' => 'World-Class Teachers',
+            'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
+        ])
+    @endif
 
     <div class="h-5 sm:h-10 relative z-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
     @php
@@ -547,24 +566,51 @@
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-black" style="background: linear-gradient(330deg, #79EE9A, #12E3FF, #79EE9A);">
-        <div class="container mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                <img class="hidden sm:inline-block sm:h-64 lg:h-96 order-1" src="https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/drum-key-free-shipping.png">
-                <img class="h-48 inline-block sm:hidden" src="https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/drum-key-free-shipping-m.png">
-                <div class="text-center w-full sm:w-auto">
-                    <h2><strong>Try Drumeo for 7 days<br class="hidden sm:inline"> & get a free drum key.</strong></h2>
-                    <p class="leading-tight my-4 sm:my-5">Click below to start your plan that will continue on {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} (after your free trial). Cancel anytime. </p>
-                    <div class="flex items-center justify-center mx-auto">
-                        <h5 class="inline-block leading-tight mx-0 py-1 px-2 rounded-md inline-block w-auto text-white bg-black"><strong>ONLY</strong> <s>5000</s> <strong>{{ $products['Drumeo-Key']->getStockAvailability() }}  LEFT</strong></h5>
+    @if(Carbon\Carbon::create(2023, 7, 1, 0, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-black" style="background: linear-gradient(330deg, #79EE9A, #12E3FF, #79EE9A);">
+            <div class="container mx-auto">
+                <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
+                    <img class="hidden sm:inline-block sm:h-64 lg:h-96 order-1" src="https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/drum-key-free-shipping.png">
+                    <img class="h-48 inline-block sm:hidden" src="https://dpwjbsxqtam5n.cloudfront.net/promos/june/2023/drum-key-free-shipping-m.png">
+                    <div class="text-center w-full sm:w-auto">
+                        <h2><strong>Try Drumeo for 7 days<br class="hidden sm:inline"> & get a free drum key.</strong></h2>
+                        <p class="leading-normal my-4 sm:my-5">Click below to start your plan that will continue on {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} (after your free trial). Cancel anytime. <br>
+                            <strong class="uppercase font-black">ONLY
+                    <span x-cloak x-data="timer()" x-init="countdown()">
+                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                         <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                     </span>
+                    LEFT</strong>
+                        </p>
+                        <a class="join drumeo w-full my-6" href="/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&products[Drumeo-Key]=1&promo-code=special&locked=true">7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+                        <a class="text-sm" href="/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true"><em><u>OR start a Monthly membership (no free bonuses).</u></em></a>
                     </div>
-                    <a class="join drumeo w-full my-6" href="/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&products[Drumeo-Key]=1&promo-code=special&locked=true">7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
-                    <a class="text-sm" href="/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true"><em><u>OR start a Monthly membership (no free bonuses).</u></em></a>
-                </div>
 
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    @else
+        @include('musora.sales.components.card-selection-section', [
+            "noSelector" => true,
+            "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
+            "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
+            "songs" => "5000+ popular songs.",
+            "firstPoint" => "The world’s best drum lessons.",
+            "thirdPoint" => "Unlimited personal support.",
+            "fifthPoint" => "Lesson access for piano, guitar, and singing.",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-7-Day]=1&locked=true",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
+            "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
+            "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+        ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'drumming',
+        ])
+
+    @endif
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices.png',
@@ -603,5 +649,10 @@
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+
+    @include('_partials.components.countdown',[
+    'countdownDate' => '2023-07-01 00:00:00',
+    'promoVersion' => false
+    ])
     @yield('scripts')
 @stop

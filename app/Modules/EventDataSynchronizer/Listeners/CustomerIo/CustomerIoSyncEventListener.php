@@ -889,6 +889,23 @@ class CustomerIoSyncEventListener
                     )
                 );
 
+                $data['brand'] = $order->getBrand();
+
+                dispatch(
+                    (new CustomerIoCreateEventByUserId(
+                        $order->getUser()
+                            ->getId(),
+                        $order->getBrand(),
+                        'musora_user_order',
+                        $data,
+                        null,
+                        $order->getCreatedAt()->timestamp
+                    ))->delay(
+                        Carbon::now()
+                            ->addSeconds(30)
+                    )
+                );
+
                 // trigger pack specific events
                 $skuToEventNameMap = config('event-data-synchronizer.customer_io_pack_sku_to_purchase_event_name', []);
 
@@ -1277,7 +1294,24 @@ class CustomerIoSyncEventListener
                 $mobileOrderEvent->getSubscription()->getCreatedAt()->timestamp
             ))->delay(
                 Carbon::now()
-                    ->addSeconds(3)
+                    ->addSeconds(30)
+            )
+        );
+
+        $data['brand'] = $mobileOrderEvent->getSubscription()->getBrand();
+
+        dispatch(
+            (new CustomerIoCreateEventByUserId(
+                $mobileOrderEvent->getSubscription()->getUser()
+                    ->getId(),
+                $mobileOrderEvent->getSubscription()->getBrand(),
+                'musora_user_order',
+                $data,
+                null,
+                $mobileOrderEvent->getSubscription()->getCreatedAt()->timestamp
+            ))->delay(
+                Carbon::now()
+                    ->addSeconds(30)
             )
         );
     }

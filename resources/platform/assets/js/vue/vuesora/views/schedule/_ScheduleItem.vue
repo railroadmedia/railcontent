@@ -108,7 +108,7 @@ export default {
         },
 
         formatted_time() {
-            return new Date(this.time_to_display + 'Z').toISOString().slice(0, 19).replace('T', ' ')
+            return this.time_to_display;
         },
 
         month() {

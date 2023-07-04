@@ -95,6 +95,7 @@ class Leadgen extends Resource
                 return '<a class="link-default" target="_blank" href="'.get_legacy_brand_base_url(strtolower($this->brand->name)).'/'.$this->slug.'">'.$this->slug.'</a>';
             })->asHtml()->hideWhenCreating()->hideWhenUpdating(),
             Text::make('Index Slug', 'slug')->hideFromIndex()->hideFromDetail(),
+            Boolean::make('Lesson tile/grid view','index_tile_view')->default(true)->help('If unchecked, the lessons will be displayed in a grid view.')->hideFromIndex(),
             Image::make('logo')
                 ->disk('nova_s3')
                 ->prunable()
