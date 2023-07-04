@@ -11,19 +11,18 @@ class ImportSongsDuration extends Command
 {
 
     protected $name = 'ImportSongsDuration';
-    protected $signature = 'ImportSongsDuration {brand=drumeo} {calculateduration=0} {startIndex=0} {endIndex=-1}';
+    protected $signature = 'ImportSongsDuration {brand=drumeo} {calculateduration=0} {startIndex=0}';
     protected $description = 'Import songs duration from csv file';
 
     public function handle()
     {
         $startIndex = $this->argument('startIndex');
-        $endIndex = $this->argument('endIndex');
         $brand = $this->argument('brand');
         $calculateDuration = $this->argument('calculateduration', false);
 
-        [$csv, $headersRow] = $this->getCSV($startIndex, $endIndex, $brand);
-
-        $this->withProgressBar($csv, function ($row) use ($headersRow, &$contentIds, $calculateDuration) {
+        [$csv, $headersRow] = $this->getCSV(0, -1, $brand);
+        $playlists = [];
+        $this->withProgressBar($csv, function ($row) use ($headersRow, &$contentIds, $calculateDuration, &$playlists) {
             $data = $this->getData($row, $headersRow);
             $songId = $this->getValue($data, $headersRow, 'id');
             $contentId = $this->getValue($data, $headersRow, 'assignment_id');
@@ -40,12 +39,29 @@ class ImportSongsDuration extends Command
                 $content->save();
             }
             if ($calculateDuration == 1) {
-                $playlists =
+                $playlists = array_merge(
+                    $playlists,
                     DB::table('railcontent_user_playlist_content')
                         ->selectRaw('user_playlist_id ')
                         ->where('content_id', '=', $songId)
-                        ->get();
-                foreach ($playlists->pluck('user_playlist_id') as $playlistId) {
+                        ->get()
+                        ->pluck('user_playlist_id')
+                        ->toArray()
+                );
+                $playlists = array_unique($playlists);
+            }
+        });
+
+        if ($calculateDuration == 1) {
+            $total = 0;
+            $chunks = array_chunk($playlists, $startIndex);
+
+            $count = count($playlists);
+
+            foreach ($chunks as $playlistIds) {
+                foreach ($playlistIds as $playlistId) {
+                    $total++;
+                    // dd($playlistIds);
                     $duration =
                         DB::table('railcontent_content_fields')
                             ->selectRaw(
@@ -85,17 +101,20 @@ class ImportSongsDuration extends Command
                                 'railcontent_content.id'
                             )
                             ->whereIn('railcontent_user_playlist_content.user_playlist_id', [$playlistId])
+                            ->where('railcontent_content.type', '=', 'assignment')
                             ->first();
-                   //dd($duration->duration + $songDuration->duration);
+
                     $playlistDuration =
                         \DB::table('railcontent_user_playlists')
                             ->where('railcontent_user_playlists.id', '=', $playlistId)
                             ->update([
-                                         'duration' => ($duration->duration??0) + ($songDuration->duration??0),
+                                         'duration' => ($duration->duration ?? 0) + ($songDuration->duration ?? 0),
                                      ]);
                 }
+                $this->info('Playlists duration updated:::'.$total);
             }
-        });
+            $this->info($total);
+        }
 
         $this->info('Done.');
     }
