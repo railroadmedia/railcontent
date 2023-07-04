@@ -1,12 +1,19 @@
-@extends('pianote.lead-gen.chord-hacks.chord-hacks-layout')
+@extends('pianote.lead-gen.lead-gen-layout-tw')
 
 @section('meta')
     @parent
     <title>Chord Hacks | Pianote</title>
-@stop()
+    <meta property="og:title" content="Chord Hacks">
+
+    <meta name="description" content="The easiest way to learn beautiful piano chords.">
+    <meta property="og:description" content="The easiest way to learn beautiful piano chords.">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/share-image.jpg" style="display: none;">
+    <meta property="og:url" content="https://www.pianote.com/chord-hacks">
+@endsection
 
 @section('head')
     @parent
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
     <style>
         header .disclaimer {
             display: none;
