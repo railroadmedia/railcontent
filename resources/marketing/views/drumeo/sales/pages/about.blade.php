@@ -105,7 +105,7 @@
         <div class="container mx-auto relative z-10 max-w-5xl">
             <div class="flex flex-wrap sm:flex-nowrap lg:items-center">
                 <div class="coaches w-full sm:w-5/12 lg:w-1/2 mb-5 sm:mb-0 sm:pl-5 mx-auto sm:order-1 text-center">
-                    <img class="h-64 sm:h-auto" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Collage_1.png" alt="student pics">
+                    <img class="h-64 sm:h-auto" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Collage_1.png">
                 </div>
                 <div class="p-5 sm:p-8 rounded-xl w-full sm:w-7/12 lg:w-1/2" style="background:#1d232f;">
                     <h3 class="mb-3"><strong>Online Drum Lessons For Everyone.</strong></h3>
@@ -128,7 +128,7 @@
 
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="coaches w-full sm:w-1/2 sm:pr-5 mb-5 sm:mb-0 text-center">
-                    <img class="h-52 sm:h-auto" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Collage_2.png" alt="staff pics">
+                    <img class="h-52 sm:h-auto" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Collage_2.png">
                 </div>
                 <div class="p-6 rounded-xl w-full sm:w-1/2" style="background:#1d232f;">
                     <h3><strong>This is the dream team.</strong></h3>
@@ -201,19 +201,19 @@
             <p class="text-light-navy mt-1.5 mb-6">Drumeo is one brand under <a href="https://www.musora.com/"><u>Musora</u></a>: a group of organizations that help musicians<br class="hidden sm:inline"> develop their skills and connect with others. Let’s make music together!</p>
             <div class="flex flex-wrap sm:flex-nowrap">
                 <div class="mb-4 sm:mb-0 w-full sm:w-1/3 px-3">
-                    <a target="_blank" href="https://www.pianote.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png" alt="brand logo"></a>
+                    <a target="_blank" href="https://www.pianote.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png"></a>
                     <p class="leading-tight text-light-navy my-3">An incredible resource<br class="hidden sm:inline lg:hidden"> for learning piano</p>
-                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/pianote-graphic.png" alt="pianote">
+                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/pianote-graphic.png">
                 </div>
                 <div class="mb-4 sm:mb-0 w-full sm:w-1/3 px-3">
-                    <a target="_blank" href="https://www.guitareo.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="brand logo"></a>
+                    <a target="_blank" href="https://www.guitareo.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png"></a>
                     <p class="leading-tight text-light-navy my-3">Where guitar players<br class="hidden sm:inline lg:hidden"> can learn and grow</p>
-                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/guitareo-graphic.png" alt="guitareo">
+                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/guitareo-graphic.png">
                 </div>
                 <div class="w-full sm:w-1/3 px-3">
-                    <a target="_blank" href="https://www.singeo.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="brand logo"></a>
+                    <a target="_blank" href="https://www.singeo.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png"></a>
                     <p class="leading-tight text-light-navy my-3">A one-stop platform<br class="hidden sm:inline lg:hidden"> for vocalists</p>
-                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/singeo-graphic.png" alt="singeo">
+                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/singeo-graphic.png">
                 </div>
             </div>
         </div>
