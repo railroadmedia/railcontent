@@ -188,31 +188,13 @@
                 </div>
             </div>
         </section>
-        <section class="tw-py-12">
-            <div class="tw-max-w-5xl tw-mx-auto tw-px-4 md:tw-px-10">
-                {{--  Body logo  --}}
-                <img
-                    class="tw-h-10 sm:tw-h-16 tw-mb-8 tw-mx-auto tw-transition-opacity tw-opacity-0"
-                    alt="just play logo"
-                    src="https://www.musora.com/musora-cdn/image/width=1220,quality=85/{{ $cohort['body_logo'] }}"
-                    loading="lazy"
-                    onload="this.classList.remove('tw-opacity-0')"
-                />
-                {{--Body bottom description--}}
-                <p class="tw-text-center tw-px-6">{!! $cohort['body_bottom_description'] !!}</p>
-            </div>
-        </section>
 
         {{--  Dropdown  --}}
         <section class="tw-bg-white tw-py-12">
             <div class="tw-max-w-5xl tw-mx-auto tw-pl-6 tw-pr-4">
                 <div class="tw-text-center tw-mb-3">
-                    <img class="tw-h-20 md:tw-h-24 lg:tw-h-28 tw-transition-all tw-mx-auto" src="https://www.musora.com/musora-cdn/image/width=380,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <h4 class="tw-leading-tight tw-mt-2 tw-mb-4 sm:tw-my-4 lg:tw-my-5"><strong>
-                            20 Guided Play-Along Lessons.<br>
-                            Feedback From Real Teachers.<br>
-                            Lifetime Course Access.
-                        </strong></h4>
+                    <img class="tw-h-20 md:tw-h-24 lg:tw-h-28 tw-transition-all tw-mx-auto" src="https://www.musora.com/musora-cdn/image/width=380,quality=85/{{ $cohort['body_logo'] }}" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <h4 class="tw-leading-tight tw-mt-2 tw-mb-4 sm:tw-my-4 lg:tw-my-5"><strong>{!! $cohort['body_bottom_description'] !!}</strong></h4>
                     <div class="tw-w-full tw-mx-auto sm:tw-mx-0">
                         <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Master your chord changes &amp; inversions.</p>
                         <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Join 9,381 piano players who have already registered.</p>
