@@ -3,7 +3,6 @@
 @section('meta')
     @parent
     <title>Getting Started On The Piano | Pianote</title>
-    <title>Getting Started On The Piano</title>
     <meta name="description" content="Go from absolute beginner to playing your first song in four easy lessons!">
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started-2022/share-image.jpg" style="display: none;">
@@ -42,7 +41,7 @@
 
 @section('page-body')
     <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
-        <div class="container max-w-5xl mx-auto">
+        <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-14 sm:h-18 lg:h-20 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg" alt="logo" fetchpriority="high">
@@ -92,7 +91,7 @@
     <div class="container max-w-4xl mx-auto -mb-10 -mt-10">
         <div class="px-5 sm:px-0">
             <div class="flex flex-wrap sm:flex-nowrap text-center shadow-lg rounded-xl relative" style="background:linear-gradient(to bottom, #fff, #F1F7FE);">
-                <div class="z-10 flex flex-wrap sm:flex-nowrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 lg:px-5 text-left sm:text-center">
+                <div class="z-10 flex flex-wrap sm:flex-nowrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-6 lg:px-5 text-left sm:text-center">
                     <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
