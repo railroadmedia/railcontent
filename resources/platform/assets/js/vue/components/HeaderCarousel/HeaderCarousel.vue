@@ -112,6 +112,7 @@ onMounted(() => {
       :desktopImg="slide.desktop_img"
       :tabletImg="slide.tablet_img"
       :mobileImg="slide.mobile_img"
+      :is-draft="slide.draft"
     />
 
       <!-- Directional Buttons -->
