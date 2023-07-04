@@ -221,18 +221,11 @@
                         </div>
                         <div class="tw-flex tw-flex-row tw-w-full">
                             <assignments-container
+                                brand="{{ $brand }}"
+                                :user-id="{{ auth()->id() }}"
                                 :lesson-data="{{ json_encode($lessonContent) }}"
                                 :assignments="{{ json_encode($lessonContent->fetch('*assignments', [])) }}"
-                                :brand="{{ $brand }}"
-                                :user-id="{{ auth()->id() }}"
                             >
-                                <template slot="completion-bonus">
-                                    @include('partials.bladesora.members.partials._completion-bonus', [
-                                        'xpBonus' => $lessonContent->fetch('xp_bonus', 0),
-                                        'isComplete' => $lessonContent->fetch('progress_percent', 0) === 100,
-                                        'themeColor' => brand(),
-                                    ])
-                                </template>
                             </assignments-container>
                         </div>
                     </div>
