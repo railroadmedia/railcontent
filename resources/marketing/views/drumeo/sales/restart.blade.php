@@ -361,15 +361,7 @@
                     </div>
                     <br>
                     <h3 class="leading-tight mt-4 sm:mt-5"><strong>Restart your <span class="hidden sm:inline">Drumeo</span> Membership<br class="hidden sm:inline">  today and save 50%.</strong></h3>
-                    <p class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until June 30th.
-                                <span x-cloak x-data="timer()" x-init="countdown()">
-                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                                                                 </span>
-                                left!</em></strong></p>
+                    <p class="leading-tight my-3 sm:my-4 text-musora font-black"><strong><em>Only available until June 30th.</em></strong></p>
 
                     <h3 class="leading-tight mb-1"><strong>Only</strong> <s class="opacity-50">$240</s> <strong>$120</strong></h3>
                     <p class="leading-tight text-sm mb-5"><em>Renews at $240 after your first year.</em></p>
