@@ -288,8 +288,8 @@ onUpdated(() => {
         <h2 v-if="adminMessage && adminMessage.length" class="tw-text-[18px] tw-w-full tw-bg-yellow-200 tw-p-[20px] tw-text-center">
           {{ adminMessage }}
         </h2>
-        <!-- Content -->
-        <div class="tw-flex tw-flex-col tw-grow tw-h-full tw-w-full tw-min-h-[calc(100vh-70px)]">
+        <!-- Content | Accounting for footer heithg in min height -->
+        <div class="tw-flex tw-flex-col tw-grow tw-h-full tw-w-full tw-min-h-[calc(100vh-152px)] lg:tw-min-h-[calc(100vh-128px)]">
           <slot :is-dark-mode="isDarkModeSelected" />
         </div>
         <!-- Footer -->
