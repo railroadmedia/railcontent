@@ -289,7 +289,9 @@ onUpdated(() => {
           {{ adminMessage }}
         </h2>
         <!-- Content -->
-        <slot :is-dark-mode="isDarkModeSelected" />
+        <div class="tw-flex tw-flex-col tw-grow tw-h-full tw-w-full tw-min-h-[calc(100vh-70px)]">
+          <slot :is-dark-mode="isDarkModeSelected" />
+        </div>
         <!-- Footer -->
         <Footer :brand="brand" />
 
