@@ -1,5 +1,5 @@
 {
-    "/platform/js/app.js": "/platform/js/app.js?id=3a1a2c43e2467f1d22028162d064a28d",
+    "/platform/js/app.js": "/platform/js/app.js?id=d9901c93b0e8404f25395aaa6e4ccd2e",
     "/platform/js/profile.js": "/platform/js/profile.js?id=a13ed5f750a89e00edbe84934bd56773",
     "/platform/js/lesson-page.js": "/platform/js/lesson-page.js?id=9b1b997eda2b5545804b8d7649790e48",
     "/platform/js/books.js": "/platform/js/books.js?id=bd6874db5faa8414cda38fb1fa497d2c",
@@ -13,7 +13,7 @@
     "/platform/js/piano-backing-tracks.js": "/platform/js/piano-backing-tracks.js?id=a121116bf28ae9fddf985bb2860bc9a9",
     "/platform/js/student-review-form-iframe.js": "/platform/js/student-review-form-iframe.js?id=2cb6cdf4d68ab4ce703cbb67c210ec2e",
     "/platform/js/comments-catalogue-component.js": "/platform/js/comments-catalogue-component.js?id=f580ab8a27e45bfd725aa156b97119b5",
-    "/platform/js/order-form.js": "/platform/js/order-form.js?id=455496b3c0a788f6b96a4465692529e2",
+    "/platform/js/order-form.js": "/platform/js/order-form.js?id=67299e73a41d2091c4708caed27b4a7a",
     "/platform/js/forum-thread-component.js": "/platform/js/forum-thread-component.js?id=6ce78b7119d354541921b96cf9776343",
     "/platform/js/text-editor-component.js": "/platform/js/text-editor-component.js?id=81a9404cd71a68b793e020b62446c1e8",
     "/platform/js/contact-member-form.js": "/platform/js/contact-member-form.js?id=ab07a994c2a2cf1a472327b7490cbb0d",
@@ -32,9 +32,9 @@
     "/platform/js/playlist-collection-catalog.js": "/platform/js/playlist-collection-catalog.js?id=8f98079cee496111be44bc4a980c62f5",
     "/platform/js/playlist-breadcrumb.js": "/platform/js/playlist-breadcrumb.js?id=783ff25bfcb4b25bb7c92411841014a3",
     "/platform/js/playlist-collection-header.js": "/platform/js/playlist-collection-header.js?id=978226c61374a7bc302452e97900f872",
-    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=2b700955f43c3af41fe72305682e67c2",
+    "/platform/js/vendor~player.js": "/platform/js/vendor~player.js?id=09903bb6c8a5633f9a2f593d996f848f",
     "/marketing/css/vuesora.css": "/marketing/css/vuesora.css?id=e6100dbb3c4921cdbe31b79260c28a65",
-    "/platform/css/app.css": "/platform/css/app.css?id=010fc396bc7b9f44e795c33619aae185",
+    "/platform/css/app.css": "/platform/css/app.css?id=4eb7b5223c00e95033c82344dbaeadd5",
     "/marketing/css/app.css": "/marketing/css/app.css?id=0ac21dd79beabb1c4a2d33eb90289c9c",
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=1f7c1ba163fd142b565038098ef385b8"
 }

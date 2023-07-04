@@ -5,7 +5,7 @@
           <div class="lg:tw-flex">
               <div class="tw-hidden lg:tw-block" :class="isSidebarCollapsed ? 'lg:tw-w-[68px]' : 'lg:tw-w-[256px]'"></div>
               <div class="lg:tw-flex-1 tw-flex tw-justify-center">
-                  <div class="lg:tw-max-w-[1280px] tw-w-full lg:tw-container lg:tw-mx-auto lg:tw-pl-7 lg:tw-pr-9">
+                  <div class="lg:tw-max-w-[1280px] tw-w-full lg:tw-mx-auto lg:tw-pl-7 lg:tw-pr-9">
                     <div :class="`
                               tw-px-[16px]
                               tw-py-2
@@ -22,8 +22,8 @@
                     ">
                       <div class="tw-flex tw-justify-between tw-items-center tw-text-sm">
                         <div class="tw-flex tw-items-center">
-                          <musora-icon v-if="SVGIcon.length" 
-                                      :icon-name="SVGIcon" 
+                          <musora-icon v-if="SVGIcon.length"
+                                      :icon-name="SVGIcon"
                                       class="tw-w-[24px] tw-h-[24px] tw-mr-2 tw-inline-flex" />
                           <i v-else class="fas tw-mr-2 tw-text-[22px]" :class="notificationIcon ? notificationIcon : 'fa-bell'"></i>
                           <span class="tw-font-bold tw-text-sm">{{ notificationText }}</span>
