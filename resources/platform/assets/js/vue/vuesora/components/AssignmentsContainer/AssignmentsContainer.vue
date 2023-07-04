@@ -6,18 +6,18 @@
                     :lesson-thumbnail="lessonThumbnail"
                     :lesson-title="lessonTitle"
                     :lesson-id="lessonId"
-                    :theme-color="assignment.themeColor"
-                    :brand="assignment.themeColor"
-                    :timecode="assignment.timecode"
+                    :theme-color="brand"
+                    :brand="brand"
+                    :timecode="assignment.data.find((t) => t.key === 'timecode') ? assignment.data.find((t) => t.key === 'timecode').value : 0"
                     :id="assignment.id"
                     :title="assignment.title"
-                    :soundslice-slug="assignment.soundsliceSlug"
+                    :soundslice-slug="assignment.soundslice_slug"
                     :completed="assignment.completed"
-                    :user-id="assignment.userId"
+                    :user-id="userId"
                     :position="index"
                     :force-open="forceIndex === index"
-                    :disable-prev="assignments[index - 1] && !assignments[index - 1].soundsliceSlug"
-                    :disable-next="assignments[index + 1] && !assignments[index + 1].soundsliceSlug"
+                    :disable-prev="assignments[index - 1] && !assignments[index - 1].soundslice_slug"
+                    :disable-next="assignments[index + 1] && !assignments[index + 1].soundslice_slug"
                     v-on:force-prev="forceIndex = forceIndex - 1"
                     v-on:force-next="forceIndex = forceIndex + 1"
                     v-on:force-current="forceIndex = index"
@@ -45,6 +45,18 @@ export default {
         lessonData: {
             type: Object,
         },
+        brand: {
+            type: String,
+            default: 'drumeo',
+        },
+        testData: {
+            type: Array,
+            default: () => [],
+        },
+        userId: {
+            type: Number,
+            default: null,
+        }
     },
     data() {
         return {
@@ -52,7 +64,8 @@ export default {
         };
     },
     mounted() {
-        console.log('lessonData: ', this.lessonData)
+        console.log('lessonData: ', this.lessonData);
+        console.log('test', this.testData)
     },
     computed: {
         //Thumbnail
