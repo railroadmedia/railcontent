@@ -1448,8 +1448,7 @@ class ContentPagesController extends BaseController
         $lessonType = ContentTypes::newContentTypes();
         $filteredType = $request->get('included_types');
 
-        ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
 
         ContentRepository::$pullFutureContent = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
