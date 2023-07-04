@@ -11,7 +11,7 @@
         <div class="flex flex-row nmh-1 flex-wrap resource-buttons">
 
           <!-- Info Button -->
-          <div class="flex flex-column resource-button ph-1 tw-text-white">
+          <div v-if="showInfoButton" class="flex flex-column resource-button ph-1 tw-text-white">
             <button class="btn stacked" id="toggleInstructorInfo" @click="toggleInfo">
             <span
               class="tw-shadow-none tw-text-lg"
@@ -270,6 +270,11 @@ export default {
       default: () => false,
     },
 
+    showInfoButton: {
+      type: Boolean,
+      default: () => false,
+    },
+
     likeCount: {
       type: [Number, String],
       default: () => 0,
@@ -331,6 +336,8 @@ export default {
         this.resourceDropdown = false;
       }
     });
+
+    console.log('infobutton',this.showInfoButton)
   },
   methods: {
     getCurrentTime() {
