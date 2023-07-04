@@ -21518,18 +21518,6 @@ a:visited{
 .tw-top-\[-68px\]{
   top: -68px !important;
 }
-.tw-top-0{
-  top: 0px !important;
-}
-.tw-left-0{
-  left: 0px !important;
-}
-.tw-top-0{
-  top: 0px !important;
-}
-.tw-left-0{
-  left: 0px !important;
-}
 .tw-z-0{
   z-index: 0 !important;
 }
@@ -21568,9 +21556,6 @@ a:visited{
 }
 .tw-z-\[15\]{
   z-index: 15 !important;
-}
-.tw-z-10{
-  z-index: 10 !important;
 }
 .tw-order-1{
   order: 1 !important;
@@ -22322,18 +22307,6 @@ a:visited{
 .tw-h-52{
   height: 13rem !important;
 }
-.tw-h-screen{
-  height: 100vh !important;
-}
-.tw-h-full{
-  height: 100% !important;
-}
-.tw-h-screen{
-  height: 100vh !important;
-}
-.tw-h-full{
-  height: 100% !important;
-}
 .tw-max-h-0{
   max-height: 0px !important;
 }
@@ -22394,8 +22367,8 @@ a:visited{
 .tw-min-h-\[137px\]{
   min-height: 137px !important;
 }
-.tw-min-h-\[calc\(100vh-70px\)\]{
-  min-height: calc(100vh - 70px) !important;
+.tw-min-h-\[calc\(100vh-152px\)\]{
+  min-height: calc(100vh - 152px) !important;
 }
 .tw-min-h-\[140px\]{
   min-height: 140px !important;
@@ -22408,18 +22381,6 @@ a:visited{
 }
 .tw-min-h-\[180px\]{
   min-height: 180px !important;
-}
-.tw-min-h-screen{
-  min-height: 100vh !important;
-}
-.tw-min-h-\[calc\(100vh-128px\)\]{
-  min-height: calc(100vh - 128px) !important;
-}
-.tw-min-h-screen{
-  min-height: 100vh !important;
-}
-.tw-min-h-\[calc\(100vh-152px\)\]{
-  min-height: calc(100vh - 152px) !important;
 }
 .tw-w-full{
   width: 100% !important;
@@ -22701,18 +22662,6 @@ a:visited{
 .tw-w-9\/12{
   width: 75% !important;
 }
-.tw-w-screen{
-  width: 100vw !important;
-}
-.tw-w-full{
-  width: 100% !important;
-}
-.tw-w-screen{
-  width: 100vw !important;
-}
-.tw-w-full{
-  width: 100% !important;
-}
 .tw-min-w-0{
   min-width: 0px !important;
 }
@@ -22880,9 +22829,6 @@ a:visited{
 }
 .tw-grow-0{
   flex-grow: 0 !important;
-}
-.tw-grow{
-  flex-grow: 1 !important;
 }
 .tw-origin-center{
   transform-origin: center !important;
@@ -23790,28 +23736,6 @@ a:visited{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(212 212 216 / var(--tw-bg-opacity)) !important;
 }
-.tw-bg-\[\#F9F9F9\]{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(249 249 249 / var(--tw-bg-opacity)) !important;
-}
-.tw-bg-yellow-200{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(254 240 138 / var(--tw-bg-opacity)) !important;
-}
-.tw-bg-black\/30{
-  background-color: rgb(0 0 0 / 0.3) !important;
-}
-.tw-bg-\[\#F9F9F9\]{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(249 249 249 / var(--tw-bg-opacity)) !important;
-}
-.tw-bg-yellow-200{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(254 240 138 / var(--tw-bg-opacity)) !important;
-}
-.tw-bg-black\/30{
-  background-color: rgb(0 0 0 / 0.3) !important;
-}
 .tw-bg-opacity-75{
   --tw-bg-opacity: 0.75 !important;
 }
@@ -23968,9 +23892,6 @@ a:visited{
 }
 .tw-p-\[3px\]{
   padding: 3px !important;
-}
-.tw-p-\[20px\]{
-  padding: 20px !important;
 }
 .tw-px-4{
   padding-left: 1rem !important;
@@ -24443,9 +24364,6 @@ a:visited{
 .tw-pt-1{
   padding-top: 0.25rem !important;
 }
-.tw-pt-\[58px\]{
-  padding-top: 58px !important;
-}
 .tw-text-left{
   text-align: left !important;
 }
@@ -24567,9 +24485,6 @@ a:visited{
 }
 .tw-text-\[22px\]{
   font-size: 22px !important;
-}
-.tw-text-\[18px\]{
-  font-size: 18px !important;
 }
 .tw-font-bold{
   font-weight: 700 !important;
@@ -25031,13 +24946,6 @@ a:visited{
 }
 .tw-transition-none{
   transition-property: none !important;
-}
-.tw-transition-colors{
-  transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color !important;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke !important;
-  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color !important;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
-  transition-duration: 150ms !important;
 }
 .tw-duration-100{
   transition-duration: 100ms !important;
@@ -25652,10 +25560,6 @@ a:visited{
 }
 .tw-dark .dark\:tw-bg-\[\#000c17\]\/80{
   background-color: rgb(0 12 23 / 0.8) !important;
-}
-.tw-dark .dark\:tw-bg-\[\#000C17\]{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(0 12 23 / var(--tw-bg-opacity)) !important;
 }
 .tw-dark .dark\:tw-text-white{
   --tw-text-opacity: 1 !important;
@@ -27085,12 +26989,6 @@ a:visited{
   }
   .lg\:tw-inline-flex{
     display: inline-flex !important;
-  }
-  .lg\:tw-hidden{
-    display: none !important;
-  }
-  .lg\:tw-hidden{
-    display: none !important;
   }
   .lg\:tw-hidden{
     display: none !important;
