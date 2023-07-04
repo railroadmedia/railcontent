@@ -19,7 +19,7 @@
 
 <form id="{{$cleanFormId}}" accept-charset="UTF-8" method="POST"
     action="{{ url()->route('customer-io.submit-email-form-rc') }}"
-    class="@if(empty($redirectURL)) ajax-form @endif clearfix infusion-form facebook-track-lead mx-auto"
+    class="ajax-form clearfix infusion-form facebook-track-lead mx-auto"
     onsubmit="emailSignUpConversionTrackerForImpactProvider()">
 
     @if(!empty($formName))
@@ -88,6 +88,13 @@
 <script>
     function recaptchaSubmit{{$cleanFormId}}(token) {
         document.getElementById("{{$cleanFormId}}").submit();
+        var formId = $(this).find("input[name='inf_form_xid']").val();
+
+        dataLayer.push({
+            "event": "gtm.formSubmit",
+            "formId": formId,
+            "formSuccess": true
+        });
     }
 </script>
 

@@ -84,12 +84,6 @@
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
     ])
-    @include('drumeo.products.partials.promo-banner', [
-        "name" => "Drumeo EarDrums",
-        "fullPrice" => floatval($productPrices['drumeo-eardrums']->price),
-        "price" => 127,
-        "noBreadcrumb" => true
-    ])
 
     <header class="text-white relative overflow-hidden z-10" style="background-color:#0f1628;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
@@ -98,13 +92,23 @@
                 <p>Protect your ears + play your favorite songs.</p>
                 <i class="fas fa-play play-button autoplay-video my-28 md:my-36" data-open="trailer"></i><br>
                 @if( $products['drumeo-eardrums']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums']->getStockAvailability()))
-                    <a class="join blue my-2 sm:my-4 w-full sm:w-2/3" href="/ecommerce/add-to-cart?products[drumeo-eardrums]=1&promo-code=member">GRAB A PAIR &raquo;</a>
+
+                    @if(Carbon\Carbon::create(2023, 7, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                        <a class="join blue my-2 sm:my-4 w-full sm:w-2/3" href="/ecommerce/add-to-cart?products[drumeo-eardrums]=1&promo-code=member">GRAB A PAIR &raquo;</a>
+                    @else
+                        <a class="join blue my-2 sm:my-4 w-full sm:w-2/3" href="/ecommerce/add-to-cart?products[drumeo-eardrums]=1">GRAB A PAIR &raquo;</a>
+                    @endif
                 @else
                     <a class="join sold-out my-2 sm:my-4 w-full sm:w-2/3">SOLD OUT</a>
                 @endif
                 <h6 class="leading-tight">
-                    <strong> ONLY @if(floatval($productPrices['drumeo-eardrums']->price) > 127) <s style="opacity: 0.6;">${{ floatval($productPrices['drumeo-eardrums']->price) }}</s> @endif
-                    ${{ 127 }}
+                    <strong> ONLY
+                        @if(Carbon\Carbon::create(2023, 7, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                            @if(floatval($productPrices['drumeo-eardrums']->price) > 127) <s style="opacity: 0.6;">${{ floatval($productPrices['drumeo-eardrums']->price) }}</s> @endif
+                            ${{ 127 }}
+                        @else
+                            ${{ floatval($productPrices['drumeo-eardrums']->discounted_price) }}
+                        @endif
                     </strong>
                 </h6>
             </div>
@@ -322,14 +326,27 @@
                 <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-10 mx-auto">
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                         {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
-                        <a href="/ecommerce/add-to-cart?products[drumeo-eardrums]=1&promo-code=member" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
+                        <a
+                            @if(Carbon\Carbon::create(2023, 7, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                            href="/ecommerce/add-to-cart?products[drumeo-eardrums]=1&promo-code=member"
+                            @else
+                                href="/ecommerce/add-to-cart?products[drumeo-eardrums]=1"
+                            @endif
+                            class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
                             <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
                                 <h5 class="leading-none mb-3">EarDrums</h5>
                                 <h1 class="inline-block leading-none">
-                                    @if(floatval($productPrices['drumeo-eardrums']->price) > 127)
-                                        <s class="opacity-40">${{ floatval($productPrices['drumeo-eardrums']->price) }}</s>
+
+                                    @if(Carbon\Carbon::create(2023, 7, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+                                        @if(floatval($productPrices['drumeo-eardrums']->price) > 127)
+                                            <s class="opacity-40">${{ floatval($productPrices['drumeo-eardrums']->price) }}</s>
+                                        @endif
+                                        <strong>${{ 127 }}</strong>
+                                    @else
+                                        <strong> ${{ floatval($productPrices['drumeo-eardrums']->discounted_price) }}</strong>
                                     @endif
-                                    <strong>${{ 127 }}</strong></h1>
+
+                                </h1>
                                 {{--<p class="text-sm my-2 sm:my-4 opacity-60"><em>Save {{ round(100 - (100 * (127 / floatval($productPrices['drumeo-eardrums']->price)))) }}% for a limited time.</em></p>--}}
                                 <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80 mt-2 sm:mt-4" style="max-width: 230px;">Get Started</div>
                             </div>

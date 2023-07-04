@@ -967,6 +967,7 @@ return [
                 'data.description',
                 '*data.sheet_music_image_url',
                 'data.timecode',
+                'length_in_seconds',
             ],
             'next_lesson',
             'previous_lesson',

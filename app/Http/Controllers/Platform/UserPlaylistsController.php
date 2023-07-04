@@ -176,6 +176,18 @@ class UserPlaylistsController extends BaseController
             ContentRepository::$pullFutureContent = $oldFutureContent;
 
             foreach ($items as $index => $item) {
+                if ($item['type'] == 'song' && empty($item['assignments'] ?? [])) {
+                    LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
+                    $this->lessonAssignmentDecorator->decorate(new Collection([$item]))
+                        ->first();
+                    if(count($item['assignments'] ?? []) > 0){
+                        $playlistItems[$index]['duration'] = $item['assignments'][0]['length_in_seconds'] ?? 0;
+                    }
+                }
+                if($item['type'] == 'assignment'){
+                    $playlistItems[$index]['duration'] = $item['length_in_seconds'];
+                }
+
                 $playlistItems[$index]['id'] = $item['id'];
                 $playlistItems[$index]['type'] = $item['type'];
                 $playlistItems[$index]['title'] = $item['title'];
@@ -186,7 +198,7 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['need_access'] = $item['need_access'] ?? false;
                 $playlistItems[$index]['need_access_message'] = $item['need_access_message'] ?? '';
 
-                $playlistItems[$index]['duration'] = $item->fetch('fields.video.fields.length_in_seconds', 0);
+                $playlistItems[$index]['duration'] = $playlistItems[$index]['duration'] ?? $item->fetch('fields.video.fields.length_in_seconds', 0);
                 $playlistItems[$index]['url'] = url()->route('platform.user.playlist-item', [
                     'playlistId' => $playlistId,
                     'playlistItemId' => $item['user_playlist_item_id'],

@@ -53,6 +53,9 @@
             "annualLink" => "/ecommerce/add-to-cart?products[singeo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
             "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
         ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'singing',
+        ])
         @include('musora.sales.components.plans-different-section', [
             "plusLogo" => "https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-plus-logo.svg",
             "logo" => "https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-black.png",
@@ -70,6 +73,9 @@
             "fifthPoint" => "Lesson access for guitar, piano, and drums.",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[singeo-annual-recurring-30-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
             "plusMonthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-30-day-trial-membership]=1&redirect=/order&locked=true",
+        ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'singing',
         ])
     @endif
 
