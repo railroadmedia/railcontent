@@ -3,13 +3,13 @@
     <div class="flex flex-col justify-center flex-shrink-0 w-20 sm:w-36">
         <div class="relative aspect-16:9 overflow-hidden rounded-xl">
             <img src="https://www.musora.com/musora-cdn/image/width=500,quality=85/@php
-                  if(str_contains($lessonImg, 'i.vimeocdn.com')){
-                        $lessonImg = preg_replace('/[?]mw[=][0-9]+[&]mh[=][0-9]+/', '.jpg', $lessonImg);
-                        if(preg_match('/[.]png|[.]jpg|[.]jpeg|[.]svg/', $lessonImg) !== 1){
-                            $lessonImg = $lessonImg.'.jpg';
-                        }
-                    }
-                    echo $lessonImg;
+                if(str_contains($lessonImg, 'i.vimeocdn.com')){
+                      $lessonImg = preg_replace('/[?]mw[=][0-9]+[&]mh[=][0-9]+/', '.jpg', $lessonImg);
+                      if(preg_match('/[.]png|[.]jpg|[.]jpeg|[.]svg/', $lessonImg) !== 1){
+                          $lessonImg = $lessonImg.'.jpg';
+                      }
+                  }
+                  echo $lessonImg;
             @endphp" alt="Lesson Thumbnail {{ $lessonNumber }}" class="transition-opacity duration-500 opacity-1 absolute object-cover h-full w-full" loading="lazy">
             <div class="flex absolute inset-0 bg-black opacity-0 group-hover:opacity-40 z-20 flex justify-center items-center transition-opacity"></div>
             <div class="flex justify-center items-center absolute inset-0 z-30 transition-opacity opacity-0 group-hover:opacity-100">
