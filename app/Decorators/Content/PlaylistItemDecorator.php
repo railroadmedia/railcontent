@@ -112,7 +112,8 @@ class PlaylistItemDecorator extends TypeDecoratorBase
         $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
 
         foreach ($contentsOfType as $contentIndex => $content) {
-            if(!config('musora-api.api.version') || config('musora-api.api.version') != 1){
+
+            if(!config('musora-api.api.version') || config('musora-api.api.version') != 'v1'){
                 $contentsOfType[$contentIndex]['type'] = $this->convertContentType($content['type']);
             }
 
