@@ -112,7 +112,9 @@ class PlaylistItemDecorator extends TypeDecoratorBase
         $userPermissions = $this->userPermissionsRepository->getUserPermissions(user()->id, true);
 
         foreach ($contentsOfType as $contentIndex => $content) {
-            $contentsOfType[$contentIndex]['type'] = $this->convertContentType($content['type']);
+            if(!config('musora-api.api.version') || config('musora-api.api.version') != 1){
+                $contentsOfType[$contentIndex]['type'] = $this->convertContentType($content['type']);
+            }
 
             //set start/end time should not be displayed on assignments and song playlist items
             $contentsOfType[$contentIndex]['content_name'] =
