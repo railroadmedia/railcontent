@@ -119,6 +119,10 @@ const dropdownOptions = ref([
         name: "Add to List",
         action: "addToPlaylist"
     },
+    {
+        name: "Rename",
+        action: "renameItem"
+    }
 ]);
 
 //Get Dates

@@ -195,6 +195,12 @@ const addToPlaylist = () => {
     });
 }
 
+const renameItem = () => {
+    window.openplaylistmodal({
+        modalType: 'renameItem', content: { ...props.data, content_id: props.data.id }
+    });
+}
+
 const editPlaylist = () => {
     window.openplaylistmodal({ modalType: 'edit', data: props.data });
     emit('closeDropdown');
@@ -226,6 +232,7 @@ const clickHandler = (fnstring) => {
         case "sharePlaylist": sharePlaylist(); break;
         case "editPlaylist": editPlaylist(); break;
         case "addToPlaylist": addToPlaylist(); break;
+        case "renameItem": renameItem(); break;
         case "deletePlaylist": deletePlaylist(); break;
         case "duplicatePlaylist": duplicatePlaylist(); break;
         case "pinPlaylist": pinPlaylist(); break;
