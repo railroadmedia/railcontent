@@ -40,21 +40,21 @@
 @endsection
 
 @section('page-body')
-    <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#eff7ff;">
+    <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#f1f7fe;">
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <img class="h-14 sm:h-18 lg:h-20 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg" alt="logo" fetchpriority="high">
-                    <h2 class="leading-tight"><strong class="font-black">Start learning piano </strong><br>
+                <div class="w-full sm:w-1/2 text-center lg:text-left">
+                    <img class="h-14 sm:h-18 lg:h-24 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg" alt="logo" fetchpriority="high">
+                    <h2 class="leading-none"><strong class="font-black">Start learning piano </strong><br>
                         the easy and fun way.</h2>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Sign up for 5 FREE play-along lessons</strong></h6>
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
+                    <div class="my-3 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video" style="padding-bottom: 87%;" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/header-thumb.png" alt="header image" fetchpriority="high" />
                     </div>
 
-                    <p class="hidden lg:inline">
+                    <p class="hidden lg:inline text-sm">
                         <i class="fas fa-check text-pianote"></i> Learn by doing
                         <i class="ml-2 fas fa-check text-pianote"></i> No theory required
                         <i class="ml-2 fas fa-check text-pianote"></i> Free lifetime access
@@ -65,7 +65,7 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-pianote"></i><br> Free lifetime <br>access</p>
                     </div>
 
-                    <div class="mt-6 sm:mt-5 lg:mt-10">
+                    <div class="mt-3">
                             @include('pianote._partials.sign-up-form', [
                             "recaptchaKey" => $recaptchaKey,
                             "formId" => "Pianote - Engagement - Trigger - GSOTP - Web Form",
@@ -78,7 +78,7 @@
                             ])
                     </div>
                 </div>
-                <div class="w-full sm:w-5/12 hidden sm:block">
+                <div class="w-full sm:w-1/2 hidden sm:block">
                     <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/header-thumb.png" alt="header image" fetchpriority="high" />
                     </div>
@@ -88,26 +88,26 @@
     </header>
     <div style="background:#eff7ff;">
 
-    <div class="container max-w-4xl mx-auto -mb-10 -mt-10">
-        <div class="px-5 sm:px-0">
+    <div class="container max-w-4xl mx-auto -mb-10 -mt-10 z-20 relative">
+        <div class="px-5 lg:px-0">
             <div class="flex flex-wrap sm:flex-nowrap text-center shadow-lg rounded-xl relative" style="background:linear-gradient(to bottom, #fff, #F1F7FE);">
-                <div class="z-10 flex flex-wrap sm:flex-nowrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-6 lg:px-5 text-left sm:text-center">
-                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
+                <div class="z-10 flex flex-wrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-6 lg:px-5 text-left sm:text-center">
+                    <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0 mb-4 sm:mb-0 border-r border-gray-300">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-calendar-day text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
                             <span class="text-sm">Start anytime!</span></p>
                     </div>
-                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
+                    <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0 mb-4 sm:mb-0 border-r border-gray-300">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-clock text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Commitment</strong><br>
-                            <span class="text-sm">10 minutes a day for just 5 days.</span></p>
+                            <span class="text-sm">10 minutes a day.</span></p>
                     </div>
-                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 mb-4 sm:mb-0">
+                    <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0 mb-4 sm:mb-0 border-r border-gray-300">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-piano-keyboard text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Skill Level</strong><br>
                             <span class="text-sm">Beginner.</span></p>
                     </div>
-                    <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3">
+                    <div class="flex sm:block w-full sm:w-1/4 px-4 sm:px-0">
                         <i class="far fa-fw mr-3 sm:mr-0 fa-trophy text-pianote text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Result</strong><br>
                             <span class="text-sm">Play your first song.</span></p>
@@ -117,19 +117,24 @@
         </div>
     </div>
     </div>
-    <section class="text-center pt-6 sm:pt-10 lg:pt-20 bg-cover bg-center" style="background:linear-gradient(to bottom, #EEECEA, #fff);">
-        <h3 class="leading-tight px-4"><strong>Your first week of piano lessons - FREE</strong></h3>
-        <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7 px-4">
-            Starting is the hardest part. And you should know the piano is right for you before paying for lessons.<br>
-            <span class="text-pianote"><strong>Try a snippet from your 1st lesson and see if playing the piano is right for you.</strong></span>
-        </p>
-        <div class="relative cursor-pointer autoplay-video" data-open="demoVid">
-            <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/tablet-piano-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/tablet-piano.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-        </div>
+    <section class="relative text-center px-4 sm:px-6 pt-16 sm:pt-20 lg:pt-28 pb-6 sm:pb-10 lg:pb-14 bg-cover bg-center" style="background:linear-gradient(to bottom, #EEECEA, #fff);">
+        <div class="absolute top-0 left-0 right-0 bg-cover lg:bg-contain bg-no-repeat bg-top z-10 h-1/2 lg:h-[60%]" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-bg.png);"></div>
+        <div class="z-20 relative">
+            <h3 class="leading-tight"><strong>Your first week of piano <br class="inline sm:hidden"> lessons - FREE</strong></h3>
+            <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">
+                Starting is the hardest part. And you should know the <br class="hidden sm:inline xl:hidden">
+                piano is right for you before paying for lessons.<br>
+                <span class="text-pianote"><strong>
+                        Try a snippet from your 1st lesson and   <br class="hidden sm:inline xl:hidden">
+                        see if playing the piano is right for you.</strong></span>
+            </p>
+            <div class="relative cursor-pointer max-w-xl lg:max-w-2xl mx-auto autoplay-video" data-open="demoVid">
+                <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-demo-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-demo.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+            </div>
 
-        <div class="container max-w-4xl mx-auto">
-            <p class=" mb-5 sm:mb-8" style="color:#abb5c2">SEE MORE LESSONS</p>
+            <div class="container max-w-4xl mx-auto">
+            <p class=" my-7 sm:my-10" style="color:#abb5c2">SEE MORE LESSONS</p>
             <div class="flex flex-wrap items-start justify-center text-left">
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
@@ -157,7 +162,7 @@
                     </picture>
                     <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">You have two hands. Use them! You’ll be playing beautiful music with both hands in this 10-minute lesson. Just hit play and follow along.</p>
                 </div>
-                <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-0 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
                         <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/chord-fills-thumb.jpg">
                         <img
@@ -170,7 +175,7 @@
                     </picture>
                     <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">How do you make your chords sounds extra special? Add some fills! They sound complicated but are easy to do. You’ll learn Lisa’s favorite.</p>
                 </div>
-                <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
                         <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/chord-inversions-thumb.jpg">
                         <img
@@ -184,6 +189,7 @@
                     <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">This might be the most important piano lesson you have. It will change how you think about and see piano chords. Are you ready?! (Of course you are!)</p>
                 </div>
             </div>
+        </div>
         </div>
     </section>
 
@@ -228,16 +234,16 @@
     </section>
 
     <div id="final" class="anchor"></div>
-    <section class="text-center customize px-4 lg:px-6 relative z-50 overflow-hidden py-20" style="background:#EFF7FF;">
+    <section class="text-center customize px-4 lg:px-6 relative z-50 overflow-hidden py-10 sm:py-20" style="background:#EFF7FF;">
         <div class="max-w-5xl mx-auto flex flex-wrap flex-col md:flex-row md:items-center">
             <div class="max-w-lg mx-auto text-center sm:text-left w-full md:w-1/2 sm:pl-5">
                 <picture>
                     <source media="(min-width:768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg">
-                    <img class="h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg" alt="logo">
+                    <img  class="h-14 sm:h-18 lg:h-24 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg" alt="logo">
                 </picture>
-                <h3 class="pt-4 md:pt-5 leading-7 md:leading-9 font-extrabold mb-6">
+                <h2 class="my-4 md:my-5 leading-tight">
                     <strong>5 days of piano lessons</strong> to show you how easy and fun learning the piano can be.
-                </h3>
+                </h2>
                 <p class="text-left mb-4 sm:mb-5 mx-auto inline-block sm:leading-loose">
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> FREE Lifetime Access<br>
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> Play-along with a REAL teacher<br>
@@ -245,19 +251,18 @@
                 </p>
                 <div class="max-w-md md:max-w-auto lg:w-96 mx-auto md:mx-0">
                     @include('pianote._partials.sign-up-form', [
-                    "recaptchaKey" => $recaptchaKey,
-                    "formId" => "Pianote - Engagement - Trigger - GSOTP - Web Form",
-                    "formName" => 'Getting Started On The Piano',
+                        "recaptchaKey" => $recaptchaKey,
+                        "formId" => "Pianote - Engagement - Trigger - GSOTP - Web Form",
+                        "formName" => 'Getting Started On The Piano',
                         "buttonText" => "Get started for free",
                         'stacked' => true,
                         'inputBorder' => '1px solid #7A8491',
-                        'disclaimerColor' => 'rgba(208, 226, 231, 0.8)',
-                    "redirectURL" => "/getting-started/thank-you/"
+                        "redirectURL" => "/getting-started/thank-you/"
                     ])
                 </div>
             </div>
             <div class="flex justify-center md:justify-start w-full md:w-1/2 sm:order-1 md:pl-6 mt-7 md:mt-0 relative">
-                <img class="max-w-2xl md:max-w-md lg:max-w-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/collage.png" alt="collage">
+                <img class="max-w-2xl md:max-w-md lg:max-w-5xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/collage.png" alt="collage">
             </div>
         </div>
     </section>
