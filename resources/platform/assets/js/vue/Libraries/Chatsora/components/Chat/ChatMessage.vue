@@ -79,12 +79,12 @@
                 ></textarea>
                 <div class="tw-flex tw-flex-row tw-justify-end tw-mt-2">
                     <div
-                        class="cs-btn-outline-white tw-cursor-pointer tw-rounded-full tw-leading-none tw-font-bold focus:tw-outline-none focus:tw-shadow-outline tw-uppercase tw-border-2 tw-border-white tw-text-white tw-w-28 tw-flex tw-items-center tw-justify-center tw-mr-2"
+                        class="cs-btn-outline-white tw-cursor-pointer tw-rounded-full tw-leading-none tw-font-bold focus:tw-outline-none focus:tw-shadow-outline tw-uppercase tw-border-2 tw-border-white tw-text-white tw-w-28 tw-flex tw-items-center tw-justify-center tw-mr-2 tw-font-bebas-neue"
                         title="Cancel message edit"
                         @click.stop.prevent="cancelMessageEdit()"
                     >Cancel</div>
                     <div
-                        class="cs-btn-save tw-cursor-pointer tw-cursor-pointer tw-rounded-full tw-leading-none tw-font-bold focus:tw-outline-none focus:tw-shadow-outline tw-uppercase tw-border-2 tw-text-white tw-w-28 tw-flex tw-items-center tw-justify-center"
+                        class="cs-btn-save tw-cursor-pointer tw-cursor-pointer tw-rounded-full tw-leading-none tw-font-bold focus:tw-outline-none focus:tw-shadow-outline tw-uppercase tw-border-2 tw-text-white tw-w-28 tw-flex tw-items-center tw-justify-center tw-font-bebas-neue"
                         :class="brand"
                         title="Save message updates"
                         @click.stop.prevent="saveMessageEdit()"
@@ -277,7 +277,7 @@ export default {
         },
 
         saveMessageEdit() {
-            this.eventBus.on
+            this.eventBus
                 .emit(
                     'updateMessage',
                     {
