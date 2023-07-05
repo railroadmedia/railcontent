@@ -8166,12 +8166,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "084c4961a2dfa232db52b1451c78cfa3c8963bc0"
+                "reference": "48df71f70615db53cf379a6e3c16b0f010baac1f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/084c4961a2dfa232db52b1451c78cfa3c8963bc0",
-                "reference": "084c4961a2dfa232db52b1451c78cfa3c8963bc0",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/48df71f70615db53cf379a6e3c16b0f010baac1f",
+                "reference": "48df71f70615db53cf379a6e3c16b0f010baac1f",
                 "shasum": ""
             },
             "require": {
@@ -8210,7 +8210,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-in-app-products"
             },
-            "time": "2023-07-05T11:51:15+00:00"
+            "time": "2023-07-05T12:58:51+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -8370,12 +8370,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "969d8f7e13cff2253438a11f668e96bdb43ff98d"
+                "reference": "293c41adad42ef7891396c5331beb00ff9d364f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/969d8f7e13cff2253438a11f668e96bdb43ff98d",
-                "reference": "969d8f7e13cff2253438a11f668e96bdb43ff98d",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/293c41adad42ef7891396c5331beb00ff9d364f9",
+                "reference": "293c41adad42ef7891396c5331beb00ff9d364f9",
                 "shasum": ""
             },
             "require": {
@@ -8407,7 +8407,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/2.0-playlists-v15"
             },
-            "time": "2023-07-05T09:37:31+00:00"
+            "time": "2023-07-05T12:57:10+00:00"
         },
         {
             "name": "railroad/permissions",
