@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d9505339d0a44d245184af80f70e4f09",
+    "content-hash": "c65327d270094f6449ea936a79fac498",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -17020,6 +17020,12 @@
             "alias_normalized": "5.0.89.0"
         },
         {
+            "package": "railroad/musora-api",
+            "version": "dev-2.0-playlists-v15",
+            "alias": "v3.1.23",
+            "alias_normalized": "3.1.23.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
@@ -17034,6 +17040,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "railroad/ecommerce": 20,
         "railroad/musora-api": 20,
         "railroad/railanalytics": 20,
         "railroad/railcontent": 20
