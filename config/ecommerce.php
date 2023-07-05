@@ -424,8 +424,8 @@ return [
         'test_6month' => '6-MONTH-MEMBERSHIP',
 
         //musora products
-        'musora_app_monthly_member' => 'DLM-1-month',
-        'musora_app_1_year_member' => 'DLM-1-year',
+        'musora_app_monthly_member' => 'musora-monthly-recurring-membership',
+        'musora_app_1_year_member' => 'musora-annual-recurring-membership',
 //        'musora_app_monthly_member' => 'musora-monthly-recurring-7-day-trial-membership',
 //        'musora_app_1_year_member' => 'musora-annual-recurring-7-day-trial-membership',
     ],
@@ -489,6 +489,37 @@ return [
         'musora_annual_subscription' => 'DLM-1-year',
 //        'musora_monthly_subscription' => 'musora-monthly-recurring-7-day-trial-membership',
 //        'musora_annual_subscription' => 'musora-annual-recurring-7-day-trial-membership',
+    ],
+
+    'apple_store_products_map_trial' => [
+
+        // live products
+        'drumeo_app_1_year_member' => 'DLM-Trial-Annual-7-Day',
+        'drumeo_app_monthly_member' => 'DLM-Trial-1-month',
+        //        'drumeo_app_1_year_member' => 'DLM-Trial-Annual-7-Day',
+        //        'drumeo_app_monthly_member' => 'DLM-Trial-1-month',
+
+        //2021 products
+        'drumeo_app_1_year_2021' => 'DLM-Trial-Annual-7-Day',
+        'drumeo_app_1_month_2021' => 'DLM-Trial-1-month',
+        //        'drumeo_app_1_year_2021' => 'DLM-Trial-Annual-7-Day',
+        //        'drumeo_app_1_month_2021' => 'DLM-Trial-1-month',
+
+        'pianote_app_1_year_membership' => 'PIANOTE-MEMBERSHIP-1-YEAR',
+        'pianote_app_1_month_membership' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+        //        'pianote_app_1_year_membership' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+        //        'pianote_app_1_month_membership' => 'PIANOTE-MEMBERSHIP-TRIAL',
+
+        //2021 products
+        'pianote_app_1_year_membership_2021' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+        'pianote_app_1_month_membership_2021' => 'PIANOTE-MEMBERSHIP-TRIAL',
+        //        'pianote_app_1_year_membership_2021' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+        //        'pianote_app_1_month_membership_2021' => 'PIANOTE-MEMBERSHIP-TRIAL',
+
+        // todo - update stage/local env products apple id => local product sku
+        //musora products
+        'musora_app_monthly_member' => 'musora-monthly-recurring-7-day-trial-membership',
+        'musora_app_1_year_member' => 'musora-annual-recurring-7-day-trial-membership',
     ],
 
     // paypal
