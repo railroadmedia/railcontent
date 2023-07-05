@@ -73,8 +73,6 @@ export default {
 
     },
     mounted() {
-        console.log('preloaded content', this.preloadedContent);
-
         const monthsSelector = ['jan', 'feb', 'mar', 'apr', 'may', 'jun', 'jul', 'aug', 'sep', 'oct', 'nov', 'dec'];
 
         monthsSelector.forEach((month) => {
