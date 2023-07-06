@@ -1,3 +1,7 @@
+@php
+    require_once(resource_path('marketing/views/pianote/shop/bundles.php'))
+@endphp
+
 @extends('_partials.layout.global-shop-layout')
 
 @section('meta')
@@ -65,7 +69,7 @@
         "all" => true
     ])
     <div class="white-box">
-        {{--        @include('_partials.layout.holiday.bundle-cards')--}}
+                @include('_partials.layout.holiday.bundle-cards')
 
         {{--        <section class="bundles">--}}
         {{--            <div class="container mx-auto">--}}
