@@ -7998,62 +7998,6 @@
             "time": "2023-05-23T02:31:11+00:00"
         },
         {
-            "name": "ql/uri-template",
-            "version": "1.1.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/QuickenLoans/uri-template.git",
-                "reference": "948f14d8e288641b72bd0c1de6647d2c9ccae616"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/QuickenLoans/uri-template/zipball/948f14d8e288641b72bd0c1de6647d2c9ccae616",
-                "reference": "948f14d8e288641b72bd0c1de6647d2c9ccae616",
-                "shasum": ""
-            },
-            "require": {
-                "ext-ctype": "*",
-                "ext-mbstring": "*",
-                "php": ">=5.4.0"
-            },
-            "require-dev": {
-                "php-coveralls/php-coveralls": "^1.0||^2.0",
-                "phpunit/php-invoker": "*",
-                "phpunit/phpunit": "^4.8||^5.7||^6.5||^7.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "QL\\UriTemplate\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Matt Nagi",
-                    "email": "mattnagi@quickenloans.com"
-                }
-            ],
-            "description": "An implementation of RFC 6570 level 4",
-            "homepage": "https://github.com/QuickenLoans/uri-template",
-            "keywords": [
-                "URI Template",
-                "rfc6570",
-                "template",
-                "uri",
-                "url"
-            ],
-            "support": {
-                "email": "mattnagi@quickenloans.com",
-                "issues": "https://github.com/QuickenLoans/uri-template/issues",
-                "source": "https://github.com/QuickenLoans/uri-template"
-            },
-            "time": "2018-06-10T16:08:54+00:00"
-        },
-        {
             "name": "railroad/doctrine",
             "version": "v2.0.0",
             "source": {
@@ -9093,22 +9037,22 @@
         },
         {
             "name": "railroadmedia/helpscout-api-php",
-            "version": "3.7.0",
+            "version": "3.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/helpscout-api-php.git",
-                "reference": "6a65b5b0a82d7f4831a07c7e3178101c04efc51f"
+                "reference": "9c1a87be29099af2749d92d8acb118ec1c92549e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/helpscout-api-php/zipball/6a65b5b0a82d7f4831a07c7e3178101c04efc51f",
-                "reference": "6a65b5b0a82d7f4831a07c7e3178101c04efc51f",
+                "url": "https://api.github.com/repos/railroadmedia/helpscout-api-php/zipball/9c1a87be29099af2749d92d8acb118ec1c92549e",
+                "reference": "9c1a87be29099af2749d92d8acb118ec1c92549e",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.3|^7.0.1",
                 "php": "^7.3|^8.0",
-                "ql/uri-template": "^1.1",
+                "rize/uri-template": "0.3.5",
                 "webmozart/assert": "^1.2"
             },
             "require-dev": {
@@ -9147,9 +9091,9 @@
                 "support"
             ],
             "support": {
-                "source": "https://github.com/railroadmedia/helpscout-api-php/tree/3.7.0"
+                "source": "https://github.com/railroadmedia/helpscout-api-php/tree/3.8.0"
             },
-            "time": "2021-08-11T23:09:00+00:00"
+            "time": "2023-07-06T21:12:47+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
