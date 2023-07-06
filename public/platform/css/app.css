@@ -22373,9 +22373,6 @@ a:visited{
 .tw-min-h-\[137px\]{
   min-height: 137px !important;
 }
-.tw-min-h-\[calc\(100vh-152px\)\]{
-  min-height: calc(100vh - 152px) !important;
-}
 .tw-min-h-\[140px\]{
   min-height: 140px !important;
 }
@@ -26987,9 +26984,6 @@ a:visited{
   }
   .lg\:tw-max-h-\[350px\]{
     max-height: 350px !important;
-  }
-  .lg\:tw-min-h-\[calc\(100vh-128px\)\]{
-    min-height: calc(100vh - 128px) !important;
   }
   .lg\:tw-w-7\/12{
     width: 58.333333% !important;
