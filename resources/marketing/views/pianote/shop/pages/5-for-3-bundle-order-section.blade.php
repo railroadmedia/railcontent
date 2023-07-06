@@ -1,13 +1,13 @@
 <div>
     <section class="relative overflow-hidden text-white text-center customize px-4 lg:px-6">
         <div class="container mx-auto max-w-6xl relative z-50">
-            <p class="text-promo mb-10">ONLY {{ $availableSpots }} SPOTS AVAILABLE</p>
+            <h5 class="mb-10" style="color:#FFD600;">ONLY {{ $availableSpots }} SPOTS AVAILABLE</h5>
             <div class="w-full">
                 <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
                     <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class=" {{--border-2 border-promo--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $topImage }});"></div>
+                                <div class="h-full w-full bg-center bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $topImage }});"></div>
                             </div>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
             </div>
             {!! $saveText !!}
             <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
-            <p class="text-promo mb-10">ONLY {{ $availableSpots }} SPOTS AVAILABLE</p>
+            <p class="mb-10"  style="color:#FFD600;">ONLY {{ $availableSpots }} SPOTS AVAILABLE</p>
             <p><b>Still have questions?</b> Call us toll-free at 1-800-439-8921 or directly at 1-604-855-7605.</p>
             <div class="inline-block w-full px-3 md:px-4 text-light-navy mt-6">
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa" aria-hidden="true"></i>

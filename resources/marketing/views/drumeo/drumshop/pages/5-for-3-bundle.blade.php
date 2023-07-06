@@ -34,11 +34,11 @@
     <header class="py-20 text-center text-white px-4 md:px-0" style="background: linear-gradient(180deg, #04BBDB 0%, #0F3C81 100%);">
         <img class="sm:h-8 md:h-12 lg:h-14 mb-2" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-5-for-3-logo.png" alt="5-for-3-logo" fetchpriority="high" />
         <h2 class="leading-tight mb-2"><strong>Get 5 years of Drumeo for the price of 3.</strong></h2>
-        <p class="text-promo mb-10">ONLY
+        <h6 class="mb-10" style="color:#FFD600;">ONLY
             @if(!empty($products['drumeo-eardrums']->getStockAvailability()))
             {{ $products['drumeo-eardrums']->getStockAvailability() }}
             @endif
-            SPOTS AVAILABLE</p>
+            SPOTS AVAILABLE</h6>
         <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-bundle.png" alt="bundle image" fetchpriority="high" />
         <br>
         <h4><strong><s class="opacity-60">$1586.61</s> $720</strong></h4>

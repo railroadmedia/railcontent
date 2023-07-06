@@ -34,12 +34,12 @@ $product = (object)[
         ],
         [
             'name' => 'Electrify Your Drumming',
-            'price' => 'Normally $197',
-            'desc' => 'Electrify Your Drumming will teach you the tools and styles of electronic dance music -- so you can build energy with risers, lock in with the vocals, add power to your beats and fills, create a climax in the music, and ultimately fuel any song with your playing -- giving you valuable skills that will apply to every style of music.',
-            'freeBonus' => true,
-            'lifetimeAccess' => true,
-            'lineBreak' => true,
-            'img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eyd.jpg'
+            'price' => 197,
+            'bundle_desc' => 'Electrify Your Drumming will teach you the tools and styles of electronic dance music -- so you can build energy with risers, lock in with the vocals, add power to your beats and fills, create a climax in the music, and ultimately fuel any song with your playing -- giving you valuable skills that will apply to every style of music.',
+            'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eyd.jpg',
+            'bundle_free_shipping' => true,
+            'lifetime_access' => false,
+            'free_bonus' => true,
         ],
         [
             'name' => 'Successful Drumming',
@@ -204,12 +204,6 @@ $bonuses = [
         'image' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/5-for-3-bundle/hudson-pack-card.jpg',
     ],
     [
-        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eyd.jpg',
-        'title' => 'Electrify Your Drumming',
-        'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
-        'price' => 197,
-    ],
-    [
         'name' => 'Successful Drumming',
         'price' => 247,
         'description' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drum.',
@@ -238,5 +232,11 @@ $bonuses = [
         'price' => 19,
         'description' => 'his masterclass will give you proven techniques for learning MORE songs in less time.',
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/lsf.jpg',
+    ],
+    [
+        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eyd.jpg',
+        'title' => 'Electrify Your Drumming',
+        'description' => 'Your guide to playing 10 styles of electronic dance music - includes 23 play-alongs!',
+        'price' => 197,
     ],
 ];
