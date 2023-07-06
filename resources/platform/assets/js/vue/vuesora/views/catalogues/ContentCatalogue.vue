@@ -1,5 +1,6 @@
 <template>
-  <div class="tw-flex tw-flex-col tw-grow tw-justify-center tw-min-h-full">
+  <div class="flex flex-column grow align-v-center">
+
     <div v-if="isCoachesGrid"
          id="coach-section"
          class="tw-flex tw-flex-col tw-mb-6">
