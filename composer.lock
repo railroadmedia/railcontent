@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.275.2",
+            "version": "3.275.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "4506d631caf6097fd73009d57707e61b95efe92c"
+                "reference": "bbdf8e8d5df0b44ee83d5a751f316fc9f9dd2849"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/4506d631caf6097fd73009d57707e61b95efe92c",
-                "reference": "4506d631caf6097fd73009d57707e61b95efe92c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bbdf8e8d5df0b44ee83d5a751f316fc9f9dd2849",
+                "reference": "bbdf8e8d5df0b44ee83d5a751f316fc9f9dd2849",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.275.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.275.3"
             },
-            "time": "2023-07-03T18:27:31+00:00"
+            "time": "2023-07-05T18:22:08+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8166,12 +8166,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "437fb298e0002f3268810c9e7fb9074e9f161bbc"
+                "reference": "715e39c9db65aaddfd88b468234e5f11fba0b365"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/437fb298e0002f3268810c9e7fb9074e9f161bbc",
-                "reference": "437fb298e0002f3268810c9e7fb9074e9f161bbc",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/715e39c9db65aaddfd88b468234e5f11fba0b365",
+                "reference": "715e39c9db65aaddfd88b468234e5f11fba0b365",
                 "shasum": ""
             },
             "require": {
@@ -8210,7 +8210,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-in-app-products"
             },
-            "time": "2023-07-05T13:51:46+00:00"
+            "time": "2023-07-06T09:26:58+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -14007,16 +14007,16 @@
         },
         {
             "name": "whitecube/nova-flexible-content",
-            "version": "v1.0.8",
+            "version": "v1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whitecube/nova-flexible-content.git",
-                "reference": "274dc385e0e26abab3f47de3256d162bae3304c6"
+                "reference": "a40f885a7770f641271edff6b048d2866c538b7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/274dc385e0e26abab3f47de3256d162bae3304c6",
-                "reference": "274dc385e0e26abab3f47de3256d162bae3304c6",
+                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/a40f885a7770f641271edff6b048d2866c538b7a",
+                "reference": "a40f885a7770f641271edff6b048d2866c538b7a",
                 "shasum": ""
             },
             "require": {
@@ -14066,7 +14066,7 @@
             ],
             "support": {
                 "issues": "https://github.com/whitecube/nova-flexible-content/issues",
-                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.8"
+                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.9"
             },
             "funding": [
                 {
@@ -14074,7 +14074,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-06-27T13:05:52+00:00"
+            "time": "2023-07-06T08:45:28+00:00"
         }
     ],
     "packages-dev": [
