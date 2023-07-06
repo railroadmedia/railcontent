@@ -289,7 +289,7 @@ onUpdated(() => {
           {{ adminMessage }}
         </h2>
         <!-- Content -->
-        <section class="tw-flex tw-flex-col tw-grow tw-w-full">
+        <section class="tw-flex tw-flex-col tw-grow tw-w-full tw-min-h-full">
           <slot :is-dark-mode="isDarkModeSelected" />
         </section>
 
