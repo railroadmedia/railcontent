@@ -487,10 +487,4 @@
             </div>
         </div>
     </section>
-
-    @include('_partials.components.video-modal',[
-        'name' => 'trailer',
-        'video' => 'TODO',
-        'vimeo' => true,
-    ])
 @endsection

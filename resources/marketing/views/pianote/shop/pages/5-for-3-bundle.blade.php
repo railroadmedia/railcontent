@@ -7,8 +7,8 @@
 @section('meta')
     <title>Pianote 5 for 3 bundle</title>
     <meta property="og:title" content="Pianote 5 for 3 bundle">
-    <meta property="description" content="TODO">
-    <meta property="og:description" content="TODO">
+    <meta property="description" content="Get 5 years of Pianote for the price of 3.">
+    <meta property="og:description" content="Get 5 years of Pianote for the price of 3.">
     <meta property="og:url" content="{{ get_legacy_brand_base_url($theme)}}/{{ Request::path() }}"/>
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-bundle.png">
 
@@ -34,7 +34,11 @@
     <header class="py-20 text-center text-white px-4 md:px-0" style="background: linear-gradient(180deg, #DC3848 0%, #5E0239 100%);">
         <img class="sm:h-8 md:h-12 lg:h-14 mb-2" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-5-for-3-logo.png" alt="5-for-3-logo" fetchpriority="high" />
         <h2 class="leading-tight mb-2"><strong>Get 5 years of Pianote for the price of 3.</strong></h2>
-        <p class="text-promo mb-10">ONLY <!-- TODO --> SPOTS AVAILABLE</p>
+        <p class="text-promo mb-10">ONLY
+            @if(!empty($products['drumeo-eardrums']->getStockAvailability()))
+                {{ $products['drumeo-eardrums']->getStockAvailability() }}
+            @endif
+            SPOTS AVAILABLE</p>
         <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-bundle.png" alt="bundle image" fetchpriority="high" />
         <br>
         <h4><strong><s class="opacity-60">$1007</s> $720</strong> (SAVE 40%)</h4>
