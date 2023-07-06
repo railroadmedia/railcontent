@@ -109,9 +109,9 @@ abstract class RepositoryBase
      */
     public function __destruct()
     {
-        if (!empty($this->connectionMask)) {
-            $this->connectionMask->disconnect();
-        }
+//        if (!empty($this->connectionMask)) {
+//            $this->connectionMask->disconnect();
+//        }
     }
 
     /**
