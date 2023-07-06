@@ -116,7 +116,7 @@
             s = document.getElementsByTagName('script')[0];
         t.async = true;
         t.id    = 'cio-tracker';
-        t.setAttribute('data-site-id', 'fa24b9733327116040c7');
+        t.setAttribute('data-site-id', {{ config('customer-io.accounts.musora.site_id') }});
         t.setAttribute('data-use-array-params', 'true');
         t.setAttribute('data-use-in-app', 'true');
         t.src = 'https://assets.customer.io/assets/track.js';
