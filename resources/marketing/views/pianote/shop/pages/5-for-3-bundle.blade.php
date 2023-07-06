@@ -67,7 +67,7 @@
 
             @include('pianote.shop.pages.5-for-3-bundle-order-section', [
                 'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-5-year-double-card.jpg',
-                'availableSpots' => 'TODO',
+                'availableSpots' => $products['drumeo-eardrums']->getStockAvailability(),
                 'saveText' => '<h4><strong><s class="opacity-60">$2107</s> $720</strong> (SAVE 40%)</h4>',
                 'buttonLink' => '/ecommerce/add-to-cart?products[TODO]=1&products[TODO]=1&products[piano-chords-and-scales-guide]=1&products[poster-chords]=1&products[poster-scales]=1&products[pianote-practice-planner]=1&products[new-piano-players]=1&products[easy-chords]=1&products[piano-technique-made-easy]=1&products[the-power-of-chords]=1&products[worship-piano]=1&products[piano-riffs-and-fills]=1&products[destupefy-your-left-hand]=1&products[faster-fingers]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&locked=true',
             ])

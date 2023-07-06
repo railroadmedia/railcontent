@@ -68,7 +68,7 @@
 
             @include('pianote.shop.pages.5-for-3-bundle-order-section', [
                 'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-5-year-double-card.jpg',
-                'availableSpots' => 'TODO',
+                'availableSpots' => $products['drumeo-eardrums']->getStockAvailability(),
                 'saveText' => '<h4><strong><s class="opacity-60">$1586.61</s> $720</strong></h4>',
                 'buttonLink' => '/ecommerce/add-to-cart?products[TODO]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[DSYS2-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[learn-songs-faster-pack]=1&products[MAM-DIGI]=1&products[TLOD-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[ICM-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&products[BTC-DIGI]=1&products[AOADS-DIGI]=1&locked=true',
             ])
