@@ -273,7 +273,7 @@ onUpdated(() => {
         :forceSidebarHidden="forceSidebarHidden" :user-id="userId" />
 
       <!-- Content Container -->
-      <main class="
+      <section class="
           tw-flex
           tw-w-full
           tw-h-full
@@ -288,11 +288,10 @@ onUpdated(() => {
         <h2 v-if="adminMessage && adminMessage.length" class="tw-text-[18px] tw-w-full tw-bg-yellow-200 tw-p-[20px] tw-text-center">
           {{ adminMessage }}
         </h2>
-        <!-- Content -->
-        <section class="tw-flex tw-flex-col tw-grow tw-w-full">
+        <!-- Content | Accounting for footer heithg in min height -->
+        <div class="tw-flex tw-flex-col tw-grow tw-h-full tw-w-full tw-min-h-[calc(100vh-152px)] lg:tw-min-h-[calc(100vh-128px)]">
           <slot :is-dark-mode="isDarkModeSelected" />
-        </section>
-
+        </div>
         <!-- Footer -->
         <Footer :brand="brand" />
 
@@ -304,7 +303,7 @@ onUpdated(() => {
               tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10 tw-bg-black/30
             "></div>
         </Transition>
-      </main>
+      </section>
     </div>
   </main>
 </template>

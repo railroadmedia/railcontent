@@ -268,7 +268,7 @@ onMounted(() => {
                     :class="[{'tw-pointer-events-none tw-cursor-default tw-opacity-60' : item.name === 'Re-Order' && lessonsLength === 1 }]"
                     @click.prevent="clickHandler(item.action)">
                     <template v-if="item.name === 'Private'">
-                        {{ state.isPrivate ? 'Private' : 'Public' }}
+                        Public
                         <div
                             class="tw-relative tw-inline-flex tw-ml-auto tw-w-[27px] tw-h-[12px] tw-rounded-xl"
                             :class="state.isPrivate ? 'tw-bg-[#445F74]' : 'tw-bg-drumeo'"
