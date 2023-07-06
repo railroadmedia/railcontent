@@ -380,13 +380,9 @@ return [
         //2021 products
         'drumeo_app_1_year_2021' => 'DLM-1-year',
         'drumeo_app_1_month_2021' => 'DLM-1-month',
-//        'drumeo_app_1_year_2021' => 'DLM-Trial-Annual-7-Day',
-//        'drumeo_app_1_month_2021' => 'DLM-Trial-1-month',
 
         'pianote_app_1_year_membership' => 'PIANOTE-MEMBERSHIP-1-YEAR',
         'pianote_app_1_month_membership' => 'PIANOTE-MEMBERSHIP-1-MONTH',
-//        'pianote_app_1_year_membership' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
-//        'pianote_app_1_month_membership' => 'PIANOTE-MEMBERSHIP-TRIAL',
 
         //2021 products
         'pianote_app_1_year_membership_2021' => 'PIANOTE-MEMBERSHIP-1-YEAR',
@@ -485,8 +481,8 @@ return [
         'test.pianote' => 'PIANOTE-MEMBERSHIP-1-YEAR',
 
         //Musora app
-        'musora_monthly_subscription' => 'DLM-1-month',
-        'musora_annual_subscription' => 'DLM-1-year',
+        'musora_monthly_subscription' => 'musora-monthly-recurring-membership',
+        'musora_annual_subscription' => 'musora-annual-recurring-membership',
 //        'musora_monthly_subscription' => 'musora-monthly-recurring-7-day-trial-membership',
 //        'musora_annual_subscription' => 'musora-annual-recurring-7-day-trial-membership',
     ],
