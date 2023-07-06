@@ -23,7 +23,7 @@ abstract class RepositoryBase
     /**
      * @var Connection
      */
-    protected $connectionMask;
+    protected static $connectionMask;
 
     /**
      * @var PresenterInterface
@@ -74,7 +74,7 @@ abstract class RepositoryBase
     {
         $this->databaseManager = app('db');
 
-        if (empty($this->connectionMask)) {
+        if (empty(self::$connectionMask)) {
             /**
              * @var $realConnection Connection
              */
@@ -98,10 +98,10 @@ abstract class RepositoryBase
             $maskConnection->setEventDispatcher($realConnection->getEventDispatcher());
             $maskConnection->setPostProcessor($realConnection->getPostProcessor());
 
-            $this->connectionMask = $maskConnection;
+            self::$connectionMask = $maskConnection;
         }
 
-        $this->connection = $this->connectionMask;
+        $this->connection = self::$connectionMask;
     }
 
     /**
@@ -109,8 +109,8 @@ abstract class RepositoryBase
      */
     public function __destruct()
     {
-//        if (!empty($this->connectionMask)) {
-//            $this->connectionMask->disconnect();
+//        if (!empty(self::$connectionMask)) {
+//            self::$connectionMask->disconnect();
 //        }
     }
 
@@ -119,7 +119,7 @@ abstract class RepositoryBase
      */
     public function connectionMask()
     {
-        return $this->connectionMask;
+        return self::$connectionMask;
     }
 
     /**
