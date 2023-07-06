@@ -275,6 +275,7 @@ onUpdated(() => {
       <!-- Content Container -->
       <main class="
           tw-flex
+          tw-justify-between
           tw-w-full
           tw-h-full
           tw-min-h-screen
