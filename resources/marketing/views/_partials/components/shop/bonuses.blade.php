@@ -4,7 +4,7 @@
             <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/{{ $bundle['bundle_img'] }}" alt="product thumbnail{{$key+1}}">
         </div>
         <div>
-            <strong>{{ $bundle['name'] }} - <span @if($bundle['priceColor'] == 'orange') class="orange" @endif>Normally ${{ floatVal($bundle['price'])}}</span>
+            <strong>{{ $bundle['name'] }} - <span @if(!empty($bundle['priceColor']) && $bundle['priceColor'] == 'orange') class="orange" @endif>Normally ${{ floatVal($bundle['price'])}}</span> @if(!empty($bundle['special_text']))<span class="text-{{ $theme }}">{{ $bundle['special_text'] }}</span> @endif
                     <br @if(!$bundle['bundle_free_shipping'] && !$bundle['lifetime_access'] && !$bundle['free_bonus']) class="hidden" @endif>
 
                     @if($bundle['free_bonus'])
