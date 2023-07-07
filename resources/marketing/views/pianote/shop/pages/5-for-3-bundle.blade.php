@@ -41,7 +41,7 @@
             SPOTS AVAILABLE</p>
         <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-bundle.png" alt="bundle image" fetchpriority="high" />
         <br>
-        <h4><strong><s class="opacity-60">$1007</s> $720</strong> (SAVE 40%)</h4>
+        <h4><strong><s class="opacity-60">$1716</s> $720</strong> (SAVE 58%)</h4>
         <br>
         <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96" href="/choose-plan">
             get started &raquo;
@@ -68,8 +68,8 @@
             @include('pianote.shop.pages.5-for-3-bundle-order-section', [
                 'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-5-year-double-card.jpg',
                 'availableSpots' => $products['drumeo-eardrums']->getStockAvailability(),
-                'saveText' => '<h4><strong><s class="opacity-60">$2107</s> $720</strong> (SAVE 40%)</h4>',
-                'buttonLink' => '/ecommerce/add-to-cart?products[TODO]=1&products[TODO]=1&products[piano-chords-and-scales-guide]=1&products[poster-chords]=1&products[poster-scales]=1&products[pianote-practice-planner]=1&products[new-piano-players]=1&products[easy-chords]=1&products[piano-technique-made-easy]=1&products[the-power-of-chords]=1&products[worship-piano]=1&products[piano-riffs-and-fills]=1&products[destupefy-your-left-hand]=1&products[faster-fingers]=1&products[jesus-molina-improvisation-and-musical-freedom-pack]=1&products[play-beautiful-piano]=1&locked=true',
+                'saveText' => '<h4><strong><s class="opacity-60">$1716</s> $720</strong> (SAVE 58%)</h4>',
+                'buttonLink' => '/ecommerce/add-to-cart?locked=true&product-array=pianote_access_5-years:1,classical-book:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,new-piano-players-start-here:1,easy-chords:1,piano-technique-made-easy:1,the-power-of-chords:1,worship-piano:1,piano-riffs-and-fills:1,destupefy-your-left-hand:1,faster-fingers:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1',
             ])
 
         </div>

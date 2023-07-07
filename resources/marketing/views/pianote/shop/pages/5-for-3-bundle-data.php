@@ -4,7 +4,7 @@
         'bundles' => [
             [
                 'name' => '5-Year Pianote Membership',
-                'price' => 720,
+                'price' => 1200,
                 'special_text' => '(SAVE 40%)',
                 'bundle_desc' => 'Discover the best online piano lessons experience with Pianote. Your Pianote membership will give you hundreds of expertly designed, step-by-step lessons to guide you along the path to musical freedom. And you’ll get access to REAL teachers who will be able to answer any questions you have along the way.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-5-year-card.jpg',
@@ -17,7 +17,7 @@
                 'price' => 49,
                 'special_text' => 'NEW',
                 'bundle_desc' => '92 pages full of beautiful pieces by famous classical composers that you can actually play!',
-                'bundle_img' => '',
+                'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/classical_piano_book.png',
                 'bundle_free_shipping' => false,
                 'lifetime_access' => false,
                 'free_bonus' => true,
@@ -171,7 +171,7 @@
             'price' => 49,
             'special_text' => 'NEW',
             'description' => '',
-            'image' => '',
+            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/classical_piano_book.png',
         ],
         [
             'name' => 'Chords & Scales Book',

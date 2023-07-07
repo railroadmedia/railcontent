@@ -4,7 +4,7 @@ $product = (object)[
     'bundles' => [
         [
             'name' => '5-Year Drumeo Membership',
-            'price' => 720,
+            'price' => 1200,
             'special_text' => 'SAVE 40%',
             'bundle_desc' => 'Get better, faster with Drumeo’s award-winning online drum lessons taught by the world’s greatest drummers. You’ll always know what to practice with step-by-step lessons, 5000+ note-for-note song breakdowns, hundreds of drum-less playalongs, and ongoing support & motivation from pro drummers. ',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-5-year-card.jpg',
@@ -200,7 +200,7 @@ $bonuses = [
     [
         'name' => 'Hudson lessons',
         'price' => 270,
-        'description' => 'TODO',
+        'description' => ' ',
         'image' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/5-for-3-bundle/hudson-pack-card.jpg',
     ],
     [

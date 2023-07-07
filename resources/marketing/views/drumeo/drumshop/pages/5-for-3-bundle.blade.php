@@ -41,7 +41,7 @@
             SPOTS AVAILABLE</h6>
         <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-bundle.png" alt="bundle image" fetchpriority="high" />
         <br>
-        <h4><strong><s class="opacity-60">$1586.61</s> $720</strong></h4>
+        <h4><strong><s class="opacity-60">$2270.61</s> $720</strong></h4>
         <br>
         <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96" href="#order-section">
             get started &raquo;
@@ -69,8 +69,8 @@
             @include('pianote.shop.pages.5-for-3-bundle-order-section', [
                 'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-5-year-double-card.jpg',
                 'availableSpots' => $products['drumeo-eardrums']->getStockAvailability(),
-                'saveText' => '<h4><strong><s class="opacity-60">$1586.61</s> $720</strong></h4>',
-                'buttonLink' => '/ecommerce/add-to-cart?products[TODO]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[DSYS2-DIGI]=1&products[SD-DIGI]=1&products[rock-drumming-masterclass-pack]=1&products[drum-technique-made-easy-pack]=1&products[independence-made-easy-pack]=1&products[learn-songs-faster-pack]=1&products[MAM-DIGI]=1&products[TLOD-DIGI]=1&products[GHFAL-DIGI]=1&products[HGAF-DIGI]=1&products[ICM-DIGI]=1&products[CC-DIGI]=1&products[TG-DIGI]=1&products[BTC-DIGI]=1&products[AOADS-DIGI]=1&locked=true',
+                'saveText' => '<h4><strong><s class="opacity-60">$2270.61</s> $720</strong></h4>',
+                'buttonLink' => '/ecommerce/add-to-cart?locked=true&product-array=drumeo_access_5-years:1,drumeo-eardrums:1,Drumeo-VaterSticks:6,SD-DIGI:1,rock-drumming-masterclass-pack:1,drum-technique-made-easy-pack:1,independence-made-easy-pack:1,learn-songs-faster-pack:1,electrify-your-drumming:1,MAM-DIGI:1,TLOD-DIGI:1,GHFAL-DIGI:1,HGAF-DIGI:1,ICM-DIGI:1,CC-DIGI:1,TG-DIGI:1,BTC-DIGI:1,AOADS-DIGI:1',
             ])
 
         </div>

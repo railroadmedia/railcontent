@@ -1,6 +1,6 @@
 @foreach ($product->bundles as $key => $bundle)
     <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center">
-        <div class="image-wrap relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto {{-- @if($bundle['bundle_free_shipping']) shipping @endif--}}">
+        <div class="image-wrap relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-0 {{-- @if($bundle['bundle_free_shipping']) shipping @endif--}}">
             <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/{{ $bundle['bundle_img'] }}" alt="product thumbnail{{$key+1}}">
         </div>
         <div>
