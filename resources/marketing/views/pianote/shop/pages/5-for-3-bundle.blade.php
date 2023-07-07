@@ -21,6 +21,14 @@
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link href="{{ asset('/marketing/parcel/drumeo/drum-shop-product.css') }}" rel="stylesheet">
+    <style>
+        .text-promo {
+            color: #FFD600!important;
+        }
+        .border-promo {
+            border-color: #FFD600!important;
+        }
+    </style>
 @endsection
 
 @section('layout-header')
