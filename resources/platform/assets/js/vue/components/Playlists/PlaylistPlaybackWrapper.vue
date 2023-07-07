@@ -18,12 +18,17 @@ import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
 import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
 import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import ContentUnavailable from './ContentUnavailable.vue';
+import AssignmentsContainer from '../../vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
 
 //-----------Props-----------//
 const props = defineProps({
     additionalSoundsliceParams: {
         type: String,
         default: ''
+    },
+    assignments: {
+        type: Array,
+        default: () => []
     },
     brand: {
         type: String,
@@ -64,6 +69,10 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
+    lessonData:{
+        type: Array,
+        default: () => []
+    },
     lessonType: {
         type: String,
         default: ''
@@ -75,10 +84,6 @@ const props = defineProps({
     nextLessonUrl: {
         type: String,
         default: '/'
-    },
-    playlistName: {
-        type: String,
-        default: ''
     },
     playlistItems: {
         type: Object,
@@ -364,6 +369,22 @@ onBeforeMount(() => {
                 
                 <!-- Info Section -->
                 <slot name="info-section"></slot>
+
+                <!-- Assignments Section -->
+                <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
+                    <div class="tw-flex tw-flex-row pv-3 tw-w-full">
+                        <h1 class="heading dark:tw-text-white">Assignments</h1>
+                    </div>
+                    <div class="tw-flex tw-flex-row tw-w-full">
+                        <assignments-container
+                            :lesson-data="lessonData"
+                            :assignments="assignments"
+                            :brand="brand"
+                            :user-id="userId"
+                        >
+                        </assignments-container>
+                    </div>
+                </div>
 
                 <!-- Comments Section -->
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full tw-mb-4"

@@ -127,7 +127,7 @@
 
                     {{-- Add to List and Next/Prev Buttons --}}
                     @include('partials.bladesora.members.content.lesson-video._buttons', [
-                        'themeColor' => '{{ $brand }}',
+                        'themeColor' => $brand,
                         'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
                         'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
                         'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
@@ -163,7 +163,7 @@
 
             <div class="container-fluid tw-bg-{{ $brand }} tw-rounded-[10px]">
                 @include('partials.bladesora.members.content.content-progress', [
-                    'themeColor' => '{{ $brand }}',
+                    'themeColor' => $brand,
                     'contentType' => $lessonContent->fetch('type'),
                     'progress' => $lessonContent->fetch('progress_percent'),
                     'nextLessonUrl' => '',
@@ -220,52 +220,14 @@
                     <div class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                         <div class="tw-flex tw-flex-row pv-3 tw-w-full">
                             <h1 class="heading dark:tw-text-white">Assignments</h1>
-                            @php
-                                $formattedAssignments = [];
-                                foreach ($lessonContent->fetch('*assignments', []) as $index => $assignment) {
-                                    $content = [];
-                                    $content['themeColor'] = brand();
-                                    $content['timecode'] = $assignment->fetch('data.timecode', 0);
-                                    $content['id'] = $assignment->fetch('id');
-                                    $content['xp'] = $assignment->fetch('xp');
-                                    $content['title'] = $assignment->fetch('fields.title');
-                                    $content['soundsliceSlug'] = $assignment->fetch('fields.soundslice_slug');
-                                    $content['completed'] = $assignment->fetch('completed');
-                                    $content['userId'] = auth()->id();
-                                    $content['position'] = $index;
-                                    $formattedAssignments[] = $content;
-                                }
-                            @endphp
                         </div>
-                        @php
-                            $formattedAssignments = [];
-                            foreach ($lessonContent->fetch('*assignments', []) as $index => $assignment) {
-                                $content = [];
-                                $content['dusk'] = 'content-assignment';
-                                $content['themeColor'] = brand();
-                                $content['timecode'] = $assignment->fetch('data.timecode', 0);
-                                $content['id'] = $assignment->fetch('id');
-                                $content['xp'] = $assignment->fetch('fields.total_xp');
-                                $content['title'] = $assignment->fetch('fields.title');
-                                $content['soundsliceSlug'] = $assignment->fetch('fields.soundslice_slug');
-                                $content['completed'] = $assignment->fetch('completed');
-                                $content['userId'] = auth()->id();
-                                $content['position'] = $index;
-                                $formattedAssignments[] = $content;
-                            }
-                        @endphp
                         <div class="tw-flex tw-flex-row tw-w-full">
                             <assignments-container
+                                brand="{{ $brand }}"
+                                :user-id="{{ auth()->id() }}"
                                 :lesson-data="{{ json_encode($lessonContent) }}"
-                                :assignments="{{ json_encode($formattedAssignments) }}"
+                                :assignments="{{ json_encode($lessonContent->fetch('*assignments', [])) }}"
                             >
-                                <template slot="completion-bonus">
-                                    @include('partials.bladesora.members.partials._completion-bonus', [
-                                        'xpBonus' => $lessonContent->fetch('xp_bonus', 0),
-                                        'isComplete' => $lessonContent->fetch('progress_percent', 0) === 100,
-                                        'themeColor' => brand(),
-                                    ])
-                                </template>
                             </assignments-container>
                         </div>
                     </div>
@@ -273,7 +235,7 @@
             </div>
 
             @include('partials.bladesora.members.content._lesson-complete', [
-                'themeColor' => '{{ $brand }}',
+                'themeColor' => $brand,
                 'thisLessonJson' => $thisLessonJson,
                 'nextLessonJson' => !empty($nextChild) ? $nextLessonJson : null,
             ])
