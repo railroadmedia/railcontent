@@ -111,7 +111,6 @@ export const usePlaylistsStore = defineStore({
       this.playlistsQuantity--;
     },
     deletePlaylistItem(item) {
-      console.log('deleting', item);
       //update duration from active playlist
       this.activePlaylist.duration = this.activePlaylist.duration - item.duration;
       //filter out item from lessons
