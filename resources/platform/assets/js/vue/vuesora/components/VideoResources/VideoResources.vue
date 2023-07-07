@@ -10,6 +10,19 @@
       <div class="flex flex-column pv-2">
         <div class="flex flex-row nmh-1 flex-wrap resource-buttons">
 
+          <!-- Info Button -->
+          <div v-if="showInfoButton" class="flex flex-column resource-button ph-1 tw-text-white">
+            <button class="btn stacked" id="toggleInstructorInfo" @click="toggleInfo">
+            <span
+              class="tw-shadow-none tw-text-lg"
+              style="padding: 0 8px"
+            >
+                <musora-icon :icon-name="openInfo ? 'info-filled' : 'info'"  class="tw-w-6 tw-h-6 tw-mb-1" />
+                Info
+            </span>
+            </button>
+          </div>
+
           <!-- Like Button -->
           <div class="flex flex-column resource-button ph-1">
             <button class="btn stacked" @click="likeContent">
@@ -104,7 +117,7 @@
               </span>
             </button>
           </div>
-          
+
           <!-- Completed Button -->
           <div
             class="flex flex-column resource-button ph-1"
@@ -124,7 +137,7 @@
               </span>
             </button>
           </div>
-          
+
         </div>
       </div>
 
@@ -254,7 +267,12 @@ export default {
 
     showCompleteButton: {
       type: Boolean,
-      default: () => false, 
+      default: () => false,
+    },
+
+    showInfoButton: {
+      type: Boolean,
+      default: () => false,
     },
 
     likeCount: {
@@ -297,6 +315,7 @@ export default {
       useTimecode: true,
       showModalContent: false,
       completed: this.lesson.completed,
+      openInfo: false,
     };
   },
 
@@ -317,6 +336,8 @@ export default {
         this.resourceDropdown = false;
       }
     });
+
+    console.log('infobutton',this.showInfoButton)
   },
   methods: {
     getCurrentTime() {
@@ -436,6 +457,9 @@ export default {
         title: "SHARE THE LOVE!",
         message: "This URL has been copied, and is ready to share!",
       });
+    },
+    toggleInfo() {
+      this.openInfo = !this.openInfo;
     },
   },
 };

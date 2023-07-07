@@ -135,6 +135,10 @@ const props = defineProps({
         type: Object,
         default: {}
     },
+    showInfoButton: {
+        type: Boolean,
+        default: false
+    },
     startSecond: {
         type: [String, Number],
         default: 0
@@ -351,12 +355,15 @@ onBeforeMount(() => {
                             :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                             :user-id="userId" :resources="videoResources" :show-add-to-list="true"
                             :show-complete-button="released && !needAccess" :relatedLesson="relatedLesson"
-                            :lesson="playlistItems.data[props.playlistItemPosition - 1]" />
+                            :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton" />
                         <RelatedLesson v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
                             :relatedLesson="relatedLesson.data[0]" />
                         <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
                     </div>
                 </div>
+                
+                <!-- Info Section -->
+                <slot name="info-section"></slot>
 
                 <!-- Comments Section -->
                 <div class="tw-flex tw-flex-col tw-flex-grow tw-w-full tw-mb-4"

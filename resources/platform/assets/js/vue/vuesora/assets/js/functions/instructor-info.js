@@ -9,8 +9,10 @@ export default (function () {
 
             if (event.target.classList.contains('active')) {
                 instructorInfo.style.maxHeight = `${instructorInfo.scrollHeight}px`;
+                instructorInfo.classList.add('tw-mb-4');
             } else {
                 instructorInfo.style.maxHeight = '0';
+                instructorInfo.classList.remove('tw-mb-4');
             }
         }
     });
