@@ -19279,32 +19279,6 @@ ul {
   transition: max-height 0.2s ease-in-out;
 }
 
-#toggleInstructorInfo {
-  height: 20px;
-  width: 40px;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-  position: relative;
-  z-index: 2;
-}
-#toggleInstructorInfo.active i {
-  transform: rotate(180deg);
-}
-#toggleInstructorInfo > * {
-  pointer-events: none;
-}
-#toggleInstructorInfo .x-tiny {
-  font-size: 8px;
-  line-height: 8px;
-  display: block;
-}
-#toggleInstructorInfo i {
-  font-size: 8px;
-  will-change: transform;
-  transition: transform 0.2s ease-in-out;
-  display: block;
-}
-
 .no-events {
   pointer-events: none;
 }
