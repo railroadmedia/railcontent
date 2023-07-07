@@ -12,6 +12,8 @@
     x-data="{
         ...timer(),
         trailer: false,
+        trailerFirstDay: false,
+        trailerLastDay: false,
     }"
 
     x-init="countdown()"
@@ -163,24 +165,24 @@
                 <div class="tw-flex tw-flex-wrap tw-text-left tw-max-w-3xl tw-mx-auto tw-mt-5 sm:tw-mt-7 tw-mb-10 sm:tw-mb-14 lg:tw-mb-20">
                     <div class="tw-w-1/2 tw-pr-2 sm:tw-px-4">
                         <div class="tw-rounded-xl tw-overflow-hidden tw-shadow-md tw-cursor-pointer autoplay-video" data-open="dayOne" aria-controls="dayOne" aria-haspopup="true" tabindex="0">
-                            <img src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['description_trailer_1_thumb_url'] }}" alt="day1 thumb" loading="lazy" onload="this.classList.remove('opacity-0')" onclick="openTrailer('{{ $cohort["description_trailer_1"] }}');">
+                            <img src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['description_trailer_1_thumb_url'] }}" alt="day1 thumb" loading="lazy" onload="this.classList.remove('opacity-0')" x-on:click="trailerFirstDay = true">
                             <p class="tw-p-2 sm:tw-p-5 tw-text-sm">We’ll start slow. Here’s what you’ll be playing in your first lesson.</p>
                         </div>
                     </div>
                     <div class="tw-w-1/2 sm:tw-px-4">
                         <div class="tw-rounded-xl tw-overflow-hidden tw-shadow-md tw-cursor-pointer autoplay-video" data-open="dayThirty" aria-controls="dayThirty" aria-haspopup="true" tabindex="0">
-                            <img src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['description_trailer_2_thumb_url'] }}" alt="day 30 thumb" loading="lazy" onload="this.classList.remove('opacity-0')" onclick="openTrailer('{{ $cohort["description_trailer_2"] }}');">
+                            <img src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['description_trailer_2_thumb_url'] }}" alt="day 30 thumb" loading="lazy" onload="this.classList.remove('opacity-0')" x-on:click="trailerLastDay = true">
                             <p class="tw-p-2 sm:tw-p-5 tw-text-sm">After 30 days, you’ll be playing this beautiful song. All you have to do is follow along.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section class="tw-text-center tw-text-white  tw-bg-cover tw-bg-center" style="background-color:#2a2f34;background-image:url();">
+        <section class="tw-text-center tw-text-white  tw-bg-cover tw-bg-center" style="background-color:#2a2f34;">
             <div class="tw-max-w-[1600px] tw-mx-auto tw-relative tw-pt-10 sm:tw-pt-14 lg:tw-pt-20">
                 <img class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-object-cover" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-bg.jpg" alt="bg" />
-                <h3 class="tw-leading-tight"><strong>Go on, give it a try</strong></h3>
-                <p class="tw-leading-normal tw-mt-2 sm:tw-mt-3 tw-mb-5 sm:tw-mb-7">Curious? <strong>Try a snippet from Day 1</strong> and<br class="tw-inline sm:tw-hidden"> see if Easy Chords is right for you.</p>
+                <h3 class="tw-leading-tight tw-relative"><strong>Go on, give it a try</strong></h3>
+                <p class="tw-leading-normal tw-mt-2 sm:tw-mt-3 tw-mb-5 sm:tw-mb-7 tw-relative">Curious? <strong>Try a snippet from Day 1</strong> and<br class="tw-inline sm:tw-hidden"> see if Easy Chords is right for you.</p>
                 <div class="tw-relative tw-cursor-pointer autoplay-video" data-open="demoVid" aria-controls="demoVid" aria-haspopup="true" tabindex="0">
                     <img class="tw-inline-block sm:tw-hidden tw-w-full tw-transition-all" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-m-lisa.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <img class="tw-hidden sm:tw-inline-block tw-w-full tw-transition-all" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/tablet-piano-lisa.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
@@ -197,13 +199,9 @@
                     <h4 class="tw-leading-tight tw-mt-2 tw-mb-4 sm:tw-my-4 lg:tw-my-5"><strong>{!! $cohort['body_bottom_description'] !!}</strong></h4>
                     <div class="tw-w-full tw-mx-auto sm:tw-mx-0">
                         @foreach($cohort->lists as $item)
-                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> {{$item['description']}}</p>
-
+                            <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> {{$item['description']}}</p>
                         @endforeach
-<!--                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Master your chord changes &amp; inversions.</p>-->
-<!--                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Join 9,381 piano players who have already registered.</p>-->
-<!--                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Course runs June 5 to July 5.</p>-->
-<!--                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Choose your best option to get started.</p>-->
+
                     </div>
                 </div>
                 <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
@@ -270,6 +268,16 @@
         @include('partials.modals._video-modal',[
             'name' => "trailer",
             "video" => $cohort['cohort_trailer'],
+        ])
+
+        @include('partials.modals._video-modal',[
+            'name' => "trailerFirstDay",
+            "video" => $cohort['description_trailer_1'],
+        ])
+
+        @include('partials.modals._video-modal',[
+            'name' => "trailerLastDay",
+            "video" => $cohort['description_trailer_2'],
         ])
 
         @include('partials._railanalytics-brand-tracking-iframe')
