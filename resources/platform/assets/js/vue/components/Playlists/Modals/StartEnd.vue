@@ -62,7 +62,10 @@
             brand: props.brand,
         };
         //Update UI
-        playlistsStore.updatePlaylistItem(payload);
+        playlistsStore.updatePlaylistItem({
+            ...props.data,
+            ...payload,
+        });
         //Send Request
         PlaylistService.updatePlaylistItem(payload, token)
             .then(function(response) {
