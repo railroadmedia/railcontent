@@ -315,9 +315,69 @@ class Cohort extends Resource
             Markdown::make('Body Bottom Description','body_bottom_description')->hideFromIndex(),
 
             Text::make('First day Trailer URL', 'description_trailer_1')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
+            Image::make('Thumb image url - first day trailer', 'description_trailer_1_thumb_url')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('description_trailer_1_thumb_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
             Text::make('Thumb image url - first day trailer', 'description_trailer_1_thumb_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
 
             Text::make('Last day Trailer URL', 'description_trailer_2')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
+            Image::make('Thumb image url - last day trailer', 'description_trailer_2_thumb_url')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('description_trailer_2_thumb_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
             Text::make('Thumb image url - last day trailer', 'description_trailer_2_thumb_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
 
             Heading::make(' Body Description list'),
