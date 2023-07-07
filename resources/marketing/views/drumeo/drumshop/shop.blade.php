@@ -131,7 +131,7 @@
                     </h1>
                 </li>
                 {{-- Drumeo annual membership --}}
-                @include('drumeo.drumshop._partials._drum-shop-card', [
+                @include('musora.shop._shop-card', [
                      "itemURL" => "/",
                      "sku" => null,
                      "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/dcb-01.jpg",
@@ -147,7 +147,7 @@
                      'soldOut' => false,
                 ])
                 @foreach($lessons as $key => $lesson)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                         "sku" => $lesson->sku === 'drumeo' ? null : $lesson->sku,
                         "badgeText" => $lesson->badge_text,
@@ -168,7 +168,7 @@
                 @endforeach
 
                 {{-- Drumeo gift card --}}
-                @include('drumeo.drumshop._partials._drum-shop-card', [
+                @include('musora.shop._shop-card', [
                     "itemURL" => "/drumshop/gift-card/",
                     "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
                     "title" => "Drumeo Gift Card",
@@ -191,7 +191,7 @@
                     </h1>
                 </li>
                 @foreach($accessories as $accessory)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                         "sku" => $accessory->sku,
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                         "badgeText" => $accessory->badge_text,
@@ -220,7 +220,7 @@
                 </li>
 
                 @foreach($hats as $hat)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                          "sku" => $hat->sku,
                          "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
                          "badgeText" => $hat->badge_text,
@@ -250,7 +250,7 @@
                 </li>
 
                 @foreach($shirts as $shirt)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                          "sku" => $shirt->sku,
                          "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                          "badgeText" => $shirt->badge_text,
@@ -265,7 +265,7 @@
                          "category" => strtolower($shirt->productType->name),
                     ])
                 @endforeach
-                @include('drumeo.drumshop._partials._drum-shop-card', [
+                @include('musora.shop._shop-card', [
                      "badgeText" => "SEE MORE ON TEESPRING",
                      "itemURL" => "https://teespring.com/stores/drumeo",
                      "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/teespring.jpg",
@@ -292,7 +292,7 @@
                     </h1>
                 </li>
                 @foreach($hoodies as $hoodie)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                          "sku" => $hoodie->sku,
                          "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                          "badgeText" => $hoodie->badge_text,

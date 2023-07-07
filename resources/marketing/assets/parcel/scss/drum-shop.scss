@@ -1275,16 +1275,13 @@ img {
         p {
           width: 100%;
           font: 400 13px/1.3em $opensans;
-          margin: 0 auto;
           display: inline-block;
 
           &.description {
             font-size: 12px;
-            margin: 10px auto;
           }
 
           &.price {
-            margin: 0 auto 15px;
             font-size: 22px;
             @include tablet {
               font-size: 26px;

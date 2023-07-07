@@ -101,7 +101,7 @@
                         Piano Lessons
                     </h1>
                 </li>
-                @include('drumeo.drumshop._partials._drum-shop-card', [
+                @include('musora.shop._shop-card', [
                      "itemURL" => "/",
                      "sku" => null,
                      "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/header.jpg",
@@ -118,7 +118,7 @@
                 ])
 
                 @foreach($lessons as $key => $lesson)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                             "thumbnail" => $lesson->thumbnail,
@@ -148,7 +148,7 @@
                     </h1>
                 </li>
                 @foreach($accessories as $accessory)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                             "sku" => (str_contains($accessory->sku, 'member') || str_contains($accessory->sku, 'products')) ? '' : $accessory->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                             "thumbnail" => $accessory->thumbnail,
@@ -177,7 +177,7 @@
                 </li>
 
                 @foreach($hats as $hat)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                          "sku" => $hat->sku,
                          "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
                          "badgeText" => $hat->badge_text,
@@ -206,7 +206,7 @@
                     </h1>
                 </li>
                 @foreach($shirts as $shirt)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                         "sku" => $shirt->sku,
                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                         "thumbnail" => $shirt->thumbnail,
@@ -234,7 +234,7 @@
                     </h1>
                 </li>
                 @foreach($hoodies as $hoodie)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                         "sku" => $hoodie->sku,
                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                         "thumbnail" => $hoodie->thumbnail,
