@@ -10,7 +10,7 @@
         'pianote' => '&show_chords=1',
     ];
     $recordingIdx = 1;
-    if (($lessonType == 'song' || $lessonType == 'assignment') && isset($playlistItem['instrumentless']) && boolval($playlistItem['instrumentless'])) {
+    if (($lessonType == 'song' || $lessonType == 'assignment') && isset($playlistItem['is_instrumentless_track']) && boolval($playlistItem['is_instrumentless_track'])) {
         $recordingIdx = 2;
     }
     $soundsliceAdditionalParams = $brandParams[$brand] . '&layout=3&recording_idx=' . $recordingIdx;
