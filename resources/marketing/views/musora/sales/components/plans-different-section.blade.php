@@ -4,10 +4,10 @@
         <div class="flex items-center rounded-xl py-3 px-3 sm:px-6">
             <div class="w-1/2 text-left"></div>
             <div class="w-1/4">
-                <img class="h-4 sm:h-6 lg:h-8" src="{{ $plusLogo }}" alt="plus logo">
+                <img class="h-4 sm:h-6 lg:h-8" src="{{ $plusLogo }}">
             </div>
             <div class="w-1/4">
-                <img class="h-4 sm:h-6 lg:h-8" src="{{ $logo }}" alt="brand logo">
+                <img class="h-4 sm:h-6 lg:h-8" src="{{ $logo }}">
             </div>
         </div>
         <div class="flex items-center rounded-xl py-4 px-3 sm:px-6" style="background-color:#f5f8fc;">
