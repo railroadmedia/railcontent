@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c65327d270094f6449ea936a79fac498",
+    "content-hash": "c37116cea0507bcfae0f3540f09a8f08",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.275.3",
+            "version": "3.275.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "bbdf8e8d5df0b44ee83d5a751f316fc9f9dd2849"
+                "reference": "bacab9b131dc790ed0084b63f5f4889a81eee311"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bbdf8e8d5df0b44ee83d5a751f316fc9f9dd2849",
-                "reference": "bbdf8e8d5df0b44ee83d5a751f316fc9f9dd2849",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/bacab9b131dc790ed0084b63f5f4889a81eee311",
+                "reference": "bacab9b131dc790ed0084b63f5f4889a81eee311",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.275.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.275.4"
             },
-            "time": "2023-07-05T18:22:08+00:00"
+            "time": "2023-07-06T18:22:51+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -8106,16 +8106,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "dev-5.0-in-app-products",
+            "version": "dev-5.0-revenuecat",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "715e39c9db65aaddfd88b468234e5f11fba0b365"
+                "reference": "0cc24b7f024c529f94f05da438596cee0e69cb36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/715e39c9db65aaddfd88b468234e5f11fba0b365",
-                "reference": "715e39c9db65aaddfd88b468234e5f11fba0b365",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/0cc24b7f024c529f94f05da438596cee0e69cb36",
+                "reference": "0cc24b7f024c529f94f05da438596cee0e69cb36",
                 "shasum": ""
             },
             "require": {
@@ -8152,9 +8152,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-in-app-products"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-revenuecat"
             },
-            "time": "2023-07-06T09:26:58+00:00"
+            "time": "2023-07-07T08:24:39+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -13951,16 +13951,16 @@
         },
         {
             "name": "whitecube/nova-flexible-content",
-            "version": "v1.0.9",
+            "version": "v1.0.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/whitecube/nova-flexible-content.git",
-                "reference": "a40f885a7770f641271edff6b048d2866c538b7a"
+                "reference": "e2be82a739c836d448729d2597db3d3ca0afdc73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/a40f885a7770f641271edff6b048d2866c538b7a",
-                "reference": "a40f885a7770f641271edff6b048d2866c538b7a",
+                "url": "https://api.github.com/repos/whitecube/nova-flexible-content/zipball/e2be82a739c836d448729d2597db3d3ca0afdc73",
+                "reference": "e2be82a739c836d448729d2597db3d3ca0afdc73",
                 "shasum": ""
             },
             "require": {
@@ -14010,7 +14010,7 @@
             ],
             "support": {
                 "issues": "https://github.com/whitecube/nova-flexible-content/issues",
-                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.9"
+                "source": "https://github.com/whitecube/nova-flexible-content/tree/v1.0.11"
             },
             "funding": [
                 {
@@ -14018,7 +14018,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-06T08:45:28+00:00"
+            "time": "2023-07-06T11:38:43+00:00"
         }
     ],
     "packages-dev": [
@@ -14202,16 +14202,16 @@
         },
         {
             "name": "barryvdh/reflection-docblock",
-            "version": "v2.1.0",
+            "version": "v2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/ReflectionDocBlock.git",
-                "reference": "bf44b757feb8ba1734659029357646466ded673e"
+                "reference": "e6811e927f0ecc37cc4deaa6627033150343e597"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/ReflectionDocBlock/zipball/bf44b757feb8ba1734659029357646466ded673e",
-                "reference": "bf44b757feb8ba1734659029357646466ded673e",
+                "url": "https://api.github.com/repos/barryvdh/ReflectionDocBlock/zipball/e6811e927f0ecc37cc4deaa6627033150343e597",
+                "reference": "e6811e927f0ecc37cc4deaa6627033150343e597",
                 "shasum": ""
             },
             "require": {
@@ -14248,9 +14248,9 @@
                 }
             ],
             "support": {
-                "source": "https://github.com/barryvdh/ReflectionDocBlock/tree/v2.1.0"
+                "source": "https://github.com/barryvdh/ReflectionDocBlock/tree/v2.1.1"
             },
-            "time": "2022-10-31T15:35:43+00:00"
+            "time": "2023-06-14T05:06:27+00:00"
         },
         {
             "name": "composer/class-map-generator",
@@ -16664,16 +16664,16 @@
         },
         {
             "name": "spatie/flare-client-php",
-            "version": "1.4.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/flare-client-php.git",
-                "reference": "82138174d5fe2829a7f085a6bdb2a06f6def9f7a"
+                "reference": "943894c6a6b00501365ac0b91ae0dce56f2226fa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/82138174d5fe2829a7f085a6bdb2a06f6def9f7a",
-                "reference": "82138174d5fe2829a7f085a6bdb2a06f6def9f7a",
+                "url": "https://api.github.com/repos/spatie/flare-client-php/zipball/943894c6a6b00501365ac0b91ae0dce56f2226fa",
+                "reference": "943894c6a6b00501365ac0b91ae0dce56f2226fa",
                 "shasum": ""
             },
             "require": {
@@ -16722,7 +16722,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/flare-client-php/issues",
-                "source": "https://github.com/spatie/flare-client-php/tree/1.4.0"
+                "source": "https://github.com/spatie/flare-client-php/tree/1.4.1"
             },
             "funding": [
                 {
@@ -16730,7 +16730,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-06-28T11:08:09+00:00"
+            "time": "2023-07-06T09:29:49+00:00"
         },
         {
             "name": "spatie/ignition",
@@ -16959,15 +16959,9 @@
     "aliases": [
         {
             "package": "railroad/ecommerce",
-            "version": "dev-5.0-in-app-products",
+            "version": "dev-5.0-revenuecat",
             "alias": "v5.0.89",
             "alias_normalized": "5.0.89.0"
-        },
-        {
-            "package": "railroad/musora-api",
-            "version": "dev-2.0-playlists-v15",
-            "alias": "v3.1.23",
-            "alias_normalized": "3.1.23.0"
         },
         {
             "package": "railroad/railanalytics",
@@ -16985,9 +16979,7 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/ecommerce": 20,
-        "railroad/musora-api": 20,
-        "railroad/railanalytics": 20,
-        "railroad/railcontent": 20
+        "railroad/railanalytics": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
