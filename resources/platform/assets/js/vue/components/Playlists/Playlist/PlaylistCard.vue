@@ -70,7 +70,7 @@ const instructor = computed(() => {
 })
 //Description
 const lessonDescription = computed(() => {
-    return props.lesson.title;
+    return props.lesson.playlist_item_name ? props.lesson.playlist_item_name : props.lesson.title;
 })
 //Show Content Mask
 const showMask = computed(() => {

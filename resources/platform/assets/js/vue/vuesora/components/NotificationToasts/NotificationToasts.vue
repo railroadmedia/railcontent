@@ -127,7 +127,7 @@ export default {
       } else if (val === 'check') {
         this.notificationIcon = 'fa-check-circle tw-text-[#22c55d]';
       } else if (val === 'edit') {
-        this.notificationIcon = 'fa-edit tw-text-[#22c55d]';
+        this.notificationIcon = 'fa-edit dark:tw-text-black tw-text-white';
       } else if (val === 'xp') {
         this.notificationIcon = 'fa-child dark:tw-text-black tw-text-white';
       } else {
