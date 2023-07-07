@@ -124,7 +124,6 @@ export const usePlaylistsStore = defineStore({
       //update item in lessons
       this.lessons = this.lessons.map((lesson) => {
         if (lesson.user_playlist_item_id === item.user_playlist_item_id) {
-          console.log(item.playlist_item_name)
           return item;
         } else {
           return lesson;
