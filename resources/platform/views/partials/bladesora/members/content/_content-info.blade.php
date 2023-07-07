@@ -64,11 +64,3 @@
         {{ $extra ?? '' }}
     </div>
 </div>
-<div class="tw-container tw-mx-auto fluid">
-    <div class="tw-flex tw-flex-col tw-items-center">
-        <div id="toggleInstructorInfo" class="tw-transition tw-text-center tw-text-[#191b1c] tw-bg-white dark:tw-bg-[#191b1c] dark:tw-text-white tw-cursor-pointer tw-mb-[-20px]">
-            <span class="x-tiny tw-uppercase tw-font-bold">Info</span>
-            <i class="fas fa-chevron-down"></i>
-        </div>
-    </div>
-</div>

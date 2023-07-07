@@ -275,6 +275,7 @@ onUpdated(() => {
       <!-- Content Container -->
       <main class="
           tw-flex
+          tw-justify-between
           tw-w-full
           tw-h-full
           tw-min-h-screen
@@ -289,7 +290,7 @@ onUpdated(() => {
           {{ adminMessage }}
         </h2>
         <!-- Content -->
-        <section class="tw-flex tw-flex-col tw-grow tw-w-full">
+        <section class="tw-w-full">
           <slot :is-dark-mode="isDarkModeSelected" />
         </section>
 

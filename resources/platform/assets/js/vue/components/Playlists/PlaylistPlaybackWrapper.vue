@@ -18,12 +18,17 @@ import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
 import VideoResources from '../../vuesora/components/VideoResources/VideoResources.vue';
 import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import ContentUnavailable from './ContentUnavailable.vue';
+import AssignmentsContainer from '../../vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
 
 //-----------Props-----------//
 const props = defineProps({
     additionalSoundsliceParams: {
         type: String,
         default: ''
+    },
+    assignments: {
+        type: Array,
+        default: () => []
     },
     brand: {
         type: String,
@@ -64,6 +69,10 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
+    lessonData:{
+        type: Array,
+        default: () => []
+    },
     lessonType: {
         type: String,
         default: ''
@@ -75,10 +84,6 @@ const props = defineProps({
     nextLessonUrl: {
         type: String,
         default: '/'
-    },
-    playlistName: {
-        type: String,
-        default: ''
     },
     playlistItems: {
         type: Object,
@@ -134,6 +139,10 @@ const props = defineProps({
     relatedPlaylists: {
         type: Object,
         default: {}
+    },
+    showInfoButton: {
+        type: Boolean,
+        default: false
     },
     startSecond: {
         type: [String, Number],
@@ -296,7 +305,7 @@ onBeforeMount(() => {
                         :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle"
                         :message="needAccessMessage" />
                     <!-- Soundslice Player -->
-                    <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && !needAccess"
+                    <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && !needAccess && released"
                         class="tw-w-full tw-aspect-video tw-max-h-[90vh]"
                         :class="{ 'tw-max-w-[1280px]' : !playlistsStore.playerExpanded }"
                     >
@@ -351,10 +360,29 @@ onBeforeMount(() => {
                             :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                             :user-id="userId" :resources="videoResources" :show-add-to-list="true"
                             :show-complete-button="released && !needAccess" :relatedLesson="relatedLesson"
-                            :lesson="playlistItems.data[props.playlistItemPosition - 1]" />
+                            :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton" />
                         <RelatedLesson v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
                             :relatedLesson="relatedLesson.data[0]" />
                         <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
+                    </div>
+                </div>
+                
+                <!-- Info Section -->
+                <slot name="info-section"></slot>
+
+                <!-- Assignments Section -->
+                <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
+                    <div class="tw-flex tw-flex-row pv-3 tw-w-full">
+                        <h1 class="heading dark:tw-text-white">Assignments</h1>
+                    </div>
+                    <div class="tw-flex tw-flex-row tw-w-full">
+                        <assignments-container
+                            :lesson-data="lessonData"
+                            :assignments="assignments"
+                            :brand="brand"
+                            :user-id="userId"
+                        >
+                        </assignments-container>
                     </div>
                 </div>
 

@@ -31,13 +31,13 @@
     <input type="hidden" id="sessionToken" value="{{ railtracker_session_token() }}">
 
     {{-- WRAPPER VUE --}}
-    <playlist-playback-wrapper 
-        lesson-type="{{ $lessonType }}" 
-        brand="{{ $brand }}" 
+    <playlist-playback-wrapper
+        lesson-type="{{ $lessonType }}"
+        brand="{{ $brand }}"
         user-id="{{ user()->id }}"
-        additional-soundslice-params="{{ $soundsliceAdditionalParams }}" 
+        additional-soundslice-params="{{ $soundsliceAdditionalParams }}"
         playlist-id="{{ $playlist['id'] }}"
-        soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}" 
+        soundslice-slug="{{ $playlistItem['soundslice_slug'] ?? '' }}"
         content-id="{{ $lessonContent->fetch('id') }}"
         youtube-video-id="{{ $lessonContent->fetch('fields.video.fields.youtube_video_id') }}"
         vimeo-video-id="{{ $lessonContent->fetch('fields.video.fields.vimeo_video_id') }}"
@@ -53,13 +53,13 @@
         description="{{ $lessonContent->fetch('data.description') }}"
         parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
         playlist-name="{{ $playlist['name'] }}"
-        next-lesson-url="{{ $nextPlaylistItemUrl }}" 
+        next-lesson-url="{{ $nextPlaylistItemUrl }}"
         prev-lesson-url="{{ $previousPlaylistItemUrl }}"
-        playlist-duration="{{ $playlist['duration'] }}" 
+        playlist-duration="{{ $playlist['duration'] }}"
         user-name="{{ user()->display_name }}"
-        user-avatar="{{ user()->profile_picture_url }}" 
+        user-avatar="{{ user()->profile_picture_url }}"
         user-xp="{{ user()->totalXP() }}"
-        user-access-level="{{ user()->access_level }}" 
+        user-access-level="{{ user()->access_level }}"
         playlist-url="{{ $playlist['url'] }}"
         :video-resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
         :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
@@ -69,9 +69,9 @@
         :useLegacyVideoPlayer="{{ user()->use_legacy_video_player ?? false }}"
         :song-ranges="{{ json_encode($lessonContent['ranges'] ?? []) }}"
         :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}" {{-- Todo: Find a way to re add captions --}} {{-- :captions="{{ $lessonContent->fetch('fields.video.data.captions') }}" --}}
-        :playlist-items="{{ $playlistItems }}" 
+        :playlist-items="{{ $playlistItems }}"
         :related-lesson="{{ $relatedLesson }}"
-        :related-playlists="{{ $relatedPlaylists }}" 
+        :related-playlists="{{ $relatedPlaylists }}"
         :playlist-item-position="{{ $positionInPlaylist }}"
         :playlist-item-id="{{ $playlistItem['id'] }}"
         :playlist-item-title="{{ json_encode($playlistItem['title']) }}"
@@ -79,7 +79,21 @@
         :is-my-playlist="{{ $playlist['is_my_playlist'] }}"
         :end-second="{{ $playlistItem['end_second'] ?? $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
         subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] }}"
+        :assignments="{{ json_encode($lessonContent->fetch('*assignments', [])) }}"
+        :lesson-data="{{ json_encode($lessonContent) }}"
+        :show-info-button="{{ json_encode(!empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters'])) }}"
     >
+        @if (!empty($lessonContent->fetch('*fields.instructor')) ||
+                !empty($lessonContent->fetch('data.description')) ||
+                !empty($lessonContent['chapters']))
+            <template #info-section>
+                @include('partials.bladesora.members.content._content-info', [
+                    'instructors' => $lessonContent->fetch('*fields.instructor'),
+                    'contentDescription' => $lessonContent->fetch('data.description', null),
+                    'contentChapters' => $lessonContent['chapters'] ?? [],
+                ])
+            </template>
+        @endif
     </playlist-playback-wrapper>
 @endsection
 
