@@ -26,7 +26,7 @@
         "laravel/vapor-core": "^2.22",
         "laravel/vapor-ui": "^1.5",
         "league/flysystem-aws-s3-v3": "^3.0",
-        "railroad/ecommerce": "dev-5.0-in-app-products as v5.0.89",
+        "railroad/ecommerce": "^5.0",
         "railroad/lead-tracker": "^3.0",
         "railroad/location": "3.0.*",
         "railroad/mailora": "^3.0",
