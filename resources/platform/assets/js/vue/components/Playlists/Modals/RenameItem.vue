@@ -27,8 +27,8 @@
 
     //--------Refs--------//
 
-    const itemName = ref(props.content.playlist_item_name);
-    const nameKey = ref(props.content.playlist_item_name);
+    const itemName = ref(props.content.playlist_item_name ? props.content.playlist_item_name : props.content.title);
+    const nameKey = ref(props.content.playlist_item_name ? props.content.playlist_item_name : props.content.title);
 
     //--------Computed--------//
 
@@ -89,7 +89,7 @@
             <img :src="content.thumbnail_url" class="tw-h-[80px] tw-min-w-[145px]" />
             <div class="tw-ml-[15px] tw-h-full tw-flex tw-flex-col tw-justify-around">
                 <h3 class="tw-text-black dark:tw-text-white tw-text-[16px] tw-font-bold tw-font-open-sans">
-                    {{ content.playlist_item_name }}
+                    {{ props.content.playlist_item_name ? props.content.playlist_item_name : props.content.title }}
                 </h3>
                 <p class="tw-text-black dark:tw-text-[#9EC0DC]">{{ authors }}</p>
             </div>
