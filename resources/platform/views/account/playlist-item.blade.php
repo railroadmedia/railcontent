@@ -79,9 +79,24 @@
         :is-my-playlist="{{ $playlist['is_my_playlist'] }}"
         :end-second="{{ $playlistItem['end_second'] ?? $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
         subscription-calendar-id="{{ config('addevent.'.$brand)['uniquekeys']['brand-overview'] }}"
+<<<<<<< HEAD
         :assignments="{{ json_encode($lessonContent->fetch('*assignments', [])) }}"
         :lesson-data="{{ json_encode($lessonContent) }}"
+=======
+        :show-info-button="{{ json_encode(!empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters'])) }}"
+>>>>>>> project-playlists-v15
     >
+        @if (!empty($lessonContent->fetch('*fields.instructor')) ||
+                !empty($lessonContent->fetch('data.description')) ||
+                !empty($lessonContent['chapters']))
+            <template #info-section>
+                @include('partials.bladesora.members.content._content-info', [
+                    'instructors' => $lessonContent->fetch('*fields.instructor'),
+                    'contentDescription' => $lessonContent->fetch('data.description', null),
+                    'contentChapters' => $lessonContent['chapters'] ?? [],
+                ])
+            </template>
+        @endif
     </playlist-playback-wrapper>
 @endsection
 

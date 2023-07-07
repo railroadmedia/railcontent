@@ -121,7 +121,9 @@
                         :is-added="{{ json_encode($lessonContent->fetch('is_added_to_primary_playlist') ?? false) }}"
                         content-id="{{ $lessonContent->fetch('id') }}" user-id="{{ auth()->id() }}"
                         :resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
-                        :show-add-to-list="{{ json_encode($lessonType != 'song') }}"></video-resources>
+                        :show-add-to-list="{{ json_encode($lessonType != 'song') }}"
+                        :show-info-button="{{ json_encode(!empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters'])) }}"
+                    ></video-resources>
 
                     {{-- Add to List and Next/Prev Buttons --}}
                     @include('partials.bladesora.members.content.lesson-video._buttons', [
