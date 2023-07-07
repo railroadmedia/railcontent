@@ -163,13 +163,13 @@
                 <div class="tw-flex tw-flex-wrap tw-text-left tw-max-w-3xl tw-mx-auto tw-mt-5 sm:tw-mt-7 tw-mb-10 sm:tw-mb-14 lg:tw-mb-20">
                     <div class="tw-w-1/2 tw-pr-2 sm:tw-px-4">
                         <div class="tw-rounded-xl tw-overflow-hidden tw-shadow-md tw-cursor-pointer autoplay-video" data-open="dayOne" aria-controls="dayOne" aria-haspopup="true" tabindex="0">
-                            <img src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/day-1-thumb.jpg" alt="day1 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
+                            <img src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['description_trailer_1_thumb_url'] }}" alt="day1 thumb" loading="lazy" onload="this.classList.remove('opacity-0')" onclick="openTrailer('{{ $cohort["description_trailer_1"] }}');">
                             <p class="tw-p-2 sm:tw-p-5 tw-text-sm">We’ll start slow. Here’s what you’ll be playing in your first lesson.</p>
                         </div>
                     </div>
                     <div class="tw-w-1/2 sm:tw-px-4">
                         <div class="tw-rounded-xl tw-overflow-hidden tw-shadow-md tw-cursor-pointer autoplay-video" data-open="dayThirty" aria-controls="dayThirty" aria-haspopup="true" tabindex="0">
-                            <img src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/day-30-thumb.jpg" alt="day 30 thumb" loading="lazy" onload="this.classList.remove('opacity-0')">
+                            <img src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['description_trailer_2_thumb_url'] }}" alt="day 30 thumb" loading="lazy" onload="this.classList.remove('opacity-0')" onclick="openTrailer('{{ $cohort["description_trailer_2"] }}');">
                             <p class="tw-p-2 sm:tw-p-5 tw-text-sm">After 30 days, you’ll be playing this beautiful song. All you have to do is follow along.</p>
                         </div>
                     </div>
@@ -196,10 +196,14 @@
                     <img class="tw-h-20 md:tw-h-24 lg:tw-h-28 tw-transition-all tw-mx-auto" src="https://www.musora.com/musora-cdn/image/width=380,quality=85/{{ $cohort['body_logo'] }}" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h4 class="tw-leading-tight tw-mt-2 tw-mb-4 sm:tw-my-4 lg:tw-my-5"><strong>{!! $cohort['body_bottom_description'] !!}</strong></h4>
                     <div class="tw-w-full tw-mx-auto sm:tw-mx-0">
-                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Master your chord changes &amp; inversions.</p>
-                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Join 9,381 piano players who have already registered.</p>
-                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Course runs June 5 to July 5.</p>
-                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Choose your best option to get started.</p>
+                        @foreach($cohort->lists as $item)
+                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> {{$item['description']}}</p>
+
+                        @endforeach
+<!--                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Master your chord changes &amp; inversions.</p>-->
+<!--                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Join 9,381 piano players who have already registered.</p>-->
+<!--                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Course runs June 5 to July 5.</p>-->
+<!--                        <p class="tw-leading-tight tw-mb-2 sm:tw-mb-3"><i class="fas fa-check tw-text-pianote tw-mr-1" aria-hidden="true"></i> Choose your best option to get started.</p>-->
                     </div>
                 </div>
                 <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
@@ -301,6 +305,11 @@
                     isError: true
                 });
             });
+        }
+
+        function openTrailer(URL){
+            console.log(URL)
+            //window.openModal('trailer');
         }
     </script>
 @endsection

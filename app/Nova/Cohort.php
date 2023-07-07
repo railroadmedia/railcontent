@@ -3,7 +3,9 @@
 namespace App\Nova;
 
 use App\Nova\Flexible\Layouts\CohortDropdownLayout;
+use App\Nova\Flexible\Layouts\CohortListLayout;
 use App\Nova\Flexible\Presets\CohortDropdownPreset;
+use App\Nova\Flexible\Presets\CohortListPreset;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
@@ -312,11 +314,25 @@ class Cohort extends Resource
             Text::make('Body Logo', 'body_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted logo link. (Google Drive links will NOT work.)'),
             Markdown::make('Body Bottom Description','body_bottom_description')->hideFromIndex(),
 
+            Text::make('First day Trailer URL', 'description_trailer_1')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
+            Text::make('Thumb image url - first day trailer', 'description_trailer_1_thumb_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+
+            Text::make('Last day Trailer URL', 'description_trailer_2')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
+            Text::make('Thumb image url - last day trailer', 'description_trailer_2_thumb_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+
+            Heading::make(' Body Description list'),
+            // Text::make('Dropdown Title 2','dropdown_title')->hideFromIndex(),
+            Flexible::make('Items')
+                ->addLayout(CohortListLayout::class)
+                ->preset(CohortListPreset::class),
+
             Heading::make('Dropdown'),
             Text::make('Dropdown Title','dropdown_title')->hideFromIndex(),
             Flexible::make('Dropdowns')
                 ->addLayout(CohortDropdownLayout::class)
                 ->preset(CohortDropdownPreset::class),
+
+
 
             Heading::make('Bottom'),
             Text::make('Title','bottom_title')->hideFromIndex(),

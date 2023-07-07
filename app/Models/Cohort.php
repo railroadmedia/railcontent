@@ -52,6 +52,11 @@ class Cohort extends Model
         return $this->hasMany(CohortDropdown::class);
     }
 
+    public function lists()
+    {
+        return $this->hasMany(CohortList::class);
+    }
+
 //    protected function slug(): Attribute
 //    {
 //        return Attribute::make(
