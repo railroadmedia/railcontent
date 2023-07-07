@@ -26836,6 +26836,47 @@ a:visited{
   }
 }
 @media (min-width: 1024px){
+<<<<<<< HEAD
+=======
+  .lg\:tw-container{
+    width: 100%;
+  }
+  @media (min-width: 640px){
+    .lg\:tw-container{
+      max-width: 640px;
+    }
+  }
+  @media (min-width: 768px){
+    .lg\:tw-container{
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 1024px){
+    .lg\:tw-container{
+      max-width: 1024px;
+    }
+  }
+  @media (min-width: 1280px){
+    .lg\:tw-container{
+      max-width: 1280px;
+    }
+  }
+  @media (min-width: 1536px){
+    .lg\:tw-container{
+      max-width: 1536px;
+    }
+  }
+  @media (min-width: 1815px){
+    .lg\:tw-container{
+      max-width: 1815px;
+    }
+  }
+  @media (min-width: 2256px){
+    .lg\:tw-container{
+      max-width: 2256px;
+    }
+  }
+>>>>>>> master
   .lg\:tw-relative{
     position: relative !important;
   }
@@ -27322,6 +27363,19 @@ a:visited{
   .lg\:tw-line-clamp-none{
     -webkit-line-clamp: unset !important;
   }
+<<<<<<< HEAD
+=======
+  @media (min-width: 1815px){
+    .lg\:tw-container{
+      max-width: 1815px !important;
+    }
+  }
+  @media (min-width: 2256px){
+    .lg\:tw-container{
+      max-width: 2256px !important;
+    }
+  }
+>>>>>>> master
 }
 @media (min-width: 1280px){
   .xl\:tw-static{
