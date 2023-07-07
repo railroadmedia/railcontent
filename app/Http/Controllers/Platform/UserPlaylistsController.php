@@ -352,7 +352,8 @@ class UserPlaylistsController extends BaseController
         $playlistItem['need_access_message'] = $initialItem['need_access_message'] ?? false;
         $playlistItem['content_name'] = $initialItem['content_name'] ?? false;
         $playlistItem['playlist_item_name'] = $initialItem['playlist_item_name'] ?? false;
-
+        $playlistItem['is_full_track'] = $initialItem['is_full_track'] ?? false;
+        $playlistItem['is_instrumentless_track'] = $initialItem['is_instrumentless_track'] ?? false;
 
         $userPlaylists = collect($this->userPlaylistsService->getUserPlaylist(user()->id, 'user-playlist'));
         $playlists = $userPlaylists->whereNotIn('id', $playlistId);
