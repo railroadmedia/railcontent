@@ -155,7 +155,7 @@
                             "sizes" => $accessory->sizes,
                             "price" => $accessory->discounted_price,
                             "category" => strtolower($accessory->productType->name),
-                            "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
+                            "soldOut" => isset($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
                             "size_case_sensitive" => $accessory->size_case_sensitive,
                     ])
                 @endforeach
@@ -183,7 +183,7 @@
                          "fullPrice" => $hat->price,
                          "price" => $hat->discounted_price,
                          "sizes" => $hat->sizes,
-                         "soldOut" => !empty($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
+                         "soldOut" => isset($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
                          "category" => strtolower($hat->productType->name),
                          "size_case_sensitive" => $hat->size_case_sensitive,
                     ])
@@ -213,7 +213,7 @@
                         "price" => $shirt->discounted_price,
                         "category" => strtolower($shirt->productType->name),
                         "sizes" => $shirt->sizes,
-                        "soldOut" => !empty($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
+                        "soldOut" => isset($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
                         "size_case_sensitive" => $shirt->size_case_sensitive,
                     ])
                 @endforeach
@@ -241,7 +241,7 @@
                         "price" => $hoodie->discounted_price,
                         "category" => strtolower($hoodie->productType->name),
                         "sizes" => $hoodie->sizes,
-                        "soldOut" => !empty($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 :$hoodie->sold_out,
+                        "soldOut" => isset($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 :$hoodie->sold_out,
                         "size_case_sensitive" => $hoodie->size_case_sensitive,
                     ])
                 @endforeach

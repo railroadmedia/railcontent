@@ -276,11 +276,14 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                     Decorator::$typeDecoratorsEnabled = false;
                     \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
                     $initialByPassPermission = ContentRepository::$bypassPermissions;
+                    $initialPullFutureContent = ContentRepository::$pullFutureContent;
                     ContentRepository::$bypassPermissions = true;
+                    ContentRepository::$pullFutureContent = true;
                     $parentContent[$content['id']] =
                         $this->contentService->getByIds([$parent->id])
                             ->first();
                     ContentRepository::$bypassPermissions = $initialByPassPermission;
+                    ContentRepository::$pullFutureContent = $initialPullFutureContent;
                     self::$parents = $parentContent + self::$parents;
                     Decorator::$typeDecoratorsEnabled = true;
                 }

@@ -126,6 +126,7 @@
                         Online Drum Lessons
                     </h1>
                 </li>
+                {{-- Drumeo annual membership --}}
                 @include('drumeo.drumshop._partials._drum-shop-card', [
                      "itemURL" => "/",
                      "sku" => null,
@@ -162,6 +163,7 @@
                     ])
                 @endforeach
 
+                {{-- Drumeo gift card --}}
                 @include('drumeo.drumshop._partials._drum-shop-card', [
                     "itemURL" => "/drumshop/gift-card/",
                     "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
@@ -195,7 +197,7 @@
                         "fullPrice" => $accessory->price,
                         "price" => $accessory->discounted_price,
                         "sizes" => $accessory->sizes,
-                        "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
+                        "soldOut" => isset($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
                         "category" => strtolower($accessory->productType->name),
                         "size_case_sensitive" => $accessory->size_case_sensitive,
                     ])
@@ -224,7 +226,7 @@
                          "fullPrice" => $hat->price,
                          "price" => $hat->discounted_price,
                          "sizes" => $hat->sizes,
-                         "soldOut" => !empty($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
+                         "soldOut" => isset($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
                          "category" => strtolower($hat->productType->name),
                          "size_case_sensitive" => $hat->size_case_sensitive,
                     ])
@@ -254,7 +256,7 @@
                          "fullPrice" => $shirt->price,
                          "price" => $shirt->discounted_price,
                          "sizes" => $shirt->sizes,
-                         "soldOut" => !empty($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
+                         "soldOut" => isset($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
                          "size_case_sensitive" => $shirt->size_case_sensitive,
                          "category" => strtolower($shirt->productType->name),
                     ])
@@ -296,7 +298,7 @@
                          "fullPrice" => $hoodie->price,
                          "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
                          "sizes" => $hoodie->sizes,
-                         "soldOut" => !empty($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 : $hoodie->sold_out,
+                         "soldOut" => isset($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 : $hoodie->sold_out,
                          "category" => strtolower($hoodie->productType->name),
                          "size_case_sensitive" => $hoodie->size_case_sensitive,
                     ])
