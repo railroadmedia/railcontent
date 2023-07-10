@@ -39,7 +39,7 @@ const props = defineProps({
         default: false,
     },
     isPrivate: {
-        type: Number
+        type: [Number,Boolean]
     },
     type: {
         type: String,
