@@ -124,11 +124,11 @@ const secondaryVideoModal = ref(false);
         <!-- Background Image -->
         <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
             <picture>
-                <source media="(min-width:1280px)" :srcset="`https://www.musora.com/musora-cdn/image/width=2000,quality=85${desktopImg}`">
-                <source media="(min-width:768px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1500,quality=85${tabletImg}`">
+                <source media="(min-width:1280px)" :srcset="`https://www.musora.com/musora-cdn/image/width=2000,quality=85/${desktopImg}`">
+                <source media="(min-width:768px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1500,quality=85/${tabletImg}`">
                 <img
                     class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-z-50"
-                    :src="`https://www.musora.com/musora-cdn/image/width=700,quality=85${mobileImg}`"
+                    :src="`https://www.musora.com/musora-cdn/image/width=700,quality=85/${mobileImg}`"
                     alt="banner background image"
                 />
             </picture>
