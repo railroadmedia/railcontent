@@ -6,6 +6,7 @@
     import DeleteModal from './DeleteModal.vue';
     import NoAccess from './NoAccess.vue';
     import UnpinModal from './UnpinModal/UnpinModal.vue';
+    import ShareModal from './ShareModal.vue';
 
     const emit = defineEmits(['onClosePlaylistsModal']);
 
@@ -33,6 +34,7 @@
         noAccess: 'tw-max-w-[550px] tw-px-[64px]',
         removeLesson: 'tw-max-w-[606px] tw-px-[64px]',
         startEnd: 'tw-max-w-[589px] tw-px-[48px]',
+        share: 'tw-max-w-[550px] tw-px-[64px]',
         addItem: 'tw-max-w-[917px] tw-px-4 sm:tw-px-[32px]',
         unpinPlaylists: 'tw-max-w-[917px] tw-px-[32px]',
         alreadyAddedItem: '',
@@ -50,6 +52,7 @@
             <CreatePlaylist mode="duplicate" @onCloseModal="() => emit('onClosePlaylistsModal')" :brand="brand" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'duplicate'"  />
             <CreatePlaylist mode="edit" @onCloseModal="() => emit('onClosePlaylistsModal')" :brand="brand" :playlist="modalProps.data" :modalProps="modalProps" v-if="modalProps.modalType === 'edit'"  />
 
+            <ShareModal mode="share" @onCloseModal="() => emit('onClosePlaylistsModal')" :brand="brand" :data="modalProps.data" v-if="modalProps.modalType === 'share'"  /> 
 
             <DeleteModal v-if="modalProps.modalType === 'remove'"
                          @onCloseModal="() => emit('onClosePlaylistsModal')"
