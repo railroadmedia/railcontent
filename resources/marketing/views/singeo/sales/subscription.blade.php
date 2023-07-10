@@ -146,6 +146,12 @@
         ])
     @endif
 
+    @include('_partials.components.promo-top-banner',[
+        'bg' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-shop-summer-sale-bg.jpg',
+        'logo' => 'TODO',
+        'promoText' => 'SAVE UP TO TODO% UNTIL JULY 17TH!',
+    ])
+
     @php
         $features = [
             [

@@ -148,6 +148,12 @@
         ])
     @endif
 
+    @include('_partials.components.promo-top-banner',[
+        'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-shop-summer-sale-bg.jpg',
+        'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-summer-sale-logo.svg',
+        'promoText' => 'SAVE UP TO 68% UNTIL JULY 17TH!',
+    ])
+
     @php
         $features = [
             [

@@ -151,6 +151,12 @@
         ])
     @endif
 
+    @include('_partials.components.promo-top-banner',[
+        'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-shop-summer-sale-bg.jpg',
+        'logo' => 'TODO',
+        'promoText' => 'SAVE UP TO TODO% UNTIL JULY 17TH!',
+    ])
+
     @php
         $features = [
             [
