@@ -257,7 +257,7 @@
         })
     </script>
     @include('_partials.components.countdown',[
-    'countdownDate' => '2023-07-12 00:00:00',
+    'countdownDate' => '2023-07-13 00:00:00',
     'promoVersion' => false
     ])
 @stop
