@@ -200,8 +200,8 @@ $bonuses = [
     [
         'name' => 'Hudson lessons',
         'price' => 270,
-        'description' => ' ',
-        'image' => 'https://drumeo-assets.s3.amazonaws.com/drum-shop/5-for-3-bundle/hudson-pack-card.jpg',
+        'description' => '',
+        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/hudson-pack-card.jpg',
     ],
     [
         'name' => 'Successful Drumming',
