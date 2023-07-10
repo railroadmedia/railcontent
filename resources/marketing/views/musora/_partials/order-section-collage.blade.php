@@ -8,7 +8,7 @@
             <div class="flex w-full justify-center sm:justify-start sm:w-auto sm:order-1 mb-7 sm:mb-0 -mt-4">
                 <picture class="max-w-xs sm:max-w-full">
                     <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team2.png">
-                    <img class="transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team2.png" alt="musora collage image">
+                    <img class="transition-opacity" loading="lazy" onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora-m-team2.png" alt="musora collage image">
                 </picture>
             </div>
             <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0 flex-col flex items-center sm:items-start">

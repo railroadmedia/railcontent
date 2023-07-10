@@ -9,7 +9,7 @@
                 <img class="w-full transition-opacity opacity-0 mb-6 md:mb-0 lg:-mt-11 lg:-mb-4 "
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{!! $image !!}"
+                    src="https://www.musora.com/musora-cdn/image/width=650,quality=85/{!! $image !!}"
                     alt="device image"
                 >
             </picture>

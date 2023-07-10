@@ -306,7 +306,7 @@
                             <picture>
                                 <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/{{ $gridItem['image'] }}">
                                 <img
-                                    class="w-full rounded-xl mb-3 transition-opacity opacity-0"
+                                    class="h-40 sm:h-auto sm:w-full rounded-xl mb-3 transition-opacity opacity-0"
                                     src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $gridItem['image'] }}"
                                     alt="grid{{$key+1}}"
                                     loading="lazy"
@@ -380,7 +380,7 @@
                             <picture>
                                 <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{$testimonial['image']}}">
                                 <img
-                                    class="rounded-xl transition-opacity opacity-0"
+                                    class="h-52 sm:h-auto sm:w-full rounded-xl transition-opacity opacity-0"
                                     src="https://www.musora.com/musora-cdn/image/width=350,quality=85/{{$testimonial['image']}}"
                                     alt="{{$testimonial['name']}} testimonial"
                                     loading="lazy"
