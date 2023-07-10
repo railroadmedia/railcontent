@@ -200,7 +200,7 @@ $bonuses = [
     [
         'name' => 'Hudson lessons',
         'price' => 270,
-        'description' => '',
+        'description' => 'These 9 lesson packs changed the game in drum education. Improve your independence, solos, and more!',
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/hudson-pack-card.jpg',
     ],
     [
