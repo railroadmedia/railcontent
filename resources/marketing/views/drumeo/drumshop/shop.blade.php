@@ -24,20 +24,27 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header relative">
-        <picture>
-            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg">
-            <img class="absolute w-full h-full left-0 top-0 object-cover object-center" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg" alt="header background" fetchpriority="high" />
-        </picture>
+{{--    <header class="drum-shop-header relative">--}}
+{{--        <picture>--}}
+{{--            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg">--}}
+{{--            <img class="absolute w-full h-full left-0 top-0 object-cover object-center" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg" alt="header background" fetchpriority="high" />--}}
+{{--        </picture>--}}
 
-        <div class="container mx-auto relative z-10">
-            <div class="px-2 md:px-3">
-                <img class="h-6 md:h-9" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo" fetchpriority="high">
-                <h1><strong>DRUM SHOP</strong></h1>
-                <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>
-            </div>
-        </div>
-    </header>
+{{--        <div class="container mx-auto relative z-10">--}}
+{{--            <div class="px-2 md:px-3">--}}
+{{--                <img class="h-6 md:h-9" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo" fetchpriority="high">--}}
+{{--                <h1><strong>DRUM SHOP</strong></h1>--}}
+{{--                <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </header>--}}
+
+    @include('_partials.components.shop.promo-top-banner',[
+        'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-shop-summer-sale-bg.jpg',
+        'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-summer-sale-logo.svg',
+        'title' => 'get lessons, accessories, and merch.',
+        'promoText' => 'SAVE UP TO 81% UNTIL JULY 31ST!',
+    ])
 
     @if(Session::has('addedProducts'))
         <section class="added-to-cart-background clearfix">
@@ -314,5 +321,12 @@
 
 @section('layout-footer')
     @include("drumeo.sales.partials._footer")
+@endsection
+
+@section('layout-scripts')
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-07-31 23:59:59',
+        'promoVersion' => true
+    ])
 @endsection
 

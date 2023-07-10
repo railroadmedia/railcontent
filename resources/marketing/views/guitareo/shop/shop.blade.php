@@ -84,18 +84,25 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header relative">
-        <picture>
-            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg">
-            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg" alt="header background image" fetchpriority="high" />
-        </picture>
-        <div class="container mx-auto relative z-10">
-            <div class="px-2 md:px-3">
-                <img class="logo" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="guitareo logo" fetchpriority="high" />
-                <h1><strong>SHOP</strong></h1>
-            </div>
-        </div>
-    </header>
+{{--    <header class="drum-shop-header relative">--}}
+{{--        <picture>--}}
+{{--            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg">--}}
+{{--            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg" alt="header background image" fetchpriority="high" />--}}
+{{--        </picture>--}}
+{{--        <div class="container mx-auto relative z-10">--}}
+{{--            <div class="px-2 md:px-3">--}}
+{{--                <img class="logo" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="guitareo logo" fetchpriority="high" />--}}
+{{--                <h1><strong>SHOP</strong></h1>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </header>--}}
+
+    @include('_partials.components.shop.promo-top-banner',[
+        'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-shop-summer-sale-bg.jpg',
+        'logo' => 'TODO',
+        'title' => 'get lessons, accessories, and merch.',
+        'promoText' => 'SAVE UP TO TODO% UNTIL JULY 31ST!',
+    ])
 
     @if(Session::has('addedProducts'))
         <section class="py-6 md:py-10">
@@ -211,4 +218,11 @@
 
 @section('layout-footer')
     @include("guitareo.sales.partials._footer")
+@endsection
+
+@section('layout-scripts')
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-07-31 23:59:59',
+        'promoVersion' => true
+    ])
 @endsection

@@ -24,20 +24,27 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header">
-        <picture>
-            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">
-            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg" alt="header background image" fetchpriority="high" />
-        </picture>
-        <div class="container mx-auto relative z-10">
-            <div class="px-2 md:px-3">
-                <div class="float-left px-2 md:px-3 w-full">
-                    <img class="h-12 sm:h-14 md:h-24 lg:h-28 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/pianote-shop-logo.png" alt="pianote logo" fetchpriority="high">
-                    <h3>GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>
-                </div>
-            </div>
-        </div>
-    </header>
+{{--    <header class="drum-shop-header">--}}
+{{--        <picture>--}}
+{{--            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">--}}
+{{--            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg" alt="header background image" fetchpriority="high" />--}}
+{{--        </picture>--}}
+{{--        <div class="container mx-auto relative z-10">--}}
+{{--            <div class="px-2 md:px-3">--}}
+{{--                <div class="float-left px-2 md:px-3 w-full">--}}
+{{--                    <img class="h-12 sm:h-14 md:h-24 lg:h-28 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/pianote-shop-logo.png" alt="pianote logo" fetchpriority="high">--}}
+{{--                    <h3>GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </header>--}}
+
+    @include('_partials.components.shop.promo-top-banner',[
+        'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-shop-summer-sale-bg.jpg',
+        'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-summer-sale-logo.svg',
+        'title' => 'get lessons, accessories, and merch.',
+        'promoText' => 'SAVE UP TO 68% UNTIL JULY 31ST!',
+    ])
 
     @if(Session::has('addedProducts'))
         <section class="added-to-cart-background clearfix">
@@ -257,5 +264,12 @@
 
 @section('layout-footer')
     @include('pianote.sales.partials._footer')
+@endsection
+
+@section('layout-scripts')
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-07-31 23:59:59',
+        'promoVersion' => true
+    ])
 @endsection
 
