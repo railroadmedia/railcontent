@@ -122,6 +122,7 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 ($content['type'] != 'assignment' && $content['type'] != 'song');
             $contentsOfType[$contentIndex]['user_playlist_item_extra_data'] =
                 $content['user_playlist_item_extra_data'] ?? null;
+            $contentsOfType[$contentIndex]['duration'] =  $content->fetch('fields.video.fields.length_in_seconds', 0);
 
             $userPlaylistId =
                 $content['user_playlist_id']
