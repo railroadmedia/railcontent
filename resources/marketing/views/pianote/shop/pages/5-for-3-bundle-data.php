@@ -170,7 +170,7 @@
             'name' => 'Classical Book',
             'price' => 49,
             'special_text' => 'NEW',
-            'description' => '',
+            'description' => '92 pages full of beautiful pieces by famous classical composers that you can actually play!',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/classical_piano_book.png',
         ],
         [
@@ -205,14 +205,14 @@
             'name' => 'New Piano Players Start Here',
             'price' => 97,
             'special_text' => '',
-            'description' => '',
+            'description' => 'Your guide to go from a total beginner to playing REAL music in just 30 days.',
             'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
         ],
         [
             'name' => 'Easy Chords',
             'price' => 97,
             'special_text' => '',
-            'description' => '',
+            'description' => 'Master your chord changes & inversions.',
             'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
         ],
         [
