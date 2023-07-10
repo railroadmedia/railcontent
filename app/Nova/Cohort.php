@@ -380,8 +380,106 @@ class Cohort extends Resource
                 }),
             Text::make('Thumb image url - last day trailer', 'description_trailer_2_thumb_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
 
-            Heading::make(' Body Description list'),
-            // Text::make('Dropdown Title 2','dropdown_title')->hideFromIndex(),
+            Heading::make('Demo Section'),
+            Text::make('Demo Title', 'demo_title_text')->hideFromIndex(),
+            Text::make('Demo Description', 'demo_description_text')->hideFromIndex(),
+            Text::make('Demo Label', 'demo_label_text')->hideFromIndex(),
+            Image::make('Demo Background Image', 'demo_background_image_url')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('demo_background_image_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Demo Background Image', 'demo_background_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Image::make('Demo Desktop Center Image', 'demo_desktop_center_image_url')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('demo_desktop_center_image_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Demo Desktop Center Image', 'demo_desktop_center_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Image::make('Demo Mobile Center Image', 'demo_mobile_center_image_url')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('demo_mobile_center_image_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Demo Mobile Center Image', 'demo_mobile_center_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Text::make('Demo Trailer', 'demo_trailer')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
+
+            Heading::make('Body Description list'),
             Flexible::make('Items')
                 ->addLayout(CohortListLayout::class)
                 ->preset(CohortListPreset::class),
@@ -391,8 +489,6 @@ class Cohort extends Resource
             Flexible::make('Dropdowns')
                 ->addLayout(CohortDropdownLayout::class)
                 ->preset(CohortDropdownPreset::class),
-
-
 
             Heading::make('Bottom'),
             Text::make('Title','bottom_title')->hideFromIndex(),
