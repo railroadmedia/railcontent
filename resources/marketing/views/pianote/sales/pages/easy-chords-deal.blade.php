@@ -138,16 +138,15 @@
                 You’ve done the hard part.<br class="hidden sm:inline">
                 <strong>Keep the momentum going!</strong>
             </h3>
-            <h6 class="uppercase text-pianote leading-tight"><strong>GET UNLIMITED PIANO LESSONS FOR A YEAR + 5 FREE BONUSES</strong>
-{{--                <br class="hidden sm:inline">--}}
-{{--                <span x-cloak x-data="timer()" x-init="countdown()">--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
-{{--                                                                 </span>--}}
-{{--                left!--}}
+            <h6 class="uppercase text-pianote leading-tight"><strong>GET UNLIMITED PIANO LESSONS FOR A YEAR + 5 FREE BONUSES</strong><br class="hidden sm:inline">
+                <span x-cloak x-data="timer()" x-init="countdown()">
+                                                                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                                                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                                                                 </span>
+                left!
             </h6>
             <div class="w-full mx-auto my-5 sm:my-10 px-3">
                 <div class="aspect-16:9 w-full relative rounded-xl overflow-hidden">
@@ -180,13 +179,12 @@
                 <br><br>
                 We’ll discount your first year by $40 as a special thank you, and you’ll have 90 days to try it risk-free.
                 <br><br>
-                But this offer is only available until midnight, July 9th.
+                But this offer is only available until midnight, July 12th.
                 <br><br>
                 So click below and keep your progress going!
             </p>
             <div class="px-3 md:px-0">
-{{--                <a class="join smaller w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">Claim Your Offer</a>--}}
-                <div class="join sold-out smaller w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide">sold out</div>
+                <a class="join smaller w-full sm:w-auto max-w-xs sm:max-w-full anchor-slide" href="#customize-section">Claim Your Offer</a>
             </div>
         </div>
     </section>
@@ -194,13 +192,55 @@
 
     <div id="customize-section" class="anchor"></div>
 
-    @include("pianote.sales.partials._footer", [
-        "minimal" => true
+    @php
+
+        $bonuses = [
+            [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Pianote_Planner_Card.jpg',
+        'title' => 'Practice Planner',
+        'description' => 'Always know exactly what to practice.',
+        'price' => floatval($productPrices['pianote-practice-planner']->price),
+        'shipping' => true,
+    ],
+
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Piano_Chords_Card.jpg',
+        'title' => 'Chords Poster',
+        'description' => 'Hang these piano chords in your practice space.',
+        'price' => floatval($productPrices['poster-chords']->price),
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/may/Piano_Scales_Card.jpg',
+        'title' => 'Scales Poster',
+        'description' => 'All the major and minor piano scales in one poster.',
+        'price' => floatval($productPrices['poster-scales']->price),
+        'shipping' => true,
+    ],
+            [
+            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
+            'title' => 'Piano Riffs<br> & Fills',
+            'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
+            'price' => floatval($productPrices['piano-riffs-and-fills']->price),
+            ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/october/power_of_chords_card.jpg',
+        'title' => 'The Power of Chords',
+        'description' => 'Play the music you love using the power of chords.',
+        'price' => floatval($productPrices['the-power-of-chords']->price),
+    ],
+        ]
+    @endphp
+    @include('musora.sales.components.order-section-bonuses', [
+        'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png',
+        'header' => 'Online piano lessons<br class="inline sm:hidden"> for all skill levels.',
+        'subDescription' => 'Join Pianote today and get 5 free bonuses!',
+        'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
+        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[pianote-practice-planner]=1&products[poster-chords]=1&products[poster-scales]=1&products[piano-riffs-and-fills]=1&products[the-power-of-chords]=1&redirect=/order&locked=true&promo-code=special',
     ])
 
-    @include('_partials.components.countdown',[
-        'countdownDate' => '2023-04-01 00:00:00',
-        'promoVersion' => false
+    @include("pianote.sales.partials._footer", [
+        "minimal" => true
     ])
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
@@ -217,7 +257,7 @@
         })
     </script>
     @include('_partials.components.countdown',[
-    'countdownDate' => '2023-07-10 00:00:00',
+    'countdownDate' => '2023-07-12 00:00:00',
     'promoVersion' => false
     ])
 @stop
