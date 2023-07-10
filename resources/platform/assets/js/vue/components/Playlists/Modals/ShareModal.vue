@@ -1,12 +1,16 @@
 <script setup>
     import { inject, onBeforeMount, computed, reactive } from 'vue';
     import PlaylistService from '../../../../services/playlists.js';
+    import { usePlaylistsStore } from '../../../../stores/playlists';
 
     //Emits
     const emit = defineEmits(['onCloseModal']);
 
     //Inject
     const token = inject('csrf_token');
+
+    //Pinia Stores
+    const playlistsStore = usePlaylistsStore();
 
     //-----------Props-----------//
     const props = defineProps({
@@ -33,6 +37,9 @@
 
     //Send request
     const handleConfirm = () => {
+        //Update Playlist Store
+        playlistsStore.activePlaylist.private = false;
+        
         //Close Modal
         emit('onCloseModal')
 
@@ -47,6 +54,9 @@
                 }
             })
             .catch(function (error) {
+                //Revert
+                playlistsStore.activePlaylist.private = true;
+
                 if (error.response) {
                     window.shownotification({
                         icon: 'error',

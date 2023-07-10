@@ -151,9 +151,10 @@
 
     onBeforeMount(() => {
         playlistsStore.setActivePlaylist(props.playlist)
+        //initial Values
         state.isLiked = props.playlist.is_liked_by_current_user;
         state.isPinned = props.playlist.pinned ? true : false;
-        state.isPrivate = props.playlist.private;
+        state.isPrivate = playlistsStore.activePlaylist.private;
         
         //Get Duration Hours and Seconds
         formatDuration(playlistsStore.activePlaylist.duration)
@@ -162,7 +163,9 @@
     onUpdated(()=>{
         state.isPinned = props.playlist.pinned ? true : false;
         //Recalculate Duration
-        formatDuration(playlistsStore.activePlaylist.duration)
+        formatDuration(playlistsStore.activePlaylist.duration);
+        //Update isPrivate 
+        state.isPrivate = playlistsStore.activePlaylist.private;
     })
 </script>
 <template>
