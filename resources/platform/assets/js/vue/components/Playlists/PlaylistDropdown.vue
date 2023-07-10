@@ -39,7 +39,7 @@ const props = defineProps({
         default: false,
     },
     isPrivate: {
-        type: Number
+        type: [Number,Boolean]
     },
     type: {
         type: String,
@@ -90,6 +90,9 @@ const sharePlaylist = () => {
 
 const privateToggle = () => {
     state.isPrivate = !state.isPrivate;
+    // if(props.inPlaylistHeader) {
+    //     playlistsStore.activePlaylist.private = !playlistsStore.activePlaylist.private;
+    // }
     emit('makePublic', state.isPrivate)
     let isPrivate = props.data.private === 1 ? true : false;
     PlaylistService.setToPrivate(props.data.id, isPrivate, token)
@@ -104,6 +107,10 @@ const privateToggle = () => {
         })
         .catch(function (error) {
             if (error.response) {
+                //revert
+                // if(props.inPlaylistHeader) {
+                //     playlistsStore.activePlaylist.private = !playlistsStore.activePlaylist.private;
+                // }
                 //undo private/public change
                 state.isPrivate = !state.isPrivate;
                 window.shownotification({
