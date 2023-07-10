@@ -15,13 +15,13 @@ environments:
             - 'production.singeo.com'
         runtime: docker
         gateway-version: 2
-        memory: 1728
-        cli-memory: 1728
+        memory: 1024
+        cli-memory: 1024
         cli-timeout: 900
         timeout: 120
-        tmp-storage: 2048
-        cli-tmp-storage: 2048
-        queue-tmp-storage: 2048
+        tmp-storage: 1024
+        cli-tmp-storage: 1024
+        queue-tmp-storage: 1024
         queue-concurrency: 30
         cache: musora-production-redis-cache
         build:
