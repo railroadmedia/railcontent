@@ -43,7 +43,7 @@
         'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-shop-summer-sale-bg.jpg',
         'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-summer-sale-logo.svg',
         'title' => 'get lessons, accessories, and merch.',
-        'promoText' => 'SAVE UP TO 81% UNTIL JULY 31ST!',
+        'promoText' => 'SAVE UP TO 81% UNTIL JULY 17TH!',
     ])
 
     @if(Session::has('addedProducts'))
@@ -325,7 +325,7 @@
 
 @section('layout-scripts')
     @include('_partials.components.countdown',[
-        'countdownDate' => '2023-07-31 23:59:59',
+        'countdownDate' => '2023-07-17 23:59:59',
         'promoVersion' => true
     ])
 @endsection

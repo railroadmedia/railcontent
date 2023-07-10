@@ -43,7 +43,7 @@
         'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-shop-summer-sale-bg.jpg',
         'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-summer-sale-logo.svg',
         'title' => 'get lessons, accessories, and merch.',
-        'promoText' => 'SAVE UP TO 68% UNTIL JULY 31ST!',
+        'promoText' => 'SAVE UP TO 68% UNTIL JULY 17TH!',
     ])
 
     @if(Session::has('addedProducts'))
@@ -268,7 +268,7 @@
 
 @section('layout-scripts')
     @include('_partials.components.countdown',[
-        'countdownDate' => '2023-07-31 23:59:59',
+        'countdownDate' => '2023-07-17 23:59:59',
         'promoVersion' => true
     ])
 @endsection

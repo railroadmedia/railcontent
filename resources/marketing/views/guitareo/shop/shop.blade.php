@@ -101,7 +101,7 @@
         'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-shop-summer-sale-bg.jpg',
         'logo' => 'TODO',
         'title' => 'get lessons, accessories, and merch.',
-        'promoText' => 'SAVE UP TO TODO% UNTIL JULY 31ST!',
+        'promoText' => 'SAVE UP TO TODO% UNTIL JULY 17TH!',
     ])
 
     @if(Session::has('addedProducts'))
@@ -222,7 +222,7 @@
 
 @section('layout-scripts')
     @include('_partials.components.countdown',[
-        'countdownDate' => '2023-07-31 23:59:59',
+        'countdownDate' => '2023-07-17 23:59:59',
         'promoVersion' => true
     ])
 @endsection
