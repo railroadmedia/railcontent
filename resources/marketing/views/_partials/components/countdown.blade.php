@@ -40,12 +40,15 @@
                 this.second = this.formatTime(this.timeLeft % 60);
 
                 @if(empty($promoVersion))
-                if ( !this.smallScreen ){
-                    this.dayText = formatText(this.day, ' days');
-                    this.hourText = formatText(this.hour, ' hours');
-                    this.minuteText = formatText(this.minute, ' minutes');
-                    this.secondText = formatText(this.second, ' seconds');
-                }
+                    if ( !this.smallScreen ){
+                        this.dayText = formatText(this.day, ' days');
+                        this.hourText = formatText(this.hour, ' hours');
+                        this.minuteText = formatText(this.minute, ' minutes');
+                        this.secondText = formatText(this.second, ' seconds');
+                    }
+                @else
+                    this.dayText = formatText(this.day, 'DAYS');
+                    this.hourText = formatText(this.hour, 'HRS');
                 @endif
 
                 if(this.timeLeft > 0){
@@ -64,6 +67,9 @@
                                 this.minuteText = formatText(this.minute, ' minutes');
                                 this.secondText = formatText(this.second, ' seconds');
                             }
+                        @else
+                            this.dayText = formatText(this.day, 'DAYS');
+                            this.hourText = formatText(this.hour, 'HRS');
                         @endif
 
                     }, 1000);
