@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\Platform\AdminController;
 use Illuminate\Support\Facades\Route;
-
+// what is the deal with this???
 Route::domain('{musoraDomain}')
     ->prefix('admin')
     ->middleware(['web_authenticated', 'web_authenticated_admin'])

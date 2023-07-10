@@ -69,9 +69,10 @@ Route::group(
 Route::group(
     [
         'prefix' => 'musora-center',
-        'middleware' => ['web_or_api_authenticated']
+        'middleware' => ['web_or_api_authenticated', 'musora-center-admin']
     ],
     function () {
+
         Route::get(
             '/',
             [

@@ -44,9 +44,9 @@ return [
     ],
 
     // routes
-    'autoload_all_routes' => false,
-    'route_middleware_public_groups' => ['web'],
-    'route_middleware_logged_in_groups' => ['web_authed'],
+    'autoload_all_routes' => true,
+    'route_middleware_public_groups' => ['web_or_api_public'],
+    'route_middleware_logged_in_groups' => ['web_or_api_authenticated'],
     'route_prefix' => 'usora',
 
     //middleware for API requests

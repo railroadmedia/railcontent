@@ -287,7 +287,9 @@ return [
         \App\Modules\Brand\Middleware\SetLastUsedBrand::class,
         \App\Http\Middleware\SetContentPermissions::class,
     ],
-    'administrator_routes_middleware' => ['auth.admin'],
+
+    'administrator_routes_middleware' => [],
+
 
     //middleware for API requests
     'api_middleware' => [
