@@ -106,7 +106,7 @@
     <div class="white-box">
         @include('_partials.layout.holiday.bundle-cards')
 
-        <section class="bundles">
+        <section class="bundles" x-show="filter === 'all'">
             <div class="container mx-auto">
                 <div class="float-left w-full px-2 md:px-3 card-wrap">
                     <div>
@@ -324,6 +324,7 @@
 @endsection
 
 @section('layout-scripts')
+    @parent
     @include('_partials.components.countdown',[
         'countdownDate' => '2023-07-17 23:59:59',
         'promoVersion' => true

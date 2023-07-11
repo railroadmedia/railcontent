@@ -172,6 +172,7 @@
 @endsection
 
 @section('layout-scripts')
+    @parent
     @include('_partials.components.countdown',[
         'countdownDate' => '2023-07-17 23:59:59',
         'promoVersion' => true
