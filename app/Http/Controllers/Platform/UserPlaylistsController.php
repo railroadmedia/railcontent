@@ -223,6 +223,8 @@ class UserPlaylistsController extends BaseController
                 $playlistItems[$index]['parent_title'] = $item['parent_title'] ?? '';
                 $playlistItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
                 $playlistItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
+                $playlistItems[$index]['playlist_item_name'] = $item['playlist_item_name'] ?? false;
+                $playlistItems[$index]['content_name'] = $item['content_name'] ?? false;
             }
         }
 
@@ -339,6 +341,8 @@ class UserPlaylistsController extends BaseController
             $otherItems[$index]['parent_title'] = $item['parent_title'] ?? '';
             $otherItems[$index]['is_high_routine'] = $item['is_high_routine'] ?? false;
             $otherItems[$index]['is_low_routine'] = $item['is_low_routine'] ?? false;
+            $otherItems[$index]['content_name'] = $item['content_name'] ?? false;
+            $otherItems[$index]['playlist_item_name'] = $item['playlist_item_name'] ?? false;
         }
 
         if (!empty($content['parent_content_data'] ?? [])) {
