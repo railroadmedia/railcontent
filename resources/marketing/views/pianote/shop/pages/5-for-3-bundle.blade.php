@@ -51,7 +51,7 @@
         <br>
         <h4><strong><span class="opacity-60">Was <s>$2207</s></span>&nbsp; <span class="text-promo">Now $720 (Save 68%)</span></strong></h4>
         <br>
-        <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96" href="/ecommerce/add-to-cart?locked=true&product-array=pianote_access_5-years:1,classical-piano-pieces:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,new-piano-players-start-here:1,easy-chords:1,piano-technique-made-easy:1,the-power-of-chords:1,worship-piano:1,piano-riffs-and-fills:1,destupefy-your-left-hand:1,faster-fingers:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1">
+        <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96 mb-2" href="/ecommerce/add-to-cart?locked=true&product-array=pianote_access_5-years:1,classical-piano-pieces:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,new-piano-players-start-here:1,easy-chords:1,piano-technique-made-easy:1,the-power-of-chords:1,worship-piano:1,piano-riffs-and-fills:1,destupefy-your-left-hand:1,faster-fingers:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1">
             get started &raquo;
         </a>
         <br>
