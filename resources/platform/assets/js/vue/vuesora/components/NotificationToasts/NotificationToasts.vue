@@ -126,6 +126,8 @@ export default {
         this.notificationIcon = 'fa-exclamation-circle tw-text-[#facb15]';
       } else if (val === 'check') {
         this.notificationIcon = 'fa-check-circle tw-text-[#22c55d]';
+      } else if (val === 'edit') {
+        this.notificationIcon = 'fa-edit dark:tw-text-black tw-text-white';
       } else if (val === 'xp') {
         this.notificationIcon = 'fa-child dark:tw-text-black tw-text-white';
       } else {

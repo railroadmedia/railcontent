@@ -6,6 +6,7 @@
     import DeleteModal from './DeleteModal.vue';
     import NoAccess from './NoAccess.vue';
     import UnpinModal from './UnpinModal/UnpinModal.vue';
+    import RenameItem from './RenameItem.vue';
     import ShareModal from './ShareModal.vue';
 
     const emit = defineEmits(['onClosePlaylistsModal']);
@@ -37,6 +38,7 @@
         share: 'tw-max-w-[550px] tw-px-[64px]',
         addItem: 'tw-max-w-[917px] tw-px-4 sm:tw-px-[32px]',
         unpinPlaylists: 'tw-max-w-[917px] tw-px-[32px]',
+        renameItem: 'tw-max-w-[514px] tw-px-[32px]',
         alreadyAddedItem: '',
     };
 </script>
@@ -70,6 +72,12 @@
                       @onCloseModal="() => emit('onClosePlaylistsModal')"
                       :brand="brand"
                       :data="modalProps.data"
+            />
+
+            <RenameItem v-if="modalProps.modalType === 'renameItem'"
+                        @onCloseModal="() => emit('onClosePlaylistsModal')"
+                        :brand="brand"
+                        :content="modalProps.content"
             />
 
             <div v-if="modalProps.modalType === 'startEnd'">
