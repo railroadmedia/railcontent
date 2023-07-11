@@ -34,10 +34,10 @@
                         <p><em>{{ $packAuthor }}</em></p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p><strong class="text-{{ $theme }}">{{ $specialPrice }}</strong></p>
+                        <p><strong class="text-{{ $theme }} font-extrabold">{{ $specialPrice }}</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <p><s>WAS ${{ floatVal($fullPrice) }}</s>
-                            <strong class="text-{{ $theme }}"> NOW
+                            <strong class="text-{{ $theme }} font-extrabold"> NOW
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatVal($price)  }}
                                 @else
@@ -45,7 +45,7 @@
                                 @endif
                             </strong></p>
                     @else
-                        <p><strong class="text-{{ $theme }}">${{  floatVal($price)  }}</strong></p>
+                        <p><strong class="text-{{ $theme }} font-extrabold">${{  floatVal($price)  }}</strong></p>
                     @endif
                 </div>
             </section>
@@ -61,9 +61,9 @@
                         <p class="description leading-normal my-2">{!! $cardDescription  !!}</p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p class="text-promo mb-4"><strong class="font-black">{{  $specialPrice  }}</strong></p>
+                        <p class="text-promo mb-4"><strong class="font-extrabold">{{  $specialPrice  }}</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p class="leading-tight mb-2 price"><s>${{ floatVal($fullPrice) }}</s> <strong class="font-black text-promo">
+                        <p class="leading-tight mb-2 price"><s>${{ floatVal($fullPrice) }}</s> <strong class="font-extrabold text-promo">
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatVal($price)  }}
                                 @else
@@ -71,7 +71,7 @@
                                 @endif
                             </strong></p>
                     @else
-                        <p class="leading-tight mb-2 price"><strong class="font-black text-promo"> ${{  floatVal($price)  }}</strong></p>
+                        <p class="leading-tight mb-2 price"><strong class="font-extrabold text-promo"> ${{  floatVal($price)  }}</strong></p>
                     @endif
                     @if(!empty($includedEdge))
                         <p class="description relative -mt-2 mb-1"><em class="text-red">Or free with {{ ucfirst($theme) }}</em></p>
