@@ -190,12 +190,14 @@ $bonuses = [
         'price' => 149,
         'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
+        'shipping' => true,
     ],
     [
         'name' => 'Drumeo Drumsticks',
         'price' => 12.95,
         'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer',
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
+        'shipping' => true,
     ],
     [
         'name' => 'Hudson lessons',

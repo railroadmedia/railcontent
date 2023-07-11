@@ -172,6 +172,7 @@
             'special_text' => 'NEW',
             'description' => 'You’ll find 20 of the most beautiful pieces ever written. And every piece comes in its original arrangement plus a simplified version.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/classical-piano-pieces.png',
+            'shipping' => true,
         ],
         [
             'name' => 'Chords & Scales Book',
@@ -179,6 +180,7 @@
             'special_text' => '',
             'description' => 'Your encyclopedia of piano chords & scale.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
+            'shipping' => true,
         ],
         [
             'name' => 'Piano Chords Poster',
@@ -186,6 +188,7 @@
             'special_text' => '',
             'description' => 'Hang these piano chords in your practice space.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/poster-chords.jpg',
+            'shipping' => true,
         ],
         [
             'name' => 'Piano Scales Poster',
@@ -193,6 +196,7 @@
             'special_text' => '',
             'description' => 'All the major and minor piano scales in one poster.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/poster-scales.jpg',
+            'shipping' => true,
         ],
         [
             'name' => 'Pianote Practice Planner',
@@ -200,6 +204,7 @@
             'special_text' => '',
             'description' => 'Always know exactly what to practice.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/planner.png',
+            'shipping' => true,
         ],
         [
             'name' => 'New Piano Players Start Here',
