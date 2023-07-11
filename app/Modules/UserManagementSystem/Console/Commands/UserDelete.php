@@ -40,6 +40,11 @@ class UserDelete extends Command
                 'usora_user_fields',
                 'usora_user_firebase_tokens',
                 'mentor_students',
+                'onboarding_answer_history',
+                'onboarding_experience',
+                'onboarding_gears',
+                'onboarding_genres',
+                'onboarding_topics'
             ],
             'author_id' => [
                 'railcontent_versions',
@@ -95,7 +100,7 @@ class UserDelete extends Command
                 'user_profile_data',
                 'user_shipping_addresses',
                 'user_stripe_customer',
-                'user_video_timings',
+                'user_video_timings'
             ],
             'author_id' => [
                 'forum_posts',
