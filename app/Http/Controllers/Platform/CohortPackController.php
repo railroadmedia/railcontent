@@ -78,6 +78,12 @@ class CohortPackController
             $cohort['conversation_thread_id'] ?
                 url()->route('forums.jump-to-thread', ['threadId' => $cohort['conversation_thread_id']]) : '';
 
+        $lists = $cohort->lists;
+        foreach ($lists as $list) {
+            $list->description = preg_replace('/{'.'enrolled'.'}/', $nPackOwners, $list->description);
+        }
+        $cohort->lists = $lists;
+
         return view('content.cohort-template', [
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,

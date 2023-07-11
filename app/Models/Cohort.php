@@ -52,6 +52,11 @@ class Cohort extends Model
         return $this->hasMany(CohortDropdown::class);
     }
 
+    public function lists()
+    {
+        return $this->hasMany(CohortList::class);
+    }
+
 //    protected function slug(): Attribute
 //    {
 //        return Attribute::make(
@@ -101,6 +106,14 @@ class Cohort extends Model
 
             if (gettype($model['icon3_url']) === 'object') {
                 $model['icon3_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['icon3_url']->getClientOriginalName());
+            }
+
+            if (gettype($model['description_trailer_1_thumb_url']) === 'object') {
+                $model['description_trailer_1_thumb_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['description_trailer_1_thumb_url']->getClientOriginalName());
+            }
+
+            if (gettype($model['description_trailer_2_thumb_url']) === 'object') {
+                $model['description_trailer_2_thumb_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['description_trailer_2_thumb_url']->getClientOriginalName());
             }
         });
     }
