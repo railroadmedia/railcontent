@@ -57,6 +57,41 @@
     </header>
 
     <section class="py-20">
+        <div class="max-w-4xl px-1 sm:px-4 container mx-auto z-10 relative text-center">
+            <h2><strong>The 5-Year Advantage</strong></h2>
+            <p class="mt-2 mb-12"><em>You’ll have 5 years of unlimited drum lessons for <br class="inline lg:hidden">the price of 3 years of access to Drumeo ($720 total).</em></p>
+
+            <style>
+                .beg-adv-text p:nth-child(2) {
+                    transform: translate(-50%, 0);
+                    left: 60%;
+                }
+                .beg-adv-text p:nth-child(3) {
+                    transform: translate(-50%, 0);
+                    left: 90%;
+                }
+                @media (min-width:768px) {
+                    .beg-adv-text p:nth-child(3) {
+                        left: 96%;
+                    }
+                }
+                .beg-adv-bar div:nth-child(1) {
+                    width: 60%;
+                }
+            </style>
+            <div class="relative w-full rounded-full mx-auto h-10 beg-adv-text">
+                <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap text-left"><strong>TODAY</strong><br>START LEARNING</p>
+                <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap"><strong>YEAR 3</strong><br>DRUMMER</p>
+                <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap text-right"><strong>YEAR 5</strong><br>ROCKSTAR</p>
+            </div>
+            <div class="relative w-full rounded-full h-16 mx-auto flex space-between items-center beg-adv-bar" style="background-color: #0F3F82;">
+                <div class="h-full flex items-center flex-wrap relative rounded-l-full" style="background:linear-gradient(to right, #0F3C81, #04BBDB);">
+                    <h4 class="uppercase leading-none w-full"><img class="h-7 sm:h-8" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png" alt="Drumeo logo"></h4>
+                    <h1 class="absolute right-0 text-white rounded-full px-6 py-4 -mr-7 mt-1" style="background-color:#0F3C81;">$</h1>
+                </div>
+                <p class="uppercase leading-none my-0 mx-auto text-white"><strong>2 YEARS</strong><br class="sm:hidden"> FOR FREE</p>
+            </div>
+        </div>
         <div class="max-w-4xl mx-auto pack-details px-4 lg:px-0">
             <hr class="my-8 border-[#C4C4C4] border" />
             <p class="mb-4">

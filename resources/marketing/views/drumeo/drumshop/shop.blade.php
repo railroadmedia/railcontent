@@ -118,7 +118,7 @@
                                         <span class="opacity-60">Was <s>$1200</s></span>&nbsp; <span class="text-promo">Now $720</span></strong></h4><br>
                                 <div class="join white smaller mt-3 w-full bg-[#053468] text-white p-[10px] md:max-w-md w-full text-[15px] lg:text-[17px]">See The Deal &raquo;</div><br>
                             </div>
-                            <p class="absolute z-20 top-0 left-0 text-white rounded-br-xl bg-promo uppercase py-1.5 px-2.5 leading-none text-xs font-roboto"><i class="fas fa-star"></i> <strong>SAVE 20%</strong></p>
+                            <p class="absolute z-20 top-0 left-0 text-black rounded-br-xl bg-promo uppercase py-1.5 px-2.5 leading-none text-xs font-roboto"><i class="fas fa-star"></i> <strong>SAVE 20%</strong></p>
                             <div class="hidden sm:block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-shop.jpg);"></div>
                             <div class="block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-shop-m-4.jpg);"></div>
                         </a>

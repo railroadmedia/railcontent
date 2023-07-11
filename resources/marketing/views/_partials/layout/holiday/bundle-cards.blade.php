@@ -11,7 +11,7 @@
                             <p>
                                 <strong>{!! $bundle['title'] !!}</strong><br>
                                 <em>{!!$bundle['desc'] !!}<br></em>
-                                <strong class="price">@if(!empty($bundle['discountedPrice']))<span class="opacity-30">Was <s>${{ $bundle['price'] }}</s></span>&nbsp;@endif <span style="background:{{$bundle['priceColor']}};-webkit-background-clip: text; -webkit-text-fill-color: transparent;">$@if(!empty($bundle['discountedPrice']))Now {{$bundle['discountedPrice']}} @else{{$bundle['price']}} @endif</span></strong>
+                                <strong class="price">@if(!empty($bundle['discountedPrice']))<span class="opacity-30">Was <s>${{ $bundle['price'] }}</s></span>&nbsp;@endif <span style="background:{{$bundle['priceColor']}};-webkit-background-clip: text; -webkit-text-fill-color: transparent;">@if(!empty($bundle['discountedPrice']))Now ${{$bundle['discountedPrice']}} @else ${{$bundle['price']}} @endif</span></strong>
                             </p>
                             <span class="join max-w-md" style="background:{{$bundle['buttonColor']}};">See The Deal &raquo;</span>
                         </div>
