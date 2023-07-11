@@ -280,37 +280,6 @@ class Cohort extends Resource
                     return $value;
                 }),
             Text::make('Body image url', 'body_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            Image::make('Body Logo', 'body_logo')
-                ->help('The logo should be 896 x 100px or a comparable aspect ratio.')
-                ->disk('nova_s3')
-                ->prunable()
-                ->hideFromIndex()
-                ->deletable(false)
-                ->disableDownload()
-                ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
-                    }
-
-                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('body_logo')->getClientOriginalName();
-                })
-                ->preview(function($value){
-                    if(empty($value)) return null;
-
-                    return $value;
-                }),
 
             Text::make('First day Trailer URL', 'description_trailer_1')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
             Image::make('Thumb image url - first day trailer', 'description_trailer_1_thumb_url')
@@ -478,6 +447,37 @@ class Cohort extends Resource
             Text::make('Demo Trailer', 'demo_trailer')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
 
             Heading::make('Bottom'),
+            Image::make('Bottom Logo', 'body_logo')
+                ->help('The logo should be 896 x 100px or a comparable aspect ratio.')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('body_logo')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
             Text::make('Bottom Logo', 'body_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted logo link. (Google Drive links will NOT work.)'),
             Markdown::make('Bottom Description','body_bottom_description')->hideFromIndex(),
 
