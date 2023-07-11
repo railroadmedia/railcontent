@@ -49,7 +49,7 @@
             SPOTS AVAILABLE</p>
         <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-bundle.png" alt="bundle image" fetchpriority="high" />
         <br>
-        <h4><strong><s class="opacity-60">$1716</s> $720</strong> (SAVE 58%)</h4>
+        <h4><strong><s class="opacity-60">$1716</s> $720</strong></h4>
         <br>
         <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96" href="/choose-plan">
             get started &raquo;
@@ -57,6 +57,41 @@
     </header>
 
     <section class="py-20">
+        <div class="max-w-4xl px-1 sm:px-4 container mx-auto z-10 relative text-center">
+            <h2><strong>The 5-Year Advantage</strong></h2>
+            <p class="mt-2 mb-12"><em>You’ll have 5 years of unlimited piano lessons for  <br class="inline lg:hidden">the price of 3 years of access to Pianote ($720 total).</em></p>
+
+            <style>
+                .beg-adv-text p:nth-child(2) {
+                    transform: translate(-50%, 0);
+                    left: 60%;
+                }
+                .beg-adv-text p:nth-child(3) {
+                    transform: translate(-50%, 0);
+                    left: 90%;
+                }
+                @media (min-width:768px) {
+                    .beg-adv-text p:nth-child(3) {
+                        left: 96%;
+                    }
+                }
+                .beg-adv-bar div:nth-child(1) {
+                    width: 60%;
+                }
+            </style>
+            <div class="relative w-full rounded-full mx-auto h-10 beg-adv-text">
+                <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap text-left"><strong>TODAY</strong><br>START LEARNING</p>
+                <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap"><strong>YEAR 3</strong><br>PIANO PLAYER</p>
+                <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap text-right"><strong>YEAR 5</strong><br>PIANO SENSATION</p>
+            </div>
+            <div class="relative w-full rounded-full h-16 mx-auto flex space-between items-center beg-adv-bar" style="background-color: #61043A;">
+                <div class="h-full flex items-center flex-wrap relative rounded-l-full" style="background:linear-gradient(to right, #61043A, #F61A30);">
+                    <h4 class="uppercase leading-none w-full"><img class="h-7 sm:h-8" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png" alt="Drumeo logo"></h4>
+                    <h1 class="absolute right-0 text-white rounded-full px-6 py-4 -mr-7 mt-1" style="background-color:#61043A;">$</h1>
+                </div>
+                <p class="uppercase leading-none my-0 mx-auto text-white"><strong>2 YEARS</strong><br class="sm:hidden"> FOR FREE</p>
+            </div>
+        </div>
         <div class="max-w-4xl mx-auto pack-details px-4 lg:px-0">
             <hr class="my-8 border-[#C4C4C4] border" />
             <p class="mb-4">
@@ -76,8 +111,8 @@
             @include('pianote.shop.pages.5-for-3-bundle-order-section', [
                 'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-5-year-double-card.jpg',
                 'availableSpots' => $products['drumeo-eardrums']->getStockAvailability(),
-                'saveText' => '<h4><strong><s class="opacity-60">$1716</s> $720</strong> (SAVE 58%)</h4>',
-                'buttonLink' => '/ecommerce/add-to-cart?locked=true&product-array=pianote_access_5-years:1,classical-book:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,new-piano-players-start-here:1,easy-chords:1,piano-technique-made-easy:1,the-power-of-chords:1,worship-piano:1,piano-riffs-and-fills:1,destupefy-your-left-hand:1,faster-fingers:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1',
+                'saveText' => '<h4><strong><s class="opacity-60">$1716</s> $720</strong></h4>',
+                'buttonLink' => '/ecommerce/add-to-cart?locked=true&product-array=pianote_access_5-years:1,classical-piano-pieces:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,new-piano-players-start-here:1,easy-chords:1,piano-technique-made-easy:1,the-power-of-chords:1,worship-piano:1,piano-riffs-and-fills:1,destupefy-your-left-hand:1,faster-fingers:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1',
             ])
 
         </div>

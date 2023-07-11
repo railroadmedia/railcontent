@@ -167,11 +167,11 @@
 
     $bonuses = [
         [
-            'name' => 'Classical Book',
+            'name' => 'The Most Beautiful Classical Piano Pieces',
             'price' => 49,
             'special_text' => 'NEW',
-            'description' => '92 pages full of beautiful pieces by famous classical composers that you can actually play!',
-            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/classical_piano_book.png',
+            'description' => 'You’ll find 20 of the most beautiful pieces ever written. And every piece comes in its original arrangement plus a simplified version.',
+            'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/classical-piano-pieces.png',
         ],
         [
             'name' => 'Chords & Scales Book',
