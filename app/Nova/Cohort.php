@@ -480,7 +480,7 @@ class Cohort extends Resource
             Text::make('Demo Trailer', 'demo_trailer')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
 
             Heading::make('Body Description list'),
-            Flexible::make('Items')
+            Flexible::make('Items')->help('You can use tags as {enrolled} that will be replaced with number of enrolled students   e.g: "Join {enrolled} players who have already registered."')
                 ->addLayout(CohortListLayout::class)
                 ->preset(CohortListPreset::class),
 
