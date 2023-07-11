@@ -21934,6 +21934,15 @@ a:visited{
 .tw-mt-\[40px\]{
   margin-top: 40px !important;
 }
+.tw-ml-\[15px\]{
+  margin-left: 15px !important;
+}
+.tw-mt-\[16px\]{
+  margin-top: 16px !important;
+}
+.tw-ml-\[8px\]{
+  margin-left: 8px !important;
+}
 .tw-mb-\[16px\]{
   margin-bottom: 16px !important;
 }
@@ -22257,6 +22266,9 @@ a:visited{
 }
 .tw-h-\[93px\]{
   height: 93px !important;
+}
+.tw-h-\[80px\]{
+  height: 80px !important;
 }
 .tw-h-2{
   height: 0.5rem !important;
@@ -22658,6 +22670,9 @@ a:visited{
 .tw-min-w-\[167px\]{
   min-width: 167px !important;
 }
+.tw-min-w-\[145px\]{
+  min-width: 145px !important;
+}
 .tw-min-w-\[40px\]{
   min-width: 40px !important;
 }
@@ -22771,6 +22786,9 @@ a:visited{
 }
 .tw-max-w-\[917px\]{
   max-width: 917px !important;
+}
+.tw-max-w-\[514px\]{
+  max-width: 514px !important;
 }
 .tw-max-w-\[120px\]{
   max-width: 120px !important;
