@@ -47,13 +47,22 @@
             {{ $products['drumeo-eardrums']->getStockAvailability() }}
             @endif
             SPOTS AVAILABLE</h6>
-        <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-bundle.png" alt="bundle image" fetchpriority="high" />
+        <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-bundle.png" alt="bundle image" fetchpriority="high" />
         <br>
-        <h4><strong><s class="opacity-60">$2270.61</s> $720</strong></h4>
+        <h4><strong><span class="opacity-60">Was <s>$2736</s></span>&nbsp; <span class="text-promo">Now $720 (Save 74%)</span></strong></h4>
         <br>
-        <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96" href="#order-section">
+        <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96" href="/ecommerce/add-to-cart?locked=true&product-array=drumeo_access_5-years:1,drumeo-eardrums:1,Drumeo-VaterSticks:6,SD-DIGI:1,rock-drumming-masterclass-pack:1,drum-technique-made-easy-pack:1,independence-made-easy-pack:1,learn-songs-faster-pack:1,electrify-your-drumming:1,MAM-DIGI:1,TLOD-DIGI:1,GHFAL-DIGI:1,HGAF-DIGI:1,ICM-DIGI:1,CC-DIGI:1,TG-DIGI:1,BTC-DIGI:1,AOADS-DIGI:1">
             get started &raquo;
         </a>
+        <br>
+        <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+            <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>
+            <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+            <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+            <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+            <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+        </a>
+        <p class="inline-block leading-tight text-sm align-middle pl-2 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
     </header>
 
     <section class="py-20">
@@ -112,7 +121,7 @@
             @include('pianote.shop.pages.5-for-3-bundle-order-section', [
                 'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-5-year-double-card.jpg',
                 'availableSpots' => $products['drumeo-eardrums']->getStockAvailability(),
-                'saveText' => '<h4><strong><s class="opacity-60">$2270.61</s> $720</strong></h4>',
+                'saveText' => '<h4><strong><span class="opacity-60">Was <s>$2736</s></span>&nbsp; <span class="text-promo">Now $720 (Save 74%)</span></strong></h4>',
                 'buttonLink' => '/ecommerce/add-to-cart?locked=true&product-array=drumeo_access_5-years:1,drumeo-eardrums:1,Drumeo-VaterSticks:6,SD-DIGI:1,rock-drumming-masterclass-pack:1,drum-technique-made-easy-pack:1,independence-made-easy-pack:1,learn-songs-faster-pack:1,electrify-your-drumming:1,MAM-DIGI:1,TLOD-DIGI:1,GHFAL-DIGI:1,HGAF-DIGI:1,ICM-DIGI:1,CC-DIGI:1,TG-DIGI:1,BTC-DIGI:1,AOADS-DIGI:1',
             ])
 

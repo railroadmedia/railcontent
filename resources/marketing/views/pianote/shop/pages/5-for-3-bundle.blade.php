@@ -47,13 +47,22 @@
                 {{ $products['drumeo-eardrums']->getStockAvailability() }}
             @endif
             SPOTS AVAILABLE</p>
-        <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-bundle.png" alt="bundle image" fetchpriority="high" />
+        <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-bundle.png" alt="bundle image" fetchpriority="high" />
         <br>
-        <h4><strong><s class="opacity-60">$1716</s> $720</strong></h4>
+        <h4><strong><span class="opacity-60">Was <s>$2207</s></span>&nbsp; <span class="text-promo">Now $720 (Save 68%)</span></strong></h4>
         <br>
-        <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96" href="/choose-plan">
+        <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96" href="/ecommerce/add-to-cart?locked=true&product-array=pianote_access_5-years:1,classical-piano-pieces:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,new-piano-players-start-here:1,easy-chords:1,piano-technique-made-easy:1,the-power-of-chords:1,worship-piano:1,piano-riffs-and-fills:1,destupefy-your-left-hand:1,faster-fingers:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1">
             get started &raquo;
         </a>
+        <br>
+        <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+            <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>
+            <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+            <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+            <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+            <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+        </a>
+        <p class="inline-block leading-tight text-sm align-middle pl-2 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
     </header>
 
     <section class="py-20">
@@ -111,7 +120,7 @@
             @include('pianote.shop.pages.5-for-3-bundle-order-section', [
                 'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-5-year-double-card.jpg',
                 'availableSpots' => $products['drumeo-eardrums']->getStockAvailability(),
-                'saveText' => '<h4><strong><s class="opacity-60">$1716</s> $720</strong></h4>',
+                'saveText' => '<h4><strong><span class="opacity-60">Was <s>$2207</s></span>&nbsp; <span class="text-promo">Now $720 (Save 68%)</span></strong></h4>',
                 'buttonLink' => '/ecommerce/add-to-cart?locked=true&product-array=pianote_access_5-years:1,classical-piano-pieces:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,new-piano-players-start-here:1,easy-chords:1,piano-technique-made-easy:1,the-power-of-chords:1,worship-piano:1,piano-riffs-and-fills:1,destupefy-your-left-hand:1,faster-fingers:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1',
             ])
 

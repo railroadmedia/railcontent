@@ -221,6 +221,9 @@
                 'pointOne' => '1000+ popular songs',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Learn anywhere, anytime',
+
+
+
             ])
         @else
             @include('musora.sales.components.header-section', [

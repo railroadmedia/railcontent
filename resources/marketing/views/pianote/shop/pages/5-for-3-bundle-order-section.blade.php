@@ -82,7 +82,16 @@
                 @endforeach
             </div>
             {!! $saveText !!}
-            <a class="join my-4 md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+            <a class="join my-4 bg-[#24CE7C] md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+            <br>
+            <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+                <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>
+                <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+                <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+                <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+                <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+            </a>
+            <p class="inline-block leading-tight text-sm align-middle pl-2 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
             <p class="mb-10"  style="color:#FFD600;">ONLY {{ $availableSpots }} SPOTS AVAILABLE</p>
             <p><b>Still have questions?</b> Call us toll-free at 1-800-439-8921 or directly at 1-604-855-7605.</p>
             <div class="inline-block w-full px-3 md:px-4 text-light-navy mt-6">

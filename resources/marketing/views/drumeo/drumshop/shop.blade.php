@@ -42,7 +42,8 @@
     @include('_partials.components.shop.promo-top-banner',[
         'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-shop-summer-sale-bg.jpg',
         'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-summer-sale-logo.svg',
-        'title' => 'get lessons, accessories, and merch.',
+        'logoStyles' => '-mt-16 ml-10 sm:ml-24 lg:ml-32',
+        'title' => 'GREAT DEALS ON LESSONS, ACCESSORIES AND MORE!',
         'promoText' => 'SAVE UP TO 81% UNTIL JULY 17TH!',
     ])
 
@@ -113,13 +114,14 @@
                         <a href="/drumshop/5-for-3-bundle/" class="flex flex-row text-white rounded-xl mx-auto mb-5 overflow-hidden relative w-full sm:text-left px-3 md:px-5 lg:px-[13%] pt-40 pb-5 sm:py-7 lg:py-8">
                             <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                                 <img class="h-20 sm:h-24 md:h-28 lg:h-32" src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-logo-stacked.png"><br>
-                                <p class="leading-tight my-3 text-[#053468] text-xs italic">A 5-Year Membership for the price of 3, and more!</p>
+                                <p class="leading-tight my-3 text-xs italic">A 5-Year Membership for the price of 3, and more!</p>
                                 <h4 class="inline-block leading-none"><strong>
-                                        <span class="opacity-60">Was <s>$1200</s></span>&nbsp; <span class="text-promo">Now $720</span></strong></h4><br>
-                                <div class="join white smaller mt-3 w-full bg-[#053468] text-white p-[10px] md:max-w-md w-full text-[15px] lg:text-[17px]">See The Deal &raquo;</div><br>
+                                        <span class="opacity-60">Was <s>$2736</s></span>&nbsp; <span class="text-promo">Now $720</span></strong></h4><br>
+                                <div class="join white smaller mt-3 w-full bg-[#24CE7C] text-white p-[10px] md:max-w-md w-full text-[15px] lg:text-[17px]">See The Deal &raquo;</div><br>
                             </div>
                             <p class="absolute z-20 top-0 left-0 text-black rounded-br-xl bg-promo uppercase py-1.5 px-2.5 leading-none text-xs font-roboto"><i class="fas fa-star"></i> <strong>SAVE 20%</strong></p>
-                            <div class="hidden sm:block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-shop.jpg);"></div>
+                            <div class="hidden lg:block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-shop-1.jpg);"></div>
+                            <div class="hidden sm:block lg:hidden absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-shop.jpg);"></div>
                             <div class="block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-shop-m-4.jpg);"></div>
                         </a>
                     </div>
