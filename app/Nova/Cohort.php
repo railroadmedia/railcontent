@@ -311,8 +311,6 @@ class Cohort extends Resource
 
                     return $value;
                 }),
-            Text::make('Body Logo', 'body_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted logo link. (Google Drive links will NOT work.)'),
-            Markdown::make('Body Bottom Description','body_bottom_description')->hideFromIndex(),
 
             Text::make('First day Trailer URL', 'description_trailer_1')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
             Image::make('Thumb image url - first day trailer', 'description_trailer_1_thumb_url')
@@ -479,7 +477,10 @@ class Cohort extends Resource
             Text::make('Demo Mobile Center Image', 'demo_mobile_center_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
             Text::make('Demo Trailer', 'demo_trailer')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
 
-            Heading::make('Body Description list'),
+            Heading::make('Bottom'),
+            Text::make('Bottom Logo', 'body_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted logo link. (Google Drive links will NOT work.)'),
+            Markdown::make('Bottom Description','body_bottom_description')->hideFromIndex(),
+
             Flexible::make('Items')->help('You can use tags as {enrolled} that will be replaced with number of enrolled students   e.g: "Join {enrolled} players who have already registered."')
                 ->addLayout(CohortListLayout::class)
                 ->preset(CohortListPreset::class),
@@ -489,10 +490,6 @@ class Cohort extends Resource
             Flexible::make('Dropdowns')
                 ->addLayout(CohortDropdownLayout::class)
                 ->preset(CohortDropdownPreset::class),
-
-            Heading::make('Bottom'),
-            Text::make('Title','bottom_title')->hideFromIndex(),
-            Text::make('Description','bottom_description')->hideFromIndex(),
 
             DateTime::make(__('Enrollment Start Time'), 'enrollment_start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             DateTime::make(__('Enrollment End Time'), 'enrollment_end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
