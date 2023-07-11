@@ -41,7 +41,7 @@
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatVal($price)  }}
                                 @else
-                                    ${{  floatVal(number_format($price, 2))  }}
+                                    ${{  number_format($price, 2)  }}
                                 @endif
                             </strong></p>
                     @else
