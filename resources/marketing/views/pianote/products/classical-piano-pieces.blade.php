@@ -67,44 +67,37 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    <header class="text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20 bg-cover bg-top" style="background:url(https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image.jpg);">
-        <div class="container max-w-5xl mx-auto">
+    <header class="text-white px-5 sm:px-6 py-16 sm:py-20 lg:py-36 bg-cover bg-top" style="background:#f7fbfe url(https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image.jpg);">
+        <div class="container max-w-3xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top" style="padding-bottom: 75%;">
-                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image-m.jpg" alt="header image" fetchpriority="high" />
+                <div class="w-full sm:w-5/12 text-center lg:text-left">
+                    <div class="mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top" style="padding-bottom: 75%;">
+                        <img class="absolute inset-0" alt="header image" fetchpriority="high"
+                            src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image-m.jpg" />
                     </div>
-                    <img class="h-14 sm:h-18 lg:h-20 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light.svg" alt="logo" fetchpriority="high">
-
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Timeless classics</strong> you’ll want to play over and over again. Presented in original and simplified arrangements.</h6>
-
-
-                    <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
-                        <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                                <a href="#final" class="join medium w-full anchor-slide">GET YOUR COPY &raquo;</a>
-                        </div>
-                    </div>
+                    <img class="h-16 sm:h-24 lg:h-32" alt="logo" fetchpriority="high"
+                        src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light.svg">
+                    <p class="leading-normal my-4 sm:my-6"><strong>Timeless classics</strong> you’ll want to play over and over again. Presented in original and simplified arrangements.</p>
+                    <a href="#final" class="join medium w-full anchor-slide">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>
     </header>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 bg-cover bg-top" style="background:url(https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/list-section-bg.png);">
-        <div class="container max-w-4xl mx-auto">
-            <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/composers-text.svg">
-            <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/composers-text-m.svg">
+        <div class="container max-w-6xl mx-auto">
+            <img class="hidden sm:inline-block h-9 lg:h-11" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/composers-text.svg">
+            <img class="sm:hidden h-7" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/composers-text-m.svg">
 
-            <h2 class="text-center"><strong>Original & Simplified <br class="inline sm:hidden"> Arrangments of Every Piece</strong></h2>
-            <h5 class="text-center text-pianote my-2 sm:my-3"><em>Because these pieces should<br class="inline sm:hidden">not be reserved for the pros.</em></h5>
-            <h6 class="leading-normal mb-5 sm:mb-7">When you think of classical piano, you think of iconic pieces from the greats.
+            <p class="leading-normal my-3 sm:my-5 mx-auto max-w-3xl">When you think of classical piano, you think of iconic pieces from the greats.
                 <br><br>
                 So when deciding which works should adorn these pages, we asked ourselves one simple question…
                 <br><br>
                 <strong class="text-pianote">Is it beautiful?</strong>
                 <br><br>
-                Those are the pieces you’ll find here. This book is a carefully curated collection of the most beautiful classical piano pieces ever written. And even though some of them are quite advanced, we believe that playing them shouldn’t be reserved for the pros.</h6>
+                Those are the pieces you’ll find here. This book is a carefully curated collection of the most beautiful classical piano pieces ever written. And even though some of them are quite advanced, we believe that playing them shouldn’t be reserved for the pros.</p>
 
-            <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/composers-list.png">
-            <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/composers-list-m.png">
+            <img class="hidden sm:inline-block h-64 lg:h-80" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/composers-list.png">
+            <img class="sm:hidden" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/composers-list-m.png">
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#F2EFED;">
@@ -213,7 +206,9 @@
                         </div>
                     </div>
                 </div>
-                <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/order-book.png">
+                <div class="w-full sm:w-5/12 text-center lg:text-left">
+                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/order-book.png">
+                </div>
             </div>
         </div>
     </section>
