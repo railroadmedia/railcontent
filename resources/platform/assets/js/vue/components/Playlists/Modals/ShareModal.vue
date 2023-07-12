@@ -93,7 +93,7 @@
             <!-- Delete Lesson -->
             <button class="tw-mb-2 tw-ml-auto tw-btn-primary tw-bg-[#002039] tw-text-white dark:tw-bg-white dark:tw-text-[#00101D] tw-px-[30px] tw-w-[218px] disabled:tw-pointer-events-none disabled:tw-opacity-70"
                     :disabled="!state.isPublic"
-                    @click.prevent="handleConfirm()"
+                    @click.prevent="handleConfirm"
             >
                 Confirm
             </button>

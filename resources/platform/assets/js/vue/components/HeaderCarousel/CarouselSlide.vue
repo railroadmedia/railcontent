@@ -124,11 +124,11 @@ const secondaryVideoModal = ref(false);
         <!-- Background Image -->
         <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
             <picture>
-                <source media="(min-width:1280px)" :srcset="`${desktopImg}`">
-                <source media="(min-width:768px)" :srcset="`${tabletImg}`">
+                <source media="(min-width:1280px)" :srcset="`https://www.musora.com/musora-cdn/image/width=2000,quality=85/${desktopImg}`">
+                <source media="(min-width:768px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1500,quality=85/${tabletImg}`">
                 <img
                     class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-z-50"
-                    :src="`${mobileImg}`"
+                    :src="`https://www.musora.com/musora-cdn/image/width=700,quality=85/${mobileImg}`"
                     alt="banner background image"
                 />
             </picture>
@@ -150,7 +150,7 @@ const secondaryVideoModal = ref(false);
             {{ title }}
           </h2>
             <!-- Logo -->
-            <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
+            <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto" :src="`https://www.musora.com/musora-cdn/image/width=800,quality=85/${logo}`" alt="pack logo" />
           <p :class="`tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg tw-max-w-[520px] ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
           <!-- CTA -->
             <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
