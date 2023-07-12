@@ -198,7 +198,7 @@
         [
             'name' => 'Pianote Practice Planner',
             'price' => 39,
-            'description' => 'Always know exactly what to practice.',
+            'description' => 'Always know exactly what to practice with the Pianote Practice Planner.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/planner.png',
             'shipping' => true,
         ],

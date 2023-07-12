@@ -43,7 +43,7 @@
         'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-shop-summer-sale-bg.jpg',
         'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-summer-sale-logo.svg',
         'logoStyles' => 'mb-2 md:mb-4 ml-2 sm:ml-6 lg:ml-10',
-        'title' => 'GREAT DEALS ON LESSONS, ACCESSORIES AND MORE!',
+        'title' => 'GREAT DEALS ON LESSONS,<br class="sm:hidden"> ACCESSORIES AND MORE!',
         'promoText' => 'SAVE UP TO 68% UNTIL JULY 17TH!',
     ])
 
@@ -112,7 +112,7 @@
                 @include('musora.shop._shop-card', [
                      "itemURL" => "/",
                      "sku" => null,
-                     "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/header.jpg",
+                     "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg",
                      "packLogo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',
                      "title" => "Pianote Membership",
                      "packAuthor" => "Lisa Witt",

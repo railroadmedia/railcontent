@@ -19,7 +19,7 @@
             'title' => 'Pianote 5-For-3 Bundle',
             'desc' => 'A 5-Year Membership for the price of 3, and more!',
             'priceColor' => '#63053A',
-            'price' => '2207',
+            'price' => '1726',
             'discountedPrice' => '720',
             'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-5-for-3-shop.jpg',
             'buttonColor' => '#63053A',
