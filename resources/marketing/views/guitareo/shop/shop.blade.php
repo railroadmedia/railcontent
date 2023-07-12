@@ -101,7 +101,7 @@
         'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-shop-summer-sale-bg.jpg',
         'logo' => 'TODO',
         'logoStyles' => 'TODO',
-        'title' => 'GREAT DEALS ON LESSONS,<br class="sm:hidden"> ACCESSORIES AND MORE!',
+        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
         'promoText' => 'SAVE UP TO TODO% UNTIL JULY 17TH!',
     ])
 
