@@ -76,15 +76,13 @@ class ContentJsonController extends Controller
 
         if ($request->has('only_from_my_list') && ($request->get('only_from_my_list') == "true")) {
             $myList =
-                \Arr::first(
                     $this->userPlaylistsService->getUserPlaylist(
                         user()->id,
-                        'primary-playlist',
+                        'user-playlist',
                         config('railcontent.brand')
-                    )
-                );
-            $myListId = ($myList) ? [$myList['id']] : [];
-            ContentRepository::$includedInPlaylistsIds = $myListId;
+                    );
+            $myListIds = \Arr::pluck($myList, 'id');
+            ContentRepository::$includedInPlaylistsIds = $myListIds;
         }
 
         $required_fields = $request->get('required_fields', []);
