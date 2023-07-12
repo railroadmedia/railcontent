@@ -874,6 +874,10 @@
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('private');
             });
+
+            @if(!empty($errors) && $errors->any())
+                $('#waitlistModal').foundation('open');
+            @endif
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
