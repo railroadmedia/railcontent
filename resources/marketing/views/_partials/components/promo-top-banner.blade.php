@@ -7,7 +7,7 @@
     <div class="container mx-auto relative z-10">
         <div>
             <img class="sm:h-32 md:h-44 lg:h-48 -mt-10 sm:-mt-16 {{ $logoStyles }}" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/{{ $logo }}" alt="drumeo summer sale logo" fetchpriority="high">
-            <p class="uppercase text-white">GREAT DEALS ON LESSONS, ACCESSORIES AND MORE!</p>
+            <p class="uppercase text-white">GREAT DEALS ON LESSONS,<br class="sm:hidden"> ACCESSORIES AND MORE!</p>
             <p class="font-extrabold text-[#FFD600] mb-4 md:mb-6">{{ $promoText }}</p>
             <a href="{{ $theme === 'drumeo' ? '/drumshop' : '/shop' }}" class="join smaller text-black bg-[#FFD600] sm:max-w-xs sm:w-full">SHOP NOW <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i></a>
         </div>

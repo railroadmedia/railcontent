@@ -42,8 +42,8 @@
     @include('_partials.components.shop.promo-top-banner',[
         'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-shop-summer-sale-bg.jpg',
         'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-summer-sale-logo.svg',
-        'logoStyles' => '-mt-16 ml-10 sm:ml-24 lg:ml-32',
-        'title' => 'GREAT DEALS ON LESSONS, ACCESSORIES AND MORE!',
+        'logoStyles' => 'mb-2 md:mb-4 -mt-16 ml-10 sm:ml-24 lg:ml-32',
+        'title' => 'GREAT DEALS ON LESSONS,<br class="sm:hidden"> ACCESSORIES AND MORE!',
         'promoText' => 'SAVE UP TO 81% UNTIL JULY 17TH!',
     ])
 

@@ -1,13 +1,9 @@
 <li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ !empty($soldOut) ? 'sold-out' : '' }}" data-price="{{ floatVal($price) }}" data-category="{{ $category }}">
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
-            <section class="drum-shop">
+            <section class="drum-shop w-full">
                 <div class="top-image @if(!empty($packLogo)) with-logo @endif">
-                    <picture>
-                        <source media="(min-width: 640px)" srcset="{{ 'https://www.musora.com/musora-cdn/image/width=600,quality=85/'.$thumbnail }}">
-                        <img class="absolute w-full h-full top-0 left-0 object-top object-cover" src="{{ 'https://www.musora.com/musora-cdn/image/width=400,quality=85/'.$thumbnail }}" alt="{{ $title }} thumbnail" @if(!empty($FCP)) fetchpriority="high" @endif />
-                    </picture>
-
+                    <img class="absolute w-full h-full top-0 left-0 object-top object-cover" src="{{ 'https://www.musora.com/musora-cdn/image/width=520,quality=85/'.$thumbnail }}" alt="{{ $title }} thumbnail" @if(!empty($FCP)) fetchpriority="high" @endif />
                     @if (!empty($badgeText))
                         <span class="top-left-badge bg-promo">
                             {!! $badgeText !!}
@@ -18,13 +14,11 @@
                         </span>
                     @endif
                     @if(!empty($packLogo))
-                        <div class="logo">
-                            <picture>
-                                <source media="(min-width: 640px)" srcset="{{ 'https://www.musora.com/musora-cdn/image/width=600,quality=85/'.$packLogo }}">
-                                <img @if($sku === '30-day-drummer-2') class="max-h-full h-24" @endif src="{{ 'https://www.musora.com/musora-cdn/image/width=300,quality=85/'.$packLogo }}" alt="{{ $title }} logo" @if(!empty($FCP)) fetchpriority="high" @endif >
-                            </picture>
-
+                        <div class="z-20 absolute bottom-0 left-0 right-0 px-5 py-4">
+                            <img class="w-auto h-auto" style="max-height:55px;" src="{{ 'https://www.musora.com/musora-cdn/image/width=500,quality=85/'.$packLogo }}"
+                                alt="{{ $title }} logo" @if(!empty($FCP)) fetchpriority="high" @endif >
                         </div>
+                        <div class="inset-0 absolute z-10" style="background:linear-gradient(to bottom, transparent 66%, rgba(0,0,0,0.75));"></div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>
                 </div>
