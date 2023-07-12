@@ -260,7 +260,7 @@ onMounted(() => {
 });
 
 onBeforeUpdate(() => {
-    if (props.isPrivate !== undefined && props.isPrivate !== null && props.isPrivate !== state.isPrivate) {
+    if (props.isPrivate !== undefined && props.isPrivate !== null && props.inPlaylistHeader && props.isPrivate !== state.isPrivate) {
         state.isPrivate = props.isPrivate;
     }
 });
