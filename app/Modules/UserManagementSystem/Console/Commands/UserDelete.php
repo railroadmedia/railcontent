@@ -48,7 +48,8 @@ class UserDelete extends Command
                 'onboarding_genres',
                 'onboarding_topics',
                 'railtracker_content_last_engaged',
-                'railtracker_content_last_engaged_seconds'
+                'railtracker_content_last_engaged_seconds',
+                'customer_io_customers'
             ],
             'author_id' => [
                 'railcontent_versions',
