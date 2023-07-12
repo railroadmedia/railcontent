@@ -34,7 +34,7 @@
         'bg' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-shop-summer-sale-bg.jpg',
         'logo' => 'TODO',
         'logoStyles' => 'TODO',
-        'title' => 'GREAT DEALS ON LESSONS,<br class="sm:hidden"> ACCESSORIES AND MORE!',
+        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
         'promoText' => 'SAVE UP TO TODO% UNTIL JULY 17TH!',
     ])
 
