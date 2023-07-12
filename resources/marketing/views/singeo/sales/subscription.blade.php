@@ -150,7 +150,7 @@
         'bg' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-shop-summer-sale-bg.jpg',
         'logo' => 'TODO',
         'logoStyles' => 'TODO',
-        'promoText' => 'SAVE UP TO TODO% UNTIL JULY 17TH!',
+        'promoText' => 'SAVE UP TO 74% UNTIL JULY 17TH!',
     ])
 
     @php

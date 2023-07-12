@@ -35,7 +35,7 @@
         'logo' => 'TODO',
         'logoStyles' => 'TODO',
         'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
-        'promoText' => 'SAVE UP TO TODO% UNTIL JULY 17TH!',
+        'promoText' => 'SAVE UP TO 74% UNTIL JULY 17TH!',
     ])
 
 
