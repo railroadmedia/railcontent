@@ -95,11 +95,15 @@
 
     //Handle Share
     const sharePlaylist = () => {
-        navigator.clipboard.writeText(props.playlist.url)
-        window.shownotification({
-            icon: 'fa-link',
-            text: `${ props.playlist.name } link copied to clipboard.`
-        })
+        if(state.isPrivate) {
+            window.openplaylistmodal({ modalType: 'share', data: props.playlist });
+        } else {
+            navigator.clipboard.writeText(props.playlist.url)
+            window.shownotification({
+                icon: 'fa-link',
+                text: `${ props.playlist.name } link copied to clipboard.`
+            })
+        }
     };
 
     //Handle Like/Unllike
@@ -147,8 +151,10 @@
 
     onBeforeMount(() => {
         playlistsStore.setActivePlaylist(props.playlist)
+        //initial Values
         state.isLiked = props.playlist.is_liked_by_current_user;
         state.isPinned = props.playlist.pinned ? true : false;
+        // state.isPrivate = playlistsStore.activePlaylist.private;
         state.isPrivate = props.playlist.private;
         
         //Get Duration Hours and Seconds
@@ -158,7 +164,9 @@
     onUpdated(()=>{
         state.isPinned = props.playlist.pinned ? true : false;
         //Recalculate Duration
-        formatDuration(playlistsStore.activePlaylist.duration)
+        formatDuration(playlistsStore.activePlaylist.duration);
+        //Update isPrivate 
+        // state.isPrivate = playlistsStore.activePlaylist.private;
     })
 </script>
 <template>
@@ -244,7 +252,7 @@
         <template v-slot:ctas>
             <div v-if="hasAccess" class="tw-flex tw-items-end tw-justify-center tw ml-0 lg:tw-w-1/2 lg:tw-ml-auto lg:tw-w-4/12 tw-w-full tw-mt-4 lg:tw-justify-end">
                 <!--Share-->
-                <button v-if="!state.isPrivate" class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]"
+                <button class="tw-text-white tw-inline-flex tw-flex-col tw-items-center tw-px-4 tw-w-full tw-max-w-[120px]"
                         @click.prevent="sharePlaylist()"
                 >
                     <musora-icon icon-name="share" class="tw-mb-1" />

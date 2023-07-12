@@ -276,10 +276,13 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                 if (isset($parent) && (!isset(self::$parents[$content['id']]))) {
                     Decorator::$typeDecoratorsEnabled = false;
                     \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
+                    AddedToPrimaryPlaylistDecorator::$skip = true;
                     $initialByPassPermission = ContentRepository::$bypassPermissions;
                     $initialPullFutureContent = ContentRepository::$pullFutureContent;
                     ContentRepository::$bypassPermissions = true;
                     ContentRepository::$pullFutureContent = true;
+                    ResourceDecorator::$decorationMode = \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
+
                     $parentContent[$content['id']] =
                         $this->contentService->getByIds([$parent->id])
                             ->first();
@@ -293,6 +296,8 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                     (self::$parents[$content['id']] instanceof ContentEntity)) {
                     $contentsOfType[$contentIndex]['parent'] = self::$parents[$content['id']] ?? null;
                     $contentsOfType[$contentIndex]['parent_title'] = self::$parents[$content['id']]['title'] ?? null;
+                    $contentsOfType[$contentIndex]['parent'] = $this->resourceDecorator->decorate(new Collection([self::$parents[$content['id']]]))
+                        ->first();
                     if (empty($contentsOfType[$contentIndex]['instructors'])) {
                         InstructorDecorator::$decorationMode =
                             \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;

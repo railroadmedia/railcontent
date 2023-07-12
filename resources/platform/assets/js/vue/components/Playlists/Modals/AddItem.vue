@@ -78,6 +78,11 @@ const instrumentless = computed(() => {
     }[props.brand];
 });
 
+//Content Title
+const title = computed(() => {
+    return props.content.title || props.content.name;
+});
+
 const addRemovePlaylistSelection = (payload) => {
     const index = selectedPlaylists.value.indexOf(String(payload));
     if (index !== -1) {
@@ -144,7 +149,7 @@ const handleSaveItem = () => {
     if (selectedPlaylists.value.length) {
         isLoadingPlaylists.value = true;
         return saveData().then(() => {
-            window.shownotification({ icon: 'check', text: 'The items were added to your selected playlists.' });
+            window.shownotification({ icon: 'check', text: `${title.value} has been successfuly added to your playlist(s).`, duration: 2000 });
         }).catch(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
         }).finally(() => {

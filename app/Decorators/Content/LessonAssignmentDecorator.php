@@ -3,6 +3,7 @@
 namespace App\Decorators\Content;
 
 use App\Maps\ContentTypes;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Support\Collection;
 
 class LessonAssignmentDecorator extends TypeDecoratorBase
@@ -23,6 +24,7 @@ class LessonAssignmentDecorator extends TypeDecoratorBase
         $initialDecorationMode = \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode;
         \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode =
             \Railroad\Railcontent\Decorators\ModeDecoratorBase::DECORATION_MODE_MINIMUM;
+        Decorator::$typeDecoratorsEnabled = false;
 
         $childHierarchyRows = $this->contentHierarchyService->getByParentIds(
             $contentsOfTypes->pluck('id')
@@ -33,7 +35,7 @@ class LessonAssignmentDecorator extends TypeDecoratorBase
         if (empty($childHierarchyRows)) {
             return $contents;
         }
-
+        Decorator::$typeDecoratorsEnabled = true;
         $assignmentContents =
             $this->contentService->getByIds(array_column($childHierarchyRows, 'child_id'))
                 ->keyBy('id');

@@ -19279,32 +19279,6 @@ ul {
   transition: max-height 0.2s ease-in-out;
 }
 
-#toggleInstructorInfo {
-  height: 20px;
-  width: 40px;
-  border-bottom-left-radius: 40px;
-  border-bottom-right-radius: 40px;
-  position: relative;
-  z-index: 2;
-}
-#toggleInstructorInfo.active i {
-  transform: rotate(180deg);
-}
-#toggleInstructorInfo > * {
-  pointer-events: none;
-}
-#toggleInstructorInfo .x-tiny {
-  font-size: 8px;
-  line-height: 8px;
-  display: block;
-}
-#toggleInstructorInfo i {
-  font-size: 8px;
-  will-change: transform;
-  transition: transform 0.2s ease-in-out;
-  display: block;
-}
-
 .no-events {
   pointer-events: none;
 }
@@ -21684,6 +21658,10 @@ a:visited{
   margin-top: 7px !important;
   margin-bottom: 7px !important;
 }
+.tw-mx-\[10px\]{
+  margin-left: 10px !important;
+  margin-right: 10px !important;
+}
 .tw-mx-\[25px\]{
   margin-left: 25px !important;
   margin-right: 25px !important;
@@ -21941,9 +21919,6 @@ a:visited{
 .tw-mr-0{
   margin-right: 0px !important;
 }
-.tw-mb-\[-20px\]{
-  margin-bottom: -20px !important;
-}
 .tw-mb-1\.5{
   margin-bottom: 0.375rem !important;
 }
@@ -21955,6 +21930,15 @@ a:visited{
 }
 .tw-mt-\[40px\]{
   margin-top: 40px !important;
+}
+.tw-ml-\[15px\]{
+  margin-left: 15px !important;
+}
+.tw-mt-\[16px\]{
+  margin-top: 16px !important;
+}
+.tw-ml-\[8px\]{
+  margin-left: 8px !important;
 }
 .tw-mb-\[16px\]{
   margin-bottom: 16px !important;
@@ -22279,6 +22263,9 @@ a:visited{
 }
 .tw-h-\[93px\]{
   height: 93px !important;
+}
+.tw-h-\[80px\]{
+  height: 80px !important;
 }
 .tw-h-2{
   height: 0.5rem !important;
@@ -22671,6 +22658,9 @@ a:visited{
 .tw-min-w-\[167px\]{
   min-width: 167px !important;
 }
+.tw-min-w-\[145px\]{
+  min-width: 145px !important;
+}
 .tw-min-w-\[40px\]{
   min-width: 40px !important;
 }
@@ -22787,6 +22777,9 @@ a:visited{
 }
 .tw-max-w-\[917px\]{
   max-width: 917px !important;
+}
+.tw-max-w-\[514px\]{
+  max-width: 514px !important;
 }
 .tw-max-w-\[120px\]{
   max-width: 120px !important;
@@ -25317,8 +25310,14 @@ a:visited{
 .focus-visible\:tw-outline-\[\#111827\]:focus-visible{
   outline-color: #111827 !important;
 }
+.disabled\:tw-pointer-events-none:disabled{
+  pointer-events: none !important;
+}
 .disabled\:tw-opacity-40:disabled{
   opacity: 0.4 !important;
+}
+.disabled\:tw-opacity-70:disabled{
+  opacity: 0.7 !important;
 }
 .tw-group:hover .group-hover\:tw-mt-1{
   margin-top: 0.25rem !important;

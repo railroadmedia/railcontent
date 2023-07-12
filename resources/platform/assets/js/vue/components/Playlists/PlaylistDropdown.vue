@@ -39,7 +39,7 @@ const props = defineProps({
         default: false,
     },
     isPrivate: {
-        type: Number
+        type: [Number,Boolean]
     },
     type: {
         type: String,
@@ -90,6 +90,9 @@ const sharePlaylist = () => {
 
 const privateToggle = () => {
     state.isPrivate = !state.isPrivate;
+    // if(props.inPlaylistHeader) {
+    //     playlistsStore.activePlaylist.private = !playlistsStore.activePlaylist.private;
+    // }
     emit('makePublic', state.isPrivate)
     let isPrivate = props.data.private === 1 ? true : false;
     PlaylistService.setToPrivate(props.data.id, isPrivate, token)
@@ -104,6 +107,10 @@ const privateToggle = () => {
         })
         .catch(function (error) {
             if (error.response) {
+                //revert
+                // if(props.inPlaylistHeader) {
+                //     playlistsStore.activePlaylist.private = !playlistsStore.activePlaylist.private;
+                // }
                 //undo private/public change
                 state.isPrivate = !state.isPrivate;
                 window.shownotification({
@@ -195,6 +202,12 @@ const addToPlaylist = () => {
     });
 }
 
+const renameItem = () => {
+    window.openplaylistmodal({
+        modalType: 'renameItem', content: { ...props.data, content_id: props.data.id }
+    });
+}
+
 const editPlaylist = () => {
     window.openplaylistmodal({ modalType: 'edit', data: props.data });
     emit('closeDropdown');
@@ -226,6 +239,7 @@ const clickHandler = (fnstring) => {
         case "sharePlaylist": sharePlaylist(); break;
         case "editPlaylist": editPlaylist(); break;
         case "addToPlaylist": addToPlaylist(); break;
+        case "renameItem": renameItem(); break;
         case "deletePlaylist": deletePlaylist(); break;
         case "duplicatePlaylist": duplicatePlaylist(); break;
         case "pinPlaylist": pinPlaylist(); break;

@@ -367,8 +367,10 @@ return [
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
 
             \App\Decorators\Content\InstructorDecorator::class,
-            \App\Decorators\Content\PlaylistItemDecorator::class,
+            \App\Decorators\Content\ResourceDecorator::class,
             \App\Decorators\Content\ContentTimezoneDecorator::class,
+            \App\Decorators\Content\PlaylistItemDecorator::class,
+
         ]
     ],
 
