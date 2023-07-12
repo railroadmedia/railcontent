@@ -2,10 +2,10 @@
 
 @section('global-head')
     @parent
-    <title>Easy Chords | Pianote</title>
+    <title>The Most Beautiful Classical Piano Pieces | Pianote</title>
     <meta property="og:title" content="Easy Chords | Pianote">
-    <meta name="description" content="30 days to better piano chords.">
-    <meta property="og:description" content="30 days to better piano chords.">
+    <meta name="description" content="Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.">
+    <meta property="og:description" content="Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.">
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
@@ -67,7 +67,7 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    <header class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20 bg-cover bg-top" style="background:url(https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image.jpg);">
+    <header class="text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20 bg-cover bg-top" style="background:url(https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image.jpg);">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
@@ -146,7 +146,7 @@
             <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
         </a>
     </section>
-    <section class="text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
+    <section class="relative text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
         <div class="absolute top-0 left-0 right-0 bg-cover lg:bg-contain bg-no-repeat bg-top z-10 h-1/2 lg:h-[60%]" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/author-bg.png);"></div>
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
