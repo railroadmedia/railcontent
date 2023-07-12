@@ -3,6 +3,7 @@
 namespace App\Modules\UserManagementSystem\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
+use App\Modules\EventDataSynchronizer\Jobs\CustomerIoDeleteUser;
 use Illuminate\Database\DatabaseManager;
 
 class UserDelete extends Command
@@ -31,6 +32,7 @@ class UserDelete extends Command
                 'railcontent_content_likes',
                 'railcontent_user_content_progress',
                 'railcontent_user_permissions',
+                'railcontent_user_playlists',
                 'railtracker4_requests',
                 'railtracker_media_playback_sessions',
                 'user_abilities',
@@ -44,7 +46,9 @@ class UserDelete extends Command
                 'onboarding_experience',
                 'onboarding_gears',
                 'onboarding_genres',
-                'onboarding_topics'
+                'onboarding_topics',
+                'railtracker_content_last_engaged',
+                'railtracker_content_last_engaged_seconds'
             ],
             'author_id' => [
                 'railcontent_versions',
@@ -306,6 +310,15 @@ class UserDelete extends Command
 
     public function deleteUserIds(array $allUserIds)
     {
+        foreach ($allUserIds as $userId) {
+            if ($this->simulate) {
+                $this->info("Simulating delete user $userId from customer IO");
+            } else {
+                $this->info("Deleting user from customer IO: $userId");
+                dispatch_sync(new CustomerIoDeleteUser($userId));
+            }
+        }
+
         $totalRowsDeleted = 0;
         $batch = array_chunk($allUserIds, 1000);
 
@@ -328,7 +341,7 @@ class UserDelete extends Command
                                 );
                             }
                         } else {
-                            $this->info('About to delete from table: ' . $tableName);
+                            $this->info('Deleting from table: ' . $tableName);
 
                             $totalRowsDeleted += $query->delete();
 
@@ -338,7 +351,7 @@ class UserDelete extends Command
                 }
             }
 
-            // finally delete from the usora users table
+// finally delete from the usora users table
             $query = $this->databaseManager->connection('musora_laravel_mysql_writer_only')->table(
                 'usora_users'
             )->WhereIn('id', $batchUserIds);

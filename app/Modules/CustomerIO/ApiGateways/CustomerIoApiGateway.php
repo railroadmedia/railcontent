@@ -428,8 +428,10 @@ class CustomerIoApiGateway
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
         if (curl_errno($ch) || $httpCode !== 200) {
-            throw new Exception('Customer.io mergeCustomers api call failed: ' . curl_error($ch) .
-                ' - http code: ' . $httpCode);
+            throw new Exception(
+                'Customer.io mergeCustomers api call failed: ' . curl_error($ch) .
+                ' - http code: ' . $httpCode
+            );
         }
 
         // empty result means success for some reason...
@@ -440,5 +442,39 @@ class CustomerIoApiGateway
         curl_close($ch);
 
         return true;
+    }
+
+
+    public function deleteCustomer(
+        $customerIoSiteId,
+        $customerIoTrackApiKey,
+        $customerId
+    ) {
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'https://track.customer.io/api/v1/customers/' . $customerId);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
+
+        $authHeaderKey = base64_encode($customerIoSiteId . ':' . $customerIoTrackApiKey);
+
+        $headers = [];
+        $headers[] = 'Authorization: Basic ' . $authHeaderKey;
+        $headers[] = 'Content-Type: application/json';
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+        $result = json_decode(curl_exec($ch), true);
+
+        if (curl_errno($ch)) {
+            throw new Exception('Customer.io deleteCustomer api call failed: ' . curl_error($ch));
+        }
+
+        // empty result means success for some reason...
+        if ($result !== []) {
+            throw new Exception('Customer.io deleteCustomer api call failed: ' . curl_error($ch));
+        }
+
+        curl_close($ch);
     }
 }
