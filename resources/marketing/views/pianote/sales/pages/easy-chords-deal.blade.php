@@ -179,7 +179,7 @@
                 <br><br>
                 We’ll discount your first year by $40 as a special thank you, and you’ll have 90 days to try it risk-free.
                 <br><br>
-                But this offer is only available until midnight, July 12th.
+                But this offer is only available until midnight, July 13th.
                 <br><br>
                 So click below and keep your progress going!
             </p>
@@ -257,7 +257,7 @@
         })
     </script>
     @include('_partials.components.countdown',[
-    'countdownDate' => '2023-07-12 00:00:00',
+    'countdownDate' => '2023-07-13 00:00:00',
     'promoVersion' => false
     ])
 @stop
