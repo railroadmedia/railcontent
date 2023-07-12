@@ -15,7 +15,6 @@ $product = (object)[
         [
             'name' => 'Drumeo EarDrums',
             'price' => 197,
-            'special_text' => '',
             'bundle_desc' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
             'bundle_img' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Bundle-images/ear-drums-card.jpg',
             'bundle_free_shipping' => true,
@@ -25,7 +24,6 @@ $product = (object)[
         [
             'name' => 'Drumeo Drumsticks',
             'price' => 12.95,
-            'special_text' => '',
             'bundle_desc' => 'The Drumeo 5A Drumsticks by Vater -- made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer-lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
             'bundle_free_shipping' => true,
@@ -44,7 +42,6 @@ $product = (object)[
         [
             'name' => 'Successful Drumming',
             'price' => 97,
-            'special_text' => '',
             'bundle_desc' => 'The ultimate crash course to playing more creative and more musical drum fills your audience will love. Rather than memorizing and playing the same fills over and over again, you’ll gain the skills you need to create effective drum fills on the fly and adapt them to any musical setting.',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/sd.jpg',
             'bundle_free_shipping' => false,
@@ -54,7 +51,6 @@ $product = (object)[
         [
             'name' => 'Rock Drumming Masterclass',
             'price' => 197,
-            'special_text' => '',
             'bundle_desc' => 'Rock icon Todd Sucherman is your personal drum coach with a 26-week online course to rapidly improve your rock drumming. You’ll get weekly video lessons and exercises to improve your beats, fills, creativity, solos, bass drum combinations, hand technique, shuffles & variations, musicality, and more. ',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/rdm.jpg',
             'bundle_free_shipping' => false,
@@ -64,7 +60,6 @@ $product = (object)[
         [
             'name' => 'Drum Technique Made Easy',
             'price' => 197,
-            'special_text' => '',
             'bundle_desc' => 'Technique guru Bruce Becker delivers an intimate 26-week course where you’ll get his proven process for improving your hand technique and foot technique so you can develop more speed and control around the kit -- all while preventing injuries & enjoying the music. ',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/dtme.jpg',
             'bundle_free_shipping' => false,
@@ -74,7 +69,6 @@ $product = (object)[
         [
             'name' => 'Independence Made Easy',
             'price' => 197,
-            'special_text' => '',
             'bundle_desc' => 'Freedom starts here. Jared Falk’s 26-week course was built to unlock all four limbs so you can play more musical grooves, better sounding fills, and finally achieve the musical freedom that allows you to play whatever you want, whenever you want.',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/ime.jpg',
             'bundle_free_shipping' => false,
@@ -84,7 +78,6 @@ $product = (object)[
         [
             'name' => 'Learn Songs Faster',
             'price' => 19,
-            'special_text' => '',
             'bundle_desc' => 'A 75-minute masterclass with Jared Falk & Dave Atkinson to help you learn MORE songs in less time -- from active listening that’ll help you hear phrasing and understand song structure, to building effective grooves and fills, and keeping time so your playing always matches the music.',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/lsf.jpg',
             'bundle_free_shipping' => false,
@@ -94,7 +87,6 @@ $product = (object)[
         [
             'name' => 'Anatomy of a Drum Solo | Neil Peart',
             'price' => 29.99,
-            'special_text' => '',
             'bundle_desc' => 'Drumming’s all-time greatest legend shows you his thoughtful approach to music’s most celebrated breakdown: the drum solo. Join Neil Peart as he explores the history of the drum solo and how you can build your own epic composition.',
             'bundle_img' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Bundle-images/anatomy-of-a-drum-solo-card.jpg',
             'bundle_free_shipping' => false,
@@ -104,7 +96,6 @@ $product = (object)[
         [
             'name' => 'Methods & Mechanics | Todd Sucherman',
             'price' => 29.99,
-            'special_text' => '',
             'bundle_desc' => 'Learn to strike with power & grace with expert guidance from award-winning Styx drummer, Todd Sucherman. Todd brings the knowledge of thousands of gigs, shows and recording sessions along with over three decades as a professional drummer to this useful and unique package.',
             'bundle_img' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Bundle-images/method-mechanics-card.jpg',
             'bundle_free_shipping' => false,
@@ -114,7 +105,6 @@ $product = (object)[
         [
             'name' => 'The Language Of Drumming | Benny Greb',
             'price' => 29.99,
-            'special_text' => '',
             'bundle_desc' => 'The Language of Drumming helps you express yourself through the drums by focusing on the most basic components. Benny Greb introduces his revolutionary 24-character system and shows you how to use the basic rhythms to develop timing, technique, dynamic control, and speed.',
             'bundle_img' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Bundle-images/the-language-of-drumming-card.jpg',
             'bundle_free_shipping' => false,
@@ -124,7 +114,6 @@ $product = (object)[
         [
             'name' => 'Great Hands For A Lifetime | Tommy Igoe',
             'price' => 29.99,
-            'special_text' => '',
             'bundle_desc' => 'Your pathway to playing better, faster, and healthier for a lifetime of pain-free drumming -- Great Hands For A Lifetime will help you unlock your potential and protect your hands for the many years of drumming to come.',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/tommy_card.jpg',
             'bundle_free_shipping' => false,
@@ -134,7 +123,6 @@ $product = (object)[
         [
             'name' => 'Hands Grooves & Fills | Pat Petrillo',
             'price' => 29.99,
-            'special_text' => '',
             'bundle_desc' => 'Hands, Grooves, & Fills is your complete curriculum for developing technique, groove ideas, and a drum fill vocabulary. Join veteran NYC drummer, Pat Petrillo, as he breaks down exercises to expand these three key areas of your drumming.',
             'bundle_img' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Bundle-images/hand-grooves-fills-card.jpg',
             'bundle_free_shipping' => false,
@@ -144,7 +132,6 @@ $product = (object)[
         [
             'name' => 'In Constant Motion | Mike Portnoy',
             'price' => 29.99,
-            'special_text' => '',
             'bundle_desc' => 'In Constant Motion features over seven hours of instruction, live and studio performances, and insights into Mike Portnoy’s numerous projects. Packed with audio and video, special features, and printable transcriptions of selected performances, the depth and diversity of this package is recommended for drummers of all interests and skill levels.',
             'bundle_img' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Bundle-images/in-constant-motion-card.jpg',
             'bundle_free_shipping' => false,
@@ -154,7 +141,6 @@ $product = (object)[
         [
             'name' => 'Creative Control | Thomas Lang',
             'price' => 29.99,
-            'special_text' => '',
             'bundle_desc' => 'Thomas Lang gives you an innovative & inspired practice regime that helps you develop incredible drumset technique. This course will forever change your relationship with four-way coordination, musical ostinatos, and more.',
             'bundle_img' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Bundle-images/creative-control-card.jpg',
             'bundle_free_shipping' => false,
@@ -164,7 +150,6 @@ $product = (object)[
         [
             'name' => 'The Grid | Mike Mangini',
             'price' => 29.99,
-            'special_text' => '',
             'bundle_desc' => 'With The Grid, Mike Mangini presents a complete system for expanding your skills as a creative player and improviser, focusing in on your own musical identity. You will increase your speed, develop better independence, learn how to use ostinatos, and become a more creative player.',
             'bundle_img' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Bundle-images/the-grid-card.jpg',
             'bundle_free_shipping' => false,
@@ -174,7 +159,6 @@ $product = (object)[
         [
             'name' => 'Beyond The Chops | Aaron Spears',
             'price' => 29.99,
-            'special_text' => '',
             'bundle_desc' => 'Be inspired with amazing performances, enlightening educational segments, and revealing interviews as Spears displays his natural talent, incredible groove, and deep skills in a set of performances with Gospel, R&B, Motown, rock, shuffle, and odd-meter tracks.',
             'bundle_img' => 'https://d1fyshwdvi6fth.cloudfront.net/Drumeo/Bundle-images/beyond-the-chops-card.jpg',
             'bundle_free_shipping' => false,

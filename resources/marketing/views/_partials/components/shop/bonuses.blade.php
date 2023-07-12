@@ -4,13 +4,12 @@
             <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/{{ $bundle['bundle_img'] }}" alt="product thumbnail{{$key+1}}">
         </div>
         <div>
-            <strong>{{ $bundle['name'] }} - <span @if(!empty($bundle['priceColor']) && $bundle['priceColor'] == 'orange') class="orange" @endif>Normally ${{ floatVal($bundle['price'])}}</span> @if(!empty($bundle['special_text']))<span class="text-{{ $theme }}">{{ $bundle['special_text'] }}</span> @endif
-                    <br @if(!$bundle['bundle_free_shipping'] && !$bundle['lifetime_access'] && !$bundle['free_bonus']) class="hidden" @endif>
+            <strong>
+                {{ $bundle['name'] }} - <span @if(!empty($bundle['priceColor']) && $bundle['priceColor'] == 'orange') class="orange" @endif>Normally ${{ floatVal($bundle['price'])}}</span>
+                @if(!empty($bundle['special_text']))<span class="text-{{ $theme }}">{{ $bundle['special_text'] }}</span> @endif
+                @if($bundle['free_bonus']) <span class="text-{{$theme}}">FREE BONUS</span> @endif
 
-                    @if($bundle['free_bonus'])
-                        <span class="text-{{$theme}}">*FREE BONUS*</span>
-                    @endif
-
+                <br @if(!$bundle['bundle_free_shipping'] && !$bundle['lifetime_access']) class="hidden" @endif>
                     @if($bundle['lifetime_access'])
                         <span style="color:#E69500;">LIFETIME ACCESS</span>
                     @endif

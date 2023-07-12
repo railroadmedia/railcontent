@@ -25,7 +25,7 @@
             [
                 'name' => 'Chords & Scales Book',
                 'price' => 39,
-                'special_text' => '',
+
                 'bundle_desc' => 'You need chords to play your favorite songs, but learning them all can be a real challenge. The Piano Chords & Scales book is your go-to reference guide so you’ll never get stuck again. See a chord you don’t know? Simply flip to the relevant page in your book and you’ll see all the inversions and alterations you need to play beautifully and confidently. Don’t let scary-looking chords slow your progress.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
                 'bundle_free_shipping' => true,
@@ -35,7 +35,7 @@
             [
                 'name' => 'Piano Chords Poster',
                 'price' => 9,
-                'special_text' => '',
+
                 'bundle_desc' => 'Chord shapes can be hard to remember, especially when you’re starting out and learning how they work. Luckily we have the Pianote Chords Poster to help you with all those tricky shapes! Get this awesome poster for your practice space and start chording your way through all your favorite songs. If you ever forget your chord shapes, all you have to do is look up!',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/poster-chords.jpg',
                 'bundle_free_shipping' => true,
@@ -45,7 +45,7 @@
             [
                 'name' => 'Piano Scales Poster',
                 'price' => 9,
-                'special_text' => '',
+
                 'bundle_desc' => 'If you ever find yourself forgetting the notes in a scale (like most of us do), the Pianote Scales Poster is here to help! Remember your scales with this easy-to-read poster, designed to help you quickly recall the right notes at the right time, making your scales (or soloing) a piece of cake. With this up on your wall, you’ll never miss a note again.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/poster-scales.jpg',
                 'bundle_free_shipping' => true,
@@ -55,7 +55,7 @@
             [
                 'name' => 'Pianote Practice Planner',
                 'price' => 39,
-                'special_text' => '',
+
                 'bundle_desc' => 'Practice is the key to getting better. But to really progress it’s so important to practice the right things. Knowing what, when, and how to practice will make the biggest difference in your playing. The Pianote Practice Planner is your written guide to making every practice perfect, so you get the results you deserve. This is Lisa Witt’s personal practice guide. Written by her, exclusively for piano players.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/planner.png',
                 'bundle_free_shipping' => true,
@@ -65,7 +65,7 @@
             [
                 'name' => 'New Piano Players Start Here',
                 'price' => 97,
-                'special_text' => '',
+
                 'bundle_desc' => 'New to the piano? Start here! This play-along course is your first 30 days on the piano. You don’t need any previous experience or theory knowledge. Over 30 days, you’ll play along with your teacher for just 10 minutes a day! You’ll be amazing at what a little bit of consistent practice will do.',
                 'bundle_img' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
                 'bundle_free_shipping' => false,
@@ -75,7 +75,7 @@
             [
                 'name' => 'Easy Chords',
                 'price' => 97,
-                'special_text' => '',
+
                 'bundle_desc' => 'Chords are the foundation of all music. But they can be tricky to understand, let alone practice. Easy Chords solves that problem. Over 30 days, you’ll play with a teacher and unlock the beauty and power of piano chord progressions. You’ll be able to play hundreds of songs after taking this course. And best of all? It only takes 10 minutes a day.',
                 'bundle_img' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
                 'bundle_free_shipping' => false,
@@ -85,7 +85,7 @@
             [
                 'name' => 'Piano Technique Made Easy',
                 'price' => 120,
-                'special_text' => '',
+
                 'bundle_desc' => 'What does piano technique have to do with songs? Well, having good piano technique makes learning and playing the songs you love SO MUCH EASIER. After all, what are songs? They’re simply a combination of chords, scales, and arpeggios. Piano Technique Made Easy is the comprehensive guide for learning and perfecting your technique.  Every scale. Every key signature. Every chord. You’ll learn them all.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
                 'bundle_free_shipping' => false,
@@ -95,7 +95,7 @@
             [
                 'name' => 'The Power of Chords',
                 'price' => 97,
-                'special_text' => '',
+
                 'bundle_desc' => 'Play the music you love on the piano with the awesome Power of Chords. This fun course will demystify chording and show you how chords are the foundation of ALL music (even classical). When you understand and can play chords -- you’ll be able to play the songs you love easier, with more confidence.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/power-of-chords.jpg',
                 'bundle_free_shipping' => false,
@@ -105,7 +105,7 @@
             [
                 'name' => 'Worship Piano',
                 'price' => 99,
-                'special_text' => '',
+
                 'bundle_desc' => 'Master the skills to play modern worship songs and learn how to be part of a band. You’ll learn how to read worship chord charts, create beautiful background music, and how to be part of a worship team. Plus, this pack comes with your own band as a backing track, so YOU can join the band and play piano with other musicians. No prior knowledge or experience is needed. We start from scratch with this one.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/worship-piano.jpg',
                 'bundle_free_shipping' => false,
@@ -115,7 +115,7 @@
             [
                 'name' => 'Piano Riffs & Fills',
                 'price' => 99,
-                'special_text' => '',
+
                 'bundle_desc' => 'Anyone can play a chord -- but what happens in the spaces between the chords distinguishes the great players from the mediocre ones. Fill those spaces with piano riffs that will make you sound professional, polished ... and close to perfect. This course is broken down so even complete beginners can start sounding amazing. You’ll be shown exactly how to play the fills -- note for note.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
                 'bundle_free_shipping' => false,
@@ -125,7 +125,7 @@
             [
                 'name' => 'De-Stupefy Your Left Hand',
                 'price' => 99,
-                'special_text' => '',
+
                 'bundle_desc' => 'Your left hand is weaker. And that’s normal. Most piano players struggle with their left hand, and sadly, most just accept it. De-Stupefy Your Left Hand is your 3-step path to a better left hand. Yes, your left hand might be weaker… But it doesn’t have to be.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
                 'bundle_free_shipping' => false,
@@ -135,7 +135,7 @@
             [
                 'name' => 'Faster Fingers',
                 'price' => 99,
-                'special_text' => '',
+
                 'bundle_desc' => 'Increase your finger speed, strength, and accuracy with this complete digital training pack. Faster Fingers is your roadmap to success on the piano. You’ll be guided every step of the way with daily practice videos and encouragement, plus you’ll be able to play along with every exercise and record your speed. The metronome doesn’t lie -- you’ll be able to SEE how much faster you’re getting.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/faster-fingers.jpg',
                 'bundle_free_shipping' => false,
@@ -145,7 +145,7 @@
             [
                 'name' => 'Improvisation and Musical Freedom',
                 'price' => 47,
-                'special_text' => '',
+
                 'bundle_desc' => 'How do you learn to improvise on the piano? Simple. You learn from the best in the world! Join Jesús Molina as he shows you how to approach improvising in a structured, step-by-step way that’s fun, inspiring, and 100% not scary. It’s rare to get access to teachers of this caliber. But the course is yours for life.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/improv-musical-freedom.jpg',
                 'bundle_free_shipping' => false,
@@ -155,7 +155,7 @@
             [
                 'name' => 'The Beginner’s Guide to Playing Beautiful Piano',
                 'price' => 9,
-                'special_text' => '',
+
                 'bundle_desc' => 'Start playing beautiful piano music from the very first time you touch the keyboard. The Beginner’s Guide To Playing Beautiful Piano is your introduction to the world of stunning melodies and emotional music. Follow along and play beautiful sounds. But you won’t just be copying what you see… You’ll learn WHY certain chords and melodies sound beautiful. So after the course, you can create your own beautiful piano music.',
                 'bundle_img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTPBP.jpg',
                 'bundle_free_shipping' => false,
@@ -177,7 +177,6 @@
         [
             'name' => 'Chords & Scales Book',
             'price' => 39,
-            'special_text' => '',
             'description' => 'Your encyclopedia of piano chords & scale.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
             'shipping' => true,
@@ -185,7 +184,6 @@
         [
             'name' => 'Piano Chords Poster',
             'price' => 9,
-            'special_text' => '',
             'description' => 'Hang these piano chords in your practice space.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/poster-chords.jpg',
             'shipping' => true,
@@ -193,7 +191,6 @@
         [
             'name' => 'Piano Scales Poster',
             'price' => 9,
-            'special_text' => '',
             'description' => 'All the major and minor piano scales in one poster.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/poster-scales.jpg',
             'shipping' => true,
@@ -201,7 +198,6 @@
         [
             'name' => 'Pianote Practice Planner',
             'price' => 39,
-            'special_text' => '',
             'description' => 'Always know exactly what to practice.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/planner.png',
             'shipping' => true,
@@ -209,70 +205,60 @@
         [
             'name' => 'New Piano Players Start Here',
             'price' => 97,
-            'special_text' => '',
             'description' => 'Your guide to go from a total beginner to playing REAL music in just 30 days.',
             'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/fb81d171-6ee7-46bb-bd5e-b29de32766c5-NPPSH-card.jpg',
         ],
         [
             'name' => 'Easy Chords',
             'price' => 97,
-            'special_text' => '',
             'description' => 'Master your chord changes & inversions.',
             'image' => 'https://d1fyshwdvi6fth.cloudfront.net/Pianote/Bundle-images/2bae4048-37d2-4fe4-a195-431de3f7f822-easy-chords-card.jpg',
         ],
         [
             'name' => 'Piano Technique Made Easy',
             'price' => 120,
-            'special_text' => '',
             'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
         ],
         [
             'name' => 'The Power of Chords',
             'price' => 97,
-            'special_text' => '',
             'description' => 'Play the music you love using the power of chords.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/power-of-chords.jpg',
         ],
         [
             'name' => 'Worship Piano',
             'price' => 99,
-            'special_text' => '',
             'description' => 'Learn hundreds of worship songs and get the skills to start playing in a worship band.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/worship-piano.jpg',
         ],
         [
             'name' => 'Piano Riffs & Fills',
             'price' => 99,
-            'special_text' => '',
             'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
         ],
         [
             'name' => 'De-Stupefy Your Left Hand',
             'price' => 99,
-            'special_text' => '',
             'description' => 'Most piano players find their left-hand is weaker. Fix those weaknesses and “de-stupefy” that left hand.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/de-stupefy-your-left-hand.jpg',
         ],
         [
             'name' => 'Faster Fingers',
             'price' => 99,
-            'special_text' => '',
             'description' => 'Boost your speed and confidence with this guided practice course.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/faster-fingers.jpg',
         ],
         [
             'name' => 'Improvisation and Musical Freedom',
             'price' => 47,
-            'special_text' => '',
             'description' => 'Learn to improvise from one of the best piano players in the world, Jesús Molina.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/improv-musical-freedom.jpg',
         ],
         [
             'name' => 'The Beginner’s Guide to Playing Beautiful Piano',
             'price' => 9,
-            'special_text' => '',
             'description' => 'Start playing beautiful music from your very 1st lesson.',
             'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/bonuses/TBGTPBP.jpg',
         ],

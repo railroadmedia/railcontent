@@ -86,10 +86,10 @@
             <br>
             <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                 <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>
-                <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
-                <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
-                <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
-                <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
+                <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #333;color: #ffac00;"></i>
+                <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #333;color: #ffac00;"></i>
+                <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #333;color: #ffac00;"></i>
+                <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #333;color: #ffac00;"></i>
             </a>
             <p class="inline-block leading-tight text-sm align-middle pl-2 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
             <p class="mb-10"  style="color:#FFD600;">ONLY <s>100</s> {{ $availableSpots }} SPOTS AVAILABLE</p>
