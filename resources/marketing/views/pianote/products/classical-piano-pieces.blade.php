@@ -102,29 +102,31 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#F2EFED;">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="text-center"><strong>Original & Simplified <br class="inline sm:hidden"> Arrangments of Every Piece</strong></h2>
-            <h5 class="text-center text-pianote my-2 sm:my-3"><em>Because these pieces should<br class="inline sm:hidden">not be reserved for the pros.</em></h5>
-            <h6 class="leading-normal mb-5 sm:mb-7">Some of these pieces are quite advanced.
+            <h3 class="text-center"><strong>Original & Simplified <br class="inline sm:hidden"> Arrangments of Every Piece</strong></h3>
+            <h6 class="text-center text-pianote my-3 sm:my-4"><em>Because these pieces should<br class="inline sm:hidden"> not be reserved for the pros.</em></h6>
+            <p class="leading-normal mb-7 sm:mb-10">Some of these pieces are quite advanced.
                 <br><br>
                 But we don’t think that should stop anyone from being able to play and enjoy them. That’s why you’ll find simplified versions of every piece that are approachable for the late beginner/early intermediate pianist.
                 <br><br>
-                We’ve made them easier while staying true to the beauty of the original composition.</h6>
+                We’ve made them easier while staying true to the beauty of the original composition.</p>
 
-            <div class="flex flex-wrap text-left max-w-3xl mx-auto mt-5 sm:mt-7 mb-10 sm:mb-14 lg:mb-20">
-                <div class="w-1/2 pr-2 sm:px-4">
-                    <div class="">
+            <div class="flex flex-wrap text-left mx-auto mt-5 sm:mt-7">
+                <div class="w-1/2 pr-2 sm:px-2">
+                    <div class="relative">
                         <div class=" aspect-16:9  cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative" data-open="trailer">
                             <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
                             <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/trailer.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
                         </div>
+                        <p class="inline-block rounded-full bg-black text-white px-5 mx-auto absolute bottom-0 left-1/2 -translate-x-1/2 -mb-3"><strong>Original</strong></p>
                     </div>
                 </div>
-                <div class="w-1/2 sm:px-4">
-                    <div class="">
+                <div class="w-1/2 sm:px-2">
+                    <div class="relative">
                         <div class=" aspect-16:9  cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative" data-open="trailer">
                             <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
                             <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/trailer.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
                         </div>
+                        <p class="inline-block rounded-full bg-pianote text-white px-5 mx-auto absolute bottom-0 left-1/2 -translate-x-1/2 -mb-3"><strong>Simplified</strong></p>
                     </div>
                 </div>
             </div>
@@ -133,57 +135,62 @@
 
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book-bg.jpg);">
         <h3 class="leading-tight"><strong>Take A Look Inside.</strong></h3>
-        <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7"><em>Click to see inside the book!</em></p>
+        <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><em>Click to see inside the book!</em></p>
         <a href="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Classical-Piano-Book-1-14.pdf" class="relative">
             <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
         </a>
     </section>
-    <section class="relative text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background-color:#f4f8fb;">
-        <div class="absolute top-0 left-0 right-0 bg-cover lg:bg-contain bg-no-repeat bg-top z-10 h-1/2 lg:h-[60%]" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/author-bg.png);"></div>
-        <div class="container max-w-5xl mx-auto">
-            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
-                <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
-                    <img class="inline-block w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/lisa-profile.jpg" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
-                </div>
+    <section class="relative text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background:linear-gradient(to bottom, #f2efed, #FFF);">
+        <div class="absolute z-10 top-0 left-0 right-0 bg-cover lg:bg-contain bg-no-repeat bg-top z-10 h-1/2 lg:h-[60%]" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/author-bg.png);"></div>
+        <div class="container max-w-5xl mx-auto relative z-20">
+            <h3 class="text-center"><strong>About The Authors</strong></h3>
 
-                <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
-                    <img class="float-right h-12 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector.svg" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <p class="leading-normal mt-4 lg:mt-6">Lisa Witt is the lead instructor at Pianote and has inspired millions of students around the world with her infectious enthusiasm for this instrument.
-                        <br><br>Lisa grew up learning classical piano through the Royal Conservatory of Music, but it wasn’t easy.
-                        <br><br>“In fact, I mostly hated it,” she said.
-                        <br><br>“But there were some songs that made it all worth it. The beautiful songs by the great composers.”
-                        <br><br>Those songs are what drove Lisa to compile this book and share those beautiful pieces with you. She hand-picked each one to fill this book with 20 of the most beautiful classical piano pieces around.
-                        <br><br>Lisa’s teaching style is all about FUN. If you’re not having fun playing the piano, then you won’t keep learning.The pieces in this book reflect that style. They are beautiful, but also fun to learn. So you’ll keep coming back to them.
-                        <br><br>Lisa is also the author of “Piano Chords & Scales: The Ultimate Guide” and “The Pianote Practice Planner.”
-                    </p>
-                </div>
-            </div>
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
-                <div class="w-52 sm:w-64 lg:w-72 relative -mb-8 sm:mb-0 sm:-mr-8">
-                    <img class="inline-block w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/eleny-profile.jpg" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <div class="w-full sm:w-1/2 px-2">
+                    <div class="text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow shadow-lg" style="background-color:#f2efed;">
+                        <img class="w-20 sm:w-36 relative -mb-8 sm:mb-0 inline-block w-full relative z-20 rounded-full border-4 border-white shadow-lg transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/lisa-profile.jpg">
+                        <br>
+                        <img class="h-5 transition-all opacity-0" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector.svg">
+                        <p class="leading-normal mt-2 lg:mt-3">
+                            Lisa Witt is the lead instructor at Pianote and has inspired millions of students around the world with her infectious enthusiasm for this instrument.
+                            <br><br>Lisa grew up learning classical piano through the Royal Conservatory of Music, but it wasn’t easy.
+                            <br><br>“In fact, I mostly hated it,” she said.
+                            <br><br>“But there were some songs that made it all worth it. The beautiful songs by the great composers.”
+                            <br><br>Those songs are what drove Lisa to compile this book and share those beautiful pieces with you. She hand-picked each one to fill this book with 20 of the most beautiful classical piano pieces around.
+                            <br><br>Lisa’s teaching style is all about FUN. If you’re not having fun playing the piano, then you won’t keep learning.The pieces in this book reflect that style. They are beautiful, but also fun to learn. So you’ll keep coming back to them.
+                            <br><br>Lisa is also the author of “Piano Chords & Scales: The Ultimate Guide” and “The Pianote Practice Planner.”
+                        </p>
+                    </div>
                 </div>
-
-                <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
-                    <img class="float-right h-12 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector-1.svg" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <p class="leading-normal mt-4 lg:mt-6">
-                        <br><br>Eleny Quapp is a skilled musician with over 20 years of experience. As a former student of the Royal Conservatory of Music, she has refined her skills at the piano and has since become an accomplished teacher, passing on her passion for music to her students.
-                        <br><br>Eleny's love for music is reflected in her teaching, where she emphasizes the importance of practice and dedication, but also discovering the fun in learning. She firmly believes in the profound effects that music can have on a person's life and will always find ways to inspire those around her.
-                        <br><br>With a particular affinity for classical music, Eleny enjoys sharing her passion for some of the world's most beautiful music with those around her.
-                        <br><br>The Most Beautiful Piano Classical Pieces is a delightful collection of some of her favorite pieces. 
-                        <br><br>She has arranged all the simplified pieces to be accessible to students of all skill levels Her arrangements reflect what she is most passionate about - sharing the joy and beauty of classical music.
-                    </p>
+                <div class="w-full sm:w-1/2 px-2">
+                    <div class="text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow shadow-lg" style="background-color:#f2efed;">
+                        <img class="w-20 sm:w-36 relative -mb-8 sm:mb-0 inline-block w-full relative z-20 rounded-full border-4 border-white shadow-lg transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/eleny-profile.jpg">
+                        <br>
+                        <img class="h-5 transition-all opacity-0" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector-1.svg">
+                        <p class="leading-normal mt-2 lg:mt-3">
+                            Eleny Quapp is a skilled musician with over 20 years of experience. As a former student of the Royal Conservatory of Music, she has refined her skills at the piano and has since become an accomplished teacher, passing on her passion for music to her students.
+                            <br><br>Eleny's love for music is reflected in her teaching, where she emphasizes the importance of practice and dedication, but also discovering the fun in learning. She firmly believes in the profound effects that music can have on a person's life and will always find ways to inspire those around her.
+                            <br><br>With a particular affinity for classical music, Eleny enjoys sharing her passion for some of the world's most beautiful music with those around her.
+                            <br><br>The Most Beautiful Piano Classical Pieces is a delightful collection of some of her favorite pieces. 
+                            <br><br>She has arranged all the simplified pieces to be accessible to students of all skill levels Her arrangements reflect what she is most passionate about - sharing the joy and beauty of classical music.
+                        </p>
+                    </div>
                 </div>
             </div>
 
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 bg-cover bg-top" style="background:url(https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/list-section-bg.png);">
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
-            <h2 class="text-center"><strong>The best way to <br class="inline sm:hidden"> play your favorites.</strong></h2>
+            <h3 class="leading-tight text-center mb-4 sm:mb-5"><strong>The best way to <br class="inline sm:hidden"> play your favorites.</strong></h3>
 
-            <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage.png">
-            <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-m.png">
+            <img class="hidden sm:inline-block h-64 lg:h-80" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage.png">
+            <img class="sm:hidden" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-m.png">
         </div>
     </section>
 
