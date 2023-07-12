@@ -6,7 +6,9 @@ use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
+use App\Decorators\Playlist\PlaylistDecorator;
 use App\Decorators\Playlist\RoutingDecorator;
+use App\Decorators\Content\ResourceDecorator;
 use App\Http\Controllers\BaseController;
 use App\Services\PlaylistService;
 use Illuminate\Http\Request;
@@ -266,7 +268,7 @@ class UserPlaylistsController extends BaseController
             ContentService::STATUS_ARCHIVED
         ];
         ContentRepository::$pullFutureContent = true;
-
+        PlaylistDecorator::$decorationMode= DecoratorInterface::DECORATION_MODE_MINIMUM;
         $playlist = $this->userPlaylistsService->getPlaylist($playlistId, false);
         throw_if((empty($playlist) || ($playlist == -1)), new NotFoundHttpException());
 
@@ -296,6 +298,7 @@ class UserPlaylistsController extends BaseController
         ContentRepository::$bypassPermissions = true;
         $content = $this->contentService->getById($playlistItem['content_id']);
         ModeDecoratorBase::$decorationMode =   DecoratorInterface::DECORATION_MODE_MAXIMUM;
+        ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MAXIMUM;
         $playlistItems = $this->userPlaylistsService->getUserPlaylistContents($playlist['id'], [], 20, $page);
         ContentRepository::$bypassPermissions = false;
 
@@ -370,9 +373,7 @@ class UserPlaylistsController extends BaseController
         $playlistItem['playlist_item_name'] = $initialItem['playlist_item_name'] ?? false;
         $playlistItem['is_full_track'] = $initialItem['is_full_track'] ?? false;
         $playlistItem['is_instrumentless_track'] = $initialItem['is_instrumentless_track'] ?? false;
-
-        $userPlaylists = collect($this->userPlaylistsService->getUserPlaylist(user()->id, 'user-playlist'));
-        $playlists = $userPlaylists->whereNotIn('id', $playlistId);
+        $playlistItem['resources'] = $initialItem['resources'] ?? [] ;
 
         $playlistLessons = (new ContentFilterResultsEntity([
                                                                'results' => $otherItems,
@@ -381,9 +382,9 @@ class UserPlaylistsController extends BaseController
                                                                ),
                                                            ]))->toResponseRawJson();
 
-        $relatedPlaylists = (new ContentFilterResultsEntity(['results' => $playlists]))->toResponseRawJson();
-        if (empty($playlistItem['assignments'] ?? [])) {
+        if (empty($playlistItem['assignments'] ?? []) && $playlistItem['type'] !== 'assignment') {
             LessonAssignmentDecorator::$decorationMode = LessonAssignmentDecorator::DECORATION_MODE_MAXIMUM;
+            AddedToPrimaryPlaylistDecorator::$skip = true;
             $this->lessonAssignmentDecorator->decorate(new Collection([$playlistItem]))
                 ->first();
         }
@@ -422,6 +423,10 @@ class UserPlaylistsController extends BaseController
                     $playlistItem['parent']['parent']->fetch('data.thumbnail_url')
                 );
             }
+            }
+        if (!empty($playlistItem['parent'] ?? [])){
+            $playlistItem['resources'] = array_merge($playlistItem['resources'] ?? [], $initialItem['parent']['resources'] ?? []) ;
+
         }
 
         $relatedLesson =
@@ -434,7 +439,6 @@ class UserPlaylistsController extends BaseController
             "playlist" => $playlist,
             "playlistItem" => $playlistItem,
             "lessonType" => $playlistItem['type'],
-            "relatedPlaylists" => $relatedPlaylists,
             "playlistItems" => $playlistLessons,
             "relatedLesson" => $relatedLesson,
             "relatedLessons" => $relatedLesson,

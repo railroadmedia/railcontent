@@ -71,7 +71,6 @@
         :ranges-video-ids="{{ json_encode($rangesVideoIds ?? []) }}" {{-- Todo: Find a way to re add captions --}} {{-- :captions="{{ $lessonContent->fetch('fields.video.data.captions') }}" --}}
         :playlist-items="{{ $playlistItems }}"
         :related-lesson="{{ $relatedLesson }}"
-        :related-playlists="{{ $relatedPlaylists }}"
         :playlist-item-position="{{ $positionInPlaylist }}"
         :playlist-item-id="{{ $playlistItem['id'] }}"
         :playlist-item-title="{{ json_encode($playlistItem['title']) }}"
