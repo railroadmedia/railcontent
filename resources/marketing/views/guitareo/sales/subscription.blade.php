@@ -155,7 +155,7 @@
         'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-shop-summer-sale-bg.jpg',
         'logo' => 'TODO',
         'logoStyles' => 'TODO',
-        'promoText' => 'SAVE UP TO TODO% UNTIL JULY 17TH!',
+        'promoText' => 'SAVE UP TO 91% UNTIL JULY 17TH!',
     ])
 
     @php
