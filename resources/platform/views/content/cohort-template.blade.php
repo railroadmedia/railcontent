@@ -261,8 +261,14 @@
                         The course runs from {{ date('F jS', strtotime('+1 hour', strtotime($cohort['cohort_start_date']))) }} - {{ date('F jS', strtotime('+1 hour', strtotime($cohort['cohort_end_date']))) }}. We’ll notify you before the course begins.
                     </p>
                     <div>
-                        <a href="{{$homeUrl}}" class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]">Go home</a>
-                        <a href="{{$cohort['course_url']}}" class="tw-btn-primary tw-bg-[#00101D] tw-text-white hover:tw-bg-[#3F3F46] dark:tw-bg-white dark:tw-text-[#00101D] dark:hover:tw-bg-[#627F97] dark:hover:tw-text-white">Go to course</a>
+                        @if(!empty($cohort['conversation_url']))
+                            <div class="sm:tw-w-1/2 sm:tw-inline-block sm:tw-pr-1">
+                                <a href="{{$cohort['conversation_url']}}" class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#000C17] tw-w-full">Join the conversation</a>
+                            </div>
+                        @endif
+                        <div class="sm:tw-w-1/2 sm:tw-inline-block sm:tw-pl-1">
+                            <a href="{{$cohort['course_url']}}" class="tw-btn-primary tw-bg-[#00101D] tw-text-white hover:tw-bg-[#3F3F46] dark:tw-bg-white dark:tw-text-[#00101D] dark:hover:tw-bg-[#627F97] dark:hover:tw-text-white tw-w-full">Go to course</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -321,11 +327,6 @@
                     isError: true
                 });
             });
-        }
-
-        function openTrailer(URL){
-            console.log(URL)
-            //window.openModal('trailer');
         }
     </script>
 @endsection
