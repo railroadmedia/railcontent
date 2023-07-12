@@ -232,7 +232,7 @@ $bonuses = [
     [
         'name' => 'Learn Songs Faster',
         'price' => 19,
-        'description' => 'This masterclass will give you proven techniques for learning MORE songs in less time.',
+        'description' => 'Your guide to learning MORE songs in less time with Jared Falk & Dave Atkinson.',
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/lsf.jpg',
     ],
     [

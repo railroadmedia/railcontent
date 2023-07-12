@@ -92,7 +92,7 @@
                 <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
             </a>
             <p class="inline-block leading-tight text-sm align-middle pl-2 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
-            <p class="mb-10"  style="color:#FFD600;">ONLY {{ $availableSpots }} SPOTS AVAILABLE</p>
+            <p class="mb-10"  style="color:#FFD600;">ONLY <s>100</s> {{ $availableSpots }} SPOTS AVAILABLE</p>
             <p><b>Still have questions?</b> Call us toll-free at 1-800-439-8921 or directly at 1-604-855-7605.</p>
             <div class="inline-block w-full px-3 md:px-4 text-light-navy mt-6">
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa" aria-hidden="true"></i>
