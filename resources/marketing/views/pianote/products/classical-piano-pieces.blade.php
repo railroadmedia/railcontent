@@ -60,6 +60,16 @@
         .image-modal-arrow-right::before {
             content: "\f105";
         }
+        header {
+            background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image-m.jpg);
+            background-size: 250px;
+        }
+        @media (min-width: 768px) {
+            header {
+               background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image.jpg);
+                background-size: cover;
+            }
+        }
     </style>
 @stop()
 
@@ -67,14 +77,10 @@
     @include('pianote.sales.partials._nav', [
         "cartVersion" => true
     ])
-    <header class="text-white px-5 sm:px-6 py-16 sm:py-20 lg:py-36 bg-cover bg-top" style="background:#f7fbfe url(https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image.jpg);">
+    <header class="text-white px-5 sm:px-6 pt-64 pb-16 sm:py-20 lg:py-36 bg-top bg-no-repeat" style="background-color:#0e1623;">
         <div class="container max-w-3xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-5/12 text-center lg:text-left">
-                    <div class="mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top" style="padding-bottom: 75%;">
-                        <img class="absolute inset-0" alt="header image" fetchpriority="high"
-                            src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image-m.jpg" />
-                    </div>
                     <img class="h-16 sm:h-24 lg:h-32" alt="logo" fetchpriority="high"
                         src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light.svg">
                     <p class="leading-normal my-4 sm:my-6"><strong>Timeless classics</strong> you’ll want to play over and over again. Presented in original and simplified arrangements.</p>
@@ -103,8 +109,10 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background:#F2EFED;">
         <div class="container max-w-4xl mx-auto">
             <h3 class="text-center"><strong>Original & Simplified <br class="inline sm:hidden"> Arrangments of Every Piece</strong></h3>
-            <h6 class="text-center text-pianote my-3 sm:my-4"><em>Because these pieces should<br class="inline sm:hidden"> not be reserved for the pros.</em></h6>
-            <p class="leading-normal mb-7 sm:mb-10">Some of these pieces are quite advanced.
+            <p class="leading-normal mt-4 sm:mt-5 mb-7 sm:mb-10">
+                <span class="text-pianote"><em>Because these pieces should<br class="inline sm:hidden"> not be reserved for the pros.</em></span>
+                <br><br>
+                Some of these pieces are quite advanced.
                 <br><br>
                 But we don’t think that should stop anyone from being able to play and enjoy them. That’s why you’ll find simplified versions of every piece that are approachable for the late beginner/early intermediate pianist.
                 <br><br>
@@ -112,22 +120,10 @@
 
             <div class="flex flex-wrap text-left mx-auto mt-5 sm:mt-7">
                 <div class="w-1/2 pr-2 sm:px-2">
-                    <div class="relative">
-                        <div class=" aspect-16:9  cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative" data-open="trailer">
-                            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                            <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/trailer.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
-                        </div>
-                        <p class="inline-block rounded-full bg-black text-white px-5 mx-auto absolute bottom-0 left-1/2 -translate-x-1/2 -mb-3"><strong>Original</strong></p>
-                    </div>
+                    <img class="cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open="original" src="https://pianote.s3.amazonaws.com/products/classical-piano-pieces/original-video-thumb.png">
                 </div>
                 <div class="w-1/2 sm:px-2">
-                    <div class="relative">
-                        <div class=" aspect-16:9  cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative" data-open="trailer">
-                            <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
-                            <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/trailer.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
-                        </div>
-                        <p class="inline-block rounded-full bg-pianote text-white px-5 mx-auto absolute bottom-0 left-1/2 -translate-x-1/2 -mb-3"><strong>Simplified</strong></p>
-                    </div>
+                    <img class="cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open="simplified" src="https://pianote.s3.amazonaws.com/products/classical-piano-pieces/simplified-video-thumb.png">
                 </div>
             </div>
         </div>
@@ -136,25 +132,25 @@
     <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book-bg.jpg);">
         <h3 class="leading-tight"><strong>Take A Look Inside.</strong></h3>
         <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><em>Click to see inside the book!</em></p>
-        <a href="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Classical-Piano-Book-1-14.pdf" class="relative">
+        <a target="_blank" href="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Classical-Piano-Book-1-14.pdf" class="relative">
             <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
         </a>
     </section>
-    <section class="relative text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20 py-16 sm:pb-32 lg:pb-40" style="background:linear-gradient(to bottom, #f2efed, #FFF);">
-        <div class="absolute z-10 top-0 left-0 right-0 bg-cover lg:bg-contain bg-no-repeat bg-top z-10 h-1/2 lg:h-[60%]" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/author-bg.png);"></div>
+    <section class="relative text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20" style="background:linear-gradient(to bottom, #f2efed, #FFF);">
+        <div class="absolute z-10 top-0 left-0 right-0 bg-cover bg-no-repeat bg-top z-10 h-1/2 lg:h-full" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/author-bg.png);"></div>
         <div class="container max-w-5xl mx-auto relative z-20">
-            <h3 class="text-center"><strong>About The Authors</strong></h3>
+            <h3 class="text-center mb-24"><strong>About The Authors</strong></h3>
 
-            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
-                <div class="w-full sm:w-1/2 px-2">
-                    <div class="text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow shadow-lg" style="background-color:#f2efed;">
-                        <img class="w-20 sm:w-36 relative -mb-8 sm:mb-0 inline-block w-full relative z-20 rounded-full border-4 border-white shadow-lg transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
+            <div class="flex flex-wrap sm:flex-nowrap items-start justify-center">
+                <div class="w-full sm:w-1/2 px-4">
+                    <div class="relative text-left z-10 rounded-xl py-8 sm:py-12 px-6 sm:px-10 w-full shadow-md" style="background-color:#f2efed;">
+                        <img class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 lg:w-36 z-20 rounded-full border-4 border-white shadow-md transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
                             src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/lisa-profile.jpg">
                         <br>
-                        <img class="h-5 transition-all opacity-0" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')"
+                        <img class="h-5 my-2 sm:my-3 transition-all opacity-0" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')"
                             src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector.svg">
-                        <p class="leading-normal mt-2 lg:mt-3">
+                        <p class="leading-normal">
                             Lisa Witt is the lead instructor at Pianote and has inspired millions of students around the world with her infectious enthusiasm for this instrument.
                             <br><br>Lisa grew up learning classical piano through the Royal Conservatory of Music, but it wasn’t easy.
                             <br><br>“In fact, I mostly hated it,” she said.
@@ -165,14 +161,14 @@
                         </p>
                     </div>
                 </div>
-                <div class="w-full sm:w-1/2 px-2">
-                    <div class="text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-20 max-w-lg lg:max-w-2xl sm:mt-8 w-full sm:w-auto sm:flex-grow shadow-lg" style="background-color:#f2efed;">
-                        <img class="w-20 sm:w-36 relative -mb-8 sm:mb-0 inline-block w-full relative z-20 rounded-full border-4 border-white shadow-lg transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
+                <div class="w-full sm:w-1/2 px-4">
+                    <div class="relative text-left z-10 rounded-xl py-8 sm:py-12 px-6 sm:px-10 w-full shadow-md" style="background-color:#f2efed;">
+                        <img class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 lg:w-36 z-20 rounded-full border-4 border-white shadow-md transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
                             src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/eleny-profile.jpg">
                         <br>
-                        <img class="h-5 transition-all opacity-0" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')"
+                        <img class="h-5 my-2 sm:my-3 transition-all opacity-0" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')"
                             src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector-1.svg">
-                        <p class="leading-normal mt-2 lg:mt-3">
+                        <p class="leading-normal">
                             Eleny Quapp is a skilled musician with over 20 years of experience. As a former student of the Royal Conservatory of Music, she has refined her skills at the piano and has since become an accomplished teacher, passing on her passion for music to her students.
                             <br><br>Eleny's love for music is reflected in her teaching, where she emphasizes the importance of practice and dedication, but also discovering the fun in learning. She firmly believes in the profound effects that music can have on a person's life and will always find ways to inspire those around her.
                             <br><br>With a particular affinity for classical music, Eleny enjoys sharing her passion for some of the world's most beautiful music with those around her.
@@ -185,60 +181,42 @@
 
         </div>
     </section>
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container max-w-4xl mx-auto">
-            <h3 class="leading-tight text-center mb-4 sm:mb-5"><strong>The best way to <br class="inline sm:hidden"> play your favorites.</strong></h3>
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 mb-24">
+        <div class="container max-w-5xl mx-auto">
+            <h3 class="leading-tight text-center mb-6 sm:mb-7"><strong>The best way to <br class="inline sm:hidden"> play your favorites.</strong></h3>
 
-            <img class="hidden sm:inline-block h-64 lg:h-80" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage.png">
+            <img class="hidden sm:inline-block h-64 lg:h-72" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage.png">
             <img class="sm:hidden" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-m.png">
         </div>
     </section>
 
     <div id="final" class="anchor"></div>
-    <section class="px-5 sm:px-6 py-10 sm:py-14 lg:py-20 bg-cover bg-top" style="background:url(https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/order-bg.jpg);">
-        <div class="container max-w-5xl mx-auto">
+
+    <section class="px-5 sm:px-6 py-16 sm:py-20 lg:py-28 bg-cover bg-top" style="background:#f7fbfe url(https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/order-bg.jpg);">
+        <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="w-full sm:w-7/12 text-center lg:text-left">
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top" style="padding-bottom: 75%;">
-                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image-m.jpg" alt="header image" fetchpriority="high" />
-                    </div>
-                    <img class="h-14 sm:h-18 lg:h-20 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light-dark.svg" alt="logo" fetchpriority="high">
-
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Timeless classics</strong> you’ll want to play over and over again. Presented in original and simplified arrangements.</h6>
-
-
-                    <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
-                        <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <a href="#final" class="join medium w-full anchor-slide">GET YOUR COPY &raquo;</a>
-                        </div>
-                    </div>
+                <div class="w-full sm:w-7/12 text-center lg:text-left sm:order-1">
+                    <img class="-mt-52 sm:-mb-20" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/order-book.png">
                 </div>
-                <div class="w-full sm:w-5/12 text-center lg:text-left">
-                    <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/order-book.png">
+                <div class="w-full sm:w-5/12 text-center lg:text-left pr-5">
+                    <img class="h-16 sm:h-24 lg:h-32" alt="logo" fetchpriority="high"
+                        src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light-dark.svg">
+                    <p class="leading-normal my-4 sm:my-6"><strong>Timeless classics</strong> you’ll want to play over and over again. Presented in original and simplified arrangements.</p>
+                    <a href="#final" class="join medium w-full anchor-slide">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>
     </section>
 
     @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "dayOne",
-        "video" => '//player.vimeo.com/video/823805392?h=bbd23aa655&autoplay=1',
-        "title" => 'dayOne'
+        'modalId' => "original",
+        "video" => '//player.vimeo.com/video/844377509?h=3c1c824744&autoplay=1',
+        "title" => 'original'
     ])
     @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "dayThirty",
-        "video" => '//player.vimeo.com/video/823805719?h=722d7f7336&autoplay=1',
-        "title" => 'dayThirty'
-    ])
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "demoVid",
-        "video" => '//player.vimeo.com/video/823806000?h=457fb12951&autoplay=1',
-        "title" => 'demoVid'
-    ])
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/823788317?h=b2955e3bc7&autoplay=1',
-        "title" => 'trailer'
+        'modalId' => "simplified",
+        "video" => '//player.vimeo.com/video/844377537?h=542b26a29f&autoplay=1',
+        "title" => 'simplified'
     ])
 
     @php
