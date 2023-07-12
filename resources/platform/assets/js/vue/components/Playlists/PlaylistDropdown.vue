@@ -1,6 +1,6 @@
 <script setup>
 // TODO: FIX WHEN THE CUE IS BARELY VISIBLE AND YOU OPEN THE DROPDOWN
-import { onBeforeMount, onMounted, inject, reactive, computed } from 'vue';
+import { onBeforeMount, onMounted, inject, reactive, computed, onBeforeUpdate } from 'vue';
 import PlaylistService from '../../../services/playlists.js';
 import { usePlaylistsStore } from '../../../stores/playlists';
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
@@ -248,7 +248,7 @@ const clickHandler = (fnstring) => {
         case "editLessonTime": editLessonTime(); break;
         case "reorderPlaylist": reorderPlaylist(); break;
     }
-}
+};
 
 //---------Lifecycle Methods---------//
 onBeforeMount(() => {
@@ -257,7 +257,13 @@ onBeforeMount(() => {
 
 onMounted(() => {
     //load Playlists
-})
+});
+
+onBeforeUpdate(() => {
+    if (props.isPrivate !== undefined && props.isPrivate !== null && props.isPrivate !== state.isPrivate) {
+        state.isPrivate = props.isPrivate;
+    }
+});
 
 </script>
 <template>
