@@ -15,9 +15,11 @@ return new class extends Migration
     {
         //
         Schema::table('cohorts', function (Blueprint $table) {
-            $table->string('first_day_text')
+            $table->string('benefit_1')
                 ->nullable();
-            $table->string('last_day_text')
+            $table->string('benefit_2')
+                ->nullable();
+            $table->string('benefit_3')
                 ->nullable();
         });
     }
@@ -31,8 +33,9 @@ return new class extends Migration
     {
         //
         Schema::table('cohorts', function (Blueprint $table) {
-            $table->dropColumn('first_day_text');
-            $table->dropColumn('last_day_text');
+            $table->dropColumn('benefit_1');
+            $table->dropColumn('benefit_2');
+            $table->dropColumn('benefit_3');
         });
     }
 };

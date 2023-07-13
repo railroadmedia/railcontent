@@ -106,6 +106,9 @@ class Cohort extends Resource
             Text::make('Headline')->hideFromIndex(),
             Text::make('Subheadline')->hideFromIndex(),
             Text::make('Header Description', 'header_description')->hideFromIndex(),
+            Text::make('Benefit 1', 'benefit_1')->hideFromIndex(),
+            Text::make('Benefit 2', 'benefit_2')->hideFromIndex(),
+            Text::make('Benefit 3', 'benefit_3')->hideFromIndex(),
             Image::make('Header Image Url', 'header_image_url')
                 ->help('The image should be 464 x 464px or a comparable aspect ratio.')
                 ->disk('nova_s3')
@@ -281,37 +284,6 @@ class Cohort extends Resource
                 }),
             Text::make('Body image url', 'body_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
 
-            Image::make('Timeline Image', 'timeline_image_url')
-                ->disk('nova_s3')
-                ->prunable()
-                ->hideFromIndex()
-                ->deletable(false)
-                ->disableDownload()
-                ->storeAs(function (Request $request){
-                    $brandId = $request->brand;
-                    $brand = '';
-
-                    if($brandId === "1") {
-                        $brand = 'Drumeo';
-                    }
-                    elseif($brandId === "2"){
-                        $brand = 'Pianote';
-                    }
-                    elseif($brandId === "3"){
-                        $brand = 'Guitareo';
-                    }
-                    elseif($brandId === "4"){
-                        $brand = 'Singeo';
-                    }
-
-                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('timeline_image_url')->getClientOriginalName();
-                })
-                ->preview(function($value){
-                    if(empty($value)) return null;
-
-                    return $value;
-                }),
-            Text::make('Timeline Image', 'timeline_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
 
             Text::make('First day Trailer URL', 'description_trailer_1')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
             Image::make('Thumb image url - first day trailer', 'description_trailer_1_thumb_url')
