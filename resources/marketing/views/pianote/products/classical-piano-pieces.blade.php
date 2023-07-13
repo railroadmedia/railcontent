@@ -84,7 +84,8 @@
                     <img class="h-16 sm:h-24 lg:h-32" alt="logo" fetchpriority="high"
                         src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light.svg">
                     <p class="leading-normal my-4 sm:my-6"><strong>Timeless classics</strong> you’ll want to play over and over again. Presented in original and simplified arrangements.</p>
-                    <a href="#final" class="join medium w-full anchor-slide">GET YOUR COPY &raquo;</a>
+                    <h4 class="mb-4 sm:mb-6"><strong>ONLY ${{ floatval($productPrices['classical-piano-pieces']->discounted_price) }}</strong></h4>
+                    <a href="/ecommerce/add-to-cart?products[classical-piano-pieces]=1&redirect=/order" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>
@@ -166,7 +167,7 @@
                         <img class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 lg:w-36 z-20 rounded-full border-4 border-white shadow-md transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
                             src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/eleny-profile.jpg">
                         <br>
-                        <img class="h-5 my-2 sm:my-3 transition-all opacity-0" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')"
+                        <img class="h-7 my-2 sm:my-3 transition-all opacity-0" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')"
                             src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector-1.svg">
                         <p class="leading-normal">
                             Eleny Quapp is a skilled musician with over 20 years of experience. As a former student of the Royal Conservatory of Music, she has refined her skills at the piano and has since become an accomplished teacher, passing on her passion for music to her students.
@@ -193,16 +194,17 @@
     <div id="final" class="anchor"></div>
 
     <section class="px-5 sm:px-6 py-16 sm:py-20 lg:py-28 bg-cover bg-top" style="background:#f7fbfe url(https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/order-bg.jpg);">
-        <div class="container max-w-4xl mx-auto">
+        <div class="container max-w-3xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left sm:order-1">
-                    <img class="-mt-52 sm:-mb-20" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/order-book.png">
+                    <img class="-mt-52 sm:-mb-20 max-w-md" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/order-book.png">
                 </div>
                 <div class="w-full sm:w-5/12 text-center lg:text-left pr-5">
                     <img class="h-16 sm:h-24 lg:h-32" alt="logo" fetchpriority="high"
                         src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light-dark.svg">
                     <p class="leading-normal my-4 sm:my-6"><strong>Timeless classics</strong> you’ll want to play over and over again. Presented in original and simplified arrangements.</p>
-                    <a href="#final" class="join medium w-full anchor-slide">GET YOUR COPY &raquo;</a>
+                    <h4 class="mb-4 sm:mb-6"><strong>ONLY ${{ floatval($productPrices['classical-piano-pieces']->discounted_price) }}</strong></h4>
+                    <a href="/ecommerce/add-to-cart?products[classical-piano-pieces]=1&redirect=/order" class="join medium w-full">GET YOUR COPY &raquo;</a>
                 </div>
             </div>
         </div>
