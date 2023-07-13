@@ -326,7 +326,7 @@ class UserDelete extends Command
         }
 
         $totalRowsDeleted = 0;
-        $batch = array_chunk($allUserIds, 10);
+        $batch = array_chunk($allUserIds, 1);
 
         foreach ($batch as $batchIndex => $batchUserIds) {
             foreach ($this->databaseTablesUserIdColumnsMap as $databaseConnectionName => $tablesColumns) {
