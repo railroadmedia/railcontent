@@ -7,7 +7,7 @@
     <div class="container mx-auto relative z-10">
         <div>
             <img class="sm:h-32 md:h-40 lg:h-48 -mt-16 {{ $logoStyles }}" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/{{ $logo }}" alt="{{ $theme }} summer sale logo" fetchpriority="high">
-            <p class="uppercase leading-tight mt-1">{!! $title !!}</p>
+            <p class="font-extrabold uppercase leading-tight mt-1">{!! $title !!}</p>
             <p class="font-extrabold text-[#FFD600] mt-1 mb-4 md:mb-6">{{ $promoText }}</p>
             <div class="flex justify-center">
                 <div class="rounded-xl bg-[#FFD600] inline-block" style="filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.25));" x-data="timer()" x-init="countdown()">
