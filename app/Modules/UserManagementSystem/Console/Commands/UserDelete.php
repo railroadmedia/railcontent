@@ -322,7 +322,7 @@ class UserDelete extends Command
         }
 
         $totalRowsDeleted = 0;
-        $batch = array_chunk($allUserIds, 1);
+        $batch = array_chunk($allUserIds, 10);
 
         foreach ($batch as $batchIndex => $batchUserIds) {
             try {
@@ -341,11 +341,11 @@ class UserDelete extends Command
                                 foreach ($rows as $row) {
                                     $id = property_exists($row, 'id') ? $row->id : '';
                                     $this->info(
-                                        "Deleting (simulate): $tableName id: $id $userIdColumn:" . $row->{$userIdColumn}
+                                        "Deleting (simulate): $databaseConnectionName.$tableName id: $id $userIdColumn:" . $row->{$userIdColumn}
                                     );
                                 }
                             } else {
-                                $this->info('Deleting from table: ' . $tableName);
+                                $this->info("Deleting from table: $databaseConnectionName.$tableName");
 
                                 $totalRowsDeleted += $query->delete();
 
@@ -372,9 +372,9 @@ class UserDelete extends Command
 
                 $this->info('Finished batch ' . $batchIndex + 1 . ' out of ' . count($batch));
                 $this->info('Total rows deleted: ' . $totalRowsDeleted);
-                $this->info('Total users deleted: ' . count($allUserIds));
+                $this->info('Total users deleted: ' . count($batchUserIds));
             } catch (\Exception $e) {
-                $this->info("Error deleting user: " . implode(', ', $batchUserIds));
+                $this->info("Error deleting users: " . implode(', ', $batchUserIds));
                 Log::error($e);
             }
         }
