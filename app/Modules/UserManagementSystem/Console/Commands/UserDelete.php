@@ -98,7 +98,6 @@ class UserDelete extends Command
                 'railcenter_renewal_history_inf_ppal',
                 'railcenter_user_levels',
                 'railcenter_user_level_links',
-                'railtracker4_requests',
                 'railtracker_media_playback_sessions',
                 'star_rating',
                 'subscriptions',
@@ -149,7 +148,6 @@ class UserDelete extends Command
                 'completed_lessons',
                 'experiences',
                 'favourite_series',
-                'railtracker4_requests',
                 'railtracker_media_playback_sessions',
                 'role_user',
                 'shipping_addresses',
@@ -187,7 +185,6 @@ class UserDelete extends Command
         'pianote_laravel_mysql_writer_only' => [
             'user_id' => [
                 'railtracker_media_playback_sessions',
-                'railtracker4_requests',
                 'subscriptions',
                 'user_access_levels',
                 'user_addresses',
@@ -230,7 +227,6 @@ class UserDelete extends Command
         'singeo_laravel_mysql_writer_only' => [
             'user_id' => [
                 'railtracker_media_playback_sessions',
-                'railtracker4_requests',
             ],
             'author_id' => [
                 'forum_posts',
@@ -329,53 +325,58 @@ class UserDelete extends Command
         $batch = array_chunk($allUserIds, 1);
 
         foreach ($batch as $batchIndex => $batchUserIds) {
-            foreach ($this->databaseTablesUserIdColumnsMap as $databaseConnectionName => $tablesColumns) {
-                foreach ($tablesColumns as $userIdColumn => $tableNames) {
-                    foreach ($tableNames as $tableName) {
-                        $query = $this->databaseManager
-                            ->connection($databaseConnectionName)
-                            ->table($tableName)
-                            ->whereIn($userIdColumn, $batchUserIds);
+            try {
+                foreach ($this->databaseTablesUserIdColumnsMap as $databaseConnectionName => $tablesColumns) {
+                    foreach ($tablesColumns as $userIdColumn => $tableNames) {
+                        foreach ($tableNames as $tableName) {
+                            $query = $this->databaseManager
+                                ->connection($databaseConnectionName)
+                                ->table($tableName)
+                                ->whereIn($userIdColumn, $batchUserIds);
 
-                        if ($this->simulate) {
-                            $rows = $query->get();
-                            $totalRowsDeleted += $rows->count();
+                            if ($this->simulate) {
+                                $rows = $query->get();
+                                $totalRowsDeleted += $rows->count();
 
-                            foreach ($rows as $row) {
-                                $id = property_exists($row, 'id') ? $row->id : '';
-                                $this->info(
-                                    "Deleting (simulate): $tableName id: $id $userIdColumn:" . $row->{$userIdColumn}
-                                );
+                                foreach ($rows as $row) {
+                                    $id = property_exists($row, 'id') ? $row->id : '';
+                                    $this->info(
+                                        "Deleting (simulate): $tableName id: $id $userIdColumn:" . $row->{$userIdColumn}
+                                    );
+                                }
+                            } else {
+                                $this->info('Deleting from table: ' . $tableName);
+
+                                $totalRowsDeleted += $query->delete();
+
+                                usleep(100000);
                             }
-                        } else {
-                            $this->info('Deleting from table: ' . $tableName);
-
-                            $totalRowsDeleted += $query->delete();
-
-                            usleep(100000);
                         }
                     }
                 }
-            }
 
 // finally delete from the usora users table
-            $query = $this->databaseManager->connection('musora_laravel_mysql_writer_only')->table(
-                'usora_users'
-            )->WhereIn('id', $batchUserIds);
+                $query = $this->databaseManager->connection('musora_laravel_mysql_writer_only')->table(
+                    'usora_users'
+                )->WhereIn('id', $batchUserIds);
 
-            if ($this->simulate) {
-                $userRows = $query->get();
-                $totalRowsDeleted += $userRows->count();
-                foreach ($userRows as $userRow) {
-                    $this->info("Deleting (simulate): usora_users id: $userRow->id email: $userRow->email");
+                if ($this->simulate) {
+                    $userRows = $query->get();
+                    $totalRowsDeleted += $userRows->count();
+                    foreach ($userRows as $userRow) {
+                        $this->info("Deleting (simulate): usora_users id: $userRow->id email: $userRow->email");
+                    }
+                } else {
+                    $totalRowsDeleted += $query->delete();
                 }
-            } else {
-                $totalRowsDeleted += $query->delete();
-            }
 
-            $this->info('Finished batch ' . $batchIndex + 1 . ' out of ' . count($batch));
-            $this->info('Total rows deleted: ' . $totalRowsDeleted);
-            $this->info('Total users deleted: ' . count($allUserIds));
+                $this->info('Finished batch ' . $batchIndex + 1 . ' out of ' . count($batch));
+                $this->info('Total rows deleted: ' . $totalRowsDeleted);
+                $this->info('Total users deleted: ' . count($allUserIds));
+            } catch (\Exception $e) {
+                $this->info("Error deleting user: " . implode(', ', $batchUserIds));
+                Log::error($e);
+            }
         }
     }
 }
