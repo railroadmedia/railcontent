@@ -22,8 +22,8 @@ $product = (object)[
             'free_bonus' => true,
         ],
         [
-            'name' => 'Drumeo Drumsticks',
-            'price' => 12.95,
+            'name' => '6 Pairs of Drumeo Drumsticks',
+            'price' => 77.70,
             'bundle_desc' => 'The Drumeo 5A Drumsticks by Vater -- made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer-lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.',
             'bundle_img' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
             'bundle_free_shipping' => true,
@@ -178,7 +178,7 @@ $bonuses = [
     ],
     [
         'name' => 'Drumeo Drumsticks',
-        'price' => 12.95,
+        'price' => 77.70,
         'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer',
         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
         'shipping' => true,
