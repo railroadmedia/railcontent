@@ -144,8 +144,7 @@
                 @include('musora.shop._shop-card', [
                      "itemURL" => "/",
                      "sku" => null,
-                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg",
-                     "packLogo" => 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png',
+                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",
                      "title" => "Drumeo Membership",
                      "packAuthor" => "Award-Winning Membership",
                      "cardDescription" => "The Ultimate Online Drum Lessons Experience. You’ll get step-by-step drum lessons from the best drummers in the world (and much more).",
