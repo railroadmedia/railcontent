@@ -71,15 +71,15 @@
                     <p class="font-bold mb-1 text-sm">Customs fees</p>
                     <p class="text-sm">Does Musora cover customs fees?</p>
                 </a>
-{{--                <a href="TODO" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">--}}
+{{--                <a href="" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">--}}
 {{--                    <i class="fal fa-trophy text-3xl md:text-4xl mb-3"></i>--}}
 {{--                    <p class="font-bold mb-1 text-sm"> Learning outcomes</p>--}}
-{{--                    <p class="text-sm">TODO</p>--}}
+{{--                    <p class="text-sm"></p>--}}
 {{--                </a>--}}
-{{--                <a href="TODO" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">--}}
+{{--                <a href="" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">--}}
 {{--                    <i class="fal fa-desktop text-3xl md:text-4xl mb-3"></i>--}}
 {{--                    <p class="font-bold mb-1 text-sm">Online or in-person lessons?</p>--}}
-{{--                    <p class="text-sm">TODO</p>--}}
+{{--                    <p class="text-sm"></p>--}}
 {{--                </a>--}}
             </div>
         </div>

@@ -1,13 +1,9 @@
 <li class="scalable-card {{ !empty($cardType) ? $cardType : '' }} {{ !empty($soldOut) ? 'sold-out' : '' }}" data-price="{{ floatVal($price) }}" data-category="{{ $category }}">
     <div class="flip-card-inner">
         <div class="flip-card-front card-inside">
-            <section class="drum-shop">
+            <section class="drum-shop w-full">
                 <div class="top-image @if(!empty($packLogo)) with-logo @endif">
-                    <picture>
-                        <source media="(min-width: 640px)" srcset="{{ 'https://www.musora.com/musora-cdn/image/width=600,quality=85/'.$thumbnail }}">
-                        <img class="absolute w-full h-full top-0 left-0 object-top object-cover" src="{{ 'https://www.musora.com/musora-cdn/image/width=400,quality=85/'.$thumbnail }}" alt="{{ $title }} thumbnail" @if(!empty($FCP)) fetchpriority="high" @endif />
-                    </picture>
-
+                    <img class="absolute w-full h-full top-0 left-0 object-top object-cover" src="{{ 'https://www.musora.com/musora-cdn/image/width=520,quality=85/'.$thumbnail }}" alt="{{ $title }} thumbnail" @if(!empty($FCP)) fetchpriority="high" @endif />
                     @if (!empty($badgeText))
                         <span class="top-left-badge bg-promo">
                             {!! $badgeText !!}
@@ -18,13 +14,11 @@
                         </span>
                     @endif
                     @if(!empty($packLogo))
-                        <div class="logo">
-                            <picture>
-                                <source media="(min-width: 640px)" srcset="{{ 'https://www.musora.com/musora-cdn/image/width=600,quality=85/'.$packLogo }}">
-                                <img @if($sku === '30-day-drummer-2') class="max-h-full h-24" @endif src="{{ 'https://www.musora.com/musora-cdn/image/width=300,quality=85/'.$packLogo }}" alt="{{ $title }} logo" @if(!empty($FCP)) fetchpriority="high" @endif >
-                            </picture>
-
+                        <div class="z-20 absolute bottom-0 left-0 right-0 px-5 py-4">
+                            <img class="w-auto h-auto" style="max-height:55px;" src="{{ 'https://www.musora.com/musora-cdn/image/width=500,quality=85/'.$packLogo }}"
+                                alt="{{ $title }} logo" @if(!empty($FCP)) fetchpriority="high" @endif >
                         </div>
+                        <div class="inset-0 absolute z-10" style="background:linear-gradient(to bottom, transparent 66%, rgba(0,0,0,0.75));"></div>
                     @endif
                     <i class="fas fa-arrow-right hover-icon"></i>
                 </div>
@@ -34,18 +28,18 @@
                         <p><em>{{ $packAuthor }}</em></p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p><strong class="text-promo">{{ $specialPrice }}</strong></p>
+                        <p><strong class="text-{{ $theme }} font-extrabold">{{ $specialPrice }}</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
                         <p><s>WAS ${{ floatVal($fullPrice) }}</s>
-                            <strong class="text-promo"> NOW
+                            <strong class="text-{{ $theme }} font-extrabold"> NOW
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatVal($price)  }}
                                 @else
-                                    ${{  floatVal(number_format($price, 2))  }}
+                                    ${{  number_format($price, 2)  }}
                                 @endif
                             </strong></p>
                     @else
-                        <p><strong class="text-promo">${{  floatVal($price)  }}</strong></p>
+                        <p><strong class="text-{{ $theme }} font-extrabold">${{  floatVal($price)  }}</strong></p>
                     @endif
                 </div>
             </section>
@@ -53,17 +47,17 @@
         @if(empty($isBundle))
             <div class="flip-card-back">
                 <div class="card-center">
-                    <h6>{!! $title !!}</h6>
+                    <h6 class="font-black">{!! $title !!}</h6>
                     @if(!empty($packAuthor))
                         <p><em>{{ $packAuthor }}</em></p>
                     @endif
                     @if(!empty($cardDescription))
-                        <p class="description">{!! $cardDescription  !!}</p>
+                        <p class="description leading-normal my-2">{!! $cardDescription  !!}</p>
                     @endif
                     @if(!empty($specialPrice))
-                        <p><strong class="text-promo">{{  $specialPrice  }}</strong><br><br></p>
+                        <p class="text-promo mb-4"><strong class="font-extrabold">{{  $specialPrice  }}</strong></p>
                     @elseif (round(100 - (100 * ($price / $fullPrice))) > 1)
-                        <p class="price"><s>${{ floatVal($fullPrice) }}</s> <strong class="text-promo">
+                        <p class="leading-tight mb-2 price"><s>${{ floatVal($fullPrice) }}</s> <strong class="font-extrabold text-promo">
                                 @if(number_format($price, 2) == intval($price))
                                     ${{  floatVal($price)  }}
                                 @else
@@ -71,10 +65,10 @@
                                 @endif
                             </strong></p>
                     @else
-                        <p class="price"><strong class="text-promo"> ${{  floatVal($price)  }}</strong></p>
+                        <p class="leading-tight mb-2 price"><strong class="font-extrabold text-promo"> ${{  floatVal($price)  }}</strong></p>
                     @endif
                     @if(!empty($includedEdge))
-                        <p class="description" style="top: -13px;position: relative;margin: 0;"><em class="text-red">Or free with {{ ucfirst($theme) }}</em></p>
+                        <p class="description relative -mt-2 mb-1"><em class="text-red">Or free with {{ ucfirst($theme) }}</em></p>
                     @endif
                     @if(!$soldOut)
                         @if(!empty($sizes) && count($sizes) > 0)

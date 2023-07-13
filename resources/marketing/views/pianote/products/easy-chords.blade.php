@@ -1,13 +1,5 @@
 @extends('pianote._partials.global-layout')
 
-@php
-    $modalImages = [
-        "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-106-Edit.jpg",
-        "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg",
-        "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg"
-    ];
-@endphp
-
 @section('global-head')
     @parent
     <title>Easy Chords | Pianote</title>
@@ -845,13 +837,6 @@
         "video" => '//player.vimeo.com/video/823788317?h=b2955e3bc7&autoplay=1',
         "title" => 'trailer'
     ])
-    @foreach ($modalImages as $key => $img)
-        @include('pianote.products.partials.image-modal',[
-            'id' => "seeInside".$key,
-            "image" => $img,
-            "imageName" => "seeInside".$key,
-        ])
-    @endforeach
 
     @include('_partials.components.countdown',[
         'countdownDate' => '2023-06-05 00:00:00',
@@ -884,41 +869,6 @@
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('private');
             });
-
-            // var showModal = location.search.substr(1).includes('member-email');
-            //
-            // if (showModal) {
-            //     $('#loginModal').foundation('open');
-            // }
-            let imgNum = 1;
-
-            $('.image-modal-arrow-left').on('click', function(){
-                if(imgNum === 0){
-                    imgNum = 2;
-                }
-                else {
-                    imgNum--;
-                }
-
-                $('#seeInside' + imgNum).find('img').each(function(){
-                    const imgSrc = $(this);
-                    $('#seeInside1').find('img').attr('src', imgSrc.data('src'))
-                })
-            })
-
-            $('.image-modal-arrow-right').on('click', function(){
-                if(imgNum === 2){
-                    imgNum = 0;
-                }
-                else {
-                    imgNum++;
-                }
-
-                $('#seeInside' + imgNum).find('img').each(function(){
-                    const imgSrc = $(this);
-                    $('#seeInside1').find('img').attr('src', imgSrc.data('src'))
-                })
-            })
 
             @if(!empty($errors) && $errors->any())
                 $('#waitlistModal').foundation('open');

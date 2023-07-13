@@ -798,7 +798,7 @@
 
         <div class="text-center">
             <h3 class="font-extrabold mb-6">Plus thousands more popular songs.</h3>
-            <a href="/TODO" class="mx-1 join blue smaller font-bebas">Get started <i class="fas fa-arrow-right" style="line-height: 0;"></i> </a>
+            <a href="/choose-plan" class="mx-1 join blue smaller font-bebas">Get started <i class="fas fa-arrow-right" style="line-height: 0;"></i> </a>
         </div>
     </section>
     @include('musora._partials.order-section-collage')

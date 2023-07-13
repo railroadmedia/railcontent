@@ -148,6 +148,13 @@
         ])
     @endif
 
+    @include('_partials.components.promo-top-banner',[
+        'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-shop-summer-sale-bg.jpg',
+        'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-summer-sale-logo.svg',
+        'logoStyles' => 'mb-3 ml-2 sm:ml-6 lg:ml-10',
+        'promoText' => 'SAVE UP TO 68% UNTIL JULY 17TH!',
+    ])
+
     @php
         $features = [
             [
@@ -215,6 +222,9 @@
                 'pointOne' => '1000+ popular songs',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Learn anywhere, anytime',
+
+
+
             ])
         @else
             @include('musora.sales.components.header-section', [
@@ -565,8 +575,8 @@
     @elseif(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
-            "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
-            "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
+            "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
+            "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
             "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited piano lessons.",
             "thirdPoint" => "Direct access to real teachers.",

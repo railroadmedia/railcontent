@@ -7,7 +7,7 @@
 
     <meta name="description" content="Because starting out should sound this good.">
     <meta property="og:description" content="Because starting out should sound this good.">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://pianote.s3.amazonaws.com/shop/products/beautiful-beginner-bundle/banner.jpg" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/beautiful-beginner-bundle/banner.jpg" style="display: none;">
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
@@ -112,7 +112,7 @@
             <div class="w-full mx-auto mt-5 sm:mt-10 mb-10 sm:mb-20 px-4" style="max-width:920px;">
                 <img
                     class="rounded-xl"
-                    src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://pianote.s3.amazonaws.com/shop/products/beautiful-beginner-bundle/banner.jpg"
+                    src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/beautiful-beginner-bundle/banner.jpg"
                     alt="Video thumbnail"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -246,7 +246,7 @@
                     </div>
                     <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center text-left">
                         <div class="image-wrap w-32 lg:w-48 flex-shrink-0 relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
-                            <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://pianote.s3.amazonaws.com/sales/2022/bonus-chords-scales.jpg" alt="product thumbnail4">
+                            <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg" alt="product thumbnail4">
                         </div>
                         <div>
                             <strong>Piano Chords &amp; Scales - <span>Normally $39</span>
@@ -260,7 +260,7 @@
                     </div>
                     <div class="bonus-pic mb-7 md:flex md:items-start md:mb-10 lg:items-center text-left">
                         <div class="image-wrap w-32 lg:w-48 flex-shrink-0 relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
-                            <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/poster-chords.jpg" alt="product thumbnail5">
+                            <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/poster-chords.jpg" alt="product thumbnail5">
                         </div>
                         <div>
                             <strong>Chords Poster - <span>Normally $9</span>
@@ -274,7 +274,7 @@
                     </div>
                     <div class="bonus-pic md:flex md:items-start lg:items-center text-left">
                         <div class="image-wrap w-32 lg:w-48 flex-shrink-0 relative overflow-hidden mb-4 md:mb-0 md:mr-5 mx-auto ">
-                            <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://pianote.s3.amazonaws.com/sales/promos/black-friday/unlimited/poster-scales.jpg" alt="product thumbnail6">
+                            <img class="w-full rounded-lg" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/poster-scales.jpg" alt="product thumbnail6">
                         </div>
                         <div>
                             <strong>Scales Poster - <span>Normally $9</span>
@@ -339,7 +339,7 @@
                     </a>
                 </div>
                 <div class="flex w-full justify-center xl:justify-start xl:order-1 xl:w-5/12 xl:pl-4  mt-10 xl:mt-0">
-                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1800,quality=85/https://pianote.s3.amazonaws.com/shop/products/beautiful-beginner-bundle/bottom-collage.png" alt="order collage image">
+                    <img class="max-w-lg sm:max-w-2xl lg:max-w-4xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/beautiful-beginner-bundle/bottom-collage.png" alt="order collage image">
                 </div>
             </div>
             <div class="inline-block w-full px-3 md:px-4 my-3 sm:my-5" style="color:#2a2f34;">
