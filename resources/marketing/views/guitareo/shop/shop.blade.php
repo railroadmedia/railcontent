@@ -5,7 +5,11 @@
     <meta property="og:title" content="Guitareo Shop">
     <meta name="description" content="Say goodbye to “do it yourself” guitar lessons.">
     <meta property="og:description" content="Say goodbye to “do it yourself” guitar lessons.">
-    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-guitareo.jpg">
+    @if(Carbon\Carbon::create(2023, 8, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/july/guitareo-summer-share-image.jpg">
+    @else
+        <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-guitareo.jpg">
+    @endif
     <meta property="og:url" content="https://www.guitareo.com/shop/">
 @endsection
 

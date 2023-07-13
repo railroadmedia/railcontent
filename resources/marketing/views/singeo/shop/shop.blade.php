@@ -5,7 +5,11 @@
     <meta property="og:title" content="Singeo Shop - Get Lessons, T-Shirts, & More!">
     <meta name="description" content="Singeo.com: Your start-to-finish guide to confident singing">
     <meta property="og:description" content="Singeo.com: Your start-to-finish guide to confident singing">
-    <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2022/og-image.jpg"/>
+    @if(Carbon\Carbon::create(2023, 8, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/july/singeo-summer-share-image.jpg">
+    @else
+        <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/sales/2022/og-image.jpg">
+    @endif
     <meta property="og:url" content="https://www.singeo.com/shop/">
 @endsection
 
