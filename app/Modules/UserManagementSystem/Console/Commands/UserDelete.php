@@ -342,8 +342,9 @@ class UserDelete extends Command
                             $totalRowsDeleted += $rows->count();
 
                             foreach ($rows as $row) {
+                                $id = property_exists($row, 'id') ? $row->id : '';
                                 $this->info(
-                                    "Deleting (simulate): $tableName id: $row->id $userIdColumn:" . $row->{$userIdColumn}
+                                    "Deleting (simulate): $tableName id: $id $userIdColumn:" . $row->{$userIdColumn}
                                 );
                             }
                         } else {
