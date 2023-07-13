@@ -302,7 +302,7 @@
     <div class="beat-navigation drumeo">
         <div class="row">
             <a href="/blog/" class="nav-item inline-block">
-                <img alt="The Note" src="https://pianote.s3.amazonaws.com/blog/the-note-logo.svg">
+                <img alt="The Note" src="https://d2vyvo0tyx8ig5.cloudfront.net/blog/the-note-logo.svg">
             </a>
             <a href="/start-here" class="nav-item hidden sm:inline-block">
                 START HERE</a>

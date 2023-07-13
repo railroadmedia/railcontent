@@ -1,3 +1,7 @@
+@php
+    require_once(resource_path('marketing/views/pianote/shop/bundles.php'))
+@endphp
+
 @extends('_partials.layout.global-shop-layout')
 
 @section('meta')
@@ -5,7 +9,11 @@
     <meta property="og:title" content="Pianote Shop">
     <meta name="description" content="Get Lessons, T-Shirts, & Much More!">
     <meta property="og:description" content="Get Lessons, T-Shirts, & Much More!">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg">
+    @if(Carbon\Carbon::create(2023, 8, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/july/pianote-summer-share-image.jpg">
+    @else
+        <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/share-image-pianote2.jpg">
+    @endif
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 @endsection
 
@@ -20,20 +28,28 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header">
-        <picture>
-            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">
-            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg" alt="header background image" fetchpriority="high" />
-        </picture>
-        <div class="container mx-auto relative z-10">
-            <div class="px-2 md:px-3">
-                <div class="float-left px-2 md:px-3 w-full">
-                    <img class="h-12 sm:h-14 md:h-24 lg:h-28 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/pianote-shop-logo.png" alt="pianote logo" fetchpriority="high">
-                    <h3>GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>
-                </div>
-            </div>
-        </div>
-    </header>
+{{--    <header class="drum-shop-header">--}}
+{{--        <picture>--}}
+{{--            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">--}}
+{{--            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg" alt="header background image" fetchpriority="high" />--}}
+{{--        </picture>--}}
+{{--        <div class="container mx-auto relative z-10">--}}
+{{--            <div class="px-2 md:px-3">--}}
+{{--                <div class="float-left px-2 md:px-3 w-full">--}}
+{{--                    <img class="h-12 sm:h-14 md:h-24 lg:h-28 mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/pianote-shop-logo.png" alt="pianote logo" fetchpriority="high">--}}
+{{--                    <h3>GET LESSONS, MERCH, <br class="inline md:hidden"> GEAR & MORE!</h3>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </header>--}}
+
+    @include('_partials.components.shop.promo-top-banner',[
+        'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-shop-summer-sale-bg.jpg',
+        'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-summer-sale-logo.svg',
+        'logoStyles' => 'mb-3 ml-2 sm:ml-6 lg:ml-10',
+        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
+        'promoText' => 'SAVE UP TO 68% UNTIL JULY 17TH!',
+    ])
 
     @if(Session::has('addedProducts'))
         <section class="added-to-cart-background clearfix">
@@ -65,7 +81,7 @@
         "all" => true
     ])
     <div class="white-box">
-        {{--        @include('_partials.layout.holiday.bundle-cards')--}}
+                @include('_partials.layout.holiday.bundle-cards')
 
         {{--        <section class="bundles">--}}
         {{--            <div class="container mx-auto">--}}
@@ -97,11 +113,10 @@
                         Piano Lessons
                     </h1>
                 </li>
-                @include('drumeo.drumshop._partials._drum-shop-card', [
+                @include('musora.shop._shop-card', [
                      "itemURL" => "/",
                      "sku" => null,
-                     "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/header.jpg",
-                     "packLogo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',
+                     "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
                      "title" => "Pianote Membership",
                      "packAuthor" => "Lisa Witt",
                      "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",
@@ -114,7 +129,7 @@
                 ])
 
                 @foreach($lessons as $key => $lesson)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                             "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                             "thumbnail" => $lesson->thumbnail,
@@ -144,7 +159,7 @@
                     </h1>
                 </li>
                 @foreach($accessories as $accessory)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                             "sku" => (str_contains($accessory->sku, 'member') || str_contains($accessory->sku, 'products')) ? '' : $accessory->sku,
                             "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                             "thumbnail" => $accessory->thumbnail,
@@ -173,7 +188,7 @@
                 </li>
 
                 @foreach($hats as $hat)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                          "sku" => $hat->sku,
                          "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
                          "badgeText" => $hat->badge_text,
@@ -202,7 +217,7 @@
                     </h1>
                 </li>
                 @foreach($shirts as $shirt)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                         "sku" => $shirt->sku,
                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                         "thumbnail" => $shirt->thumbnail,
@@ -230,7 +245,7 @@
                     </h1>
                 </li>
                 @foreach($hoodies as $hoodie)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                         "sku" => $hoodie->sku,
                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                         "thumbnail" => $hoodie->thumbnail,
@@ -253,5 +268,13 @@
 
 @section('layout-footer')
     @include('pianote.sales.partials._footer')
+@endsection
+
+@section('layout-scripts')
+    @parent
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-07-17 23:59:59',
+        'promoVersion' => true
+    ])
 @endsection
 
