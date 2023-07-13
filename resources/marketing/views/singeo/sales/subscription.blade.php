@@ -148,7 +148,7 @@
 
     @include('_partials.components.promo-top-banner',[
         'bg' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-shop-summer-sale-bg.jpg',
-        'logo' => 'TODO',
+        'logo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-summer-sale-logo.svg',
         'logoStyles' => 'TODO',
         'promoText' => 'SAVE UP TO 74% UNTIL JULY 17TH!',
     ])

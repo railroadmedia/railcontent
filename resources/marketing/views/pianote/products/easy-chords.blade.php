@@ -2,9 +2,9 @@
 
 @php
     $modalImages = [
-        "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-106-Edit.jpg",
-        "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg",
-        "https://pianote.s3.amazonaws.com/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg"
+        "https://d2vyvo0tyx8ig5.cloudfront.net/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-106-Edit.jpg",
+        "https://d2vyvo0tyx8ig5.cloudfront.net/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg",
+        "https://d2vyvo0tyx8ig5.cloudfront.net/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg"
     ];
 @endphp
 

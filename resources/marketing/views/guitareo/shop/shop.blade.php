@@ -99,7 +99,7 @@
 
     @include('_partials.components.shop.promo-top-banner',[
         'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-shop-summer-sale-bg.jpg',
-        'logo' => 'TODO',
+        'logo' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-summer-sale-logo.svg',
         'logoStyles' => 'TODO',
         'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
         'promoText' => 'SAVE UP TO 91% UNTIL JULY 17TH!',

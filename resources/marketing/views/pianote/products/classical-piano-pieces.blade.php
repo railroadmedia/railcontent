@@ -121,10 +121,10 @@
 
             <div class="flex flex-wrap text-left mx-auto mt-5 sm:mt-7">
                 <div class="w-1/2 pr-2 sm:px-2">
-                    <img class="cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open="original" src="https://pianote.s3.amazonaws.com/products/classical-piano-pieces/original-video-thumb.png">
+                    <img class="cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open="original" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/original-video-thumb.png">
                 </div>
                 <div class="w-1/2 sm:px-2">
-                    <img class="cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open="simplified" src="https://pianote.s3.amazonaws.com/products/classical-piano-pieces/simplified-video-thumb.png">
+                    <img class="cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open="simplified" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/simplified-video-thumb.png">
                 </div>
             </div>
         </div>
