@@ -14,7 +14,7 @@
         ],
         [
             'slug' => '/drumshop/beginner-bundle',
-            'badgeText' => 'Free practice & drumsticks',
+            'badgeText' => 'Free practice pad & drumsticks',
             'title' => 'Everything You Need To Get Started',
             'desc' => 'Annual Drumeo membership + a FREE book, practice pad, and more!',
             'priceColor' => '#BC0E90',
