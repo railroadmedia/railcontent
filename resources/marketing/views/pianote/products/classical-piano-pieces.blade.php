@@ -192,9 +192,10 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 mb-20 sm:mb-24">
         <div class="container max-w-5xl mx-auto">
             <h3 class="leading-tight text-center mb-6 sm:mb-7"><strong>The best way to <br class="inline sm:hidden"> play your favorites.</strong></h3>
-
-            <img class="hidden sm:inline-block h-64 lg:h-72" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage.png">
-            <img class="sm:hidden" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-m.png">
+            <div class="cursor-pointer" data-open="seeInside0">
+                <img class="hidden sm:inline-block h-64 lg:h-72" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage.png">
+                <img class="sm:hidden" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-m.png">
+            </div>
         </div>
     </section>
 
@@ -224,22 +225,12 @@
         </div>
     </section>
 
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "original",
-        "video" => '//player.vimeo.com/video/844377509?h=3c1c824744&autoplay=1',
-        "title" => 'original'
-    ])
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "simplified",
-        "video" => '//player.vimeo.com/video/844377537?h=542b26a29f&autoplay=1',
-        "title" => 'simplified'
-    ])
-
     @php
         $modalImages = [
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-106-Edit.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg"
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-01.jpg",
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-05.jpg",
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-02.jpg",
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-06.jpg"
         ];
     @endphp
     @foreach ($modalImages as $key => $img)
@@ -269,11 +260,11 @@
                 $(".example-video").not(this).trigger('pause');
             });
 
-            let imgNum = 1;
+            let imgNum = 0;
 
             $('.image-modal-arrow-left').on('click', function(){
                 if(imgNum === 0){
-                    imgNum = 2;
+                    imgNum = 3;
                 }
                 else {
                     imgNum--;
@@ -281,12 +272,12 @@
 
                 $('#seeInside' + imgNum).find('img').each(function(){
                     const imgSrc = $(this);
-                    $('#seeInside1').find('img').attr('src', imgSrc.data('src'))
+                    $('#seeInside0').find('img').attr('src', imgSrc.data('src'))
                 })
             })
 
             $('.image-modal-arrow-right').on('click', function(){
-                if(imgNum === 2){
+                if(imgNum === 3){
                     imgNum = 0;
                 }
                 else {
@@ -295,7 +286,7 @@
 
                 $('#seeInside' + imgNum).find('img').each(function(){
                     const imgSrc = $(this);
-                    $('#seeInside1').find('img').attr('src', imgSrc.data('src'))
+                    $('#seeInside0').find('img').attr('src', imgSrc.data('src'))
                 })
             })
         })
