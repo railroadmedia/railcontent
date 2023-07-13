@@ -169,6 +169,21 @@
         {{--        @include('_partials.layout.holiday.bundle-cards')--}}
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards text-center lg:text-left">
+
+                @include('musora.shop._shop-card', [
+                     "itemURL" => "/",
+                     "sku" => null,
+                     "thumbnail" => "https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-membership-shop.jpg",
+                     "title" => "Guitareo Membership",
+                     "packAuthor" => "Ayla Tesler-Mabe",
+                     "cardDescription" => "Unlimited guitar lessons, a huge song library, and ongoing support from real teachers.",
+                     "specialPrice" => "7-Day Free Trial",
+                     "fullPrice" => 240,
+                     "price" => 240,
+                     "category" => "lessons",
+                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
+                     'soldOut' => false,
+                ])
                 @foreach($items as $key => $item)
                     @include('musora.shop._shop-card', [
                         "sku" => $item->sku,
@@ -226,6 +241,7 @@
 @endsection
 
 @section('layout-scripts')
+    @parent
     @include('_partials.components.countdown',[
         'countdownDate' => '2023-07-17 23:59:59',
         'promoVersion' => true

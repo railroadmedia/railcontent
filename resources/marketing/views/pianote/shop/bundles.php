@@ -7,7 +7,7 @@
             'title' => 'The Unlimited Lessons Bundle',
             'desc' => 'Annual Pianote membership + books, posters, and more!',
             'priceColor' => '#F16B1C',
-            'price' => '699',
+            'price' => '700',
             'discountedPrice' => '200',
             'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/unlimited-lessons-bundle-shop.jpg',
             'buttonColor' => '#F16B1C',
