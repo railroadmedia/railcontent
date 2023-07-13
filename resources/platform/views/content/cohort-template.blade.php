@@ -24,7 +24,7 @@
         <header class="tw-bg-[#F1F7FE] tw-py-4 md:tw-py-7 tw-px-4">
             <div class="tw-max-w-5xl tw-mx-auto">
                 <div class="md:tw-flex tw-items-center tw-gap-6 tw-mb-12 tw-text-center md:tw-text-left">
-                    <div class="md:tw-flex-1">
+                    <div class="md:tw-flex-1 md:tw-text-center lg:tw-text-left">
                         {{--  Header logo  --}}
                         <img class="tw-h-14 sm:tw-h-18 lg:tw-h-20 tw-mb-2 tw-inline-block " alt="header logo" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['light_mode_logo']??'' }}" />
                         {{--  Headline  --}}
@@ -32,7 +32,12 @@
                         {{--  Subheadline  --}}
                         <h2 class="tw-font-normal tw-text-2xl lg:tw-text-3xl">{{ $cohort['subheadline'] }}</h2>
                         {{--  Header description  --}}
-                        <p class="tw-font-bold tw-mt-4 lg:tw-mt-6 tw-mb-7 lg:tw-mb-9">{{ $cohort['header_description'] }}</p>
+                        <p class="tw-font-bold tw-mt-4 lg:tw-mt-6 tw-mb-2">{{ $cohort['header_description'] }}</p>
+                        <div class="tw-mb-7 lg:tw-mb-9 tw-flex tw-justify-between sm:tw-justify-center lg:tw-justify-start tw-max-w-md sm:tw-max-w-none tw-mx-auto">
+                            <div class="md:tw-flex sm:tw-mr-4 md:tw-mr-2"><i class="fas fa-check text-{{ $brand }} tw-mt-1 tw-mr-1" aria-hidden="true"></i><br class="md:tw-hidden"> {{ $cohort['benefit_1'] }}</div>
+                            <div class="md:tw-flex sm:tw-mr-4 md:tw-mr-2 tw-px-2 sm:tw-px-0"><i class="fas fa-check text-{{ $brand }} tw-mt-1 tw-mr-1" aria-hidden="true"></i><br class="md:tw-hidden"> {{ $cohort['benefit_2'] }}</div>
+                            <div class="md:tw-flex"><i class="fas fa-check text-{{ $brand }} tw-mt-1 tw-mr-1" aria-hidden="true"></i><br class="md:tw-hidden"> {{ $cohort['benefit_3'] }}</div>
+                        </div>
                         {{--  Mobile Header Image --}}
                         <div class="tw-relative md:tw-hidden">
                             <img
