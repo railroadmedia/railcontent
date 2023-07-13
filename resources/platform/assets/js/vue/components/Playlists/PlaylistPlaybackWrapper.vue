@@ -5,10 +5,8 @@
 */
 import { onBeforeMount, computed } from 'vue';
 import { usePlaylistsStore } from '../../../stores/playlists';
-import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
 import SoundSlice from '../SoundSlice/SoundSlice.vue';
 import PlaybackCue from './PlaybackCue.vue';
-import RelatedPlaylists from './RelatedPlaylists.vue';
 import Comments from '../../vuesora/views/comments/Comments.vue';
 import PlaybackNavButtons from './PlaybackNavButtons.vue';
 import RelatedLesson from './RelatedLesson.vue';
