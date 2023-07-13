@@ -346,7 +346,7 @@ onBeforeMount(() => {
                                     :hls-manifest-url="hlsManifestUrl" :chapters="videoChapters"
                                     :current-second="currentSecond" :content-id="contentId" :user-id="userId"
                                     :video-id="vimeoVideoId" :video-length="videoLength" :total-duration="totalDuration"
-                                    :cast-title="castTitle" :use-intersection-observer="true" @play="handleVideoPlay"
+                                    :cast-title="playlistItemTitle" :use-intersection-observer="true" @play="handleVideoPlay"
                                     @pause="handleVideoPause" @onVideoEnd="handleGoToNext">
                                     <div :class="`widescreen title tw-text-${brand} tw-mb-2`"></div>
                                 </VideoPlayer>
@@ -355,7 +355,7 @@ onBeforeMount(() => {
                     </div>
                     <!-- Video Resources -->
                     <div class="tw-container tw-mx-auto lean">
-                        <VideoResources :theme-color="brand" :brand="brand" :title="castTitle" :lesson-type="lessonType"
+                        <VideoResources :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
                             :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
                             :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                             :user-id="userId" :resources="videoResources" :show-add-to-list="true"
