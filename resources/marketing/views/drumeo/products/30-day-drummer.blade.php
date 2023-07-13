@@ -948,6 +948,10 @@
             // if (showModal) {
             //     $('#loginModal').foundation('open');
             // }
+
+            @if(!empty($errors) && $errors->any())
+                $('#waitlistModal').foundation('open');
+            @endif
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
