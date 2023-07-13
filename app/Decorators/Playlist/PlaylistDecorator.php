@@ -138,11 +138,12 @@ class PlaylistDecorator extends ModeDecoratorBase
                     $firstItem = $this->contentService->getById($firstItem['content_id']);
 
                     $playlists[$index]['thumbnail_url'] = '';
+                    Decorator::$typeDecoratorsEnabled = true;
                     if ($firstItem) {
                         $parent =
                             $this->contentService->getByChildId($firstItem['id'])
                                 ->first();
-                        Decorator::$typeDecoratorsEnabled = true;
+
                         $playlists[$index]['square_thumbnail'] =
                             (($firstItem['type'] == 'assignment' &&
                                     ($firstItem->fetch('parent')) &&
