@@ -5,6 +5,7 @@ namespace App\Modules\UserManagementSystem\Console\Commands;
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\EventDataSynchronizer\Jobs\CustomerIoDeleteUser;
 use Illuminate\Database\DatabaseManager;
+use Illuminate\Support\Facades\Log;
 
 class UserDelete extends Command
 {
@@ -14,6 +15,8 @@ class UserDelete extends Command
     private $simulate = false;
     private DatabaseManager $databaseManager;
 
+    // Should review this query for future use
+    // SELECT * FROM information_schema.columns WHERE column_name = 'user_id'
     private $databaseTablesUserIdColumnsMap = [
         // musora_laravel
         'musora_laravel_mysql_writer_only' => [
@@ -311,6 +314,8 @@ class UserDelete extends Command
 
     public function deleteUserIds(array $allUserIds)
     {
+        Log::info('Deleting users: ' . implode(', ', $allUserIds));
+
         foreach ($allUserIds as $userId) {
             if ($this->simulate) {
                 $this->info("Simulating delete user $userId from customer IO");
@@ -327,10 +332,10 @@ class UserDelete extends Command
             foreach ($this->databaseTablesUserIdColumnsMap as $databaseConnectionName => $tablesColumns) {
                 foreach ($tablesColumns as $userIdColumn => $tableNames) {
                     foreach ($tableNames as $tableName) {
-                        $query = $this->databaseManager->connection($databaseConnectionName)->table($tableName);
-
-                        $query->orWhereIn($userIdColumn, $batchUserIds);
-
+                        $query = $this->databaseManager
+                            ->connection($databaseConnectionName)
+                            ->table($tableName)
+                            ->whereIn($userIdColumn, $batchUserIds);
 
                         if ($this->simulate) {
                             $rows = $query->get();
