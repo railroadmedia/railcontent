@@ -112,8 +112,7 @@
                 @include('musora.shop._shop-card', [
                      "itemURL" => "/",
                      "sku" => null,
-                     "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg",
-                     "packLogo" => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',
+                     "thumbnail" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-membership-shop.jpg",
                      "title" => "Pianote Membership",
                      "packAuthor" => "Lisa Witt",
                      "cardDescription" => "Perfectly structured step by step lessons, with teachers that are fun to watch, and unlimited support - 100% guaranteed. Learn piano online the easy way.",
