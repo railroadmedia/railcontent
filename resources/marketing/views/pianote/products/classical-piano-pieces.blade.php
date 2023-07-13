@@ -99,8 +99,8 @@
     </header>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 bg-cover bg-top" style="background:url(https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/list-section-bg.png);">
         <div class="container max-w-6xl mx-auto">
-            <img class="hidden sm:inline-block h-9 lg:h-11" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/composers-text.svg">
-            <img class="sm:hidden h-14" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/composers-text-m.svg">
+            <img class="hidden sm:inline-block h-9 lg:h-11" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/composers-text2.svg">
+            <img class="sm:hidden h-14" src="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/composers-text-m2.svg">
 
             <p class="leading-normal my-3 sm:my-5 mx-auto max-w-3xl">When you think of classical piano, you think of iconic pieces from the greats.
                 <br><br>

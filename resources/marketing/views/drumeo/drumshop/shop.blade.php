@@ -116,7 +116,7 @@
             <div class="container mx-auto">
                 <div class="float-left w-full px-2 md:px-3 card-wrap">
                     <div>
-                        <a href="/drumshop/5-for-3-bundle/" class="flex flex-row text-white rounded-xl mx-auto mb-5 overflow-hidden relative w-full sm:text-left px-3 md:px-5 lg:px-[13%] pt-40 pb-5 sm:py-7 lg:py-8">
+                        <a href="/drumshop/5-for-3-bundle/" class="flex flex-row text-white rounded-xl mx-auto mb-5 sm:mb-10 overflow-hidden relative w-full sm:text-left px-3 md:px-5 lg:px-[13%] pt-40 pb-5 sm:py-7 lg:py-8">
                             <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
 
                                 <img class="h-20 sm:h-24 md:h-28 lg:h-32" src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-logo-stacked.png"><br>
@@ -146,20 +146,20 @@
                     </h1>
                 </li>
                 {{-- Drumeo annual membership --}}
-                @include('musora.shop._shop-card', [
-                     "itemURL" => "/",
-                     "sku" => null,
-                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",
-                     "title" => "Drumeo Membership",
-                     "packAuthor" => "Award-Winning Membership",
-                     "cardDescription" => "The Ultimate Online Drum Lessons Experience. You’ll get step-by-step drum lessons from the best drummers in the world (and much more).",
-                     "specialPrice" => "7-Day Free Trial",
-                     "fullPrice" => 240,
-                     "price" => 240,
-                     "category" => "lessons",
-                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
-                     'soldOut' => false,
-                ])
+{{--                @include('musora.shop._shop-card', [--}}
+{{--                     "itemURL" => "/",--}}
+{{--                     "sku" => null,--}}
+{{--                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",--}}
+{{--                     "title" => "Drumeo Membership",--}}
+{{--                     "packAuthor" => "Award-Winning Membership",--}}
+{{--                     "cardDescription" => "The Ultimate Online Drum Lessons Experience. You’ll get step-by-step drum lessons from the best drummers in the world (and much more).",--}}
+{{--                     "specialPrice" => "7-Day Free Trial",--}}
+{{--                     "fullPrice" => 240,--}}
+{{--                     "price" => 240,--}}
+{{--                     "category" => "lessons",--}}
+{{--                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",--}}
+{{--                     'soldOut' => false,--}}
+{{--                ])--}}
                 @foreach($lessons as $key => $lesson)
                     @include('musora.shop._shop-card', [
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
