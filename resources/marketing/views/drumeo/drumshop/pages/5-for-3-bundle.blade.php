@@ -10,7 +10,7 @@
     <meta property="description" content="Get 5 years of Drumeo for the price of 3.">
     <meta property="og:description" content="Get 5 years of Drumeo for the price of 3.">
     <meta property="og:url" content="{{ get_legacy_brand_base_url($theme)}}/{{ Request::path() }}"/>
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-bundle2.png">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-bundle3.png">
 
 @endsection
 
@@ -47,7 +47,7 @@
             {{ $products['drumeo_access_5-years']->getPublicStockCount() }}
             @endif
             SPOTS AVAILABLE</h6>
-        <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-bundle2.png" alt="bundle image" fetchpriority="high" />
+        <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-bundle3.png" alt="bundle image" fetchpriority="high" />
         <br>
         <h4 class="text-promo"><strong>ONLY</strong> <s class="opacity-60">$2270</s> <strong>$720</strong> (Save 68%)</h4>
         <br>
