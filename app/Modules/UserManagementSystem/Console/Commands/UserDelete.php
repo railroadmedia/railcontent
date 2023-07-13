@@ -322,6 +322,7 @@ class UserDelete extends Command
         }
 
         $totalRowsDeleted = 0;
+        $totalUsersDeleted = 0;
         $batch = array_chunk($allUserIds, 10);
 
         foreach ($batch as $batchIndex => $batchUserIds) {
@@ -370,9 +371,10 @@ class UserDelete extends Command
                     $totalRowsDeleted += $query->delete();
                 }
 
+                $totalUsersDeleted += count($batchUserIds);
                 $this->info('Finished batch ' . $batchIndex + 1 . ' out of ' . count($batch));
                 $this->info('Total rows deleted: ' . $totalRowsDeleted);
-                $this->info('Total users deleted: ' . count($batchUserIds));
+                $this->info('Total users deleted: ' . $totalUsersDeleted);
             } catch (\Exception $e) {
                 $this->info("Error deleting users: " . implode(', ', $batchUserIds));
                 Log::error($e);
