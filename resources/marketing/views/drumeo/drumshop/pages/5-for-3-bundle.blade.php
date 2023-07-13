@@ -47,7 +47,7 @@
             {{ $products['drumeo_access_5-years']->getPublicStockCount() }}
             @endif
             SPOTS AVAILABLE</h6>
-        <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-bundle2.png" alt="bundle image" fetchpriority="high" />
+        <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-bundle2.png" alt="bundle image" fetchpriority="high" />
         <br>
         <h4 class="text-promo"><strong>ONLY</strong> <s class="opacity-60">$2270</s> <strong>$720</strong> (Save 68%)</h4>
         <br>
