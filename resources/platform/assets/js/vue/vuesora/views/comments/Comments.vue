@@ -17,7 +17,7 @@
                     <span>{{ totalCommentsAndReplies }}</span>
                     Comments
                 </h2>
-                <button v-if="collapsable" class="tw-btn-primary tw-transparent tw-px-3 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
+                <button v-if="collapsable" class="tw-btn-primary tw-transparent tw-px-3 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-white"
                         @click="commentsCollapsed = !commentsCollapsed">
                     {{ !commentsCollapsed ? 'Hide Comments' : 'Show Comments' }}
                     <svg class="tw-ml-3 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
