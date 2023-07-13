@@ -31,11 +31,12 @@ class LessonAssignmentDecorator extends TypeDecoratorBase
                 ->toArray()
         );
         \Railroad\Railcontent\Decorators\ModeDecoratorBase::$decorationMode = $initialDecorationMode;
+        Decorator::$typeDecoratorsEnabled = true;
 
         if (empty($childHierarchyRows)) {
             return $contents;
         }
-        Decorator::$typeDecoratorsEnabled = true;
+
         $assignmentContents =
             $this->contentService->getByIds(array_column($childHierarchyRows, 'child_id'))
                 ->keyBy('id');

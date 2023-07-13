@@ -42,7 +42,6 @@
         durationHours: '0',
         durationMinutes: '0',
         dropdownTop: false,
-        isPrivate: 1,
         isPinned: false,
         isLiked: false,
     })
@@ -95,7 +94,7 @@
 
     //Handle Share
     const sharePlaylist = () => {
-        if(state.isPrivate) {
+        if(playlistsStore.activePlaylist.private) {
             window.openplaylistmodal({ modalType: 'share', data: props.playlist });
         } else {
             navigator.clipboard.writeText(props.playlist.url)
@@ -154,8 +153,6 @@
         //initial Values
         state.isLiked = props.playlist.is_liked_by_current_user;
         state.isPinned = props.playlist.pinned ? true : false;
-        // state.isPrivate = playlistsStore.activePlaylist.private;
-        state.isPrivate = props.playlist.private;
         
         //Get Duration Hours and Seconds
         formatDuration(playlistsStore.activePlaylist.duration)
@@ -165,8 +162,6 @@
         state.isPinned = props.playlist.pinned ? true : false;
         //Recalculate Duration
         formatDuration(playlistsStore.activePlaylist.duration);
-        //Update isPrivate 
-        // state.isPrivate = playlistsStore.activePlaylist.private;
     })
 </script>
 <template>
@@ -281,7 +276,7 @@
                             :lessons-length="lessons.data.length"
                             :brand="brand"
                             :dropdownTop="state.dropdownTop"
-                            :is-private="state.isPrivate"
+                            :is-private="playlistsStore.activePlaylist.private"
                             :is-pinned="state.isPinned ? true : false"
                             :dropdownOptions="dropdownOptions"
                             :data="playlistsStore.activePlaylist"
@@ -292,7 +287,7 @@
                             @closeDropdown="state.dropdownOpen = false"
                             @updatePinned="(val) => state.isPinned = val"
                             @pinItem="playlistsStore.activePlaylist.pinned = $event"
-                            @makePublic="(val) => state.isPrivate = val"
+                            @makePublic="(val) => playlistsStore.activePlaylist.private = val"
                         />
                     </div>
                     <span class="tw-uppercase tw-font-bebas-neue">More</span>
