@@ -227,10 +227,12 @@
 
     @php
         $modalImages = [
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-03.jpg",
             "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-01.jpg",
             "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-05.jpg",
             "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-02.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-06.jpg"
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-06.jpg",
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-04.jpg"
         ];
     @endphp
     @foreach ($modalImages as $key => $img)
@@ -264,7 +266,7 @@
 
             $('.image-modal-arrow-left').on('click', function(){
                 if(imgNum === 0){
-                    imgNum = 3;
+                    imgNum = 5;
                 }
                 else {
                     imgNum--;
@@ -277,7 +279,7 @@
             })
 
             $('.image-modal-arrow-right').on('click', function(){
-                if(imgNum === 3){
+                if(imgNum === 5){
                     imgNum = 0;
                 }
                 else {
