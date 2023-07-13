@@ -314,7 +314,7 @@ class UserDelete extends Command
 
     public function deleteUserIds(array $allUserIds)
     {
-        Log::info('Deleting users: ' . implode(', ', $allUserIds));
+        $this->info('Deleting users: ' . implode(', ', $allUserIds));
 
         foreach ($allUserIds as $userId) {
             if ($this->simulate) {
