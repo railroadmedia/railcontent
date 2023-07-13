@@ -167,18 +167,19 @@
                     <div class="tw-w-1/2 tw-pr-2 sm:tw-px-4">
                         <div class="tw-rounded-xl tw-overflow-hidden tw-shadow-md tw-cursor-pointer autoplay-video" data-open="dayOne" aria-controls="dayOne" aria-haspopup="true" tabindex="0">
                             <img src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['description_trailer_1_thumb_url'] }}" alt="day1 thumb" loading="lazy" onload="this.classList.remove('opacity-0')" x-on:click="trailerFirstDay = true">
-                            <p class="tw-p-2 sm:tw-p-5 tw-text-sm">We’ll start slow. Here’s what you’ll be playing in your first lesson.</p>
+                            <p class="tw-p-2 sm:tw-p-5 tw-text-sm">{{ $cohort['first_day_text'] }}</p>
                         </div>
                     </div>
                     <div class="tw-w-1/2 sm:tw-px-4">
                         <div class="tw-rounded-xl tw-overflow-hidden tw-shadow-md tw-cursor-pointer autoplay-video" data-open="dayThirty" aria-controls="dayThirty" aria-haspopup="true" tabindex="0">
                             <img src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['description_trailer_2_thumb_url'] }}" alt="day 30 thumb" loading="lazy" onload="this.classList.remove('opacity-0')" x-on:click="trailerLastDay = true">
-                            <p class="tw-p-2 sm:tw-p-5 tw-text-sm">After 30 days, you’ll be playing this beautiful song. All you have to do is follow along.</p>
+                            <p class="tw-p-2 sm:tw-p-5 tw-text-sm">{{ $cohort['last_day_text'] }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+
         <section class="tw-text-center tw-text-white  tw-bg-cover tw-bg-center" style="background-color:#2a2f34;">
             <div class="tw-max-w-[1600px] tw-mx-auto tw-relative tw-pt-10 sm:tw-pt-14 lg:tw-pt-20">
                 <img class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-object-cover" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ $cohort['demo_background_image_url'] }}" alt="bg" />
@@ -188,7 +189,7 @@
                     <img class="tw-inline-block sm:tw-hidden tw-w-full tw-transition-all tw-cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ $cohort['demo_mobile_center_image_url'] }}" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')" x-on:click=" trailerDemo = true;">
                     <img class="tw-hidden sm:tw-inline-block tw-w-full tw-transition-all tw-cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ $cohort['demo_desktop_center_image_url'] }}" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')" x-on:click=" trailerDemo = true;">
                     <div class="tw-absolute tw-w-full tw-top-2/3 tw-flex tw-justify-center tw-px-4 sm:tw-px-0">
-                        <p class="tw-px-3 tw-py-1 tw-z-10 tw-rounded-xl tw-text-white tw-text-sm tw-bg-[#C20000]"><i class="fas fa-play-circle tw-mr-1 tw-text-xl sm:tw-text-3xl tw-align-middle" aria-hidden="true"></i> {!! $cohort['demo_label_text'] !!}</p>
+                        <p class="tw-px-3 tw-py-1 tw-z-10 tw-rounded-xl tw-text-white tw-text-sm tw-bg-{{ $brand }}"><i class="fas fa-play-circle tw-mr-1 tw-text-xl sm:tw-text-3xl tw-align-middle" aria-hidden="true"></i> {!! $cohort['demo_label_text'] !!}</p>
                     </div>
                 </div>
             </div>
