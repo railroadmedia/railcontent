@@ -16,6 +16,7 @@ use Laravel\Nova\Fields\FormData;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Illuminate\Support\Str;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Select;
 
 class Carousel extends Resource
 {
@@ -59,6 +60,15 @@ class Carousel extends Resource
             Text::make('Name')->sortable()->help('For easy reference to this banner in the CMS. This info won\'t show on the banner.')->required()->rules('required'),
             Boolean::make('Visible on Desktop', 'visible_on_desktop')->hideFromIndex()->default(true),
             Boolean::make('Visible on Mobile', 'visible_on_mobile')->hideFromIndex()->default(true),
+            Select::make(__('Mobile endpoint version'), 'mobile_version')->options(function () {
+                return [
+                    'v1' => '' . __('V1') . '',
+                    'v2' => '' . __('V2') . '',
+                    'v3' => '' . __('V3') . '',
+                    'v4' => '' . __('V4') . '',
+                ];
+            })
+                ->rules('required'),
             Boolean::make('Draft')->hideFromIndex()->default(true),
             Number::make('Display Order', 'display_order')->hideFromIndex(),
             DateTime::make('Start Time', 'start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
