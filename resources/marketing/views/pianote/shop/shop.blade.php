@@ -47,7 +47,7 @@
         'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-shop-summer-sale-bg.jpg',
         'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-summer-sale-logo.svg',
         'logoStyles' => 'mb-3 ml-2 sm:ml-6 lg:ml-10',
-        'title' => 'Join Pianote + Choose <br class="sm:hidden"> Your Bonus Bundle',
+        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
         'promoText' => 'SAVE UP TO 68% UNTIL JULY 17TH!',
     ])
 
@@ -81,7 +81,9 @@
         "all" => true
     ])
     <div class="white-box">
-                @include('_partials.layout.holiday.bundle-cards')
+                @include('_partials.layout.holiday.bundle-cards', [
+                    "header" => 'Join Pianote + Choose <br class="sm:hidden"> Your Bonus Bundle',
+                ])
 
         {{--        <section class="bundles">--}}
         {{--            <div class="container mx-auto">--}}

@@ -48,7 +48,7 @@
         'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-shop-summer-sale-bg.jpg',
         'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-summer-sale-logo.svg',
         'logoStyles' => '-mt-16 ml-10 sm:ml-24 lg:ml-32',
-        'title' => 'Join Drumeo And Save 20%<br class="sm:hidden"> + Choose Your Bonus Bundle',
+        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
         'promoText' => 'SAVE UP TO 81% UNTIL JULY 17TH!',
     ])
 
@@ -110,7 +110,9 @@
 
 
     <div class="white-box">
-        @include('_partials.layout.holiday.bundle-cards')
+        @include('_partials.layout.holiday.bundle-cards', [
+            "header" => 'Join Drumeo And Save 20%<br class="sm:hidden"> + Choose Your Bonus Bundle',
+        ])
 
         <section class="bundles" x-show="filter === 'all'">
             <div class="container mx-auto">

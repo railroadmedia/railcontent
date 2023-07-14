@@ -1,6 +1,6 @@
 <section class="bundles" x-show="filter === 'all'">
     <div class="container mx-auto">
-        <h4 class="text-left px-[7px] md:px-[10px] mb-4 md:mb-6 lg:mb-10"><i class="fa-solid fa-square-star text-xl md:text-2xl lg:text-3xl text-{{$theme}} mr-2"></i> <span class="font-semibold">Deals</span></h4>
+        <h4 class="text-left px-[7px] md:px-[10px] mb-4 md:mb-7"><i class="fa-solid fa-square-star text-xl md:text-2xl lg:text-3xl text-{{$theme}} mr-2"></i> <span class="font-bold" style="font-size:20px;line-heigh:1.2em;">{!!  $header  !!}</span></h4>
         <div class="grid md:grid-cols-{{array_count_values(array_column($bundles, 'visible'))[1]}}">
             @foreach(array_filter($bundles, function($val){if($val['visible'] === 1){ return 1; }}) as $key => $bundle)
                 <div class="card-wrap">
