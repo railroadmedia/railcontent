@@ -3,6 +3,7 @@
 namespace App\Modules\EventDataSynchronizer\Services;
 
 use Carbon\Carbon;
+use Doctrine\ORM\NonUniqueResultException;
 use Exception;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Entities\PaymentMethod;
@@ -106,7 +107,7 @@ class CustomerIoSyncService
 
     /**
      * Attribute list:
-     * rumeo_membership_access-expiration-date (null if BRAND_membership_is_lifetime is true)
+     * BRAND_membership_access-expiration-date (null if BRAND_membership_is_lifetime is true)
      * BRAND_membership_is_lifetime
      * BRAND_membership_latest-start-date
      * BRAND_membership_first-start-date
@@ -114,6 +115,7 @@ class CustomerIoSyncService
      * @param User $user
      * @param array $brands
      * @return array
+     * @throws NonUniqueResultException
      */
     public function getUsersMembershipAccessAttributes(User $user, $brands = [])
     {
@@ -208,6 +210,15 @@ class CustomerIoSyncService
                     $latestMembershipUserProductToSync->getProduct()->getId() : null
             ];
 
+        }
+
+        // if the user has ANY brand lifetime membership, set the data to be true for ALL brands
+        $brand_ltm_keys = collect($brands)->transform(fn($brand) => "{$brand}_membership_is_lifetime")->toArray();
+        $lifetimeMemberships = array_filter($productAttributes, fn($key) => in_array($key, $brand_ltm_keys), ARRAY_FILTER_USE_KEY);
+        if (collect($lifetimeMemberships)->contains(true)) {
+            foreach($brand_ltm_keys as $brand_ltm_key) {
+                $productAttributes[$brand_ltm_key] = true;
+            }
         }
 
         return $productAttributes;
