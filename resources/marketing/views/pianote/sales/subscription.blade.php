@@ -555,11 +555,11 @@
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'youtube' => '1.2M',
+        'youtube' => '1.3M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
-        'facebook' => '422K',
+        'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '174K',
+        'instagram' => '203K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [

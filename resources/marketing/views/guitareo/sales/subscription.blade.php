@@ -510,9 +510,9 @@
         'youtubeLink' => 'https://www.youtube.com/guitarlessonscom/',
         'youtube' => '1M',
         'facebookLink' => 'https://facebook.com/guitareoofficial/',
-        'facebook' => '333K',
+        'facebook' => '330K',
         'instagramLink' => 'https://instagram.com/guitareoofficial/',
-        'instagram' => '18K',
+        'instagram' => '19K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
