@@ -1,5 +1,5 @@
 @php
-    //dd($playlist);
+    //dd($playlistItem);
     //dd(get_defined_vars()['__data']);
     //dd(isset($playlistItem['instrumentless']));
 
@@ -73,7 +73,7 @@
         :related-lesson="{{ $relatedLesson }}"
         :playlist-item-position="{{ $positionInPlaylist }}"
         :playlist-item-id="{{ $playlistItem['id'] }}"
-        :playlist-item-title="{{ json_encode($playlistItem['title']) }}"
+        :playlist-item-title="{{ json_encode($playlistItem['playlist_item_name'] ? $playlistItem['playlist_item_name'] : $playlistItem['title']) }}"
         :start-second="{{ $playlistItem['start_second'] ?? 0 }}"
         :is-my-playlist="{{ $playlist['is_my_playlist'] }}"
         :end-second="{{ $playlistItem['end_second'] ?? $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"

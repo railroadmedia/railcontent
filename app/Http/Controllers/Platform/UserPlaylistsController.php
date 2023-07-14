@@ -101,7 +101,7 @@ class UserPlaylistsController extends BaseController
             brand(),
             $term
         );
-
+        UserPlaylistsRepository::$availableCategories = false;
         $currentUser = [
             "avatar" => user()->profile_picture_url,
             "xp" => user()->totalXp(),
