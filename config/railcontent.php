@@ -731,6 +731,16 @@ return [
                 "allowableFilters" => ['bpm', 'style', 'difficulty'],
                 'allowableFiltersMobile' => ['difficulty', 'bpm','style','artist'],
             ],
+            'drum-fest-international-2022' => [
+                'thumbnailUrl' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/2c12c9ae-5a67-4767-f257-d1fa3693bd00/public',
+                'name' => '2022 Drum Fest International',
+                'shortname' => 'Episodes',
+                'icon' => 'icon-shows',
+                'description' => " In 2022, Drumeo had the exclusive honor of filming Ralph Angelillo’s Drum Fest International. It was an incredible gathering of some of the best drummers in the world. Tune in to see a spectrum of unforgettable performances - from Greyson Nekrutman’s show-stopping jazz, to Simon Phillips’ fancy fusion work, these are videos you do not want to miss.",
+                'allowableFilters' => [],
+                'allowableFiltersMobile' => [],
+                'sortBy' => 'sort',
+            ]
         ],
         'pianote' => [
             'all' => [
@@ -1040,6 +1050,7 @@ return [
      */
     'showTypes' => [
         'drumeo' => [
+            'drum-fest-international-2022',
             'spotlight',
             'the-history-of-electronic-drums',
             'backstage-secrets',
