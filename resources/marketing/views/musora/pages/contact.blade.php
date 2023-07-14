@@ -16,6 +16,14 @@
             color:inherit!important;
         }
     </style>
+
+    <script type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});</script>
+    <script type="text/javascript">
+        window.Beacon('init', '9f119028-29b4-4fcd-8b9d-03c86f3d2521')
+        Beacon('on', 'ready', () => {
+            document.querySelector('.BeaconFabButtonFrame').style.bottom ="50px";
+        })
+    </script>
 @endsection
 
 <!-- Main -->
@@ -41,32 +49,32 @@
             <div class="grid grid-cols-2 md:grid-cols-3
 {{--            lg:grid-cols-4 --}}
             gap-3 sm:gap-4">
-                <a href="https://help.musora.com/article/1034-musora-membership-options" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                <a href="#" data-beacon-article-sidebar="64272ebf8fe95055b525a84d" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fal fa-toggle-on text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Membership options</p>
                     <p class="text-sm">What different types of memberships are available? </p>
                 </a>
-                <a href="https://help.musora.com/article/981-do-you-have-a-curriculum" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                <a href="#" data-beacon-article-sidebar="637fe0fc6eb6095a0543930a" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fal fa-book-open text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Lesson curriculum</p>
                     <p class="text-sm">Do you have a specific lesson curriculum?</p>
                 </a>
-                <a href="https://help.musora.com/article/946-how-do-i-track-my-shipment" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                <a href="#" data-beacon-article-sidebar="634b2901927a2c1634dfac43" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fal fa-truck-fast text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Shipment tracking</p>
                     <p class="text-sm">I ordered a product from you, how can I track my shipment?</p>
                 </a>
-                <a href="https://help.musora.com/article/1061-what-is-the-difference-between-your-free-and-paid-content" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                <a href="#" data-beacon-article-sidebar="6467ad5b67acd170a44c2eb8" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fal fa-tag text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Free and paid</p>
                     <p class="text-sm">What’s the difference between free and paid content?</p>
                 </a>
-                <a href="https://help.musora.com/article/1062-what-are-the-terms-for-your-refund-policy" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                <a href="#" data-beacon-article-sidebar="6467b2256413a34741154344" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fal fa-badge-check text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">90-day guarantee</p>
                     <p class="text-sm">What are the terms for your refund guarantee? </p>
                 </a>
-                <a href="https://help.musora.com/article/1063-do-you-cover-customs-fees" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                <a href="#" data-beacon-article-sidebar="6467b51367acd170a44c2ef9" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fal fa-hand-holding-dollar text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Customs fees</p>
                     <p class="text-sm">Does Musora cover customs fees?</p>
@@ -157,4 +165,7 @@
     <script src="{{ mix('platform/js/manifest.js') }}"></script>
     <script src="{{ mix('platform/js/vendor.js') }}"></script>
     <script src="{{ mix('platform/js/app.js') }}"></script>
+    <script>
+
+    </script>
 @endsection
