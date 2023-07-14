@@ -67,7 +67,7 @@
             </div>
         </div>
         <div
-            class="cs-main-menu tw-flex tw-flex-row tw-rounded-full tw-cursor-pointer tw-px-1"
+            class="cs-main-menu tw-flex tw-flex-row tw-rounded-full tw-cursor-pointer tw-px-1 tw-bg-[#002039] tw-border tw-border-[#223F57] tw-text-[#9EC0DC]"
             :class="{ 'cs-menu-opened': messageMenu || messageReact }"
         >
             <div class="cs-divide-right tw-px-2 cs-text-xs tw-flex tw-flex-row tw-items-center tw-cursor-default">

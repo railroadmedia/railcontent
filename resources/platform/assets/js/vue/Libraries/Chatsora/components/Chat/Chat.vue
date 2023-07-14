@@ -1,20 +1,20 @@
 <template>
     <div
-        class="cs-container tw-relative tw-h-full tw-w-full tw-max-h-[690px] tw-flex tw-flex-col vuesora-override"
+        class="cs-container tw-relative tw-h-full tw-w-full tw-max-h-[690px] tw-flex tw-flex-col vuesora-override tw-border tw-border-[#D4D4D8] dark:tw-border-[#223F57] tw-rounded-md tw-overflow-hidden"
         :class="brand"
     >
-        <div class="cs-top tw-flex-none">
+        <div class="cs-top tw-flex-none tw-bg-[#F4F4F5] dark:tw-bg-[#002039] tw-border-b-[#223F57] tw-border-b">
             <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center tw-place-content-between">
-                <div class="tw-h-full tw-ml-4 tw-flex tw-flex-row tw-items-end tw-space-x-4 cs-text-sm">
+                <div class="tw-h-full tw-ml-4 tw-flex tw-flex-row tw-items-end tw-space-x-4 cs-text-sm tw-font-semibold">
                     <a
                         href="#"
-                        class="tw-no-underline tw-px-3 tw-border-b-2 tw-h-full tw-flex tw-flex-row tw-items-center"
+                        class="tw-no-underline tw-px-3 tw-h-full tw-flex tw-flex-row tw-items-center"
                         :class="getTabClasses('chat')"
                         @click.stop.prevent="setCurrentTab('chat')"
                     >Chat</a>
                     <a
                         href="#"
-                        class="tw-no-underline tw-px-3 tw-border-b-2 tw-h-full tw-flex tw-flex-row tw-items-center"
+                        class="tw-no-underline tw-px-3 tw-h-full tw-flex tw-flex-row tw-items-center"
                         :class="getTabClasses('questions')"
                         @click.stop.prevent="setCurrentTab('questions')"
                     >Questions</a>
@@ -27,22 +27,22 @@
             </div>
             <div class="tw-relative">
                 <div
-                    class="cs-top-menu cs-text-sm tw-leading-relaxed tw-absolute tw-right-4 tw-py-3 tw-flex tw-flex-col tw-bg-black tw-rounded-lg tw-text-white tw-z-30"
+                    class="cs-top-menu cs-text-sm tw-leading-relaxed tw-absolute tw-right-4 tw-py-3 tw-flex tw-flex-col tw-rounded-lg tw-text-white tw-z-30 tw-bg-[#081825] tw-border-[#223F57] tw-border"
                     v-if="chatMenu"
                 >
                     <div class="tw-px-3 tw-mb-2 tw-font-semibold tw-cursor-default" v-if="isAdministrator">Moderation</div>
-                    <div class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer" @click.stop.prevent="toggleShowMembers()">Participants</div>
+                    <div class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer hover:tw-bg-[#002039]" @click.stop.prevent="toggleShowMembers()">Participants</div>
                     <div
-                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
+                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer hover:tw-bg-[#002039]"
                         @click.stop.prevent="popoutChat()"
                     >Pop Out Chat</div>
                     <div
-                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
+                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer hover:tw-bg-[#002039]"
                         @click.stop.prevent="toggleShowBannedUsers()"
                         v-if="isAdministrator"
                     >Blocked Students</div>
                     <div
-                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer"
+                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer hover:tw-bg-[#002039]"
                         @click.stop.prevent="removeAllQuestions()"
                         v-if="currentTab == 'questions' && isAdministrator"
                     >Clear All Questions</div>
@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <div class="tw-absolute tw-inset-0 tw-flex-col tw-z-40" 
+        <div class="tw-absolute tw-inset-0 tw-flex-col tw-z-40"
              :class="showMembers ? 'tw-flex' : 'tw-hidden'"
         >
             <div class="cs-top tw-flex-none">
@@ -193,7 +193,7 @@
                 </div>
             </div>
             <div
-                class="cs-messages-container tw-px-3 tw-pt-4 tw-overflow-y-scroll"
+                class="cs-messages-container tw-px-1 tw-pt-4 tw-overflow-y-scroll tw-bg-white dark:tw-bg-[#081825]"
                 ref="messages"
                 v-show="currentTab == 'chat' && !showThread"
                 @scroll="containerScrolled"
@@ -227,7 +227,7 @@
                 >{{ message }}</div>
             </div>
             <div
-                class="cs-messages-container tw-pt-4 tw-overflow-y-scroll"
+                class="cs-messages-container tw-pt-4 tw-overflow-y-scroll tw-bg-[#081825]"
                 ref="questions"
                 v-show="currentTab == 'questions' && !showThread"
                 @scroll="containerScrolled"
@@ -309,9 +309,9 @@
         <chat-emoji
             :show-window="showEmoji"
         ></chat-emoji>
-        <div class="cs-new-message-container tw-flex-none box-border">
+        <div class="cs-new-message-container tw-flex-none box-border tw-bg-[#002039] tw-border-t-[#223F57] tw-border-t">
             <div class="tw-h-full tw-flex tw-flex-col tw-place-content-between tw-py-2 tw-px-4 tw-relative">
-                <div class="cs-new-message-wrapper tw-rounded">
+                <div class="cs-new-message-wrapper tw-rounded tw-bg-[#00101D]">
                     <textarea
                         v-model="message"
                         placeholder="Say something..."
@@ -320,7 +320,7 @@
                         v-on:keyup.enter="sendMessage()"
                         wrap="off"
                         rows="1"
-                        class="tw-resize-none cs-text-sm tw-bg-black tw-rounded-none"
+                        class="tw-resize-none cs-text-sm tw-bg-[#00101D] tw-text-[#9EC0DC] tw-rounded-none"
                         :class="{'cs-typing': message != ''}"
                         ref="newMessage"
                         v-if="currentTab == 'chat'"
@@ -333,7 +333,7 @@
                         v-on:keyup.enter="sendQuestion()"
                         wrap="off"
                         rows="1"
-                        class="tw-resize-none cs-text-sm tw-bg-black tw-rounded-none"
+                        class="tw-resize-none cs-text-sm tw-bg-[#00101D] tw-text-[#9EC0DC] tw-rounded-none"
                         :class="{'cs-typing': question != ''}"
                         v-if="currentTab == 'questions'"
                     ></textarea>
@@ -360,7 +360,7 @@
                 </div>
                 <div>
                     <span
-                        class="cs-text-gray tw-text-xs tw-cursor-pointer"
+                        class="tw-text-[#9EC0DC] tw-text-xs tw-cursor-pointer"
                         @click.stop.prevent="toggleShowMembers()"
                     >{{ $_watcher_count }} Online</span>
                 </div>
@@ -1764,8 +1764,8 @@ export default {
         },
 
         getTabClasses(tab) {
-            let active = ['tw-font-semibold', 'tw-text-white', 'tw-border-white'];
-            let inactive = ['cs-text-gray', 't-border-transparent'];
+            let active = ['tw-text-[#00101D]', 'dark:tw-text-white', 'tw-border-[#00101D]', 'dark:tw-border-white', 'tw-border-b-2'];
+            let inactive = ['tw-text-[#717179]', 'dark:tw-text-[#9EC0DC]', 't-border-transparent'];
 
             return this.currentTab == tab ? active : inactive;
         },

@@ -1,6 +1,6 @@
 <template>
     <div
-        class="cs-message tw-p-3 tw-rounded-md tw-relative tw-top-0"
+        class="cs-message tw-p-3 tw-rounded-md tw-relative tw-top-0 hover:tw-bg-[#F4F4F5] dark:hover:tw-bg-[#002039] hover:tw-border hover:tw-border-[#223F57]"
         :class="{'system': message.type == 'system', 'pinned': message.pinned && showPin}"
         @mouseleave="closeMessageMenus()"
         @click.stop="closeMessageMenus()"
