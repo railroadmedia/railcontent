@@ -40,14 +40,14 @@
 
 @section('layout-body')
     <header class="py-20 text-center text-white px-4 md:px-0" style="background: linear-gradient(180deg, #DC3848 0%, #5E0239 100%);">
-        <img class="sm:h-8 md:h-12 lg:h-14 mb-2" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-5-for-3-logo.png" alt="5-for-3-logo" fetchpriority="high" />
+        <img class="sm:h-8 md:h-12 lg:h-14 mb-2" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-5-for-3-logo.png" alt="5-for-3-logo" fetchpriority="high" />
         <h2 class="leading-tight mb-2"><strong>Get 5 years of Pianote for the price of 3.</strong></h2>
         <p class="text-promo mb-10">ONLY <s class="opacity-60">100</s>
             @if(!empty($products['pianote_access_5-years']->getPublicStockCount()))
                 {{ $products['pianote_access_5-years']->getPublicStockCount() }}
             @endif
             SPOTS AVAILABLE</p>
-        <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-bundle.png" alt="bundle image" fetchpriority="high" />
+        <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1800,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-bundle.png" alt="bundle image" fetchpriority="high" />
         <br>
         <h4 class="text-promo"><strong>ONLY</strong> <s class="opacity-60">$1726</s> <strong>$720</strong> (Save 58%)</h4>
         <br>
@@ -95,7 +95,7 @@
             </div>
             <div class="relative w-full rounded-full h-16 mx-auto flex space-between items-center beg-adv-bar" style="background-color: #61043A;">
                 <div class="h-full flex items-center flex-wrap relative rounded-l-full" style="background:linear-gradient(to right, #61043A, #F61A30);">
-                    <h4 class="uppercase leading-none w-full"><img class="h-7 sm:h-8" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png" alt="Drumeo logo"></h4>
+                    <h4 class="uppercase leading-none w-full"><img class="h-7 sm:h-8" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png" alt="Drumeo logo"></h4>
                     <h1 class="absolute right-0 text-white rounded-full px-6 py-4 -mr-7 mt-1" style="background-color:#61043A;">$</h1>
                 </div>
                 <p class="uppercase leading-none my-0 mx-auto text-white"><strong>2 YEARS</strong><br class="sm:hidden"> FOR FREE</p>
@@ -114,7 +114,7 @@
 
     <section class="py-20" style="background: linear-gradient(180deg, #DC3848 0%, #5E0239 100%);">
         <div class="max-w-5xl mx-auto text-center text-white px-4 md:px-0">
-            <img class="sm:h-8 md:h-12 lg:h-14 mb-2" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-5-for-3-logo.png" alt="5-for-3-logo" />
+            <img class="sm:h-8 md:h-12 lg:h-14 mb-2" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/5-for-3-bundle/pianote-5-for-3-logo.png" alt="5-for-3-logo" />
             <h2 class="leading-tight mb-2"><strong>Get 5 years of Pianote for the price of 3.</strong></h2>
 
             @include('pianote.shop.pages.5-for-3-bundle-order-section', [

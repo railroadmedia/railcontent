@@ -15,7 +15,7 @@
     <div class="text-white px-3 py-10 sm:py-32" style="background: linear-gradient(to bottom, #01050f 60%, #021225);">
         <div class="container mx-auto px-4 max-w-5xl">
             <div class="px-2 text-center md:px-3">
-                <img class="mx-auto h-10 sm:h-16" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="singeo-logo" />
+                <img class="mx-auto h-10 sm:h-16" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="singeo-logo" />
 
                 <div class="text-xl sm:text-3xl lg:text-4xl my-5 sm:my-7">
                     <strong>Got it! Thank you so much for<br class="hidden sm:inline"> sharing that information with me.</strong>

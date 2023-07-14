@@ -98,7 +98,7 @@
                     email-subject="Support Request From Musora"
                     email-type="support-contact"
                     email-endpoint="{{url()->route('mailora.public.send') }}"
-                    email-logo="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/logo.png"
+                    email-logo="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/musora/logo.png"
                     input-label="Report your issue here.."
                     recipient="support@musora.com"
                     success-message="Your email has been sent!"

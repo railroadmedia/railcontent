@@ -12,9 +12,9 @@
 
 @section('page-body')
 
-    <header class="header text-center text-white py-12 md:py-18 lg:py-20 px-4 bg-center bg-no-repeat relative" style="background-color:#010519; background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/bg.jpg);">
+    <header class="header text-center text-white py-12 md:py-18 lg:py-20 px-4 bg-center bg-no-repeat relative" style="background-color:#010519; background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/bg.jpg);">
         <div class="container mx-auto relative z-10 max-w-4xl">
-            <img class="h-6 md:h-10 lg:h-12" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/logo.png" alt="cord hacks logo">
+            <img class="h-6 md:h-10 lg:h-12" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/logo.png" alt="cord hacks logo">
         </div>
     </header>
 

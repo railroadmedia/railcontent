@@ -217,7 +217,7 @@
                 <div class="flex flex-wrap items-start justify-center w-full sm:w-1/3  px-7 sm:px-3 mb-4">
                     <img
                         class="h-40 sm:h-40 lg:h-56 rounded-xl transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/1st-place.png"
+                        src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/1st-place.png"
                         alt="grid"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -226,7 +226,7 @@
                 <div class="flex flex-wrap items-start justify-center w-full sm:w-1/3  px-7 sm:px-3 mb-4">
                         <img
                             class="h-40 sm:h-40 lg:h-56 rounded-xl transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/2nd-place.png"
+                            src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/2nd-place.png"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -235,7 +235,7 @@
                 <div class="flex flex-wrap items-start justify-center w-full sm:w-1/3  px-7 sm:px-3 mb-4">
                         <img
                             class="h-40 sm:h-40 lg:h-56 rounded-xl transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/3rd-place.png"
+                            src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/3rd-place.png"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -266,7 +266,7 @@
             <img class="my-5 h-64 inline sm:hidden transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-collage.png"
+                src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-collage.png"
                 alt="learn playing image"
             >
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-center mt-2 sm:mt-8">
@@ -274,7 +274,7 @@
                 <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-collage.png"
+                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/june-collage.png"
                     alt="learn playing image"
                 >
             </div>

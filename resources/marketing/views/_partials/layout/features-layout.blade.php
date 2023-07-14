@@ -44,7 +44,7 @@
     <header class="pb-12 md:pb-0 md:pt-20 bg-[#111729] text-center text-white">
         <img
             class="md:hidden mb-16 @if($page === 'songs') cursor-pointer @endif"
-            src="https://www.musora.com/musora-cdn/image/width=900,quality=85/@yield('header-img')"
+            src="https://www.musora.com/musora-cdn/image/width=900,quality=95/@yield('header-img')"
             alt="{{$page}} thumb"
             @if($page === 'songs') x-on:click="soundslice = true" @endif
             fetchpriority="high"
@@ -53,13 +53,13 @@
             <div class="mb-6">
                 <img
                     class="h-6 md:h-10 @if($theme !== 'drumeo') mr-2 @endif"
-                    src="https://www.musora.com/musora-cdn/image/width=150,quality=85/@if($theme === 'drumeo')https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png @elseif($theme === 'pianote')https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png @elseif($theme === 'guitareo')https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png @elseif($theme === 'singeo')https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png @endif"
+                    src="https://www.musora.com/musora-cdn/image/width=150,quality=95/@if($theme === 'drumeo')https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png @elseif($theme === 'pianote')https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png @elseif($theme === 'guitareo')https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png @elseif($theme === 'singeo')https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png @endif"
                     alt="{{$theme}} logo"
                     fetchpriority="high"
                 />
                 <img
                     class="h-6 md:h-10"
-                    src="https://www.musora.com/musora-cdn/image/width=150,quality=85/@if($page === 'method')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg @elseif($page === 'coaches')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg @elseif($page === 'songs')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg @endif"
+                    src="https://www.musora.com/musora-cdn/image/width=150,quality=95/@if($page === 'method')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg @elseif($page === 'coaches')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg @elseif($page === 'songs')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg @endif"
                     alt="{{$page}} logo"
                     style="filter:@if($theme === 'drumeo')invert(1) brightness(.35) sepia(1) saturate(50) hue-rotate(195deg); @elseif($theme === 'pianote')invert(21%) sepia(91%) saturate(4092%) hue-rotate(344deg) brightness(96%) contrast(102%); @elseif($theme === 'guitareo')invert(55%) sepia(45%) saturate(5847%) hue-rotate(141deg) brightness(110%) contrast(101%); @elseif($theme === 'singeo')invert(24%) sepia(99%) saturate(7465%) hue-rotate(275deg) brightness(85%) contrast(125%); @endif"
                     fetchpriority="high"
@@ -69,10 +69,10 @@
             <p class="md:mb-10">@yield('desc')</p>
         </div>
         <picture>
-            <source media="(min-width: 500px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/@yield('header-img')">
+            <source media="(min-width: 500px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/@yield('header-img')">
             <img
                 class="rounded-t-xl md:h-72 lg:h-80 hidden md:inline-block @if($page === 'songs') cursor-pointer @endif"
-                src="https://www.musora.com/musora-cdn/image/width=550,quality=85/@yield('header-img')"
+                src="https://www.musora.com/musora-cdn/image/width=550,quality=95/@yield('header-img')"
                 alt="{{$page}} thumb"
                 @if($page === 'songs') x-on:click="soundslice = true" @endif
                 fetchpriority="high"

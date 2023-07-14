@@ -132,14 +132,14 @@ $lessons = [
                 <div class="px-2 sm:pl-3 lg:pr-6 xl:pr-20">
                     <img
                         class="h-20 lg:h-24 mb-3"
-                        src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/GSOTD-dark-blue.png"
+                        src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/GSOTD-dark-blue.png"
                         alt="GSOTD logo"
                         fetchpriority="high"
                     />
                     <h3 class="leading-tight mb-5">Go from a <strong>total beginner</strong> to playing your <strong>first drum beats</strong> in this <u>FREE</u> series.</h3>
                     <div class="max-w-sm mx-auto sm:hidden mb-5">
                         <img
-                            src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/header-collage.png"
+                            src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/header-collage.png"
                             alt="header hero image mobile"
                             fetchpriority="high"
                         />
@@ -160,7 +160,7 @@ $lessons = [
             <div class="w-full sm:w-1/2 hidden sm:block">
                 <img
                     class="transition-opacity opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/header-collage.png"
+                    src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/header-collage.png"
                     alt="header hero image"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -220,17 +220,17 @@ $lessons = [
                 </h6>
                 <div class="flex justify-between text-center mt-7 lg:mt-10">
                     <div class="">
-                        <img class="h-6 sm:h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <img class="h-6 sm:h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon" loading="lazy" onload="this.classList.remove('opacity-0')">
                         <h3 class="mt-2"><strong>1.6M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">Followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <img class="h-6 sm:h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon" loading="lazy" onload="this.classList.remove('opacity-0')">
                         <h3 class="mt-2"><strong>460K</strong></h3>
                         <p class="uppercase opacity-70 text-sm">followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <img class="h-6 sm:h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon" loading="lazy" onload="this.classList.remove('opacity-0')">
                         <h3 class="mt-2"><strong>224M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">views</p>
                     </div>
@@ -247,7 +247,7 @@ $lessons = [
     <section class="py-8 sm:py-14 text-center relative">
         <img class="absolute top-0 left-0 w-full h-full transition-opacity opacity-0 object-cover" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/order-bg.jpg" alt="order-bg" loading="lazy" onload="this.classList.remove('opacity-0')" />
         <div class="max-w-3xl mx-auto z-50 relative">
-            <img class="h-16 lg:h-24 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/GSOTD-dark-blue.png" alt="GSTOD logo" loading="lazy" onload="this.classList.remove('opacity-0')" />
+            <img class="h-16 lg:h-24 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/GSOTD-dark-blue.png" alt="GSTOD logo" loading="lazy" onload="this.classList.remove('opacity-0')" />
             <h5 class="my-5 sm:my-7 font-bold">Enter your email to receive 12 free lessons.</h5>
             <div class="max-w-sm mx-auto sm:max-w-none">
             @include("drumeo.lead-gen.partials.sign-up-form", [

@@ -6,7 +6,7 @@
     <meta property="og:title" content="The Most Beautiful Classical Piano Pieces | Pianote">
     <meta name="description" content="Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.">
     <meta property="og:description" content="Timeless classics you’ll want to play over and over again. Presented in original and simplified arrangements.">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -61,7 +61,7 @@
             content: "\f105";
         }
         header {
-            background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image-m.jpg);
+            background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/header-image-m.jpg);
             background-size: 290px;
         }
         @media (min-width: 768px) {
@@ -82,7 +82,7 @@
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-5/12 text-center lg:text-left">
                     <img class="h-24 lg:h-32" alt="logo" fetchpriority="high"
-                        src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light.svg">
+                        src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light.svg">
                     <p class="leading-normal my-4 sm:my-6"><strong>Timeless classics</strong> you’ll want to play over and over again. Presented in original and simplified arrangements.</p>
                     <h4 class="mb-4 sm:mb-6">
                         @if(floatval($productPrices['classical-piano-pieces']->price) > floatval($productPrices['classical-piano-pieces']->discounted_price))
@@ -137,16 +137,16 @@
         </div>
     </section>
 
-    <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book-bg.jpg);">
+    <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book-bg.jpg);">
         <h3 class="leading-tight"><strong>Take A Look Inside.</strong></h3>
         <p class="leading-normal mt-1 sm:mt-2 mb-4 sm:mb-5"><i class="fa-light fa-arrow-turn-down fa-flip-horizontal mr-1 relative" style="bottom:-7px"></i> <em>Click to see inside the book!</em> <i class="fa-light fa-arrow-turn-down ml-1 relative" style="bottom:-7px"></i></p>
         <a target="_blank" href="https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Classical-Piano-Book-1-14.pdf" class="relative">
-            <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=2500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/piano-book.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
         </a>
     </section>
     <section class="relative text-center px-3 sm:px-6 pt-10 sm:pt-14 lg:pt-20" style="background:linear-gradient(to bottom, #f2efed, #FFF);">
-        <div class="absolute z-10 top-0 left-0 right-0 bg-cover bg-no-repeat bg-top z-10 h-1/2 lg:h-full" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/author-bg.png);"></div>
+        <div class="absolute z-10 top-0 left-0 right-0 bg-cover bg-no-repeat bg-top z-10 h-1/2 lg:h-full" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/author-bg.png);"></div>
         <div class="container max-w-5xl mx-auto relative z-20">
             <h3 class="text-center mb-24"><strong>About The Authors</strong></h3>
 
@@ -154,10 +154,10 @@
                 <div class="w-full sm:w-1/2 px-4 mb-20 sm:mb-0">
                     <div class="relative text-left z-10 rounded-xl py-8 sm:py-12 px-6 sm:px-10 w-full shadow-md" style="background-color:#f2efed;">
                         <img class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 lg:w-36 z-20 rounded-full border-4 border-white shadow-md transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/lisa-profile.jpg">
+                            src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/lisa-profile.jpg">
                         <br>
                         <img class="h-5 mt-4 sm:mt-3 mb-3 transition-all opacity-0" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector.svg">
+                            src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector.svg">
                         <p class="leading-normal">
                             Lisa Witt is the lead instructor at Pianote and has inspired millions of students around the world with her infectious enthusiasm for this instrument.
                             <br><br>Lisa grew up learning classical piano through the Royal Conservatory of Music, but it wasn’t easy.
@@ -172,10 +172,10 @@
                 <div class="w-full sm:w-1/2 px-4">
                     <div class="relative text-left z-10 rounded-xl py-8 sm:py-12 px-6 sm:px-10 w-full shadow-md" style="background-color:#f2efed;">
                         <img class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 lg:w-36 z-20 rounded-full border-4 border-white shadow-md transition-all opacity-0" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/eleny-profile.jpg">
+                            src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/eleny-profile.jpg">
                         <br>
                         <img class="h-7 mt-4 sm:mt-3 mb-1.5 transition-all opacity-0" alt="lisa signature" loading="lazy" onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector-1.svg">
+                            src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/Vector-1.svg">
                         <p class="leading-normal">
                             Eleny Quapp is a skilled musician with over 20 years of experience. As a former student of the Royal Conservatory of Music, she has refined her skills at the piano and has since become an accomplished teacher, passing on her passion for music to her students.
                             <br><br>Eleny's love for music is reflected in her teaching, where she emphasizes the importance of practice and dedication, but also discovering the fun in learning. She firmly believes in the profound effects that music can have on a person's life and will always find ways to inspire those around her.
@@ -209,7 +209,7 @@
                 </div>
                 <div class="w-full sm:w-5/12 text-center lg:text-left sm:pr-5">
                     <img class="h-24 lg:h-32" alt="logo" fetchpriority="high"
-                        src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light-dark.svg">
+                        src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/logo-light-dark.svg">
                     <p class="leading-normal my-4 sm:my-6"><strong>Timeless classics</strong> you’ll want to play over and over again. Presented in original and simplified arrangements.</p>
                     <h4 class="mb-4 sm:mb-6">
                         @if(floatval($productPrices['classical-piano-pieces']->price) > floatval($productPrices['classical-piano-pieces']->discounted_price))

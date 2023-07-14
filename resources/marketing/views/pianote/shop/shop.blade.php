@@ -30,8 +30,8 @@
 @section('body')
 {{--    <header class="drum-shop-header">--}}
 {{--        <picture>--}}
-{{--            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">--}}
-{{--            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg" alt="header background image" fetchpriority="high" />--}}
+{{--            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg">--}}
+{{--            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/shop/header-background.jpg" alt="header background image" fetchpriority="high" />--}}
 {{--        </picture>--}}
 {{--        <div class="container mx-auto relative z-10">--}}
 {{--            <div class="px-2 md:px-3">--}}
@@ -88,10 +88,10 @@
         {{--        <section class="bundles">--}}
         {{--            <div class="container mx-auto">--}}
         {{--                <div class="w-full card-wrap mb-5">--}}
-        {{--                    <a href="/shop/book-bundle/" class="w-full --}}{{--py-20 sm:py-28 lg:py-40--}}{{-- py-5 lg:py-8 px-4 sm:px-6 lg:px-20 banner-product overflow-hidden bg-cover bg-center sm:bg-right" style="background-color:#ca1176;background-image:url(https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/just-the-books-shop-no-classic.jpg);">--}}
+        {{--                    <a href="/shop/book-bundle/" class="w-full --}}{{--py-20 sm:py-28 lg:py-40--}}{{-- py-5 lg:py-8 px-4 sm:px-6 lg:px-20 banner-product overflow-hidden bg-cover bg-center sm:bg-right" style="background-color:#ca1176;background-image:url(https://www.musora.com/musora-cdn/image/width=2500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/just-the-books-shop-no-classic.jpg);">--}}
         {{--                        <span class="top-left-badge text-white bg-promo z-10"><i class="fas fa-star"></i> SAVE {{ round(100 - (100 * (59 / 145))) }}%</span>--}}
         {{--                        <div class="text-wrap relative z-10">--}}
-        {{--                            <img class="h-24 lg:h-32 relative z-10" src="https://www.musora.com/musora-cdn/image/width=1600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/just-the-books-bundle-white.png">--}}
+        {{--                            <img class="h-24 lg:h-32 relative z-10" src="https://www.musora.com/musora-cdn/image/width=1600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/november/just-the-books-bundle-white.png">--}}
         {{--                            <p class="my-2">--}}
         {{--                                Chords & Scales Book + Practice Planner + Christmas<br class="hidden sm:inline">--}}
         {{--                                Songbook + Chords Poster + Scales Poster</p>--}}

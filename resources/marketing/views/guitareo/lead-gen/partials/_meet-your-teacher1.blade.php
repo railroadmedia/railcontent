@@ -9,7 +9,7 @@
                 @foreach ($thumbnails as $key => $thumbnail)
                     <div class="float-left w-full px-2 md:px-3 md:w-1/3">
                         <div data-open="{{ $thumbnail['dataOpen'] }}" class="autoplay-video thumb-wrap transition-all duration-300 cursor-pointer">
-                            <img class="rounded-lg" src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{ $thumbnail['src'] }}" alt="as-seen-{{ $key + 1 }}">
+                            <img class="rounded-lg" src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{ $thumbnail['src'] }}" alt="as-seen-{{ $key + 1 }}">
                             <p class="leading-tight mt-2 mb-5 md:mb-0">
                                 <strong>{!! $thumbnail['desc'] !!}</strong><br>
                                 @isset($thumbnail['views'])
