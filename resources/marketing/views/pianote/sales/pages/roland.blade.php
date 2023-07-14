@@ -34,7 +34,7 @@
 @endsection
 @section('promo-banner')
     <header class="text-center text-white" style="background-color:#0e1213;">
-        <div class="container relative mx-auto px-2 md:px-0 pb-7 md:pb-12 lg:pb-16 pt-3 lg:pt-5 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1920,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/trials/roland/header.jpg);">
+        <div class="container relative mx-auto px-2 md:px-0 pb-7 md:pb-12 lg:pb-16 pt-3 lg:pt-5 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1920,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/trials/roland/header.jpg);">
             <div class="z-10 relative">
                 <h5 class="text-light-navy mb-1"><em>Learn piano for FREE with</em></h5>
                 <img class="w-64 md:w-80 lg:w-96" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/trials/roland/pianote-roland-logo-blue.png"><br>

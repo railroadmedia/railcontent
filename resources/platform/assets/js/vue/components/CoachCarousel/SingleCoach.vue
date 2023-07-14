@@ -69,7 +69,7 @@ function onFollow(e) {
       `"
   >
     <img
-      :src="`https://www.musora.com/musora-cdn/image/width=232,quality=75/${cardImg}`"
+      :src="`https://www.musora.com/musora-cdn/image/width=232,quality=95/${cardImg}`"
       :alt="name"
       class="tw-w-[232px]"
     />

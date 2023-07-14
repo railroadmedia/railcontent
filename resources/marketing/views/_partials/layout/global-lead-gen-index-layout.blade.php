@@ -25,7 +25,7 @@
         <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap py-2 sm:py-1 fixed mx-auto bg-black text-white z-[100]">
             <div class="container mx-auto">
                 <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
-                    <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=300,q_60,quality=85/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
+                    <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=300,q_60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
                     <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$drumeoPlayAlongs }}+ more play-alongs + world-class drum  <br>
                         lessons inside Drumeo. Click for a FREE trial.</p>
                 </div>

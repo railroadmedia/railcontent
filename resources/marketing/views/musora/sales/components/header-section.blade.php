@@ -9,7 +9,7 @@
                         style="background-image:url();padding-bottom: 75%;"
                     @endif
                 >
-                    <img class="absolute inset-0 object-cover w-full" src="https://www.musora.com/musora-cdn/image/width=700,quality=85/{{ !empty($thumbM) ? $thumbM : $thumb }}" alt="Header thumbnail" />
+                    <img class="absolute inset-0 object-cover w-full" src="https://www.musora.com/musora-cdn/image/width=700,quality=95/{{ !empty($thumbM) ? $thumbM : $thumb }}" alt="Header thumbnail" />
                     <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                 </div>
                 <div class="px-5 sm:px-0">
@@ -71,9 +71,9 @@
             <div class="w-full sm:w-5/12 hidden sm:block">
                     <div x-on:click="trailer = true;"
 {{--                        @if(!empty($promoVersion))--}}
-{{--                            class="relative bg-contain bg-top bg-no-repeat cursor-pointer autoplay-video" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{!! $promoThumb !!});padding-bottom: 108%;"--}}
+{{--                            class="relative bg-contain bg-top bg-no-repeat cursor-pointer autoplay-video" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/{!! $promoThumb !!});padding-bottom: 108%;"--}}
 {{--                        @else--}}
-                            class="bg-no-repeat @if(empty($noThumbShadow)) shadow-2xl bg-cover @else bg-contain @endif rounded-xl aspect-1:1 overflow-hidden relative bg-top cursor-pointer autoplay-video" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{!! $thumb !!});"
+                            class="bg-no-repeat @if(empty($noThumbShadow)) shadow-2xl bg-cover @else bg-contain @endif rounded-xl aspect-1:1 overflow-hidden relative bg-top cursor-pointer autoplay-video" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/{!! $thumb !!});"
 {{--                        @endif--}}
                         >
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
@@ -125,7 +125,7 @@
                             <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
                                 <img
                                     class="rounded-full object-cover object-right w-10 h-10 transition-opacity opacity-0"
-                                    src="https://www.musora.com/musora-cdn/image/width=80,quality=85/{{ $slide['thumb'] }}"
+                                    src="https://www.musora.com/musora-cdn/image/width=80,quality=95/{{ $slide['thumb'] }}"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
                                     alt="{{$slide['name']}}"

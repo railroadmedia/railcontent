@@ -208,7 +208,7 @@
                     " style="padding-bottom: 65%;">
                         <img
                             class="absolute inset-0 object-cover w-full"
-                            src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dmmior4id2ysr.cloudfront.net/redeem/header-image-m-2.png"
+                            src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/redeem/header-image-m-2.png"
                             alt="Header thumbnail"
                             fetchpriority="high"
                         />
@@ -235,7 +235,7 @@
                     <div x-on:click="trailer = true;"
                          class="bg-no-repeat bg-contain rounded-xl aspect-1:1 overflow-auto relative bg-top
 {{--                         cursor-pointer autoplay-video--}}
-                         " style="background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dmmior4id2ysr.cloudfront.net/redeem/header-image-2.png');"
+                         " style="background-image:url('https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dmmior4id2ysr.cloudfront.net/redeem/header-image-2.png');"
                     >
 {{--                        <div class="join white smaller absolute bottom-1 md:bottom-2 left-[24px] md:left-2 lg:left-3 bg-white text-black text-sm py-2 px-4 font-normal font-bebas tracking-widest"><i class="fas fa-play"></i> &nbsp; Watch Trailer</div>--}}
                     </div>
@@ -248,7 +248,7 @@
                         @foreach ($features as $key => $feature)
                             <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 my-2 sm:mb-0">
                                 <img
-                                    src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $feature['image'] }}"
+                                    src="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $feature['image'] }}"
                                     class="h-5 sm:h-7 mb-2 mr-4 sm:mr-0"
                                     alt="feature image{{$key+1}}"
                                     fetchpriority="high"
@@ -304,10 +304,10 @@
                     @foreach ($gridItems as $key => $gridItem)
                         <div class="sm:flex sm:flex-wrap sm:items-start w-full sm:w-1/2 lg:w-1/3 pb-4 sm:pb-0 px-2 lg:px-4 mb-4 sm:mb-8 border-b sm:border-b-0">
                             <picture>
-                                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/{{ $gridItem['image'] }}">
+                                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/{{ $gridItem['image'] }}">
                                 <img
                                     class="h-40 sm:h-auto sm:w-full rounded-xl mb-3 transition-opacity opacity-0"
-                                    src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $gridItem['image'] }}"
+                                    src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $gridItem['image'] }}"
                                     alt="grid{{$key+1}}"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
@@ -378,10 +378,10 @@
                              x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                         >
                             <picture>
-                                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{$testimonial['image']}}">
+                                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{$testimonial['image']}}">
                                 <img
                                     class="h-52 sm:h-auto sm:w-full rounded-xl transition-opacity opacity-0"
-                                    src="https://www.musora.com/musora-cdn/image/width=350,quality=85/{{$testimonial['image']}}"
+                                    src="https://www.musora.com/musora-cdn/image/width=350,quality=95/{{$testimonial['image']}}"
                                     alt="{{$testimonial['name']}} testimonial"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"

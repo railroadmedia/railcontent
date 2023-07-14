@@ -1,13 +1,13 @@
 <div>
     <section class="relative overflow-hidden text-white text-center customize px-4 lg:px-6">
         <div class="container mx-auto max-w-6xl relative z-50">
-            <h5 class="mb-10" style="color:#FFD600;">ONLY {{ $availableSpots }} SPOTS AVAILABLE</h5>
+            <h5 class="mb-10" style="color:#FFD600;">ONLY <s class="opacity-60">100</s> {{ $availableSpots }} SPOTS AVAILABLE</h5>
             <div class="w-full">
                 <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
                     <div class=" inline-block relative w-full group" style="padding-bottom: 45%;perspective: 1000px;">
                         <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                             <div class=" {{--border-2 border-promo--}} front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                <div class="h-full w-full bg-center bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $topImage }});"></div>
+                                <div class="h-full w-full bg-center bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/{{ $topImage }});"></div>
                             </div>
                         </div>
                     </div>
@@ -45,7 +45,7 @@
                                         <h6 class="absolute text-white top-0 left-0 w-full py-0.5 bg-{{ $theme }} rounded-t-xl font-bebas uppercase">{{ $bonus['badge'] }}</h6>
                                         {{--                                        <h4 class="absolute text-white -top-3 -left-3  py-3 px-2.5 rounded-full transform -rotate-12" style="    line-height: 0.6;background-color:#cda880;"><strong>6<br><span class="leading-none" style="font-size: 50%;">PAIRS</span></strong></h4>--}}
                                     @endif
-                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/{{ $bonus['image'] }});"></div>
+                                    <div class="overflow-hidden rounded-xl h-full w-full bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }});"></div>
                                     <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                         <i class="fas fa-arrow-right text-4xl"></i><br>
                                         <p class="text-sm"><strong>DETAILS</strong></p>
@@ -92,7 +92,7 @@
                 <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #333;color: #ffac00;"></i>
             </a>
             <p class="inline-block leading-tight text-sm align-middle pl-2 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
-            <p class="mb-10"  style="color:#FFD600;">ONLY <s>100</s> {{ $availableSpots }} SPOTS AVAILABLE</p>
+            <p class="mb-10"  style="color:#FFD600;">ONLY <s class="opacity-60">100</s> {{ $availableSpots }} SPOTS AVAILABLE</p>
             <p><b>Still have questions?</b> Call us toll-free at 1-800-439-8921 or directly at 1-604-855-7605.</p>
             <div class="inline-block w-full px-3 md:px-4 text-light-navy mt-6">
                 <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa" aria-hidden="true"></i>

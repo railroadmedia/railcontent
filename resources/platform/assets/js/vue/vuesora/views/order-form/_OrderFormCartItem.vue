@@ -7,7 +7,7 @@
             >
                 <img
                     class="absolute w-full h-full object-center object-cover"
-                    :src="'https://www.musora.com/musora-cdn/image/width=290,quality=85/' + item.thumbnail_url"
+                    :src="'https://www.musora.com/musora-cdn/image/width=290,quality=95/' + item.thumbnail_url"
                 >
             </div>
         </div>

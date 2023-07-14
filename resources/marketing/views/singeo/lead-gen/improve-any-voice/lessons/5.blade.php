@@ -16,9 +16,9 @@
     /improve-any-voice/lessons/6
 @stop
 
-@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-4.png')
+@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-4.png')
 
-@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-6.png')
+@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-6.png')
 
 @section('assets')
     @parent

@@ -71,7 +71,7 @@
     <meta property="og:title" content="The Power of Chords | Pianote">
     <meta name="description" content="Play the music you love on piano.">
     <meta property="og:description" content="Play the music you love on piano.">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/share-image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/share-image.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
 
@@ -338,7 +338,7 @@
         <div class="max-w-5xl mx-auto md:flex relative items-center px-4">
             <div class="flex-1 text-center lg:text-right">
                 <div class="md:inline-block text-center md:text-left">
-                    <img class="h-20 md:h-24 mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/Logo_left.png" alt="logo left">
+                    <img class="h-20 md:h-24 mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/Logo_left.png" alt="logo left">
                     <h1 class="font-extrabold mb-4">
                         Play the music <br>you love on piano.
                     </h1>
@@ -353,7 +353,7 @@
                             {{--</div>--}}
                         </div>
                         <div class="flex-1 flex items-center pl-2">
-                            <img class="h-6 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">
+                            <img class="h-6 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">
                             <div style="font-size: 10px;">
                                 Join {{ $students }} pianists who<br> have already registered.
                             </div>
@@ -363,8 +363,8 @@
             </div>
             <div class="flex-1 text-center md:pl-6 lg:pl-0">
                 <div class="inline-block relative max-w-lg">
-                    <img class="hidden md:inline-block rounded-xl cursor-pointer header-thumb lazyload autoplay-video" data-src="https://www.musora.com/musora-cdn/image/width=760,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/header_thumb.png" data-open="sample" alt="header thumb">
-                    <img class="md:hidden rounded-xl mb-6 cursor-pointer lazyload autoplay-video" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/header_thumb_m.png" data-open="sample" alt="mobile header thumb">
+                    <img class="hidden md:inline-block rounded-xl cursor-pointer header-thumb lazyload autoplay-video" data-src="https://www.musora.com/musora-cdn/image/width=760,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/header_thumb.png" data-open="sample" alt="header thumb">
+                    <img class="md:hidden rounded-xl mb-6 cursor-pointer lazyload autoplay-video" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/header_thumb_m.png" data-open="sample" alt="mobile header thumb">
                     <div class="join smaller white absolute bottom-8 md:bottom-3 left-2 autoplay-video" data-open="sample">
                         <i class="fa-solid fa-play"></i>
                         watch a sample
@@ -379,7 +379,7 @@
                     {{--</div>--}}
                 </div>
                 <div class="flex-1 flex items-center md:pl-2 justify-center">
-                    <img class="h-6 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">
+                    <img class="h-6 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">
                     <div style="font-size: 10px;">
                         Join {{ $students }} pianists who<br class="hidden md:inline-block"> have already <br class="md:hidden">registered.
                     </div>
@@ -406,7 +406,7 @@
                 </div>
             </div>
             <div class="flex-1 md:pl-4 lg:pl-10 text-center">
-                <img class="music-sheet -mb-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1050,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/sheet_music.png" alt="sheet music">
+                <img class="music-sheet -mb-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1050,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/sheet_music.png" alt="sheet music">
             </div>
         </div>
 
@@ -435,13 +435,13 @@
                                 </div>
                             </div>
                             <div class="pl-1 md:pl-9 lg:pl-10">
-                                <img class="timeline-img rounded-xl lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $step['img'] }}" alt="step {{$key+1}}" />
+                                <img class="timeline-img rounded-xl lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $step['img'] }}" alt="step {{$key+1}}" />
                             </div>
                         </div>
                     @else
                         <div class="timeline relative flex flex-col md:grid md:grid-cols-2 {{--gap-2 md:gap-12 lg:gap-20--}} mb-16 md:mb-16 lg:mb-28 pl-6 md:pl-0">
                             <div class="pr-1 md:pr-9 lg:pr-10">
-                                <img class="timeline-img rounded-xl lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $step['img'] }}" alt="step {{$key+1}}" />
+                                <img class="timeline-img rounded-xl lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $step['img'] }}" alt="step {{$key+1}}" />
                             </div>
                             <div class="content relative flex items-center justify-center pl-1 md:pl-8 lg:pl-10">
                                 <div class="relative w-full">
@@ -481,7 +481,7 @@
                     </p>
                 </div>
                 <div class="flex-1 mb-10 md:mb-0">
-                    <div class="bg-cover bg-top w-full aspect-16:9 rounded-xl mb-4 lazyload shadow-md" data-bg="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/downloadable.jpg"></div>
+                    <div class="bg-cover bg-top w-full aspect-16:9 rounded-xl mb-4 lazyload shadow-md" data-bg="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/downloadable.jpg"></div>
                     <h5 class="font-extrabold mb-2">
                         Downloadable Cheat Sheats
                     </h5>
@@ -490,7 +490,7 @@
                     </p>
                 </div>
                 <div class="flex-1">
-                    <div class="bg-cover bg-top w-full aspect-16:9 rounded-xl mb-4 lazyload shadow-md" data-bg="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/personal_support.jpg"></div>
+                    <div class="bg-cover bg-top w-full aspect-16:9 rounded-xl mb-4 lazyload shadow-md" data-bg="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/personal_support.jpg"></div>
                     <h5 class="font-extrabold mb-2">
                         Personal Support
                     </h5>
@@ -508,13 +508,13 @@
     <section class="text-center px-5 sm:px-6 pb-20 pt-10 sm:py-16 lg:py-24" style="background-color:#00101D;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-12 mb-12">
-                <div class="py-40 sm:py-48 lg:py-64 border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 bg-center bg-cover relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 flex-shrink-0 cursor-pointer lazyload autoplay-video" data-bg="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/coach_profile-min.png" data-open="meetlisa">
+                <div class="py-40 sm:py-48 lg:py-64 border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 bg-center bg-cover relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 flex-shrink-0 cursor-pointer lazyload autoplay-video" data-bg="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/coach_profile-min.png" data-open="meetlisa">
                     <div class="join smaller white absolute bottom-2 md:bottom-3 left-2 autoplay-video" data-open="meetlisa">
                         <i class="fa-solid fa-play"></i>
                         meet lisa!
                     </div>
                 </div>
-                {{-- <img class="border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/coach_profile-min.png"> --}}
+                {{-- <img class="border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/coach_profile-min.png"> --}}
                 <div class="bg-white text-left rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow">
                     <h6 class="uppercase text-pianote leading-normal text-center sm:text-left">MEET YOUR COACH</h6>
                     <h2 class="text-center sm:text-left"><strong>Lisa Witt</strong></h2>
