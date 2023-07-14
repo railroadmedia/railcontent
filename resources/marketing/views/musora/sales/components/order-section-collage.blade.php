@@ -1,10 +1,10 @@
-<section class="py-14 sm:py-24 lg:py-32 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative overflow-hidden"
+<section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6 relative overflow-hidden"
     @if(!empty($bgColor))
         style="background: {{ $bgColor }};"
     @else
         style="background: linear-gradient(45deg, #07233e, #0c1524);"
   @endif >
-    <div class="container mx-auto max-w-6xl sm:mb-16">
+    <div class="container mx-auto max-w-5xl sm:mb-16">
         <div class="flex flex-wrap items-center">
             <div class="flex w-full justify-center sm:justify-start sm:w-1/2 sm:order-1 sm:pl-5 lg:pl-10 mb-7 sm:mb-0">
                 <picture>
@@ -19,9 +19,9 @@
             </div>
             <div class="text-center sm:text-left w-full sm:w-1/2 sm:pl-5">
                 @if(!empty($logo))
-                    <img class="h-6 mb-3 sm:my-6" src="{{ $logo }}">
+                    <img class="h-7 mb-4 sm:mb-7" src="{{ $logo }}">
                 @endif
-                <h6 class="uppercase text-musora mb-2"><strong>YOUR FIRST @if(!empty($month)) 30 Days @else 7 Days @endif ARE FREE.</strong></h6>
+                <p class="uppercase text-musora mb-2"><strong class="font-black">YOUR FIRST @if(!empty($month)) 30 Days @else 7 Days @endif ARE FREE.</strong></p>
                 <h3 class="leading-normal"><strong>{!! $header !!}</strong></h3>
                 <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
                     {!! $list !!}
