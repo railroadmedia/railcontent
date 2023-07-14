@@ -29,7 +29,8 @@
     //---------Reactive Data---------//
     const state = reactive({
         searchTerm: '',
-        sortValue: '-created_at' //Default
+        sortValue: '-created_at', //Default
+        categories: '',
     })
 
     //---------Template Refs---------//
@@ -43,6 +44,41 @@
         { text: 'Pinned', value: 'pinned' }
     ]
 
+    const categories = [
+        {
+            text: 'Watch-Later',
+            value: 'Watch Later',
+        },
+        {
+            text: 'Favorites',
+            value: 'Favorites',
+        },
+        {
+            text: 'General',
+            value: 'General',
+        },
+        {
+            text: 'Practice',
+            value: 'Practice',
+        },
+        {
+            text: 'Learning',
+            value: 'Learning',
+        },
+        {
+            text: 'Entertainment',
+            value: 'Entertainment',
+        },
+        {
+            text: 'Warm-Up',
+            value: 'Warm Up',
+        },
+        {
+            text: 'Songs',
+            value: 'Songs',
+        }
+    ];
+
     //----------Methods----------//
     const loadPlaylists = ()=> {
         const payload = {
@@ -51,12 +87,14 @@
             limit: 10,
             term: state.searchTerm,
             sort: state.sortValue,
+            categories: state.categories ? [state.categories] : '',
         }
         //load Playlists
         playlistsStore.getPlaylists(payload, token);
         //Update URL w/ new params
         const url = new URL(window.location.href);
         url.searchParams.set('sortby_val', state.sortValue)
+        if(state.categories) url.searchParams.set('categories[]', state.categories)
         url.searchParams.set('search', state.searchTerm)
         window.history.pushState({}, '', url);
         //Blur Input
@@ -71,13 +109,14 @@
         });
         //Set state props
         state.searchTerm = params.search || '';
+        state.categories = params['categories[]'] || '';
         state.sortValue = params.sortby_val || '-created_at';
     })
 </script>
 <template>
     <nav class="tw-flex tw-my-4 tw-w-full tw-items-center tw-flex-wrap md:tw-flex-nowrap">
         <!--Sort -->
-        <div class="tw-w-full tw-max-w-[calc(100%-68px)] tw-pr-3 md:tw-pr-0 md:tw-max-w-[290px] tw-mr-auto tw-order-2 md:tw-order-1 form-group">
+        <div class="tw-w-full tw-max-w-[calc(100%-68px)] tw-pr-3 md:tw-pr-0 md:tw-max-w-[290px] tw-mr-auto tw-order-3 md:tw-order-1 form-group md:tw-mr-1">
             <select name="playlist-sort"
                     id="playlist-sort"
                     class="tw-transition-colors tw-w-full tw-rounded-3xl tw-text-[#00101D] focus:tw-ring-0 dark:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-bg-white dark:tw-bg-transparent"
@@ -89,6 +128,20 @@
                 </option>
             </select>
         </div>
+        <div class="tw-w-full tw-pr-3 md:tw-pr-0 md:tw-max-w-[290px] tw-mr-auto tw-order-2 md:tw-order-1 form-group tw-mb-5 md:tw-mb-0">
+            <select name="playlist-sort"
+                    id="playlist-category"
+                    class="tw-transition-colors tw-w-full tw-rounded-3xl tw-text-[#00101D] focus:tw-ring-0 dark:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-bg-white dark:tw-bg-transparent"
+                    v-model="state.categories"
+                    @change="loadPlaylists"
+            >
+                <option class="tw-text-[#00101D]" value="" disabled>Filter by Category</option>
+                <option v-for="(category, i) in categories" :key="i" :value="category.value" class="tw-text-[#00101D]">
+                    {{ category.text }}
+                </option>
+            </select>
+        </div>
+
         <!-- Search -->
         <div class="tw-relative tw-w-full md:tw-max-w-[465px] md:tw-mx-4 tw-mb-[20px] md:tw-mb-0 xl:tw-ml-[30px] xl:tw-mr-[26px] tw-order-1 md:tw-order-2">
             <MusoraIcon
@@ -105,7 +158,7 @@
             <button v-if="state.searchTerm.length" class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0" @click="state.searchTerm = ''">
                 <XIcon class="" />
             </button>
-            
+
         </div>
         <!-- List/Grid Toggle -->
         <div class="tw-flex-shrink-0 tw-order-3">
