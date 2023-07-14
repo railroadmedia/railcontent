@@ -182,9 +182,9 @@
                 <!-- Mini Catalog -->
                 <template v-if="miniCatalog">
                     <playlist-collection-card
-                        v-for="list in playlistsStore.playlists.slice(0,5)"
-                        :key="list.id"
-                        :list="list"
+                        v-for="listElement in playlistsStore.playlists.slice(0,5)"
+                        :key="listElement.id"
+                        :listElement="listElement"
                         :isListView="false"
                         :token="token"
                         :brand="brand"
@@ -193,9 +193,9 @@
                 <!-- Full Catalog -->
                 <template v-else>
                     <playlist-collection-card
-                        v-for="list in playlistsStore.playlists"
-                        :key="list.id"
-                        :list="list"
+                        v-for="listElement in playlistsStore.playlists"
+                        :key="listElement.id"
+                        :listElement="listElement"
                         :isListView="state.isListView"
                         :token="token"
                         :brand="brand"
