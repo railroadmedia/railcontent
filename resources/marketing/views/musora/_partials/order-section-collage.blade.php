@@ -12,7 +12,7 @@
                 </picture>
             </div>
             <div class="text-center sm:text-left w-full sm:w-auto flex-shrink-0 flex-col flex items-center sm:items-start">
-                <img class="h-6 mb-3 sm:my-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png">
+                <img class="h-6 mb-3 sm:mb-6" src="https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png">
                 <h6 class="uppercase  text-musora inline-block mb-2"><strong>YOUR FIRST  7 Days  ARE FREE.</strong></h6>
                 <h3 class="leading-tight inline-block"><strong>Unlimited music lessons.<br> The world’s best teachers.<br> Thousands of popular songs.</strong></h3>
                 <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-0 inline-block">
