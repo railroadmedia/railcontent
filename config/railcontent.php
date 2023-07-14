@@ -1751,6 +1751,9 @@ return [
             "icon3_url" => "https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/60a5d4c0-6dce-4f12-b1cb-a47996be1500/public",
         ],
     ],
+    'cohort_timeline_image_urls' => [
+        'pianote' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/timeline.png',
+    ],
     'content_multiple_level_content_depth_playlist_allowed' => [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
     ],

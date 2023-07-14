@@ -121,7 +121,7 @@ class MusoraApiProductProvider implements ProductProviderInterface
     public function getCohortTemplate($slug)
     : array {
         $cohort = $this->cohortService->getCohort($slug);
-
+        $cohort['timeline_image_url'] = config('railcontent.cohort_timeline_image_urls')[brand()] ?? config('railcontent.cohort_timeline_image_urls')['pianote'];
         foreach (config('railcontent.cohort_icons')[brand()] ?? [] as $key => $value) {
             $cohort[$key] = $value;
         }
