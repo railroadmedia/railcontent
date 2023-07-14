@@ -1,7 +1,7 @@
 <template>
     <div class="recommended-product-container">
         <div class="image-container">
-            <a :href="this.item.sales_page_url"><img :src="'https://www.musora.com/musora-cdn/image/width=200,quality=85/' + item.thumbnail_url" class="item-thumbnail"></a>
+            <a :href="this.item.sales_page_url"><img :src="'https://www.musora.com/musora-cdn/image/width=200,quality=95/' + item.thumbnail_url" class="item-thumbnail"></a>
         </div>
         <div class="recommended-product-title"><a :href="this.item.sales_page_url">{{ item.name }}</a></div>
         <div class="recommended-product-cta">

@@ -8,8 +8,8 @@
 
     <header id="page-header" class="tw-flex tw-w-full tw-min-h-[240px] tw-relative tw-z-0 tw-items-center tw-justify-center">
         <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top">
-            <img src="https://musora.com/cdn-cgi/image/quality=100,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg" 
-                 class="tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity" 
+            <img src="https://musora.com/cdn-cgi/image/quality=95,width=1536,fit=cover,metadata=none/https://musora-web-platform.s3.amazonaws.com/headers/unified_header.jpg"
+                 class="tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity"
                  onload="this.classList.remove('tw-opacity-0')"
             />
         </div>

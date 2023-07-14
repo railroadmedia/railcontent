@@ -27,7 +27,7 @@
          class="tw-flex tw-w-full tw-min-h-[140px] tw-py-5 tw-relative tw-z-30 tw-items-center tw-justify-center"
     >
         <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top tw-overflow-hidden">
-            <img :src="`https://musora.com/cdn-cgi/image/quality=100,width=800,fit=cover,metadata=none/${ backgroundImage }`"
+            <img :src="`https://musora.com/cdn-cgi/image/quality=95,width=800,fit=cover,metadata=none/${ backgroundImage }`"
                 class="tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
                 :class="{ 'tw-blur-sm' : blurBG }"
                 onload="this.classList.remove('tw-opacity-0')"
