@@ -734,7 +734,7 @@ return [
                 'allowableFiltersMobile' => ['difficulty', 'bpm','style','artist'],
             ],
             'drum-fest-international-2022' => [
-                'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/namm-show-card2.jpg',
+                'thumbnailUrl' => 'https://musora.com/cdn-cgi/imagedelivery/0Hon__GSkIjm-B_W77SWCA/2c12c9ae-5a67-4767-f257-d1fa3693bd00/public',
                 'name' => '2022 Drum Fest International',
                 'shortname' => 'Episodes',
                 'icon' => 'icon-shows',
