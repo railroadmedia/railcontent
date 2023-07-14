@@ -15,13 +15,12 @@
         t.src = 'https://assets.customer.io/assets/track.js';
         s.parentNode.insertBefore(t, s);
     })();
-    //**** The below script was overriding the existing cio customer information: Needs further testing/discovery ****//
-    // _cio.identify({
-    //     id: {{ user()->id }},
-    //     created_at: "{{ user()->created_at }}",   
-    //     email: "{{ user()->email }}",
-    //     first_name: "{{ user()->first_name }}",
-    //     last_name: "{{ user()->last_name }}",
-    //     plan_name: "{{ user()->access_level }}"
-    // });
+    _cio.identify({
+        id: "{{ user()->getCustomerIOId() }}",
+        created_at: "{{ user()->created_at }}",   
+        email: "{{ user()->email }}",
+        first_name: "{{ user()->first_name }}",
+        last_name: "{{ user()->last_name }}",
+        plan_name: "{{ user()->access_level }}"
+    });
 </script>
