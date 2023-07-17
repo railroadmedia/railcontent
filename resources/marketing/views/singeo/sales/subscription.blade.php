@@ -151,7 +151,7 @@
         'logo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-summer-sale-logo.svg',
         'logoStyles' => '-mb-3',
         'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
-        'promoText' => 'SAVE UP TO 74% UNTIL JULY 17TH!',
+        'promoText' => 'SAVE UP TO 74% UNTIL JULY 31ST!',
     ])
 
     @php
