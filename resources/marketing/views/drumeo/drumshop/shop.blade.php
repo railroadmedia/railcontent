@@ -49,7 +49,7 @@
         'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-summer-sale-logo.svg',
         'logoStyles' => '-mt-16 ml-10 sm:ml-24 lg:ml-32',
         'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
-        'promoText' => 'SAVE UP TO 81% UNTIL JULY 17TH!',
+        'promoText' => 'SAVE UP TO 81% UNTIL JULY 31ST!',
     ])
 
     @if(Session::has('addedProducts'))
