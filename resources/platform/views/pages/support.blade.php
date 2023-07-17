@@ -10,7 +10,7 @@
     <section class="tw-py-16 md:tw-py-20 tw-text-[#00101D] dark:tw-text-white tw-text-center tw-relative tw-bg-[#F9F9F9] dark:tw-bg-[#002039] tw-px-4 md:tw-px-0">
         <div class="tw-container tw-mx-auto tw-relative tw-z-0 tw-max-w-xl md:tw-max-w-none">
             <h3 class="tw-text-[32px]"><strong>Advice and answers from the Musora team</strong></h3>
-            <p class="tw-mt-2 tw-mb-10 tw-text-lg">Find an answer on your own or get in touch with your dedicated Musora Mentor.</p>
+            <p class="tw-mt-2 tw-mb-10 tw-text-lg">Find an answer on your own or get in touch with our support team.</p>
             <div>
                 <form onsubmit="handleSearch(event)">
                     <input class="tw-border tw-border-[#D1D5DB] tw-rounded-full tw-py-3 tw-pl-4 tw-text-black md:tw-max-w-lg tw-w-full tw-mr-2 md:tw-mr-0 tw-mb-2 md:tw-mb-0" placeholder="Search the knowledgebase" id="searchInput" /> <br class="md:tw-hidden">
@@ -82,7 +82,7 @@
         <div class="tw-container tw-max-w-3xl tw-mx-auto tw-text-center">
             <h3><strong>Reach Out Directly</strong></h3>
             <p class="tw-mt-4 tw-mb-5 tw-text-sm md:tw-text-base tw-max-w-3xl tw-mx-auto">
-                Get in touch with your dedicated Musora Mentor!
+                Get in touch with our support team!
             </p>
             <div class="tw-text-left">
                 @include('partials.bladesora.members.partials._support', [

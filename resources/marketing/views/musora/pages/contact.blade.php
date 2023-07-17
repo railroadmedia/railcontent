@@ -33,7 +33,7 @@
     <section class="py-16 md:py-20 text-white text-center relative bg-[#030814] px-4 md:px-0">
         <div class="container mx-auto relative z-0 max-w-xl md:max-w-none">
             <h3><strong>Advice and answers from the Musora team</strong></h3>
-            <p class="my-4">Find an answer on your own or get in touch with your dedicated Musora Mentor.</p>
+            <p class="my-4">Find an answer on your own or get in touch with our support team.</p>
             <div>
                 <form onsubmit="handleSearch(event)">
                     <input class="border-2 border-white rounded-full py-3 pl-4 text-black md:max-w-lg w-full mr-2 md:mr-0 mb-2 md:mb-0" placeholder="Search the knowledgebase" id="searchInput" />
@@ -103,7 +103,7 @@
         <div class="container max-w-3xl mx-auto text-center">
             <h3><strong>Reach Out Directly</strong></h3>
             <p class="mt-4 mb-5 text-sm md:text-base max-w-3xl mx-auto">
-                Get in touch with your dedicated Musora Mentor!
+                Get in touch with our support team!
             </p>
             <div class="text-left">
                 <contact-email-form-marketing
