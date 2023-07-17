@@ -39,7 +39,7 @@
         'logo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-summer-sale-logo.svg',
         'logoStyles' => '-mb-3',
         'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
-        'promoText' => 'SAVE UP TO 74% UNTIL JULY 17TH!',
+        'promoText' => 'SAVE UP TO 74% UNTIL JULY 31ST!',
     ])
 
 
@@ -194,7 +194,7 @@
 @section('layout-scripts')
     @parent
     @include('_partials.components.countdown',[
-        'countdownDate' => '2023-07-17 23:59:59',
+        'countdownDate' => '2023-07-31 23:59:59',
         'promoVersion' => true
     ])
 @endsection

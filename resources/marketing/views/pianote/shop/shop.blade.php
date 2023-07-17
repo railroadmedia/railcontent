@@ -48,7 +48,7 @@
         'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-summer-sale-logo.svg',
         'logoStyles' => 'mb-3 ml-2 sm:ml-6 lg:ml-10',
         'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
-        'promoText' => 'SAVE UP TO 68% UNTIL JULY 17TH!',
+        'promoText' => 'SAVE UP TO 68% UNTIL JULY 31ST!',
     ])
 
     @if(Session::has('addedProducts'))
@@ -275,7 +275,7 @@
 @section('layout-scripts')
     @parent
     @include('_partials.components.countdown',[
-        'countdownDate' => '2023-07-17 23:59:59',
+        'countdownDate' => '2023-07-31 23:59:59',
         'promoVersion' => true
     ])
 @endsection

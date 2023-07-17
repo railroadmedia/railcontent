@@ -153,7 +153,7 @@
         'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-summer-sale-logo.svg',
         'logoStyles' => 'mb-3 ml-2 sm:ml-6 lg:ml-10',
         'title' => 'Join Pianote + Choose <br class="sm:hidden"> Your Bonus Bundle',
-        'promoText' => 'SAVE UP TO 68% UNTIL JULY 17TH!',
+        'promoText' => 'SAVE UP TO 68% UNTIL JULY 31ST!',
     ])
 
     @php

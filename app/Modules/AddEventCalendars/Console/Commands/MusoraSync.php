@@ -3,9 +3,9 @@
 namespace App\Modules\AddEventCalendars\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
+use App\Maps\ContentTypes;
 use App\Modules\AddEventCalendars\Services\AddEventService;
 use App\Modules\AddEventCalendars\Services\CalendarSyncService;
-use Railroad\Railcontent\Entities\ContentEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ConfigService;
 use Railroad\Railcontent\Services\ContentService;
@@ -13,11 +13,13 @@ use Railroad\Railcontent\Services\ContentService;
 class MusoraSync extends Command
 {
 
-    protected $signature = 'addevent:syncMusora';
+    protected $signature = 'addevent:syncMusora {--live}';
     protected $description = 'AddEventMusoraCalendarSync';
     private AddEventService $addEventService;
     private ContentService $contentService;
     private CalendarSyncService $calendarSyncService;
+
+    private bool $syncLiveEvents;
 
     public function handle(
         AddEventService $addEventService,
@@ -27,6 +29,7 @@ class MusoraSync extends Command
         $this->addEventService = $addEventService;
         $this->contentService = $contentService;
         $this->calendarSyncService = $calendarSyncService;
+        $this->syncLiveEvents = $this->option('live');
         $this->withExecutionTime(function () {
             $this->syncMusoraCalendar();
         });
@@ -34,12 +37,13 @@ class MusoraSync extends Command
 
     private function syncMusoraCalendar()
     {
-        $calendar = $this->addEventService->getCalendarByNameIfExists('Musora');
+        $calendar = $this->addEventService->getCalendarByNameIfExists($this->syncLiveEvents ? 'Musora Live' : 'Musora');
         $allContent = $this->getAllContent();
         $this->calendarSyncService->syncContentListToCalendar($allContent, $calendar);
     }
 
-    public function getAllContent(): array
+    public function getAllContent()
+    : array
     {
         $this->info('Loading all content');
 
@@ -48,7 +52,7 @@ class MusoraSync extends Command
         $brands = config('addevent.brands-enabled');
 
         foreach ($brands as $brand) {
-            $typeUniquekeyMap = config("addevent.uniquekeys-by-brand.$brand.by-type", []);
+            $typeUniquekeyMap = $this->filterContentTypes(config("addevent.uniquekeys-by-brand.$brand.by-type", []));
             foreach ($typeUniquekeyMap as $typeOrSlug => $calendarUniqueId) {
                 $content = $this->getContentByContentType($brand, $typeOrSlug);
                 $allContent = array_merge($allContent, $content); // needed for brand-overview calendar
@@ -57,8 +61,14 @@ class MusoraSync extends Command
         return $allContent;
     }
 
-    private function getContentByContentType($brand, $type): array
-    {
+    private function filterContentTypes($contentTypes): array {
+        return $this->syncLiveEvents ? array_filter($contentTypes, function ($k) {
+            return in_array($k, ContentTypes::liveContentTypes());
+        }, ARRAY_FILTER_USE_KEY) : $contentTypes;
+    }
+
+    private function getContentByContentType($brand, $type)
+    : array {
         $page = 1;
         $content = [];
 
@@ -66,7 +76,7 @@ class MusoraSync extends Command
         ContentRepository::$bypassPermissions = true;
         ContentRepository::$availableContentStatues = [
             ContentService::STATUS_PUBLISHED,
-            ContentService::STATUS_SCHEDULED
+            ContentService::STATUS_SCHEDULED,
         ];
         ContentRepository::$pullFutureContent = true;
 
@@ -86,7 +96,9 @@ class MusoraSync extends Command
                 true
             );
 
-            $contentThisLoop = $contentQuery->results()->all();
+            $contentThisLoop =
+                $contentQuery->results()
+                    ->all();
 
             if (count($contentThisLoop) > 0) {
                 $content = array_merge($content, $contentThisLoop);
@@ -97,6 +109,5 @@ class MusoraSync extends Command
 
         return $content ?? [];
     }
-
 
 }
