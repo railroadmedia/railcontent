@@ -19,7 +19,7 @@ class MusoraSync extends Command
     private ContentService $contentService;
     private CalendarSyncService $calendarSyncService;
 
-    private bool $isLiveEvents;
+    private bool $syncLiveEvents;
 
     public function handle(
         AddEventService $addEventService,
@@ -29,7 +29,7 @@ class MusoraSync extends Command
         $this->addEventService = $addEventService;
         $this->contentService = $contentService;
         $this->calendarSyncService = $calendarSyncService;
-        $this->isLiveEvents = $this->option('live');
+        $this->syncLiveEvents = $this->option('live');
         $this->withExecutionTime(function () {
             $this->syncMusoraCalendar();
         });
@@ -37,7 +37,7 @@ class MusoraSync extends Command
 
     private function syncMusoraCalendar()
     {
-        $calendar = $this->addEventService->getCalendarByNameIfExists($this->isLiveEvents ? 'Musora Live' : 'Musora');
+        $calendar = $this->addEventService->getCalendarByNameIfExists($this->syncLiveEvents ? 'Musora Live' : 'Musora');
         $allContent = $this->getAllContent();
         $this->calendarSyncService->syncContentListToCalendar($allContent, $calendar);
     }
@@ -62,7 +62,7 @@ class MusoraSync extends Command
     }
 
     private function filterContentTypes($contentTypes): array {
-        return $this->isLiveEvents ? array_filter($contentTypes, function ($k) {
+        return $this->syncLiveEvents ? array_filter($contentTypes, function ($k) {
             return in_array($k, ContentTypes::liveContentTypes());
         }, ARRAY_FILTER_USE_KEY) : $contentTypes;
     }
