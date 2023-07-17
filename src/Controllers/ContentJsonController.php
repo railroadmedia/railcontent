@@ -244,7 +244,8 @@ class ContentJsonController extends Controller
                     'published_on' => '',
                     'archived_on' => '',
                     'instrument' => '',
-                    'instrumentless' => ''
+                    'instrumentless' => '',
+                    'length_in_seconds' => '',
                 ])
         );
 
