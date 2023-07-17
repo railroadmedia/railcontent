@@ -25,46 +25,54 @@
         <div class="tw-max-w-4xl tw-mx-auto tw-px-4">
             <h3 class="tw-text-center tw-mb-10 dark:tw-text-white"><strong>Frequently Asked Questions</strong></h3>
             <div class="tw-grid tw-grid-cols-2 md:tw-grid-cols-3 lg:tw-grid-cols-4 tw-gap-3 sm:tw-gap-4">
-                <a href="#" data-beacon-article-sidebar="634b281d4d805871ceaa3acb" class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-regular fa-comments tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
                     <p class="tw-font-bold tw-mb-1 tw-text-sm">Instructor Feedback</p>
                     <p class="tw-text-sm">How can I get personalized feedback from my instructor?</p>
-                </a>
-                <a href="#" data-beacon-article-sidebar="634b2901927a2c1634dfac43" class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <a href="#" data-beacon-article-sidebar="634b281d4d805871ceaa3acb" class="tw-absolute tw-inset-0" aria-label="Instructor Feedback"></a>
+                </div>
+                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-sharp fa-regular fa-truck-fast tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
                     <p class="tw-font-bold tw-mb-1 tw-text-sm">Shipment Tracking</p>
                     <p class="tw-text-sm">I ordered a product from you, how can I track my shipment?</p>
-                </a>
-                <a href="#" data-beacon-article-sidebar="636ed0fe190e8f786b443e0f" class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <a href="#" data-beacon-article-sidebar="634b2901927a2c1634dfac43" class="tw-absolute tw-inset-0" aria-label="Shipment Tracking"></a>
+                </div>
+                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-sharp fa-regular fa-download tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
                     <p class="tw-font-bold tw-mb-1 tw-text-sm">Download Lessons</p>
                     <p class="tw-text-sm">Can I download lessons and replay them later without using data?</p>
-                </a>
-                <a href="#" data-beacon-article-sidebar="634b2887de258f5018eb4af3" class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <a href="#" data-beacon-article-sidebar="636ed0fe190e8f786b443e0f" class="tw-absolute tw-inset-0" aria-label="Download Lessons"></a>
+                </div>
+                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-regular fa-file-music tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
                     <p class="tw-font-bold tw-mb-1 tw-text-sm">Downloading Sheet Music</p>
                     <p class="tw-text-sm">How do I download or print sheet music and chord charts?</p>
-                </a>
-                <a href="#" data-beacon-article-sidebar="637fdfec9d8f1448fb81874e" class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <a href="#" data-beacon-article-sidebar="634b2887de258f5018eb4af3" class="tw-absolute tw-inset-0" aria-label="Downloading Sheet Music"></a>
+                </div>
+                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-solid fa-question tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
                     <p class="tw-font-bold tw-mb-1 tw-text-sm">Determine skill level</p>
                     <p class="tw-text-sm">How do I know if I’m a beginner, intermediate, or advanced?</p>
-                </a>
-                <a href="#" data-beacon-article-sidebar="6467ba0017da4d6b8d6f0963" class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <a href="#" data-beacon-article-sidebar="637fdfec9d8f1448fb81874e" class="tw-absolute tw-inset-0" aria-label="Determine skill level"></a>
+                </div>
+                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-regular fa-file-invoice-dollar tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
                     <p class="tw-font-bold tw-mb-1 tw-text-sm">Billing Information</p>
                     <p class="tw-text-sm">Where can I find my billing history and invoices?</p>
-                </a>
-                <a href="#" data-beacon-article-sidebar="646f6b46dad2804588f1e1cd" class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <a href="#" data-beacon-article-sidebar="6467ba0017da4d6b8d6f0963" class="tw-absolute tw-inset-0" aria-label="Billing Information"></a>
+                </div>
+                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-light fa-circle-xmark tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
                     <p class="tw-font-bold tw-mb-1 tw-text-sm">End membership</p>
                     <p class="tw-text-sm">How can I make sure my subscription doesn't renew?</p>
-                </a>
-                <a href="#" data-beacon-article-sidebar="6467b2256413a34741154344" class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <a href="#" data-beacon-article-sidebar="646f6b46dad2804588f1e1cd" class="tw-absolute tw-inset-0" aria-label="End membership"></a>
+                </div>
+                <div class="tw-bg-[#030814] dark:tw-bg-white tw-text-white dark:tw-text-[#000C17] tw-text-center tw-rounded-xl tw-px-3 tw-py-6 sm:tw-py-9 tw-relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
                     <i class="fa-regular fa-circle-dollar tw-text-3xl md:tw-text-4xl tw-mb-3"></i>
                     <p class="tw-font-bold tw-mb-1 tw-text-sm">Request a Refund</p>
                     <p class="tw-text-sm">I purchased less than 90 days ago and I would like a refund.</p>
-                </a>
+                    <a href="#" data-beacon-article-sidebar="6467b2256413a34741154344" class="tw-absolute tw-inset-0" aria-label="Request a Refund"></a>
+                </div>
             </div>
         </div>
     </section>
