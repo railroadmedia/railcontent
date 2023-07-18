@@ -104,7 +104,9 @@ class PermissionService
                 'brand' => $brand ?? ConfigService::$brand
             ]
         );
-        CacheHelper::deleteAllCachedSearchResults('permissions_' . CacheHelper::getKey());
+        // DEV NOTE: do not add the `CacheHelper::getKey()` here: we need to remove all keys that have "permissions_",
+        // not only those that would be for this user's key
+        CacheHelper::deleteAllCachedSearchResults('permissions_');
 
         return $this->get($permissionId);
     }
@@ -131,7 +133,9 @@ class PermissionService
             ['name' => $name, 'brand' => $brand ?? ConfigService::$brand]
         );
 
-        CacheHelper::deleteAllCachedSearchResults('permissions_' . CacheHelper::getKey());
+        // DEV NOTE: do not add the `CacheHelper::getKey()` here: we need to remove all keys that have "permissions_",
+        // not only those that would be for this user's key
+        CacheHelper::deleteAllCachedSearchResults('permissions_');
 
         return $this->get($id);
     }
@@ -157,7 +161,9 @@ class PermissionService
             $contentIds = $this->contentRepository->getByType($contentType);
             CacheHelper::deleteCacheKeys($contentIds);
         }
-        CacheHelper::deleteAllCachedSearchResults('permissions_' . CacheHelper::getKey());
+        // DEV NOTE: do not add the `CacheHelper::getKey()` here: we need to remove all keys that have "permissions_",
+        // not only those that would be for this user's key
+        CacheHelper::deleteAllCachedSearchResults('permissions_');
 
         $this->contentPermissionRepository->unlinkPermissionFromAllContent($id);
 
