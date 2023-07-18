@@ -426,11 +426,11 @@
         ]
     @endphp
     @include('musora.sales.components.order-section-bonuses', [
-    'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png',
+        'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-annual-2w-card.png',
         'header' => 'Online drum lessons<br class="inline sm:hidden"> for all skill levels.',
         'subDescription' => 'Start your Drumeo membership today and get:',
         'bonusWidth' => 'w-1/2 md:w-1/3 lg:w-1/5',
-    'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[the-drummers-toolbox-book]=1&products[rudiments-poster]=1&locked=true&promo-code=special',
+        'buttonLink' => '/ecommerce/add-to-cart?products[DLM-1-year]=1&products[drumeo-eardrums]=1&products[Drumeo-VaterSticks]=1&products[the-drummers-toolbox-book]=1&products[rudiments-poster]=1&locked=true&promo-code=special',
     ])
 
     @include("drumeo.sales.partials._footer", [

@@ -555,11 +555,11 @@
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'youtube' => '1.2M',
+        'youtube' => '1.3M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
-        'facebook' => '422K',
+        'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '174K',
+        'instagram' => '203K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
@@ -629,6 +629,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',
         'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>

@@ -227,12 +227,12 @@
 
     @php
         $modalImages = [
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-03.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-01.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-05.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-02.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-06.jpg",
-            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-04.jpg"
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-03a.jpg",
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-01a.jpg",
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-05a.jpg",
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-02a.jpg",
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-06a.jpg",
+            "https://d2vyvo0tyx8ig5.cloudfront.net/products/classical-piano-pieces/collage-04a.jpg"
         ];
     @endphp
     @foreach ($modalImages as $key => $img)

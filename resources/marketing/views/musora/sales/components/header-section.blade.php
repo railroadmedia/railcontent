@@ -1,4 +1,4 @@
-<header class="sm:px-6 pb-10 sm:py-14 lg:py-20" style="background:#f6f8fc;">
+<header class="sm:px-6 pb-10 sm:py-12 lg:py-16" style="background:#f6f8fc;">
     <div class="container max-w-6xl mx-auto">
         <div class="flex flex-wrap sm:flex-nowrap items-center">
             <div class="w-full sm:w-7/12 sm:pr-6 text-center lg:text-left">
@@ -80,8 +80,8 @@
                     </div>
             </div>
         </div>
-        <div class="px-5 sm:px-0 mb-10">
-            <div class="flex flex-wrap sm:flex-nowrap text-center border-2 rounded-xl border-{{ $theme }} mt-8 lg:mt-12 lg:mb-4 relative"
+        <div class="px-5 sm:px-0">
+            <div class="flex flex-wrap sm:flex-nowrap text-center border-2 rounded-xl border-{{ $theme }} mt-8 lg:mt-12 relative"
 {{--                style="background-color:#eaf1fa;"--}}
             >
                     <div class="z-10 flex flex-wrap sm:flex-nowrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 lg:px-5 text-left sm:text-center">
@@ -102,7 +102,10 @@
                 <div class="absolute inset-0 z-0 bg-{{ $theme }}" style="opacity: 0.07;"></div>
                 </div>
         </div>
-
+    </div>
+</header>
+<section class="sm:px-6 py-4 sm:py-5 text-white" style="background:#0c1524;">
+    <div class="container max-w-4xl mx-auto">
         @component('_partials.components.carousel',[
             'xdata' => "
                 classes: {
@@ -124,13 +127,13 @@
                             <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
                             <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
                                 <img
-                                    class="rounded-full object-cover object-right w-10 h-10 transition-opacity opacity-0"
+                                    class="rounded-full object-cover object-right w-9 h-9 transition-opacity opacity-0"
                                     src="https://www.musora.com/musora-cdn/image/width=80,quality=95/{{ $slide['thumb'] }}"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
                                     alt="{{$slide['name']}}"
                                 ><br class="inline md:hidden">
-                                <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
+                                <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
                             </div>
                         </div>
                     </li>
@@ -138,4 +141,4 @@
             @endslot
         @endcomponent
     </div>
-</header>
+</section>

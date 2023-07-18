@@ -530,11 +530,11 @@
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
-        'youtube' => '2.6M',
+        'youtube' => '2.7M',
         'facebookLink' => 'https://facebook.com/drumeo/',
         'facebook' => '1.2M',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',
-        'instagram' => '1M',
+        'instagram' => '1.1M',
     ])
     @if(empty($trialVersion))
         @include('musora.sales.components.guarantee-section', [
@@ -604,6 +604,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
         'header' => 'Unlimited drum lessons.<br> The world’s best teachers.<br> 5000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>

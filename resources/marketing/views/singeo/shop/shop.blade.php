@@ -123,7 +123,7 @@
                             </p>
                             <div class="join white smaller w-full" style="background:#D46A7D;color:white;">only <!--<s style="color:#C4C4C4;">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>--> ${{ floatval($productPrices['singing-starter-kit']->discounted_price) }} &raquo;</div><br>
                         </div>
-                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover" style="background-position:60% 0;background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=2200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/singing-starter-kit-banner.jpg);"></div>
+                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover" style="background-position:60% 0;background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=3000,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/singing-starter-kit-banner.jpg);"></div>
                         <div class="inline-block sm:hidden absolute inset-0 z-0" style="background-color:#293239;"></div>
                     </a>
                 </div>
@@ -137,7 +137,7 @@
                             </p>
                             <div class="join white smaller w-full" style="background:white;color:#2B384D;">only <!--<s style="color:#C4C4C4;">${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price) }}</s>--> ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }} &raquo;</div><br>
                         </div>
-                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=2200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/beautiful-harmonies-banner.jpg);"></div>
+                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=3000,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/beautiful-harmonies-banner.jpg);"></div>
                         <div class="inline-block sm:hidden absolute inset-0 z-0" style="background-color:#293239;"></div>
                     </a>
                 </div>

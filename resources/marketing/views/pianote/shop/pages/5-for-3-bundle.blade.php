@@ -105,7 +105,7 @@
             <hr class="my-8 border-[#C4C4C4] border" />
             <p class="mb-4">
                 <strong>Say hello to your free bonuses:</strong><br>
-                <em class="opacity-50">All digital bonuses are added to your account instantly with your membership to {{ ucfirst($theme) }}, and they’re yours for as long as you remain a member.</em>
+                <em class="opacity-50">All digital bonuses are added to your account instantly with your membership to {{ ucfirst($theme) }}, and they’re yours forever.</em>
             </p>
 
             @include('_partials.components.shop.bonuses')

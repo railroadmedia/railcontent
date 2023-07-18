@@ -1,7 +1,6 @@
-<div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #f4f8fb calc(50% + 1px));"></div>
 <div id="method" class="anchor"></div>
 <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-    <div class="container max-w-6xl mx-auto">
+    <div class="container max-w-5xl mx-auto">
         <h2><strong>{!! $header !!}</strong></h2>
         <p class="mt-2 sm:mt-3 mb-8 sm:mb-10">{!! $desc !!}</p>
         <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6">
@@ -24,7 +23,7 @@
             @endforeach
         </div>
         @if(empty($promoVersion))
-            <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }} smaller">{{ $theme }} METHOD</a>
+            <a href="/method" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline black smaller">{{ $theme }} METHOD</a>
         @endif
         <a class="sm:mx-1 w-full sm:w-64 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))

@@ -6,7 +6,7 @@
     $payload->name = $itemTitle;
     $payload->thumbnail_url = $itemThumbnail;
     $payload->description = $itemDescription;
-    
+
     $parsedPayload = json_encode($payload);
 @endphp
 
@@ -18,7 +18,7 @@
             <a @if ((empty($noLink) || $noLink === false) && $isOwned) href="{{ $lessonsUrl }}" @endif>
                 <div
                     class="thumb-img bg-center corners-10 bg-grey-2 dark:tw-bg-[#081825] {{ $forceSquareThumb === true ? 'square' : 'widescreen' }}">
-                    <img src="https://www.musora.com/musora-cdn/image/width=280,height=280,quality=90/{{ $itemThumbnail }}"
+                    <img src="https://www.musora.com/musora-cdn/image/width=280,height=280,quality=95/{{ $itemThumbnail }}"
                         alt="{{ $itemTitle }} Thumbnail" class="tw-transition-opacity tw-opacity-0" loading="lazy"
                         onload="this.classList.remove('tw-opacity-0')">
 
@@ -72,7 +72,7 @@
                         Included With Edge
                     </p>
                 @endif
-                    
+
                 @if(!empty($statusText))
                         <div class="tw-mb-2"><p class="tw-text-white tw-bg-{{ $brand }} tw-uppercase tiny tw-rounded-lg tw-font-bold tw-py-1 tw-px-2.5 tw-inline-block">{{ $statusText }}</p></div>
                 @endif
