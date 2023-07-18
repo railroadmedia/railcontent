@@ -258,7 +258,10 @@ onUpdated(() => {
       :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="pageContainerStore.isSidebarHidden"
       :isDarkModeSelected="isDarkModeSelected" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
       :canReferNewStudents="canReferNewStudents"
-      @onCollapseSidebar="onCollapseSidebar" @onColorModeToggle="onColorModeToggle" />
+      :is-live="isLive"
+      @onCollapseSidebar="onCollapseSidebar" 
+      @onColorModeToggle="onColorModeToggle" 
+    />
 
     <!-- Page Container -->
     <div class="
@@ -275,6 +278,7 @@ onUpdated(() => {
       <!-- Content Container -->
       <main class="
           tw-flex
+          tw-justify-between
           tw-w-full
           tw-h-full
           tw-min-h-screen
@@ -289,7 +293,7 @@ onUpdated(() => {
           {{ adminMessage }}
         </h2>
         <!-- Content -->
-        <section class="tw-flex tw-flex-col tw-grow tw-w-full">
+        <section class="tw-w-full">
           <slot :is-dark-mode="isDarkModeSelected" />
         </section>
 

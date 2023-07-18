@@ -7,7 +7,7 @@
     <meta property="og:title" content="Perfect Piano Practice Live Bootcamp | Pianote">
     <meta name="description" content="Accelerate your progress on the piano with a FREE 90-minute live lesson from Lisa Witt"/>
     <meta property="og:description" content="Accelerate your progress on the piano with a FREE 90-minute live lesson from Lisa Witt">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https:/d2vyvo0tyx8ig5.cloudfront.net/lead-gen/magic-of-piano-chords/header.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https:/d2vyvo0tyx8ig5.cloudfront.net/lead-gen/magic-of-piano-chords/header.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
 @endsection
@@ -145,7 +145,7 @@
         .header {
             background-position: top;
             background-size: cover;
-            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/magic-of-piano-chords/header_m.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/magic-of-piano-chords/header_m.jpg');
         }
 
         .text-yellow {
@@ -208,7 +208,7 @@
 
         @media (min-width: 768px) {
             .header {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/magic-of-piano-chords/header.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/magic-of-piano-chords/header.jpg');
                 background-size: 1410px;
             }
 

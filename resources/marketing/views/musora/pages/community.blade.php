@@ -151,24 +151,24 @@
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-56 relative overflow-hidden">
         <div class="container max-w-6xl mx-auto relative z-20">
             <picture>
-                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://dmmior4id2ysr.cloudfront.net/community/header-title1.png">
-                <img class="h-40 md:h-56 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/community/header-title-m1.png" alt="Welcome home" fetchpriority="high">
+                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/community/header-title1.png">
+                <img class="h-40 md:h-56 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dmmior4id2ysr.cloudfront.net/community/header-title-m1.png" alt="Welcome home" fetchpriority="high">
             </picture>
 
             <h6 class="leading-relaxed mt-4 mb-7">
                 Get the personal touch you need to meet your musical goals <br class="hidden sm:inline">and join the best community of musicians and students online!
             </h6>
         </div>
-        <img class="hidden lg:inline absolute z-10 h-40" style="top:60%;left: 4%;" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dmmior4id2ysr.cloudfront.net/community/header-student-pianote.png" alt="pianote student" fetchpriority="high">
-        <img class="hidden lg:inline absolute z-10 h-52 left-[2%] 2xl:left-[12%]" style="top:18%;" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dmmior4id2ysr.cloudfront.net/community/header-coach-drumeo.png" alt="drumeo coach" fetchpriority="high">
-        <img class="hidden lg:inline absolute z-10 h-28" style="top: 76%; left: 27%;" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dmmior4id2ysr.cloudfront.net/community/header-coach-singeo.png" alt="singeo coach" fetchpriority="high">
-        <img class="hidden lg:inline absolute z-10 h-32" style="top: 5%; left: 26%;" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dmmior4id2ysr.cloudfront.net/community/header-student-singeo.png" alt="singeo student" fetchpriority="high">
-        <img class="hidden lg:inline absolute z-10 h-24" style="top: 10%; left: 66%;" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dmmior4id2ysr.cloudfront.net/community/header-coach-guitareo.png" alt="guitareo coach" fetchpriority="high">
-        <img class="hidden lg:inline absolute z-10 h-52" style="top: 55%; left: 80%;" src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://dmmior4id2ysr.cloudfront.net/community/header-coach-pianote.png" alt="pianote coach" fetchpriority="high">
-        <img class="hidden lg:inline absolute z-10 h-48" style="top: 19%; left: 78%;" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dmmior4id2ysr.cloudfront.net/community/header-student-drumeo.png" alt="drumeo student" fetchpriority="high">
-        <img class="hidden lg:inline absolute z-10 h-28" style="top: 76%; left: 62%;" src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://dmmior4id2ysr.cloudfront.net/community/header-student-guitareo.png" alt="guitareo student" fetchpriority="high">
+        <img class="hidden lg:inline absolute z-10 h-40" style="top:60%;left: 4%;" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://dmmior4id2ysr.cloudfront.net/community/header-student-pianote.png" alt="pianote student" fetchpriority="high">
+        <img class="hidden lg:inline absolute z-10 h-52 left-[2%] 2xl:left-[12%]" style="top:18%;" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://dmmior4id2ysr.cloudfront.net/community/header-coach-drumeo.png" alt="drumeo coach" fetchpriority="high">
+        <img class="hidden lg:inline absolute z-10 h-28" style="top: 76%; left: 27%;" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dmmior4id2ysr.cloudfront.net/community/header-coach-singeo.png" alt="singeo coach" fetchpriority="high">
+        <img class="hidden lg:inline absolute z-10 h-32" style="top: 5%; left: 26%;" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://dmmior4id2ysr.cloudfront.net/community/header-student-singeo.png" alt="singeo student" fetchpriority="high">
+        <img class="hidden lg:inline absolute z-10 h-24" style="top: 10%; left: 66%;" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dmmior4id2ysr.cloudfront.net/community/header-coach-guitareo.png" alt="guitareo coach" fetchpriority="high">
+        <img class="hidden lg:inline absolute z-10 h-52" style="top: 55%; left: 80%;" src="https://www.musora.com/musora-cdn/image/width=350,quality=95/https://dmmior4id2ysr.cloudfront.net/community/header-coach-pianote.png" alt="pianote coach" fetchpriority="high">
+        <img class="hidden lg:inline absolute z-10 h-48" style="top: 19%; left: 78%;" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dmmior4id2ysr.cloudfront.net/community/header-student-drumeo.png" alt="drumeo student" fetchpriority="high">
+        <img class="hidden lg:inline absolute z-10 h-28" style="top: 76%; left: 62%;" src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://dmmior4id2ysr.cloudfront.net/community/header-student-guitareo.png" alt="guitareo student" fetchpriority="high">
         <div class="flex justify-center">
-            <img class="lg:hidden max-w-2xl sm:max-w-3xl md:max-w-none" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dmmior4id2ysr.cloudfront.net/community/header-collage-m.png" alt="header collage mobile" fetchpriority="high"/>
+            <img class="lg:hidden max-w-2xl sm:max-w-3xl md:max-w-none" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dmmior4id2ysr.cloudfront.net/community/header-collage-m.png" alt="header collage mobile" fetchpriority="high"/>
         </div>
     </section>
 
@@ -226,8 +226,8 @@
                             </div>
                             <div class="-mt-7 md:rounded-lg relative aspect-16:9 mb-6 md:mb-0">
                                 <picture>
-                                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="timeline image {{ $key + 1 }}">
-                                    <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=760,quality=85/{{ $getting['mobileImg'] }}" alt="timeline image {{ $key + 1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="timeline image {{ $key + 1 }}">
+                                    <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=760,quality=95/{{ $getting['mobileImg'] }}" alt="timeline image {{ $key + 1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                                 </picture>
 
                             </div>
@@ -237,8 +237,8 @@
                         <div class="relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-28">
                             <div class="-mt-7 md:rounded-lg relative aspect-16:9 mb-6 md:mb-0">
                                 <picture>
-                                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="timeline image {{ $key + 1 }}">
-                                    <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=760,quality=85/{{ $getting['mobileImg'] }}" alt="timeline image {{ $key + 1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="timeline image {{ $key + 1 }}">
+                                    <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=760,quality=95/{{ $getting['mobileImg'] }}" alt="timeline image {{ $key + 1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                                 </picture>
                             </div>
                             <div class="content relative text-left px-4 md:px-0">

@@ -5,7 +5,11 @@
     <meta property="og:title" content="Guitareo Shop">
     <meta name="description" content="Say goodbye to “do it yourself” guitar lessons.">
     <meta property="og:description" content="Say goodbye to “do it yourself” guitar lessons.">
-    <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-guitareo.jpg">
+    @if(Carbon\Carbon::create(2023, 8, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())
+        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/july/guitareo-summer-share-image.jpg">
+    @else
+        <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-guitareo.jpg">
+    @endif
     <meta property="og:url" content="https://www.guitareo.com/shop/">
 @endsection
 
@@ -84,18 +88,26 @@
 @endsection
 
 @section('body')
-    <header class="drum-shop-header relative">
-        <picture>
-            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg">
-            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg" alt="header background image" fetchpriority="high" />
-        </picture>
-        <div class="container mx-auto relative z-10">
-            <div class="px-2 md:px-3">
-                <img class="logo" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="guitareo logo" fetchpriority="high" />
-                <h1><strong>SHOP</strong></h1>
-            </div>
-        </div>
-    </header>
+{{--    <header class="drum-shop-header relative">--}}
+{{--        <picture>--}}
+{{--            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg">--}}
+{{--            <img class="absolute w-full h-full top-0 left-0 object-center object-cover" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/promos/black-friday/shop-bg.jpg" alt="header background image" fetchpriority="high" />--}}
+{{--        </picture>--}}
+{{--        <div class="container mx-auto relative z-10">--}}
+{{--            <div class="px-2 md:px-3">--}}
+{{--                <img class="logo" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="guitareo logo" fetchpriority="high" />--}}
+{{--                <h1><strong>SHOP</strong></h1>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </header>--}}
+
+    @include('_partials.components.shop.promo-top-banner',[
+        'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-shop-summer-sale-bg.jpg',
+        'logo' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-summer-sale-logo.svg',
+        'logoStyles' => 'mb-3',
+        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
+        'promoText' => 'SAVE UP TO 91% UNTIL JULY 31ST!',
+    ])
 
     @if(Session::has('addedProducts'))
         <section class="py-6 md:py-10">
@@ -157,8 +169,23 @@
         {{--        @include('_partials.layout.holiday.bundle-cards')--}}
         <section class="grid-view category-section" data-category="lessons">
             <ul class="container mx-auto fixed-cards text-center lg:text-left">
+
+                @include('musora.shop._shop-card', [
+                     "itemURL" => "/",
+                     "sku" => null,
+                     "thumbnail" => "https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-membership-shop.jpg",
+                     "title" => "Guitareo Membership",
+                     "packAuthor" => "Ayla Tesler-Mabe",
+                     "cardDescription" => "Unlimited guitar lessons, a huge song library, and ongoing support from real teachers.",
+                     "specialPrice" => "7-Day Free Trial",
+                     "fullPrice" => 240,
+                     "price" => 240,
+                     "category" => "lessons",
+                     "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
+                     'soldOut' => false,
+                ])
                 @foreach($items as $key => $item)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                         "sku" => $item->sku,
                         "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
                         "thumbnail" => $item->thumbnail,
@@ -172,7 +199,7 @@
                         "price" => $item->discounted_price,
                         "category" => strtolower($item->productType->name),
                         "sizes" => $item->sizes,
-                        "soldOut" => (!empty($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
+                        "soldOut" => (isset($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
                         "size_case_sensitive" => $item->size_case_sensitive,
                         'FCP' => $key < 4 ? true : null,
                     ])
@@ -184,7 +211,7 @@
     </div>
     <section class="content-section text-white text-center px-6 py-10 sm:py-20" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
         <div class="container mx-auto max-w-4xl">
-            <img class="h-28 md:h-32 lazyload" src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/2022/guitareo-guarantee.png" alt="guitareo-guarantee">
+            <img class="h-28 md:h-32 lazyload" src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/2022/guitareo-guarantee.png" alt="guitareo-guarantee">
 
             <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Happy student guarantee. </strong><br>
                 Test-drive your lessons for 90 days. Zero risk. </h3>
@@ -211,4 +238,12 @@
 
 @section('layout-footer')
     @include("guitareo.sales.partials._footer")
+@endsection
+
+@section('layout-scripts')
+    @parent
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-07-31 23:59:59',
+        'promoVersion' => true
+    ])
 @endsection

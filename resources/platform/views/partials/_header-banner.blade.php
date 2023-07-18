@@ -2,7 +2,7 @@
 <div class="tw-w-full fluid collapsed-h tw-py-8 md:tw-py-11 relative tw-bg-black">
     {{-- Background Image --}}
     <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top">
-        <img src="https://www.musora.com/musora-cdn/image/width=1000,quality=90/{{ $backgroundImage }}"
+        <img src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $backgroundImage }}"
              class="tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
              onload="this.classList.remove('tw-opacity-0')"
         >

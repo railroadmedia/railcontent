@@ -112,13 +112,6 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
     }
-    public function trialJune()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.subscription-june', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
-    }
     public function trialBeginner()
     {
         $products = $this->productRepository->all();
@@ -271,6 +264,13 @@ class SalesController extends BaseController
 
         return view('drumeo.lead-gen.pages.30-day-drummer-deal', ['products' => $products]);
     }
+    public function thirtyDayChopsDeal()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.lead-gen.pages.30-day-chops-deal', ['products' => $products, 'theme' => 'drumeo']);
+    }
 
 
 
@@ -418,5 +418,10 @@ class SalesController extends BaseController
     public function drummingSystem()
     {
         return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
+    }
+
+    public function fiveforthreeBundle()
+    {
+        return view('drumeo.drumshop.pages.5-for-3-bundle', ['theme' => 'drumeo']);
     }
 }

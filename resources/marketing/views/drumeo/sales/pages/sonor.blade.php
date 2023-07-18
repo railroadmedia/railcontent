@@ -42,7 +42,7 @@
 
     <header class="sonor-header content-section text-center" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/promos/sonor-trial/header-background.jpg);">
         <div class="container mx-auto">
-            <img class="logo edge" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
+            <img class="logo edge" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
             <img class="logo sonor" src="https://dpwjbsxqtam5n.cloudfront.net/promos/sonor-trial/sonor-logo-white.png">
             <br>
             <h1><strong>The Ultimate Online <br class="inline lg:hidden"> Drum Lessons Experience<sup>&trade;</sup></strong></h1>
@@ -105,7 +105,7 @@
 
     <section class="sonor-footer content-section text-center">
         <div class="container mx-auto">
-            <img class="logo edge" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
+            <img class="logo edge" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
             <img class="logo sonor" src="https://dpwjbsxqtam5n.cloudfront.net/promos/sonor-trial/sonor-logo-white.png">
             <br>
             <h1><strong>The Ultimate Online <br class="inline lg:hidden"> Drum Lessons Experience<sup>&trade;</sup></strong></h1>

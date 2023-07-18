@@ -80,6 +80,9 @@
         @yield('scripts')
         @yield('inject-components')
 
+        {{-- Customer.io --}}
+        @include('partials._customer-io')
+
         {{-- Helpscout Beacon --}}
         @include('partials.third-party.helpscout-tracking-beacon-script', ['email' => !empty(user()) ? user()->email : null])
         

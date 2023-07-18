@@ -3,6 +3,7 @@
 namespace Modules\UserManagementSystem\Providers;
 
 use App\Modules\UserManagementSystem\Console\Commands\CreateUser;
+use App\Modules\UserManagementSystem\Console\Commands\UserDelete;
 use App\Modules\UserManagementSystem\Policies\UserPolicy;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -32,6 +33,7 @@ class UserManagementSystemServiceProvider extends ServiceProvider
         $this->commands(
             [
                 CreateUser::class,
+                UserDelete::class
             ]
         );
         // publish config file

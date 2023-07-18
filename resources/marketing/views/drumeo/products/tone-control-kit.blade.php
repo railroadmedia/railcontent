@@ -314,7 +314,7 @@
         <video poster="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/header-thumbnail.jpg" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/header.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         <div class="overlay"></div>
         <div class="row">
-            <img class="logo drumeo" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo logo"><br>
+            <img class="logo drumeo" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo logo"><br>
             <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/tone-control-kit-logo.png" alt="Tone control kit logo"><br>
             <div class="watch-badge">
                 WATCH<br> THE DEMO
@@ -485,7 +485,7 @@
         <div id="customize-anchor" class="anchor"></div>
         <div class="row">
             <div class="columns">
-                <img class="logo drumeo" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drume logo"><br>
+                <img class="logo drumeo" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drume logo"><br>
                 <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/tone-control-kit-logo.png" alt="Tone control kit logo">
 
                 <h2 class="uppercase">

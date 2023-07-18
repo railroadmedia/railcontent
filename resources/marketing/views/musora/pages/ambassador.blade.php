@@ -192,14 +192,14 @@
 
 <!-- Main -->
 @section('layout-body')
-    <header class="bg-cover bg-center text-center text-white py-12 md:py-20 lg:py-24 px-4 relative" style="background-color:#011223;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-drums.jpg);">
+    <header class="bg-cover bg-center text-center text-white py-12 md:py-20 lg:py-24 px-4 relative" style="background-color:#011223;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/background-drums.jpg);">
         <div class="background-fade">
-            <div class="drums" style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-drums.jpg);"></div>
-            <div class="piano"  style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-piano.jpg);"></div>
-            <div class="guitar"  style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-guitar.jpg);"></div>
+            <div class="drums" style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/background-drums.jpg);"></div>
+            <div class="piano"  style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/background-piano.jpg);"></div>
+            <div class="guitar"  style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/background-guitar.jpg);"></div>
         </div>
         <div class="container mx-auto max-w-6xl relative z-10">
-            <img class="mx-auto h-16 sm:h-32 lg:h-40 mb-5 md:mb-10" src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://musora-center.s3.amazonaws.com/affiliate/Musora-AllBrands.png" alt="musora logos" fetchpriority="high">
+            <img class="mx-auto h-16 sm:h-32 lg:h-40 mb-5 md:mb-10" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://musora-center.s3.amazonaws.com/affiliate/Musora-AllBrands.png" alt="musora logos" fetchpriority="high">
 
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
             <h4 class="mt-3 mb-5 md:mb-10 leading-normal">Get paid to promote world-class<br class="inline md:hidden"> online music lessons.</h4>
@@ -238,7 +238,7 @@
     </section>
     <section class="bg-cover bg-center text-center text-white py-8 md:py-10 lg:py-14 px-4 relative">
         {{-- background --}}
-        <img src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-piano.jpg"
+        <img src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/background-piano.jpg"
             class="absolute object-cover object-center inset-0 w-full h-full"
              alt="piano background"
         />
@@ -309,7 +309,7 @@
                                 <div class="flex items-center justify-center pt-5 md:pt-8">
                                     <img
                                         class="rounded-full w-1/4 transition-opacity opacity-0"
-                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/testimonial-alejandro.jpg"
+                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/testimonial-alejandro.jpg"
                                         alt="testimonial alejandro"
                                     >
                                     <div class="text pl-3 md:pl-5">
@@ -331,7 +331,7 @@
                                 <div class="flex items-center justify-center pt-5 md:pt-8">
                                     <img
                                         class="rounded-full w-1/4"
-                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/testimonial-piano-dreamers.jpg"
+                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/testimonial-piano-dreamers.jpg"
                                         alt="testimonial piano dreamer"
                                     >
                                     <div class="text pl-3 md:pl-5">
@@ -353,7 +353,7 @@
                                 <div class="flex items-center justify-center pt-5 md:pt-8">
                                     <img
                                         class="rounded-full w-1/4"
-                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/testimonial-aguafish.jpg"
+                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/testimonial-aguafish.jpg"
                                         alt="testimonial aguafish"
                                     >
                                     <div class="text pl-3 md:pl-5">
@@ -375,7 +375,7 @@
                                 <div class="flex items-center justify-center pt-5 md:pt-8">
                                     <img
                                         class="rounded-full w-1/4"
-                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/trials/casey-cooper.jpg"
+                                        src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/trials/casey-cooper.jpg"
                                         alt="casey cooper"
                                     >
                                     <div class="text pl-3 md:pl-5">
@@ -393,7 +393,7 @@
     </section>
 
     <section class="bg-cover bg-center text-center text-white py-24 md:py-32 lg:py-52 px-4 relative">
-        <img src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/affiliate/background-guitar.jpg"
+        <img src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/background-guitar.jpg"
             class="absolute object-cover z-[-2] w-full h-full top-0 left-0 object-cover"
              alt="guitar background"
         />

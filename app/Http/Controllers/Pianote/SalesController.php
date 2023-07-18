@@ -30,14 +30,6 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.restart', ['theme' => 'pianote']);
     }
-    public function homeJune()
-    {
-        return view('pianote.sales.subscription-june', ['theme' => 'pianote', 'month' => true, 'promoVersion' => true, 'trialVersion' => true]);
-    }
-    public function homeJune2()
-    {
-        return view('pianote.sales.subscription-june2', ['theme' => 'pianote', 'month' => true, 'promoVersion' => true, 'trialVersion' => true]);
-    }
     public function homeMonth()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'month' => true]);
@@ -166,6 +158,11 @@ class SalesController extends BaseController
         return view('pianote.products.beautiful-beginner-bundle', [ 'theme' => 'pianote' ]);
     }
 
+    public function fiveforthreeBundle()
+    {
+        return view('pianote.shop.pages.5-for-3-bundle', [ 'theme' => 'pianote' ]);
+    }
+
     public function buildYourBundle()
     {
         return view('pianote.products.build-your-bundle', [ 'theme' => 'pianote' ]);
@@ -239,6 +236,14 @@ class SalesController extends BaseController
     public function foundations()
     {
         return view('pianote.products.foundation-books');
+    }
+    public function classicalPianoPieces()
+    {
+        return view('pianote.products.classical-piano-pieces', ['theme' => 'pianote']);
+    }
+    public function easyChordsDeal()
+    {
+        return view('pianote.sales.pages.easy-chords-deal', ['theme' => 'pianote']);
     }
 
     public function newPianoPlayers()

@@ -12,7 +12,7 @@
     /stop-hating-your-voice/lessons/2
 @stop
 
-@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-2.png')
+@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-2.png')
 
 @section('description')
     One of the biggest misconceptions about singing is that the voice you are born with is the voice you have forever. In this very first lesson we’ll bust that myth.

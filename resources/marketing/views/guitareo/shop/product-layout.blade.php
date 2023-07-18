@@ -24,7 +24,7 @@
                 "price"=> $product->discounted_price,
                 "guaranteeBadge" => $product->guaranteed,
                 "sizes" => $product->sizes,
-                "soldOut" => !empty($products[$product->sku]) ? $products[$product->sku]->getStockAvailability() === 0 : $product->sold_out,
+                "soldOut" => ( isset($products[$product->sku]) && $product->productType->name !== 'Lessons' && $product->productType->name !== 'Bundles' ) ? $products[$product->sku]->getStockAvailability() === 0 : $product->sold_out,
                 "specialText" => $product->special_text,
                 "freeShipping" => $product->free_shipping,
                 "size_case_sensitive" => $product->size_case_sensitive,
@@ -44,7 +44,7 @@
                 @if($product->productType->name === 'Bundles' && !empty($product->spread_img))
                     <div class="text-center">
                         <h3 class="mb-4"><strong>What's included:</strong></h3>
-                        <img class="mb-4" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{$product->spread_img}}" alt="bundle spread image" />
+                        <img class="mb-4" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{$product->spread_img}}" alt="bundle spread image" />
                     </div>
                 @endif
 

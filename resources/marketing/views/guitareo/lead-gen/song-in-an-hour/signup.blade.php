@@ -19,42 +19,42 @@
         .reveal-overlay {background: linear-gradient(180deg, rgba(1, 7, 19, 0.9), #10052b);}
 
         .header-bg {
-            background-image: url('https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/header.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/header.jpg');
         }
 
         .final-pitch {
-            background-image: url('https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/order-background.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/order-background.jpg');
         }
 
         .meet-rob {
-            background-image: url('https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/teacher-background-mobile.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/teacher-background-mobile.jpg');
         }
 
         @media (min-width: 768px) {
             .header-bg {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/header.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/header.jpg');
             }
 
             .final-pitch {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/order-background.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/order-background.jpg');
             }
 
             .meet-rob {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/teacher-background.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/teacher-background.jpg');
             }
         }
 
         @media (min-width: 1024px) {
             .header-bg {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/header.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/header.jpg');
             }
 
             .final-pitch {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/order-background.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/order-background.jpg');
             }
 
             .meet-rob {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/teacher-background.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/teacher-background.jpg');
             }
         }
     </style>
@@ -88,8 +88,8 @@
         "bgImg" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/header.jpg",
         "bgColor" => "black",
         "imgs" => [
-            '<img class="logo guitar-quest mx-auto mb-2 sm:mb-5" src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d122ay5chh2hr5.cloudfront.net/shop/logos/guitar-quest-logo.png" alt="guitar-quest-logo">',
-            '<img class="logo mx-auto" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/logo-purple.png" alt="song-in-an-hour-logo">',
+            '<img class="logo guitar-quest mx-auto mb-2 sm:mb-5" src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d122ay5chh2hr5.cloudfront.net/shop/logos/guitar-quest-logo.png" alt="guitar-quest-logo">',
+            '<img class="logo mx-auto" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/logo-purple.png" alt="song-in-an-hour-logo">',
         ],
         "playButton" => "down",
         "headLine" => "<h1 class='font-bison-bold leading-none text-3xl md:text-5xl lg:text-6xl'><strong>PLAY YOUR FIRST SONG ON THE<br> GUITAR, START TO FINISH, IN AN HOUR.</strong></h1>
@@ -102,7 +102,7 @@
 
     <section class="pt-7 px-3 md:px-4 md:pt-12 lg:pt-16" style=" background:#010611;">
         <div class="w-3/4 md:w-full sm:flex items-start lg:items-center mx-auto text-left text-white md:px-2 md:px-4" style="max-width:1000px;">
-            <img class="w-28 md:w-48 lg:w-60 mb-5 sm:mb-0 sm:mr-5 lg:mr-10" src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/rob-stopwatch.png" alt="rob-stopwatch-img">
+            <img class="w-28 md:w-48 lg:w-60 mb-5 sm:mb-0 sm:mr-5 lg:mr-10" src="https://www.musora.com/musora-cdn/image/width=350,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/rob-stopwatch.png" alt="rob-stopwatch-img">
             <div>
                 <h1 class="mb-6 text-lg md:text-xl lg:text-2xl">Get your stopwatch ready. <strong>You WILL play your first song…</strong></h1>
                 <p class="leading-normal">Getting started on the guitar can feel daunting. This challenge was designed to get you started faster with a single focus: let’s play a song!
@@ -255,7 +255,7 @@
 
     @include('guitareo.lead-gen.partials._enter-email', [
         "bgImg" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/order-background.jpg",
-        "img" => '<img class="h-14 sm:h-20 lg:h-28 mx-auto" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/logo-purple.png" alt="song-in-an-hour-logo" />',
+        "img" => '<img class="h-14 sm:h-20 lg:h-28 mx-auto" src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/logo-purple.png" alt="song-in-an-hour-logo" />',
         "text" => '<div class="leading-tight text-lg my-5 md:my-8 md:text-2xl lg:text-3xl">Enter your email below<br class="inline md:hidden"> to get started!</div>',
         "formId" => "Guitareo - Engagement - Trigger - Song Hour - Web Form",
         "formName" => 'Song Hour',

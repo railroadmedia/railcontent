@@ -151,6 +151,14 @@
         ])
     @endif
 
+    @include('_partials.components.promo-top-banner',[
+        'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-shop-summer-sale-bg.jpg',
+        'logo' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-summer-sale-logo.svg',
+        'logoStyles' => 'mb-3',
+        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
+        'promoText' => 'SAVE UP TO 91% UNTIL JULY 31ST!',
+    ])
+
     @php
         $features = [
             [
@@ -502,23 +510,25 @@
         'youtubeLink' => 'https://www.youtube.com/guitarlessonscom/',
         'youtube' => '1M',
         'facebookLink' => 'https://facebook.com/guitareoofficial/',
-        'facebook' => '333K',
+        'facebook' => '330K',
         'instagramLink' => 'https://instagram.com/guitareoofficial/',
-        'instagram' => '18K',
+        'instagram' => '19K',
     ])
+    @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2022/guitareo-guarantee.png',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the guitar.',
     ])
+    @endif
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
     @if(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
-            "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
-            "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
+            "plusLogo" => "https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-plus-logo-light.svg",
+            "logo" => "https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo.png",
             "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
@@ -527,6 +537,9 @@
             "plusMonthlyLink" => "/ecommerce/add-to-cart?products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=/order&locked=true",
             "annualLink" => "/ecommerce/add-to-cart?products[guitareo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
             "monthlyLink" => "/ecommerce/add-to-cart?products[guitareo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'guitar',
         ])
     @elseif(!empty($promoVersion))
         @php
@@ -562,6 +575,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'logo' => 'https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png',
         'header' => 'Unlimited guitar lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>

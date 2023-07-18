@@ -37,7 +37,7 @@
                 <div class="flex flex-wrap items-center">
                     <div class="w-full sm:w-5/12 relative mx-auto text-center sm:pl-5 lg:pl-10 relative mx-auto sm:order-1 mb-4 md:mb-0">
                         <img class="h-64 md:h-80 scales-book lazyload"
-                                data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/book.png"
+                                data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/book.png"
                                 alt="scales book">
                     </div>
                     <div class="w-full sm:w-7/12 text-white mx-auto text-center md:text-left">

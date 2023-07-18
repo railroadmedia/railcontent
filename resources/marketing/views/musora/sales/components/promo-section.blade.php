@@ -41,14 +41,14 @@
             <img class="h-56 mb-5 inline sm:hidden transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                src="https://www.musora.com/musora-cdn/image/width=520,quality=85/{{ $img }}"
+                src="https://www.musora.com/musora-cdn/image/width=520,quality=95/{{ $img }}"
                 alt="promo image"
             >
             <p class="leading-normal max-w-xl pr-7 mx-0">{!! $text !!}</p>
             <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                src="https://www.musora.com/musora-cdn/image/width=690,quality=85/{{ $img }}"
+                src="https://www.musora.com/musora-cdn/image/width=690,quality=95/{{ $img }}"
                 alt="promo image"
             >
         </div>

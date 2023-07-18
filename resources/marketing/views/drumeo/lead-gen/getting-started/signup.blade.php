@@ -1,18 +1,105 @@
+@php
+$lessons = [
+    [
+        "title" => "Pre-beginner",
+        'lessonNum' => 3,
+        'bgHex' => '#03c9ae',
+        'lessonInfo' => [
+            [
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-01-1687630623.jpg',
+                'title' => ' Listening For The Drums In Music',
+                'desc' => 'Domino shows you how to identify the key pieces of a drum set in a real song so that you can start learning how to play them.',
+            ],
+            [
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-02-1687630735.jpg',
+                'title' => 'Drumming Coordination',
+                'desc' => 'Domino shows you how to learn basic drumming coordination by tapping on your legs – this one skill will help you play hundreds of songs.',
+            ],
+            [
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-03-1687630937.jpg',
+                'title' => 'Adding Your Foot',
+                'desc' => 'In this video, you’ll learn how to add your foot into a real drum beat simply by tapping on the floor. You’ll be playing 3 things at once!',
+            ],
+        ]
+    ],
+    [
+        "title" => "Buying guide for drummers",
+        'lessonNum' => 4,
+        'bgHex' => '#ffae0c',
+        'lessonInfo' => [
+            [
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-04-1687630952.jpg',
+                'title' => 'Practice Pad',
+                'desc' => 'A practice pad is a practical, inexpensive option to help you get started on the drums. Domino discusses how to use one and where you can find your first practice pad.',
+            ],
+            [
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-05-1687631003.jpg',
+                'title' => 'Electronic Drum Set',
+                'desc' => 'If you’re ready for your first E-Kit, Domino will help you navigate the pros and cons of using an electronic drum set. If you’re in an apartment or townhouse, this is for you!',
+            ],
+            [
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-06-1687631022.jpg',
+                'title' => 'Acoustic Drum Set',
+                'desc' => 'Every drummer’s dream! In this video, you’ll learn how to shop for an acoustic drum set – what to look for and how much you can expect to pay for your first kit.',
+            ],
+            [
+                'thumb' => 'https://d1923uyy6spedc.cloudfront.net/GettingStartedOnTheDrums-07-1687631041.jpg',
+                'title' => 'Setting Up Your Kit',
+                'desc' => 'Domino gives you a simple overview of how to set up and position your drums. These tips will help you ensure you’re comfortable sitting behind the drums.',
+            ],
+        ]
+    ],
+    [
+        "title" => "Beginner drummer",
+        'lessonNum' => 5,
+        'bgHex' => '#0072df',
+        'lessonInfo' => [
+            [
+                'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/4c2dcbb9-11dd-41cf-b9a9-69d0ce385196-GettingStartedOnTheDrums-08.jpg',
+                'title' => 'Your First Drum Beat',
+                'desc' => 'Domino shows you the basic coordination to start playing your first beat on the drums. This one drum beat will unlock hundreds of songs you can play!',
+            ],
+            [
+                'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/4c2dcbb9-11dd-41cf-b9a9-69d0ce385196-GettingStartedOnTheDrums-09.jpg',
+                'title' => 'Beginner Drum Workout',
+                'desc' => 'In this 5-minute lesson, Domino plays along with you as you play your first drum beat. This lesson helps you learn the groove & coordination you need to fall in love with playing the drums.',
+            ],
+            [
+                'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/4c2dcbb9-11dd-41cf-b9a9-69d0ce385196-GettingStartedOnTheDrums-10.jpg',
+                'title' => 'How To Read Drum Music',
+                'desc' => 'Domino teaches you the alphabet of drum music so you can start learning any song you want!',
+            ],
+            [
+                'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/4c2dcbb9-11dd-41cf-b9a9-69d0ce385196-GettingStartedOnTheDrums-11.jpg',
+                'title' => 'Song Tutorial',
+                'desc' => 'Domino shows you how to use a handy practice tool to learn your favorite songs. This lesson includes a special invitation!',
+            ],
+            [
+                'thumb' => 'https://d1fyshwdvi6fth.cloudfront.net/Lead-gens/Thumbnails/4c2dcbb9-11dd-41cf-b9a9-69d0ce385196-GettingStartedOnTheDrums-12.jpg',
+                'title' => 'What’s Next? (BONUS)',
+                'desc' => 'Domino gives you an example of all the songs you can play with the skills you’ve learned in this course.',
+            ],
+        ]
+    ],
+];
+
+@endphp
+
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
     <title>Getting Started On The Drums | Drumeo</title>
     <meta property="og:title" content="Getting Started On The Drums | Drumeo">
 
-    <meta name="description" content="Just starting out on the drums? Want to rebuild your foundation? Try Jared Falk's free video series!">
-    <meta property="og:description" content="Just starting out on the drums? Want to rebuild your foundation? Try Jared Falk's free video series!">
+    <meta name="description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
+    <meta property="og:description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
 
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/getting-started/">
 
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
@@ -39,135 +126,145 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
-    <header class="pt-8 sm:pt-20">
-        <div class="max-w-xl md:max-w-4xl mx-auto flex flex-col md:flex-row px-3 sm:px-4 lg:px-0 text-center md:text-left">
-            <div class="w-full md:w-7/12 lg:w-1/2">
-                <div class="md:px-2">
-                    <picture>
-                        <source media="(min-width:768px)" srcset="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/logo_left_black.png">
-                        <img class="h-10 md:h-14 mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/logo_centre_black.png" alt="getting started logo">
-                    </picture>
-
-                    <img class="md:hidden object-cover h-full w-full rounded-lg mb-6 lazyload" data-src="https://cdn.musora.com/image/fetch/w_1500/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/E-mail.jpg" alt="jared email">
-
-                    <h3 class="font-extrabold leading-tight">
-                        Go from a total beginner to playing your first drum beats in this FREE series.
-                    </h3>
-                    <h6 class="my-4" style="color: rgba(0, 0, 0, 0.8);">
-                        Enter your email below for your 10 free lessons.
-                    </h6>
+    <header class="py-12 sm:py-20" style="background: linear-gradient(225deg, #15C5FD 0%, #BBFFEF 100%);">
+        <div class="max-w-5xl mx-auto sm:flex items-center container px-4 text-center sm:text-left">
+            <div class="w-full sm:w-1/2 max-w-xl mx-auto sm:max-w-full">
+                <div class="px-2 sm:pl-3 lg:pr-6 xl:pr-20">
+                    <img
+                        class="h-20 lg:h-24 mb-3"
+                        src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/GSOTD-dark-blue.png"
+                        alt="GSOTD logo"
+                        fetchpriority="high"
+                    />
+                    <h3 class="leading-tight mb-5">Go from a <strong>total beginner</strong> to playing your <strong>first drum beats</strong> in this <u>FREE</u> series.</h3>
+                    <div class="max-w-sm mx-auto sm:hidden mb-5">
+                        <img
+                            src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/header-collage.png"
+                            alt="header hero image mobile"
+                            fetchpriority="high"
+                        />
+                    </div>
+                    <h6 class="mb-4">Enter your email below for your 12 free lessons:</h6>
                 </div>
-
+                <div class="lg:pr-6 xl:pr-20">
                 @include("drumeo.lead-gen.partials.sign-up-form", [
                     "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
                     "formName" => 'Getting Started On The Drums',
                     "buttonText" => "Get started for free",
                     'stacked' => true,
-                    'inputBorder' => '1px solid #7A8491',
                     "redirectURL" => "/getting-started/thank-you/",
                     "recaptchaKey" => $recaptchaKey
                 ])
-            </div>
-            <div class="w-full sm:w-5/12 lg:w-1/2">
-                <div class="px-4 lg:px-10 h-full w-full">
-                    <img class="hidden md:inline-block object-cover h-full w-full rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=860,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/E-mail.jpg" alt="jared email">
                 </div>
             </div>
-
+            <div class="w-full sm:w-1/2 hidden sm:block">
+                <img
+                    class="transition-opacity opacity-0"
+                    src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/header-collage.png"
+                    alt="header hero image"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                />
+            </div>
         </div>
     </header>
 
-    <section class="py-20">
-        <div class="max-w-lg sm:max-w-4xl lg:max-w-6xl mx-auto">
-            <p class="text-center text-xs uppercase mb-2 sm:mb-4 tracking-widest" style="color: #ABB5C2;">
-                What you'll get
+    <section class="py-12 sm:py-20 px-4 text-center">
+        <div class="container max-w-5xl mx-auto">
+            <h2 class="font-extrabold mb-4">Get started even if you don’t have drums yet.</h2>
+            <p class="mb-10">
+                Getting Started On The Drums includes <b>3 learning paths</b> to help you start <br class="hidden md:inline">without drums, help you buy drums, AND start playing on a full kit.
             </p>
-            <h3 class="text-center leading-tight font-extrabold mb-10 px-2 sm:px-0">
-                10 beginner drum lessons to set <br>
-                yourself up for success behind the kit.
-            </h3>
-            <div class="flex flex-wrap mb-14 sm:px-2">
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-2 mb-6">
-                    <div class="relative mb-2 cursor-pointer hover:opacity-90 transition-opacity" data-open="signUpModal">
-                        <img class="relative z-0 rounded-lg lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/lesson1_thumb.jpg" alt="thumb1">
-                        <i class="absolute top-1/2 left-1/2 fas fa-play play-button text-white" style="margin: -39px;"></i>
+            <div class="flex flex-wrap justify-center mb-10 max-w-sm mx-auto md:max-w-full">
+                @foreach($lessons as $key => $lesson)
+                    @include('drumeo.lead-gen.getting-started.dropdown',[
+                        'bgHex' => $lesson['bgHex'],
+                        'title' => $lesson['title'],
+                        'lessonNum' => $lesson['lessonNum'],
+                        'key' => $key,
+                        'lessonInfo' => $lesson['lessonInfo'],
+                    ])
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <section class="py-12 sm:py-20" style="background: #F1F7FE;">
+        <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8 sm:px-4 lg:px-0">
+            <div class="-mb-16 sm:mb-0 sm:mt-10 sm:-mr-8 relative">
+                <picture>
+                    <source media="(min-width: 640px)" srcset="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/coach-image.png">
+                    <img
+                        class="w-52 sm:w-72 md:w-96 relative z-40 transition-opacity opacity-0"
+                        src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/coach-image-m.png"
+                        alt="profile picture"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                    >
+                </picture>
+
+                <picture class="w-80 sm:w-80 lg:w-96 -left-14 sm:left-0 sm:-top-6 md:top-0 absolute md:-top-7 lg:-top-10 md:-left-10">
+                    <source media="(min-width: 640px)" srcset="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/coach-splash.png">
+                    <img class="transition-all opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/coach-splash-m.png" alt="splash" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                </picture>
+
+            </div>
+            <div class="mx-4 sm:mx-0 text-white text-left rounded-xl pt-20 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-14 sm:mt-8 w-full sm:w-auto sm:flex-grow max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl z-30" style="background-color:#00101d;">
+                <h6 class="uppercase text-drumeo leading-normal text-[#15C5FD]">MEET YOUR TEACHER</h6>
+                <h2><strong>Domino Santantonio</strong></h2>
+                <h6 class="leading-normal mt-4 lg:mt-6">
+                    Domino Santantonio is one of the world’s most viewed drummers.<br><br>
+                    And she’s achieved this with her engaging & supportive style of drumming – always smiling and reminding you why playing the drums is so fun & healthy. Who better to jumpstart your drumming progress?<br><br>
+                    Plus, Domino is also your personal guide through the course.<br><br>
+                    At the end of every week, you’ll have a Q&A session with Domino where you can ask her any questions you had during the lessons.
+                </h6>
+                <div class="flex justify-between text-center mt-7 lg:mt-10">
+                    <div class="">
+                        <img class="h-6 sm:h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <h3 class="mt-2"><strong>1.6M</strong></h3>
+                        <p class="uppercase opacity-70 text-sm">Followers</p>
                     </div>
-                    <p>
-                        Positioning your drums in the right places is super important. Jared shows you where to place every drum for maximum efficiency in this first video.
-                    </p>
-                </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-2 mb-6">
-                    <img class="rounded-lg mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=720,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/lesson2_thumb.jpg" alt="thumb2">
-                    <p>
-                        Tuning your drums doesn’t need to be frustrating. Follow Jared’s simple guide to getting great sounds out of your kit with the turn of a key.
-                    </p>
-                </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-2 mb-6">
-                    <img class="rounded-lg mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=720,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/lesson3_thumb.jpg" alt="thumb3">
-                    <p>
-                        Yep, there’s a right and wrong way. Jared covers the 3 main grips in drumming and how you can get the most out of every stroke without risking injuries.
-                    </p>
-                </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-2 mb-6 sm:mb-0">
-                    <img class="rounded-lg mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=720,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/lesson4_thumb.jpg" alt="thumb4">
-                    <p>
-                        Reading drum music is surprisingly simple. Jared shows you this vital skill so you can take your drumming ANYWHERE.
-                    </p>
-                </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-2 mb-6 sm:mb-0">
-                    <img class="rounded-lg mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=720,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/lesson6_thumb.jpg" alt="thumb6">
-                    <p>
-                        And just like that, you’re playing full beats. Jared shows you some of the most popular drum beats -- you’re almost ready to play along with real music!
-                    </p>
-                </div>
-                <div class="w-full sm:w-1/2 lg:w-1/3 px-4 sm:px-2">
-                    <img class="rounded-lg mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=720,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/lesson7_thumb.jpg" alt="thumb7">
-                    <p>
-                        Drum fills are your moment to shine. You’ll learn how to move around the kit musically with these fun & effective transitions.
-                    </p>
+                    <div class="">
+                        <img class="h-6 sm:h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <h3 class="mt-2"><strong>460K</strong></h3>
+                        <p class="uppercase opacity-70 text-sm">followers</p>
+                    </div>
+                    <div class="">
+                        <img class="h-6 sm:h-8 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon" loading="lazy" onload="this.classList.remove('opacity-0')">
+                        <h3 class="mt-2"><strong>224M</strong></h3>
+                        <p class="uppercase opacity-70 text-sm">views</p>
+                    </div>
                 </div>
             </div>
-            <h5 class="font-extrabold text-center italic">
-                You’ll get 10 FREE lessons in total.
-            </h5>
         </div>
     </section>
 
+    @include('drumeo.lead-gen.partials.quick-questions', [
+        'textColor' => 'white',
+        'bgColor' => 'linear-gradient(180deg, #01050F 0%, #032546 100%);'
+    ])
 
-    <section class="pt-32 pb-20 px-2 sm:px-4 relative" style="background: #F2F8FB;">
-        <div class="h-10 absolute left-0 right-0" style="background: linear-gradient(to top left, #F2F8FB calc(50% - 1px), #F2F8FB, #fff calc(50% + 1px)); top: -1px;"></div>
-        <div class="max-w-xl md:max-w-3xl mx-auto text-center">
-            <img class="h-20 sm:h-24 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/getting-started/logo_centre_black.png" alt="logo centered">
-            <h3 class="leading-tight font-extrabold my-10">
-                Enter your email address<br class="inline sm:hidden"> below to get started:
-            </h3>
+    <section class="py-8 sm:py-14 text-center relative">
+        <img class="absolute top-0 left-0 w-full h-full transition-opacity opacity-0 object-cover" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/order-bg.jpg" alt="order-bg" loading="lazy" onload="this.classList.remove('opacity-0')" />
+        <div class="max-w-3xl mx-auto z-50 relative">
+            <img class="h-16 lg:h-24 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/GSOTD-dark-blue.png" alt="GSTOD logo" loading="lazy" onload="this.classList.remove('opacity-0')" />
+            <h5 class="my-5 sm:my-7 font-bold">Enter your email to receive 12 free lessons.</h5>
+            <div class="max-w-sm mx-auto sm:max-w-none">
             @include("drumeo.lead-gen.partials.sign-up-form", [
-                "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
+                "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form2",
                 "formName" => 'Getting Started On The Drums',
                 "buttonText" => "Get started for free ",
-                'inputBorder' => '1px solid #7A8491',
                     "redirectURL" => "/getting-started/thank-you/",
                     "recaptchaKey" => $recaptchaKey
             ])
+            </div>
         </div>
     </section>
-
-    <div class="reveal max-w-xl text-center" id="signUpModal" data-reveal data-reset-on-close="false">
-        <div class="p-4">
-            <h2 class="mb-2"><strong>Enter your email address<br class="inline sm:hidden"> below to get started:</strong></h2>
-            @include("drumeo.lead-gen.partials.sign-up-form", [
-                "stacked" => true,
-                "formId" => "Drumeo - Engagement - Trigger - GSOTD - Web Form",
-                "formName" => 'Getting Started On The Drums',
-                    "redirectURL" => "/getting-started/thank-you/",
-                    "recaptchaKey" => $recaptchaKey
-            ])
-        </div>
-    </div>
 
     @include("drumeo.sales.partials._footer", [
             "minimal" => true
         ])
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script defer src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
@@ -178,6 +275,4 @@
     </script>
     <script defer src="{{ asset('/marketing/js/pre-form-submit-facebook-lead.js') }}"></script>
     <script defer src="{{ asset('/marketing/js/drumeo/infusionsoft-tracking.js') }}"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop
