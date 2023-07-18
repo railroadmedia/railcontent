@@ -205,10 +205,7 @@ class CustomerIoSyncService
                 $brand . '_membership_status' => !empty($latestSubscription) ?
                     $latestSubscription->getIsActive() : null,
                 $brand . '_membership_latest-access-product-id' => !empty($latestMembershipUserProductToSync) ?
-                    $latestMembershipUserProductToSync->getProduct()->getId() : null,
-                'musora_membership_latest-access-product-id' => !empty($latestMembershipUserProductToSync) ?
-                    $latestMembershipUserProductToSync->getProduct()->getId() : null,
-
+                    $latestMembershipUserProductToSync->getProduct()->getId() : null
             ];
 
         }
