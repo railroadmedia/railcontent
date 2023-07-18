@@ -167,7 +167,7 @@
                 <h3 class="tw-font-extrabold tw-text-center tw-mb-7">{{ $cohort['body_title'] }}</h3>
                 {{--  Body top description  --}}
                 <p class="md:tw-px-10 tw-mb-7">{!! $cohort['body_top_description'] !!}</p>
-                <img class="sm:tw-h-7 tw-mx-auto" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/timeline.png" alt="timeline">
+                <img class="sm:tw-h-7 tw-mx-auto" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/{{ $cohort['timeline_image_url'] }}" alt="timeline">
                 <div class="tw-flex tw-flex-wrap tw-text-left tw-max-w-3xl tw-mx-auto tw-mt-5 sm:tw-mt-7 tw-mb-10 sm:tw-mb-14 lg:tw-mb-20">
                     <div class="tw-w-1/2 tw-pr-2 sm:tw-px-4">
                         <div class="tw-rounded-xl tw-overflow-hidden tw-shadow-md tw-cursor-pointer autoplay-video" data-open="dayOne" aria-controls="dayOne" aria-haspopup="true" tabindex="0">
