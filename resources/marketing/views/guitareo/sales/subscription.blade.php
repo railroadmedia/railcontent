@@ -223,7 +223,7 @@
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
             ],
             [
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/world-class-teachers.jpg',
+                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches-thumb2.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'The best guitarists are here – including Grammy Award winners and touring musicians.',
             ],
