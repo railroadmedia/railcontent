@@ -124,15 +124,16 @@ const secondaryVideoModal = ref(false);
         <!-- Background Image -->
         <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
             <picture>
-                <source media="(min-width:1280px)" :srcset="`https://www.musora.com/musora-cdn/image/width=2000,quality=95/${desktopImg}`">
-                <source media="(min-width:768px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1500,quality=95/${tabletImg}`">
+                <source media="(min-width:1280px)" :srcset="`https://www.musora.com/musora-cdn/image/width=2190,quality=100/${desktopImg}`">
+                <source media="(min-width:768px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1200,quality=100/${tabletImg}`">
                 <img
                     class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-z-50"
-                    :src="`https://www.musora.com/musora-cdn/image/width=700,quality=95/${mobileImg}`"
+                    :src="`https://www.musora.com/musora-cdn/image/width=700,quality=100/${mobileImg}`"
                     alt="banner background image"
                 />
             </picture>
         </div>
+
       <!-- Text Content -->
       <div class="tw-absolute tw-bottom-0 tw-w-full md:tw-relative tw-text-white tw-h-4/5 md:tw-h-full">
         <div class="tw-flex tw-flex-col tw-flex-wrap tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[15px] sm:tw-px-[26px] tw-font-open-sans tw-pb-12 sm:tw-pb-[38px] md:tw-pb-10 lg:tw-pb-0 tw-relative">
