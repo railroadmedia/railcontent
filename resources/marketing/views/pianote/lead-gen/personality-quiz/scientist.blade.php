@@ -7,7 +7,7 @@
     <meta name="description" content="You have an analytical mind and you love looking for patterns.">
     <meta property="og:description" content="You have an analytical mind and you love looking for patterns.">
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/Q-SCIENTIST.png" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/Q-SCIENTIST.png" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
     @include('_partials.layout._fonts')
     <!-- Tailwind -->
@@ -28,9 +28,9 @@
 @section('global-body')
     @include('pianote.sales.partials._nav')
 
-    <section class="py-12 md:py-20 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/bg.jpg')">
+    <section class="py-12 md:py-20 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/bg.jpg')">
         <div class="max-w-2xl lg:max-w-3xl mx-auto text-center text-white px-6 lg:px-0">
-            <img class="h-40 md:h-72 lg:h-80 mb-2" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/Q-SCIENTIST.png" alt="scientist">
+            <img class="h-40 md:h-72 lg:h-80 mb-2" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/Q-SCIENTIST.png" alt="scientist">
             <h2 class="font-extrabold mb-6">You're the Scientist!</h2>
             <p class="mb-4">
                 You’re the Scientist! You have an analytical mind and you love looking for patterns. Music theory fascinates you, and you love discussing the nuts and bolts that make a song incredible. You may be drawn to classical or jazz, and you’re looking to apply your theoretical knowledge to practice. <br><br>

@@ -8,11 +8,11 @@
     <div class="container mx-auto max-w-6xl">
         <h2 class="leading-tight mb-4"><strong>{!! $header !!}</strong></h2>
         <p class="mx-auto mb-7">{!!  $reviewText  !!}</p>
-        <a class="inline-block w-full" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
+        <a class="inline-block w-full" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
             <img
                 alt="shopper approved image"
                 class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png"
+                src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
             >
@@ -78,7 +78,7 @@
                                     <div class="relative mb-2 w-full overflow-hidden rounded-xl cursor-pointer" style="padding-bottom: 66%;"
                                         x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                                     >
-                                        <div class="absolute inset-0 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=500,quality=85/{{$testimonial['image']}});"></div>
+                                        <div class="absolute inset-0 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=500,quality=95/{{$testimonial['image']}});"></div>
                                         <div class="absolute inset-0 flex justify-center align-center">
                                             <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
                                         </div>
@@ -124,7 +124,7 @@
                         <div class="relative mb-2 w-full overflow-hidden rounded-xl cursor-pointer" style="padding-bottom: 66%;"
                             x-on:click="{{str_replace(' ', '', $testimonial['name'])}} = true;"
                         >
-                            <div class="absolute inset-0 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=500,quality=85/{{$testimonial['image']}});"></div>
+                            <div class="absolute inset-0 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=500,quality=95/{{$testimonial['image']}});"></div>
                             <div class="absolute inset-0 flex justify-center align-center">
                                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas @if(!empty($testimonial['video'])) fa-play @else fa-align-left @endif text-lg text-white border-2 border-white px-3 py-1 rounded-full bg-[#0009] hover:opacity-80"></i>
                             </div>

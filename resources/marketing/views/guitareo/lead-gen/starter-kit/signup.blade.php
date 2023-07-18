@@ -32,19 +32,20 @@
             <div class="flex flex-col-reverse sm:flex-row">
                 <div class="sm:w-3/4">
                     <picture>
-                        <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
-                        <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
-                        <img class="logo" src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png" alt="logo">
+                        <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
+                        <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
+                        <img class="logo" src="https://www.musora.com/musora-cdn/image/width=350,quality=95/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png" alt="logo">
                     </picture>
                 </div>
                 <div class="text-center sm:w-1/4">
-                    <img class="circle-nate" src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://d122ay5chh2hr5.cloudfront.net/gl-sales/nate-circle.png" alt="nate-circle">
+                    <img class="circle-nate" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://d122ay5chh2hr5.cloudfront.net/gl-sales/nate-circle.png" alt="nate-circle">
                 </div>
             </div>
             <div>
                 <h2>Enter your email below to get <br class="sm:hidden"> a free beginner guitar course!</h2>
 
-                @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+                @include("guitareo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => "Guitareo - Engagement - Trigger - Starter Kit - Web Form",
                     "formName" => 'The Beginner Guitar Starter',
                 ])
@@ -135,15 +136,16 @@
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <div class="logo">
                 <picture>
-                    <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
-                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
-                    <img src="https://www.musora.com/musora-cdn/image/width=330,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png" alt="logo">
+                    <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
+                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
+                    <img src="https://www.musora.com/musora-cdn/image/width=330,quality=95/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png" alt="logo">
                 </picture>
             </div>
             <p>
                 Enter your email below to get <br class="lg:hidden">
                 a free beginner guitar course!</p>
-            @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+            @include("guitareo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formId" => "Guitareo - Engagement - Trigger - Starter Kit - Web Form",
                 "formName" => 'The Beginner Guitar Starter',
             ])
@@ -157,7 +159,8 @@
     <div class="reveal w-full text-center" id="getAccess" data-reveal data-reset-on-close="true">
         <p>Enter your email below to get a free beginner guitar <br class="hidden sm:inline">
             course and start learning music theory.</p>
-        @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+        @include("guitareo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
             "stacked" => true,
             "outline" => true,
             "formId" => "Guitareo - Engagement - Trigger - Starter Kit - Web Form",

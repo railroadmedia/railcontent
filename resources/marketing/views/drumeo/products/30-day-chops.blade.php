@@ -358,7 +358,7 @@
                     'position' => 'left',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/practice-thats-actually.jpg',
                     'title' => 'Play with real music.',
-                    'desc' => 'No more painfully dry exercises set to MIDI playalongs. 30-Day Chops includes custom-made music by acclaimed drum composer, Kaz Rodriguez. He’s crafted the perfect song for you to chop out with. ',
+                    'desc' => 'No more painfully dry exercises set to MIDI play-alongs. 30-Day Chops includes custom-made music by acclaimed drum composer, Kaz Rodriguez. He’s crafted the perfect song for you to chop out with. ',
                     ],
                     [
                     'position' => 'right',
@@ -370,7 +370,7 @@
                     'position' => 'left',
                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/lifetime-access.jpg',
                     'title' => 'Lifetime access.',
-                    'desc' => 'You can access ALL playalongs, charts, and lessons from 30-Day Chops for life. That means you can return to your favorite chop workouts over and over – plus, it means you can work at your own pace.',
+                    'desc' => 'You can access ALL play-alongs, charts, and lessons from 30-Day Chops for life. That means you can return to your favorite chop workouts over and over – plus, it means you can work at your own pace.',
                     ],
                 ];
 //            @endphp
@@ -712,7 +712,7 @@
 {{--                            <hr class="w-full my-5" style="border-color:#b2cae1">--}}
 {{--                            <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
 {{--                                <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>--}}
-{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
+{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money-Back Guarantee</p>--}}
 {{--                        </a>--}}
 {{--                        <a href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[30-day-chops]=1&products[quietpad]=1&products[Drumeo-VaterSticks]=6&products[drum-technique-made-easy-pack]=1&products[rock-drumming-masterclass-pack]=1&products[independence-made-easy-pack]=1&products[SD-DIGI]=1&products[four-weeks-to-better-drum-fills]=1&locked=true"--}}
 {{--                            class="px-5 sm:px-10 py-5 sm:py-7 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"--}}
@@ -737,7 +737,7 @@
 {{--                            <hr class="w-full my-5" style="border-color:#b2cae1">--}}
 {{--                            <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
 {{--                                <i class="fas fa-check text-drumeo mr-1"></i> Lifetime Course Access<br>--}}
-{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money Back Guarantee</p>--}}
+{{--                                <i class="fas fa-check text-drumeo mr-1"></i> 90-Day Money-Back Guarantee</p>--}}
 {{--                        </a>--}}
 {{--                    </div>--}}
 
@@ -811,7 +811,8 @@
             <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
             <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
                 next edition of 30-Day Chops is announced. </p>
-            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formName" => '30 Day Chops Waitlist',
                 "formId" => "Drumeo - Engagement - Trigger - 30 Day Chops Waitlist - Web Form",
                 "buttonText" => "Let Me Know ",
@@ -873,6 +874,10 @@
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('private');
             });
+
+            @if(!empty($errors) && $errors->any())
+                $('#waitlistModal').foundation('open');
+            @endif
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>

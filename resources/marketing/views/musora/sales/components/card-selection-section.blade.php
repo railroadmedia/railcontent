@@ -8,7 +8,8 @@
     x-data="{ plusMembershipSelected: true }"
 >
     <div class="container max-w-6xl mx-auto">
-        <h1 class="leading-tight"><strong>@if(!empty($headline)) {{ $headline }} @else Your first @if(empty($month)) week @else month @endif <br class="inline sm:hidden"> is free. @endif</strong></h1>
+        <h1 class="leading-tight"><strong>
+                @if(!empty($headline)) {!! $headline  !!}  @else Your first @if(empty($month)) week @else month @endif <br class="inline sm:hidden"> is free. @endif</strong></h1>
         <h5 class="mt-2 md:mt-4 mb-5">Choose the plan that will continue on <br class="inline lg:hidden">
             @if(empty($month)) {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} @else {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }} @endif
             (after your free trial). Cancel anytime.</h5>
@@ -20,20 +21,18 @@
             <div class="w-full md:w-1/2 px-2 md:px-3 relative">
                 <a href="{{$plusMonthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif">
                     <div class="bg-white px-3 py-5 md:py-7">
-                        <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
-                        <h4 class="inline-block leading-none"><strong>${{ Prices::$plusSubscriptionMonthly }}/month</strong></h4>
-                        <p class="text-sm mb-6"><em>Pay as you go.</em></p>
-                        <div class="font-bebas join musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
-                    </div>
-                    <div class="px-3 pb-7 md:pb-8 bg-white">
-                        <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
-                        <p class="text-sm mb-1"><strong>{{ $songs }}</strong></p>
-                        <p class="text-sm mb-1"><strong>{{ $thirdPoint }}</strong></p>
-                        <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
+                        <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl"><strong>Monthly</strong></h2>
+                        <h4 class="inline-block leading-tight"><strong>${{ Prices::$plusSubscriptionMonthly }}/month</strong></h4>
+                        <p class="text-sm"><em>Pay as you go.</em></p>
+                        <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
+                        <p class="text-sm mb-1.5"><strong>{{ $firstPoint }}</strong></p>
+                        <p class="text-sm mb-1.5"><strong>{{ $songs }}</strong></p>
+                        <p class="text-sm mb-1.5"><strong>{{ $thirdPoint }}</strong></p>
+                        <p class="text-sm mb-1.5">Join a community of {{ number_format(Prices::$students) }} students.</p>
                         @if(!empty($fifthPoint))
-                            <p class="text-sm mb-1">{{ $fifthPoint }}</p>
+                            <p class="text-sm mb-1.5">{{ $fifthPoint }}</p>
                         @endif
-                        <p class="text-sm mb-1">90-day money back guarantee.</p>
+                        <p class="text-sm mb-1.5">90-day money-back guarantee.</p>
                         <p class="text-sm">Cancel anytime.</p>
                     </div>
                 </a>
@@ -42,20 +41,18 @@
                 <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{ $theme }} @if($theme == 'musora') text-black @endif" >MOST POPULAR</p>
                 <a href="{{$plusAnnualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-{{ $theme }}">
                     <div class="bg-white px-3 py-6 md:py-9">
-                        <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
-                        <h4 class="inline-block leading-none"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12) }}/month</strong></h4>
-                        <p class="text-sm mb-6"><em>Save 33%. Billed at ${{Prices::$plusSubscriptionAnnualFull}} per year.</em></p>
-                        <div class="font-bebas join {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
-                    </div>
-                    <div class="px-3 pb-9 md:pb-10 bg-white">
-                        <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
-                        <p class="text-sm mb-1"><strong>{{ $songs }}</strong></p>
-                        <p class="text-sm mb-1"><strong>{{ $thirdPoint }}</strong></p>
-                        <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
+                        <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl"><strong>Annual</strong></h2>
+                        <h4 class="inline-block leading-tight"><strong>${{ number_format(Prices::$plusSubscriptionAnnualFull / 12) }}/month</strong></h4>
+                        <p class="text-sm"><em>Save 33%. Billed at ${{Prices::$plusSubscriptionAnnualFull}} per year.</em></p>
+                        <div class="join my-5 {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for @if(!empty($month)) 1 Month @else 7 days @endif </div>
+                        <p class="text-sm mb-1.5"><strong>{{ $firstPoint }}</strong></p>
+                        <p class="text-sm mb-1.5"><strong>{{ $songs }}</strong></p>
+                        <p class="text-sm mb-1.5"><strong>{{ $thirdPoint }}</strong></p>
+                        <p class="text-sm mb-1.5">Join a community of {{ number_format(Prices::$students) }} students.</p>
                         @if(!empty($fifthPoint))
-                            <p class="text-sm mb-1">{{ $fifthPoint }}</p>
+                            <p class="text-sm mb-1.5">{{ $fifthPoint }}</p>
                         @endif
-                        <p class="text-sm mb-1">90-day money back guarantee.</p>
+                        <p class="text-sm mb-1.5">90-day money-back guarantee.</p>
                         <p class="text-sm">Cancel anytime.</p>
                     </div>
                 </a>
@@ -70,40 +67,36 @@
             <div class="w-full md:w-1/2 px-2 md:px-3 mb-4 md:mb-0 relative">
                 <a href="{{$monthlyLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto group border-2 @if(!empty($whiteBg)) border-musora-black @else border-white @endif">
                     <div class="bg-white px-3 py-5 md:py-7">
-                        <h2 class="leading-none mb-6"><strong>Monthly</strong></h2>
-                        <h4 class="inline-block leading-none"><strong>${{ 25 }}/month</strong></h4>
-                        <p class="text-sm mb-6"><em>Pay as you go.</em></p>
-                        <div class="font-bebas join musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
-                    </div>
-                    <div class="px-3 pb-7 md:pb-8 bg-white">
-                        <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
-                        <p class="text-sm mb-1"><strong>{{ $thirdPoint }}</strong></p>
-                        <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
+                        <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl"><strong>Monthly</strong></h2>
+                        <h4 class="inline-block leading-tight"><strong>${{ 25 }}/month</strong></h4>
+                        <p class="text-sm"><em>Pay as you go.</em></p>
+                        <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
+                        <p class="text-sm mb-1.5"><strong>{{ $firstPoint }}</strong></p>
+                        <p class="text-sm mb-1.5"><strong>{{ $thirdPoint }}</strong></p>
+                        <p class="text-sm mb-1.5">Join a community of {{ number_format(Prices::$students) }} students.</p>
                         @if(!empty($fifthPoint))
-                            <p class="text-sm mb-1">{{ $fifthPoint }}</p>
+                            <p class="text-sm mb-1.5">{{ $fifthPoint }}</p>
                         @endif
-                        <p class="text-sm mb-1">90-day money back guarantee.</p>
+                        <p class="text-sm mb-1.5">90-day money-back guarantee.</p>
                         <p class="text-sm">Cancel anytime.</p>
                     </div>
                 </a>
             </div>
             <div class="w-full md:w-1/2 px-2 md:px-3 mb-4 md:mb-0 relative">
                 <p class="inline-block relative -bottom-1 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-{{ $theme }} @if($theme == 'musora') text-black @endif">MOST POPULAR</p>
-                <a href="{{$annualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto group @if(!empty($whiteBg)) border-2 border-{{ $theme }} @endif">
+                <a href="{{$annualLink}}" class="text-black overflow-hidden rounded-2xl block mx-auto group border-2 border-{{ $theme }}">
                     <div class="bg-white px-3 py-6 md:py-9">
-                        <h2 class="leading-none mb-6"><strong>Annual</strong></h2>
-                        <h4 class="inline-block leading-none"><strong>${{ number_format(200 / 12, 2) }}/month</strong></h4>
-                        <p class="text-sm mb-6"><em>Save 33%. Billed at ${{200}} per year.</em></p>
-                        <div class="font-bebas join {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
-                    </div>
-                    <div class="px-3 pb-9 md:pb-10 bg-white">
-                        <p class="text-sm mb-1"><strong>{{ $firstPoint }}</strong></p>
-                        <p class="text-sm mb-1"><strong>{{ $thirdPoint }}</strong></p>
-                        <p class="text-sm mb-1">Join a community of {{ number_format(Prices::$students) }} students.</p>
+                        <h2 class="mb-2 sm:mb-3 text-3xl lg:text-4xl"><strong>Annual</strong></h2>
+                        <h4 class="inline-block leading-tight"><strong>${{ number_format(200 / 12, 2) }}/month</strong></h4>
+                        <p class="text-sm"><em>Save 33%. Billed at ${{200}} per year.</em></p>
+                        <div class="join my-5 {{ $theme }} smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Free for 7 days</div>
+                        <p class="text-sm mb-1.5"><strong>{{ $firstPoint }}</strong></p>
+                        <p class="text-sm mb-1.5"><strong>{{ $thirdPoint }}</strong></p>
+                        <p class="text-sm mb-1.5">Join a community of {{ number_format(Prices::$students) }} students.</p>
                         @if(!empty($fifthPoint))
-                            <p class="text-sm mb-1">{{ $fifthPoint }}</p>
+                            <p class="text-sm mb-1.5">{{ $fifthPoint }}</p>
                         @endif
-                        <p class="text-sm mb-1">90-day money back guarantee.</p>
+                        <p class="text-sm mb-1.5">90-day money-back guarantee.</p>
                         <p class="text-sm">Cancel anytime.</p>
                     </div>
                 </a>

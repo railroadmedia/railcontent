@@ -47,7 +47,8 @@ $(window).on("load", function (){
         $(this).removeClass('error');
         orderButton.addClass('active');
         orderButton.attr('href', originalLink);
-        orderButton.attr('href', orderButton.attr('href') + '&products[' + selectedOption.val() + ']=1' + '&redirect=/shop');
+        const isPromo = orderButton[0].getAttribute('data-promocode');
+        orderButton.attr('href', orderButton.attr('href') + '&products[' + selectedOption.val() + ']=1' + (isPromo ? `&promo-code=${isPromo}` : '') + '&redirect=/shop');
         orderButton.attr('data-product-json', selectedOption.attr('data-product-json'));
     });
 

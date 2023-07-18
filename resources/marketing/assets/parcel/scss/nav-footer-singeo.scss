@@ -107,7 +107,7 @@ a {
 .top-bar {
     transition: background-color .3s, box-shadow .3s;
     background: #020815;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     position: fixed;
     padding: 0;
     top: 0;
@@ -850,7 +850,7 @@ iframe[name='google_conversion_frame'] {
     float: left;
 }
 
-.FabButtonFramecss__FabButtonFrameUI-sc-y1b4md-0.iCEwMd.BeaconFabButtonFrame {
+.BeaconFabButtonFrame {
     bottom: 5px !important;
     right: 3px !important;
 }

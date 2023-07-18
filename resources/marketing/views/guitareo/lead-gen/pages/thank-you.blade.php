@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {!! \App\Analytics\Tracker::headTop() !!}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=5">
 
+    {!! \App\Analytics\Tracker::trackPageView() !!}
+
+    @include('guitareo._partials.google-optimize')
     @include('_partials.layout._fonts')
     @include('_partials.layout._tailwindcdn')
     <!-- Facebook Pixel Code -->
@@ -113,8 +117,10 @@
             }
         }
     </style>
+    {!! \App\Analytics\Tracker::headBottom() !!}
 </head>
 <body>
+{!! \App\Analytics\Tracker::bodyTop() !!}
 <p><strong>Success!</strong></p>
 <h2>Check your email</h2>
 <p><em>You should receive an email from team@guitareo.com within 10 minutes.
@@ -125,5 +131,6 @@
     <a href="https://www.facebook.com/guitareoofficial" target="_blank" class="facebook"><i class="fab fa-facebook-f"></i></a>
     <a href="https://www.instagram.com/guitareoofficial/" target="_blank" class="instagram"><i class="fab fa-instagram"></i></a>
 </div>
+{!! \App\Analytics\Tracker::bodyBottom() !!}
 </body>
 </html>

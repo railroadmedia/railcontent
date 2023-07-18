@@ -20,7 +20,7 @@
 
                 <input type="hidden" name="leadtracker_form_name" value="Singeo General">
                 <div class="infusion-field col-xs-12 form-group text-center medium-text-left lg:w-7/12 lg:pr-1">
-                    <input class="medium-body infusion-field-input-container" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required="">
+                    <input class="medium-body infusion-field-input-container" id="sign-up-email" name="email" type="email" placeholder="Email Address..." required="">
                 </div>
                 <div class="infusion-submit col-xs-12 form-group lg:w-5/12">
                     <button class="submit button-red infusion-recaptcha join-form-button border-singeo text-singeo hover:bg-singeo hover:text-black" type="submit">
@@ -33,7 +33,7 @@
                 <input name="inf_form_xid" type="hidden" value="SingeoEngagementTriggerWebsiteSignupWebForm">
                 <input name="tag_names_to_add[]" type="hidden" value="Singeo - Engagement - Trigger - Website Signup - Web Form">
                 <input name="list_ids_to_subscribe_to[]" type="hidden" value="33">
-                <input name="success_redirect" type="hidden" value="/thank-you-white">
+                <input name="success_redirect" type="hidden" value="/thank-you">
             </form>
             <div class="thank-you-box">
                 <p><em>You should receive an email from team@singeo.com within 10 minutes.</em></p>
@@ -75,7 +75,7 @@
     @endif
     <div class="footer-bottom" @if(!empty($minimal)) style="border-top: 0;padding-top: 0;" @endif>
         <div class="container mx-auto">
-            <img class="logo" src="https://www.musora.com/musora-cdn/image/width=280,quality=85/https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-white.png" alt="Singeo">
+            <img class="logo" src="https://www.musora.com/musora-cdn/image/width=280,quality=95/https://dmmior4id2ysr.cloudfront.net/logos/singeo-logo-white.png" alt="Singeo">
             @if(empty($minimal))
                 <p><a href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
                     <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>

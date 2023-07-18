@@ -104,11 +104,11 @@
                             style="font-size:40px;"
                         ></i>
                         <p class="tiny font-bold text-white">
-                            100% Money Back Guarantee
+                            100% Money-Back Guarantee
                         </p>
                         <p class="x-tiny text-white">
                             Order risk-free with our 90-day, <br>
-                            100% money back guarantee.
+                            100% money-back guarantee.
                         </p>
                     </div>
                 </div>

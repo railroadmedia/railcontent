@@ -12,7 +12,7 @@
             @onClose="handleCloseConfirmationModal" :title="confirmation.title" :subtitle="confirmation.subtitle"
             :submitLabel="confirmation.submitLabel" :hideCancel="confirmation.hideCancel"
             @onCancel="handleCloseConfirmationModal" @onSubmit="handleConfirmationSubmit" />
-            
+
         <!-- Payment SVG -->
         <payment-svg></payment-svg>
 
@@ -164,11 +164,11 @@
                 ranging from 5-25 EUR, dependant on the value of your delivery.
             </p>
             <button
-                class="btn"
+                class="btn group"
                 @click.stop="submitForm"
             >
                 <span
-                    class="text-white"
+                    class="text-white group-hover:bg-[#3EE092]"
                     :class="themeBgClass"
                 >
                     Place Order

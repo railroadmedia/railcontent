@@ -96,7 +96,7 @@
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Guitareo-Method-Level6-1641917824.jpg',
             'lessonNum' => 8,
-            'title' => 'You Can Start Loloing, Like Now!',
+            'title' => 'You Can Start Soloing, Like Now!',
             'desc' => 'Learn three easy scales, a powerful picking technique, and how to know what key you\'re in to make soloing feel like second nature.',
         ],
         [
@@ -193,19 +193,19 @@
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Level-1.png',
             'lessonNum' => 6,
             'title' => 'Understanding Your Voice',
-            'desc' => 'This is where it starts. You’ll learn how to set up your drum-set, hold your drumsticks properly, and play your first beats. And, best of all, you’ll learn how to play your first two songs on the drums.',
+            'desc' => 'Welcome to the Singeo Method! The lessons ahead are designed to help you discover and fall in love with your unique voice. In Level 1, you will learn how your voice works so that you can be in control of your sound and sing with confidence.',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Level-2.png',
             'lessonNum' => 11,
             'title' => 'Build Strength & Gain Control',
-            'desc' => 'In Level Two, you’ll continue to build your drumming foundation. You’re going to learn your first drum rudiments, develop basic reading skills (it’s not that hard, we promise!), and get introduced to three styles of drumming: rock, punk, and metal.',
+            'desc' => "Now that you know how your voice works, it's time to begin developing your own unique voice. In this level, you will learn how to warm up your voice, develop great practice habits, identify your unique vocal type, and exercise your voice based on your unique vocal type!",
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Level-3.png',
             'lessonNum' => 7,
             'title' => 'Vowel Shapes & Sounds',
-            'desc' => 'Learning the motions of drumming will help you play faster, smoother, and for longer periods. This level introduces you to key drum set techniques like the three main stick grips and beginner bass drum pedal technique.',
+            'desc' => 'Vowels are the not so secret ingredient to singing better. This level will teach you how to use vowels to sing with more ease and impact.',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Level-4.png',

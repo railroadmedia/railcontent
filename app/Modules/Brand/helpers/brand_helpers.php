@@ -31,6 +31,15 @@ if (! function_exists('all_brands')) {
     }
 }
 
+if (! function_exists('all_brands_and_musora')) {
+    function all_brands_and_musora()
+    {
+        $brands = array_column(Brand::cases(), 'value');
+        $brands[] = 'musora';
+        return $brands;
+    }
+}
+
 if (! function_exists('drumeo_cdn')) {
     function drumeo_cdn($file)
     {

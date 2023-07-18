@@ -44,7 +44,7 @@
                 <div class="tw-bg-white tw-p-4 tw-rounded-xl tw-flex tw-flex-col md:tw-flex-row tw-mb-2 @if(empty($info['desc'])) md:tw-items-center @endif">
                     <img
                         class="tw-rounded-xl @if(empty($info['desc'])) md:tw-h-24 @else md:tw-h-32 @endif tw-mb-6 md:tw-mb-0 tw-transition-opacity tw-opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=650,quality=85/{{$info['thumb']}}"
+                        src="https://www.musora.com/musora-cdn/image/width=650,quality=95/{{$info['thumb']}}"
                         alt="lesson{{$key+1}} thumb"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"

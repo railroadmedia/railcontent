@@ -104,7 +104,8 @@ Route::domain('{musoraDomain}')
                         'sonor-drums',
                         'rudiments',
                         'boot-camps',
-                        'song-tutorials'
+                        'song-tutorials',
+                        'drum-fest-international-2022',
                     ])
                     ->name('platform.content-type-catalog');
 
@@ -210,6 +211,7 @@ Route::domain('{musoraDomain}')
                             'recording',
                             'play-alongs',
                             'song-tutorials',
+                            'drum-fest-international-2022',
                         ]
                     )
                     ->name('platform.content.first-level');
@@ -285,7 +287,7 @@ Route::domain('{musoraDomain}')
             ->name('platform.notifications-redirect');
 
         Route::get('/purchase-redirect/{brand}', [RedirectController::class, 'redirectPurchase'])
-            ->whereIn('brand', all_brands())
+            ->whereIn('brand', all_brands_and_musora())
             ->name('platform.purchase-redirect');
 
         /*

@@ -39,7 +39,7 @@ class LeadGenController extends BaseController
     {
         switch ($page) {
             case null:
-                return view('singeo.lead-gen.holiday-karaoke.signup');
+                return view('singeo.lead-gen.holiday-karaoke.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'unlocked':
                 return view('singeo.lead-gen.holiday-karaoke.unlocked');
         }
@@ -49,7 +49,7 @@ class LeadGenController extends BaseController
 
     public function improveAnyVoice()
     {
-        return view('singeo.lead-gen.improve-any-voice.signup');
+        return view('singeo.lead-gen.improve-any-voice.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function liveBootcamp(Request $request, $domain, $page = null)
@@ -66,7 +66,7 @@ class LeadGenController extends BaseController
 
     public function stopHatingVoice()
     {
-        return view('singeo.lead-gen.stop-hating-your-voice.signup');
+        return view('singeo.lead-gen.stop-hating-your-voice.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)

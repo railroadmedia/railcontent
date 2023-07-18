@@ -51,7 +51,7 @@
             </div>
 
         <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
-        <div class="tw-hidden md:tw-flex tw-flex-col icon-col tw-justify-center hide-xs-only">
+        <div class="tw-hidden md:tw-flex tw-flex-col icon-col tw-justify-center hide-xs-only">  
             <div class="body">
                 <i
                     class="add-to-list fas fa-plus flex-center pointer"
@@ -108,7 +108,7 @@ export default {
         },
 
         formatted_time() {
-            return new Date(this.time_to_display + 'Z').toISOString().slice(0, 19).replace('T', ' ')
+            return this.time_to_display;
         },
 
         month() {

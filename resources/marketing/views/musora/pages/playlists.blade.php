@@ -13,7 +13,7 @@
         .reveal-overlay{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483002;display:none;overflow-y:auto;background-color:rgba(0,0,0,0.8)}.reveal-overlay:after{-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;font-family:"Font Awesome 5 Pro";font-weight:900;font-style:normal;font-variant:normal;text-rendering:auto;content:"\f00d";color:#fff;z-index:1;opacity:0.8;position:absolute;margin:0;line-height:1em;text-align:center;display:inline-block;outline:none;top:0;right:0;font-size:35px;width:35px}@media (min-width: 768px){.reveal-overlay:after{top:7px;right:7px;font-size:50px;width:50px}}.reveal-overlay .reveal{z-index:1006;-webkit-backface-visibility:hidden;backface-visibility:hidden;display:none;background-color:#fefefe;position:relative;top:100px;margin-right:auto;margin-left:auto;overflow-y:auto;width:90%;height:inherit;min-height:0;outline:none;padding:0;border:none;border-radius:7px}@media (min-width: 768px){.reveal-overlay .reveal{right:auto;left:auto;margin:0 auto}}
 
         .header-pic {
-            background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dmmior4id2ysr.cloudfront.net/sales/playlist-launch/header-5.png);
+            background-image:url(https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/playlist-launch/header-5.png);
         }
         .dot {
             left:-16px;
@@ -148,7 +148,7 @@
                     <div class="join musora-gold smaller absolute bottom-0 left-0 mx-5 my-5"><i class="fas fa-play"></i>&nbsp; PLAY TRAILER</div>
                 </div>
                 <div class="w-full sm:w-1/2 lg:w-7/12 sm:pr-6 text-center sm:text-left">
-                    <img class="h-10 sm:h-20" src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/sales/playlist-launch/logos.png">
+                    <img class="h-10 sm:h-20" src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/playlist-launch/logos.png">
                     <h3 class="leading-tight my-3 sm:my-5"><strong>Introducing Playlists.</strong><br> Learning music just got easier.</h3>
                     <p>Playlists give you ultimate control over how you learn the music you love. Organize videos, songs, and lessons YOUR way – and share your journey with students worldwide.</p>
                 </div>
@@ -243,14 +243,14 @@
                                 <p>{{ $getting['desc'] }}</p>
                             </div>
                             <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9">
-                                <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="workout {{ $key+1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                                <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="workout {{ $key+1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                             </div>
                             <div class="dot hidden sm:block absolute bg-musora top-0 rounded-full z-10 transform -translate-x-1/2 -translate-y-1/2" style="width: 20px;height:20px"></div>
                         </div>
                     @else
                         <div class="relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 @if($key !== 2) mb-16 md:mb-28 @endif">
                             <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9">
-                                <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="workout {{ $key+1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
+                                <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="workout {{ $key+1 }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                             </div>
                             <div class="content relative text-left sm:pl-10 md:pl-0">
                                 <h5 class="mb-2 md:mb-4 mt-1 md:mt-0"><strong>{{ $getting['title'] }}</strong></h5>
@@ -265,7 +265,7 @@
             <div class="text-center sm:text-left sm:text-center">
                 <img class="h-12 mt-4 mb-2 transition-opacity opacity-0"
                     loading="lazy"
-                    onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=190,quality=85/https://dmmior4id2ysr.cloudfront.net/sales/playlist-launch/party.png" alt="bonus icon">
+                    onload="this.classList.remove('opacity-0')" src="https://www.musora.com/musora-cdn/image/width=190,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/playlist-launch/party.png" alt="bonus icon">
                 <h5><strong>That’s it!</strong></h5>
                 <p class="max-w-sm mx-auto leading-normal mt-3">Use your playlists to learn what you like, jam along to songs, and so much more. Or share them elsewhere in Musora using your playlist’s link.</p>
             </div>

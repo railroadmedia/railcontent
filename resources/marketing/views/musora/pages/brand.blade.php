@@ -12,7 +12,7 @@
 <!-- Main -->
 @section('layout-body')
 
-    <section class="py-24 md:py-32 lg:py-40 text-white text-center bg-center bg-cover" style="background-color:#1a1e58;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/header.jpg);">
+    <section class="py-24 md:py-32 lg:py-40 text-white text-center bg-center bg-cover" style="background-color:#1a1e58;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/header.jpg);">
         <div class="container mx-auto relative z-0">
             <h1 class="mt-6"><strong>Brand Guides</strong></h1>
         </div>
@@ -65,12 +65,12 @@
 
             <div class="mt-7 md:mt-16" style="font-size: 0;">
                 <a href="https://dmmior4id2ysr.cloudfront.net/brand/Drumeo-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #0b76db;">
-                    <img src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>
+                    <img src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>
                     <p class="text-xs"><strong>ASSETS</strong></p>
                     <i class="fas fa-arrow-to-bottom absolute left-1/2 bottom-0 transform -translate-x-1/2 pb-3 text-xs"></i>
                 </a>
                 <a href="https://dmmior4id2ysr.cloudfront.net/brand/Pianote-Assets.zip" class="align-middle rounded-full border-2 relative my-2 md:my-0 mx-2 inline-block py-8 px-2 relative hover:opacity-80" style="width:110px;height:110px;border-color: #f61a30;">
-                    <img src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>
+                    <img src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png" class="w-auto h-auto" style="max-width: 90px;max-height: 25px;"><br>
                     <p class="text-xs"><strong>ASSETS</strong></p>
                     <i class="fas fa-arrow-to-bottom absolute left-1/2 bottom-0 transform -translate-x-1/2 pb-3 text-xs"></i>
                 </a>

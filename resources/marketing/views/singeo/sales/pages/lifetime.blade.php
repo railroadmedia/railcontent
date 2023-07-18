@@ -157,7 +157,7 @@
                             <div class="flip-inner">
                                 <div class="front">
                                     <div class="hover-icon"><i class="fas fa-arrow-right"></i><br>DETAILS</div>
-                                    <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=670,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/promos/november/lifetime-bundle-mic-card.jpg);"></div>
+                                    <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=670,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/november/lifetime-bundle-mic-card.jpg);"></div>
                                 </div>
                                 <div class="back">
                                     <div class="text-wrap">
@@ -177,7 +177,7 @@
                             <div class="flip-inner">
                                 <div class="front">
                                     <div class="hover-icon"><i class="fas fa-arrow-right"></i><br>DETAILS</div>
-                                    <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=670,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/lifetime/lisa-witt-exclusive-card.jpg);"></div>
+                                    <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=670,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/lifetime/lisa-witt-exclusive-card.jpg);"></div>
                                 </div>
                                 <div class="back">
                                     <div class="text-wrap">
@@ -235,7 +235,7 @@
                                     <div class="front border-singeo relative overflow-hidden @if(!empty($bonus['shipping'])) {{ $bonus['shipping'] }} @endif">
                                         @if(!empty($bonus['new']))<div class="bg-promo text-white font-bebas absolute flex justify-center items-center h-6 w-full">NEW</div>@endif
                                         <div class="hover-icon"><i class="fas fa-arrow-right"></i><br>DETAILS</div>
-                                        <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/{{ $bonus['image'] }});"></div>
+                                        <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }});"></div>
                                     </div>
                                     <div class="back">
                                         <div class="text-wrap">

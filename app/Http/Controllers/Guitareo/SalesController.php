@@ -12,6 +12,10 @@ class SalesController extends BaseController
     {
         return view('guitareo.sales.subscription', ['theme' => 'guitareo']);
     }
+    public function restart()
+    {
+        return view('guitareo.sales.restart', ['theme' => 'guitareo']);
+    }
 
     public function homeMonth()
     {

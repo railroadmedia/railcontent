@@ -182,7 +182,7 @@
     </div>
 
     <!-- ADD TO LIST OR RESET PROGRESS BUTTONS -->
-    <div v-if="displayUserInteractions && item.type !== 'learning-path'"
+    <div v-if="displayUserInteractions && item.type !== 'learning-path-level'"
       class="flex tw-flex-col icon-col tw-justify-center" :class="is_search ? '' : 'hide-xs-only'">
       <div v-if="resetProgress" class="body">
         <i class="fas fa-undo flex-center tw-text-[#D4D4D8] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white hover:tw-text-[#00101D] reset"

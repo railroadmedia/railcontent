@@ -47,7 +47,6 @@ const preventReFetch = ref(false);
 const duplicatedIDs = ref([]);
 const duplicateProps = ref({ show: false, id: null });
 const duplicatedItemIdNameMap = ref({});
-const playlistNum = ref(0);
 
 const handleOnToggleAssignments = (val) => {
     importAll.value = val;
@@ -236,7 +235,6 @@ const getUserPlaylists = () => {
             } else {
                 state.formattedTable = [...state.formattedTable, ...formattedTable]
             }
-            playlistNum.value = data.length;
         } else {
             preventReFetch.value = true;
         }
@@ -280,8 +278,8 @@ onMounted(() => {
         </div>
         <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
 
-        <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-4" v-if="additionalItems > 0 && content.type !== 'song'">
-            <p class="tw-text-center tw-text-[14px] tw-mb-3">
+        <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-2 lg:tw-mt-4" v-if="additionalItems > 0 && content.type !== 'song'">
+            <p class="tw-text-center tw-text-[14px] tw-mb-1 lg:tw-mb-3">
                 Your selected video(s) also contain(s) {{
                     additionalItems
                 }} additional
@@ -290,7 +288,7 @@ onMounted(() => {
             <div class="tw-flex tw-w-full">
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-justify-between tw-w-full">
                     <b class="tw-uppercase tw-text-sm">Additional Playlist Items</b>
-                    <Toggle :initialValue="props.content.type === 'play-along' ? true : addFullSongToggle" 
+                    <Toggle :initialValue="addFullSongToggle" 
                             id="import-all-toggle" 
                             @onToggle="handleOnToggleAssignments" 
                     />
@@ -365,7 +363,7 @@ onMounted(() => {
         </div>
 
         <!-- Search -->
-        <div v-if="state.formattedTable.length" class="tw-relative tw-w-full tw-mt-5">
+        <div v-if="state.formattedTable.length" class="tw-relative tw-w-full tw-mt-5 tw-pb-[24px]">
             <MusoraIcon
                 icon-name="search"
                 class="tw-absolute tw-top-5 tw-left-[26px] dark:tw-text-[#9EC0DC] tw-z-0"
@@ -386,7 +384,7 @@ onMounted(() => {
 
         <Table @onActionClick="handleActionClick" 
             @onScroll="handleScroll"
-            :classOverride="`tw-mt-[24px] tw-max-h-[350px] ${ playlistNum < 4 && 'lg:tw-overflow-y-hidden'}`" 
+            :classOverride="`tw-max-h-[150px] lg:tw-max-h-[350px] ${ state.formattedTable.length < 4 && 'lg:tw-overflow-y-hidden'}`" 
             :stickyHeader="true" 
             :rows="state.formattedTable"
         >

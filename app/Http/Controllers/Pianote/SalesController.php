@@ -25,13 +25,10 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote']);
     }
-    public function homeJune()
+
+    public function restart()
     {
-        return view('pianote.sales.subscription-june', ['theme' => 'pianote', 'month' => true, 'promoVersion' => true, 'trialVersion' => true]);
-    }
-    public function homeJune2()
-    {
-        return view('pianote.sales.subscription-june2', ['theme' => 'pianote', 'month' => true, 'promoVersion' => true, 'trialVersion' => true]);
+        return view('pianote.sales.restart', ['theme' => 'pianote']);
     }
     public function homeMonth()
     {
@@ -161,6 +158,11 @@ class SalesController extends BaseController
         return view('pianote.products.beautiful-beginner-bundle', [ 'theme' => 'pianote' ]);
     }
 
+    public function fiveforthreeBundle()
+    {
+        return view('pianote.shop.pages.5-for-3-bundle', [ 'theme' => 'pianote' ]);
+    }
+
     public function buildYourBundle()
     {
         return view('pianote.products.build-your-bundle', [ 'theme' => 'pianote' ]);
@@ -235,6 +237,14 @@ class SalesController extends BaseController
     {
         return view('pianote.products.foundation-books');
     }
+    public function classicalPianoPieces()
+    {
+        return view('pianote.products.classical-piano-pieces', ['theme' => 'pianote']);
+    }
+    public function easyChordsDeal()
+    {
+        return view('pianote.sales.pages.easy-chords-deal', ['theme' => 'pianote']);
+    }
 
     public function newPianoPlayers()
     {
@@ -245,6 +255,7 @@ class SalesController extends BaseController
         $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('pianote.products.new-piano-players', [
+            'recaptchaKey'=>config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
@@ -263,6 +274,7 @@ class SalesController extends BaseController
         $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('pianote.products.easy-chords', [
+            'recaptchaKey'=>config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,

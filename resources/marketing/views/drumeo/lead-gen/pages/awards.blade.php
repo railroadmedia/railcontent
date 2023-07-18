@@ -189,11 +189,11 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
-    <section class="text-white py-8 sm:py-14 lg:py-16 px-4 bg-cover bg-top lazyload" style="background-color:#000;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/header-bg.jpg">
+    <section class="text-white py-8 sm:py-14 lg:py-16 px-4 bg-cover bg-top lazyload" style="background-color:#000;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/header-bg.jpg">
         <div class="container mx-auto max-w-5xl">
             <div class="flex flex-wrap items-center">
                 <div class="w-full sm:w-1/2 lg:w-5/12 text-center">
-                    <img class="h-28 sm:h-36 lg:h-44 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png">
+                    <img class="h-28 sm:h-36 lg:h-44 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drumeo-awards-logo.png">
                     <h1 class="my-1.5 sm:my-3 font-bebas text-5xl sm:text-6xl lg:text-7xl" style="color:#fcd05b"><span x-text="year" style="color: #0c0b0b;-webkit-text-stroke: 1px #fcd05b;"></span> WINNERS</h1>
                     <p class="hidden sm:inline-block text-left max-w-sm px-4">The Drumeo Awards highlights inspirational drummers at the top of their game. Learn about this year's winners below.</p>
                 </div>
@@ -216,7 +216,7 @@
                 </select>
             </div>
             <div class="py-6 sm:py-8 px-4 sm:px-8 lg:px-12" style="background-color:#272727;">
-                <img class="h-14 sm:h-20 lg:h-24 -mt-12 sm:-mt-16 mb-3 lg:mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drummer-of-the-year-logo.png">
+                <img class="h-14 sm:h-20 lg:h-24 -mt-12 sm:-mt-16 mb-3 lg:mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/drummer-of-the-year-logo.png">
                 <div class="md:flex md:justify-between">
                     <p class="leading-tight max-w-xl m-0">Drumeo’s Drummer Of The Year awards - chosen by you, the community - celebrate those who stand out in different musical styles, and recognize exceptional performances, recordings, and your favorite drummer overall.</p>
                     <div class="text-center mt-4 md:mt-0">
@@ -230,10 +230,10 @@
                     <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12 ">
                         @foreach($yearAwards2022 as $videoModal)
                             <div class="flex items-start {{--award-container cursor-pointer--}} relative @if(empty($videoModal['last-child'])) border-b pb-7 sm:pb-10 mb-7 sm:mb-10 @endif" style="border-color:#404040">
-                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
+                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
                                 <div class="sm:pl-6">
                                     <h3 class="text-center sm:text-left uppercase font-bebas chrome" {{--style="color: #fcd05b;"--}}>{{ $videoModal['award'] }}</h3>
-                                    <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $videoModal['image'] }}">
+                                    <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}">
                                     <div {{--class="blur-wrap transition duration-500 filter blur"--}}>
                                         <h5 class="text-center sm:text-left my-2"><strong>{{ $videoModal['winner'] }}</strong></h5>
                                         <p class="leading-tight text-light-navy">{!! $videoModal['description'] !!}</p>
@@ -251,10 +251,10 @@
                     <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12 ">
                         @foreach($yearAwards2021 as $videoModal)
                             <div class="flex items-start {{--award-container cursor-pointer--}} relative @if(empty($videoModal['last-child'])) border-b pb-7 sm:pb-10 mb-7 sm:mb-10 @endif" style="border-color:#404040">
-                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}" alt="{{ $videoModal['winner'] }}">
+                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}" alt="{{ $videoModal['winner'] }}">
                                 <div class="sm:pl-6">
                                     <h3 class="text-center sm:text-left uppercase font-bebas chrome" {{--style="color: #fcd05b;"--}}>{{ $videoModal['award'] }}</h3>
-                                    <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}" alt="{{ $videoModal['winner'] }}">
+                                    <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}" alt="{{ $videoModal['winner'] }}">
                                     <div {{--class="blur-wrap transition duration-500 filter blur"--}}>
                                         <h5 class="text-center sm:text-left my-2"><strong>{{ $videoModal['winner'] }}</strong></h5>
                                         <p class="leading-tight text-light-navy">{!! $videoModal['description'] !!}</p>
@@ -268,7 +268,7 @@
             </div>
 
             <div class="py-6 sm:py-8 px-4 sm:px-8 lg:px-12" style="background-color:#272727;">
-                <img class="h-14 sm:h-20 lg:h-24 -mt-12 sm:-mt-16 mb-3 lg:mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/legacy-awards-logo.png">
+                <img class="h-14 sm:h-20 lg:h-24 -mt-12 sm:-mt-16 mb-3 lg:mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dpwjbsxqtam5n.cloudfront.net/beat/awards/legacy-awards-logo.png">
                 <div class="md:flex md:justify-between">
                     <p class="leading-tight max-w-xl m-0">These Legacy awards - chosen by a panel of industry experts - honor today’s drummers while paying tribute to the awards’ legendary namesakes.</p>
                     <div class="text-center mt-4 md:mt-0">
@@ -283,10 +283,10 @@
                     <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12">
                         @foreach($legacyAwards2022 as $videoModal)
                             <div class="flex items-start {{--award-container cursor-pointer--}} relative @if(empty($videoModal['last-child'])) border-b pb-7 sm:pb-10 mb-7 sm:mb-10 @endif" style="border-color:#404040">
-                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
+                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
                                 <div class="sm:pl-6">
                                     <h3 class="text-center sm:text-left uppercase font-bebas chrome" {{--style="color: #fcd05b;"--}}>{{ $videoModal['award'] }}</h3>
-                                    <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
+                                    <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
                                     <div {{--class="blur-wrap transition duration-500 filter blur"--}}>
                                         <h5 class="text-center sm:text-left my-2"><strong>{{ $videoModal['winner'] }}</strong></h5>
                                         <p class="leading-tight text-light-navy">{!! $videoModal['description'] !!}</p>
@@ -304,10 +304,10 @@
                     <div class="py-8 sm:py-14 px-4 sm:px-8 lg:px-12">
                         @foreach($legacyAwards2021 as $videoModal)
                             <div class="flex items-start {{--award-container cursor-pointer--}} relative @if(empty($videoModal['last-child'])) border-b pb-7 sm:pb-10 mb-7 sm:mb-10 @endif" style="border-color:#404040">
-                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
+                                <img class="hidden sm:block h-52 lg:h-72 rounded-xl {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
                                 <div class="sm:pl-6">
                                     <h3 class="text-center sm:text-left uppercase font-bebas chrome" {{--style="color: #fcd05b;"--}}>{{ $videoModal['award'] }}</h3>
-                                    <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
+                                    <img class="block sm:hidden h-52 mx-auto my-3 {{--transition duration-500 filter blur brightness-75--}} lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $videoModal['image'] }}" alt="{{ $videoModal['winner'] }}">
                                     <div {{--class="blur-wrap transition duration-500 filter blur"--}}>
                                         <h5 class="text-center sm:text-left my-2"><strong>{{ $videoModal['winner'] }}</strong></h5>
                                         <p class="leading-tight text-light-navy">{!! $videoModal['description'] !!}</p>

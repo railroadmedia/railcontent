@@ -163,7 +163,7 @@
 
 @section('global-body')
     @include("drumeo.sales.partials._nav")
-    <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https:/dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg">
+    <header class="header text-white text-center px-4 sm:px-6 py-14 md:py-20 lg:py-32 relative bg-no-repeat bg-cover bg-top lazyload" style="background-color:#031e3b;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https:/dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg">
         <div class="mx-auto relative z-10 max-w-md md:max-w-5xl">
                 <h1><strong>30 Day Drummer</strong></h1>
                 <h4>with Domino Santantonio</h4>

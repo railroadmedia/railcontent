@@ -32,6 +32,9 @@
         sortValue: '-created_at' //Default
     })
 
+    //---------Template Refs---------//
+    const playlistSearch = ref(null)
+
     //---------Static Data---------//
     const sortOptions =[
         { text: 'Newest First', value: '-created_at' },
@@ -53,9 +56,13 @@
         playlistsStore.getPlaylists(payload, token);
         //Update URL w/ new params
         const url = new URL(window.location.href);
-        url.searchParams.set('sortby_val', state.sortValue)
-        url.searchParams.set('search', state.searchTerm)
+        url.searchParams.set('sortby_val', state.sortValue);
+        url.searchParams.set('search', state.searchTerm);
+        url.searchParams.set('page', 1);
+        playlistsStore.resultsPage = 1;
         window.history.pushState({}, '', url);
+        //Blur Input
+        playlistSearch.value.blur();
     };
 
     //---------Lifecycle Methods---------//
@@ -93,13 +100,14 @@
             <input type="text"
                    class="tw-px-[50px] tw-w-full tw-h-[50px] focus:tw-ring-0 tw-text-[#00101D] dark:tw-text-white dark:focus:tw-bg-[#00101D] dark:placeholder:tw-text-[#9EC0DC] dark:tw-border-[#445F74] tw-bg-white dark:tw-bg-transparent tw-rounded-full focus:tw-ring-0 focus:tw-outline-none tw-text-[#00101D] dark:tw-text-white tw-border tw-border-[#D4D4D8]"
                    placeholder="Search"
+                   ref="playlistSearch"
                    v-model="state.searchTerm"
                    @keyup.enter="loadPlaylists"
             >
             <button v-if="state.searchTerm.length" class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0" @click="state.searchTerm = ''">
                 <XIcon class="" />
             </button>
-            
+
         </div>
         <!-- List/Grid Toggle -->
         <div class="tw-flex-shrink-0 tw-order-3">

@@ -33,7 +33,8 @@
 
             <h5 class="leading-normal my-3 md:my-5">Learn 10 of Led Zeppelin’s most famous <br class="inline md:hidden"> grooves in this FREE Drumeo series.</h5>
             <div class="mx-auto text-center max-w-3xl">
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formName" => 'Grooves Of John Bonham',
                     "formId" => "Drumeo - Engagement - Trigger - Grooves Of John Bonham - Web Form",
                     "buttonText" => "Hook Me Up ",
@@ -117,7 +118,8 @@
 
             <h5 class="leading-normal my-3 md:my-5">Learn 10 of Led Zeppelin’s most famous <br class="inline md:hidden"> grooves in this FREE Drumeo series.</h5>
             <div class="mx-auto text-center max-w-3xl">
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formName" => 'Grooves Of John Bonham',
                     "formId" => "Drumeo - Engagement - Trigger - Grooves Of John Bonham - Web Form",
                     "buttonText" => "Hook Me Up ",

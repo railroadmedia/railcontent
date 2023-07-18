@@ -113,10 +113,16 @@ class PlaylistItemDecorator extends TypeDecoratorBase
 
         foreach ($contentsOfType as $contentIndex => $content) {
             //set start/end time should not be displayed on assignments and song playlist items
+            $contentsOfType[$contentIndex]['content_name'] =
+                $content['content_name'] ?? null;
+            $contentsOfType[$contentIndex]['playlist_item_name'] =
+                $content['playlist_item_name'] ?? null;
+
             $contentsOfType[$contentIndex]['set_start_end_time'] =
                 ($content['type'] != 'assignment' && $content['type'] != 'song');
             $contentsOfType[$contentIndex]['user_playlist_item_extra_data'] =
                 $content['user_playlist_item_extra_data'] ?? null;
+            $contentsOfType[$contentIndex]['duration'] =  $content->fetch('fields.video.fields.length_in_seconds', 0);
 
             $userPlaylistId =
                 $content['user_playlist_id']
@@ -261,11 +267,14 @@ class PlaylistItemDecorator extends TypeDecoratorBase
                     Decorator::$typeDecoratorsEnabled = false;
                     \Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator::$skip = true;
                     $initialByPassPermission = ContentRepository::$bypassPermissions;
+                    $initialPullFutureContent = ContentRepository::$pullFutureContent;
                     ContentRepository::$bypassPermissions = true;
+                    ContentRepository::$pullFutureContent = true;
                     $parentContent[$content['id']] =
                         $this->contentService->getByIds([$parent->id])
                             ->first();
                     ContentRepository::$bypassPermissions = $initialByPassPermission;
+                    ContentRepository::$pullFutureContent = $initialPullFutureContent;
                     self::$parents = $parentContent + self::$parents;
                     Decorator::$typeDecoratorsEnabled = true;
                 }

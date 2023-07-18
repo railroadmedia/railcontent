@@ -28,7 +28,8 @@
             <img class="h-16 md:h-28 lg:h-36" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/logo.svg" alt="play-along-logo">
             <h6 class="leading-normal my-5">Add your drumming to nine high-quality drumless play-along tracks.</h6>
             <div class="mx-auto text-center max-w-2xl">
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                         "formName" => 'Free Play-Alongs',
                         "formId" => "Drumeo - Engagement - Trigger - Free Play-Alongs - Web Form",
                         "buttonText" => "Hook Me Up ",
@@ -96,7 +97,7 @@
                     <div class="w-1/2 sm:w-1/3 px-2 md:px-3 mb-5 md:mb-7">
                         <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md" data-open="signUpModal">
                             <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;"></i>
-                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=85/{{ $bonus['image'] }}"></div>
+                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=95/{{ $bonus['image'] }}"></div>
                         </div>
                         <h5 class="mt-3 mb-1"><strong>w/ {{ $bonus['artist'] }}</strong></h5>
                         <p class="text-light-navy leading-tight">{{ $bonus['descriptions'] }}</p>
@@ -172,12 +173,13 @@
         "textColor" => "white"
     ])
 
-    <section class="text-white text-center py-10 md:py-28 px-4 md:px-6" style="background: #062342 url(https://www.musora.com/musora-cdn/image/width=1900,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/order_background.jpg) center bottom/cover;">
+    <section class="text-white text-center py-10 md:py-28 px-4 md:px-6" style="background: #062342 url(https://www.musora.com/musora-cdn/image/width=1900,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/order_background.jpg) center bottom/cover;">
         <div class="container mx-auto">
             <img class="h-16 md:h-28 lg:h-36" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/logo.svg" alt="free-playalongs-icon">
             <h6 class="leading-normal my-5">Add your drumming to nine high-quality drumless play-along tracks.</h6>
             <div class="mx-auto text-center max-w-2xl">
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                         "formName" => 'Free Play-Alongs',
                         "formId" => "Drumeo - Engagement - Trigger - Free Play-Alongs - Web Form",
                         "buttonText" => "Hook Me Up ",
@@ -192,7 +194,8 @@
                     Add your drumming to nine high-quality <br class="inline md:hidden">
                     drumless play-along tracks.
                 </strong></h4>
-            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formName" => 'Free Play-Alongs',
                 "formId" => "Drumeo - Engagement - Trigger - Free Play-Alongs - Web Form",
                 "buttonText" => "Hook Me Up ",

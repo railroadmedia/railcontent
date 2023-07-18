@@ -339,7 +339,7 @@
             <div class="columns medium-6 circle-point">
                 <div class="point-icon"><i class="fal fa-thumbs-up"></i></div>
                 <p><strong>Money-Back Guarantee</strong><br>
-                    Try The Guitar System risk-free for three months with our 90-day money back guarantee.</p>
+                    Try The Guitar System risk-free for three months with our 90-day money-back guarantee.</p>
             </div>
         </div>
     </section>

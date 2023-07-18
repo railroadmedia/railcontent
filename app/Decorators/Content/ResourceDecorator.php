@@ -22,6 +22,9 @@ class ResourceDecorator extends ModeDecoratorBase
                 }
 
                 if ($resource['key'] === 'resource_url') {
+                    if(str_starts_with($resource['value'], '//')) {
+                        $resource['value'] = 'https:' . $resource['value'];
+                    }
                     $contents[$contentIndex]['resources'][$resource['position']]['resource_url'] = $resource['value'];
                 }
             }

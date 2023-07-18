@@ -20,7 +20,7 @@
 
                 <input type="hidden" name="leadtracker_form_name" value="Blog Signup">
                 <div class="infusion-field col-xs-12 form-group text-center medium-text-left lg:w-7/12 lg:pr-1">
-                    <input class="medium-body infusion-field-input-container" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required="">
+                    <input class="medium-body infusion-field-input-container" id="sign-up-email" name="email" type="email" placeholder="Email Address..." required="">
                 </div>
                 <div class="infusion-submit col-xs-12 form-group lg:w-5/12">
                     <button class="submit button-red infusion-recaptcha join-form-button border-guitareo text-guitareo hover:bg-guitareo hover:text-black" type="submit">
@@ -33,7 +33,7 @@
                 <input name="inf_form_xid" type="hidden" value="GuitareoEngagementTriggerWebsiteSignupWebForm">
                 <input name="tag_names_to_add[]" type="hidden" value="Guitareo - Engagement - Trigger - Website Signup - Web Form">
                 <input name="list_ids_to_subscribe_to[]" type="hidden" value="32">
-                <input name="success_redirect" type="hidden" value="/thank-you-white">
+                <input name="success_redirect" type="hidden" value="/thank-you">
             </form>
             <div class="thank-you-box">
                 <p><em>You should receive an email from team@guitareo.com within 10 minutes.</em></p>
@@ -42,11 +42,11 @@
         display: inline-block;
         margin-right: 2%;
         margin-top: 10px;" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=e92a296a-7aeb-40ec-85eb-aaf891c3e6c1" target="_blank">
-                <img src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store icon"></a>
+                <img src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store icon"></a>
             <a style="width: 48%;max-width:130px;
         display: inline-block;
         margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=guitareo_previews" target="_blank">
-                <img src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play icon"></a>
+                <img src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play icon"></a>
         </div>
         <div class="footer-link-wrap">
             <h1>Resources</h1>

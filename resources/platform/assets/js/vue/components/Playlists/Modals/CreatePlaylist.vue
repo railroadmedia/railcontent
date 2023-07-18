@@ -47,6 +47,7 @@
         category: 'General',
         thumb: null,
         description: '',
+        sortValue: '-created_at' //Default
     })
 
     //------------Static Data------------//
@@ -109,8 +110,7 @@
             name: state.name ? state.name : 'Playlist',
             description: state.description,
             category: state.category,
-            private: props.playlist.private,
-            thumbnail_url: state.thumb,
+            thumbnail_url: state.thumb !== props.playlist.thumbnail_url ? state.thumb : null,
         };
         if(props.mode === "create") {
             PlaylistService.createUserPlaylist({
@@ -130,7 +130,12 @@
                     }
                     //load Playlists (if collection catalog exists)
                     if(playlistsStore.pageHasPlaylistCatalog) {
-                        playlistsStore.getPlaylists({ brand: props.brand, page: playlistsStore.resultsPage, limit: null }, token);
+                        playlistsStore.getPlaylists({ 
+                            brand: props.brand, 
+                            page: playlistsStore.resultsPage, 
+                            sort: state.sortValue, 
+                            limit: null 
+                        }, token);
                     }
 
                     //load sidebar playlists
@@ -248,9 +253,15 @@
         //Load Data
         state.thumb = props.playlist.thumbnail_url;
         state.name = props.mode === 'duplicate' ? props.playlist.name + ' (Duplicate)' : props.playlist.name;
-        state.description = props.playlist.description;
+        state.description = props.playlist.description.replace(/(<([^>]+)>)/gi, "");
         state.category = props.playlist.category || 'General';
 
+        //get url params
+        const params = new Proxy(new URLSearchParams(window.location.search), {
+            get: (searchParams, prop) => searchParams.get(prop),
+        });
+        //Set state props
+        state.sortValue = params.sortby_val || '-created_at';
     })
     onBeforeUnmount(() => {
         //Reset Modal Data

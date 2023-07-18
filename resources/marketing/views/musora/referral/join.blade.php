@@ -24,10 +24,7 @@
     <section class="text-center text-white py-16">
         <div class="container mx-auto max-w-6xl px-4 md:px-8">
             @if ($canRefer && !$errors->has('email-invite-message'))
-                <h1 class="leading-tight @if($brand === 'pianote') mb-4 lg:mb-6 @else lg:mb-14 @endif"><strong>{{ $referredByUserName }} gifted you 30 days<br class="hidden lg:inline"> of free lessons!</strong></h1>
-                <p class="lg:mb-10 max-w-3xl mx-auto">
-                    Redeem your 30-Day Guest Pass for a chance to win a piano, a VIP lesson, and more! This contest runs between June 19 and 30, 2023. <a href="#terms" class="font-bold underline text-white">See contest details*</a>
-                </p>
+                <h1 class="leading-tight lg:mb-14"><strong>{{ $referredByUserName }} gifted you 30 days<br class="hidden md:inline"> of free lessons!</strong></h1>
                 <div class="flex flex-wrap lg:flex-nowrap items-center sm:px-4">
                     <div class="flex-shrink-0 w-full lg:w-auto my-5 md:my-6 lg:my-0">
                         <div class="relative">
@@ -78,46 +75,7 @@
             @endif
         </div>
     </section>
-
-    @if($brand === 'pianote')
-        <section class="bg-[#00101D] py-10 lg:py-20">
-            <div class="max-w-5xl mx-auto px-3 sm:px-6 xl:px-0 text-white text-center">
-                <h3 class="mb-10 text-xl sm:text-2xl md:text-3xl"><strong>You can win...</strong></h3>
-                <div class="md:grid md:grid-cols-3 md:gap-4 mb-14 max-w-xs sm:max-w-none mx-auto">
-                    <img class="mx-auto mb-6 sm:mb-0" src="https://musora-web-platform.s3.amazonaws.com/referral/pianote_1st+Prize.png" alt="1st prize" />
-                    <img class="mx-auto mb-6 sm:mb-0" src="https://musora-web-platform.s3.amazonaws.com/referral/pianote_2nd+Prize.png" alt="2nd prize" />
-                    <img class="mx-auto" src="https://musora-web-platform.s3.amazonaws.com/referral/pianote_3rd+Prize.png" alt="3rd prize" />
-                </div>
-            </div>
-        </section>
-
-        <div id="terms" class="block relative invisible"></div>
-        <section class="py-12 lg:py-20 bg-white">
-            <div class="max-w-6xl mx-auto px-6 2xl:px-0">
-                <h4 class="mb-4"><strong>Terms and Conditions</strong></h4>
-                <p>
-                    <strong>Eligibility:</strong> This contest is open to Musora students with an active, paid membership and new students who sign up for a 30-Day Guest Pass, 18 years or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
-                    <br><br>
-                    <strong>How to Enter:</strong> Musora students automatically receive (1) entry to the contest when a referred friend signs up for a 30-Day Guest Pass between June 19 to 30, 2023. Musora students may collect up to (5) contest entries by having 5 successful referrals within this timeframe. New students who sign-up for a 30-Day Guest Pass within this period will have (1) entry to the contest. No purchase is necessary to enter or win.
-                    <br><br>
-                    <strong>Prize:</strong> The first prize is a Casio PXS3100BK Digital Piano with a retail value of US$879.99. The second prize is a Pianote Book Bundle & a VIP lesson with an estimated value of US$250. The third prize is a Pianote Book Bundle with a retail value of US$117. The prizes are non-transferable and cannot be exchanged for cash.
-                    <br><br>
-                    <strong>Winner Selection:</strong> The winner will be selected randomly from all eligible entries received during the entry period. The winner will be notified by email or direct message within 48 hours of the selection. If the winner does not respond within 48 hours, another winner will be selected.
-                    <br><br>
-                    <strong>Release:</strong> By entering the contest, participants release and hold harmless the sponsor, their affiliates, and their respective officers, directors, employees, and agents from any liability or any injury, loss, or damage of any kind arising from or in connection with the contest or any prize won.
-                    <br><br>
-                    <strong>General Conditions:</strong> The sponsor reserves the right to cancel, suspend, or modify the contest if fraud, technical failures, or any other factor beyond their control impairs the contest's integrity, as determined by the sponsor in their sole discretion. The sponsor reserves the right to disqualify any individual who violates these Terms and Conditions or interferes with the contest in any way.
-                    <br><br>
-                    <strong>Governing Law:</strong> The contest shall be governed by and construed by the laws of the country where the contest is held, without regard to conflicts of law principles.
-                    <br><br>
-                    <strong>Privacy:</strong> Personal information collected from participants will be used only to administer the contest and will not be shared with any third party except as necessary to fulfill the prize.
-                    <br><br>
-                    By participating in the contest, participants agree to be bound by these Terms and Conditions.
-                </p>
-            </div>
-        </section>
-    @endif
-
+    
     @include('_partials.components.video-modal',[
         'name' => 'drumeoTrailer',
         'video' => '785314424',

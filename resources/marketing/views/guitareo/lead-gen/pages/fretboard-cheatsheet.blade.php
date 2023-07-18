@@ -58,15 +58,16 @@
 @stop
 
 @section('body')
-    <header class="hero-header text-white text-center px-3 py-5 md:py-12 relative" style="background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/Fretboard+Cheatsheet/header-3.jpg);">
+    <header class="hero-header text-white text-center px-3 py-5 md:py-12 relative" style="background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/Fretboard+Cheatsheet/header-3.jpg);">
         <div class="container mx-auto relative z-10">
-            <img class="h-6 md:h-11 lg:h-12 w-auto mx-auto" src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/Fretboard+Cheatsheet/logo.png"><br>
+            <img class="h-6 md:h-11 lg:h-12 w-auto mx-auto" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/Fretboard+Cheatsheet/logo.png"><br>
             <i data-open="trailer" class="fas fa-play play-button autoplay-video"></i>
             <h6 class="uppercase font-bebas mt-2.5 mb-5 md:mb-9">SEE WHAT'S INSIDE</h6>
             <h2 class="leading-tight text-shadow-4"><strong>Your All-In-One Guide To<br class="hidden md:inline"> Understand The Fretboard</strong></h2>
             <h6 class="px-4 sm:px-0 mt-1 mb-5 text-guitareo leading-normal max-w-xs md:max-w-full">Download your free PDF and easily navigate the fretboard<br class="hidden sm:inline">
                  to unlock new possibilities in your playing</h6>
-            @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+            @include("guitareo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => "Guitareo - Engagement - Trigger - Fretboard Cheatsheet - Web Form",
                     "formName" => 'Fretboard Cheatsheet',
                     "buttonText" => "Get It Now",

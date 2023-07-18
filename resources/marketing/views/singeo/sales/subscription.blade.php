@@ -146,6 +146,14 @@
         ])
     @endif
 
+    @include('_partials.components.promo-top-banner',[
+        'bg' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-shop-summer-sale-bg.jpg',
+        'logo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-summer-sale-logo.svg',
+        'logoStyles' => '-mb-3',
+        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
+        'promoText' => 'SAVE UP TO 74% UNTIL JULY 31ST!',
+    ])
+
     @php
         $features = [
             [
@@ -201,8 +209,6 @@
             'pointOne' => 'Improve Your Voice',
             'pointTwo' => 'Helpful Vocal Coaches',
             'pointThree' => 'Sing Popular Songs',
-            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
-            'students' => number_format(Prices::$students),
         ])
     @else
         @include('musora.sales.components.header-section', [
@@ -214,8 +220,6 @@
             'pointOne' => 'Improve Your Voice',
             'pointTwo' => 'Helpful Vocal Coaches',
             'pointThree' => 'Sing Popular Songs',
-            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
-            'students' => number_format(Prices::$students),
         ])
     @endif
     @hasSection('promo-banner')
@@ -494,21 +498,22 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by singers everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
-        'youtube' => '29,000',
+        'youtube' => '75,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
         'facebook' => '23,000',
         'instagramLink' => 'https://instagram.com/singeoofficial/',
         'instagram' => '9,000',
     ])
 
+    @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2022/singeo-guarantee.png',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence to share your voice with the world.',
     ])
+    @endif
 
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
@@ -517,7 +522,7 @@
     @if(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
-            "plusLogo" => "https://singeo.s3.amazonaws.com/sales/2023/singeo-plus-logo-light.svg",
+            "plusLogo" => "https://d21xeg6s76swyd.cloudfront.net/sales/2023/singeo-plus-logo-light.svg",
             "logo" => "https://musora-ui.s3.amazonaws.com/logos/singeo-white.svg",
             "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited singing lessons.",
@@ -527,6 +532,9 @@
             "plusMonthlyLink" => "/ecommerce/add-to-cart?products[singeo-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
             "annualLink" => "/ecommerce/add-to-cart?products[singeo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
             "monthlyLink" => "/ecommerce/add-to-cart?products[singeo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'singing',
         ])
     @elseif(!empty($promoVersion))
         @php
@@ -555,6 +563,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'logo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png',
         'header' => 'Unlimited singing lessons.<br> Vocal coaches and support.<br>1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>

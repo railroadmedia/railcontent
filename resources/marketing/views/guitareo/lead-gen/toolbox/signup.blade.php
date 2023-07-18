@@ -26,21 +26,22 @@
     <header class="header blue" style="background:#1a1c1d;">
         <div class="container clearfix mx-auto max-w-6xl flex flex-col">
             <picture>
-                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg">
-                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg">
-                <img class="logo" src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg" alt="logo">
+                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg">
+                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg">
+                <img class="logo" src="https://www.musora.com/musora-cdn/image/width=350,quality=95/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg" alt="logo">
             </picture>
             <div class="flex flex-col sm:flex-row">
                 <div class="text-center sm:w-5/12 preview-circle">
                     <picture>
-                        <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/nate-savage.jpg">
-                        <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/nate-savage.jpg">
-                        <img class="circle-nate" src="https://www.musora.com/musora-cdn/image/width=270,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/nate-savage.jpg" alt="nate-savage">
+                        <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d122ay5chh2hr5.cloudfront.net/toolbox/nate-savage.jpg">
+                        <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d122ay5chh2hr5.cloudfront.net/toolbox/nate-savage.jpg">
+                        <img class="circle-nate" src="https://www.musora.com/musora-cdn/image/width=270,quality=95/https://d122ay5chh2hr5.cloudfront.net/toolbox/nate-savage.jpg" alt="nate-savage">
                     </picture>
                 </div>
                 <div class="px-2 sm:px-8 sm:w-7/12">
                     <h2>Enter your email below to get my <br> free collection of guitar courses!</h2>
-                    @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+                    @include("guitareo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "stacked" => true,
                         "formId" => "Guitareo - Engagement - Trigger - Toolbox - Web Form",
                         "formName" => 'The Guitarists Toolbox',
@@ -133,15 +134,16 @@
         <div class="container clearfix mx-auto max-w-6xl">
             <div class="logo">
                 <picture>
-                    <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg">
-                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg">
-                    <img src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg" alt="logo">
+                    <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg">
+                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg">
+                    <img src="https://www.musora.com/musora-cdn/image/width=350,quality=95/https://d122ay5chh2hr5.cloudfront.net/toolbox/logo.svg" alt="logo">
                 </picture>
             </div>
             <p>
                 Enter your email below to get <br class="lg:hidden"> a free beginner guitar course!</p>
 
-            @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+            @include("guitareo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formId" => "Guitareo - Engagement - Trigger - Toolbox - Web Form",
                 "formName" => 'The Guitarists Toolbox',
                 "submitButtonColor" => "#408beb",
@@ -152,7 +154,8 @@
     <div class="reveal large blue" id="getAccess" data-reveal data-reset-on-close="true" style="background:#1a1c1d;">
         <p>Enter your email below to get a free beginner guitar <br
                     class="sm:hidden"> course and start learning music theory.</p>
-        @include("guitareo.lead-gen.partials._sign-up-form-tw", [
+        @include("guitareo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
            "stacked" => true,
             "formId" => "Guitareo - Engagement - Trigger - Toolbox - Web Form",
             "formName" => 'The Guitarists Toolbox',

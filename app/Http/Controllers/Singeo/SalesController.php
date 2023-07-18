@@ -11,6 +11,14 @@ class SalesController extends BaseController
     {
         return view('singeo.sales.subscription', ['theme' => 'singeo']);
     }
+    public function restart()
+    {
+        return view('singeo.sales.restart', ['theme' => 'singeo']);
+    }
+    public function fiveReasons()
+    {
+        return view('singeo.sales.pages.5-reasons', ['theme' => 'singeo']);
+    }
 
     public function homeMonth()
     {

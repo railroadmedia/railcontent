@@ -6,7 +6,7 @@
     <title>4 Exercises Guaranteed To Improve ANY Voice!</title>
     <meta name="description" content="Anyone can sing! Singeo is here to show you how in this free mini lesson series."/>
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/og-image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/og-image.jpg">
     <meta property="og:title" content="4 Exercises Guaranteed To Improve ANY Voice!">
     <meta property="og:description" content="Anyone can sing! Singeo is here to show you how in this free mini lesson series.">
     <meta property="og:url" content="https://www.singeo.com/improve-any-voice/">
@@ -18,13 +18,13 @@
         .hero-header {
             background-position: center top;
             background-size: 470px;
-            background-image: url('https://www.musora.com/musora-cdn/image/width=900,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/header-mobile.png');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=900,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/header-mobile.png');
         }
 
         @media (min-width: 768px) {
             .hero-header {
                 background-size: 1300px;
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2900,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/header-desktop.png');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2900,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/header-desktop.png');
             }
         }
 
@@ -50,7 +50,8 @@
                     <h1 class="leading-tight"><strong>4 Exercises Guaranteed<br class="inline sm:hidden lg:inline"> To Improve ANY Voice!</strong></h1>
                     <h3 class="mt-2 md:mt-5 mb-3 md:mb-7 lg:mb-10" style="text-shadow: 0 0 5px #000;"><em>You CAN sing! We'll show you how.</em></h3>
                     <h5 class="mb-3 md:mb-5 leading-tight">Simply enter your email to<br class="inline lg:hidden"> unlock your FREE videos!</h5>
-                    @include("singeo._partials._sign-up-form", [
+                    @include("singeo._partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => "Singeo - Engagement - Trigger - 4 Exercises - Web Form",
                     "formName" => 'Improve Any Voice',
                     "buttonText" => "Send My Videos",
@@ -122,11 +123,12 @@
         </div>
     </section>
 
-    <section class="final-pitch px-4 py-14 md:py-20 lg:py-24 text-white text-center bg-cover bg-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/bottom-background.png);">
+    <section class="final-pitch px-4 py-14 md:py-20 lg:py-24 text-white text-center bg-cover bg-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/bottom-background.png);">
         <div class="container mx-auto">
             <h3 class="mb-5 md:mb-8 lg:mb-10"><strong>Simply enter your email to<br class="inline lg:hidden"> unlock your FREE videos!</strong></h3>
             <div class="w-full mx-auto max-w-lg lg:max-w-3xl">
-                @include("singeo._partials._sign-up-form", [
+                @include("singeo._partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => "Singeo - Engagement - Trigger - 4 Exercises - Web Form",
                     "formName" => 'Improve Any Voice',
                     "buttonText" => "Send My Videos",

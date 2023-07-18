@@ -19,7 +19,7 @@
 
         <div class="tw-flex tw-flex-col tw-w-full">
 
-            <div class="fluid tw-pb-3 @if(count(json_decode($relatedLessons)->data) > 1 && $lessonContent['id'] === json_decode($relatedLessons)->data[0]->id) tw-max-w-[1280px] @endif tw-w-full tw-mx-auto">
+            <div class="fluid tw-pb-3 @if(count(json_decode($relatedLessons)->data) === 1 && $lessonContent['id'] === json_decode($relatedLessons)->data[0]->id) tw-max-w-[1280px] @endif tw-w-full tw-mx-auto">
 
                 <div class="p-lg-only lean">
                     {{-- Video Player --}}
@@ -250,10 +250,10 @@
                                 $content['userId'] = auth()->id();
                                 $content['position'] = $index;
                                 $formattedAssignments[] = $content;
-                            }                            
+                            }
                         @endphp
                         <div class="tw-flex tw-flex-row tw-w-full">
-                            <assignments-container 
+                            <assignments-container
                                 :lesson-data="{{ json_encode($lessonContent) }}"
                                 :assignments="{{ json_encode($formattedAssignments) }}"
                             >
@@ -290,7 +290,7 @@
         </div>
 
         {{-- Related Lessons Section --}}
-        @if(count(json_decode($relatedLessons)->data) > 1 && $lessonContent['id'] === json_decode($relatedLessons)->data[0]->id)
+        @if(count(json_decode($relatedLessons)->data) > 1 && $lessonContent['id'] !== json_decode($relatedLessons)->data[0]->id)
             <div class="">
                 <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
                     <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">

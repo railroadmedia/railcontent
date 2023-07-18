@@ -19,7 +19,7 @@
         "iksaku/laravel-mass-update": "^1.0",
         "intervention/image": "^2.7",
         "laravel/framework": "^9.9",
-        "laravel/nova": "~4.0",
+        "laravel/nova": "4.25.1",
         "laravel/sanctum": "^2.15",
         "laravel/tinker": "^2.7",
         "laravel/vapor-cli": "^1.45",

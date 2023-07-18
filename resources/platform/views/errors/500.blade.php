@@ -65,7 +65,7 @@
                     >
                         <template v-cloak v-slot="slotProps">
 
-                            <div class="tw-relative tw-flex tw-flex-col tw-h-[calc(100%+1.75rem)] tw-justify-center tw-items-center">
+                            <div class="tw-relative tw-flex tw-flex-col tw-h-[calc(100vh-152px)] lg:tw-h-[calc(100vh-128px)]  tw-justify-center tw-items-center">
                                 <img src="https://cdn.musora.com/image/fetch/c_thumb,w_1200,q_auto:best/https://d3fzm1tzeyr5n3.cloudfront.net/Rehearsal+Studio_deSaturated.png"
                                     alt="Image of Musical instrument on a stage"
                                     class="tw-absolute tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
@@ -77,7 +77,7 @@
                                 <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3 tw-z-50 tw-items-center tw-justify-center">
                                     <div class="tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
                                         <h1 class="tw-text-5xl lg:tw-text-6xl tw-font-bold tw-mb-4 lg:tw-mb-6">Server Error</h1>
-                                        <h2 class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-2xl lg:tw-text-3xl tw-font-bold tw-mb-4">500 ERROR</h1>
+                                        <h2 class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-2xl lg:tw-text-3xl tw-font-bold tw-mb-4">500 ERROR</h2>
                                         <p class="tw-mb-8">We're experiencing an internal server problem.</p>
 
                                         <a href="{{ $brand }}/" class="tw-btn-primary tw-bg-[#081825] tw-text-white dark:tw-bg-white dark:tw-text-[#00101D] tw-mb-4">Go Back</a>
@@ -105,6 +105,9 @@
                 <script src="{{ mix('platform/js/app.js') }}"></script>
             @yield('inject-components')
 
+            {{-- Customer.io --}}
+            @include('partials._customer-io')
+
             {{-- Helpscout Beacon --}}
             @include('partials.third-party.helpscout-tracking-beacon-script', [
                 'email' => !empty(user()) ? user()->email : null,
@@ -119,7 +122,8 @@
         <body class="tw-bg-[#000C17] tw-text-white tw-flex">
             <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
                 <div class="tw-text-center tw-max-w-md tw-px-6 md:tw-px-0 md:tw-max-w-full">
-                    <img class="md:tw-h-60 lg:tw-h-72 tw-mx-auto" src="https://dmmior4id2ysr.cloudfront.net/logos/404_musora_logo.png" alt="404 logo" />
+                    <h1 class="tw-text-5xl lg:tw-text-6xl tw-font-bold tw-mb-4 lg:tw-mb-6">Server Error</h1>
+                    <h2 class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-2xl lg:tw-text-3xl tw-font-bold tw-mb-4">500 ERROR</h2>
                     <div class="tw-mb-2 tw-text-xl md:tw-text-2xl lg:tw-text-3xl">Oops, we're experiencing an internal server problem.</div>
                     <div class="tw-font-normal tw-mb-3 md:tw-mb-6 tw-text-sm md:tw-text- tw-text-[#E4E4E7]">The page you're looking for doesn't exist.</div>
                     <button onclick="history.back()" class="tw-btn-primary tw-bg-white tw-text-black tw-mb-3 md:tw-mb-4">Go Back</button>
