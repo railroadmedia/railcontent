@@ -1,10 +1,62 @@
 <?php
+$classic = [
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/acdc-back-in-black.png',
+        'title' => 'Back in Black',
+        'artist' => 'AC/DC',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/28218-card-thumbnail-maxres-1592341146.jpg',
+        'title' => 'Walk This Way',
+        'artist' => 'Aerosmith',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/van-halen-van-halen.jpg',
+        'title' => 'Running with the Devil',
+        'artist' => 'Van Halen',
+    ],
+//        [
+//            'img' => '',
+//            'title' => 'Hey Joe',
+//            'artist' => 'Jimi Hendrix',
+//        ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/journey-separate-ways-worlds-apart.jpg',
+        'title' => 'Separate Ways',
+        'artist' => 'Journey',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/bruce springsteen-born-in-the-usa.jpg',
+        'title' => 'Born in the USA',
+        'artist' => 'Bruce Springsteen',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/led-zeppelin-led-zeppelin-iv.jpg',
+        'title' => 'Stairway to Heaven',
+        'artist' => 'Led Zeppelin',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/john-mellencamp-american-fool.jpg',
+        'title' => 'Jack and Diane',
+        'artist' => 'John Cougar Mellencamp',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/eagles-hotel-california.jpg',
+        'title' => 'Hotel California',
+        'artist' => 'Eagles',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/guns-n-roses-sweet-child-o-mine.jpg',
+        'title' => 'Guns N\' Roses',
+        'artist' => 'Sweet Child O’ Mine',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/creedence-clearwater-revival-have-you-ever-seen-the-rain.jpg',
+        'title' => 'Have You Ever Seen The Rain',
+        'artist' => 'Creedence Clearwater Revival',
+    ],
+];
     $rock90s = [
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/3-doors-down-the-better-life.jpg',
-            'title' => 'Here Without You',
-            'artist' => '3 Doors Down',
-        ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/20249-card-thumbnail-maxres-1592340937.jpeg',
             'title' => 'All The Small Things',
@@ -51,60 +103,6 @@
             'artist' => 'Red Hot Chili Peppers',
         ],
     ];
-
-    $classic = [
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/acdc-back-in-black.png',
-            'title' => 'Back in Black',
-            'artist' => 'AC/DC',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/28218-card-thumbnail-maxres-1592341146.jpg',
-            'title' => 'Walk This Way',
-            'artist' => 'Aerosmith',
-        ],
-//        [
-//            'img' => '',
-//            'title' => 'Hey Joe',
-//            'artist' => 'Jimi Hendrix',
-//        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/journey-separate-ways-worlds-apart.jpg',
-            'title' => 'Separate Ways',
-            'artist' => 'Journey',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/bruce springsteen-born-in-the-usa.jpg',
-            'title' => 'Born in the USA',
-            'artist' => 'Bruce Springsteen',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/led-zeppelin-led-zeppelin-iv.jpg',
-            'title' => 'Stairway to Heaven',
-            'artist' => 'Led Zeppelin',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/john-mellencamp-american-fool.jpg',
-            'title' => 'Jack and Diane',
-            'artist' => 'John Cougar Mellencamp',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/eagles-hotel-california.jpg',
-            'title' => 'Hotel California',
-            'artist' => 'Eagles',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/guns-n-roses-sweet-child-o-mine.jpg',
-            'title' => 'Guns N\' Roses',
-            'artist' => 'Sweet Child O’ Mine',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/21264-card-thumbnail-maxres-1593110179.jpg',
-            'title' => 'Crazy Train',
-            'artist' => 'Ozzy Osbourne',
-        ],
-    ];
-
     $modern = [
 //        [
 //            'img' => '',
@@ -157,48 +155,191 @@
 //            'artist' => 'Mumford & Sons',
 //        ],
     ];
+$acoustic = [
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/the-beatles-the-beatles-white-album.jpg',
+        'title' => 'Blackbird',
+        'artist' => 'The Beatles',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/kansas-point-of-know-return.jpg',
+        'title' => 'Dust In The Wind',
+        'artist' => 'Kansas',
+    ],
+//        [
+//            'img' => '',
+//            'title' => 'Fire and Rain',
+//            'artist' => 'James Taylor',
+//        ],
+//        [
+//            'img' => '',
+//            'title' => 'Better Together',
+//            'artist' => 'Jack Johnson',
+//        ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/oasis-wonderwall-1629262609.jpeg',
+        'title' => 'Wonderwall',
+        'artist' => 'Oasis',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/ed-sheeran-x.jpg',
+        'title' => 'Photograph',
+        'artist' => 'Ed Sheeran',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/260375-card-thumbnail-maxres-1592340433.jpg',
+        'title' => 'Take It Easy',
+        'artist' => 'Eagles',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/vance-joy-dream-your-life-away.jpg',
+        'title' => 'Georgia',
+        'artist' => 'Vance Joy',
+    ],
+//        [
+//            'img' => '',
+//            'title' => 'Country Roads',
+//            'artist' => 'John Denver',
+//        ],
+];
+$blues = [
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/260310-card-thumbnail-maxres-1592340581.jpg',
+        'title' => 'The Thrill Is Gone',
+        'artist' => 'B.B. King',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/steppenwolf-born-to-be-wild.jpg',
+        'title' => 'Come On Part 1 (Let The Good Times Roll)',
+        'artist' => 'Earl King',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/guitar-slim-the-things-that-i-used-to-do.jpg',
+        'title' => 'The Things That I Used To Do',
+        'artist' => 'Guitar Slim',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/john-mayall-blue-breakers-with-eric-clapton-john-mayall-blue-breakers-with-eric-clapton.jpg',
+        'title' => 'Hideaway',
+        'artist' => 'John Mayall Blue Breakers With Eric Clapton',
+    ],
+//        [
+//            'img' => '',
+//            'title' => 'Folsom Prison Blues',
+//            'artist' => 'Johnny Cash',
+//        ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/muddy-waters-rolling-stone.jpg',
+        'title' => 'Got My Mojo Working',
+        'artist' => 'Muddy Waters',
+    ],
+//        [
+//            'img' => '',
+//            'title' => 'Sweet Home Chicago',
+//            'artist' => 'Robert Johnson',
+//        ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/sonny-boy-williamson-more-folk-blues.jpg',
+        'title' => 'Help Me',
+        'artist' => 'Sonny Boy Williamson',
+    ],
+];
 
-    $metal = [
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/black-sabbath-paranoid.jpg',
-            'title' => 'Paranoid',
-            'artist' => 'Black Sabbath',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/evanescence-bring-me-to-life.jpg',
-            'title' => 'Bring Me To Life',
-            'artist' => 'Evanescense',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-feb/album-art/Marilyn Manson-Sweet Dreams (Are Made Of This).jpg',
-            'title' => 'Sweet Dreams (Are Made Of This)',
-            'artist' => 'Marilyn Manson',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/megadeth-symphony-of-destruction.jpg',
-            'title' => 'Symphony of Destruction',
-            'artist' => 'Megadeth',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/metallica-master-of-puppets.jpg',
-            'title' => 'Master of Puppets',
-            'artist' => 'Metallica',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/motley-crue-dr-feelgood-1644912379.jpg',
-            'title' => 'Kickstart My Heart',
-            'artist' => 'Mötley Crüe',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/van-halen-van-halen.jpg',
-            'title' => 'Running with the Devil',
-            'artist' => 'Van Halen',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/system-of-a-down-aerials.jpg',
-            'title' => 'Aerials',
-            'artist' => 'System of a Down',
-        ],
+
+
+$country = [
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/hank-williams-i-saw-the-light.jpg',
+        'title' => 'I Saw The Light',
+        'artist' => 'Hank Williams',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/blake-shelton-bringing-back-the-sunshine.jpg',
+        'title' => 'Sangría',
+        'artist' => 'Blake Shelton',
+    ],
+//        [
+//            'img' => '',
+//            'title' => 'Mr. Bojangles',
+//            'artist' => 'Nitty Gritty Dirt Band',
+//        ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/shania-twain-come-on-over.jpg',
+        'title' => 'From This Moment',
+        'artist' => 'Shania Twain',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/blake-shelton-red-river-blue.jpg',
+        'title' => 'Hicktown',
+        'artist' => 'Jason Aldean',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/carrie-underwood-jesus-take-the-wheel-1628912212.jpg',
+        'title' => 'Jesus, Take The Wheel',
+        'artist' => 'Carrie Underwood',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/313381-card-thumbnail-maxres-1627646906.jpg',
+        'title' => 'Tennessey Whiskey',
+        'artist' => 'Chris Stapleton',
+    ],
+//        [
+//            'img' => '',
+//            'title' => 'Tequila',
+//            'artist' => 'Dan + Shay',
+//        ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/florida-georgia-line-heres-to-the-good-times.jpg',
+        'title' => 'Cruise',
+        'artist' => 'Florida Georgia Line',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/garth-brooks-friends-in-low-places.jpg',
+        'title' => 'Friends In Low Places',
+        'artist' => 'Garth Brooks',
+    ],
+];
+$metal = [
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/21264-card-thumbnail-maxres-1593110179.jpg',
+        'title' => 'Crazy Train',
+        'artist' => 'Ozzy Osbourne',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/black-sabbath-paranoid.jpg',
+        'title' => 'Paranoid',
+        'artist' => 'Black Sabbath',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/evanescence-bring-me-to-life.jpg',
+        'title' => 'Bring Me To Life',
+        'artist' => 'Evanescense',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-feb/album-art/Marilyn Manson-Sweet Dreams (Are Made Of This).jpg',
+        'title' => 'Sweet Dreams (Are Made Of This)',
+        'artist' => 'Marilyn Manson',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/megadeth-symphony-of-destruction.jpg',
+        'title' => 'Symphony of Destruction',
+        'artist' => 'Megadeth',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/metallica-master-of-puppets.jpg',
+        'title' => 'Master of Puppets',
+        'artist' => 'Metallica',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/motley-crue-dr-feelgood-1644912379.jpg',
+        'title' => 'Kickstart My Heart',
+        'artist' => 'Mötley Crüe',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/system-of-a-down-aerials.jpg',
+        'title' => 'Aerials',
+        'artist' => 'System of a Down',
+    ],
 //        [
 //            'img' => '',
 //            'title' => 'Through the Fire and Flames',
@@ -209,8 +350,7 @@
 //            'title' => 'Darker Still',
 //            'artist' => 'Parkway Drive',
 //        ],
-    ];
-
+];
     $pop = [
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/ABBA-Dancing Queen.jpg',
@@ -262,167 +402,59 @@
             'title' => 'Raise Your Glass',
             'artist' => 'Pink',
         ],
-    ];
-
-    $surf = [
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/the-surfaris-wipe-out.jpg',
-            'title' => 'Wipe Out',
-            'artist' => 'The Surfaris',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/dick-dale-his-del-tones-misirlou.jpg',
-            'title' => 'Misirlou',
-            'artist' => 'Dick Dale',
-        ],
-//        [
-//            'img' => '',
-//            'title' => 'Pipeline',
-//            'artist' => 'The Ventures',
-//        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-dec/album-art/the-ventures-walk-dont-run.jpg',
-            'title' => 'Walk Don\'t Run',
-            'artist' => 'The Ventures',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/The Beach Boys-Fun, Fun, Fun.jpg',
-            'title' => 'Fun, Fun, Fun',
-            'artist' => 'The Beach Boys',
-        ],
-//        [
-//            'img' => '',
-//            'title' => 'Surfin\' Bird',
-//            'artist' => 'The Trashmen',
-//        ],
-//        [
-//            'img' => '',
-//            'title' => 'Mr. Moto',
-//            'artist' => 'The Bel-Airs',
-//        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/the-beach-boys-surfer-girl.jpg',
-            'title' => 'Surfer Girl',
-            'artist' => 'The Beach Boys',
-        ],
-//        [
-//            'img' => '',
-//            'title' => 'Surf Rider',
-//            'artist' => 'The Lively Ones',
-//        ],
-//        [
-//            'img' => '',
-//            'title' => 'Freaks',
-//            'artist' => 'Surf Curse',
-//        ],
-    ];
-
-    $blues = [
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/260310-card-thumbnail-maxres-1592340581.jpg',
-            'title' => 'The Thrill Is Gone',
-            'artist' => 'B.B. King',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/steppenwolf-born-to-be-wild.jpg',
-            'title' => 'Come On Part 1 (Let The Good Times Roll)',
-            'artist' => 'Earl King',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/guitar-slim-the-things-that-i-used-to-do.jpg',
-            'title' => 'The Things That I Used To Do',
-            'artist' => 'Guitar Slim',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/john-mayall-blue-breakers-with-eric-clapton-john-mayall-blue-breakers-with-eric-clapton.jpg',
-            'title' => 'Hideaway',
-            'artist' => 'John Mayall Blue Breakers With Eric Clapton',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/steve-miller-band-book-of-dreams-1658170138.jpg',
-            'title' => 'Jet Airliner',
-            'artist' => 'Steve Miller Band',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/booker-t-mgs-green-onions.jpg',
-            'title' => 'Green Onions',
-            'artist' => 'Booker T. & The M.G.\'s',
-        ],
-//        [
-//            'img' => '',
-//            'title' => 'Folsom Prison Blues',
-//            'artist' => 'Johnny Cash',
-//        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/muddy-waters-rolling-stone.jpg',
-            'title' => 'Got My Mojo Working',
-            'artist' => 'Muddy Waters',
-        ],
-//        [
-//            'img' => '',
-//            'title' => 'Sweet Home Chicago',
-//            'artist' => 'Robert Johnson',
-//        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/sonny-boy-williamson-more-folk-blues.jpg',
-            'title' => 'Help Me',
-            'artist' => 'Sonny Boy Williamson',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/shawn-mendes-illuminate.jpg',
+            'title' => 'Mercy',
+            'artist' => 'Shawn Mendes',
         ],
     ];
-
-    $country = [
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/hank-williams-i-saw-the-light.jpg',
-            'title' => 'I Saw The Light',
-            'artist' => 'Hank Williams',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/blake-shelton-bringing-back-the-sunshine.jpg',
-            'title' => 'Sangría',
-            'artist' => 'Blake Shelton',
-        ],
+$soul = [
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/alicia-keys-fallin-1649335656.jpg',
+        'title' => 'Fallin\'',
+        'artist' => 'Alicia Keys',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/ben-king-dont-play-that-song.jpg',
+        'title' => 'Stand By Me',
+        'artist' => 'Ben King',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/bill-withers-aint-no-sunshine.jpg',
+        'title' => 'Ain\'t No Sunshine',
+        'artist' => 'Bill Withers',
+    ],
 //        [
 //            'img' => '',
-//            'title' => 'Mr. Bojangles',
-//            'artist' => 'Nitty Gritty Dirt Band',
+//            'title' => 'Me and Your Mama',
+//            'artist' => 'Childish Gambino',
 //        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/shania-twain-come-on-over.jpg',
-            'title' => 'From This Moment',
-            'artist' => 'Shania Twain',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/blake-shelton-red-river-blue.jpg',
-            'title' => 'Hicktown',
-            'artist' => 'Jason Aldean',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/carrie-underwood-jesus-take-the-wheel-1628912212.jpg',
-            'title' => 'Jesus, Take The Wheel',
-            'artist' => 'Carrie Underwood',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/313381-card-thumbnail-maxres-1627646906.jpg',
-            'title' => 'Tennessey Whiskey',
-            'artist' => 'Chris Stapleton',
-        ],
-//        [
-//            'img' => '',
-//            'title' => 'Tequila',
-//            'artist' => 'Dan + Shay',
-//        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/florida-georgia-line-heres-to-the-good-times.jpg',
-            'title' => 'Cruise',
-            'artist' => 'Florida Georgia Line',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/garth-brooks-friends-in-low-places.jpg',
-            'title' => 'Friends In Low Places',
-            'artist' => 'Garth Brooks',
-        ],
-    ];
-
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/diana-ross-and-lionel-richie-endless-love.jpg',
+        'title' => 'Endless Love',
+        'artist' => 'Diana Ross & Lionel Richie',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/james-brown-i-got-you.jpg',
+        'title' => 'I Feel Good',
+        'artist' => 'James Brown',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/john-legend-love-in-the-future.jpg',
+        'title' => 'I Swear',
+        'artist' => 'John Legend',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/nelly-50.jpg',
+        'title' => 'Just A Dream',
+        'artist' => 'Nelly',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/Rihanna-Umbrella.jpg',
+        'title' => 'Umbrella',
+        'artist' => 'Rihanna',
+    ],
+];
     $electronic = [
 //        [
 //            'img' => '',
@@ -474,110 +506,4 @@
             'title' => 'Close To Me',
             'artist' => 'Ellie Goulding, Diplo, Swae Lee',
         ],
-    ];
-
-    $soul = [
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/alicia-keys-fallin-1649335656.jpg',
-            'title' => 'Fallin\'',
-            'artist' => 'Alicia Keys',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/ben-king-dont-play-that-song.jpg',
-            'title' => 'Stand By Me',
-            'artist' => 'Ben King',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-september/album-art/bill-withers-aint-no-sunshine.jpg',
-            'title' => 'Ain\'t No Sunshine',
-            'artist' => 'Bill Withers',
-        ],
-//        [
-//            'img' => '',
-//            'title' => 'Me and Your Mama',
-//            'artist' => 'Childish Gambino',
-//        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/diana-ross-and-lionel-richie-endless-love.jpg',
-            'title' => 'Endless Love',
-            'artist' => 'Diana Ross & Lionel Richie',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/james-brown-i-got-you.jpg',
-            'title' => 'I Feel Good',
-            'artist' => 'James Brown',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/john-legend-love-in-the-future.jpg',
-            'title' => 'I Swear',
-            'artist' => 'John Legend',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/nelly-50.jpg',
-            'title' => 'Just A Dream',
-            'artist' => 'Nelly',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2021-jan/album-art/Rihanna-Umbrella.jpg',
-            'title' => 'Umbrella',
-            'artist' => 'Rihanna',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/shawn-mendes-illuminate.jpg',
-            'title' => 'Mercy',
-            'artist' => 'Shawn Mendes',
-        ],
-    ];
-
-    $acoustic = [
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/the-beatles-the-beatles-white-album.jpg',
-            'title' => 'Blackbird',
-            'artist' => 'The Beatles',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/kansas-point-of-know-return.jpg',
-            'title' => 'Dust In The Wind',
-            'artist' => 'Kansas',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-june/album-art/creedence-clearwater-revival-have-you-ever-seen-the-rain.jpg',
-            'title' => 'Have You Ever Seen The Rain',
-            'artist' => 'Creedence Clearwater Revival',
-        ],
-//        [
-//            'img' => '',
-//            'title' => 'Fire and Rain',
-//            'artist' => 'James Taylor',
-//        ],
-//        [
-//            'img' => '',
-//            'title' => 'Better Together',
-//            'artist' => 'Jack Johnson',
-//        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/oasis-wonderwall-1629262609.jpeg',
-            'title' => 'Wonderwall',
-            'artist' => 'Oasis',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/ed-sheeran-x.jpg',
-            'title' => 'Photograph',
-            'artist' => 'Ed Sheeran',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/260375-card-thumbnail-maxres-1592340433.jpg',
-            'title' => 'Take It Easy',
-            'artist' => 'Eagles',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/vance-joy-dream-your-life-away.jpg',
-            'title' => 'Georgia',
-            'artist' => 'Vance Joy',
-        ],
-//        [
-//            'img' => '',
-//            'title' => 'Country Roads',
-//            'artist' => 'John Denver',
-//        ],
     ];

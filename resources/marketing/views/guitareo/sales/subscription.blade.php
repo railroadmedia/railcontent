@@ -265,23 +265,13 @@
                     'instructor' => 'Rob Scallon',
                     ],
                     [
-                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/rhythm-groove.jpg',
-                    'title' => 'Rhythm<br> & Groove ',
-                    'instructor' => 'Sami Ghawi',
-                    ],
-                    [
-                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/timing-feel.jpg',
-                    'title' => 'Timing<br> & Feel',
-                    'instructor' => 'David Becker',
-                    ],
-                    [
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/musical-lanes.jpg',
-                    'title' => 'Musical<br> Lanes',
+                    'title' => 'Creating The Perfect <br> Guitar Part',
                     'instructor' => 'Mark Lettieri',
                     ],
                     [
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/add-power-to-your-playing.jpg',
-                    'title' => 'Add Power To<br> Your Playing',
+                    'title' => 'Better <br> Guitar Solos',
                     'instructor' => 'Dave Weiner',
                     ],
                     [
@@ -294,6 +284,16 @@
                     'title' => 'The Anatomy<br> of a Song',
                     'instructor' => 'Pete Thorn',
                     ],
+                    [
+                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/looping.jpg',
+                    'title' => 'Looping',
+                    'instructor' => 'David Becker',
+                    ],
+                    [
+                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/altered-open-tunings.jpg',
+                    'title' => 'Altered &<br> Open Tunings',
+                    'instructor' => 'Don Ross',
+                    ],
                 ]
             ],
             [
@@ -303,11 +303,6 @@
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/rock-guitar.jpg',
                     'title' => 'Rock<br> Guitar ',
                     'instructor' => 'Ayla Tesler-Mabé',
-                    ],
-                    [
-                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/punk-rock.jpg',
-                    'title' => 'Punk<br> Rock',
-                    'instructor' => 'Kent Shores',
                     ],
                     [
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/surf-guitar.jpg',
@@ -339,6 +334,11 @@
                     'title' => 'Shred<br> Guitar',
                     'instructor' => 'Dean Lamb',
                     ],
+                    [
+                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/musical-lanes.jpg',
+                    'title' => 'Fusion <br> /Neo-Soul',
+                    'instructor' => 'Mark Lettieri',
+                    ],
                 ]
             ],
             [
@@ -353,16 +353,6 @@
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/getting-started-on-the-electric.jpg',
                     'title' => 'Getting Started<br> On The Electric<br> Guitar',
                     'instructor' => 'Ayla Tesler-Mabé',
-                    ],
-                    [
-                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/altered-open-tunings.jpg',
-                    'title' => 'Altered &<br> Open Tunings',
-                    'instructor' => 'Don Ross',
-                    ],
-                    [
-                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/looping.jpg',
-                    'title' => 'Looping',
-                    'instructor' => 'David Becker',
                     ],
                     [
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/picking.jpg',
@@ -383,6 +373,16 @@
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/bending-virbrato.jpg',
                     'title' => 'Bending &<br> Vibrato',
                     'instructor' => 'Ayla Tesler-Mabé',
+                    ],
+                    [
+                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/rhythm-groove.jpg',
+                    'title' => 'Rhythm<br> & Groove ',
+                    'instructor' => 'Sami Ghawi',
+                    ],
+                    [
+                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/timing-feel.jpg',
+                    'title' => 'Timing<br> & Feel',
+                    'instructor' => 'David Becker',
                     ],
                 ]
             ],
