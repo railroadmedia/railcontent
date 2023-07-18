@@ -114,12 +114,12 @@
 
         <!-- PLAYLIST INFO: clickable link -->
         <a  :href="listElement.url"
-            class="tw-flex tw-w-full tw-text-[#0D0D0D] dark:tw-text-white"
+            class="playlist-info-link tw-flex tw-w-full tw-text-[#0D0D0D] dark:tw-text-white"
             :class="props.isListView ? '' : 'tw-col-span-4'"
         >
             <div class="tw-w-full" :class="props.isListView ? 'tw-grid tw-grid-cols-10 tw-items-center' : '' ">
                 <!--name-->
-                <p class="tw-font-bold tw-truncate tw-w-full"
+                <p class="playlist-info-link-name tw-font-bold tw-truncate tw-w-full"
                    :class="props.isListView ? 'tw-col-span-10 md:tw-col-span-7 xl:tw-col-span-2 tw-pl-2 md:tw-pl-[19px] tw-pr-2' : '' "
                 >
                     {{ listElement.name }}
@@ -184,3 +184,9 @@
         </div>
     </div>
 </template>
+
+<style>
+.playlist-info-link:hover .playlist-info-link-name {
+    text-decoration: underline;
+}
+</style>
