@@ -184,7 +184,6 @@
                 </div>
             </div>
         </section>
-<<<<<<< HEAD
 
         <section class="tw-text-center tw-text-white  tw-bg-cover tw-bg-center" style="background-color:#2a2f34;">
             <div class="tw-max-w-[1600px] tw-mx-auto tw-relative tw-pt-10 sm:tw-pt-14 lg:tw-pt-20">
