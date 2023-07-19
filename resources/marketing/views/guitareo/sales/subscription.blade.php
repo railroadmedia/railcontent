@@ -211,31 +211,61 @@
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/method.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Develop your core skills, techniques, and musicality to play confidently in any setting. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/method.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to help you see results.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/practical-assignments.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guided-workouts.jpg',
                 'title' => 'Guided Workouts',
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guided-workouts.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches-thumb2.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'The best guitarists are here – including Grammy Award winners and touring musicians.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches-thumb2.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/downloadable-videos.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global guitar community. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/personalized-support.jpg',
+                    ],
+                ]
             ],
         ];
     @endphp
@@ -581,7 +611,7 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
-        'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-spread.png',
+        'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-collage.png',
         ])
     @endif
 
