@@ -224,7 +224,7 @@
             ])
         @elseif(!empty($songsVersion))
             @include('musora.sales.components.header-section', [
-                'header' => 'Learn piano from real <br> Play your favorite songs.',
+                'header' => 'Learn piano from real teachers.<br> Play your favorite songs.',
                 'desc' => ' Find and play the songs you love. Download, print, and<br class="hidden sm:inline">   play 1000+ songs. Plus get flexible, fun lessons and<br class="hidden sm:inline">  unlimited personal support from real teachers.',
                 'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
@@ -236,6 +236,7 @@
         @else
             @include('musora.sales.components.header-section', [
                 'header' => 'Online piano lessons<br> for all skill levels.',
+                'underline' => true,
                 'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
                 'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',

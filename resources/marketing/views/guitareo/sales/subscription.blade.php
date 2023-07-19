@@ -203,6 +203,7 @@
 
     @include('musora.sales.components.header-section', [
         'header' => 'Online guitar lessons<br> for all skill levels.',
+            'underline' => true,
         'desc' => 'Learn the guitar faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
         'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/header-thumb.jpg',
         'promoThumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/jan-thumb.png',

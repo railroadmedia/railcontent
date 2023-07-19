@@ -202,6 +202,7 @@
     @else
         @include('musora.sales.components.header-section', [
             'header' => 'Online drum lessons<br> for all skill levels.',
+            'underline' => true,
             'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> thousands of songs and unlimited personal support.',
             'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
             'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
