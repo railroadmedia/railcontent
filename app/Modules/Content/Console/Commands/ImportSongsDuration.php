@@ -57,12 +57,12 @@ class ImportSongsDuration extends Command
             $chunks = array_chunk($playlists, $startIndex);
 
             $count = count($playlists);
-            $this->info('Playlists number that should be updated:::'.$total);
+            $this->info('Playlists number that should be updated:::'.$count);
             foreach ($chunks as $playlistIds) {
                 $durations =
                     DB::table('railcontent_content_fields')
                         ->selectRaw(
-                            'sum(length_in_seconds) as duration, railcontent_user_playlist_content.user_playlist_id as playlist_id'
+                            'sum(f2.value) as duration, railcontent_user_playlist_content.user_playlist_id as playlist_id'
                         )
                         ->join(
                             'railcontent_content',
@@ -71,6 +71,13 @@ class ImportSongsDuration extends Command
                             'railcontent_content.id'
                         )
                         ->join(
+                            'railcontent_content_fields as f2',
+                            'railcontent_content.id',
+                            '=',
+                            'f2.content_id'
+                        )
+
+                        ->join(
                             'railcontent_user_playlist_content',
                             'railcontent_content_fields.content_id',
                             '=',
@@ -78,6 +85,7 @@ class ImportSongsDuration extends Command
                         )
                         ->whereIn('railcontent_user_playlist_content.user_playlist_id', $playlistIds)
                         ->where('railcontent_content_fields.key', '=', 'video')
+                        ->where('f2.key', '=', 'length_in_seconds')
                         ->groupBy('railcontent_user_playlist_content.user_playlist_id')
                         ->orderBy('railcontent_user_playlist_content.user_playlist_id', 'asc')
                         ->get();
