@@ -235,31 +235,61 @@
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/10-level-cirriculum.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'The most trusted step-by-step video lessons for every technique, pattern, and style.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/10-level-cirriculum.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'Keep up your progress with clear assignments and handy practice tools for every level.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/practical-assignments.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts.jpg',
                 'title' => 'Guided Workouts',
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'The best drummers are here -- including Grammy Award winners and touring musicians.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/world-class-teachers.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/downloadable-videos.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global drum community.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/personalized-support.jpg',
+                    ],
+                ]
             ],
         ];
     @endphp
@@ -610,7 +640,7 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
-        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-spread.png',
+        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-collage.png',
         ])
     @endif
 

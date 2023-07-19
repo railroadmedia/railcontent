@@ -234,31 +234,61 @@
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/method.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Turn your desire to sing into passionate practice with useful lessons and exercises.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/method.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to guide you along the way.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/practical-assignments.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/guided-workouts.jpg',
                 'title' => 'Warm-Up Routines',
                 'desc' => 'Access our quick warm-up routines to fit any schedule, ranging from 5 to 20 minutes.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/guided-workouts.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'Gain insights from vocal coaches, Grammy-Award winners, and chart-topping performers.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/world-class-teachers.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/downloadable-videos.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global singing community.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/personalized-support.jpg',
+                    ],
+                ]
             ],
         ];
     @endphp
