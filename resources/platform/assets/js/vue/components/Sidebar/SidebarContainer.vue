@@ -1,9 +1,9 @@
 <script>
-
 export default {
   name: 'SidebarContainer',
   props: ['brand', 'isSidebarCollapsed', 'isSidebarHidden', 'forceSidebarHidden'],
 }
+
 </script>
 <template>
   <aside
@@ -12,7 +12,7 @@ export default {
     style="clip-path: inset(0 -200px 0 0);"
     :class="[
       isSidebarCollapsed && forceSidebarHidden ? 'lg:tw-w-0 ' : '',
-      isSidebarCollapsed && !isSidebarHidden && !forceSidebarHidden ? 'lg:tw-w-[68px] ' : '',
+      isSidebarCollapsed && !forceSidebarHidden ? 'lg:tw-w-[68px] ' : '',
       isSidebarHidden ? 'tw--left-64 ' : 'tw-left-0',
     ]"
   >
