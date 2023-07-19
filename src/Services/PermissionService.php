@@ -63,12 +63,7 @@ class PermissionService
      */
     public function getAll()
     {
-        /* TODO: revert this back to just
-         * $hash = 'permissions_' . CacheHelper::getKey();
-         * once we have caching issues resolved
-         * - Brandon 2023-07-19
-        */
-        $hash = 'permissions_all_' . CacheHelper::getKey();
+        $hash = 'permissions_' . CacheHelper::getKey();
         $results = CacheHelper::getCachedResultsForKey($hash);
 
         if (!$results) {
