@@ -2,7 +2,9 @@
     <div class="container max-w-xs sm:max-w-6xl mx-auto relative z-20">
         <h1 class="relative w-auto inline-block text-3xl sm:text-4xl lg:text-5xl">
             <strong>{!! $header !!}</strong>
-            <img class="w-64 lg:w-80 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-7" style="right:3%" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png" alt="underline" fetchpriority="high">
+            @if(!empty($underline))
+                <img class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png" alt="underline" fetchpriority="high">
+            @endif
         </h1>
         <h6 class="leading-relaxed sm:mt-6 mb-4 sm:mb-7 px-5 sm:px-0 max-w-xs sm:max-w-full">{!! $desc !!}</h6>
         <a class="sm:mx-1 w-full sm:w-56 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"

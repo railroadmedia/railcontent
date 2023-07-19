@@ -133,6 +133,15 @@ img {
 }
 
 .join {
+    i {
+        transition: all .3s;
+        position: relative;
+        right: 0;
+    }
+
+    &:hover i {
+        right: -3px;
+    }
     &.smaller {
         padding: 8px 30px;
         font-size: 16px;
