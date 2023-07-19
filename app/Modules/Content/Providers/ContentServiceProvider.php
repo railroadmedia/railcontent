@@ -8,6 +8,7 @@ use App\Modules\Content\Console\Commands\FixProgressOnUnpublishedContent;
 use App\Modules\Content\Console\Commands\ImportSongsDuration;
 use App\Modules\Content\Console\Commands\PredefinedPlaylists;
 use App\Modules\Content\Console\Commands\RebuildSearchIndexes;
+use App\Modules\Content\Console\Commands\RecalculatePlaylistDuration;
 use App\Modules\Content\Console\Commands\SongDuration;
 use App\Modules\Content\Models\ContentField;
 use App\Modules\Content\Observers\ContentFieldObserver;
@@ -37,6 +38,7 @@ class ContentServiceProvider extends ServiceProvider
                             MigrateMissingPlaylistsItems::class,
                             SongDuration::class,
                             ImportSongsDuration::class,
+                            RecalculatePlaylistDuration::class
                         ]);
     }
 }
