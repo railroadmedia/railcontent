@@ -104,7 +104,8 @@ Route::domain('{musoraDomain}')
                         'sonor-drums',
                         'rudiments',
                         'boot-camps',
-                        'song-tutorials'
+                        'song-tutorials',
+                        'drum-fest-international-2022',
                     ])
                     ->name('platform.content-type-catalog');
 
@@ -210,6 +211,7 @@ Route::domain('{musoraDomain}')
                             'recording',
                             'play-alongs',
                             'song-tutorials',
+                            'drum-fest-international-2022',
                         ]
                     )
                     ->name('platform.content.first-level');

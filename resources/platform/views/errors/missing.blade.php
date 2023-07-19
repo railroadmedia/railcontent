@@ -77,7 +77,7 @@
                                 <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3 tw-z-50 tw-items-center tw-justify-center">
                                     <div class="tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
                                         <h1 class="tw-text-5xl lg:tw-text-6xl tw-font-bold tw-mb-4 lg:tw-mb-6">Page not found</h1>
-                                        <h2 class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-2xl lg:tw-text-3xl tw-font-bold tw-mb-4">404 ERROR</h1>
+                                        <h2 class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-2xl lg:tw-text-3xl tw-font-bold tw-mb-4">404 ERROR</h2>
                                         <p class="tw-mb-8">The Page you're looking for doesn't exist.</p>
 
                                         <a href="javascript:history.back()" class="tw-btn-primary tw-bg-[#081825] tw-text-white dark:tw-bg-white dark:tw-text-[#00101D] tw-mb-4">Go Back</a>

@@ -93,9 +93,11 @@
         playlistsStore.getPlaylists(payload, token);
         //Update URL w/ new params
         const url = new URL(window.location.href);
-        url.searchParams.set('sortby_val', state.sortValue)
+        url.searchParams.set('sortby_val', state.sortValue);
         if(state.categories) url.searchParams.set('categories[]', state.categories)
-        url.searchParams.set('search', state.searchTerm)
+        url.searchParams.set('search', state.searchTerm);
+        url.searchParams.set('page', 1);
+        playlistsStore.resultsPage = 1;
         window.history.pushState({}, '', url);
         //Blur Input
         playlistSearch.value.blur();

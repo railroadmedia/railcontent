@@ -4,7 +4,7 @@
         <div class="flip-card-front card-inside">
             <section class="drum-shop h-full flex flex-col">
                 <div class="top-image @if(!empty($thumbnail_logo)) with-logo @endif"
-                     style="flex: 1; background-image:url(https://www.musora.com/musora-cdn/image/width=600,quality=85/{{$thumbnail}}"
+                     style="flex: 1; background-image:url(https://www.musora.com/musora-cdn/image/width=600,quality=95/{{$thumbnail}}"
                      ;>
                     @if (!empty($badgeText))
                         <span

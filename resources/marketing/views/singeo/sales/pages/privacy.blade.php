@@ -22,7 +22,7 @@
     @include("singeo.sales.partials._nav", [
         "joinVersion" => true,
     ])
-    <div class="hero-header px-4 py-12 md:py-20 lg:py-32 bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/background-order.jpg);">
+    <div class="hero-header px-4 py-12 md:py-20 lg:py-32 bg-black bg-top bg-cover" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/background-order.jpg);">
         <div class="container mx-auto">
             <h1 class="mx-auto text-center text-white text-2xl md:text-4xl font-bold">Privacy Policy</h1>
             <p class="text-sm text-center text-white opacity-75"><em>Last updated: September 2021</em></p>

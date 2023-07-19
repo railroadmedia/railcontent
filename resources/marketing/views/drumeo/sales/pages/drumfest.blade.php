@@ -7,7 +7,7 @@
     <meta name="description" content="Save on your Drumeo Membership + get FREE bonuses.">
     <meta property="og:description" content="Save on your Drumeo Membership + get FREE bonuses.">
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/festival/quebec-festival-header-bg.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/festival/quebec-festival-header-bg.jpg">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -24,8 +24,8 @@
         "scrollToJoin" => true,
     ])
 
-    <header class="bg-cover bg-top py-6 text-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/festival/quebec-festival-header-bg.jpg">
-        <img class="h-44 md:h-56 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/festival/quebec-festiva-logo.svg" alt="Quebec Festival Logo">
+    <header class="bg-cover bg-top py-6 text-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/festival/quebec-festival-header-bg.jpg">
+        <img class="h-44 md:h-56 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/festival/quebec-festiva-logo.svg" alt="Quebec Festival Logo">
     </header>
 
     <section class="py-12 sm:py-20 text-center text-white" style="background: #01050F;">
@@ -41,29 +41,29 @@
         </h6>
         <div class="md:grid md:grid-cols-3 md:gap-4 max-w-md md:max-w-3xl mx-auto mb-20 md:mb-32 px-6 sm:px-4 lg:px-2">
             <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#051124;">
-                <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-method.jpg"></div>
+                <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-method.jpg"></div>
                 <div class=" px-3 lg:px-4 py-5 lg:py-7">
                     <i class="text-4xl align-middle icon-drumeo-method text-drumeo"></i>
-                    <img class="h-5 ml-2 imgfilter-method lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method-text">
+                    <img class="h-5 ml-2 imgfilter-method lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg" alt="method-text">
                     <p class="mt-2" style="color:#A3AEC6;">
                         Step-by-step drum lessons for ALL skill levels.
                     </p>
                 </div>
             </div>
             <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#051124;">
-                <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-songs2.jpg"></div>
+                <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-songs2.jpg"></div>
                 <div class="px-3 lg:px-4 py-5 lg:py-7">
                     <i class="text-4xl align-middle icon-songs text-songs"></i>
-                    <img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
+                    <img class="h-5 ml-2 imgfilter-songs lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg" alt="songs-text">
                     <p class="mt-2" style="color:#A3AEC6;">
                         Play-along tools for 3100+ famous drum songs.
                     </p>
                 </div>
             </div>
             <div class="relative rounded-xl overflow-hidden" style="background-color:#051124;">
-                <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-coaches.jpg"></div>
+                <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/thumb-coaches.jpg"></div>
                 <div class="px-3 lg:px-4 py-5 lg:py-7">
-                    <img class="h-8 icon imgfilter-coaches" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon">
+                    <img class="h-8 icon imgfilter-coaches" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-icon.svg" alt="coaches-icon">
                     <img class="h-5 ml-2 imgfilter-coaches lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg" alt="coaches-text">
                     <p class="mt-2" style="color:#A3AEC6;">
                         Ongoing support from legendary drummers.

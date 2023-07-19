@@ -1,7 +1,7 @@
 <?php
     $bonuses = [
         [
-            'image' => 'https://cdn.musora.com/image/fetch/c_fill,w_300,q_auto:good/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
+            'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/eardrums.jpg',
             'title' => 'Drumeo EarDrums',
             'description' => 'Drumeo EarDrums reduce external volume by up to -29dB. That means you can play hard while protecting your ears.',
             'price' => floatval($productPrices['drumeo-eardrums']->price),

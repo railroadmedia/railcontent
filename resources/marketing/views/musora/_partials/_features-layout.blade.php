@@ -9,7 +9,7 @@
         @else
             <img
                 class="md:hidden mb-16"
-                src="https://www.musora.com/musora-cdn/image/width=900,quality=85/@yield('header-img')"
+                src="https://www.musora.com/musora-cdn/image/width=900,quality=95/@yield('header-img')"
                 alt="{{$page}} thumb"
                 fetchpriority="high"
             />
@@ -19,13 +19,13 @@
             <div class="mb-6">
                 <img
                     class="h-5 md:h-7 mr-2"
-                    src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png"
+                    src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png"
                     alt="musora logo"
                     fetchpriority="high"
                 />
                 <img
                     class="h-6 md:h-10"
-                    src="https://www.musora.com/musora-cdn/image/width=150,quality=85/@if($page === 'method')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg @elseif($page === 'coaches')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg @elseif($page === 'songs')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg @endif"
+                    src="https://www.musora.com/musora-cdn/image/width=150,quality=95/@if($page === 'method')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/method-text.svg @elseif($page === 'coaches')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/coaches-text.svg @elseif($page === 'songs')https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-text.svg @endif"
                     alt="{{$page}} logo"
                     style="filter:brightness(0) invert(1)"
                     fetchpriority="high"
@@ -38,10 +38,10 @@
                 @yield('header-img')
             @else
                 <picture>
-                    <source media="(min-width: 500px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/@yield('header-img')">
+                    <source media="(min-width: 500px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/@yield('header-img')">
                     <img
                         class="rounded-t-xl md:h-72 lg:h-80 hidden md:inline-block @if($page === 'songs') cursor-pointer @endif"
-                        src="https://www.musora.com/musora-cdn/image/width=550,quality=85/@yield('header-img')"
+                        src="https://www.musora.com/musora-cdn/image/width=550,quality=95/@yield('header-img')"
                         alt="{{$page}} thumb"
                         @if($page === 'songs') x-on:click="soundslice = true" @endif
                         fetchpriority="high"

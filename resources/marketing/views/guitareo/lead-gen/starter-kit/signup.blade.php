@@ -32,13 +32,13 @@
             <div class="flex flex-col-reverse sm:flex-row">
                 <div class="sm:w-3/4">
                     <picture>
-                        <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
-                        <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
-                        <img class="logo" src="https://www.musora.com/musora-cdn/image/width=350,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png" alt="logo">
+                        <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
+                        <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
+                        <img class="logo" src="https://www.musora.com/musora-cdn/image/width=350,quality=95/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png" alt="logo">
                     </picture>
                 </div>
                 <div class="text-center sm:w-1/4">
-                    <img class="circle-nate" src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://d122ay5chh2hr5.cloudfront.net/gl-sales/nate-circle.png" alt="nate-circle">
+                    <img class="circle-nate" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://d122ay5chh2hr5.cloudfront.net/gl-sales/nate-circle.png" alt="nate-circle">
                 </div>
             </div>
             <div>
@@ -136,9 +136,9 @@
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <div class="logo">
                 <picture>
-                    <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
-                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
-                    <img src="https://www.musora.com/musora-cdn/image/width=330,quality=85/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png" alt="logo">
+                    <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
+                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png">
+                    <img src="https://www.musora.com/musora-cdn/image/width=330,quality=95/https://d122ay5chh2hr5.cloudfront.net/starter-kit/logo-green.png" alt="logo">
                 </picture>
             </div>
             <p>

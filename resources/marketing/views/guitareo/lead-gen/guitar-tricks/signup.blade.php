@@ -16,21 +16,21 @@
 
     <style>
         .header-bg {
-            background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/header.jpg');
+            background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/header.jpg');
             background-position-y: top;
             background-position-x: center;
         }
 
         @media (min-width:768px) {
             .header-bg {
-                background-image:url('https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/header.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/header.jpg');
                 background-position: center;
             }
         }
 
         @media (min-width:1024px) {
             .header-bg {
-                background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/header.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/header.jpg');
             }
         }
     </style>
@@ -113,7 +113,7 @@
                 @foreach ($steps as $step)
                     <div class="w-full step @if(empty($lesson['last'])) mb-10 @endif sm:w-1/2 lg:w-1/3 lg:mb-12">
                         <div class="pic-wrap relative mx-auto">
-                            <img src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/{{ $step['img'] }}">
+                            <img src="https://www.musora.com/musora-cdn/image/width=1300,quality=95/{{ $step['img'] }}">
                             @if ($step['exclusive'])
                                 <p class="absolute font-bold text-xs leading-none uppercase -top-2 -right-7 md:text-sm md:-top-3 md:-right-9" style="font-family: Permanent Marker, sans-serif; transform: rotate(35deg);">Exclusive<br>
                                     @if ($step['commercial'])

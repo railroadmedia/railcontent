@@ -32,10 +32,10 @@
                 {{--"noBreadcrumb" => true--}}
             {{--])--}}
 
-    <header class="text-center text-white py-5 md:py-8 bg-top bg-no-repeat relative" style="background-color:#000419;background-image: url(https://www.musora.com/musora-cdn/image/width=1900,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/header2.jpg);">
+    <header class="text-center text-white py-5 md:py-8 bg-top bg-no-repeat relative" style="background-color:#000419;background-image: url(https://www.musora.com/musora-cdn/image/width=1900,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/header2.jpg);">
         <div class="container mx-auto relative z-10">
             <i class="fas fa-play play-button autoplay-video mt-40 md:mt-56 lg:mt-64 mb-3 md:mb-3" data-open="trailer"></i><br>
-            <img class="h-20 md:h-32 lg:h-40" src="https://www.musora.com/musora-cdn/image/width=980,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/logo.png"><br>
+            <img class="h-20 md:h-32 lg:h-40" src="https://www.musora.com/musora-cdn/image/width=980,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/logo.png"><br>
             <h4 class="mt-2 mb-5">Everything You Need To Start Singing Now</h4>
             <a class="join" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1&redirect=/order">START SINGING FOR
                 @if(floatval($productPrices['singing-starter-kit']->discounted_price) < floatval($productPrices['singing-starter-kit']->price))
@@ -52,7 +52,7 @@
 
     <section class="text-white sm:px-5 sm:py-12 relative" style="background:#000419;">
         <div class="container mx-auto relative max-w-5xl">
-            <div class="py-6 sm:py-8 lg:py-14 px-4 sm:px-5 lg:px-10 bg-cover overflow-hidden sm:rounded-2xl bg-center sm:bg-left lazyload" {{--style="background-position: 60% 50%;"--}} data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/intro2.jpg">
+            <div class="py-6 sm:py-8 lg:py-14 px-4 sm:px-5 lg:px-10 bg-cover overflow-hidden sm:rounded-2xl bg-center sm:bg-left lazyload" {{--style="background-position: 60% 50%;"--}} data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/intro2.jpg">
                 <div class="w-full sm:w-3/5 lg:w-1/2 relative z-10">
                     <p class="leading-tight text-left">Start your singing journey the <em>right</em> way with The Singing Starter Kit.
                         <br><br>
@@ -120,11 +120,11 @@
                 @endphp
                 @foreach($lessons as $lesson)
                     <div class="w-1/2 sm:w-1/3 p-1 sm:p-1.5">
-                        <img class="rounded-xl cursor-pointer hover:opacity-80 transition-opacity lazyload" data-open="lesson{{ $lesson['lesson'] }}" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $lesson['image'] }}">
+                        <img class="rounded-xl cursor-pointer hover:opacity-80 transition-opacity lazyload" data-open="lesson{{ $lesson['lesson'] }}" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $lesson['image'] }}">
                     </div>
 
                     <div class="reveal" style="max-width:600px" id="lesson{{ $lesson['lesson'] }}" data-reveal data-reset-on-close="false">
-                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $lesson['image'] }}">
+                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $lesson['image'] }}">
                         <div class="p-4">
                             <h3 class="leading-tight mb-3"><strong>{{ $lesson['title'] }}</strong></h3>
                             <h6 class="leading-normal">{{ $lesson['description'] }}</h6>
@@ -135,11 +135,11 @@
         </div>
     </section>
 
-    <section class="lisa-bio text-white pt-10 md:pt-44 lg:pt-64 pb-0 md:pb-16 lg:pb-36 px-4 relative bg-cover bg-top lazyload" style="background-color:#100924;" data-bg="https://www.musora.com/musora-cdn/image/width=1900,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/bio-bg.jpg">
+    <section class="lisa-bio text-white pt-10 md:pt-44 lg:pt-64 pb-0 md:pb-16 lg:pb-36 px-4 relative bg-cover bg-top lazyload" style="background-color:#100924;" data-bg="https://www.musora.com/musora-cdn/image/width=1900,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/bio-bg.jpg">
         <div class="container mx-auto max-w-5xl relative z-10">
             <div class="md:flex flex-wrap md:w-7/12 ml-auto order-1 text-center md:text-left">
                 <h5 class="m-0 leading-none"><strong>Meet Your Singing Teacher</strong></h5>
-                <img class="h-10 md:h-20 lg:h-24 mt-2 md:mt-3 mb-44 md:mb-5" src="https://www.musora.com/musora-cdn/image/width=880,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/lisa.png">
+                <img class="h-10 md:h-20 lg:h-24 mt-2 md:mt-3 mb-44 md:mb-5" src="https://www.musora.com/musora-cdn/image/width=880,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/lisa.png">
                 <p class="leading-normal md:leading-relaxed text-left">Lisa Witt has been teaching singing for over {{ date('Y') - 2008 }} years, and is arguably the happiest vocal coach on the planet! With a background in classical and contemporary vocal training combined with a deep love for popular music, Lisa focuses on guiding her students (that’s you!) to find their own, unique sound. Using simple routines, practical exercises, and tips for faster results, Lisa helps her students gain strength, control, and confidence in singing.</p>
             </div>
         </div>
@@ -154,7 +154,7 @@
                     <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(to bottom, #1e0338, #060416)">
                         <p class="leading-normal md:leading-relaxed">"I practice every day driving to work. I have learned things about my voice I never imagined I could do.  I now take note of my breath before starting every song. I have more control, and sing consciously, instead of just opening my mouth and pushing out noise"</p>
                         <div class="flex items-center pt-5 md:pt-8">
-                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=140,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/diane.jpg">
+                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=140,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/diane.jpg">
                             <div class="text pl-3 md:pl-5">
                                 <p class="text-singeo leading-none"><strong>Diane Smith</strong></p>
                                 <p class="text-singeo leading-none pt-1">Burnley, England</p>
@@ -166,7 +166,7 @@
                     <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(to bottom, #1e0338, #060416)">
                         <p class="leading-normal md:leading-relaxed">"I was a singing teacher before I changed careers. I missed singing. Singeo absolutely provided the vocal exercises I needed to pull my voice back into shape. There's nothing else out there in a self-contained course that I can use when and where it suits my schedule. Great course. Well worth the money."</p>
                         <div class="flex items-center pt-5 md:pt-8">
-                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=140,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/susan.jpg">
+                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=140,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/susan.jpg">
                             <div class="text pl-3 md:pl-5">
                                 <p class="text-singeo leading-none"><strong>Susan French</strong></p>
                                 <p class="text-singeo leading-none pt-1">California, USA</p>
@@ -178,7 +178,7 @@
                     <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(to bottom, #1e0338, #060416)">
                         <p class="leading-normal md:leading-relaxed">"For the first time, I sang at church and it felt wonderful! Was I terrific? Probably not.  Do I have to be? No!  Did I sing balanced? Yes!  Was I better than a month ago? Absolutely!!!!  Did I hate my voice? For once…no!   I have discovered that I don't have to be a professional to thoroughly ENJOY singing and have it enrich my life! I’m looking forward to many more “moments of wow” as my journey goes forward with Singeo!"</p>
                         <div class="flex items-center pt-5 md:pt-8">
-                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=140,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/kelly.jpg">
+                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=140,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/kelly.jpg">
                             <div class="text pl-3 md:pl-5">
                                 <p class="text-singeo leading-none"><strong>Kelly</strong></p>
                                 <p class="text-singeo leading-none pt-1">Indiana, USA</p>
@@ -193,7 +193,7 @@
     <section class="text-white pb-20 md:pb-20 lg:pb-24" style="background:#000419;">
         <div class="container mx-auto">
             <div class="flex items-start lg:items-center flex-wrap md:flex-nowrap max-w-5xl mx-auto px-5 md:px-6 lg:px-8 text-center md:text-left">
-                <img class="w-36 md:w-52 lg:w-60 mb-5 md:mb-0 mx-auto md:order-1 inline-block lazyload" data-src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/guarantee.png">
+                <img class="w-36 md:w-52 lg:w-60 mb-5 md:mb-0 mx-auto md:order-1 inline-block lazyload" data-src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/guarantee.png">
                 <div class="md:pr-8 lg:pr-10">
                     <h2 class="mb-4 lg:mb-7"><strong>Think you are the ONE person who actually CAN’T sing? </strong></h2>
                     <p class="leading-normal">You love to sing, so sing! The Singing Starter Kit comes with a full 90-day money-back guarantee so you can try singing risk-free. We want you to see (and HEAR) the positive changes in your voice as you gain strength and control through guided practice.</p>
@@ -204,7 +204,7 @@
 
     <section class="text-center text-white py-16 md:py-20 lg:py-24 bg-cover bg-left md:bg-center lazyload" style="background-color:#210436;" data-bg="https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/final-bg.jpg">
         <div class="container mx-auto">
-            <img class="h-20 md:h-32 lg:h-40" src="https://www.musora.com/musora-cdn/image/width=980,quality=85/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/logo.png"><br>
+            <img class="h-20 md:h-32 lg:h-40" src="https://www.musora.com/musora-cdn/image/width=980,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/logo.png"><br>
             <h4 class="mt-2 mt-3 leading-normal">Everything You Need To Start Singing Now</h4>
             <a class="join my-2 md:my-3" href="/ecommerce/add-to-cart?products[singing-starter-kit]=1&redirect=/order">START SINGING FOR
                 @if(floatval($productPrices['singing-starter-kit']->discounted_price) < floatval($productPrices['singing-starter-kit']->price))
