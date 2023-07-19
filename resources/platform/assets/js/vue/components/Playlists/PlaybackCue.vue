@@ -171,8 +171,14 @@ const handleExpandedView = (value) => {
     localStorage.setItem("playerExpanded", value);
 
     playlistsStore.playerExpanded = value;
+
     // collapse sidebar when player is expanded and use localstorage to remember the state when player is collapsed
-    if(value) pageContainerStore.isSidebarCollapsed = value; else pageContainerStore.isSidebarCollapsed = localStorage.getItem('isSidebarCollapsed') === 'true';
+    if(value){
+        pageContainerStore.isSidebarCollapsed = value;
+    }
+    else {
+        pageContainerStore.isSidebarCollapsed = localStorage.getItem('isSidebarCollapsed') === 'true';
+    }
 }
 
 //-----------Lifecycle Hooks -----------//
