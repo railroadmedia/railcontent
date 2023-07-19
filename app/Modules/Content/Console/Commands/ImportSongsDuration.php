@@ -57,58 +57,64 @@ class ImportSongsDuration extends Command
             $chunks = array_chunk($playlists, $startIndex);
 
             $count = count($playlists);
-
+            $this->info('Playlists number that should be updated:::'.$total);
             foreach ($chunks as $playlistIds) {
+                $durations =
+                    DB::table('railcontent_content_fields')
+                        ->selectRaw(
+                            'sum(length_in_seconds) as duration, railcontent_user_playlist_content.user_playlist_id as playlist_id'
+                        )
+                        ->join(
+                            'railcontent_content',
+                            'railcontent_content_fields.value',
+                            '=',
+                            'railcontent_content.id'
+                        )
+                        ->join(
+                            'railcontent_user_playlist_content',
+                            'railcontent_content_fields.content_id',
+                            '=',
+                            'railcontent_user_playlist_content.content_id'
+                        )
+                        ->whereIn('railcontent_user_playlist_content.user_playlist_id', $playlistIds)
+                        ->where('railcontent_content_fields.key', '=', 'video')
+                        ->groupBy('railcontent_user_playlist_content.user_playlist_id')
+                        ->orderBy('railcontent_user_playlist_content.user_playlist_id', 'asc')
+                        ->get();
+                $videoDurations = (array_combine($durations->pluck('playlist_id')->toArray(), $durations->pluck( 'duration')->toArray()));
+
+                $songDuration =
+                    DB::table('railcontent_user_playlist_content')
+                        ->selectRaw(
+                            'sum(railcontent_content.length_in_seconds) as duration,  railcontent_user_playlist_content.user_playlist_id as playlist_id'
+                        )
+                        ->join(
+                            'railcontent_content_hierarchy',
+                            'railcontent_content_hierarchy.parent_id',
+                            '=',
+                            'railcontent_user_playlist_content.content_id'
+                        )
+                        ->join(
+                            'railcontent_content',
+                            'railcontent_content_hierarchy.child_id',
+                            '=',
+                            'railcontent_content.id'
+                        )
+                        ->whereIn('railcontent_user_playlist_content.user_playlist_id', $playlistIds)
+                        ->where('railcontent_content.type', '=', 'assignment')
+                        ->groupBy('railcontent_user_playlist_content.user_playlist_id')
+                        ->get();
+
+                $songsDurations = (array_combine($songDuration->pluck('playlist_id')->toArray(), $songDuration->pluck( 'duration')->toArray()));
+
                 foreach ($playlistIds as $playlistId) {
                     $total++;
-                    // dd($playlistIds);
-                    $duration =
-                        DB::table('railcontent_content_fields')
-                            ->selectRaw(
-                                'sum(length_in_seconds) as duration'
-                            )
-                            ->join(
-                                'railcontent_content',
-                                'railcontent_content_fields.value',
-                                '=',
-                                'railcontent_content.id'
-                            )
-                            ->join(
-                                'railcontent_user_playlist_content',
-                                'railcontent_content_fields.content_id',
-                                '=',
-                                'railcontent_user_playlist_content.content_id'
-                            )
-                            ->whereIn('railcontent_user_playlist_content.user_playlist_id', [$playlistId])
-                            ->where('railcontent_content_fields.key', '=', 'video')
-                            ->orderBy('railcontent_content_fields.id', 'asc')
-                            ->first();
-                    $songDuration =
-                        DB::table('railcontent_user_playlist_content')
-                            ->selectRaw(
-                                'sum(railcontent_content.length_in_seconds) as duration'
-                            )
-                            ->join(
-                                'railcontent_content_hierarchy',
-                                'railcontent_content_hierarchy.parent_id',
-                                '=',
-                                'railcontent_user_playlist_content.content_id'
-                            )
-                            ->join(
-                                'railcontent_content',
-                                'railcontent_content_hierarchy.child_id',
-                                '=',
-                                'railcontent_content.id'
-                            )
-                            ->whereIn('railcontent_user_playlist_content.user_playlist_id', [$playlistId])
-                            ->where('railcontent_content.type', '=', 'assignment')
-                            ->first();
 
                     $playlistDuration =
                         \DB::table('railcontent_user_playlists')
                             ->where('railcontent_user_playlists.id', '=', $playlistId)
                             ->update([
-                                         'duration' => ($duration->duration ?? 0) + ($songDuration->duration ?? 0),
+                                         'duration' => ($videoDurations[$playlistId] ?? 0) + ($songsDurations[$playlistId] ?? 0),
                                      ]);
                 }
                 $this->info('Playlists duration updated:::'.$total);
