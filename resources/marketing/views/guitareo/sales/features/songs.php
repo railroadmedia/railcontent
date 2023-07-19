@@ -55,6 +55,21 @@ $classic = [
         'title' => 'Have You Ever Seen The Rain',
         'artist' => 'Creedence Clearwater Revival',
     ],
+    [
+        'artist' => 'Rolling Stones',
+        'title' => 'Gimme Shelter',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/the-rolling-stones-gimme-shelter-1681282470.jpg',
+    ],
+    [
+        'artist' => 'heart',
+        'title' => 'Barracuda',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/heart-little-queen-1686894312.jpg',
+    ],
+    [
+        'artist' => 'Journey',
+        'title' => 'Don’t Stop Believing',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/journey-escape-1680514099.jpg',
+    ],
 ];
     $rock90s = [
         [
@@ -101,6 +116,41 @@ $classic = [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/305691-card-thumbnail-maxres-1622728126.jpg',
             'title' => 'Scar Tissue',
             'artist' => 'Red Hot Chili Peppers',
+        ],
+        [
+            'artist' => 'Rage Against the Machine',
+            'title' => 'Killing in the Name',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/rage-against-the-machine-rage-against-the-machine.jpg',
+        ],
+        [
+            'artist' => 'Pearl Jam',
+            'title' => 'Alive',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/pearl-jam-ten-1689788332.jpg',
+        ],
+        [
+            'artist' => 'Smashing Pumpkins',
+            'title' => 'Today',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/smashing-pumpkins-siamese-dream-1681920052.jpg',
+        ],
+        [
+            'artist' => 'Soundgarden',
+            'title' => 'Black Hole Sun',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/soundgarden-superunknown-1688279377.jpg',
+        ],
+        [
+            'artist' => 'The Cranberries',
+            'title' => 'Zombie',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/the-cranberries-no-need-to-argue-1682587131.jpg',
+        ],
+        [
+            'artist' => 'Alice in Chains',
+            'title' => 'Man in the Box',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/alice-in-chains-facelift.jpg',
+        ],
+        [
+            'artist' => 'Collective Soul',
+            'title' => 'Shine',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/collective-soul-hints-allegations-and-things-left-unsaid-1676534913.jpg',
         ],
     ];
     $modern = [
@@ -154,13 +204,23 @@ $classic = [
 //            'title' => 'Little Lion Man',
 //            'artist' => 'Mumford & Sons',
 //        ],
+        [
+            'artist' => 'The Killers',
+            'title' => 'Mr. Brightside',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/the-killers-hot-fuss.jpg',
+        ],
+        [
+            'artist' => 'Jimmy Eat World',
+            'title' => 'The Middle',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/jimmy-eat-world-the-middle-1675632907.jpg',
+        ],
+        [
+            'artist' => 'John Mayer',
+            'title' => 'Last Train Home',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/john-mayer-sob-rock.jpg',
+        ],
     ];
 $acoustic = [
-    [
-        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/the-beatles-the-beatles-white-album.jpg',
-        'title' => 'Blackbird',
-        'artist' => 'The Beatles',
-    ],
     [
         'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/kansas-point-of-know-return.jpg',
         'title' => 'Dust In The Wind',
@@ -201,6 +261,31 @@ $acoustic = [
 //            'title' => 'Country Roads',
 //            'artist' => 'John Denver',
 //        ],
+    [
+        'artist' => 'Extreme',
+        'title' => 'More Than Words',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/extreme-extreme-ii-pornograffitti.jpg',
+    ],
+    [
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/the-beatles-the-beatles-white-album.jpg',
+        'title' => 'Blackbird',
+        'artist' => 'The Beatles',
+    ],
+    [
+        'artist' => 'Tracy Chapman',
+        'title' => 'Fast Car',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/tracy-chapman-tracy-chapman-1676534808.jpg',
+    ],
+    [
+        'artist' => 'Pink Floyd',
+        'title' => 'Wish You Were Here',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/pink-floyd-wish-you-were-1675408894.jpg',
+    ],
+    [
+        'artist' => 'Plain White Tees',
+        'title' => 'hey There Delilah',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/plain-white-ts-all-that-we-needed.jpg',
+    ],
 ];
 $blues = [
     [
@@ -243,10 +328,64 @@ $blues = [
         'title' => 'Help Me',
         'artist' => 'Sonny Boy Williamson',
     ],
+    [
+        'artist' => 'Stevie Ray Vaughan',
+        'title' => 'Pride and Joy',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/stevie-ray-vaughan-pride-and-joy-1676354998.jpg',
+    ],
+    [
+        'artist' => 'John Lee Hooker',
+        'title' => 'Boogie Chillen',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/Boogie_Chillen_single_cover-1686131582.jpg',
+    ],
+    [
+        'artist' => 'Earl King',
+        'title' => 'Come On Part 1 (Let The Good Times Roll)',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/earl-king-trick-bag-the-best-of-1674758666.jpg',
+    ],
 ];
-
-
-
+$folk = [
+    [
+        'artist' => 'Bob Dylan',
+        'title' => 'Blowin in the Wind',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/bob-dylan-the-freewheelin-bob-dylan-1685435989.jpg',
+    ],
+    [
+        'artist' => 'America',
+        'title' => 'A Horse With No Name',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/america-america.jpg',
+    ],
+    [
+        'artist' => 'The Lumineers',
+        'title' => 'ho Hey',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/the-lumineers-the-lumineers.jpg',
+    ],
+    [
+        'artist' => 'Jim Croce',
+        'title' => 'Time in a Bottle',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/jim-croce-time-in-a-bottle-1684155591.jpg',
+    ],
+    [
+        'artist' => 'Bon Iver',
+        'title' => 'Skinny Love',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/bon-iver-for-emma-forever-ago-1679560576.jpg',
+    ],
+    [
+        'artist' => 'Simon & Garfunkel',
+        'title' => 'Scarborough Fair',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/simon-and-garfunkel-parsley-1674757907.jpg',
+    ],
+    [
+        'artist' => 'Neil Young',
+        'title' => 'harvest Moon',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/neil-young-harvest-moon.jpg',
+    ],
+    [
+        'artist' => 'Bob Dylan',
+        'title' => 'Don’t Think Twice, It’s Alright',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/bob-dylan-the-freewheelin-bob-dylan-1684215816.jpg',
+    ],
+];
 $country = [
     [
         'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/hank-williams-i-saw-the-light.jpg',
@@ -297,6 +436,36 @@ $country = [
         'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/garth-brooks-friends-in-low-places.jpg',
         'title' => 'Friends In Low Places',
         'artist' => 'Garth Brooks',
+    ],
+    [
+        'artist' => 'Johnny Cash',
+        'title' => 'Folsom Prison Blues',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/johnny-cash-at-folsom-prison-1681919828.jpg',
+    ],
+    [
+        'artist' => 'Dolly Parton',
+        'title' => 'Jolene',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/dolly-parton-jolene-1683701680.jpg',
+    ],
+    [
+        'artist' => 'Zac Brown Band',
+        'title' => 'Chicken Fried',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/zac-brown-band-chicken-fried-1681917054.jpg',
+    ],
+    [
+        'artist' => 'Glen Campbell',
+        'title' => 'Wichita Lineman',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/glen-campbell-wichita-lineman-1684846297.jpg',
+    ],
+    [
+        'artist' => 'Bradley Cooper & Lady Gaga',
+        'title' => 'Shallow',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/bradley-cooper-and-lady-gaga-a-star-is-born-soundtrack.jpg',
+    ],
+    [
+        'artist' => 'hicktown',
+        'title' => 'Jason Aldean',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/jason-aldean-jason-aldean.jpg',
     ],
 ];
 $metal = [
@@ -350,6 +519,21 @@ $metal = [
 //            'title' => 'Darker Still',
 //            'artist' => 'Parkway Drive',
 //        ],
+    [
+        'artist' => 'Avenged Sevenfold',
+        'title' => 'Bat Country',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/avenged-sevenfold-city-of-evil-1688450342.jpg',
+    ],
+    [
+        'artist' => 'Slipknot',
+        'title' => 'hivemind',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/slipknot-the-end-so-far-1686893144.jpg',
+    ],
+    [
+        'artist' => 'Iron Maiden',
+        'title' => 'The Trooper',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/iron-maiden-piece-of-mind-1676277303.jpeg',
+    ],
 ];
     $pop = [
         [
