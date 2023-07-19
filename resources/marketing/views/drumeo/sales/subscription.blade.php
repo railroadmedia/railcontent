@@ -157,28 +157,15 @@
     ])
 
     @php
-        $features = [
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drum-lessons-icon.svg',
-                'title' => 'Drum Lessons',
-                'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
-            ],
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/artist-course-icon2.svg',
-                'title' => 'Artist Courses',
-                'desc' => 'Courses and live events<br class="hidden sm:inline"> with drumming heroes. ',
-            ],
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/songs-icon.svg',
-                'title' => '5000+ Songs',
-                'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
-            ],
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/support-icon.svg',
-                'title' => '24/7 Support',
-                'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
-            ],
-        ];
+        $bubble1 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/dorothea-taylor.png';
+        $bubble2 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/todd-sucherman.png';
+        $bubble3 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/jared-falk.png';
+        $bubble4 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/hannah-welton.png';
+        $bubble5 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/larnell-lewis.png';
+        $bubble6 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/zack-grooves.png';
+        $bubble7 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/domino-santatonio.png';
+        $bubble8 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/aaron-spears.png';
+
         $slides = [
             [
                 'desc' => 'Drumeo is the real deal folks - a good place to study and realize one’s dreams.',
@@ -203,7 +190,7 @@
 
     @if(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
-            'header' => 'Learn beginner beats, fills and songs on the drums.',
+            'header' => 'Learn beginner beats, fills<br> and songs on the drums.',
             'desc' => 'Try Drumeo’s award-winning online drum lessons for 7 days FREE:',
             'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
             'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
@@ -214,8 +201,8 @@
         ])
     @else
         @include('musora.sales.components.header-section', [
-            'header' => 'Online drum lessons for all skill levels.',
-            'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
+            'header' => 'Online drum lessons<br> for all skill levels.',
+            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> thousands of songs and unlimited personal support.',
             'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
             'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
             'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo-m2.jpg',
