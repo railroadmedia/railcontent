@@ -160,6 +160,15 @@
     ])
 
     @php
+        $bubble1 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/rob-scallon.png';
+        $bubble2 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/ayla-tesler-mabe.png';
+        $bubble3 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/mark-lettieri.png';
+        $bubble4 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/pete-thorn.png';
+        $bubble5 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/dean-lamb.png';
+        $bubble6 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/sami-ghawi.png';
+        $bubble7 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/yvette-young.png';
+        $bubble8 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/kent-shores.png';
+
         $features = [
             [
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitar-lessons-icon.svg',
@@ -193,8 +202,8 @@
     @endphp
 
     @include('musora.sales.components.header-section', [
-        'header' => 'Online guitar lessons for all skill levels.',
-        'desc' => 'Learn the guitar faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
+        'header' => 'Online guitar lessons<br> for all skill levels.',
+        'desc' => 'Learn the guitar faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
         'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/header-thumb.jpg',
         'promoThumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/jan-thumb.png',
         'promoThumbM' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/jan-thumb-m.jpg',

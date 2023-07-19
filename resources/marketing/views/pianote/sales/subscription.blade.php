@@ -157,6 +157,15 @@
     ])
 
     @php
+        $bubble1 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/summer-swee-singh.png';
+        $bubble2 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/lisa-witt.png';
+        $bubble3 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/jesus-molina.png';
+        $bubble4 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/kevin-castro.png';
+        $bubble5 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/erskine-hawkins.png';
+        $bubble6 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/victoria-theodore.png';
+        $bubble7 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/sangah-noona.png';
+        $bubble8 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/cassi-falk.png';
+
         $features = [
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/piano-lesson-icon.svg',
@@ -204,8 +213,8 @@
     @if(empty($hideHeader) || !$hideHeader)
         @if(!empty($beginnerVersion))
             @include('musora.sales.components.header-section', [
-                'header' => 'Online piano lessons tailored for beginners.',
-                'desc' => 'Learn the piano faster with step-by-step lessons, friendly teachers, and songs perfect for your skill level.',
+                'header' => 'Online piano lessons<br> tailored for beginners.',
+                'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> friendly teachers, and songs perfect for your skill level.',
                 'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
                 'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
@@ -215,22 +224,19 @@
             ])
         @elseif(!empty($songsVersion))
             @include('musora.sales.components.header-section', [
-                'header' => 'Learn piano from real teachers. Play your favorite songs.',
-                'desc' => 'Find and play the songs you love. Download, print, and play 1000+ songs. Plus get flexible, fun lessons and unlimited personal support from real teachers.',
+                'header' => 'Learn piano from real <br> Play your favorite songs.',
+                'desc' => ' Find and play the songs you love. Download, print, and<br class="hidden sm:inline">   play 1000+ songs. Plus get flexible, fun lessons and<br class="hidden sm:inline">  unlimited personal support from real teachers.',
                 'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
                 'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
                 'pointOne' => '1000+ popular songs',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Learn anywhere, anytime',
-
-
-
             ])
         @else
             @include('musora.sales.components.header-section', [
-                'header' => 'Online piano lessons for all skill levels.',
-                'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
+                'header' => 'Online piano lessons<br> for all skill levels.',
+                'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
                 'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
                 'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
