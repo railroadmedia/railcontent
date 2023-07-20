@@ -224,8 +224,8 @@
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support.",
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",
-        "plusAnnualLink" => "/ty-annual",
-        "plusMonthlyLink" => "/ty-monthly",
+        "plusAnnualLink" => "/getting-started/ty-annual",
+        "plusMonthlyLink" => "/getting-started/ty-monthly",
     ])
     @include('musora.sales.components.trial-explanation', [
         'instrument' => 'drumming',
