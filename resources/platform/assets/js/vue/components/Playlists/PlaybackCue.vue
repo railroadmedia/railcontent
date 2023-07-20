@@ -177,7 +177,7 @@ const handleExpandedView = (value) => {
         pageContainerStore.isSidebarCollapsed = value;
     }
     else {
-        pageContainerStore.isSidebarCollapsed = localStorage.getItem('isSidebarCollapsed') === 'true';
+        pageContainerStore.isSidebarCollapsed = JSON.parse(localStorage.getItem('isSidebarCollapsed'));
     }
 }
 
@@ -196,6 +196,10 @@ onBeforeMount(() => {
     }
     if (localStorage.getItem("playerExpanded")) {
         playlistsStore.playerExpanded = JSON.parse(localStorage.getItem("playerExpanded"));
+        
+        if(playlistsStore.playerExpanded){
+            pageContainerStore.isSidebarCollapsed = true;
+        }
     }
 
     localStorage.setItem("playbackRepeatOn", false);
