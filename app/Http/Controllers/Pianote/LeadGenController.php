@@ -132,7 +132,7 @@ class LeadGenController extends BaseController
             case null:
                 return view('pianote.lead-gen.chord-hacks.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
-                return view('pianote.lead-gen.chord-hacks.thank-you');
+                return view('pianote.lead-gen.chord-hacks.thank-you', ['theme' => 'pianote']);
         }
 
         throw new NotFoundHttpException();
