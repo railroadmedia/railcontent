@@ -296,7 +296,7 @@ onBeforeMount(() => {
             :class="playlistsStore.playerExpanded ? 'lg:tw-flex-col-reverse' : '2xl:tw-flex-row'">
             <div class="tw-flex tw-flex-col tw-w-full">
                 <!--Player Wrapper -->
-                <div class="fluid tw-pb-3">
+                <div class="fluid">
                     <!-- Content Unavailable -->
                     <ContentUnavailable v-if="!released || needAccess" @goToNext="handleGoToNext"
                         :subscriptionCalendarId="subscriptionCalendarId" :bgImgUrl="thumbnailUrl"
@@ -352,24 +352,24 @@ onBeforeMount(() => {
                         </div>
                     </div>
                     <!-- Video Resources -->
-                    <div class="tw-container tw-mx-auto lean">
+                    <div class="lean">
                         <VideoResources :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
                             :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
                             :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                             :user-id="userId" :resources="videoResources" :show-add-to-list="true"
                             :show-complete-button="released && !needAccess" :relatedLesson="relatedLesson"
                             :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton" />
+                        <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
                         <RelatedLesson v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
                             :relatedLesson="relatedLesson.data[0]" :brand="brand" />
-                        <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
                     </div>
                 </div>
-                
+
                 <!-- Info Section -->
                 <slot name="info-section"></slot>
 
                 <!-- Assignments Section -->
-                <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
+                <div v-if="assignments.length > 0" class="tw-flex tw-flex-col tw-flex-grow tw-w-full">
                     <div class="tw-flex tw-flex-row pv-3 tw-w-full">
                         <h1 class="heading dark:tw-text-white">Assignments</h1>
                     </div>
