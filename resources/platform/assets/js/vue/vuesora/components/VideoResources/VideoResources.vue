@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="tw-flex tw-items-start tw-mb-3 tw-w-full tw-flex-wrap xl:tw-flex-nowrap">
+    <div class="tw-flex tw-items-start tw-mb-3 tw-w-full tw-flex-wrap">
 
       <div class="tw-flex tw-text-[#00101D] dark:tw-text-white tw-mr-auto">
         <h1 class="heading tw-py-2 tw-pr-4 xl:tw-pr-0">
@@ -8,7 +8,7 @@
         </h1>
       </div>
       <!-- Video CTAs -->
-      <div class="tw-flex tw-items-start tw-flex-shrink-0 tw-py-2 xl:tw-py-0">
+      <div class="tw-flex tw-items-start tw-flex-shrink-0 tw-py-2">
         <!-- Info Button -->
         <div v-if="showInfoButton" class="flex flex-column resource-button ph-1 tw-text-white">
           <button class="btn stacked" id="toggleInstructorInfo" @click="toggleInfo">
