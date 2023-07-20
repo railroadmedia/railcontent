@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row flex-wrap align-v-center tw-mb-2">
+    <div class="tw-flex tw-items-center tw-mb-2">
         <div class="flex flex-column pv-2">
             <div
                 class="flex flex-row nmh-1 flex-wrap"
