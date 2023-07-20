@@ -209,10 +209,11 @@ const onResize = (e) => {
     pageContainerStore.isSidebarHidden = true;
     pageContainerStore.isSidebarCollapsed = false;
   } else {
-    if(playlistsStore.playerExpanded) {
       pageContainerStore.isSidebarHidden = false;
-      pageContainerStore.isSidebarCollapsed = true;
-    }
+
+      if(playlistsStore.playerExpanded) {
+        pageContainerStore.isSidebarCollapsed = true;
+      }
   }
 }
 
@@ -259,8 +260,8 @@ onUpdated(() => {
       :isDarkModeSelected="isDarkModeSelected" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
       :canReferNewStudents="canReferNewStudents"
       :is-live="isLive"
-      @onCollapseSidebar="onCollapseSidebar" 
-      @onColorModeToggle="onColorModeToggle" 
+      @onCollapseSidebar="onCollapseSidebar"
+      @onColorModeToggle="onColorModeToggle"
     />
 
     <!-- Page Container -->
