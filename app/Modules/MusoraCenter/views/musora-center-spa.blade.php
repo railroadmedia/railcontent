@@ -8,7 +8,7 @@
     <link rel="icon" href="/dist/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Roboto:100:300,400,500,700,900|Material+Icons" rel="stylesheet">
 
-    @foreach(glob(app_path() . '/Modules/MusoraCenter/public/dist/js/*.js') as $assetPath)
+    @foreach(glob(public_path() . '/vendor/musora-center/dist/js/*.js') as $assetPath)
         <link href="vendor/musora-center/dist/js/{{ basename($assetPath) }}" rel="preload" as="script">
     @endforeach
 </head>
@@ -34,7 +34,7 @@
 <script src="https://js.stripe.com/v3/"></script>
 
 <!-- built files will be auto-injected -->
-@foreach(glob(app_path() . '/Modules/MusoraCenter/public/dist/js/*.js') as $assetPath)
+@foreach(glob(public_path() . '/vendor/musora-center/dist/js/*.js') as $assetPath)
     <script type="text/javascript" src="vendor/musora-center/dist/js/{{ basename($assetPath) }}"></script>
 @endforeach
 

@@ -4,7 +4,7 @@ module.exports = {
         ? '../public/dist/'
         : '../public/dist/js',
     productionSourceMap: false,
-    filenameHashing: true,
+    filenameHashing: false,
     css: {
         extract: false,
     },
