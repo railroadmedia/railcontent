@@ -165,11 +165,6 @@ $classic = [
             'artist' => 'Arctic Monkeys',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/of-monsters-and-man-my-head-is-an-animal-1654870838.jpg',
-            'title' => 'Little Talks',
-            'artist' => 'Of Monsters and Men',
-        ],
-        [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/drumeo-songs-2020-july/album-art/coldplay-the-scientist.jpg',
             'title' => 'The Scientist',
             'artist' => 'Coldplay',
@@ -336,7 +331,7 @@ $blues = [
     [
         'artist' => 'John Lee Hooker',
         'title' => 'Boogie Chillen',
-        'img' => 'https://d1923uyy6spedc.cloudfront.net/Boogie_Chillen_single_cover-1686131582.jpg',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/Boogie_Chillen_single_cover-1686131582-1689789452.jpg',
     ],
     [
         'artist' => 'Earl King',
@@ -366,6 +361,11 @@ $folk = [
         'img' => 'https://d1923uyy6spedc.cloudfront.net/jim-croce-time-in-a-bottle-1684155591.jpg',
     ],
     [
+        'artist' => 'Bob Dylan',
+        'title' => 'Don’t Think Twice, It’s Alright',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/bob-dylan-the-freewheelin-bob-dylan-1684215816.jpg',
+    ],
+    [
         'artist' => 'Bon Iver',
         'title' => 'Skinny Love',
         'img' => 'https://d1923uyy6spedc.cloudfront.net/bon-iver-for-emma-forever-ago-1679560576.jpg',
@@ -379,11 +379,6 @@ $folk = [
         'artist' => 'Neil Young',
         'title' => 'harvest Moon',
         'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/neil-young-harvest-moon.jpg',
-    ],
-    [
-        'artist' => 'Bob Dylan',
-        'title' => 'Don’t Think Twice, It’s Alright',
-        'img' => 'https://d1923uyy6spedc.cloudfront.net/bob-dylan-the-freewheelin-bob-dylan-1684215816.jpg',
     ],
 ];
 $country = [
@@ -408,7 +403,7 @@ $country = [
         'artist' => 'Shania Twain',
     ],
     [
-        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/blake-shelton-red-river-blue.jpg',
+        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/jason-aldean-jason-aldean.jpg',
         'title' => 'Hicktown',
         'artist' => 'Jason Aldean',
     ],
@@ -461,11 +456,6 @@ $country = [
         'artist' => 'Bradley Cooper & Lady Gaga',
         'title' => 'Shallow',
         'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/bradley-cooper-and-lady-gaga-a-star-is-born-soundtrack.jpg',
-    ],
-    [
-        'artist' => 'hicktown',
-        'title' => 'Jason Aldean',
-        'img' => 'https://d1923uyy6spedc.cloudfront.net/songs-jan-2022/thumbnails/jason-aldean-jason-aldean.jpg',
     ],
 ];
 $metal = [
