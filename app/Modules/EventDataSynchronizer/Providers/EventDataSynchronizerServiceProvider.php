@@ -6,12 +6,11 @@ use App\Modules\EventDataSynchronizer\Console\Commands\CustomerIOSyncUser;
 use App\Modules\EventDataSynchronizer\Console\Commands\ExpiredProductResync;
 use App\Modules\EventDataSynchronizer\Console\Commands\MigrateMinutesWatchedPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\PackBonusExpirationDateResyncTool;
-use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoPayments;
+use App\Modules\EventDataSynchronizer\Console\Commands\SyncCustomerIoOrders;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncPoints;
 use App\Modules\EventDataSynchronizer\Console\Commands\SyncUserTotalXp;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserContentProductPermissionsResyncTool;
 use App\Modules\EventDataSynchronizer\Console\Commands\UserMembershipOwnedProductSyncTool;
-use App\Modules\EventDataSynchronizer\Jobs\CustomerIoSyncUserByUserId;
 use App\Modules\Mentor\Events\StudentMentorsUpdated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Railroad\Ecommerce\Events\AccessCodeClaimed;
@@ -241,7 +240,7 @@ class EventDataSynchronizerServiceProvider extends EventServiceProvider
                 ExpiredProductResync::class,
                 MigrateMinutesWatchedPoints::class,
                 SyncPoints::class,
-                SyncCustomerIoPayments::class
+                SyncCustomerIoOrders::class,
             ]
         );
         $this->mergeConfigFrom(
