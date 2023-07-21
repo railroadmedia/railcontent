@@ -218,16 +218,15 @@
     ])
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('musora.sales.components.card-selection-section', [
+            "noSelector" => true,
         "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
         "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
         "songs" => "1000+ popular songs.",
         "firstPoint" => "Unlimited piano lessons.",
         "thirdPoint" => "Direct access to real teachers.",
         "fifthPoint" => "Lesson access for singing, guitar, and drums.",
-        "plusAnnualLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",
-        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[pianote-base-annual-recurring-7-day-trial-membership]=1&promo-code=annual-trial&redirect=/order&locked=true",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[pianote-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        "plusAnnualLink" => "/chord-hacks/ty-annual",
+        "plusMonthlyLink" => "/chord-hacks/ty-monthly",
     ])
     @include('musora.sales.components.trial-explanation', [
         'instrument' => 'piano',
