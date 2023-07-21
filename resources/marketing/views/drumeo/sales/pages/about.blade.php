@@ -91,7 +91,7 @@
         "fullSubscriptionVersion" => true,
     ])
 
-    <section class="text-white relative z-10 overflow-hidden px-4 md:px-8 py-8 md:py-40 lg:py-52 bg-cover bg-center lazyload" style="background-color:#163146;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Header_BG.jpg">
+    <section class="text-white relative z-10 overflow-hidden px-4 md:px-8 py-8 md:py-40 lg:py-52 bg-cover bg-center lazyload" style="background-color:#163146;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Header_BG.jpg">
         <div class="container mx-auto relative z-10 max-w-5xl">
             <p class="text-light-navy mb-1 mx-0 max-w-xs sm:max-w-sm lg:max-w-lg pr-6 sm:pr-0"><em>Marlene Rosen, Drumeo student</em></p>
             <h2><strong>"It’s like having a teacher<br> right in front of you"</strong></h2>
@@ -105,7 +105,7 @@
         <div class="container mx-auto relative z-10 max-w-5xl">
             <div class="flex flex-wrap sm:flex-nowrap lg:items-center">
                 <div class="coaches w-full sm:w-5/12 lg:w-1/2 mb-5 sm:mb-0 sm:pl-5 mx-auto sm:order-1 text-center">
-                    <img class="h-64 sm:h-auto" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Collage_1.png" alt="student pics">
+                    <img class="h-64 sm:h-auto" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Collage_1.png">
                 </div>
                 <div class="p-5 sm:p-8 rounded-xl w-full sm:w-7/12 lg:w-1/2" style="background:#1d232f;">
                     <h3 class="mb-3"><strong>Online Drum Lessons For Everyone.</strong></h3>
@@ -128,7 +128,7 @@
 
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="coaches w-full sm:w-1/2 sm:pr-5 mb-5 sm:mb-0 text-center">
-                    <img class="h-52 sm:h-auto" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Collage_2.png" alt="staff pics">
+                    <img class="h-52 sm:h-auto" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Collage_2.png">
                 </div>
                 <div class="p-6 rounded-xl w-full sm:w-1/2" style="background:#1d232f;">
                     <h3><strong>This is the dream team.</strong></h3>
@@ -154,35 +154,35 @@
                             <div class="timeline-line relative px-1.5 lg:px-2.5">
                                 <div class="relative z-10 rounded-xl text-center py-3" style="background-color:#1d232f;">
                                     <h1 class="font-bebas leading-none">2003</h1>
-                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/BreakSticks.jpg" alt="timeline">
+                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/about/BreakSticks.jpg" alt="timeline">
                                     <p class="text-left text-sm px-2 text-light-navy mx-auto leading-tight whitespace-pre-wrap">Drumeo’s founders launched their first online community at BreakSticks.com.</p>
                                 </div>
                             </div>
                             <div class="timeline-line relative px-1.5 lg:px-2.5">
                                 <div class="relative z-10 rounded-xl text-center py-3" style="background-color:#1d232f;">
                                     <h1 class="font-bebas leading-none">2005</h1>
-                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/RailRoad+Media.jpg" alt="timeline">
+                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/about/RailRoad+Media.jpg" alt="timeline">
                                     <p class="text-left text-sm px-2 text-light-navy mx-auto leading-tight whitespace-pre-wrap">The company became ‘Railroad Media’, putting out drum lesson DVDs and continuing to support their online community.</p>
                                 </div>
                             </div>
                             <div class="timeline-line relative px-1.5 lg:px-2.5">
                                 <div class="relative z-10 rounded-xl text-center py-3" style="background-color:#1d232f;">
                                     <h1 class="font-bebas leading-none">2007</h1>
-                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/DrumLesson.jpg" alt="timeline">
+                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/about/DrumLesson.jpg" alt="timeline">
                                     <p class="text-left text-sm px-2 text-light-navy mx-auto leading-tight whitespace-pre-wrap">The growing team launched FreeDrumLessons.com.</p>
                                 </div>
                             </div>
                             <div class="timeline-line relative px-1.5 lg:px-2.5">
                                 <div class="relative z-10 rounded-xl text-center py-3" style="background-color:#1d232f;">
                                     <h1 class="font-bebas leading-none">2012</h1>
-                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Drumeo.jpg" alt="timeline">
+                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Drumeo.jpg" alt="timeline">
                                     <p class="text-left text-sm px-2 text-light-navy mx-auto leading-tight whitespace-pre-wrap">Drumeo was born!</p>
                                 </div>
                             </div>
                             <div class="relative px-1.5 lg:px-2.5">
                                 <div class="relative z-10 rounded-xl text-center py-3" style="background-color:#1d232f;">
                                     <h1 class="font-bebas leading-none">2021</h1>
-                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/musora.png" alt="timeline">
+                                    <img class="my-2.5" src="https://www.musora.com/musora-cdn/image/width=430,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/about/musora.png" alt="timeline">
                                     <p class="text-left text-sm px-2 text-light-navy mx-auto leading-tight whitespace-pre-wrap">We started offering similar platforms for other instruments under the Musora brand.</p>
                                 </div>
                             </div>
@@ -201,19 +201,19 @@
             <p class="text-light-navy mt-1.5 mb-6">Drumeo is one brand under <a href="https://www.musora.com/"><u>Musora</u></a>: a group of organizations that help musicians<br class="hidden sm:inline"> develop their skills and connect with others. Let’s make music together!</p>
             <div class="flex flex-wrap sm:flex-nowrap">
                 <div class="mb-4 sm:mb-0 w-full sm:w-1/3 px-3">
-                    <a target="_blank" href="https://www.pianote.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png" alt="brand logo"></a>
+                    <a target="_blank" href="https://www.pianote.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png"></a>
                     <p class="leading-tight text-light-navy my-3">An incredible resource<br class="hidden sm:inline lg:hidden"> for learning piano</p>
-                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/pianote-graphic.png" alt="pianote">
+                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/pianote-graphic.png">
                 </div>
                 <div class="mb-4 sm:mb-0 w-full sm:w-1/3 px-3">
-                    <a target="_blank" href="https://www.guitareo.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png" alt="brand logo"></a>
+                    <a target="_blank" href="https://www.guitareo.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png"></a>
                     <p class="leading-tight text-light-navy my-3">Where guitar players<br class="hidden sm:inline lg:hidden"> can learn and grow</p>
-                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/guitareo-graphic.png" alt="guitareo">
+                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/guitareo-graphic.png">
                 </div>
                 <div class="w-full sm:w-1/3 px-3">
-                    <a target="_blank" href="https://www.singeo.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png" alt="brand logo"></a>
+                    <a target="_blank" href="https://www.singeo.com/"><img class="h-8 lg:h-10 lazyload" data-src="https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png"></a>
                     <p class="leading-tight text-light-navy my-3">A one-stop platform<br class="hidden sm:inline lg:hidden"> for vocalists</p>
-                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/singeo-graphic.png" alt="singeo">
+                    <img class="h-40 sm:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/singeo-graphic.png">
                 </div>
             </div>
         </div>
@@ -264,8 +264,8 @@
                         <div class="flip-div teacher inline-block relative w-full group" style="perspective: 1000px;">
                             <div class="text-center w-full h-full absolute cursor-pointer" style="transform-style: preserve-3d;">
                                 <div class="front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="bg-image w-full bg-black bg-top bg-cover absolute left-0 top-0 img-toggle opacity-0 transition-all duration-700 active lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $altSlide['image'] }}"></div>
-                                    <div class="bg-image w-full bg-black bg-top bg-cover absolute left-0 top-0 img-toggle opacity-0 transition-all duration-700 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1000,quality=85/{{ $altSlide['image2'] }}"></div>
+                                    <div class="bg-image w-full bg-black bg-top bg-cover absolute left-0 top-0 img-toggle opacity-0 transition-all duration-700 active lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $altSlide['image'] }}"></div>
+                                    <div class="bg-image w-full bg-black bg-top bg-cover absolute left-0 top-0 img-toggle opacity-0 transition-all duration-700 lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $altSlide['image2'] }}"></div>
                                     <div class="absolute uppercase w-full bottom-3 lg:bottom-4 z-10 text-shadow-4">
                                         <h2 class="font-bebas text-3xl mb-0.5" style="line-height:0.85em">{!! $altSlide['name']  !!}</h2>
                                     </div>
@@ -378,7 +378,7 @@
                             <div class="flip-div inline-block relative w-full group" style="perspective: 1000px;">
                                 <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                                     <div class="front absolute z-20 overflow-hidden rounded-xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                        <div class="bg-image w-full bg-black bg-top bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $slide['image'] }}"></div>
+                                        <div class="bg-image w-full bg-black bg-top bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $slide['image'] }}"></div>
                                         <div class="absolute uppercase w-full bottom-3 lg:bottom-4 z-10 text-shadow-4">
                                             <h2 class="font-bebas text-3xl" style="line-height:0.85em">
                                                 {!! $slide['name']  !!}
@@ -406,7 +406,7 @@
             <a target="_blank" class="transition-opacity duration-300 py-3 w-14 h-14 text-3xl leading-none rounded-full inline-block text-center mx-1.5 hover:opacity-70 social-bubble tiktok text-white" href="https://www.tiktok.com/@drumeoofficial" style="background: #000;"><i class="fab fa-tiktok" style="filter: drop-shadow(2px 2px 0px #fe2b54) drop-shadow(-2px -2px 0px #25f4ee);"></i></a>
         </div>
     </section>
-    <section class="text-white text-center relative z-10 overflow-hidden px-4 md:px-5 py-8 md:py-20 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Order_BG.jpg">
+    <section class="text-white text-center relative z-10 overflow-hidden px-4 md:px-5 py-8 md:py-20 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/about/Order_BG.jpg">
         <div class="container mx-auto relative z-10 max-w-4xl">
             <h2 class="mb-7"><strong>Join the party.</strong></h2>
             <div class="flex flex-wrap sm:flex-nowrap w-full">

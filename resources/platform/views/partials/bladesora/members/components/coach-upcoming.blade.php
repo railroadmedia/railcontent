@@ -11,7 +11,7 @@
                 @foreach ($upcomingCoaches as $coach)
                     <div class="tw-rounded-3xl tw-overflow-hidden tw-relative tw-flex tw-mb-3">
                         <!-- Coach Image -->
-                        <img src="https://www.musora.com/musora-cdn/image/width=300,height=436,quality=90/{{ $coach['image'] }}"
+                        <img src="https://www.musora.com/musora-cdn/image/width=300,height=436,quality=95/{{ $coach['image'] }}"
                              class="tw-w-full tw-flex tw-object-top tw-object-cover tw-filter tw-grayscale tw-transition-opacity tw-opacity-0"
                              alt="{{ $coach['name'] }} Card"
                              loading="lazy"

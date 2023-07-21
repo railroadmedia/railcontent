@@ -124,7 +124,7 @@
                         "price" => 29,
                         "stockingStuffer" => "TRUE",
                         "itemURL" => "/drumshop/gift-card/",
-                        "thumbnail" => "https://www.musora.com/musora-cdn/image/width=600,quality=85/https:/d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
+                        "thumbnail" => "https://www.musora.com/musora-cdn/image/width=600,quality=95/https:/d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
                         "title" => "Drumeo Gift Card",
                         "bottomText" => "A physical access pass that you can use for yourself, or to send as a gift to another drummer that can be redeemed at anytime. This gift card grants full access to Drumeo, The Ultimate Online Drum Lessons Experience.",
                         "onDrumeo" => "TRUE"

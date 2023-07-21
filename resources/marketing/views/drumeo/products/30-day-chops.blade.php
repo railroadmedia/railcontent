@@ -385,7 +385,7 @@
                             <img class="-mt-7 rounded-lg transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                         </div>
                     @else
-                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-0 @if($key !== 4) md:mb-28 @endif">
+                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 @if($key !== 4) md:mb-28 @else md:mb-0 @endif">
                             <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 overflow-hidden">
                                 <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}img" loading="lazy" onload="this.classList.remove('opacity-0')" />
                             </div>
@@ -874,6 +874,10 @@
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('private');
             });
+
+            @if(!empty($errors) && $errors->any())
+                $('#waitlistModal').foundation('open');
+            @endif
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>

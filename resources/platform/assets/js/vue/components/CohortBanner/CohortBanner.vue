@@ -53,10 +53,10 @@ onBeforeMount(() => {
         v-if="showBanner"
     >
         <div class="tw-flex tw-items-center tw-mb-4 md:tw-mb-0 md:tw-mr-4">
-            <img class="tw-h-24 tw-rounded-xl tw-mr-3" :src="preloadedBanner.thumbnail" alt="cohort thumbnail" />
+            <img class="tw-h-24 tw-rounded-xl tw-mr-3" :src="'https://www.musora.com/musora-cdn/image/width=300,quality=95/'+preloadedBanner.thumbnail" alt="cohort thumbnail" />
             <div>
-                <img class="tw-h-[54px] tw-hidden xl:tw-inline-block dark:xl:tw-hidden" :src="preloadedBanner.light_mode_logo" alt="cohort logo" />
-                <img class="tw-h-[54px] tw-hidden dark:xl:tw-inline-block" :src="preloadedBanner.dark_mode_logo" alt="cohort logo" />
+                <img class="tw-h-[54px] tw-hidden xl:tw-inline-block dark:xl:tw-hidden" :src="'https://www.musora.com/musora-cdn/image/width=200,quality=95/'+preloadedBanner.light_mode_logo" alt="cohort logo" />
+                <img class="tw-h-[54px] tw-hidden dark:xl:tw-inline-block" :src="'https://www.musora.com/musora-cdn/image/width=200,quality=95/'+preloadedBanner.dark_mode_logo" alt="cohort logo" />
                 <div class="tw-font-bold tw-text-xl xl:tw-text-2xl"><span v-if="!preloadedBanner.continue_visible">Next Lesson: </span>{{ preloadedBanner.title }}</div>
             </div>
         </div>

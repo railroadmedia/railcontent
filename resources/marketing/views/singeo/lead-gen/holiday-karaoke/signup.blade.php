@@ -15,9 +15,9 @@
 @stop
 
 @section('body')
-    <header class="relative overflow-hidden text-white text-center py-14 md:py-24 lg:py-36 px-4 md:px-6" style="background: #2b3857 url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/header_no_snow.jpg) center center/cover;">
+    <header class="relative overflow-hidden text-white text-center py-14 md:py-24 lg:py-36 px-4 md:px-6" style="background: #2b3857 url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/header_no_snow.jpg) center center/cover;">
         <div class="container mx-auto max-w-5xl relative z-50">
-            <img class="py-1 md:py-0 h-28 md:h-48 lg:h-60" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/logo.png">
+            <img class="py-1 md:py-0 h-28 md:h-48 lg:h-60" src="https://www.musora.com/musora-cdn/image/width=1300,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/logo.png">
             <h6 class="mt-3 md:mt-4 lg:mt-6 mb-5 md:mb-6 leading-tight">Simply enter your email to unlock<br class="inline md:hidden"> your holiday karaoke library!</h6>
             <div class="mx-auto text-center max-w-2xl">
                 @include("singeo._partials.sign-up-form", [
@@ -291,7 +291,7 @@
                     <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 md:px-3 mb-5 md:mb-6 lg:mb-8">
                         <div class="relative autoplay-video cursor-pointer overflow-hidden group" data-open="signUpModal">
                             <i class="absolute top-1/2 left-1/2 fas fa-play play-button smaller opacity-0 group-hover:opacity-100 -m-10 lg:-m-12"></i>
-                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=85/{{ $bonus['image'] }}"></div>
+                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=95/{{ $bonus['image'] }}"></div>
                         </div>
                         <h6 class="mt-3 mb-0.5 leading-tight"><strong>{{ $bonus['song'] }}</strong></h6>
                         <p class="text-navy leading-tight">{{ $bonus['artist'] }}</p>
@@ -300,9 +300,9 @@
             </div>
         </div>
     </section>
-    <section class="relative overflow-hidden text-white text-center py-7 md:py-12 px-6 lazyload" style="background: #6d7894 center center/cover;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/final.jpg">
+    <section class="relative overflow-hidden text-white text-center py-7 md:py-12 px-6 lazyload" style="background: #6d7894 center center/cover;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/final.jpg">
         <div class="container mx-auto max-w-5xl relative z-50">
-            <img class="py-1 md:py-0 h-28 md:h-48 lg:h-60" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/logo.png">
+            <img class="py-1 md:py-0 h-28 md:h-48 lg:h-60" src="https://www.musora.com/musora-cdn/image/width=1300,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/logo.png">
             <h6 class="mt-2 md:mt-4 lg:mt-6 mb-4 md:mb-6 leading-tight">Simply enter your email to unlock<br class="inline md:hidden"> your holiday karaoke library!</h6>
             <div class="mx-auto text-center max-w-2xl">
                 @include("singeo._partials.sign-up-form", [
@@ -325,7 +325,7 @@
         <div class="snow"></div>
     </section>
 
-    <div class="reveal text-center max-w-xl text-white lazyload" id="signUpModal" data-reveal style="background: #6d7894 right center/cover;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/final.jpg">
+    <div class="reveal text-center max-w-xl text-white lazyload" id="signUpModal" data-reveal style="background: #6d7894 right center/cover;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/final.jpg">
         <div class="py-5 px-3 md:px-9 md:py-9">
             <h4 class="leading-normal mb-4"><strong>Simply enter your email to unlock<br class="inline lg:hidden"> your holiday karaoke library!</strong></h4>
             @include("singeo._partials.sign-up-form", [

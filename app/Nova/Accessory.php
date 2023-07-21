@@ -164,7 +164,7 @@ class Accessory extends Resource
                         abort(500, 'Please select a brand');
                     }
 
-                    return '/'.$brand.'/Bundle-images'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();
+                    return '/'.$brand.'/Bundle-images/'.$request->uuid.'-'.$request->file('bundle_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;

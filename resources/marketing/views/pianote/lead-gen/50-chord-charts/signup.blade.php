@@ -27,7 +27,7 @@
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @endsection
 @section('page-body')
-    <header class="text-white text-center lg:text-left py-7 md:py-12 lg:py-20 px-6 md:px-4 lg:px-6" style="background: #06091a url(https://www.musora.com/musora-cdn/image/width=2000,q_60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/50-chord-charts/header-bg.jpg) center bottom/cover;">
+    <header class="text-white text-center lg:text-left py-7 md:py-12 lg:py-20 px-6 md:px-4 lg:px-6" style="background: #06091a url(https://www.musora.com/musora-cdn/image/width=2000,q_60,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/50-chord-charts/header-bg.jpg) center bottom/cover;">
         <div class="container mx-auto max-w-4xl">
             <div class="flex flex-wrap justify-center items-center md:items-center">
                 <div class="w-8/12 sm:w-6/12 lg:w-5/12 sm:order-1 text-right sm:pl-4 lg:pl-0">
@@ -368,7 +368,7 @@
                     <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 md:px-3 mb-7 md:mb-10">
                         <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md" data-open="signUpModal">
                             <i class="absolute top-1/2 left-1/2 fas fa-cloud-download play-button opacity-0 transition-opacity duration-300" style="margin: -39px;padding: 22px 17px;"></i>
-                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=85/{{ $bonus['image'] }}"></div>
+                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=95/{{ $bonus['image'] }}"></div>
                         </div>
                         <h5 class="mt-3 mb-1"><strong>{{ $bonus['artist'] }}</strong></h5>
                         <p class="text-navy leading-none">{{ $bonus['song'] }}</p>
@@ -387,7 +387,7 @@
         </div>
     </section>
 
-    <section class="text-center py-14 md:py-16 lg:py-20 text-white bg-center bg-cover lazyload" style="background-color:#030618;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/50-chord-charts/final-bg.jpg">
+    <section class="text-center py-14 md:py-16 lg:py-20 text-white bg-center bg-cover lazyload" style="background-color:#030618;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/50-chord-charts/final-bg.jpg">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
                 <img class="mb-6 h-20 md:h-24" src="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/50-chord-charts/logo.svg">

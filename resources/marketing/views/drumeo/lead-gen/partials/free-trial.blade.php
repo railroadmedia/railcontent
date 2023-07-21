@@ -2,7 +2,7 @@
     <div class="max-w-5xl mx-auto md:flex items-center text-white px-4">
         <div class="flex-1 relative text-center md:text-left">
             <div class="-ml-20 -mr-28 mt-10 mb-6 md:hidden">
-                <img class="w-full" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/albums-m.png" alt="albums mobile" />
+                <img class="w-full" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums-m.png" alt="albums mobile" />
             </div>
             <h3 class="font-extrabold">
                 @if(!empty($gsotd))
@@ -24,7 +24,7 @@
             </a>
         </div>
         <div class="flex-1 md:pl-10 g:pl-14 hidden md:block">
-            <img class="-mt-10 -mb-10" src="https://drumeo-assets.s3.amazonaws.com/lead-gen/albums.png" alt="albums" />
+            <img class="-mt-10 -mb-10" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums.png" alt="albums" />
         </div>
     </div>
 </section>

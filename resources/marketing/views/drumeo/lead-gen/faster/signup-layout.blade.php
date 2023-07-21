@@ -95,14 +95,14 @@
                 <div class="px-2 sm:px-3">
                     <img
                         class="h-12 sm:h-14 lg:h-20 mb-3 transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg"
+                        src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg"
                         alt="FWTGF logo"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     />
                     <img
                         class="rounded-xl sm:hidden mb-5 transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=85/{{ $headerImageM }}"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/{{ $headerImageM }}"
                         alt="header hero image mobile"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -121,7 +121,7 @@
             <div class="w-full sm:w-5/12 lg:w-1/2 sm:pl-5 lg:pl-12 xl:px-12 hidden sm:block">
                 <img
                     class="transition-opacity opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=700,quality=85/{{ $headerImage }}"
+                    src="https://www.musora.com/musora-cdn/image/width=700,quality=95/{{ $headerImage }}"
                     alt="header hero image"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -146,7 +146,7 @@
                             <div class="relative">
                                 <img
                                     class="transition-opacity opacity-0"
-                                    src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['img'] }}"
+                                    src="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $lesson['img'] }}"
                                     alt="lesson thumbnail {{ $key+1 }}"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
@@ -193,17 +193,17 @@
                 </h6>
                 <div class="flex justify-between text-center mt-7 lg:mt-10">
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
                         <h3 class="mt-2"><strong>2.5M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">Followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
                         <h3 class="mt-2"><strong>1M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">followers</p>
                     </div>
                     <div class="">
-                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
+                        <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
                         <h3 class="mt-2"><strong>268M</strong></h3>
                         <p class="uppercase opacity-70 text-sm">views</p>
                     </div>
@@ -219,7 +219,7 @@
 
     <section class="py-8 sm:py-14 text-center text-white" style="background:{{ !empty($layoutAlt) ? 'linear-gradient(79.2deg, #FF3DD8 0.06%, #FD6915 100%);' : '#040A20' }};">
         <div class="max-w-3xl mx-auto">
-        <img class="h-16 lg:h-20" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
+        <img class="h-16 lg:h-20" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/fwtgf/fwtgf-logo.svg" alt="FWTGF logo" />
         <h5 class="my-5 sm:my-7">Enter your email to receive ten free exercises.</h5>
         @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,

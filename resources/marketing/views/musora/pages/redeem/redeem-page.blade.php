@@ -162,7 +162,7 @@
 
 <!-- Main -->
 @section('layout-body')
-    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
+    <div class="py-8 sm:py-12 px-4 sm:px-6 bg-cover bg-center text-white text-center" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/{{ musora_cdn('redeem/sweetwater/bg.jpg') }});">
         <div class="container mx-auto max-w-sm sm:max-w-xl lg:max-w-3xl">
             @if(empty($thomann))
                 <h3 class="leading-tight mb-6 sm:mb-10"><strong>Redeem your membership for<br class="hidden sm:inline"> Drumeo, Pianote, Guitareo & Singeo.</strong></h3>
@@ -172,7 +172,7 @@
             @else
                 <img alt="sweetwater logo" loading="lazy" onload="this.classList.remove('opacity-0')" class="filter  h-8 sm:h-11 lg:h-14 transition-opacity opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/books/best-beginner-drum-book/sales/thomann-logo.png">
                 <h3 class="leading-tight mt-4 mb-6 sm:mb-10"><strong>Redeem your membership to Drumeo.</strong></h3>
-                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
+                <img alt="laptop spread" loading="lazy" onload="this.classList.remove('opacity-0')" class="-mb-4 h-40 sm:h-72 lg:h-96 transition-opacity opacity-0" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{ musora_cdn('redeem/sweetwater/drumeo-spread.png') }}">
             @endif
         </div>
     </div>

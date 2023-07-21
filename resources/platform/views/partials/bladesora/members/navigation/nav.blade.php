@@ -133,7 +133,7 @@
                    @if(!empty($isIframe)) target="_parent" @endif>
                     <div class="pa-1 wrap">
                         <img class="rounded tw-h-7 tw-w-7 lg:tw-w-9 lg:tw-h-9 tw-box-border"
-                             src="https://www.musora.com/musora-cdn/image/height=50,width=50,quality=90/{{ $userAvatar }}"
+                             src="https://www.musora.com/musora-cdn/image/height=50,width=50,quality=95/{{ $userAvatar }}"
                              data-avatar-update="true">
                     </div>
                 </a>
@@ -168,7 +168,7 @@
                 <div class="member-avatar">
                     <a href="{{ $member['profileUrl'] ?? '#' }}">
                         <img class="bg-grey-2 rounded {{ $themeColor }}"
-                             src="https://www.musora.com/musora-cdn/image/width=60,height=60,quality=90/{{ $member['avatar'] }}"
+                             src="https://www.musora.com/musora-cdn/image/width=60,height=60,quality=95/{{ $member['avatar'] }}"
                              alt="member avatar"
                         >
                     </a>

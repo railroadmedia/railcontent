@@ -23,7 +23,7 @@
                 <div class="md:tw-flex tw-items-center tw-gap-6 tw-mb-12 tw-text-center md:tw-text-left">
                     <div class="md:tw-flex-1">
                         {{--  Header logo  --}}
-                        <img class="tw-h-14 sm:tw-h-18 lg:tw-h-20 tw-mb-2 tw-inline-block " alt="header logo" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['light_mode_logo']??'' }}" />
+                        <img class="tw-h-14 sm:tw-h-18 lg:tw-h-20 tw-mb-2 tw-inline-block " alt="header logo" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/{{ $cohort['light_mode_logo']??'' }}" />
                         {{--  Headline  --}}
                         <h1 class="tw-font-extrabold tw-text-3xl lg:tw-text-4xl">{{ $cohort['headline'] }}</h1>
                         {{--  Subheadline  --}}
@@ -34,7 +34,7 @@
                         <div class="tw-relative md:tw-hidden">
                             <img
                                 class="tw-rounded-xl tw-mb-6 tw-transition-opacity tw-opacity-0"
-                                src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['header_image_url'] }}"
+                                src="https://www.musora.com/musora-cdn/image/width=850,quality=95/{{ $cohort['header_image_url'] }}"
                                 alt="header thumb"
                                 loading="lazy"
                                 onload="this.classList.remove('tw-opacity-0')"
@@ -55,7 +55,7 @@
                             <div class="md:tw-w-1/2 tw-flex tw-items-center tw-justify-center md:tw-justify-start @if($hasProduct) md:tw-mt-2 @endif">
                                 <img
                                     class="tw-h-8 md:tw-h-6 tw-mr-1 tw-transition-opacity tw-opacity-0"
-                                    src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
+                                    src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
                                     alt="joined student profiles"
                                     loading="lazy"
                                     onload="this.classList.remove('tw-opacity-0')"
@@ -78,7 +78,7 @@
                     <div class="md:tw-flex-1 tw-hidden md:tw-block tw-relative">
                         <img
                             class="tw-rounded-xl tw-transition-opacity tw-opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=850,quality=85/{{ $cohort['header_image_url'] }}"
+                            src="https://www.musora.com/musora-cdn/image/width=850,quality=95/{{ $cohort['header_image_url'] }}"
                             alt="header thumb"
                             loading="lazy"
                             onload="this.classList.remove('tw-opacity-0')"
@@ -112,7 +112,7 @@
     {{--                            <img--}}
     {{--                                class="tw-mr-3 tw-h-[30px] sm:tw-mb-1 sm:tw-mx-auto"--}}
     {{--                                alt="icon 1"--}}
-    {{--                                src="https://www.musora.com/musora-cdn/image/width=60,quality=85/{{ $cohort['icon1_url'] }}"--}}
+    {{--                                src="https://www.musora.com/musora-cdn/image/width=60,quality=95/{{ $cohort['icon1_url'] }}"--}}
     {{--                                loading="lazy"--}}
     {{--                                onload="this.classList.remove('tw-opacity-0')"--}}
     {{--                            />--}}
@@ -126,7 +126,7 @@
     {{--                            <img--}}
     {{--                                class="tw-mr-3 tw-h-[30px] sm:tw-mb-1 sm:tw-mx-auto"--}}
     {{--                                alt="icon 2"--}}
-    {{--                                src="https://www.musora.com/musora-cdn/image/width=60,quality=85/{{ $cohort['icon2_url'] }}"--}}
+    {{--                                src="https://www.musora.com/musora-cdn/image/width=60,quality=95/{{ $cohort['icon2_url'] }}"--}}
     {{--                                loading="lazy"--}}
     {{--                                onload="this.classList.remove('tw-opacity-0')"--}}
     {{--                            />--}}
@@ -140,7 +140,7 @@
     {{--                            <img--}}
     {{--                                class="tw-mr-3 tw-h-[30px] sm:tw-mb-1 sm:tw-mx-auto"--}}
     {{--                                alt="icon 3"--}}
-    {{--                                src="https://www.musora.com/musora-cdn/image/width=60,quality=85/{{ $cohort['icon3_url'] }}"--}}
+    {{--                                src="https://www.musora.com/musora-cdn/image/width=60,quality=95/{{ $cohort['icon3_url'] }}"--}}
     {{--                                loading="lazy"--}}
     {{--                                onload="this.classList.remove('tw-opacity-0')"--}}
     {{--                            />--}}
@@ -167,7 +167,7 @@
                     {{--  Body Image  --}}
                     <img
                         class="tw-rounded-xl tw-transition-opacity tw-opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/{{ $cohort['body_image_url'] }}"
+                        src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/{{ $cohort['body_image_url'] }}"
                         alt="video thumb"
                         loading="lazy"
                         onload="this.classList.remove('tw-opacity-0')"
@@ -180,7 +180,7 @@
                 <img
                     class="tw-h-10 sm:tw-h-16 tw-mb-8 tw-mx-auto tw-transition-opacity tw-opacity-0"
                     alt="just play logo"
-                    src="https://www.musora.com/musora-cdn/image/width=1220,quality=85/{{ $cohort['body_logo'] }}"
+                    src="https://www.musora.com/musora-cdn/image/width=1220,quality=95/{{ $cohort['body_logo'] }}"
                     loading="lazy"
                     onload="this.classList.remove('tw-opacity-0')"
                 />
@@ -219,7 +219,7 @@
                 <div class="tw-max-w-[250px] tw-mx-auto tw-flex tw-justify-center tw-items-center">
                     <img
                         class="tw-h-7 sm:tw-mb-1 lg:tw-mb-0 tw-mr-1 tw-transition-opacity tw-opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
+                        src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png"
                         alt="joined student profiles"
                         loading="lazy"
                         onload="this.classList.remove('tw-opacity-0')"
@@ -243,8 +243,8 @@
         <div id="signupModal" class="modal">
             <div class="tw-flex tw-justify-center tw-items-center">
                 <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-8 tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
-                    <img class="tw-h-20 tw-mx-auto tw-mb-5 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['light_mode_logo']??'' }}" alt="modal logo" />
-                    <img class="tw-h-20 tw-mx-auto tw-mb-5 tw-hidden dark:tw-inline-block" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/{{ $cohort['dark_mode_logo']??'' }}" alt="modal logo" />
+                    <img class="tw-h-20 tw-mx-auto tw-mb-5 dark:tw-hidden" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/{{ $cohort['light_mode_logo']??'' }}" alt="modal logo" />
+                    <img class="tw-h-20 tw-mx-auto tw-mb-5 tw-hidden dark:tw-inline-block" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/{{ $cohort['dark_mode_logo']??'' }}" alt="modal logo" />
                     <div class="tw-text-2xl tw-font-bold tw-mb-1">Success, You’re Enrolled!</div>
                     <p class="tw-mb-5">
                         The course runs from {{ date('F jS', strtotime('+1 hour', strtotime($cohort['cohort_start_date']))) }} - {{ date('F jS', strtotime('+1 hour', strtotime($cohort['cohort_end_date']))) }}. We’ll notify you before the course begins.

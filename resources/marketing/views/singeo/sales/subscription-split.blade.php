@@ -147,6 +147,15 @@
     @endif
 
     @php
+        $bubble1 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/hailey-benedict.png';
+        $bubble2 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/lisa-witt.png';
+        $bubble3 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/tony-lindsay.png';
+        $bubble4 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/chris-johnson.png';
+        $bubble5 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/julia-ziegler.png';
+        $bubble6 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/darcy-d.png';
+        $bubble7 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/shelea.png';
+        $bubble8 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/cate-canning.png';
+
         $features = [
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/vocal-lessons-icon.svg',
@@ -192,8 +201,8 @@
     @endphp
 
         @include('musora.sales.components.header-section', [
-            'header' => 'Singing lessons that fit your schedule. ',
-            'desc' => 'Learn to sing from home, anytime, with bite-sized video lessons and unlimited personal support. ',
+            'header' => 'Singing lessons that <br> fit your schedule. ',
+            'desc' => 'Learn to sing from home, anytime, with bite-sized <br class="hidden sm:inline"> video lessons and unlimited personal support. ',
             'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/header-thumb2.jpg',
             'promoThumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb.png',
             'promoThumbM' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb-m.png',

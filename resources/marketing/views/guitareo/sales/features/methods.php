@@ -40,7 +40,7 @@ $methods = [
         ]
     ],
     [
-        "title" => "9 Essential Guitar Chords to Play Thousands Of Songs",
+        "title" => "13 Essential Guitar Chord Shapes to Play Thousands Of Songs",
         "desc" => 'Music is a language and a powerful communication tool. You\'ll learn to read and understand chord diagrams and play progressions used in thousands of songs.',
         'detail' => '8 lessons',
         'lessonInfo' => [
@@ -80,7 +80,7 @@ $methods = [
     ],
     [
         "title" => "Let's Get Rockin' with Rhythm",
-        "desc" => 'Rhythm is an important part of learning the guitar. Add groove to your playing by understanding beat, timing, and tempo.',
+        "desc" => 'Learn essential strum patterns so you can take your chords and turn them into music.',
         'detail' => '8 lessons',
         'lessonInfo' => [
             [
@@ -197,7 +197,7 @@ $methods = [
     ],
     [
         "title" => "You Can Start Soloing, Like Now!",
-        "desc" => 'Learn three easy scales, a powerful picking technique, and how to know what key you\'re in to make soloing feel like second nature.',
+        "desc" => 'Learn the most iconic scale on the guitar so you can start turning heads with your guitar solos',
         'detail' => '8 lessons',
         'lessonInfo' => [
             [
@@ -235,7 +235,7 @@ $methods = [
         ]
     ],
     [
-        "title" => "Don't Be Afraid Of Barre Chords… Embrace Them",
+        "title" => "Don't Be Afraid Of Bar Chords… Embrace Them",
         "desc" => 'Unlock the freedom to easily play ANY major or minor chord and color chords in any key across the neck of the guitar.',
         'detail' => '8 lessons',
         'lessonInfo' => [
@@ -318,7 +318,7 @@ $methods = [
     ],
     [
         "title" => "Tying It All Together: Add Dazzle To Your Playing",
-        "desc" => 'Take your playing to the next level by building your lick bank and throwing some recognizable punches into your solos with these 8 licks.',
+        "desc" => 'Take your soloing to new heights by adding 7 iconic licks inspired by the greats to your playing.',
         'detail' => '8 lessons',
         'lessonInfo' => [
             [

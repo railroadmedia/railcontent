@@ -34,7 +34,7 @@
 {{--            <a class="w-full md:w-1/2 join smaller outline md:order-2" href="@if($theme === 'drumeo') /drumshop @else /shop @endif">SHOP ALL DEALS &raquo;</a>--}}
 {{--        </div>--}}
 {{--    </div>--}}
-{{--    <div class="inset-0 block sm:hidden absolute bg-center bg-cover z-0" style="background-image:url(https://www.musora.com/musora-cdn/image/width=750,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/november/header-banner-bg-m.jpg);"></div>--}}
-{{--    <div class="inset-0 block sm:hidden absolute bg-center bg-cover z-0" style="background-image:url(https://www.musora.com/musora-cdn/image/width=750,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/november/header-banner-bg-m2.jpg);"></div>--}}
-{{--    <div class="inset-0 hidden sm:block absolute bg-center bg-cover z-0" style="background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/november/header-banner-bg.jpg);"></div>--}}
+{{--    <div class="inset-0 block sm:hidden absolute bg-center bg-cover z-0" style="background-image:url(https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/november/header-banner-bg-m.jpg);"></div>--}}
+{{--    <div class="inset-0 block sm:hidden absolute bg-center bg-cover z-0" style="background-image:url(https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/november/header-banner-bg-m2.jpg);"></div>--}}
+{{--    <div class="inset-0 hidden sm:block absolute bg-center bg-cover z-0" style="background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/november/header-banner-bg.jpg);"></div>--}}
 {{--</section>--}}

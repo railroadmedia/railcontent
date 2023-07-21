@@ -258,7 +258,10 @@ onUpdated(() => {
       :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="pageContainerStore.isSidebarHidden"
       :isDarkModeSelected="isDarkModeSelected" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
       :canReferNewStudents="canReferNewStudents"
-      @onCollapseSidebar="onCollapseSidebar" @onColorModeToggle="onColorModeToggle" />
+      :is-live="isLive"
+      @onCollapseSidebar="onCollapseSidebar" 
+      @onColorModeToggle="onColorModeToggle" 
+    />
 
     <!-- Page Container -->
     <div class="
@@ -273,8 +276,9 @@ onUpdated(() => {
         :forceSidebarHidden="forceSidebarHidden" :user-id="userId" />
 
       <!-- Content Container -->
-      <section class="
+      <main class="
           tw-flex
+          tw-justify-between
           tw-w-full
           tw-h-full
           tw-min-h-screen
@@ -288,10 +292,11 @@ onUpdated(() => {
         <h2 v-if="adminMessage && adminMessage.length" class="tw-text-[18px] tw-w-full tw-bg-yellow-200 tw-p-[20px] tw-text-center">
           {{ adminMessage }}
         </h2>
-        <!-- Content | Accounting for footer heithg in min height -->
-        <div class="tw-flex tw-flex-col tw-grow tw-h-full tw-w-full tw-min-h-[calc(100vh-152px)] lg:tw-min-h-[calc(100vh-128px)]">
+        <!-- Content -->
+        <section class="tw-w-full">
           <slot :is-dark-mode="isDarkModeSelected" />
-        </div>
+        </section>
+
         <!-- Footer -->
         <Footer :brand="brand" />
 
@@ -303,7 +308,7 @@ onUpdated(() => {
               tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10 tw-bg-black/30
             "></div>
         </Transition>
-      </section>
+      </main>
     </div>
   </main>
 </template>

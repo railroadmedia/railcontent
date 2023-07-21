@@ -56,8 +56,10 @@
         playlistsStore.getPlaylists(payload, token);
         //Update URL w/ new params
         const url = new URL(window.location.href);
-        url.searchParams.set('sortby_val', state.sortValue)
-        url.searchParams.set('search', state.searchTerm)
+        url.searchParams.set('sortby_val', state.sortValue);
+        url.searchParams.set('search', state.searchTerm);
+        url.searchParams.set('page', 1);
+        playlistsStore.resultsPage = 1;
         window.history.pushState({}, '', url);
         //Blur Input
         playlistSearch.value.blur();
@@ -105,7 +107,7 @@
             <button v-if="state.searchTerm.length" class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0" @click="state.searchTerm = ''">
                 <XIcon class="" />
             </button>
-            
+
         </div>
         <!-- List/Grid Toggle -->
         <div class="tw-flex-shrink-0 tw-order-3">

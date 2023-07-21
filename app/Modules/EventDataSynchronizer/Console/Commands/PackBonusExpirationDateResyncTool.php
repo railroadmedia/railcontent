@@ -2,7 +2,9 @@
 
 namespace App\Modules\EventDataSynchronizer\Console\Commands;
 
+use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
+use App\Modules\EventDataSynchronizer\Services\UserMembershipFieldsService;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -12,12 +14,23 @@ class PackBonusExpirationDateResyncTool extends Command
 {
     protected $name = 'PackBonusExpirationDateResyncTool';
     protected $description = 'PackBonusExpirationDateResyncTool';
-    protected $signature = 'PackBonusExpirationDateResyncTool';
+    protected $signature = 'PackBonusExpirationDateResyncTool {productId}';
 
-    public function handle(UserProductToUserContentPermissionListener $userProductToUserContentPermissionListener)
-    {
+    public function handle(
+        UserProductToUserContentPermissionListener $userProductToUserContentPermissionListener,
+        UserMembershipFieldsService $userMembershipFieldsService
+    ) {
         $this->info("Processing PackBonusExpirationDateResyncTool");
-        $productId = 732;
+
+        $productId = $this->argument('productId');
+
+        /** @var Product $product */
+        $product = Product::find($productId);
+
+        if (!$product) {
+            $this->info("Product $productId not found");
+            return;
+        }
 
         $query = UserProduct::query()->select('ecommerce_user_products.*')
             ->join('ecommerce_products', 'ecommerce_products.id', '=', 'ecommerce_user_products.product_id')
@@ -26,25 +39,29 @@ class PackBonusExpirationDateResyncTool extends Command
         $count = $query->count();
 
         $this->info("$count records to be processed.");
-        $done = 0;
 
         $query->chunk(1000, function (Collection $userProducts) use (
             $userProductToUserContentPermissionListener,
-            &$done
+            &$done,
+            $product,
+            $userMembershipFieldsService
         ) {
-            $oldDate = new Carbon('2023-03-28');
-            $newDate = new Carbon('2023-04-01');
+            $bonusProductId = 732;
             /** @var UserProduct $userProduct */
             foreach ($userProducts as $userProduct) {
-                if ($userProduct->expiration_date == $oldDate) {
-                    $userProduct->expiration_date = $newDate;
-                    $userProduct->save();
-                    $userProductToUserContentPermissionListener->syncUserId($userProduct->user_id);
-                    $done++;
+                $userId = $userProduct->user_id;
+                $bonusUserProduct = UserProduct::query()->where('user_id', '=', $userId)
+                    ->where('product_id', '=', $bonusProductId)
+                    ->get()->first();
+                if (!$bonusUserProduct) {
+                    //$this->info("Bonus User Product not found for user $userId");
+                    continue;
                 }
+                $bonusUserProduct->expiration_date = $product->digital_membership_access_expiration_date;
+                $bonusUserProduct->save();
+                $userProductToUserContentPermissionListener->syncUserId($userId);
+                $userMembershipFieldsService->sync($userId);
             }
-
-            $this->info('Done ' . $done);
         });
         $this->info("Finished PackBonusExpirationDateResyncTool");
     }
