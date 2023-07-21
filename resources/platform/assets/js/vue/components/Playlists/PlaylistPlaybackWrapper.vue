@@ -304,7 +304,7 @@ onBeforeMount(() => {
                         :message="needAccessMessage" />
                     <!-- Soundslice Player -->
                     <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && !needAccess && released"
-                        class="tw-w-full tw-aspect-video tw-max-h-[90vh]"
+                        class="tw-w-full tw-aspect-video tw-max-h-[90vh] tw-mb-4"
                         :class="{ 'tw-max-w-[1280px]' : !playlistsStore.playerExpanded }"
                     >
                         <SoundSlice :user-id="userId" :theme-color="brand" :additional-params="additionalSoundsliceParams"
