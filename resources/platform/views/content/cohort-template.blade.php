@@ -184,21 +184,6 @@
                 </div>
             </div>
         </section>
-<<<<<<< HEAD
-
-        <section class="tw-text-center tw-text-white  tw-bg-cover tw-bg-center" style="background-color:#2a2f34;">
-            <div class="tw-max-w-[1600px] tw-mx-auto tw-relative tw-pt-10 sm:tw-pt-14 lg:tw-pt-20">
-                <img class="tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-object-cover" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ $cohort['demo_background_image_url'] }}" alt="bg" />
-                <h3 class="tw-leading-tight tw-relative"><strong>{!! $cohort['demo_title_text'] !!}</strong></h3>
-                <p class="tw-leading-normal tw-mt-2 sm:tw-mt-3 tw-mb-5 sm:tw-mb-7 tw-relative tw-px-4 sm:tw-px-0">{!! $cohort['demo_description_text'] !!}</p>
-                <div class="tw-relative">
-                    <img class="tw-inline-block sm:tw-hidden tw-w-full tw-transition-all tw-cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ $cohort['demo_mobile_center_image_url'] }}" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')" x-on:click=" trailerDemo = true;">
-                    <img class="tw-hidden sm:tw-inline-block tw-w-full tw-transition-all tw-cursor-pointer" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/{{ $cohort['demo_desktop_center_image_url'] }}" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')" x-on:click=" trailerDemo = true;">
-                    <div class="tw-absolute tw-w-full tw-top-2/3 tw-flex tw-justify-center tw-px-4 sm:tw-px-0">
-                        <p class="tw-px-3 tw-py-1 tw-z-10 tw-rounded-xl tw-text-white tw-text-sm tw-bg-{{ $brand }}"><i class="fas fa-play-circle tw-mr-1 tw-text-xl sm:tw-text-3xl tw-align-middle" aria-hidden="true"></i> {!! $cohort['demo_label_text'] !!}</p>
-                    </div>
-                </div>
-=======
         <section class="tw-bg-[#F1F7FE] tw-pb-7 ">
             <div class="tw-max-w-5xl tw-mx-auto tw-px-4 md:tw-px-10 -tw-mt-40">
                 <div class="tw-relative tw-cursor-pointer tw-mb-10" x-on:click="trailer = true">
@@ -224,7 +209,6 @@
                 />
                 {{--  Body bottom description  --}}
                 <p class="tw-text-center tw-px-6">{!! $cohort['body_bottom_description'] !!}</p>
->>>>>>> project-playlists-v15
             </div>
         </section>
 

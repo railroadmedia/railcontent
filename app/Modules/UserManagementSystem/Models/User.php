@@ -854,11 +854,6 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return preg_match("/musora\+deleted_[\d]+@musora\.com/", $this->email);
     }
 
-<<<<<<< HEAD
-    public function isAPausedMember(): bool
-    {
-        return !empty($this->membership_start_date) && $this->membership_start_date > Carbon::now();
-=======
     public function getCustomerIOId()
     {
         foreach ($this->customerIO as $customerIOData){
@@ -867,6 +862,5 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             }
         }
         return null;
->>>>>>> project-playlists-v15
     }
 }
