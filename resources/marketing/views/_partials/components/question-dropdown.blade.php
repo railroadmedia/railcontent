@@ -59,7 +59,7 @@
                 <div class="bg-white @if(!empty($info['desc'])) p-4 @endif rounded-xl flex flex-col md:flex-row mb-2 @if(empty($info['desc'])) md:items-center @endif">
                     <img
                         class="rounded-xl @if(empty($info['desc'])) md:h-24 @else mb-6 md:mb-0 md:h-32 @endif transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=650,quality=85/{{$info['thumb']}}"
+                        src="https://www.musora.com/musora-cdn/image/width=650,quality=95/{{$info['thumb']}}"
                         alt="lesson{{$key+1}} thumb"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"

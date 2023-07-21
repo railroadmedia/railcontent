@@ -151,6 +151,14 @@
         ])
     @endif
 
+    @include('_partials.components.promo-top-banner',[
+        'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-shop-summer-sale-bg.jpg',
+        'logo' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-summer-sale-logo.svg',
+        'logoStyles' => 'mb-3',
+        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
+        'promoText' => 'SAVE UP TO 91% UNTIL JULY 31ST!',
+    ])
+
     @php
         $features = [
             [
@@ -502,9 +510,9 @@
         'youtubeLink' => 'https://www.youtube.com/guitarlessonscom/',
         'youtube' => '1M',
         'facebookLink' => 'https://facebook.com/guitareoofficial/',
-        'facebook' => '333K',
+        'facebook' => '330K',
         'instagramLink' => 'https://instagram.com/guitareoofficial/',
-        'instagram' => '18K',
+        'instagram' => '19K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
@@ -519,8 +527,8 @@
     @if(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
-            "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
-            "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
+            "plusLogo" => "https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-plus-logo-light.svg",
+            "logo" => "https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo.png",
             "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
@@ -567,6 +575,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'logo' => 'https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png',
         'header' => 'Unlimited guitar lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>

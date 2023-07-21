@@ -7,7 +7,7 @@
     <meta name="description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
     <meta property="og:description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
 
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/gsotd/updated/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/getting-started/">
 @stop
 

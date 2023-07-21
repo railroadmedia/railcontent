@@ -2,7 +2,7 @@
     @if(!empty($logo))
     <img
         class="h-8 sm:h-10 mr-4 transition-opacity opacity-0"
-        src="https://www.musora.com/musora-cdn/image/width=300,quality=85/{{ $logo }}"
+        src="https://www.musora.com/musora-cdn/image/width=300,quality=95/{{ $logo }}"
         alt="sticky bar logo"
         loading="lazy"
         onload="this.classList.remove('opacity-0')"

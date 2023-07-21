@@ -19,6 +19,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  isLive: {
+    type: Boolean,
+    default: false
+  },
   userName: {
     type: String
   },
@@ -92,6 +96,14 @@ const toggleSearchModal = (val) => {
       />
     </div>
     <div class="tw-self-end tw-h-full tw-flex tw-items-center tw-ml-auto">
+
+      <!-- Live Indicator -->
+      <a :href="`/${brand}/live`" v-if="isLive" class="tw-relative tw-mr-2">
+        <span
+          class="tw-animate-grow-shrink tw-blur-sm tw-origin-center tw-absolute tw-left-0 tw-top-0 tw-inline-flex tw-h-full tw-w-full tw-rounded tw-bg-[#F71B26] tw-opacity-75"></span>
+        <span
+          class="tw-relative tw-whitespace-nowrap tw-base tw-pt-[2px] tw-text-sm tw-pb-0 tw-px-[3px] tw-rounded tw-leading-none tw-text-white tw-bg-[#DC2626] tw-uppercase tw-font-bebas-neue">On-Air</span>
+      </a>
 
       <!-- Search Trigger -->
       <button

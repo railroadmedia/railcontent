@@ -12,7 +12,7 @@
     /improve-any-voice/lessons/6
 @stop
 
-@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-6.png')
+@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/4-exercises/thumb-6.png')
 
 @section('assignments')
     @include('singeo.lead-gen.partials._assignment-resources', [
@@ -35,7 +35,7 @@
 
     @include('singeo.lead-gen.partials._assignment-resources', [
         "title" => "Sheet Music",
-        "pdfURL" => "https://www.musora.com/musora-cdn/image/width=1760,q_60,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/6.png"
+        "pdfURL" => "https://www.musora.com/musora-cdn/image/width=1760,q_60,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/6.png"
     ])
     @include('singeo.lead-gen.partials._assignment-resources', [
         "title" => "Practice Both Chords In Time",

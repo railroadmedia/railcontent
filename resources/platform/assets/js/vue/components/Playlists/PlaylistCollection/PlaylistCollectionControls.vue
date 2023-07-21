@@ -97,11 +97,19 @@
         if(state.categories) url.searchParams.set('categories[]', state.categories)
         url.searchParams.set('search', state.searchTerm);
         url.searchParams.set('page', 1);
+        if(state.categories) url.searchParams.set('categories[]', state.categories);
+        else url.searchParams.delete('categories[]');
+
         playlistsStore.resultsPage = 1;
         window.history.pushState({}, '', url);
         //Blur Input
         playlistSearch.value.blur();
     };
+
+    const cancelCategoryFilter = ()=> {
+        state.categories = '';
+        loadPlaylists();
+    }
 
     //---------Lifecycle Methods---------//
     onBeforeMount(()=> {
@@ -142,6 +150,16 @@
                     {{ category.text }}
                 </option>
             </select>
+            <span
+                v-if="state.categories"
+                class="cancel-filter"
+            >
+                <i
+                    class="fas fa-times tw-absolute tw-right-0 tw-top-0 tw-bottom-0 tw-w-[50px] tw-cursor-pointer tw-bg-white tw-flex tw-justify-center tw-items-center tw-border tw-border-[#D1D1D1] tw-rounded-[25px] tw-text-xl"
+                    :class="'text-' + brand"
+                    @click="cancelCategoryFilter"
+                ></i>
+            </span>
         </div>
 
         <!-- Search -->

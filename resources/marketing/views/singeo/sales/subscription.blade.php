@@ -146,6 +146,14 @@
         ])
     @endif
 
+    @include('_partials.components.promo-top-banner',[
+        'bg' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-shop-summer-sale-bg.jpg',
+        'logo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-summer-sale-logo.svg',
+        'logoStyles' => '-mb-3',
+        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
+        'promoText' => 'SAVE UP TO 74% UNTIL JULY 31ST!',
+    ])
+
     @php
         $features = [
             [
@@ -492,7 +500,7 @@
         'header' => 'Trusted by singers everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
-        'youtube' => '29,000',
+        'youtube' => '75,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
         'facebook' => '23,000',
         'instagramLink' => 'https://instagram.com/singeoofficial/',
@@ -555,6 +563,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'logo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png',
         'header' => 'Unlimited singing lessons.<br> Vocal coaches and support.<br>1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>

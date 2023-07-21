@@ -209,10 +209,11 @@ const onResize = (e) => {
     pageContainerStore.isSidebarHidden = true;
     pageContainerStore.isSidebarCollapsed = false;
   } else {
-    if(playlistsStore.playerExpanded) {
       pageContainerStore.isSidebarHidden = false;
-      pageContainerStore.isSidebarCollapsed = true;
-    }
+
+      if(playlistsStore.playerExpanded) {
+        pageContainerStore.isSidebarCollapsed = true;
+      }
   }
 }
 
@@ -258,7 +259,10 @@ onUpdated(() => {
       :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="pageContainerStore.isSidebarHidden"
       :isDarkModeSelected="isDarkModeSelected" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
       :canReferNewStudents="canReferNewStudents"
-      @onCollapseSidebar="onCollapseSidebar" @onColorModeToggle="onColorModeToggle" />
+      :is-live="isLive"
+      @onCollapseSidebar="onCollapseSidebar"
+      @onColorModeToggle="onColorModeToggle"
+    />
 
     <!-- Page Container -->
     <div class="

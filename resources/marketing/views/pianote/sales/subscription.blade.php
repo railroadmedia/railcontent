@@ -148,6 +148,14 @@
         ])
     @endif
 
+    @include('_partials.components.promo-top-banner',[
+        'bg' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-shop-summer-sale-bg.jpg',
+        'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/july/pianote-summer-sale-logo.svg',
+        'logoStyles' => 'mb-3 ml-2 sm:ml-6 lg:ml-10',
+        'title' => 'Join Pianote + Choose <br class="sm:hidden"> Your Bonus Bundle',
+        'promoText' => 'SAVE UP TO 68% UNTIL JULY 31ST!',
+    ])
+
     @php
         $features = [
             [
@@ -215,6 +223,9 @@
                 'pointOne' => '1000+ popular songs',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Learn anywhere, anytime',
+
+
+
             ])
         @else
             @include('musora.sales.components.header-section', [
@@ -544,11 +555,11 @@
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'youtube' => '1.2M',
+        'youtube' => '1.3M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
-        'facebook' => '422K',
+        'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '174K',
+        'instagram' => '203K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
@@ -565,8 +576,8 @@
     @elseif(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
             "noSelector" => true,
-            "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
-            "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
+            "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
+            "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
             "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited piano lessons.",
             "thirdPoint" => "Direct access to real teachers.",
@@ -618,6 +629,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',
         'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>

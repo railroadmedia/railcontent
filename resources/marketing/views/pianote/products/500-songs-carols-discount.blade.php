@@ -15,7 +15,7 @@
     <a href="@yield('order-link')" class="artist-promo-banner fixed">
         <div class="noise-wrap">
             <div class="container">
-                <img class="logo" src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/logo.png">
+                <img class="logo" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/logo.png">
                 <div class="text">
                     <p><strong>Save {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days']->price)))) }}% on<br> 500 Songs in 5 Days</strong></p>
                 </div>

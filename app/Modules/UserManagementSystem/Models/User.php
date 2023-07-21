@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
@@ -315,6 +316,12 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
     {
         return $this->hasMany(NotificationSetting::class, 'user_id');
     }
+
+    public function customerIO(): HasMany
+    {
+        return $this->hasMany(Customer::class, 'user_id');
+    }
+
 
     public function getNotificationSetting(string $brand, string $settingName): bool
     {
@@ -847,8 +854,19 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return preg_match("/musora\+deleted_[\d]+@musora\.com/", $this->email);
     }
 
+<<<<<<< HEAD
     public function isAPausedMember(): bool
     {
         return !empty($this->membership_start_date) && $this->membership_start_date > Carbon::now();
+=======
+    public function getCustomerIOId()
+    {
+        foreach ($this->customerIO as $customerIOData){
+            if($customerIOData->workspace_name == 'musora'){
+                return $customerIOData->uuid;
+            }
+        }
+        return null;
+>>>>>>> project-playlists-v15
     }
 }
