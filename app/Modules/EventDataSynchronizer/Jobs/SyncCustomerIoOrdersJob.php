@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
 use Railroad\Ecommerce\Events\PaymentEvent;
+use Railroad\Ecommerce\Repositories\OrderPaymentRepository;
 use Railroad\Ecommerce\Repositories\OrderRepository;
 use Railroad\Ecommerce\Repositories\PaymentRepository;
 
@@ -21,6 +22,7 @@ class SyncCustomerIoOrdersJob extends BatchQueryJob
 {
     private int $skip;
     private int $take;
+
     public function __construct(int $skip, int $take)
     {
         $this->skip = $skip;
@@ -39,7 +41,7 @@ class SyncCustomerIoOrdersJob extends BatchQueryJob
 
     function getQuery(): Builder
     {
-        $query = OrderPayment::query()
+        $query = Order::query()
             ->where('created_at', '>', '2023-01-01')
             ->where('created_at', '<', '2023-06-29');
         return $query;
@@ -57,12 +59,14 @@ class SyncCustomerIoOrdersJob extends BatchQueryJob
         $listener = app()->make(CustomerIoSyncEventListener::class);
         /** @var OrderPayment $item */
         foreach ($items as $item) {
-            $order = $orderRepository->find($item->order_id);
-            $payment = $paymentRepository->find($item->payment_id);
-            if ($order && $payment) {
-                $listener->syncOrder($order, $payment, true);
-            } else {
-                Log::warning("Issue with order $item->order_id payment $item->payment_id");
+            $orderPayment = OrderPayment::query()->where('order_id', $item->id)->first();
+            if ($orderPayment == null) {
+                $order = $orderRepository->find($item->id);
+                if ($order) {
+                    $listener->syncOrder($order, null, true);
+                } else {
+                    Log::warning("Issue with order $item->order_id payment $item->payment_id");
+                }
             }
         }
         return true;
