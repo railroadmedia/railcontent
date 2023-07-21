@@ -326,8 +326,8 @@ onMounted(() => {
         </div>
         <!-- Items -->
         <div v-if="playlistsStore.lessons.length" id="cue-scroll-container"
-            class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-relative"
-            :class="[{ 'tw-hidden lg:tw-block' : state.collapsed  }, { 'lg:tw-hidden' : playlistsStore.playerExpanded }, {'tw-overflow-y-auto': playlistsStore.lessons.length > 6} ]">
+            class="tw-w-full tw-flex tw-flex-col tw-max-h-[540px] tw-relative tw-overflow-y-auto"
+            :class="[{ 'tw-hidden lg:tw-block' : state.collapsed  }, { 'lg:tw-hidden' : playlistsStore.playerExpanded }]">
             <!-- Top Skeleton for offset For top Infinite Scroll -->
             <!-- <div v-if="shouldShowTopSkeleton" class="tw-w-full tw-animate-pulse tw-flex tw-flex-col">
                 <div
