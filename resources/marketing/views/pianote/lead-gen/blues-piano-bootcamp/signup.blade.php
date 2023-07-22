@@ -103,7 +103,9 @@
     </div>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-4xl mx-auto">
-            <p class=" mb-5 sm:mb-8" style="color:#abb5c2">SEE MORE LESSONS</p>
+            <h2 class="text-center"><strong>Learn the Blues by <br class="inline sm:hidden"> PLAYING the Blues.</strong></h2>
+            <h6 class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7"><em>This is not your average piano course.</em><br>
+                <strong class="text-indigo-700">Try a snippet from your 1st lesson and see for yourself.</strong></h6>
             <div class="flex flex-wrap items-start justify-center text-left">
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
@@ -116,7 +118,7 @@
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">Now it’s time to work on that left hand. This can be a sticking point for a lot of piano players, but don’t worry - just do what Lisa does!</p>
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">Want to play the Blues? Then you NEED to know the 12-bar Blues pattern.</p>
                 </div>
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
@@ -129,7 +131,7 @@
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">You have two hands. Use them! You’ll be playing beautiful music with both hands in this 10-minute lesson. Just hit play and follow along.</p>
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">To play the Blues, you have to feel the Blues. This lesson will show you how to get into the swing of things.</p>
                 </div>
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
@@ -142,7 +144,7 @@
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">How do you make your chords sounds extra special? Add some fills! They sound complicated but are easy to do. You’ll learn Lisa’s favorite.</p>
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">Break away from basic chords. You’ll be confidently playing through chord changes with this iconic Boogie Pattern.</p>
                 </div>
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
@@ -155,7 +157,7 @@
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">This might be the most important piano lesson you have. It will change how you think about and see piano chords. Are you ready?! (Of course you are!)</p>
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">You’ll learn 2 iconic Blues riffs. You can play them over your 12-bar progression, or use them as fills whenever you like.</p>
                 </div>
             </div>
         </div>
@@ -190,21 +192,17 @@
         'bgColor' => '#fff'
     ])
     <div id="final" class="anchor"></div>
-    <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#eff7ff;">
+    <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background:linear-gradient(to right, #077dff, #343fff, #5a09ff);">
         <div class="container max-w-6xl mx-auto relative z-50">
             <div class="flex flex-wrap items-center justify-center">
-                <div class="text-center w-full sm:w-7/12 lg:w-1/3 mb-7 lg:mb-0">
+                <div class="text-center w-full sm:w-7/12 lg:w-5/12 mb-7 lg:mb-0">
                     <img class="h-20 md:h-24 lg:h-28 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/easy-chords/logo.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <h4 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
-                            20 Guided Play-Along Lessons.<br>
-                            Feedback From Real Teachers.<br>
-                            Lifetime Course Access.
-                        </strong></h4>
+                    <h2 class="mt-2 sm:mt-4"><strong>4 play-along lessons </strong></h2>
+                    <h3 class="mb-4 sm:mb-5">to get you started with the Blues</h3>
                     <div class="w-full mx-auto sm:mx-0">
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Master your chord changes & inversions.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Course runs June 5 to July 5.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>  Choose your best option to get started.</p>
+                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check mr-1"></i> FREE lifetime access</p>
+                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check mr-1"></i> Play-along with a REAL teacher</p>
+                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check mr-1"></i> No music theory knowledge required</p>
                     </div>
                     <div class="max-w-md md:max-w-auto mx-auto md:mx-0">
                         @include('pianote._partials.sign-up-form', [
