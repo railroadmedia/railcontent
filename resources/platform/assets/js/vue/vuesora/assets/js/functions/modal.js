@@ -35,7 +35,7 @@ export default (function () {
             //event.stopPropagation();
 
             if (modalToOpen) {
-                const appendDiv = modalToOpen.getElementsByClassName('tw-relative');
+                const appendDiv = modalToOpen.getElementsByClassName('modal-container');
 
                 if(appendDiv.length !== 0) {
                     const xIconCheck = modalToOpen.querySelector('#modalXIcon');
