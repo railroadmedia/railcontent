@@ -151,6 +151,7 @@
         ])
     @endif
 
+    @if(empty($trialVersion))
     @include('_partials.components.promo-top-banner',[
         'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-shop-summer-sale-bg.jpg',
         'logo' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-summer-sale-logo.svg',
@@ -158,6 +159,7 @@
         'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
         'promoText' => 'SAVE UP TO 91% UNTIL JULY 31ST!',
     ])
+    @endif
 
     @php
         $bubble1 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/rob-scallon.png';
