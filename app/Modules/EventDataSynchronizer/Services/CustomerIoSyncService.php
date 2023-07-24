@@ -43,12 +43,13 @@ class CustomerIoSyncService
     private UserMembershipFieldsService $userMembershipFieldsService;
 
     public function __construct(
-        SubscriptionRepository $subscriptionRepository,
-        UserProductRepository $userProductRepository,
-        ProductRepository $productRepository,
-        ContentFollowsRepository $contentFollowsRepository,
+        SubscriptionRepository      $subscriptionRepository,
+        UserProductRepository       $userProductRepository,
+        ProductRepository           $productRepository,
+        ContentFollowsRepository    $contentFollowsRepository,
         UserMembershipFieldsService $userMembershipFieldsService,
-    ) {
+    )
+    {
         $this->subscriptionRepository = $subscriptionRepository;
         $this->userProductRepository = $userProductRepository;
         $this->productRepository = $productRepository;
@@ -117,7 +118,7 @@ class CustomerIoSyncService
      * @return array
      * @throws NonUniqueResultException
      */
-    public function getUsersMembershipAccessAttributes(User $user, $brands = [])
+    public function getUsersMembershipAccessAttributes(User $user, array $brands = []): array
     {
         if (empty($brands)) {
             $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
@@ -125,8 +126,7 @@ class CustomerIoSyncService
 
         $latestSubscription = $this->subscriptionRepository->getUserMembershipSubscriptionBeforeDate($user->id, Carbon::now());
         $userProducts = $this->userProductRepository->getAllUsersProducts($user->id);
-        $membershipProduct = $this->userMembershipFieldsService
-            ->getUserProductThatRepresentsUsersMembership($user->id, $userProducts);
+        $membershipProduct = $this->userMembershipFieldsService->getUserProductThatRepresentsUsersMembership($user->id, $userProducts);
 
         $productAttributes = [];
 
@@ -142,86 +142,144 @@ class CustomerIoSyncService
                 $eligibleUserProducts[] = $userProduct;
             }
 
-            // get attributes related to the latest user membership product
-            $latestMembershipUserProductToSync = null;
-
-            foreach ($eligibleUserProducts as $eligibleUserProductIndex => $eligibleUserProduct) {
-                // if its lifetime, use it
-                if (empty($eligibleUserProduct->getExpirationDate())) {
-                    $latestMembershipUserProductToSync = $eligibleUserProduct;
-                    break;
-                }
-
-                if (empty($latestMembershipUserProductToSync)) {
-                    $latestMembershipUserProductToSync = $eligibleUserProduct;
-                    continue;
-                }
-
-                // if this product expiration date is further in the past than whatever is currently set, skip it
-                if (!empty($latestMembershipUserProductToSync) &&
-                    ($latestMembershipUserProductToSync->getExpirationDate() < $eligibleUserProduct->getExpirationDate(
-                        ))) {
-                    $latestMembershipUserProductToSync = $eligibleUserProduct;
-                }
-            }
-
-            // get attributes related to the first created user membership product
-            $firstMembershipUserProductToSync = null;
-
-            foreach ($eligibleUserProducts as $eligibleUserProductIndex => $eligibleUserProduct) {
-                if (empty($firstMembershipUserProductToSync)) {
-                    $firstMembershipUserProductToSync = $eligibleUserProduct;
-
-                    continue;
-                }
-
-                // if this product expiration date is further in the past than whatever is currently set, skip it
-                if (!empty($firstMembershipUserProductToSync) &&
-                    ($eligibleUserProduct->getCreatedAt() < $firstMembershipUserProductToSync->getCreatedAt())) {
-                    $firstMembershipUserProductToSync = $eligibleUserProduct;
-                }
-            }
-
-            $membershipAccessExpirationDate = !empty($membershipProduct) ? $membershipProduct->getExpirationDate(
-            ) : null;
-
-            if (!empty($latestMembershipUserProductToSync) && !empty($firstMembershipUserProductToSync)) {
-                $membershipLatestAccessStartDate = $latestMembershipUserProductToSync->getCreatedAt();
-                $membershipFirstAccessStartDate = $firstMembershipUserProductToSync->getCreatedAt();
-            } else {
-                $membershipLatestAccessStartDate = null;
-                $membershipFirstAccessStartDate = null;
-            }
-
-            $productAttributes += [
-                $brand . '_membership_access-expiration-date' => !empty($membershipAccessExpirationDate) ?
-                    $membershipAccessExpirationDate->timestamp : null,
-                $brand . '_membership_latest-access-start-date' => !empty($membershipLatestAccessStartDate) ?
-                    $membershipLatestAccessStartDate->timestamp : null,
-                $brand . '_membership_first-access-start-date' => !empty($membershipFirstAccessStartDate) ?
-                    $membershipFirstAccessStartDate->timestamp : null,
-                $brand . '_membership_is_lifetime' => !empty($latestMembershipUserProductToSync) ?
-                    empty($latestMembershipUserProductToSync->getExpirationDate()) : null,
-                $brand . '_membership_latest-access-type' => !empty($latestSubscription) ?
-                    $latestSubscription->getIntervalType() : null,
-                $brand . '_membership_status' => !empty($latestSubscription) ?
-                    $latestSubscription->getIsActive() : null,
-                $brand . '_membership_latest-access-product-id' => !empty($latestMembershipUserProductToSync) ?
-                    $latestMembershipUserProductToSync->getProduct()->getId() : null
-            ];
-
+            $latestMembershipUserProductToSync = $this->getLatestMembershipUserProduct($eligibleUserProducts);
+            $firstMembershipUserProductToSync = $this->getFirstMembershipUserProduct($eligibleUserProducts);
+            $this->addMembershipAccessProperties($brand, $latestSubscription, $membershipProduct, $latestMembershipUserProductToSync, $firstMembershipUserProductToSync, $productAttributes);
         }
 
-        // if the user has ANY brand lifetime membership, set the data to be true for ALL brands
-        $brand_ltm_keys = collect($brands)->transform(fn($brand) => "{$brand}_membership_is_lifetime")->toArray();
-        $lifetimeMemberships = array_filter($productAttributes, fn($key) => in_array($key, $brand_ltm_keys), ARRAY_FILTER_USE_KEY);
-        if (collect($lifetimeMemberships)->contains(true)) {
-            foreach($brand_ltm_keys as $brand_ltm_key) {
-                $productAttributes[$brand_ltm_key] = true;
-            }
-        }
+        $this->handleLifetimeMembership($userProducts, $brands, $productAttributes);
 
         return $productAttributes;
+    }
+
+    /**
+     * Get the latest membership UserProduct
+     * (or the lifetime membership product, if applicable)
+     *
+     * @param array<UserProduct> $eligibleUserProducts
+     * @return UserProduct|null
+     */
+    private function getLatestMembershipUserProduct(array $eligibleUserProducts): UserProduct|null
+    {
+        $latestMembershipUserProductToSync = null;
+        foreach ($eligibleUserProducts as $eligibleUserProductIndex => $eligibleUserProduct) {
+            // if it's lifetime, use it
+            if (empty($eligibleUserProduct->getExpirationDate())) {
+                $latestMembershipUserProductToSync = $eligibleUserProduct;
+                break;
+            }
+
+            if (empty($latestMembershipUserProductToSync)) {
+                $latestMembershipUserProductToSync = $eligibleUserProduct;
+                continue;
+            }
+
+            // if this product expiration date is further in the past than whatever is currently set, skip it
+            if ($latestMembershipUserProductToSync->getExpirationDate() < $eligibleUserProduct->getExpirationDate()) {
+                $latestMembershipUserProductToSync = $eligibleUserProduct;
+            }
+        }
+        return $latestMembershipUserProductToSync;
+    }
+
+    /**
+     * Get the first membership UserProduct
+     *
+     * @param array<UserProduct> $eligibleUserProducts
+     * @return UserProduct|null
+     */
+    private function getFirstMembershipUserProduct(array $eligibleUserProducts): UserProduct|null
+    {
+        $firstMembershipUserProductToSync = null;
+        foreach ($eligibleUserProducts as $eligibleUserProductIndex => $eligibleUserProduct) {
+            if (empty($firstMembershipUserProductToSync)) {
+                $firstMembershipUserProductToSync = $eligibleUserProduct;
+
+                continue;
+            }
+
+            // if this product expiration date is further in the past than whatever is currently set, skip it
+            if ($eligibleUserProduct->getCreatedAt() < $firstMembershipUserProductToSync->getCreatedAt()) {
+                $firstMembershipUserProductToSync = $eligibleUserProduct;
+            }
+        }
+
+        return $firstMembershipUserProductToSync;
+    }
+
+    /**
+     * Add attributes related to the user's membership product
+     *
+     * @param string $brand
+     * @param Subscription|null $latestSubscription
+     * @param UserProduct|null $membershipProduct
+     * @param UserProduct|null $latestMembershipUserProductToSync
+     * @param UserProduct|null $firstMembershipUserProductToSync
+     * @param array $productAttributes
+     * @return void
+     */
+    private function addMembershipAccessProperties(string        $brand,
+                                                   ?Subscription $latestSubscription,
+                                                   ?UserProduct  $membershipProduct,
+                                                   ?UserProduct  $latestMembershipUserProductToSync,
+                                                   ?UserProduct  $firstMembershipUserProductToSync,
+                                                   array         &$productAttributes): void
+    {
+        $membershipAccessExpirationDate = $membershipProduct?->getExpirationDate() ?: null;
+
+        if (!empty($latestMembershipUserProductToSync) && !empty($firstMembershipUserProductToSync)) {
+            $membershipLatestAccessStartDate = $latestMembershipUserProductToSync->getCreatedAt();
+            $membershipFirstAccessStartDate = $firstMembershipUserProductToSync->getCreatedAt();
+        } else {
+            $membershipLatestAccessStartDate = null;
+            $membershipFirstAccessStartDate = null;
+        }
+
+        $productAttributes += [
+            $brand . '_membership_access-expiration-date' => !empty($membershipAccessExpirationDate) ?
+                $membershipAccessExpirationDate->timestamp : null,
+            $brand . '_membership_latest-access-start-date' => !empty($membershipLatestAccessStartDate) ?
+                $membershipLatestAccessStartDate->timestamp : null,
+            $brand . '_membership_first-access-start-date' => !empty($membershipFirstAccessStartDate) ?
+                $membershipFirstAccessStartDate->timestamp : null,
+            $brand . '_membership_is_lifetime' => !empty($latestMembershipUserProductToSync) ?
+                empty($latestMembershipUserProductToSync->getExpirationDate()) : null,
+            $brand . '_membership_latest-access-type' => !empty($latestSubscription) ?
+                $latestSubscription->getIntervalType() : null,
+            $brand . '_membership_status' => !empty($latestSubscription) ?
+                $latestSubscription->getIsActive() : null,
+            $brand . '_membership_latest-access-product-id' => !empty($latestMembershipUserProductToSync) ?
+                $latestMembershipUserProductToSync->getProduct()->getId() : null
+        ];
+    }
+
+    /**
+     * Handle special cases if the user has a lifetime membership product
+     *
+     * @param array<UserProduct> $userProducts
+     * @param array<string> $brands
+     * @param array $productAttributes
+     * @return void
+     */
+    private function handleLifetimeMembership(array $userProducts, array $brands, array &$productAttributes): void
+    {
+        $lifetimeMemberships = collect($userProducts)->filter(function (UserProduct $userProduct) {
+            return empty($userProduct->getExpirationDate());
+        });
+
+        if ($lifetimeMemberships->isNotEmpty()) {
+            /**
+             * @var UserProduct $lifetimeMembership
+             */
+            $lifetimeMembership = $lifetimeMemberships->first();
+            $brand_ltm_keys = collect($brands)->transform(fn($brand) => "{$brand}_membership_is_lifetime")->toArray();
+            foreach ($brand_ltm_keys as $brand_ltm_key) {
+                $productAttributes[$brand_ltm_key] = true;
+            }
+            // BR-904: the musora_membership_latest-access-product-id should use the lifetime membership product, if applicable
+            $rootBrand = config('event-data-synchronizer.customer_io_account_to_sync_all_brands');
+            $productAttributes[$rootBrand . '_membership_latest-access-product-id'] = $lifetimeMembership->getProduct()?->getId() ?? null;
+        }
     }
 
     /**
@@ -232,7 +290,7 @@ class CustomerIoSyncService
      * @param array $brands
      * @return array
      */
-    public function getUsersContentFollowAttributes(User $user, $brands = [])
+    public function getUsersContentFollowAttributes(User $user, array $brands = [])
     {
         // for now we'll sync all brands to all workspaces
 
@@ -278,7 +336,6 @@ class CustomerIoSyncService
         return $contentFollowAttributes;
     }
 
-
     /**
      * If no brands are passed in this will get attributes for all brands in the config.
      * We need the $userProductAttributes since if the user is lifetime all the attributes should be null.
@@ -288,7 +345,7 @@ class CustomerIoSyncService
      * @param array $brands
      * @return array
      */
-    public function getUsersSubscriptionAttributes(User $user, array $userMembershipAccessAttributes, $brands = [])
+    public function getUsersSubscriptionAttributes(User $user, array $userMembershipAccessAttributes, array $brands = [])
     {
         if (empty($brands)) {
             $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
@@ -337,10 +394,9 @@ class CustomerIoSyncService
 
                 // if this subscription paid_until is further in the past than whatever is currently set, skip it
                 // unless the set subscription is not-active and this one is, then use the active one
-                if (!empty($latestSubscriptionToSync) &&
-                    ($latestSubscriptionToSync->getPaidUntil() < $userSubscription->getPaidUntil() ||
-                        !$latestSubscriptionToSync->getIsActive() &&
-                        $userSubscription->getIsActive())) {
+                if (($latestSubscriptionToSync->getPaidUntil() < $userSubscription->getPaidUntil() ||
+                    !$latestSubscriptionToSync->getIsActive() &&
+                    $userSubscription->getIsActive())) {
                     $latestSubscriptionToSync = $userSubscription;
                 }
             }
@@ -357,8 +413,7 @@ class CustomerIoSyncService
                 }
 
                 // get the earliest started subscription
-                if (!empty($firstSubscriptionToSync) &&
-                    $firstSubscriptionToSync->getStartDate() > $userSubscription->getStartDate()) {
+                if ($firstSubscriptionToSync->getStartDate() > $userSubscription->getStartDate()) {
                     $firstSubscriptionToSync = $userSubscription;
                 }
             }
@@ -447,7 +502,7 @@ class CustomerIoSyncService
             }
 
             // if the user is a lifetime make sure all subscription related info is set to null
-            if (($userMembershipAccessAttributes[$brand . '_membership_is_lifetime'] ?? false) == true) {
+            if (($userMembershipAccessAttributes[$brand . '_membership_is_lifetime'] ?? false)) {
                 $subscriptionPriceCents = null;
                 $subscriptionCurrency = null;
                 $membershipRenewalDate = null;
@@ -507,15 +562,12 @@ class CustomerIoSyncService
      * @param array $brands
      * @return array
      */
-    public function getUsersProductOwnershipStrings(User $user, $brands = [])
+    public function getUsersProductOwnershipStrings(User $user, array $brands = [])
     {
         if (empty($brands)) {
             $brands = config('event-data-synchronizer.customer_io_brands_to_sync');
         }
 
-        /**
-         * @var $userProducts UserProduct[]
-         */
         $userProducts = $this->userProductRepository->getAllUsersProducts($user->id);
 
         $finalArray = [];

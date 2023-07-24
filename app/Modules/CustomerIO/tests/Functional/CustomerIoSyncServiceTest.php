@@ -18,8 +18,19 @@ use Modules\UserManagementSystem\Models\User;
 
 class CustomerIoSyncServiceTest extends CustomerIoTestCase
 {
-    const BRAND = "musora";
+    const ROOT_BRAND = "musora";
+    const MEMBERSHIP_LATEST_ACCESS_PRODUCT_ID_KEY = "_membership_latest-access-product-id";
     private CustomerIoSyncService $customerIoSyncService;
+
+    /**
+     * @throws BindingResolutionException
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->customerIoSyncService = app()->make(CustomerIoSyncService::class);
+    }
 
     /**
      * @throws NonUniqueResultException
@@ -27,7 +38,7 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
     public function test_lifetime_membership_applies_to_all_brands_in_customer_io()
     {
         $user = $this->createUser();
-        $lifetimeProduct = $this->createLifetimeProduct();
+        $this->createProductForUser($user);
 
         // verify that the user does not have any lifetime membership
         $lifetimeAccess = $this->getLifetimeMembershipAccessAttributes($user);
@@ -38,12 +49,8 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
         // record the number of brand memberships, so we can ensure we have that many true later
         $membershipCount = $lifetimeAccess->count();
 
-        // assign the lifetime product to the user
-        UserProduct::factory()->create([
-            "user_id" => $user->id,
-            "product_id" => $lifetimeProduct->id,
-            "expiration_date" => null
-        ]);
+        // create a lifetime product and assign it to the user
+        $this->createLifetimeProduct($user);
         $user->refresh();
 
         $this->customerIoSyncService->getUsersMembershipAccessAttributes($user);
@@ -58,27 +65,76 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
         $this->assertCount($membershipCount, $lifetimeMemberships);
     }
 
+    public function test_musora_membership_latest_access_product_respects_lifetime_memberships_in_customer_io()
+    {
+        $brand_1 = "singeo";
+        $brand_2 = "pianote";
+        $brand_3 = "drumeo";
+
+        // create a user with a non-lifetime membership product for singeo
+        $user = $this->createUser();
+        $firstProduct = $this->createProductForUser($user, $brand_1);
+        // then add a lifetime membership product for pianote
+        $lifetimeProduct = $this->createLifetimeProduct($user, $brand_2);
+        // and another non-lifetime membership, that will be the later product
+        $laterProduct = $this->createProductForUser($user, $brand_3);
+
+        $user->refresh();
+
+        $brandAccounts = config("event-data-synchronizer.customer_io_account_name_brands_to_sync", []);
+
+        $brand_1_membershipLatestAccessProductIdAttributes = $this->getMembershipLatestAccessProductIdAttributes($user, $brandAccounts[$brand_1]);
+        $brand_2_membershipLatestAccessProductIdAttributes = $this->getMembershipLatestAccessProductIdAttributes($user, $brandAccounts[$brand_2]);
+        $brand_3_membershipLatestAccessProductIdAttributes = $this->getMembershipLatestAccessProductIdAttributes($user, $brandAccounts[$brand_3]);
+
+        // brand 1 does not have lifetime membership, so its own product is the original
+        $this->assertSame($firstProduct->id, $brand_1_membershipLatestAccessProductIdAttributes->get($brand_1 . self::MEMBERSHIP_LATEST_ACCESS_PRODUCT_ID_KEY));
+        // ... and the musora version is the lifetime product
+        $this->assertSame($lifetimeProduct->id, $brand_1_membershipLatestAccessProductIdAttributes->get(self::ROOT_BRAND . self::MEMBERSHIP_LATEST_ACCESS_PRODUCT_ID_KEY));
+
+        // brand 2 has a lifetime membership, so its own product and the musora version are both the lifetime product
+        $this->assertSame($lifetimeProduct->id, $brand_2_membershipLatestAccessProductIdAttributes->get($brand_2 . self::MEMBERSHIP_LATEST_ACCESS_PRODUCT_ID_KEY));
+        $this->assertSame($lifetimeProduct->id, $brand_2_membershipLatestAccessProductIdAttributes->get(self::ROOT_BRAND . self::MEMBERSHIP_LATEST_ACCESS_PRODUCT_ID_KEY));
+
+        // brand 3 does not have lifetime membership, so its own product is the original
+        $this->assertSame($laterProduct->id, $brand_3_membershipLatestAccessProductIdAttributes->get($brand_3 . self::MEMBERSHIP_LATEST_ACCESS_PRODUCT_ID_KEY));
+        // ... and the musora version is the lifetime product
+        $this->assertSame($lifetimeProduct->id, $brand_3_membershipLatestAccessProductIdAttributes->get(self::ROOT_BRAND . self::MEMBERSHIP_LATEST_ACCESS_PRODUCT_ID_KEY));
+    }
+
     /**
-     * Create a user with a subscription to a non-lifetime product
+     * Create a user who is not a lifetime member
      *
      * @return User
      */
     private function createUser(): User
     {
+        // ensure that the user does not have any lifetime membership
+        return  User::factory([
+            "is_lifetime_member" => false,
+            "access_level" => null,
+        ])->create();
+    }
+
+    /**
+     * Create a non-lifetime product and a subscription to it for the given user
+     *
+     * @param User $user
+     * @param string|null $brand
+     * @return Product
+     */
+    private function createProductForUser(User $user, ?string $brand = self::ROOT_BRAND): Product
+    {
         $product = Product::factory()->createSubscriptionProduct(
-            self::BRAND,
+            $brand,
             DigitalAccessType::Basic,
             Interval::Year,
             100
         );
-        // ensure that the user does not have any lifetime membership
-        /**
-         * @var User $user
-         */
-        $user = User::factory([
-            "is_lifetime_member" => false,
-            "access_level" => null,
-        ])->hasUserProduct(["product_id" => $product->id])->create();
+        UserProduct::factory()->create([
+            "user_id" => $user->id,
+            "product_id" => $product->id,
+        ]);
 
         $activeTime = Carbon::today();
         $expirationTime = Carbon::today()->addMonths(6)->addDays(10);
@@ -88,19 +144,21 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
                 "interval_count" => 1,
             ]);
 
-        return $user;
+        return $product;
     }
 
     /**
-     * Create a lifetime membership product for the specified brand
+     * Create a lifetime membership product for the specified brand.
+     * If a user is provided, it will automatically be linked to the user.
      *
+     * @param User|null $user
      * @param string|null $brand
      * @return Product
      */
-    private function createLifetimeProduct(?string $brand = self::BRAND): Product
+    private function createLifetimeProduct(?User $user = null, ?string $brand = self::ROOT_BRAND): Product
     {
         $name = "Lifetime membership for $brand";
-        return Product::factory([
+        $product = Product::factory([
             "brand" => $brand,
             "name" => $name,
             "sku" => Str::slug($name),
@@ -116,6 +174,15 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
             "digital_membership_access_expiration_date" => null,
         ])
             ->create();
+
+        if ($user) {
+            UserProduct::factory()->create([
+                "user_id" => $user->id,
+                "product_id" => $product->id,
+                "expiration_date" => null
+            ]);
+        }
+        return $product;
     }
 
     /**
@@ -148,12 +215,19 @@ class CustomerIoSyncServiceTest extends CustomerIoTestCase
     }
 
     /**
-     * @throws BindingResolutionException
+     * Get the user's custom attributes from the CustomerIO sync service, and return only those that are
+     * for brand _membership_latest-access-product-id
+     *
+     * @param User $user
+     * @param array $brands
+     * @return Collection
      */
-    protected function setUp(): void
+    private function getMembershipLatestAccessProductIdAttributes(User $user, array $brands): Collection
     {
-        parent::setUp();
+        $userAttrs = collect($this->customerIoSyncService->getUsersCustomAttributes($user, $brands));
 
-        $this->customerIoSyncService = app()->make(CustomerIoSyncService::class);
+        return $userAttrs->filter(function ($value, $key) {
+            return Str::endsWith($key, self::MEMBERSHIP_LATEST_ACCESS_PRODUCT_ID_KEY);
+        });
     }
 }
