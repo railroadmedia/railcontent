@@ -23881,6 +23881,9 @@ a:visited{
 .tw-p-2{
   padding: 0.5rem !important;
 }
+.tw-p-\[10px\]{
+  padding: 10px !important;
+}
 .tw-p-1{
   padding: 0.25rem !important;
 }
@@ -24282,9 +24285,6 @@ a:visited{
 }
 .tw-pt-\[58px\]{
   padding-top: 58px !important;
-}
-.tw-pb-\[32px\]{
-  padding-bottom: 32px !important;
 }
 .tw-pl-\[16px\]{
   padding-left: 16px !important;
@@ -25537,10 +25537,6 @@ a:visited{
 .tw-dark .dark\:tw-bg-\[\#071826\]{
   --tw-bg-opacity: 1 !important;
   background-color: rgb(7 24 38 / var(--tw-bg-opacity)) !important;
-}
-.tw-dark .dark\:tw-bg-\[\#191b1c\]{
-  --tw-bg-opacity: 1 !important;
-  background-color: rgb(25 27 28 / var(--tw-bg-opacity)) !important;
 }
 .tw-dark .dark\:tw-bg-\[\#081f35\]{
   --tw-bg-opacity: 1 !important;

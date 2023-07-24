@@ -56,10 +56,10 @@ const handleAddRelatedLesson = () => {
 };
 </script>
 <template>
-    <div class="tw-flex tw-flex-col tw-pb-[32px]">
+    <div class="tw-flex tw-flex-col tw-py-[24px]">
         <h3 class="tw-text-[18px] tw-text-black tw-font-bold dark:tw-text-white tw-pb-[12px]">Related Lesson</h3>
         <div
-            class="tw-flex dark:tw-bg-[#00101D] dark:tw-border-[#223F57] tw-border-[#E0E0E1] tw-border-[1px] tw-rounded-[8px] tw-p-[12px]">
+            class="tw-flex dark:tw-bg-[#00101D] dark:tw-border-[#223F57] tw-border-[#E0E0E1] tw-border-[1px] tw-rounded-[8px] tw-p-[10px]">
             <a :href="relatedLessonUrl" class="tw-h-[70px]">
                 <img :src="`https://musora.com/cdn-cgi/image/width=330/${relatedLessonThumbnail}`"
                     class="tw-h-[70px] tw-rounded" />
