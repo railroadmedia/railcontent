@@ -7,7 +7,7 @@
                 href="{{ get_legacy_brand_base_url('musora') }}"
             @endif
         >
-            <img class="@if(!empty($whiteNav)) invert @endif" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png" alt="Drumeo">
+            <img class="@if(!empty($whiteNav)) invert @endif" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png" alt="Drumeo">
         </a>
     </div>
 

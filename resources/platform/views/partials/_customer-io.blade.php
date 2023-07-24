@@ -16,7 +16,7 @@
         s.parentNode.insertBefore(t, s);
     })();
     _cio.identify({
-        id: {{ user()->id }},
+        id: "{{ user()->getCustomerIOId() }}",
         created_at: "{{ user()->created_at }}",   
         email: "{{ user()->email }}",
         first_name: "{{ user()->first_name }}",

@@ -41,11 +41,11 @@
         <div class="container mx-auto clearfix" style="max-width:940px">
             <div class="text-center sm:px-3">
                 <a href="/classical-piano/lessons">
-                    <img class="mx-auto inline-block h-8 md:h-16 lg:h-20 mb-2" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/@yield('lesson-logo')" alt="lesson logo">
+                    <img class="mx-auto inline-block h-8 md:h-16 lg:h-20 mb-2" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/@yield('lesson-logo')" alt="lesson logo">
                 </a>
                 <div class="video-row relative my-4 sm:my-7">
                     @hasSection('prev-thumb')
-                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -10%; width: 80%;" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/@yield('prev-thumb')" alt="prev-thumb">
+                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -10%; width: 80%;" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/@yield('prev-thumb')" alt="prev-thumb">
                     @endif
 
                     <div class="aspect-16:9 w-full relative">
@@ -53,7 +53,7 @@
                     </div>
 
                     @hasSection('next-thumb')
-                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%); left: 110%; width: 80%;" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/@yield('next-thumb')" alt="next-thumb">
+                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%); left: 110%; width: 80%;" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/@yield('next-thumb')" alt="next-thumb">
                     @endif
                 </div>
             </div>

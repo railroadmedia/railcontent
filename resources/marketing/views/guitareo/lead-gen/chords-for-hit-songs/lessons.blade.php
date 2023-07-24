@@ -53,7 +53,7 @@
 
 @section('body')
     <header class="lazyload bg-cover bg-center py-10 text-center" data-bg="https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/lesson-header.jpg">
-        <img class="lazyload inline-block h-36" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
+        <img class="lazyload inline-block h-36" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
     </header>
 
     <section class="py-12 md:py-20" style="background:#010D18;">

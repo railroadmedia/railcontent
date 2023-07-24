@@ -29,6 +29,7 @@ class LeadgenLessonResolver implements ResolverInterface
             return $layout->duplicateAndHydrate($lesson->id, [
                 'title' => $lesson->title,
                 'desc' => $lesson->desc,
+                'caption' => $lesson->caption,
                 'thumbnail_text' => $lesson->thumbnail,
                 'thumbnail_file' => $lesson->thumbnail,
                 'video_src' => $lesson->video_src,

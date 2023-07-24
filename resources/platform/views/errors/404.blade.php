@@ -65,7 +65,7 @@
         >
             <template v-cloak v-slot="slotProps">
 
-                <div class="tw-relative tw-flex tw-flex-col tw-h-[calc(100%+1.75rem)] tw-justify-center tw-items-center">
+                <div class="tw-relative tw-flex tw-flex-col tw-h-[calc(100vh-152px)] lg:tw-h-[calc(100vh-128px)] tw-justify-center tw-items-center">
                     <img src="https://cdn.musora.com/image/fetch/c_thumb,w_1200,q_auto:best/https://d3fzm1tzeyr5n3.cloudfront.net/Rehearsal+Studio_deSaturated.png"
                          alt="Image of Musical instrument on a stage"
                          class="tw-absolute tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
@@ -119,19 +119,52 @@
 
 @else
 
-    <body class="tw-bg-[#000C17] tw-text-white tw-flex">
-    <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
-        <div class="tw-text-center tw-max-w-md tw-px-6 md:tw-px-0 md:tw-max-w-full">
-            <img class="md:tw-h-60 lg:tw-h-72 tw-mx-auto" src="https://dmmior4id2ysr.cloudfront.net/logos/404_musora_logo.png" alt="404 logo" />
-            <div class="tw-mb-2 tw-text-xl md:tw-text-2xl lg:tw-text-3xl">Oops, this link is lost in your <br class="md:tw-hidden">stack of notes.</div>
-            <div class="tw-font-normal tw-mb-3 md:tw-mb-6 tw-text-sm md:tw-text- tw-text-[#E4E4E7]">The page you're looking for doesn't exist.</div>
-            <button onclick="history.back()" class="tw-btn-primary tw-bg-white tw-text-black tw-mb-3 md:tw-mb-4">Go Back</button>
-            <p class="tw-text-sm md:tw-text-base tw-text-[#E4E4E7]">
-                Go back or contact <u class="tw-text-sm md:tw-text-base">support@musora.com</u>
-            </p>
+    <body class="tw-text-white tw-flex
+                @if($brand == 'drumeo')
+                    tw-bg-drumeo
+                @elseif($brand == 'pianote')
+                     tw-bg-pianote
+                @elseif($brand == 'guitareo')
+                     tw-bg-guitareo
+                @elseif($brand == 'singeo')
+                     tw-bg-singeo
+                @else
+                     tw-bg-[#000C17]
+                 @endif
+     ">
+        <div class="tw-flex-1 tw-flex tw-flex-col tw-items-center tw-justify-center">
+            <div class="tw-text-center tw-max-w-md tw-px-6 md:tw-px-0 md:tw-max-w-full">
+                <img alt="404 - Not Found" class="w-full md:tw-h-60 lg:tw-h-72 tw-mx-auto"
+                    @if($brand == 'drumeo')
+                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/drumeo-404.svg"
+                    @elseif($brand == 'pianote')
+                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/pianote-404.svg"
+                    @elseif($brand == 'guitareo')
+                        src="https://dmmior4id2ysr.cloudfront.net/assets/images/guitareo-404.svg"
+                    @else
+                        src="https://dmmior4id2ysr.cloudfront.net/logos/404_musora_logo.png"
+                    @endif
+                >
+                <div class="tw-mb-2 tw-text-xl md:tw-text-2xl lg:tw-text-3xl">
+                    @if($brand == 'drumeo')
+                        Oops, this link is lost in your hardware case.
+                    @elseif($brand == 'pianote')
+                        Oops, this link is lost in your piano bench.
+                    @elseif($brand == 'guitareo')
+                        Oops, this link is lost in your guitar case.
+                    @elseif($brand == 'singeo')
+                        Oops, look like this link hit the wrong note.
+                    @else
+                        Oops, this link is lost in your stack of notes.
+                    @endif
+                </div>
+                <div class="tw-font-normal tw-mb-3 md:tw-mb-6 tw-text-sm md:tw-text- tw-text-[#E4E4E7]">The page you're looking for doesn't exist.</div>
+                <button onclick="history.back()" class="tw-btn-primary tw-bg-white tw-text-black tw-mb-3 md:tw-mb-4">Go Back</button>
+                <p class="tw-text-sm md:tw-text-base tw-text-[#E4E4E7]">
+                    Go back or <a href="https://www.musora.com/contact"><u class="tw-text-sm md:tw-text-base">contact us</u></a>
+                </p>
+            </div>
         </div>
-    </div>
     </body>
-
 @endif
 </html>

@@ -7,7 +7,7 @@
     <meta name="description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
     <meta property="og:description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
 
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/gsotd/updated/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/getting-started/">
 @stop
 
@@ -224,8 +224,8 @@
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support.",
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",
-        "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-30-Day]=1&locked=true",
-        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-30-Day]=1&locked=true",
+        "plusAnnualLink" => "/getting-started/ty-annual",
+        "plusMonthlyLink" => "/getting-started/ty-monthly",
     ])
     @include('musora.sales.components.trial-explanation', [
         'instrument' => 'drumming',
