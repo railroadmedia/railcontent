@@ -242,12 +242,12 @@
                 ]
             ],
             [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts2.jpg',
                 'title' => 'Guided Workouts',
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts.jpg',
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts2.jpg',
                     ],
                 ]
             ],
