@@ -119,7 +119,7 @@
     </div>
     </div>
     <section class="relative text-center px-4 sm:px-6 pt-16 sm:pt-20 lg:pt-28 pb-6 sm:pb-10 lg:pb-14 bg-cover bg-center" style="background:linear-gradient(to bottom, #EEECEA, #fff);">
-        <div class="absolute top-0 left-0 right-0 bg-cover lg:bg-contain bg-no-repeat bg-top z-10 h-1/2 lg:h-[70%]" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-bg.png);"></div>
+        <div class="absolute top-0 left-0 right-0 bg-cover lg:bg-contain bg-no-repeat bg-top z-10 h-1/2 lg:h-[75%]" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-bg.png);"></div>
         <div class="z-20 relative">
             <h3 class="leading-tight"><strong>Your first week of piano <br class="inline sm:hidden"> lessons - FREE</strong></h3>
             <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">
