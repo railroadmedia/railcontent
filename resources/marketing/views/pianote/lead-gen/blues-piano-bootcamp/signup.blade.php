@@ -2,13 +2,13 @@
 
 @section('meta')
     @parent
-    <title>Chord Hacks | Pianote</title>
-    <meta property="og:title" content="Chord Hacks">
+    <title>Blues Piano Bootcamp | Pianote</title>
+    <meta property="og:title" content="Blues Piano Bootcamp">
 
-    <meta name="description" content="The easiest way to learn beautiful piano chords.">
-    <meta property="og:description" content="The easiest way to learn beautiful piano chords.">
+    <meta name="description" content="The essential keys to playing blues piano">
+    <meta property="og:description" content="The essential keys to playing blues piano">
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/share-image.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.pianote.com/chord-hacks">
+    <meta property="og:url" content="https://www.pianote.com/blues-piano-bootcamp">
 @endsection
 
 @section('head')
@@ -58,13 +58,13 @@
                     <div class="mt-2 sm:mt-3">
                         @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Pianote - Engagement - Trigger - Chord Hacks - Web Form",
-                        "formName" => 'Chord Hacks',
+                        "formId" => "Pianote - Engagement - Trigger - Blues Piano Bootcamp - Web Form",
+                        "formName" => 'Blues Piano Bootcamp',
                             "buttonText" => "start for free",
                             'stacked' => true,
                             'inputBorder' => '1px solid #747474',
                             'disclaimerColor' => 'rgba(208, 226, 231, 0.8)',
-                    "redirectURL" => "/chord-hacks/thank-you/"
+                    "redirectURL" => "/blues-piano-bootcamp/thank-you/"
                         ])
                     </div>
                 </div>
@@ -213,12 +213,12 @@
                     <div class="max-w-md md:max-w-auto mx-auto">
                         @include('pianote._partials.sign-up-form', [
                         "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Pianote - Engagement - Trigger - Chord Hacks - Web Form",
-                        "formName" => 'Chord Hacks',
+                        "formId" => "Pianote - Engagement - Trigger - Blues Piano Bootcamp - Web Form",
+                        "formName" => 'Blues Piano Bootcamp',
                             "buttonText" => "start for free",
                             'stacked' => true,
                             'inputBorder' => '1px solid #7A8491',
-                        "redirectURL" => "/chord-hacks/thank-you/"
+                        "redirectURL" => "/blues-piano-bootcamp/thank-you/"
                         ])
                     </div>
                 </div>

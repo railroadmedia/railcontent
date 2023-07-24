@@ -1,13 +1,13 @@
 @extends('pianote.lead-gen.lead-gen-layout-tw',[ 'appTailwind' => true, ])
 
 @section('meta')
-    <title>Chord Hacks | Pianote</title>
-    <meta property="og:title" content="Chord Hacks">
+    <title>Blues Piano Bootcamp | Pianote</title>
+    <meta property="og:title" content="Blues Piano Bootcamp">
 
-    <meta name="description" content="The easiest way to learn beautiful piano chords.">
-    <meta property="og:description" content="The easiest way to learn beautiful piano chords.">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/share-image.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.pianote.com/chord-hacks">
+    <meta name="description" content="The essential keys to playing blues piano">
+    <meta property="og:description" content="The essential keys to playing blues piano">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/share-image.jpg" style="display: none;">
+    <meta property="og:url" content="https://www.pianote.com/blues-piano-bootcamp">
 @stop
 
 @section('head')
@@ -50,7 +50,7 @@
     <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12" style="background-color:#000a1e;">
         <div class="container mx-auto max-w-3xl clearfix">
             <div class="text-center sm:px-3">
-                <img class="h-8 sm:h-10" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/logo.svg">
+                <img class="h-14 sm:h-20" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/blues-piano-bootcamp-logo-white.png">
                 <h3 class="my-4"><strong>
                         Check your email for<br class="inline sm:hidden"> your free piano lessons.</strong></h3>
                 <p class="leading-normal mb-8">
@@ -224,8 +224,8 @@
         "firstPoint" => "Unlimited piano lessons.",
         "thirdPoint" => "Direct access to real teachers.",
         "fifthPoint" => "Lesson access for singing, guitar, and drums.",
-        "plusAnnualLink" => "/chord-hacks/ty-annual",
-        "plusMonthlyLink" => "/chord-hacks/ty-monthly",
+        "plusAnnualLink" => "/blues-piano-bootcamp/ty-annual",
+        "plusMonthlyLink" => "/blues-piano-bootcamp/ty-monthly",
     ])
     @include('musora.sales.components.trial-explanation', [
         'instrument' => 'piano',
