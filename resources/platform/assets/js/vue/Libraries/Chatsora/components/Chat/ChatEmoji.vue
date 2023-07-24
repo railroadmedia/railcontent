@@ -1,7 +1,7 @@
 <template>
     <div class="tw-relative">
         <div
-            class="cs-emoji tw-absolute tw-right-0 tw-bottom-0 tw-rounded-md tw-z-150 tw-overflow-hidden dark:tw-bg-[#002138] tw-border dark:tw-border-[#223F57]"
+            class="cs-emoji tw-absolute tw-right-0 tw-bottom-0 tw-rounded-md tw-z-150 tw-overflow-hidden tw-bg-[#F4F4F5] dark:tw-bg-[#002138] tw-border tw-border-[#B2B2B5] dark:tw-border-[#223F57]"
             v-if="showWindow"
         >
             <div class="cs-emoji-tabs tw-flex tw-flex-row tw-items-center tw-justify-between tw-border-b tw-border-gray-800 tw-text-lg">
