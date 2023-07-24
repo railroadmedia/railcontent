@@ -147,12 +147,12 @@ onBeforeMount(()=> {
                             class="tw-max-w-[185px] sm:tw-max-w-none tw-min-w-0 group-hover:tw-max-w-[185px] tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-h-[42px] tw-items-center">
                             <span class="tw-truncate tw-capitalize tw-text-sm group-hover:tw-underline">{{ item.name }}</span>
                         </a>
-                        <div class="md:tw-hidden group-hover:tw-inline-flex tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center dark:tw-text-white">
+                        <div class="tw-opacity-0 group-hover:tw-opacity-100 tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center dark:tw-text-white">
                             <button title="Unpin Playlist" @click="unpinPlaylist(item, brand)">
                                 <musora-icon icon-name="tack-filled" class="tw-w-[24px] tw-h-[24px] tw-mx-auto"  />
                             </button>
                         </div>
-                        <div class="md:tw-hidden group-hover:tw-inline-flex dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
+                        <div class="tw-opacity-0 group-hover:tw-opacity-100 dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
                             <a :href="item.playback_url"
                                 class="tw-text-[#00101D] dark:tw-text-white"
                                 :class="!item.playback_url ? 'tw-opacity-20 tw-pointer-events-none' : 'hover:tw-opacity-80'"
@@ -179,13 +179,13 @@ onBeforeMount(()=> {
                            class="tw-max-w-[185px] sm:tw-max-w-none tw-min-w-0 group-hover:tw-max-w-[185px] tw-flex tw-flex-wrap tw-px-[25px] tw-w-full tw-no-underline tw-text-inherit tw-h-[42px] tw-items-center">
                             <span class="tw-truncate tw-capitalize tw-text-sm group-hover:tw-underline">{{ item.name }}</span>
                         </a>
-                        <div class="md:tw-hidden group-hover:tw-inline-flex tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center dark:tw-text-white unpinned-pin-container">
+                        <div class="tw-opacity-0 group-hover:tw-opacity-100 tw-w-[30px] tw-shrink-0 tw-items-center tw-justify-center dark:tw-text-white unpinned-pin-container">
                             <button title="Pin Playlist" @click="pinPlaylist(item, brand)">
                                 <musora-icon icon-name="tack" class="tw-w-[24px] tw-h-[24px] tw-mx-auto outlined-pin"  />
                                 <musora-icon icon-name="tack-filled" class="tw-w-[24px] tw-h-[24px] tw-mx-auto solid-pin tw-hidden"  />
                             </button>
                         </div>
-                        <div class="md:tw-hidden group-hover:tw-inline-flex dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
+                        <div class="tw-opacity-0 group-hover:tw-opacity-100 dark:tw-text-white tw-w-[42px] tw-shrink-0 tw-items-center tw-justify-center">
                             <a :href="item.playback_url"
                                class="tw-text-[#00101D] dark:tw-text-white"
                                :class="!item.playback_url ? 'tw-opacity-20 tw-pointer-events-none' : 'hover:tw-opacity-80'"
