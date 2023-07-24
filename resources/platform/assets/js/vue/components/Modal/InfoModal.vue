@@ -60,6 +60,7 @@ onUnmounted(() => {
           tw-py-[30px]
           tw-flex
           tw-flex-col
+          tw-relative
           tw-mx-[16px]
           md:tw-mx-[28px]
         "
@@ -75,7 +76,7 @@ onUnmounted(() => {
           "
         >
           <h3 v-if="title && title.length" class="tw-mb-[24px] tw-text-center tw-w-full tw-text-black dark:tw-text-white tw-font-bold">{{ title }}</h3>
-          <button @click="onClose" class="tw-absolute tw-right-[2px] tw-top-[12px] lg:tw-top-[24px] lg:tw-right-[24px] tw-text-[#E5E5E5] hover:tw-text-black dark:hover:tw-text-white">
+          <button @click="onClose" class="tw-absolute tw-right-[8px] tw-top-[8px] tw-text-[#000C17] dark:tw-text-white">
             <XIcon class="tw-h-[30px] tw-w-[30px]" />
           </button>
         </div>
