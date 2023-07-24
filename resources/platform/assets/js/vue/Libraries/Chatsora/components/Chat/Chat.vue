@@ -3,7 +3,7 @@
         class="cs-container tw-relative tw-h-full tw-w-full tw-max-h-[690px] tw-flex tw-flex-col vuesora-override tw-border tw-border-[#D4D4D8] dark:tw-border-[#223F57] tw-rounded-md tw-overflow-hidden"
         :class="brand"
     >
-        <div class="cs-top tw-flex-none tw-bg-[#F4F4F5] dark:tw-bg-[#002039] tw-border-b-[#223F57] tw-border-b">
+        <div class="cs-top tw-flex-none tw-bg-[#F4F4F5] dark:tw-bg-[#002039] tw-border-b-[#D4D4D8] dark:tw-border-b-[#223F57] tw-border-b">
             <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center tw-place-content-between">
                 <div class="tw-h-full tw-ml-4 tw-flex tw-flex-row tw-items-end tw-space-x-4 cs-text-sm tw-font-semibold">
                     <a
@@ -21,28 +21,28 @@
                 </div>
                 <a
                     href="#"
-                    class="tw-no-underline tw-font-semibold tw-px-4 cs-text-gray tw-border-b-2 tw-border-transparent tw-h-full tw-flex tw-flex-row tw-items-center"
+                    class="tw-no-underline tw-font-semibold tw-px-4 tw-border-b-2 tw-border-transparent tw-h-full tw-flex tw-flex-row tw-items-center tw-text-[#00101D] dark:tw-text-white"
                     @click.stop.prevent="toggleChatMenu()"
                 ><i class="fas fa-ellipsis-v"></i></a>
             </div>
             <div class="tw-relative">
                 <div
-                    class="cs-top-menu cs-text-sm tw-leading-relaxed tw-absolute tw-right-4 tw-py-3 tw-flex tw-flex-col tw-rounded-lg tw-text-white tw-z-30 tw-bg-[#081825] tw-border-[#223F57] tw-border"
+                    class="cs-top-menu cs-text-sm tw-leading-relaxed tw-absolute tw-right-4 tw-py-3 tw-flex tw-flex-col tw-rounded-lg tw-text-black dark:tw-text-white tw-z-30 tw-bg-white dark:tw-bg-[#081825] tw-border-[#D4D4D8] dark:tw-border-[#223F57] tw-border"
                     v-if="chatMenu"
                 >
                     <div class="tw-px-3 tw-mb-2 tw-font-semibold tw-cursor-default" v-if="isAdministrator">Moderation</div>
-                    <div class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer hover:tw-bg-[#002039]" @click.stop.prevent="toggleShowMembers()">Participants</div>
+                    <div class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer hover:tw-bg-[#F4F4F5] dark:hover:tw-bg-[#002039]" @click.stop.prevent="toggleShowMembers()">Participants</div>
                     <div
-                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer hover:tw-bg-[#002039]"
+                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer hover:tw-bg-[#F4F4F5] dark:hover:tw-bg-[#002039]"
                         @click.stop.prevent="popoutChat()"
                     >Pop Out Chat</div>
                     <div
-                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer hover:tw-bg-[#002039]"
+                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer hover:tw-bg-[#F4F4F5] dark:hover:tw-bg-[#002039]"
                         @click.stop.prevent="toggleShowBannedUsers()"
                         v-if="isAdministrator"
                     >Blocked Students</div>
                     <div
-                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer hover:tw-bg-[#002039]"
+                        class="cs-top-menu-item tw-px-3 tw-mb-1 tw-cursor-pointer hover:tw-bg-[#F4F4F5] dark:hover:tw-bg-[#002039]"
                         @click.stop.prevent="removeAllQuestions()"
                         v-if="currentTab == 'questions' && isAdministrator"
                     >Clear All Questions</div>
@@ -67,16 +67,16 @@
         <div class="tw-absolute tw-inset-0 tw-flex-col tw-z-40"
              :class="showMembers ? 'tw-flex' : 'tw-hidden'"
         >
-            <div class="cs-top tw-flex-none">
+            <div class="cs-top tw-flex-none tw-bg-[#F4F4F5] dark:tw-bg-[#002039] tw-border-b-[#D4D4D8] dark:tw-border-b-[#223F57] tw-border-b">
                 <div class="tw-h-full tw-w-full tw-flex tw-flex-row tw-items-center">
                     <a
                         href="#"
-                        class="tw-ml-3 tw-no-underline tw-text-white"
+                        class="tw-ml-3 tw-no-underline tw-text-[#00101D] dark:tw-text-white"
                         @click.stop.prevent="toggleShowMembers()"
                     ><i class="fas fa-arrow-left"></i><span class="tw-ml-2 cs-text-sm">Participants</span></a>
                 </div>
             </div>
-            <div class="cs-body tw-flex-grow tw-overflow-y-auto">
+            <div class="cs-body tw-flex-grow tw-overflow-y-auto tw-bg-white dark:tw-bg-[#081825]">
                 <div class="cs-members-container tw-mt-1 tw-p-3">
                     <div
                         class="tw-py-2"
@@ -87,9 +87,9 @@
                     </div>
                 </div>
             </div>
-            <div class="cs-footer tw-flex-none tw-h-8">
+            <div class="cs-footer tw-flex-none tw-h-8 tw-bg-[#F4F4F5] dark:tw-bg-[#002039] tw-border-t-[#D4D4D8] dark:tw-border-t-[#223F57]">
                 <div class="tw-h-full tw-flex tw-flex-row tw-items-center tw-px-3">
-                    <span class="cs-text-gray tw-text-xs">{{ $_watcher_count }} Online</span>
+                    <span class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs">{{ $_watcher_count }} Online</span>
                 </div>
             </div>
         </div>
@@ -138,7 +138,7 @@
             </div>
         </div>
 
-        <div class="cs-body tw-flex-grow tw-flex tw-flex-col tw-overflow-hidden tw-relative">
+        <div class="cs-body tw-flex-grow tw-flex tw-flex-col tw-overflow-hidden tw-relative tw-bg-white dark:tw-bg-[#081825]">
             <div
                 class="cs-messages-container tw-pt-4 tw-overflow-y-scroll tw-z-40"
                 v-if="showThread"
@@ -193,7 +193,7 @@
                 </div>
             </div>
             <div
-                class="cs-messages-container tw-px-1 tw-pt-4 tw-overflow-y-scroll tw-bg-white dark:tw-bg-[#081825]"
+                class="cs-messages-container tw-px-1 tw-pt-4 tw-overflow-y-scroll"
                 ref="messages"
                 v-show="currentTab == 'chat' && !showThread"
                 @scroll="containerScrolled"
@@ -203,7 +203,7 @@
                     @click.stop.prevent="loadMoreMessages"
                     v-if="$_show_load_more_messages"
                 >
-                    <span class="cs-text-sm tw-text-white">Load more messages</span>
+                    <span class="cs-text-sm tw-text-black dark:tw-text-white">Load more messages</span>
                 </div>
                 <div
                     v-for="(item, index) in $_messages"
@@ -227,7 +227,7 @@
                 >{{ message }}</div>
             </div>
             <div
-                class="cs-messages-container tw-pt-4 tw-overflow-y-scroll tw-bg-[#081825]"
+                class="cs-messages-container tw-pt-4 tw-overflow-y-scroll"
                 ref="questions"
                 v-show="currentTab == 'questions' && !showThread"
                 @scroll="containerScrolled"
@@ -247,7 +247,7 @@
                     ></chat-message>
                 </div>
                 <div
-                    class="cs-text-gray tw-px-3 tw-py-1 cs-text-sm"
+                    class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-px-3 tw-py-1 cs-text-sm"
                     v-if="$_questions.length == 0"
                 >There are no questions in this chat</div>
                 <div
@@ -277,27 +277,27 @@
             >
                 <div class="cs-dialog-overlay tw-absolute tw-inset-0 tw-opacity-100 tw-z-20" @click.stop.prevent="closeDialog()"></div>
                 <div class="tw-w-full tw-h-full tw-flex tw-flex-col tw-place-content-center tw-place-items-center">
-                    <div class="cs-dialog-window tw-rounded-lg tw-flex-none tw-bg-black tw-z-30 tw-relative">
-                        <div class="tw-absolute tw-top-2 tw-right-3 tw-text-white"><i class="fal fa-times tw-font-semibold tw-cursor-pointer" @click.stop.prevent="closeDialog()"></i></div>
+                    <div class="cs-dialog-window tw-rounded-lg tw-flex-none tw-bg-white dark:tw-bg-[#081825] tw-border tw-border-[#D4D4D8] dark:tw-border-[#223F57] tw-z-30 tw-relative">
+                        <div class="tw-absolute tw-top-2 tw-right-3 tw-text-black dark:tw-text-white"><i class="fal fa-times tw-font-semibold tw-cursor-pointer" @click.stop.prevent="closeDialog()"></i></div>
 
                         <div
-                            class="tw-mt-6 tw-mx-8 cs-text-sm tw-text-center tw-text-white tw-tracking-tight tw-leading-relaxed"
+                            class="tw-mt-6 tw-mx-8 cs-text-sm tw-text-center tw-text-black dark:tw-text-white tw-tracking-tight tw-leading-relaxed"
                             v-if="userDeleteMessages != null"
                         >Are you sure you want to delete all user's messages from the chat?</div>
 
                         <div
-                            class="tw-mt-6 tw-mx-8 cs-text-sm tw-text-center tw-text-white tw-tracking-tight tw-leading-relaxed"
+                            class="tw-mt-6 tw-mx-8 cs-text-sm tw-text-center tw-text-black dark:tw-text-white tw-tracking-tight tw-leading-relaxed"
                             v-if="questionRemove != null"
                         >Are you sure you want to mark this question as answered?</div>
 
                         <div
-                            class="tw-mt-6 tw-mx-6 cs-text-sm tw-text-center tw-text-white tw-tracking-tight tw-leading-relaxed"
+                            class="tw-mt-6 tw-mx-6 cs-text-sm tw-text-center tw-text-black dark:tw-text-white tw-tracking-tight tw-leading-relaxed"
                             :class="{'t-pb-2': $_short_username}"
                             v-if="userBlock != null"
                         >Are you sure you want to block <span class="tw-font-bold">{{ userBlock.displayName }}</span> from this chat?</div>
                         <div class="tw-mt-3 tw-flex tw-flex-row tw-justify-center">
                             <div
-                                class="cs-btn cs-text-sm tw-cursor-pointer tw-cursor-pointer tw-rounded-full tw-leading-none tw-tracking-normal tw-font-bold focus:t-outline-none focus:t-shadow-outline tw-uppercase tw-text-white tw-w-28 tw-flex tw-justify-center"
+                                class="cs-btn cs-text-sm tw-cursor-pointer tw-cursor-pointer tw-rounded-full tw-leading-none tw-tracking-normal tw-font-bold focus:t-outline-none focus:t-shadow-outline tw-uppercase dark:tw-bg-white tw-text-[#00101D] tw-w-28 tw-flex tw-justify-center tw-font-bebas-neue tw-border-2 tw-border-[#00101D] dark:tw-border-none tw-bg-transparent tw-pt-2 tw-py-1"
                                 @click.stop.prevent="closeDialog(true)"
                             >confirm</div>
                         </div>
@@ -309,9 +309,9 @@
         <chat-emoji
             :show-window="showEmoji"
         ></chat-emoji>
-        <div class="cs-new-message-container tw-flex-none box-border tw-bg-[#002039] tw-border-t-[#223F57] tw-border-t">
+        <div class="cs-new-message-container tw-flex-none box-border tw-bg-[#F4F4F5] dark:tw-bg-[#002039] tw-border-t-[#D4D4D8] dark:tw-border-t-[#223F57] tw-border-t">
             <div class="tw-h-full tw-flex tw-flex-col tw-place-content-between tw-py-2 tw-px-4 tw-relative">
-                <div class="cs-new-message-wrapper tw-rounded tw-bg-[#00101D]">
+                <div class="cs-new-message-wrapper tw-rounded tw-bg-white dark:tw-bg-[#00101D]">
                     <textarea
                         v-model="message"
                         placeholder="Say something..."
@@ -320,7 +320,7 @@
                         v-on:keyup.enter="sendMessage()"
                         wrap="off"
                         rows="1"
-                        class="tw-resize-none cs-text-sm tw-bg-[#00101D] tw-text-[#9EC0DC] tw-rounded-none"
+                        class="tw-resize-none cs-text-sm tw-bg-white dark:tw-bg-[#00101D] tw-text-[#000C17] dark:tw-text-white dark:tw-placeholder-[#9EC0DC] tw-rounded-none"
                         :class="{'cs-typing': message != ''}"
                         ref="newMessage"
                         v-if="currentTab == 'chat'"
@@ -333,7 +333,7 @@
                         v-on:keyup.enter="sendQuestion()"
                         wrap="off"
                         rows="1"
-                        class="tw-resize-none cs-text-sm tw-bg-[#00101D] tw-text-[#9EC0DC] tw-rounded-none"
+                        class="tw-resize-none cs-text-sm tw-bg-white dark:tw-bg-[#00101D] tw-text-[#000C17] dark:tw-text-white dark:tw-placeholder-[#9EC0DC] tw-rounded-none"
                         :class="{'cs-typing': question != ''}"
                         v-if="currentTab == 'questions'"
                     ></textarea>
@@ -342,6 +342,7 @@
                     <a
                         href="#"
                         class="cs-text-gray tw-mr-3"
+                        :class="message ? 'tw-text-[#00101D] dark:tw-text-white' : 'tw-text-[#8C9698]'"
                         @click.stop.prevent="toggleShowEmoji()"
                         v-if="currentTab == 'chat'"
                     ><i class="fal fa-smile"></i></a>
@@ -350,17 +351,29 @@
                         class="cs-text-gray"
                         @click.stop.prevent="sendMessage()"
                         v-if="currentTab == 'chat'"
-                    ><div class="send-icon" :class="{'blue': message != ''}"></div></a>
+                    >
+                        <musora-icon
+                            icon-name="send"
+                            class="tw-w-[15px] -tw-mt-1 tw-inline-block"
+                            :class="message ? 'tw-text-[#00101D] dark:tw-text-white' : 'tw-text-[#8C9698]'"
+                        />
+                    </a>
                     <a
                         href="#"
                         class="cs-text-gray"
                         @click.stop.prevent="sendQuestion()"
                         v-if="currentTab == 'questions'"
-                    ><div class="send-icon" :class="{'blue': question != ''}"></div></a>
+                    >
+                        <musora-icon
+                            icon-name="send"
+                            class="tw-w-[15px] -tw-mt-1 tw-inline-block"
+                            :class="question ? 'tw-text-[#00101D] dark:tw-text-white' : 'tw-text-[#8C9698]'"
+                        />
+                    </a>
                 </div>
                 <div>
                     <span
-                        class="tw-text-[#9EC0DC] tw-text-xs tw-cursor-pointer"
+                        class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-xs tw-cursor-pointer"
                         @click.stop.prevent="toggleShowMembers()"
                     >{{ $_watcher_count }} Online</span>
                 </div>
@@ -1778,6 +1791,3 @@ export default {
     },
 }
 </script>
-
-<style>
-</style>

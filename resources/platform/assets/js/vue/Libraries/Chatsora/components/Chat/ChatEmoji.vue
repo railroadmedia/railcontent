@@ -1,32 +1,31 @@
 <template>
     <div class="tw-relative">
         <div
-            class="cs-emoji tw-absolute tw-right-0 tw-bottom-4 tw-rounded-md"
+            class="cs-emoji tw-absolute tw-right-0 tw-bottom-0 tw-rounded-md tw-z-150 tw-overflow-hidden dark:tw-bg-[#002138] tw-border dark:tw-border-[#223F57]"
             v-if="showWindow"
         >
             <div class="cs-emoji-tabs tw-flex tw-flex-row tw-items-center tw-justify-between tw-border-b tw-border-gray-800 tw-text-lg">
                 <div>
                     <a
                         class="tw-p-3 tw-cursor-pointer"
-                        :class="{'cs-text-gray': currentTab != category, 'cs-text-blue': currentTab == category}"
+                        :class="{'tw-text-[#65656B] dark:tw-text-[#9EC0DC]': currentTab != category, 'tw-text-[000C17] dark:tw-text-white': currentTab == category}"
                         v-for="(emojiArray, category) in this.emojiData"
                         :key="category"
                         @click.stop.prevent="setCurrentTab(category)"
                     ><i class="fal" :class="tabIcons[category]"></i></a>
                 </div>
                 <a
-                    class="tw-p-2 cs-text-gray tw-cursor-pointer"
+                    class="tw-p-2 tw-text-[000C17] dark:tw-text-white tw-cursor-pointer"
                     @click.stop.prevent="closeEmojiWindow()"
                 ><i class="fal fa-backspace"></i></a>
             </div>
             <div class="tw-p-3">
-                <textarea
+                <input
                     v-model="search"
                     placeholder="Search Emojis"
                     wrap="off"
-                    rows="1"
-                    class="tw-resize-none tw-whitespace-nowrap tw-overflow-x-auto tw-rounded-full cs-text-sm"
-                ></textarea>
+                    class="tw-resize-none tw-whitespace-nowrap tw-overflow-x-auto tw-rounded-full cs-text-sm tw-w-full tw-py-[9px] tw-px-[13px]"
+                >
             </div>
             <div class="tw-px-3 tw-text-white tw-font-semibold">{{ $_current_tab_label }}</div>
             <div class="tw-py-2 tw-overflow-hidden">

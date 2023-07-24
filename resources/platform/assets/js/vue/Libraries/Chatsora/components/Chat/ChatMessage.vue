@@ -1,7 +1,7 @@
 <template>
     <div
-        class="cs-message tw-p-3 tw-rounded-md tw-relative tw-top-0 hover:tw-bg-[#F4F4F5] dark:hover:tw-bg-[#002039] hover:tw-border hover:tw-border-[#223F57]"
-        :class="{'system': message.type == 'system', 'pinned': message.pinned && showPin}"
+        class="cs-message tw-p-3 tw-rounded-md tw-relative tw-top-0 hover:tw-bg-[#F4F4F5] dark:hover:tw-bg-[#002039] hover:tw-border hover:tw-border-[#D4D4D8] dark:hover:tw-border-[#223F57]"
+        :class="{'system': message.type == 'system', 'tw-bg-[#F4F4F5] dark:tw-bg-[#002039]': message.pinned && showPin }"
         @mouseleave="closeMessageMenus()"
         @click.stop="closeMessageMenus()"
         ref="msg"
@@ -21,13 +21,13 @@
                     <div v-html="message.text" class="cs-message-text tw-break-words cs-text-sm"></div>
                     <div class="tw-inline-flex tw-items-center" v-if="$_has_reactions || showUpvote">
                         <div
-                            class="cs-upvote tw-flex tw-flex-row tw-items-center tw-px-3 tw-rounded-full cs-text-xs"
+                            class="cs-upvote tw-flex tw-flex-row tw-items-center tw-px-3 tw-rounded-full cs-text-xs tw-border tw-border-[#15803D]/20 dark:tw-border-none tw-bg-[#BBF7D0] dark:tw-bg-[#14532D]"
                             :class="$_message_upvote_class"
                             @click.stop.prevent="toggleUpvote()"
                             v-if="showUpvote"
                         >
-                            <i class="cs-icon fas fa-arrow-up"></i>
-                            <span class="cs-reaction-count">{{ $_message_upvote }}</span>
+                            <i class="cs-icon fas fa-arrow-up tw-text-[#14532D] dark:tw-text-[#F0FDF4]"></i>
+                            <span class="cs-reaction-count tw-text-[#14532D] dark:tw-text-[#F0FDF4]">{{ $_message_upvote }}</span>
                         </div>
                         <div
                             class="tw-flex tw-flex-row tw-text-gray-500 tw-cursor-pointer"
@@ -75,24 +75,23 @@
             <div class="cs-message-edit">
                 <textarea
                     v-model="messageEdit.text"
-                    class="cs-text-sm tw-p-2 tw-bg-black tw-text-white tw-resize-none tw-rounded-md tw-border-0"
+                    class="cs-text-sm tw-p-2 tw-bg-black dark:tw-text-white tw-bg-[#F4F4F5] dark:tw-bg-[#002039] tw-resize-none tw-rounded-md tw-border-[#D4D4D8] dark:tw-border-[#223F57] tw-border"
                 ></textarea>
                 <div class="tw-flex tw-flex-row tw-justify-end tw-mt-2">
                     <div
-                        class="cs-btn-outline-white tw-cursor-pointer tw-rounded-full tw-leading-none tw-font-bold focus:tw-outline-none focus:tw-shadow-outline tw-uppercase tw-border-2 tw-border-white tw-text-white tw-w-28 tw-flex tw-items-center tw-justify-center tw-mr-2 tw-font-bebas-neue"
+                        class="cs-btn-outline-white tw-cursor-pointer tw-rounded-full tw-leading-none tw-font-bold focus:tw-outline-none focus:tw-shadow-outline tw-uppercase tw-border-2 tw-border-[#00101D] dark:tw-border-white tw-text-[#00101D] dark:tw-text-white dark:tw-border-white tw-w-28 tw-flex tw-items-center tw-justify-center tw-mr-2 tw-font-bebas-neue"
                         title="Cancel message edit"
                         @click.stop.prevent="cancelMessageEdit()"
                     >Cancel</div>
                     <div
-                        class="cs-btn-save tw-cursor-pointer tw-cursor-pointer tw-rounded-full tw-leading-none tw-font-bold focus:tw-outline-none focus:tw-shadow-outline tw-uppercase tw-border-2 tw-text-white tw-w-28 tw-flex tw-items-center tw-justify-center tw-font-bebas-neue"
-                        :class="brand"
+                        class="cs-btn-save tw-cursor-pointer tw-cursor-pointer tw-rounded-full tw-leading-none tw-font-bold focus:tw-outline-none focus:tw-shadow-outline tw-uppercase tw-w-28 tw-flex tw-items-center tw-justify-center tw-font-bebas-neue tw-bg-[#00101D] dark:tw-bg-white tw-text-white dark:tw-text-[#00101D]"
                         title="Save message updates"
                         @click.stop.prevent="saveMessageEdit()"
                     >Save</div>
                 </div>
             </div>
         </div>
-        <div v-if="message.type == 'system'" class="tw-py-2 tw-text-white cs-text-sm">
+        <div v-if="message.type == 'system'" class="tw-py-2 cs-text-sm tw-text-black dark:tw-text-white">
             {{ message.text }}
         </div>
     </div>
@@ -167,7 +166,7 @@ export default {
             messageReactions: {
                 'thumb': '👍',
                 'thumbs-down': '👎',
-                'heart': '💓',
+                'heart': '🧡',
                 'fire': '🔥',
                 'meh-rolling-eyes': '🙄',
                 'grin-hearts': '😍',
