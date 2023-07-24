@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.276.2",
+            "version": "3.276.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "78c9510280512121e8fdaa9538b744778ab48bf9"
+                "reference": "c8b38cfab677a3ec98e3f40bccd1a2bf851a014f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/78c9510280512121e8fdaa9538b744778ab48bf9",
-                "reference": "78c9510280512121e8fdaa9538b744778ab48bf9",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c8b38cfab677a3ec98e3f40bccd1a2bf851a014f",
+                "reference": "c8b38cfab677a3ec98e3f40bccd1a2bf851a014f",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.276.2"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.276.3"
             },
-            "time": "2023-07-20T18:16:37+00:00"
+            "time": "2023-07-21T18:30:18+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -1245,16 +1245,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "3.6.4",
+            "version": "3.6.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "19f0dec95edd6a3c3c5ff1d188ea94c6b7fc903f"
+                "reference": "96d5a70fd91efdcec81fc46316efc5bf3da17ddf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/19f0dec95edd6a3c3c5ff1d188ea94c6b7fc903f",
-                "reference": "19f0dec95edd6a3c3c5ff1d188ea94c6b7fc903f",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/96d5a70fd91efdcec81fc46316efc5bf3da17ddf",
+                "reference": "96d5a70fd91efdcec81fc46316efc5bf3da17ddf",
                 "shasum": ""
             },
             "require": {
@@ -1269,10 +1269,10 @@
             "require-dev": {
                 "doctrine/coding-standard": "12.0.0",
                 "fig/log-test": "^1",
-                "jetbrains/phpstorm-stubs": "2022.3",
-                "phpstan/phpstan": "1.10.14",
+                "jetbrains/phpstorm-stubs": "2023.1",
+                "phpstan/phpstan": "1.10.21",
                 "phpstan/phpstan-strict-rules": "^1.5",
-                "phpunit/phpunit": "9.6.7",
+                "phpunit/phpunit": "9.6.9",
                 "psalm/plugin-phpunit": "0.18.4",
                 "squizlabs/php_codesniffer": "3.7.2",
                 "symfony/cache": "^5.4|^6.0",
@@ -1337,7 +1337,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/dbal/issues",
-                "source": "https://github.com/doctrine/dbal/tree/3.6.4"
+                "source": "https://github.com/doctrine/dbal/tree/3.6.5"
             },
             "funding": [
                 {
@@ -1353,7 +1353,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-15T07:40:12+00:00"
+            "time": "2023-07-17T09:15:50+00:00"
         },
         {
             "name": "doctrine/deprecations",
@@ -2943,16 +2943,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.309.0",
+            "version": "v0.310.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "562f8e5ddbca68d52afc3bf47d03839e78722026"
+                "reference": "5088cb76d5ecab675065d2184fa75132396d8648"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/562f8e5ddbca68d52afc3bf47d03839e78722026",
-                "reference": "562f8e5ddbca68d52afc3bf47d03839e78722026",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/5088cb76d5ecab675065d2184fa75132396d8648",
+                "reference": "5088cb76d5ecab675065d2184fa75132396d8648",
                 "shasum": ""
             },
             "require": {
@@ -2981,9 +2981,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.309.0"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.310.0"
             },
-            "time": "2023-07-16T01:08:14+00:00"
+            "time": "2023-07-24T01:02:12+00:00"
         },
         {
             "name": "google/auth",
@@ -3942,16 +3942,16 @@
         },
         {
             "name": "jaybizzle/crawler-detect",
-            "version": "v1.2.115",
+            "version": "v1.2.116",
             "source": {
                 "type": "git",
                 "url": "https://github.com/JayBizzle/Crawler-Detect.git",
-                "reference": "4531e4a70d55d10cbe7d41ac1ff0d75a5fe2ef1e"
+                "reference": "97e9fe30219e60092e107651abb379a38b342921"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/4531e4a70d55d10cbe7d41ac1ff0d75a5fe2ef1e",
-                "reference": "4531e4a70d55d10cbe7d41ac1ff0d75a5fe2ef1e",
+                "url": "https://api.github.com/repos/JayBizzle/Crawler-Detect/zipball/97e9fe30219e60092e107651abb379a38b342921",
+                "reference": "97e9fe30219e60092e107651abb379a38b342921",
                 "shasum": ""
             },
             "require": {
@@ -3988,9 +3988,9 @@
             ],
             "support": {
                 "issues": "https://github.com/JayBizzle/Crawler-Detect/issues",
-                "source": "https://github.com/JayBizzle/Crawler-Detect/tree/v1.2.115"
+                "source": "https://github.com/JayBizzle/Crawler-Detect/tree/v1.2.116"
             },
-            "time": "2023-06-05T21:32:18+00:00"
+            "time": "2023-07-21T15:49:49+00:00"
         },
         {
             "name": "jenssegers/agent",
@@ -8331,12 +8331,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "c308616c59f02140147b462f68a8c4aa7b46d846"
+                "reference": "0e4ec57a6849d2aca66e87a97f3265896c65f125"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/c308616c59f02140147b462f68a8c4aa7b46d846",
-                "reference": "c308616c59f02140147b462f68a8c4aa7b46d846",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/0e4ec57a6849d2aca66e87a97f3265896c65f125",
+                "reference": "0e4ec57a6849d2aca66e87a97f3265896c65f125",
                 "shasum": ""
             },
             "require": {
@@ -8368,7 +8368,7 @@
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
                 "source": "https://github.com/railroadmedia/musora-api/tree/2.0-playlists-v15"
             },
-            "time": "2023-07-11T13:52:10+00:00"
+            "time": "2023-07-24T09:36:04+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -15194,16 +15194,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.22.1",
+            "version": "1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "65c39594fbd8c67abfc68bb323f86447bab79cc0"
+                "reference": "a2b24135c35852b348894320d47b3902a94bc494"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/65c39594fbd8c67abfc68bb323f86447bab79cc0",
-                "reference": "65c39594fbd8c67abfc68bb323f86447bab79cc0",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/a2b24135c35852b348894320d47b3902a94bc494",
+                "reference": "a2b24135c35852b348894320d47b3902a94bc494",
                 "shasum": ""
             },
             "require": {
@@ -15235,9 +15235,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.22.1"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.23.0"
             },
-            "time": "2023-06-29T20:46:06+00:00"
+            "time": "2023-07-23T22:17:56+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
@@ -17020,5 +17020,5 @@
         "ext-curl": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
