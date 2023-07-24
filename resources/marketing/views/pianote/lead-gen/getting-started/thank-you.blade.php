@@ -51,9 +51,10 @@
         <div class="container mx-auto max-w-3xl clearfix">
             <div class="text-center sm:px-3">
                 <img class="h-10 sm:h-14 filter saturate-0 brightness-0 invert" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/GSOTP-red-dark.svg">
-                <h3 class="my-4"><strong>
-                        Check your email for<br class="inline sm:hidden"> your free piano lessons.</strong></h3>
-                <p class="leading-normal mb-8">
+                <h3 class="mt-4 leading-tight"><strong>
+                        Congratulations! Your free lessons <br class="hidden sm:inline">
+                        will be landing in your inbox soon!</strong></h3>
+                <p class="leading-normal mt-2 mb-8">
                     Before you get started, here’s a <br class="inline sm:hidden">
                     message from Kevin!</p>
                 <div class="max-w-xs mx-auto px-10 sm:px-7 relative">
@@ -62,6 +63,16 @@
                         <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/848153207?h=3e568a6e89" frameborder="0" allowfullscreen title="intro-video"></iframe>
                     </div>
                 </div>
+                <p class="mt-8 max-w-lg">Here’s what you need to do now:
+                <br><br>
+                    <strong>✓ Check your inbox.</strong> Your access link will be emailed to the email address you provided. If you don’t see it in your inbox, check your spam or junk folder. Make sure you add us to your contacts or safe sender so you never miss a lesson!
+                    <br><br>
+                    <strong>✓ Get to your piano!</strong> You’re here to learn right?! You’ll be following along with Kevin for all of the lessons. That means you’ll want to be at your piano when you watch them. You can watch them on ANY device.
+                    <br><br>
+                    <strong>✓ Tell your friends and family.</strong> If you like the lessons, or you know someone who also wants to learn the piano, please <a target="_blank" href="/getting-started"><u><strong>share this link with them!</strong></u></a> Learning is more fun when it’s done together. And having a buddy learn with you will set you up for greater success.
+                    <br><br>
+                We’ll see you in Lesson 1!!</p>
+
             </div>
         </div>
     </div>
