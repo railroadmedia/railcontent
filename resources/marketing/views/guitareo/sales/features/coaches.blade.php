@@ -13,7 +13,7 @@
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/sales/2023/share-image-coaches.jpg" style="display: none;">
 @endsection
 
-@section('header-img', 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches-thumb.jpg')
+@section('header-img', 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches-thumb2.jpg')
 
 @section('header', 'Study with the world’s best teachers.')
 

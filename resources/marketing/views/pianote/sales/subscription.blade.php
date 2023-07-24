@@ -157,6 +157,15 @@
     ])
 
     @php
+        $bubble1 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/summer-swee-singh.png';
+        $bubble2 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/lisa-witt.png';
+        $bubble3 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/jesus-molina.png';
+        $bubble4 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/kevin-castro.png';
+        $bubble5 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/erskine-hawkins.png';
+        $bubble6 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/victoria-theodore.png';
+        $bubble7 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/sangah-noona.png';
+        $bubble8 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/cassi-falk.png';
+
         $features = [
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/piano-lesson-icon.svg',
@@ -204,8 +213,8 @@
     @if(empty($hideHeader) || !$hideHeader)
         @if(!empty($beginnerVersion))
             @include('musora.sales.components.header-section', [
-                'header' => 'Online piano lessons tailored for beginners.',
-                'desc' => 'Learn the piano faster with step-by-step lessons, friendly teachers, and songs perfect for your skill level.',
+                'header' => 'Online piano lessons<br> tailored for beginners.',
+                'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> friendly teachers, and songs perfect for your skill level.',
                 'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
                 'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
@@ -215,22 +224,20 @@
             ])
         @elseif(!empty($songsVersion))
             @include('musora.sales.components.header-section', [
-                'header' => 'Learn piano from real teachers. Play your favorite songs.',
-                'desc' => 'Find and play the songs you love. Download, print, and play 1000+ songs. Plus get flexible, fun lessons and unlimited personal support from real teachers.',
+                'header' => 'Learn piano from real teachers.<br> Play your favorite songs.',
+                'desc' => ' Find and play the songs you love. Download, print, and<br class="hidden sm:inline">   play 1000+ songs. Plus get flexible, fun lessons and<br class="hidden sm:inline">  unlimited personal support from real teachers.',
                 'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
                 'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
                 'pointOne' => '1000+ popular songs',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Learn anywhere, anytime',
-
-
-
             ])
         @else
             @include('musora.sales.components.header-section', [
-                'header' => 'Online piano lessons for all skill levels.',
-                'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
+                'header' => 'Online piano lessons<br> for all skill levels.',
+                'underline' => true,
+                'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
                 'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
                 'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
@@ -252,31 +259,61 @@
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/modern-method.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Develop your core skills, techniques, and musicality to play beautifully in any setting. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/modern-method.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to help you see results.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/practical-assignments.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/guided-workouts.jpg',
                 'title' => 'Guided Workouts',
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/guided-workouts.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'Lifetime teachers, touring performers, recording professionals, and trending stars. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/world-class-teachers.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/downloadable-videos.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global piano community. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/personalized-support.jpg',
+                    ],
+                ]
             ],
         ];
     @endphp
@@ -635,7 +672,7 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-spread.png',
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-collage.png',
         ])
     @endif
 

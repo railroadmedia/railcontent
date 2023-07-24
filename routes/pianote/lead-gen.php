@@ -47,7 +47,7 @@ Route::domain('{pianoteDomain}')
         function () {
             Route::get('/{page?}', LeadGenController::class . '@chordHacks')
                 ->whereIn('page', [
-                    null,'thank-you'
+                    null, 'thank-you', 'ty-annual', 'ty-monthly'
                 ]);
         }
     );

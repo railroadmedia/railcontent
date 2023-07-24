@@ -37,7 +37,7 @@ class SalesController extends BaseController
 
     public function trial2()
     {
-        return view('singeo.sales.subscription-split', ['theme' => 'singeo', 'trialVersion' => true, 'promoVersion' => 'true']);
+        return view('singeo.sales.subscription-split', ['theme' => 'singeo', 'trialVersion' => true]);
     }
 
     public function promo()
