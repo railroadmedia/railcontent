@@ -294,7 +294,6 @@ onBeforeMount(() => {
         <Breadcrumb :class="{ 'lg:tw-hidden': playlistsStore.playerExpanded }" :brand="brand"
             :first-level-url="`/${brand}/playlists`" first-level-title="Playlists" :secondLevelUrl="secondLevelUrl"
             :secondLevelTitle="playlistName" :lastLevelTitle="playlistItemTitle" />
-
         <div class="tw-grid tw-grid-cols-3 2xl:tw-grid-cols-[auto_auto_420px] tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 tw-mt-3 tw-flex-col"
              :class="{ 'tw-gap-4' : !playlistsStore.playerExpanded }"
         >
@@ -364,17 +363,16 @@ onBeforeMount(() => {
                         :user-id="userId" :resources="videoResources" :show-add-to-list="true"
                         :show-complete-button="released && !needAccess" :relatedLesson="relatedLesson"
                         :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton" />
+                    <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
                     <RelatedLesson v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
                         :relatedLesson="relatedLesson.data[0]" :brand="brand" />
-                    <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
                 </div>
-                
                 <!-- Info Section -->
                 <slot name="info-section"></slot>
             </div>
-                      
+
             <!-- Cue and Realted Playlist Wrapper -->
-            <div class="tw-w-full tw-col-span-3 tw-flex tw-flex-col" 
+            <div class="tw-w-full tw-col-span-3 tw-flex tw-flex-col"
                 :class="playlistsStore.playerExpanded ? 'tw-mb-0 2xl:tw-col-span-3 lg:tw-order-first' : '2xl:tw-mt-0 2xl:tw-col-span-1'"
             >
                 <!-- Playback Cue -->
