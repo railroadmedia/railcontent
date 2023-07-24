@@ -547,7 +547,7 @@
         <div class="timeline-container max-w-3xl lg:max-w-4xl mx-auto relative mt-28 px-4">
             @foreach ($gettings as $key => $getting)
                 @if($getting['position'] === 'right')
-                    <div class="timeline relative grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-20 md:mb-0 @if($key !== 3) md:mb-28 @endif">
+                    <div class="timeline relative grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-20 @if($key !== 3) md:mb-28 @else md:mb-0 @endif">
                         <div class="content relative text-left md:text-right  pl-10 md:pl-0">
                             <img class="h-10 md:absolute -top-14 right-0 lazyload" data-src="{{ $getting['icon'] }}" alt="lesson icon" />
                             <p class="text-theme uppercase font-extrabold mb-2 md:mb-6 mt-1 md:mt-0">

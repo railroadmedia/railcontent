@@ -115,6 +115,14 @@
             color:#000;
         }
 
+        .join.outline.black {
+            border-color:#000;
+            color:#000;
+        }
+        .join.outline.black:hover, .join.outline.black:focus {
+            background:#000;
+            color:#fff;
+        }
         .join.outline.musora {
             border-color:#0c1524;
             color:#0c1524;
