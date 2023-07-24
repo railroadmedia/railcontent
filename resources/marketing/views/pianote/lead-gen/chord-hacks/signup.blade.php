@@ -22,14 +22,14 @@
         <div class="container max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 text-center lg:text-left pr-0 sm:pr-6">
-                    <img class="h-5 sm:h-6 lg:h-7 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/logo.svg" alt="logo" fetchpriority="high">
+                    <img class="h-5 sm:h-6 lg:h-7 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/logo.svg" alt="logo" fetchpriority="high">
                     <h2 class=""><strong>The easiest way to</strong></h2>
                     <h3 class="sm:-mt-1 lg:mt-0">learn beautiful piano chords.</h3>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-2"><strong>Sign up for 5 FREE play-along lessons</strong></h6>
 
                     <div class="mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
-                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/header-image-m.png" alt="header image" fetchpriority="high" />
+                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/header-image-m.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
 
@@ -58,7 +58,7 @@
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
                     <div class="relative bg-contain bg-top cursor-hover autoplay-video" style="padding-bottom: 102%;" data-open="trailer">
-                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/header-image.png" alt="header image" fetchpriority="high" />
+                        <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/header-image.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
@@ -91,15 +91,15 @@
             <p class="opacity-50 text-center"><em>Flexible lesson times to fit any schedule<br class="inline sm:hidden"> PLUS you get lifetime access!</em></p>
         </div>
     </header>
-    <section class="text-center text-white pt-6 sm:pt-10 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/tablet-piano-bg.png);">
+    <section class="text-center text-white pt-6 sm:pt-10 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/tablet-piano-bg.png);">
         <h3 class="leading-tight px-4"><strong>Play beautiful piano in<br class="inline sm:hidden"> minutes - NOT months</strong></h3>
         <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7 px-4">
             It really is this simple. But don’t take our word for it.<br class="hidden sm:inline">
             <span style="color:#da9d19;"><strong>Try a snippet from your 1st lesson</strong> and see if Chord Hacks is right for you.</span>
         </p>
         <div class="relative cursor-pointer autoplay-video" data-open="demoVid">
-            <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/tablet-piano-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=2200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/tablet-piano.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/tablet-piano-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=2200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/tablet-piano.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white" style="background-color:#010712;">
@@ -108,10 +108,10 @@
             <div class="flex flex-wrap items-start justify-center text-left">
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/left-hand-thumb.jpg">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/left-hand-thumb.jpg">
                         <img
                             class=" rounded-xl mb-3 transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/left-hand-thumb.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/left-hand-thumb.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -121,10 +121,10 @@
                 </div>
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/playing-hands-together-thumb.jpg">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/playing-hands-together-thumb.jpg">
                         <img
                             class=" rounded-xl mb-3 transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/playing-hands-together-thumb.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/playing-hands-together-thumb.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -134,10 +134,10 @@
                 </div>
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/chord-fills-thumb.jpg">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/chord-fills-thumb.jpg">
                         <img
                             class=" rounded-xl mb-3 transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/chord-fills-thumb.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/chord-fills-thumb.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -147,10 +147,10 @@
                 </div>
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
                     <picture class="w-1/3 sm:w-full">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/chord-inversions-thumb.jpg">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/chord-inversions-thumb.jpg">
                         <img
                             class=" rounded-xl mb-3 transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/chord-inversions-thumb.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/chord-inversions-thumb.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
@@ -163,7 +163,7 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-5xl mx-auto">
-            <img class="h-56 inline sm:hidden transition-all opacity-0 mb-5" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="h-56 inline sm:hidden transition-all opacity-0 mb-5" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
             <div class="text-left flex flex-wrap sm:flex-nowrap items-center">
                 <div class=" max-w-lg sm:pr-7">
                     <h2 class="mb-3 sm:mb-7"><strong>Don’t practice -- PLAY!</strong></h2>
@@ -175,7 +175,7 @@
                         <br><br>
                         With Chord Hacks, you’ll never have to practice, because your lessons ARE the practice! Simply press play and follow along with Lisa as you learn and play beautiful piano chords.</p>
                 </div>
-                <img class="h-56 lg:h-80 hidden sm:inline transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="h-56 lg:h-80 hidden sm:inline transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
         </div>
     </section>
@@ -202,33 +202,16 @@
             </div>
         </div>
     </section>
-    <section class="py-8 md:py-16 lg:py-20 relative" style="background:linear-gradient(to bottom,#01050F, #02142a);">
-        <div class="container mx-auto relative z-20">
-            <div class="flex flex-wrap max-w-6xl mx-auto px-2 lg:px-3">
-                <div class="px-3 md:px-4 w-full md:w-5/12 lg:w-5/12">
-                    <h4 class="mb-3 text-white">
-                        <strong>Is this really free?</strong>
-                    </h4>
-                    <p style="color:#ABB5C2;">
-                        Yes! We love sharing videos to help piano players -- and deep down we hope you’ll see some of the value that we provide inside Pianote juuuuust in case you ever want to consider joining!
-                    </p>
-                </div>
-                <div class="px-3 md:px-4 w-full md:w-7/12 lg:w-7/12">
-                    <h4 class="mt-7 md:mt-0 mb-3 text-white">
-                        <strong>Why do I need to give my email address?</strong>
-                    </h4>
-                    <p style="color:#ABB5C2;">
-                        Secretly, we’re hoping to start a relationship with you. This is our way of saying “Hey we create awesome piano lessons, can we show you?” Don’t worry, we won’t send you spam or share your email address with anybody else. You’ll get exactly what’s promised on this page along with ongoing piano videos, free lessons, and some special offers. And if you don’t like our emails, you can unsubscribe at any time.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+
+    @include('pianote.lead-gen.partials.quick-questions', [
+        'textColor' => 'white',
+        'bgColor' => 'linear-gradient(to bottom,#01050F, #02142a)'
+    ])
     <div id="final" class="anchor"></div>
     <section class="text-center customize px-4 lg:px-6 relative z-50 overflow-hidden py-10 sm:py-20" style="background:#eff7ff;">
         <div class="max-w-5xl mx-auto flex flex-wrap flex-col md:flex-row md:items-center">
             <div class="max-w-lg mx-auto text-center sm:text-left w-full md:w-1/2 sm:pl-5">
-                <img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/logo.svg" alt="logo">
+                <img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=740,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/logo.svg" alt="logo">
                 <h2 class="pt-4 md:pt-5 leading-7 md:leading-9 mb-6">
                     <strong>5 play-along lessons</strong> to show you how easy and fun learning the piano can be.
                 </h2>
@@ -251,7 +234,7 @@
                 </div>
             </div>
             <div class="flex justify-center md:justify-start w-full md:w-1/2 sm:order-1 md:pl-6 mt-7 md:mt-0 relative">
-                <img class="max-w-2xl md:max-w-4xl lg:max-w-6xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/collage.png" alt="collage">
+                <img class="max-w-2xl md:max-w-4xl lg:max-w-6xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/collage.png" alt="collage">
             </div>
         </div>
     </section>

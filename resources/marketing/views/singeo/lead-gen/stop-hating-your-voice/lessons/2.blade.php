@@ -16,9 +16,9 @@
     /stop-hating-your-voice/lessons/3
 @stop
 
-@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-1.png')
+@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-1.png')
 
-@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-3.png')
+@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-3.png')
 
 @section('description')
     You’ll get control of your voice after this lesson. Follow along with these exercises to build a stronger voice you can be proud of.

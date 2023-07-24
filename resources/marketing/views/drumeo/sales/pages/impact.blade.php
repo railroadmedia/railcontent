@@ -327,7 +327,7 @@
     <meta name="description" content="Trusted by {{ number_format(Prices::$students) }} active students from 116 countries.">
     <meta property="og:description" content="Trusted by {{ number_format(Prices::$students) }} active students from 116 countries.">
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/share_image.png" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/share_image.png" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}/">
 
     @include('_partials.layout._fonts')
@@ -657,7 +657,7 @@
                                 </h4>
                                 <img class="h-4 md:h-7 lg:h-8 absolute bottom-0 -right-6 sm:-right-10 lg:-right-11" src="https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/quote_end.svg" alt="quote end">
                             </div><br>
-                            <img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/{{ $slider['name'] }}" alt="Bill Cobham" style="display:inline-block;">
+                            <img class="h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/{{ $slider['name'] }}" alt="Bill Cobham" style="display:inline-block;">
                             · <span class="text-xs">{{ $slider['title'] }}</span>
                          </div>
                     </div>
@@ -711,35 +711,35 @@
     <section class="py-20" style="background: #FAFAFA;">
         <div class="mx-auto md:max-w-3xl lg:max-w-4xl grid grid-cols-1 sm:grid-cols-3 gap-6 px-4 lg:px-0">
             <div class="max-w-xs mx-auto">
-                <img class="rounded-md" src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John_Stamos.jpg" alt="John Stamos" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+                <img class="rounded-md" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John_Stamos.jpg" alt="John Stamos" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                 <p class="mt-6 mb-4 sm:mb-10 sm:h-32 md:h-24 lg:h-20">
                     “Playing drums is my favorite thing I get to do and I learn so much from all of these super pros on Drumeo.”
                 </p>
                 <a class="italic border-b text-gray-500 border-gray-300 pb-1" target="_blank" style="font-size: 10px; " href="https://www.instagram.com/reel/CeTtxCLpo7m/?utm_source=ig_web_copy_link&utm_campaign=2022-06-05_Drumeo_Mainlist_Celebrity-Drummers&utm_medium=email&utm_source=customer.io">As shared on Instagram</a>
                 <p class="font-inter mt-4 sm:mt-6">
-                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=220,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John--Stamos.svg" alt="John Stamos"> <br>
+                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=220,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/John--Stamos.svg" alt="John Stamos"> <br>
                     <i class="text-sm">Actor, Musician, Singer</i>
                 </p>
             </div>
             <div class="max-w-xs mx-auto">
-                <img class="rounded-md" src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben_Stiller.jpg" alt="Ben Stiller" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+                <img class="rounded-md" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben_Stiller.jpg" alt="Ben Stiller" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                 <p class="mt-6 mb-4 sm:mb-10 sm:h-32 md:h-24 lg:h-20">
                     “It’s an app that teaches you drums and has songs you can play along with, different teachers, and sheet music. It’s really good.”
                 </p>
                 <a class="italic border-b text-gray-500 border-gray-300 pb-1" target="_blank" style="font-size: 10px;" href="https://youtube.com/shorts/frOYuDmEO2s?feature=share">As shared on "The Howard Stern Show"</a>
                 <p class="font-inter mt-4 sm:mt-6">
-                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben--Stiller.svg" alt="Ben Stiller"> <br>
+                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Ben--Stiller.svg" alt="Ben Stiller"> <br>
                     <i class="text-sm">Actor, Comedian, Producer</i>
                 </p>
             </div>
             <div class="max-w-xs mx-auto">
-                <img class="rounded-md" src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr_Cech.jpg" alt="Petr_Cech" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
+                <img class="rounded-md" src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr_Cech.jpg" alt="Petr_Cech" style="filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));">
                 <p class="mt-6 mb-4 sm:mb-10 sm:h-32 md:h-24 lg:h-20">
                     “Drumeo is the easiest way for me to learn the drums, because I can learn anything I want, whenever it works best for me!”
                 </p>
                 <a class="italic border-b text-gray-500 border-gray-300 pb-1" target="_blank" style="font-size: 10px; " href="https://www.drumeo.com/beat/petr-cech/">As shared on Drumeo.com</a>
                 <p class="font-inter mt-4 sm:mt-6">
-                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=170,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr--Cech.svg" alt="Petr Cech"> <br>
+                    <img class="h-10" src="https://www.musora.com/musora-cdn/image/width=170,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/Petr--Cech.svg" alt="Petr Cech"> <br>
                     <i class="text-sm">Record-Setting Goalkeeper, Chelsea FC</i>
                 </p>
             </div>
@@ -757,7 +757,7 @@
             </h3>
             @foreach ($testimonials as $key => $testimonial)
                 <div class="testimonial flex flex-col sm:flex-row sm:items-center mb-8 sm:mb-10">
-                    <img class="autoplay-video sm:h-52 md:h-56 lg:h-60 rounded-md sm:mr-4 lg:mr-10 cursor-pointer mb-4 sm:mb-0 hover:opacity-90 transition-opacity duration-300 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=85/{{ $testimonial['img'] }}" alt="testimonial{{ $key+1 }}" data-open="testimonial{{ $key+1 }}" style="filter:drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.25));">
+                    <img class="autoplay-video sm:h-52 md:h-56 lg:h-60 rounded-md sm:mr-4 lg:mr-10 cursor-pointer mb-4 sm:mb-0 hover:opacity-90 transition-opacity duration-300 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=350,quality=95/{{ $testimonial['img'] }}" alt="testimonial{{ $key+1 }}" data-open="testimonial{{ $key+1 }}" style="filter:drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.25));">
                     <div>
                         <h5 class="font-extrabold mb-2 leading-tight sm:leading-normal">{{ $testimonial['header'] }}</h5>
                         <p>{{ $testimonial['desc'] }}</p>
@@ -825,22 +825,22 @@
     <section class="py-10 sm:py-20" style="background: linear-gradient(180deg, #0B76DB 0%, #083F74 100%);">
         <div class="md:max-w-3xl lg:max-w-4xl mx-auto px-4 lg:px-0 grid grid-cols-2 sm:grid-cols-4 gap-6 lg:gap-10 text-white">
             <div class="text-center mb-4 sm:mb-0">
-                <img class="block h-4 md:h-5 lg:h-6 mx-auto mb-6" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/drumeo_icon.svg" alt="drumeo logo">
+                <img class="block h-4 md:h-5 lg:h-6 mx-auto mb-6" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/drumeo_icon.svg" alt="drumeo logo">
                 <h1 class="font-extrabold">33.6K</h1>
                 <p class="uppercase sm:tracking-widest">Active students</p>
             </div>
             <div class="text-center mb-4 sm:mb-0">
-                <img class="block h-4 md:h-5 lg:h-6 mx-auto mb-6" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/facebook_icon.svg" alt="drumeo logo">
+                <img class="block h-4 md:h-5 lg:h-6 mx-auto mb-6" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/facebook_icon.svg" alt="drumeo logo">
                 <h1 class="font-extrabold">1.1M</h1>
                 <p class="uppercase sm:tracking-widest">Followers</p>
             </div>
             <div class="text-center">
-                <img class="block h-4 md:h-5 lg:h-6 mx-auto mb-6" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/youtube_icon.svg" alt="drumeo logo">
+                <img class="block h-4 md:h-5 lg:h-6 mx-auto mb-6" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/youtube_icon.svg" alt="drumeo logo">
                 <h1 class="font-extrabold">2.3M</h1>
                 <p class="uppercase sm:tracking-widest">Subscribers</p>
             </div>
             <div class="text-center">
-                <img class="block h-4 md:h-5 lg:h-6 mx-auto mb-6" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/instagram_icon.svg" alt="drumeo logo">
+                <img class="block h-4 md:h-5 lg:h-6 mx-auto mb-6" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/instagram_icon.svg" alt="drumeo logo">
                 <h1 class="font-extrabold">909K</h1>
                 <p class="uppercase sm:tracking-widest">Followers</p>
             </div>
@@ -850,7 +850,7 @@
     <section class="py-20">
         <div class="md:max-w-3xl lg:max-w-4xl mx-auto text-center px-4 lg:px-0">
             <a target="_blank" href="https://www.shopperapproved.com/reviews/Musora.com">
-                <img class="mx-auto h-10 mb-6" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/shopper-approved-icon.svg" alt="shopper approved logo">
+                <img class="mx-auto h-10 mb-6" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/shopper-approved-icon.svg" alt="shopper approved logo">
             </a>
             <h4 class="font-extrabold leading-tight {{--mb-2 sm:mb-4--}} mb-14">
                 Trusted by {{ number_format(Prices::$students) }} students<br class="inline sm:hidden"> from around the world.
@@ -862,7 +862,7 @@
                 @foreach ($studentReviews as $key => $review)
                     <div class="max-w-sm md:max-w-full mx-auto mb-10 @if($key > 3) hidden sm:block @endif">
                         <h5 class="font-bold mb-3 leading-tight">{!!  $review['quote']  !!}</h5>
-                        <img class="h-4" src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/stars.svg" alt="5starts">
+                        <img class="h-4" src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/stars.svg" alt="5starts">
                         <hr class="w-12 mx-auto my-5" style="border-color: #D9D9D9; border-width: 1px;">
                         <p>{!! $review['review'] !!}</p>
                         <p class="mt-4 text-drumeo text-sm"><a target="_blank" href="{!! $review['link'] !!}"><strong>{!! $review['name'] !!}</strong> - {{ $review['date'] }}</a></p>
@@ -883,29 +883,29 @@
             <div class="song-wrap relative z-0 overflow-hidden">
                 <div class="song-row absolute z-0 whitespace-nowrap">
                     @foreach ($footerImgs1 as $key => $img)
-                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{ $img }}" alt="moving collage 0{{ $key+1 }}">
+                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=95/{{ $img }}" alt="moving collage 0{{ $key+1 }}">
                     @endforeach
 
                     @foreach ($footerImgs1 as $key => $img)
-                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{ $img }}" alt="moving collage 0{{ $key+1 }}">
+                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=95/{{ $img }}" alt="moving collage 0{{ $key+1 }}">
                     @endforeach
                 </div>
                 <div class="song-row absolute z-0 whitespace-nowrap">
                     @foreach ($footerImgs2 as $key => $img)
-                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{ $img }}" alt="moving collage 0{{ $key+1 }}">
+                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=95/{{ $img }}" alt="moving collage 0{{ $key+1 }}">
                     @endforeach
 
                     @foreach ($footerImgs2 as $key => $img)
-                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{ $img }}" alt="moving collage 0{{ $key+1 }}">
+                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=95/{{ $img }}" alt="moving collage 0{{ $key+1 }}">
                     @endforeach
                 </div>
                 <div class="song-row absolute z-0 whitespace-nowrap">
                     @foreach ($footerImgs3 as $key => $img)
-                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{ $img }}" alt="moving collage 0{{ $key+1 }}">
+                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=95/{{ $img }}" alt="moving collage 0{{ $key+1 }}">
                     @endforeach
 
                     @foreach ($footerImgs3 as $key => $img)
-                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{ $img }}" alt="moving collage 0{{ $key+1 }}">
+                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=95/{{ $img }}" alt="moving collage 0{{ $key+1 }}">
                     @endforeach
                 </div>
                 <div class="hidden sm:block song-gradient absolute z-10 inset-0"></div>
@@ -924,8 +924,8 @@
                     </p>
                     <div class="relative">
                         <a href="/#customize-anchor" target="_blank" class="join blue uppercase w-full sm:w-2/3 md:w-3/4">count me in</a>
-                        <img class="left-arrow absolute -left-8 sm:-left-14 md:-left-20 lg:-left-24 -top-6 sm:-top-10 md:-top-14 h-8 sm:h-14 md:h-20 lg:h-auto" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/left_arrow.svg" alt="left arrow">
-                        <img class="absolute sm:right-20 lg:right-14 -top-6 sm:-top-8 md:-top-12 lg:-top-10 h-8 sm:h-10 md:h-16 lg:h-auto" src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/right_arrow.svg" alt="right arrow">
+                        <img class="left-arrow absolute -left-8 sm:-left-14 md:-left-20 lg:-left-24 -top-6 sm:-top-10 md:-top-14 h-8 sm:h-14 md:h-20 lg:h-auto" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/left_arrow.svg" alt="left arrow">
+                        <img class="absolute sm:right-20 lg:right-14 -top-6 sm:-top-8 md:-top-12 lg:-top-10 h-8 sm:h-10 md:h-16 lg:h-auto" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/right_arrow.svg" alt="right arrow">
                     </div>
                 </div>
             </div>

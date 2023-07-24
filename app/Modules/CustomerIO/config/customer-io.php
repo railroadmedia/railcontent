@@ -540,6 +540,16 @@ return [
                     'pianote',
                 ],
             ],
+            'Waltz in A Minor' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_waltz-in-a-minor',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Personality Quiz Academic' => [
                 'custom_attributes' => [
                 ],

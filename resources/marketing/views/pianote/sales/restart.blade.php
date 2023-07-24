@@ -219,25 +219,25 @@
                 <p class="text-center mt-3 mb-6">You’ll have one year of unlimited<br class="inline sm:hidden">  piano lessons, including:</p>
                 <div class="md:grid md:grid-cols-3 md:gap-4">
                     <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#F6F8FC;">
-                        <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/pianote-method.jpg"></div>
+                        <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/pianote-method.jpg"></div>
                         <div class=" px-3 lg:px-4 py-5 lg:py-7 text-center">
-                            <img class="h-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/pianote-method-logo.svg" alt="method-text">
+                            <img class="h-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/pianote-method-logo.svg" alt="method-text">
                             <p class="mt-2">
                                 Step-by-step lessons for the next stage of your piano playing.
                             </p>
                         </div>
                     </div>
                     <div class="relative rounded-xl overflow-hidden mb-3 md:mb-0" style="background-color:#F6F8FC;">
-                        <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/pianote-songs.jpg"></div>
+                        <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/pianote-songs.jpg"></div>
                         <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
-                            <img class="h-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/pianote-songs-logo.svg" alt="songs-text">
+                            <img class="h-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/pianote-songs-logo.svg" alt="songs-text">
                             <p class="mt-2">
                                 Easy access to 1000+ famous songs with play-along tools.
                             </p>
                         </div>
                     </div>
                     <div class="relative rounded-xl overflow-hidden" style="background-color:#F6F8FC;">
-                        <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/pianote-coaches.jpg"></div>
+                        <div class="w-full aspect-16:9 bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/pianote-coaches.jpg"></div>
                         <div class="px-3 lg:px-4 py-5 lg:py-7 text-center">
                             <img class="h-5 lazyload" data-src="https://cdn.musora.com/image/fetch/q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/pianote-coaches-logo.svg" alt="coaches-text">
                             <p class="mt-2">
@@ -334,7 +334,7 @@
                         <div class=" inline-block relative w-full group" style="padding-bottom: 62%;perspective: 1000px;">
                             <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
                                 <div class="  front absolute z-20 overflow-hidden rounded-3xl w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
-                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/membership-badge.png);"></div>
+                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/june/2023/membership-badge.png);"></div>
                                 </div>
                             </div>
                         </div>

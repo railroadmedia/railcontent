@@ -3,7 +3,7 @@
         <div class="flip-card-front card-inside">
             <section class="drum-shop w-full">
                 <div class="top-image @if(!empty($packLogo)) with-logo @endif">
-                    <img class="absolute w-full h-full top-0 left-0 object-top object-cover" src="{{ 'https://www.musora.com/musora-cdn/image/width=520,quality=85/'.$thumbnail }}" alt="{{ $title }} thumbnail" @if(!empty($FCP)) fetchpriority="high" @endif />
+                    <img class="absolute w-full h-full top-0 left-0 object-top object-cover" src="{{ 'https://www.musora.com/musora-cdn/image/width=520,quality=95/'.$thumbnail }}" alt="{{ $title }} thumbnail" @if(!empty($FCP)) fetchpriority="high" @endif />
                     @if (!empty($badgeText))
                         <span class="top-left-badge bg-promo">
                             {!! $badgeText !!}
@@ -15,7 +15,7 @@
                     @endif
                     @if(!empty($packLogo))
                         <div class="z-20 absolute bottom-0 left-0 right-0 px-5 py-4">
-                            <img class="w-auto h-auto" style="max-height:55px;" src="{{ 'https://www.musora.com/musora-cdn/image/width=500,quality=85/'.$packLogo }}"
+                            <img class="w-auto h-auto" style="max-height:55px;" src="{{ 'https://www.musora.com/musora-cdn/image/width=500,quality=95/'.$packLogo }}"
                                 alt="{{ $title }} logo" @if(!empty($FCP)) fetchpriority="high" @endif >
                         </div>
                         <div class="inset-0 absolute z-10" style="background:linear-gradient(to bottom, transparent 66%, rgba(0,0,0,0.75));"></div>

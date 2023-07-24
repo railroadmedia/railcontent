@@ -10,7 +10,7 @@
     <meta property="description" content="Get 5 years of Drumeo for the price of 3.">
     <meta property="og:description" content="Get 5 years of Drumeo for the price of 3.">
     <meta property="og:url" content="{{ get_legacy_brand_base_url($theme)}}/{{ Request::path() }}"/>
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-bundle.png">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-bundle3.png">
 
 @endsection
 
@@ -40,16 +40,11 @@
 
 @section('layout-body')
     <header class="py-20 text-center text-white px-4 md:px-0" style="background: linear-gradient(180deg, #04BBDB 0%, #0F3C81 100%);">
-        <img class="sm:h-8 md:h-12 lg:h-14 mb-2" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-5-for-3-logo.png" alt="5-for-3-logo" fetchpriority="high" />
-        <h2 class="leading-tight mb-2"><strong>Get 5 years of Drumeo for the price of 3.</strong></h2>
-        <h6 class="mb-10" style="color:#FFD600;">ONLY
-            @if(!empty($products['drumeo_access_5-years']->getPublicStockCount()))
-            {{ $products['drumeo_access_5-years']->getPublicStockCount() }}
-            @endif
-            SPOTS AVAILABLE</h6>
-        <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-bundle.png" alt="bundle image" fetchpriority="high" />
+        <img class="sm:h-8 md:h-12 lg:h-14 mb-2" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-5-for-3-logo.png" alt="5-for-3-logo" fetchpriority="high" />
+        <h2 class="leading-tight mb-10"><strong>Get 5 years of Drumeo for the price of 3.</strong></h2>
+        <img class="md:h-96 lg:h-[460px]" src="https://www.musora.com/musora-cdn/image/width=1800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-bundle3.png" alt="bundle image" fetchpriority="high" />
         <br>
-        <h4><strong><span class="opacity-60">Was <s>$2270</s></span>&nbsp; <span class="text-promo">Now $720 (Save 68%)</span></strong></h4>
+        <h4 class="text-promo"><strong>ONLY</strong> <s class="opacity-60">$2270</s> <strong>$720</strong> (Save 68%)</h4>
         <br>
         <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96 mb-2" href="/ecommerce/add-to-cart?locked=true&product-array=drumeo_access_5-years:1,drumeo-eardrums:1,Drumeo-VaterSticks:6,SD-DIGI:1,rock-drumming-masterclass-pack:1,drum-technique-made-easy-pack:1,independence-made-easy-pack:1,learn-songs-faster-pack:1,electrify-your-drumming:1,MAM-DIGI:1,TLOD-DIGI:1,GHFAL-DIGI:1,HGAF-DIGI:1,ICM-DIGI:1,CC-DIGI:1,TG-DIGI:1,BTC-DIGI:1,AOADS-DIGI:1">
             get started &raquo;
@@ -95,7 +90,7 @@
             </div>
             <div class="relative w-full rounded-full h-16 mx-auto flex space-between items-center beg-adv-bar" style="background-color: #0F3F82;">
                 <div class="h-full flex items-center flex-wrap relative rounded-l-full" style="background:linear-gradient(to right, #0F3C81, #04BBDB);">
-                    <h4 class="uppercase leading-none w-full"><img class="h-7 sm:h-8" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png" alt="Drumeo logo"></h4>
+                    <h4 class="uppercase leading-none w-full"><img class="h-7 sm:h-8" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png" alt="Drumeo logo"></h4>
                     <h1 class="absolute right-0 text-white rounded-full px-6 py-4 -mr-7 mt-1" style="background-color:#0F3C81;">$</h1>
                 </div>
                 <p class="uppercase leading-none my-0 mx-auto text-white"><strong>2 YEARS</strong><br class="sm:hidden"> FOR FREE</p>
@@ -105,7 +100,7 @@
             <hr class="my-8 border-[#C4C4C4] border" />
             <p class="mb-4">
                 <strong>Say hello to your free bonuses:</strong><br>
-                <em class="opacity-50">All digital bonuses are added to your account instantly with your membership to {{ ucfirst($theme) }}, and they’re yours for as long as you remain a member.</em>
+                <em class="opacity-50">All digital bonuses are added to your account instantly with your membership to {{ ucfirst($theme) }}, and they’re yours forever.</em>
             </p>
 
             @include('_partials.components.shop.bonuses')
@@ -115,13 +110,13 @@
     <div id="order-section"></div>
     <section class="py-20" style="background: linear-gradient(180deg, #04BBDB 0%, #0F3C81 100%);">
         <div class="max-w-5xl mx-auto text-center text-white px-4 md:px-0">
-            <img class="sm:h-8 md:h-12 lg:h-14 mb-2" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-5-for-3-logo.png" alt="5-for-3-logo" />
-            <h2 class="leading-tight mb-2"><strong>Get 5 years of Drumeo for the price of 3.</strong></h2>
+            <img class="sm:h-8 md:h-12 lg:h-14 mb-2" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-5-for-3-logo.png" alt="5-for-3-logo" />
+            <h2 class="leading-tight mb-7"><strong>Get 5 years of Drumeo for the price of 3.</strong></h2>
 
             @include('pianote.shop.pages.5-for-3-bundle-order-section', [
                 'topImage' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/5-for-3-bundle/drumeo-5-year-double-card.jpg',
                 'availableSpots' => $products['drumeo_access_5-years']->getPublicStockCount(),
-                'saveText' => '<h4><strong><span class="opacity-60">Was <s>$2270</s></span>&nbsp; <span class="text-promo">Now $720 (Save 68%)</span></strong></h4>',
+                'saveText' => '<h4 class="text-promo"><strong>ONLY</strong> <s class="opacity-60">$2270</s> <strong>$720</strong> (Save 68%)</h4>',
                 'buttonLink' => '/ecommerce/add-to-cart?locked=true&product-array=drumeo_access_5-years:1,drumeo-eardrums:1,Drumeo-VaterSticks:6,SD-DIGI:1,rock-drumming-masterclass-pack:1,drum-technique-made-easy-pack:1,independence-made-easy-pack:1,learn-songs-faster-pack:1,electrify-your-drumming:1,MAM-DIGI:1,TLOD-DIGI:1,GHFAL-DIGI:1,HGAF-DIGI:1,ICM-DIGI:1,CC-DIGI:1,TG-DIGI:1,BTC-DIGI:1,AOADS-DIGI:1',
             ])
 

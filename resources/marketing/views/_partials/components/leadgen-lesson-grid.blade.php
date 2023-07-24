@@ -2,7 +2,7 @@
 {{--    <div class="flex flex-col text-[#00101D] align-left justify-center hide-xs-only font-black text-lg xl:text-xl flex-shrink-0 w-7 sm:w-9">{{ $lessonNumber }}</div>--}}
     <div class="flex flex-col justify-center flex-shrink-0">
         <div class="relative aspect-16:9 overflow-hidden rounded-xl border border-[#F0F0F0]">
-            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=85/@php
+            <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/@php
                   if(str_contains($lessonImg, 'i.vimeocdn.com')){
                         $lessonImg = preg_replace('/[?]mw[=][0-9]+[&]mh[=][0-9]+/', '.jpg', $lessonImg);
                         if(preg_match('/[.]png|[.]jpg|[.]jpeg|[.]svg/', $lessonImg) !== 1){

@@ -1,12 +1,12 @@
 <header class="drum-shop-header relative overflow-hidden">
     <picture>
-        <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/{{ $bg }}">
-        <img class="absolute w-full h-full left-0 top-0 object-cover object-center" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $bg }}" alt="header background" fetchpriority="high" />
+        <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=95/{{ $bg }}">
+        <img class="absolute w-full h-full left-0 top-0 object-cover object-center" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $bg }}" alt="header background" fetchpriority="high" />
     </picture>
 
     <div class="container mx-auto relative z-10">
         <div>
-            <img class="sm:h-32 md:h-40 lg:h-48 -mt-16 {{ $logoStyles }}" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/{{ $logo }}" alt="{{ $theme }} summer sale logo" fetchpriority="high">
+            <img class="sm:h-32 md:h-40 lg:h-48 -mt-16 {{ $logoStyles }}" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/{{ $logo }}" alt="{{ $theme }} summer sale logo" fetchpriority="high">
             <p class="uppercase leading-tight mt-1">{!! $title !!}</p>
             <p class="font-extrabold text-[#FFD600] mt-1 mb-4 md:mb-6">{{ $promoText }}</p>
             <div class="flex justify-center">

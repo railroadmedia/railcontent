@@ -160,7 +160,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
     <style>
         .header-bg {
-            background-image: url('https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/header_image_mobile.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/header_image_mobile.jpg');
             background-position: top center;
         }
 
@@ -233,7 +233,7 @@
 
             .header-bg {
                 background-position: center;
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/header_image_desktop.jpg')
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/header_image_desktop.jpg')
             }
 
             .timeline-container::after {
@@ -447,7 +447,7 @@
     <header class="header-bg text-center text-white sm:px-4 bg-no-repeat bg-cover bg-center relative" style="background-color:#101e29;">
         <div class="container mx-auto relative py-10 md:py-32 lg:py-40 z-10 max-w-sm md:max-w-6xl">
             <div class="text-center md:text-left md:w-3/5 md:pl-4">
-                <img class="h-20 mb-80 md:mb-4 md:h-14 lg:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg">
+                <img class="h-20 mb-80 md:mb-4 md:h-14 lg:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg">
                 <h1 class="px-4 sm:px-0">
                     <strong>
                         The fun way to start playing classical piano.
@@ -510,7 +510,7 @@
     {{--class="promo-banner block text-center w-full transition-opacity duration-300 overflow-hidden whitespace-nowrap shadow-md py-1 hover:text-gray-100 z-0 mx-auto -mt-12 text-xs">--}}
         {{--<div class="container mx-auto relative">--}}
             {{--<div class="inline-block align-middle text-center">--}}
-                {{--<img class="inline-block align-middle mr-2 h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg">--}}
+                {{--<img class="inline-block align-middle mr-2 h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg">--}}
                 {{--<div class="inline-block align-middle bg-white rounded-full px-6 sm:px-10 py-1 font-medium items-center font-bebas tracking-wider cursor-pointer text-center leading-none text-base" style="color:#902E38;">Get Started &raquo;</div>--}}
             {{--</div>--}}
         {{--</div>--}}
@@ -519,7 +519,7 @@
     <section class="pt-10 sm:pt-16 md:pt-24 lg:pt-40 sm:mb-24 sm:mb-0 pb-10 sm:pb-0" style="background: #F5F5F7">
         <div class="flex mx-auto px-4 flex-col-reverse sm:flex-row md:max-w-2xl lg:max-w-4xl">
             <div class="w-full sm:w-1/2 relative">
-                <img class="sm:absolute left-0 right-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/intro_collage.png" alt="intro_collage">
+                <img class="sm:absolute left-0 right-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/intro_collage.png" alt="intro_collage">
             </div>
             <div class="w-full mb-6 sm:mb-0 sm:w-1/2 sm:pl-6 lg:pl-10 sm:pb-5 md:pb-7 lg:pb-16">
                 <div class="uppercase tracking-wide lg:tracking-widest text-gray-500 text-xs lg:text-base">A New Approach To </div>
@@ -547,7 +547,7 @@
         <div class="timeline-container max-w-3xl lg:max-w-4xl mx-auto relative mt-28 px-4">
             @foreach ($gettings as $key => $getting)
                 @if($getting['position'] === 'right')
-                    <div class="timeline relative grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-20 md:mb-0 @if($key !== 3) md:mb-28 @endif">
+                    <div class="timeline relative grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-20 @if($key !== 3) md:mb-28 @else md:mb-0 @endif">
                         <div class="content relative text-left md:text-right  pl-10 md:pl-0">
                             <img class="h-10 md:absolute -top-14 right-0 lazyload" data-src="{{ $getting['icon'] }}" alt="lesson icon" />
                             <p class="text-theme uppercase font-extrabold mb-2 md:mb-6 mt-1 md:mt-0">
@@ -565,11 +565,11 @@
                                 </ul>
                             </div>
                         </div>
-                        <img class="rounded-lg cursor-pointer autoplay-video lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" data-open="{{ strtolower(str_replace(' ', '', $getting['title'])) }}" />
+                        <img class="rounded-lg cursor-pointer autoplay-video lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" data-open="{{ strtolower(str_replace(' ', '', $getting['title'])) }}" />
                     </div>
                 @else
                     <div class="timeline relative flex flex-col-reverse md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-20 md:mb-28">
-                        <img class="rounded-lg cursor-pointer autoplay-video lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" data-open="{{ strtolower(str_replace(' ', '', $getting['title'])) }}" />
+                        <img class="rounded-lg cursor-pointer autoplay-video lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" data-open="{{ strtolower(str_replace(' ', '', $getting['title'])) }}" />
                         <div class="content relative text-left pl-10 md:pl-0">
                             <img class="h-10 md:absolute -top-14 lazyload" data-src="{{ $getting['icon'] }}" alt="lesson icon">
                             <p class="text-theme uppercase font-extrabold mb-2 md:mb-6 mt-1 md:mt-0">
@@ -594,7 +594,7 @@
         </div>
     </section>
     <section class="text-center md:pt-14 pb-20 lg:pb-40">
-        <img class="h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=120,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/gift_icon.svg" alt="gift icon">
+        <img class="h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=120,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/gift_icon.svg" alt="gift icon">
         @include('pianote.products.partials._header-text',[
             'topText' => 'Bonus Pieces',
             'topStyles' => 'mt-3 mb-6'
@@ -605,7 +605,7 @@
         <div class="max-w-5xl flex flex-wrap mx-auto px-4">
             @foreach ($bonuses as $key => $bonus)
                 <div class="px-2 mb-4 md:mb-0 w-1/2 md:w-1/4">
-                    <img class="rounded-lg mb-2 md:mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=85/{{ $bonus['img'] }}" alt="{{ $bonus['title'] }}">
+                    <img class="rounded-lg mb-2 md:mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=95/{{ $bonus['img'] }}" alt="{{ $bonus['title'] }}">
                     <p class="md:text-sm lg:text-base"><strong>{{ $bonus['title'] }}</strong></p>
                     <p>{{ $bonus['artist'] }}</p>
                 </div>
@@ -630,21 +630,21 @@
                     <div>
                         <span class="italic lg:text-2xl">“... a new approach to traditional lessons”</span>
                         <div class="mt-8 flex justify-center items-center">
-                            <img class="h-10 rounded-full mr-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/KeyboardKraze_avatar.jpg" />
+                            <img class="h-10 rounded-full mr-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/KeyboardKraze_avatar.jpg" />
                             Keyboard Kraze
                         </div>
                     </div>
                     <div>
                         <span class="italic lg:text-2xl">“Pianote is a really fun resource for those wishing to pick up tips and tricks and gain perspective.”</span>
                         <div class="mt-6 flex justify-center items-center">
-                            <img class="h-10 rounded-full mr-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/feature-testimonial-yvette.jpg" />
+                            <img class="h-10 rounded-full mr-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/feature-testimonial-yvette.jpg" />
                             Yvette Young, Multi-Instrumentalist
                         </div>
                     </div>
                     <div>
                         <span class="italic lg:text-2xl">“You should check out Pianote. If you’re a beginner or intermediate, this is ideal for you!”</span>
                         <div class="mt-6 flex justify-center items-center">
-                            <img class="h-10 rounded-full mr-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/feature-testimonial-ali.jpg" />
+                            <img class="h-10 rounded-full mr-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/feature-testimonial-ali.jpg" />
                             Ali Spagnola, YouTube Entertainer
                         </div>
                     </div>
@@ -711,7 +711,7 @@
     <section class="z-20 py-16 pt-10 md:pt-16 lg:pb-40 lg:pt-20">
         <div class="relative learning-container mx-auto max-w-5xl flex flex-wrap px-2 sm:px-4 md:px-8 lg:px-10">
             <div class="w-1/2 text-center mb-20 pr-2 sm:pr-4 md:pr-8 lg:pr-10">
-                <img style="filter: brightness(.245) sepia(1) saturate(9) hue-rotate(320deg);" class="w-3/4 md:w-2/3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.png" alt="classical piano logo red">
+                <img style="filter: brightness(.245) sepia(1) saturate(9) hue-rotate(320deg);" class="w-3/4 md:w-2/3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=450,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.png" alt="classical piano logo red">
             </div>
             <div class="w-1/2 mb-20 uppercase pl-2 sm:pl-4 md:pl-8 lg:pl-10" style="color:#879097;">
                 <div class="tracking-widest sm:-mb-1 md:mb-0 lg:mt-4 text-xs sm:text-sm md:text-base">Traditional</div>
@@ -719,7 +719,7 @@
             </div>
             @foreach ($learnings as $key => $learning)
                 <div class="w-1/2 @if($key%2 === 0) pr-2 sm:pr-4 md:pr-8 lg:pr-10 @else pl-2 sm:pl-4 md:pl-8 lg:pl-10 @endif">
-                    <img class="h-10 mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=90,quality=85/{{ $learning['icon'] }}" alt="learning icon {{ $key }}">
+                    <img class="h-10 mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=90,quality=95/{{ $learning['icon'] }}" alt="learning icon {{ $key }}">
                     <div class="mb-10 text-xs md:text-sm lg:text-base" style="color:#879097;">
                         {!!  $learning['desc'] !!}
                     </div>
@@ -728,7 +728,7 @@
         </div>
     </section>
     <section class="px-5 py-16 md:py-24 text-center" style="background: #051321;">
-        <img class="h-10 lg:h-14 mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg" alt="classical piano logo">
+        <img class="h-10 lg:h-14 mb-3 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg" alt="classical piano logo">
         <h1 class="font-knewave text-white mb-4">Jump-Start Program</h1>
         <p class="uppercase text-gray-400 leading-5 mb-10">
             Personal Support For <br class="sm:hidden">Guaranteed Results
@@ -775,8 +775,8 @@
                 </ul>
             </div>
             <picture class="w-full md:w-5/12 rounded-xl overflow-hidden">
-                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Lisa_Live.jpg">
-                <img src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Lisa_Live.jpg" alt="value image">
+                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Lisa_Live.jpg">
+                <img src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Lisa_Live.jpg" alt="value image">
             </picture>
 
         </div>
@@ -791,9 +791,9 @@
         ])
         <div class="sm:max-w-xl md:max-w-3xl lg:max-w-4xl mx-auto md:flex md:px-10 lg:px-0">
             <div class="relative md:h-10 lg:h-28 w-80 sm:w-2/3 md:w-3/5 md:-ml-10 mx-auto">
-                <img class="coach-image z-20 md:absolute w-5/6 sm:w-full rounded-3xl sm:rounded-md left-10 lazyload" style="border-color:#f5f5f7;border-width: 20px" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/victoria_theodore_coach.png" alt="coach image">
+                <img class="coach-image z-20 md:absolute w-5/6 sm:w-full rounded-3xl sm:rounded-md left-10 lazyload" style="border-color:#f5f5f7;border-width: 20px" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/victoria_theodore_coach.png" alt="coach image">
 
-                <img class="corner-shape absolute h-10 sm:h-16 lg:h-20 left-4 sm:-left-4 md:left-7 lg:left-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/corner_shape.png" alt="corner shape">
+                <img class="corner-shape absolute h-10 sm:h-16 lg:h-20 left-4 sm:-left-4 md:left-7 lg:left-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=150,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/corner_shape.png" alt="corner shape">
             </div>
             <div class="relative w-5/6 sm:w-5/6 md:w-3/5 -mt-8 sm:mt-0 mx-auto">
                 <div class="z-10 md:absolute text-white rounded-md px-4 sm:px-12 md:pl-14 lg:pl-16 md:pr-4 lg:pr-6 py-6 lg:py-10 text-left mt-20 lg:mt-14 text-xs sm:text-sm lg:text-base" style="background: linear-gradient(180deg, #BB3744 0%, #6D282F 100%);">
@@ -810,7 +810,7 @@
         </div>
     </section>
     <section class="text-center py-10 md:pt-40 md:pb-20">
-        <img class="h-28 mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/guarantee_logo.png" alt="guarantee badge">
+        <img class="h-28 mb-4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/guarantee_logo.png" alt="guarantee badge">
         @include('pianote.products.partials._header-text',[
             'headerText' => 'The guarantee that lasts<br>longer than the course'
         ])
@@ -835,12 +835,12 @@
             </div>
         </div>
     </section>
-    <section class="text-white px-5 sm:px-0 py-14 md:py-20 bg-no-repeat bg-cover bg-center overflow-hidden lazyload" style="background-color:#071522;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Order_BG.jpg">
+    <section class="text-white px-5 sm:px-0 py-14 md:py-20 bg-no-repeat bg-cover bg-center overflow-hidden lazyload" style="background-color:#071522;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/Order_BG.jpg">
         <div class="container mx-auto max-w-6xl">
 
             <div class="flex flex-wrap items-center">
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-5/12 sm:pl-5">
-                    <img class="h-14 md:h-14 lg:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg">
+                    <img class="h-14 md:h-14 lg:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo-2.svg">
                     <h2 class="pt-4 md:pt-5"><strong>Pieces you can actually play, with lessons that are actually fun.</strong></h2>
                     <p class="text-left mx-auto inline-block py-4 md:py-5 sm:leading-loose">
                         <i class="text-pianote fas fa-check sm:mr-2"></i> 4 bonus hours of LIVE lessons<br>
@@ -873,7 +873,7 @@
                     </div>
                 </div>
                 <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-7/12 sm:order-1 sm:pl-5 lg:pl-10 mt-7 sm:mt-0">
-                    <img class="max-w-xl sm:max-w-3xl lg:max-w-5xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/order_collage.png">
+                    <img class="max-w-xl sm:max-w-3xl lg:max-w-5xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/order_collage.png">
                 </div>
             </div>
         </div>

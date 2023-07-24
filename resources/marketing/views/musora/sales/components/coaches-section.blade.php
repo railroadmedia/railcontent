@@ -89,8 +89,8 @@
                                         <li class="splide__slide flex flex-col items-center justify-center px-1">
                                             <div class="relative w-full rounded-xl overflow-hidden pb-48 sm:pb-52 lg:pb-72">
                                                 <picture>
-                                                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=450,quality=85/{{$image['img']}}">
-                                                    <img class="absolute top-0 left-0 w-full h-full object-cover" src="https://www.musora.com/musora-cdn/image/width=260,quality=85/{{$image['img']}}" alt="{{ $image['instructor'] }}" />
+                                                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=450,quality=95/{{$image['img']}}">
+                                                    <img class="absolute top-0 left-0 w-full h-full object-cover" src="https://www.musora.com/musora-cdn/image/width=260,quality=95/{{$image['img']}}" alt="{{ $image['instructor'] }}" />
                                                 </picture>
                                                 <div class="rounded-b-xl absolute w-full bottom-0 h-full text-white text-center flex justify-end flex-col pb-3 lg:pb-6" style="background:linear-gradient(180deg, rgba(1, 5, 15, 0) 50%, #01050F 100%);">
                                                     <h4 class="leading-none font-extrabold mb-1.5 lg:mb-2">{!! $image['title'] !!}</h4>
@@ -110,7 +110,7 @@
 
     <div class="text-center mt-10 px-4 sm:px-0">
         @if(empty($promoVersion))
-            <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline {{ $theme }} smaller">EXPLORE COURSES</a>
+            <a href="/coaches" class="sm:mx-1 mb-2 sm:mb-0 w-full sm:w-64 join outline black smaller">EXPLORE COURSES</a>
         @endif
         <a class="sm:mx-1 w-full sm:w-64 join @if($theme != 'musora') {{ $theme }} @else musora-gold @endif smaller @if(!empty($promoVersion)) anchor-slide @endif"
             @if(!empty($promoVersion))

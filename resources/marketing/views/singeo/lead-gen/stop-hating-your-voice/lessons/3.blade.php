@@ -12,7 +12,7 @@
     /stop-hating-your-voice/lessons/2
 @stop
 
-@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-2.png')
+@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/thumb-2.png')
 
 @section('description')
     We’ll dive deeper into exactly how you can sound better. And what better way to do that than with a beautiful song! Sing this Adele ballad and sound more beautiful.
