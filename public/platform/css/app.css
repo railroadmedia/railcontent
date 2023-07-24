@@ -25337,9 +25337,6 @@ a:visited{
 .tw-group:hover .group-hover\:tw-mt-1{
   margin-top: 0.25rem !important;
 }
-.tw-group:hover .group-hover\:tw-inline-flex{
-  display: inline-flex !important;
-}
 .tw-group:hover .group-hover\:tw-max-w-\[185px\]{
   max-width: 185px !important;
 }
