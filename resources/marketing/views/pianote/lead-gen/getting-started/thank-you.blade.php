@@ -1,13 +1,14 @@
 @extends('pianote.lead-gen.lead-gen-layout-tw',[ 'appTailwind' => true, ])
 
 @section('meta')
-    <title>Chord Hacks | Pianote</title>
-    <meta property="og:title" content="Chord Hacks">
+    <title>Getting Started On The Piano | Pianote</title>
+    <meta property="og:title" content="Getting Started On The Piano">
 
-    <meta name="description" content="The easiest way to learn beautiful piano chords.">
-    <meta property="og:description" content="The easiest way to learn beautiful piano chords.">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/share-image.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.pianote.com/chord-hacks">
+    <meta name="description" content="Start learning piano the easy and fun way.">
+    <meta property="og:description" content="Start learning piano the easy and fun way.">
+
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-demo.png" style="display: none;">
+    <meta property="og:url" content="https://www.pianote.com/getting-started">
 @stop
 
 @section('head')
