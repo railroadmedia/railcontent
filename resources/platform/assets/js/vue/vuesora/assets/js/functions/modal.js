@@ -36,6 +36,21 @@ export default (function () {
 
             if (modalToOpen) {
                 window.appendBackgroundOverlay();
+                const xIcon = document.createElement('span');
+                xIcon.setAttribute('id', 'modalXIcon');
+                xIcon.setAttribute('class', 'close-modal');
+
+                const appendDiv = modalToOpen.getElementsByClassName('tw-relative');
+                const xIconCheck = modalToOpen.querySelector('#modalXIcon');
+                if(!xIconCheck) {
+                    if(appendDiv.length !== 0) {
+                        appendDiv[0].appendChild(xIcon);
+                    }
+                    else{
+                        xIcon.setAttribute('class', 'black');
+                        modalToOpen.appendChild(xIcon);
+                    }
+                }
 
                 document.body.classList.add('no-scroll');
                 document.documentElement.classList.add('no-scroll');
