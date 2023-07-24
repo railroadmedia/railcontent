@@ -190,4 +190,10 @@ class MusoraApiProductProvider implements ProductProviderInterface
     {
         return $this->playlistService->getPlaylistNextItem($playlistId);
     }
+
+    public function getVimeoEndpoints($vimeoId)
+    {
+       return  $this->vimeoTrailerDecorator->decorate($vimeoId);
+    }
+
 }

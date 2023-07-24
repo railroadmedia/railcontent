@@ -209,28 +209,11 @@
             </div>
         </div>
     </section>
-    <section class="py-8 md:py-16 lg:py-20 relative" style="background:linear-gradient(to bottom,#01050F, #02142a);">
-        <div class="container mx-auto relative z-20">
-            <div class="flex flex-wrap max-w-6xl mx-auto px-2 lg:px-3">
-                <div class="px-3 md:px-4 w-full md:w-5/12 lg:w-5/12">
-                    <h4 class="mb-3 text-white">
-                        <strong>Is this really free?</strong>
-                    </h4>
-                    <p style="color:#ABB5C2;">
-                        Yes! We love sharing videos to help piano players -- and deep down we hope you’ll see some of the value that we provide inside Pianote juuuuust in case you ever want to consider joining!
-                    </p>
-                </div>
-                <div class="px-3 md:px-4 w-full md:w-7/12 lg:w-7/12">
-                    <h4 class="mt-7 md:mt-0 mb-3 text-white">
-                        <strong>Why do I need to give my email address?</strong>
-                    </h4>
-                    <p style="color:#ABB5C2;">
-                        Secretly, we’re hoping to start a relationship with you. This is our way of saying “Hey we create awesome piano lessons, can we show you?” Don’t worry, we won’t send you spam or share your email address with anybody else. You’ll get exactly what’s promised on this page along with ongoing piano videos, free lessons, and some special offers. And if you don’t like our emails, you can unsubscribe at any time.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+
+    @include('pianote.lead-gen.partials.quick-questions', [
+        'textColor' => 'white',
+        'bgColor' => 'linear-gradient(to bottom,#01050F, #02142a)'
+    ])
     <div id="final" class="anchor"></div>
     <section class="text-center customize px-4 lg:px-6 relative z-50 overflow-hidden py-10 sm:py-20" style="background:#eff7ff;">
         <div class="max-w-5xl mx-auto flex flex-wrap flex-col md:flex-row md:items-center">

@@ -279,23 +279,10 @@
             @endforeach
         </div>
     </div>
-
-    <section class="py-12 md:py-14" style="background: #e9edf0;">
-        <div class="container mx-auto lg:max-w-5xl flex">
-            <div class="w-full md:w-1/3 px-4">
-                <div class="font-bold mb-4 md:mb-6 md:tex-lg lg:text-2xl">Is this really free?</div>
-                <p class="text-sm lg:text-base">
-                    Yes! This 4-video training pack sold for $19 but we’re now making it free. We love sharing lessons and videos to help piano players, and reading music is a great skill to develop. We hope you’ll see some of the value we provide inside Pianote juuuust in case you ever want to consider joining!
-                </p>
-            </div>
-            <div class="w-full md:w-2/3 px-4">
-                <div class="font-bold mb-4 md:mb-6 md:tex-lg lg:text-2xl">Why do I need to give my email address?</div>
-                <p class="text-sm lg:text-base">
-                    Well, we want to get to know you! We think of this like a “first date”, and hopefully the start of a beautiful relationship. We create a lot of great piano-related content, and we’ve love to show you. Don’t worry, we won’t send you spam or share your email address with anyone else. You’ll get all these lessons along with ongoing free lessons and some special offers. If you don’t like what we send you, you can unsubscribe at any time. But we promise to only send emails that WE would want to read ourselves.
-                </p>
-            </div>
-        </div>
-    </section>
+    @include('pianote.lead-gen.partials.quick-questions', [
+            'textColor' => 'black',
+            'bgColor' => '#e9edf0'
+        ])
 
     <section class="final text-center text-white py-14 md:py-20">
         <div class="container mx-auto lg:max-w-5xl">
