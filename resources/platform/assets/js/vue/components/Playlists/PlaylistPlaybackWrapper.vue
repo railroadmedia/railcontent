@@ -296,7 +296,7 @@ onBeforeMount(() => {
             :class="playlistsStore.playerExpanded ? 'lg:tw-flex-col-reverse' : '2xl:tw-flex-row'">
             <div class="tw-flex tw-flex-col tw-w-full">
                 <!--Player Wrapper -->
-                <div class="fluid">
+                <div>
                     <!-- Content Unavailable -->
                     <ContentUnavailable v-if="!released || needAccess" @goToNext="handleGoToNext"
                         :subscriptionCalendarId="subscriptionCalendarId" :bgImgUrl="thumbnailUrl"
@@ -352,7 +352,7 @@ onBeforeMount(() => {
                         </div>
                     </div>
                     <!-- Video Resources -->
-                    <div class="lean">
+                    <div>
                         <VideoResources :theme-color="brand" :brand="brand" :title="playlistItemTitle" :lesson-type="lessonType"
                             :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
                             :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
