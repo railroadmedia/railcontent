@@ -51,6 +51,14 @@ Route::domain('{pianoteDomain}')
                 ]);
         }
     );
+    Route::group(['prefix' => 'blues-piano-bootcamp'],
+        function () {
+            Route::get('/{page?}', LeadGenController::class . '@bluesPianoBootcamp')
+                ->whereIn('page', [
+                    null, 'thank-you', 'ty-annual', 'ty-monthly'
+                ]);
+        }
+    );
 
     Route::group(['prefix' => 'method'],
         function () {
