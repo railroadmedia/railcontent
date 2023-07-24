@@ -8,7 +8,7 @@
           align-h-center
           tw-overflow-visible tw-max-w-lg
         ">
-        <div class="tw-relative tw-p-4 md:tw-p-7">
+        <div class="tw-relative tw-p-4 md:tw-p-7 modal-container">
           <h1 class="tw-text-center tw-mb-2 tw-text-xl tw-font-bold md:tw-text-2xl tw-text-[#00101D]">
             Subscribe to Calendar
           </h1>
