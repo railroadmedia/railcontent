@@ -35,21 +35,20 @@ export default (function () {
             //event.stopPropagation();
 
             if (modalToOpen) {
-                window.appendBackgroundOverlay();
-                const xIcon = document.createElement('span');
-                xIcon.setAttribute('id', 'modalXIcon');
-                xIcon.setAttribute('class', 'close-modal');
-
                 const appendDiv = modalToOpen.getElementsByClassName('tw-relative');
-                const xIconCheck = modalToOpen.querySelector('#modalXIcon');
-                if(!xIconCheck) {
-                    if(appendDiv.length !== 0) {
+
+                if(appendDiv.length !== 0) {
+                    const xIconCheck = modalToOpen.querySelector('#modalXIcon');
+                    if(!xIconCheck){
+                        window.appendBackgroundOverlay();
+                        const xIcon = document.createElement('span');
+                        xIcon.setAttribute('id', 'modalXIcon');
+                        xIcon.setAttribute('class', 'close-modal');
                         appendDiv[0].appendChild(xIcon);
                     }
-                    else{
-                        xIcon.setAttribute('class', 'black');
-                        modalToOpen.appendChild(xIcon);
-                    }
+                }
+                else{
+                    window.appendBackgroundOverlay(true);
                 }
 
                 document.body.classList.add('no-scroll');
@@ -106,7 +105,7 @@ export default (function () {
             closeModal();
         };
 
-        window.appendBackgroundOverlay = function () {
+        window.appendBackgroundOverlay = function (xIcon = false) {
             const modalOverlay = document.createElement('div');
 
             // Add ID to overlay
@@ -117,6 +116,9 @@ export default (function () {
 
             // Add active class to fade in
             modalOverlay.classList.add('active');
+            if(xIcon){
+                modalOverlay.classList.add('xIcon');
+            }
 
             // Add an event listener
             modalOverlay.addEventListener('click', closeModal);
