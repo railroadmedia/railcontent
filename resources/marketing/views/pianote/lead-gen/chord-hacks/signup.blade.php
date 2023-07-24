@@ -35,7 +35,7 @@
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-2"><strong>Sign up for 5 FREE play-along lessons</strong></h6>
 
-                    <div class="mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
+                    <div class="mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/header-image-m.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="relative bg-contain bg-top cursor-hover autoplay-video" style="padding-bottom: 102%;" data-open="trailer">
+                    <div class="relative bg-contain bg-top cursor-pointer autoplay-video" style="padding-bottom: 102%;" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/header-image.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>

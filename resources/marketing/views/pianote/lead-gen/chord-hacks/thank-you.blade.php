@@ -78,7 +78,7 @@
         <div class="container max-w-5xl mx-auto">
             <h2><strong>Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.</strong></h2>
             <p class="leading-tight mt-2 sm:mt-3 mb-8 sm:mb-10">With Pianote, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.</p>
-            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative z-20 mb-7" x-on:click="trailer = true;">
+            <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative z-20 mb-7" x-on:click="trailer = true;">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
                 <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="https://player.vimeo.com/progressive_redirect/playback/785314572/rendition/540p/file.mp4?loc=external&signature=b8d6bc7c80a784c2cc9473ae9e1389b3f9e005fbbce2568d7bd6b7d548a4c19e" type="video/mp4" autoplay muted loop playsinline></video>
             </div>

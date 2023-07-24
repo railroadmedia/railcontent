@@ -51,7 +51,7 @@
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Sign up for 4 FREE play-along lessons</strong></h6>
 
-                    <div class="my-3 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video" style="padding-bottom: 87%;" data-open="trailer">
+                    <div class="my-3 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video" style="padding-bottom: 87%;" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/header-thumb.png" alt="header image" fetchpriority="high" />
                     </div>
 
@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 hidden sm:block">
-                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video" data-open="trailer">
+                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/header-thumb.png" alt="header image" fetchpriority="high" />
                     </div>
                 </div>
@@ -119,7 +119,7 @@
     </div>
     </div>
     <section class="relative text-center px-4 sm:px-6 pt-16 sm:pt-20 lg:pt-28 pb-6 sm:pb-10 lg:pb-14 bg-cover bg-center" style="background:linear-gradient(to bottom, #EEECEA, #fff);">
-        <div class="absolute top-0 left-0 right-0 bg-cover lg:bg-contain bg-no-repeat bg-top z-10 h-1/2 lg:h-[60%]" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-bg.png);"></div>
+        <div class="absolute top-0 left-0 right-0 bg-cover lg:bg-contain bg-no-repeat bg-top z-10 h-1/2 lg:h-[70%]" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/getting-started/2023/video-bg.png);"></div>
         <div class="z-20 relative">
             <h3 class="leading-tight"><strong>Your first week of piano <br class="inline sm:hidden"> lessons - FREE</strong></h3>
             <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">
@@ -254,6 +254,11 @@
             </div>
         </div>
     </section>
+    @include('drumeo.sales.partials._video-modal',[
+        'modalId' => "trailer",
+        "video" => '//player.vimeo.com/video/847443507?h=fdfbd9a244&autoplay=1',
+        "title" => 'trailer'
+    ])
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "demoVid",
         "video" => '//player.vimeo.com/video/846685149?h=38472dc2c6&autoplay=1',
