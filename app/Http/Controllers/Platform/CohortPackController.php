@@ -77,6 +77,8 @@ class CohortPackController
         $cohort['conversation_url'] =
             $cohort['conversation_thread_id'] ?
                 url()->route('forums.jump-to-thread', ['threadId' => $cohort['conversation_thread_id']]) : '';
+        $cohort['timeline_image_url'] = config('railcontent.cohort_timeline_image_urls')[brand()] ?? config('railcontent.cohort_timeline_image_urls')['pianote'];
+
 
         $lists = $cohort->lists;
         foreach ($lists as $list) {
