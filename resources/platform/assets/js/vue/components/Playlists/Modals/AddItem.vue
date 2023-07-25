@@ -275,13 +275,18 @@ onMounted(() => {
 
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
+
         <AddDuplicate v-if="duplicateProps.show" :title="duplicateProps.title" :brand="brand"
             @onConfirm="() => handleDuplicateConfirm(duplicateProps.id)" @onClose="handleDuplicateCancel"  />
+        
         <div v-if="isLoadingAssignments || isLoadingPlaylists"
-            class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-items-center tw-justify-center tw-bg-black/40">
+            class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-top-0 tw-left-0 tw-items-center tw-justify-center tw-bg-black/40">
             <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
         </div>
-        <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
+
+        <div class="tw-relative tw-w-full">
+            <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
+        </div>
 
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-2 lg:tw-mt-4" v-if="additionalItems > 0 && content.type !== 'song'">
             <p class="tw-text-center tw-text-[14px] tw-mb-1 lg:tw-mb-3">

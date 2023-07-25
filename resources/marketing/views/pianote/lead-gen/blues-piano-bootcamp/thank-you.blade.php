@@ -1,13 +1,13 @@
 @extends('pianote.lead-gen.lead-gen-layout-tw',[ 'appTailwind' => true, ])
 
 @section('meta')
-    <title>Chord Hacks | Pianote</title>
-    <meta property="og:title" content="Chord Hacks">
+    <title>Blues Piano Bootcamp | Pianote</title>
+    <meta property="og:title" content="Blues Piano Bootcamp">
 
-    <meta name="description" content="The easiest way to learn beautiful piano chords.">
-    <meta property="og:description" content="The easiest way to learn beautiful piano chords.">
-    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/share-image.jpg" style="display: none;">
-    <meta property="og:url" content="https://www.pianote.com/chord-hacks">
+    <meta name="description" content="The essential keys to playing blues piano">
+    <meta property="og:description" content="The essential keys to playing blues piano">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/share-image.jpg" style="display: none;">
+    <meta property="og:url" content="https://www.pianote.com/blues-piano-bootcamp">
 @stop
 
 @section('head')
@@ -50,11 +50,10 @@
     <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12" style="background-color:#000a1e;">
         <div class="container mx-auto max-w-3xl clearfix">
             <div class="text-center sm:px-3">
-                <img class="h-8 sm:h-10" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/logo.svg">
-                <h3 class="mt-4 leading-tight"><strong>
-                        Congratulations! Your free lessons <br class="hidden sm:inline">
-                        will be landing in your inbox soon!</strong></h3>
-                <p class="leading-normal mt-2 mb-8">
+                <img class="h-14 sm:h-20" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/blues-piano-bootcamp-logo-white.png">
+                <h3 class="my-4"><strong>
+                        Check your email for<br class="inline sm:hidden"> your free piano lessons.</strong></h3>
+                <p class="leading-normal mb-8">
                     Before you get started, here’s a <br class="inline sm:hidden">
                     message from Lisa!</p>
                 <div class="max-w-xs mx-auto px-10 sm:px-7 relative">
@@ -63,15 +62,6 @@
                         <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/847164746?h=857e80c5e2" frameborder="0" allowfullscreen title="intro-video"></iframe>
                     </div>
                 </div>
-                <p class="mt-8 max-w-lg">Here’s what you need to do now:
-                    <br><br>
-                    <strong>✓ Check your inbox.</strong> Your access link will be emailed to the email address you provided. If you don’t see it in your inbox, check your spam or junk folder. Make sure you add us to your contacts or safe sender so you never miss a lesson!
-                    <br><br>
-                    <strong>✓ Get to your piano!</strong> You’re here to learn right?! You’ll be following along with Lisa for all of the lessons. That means you’ll want to be at your piano when you watch them. You can watch them on ANY device.
-                    <br><br>
-                    <strong>✓ Tell your friends and family.</strong> If you like the lessons, or you know someone who also wants to learn the piano, please <a target="_blank" href="/chord-hacks"><u><strong>share this link with them!</strong></u></a> Learning is more fun when it’s done together. And having a buddy learn with you will set you up for greater success.
-                    <br><br>
-                    We’ll see you in Lesson 1!!</p>
             </div>
         </div>
     </div>
@@ -234,8 +224,8 @@
         "firstPoint" => "Unlimited piano lessons.",
         "thirdPoint" => "Direct access to real teachers.",
         "fifthPoint" => "Lesson access for singing, guitar, and drums.",
-        "plusAnnualLink" => "/chord-hacks/ty-annual",
-        "plusMonthlyLink" => "/chord-hacks/ty-monthly",
+        "plusAnnualLink" => "/blues-piano-bootcamp/ty-annual",
+        "plusMonthlyLink" => "/blues-piano-bootcamp/ty-monthly",
     ])
     @include('musora.sales.components.trial-explanation', [
         'instrument' => 'piano',

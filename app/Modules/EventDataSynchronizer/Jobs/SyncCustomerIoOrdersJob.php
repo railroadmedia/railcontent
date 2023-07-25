@@ -42,8 +42,8 @@ class SyncCustomerIoOrdersJob extends BatchQueryJob
     function getQuery(): Builder
     {
         $query = Order::query()
-            ->where('created_at', '>', '2023-01-01')
-            ->where('created_at', '<', '2023-06-29');
+            ->where('created_at', '>', '2023-06-29')
+            ->where('created_at', '<', '2023-06-29 19:11:00');
         return $query;
     }
 

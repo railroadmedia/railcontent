@@ -300,6 +300,16 @@ return [
             ],
         ],
         'pianote' => [
+            'Blues Piano Bootcamp' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_blues-piano-bootcamp',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Chord Hacks' => [
                 'custom_attributes' => [
                 ],

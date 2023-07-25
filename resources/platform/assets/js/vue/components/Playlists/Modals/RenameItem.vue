@@ -86,14 +86,31 @@
     <div class="tw-h-full tw-w-full">
         <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">Rename Playlist Item</h2>
         <div class="tw-flex tw-mt-[20px] tw-pb-4 tw-h-[80px] tw-items-center tw-justify-center">
-            <img :src="content.thumbnail_url" class="tw-h-[80px] tw-min-w-[145px]" />
-            <div class="tw-ml-[15px] tw-h-full tw-flex tw-flex-col tw-justify-around">
+            
+            <!-- Playlist Image -->
+            <div class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-w-[110px] tw-rounded tw-shrink-0">
+                <!-- Image Conatiner -->
+                <div class="tw-relative tw-w-full tw-h-full" v-if="content.thumbnail_url">
+                    <img :src="`https://musora.com/cdn-cgi/image/width=330/${content.thumbnail_url}`" alt="playlist thumbnail"
+                        class="tw-transition-opacity tw-opacity-0 tw-duration-500 tw-object-cover tw-object-center tw-w-full tw-h-full tw-blur-sm"
+                        loading="lazy" onload="this.classList.remove('tw-opacity-0')" />
+                    <!-- Image Mask -->
+                    <div
+                        class="tw-z-10 tw-absolute tw-w-full tw-h-full tw-left-0 tw-top-0 tw-bg-black/70 tw-flex tw-justify-center">
+                        <img class="tw-h-full tw-object-contain"
+                            :src="`https://musora.com/cdn-cgi/image/width=330/${content.thumbnail_url}`" alt="playlist thumbnail">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tw-ml-[15px] tw-h-full tw-flex tw-flex-col tw-justify-center">
                 <h3 class="tw-text-black dark:tw-text-white tw-text-[16px] tw-font-bold tw-font-open-sans">
                     {{ props.content.playlist_item_name ? props.content.playlist_item_name : props.content.title }}
                 </h3>
                 <p class="tw-text-black dark:tw-text-[#9EC0DC]">{{ authors }}</p>
             </div>
         </div>
+
         <div class="tw-flex tw-mt-[16px]">
             <InputLabel
                 :initialValue="itemName"

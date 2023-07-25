@@ -1,5 +1,5 @@
 <div id="applicationModal" class="modal">
-    <div class="tw-text-[#00101D] tw-flex tw-flex-col tw-bg-white tw-rounded-[10px] tw-shadow tw-p-[30px]">
+    <div class="tw-text-[#00101D] tw-flex tw-flex-col tw-bg-white tw-rounded-[10px] tw-shadow tw-p-[30px] tw-relative modal-container">
 
         <div class="tw-flex tw-flex-row tw-mb-[30px]">
             <h1 class="subheading">Student Review Application</h1>
