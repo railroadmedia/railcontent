@@ -378,14 +378,10 @@
         </div>
     </section>
 
-    <section class="text-white py-8 md:py-14 lg:py-20 text-center" style="background:linear-gradient(to bottom, #010317, #071336);">
-        <div class="container mx-auto">
-            <div class="max-w-2xl mx-auto px-3 lg:px-4">
-                <h4 class="mb-3 mb-5"><strong>Why do I need to give my email address?</strong></h4>
-                <p>Because we want to get to know you! It’s our not-so-secret way of saying “Hey we create awesome piano lessons, can we show you?” Don’t worry, we won’t send you spam or share your email address with anybody else. You’ll get exactly what’s promised on this page along with ongoing piano lessons, and some special offers. And if you don’t like our emails, you can unsubscribe at any time.</p>
-            </div>
-        </div>
-    </section>
+    @include('pianote.lead-gen.partials.quick-questions', [
+        'textColor' => 'white',
+        'bgColor' => 'linear-gradient(to bottom, #010317, #071336)'
+    ])
 
     <section class="text-center py-14 md:py-16 lg:py-20 text-white bg-center bg-cover lazyload" style="background-color:#030618;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/50-chord-charts/final-bg.jpg">
         <div class="container mx-auto">

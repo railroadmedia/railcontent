@@ -1,5 +1,5 @@
 <div class="tw-flex tw-w-full tw-max-w-[1703px] tw-mx-auto tw-px-4 md:tw-px-8 tw-flex-col lg:tw-flex-row">
-    
+
     {{-- Video --}}
     <div id="video-container" class="tw-w-full tw-flex tw-flex-col sm:tw-mb-8 lg:tw-mb-0" dusk="video-player">
         <div class="widescreen">
@@ -9,7 +9,7 @@
             <div class="tw-flex tw-flex-row">
                 {{-- Lesson Title --}}
                 <div class="flex flex-row flex-wrap align-v-center pv-2 tw-pr-2">
-                    <div class="flex flex-column tw-text-white">
+                    <div class="flex flex-column tw-text-[#00101D] dark:tw-text-white">
                         <h1 class="heading">{{ $lessonTitle }}</h1>
                     </div>
                 </div>
@@ -20,7 +20,7 @@
                             data-tooltip="Download Resources">
                             <i class="unopen fas fa-download no-events text-{{ $brand }}"></i>
                             <i class="open fas fa-download no-events text-white"></i>
-        
+
                             <div class="dropdown-content bg-white shadow tiny text-black">
                                 <ul>
                                     @foreach($lessonResources as $resource)
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                 @endif
-                
+
                 {{-- Live Indicator --}}
                 <div class="">
                     <p id="liveIndicator" class="bg-error tw-mt-1 tw-text-white tw-text-xs tw-font-bold corners-3 tw-text-center tw-uppercase tw-px-1">live</p>
@@ -62,7 +62,7 @@
             </h4>
         </div>
     </div>
-    
+
     {{-- Chat --}}
     <div id="chat-container" class="tw-flex tw-flex-col tw-w-full lg:tw-w-[420px] tw-mb-4 lg:tw-ml-4 tw-overflow-hidden" dusk="chat-container">
         <chat

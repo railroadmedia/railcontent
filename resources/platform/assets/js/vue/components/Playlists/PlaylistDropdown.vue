@@ -1,6 +1,6 @@
 <script setup>
 // TODO: FIX WHEN THE CUE IS BARELY VISIBLE AND YOU OPEN THE DROPDOWN
-import { onBeforeMount, onMounted, inject, reactive, computed } from 'vue';
+import { onBeforeMount, onMounted, inject, reactive, computed, onBeforeUpdate } from 'vue';
 import PlaylistService from '../../../services/playlists.js';
 import { usePlaylistsStore } from '../../../stores/playlists';
 import MusoraIcon from '../MusoraIcons/MusoraIcon.vue';
@@ -39,7 +39,7 @@ const props = defineProps({
         default: false,
     },
     isPrivate: {
-        type: Number
+        type: [Number,Boolean]
     },
     type: {
         type: String,
@@ -90,6 +90,9 @@ const sharePlaylist = () => {
 
 const privateToggle = () => {
     state.isPrivate = !state.isPrivate;
+    // if(props.inPlaylistHeader) {
+    //     playlistsStore.activePlaylist.private = !playlistsStore.activePlaylist.private;
+    // }
     emit('makePublic', state.isPrivate)
     let isPrivate = props.data.private === 1 ? true : false;
     PlaylistService.setToPrivate(props.data.id, isPrivate, token)
@@ -104,6 +107,10 @@ const privateToggle = () => {
         })
         .catch(function (error) {
             if (error.response) {
+                //revert
+                // if(props.inPlaylistHeader) {
+                //     playlistsStore.activePlaylist.private = !playlistsStore.activePlaylist.private;
+                // }
                 //undo private/public change
                 state.isPrivate = !state.isPrivate;
                 window.shownotification({
@@ -195,6 +202,12 @@ const addToPlaylist = () => {
     });
 }
 
+const renameItem = () => {
+    window.openplaylistmodal({
+        modalType: 'renameItem', content: { ...props.data, content_id: props.data.id }
+    });
+}
+
 const editPlaylist = () => {
     window.openplaylistmodal({ modalType: 'edit', data: props.data });
     emit('closeDropdown');
@@ -226,6 +239,7 @@ const clickHandler = (fnstring) => {
         case "sharePlaylist": sharePlaylist(); break;
         case "editPlaylist": editPlaylist(); break;
         case "addToPlaylist": addToPlaylist(); break;
+        case "renameItem": renameItem(); break;
         case "deletePlaylist": deletePlaylist(); break;
         case "duplicatePlaylist": duplicatePlaylist(); break;
         case "pinPlaylist": pinPlaylist(); break;
@@ -234,7 +248,7 @@ const clickHandler = (fnstring) => {
         case "editLessonTime": editLessonTime(); break;
         case "reorderPlaylist": reorderPlaylist(); break;
     }
-}
+};
 
 //---------Lifecycle Methods---------//
 onBeforeMount(() => {
@@ -243,7 +257,13 @@ onBeforeMount(() => {
 
 onMounted(() => {
     //load Playlists
-})
+});
+
+onBeforeUpdate(() => {
+    if (props.isPrivate !== undefined && props.isPrivate !== null && props.inPlaylistHeader && props.isPrivate !== state.isPrivate) {
+        state.isPrivate = props.isPrivate;
+    }
+});
 
 </script>
 <template>
@@ -261,7 +281,7 @@ onMounted(() => {
                     :class="[{'tw-pointer-events-none tw-cursor-default tw-opacity-60' : item.name === 'Re-Order' && lessonsLength === 1 }]"
                     @click.prevent="clickHandler(item.action)">
                     <template v-if="item.name === 'Private'">
-                        {{ state.isPrivate ? 'Private' : 'Public' }}
+                        Public
                         <div
                             class="tw-relative tw-inline-flex tw-ml-auto tw-w-[27px] tw-h-[12px] tw-rounded-xl"
                             :class="state.isPrivate ? 'tw-bg-[#445F74]' : 'tw-bg-drumeo'"

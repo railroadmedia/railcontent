@@ -26,6 +26,7 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
     protected ContentPermissionRepository $contentPermissionRepository;
     protected UserPermissionsRepository $userPermissionsRepository;
     protected UserPlaylistContentRepository $userPlaylistContentRepository;
+    protected ResourceDecorator $resourceDecorator;
 
     public function __construct(
         ContentService $contentService,
@@ -36,7 +37,8 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
         ContentRepository $contentRepository,
         ContentPermissionRepository $contentPermissionRepository,
         UserPermissionsRepository $userPermissionsRepository,
-        UserPlaylistContentRepository $userPlaylistContentRepository
+        UserPlaylistContentRepository $userPlaylistContentRepository,
+        ResourceDecorator $resourceDecorator
     ) {
         $this->contentService = $contentService;
         $this->userContentProgressService = $userContentProgressService;
@@ -47,6 +49,7 @@ abstract class TypeDecoratorBase extends ModeDecoratorBase
         $this->contentPermissionRepository = $contentPermissionRepository;
         $this->userPermissionsRepository = $userPermissionsRepository;
         $this->userPlaylistContentRepository = $userPlaylistContentRepository;
+        $this->resourceDecorator = $resourceDecorator;
     }
 
     /**
