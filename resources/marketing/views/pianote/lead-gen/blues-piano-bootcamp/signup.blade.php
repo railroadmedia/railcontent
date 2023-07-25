@@ -37,9 +37,9 @@
                 <div class="w-full sm:w-7/12 text-center lg:text-left pr-0 sm:pr-6">
                     <img class="h-14 sm:h-16 lg:h-20 mb-1 sm:mb-0 lg:mb-3" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/blues-piano-bootcamp-logo-white.png" alt="logo" fetchpriority="high">
                     <h2 class=""><strong>The essential keys</strong></h2>
-                    <h3 class="sm:-mt-1 lg:mt-0"> to playing blues piano</h3>
+                    <h3 class="sm:-mt-1 lg:mt-0"> to playing blues piano.</h3>
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-2"><strong>Sign up for 4 FREE play-along lessons</strong></h6>
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-2"><strong>Sign up for 4 FREE play-along lessons.</strong></h6>
 
                     <div class="mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top" style="padding-bottom: 75%;">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/header-m.png" alt="header image" fetchpriority="high" />
@@ -114,56 +114,68 @@
                 <strong class="text-blue-700">Try a snippet from your 1st lesson and see for yourself.</strong></h6>
             <div class="flex flex-wrap items-start justify-center text-left">
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
-                    <picture class="w-1/3 sm:w-full cursor-pointer autoplay-video" data-open="demoVid">
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/12-bar-blues.jpg">
-                        <img
-                            class=" rounded-xl mb-3 transition-opacity opacity-0"
-                            src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/12-bar-blues.jpg"
-                            alt="grid"
-                            loading="lazy"
-                            onload="this.classList.remove('opacity-0')"
-                        >
-                    </picture>
-                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">Want to play the Blues? Then you NEED to know the 12-bar Blues pattern.</p>
+                    <div class="relative">
+                        <picture class="w-1/3 sm:w-full cursor-pointer autoplay-video" data-open="demoVid">
+                            <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/12-bar-blues.jpg">
+                            <img
+                                class=" rounded-xl transition-opacity opacity-0"
+                                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/12-bar-blues.jpg"
+                                alt="grid"
+                                loading="lazy"
+                                onload="this.classList.remove('opacity-0')"
+                            >
+                        </picture>
+                        <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
+                    </div>
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">Want to play the Blues? Then you NEED to know the 12-Bar Blues pattern.</p>
                 </div>
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <div class="relative">
                     <picture class="w-1/3 sm:w-full">
                         <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/essential-blues-rhythm.jpg">
                         <img
-                            class=" rounded-xl mb-3 transition-opacity opacity-0"
+                            class=" rounded-xl transition-opacity opacity-0"
                             src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/essential-blues-rhythm.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">To play the Blues, you have to feel the Blues. This lesson will show you how to get into the swing of things.</p>
+                    <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
+                    </div>
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">To play the Blues, you have to feel the Blues. This lesson will show you how to get into the swing of things.</p>
                 </div>
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <div class="relative">
                     <picture class="w-1/3 sm:w-full">
                         <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/boogie-pattern.jpg">
                         <img
-                            class=" rounded-xl mb-3 transition-opacity opacity-0"
+                            class=" rounded-xl transition-opacity opacity-0"
                             src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/boogie-pattern.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">Break away from basic chords. You’ll be confidently playing through chord changes with this iconic Boogie Pattern.</p>
+                    <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
+                    </div>
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">Break away from basic chords. You’ll be confidently playing through chord changes with this iconic Boogie Pattern.</p>
                 </div>
                 <div class="flex flex-wrap items-start w-full sm:w-1/2 pb-4 sm:pb-0 sm:px-3 mb-4 sm:mb-8 border-b sm:border-b-0">
+                    <div class="relative">
                     <picture class="w-1/3 sm:w-full">
                         <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/your-first-blue-riffs.jpg">
                         <img
-                            class=" rounded-xl mb-3 transition-opacity opacity-0"
+                            class=" rounded-xl transition-opacity opacity-0"
                             src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/blues-piano-bootcamp/your-first-blue-riffs.jpg"
                             alt="grid"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 leading-normal">You’ll learn 2 iconic Blues riffs. You can play them over your 12-bar progression, or use them as fills whenever you like.</p>
+                    <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
+                    </div>
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">We’ve saved the best ‘till last. In this lesson, you’ll get two iconic Blues Riffs you can use anywhere. These sound amazing!</p>
                 </div>
             </div>
         </div>
@@ -227,7 +239,7 @@
     </section>
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "demoVid",
-        "video" => '//player.vimeo.com/video/830711083?h=701c01c83f&autoplay=1',
+        "video" => '//player.vimeo.com/video/TODO&autoplay=1',
         "title" => 'demoVid'
     ])
 @stop
