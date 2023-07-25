@@ -231,7 +231,11 @@ class RailcontentV2DataSyncingService
             $contentColumnsToUpdate['like_count'] = $contentsLikeCounts[$contentRow->id]->count ?? 0;
 
             // length in seconds
-            $contentColumnsToUpdate['length_in_seconds'] = (integer)($contentLengthInSecondsField->value ?? 0);
+            if($contentRow->type !== 'assignment') {
+                $contentColumnsToUpdate['length_in_seconds'] = (integer)($contentLengthInSecondsField->value ?? 0);
+            }else{
+                $contentColumnsToUpdate['length_in_seconds'] = $contentRow->length_in_seconds;
+            }
 
             // update content row
             $contentColumnsToUpdate['id'] = $contentRow->id;
