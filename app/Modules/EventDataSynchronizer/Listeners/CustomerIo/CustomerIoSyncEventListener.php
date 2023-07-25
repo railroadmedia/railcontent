@@ -872,6 +872,7 @@ class CustomerIoSyncEventListener
                     'product_id' => $productIds,
                     'amount_paid' => $payment ? $payment->getTotalPaid() : $order->getTotalPaid(),
                     'amount_due' => $order->getTotalDue(),
+                    'timestamp' => $order->getCreatedAt()->timestamp,
                 ];
 
                 if (!$onlyMusoraEvent) {
