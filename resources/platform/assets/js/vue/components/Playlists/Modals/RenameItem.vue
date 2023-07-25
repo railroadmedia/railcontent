@@ -88,7 +88,7 @@
         <div class="tw-flex tw-mt-[20px] tw-pb-4 tw-h-[80px] tw-items-center tw-justify-center">
             
             <!-- Playlist Image -->
-            <div class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-h-[80px] tw-rounded tw-shrink-0">
+            <div class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-w-[110px] tw-rounded tw-shrink-0">
                 <!-- Image Conatiner -->
                 <div class="tw-relative tw-w-full tw-h-full" v-if="content.thumbnail_url">
                     <img :src="`https://musora.com/cdn-cgi/image/width=330/${content.thumbnail_url}`" alt="playlist thumbnail"
