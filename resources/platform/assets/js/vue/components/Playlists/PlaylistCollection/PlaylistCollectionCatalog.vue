@@ -44,6 +44,7 @@
         showControls: true,
         searchTerm: '',
         sortValue: '',
+        categories: '',
     })
 
     //----------Methods----------//
@@ -51,7 +52,7 @@
     const handlePageChange = (pageNumber) => {
         //load playlists
         playlistsStore.loadingPlaylists = true;
-        playlistsStore.getPlaylists({ brand: props.brand, page: pageNumber, term: state.searchTerm, sort: state.sortValue, limit: 10 }, token);
+        playlistsStore.getPlaylists({ brand: props.brand, page: pageNumber, term: state.searchTerm, sort: state.sortValue, categories: state.categories ? [state.categories] : [], limit: 10 }, token);
         //update current page number
         playlistsStore.resultsPage = pageNumber;
         //update url
@@ -79,6 +80,7 @@
                     limit: null,
                     term: state.searchTerm,
                     sort: state.sortValue,
+                    categories: state.categories ? [state.categories] : [],
                 }, token);
         }
         //For Create Modal to reload Playlists
@@ -102,6 +104,7 @@
         //Set resultsPage
         playlistsStore.resultsPage = Number(params.page || 1);
         state.searchTerm = params.search || '';
+        state.categories = params['categories[]'] || '';
         state.sortValue = params.sortby_val || '-created_at';
     });
 
@@ -110,7 +113,9 @@
         const params = new Proxy(new URLSearchParams(window.location.search), {
             get: (searchParams, prop) => searchParams.get(prop),
         });
+
         state.searchTerm = params.search || '';
+        state.categories = params['categories[]'] || '';
         state.sortValue = params.sortby_val || '-created_at';
     })
 
@@ -127,7 +132,7 @@
 <template>
     <main class="tw-w-full">
         <!-- No Playlists -->
-        <section v-if="playlistsStore.playlists.length === 0 && !playlistsStore.loadingPlaylists && !state.searchTerm.length"
+        <section v-if="playlistsStore.playlists.length === 0 && !playlistsStore.loadingPlaylists && !state.searchTerm && !state.categories"
                  class="tw-w-full tw-flex dark:tw-text-white tw-items-center "
                  :class="miniCatalog ? 'tw-mt-1' : 'tw-mt-[58px] tw-flex-col'"
         >
@@ -144,7 +149,7 @@
         </section>
 
         <!-- Catalog -->
-        <div v-if="playlistsStore.playlists.length !== 0 || state.searchTerm.length" class="tw-w-full">
+        <div v-else class="tw-w-full">
             <!-- Controls -->
             <PlaylistCollectionControls
                 v-if="!props.miniCatalog || state.searchTerm.length"
@@ -182,9 +187,9 @@
                 <!-- Mini Catalog -->
                 <template v-if="miniCatalog">
                     <playlist-collection-card
-                        v-for="list in playlistsStore.playlists.slice(0,5)"
-                        :key="list.id"
-                        :list="list"
+                        v-for="listElement in playlistsStore.playlists.slice(0,5)"
+                        :key="listElement.id"
+                        :listElement="listElement"
                         :isListView="false"
                         :token="token"
                         :brand="brand"
@@ -193,9 +198,9 @@
                 <!-- Full Catalog -->
                 <template v-else>
                     <playlist-collection-card
-                        v-for="list in playlistsStore.playlists"
-                        :key="list.id"
-                        :list="list"
+                        v-for="listElement in playlistsStore.playlists"
+                        :key="listElement.id"
+                        :listElement="listElement"
                         :isListView="state.isListView"
                         :token="token"
                         :brand="brand"
@@ -213,8 +218,8 @@
             />
 
             <!-- No Playlists -->
-            <section v-if="playlistsStore.playlists.length === 0 && state.searchTerm" class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
-                <h2 class="tw-text-3xl tw-font-bold tw-mb-[15px]">No results found for <span :class="`tw-text-${brand}`">{{ state.searchTerm }}</span></h2>
+            <section v-if="playlistsStore.playlists.length === 0 && (state.categories || state.searchTerm)" class="tw-w-full tw-flex tw-flex-col dark:tw-text-white tw-items-center tw-mt-[58px]">
+                <h2 class="tw-text-3xl tw-font-bold tw-mb-[15px]">No results found for <span v-if="state.categories">category <span :class="`tw-text-${brand}`">{{ state.categories }}</span></span> <span v-if="state.categories && state.searchTerm">and</span> <span v-if="state.searchTerm">keyword <span :class="`tw-text-${brand}`">{{ state.searchTerm }}</span></span></h2>
             </section>
         </div>
 

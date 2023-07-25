@@ -852,7 +852,7 @@ class CustomerIoSyncEventListener
         }
     }
 
-    public function syncOrder($order, $payment)
+    public function syncOrder($order, $payment, $onlyMusoraEvent = false)
     {
         try {
             if (!empty($order) && !empty(
@@ -872,22 +872,25 @@ class CustomerIoSyncEventListener
                     'product_id' => $productIds,
                     'amount_paid' => $payment ? $payment->getTotalPaid() : $order->getTotalPaid(),
                     'amount_due' => $order->getTotalDue(),
+                    'timestamp' => $order->getCreatedAt()->timestamp,
                 ];
 
-                dispatch(
-                    (new CustomerIoCreateEventByUserId(
-                        $order->getUser()
-                            ->getId(),
-                        $order->getBrand(),
-                        $order->getBrand() . '_user_order',
-                        $data,
-                        null,
-                        $order->getCreatedAt()->timestamp
-                    ))->delay(
-                        Carbon::now()
-                            ->addSeconds(30)
-                    )
-                );
+                if (!$onlyMusoraEvent) {
+                    dispatch(
+                        (new CustomerIoCreateEventByUserId(
+                            $order->getUser()
+                                ->getId(),
+                            $order->getBrand(),
+                            $order->getBrand() . '_user_order',
+                            $data,
+                            null,
+                            $order->getCreatedAt()->timestamp
+                        ))->delay(
+                            Carbon::now()
+                                ->addSeconds(30)
+                        )
+                    );
+                }
 
                 $data['brand'] = $order->getBrand();
 
@@ -906,36 +909,41 @@ class CustomerIoSyncEventListener
                     )
                 );
 
-                // trigger pack specific events
-                $skuToEventNameMap = config('event-data-synchronizer.customer_io_pack_sku_to_purchase_event_name', []);
+                if (!$onlyMusoraEvent) {
+                    // trigger pack specific events
+                    $skuToEventNameMap = config(
+                        'event-data-synchronizer.customer_io_pack_sku_to_purchase_event_name',
+                        []
+                    );
 
-                foreach (
-                    $order->getOrderItems() as $orderItem
-                ) {
-                    if (array_key_exists(
-                        $orderItem->getProduct()
-                            ->getSku(),
-                        $skuToEventNameMap
-                    )) {
-                        dispatch(
-                            (new CustomerIoCreateEventByUserId(
-                                $order->getUser()
-                                    ->getId(),
-                                $order->getBrand(),
-                                $order->getBrand() .
-                                '_pack_' .
-                                $skuToEventNameMap[$orderItem->getProduct()
-                                    ->getSku()],
-                                [
-                                    'amount_paid' => $orderItem->getFinalPrice(),
-                                ],
-                                null,
-                                $order->getCreatedAt()->timestamp
-                            ))->delay(
-                                Carbon::now()
-                                    ->addSeconds(30)
-                            )
-                        );
+                    foreach (
+                        $order->getOrderItems() as $orderItem
+                    ) {
+                        if (array_key_exists(
+                            $orderItem->getProduct()
+                                ->getSku(),
+                            $skuToEventNameMap
+                        )) {
+                            dispatch(
+                                (new CustomerIoCreateEventByUserId(
+                                    $order->getUser()
+                                        ->getId(),
+                                    $order->getBrand(),
+                                    $order->getBrand() .
+                                    '_pack_' .
+                                    $skuToEventNameMap[$orderItem->getProduct()
+                                        ->getSku()],
+                                    [
+                                        'amount_paid' => $orderItem->getFinalPrice(),
+                                    ],
+                                    null,
+                                    $order->getCreatedAt()->timestamp
+                                ))->delay(
+                                    Carbon::now()
+                                        ->addSeconds(30)
+                                )
+                            );
+                        }
                     }
                 }
             }

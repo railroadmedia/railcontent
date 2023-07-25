@@ -148,6 +148,7 @@
 
     @endif
 
+    @if(empty($trialVersion))
     @include('_partials.components.promo-top-banner',[
         'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-shop-summer-sale-bg.jpg',
         'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-summer-sale-logo.svg',
@@ -155,30 +156,18 @@
         'title' => 'Join Drumeo And Save 20%<br class="sm:hidden"> + Choose Your Bonus Bundle',
         'promoText' => 'SAVE UP TO 81% UNTIL JULY 31ST!',
     ])
+    @endif
 
     @php
-        $features = [
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drum-lessons-icon.svg',
-                'title' => 'Drum Lessons',
-                'desc' => 'Step-by-step video<br class="hidden sm:inline"> lessons on every topic.',
-            ],
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/artist-course-icon2.svg',
-                'title' => 'Artist Courses',
-                'desc' => 'Courses and live events<br class="hidden sm:inline"> with drumming heroes. ',
-            ],
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/songs-icon.svg',
-                'title' => '5000+ Songs',
-                'desc' => 'Play your favorite songs<br class="hidden sm:inline"> from every style & era.',
-            ],
-            [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/support-icon.svg',
-                'title' => '24/7 Support',
-                'desc' => 'The largest community<br class="hidden sm:inline"> of students & teachers.',
-            ],
-        ];
+        $bubble1 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/dorothea-taylor.png';
+        $bubble2 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/todd-sucherman.png';
+        $bubble3 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/jared-falk.png';
+        $bubble4 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/hannah-welton.png';
+        $bubble5 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/larnell-lewis.png';
+        $bubble6 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/zack-grooves.png';
+        $bubble7 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/domino-santatonio.png';
+        $bubble8 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/aaron-spears.png';
+
         $slides = [
             [
                 'desc' => 'Drumeo is the real deal folks - a good place to study and realize one’s dreams.',
@@ -203,7 +192,7 @@
 
     @if(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
-            'header' => 'Learn beginner beats, fills and songs on the drums.',
+            'header' => 'Learn beginner beats, fills<br> and songs on the drums.',
             'desc' => 'Try Drumeo’s award-winning online drum lessons for 7 days FREE:',
             'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
             'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
@@ -214,8 +203,9 @@
         ])
     @else
         @include('musora.sales.components.header-section', [
-            'header' => 'Online drum lessons for all skill levels.',
-            'desc' => 'Learn the drums faster with step-by-step lessons, thousands of songs and unlimited personal support.',
+            'header' => 'Online drum lessons<br> for all skill levels.',
+            'underline' => true,
+            'desc' => 'Learn the drums faster with step-by-step lessons,<br class="hidden sm:inline"> thousands of songs and unlimited personal support.',
             'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/jan-thumb-no-badge.jpg',
             'promoThumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo2.png',
             'promoThumbM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/header-thumb-promo-m2.jpg',
@@ -235,31 +225,61 @@
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/10-level-cirriculum.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'The most trusted step-by-step video lessons for every technique, pattern, and style.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/10-level-cirriculum.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'Keep up your progress with clear assignments and handy practice tools for every level.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/practical-assignments.jpg',
+                    ],
+                ]
             ],
             [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts2.jpg',
                 'title' => 'Guided Workouts',
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts2.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'The best drummers are here -- including Grammy Award winners and touring musicians.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/world-class-teachers.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/downloadable-videos.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global drum community.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/personalized-support.jpg',
+                    ],
+                ]
             ],
         ];
     @endphp
@@ -610,7 +630,7 @@
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Online lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-drumeo"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> piano, guitar, and voice lessons with full access to all Musora communities.</li>',
-        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-spread.png',
+        'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeo-collage.png',
         ])
     @endif
 

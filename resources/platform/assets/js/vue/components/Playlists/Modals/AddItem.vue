@@ -78,6 +78,11 @@ const instrumentless = computed(() => {
     }[props.brand];
 });
 
+//Content Title
+const title = computed(() => {
+    return props.content.title || props.content.name;
+});
+
 const addRemovePlaylistSelection = (payload) => {
     const index = selectedPlaylists.value.indexOf(String(payload));
     if (index !== -1) {
@@ -144,7 +149,7 @@ const handleSaveItem = () => {
     if (selectedPlaylists.value.length) {
         isLoadingPlaylists.value = true;
         return saveData().then(() => {
-            window.shownotification({ icon: 'check', text: 'The items were added to your selected playlists.' });
+            window.shownotification({ icon: 'check', text: `${title.value} has been successfuly added to your playlist(s).`, duration: 2000 });
         }).catch(() => {
             window.shownotification({ icon: 'error', text: 'An error ocurred while saving your changes, please try again later.' });
         }).finally(() => {
@@ -187,12 +192,12 @@ const handleDuplicateCancel = () => {
 };
 
 const getUserPlaylists = () => {
-    PlaylistService.getCurrentUserPlaylists({ 
-        brand: props.brand, 
-        page: pageNumber.value, 
-        limit: 10, 
-        term: state.searchTerm, 
-        content_id: props.content.content_id 
+    PlaylistService.getCurrentUserPlaylists({
+        brand: props.brand,
+        page: pageNumber.value,
+        limit: 10,
+        term: state.searchTerm,
+        content_id: props.content.content_id
     }, token).then(r => {
         isLoadingPlaylists.value = false;
         const duplicatedItemIDs = [];
@@ -204,7 +209,7 @@ const getUserPlaylists = () => {
                 const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
                 const month = months[dateCreated.getMonth()];
                 const formattedDate = `${month} ${dateCreated.getDate()}, ${dateCreated.getFullYear()}`;
-                
+
                 if (is_added_to_playlist) {
                     duplicatedItemIDs.push(String(id));
                     duplicatedItemIdNameMap.value = {
@@ -251,7 +256,7 @@ onMounted(() => {
         addFullSongToggle.value = true;
     }
 
-    //If Adding a Routine 
+    //If Adding a Routine
     showVocalRoutineToggles.value = props.content.type === 'routine' ? true : false ;
 
     if (props.content.type !== 'Assignments') {
@@ -270,13 +275,18 @@ onMounted(() => {
 
 <template>
     <div class="tw-flex tw-flex-col tw-justify-center tw-items-center tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
+
         <AddDuplicate v-if="duplicateProps.show" :title="duplicateProps.title" :brand="brand"
             @onConfirm="() => handleDuplicateConfirm(duplicateProps.id)" @onClose="handleDuplicateCancel"  />
+        
         <div v-if="isLoadingAssignments || isLoadingPlaylists"
-            class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-items-center tw-justify-center tw-bg-black/40">
+            class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-top-0 tw-left-0 tw-items-center tw-justify-center tw-bg-black/40">
             <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
         </div>
-        <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
+
+        <div class="tw-relative tw-w-full">
+            <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
+        </div>
 
         <div class="tw-flex tw-w-full tw-justify-center tw-flex-col tw-mt-2 lg:tw-mt-4" v-if="additionalItems > 0 && content.type !== 'song'">
             <p class="tw-text-center tw-text-[14px] tw-mb-1 lg:tw-mb-3">
@@ -288,9 +298,9 @@ onMounted(() => {
             <div class="tw-flex tw-w-full">
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-justify-between tw-w-full">
                     <b class="tw-uppercase tw-text-sm">Additional Playlist Items</b>
-                    <Toggle :initialValue="addFullSongToggle" 
-                            id="import-all-toggle" 
-                            @onToggle="handleOnToggleAssignments" 
+                    <Toggle :initialValue="addFullSongToggle"
+                            id="import-all-toggle"
+                            @onToggle="handleOnToggleAssignments"
                     />
                 </fieldset>
             </div>
@@ -313,22 +323,22 @@ onMounted(() => {
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]">
                         <strong class="tw-uppercase">FULL TRACK</strong>
                     </p>
-                    <Toggle 
-                        :initialValue="addFullSongToggle" 
-                        :brand="brand" 
-                        id="toggle-full-song" 
-                        @onToggle="handleOnToggleFullSong" 
+                    <Toggle
+                        :initialValue="addFullSongToggle"
+                        :brand="brand"
+                        id="toggle-full-song"
+                        @onToggle="handleOnToggleFullSong"
                     />
                 </fieldset>
                 <fieldset v-if="additionalItems > 1" class="tw-flex tw-flex-row tw-items-center tw-mx-4">
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]">
                         <strong class="tw-uppercase">{{ instrumentless }} TRACK</strong>
                     </p>
-                    <Toggle 
-                        :initialValue="addInstrumentlessToggle" 
-                        :brand="brand" 
+                    <Toggle
+                        :initialValue="addInstrumentlessToggle"
+                        :brand="brand"
                         id="toggle-instrumentless-song"
-                        @onToggle="handleOnToggleInstrumentlessSong" 
+                        @onToggle="handleOnToggleInstrumentlessSong"
                     />
                 </fieldset>
             </div>
@@ -343,20 +353,20 @@ onMounted(() => {
             <div class="tw-flex tw-justify-center tw-w-full">
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-mx-4">
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">High</strong></p>
-                    <Toggle 
-                        id="toggle-high-voice" 
+                    <Toggle
+                        id="toggle-high-voice"
                         :brand="brand"
-                        :initialValue="includeHighRoutine" 
-                        @onToggle="handleHighRoutine" 
+                        :initialValue="includeHighRoutine"
+                        @onToggle="handleHighRoutine"
                     />
                 </fieldset>
                 <fieldset class="tw-flex tw-flex-row tw-items-center tw-mx-4">
                     <p class="tw-text-center tw-text-[14px] tw-pr-[16px]"><strong class="tw-uppercase">Low</strong></p>
-                    <Toggle 
-                        id="toggle-low-voice" 
+                    <Toggle
+                        id="toggle-low-voice"
                         :brand="brand"
-                        :initialValue="includeLowRoutine" 
-                        @onToggle="handleLowRoutine" 
+                        :initialValue="includeLowRoutine"
+                        @onToggle="handleLowRoutine"
                     />
                 </fieldset>
             </div>
@@ -374,18 +384,18 @@ onMounted(() => {
                    v-model="state.searchTerm"
                    @keyup.enter="searchPlaylists"
             >
-            <button v-if="state.searchTerm.length" 
-                    class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0" 
+            <button v-if="state.searchTerm.length"
+                    class="tw-absolute tw-top-4 tw-w-[18px] tw-right-[22px] dark:tw-text-white tw-z-0"
                     @click="clearSearch"
             >
                 <XIcon class="" />
             </button>
         </div>
 
-        <Table @onActionClick="handleActionClick" 
+        <Table @onActionClick="handleActionClick"
             @onScroll="handleScroll"
-            :classOverride="`tw-max-h-[150px] lg:tw-max-h-[350px] ${ state.formattedTable.length < 4 && 'lg:tw-overflow-y-hidden'}`" 
-            :stickyHeader="true" 
+            :classOverride="`tw-max-h-[150px] sm:tw-max-h-[260px] lg:tw-max-h-[350px] ${ state.formattedTable.length < 4 && 'lg:tw-overflow-y-hidden'}`"
+            :stickyHeader="true"
             :rows="state.formattedTable"
         >
             <template v-slot:actionContent="slotProps">
@@ -424,7 +434,7 @@ onMounted(() => {
                     :disabled="selectedPlaylists.length === 0"
             >
                 SAVE
-            </button> 
+            </button>
 
         </div>
     </div>

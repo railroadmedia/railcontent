@@ -63,11 +63,9 @@
         };
         //Update UI
         playlistsStore.updatePlaylistItem({
-            user_playlist_item_id: props.data.user_playlist_item_id,
-            index: props.index,
-            start: payload.start_second,
-            end: payload.end_second
-        })
+            ...props.data,
+            ...payload,
+        });
         //Send Request
         PlaylistService.updatePlaylistItem(payload, token)
             .then(function(response) {

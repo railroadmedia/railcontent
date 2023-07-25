@@ -67,6 +67,10 @@ class LeadGenController extends BaseController
                 return view('drumeo.lead-gen.getting-started.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
                 return view('drumeo.lead-gen.getting-started.thank-you', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-annual':
+                return view('drumeo.lead-gen.getting-started.ty-annual', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-monthly':
+                return view('drumeo.lead-gen.getting-started.ty-monthly', ['theme'=> 'drumeo', 'month' => true]);
             case '10-practice':
                 $currentLesson = (object) array(
                     'title' => 'Building Your Practice Routine',

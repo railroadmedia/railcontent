@@ -90,7 +90,7 @@
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Guitareo-Method-Level5-1640823238.jpg',
             'lessonNum' => 7,
-            'title' => 'Time To Get Fancy! Add Color To You Chords',
+            'title' => 'Time To Get Fancy! Add Color To Your Chords',
             'desc' => 'With a few simple shifts of your fingers, expanding your knowledge and palette of chords is easy. Impress your friends with these "fancy" chords.',
         ],
         [
@@ -102,7 +102,7 @@
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/MethodLevel7-09-1643789795.png',
             'lessonNum' => 8,
-            'title' => 'Don’t Be Afraid Of Barre Chords… Embrace Them',
+            'title' => 'Don’t Be Afraid Of Bar Chords… Embrace Them',
             'desc' => 'Unlock the freedom to easily play ANY major or minor chord and color chords in any key across the neck of the guitar.',
         ],
         [
@@ -115,11 +115,11 @@
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Guitaro-Method-Level9-1650358480.jpg',
             'lessonNum' => 8,
             'title' => 'Tying It All Together: Add Dazzle To Your Playing',
-            'desc' => 'Take your playing to the next level by building your lick bank and throwing some recognizable punches into your solos with these 8 licks.',
+            'desc' => 'Take your playing to the next level by building your lick bank and throwing some recognizable punches into your solos with these 7 licks.',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Guitareo-Method-Level10-1663141571.jpg',
-            'lessonNum' => 9,
+            'lessonNum' => 5,
             'title' => 'You Made It! Let’s Push A Bit Further',
             'desc' => 'This isn\'t the end of your journey - it\'s just the beginning. Now that you\'ve gotten everything you need to become a complete guitarist, it\'s time to build a great practice routine that will help you continuously improve your playing!',
         ],

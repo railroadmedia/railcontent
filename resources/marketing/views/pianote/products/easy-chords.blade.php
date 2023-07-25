@@ -446,7 +446,7 @@
                             <img class="-mt-7 rounded-lg overflow-hidden transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                         </div>
                     @else
-                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-0 @if($key !== 4) md:mb-28 @endif">
+                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 @if($key !== 4) md:mb-28 @else md:mb-0 @endif">
                             @if(empty($getting['special']))
                                 <img class="-mt-7 rounded-lg transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                             @else

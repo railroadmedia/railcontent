@@ -11,23 +11,13 @@
             'artist' => 'Rob Scallon',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1648717349.jpg',
-            'title' => 'Rhythm & Groove',
-            'artist' => 'Sami Ghawi',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/222675-card-thumbnail-maxres-1553776379.jpg',
-            'title' => 'Timing & Feel',
-            'artist' => 'David Becker',
-        ],
-        [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1664263514.jpg',
-            'title' => 'Musical Lanes',
+            'title' => 'Creating The Perfect Guitar Part',
             'artist' => 'Mark Lettieri',
         ],
         [
             'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/add-power-to-your-playing-thumb.jpg',
-            'title' => 'Add Power To Your Playing',
+            'title' => 'Better Guitar Solos',
             'artist' => 'Dave Weiner',
         ],
         [
@@ -40,6 +30,16 @@
             'title' => 'The Anatomy of a Song',
             'artist' => 'Pete Thorn',
         ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/altered-open-tunings.jpg',
+            'title' => 'Altered & Open Tunings',
+            'artist' => 'Don Ross',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/222675-card-thumbnail-maxres-1553776379.jpg',
+            'title' => 'Looping',
+            'artist' => 'David Becker',
+        ],
     ];
 
     $learn = [
@@ -47,11 +47,6 @@
             'img' => 'https://d1923uyy6spedc.cloudfront.net/YT-TechniquesToSoundLikeARockGod-05-1628743345.jpg',
             'title' => 'Rock Guitar',
             'artist' => 'Ayla Tesler-Mabé',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1647158359.jpg',
-            'title' => 'Punk Rock',
-            'artist' => 'Kent Shores',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/course-Card-1646897809.png',
@@ -67,6 +62,11 @@
             'img' => 'https://d1923uyy6spedc.cloudfront.net/278525-card-thumbnail-maxres-1609945442.png',
             'title' => 'Funk Essentials',
             'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1664263514.jpg',
+            'title' => 'Fusion/Neo-Soul',
+            'artist' => 'Mark Lettieri',
         ],
         [
             'img' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons/eba35aa-bg1-card-scaled@2x.jpg',
@@ -87,6 +87,11 @@
 
     $techniques = [
         [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1648717349.jpg',
+            'title' => 'Rhythm & Groove',
+            'artist' => 'Sami Ghawi',
+        ],
+        [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/294635-card-thumbnail-maxres-1617276103.png',
             'title' => 'Getting Started On The Acoustic Guitar',
             'artist' => 'Ayla Tesler-Mabé',
@@ -95,16 +100,6 @@
             'img' => 'https://d1923uyy6spedc.cloudfront.net/290985-card-thumbnail-maxres-1614867316.png',
             'title' => 'Getting Started On The Electric Guitar',
             'artist' => 'Ayla Tesler-Mabé',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/altered-open-tunings.jpg',
-            'title' => 'Altered & Open Tunings',
-            'artist' => 'Don Ross',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/222675-card-thumbnail-maxres-1553776379.jpg',
-            'title' => 'Looping',
-            'artist' => 'David Becker',
         ],
         [
             'img' => 'https://guitarlessons-com.s3.amazonaws.com/guitar-lessons/212a52c-picking-card-scaled@2x.jpg',
@@ -125,6 +120,11 @@
             'img' => 'https://d1923uyy6spedc.cloudfront.net/303027-card-thumbnail-maxres-1621854579.png',
             'title' => 'Bending & Vibrato',
             'artist' => 'Ayla Tesler-Mabé',
+        ],
+        [
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/222675-card-thumbnail-maxres-1553776379.jpg',
+            'title' => 'Timing & Feel',
+            'artist' => 'David Becker',
         ],
     ];
 

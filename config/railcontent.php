@@ -367,8 +367,10 @@ return [
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
 
             \App\Decorators\Content\InstructorDecorator::class,
-            \App\Decorators\Content\PlaylistItemDecorator::class,
+            \App\Decorators\Content\ResourceDecorator::class,
             \App\Decorators\Content\ContentTimezoneDecorator::class,
+            \App\Decorators\Content\PlaylistItemDecorator::class,
+
         ]
     ],
 
@@ -672,6 +674,8 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
+                'trailer1' => 448684113,
+                'trailer2' => 448684140
             ],
             'diy-drum-experiments' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/diy-drum-experiments.jpg',
@@ -1735,5 +1739,5 @@ return [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
     ],
     'playlist_items_limit' => 300,
-    'search_in_playlist_items_name' => false
+    'search_in_playlist_items_name' => true
 ];

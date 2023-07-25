@@ -132,7 +132,27 @@ class LeadGenController extends BaseController
             case null:
                 return view('pianote.lead-gen.chord-hacks.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
-                return view('pianote.lead-gen.chord-hacks.thank-you');
+                return view('pianote.lead-gen.chord-hacks.thank-you', ['theme' => 'pianote', 'month' => true]);
+            case 'ty-annual':
+                return view('pianote.lead-gen.chord-hacks.ty-annual');
+            case 'ty-monthly':
+                return view('pianote.lead-gen.chord-hacks.ty-monthly');
+        }
+
+        throw new NotFoundHttpException();
+    }
+
+    public function bluesPianoBootcamp(Request $request, $domain, $page = null, $lesson = null)
+    {
+        switch($page){
+            case null:
+                return view('pianote.lead-gen.blues-piano-bootcamp.signup', ['recaptchaKey'=>config('recaptcha.key')]);
+            case 'thank-you':
+                return view('pianote.lead-gen.blues-piano-bootcamp.thank-you', ['theme' => 'pianote', 'month' => true]);
+            case 'ty-annual':
+                return view('pianote.lead-gen.blues-piano-bootcamp.ty-annual');
+            case 'ty-monthly':
+                return view('pianote.lead-gen.blues-piano-bootcamp.ty-monthly');
         }
 
         throw new NotFoundHttpException();

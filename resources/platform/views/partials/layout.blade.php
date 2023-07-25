@@ -40,44 +40,49 @@
 
         {{-- App Container --}}
         <div id="app" class="flex-1">
-            <app-container
-                :vue-router="false"
-                brand="{{ $brand }}"
-            >
-                <page-container
-                    csrf_token="{{ csrf_token() }}"
+            @if(empty($noContainer) || !$noContainer)
+                <app-container
+                    :vue-router="false"
                     brand="{{ $brand }}"
-                    :is-live="{{ isLive() ? 'true':'false' }}"
-                    search-url=""
-                    :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}mostRecentPlaylists
-                    :most-recent-playlists="{{ json_encode($mostRecentPlaylists) }}" {{-- Preloaded Content --}}
-                    @if(!empty( user() ))
-                        user-name="{{ user()->display_name }}"
-                        user-avatar="{{ user()->profile_picture_url }}"
-                        user-id="{{ user()->id }}"
-                        account-url="{{ user()->getDashboardUrl() }}"
-                        :can-refer-new-students="{{ user()->isAMember() ? 'true' : 'false' }}"
-                    @endif
-                    @if(!empty( $hasUnreadNotifications ))
-                        :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
-                    @endif
-                    @if(isset($adminMessage))
-                        admin-message="{{ $adminMessage }}"
-                    @endif
-                    {{-- @if(isset($forceHideSidebar))
-                        :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
-                    @endif --}}
                 >
-                    <template v-cloak v-slot="slotProps">
+                    <page-container
+                        csrf_token="{{ csrf_token() }}"
+                        brand="{{ $brand }}"
+                        :is-live="{{ isLive() ? 'true':'false' }}"
+                        search-url=""
+                        :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}mostRecentPlaylists
+                        :most-recent-playlists="{{ json_encode($mostRecentPlaylists) }}" {{-- Preloaded Content --}}
+                        @if(!empty( user() ))
+                            user-name="{{ user()->display_name }}"
+                            user-avatar="{{ user()->profile_picture_url }}"
+                            user-id="{{ user()->id }}"
+                            account-url="{{ user()->getDashboardUrl() }}"
+                            :can-refer-new-students="{{ user()->isAMember() ? 'true' : 'false' }}"
+                        @endif
+                        @if(!empty( $hasUnreadNotifications ))
+                            :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
+                        @endif
+                        @if(isset($adminMessage))
+                            admin-message="{{ $adminMessage }}"
+                        @endif
+                        {{-- @if(isset($forceHideSidebar))
+                            :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
+                        @endif --}}
+                    >
+                        <template v-cloak v-slot="slotProps">
 
-                        @yield('content')
+                            @yield('content')
 
-                    </template>
-                </page-container>
-                {{-- Review Modals Code Loads Here --}}
-                @yield('review-modal-section')
-            </app-container>
-        </div>
+                        </template>
+                    </page-container>
+                    {{-- Review Modals Code Loads Here --}}
+                    @yield('review-modal-section')
+                </app-container>
+            @else
+                @yield('content')
+            @endif
+         </div>
+
 
         @include('partials._brand-set-authentication-cookies-iframe')
 
