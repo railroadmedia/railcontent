@@ -21468,9 +21468,6 @@ a:visited{
 .tw-top-full{
   top: 100% !important;
 }
-.-tw-top-4{
-  top: -1rem !important;
-}
 .tw-top-5{
   top: 1.25rem !important;
 }
@@ -22623,11 +22620,11 @@ a:visited{
 .tw-w-\[175px\]{
   width: 175px !important;
 }
-.tw-w-\[calc\(100\%-35px\)\]{
-  width: calc(100% - 35px) !important;
-}
 .tw-w-\[110px\]{
   width: 110px !important;
+}
+.tw-w-\[calc\(100\%-35px\)\]{
+  width: calc(100% - 35px) !important;
 }
 .tw-w-\[84px\]{
   width: 84px !important;
@@ -22673,9 +22670,6 @@ a:visited{
 }
 .tw-min-w-\[167px\]{
   min-width: 167px !important;
-}
-.tw-min-w-\[145px\]{
-  min-width: 145px !important;
 }
 .tw-min-w-\[40px\]{
   min-width: 40px !important;
