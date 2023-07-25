@@ -674,6 +674,8 @@ return [
                 'allowableFilters' => [],
                 'allowableFiltersMobile' => [],
                 'sortBy' => '-published_on',
+                'trailer1' => 448684113,
+                'trailer2' => 448684140
             ],
             'diy-drum-experiments' => [
                 'thumbnailUrl' => 'https://dpwjbsxqtam5n.cloudfront.net/shows/diy-drum-experiments.jpg',

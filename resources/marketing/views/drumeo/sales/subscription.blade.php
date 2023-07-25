@@ -148,6 +148,7 @@
 
     @endif
 
+    @if(empty($trialVersion))
     @include('_partials.components.promo-top-banner',[
         'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-shop-summer-sale-bg.jpg',
         'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-summer-sale-logo.svg',
@@ -155,6 +156,7 @@
         'title' => 'Join Drumeo And Save 20%<br class="sm:hidden"> + Choose Your Bonus Bundle',
         'promoText' => 'SAVE UP TO 81% UNTIL JULY 31ST!',
     ])
+    @endif
 
     @php
         $bubble1 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/dorothea-taylor.png';
@@ -240,12 +242,12 @@
                 ]
             ],
             [
-                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts.jpg',
+                'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts2.jpg',
                 'title' => 'Guided Workouts',
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
                 'lessonInfo' => [
                     [
-                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts.jpg',
+                        'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/guided-workouts2.jpg',
                     ],
                 ]
             ],
