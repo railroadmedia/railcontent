@@ -278,16 +278,13 @@ onMounted(() => {
 
         <AddDuplicate v-if="duplicateProps.show" :title="duplicateProps.title" :brand="brand"
             @onConfirm="() => handleDuplicateConfirm(duplicateProps.id)" @onClose="handleDuplicateCancel"  />
+        
         <div v-if="isLoadingAssignments || isLoadingPlaylists"
-            class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-items-center tw-justify-center tw-bg-black/40">
+            class="tw-z-40 tw-flex tw-w-full tw-h-full tw-text-white tw-absolute tw-top-0 tw-left-0 tw-items-center tw-justify-center tw-bg-black/40">
             <LoadingSpinner class="tw-w-[40px] tw-h-[40px] tw-text-white" />
         </div>
 
         <div class="tw-relative tw-w-full">
-            <!-- Close Modal -->
-            <button @click="() => emit('onCancel')" class="tw-absolute -tw-top-4 tw-right-0">
-                <XIcon class="tw-h-[30px] tw-w-[30px]" />
-            </button>
             <h2 class="tw-text-[24px] tw-font-bold tw-w-full tw-text-center">Add Item to Playlist</h2>
         </div>
 
