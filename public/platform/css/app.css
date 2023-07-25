@@ -22620,11 +22620,11 @@ a:visited{
 .tw-w-\[175px\]{
   width: 175px !important;
 }
-.tw-w-\[110px\]{
-  width: 110px !important;
-}
 .tw-w-\[calc\(100\%-35px\)\]{
   width: calc(100% - 35px) !important;
+}
+.tw-w-\[110px\]{
+  width: 110px !important;
 }
 .tw-w-\[84px\]{
   width: 84px !important;
