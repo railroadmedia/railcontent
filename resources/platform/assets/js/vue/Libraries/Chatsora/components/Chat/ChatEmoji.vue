@@ -27,7 +27,7 @@
                     class="tw-resize-none tw-whitespace-nowrap tw-overflow-x-auto tw-rounded-full cs-text-sm tw-w-full tw-py-[9px] tw-px-[13px]"
                 >
             </div>
-            <div class="tw-px-3 tw-text-white tw-font-semibold">{{ $_current_tab_label }}</div>
+            <div class="tw-px-3 tw-text-[#000C17] dark:tw-text-white tw-font-semibold">{{ $_current_tab_label }}</div>
             <div class="tw-py-2 tw-overflow-hidden">
                 <div class="cs-emoji-list" ref="simplebar">
                     <div class="tw-py-3 tw-px-2 tw-grid tw-grid-cols-8 tw-gap-y-3 tw-text-2xl tw-overflow-auto">
