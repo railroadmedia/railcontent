@@ -10,9 +10,9 @@
       <!-- Video CTAs -->
       <div class="tw-flex tw-items-start tw-flex-shrink-0 tw-py-2">
         <!-- Info Button -->
-        <div v-if="showInfoButton" class="flex flex-column resource-button ph-1 tw-text-white">
+        <div v-if="showInfoButton" class="flex flex-column resource-button ph-1">
           <button class="btn stacked" id="toggleInstructorInfo" @click="toggleInfo">
-            <span class="tw-shadow-none tw-text-lg tw-h-auto" style="padding: 0 8px">
+            <span class="tw-shadow-none tw-text-lg tw-h-auto tw-text-[#3F3F46] dark:tw-text-white" style="padding: 0 8px">
               <musora-icon :icon-name="openInfo ? 'info-filled' : 'info'" class="tw-w-6 tw-h-6 tw-mb-1" />
               Info
             </span>
