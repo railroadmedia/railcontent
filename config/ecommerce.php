@@ -314,6 +314,19 @@ return [
                 'paypal_api_checkout_cancel_url' => env('SINGEO_PAYPAL_API_CHECKOUT_CANCEL_URL'),
                 'paypal_api_test_billing_agreement_id' => '',
             ],
+            'musora' => [
+                'paypal_api_username' => env('MUSORA_PAYPAL_API_USERNAME'),
+                'paypal_api_password' => env('MUSORA_PAYPAL_API_PASSWORD'),
+                'paypal_api_signature' => env('MUSORA_PAYPAL_API_SIGNATURE'),
+                'paypal_api_currency_code' => env('MUSORA_PAYPAL_API_CURRENCY_CODE'),
+                'paypal_api_version' => env('MUSORA_PAYPAL_API_VERSION'),
+                'paypal_api_nvp_curl_url' => env('MUSORA_PAYPAL_API_NVP_CURL_URL'),
+                'paypal_api_checkout_return_route' => 'order-form.submit-paypal',
+                'paypal_api_checkout_redirect_url' => env('MUSORA_PAYPAL_API_CHECKOUT_REDIRECT_URL'),
+                'paypal_api_checkout_return_url' => env('MUSORA_PAYPAL_API_CHECKOUT_RETURN_URL'),
+                'paypal_api_checkout_cancel_url' => env('MUSORA_PAYPAL_API_CHECKOUT_CANCEL_URL'),
+                'paypal_api_test_billing_agreement_id' => env('MUSORA_PAYPAL_API_TEST_BILLING_AGREEMENT_ID'),
+            ]
         ],
 
         'stripe' => [
