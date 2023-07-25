@@ -173,7 +173,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div v-if="soundsliceSlug" class="tw-h-full tw-w-full">
+    <div v-if="soundsliceSlug" class="tw-h-full tw-w-full tw-relative" :class="{ 'lg:-tw-ml-[256px]': isLoading }">
         <div class="flex flex-column tw-h-full">
             <slot name="soundsliceControls"></slot>
             <div class="flex flex-row grow">
@@ -185,7 +185,7 @@ onBeforeUnmount(() => {
             </div>
         </div>
 
-        <div v-if="isLoading" class="loading-exercise heading ph-4 pv-2">
+        <div v-if="isLoading" class="loading-exercise heading">
             <LoadingAnimation :theme-color="themeColor" />
         </div>
     </div>

@@ -367,8 +367,10 @@ return [
             \Railroad\Railcontent\Decorators\Entity\ContentEntityDecorator::class,
 
             \App\Decorators\Content\InstructorDecorator::class,
-            \App\Decorators\Content\PlaylistItemDecorator::class,
+            \App\Decorators\Content\ResourceDecorator::class,
             \App\Decorators\Content\ContentTimezoneDecorator::class,
+            \App\Decorators\Content\PlaylistItemDecorator::class,
+
         ]
     ],
 
@@ -1731,5 +1733,5 @@ return [
         'course', 'learning-path-course', 'semester-pack', 'pack-bundle', 'song-tutorial'
     ],
     'playlist_items_limit' => 300,
-    'search_in_playlist_items_name' => false
+    'search_in_playlist_items_name' => true
 ];

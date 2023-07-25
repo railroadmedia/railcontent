@@ -130,11 +130,11 @@
                     }
                     //load Playlists (if collection catalog exists)
                     if(playlistsStore.pageHasPlaylistCatalog) {
-                        playlistsStore.getPlaylists({ 
-                            brand: props.brand, 
-                            page: playlistsStore.resultsPage, 
-                            sort: state.sortValue, 
-                            limit: null 
+                        playlistsStore.getPlaylists({
+                            brand: props.brand,
+                            page: playlistsStore.resultsPage,
+                            sort: state.sortValue,
+                            limit: null
                         }, token);
                     }
 
@@ -150,7 +150,7 @@
             }).catch((error)=>{
                 window.shownotification({
                     icon: 'error',
-                    text: 'Woops! Something wrong happened, please try again later.'
+                    text: error.response.data.meta.errors[0].detail
                 })
             })
         }

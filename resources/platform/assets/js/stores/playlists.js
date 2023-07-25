@@ -119,6 +119,17 @@ export const usePlaylistsStore = defineStore({
       })
     },
 
+    updatePlaylistItem(item) {
+      //update item in lessons
+      this.lessons = this.lessons.map((lesson) => {
+        if (lesson.user_playlist_item_id === item.user_playlist_item_id) {
+          return item;
+        } else {
+          return lesson;
+        }
+      })
+    },
+
     //Set/Update Playlist Data for Playlist page
     setActivePlaylist(list) {
       this.activePlaylist = list;
@@ -162,12 +173,6 @@ export const usePlaylistsStore = defineStore({
             pinnedList.name = name;
         }
       }
-    },
-    //Update Set/Time
-    updatePlaylistItem(data) {
-      let lesson = this.lessons.find(l => l.user_playlist_item_id === data.user_playlist_item_id);
-      lesson.start_second = data.start;
-      lesson.end_second = data.end
     },
 
     openModal(modalOpen) {
