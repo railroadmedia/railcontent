@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "05c7bd82440fcf155fbf307487743879",
+    "content-hash": "091777e6a2f0bf97fac0afc0289f6aab",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8327,16 +8327,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "dev-2.0-playlists-v15",
+            "version": "v3.1.28",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "11e98398b5ee37d245a886a71ed3bbef4baf7531"
+                "reference": "018b5cd15308fd575610b314b209eede42a2e646"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/11e98398b5ee37d245a886a71ed3bbef4baf7531",
-                "reference": "11e98398b5ee37d245a886a71ed3bbef4baf7531",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/018b5cd15308fd575610b314b209eede42a2e646",
+                "reference": "018b5cd15308fd575610b314b209eede42a2e646",
                 "shasum": ""
             },
             "require": {
@@ -8366,9 +8366,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/2.0-playlists-v15"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.28"
             },
-            "time": "2023-07-24T11:12:33+00:00"
+            "time": "2023-07-25T13:10:56+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8561,16 +8561,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "dev-2.0-playlists-v15",
+            "version": "v2.1.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "f0fcaee523b4f5d878e7b56dbbd1f27948705999"
+                "reference": "92b8423e08eba5fd64c8a7e9e5b03e9f101d23b9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/f0fcaee523b4f5d878e7b56dbbd1f27948705999",
-                "reference": "f0fcaee523b4f5d878e7b56dbbd1f27948705999",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/92b8423e08eba5fd64c8a7e9e5b03e9f101d23b9",
+                "reference": "92b8423e08eba5fd64c8a7e9e5b03e9f101d23b9",
                 "shasum": ""
             },
             "require": {
@@ -8625,9 +8625,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/2.0-playlists-v15"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.31"
             },
-            "time": "2023-07-03T10:48:32+00:00"
+            "time": "2023-07-25T13:06:44+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16982,29 +16982,15 @@
     ],
     "aliases": [
         {
-            "package": "railroad/musora-api",
-            "version": "dev-2.0-playlists-v15",
-            "alias": "v3.1.23",
-            "alias_normalized": "3.1.23.0"
-        },
-        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
             "alias_normalized": "3.0.7.0"
-        },
-        {
-            "package": "railroad/railcontent",
-            "version": "dev-2.0-playlists-v15",
-            "alias": "v2.1.24",
-            "alias_normalized": "2.1.24.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/musora-api": 20,
-        "railroad/railanalytics": 20,
-        "railroad/railcontent": 20
+        "railroad/railanalytics": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
