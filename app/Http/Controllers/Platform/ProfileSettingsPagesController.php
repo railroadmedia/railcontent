@@ -224,13 +224,18 @@ class ProfileSettingsPagesController extends BaseController
             brand()
         );
 
+        $musoraPaymentMethods = $this->paymentMethodRepository
+            ->getAllUsersPaymentMethods($user->id, $request, 'musora');
+
+        array_push($paymentMethods, ...$musoraPaymentMethods);
+
         $paymentMethodsJson = ResponseService::paymentMethod(
             $paymentMethods
         )
             ->respond()
             ->getContent();
 
-        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.' . brand() . '.stripe_publishable_key');
+        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.musora.stripe_publishable_key');
 
         $membershipProductIds = ProductModel::query()
             ->where([
