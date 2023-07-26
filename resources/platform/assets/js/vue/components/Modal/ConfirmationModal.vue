@@ -76,15 +76,12 @@ onUnmounted(() => {
   modalContainer.classList.remove("tw-fixed");
 });
 </script>
-    
+
 <template>
   <teleport to="#confirmation-container">
     <div :id="`${modalId}-overlay`" class="
             tw-absolute tw-h-full tw-w-full tw-bg-[#000000] tw-bg-opacity-80 tw-z-30
           " @click="onOverlayClick">
-          <button @click="onClose" class="tw-absolute tw-top-3 tw-right-3">
-            <XIcon class="tw-text-[#E5E5E5] tw-h-[30px] tw-w-[30px]" />
-          </button>
     </div>
     <div class="
             tw-absolute
@@ -109,7 +106,8 @@ onUnmounted(() => {
               dark:tw-bg-[#081825]
               tw-text-black
               dark:tw-text-white
-              tw-w-[480px]
+              tw-w-[606px]
+              tw-relative
             "
           :class="slideClass"
         >
@@ -118,23 +116,27 @@ onUnmounted(() => {
                 tw-flex-row
                 tw-justify-between
                 tw-text-white
-                tw-px-[32px]
+                tw-px-[64px]
               ">
           <h3 class="tw-w-full tw-text-center tw-text-[20px] tw-text-black dark:tw-text-white">{{ title }}</h3>
         </div>
         <div
-          class="tw-text-center tw-text-[#8c9698] dark:tw-text-[#9EC0DC] tw-flex tw-justify-center tw-items-center tw-text-black tw-py-[32px] tw-text-[14px]">
+          class="tw-text-center tw-text-[#000C17] dark:tw-text-white tw-flex tw-justify-center tw-items-center tw-text-black tw-py-[32px]">
           {{ subtitle }}
         </div>
         <div class="tw-flex tw-justify-end tw-px-[32px]">
-          <button v-if="!hideCancel" @click="onCancel" class="tw-grow tw-btn-secondary tw-text-gray-400">No</button>
-          <button @click="onSubmit" :class="`tw-grow tw-btn-primary tw-bg-${brand} hover:tw-bg-${brand}-600 tw-ml-[16px]`">{{ submitLabel }}</button>
+          <button v-if="!hideCancel" @click="onCancel" class="tw-grow tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">No</button>
+          <button @click="onSubmit" :class="`tw-grow tw-btn-primary tw-ml-[16px] tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57]`">{{ submitLabel }}</button>
         </div>
+        <!-- X Icon -->
+        <button @click="onClose" class="tw-absolute tw-top-3 tw-right-3">
+          <XIcon class="tw-text-[#000C17] dark:tw-text-white tw-h-[30px] tw-w-[30px]" />
+        </button>
       </div>
     </div>
   </teleport>
 </template>
-    
+
 <style>
 .slide-out-left {
   -webkit-animation: slide-out-left 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
