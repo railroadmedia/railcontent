@@ -107,6 +107,7 @@
         {{--        </section>--}}
 
         {{--    LESSONS    --}}
+        <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <ul class="container mx-auto fixed-cards text-center lg:text-left">
                 <li>
@@ -152,6 +153,7 @@
         </section>
 
         {{--   ACCESSORIES     --}}
+        <div id="accessories" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'accessories' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
@@ -180,6 +182,7 @@
         </section>
 
         {{--   HATS     --}}
+        <div id="hats" class="anchor"></div>
         <section class="grid-view category-section" data-category="hats" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
@@ -210,6 +213,7 @@
         </section>
 
         {{--   SHIRTS     --}}
+        <div id="shirts" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
@@ -238,6 +242,7 @@
         </section>
 
         {{--   HOODIES     --}}
+        <div id="hoodies" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
