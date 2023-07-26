@@ -347,8 +347,8 @@ return [
                 'stripe_publishable_key' => env('SINGEO_STRIPE_PUBLISHABLE_KEY'),
             ],
             'musora' => [
-                'stripe_api_secret' => env('DRUMEO_STRIPE_API_SECRET'),
-                'stripe_publishable_key' => env('DRUMEO_STRIPE_PUBLISHABLE_KEY'),
+                'stripe_api_secret' => env('MUSORA_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('MUSORA_STRIPE_PUBLISHABLE_KEY'),
             ],
         ],
 
