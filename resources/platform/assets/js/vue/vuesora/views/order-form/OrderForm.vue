@@ -665,7 +665,7 @@ export default {
 
         createOrderPayload() {
             const payload = {
-                gateway: this.brand,
+                gateway: 'musora',
                 brand: this.brand,
                 billing_country: this.paymentStateFactory.billingCountry,
                 billing_region: this.paymentStateFactory.billingRegion,

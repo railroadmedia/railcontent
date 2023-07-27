@@ -81,8 +81,7 @@
             @else
                 @yield('content')
             @endif
-         </div>
-
+        </div>
 
         @include('partials._brand-set-authentication-cookies-iframe')
 
@@ -92,14 +91,14 @@
             window.userNavigationDropdownLinks = {!! $userNavigationDropdownLinksJson ?? '' !!};
         </script>
 
+        {{-- Customer.io --}}
+        @include('partials._customer-io')
+
         @yield('layout-scripts')
             <script src="{{ mix('platform/js/manifest.js') }}"></script>
             <script src="{{ mix('platform/js/vendor.js') }}"></script>
             <script src="{{ mix('platform/js/app.js') }}"></script>
         @yield('inject-components')
-
-        {{-- Customer.io --}}
-        @include('partials._customer-io')
 
         {{-- Helpscout Beacon --}}
         @include('partials.third-party.helpscout-tracking-beacon-script', [
