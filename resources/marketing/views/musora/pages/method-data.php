@@ -279,11 +279,6 @@
             'artist' => 'Ayla Tesler-Mabé',
         ],
         [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1647158359.jpg',
-            'title' => 'Punk Rock',
-            'artist' => 'Kent Shores',
-        ],
-        [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/title-card-1657816791.jpg',
             'title' => 'Classical Piano',
             'artist' => 'Victoria Theodore',
