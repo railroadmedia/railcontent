@@ -52,14 +52,21 @@ class MigrateFixMissingStripeCustomerIds extends Command
             ->where('ecommerce_user_payment_methods.id', '>=', $startingId)
             ->where('ecommerce_credit_cards.external_customer_id', '!=', '')
             ->where('ecommerce_credit_cards.external_customer_id', '!=', null)
-            ->whereRaw('not exists (SELECT * FROM ecommerce_user_stripe_customer_ids s where s.stripe_customer_id = ecommerce_credit_cards.external_customer_id)')
+            ->whereRaw(
+                'not exists (SELECT s.id FROM ecommerce_user_stripe_customer_ids s where s.stripe_customer_id = ecommerce_credit_cards.external_customer_id)'
+            )
             ->chunkById(10000, function ($items) {
+                $processedIds = [];
                 foreach ($items as $item) {
+                    if ($processedIds[$item->external_customer_id] ?? false) {
+                        continue;
+                    }
                     $this->info("Processing user payment method id: " . $item->id . " $item->external_customer_id");
                     $this->migrateCreditCard($item);
+                    $processedIds[$item->external_customer_id] = true;
                     $this->totalCount++;
                 }
-            });
+            }, 'ecommerce_user_payment_methods.id');
 
         $this->info("Total migrated: " . $this->count);
         $this->info("Total processed: " . $this->totalCount);
