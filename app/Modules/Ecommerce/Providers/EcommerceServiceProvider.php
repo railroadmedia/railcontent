@@ -2,6 +2,7 @@
 
 namespace App\Modules\Ecommerce\Providers;
 
+use App\Modules\Ecommerce\Console\Commands\MigrateFixMissingStripeCustomerIds;
 use App\Modules\Ecommerce\Console\Commands\MigrateExistingStripeMusoraGatewayPaymentsToDrumeo;
 use App\Modules\Ecommerce\Console\Commands\MigrateStripeCustomersToMusora;
 use App\Modules\Ecommerce\Console\Commands\ProcessAppleExpiredSubscriptions;
@@ -34,6 +35,7 @@ class EcommerceServiceProvider extends ServiceProvider
                 ProcessAppleExpiredSubscriptions::class,
                 MigrateExistingStripeMusoraGatewayPaymentsToDrumeo::class,
                 MigrateStripeCustomersToMusora::class,
+                MigrateFixMissingStripeCustomerIds::class,
             ]
         );
 
