@@ -13,7 +13,7 @@ use Carbon\Carbon;
 
 class MigrateStripeCustomersToMusora extends Command
 {
-    protected $signature = 'ecommerce:MigrateStripeCustomersToMusora {--userId=} {--toUserId=}';
+    protected $signature = 'ecommerce:MigrateStripeCustomersToMusora {userId?} {toUserId?}';
     protected int $totalCount = 0;
 
     protected int $alreadyMigratedCount = 0;
@@ -30,8 +30,8 @@ class MigrateStripeCustomersToMusora extends Command
     {
         $this->info("Migrate Stripe Gateway Customers and Credit Cards To Musora...");
 
-        $userId = $this->option('userId') ?? 0;
-        $toUserId = $this->option('toUserId') ?? 9999999;
+        $userId = $this->argument('userId') ?? 0;
+        $toUserId = $this->argument('toUserId') ?? 9999999;
         $this->withExecutionTime(function () use ($userId, $toUserId) {
             StripeCustomer::query()->select('user_id')
                 ->distinct()
@@ -64,7 +64,6 @@ class MigrateStripeCustomersToMusora extends Command
 
         if ($stripeCustomer) {
             $this->info("Stripe Customer: $stripeCustomer->stripe_customer_id");
-            return;
             $newStripeCustomer = new StripeCustomer();
             $newStripeCustomer->user_id = $stripeCustomer->user_id;
             $newStripeCustomer->stripe_customer_id = $stripeCustomer->stripe_customer_id;
@@ -106,6 +105,14 @@ class MigrateStripeCustomersToMusora extends Command
                         $newUserPaymentMethod->user_id = $userPaymentMethod->user_id;
                         $newUserPaymentMethod->payment_method_id = $newPaymentMethod->id;
                         $newUserPaymentMethod->save();
+                    }
+
+                    $subscriptions = Subscription::query()
+                        ->where('payment_method_id', $paymentMethod->id)->get();
+                    foreach($subscriptions as $subscription){
+                        $this->info("Updating Subscription $subscription->id to use new payment method: $subscription->payment_method_id -> $newPaymentMethod->id");
+                        $subscription->payment_method_id = $newPaymentMethod->id;
+                        $subscription->save();
                     }
                 }
 
