@@ -13,7 +13,7 @@ use Carbon\Carbon;
 
 class MigrateStripeCustomersToMusora extends Command
 {
-    protected $signature = 'ecommerce:MigrateStripeCustomersToMusora {--userId=}';
+    protected $signature = 'ecommerce:MigrateStripeCustomersToMusora {--userId=} {--toUserId=}';
     protected int $totalCount = 0;
 
     protected int $alreadyMigratedCount = 0;
@@ -21,6 +21,7 @@ class MigrateStripeCustomersToMusora extends Command
     protected int $onlyOneStripeCustomerFoundCount = 0;
     protected int $recentPaymentFoundCount = 0;
     protected int $recentCreditCardFoundCount = 0;
+    protected int $skippedMigratedCount = 0;
 
     protected int $lastResortCount = 0;
 
@@ -30,11 +31,13 @@ class MigrateStripeCustomersToMusora extends Command
         $this->info("Migrate Stripe Gateway Customers and Credit Cards To Musora...");
 
         $userId = $this->option('userId') ?? 0;
-        $this->withExecutionTime(function () use ($userId) {
+        $toUserId = $this->option('toUserId') ?? 9999999;
+        $this->withExecutionTime(function () use ($userId, $toUserId) {
             StripeCustomer::query()->select('user_id')
                 ->distinct()
                 ->orderBy('user_id')
-                ->where('user_id', '>', $userId)
+                ->where('user_id', '>=', $userId)
+                ->where('user_id', '<=', $toUserId)
                 ->chunk(1000, function ($items) {
                     foreach ($items as $item) {
                         $this->totalCount++;
@@ -51,6 +54,7 @@ class MigrateStripeCustomersToMusora extends Command
         $this->info("Recent payment found: " . $this->recentPaymentFoundCount);
         $this->info("Recent credit card found: " . $this->recentCreditCardFoundCount);
         $this->info("Last resort: " . $this->lastResortCount);
+        $this->info("Skipped migrated: " . $this->skippedMigratedCount);
     }
 
     private function migrateStripeCustomer(int $userId)
@@ -60,6 +64,7 @@ class MigrateStripeCustomersToMusora extends Command
 
         if ($stripeCustomer) {
             $this->info("Stripe Customer: $stripeCustomer->stripe_customer_id");
+            return;
             $newStripeCustomer = new StripeCustomer();
             $newStripeCustomer->user_id = $stripeCustomer->user_id;
             $newStripeCustomer->stripe_customer_id = $stripeCustomer->stripe_customer_id;
@@ -136,6 +141,12 @@ class MigrateStripeCustomersToMusora extends Command
                 $this->info("Already migrated");
                 $this->alreadyMigratedCount++;
                 return null; //is already migrated
+            } else {
+                if ($stripeCustomer->created_at >= '2023-07-27') {
+                    $this->info("Skipped migration");
+                    $this->skippedMigratedCount++;
+                    return null;
+                }
             }
         }
 
