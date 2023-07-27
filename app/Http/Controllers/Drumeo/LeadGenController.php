@@ -45,11 +45,6 @@ class LeadGenController extends BaseController
         return view('drumeo.products.dtme-testimonials');
     }
 
-    public function faster()
-    {
-        return view('drumeo.lead-gen.faster.signup', ['recaptchaKey'=>config('recaptcha.key')]);
-    }
-
     public function fasterNeon()
     {
         return view('drumeo.lead-gen.faster.signup-neon', ['recaptchaKey'=>config('recaptcha.key')]);
@@ -104,6 +99,21 @@ class LeadGenController extends BaseController
                     'totalLessonNum' => 10,
                     'currentLessonNum' => 10,
                 ]);
+        }
+
+        throw new NotFoundHttpException();
+    }
+    public function faster(Request $request, $domain, $page = null)
+    {
+        switch ($page) {
+            case null:
+                return view('drumeo.lead-gen.faster.signup', ['recaptchaKey'=>config('recaptcha.key')]);
+            case 'thank-you':
+                return view('drumeo.lead-gen.faster.thank-you', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-annual':
+                return view('drumeo.lead-gen.getting-started.ty-annual');
+            case 'ty-monthly':
+                return view('drumeo.lead-gen.getting-started.ty-monthly');
         }
 
         throw new NotFoundHttpException();
