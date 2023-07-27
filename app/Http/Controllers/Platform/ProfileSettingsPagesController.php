@@ -224,11 +224,6 @@ class ProfileSettingsPagesController extends BaseController
             brand()
         );
 
-        $musoraPaymentMethods = $this->paymentMethodRepository
-            ->getAllUsersPaymentMethods($user->id, $request, 'musora');
-
-        array_push($paymentMethods, ...$musoraPaymentMethods);
-
         $paymentMethodsJson = ResponseService::paymentMethod(
             $paymentMethods
         )
