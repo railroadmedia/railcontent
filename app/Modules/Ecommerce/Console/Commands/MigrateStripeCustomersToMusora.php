@@ -141,12 +141,6 @@ class MigrateStripeCustomersToMusora extends Command
                 $this->info("Already migrated");
                 $this->alreadyMigratedCount++;
                 return null; //is already migrated
-            } else {
-                if ($stripeCustomer->created_at >= '2023-07-27') {
-                    $this->info("Skipped migration");
-                    $this->skippedMigratedCount++;
-                    return null;
-                }
             }
         }
 
