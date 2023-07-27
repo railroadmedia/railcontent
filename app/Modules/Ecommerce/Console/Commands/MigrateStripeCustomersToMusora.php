@@ -9,7 +9,7 @@ use App\Modules\Ecommerce\Models\PaymentMethod;
 use App\Modules\Ecommerce\Models\StripeCustomer;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\UserPaymentMethod;
-use Carbon\Carbon;
+use Railroad\Ecommerce\Gateways\StripePaymentGateway;
 
 class MigrateStripeCustomersToMusora extends Command
 {
@@ -25,9 +25,11 @@ class MigrateStripeCustomersToMusora extends Command
 
     protected int $lastResortCount = 0;
 
+    protected StripePaymentGateway $stripePaymentGateway;
 
-    public function handle()
+    public function handle(StripePaymentGateway $stripePaymentGateway)
     {
+        $this->stripePaymentGateway = $stripePaymentGateway;
         $this->info("Migrate Stripe Gateway Customers and Credit Cards To Musora...");
 
         $userId = $this->argument('userId') ?? 0;
@@ -70,73 +72,63 @@ class MigrateStripeCustomersToMusora extends Command
             $newStripeCustomer->payment_gateway_name = 'musora';
             $newStripeCustomer->save();
 
-            $creditCards = CreditCard::query()
-                ->where('external_customer_id', $stripeCustomer->stripe_customer_id)
-                ->get();
 
-            foreach ($creditCards as $creditCard) {
-                $newCreditCard = new CreditCard();
-                $newCreditCard->fingerprint = $creditCard->fingerprint;
-                $newCreditCard->last_four_digits = $creditCard->last_four_digits;
-                $newCreditCard->cardholder_name = $creditCard->cardholder_name;
-                $newCreditCard->company_name = $creditCard->company_name;
-                $newCreditCard->expiration_date = $creditCard->expiration_date;
-                $newCreditCard->external_id = $creditCard->external_id;
-                $newCreditCard->payment_gateway_name = 'musora';
-                $newCreditCard->external_customer_id = $creditCard->external_customer_id;
-                $newCreditCard->save();
-
-                $paymentMethod = PaymentMethod::query()->where('credit_card_id', $creditCard->id)->first();
-                if ($paymentMethod) {
-                    $newPaymentMethod = new PaymentMethod();
-                    $newPaymentMethod->method_id = $paymentMethod->method_id;
-                    $newPaymentMethod->method_type = $paymentMethod->method_type;
-                    $newPaymentMethod->credit_card_id = $newCreditCard->id;
-                    $newPaymentMethod->currency = $paymentMethod->currency;
-                    $newPaymentMethod->billing_address_id = $paymentMethod->billing_address_id;
-                    $newPaymentMethod->note = $paymentMethod->note;
-                    $newPaymentMethod->save();
-
-                    $userPaymentMethod = UserPaymentMethod::query()
-                        ->where('payment_method_id', $paymentMethod->id)
-                        ->first();
-                    if ($userPaymentMethod) {
-                        $newUserPaymentMethod = new UserPaymentMethod();
-                        $newUserPaymentMethod->user_id = $userPaymentMethod->user_id;
-                        $newUserPaymentMethod->payment_method_id = $newPaymentMethod->id;
-                        $newUserPaymentMethod->save();
-                    }
-
-                    $subscriptions = Subscription::query()
-                        ->where('payment_method_id', $paymentMethod->id)->get();
-                    foreach($subscriptions as $subscription){
-                        $this->info("Updating Subscription $subscription->id to use new payment method: $subscription->payment_method_id -> $newPaymentMethod->id");
-                        $subscription->payment_method_id = $newPaymentMethod->id;
-                        $subscription->save();
-                    }
-                }
-
-//                $paymentMethodsToDelete = PaymentMethod::query()
-//                    ->join(
-//                        'ecommerce_user_payment_methods',
-//                        'ecommerce_user_payment_methods.payment_method_id',
-//                        '=',
-//                        'ecommerce_payment_methods.id'
-//                    )
-//                    ->join(
-//                        'ecommerce_credit_cards',
-//                        'ecommerce_credit_cards.id',
-//                        '=',
-//                        'ecommerce_payment_methods.credit_card_id'
-//                    )
-//                    ->where('ecommerce_user_payment_methods.user_id', $userId)
-//                    ->where('ecommerce_credit_cards.payment_gateway_name', '!=', 'musora')
-//                    ->get();
-//                foreach ($paymentMethodsToDelete as $paymentMethodToDelete) {
-//                    $paymentMethodToDelete->deleted_at = Carbon::now();
-//                    $paymentMethodToDelete->save();
+//            $customerData = $this->stripePaymentGateway->getCustomer('musora', $newStripeCustomer->stripe_customer_id);
+//
+//
+//
+//
+//
+//
+//            $creditCards = CreditCard::query()
+//                ->where('external_customer_id', $stripeCustomer->stripe_customer_id)
+//                ->get();
+//
+//            foreach ($creditCards as $creditCard) {
+//                $newCreditCard = new CreditCard();
+//                $newCreditCard->fingerprint = $creditCard->fingerprint;
+//                $newCreditCard->last_four_digits = $creditCard->last_four_digits;
+//                $newCreditCard->cardholder_name = $creditCard->cardholder_name;
+//                $newCreditCard->company_name = $creditCard->company_name;
+//                $newCreditCard->expiration_date = $creditCard->expiration_date;
+//                $newCreditCard->external_id = $creditCard->external_id;
+//                $newCreditCard->payment_gateway_name = 'musora';
+//                $newCreditCard->external_customer_id = $creditCard->external_customer_id;
+//                $newCreditCard->save();
+//
+//                $paymentMethod = PaymentMethod::query()->where('credit_card_id', $creditCard->id)->first();
+//                if ($paymentMethod) {
+//                    $newPaymentMethod = new PaymentMethod();
+//                    $newPaymentMethod->method_id = $paymentMethod->method_id;
+//                    $newPaymentMethod->method_type = $paymentMethod->method_type;
+//                    $newPaymentMethod->credit_card_id = $newCreditCard->id;
+//                    $newPaymentMethod->currency = $paymentMethod->currency;
+//                    $newPaymentMethod->billing_address_id = $paymentMethod->billing_address_id;
+//                    $newPaymentMethod->note = $paymentMethod->note;
+//                    $newPaymentMethod->save();
+//
+//                    $userPaymentMethod = UserPaymentMethod::query()
+//                        ->where('payment_method_id', $paymentMethod->id)
+//                        ->first();
+//                    if ($userPaymentMethod) {
+//                        $newUserPaymentMethod = new UserPaymentMethod();
+//                        $newUserPaymentMethod->user_id = $userPaymentMethod->user_id;
+//                        $newUserPaymentMethod->payment_method_id = $newPaymentMethod->id;
+//                        $newUserPaymentMethod->save();
+//                    }
+//
+//
+//                    $subscriptions = Subscription::query()
+//                        ->where('payment_method_id', $paymentMethod->id)->get();
+//                    foreach ($subscriptions as $subscription) {
+//                        $this->info(
+//                            "Updating Subscription $subscription->id to use new payment method: $subscription->payment_method_id -> $newPaymentMethod->id"
+//                        );
+//                        $subscription->payment_method_id = $newPaymentMethod->id;
+//                        $subscription->save();
+//                    }
 //                }
-            }
+//            }
         }
     }
 
