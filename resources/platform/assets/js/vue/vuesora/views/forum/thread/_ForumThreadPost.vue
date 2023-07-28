@@ -69,7 +69,7 @@
 
                         <div class="tw-flex tw-flex-row tw-justify-end tw-mt-4 tw-flex-wrap">
                             <a
-                                class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-black/10 tw-mr-2 tw-w-full sm:tw-w-auto"
+                                class="tw-btn-primary tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] tw-mr-2 tw-w-full sm:tw-w-auto"
                                 @click="editing = false"
                             >
                                 Cancel
@@ -77,7 +77,7 @@
 
                             <button
                                 class="tw-btn-primary tw-w-full sm:tw-w-auto"
-                                :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
+                                :class="`tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57]`"
                                 type="submit"
                             >
                                 Save Post
@@ -131,7 +131,7 @@
                             class="tw-text-lg tw-text-[#00101D] dark:tw-text-white sm:ml-3 tw-uppercase dense tw-cursor-pointer"
                             @click="reportPost"
                         >
-                            Report 
+                            Report
                         </p>
                         <p
                             v-if="!(currentPage === 1 && index === 0) && canEdit"

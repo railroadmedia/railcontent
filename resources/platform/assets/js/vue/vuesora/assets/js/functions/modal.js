@@ -38,9 +38,10 @@ export default (function () {
                 const appendDiv = modalToOpen.getElementsByClassName('modal-container');
 
                 if(appendDiv.length !== 0) {
+                    window.appendBackgroundOverlay();
+
                     const xIconCheck = modalToOpen.querySelector('#modalXIcon');
                     if(!xIconCheck){
-                        window.appendBackgroundOverlay();
                         const xIcon = document.createElement('span');
                         xIcon.setAttribute('id', 'modalXIcon');
                         xIcon.setAttribute('class', 'close-modal');
