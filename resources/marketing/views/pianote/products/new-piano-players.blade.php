@@ -93,7 +93,8 @@
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                                <a href="{{ $registerButtonUrl }}" class="join medium w-full">Get Started</a>
+{{--                                <a href="{{ $registerButtonUrl }}" class="join medium w-full">Get Started</a>--}}
+                                <a class="join medium sold-out w-full">Sold Out</a>
                         </div>
                         <div class="w-full sm:w-1/2">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png" alt="joined student profiles">
@@ -154,7 +155,7 @@
                     <strong>Start here.</strong></h6>
                 <img class="h-96 hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/collage-intro-desktop.png" alt="collage intro">
             </div>
-            <a href="{{ $registerButtonUrl }}" class="join smaller">Get Started</a>
+{{--            <a href="{{ $registerButtonUrl }}" class="join smaller">Get Started</a>--}}
         </div>
     </section>
 
@@ -246,9 +247,9 @@
                     <i class="fas fa-check text-pianote mr-5"></i> Ongoing motivation & support<br>
                     <i class="fas fa-check text-pianote mr-5"></i> Guaranteed results</h4>
             </div>
-            <a href="{{ $registerButtonUrl }}" class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">Get Started</a><br>
-            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png" alt="joined profiles">
-            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>
+{{--            <a href="{{ $registerButtonUrl }}" class="join medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">Get Started</a><br>--}}
+{{--            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/joined_profiles.png" alt="joined profiles">--}}
+{{--            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</p>--}}
 
         </div>
     </section>
@@ -464,8 +465,8 @@
                                 <s class="opacity-60">${{ floatval($productPrices['new-piano-players-start-here']->price) }}</s>
                             @endif
                             <strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></h1>
-
-                            <a class="join medium w-1/2 align-middle" href="{{ $registerButtonUrl }}">Get Started</a>
+                        <a class="join medium sold-out w-1/2 align-middle">Sold Out</a>
+{{--                            <a class="join medium w-1/2 align-middle" href="{{ $registerButtonUrl }}">Get Started</a>--}}
                     </div>
                 </div>
                 <div class="flex w-full justify-center sm:justify-start sm:order-1 sm:w-5/12 xl:w-7/12 sm:pl-5 lg:pl-7  mt-10 sm:mt-0">
