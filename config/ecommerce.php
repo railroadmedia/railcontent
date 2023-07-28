@@ -750,6 +750,22 @@ return [
                 'invoice_view' => 'ecommerce::order_invoice',
             ],
         ],
+        'musora' => [
+            'subscription_renewal_invoice' => [
+                'invoice_sender' => 'support@musora.com',
+                'invoice_sender_name' => 'Musora',
+                'invoice_address' => 'Musora 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Musora Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::subscription_renewal_invoice',
+            ],
+            'order_invoice' => [
+                'invoice_sender' => 'support@musora.com',
+                'invoice_sender_name' => 'Musora',
+                'invoice_address' => 'Musora 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Musora Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::order_invoice',
+            ],
+        ],
     ],
 
     // this is displayed on all invoices to canadian customers
