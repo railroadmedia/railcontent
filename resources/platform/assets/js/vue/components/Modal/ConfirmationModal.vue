@@ -126,7 +126,7 @@ onUnmounted(() => {
         </div>
         <div class="tw-flex tw-justify-end tw-px-[32px]">
           <button v-if="!hideCancel" @click="onCancel" class="tw-grow tw-btn-secondary tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">No</button>
-          <button @click="onSubmit" :class="`tw-grow tw-btn-primary tw-ml-[16px] tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57]`">{{ submitLabel }}</button>
+          <button @click="onSubmit" :class="`tw-grow tw-btn-primary tw-ml-[16px] tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`">{{ submitLabel }}</button>
         </div>
         <!-- X Icon -->
         <button @click="onClose" class="tw-absolute tw-top-3 tw-right-3">
