@@ -33,7 +33,7 @@
                     tw-py-4
                     tw-uppercase
                     tw-font-bebas-neue
-                    tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57]
+                    tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white
                   ">
                 <i class="fas fa-calendar-plus tw-mr-1"></i>
                 Subscribe to calendar
@@ -56,7 +56,7 @@
           </p>
 
           <div v-if="hasSingleEvent" class="tw-text-sm tw-leading-normal pointer tw-relative tw-w-full">
-            <button class="tw-btn-primary tw-mb-1 tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] tw-w-full" @click.stop="singleEventDropdown = !singleEventDropdown">
+            <button class="tw-btn-primary tw-mb-1 tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-w-full" @click.stop="singleEventDropdown = !singleEventDropdown">
                 <i class="fas fa-calendar-plus tw-mr-1"></i>
                 Subscribe to this event only
             </button>

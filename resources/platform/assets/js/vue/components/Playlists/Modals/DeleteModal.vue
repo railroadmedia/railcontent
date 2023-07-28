@@ -146,13 +146,13 @@
             </p>
             <div class="tw-pt-8 tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-justify-center tw-w-full">
                 <!-- Delete Playlist -->
-                <button v-if="mode !== 'lesson'" :class="`tw-mb-2 tw-btn-primary tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1 tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57]`"
+                <button v-if="mode !== 'lesson'" :class="`tw-mb-2 tw-btn-primary tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1 tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`"
                         @click.prevent="handleDeletePlaylist()"
                 >
                     CONFIRM
                 </button>
                 <!-- Delete Lesson -->
-                <button v-else :class="`tw-mb-2 tw-btn-primary tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1 tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57]`"
+                <button v-else :class="`tw-mb-2 tw-btn-primary tw-px-[30px] tw-w-[218px] sm:tw-order-1 sm:tw-ml-2 sm:tw-order-1 tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`"
                         @click.prevent="handleDeleteLesson()"
                 >
                     CONFIRM

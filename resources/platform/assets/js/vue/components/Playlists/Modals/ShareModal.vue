@@ -91,7 +91,7 @@
                     CANCEL
             </button>
             <!-- Delete Lesson -->
-            <button class="tw-mb-2 tw-ml-auto tw-btn-primary tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] tw-px-[30px] tw-w-[218px] disabled:tw-pointer-events-none disabled:tw-opacity-70"
+            <button class="tw-mb-2 tw-ml-auto tw-btn-primary tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] tw-px-[30px] tw-w-[218px] disabled:tw-pointer-events-none disabled:tw-opacity-70 dark:hover:tw-text-white"
                     :disabled="!state.isPublic"
                     @click.prevent="handleConfirm"
             >

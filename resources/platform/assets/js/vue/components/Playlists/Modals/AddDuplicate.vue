@@ -34,7 +34,7 @@ const props = defineProps({
 
             <div class="tw-pt-8 tw-flex tw-flex-col sm:tw-flex-row tw-items-center tw-justify-center tw-w-full">
                 <!-- Delete Lesson -->
-                <button :class="`tw-mb-2 sm:tw-mb-0 sm:tw-order-1 tw-btn-primary tw-px-[30px] tw-w-[218px] tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57]`"
+                <button :class="`tw-mb-2 sm:tw-mb-0 sm:tw-order-1 tw-btn-primary tw-px-[30px] tw-w-[218px] tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`"
                     @click.prevent="() => emit('onConfirm')">
                     CONFIRM
                 </button>

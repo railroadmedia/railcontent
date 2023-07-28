@@ -416,21 +416,21 @@ onMounted(() => {
             <!--Save Buttons -->
             <button v-if="props.content.type === 'song'"
                     @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] tw-h-[35px]`"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-h-[35px]`"
                     :disabled="selectedPlaylists.length === 0 || (addInstrumentlessToggle === false && addFullSongToggle === false) "
             >
                 SAVE
             </button>
             <button v-else-if="props.content.type === 'routine'"
                     @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] tw-h-[35px]`"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-h-[35px]`"
                     :disabled="selectedPlaylists.length === 0 || (includeHighRoutine === false && includeLowRoutine === false)"
             >
                 SAVE
             </button>
             <button v-else
                     @click="handleSaveItem"
-                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] tw-h-[35px]`"
+                    :class="`tw-btn-primary tw-uppercase tw-text-white dark:tw-text-[#00101D] disabled:tw-bg-[#B2B2B5] disabled:tw-text-[#65656B] dark:disabled:tw-bg-[#081F37] dark:disabled:tw-text-[#445F74] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white tw-h-[35px]`"
                     :disabled="selectedPlaylists.length === 0"
             >
                 SAVE
