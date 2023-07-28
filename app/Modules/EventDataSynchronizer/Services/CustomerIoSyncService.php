@@ -264,7 +264,8 @@ class CustomerIoSyncService
     private function handleLifetimeMembership(array $userProducts, array $brands, array &$productAttributes): void
     {
         $lifetimeMemberships = collect($userProducts)->filter(function (UserProduct $userProduct) {
-            return empty($userProduct->getExpirationDate());
+            return empty($userProduct->getExpirationDate())
+                && $userProduct->getProduct()->getDigitalAccessTimeType() == Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME;
         });
 
         if ($lifetimeMemberships->isNotEmpty()) {
