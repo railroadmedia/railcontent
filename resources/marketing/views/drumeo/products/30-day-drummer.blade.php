@@ -2,8 +2,8 @@
 
 @section('global-head')
     @parent
-    <title>30 Day Drummer | Drumeo</title>
-    <meta property="og:title" content="30 Day Drummer | Drumeo">
+    <title>30-Day Drummer | Drumeo</title>
+    <meta property="og:title" content="30-Day Drummer | Drumeo">
     <meta name="description" content="Learn the drums with daily guided workouts.">
     <meta property="og:description" content="Learn the drums with daily guided workouts.">
     <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30DD2-share-image.jpg" style="display: none;">
@@ -206,7 +206,7 @@
         "cartVersion" => true
     ])
     @include('drumeo.products.partials.promo-banner', [
-                "name" => "30 Day Drummer",
+                "name" => "30-Day Drummer",
                 "fullPrice" => floatval($productPrices['30-day-drummer-2']->price),
                 "price" => floatval($productPrices['30-day-drummer-2']->discounted_price),
                 "noBreadcrumb" => true
