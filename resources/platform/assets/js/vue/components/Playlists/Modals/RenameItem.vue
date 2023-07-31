@@ -68,7 +68,7 @@
                 window.shownotification({
                     icon: 'error',
                     text: 'There was an error saving your changes, try again later.'
-                });    
+                });
             });
     };
 
@@ -86,7 +86,7 @@
     <div class="tw-h-full tw-w-full">
         <h2 class="tw-text-2xl tw-font-bold tw-w-full tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">Rename Playlist Item</h2>
         <div class="tw-flex tw-mt-[20px] tw-pb-4 tw-h-[80px] tw-items-center tw-justify-center">
-            
+
             <!-- Playlist Image -->
             <div class="tw-relative tw-inline-flex tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-video tw-w-[110px] tw-rounded tw-shrink-0">
                 <!-- Image Conatiner -->
@@ -102,7 +102,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="tw-ml-[15px] tw-h-full tw-flex tw-flex-col tw-justify-center">
                 <h3 class="tw-text-black dark:tw-text-white tw-text-[16px] tw-font-bold tw-font-open-sans">
                     {{ props.content.playlist_item_name ? props.content.playlist_item_name : props.content.title }}
@@ -136,11 +136,11 @@
         <div class="tw-pt-[25px] tw-flex tw-justify-end tw-w-full">
             <!-- Close Modal -->
             <button @click="() => emit('onCloseModal')"
-                    class="tw-btn-secondary tw-text-[#002039] dark:tw-text-white tw-mr-4 tw-w-[218px]">
+                    class="tw-btn-secondary tw-mr-4 tw-w-[218px] tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">
                     CANCEL
             </button>
             <!-- Delete Lesson -->
-            <button :class="`tw-mb-2 tw-ml-auto tw-btn-primary dark:tw-bg-white dark:tw-text-black tw-text-white tw-bg-black tw-px-[30px] tw-w-[218px]`"
+            <button :class="`tw-mb-2 tw-ml-auto tw-btn-primary tw-px-[30px] tw-w-[218px] tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`"
                     @click.prevent="handleConfirm()"
             >
                 RENAME ITEM

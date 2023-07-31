@@ -176,7 +176,7 @@ class OrderController extends Controller
             }
         );
 
-        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.' . $brand . '.stripe_publishable_key');
+        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.musora.stripe_publishable_key');
 
         $bonuses = $request->session()->get('bonuses', []);
 

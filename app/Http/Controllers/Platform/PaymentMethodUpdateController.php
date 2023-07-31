@@ -19,8 +19,10 @@ use Railroad\Ecommerce\Gateways\PayPalPaymentGateway;
 use Railroad\Ecommerce\Gateways\StripePaymentGateway;
 use Railroad\Ecommerce\Managers\EcommerceEntityManager;
 use Railroad\Ecommerce\Repositories\SubscriptionRepository;
+use Railroad\Ecommerce\Repositories\UserStripeCustomerIdRepository;
 use Railroad\Ecommerce\Services\CurrencyService;
 use Railroad\Ecommerce\Services\PaymentMethodService;
+use Railroad\Ecommerce\Services\PaymentService;
 use Railroad\Ecommerce\Services\ResponseService;
 use Railroad\Ecommerce\Services\SubscriptionService;
 use Spatie\Fractal\Fractal;
@@ -68,6 +70,11 @@ class PaymentMethodUpdateController extends Controller
      */
     private $entityManager;
 
+    /**
+     * @var UserStripeCustomerIdRepository
+     */
+    private PaymentService $paymentService;
+
     public function __construct(
         CurrencyService $currencyService,
         EcommerceEntityManager $entityManager,
@@ -76,7 +83,8 @@ class PaymentMethodUpdateController extends Controller
         StripePaymentGateway $stripePaymentGateway,
         SubscriptionRepository $subscriptionRepository,
         SubscriptionService $subscriptionService,
-        UserProviderInterface $userProvider
+        UserProviderInterface $userProvider,
+        PaymentService $paymentService,
     ) {
         $this->currencyService = $currencyService;
         $this->entityManager = $entityManager;
@@ -86,6 +94,7 @@ class PaymentMethodUpdateController extends Controller
         $this->subscriptionRepository = $subscriptionRepository;
         $this->subscriptionService = $subscriptionService;
         $this->userProvider = $userProvider;
+        $this->paymentService = $paymentService;
     }
 
     /**
@@ -112,10 +121,7 @@ class PaymentMethodUpdateController extends Controller
 
             // credit card
             if ($request->get('method_type') == PaymentMethod::TYPE_CREDIT_CARD) {
-                $customer = $this->stripePaymentGateway->getOrCreateCustomer(
-                    $request->get('gateway'),
-                    $user->getEmail()
-                );
+                $customer = $this->paymentService->getStripeCustomer($purchaser, $request->get('gateway'));
 
                 $card = $this->stripePaymentGateway->createCustomerCard(
                     $request->get('gateway'),

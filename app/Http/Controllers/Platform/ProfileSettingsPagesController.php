@@ -230,7 +230,7 @@ class ProfileSettingsPagesController extends BaseController
             ->respond()
             ->getContent();
 
-        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.' . brand() . '.stripe_publishable_key');
+        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.musora.stripe_publishable_key');
 
         $membershipProductIds = ProductModel::query()
             ->where([
