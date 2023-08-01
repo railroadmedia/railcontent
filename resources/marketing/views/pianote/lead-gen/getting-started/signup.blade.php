@@ -240,7 +240,7 @@
                 <div class="max-w-md md:max-w-auto lg:w-96 mx-auto md:mx-0">
                     @include('pianote._partials.sign-up-form', [
                         "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Pianote - Engagement - Trigger - GSOTP - Web Form",
+                        "formId" => "Pianote - Engagement - Trigger - GSOTP - Web Form2",
                         "formName" => 'Getting Started On The Piano',
                         "buttonText" => "Get started for free",
                         'stacked' => true,
