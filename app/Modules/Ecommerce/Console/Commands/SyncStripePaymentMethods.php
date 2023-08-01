@@ -9,6 +9,8 @@ use App\Modules\Ecommerce\Models\PaymentMethod;
 use App\Modules\Ecommerce\Models\StripeCustomer;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\UserPaymentMethod;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 use Railroad\Ecommerce\ExternalHelpers\Stripe;
 use Railroad\Ecommerce\Gateways\StripePaymentGateway;
 use Stripe\Card;
@@ -36,12 +38,22 @@ class SyncStripePaymentMethods extends Command
             $this->info("Total Users: " . $count);
             $query->chunk(1000, function ($items) {
                 $customerIds = $items->pluck('stripe_customer_id')->toArray();
-                $creditCardLookup = CreditCard::query()
+                $creditCards = CreditCard::query()
                     ->whereIn('external_customer_id', $customerIds)
-                    ->get()->keyBy('external_card_id');
+                    ->get();
+                $creditCardLookup = $creditCards->groupBy('external_customer_id');
+                $cardIds = $creditCards->pluck('id')->toArray();
+                $paymentMethods = PaymentMethod::query()->whereIn('credit_card_id', $cardIds)->get();
+                $paymentMethodLookup = $paymentMethods->keyBy(
+                    'credit_card_id'
+                );
+                $paymentMethodIds = $paymentMethods->pluck('id')->toArray();
+                $subscriptionLookup = Subscription::query()
+                    ->whereIn('payment_method_id', $paymentMethodIds)
+                    ->get()->keyBy('payment_method_id');
                 foreach ($items as $item) {
                     $this->totalCount++;
-                    $this->migrateStripeCustomer($item, $creditCardLookup);
+                    $this->migrateStripeCustomer($item, $creditCardLookup, $paymentMethodLookup, $subscriptionLookup);
                 }
             });
         });
@@ -50,74 +62,72 @@ class SyncStripePaymentMethods extends Command
         $this->info("Total Users: " . $this->totalCount);
     }
 
-    private function migrateStripeCustomer(StripeCustomer $stripeCustomer, $creditCardLookup)
-    {
+    private function migrateStripeCustomer(
+        StripeCustomer $stripeCustomer,
+        $creditCardLookup,
+        $paymentMethodLookup,
+        $subscriptionLookup
+    ) {
         $this->info("Migrating stripe user to musora: " . $stripeCustomer->user_id);
 
         $stripeData = $this->stripePaymentGateway->listCreditCards('musora', $stripeCustomer->stripe_customer_id);
 
+        $creditCardLookupByCard = collect(
+            $creditCardLookup->get($stripeCustomer->stripe_customer_id) ?? new Collection()
+        )->keyBy('external_id');
+
+
         /** @var Card $card */
         foreach ($stripeData as $card) {
-            $creditCard = $creditCardLookup[$card['id']] ?? null;
-            if (!$creditCard) {
-                $this->info("Creating Payment Method for card " . $card['id']);
-                $creditCard = new CreditCard();
-                $creditCard->fingerprint = $card->fingerprint;
-                $creditCard->last_four_digits = $card->last4;
-                $creditCard->cardholder_name = $card->name;
-                $creditCard->company_name = $card->brand;
-                $creditCard->expiration_date = $card->exp_month . '/' . $card->exp_year;
-                $creditCard->external_id = $card->id;
-                $creditCard->external_customer_id = $stripeCustomer->stripe_customer_id;
-                $creditCard->payment_gateway_name = 'musora';
-                //$creditCard->save();
-            } else {
+            $newCreditCard = $creditCardLookupByCard->get($card['id']) ?? null;
+            if ($newCreditCard) {
                 $this->info("Card exists");
+                continue;
+            }
+
+            $expirationDateCompare = Carbon::createFromDate($card->exp_year, $card->exp_month)->format('Y-m');
+
+            foreach ($creditCardLookupByCard as $card2) {
+                $card2->expiration_compare = Carbon::createFromDate($card2->expiration_date)->format('Y-m');
+            }
+
+            $matchingCard = $creditCardLookupByCard
+                ->where('last_four_digits', $card->last4)
+                ->where('expiration_compare', $expirationDateCompare)
+                ->where('payment_gateway_name', "!=", 'musora')
+                ->sortByDesc('id')->first() ?? null;
+            $matchingPaymentMethod = $paymentMethodLookup->get($matchingCard->id ?? 0) ?? null;
+
+            $this->info("Creating Payment Method for card " . $card['id']);
+            $newCreditCard = new CreditCard();
+            $newCreditCard->fingerprint = $card->fingerprint;
+            $newCreditCard->last_four_digits = $card->last4;
+            $newCreditCard->cardholder_name = $card->name;
+            $newCreditCard->company_name = $card->brand;
+            $newCreditCard->expiration_date = Carbon::createFromDate($card->exp_year, $card->exp_month);
+            $newCreditCard->external_id = $card->id;
+            $newCreditCard->external_customer_id = $stripeCustomer->stripe_customer_id;
+            $newCreditCard->payment_gateway_name = 'musora';
+            $newCreditCard->save();
+
+            $newPaymentMethod = new PaymentMethod();
+            $newPaymentMethod->credit_card_id = $newCreditCard->id;
+            $newPaymentMethod->currency = 'USD';
+            $newPaymentMethod->billing_address_id = $matchingPaymentMethod->billing_address_id ?? null;
+            $newPaymentMethod->save();
+
+            $newUserPaymentMethod = new UserPaymentMethod();
+            $newUserPaymentMethod->user_id = $stripeCustomer->user_id;
+            $newUserPaymentMethod->payment_method_id = $newPaymentMethod->id;
+            $newUserPaymentMethod->save();
+
+            $subscription = $subscriptionLookup->get($matchingPaymentMethod->id ?? 0) ?? null;
+            if ($subscription) {
+                $subscription->legacy_payment_method_id = $matchingPaymentMethod->id ?? null;
+                $subscription->payment_method_id = $newPaymentMethod->id;
+                $subscription->save();
+                $this->info("Subscription $subscription->id updated from $subscription->legacy_payment_method_id to $subscription->payment_method_id");
             }
         }
-//                $newCreditCard = new CreditCard();
-//                $newCreditCard->fingerprint = $creditCard->fingerprint;
-//                $newCreditCard->last_four_digits = $creditCard->last_four_digits;
-//                $newCreditCard->cardholder_name = $creditCard->cardholder_name;
-//                $newCreditCard->company_name = $creditCard->company_name;
-//                $newCreditCard->expiration_date = $creditCard->expiration_date;
-//                $newCreditCard->external_id = $creditCard->external_id;
-//                $newCreditCard->payment_gateway_name = 'musora';
-//                $newCreditCard->external_customer_id = $creditCard->external_customer_id;
-//                $newCreditCard->save();
-//
-//                $paymentMethod = PaymentMethod::query()->where('credit_card_id', $creditCard->id)->first();
-//                if ($paymentMethod) {
-//                    $newPaymentMethod = new PaymentMethod();
-//                    $newPaymentMethod->method_id = $paymentMethod->method_id;
-//                    $newPaymentMethod->method_type = $paymentMethod->method_type;
-//                    $newPaymentMethod->credit_card_id = $newCreditCard->id;
-//                    $newPaymentMethod->currency = $paymentMethod->currency;
-//                    $newPaymentMethod->billing_address_id = $paymentMethod->billing_address_id;
-//                    $newPaymentMethod->note = $paymentMethod->note;
-//                    $newPaymentMethod->save();
-//
-//                    $userPaymentMethod = UserPaymentMethod::query()
-//                        ->where('payment_method_id', $paymentMethod->id)
-//                        ->first();
-//                    if ($userPaymentMethod) {
-//                        $newUserPaymentMethod = new UserPaymentMethod();
-//                        $newUserPaymentMethod->user_id = $userPaymentMethod->user_id;
-//                        $newUserPaymentMethod->payment_method_id = $newPaymentMethod->id;
-//                        $newUserPaymentMethod->save();
-//                    }
-//
-//
-//                    $subscriptions = Subscription::query()
-//                        ->where('payment_method_id', $paymentMethod->id)->get();
-//                    foreach ($subscriptions as $subscription) {
-//                        $this->info(
-//                            "Updating Subscription $subscription->id to use new payment method: $subscription->payment_method_id -> $newPaymentMethod->id"
-//                        );
-//                        $subscription->payment_method_id = $newPaymentMethod->id;
-//                        $subscription->save();
-//                    }
-//                }
-//            }
     }
 }
