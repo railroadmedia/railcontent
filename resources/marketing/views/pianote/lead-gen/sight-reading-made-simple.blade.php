@@ -2,7 +2,6 @@
 
 @section('meta')
     @parent
-
     <title>Sight-Reading Made Simple | Pianote</title>
     <meta name="description" content="If you’ve ever struggled through a music class or felt daunted by the notes on the page -- let us show you how easy reading music can be.">
 
@@ -11,13 +10,25 @@
     <meta property="og:description" content="If you’ve ever struggled through a music class or felt daunted by the notes on the page -- let us show you how easy reading music can be.">
     <meta property="og:url" content="https://www.pianote.com/sight-reading-made-simple">
 
-    {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css"> --}}
-
-@stop
+@endsection
 
 @section('head')
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
 
+    <style>
+
+        .join.smaller {
+            padding:8px 20px;
+            font-size:14px;
+        }
+
+        @media only screen and (min-width:40em) {
+            .join.smaller {
+                font-size:16px;
+                padding:13px 30px;
+            }
+        }
+    </style>
     <style>
         .header-bg {
             background: linear-gradient(180deg, rgba(20, 20, 22, 0) 30%, #141416 55%), url("https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/header.jpg") 60% 0/800px no-repeat;

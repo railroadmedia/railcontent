@@ -200,7 +200,7 @@
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="w-full sm:w-7/12 sm:pr-8 text-center lg:text-left">
                     <div x-on:click="trailer = true;" class="mb-5 overflow-hidden relative block sm:hidden bg-cover bg-top
-{{--                    cursor-hover autoplay-video--}}
+{{--                    cursor-pointer autoplay-video--}}
                     " style="padding-bottom: 65%;">
                         <img
                             class="absolute inset-0 object-cover w-full"

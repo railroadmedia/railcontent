@@ -175,7 +175,7 @@
                     </picture>
                     <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
                     </div>
-                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">We’ve saved the best ‘till last. In this lesson, you’ll get two iconic Blues Riffs you can use anywhere. These sound amazing!</p>
+                    <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">We’ve saved the best ‘till last. In this lesson, you’ll play an iconic Blues riff over your chord progression.  You’ll want to save this one!</p>
                 </div>
             </div>
         </div>
