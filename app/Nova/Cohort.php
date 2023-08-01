@@ -497,10 +497,6 @@ class Cohort extends Resource
                 ->addLayout(CohortDropdownLayout::class)
                 ->preset(CohortDropdownPreset::class),
 
-            Heading::make('Footer'),
-            Text::make('Footer Title','bottom_title')->hideFromIndex(),
-            Text::make('Footer Description','bottom_description')->hideFromIndex(),
-
             DateTime::make(__('Enrollment Start Time'), 'enrollment_start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             DateTime::make(__('Enrollment End Time'), 'enrollment_end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             Text::make('Product ID', 'product_id')->hideFromIndex()->required()->rules('required'),
