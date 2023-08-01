@@ -12,7 +12,7 @@ use App\Modules\Ecommerce\Models\UserPaymentMethod;
 use Carbon\Carbon;
 use Stripe\Stripe;
 
-class MigrateFixMissingStripeCustomerIds extends Command
+class FixMissingStripeCustomerIds extends Command
 {
     protected $signature = 'ecommerce:MigrateFixMissingStripeCustomerIds {startingId?} ';
     private int $count = 0;
@@ -85,7 +85,7 @@ class MigrateFixMissingStripeCustomerIds extends Command
 
     private function migrateCreditCard(mixed $item)
     {
-        if ($item->payment_gateway_name == 'musora' || $item->payment_gateway_name == 'recordeo') {
+        if ($item->payment_gateway_name == 'recordeo') {
             return;
         }
 
