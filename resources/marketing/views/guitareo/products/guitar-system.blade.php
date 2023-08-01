@@ -103,9 +103,9 @@
                             {{--<br><br>--}}
                             {{--Yes, anything!--}}
                             {{--<br><br>--}}
-                            {{--The Guitar System is the ultimate encyclopedia of guitar lessons -- and it’s an affordable solution to reach your goals. So hey, why not join us and reach your goals?--}}
+                            {{--The Guitar System is the ultimate encyclopedia of guitar lessons — and it’s an affordable solution to reach your goals. So hey, why not join us and reach your goals?--}}
                             {{--<br><br>--}}
-                            {{--<u>Just click here to get started</u> -- and join in the celebration by playing and creating the music you love.--}}
+                            {{--<u>Just click here to get started</u> — and join in the celebration by playing and creating the music you love.--}}
                             {{--<br></p>--}}
                         {{--<div class="join">Get Started &raquo;</div>--}}
                     {{--</div>--}}

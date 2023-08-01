@@ -6,7 +6,7 @@
                     <strong>Is this really free?</strong>
                 </div>
                 <p>
-                    Yes! We love sharing videos to help piano players -- and deep down we hope you’ll see some of the value that we provide inside Pianote juuuuust in case you ever want to consider joining!
+                    Yes! We love sharing videos to help piano players — and deep down we hope you’ll see some of the value that we provide inside Pianote juuuuust in case you ever want to consider joining!
                 </p>
             </div>
             <div class="px-3 md:px-4 w-full md:w-7/12 lg:w-7/12">

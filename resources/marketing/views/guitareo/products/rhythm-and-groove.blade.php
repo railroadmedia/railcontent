@@ -152,7 +152,7 @@
 
             <div class="inline-block mx-auto my-4 w-12 h-2 rounded-full bg-guitareo"></div>
 
-            <p class="leading-normal mb-24 max-w-xl lg:max-w-2xl">Each lesson is designed to build on the previous one, so you’ll be reinforcing what you’ve already learned while developing new skills. It WILL take practice -- but it won’t take months. Most students can expect to complete these lessons in less than two weeks (including practice time.)</p>
+            <p class="leading-normal mb-24 max-w-xl lg:max-w-2xl">Each lesson is designed to build on the previous one, so you’ll be reinforcing what you’ve already learned while developing new skills. It WILL take practice — but it won’t take months. Most students can expect to complete these lessons in less than two weeks (including practice time.)</p>
 
             <h2 class="leading-normal"><strong>Rhythm Simplified</strong></h2>
             <p class="leading-normal mt-4 mb-20 lg:mb-16">Rhythm guitar shouldn’t be complicated. That’s why we created this course that<br class="hidden sm:inline">

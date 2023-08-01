@@ -189,7 +189,7 @@
                     "itemURL" => "/drumshop/gift-card/",
                     "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
                     "title" => "Drumeo Gift Card",
-                    "cardDescription" => "Give the gift of drum lessons with a gift card to Drumeo -- with your choice between a one-month, 6-month, or 1-year membership pass.",
+                    "cardDescription" => "Give the gift of drum lessons with a gift card to Drumeo — with your choice between a one-month, 6-month, or 1-year membership pass.",
                     "fullPrice" =>29,
                     "price" => 29,
                     "category" => "card",

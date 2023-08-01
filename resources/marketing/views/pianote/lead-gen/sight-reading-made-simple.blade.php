@@ -3,11 +3,11 @@
 @section('meta')
     @parent
     <title>Sight-Reading Made Simple | Pianote</title>
-    <meta name="description" content="If you’ve ever struggled through a music class or felt daunted by the notes on the page -- let us show you how easy reading music can be.">
+    <meta name="description" content="If you’ve ever struggled through a music class or felt daunted by the notes on the page — let us show you how easy reading music can be.">
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/og-image.jpg" style="display: none;">
     <meta property="og:title" content="Sight-Reading Made Simple">
-    <meta property="og:description" content="If you’ve ever struggled through a music class or felt daunted by the notes on the page -- let us show you how easy reading music can be.">
+    <meta property="og:description" content="If you’ve ever struggled through a music class or felt daunted by the notes on the page — let us show you how easy reading music can be.">
     <meta property="og:url" content="https://www.pianote.com/sight-reading-made-simple">
 
 @endsection
@@ -80,7 +80,7 @@
         [
             "imgSrc" => "https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/thumb1.jpg",
             "title" => "Notes & Rhythm",
-            "desc" => "Learn the different types of notes used in music -- and what they mean. How to count rhythm and understand time signatures.",
+            "desc" => "Learn the different types of notes used in music — and what they mean. How to count rhythm and understand time signatures.",
         ],
         [
             "imgSrc" => "https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/thumb2.jpg",
@@ -90,7 +90,7 @@
         [
             "imgSrc" => "https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/thumb3.jpg",
             "title" => "The Bass Clef",
-            "desc" => "Learn the names of all the notes in the Bass Clef for your left hand. Warning -- they’re not the same as the Treble Clef!",
+            "desc" => "Learn the names of all the notes in the Bass Clef for your left hand. Warning — they’re not the same as the Treble Clef!",
         ],
         [
             "imgSrc" => "https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/thumb4.jpg",
@@ -161,7 +161,7 @@
             <p class="mb-4 md:mb-7 md:text-lg">
                 Reading music does not have to be daunting. Learn today with Lisa Witt’s 4-video course <br class="hidden md:inline">
                 on “Sight-Reading Made Simple”.  If you’ve ever struggled through a music class or felt  <br class="hidden md:inline">
-                daunted by the notes on the page -- let us show you how easy reading music can be.
+                daunted by the notes on the page — let us show you how easy reading music can be.
             </p>
         ',
         "playButtonStyles" => "my-20 md:my-44 lg:my-48",
@@ -182,7 +182,7 @@
 
     <section class="day-breakdown text-center container mx-auto py-12 px-4 md:py-14 lg:max-w-5xl">
         <div class="font-bold text-2xl mb-12 md:text-3xl lg:text-4xl">
-            Learning To Read Music Doesn’t<br class="hidden md:inline"> Have To Be Hard -- <s style="opacity:0.4">Only $19</s> <u>FREE!</u>
+            Learning To Read Music Doesn’t<br class="hidden md:inline"> Have To Be Hard — <s style="opacity:0.4">Only $19</s> <u>FREE!</u>
         </div>
 
         @foreach ($learnings as $learning)

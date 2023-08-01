@@ -154,9 +154,9 @@
             <div id="mission" class="anchor block relative invisible"></div>
             <h2 class="mt-12 sm:mt-20 mb-5"><strong>Meaningful work matters</strong></h2>
             <p class="text-[#a1afc9] text-left max-w-2xl mx-auto">
-                We believe music can change the world -- that an instrument provides a voice, and a voice empowers an individual to express themselves. So when we’re building our music lesson communities, we always put relationships before technology. It’s our job to make sure students reach their musical goals.
+                We believe music can change the world — that an instrument provides a voice, and a voice empowers an individual to express themselves. So when we’re building our music lesson communities, we always put relationships before technology. It’s our job to make sure students reach their musical goals.
                 <br><br>
-                When you join our team, you’ll join our mission to create new musicians and keep them playing longer. That means caring about the details -- the messaging, the experience, and the impact. It also means that we’ll care about you, all humans are unique and we care about ensuring that our people feel welcome, heard and appreciated. We want to make sure you’re supported in the work you do -- with perks, benefits, opportunities for growth and more! We’d love to connect with you.
+                When you join our team, you’ll join our mission to create new musicians and keep them playing longer. That means caring about the details — the messaging, the experience, and the impact. It also means that we’ll care about you, all humans are unique and we care about ensuring that our people feel welcome, heard and appreciated. We want to make sure you’re supported in the work you do — with perks, benefits, opportunities for growth and more! We’d love to connect with you.
             </p>
 
             <img
@@ -184,8 +184,8 @@
 
             <h3><strong>Not the right time or opportunity?</strong></h3>
             <p class="text-[#a1afc9] my-5">
-                No problem! We’re always looking for good people -- so if now isn’t the <br class="hidden md:inline">
-                right time, or there’s not an opening for what you do best -- just click the <br class="hidden md:inline">
+                No problem! We’re always looking for good people — so if now isn’t the <br class="hidden md:inline">
+                right time, or there’s not an opening for what you do best — just click the <br class="hidden md:inline">
                 link below to join our talent pool for future opportunities.
             </p>
             <a class="join gradient-outline smaller rounded-full relative bg-musora-black py-2 px-5 md:py-3 md:px-7 hover:bg-musora border-musora" target="_blank" href="https://musoramediainc.bamboohr.com/careers/view.php?id=58">JOIN TALENT POOL <i class="fal fa-smile-plus"></i></a>
@@ -281,7 +281,7 @@
                         [
                         "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/health-icon.svg",
                         "title" => "Health Benefits",
-                        "description" => "Our people matter -- so you’ll gain access to a benefits package including health, dental, and vision.",
+                        "description" => "Our people matter — so you’ll gain access to a benefits package including health, dental, and vision.",
                         ],
                         [
                         "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/mental-icon.svg",

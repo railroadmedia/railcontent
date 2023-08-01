@@ -17,7 +17,7 @@
                     <h6 class="leading-normal my-3 md:my-5">
                         Thanks for taking the DrumeCOACHES quiz! Now it’s time to join your perfect coach inside Drumeo.
                         <br><br>
-                        At the bottom of this page, you’ll get an exclusive 30-day trial to Drumeo -- where you can try out ALL the coaching sessions, lessons, and song breakdowns inside the members’ area. Click below to get started.
+                        At the bottom of this page, you’ll get an exclusive 30-day trial to Drumeo — where you can try out ALL the coaching sessions, lessons, and song breakdowns inside the members’ area. Click below to get started.
                     </h6>
                     <a href="/choose-your-trial-month/" class="join smaller">START MY FREE TRIAL</a>
                 </div>

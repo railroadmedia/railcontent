@@ -110,7 +110,7 @@
                         ],
                         [
                         'title' => "PLAY YOUR FIRST SONG",
-                        'description' => "The moment you’ve been waiting for! Put everything you’ve learned together and play a full song -- including a simple lead guitar line.",
+                        'description' => "The moment you’ve been waiting for! Put everything you’ve learned together and play a full song — including a simple lead guitar line.",
                         'image' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/thumbs-electric-05.jpg',
                         ],
                         [

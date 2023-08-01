@@ -385,7 +385,7 @@
     {{--'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/logo.png',--}}
     {{--'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/shop/card-thumbs/sight-reading.jpg',--}}
     {{--'title' => 'Sight Reading Made Simple',--}}
-    {{--'description' => 'If you’ve ever struggled through a music class -- let us show you how easy reading music can be.',--}}
+    {{--'description' => 'If you’ve ever struggled through a music class — let us show you how easy reading music can be.',--}}
     {{--'artist' => 'Lisa <strong>Witt</strong>',--}}
     {{--],--}}
     {{--[--}}

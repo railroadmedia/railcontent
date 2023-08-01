@@ -73,14 +73,14 @@
                 <img class="hidden sm:inline" src="https://dpwjbsxqtam5n.cloudfront.net/app/for-kids/music-image.jpg" alt="music image">
                 <img class="inline sm:hidden" src="https://dpwjbsxqtam5n.cloudfront.net/app/for-kids/music-image-m.jpg" alt="music image mobile">
                 <br>
-                <p>Every episode highlights a different genre of music --<br class="inline sm:hidden">
+                <p>Every episode highlights a different genre of music —<br class="inline sm:hidden">
                     introducing your <br class="hidden sm:inline">
                     kids to rock, blues, hip hop, reggae,<br class="inline sm:hidden"> disco, country, salsa, funk, & more.</p>
 
             </div>
             <div class="float-left w-full px-3 sm:px-4 no-padding topic-wrap fun">
                 <h1>Clap Along To<br class="inline sm:hidden"> Fun Rhythms</h1>
-                <h2>We all have rhythm inside of us -- and these entertaining <br class="inline sm:hidden"> shows were designed<br class="hidden sm:inline">
+                <h2>We all have rhythm inside of us — and these entertaining <br class="inline sm:hidden"> shows were designed<br class="hidden sm:inline">
                     to get kids clapping along and <br class="inline sm:hidden"> boot-chick-cattin’ away to real drum beats.</h2>
 
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/app/for-kids/fun-image.jpg" alt="fun image">
@@ -103,7 +103,7 @@
                 <h2>Stream or download every episode <br class="inline sm:hidden">
                     from the “Drumeo Kids” app.</h2>
                 <img class="autoplay-video" data-open="trailer2" src="https://dpwjbsxqtam5n.cloudfront.net/app/for-kids/on-the-go-image.jpg" alt="on the go image">
-                <p>Inside the Drumeo Kids app, every episode<br class="inline sm:hidden"> can be streamed or downloaded -- perfect for <br>
+                <p>Inside the Drumeo Kids app, every episode<br class="inline sm:hidden"> can be streamed or downloaded — perfect for <br>
                     morning shows, road trip entertainment, or<br class="inline sm:hidden"> wherever your kids have time to clap and dance!</p>
                 <div class="reveal large" id="trailer2" data-reveal data-reset-on-close="false">
                     <div class="aspect-16:9 w-full relative">

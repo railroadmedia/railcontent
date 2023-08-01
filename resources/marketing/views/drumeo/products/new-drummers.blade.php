@@ -164,7 +164,7 @@
                         <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
                             <h2 class="uppercase text-blue"><strong>Drum Theory Simplifier<sup>&trade;</sup></strong></h2>
                             <h4 class="my-3 md:my-5"><strong>How to read drum music.</strong></h4>
-                            <h6 class="leading-relaxed">It’s not as hard as it sounds. Jared breaks down reading drum music in a quick & fun way so you’ll be able to look at a page of simple drum music and hear the pattern in your head -- it’s like you speak another language!</h6>
+                            <h6 class="leading-relaxed">It’s not as hard as it sounds. Jared breaks down reading drum music in a quick & fun way so you’ll be able to look at a page of simple drum music and hear the pattern in your head — it’s like you speak another language!</h6>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>03</strong></h1>
@@ -275,7 +275,7 @@
                         <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
                             <h2 class="uppercase text-blue"><strong>Drum Theory Simplifier<sup>&trade;</sup></strong></h2>
                             <h4 class="my-3 md:my-5"><strong>How to read drum music.</strong></h4>
-                            <h6 class="leading-relaxed">It’s not as hard as it sounds. Jared breaks down reading drum music in a quick & fun way so you’ll be able to look at a page of simple drum music and hear the pattern in your head -- it’s like you speak another language!</h6>
+                            <h6 class="leading-relaxed">It’s not as hard as it sounds. Jared breaks down reading drum music in a quick & fun way so you’ll be able to look at a page of simple drum music and hear the pattern in your head — it’s like you speak another language!</h6>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>03</strong></h1>
@@ -393,7 +393,7 @@
                 <h1 class="text-center md:text-left text-blue m-0 text-5xl md:text-6xl lg:text-8xl leading-none"><strong>JARED<br class="hidden md:inline"> FALK</strong></h1>
                 <h6 class="mt-60 md:mt-5 leading-relaxed">Jared Falk has been a trusted source for online drum lessons for 15+ years.
                     <br><br>
-                    As the face of Drumeo, Jared is a pioneer of online drum instruction -- helping prospective drummers around the world learn their first beats and beyond.
+                    As the face of Drumeo, Jared is a pioneer of online drum instruction — helping prospective drummers around the world learn their first beats and beyond.
                     <br><br>
                     His passion, grit, and approachable style have helped him become the most-watched drum instructor online… ever! And now you can take in his first-ever full curriculum for beginner drummers anytime and anywhere it fits your schedule.</h6>
             </div>
@@ -576,7 +576,7 @@
         <div class="container mx-auto">
             <img class="logo lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo">
             <h2 class="mt-5 md:mt-8"><strong>Crush your first 90 days<br class="inline md:hidden"> on the drums.</strong></h2>
-            {{--<h6 class="mb-5 md:mb-14 leading-normal px-3"><em>Choose your adventure -- get your beginner lessons for just $7 <br class="hidden md:inline">--}}
+            {{--<h6 class="mb-5 md:mb-14 leading-normal px-3"><em>Choose your adventure — get your beginner lessons for just $7 <br class="hidden md:inline">--}}
                     {{--or add a practice pad and drumsticks for a discount. </em></h6>--}}
 
             <h5 class="my-3 leading-normal px-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>

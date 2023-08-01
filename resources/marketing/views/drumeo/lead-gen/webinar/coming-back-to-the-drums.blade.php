@@ -70,7 +70,7 @@
                 <br><br> You just want to PLAY THE DRUMS!
                 <br>
                 <img class="quote float-right" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/webinar/quote-image.png">
-                <br> You want to play along to your favorite songs. You want to play the beats and fills that you used to love -- and add new ones that you always wished you could play. And you want to have fun!
+                <br> You want to play along to your favorite songs. You want to play the beats and fills that you used to love — and add new ones that you always wished you could play. And you want to have fun!
                 <br><br> So in this one-hour live event, you’ll get the ammunition you need ‘come back to the drums’ with more clarity, clearer expectations, and a practice plan that’s guaranteed to work.
                 <br><br> And the best part? It’s live. So we’ll take YOUR questions and talk about what’s working, what’s not, and make sure that you have a better plan going forward. Just click any of the big buttons on this page to register. Let’s do this!
                 <br><br> To Your Drumming Success,

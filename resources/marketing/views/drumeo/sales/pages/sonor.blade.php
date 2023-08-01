@@ -97,7 +97,7 @@
                 <h2>Drumming isn’t limited <br class="inline md:hidden">to the practice room.</h2>
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/app/watch-spread-2.png">
                 <p>Enjoy entertaining shows and documentaries from the most talented content creators in the <br class="hidden md:inline">
-                    drum space -- including Carson Gant’s “Exploring Beats”, Aaron Edgar’s “Rhythms From Another <br class="hidden md:inline">
+                    drum space — including Carson Gant’s “Exploring Beats”, Aaron Edgar’s “Rhythms From Another <br class="hidden md:inline">
                     Planet”, and exclusive episodes of Austin Burcham’s “Study The Greats”. </p>
             </div>
         </div>

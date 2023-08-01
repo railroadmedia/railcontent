@@ -21,7 +21,7 @@
             <a href="@yield('order-link')">
                 <h1><i class="fab fa-facebook-messenger"></i> Facebook Messenger Discount <i class="fab fa-facebook-messenger"></i><br>
                     <em>Save {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days']->price)))) }}%</em></h1>
-                <p>You’ve already watched the first lesson -- and we want to make it insanely easy for you to continue your journey towards playing 500 songs on the piano. So we’re giving you a 50% discount when you register before November 15th @ Midnight.</p>
+                <p>You’ve already watched the first lesson — and we want to make it insanely easy for you to continue your journey towards playing 500 songs on the piano. So we’re giving you a 50% discount when you register before November 15th @ Midnight.</p>
             </a>
         </div>
     </section>

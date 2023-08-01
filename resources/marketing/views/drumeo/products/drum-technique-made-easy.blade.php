@@ -425,13 +425,13 @@
     <section class="bruce-bio">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <p class="px-3 md:px-4">
-                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bold-b.png" alt="Alphabet B"></span> ruce Becker’s story begins in 1977, where he began his drumming studies under the instruction of the legendary Freddie Gruber -- who has often been referred to as the “zen master” of teaching.
-                <br><br> Freddie had a rare insight that was spurred on by his close 40 year friendship with Buddy Rich, and many of the best drummers in the world turned to him to perfect their individual techniques and styles -- including Neil Peart, Steve Smith, and Dave Weckl.
+                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bold-b.png" alt="Alphabet B"></span> ruce Becker’s story begins in 1977, where he began his drumming studies under the instruction of the legendary Freddie Gruber — who has often been referred to as the “zen master” of teaching.
+                <br><br> Freddie had a rare insight that was spurred on by his close 40 year friendship with Buddy Rich, and many of the best drummers in the world turned to him to perfect their individual techniques and styles — including Neil Peart, Steve Smith, and Dave Weckl.
                 <br><br> Bruce not only benefited from Freddie’s instruction for eight years, but he also developed a close personal relationship.
                 <br><br> “I became as close as one could become with him. I became Freddie’s go-to guy, house sitter, and airport runner,” Bruce told Modern Drummer in 2013. “I am the only guy I know of that actually did five clinics with him. There are too many stories to tell.”
                 <br><br> Freddie would have Bruce available when he’d teach other pupils, getting Bruce to demonstrate the techniques as he would teach. They spent many late nights discussing drum technique and the mind-body connection, and exactly how it applies to music.
-                <br><br> Through this incredible relationship, Bruce was able to watch the evolution and changes Freddie made in response to musical styles and drum innovations at the time -- gaining a deeper understanding of how the body should function in all sorts of musical situations and the importance of mastering a loose technical style that is built on natural ergonomic playing.
-                <br><br> Bruce has since gone on to build his own thoughts and concepts based on all that Freddie had shared with him -- offering the most comprehensive insights into the teachings of Freddie Gruber and applying these lessons to his own all-star cast of drum students including Daniel Glass, David Garibaldi, and Mark Schulman.
+                <br><br> Through this incredible relationship, Bruce was able to watch the evolution and changes Freddie made in response to musical styles and drum innovations at the time — gaining a deeper understanding of how the body should function in all sorts of musical situations and the importance of mastering a loose technical style that is built on natural ergonomic playing.
+                <br><br> Bruce has since gone on to build his own thoughts and concepts based on all that Freddie had shared with him — offering the most comprehensive insights into the teachings of Freddie Gruber and applying these lessons to his own all-star cast of drum students including Daniel Glass, David Garibaldi, and Mark Schulman.
                 <br><br> Bruce Becker’s conceptual approach to the drums is defined as “Balance + Motion = Emotion”. And through Drum Technique Made Easy, you’ll have the opportunity to study with Bruce and gain his best insights for improving your technique through 26 weekly lessons.
             </p>
             <div class="px-3 md:px-4 timeline-pic">
@@ -579,8 +579,8 @@
                 </tbody>
             </table>
             <p>
-                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums -- <u>all for just {{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }} for the entire course).
-                <br><br> You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
+                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums — <u>all for just {{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }} for the entire course).
+                <br><br> You can choose a one-time payment, a two-payment plan, or a five-payment plan — and the entire course is yours for life with no recurring subscription or additional fees.
             </p>
         </div>
     </section>
@@ -594,7 +594,7 @@
                 @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/KenBrashear.jpg",
                 "testimonialHighlight" => "I broke through a 5-year impasse!",
-                "fullTestimonial" => "As a self-taught drummer, I was struggling for years to achieve the speed and precision I wanted on the drums. Bruce helped me modify my finger positioning and hand technique -- it felt like I’d broke through a 5-year impasse! Regardless of your skill level, if you have issues playing what you want to play and getting that onto the kit, this course is for you!",
+                "fullTestimonial" => "As a self-taught drummer, I was struggling for years to achieve the speed and precision I wanted on the drums. Bruce helped me modify my finger positioning and hand technique — it felt like I’d broke through a 5-year impasse! Regardless of your skill level, if you have issues playing what you want to play and getting that onto the kit, this course is for you!",
                 "name" => "Ken Brashear",
                 "location" => "North Carolina, USA"
                 ])
@@ -615,7 +615,7 @@
                 @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/ElizaGagnon.jpg",
                 "testimonialHighlight" => "It gave me a new fluency and fluidity for playing grooves!",
-                "fullTestimonial" => "I was a beginner and had very little technique at all, so everything was new. Bruce broke things down very clearly and all of the exercises progressed logically and smoothly -- and they weren’t boring to practice!<br><br> Drum Technique Made Easy helped me get in the habit of having the sticks in my hands every day and to be satisfied with slow and steady progress. It gave me a new fluency and fluidity for playing grooves. My partner actually noticed it before I did and commented on how much better my playing sounded.",
+                "fullTestimonial" => "I was a beginner and had very little technique at all, so everything was new. Bruce broke things down very clearly and all of the exercises progressed logically and smoothly — and they weren’t boring to practice!<br><br> Drum Technique Made Easy helped me get in the habit of having the sticks in my hands every day and to be satisfied with slow and steady progress. It gave me a new fluency and fluidity for playing grooves. My partner actually noticed it before I did and commented on how much better my playing sounded.",
                 "name" => "Eliza Gagnon",
                 "location" => "Massachusetts, USA"
                 ])

@@ -136,7 +136,7 @@
                         <img class="h-7" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Detail_Icon.svg" alt="Detail icon">
                         <div class="pl-4">
                             <p class="mb-1 uppercase text-drumeo"><strong>Catch every detail.</strong></p>
-                            <p class="mb-7 sm:mb-10">Triple driver headphones (that means 3 tiny speakers) give you a full range of sound -- from low kick drums to high cymbal shots.</p>
+                            <p class="mb-7 sm:mb-10">Triple driver headphones (that means 3 tiny speakers) give you a full range of sound — from low kick drums to high cymbal shots.</p>
                         </div>
                     </div>
                     <div class="flex items-start">

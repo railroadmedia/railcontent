@@ -357,7 +357,7 @@
     <section class="four-tones text-center">
         <div class="row">
             <h2><strong>Flexible drum tones<br class="hide-for-medium"> on the fly.</strong></h2>
-            <p>You know the feeling. You’ve almost got your drums sounding <em>exactly</em> how you want, but there’s an uneven warble or obnoxious ring -- these are called overtones. The Drumeo Tone Control Kit helps you <strong>balance overtones</strong> with four adjustable levels of dampening in one simple system.</p>
+            <p>You know the feeling. You’ve almost got your drums sounding <em>exactly</em> how you want, but there’s an uneven warble or obnoxious ring — these are called overtones. The Drumeo Tone Control Kit helps you <strong>balance overtones</strong> with four adjustable levels of dampening in one simple system.</p>
 
             <div class="swapper-container">
                 <div class="large-image active" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/level-studio.jpg);"></div>
@@ -377,7 +377,7 @@
     <section class="comparison-slider text-center">
         <div class="row">
             <h2><strong>Cleaner than Buddy’s<br class="hide-for-medium"> double strokes.</strong></h2>
-            <p>The Drumeo Tone Control Kit is the cleanest solution to drum dampening-- so your drum heads can be spared the oily residues and sticky messes from traditional dampening methods.</p>
+            <p>The Drumeo Tone Control Kit is the cleanest solution to drum dampening— so your drum heads can be spared the oily residues and sticky messes from traditional dampening methods.</p>
         </div>
         <div class='comparer'>
             <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/compare-clean.jpg" alt="Clean drum">
@@ -397,7 +397,7 @@
             <div class="benefit">
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/2-set-it-forget-it.jpg" alt="Drum set">
                 <div class="text medium-text-left">
-                    <h2><strong>Set it and forget it --<br> Drummer’s Edition.</strong></h2>
+                    <h2><strong>Set it and forget it —<br> Drummer’s Edition.</strong></h2>
                     <p>Each Tone Control strip securely fastens to any metal hoop and can be left on during transport. No more worrying about that perfectly placed gel or tape falling off. </p>
                 </div>
             </div>
@@ -429,7 +429,7 @@
                     </div>
                 </div>
                 <div class="table-wrap">
-                    <p>The Drumeo Tone Control Kit includes a snare + three tom dampeners, and one handy canvas carrying case -- everything you need to make your kit sing.</p>
+                    <p>The Drumeo Tone Control Kit includes a snare + three tom dampeners, and one handy canvas carrying case — everything you need to make your kit sing.</p>
                     <table>
                         <tr>
                             <td>Snare dampener</td>

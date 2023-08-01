@@ -119,7 +119,7 @@
                     <div id="step1" class="anchor"></div>
                     <h4 class="text-red"><strong>STEP 1</strong></h4>
                     <h2><strong>INCREASE YOUR IQ</strong></h2>
-                    <p>Start from scratch and show your left-hand what to do. Because once it knows what it’s supposed to do, we can put it to work.  In this section, you’ll get the basic skills of keyboard familiarity and finger independence. So your fingers will move when YOU want them to -- not on their own.</p>
+                    <p>Start from scratch and show your left-hand what to do. Because once it knows what it’s supposed to do, we can put it to work.  In this section, you’ll get the basic skills of keyboard familiarity and finger independence. So your fingers will move when YOU want them to — not on their own.</p>
                     <div class="image-grid-item col-xs-12 col-sm-6 col-md-3">
                         <div class="thumbnail" style="background-image:url(https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/destupefy-your-left-hand/lesson-1.jpg)"><div class="top-left-badge">LESSON 1</div></div>
                         <p><strong>Left-Hand Intervals</strong><br>
@@ -361,7 +361,7 @@
                         alt="90-Day Money-Back Guarantee">
                 <p>You shouldn’t have to pay for something you don’t get. That’s why if your left hand is not better, faster, and more independent, you won’t pay a cent.
                     <br><br>
-                    And you’ll have 90 days to test it all. Many courses only offer a short guarantee -- some as little as 14 days.
+                    And you’ll have 90 days to test it all. Many courses only offer a short guarantee — some as little as 14 days.
                     <br><br>
                     But you know it takes more than that to tell if something is REALLY working. And we want you to be able to try EVERYTHING in this course before deciding whether it’s worth your money.
                     <br><br>

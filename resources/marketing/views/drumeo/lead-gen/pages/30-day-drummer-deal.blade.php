@@ -511,7 +511,7 @@
                         [
                         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                         'title' => 'Drumeo Drumsticks',
-                        'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
+                        'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
                         'price' => 0,
                         'shipping' => "Free Shipping",
                         ],

@@ -173,7 +173,7 @@
             <img class="h-56 inline sm:hidden transition-all opacity-0 mb-5" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
             <div class="text-left flex flex-wrap sm:flex-nowrap items-center">
                 <div class=" max-w-lg sm:pr-7">
-                    <h2 class="mb-3 sm:mb-7"><strong>Don’t practice -- PLAY!</strong></h2>
+                    <h2 class="mb-3 sm:mb-7"><strong>Don’t practice — PLAY!</strong></h2>
                     <p class="leading-normal">Practice makes perfect. But it also makes you question your sanity.
                         <br><br>
                         You’re on your own. It’s repetitive. It doesn’t sound good. And it’s hard.

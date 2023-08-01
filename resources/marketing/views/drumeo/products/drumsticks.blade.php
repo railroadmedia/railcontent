@@ -124,8 +124,8 @@
                 <br><br> Drumeo has a bigger community than ever, with drummers all over the world playing in thousands of different situations. When I was thinking about our next drumstick, I didn’t want it to be just another drumstick with a Drumeo logo on it. I wanted a stick with the
                 <strong>versatility</strong> to meet a wide range of needs and the
                 <strong>durability</strong> to get your money's worth out of every pair.
-                <br><br> Vater’s high standards for quality and their grassroots, family-owned style really resonate with me. Growing up on a farm, these are the same values my dad displayed every day to get the job done. In many ways, partnering with Vater on these new Drumeo Drumsticks feels like working with family -- and that's important to me.
-                <br><br> Vater drumsticks have a rich history with Alan & Ron Vater’s grandfather, Jack Adams, starting out by making drumsticks for his jazz drummer friends in the Boston area --
+                <br><br> Vater’s high standards for quality and their grassroots, family-owned style really resonate with me. Growing up on a farm, these are the same values my dad displayed every day to get the job done. In many ways, partnering with Vater on these new Drumeo Drumsticks feels like working with family — and that's important to me.
+                <br><br> Vater drumsticks have a rich history with Alan & Ron Vater’s grandfather, Jack Adams, starting out by making drumsticks for his jazz drummer friends in the Boston area —
                 <strong>Buddy Rich, Elvin Jones, and Philly Joe Jones</strong>. That tradition of excellence continues today with Vater being used by drummers in the last nine Superbowl Halftime Shows!
                 <br><br> Your drumsticks are an extension of your unique personality behind the kit. That's why I'm so excited to partner with Vater, a company that has been helping drummers achieve excellence for a long time. When you pick up a pair of Drumeo 5A Drumsticks by Vater, you're not just picking up another pair of hickory drumsticks. You're picking up a pair of history.
             </p>
