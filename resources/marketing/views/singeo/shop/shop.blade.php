@@ -106,31 +106,33 @@
                 {{--                        </div>--}}
                 {{--                    </a>--}}
                 {{--                </div>--}}
-                <div class="float-left w-full px-2 md:px-3 card-wrap">
-                    <a href="/shop/singing-starter-kit" class="flex flex-row text-white rounded-xl mb-3 md:mb-5 overflow-hidden relative w-full sm:text-left px-5 lg:px-10 py-10 sm:py-10 lg:py-28 xl:py-32">
+                <div class="float-left w-full px-2 card-wrap">
+                    <a href="/shop/singing-starter-kit" class="flex flex-row text-white rounded-xl mb-3 md:mb-5 overflow-hidden relative w-full sm:text-left px-5 sm:px-8 lg:px-16 py-10 sm:py-7 lg:py-10">
                         <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                             <img class="h-20 md:h-16 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d21xeg6s76swyd.cloudfront.net/products/singing-starter-kit/logo.png" alt="essential bundle logo"><br>
-                            <p class="leading-tight mt-2 mb-2 lg:mb-3 lg:mt-5 text-sm">
-                                Everything you need to <b>start singing now.</b>
-                            </p>
+                            <h6 class="leading-tight my-4 lg:my-5">
+                                Everything you need to<br class="lg:hidden">
+                                <b>start singing now.</b>
+                            </h6>
                             <div class="join white smaller w-full" style="background:#D46A7D;color:white;">only <!--<s style="color:#C4C4C4;">${{ floatval($productPrices['singing-starter-kit']->price) }}</s>--> ${{ floatval($productPrices['singing-starter-kit']->discounted_price) }} &raquo;</div><br>
                         </div>
-                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover" style="background-position:60% 0;background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=3000,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/singing-starter-kit-banner.jpg);"></div>
-                        <div class="inline-block sm:hidden absolute inset-0 z-0" style="background-color:#293239;"></div>
+                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover" style="background-position:60% 0;background-color:#291618;background-image:url(https://www.musora.com/musora-cdn/image/width=3000,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/singing-starter-kit-banner.jpg);"></div>
+                        <div class="inline-block sm:hidden absolute inset-0 z-0" style="background-color:#291618;"></div>
                     </a>
                 </div>
 
-                <div class="float-left w-full px-2 md:px-3 card-wrap">
-                    <a href="/beautiful-harmonies" class="flex flex-row-reverse text-white rounded-xl mb-5 overflow-hidden relative w-full sm:text-left px-4 lg:px-12 py-10 sm:py-7 lg:py-20 margin-per">
+                <div class="float-left w-full px-2 card-wrap">
+                    <a href="/beautiful-harmonies" class="flex flex-row-reverse text-white rounded-xl mb-5 overflow-hidden relative w-full sm:text-left px-4 sm:px-8 xl:px-14 py-10 sm:py-7 lg:py-10 margin-per">
                         <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">
                             <img class="h-20 md:h-16 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/essential-logo.png" alt="essential bundle logo"><br>
-                            <p class="leading-tight mt-4 mb-2 lg:mb-3 lg:mt-5 text-sm">
-                                Take your singing skills to the <b>next level.</b>
-                            </p>
+                            <h6 class="leading-tight my-4 lg:my-5">
+                                Take your singing skills <br class="lg:hidden">
+                                to the <b>next level.</b>
+                            </h6>
                             <div class="join white smaller w-full" style="background:white;color:#2B384D;">only <!--<s style="color:#C4C4C4;">${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->price) }}</s>--> ${{ floatval($productPrices['the-essential-guide-to-beautiful-harmonies']->discounted_price) }} &raquo;</div><br>
                         </div>
-                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=3000,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/beautiful-harmonies-banner.jpg);"></div>
-                        <div class="inline-block sm:hidden absolute inset-0 z-0" style="background-color:#293239;"></div>
+                        <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#2b374d;background-image:url(https://www.musora.com/musora-cdn/image/width=3000,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/black-friday/beautiful-harmonies-banner.jpg);"></div>
+                        <div class="inline-block sm:hidden absolute inset-0 z-0" style="background-color:#2b374d;"></div>
                     </a>
                 </div>
             </div>
