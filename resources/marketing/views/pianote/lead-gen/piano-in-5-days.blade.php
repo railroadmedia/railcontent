@@ -219,7 +219,7 @@
                         </h3>
                         <h6 class="my-3 sm:my-4" style="color: rgba(208, 226, 231, 0.8);">
                             Enter your email below for your first <br>
-                            week of piano lessons -- for free.
+                            week of piano lessons — for free.
                         </h6>
                     </div>
                     <div class="sm:pr-20">
@@ -424,7 +424,7 @@
                 <p>
                     Lisa Witt might just be the happiest piano teacher on the internet. <br><br>
                     With 20 years of teaching experience, her online lessons have helped millions of students around the world. <br><br>
-                    Lisa’s contagious enthusiasm will have you excited from the very first time you sit down to play -- and it will make learning the piano a super fun and engaging experience. <br><br>
+                    Lisa’s contagious enthusiasm will have you excited from the very first time you sit down to play — and it will make learning the piano a super fun and engaging experience. <br><br>
                     Start your piano journey with Lisa today.
                 </p>
             </div>
@@ -533,7 +533,7 @@
                 <p class="text-left mb-3 sm:mb-4 mx-auto inline-block sm:leading-loose">
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> Unlock the piano keyboard.<br>
                     <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> Play your first song on the piano.<br>
-                    <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> 100% free -- lifetime access!<br>
+                    <i class="fas fa-check sm:mr-2 text-xl" style="color:#FF0000;"></i> 100% free — lifetime access!<br>
                 </p>
                 <div class="max-w-md md:max-w-auto lg:w-96 mx-auto md:mx-0">
                     <p class="mb-2">

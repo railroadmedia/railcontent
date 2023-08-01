@@ -69,7 +69,7 @@
     <section class="more-songs">
         <div class="container">
             <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/piano-music-icons.png" alt="Note and piano icon">
-            <p>Anyone can play a chord -- but what happens in the spaces <strong>between</strong> the chords distinguishes the great players from the mediocre ones.
+            <p>Anyone can play a chord — but what happens in the spaces <strong>between</strong> the chords distinguishes the great players from the mediocre ones.
                 <br><br>
                 Fill those spaces with piano riffs that will make you sound professional, polished ... and close to perfect. Learn the secrets and tips to play fills that <strong>sound</strong> complicated and advanced, but are actually very <strong>simple</strong> to learn and start adding to your repertoire.
             </p>
@@ -113,7 +113,7 @@
     <section class="thumb-grid text-center">
         <div class="container">
             <h1><strong>It’s time to sound<br class="hidden-sm hidden-md hidden-lg"> like a professional.</strong></h1>
-            <p>Each lesson is designed to build on the previous one, so you’ll be reinforcing what you’ve already learned while developing new skills. It WILL take practice -- but it won’t take months. Most students can expect to complete these lessons in less than two weeks (including practice time).</p>
+            <p>Each lesson is designed to build on the previous one, so you’ll be reinforcing what you’ve already learned while developing new skills. It WILL take practice — but it won’t take months. Most students can expect to complete these lessons in less than two weeks (including practice time).</p>
             <div class="image-grid-item col-xs-12 col-sm-4">
                 <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-1.jpg" alt="Lesson 1 thumbnail">
                 <p><span class="text-red"><strong>Chords and Inversions</strong></span><br>
@@ -129,7 +129,7 @@ Start filling in the spaces with simple riffs that sound amazing. You’ll see h
             <div class="image-grid-item col-xs-12 col-sm-4">
                 <img src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-riffs-and-fills/lesson-thumb-3.jpg" alt="Lesson 3 thumbnail">
                 <p><span class="text-red"><strong>The “Sus-Trill”</strong></span><br>
-Learn one of the most beautiful and versatile fills in piano music. Add sparkle to your playing with this fill -- which sounds much more complicated than it is.</p>
+Learn one of the most beautiful and versatile fills in piano music. Add sparkle to your playing with this fill — which sounds much more complicated than it is.</p>
             </div>
 
             <div class="image-grid-item col-xs-12 col-sm-4">

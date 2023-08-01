@@ -332,7 +332,7 @@
                         <br><br>
                         It can be confusing, overwhelming, and even frustrating to know where or how to begin your piano journey. Not to mention expensive.
                         <br><br>
-                        So we’re taking ALL of the risk and worry out of it with your first lesson -- 100% FREE.
+                        So we’re taking ALL of the risk and worry out of it with your first lesson — 100% FREE.
                         <br><br>
                         Join Lisa Witt live via Zoom for 90 minutes and discover just what’s possible.
                         <br><br>

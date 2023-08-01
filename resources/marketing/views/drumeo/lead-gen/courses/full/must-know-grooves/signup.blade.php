@@ -61,7 +61,7 @@
             "lessonNumber" => "8",
             "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/thumb-social-punk.jpg",
             "lessonText" => "SoCal Punk",
-            "description" => "Rich shows you the fast & furious beats that became synonymous with 1990’s Southern California punk -- get ready to break a sweat.",
+            "description" => "Rich shows you the fast & furious beats that became synonymous with 1990’s Southern California punk — get ready to break a sweat.",
         ],
         [
             "lessonNumber" => "9",

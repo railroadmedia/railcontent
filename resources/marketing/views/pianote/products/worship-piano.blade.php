@@ -74,7 +74,7 @@
             <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/lisa-amberly-1.png" alt="Lisa and Amberly">
             <p>The piano (and keyboard) is the glue that holds worship bands together. From song introductions and transitions to backing music during prayer and altar calls, the piano sets the tone and space inside church.
                 <br><br> The needs of a church pianist are unique - there isn’t really any other environment like it. That means the skills are unique. This training pack has been specially designed for worship piano inside a church setting.
-                <br><br> If you’ve been wanting to learn the piano to help serve your church but didn’t know how -- this training pack will equip you to start playing and serving in the shortest time possible.</p>
+                <br><br> If you’ve been wanting to learn the piano to help serve your church but didn’t know how — this training pack will equip you to start playing and serving in the shortest time possible.</p>
         </div>
     </section>
 
@@ -330,7 +330,7 @@
 
     <section class="two-video-example text-center lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/church-stage-background.jpg">
         <div class="container">
-            <h2><strong>Know you’re good enough --<br>
+            <h2><strong>Know you’re good enough  — <br>
                     BEFORE you ever step on stage</strong></h2>
             <p>Playing at church can be intimidating and scary. Even if you’ve played piano before.
                 <br><br>Worship Piano takes the fear out of knowing if you’re good enough. That’s because you’ll be able to practice along with YOUR OWN worship band. Play along and get comfortable with other musicians, in your own home. Take a look:</p>
@@ -487,7 +487,7 @@
 
     <section class="play-songs text-center">
         <div class="container">
-            <h2><strong>Fast results -- so you can<br class="hidden-sm hidden-md hidden-lg"> start playing right away</strong></h2>
+            <h2><strong>Fast results — so you can<br class="hidden-sm hidden-md hidden-lg"> start playing right away</strong></h2>
             <p>Modern worship music is not complicated. It’s not designed to be. After all, the goal is not “showing-off” or being flashy, it’s about helping people connect with God during times of worship.
                 <br><br>
                 Because of its beautiful simplicity, it’s easy to learn and start playing in church sooner. This won’t take you weeks or months to be ready. In fact, you might find yourself wanting to play within a few days of starting.</p>

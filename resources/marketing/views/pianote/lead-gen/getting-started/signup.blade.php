@@ -186,7 +186,7 @@
             <img class="h-56 inline sm:hidden transition-all opacity-0 mb-5" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
             <div class="text-left flex flex-wrap sm:flex-nowrap items-center">
                 <div class=" max-w-lg sm:pr-7">
-                    <h2 class="mb-3 sm:mb-7"><strong>Don’t practice -- PLAY!</strong></h2>
+                    <h2 class="mb-3 sm:mb-7"><strong>Don’t practice — PLAY!</strong></h2>
                     <p class="leading-normal">So you just had your first piano lesson. Congratulations! Now…
                         <br><br>
                         You’re on your own.<br><br>
@@ -206,7 +206,7 @@
                         <strong>Is this really free?</strong>
                     </h4>
                     <p style="color:#ABB5C2;">
-                        Yes! We love sharing videos to help piano players -- and deep down we hope you’ll see some of the value that we provide inside Pianote juuuuust in case you ever want to consider joining!
+                        Yes! We love sharing videos to help piano players — and deep down we hope you’ll see some of the value that we provide inside Pianote juuuuust in case you ever want to consider joining!
                     </p>
                 </div>
                 <div class="px-3 md:px-4 w-full md:w-7/12 lg:w-7/12">

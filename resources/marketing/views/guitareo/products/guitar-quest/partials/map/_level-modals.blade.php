@@ -51,7 +51,7 @@
                 <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-2-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=029027bcdf62593d95e1e4959775a635" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">8 Videos // 9 Challenges</h4>
-                    <p class="text-sm">You don't want the rest of your band to know that you don't play guitar -- and there's a music video shoot coming up soon. So you’re going to prepare with a secret guitar lesson in a secret location, where you'll learn the absolute basics and how to make it seem like you've been playing for a long time.</p>
+                    <p class="text-sm">You don't want the rest of your band to know that you don't play guitar — and there's a music video shoot coming up soon. So you’re going to prepare with a secret guitar lesson in a secret location, where you'll learn the absolute basics and how to make it seem like you've been playing for a long time.</p>
                     <ul class="list-none ml-0 text-sm">
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Get Familiar With Your Guitar</span></li>
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Explore Your Amp (Optional)</span></li>
@@ -73,7 +73,7 @@
                 <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-3-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=4c64fc507666feea5fbfa51e089adb30" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">9 Videos // 13 Challenges</h4>
-                    <p class="text-sm">It's time for the new music video -- and if you can quickly learn the song before the band shows up, no one will ever notice that you don't actually play guitar. You've got this -- with some basic strumming and easy new chords.</p>
+                    <p class="text-sm">It's time for the new music video — and if you can quickly learn the song before the band shows up, no one will ever notice that you don't actually play guitar. You've got this — with some basic strumming and easy new chords.</p>
                     <ul class="list-none ml-0 text-sm">
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Strumming Pattern #1</span></li>
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Strumming Pattern #2</span></li>
@@ -143,7 +143,7 @@
                 <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-6-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=827a0b3e1815df14e30a1fbbf57e121a" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">9 Videos // 7 Challenges</h4>
-                    <p class="text-sm">After selling out, the band needs to re-establish itself for the diehard fans -- and what better way than a punk show! Your audience will expect something hardcore, so it's time for you to get familiar with the fretboard and play some power chords!</p>
+                    <p class="text-sm">After selling out, the band needs to re-establish itself for the diehard fans — and what better way than a punk show! Your audience will expect something hardcore, so it's time for you to get familiar with the fretboard and play some power chords!</p>
                     <ul class="list-none ml-0 text-sm">
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Get Familiar With The Fretboard</span></li>
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">Practice The One Note Riff</span></li>
@@ -215,7 +215,7 @@
                 <img src="https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2FGuitar-Quest-9-0.png?auto=format&ixlib=php-1.2.1&w=2000&s=3dbab20b2a24fa1684f66bcbe63676cd" />
                 <div class="p-6">
                     <h4 class="text-goldenrod mb-4 font-bold uppercase text-center font-primary">10 Videos // 10 Challenges</h4>
-                    <p class="text-sm">Here's the final song. The final boss. It's everything you've learned so far in ONE high energy tune -- and it's so satisfying to pull off. If you can muster up the skill and determination to play this, you've completed your GuitarQuest!</p>
+                    <p class="text-sm">Here's the final song. The final boss. It's everything you've learned so far in ONE high energy tune — and it's so satisfying to pull off. If you can muster up the skill and determination to play this, you've completed your GuitarQuest!</p>
                     <ul class="list-none ml-0 text-sm">
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">The Chorus Riff (1st Half)</span></li>
                         <li><i class="fas fa-check-circle mr-2"></i> <span class="font-semibold">The Chorus Riff (2nd Half)</span></li>

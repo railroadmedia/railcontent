@@ -15,11 +15,11 @@
             <h3 class="text-center uppercase mb-4 font-bison-bold mb-6 text-5xl md:text-6xl">
                 Your <span class="text-goldenrod underline">Mission</span>
             </h3>
-            <p>Music is a language -- and just like you didn’t start talking by understanding prepositions and nouns, you shouldn’t learn guitar by endlessly studying theory. <span class="font-bold">Instead, let’s just start playing!</span></p>
+            <p>Music is a language — and just like you didn’t start talking by understanding prepositions and nouns, you shouldn’t learn guitar by endlessly studying theory. <span class="font-bold">Instead, let’s just start playing!</span></p>
             <p>We'll play a show, shoot a music video, make commercial jingles, rock out, make a BUNCH of noise and write a ton of your own music along the way.</p>
             <p>GuitarQuest isn’t an all-in-one-guide, it’s not a step by step curriculum. It’s hardly even guitar lessons! You’ll start with a mission: <span class="italic">There’s a concert going on RIGHT NOW but the guitarist didn’t show. And they’re turning to you! Just learn these chords...</span></p>
-            <p>And level after level, we’re going to trick you into playing things you didn’t think you could, faster than you expected -- and you’ll end up doing the repetition and practice NOT because it’s practice, but because you’re making something cool happen!</p>
-            <p>You’ll gain momentum that keeps you hooked and falling more and more in love with the guitar. And you'll have the freedom to take your guitar journey anywhere you want -- playing songs, jamming with your friends, and writing your own music.</p>
+            <p>And level after level, we’re going to trick you into playing things you didn’t think you could, faster than you expected — and you’ll end up doing the repetition and practice NOT because it’s practice, but because you’re making something cool happen!</p>
+            <p>You’ll gain momentum that keeps you hooked and falling more and more in love with the guitar. And you'll have the freedom to take your guitar journey anywhere you want — playing songs, jamming with your friends, and writing your own music.</p>
             <p>I think you’re going to love it.</p>
             <!-- Signature -->
             <div class="flex flex-col items-center mb-6">

@@ -133,7 +133,7 @@
             <p class="columns"><strong><em>Any of these sound like you?</em></strong>
                 <br><br>
                 Acoustic Guitar Made Easy was created to give you a crystal-clear pathway to reaching these  <br class="show-for-medium">
-                exact life-changing goals -- <u>and here’s how we’ll get there together in just 26 weeks...</u></p>
+                exact life-changing goals — <u>and here’s how we’ll get there together in just 26 weeks...</u></p>
         </div>
     </div>
     <section class="triple-benefits">
@@ -476,7 +476,7 @@
     <section class="instructor-bio">
         <div class="row">
             <p class="columns">
-                <span class="first-letter"><img style="border-radius: 5px;" src="https://d122ay5chh2hr5.cloudfront.net/gtme/bold-n.png" alt="Bold N"></span>ate Savage always knew he wanted to share his love for playing the guitar with others. After earning his Music Degree at San Jacinto College and playing hundreds of shows across Canada, the USA, and Europe -- he wanted to find a better way to help guitarists around the world. So in 2009, he connected with Musora Media to start GuitarLessons.com -- a massive library of free online guitar lessons that has since helped more than 20 million guitar players.
+                <span class="first-letter"><img style="border-radius: 5px;" src="https://d122ay5chh2hr5.cloudfront.net/gtme/bold-n.png" alt="Bold N"></span>ate Savage always knew he wanted to share his love for playing the guitar with others. After earning his Music Degree at San Jacinto College and playing hundreds of shows across Canada, the USA, and Europe — he wanted to find a better way to help guitarists around the world. So in 2009, he connected with Musora Media to start GuitarLessons.com — a massive library of free online guitar lessons that has since helped more than 20 million guitar players.
 
                 <br><br>
                 “I loved playing shows and touring,” Nate said in 2009. “But my heart has always been set on guitar education. I truly believe that playing the guitar can be a life-changing experience, so having the opportunity to create online lessons and help students around the world felt like such a perfect opportunity.”
@@ -485,13 +485,13 @@
                 Nate’s most popular videos are built to give beginners an easier way to get started without the friction of private lessons. “8 Guitar Chords You Must Know” has reached more than 4 million views. “Play 10 Songs With 4 Chords”, “5 Essential Strumming Patterns”, and “How To Hold The Guitar” are just a few other examples of videos that have been seen more by more than a million students.
 
                 <br><br>
-                Through his online lessons, Nate has been able to reach more guitarists than he’d ever imagined and get feedback from tens of thousands of YouTube comments and personal emails -- gaining a deeper understanding of where students were having issues, what obstacles were getting in the way, and what was creating the fastest breakthroughs for getting to that next level.
+                Through his online lessons, Nate has been able to reach more guitarists than he’d ever imagined and get feedback from tens of thousands of YouTube comments and personal emails — gaining a deeper understanding of where students were having issues, what obstacles were getting in the way, and what was creating the fastest breakthroughs for getting to that next level.
 
                 <br><br>
                 “A lot of new guitarists end up quitting because they’re missing one of the five major pillars of acoustic guitar: strumming, playing clean chords, changing chords smoothly, music theory, and playing songs,” says Nate. “When even just one of those pillars is missing, your guitar experience can be super frustrating and you’re left with no clear path forward.”
 
                 <br><br>
-                Acoustic Guitar Made Easy is Nate’s solution -- giving students a simpler approach to accelerating their skills on the acoustic guitar through weekly lesson plans (where you’ll always know exactly what to do, and in exactly what order).
+                Acoustic Guitar Made Easy is Nate’s solution — giving students a simpler approach to accelerating their skills on the acoustic guitar through weekly lesson plans (where you’ll always know exactly what to do, and in exactly what order).
             </p>
             <div class="columns no-padding medium-4 benefit-row practice">
                 <div class="columns float-right">
@@ -666,9 +666,9 @@
                 </tbody>
             </table>
             <p class="columns">
-                <strong>Normally, Nate Savage charges $50 for a 30-minute private lesson</strong> and is extremely selective on which students he’ll teach. With Acoustic Guitar Made Easy, Nate is your personal guitar coach for 26 weeks, giving you a new exclusive video lesson each week and a clear path to improve your skills -- <u>all for just ${{ number_format((floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price) / 26), 2, '.', ',') }} per week.</u>
+                <strong>Normally, Nate Savage charges $50 for a 30-minute private lesson</strong> and is extremely selective on which students he’ll teach. With Acoustic Guitar Made Easy, Nate is your personal guitar coach for 26 weeks, giving you a new exclusive video lesson each week and a clear path to improve your skills — <u>all for just ${{ number_format((floatval($productPrices['AGME-JAN-2019-SEMESTER']->discounted_price) / 26), 2, '.', ',') }} per week.</u>
                 <br><br>
-                You can choose a one-time payment, or two or five-time payment plans -- and the entire Acoustic Guitar Made Easy course is <u>yours for life</u> with no recurring subscription or additional fees.
+                You can choose a one-time payment, or two or five-time payment plans — and the entire Acoustic Guitar Made Easy course is <u>yours for life</u> with no recurring subscription or additional fees.
             </p>
         </div>
     </section>

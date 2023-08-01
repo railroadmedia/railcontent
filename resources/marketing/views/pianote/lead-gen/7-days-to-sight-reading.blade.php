@@ -382,7 +382,7 @@
                         That’s what it’s all about. <br><br>
                         The only reason to read music is so you can PLAY music. So that’s what you’ll do. Join Lisa Witt every day for a week and unlock the mystery and beauty of sight-reading by playing REAL music on the piano. <br><br>
                         It’s not a boring theory lesson. <br><br>
-                        You’ll be learning by doing. And because of that -- you’ll see results so much faster.  And have a ton of fun.
+                        You’ll be learning by doing. And because of that — you’ll see results so much faster.  And have a ton of fun.
                     </p>
                 </div>
             </div>
@@ -505,7 +505,7 @@
                 @include('_partials.components.question-dropdown', [
                     "num" => "?",
                     "title" => "What happens if I miss a day?",
-                    "desc" => "That’s totally ok! Life happens. And while this is designed to be completed in a week, the lessons are yours for life. Simply pick up where you left off -- when it suits you."
+                    "desc" => "That’s totally ok! Life happens. And while this is designed to be completed in a week, the lessons are yours for life. Simply pick up where you left off — when it suits you."
                 ])
                 @include('_partials.components.question-dropdown', [
                     "num" => "?",

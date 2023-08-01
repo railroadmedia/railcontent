@@ -130,14 +130,14 @@
                         <i class="text-songs icon-metronome"></i>
                         <div>
                             <h3><strong>Counting just got easier.</strong></h3>
-                            <p>Add or remove the metronome to help you count out the beats in a bar. This makes learning songs of all levels easier -- even that odd-time Rush song!</p>
+                            <p>Add or remove the metronome to help you count out the beats in a bar. This makes learning songs of all levels easier — even that odd-time Rush song!</p>
                         </div>
                     </div>
                     <div class="text-icon-wrap">
                         <i class="text-songs fal fa-phone-laptop"></i>
                         <div>
                             <h3><strong>Available on all your devices.</strong></h3>
-                            <p>Load up DrumeoSONGS on your phone during practice time, your laptop when you’re behind the kit, and your tablet at the gig -- wherever the music takes you!</p>
+                            <p>Load up DrumeoSONGS on your phone during practice time, your laptop when you’re behind the kit, and your tablet at the gig — wherever the music takes you!</p>
                         </div>
                     </div>
                 </div>

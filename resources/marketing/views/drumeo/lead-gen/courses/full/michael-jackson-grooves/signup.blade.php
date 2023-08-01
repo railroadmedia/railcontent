@@ -95,7 +95,7 @@
     @include('drumeo.lead-gen.courses.full.partials.instructor',[
         "img" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/michael-jackson-grooves/avatar.jpg",
         "title" => '
-            Learn From The Master --
+            Learn From The Master —
             <br class="hidden sm:inline lg:hidden">
             Michael\'s Go-To Live Drummer
         ',

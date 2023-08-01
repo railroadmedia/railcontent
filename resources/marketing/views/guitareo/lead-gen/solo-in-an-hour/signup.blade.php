@@ -170,7 +170,7 @@
                         <strong>Tesler-Mabe</strong></h1>
                         <div class="uppercase text-yellow-2 lg:text-lg">TEACHING GUITARISTS FOR {{ date('Y') - 2013}} YEARS</div>
                     </div>
-                    <p class="leading-relaxed text-left mt-4 lg:mt-5">Ayla Tesler-Mabe has made a splash in the music industry as a professional guitarist, vocalist, and songwriter -- playing in popular bands including Ludic and formally Calpurnia. And while she’s actively creating new music and performing, Ayla’s also passionate about helping students through Guitareo every day!</p>
+                    <p class="leading-relaxed text-left mt-4 lg:mt-5">Ayla Tesler-Mabe has made a splash in the music industry as a professional guitarist, vocalist, and songwriter — playing in popular bands including Ludic and formally Calpurnia. And while she’s actively creating new music and performing, Ayla’s also passionate about helping students through Guitareo every day!</p>
                 </div>
             </div>
         </div>

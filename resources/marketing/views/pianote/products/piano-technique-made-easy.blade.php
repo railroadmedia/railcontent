@@ -2,11 +2,11 @@
 
 @section('global-head')
     <title>Piano Technique Made Easy | Pianote</title>
-    <meta name="description" content="Master the fundamentals -- so you can play anything you want on the piano.">
+    <meta name="description" content="Master the fundamentals — so you can play anything you want on the piano.">
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/og-image.jpg" style="display: none;">
     <meta property="og:title" content="Piano Technique Made Easy">
-    <meta property="og:description" content="Master the fundamentals -- so you can play anything you want on the piano.">
+    <meta property="og:description" content="Master the fundamentals — so you can play anything you want on the piano.">
     <meta property="og:url" content="https://www.pianote.com/piano-technique-made-easy">
 
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
         <div class="container">
             <img class="logo" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/logo.png" alt="Pianote technique made easy logo"><br>
             <i class="fas fa-play play-vimeo autoplay-video" data-toggle="modal" data-target="#trailer"></i>
-            <h2>Master the fundamentals -- so you can <br> <strong>play anything you want on the piano.</strong></h2>
+            <h2>Master the fundamentals — so you can <br> <strong>play anything you want on the piano.</strong></h2>
             {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
             <a
                 class="join vue-add-to-cart"
@@ -68,16 +68,16 @@
             <img class="hidden-sm hidden-md hidden-lg" src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/struggle-graphic-mobile.png" alt="Struggle diagram">
             <p>Feeling stuck on the keys? Like you’ve hit a wall you just can’t break through?
                 <br><br>
-                We all have that one song -- you know, the one you WANT to play but wonder if you’ll ever be good enough to make it happen.
+                We all have that one song — you know, the one you WANT to play but wonder if you’ll ever be good enough to make it happen.
                 <br><br>
-                Because up until now -- it hasn’t.
+                Because up until now — it hasn’t.
                 <br><br>
                 Chances are your technique is holding you back.
                 <br><br>
                 Here’s the thing about technique…<br>
                 <strong>It’s the FOUNDATION of your piano playing.</strong>
                 <br><br>
-                And without a good foundation -- you’ll never reach the heights you dream of. You’ll get stuck at the same level.
+                And without a good foundation — you’ll never reach the heights you dream of. You’ll get stuck at the same level.
                 <br><br>
                 Forever frustrated that you’re not seeing the results you know you deserve.
                 <br><br>
@@ -227,7 +227,7 @@
                     <br><br> At the end of every level you’ll be able to play the most popular chord progressions used in your favorite songs.
                     <br><br> This makes learning pop songs a breeze because you’ll have already mastered the progressions that are used in EVERY key.
                     <br><br> So you’ll NEVER have to be intimidated by different key signatures or chord progressions.
-                    <br><br> And that song you’ve been dreaming of -- won’t seem so hard anymore.</p>
+                    <br><br> And that song you’ve been dreaming of — won’t seem so hard anymore.</p>
             </div>
 
             <div class="clearfix check-container text-center">
@@ -564,7 +564,7 @@
         <div class="container">
             <img class="logo lazy"
                     data-src="https://d2vyvo0tyx8ig5.cloudfront.net/shop/products/piano-technique-made-easy/logo.png" alt="Pianote technique made easy logo">
-            <h2>Master the fundamentals -- so you can <br> <strong>play anything you want on the piano.</strong></h2>
+            <h2>Master the fundamentals — so you can <br> <strong>play anything you want on the piano.</strong></h2>
             {{--<a class="join" href="/piano-technique-made-easy/notify">Notify Me &raquo;</a>--}}
             <a
                 href="{{ url()->route('shopping-cart.add-to-cart', ['products' => ['piano-technique-made-easy' => 1], 'redirect' => '/order', 'locked' => 'false']) }}"

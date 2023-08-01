@@ -216,7 +216,7 @@
                     <h2 class="text-center sm:text-left"><strong>Jared Falk</strong></h2>
                     <h6 class="leading-normal mt-4 lg:mt-6">Jared Falk has been a trusted source for online drum lessons for 15+ years.
                         <br><br>
-                        As the face of Drumeo, Jared is a pioneer of online drum instruction -- helping prospective drummers around the world learn their first beats and beyond.
+                        As the face of Drumeo, Jared is a pioneer of online drum instruction — helping prospective drummers around the world learn their first beats and beyond.
                         <br><br>
                         His passion, grit, and approachable style have helped him become the most-watched drum instructor online… ever! And now you can take in his first-ever full curriculum for beginner drummers anytime and anywhere it fits your schedule.
                     </h6>

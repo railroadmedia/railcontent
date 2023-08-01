@@ -93,7 +93,7 @@
                     <br><br>
                     Unfortunately, most drummers play a handful of drum fills on autopilot - without giving much thought to the musical application. But there’s a big difference between drum fills that simply fill space while transitioning to another part of the song… and drum fills that amplify the music and leave a lasting impression.
                     <br><br>
-                    And in just four weeks -- while following a carefully organized plan -- you can exchange your boring ol’ played-out fills with better drum fills your audience will LOVE!
+                    And in just four weeks — while following a carefully organized plan — you can exchange your boring ol’ played-out fills with better drum fills your audience will LOVE!
                 </p>
             </div>
         </div>
@@ -159,7 +159,7 @@
                 <div class="columns medium-6">
                     <div class="colored-box">
                         <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/memorize.png" alt="Memorize text">
-                        <p>You can grab some sheet music of different drum fills and work your way through the patterns and orchestrations -- memorizing new drum fills as you continue to play. And that’s fine, most drummers do this for years and slowly add to their arsenal one pattern at a time.
+                        <p>You can grab some sheet music of different drum fills and work your way through the patterns and orchestrations — memorizing new drum fills as you continue to play. And that’s fine, most drummers do this for years and slowly add to their arsenal one pattern at a time.
                             <br><br>
                         <strong>This is NOT what’s covered in this training program.</strong></p>
                     </div>
@@ -167,7 +167,7 @@
                 <div class="columns medium-6">
                     <div class="colored-box blue">
                         <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/four-weeks-to-better-drum-fills/create.png" alt="Create text">
-                        <p>You can study the foundations of a drum fill: the purpose, the lengths, the motions, the combinations, and the vocabulary -- so you can create effective drum fills on the fly. You’ll gain the ability to adapt to the music, the audience, and the setting for a more impactful musical experience.
+                        <p>You can study the foundations of a drum fill: the purpose, the lengths, the motions, the combinations, and the vocabulary — so you can create effective drum fills on the fly. You’ll gain the ability to adapt to the music, the audience, and the setting for a more impactful musical experience.
                             <br><br>
                         <strong>This is what we’ll cover through four weeks of lessons.</strong></p>
                     </div>
@@ -215,7 +215,7 @@
             <img class="sticks" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/fair-warning-x.png" alt="X Image"><br>
             <p>Four Weeks To Better Drum Fills is not a magical pill that’ll turn you into a world-class drummer in four weeks, but you will get four simple weekly lesson plans that will give you almost-immediate improvements in your creativity and drum fill applications.
                 <br><br>
-                You will start a new journey -- one that will last a lifetime -- for understanding the purpose of a drum fill, the ideas behind constructing and orchestrating something that sounds great, and learning how to apply effective drum fills within real music.</p>
+                You will start a new journey — one that will last a lifetime — for understanding the purpose of a drum fill, the ideas behind constructing and orchestrating something that sounds great, and learning how to apply effective drum fills within real music.</p>
             <img class="bg-icon sign" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/fair-warning-1.png" alt="Warning icon">
             <img class="bg-icon cal" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/fair-warning-2.png" alt="Calendar icon">
         </div>
@@ -240,13 +240,13 @@
                     <br><br>
                     Back in 2003, Jared partnered with one of his private drum students to create simple websites with drum articles, video tutorials, and community discussion forums. As online drum lessons transitioned to becoming a full-time job, Jared launched several step-by-step DVD packs including the One-Handed Drum Roll, Bass Drum Secrets, and The Rock Drumming System.
                     <br><br>
-                    As video streaming started to improve and websites like YouTube gained traction, Jared launched FreeDrumLessons.com in 2007 and built a massive library of drum lessons on YouTube. And through these platforms, Jared has become the world’s most-watched drum teacher with his YouTube lessons alone reaching more than 50 million views -- including his “How To Play Drums” video that has helped more than 6 million drummers.
+                    As video streaming started to improve and websites like YouTube gained traction, Jared launched FreeDrumLessons.com in 2007 and built a massive library of drum lessons on YouTube. And through these platforms, Jared has become the world’s most-watched drum teacher with his YouTube lessons alone reaching more than 50 million views — including his “How To Play Drums” video that has helped more than 6 million drummers.
                     <br><br>
                     In 2012, Jared co-founded Drumeo.com as “The Ultimate Online Drum Lessons Experience”, giving drum students the opportunity to learn from the best drummers and teachers in the world through step-by-step courses, live video drum lessons, play-along songs, personalized lesson plans, and community support.
                     <br><br>
                     Drumeo has since been voted as “The Best Educational Website” by the readers of DRUM! Magazine for three consecutive years, “The Best Educational Product” by the readers of Modern Drummer magazine, and Jared was awarded “The Best Drum Educator” by Rhythm Magazine.
                     <br><br>
-                    Four Weeks To Better Drum Fills isn’t something Jared’s created on his own. He’s had the opportunity to study with the world’s best drummers, hosting lessons with them, and picking their brains on how they approach their drumming -- and this course includes the takeaways he’s gained from these experiences, applied to his own drumming, and is now sharing with drummers to help you unlock the ability to play whatever fills you want.
+                    Four Weeks To Better Drum Fills isn’t something Jared’s created on his own. He’s had the opportunity to study with the world’s best drummers, hosting lessons with them, and picking their brains on how they approach their drumming — and this course includes the takeaways he’s gained from these experiences, applied to his own drumming, and is now sharing with drummers to help you unlock the ability to play whatever fills you want.
                 </p>
             </div>
         </div>

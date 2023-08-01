@@ -299,7 +299,7 @@
                 'name' => 'Ivy Elizondo',
                 'video' => '373445819',
                 'title' => 'Now we have a band and we’re recording an album!',
-                'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead -- she’s used Drumeo to build a foundation and formed a band.',
+                'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead — she’s used Drumeo to build a foundation and formed a band.',
                 ],
             ]
         @endphp

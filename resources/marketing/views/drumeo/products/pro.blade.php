@@ -53,7 +53,7 @@
             </div>
             <img data-open="previewModal" class="play-button autoplay-video animated infinite pulse delay-2s slower" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png">
             <h1><strong>The easier way to sell<br class="hide-for-medium">  drum lessons.</strong></h1>
-            <h4>We’re partnering with drum teachers and content creators to bring your ideas to life -- giving you<br class="show-for-large">
+            <h4>We’re partnering with drum teachers and content creators to bring your ideas to life — giving you<br class="show-for-large">
                 access to a global audience of drum students who already know and love digital lessons. </h4>
             <a href="https://musora.typeform.com/to/WjlCOG" class="join blue">Apply Now &raquo;</a><br>
             <a data-open="contact" class="join blue smaller outline">Contact Us</a>
@@ -113,7 +113,7 @@
                 <h3 class="text-yellow"><em>(We’ll take care of the rest.)</em></h3>
                 <p>You love playing drums and teaching students. But when it comes to creating video drum lessons, everything after that becomes so complicated. Video hosting, content management, sales pages, order forms, marketing, customer support… it adds up.
                     <br><br>
-                    And even when you finally figure it out -- you end up spending too much time editing your website, troubleshooting video glitches, or sorting through login issues and payment problems. Unless it’s your full-time job, it’s just not worth it. And many teachers end up putting their hands in the air and giving up.
+                    And even when you finally figure it out — you end up spending too much time editing your website, troubleshooting video glitches, or sorting through login issues and payment problems. Unless it’s your full-time job, it’s just not worth it. And many teachers end up putting their hands in the air and giving up.
                     <br><br>
                     <strong>But there’s a better way.</strong>
                     <br><br>
@@ -228,7 +228,7 @@
                     <i class="fal fa-rocket-launch"></i>
                 </div>
                 <h2><strong>Launch</strong></h2>
-                <p>We’ll host your videos, manage the content, create the sales page, handle payments, and respond to student questions. Your product will be added to the Drumeo Drum Shop -- giving you access to our audience of drummers and students around the world.</p>
+                <p>We’ll host your videos, manage the content, create the sales page, handle payments, and respond to student questions. Your product will be added to the Drumeo Drum Shop — giving you access to our audience of drummers and students around the world.</p>
             </div>
             <div class="columns medium-4">
                 <div class="icon-step text-yellow">

@@ -274,7 +274,7 @@
                 ],
                 [
                 'title' => "I’ve started making my own melodies.",
-                'description' => "Guitareo has been fun and motivated me to try more. I like how we start making melodies quickly along with helpful background information on chords and notes. I love seeing other students post their melodies -- it’s so much fun to listen to others!",
+                'description' => "Guitareo has been fun and motivated me to try more. I like how we start making melodies quickly along with helpful background information on chords and notes. I love seeing other students post their melodies — it’s so much fun to listen to others!",
                 'name' => 'Jan M',
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/jan-berlin-germany.jpg',
                 'location' => 'Germany',
