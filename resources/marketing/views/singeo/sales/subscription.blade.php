@@ -146,16 +146,6 @@
         ])
     @endif
 
-    @if(empty($trialVersion))
-    @include('_partials.components.promo-top-banner',[
-        'bg' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-shop-summer-sale-bg.jpg',
-        'logo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/promos/july/singeo-summer-sale-logo.svg',
-        'logoStyles' => '-mb-3',
-        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
-        'promoText' => 'SAVE UP TO 74% UNTIL JULY 31ST!',
-    ])
-    @endif
-
     @php
         $bubble1 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/hailey-benedict.png';
         $bubble2 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/lisa-witt.png';

@@ -46,8 +46,11 @@
         <br>
         <h4 class="text-promo"><strong>ONLY</strong> <s class="opacity-60">$1726</s> <strong>$720</strong> (Save 58%)</h4>
         <br>
-        <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96 mb-2" href="/ecommerce/add-to-cart?locked=true&product-array=pianote_access_5-years:1,classical-piano-pieces:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,new-piano-players-start-here:1,easy-chords:1,piano-technique-made-easy:1,the-power-of-chords:1,worship-piano:1,piano-riffs-and-fills:1,destupefy-your-left-hand:1,faster-fingers:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1">
-            get started &raquo;
+{{--        <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96 mb-2" href="/ecommerce/add-to-cart?locked=true&product-array=pianote_access_5-years:1,classical-piano-pieces:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,new-piano-players-start-here:1,easy-chords:1,piano-technique-made-easy:1,the-power-of-chords:1,worship-piano:1,piano-riffs-and-fills:1,destupefy-your-left-hand:1,faster-fingers:1,jesus-molina-improvisation-and-musical-freedom-pack:1,play-beautiful-piano:1">--}}
+{{--            get started &raquo;--}}
+{{--        </a>--}}
+        <a class="join sold-out smaller w-full max-w-sm md:w-96 mb-2">
+            SOLD OUT
         </a>
         <br>
         <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
