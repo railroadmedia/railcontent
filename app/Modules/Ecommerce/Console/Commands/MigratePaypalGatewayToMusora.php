@@ -31,11 +31,14 @@ class MigratePaypalGatewayToMusora extends Command
                 ->orderBy('id')
                 ->where('id', '>=', $userId)
                 ->where('id', '<=', $toUserId)
-                ->whereIn('payment_gateway_name', ['drumeo', 'pianote', 'guitareo', 'singeo']);
+                ->whereIn('payment_gateway_name', ['drumeo', 'pianote', 'guitareo', 'singeo', 'musora']);
             $totalCount = $query->count();
             $this->info("Total agreements: " . $totalCount);
             $query->chunk(1000, function ($items) {
                 foreach ($items as $item) {
+                    if($item->payment_gateway_name == 'musora'){
+                        continue;
+                    }
                     $this->totalCount++;
                     $this->info("Processing agreement: $item->id $item->payment_gateway_name -> musora");
                     $item->legacy_payment_gateway_name = $item->payment_gateway_name;
