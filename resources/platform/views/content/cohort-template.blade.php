@@ -202,9 +202,9 @@
                 ])
             @endforeach
             {{--  Bottom title  --}}
-            <h3 class="tw-font-extrabold tw-text-center tw-mt-10">Limited Time Only – Save Your Spot Now</h3>
+            <h3 class="tw-font-extrabold tw-text-center tw-mt-10">{{ $cohort['bottom_title'] }}</h3>
             {{--  Bottom description  --}}
-            <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">Classes start on September 4</p>
+            <p class="tw-font-bold tw-text-center tw-mt-4 tw-mb-6">{{ $cohort['bottom_description'] }}</p>
             <div class="tw-max-w-[415px] md:tw-max-w-xl tw-mx-auto tw-flex tw-flex-col md:tw-flex-row md:tw-gap-2 tw-mb-4 tw-justify-center">
                 {{--  Buttons  --}}
                 @if($hasProduct)
