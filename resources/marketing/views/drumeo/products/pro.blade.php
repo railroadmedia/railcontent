@@ -18,22 +18,21 @@
 
 @section('scripts')
     @parent
-    <script>
-        $(document).ready(function () {
-            $(document).foundation();
-        });
-    </script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 @stop()
+
+@section('body-data')
+    x-data="{ trailer: false, contact: false }"
+@endsection
 
 @section('content')
     @if(strpos(url()->full(), 'error'))
         <div class="thank-you-banner error text-center">
             <h3><strong>Oops!</strong></h3>
             <p>Please go back and make sure you check the security CAPTCHA box.<br>
-                <a data-open="contact" style="color:inherit"><u>Retry &raquo;</u></a></p>
+                <a @click="contact = true;" style="color:inherit"><u>Retry &raquo;</u></a></p>
         </div>
     @endif
     @if(strpos(url()->full(), 'sent'))
@@ -51,60 +50,67 @@
                 <span>LEARN<br> MORE</span>
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png">
             </div>
-            <img data-open="previewModal" class="play-button autoplay-video animated infinite pulse delay-2s slower" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png">
+            <img @click="trailer = true;" class="play-button autoplay-video animated infinite pulse delay-2s slower" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png">
             <h1><strong>The easier way to sell<br class="hide-for-medium">  drum lessons.</strong></h1>
             <h4>We’re partnering with drum teachers and content creators to bring your ideas to life — giving you<br class="show-for-large">
                 access to a global audience of drum students who already know and love digital lessons. </h4>
             <a href="https://musora.typeform.com/to/WjlCOG" class="join blue">Apply Now &raquo;</a><br>
-            <a data-open="contact" class="join blue smaller outline">Contact Us</a>
+            <a @click="contact = true;" class="join blue smaller outline">Contact Us</a>
         </div>
     </header>
 
-    <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-        <div class="flex-video widescreen vimeo">
-            <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/425675984?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-    </div>
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '425675984',
+        'vimeo' => true,
+    ])
 
-    <div class="reveal large text-center contact" id="contact" data-reveal data-reset-on-close="false">
-        <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drumeo-pro/drumeo-pro-logo-black.png">
-        <p class="headline">If you’re interested in Drumeo Pro but have questions, <br class="show-for-medium">
-            please use the form below to send a detailed message to our team.</p>
-        <form id="ajaxForm" class="ajax-form" name="drumeo" method="post" action="/form-mail/drumeo-pro.php">
-        <input type="hidden" name="subject" value="Drumeo Pro Contact"/>
-        <input type="hidden" name="redirect" value="/pro?sent"/>
-            <input name="name" type="text" placeholder="Name"/>
-            <input name="email" type="email" placeholder="Email Address" required/>
-            <input name="phone" type="tel" placeholder="Phone Number"/>
-            <div class="blue-background text-left">
-                <p><strong>Select the topic that relates to you:</strong></p>
-                <label for="productReady"><input type="radio" name="topic" id="productReady" value="Product Ready">
-                I have a product ready that I’d like to sell through Drumeo PRO</label>
+    @component('_partials.components.modal',[
+        'name' => 'contact',
+    ])
+        @slot('content')
+            <div class="relative overflow-y-visible max-w-3xl px-4 md:px-5 lg:px-7 py-5 md:py-7 lg:py-10 text-black bg-white mx-auto rounded-xl shadow-lg text-center">
+                <img class="logo h-7 md:h-12 lg:h-14" src="https://dpwjbsxqtam5n.cloudfront.net/drumeo-pro/drumeo-pro-logo-black.png">
+                <p class="my-4 md:my-5 lg:my-6 text-sm md:text-base">If you’re interested in Drumeo Pro but have questions, <br class="show-for-medium">
+                    please use the form below to send a detailed message to our team.</p>
+                <form id="ajaxForm" class="ajax-form" name="drumeo" method="post" action="/form-mail/drumeo-pro.php">
+                    <input type="hidden" name="subject" value="Drumeo Pro Contact"/>
+                    <input type="hidden" name="redirect" value="/pro?sent"/>
+                    <input class="rounded-full text-center" name="name" type="text" placeholder="Name"/>
+                    <input class="rounded-full text-center" name="email" type="email" placeholder="Email Address" required/>
+                    <input class="rounded-full text-center" name="phone" type="tel" placeholder="Phone Number"/>
+                    <div class="mb-4 text-left py-2 px-4 rounded-xl" style="background:#e3effa;">
+                        <p><strong>Select the topic that relates to you:</strong></p>
+                        <label for="productReady"><input type="radio" name="topic" id="productReady" value="Product Ready">
+                            I have a product ready that I’d like to sell through Drumeo PRO</label>
 
-                <label for="productIdea"><input type="radio" name="topic" id="productIdea" value="Product Idea">
-                I have a product idea that I’d like to create for Drumeo PRO</label>
+                        <label for="productIdea"><input type="radio" name="topic" id="productIdea" value="Product Idea">
+                            I have a product idea that I’d like to create for Drumeo PRO</label>
 
-                <label for="general"><input type="radio" name="topic" id="general" value="General Question">
-                I’m interested in Drumeo PRO but have some questions</label>
+                        <label for="general"><input type="radio" name="topic" id="general" value="General Question">
+                            I’m interested in Drumeo PRO but have some questions</label>
 
-                <label for="other"><input type="radio" name="topic" id="other" value="Other">
-                Other</label>
+                        <label for="other"><input type="radio" name="topic" id="other" value="Other">
+                            Other</label>
+                    </div>
+                    <textarea class="rounded-full text-center mb-4" name="message" placeholder="How can we help you?" rows="3"></textarea>
+                    <div class="g-recaptcha" data-sitekey="6LcBSxYUAAAAANEVgiFM3kmHOjzbcrkspWBtQd9n"></div>
+                    <button class="button join blue w-full h-12 justify-center items-center" type="submit" style="display: flex;">
+                        <span class="pre-add"><i class="fad fa-paper-plane"></i> Send</span>
+                        <span class="pending hide"><i class="fad fa-spinner-third fa-spin"></i> Sending</span>
+                        <span class="success hide"><i class="fad fa-thumbs-up"></i> Sent</span>
+                        <span class="fail hide"><i class="fad fa-exclamation-triangle"></i> Oops</span>
+                    </button>
+                </form>
+                @include('drumeo.lead-gen.partials.thank-you-box', [
+                    "headline" => "SENT",
+                    "body" => "We’ve received your message and will respond as soon as possible!",
+                    "noSocial" => true
+                ])
             </div>
-            <textarea name="message" placeholder="How can we help you?" rows="3"></textarea>
-            <div class="g-recaptcha" data-sitekey="6LcBSxYUAAAAANEVgiFM3kmHOjzbcrkspWBtQd9n"></div>
-            <button class="button join" type="submit">
-                <span class="pre-add"><i class="fad fa-paper-plane"></i> Send</span>
-                <span class="pending hide"><i class="fad fa-spinner-third fa-spin"></i> Sending</span>
-                <span class="success hide"><i class="fad fa-thumbs-up"></i> Sent</span>
-                <span class="fail hide"><i class="fad fa-exclamation-triangle"></i> Oops</span>
-            </button>
-        </form>
-        @include('drumeo.lead-gen.partials.thank-you-box', [
-            "headline" => "SENT",
-            "body" => "We’ve received your message and will respond as soon as possible!",
-            "noSocial" => true
-        ])
-    </div>
+        @endslot
+    @endcomponent
+
 
     <section class="better-way" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drumeo-pro/just-teach-background.jpg);">
         <div class="row">
@@ -247,7 +253,7 @@
             <div class="columns logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/drumeo-pro/drumeo-pro-logo.png"></div>
             <h2 class="columns"><strong>Interested? The first step is one click away...</strong></h2>
             <a href="https://musora.typeform.com/to/WjlCOG" class="join blue">Apply Now &raquo;</a><br>
-            <a data-open="contact" class="join blue smaller outline">Contact Us</a>
+            <a @click="contact = true;" class="join blue smaller outline">Contact Us</a>
             <div class="columns questions">
                 <p><strong>Any questions?</strong><br class="hide-for-medium"> Call us toll-free at
                     <a href="tel:+18004398921">1-800-439-8921</a> <br class="hide-for-medium"> or directly at

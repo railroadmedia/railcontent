@@ -23,8 +23,6 @@
     @parent
     <script>
         $(document).ready(function () {
-            $(document).foundation();
-
             // Dropdown for FAQ section
             $('.question-dropdown').on('click', questionDropdown);
 
@@ -38,8 +36,11 @@
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
 
-@section('content')
+@section('body-data')
+    x-data="{ trailerOne: false, trailerTwo: false }"
+@endsection
 
+@section('content')
     @include('drumeo.products.partials.promo-banner', [
                 "name" => "Electrify Your Drumming",
                 "fullPrice" => floatval($productPrices['electrify-your-drumming']->price),
@@ -51,7 +52,7 @@
         <div class="row">
             <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/electrify-your-drumming/logo.png" alt="Electrify your drumming logo">
             <br>
-            <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
+            <i @click="trailerOne = true;" class="fas fa-play play-button autoplay-video"></i>
             <h1>The ultimate guide to playing<br>
                 <strong>electronic dance music</strong> on the drums.</h1>
             <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>
@@ -71,12 +72,17 @@
         </div>
     </header>
 
-    <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-        <div class="flex-video widescreen vimeo">
-            <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/454835085?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-        <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>
-    </div>
+    @component('_partials.components.video-modal',[
+        'name' => 'trailerOne',
+        'video' => '454835085',
+        'vimeo' => true,
+    ])
+        @slot('button')
+            <div class="text-center bg-white rounded-b-xl py-4">
+                <a href="/ecommerce/add-to-cart?products[electrify-your-drumming]=1" class="join blue">Get Started &raquo;</a>
+            </div>
+        @endslot
+    @endcomponent
 
     <section class="power-outage text-center">
         <div class="triangle-bg" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/electrify-your-drumming/power-outage-triangle.png);"></div>
@@ -354,7 +360,7 @@
             <h1 class="permanent">MICHAEL SCHACK</h1>
             <h2 class="permanent"><span class="text-yellow">THE MAD SCIENTIST<br class="hide-for-medium"> OF ENERGY</span></h2>
             <br>
-            <i data-open="bioModal" class="fas fa-play play-button autoplay-video"></i>
+            <i @click="trailerTwo = true;" class="fas fa-play play-button autoplay-video"></i>
             <div class="bio">
                 <p>Michael Schack has done it all. He’s played massive festival stages, small clubs, and concert venues around the world. He’s crushed it online with jaw-dropping performances on YouTube and entertaining mashup mixes and singles on Spotify.
                 <br><br>
@@ -364,11 +370,12 @@
             </div>
         </div>
     </section>
-    <div class="reveal large text-center" id="bioModal" data-reveal data-reset-on-close="false">
-        <div class="flex-video widescreen vimeo">
-            <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/455069256?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-    </div>
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailerTwo',
+        'video' => '455069256',
+        'vimeo' => true,
+    ])
 
     <section class="icon-grid text-center">
         <div class="triangle-bg" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/electrify-your-drumming/everything-you-need.png);"></div>

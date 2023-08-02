@@ -17,17 +17,13 @@
 
 @section('scripts')
     @parent
-
-    <script>
-        $(document).ready(function () {
-
-            $(document).foundation();
-        });
-    </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 @stop()
+
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
 
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
@@ -41,7 +37,7 @@
             <img class="px-4 w-auto max-h-20 mx-auto" src="https://dpwjbsxqtam5n.cloudfront.net/tripwires/sd/sd-logo.png" alt="Successful drumming logo">
 
             <div class="float-left w-full px-3 sm:px-4 video-container">
-                <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
+                <i @click="trailer = true;" class="fas fa-play play-button autoplay-video"></i>
             </div>
             <div class="float-left w-full px-3 sm:px-4 text-container">
                 <div class="course-logo">
@@ -63,13 +59,13 @@
                 </p>
             </div>
         </div>
-
-        <div class="reveal large" id="previewModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/275665270?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-        </div>
     </header>
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '275665270',
+        'vimeo' => true,
+    ])
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-6xl mx-auto">
