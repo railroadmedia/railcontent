@@ -70,7 +70,14 @@ class SyncStripePaymentMethods extends Command
     ) {
         $this->info("Migrating stripe user to musora: " . $stripeCustomer->user_id);
 
-        $stripeData = $this->stripePaymentGateway->listCreditCards('musora', $stripeCustomer->stripe_customer_id);
+        try {
+            $stripeData = $this->stripePaymentGateway->listCreditCards('musora', $stripeCustomer->stripe_customer_id);
+        }
+        catch(\Exception $exception){
+            $this->error("Error getting stripe data for user: " . $stripeCustomer->user_id);
+            $this->error($exception->getMessage());
+            return;
+        }
 
         $creditCardLookupByCard = collect(
             $creditCardLookup->get($stripeCustomer->stripe_customer_id) ?? new Collection()
