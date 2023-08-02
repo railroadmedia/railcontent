@@ -30,10 +30,10 @@
                     <h2 class="tw-font-normal tw-text-2xl lg:tw-text-3xl">{{ $cohort['subheadline'] }}</h2>
                     {{--  Header description  --}}
                     <p class="tw-font-bold tw-mt-4 lg:tw-mt-6 tw-mb-2">{{ $cohort['header_description'] }}</p>
-                    <div class="tw-mb-7 lg:tw-mb-9 tw-flex tw-justify-between sm:tw-justify-center lg:tw-justify-start tw-max-w-md sm:tw-max-w-none tw-mx-auto">
-                        <div class="md:tw-flex sm:tw-mr-4 md:tw-mr-1 lg:tw-mr-2"><i class="fas fa-check tw-text-{{ $brand }} tw-mt-1 tw-mr-1" aria-hidden="true"></i><br class="md:tw-hidden"> <span class="tw-text-sm lg:tw-text-base">{{ $cohort['benefit_1'] }}</span></div>
-                        <div class="md:tw-flex sm:tw-mr-4 md:tw-mr-1 lg:tw-mr-2 tw-px-2 sm:tw-px-0"><i class="fas fa-check tw-text-{{ $brand }} tw-mt-1 tw-mr-1" aria-hidden="true"></i><br class="md:tw-hidden"> <span class="tw-text-sm lg:tw-text-base">{{ $cohort['benefit_2'] }}</span></div>
-                        <div class="md:tw-flex"><i class="fas fa-check tw-text-{{ $brand }} tw-mt-1 tw-mr-1" aria-hidden="true"></i><br class="md:tw-hidden"> <span class="tw-text-sm lg:tw-text-base">{{ $cohort['benefit_3'] }}</span></div>
+                    <div class="tw-mb-7 lg:tw-mb-9 tw-flex tw-justify-between sm:tw-justify-center md:tw-justify-start tw-max-w-md sm:tw-max-w-none tw-mx-auto">
+                        <div class="md:tw-flex sm:tw-mr-4 md:tw-mr-2"><i class="fas fa-check tw-text-{{ $brand }} tw-mt-1 tw-mr-1" aria-hidden="true"></i><br class="md:tw-hidden"> <span class="tw-text-sm">{{ $cohort['benefit_1'] }}</span></div>
+                        <div class="md:tw-flex sm:tw-mr-4 md:tw-mr-2 tw-px-2 sm:tw-px-0"><i class="fas fa-check tw-text-{{ $brand }} tw-mt-1 tw-mr-1" aria-hidden="true"></i><br class="md:tw-hidden"> <span class="tw-text-sm">{{ $cohort['benefit_2'] }}</span></div>
+                        <div class="md:tw-flex"><i class="fas fa-check tw-text-{{ $brand }} tw-mt-1 tw-mr-1" aria-hidden="true"></i><br class="md:tw-hidden"> <span class="tw-text-sm">{{ $cohort['benefit_3'] }}</span></div>
                     </div>
                     {{--  Mobile Header Image --}}
                     <div class="tw-relative md:tw-hidden">
