@@ -23,13 +23,18 @@
             <div class="md:tw-flex tw-items-center tw-gap-6 tw-mb-12 tw-text-center md:tw-text-left">
                 <div class="md:tw-flex-1">
                     {{--  Header logo  --}}
-                    <img class="tw-h-14 sm:tw-h-18 lg:tw-h-20 tw-mb-2 tw-inline-block " alt="header logo" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/{{ $cohort['light_mode_logo']??'' }}" />
+                    <img class="tw-h-20 sm:tw-h-20 lg:tw-h-28 tw-mb-2 tw-inline-block " alt="header logo" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/{{ $cohort['light_mode_logo']??'' }}" />
                     {{--  Headline  --}}
                     <h1 class="tw-font-extrabold tw-text-3xl lg:tw-text-4xl">{{ $cohort['headline'] }}</h1>
                     {{--  Subheadline  --}}
                     <h2 class="tw-font-normal tw-text-2xl lg:tw-text-3xl">{{ $cohort['subheadline'] }}</h2>
                     {{--  Header description  --}}
-                    <p class="tw-font-bold tw-mt-4 lg:tw-mt-6 tw-mb-7 lg:tw-mb-9">{{ $cohort['header_description'] }}</p>
+                    <p class="tw-font-bold tw-mt-4 lg:tw-mt-6 tw-mb-2">{{ $cohort['header_description'] }}</p>
+                    <div class="tw-mb-7 lg:tw-mb-9 tw-flex tw-justify-between sm:tw-justify-center lg:tw-justify-start tw-max-w-md sm:tw-max-w-none tw-mx-auto">
+                        <div class="md:tw-flex sm:tw-mr-4 md:tw-mr-1 lg:tw-mr-2"><i class="fas fa-check tw-text-{{ $brand }} tw-mt-1 tw-mr-1" aria-hidden="true"></i><br class="md:tw-hidden"> <span class="tw-text-sm lg:tw-text-base">{{ $cohort['benefit_1'] }}</span></div>
+                        <div class="md:tw-flex sm:tw-mr-4 md:tw-mr-1 lg:tw-mr-2 tw-px-2 sm:tw-px-0"><i class="fas fa-check tw-text-{{ $brand }} tw-mt-1 tw-mr-1" aria-hidden="true"></i><br class="md:tw-hidden"> <span class="tw-text-sm lg:tw-text-base">{{ $cohort['benefit_2'] }}</span></div>
+                        <div class="md:tw-flex"><i class="fas fa-check tw-text-{{ $brand }} tw-mt-1 tw-mr-1" aria-hidden="true"></i><br class="md:tw-hidden"> <span class="tw-text-sm lg:tw-text-base">{{ $cohort['benefit_3'] }}</span></div>
+                    </div>
                     {{--  Mobile Header Image --}}
                     <div class="tw-relative md:tw-hidden">
                         <img
@@ -173,9 +178,6 @@
                     loading="lazy"
                     onload="this.classList.remove('tw-opacity-0')"
                 />
-                <div class="tw-absolute tw-inset-0 tw-flex tw-justify-center tw-items-center">
-                    <i class="fa-regular fa-play tw-z-10 tw-border-white tw-border-4 tw-text-white tw-py-3 md:tw-py-6 tw-pl-5 md:tw-pl-8 tw-pr-4 md:tw-pr-6 tw-rounded-full tw-text-3xl md:tw-text-5xl tw-bg-[rgba(0,0,0,0.2)]"></i>
-                </div>
             </div>
             {{--  Body logo  --}}
             <img
