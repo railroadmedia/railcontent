@@ -557,7 +557,8 @@
 @stop
 
 @section('scripts')
-
+    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script>
         $(document).ready(function () {
             $(document).foundation();
