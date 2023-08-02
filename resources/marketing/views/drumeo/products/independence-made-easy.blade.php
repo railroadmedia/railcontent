@@ -444,9 +444,9 @@
                 </tbody>
             </table>
             <p class="columns">
-                <strong>You can unlock the full 26-week course today</strong> to get Jared Falk’s best advice for improving your independence on the drums -- <u>all for just ${{ round(floatval($productPrices['independence-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }} for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Jared Falk’s best advice for improving your independence on the drums — <u>all for just ${{ round(floatval($productPrices['independence-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['independence-made-easy-pack']->discounted_price), 2 }} for the entire course).
                 <br><br>
-                You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
+                You can choose a one-time payment, a two-payment plan, or a five-payment plan — and the entire course is yours for life with no recurring subscription or additional fees.
 
             </p>
         </div>
@@ -517,7 +517,7 @@
                 @include('_partials.components.question-dropdown', [
                 "num" => "?",
                 "title" => "What if I can’t follow the lessons EVERY week?",
-                "desc" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You’ll have lifetime access to the entire course so you’ll never lose your spot -- and you can continue whenever it’s most convenient for you."
+                "desc" => "You’ll get 26 weekly lessons and exercises. And while they’re intended to be completed week-after-week, we know that everybody’s schedules are different - so we’ve included progress-tracking so you never lose your spot. If you need to miss a week, that’s fine! You’ll have lifetime access to the entire course so you’ll never lose your spot — and you can continue whenever it’s most convenient for you."
                 ])
                 @include('_partials.components.question-dropdown', [
                 "num" => "?",

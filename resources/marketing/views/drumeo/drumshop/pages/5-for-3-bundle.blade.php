@@ -46,8 +46,11 @@
         <br>
         <h4 class="text-promo"><strong>ONLY</strong> <s class="opacity-60">$2270</s> <strong>$720</strong> (Save 68%)</h4>
         <br>
-        <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96 mb-2" href="/ecommerce/add-to-cart?locked=true&product-array=drumeo_access_5-years:1,drumeo-eardrums:1,Drumeo-VaterSticks:6,SD-DIGI:1,rock-drumming-masterclass-pack:1,drum-technique-made-easy-pack:1,independence-made-easy-pack:1,learn-songs-faster-pack:1,electrify-your-drumming:1,MAM-DIGI:1,TLOD-DIGI:1,GHFAL-DIGI:1,HGAF-DIGI:1,ICM-DIGI:1,CC-DIGI:1,TG-DIGI:1,BTC-DIGI:1,AOADS-DIGI:1">
-            get started &raquo;
+{{--        <a class="join bg-[#24CE7C] smaller w-full max-w-sm md:w-96 mb-2" href="/ecommerce/add-to-cart?locked=true&product-array=drumeo_access_5-years:1,drumeo-eardrums:1,Drumeo-VaterSticks:6,SD-DIGI:1,rock-drumming-masterclass-pack:1,drum-technique-made-easy-pack:1,independence-made-easy-pack:1,learn-songs-faster-pack:1,electrify-your-drumming:1,MAM-DIGI:1,TLOD-DIGI:1,GHFAL-DIGI:1,HGAF-DIGI:1,ICM-DIGI:1,CC-DIGI:1,TG-DIGI:1,BTC-DIGI:1,AOADS-DIGI:1">--}}
+{{--            get started &raquo;--}}
+{{--        </a>--}}
+        <a class="join sold-out smaller w-full max-w-sm md:w-96 mb-2">
+            SOLD OUT
         </a>
         <br>
         <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">

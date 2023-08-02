@@ -19,7 +19,7 @@
 @section('lesson-description')
     <strong>Mission 1: Shampoo Ad Performance</strong>
     <br><br>
-    This is it! The moment you’ve been waiting for -- all of your hard work pays off and the advertisement comes to life.
+    This is it! The moment you’ve been waiting for — all of your hard work pays off and the advertisement comes to life.
     <br><br>
     Use the technique we studied in painstaking depth in the last video, and put it to work now. Your wallet depends on it!
     <br><br>

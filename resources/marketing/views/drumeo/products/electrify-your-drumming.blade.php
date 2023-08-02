@@ -104,7 +104,7 @@
             <div class="columns medium-4 emoji-point">
                 <i class="fal fa-drum text-yellow"></i>
                 <h3><strong>Energy-Building Fills</strong></h3>
-                <p><strong>Drum fills are used by producers every day to build energy</strong> before the drop or chorus of the song. And while they get to program it, WE need to play it. You’ll learn how to create effective risers with simple drum fills that start softly, build, and crescendo -- creating a powerful experience for your audience.</p>
+                <p><strong>Drum fills are used by producers every day to build energy</strong> before the drop or chorus of the song. And while they get to program it, WE need to play it. You’ll learn how to create effective risers with simple drum fills that start softly, build, and crescendo — creating a powerful experience for your audience.</p>
             </div>
             <div class="columns medium-4 emoji-point">
                 <i class="fal fa-hands text-yellow"></i>
@@ -114,7 +114,7 @@
             <div class="columns medium-4 emoji-point">
                 <i class="fal fa-music text-yellow"></i>
                 <h3><strong>Musical Grooves</strong></h3>
-                <p><strong>Your hi-hat technique will determine the feel of your grooves</strong> -- and you’ll learn how to make effective adjustments between single strokes, ghost notes, and accents. PLUS you’ll get seven must-know hi-hat patterns to play on top of your kick & snare.</p>
+                <p><strong>Your hi-hat technique will determine the feel of your grooves</strong> — and you’ll learn how to make effective adjustments between single strokes, ghost notes, and accents. PLUS you’ll get seven must-know hi-hat patterns to play on top of your kick & snare.</p>
             </div>
         </div>
     </section>
@@ -125,7 +125,7 @@
                 <div class="text">
                     <h1 class="permanent"><span class="text-yellow">10</span> EDM<br>STYLES</h1>
                     <h4>Unlock 10 Styles Of Electronic Music</h4>
-                    <p>Electrify Your Drumming will teach you the tools and styles of electronic dance music -- so you can build energy with risers, lock-in with the vocals, add power to your beats and fills, create a climax in the music, and ultimately fuel any song with your playing -- giving you valuable skills that will apply to every style of music.</p>
+                    <p>Electrify Your Drumming will teach you the tools and styles of electronic dance music — so you can build energy with risers, lock-in with the vocals, add power to your beats and fills, create a climax in the music, and ultimately fuel any song with your playing — giving you valuable skills that will apply to every style of music.</p>
                 </div>
                 <div class="columns no-padding question-dropdown text-left">
                     <div class=" small-11  columns drop-down-wrap">
@@ -358,9 +358,9 @@
             <div class="bio">
                 <p>Michael Schack has done it all. He’s played massive festival stages, small clubs, and concert venues around the world. He’s crushed it online with jaw-dropping performances on YouTube and entertaining mashup mixes and singles on Spotify.
                 <br><br>
-                And more than a performer, he’s also a clinician and teacher who knows how to translate his insights to deliver practical results for students. He’s been nominated for several “Best Clinician/Demonstrator” awards as a touring clinician for Roland Drums -- and his instructional debut on Drumeo in 2013 went bonkers with 226,000 views. Since then, Michael’s become one of our most popular teachers -- creating more than 80 videos for Drumeo students on every topic you’d need to energize your performances.
+                And more than a performer, he’s also a clinician and teacher who knows how to translate his insights to deliver practical results for students. He’s been nominated for several “Best Clinician/Demonstrator” awards as a touring clinician for Roland Drums — and his instructional debut on Drumeo in 2013 went bonkers with 226,000 views. Since then, Michael’s become one of our most popular teachers — creating more than 80 videos for Drumeo students on every topic you’d need to energize your performances.
                 <br><br>
-                And now, the ULTIMATE SCHACK PACK is here -- giving you direct access to the mad scientist of energy so your drumming will always make a lasting impression.</p>
+                And now, the ULTIMATE SCHACK PACK is here — giving you direct access to the mad scientist of energy so your drumming will always make a lasting impression.</p>
             </div>
         </div>
     </section>
@@ -375,7 +375,7 @@
         <div class="row">
             <h1 class="permanent"><span class="text-yellow">EVERYTHING</span><br>YOU NEED</h1>
             <h2><strong>The Ultimate Guide To Playing Electronic Music</strong></h2>
-            <p>Electrify Your Drumming is loaded with 84 videos and 11 hours of content -- the ultimate guide<br class="show-for-large">
+            <p>Electrify Your Drumming is loaded with 84 videos and 11 hours of content — the ultimate guide<br class="show-for-large">
                 to electronic drums that’ll help you turn EVERY performance into an unforgettable show!</p>
 
             <div class="columns medium-6 large-4 circle-point">
@@ -406,7 +406,7 @@
             <div class="columns medium-6 large-4 circle-point">
                 <i class="fas text-white border-yellow fa-users"></i>
                 <p><strong class="text-yellow permanent">PERSONAL SUPPORT</strong><br>
-                    Join a community of students & teachers -- ask questions, share your successes, and have fun!</p>
+                    Join a community of students & teachers — ask questions, share your successes, and have fun!</p>
             </div>
         </div>
     </section>

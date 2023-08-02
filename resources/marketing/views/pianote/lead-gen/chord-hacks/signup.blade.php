@@ -1,12 +1,19 @@
-@extends('pianote.lead-gen.chord-hacks.chord-hacks-layout')
+@extends('pianote.lead-gen.lead-gen-layout-tw')
 
 @section('meta')
     @parent
     <title>Chord Hacks | Pianote</title>
-@stop()
+    <meta property="og:title" content="Chord Hacks">
+
+    <meta name="description" content="The easiest way to learn beautiful piano chords.">
+    <meta property="og:description" content="The easiest way to learn beautiful piano chords.">
+    <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/share-image.jpg" style="display: none;">
+    <meta property="og:url" content="https://www.pianote.com/chord-hacks">
+@endsection
 
 @section('head')
     @parent
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
     <style>
         header .disclaimer {
             display: none;
@@ -28,7 +35,7 @@
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-2"><strong>Sign up for 5 FREE play-along lessons</strong></h6>
 
-                    <div class="mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
+                    <div class="mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/header-image-m.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -57,7 +64,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="relative bg-contain bg-top cursor-hover autoplay-video" style="padding-bottom: 102%;" data-open="trailer">
+                    <div class="relative bg-contain bg-top cursor-pointer autoplay-video" style="padding-bottom: 102%;" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/header-image.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -166,7 +173,7 @@
             <img class="h-56 inline sm:hidden transition-all opacity-0 mb-5" src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/2023/dont-practice-play.png" alt="collage intro" loading="lazy" onload="this.classList.remove('opacity-0')">
             <div class="text-left flex flex-wrap sm:flex-nowrap items-center">
                 <div class=" max-w-lg sm:pr-7">
-                    <h2 class="mb-3 sm:mb-7"><strong>Don’t practice -- PLAY!</strong></h2>
+                    <h2 class="mb-3 sm:mb-7"><strong>Don’t practice — PLAY!</strong></h2>
                     <p class="leading-normal">Practice makes perfect. But it also makes you question your sanity.
                         <br><br>
                         You’re on your own. It’s repetitive. It doesn’t sound good. And it’s hard.

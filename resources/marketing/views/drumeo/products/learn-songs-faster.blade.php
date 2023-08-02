@@ -75,14 +75,14 @@
                 <i class="far fa-video text-blue"></i>
                 <h3 class="dense"><strong>PLAY MORE SONGS</strong></h3>
                 <p><em class="text-blue">With A 75-Minute Video Masterclass.</em><br>
-                    You’ll get access to a 75-minute video masterclass with Jared Falk & Dave Atkinson where they’ll give you their best advice for learning to play songs on the drums -- from active listening that’ll help you hear phrasing and understand song structure, to building effective grooves and fills, and keeping time so your playing always sounds ‘right’.
+                    You’ll get access to a 75-minute video masterclass with Jared Falk & Dave Atkinson where they’ll give you their best advice for learning to play songs on the drums — from active listening that’ll help you hear phrasing and understand song structure, to building effective grooves and fills, and keeping time so your playing always sounds ‘right’.
                 </p>
             </div>
             <div class="columns medium-6">
                 <i class="far fa-shield-check text-blue"></i>
                 <h3 class="dense"><strong>100% GUARANTEED</strong></h3>
                 <p><em class="text-blue">Try Risk-Free For 90-Days</em><br>
-                    The ability to quickly & accurately learn songs is one of the most valuable skills for drummers -- for playing alone or in a band. It's also a very learnable skill that you can acquire through the techniques in this course. We're so confident you'll love these lessons, and the impact on your playing, that you'll get a 90-day money-back guarantee.
+                    The ability to quickly & accurately learn songs is one of the most valuable skills for drummers — for playing alone or in a band. It's also a very learnable skill that you can acquire through the techniques in this course. We're so confident you'll love these lessons, and the impact on your playing, that you'll get a 90-day money-back guarantee.
                 </p>
             </div>
         </div>
@@ -101,7 +101,7 @@
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/dave-atkinson.jpg" alt="Dave Atkinson">
                 <h3 class="dense"><strong>Dave Atkinson</strong></h3>
                 <p><em class="text-grey">TEACHING FOR {{ date('Y') - 2006 }} YEARS</em><br>
-                    Dave Atkinson has been working with students and teachers at FreeDrumLessons.com and Drumeo.com since 2006 -- teaching video lessons, hosting online events, and working alongside many of the world’s best drummers. Dave is one of the rare teachers in the world who has been directly responding to students every single day for the past 14 years -- making him uniquely qualified on the problems that drummers face and the best ways to overcome them.
+                    Dave Atkinson has been working with students and teachers at FreeDrumLessons.com and Drumeo.com since 2006 — teaching video lessons, hosting online events, and working alongside many of the world’s best drummers. Dave is one of the rare teachers in the world who has been directly responding to students every single day for the past 14 years — making him uniquely qualified on the problems that drummers face and the best ways to overcome them.
                 </p>
             </div>
         </div>
@@ -141,7 +141,7 @@
                         <h1>THE DOWNBEAT</h1>
                     </div>
                     <p>
-                        The downbeat is usually known as the “1” count to each bar in the song. It sets up and finishes phrases. Here, you’ll learn how to create a solid downbeat -- and paired with a backbeat, you’ll be able to play almost any tune!
+                        The downbeat is usually known as the “1” count to each bar in the song. It sets up and finishes phrases. Here, you’ll learn how to create a solid downbeat — and paired with a backbeat, you’ll be able to play almost any tune!
                     </p>
                 </div>
                 <div class="columns half-padding">
@@ -149,7 +149,7 @@
                         <h1>BETTER FEEL</h1>
                     </div>
                     <p>
-                        You don’t need to play songs note-for-note. A song is organic: it lives and breathes. Here, you’ll learn why understanding the feel is more important than the exact beats that are being played -- and how to lock in with the music.
+                        You don’t need to play songs note-for-note. A song is organic: it lives and breathes. Here, you’ll learn why understanding the feel is more important than the exact beats that are being played — and how to lock in with the music.
                     </p>
                 </div>
                 <div class="columns half-padding">
@@ -173,7 +173,7 @@
                         <h1>FINE TUNING</h1>
                     </div>
                     <p>
-                        Once you can play the entire song at a basic level, it’s time to put the final touches on your grooves and fills. You’ll learn how to listen to key patterns and replicate them -- adding the right ghost notes and bass patterns.
+                        Once you can play the entire song at a basic level, it’s time to put the final touches on your grooves and fills. You’ll learn how to listen to key patterns and replicate them — adding the right ghost notes and bass patterns.
                     </p>
                 </div>
             </div>

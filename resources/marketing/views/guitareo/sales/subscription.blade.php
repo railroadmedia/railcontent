@@ -151,16 +151,6 @@
         ])
     @endif
 
-    @if(empty($trialVersion))
-    @include('_partials.components.promo-top-banner',[
-        'bg' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-shop-summer-sale-bg.jpg',
-        'logo' => 'https://d122ay5chh2hr5.cloudfront.net/sales/promos/july/guitareo-summer-sale-logo.svg',
-        'logoStyles' => 'mb-3',
-        'title' => 'DEALS ON LESSONS, ACCESSORIES AND MORE!',
-        'promoText' => 'SAVE UP TO 91% UNTIL JULY 31ST!',
-    ])
-    @endif
-
     @php
         $bubble1 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/rob-scallon.png';
         $bubble2 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/ayla-tesler-mabe.png';
@@ -525,7 +515,7 @@
             ],
             [
             'title' => "I’ve started making my own melodies.",
-            'description' => "Guitareo has been fun and motivated me to try more. I like how we start making melodies quickly along with helpful background information on chords and notes. I love seeing other students post their melodies -- it’s so much fun to listen to others!",
+            'description' => "Guitareo has been fun and motivated me to try more. I like how we start making melodies quickly along with helpful background information on chords and notes. I love seeing other students post their melodies — it’s so much fun to listen to others!",
             'name' => 'Jan M',
             'image' => 'https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/jan-berlin-germany.jpg',
             'location' => 'Germany',

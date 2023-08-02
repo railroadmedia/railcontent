@@ -166,7 +166,7 @@
                 <div class="flex items-start w-full sm:w-1/2 p-4">
                     <img class="h-12" src="https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/loading_icon.svg">
                     <p class="pl-5 mt-2"><strong class="font-black">Faster load times across the site</strong><br>
-                        Attention spans are shorter than ever -- and our new site now loads faster to keep up!</p>
+                        Attention spans are shorter than ever — and our new site now loads faster to keep up!</p>
                 </div>
                 <div class="flex items-start w-full sm:w-1/2 p-4">
                     <img class="h-12" src="https://d3fzm1tzeyr5n3.cloudfront.net/musora/homepage/dark_icon.svg">

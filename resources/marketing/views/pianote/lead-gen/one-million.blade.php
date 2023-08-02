@@ -191,7 +191,7 @@
                 <li>5 Chords & Scales Books</li>
             </ul>
 
-            <p>Enter your information at the top of this page to be entered into the random draws we’ll be doing throughout the live stream. The winners will be contacted immediately after -- it’s that simple.</p>
+            <p>Enter your information at the top of this page to be entered into the random draws we’ll be doing throughout the live stream. The winners will be contacted immediately after — it’s that simple.</p>
 
             <br><br>
             <a target="_blank" href="https://youtu.be/yRdOLuLz2I0" class="join blue smaller">1 MILLION SUBSCRIBERS PARTY</a>

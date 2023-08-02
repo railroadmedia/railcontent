@@ -29,7 +29,7 @@
 
 @section('biography')
     <h1>Gain a clearer vision for your goals and purpose as a drummer.</h1>
-    <p>Jared Falk is the Co-Founder and CEO of Drumeo -- and a respected educator whose video drum lessons have been watched by millions of drummers around the world.
+    <p>Jared Falk is the Co-Founder and CEO of Drumeo — and a respected educator whose video drum lessons have been watched by millions of drummers around the world.
         <br><br>
         But in this course, it’s not about the beats, fills, or techniques. While you’ll jump behind your kit for some of the ideas and exercises, the bigger focus is having a vision for your playing, finding the time to make that vision a reality, and maintaining momentum so you truly become a better musician.
     </p>

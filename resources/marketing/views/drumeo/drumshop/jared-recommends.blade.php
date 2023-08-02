@@ -5,8 +5,8 @@
     <title>Jared's Top Gear Picks | Drumeo</title>
     <meta property="og:title" content="Jared's Top Gear Picks | Drumeo">
 
-    <meta name="description" content="You can peruse Jared’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views -- and gotten the Drumeo stamp of approval!">
-    <meta property="og:description" content="You can peruse Jared’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views -- and gotten the Drumeo stamp of approval!">
+    <meta name="description" content="You can peruse Jared’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views — and gotten the Drumeo stamp of approval!">
+    <meta property="og:description" content="You can peruse Jared’s top gear recommendations with confidence, knowing they’ve passed the test of millions of YouTube views — and gotten the Drumeo stamp of approval!">
 
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/affiliate-share.jpg">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">

@@ -340,7 +340,7 @@
                         <br><br>
                         You’ll leave knowing how to structure your practice times to reach your goals, and you’ll have a planned template to follow.
                         <br><br>
-                        Best of all -- it’s 100% FREE.
+                        Best of all — it’s 100% FREE.
                         <br><br>
                         Simply enter your email to save your spot.
 

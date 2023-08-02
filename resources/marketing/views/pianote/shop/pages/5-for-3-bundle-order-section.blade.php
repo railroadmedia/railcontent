@@ -81,7 +81,7 @@
                 @endforeach
             </div>
             {!! $saveText !!}
-            <a class="join my-4 bg-[#24CE7C] md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="{{ $buttonLink }}">GET Started &raquo;</a>
+            <a class="join my-4 sold-out md:my-5 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" {{--href="{{ $buttonLink }}"--}}>SOLD OUT</a>
             <br>
             <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                 <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>

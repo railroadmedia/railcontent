@@ -2,9 +2,11 @@
 
 namespace App\Modules\Ecommerce\Providers;
 
-use App\Modules\Ecommerce\Console\Commands\MigrateFixMissingStripeCustomerIds;
+use App\Modules\Ecommerce\Console\Commands\FixMissingStripeCustomerIds;
 use App\Modules\Ecommerce\Console\Commands\MigrateExistingStripeMusoraGatewayPaymentsToDrumeo;
+use App\Modules\Ecommerce\Console\Commands\MigratePaypalGatewayToMusora;
 use App\Modules\Ecommerce\Console\Commands\MigrateStripeCustomersToMusora;
+use App\Modules\Ecommerce\Console\Commands\SyncStripePaymentMethods;
 use App\Modules\Ecommerce\Console\Commands\ProcessAppleExpiredSubscriptions;
 use App\Modules\Ecommerce\Console\Commands\UnifySubscriptions;
 use Illuminate\Foundation\Application;
@@ -33,9 +35,10 @@ class EcommerceServiceProvider extends ServiceProvider
             [
                 UnifySubscriptions::class,
                 ProcessAppleExpiredSubscriptions::class,
-                MigrateExistingStripeMusoraGatewayPaymentsToDrumeo::class,
+                SyncStripePaymentMethods::class,
+                FixMissingStripeCustomerIds::class,
                 MigrateStripeCustomersToMusora::class,
-                MigrateFixMissingStripeCustomerIds::class,
+                MigratePaypalGatewayToMusora::class
             ]
         );
 

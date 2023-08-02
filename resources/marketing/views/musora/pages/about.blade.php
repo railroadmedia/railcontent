@@ -46,13 +46,13 @@
             <p class="text-[#a1afc9]">
                 You’ve likely seen the health benefits of playing music.
                 <br><br>
-                It can <a target="_blank" href="https://www.drumeo.com/beat/play-music-to-improve-memory/"><u>improve your memory</u></a>, <a target="_blank" href="https://www.drumeo.com/beat/8-health-benefits/"><u>reduce anxiety</u></a>, <a target="_blank" href="https://www.telegraph.co.uk/news/science/science-news/6447588/Playing-a-musical-instrument-makes-you-brainier.html"><u>make you smarter</u></a>, <a target="_blank" href="https://www.rcm.ac.uk/about/news/all/2016-03-16rcmfindsdrumminghaspositiveimpactonmentalhealth.aspx"><u>make you happier</u></a>, and <a target="_blank" href="https://www.drumeo.com/beat/8-health-benefits/"><u>support your physical health</u></a>. And, well, it’s just fun! There’s a magical feeling when you’ve developed your skills to the point of achieving musical freedom -- where you’re not <em>thinking</em> about what you’re playing, you’re just creating.
+                It can <a target="_blank" href="https://www.drumeo.com/beat/play-music-to-improve-memory/"><u>improve your memory</u></a>, <a target="_blank" href="https://www.drumeo.com/beat/8-health-benefits/"><u>reduce anxiety</u></a>, <a target="_blank" href="https://www.telegraph.co.uk/news/science/science-news/6447588/Playing-a-musical-instrument-makes-you-brainier.html"><u>make you smarter</u></a>, <a target="_blank" href="https://www.rcm.ac.uk/about/news/all/2016-03-16rcmfindsdrumminghaspositiveimpactonmentalhealth.aspx"><u>make you happier</u></a>, and <a target="_blank" href="https://www.drumeo.com/beat/8-health-benefits/"><u>support your physical health</u></a>. And, well, it’s just fun! There’s a magical feeling when you’ve developed your skills to the point of achieving musical freedom — where you’re not <em>thinking</em> about what you’re playing, you’re just creating.
                     <br><br>
                 So at Musora Media, we have two simple goals: create more musicians and keep them playing longer.
                     <br><br>
-                For us, that starts by making the beginner’s journey an enjoyable one -- where they see progress, overcome the early obstacles, and fall in love with their instrument.
+                For us, that starts by making the beginner’s journey an enjoyable one — where they see progress, overcome the early obstacles, and fall in love with their instrument.
                     <br><br>
-                And then later, it’s about supporting any musical goals -- from jamming with a band, writing and recording songs, or becoming a touring professional. It’s about inspiring students with new ideas, connecting them with a group of peers and mentors, and helping them share their passion with others.
+                And then later, it’s about supporting any musical goals — from jamming with a band, writing and recording songs, or becoming a touring professional. It’s about inspiring students with new ideas, connecting them with a group of peers and mentors, and helping them share their passion with others.
                     <br><br>
                 We believe the world’s a better place when it’s filled with music. And if you agree, we’d love to connect!
             </p>
@@ -322,7 +322,7 @@
                             <h5><strong>Chad Kettner</strong></h5>
                             <p>Chief Marketing Officer</p>
                             <p class="text-left mt-4 select-none">
-                                Chad Kettner is passionate about strategy, copywriting, and brand positioning -- with 15 years of marketing experience. Since joining the team in 2012, Chad has helped grow the Drumeo brand into a marketplace leader and launched the Pianote, Guitareo, and Singeo brands. He loves going on adventures with his wife (Rachel) and two young kids (Everett and Evelyn).
+                                Chad Kettner is passionate about strategy, copywriting, and brand positioning — with 15 years of marketing experience. Since joining the team in 2012, Chad has helped grow the Drumeo brand into a marketplace leader and launched the Pianote, Guitareo, and Singeo brands. He loves going on adventures with his wife (Rachel) and two young kids (Everett and Evelyn).
                             </p>
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="chad = false; amy = true "></i>
                         </div>

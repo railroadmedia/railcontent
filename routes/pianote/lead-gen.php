@@ -72,7 +72,7 @@ Route::domain('{pianoteDomain}')
         function () {
             Route::get('/{page?}', LeadGenController::class . '@gstd')
                 ->whereIn('page', [
-                    null,'thank-you'
+                    null, 'thank-you', 'ty-annual', 'ty-monthly'
                 ]);
         }
     );

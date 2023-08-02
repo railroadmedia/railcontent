@@ -32,7 +32,7 @@
                     <span class="text-goldenrod">And then play more.</span>
                 </h2>
                 <p class="text-base font-semibold lg:text-lg">
-                    Everybody says: "I wish I practiced more." But playing guitar shouldn’t feel like work -- so GuitarQuest is loaded with addicting missions to keep you motivated as you develop your skills.
+                    Everybody says: "I wish I practiced more." But playing guitar shouldn’t feel like work — so GuitarQuest is loaded with addicting missions to keep you motivated as you develop your skills.
                 </p>
             </div>
         </div>
@@ -52,7 +52,7 @@
                     <br><span>On the guitar.</span>
                 </h2>
                 <p class="text-base font-semibold lg:text-lg ">
-                    Your guitar is a tool for self expression. Break past major chords and single notes -- and build the technical foundation you need to write music, record songs, and make your creative projects come to life.
+                    Your guitar is a tool for self expression. Break past major chords and single notes — and build the technical foundation you need to write music, record songs, and make your creative projects come to life.
                 </p>
             </div>
         </div>

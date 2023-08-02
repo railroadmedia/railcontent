@@ -213,13 +213,13 @@
                 <img alt="Comfort cover spread" class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1300,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/comfort-cover-spread.png">
                 <p class="text-left">As a drummer, you’re ALWAYS sitting.
                     <br><br>
-                    Through every practice, rehearsal and gig, you’re constantly confined to your drum throne. Sometimes it’s great -- you have a built in place to chill out. But other times, it’s NOT.
+                    Through every practice, rehearsal and gig, you’re constantly confined to your drum throne. Sometimes it’s great — you have a built in place to chill out. But other times, it’s NOT.
                     <br><br>
                     Like when you hop on the drums after a long day sitting at work or in traffic and you just want to do the thing you love without nagging back, hip, or butt pain.
                     <br><br>
                     That’s why the fine folks at Drum Art created the Drumeo Comfort Cover.
                     <br><br>
-                    Designed specifically for drummers, the Comfort Cover absorbs shock, distributes your weight evenly, and improves your posture behind the drums -- instantly giving you a comfier, healthier, better drumming experience.
+                    Designed specifically for drummers, the Comfort Cover absorbs shock, distributes your weight evenly, and improves your posture behind the drums — instantly giving you a comfier, healthier, better drumming experience.
                 </p>
             </div>
         </div>
@@ -263,7 +263,7 @@
                     <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/comfort-cover/icon-10-second.png" alt="Time icon">
                     <h4><strong>10 SECOND SET UP </strong></h4>
                     <p>
-                        The Comfort Cover easily folds up and can be taken to any of your gigs or rehearsals -- making every drum throne feel like home.
+                        The Comfort Cover easily folds up and can be taken to any of your gigs or rehearsals — making every drum throne feel like home.
                     </p>
                 </div>
             </div>
@@ -288,7 +288,7 @@
                     </div>
                 </div>
                 <div class="table-wrap">
-                    <p>The Comfort Cover gives you a consistent foundation every time (and everywhere) you sit down to play the drums -- so you can play longer, harder, and in total comfort.</p>
+                    <p>The Comfort Cover gives you a consistent foundation every time (and everywhere) you sit down to play the drums — so you can play longer, harder, and in total comfort.</p>
                     <table>
                         <tr>
                             <td>Portable</td>
@@ -392,7 +392,7 @@
                 @include('_partials.components.question-dropdown', [
                 "num" => "?",
                 "title" => "Will the Comfort Cover replace my existing throne?",
-                "desc" => "No! The Comfort Cover upgrades your existing round drum throne to a more comfortable drumming experience. Just slide it over top and start playing -- you’re ready to go in seconds.",
+                "desc" => "No! The Comfort Cover upgrades your existing round drum throne to a more comfortable drumming experience. Just slide it over top and start playing — you’re ready to go in seconds.",
                 ])
             </div>
         </div>

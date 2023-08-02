@@ -148,16 +148,6 @@
 
     @endif
 
-    @if(empty($trialVersion))
-    @include('_partials.components.promo-top-banner',[
-        'bg' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-shop-summer-sale-bg.jpg',
-        'logo' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-summer-sale-logo.svg',
-        'logoStyles' => '-mt-16 ml-8 sm:ml-24 lg:ml-32',
-        'title' => 'Join Drumeo And Save 20%<br class="sm:hidden"> + Choose Your Bonus Bundle',
-        'promoText' => 'SAVE UP TO 81% UNTIL JULY 31ST!',
-    ])
-    @endif
-
     @php
         $bubble1 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/dorothea-taylor.png';
         $bubble2 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/todd-sucherman.png';
@@ -254,7 +244,7 @@
             [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
-                'desc' => 'The best drummers are here -- including Grammy Award winners and touring musicians.',
+                'desc' => 'The best drummers are here — including Grammy Award winners and touring musicians.',
                 'lessonInfo' => [
                     [
                         'thumb' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/world-class-teachers.jpg',
@@ -542,7 +532,7 @@
             'name' => 'Ivy Elizondo',
             'video' => '373445819',
             'title' => 'Now we have a band and we’re recording an album!',
-            'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead -- she’s used Drumeo to build a foundation and formed a band.',
+            'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead — she’s used Drumeo to build a foundation and formed a band.',
             ],
         ]
     @endphp
@@ -591,7 +581,7 @@
                 [
                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                 'title' => 'Drumeo Drumsticks',
-                'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
+                'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
                 'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                 'shipping' => true,
                 ],
