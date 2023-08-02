@@ -81,6 +81,10 @@
     </style>
 @endsection
 
+@section('x-data')
+    filter: '{{ $category !== 'shop' ? $category : 'all' }}',
+@endsection
+
 @section('layout-header')
     @include("guitareo.sales.partials._nav", [
         "cartVersion" => true
@@ -157,10 +161,23 @@
         </div>
     @endif
 
+    @include('guitareo.shop._partials._catalogue-filters', [
+        "all" => true,
+        "noClothing" => true
+    ])
     <div class="white-box">
         {{--        @include('_partials.layout.holiday.bundle-cards')--}}
-        <section class="grid-view category-section" data-category="lessons">
+
+        {{--    LESSONS    --}}
+        <div id="lessons" class="anchor"></div>
+        <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <ul class="container mx-auto fixed-cards text-center lg:text-left">
+                <li>
+                    <h1 class="float-left px-2 md:px-3 w-full">
+                        <div class="heading-icon text-guitareo"><i class="fas fa-video"></i></div>
+                        Guitar Lessons
+                    </h1>
+                </li>
 
                 @include('musora.shop._shop-card', [
                      "itemURL" => "/",
@@ -176,27 +193,54 @@
                      "buttonText" => "Start For Free <i class='fas fa-arrow-right'></i>",
                      'soldOut' => false,
                 ])
-                @foreach($items as $key => $item)
+
+                @foreach($lessons as $key => $lesson)
                     @include('musora.shop._shop-card', [
-                        "sku" => $item->sku,
-                        "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
-                        "thumbnail" => $item->thumbnail,
-                        "packLogo" => $item->thumbnail_logo,
-                        "badgeText" => $item->badge_text,
-                        "title" => $item->name,
-                        "packAuthor" => $item->instructor_name ?? 'Guitareo',
-                        "cardDescription" => $item->short_desc,
-                        "includedEdge" => $item->included_edge,
-                        "fullPrice" => $item->price,
-                        "price" => $item->discounted_price,
-                        "category" => strtolower($item->productType->name),
-                        "sizes" => $item->sizes,
-                        "soldOut" => (isset($products[$item->sku]) && $item->productType->name !== 'Lessons') ? $products[$item->sku]->getStockAvailability() === 0 : $item->sold_out,
-                        "size_case_sensitive" => $item->size_case_sensitive,
-                        'FCP' => $key < 4 ? true : null,
+                            "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
+                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
+                            "thumbnail" => $lesson->thumbnail,
+                            "packLogo" => $lesson->thumbnail_logo,
+                            "title" => $lesson->name,
+                            "packAuthor" => $lesson->instructor_name,
+                            "cardDescription" => $lesson->short_desc,
+                            "fullPrice" => $lesson->price,
+                            "price" => $lesson->discounted_price,
+                            "category" => strtolower($lesson->productType->name),
+                            "soldOut" => $lesson->sold_out,
+                            "includedMembership" => $lesson->included_edge,
+                            "badgeText" => $lesson->badge_text,
+                            'FCP' => $key < 4 ? true : null,
                     ])
                 @endforeach
+            </ul>
+        </section>
 
+        {{--   ACCESSORIES     --}}
+        <div id="accessories" class="anchor"></div>
+        <section class="grid-view category-section" data-category="shirts" x-show="filter === 'accessories' || filter === 'all'">
+            <ul class="container mx-auto fixed-cards">
+                <li>
+                    <h1 class="float-left px-2 md:px-3 w-full">
+                        <div class="heading-icon text-guitareo"><i class="fas fa-mug-hot"></i></div>
+                        Accessories
+                    </h1>
+                </li>
+                @foreach($accessories as $accessory)
+                    @include('musora.shop._shop-card', [
+                            "sku" => (str_contains($accessory->sku, 'member') || str_contains($accessory->sku, 'products')) ? '' : $accessory->sku,
+                            "itemURL" => '/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
+                            "thumbnail" => $accessory->thumbnail,
+                            "badgeText" => $accessory->badge_text,
+                            "title" => $accessory->name,
+                            "cardDescription" => $accessory->short_desc,
+                            "fullPrice" => $accessory->price,
+                            "sizes" => $accessory->sizes,
+                            "price" => $accessory->discounted_price,
+                            "category" => strtolower($accessory->productType->name),
+                            "soldOut" => isset($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
+                            "size_case_sensitive" => $accessory->size_case_sensitive,
+                    ])
+                @endforeach
             </ul>
         </section>
 
