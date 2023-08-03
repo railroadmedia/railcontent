@@ -10,8 +10,7 @@ class ProductPagesController extends BaseController
 {
     public function shopAlt(Request $request)
     {
-        $products = Product::where([['visible', 1], ['is_seasonal', 1]])->whereNotIn('product_type_id', [1, 6])->orderBy('display_order')->get();
-
+        $products = Product::where([['shop_card_visible', 1], ['product_type_id', '!=', 6], ['is_seasonal', 1]])->orderBy('display_order')->get();
 
         $accessories = $products->filter(function($value, $key){
             return $value->productType->name === 'Accessories';
@@ -26,7 +25,7 @@ class ProductPagesController extends BaseController
         });
 
         $hoodies = $products->filter(function($value, $key){
-            return $value->productType->name === 'Hoodies' || $value->productType->name === 'Sweaters';;
+            return $value->productType->name === 'Hoodies' || $value->productType->name === 'Sweaters';
         });
 
         $drumeo = $products->filter(function($value, $key){

@@ -27,15 +27,14 @@
     <div
         x-show="{{ $name }}" x-transition
         x-on:click="{{ $name }} = false;"
-        class="relative min-h-screen flex justify-center"
+        class="relative min-h-screen flex items-start justify-center px-4 pt-40 sm:pt-28 lg:pt-16"
         style="z-index: 1006;"
     >
         <!-- Close button -->
         <i class="fal fa-times fa-2x fixed top-1 right-1 text-white cursor-pointer text-5xl"></i>
         <div
             x-on:click.stop
-            class="relative overflow-y-visible max-w-6xl top-40 md:top-28 lg:top-16"
-            style="width: 90%;"
+            class="relative w-full overflow-y-visible max-w-6xl"
         >
             <!-- Content -->
             <div
