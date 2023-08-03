@@ -280,6 +280,21 @@ class SalesController extends BaseController
             'nPackOwners' => $nPackOwners,
         ]);
     }
+    public function thirtyDayBluesPiano()
+    {
+        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
+        $productId = 734;
+        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
+        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+
+        return view('pianote.products.30-day-blues-piano', [
+            'recaptchaKey'=>config('recaptcha.key'),
+            'theme' => 'pianote',
+            'hasProduct' => $hasProduct,
+            'nPackOwners' => $nPackOwners,
+        ]);
+    }
 
 
     // 408 is the 3 month access code product
