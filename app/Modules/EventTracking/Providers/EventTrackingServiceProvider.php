@@ -28,7 +28,7 @@ class EventTrackingServiceProvider extends EventServiceProvider
 
         Avo::init_avo([
             "env" => app()->isProduction() ? "prod" : "dev",
-            "logger" => logger(),
+            "logger" => \Log::getLogger(),
             "rudder_stack_instance" => new RudderDestination(),
         ]);
     }
