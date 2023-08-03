@@ -125,7 +125,6 @@
                                 onload="this.classList.remove('opacity-0')"
                             >
                         </picture>
-                        <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
                     </div>
                     <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">Want to play the Blues? Then you NEED to know the 12-Bar Blues pattern.</p>
                 </div>
@@ -141,7 +140,6 @@
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
                     </div>
                     <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">To play the Blues, you have to feel the Blues. This lesson will show you how to get into the swing of things.</p>
                 </div>
@@ -157,7 +155,6 @@
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
                     </div>
                     <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">Break away from basic chords. You’ll be confidently playing through chord changes with this iconic Boogie Pattern.</p>
                 </div>
@@ -173,7 +170,6 @@
                             onload="this.classList.remove('opacity-0')"
                         >
                     </picture>
-                    <p class="absolute bottom-0 right-0 m-3 rounded-lg text-white px-2 py-0.5 font-semibold" style="background-color:rgba(0,0,0,0.8);">10:00</p>
                     </div>
                     <p class="w-2/3 sm:w-full pl-3 sm:pl-0 mt-3 leading-normal">We’ve saved the best ‘till last. In this lesson, you’ll play an iconic Blues riff over your chord progression.  You’ll want to save this one!</p>
                 </div>
@@ -237,9 +233,10 @@
             </div>
         </div>
     </section>
+
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "demoVid",
-        "video" => '//player.vimeo.com/video/TODO&autoplay=1',
+        "video" => '//player.vimeo.com/video/851372644?autoplay=1',
         "title" => 'demoVid'
     ])
 @stop
