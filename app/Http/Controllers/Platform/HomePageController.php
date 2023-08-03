@@ -97,22 +97,22 @@ class HomePageController extends BaseController
 
     public function profileRedirect()
     {
-        return redirect("/".brand()."/profile/".user()->id."/dashboard");
+        return redirect("/" . brand() . "/profile/" . user()->id . "/dashboard");
     }
 
     public function paymentSettingsRedirect()
     {
-        return redirect("/".brand()."/profile/".user()->id."/settings/payments");
+        return redirect("/" . brand() . "/profile/" . user()->id . "/settings/payments");
     }
 
     public function notificationsRedirect()
     {
-        return redirect("/".brand()."/notifications");
+        return redirect("/" . brand() . "/notifications");
     }
 
     public function notificationSettingsRedirect()
     {
-        return redirect("/".brand()."/profile/".user()->id."/settings/notifications");
+        return redirect("/" . brand() . "/profile/" . user()->id . "/settings/notifications");
     }
 
     public function home(Request $request, $brand)
@@ -276,9 +276,9 @@ class HomePageController extends BaseController
             ->slice(0, 4)
             ->values();
         $upcomingEvents = new ContentFilterResultsEntity([
-                                                             'results' => $upcomingEvents,
-                                                             'total_results' => $upcomingEventsCount,
-                                                         ]);
+            'results' => $upcomingEvents,
+            'total_results' => $upcomingEventsCount,
+        ]);
 
         if ($currentEvent) {
             $youtubeId = $this->liveStreamEventService->getCurrentOrNextYoutubeEventId();
@@ -292,8 +292,8 @@ class HomePageController extends BaseController
                     'firstContentId' => $eventCoachId,
                 ]);
                 $currentEventCalendarId = config('addevent.uniquekeys.by-coach')[$currentEvent->fetch(
-                        'fields.instructor.slug'
-                    )] ?? config('addevent.uniquekeys.brand-overview');
+                    'fields.instructor.slug'
+                )] ?? config('addevent.uniquekeys.brand-overview');
             } else {
                 $currentEvent = null;
             }
@@ -329,7 +329,7 @@ class HomePageController extends BaseController
                     $cohortBanner['title'] = $nextLesson->fetch('title');
                     $cohortBanner['thumbnail'] = $nextLesson->fetch('data.thumbnail_url');
                     $cohortBanner['continue_visible'] = true;
-                    if(Carbon::parse($nextLesson->fetch('published_on')) > Carbon::now()){
+                    if (Carbon::parse($nextLesson->fetch('published_on')) > Carbon::now()) {
                         $cohortBanner['continue_visible'] = false;
                         $cohortBanner['close_visible'] = false;
                     }
@@ -372,7 +372,10 @@ class HomePageController extends BaseController
             'hasGenres' => $hasGenres,
             'hasTopics' => $hasTopics,
             'hasExperience' => $hasExperience,
-            'methodUrl' => ($hasCompletedMethod)? url()->route('platform.content.first-level', ['method', $methodContent['slug'], $methodContent['id']]):
+            'methodUrl' => ($hasCompletedMethod) ? url()->route(
+                'platform.content.first-level',
+                ['method', $methodContent['slug'], $methodContent['id']]
+            ) :
                 url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
             'completedLevelsUrl' => $methodContent['url'] ?? '',
             'carousel' => $carousel,
@@ -383,6 +386,10 @@ class HomePageController extends BaseController
 
     public function onboarding(Request $request)
     {
+        \Avo::onboarding_started([
+            'user_id_' => userIdString(),
+            'musora_user_id' => userId()
+        ]);
         return view('home.onboarding');
     }
 
@@ -495,7 +502,7 @@ class HomePageController extends BaseController
                 $forumPosts[$forumPostIndex]->content = preg_replace(
                     "~<blockquote(.*?)>(.*)</blockquote>~si",
                     "",
-                    ' '.$forumPosts[$forumPostIndex]->content.' '
+                    ' ' . $forumPosts[$forumPostIndex]->content . ' '
                 );
 
                 $forumPosts[$forumPostIndex]->user_xp = $user->getBrandTotalXp();
