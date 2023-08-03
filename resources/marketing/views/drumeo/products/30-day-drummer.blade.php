@@ -247,7 +247,7 @@
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h2>
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in Season 2 <br class="inline lg:hidden">starting February 27th.</strong></h6>
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in Season 3 <br class="inline lg:hidden">starting Sept. 4th.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video lazyload" style="padding-bottom: 63%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30DD2_header_thumb_no_badge_m.jpg" data-open="trailer">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
@@ -272,18 +272,18 @@
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>
+{{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
 {{--                            @if($hasProduct)--}}
 {{--                                <a class="join sold-out medium w-full">YOU'RE ENROLLED!</a>--}}
 {{--                            @else--}}
-{{--                                <a href="{{ $registerButtonUrl }}" class="join blue medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>--}}
+                                <a href="{{ $registerButtonUrl }}" class="join blue medium w-full @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a>
 {{--                            @endif--}}
 
-{{--                            @if(!auth()->check())--}}
-{{--                                <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">--}}
-{{--                                    <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Drumeo Members register for free here.</a>--}}
-{{--                                </p>--}}
-{{--                            @endif--}}
+                            @if(!auth()->check())
+                                <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
+                                    <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Drumeo Members register for free here.</a>
+                                </p>
+                            @endif
                         </div>
                         <div class="w-full sm:w-1/2 pt-4 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined student profiles">
@@ -301,18 +301,25 @@
             <div class="flex flex-wrap md:flex-nowrap text-center border rounded-lg border-gray-300 mt-6 lg:mt-8 mb-2 lg:mb-4">
                 <div class="w-full md:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 md:py-3 lg:py-4">
                     <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
-                    <h4 class="px-3 lg:px-5"><strong>February 27th</strong></h4>
+                    <h4 class="px-3 lg:px-5"><strong>Sept. 4th</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-{{--                        Enrollment closes in <span class="tzcd-30DD text-drumeo"></span>--}}
-                        Enrollment closed
+                            Enrollment closes in<br class="inline lg:hidden">
+                            <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
+                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                             </span>
+{{--                        Enrollment closed--}}
                     </p>
                 </div>
                 <div class="flex flex-wrap md:flex-nowrap items-center justify-evenly w-full md:w-auto md:flex-grow py-4 md:py-3 lg:py-4 text-left md:text-center">
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-calendar-day text-drumeo text-2xl"></i>
                         <p class="leading-tight mx-0"><strong class="font-black">Course Dates</strong><br>
-                            <span class="text-sm"> February 27th to<br class="hidden md:inline"> March 27th</span></p>
+                            <span class="text-sm"> Sept. 4th to<br class="hidden md:inline"> Oct. 4th</span></p>
                     </div>
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
                         <i class="far fa-fw mr-3 md:mr-0 fa-clock text-drumeo text-2xl"></i>
@@ -465,20 +472,20 @@
                         <h6 class="inline-block uppercase mb-2 lg:mb-0"><strong>Join Domino LIVE: <i class="fas fa-arrow-down text-drumeo mx-2 inline lg:hidden"></i> <i class="fas fa-arrow-right text-drumeo mx-2 hidden lg:inline"></i></strong></h6><br class="inline lg:hidden">
 
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
-                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">4</strong></p>
+                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>SEPT</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">9</strong></p>
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
-                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">11</strong></p>
+                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>SEPT</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">16</strong></p>
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
-                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">18</strong></p>
+                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>SEPT</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">23</strong></p>
                         </div>
                         <div class="align-middle bg-white text-center rounded-lg inline-block overflow-hidden w-11 mr-2">
-                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>MAR</strong></p>
-                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">25</strong></p>
+                            <p class="leading-none tracking-tighter text-xs py-0.5 text-white bg-drumeo"><strong>SEPT</strong></p>
+                            <p class="leading-none text-lg py-1 text-black"><strong class="font-black">30</strong></p>
                         </div>
                     </div>
                 </div>
@@ -593,15 +600,27 @@
             </div>
             <h1 class="font-bebas text-5xl sm:text-6xl lg:text-7xl">FAIR WARNING</h1>
             <h6 class="leading-normal  mt-4 mb-8">30-Day Drummer is a daily guided workout program for drummers — where you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this, students will not be able to join midway — and you need to register before the course begins. {{--on September 5th.--}}</h6>
-{{--            <h4 class="py-1.5 w-full font-bebas uppercase inline-block mx-auto bg-white" style="color:#9d1032;">REGISTRATION CLOSES IN<br class="inline sm:hidden"> <span class="tzcd-30DD">a limited time</span></h4>--}}
+                        <h4 class="py-1.5 w-full font-bebas uppercase inline-block mx-auto" style="background-color:#fd5;color:#9d1032;">REGISTRATION CLOSES IN<br class="inline sm:hidden">
+                            <span x-cloak x-data="timer()" x-init="countdown()">
+                                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                                     </span>
+                        </h4>
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-8">
-                <img class="border-8 border-white rounded-3xl shadow-xl w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/profile_picture.jpg" alt="profile picture">
+                <div class="w-52 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8">
+                    <img class="inline-block sm:hidden w-full relative z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/profile_picture.jpg" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block absolute top-0 left-0 w-full z-20 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/profile_picture.jpg" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                    <img class="hidden sm:inline-block absolute top-0 left-1/2 max-w-none z-10 transition-all opacity-0" style="width: 150%;transform: translate(-44%, -7%);" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/coach-brush-layer.png" alt="profile picture" loading="lazy" onload="this.classList.remove('opacity-0')">
+                </div>
 
-                <div class="text-white text-left rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
+                <div class="text-white text-left z-10 rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow" style="background-color:#00101d;">
                     <h6 class="uppercase text-drumeo leading-normal text-center sm:text-left">MEET YOUR TEACHER</h6>
                     <h2 class="text-center sm:text-left"><strong>Domino Santantonio</strong></h2>
                     <h6 class="leading-normal mt-4 lg:mt-6">Domino Santantonio is one of the world’s most viewed drummers.
@@ -615,17 +634,17 @@
                     <div class="flex justify-between text-center mt-7 lg:mt-10">
                         <div class="">
                             <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/TikTok_Icon.svg" alt="tiktok icon">
-                            <h3 class="mt-2"><strong>1.5M</strong></h3>
+                            <h3 class="mt-2"><strong>1.6M</strong></h3>
                             <p class="uppercase opacity-70 text-sm">Followers</p>
                         </div>
                         <div class="">
                             <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Youtube_Icon.svg" alt="youtube icon">
-                            <h3 class="mt-2"><strong>16.9M</strong></h3>
+                            <h3 class="mt-2"><strong>19M</strong></h3>
                             <p class="uppercase opacity-70 text-sm">views</p>
                         </div>
                         <div class="">
                             <img class="h-6 sm:h-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Insta_Icon.svg" alt="insta icon">
-                            <h3 class="mt-2"><strong>437k</strong></h3>
+                            <h3 class="mt-2"><strong>461k</strong></h3>
                             <p class="uppercase opacity-70 text-sm">followers</p>
                         </div>
                     </div>
