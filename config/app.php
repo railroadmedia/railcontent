@@ -195,7 +195,7 @@ return [
         App\Modules\Notifications\Providers\NotificationServiceProvider::class,
         App\Modules\Reporting\Providers\ReportingServiceProvider::class,
         App\Modules\AddEventCalendars\Providers\AddEventCalendarsServiceProvider::class,
-
+        App\Modules\EventTracking\Providers\EventTrackingServiceProvider::class,
         /*
          * Application Service Providers...
          */
