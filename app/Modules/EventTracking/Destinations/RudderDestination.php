@@ -14,7 +14,7 @@ class RudderDestination
         $key = env('RUDDERSTACK_WRITE_KEY');
         if ($key) {
             try {
-                Rudder::init("2TU5G9aYpLOYivpnpot6nVcaG9N", array(
+                Rudder::init($key, array(
                     "data_plane_url" => "https://musoraalearg.dataplane.rudderstack.com",
                     "consumer" => "lib_curl",
                     "debug" => !app()->isProduction(),
