@@ -221,7 +221,7 @@
                     <div class="max-w-md md:max-w-auto mx-auto">
                         @include('pianote._partials.sign-up-form', [
                         "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Pianote - Engagement - Trigger - Blues Piano Bootcamp - Web Form",
+                        "formId" => "Pianote - Engagement - Trigger - Blues Piano Bootcamp - Web Form - Footer",
                         "formName" => 'Blues Piano Bootcamp',
                             "buttonText" => "start for free",
                             'stacked' => true,
