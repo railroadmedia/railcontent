@@ -381,7 +381,7 @@
                     'position' => 'left',
                     'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/perfect-lesson.jpg',
                     'title' => 'The PERFECT lesson, every time.',
-                    'desc' => 'Knowing what and how to practice is half the battle of getting better. But you’ll never have to worry, because all the lessons ARE your practice sessions. Every day just press play and follow along.',
+                    'desc' => 'You’ll start slow and gradually build your skills day-by-day. It won’t be overwhelming, and you’ll never have to worry about WHAT to practice.',
                     'special' => true,
                     ],
                     [
@@ -394,13 +394,13 @@
                     'position' => 'left',
                     'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/live-support.jpg',
                     'title' => 'Live support from REAL teachers.',
-                    'desc' => 'You won’t be playing the same chords over and over again. You’ll be playing REAL music. You’ll sound beautiful, and it will never feel like practice.',
+                    'desc' => 'Throughout the 30 days, you’ll have a team of REAL teachers to help you. Got questions? You’ll get a personalized answer from an experienced piano teacher. You’re never alone.',
                     ],
                     [
                     'position' => 'right',
                     'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/lifetime-access.jpg',
                     'title' => 'Lifetime access.',
-                    'desc' => 'At every step, you’ll have REAL teachers helping you. Ask questions, get feedback, and connect with other students. You’re never alone.',
+                    'desc' => 'The course lasts 30 days. But it’s yours for life. You’ll keep access to ALL the lessons forever. So you can go back and repeat anything you want to, as often as you like.',
                     ],
                 ];
             @endphp
