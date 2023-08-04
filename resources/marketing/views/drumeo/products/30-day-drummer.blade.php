@@ -805,7 +805,7 @@
                         <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-2.png" alt="Tier 2 pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$147</s><strong>$117</strong></h2>
                         <p class="italic mb-4 text-xs">One-time payment</p>
-                        <a href="TODO" class="join medium w-full mb-5 bg-[#FFB500]">ENROLL NOW</a>
+                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,DLM-3-month:1,quietpad:1,padstand:1,Drumeo-VaterSticks:1,Drumeo-Key:1&redirect=/order&locked=true" class="join medium w-full mb-5 bg-[#FFB500]">ENROLL NOW</a>
                         <p>
                             <b>30-Day Drummer - Season 3</b><br/>
                             <b class="text-[#FFB500]">Free</b> 3-Month Drumeo Access<br>
@@ -825,7 +825,7 @@
                         <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-3.png" alt="Tier 3 pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$240</s><strong>$200</strong></h2>
                         <p class="italic mb-4 text-xs">Per year</p>
-                        <a href="TODO" class="join blue medium w-full mb-5 bg-[#071D31]">ENROLL NOW</a>
+                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,DLM-3-month:1,quietpad:1,padstand:1,Drumeo-VaterSticks:1,BeginnerBook:1,Drumeo-Key:1,TODO:1&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-[#071D31]">ENROLL NOW</a>
                         <p>
                             <b>Annual Drumeo Membership</b><br/>
                             <b class="text-[#071D31]">Free</b> 3-Month Drumeo Access<br>
