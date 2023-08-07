@@ -97,6 +97,7 @@ class UserContentProgressService
      */
     public function startContent($contentId, $userId, $forceEvenIfComplete = false)
     {
+//die("mircea-debug");
         $progressPercent = 0;
 
         $children = $this->contentService->getByParentId($contentId);
@@ -166,8 +167,11 @@ class UserContentProgressService
         UserContentProgressRepository::$cache = [];
 
         event(new UserContentProgressSaved($userId, $contentId, $progressPercent, self::STATE_STARTED));
+        // DACA STERG ASTA, PARE SA APARA CORECT; DAR NU GASESC DE UNDE ALTUNDEVA SE APELEAZA!!!
 
         event(new UserContentProgressStarted($userId, $contentId, $progressPercent));
+        // AASTA NICI NU CRED CA E FOLOSIT!!!
+
 
         return true;
     }
@@ -540,7 +544,7 @@ class UserContentProgressService
             // start parent if necessary
             if (!$parent[self::STATE_STARTED] &&
                 in_array($parent['type'], $allowedTypesForStarted)) {
-                $this->startContent($parent['id'], $userId, true);
+                $this->startContent($parent['id'], $userId, true);  // posibil de aici sa fie!!!!
                 $parent[self::STATE_STARTED] = true;
             }
 

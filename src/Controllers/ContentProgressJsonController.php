@@ -35,6 +35,10 @@ class ContentProgressJsonController extends Controller
      */
     public function startContent(UserContentRequest $request)
     {
+// nu de aici se declanseaza eventul
+//die("start-content-railcontent");
+//aici nici nu pare sa intre
+// CAND DAU PLAY, INTRA AICI, DAR CONTINUA VIDEOUL SI DACA AM DIE!!!!!
         $response = $this->userContentService->startContent(
             $request->input('content_id'),
             auth()->id()
