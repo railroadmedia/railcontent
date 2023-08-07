@@ -165,8 +165,6 @@ class UserContentProgressService
 
         UserContentProgressRepository::$cache = [];
 
-        event(new UserContentProgressSaved($userId, $contentId, $progressPercent, self::STATE_STARTED));
-
         event(new UserContentProgressStarted($userId, $contentId, $progressPercent));
 
         return true;
