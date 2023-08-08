@@ -1,6 +1,6 @@
 <div
     class="dropdown text-center rounded-xl mb-3 select-none text-black"
-    x-data="{ open: @if($key === 0) true @else false @endif }"
+    x-data="{ open: @if($key === 2) true @else false @endif }"
     style="background:linear-gradient(180deg, #F1F7FE 0%, rgba(241, 247, 254, 0.00) 100%);"
 >
     <div class="flex">
