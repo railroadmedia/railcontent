@@ -271,7 +271,7 @@
                         </strong></h1>
                     <h2 class="-mt-3 sm:-mt-1 lg:mt-0">with daily guided workouts.</h2>
 
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in Season 3 <br class="inline lg:hidden">starting Sept 4th.</strong></h6>
+                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the next class <br class="inline lg:hidden">starting Sept 4th.</strong></h6>
 
                     <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video lazyload" style="padding-bottom: 63%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/header-thumb-early-bird-m.png" data-open="trailer">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
@@ -845,7 +845,7 @@
 
     <section class="bg-[#DEEFFF] py-6 md:py-10 text-center">
         <p class="max-w-2xl px-4 md:px-2 leading-loose">
-            <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your sticks might not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
+            <i class="fas fa-info-circle text-drumeo" aria-hidden="true"></i> <b>Shipping Disclaimer –</b> Your physical bonuses may not arrive by the course start date. We’ll do everything on our end to make it happen – the rest is up to the shipping gods.
         </p>
     </section>
 
