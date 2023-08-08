@@ -278,7 +278,7 @@ class SalesController extends BaseController
     public function thirtyDayBluesPiano()
     {
         /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
-        $productId = 734;
+        $productId = 740;
         $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
         $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
         $nPackOwners = $userProductService->getNumberProductOwners($productId);

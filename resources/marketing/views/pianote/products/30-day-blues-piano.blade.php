@@ -265,7 +265,7 @@
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-32 mb-1 sm:mb-0 lg:mb-1" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="logo" fetchpriority="high">
                     <h1 class=""><strong>Learn the Blues</strong></h1>
-                    <h2 class="sm:-mt-1 lg:mt-0">in just 30 days</h2>
+                    <h2 class="sm:-mt-1 lg:mt-0">in just 30 days.</h2>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting Sept. 4th.</strong></h6>
 
@@ -388,7 +388,7 @@
                     'position' => 'right',
                     'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/practice.jpg',
                     'title' => 'Get the MOST out of every practice.',
-                    'desc' => 'It’s precious, so don’t waste it. Each lesson is only 10 minutes and there’s a handy countdown timer so you can stay focused and get more results in a shorter time.',
+                    'desc' => 'Your time is precious, so don’t waste it. Each lesson is only 10 minutes and there’s a handy countdown timer so you can stay focused and get better results in a shorter time.',
                     ],
                     [
                     'position' => 'left',
@@ -519,6 +519,13 @@
                         <td>Self-Directed</td>
                     </tr>
                     <tr>
+                        <td>Live</td>
+                        <td>Weekly Live Q&As</td>
+                        <td>Yes</td>
+                        <td>Sometimes</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
                         <td>Length</td>
                         <td>30 Days</td>
                         <td>Open Ended</td>
@@ -634,7 +641,7 @@
                 </h4>
                 <p class="mb-10">Learn to play the Blues in the first-ever class starting September 4th!</p>
             </div>
-            <div class="md:grid md:grid-cols-2 gap-6 max-w-md md:max-w-3xl mx-auto text-black mb-7">
+            <div class="md:grid md:grid-cols-2 gap-6 items-start max-w-md md:max-w-3xl mx-auto text-black mb-7">
                 <div class="bg-white rounded-xl py-8 px-4 mb-10 md:mb-0">
                     <div class="text-center -mt-11">
                         <div class="bg-[#284FFD] rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">EARLY BIRD SPECIAL</div>
@@ -656,7 +663,7 @@
                         <h4 class="mb-10"><strong>Join Pianote + FREE 30-Day Blues Piano</strong></h4>
                         <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/launch-membership-collage.png" alt="Membership special pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$726</s><strong>$200</strong></h2>
-                        <p class="italic mb-4 text-xs">Billed annually at $200/yr.</p>
+                        <p class="italic mb-4 text-xs">Per year</p>
                         <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,easy-chords:1,new-piano-players-start-here:1,faster-fingers:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1&promo-code=special&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-pianote">ENROLL NOW</a>
                         <p>
                             <b class="text-pianote">Annual Pianote Membership</b><br/>
@@ -673,7 +680,7 @@
             </div>
             <div class="flex items-center justify-center">
                 <img class="h-7 mr-1 transition-all" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/piano-players-trusted.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
-                <div class="inline-block leading-tight text-sm">Join 9,375 piano players who<br> have already registered.</div>
+                <div class="inline-block leading-tight text-sm">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</div>
             </div>
 
 {{--                <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10 text-black">--}}
