@@ -642,12 +642,11 @@
                         <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/early-bird-collage.png" alt="Early bird special pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$235</s><strong>$97</strong></h2>
                         <p class="italic mb-4 text-xs">One-time payment</p>
-                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1,piano-chords-and-scales-guide:1&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-[#284FFD]">ENROLL NOW</a>
+                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1,faster-fingers:1,piano-chords-and-scales-guide:1&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-[#284FFD]">ENROLL NOW</a>
                         <p>
                             <b class="text-[#284FFD]">30-Day Blues Piano (Lifetime Access)</b><br/>
                             <span class="text-[#284FFD]">Free</span> Faster Fingers <i>($99 value)</i><br>
-                            <span class="text-[#284FFD]">Free</span> Chords & Scales Book <i>($39 value)</i><br>
-{{--                            <b class="text-[#284FFD]">Free</b> Drumeo QuietPad--}}
+                            <span class="text-[#284FFD]">Free</span> Chords & Scales Book <i>($39 value)</i>
                         </p>
                     </div>
                 </div>
@@ -658,7 +657,7 @@
                         <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/launch-membership-collage.png" alt="Membership special pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$726</s><strong>$200</strong></h2>
                         <p class="italic mb-4 text-xs">Billed annually at $200/yr.</p>
-                        <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,new-piano-players-start-here:1,faster-fingers:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-pianote">ENROLL NOW</a>
+                        <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,easy-chords:1,new-piano-players-start-here:1,faster-fingers:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1&promo-code=special&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-pianote">ENROLL NOW</a>
                         <p>
                             <b class="text-pianote">Annual Pianote Membership</b><br/>
                             <b class="text-pianote">30-Day Blues Piano (Lifetime Access)</b><br/>
