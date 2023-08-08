@@ -519,6 +519,13 @@
                         <td>Self-Directed</td>
                     </tr>
                     <tr>
+                        <td>Live</td>
+                        <td>Weekly Live Q&As</td>
+                        <td>Yes</td>
+                        <td>Sometimes</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
                         <td>Length</td>
                         <td>30 Days</td>
                         <td>Open Ended</td>
