@@ -259,52 +259,52 @@
         <div class="container">
             <h1>PLAY FASTER  — <br class="hidden-sm hidden-md hidden-lg"> THE RIGHT WAY</h1>
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-piano-keyboard"></i>
+                <i class="fa-light fa-piano-keyboard"></i>
                 <p>
                     <strong>YOUR OWN PRACTICE PARTNER</strong><br> You will get 30 guided video lessons showing you exactly what to do — at what tempo. No guessing about what comes next, Lisa will be there to show — and motivate you.
                 </p>
             </div>
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-list-ol"></i>
+                <i class="fa-light fa-list-ol"></i>
                 <p>
                     <strong>NO GUESSWORK</strong><br> You’ll know exactly what to play, and when. Every single day of this training period has been thought of (including the rest days), so you don’t have to worry about WHAT you’ll practice. No guesswork — only results.
                 </p>
             </div>
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-stopwatch"></i>
+                <i class="fa-light fa-stopwatch"></i>
                 <p>
                     <strong>SHORT PRACTICES</strong><br> Each lesson (and practice) will take just 10-minutes or less to finish. You’ll be practicing efficiently, and have more time to play songs. There’s no wasting time here.
                 </p>
             </div>
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-music"></i>
+                <i class="fa-light fa-music"></i>
                 <p>
                     <strong>PLAY-ALONG AS YOU PRACTICE</strong><br> Specifically designed for you to play along and measure your progress. Practice along with every exercise and set your own tempo.
                 </p>
             </div>
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-chart-line"></i>
+                <i class="fa-light fa-chart-line"></i>
                 <p>
                     <strong>SEE REAL RESULTS</strong><br> You’ll be able to measure your progress as you go along and SEE how much faster you’re getting. Simply fill in the progress tracker after each lesson.
                 </p>
             </div>
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-question"></i>
+                <i class="fa-light fa-question"></i>
                 <p>
                     <strong>YOUR QUESTIONS ANSWERED</strong><br> Got questions? We’ll be available to answer any you might have. Whether you're struggling with one particular exercise or have a question about technique, we’re here for you.
                 </p>
             </div>
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-users"></i>
+                <i class="fa-light fa-users"></i>
                 <p>
                     <strong>THE BEST ONLINE COMMUNITY</strong><br> Share your progress and your success with the best online piano community. The Pianote forum is a great place to meet other students and find encouragement and support.
                 </p>
             </div>
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-infinity"></i>
+                <i class="fa-light fa-infinity"></i>
                 <p>
                     <strong>LIFETIME ACCESS</strong><br> This training is 30 lessons. And you’ll have access to it for life. Come back anytime to brush up on your new-found speed skills. Or keep pushing to see how fast you can get.
                 </p>

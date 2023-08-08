@@ -442,7 +442,7 @@
                         </tr>
                         <tr>
                             <td>Carrying Case</td>
-                            <td><i class="fal fa-check"></i></td>
+                            <td><i class="fa-light fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>Cost</td>

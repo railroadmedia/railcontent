@@ -88,10 +88,10 @@
             <div class="px-2 md:px-4">
                 <div class="relative w-full rounded-2xl mx-auto h-10 beg-adv-text" style="max-width: 840px;">
                     <img class="absolute top-0 h-5 md:h-7" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo">
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap hidden md:inline">Play your<br> favorite songs<br><i class="fal fa-angle-down"></i></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap">Play in<br> bands<br><i class="fal fa-angle-down"></i></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap hidden md:inline">Write & record<br> drum parts<br><i class="fal fa-angle-down"></i></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap">Play anything<br> you want<br><i class="fal fa-angle-down"></i></p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap hidden md:inline">Play your<br> favorite songs<br><i class="fa-light fa-angle-down"></i></p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap">Play in<br> bands<br><i class="fa-light fa-angle-down"></i></p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap hidden md:inline">Write & record<br> drum parts<br><i class="fa-light fa-angle-down"></i></p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap">Play anything<br> you want<br><i class="fa-light fa-angle-down"></i></p>
                 </div>
                 <div class="relative w-full rounded-2xl h-20 mx-auto flex space-between overflow-hidden items-center beg-adv-bar" style="background-color: #1571bd;max-width: 840px;">
                     <div class="h-full flex items-center flex-wrap relative" style="background-color:#00bafd;">
@@ -105,9 +105,9 @@
                 </div>
                 <div class="relative w-full rounded-2xl mx-auto h-10 beg-adv-text block md:hidden" style="max-width: 840px;">
                     <p></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap inline md:hidden"><i class="fal fa-angle-up"></i><br>Play your<br> favorite songs</p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap inline md:hidden"><i class="fa-light fa-angle-up"></i><br>Play your<br> favorite songs</p>
                     <p></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap inline md:hidden"><i class="fal fa-angle-up"></i><br>Write & record<br> drum parts</p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap inline md:hidden"><i class="fa-light fa-angle-up"></i><br>Write & record<br> drum parts</p>
                     <p></p>
                 </div>
             </div>

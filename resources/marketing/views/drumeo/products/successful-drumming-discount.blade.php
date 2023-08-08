@@ -139,7 +139,7 @@
                  whatever that might mean to you.</h6>
             <div class="flex flex-wrap justify-center align-center">
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-tree"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-tree"></i></div>
                     <p><strong>THE DRUMMING TREE</strong><br>
                         Perfect for drummers of all levels with progressive step-by-step lessons on every topic.</p>
                 </div>
@@ -154,47 +154,47 @@
                         A simple three-step formula for unlocking your creativity while creating your own drum fills.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-list"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-list"></i></div>
                     <p><strong>THE STYLE SELECTOR </strong><br>
                         Explore a variety of musical styles including rock, jazz, latin, funk, country, metal, and more.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-file-alt"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-file-alt"></i></div>
                     <p><strong>THE DRUMMING CHEAT SHEET </strong><br>
                         The easier way to create personalized charts for learning and remembering song structures.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-music"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-music"></i></div>
                     <p><strong>THE DRUMMING SONG SIMPLIFIER</strong><br>
                         A fast and effective way to play-along to virtually any song without learning every drum part.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-lock"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-lock"></i></div>
                     <p><strong>THE LOCKED-IN SYSTEM </strong><br>
                         A simple three-phase approach for working with a bassist to create a better musical foundation.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-headphones"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-headphones"></i></div>
                     <p><strong>THE SUCCESSFUL BAND METHOD </strong><br>
                         A list of 10 important guidelines for bands to follow to improve your chance of success.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-check"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-check"></i></div>
                     <p><strong>THE DRUMMER’S CHECKLIST </strong><br>
                         A comprehensive list of everything drummers should bring to the practice room, studio, or live gig.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-calendar-alt"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-calendar-alt"></i></div>
                     <p><strong>THE HABITUAL DRUMMER </strong><br>
                         Five steps to maintaining the habits you need to achieve consistent drumming progress.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-lightbulb"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-lightbulb"></i></div>
                     <p><strong>THE INSPIRED DRUMMER </strong><br>
                         Ten sources of drumming inspiration to help you stay motivated as a musician.</p>
                 </div>
                 <div class="w-full sm:w-1/2 px-3 sm:px-4 circle-point">
-                    <div class="point-icon"><i class="fal fa-users"></i></div>
+                    <div class="point-icon"><i class="fa-light fa-users"></i></div>
                     <p><strong>THE CONNECTED DRUMMER </strong><br>
                         Ten unique ways you can connect with other musicians for support and encouragement.</p>
                 </div>

@@ -223,7 +223,7 @@
             <div class="columns medium-4">
                 <div class="icon-step text-yellow">
                     <h2 class="animated infinite pulse"><strong>1</strong></h2>
-                    <i class="fal fa-camera-movie"></i>
+                    <i class="fa-light fa-camera-movie"></i>
                 </div>
                 <h2><strong>Create</strong></h2>
                 <p>You’re the teacher & product creator. Simply organize, film, and edit your video lessons. If you’ve already created a drum lessons course or have an idea that you’d love to create, then we’re looking to partner!</p>
@@ -231,7 +231,7 @@
             <div class="columns medium-4">
                 <div class="icon-step text-yellow">
                     <h2 class="animated infinite pulse delay-1s"><strong>2</strong></h2>
-                    <i class="fal fa-rocket-launch"></i>
+                    <i class="fa-light fa-rocket-launch"></i>
                 </div>
                 <h2><strong>Launch</strong></h2>
                 <p>We’ll host your videos, manage the content, create the sales page, handle payments, and respond to student questions. Your product will be added to the Drumeo Drum Shop — giving you access to our audience of drummers and students around the world.</p>
@@ -239,7 +239,7 @@
             <div class="columns medium-4">
                 <div class="icon-step text-yellow">
                     <h2 class="animated infinite pulse delay-2s"><strong>3</strong></h2>
-                    <i class="fal fa-hand-holding-usd"></i>
+                    <i class="fa-light fa-hand-holding-usd"></i>
                 </div>
                 <h2><strong>Earn</strong></h2>
                 <p>There are two revenue-sharing options: you’ll get 90% of product sales when allowing free access to Drumeo members, or you’ll get 70% of product sales when hosting your product exclusively as a training pack.</p>

@@ -113,14 +113,14 @@
                 </div>
                 <div class="text-left">
                     <div class="text-icon-wrap active">
-                        <i class="text-songs fal fa-music"></i>
+                        <i class="text-songs fa-light fa-music"></i>
                         <div>
                             <h3><strong>Find the perfect tempo.</strong></h3>
                             <p>Slow down or speed up any section of a song to hear every note your favorite drummer plays. When you’ve nailed the part, bump the tempo back up and rock out in real time.</p>
                         </div>
                     </div>
                     <div class="text-icon-wrap">
-                        <i class="text-songs fal fa-repeat"></i>
+                        <i class="text-songs fa-light fa-repeat"></i>
                         <div>
                             <h3><strong>Loop the trouble spots.</strong></h3>
                             <p>No more pausing and rewinding when you mess up that fill. Simply grab the section of the song and loop it over, and over, and over until you’ve got it down.</p>
@@ -134,7 +134,7 @@
                         </div>
                     </div>
                     <div class="text-icon-wrap">
-                        <i class="text-songs fal fa-phone-laptop"></i>
+                        <i class="text-songs fa-light fa-phone-laptop"></i>
                         <div>
                             <h3><strong>Available on all your devices.</strong></h3>
                             <p>Load up DrumeoSONGS on your phone during practice time, your laptop when you’re behind the kit, and your tablet at the gig — wherever the music takes you!</p>

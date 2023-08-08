@@ -166,7 +166,7 @@
                 right time, or there’s not an opening for what you do best — just click the <br class="hidden md:inline">
                 link below to join our talent pool for future opportunities.
             </p>
-            <a class="join bg-musora text-black" target="_blank" href="https://musoramediainc.bamboohr.com/careers/58">JOIN TALENT POOL <i class="fal fa-smile-plus"></i></a>
+            <a class="join bg-musora text-black" target="_blank" href="https://musoramediainc.bamboohr.com/careers/58">JOIN TALENT POOL <i class="fa-light fa-smile-plus"></i></a>
         </div>
     </section>
     <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-5 relative">

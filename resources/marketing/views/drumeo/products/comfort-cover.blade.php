@@ -297,15 +297,15 @@
                     <table>
                         <tr>
                             <td>Portable</td>
-                            <td><i class="fal fa-check"></i></td>
+                            <td><i class="fa-light fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>Hand-stitched</td>
-                            <td><i class="fal fa-check"></i></td>
+                            <td><i class="fa-light fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>Made In Italy</td>
-                            <td><i class="fal fa-check"></i></td>
+                            <td><i class="fa-light fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>Cost</td>

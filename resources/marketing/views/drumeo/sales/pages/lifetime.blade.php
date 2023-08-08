@@ -157,8 +157,8 @@
                 }
             </style>
             <div class="relative w-full rounded-2xl mx-auto h-8 beg-adv-text" style="max-width: 840px;">
-                <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap">NOW<br><i class="fal fa-angle-down"></i></p>
-                <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap">YEAR 5<br><i class="fal fa-angle-down"></i></p>
+                <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap">NOW<br><i class="fa-light fa-angle-down"></i></p>
+                <p class="absolute top-0 leading-none text-sm uppercase whitespace-nowrap">YEAR 5<br><i class="fa-light fa-angle-down"></i></p>
                 <img class="absolute top-0 h-14 md:h-20 md:-mt-5 rounded-full z-10" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/lifetime/jared.jpg" alt="Granpa Jared">
             </div>
             <div class="relative w-full rounded-2xl h-28 mx-auto flex space-between overflow-hidden items-center beg-adv-bar" style="background-color: #325e97;max-width: 840px;">

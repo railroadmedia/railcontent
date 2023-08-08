@@ -247,14 +247,14 @@
             <h4 class="text-red"><em>You’ll have constant access to REAL teachers throughout the training course, as well as your fellow students. Never feel lost or overwhelmed. There will always be help when you need it.</em></h4>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-stopwatch"></i>
+                <i class="fa-light fa-stopwatch"></i>
                 <p>
                     <strong>Short Lessons</strong><br> The longest lesson is only 10 minutes. That means you spend more time playing - and getting better!
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-signal-alt"></i>
+                <i class="fa-light fa-signal-alt"></i>
                 <p>
                     <strong>Perfect For All Levels</strong><br> Structured step-by-step lessons you can take at your own pace.
                 </p>
@@ -262,14 +262,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-piano-keyboard"></i>
+                <i class="fa-light fa-piano-keyboard"></i>
                 <p>
                     <strong>Practice-along Exercises</strong><br> Play-along exercises will help you master the fundamentals and build the foundation needed for success.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-question"></i>
+                <i class="fa-light fa-question"></i>
                 <p>
                     <strong>Your Questions Answered</strong><br> Got questions? You’ll always find answers. Real teachers will be available to help when you need it.
                 </p>
@@ -277,14 +277,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-file-download"></i>
+                <i class="fa-light fa-file-download"></i>
                 <p>
                     <strong>Downloadable Resources</strong><br> EVERY lesson comes with downloadable exercises and resources. You’ll get over 21 pages of printable exercises.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-infinity"></i>
+                <i class="fa-light fa-infinity"></i>
                 <p>
                     <strong>Yours Forever</strong><br> These lessons NEVER expire. Watch them again, and again, and again… (you get the point).
                 </p>

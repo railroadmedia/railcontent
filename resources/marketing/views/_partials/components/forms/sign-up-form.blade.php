@@ -61,7 +61,7 @@
 
 @if(empty($noTy) && empty($minimalForm))
     <div class="disclaimer opacity-70 mx-auto flex items-center justify-center" @if(!empty($disclaimerColor)) style="color: {{$disclaimerColor}};" @endif>
-        <i class="fal fa-info-circle leading-none mr-2"></i>
+        <i class="fa-light fa-info-circle leading-none mr-2"></i>
         <span class="text-left leading-tight text-xs max-w-lg">By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>
     </div>
     <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl">

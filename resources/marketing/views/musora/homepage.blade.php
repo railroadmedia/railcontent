@@ -230,16 +230,16 @@
     <section class="text-center text-white py-5 sm:py-7" style="background-color:#0c1524;">
         <div class="container max-w-4xl mx-auto">
             <div class="flex-wrap justify-center items-center hidden sm:flex">
-                <h5 class="px-1 sm:px-5 lg:px-10"><i class="text-pianote text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fal fa-piano-keyboard"></i> <strong>Piano</strong></h5>
-                <h5 class="px-1 sm:px-5 lg:px-10"><i class="text-guitareo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fal fa-guitar"></i> <strong>Guitar</strong></h5>
-                <h5 class="px-1 sm:px-5 lg:px-10"><i class="text-drumeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fal fa-drum"></i> <strong>Drums</strong></h5>
-                <h5 class="px-1 sm:px-5 lg:px-10"><i class="text-singeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fal fa-microphone-stand"></i> <strong>Singing</strong></h5>
+                <h5 class="px-1 sm:px-5 lg:px-10"><i class="text-pianote text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> <strong>Piano</strong></h5>
+                <h5 class="px-1 sm:px-5 lg:px-10"><i class="text-guitareo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> <strong>Guitar</strong></h5>
+                <h5 class="px-1 sm:px-5 lg:px-10"><i class="text-drumeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-drum"></i> <strong>Drums</strong></h5>
+                <h5 class="px-1 sm:px-5 lg:px-10"><i class="text-singeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-microphone-stand"></i> <strong>Singing</strong></h5>
             </div>
             <div class="flex-wrap justify-center items-center flex sm:hidden">
-                <p class="px-2 sm:px-5 lg:px-10"><i class="text-pianote text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fal fa-piano-keyboard"></i> <strong>Piano</strong></p>
-                <p class="px-2 sm:px-5 lg:px-10"><i class="text-guitareo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fal fa-guitar"></i> <strong>Guitar</strong></p>
-                <p class="px-2 sm:px-5 lg:px-10"><i class="text-drumeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fal fa-drum"></i> <strong>Drums</strong></p>
-                <p class="px-2 sm:px-5 lg:px-10"><i class="text-singeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fal fa-microphone-stand"></i> <strong>Singing</strong></p>
+                <p class="px-2 sm:px-5 lg:px-10"><i class="text-pianote text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-piano-keyboard"></i> <strong>Piano</strong></p>
+                <p class="px-2 sm:px-5 lg:px-10"><i class="text-guitareo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-guitar"></i> <strong>Guitar</strong></p>
+                <p class="px-2 sm:px-5 lg:px-10"><i class="text-drumeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-drum"></i> <strong>Drums</strong></p>
+                <p class="px-2 sm:px-5 lg:px-10"><i class="text-singeo text-xl sm:text-5xl align-middle mr-0.5 sm:mr-1 fa-light fa-microphone-stand"></i> <strong>Singing</strong></p>
             </div>
         </div>
     </section>
@@ -399,15 +399,15 @@
 
     @php
         $buttons = [
-            '<i class="text-pianote align-middle mr-0.5 fal fa-piano-keyboard"></i> Piano',
-            '<i class="text-guitareo align-middle mr-0.5 fal fa-guitar"></i> Guitar',
-            '<i class="text-drumeo align-middle mr-0.5 fal fa-drum"></i> Drums',
-            '<i class="text-singeo align-middle mr-0.5 fal fa-microphone-stand"></i> Singing'
+            '<i class="text-pianote align-middle mr-0.5 fa-light fa-piano-keyboard"></i> Piano',
+            '<i class="text-guitareo align-middle mr-0.5 fa-light fa-guitar"></i> Guitar',
+            '<i class="text-drumeo align-middle mr-0.5 fa-light fa-drum"></i> Drums',
+            '<i class="text-singeo align-middle mr-0.5 fa-light fa-microphone-stand"></i> Singing'
         ];
 
         $courses = [
             [
-                'title' => '<i class="text-pianote align-middle mr-0.5 fal fa-piano-keyboard"></i> Piano',
+                'title' => '<i class="text-pianote align-middle mr-0.5 fa-light fa-piano-keyboard"></i> Piano',
                 'images' => [
                     [
                     'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/classical-piano.jpg',
@@ -452,7 +452,7 @@
                 ]
             ],
             [
-                'title' => '<i class="text-guitareo align-middle mr-0.5 fal fa-guitar"></i> Guitar',
+                'title' => '<i class="text-guitareo align-middle mr-0.5 fa-light fa-guitar"></i> Guitar',
                 'images' => [
                     [
                     'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/solo-in-an-hour.jpg',
@@ -497,7 +497,7 @@
                 ]
             ],
             [
-                'title' => '<i class="text-drumeo align-middle mr-0.5 fal fa-drum"></i> Drums',
+                'title' => '<i class="text-drumeo align-middle mr-0.5 fa-light fa-drum"></i> Drums',
                 'images' => [
                     [
                     'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/Aaron-Spears.jpg',
@@ -542,7 +542,7 @@
                 ]
             ],
             [
-                'title' => '<i class="text-singeo align-middle mr-0.5 fal fa-microphone-stand"></i> Singing',
+                'title' => '<i class="text-singeo align-middle mr-0.5 fa-light fa-microphone-stand"></i> Singing',
                 'images' => [
                     [
                     'img' => 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/coaches/find-your-true-voice.jpg',
@@ -778,7 +778,7 @@
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 sm:mb-4">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <i class="fal {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-musora-black"></i>
+                                    <i class="fa-light {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-musora-black"></i>
 {{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
@@ -794,7 +794,7 @@
                     @foreach ($songItems as $key => $songItem)
                         @include('_partials.components.question-dropdown', [
                             'variant' => true,
-                            "title" => '<i class="fal ' . $songItem['fa-icon'] . ' text-xl mr-1.5 text-musora-black"></i>' . $songItem['title'],
+                            "title" => '<i class="fa-light ' . $songItem['fa-icon'] . ' text-xl mr-1.5 text-musora-black"></i>' . $songItem['title'],
                             "desc" => $songItem['desc'],
                             'open' => $key === 0 ? true : false
                         ])
