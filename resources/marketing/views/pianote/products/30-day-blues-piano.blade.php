@@ -265,7 +265,7 @@
                 <div class="w-full sm:w-7/12 text-center lg:text-left">
                     <img class="h-20 sm:h-24 lg:h-32 mb-1 sm:mb-0 lg:mb-1" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="logo" fetchpriority="high">
                     <h1 class=""><strong>Learn the Blues</strong></h1>
-                    <h2 class="sm:-mt-1 lg:mt-0">in just 30 days</h2>
+                    <h2 class="sm:-mt-1 lg:mt-0">in just 30 days.</h2>
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting Sept. 4th.</strong></h6>
 
@@ -519,6 +519,13 @@
                         <td>Self-Directed</td>
                     </tr>
                     <tr>
+                        <td>LIVE Sessions</td>
+                        <td>Weekly Live Q&As</td>
+                        <td>Yes</td>
+                        <td>Sometimes</td>
+                        <td>Yes</td>
+                    </tr>
+                    <tr>
                         <td>Length</td>
                         <td>30 Days</td>
                         <td>Open Ended</td>
@@ -634,8 +641,8 @@
                 </h4>
                 <p class="mb-10">Learn to play the Blues in the first-ever class starting September 4th!</p>
             </div>
-            <div class="md:grid md:grid-cols-2 gap-6 max-w-md md:max-w-3xl mx-auto text-black mb-7">
-                <div class="bg-white rounded-xl py-8 px-4 mb-10 md:mb-0">
+            <div class="md:grid md:grid-cols-2 gap-6 max-w-md md:max-w-3xl mx-auto text-black mb-7 col-auto">
+                <div class="bg-white rounded-xl py-8 px-4 mb-10 md:mb-0 md:max-h-[530px]">
                     <div class="text-center -mt-11">
                         <div class="bg-[#284FFD] rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">EARLY BIRD SPECIAL</div>
                         <h4 class="mb-10"><strong>30-Day Blues Piano</strong></h4>
@@ -674,7 +681,7 @@
             </div>
             <div class="flex items-center justify-center">
                 <img class="h-7 mr-1 transition-all" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/piano-players-trusted.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
-                <div class="inline-block leading-tight text-sm">Join 9,375 piano players who<br> have already registered.</div>
+                <div class="inline-block leading-tight text-sm">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</div>
             </div>
 
 {{--                <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10 text-black">--}}
@@ -783,23 +790,13 @@
     </div>
 
     @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "dayOne",
-        "video" => '//player.vimeo.com/video/823805392?h=bbd23aa655&autoplay=1',
-        "title" => 'dayOne'
-    ])
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "dayThirty",
-        "video" => '//player.vimeo.com/video/823805719?h=722d7f7336&autoplay=1',
-        "title" => 'dayThirty'
-    ])
-    @include('drumeo.sales.partials._video-modal',[
         'modalId' => "demoVid",
-        "video" => '//player.vimeo.com/video/823806000?h=457fb12951&autoplay=1',
+        "video" => '//player.vimeo.com/video/TODO&autoplay=1',
         "title" => 'demoVid'
     ])
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/823788317?h=b2955e3bc7&autoplay=1',
+        "video" => '//player.vimeo.com/video/TODO&autoplay=1',
         "title" => 'trailer'
     ])
 
