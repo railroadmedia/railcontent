@@ -78,9 +78,30 @@
         @if($leadgen->slug === 'getting-started/lessons')
             @include('drumeo.lead-gen.partials.free-trial', [
                 'gsotd' => true,
+                'header' => 'Start playing your favorite songs',
+                'subHeader' => 'Try Drumeo’s Songs section <br class="sm:hidden">free for 7 days.',
+                'benefits' => ['5000+ Note-for-note songs', 'Lessons with your favorite drummers', 'Live support & clinics'],
+                'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums.png',
+                'mobileImg' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums-m.png',
             ])
         @else
-            @include('drumeo.lead-gen.partials.free-trial')
+            @include('drumeo.lead-gen.partials.free-trial', [
+                'header' => 'Test your speed out with real music.',
+                'subHeader' => 'Try Drumeo’s Songs section <br class="sm:hidden">free for 7 days.',
+                'benefits' => ['5000+ Note-for-note songs', 'Lessons with your favorite drummers', 'Live support & clinics'],
+                'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums.png',
+                'mobileImg' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums-m.png',
+            ])
+        @endif
+    @elseif($theme === 'pianote')
+        @if($leadgen->slug === 'blues-bootcamp/lessons')
+            @include('drumeo.lead-gen.partials.free-trial', [
+                'header' => 'You’ve started playing the piano. Now take the next step.',
+                'subHeader' => 'TRY PIANOTE FREE FOR 7 DAYS AND GET:',
+                'benefits' => ['The perfect step-by-step curriculum', 'Beginner-friendly song tutorials', 'Live support from REAL teachers'],
+                'img' => 'https://pianote.s3.amazonaws.com/products/30-day-blues-piano/collage-lessons.png',
+                'mobileImg' => 'https://pianote.s3.amazonaws.com/products/30-day-blues-piano/collage-lessons-m.png',
+            ])
         @endif
     @endif
 @endsection

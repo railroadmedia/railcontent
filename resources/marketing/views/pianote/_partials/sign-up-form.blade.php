@@ -60,7 +60,7 @@
 </form>
 @if(empty($minimalForm))
     <div class="disclaimer opacity-70 mx-auto flex items-center" style="max-width: 470px; @if(!empty($disclaimerColor)) color:{{ $disclaimerColor }}; @endif">
-        <i class="fal fa-info-circle leading-none w-10 text-xl md:text-3xl"></i>
+        <i class="fa-light fa-info-circle leading-none w-10 text-xl md:text-3xl"></i>
         <span class="mx-auto text-left leading-tight flex-1 text-xs"><em>By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</em></span>
     </div>
 

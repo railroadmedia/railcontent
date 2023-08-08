@@ -493,14 +493,14 @@
                 Because of its beautiful simplicity, it’s easy to learn and start playing in church sooner. This won’t take you weeks or months to be ready. In fact, you might find yourself wanting to play within a few days of starting.</p>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-piano-keyboard"></i>
+                <i class="fa-light fa-piano-keyboard"></i>
                 <p>
                     <strong>no guesswork</strong><br> You’ll never be left guessing because every lesson is structured to teach you the right skills at the right time.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-check"></i>
+                <i class="fa-light fa-check"></i>
                 <p>
                     <strong>perfect for all levels</strong><br> Even if you’ve never touched a piano before, you’ll learn the skills to play in church.
                 </p>
@@ -508,14 +508,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-music"></i>
+                <i class="fa-light fa-music"></i>
                 <p>
                     <strong>play real worship songs</strong><br> You’ll be learning with REAL modern worship songs that are currently used in church.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-download"></i>
+                <i class="fa-light fa-download"></i>
                 <p>
                     <strong>downloadable resources</strong><br> Helpful guides to download, print, and keep by the piano. Never forget what you’ve learned.
                 </p>
@@ -523,14 +523,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-guitars"></i>
+                <i class="fa-light fa-guitars"></i>
                 <p>
                     <strong>your own worship band</strong><br> Practice along to the backing tracks and BE part of a worship band before ever stepping on stage.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-hands-helping"></i>
+                <i class="fa-light fa-hands-helping"></i>
                 <p>
                     <strong>support from real teachers</strong><br> Ask your biggest questions and get personalized feedback from teachers.
                 </p>
@@ -538,14 +538,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-users"></i>
+                <i class="fa-light fa-users"></i>
                 <p>
                     <strong>the best online community</strong><br> Meet other church piano players, share your experiences, struggles, and successes with other students.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-infinity"></i>
+                <i class="fa-light fa-infinity"></i>
                 <p>
                     <strong>yours forever</strong><br> These lessons NEVER expire. Watch them again, and again, and again… (you get the point).
                 </p>

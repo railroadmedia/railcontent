@@ -306,7 +306,7 @@
                                 <p class="leading-none text-lg py-1 text-black"><strong class="font-black">17</strong></p>
                             </div>
                             <p class="leading-tight uppercase text-yellow ml-4">
-                                <a target="_blank" href="https://www.google.com/search?q=9am+PDT" class="font-extrabold"><strong>Monday, October 17 @ 9am PDT</strong> <i class="fal fa-info-circle"></i></a>
+                                <a target="_blank" href="https://www.google.com/search?q=9am+PDT" class="font-extrabold"><strong>Monday, October 17 @ 9am PDT</strong> <i class="fa-light fa-info-circle"></i></a>
                             </p>
                         </div>
                         <p class="leading-tight mb-4" style="color:#fcffe3">

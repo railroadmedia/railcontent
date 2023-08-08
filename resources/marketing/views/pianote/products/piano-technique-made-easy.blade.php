@@ -124,15 +124,15 @@
 
             <div class="clearfix check-container text-center">
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">FEEL LIKE<br>YOU BELONG</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">NEVER BE<br>OVERWHELMED</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">KNOW YOUR<br>INSTRUMENT</h4>
                 </div>
             </div>
@@ -152,15 +152,15 @@
 
             <div class="clearfix check-container text-center">
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">EVERY MAJOR &<br> MINOR SCALE</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">NEVER FEEL <br>TRAPPED</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">SONGS BECOME <br>EASIER</h4>
                 </div>
             </div>
@@ -179,15 +179,15 @@
 
             <div class="clearfix check-container text-center">
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">EVERY CHORD ON<br> EVERY KEY</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">UNLOCK  <br>NEW SONGS</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">CHANGE CHORDS  <br>FASTER</h4>
                 </div>
             </div>
@@ -206,15 +206,15 @@
 
             <div class="clearfix check-container text-center">
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">SOUND LIKE <br> EINAUDI</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">ADD BEAUTY TO <br>YOUR PLAYING</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">STEP-BY-STEP <br>INSTRUCTIONS</h4>
                 </div>
             </div>
@@ -232,15 +232,15 @@
 
             <div class="clearfix check-container text-center">
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">MASTER CHORD <br> PROGRESSIONS</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">PLAY SONGS   <br>MORE EASILY</h4>
                 </div>
                 <div class="col-xs-4 no-padding">
-                    <i class="fal fa-check text-red"></i>
+                    <i class="fa-light fa-check text-red"></i>
                     <h4 class="permanent">
                         <span class="hidden-sm hidden-md hidden-lg">USE YOUR <br>TECHNIQUE</span>
                         <span class="hidden-xs">PUT YOUR <br>TECHNIQUE TO USE</span>
@@ -479,14 +479,14 @@
             <h2><strong>Your hands <br class="hidden-sm hidden-md hidden-lg"> will thank you.</strong></h2>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-piano-keyboard"></i>
+                <i class="fa-light fa-piano-keyboard"></i>
                 <p>
                     <strong>Step-By-Step Lessons</strong><br> Every lesson is presented in order, starting at the easiest level. You’ll only progress when you’re ready.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-signal-alt"></i>
+                <i class="fa-light fa-signal-alt"></i>
                 <p>
                     <strong>All Skill Levels</strong><br> These lessons are perfect for all levels, from beginners wanting to master new keys to experienced players who need a refresher.
                 </p>
@@ -494,14 +494,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-video"></i>
+                <i class="fa-light fa-video"></i>
                 <p>
                     <strong>Guided Video Lessons</strong><br> Learn at your own pace, whenever it suits you. Watch a lesson as many times as you need from your own home.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-tachometer-alt"></i>
+                <i class="fa-light fa-tachometer-alt"></i>
                 <p>
                     <strong>More Effective Practice</strong><br> Don’t waste your practice time. Only work on the right exercises, at the right time. That guarantees the fastest results.
                 </p>
@@ -509,14 +509,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-hands-helping"></i>
+                <i class="fa-light fa-hands-helping"></i>
                 <p>
                     <strong>Personalized Support</strong><br> Need help? No problem! Get all your questions answered by REAL teachers who are here to help you every step of the way.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-infinity"></i>
+                <i class="fa-light fa-infinity"></i>
                 <p>
                     <strong>Lifetime Access</strong><br> The lessons are yours for life. They never expire and you can come back to them any time, as often as you like.
                 </p>

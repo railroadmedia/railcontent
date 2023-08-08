@@ -73,6 +73,7 @@ class PackPagesController extends Controller
 
     public function index(Request $request, $domain, $brand)
     {
+        PackDecorator::$skip = true;
         $packs = $this->packService->getPacks();
         $activePack = $this->cohortService->getActiveCohort()['content_id'] ?? 0;
 

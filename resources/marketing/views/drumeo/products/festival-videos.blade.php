@@ -60,14 +60,14 @@
     <section class="content-section benefits text-center">
         <div class="row">
             <div class="columns medium-6">
-                <i class="fal fa-music text-blue"></i>
+                <i class="fa-light fa-music text-blue"></i>
                 <h4><strong>10 Legendary Shows</strong></h4>
                 <p><em class="text-blue">10 hours of drumming inspiration.</em><br>
                     You’ll get digital access to the full 10 hours of performances from the Drumeo Festival — including Jojo Mayer & Nerve, Tommy Igoe & WIM Trio, Steve Smith & Vital Information, Cindy Blackman Santana, Benny Greb & Moving Parts, Robert “Sput” Searight & Ghost-Note, Anika Nilles, Chris Coleman, Horacio "El Negro" Hernández, and Aquiles Priester.
                 </p>
             </div>
             <div class="columns medium-6">
-                <i class="fal fa-play text-blue"></i>
+                <i class="fa-light fa-play text-blue"></i>
                 <h4><strong>Lifetime Access</strong></h4>
                 <p><em class="text-blue">Try risk-free for 90-days</em><br>
                     You’ll get lifetime access to all of the video performances from the Drumeo Festival — accessible inside your Drumeo.com account and accessible on any internet-ready device. Or if you’d rather take the performances with you on the road, you’ll be able to download your videos through the Drumeo App on Apple or Android phones and tablets.

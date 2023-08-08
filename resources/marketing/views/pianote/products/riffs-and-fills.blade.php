@@ -232,9 +232,9 @@ Connect every riff, fill and tip you’ve learned and see how to apply it to pre
                 <img class="guarantee-badge hidden-xs" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee badge">
                 <div class="text-wrap text-left">
                     <h3><em>
-                            <i class="text-red fal fa-check-circle"></i> Sound better and more professional<br>
-                            <i class="text-red fal fa-check-circle"></i> Apply fancy-sounding fills to REAL songs<br>
-                            <i class="text-red fal fa-check-circle"></i> Have way more FUN at the piano
+                            <i class="text-red fa-light fa-check-circle"></i> Sound better and more professional<br>
+                            <i class="text-red fa-light fa-check-circle"></i> Apply fancy-sounding fills to REAL songs<br>
+                            <i class="text-red fa-light fa-check-circle"></i> Have way more FUN at the piano
                         </em></h3>
 
                     <h4>We only want you to pay if you actually LOVE your Pianote experience! So join below to try it out totally risk-free. If it’s not for you, simply cancel your membership within 90 days and contact support for a full refund.</h4>

@@ -60,7 +60,7 @@
 </form>
 <br>
 <div class="disclaimer opacity-70 mx-auto inline-block" @if(!empty($disclaimerColor)) style="color: {{$disclaimerColor}};" @endif>
-    <i class="fal fa-info-circle float-left leading-none"></i>
+    <i class="fa-light fa-info-circle float-left leading-none"></i>
     <span class="mx-auto text-left float-left leading-tight">By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</span>
 </div>
 

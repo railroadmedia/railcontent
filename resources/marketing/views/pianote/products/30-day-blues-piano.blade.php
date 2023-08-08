@@ -381,7 +381,7 @@
                     'position' => 'left',
                     'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/perfect-lesson.jpg',
                     'title' => 'The PERFECT lesson, every time.',
-                    'desc' => 'Knowing what and how to practice is half the battle of getting better. But you’ll never have to worry, because all the lessons ARE your practice sessions. Every day just press play and follow along.',
+                    'desc' => 'You’ll start slow and gradually build your skills day-by-day. It won’t be overwhelming, and you’ll never have to worry about WHAT to practice.',
                     'special' => true,
                     ],
                     [
@@ -394,13 +394,13 @@
                     'position' => 'left',
                     'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/live-support.jpg',
                     'title' => 'Live support from REAL teachers.',
-                    'desc' => 'You won’t be playing the same chords over and over again. You’ll be playing REAL music. You’ll sound beautiful, and it will never feel like practice.',
+                    'desc' => 'Throughout the 30 days, you’ll have a team of REAL teachers to help you. Got questions? You’ll get a personalized answer from an experienced piano teacher. You’re never alone.',
                     ],
                     [
                     'position' => 'right',
                     'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/lifetime-access.jpg',
                     'title' => 'Lifetime access.',
-                    'desc' => 'At every step, you’ll have REAL teachers helping you. Ask questions, get feedback, and connect with other students. You’re never alone.',
+                    'desc' => 'The course lasts 30 days. But it’s yours for life. You’ll keep access to ALL the lessons forever. So you can go back and repeat anything you want to, as often as you like.',
                     ],
                 ];
             @endphp
@@ -497,7 +497,7 @@
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-6xl mx-auto">
-            <h2 class="leading-tight"><strong>Play More = Get Better.</strong></h2>
+            <h2 class="leading-tight"><strong>Play More. Get Better.</strong></h2>
             <p class="leading-tight mt-2 sm:mt-3 mb-5 sm:mb-7 uppercase text-blue-600">It’s not rocket science.</p>
             <p class="leading-normal mb-11 max-w-2xl">The more you play, the better you’ll get. And it won’t cost the earth. For less than the cost of 2 private piano lessons, you’ll get 30 days of guided training to get you playing awesome Blues piano. And once the course is over, the lessons are yours for life.</p>
             <div class="relative">
@@ -541,8 +541,8 @@
                     </tr>
                     <tr>
                         <td>Investment</td>
-                        <td class="rounded-b-xl"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong></td>
-                        <td class="rounded-bl-xl"><strong>$50-$100</strong><br> per lesson</td>
+                        <td class="rounded-b-xl"><strong>${{ floatval($productPrices['new-piano-players-start-here']->discounted_price) }}</strong><br>Single Payment</td>
+                        <td class="rounded-bl-xl"><strong>$50-$100</strong><br> For a Single <L></L>esson</td>
                         <td><strong>$89-$270+</strong><br>&nbsp;</td>
                         <td class="rounded-br-xl"><strong>$19-$49</strong><br>&nbsp;</td>
                     </tr>
@@ -627,62 +627,92 @@
     <div id="final" class="anchor"></div>
     <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white bg-cover bg-top" style="background:#00114f url(https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/order-bg.jpg);">
         <div class="container max-w-6xl mx-auto relative z-50">
-            <div class="flex flex-wrap items-center justify-center">
-                <div class="text-center sm:text-left w-full sm:w-7/12 lg:w-1/3 mb-7 lg:mb-0">
-                    <img class="h-20 md:h-24 lg:h-28 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
-                    <h4 class="leading-tight mt-2 mb-4 sm:my-4 lg:my-5"><strong>
-                            20 Guided Play-Along Lessons.<br>
-                            Feedback From REAL Teachers.<br>
-                            Lifetime Course Access.
-                        </strong></h4>
-                    <div class="w-full mx-auto sm:mx-0">
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Master your chord changes & inversions.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Join {{ number_format($nPackOwners ?? 0) }} piano players who have already registered.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i> Course runs Sept. 4th to Oct 3rd.</p>
-                        <p class="leading-tight mb-2 sm:mb-3"><i class="fas fa-check text-pianote mr-1"></i>  Choose your best option to get started.</p>
-                    </div>
-{{--                    <span class="join sold-out medium w-full align-middle" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-                </div>
-
-                <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10 text-black">
-                    <a href="/ecommerce/add-to-cart?products[30-day-blues-piano]=1&locked=true"
-                        class="z-10 relative px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-lg w-full sm:w-5/12">
-                        <p class="text-white bg-blue-600 inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">EARLY BIRD SPECIAL</p>
-                        <h3><strong>30-Day Blues Piano</strong></h3>
-                        <p class="text-sm mt-2 mb-5">Play the Blues in just 30 days.</p>
-                        <h2 class="inline-block"><s class="opacity-60">$235</s> <strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>
-                        <div class="join blue smaller my-4 w-full">ENROLL NOW</div>
-                        <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                            <i class="fas fa-check text-blue-600 mr-1"></i> Lifetime Course Access<br>
-                            <i class="fas fa-check text-blue-600 mr-1"></i> FREE Faster Fingers ($99 Value)<br>
-                            <i class="fas fa-check text-blue-600 mr-1"></i> FREE Chords & Scales Book ($39 Value)<br>
-                            <i class="fas fa-check text-blue-600 mr-1"></i> 90-Day Money-Back Guarantee</p>
-                    </a>
-                    <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,100-days-of-practice-poster:1,the-power-of-chords:1,piano-riffs-and-fills:1&redirect=/order&locked=true"
-                        class="px-5 sm:px-10 py-5 sm:py-7 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"
-                        style="background-color:#dde9f9;background-image:url(https://www.musora.com/musora-cdn/image/width=380,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/order-bg.jpg);"
-                    >
-                        <p class="bg-pianote text-white inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">LAUNCH MEMBERSHIP SPECIAL</p>
-                        <h3><strong>Join Pianote + FREE <br class="hidden sm:inline"> 30-Day Blues Piano</strong></h3>
-                        <p class="text-sm mt-2 mb-5">The Ultimate Online Lessons Experience.</p>
-                        <h2 class="inline-block"><s class="opacity-60">$726</s> <strong class="text-4xl">$200</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>
-                        <div class="join blue smaller my-4 w-full">GET EVERYTHING</div>
-                        <ul class="list-disc ml-6">
-                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Easy Chords ($97 Value)</li>
-                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> New Piano Players Start Here ($97 Value)</li>
-                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Faster Fingers ($99 Value)</li>
-                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Chords & Scales Book ($39 Value)</li>
-                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Chords & Scales Posters ($18 Value)</li>
-                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Pianote Practice Planner ($39 Value)</li>
-                        </ul>
-                        <hr class="w-full my-5" style="border-color:#b2cae1">
-                        <p class="leading-loose text-sm"><strong>Key Features</strong><br>
-                            <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>
-                            <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money-Back Guarantee</p>
-                    </a>
-                </div>
-
+            <div class="text-center">
+                <img class="h-20 md:h-24 lg:h-28 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <h4 class="leading-tight mt-4 mb-2">
+                    <strong>20 Guided Play-Along Lessons + Feedback From REAL Teachers.</strong>
+                </h4>
+                <p class="mb-10">Learn to play the Blues in the first-ever class starting September 4th!</p>
             </div>
+            <div class="md:grid md:grid-cols-2 gap-6 max-w-md md:max-w-3xl mx-auto text-black mb-7">
+                <div class="bg-white rounded-xl py-8 px-4 mb-10 md:mb-0">
+                    <div class="text-center -mt-11">
+                        <div class="bg-[#284FFD] rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">EARLY BIRD SPECIAL</div>
+                        <h4 class="mb-10"><strong>30-Day Blues Piano</strong></h4>
+                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/early-bird-collage.png" alt="Early bird special pack" />
+                        <h2><s class="text-[#ABB5C2] mr-2">$235</s><strong>$97</strong></h2>
+                        <p class="italic mb-4 text-xs">One-time payment</p>
+                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1,faster-fingers:1,piano-chords-and-scales-guide:1&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-[#284FFD]">ENROLL NOW</a>
+                        <p>
+                            <b class="text-[#284FFD]">30-Day Blues Piano (Lifetime Access)</b><br/>
+                            <span class="text-[#284FFD]">Free</span> Faster Fingers <i>($99 value)</i><br>
+                            <span class="text-[#284FFD]">Free</span> Chords & Scales Book <i>($39 value)</i>
+                        </p>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl py-8 px-4">
+                    <div class="text-center -mt-11">
+                        <div class="bg-pianote rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">LAUNCH MEMBERSHIP SPECIAL</div>
+                        <h4 class="mb-10"><strong>Join Pianote + FREE 30-Day Blues Piano</strong></h4>
+                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/launch-membership-collage.png" alt="Membership special pack" />
+                        <h2><s class="text-[#ABB5C2] mr-2">$726</s><strong>$200</strong></h2>
+                        <p class="italic mb-4 text-xs">Billed annually at $200/yr.</p>
+                        <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,easy-chords:1,new-piano-players-start-here:1,faster-fingers:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1&promo-code=special&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-pianote">ENROLL NOW</a>
+                        <p>
+                            <b class="text-pianote">Annual Pianote Membership</b><br/>
+                            <b class="text-pianote">30-Day Blues Piano (Lifetime Access)</b><br/>
+                            <span class="text-pianote">Free</span> Easy Chords <i>($97 value)</i><br>
+                            <span class="text-pianote">Free</span> New Piano Players Start Here <i>($97 value)</i><br>
+                            <span class="text-pianote">Free</span> Faster Fingers <i>($99 value)</i><br>
+                            <span class="text-pianote">Free</span> Chords & Scales Book <i>($39 value)</i><br>
+                            <span class="text-pianote">Free</span> Chords & Scales Posters <i>($18 value)</i><br>
+                            <span class="text-pianote">Free</span> Pianote Practice Planner <i>($39 value)</i>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex items-center justify-center">
+                <img class="h-7 mr-1 transition-all" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/piano-players-trusted.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <div class="inline-block leading-tight text-sm">Join 9,375 piano players who<br> have already registered.</div>
+            </div>
+
+{{--                <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10 text-black">--}}
+{{--                    <a href="/ecommerce/add-to-cart?products[30-day-blues-piano]=1&locked=true"--}}
+{{--                        class="z-10 relative px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-lg w-full sm:w-5/12">--}}
+{{--                        <p class="text-white bg-blue-600 inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">EARLY BIRD SPECIAL</p>--}}
+{{--                        <h3><strong>30-Day Blues Piano</strong></h3>--}}
+{{--                        <p class="text-sm mt-2 mb-5">Play the Blues in just 30 days.</p>--}}
+{{--                        <h2 class="inline-block"><s class="opacity-60">$235</s> <strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>--}}
+{{--                        <div class="join blue smaller my-4 w-full">ENROLL NOW</div>--}}
+{{--                        <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
+{{--                            <i class="fas fa-check text-blue-600 mr-1"></i> Lifetime Course Access<br>--}}
+{{--                            <i class="fas fa-check text-blue-600 mr-1"></i> FREE Faster Fingers ($99 Value)<br>--}}
+{{--                            <i class="fas fa-check text-blue-600 mr-1"></i> FREE Chords & Scales Book ($39 Value)<br>--}}
+{{--                            <i class="fas fa-check text-blue-600 mr-1"></i> 90-Day Money-Back Guarantee</p>--}}
+{{--                    </a>--}}
+{{--                    <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,100-days-of-practice-poster:1,the-power-of-chords:1,piano-riffs-and-fills:1&redirect=/order&locked=true"--}}
+{{--                        class="px-5 sm:px-10 py-5 sm:py-7 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"--}}
+{{--                        style="background-color:#dde9f9;background-image:url(https://www.musora.com/musora-cdn/image/width=380,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/order-bg.jpg);"--}}
+{{--                    >--}}
+{{--                        <p class="bg-pianote text-white inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">LAUNCH MEMBERSHIP SPECIAL</p>--}}
+{{--                        <h3><strong>Join Pianote + FREE <br class="hidden sm:inline"> 30-Day Blues Piano</strong></h3>--}}
+{{--                        <p class="text-sm mt-2 mb-5">The Ultimate Online Lessons Experience.</p>--}}
+{{--                        <h2 class="inline-block"><s class="opacity-60">$726</s> <strong class="text-4xl">$200</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>--}}
+{{--                        <div class="join blue smaller my-4 w-full">GET EVERYTHING</div>--}}
+{{--                        <ul class="list-disc ml-6">--}}
+{{--                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Easy Chords ($97 Value)</li>--}}
+{{--                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> New Piano Players Start Here ($97 Value)</li>--}}
+{{--                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Faster Fingers ($99 Value)</li>--}}
+{{--                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Chords & Scales Book ($39 Value)</li>--}}
+{{--                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Chords & Scales Posters ($18 Value)</li>--}}
+{{--                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Pianote Practice Planner ($39 Value)</li>--}}
+{{--                        </ul>--}}
+{{--                        <hr class="w-full my-5" style="border-color:#b2cae1">--}}
+{{--                        <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
+{{--                            <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>--}}
+{{--                            <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money-Back Guarantee</p>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
         </div>
     </section>
 

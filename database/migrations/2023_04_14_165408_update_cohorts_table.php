@@ -8,12 +8,17 @@ return new class extends Migration {
 
     public function up()
     {
-        Schema::table('cohorts', function (Blueprint $table) {
-            $table->renameColumn('start_date', 'enrollment_start_date');
-            $table->renameColumn('end_date', 'enrollment_end_date');
-            $table->timestamp('cohort_start_date')->nullable();
-            $table->timestamp('cohort_end_date')->nullable();
-        });
+        // SQLite doesn't support multiple calls to dropColumn / renameColumn in a single modification
+        if (Schema::getConnection()->getDriverName() === "sqlite") {
+            $this->upSqlite();
+        } else {
+            Schema::table('cohorts', function (Blueprint $table) {
+                $table->renameColumn('start_date', 'enrollment_start_date');
+                $table->renameColumn('end_date', 'enrollment_end_date');
+                $table->timestamp('cohort_start_date')->nullable();
+                $table->timestamp('cohort_end_date')->nullable();
+            });
+        }
 
         $cohorts = [
             [
@@ -22,7 +27,7 @@ return new class extends Migration {
                 'cohort_end_date' => '2023-03-31 00:00:00',
             ],
             [
-                'id' => 1,
+                'id' => 2,
                 'cohort_start_date' => '2023-03-01 00:00:00',
                 'cohort_end_date' => '2023-03-31 00:00:00',
             ],
@@ -38,10 +43,54 @@ return new class extends Migration {
 
     public function down()
     {
+        if (Schema::getConnection()->getDriverName() === "sqlite") {
+            $this->downSqlite();
+        } else {
+            Schema::table('cohorts', function (Blueprint $table) {
+                $table->renameColumn('enrollment_start_date', 'start_date');
+                $table->renameColumn('enrollment_end_date', 'end_date');
+                $table->dropColumn('cohort_start_date');
+                $table->dropColumn('cohort_end_date');
+            });
+        }
+    }
+
+    /**
+     * Run the migrations (separated out for SQLite support)
+     *
+     * @return void
+     */
+    private function upSqlite(): void
+    {
+        Schema::table('cohorts', function (Blueprint $table) {
+            $table->renameColumn('start_date', 'enrollment_start_date');
+        });
+        Schema::table('cohorts', function (Blueprint $table) {
+            $table->renameColumn('end_date', 'enrollment_end_date');
+        });
+        Schema::table('cohorts', function (Blueprint $table) {
+            $table->timestamp('cohort_start_date')->nullable();
+            $table->timestamp('cohort_end_date')->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations (separated out for SQLite support)
+     *
+     * @return void
+     */
+    public function downSqlite(): void
+    {
         Schema::table('cohorts', function (Blueprint $table) {
             $table->renameColumn('enrollment_start_date', 'start_date');
+        });
+        Schema::table('cohorts', function (Blueprint $table) {
             $table->renameColumn('enrollment_end_date', 'end_date');
+        });
+        Schema::table('cohorts', function (Blueprint $table) {
             $table->dropColumn('cohort_start_date');
+        });
+        Schema::table('cohorts', function (Blueprint $table) {
             $table->dropColumn('cohort_end_date');
         });
     }

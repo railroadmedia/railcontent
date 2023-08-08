@@ -106,7 +106,7 @@
                 </form>
                 <div class="disclaimer block opacity-70 mx-auto mt-3 max-w-lg">
                     <div class="flex w-full">
-                    <i class="fal fa-info-circle leading-none text-xl md:text-3xl" style="width:40px"></i>
+                    <i class="fa-light fa-info-circle leading-none text-xl md:text-3xl" style="width:40px"></i>
                     <p class="mx-auto text-left leading-tight pl-2 text-xs"><em>By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</em></p>
                     </div>
                 </div>
