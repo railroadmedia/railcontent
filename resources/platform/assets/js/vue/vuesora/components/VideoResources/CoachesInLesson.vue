@@ -1,11 +1,7 @@
 <template>
   <div
     class="
-      tw-w-full tw-grid tw-grid-cols-1
-      sm:tw-grid-cols-2
-      xl:tw-grid-cols-4
-      tw-grid-flow-row tw-gap-0
-    "
+      tw-w-full tw-flex tw-flex-wrap"
   >
     <div
       v-for="instructor in instructorList"
