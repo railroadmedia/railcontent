@@ -273,11 +273,11 @@
         ])
 
     <script>
-{{--        @if(!empty($purchased) && $purchased)--}}
+        @if(!empty($purchased) && $purchased)
         document.addEventListener('DOMContentLoaded', function () {
             window.openModal('signupModal');
         })
-{{--        @endif--}}
+        @endif
 
         function enroll(URL){
             fetch(URL, {
