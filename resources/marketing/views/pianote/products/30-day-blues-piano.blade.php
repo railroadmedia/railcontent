@@ -791,12 +791,12 @@
 
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "demoVid",
-        "video" => '//player.vimeo.com/video/TODO&autoplay=1',
+        "video" => '//player.vimeo.com/video/852836211?autoplay=1',
         "title" => 'demoVid'
     ])
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/TODO&autoplay=1',
+        "video" => '//player.vimeo.com/video/852795615?autoplay=1',
         "title" => 'trailer'
     ])
 
