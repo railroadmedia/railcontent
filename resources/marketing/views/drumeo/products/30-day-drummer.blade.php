@@ -772,7 +772,7 @@
                      <span x-cloak x-show="timeLeft > 0">left!</span>
                      <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                  </span>
-                <br><strong></strong>
+                <br><br><strong class="font-black"><i class="fas fa-arrow-down"></i> CHOOSE YOUR BUNDLE <i class="fas fa-arrow-down"></i></strong>
             </p>
 
             <div class="grid md:grid-cols-3 gap-2 lg:gap-4 items-start px-4 mx-auto max-w-md md:max-w-none">
