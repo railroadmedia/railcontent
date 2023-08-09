@@ -729,11 +729,6 @@
             <h2><strong>Still have questions?</strong></h2>
             <div class="max-w-6xl mt-4 sm:mt-10 px-4">
                 @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "Why do I need to register if I get it for free as a member?",
-                "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",
-                ])
-                @include('_partials.components.question-dropdown', [
                 "title" => "What if I miss a day (or two)?",
                 "desc" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
                 "num" => '?',
