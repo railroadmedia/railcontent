@@ -28,10 +28,10 @@ class SyncStripePaymentMethods extends Command
     public function handle(StripePaymentGateway $stripePaymentGateway)
     {
         $this->stripePaymentGateway = $stripePaymentGateway;
-        $this->info("Migrate Stripe Gateway Customers and Credit Cards To Musora...");
-
         $userId = $this->argument('userId') ?? 0;
         $toUserId = $this->argument('toUserId') ?? 9999999;
+        $this->info("Migrate Stripe Gateway Customers and Credit Cards To Musora... $userId to $toUserId.");
+
         $this->withExecutionTime(function () use ($userId, $toUserId) {
             $query = StripeCustomer::query()
                 ->where('user_id', '>=', $userId)
