@@ -104,11 +104,11 @@ class SyncStripePaymentMethods extends Command
                 }
 
                 $expirationDate = Carbon::createFromDate($card->exp_year, $card->exp_month);
-                if ($expirationDate->addYear()->isPast()) {
-                    $this->info("Card is expired");
-                    $this->expiredCount++;
-                    continue;
-                }
+//                if ($expirationDate->addYear()->isPast()) {
+//                    $this->info("Card is expired");
+//                    $this->expiredCount++;
+//                    continue;
+//                }
 
                 $expirationDateCompare = $expirationDate->format('Y-m');
 
