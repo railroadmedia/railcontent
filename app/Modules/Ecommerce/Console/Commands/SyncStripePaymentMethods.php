@@ -105,7 +105,7 @@ class SyncStripePaymentMethods extends Command
                 }
 
                 $expirationDate = Carbon::createFromDate($card->exp_year, $card->exp_month);
-                if ($expirationDate->addMonth()->isPast()) {
+                if ($expirationDate->addYear()->isPast()) {
                     $this->info("Card is expired");
                     $this->expiredCount++;
                     continue;
@@ -141,7 +141,8 @@ class SyncStripePaymentMethods extends Command
                 $newCreditCard->last_four_digits = $card->last4;
                 $newCreditCard->cardholder_name = $card->name;
                 $newCreditCard->company_name = $card->brand;
-                $newCreditCard->expiration_date = Carbon::createFromDate($card->exp_year, $card->exp_month);
+                $newCreditCard->expiration_date = Carbon::createFromDate($card->exp_year, $card->exp_month, 1)
+                    ->format('Y-m-d');
                 $newCreditCard->external_id = $card->id;
                 $newCreditCard->external_customer_id = $stripeCustomer->stripe_customer_id;
                 $newCreditCard->payment_gateway_name = 'musora';

@@ -789,23 +789,13 @@
     </div>
 
     @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "dayOne",
-        "video" => '//player.vimeo.com/video/823805392?h=bbd23aa655&autoplay=1',
-        "title" => 'dayOne'
-    ])
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "dayThirty",
-        "video" => '//player.vimeo.com/video/823805719?h=722d7f7336&autoplay=1',
-        "title" => 'dayThirty'
-    ])
-    @include('drumeo.sales.partials._video-modal',[
         'modalId' => "demoVid",
-        "video" => '//player.vimeo.com/video/823806000?h=457fb12951&autoplay=1',
+        "video" => '//player.vimeo.com/video/TODO&autoplay=1',
         "title" => 'demoVid'
     ])
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/823788317?h=b2955e3bc7&autoplay=1',
+        "video" => '//player.vimeo.com/video/TODO&autoplay=1',
         "title" => 'trailer'
     ])
 
