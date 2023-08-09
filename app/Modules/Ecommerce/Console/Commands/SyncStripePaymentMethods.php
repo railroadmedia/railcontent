@@ -51,13 +51,13 @@ class SyncStripePaymentMethods extends Command
                 $paymentMethodLookup = $paymentMethods->keyBy(
                     'credit_card_id'
                 );
-                $paymentMethodIds = $paymentMethods->pluck('id')->toArray();
-                $subscriptionLookup = Subscription::query()
-                    ->whereIn('payment_method_id', $paymentMethodIds)
-                    ->get()->keyBy('payment_method_id');
+//                $paymentMethodIds = $paymentMethods->pluck('id')->toArray();
+//                $subscriptionLookup = Subscription::query()
+//                    ->whereIn('payment_method_id', $paymentMethodIds)
+//                    ->get()->keyBy('payment_method_id');
                 foreach ($items as $item) {
                     $this->totalCount++;
-                    $this->migrateStripeCustomer($item, $creditCardLookup, $paymentMethodLookup, $subscriptionLookup);
+                    $this->migrateStripeCustomer($item, $creditCardLookup, $paymentMethodLookup);
                 }
             });
         });
@@ -74,8 +74,7 @@ class SyncStripePaymentMethods extends Command
     private function migrateStripeCustomer(
         StripeCustomer $stripeCustomer,
         $creditCardLookup,
-        $paymentMethodLookup,
-        $subscriptionLookup
+        $paymentMethodLookup
     ) {
         $this->info("Migrating stripe user to musora: " . $stripeCustomer->user_id);
 
@@ -159,15 +158,15 @@ class SyncStripePaymentMethods extends Command
                 $newUserPaymentMethod->payment_method_id = $newPaymentMethod->id;
                 $newUserPaymentMethod->save();
 
-                $subscription = $subscriptionLookup->get($matchingPaymentMethod->id ?? 0) ?? null;
-                if ($subscription) {
-                    $subscription->legacy_payment_method_id = $matchingPaymentMethod->id ?? null;
-                    $subscription->payment_method_id = $newPaymentMethod->id;
-                    $subscription->save();
-                    $this->info(
-                        "Subscription $subscription->id updated from $subscription->legacy_payment_method_id to $subscription->payment_method_id"
-                    );
-                }
+//                $subscription = $subscriptionLookup->get($matchingPaymentMethod->id ?? 0) ?? null;
+//                if ($subscription) {
+//                    $subscription->legacy_payment_method_id = $matchingPaymentMethod->id ?? null;
+//                    $subscription->payment_method_id = $newPaymentMethod->id;
+//                    $subscription->save();
+//                    $this->info(
+//                        "Subscription $subscription->id updated from $subscription->legacy_payment_method_id to $subscription->payment_method_id"
+//                    );
+//                }
                 $this->info("Created Payment Method for card");
                 $this->createdPaymentMethods++;
             } catch (Exception $e) {
