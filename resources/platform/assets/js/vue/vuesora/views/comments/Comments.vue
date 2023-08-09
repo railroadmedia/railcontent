@@ -13,20 +13,34 @@
                         </div>
                     </div>
                 </div>
-                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mr-auto tw-mb-2 lg:tw-mb-0 tw-whitespace-nowrap">
+                <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl tw-mb-2 lg:tw-mb-0 tw-whitespace-nowrap tw-mr-5">
                     <span>{{ totalCommentsAndReplies }}</span>
                     Comments
                 </h2>
-                <button v-if="collapsable" class="tw-btn-primary tw-transparent tw-px-3 dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6] tw-text-[#00101D] dark:tw-text-white"
+                <!-- Sort -->
+                <div class="tw-mr-auto">
+                    <div class="form-group xs-12" style="width:100%;">
+                        <select id="commentSort" class="dark:tw-text-white tw-pb-0 tw-pt-1 has-input tw-h-[40px] tw-font-bebas-neue tw-border-2 tw-border-[#000C17] dark:tw-border-white" v-model="sortInterface">
+                            <option class="tw-text-[#00101D]" value="-like_count">
+                                Popular
+                            </option>
+                            <option class="tw-text-[#00101D]" value="-created_on">
+                                Latest
+                            </option>
+                            <option class="tw-text-[#00101D]" value="created_on">
+                                Oldest
+                            </option>
+                            <option class="tw-text-[#00101D]" value="-mine">
+                                My Comments
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <button v-if="collapsable" class="btn collapse-square"
                         @click="commentsCollapsed = !commentsCollapsed">
-                    {{ !commentsCollapsed ? 'Hide Comments' : 'Show Comments' }}
-                    <svg class="tw-ml-3 tw-text-[#3F3F46] dark:tw-text-[#9EC0DC]"
-                         :class="[{ 'tw-rotate-180': !commentsCollapsed }]" width="15" height="16" viewBox="0 0 15 16"
-                         fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path
-                            d="M13.0492 8.33329L7.21583 14.1666L1.38249 8.33329M13.0492 1.66663L7.21583 7.49996L1.38249 1.66663"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                    </svg>
+                    <div class="tw-border-2 tw-text-[#000C17] tw-border-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center" :class="!commentsCollapsed && 'tw-rotate-180'">
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
                 </button>
             </div>
         </div>
@@ -69,27 +83,6 @@
                             loading...
                         </p>
                     </div>
-                </div>
-            </div>
-
-            <!-- Sort -->
-            <div class="tw-ml-auto tw-mb-3">
-                <div class="form-group xs-12" style="width:100%;">
-                    <select id="commentSort" class="dark:tw-text-white tw-pb-0 has-input" v-model="sortInterface">
-                        <option class="tw-text-[#00101D]" value="-like_count">
-                            Popular
-                        </option>
-                        <option class="tw-text-[#00101D]" value="-created_on">
-                            Latest
-                        </option>
-                        <option class="tw-text-[#00101D]" value="created_on">
-                            Oldest
-                        </option>
-                        <option class="tw-text-[#00101D]" value="-mine">
-                            My Comments
-                        </option>
-                    </select>
-                    <label for="commentSort" :class="brandTextColor">Sort By</label>
                 </div>
             </div>
 
