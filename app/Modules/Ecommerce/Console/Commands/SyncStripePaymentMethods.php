@@ -6,7 +6,6 @@ use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Models\CreditCard;
 use App\Modules\Ecommerce\Models\PaymentMethod;
 use App\Modules\Ecommerce\Models\StripeCustomer;
-use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\UserPaymentMethod;
 use Carbon\Carbon;
 use Exception;
@@ -30,7 +29,7 @@ class SyncStripePaymentMethods extends Command
         $this->stripePaymentGateway = $stripePaymentGateway;
         $userId = $this->argument('userId') ?? 0;
         $toUserId = $this->argument('toUserId') ?? 9999999;
-        $this->info("Migrate Stripe Gateway Customers and Credit Cards To Musora... $userId to $toUserId.");
+        $this->info("Migrate Stripe Credit Cards To Musora... $userId to $toUserId.");
 
         $this->withExecutionTime(function () use ($userId, $toUserId) {
             $query = StripeCustomer::query()
@@ -62,6 +61,7 @@ class SyncStripePaymentMethods extends Command
             });
         });
 
+        $this->info("Finished Migrated Stripe Credit Cards To Musora... $userId to $toUserId.");
         $this->info("Summary:");
         $this->info("Total Users: " . $this->totalCount);
         $this->info("Total Cards: " . $this->totalCards);
