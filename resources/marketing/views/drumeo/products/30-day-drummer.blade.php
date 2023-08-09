@@ -273,7 +273,7 @@
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the next class <br class="inline lg:hidden">starting Sept 4th.</strong></h6>
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video lazyload" style="padding-bottom: 63%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/header-thumb-early-bird-m.png" data-open="trailer">
+                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video lazyload" style="padding-bottom: 63%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/header-thumb-early-bird-m2.png" data-open="trailer">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
 
@@ -316,7 +316,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video lazyload" style="padding-bottom: 98%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/header-thumb-early-bird.png" data-open="trailer">
+                    <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video lazyload" style="padding-bottom: 98%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/header-thumb-early-bird2.png" data-open="trailer">
                         <div class="join white smaller absolute {{-- bottom-1 --}} bottom-2 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
@@ -503,14 +503,14 @@
             @if(session()->has('success-message'))
                 <p class="-mb-2 sm:-mb-8 mt-5 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>
             @endif
-            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>
-{{--            @if($hasProduct)--}}
-{{--                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>--}}
-{{--            @else--}}
-{{--                <a--}}
-{{--                    href="{{ $registerButtonUrl }}"--}}
-{{--                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>--}}
-{{--            @endif--}}
+{{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>--}}
+            @if($hasProduct)
+                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
+            @else
+                <a
+                    href="{{ $registerButtonUrl }}"
+                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 @if(!is_current_user_a_member()) anchor-slide @endif">ENROLL NOW</a><br>
+            @endif
             <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined student profiles">
             <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
 
@@ -765,7 +765,7 @@
     </section>
 
     <section class="py-10 sm:py-16 lg:py-20 bg-[#EFF7FF]">
-        <div class="max-w-5xl mx-auto text-center">
+        <div class="max-w-6xl mx-auto text-center">
             <img class="h-20 sm:h-24 lg:h-28 mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/30_day_drummer_logo.svg" alt="30DD logo season3 logo">
             <h3 class="mb-4"><strong>Learn the drums with daily guided workouts.</strong></h3>
             <p class="mb-1">
@@ -775,13 +775,13 @@
                 <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
                      <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                      <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                     <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
                      <span x-cloak x-show="timeLeft > 0">left!</span>
                      <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                  </span>
             </p>
-            <div class="grid md:grid-cols-3 gap-2 lg:gap-6 px-4 mx-auto max-w-md md:max-w-none">
+            <div class="grid md:grid-cols-3 gap-2 lg:gap-4 items-start px-4 mx-auto max-w-md md:max-w-none">
                 <div class="bg-white rounded-xl border border-drumeo py-8 px-4 mb-8 md:mb-0">
                     <div class="text-center -mt-11">
                         <div class="bg-drumeo rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Keeping it light</div>
@@ -791,7 +791,7 @@
                         <h2><s class="text-[#ABB5C2] mr-2">$97</s><strong>$77</strong></h2>
                         <p class="italic mb-4 text-xs">One-time payment</p>
                         <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&promo-code=special&redirect=/order&locked=true" class="join blue medium w-full mb-5">ENROLL NOW</a>
-                        <p>
+                        <p class="inline-block text-left">
                             <b>30-Day Drummer - Season 3</b><br/>
                             <b class="text-drumeo">Free</b> 1-Month Drumeo Access
                         </p>
@@ -806,7 +806,7 @@
                         <h2><s class="text-[#ABB5C2] mr-2">$147</s><strong>$117</strong></h2>
                         <p class="italic mb-4 text-xs">One-time payment</p>
                         <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_90-days:1,quietpad:1,padstand:1,Drumeo-VaterSticks:1,Drumeo-Key:1&redirect=/order&locked=true" class="join medium w-full mb-5 bg-[#FFB500]">ENROLL NOW</a>
-                        <p>
+                        <p class="inline-block text-left">
                             <b>30-Day Drummer - Season 3</b><br/>
                             <b class="text-[#FFB500]">Free</b> 3-Month Drumeo Access<br>
                             <b class="text-[#FFB500]">Free</b> Drumeo QuietPad<br>
@@ -824,9 +824,9 @@
                         <p class="italic mb-4 text-xs mt-2">1 year of Drumeo + 7 bonuses worth $580.95</p>
                         <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-3.png" alt="Tier 3 pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$240</s><strong>$200</strong></h2>
-                        <p class="italic mb-4 text-xs">Per year</p>
-                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,DLM-1-year:1,quietpad:1,padstand:1,Drumeo-VaterSticks:1,BeginnerBook:1,Drumeo-Key:1,independence-made-easy-pack:1,four-weeks-to-better-drum-fills:1,learn-songs-faster-pack:1&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-[#071D31]">ENROLL NOW</a>
-                        <p>
+                        <p class="italic mb-4 text-xs">Your first year</p>
+                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,DLM-1-year:1,quietpad:1,padstand:1,Drumeo-VaterSticks:1,BeginnerBook:1,Drumeo-Key:1,independence-made-easy-pack:1,four-weeks-to-better-drum-fills:1,learn-songs-faster-pack:1&promo-code=special&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-[#071D31]">ENROLL NOW</a>
+                        <p class="inline-block text-left">
                             <b>Annual Drumeo Membership</b><br/>
                             <b class="text-[#071D31]">Free</b> 30-Day Drummer - Season 3<br>
                             <b class="text-[#071D31]">Free</b> Drumeo QuietPad<br>
@@ -925,26 +925,9 @@
         </div>
     </section>
 
-        <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="waitlistModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
-            <div class="p-5 sm:p-7">
-                <img class="h-24 sm:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD logo">
-                <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
-                <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
-                    next edition of 30-Day Drummer is announced. </p>
-                @include("drumeo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-                    "formName" => '30 Day Drummer Waitlist',
-                    "formId" => "Drumeo - Engagement - Trigger - 30 Day Drummer Waitlist - Web Form",
-                    "buttonText" => "Let Me Know ",
-                    "stacked" => true,
-                    "noSocial" => true,
-                ])
-            </div>
-        </div>
-
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/796456383?autoplay=1',
+        "video" => '//player.vimeo.com/video/852777053?h=87d3e7a97a&autoplay=1',
         "title" => 'trailer'
     ])
 
@@ -981,16 +964,6 @@
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('private');
             });
-
-            // var showModal = location.search.substr(1).includes('member-email');
-            //
-            // if (showModal) {
-            //     $('#loginModal').foundation('open');
-            // }
-
-            @if(!empty($errors) && $errors->any())
-                $('#waitlistModal').foundation('open');
-            @endif
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
