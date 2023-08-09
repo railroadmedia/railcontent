@@ -16,175 +16,6 @@
     <link href="{{ asset('/marketing/parcel/drumeo/30dd.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
     <style>
-
-        [placeholder]:focus::-webkit-input-placeholder {
-            color:transparent
-        }
-
-        form ::-webkit-input-placeholder, form ::-moz-placeholder, form :-ms-input-placeholder, form :-moz-placeholder {
-            color:#777
-        }
-
-        form {
-            position: relative;
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        @media (min-width: 768px) {
-            form {
-                margin: 0 auto 10px;
-            }
-        }
-
-        form input, form button {
-            font: 400 18px/50px 'Open Sans', sans-serif;
-            height: 50px;
-            color: #999;
-            border-radius: 100px;
-            text-align: left;
-            padding: 7px 20px;
-            margin: 0 auto 15px;
-        }
-        @media (min-width: 768px) {
-            form input, form button {
-                font-size: 22px;
-                height: 65px;
-                line-height: 65px;
-            }
-        }
-        form input[type="submit"], form button[type="submit"], form input button, form button button {
-            font-family: 'Roboto Condensed', sans-serif;
-            font-weight: 700;
-            color: #fff;
-            background: #F61A30;
-            text-transform: uppercase;
-            margin: 0 auto 15px;
-            display: block;
-            cursor: pointer;
-            border: none;
-            width: 100%;
-            text-align: center;
-            padding: 0;
-        }
-        form input[type="submit"]:hover, form button[type="submit"]:hover, form input button:hover, form button button:hover {
-            background:#ff5454;
-        }
-        .disclaimer {
-            display: none;
-            margin: 0 auto;
-            opacity: 0.9;
-            max-width: 500px;
-        }
-
-        .thank-you-box {
-            width:100%;
-            max-width:960px;
-            border-radius:5px;
-            height:auto;
-            max-height:0;
-            visibility:hidden;
-            opacity:0;
-            transition:all .4s ease-in;
-            display:block;
-            margin:0 auto;
-            background:#FFF;
-            text-align:center;
-            overflow:hidden;
-            color:#000
-        }
-
-        .thank-you-box.active {
-            max-height:1000px;
-            visibility:visible;
-            opacity:1;
-            padding:15px
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box.active {
-                padding:20px
-            }
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box.active {
-                padding:30px
-            }
-        }
-
-        .thank-you-box p {
-            font:400 15px/1.4em "Open Sans", sans-serif;
-            margin:0 auto
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box p {
-                font-size:19px
-            }
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box p {
-                font-size:23px
-            }
-        }
-
-        .thank-you-box p em {
-            line-height:1.4em;
-            max-width:550px;
-            display:inline-block;
-            font-size:12px
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box p em {
-                font-size:14px
-            }
-        }
-
-        .thank-you-box h2 {
-            font:700 30px/1em "Roboto Condensed", sans-serif;
-            margin:15px auto;
-            text-transform:uppercase;
-            color:#F61A30
-        }
-
-        @media (min-width:40em) {
-            .thank-you-box h2 {
-                font-size:37px;
-                margin:20px auto
-            }
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box h2 {
-                font-size:44px
-            }
-        }
-
-        .thank-you-box .social-media a {
-            background:#000;
-            color:#fff;
-            border-radius:50%;
-            display:inline-block;
-            text-align:center;
-            margin:20px 3px 0;
-            width:50px;
-            height:50px;
-            line-height:50px;
-            font-size:26px
-        }
-
-        @media (min-width:64em) {
-            .thank-you-box .social-media a {
-                width:70px;
-                height:70px;
-                line-height:70px;
-                font-size:35px;
-                margin:25px 10px 0
-            }
-        }
         .timeline-container .timeline:after,
         .timeline-container:after {
             background-color: #284ffd;
@@ -198,54 +29,15 @@
             background-color:#eb1a2f;
 
         }
-
-        .image-modal-arrow-left, .image-modal-arrow-right {
-            font-size: 0;
-            position: absolute;
-            transform: translate(0, -50%);
-            background: #FFF;
-            transition: opacity .3s;
-            border-radius: 100px;
-            height: auto;
-            width: auto;
-            z-index: 10;
-            padding: 3px 10px;
-            margin: 0;
-            bottom: unset;
-            top: 50%;
-        }
-
-        .image-modal-arrow-left {
-            left: 0;
-        }
-
-        .image-modal-arrow-right {
-            right: 0;
-        }
-
-        .image-modal-arrow-left::before, .image-modal-arrow-right::before {
-            -webkit-font-smoothing: antialiased;
-            display: inline-block;
-            font-style: normal;
-            font-variant: normal;
-            text-rendering: auto;
-            opacity: 1;
-            line-height: 1;
-            font-family: "Font Awesome 5 Pro";
-            font-weight: 300;
-            color: #f61a30;
-            font-size: 28px;
-        }
-
-        .image-modal-arrow-left::before {
-            content: "\f104";
-        }
-
-        .image-modal-arrow-right::before {
-            content: "\f105";
-        }
     </style>
 @stop()
+
+@section('body-data')
+    x-data ='{
+    trailer : false,
+    demoVid : false,
+    }'
+@endsection
 
 @section('global-body')
     @include('pianote.sales.partials._nav', [
@@ -269,7 +61,7 @@
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the first-ever <br class="inline lg:hidden">class starting Sept. 4th.</strong></h6>
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video" style="padding-bottom: 75%;" data-open="trailer">
+                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video" style="padding-bottom: 75%;"  x-on:click="trailer = true;">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/header-thumb-m.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -299,7 +91,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video" data-open="trailer">
+                    <div class="rounded-xl aspect-1:1 overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video" x-on:click="trailer = true;">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/header-thumb.png" alt="header image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -436,12 +228,12 @@
         </div>
     </section>
     <div id="demo" class="anchor"></div>
-    <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-tablet-bg.png);">
+    <section class="text-center text-white pt-10 sm:pt-14 lg:pt-20 bg-cover bg-center" style="background-color:#2a2f34;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-tablet-bg.png);">
         <h3 class="leading-tight"><strong>You should know it’s right for you.</strong></h3>
         <p class="leading-normal mt-2 sm:mt-3 mb-5 sm:mb-7">Curious? <strong>Try a snippet from Day 1</strong> and<br class="inline sm:hidden"> see if  30-Day Blues Piano is right for you.</p>
-        <div class="relative cursor-pointer autoplay-video" data-open="demoVid">
-            <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-tablet-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
-            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-tablet.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+        <div class="relative cursor-pointer autoplay-video" x-on:click="demoVid = true;">
+            <img class="inline-block sm:hidden w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-tablet-m.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
+            <img class="hidden sm:inline-block w-full transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-tablet.png" alt="tablet piano" loading="lazy" onload="this.classList.remove('opacity-0')">
             <p class="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-2/3 px-3 py-1 z-10 rounded-xl text-white inline-block mx-auto text-sm whitespace-nowrap" style="background-color:#284ffd;"><i class="fas fa-play-circle mr-1 text-xl sm:text-3xl align-middle"></i> Hit play and see what Day 1 is like.</p>
         </div>
     </section>
@@ -663,7 +455,7 @@
                         <h4 class="mb-10"><strong>Join Pianote + FREE 30-Day Blues Piano</strong></h4>
                         <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/launch-membership-collage.png" alt="Membership special pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$726</s><strong>$200</strong></h2>
-                        <p class="italic mb-4 text-xs">Per year</p>
+                        <p class="italic mb-4 text-xs">Your first year</p>
                         <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,easy-chords:1,new-piano-players-start-here:1,faster-fingers:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1&promo-code=special&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-pianote">ENROLL NOW</a>
                         <p>
                             <b class="text-pianote">Annual Pianote Membership</b><br/>
@@ -729,11 +521,6 @@
             <h2><strong>Still have questions?</strong></h2>
             <div class="max-w-6xl mt-4 sm:mt-10 px-4">
                 @include('_partials.components.question-dropdown', [
-                "num" => "?",
-                "title" => "Why do I need to register if I get it for free as a member?",
-                "desc" => "It’s a 30-day course and it only works if you’re actively participating. So we wanted to make sure you raised your hand to enroll in the journey.<br><br>This isn’t a “watch a lesson, go do something else for 10 days, watch another” type of routine. So we’re asking for a commitment from anybody who participates.",
-                ])
-                @include('_partials.components.question-dropdown', [
                 "title" => "What if I miss a day (or two)?",
                 "desc" => "That’s totally fine. The course is meant to be flexible if you miss a day here or there. There are a few buffer days mixed in PLUS the lessons are short enough that you could watch 2-3 in a single session if you ever need to catch up.",
                 "num" => '?',
@@ -769,34 +556,15 @@
         </div>
     </section>
 
-    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none" id="waitlistModal" style="max-width: 560px;" data-reveal data-reset-on-close="false">
-        <div class="p-5 sm:p-7">
-{{--            <img class="h-14 sm:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/new-piano-players/new-piano-players-start-here-logo-2+1.png">--}}
-            <h3 class="leading-tight my-4"><strong>Join The Waitlist!</strong></h3>
-            <p class="mb-4">
-                Enter your email below to get notified when the next <br class="hidden sm:inline">
-                edition of 30-Day Blues Piano is announced. </p>
-
-            @include("pianote._partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-                "formName" => '30-Day Blues Piano Waitlist',
-                "formId" => "Pianote - Engagement - Trigger - 30-Day Blues Piano Waitlist - Web Form",
-                "buttonText" => "Let Me Know ",
-                "stacked" => true,
-                "noSocial" => true,
-            ])
-        </div>
-    </div>
-
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "demoVid",
-        "video" => '//player.vimeo.com/video/TODO&autoplay=1',
-        "title" => 'demoVid'
+    @include('_partials.components.video-modal',[
+        'name' => 'demoVid',
+        'video' => '852836211',
+        'vimeo' => true,
     ])
-    @include('drumeo.sales.partials._video-modal',[
-        'modalId' => "trailer",
-        "video" => '//player.vimeo.com/video/TODO&autoplay=1',
-        "title" => 'trailer'
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '852795615',
+        'vimeo' => true,
     ])
 
     @include('_partials.components.countdown',[
@@ -806,7 +574,6 @@
     @include("pianote.sales.partials._footer")
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
 
         <script src="{{ asset('/marketing/js/drumeo/manifest.js') }}"></script>
@@ -817,7 +584,6 @@
 
     <script>
         $(document).ready(function () {
-            $(document).foundation();
             $('.comparison tr td:nth-child(3)').on('click', function(){
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('online');
@@ -830,13 +596,8 @@
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('private');
             });
-
-            @if(!empty($errors) && $errors->any())
-                $('#waitlistModal').foundation('open');
-            @endif
         })
     </script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
 
