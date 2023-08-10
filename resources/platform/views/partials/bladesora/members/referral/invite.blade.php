@@ -20,6 +20,13 @@
         'guitareo' => 'A PAC012 RM - Pacifica Electric Guitar in Red',
     ];
 
+    $prizeWithPrice = [
+        'drumeo' => 'Yamaha E-Drum Kit retailing at $499.99 USD',
+        'pianote' => 'Yamaha Digital Piano in white retailing at $699.99 USD',
+        'singeo' => 'Steinberg Recording Kit with an audio interface, headphones, and a condenser microphone retailing at [$$ $359.99 USD',
+        'guitareo' => 'Pacifica Electric Guitar in Red retailing at $209.99 USD',
+    ];
+
     $titleLineOne = $canRefer ? 'Refer your loved ones for a chance' : 'Thank you for your';
     $titleLineTwo = $canRefer ? 'to win a Yamaha '.$prizes[$brand] : 'referrals & support!';
     $footerLineOne = $canRefer ? 'Guest passes are for new subscribers only and cannot be' : 'You have referred the maximum of five guests.';
@@ -154,13 +161,13 @@
         <div class="tw-max-w-6xl tw-mx-auto tw-px-6 2xl:tw-px-0 dark:tw-text-white">
             <h4 class="tw-mb-4"><strong>Terms and Conditions</strong></h4>
             <p>
-                <strong>Eligibility:</strong> This contest is open to Musora students with an active, paid membership and new students who sign up for a 30-Day Guest Pass, 18 years or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
+                <strong>Eligibility:</strong> This contest is open to Musora students with an active, paid membership and newly referred students, 18 years or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
                 <br><br>
-                <strong>How to Enter:</strong> Musora students automatically receive (1) entry to the contest when a referred friend signs up for a 30-Day Guest Pass between June 19 to 30, 2023. Musora students may collect up to (5) contest entries by having 5 successful referrals within this timeframe. New students who sign-up for a 30-Day Guest Pass within this period will have (1) entry to the contest. No purchase is necessary to enter or win.
+                <strong>How to Enter:</strong> Participants automatically receive (1) entry to the contest when a referred friend signs up for a membership with a 30-day trial from August 18 to September 14, 2023. Participants may collect up to (5) contest entries for {{ ucfirst($brand) }} based on each successful referral during the contest period. New students who sign up for {{ ucfirst($brand) }} will gain one contest entry. No purchase is necessary to enter or win.
                 <br><br>
-                <strong>Prize:</strong> The first prize is a Casio PXS3100BK Digital piano with a retail value of $250 USD. The second prize is a Pianote Book Bundle & a VIP lesson with a total value of [$$] USD. The third prize is a Pianote Book Bundle with a retail value of $117 USD. The prizes are non-transferable and cannot be exchanged for cash.
+                <strong>Prize:</strong> The contest prize is a {{ $prizeWithPrice[$brand] }}. The prizes are non-transferable and cannot be exchanged for cash.
                 <br><br>
-                <strong>Winner Selection:</strong> The winner will be selected randomly from all eligible entries received during the entry period. The winner will be notified by email or direct message within 48 hours of the selection. If the winner does not respond within 48 hours, another winner will be selected.
+                <strong>Winner Selection:</strong> The winner will be randomly selected from all eligible entries received during the contest period. The winner will be notified by email or direct message within 48 hours of the selection. If the winner does not respond within 48 hours, another winner will be selected.
                 <br><br>
                 <strong>Release:</strong> By entering the contest, participants release and hold harmless the sponsor, their affiliates, and their respective officers, directors, employees, and agents from any liability or any injury, loss, or damage of any kind arising from or in connection with the contest or any prize won.
                 <br><br>
