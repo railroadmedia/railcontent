@@ -24,7 +24,7 @@
                 </div>
                 <div class="py-4 pl-4 pr-2 sm:px-5 w-full border-b-2 border-musora" style="background-color:rgba(255,172,0,0.05);">
                     <p class="z-30 absolute left-0 w-6 text-white text-center text-sm"><i class="fas fa-heart"></i></p>
-                    <h5 class="font-extrabold mb-1.5">Plus 90-days worry-free.</h5>
+                    <h5 class="font-extrabold mb-1.5">Plus 90 days worry-free.</h5>
                     <p class="leading-normal">If you don’t love your trial but forget to cancel, don’t worry! You’ll still have a full 90-day money-back guarantee.</p>
                 </div>
             </div>
