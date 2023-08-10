@@ -42,8 +42,9 @@
         durationHours: '0',
         durationMinutes: '0',
         dropdownTop: false,
-        isPinned: false,
-        isLiked: false,
+        isPinned: props.playlist.pinned,
+        isLiked: props.playlist.is_liked_by_current_user,
+        isPrivate: props.playlist.private,
     })
 
     //-----------Static Data-----------//
@@ -149,17 +150,13 @@
     //---------Lifecycle Methods---------//
 
     onBeforeMount(() => {
-        playlistsStore.setActivePlaylist(props.playlist)
-        //initial Values
-        state.isLiked = props.playlist.is_liked_by_current_user;
-        state.isPinned = props.playlist.pinned ? true : false;
-        
+        playlistsStore.setActivePlaylist(props.playlist);
+
         //Get Duration Hours and Seconds
         formatDuration(playlistsStore.activePlaylist.duration)
     })
 
     onUpdated(()=>{
-        state.isPinned = props.playlist.pinned ? true : false;
         //Recalculate Duration
         formatDuration(playlistsStore.activePlaylist.duration);
     })
@@ -222,8 +219,8 @@
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
                         <h1 class="tw-capitalize tw-leading-tight tw-font-bold tw-mb-2 lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2">{{ description }}</p>
-                        
-                        <p  v-if="playlistsStore.lessons.length" 
+
+                        <p  v-if="playlistsStore.lessons.length"
                             class="tw-justify-center lg:tw-justify-start tw-font-bebas-neue tw-text-white tw-mt-1 tw-text-lg tw-leading-none tw-flex tw-items-center"
                         >
                             <span>{{ state.durationHours }}H {{ state.durationMinutes }}M</span>
@@ -276,8 +273,8 @@
                             :lessons-length="lessons.data.length"
                             :brand="brand"
                             :dropdownTop="state.dropdownTop"
-                            :is-private="playlistsStore.activePlaylist.private"
-                            :is-pinned="state.isPinned ? true : false"
+                            :is-private="state.isPrivate"
+                            :is-pinned="state.isPinned"
                             :dropdownOptions="dropdownOptions"
                             :data="playlistsStore.activePlaylist"
                             :is-open="state.dropdownOpen"
@@ -285,9 +282,8 @@
                             :in-playlist-header="true"
                             type="playlist"
                             @closeDropdown="state.dropdownOpen = false"
-                            @updatePinned="(val) => state.isPinned = val"
-                            @pinItem="playlistsStore.activePlaylist.pinned = $event"
-                            @makePublic="(val) => playlistsStore.activePlaylist.private = val"
+                            @pinItem="(val) => state.isPinned = val"
+                            @makePublic="(val) => state.isPrivate = val"
                         />
                     </div>
                     <span class="tw-uppercase tw-font-bebas-neue">More</span>
