@@ -89,7 +89,7 @@
                                 loading="lazy"
                                 onload="this.classList.remove('tw-opacity-0')"
                             >
-                            <div class="tw-text-sm tw-italic justify-center tw-mt-2 xl:tw-mt-0 {{ $brand === 'drumeo' ? '2xl:tw-ml-16' : '' }}">Starting at $20/month thereafter (billed annually.) Cancel anytime.</div>
+                            <div class="tw-text-sm tw-italic justify-center tw-mt-2 xl:tw-mt-0 {{ $brand === 'drumeo' ? '2xl:tw-ml-16' : '' }}">Starting at $20/month thereafter (billed annually). Cancel anytime.</div>
                         </div>
                     </div>
                 </div>
