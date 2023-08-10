@@ -424,97 +424,80 @@
     </section>
 
     <div id="final" class="anchor"></div>
-    <section class="text-center relative z-50 overflow-hidden px-5 sm:px-6 py-10 sm:py-14 lg:py-20 text-white bg-cover bg-top" style="background:#00114f url(https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/order-bg.jpg);">
-        <div class="container max-w-6xl mx-auto relative z-50">
-            <div class="text-center">
-                <img class="h-20 md:h-24 lg:h-28 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="logo" loading="lazy" onload="this.classList.remove('opacity-0')">
-                <h4 class="leading-tight mt-4 mb-2">
-                    <strong>20 Guided Play-Along Lessons + Feedback From REAL Teachers.</strong>
-                </h4>
-                <p class="mb-10">Learn to play the Blues in the first-ever class starting September 4th!</p>
-            </div>
-            <div class="md:grid md:grid-cols-2 gap-6 items-start max-w-md md:max-w-3xl mx-auto text-black mb-7">
-                <div class="bg-white rounded-xl py-8 px-4 mb-10 md:mb-0">
+    <section class="py-10 sm:py-16 lg:py-20 text-white bg-cover bg-top" style="background:#00114f url(https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/order-bg.jpg);">
+        <div class="max-w-6xl mx-auto text-center">
+            <img class="h-24 sm:h-28 lg:h-32 mb-3 sm:mb-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=380,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30DD logo season3 logo">
+            <h3 class="mb-4"><strong>20 Guided Play-Along Lessons +<br class="lg:hidden"> Feedback From REAL Teachers.</strong></h3>
+            <p class="leading-normal mb-12">
+                <strong class="bg-white text-black px-1">EARLY BIRD SPECIAL:</strong> Save up to 20% <br class="sm:hidden">on all bundles before August 20th.
+                <br>&nbsp;
+                <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">
+                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
+                     <span x-cloak x-show="timeLeft > 0">left!</span>
+                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
+                 </span>
+                <br><br><strong class="font-black"><i class="fas fa-arrow-down"></i> CHOOSE YOUR BUNDLE <i class="fas fa-arrow-down"></i></strong>
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-2 lg:gap-4 items-start px-4 mx-auto max-w-md md:max-w-none text-black">
+                <div class="bg-white rounded-xl border border-gray-400 py-8 px-4 mb-8 md:mb-0">
                     <div class="text-center -mt-11">
-                        <div class="bg-[#284FFD] rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">EARLY BIRD SPECIAL</div>
-                        <h4 class="mb-10"><strong>30-Day Blues Piano</strong></h4>
-                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/early-bird-collage.png" alt="Early bird special pack" />
+                        <div class="bg-gray-400 rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Course Only</div>
+                        <h4><strong>30-Day Blues Piano</strong></h4>
+                        <p class="italic mb-4 text-xs mt-2">Course Only<br> &nbsp; </p>
+                        <img class="h-24 lg:h-32 pb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/course-only2.png" alt="Tier 1 pack" />
+                        <h2><s class="text-[#ABB5C2] mr-2">$97</s><strong>$77</strong></h2>
+                        <p class="italic mb-4 text-xs">One-time payment</p>
+                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&promo-code=special&redirect=/order&locked=true" class="join bg-gray-400 medium w-full">ENROLL NOW</a>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl border border-blue-600 py-8 px-4 mb-8 md:mb-0">
+                    <div class="text-center -mt-11">
+                        <div class="bg-[#284FFD] rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">ONLY UNTIL AUGUST 20TH</div>
+                        <h4><strong>Early Bird Special</strong></h4>
+                        <p class="italic mb-4 text-xs mt-2">Course + 2 bonuses worth $138
+                            <br><strong class="text-blue-600">FREE SHIPPING WORLDWIDE</strong></p>
+                        <img class="h-24 lg:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/early-bird-collage.png" alt="Tier 2 pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$235</s><strong>$97</strong></h2>
                         <p class="italic mb-4 text-xs">One-time payment</p>
-                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1,faster-fingers:1,piano-chords-and-scales-guide:1&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-[#284FFD]">ENROLL NOW</a>
-                        <p>
-                            <b class="text-[#284FFD]">30-Day Blues Piano (Lifetime Access)</b><br/>
-                            <span class="text-[#284FFD]">Free</span> Faster Fingers <i>($99 value)</i><br>
-                            <span class="text-[#284FFD]">Free</span> Chords & Scales Book <i>($39 value)</i>
+                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1,faster-fingers:1,piano-chords-and-scales-guide:1&redirect=/order&locked=true" class="join medium w-full mb-5 bg-[#284FFD]">ENROLL NOW</a>
+                        <p class="inline-block text-left">
+                            <b>30-Day Blues Piano</b><br/>
+                            <b class="text-blue-600">Free</b> Faster Fingers<br>
+                            <b class="text-blue-600">Free</b> Chords & Scales Book<br>
+                            <b class="text-blue-600">Free</b> <i>Shipping Worldwide</i>
                         </p>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl py-8 px-4">
+                <div class="bg-white rounded-xl border border-pianote py-8 px-4">
                     <div class="text-center -mt-11">
                         <div class="bg-pianote rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">LAUNCH MEMBERSHIP SPECIAL</div>
-                        <h4 class="mb-10"><strong>Join Pianote + FREE 30-Day Blues Piano</strong></h4>
-                        <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/launch-membership-collage.png" alt="Membership special pack" />
+                        <h4><strong>Unlimited Lessons</strong></h4>
+                        <p class="italic mb-4 text-xs mt-2">1 year of Pianote + 7 bonuses worth $486
+                            <br><strong class="text-pianote">FREE SHIPPING WORLDWIDE</strong></p>
+                        <img class="h-24 lg:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/launch-membership-collage.png" alt="Tier 3 pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$726</s><strong>$200</strong></h2>
                         <p class="italic mb-4 text-xs">Your first year</p>
-                        <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,easy-chords:1,new-piano-players-start-here:1,faster-fingers:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1&promo-code=special&redirect=/order&locked=true" class="join blue medium w-full mb-5 bg-pianote">ENROLL NOW</a>
-                        <p>
-                            <b class="text-pianote">Annual Pianote Membership</b><br/>
-                            <b class="text-pianote">30-Day Blues Piano (Lifetime Access)</b><br/>
-                            <span class="text-pianote">Free</span> Easy Chords <i>($97 value)</i><br>
-                            <span class="text-pianote">Free</span> New Piano Players Start Here <i>($97 value)</i><br>
-                            <span class="text-pianote">Free</span> Faster Fingers <i>($99 value)</i><br>
-                            <span class="text-pianote">Free</span> Chords & Scales Book <i>($39 value)</i><br>
-                            <span class="text-pianote">Free</span> Chords & Scales Posters <i>($18 value)</i><br>
-                            <span class="text-pianote">Free</span> Pianote Practice Planner <i>($39 value)</i>
+                        <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,easy-chords:1,new-piano-players-start-here:1,faster-fingers:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1&promo-code=special&redirect=/order&locked=true" class="join blue medium w-full mb-5">ENROLL NOW</a>
+                        <p class="inline-block text-left">
+                            <b>Annual Pianote Membership</b><br/>
+                            <b class="text-pianote">Free</b> 30-Day Blues Piano<br>
+                            <b class="text-pianote">Free</b> Faster Fingers<br>
+                            <b class="text-pianote">Free</b> Chords & Scales Book<br>
+                            <b class="text-pianote">Free</b> <i>Shipping Worldwide</i><br>
+                            <b class="text-pianote">Free</b> Easy Chords<br>
+                            <b class="text-pianote">Free</b> New Piano Players Start Here<br>
+                            <b class="text-pianote">Free</b> Chords & Scales Posters<br>
+                            <b class="text-pianote">Free</b> Pianote Practice Planner<br>
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="flex items-center justify-center">
-                <img class="h-7 mr-1 transition-all" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/piano-players-trusted.png" alt="joined student profiles" loading="lazy" onload="this.classList.remove('opacity-0')">
-                <div class="inline-block leading-tight text-sm">Join {{ number_format($nPackOwners ?? 0) }} piano players who<br> have already registered.</div>
-            </div>
-
-{{--                <div class="flex flex-wrap sm:flex-nowrap max-w-xs sm:max-w-full items-center text-left w-full mx-auto lg:w-2/3 lg:pl-5 xl:pl-10 text-black">--}}
-{{--                    <a href="/ecommerce/add-to-cart?products[30-day-blues-piano]=1&locked=true"--}}
-{{--                        class="z-10 relative px-5 sm:px-7 py-7 sm:py-9 mb-7 sm:mb-0 bg-white rounded-xl shadow-lg w-full sm:w-5/12">--}}
-{{--                        <p class="text-white bg-blue-600 inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">EARLY BIRD SPECIAL</p>--}}
-{{--                        <h3><strong>30-Day Blues Piano</strong></h3>--}}
-{{--                        <p class="text-sm mt-2 mb-5">Play the Blues in just 30 days.</p>--}}
-{{--                        <h2 class="inline-block"><s class="opacity-60">$235</s> <strong class="text-4xl">${{ 97 }}</strong></h2> <p class="inline-block text-xs">One time payment.</p><br>--}}
-{{--                        <div class="join blue smaller my-4 w-full">ENROLL NOW</div>--}}
-{{--                        <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
-{{--                            <i class="fas fa-check text-blue-600 mr-1"></i> Lifetime Course Access<br>--}}
-{{--                            <i class="fas fa-check text-blue-600 mr-1"></i> FREE Faster Fingers ($99 Value)<br>--}}
-{{--                            <i class="fas fa-check text-blue-600 mr-1"></i> FREE Chords & Scales Book ($39 Value)<br>--}}
-{{--                            <i class="fas fa-check text-blue-600 mr-1"></i> 90-Day Money-Back Guarantee</p>--}}
-{{--                    </a>--}}
-{{--                    <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1,100-days-of-practice-poster:1,the-power-of-chords:1,piano-riffs-and-fills:1&redirect=/order&locked=true"--}}
-{{--                        class="px-5 sm:px-10 py-5 sm:py-7 sm:-ml-5  rounded-xl shadow-lg w-full sm:w-7/12 bg-center bg-cover border-4 border-white"--}}
-{{--                        style="background-color:#dde9f9;background-image:url(https://www.musora.com/musora-cdn/image/width=380,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/order-bg.jpg);"--}}
-{{--                    >--}}
-{{--                        <p class="bg-pianote text-white inline-block rounded-xl text-xs mb-2 px-4 tracking-wider">LAUNCH MEMBERSHIP SPECIAL</p>--}}
-{{--                        <h3><strong>Join Pianote + FREE <br class="hidden sm:inline"> 30-Day Blues Piano</strong></h3>--}}
-{{--                        <p class="text-sm mt-2 mb-5">The Ultimate Online Lessons Experience.</p>--}}
-{{--                        <h2 class="inline-block"><s class="opacity-60">$726</s> <strong class="text-4xl">$200</strong></h2> <p class="inline-block text-xs">Billed annually.</p><br>--}}
-{{--                        <div class="join blue smaller my-4 w-full">GET EVERYTHING</div>--}}
-{{--                        <ul class="list-disc ml-6">--}}
-{{--                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Easy Chords ($97 Value)</li>--}}
-{{--                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> New Piano Players Start Here ($97 Value)</li>--}}
-{{--                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Faster Fingers ($99 Value)</li>--}}
-{{--                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Chords & Scales Book ($39 Value)</li>--}}
-{{--                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Chords & Scales Posters ($18 Value)</li>--}}
-{{--                            <li class="text-sm leading-relaxed"><span class="text-pianote">Free</span> Pianote Practice Planner ($39 Value)</li>--}}
-{{--                        </ul>--}}
-{{--                        <hr class="w-full my-5" style="border-color:#b2cae1">--}}
-{{--                        <p class="leading-loose text-sm"><strong>Key Features</strong><br>--}}
-{{--                            <i class="fas fa-check text-pianote mr-1"></i> Lifetime Course Access<br>--}}
-{{--                            <i class="fas fa-check text-pianote mr-1"></i> 90-Day Money-Back Guarantee</p>--}}
-{{--                    </a>--}}
-{{--                </div>--}}
         </div>
     </section>
-
 
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container mx-auto relative z-10 max-w-5xl">
