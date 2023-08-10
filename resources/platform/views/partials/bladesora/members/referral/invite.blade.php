@@ -1,19 +1,54 @@
 @php
-    $titleLineOne = $canRefer ? 'Share a free 30-day pass' : 'Thank you for your';
-    $titleLineTwo = $canRefer ? 'with up to five friends.' : 'referrals & support!';
+    $prizes = [
+        'drumeo' => 'drum kit',
+        'pianote' => 'piano',
+        'singeo' => 'singing kit',
+        'guitareo' => 'guitar',
+    ];
+
+    $prizeImgs = [
+        'drumeo' => 'https://d3fzm1tzeyr5n3.cloudfront.net/referral/prize-drum.png',
+        'pianote' => 'https://d3fzm1tzeyr5n3.cloudfront.net/referral/prize-piano.png',
+        'singeo' => 'https://d3fzm1tzeyr5n3.cloudfront.net/referral/prize-mic.png',
+        'guitareo' => 'https://d3fzm1tzeyr5n3.cloudfront.net/referral/prize-guitar.png',
+    ];
+
+    $prizeNames = [
+        'drumeo' => 'A DTX402K - Yamaha E-Drum Kit',
+        'pianote' => 'A P125A WH - Digital Piano (White Finish)',
+        'singeo' => 'A UR22CR PACK - Steinberg Interface with Mic and Headphones',
+        'guitareo' => 'A PAC012 RM - Pacifica Electric Guitar in Red',
+    ];
+
+    $prizeWithPrice = [
+        'drumeo' => 'Yamaha E-Drum Kit retailing at $499.99 USD',
+        'pianote' => 'Yamaha Digital Piano in white retailing at $699.99 USD',
+        'singeo' => 'Steinberg Recording Kit with an audio interface, headphones, and a condenser microphone retailing at [$$ $359.99 USD',
+        'guitareo' => 'Pacifica Electric Guitar in Red retailing at $209.99 USD',
+    ];
+
+    $titleLineOne = $canRefer ? 'Refer your loved ones for a chance' : 'Thank you for your';
+    $titleLineTwo = $canRefer ? 'to win a Yamaha '.$prizes[$brand] : 'referrals & support!';
     $footerLineOne = $canRefer ? 'Guest passes are for new subscribers only and cannot be' : 'You have referred the maximum of five guests.';
     $footerLineTwo = $canRefer ? 'redeemed for renewals, extensions, or gift subscriptions.' : 'You\'ll have access to more invites soon!';
 
     $containerClass = $canRefer ? '' : 'tw-justify-center';
 
     $cardImages = [
-        'drumeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/30-day-guest-pass.png',
-        'pianote' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/pianote-guest-pass.png',
-        'singeo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/singeo-guest-pass.png',
-        'guitareo' => 'https://dpwjbsxqtam5n.cloudfront.net/redeem/referral/guitareo-guest-pass.png',
+        'drumeo' => 'https://d3fzm1tzeyr5n3.cloudfront.net/referral/drumeo-trial.png',
+        'pianote' => 'https://d3fzm1tzeyr5n3.cloudfront.net/referral/pianote-trial.png',
+        'singeo' => 'https://d3fzm1tzeyr5n3.cloudfront.net/referral/singeo-trial.png',
+        'guitareo' => 'https://d3fzm1tzeyr5n3.cloudfront.net/referral/guitareo-trial.png',
     ];
 
     $cardImage = $cardImages[brand()];
+
+    $gradients = [
+        'drumeo' => '180deg, #0B76DB 0%, #013362 100%',
+        'pianote' => '180deg, #F01A2F 0%, #55050D 100%',
+        'singeo' => '180deg, #8101E4 0%, #360160 100%',
+        'guitareo' => '180deg, #01C8AB 0%, #045045 100%',
+    ];
 
 @endphp
 
@@ -46,29 +81,25 @@
                 <strong>{{ $titleLineOne }}<br> {{ $titleLineTwo }}</strong>
             </h1>
             <div class="tw-flex tw-flex-col 2xl:tw-flex-row tw-items-center tw-px-4 {{ $containerClass }}">
-
                 <div class="tw-flex-shrink-0 tw-w-full tw-max-w-xs sm:tw-max-w-md md:tw-max-w-lg lg:tw-max-w-xl tw-my-5 md:tw-my-6 lg:tw-my-0">
                     <div class="tw-flex tw-w-full tw-relative">
-                        <div class="tw-inline-flex tw-w-full ">
+                        <div class="tw-w-full">
                             <img class="tw-inline-block tw-w-full tw-transition-opacity tw-opacity-0"
-                                src="{{ $cardImage }}"
+                                src="https://www.musora.com/musora-cdn/image/width=900,quality=95/{{ $cardImage }}"
                                 loading="lazy"
                                 onload="this.classList.remove('tw-opacity-0')"
                             >
-                        </div>
-                        <div class="tw-absolute tw-bottom-0 tw-w-full tw-p-4 tw-text-white">
-                            <p class="tw-leading-none">PASSES REDEEMED</p>
-                            <h1 class="tw-leading-none">
-                                <strong>{{ $userReferralsPerformed }}/{{ $referralsPerUser }}</strong>
-                            </h1>
+                            <div class="tw-text-sm tw-italic justify-center tw-mt-2 xl:tw-mt-0 {{ $brand === 'drumeo' ? '2xl:tw-ml-16' : '' }}">Starting at $20/month thereafter (billed annually.) Cancel anytime.</div>
                         </div>
                     </div>
                 </div>
                 @if ($canRefer)
                     <div
                         class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-lg 2xl:tw-max-w-none tw-mx-auto">
-                        <h5 class="tw-leading-tight tw-py-4 tw-text-lg">Give a friend unlimited access to {{ ucfirst($brand) }}, free for 30 days
+                        <h5 class="tw-py-4 tw-text-lg tw-font-normal">
+                            Give your friend 1 month of free music lessons when they sign up for {{ ucfirst($brand) }}! Plus, every referral you make from <b>August 18 to September 14</b> gives you a chance to win a {{ $prizes[$brand] }}.
                         </h5>
+                        <a href="#terms" class="tw-text-center tw-italic tw-underline tw-cursor-pointer tw-text-black dark:tw-text-white">See Contest Terms & Conditions</a>
                         <form id="invite-email-form" name="invite-email-form" onsubmit="sendPass(event)">
                             <label class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6"
                                 for="email"><strong>Invite via email</strong></label>
@@ -110,6 +141,44 @@
         <div class="tw-max-w-6xl tw-mx-auto tw-px-4 md:tw-px-8">
             <h5 class="tw-leading-normal tw-opacity-70 tw-text-lg">{{ $footerLineOne }}<br class="tw-hidden lg:tw-inline">
                 {{ $footerLineTwo }}</h5>
+        </div>
+    </section>
+
+    <section style="background:linear-gradient({{ $gradients[$brand] }});">
+        <div class="tw-flex tw-flex-col lg:tw-flex-row tw-text-white tw-max-w-4xl tw-mx-auto tw-items-center tw-px-4 xl:tw-px-0 tw-text-center lg:tw-text-left">
+            <div class="tw-mb-6 tw-pt-10 lg:tw-pt-0 lg:tw-my-40 lg:tw-max-w-sm tw-w-full lg:tw-mr-6">
+                <h1 class="tw-font-extrabold">You can win..</h1>
+                <div class="tw-font-bold tw-mt-2 tw-mb-4 ">{{ $prizeNames[$brand] }}</div>
+                <div><b>PLUS</b> your referred friend gets one <br class="sm:tw-hidden">entry for a chance to win these prizes!</div>
+            </div>
+
+            <img class="@if($brand === 'drumeo') sm:tw-h-[450px] lg:tw-h-[32rem] xl:tw-h-[33rem] -tw-mb-6 lg:-tw-mb-20 @elseif($brand === 'pianote') sm:tw-h-[450px] lg:tw-h-[23rem] xl:tw-h-[28rem] -tw-mb-10 lg:-tw-mb-32 lg:-tw-ml-20 @elseif($brand === 'guitareo') sm:tw-h-[450px] lg:tw-h-[23rem] xl:tw-h-[28rem] -tw-mb-6 lg:-tw-mb-32 lg:-tw-ml-10 @elseif($brand === 'singeo') -tw-mb-6 lg:tw-mb-0 sm:tw-h-56 lg:tw-h-52 xl:tw-h-64 @endif tw-mx-auto" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $prizeImgs[$brand] }}" alt="{{ $brand }} prize" />
+        </div>
+    </section>
+
+    <div id="terms" class="tw-block tw-relative tw-invisible"></div>
+    <section class="tw-py-20">
+        <div class="tw-max-w-6xl tw-mx-auto tw-px-6 2xl:tw-px-0 dark:tw-text-white">
+            <h4 class="tw-mb-4"><strong>Terms and Conditions</strong></h4>
+            <p>
+                <strong>Eligibility:</strong> This contest is open to Musora students with an active, paid membership and newly referred students, 18 years or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
+                <br><br>
+                <strong>How to Enter:</strong> Participants automatically receive (1) entry to the contest when a referred friend signs up for a membership with a 30-day trial from August 18 to September 14, 2023. Participants may collect up to (5) contest entries for {{ ucfirst($brand) }} based on each successful referral during the contest period. New students who sign up for {{ ucfirst($brand) }} will gain one contest entry. No purchase is necessary to enter or win.
+                <br><br>
+                <strong>Prize:</strong> The contest prize is a {{ $prizeWithPrice[$brand] }}. The prizes are non-transferable and cannot be exchanged for cash.
+                <br><br>
+                <strong>Winner Selection:</strong> The winner will be randomly selected from all eligible entries received during the contest period. The winner will be notified by email or direct message within 48 hours of the selection. If the winner does not respond within 48 hours, another winner will be selected.
+                <br><br>
+                <strong>Release:</strong> By entering the contest, participants release and hold harmless the sponsor, their affiliates, and their respective officers, directors, employees, and agents from any liability or any injury, loss, or damage of any kind arising from or in connection with the contest or any prize won.
+                <br><br>
+                <strong>General Conditions:</strong> The sponsor reserves the right to cancel, suspend, or modify the contest if fraud, technical failures, or any other factor beyond their control impairs the contest's integrity, as determined by the sponsor in their sole discretion. The sponsor reserves the right to disqualify any individual who violates these Terms and Conditions or interferes with the contest in any way.
+                <br><br>
+                <strong>Governing Law:</strong> The contest shall be governed by and construed by the laws of the country where the contest is held, without regard to conflicts of law principles.
+                <br><br>
+                <strong>Privacy:</strong> Personal information collected from participants will be used only to administer the contest and will not be shared with any third party except as necessary to fulfill the prize.
+                <br><br>
+                By participating in the contest, participants agree to be bound by these Terms and Conditions.
+            </p>
         </div>
     </section>
 </div>
