@@ -42,9 +42,8 @@
         durationHours: '0',
         durationMinutes: '0',
         dropdownTop: false,
-        isPinned: props.playlist.pinned,
-        isLiked: props.playlist.is_liked_by_current_user,
-        isPrivate: props.playlist.private,
+        isPinned: false,
+        isLiked: false,
     })
 
     //-----------Static Data-----------//
@@ -150,13 +149,17 @@
     //---------Lifecycle Methods---------//
 
     onBeforeMount(() => {
-        playlistsStore.setActivePlaylist(props.playlist);
-
+        playlistsStore.setActivePlaylist(props.playlist)
+        //initial Values
+        state.isLiked = props.playlist.is_liked_by_current_user;
+        state.isPinned = props.playlist.pinned ? true : false;
+        
         //Get Duration Hours and Seconds
         formatDuration(playlistsStore.activePlaylist.duration)
     })
 
     onUpdated(()=>{
+        state.isPinned = props.playlist.pinned ? true : false;
         //Recalculate Duration
         formatDuration(playlistsStore.activePlaylist.duration);
     })
@@ -219,8 +222,8 @@
                     <div class="tw-text-white tw-flex tw-flex-col tw-mb-2">
                         <h1 class="tw-capitalize tw-leading-tight tw-font-bold tw-mb-2 lg:tw-line-clamp-2">{{ playlistsStore.activePlaylist.name }}</h1>
                         <p class="lg:tw-line-clamp-2">{{ description }}</p>
-
-                        <p  v-if="playlistsStore.lessons.length"
+                        
+                        <p  v-if="playlistsStore.lessons.length" 
                             class="tw-justify-center lg:tw-justify-start tw-font-bebas-neue tw-text-white tw-mt-1 tw-text-lg tw-leading-none tw-flex tw-items-center"
                         >
                             <span>{{ state.durationHours }}H {{ state.durationMinutes }}M</span>
@@ -284,6 +287,7 @@
                             @closeDropdown="state.dropdownOpen = false"
                             @pinItem="(val) => state.isPinned = val"
                             @makePublic="(val) => playlistsStore.setActivePlaylist({...playlistsStore.activePlaylist, private: val})"
+
                         />
                     </div>
                     <span class="tw-uppercase tw-font-bebas-neue">More</span>
