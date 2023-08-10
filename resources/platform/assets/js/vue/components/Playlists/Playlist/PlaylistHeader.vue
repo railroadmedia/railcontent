@@ -273,7 +273,7 @@
                             :lessons-length="lessons.data.length"
                             :brand="brand"
                             :dropdownTop="state.dropdownTop"
-                            :is-private="state.isPrivate"
+                            :is-private="playlistsStore.activePlaylist.private"
                             :is-pinned="state.isPinned"
                             :dropdownOptions="dropdownOptions"
                             :data="playlistsStore.activePlaylist"
@@ -283,7 +283,7 @@
                             type="playlist"
                             @closeDropdown="state.dropdownOpen = false"
                             @pinItem="(val) => state.isPinned = val"
-                            @makePublic="(val) => state.isPrivate = val"
+                            @makePublic="(val) => playlistsStore.setActivePlaylist({...playlistsStore.activePlaylist, private: val})"
                         />
                     </div>
                     <span class="tw-uppercase tw-font-bebas-neue">More</span>
