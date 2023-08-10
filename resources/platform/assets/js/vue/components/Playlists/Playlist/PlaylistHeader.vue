@@ -277,7 +277,7 @@
                             :brand="brand"
                             :dropdownTop="state.dropdownTop"
                             :is-private="playlistsStore.activePlaylist.private"
-                            :is-pinned="state.isPinned ? true : false"
+                            :is-pinned="state.isPinned"
                             :dropdownOptions="dropdownOptions"
                             :data="playlistsStore.activePlaylist"
                             :is-open="state.dropdownOpen"
@@ -285,9 +285,9 @@
                             :in-playlist-header="true"
                             type="playlist"
                             @closeDropdown="state.dropdownOpen = false"
-                            @updatePinned="(val) => state.isPinned = val"
-                            @pinItem="playlistsStore.activePlaylist.pinned = $event"
-                            @makePublic="(val) => playlistsStore.activePlaylist.private = val"
+                            @pinItem="(val) => state.isPinned = val"
+                            @makePublic="(val) => playlistsStore.setActivePlaylist({...playlistsStore.activePlaylist, private: val})"
+
                         />
                     </div>
                     <span class="tw-uppercase tw-font-bebas-neue">More</span>
