@@ -143,7 +143,7 @@
 
 body.tw-dark {
     .modal {
-        & > div {
+        & .modal-container {
             background: #081825 !important;
         }
     }
