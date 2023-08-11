@@ -53,6 +53,7 @@ use Railroad\Railforums\Repositories\CategoryRepository;
 use Railroad\Railforums\Repositories\PostRepository;
 use Railroad\Railforums\Repositories\ThreadRepository;
 use Railroad\Railforums\Services\ConfigService;
+use Railroad\Referral\Events\AugustContestReferralClaimed;
 use Railroad\Referral\Events\EmailInvite;
 use Railroad\Referral\Events\ReferralClaimed;
 use Throwable;
@@ -1321,6 +1322,35 @@ class CustomerIoSyncEventListener
                 Carbon::now()
                     ->addSeconds(30)
             )
+        );
+    }
+
+    // CMT-77 August Referral Contest
+    /**
+     * @param ReferralClaimed $referralClaimed
+     */
+    public function handleAugustContestReferralClaimed(AugustContestReferralClaimed $referralClaimed) {
+        $referrer = $referralClaimed->getReferrer();
+        $referrerEmail = $this->userService->getByIdOrNull($referrer->user_id)->getEmail();
+        dispatch(
+            (new CustomerIoCreateEventByUserId(
+                $referralClaimed->getUserId(),
+                $referrer->brand,
+                'musora_trial_subscription_via_referral',
+                [
+                    'brand_source' => $referrer->brand,
+                    'access_source' => 'saasquatch',
+                    'access_added_timestamp' => $referrer->updated_at->timestamp,
+                    'product_ids' => $referralClaimed->getProductId(),
+                    'referrer_email' => $referrerEmail // email of the person who generated the invite code - CMT-77
+                ],
+                null,
+                Carbon::now()->timestamp
+            ))
+                ->delay(
+                    Carbon::now()
+                        ->addSeconds(3)
+                )
         );
     }
 

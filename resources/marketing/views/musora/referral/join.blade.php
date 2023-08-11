@@ -81,7 +81,7 @@
                             </div>
                         </div>
                         <div class="inline-block">
-                            <a href="{{ get_legacy_brand_base_url($brand) }}/choose-your-trial-month" class="btn-primary btn-small bg-{{ $brand }} py-5 px-20 mr-2 text-base">1 MONTH FOR FREE</a>
+                            <a href="{{ get_legacy_brand_base_url($brand) }}/choose-your-trial-month?referralCode={{ $referralCode }}" class="btn-primary btn-small bg-{{ $brand }} py-5 px-20 mr-2 text-base">1 MONTH FOR FREE</a>
                             <div class="flex flex-wrap items-center justify-center ">
                                 <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                                     <i class="align-middle text-base fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
