@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "091777e6a2f0bf97fac0afc0289f6aab",
+    "content-hash": "396f0ed397e666c2197f013355bd7996",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8123,16 +8123,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.98",
+            "version": "dev-august-referral-contest",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "e2a1468c1fa0a18ea6e391f119882ee3bf8de946"
+                "reference": "e9d84cdfbc94cf8b8f66b0622fc3a087c2598c73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/e2a1468c1fa0a18ea6e391f119882ee3bf8de946",
-                "reference": "e2a1468c1fa0a18ea6e391f119882ee3bf8de946",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/e9d84cdfbc94cf8b8f66b0622fc3a087c2598c73",
+                "reference": "e9d84cdfbc94cf8b8f66b0622fc3a087c2598c73",
                 "shasum": ""
             },
             "require": {
@@ -8169,9 +8169,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.98"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/august-referral-contest"
             },
-            "time": "2023-08-11T18:25:00+00:00"
+            "time": "2023-08-11T22:43:52+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -16990,6 +16990,12 @@
     ],
     "aliases": [
         {
+            "package": "railroad/ecommerce",
+            "version": "dev-august-referral-contest",
+            "alias": "5.0.99",
+            "alias_normalized": "5.0.99.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
@@ -16998,6 +17004,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "railroad/ecommerce": 20,
         "railroad/railanalytics": 20
     },
     "prefer-stable": true,
