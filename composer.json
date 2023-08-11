@@ -39,7 +39,7 @@
         "railroad/railforums": "2.0.*",
         "railroad/railnotifications": "3.0.*",
         "railroad/railtracker": "4.0.*",
-        "railroad/referral": "3.0.4",
+        "railroad/referral": "3.0.*",
         "railroad/usora": "3.0.*",
         "railroadmedia/helpscout-api-php": "~3.7",
         "spatie/laravel-markdown": "^2.2",
