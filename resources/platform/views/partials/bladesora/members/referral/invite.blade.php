@@ -89,13 +89,13 @@
                                 loading="lazy"
                                 onload="this.classList.remove('tw-opacity-0')"
                             >
-                            <div class="tw-text-sm tw-italic justify-center tw-mt-2 xl:tw-mt-0 {{ $brand === 'drumeo' ? '2xl:tw-ml-16' : '' }}">Starting at $20/month thereafter (billed annually.) Cancel anytime.</div>
+                            <div class="tw-text-sm tw-italic justify-center tw-mt-2 xl:tw-mt-0 {{ $brand === 'drumeo' ? '2xl:tw-ml-16' : '' }}">Starting at $20/month thereafter (billed annually). Cancel anytime.</div>
                         </div>
                     </div>
                 </div>
                 @if ($canRefer)
                     <div
-                        class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-lg 2xl:tw-max-w-none tw-mx-auto">
+                        class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-xl 2xl:tw-max-w-none tw-mx-auto">
                         <h5 class="tw-py-4 tw-text-lg tw-font-normal">
                             Give your friend 1 month of free music lessons when they sign up for {{ ucfirst($brand) }}! Plus, every referral you make from <b>August 18 to September 14</b> gives you a chance to win a {{ $prizes[$brand] }}.
                         </h5>

@@ -31,7 +31,7 @@
         style="z-index: 1006;"
     >
         <!-- Close button -->
-        <i class="fal fa-times fa-2x fixed top-1 right-1 text-white cursor-pointer text-5xl"></i>
+        <i class="fa-light fa-times fa-2x fixed top-1 right-1 text-white cursor-pointer text-5xl"></i>
         <div
             x-on:click.stop
             class="relative w-full overflow-y-visible max-w-6xl"

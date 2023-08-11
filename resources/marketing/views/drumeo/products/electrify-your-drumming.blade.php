@@ -108,17 +108,17 @@
             <h1 class="permanent"><span class="text-yellow">AMPLIFY</span><br>EVERY SONG</h1>
             <br>
             <div class="columns medium-4 emoji-point">
-                <i class="fal fa-drum text-yellow"></i>
+                <i class="fa-light fa-drum text-yellow"></i>
                 <h3><strong>Energy-Building Fills</strong></h3>
                 <p><strong>Drum fills are used by producers every day to build energy</strong> before the drop or chorus of the song. And while they get to program it, WE need to play it. You’ll learn how to create effective risers with simple drum fills that start softly, build, and crescendo — creating a powerful experience for your audience.</p>
             </div>
             <div class="columns medium-4 emoji-point">
-                <i class="fal fa-hands text-yellow"></i>
+                <i class="fa-light fa-hands text-yellow"></i>
                 <h3><strong>Hand-Clapping Beats</strong></h3>
                 <p><strong>The feel of the kick & snare makes a drum beat feel complete.</strong> You’ll learn how to create an effective four-on-the-floor beat with your kick to make people move, add the hi-hat to make people clap, and bring in the snare to lead to the climax of the song.</p>
             </div>
             <div class="columns medium-4 emoji-point">
-                <i class="fal fa-music text-yellow"></i>
+                <i class="fa-light fa-music text-yellow"></i>
                 <h3><strong>Musical Grooves</strong></h3>
                 <p><strong>Your hi-hat technique will determine the feel of your grooves</strong> — and you’ll learn how to make effective adjustments between single strokes, ghost notes, and accents. PLUS you’ll get seven must-know hi-hat patterns to play on top of your kick & snare.</p>
             </div>

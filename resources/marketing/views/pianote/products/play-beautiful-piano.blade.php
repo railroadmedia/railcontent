@@ -242,7 +242,7 @@
         <div class="container mx-auto">
             <h2><em>Your step-by-step journey to...</em></h2>
             <img class="h-20 md:h-40 lg:h-52 mx-auto my-3 md:my-4 lg:my-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/logo-2.png" alt="Playing beautiful piano logo">
-            <p class="text-pianote mb-5 md:mb-10"><em><i class="fal fa-angle-down"></i> &nbsp; CLICK A LESSON TO PREVIEW &nbsp; <i class="fal fa-angle-down"></i></em></p>
+            <p class="text-pianote mb-5 md:mb-10"><em><i class="fa-light fa-angle-down"></i> &nbsp; CLICK A LESSON TO PREVIEW &nbsp; <i class="fa-light fa-angle-down"></i></em></p>
         </div>
         <div class="flex flex-wrap mx-auto bg-white" style="max-width:2000px;">
             <div data-open="lesson1" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/thumb-video-1.jpg">

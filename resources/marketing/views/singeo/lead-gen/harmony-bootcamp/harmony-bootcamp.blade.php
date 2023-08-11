@@ -173,7 +173,7 @@
                             <p class="leading-none text-lg py-1 text-black"><strong class="font-black">19</strong></p>
                         </div>
                         <p class="leading-tight uppercase text-yellow mx-0">
-                            <a target="_blank" href="https://www.google.com/search?q=230pm+PDT" class="font-extrabold"><strong>October, Wednesday <br class="sm:hidden">the 19th.  2:30pm PDT</strong> <i class="fal fa-info-circle"></i></a>
+                            <a target="_blank" href="https://www.google.com/search?q=230pm+PDT" class="font-extrabold"><strong>October, Wednesday <br class="sm:hidden">the 19th.  2:30pm PDT</strong> <i class="fa-light fa-info-circle"></i></a>
                         </p>
                     </div>
                     <h6 class="leading-tight mb-4">

@@ -425,7 +425,7 @@
             class="relative flex min-h-screen items-center justify-center p-4"
         >
             <!-- Close button -->
-            <i class="fal fa-times fa-2x fixed top-16 right-2 text-white cursor-pointer text-5xl"></i>
+            <i class="fa-light fa-times fa-2x fixed top-16 right-2 text-white cursor-pointer text-5xl"></i>
             <div
                 x-on:click.stop
                 x-trap.noscroll.inert="modal"

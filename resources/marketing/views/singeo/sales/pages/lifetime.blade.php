@@ -256,9 +256,9 @@
                 {{-- <p style="max-width: 480px;color: #aaa;padding:0 15px;"><em>All digital bonuses are added to your account instantly with your membership to Singeo and they’re yours forever!</em></p> --}}
             </div>
             {{-- <div class="arrow-wrap text-promo">
-                <i class="fal fa-chevron-down animated infinite pulse"></i>
-                <i class="fal fa-chevron-down animated delay-1s infinite pulse"></i>
-                <i class="fal fa-chevron-down animated delay-2s infinite pulse"></i>
+                <i class="fa-light fa-chevron-down animated infinite pulse"></i>
+                <i class="fa-light fa-chevron-down animated delay-1s infinite pulse"></i>
+                <i class="fa-light fa-chevron-down animated delay-2s infinite pulse"></i>
             </div> --}}
             {{-- <a class="join sold-out methodcta my-4">SOLD OUT</a> --}}
             {{--                    <div class="w-full max-w-sm mx-auto">--}}

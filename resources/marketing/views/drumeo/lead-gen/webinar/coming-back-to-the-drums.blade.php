@@ -100,7 +100,7 @@
             <img src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/webinar/computer.png">
             <div class="details columns no-padding">
                 <div class="detail-box clearfix">
-                    <i class="fal fa-globe"></i>
+                    <i class="fa-light fa-globe"></i>
                     <p>
                         <strong>INTERNET READY DEVICE</strong><br> This is a live-streaming event. You’ll be able to watch from any internet-ready phone, tablet, laptop, or desktop computer.
                     </p>
@@ -112,7 +112,7 @@
                     </p>
                 </div>
                 <div class="detail-box clearfix">
-                    <i class="fal fa-file-edit"></i>
+                    <i class="fa-light fa-file-edit"></i>
                     <p>
                         <strong>PEN & PAPER</strong><br> I know everybody isn’t a ‘pen and paper’ note taker. And that’s fine. If you are, bring a pen and paper. If not, bring whatever works best for you!
                     </p>

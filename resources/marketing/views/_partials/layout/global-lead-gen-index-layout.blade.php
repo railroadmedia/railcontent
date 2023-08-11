@@ -94,7 +94,7 @@
             ])
         @endif
     @elseif($theme === 'pianote')
-        @if($leadgen->slug === 'blues-bootcamp/lessons')
+        @if($leadgen->slug === 'blues-bootcamp/lessons' || $leadgen->slug === 'getting-started/lessons' || $leadgen->slug === 'chord-hacks/lessons')
             @include('drumeo.lead-gen.partials.free-trial', [
                 'header' => 'You’ve started playing the piano. Now take the next step.',
                 'subHeader' => 'TRY PIANOTE FREE FOR 7 DAYS AND GET:',

@@ -87,17 +87,17 @@
             <h5 class="max-w-xl lg:max-w-3xl md:px-3 leading-normal mt-3 md:mt-5 mb-8">We play the piano to play songs. Real songs. Songs people want to listen to. These 3 fun lessons will show you <em>exactly</em> how to start playing beautiful songs on the piano. Even if you’ve never touched the keys before.</h5>
             <div class="flex flex-wrap items-start max-w-6xl mx-auto">
                 <div class="w-full md:w-1/3 px-3 mb-10 md:mb-0">
-                    <i class="fal fa-history text-pianote text-5xl md:text-6xl lg:text-7xl"></i>
+                    <i class="fa-light fa-history text-pianote text-5xl md:text-6xl lg:text-7xl"></i>
                     <h4 class="mt-4 md:mt-7 md:mb-2"><strong>Short Fun Lessons</strong></h4>
                     <p>So you spend more time playing.</p>
                 </div>
                 <div class="w-full md:w-1/3 px-3 mb-10 md:mb-0">
-                    <i class="fal fa-arrow-to-bottom text-pianote text-5xl md:text-6xl lg:text-7xl"></i>
+                    <i class="fa-light fa-arrow-to-bottom text-pianote text-5xl md:text-6xl lg:text-7xl"></i>
                     <h4 class="mt-4 md:mt-7 md:mb-2"><strong>Downloadable Charts</strong></h4>
                     <p>Save them, print them, they’re yours!</p>
                 </div>
                 <div class="w-full md:w-1/3 px-3">
-                    <i class="fal fa-music text-pianote text-5xl md:text-6xl lg:text-7xl"></i>
+                    <i class="fa-light fa-music text-pianote text-5xl md:text-6xl lg:text-7xl"></i>
                     <h4 class="mt-4 md:mt-7 md:mb-2"><strong>Hear The Results</strong></h4>
                     <p>From your very 1st lesson.</p>
                 </div>

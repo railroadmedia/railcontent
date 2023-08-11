@@ -6,7 +6,6 @@ use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Models\CreditCard;
 use App\Modules\Ecommerce\Models\PaymentMethod;
 use App\Modules\Ecommerce\Models\StripeCustomer;
-use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Models\UserPaymentMethod;
 use Carbon\Carbon;
 use Exception;
@@ -28,10 +27,10 @@ class SyncStripePaymentMethods extends Command
     public function handle(StripePaymentGateway $stripePaymentGateway)
     {
         $this->stripePaymentGateway = $stripePaymentGateway;
-        $this->info("Migrate Stripe Gateway Customers and Credit Cards To Musora...");
-
         $userId = $this->argument('userId') ?? 0;
         $toUserId = $this->argument('toUserId') ?? 9999999;
+        $this->info("Migrate Stripe Credit Cards To Musora... $userId to $toUserId.");
+
         $this->withExecutionTime(function () use ($userId, $toUserId) {
             $query = StripeCustomer::query()
                 ->where('user_id', '>=', $userId)
@@ -51,17 +50,18 @@ class SyncStripePaymentMethods extends Command
                 $paymentMethodLookup = $paymentMethods->keyBy(
                     'credit_card_id'
                 );
-                $paymentMethodIds = $paymentMethods->pluck('id')->toArray();
-                $subscriptionLookup = Subscription::query()
-                    ->whereIn('payment_method_id', $paymentMethodIds)
-                    ->get()->keyBy('payment_method_id');
+//                $paymentMethodIds = $paymentMethods->pluck('id')->toArray();
+//                $subscriptionLookup = Subscription::query()
+//                    ->whereIn('payment_method_id', $paymentMethodIds)
+//                    ->get()->keyBy('payment_method_id');
                 foreach ($items as $item) {
                     $this->totalCount++;
-                    $this->migrateStripeCustomer($item, $creditCardLookup, $paymentMethodLookup, $subscriptionLookup);
+                    $this->migrateStripeCustomer($item, $creditCardLookup, $paymentMethodLookup);
                 }
             });
         });
 
+        $this->info("Finished Migrated Stripe Credit Cards To Musora... $userId to $toUserId.");
         $this->info("Summary:");
         $this->info("Total Users: " . $this->totalCount);
         $this->info("Total Cards: " . $this->totalCards);
@@ -74,8 +74,7 @@ class SyncStripePaymentMethods extends Command
     private function migrateStripeCustomer(
         StripeCustomer $stripeCustomer,
         $creditCardLookup,
-        $paymentMethodLookup,
-        $subscriptionLookup
+        $paymentMethodLookup
     ) {
         $this->info("Migrating stripe user to musora: " . $stripeCustomer->user_id);
 
@@ -105,11 +104,11 @@ class SyncStripePaymentMethods extends Command
                 }
 
                 $expirationDate = Carbon::createFromDate($card->exp_year, $card->exp_month);
-                if ($expirationDate->addYear()->isPast()) {
-                    $this->info("Card is expired");
-                    $this->expiredCount++;
-                    continue;
-                }
+//                if ($expirationDate->addYear()->isPast()) {
+//                    $this->info("Card is expired");
+//                    $this->expiredCount++;
+//                    continue;
+//                }
 
                 $expirationDateCompare = $expirationDate->format('Y-m');
 
@@ -159,15 +158,15 @@ class SyncStripePaymentMethods extends Command
                 $newUserPaymentMethod->payment_method_id = $newPaymentMethod->id;
                 $newUserPaymentMethod->save();
 
-                $subscription = $subscriptionLookup->get($matchingPaymentMethod->id ?? 0) ?? null;
-                if ($subscription) {
-                    $subscription->legacy_payment_method_id = $matchingPaymentMethod->id ?? null;
-                    $subscription->payment_method_id = $newPaymentMethod->id;
-                    $subscription->save();
-                    $this->info(
-                        "Subscription $subscription->id updated from $subscription->legacy_payment_method_id to $subscription->payment_method_id"
-                    );
-                }
+//                $subscription = $subscriptionLookup->get($matchingPaymentMethod->id ?? 0) ?? null;
+//                if ($subscription) {
+//                    $subscription->legacy_payment_method_id = $matchingPaymentMethod->id ?? null;
+//                    $subscription->payment_method_id = $newPaymentMethod->id;
+//                    $subscription->save();
+//                    $this->info(
+//                        "Subscription $subscription->id updated from $subscription->legacy_payment_method_id to $subscription->payment_method_id"
+//                    );
+//                }
                 $this->info("Created Payment Method for card");
                 $this->createdPaymentMethods++;
             } catch (Exception $e) {

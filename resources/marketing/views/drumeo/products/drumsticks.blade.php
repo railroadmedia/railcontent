@@ -96,7 +96,7 @@
                         class="show-for-medium"> drumsticks — giving you a longer-lasting stick you can count on.</h5>
 
             <div class="columns medium-4">
-                <i class="fal fa-axe text-blue"></i>
+                <i class="fa-light fa-axe text-blue"></i>
                 <h3>HICKORY WOOD </h3>
                 <p>
                     <em class="text-blue">For strength and durability.</em><br>
@@ -104,7 +104,7 @@
                 </p>
             </div>
             <div class="columns medium-4">
-                <i class="fal fa-tint text-blue"></i>
+                <i class="fa-light fa-tint text-blue"></i>
                 <h3>2X MOISTURE </h3>
                 <p>
                     <em class="text-blue">For longer-lasting sticks.</em><br>
@@ -112,7 +112,7 @@
                 </p>
             </div>
             <div class="columns medium-4">
-                <i class="fal fa-hand-sparkles text-blue"></i>
+                <i class="fa-light fa-hand-sparkles text-blue"></i>
                 <h3>HAND ROLLED </h3>
                 <p>
                     <em class="text-blue">For better sticks, every time. </em><br>
