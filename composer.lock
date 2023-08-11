@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "54805101544d6142e3909cd7fae391bd",
+    "content-hash": "166e80e25d222ded4745233ad2d1d34c",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8123,16 +8123,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "dev-referral-contest",
+            "version": "dev-august-referral-contest",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "1abeb382e61666e2500acc6b98604dcb0868f3a7"
+                "reference": "ac12c2c89f407b50c729a799e2f3062d870d45c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/1abeb382e61666e2500acc6b98604dcb0868f3a7",
-                "reference": "1abeb382e61666e2500acc6b98604dcb0868f3a7",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/ac12c2c89f407b50c729a799e2f3062d870d45c8",
+                "reference": "ac12c2c89f407b50c729a799e2f3062d870d45c8",
                 "shasum": ""
             },
             "require": {
@@ -8169,9 +8169,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/referral-contest"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/august-referral-contest"
             },
-            "time": "2023-08-11T19:12:18+00:00"
+            "time": "2023-08-11T20:21:23+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -16991,7 +16991,7 @@
     "aliases": [
         {
             "package": "railroad/ecommerce",
-            "version": "dev-referral-contest",
+            "version": "dev-august-referral-contest",
             "alias": "5.0.98",
             "alias_normalized": "5.0.98.0"
         },
