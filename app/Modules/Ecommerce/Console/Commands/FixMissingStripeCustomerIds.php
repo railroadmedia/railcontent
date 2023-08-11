@@ -14,7 +14,7 @@ use Stripe\Stripe;
 
 class FixMissingStripeCustomerIds extends Command
 {
-    protected $signature = 'ecommerce:MigrateFixMissingStripeCustomerIds {startingId?} ';
+    protected $signature = 'ecommerce:FixMissingStripeCustomerIds {startingId?} ';
     private int $count = 0;
     private int $totalCount = 0;
 
@@ -73,7 +73,6 @@ class FixMissingStripeCustomerIds extends Command
                     if (isset($lookup[$item->external_customer_id])) {
                         continue;
                     }
-                    $this->info("Processing user payment method id: " . $item->id . " $item->external_customer_id");
                     $this->migrateCreditCard($item);
                     $processedIds[$item->external_customer_id] = true;
                 }
@@ -88,6 +87,7 @@ class FixMissingStripeCustomerIds extends Command
         if ($item->payment_gateway_name == 'recordeo') {
             return;
         }
+        $this->info("Processing user payment method id: " . $item->id . " $item->external_customer_id");
 
         $stripeCustomer = new StripeCustomer();
         $stripeCustomer->user_id = $item->user_id;
