@@ -211,7 +211,7 @@
     <section class="text-white py-8 md:py-10 lg:py-12 px-4 bg-musora-black">
         <div class="container mx-auto max-w-6xl">
             <p class="leading-normal px-3">
-                Musora is the home of Drumeo, Pianote, Guitareo, and Singeo -- and the leader in online music education with more than 15 years experience, 500 million video views, and 100 world-class instructors.
+                Musora is the home of Drumeo, Pianote, Guitareo, and Singeo — and the leader in online music education with more than 15 years experience, 500 million video views, and 100 world-class instructors.
                 <br><br>
                 Each brand offers a membership platform for music students to learn with step-by-step lessons, useful practice tools, and a supportive community of qualified teachers. The unique differentiator is that we provide a home for students, blending technology with tradition to give them an affordable and supportive home base to reach their musical goals.
                 <br><br>
@@ -225,14 +225,14 @@
         <div class="container mx-auto max-w-6xl">
             <h3 class="text-center mb-8 md:mb-16"><strong>Program Benefits</strong></h3>
             <ul class="fa-ul flex flex-wrap">
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Built For Creators</strong><br> If you’re a publisher, influencer, or content creator -- this program is designed for you! You have an audience who cares about music, and we’d love to support their educational journeys!</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Get Paid Consistently & On Time</strong><br> We always put our students first. After that, it’s you! You’ll be paid consistently and on-time -- with a clear breakdown of your earnings so you can attribute your efforts and successes.</li>
+                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Built For Creators</strong><br> If you’re a publisher, influencer, or content creator — this program is designed for you! You have an audience who cares about music, and we’d love to support their educational journeys!</li>
+                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Get Paid Consistently & On Time</strong><br> We always put our students first. After that, it’s you! You’ll be paid consistently and on-time — with a clear breakdown of your earnings so you can attribute your efforts and successes.</li>
                 <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">World-Class Student Experience</strong><br> You’ll always have confidence that you’re promoting meaningful products and services. Students are always supported with world-class platforms, teachers, and communities.</li>
                 <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Free Membership For Active Partners</strong><br> If you’re promoting our memberships, we want you to be a part of the community so you see the impact it makes! You’ll receive a free membership for as long as you remain an ambassador.</li>
                 <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Unique Offers & Creatives</strong><br> Depending on the partnership, you’ll have access to a dedicated storefront page and custom creatives to support your goals as an ambassador.</li>
                 <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-12 lg:mb-16"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Sponsored Content & Giveaways</strong><br> Have an idea? We’re all ears. We want to support your community and help you find the best ways to promote the partnership with your audience.</li>
                 <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed mb-6 md:mb-0"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Monthly Newsletter</strong><br> You’ll get a monthly newsletter about opportunities, initiatives, and Musora events. We want to help spark ideas for collaborating on exciting campaigns.</li>
-                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Dedicated & Responsive Support</strong><br> You’ll have an account manager to support your campaigns -- brainstorm what’s working, what’s not, and how we can work together to reach the goal of supporting and inspiring musicians.</li>
+                <li class="w-full md:w-1/2 md:pr-12 lg:pr-24 leading-relaxed"><i class="far fa-li fa-check-circle text-musora-gold text-4xl"></i><strong class="font-black">Dedicated & Responsive Support</strong><br> You’ll have an account manager to support your campaigns — brainstorm what’s working, what’s not, and how we can work together to reach the goal of supporting and inspiring musicians.</li>
             </ul>
         </div>
     </section>
@@ -425,7 +425,7 @@
             class="relative flex min-h-screen items-center justify-center p-4"
         >
             <!-- Close button -->
-            <i class="fal fa-times fa-2x fixed top-16 right-2 text-white cursor-pointer text-5xl"></i>
+            <i class="fa-light fa-times fa-2x fixed top-16 right-2 text-white cursor-pointer text-5xl"></i>
             <div
                 x-on:click.stop
                 x-trap.noscroll.inert="modal"

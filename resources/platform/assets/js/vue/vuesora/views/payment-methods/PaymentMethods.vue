@@ -308,7 +308,7 @@ export default {
         updatePaymentMethod() {
             EcommerceService.updatePaymentMethod({
                 card_token: this.editingPaymentMethod.methodType === 'credit_card' ? this.stripeToken.id : null,
-                gateway: this.brand,
+                gateway: 'musora',
                 method_type: this.editingPaymentMethod.methodType,
                 billing_country: this.editingPaymentMethod.billingCountry,
                 billing_region: this.editingPaymentMethod.billingRegion,

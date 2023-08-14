@@ -186,7 +186,7 @@
                     <p class="text-left">
                         Let’s face it.
                         <br><br>
-                        EVERYTHING is more expensive right now. And it doesn’t look like changing anytime soon. So what does that mean for your hobbies? You know -- what you do in your free time?
+                        EVERYTHING is more expensive right now. And it doesn’t look like changing anytime soon. So what does that mean for your hobbies? You know — what you do in your free time?
                         <br><br>
                         At Pianote, we believe your hobbies matter.
                         <br><br>
@@ -213,7 +213,7 @@
                                 <br>
                                 <span class="text-pianote">LIFETIME ACCESS</span>
                             </strong><br>
-                            Play the music you love on the piano with the awesome Power of Chords. This fun course will demystify chording and show you how chords are the foundation of ALL music (even classical). When you understand and can play chords -- you’ll be able to play the songs you love easier, with more confidence.
+                            Play the music you love on the piano with the awesome Power of Chords. This fun course will demystify chording and show you how chords are the foundation of ALL music (even classical). When you understand and can play chords — you’ll be able to play the songs you love easier, with more confidence.
                             <br>
                         </div>
                     </div>
@@ -226,7 +226,7 @@
                                 <br>
                                 <span class="text-pianote">LIFETIME ACCESS</span>
                             </strong><br>
-                            Anyone can play a chord -- but what happens in the spaces between the chords distinguishes the great players from the mediocre ones. Fill those spaces with piano riffs that will make you sound professional, polished ... and close to perfect. This course is broken down so even complete beginners can start sounding amazing. You’ll be shown exactly how to play the fills -- note for note.
+                            Anyone can play a chord — but what happens in the spaces between the chords distinguishes the great players from the mediocre ones. Fill those spaces with piano riffs that will make you sound professional, polished ... and close to perfect. This course is broken down so even complete beginners can start sounding amazing. You’ll be shown exactly how to play the fills — note for note.
                             <br>
                         </div>
                     </div>

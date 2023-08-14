@@ -127,7 +127,7 @@
     <section class="pt-12 md:pt-20 pb-48">
         <div class="max-w-2xl mx-auto text-center px-4 md:px-0">
             <h3 class="font-extrabold">Step into your personal Concert Hall</h3>
-            <p class="italic font-bold my-2" style="color:#AC2134;">The only headphones designed by piano players -- for piano players.</p>
+            <p class="italic font-bold my-2" style="color:#AC2134;">The only headphones designed by piano players — for piano players.</p>
             <p class="mb-10">
                 Your digital piano sounds better with headphones. It’s a simple fact. And Pianote’s Concert Series over-ear headphones deliver the immersive experience your playing deserves.
             </p>

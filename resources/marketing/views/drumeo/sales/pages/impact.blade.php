@@ -184,7 +184,7 @@
           [
               "img" => "https://dpwjbsxqtam5n.cloudfront.net/sales/social-proof/ivy-elizondo.jpg",
               "header" => "She took her kids’ drums and started a band.",
-              "desc" => "When Ivy’s kids decided to stop playing drums, she jumped on the throne instead -- she’s used Drumeo to build a foundation and formed a band.",
+              "desc" => "When Ivy’s kids decided to stop playing drums, she jumped on the throne instead — she’s used Drumeo to build a foundation and formed a band.",
               "name" => "Ivy Elizondo",
               "location" => "Hope, British Columbia",
               "video" => "//player.vimeo.com/video/373445587?autoplay=1",

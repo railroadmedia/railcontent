@@ -47,6 +47,11 @@ class MarketingController extends BaseController
         return view('musora.pages.unified-2022', [ 'theme' => 'musora']);
     }
 
+    public function mentors()
+    {
+        return view('musora.pages.mentors', [ 'theme' => 'musora']);
+    }
+
     public function playlists()
     {
         return view('musora.pages.playlists', [ 'theme' => 'musora']);

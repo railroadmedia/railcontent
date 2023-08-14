@@ -139,5 +139,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'cors' => \App\Http\Middleware\Cors::class,
+        'musora-center-admin' => \App\Modules\MusoraCenter\Middleware\MusoraCenterAdmin::class
     ];
 }

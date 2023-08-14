@@ -511,7 +511,7 @@
 
                 @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/students/Matt-Kretzer.jpg",
-                "testimonialHighlight" => "I have more confidence and ability -- and no longer need to ‘water down’ drum parts!",
+                "testimonialHighlight" => "I have more confidence and ability — and no longer need to ‘water down’ drum parts!",
                 "fullTestimonial" => "I play in a weekend cover band and there were always certain parts of a few songs that gave me trouble. Sometimes I would water down certain passages in ` to lessen my mistakes. After a few months of working through the Rock Drumming Masterclass, I had much more confidence and ability, and I no longer need to water down any parts. <br><br> I have more confidence in my playing and I believe I am a more musical drummer. I have a renewed excitement to play and have probably never been more motivated to practice. <br><br> This is the best investment you can make toward your musical journey. I wish I’d found this 20 years ago! You will develop technique, creative ideas, and exercises that you will be able to work on for the rest of your life.",
                 "name" => "Matt Kretzer",
                 "location" => "Ohio, USA"

@@ -80,7 +80,7 @@
                                     value="{{ $brand }}" id="brand" />
                                 <input
                                     class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
-                                    type="email" id="email" name="email" placeholder="Email address..." value="">
+                                    type="email" id="email" name="email" placeholder="Email address..." value="" required>
                                 <input name="button" type="submit" id="button"
                                     class=" tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
                                     value="Send Guest Pass" onclick="sendPass(event)" />

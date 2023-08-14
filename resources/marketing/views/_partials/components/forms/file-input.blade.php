@@ -1,20 +1,20 @@
-<div 
-    class="file-field" 
+<div
+    class="file-field"
     {{-- x-bind:disabled="disabled" --}}
     x-data="{
         message: '{{$message}}',
     }"
 >
-    <label 
-        for="{{$id}}" 
+    <label
+        for="{{$id}}"
         class="btn-secondary sm:btn-small {{ $darkMode ? 'text-[#a1afc9]' : 'text-gray-400' }}"
-        @if(!empty($required)) aria-required="required" @endif 
+        @if(!empty($required)) aria-required="required" @endif
         {{-- x-bind:aria-invalid="invalid" --}}
         {{-- x-bind:aria-valid="valid" --}}
     >
         <div class="input-icon">
             {{-- <!-- Normal State --> --}}
-            <i class="fal fa-paperclip"></i>
+            <i class="fa-light fa-paperclip"></i>
             {{-- <!-- Heroicon name: solid/exclamation-circle --> --}}
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="invalid-icon" fill="currentColor" aria-hidden="true">
                 <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -25,9 +25,9 @@
             </svg>
         </div>
             {{ $label }}
-        <input 
-            type="file" 
-            id="{{$id}}" 
+        <input
+            type="file"
+            id="{{$id}}"
             accept="{{$accept}}"
             x-on:change="
                 limit = {{ $megabiteLimit }} * 1000000;
@@ -35,16 +35,16 @@
                     'video/mp4',
                     'video/x-m4v',
                     'video/quicktime',
-                    'image/apng', 
-                    'image/bmp', 
-                    'image/gif', 
-                    'image/jpeg', 
-                    'image/pjpeg', 
-                    'image/png', 
-                    'image/svg+xml', 
-                    'image/tiff', 
-                    'image/webp', 
-                    'image/x-icon', 
+                    'image/apng',
+                    'image/bmp',
+                    'image/gif',
+                    'image/jpeg',
+                    'image/pjpeg',
+                    'image/png',
+                    'image/svg+xml',
+                    'image/tiff',
+                    'image/webp',
+                    'image/x-icon',
                 ];
 
                 if(!fileTypes.includes($event.target.files[0].type)){
@@ -66,7 +66,7 @@
     {{-- <!-- Message --> --}}
     <div class="input-messages">
         <p class="primary-message {{ $darkMode ? 'text-white' : 'text-[#00101D]' }}" x-text="message"></p>
-        <p 
+        <p
             x-bind:class="message === '' && 'hidden'"
             class="secondary-message">
             Max File Size {{ $megabiteLimit }}MB
@@ -76,7 +76,7 @@
     <div x-bind:class="formData.{{$name}}.length === 0 && 'hidden'">
         <template x-for="file in formData.{{$name}}">
             <div class="bg-green-50 p-2 inline-flex items-center font-bold text-xs w-full mb-2">
-                <span class="truncate" x-text="file.name"></span> 
+                <span class="truncate" x-text="file.name"></span>
                 <span class="ml-1 text-gray-500 mr-auto whitespace-nowrap" x-text="
                     bytes = file.size.toString().replace(/[^0-9.]/g, '')
                     sizes = ['B', 'KB', 'MB', 'GB', 'TB']
@@ -103,7 +103,7 @@
 
 
 
-{{-- 
+{{--
 
 <script>
 export default {
@@ -167,16 +167,16 @@ export default {
                 "video/mp4",
                 "video/x-m4v",
                 "video/quicktime",
-                "image/apng", 
-                "image/bmp", 
-                "image/gif", 
-                "image/jpeg", 
-                "image/pjpeg", 
-                "image/png", 
-                "image/svg+xml", 
-                "image/tiff", 
-                "image/webp", 
-                "image/x-icon", 
+                "image/apng",
+                "image/bmp",
+                "image/gif",
+                "image/jpeg",
+                "image/pjpeg",
+                "image/png",
+                "image/svg+xml",
+                "image/tiff",
+                "image/webp",
+                "image/x-icon",
             ];
 
 
@@ -191,7 +191,7 @@ export default {
                 return;
             } else {
                 this.validate()
-                this.formState = 2; 
+                this.formState = 2;
                 if(!this.multiple) this.$emit('clearFiles')
                 this.$emit('attachFile', e.target.files[0]);
             }
@@ -238,7 +238,7 @@ export default {
             if(Arr.length === 0 && !this.invalid) {
                 this.valid = false;
                 this.formState = 0;
-            } 
+            }
         }
     }
 }

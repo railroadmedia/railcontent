@@ -232,7 +232,7 @@
                 <br><br>
                 It’s not your fault.
                 <br><br>
-                If your playing doesn’t sound like it does in your dreams, it’s likely because you’ve never been shown HOW to play that way. And if you’ve never been shown how -- then it only makes sense that you can’t.
+                If your playing doesn’t sound like it does in your dreams, it’s likely because you’ve never been shown HOW to play that way. And if you’ve never been shown how — then it only makes sense that you can’t.
                 <br><br>
                 Not yet, anyway...</p>
             <img class="h-14 md:h-16 lg:h-20 animated infinite pulse lazyload" data-src="https://www.musora.com/musora-cdn/image/width=70,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/treble-clef.png" alt="Treble clef">
@@ -242,7 +242,7 @@
         <div class="container mx-auto">
             <h2><em>Your step-by-step journey to...</em></h2>
             <img class="h-20 md:h-40 lg:h-52 mx-auto my-3 md:my-4 lg:my-5 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/logo-2.png" alt="Playing beautiful piano logo">
-            <p class="text-pianote mb-5 md:mb-10"><em><i class="fal fa-angle-down"></i> &nbsp; CLICK A LESSON TO PREVIEW &nbsp; <i class="fal fa-angle-down"></i></em></p>
+            <p class="text-pianote mb-5 md:mb-10"><em><i class="fa-light fa-angle-down"></i> &nbsp; CLICK A LESSON TO PREVIEW &nbsp; <i class="fa-light fa-angle-down"></i></em></p>
         </div>
         <div class="flex flex-wrap mx-auto bg-white" style="max-width:2000px;">
             <div data-open="lesson1" class="w-1/2 lg:w-1/3 bg-cover bg-center pt-32 md:pt-44 lg:pt-52 pb-5 md:pb-8 lg:pb-12 relative cursor-pointer hover:opacity-95 autoplay-video lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/play-beautiful-piano/thumb-video-1.jpg">
@@ -325,7 +325,7 @@
             <h2 class="mb-60 md:mb-96 lg:pb-32 text-shadow-3">A message from<br class="inline md:hidden"> <strong>your teacher, Lisa Witt.</strong></h2>
             <p class="text-left max-w-xl leading-relaxed mx-auto px-5 md:px-0"><strong>You can do this.</strong>
                 <br><br>
-            If you can move your fingers, you can play beautiful music on the piano. I know you can -- because I’ve seen countless students discover for themselves just what’s hiding on those fingers of yours.
+            If you can move your fingers, you can play beautiful music on the piano. I know you can — because I’ve seen countless students discover for themselves just what’s hiding on those fingers of yours.
                 <br><br>
             Even if you don’t believe me...
                 <br><br>
@@ -398,7 +398,7 @@
                 <div class="md:pr-8 lg:pr-10">
                     <h2 class="mb-5 lg:mb-10 text-center md:text-left">The Best Results Guaranteed.<br>
                         <strong>With NO Risk.</strong></h2>
-                    <p class="leading-normal text-left">You’ll be playing beautiful music from your very 1st lesson -- for just ${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }}. That's just ${{ number_format(floatval($productPrices['play-beautiful-piano']->discounted_price) / 6, 2) }} per lesson.
+                    <p class="leading-normal text-left">You’ll be playing beautiful music from your very 1st lesson — for just ${{ floatval($productPrices['play-beautiful-piano']->discounted_price) }}. That's just ${{ number_format(floatval($productPrices['play-beautiful-piano']->discounted_price) / 6, 2) }} per lesson.
                         <br><br>
                         And we’ll admit, there are some pretty big claims on this page. But you know what, we believe them. And we stand by them.
                         <br><br>

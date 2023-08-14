@@ -1,8 +1,8 @@
 @extends('_partials.layout.global-template')
 
 @section('meta')
-    <title>{{ $product->name }} || {{ ucfirst($theme) }}</title>
-    <meta property="og:title" content="{{ $product->name }} || {{ ucfirst($theme) }}">
+    <title>{{ $product->name }} | {{ ucfirst($theme) }}</title>
+    <meta property="og:title" content="{{ $product->name }} | {{ ucfirst($theme) }}">
     <meta property="description" content="{{ $product->meta_desc }}">
     <meta property="og:description" content="{{ $product->meta_desc }}">
     <meta property="og:url" content="{{ get_legacy_brand_base_url($theme)}}/{{ Request::path() }}"/>

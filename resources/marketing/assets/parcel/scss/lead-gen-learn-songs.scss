@@ -370,7 +370,7 @@ img {
   background: $pianoteRed;
   color: #fff;
   border: 2px solid $pianoteRed;
-  font: 700 15px/1em $robotocondensed;
+  font: 400 15px/1em $bebas;
   transition-property: background-color, border-color, color, fill, stroke;
   transition-duration: 300ms;
   text-transform: uppercase;
@@ -448,8 +448,7 @@ img {
 }
 
 .infusion-form button {
-  font-family: $robotocondensed;
-  font-weight: 700;
+  font-family: $bebas;
   text-transform: uppercase;
   margin: 0 auto 15px;
   text-align: center;

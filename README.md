@@ -354,6 +354,35 @@ r mwp artisan VaporEnvManager web-staging-one push
 Environment variables are highly sensitive and need to stay secure. Please do not ever commit these .env files or share
 them. They should be deleted from your machine after updates are pushed.
 
+To update all staging environments at once, you can use the following commands:
+1. Pull all .env files
+```
+r mwp artisan VaporEnvManager beta-testing pull &&
+r mwp artisan VaporEnvManager pre-production pull &&
+r mwp artisan VaporEnvManager web-staging-one pull &&
+r mwp artisan VaporEnvManager web-staging-two pull &&
+r mwp artisan VaporEnvManager web-staging-three pull &&
+r mwp artisan VaporEnvManager web-staging-four pull &&
+r mwp artisan VaporEnvManager web-staging-five pull &&
+r mwp artisan VaporEnvManager app-staging-one pull &&
+r mwp artisan VaporEnvManager app-staging-two pull &&
+r mwp artisan VaporEnvManager app-staging-three pull
+```
+2. Edit all .env files
+3. Push all .env files
+```
+r mwp artisan VaporEnvManager beta-testing push &&
+r mwp artisan VaporEnvManager pre-production push &&
+r mwp artisan VaporEnvManager web-staging-one push &&
+r mwp artisan VaporEnvManager web-staging-two push &&
+r mwp artisan VaporEnvManager web-staging-three push &&
+r mwp artisan VaporEnvManager web-staging-four push &&
+r mwp artisan VaporEnvManager web-staging-five push &&
+r mwp artisan VaporEnvManager app-staging-one push &&
+r mwp artisan VaporEnvManager app-staging-two push &&
+r mwp artisan VaporEnvManager app-staging-three push
+```
+
 # How To Update Staging/Vapor Environments Databases From Production Data
 
 Use the r command 'update-databases'. Example:  
@@ -490,3 +519,20 @@ then use this URL and swap in the user of the account you wish to log in to:
 ```
 https://www.musora.com/user-management-system/login-as-user/USER_ID
 ```
+
+# Musora Center For Staging/Testing/Local
+
+Musora center is set up inside the MWP for staging and local usage. **It does not work on production yet.**  
+The production setup still uses kubernetes and the 'musora' repository.  
+
+Local URL: [https://dev.musora.com:8443/musora-center/](https://dev.musora.com:8443/musora-center/)  
+Any Staging URL: [https://web-staging-one.musora.com/musora-center/](https://web-staging-one.musora.com/musora-center/)  
+
+## How To Re-Compile MWP Musora Center Assets And Javascript
+
+1. From inside our manager container, navigate to /app/musora-web-platform/app/Modules/MusoraCenter/frontend 
+2. `cd /app/musora-web-platform/app/Modules/MusoraCenter/frontend`
+3. Run: `npm run build`
+4. Publish the new assets to the MWP public folder: `r mwp artisan vendor:publish`
+5. Choose the `App\Modules\MusoraCenter\Providers\MusoraCenterServiceProvider` line to publish
+6. Commit all files changes and deploy.

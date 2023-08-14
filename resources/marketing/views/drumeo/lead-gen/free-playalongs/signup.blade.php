@@ -53,7 +53,7 @@
                         ],
                         [
                         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/kaz-rodriguez-drum-e-o.png',
-                        'descriptions' => 'Kaz has created play-alongs for the best drummers in the world -- now it’s your turn!',
+                        'descriptions' => 'Kaz has created play-alongs for the best drummers in the world — now it’s your turn!',
                         'artist' => 'Kaz Rodriguez',
                         ],
                         [
@@ -63,7 +63,7 @@
                         ],
                         [
                         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/jost-nickel-the-check-in.png',
-                        'descriptions' => 'Contemporary funk with a few odd-time curve balls -- keep your head up!',
+                        'descriptions' => 'Contemporary funk with a few odd-time curve balls — keep your head up!',
                         'artist' => 'Jost Nickel',
                         ],
                         [
@@ -78,7 +78,7 @@
                         ],
                         [
                         'image' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/free-playalongs/sarah-thawer-straight-reggae.png',
-                        'descriptions' => 'Turn the beat around with a stanky reggae groove -- is your crosstick ready?',
+                        'descriptions' => 'Turn the beat around with a stanky reggae groove — is your crosstick ready?',
                         'artist' => 'Sarah Thawer',
                         ],
                         [

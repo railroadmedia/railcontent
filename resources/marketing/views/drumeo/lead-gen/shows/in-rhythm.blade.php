@@ -5,7 +5,7 @@
 @endsection
 
 @section('description')
-    Beau Bokan and Drumeo take you on a journey through a day in the life of touring drummers -- from breakfast to soundcheck, showtime, and getting back on the bus (and everywhere in between).
+    Beau Bokan and Drumeo take you on a journey through a day in the life of touring drummers — from breakfast to soundcheck, showtime, and getting back on the bus (and everywhere in between).
 @endsection
 
 @section('show-tile', 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/shows/in-rhythm/in-rhythm-show-card-aaron.jpg' )
@@ -31,7 +31,7 @@
 @endsection
 
 @section('grid-sub')
-    Beau Bokan, Golden Hearts Media, and Drumeo take you on a journey through a day in the life of touring drummers -- from breakfast to soundcheck, showtime, and getting back on the bus (and everywhere in between).
+    Beau Bokan, Golden Hearts Media, and Drumeo take you on a journey through a day in the life of touring drummers — from breakfast to soundcheck, showtime, and getting back on the bus (and everywhere in between).
 @endsection
 
 @section('lesson-grid')

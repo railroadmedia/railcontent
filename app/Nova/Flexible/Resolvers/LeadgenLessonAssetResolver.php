@@ -102,6 +102,11 @@ class LeadgenLessonAssetResolver implements ResolverInterface
         }
 
         //delete
-        $deleteAssets = LeadgenLessonAsset::where('leadgen_lesson_id', $model['id'])->whereNotIn('id', $updatedIds ?? [])->delete();
+        if(!empty($model['brand_id'])){
+            $deleteAssets = LeadgenLessonAsset::where('leadgen_id', $model['id'])->whereNotIn('id', $updatedIds ?? [])->delete();
+        }
+        else {
+            $deleteAssets = LeadgenLessonAsset::where('leadgen_lesson_id', $model['id'])->whereNotIn('id', $updatedIds ?? [])->delete();
+        }
     }
 }

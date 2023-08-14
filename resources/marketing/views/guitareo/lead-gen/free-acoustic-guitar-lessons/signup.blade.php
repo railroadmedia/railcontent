@@ -160,9 +160,9 @@
         "bgColor" => "#010416",
         "meetYourTeacher" => '<h3>Meet your teacher...</h3>',
         "name" => '<h1 class="leading-tight" style="background: linear-gradient(to bottom, #39e5b6, #6cb6d6);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>Ayla Tesler-Mabe</strong></h1>',
-        "desc" => "Ayla Tesler-Mabe has made a splash in the music industry as a professional guitarist, vocalist, and songwriter -- playing in popular bands including Ludic and formally Calpurnia. And while she’s actively creating new music and performing, Ayla’s also passionate about helping students through Guitareo every day!
+        "desc" => "Ayla Tesler-Mabe has made a splash in the music industry as a professional guitarist, vocalist, and songwriter — playing in popular bands including Ludic and formally Calpurnia. And while she’s actively creating new music and performing, Ayla’s also passionate about helping students through Guitareo every day!
         <br><br>
-        Ayla’s no stranger to answering questions candidly, lending advice, and starting conversations about all things guitar -- and her teaching style makes students feel comfortable and encouraged, so you’ll keep practicing and developing your skills.",
+        Ayla’s no stranger to answering questions candidly, lending advice, and starting conversations about all things guitar — and her teaching style makes students feel comfortable and encouraged, so you’ll keep practicing and developing your skills.",
         "asSeenColor" => "text-guitareo",
         "thumbnails" => [
             [

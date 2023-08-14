@@ -20,7 +20,7 @@
                     <h2 class="uppercase"><strong>@yield('name') FANS</strong></h2>
                     <h3 class="text-drumeo">YOUR FIRST MONTH IS FREE!</h3>
                     <h6 class="leading-normal my-3 sm:my-5">
-                        Join @yield('name') inside Drumeo -- where you’ll get @yield('pronoun') weekly DrumeoCOACHES live events and personal feedback to support your drumming goals. This page gives you an exclusive 30-day free trial with access to everything Drumeo has to offer.
+                        Join @yield('name') inside Drumeo — where you’ll get @yield('pronoun') weekly DrumeoCOACHES live events and personal feedback to support your drumming goals. This page gives you an exclusive 30-day free trial with access to everything Drumeo has to offer.
                     </h6>
                     <a href="/choose-your-trial-month/" class="join drumeo smaller">START MY FREE TRIAL</a>
                 </div>
