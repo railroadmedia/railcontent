@@ -776,18 +776,18 @@
             </p>
 
             <div class="grid md:grid-cols-3 gap-2 lg:gap-4 items-start px-4 mx-auto max-w-md md:max-w-none">
-                <div class="bg-white rounded-xl border border-gray-400 py-8 px-4 mb-8 md:mb-0">
+                <div class="bg-white rounded-xl border border-[#4595E1] py-8 px-4 mb-8 md:mb-0">
                     <div class="text-center -mt-11">
-                        <div class="bg-gray-400 rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Keeping it light</div>
+                        <div class="bg-[#4595E1] rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Keeping it light</div>
                         <h4><strong>30-Day Drummer</strong></h4>
                         <p class="italic mb-4 text-xs mt-2">Course Only<br> &nbsp; </p>
                         <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-1a.png" alt="Tier 1 pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$97</s><strong>$77</strong></h2>
                         <p class="italic mb-4 text-xs">One-time payment</p>
-                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&promo-code=special&redirect=/order&locked=true" class="join bg-gray-400 medium w-full mb-5">ENROLL NOW</a>
+                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&promo-code=special&redirect=/order&locked=true" class="join bg-[#4595E1] medium w-full mb-5">ENROLL NOW</a>
                         <p class="inline-block text-left">
                             <b>30-Day Drummer - Season 3</b><br/>
-                            <b class="text-gray-400">Free</b> 1-Month Drumeo Access
+                            <b class="text-[#4595E1]">Free</b> 1-Month Drumeo Access
                         </p>
                     </div>
                 </div>
