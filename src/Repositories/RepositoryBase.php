@@ -23,6 +23,11 @@ abstract class RepositoryBase
     /**
      * @var Connection
      */
+    public static $publicConnectionMask;
+
+    /**
+     * @var Connection
+     */
     protected static $connectionMask;
 
     /**
