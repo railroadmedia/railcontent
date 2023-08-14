@@ -188,7 +188,7 @@
         ',
         "text" => '<h1 class="font-bison-bold">Play your first solo<br class="inline md:hidden"> in less than 60 minutes</h1>
         <div class="leading-normal mt-2 md:mt-3 mb-4 md:mb-6 lg:text-lg">Enter your email below for your free lessons...</div>',
-        "formId" => "Guitareo - Engagement - Trigger - Solo In An Hour - Web Form",
+        "formId" => "Guitareo - Engagement - Trigger - Solo In An Hour - Web Form2",
         "formName" => 'Solo In An Hour',
         "submitButtonColor" => 'linear-gradient(180deg,#ffd500,#ffb600)',
     ])

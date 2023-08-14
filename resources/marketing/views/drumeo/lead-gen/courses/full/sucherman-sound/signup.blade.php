@@ -121,7 +121,7 @@
             <br><br class="hidden lg:inline">
             @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                "formId" => "Drumeo - Engagement - Trigger - Sucherman Sound - Web Form",
+                "formId" => "Drumeo - Engagement - Trigger - Sucherman Sound - Web Form2",
                 "formName" => 'Sucherman Sound',
                 "buttonText" => 'Send The Videos&nbsp;'
             ])

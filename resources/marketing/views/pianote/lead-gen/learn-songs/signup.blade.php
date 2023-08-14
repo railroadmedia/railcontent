@@ -142,7 +142,7 @@
                 <div class="mx-auto" style="max-width:700px">
                     @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Pianote - Engagement - Trigger - Learn 3 Songs - Web Form",
+                        "formId" => "Pianote - Engagement - Trigger - Learn 3 Songs - Web Form2",
                         "formName" => 'Learn 3 Songs On Piano',
                     ])
                 </div>

@@ -146,7 +146,7 @@
                 a free beginner guitar course!</p>
             @include("guitareo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                "formId" => "Guitareo - Engagement - Trigger - Starter Kit - Web Form",
+                "formId" => "Guitareo - Engagement - Trigger - Starter Kit - Web Form2",
                 "formName" => 'The Beginner Guitar Starter',
             ])
         </div>
@@ -156,17 +156,6 @@
     <script>
         fbq('track', 'Lead');
     </script>
-    <div class="reveal w-full text-center" id="getAccess" data-reveal data-reset-on-close="true">
-        <p>Enter your email below to get a free beginner guitar <br class="hidden sm:inline">
-            course and start learning music theory.</p>
-        @include("guitareo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-            "stacked" => true,
-            "outline" => true,
-            "formId" => "Guitareo - Engagement - Trigger - Starter Kit - Web Form",
-            "formName" => 'The Beginner Guitar Starter',
-        ])
-    </div>
 
     @if(strpos(url()->full(), 'thankyou'))
         <div class="reveal w-full text-center" id="thankYouModal" data-reveal data-reset-on-close="true">

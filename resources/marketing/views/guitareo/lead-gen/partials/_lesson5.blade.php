@@ -9,7 +9,7 @@
         <div class="flex flex-wrap">
             @foreach ($lessons as $key => $lesson)
                 <div class="mb-4 px-3 md:px-4 md:w-1/2 lg:w-1/3 lesson-thumbnail @if(!empty($lesson['details'])) with-details @endif">
-                    <div class="cursor-pointer" @if(!empty($lesson['locked'])) data-open="getAccess" @elseif(!empty($lesson['Url'])) href="{{ $lesson['Url'] }}" @endif>
+                    <div @if(empty($lesson['locked'])) class="cursor-pointer" @endif @if(!empty($lesson['Url'])) href="{{ $lesson['Url'] }}" @endif>
                         <div class="thumb">
                             @if(!empty($lesson['badgeText']))
                                 <span class="badge" @if(!empty($lesson['badgeBgColor'])) style="background:{{ $lesson['badgeBgColor'] }};" @endif>

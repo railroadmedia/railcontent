@@ -489,7 +489,7 @@
             <div class="max-w-2xl mx-auto">
                 @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
-                    "formId" => 'Pianote - Engagement - Trigger - 7 Days To Sight Reading - Web Form',
+                    "formId" => 'Pianote - Engagement - Trigger - 7 Days To Sight Reading - Web Form2',
                     "formName" => '7 Days To Sight Reading',
                     "buttonText" => "Get it now",
                     'disclaimerColor' => '#B3B3B9',
