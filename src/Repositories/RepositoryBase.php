@@ -23,7 +23,7 @@ abstract class RepositoryBase
     /**
      * @var Connection
      */
-    protected static $connectionMask;
+    public static $connectionMask;
 
     /**
      * @var PresenterInterface
