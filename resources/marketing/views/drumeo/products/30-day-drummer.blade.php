@@ -321,7 +321,7 @@
                     <h4 class="px-3 lg:px-5"><strong>September 4th</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-                            Earl Bird closes in<br class="inline lg:hidden">
+                            Early Bird closes in<br class="inline lg:hidden">
                             <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
                                  <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                  <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
