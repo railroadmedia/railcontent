@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "485ef14da75d03df8c804eb7b9a6c3c9",
+    "content-hash": "73a467bd18a9e42e0e74ceffa105b4c3",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8123,16 +8123,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "dev-srr-19-shopify-ids",
+            "version": "v5.0.99",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "d36072037a831c711383f6f005d2d0ebcd2db2cf"
+                "reference": "71702be63c82e9b22f6d00e64715590fd9e0340d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/d36072037a831c711383f6f005d2d0ebcd2db2cf",
-                "reference": "d36072037a831c711383f6f005d2d0ebcd2db2cf",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/71702be63c82e9b22f6d00e64715590fd9e0340d",
+                "reference": "71702be63c82e9b22f6d00e64715590fd9e0340d",
                 "shasum": ""
             },
             "require": {
@@ -8169,9 +8169,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/srr-19-shopify-ids"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.99"
             },
-            "time": "2023-08-11T20:10:41+00:00"
+            "time": "2023-08-14T13:42:17+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -17053,12 +17053,6 @@
     ],
     "aliases": [
         {
-            "package": "railroad/ecommerce",
-            "version": "dev-srr-19-shopify-ids",
-            "alias": "v5.0.99",
-            "alias_normalized": "5.0.99.0"
-        },
-        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
@@ -17067,7 +17061,6 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/ecommerce": 20,
         "railroad/railanalytics": 20
     },
     "prefer-stable": true,
