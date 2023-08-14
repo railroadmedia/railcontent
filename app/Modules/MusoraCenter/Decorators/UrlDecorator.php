@@ -25,7 +25,7 @@ class UrlDecorator
             $contentIds[] = $content['id'];
         }
 
-        $contentRows = RepositoryBase::$connectionMask
+        $contentRows = RepositoryBase::$publicConnectionMask
             ->table('railcontent_content')
             ->whereIn('id', $contentIds)
             ->get()
