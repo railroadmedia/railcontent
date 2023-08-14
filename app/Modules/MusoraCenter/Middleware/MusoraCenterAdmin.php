@@ -40,6 +40,7 @@ class MusoraCenterAdmin
     public function handle(Request $request, Closure $next)
     {
         $user = auth()->user();
+dd(app()->environment());
         if (!empty($user) &&
             ($this->permissionService->is(auth()->id(), 'administrator') ||
                 $this->permissionService->is(auth()->id(), 'super_administrator') ||
