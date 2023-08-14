@@ -190,7 +190,7 @@
                     <h2 class="text-center sm:text-left"><strong>Kevin Castro</strong></h2>
                     <p class="leading-normal mt-4 lg:mt-6">Kevin Castro wouldn’t be a professional pianist without the Blues. In fact, it was a Blues improvisation that got him accepted into University.
                         <br><br>
-                        Since then, he’s toured with rising stars (JESSIA, Elijah Woods), played at TikTok Headquarters in New York and LA, and even recorded a demo for Jennifer Lopez (which was, sadly, never released).
+                        Since then, he’s toured with rising stars (JESSIA, Elijah Woods), played at TikTok Headquarters in New York and LA, and even recorded a demo for Jennifer Lopez.
                         <br><br>
                         But Kevin’s real passion comes from sharing his experience and knowledge with students.
                         <br><br>
