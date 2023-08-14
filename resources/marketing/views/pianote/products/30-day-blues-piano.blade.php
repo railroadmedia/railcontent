@@ -466,9 +466,9 @@
                         <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1,faster-fingers:1,piano-chords-and-scales-guide:1&redirect=/order&locked=true" class="join medium w-full mb-5 bg-[#284FFD]">ENROLL NOW</a>
                         <p class="inline-block text-left">
                             <b>30-Day Blues Piano</b><br/>
-                            <b class="text-blue-600">Free</b> Faster Fingers<br>
-                            <b class="text-blue-600">Free</b> Chords & Scales Book<br>
-                            <b class="text-blue-600">Free</b> <i>Shipping Worldwide</i>
+                            <b class="text-blue-600">Bonus</b> Faster Fingers<br>
+                            <b class="text-blue-600">Bonus</b> Chords & Scales Book<br>
+                            <b class="text-blue-600">Bonus</b> <i>Shipping Worldwide</i>
                         </p>
                     </div>
                 </div>
