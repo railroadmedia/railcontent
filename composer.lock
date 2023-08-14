@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "166e80e25d222ded4745233ad2d1d34c",
+    "content-hash": "1261b3077577004c779799f2ff96659c",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8127,12 +8127,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "ac12c2c89f407b50c729a799e2f3062d870d45c8"
+                "reference": "e9d84cdfbc94cf8b8f66b0622fc3a087c2598c73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/ac12c2c89f407b50c729a799e2f3062d870d45c8",
-                "reference": "ac12c2c89f407b50c729a799e2f3062d870d45c8",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/e9d84cdfbc94cf8b8f66b0622fc3a087c2598c73",
+                "reference": "e9d84cdfbc94cf8b8f66b0622fc3a087c2598c73",
                 "shasum": ""
             },
             "require": {
@@ -8171,7 +8171,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/august-referral-contest"
             },
-            "time": "2023-08-11T20:21:23+00:00"
+            "time": "2023-08-11T22:43:52+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -16992,8 +16992,8 @@
         {
             "package": "railroad/ecommerce",
             "version": "dev-august-referral-contest",
-            "alias": "5.0.98",
-            "alias_normalized": "5.0.98.0"
+            "alias": "5.0.99",
+            "alias_normalized": "5.0.99.0"
         },
         {
             "package": "railroad/railanalytics",
