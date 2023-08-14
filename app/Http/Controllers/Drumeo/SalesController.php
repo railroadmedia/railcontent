@@ -228,7 +228,7 @@ class SalesController extends BaseController
     }
     public function thirtyDayDrummer()
     {
-        $productId = 516;
+        $productId = 741;
         /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
         $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
         $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
