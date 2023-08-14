@@ -795,7 +795,7 @@
                     <div class="text-center -mt-11">
                         <div class="bg-musora rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Full send</div>
                         <h4><strong>Starter Kit & More</strong></h4>
-                        <p class="italic mb-4 text-xs mt-2">3 months of Drumeo + 5 bonuses worth $256.95
+                        <p class="italic mb-4 text-xs mt-2">3 months of Drumeo + 5 bonuses worth $231
                             <br><strong class="text-musora">FREE SHIPPING WORLDWIDE</strong></p>
                         <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-2a.png" alt="Tier 2 pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$147</s><strong>$117</strong></h2>
@@ -804,8 +804,8 @@
                         <p class="inline-block text-left">
                             <b>30-Day Drummer - Season 3</b><br/>
                             <b class="text-musora">Free</b> 3-Month Drumeo Access<br>
-                            <b class="text-musora">Free</b> Drumeo QuietPad<br>
-                            <b class="text-musora">Free</b> Drumeo PadStand *NEW*<br>
+                            <b class="text-musora">Free</b> QuietPad<br>
+                            <b class="text-musora">Free</b> PadStand <sup>*NEW*</sup><br>
                             <b class="text-musora">Free</b> Pair of Drumsticks<br>
                             <b class="text-musora">Free</b> Drum Key<br>
                             <b class="text-musora">Free</b> <i>Shipping Worldwide</i>
@@ -816,7 +816,7 @@
                     <div class="text-center -mt-11">
                         <div class="bg-drumeo rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">All In, Baby</div>
                         <h4><strong>Unlimited Lessons</strong></h4>
-                        <p class="italic mb-4 text-xs mt-2">1 year of Drumeo + 7 bonuses worth $580.95
+                        <p class="italic mb-4 text-xs mt-2">1 year of Drumeo + 7 bonuses worth $581
                             <br><strong class="text-drumeo">FREE SHIPPING WORLDWIDE</strong></p>
                         <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-3a.png" alt="Tier 3 pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$240</s><strong>$200</strong></h2>
@@ -825,8 +825,8 @@
                         <p class="inline-block text-left">
                             <b>Annual Drumeo Membership</b><br/>
                             <b class="text-drumeo">Free</b> 30-Day Drummer - Season 3<br>
-                            <b class="text-drumeo">Free</b> Drumeo QuietPad<br>
-                            <b class="text-drumeo">Free</b> Drumeo PadStand *NEW*<br>
+                            <b class="text-drumeo">Free</b> QuietPad<br>
+                            <b class="text-drumeo">Free</b> PadStand <sup>*NEW*</sup><br>
                             <b class="text-drumeo">Free</b> Pair of Drumsticks<br>
                             <b class="text-drumeo">Free</b> Drum Key<br>
                             <b class="text-drumeo">Free</b> <i>Shipping Worldwide</i><br>
