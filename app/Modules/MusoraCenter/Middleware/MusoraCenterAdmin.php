@@ -40,14 +40,13 @@ class MusoraCenterAdmin
     public function handle(Request $request, Closure $next)
     {
         $user = auth()->user();
-dd(app()->environment());
         if (!empty($user) &&
             ($this->permissionService->is(auth()->id(), 'administrator') ||
                 $this->permissionService->is(auth()->id(), 'super_administrator') ||
                 $this->permissionService->is(auth()->id(), 'shipping_fulfillment') ||
                 $this->permissionService->is(auth()->id(), 'payment_recovery') ||
                 $this->permissionService->is(auth()->id(), 'view_daily_stats'))
-            && (in_array(app()->environment(), ['local', 'staging', 'development']))) {
+            && (in_array(app()->environment(), ['local', 'staging', 'development', 'beta-testing']))) {
 
             ContentRepository::$bypassPermissions = true;
             ContentRepository::$pullFutureContent = true;
