@@ -542,7 +542,7 @@
     ])
 
     @include('_partials.components.countdown',[
-        'countdownDate' => '2023-09-04 00:00:00',
+        'countdownDate' => '2023-09-01 00:00:00',
         'promoVersion' => false
     ])
     @include("pianote.sales.partials._footer")
