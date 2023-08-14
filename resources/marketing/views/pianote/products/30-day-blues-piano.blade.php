@@ -443,15 +443,15 @@
             </p>
 
             <div class="grid md:grid-cols-3 gap-2 lg:gap-4 items-start px-4 mx-auto max-w-md md:max-w-none text-black">
-                <div class="bg-white rounded-xl border border-[#f06674] py-8 px-4 mb-8 md:mb-0">
+                <div class="bg-white rounded-xl border border-pianote py-8 px-4 mb-8 md:mb-0">
                     <div class="text-center -mt-11">
-                        <div class="bg-[#f06674] rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Course Only</div>
+                        <div class="bg-pianote rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Course Only</div>
                         <h4><strong>30-Day Blues Piano</strong></h4>
                         <p class="italic mb-4 text-xs mt-2">Course Only<br> &nbsp; </p>
                         <img class="h-24 lg:h-32 pb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/course-only2.png" alt="Tier 1 pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$97</s><strong>$77</strong></h2>
                         <p class="italic mb-4 text-xs">One-time payment</p>
-                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&promo-code=special&redirect=/order&locked=true" class="join bg-[#f06674] medium w-full">ENROLL NOW</a>
+                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&promo-code=special&redirect=/order&locked=true" class="join bg-pianote medium w-full">ENROLL NOW</a>
                     </div>
                 </div>
                 <div class="bg-white rounded-xl border border-blue-600 py-8 px-4 mb-8 md:mb-0">
