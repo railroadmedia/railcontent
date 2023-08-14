@@ -11,8 +11,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
-    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/worship-piano.css') }}">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/worship-piano.css') }}">
 @stop
 
 @section('global-body')
@@ -74,7 +74,7 @@
             <img src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/lisa-amberly-1.png" alt="Lisa and Amberly">
             <p>The piano (and keyboard) is the glue that holds worship bands together. From song introductions and transitions to backing music during prayer and altar calls, the piano sets the tone and space inside church.
                 <br><br> The needs of a church pianist are unique - there isn’t really any other environment like it. That means the skills are unique. This training pack has been specially designed for worship piano inside a church setting.
-                <br><br> If you’ve been wanting to learn the piano to help serve your church but didn’t know how -- this training pack will equip you to start playing and serving in the shortest time possible.</p>
+                <br><br> If you’ve been wanting to learn the piano to help serve your church but didn’t know how — this training pack will equip you to start playing and serving in the shortest time possible.</p>
         </div>
     </section>
 
@@ -330,7 +330,7 @@
 
     <section class="two-video-example text-center lazy" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/worship-piano/church-stage-background.jpg">
         <div class="container">
-            <h2><strong>Know you’re good enough --<br>
+            <h2><strong>Know you’re good enough  — <br>
                     BEFORE you ever step on stage</strong></h2>
             <p>Playing at church can be intimidating and scary. Even if you’ve played piano before.
                 <br><br>Worship Piano takes the fear out of knowing if you’re good enough. That’s because you’ll be able to practice along with YOUR OWN worship band. Play along and get comfortable with other musicians, in your own home. Take a look:</p>
@@ -487,20 +487,20 @@
 
     <section class="play-songs text-center">
         <div class="container">
-            <h2><strong>Fast results -- so you can<br class="hidden-sm hidden-md hidden-lg"> start playing right away</strong></h2>
+            <h2><strong>Fast results — so you can<br class="hidden-sm hidden-md hidden-lg"> start playing right away</strong></h2>
             <p>Modern worship music is not complicated. It’s not designed to be. After all, the goal is not “showing-off” or being flashy, it’s about helping people connect with God during times of worship.
                 <br><br>
                 Because of its beautiful simplicity, it’s easy to learn and start playing in church sooner. This won’t take you weeks or months to be ready. In fact, you might find yourself wanting to play within a few days of starting.</p>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-piano-keyboard"></i>
+                <i class="fa-light fa-piano-keyboard"></i>
                 <p>
                     <strong>no guesswork</strong><br> You’ll never be left guessing because every lesson is structured to teach you the right skills at the right time.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-check"></i>
+                <i class="fa-light fa-check"></i>
                 <p>
                     <strong>perfect for all levels</strong><br> Even if you’ve never touched a piano before, you’ll learn the skills to play in church.
                 </p>
@@ -508,14 +508,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-music"></i>
+                <i class="fa-light fa-music"></i>
                 <p>
                     <strong>play real worship songs</strong><br> You’ll be learning with REAL modern worship songs that are currently used in church.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-download"></i>
+                <i class="fa-light fa-download"></i>
                 <p>
                     <strong>downloadable resources</strong><br> Helpful guides to download, print, and keep by the piano. Never forget what you’ve learned.
                 </p>
@@ -523,14 +523,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-guitars"></i>
+                <i class="fa-light fa-guitars"></i>
                 <p>
                     <strong>your own worship band</strong><br> Practice along to the backing tracks and BE part of a worship band before ever stepping on stage.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-hands-helping"></i>
+                <i class="fa-light fa-hands-helping"></i>
                 <p>
                     <strong>support from real teachers</strong><br> Ask your biggest questions and get personalized feedback from teachers.
                 </p>
@@ -538,14 +538,14 @@
 
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-users"></i>
+                <i class="fa-light fa-users"></i>
                 <p>
                     <strong>the best online community</strong><br> Meet other church piano players, share your experiences, struggles, and successes with other students.
                 </p>
             </div>
 
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-infinity"></i>
+                <i class="fa-light fa-infinity"></i>
                 <p>
                     <strong>yours forever</strong><br> These lessons NEVER expire. Watch them again, and again, and again… (you get the point).
                 </p>

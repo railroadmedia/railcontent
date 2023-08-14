@@ -16,7 +16,7 @@
           'position' => 'left',
           'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/thumb3.jpg',
           'title' => 'Chord Inversions 101',
-          'desc' => 'Inversions can be scary and a little confusing. But they open up the keyboard in an entirely new way. The concept behind them is simple. And the result -- is powerful. You’ll get tips to practice and master your chord inversions so they’ll become second nature.'
+          'desc' => 'Inversions can be scary and a little confusing. But they open up the keyboard in an entirely new way. The concept behind them is simple. And the result — is powerful. You’ll get tips to practice and master your chord inversions so they’ll become second nature.'
       ],
       [
           'position' => 'right',
@@ -55,12 +55,6 @@
           'desc' => 'It’s time to take everything you’ve learned and write your own music. But you won’t be alone. We’ll help you start writing your own beautiful chord progressions and exploring melodies. Your relationship with music and the piano will change once you start creating and expressing yourself.'
       ],
   ];
-
-  $modalImages = [
-      "https://d2vyvo0tyx8ig5.cloudfront.net/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-106-Edit.jpg",
-      "https://d2vyvo0tyx8ig5.cloudfront.net/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-107-Edit.jpg",
-      "https://d2vyvo0tyx8ig5.cloudfront.net/products/chords-and-scales-book/2021-12-23-Pianote-Chords-Scales-108-Edit.jpg"
-  ];
 @endphp
 
 @if(!empty($products['the-power-of-chords']->getPublicStockCount()))
@@ -77,13 +71,13 @@
     <meta property="og:title" content="The Power of Chords | Pianote">
     <meta name="description" content="Play the music you love on piano.">
     <meta property="og:description" content="Play the music you love on piano.">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/share-image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/share-image.jpg">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
 
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/pianote/play-beautiful-piano.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/play-beautiful-piano.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css"/>
@@ -344,7 +338,7 @@
         <div class="max-w-5xl mx-auto md:flex relative items-center px-4">
             <div class="flex-1 text-center lg:text-right">
                 <div class="md:inline-block text-center md:text-left">
-                    <img class="h-20 md:h-24 mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/Logo_left.png" alt="logo left">
+                    <img class="h-20 md:h-24 mb-6 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/Logo_left.png" alt="logo left">
                     <h1 class="font-extrabold mb-4">
                         Play the music <br>you love on piano.
                     </h1>
@@ -359,7 +353,7 @@
                             {{--</div>--}}
                         </div>
                         <div class="flex-1 flex items-center pl-2">
-                            <img class="h-6 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">
+                            <img class="h-6 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">
                             <div style="font-size: 10px;">
                                 Join {{ $students }} pianists who<br> have already registered.
                             </div>
@@ -369,8 +363,8 @@
             </div>
             <div class="flex-1 text-center md:pl-6 lg:pl-0">
                 <div class="inline-block relative max-w-lg">
-                    <img class="hidden md:inline-block rounded-xl cursor-pointer header-thumb lazyload autoplay-video" data-src="https://www.musora.com/musora-cdn/image/width=760,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/header_thumb.png" data-open="sample" alt="header thumb">
-                    <img class="md:hidden rounded-xl mb-6 cursor-pointer lazyload autoplay-video" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/header_thumb_m.png" data-open="sample" alt="mobile header thumb">
+                    <img class="hidden md:inline-block rounded-xl cursor-pointer header-thumb lazyload autoplay-video" data-src="https://www.musora.com/musora-cdn/image/width=760,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/header_thumb.png" data-open="sample" alt="header thumb">
+                    <img class="md:hidden rounded-xl mb-6 cursor-pointer lazyload autoplay-video" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/header_thumb_m.png" data-open="sample" alt="mobile header thumb">
                     <div class="join smaller white absolute bottom-8 md:bottom-3 left-2 autoplay-video" data-open="sample">
                         <i class="fa-solid fa-play"></i>
                         watch a sample
@@ -385,7 +379,7 @@
                     {{--</div>--}}
                 </div>
                 <div class="flex-1 flex items-center md:pl-2 justify-center">
-                    <img class="h-6 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">
+                    <img class="h-6 mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=80,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/profiles.png" alt="profiles">
                     <div style="font-size: 10px;">
                         Join {{ $students }} pianists who<br class="hidden md:inline-block"> have already <br class="md:hidden">registered.
                     </div>
@@ -403,16 +397,16 @@
                     </h2>
                     <p class="text-left" style="color: #2A2F34; max-width: 406px; margin: 0;">
                         Even classical music that’s 100s of years old. <br><br>
-                        Chords are the foundation of music. When you understand and can play chords -- you’ll be able to play the songs you love easier, with more confidence.
+                        Chords are the foundation of music. When you understand and can play chords — you’ll be able to play the songs you love easier, with more confidence.
                         <br><br>
-                        Beyond that -- chords allow you to start writing your own music and improvising on the piano.
+                        Beyond that — chords allow you to start writing your own music and improvising on the piano.
                         <br><br>
                         It all comes down to chords.
                     </p>
                 </div>
             </div>
             <div class="flex-1 md:pl-4 lg:pl-10 text-center">
-                <img class="music-sheet -mb-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1050,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/sheet_music.png" alt="sheet music">
+                <img class="music-sheet -mb-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1050,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/sheet_music.png" alt="sheet music">
             </div>
         </div>
 
@@ -441,13 +435,13 @@
                                 </div>
                             </div>
                             <div class="pl-1 md:pl-9 lg:pl-10">
-                                <img class="timeline-img rounded-xl lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $step['img'] }}" alt="step {{$key+1}}" />
+                                <img class="timeline-img rounded-xl lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $step['img'] }}" alt="step {{$key+1}}" />
                             </div>
                         </div>
                     @else
                         <div class="timeline relative flex flex-col md:grid md:grid-cols-2 {{--gap-2 md:gap-12 lg:gap-20--}} mb-16 md:mb-16 lg:mb-28 pl-6 md:pl-0">
                             <div class="pr-1 md:pr-9 lg:pr-10">
-                                <img class="timeline-img rounded-xl lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $step['img'] }}" alt="step {{$key+1}}" />
+                                <img class="timeline-img rounded-xl lazyload mb-4 md:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $step['img'] }}" alt="step {{$key+1}}" />
                             </div>
                             <div class="content relative flex items-center justify-center pl-1 md:pl-8 lg:pl-10">
                                 <div class="relative w-full">
@@ -487,7 +481,7 @@
                     </p>
                 </div>
                 <div class="flex-1 mb-10 md:mb-0">
-                    <div class="bg-cover bg-top w-full aspect-16:9 rounded-xl mb-4 lazyload shadow-md" data-bg="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/downloadable.jpg"></div>
+                    <div class="bg-cover bg-top w-full aspect-16:9 rounded-xl mb-4 lazyload shadow-md" data-bg="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/downloadable.jpg"></div>
                     <h5 class="font-extrabold mb-2">
                         Downloadable Cheat Sheats
                     </h5>
@@ -496,7 +490,7 @@
                     </p>
                 </div>
                 <div class="flex-1">
-                    <div class="bg-cover bg-top w-full aspect-16:9 rounded-xl mb-4 lazyload shadow-md" data-bg="https://www.musora.com/musora-cdn/image/width=690,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/personal_support.jpg"></div>
+                    <div class="bg-cover bg-top w-full aspect-16:9 rounded-xl mb-4 lazyload shadow-md" data-bg="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/personal_support.jpg"></div>
                     <h5 class="font-extrabold mb-2">
                         Personal Support
                     </h5>
@@ -511,44 +505,22 @@
         <div class="h-10 absolute left-0 right-0" style="background: linear-gradient(to top left, #00101D calc(50% - 1px), #00101D, #fff calc(50% + 1px)); bottom: -1px;"></div>
     </section>
 
-    {{--<section class="py-10 md:py-20 relative" style="background: linear-gradient(180deg, #F61A30 0%, #910000 122.85%);">--}}
-        {{--<div class="max-w-5xl mx-auto md:flex px-4 relative z-40">--}}
-            {{--<div class="flex-1 text-white md:pr-4 lg:pr-0 mb-6 md:mb-0 max-w-md md:max-w-auto mx-auto">--}}
-                {{--<h2 class="font-extrabold mb-4 text-center md:text-left">--}}
-                    {{--Master every chord & <br>scale with this guide.--}}
-                {{--</h2>--}}
-                {{--<p>--}}
-                    {{--<span class="font-extrabold">Every Chord. Every Scale. Every Key.</span> <br><br>--}}
-                    {{--This essential resource will help you learn the most important chord shapes, chord variations, and scales in EVERY key. <br><br>--}}
-                    {{--It’s yours FREE when you get The Power of Chords. (And we’ll cover the shipping.) <br><br>--}}
-                {{--</p>--}}
-            {{--</div>--}}
-            {{--<div class="flex-1 relative sm:w-2/3 md:w-auto mx-auto text-center sm:pl-10">--}}
-                {{--<div class="relative md:max-w-md mx-auto">--}}
-                    {{--<img class="md:absolute md:w-full h-80 md:h-auto md:left-0 --}}{{---top-20--}}{{-- scales-book cursor-pointer lazyload" data-src="https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/piano_scales_book.png" alt="scales book" data-open="seeInside1">--}}
-                {{--</div>--}}
-            {{--</div>--}}
-        {{--</div>--}}
-
-        {{--<div class="absolute md:hidden w-full h-40" style="background: #00101D; bottom: -1px;"></div>--}}
-    {{--</section>--}}
-
     <section class="text-center px-5 sm:px-6 pb-20 pt-10 sm:py-16 lg:py-24" style="background-color:#00101D;">
         <div class="container max-w-5xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center sm:mt-12 mb-12">
-                <div class="py-40 sm:py-48 lg:py-64 border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 bg-center bg-cover relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 flex-shrink-0 cursor-pointer lazyload autoplay-video" data-bg="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/coach_profile-min.png" data-open="meetlisa">
+                <div class="py-40 sm:py-48 lg:py-64 border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 bg-center bg-cover relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 flex-shrink-0 cursor-pointer lazyload autoplay-video" data-bg="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/coach_profile-min.png" data-open="meetlisa">
                     <div class="join smaller white absolute bottom-2 md:bottom-3 left-2 autoplay-video" data-open="meetlisa">
                         <i class="fa-solid fa-play"></i>
                         meet lisa!
                     </div>
                 </div>
-                {{-- <img class="border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/coach_profile-min.png"> --}}
+                {{-- <img class="border-8 border-white rounded-3xl shadow-xl w-56 sm:w-72 lg:w-96 relative -mb-8 sm:mb-0 sm:-mt-8 sm:-mr-8 z-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/products/the-power-of-chords/coach_profile-min.png"> --}}
                 <div class="bg-white text-left rounded-xl pt-14 pb-8 sm:py-10 lg:py-12 px-6 sm:pr-10 sm:pl-14 lg:px-24 max-w-xl sm:mt-8 w-full sm:w-auto sm:flex-grow">
                     <h6 class="uppercase text-pianote leading-normal text-center sm:text-left">MEET YOUR COACH</h6>
                     <h2 class="text-center sm:text-left"><strong>Lisa Witt</strong></h2>
                     <h6 class="leading-normal mt-4 lg:mt-6">I know what it’s like to struggle on the piano. <br><br>
                         I have a short attention span, and learning to read music was like trying to understand a language that made no sense to me. <br><br>
-                        But what I’ve realized is that the traditional approach to piano lessons is not the only way to learn. We’re all different. And as a teacher, I’ve made it my mission to take the fear out of learning the piano -- and prove that YOU can do this. <br><br>
+                        But what I’ve realized is that the traditional approach to piano lessons is not the only way to learn. We’re all different. And as a teacher, I’ve made it my mission to take the fear out of learning the piano — and prove that YOU can do this. <br><br>
                         Even if you don’t believe me. <br><br>
                         It’s why I’m so excited about this course - because it’s going to show you what’s possible. <br><br>
                         I hope you’ll give me a chance to do that.
@@ -697,14 +669,6 @@
         "vimeoId" => "676401508",
     ])
 
-    @foreach ($modalImages as $key => $img)
-        @include('pianote.products.partials.image-modal',[
-            'id' => "seeInside".$key,
-            "image" => $img,
-            "imageName" => "seeInside".$key,
-        ])
-    @endforeach
-
     @include('pianote.sales.partials._footer')
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -712,36 +676,6 @@
     <script>
         $(document).ready(function(){
             $(document).foundation();
-
-            let imgNum = 1;
-
-            $('.image-modal-arrow-left').on('click', function(){
-                if(imgNum === 0){
-                    imgNum = 2;
-                }
-                else {
-                    imgNum--;
-                }
-
-                $('#seeInside' + imgNum).find('img').each(function(){
-                    const imgSrc = $(this);
-                    $('#seeInside1').find('img').attr('src', imgSrc.data('src'))
-                })
-            })
-
-            $('.image-modal-arrow-right').on('click', function(){
-                if(imgNum === 2){
-                    imgNum = 0;
-                }
-                else {
-                    imgNum++;
-                }
-
-                $('#seeInside' + imgNum).find('img').each(function(){
-                    const imgSrc = $(this);
-                    $('#seeInside1').find('img').attr('src', imgSrc.data('src'))
-                })
-            })
         })
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>

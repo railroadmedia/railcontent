@@ -112,6 +112,8 @@ class OrderController extends Controller
                 $brand = 'guitareo';
             } elseif (Str::endsWith($domain, 'singeo.com')) {
                 $brand = 'singeo';
+            } elseif (Str::endsWith($domain, 'musora.com')) {
+                $brand = 'musora';
             } else {
                 $brand = 'drumeo';
             }
@@ -174,7 +176,7 @@ class OrderController extends Controller
             }
         );
 
-        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.' . $brand . '.stripe_publishable_key');
+        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.musora.stripe_publishable_key');
 
         $bonuses = $request->session()->get('bonuses', []);
 
@@ -340,6 +342,8 @@ class OrderController extends Controller
             return redirect()->to('/order/guitareo');
         } elseif (Str::endsWith($parse['host'], 'singeo.com')) {
             return redirect()->to('/order/singeo');
+        } elseif (Str::endsWith($parse['host'], 'musora.com')) {
+            return redirect()->to('/order/musora');
         }
 
         // default

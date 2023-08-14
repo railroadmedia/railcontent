@@ -42,7 +42,7 @@
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
         "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-        "songs" => "5000",
+        "songs" => "5000+ popular songs.",
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support.",
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",
@@ -50,6 +50,9 @@
         "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-1-month]=1&locked=true",
         "annualLink" => "/ecommerce/add-to-cart?products[drumeo-base-annual-recurring-7-day-trial-membership]=1&locked=true",
         "monthlyLink" => "/ecommerce/add-to-cart?products[drumeo-base-monthly-recurring-7-day-trial-membership]=1&locked=true",
+    ])
+    @include('musora.sales.components.trial-explanation', [
+        'instrument' => 'drumming',
     ])
     @include('musora.sales.components.plans-different-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo-dark.svg",
@@ -63,14 +66,18 @@
         @include('musora.sales.components.card-selection-section', [
             "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
             "logo" => "https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png",
-            "songs" => "5000",
+            "songs" => "5000+ popular songs.",
             "firstPoint" => "The world’s best drum lessons.",
             "thirdPoint" => "Unlimited personal support.",
             "fifthPoint" => "Lesson access for piano, guitar, and singing.",
             "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-30-Day]=1&locked=true",
             "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-30-Day]=1&locked=true",
         ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'drumming',
+        ])
     @endif
+
     @include('drumeo._partials.faq')
 
     @include("drumeo.sales.partials._footer")

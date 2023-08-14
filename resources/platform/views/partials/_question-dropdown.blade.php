@@ -9,7 +9,7 @@
                 x-on:click="open = !open;"
             >
                 <h5
-                    class="tw-leading-tight sm:tw-leading-loose tw-font-black tw-relative"
+                    class="tw-leading-tight sm:tw-leading-loose tw-font-bold tw-relative"
                     x-bind:class="open && 'tw-mb-2'"
                 >
                     @if(!empty($num))<span class="tw-text-white tw-rounded-full tw-py-1 tw-px-2 md:tw-px-2.5 tw-text-xs md:tw-text-sm tw-absolute -tw-left-11 sm:-tw-left-14 md:-tw-left-16 -tw-top-0.5 sm:tw-top-[2px] lg:tw-top-0.5 tw-min-w-0" x-bind:class="open ? 'tw-bg-{{$brand}}' : 'tw-bg-[#838C98]'">{{$num}}</span>@endif
@@ -44,7 +44,7 @@
                 <div class="tw-bg-white tw-p-4 tw-rounded-xl tw-flex tw-flex-col md:tw-flex-row tw-mb-2 @if(empty($info['desc'])) md:tw-items-center @endif">
                     <img
                         class="tw-rounded-xl @if(empty($info['desc'])) md:tw-h-24 @else md:tw-h-32 @endif tw-mb-6 md:tw-mb-0 tw-transition-opacity tw-opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=650,quality=85/{{$info['thumb']}}"
+                        src="https://www.musora.com/musora-cdn/image/width=650,quality=95/{{$info['thumb']}}"
                         alt="lesson{{$key+1}} thumb"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"

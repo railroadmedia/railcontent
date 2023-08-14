@@ -33,47 +33,54 @@
         <div id="notifications-container"></div>
 
         {{-- Modal Container --}}
-        <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
+        <div role="dialog" aria-labelledby="dialog-modal" aria-describedby="dialog-modal-container" id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full" tabindex="0"></div>
 
         <!-- Confirmation Modal Container -->
         <div id="confirmation-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
 
         {{-- App Container --}}
         <div id="app" class="flex-1">
-            <app-container
-                :vue-router="false"
-                brand="{{ $brand }}"
-            >
-                <page-container
+            @if(empty($noContainer) || !$noContainer)
+                <app-container
+                    :vue-router="false"
                     brand="{{ $brand }}"
-                    :is-live="{{ isLive() ? 'true':'false' }}"
-                    search-url=""
-                    @if(!empty( user() ))
-                        user-name="{{ user()->display_name }}"
-                        user-avatar="{{ user()->profile_picture_url }}"
-                        user-id="{{ user()->id }}"
-                        account-url="{{ user()->getDashboardUrl() }}"
-                        :can-refer-new-students="{{ user()->isAMember() ? 'true' : 'false' }}"
-                    @endif
-                    @if(!empty( $hasUnreadNotifications ))
-                        :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
-                    @endif
-                    @if(isset($adminMessage))
-                        admin-message="{{ $adminMessage }}"
-                    @endif
-                    {{-- @if(isset($forceHideSidebar))
-                        :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
-                    @endif --}}
                 >
-                    <template v-cloak v-slot="slotProps">
+                    <page-container
+                        csrf_token="{{ csrf_token() }}"
+                        brand="{{ $brand }}"
+                        :is-live="{{ isLive() ? 'true':'false' }}"
+                        search-url=""
+                        :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}mostRecentPlaylists
+                        :most-recent-playlists="{{ json_encode($mostRecentPlaylists) }}" {{-- Preloaded Content --}}
+                        @if(!empty( user() ))
+                            user-name="{{ user()->display_name }}"
+                            user-avatar="{{ user()->profile_picture_url }}"
+                            user-id="{{ user()->id }}"
+                            account-url="{{ user()->getDashboardUrl() }}"
+                            :can-refer-new-students="{{ user()->isAMember() ? 'true' : 'false' }}"
+                        @endif
+                        @if(!empty( $hasUnreadNotifications ))
+                            :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
+                        @endif
+                        @if(isset($adminMessage))
+                            admin-message="{{ $adminMessage }}"
+                        @endif
+                        {{-- @if(isset($forceHideSidebar))
+                            :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
+                        @endif --}}
+                    >
+                        <template v-cloak v-slot="slotProps">
 
-                        @yield('content')
+                            @yield('content')
 
-                    </template>
-                </page-container>
-                {{-- Review Modals Code Loads Here --}}
-                @yield('review-modal-section')
-            </app-container>
+                        </template>
+                    </page-container>
+                    {{-- Review Modals Code Loads Here --}}
+                    @yield('review-modal-section')
+                </app-container>
+            @else
+                @yield('content')
+            @endif
         </div>
 
         @include('partials._brand-set-authentication-cookies-iframe')
@@ -83,6 +90,9 @@
             window.sidebarNavigationLinks = {!! $sidebarNavigationSectionsJson ?? '' !!};
             window.userNavigationDropdownLinks = {!! $userNavigationDropdownLinksJson ?? '' !!};
         </script>
+
+        {{-- Customer.io --}}
+        @include('partials._customer-io')
 
         @yield('layout-scripts')
             <script src="{{ mix('platform/js/manifest.js') }}"></script>

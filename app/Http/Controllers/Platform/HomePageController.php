@@ -10,6 +10,7 @@ use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
 use App\Modules\Content\Services\CohortService;
 use App\Modules\Ecommerce\Services\UserProductService;
+use App\Modules\UserManagementSystem\Services\OnboardingService;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
 use App\Services\UserMetricsService;
@@ -25,6 +26,7 @@ use Railroad\Points\Services\UserPointsService;
 use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
+use Railroad\Railcontent\Decorators\Entity\AddedToPrimaryPlaylistDecorator;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
 use Railroad\Railcontent\Repositories\ContentRepository;
 use Railroad\Railcontent\Services\ContentFollowsService;
@@ -70,7 +72,8 @@ class HomePageController extends BaseController
         UserContentProgressService $userContentProgressService,
         CarouselService $carouselService,
         CohortService $cohortService,
-        UserProductService $userProductService
+        UserProductService $userProductService,
+        OnboardingService $onboardingService
     ) {
         $this->contentService = $contentService;
         $this->contentFollowService = $contentFollowsService;
@@ -83,6 +86,7 @@ class HomePageController extends BaseController
         $this->carouselService = $carouselService;
         $this->cohortService = $cohortService;
         $this->userProductService = $userProductService;
+        $this->onboardingService = $onboardingService;
     }
 
     public function homeRedirect()
@@ -116,6 +120,7 @@ class HomePageController extends BaseController
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
         ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MINIMUM;
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
+        AddedToPrimaryPlaylistDecorator::$skip = true;
 
         switch (brand()) {
             case 'drumeo':
@@ -144,6 +149,10 @@ class HomePageController extends BaseController
 
         if (empty($methodContent)) {
             return $this->homePackOnly($request, $brand);
+        }
+
+        if (!$this->onboardingService->getBrand(user()->id)) {
+            return redirect()->route('platform.onboarding');
         }
 
         $startedLessons = $this->getUsersStartedContent();
@@ -219,7 +228,6 @@ class HomePageController extends BaseController
             $collectionForDecoration = $collectionForDecoration->merge([$currentEvent]);
         }
         $collectionForDecoration = $collectionForDecoration->merge($startedLessons->results());
-        $collectionForDecoration = $collectionForDecoration->merge($usersList->results());
         $collectionForDecoration = $collectionForDecoration->merge($upcomingEvents);
         $collectionForDecoration = $collectionForDecoration->merge($newContent->results());
         $collectionForDecoration = $collectionForDecoration->merge($followedLessons->results());
@@ -228,6 +236,10 @@ class HomePageController extends BaseController
         Decorator::$typeDecoratorsEnabled = true;
         $collectionForDecoration = $collectionForDecoration->filter();
         $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
+
+        $collectionForDecoration = new RailcontentCollection();
+        $collectionForDecoration = $collectionForDecoration->merge($usersList->results());
+        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'playlist');
 
         $hasGear = count(
                 user()->onboardingGear->filter(function ($item) {
@@ -319,7 +331,7 @@ class HomePageController extends BaseController
                         $cohortBanner['close_visible'] = false;
                     }
                 }
-                if ($content['completed']) {
+                if ($content && $content['completed']) {
                     $cohortBanner['completed'] = true;
                     $cohortBanner['continue_visible'] = false;
                 }
@@ -332,7 +344,7 @@ class HomePageController extends BaseController
             "newContentJson" => $newContent->toResponseRawJson(),
             "startedContentJson" => $startedLessons->toResponseRawJson(),
             "startedContentCount" => count($startedLessons),
-            "usersList" => $usersList->toResponseRawJson(),
+            "usersList" => $usersList,
             "userMetrics" => $userMetrics,
             "nextLearningPathLevel" => $nextLearningPathLevel,
             "nextLearningPathProgressPercent" => $nextLearningPathProgressPercent,
@@ -357,7 +369,8 @@ class HomePageController extends BaseController
             'hasGenres' => $hasGenres,
             'hasTopics' => $hasTopics,
             'hasExperience' => $hasExperience,
-            'methodUrl' => url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
+            'methodUrl' => ($hasCompletedMethod)? url()->route('platform.content.first-level', ['method', $methodContent['slug'], $methodContent['id']]):
+                url()->route('platform.content.jump-to-continue-content', $methodContent['id']),
             'completedLevelsUrl' => $methodContent['url'] ?? '',
             'carousel' => $carousel,
             'cohortBanner' => json_encode($cohortBanner),
@@ -609,36 +622,16 @@ class HomePageController extends BaseController
      */
     public function getUsersList()
     {
-        $contentTypes = ContentTypes::inProgressContentTypes();
-        $userPrimaryPlaylist = \Arr::first(
-            $this->userPlaylistsService->getUserPlaylist(
-                user()->id,
-                'primary-playlist',
-                brand()
-            )
+        $playlists = $this->userPlaylistsService->getUserPlaylist(
+            user()->id,
+            'user-playlist',
+            brand(),
+            5
         );
-        if (empty($userPrimaryPlaylist)) {
-            return (new ContentFilterResultsEntity(['results' => []]));
-        }
-        $myListId = $userPrimaryPlaylist['id'];
-        ContentRepository::$includedInPlaylistsIds = [$myListId];
-        $results = $this->contentService->getFiltered(
-            1,
-            6,
-            '-published_on',
-            $this->parseContentTypes($contentTypes),
-            [],
-            [],
-            [],
-            [],
-            [],
-            [],
-            false,
-            false,
-            false,
-            false
-        );
-        ContentRepository::$includedInPlaylistsIds = false;
+
+        $results =
+            new ContentFilterResultsEntity(['results' => $playlists]
+            );
 
         return $results;
     }

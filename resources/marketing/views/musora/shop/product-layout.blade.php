@@ -4,7 +4,7 @@
     @include('_partials.layout.global-header', [
         "theme_bg" => "bg-musora",
         "theme_text" => "text-musora",
-        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
+        "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
         "links" => [
             "Home" => [
                 "iconClass" => "fas fa-home",
@@ -111,7 +111,7 @@
                 @if($product->productType->name === 'Bundles' && !empty($product->spread_img))
                     <div class="text-center">
                         <h3 class="mb-4"><strong>What's included:</strong></h3>
-                        <img class="mb-4" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{$product->spread_img}}" alt="bundle spread image" />
+                        <img class="mb-4" src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/{{$product->spread_img}}" alt="bundle spread image" />
                     </div>
                 @endif
 
@@ -162,6 +162,6 @@
 @section('layout-footer')
     @include('_partials.layout.global-footer', [
         "brand" => "musora",
-        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg"
+        "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png"
     ])
 @endsection

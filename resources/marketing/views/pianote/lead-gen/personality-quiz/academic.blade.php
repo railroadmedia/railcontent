@@ -7,16 +7,16 @@
     <meta name="description" content="You hold a deep admiration for the great composers and classics.">
     <meta property="og:description" content="You hold a deep admiration for the great composers and classics.">
 
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/Q-Academic.png" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/Q-Academic.png" style="display: none;">
     <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
 
     <!-- Tailwind -->
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
-    <link href="{{ asset('/marketing/parcel/pianote/lead-gen-learn-songs.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
@@ -27,9 +27,9 @@
 @section('global-body')
     @include('pianote.sales.partials._nav')
 
-    <section class="py-12 md:py-20 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/bg.jpg')">
+    <section class="py-12 md:py-20 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/bg.jpg')">
         <div class="max-w-2xl lg:max-w-3xl mx-auto text-center text-white px-6 lg:px-0">
-            <img class="h-40 md:h-72 lg:h-80 mb-2" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/Q-Academic.png" alt="academic">
+            <img class="h-40 md:h-72 lg:h-80 mb-2" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/Q-Academic.png" alt="academic">
             <h2 class="font-extrabold mb-6">You're the Academic!</h2>
             <p class="mb-4">
                 You’re the Academic! You hold a deep admiration for the great composers and classics. And while you may find improvising more challenging, you feel at home with sheet music and can creatively interpret what’s written. You may also be curious about music history, you practice diligently, and it shows! <br><br>

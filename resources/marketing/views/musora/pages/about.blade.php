@@ -8,7 +8,7 @@
     <meta property="og:description" content="We have two simple goals: create more musicians and keep them playing longer.">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
 @endsection
 
 @section('body-data')
@@ -32,7 +32,7 @@
 
     <section class="py-24 md:py-40 text-white text-center relative">
         <img
-            src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/header-about.jpg"
+            src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/header-about.jpg"
             class="absolute w-full h-full object-cover top-0 left-0 z-[-2]"
             alt="header about"
             fetchpriority="high"
@@ -46,20 +46,20 @@
             <p class="text-[#a1afc9]">
                 You’ve likely seen the health benefits of playing music.
                 <br><br>
-                It can <a target="_blank" href="https://www.drumeo.com/beat/play-music-to-improve-memory/"><u>improve your memory</u></a>, <a target="_blank" href="https://www.drumeo.com/beat/8-health-benefits/"><u>reduce anxiety</u></a>, <a target="_blank" href="https://www.telegraph.co.uk/news/science/science-news/6447588/Playing-a-musical-instrument-makes-you-brainier.html"><u>make you smarter</u></a>, <a target="_blank" href="https://www.rcm.ac.uk/about/news/all/2016-03-16rcmfindsdrumminghaspositiveimpactonmentalhealth.aspx"><u>make you happier</u></a>, and <a target="_blank" href="https://www.drumeo.com/beat/8-health-benefits/"><u>support your physical health</u></a>. And, well, it’s just fun! There’s a magical feeling when you’ve developed your skills to the point of achieving musical freedom -- where you’re not <em>thinking</em> about what you’re playing, you’re just creating.
+                It can <a target="_blank" href="https://www.drumeo.com/beat/play-music-to-improve-memory/"><u>improve your memory</u></a>, <a target="_blank" href="https://www.drumeo.com/beat/8-health-benefits/"><u>reduce anxiety</u></a>, <a target="_blank" href="https://www.telegraph.co.uk/news/science/science-news/6447588/Playing-a-musical-instrument-makes-you-brainier.html"><u>make you smarter</u></a>, <a target="_blank" href="https://www.rcm.ac.uk/about/news/all/2016-03-16rcmfindsdrumminghaspositiveimpactonmentalhealth.aspx"><u>make you happier</u></a>, and <a target="_blank" href="https://www.drumeo.com/beat/8-health-benefits/"><u>support your physical health</u></a>. And, well, it’s just fun! There’s a magical feeling when you’ve developed your skills to the point of achieving musical freedom — where you’re not <em>thinking</em> about what you’re playing, you’re just creating.
                     <br><br>
                 So at Musora Media, we have two simple goals: create more musicians and keep them playing longer.
                     <br><br>
-                For us, that starts by making the beginner’s journey an enjoyable one -- where they see progress, overcome the early obstacles, and fall in love with their instrument.
+                For us, that starts by making the beginner’s journey an enjoyable one — where they see progress, overcome the early obstacles, and fall in love with their instrument.
                     <br><br>
-                And then later, it’s about supporting any musical goals -- from jamming with a band, writing and recording songs, or becoming a touring professional. It’s about inspiring students with new ideas, connecting them with a group of peers and mentors, and helping them share their passion with others.
+                And then later, it’s about supporting any musical goals — from jamming with a band, writing and recording songs, or becoming a touring professional. It’s about inspiring students with new ideas, connecting them with a group of peers and mentors, and helping them share their passion with others.
                     <br><br>
                 We believe the world’s a better place when it’s filled with music. And if you agree, we’d love to connect!
             </p>
             <div class="flex items-center mt-8">
                 <img
                     class="h-32 rounded-full"
-                    src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/jared-falk.jpg"
+                    src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/jared-falk.jpg"
                     alt="jared falk"
                 >
                 <div class="pl-5">
@@ -82,7 +82,7 @@
             </p>
             <img
                 class="timeline px-3 md:px-0"
-                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/meet-musora.png"
+                src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/meet-musora.png"
                 alt="meet musora diagram"
             >
 
@@ -96,7 +96,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="jared = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jared-falk.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jared-falk.jpg"
                             alt="jared falk"
                         >
                     </div>
@@ -107,7 +107,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="james = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/jame-falk.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/jame-falk.jpg"
                             alt="jame falk"
                         >
                     </div>
@@ -118,7 +118,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="dave = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/dave-atkinson.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/dave-atkinson.jpg"
                             alt="dave atkinson"
                         >
                     </div>
@@ -129,7 +129,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="pam = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/pam-black.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/pam-black.jpg"
                             alt="pam black"
                         >
                     </div>
@@ -140,7 +140,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="mary = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/mary-liz-borseth.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/mary-liz-borseth.jpg"
                             alt="mary liz borseth"
                         >
                     </div>
@@ -151,7 +151,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="caleb = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/caleb-favo.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/caleb-favo.jpg"
                             alt="caleb favo"
                         >
                     </div>
@@ -162,7 +162,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="victor = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/victor-guidera.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/victor-guidera.jpg"
                             alt="victor guidera"
                         >
                     </div>
@@ -173,7 +173,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="chad = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/chad-kettner.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/chad-kettner.jpg"
                             alt="chad kettner"
                         >
                     </div>
@@ -184,7 +184,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="amy = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/amy-malcomson.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/amy-malcomson.jpg"
                             alt="amy malcomson"
                         >
                     </div>
@@ -195,7 +195,7 @@
                     <div class="relative mx-auto max-w-xs cursor-pointer" x-on:click="jordan = true; modal = true">
                         <img
                             class="w-full rounded-lg overflow-hidden standard-pic"
-                            src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jord-paul.jpg"
+                            src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jord-paul.jpg"
                             alt="jord paul"
                         >
                     </div>
@@ -211,7 +211,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px] opacity-30"></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
-                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jared-falk.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jared-falk.jpg"
                                 alt="Jared Falk"
                             >
                             <h5><strong>Jared Falk</strong></h5>
@@ -226,7 +226,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="jared = true; james = false"></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
-                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/jame-falk.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/jame-falk.jpg"
                                 alt="James Falk"
                             >
                             <h5><strong>James Falk</strong></h5>
@@ -241,7 +241,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="james = true; dave = false"></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
-                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/dave-atkinson.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/dave-atkinson.jpg"
                                 alt="Dave Atkinson"
                             >
                             <h5><strong>Dave Atkinson</strong></h5>
@@ -256,7 +256,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="dave = true; pam = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
-                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/pam-black.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/pam-black.jpg"
                                 alt="Pam Black"
                             >
                             <h5><strong>Pam Black</strong></h5>
@@ -271,7 +271,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="pam = true; mary = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
-                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/mary-liz-borseth.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/mary-liz-borseth.jpg"
                                 alt="Mary-Liz Borseth"
                             >
                             <h5><strong>Mary-Liz Borseth</strong></h5>
@@ -286,7 +286,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="mary = true; caleb = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
-                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/caleb-favo.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/caleb-favo.jpg"
                                 alt="Caleb Favor"
                             >
                             <h5><strong>Caleb Favor</strong></h5>
@@ -301,7 +301,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="caleb = true; victor = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
-                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/victor-guidera.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/victor-guidera.jpg"
                                 alt="Victor Guidera"
                             >
                             <h5><strong>Victor Guidera</strong></h5>
@@ -316,13 +316,13 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="victor = true; chad = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
-                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/chad-kettner.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/chad-kettner.jpg"
                                 alt="Chad Kettner"
                             >
                             <h5><strong>Chad Kettner</strong></h5>
                             <p>Chief Marketing Officer</p>
                             <p class="text-left mt-4 select-none">
-                                Chad Kettner is passionate about strategy, copywriting, and brand positioning -- with 15 years of marketing experience. Since joining the team in 2012, Chad has helped grow the Drumeo brand into a marketplace leader and launched the Pianote, Guitareo, and Singeo brands. He loves going on adventures with his wife (Rachel) and two young kids (Everett and Evelyn).
+                                Chad Kettner is passionate about strategy, copywriting, and brand positioning — with 15 years of marketing experience. Since joining the team in 2012, Chad has helped grow the Drumeo brand into a marketplace leader and launched the Pianote, Guitareo, and Singeo brands. He loves going on adventures with his wife (Rachel) and two young kids (Everett and Evelyn).
                             </p>
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-right right-[-50px]" x-on:click="chad = false; amy = true "></i>
                         </div>
@@ -331,7 +331,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="chad = true; amy = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
-                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/amy-malcomson.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/amy-malcomson.jpg"
                                 alt="Amy Malcomson"
                             >
                             <h5><strong>Amy Malcolmson</strong></h5>
@@ -346,7 +346,7 @@
                             <i class="absolute top-[50%] text-white cursor-pointer text-[50px] p-[10px] fas fa-angle-left left-[-50px]" x-on:click="amy = true; jordan = false "></i>
                             <img
                                 class="h-36 md:h-44 lg:h-60 -mt-16 md:-mt-20 lg:-mt-28 mb-4 border-4 border-white rounded-full mx-auto inline-block"
-                                src="https://www.musora.com/musora-cdn/image/width=480,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jord-paul.jpg"
+                                src="https://www.musora.com/musora-cdn/image/width=480,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/team/jord-paul.jpg"
                                 alt="Jordan Paul"
                             >
                             <h5><strong>Jordan Paul</strong></h5>

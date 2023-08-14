@@ -31,7 +31,7 @@
             <div id="notifications-container"></div>
 
             {{-- Modal Container --}}
-            <div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
+            <div role="dialog" aria-labelledby="dialog-modal" aria-describedby="dialog-modal-container" id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full" tabindex="0"></div>
 
             <!-- Confirmation Modal Container -->
             <div id="confirmation-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
@@ -46,6 +46,7 @@
                         brand="{{ $brand }}"
                         :is-live="{{ isLive() ? 'true':'false' }}"
                         search-url=""
+                        :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
                         @if(!empty( user() ))
                             user-name="{{ user()->display_name }}"
                             user-avatar="{{ user()->profile_picture_url }}"
@@ -64,7 +65,7 @@
                     >
                         <template v-cloak v-slot="slotProps">
 
-                            <div class="tw-relative tw-flex tw-flex-col tw-h-[calc(100%+1.75rem)] tw-justify-center tw-items-center">
+                            <div class="tw-relative tw-flex tw-flex-col tw-h-[calc(100vh-152px)] lg:tw-h-[calc(100vh-128px)] tw-justify-center tw-items-center">
                                 <img src="https://cdn.musora.com/image/fetch/c_thumb,w_1200,q_auto:best/https://d3fzm1tzeyr5n3.cloudfront.net/Rehearsal+Studio_deSaturated.png"
                                     alt="Image of Musical instrument on a stage"
                                     class="tw-absolute tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
@@ -76,7 +77,7 @@
                                 <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3 tw-z-50 tw-items-center tw-justify-center">
                                     <div class="tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
                                         <h1 class="tw-text-5xl lg:tw-text-6xl tw-font-bold tw-mb-4 lg:tw-mb-6">Page not found</h1>
-                                        <h2 class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-2xl lg:tw-text-3xl tw-font-bold tw-mb-4">404 ERROR</h1>
+                                        <h2 class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-2xl lg:tw-text-3xl tw-font-bold tw-mb-4">404 ERROR</h2>
                                         <p class="tw-mb-8">The Page you're looking for doesn't exist.</p>
 
                                         <a href="javascript:history.back()" class="tw-btn-primary tw-bg-[#081825] tw-text-white dark:tw-bg-white dark:tw-text-[#00101D] tw-mb-4">Go Back</a>
@@ -103,6 +104,9 @@
                 <script src="{{ mix('platform/js/vendor.js') }}"></script>
                 <script src="{{ mix('platform/js/app.js') }}"></script>
             @yield('inject-components')
+
+            {{-- Customer.io --}}
+            @include('partials._customer-io')
 
             {{-- Helpscout Beacon --}}
             @include('partials.third-party.helpscout-tracking-beacon-script', [

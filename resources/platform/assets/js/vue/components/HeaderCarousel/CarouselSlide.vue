@@ -1,9 +1,8 @@
 <script setup>
-import { ArrowSmRightIcon } from "@heroicons/vue/solid";
 import ModalRenderer from "../Modal/ModalRenderer";
 import { XIcon } from "@heroicons/vue/solid";
-import { onMounted, ref } from "vue";
-import {testCarousel} from "../../../constants/carousel_data";
+import { ref } from "vue";
+
 const props = defineProps({
   brand: {
     type: String,
@@ -13,7 +12,15 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  topSubtitleColor: {
+    type: String,
+    default: "",
+  },
   title: {
+    type: String,
+    default: "",
+  },
+  titleColor: {
     type: String,
     default: "",
   },
@@ -25,11 +32,11 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  primaryCtaText: {
-    type: String,
-    default: "",
+  btnLightMode: {
+    type: Boolean,
+    default: false,
   },
-  primaryCtaTextAlt: {
+  primaryCtaText: {
     type: String,
     default: "",
   },
@@ -37,7 +44,7 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  primaryCtaUrlAlt: {
+  primaryVideo: {
     type: String,
     default: "",
   },
@@ -49,6 +56,10 @@ const props = defineProps({
     type: String,
     default: "",
   },
+  secondaryVideo: {
+    type: String,
+    default: "",
+  },
   description: {
     type: String,
     default: "",
@@ -57,12 +68,8 @@ const props = defineProps({
     type: String,
     default: "",
   },
-  video: {
-    type: String,
-    default: "",
-  },
   isFeatured: {
-    type: Boolean,
+    type: [Boolean, Number],
     default: false,
   },
   desktopImg: {
@@ -76,6 +83,10 @@ const props = defineProps({
   mobileImg: {
     type: String,
     default: "",
+  },
+  isDraft: {
+    type: Boolean,
+    default: false,
   },
   showSlide: {
     type: Boolean,
@@ -95,22 +106,9 @@ const props = defineProps({
   },
 });
 
-const learnMoreModal = ref(false);
+const primaryVideoModal = ref(false);
+const secondaryVideoModal = ref(false);
 
-const goToUrl = (url) => {
-  if (url) {
-      if(props.video && screenSize.value > 1279) return;
-      window.location.href = url;
-  }
-};
-
-const openModal = () => {
-    learnMoreModal.value = true;
-};
-
-const closeModal = () => {
-    learnMoreModal.value = false;
-};
 </script>
 
 <template>
@@ -119,24 +117,27 @@ const closeModal = () => {
         ${ showSlide ? `tw-z-20 ${showSlide ? `slide-in-${animateDirection}` : ''}` : 'tw-z-0' }
       `"
   >
-    <section class="tw-w-full tw-h-full tw-rounded-[10px] tw-grid tw-grid-cols-1 xl:tw-grid-cols-2 tw-gap-0 relative">
+    <section class="tw-w-full tw-h-full tw-rounded-[10px] tw-relative">
+        <!-- Draft Label -->
+        <div v-if="isDraft" class="tw-text-white tw-absolute tw-right-2 md:tw-right-6 tw-top-2 md:tw-top-6 tw-z-50 tw-font-extrabold tw-text-xl tw-rounded-xl tw-bg-red-700 tw-px-6 tw-py-1">DRAFT</div>
+
+        <!-- Background Image -->
         <div class="tw-absolute tw-inset-0 tw-bg-cover tw-bg-top z-10">
             <picture>
-                <source media="(min-width:1024px)" :srcset="`${desktopImg}`">
-                <source media="(min-width:768px)" :srcset="`${tabletImg}`">
+                <source media="(min-width:1280px)" :srcset="`https://www.musora.com/musora-cdn/image/width=2190,quality=100/${desktopImg}`">
+                <source media="(min-width:768px)" :srcset="`https://www.musora.com/musora-cdn/image/width=1200,quality=100/${tabletImg}`">
                 <img
-                    class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0 tw-z-50"
-                    :src="`${mobileImg}`"
+                    class="tw-w-full tw-h-full tw-object-cover tw-object-top tw-z-50"
+                    :src="`https://www.musora.com/musora-cdn/image/width=700,quality=100/${mobileImg}`"
                     alt="banner background image"
-                    onload="this.classList.remove('tw-opacity-0')"
-                    loading="lazy"
                 />
             </picture>
         </div>
+
       <!-- Text Content -->
       <div class="tw-absolute tw-bottom-0 tw-w-full md:tw-relative tw-text-white tw-h-4/5 md:tw-h-full">
-        <div class="tw-flex tw-flex-col tw-flex-wrap tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[26px] tw-font-open-sans tw-pb-12 sm:tw-pb-[38px] md:tw-pb-10 lg:tw-pb-0">
-          <h4 class="tw-font-bold tw-text-sm tw-uppercase tw-leading-none tw-mb-3" v-if="topSubtitle && !logo">{{ topSubtitle }}</h4>
+        <div class="tw-flex tw-flex-col tw-flex-wrap tw-text-white tw-text-uppercase tw-h-full tw-justify-end lg:tw-mb-0 lg:tw-justify-center tw-px-[15px] sm:tw-px-[26px] tw-font-open-sans tw-pb-12 sm:tw-pb-[38px] md:tw-pb-10 lg:tw-pb-0 tw-relative">
+          <h4 class="tw-font-bold tw-text-sm tw-uppercase tw-leading-none tw-mb-3" :class="`${ topSubtitleColor && `tw-text-${topSubtitleColor}` }`" v-if="topSubtitle && !logo">{{ topSubtitle }}</h4>
           <h2 class="
               tw-font-bebas-neue
               tw-text-[50px]
@@ -144,56 +145,76 @@ const closeModal = () => {
               tw-uppercase
               tw-leading-none
             "
-            :class="titleClasses"
+            :class="`${ titleColor && `tw-text-${titleColor}` }`"
               v-if="title && !logo"
             >
             {{ title }}
           </h2>
             <!-- Logo -->
-            <img v-if="logo" class="tw-h-24 md:tw-h-28 lg:tw-h-32 mb-1 tw-mr-auto" :src="`${logo}`" alt="pack logo" />
-          <p :class="`tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
+            <img v-if="logo" class="tw-h-24 md:tw-h-28 3xl:tw-h-32 mb-1 tw-mr-auto" :src="`https://www.musora.com/musora-cdn/image/width=800,quality=95/${logo}`" alt="pack logo" />
+          <p :class="`tw-hidden xl:tw-block xl:tw-line-clamp-3 tw-text-lg tw-max-w-[520px] ${ descriptionColor && `tw-text-${descriptionColor}` }`" v-html="description"></p>
           <!-- CTA -->
             <div class="tw-mt-2 md:tw-mt-4 xl:tw-mt-6 tw-flex tw-items-center md:tw-block">
                 <a
-                    v-if="primaryCtaText"
+                    v-if="primaryCtaText && primaryCtaUrl && !primaryVideo"
                     :href="primaryCtaUrl"
-                    :class="`tw-bg-white tw-text-[#000C17] tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block hover:tw-bg-[#627F97] hover:tw-text-white tw-text-xl`"
+                    :class="`tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg md:tw-text-xl tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2`"
                 >
                     {{ primaryCtaText }}
                 </a>
+                <span
+                    v-if="primaryCtaText && primaryVideo"
+                    @click="primaryVideoModal = true"
+                    :class="`tw-font-bebas-neue tw-rounded-full tw-py-1 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-3 lg:tw-px-14 tw-text-lg tw-mr-2 tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block  tw-text-xl ${btnLightMode ? 'tw-bg-[#00101D] tw-text-white hover:tw-text-[#000C17] hover:tw-bg-white' : 'tw-bg-white tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white'} md:tw-mb-2 tw-cursor-pointer`"
+                >
+                    {{ primaryCtaText }}
+                </span>
                 <a
-                    v-if="secondaryCtaText && (!isFeatured || isFeatured && !video)"
+                    v-if="secondaryCtaText && secondaryCtaUrl && !secondaryVideo"
                     :href="secondaryCtaUrl"
-                    :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block hover:tw-bg-white hover:tw-text-[#000C17] tw-text-xl`"
+                    :class="`tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg md:tw-text-xl tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2`"
                 >
                     {{ secondaryCtaText }}
                 </a>
                 <span
-                    v-if="secondaryCtaText && isFeatured && video"
-                    @click="openModal()"
-                    :class="`tw-bg-[#000C17] tw-border-white tw-border-2 tw-text-white tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1.5 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block tw-cursor-pointer hover:tw-bg-white hover:tw-text-[#000C17] tw-text-xl`"
+                    v-if="secondaryCtaText && secondaryVideo"
+                    @click="secondaryVideoModal = true"
+                    :class="`tw-border-2 tw-font-bebas-neue tw-rounded-full tw-py-0.5 sm:tw-py-1 md:tw-py-2 tw-px-6 md:tw-px-10 lg:tw-py-2.5 lg:tw-px-14 tw-text-lg md:tw-text-xl tw-line-clamp-1 lg:tw-line-clamp-none md:tw-inline-block ${btnLightMode ? 'tw-bg-white tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#627F97] hover:tw-text-white' : 'tw-bg-[#000C17] tw-border-white tw-text-white hover:tw-bg-white hover:tw-text-[#000C17]'} md:tw-mb-2 tw-cursor-pointer`"
+
                 >
                     {{ secondaryCtaText }}
                 </span>
             </div>
-<!--            <div v-if="registerUrl || video" class="tw-gap-2 tw-mt-2 tw-hidden xl:tw-flex tw-flex-wrap">-->
+<!--            <div v-if="registerUrl || secondaryVideo" class="tw-gap-2 tw-mt-2 tw-hidden xl:tw-flex tw-flex-wrap">-->
 <!--                <a v-if="registerUrl" :href="ctaUrl" :class="`tw-btn-primary tw-bg-${brand} tw-text-xl go-to-button tw-w-[200px]`">-->
 <!--                    {{ ctaText }}-->
 <!--                </a>-->
-<!--                <span v-if="video" @click="openModal()" class="tw-btn-secondary tw-text-white tw-text-xl tw-w-[200px] tw-z-100 tw-relative">Learn More</span>-->
+<!--                <span v-if="secondaryVideo" @click="openModal()" class="tw-btn-secondary tw-text-white tw-text-xl tw-w-[200px] tw-z-100 tw-relative">Learn More</span>-->
 <!--            </div>-->
         </div>
       </div>
     </section>
   </div>
 
-    <ModalRenderer v-if="learnMoreModal">
-        <button @click="closeModal"
+    <!--  Primary Video Modal  -->
+    <ModalRenderer v-if="primaryVideoModal">
+        <button @click="primaryVideoModal = false;"
                 class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
             <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
         </button>
         <div class="tw-w-full tw-mx-6 lg:tw-mx-0 lg:tw-w-1/2 tw-relative" style="padding-bottom: 56.25%;">
-            <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close" :src="video" frameborder="0" allowfullscreen allow="autoplay" title="learn more video"></iframe>
+            <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close" :src="primaryVideo" frameborder="0" allowfullscreen allow="autoplay" title="primaryVideo"></iframe>
+        </div>
+    </ModalRenderer>
+
+    <!--  Secondary Video modal  -->
+    <ModalRenderer v-if="secondaryVideoModal">
+        <button @click="secondaryVideoModal = false;"
+                class="tw-text-white tw-absolute tw-right-2 tw-top-2 md:tw-top-[32px] md:tw-right-[48px] tw-z-50">
+            <XIcon class="tw-w-[26px] tw-h-[26px] md:tw-w-[48px] md:tw-h-[48px]" />
+        </button>
+        <div class="tw-w-full tw-mx-6 lg:tw-mx-0 lg:tw-w-1/2 tw-relative" style="padding-bottom: 56.25%;">
+            <iframe class="tw-absolute tw-w-full tw-h-full reset-on-close" :src="secondaryVideo" frameborder="0" allowfullscreen allow="autoplay" title="secondaryVideo"></iframe>
         </div>
     </ModalRenderer>
 </template>

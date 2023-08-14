@@ -6,7 +6,7 @@
     <meta property="og:title" content="Drumeo EarDrums">
     <meta name="description" content="Protect your ears + play your favorite songs.">
     <meta property="og:description" content="Protect your ears + play your favorite songs.">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Pro_BG2.jpg" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Pro_BG2.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._fonts')
@@ -94,7 +94,7 @@
     <header class="text-white relative overflow-hidden z-10" style="background-color:#0f1628;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
             <div class="container mx-auto max-w-6xl">
-                <img alt="quietkick" class="h-14 sm:h-16 lg:h-20 mb-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png"><br>
+                <img alt="quietkick" class="h-14 sm:h-16 lg:h-20 mb-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png"><br>
                 <p>Protect your ears + play your favorite songs.</p>
                 <i class="fas fa-play play-button autoplay-video my-28 md:my-36" data-open="trailer"></i><br>
                 @if( $products['drumeo-eardrums']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums']->getStockAvailability()))
@@ -111,12 +111,12 @@
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: rgba(15,22,40,0.8);"></div>
         {{--<video class="object-cover w-full h-full relative z-0" poster="" src="https://player.vimeo.com/progressive_redirect/playback/696274730/rendition/1080p?loc=external&signature=a2e19f58b044993d2561fbeaabcd4855ec9d1f577a7bba332fc5a7e7221cb23a" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
-        <img class="object-cover object-right w-full h-full relative z-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Pro_BG2.jpg" alt="Eardrum background">
+        <img class="object-cover object-right w-full h-full relative z-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Pro_BG2.jpg" alt="Eardrum background">
     </header>
 
     <section class="text-center px-5 md:px-0 py-10 md:py-16 lg:py-20">
         <div class="container mx-auto relative z-10 max-w-5xl">
-            <h1><strong>Drums are <img class="h-12 sm:h-20 align-bottom lazyload" data-src="https://www.musora.com/musora-cdn/image/width=290,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/loud.png" alt="Loud text"></strong></h1>
+            <h1><strong>Drums are <img class="h-12 sm:h-20 align-bottom lazyload" data-src="https://www.musora.com/musora-cdn/image/width=290,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/loud.png" alt="Loud text"></strong></h1>
             <h6 class="leading-tight mt-1 mb-7 sm:mb-10">Whether you’re playing acoustic or electronic drums,<br class="hidden sm:inline">
                 sealing in the sound while protecting your ears is crucial.</h6>
         </div>
@@ -124,7 +124,7 @@
             <div class="flex flex-wrap items-center">
                 <div class="w-full sm:w-7/12 lg:w-2/3 sm:order-1 sm:pl-5 lg:pl-10 mb-7">
                     <img class="w-full inline sm:hidden lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Intro_Collage_M.png" alt="Intro Collage">
-                    <img class="w-full hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Intro_Collage2.png" alt="Intro Collage">
+                    <img class="w-full hidden sm:inline lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Intro_Collage2.png" alt="Intro Collage">
                 </div>
                 <div class="text-left w-full sm:w-5/12 lg:w-1/3 sm:pl-5">
                     <h6 class="leading-normal mb-5 sm:mb-10"><strong>Drumeo EarDrums are professional <span class="inline-block">in-ear</span> headphones that help you:</strong></h6>
@@ -132,7 +132,7 @@
                         <img class="h-7" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Detail_Icon.svg" alt="Detail icon">
                         <div class="pl-4">
                             <p class="mb-1 uppercase text-drumeo"><strong>Catch every detail.</strong></p>
-                            <p class="mb-7 sm:mb-10">Triple driver headphones (that means 3 tiny speakers) give you a full range of sound -- from low kick drums to high cymbal shots.</p>
+                            <p class="mb-7 sm:mb-10">Triple driver headphones (that means 3 tiny speakers) give you a full range of sound — from low kick drums to high cymbal shots.</p>
                         </div>
                     </div>
                     <div class="flex items-start">
@@ -155,10 +155,10 @@
             </div>
         </div>
     </section>
-    <section class="text-center text-white px-5 py-10 md:py-16 lg:py-20 bg-cover bg-left sm:bg-right lazyload" style="background-color:#000;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Pro_BG2.jpg">
+    <section class="text-center text-white px-5 py-10 md:py-16 lg:py-20 bg-cover bg-left sm:bg-right lazyload" style="background-color:#000;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Pro_BG2.jpg">
         <div class="container mx-auto relative z-10 max-w-5xl">
             <div class="p-7 sm:p-14 rounded-xl w-full sm:w-7/12 text-left" style="background-color:rgba(4,17,37,0.9);">
-                <h1 class="mb-3 sm:mb-5"><strong>Not just for<br> the <img class="h-12 sm:h-20 align-top lazyload" data-src="https://www.musora.com/musora-cdn/image/width=320,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/pros.png" alt="Pros text"></strong></h1>
+                <h1 class="mb-3 sm:mb-5"><strong>Not just for<br> the <img class="h-12 sm:h-20 align-top lazyload" data-src="https://www.musora.com/musora-cdn/image/width=320,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/pros.png" alt="Pros text"></strong></h1>
 
                 <p>You don’t need to be an arena drummer to use in-ear monitors.
                     <br><br>
@@ -178,7 +178,7 @@
                     <h4 class="leading-tight"><em>“I have really small ears and I am REALLY picky about sound.”</em></h4>
                     <p class="my-4 sm:my-6">I have to say I was doubtful. I have some more expensive in-ear monitors and I have really small ears and I am REALLY picky about sound. I was 100% blown away – deep rich bass response, nice clear mids and highs and amazing fit, and best of all no ear fatigue! I was also pleasantly surprised at the nice compact package that fits into a pocket or purse to take with me and keep things all in one place. Lots of selection for ear tips and a nice cleaner all part of the package for an amazing price.  If I had listened to the sound alone I would have expected them to cost a lot more than they do. I use mine every day and recommend them to everyone I talk to!</p>
                     <div class="flex items-center">
-                        <img class="rounded-full h-12 sm:h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dzryyo1we6bm3.cloudfront.net/avatars/360053_1646349286211-1646349288-360053.jpg" alt="Joy B">
+                        <img class="rounded-full h-12 sm:h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dzryyo1we6bm3.cloudfront.net/avatars/360053_1646349286211-1646349288-360053.jpg" alt="Joy B">
                         <p class="leading-none mx-0 pl-4 text-drumeo"><strong>Joy B</strong><br>
                             <span>Toronto</span>
                         </p>
@@ -188,7 +188,7 @@
                     <h4 class="leading-tight"><em>“No more harsh-sounding headphones for drumming.”</em></h4>
                     <p class="my-4 sm:my-6">I’ve been rocking EarDrums and like them. It’s great to have a lot of low end without having the bass or kick drum get muddy. They are very comfortable and I enjoy them. No more harsh-sounding headphones for drumming – and no more guessing where the bassist is going! I also like the high-end roll-off – this prevents listening fatigue AND protects your hearing if you like to listen loudly. </p>
                     <div class="flex items-center">
-                        <img class="rounded-full h-12 sm:h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dzryyo1we6bm3.cloudfront.net/avatars/398228_1648758391036-1648758395-398228.jpg" alt="Lauri V">
+                        <img class="rounded-full h-12 sm:h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dzryyo1we6bm3.cloudfront.net/avatars/398228_1648758391036-1648758395-398228.jpg" alt="Lauri V">
                         <p class="leading-none mx-0 pl-4 text-drumeo"><strong>Lauri V.</strong><br>
                             <span>Finland</span>
                         </p>
@@ -198,7 +198,7 @@
                     <h4 class="leading-tight"><em>“Definitely felt the Drumeo in-ears are a step up.”</em></h4>
                     <p class="my-4 sm:my-6">I used these in a show the other night for the first time and really enjoyed them! Definitely felt the Drumeo in-ears are a step up from the KZ Pro 10s. The sound quality is competitive with KZs, but Drumeo in-ears are much more comfortable to me.</p>
                     <div class="flex items-center">
-                        <img class="rounded-full h-12 sm:h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dzryyo1we6bm3.cloudfront.net/avatars/IMG_3193.jpg" alt="David G">
+                        <img class="rounded-full h-12 sm:h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dzryyo1we6bm3.cloudfront.net/avatars/IMG_3193.jpg" alt="David G">
                         <p class="leading-none mx-0 pl-4 text-drumeo"><strong>David G</strong><br>
                             <span>Mississippi</span>
                         </p>
@@ -208,7 +208,7 @@
                     <h4 class="leading-tight"><em>“The isolation tips do a good job of cutting sound while still comfy.”</em></h4>
                     <p class="my-4 sm:my-6">I love these things! Great sound and a good selection of tips for various needs/uses. The isolation tips do a good job of cutting sound while still comfy. Not only great for drum monitoring but all around music enjoyment.</p>
                     <div class="flex items-center">
-                        <img class="rounded-full h-12 sm:h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Rick_profile.jpg" alt="Rick">
+                        <img class="rounded-full h-12 sm:h-16 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Rick_profile.jpg" alt="Rick">
                         <p class="leading-none mx-0 pl-4 text-drumeo"><strong>Rick</strong><br>
                             <span>Oregon</span>
                         </p>
@@ -220,7 +220,7 @@
 
     <section class="content-section text-center comparison px-1 lg:px-3" style="background:linear-gradient(to bottom, #272e41, #02050e);">
         <div class="container mx-auto max-w-5xl">
-            <h2 class="mb-16 md:mb-12 "><strong>The difference you can <img class="h-12 sm:h-20 align-bottom lazyload" data-src="https://www.musora.com/musora-cdn/image/width=320,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/hear.png" alt="Hear text"></strong></h2>
+            <h2 class="mb-16 md:mb-12 "><strong>The difference you can <img class="h-12 sm:h-20 align-bottom lazyload" data-src="https://www.musora.com/musora-cdn/image/width=320,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/hear.png" alt="Hear text"></strong></h2>
             <div class="relative">
                 <p class="inline md:hidden leading-tight text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
                 <table class="w-full mx-auto border-separate comparison eardrums earbuds">
@@ -228,7 +228,7 @@
                 <tr style="background-color:transparent!important;">
                     <td></td>
                     <td class="rounded-t-xl">
-                        <img class="h-5 md:h-12 filter saturate-0 brightness-200 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png" alt="logo-white">
+                        <img class="h-5 md:h-12 filter saturate-0 brightness-200 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png" alt="logo-white">
                     </td>
                     <td class="leading-none rounded-t-xl">Standard<br> Earbuds</td>
                     <td class="leading-none rounded-t-xl">Standard<br> Headphones</td>
@@ -285,7 +285,7 @@
             <h6 class="inline-block sm:hidden mb-5 sm:mb-10">Watch the video to see everything<br> included with your Drumeo EarDrums.</h6>
             <div class="hidden sm:inline-block relative text-coaches text-xs sm:text-lg p-1">
                 <p class="absolute w-full text-center -top-6 sm:top-6"><strong>(Tap for more information)</strong></p>
-                <img class="rounded-xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Product_Image01.jpg" alt="Eardrums kit">
+                <img class="rounded-xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Product_Image01.jpg" alt="Eardrums kit">
                 <div class="tooltip cursor-pointer" style="top: 22.5%;left: 62.5%;" tip="Memory Foam Eartips (S/M/L)"><i class="fas fa-info-circle"></i></div>
                 <div class="tooltip cursor-pointer" style="top: 22.5%;left: 45%;" tip="Single-layer Silicone Eartips (S/M/L)"><i class="fas fa-info-circle"></i></div>
                 <div class="tooltip cursor-pointer" style="top: 22.5%;left: 53%;" tip="Triple-layer Silicone Eartips (S/M/L)"><i class="fas fa-info-circle"></i></div>
@@ -302,21 +302,21 @@
                 </div>
             </div>
             <div class="flex flex-wrap">
-                <div class="p-1 w-full sm:w-7/12"><div class="h-56 sm:h-64 lg:h-80 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Product_Image04.jpg"></div></div>
-                <div class="p-1 w-full sm:w-5/12"><div class="h-56 sm:h-64 lg:h-80 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Product_Image03.jpg"></div></div>
+                <div class="p-1 w-full sm:w-7/12"><div class="h-56 sm:h-64 lg:h-80 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Product_Image04.jpg"></div></div>
+                <div class="p-1 w-full sm:w-5/12"><div class="h-56 sm:h-64 lg:h-80 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Product_Image03.jpg"></div></div>
 
-                <div class="p-1 w-full sm:w-5/12"><div class="h-56 sm:h-64 lg:h-80 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/drumeo-eardrums-6.jpg"></div></div>
-                <div class="p-1 w-full sm:w-7/12"><div class="h-56 sm:h-64 lg:h-80 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/drumeo-eardrums-1.jpg"></div></div>
+                <div class="p-1 w-full sm:w-5/12"><div class="h-56 sm:h-64 lg:h-80 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/drumeo-eardrums-6.jpg"></div></div>
+                <div class="p-1 w-full sm:w-7/12"><div class="h-56 sm:h-64 lg:h-80 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/drumeo-eardrums-1.jpg"></div></div>
 
-                <div class="p-1 w-full sm:w-7/12"><div class="h-56 sm:h-64 lg:h-80 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Product_Image02.jpg"></div></div>
-                <div class="p-1 w-full sm:w-5/12"><div class="h-56 sm:h-64 lg:h-80 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/drumeo-eardrums-8alt.jpg"></div></div>
+                <div class="p-1 w-full sm:w-7/12"><div class="h-56 sm:h-64 lg:h-80 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Product_Image02.jpg"></div></div>
+                <div class="p-1 w-full sm:w-5/12"><div class="h-56 sm:h-64 lg:h-80 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/drumeo-eardrums-8alt.jpg"></div></div>
             </div>
         </div>
     </section>
     <div id="customize-anchor" class="anchor"></div>
-    <section class="content-section text-center customize px-4 lg:px-6 lazyload" style="background-color:#253b53;background-size: cover;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Order_Image.jpg">
+    <section class="content-section text-center customize px-4 lg:px-6 lazyload" style="background-color:#253b53;background-size: cover;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Order_Image.jpg">
         <div class="container mx-auto">
-            <img alt="quietkick logo" class="h-12 sm:h-16 lg:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png"><br>
+            <img alt="quietkick logo" class="h-12 sm:h-16 lg:h-20 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png"><br>
             <h2 class="leading-tight mt-4 mb-2"><strong>Protect your ears +<br> play your favorite songs. </strong></h2>
             @if( $products['drumeo-eardrums']->getStockAvailability() > 1 && !empty($products['drumeo-eardrums']->getStockAvailability()))
                 <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-10 mx-auto">

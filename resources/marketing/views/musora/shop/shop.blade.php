@@ -17,11 +17,11 @@
 {{--    <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">--}}
     <style>
         .shop-header {
-            background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dmmior4id2ysr.cloudfront.net/shop/header-m.jpg);
+            background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dmmior4id2ysr.cloudfront.net/shop/header-m.jpg);
         }
         @media (min-width: 768px) {
             .shop-header {
-                background-image:url(https://www.musora.com/musora-cdn/image/width=2500,quality=85/https://dmmior4id2ysr.cloudfront.net/shop/header.jpg);
+                background-image:url(https://www.musora.com/musora-cdn/image/width=2500,quality=95/https://dmmior4id2ysr.cloudfront.net/shop/header.jpg);
             }
         }
         footer a {
@@ -46,7 +46,7 @@
     @include('_partials.layout.global-header', [
         "theme_bg" => "bg-musora",
         "theme_text" => "text-musora",
-        "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg",
+        "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png",
         "links" => [
             "Home" => [
                 "iconClass" => "fas fa-home",
@@ -221,7 +221,7 @@
                     </li>
 
                     @foreach($drumeo as $item){
-                        @include('drumeo.drumshop._partials._drum-shop-card', [
+                        @include('musora.shop._shop-card', [
                              "sku" => $item->sku,
                              "itemURL" => get_legacy_brand_base_url(strtolower($item->brand->name)).($item->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
                              "badgeText" => $item->badge_text,
@@ -252,7 +252,7 @@
                     </li>
 
                     @foreach($pianote as $item){
-                        @include('drumeo.drumshop._partials._drum-shop-card', [
+                        @include('musora.shop._shop-card', [
                              "sku" => $item->sku,
                              "itemURL" => get_legacy_brand_base_url(strtolower($item->brand->name)).($item->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
                              "badgeText" => $item->badge_text,
@@ -283,7 +283,7 @@
                     </li>
 
                     @foreach($guitareo as $item){
-                        @include('drumeo.drumshop._partials._drum-shop-card', [
+                        @include('musora.shop._shop-card', [
                              "sku" => $item->sku,
                              "itemURL" => get_legacy_brand_base_url(strtolower($item->brand->name)).($item->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
                              "badgeText" => $item->badge_text,
@@ -314,7 +314,7 @@
                     </li>
 
                     @foreach($singeo as $item){
-                        @include('drumeo.drumshop._partials._drum-shop-card', [
+                        @include('musora.shop._shop-card', [
                              "sku" => $item->sku,
                              "itemURL" => get_legacy_brand_base_url(strtolower($item->brand->name)).($item->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
                              "badgeText" => $item->badge_text,
@@ -345,7 +345,7 @@
                     </li>
 
                     @foreach($musora as $item){
-                        @include('drumeo.drumshop._partials._drum-shop-card', [
+                        @include('musora.shop._shop-card', [
                              "sku" => $item->sku,
                              "itemURL" => get_legacy_brand_base_url(strtolower($item->brand->name)).($item->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $item->slug ),
                              "badgeText" => $item->badge_text,
@@ -377,7 +377,7 @@
                         </h1>
                     </li>
                     @foreach($hoodies as $hoodie){
-                        @include('drumeo.drumshop._partials._drum-shop-card', [
+                        @include('musora.shop._shop-card', [
                              "sku" => $hoodie->sku,
                              "itemURL" => get_legacy_brand_base_url(strtolower($hoodie->brand->name)).($hoodie->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                              "badgeText" => $hoodie->badge_text,
@@ -408,7 +408,7 @@
                     </li>
 
                     @foreach($shirts as $shirt){
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                          "sku" => $shirt->sku,
                          "itemURL" => get_legacy_brand_base_url(strtolower($shirt->brand->name)).($shirt->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                          "badgeText" => $shirt->badge_text,
@@ -439,7 +439,7 @@
                     </li>
 
                     @foreach($hats as $hat){
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                          "sku" => $hat->sku,
                          "itemURL" => get_legacy_brand_base_url(strtolower($hat->brand->name)).($hat->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
                          "badgeText" => $hat->badge_text,
@@ -470,7 +470,7 @@
 {{--                        </h1>--}}
 {{--                    </li>--}}
 {{--                    @foreach($accessories as $accessory){--}}
-{{--                    @include('drumeo.drumshop._partials._drum-shop-card', [--}}
+{{--                    @include('musora.shop._shop-card', [--}}
 {{--                        "sku" => $accessory->sku,--}}
 {{--                        "itemURL" => get_legacy_brand_base_url(strtolower($accessory->brand->name)).($accessory->brand->name === 'Drumeo' ? '/drumshop/' : '/shop/').str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),--}}
 {{--                        "badgeText" => $accessory->badge_text,--}}
@@ -530,7 +530,7 @@
 @section('layout-footer')
     @include('_partials.layout.global-footer', [
     "brand" => "musora",
-    "logo" => "https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg"
+    "logo" => "https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png"
 ])
 @endsection
 

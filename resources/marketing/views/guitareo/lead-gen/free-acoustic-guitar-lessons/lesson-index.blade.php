@@ -11,7 +11,7 @@
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/free-acoustic-guitar-lessons/">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-guitareo.css') }}">
     @parent
 @stop
 
@@ -20,7 +20,7 @@
     @include('guitareo.lead-gen.partials._course-lessons1', [
         "bgColor" => "#030d17",
         "bgImg" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/order-bg.jpg",
-        "img" => '<img class="h-12 md:h-20 lg:h-36 inline-block" src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/logo.png">',
+        "img" => '<img class="h-12 md:h-20 lg:h-36 inline-block" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/logo.png">',
         "rootLink" => "/free-acoustic-guitar-lessons/lessons/",
         "bonuses" => [
             [

@@ -35,7 +35,22 @@ export default (function () {
             //event.stopPropagation();
 
             if (modalToOpen) {
-                window.appendBackgroundOverlay();
+                const appendDiv = modalToOpen.getElementsByClassName('modal-container');
+
+                if(appendDiv.length !== 0) {
+                    window.appendBackgroundOverlay();
+
+                    const xIconCheck = modalToOpen.querySelector('#modalXIcon');
+                    if(!xIconCheck){
+                        const xIcon = document.createElement('span');
+                        xIcon.setAttribute('id', 'modalXIcon');
+                        xIcon.setAttribute('class', 'close-modal');
+                        appendDiv[0].appendChild(xIcon);
+                    }
+                }
+                else{
+                    window.appendBackgroundOverlay(true);
+                }
 
                 document.body.classList.add('no-scroll');
                 document.documentElement.classList.add('no-scroll');
@@ -91,7 +106,7 @@ export default (function () {
             closeModal();
         };
 
-        window.appendBackgroundOverlay = function () {
+        window.appendBackgroundOverlay = function (xIcon = false) {
             const modalOverlay = document.createElement('div');
 
             // Add ID to overlay
@@ -102,6 +117,9 @@ export default (function () {
 
             // Add active class to fade in
             modalOverlay.classList.add('active');
+            if(xIcon){
+                modalOverlay.classList.add('xIcon');
+            }
 
             // Add an event listener
             modalOverlay.addEventListener('click', closeModal);

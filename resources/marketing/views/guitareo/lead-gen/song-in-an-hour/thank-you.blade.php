@@ -9,10 +9,10 @@
 
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/og-image.jpg">
     <meta property="og:title" content="Play Your First Song On The Guitar | 1-Hour Challenge">
-    <meta property="og:description" content="Play your first song on the guitar, start to finish, in an hour -- even if you’ve never played before.">
+    <meta property="og:description" content="Play your first song on the guitar, start to finish, in an hour — even if you’ve never played before.">
     <meta property="og:url" content="https://www.guitareo.com/song-in-an-hour/">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}">
     <style>
         .hero-header:after {
             content:none;
@@ -23,8 +23,8 @@
 @section('body')
     <header class="hero-header text-center px-3 py-5 md:py-6 lg:py-16 relative text-white" style="background: linear-gradient(180deg, #010611, #10052b);">
         <div class="container mx-auto relative z-10">
-            <img class="logo guitar-quest mx-auto mb-2 sm:mb-5" src="https://www.musora.com/musora-cdn/image/width=220,q_60,quality=85/https://d122ay5chh2hr5.cloudfront.net/shop/logos/guitar-quest-logo.png"><br>
-            <img class="logo mx-auto mb-7 md:mb-10" src="https://www.musora.com/musora-cdn/image/width=640,q_60,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/logo-purple.png"><br>
+            <img class="logo guitar-quest mx-auto mb-2 sm:mb-5" src="https://www.musora.com/musora-cdn/image/width=220,q_60,quality=95/https://d122ay5chh2hr5.cloudfront.net/shop/logos/guitar-quest-logo.png"><br>
+            <img class="logo mx-auto mb-7 md:mb-10" src="https://www.musora.com/musora-cdn/image/width=640,q_60,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/logo-purple.png"><br>
 
             <h2><span class="text-yellow"><i class="fad fa-check-circle"></i></span> <strong>Success!</strong> <br class="inline md:hidden">Check your email!</h2>
             <p class="mt-4 mb-8 leading-relaxed md:leading-loose" style="max-width: 670px;">You will receive an email from <strong>Rob Scallon (Guitareo)</strong> within 10 minutes with your SONG IN AN HOUR CHALLENGE. Good luck! And if you don’t receive that email for some funky reason, please check your spam folder or re-enter your email address again.</p>

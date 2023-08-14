@@ -9,13 +9,18 @@ import { Cropper } from "vue-advanced-cropper";
 import "vue-advanced-cropper/dist/style.css";
 import MusoraIcon from "../../components/MusoraIcons/MusoraIcon.vue"
 
-import Stencil from "./Stencil.vue";
+import CircleStencil from "./CircleStencil.vue";
+import SquareStencil from "./SquareStencil.vue";
 
 const props = defineProps({
   selectedImage: {
     type: Blob,
     default: null,
   },
+  type: {
+    type: String,
+    default: 'circle'
+  }
 });
  
 const emit = defineEmits(['onCrop']);
@@ -58,7 +63,7 @@ function rotate() {
       ref="cropper"
       class="musora-cropper"
       :src="selectedImage"
-      :stencil-component="Stencil"
+      :stencil-component="type === 'circle' ? CircleStencil : SquareStencil"
     />
     <div
       class="
@@ -78,7 +83,7 @@ function rotate() {
       >
         <button
           :class="`tw-flex tw-flex-col tw-justify-center tw-items-center tw-mr-[20px] ${
-            zoomLevel === 4 ? 'tw-text-[#445F74]' : ''
+            zoomLevel === 4 ? 'tw-text-[#445F74]' : 'tw-text-black dark:tw-text-white'
           }`"
           @click="zoomIn"
         >
@@ -87,7 +92,7 @@ function rotate() {
         </button>
         <button
           :class="`tw-flex tw-flex-col tw-justify-center tw-items-center tw-mr-[20px] ${
-            zoomLevel === 0 ? 'tw-text-[#445F74]' : ''
+            zoomLevel === 0 ? 'tw-text-[#445F74]' : 'tw-text-black dark:tw-text-white'
           }`"
           @click="zoomOut"
         >
@@ -96,7 +101,7 @@ function rotate() {
         </button>
         <button
           class="
-            tw-flex tw-flex-col tw-justify-center tw-items-center tw-mr-[20px]
+            tw-flex tw-flex-col tw-justify-center tw-items-center tw-mr-[20px] tw-text-black dark:tw-text-white
           "
           @click="rotate"
         >
@@ -107,7 +112,8 @@ function rotate() {
       <button
         @click="cropImage"
         class="
-          tw-border-white
+          dark:tw-border-white
+          tw-border-black
           tw-border-2
           tw-rounded-[25px]
           tw-flex
@@ -117,6 +123,7 @@ function rotate() {
           tw-h-[42px]
           tw-text-[20px]
           tw-px-[42px]
+          tw-text-black dark:tw-text-white
         "
       >
         <CheckIcon class="tw-w-[20px] tw-h-[20px] tw-inline" /> FINISH CROPPING

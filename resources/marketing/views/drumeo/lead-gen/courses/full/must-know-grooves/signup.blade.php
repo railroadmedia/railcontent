@@ -61,7 +61,7 @@
             "lessonNumber" => "8",
             "lessonThumb" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/thumb-social-punk.jpg",
             "lessonText" => "SoCal Punk",
-            "description" => "Rich shows you the fast & furious beats that became synonymous with 1990’s Southern California punk -- get ready to break a sweat.",
+            "description" => "Rich shows you the fast & furious beats that became synonymous with 1990’s Southern California punk — get ready to break a sweat.",
         ],
         [
             "lessonNumber" => "9",
@@ -84,7 +84,8 @@
                 <p>
                     Enter your email to receive <br class="sm:hidden">this FREE Drumeo course.
                 </p>
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => "Drumeo - Engagement - Trigger - Must Know - Web Form",
                     "formName" => 'Must-Know Drum Grooves',
                     "buttonText" => 'Send The Videos&nbsp;'
@@ -127,7 +128,8 @@
             </div>
             <p>Enter your email to receive <br class="sm:hidden">this FREE Drumeo course.</p>
             <br><br class="show-for-medium">
-            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formId" => "Drumeo - Engagement - Trigger - Must Know - Web Form",
                 "formName" => 'Must-Know Drum Grooves',
                 "buttonText" => 'Send The Videos&nbsp;'

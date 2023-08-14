@@ -23,8 +23,6 @@
 
     <script>
         $(function () {
-            $(document).foundation();
-
             // Dropdown for FAQ section
             $('.question-dropdown').on('click', questionDropdown);
 
@@ -42,6 +40,13 @@
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
 
+@section('body-data')
+    x-data="{
+    trailer: false,
+    trailer2: false,
+    }"
+@endsection
+
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
         "name" => "Rock Drumming Masterclass",
@@ -51,11 +56,11 @@
     ])
     <header class="hero-header">
         <div class="row">
-            <div class="columns video-wrap autoplay-video" data-open="trailer">
+            <div class="columns video-wrap autoplay-video" @click="trailer = true;">
                 <div class="play-icon"><i class="fas fa-play"></i></div>
                 <div class="logo">
                     <p><em>Todd Sucherman's</em></p>
-                    <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo-white.png" alt="Rock Drummming Masterclass Logo">
+                        <img src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo-white.png" alt="Rock Drummming Masterclass Logo" fetchpriority="high">
                 </div>
             </div>
             <h3 class="columns">The Rock Drumming Masterclass is a
@@ -75,15 +80,19 @@
                 <br>
                 <strong class="text-yellow">** 90-Day Guarantee **</strong>
             </p>
-            <div class="reveal large trailer" id="trailer" data-reveal data-reset-on-close="false">
-                <div class="flex-video widescreen vimeo">
-                    <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400735162?autoplay=1" frameborder="0" allowfullscreen allow="autoplay" title="Trailer"></iframe>
-                </div>
-                <br>
-                <a href="/ecommerce/add-to-cart?products[rock-drumming-masterclass-pack]=1" class="join blue">Get Started &raquo;</a>
-            </div>
         </div>
     </header>
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '400735162',
+        'vimeo' => true,
+    ])
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer2',
+        'video' => '307161724',
+        'vimeo' => true,
+    ])
 
     <div id="lessons" class="anchor"></div>
     <section class="lesson-breakdown">
@@ -95,7 +104,7 @@
             <div class="columns tile-wrap small-up-1 medium-up-2 large-up-3">
                 @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Must-Know Rock Beats",
-                "tileDescription" => "Discover the straight rock beats that ALWAYS work -- and that everyone should know -- along with Todd’s advice for adding variations and texture within the grooves to make them your own. ",
+                "tileDescription" => "Discover the straight rock beats that ALWAYS work — and that everyone should know — along with Todd’s advice for adding variations and texture within the grooves to make them your own. ",
                 ])
                 @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Effective Drum Fills",
@@ -103,7 +112,7 @@
                 ])
                 @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "The Foundation Of Musicality",
-                "tileDescription" => "Todd will share the “Rosetta Stone of 2 & 4” so you can decipher ALL there is to play in 4/4 backbeat time -- the foundation for becoming a musical drummer in a 20th century rock and roll context.",
+                "tileDescription" => "Todd will share the “Rosetta Stone of 2 & 4” so you can decipher ALL there is to play in 4/4 backbeat time — the foundation for becoming a musical drummer in a 20th century rock and roll context.",
                 ])
                 @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Bass Drum Combinations",
@@ -115,11 +124,11 @@
                 ])
                 @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Rhythmic Ear Training",
-                "tileDescription" => "Rock drumming is more than a learned motion. This course will help you train your ears to hear the patterns within the patterns -- so you can explore your imagination for new rhythmic possibilities.",
+                "tileDescription" => "Rock drumming is more than a learned motion. This course will help you train your ears to hear the patterns within the patterns — so you can explore your imagination for new rhythmic possibilities.",
                 ])
                 @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Better Hand Technique",
-                "tileDescription" => "Get Todd’s best insights for improving your hand technique and natural motions for more speed, power, and longevity -- from holding your sticks to cymbal techniques for creating the sounds and patterns you want.",
+                "tileDescription" => "Get Todd’s best insights for improving your hand technique and natural motions for more speed, power, and longevity — from holding your sticks to cymbal techniques for creating the sounds and patterns you want.",
                 ])
                 @include('drumeo.products.partials.lesson-tile', [
                 "tileTitle" => "Utilizing Ghost Notes",
@@ -232,19 +241,19 @@
                 "weekNumber" => "4",
                 "weekTitle" => "Song Forms",
                 "weekDate" => "Aug. 12",
-                "weekDescription" => "When you understand the form of a song you’re playing, you can get inside the music and sculpt the sections dynamically and emotionally. Todd will help you understand the foundations of songs and be able to map out songs -- the different sections and number of bars -- so you can feel the music and let it show you what it needs. "
+                "weekDescription" => "When you understand the form of a song you’re playing, you can get inside the music and sculpt the sections dynamically and emotionally. Todd will help you understand the foundations of songs and be able to map out songs — the different sections and number of bars — so you can feel the music and let it show you what it needs. "
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "5",
                 "weekTitle" => "The Motions of Drumming",
                 "weekDate" => "Aug. 19",
-                "weekDescription" => "Motion exercises are a great way to practice a few things at the same time -- including subdivisions, your timing, and your motions around the kit. You’ll become more comfortable with various sticking patterns and make practical improvements to your coordination. "
+                "weekDescription" => "Motion exercises are a great way to practice a few things at the same time — including subdivisions, your timing, and your motions around the kit. You’ll become more comfortable with various sticking patterns and make practical improvements to your coordination. "
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "6",
                 "weekTitle" => "The Rosetta Stone - Part 1",
                 "weekDate" => "Aug. 26",
-                "weekDescription" => "You’ll get Todd’s “Rosetta Stone of 2 & 4”: the key to deciphering the ability to play WHATEVER you want in a 2&4 back beat 4/4 time context -- which is largely what drummers play in a late 20th century Rock & Roll context."
+                "weekDescription" => "You’ll get Todd’s “Rosetta Stone of 2 & 4”: the key to deciphering the ability to play WHATEVER you want in a 2&4 back beat 4/4 time context — which is largely what drummers play in a late 20th century Rock & Roll context."
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "7",
@@ -256,7 +265,7 @@
                 "weekNumber" => "8",
                 "weekTitle" => "Ghost Notes - Part 1",
                 "weekDate" => "Sep. 9",
-                "weekDescription" => "Ghost Notes are the soft snare drum notes played in between the main back beat accent notes -- such as 2 & 4 or whatever accents you're playing - in any given time feel. You'll explore different possibilities for applying them in your drumming. "
+                "weekDescription" => "Ghost Notes are the soft snare drum notes played in between the main back beat accent notes — such as 2 & 4 or whatever accents you're playing - in any given time feel. You'll explore different possibilities for applying them in your drumming. "
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "9",
@@ -274,19 +283,19 @@
                 "weekNumber" => "11",
                 "weekTitle" => "Ear Training",
                 "weekDate" => "Sep. 30",
-                "weekDescription" => "It's vital to understand the relationship between the right and left hands in whatever you're playing. Anything you play on a drum is a two-note melody -- and Todd will help you understand the singular melody in each hand for when you're learning stickings or practicing rudiments. "
+                "weekDescription" => "It's vital to understand the relationship between the right and left hands in whatever you're playing. Anything you play on a drum is a two-note melody — and Todd will help you understand the singular melody in each hand for when you're learning stickings or practicing rudiments. "
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "12",
                 "weekTitle" => "Six Stroke Rolls & Three Note Conjunctions",
                 "weekDate" => "Oct. 7",
-                "weekDescription" => "Todd will train you to think differently about three note triplet conjunctions (and the different ways to orchestrate the six stroke roll). You'll find all-new ideas come alive and take shape -- from a boring printed page and into the magical realm of music. "
+                "weekDescription" => "Todd will train you to think differently about three note triplet conjunctions (and the different ways to orchestrate the six stroke roll). You'll find all-new ideas come alive and take shape — from a boring printed page and into the magical realm of music. "
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "13",
                 "weekTitle" => "What Does Music Mean?",
                 "weekDate" => "Oct. 14",
-                "weekDescription" => "Music encompasses the human experience: love, loss, joy, pain, happiness, fear, birth, death, surprise, elation. It can express every feeling and emotion that we experience -- and to become a great musician, and a great storyteller, you need to add emotion to your playing to convey ideas without words. "
+                "weekDescription" => "Music encompasses the human experience: love, loss, joy, pain, happiness, fear, birth, death, surprise, elation. It can express every feeling and emotion that we experience — and to become a great musician, and a great storyteller, you need to add emotion to your playing to convey ideas without words. "
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "14",
@@ -298,25 +307,25 @@
                 "weekNumber" => "15",
                 "weekTitle" => "Shuffles - Part 2",
                 "weekDate" => "Oct. 28",
-                "weekDescription" => "Todd will take you through some of the most popular shuffles including a Motown shuffle; some half-time shuffles made famous by Bernard Purdie, John Bonham, and Jeff Porcaro; Reggae time feels; and more -- and give you a handle on a variety of shuffle and swing time feels that will serve you well."
+                "weekDescription" => "Todd will take you through some of the most popular shuffles including a Motown shuffle; some half-time shuffles made famous by Bernard Purdie, John Bonham, and Jeff Porcaro; Reggae time feels; and more — and give you a handle on a variety of shuffle and swing time feels that will serve you well."
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "16",
                 "weekTitle" => "Hand To Foot Combinations - Part 1",
                 "weekDate" => "Nov. 4",
-                "weekDescription" => "It's time to work on some hand-foot combinations. Todd will introduce you to his Bass Drum Combination System -- along with a piece of music for applying your new found combinations to real music."
+                "weekDescription" => "It's time to work on some hand-foot combinations. Todd will introduce you to his Bass Drum Combination System — along with a piece of music for applying your new found combinations to real music."
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "17",
                 "weekTitle" => "Hand To Foot Combinations - Part 2",
                 "weekDate" => "Nov. 11",
-                "weekDescription" => "Discover additional hand-foot combinations that you'll need to be effective in any rock setting. Todd will challenge you with more complex combination templates for a variety of musical situations -- and share the thought process behind the combinations so you can create your own series of numbers and orchestrations. "
+                "weekDescription" => "Discover additional hand-foot combinations that you'll need to be effective in any rock setting. Todd will challenge you with more complex combination templates for a variety of musical situations — and share the thought process behind the combinations so you can create your own series of numbers and orchestrations. "
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "18",
                 "weekTitle" => "Chaffee Style Linear Grooves - Part 1",
                 "weekDate" => "Nov. 18",
-                "weekDescription" => "It’s time to talk about linear drumming. Gary Chaffee came up with a number system for linear concepts that are incredibly deep -- and Todd will give you an introduction to these concepts and help you apply them in a truly fun and creatively useful way. "
+                "weekDescription" => "It’s time to talk about linear drumming. Gary Chaffee came up with a number system for linear concepts that are incredibly deep — and Todd will give you an introduction to these concepts and help you apply them in a truly fun and creatively useful way. "
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "19",
@@ -328,7 +337,7 @@
                 "weekNumber" => "20",
                 "weekTitle" => "Creative Flow",
                 "weekDate" => "Dec. 2",
-                "weekDescription" => "It happens to the best of us: you’re trying to think up ideas to play, but they’re just not coming together. Todd will share a personal example of brainstorming different musical possibilities -- and the creative process he used when writing the groove for the song “Raven” from the Taylor Mills “Lullagoodbye” record."
+                "weekDescription" => "It happens to the best of us: you’re trying to think up ideas to play, but they’re just not coming together. Todd will share a personal example of brainstorming different musical possibilities — and the creative process he used when writing the groove for the song “Raven” from the Taylor Mills “Lullagoodbye” record."
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "21",
@@ -346,7 +355,7 @@
                 "weekNumber" => "23",
                 "weekTitle" => "Brushes in Rock",
                 "weekDate" => "Dec. 23",
-                "weekDescription" => "Every drummer, yes EVEN a rock drummer, should have a pair of brushes in their bag. Todd will share the many useful textures brushes can create in a pop-rock setting that goes beyond your regular jazz standards -- and then dive into some Styx licks so you can pull some ideas out for your own musical settings."
+                "weekDescription" => "Every drummer, yes EVEN a rock drummer, should have a pair of brushes in their bag. Todd will share the many useful textures brushes can create in a pop-rock setting that goes beyond your regular jazz standards — and then dive into some Styx licks so you can pull some ideas out for your own musical settings."
                 ])
                 @include('drumeo.products.partials.week-breakdown', [
                 "weekNumber" => "24",
@@ -364,7 +373,7 @@
                 "weekNumber" => "26",
                 "weekTitle" => "Rock Drumming Philosophies",
                 "weekDate" => "Jan. 13",
-                "weekDescription" => "You're nearing the end of your 26-week journey with Todd -- and now you have an incredible foundation as a rock drummer for your own unique musical journey. Todd will share some parting thoughts to get your playing and career objectives in line so you can embark to the ports of your dreams. "
+                "weekDescription" => "You're nearing the end of your 26-week journey with Todd — and now you have an incredible foundation as a rock drummer for your own unique musical journey. Todd will share some parting thoughts to get your playing and career objectives in line so you can embark to the ports of your dreams. "
                 ])
             </div>
             <span class="join outline toggle">Show All</span>
@@ -377,25 +386,20 @@
                 <h1>Todd<br class="hide-for-medium"> Sucherman</h1>
                 <p>Is Your Drum Teacher</p>
             </div>
-            <div class="play-icon autoplay-video" data-open="trailer2"><i class="fas fa-play"></i></div>
-        </div>
-        <div class="reveal large trailer" id="trailer2" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/307161724?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
+            <div class="play-icon autoplay-video" @click="trailer2 = true;"><i class="fas fa-play"></i></div>
         </div>
     </section>
 
     <section class="instructor-bio">
         <div class="row">
             <p class="columns">
-                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/bold-t.png" alt="Alphabet T"></span>odd Sucherman has played more than 2000 rock shows -- entertaining music fans around the world for more than 30 years. He’s been voted the “Best Rock Drummer” by the readers of Modern Drummer Magazine and hailed as the “Best Drum Clinician” by the readers of DRUM! Magazine -- releasing multiple award-winning educational DVDs and enjoying a 20+ year tenure with the legendary rock band Styx.
+                <span class="first-letter"><img class="transition-all opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/bold-t.png" alt="Alphabet T" onload="this.classList.remove('opacity-0')" loading="lazy"></span>odd Sucherman has played more than 2000 rock shows — entertaining music fans around the world for more than 30 years. He’s been voted the “Best Rock Drummer” by the readers of Modern Drummer Magazine and hailed as the “Best Drum Clinician” by the readers of DRUM! Magazine -- releasing multiple award-winning educational DVDs and enjoying a 20+ year tenure with the legendary rock band Styx.
                 <br><br>
-                And for the next six months, Todd will be sharing his “keys to the kingdom” with students around the world through The Rock Drumming Masterclass -- a 26-week course that will give you the confidence you need to play ANY rock music you want.
+                And for the next six months, Todd will be sharing his “keys to the kingdom” with students around the world through The Rock Drumming Masterclass — a 26-week course that will give you the confidence you need to play ANY rock music you want.
                 <br><br>
-                “I’m going to give you one new lesson each week, for 26 weeks, so you always know exactly what to practice, for exactly how long, without any guesswork”, Todd explains. “And unlike other online masterclasses, you are going to be able to rack my brain -- asking me any question you have along the way and getting my personal feedback to help you overcome any obstacles and see real improvements in your playing.”
+                “I’m going to give you one new lesson each week, for 26 weeks, so you always know exactly what to practice, for exactly how long, without any guesswork”, Todd explains. “And unlike other online masterclasses, you are going to be able to rack my brain — asking me any question you have along the way and getting my personal feedback to help you overcome any obstacles and see real improvements in your playing.”
                 <br><br>
-                Students will receive weekly videos with unique exercises and assignments for each skill level -- so whether you’re a beginner, intermediate, or advanced player, you will be challenged in different ways to improve your skills and become the best rock drummer you can possibly be.
+                Students will receive weekly videos with unique exercises and assignments for each skill level — so whether you’re a beginner, intermediate, or advanced player, you will be challenged in different ways to improve your skills and become the best rock drummer you can possibly be.
                 <br><br>
                 “I won’t just share my own style of playing rock,” Todd explains, “I’ll also show you how to express your own musical style and create your own identity on the drums. You will see results.”
                 <br><br>
@@ -404,8 +408,8 @@
                 Just click any of the big buttons on this page to take the first step towards making 2019 your best year ever on the drums.
             </p>
             <div class="columns timeline-pic">
-                <img class="show-for-large" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/awards.png" alt="Awards Image">
-                <img class="hide-for-large" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/awards-m.png" alt="Awards Image">
+                <img class="show-for-large transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1100,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/awards.png" alt="Awards Image" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="hide-for-large transition-all opacity-0" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/awards-m.png" alt="Awards Image" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
         </div>
     </section>
@@ -417,7 +421,7 @@
 
             <div class="columns no-padding drummer-testimonial featured-testimonial">
                 <div class="columns medium-5 large-4 picture">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/steve-smith.jpg" alt="Steve Smith">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/steve-smith.jpg" alt="Steve Smith" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
                 <div class="columns medium-7 large-8 text">
                     <h1>Steve Smith <span class="band">(Journey)</span></h1>
@@ -428,17 +432,17 @@
 
             <div class="columns no-padding drummer-testimonial">
                 <div class="columns medium-4">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/will-calhoun.jpg" alt="Will CalHoun">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/will-calhoun.jpg" alt="Will CalHoun" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Will Calhoun<br> <span class="band">(Living Colour)</span></h1>
                     <p>"Todd Sucherman is a great drummer. Although he’s most known for playing Rock-n-Roll, he possesses the facility and knowledge to play any style of music at a high level."</p>
                 </div>
                 <div class="columns medium-4">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/dave-dicenso.jpg" alt="Dave Discenso">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/dave-dicenso.jpg" alt="Dave Discenso" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Dave DiCenso<br> <span class="band">(Professor of Percussion at Berklee College of Music)</span></h1>
                     <p>"Todd Sucherman is one of the greatest rock drummers of our time. Brains, brawn, heart and soul - he has 'em all!"</p>
                 </div>
                 <div class="columns medium-4">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/simon-phillips.jpg" alt="Simon Phillips">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/simon-phillips.jpg" alt="Simon Phillips" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Simon Phillips<br> <span class="band">(Toto, The Who, Judas Priest)</span></h1>
                     <p>"Whenever I get the opportunity to hear Todd play I am struck by his preciseness and musicality no matter what the musical setting might be."</p>
                 </div>
@@ -446,7 +450,7 @@
 
             <div class="columns no-padding drummer-testimonial featured-testimonial">
                 <div class="columns medium-5 large-4 float-right picture">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/gavin-harrison.jpg" alt="Gavin Harrison">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/gavin-harrison.jpg" alt="Gavin Harrison" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
                 <div class="columns medium-7 large-8 text">
                     <h1>Gavin Harrison <span class="band">(Porcupine Tree)</span></h1>
@@ -457,17 +461,17 @@
 
             <div class="columns no-padding drummer-testimonial">
                 <div class="columns medium-4">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/matt-garska.jpg" alt="Matt Garska">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/matt-garska.jpg" alt="Matt Garska" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Matt Garstka<br> <span class="band">(Animals as Leaders)</span></h1>
                     <p>"Todd Sucherman is a legend. He is super clean, musical and really knows what he's doing. This polished playing only comes about after decades of touring and practice."</p>
                 </div>
                 <div class="columns medium-4">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/dave-mattacks.jpg" alt="Dave Dattacks">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/dave-mattacks.jpg" alt="Dave Dattacks" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Dave Mattacks<br> <span class="band">(Fairport Convention)</span></h1>
                     <p>"I’m happy to endorse my chum Todd with this splendid Drumeo course.  Wherever you are along your drumming path, I can honestly say that “Todd hardly ever wrecks the music.”  Seriously though!  You’re in great hands here— double entendre intentional!"</p>
                 </div>
                 <div class="columns medium-4">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/gary-husband.jpg" alt="Gary Husband">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/testimonials/gary-husband.jpg" alt="Gary Husband" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Gary Husband<br> <span class="band">(Jazz & Rock drummer, pianist, and bandleader.)</span></h1>
                     <p>"It’s always just right-across-the-border drums excellence with Todd! Every time! No matter what the music. It’s the musician he is, primarily, also the warm spirit and how benevolent he is. The taste, the articulation, the feeling, his amazing sound ... all icing on an already delicious cake."</p>
                 </div>
@@ -484,8 +488,8 @@
                 <tr>
                     <td></td>
                     <td>
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/laptop.png" class="macbook" alt="Macbook Image"><br>
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo.png" class="blue-logo" alt="Masterclass Logo">
+                        <img src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/laptop.png" class="macbook transition-all opacity-0" alt="Macbook Image" loading="lazy" onload="this.classList.remove('opacity-0')"><br>
+                        <img src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo.png" class="blue-logo transition-all opacity-0" alt="Masterclass Logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                     </td>
                     <td><i class="fas fa-user gray-logo"></i><br>Private Lessons</td>
                 </tr>
@@ -545,7 +549,7 @@
                     <td><i class="fas fa-minus"></i></td>
                 </tr>
                 <tr>
-                    <td>Money Back Guarantee</td>
+                    <td>Money-Back Guarantee</td>
                     <td><i class="fas fa-check"></i></td>
                     <td><i class="fas fa-minus"></i></td>
                 </tr>
@@ -557,9 +561,9 @@
                 </tbody>
             </table>
             <p class="columns">
-                <strong>You can unlock the full 26-week course today</strong> to get Todd Sucherman’s masterclass for improving your skills -- <u>all for just ${{ round(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) }} for the entire course).
+                <strong>You can unlock the full 26-week course today</strong> to get Todd Sucherman’s masterclass for improving your skills — <u>all for just ${{ round(floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['rock-drumming-masterclass-pack']->discounted_price) }} for the entire course).
                 <br><br>
-                You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
+                You can choose a one-time payment, a two-payment plan, or a five-payment plan — and the entire course is yours for life with no recurring subscription or additional fees.
             </p>
         </div>
     </section>
@@ -616,9 +620,9 @@
 
     <section class="text-center guarantee">
         <div class="row">
-            <img class="guarantee-badge hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
+            <img class="guarantee-badge hide-for-medium transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=150,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" loading="lazy" onload="this.classList.remove('opacity-0')" alt="Guarantee Badge">
             <div class="flex-container">
-                <img class="guarantee-badge show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge">
+                <img class="guarantee-badge show-for-medium transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge" loading="lazy" onload="this.classList.remove('opacity-0')">
                 <div class="text-wrap text-left">
                     <h1>90-Day Money-Back Guarantee</h1>
                     <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Rock Drumming Masterclass experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for a full refund.</p>
@@ -630,7 +634,7 @@
     <section class="final">
         <div id="customize-anchor" class="anchor"></div>
         <div class="row">
-            <div class="columns logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo-white.png" alt="Rock Drumming Masterclass Logo"></div>
+            <div class="columns logo"><img class="transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://dpwjbsxqtam5n.cloudfront.net/rock-drumming-masterclass/logo-white.png" alt="Rock Drumming Masterclass Logo" loading="lazy" onload="this.classList.remove('opacity-0')"></div>
 
             <h1 class="columns">
                 Todd Sucherman’s 26-Week Online <br class="hide-for-large">

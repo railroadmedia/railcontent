@@ -30,7 +30,7 @@
             <div class="text-center sm:px-3">
                 <div class="video-row relative mb-4 sm:mb-7">
                     @hasSection('prev-thumb')
-                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -5%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/@yield('prev-thumb')" alt="pre-thumb">
+                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translate(-100%, -50%); left: -5%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/@yield('prev-thumb')" alt="pre-thumb">
                     @endif
 
                     <div class="aspect-16:9 w-full relative">
@@ -38,7 +38,7 @@
                     </div>
 
                     @hasSection('next-thumb')
-                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 105%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/@yield('next-thumb')" alt="next-thumb">
+                        <img class="hidden lg:block absolute top-1/2 opacity-30" style="transform: translateY(-50%);left: 105%;width: @hasSection('thumb-width') @yield('thumb-width') @else 80% @endif;" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/@yield('next-thumb')" alt="next-thumb">
                     @endif
                 </div>
             </div>
@@ -116,7 +116,7 @@
                         <a href="{{ $lesson['url'] }}" class="@yield('lesson-tile-width') px-2 md:px-3 mb-5 md:mb-7">
                             <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md">
                                 <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="transform: translate(-50%, -50%);"></i>
-                                <div class="@hasSection('lesson-tile-aspect') @yield('lesson-tile-aspect') @else aspect-16:9 @endif w-full bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['image'] }}"></div>
+                                <div class="@hasSection('lesson-tile-aspect') @yield('lesson-tile-aspect') @else aspect-16:9 @endif w-full bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $lesson['image'] }}"></div>
                             </div>
                             <h5 class="mt-3 mb-1"><strong>{{ $lesson['title'] }}</strong></h5>
                             @if(!empty($lesson['artist']))

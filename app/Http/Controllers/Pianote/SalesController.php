@@ -25,6 +25,11 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote']);
     }
+
+    public function restart()
+    {
+        return view('pianote.sales.restart', ['theme' => 'pianote']);
+    }
     public function homeMonth()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'month' => true]);
@@ -32,6 +37,10 @@ class SalesController extends BaseController
     public function trial()
     {
         return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true']);
+    }
+    public function trialSongs()
+    {
+        return view('pianote.sales.subscription', ['theme' => 'pianote', 'trialVersion' => true, 'promoVersion' => 'true', 'songsVersion' => 'true']);
     }
     public function trialBeginner()
     {
@@ -149,14 +158,14 @@ class SalesController extends BaseController
         return view('pianote.products.beautiful-beginner-bundle', [ 'theme' => 'pianote' ]);
     }
 
+    public function fiveforthreeBundle()
+    {
+        return view('pianote.shop.pages.5-for-3-bundle', [ 'theme' => 'pianote' ]);
+    }
+
     public function buildYourBundle()
     {
         return view('pianote.products.build-your-bundle', [ 'theme' => 'pianote' ]);
-    }
-
-    public function surveyOffer()
-    {
-        return view('pianote.products.survey-offer', [ 'theme' => 'pianote' ]);
     }
 
     public function lifetime()
@@ -223,6 +232,14 @@ class SalesController extends BaseController
     {
         return view('pianote.products.foundation-books');
     }
+    public function classicalPianoPieces()
+    {
+        return view('pianote.products.classical-piano-pieces', ['theme' => 'pianote']);
+    }
+    public function easyChordsDeal()
+    {
+        return view('pianote.sales.pages.easy-chords-deal', ['theme' => 'pianote']);
+    }
 
     public function newPianoPlayers()
     {
@@ -233,6 +250,7 @@ class SalesController extends BaseController
         $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('pianote.products.new-piano-players', [
+            'recaptchaKey'=>config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,
@@ -251,6 +269,22 @@ class SalesController extends BaseController
         $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('pianote.products.easy-chords', [
+            'recaptchaKey'=>config('recaptcha.key'),
+            'theme' => 'pianote',
+            'hasProduct' => $hasProduct,
+            'nPackOwners' => $nPackOwners,
+        ]);
+    }
+    public function thirtyDayBluesPiano()
+    {
+        /** @var \App\Modules\Ecommerce\Services\UserProductService $userProductService */
+        $productId = 740;
+        $userProductService = app(\App\Modules\Ecommerce\Services\UserProductService::class);
+        $hasProduct = user() && $userProductService->hasProductNotCached(user()?->id, $productId);
+        $nPackOwners = $userProductService->getNumberProductOwners($productId);
+
+        return view('pianote.products.30-day-blues-piano', [
+            'recaptchaKey'=>config('recaptcha.key'),
             'theme' => 'pianote',
             'hasProduct' => $hasProduct,
             'nPackOwners' => $nPackOwners,

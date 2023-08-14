@@ -3,12 +3,17 @@
 @section('global-head')
     @yield('meta')
     <meta property="fb:app_id" content="1772693566314871" />
-    @include('_partials.layout._tailwindcdn')
+
+    @if(!empty($appTailwind))
+        <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
+    @else
+        @include('_partials.layout._tailwindcdn')
+    @endif
     <link rel="preload" href="{{ asset('/marketing/css/tailwind-helpers.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}"></noscript>
-    <link rel="preload" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}"></noscript>
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/lead-gen.css') }}">
+    <link rel="preload" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}"></noscript>
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-pianote.css') }}">
 
     @yield('head')
 @stop

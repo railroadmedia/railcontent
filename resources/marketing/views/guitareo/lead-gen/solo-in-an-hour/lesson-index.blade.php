@@ -8,7 +8,7 @@
     <meta property="og:description" content="Play your first solo in less than 60 minutes">
     <meta property="og:image" content="https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/og-image.jpg">
     <meta property="og:url" content="https://www.guitareo.com/solo-in-an-hour/">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-guitareo.css') }}">
     @parent
 @stop
 
@@ -17,7 +17,7 @@
     @include('guitareo.lead-gen.partials._course-lessons1', [
         "bgColor" => "#030d17",
         "bgImg" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/order-bg.jpg",
-        "img" => '<img class="tw-h-20 md:tw-h-28 lg:tw-h-40 tw-inline-block" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/logo.png">',
+        "img" => '<img class="tw-h-20 md:tw-h-28 lg:tw-h-40 tw-inline-block" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/solo-in-an-hour/logo.png">',
         "rootLink" => "/solo-in-an-hour/lessons/",
         "bonuses" => [
             [

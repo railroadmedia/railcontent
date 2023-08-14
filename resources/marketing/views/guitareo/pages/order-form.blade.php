@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind.css') }}" />
     <link rel="stylesheet" href="{{ asset('/marketing/css/app.css') }}" />
-    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     {{--<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">--}}
 @stop
@@ -70,7 +70,7 @@
                 <div class="flex flex-row flex-wrap text-center features">
                     <div class="flex flex-column xs-12 sm-4 align-center pa-3">
                         <i
-                            class="fal fa-mobile text-white mb-2"
+                            class="fa-light fa-mobile text-white mb-2"
                             style="font-size:40px;"
                         ></i>
 
@@ -100,15 +100,15 @@
 
                     <div class="flex flex-column xs-12 sm-4 pa-3 pv-2 align-center">
                         <i
-                            class="fal fa-check-circle text-white mb-2"
+                            class="fa-light fa-check-circle text-white mb-2"
                             style="font-size:40px;"
                         ></i>
                         <p class="tiny font-bold text-white">
-                            100% Money Back Guarantee
+                            100% Money-Back Guarantee
                         </p>
                         <p class="x-tiny text-white">
                             Order risk-free with our 90-day, <br>
-                            100% money back guarantee.
+                            100% money-back guarantee.
                         </p>
                     </div>
                 </div>

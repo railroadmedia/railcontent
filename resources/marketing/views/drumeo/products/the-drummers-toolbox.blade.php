@@ -62,7 +62,7 @@
             @endif
             <a class="join rounded" href="/ecommerce/add-to-cart?products[the-drummers-toolbox-book]=1">GET STARTED &raquo;</a>
 
-            {{--<a class="join blue outline rounded" href="/">GET FREE WITH <img src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"> &raquo;</a>--}}
+            {{--<a class="join blue outline rounded" href="/">GET FREE WITH <img src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"> &raquo;</a>--}}
                 <p>OR BUY FROM YOUR FAVORITE ONLINE STORES:<br class="hide-for-medium"> <a class="text-blue" target="_blank" href="https://www.amazon.com/dp/1999151933">AMAZON</a> &nbsp;|&nbsp; <a class="text-blue" target="_blank" href="https://www.amazon.com/dp/B07ZTTHK82/">KINDLE</a> &nbsp;|&nbsp; <a class="text-blue" target="_blank" href="https://books.apple.com/ca/book/id1487097588">APPLE</a></p>
         </div>
     </section>
@@ -469,7 +469,7 @@
 
     <section class="jared-quote text-center">
         <div class="row">
-            <h3><em>“Versatility is such a core component of becoming a more successful drummer -- and this book is the perfect reference for any drummer to learn about new styles, start playing new styles, and become well rounded musicians who’ll develop freedom across genres and develop their own voice on the drums.”</em></h3>
+            <h3><em>“Versatility is such a core component of becoming a more successful drummer — and this book is the perfect reference for any drummer to learn about new styles, start playing new styles, and become well rounded musicians who’ll develop freedom across genres and develop their own voice on the drums.”</em></h3>
             <div class="pic-name">
                 <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/books/drummers-toolbox/sales/jared.jpg" alt="Jared Falk">
                 <div class="name">
@@ -497,7 +497,7 @@
                         <p><strong>ONLY ${{ floatval($productPrices['the-drummers-toolbox-book']->discounted_price) }}.</strong></p>
                     @endif
                     <a class="join rounded" href="/ecommerce/add-to-cart?products[the-drummers-toolbox-book]=1">CLICK HERE TO ORDER &raquo;</a>
-                    {{--<a class="join white outline rounded" href="/">GET FREE WITH <img src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"> &raquo;</a>--}}
+                    {{--<a class="join white outline rounded" href="/">GET FREE WITH <img src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"> &raquo;</a>--}}
                     <div class="button-centerer"><p style="max-width:100%">OR BUY FROM YOUR FAVORITE ONLINE STORES:<br class="hide-for-medium"> <a class="or-drumeo" target="_blank" href="https://www.amazon.com/dp/1999151933">AMAZON</a> &nbsp;|&nbsp; <a class="or-drumeo" target="_blank" href="https://www.amazon.com/dp/B07ZTTHK82/">KINDLE</a> &nbsp;|&nbsp; <a class="or-drumeo" target="_blank" href="https://books.apple.com/ca/book/id1487097588">APPLE</a></p></div>
                 </div>
             </div>

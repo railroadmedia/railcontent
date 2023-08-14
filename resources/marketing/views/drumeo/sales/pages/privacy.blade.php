@@ -252,14 +252,14 @@
         <h2 class="font-bold md:text-2xl mt-10 mb-4">Links To Other Sites</h2>
         <p class="py-2">Our Service may contain links to other sites that are not operated by us. If you click on a third party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit.</p>
         <p class="py-2">We have no control over and assume no responsibility for the content, privacy policies or practices of any third-party sites or services.</p>
-        <h2 class="font-bold md:text-2xl mt-10 mb-4">Affiliate Disclosure</h2>
+        <h2 class="font-bold md:text-2xl mt-10 mb-4" id="affiliate-disclosure">Affiliate Disclosure</h2>
         <h3 class="font-bold md:text-lg mt-10">Amazon</h3>
         <p class="py-2">Musora Media is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to amazon (.com, .co.uk, .de, etc.) and any other website that may be affiliated with Amazon Service LLC Associates Program.</p>
         <p class="py-2">The affiliate links earn us a small commission on any purchase you make when you visit Amazon after clicking on an affiliate link. This adds no extra cost to your purchase.</p>
         <h3 class="font-bold md:text-lg mt-10">Other Affiliate Networks</h3>
         <p class="py-2">Aside from the Amazon Associates Program, Musora Media is a part of several other affiliate networks, including Impact, Thomann, and Commission Junction.</p>
         <p class="py-2">Being a part of these networks makes it possible to support a team of writers who help provide the latest and most in-depth information about the world of music. Opinions presented on the site are those of Musora Media, or our team of writers who at times may post their own opinions.</p>
-        <p class="py-2">We greatly appreciate it when you choose to use our links to buy products and we aim to be upfront about products we receive compensation for -- and again, these add no extra costs to any of your purchases.</p>
+        <p class="py-2">We greatly appreciate it when you choose to use our links to buy products and we aim to be upfront about products we receive compensation for — and again, these add no extra costs to any of your purchases.</p>
         <h2 class="font-bold md:text-2xl mt-10 mb-4">Children's Privacy</h2>
         <p class="py-2">Our Service does not address anyone under the age of 18 ("Children").</p>
         <p class="py-2">We do not knowingly collect personally identifiable information from anyone under the age of 18. If you are a parent or guardian and you are aware that your Children has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from children without verification of parental consent, we take steps to remove that information from our servers.</p>

@@ -8,18 +8,23 @@ return new class extends Migration {
 
     public function up()
     {
-        Schema::table('cohorts', function (Blueprint $table) {
-            $table->dropColumn('icon1');
-            $table->dropColumn('icon2');
-            $table->dropColumn('icon3');
+        // SQLite doesn't support multiple calls to dropColumn / renameColumn in a single modification
+        if (Schema::getConnection()->getDriverName() === "sqlite") {
+            $this->upSqlite();
+        } else {
+            Schema::table('cohorts', function (Blueprint $table) {
+                $table->dropColumn('icon1');
+                $table->dropColumn('icon2');
+                $table->dropColumn('icon3');
 
-            $table->string('icon1_url')
-                ->nullable();
-            $table->string('icon2_url')
-                ->nullable();
-            $table->string('icon3_url')
-                ->nullable();
-        });
+                $table->string('icon1_url')
+                    ->nullable();
+                $table->string('icon2_url')
+                    ->nullable();
+                $table->string('icon3_url')
+                    ->nullable();
+            });
+        }
 
         $cohorts = [
             [
@@ -46,11 +51,56 @@ return new class extends Migration {
 
     public function down()
     {
-        Schema::table('cohorts', function (Blueprint $table) {
-            $table->dropColumn('icon1_url');
-            $table->dropColumn('icon2_url');
-            $table->dropColumn('icon3_url');
+        if (Schema::getConnection()->getDriverName() === "sqlite") {
+            $this->downSqlite();
+        } else {
+            Schema::table('cohorts', function (Blueprint $table) {
+                $table->dropColumn('icon1_url');
+                $table->dropColumn('icon2_url');
+                $table->dropColumn('icon3_url');
 
+                $table->string('icon1')
+                    ->nullable();
+                $table->string('icon2')
+                    ->nullable();
+                $table->string('icon3')
+                    ->nullable();
+            });
+        }
+    }
+
+    /**
+     * Run the migrations (separated out for SQLite support)
+     *
+     * @return void
+     */
+    private function upSqlite(): void
+    {
+        Schema::table('cohorts', function (Blueprint $table) {
+            $table->dropColumn(['icon1', 'icon2', 'icon3']);
+
+        });
+        Schema::table('cohorts', function (Blueprint $table) {
+            $table->string('icon1_url')
+                ->nullable();
+            $table->string('icon2_url')
+                ->nullable();
+            $table->string('icon3_url')
+                ->nullable();
+        });
+    }
+
+    /**
+     * Reverse the migrations (separated out for SQLite support)
+     *
+     * @return void
+     */
+    public function downSqlite(): void
+    {
+        Schema::table('cohorts', function (Blueprint $table) {
+            $table->dropColumn(['icon1_url', 'icon2_url', 'icon3_url']);
+        });
+        Schema::table('cohorts', function (Blueprint $table) {
             $table->string('icon1')
                 ->nullable();
             $table->string('icon2')

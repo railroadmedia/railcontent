@@ -1,545 +1,188 @@
-<style>
-    body {
-        font-family:Open Sans, sans-serif;
-        padding-top:40px
-    }
-
-    @media (min-width:768px) {
-        body {
-            padding-top:56px
-        }
-    }
-
-    body.cart-sidebar-active {
-        overflow:hidden
-    }
-
-    @media (min-width:768px) {
-        body.cart-sidebar-active {
-            margin-right:14px
-        }
-    }
-
-    body.cart-sidebar-active .top-bar {
-        z-index:2147483002
-    }
-
-    .anchor {
-        display:block;
-        position:relative;
-        top:-86px;
-        visibility:hidden
-    }
-
-    @media (min-width:768px) {
-        .anchor {
-            top:-105px
-        }
-    }
-
-    .no-padding {
-        padding-left:0;
-        padding-right:0
-    }
-
-    a {
-        transition:all .3s
-    }
-
-    .join {
-        display:inline-block;
-        font:600 20px/1em "Open Sans", sans-serif;
-        letter-spacing: 0.1em;
-        text-transform:uppercase;
-        background:#10d05f;
-        border-radius:50px;
-        color:#fff;
-        padding:17px 7%;
-        outline:none;
-        cursor:pointer;
-        text-align:center;
-        user-select:none;
-        text-decoration:none;
-        transition:background-color .3s;
-        box-shadow:0 0 0 rgba(0, 0, 0, .35)
-    }
-
-    @media (min-width:768px) {
-        .join {
-            font-size:28px
-        }
-    }
-
-    .join:focus, .join:hover {
-        color:#fff;
-        background:#13e868;
-        box-shadow:0 0 7px rgba(0, 0, 0, .35)
-    }
-
-    .join.white {
-        background:#fff;
-        color:#0b76db;
-    }
-
-    .join.drumeo,
-	.join.blue {
-        background:#0b76db
-    }
-
-    .join.drumeo:focus,
-    .join.drumeo:hover,
-    .join.blue:focus,
-    .join.blue:hover {
-        background:#258ff4
-    }
-    .join.pianote {
-        background:#ff383f
-    }
-
-    .join.pianote:focus,
-    .join.pianote:hover {
-        background:#ff525a
-    }
-    .join.guitareo {
-        background:#00C9AC
-    }
-
-    .join.guitareo:focus,
-    .join.guitareo:hover {
-        background:#00e0bf
-    }
-    .join.pianote {
-        background:#f61a30
-    }
-
-    .join.pianote:focus, .join.blue:hover {
-        background:#ff364a
-    }
-    .join.singeo {
-        background:#8300E9
-    }
-
-    .join.singeo:focus,
-    .join.singeo:hover {
-        background:#8c00ff
-    }
-
-    .join.sold-out {
-        background:#777
-    }
-
-    .join.sold-out:focus, .join.sold-out:hover {
-        background:#919191
-    }
-
-    .join.smaller {
-        padding:7px 25px;
-        font-size:13px;
-    }
-
-    @media (min-width:768px) {
-        .join.smaller {
-            font-size:14px;
-            padding:13px 30px;
-        }
-    }
-
-    .text-gradient {
-        background:-webkit-linear-gradient(20deg, #03c8ac, #0976db, #9a01ee, #f61a30);
-        -webkit-background-clip:text;
-        -webkit-text-fill-color:transparent;
-    }
-
-    .top-bar {
-        transition:background-color .3s, box-shadow .3s;
-        background:#020815;
-        box-shadow:0 0 10px rgba(0, 0, 0, .5);
-        position:fixed;
-        padding:0;
-        top:0;
-        left:0;
-        width:100%;
-        max-width:none;
-        z-index:100;
-        height:40px
-    }
-
-    @media (min-width:768px) {
-        .top-bar {
-            height:56px
-        }
-    }
-
-    .top-bar .logo {
-        display:inline-block;
-        box-sizing:border-box;
-        height:100%;
-        width:100%;
-        float:left;
-        padding:11px 0 11px 10px;
-        font-size:0;
-        max-width:120px
-    }
-
-    @media (min-width:768px) {
-        .top-bar .logo {
-            padding:16px 16px;
-            max-width:180px
-        }
-    }
-
-    .top-bar .button-wrap, .top-bar .logo img {
-        display:inline-block;
-        height:100%
-    }
-
-    .top-bar .button-wrap {
-        box-sizing:border-box;
-        padding:6px 5px 6px 0;
-        float:right
-    }
-
-    @media (min-width:768px) {
-        .top-bar .button-wrap {
-            padding:8px
-        }
-    }
-
-    @media screen and (max-width:39.99875em) {
-        .top-bar .button-wrap .show-for-medium {
-            display:none !important
-        }
-    }
-
-    .top-bar .button-wrap .join {
-        padding:7px 10px;
-        width:auto;
-        font-size:13px
-    }
-
-    @media (min-width:768px) {
-        .top-bar .button-wrap .join {
-            font-size:14px;
-            padding:13px 30px
-        }
-    }
-
-    .top-bar .button-wrap .join.outline-button {
-        padding:5px 12px;
-        background:transparent;
-        border:2px solid #fff;
-        margin-right:5px
-    }
-
-    @media (min-width:768px) {
-        .top-bar .button-wrap .join.outline-button {
-            padding:11px 30px
-        }
-    }
-
-    .top-bar .button-wrap .join.outline-button:hover {
-        background:#fff;
-        color:#020815
-    }
-
-    .top-bar .button-wrap .join.cart-button {
-        position:relative
-    }
-
-    .top-bar .button-wrap .join.cart-button .cart-number {
-        background:red;
-        color:#fff;
-        font:700 10px/15px Open Sans, sans-serif;
-        width:15px;
-        height:15px;
-        border-radius:50%;
-        position:absolute;
-        top:0;
-        right:0
-    }
-
-    .top-bar .menu-toggle {
-        display:inline-block;
-        box-sizing:border-box;
-        padding:10px 0;
-        float:right;
-        height:100%;
-        color:#fff;
-        text-align:center;
-        width:40px;
-        cursor:pointer;
-        -webkit-touch-callout:none;
-        -webkit-user-select:none;
-        -moz-user-select:none;
-        -ms-user-select:none;
-        user-select:none
-    }
-
-    @media (min-width:768px) {
-        .top-bar .menu-toggle {
-            padding:18px 24px;
-            width:auto
-        }
-    }
-
-    .top-bar .menu-toggle span {
-        background-color:#fff;
-        display:block;
-        transition:all .3s;
-        border-radius:25px;
-        width:16px;
-        height:3px;
-        margin:3px auto
-    }
-
-    .top-bar .menu-toggle.active span:nth-child(2) {
-        opacity:0
-    }
-
-    .top-bar .menu-toggle.active span:first-child {
-        transform:translateY(6px) rotate(45deg)
-    }
-
-    .top-bar .menu-toggle.active span:nth-child(3) {
-        transform:translateY(-6px) rotate(-45deg)
-    }
-
-    .nav-side-bar {
-        position:fixed;
-        right:-325px;
-        top:40px;
-        height:calc(100% - 40px);
-        width:275px;
-        max-width:275px;
-        background:#fff;
-        z-index:101;
-        transition:all .1s;
-        overflow:auto;
-        overflow-x:hidden
-    }
-
-    @media (min-width:768px) {
-        .nav-side-bar {
-            top:56px;
-            height:calc(100% - 56px);
-            width:325px;
-            max-width:325px
-        }
-    }
-
-    @media (min-width:1024px) {
-        .nav-side-bar {
-            width:325px;
-            max-width:325px
-        }
-    }
-
-    .nav-side-bar.active {
-        right:0
-    }
-
-    .nav-side-bar .bottom-section .nav-link {
-        width:100%;
-        padding:10px 15px;
-        font:400 16px/1.4em Open Sans, sans-serif;
-        color:#333;
-        position:relative;
-        border-bottom:1px solid hsla(0, 0%, 49.4%, .2);
-        display:inline-block;
-        user-select:none;
-        box-sizing:border-box
-    }
-
-    @media (min-width:768px) {
-        .nav-side-bar .bottom-section .nav-link {
-            padding:10px 20px;
-            font-size:18px
-        }
-    }
-
-    @media (min-width:1024px) {
-        .nav-side-bar .bottom-section .nav-link {
-            padding:10px 20px
-        }
-    }
-
-    .nav-side-bar .bottom-section .nav-link:hover {
-        background:#f2f2f2
-    }
-
-    .nav-side-bar .bottom-section .nav-link i {
-        margin-right:5px;
-        position:relative;
-        top:3px;
-        font-size:18px;
-        width:25px;
-        text-align:center
-    }
-
-    .nav-side-bar .bottom-section .nav-link i.fa, .nav-side-bar .bottom-section .nav-link i.fab, .nav-side-bar .bottom-section .nav-link i.fal, .nav-side-bar .bottom-section .nav-link i.far, .nav-side-bar .bottom-section .nav-link i.fas {
-        top:0
-    }
-
-    .nav-side-bar .bottom-section .nav-link i.fa-external-link {
-        color:#000;
-        font-size:16px
-    }
-
-    .nav-side-bar .bottom-section .nav-link i.promo-color {
-        color:#00bc75
-    }
-
-    .nav-side-bar .bottom-section .nav-link .drop-down-arrow {
-        position:absolute;
-        top:0;
-        right:0;
-        height:100%;
-        width:45px;
-        line-height:45px;
-        text-align:center
-    }
-
-    .nav-side-bar .bottom-section .nav-link .drop-down-arrow i {
-        font-size:20px;
-        margin:0;
-        line-height:45px;
-        transition:all .1s
-    }
-
-    .nav-side-bar .bottom-section .nav-link .drop-down-arrow i.rotate {
-        -webkit-transform:rotate(180deg);
-        transform:rotate(180deg)
-    }
-
-    .nav-side-bar .bottom-section .lesson-links {
-        max-height:0;
-        overflow:hidden;
-        transition:all .1s;
-        -webkit-transform:translateZ(0);
-        transform:translateZ(0);
-        background:#f7f7f7
-    }
-
-    .nav-side-bar .bottom-section .lesson-links.active {
-        max-height:500px
-    }
-
-    .nav-side-bar .bottom-section .lesson-links .nav-link {
-        padding-left:30px;
-        background:#f7f7f7;
-        font-size:16px;
-        border-bottom:1px solid hsla(0, 0%, 49.4%, .2)
-    }
-
-    .nav-side-bar .bottom-section .lesson-links .nav-link:hover {
-        background:#f2f2f2
-    }
-
-    .nav-side-bar .bottom-section .lesson-links .nav-link i {
-        font-size:16px;
-        color:#000
-    }
-
-    .nav-side-bar .bottom-section .secondary-link {
-        font:400 14px Open Sans, sans-serif;
-        color:#000;
-        padding:2px 20px;
-        margin-bottom:0;
-        margin-top:5px
-    }
-
-    .nav-side-bar .bottom-section .secondary-link:hover {
-        text-decoration:underline
-    }
-
-    .nav-side-bar .shim {
-        display:block;
-        height:15px
-    }
-
-    .menu-overlay {
-        position:fixed;
-        top:0;
-        height:100%;
-        width:100%;
-        background:rgba(0, 0, 0, .2);
-        z-index:99;
-        visibility:hidden;
-        opacity:0;
-        transition:all .3s
-    }
-
-    .menu-overlay.active {
-        visibility:visible;
-        opacity:1
-    }
-</style>
-<div class="top-bar">
+<nav id="nav" class="top-bar row expanded @if(!empty($whiteNav)) bg-white @else bg-[#020815] @endif">
     <div class="logo">
-        <a href="/">
-            <img src="https://dmmior4id2ysr.cloudfront.net/logos/musora-logo-white.png" alt="Musora">
+        <a
+            @if(!empty($logoUrl))
+                href="{{ $logoUrl }}"
+            @else
+                href="{{ get_legacy_brand_base_url('musora') }}"
+            @endif
+        >
+            <img class="@if(!empty($whiteNav)) invert @endif" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dmmior4id2ysr.cloudfront.net/homepage/2023/musora_logo.png" alt="Drumeo">
         </a>
     </div>
-    <div class="menu-toggle">
+
+    <div class="menu-toggle @if(!empty($hideMenu)) opacity-0 px-1 w-0 @endif @if(!empty($whiteNav)) invert @endif">
         <span></span>
         <span></span>
         <span></span>
     </div>
-</div>
+
+    @if(!empty($cartVersion))
+        <div class="button-wrap" id="app">
+            <a href="{{ get_legacy_brand_base_url('drumeo').'/drumshop' }}" class="join outline-button">Shop</a>
+
+            <nav-cart-button
+                {{-- cart-data='{{ $cartData }}' --}}
+                cart-data-url=''
+                checkout-url='/order/drumeo'
+                api-domain-url=''
+            ></nav-cart-button>
+            <cart-sidebar
+                brand="drumeo"
+                {{-- cart-data='{{ $cartData }}' --}}
+                cart-data-url=''
+                checkout-url='/order/drumeo'
+                api-domain-url=''
+            ></cart-sidebar>
+
+        </div>
+    @endif
+
+    @if(!empty($subscriptionVersion))
+        @if(!empty($fullSubscriptionVersion))
+            <div class="relative">
+                <div class="edge-wrap show-for-medium">
+                    <span class="cursor-pointer features @if(strpos(url()->full(), 'method') || strpos(url()->full(), 'songs') || strpos(url()->full(), 'coaches')) active @endif">Features <i class="fa-solid fa-caret-down"></i></span>
+                    <span class="cursor-pointer instruments">Instruments <i class="fa-solid fa-caret-down"></i></span>
+                    <a class=" @if(strpos(url()->full(), 'choose-plan')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/choose-plan" >Pricing</a>
+                    <a class=" @if(strpos(url()->full(), 'drumshop')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/drumshop" >Shop</a>
+                    <a class="" href="{{ get_legacy_brand_base_url('drumeo') }}/beat" >Blog</a>
+                </div>
+                <div class="features-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-44 lg:left-48 top-10 lg:top-12 w-44">
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'method')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/method" ><i class="mr-1 text-lg fa-fw far fa-music-note"></i> Method</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'coaches')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/coaches" ><i class="mr-1 text-lg fa-fw far fa-whistle"></i> Coaches</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full @if(strpos(url()->full(), 'songs')) active @endif" href="{{ get_legacy_brand_base_url('drumeo') }}/songs" ><i class="mr-1 text-lg fa-fw far fa-headphones"></i> Songs</a>
+                </div>
+                <div class="instruments-dd hidden shadow-md bg-white rounded-xl p-2 absolute flex flex-col left-72 lg:left-80 -ml-3 top-10 lg:top-12 w-44">
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full text-drumeo" href="{{ get_legacy_brand_base_url('drumeo') }}" ><i class="mr-1 text-lg fa-fw far fa-drum"></i> Drums</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('pianote') }}" ><i class="mr-1 text-lg fa-fw far fa-piano-keyboard"></i> Piano</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('guitareo') }}" ><i class="mr-1 text-lg fa-fw far fa-guitar"></i> Guitar</a>
+                    <a class="font-bebas uppercase select-none text-base tracking-wider rounded-lg px-2 py-1 hover:bg-gray-100 w-full" href="{{ get_legacy_brand_base_url('singeo') }}" ><i class="mr-1 text-lg fa-fw far fa-microphone-stand"></i> Singing</a>
+                </div>
+            </div>
+        @endif
+
+        <div class="button-wrap @if(!empty($hideJoin)) hidden @endif">
+            <a @if(!empty($scrollToJoin))
+                    href="#customize-anchor" class="join anchor-slide"
+                @elseif(!empty($joinUrl))
+                    href="{{ $joinUrl }}" class="join"
+                @else
+                    href="/#customize-anchor" class="join"
+                @endif
+                >
+
+                @if(!empty($trialVersion))
+                    Start for free <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
+                @else
+                    Join<span class="show-for-medium"> Drumeo</span>
+                @endif
+            </a>
+        </div>
+        <div class="hidden lg:block button-wrap @if(!empty($hideMenu)) opacity-0 px-0.5 @endif">
+            <a href="https://www.musora.com/drumeo" class="join outline-button">Login</a>
+        </div>
+    @endif
+</nav>
 
 <div class="nav-side-bar">
     <div class="bottom-section">
-        @include('public.partials._nav-link', [
-            "linkName" => "Home",
-            "linkIcon" => "fas fa-home",
-            "linkUrl" => "/"
-        ])
-        @include('public.partials._nav-link', [
-            "linkName" => "Contact",
-            "linkIcon" => "fas fa-phone",
-            "linkUrl" => get_musora_brand_base_url().'/contact'
-        ])
-        @include('public.partials._nav-link', [
-            "linkName" => "Careers",
-            "linkIcon" => "fas fa-users",
-            "linkUrl" => "/careers"
-        ])
-        @include('public.partials._nav-link', [
-            "linkName" => "About",
-            "linkIcon" => "fas fa-question",
-            "linkUrl" => "/about"
-        ])
-        @include('public.partials._nav-link', [
-            "linkName" => "Ambassador Program",
-            "linkIcon" => "fas fa-comment-dollar",
-            "linkUrl" => "/ambassador"
-        ])
-        @include('public.partials._nav-link', [
-            "linkName" => "Brand Guides",
-            "linkIcon" => "fas fa-pencil-paintbrush",
-            "linkUrl" => "/brand"
-        ])
+        <a href="https://www.musora.com/login" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none md:text-[17px]" dusk="page-link-member-login">
+            <i class=" fas fa-sign-in text-musora w-6 text-center mr-2.5 text-lg" aria-hidden="true"></i>
+            Member Login
+        </a>
+        <a href="/" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none md:text-[17px]" dusk="page-link-home">
+            <i class=" fas fa-home text-musora w-6 text-center mr-2.5 text-lg" aria-hidden="true"></i>
+            Home
+        </a>
+        <div class="page-link parent flex flex-col flex-wrap body text-black align-v-center" data-remain-open="features" x-data="{ dropdown_648b9503bc570: false }">
+            <div class="flex py-2 px-5 border-b border-gray-100 md:text-[17px] items-center leading-none cursor-pointer" dusk="parent-button-features" x-on:click.prevent="dropdown_648b9503bc570 = !dropdown_648b9503bc570">
+                <i class="no-events fas fa-star text-musora mr-2.5 text-lg" aria-hidden="true"></i>
+                Features
+                <i class="no-events far fa-chevron-down arrow ml-auto transition-all transform-gpu origin-center text-musora rotate-0" x-bind:class="dropdown_648b9503bc570 ? '-rotate-180' : 'rotate-0'" aria-hidden="true"></i>
+            </div>
+            <div class="flex flex-col overflow-hidden transition-all transform-gpu max-h-0" x-bind:class="dropdown_648b9503bc570 ? 'max-h-[500px]' : 'max-h-0'">
+                <a href="https://www.musora.com/method" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none bg-gray-50 text-sm py-3" dusk="page-link-method">
+                    Method
+                </a>
+                <a href="https://www.musora.com/songs" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none bg-gray-50 text-sm py-3" dusk="page-link-songs">
+                    Songs
+                </a>
+            </div>
+        </div>
+        <div class="page-link parent flex flex-col flex-wrap body text-black align-v-center" data-remain-open="instruments" x-data="{ dropdown_648b9503bc982: false }">
+            <div class="flex py-2 px-5 border-b border-gray-100 md:text-[17px] items-center leading-none cursor-pointer" dusk="parent-button-instruments" x-on:click.prevent="dropdown_648b9503bc982 = !dropdown_648b9503bc982">
+                <i class="no-events fas fa-piano-keyboard text-musora mr-2.5 text-lg" aria-hidden="true"></i>
+                Instruments
+                <i class="no-events far fa-chevron-down arrow ml-auto transition-all transform-gpu origin-center text-musora rotate-0" x-bind:class="dropdown_648b9503bc982 ? '-rotate-180' : 'rotate-0'" aria-hidden="true"></i>
+            </div>
+            <div class="flex flex-col overflow-hidden transition-all transform-gpu max-h-0" x-bind:class="dropdown_648b9503bc982 ? 'max-h-[500px]' : 'max-h-0'">
+                <a href="https://www.pianote.com" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none bg-gray-50 text-sm py-3" dusk="page-link-piano">
+                    Piano
+                </a>
+                <a href="https://www.guitareo.com" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none bg-gray-50 text-sm py-3" dusk="page-link-guitar">
+                    Guitar
+                </a>
+                <a href="https://www.drumeo.com" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none bg-gray-50 text-sm py-3" dusk="page-link-drums">
+                    Drums
+                </a>
+                <a href="https://www.singeo.com" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none bg-gray-50 text-sm py-3" dusk="page-link-singing">
+                    Singing
+                </a>
+            </div>
+        </div>
+        <a href="https://www.musora.com/choose-plan" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none md:text-[17px]" dusk="page-link-pricing">
+            <i class=" fas fa-money-bill-wave text-musora w-6 text-center mr-2.5 text-lg" aria-hidden="true"></i>
+            Pricing
+        </a>
+        <a href="https://www.musora.com/contact" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none md:text-[17px]" dusk="page-link-contact">
+            <i class=" fas fa-phone text-musora w-6 text-center mr-2.5 text-lg" aria-hidden="true"></i>
+            Contact
+        </a>
+        <a href="/careers" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none md:text-[17px]" dusk="page-link-careers">
+            <i class=" fas fa-users text-musora w-6 text-center mr-2.5 text-lg" aria-hidden="true"></i>
+            Careers
+        </a>
+        <a href="/about" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none md:text-[17px]" dusk="page-link-about">
+            <i class=" fas fa-question text-musora w-6 text-center mr-2.5 text-lg" aria-hidden="true"></i>
+            About
+        </a>
+        <a href="/ambassador" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none md:text-[17px]" dusk="page-link-ambassador-program">
+            <i class=" fas fa-comment-dollar text-musora w-6 text-center mr-2.5 text-lg" aria-hidden="true"></i>
+            Ambassador Program
+        </a>
+        <a href="/brand" class="flex items-center text-gray-800 py-2 px-5 border-b border-gray-100 hover:bg-gray-100 leading-none md:text-[17px]" dusk="page-link-brand-guides">
+            <i class=" fas fa-pencil-paintbrush text-musora w-6 text-center mr-2.5 text-lg" aria-hidden="true"></i>
+            Brand Guides
+        </a>
         <span class="shim"></span>
-        @include('public.partials._secondary-nav-link', [
-            "linkName" => "Drumeo <i class='text-gradient fas fa-external-link'></i>",
-            "linkUrl" => "https://www.drumeo.com/",
-            "externalLink" => true
-        ])
-        @include('public.partials._secondary-nav-link', [
-            "linkName" => "Pianote <i class='text-gradient fas fa-external-link'></i>",
-            "linkUrl" => "https://www.pianote.com/",
-            "externalLink" => true
-        ])
-        @include('public.partials._secondary-nav-link', [
-            "linkName" => "Guitareo <i class='text-gradient fas fa-external-link'></i>",
-            "linkUrl" => "https://www.guitareo.com/",
-            "externalLink" => true
-        ])
-        @include('public.partials._secondary-nav-link', [
-            "linkName" => "Singeo <i class='text-gradient fas fa-external-link'></i>",
-            "linkUrl" => "https://www.singeo.com/",
-            "externalLink" => true
-        ])
+        <ul class="py-3 px-5">
+            <li class="mb-1">
+                <a href="https://www.drumeo.com" target="_blank" class="text-base text-black py-2 w-full">
+                    <i class="fas fa-external-link mr-1 " aria-hidden="true"></i>
+                    Drumeo
+                </a>
+            </li>
+            <li class="mb-1">
+                <a href="https://www.pianote.com" target="_blank" class="text-base text-black py-2 w-full">
+                    <i class="fas fa-external-link mr-1 " aria-hidden="true"></i>
+                    Pianote
+                </a>
+            </li>
+            <li class="mb-1">
+                <a href="https://www.guitareo.com" target="_blank" class="text-base text-black py-2 w-full">
+                    <i class="fas fa-external-link mr-1 " aria-hidden="true"></i>
+                    Guitareo
+                </a>
+            </li>
+            <li class="mb-1">
+                <a href="https://www.singeo.com" target="_blank" class="text-base text-black py-2 w-full">
+                    <i class="fas fa-external-link mr-1 " aria-hidden="true"></i>
+                    Singeo
+                </a>
+            </li>
+        </ul>
+
         <span class="shim"></span>
     </div>
 </div>

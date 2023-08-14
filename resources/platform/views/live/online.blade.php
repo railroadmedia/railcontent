@@ -6,7 +6,7 @@
 
 @section('content')
 
-    <div class="fluid bg-grey-5 pv-3">
+    <div class="fluid pv-3">
         {{-- Youtube Live Embed --}}
         @include('partials.bladesora.members.content.lesson-video._live-embed', [
             "themeColor" => "{{ $brand }}",

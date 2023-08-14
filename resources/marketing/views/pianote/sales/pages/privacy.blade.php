@@ -9,7 +9,7 @@
 
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
 
     <style>
         h1, h2, h3, p {
@@ -259,7 +259,7 @@
         <h3 class="font-bold md:text-lg mt-10">Other Affiliate Networks</h3>
         <p class="py-2">Aside from the Amazon Associates Program, Musora Media is a part of several other affiliate networks, including Impact, Thomann, and Commission Junction.</p>
         <p class="py-2">Being a part of these networks makes it possible to support a team of writers who help provide the latest and most in-depth information about the world of music. Opinions presented on the site are those of Musora Media, or our team of writers who at times may post their own opinions.</p>
-        <p class="py-2">We greatly appreciate it when you choose to use our links to buy products and we aim to be upfront about products we receive compensation for -- and again, these add no extra costs to any of your purchases.</p>
+        <p class="py-2">We greatly appreciate it when you choose to use our links to buy products and we aim to be upfront about products we receive compensation for — and again, these add no extra costs to any of your purchases.</p>
         <h2 class="font-bold md:text-2xl mt-10 mb-4">Children's Privacy</h2>
         <p class="py-2">Our Service does not address anyone under the age of 18 ("Children").</p>
         <p class="py-2">We do not knowingly collect personally identifiable information from anyone under the age of 18. If you are a parent or guardian and you are aware that your Children has provided us with Personal Data, please contact us. If we become aware that we have collected Personal Data from children without verification of parental consent, we take steps to remove that information from our servers.</p>

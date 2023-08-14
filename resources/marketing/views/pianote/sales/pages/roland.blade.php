@@ -34,7 +34,7 @@
 @endsection
 @section('promo-banner')
     <header class="text-center text-white" style="background-color:#0e1213;">
-        <div class="container relative mx-auto px-2 md:px-0 pb-7 md:pb-12 lg:pb-16 pt-3 lg:pt-5 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1920,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/trials/roland/header.jpg);">
+        <div class="container relative mx-auto px-2 md:px-0 pb-7 md:pb-12 lg:pb-16 pt-3 lg:pt-5 bg-cover bg-top" style="background-image:url(https://www.musora.com/musora-cdn/image/width=1920,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/trials/roland/header.jpg);">
             <div class="z-10 relative">
                 <h5 class="text-light-navy mb-1"><em>Learn piano for FREE with</em></h5>
                 <img class="w-64 md:w-80 lg:w-96" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/trials/roland/pianote-roland-logo-blue.png"><br>
@@ -106,7 +106,7 @@
                 </form>
                 <div class="disclaimer block opacity-70 mx-auto mt-3 max-w-lg">
                     <div class="flex w-full">
-                    <i class="fal fa-info-circle leading-none text-xl md:text-3xl" style="width:40px"></i>
+                    <i class="fa-light fa-info-circle leading-none text-xl md:text-3xl" style="width:40px"></i>
                     <p class="mx-auto text-left leading-tight pl-2 text-xs"><em>By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</em></p>
                     </div>
                 </div>

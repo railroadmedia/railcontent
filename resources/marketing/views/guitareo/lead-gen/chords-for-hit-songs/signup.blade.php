@@ -46,15 +46,15 @@
 
     @parent
 
-    <link rel="preload" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/song-in-an-hour.css') }}"></noscript>
+    <link rel="preload" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/song-in-an-hour.css') }}"></noscript>
     <style>
         i.fa-check {
             color: #00C9AC;
         }
 
         header {
-            background-image: url('https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/header-bg-m.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/header-bg-m.jpg');
             background-size: 450px;
             background-position-x: center;
             background-position-y: 0px;
@@ -65,12 +65,12 @@
         }
 
         .footer {
-            background-image: url('https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/footer-bg-m.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/footer-bg-m.jpg');
         }
 
         @media (min-width:768px){
             header {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/header-bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/header-bg.jpg');
                 background-size: 1600px;
                 background-position-x: center;
                 background-position-y: top;
@@ -81,7 +81,7 @@
             }
 
             .footer {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/footer-bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/footer-bg.jpg');
                 background-size: 1700px;
                 background-position: center;
             }
@@ -93,10 +93,11 @@
     <header class="pt-3 pb-6 md:py-20 bg-no-repeat bg-musora-black">
         <div class="max-w-md md:max-w-5xl mx-auto md:flex px-4">
             <div class="md:w-1/2 text-center md:text-left">
-                <img class="h-24 md:h-40 md:mb-8 md:pl-3 inline-block lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
+                <img class="h-24 md:h-40 md:mb-8 md:pl-3 inline-block lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
                 <h6 class="font-extrabold text-white mb-6 pl-2 md:pl-3">Sign-up for your free online lessons today!</h6>
                 <div class="md:max-w-md lg:max-w-auto lg:w-3/4">
-                    @include('guitareo.lead-gen.partials._sign-up-form-tw', [
+                    @include("guitareo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                         "formId" => "Guitareo - Engagement - Trigger - Guitar Chords for Hit Songs - Web Form",
                         "formName" => 'Guitar Chords for Hit Songs',
                         "redirectURL" => "/chords-for-hit-songs/thank-you",
@@ -119,7 +120,7 @@
             <p class="text-center mb-6">Unlock your potential to play thousands of popular songs.</p>
             <div class="md:flex md:flex-wrap md:items-center mb-10">
                 <div class="md:w-1/2 md:pr-10 mb-6 md:mb-0">
-                    <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/collage.png" alt="collage image">
+                    <img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/collage.png" alt="collage image">
                 </div>
                 <div class="md:w-1/2 rounded-xl border py-6 px-4 md:pl-10" style="border-color:#E0E0E0;">
                     <p class="font-bold md:text-center mb-4">Gain 3 essential guitar skills to play songs:</p>
@@ -131,8 +132,8 @@
                 </div>
             </div>
             <picture>
-                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/chords.png">
-                <img class="w-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/chords-m.png" alt="chords">
+                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/chords.png">
+                <img class="w-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/chords-m.png" alt="chords">
             </picture>
         </div>
     </section>
@@ -149,7 +150,7 @@
             <div class="grid grid-cols-2 md:grid-cols-3 gap-6 mb-14">
                 @foreach ($albums as $key => $album)
                     <div @if($key === 0) class="md:mb-6" @endif>
-                        <img class="lazyload rounded-md" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $album['img'] }}" alt="{{ $album['title'] }}">
+                        <img class="lazyload rounded-md" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $album['img'] }}" alt="{{ $album['title'] }}">
                         <p>
                             <span class="font-bold">{{ $album['title'] }}</span><br>
                             {{ $album['artist'] }}
@@ -165,7 +166,7 @@
         <div class="max-w-md md:max-w-5xl px-4 mx-auto md:flex">
             <div class="md:w-1/2">
                 <div class="md:pl-3 text-white text-center md:text-left">
-                    <img class="h-32 mb-8 inline-block lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
+                    <img class="h-32 mb-8 inline-block lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/chords-for-hit-songs/logo.png" alt="logo">
                     <p class="font-bold italic mb-2">Start to sound amazing with 4 guitar chords and <br class="hidden lg:inline">3 essential skills to play hit songs</p>
                     <p class="leading-relaxed"><i class="fas fa-check mr-2 text-xl" aria-hidden="true"></i>Guided play-along lessons.</p>
                     <p class="leading-relaxed"><i class="fas fa-check mr-2 text-xl" aria-hidden="true"></i>Free chord chart diagram.</p>
@@ -173,7 +174,8 @@
                 </div>
 
                 <div class="md:max-w-md lg:max-w-auto lg:w-3/4">
-                    @include('guitareo.lead-gen.partials._sign-up-form-tw', [
+                    @include("guitareo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                         "formId" => "Guitareo - Engagement - Trigger - Guitar Chords for Hit Songs - Web Form",
                         "formName" => 'Guitar Chords for Hit Songs',
                         "redirectURL" => "/chords-for-hit-songs/thank-you",

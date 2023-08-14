@@ -37,17 +37,17 @@
             </div>
         </div>
     </a>
-    <header class="text-white text-center sm:text-left pt-7 md:pt-20 px-6 pb-7 md:pb-0" style="background: #010a2b url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/header-background.jpg) center bottom/cover;">
+    <header class="text-white text-center sm:text-left pt-7 md:pt-20 px-6 pb-7 md:pb-0" style="background: #010a2b url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/header-background.jpg) center bottom/cover;">
         <div class="container mx-auto max-w-5xl">
             <div class="flex flex-wrap justify-center items-end lg:items-center">
                 <div class="w-10/12 sm:w-1/2 {{--lg:w-7/12--}} sm:order-1 text-right sm:pl-4 lg:pl-0">
                     <div class="relative inline-block align-bottom z-10 w-1/3" style="max-width:190px;margin-right: -6%;">
                         <video class="absolute top-0 left-0 right-0 bottom-0 w-full p-1 rounded-2xl overflow-hidden" src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/tom-sawyer.mp4" muted autoplay loop playsinline></video>
-                        <img src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/phone-background.png" alt="phone-background">
+                        <img src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/phone-background.png" alt="phone-background">
                     </div>
                     <div class="relative inline-block align-bottom z-0 w-2/3" style="max-width:420px">
                         <div class="absolute rounded-xl overflow-hidden bg-white bg-cover bg-center" style="top: 1.5%;left: 1.5%;right: 1.5%;bottom: 7%;background-image:url(https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/tablet-screen2.png);"></div>
-                        <img src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/tablet-background.png" alt="tablet-background">
+                        <img src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/tablet-background.png" alt="tablet-background">
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 {{--lg:w-5/12--}} mt-5 sm:mt-0 {{--lg:mt-14--}}">
@@ -58,7 +58,8 @@
                         <s class="opacity-50">40</s> <strong class="text-coaches">100</strong> of drumming’s biggest songs FREE.
                     </h6>
                     <div class="mx-auto sm:mx-0 text-center" style="max-width:470px">
-                        @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                        @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                                 "formName" => '40 Songs',
                                 "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
                                 "buttonText" => "Get It Now ",
@@ -105,21 +106,21 @@
             </h6>
             <div class="flex-container w-full mx-auto md:max-w-6xl md:flex items-center px-5 md:px-8 mb-9 md:mb-10 mt-4 md:mt-16 lg:mt-20">
                 <div class="pic-wrap">
-                    <img class="lazyload side-pic" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-1.png" alt="songs-1">
-                    <img class="lazyload side-pic mobile-feature" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-2-alt.png" alt="songs-2">
-                    <img class="lazyload side-pic" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-3.png" alt="songs-3">
-                    <img class="lazyload side-pic" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-5.png" alt="songs-4">
+                    <img class="lazyload side-pic" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-1.png" alt="songs-1">
+                    <img class="lazyload side-pic mobile-feature" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-2-alt.png" alt="songs-2">
+                    <img class="lazyload side-pic" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-3.png" alt="songs-3">
+                    <img class="lazyload side-pic" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-5.png" alt="songs-4">
                 </div>
                 <div class="text-left">
                     <div class="text-icon-wrap active">
-                        <i class="text-songs fal fa-music"></i>
+                        <i class="text-songs fa-light fa-music"></i>
                         <div>
                             <h3><strong>Find the perfect tempo.</strong></h3>
                             <p>Slow down or speed up any section of a song to hear every note your favorite drummer plays. When you’ve nailed the part, bump the tempo back up and rock out in real time.</p>
                         </div>
                     </div>
                     <div class="text-icon-wrap">
-                        <i class="text-songs fal fa-repeat"></i>
+                        <i class="text-songs fa-light fa-repeat"></i>
                         <div>
                             <h3><strong>Loop the trouble spots.</strong></h3>
                             <p>No more pausing and rewinding when you mess up that fill. Simply grab the section of the song and loop it over, and over, and over until you’ve got it down.</p>
@@ -129,14 +130,14 @@
                         <i class="text-songs icon-metronome"></i>
                         <div>
                             <h3><strong>Counting just got easier.</strong></h3>
-                            <p>Add or remove the metronome to help you count out the beats in a bar. This makes learning songs of all levels easier -- even that odd-time Rush song!</p>
+                            <p>Add or remove the metronome to help you count out the beats in a bar. This makes learning songs of all levels easier — even that odd-time Rush song!</p>
                         </div>
                     </div>
                     <div class="text-icon-wrap">
-                        <i class="text-songs fal fa-phone-laptop"></i>
+                        <i class="text-songs fa-light fa-phone-laptop"></i>
                         <div>
                             <h3><strong>Available on all your devices.</strong></h3>
-                            <p>Load up DrumeoSONGS on your phone during practice time, your laptop when you’re behind the kit, and your tablet at the gig -- wherever the music takes you!</p>
+                            <p>Load up DrumeoSONGS on your phone during practice time, your laptop when you’re behind the kit, and your tablet at the gig — wherever the music takes you!</p>
                         </div>
                     </div>
                 </div>
@@ -149,17 +150,18 @@
         "textColor" => "white",
     ])
 
-    <section class="text-center py-14 md:py-24 lg:py-32 text-white bg-black bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/order-background.jpg">
+    <section class="text-center py-14 md:py-24 lg:py-32 text-white bg-black bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/order-background.jpg">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
                 <h1 class="leading-none uppercase font-bebas"><span class="text-coaches">100 Drumming Anthems</span><br> Every. Single. Note.</h1>
                 <p class="text-coaches my-2 sm:my-3">EXPANDED EDITION</p>
                 <h5 class="mb-6 lg:mb-9 leading-normal">
                     <strong>For a LIMITED TIME, you’ll get 100 Drumeo Songs totally FREE.</strong><br>
-                    <em>Enter your email to grab note-for-note sheet music & handy playalong tools.</em>
+                    <em>Enter your email to grab note-for-note sheet music & handy play-along tools.</em>
                 </h5>
                 <div class="mx-auto" style="max-width:700px">
-                    @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                    @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                             "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
                                 "buttonText" => "Get It Now ",
                             "formName" => '40 Songs',
@@ -178,7 +180,8 @@
                     100 of drumming’s biggest songs FREE.
                 </strong>
             </h4>
-            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
             "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
                                 "buttonText" => "Get It Now ",
             "formName" => '40 Songs',

@@ -21,7 +21,6 @@
     @parent
     <script>
         $(document).ready(function () {
-            $(document).foundation();
             $('.instructors .instructor').click(function () {
                 if($(this).hasClass('active')) {
                     $('.instructors .instructor').removeClass('active');
@@ -35,6 +34,10 @@
     </script>
     <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
+
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
 
 @section('content')
 
@@ -56,7 +59,7 @@
                 Challenge
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
-            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
+            <img @click="trailer = true;" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
             <br>
             <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
             {{--<a class="join sold-out">Sold Out</a>--}}
@@ -70,13 +73,18 @@
                 @endif
             </p>
         </div>
-        <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/436834726?autoplay=1"
-                        frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-            <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
-        </div>
+
+        @component('_partials.components.video-modal',[
+            'name' => 'trailer',
+            'video' => '436834726',
+            'vimeo' => true,
+        ])
+            @slot('button')
+                <div class="text-center bg-white rounded-b-xl py-4">
+                    <a class="join blue" href="/ecommerce/add-to-cart?products[Drumeo-VaterSticks]=1">Grab A Pair &raquo;</a>
+                </div>
+            @endslot
+        @endcomponent
     </header>
 
 
@@ -88,7 +96,7 @@
                         class="show-for-medium"> drumsticks — giving you a longer-lasting stick you can count on.</h5>
 
             <div class="columns medium-4">
-                <i class="fal fa-axe text-blue"></i>
+                <i class="fa-light fa-axe text-blue"></i>
                 <h3>HICKORY WOOD </h3>
                 <p>
                     <em class="text-blue">For strength and durability.</em><br>
@@ -96,7 +104,7 @@
                 </p>
             </div>
             <div class="columns medium-4">
-                <i class="fal fa-tint text-blue"></i>
+                <i class="fa-light fa-tint text-blue"></i>
                 <h3>2X MOISTURE </h3>
                 <p>
                     <em class="text-blue">For longer-lasting sticks.</em><br>
@@ -104,7 +112,7 @@
                 </p>
             </div>
             <div class="columns medium-4">
-                <i class="fal fa-hand-sparkles text-blue"></i>
+                <i class="fa-light fa-hand-sparkles text-blue"></i>
                 <h3>HAND ROLLED </h3>
                 <p>
                     <em class="text-blue">For better sticks, every time. </em><br>
@@ -124,8 +132,8 @@
                 <br><br> Drumeo has a bigger community than ever, with drummers all over the world playing in thousands of different situations. When I was thinking about our next drumstick, I didn’t want it to be just another drumstick with a Drumeo logo on it. I wanted a stick with the
                 <strong>versatility</strong> to meet a wide range of needs and the
                 <strong>durability</strong> to get your money's worth out of every pair.
-                <br><br> Vater’s high standards for quality and their grassroots, family-owned style really resonate with me. Growing up on a farm, these are the same values my dad displayed every day to get the job done. In many ways, partnering with Vater on these new Drumeo Drumsticks feels like working with family -- and that's important to me.
-                <br><br> Vater drumsticks have a rich history with Alan & Ron Vater’s grandfather, Jack Adams, starting out by making drumsticks for his jazz drummer friends in the Boston area --
+                <br><br> Vater’s high standards for quality and their grassroots, family-owned style really resonate with me. Growing up on a farm, these are the same values my dad displayed every day to get the job done. In many ways, partnering with Vater on these new Drumeo Drumsticks feels like working with family — and that's important to me.
+                <br><br> Vater drumsticks have a rich history with Alan & Ron Vater’s grandfather, Jack Adams, starting out by making drumsticks for his jazz drummer friends in the Boston area —
                 <strong>Buddy Rich, Elvin Jones, and Philly Joe Jones</strong>. That tradition of excellence continues today with Vater being used by drummers in the last nine Superbowl Halftime Shows!
                 <br><br> Your drumsticks are an extension of your unique personality behind the kit. That's why I'm so excited to partner with Vater, a company that has been helping drummers achieve excellence for a long time. When you pick up a pair of Drumeo 5A Drumsticks by Vater, you're not just picking up another pair of hickory drumsticks. You're picking up a pair of history.
             </p>

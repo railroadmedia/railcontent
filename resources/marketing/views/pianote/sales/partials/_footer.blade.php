@@ -1,6 +1,6 @@
 <div class="cookie-notice hide">
     <div class="text-wrap">
-        <p>We use cookies for traffic data and advertising. <a href="/cookie">learn more</a></p>
+        <p>We use cookies for traffic data and advertising. <a href="/cookie">Cookie Policy &raquo;</a></p>
         <div class="text-center">
             <div id="accept-cookies">OKAY GOT IT</div>
 
@@ -20,7 +20,7 @@
 
                 <input type="hidden" name="leadtracker_form_name" value="Pianote General">
                 <div class="infusion-field col-xs-12 form-group text-center medium-text-left lg:w-7/12 lg:pr-1">
-                    <input class="medium-body infusion-field-input-container" id="inf_field_Email" name="email" type="email" placeholder="Email Address..." required="">
+                    <input class="medium-body infusion-field-input-container" id="sign-up-email" name="email" type="email" placeholder="Email Address..." required="">
                 </div>
                 <div class="infusion-submit col-xs-12 form-group lg:w-5/12">
                     <button class="submit button-red infusion-recaptcha join-form-button border-pianote text-pianote hover:bg-pianote hover:text-black" type="submit">
@@ -42,11 +42,11 @@
         display: inline-block;
         margin-right: 2%;
         margin-top: 10px;" href="https://apps.apple.com/us/app/musora/id1619053766?ppid=afddd5f6-fbc3-46c9-b6e4-6c9e6a6936af" target="_blank">
-                <img src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store icon"></a>
+                <img src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/app/download-on-app-store-button.png" alt="app store icon"></a>
             <a style="width: 48%;max-width:130px;
         display: inline-block;
         margin-top: 10px;" href="https://play.google.com/store/apps/details?id=com.musoraapp&listing=pianote_previews" target="_blank">
-                <img src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play icon"></a>
+                <img src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/app/google-play-button.png" alt="google play icon"></a>
         </div>
         <div class="footer-link-wrap">
             <h1>Resources</h1>
@@ -75,7 +75,7 @@
     @endif
     <div class="footer-bottom" @if(!empty($minimal)) style="border-top: 0;padding-top: 0;" @endif>
         <div class="container mx-auto">
-            <img class="logo" src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png" alt="Pianote">
+            <img class="logo" src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png" alt="Pianote">
             @if(empty($minimal))
             <p><a rel="noopener" href="https://goo.gl/maps/c4JxakSmnjB2" target="_blank">107-31265 Wheel Ave. Abbotsford,<br class="mobile-only"> BC, V2T 6H2 Canada</a><br>
                 <a href="tel:+18004398921">Toll Free: 1-800-439-8921</a> / <br class="mobile-only"><a href="tel:+16048557605">Direct: 1-604-855-7605</a> / <br class="mobile-only"><a href="{{ get_musora_brand_base_url() }}/contact">Contact Us</a></p>

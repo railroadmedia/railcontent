@@ -43,7 +43,22 @@ Route::domain('{pianoteDomain}')
                 ]);
         }
     );
-    Route::get('/chord-hacks', [LeadGenController::class, 'chordHacks']);
+    Route::group(['prefix' => 'chord-hacks'],
+        function () {
+            Route::get('/{page?}', LeadGenController::class . '@chordHacks')
+                ->whereIn('page', [
+                    null, 'thank-you', 'ty-annual', 'ty-monthly'
+                ]);
+        }
+    );
+    Route::group(['prefix' => 'blues-piano-bootcamp'],
+        function () {
+            Route::get('/{page?}', LeadGenController::class . '@bluesPianoBootcamp')
+                ->whereIn('page', [
+                    null, 'thank-you', 'ty-annual', 'ty-monthly'
+                ]);
+        }
+    );
 
     Route::group(['prefix' => 'method'],
         function () {
@@ -57,7 +72,7 @@ Route::domain('{pianoteDomain}')
         function () {
             Route::get('/{page?}', LeadGenController::class . '@gstd')
                 ->whereIn('page', [
-                    null,'thank-you'
+                    null, 'thank-you', 'ty-annual', 'ty-monthly'
                 ]);
         }
     );

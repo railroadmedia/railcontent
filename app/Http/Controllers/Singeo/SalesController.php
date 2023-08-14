@@ -11,6 +11,14 @@ class SalesController extends BaseController
     {
         return view('singeo.sales.subscription', ['theme' => 'singeo']);
     }
+    public function restart()
+    {
+        return view('singeo.sales.restart', ['theme' => 'singeo']);
+    }
+    public function fiveReasons()
+    {
+        return view('singeo.sales.pages.5-reasons', ['theme' => 'singeo']);
+    }
 
     public function homeMonth()
     {
@@ -29,7 +37,7 @@ class SalesController extends BaseController
 
     public function trial2()
     {
-        return view('singeo.sales.subscription-split', ['theme' => 'singeo', 'trialVersion' => true, 'promoVersion' => 'true']);
+        return view('singeo.sales.subscription-split', ['theme' => 'singeo', 'trialVersion' => true]);
     }
 
     public function promo()

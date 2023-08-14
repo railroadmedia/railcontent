@@ -1,9 +1,18 @@
+@php
+    require_once(resource_path('marketing/views/drumeo/drumshop/bundles.php'))
+@endphp
+
 @extends('_partials.layout.global-shop-layout')
 
 @section('meta')
     <title>Drumeo Drum Shop - Get Lessons, T-Shirts, Gear, & Much More!</title>
     <meta name="description" content="Take your drumming to the next level with the largest collection of drum lessons in the world - or gear up for success with a selection of drum gear, t-shirts, sticks, and other cool drum swag.">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/og-image.jpg">
+
+{{--    @if(Carbon\Carbon::create(2023, 8, 1, 10, 0, 0, 'America/Vancouver') > Carbon\Carbon::now())--}}
+{{--        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-summer-share-image.jpg">--}}
+{{--    @else--}}
+        <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/og-image.jpg">
+{{--    @endif--}}
     <meta property="og:title" content="Drumeo Drum Shop - Get Lessons, T-Shirts, Gear, & Much More!">
     <meta property="og:description" content="Take your drumming to the next level with the largest collection of drum lessons in the world - or gear up for success with a selection of drum gear, t-shirts, sticks, and other cool drum swag.">
     <meta property="og:url" content="https://www.drumeo.com/drumshop/">
@@ -22,13 +31,13 @@
 @section('body')
     <header class="drum-shop-header relative">
         <picture>
-            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg">
-            <img class="absolute w-full h-full left-0 top-0 object-cover object-center" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg" alt="header background" fetchpriority="high" />
+            <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg">
+            <img class="absolute w-full h-full left-0 top-0 object-cover object-center" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/header-background.jpg" alt="header background" fetchpriority="high" />
         </picture>
 
         <div class="container mx-auto relative z-10">
             <div class="px-2 md:px-3">
-                <img class="h-6 md:h-9" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo" fetchpriority="high">
+                <img class="h-6 md:h-9" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="drumeo logo" fetchpriority="high">
                 <h1><strong>DRUM SHOP</strong></h1>
                 <p>GET LESSONS, MERCH, GEAR, & MUCH MORE</p>
             </div>
@@ -93,31 +102,36 @@
 
 
     <div class="white-box">
-        {{--        @include('_partials.layout.holiday.bundle-cards')--}}
+{{--        @include('_partials.layout.holiday.bundle-cards', [--}}
+{{--            "header" => 'Join Drumeo And Save 20%<br class="sm:hidden"> + Choose Your Bonus Bundle',--}}
+{{--        ])--}}
 
-        {{--        <section class="bundles">--}}
-        {{--            <div class="container mx-auto">--}}
-        {{--                <div class="float-left w-full px-2 md:px-3 card-wrap">--}}
-        {{--                    <div class="px-2 sm:px-0 max-w-xs sm:max-w-full mx-auto">--}}
-        {{--                        <a href="/drumshop/bundle-practice-anywhere/" class="flex flex-row-reverse text-white rounded-xl mx-auto mb-5 overflow-hidden relative w-full sm:text-left px-5 lg:px-12 pt-40 pb-5 sm:py-7 lg:py-8">--}}
-        {{--                            <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">--}}
-        {{--                                <img class="h-14 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/november/practice-anywhere-logo-wide-white.png"><br>--}}
-        {{--                                <p class="leading-tight my-3">P4 Practice Pad + Drumsticks<br class="inline lg:hidden"> + Rudiment Poster</p>--}}
-        {{--                                <h4 class="inline-block leading-none"><strong>--}}
-        {{--                                        <s class="opacity-60">$98.95</s>&nbsp; $79</strong></h4><br>--}}
-        {{--                                <div class="join white smaller mt-3 w-full">See The Deal &raquo;</div><br>--}}
-        {{--                            </div>--}}
-        {{--                            <p class="absolute z-20 top-0 left-0 text-white rounded-br-xl bg-promo uppercase py-1.5 px-2.5 leading-none text-xs font-roboto"><i class="fas fa-star"></i> <strong>SAVE 20%</strong></p>--}}
-        {{--                            <div class="hidden sm:block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/november/practice-anywhere-shop.jpg);"></div>--}}
-        {{--                            <div class="block sm:hidden absolute inset-0 z-0 bg-cover bg-right" style="background-color:#0d1d3f;background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/november/practice-anywhere-m.jpg);"></div>--}}
-        {{--                        </a>--}}
-        {{--                    </div>--}}
-        {{--                </div>--}}
+{{--        <section class="bundles" x-show="filter === 'all'">--}}
+{{--            <div class="container mx-auto">--}}
+{{--                <div class="float-left w-full px-2 md:px-3 card-wrap">--}}
+{{--                    <div>--}}
+{{--                        <a href="/drumshop/5-for-3-bundle/" class="flex flex-row text-white rounded-xl mx-auto mb-5 sm:mb-10 overflow-hidden relative w-full sm:text-left px-3 md:px-5 lg:px-[13%] pt-40 pb-5 sm:py-7 lg:py-8">--}}
+{{--                            <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">--}}
 
-        {{--            </div>--}}
-        {{--        </section>--}}
+{{--                                <img class="h-20 sm:h-24 md:h-28 lg:h-32" src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-logo-stacked.png"><br>--}}
+{{--                                <p class="leading-tight my-3 text-xs italic">A 5-Year Membership for the price of 3, and more!</p>--}}
+{{--                                <h4 class="inline-block leading-none"><strong>--}}
+{{--                                        <span class="opacity-60">Was <s>$2270</s></span>&nbsp; <span class="text-promo">Now $720</span></strong></h4><br>--}}
+{{--                                <div class="join white smaller mt-3 w-full bg-[#24CE7C] text-white p-[10px] md:max-w-md w-full text-[15px] lg:text-[17px]">See The Deal &raquo;</div><br>--}}
+{{--                            </div>--}}
+{{--                            <p class="absolute z-20 top-0 left-0 text-black rounded-br-xl bg-promo uppercase py-1.5 px-2.5 leading-none text-xs font-roboto"><i class="fas fa-star"></i> <strong>SAVE 20%</strong></p>--}}
+{{--                            <div class="hidden lg:block absolute inset-0 z-0 bg-cover bg-center" style="background-color:#05b4d7;background-image:url(https://www.musora.com/musora-cdn/image/width=3050,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-shop3.jpg);"></div>--}}
+{{--                            <div class="hidden sm:block lg:hidden absolute inset-0 z-0 bg-cover bg-center" style="background-color:#05b4d7;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-shop3.jpg);"></div>--}}
+{{--                            <div class="block sm:hidden absolute inset-0 z-0 bg-cover bg-top" style="background-color:#05b4d7;background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-5-for-3-shop-m3.jpg);"></div>--}}
+{{--                        </a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+
+{{--            </div>--}}
+{{--        </section>--}}
 
         {{--  LESSONS  --}}
+        <div id="lessons" class="anchor"></div>
         <section class="grid-view category-section" data-category="lessons" x-show="filter === 'lessons' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
@@ -126,11 +140,11 @@
                         Online Drum Lessons
                     </h1>
                 </li>
-                @include('drumeo.drumshop._partials._drum-shop-card', [
+                {{-- Drumeo annual membership --}}
+                @include('musora.shop._shop-card', [
                      "itemURL" => "/",
                      "sku" => null,
-                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/dcb-01.jpg",
-                     "packLogo" => 'https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png',
+                     "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/promos/july/drumeo-membership-shop.jpg",
                      "title" => "Drumeo Membership",
                      "packAuthor" => "Award-Winning Membership",
                      "cardDescription" => "The Ultimate Online Drum Lessons Experience. You’ll get step-by-step drum lessons from the best drummers in the world (and much more).",
@@ -142,7 +156,7 @@
                      'soldOut' => false,
                 ])
                 @foreach($lessons as $key => $lesson)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                         "sku" => $lesson->sku === 'drumeo' ? null : $lesson->sku,
                         "badgeText" => $lesson->badge_text,
@@ -162,11 +176,12 @@
                     ])
                 @endforeach
 
-                @include('drumeo.drumshop._partials._drum-shop-card', [
+                {{-- Drumeo gift card --}}
+                @include('musora.shop._shop-card', [
                     "itemURL" => "/drumshop/gift-card/",
                     "thumbnail" => "https://d1923uyy6spedc.cloudfront.net/Drumeo-cart-2-1643147388.png",
                     "title" => "Drumeo Gift Card",
-                    "cardDescription" => "Give the gift of drum lessons with a gift card to Drumeo -- with your choice between a one-month, 6-month, or 1-year membership pass.",
+                    "cardDescription" => "Give the gift of drum lessons with a gift card to Drumeo — with your choice between a one-month, 6-month, or 1-year membership pass.",
                     "fullPrice" =>29,
                     "price" => 29,
                     "category" => "card",
@@ -176,6 +191,7 @@
         </section>
 
         {{--   ACCESSORIES     --}}
+        <div id="accessories" class="anchor"></div>
         <section class="grid-view category-section" data-category="accessories" x-show="filter === 'accessories' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
@@ -185,7 +201,7 @@
                     </h1>
                 </li>
                 @foreach($accessories as $accessory)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                         "sku" => $accessory->sku,
                         "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                         "badgeText" => $accessory->badge_text,
@@ -195,7 +211,7 @@
                         "fullPrice" => $accessory->price,
                         "price" => $accessory->discounted_price,
                         "sizes" => $accessory->sizes,
-                        "soldOut" => !empty($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
+                        "soldOut" => isset($products[$accessory->sku]) ? $products[$accessory->sku]->getStockAvailability() === 0 : $accessory->sold_out,
                         "category" => strtolower($accessory->productType->name),
                         "size_case_sensitive" => $accessory->size_case_sensitive,
                     ])
@@ -204,6 +220,7 @@
         </section>
 
         {{--   HATS     --}}
+        <div id="hats" class="anchor"></div>
         <section class="grid-view category-section" data-category="hats" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
@@ -214,7 +231,7 @@
                 </li>
 
                 @foreach($hats as $hat)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                          "sku" => $hat->sku,
                          "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
                          "badgeText" => $hat->badge_text,
@@ -224,7 +241,7 @@
                          "fullPrice" => $hat->price,
                          "price" => $hat->discounted_price,
                          "sizes" => $hat->sizes,
-                         "soldOut" => !empty($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
+                         "soldOut" => isset($products[$hat->sku]) ? $products[$hat->sku]->getStockAvailability() === 0 : $hat->sold_out,
                          "category" => strtolower($hat->productType->name),
                          "size_case_sensitive" => $hat->size_case_sensitive,
                     ])
@@ -234,6 +251,7 @@
         </section>
 
         {{--   SHIRTS     --}}
+        <div id="shirts" class="anchor"></div>
         <section class="grid-view category-section" data-category="shirts" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
@@ -244,7 +262,7 @@
                 </li>
 
                 @foreach($shirts as $shirt)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                          "sku" => $shirt->sku,
                          "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                          "badgeText" => $shirt->badge_text,
@@ -254,12 +272,12 @@
                          "fullPrice" => $shirt->price,
                          "price" => $shirt->discounted_price,
                          "sizes" => $shirt->sizes,
-                         "soldOut" => !empty($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
+                         "soldOut" => isset($products[$shirt->sku]) ? $products[$shirt->sku]->getStockAvailability() === 0 : $shirt->sold_out,
                          "size_case_sensitive" => $shirt->size_case_sensitive,
                          "category" => strtolower($shirt->productType->name),
                     ])
                 @endforeach
-                @include('drumeo.drumshop._partials._drum-shop-card', [
+                @include('musora.shop._shop-card', [
                      "badgeText" => "SEE MORE ON TEESPRING",
                      "itemURL" => "https://teespring.com/stores/drumeo",
                      "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/teespring.jpg",
@@ -277,6 +295,7 @@
         </section>
 
         {{--   HOODIES     --}}
+        <div id="hoodies" class="anchor"></div>
         <section class="grid-view category-section" data-category="hoodies" x-show="filter === 'clothing' || filter === 'all'">
             <ul class="container mx-auto fixed-cards">
                 <li>
@@ -286,7 +305,7 @@
                     </h1>
                 </li>
                 @foreach($hoodies as $hoodie)
-                    @include('drumeo.drumshop._partials._drum-shop-card', [
+                    @include('musora.shop._shop-card', [
                          "sku" => $hoodie->sku,
                          "itemURL" => '/drumshop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                          "badgeText" => $hoodie->badge_text,
@@ -296,7 +315,7 @@
                          "fullPrice" => $hoodie->price,
                          "price" => $hoodie->discounted_price === '0.00' || empty($hoodie->discounted_price) ? $hoodie->price : $hoodie->discounted_price,
                          "sizes" => $hoodie->sizes,
-                         "soldOut" => !empty($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 : $hoodie->sold_out,
+                         "soldOut" => isset($products[$hoodie->sku]) ? $products[$hoodie->sku]->getStockAvailability() === 0 : $hoodie->sold_out,
                          "category" => strtolower($hoodie->productType->name),
                          "size_case_sensitive" => $hoodie->size_case_sensitive,
                     ])
@@ -308,5 +327,13 @@
 
 @section('layout-footer')
     @include("drumeo.sales.partials._footer")
+@endsection
+
+@section('layout-scripts')
+    @parent
+    @include('_partials.components.countdown',[
+        'countdownDate' => '2023-07-31 23:59:59',
+        'promoVersion' => true
+    ])
 @endsection
 

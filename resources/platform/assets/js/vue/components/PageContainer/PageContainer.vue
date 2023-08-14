@@ -1,7 +1,10 @@
 <script setup>
 import { ref, provide, onBeforeMount, onMounted, onUnmounted, onUpdated } from "vue";
+import { storeToRefs  } from 'pinia';
 import { useNotificationStore } from '../../../stores/notification';
 import { useConfirmationStore } from '../../../stores/confirmation';
+import { usePlaylistsStore } from '../../../stores/playlists';
+import { usePageContainerStore } from '../../../stores/pageContainer';
 import NotificationToasts from '../../vuesora/components/NotificationToasts/NotificationToasts.vue';
 import Navbar from "../Navbar/Navbar.vue";
 import ConfirmationModal from "../Modal/ConfirmationModal.vue";
@@ -10,6 +13,7 @@ import Footer from "../Footer/Footer.vue";
 // import { useRouter, useRoute } from "vue-router";
 import SpriteSheet from "../MusoraIcons/SpriteSheet.vue";
 import { setEndpointPrefix } from "../../utils"
+import PlaylistsModal from "../Playlists/Modals/PlaylistsModal.vue";
 
 const props = defineProps({
   brand: {
@@ -50,20 +54,34 @@ const props = defineProps({
       type: Boolean,
       default: true
   },
+  playlists: {
+    type: Array,
+    default: [],
+  },
+  mostRecentPlaylists:{
+    type: Array,
+    default: []
+  },
+  csrf_token: {
+      type: String,
+      required: true
+  }
 });
 
+const pageContainerStore = usePageContainerStore();
 const notification = useNotificationStore();
 const confirmation = useConfirmationStore();
+const playlistsStore = usePlaylistsStore();
+const { modalOpen: playlistModalProps } = storeToRefs(playlistsStore);
 
-const isSidebarCollapsed = ref(false);
-const isSidebarHidden = ref(false);
 const isDarkModeSelected = ref(false);
 
 provide('isDarkModeSelected', isDarkModeSelected);
 provide('userAvatar', props.userAvatar);
 provide('userName', props.userName);
 provide('userId', props.userId);
-provide('isSidebarCollapsed', isSidebarCollapsed);
+provide('csrf_token', props.csrf_token);
+provide('isSidebarCollapsed', pageContainerStore.isSidebarCollapsed);
 
 const setDarkMode = (isSelected) => {
   const body = document.getElementById("app-body");
@@ -76,20 +94,20 @@ const setDarkMode = (isSelected) => {
 
 const onCollapseSidebar = (val) => {
   if (typeof val === "boolean") {
-    isSidebarCollapsed.value = val;
-    isSidebarHidden.value = val;
+    pageContainerStore.isSidebarCollapsed = val;
+    pageContainerStore.isSidebarHidden = val;
   } else {
     const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
 
     if (smallBreakpoint.matches) {
-      isSidebarHidden.value = !isSidebarHidden.value;
-      isSidebarCollapsed.value = false;
-      localStorage.setItem("isSidebarHidden", isSidebarHidden.value);
+      pageContainerStore.isSidebarHidden = !pageContainerStore.isSidebarHidden;
+      pageContainerStore.isSidebarCollapsed = false;
+      localStorage.setItem("isSidebarHidden", pageContainerStore.isSidebarHidden);
     } else {
-      isSidebarHidden.value = false;
-      isSidebarCollapsed.value = !isSidebarCollapsed.value;
+      pageContainerStore.isSidebarHidden = false;
+      pageContainerStore.isSidebarCollapsed = !pageContainerStore.isSidebarCollapsed;
       //Dom manipulation...
-      if (isSidebarCollapsed.value) {
+      if (pageContainerStore.isSidebarCollapsed) {
         document.body.classList.add('sidebar-collapsed')
       } else {
         document.body.classList.remove('sidebar-collapsed')
@@ -97,7 +115,7 @@ const onCollapseSidebar = (val) => {
     }
   }
   //save to local storage
-  localStorage.setItem("isSidebarCollapsed", isSidebarCollapsed.value);
+  localStorage.setItem("isSidebarCollapsed", pageContainerStore.isSidebarCollapsed);
 };
 
 const onColorModeToggle = (val) => {
@@ -131,22 +149,23 @@ onBeforeMount(() => {
 
   if (smallBreakpoint.matches) {
     //Close sidebar by default in mobile
-    if (!isSidebarHidden.value) {
-      isSidebarHidden.value = true;
-      isSidebarCollapsed.value = false;
+    if (!pageContainerStore.isSidebarHidden) {
+      pageContainerStore.isSidebarHidden = true;
+      pageContainerStore.isSidebarCollapsed = false;
     }
   } else if (localStorage.getItem("isSidebarCollapsed") && !props.forceSidebarHidden) {
     // On desktop load the sidebar collapsed value saved on local storage, if the hidden state is not forced
-    isSidebarCollapsed.value = JSON.parse(localStorage.getItem("isSidebarCollapsed"));
+    pageContainerStore.isSidebarCollapsed = JSON.parse(localStorage.getItem("isSidebarCollapsed"));
     //Dom manipulation...
-    if (isSidebarCollapsed.value) {
+    if (pageContainerStore.isSidebarCollapsed) {
       document.body.classList.add('sidebar-collapsed')
     } else {
       document.body.classList.remove('sidebar-collapsed')
     }
   } else if (props.forceSidebarHidden) {
-    isSidebarCollapsed.value = true;
+    pageContainerStore.isSidebarCollapsed = true;
   }
+
   setEndpointPrefix();
 
   // Attach notification push to window
@@ -154,11 +173,21 @@ onBeforeMount(() => {
     notification.push(n);
   };
 
-// Attach confirmation update to window
-window.showconfirmationmodal = (n) => {
-  confirmation.update(n);
-};
-})
+  // Attach confirmation update to window
+  window.showconfirmationmodal = (n) => {
+    confirmation.update(n);
+  };
+
+  // Attach pinia playlist modal to window
+  window.openplaylistmodal = (modalOpen) => {
+    playlistsStore.openModal(modalOpen);
+    pageContainerStore.isPlaylistModalOpen = true;
+  };
+
+  // Initialize playlists pinia store
+  playlistsStore.updateSidebarPlaylists({ sidebarPlaylists: props.mostRecentPlaylists })
+  playlistsStore.update({ pinnedPlaylists: props.playlists });
+});
 
 const handleCloseConfirmationModal = () => {
   confirmation.callbacks.cancel();
@@ -169,11 +198,22 @@ const handleNotificationClear = () => {
   notification.clear();
 };
 
+const handleClosePlaylistModal = () => {
+  playlistsStore.modalReset();
+  pageContainerStore.isPlaylistModalOpen = false;
+};
+
 const onResize = (e) => {
   const smallBreakpoint = window.matchMedia("(max-width: 1023px)");
   if (smallBreakpoint.matches) {
-    isSidebarHidden.value = true;
-    isSidebarCollapsed.value = false;
+    pageContainerStore.isSidebarHidden = true;
+    pageContainerStore.isSidebarCollapsed = false;
+  } else {
+      pageContainerStore.isSidebarHidden = false;
+
+      if(playlistsStore.playerExpanded) {
+        pageContainerStore.isSidebarCollapsed = true;
+      }
   }
 }
 
@@ -184,6 +224,7 @@ const handleSubmit = () => {
 
 onMounted(() => {
   //Check if Mobile on Resize
+  //   console.log('most recent ', props.mostRecentPlaylists)
   window.addEventListener("resize", onResize);
 })
 
@@ -191,12 +232,15 @@ onUnmounted(() => {
   window.removeEventListener("resize", onResize);
 })
 
+onUpdated(() => {
+  // console.log(playlistsStore.modalOpen)
+});
 </script>
 
 <template>
   <main class="tw-min-h-screen tw-w-screen">
     <sprite-sheet></sprite-sheet>
-    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" :slideClass="notification.slideClass" @onClose="handleNotificationClear" />
+    <NotificationToasts :icon="notification.icon" :text="notification.text" :isError="notification.isError" :slideClass="notification.slideClass" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed" @onClose="handleNotificationClear" />
     <ConfirmationModal
       v-if="confirmation.title"
       :brand="brand"
@@ -209,12 +253,16 @@ onUnmounted(() => {
       @onCancel="handleCloseConfirmationModal"
       @onSubmit="handleSubmit"
     />
+    <PlaylistsModal @onClosePlaylistsModal="handleClosePlaylistModal" key="playlists-modal-key" v-if="pageContainerStore.isPlaylistModalOpen" :modalProps="playlistModalProps" :brand="brand"></PlaylistsModal>
 
     <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications"
-      :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="isSidebarHidden"
-      :isDarkModeSelected="isDarkModeSelected" :isSidebarCollapsed="isSidebarCollapsed"
+      :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="pageContainerStore.isSidebarHidden"
+      :isDarkModeSelected="isDarkModeSelected" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
       :canReferNewStudents="canReferNewStudents"
-      @onCollapseSidebar="onCollapseSidebar" @onColorModeToggle="onColorModeToggle" />
+      :is-live="isLive"
+      @onCollapseSidebar="onCollapseSidebar"
+      @onColorModeToggle="onColorModeToggle"
+    />
 
     <!-- Page Container -->
     <div class="
@@ -224,13 +272,14 @@ onUnmounted(() => {
       ">
 
       <!-- Sidebar -->
-      <Sidebar :brand="brand" :isLive="isLive" :isSidebarCollapsed="isSidebarCollapsed"
-        :isSidebarHidden="isSidebarHidden" @onCollapseSidebar="onCollapseSidebar"
-        :forceSidebarHidden="forceSidebarHidden" />
+      <Sidebar :brand="brand" :isLive="isLive" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
+        :isSidebarHidden="pageContainerStore.isSidebarHidden" @onCollapseSidebar="onCollapseSidebar"
+        :forceSidebarHidden="forceSidebarHidden" :user-id="userId" />
 
       <!-- Content Container -->
       <main class="
           tw-flex
+          tw-justify-between
           tw-w-full
           tw-h-full
           tw-min-h-screen
@@ -245,7 +294,7 @@ onUnmounted(() => {
           {{ adminMessage }}
         </h2>
         <!-- Content -->
-        <section class="tw-flex tw-flex-col tw-grow tw-w-full">
+        <section class="tw-w-full">
           <slot :is-dark-mode="isDarkModeSelected" />
         </section>
 
@@ -254,7 +303,7 @@ onUnmounted(() => {
 
         <!-- Sidebar Content Wrapper -->
         <Transition name="fade">
-          <div v-if="!isSidebarCollapsed && !isSidebarHidden" @click="isSidebarHidden = true" class="
+          <div v-if="!pageContainerStore.isSidebarCollapsed && !pageContainerStore.isSidebarHidden" @click="pageContainerStore.isSidebarHidden = true" class="
               tw-fixed
               lg:tw-hidden
               tw-top-0 tw-left-0 tw-w-full tw-h-full tw-z-10 tw-bg-black/30

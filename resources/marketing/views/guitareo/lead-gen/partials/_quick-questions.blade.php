@@ -2,7 +2,7 @@
     <div class="flex max-w-6xl mx-auto">
         <div class="px-3 md:px-4 sm:w-1/3">
             <h2 class="font-bold text-xl leading-tight mx-auto mb-4 md:text-2xl md:mb-6">Is this really free?</h2>
-            <p class="leading-normal mx-auto mb-5 md:my-0 lg:text-lg">Yes! We love sharing videos to help guitarists -- and deep down we hope you’ll see some of the value that we provide inside Guitareo juuuuust in case you ever want to consider joining!</p>
+            <p class="leading-normal mx-auto mb-5 md:my-0 lg:text-lg">Yes! We love sharing videos to help guitarists — and deep down we hope you’ll see some of the value that we provide inside Guitareo juuuuust in case you ever want to consider joining!</p>
         </div>
         <div class="px-3 md:px-4 sm:w-2/3">
             <h2 class="font-bold text-xl leading-tight mx-auto mb-4 md:text-2xl md:mb-6">Why do I need to give my email address?</h2>

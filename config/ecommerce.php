@@ -314,6 +314,19 @@ return [
                 'paypal_api_checkout_cancel_url' => env('SINGEO_PAYPAL_API_CHECKOUT_CANCEL_URL'),
                 'paypal_api_test_billing_agreement_id' => '',
             ],
+            'musora' => [
+                'paypal_api_username' => env('MUSORA_PAYPAL_API_USERNAME'),
+                'paypal_api_password' => env('MUSORA_PAYPAL_API_PASSWORD'),
+                'paypal_api_signature' => env('MUSORA_PAYPAL_API_SIGNATURE'),
+                'paypal_api_currency_code' => env('MUSORA_PAYPAL_API_CURRENCY_CODE'),
+                'paypal_api_version' => env('MUSORA_PAYPAL_API_VERSION'),
+                'paypal_api_nvp_curl_url' => env('MUSORA_PAYPAL_API_NVP_CURL_URL'),
+                'paypal_api_checkout_return_route' => 'order-form.submit-paypal',
+                'paypal_api_checkout_redirect_url' => env('MUSORA_PAYPAL_API_CHECKOUT_REDIRECT_URL'),
+                'paypal_api_checkout_return_url' => env('MUSORA_PAYPAL_API_CHECKOUT_RETURN_URL'),
+                'paypal_api_checkout_cancel_url' => env('MUSORA_PAYPAL_API_CHECKOUT_CANCEL_URL'),
+                'paypal_api_test_billing_agreement_id' => env('MUSORA_PAYPAL_API_TEST_BILLING_AGREEMENT_ID'),
+            ]
         ],
 
         'stripe' => [
@@ -332,6 +345,10 @@ return [
             'singeo' => [
                 'stripe_api_secret' => env('SINGEO_STRIPE_API_SECRET'),
                 'stripe_publishable_key' => env('SINGEO_STRIPE_PUBLISHABLE_KEY'),
+            ],
+            'musora' => [
+                'stripe_api_secret' => env('MUSORA_STRIPE_API_SECRET'),
+                'stripe_publishable_key' => env('MUSORA_STRIPE_PUBLISHABLE_KEY'),
             ],
         ],
 
@@ -370,6 +387,8 @@ return [
         // live products
         'drumeo_app_1_year_member' => 'DLM-1-year',
         'drumeo_app_monthly_member' => 'DLM-1-month',
+//        'drumeo_app_1_year_member' => 'DLM-Trial-Annual-7-Day',
+//        'drumeo_app_monthly_member' => 'DLM-Trial-1-month',
 
         //2021 products
         'drumeo_app_1_year_2021' => 'DLM-1-year',
@@ -381,6 +400,8 @@ return [
         //2021 products
         'pianote_app_1_year_membership_2021' => 'PIANOTE-MEMBERSHIP-1-YEAR',
         'pianote_app_1_month_membership_2021' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+//        'pianote_app_1_year_membership_2021' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+//        'pianote_app_1_month_membership_2021' => 'PIANOTE-MEMBERSHIP-TRIAL',
 
         // todo - update stage/local env products apple id => local product sku
         'test' => 'PIANOTE-MEMBERSHIP-1-YEAR',
@@ -412,8 +433,10 @@ return [
         'test_6month' => '6-MONTH-MEMBERSHIP',
 
         //musora products
-        'musora_app_monthly_member' => 'DLM-1-month',
-        'musora_app_1_year_member' => 'DLM-1-year',
+        'musora_app_monthly_member' => 'musora-monthly-recurring-membership',
+        'musora_app_1_year_member' => 'musora-annual-recurring-membership',
+//        'musora_app_monthly_member' => 'musora-monthly-recurring-7-day-trial-membership',
+//        'musora_app_1_year_member' => 'musora-annual-recurring-7-day-trial-membership',
     ],
 
     'google_store_products_map' => [
@@ -421,9 +444,12 @@ return [
         // live products
         'drumeo_app_1_year_member' => 'DLM-1-year',
         'drumeo_app_1_month_member' => 'DLM-1-month',
+//        'drumeo_app_1_year_member' => 'DLM-Trial-Annual-7-Day',
+//        'drumeo_app_1_month_member' => 'DLM-Trial-1-month',
 
         //2021 products
         'drumeo_app_1_year_2021' => 'DLM-1-year',
+//        'drumeo_app_1_year_2021' => 'DLM-Trial-Annual-7-Day',
         'drumeo_app_1_month_2021' => 'DLM-1-month',
 
         'anatomy_of_a_drum_solo' => 'AOADS-DIGI',
@@ -452,10 +478,14 @@ return [
         // todo - update production products play store id => local product sku
         'pianote_app_1_year_member' => 'PIANOTE-MEMBERSHIP-1-YEAR',
         'pianote_app_1_month_member' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+//        'pianote_app_1_year_member' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+//        'pianote_app_1_month_member' => 'PIANOTE-MEMBERSHIP-TRIAL',
 
         //2021 products
         'pianote_app_1_year_2021' => 'PIANOTE-MEMBERSHIP-1-YEAR',
         'pianote_app_1_month_2021' => 'PIANOTE-MEMBERSHIP-1-MONTH',
+//        'pianote_app_1_year_2021' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+//        'pianote_app_1_month_2021' => 'PIANOTE-MEMBERSHIP-TRIAL',
 
         // todo - update stage/local env products play store id => local product sku
         '2' => 'PIANOTE-MEMBERSHIP-1-YEAR',
@@ -464,8 +494,52 @@ return [
         'test.pianote' => 'PIANOTE-MEMBERSHIP-1-YEAR',
 
         //Musora app
-        'musora_monthly_subscription' => 'DLM-1-month',
-        'musora_annual_subscription' => 'DLM-1-year',
+        'musora_monthly_subscription' => 'musora-monthly-recurring-membership',
+        'musora_annual_subscription' => 'musora-annual-recurring-membership',
+//        'musora_monthly_subscription' => 'musora-monthly-recurring-7-day-trial-membership',
+//        'musora_annual_subscription' => 'musora-annual-recurring-7-day-trial-membership',
+    ],
+
+    'apple_store_products_map_trial' => [
+
+        // live products
+        'drumeo_app_1_year_member' => 'DLM-Trial-Annual-7-Day',
+        'drumeo_app_monthly_member' => 'DLM-Trial-1-month',
+
+        //2021 products
+        'drumeo_app_1_year_2021' => 'DLM-Trial-Annual-7-Day',
+        'drumeo_app_1_month_2021' => 'DLM-Trial-1-month',
+
+        'pianote_app_1_year_membership' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+        'pianote_app_1_month_membership' => 'PIANOTE-MEMBERSHIP-TRIAL',
+
+        //2021 products
+        'pianote_app_1_year_membership_2021' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+        'pianote_app_1_month_membership_2021' => 'PIANOTE-MEMBERSHIP-TRIAL',
+
+        //musora products
+        'musora_app_monthly_member' => 'musora-monthly-recurring-7-day-trial-membership',
+        'musora_app_1_year_member' => 'musora-annual-recurring-7-day-trial-membership',
+    ],
+    'google_store_products_map_trial' => [
+        // live products
+        'drumeo_app_1_year_member' => 'DLM-Trial-Annual-7-Day',
+        'drumeo_app_1_month_member' => 'DLM-Trial-1-month',
+
+        //2021 products
+        'drumeo_app_1_year_2021' => 'DLM-Trial-Annual-7-Day',
+        'drumeo_app_1_month_2021' => 'DLM-Trial-1-month',
+
+        'pianote_app_1_year_member' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+        'pianote_app_1_month_member' => 'PIANOTE-MEMBERSHIP-TRIAL',
+
+        //2021 products
+        'pianote_app_1_year_2021' => 'PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL',
+        'pianote_app_1_month_2021' => 'PIANOTE-MEMBERSHIP-TRIAL',
+
+        //Musora app
+        'musora_monthly_subscription' => 'musora-monthly-recurring-7-day-trial-membership',
+        'musora_annual_subscription' => 'musora-annual-recurring-7-day-trial-membership',
     ],
 
     // paypal
@@ -676,6 +750,22 @@ return [
                 'invoice_view' => 'ecommerce::order_invoice',
             ],
         ],
+        'musora' => [
+            'subscription_renewal_invoice' => [
+                'invoice_sender' => 'support@musora.com',
+                'invoice_sender_name' => 'Musora',
+                'invoice_address' => 'Musora 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Musora Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::subscription_renewal_invoice',
+            ],
+            'order_invoice' => [
+                'invoice_sender' => 'support@musora.com',
+                'invoice_sender_name' => 'Musora',
+                'invoice_address' => 'Musora 107-31265 Wheel Avenue - Abbotsford BC, Canada',
+                'invoice_email_subject' => 'Musora Invoice - Thank You!',
+                'invoice_view' => 'ecommerce::order_invoice',
+            ],
+        ],
     ],
 
     // this is displayed on all invoices to canadian customers
@@ -704,7 +794,7 @@ return [
 
     'subscription_renewal_date' => 1,
     'failed_payments_before_de_activation' => 1,
-    'days_before_access_revoked_after_expiry_in_app_purchases_only' => 7,
+    'days_before_access_revoked_after_expiry_in_app_purchases_only' => 5,
     'days_before_access_revoked_after_expiry' => 5,
 
     'password_creation_rules' => 'min:8|max:128', // also defined in usora

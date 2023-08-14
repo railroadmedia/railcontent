@@ -1,21 +1,123 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        {!! \App\Analytics\Tracker::headTop() !!}
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
-        {!! \App\Analytics\Tracker::trackPageView() !!}
-        <title>Page Not Found | Musora</title>
+<head>
+    {!! \App\Analytics\Tracker::headTop() !!}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1">
+    {!! \App\Analytics\Tracker::trackPageView() !!}
+    <title>Page Not Found | Musora</title>
 
-        <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
-        <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
-        @include('partials._fonts')
-        @include('partials._favicons')
-        <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
+    {{-- Icons --}}
+    <script src="https://kit.fontawesome.com/cf2f4c6c71.js" crossorigin="anonymous"></script>
+    <link href="https://d1prhhmg8i11jr.cloudfront.net/v1.0.3/dist/icons.css" rel="stylesheet">
 
-        @yield('styles')
-        {!! \App\Analytics\Tracker::headBottom() !!}
-    </head>
+    {{-- Fonts --}}
+    @include('partials._fonts')
+
+    {{-- Favicons --}}
+    @include('partials._favicons')
+
+    {{-- Styles --}}
+    <link rel="stylesheet" href="{{ mix('platform/css/app.css') }}">
+
+    @yield('styles')
+    {!! \App\Analytics\Tracker::headBottom() !!}
+</head>
+
+@if( !empty(user()->id) ) {{-- Is User Logged In? --}}
+<body id="app-body" class="tw-flex tw-flex-col tw-w-full tw-min-h-screen tw-relative">
+{!! \App\Analytics\Tracker::bodyTop() !!}
+{{-- Notifications Container --}}
+<div id="notifications-container"></div>
+
+{{-- Modal Container --}}
+<div id="modal-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
+
+<!-- Confirmation Modal Container -->
+<div id="confirmation-container" class="tw-z-[150] tw-hidden tw-h-full tw-w-full"></div>
+
+{{-- App Container --}}
+<div id="app" class="flex-1">
+    <app-container
+        :vue-router="false"
+        brand="{{ $brand }}"
+    >
+        <page-container
+            brand="{{ $brand }}"
+            :is-live="{{ isLive() ? 'true':'false' }}"
+            search-url=""
+            :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}
+            @if(!empty( user() ))
+            user-name="{{ user()->display_name }}"
+            user-avatar="{{ user()->profile_picture_url }}"
+            user-id="{{ user()->id }}"
+            account-url="{{ user()->getDashboardUrl() }}"
+            @endif
+            @if(!empty( $hasUnreadNotifications ))
+            :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
+            @endif
+            @if(isset($adminMessage))
+            admin-message="{{ $adminMessage }}"
+            @endif
+            {{-- @if(isset($forceHideSidebar))
+                :force-sidebar-hidden="{{$forceHideSidebar ? 'true' : 'false'}}"
+            @endif --}}
+        >
+            <template v-cloak v-slot="slotProps">
+
+                <div class="tw-relative tw-flex tw-flex-col tw-h-[calc(100vh-152px)] lg:tw-h-[calc(100vh-128px)] tw-justify-center tw-items-center">
+                    <img src="https://cdn.musora.com/image/fetch/c_thumb,w_1200,q_auto:best/https://d3fzm1tzeyr5n3.cloudfront.net/Rehearsal+Studio_deSaturated.png"
+                         alt="Image of Musical instrument on a stage"
+                         class="tw-absolute tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
+                         onload="this.classList.remove('tw-opacity-0')"
+                    >
+                    <div class="tw-absolute tw-h-full tw-w-full tw-top-0 tw-left-0 tw-bg-[#E5E5E5]/90 dark:tw-bg-[#00101D]/90"></div>
+
+                    {{-- Content --}}
+                    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-my-3 tw-z-50 tw-items-center tw-justify-center">
+                        <div class="tw-text-[#0D0D0D] dark:tw-text-white tw-text-center">
+                            <h1 class="tw-text-5xl lg:tw-text-6xl tw-font-bold tw-mb-4 lg:tw-mb-6">Page not found</h1>
+                            <h2 class="tw-text-[#3F3F46] dark:tw-text-[#9EC0DC] tw-text-2xl lg:tw-text-3xl tw-font-bold tw-mb-4">404 ERROR</h1>
+                                <p class="tw-mb-8">The Page you're looking for doesn't exist.</p>
+
+                                <a href="javascript:history.back()" class="tw-btn-primary tw-bg-[#081825] tw-text-white dark:tw-bg-white dark:tw-text-[#00101D] tw-mb-4">Go Back</a>
+                                <p class="tw-mb-4">Go back or <a href="/{{ $brand }}/support" class="tw-text-[#081825] dark:tw-text-white tw-underline tw-font-bold">contact support</a></p>
+                        </div>
+                    </div>
+                </div>
+
+            </template>
+        </page-container>
+        {{-- Review Modals Code Loads Here --}}
+        @yield('review-modal-section')
+    </app-container>
+</div>
+
+{{-- Scripts --}}
+<script type="application/javascript">
+    window.sidebarNavigationLinks = {!! $sidebarNavigationSectionsJson ?? '' !!};
+    window.userNavigationDropdownLinks = {!! $userNavigationDropdownLinksJson ?? '' !!};
+</script>
+
+@yield('layout-scripts')
+<script src="{{ mix('platform/js/manifest.js') }}"></script>
+<script src="{{ mix('platform/js/vendor.js') }}"></script>
+<script src="{{ mix('platform/js/app.js') }}"></script>
+@yield('inject-components')
+
+{{-- Customer.io --}}
+@include('partials._customer-io')
+
+{{-- Helpscout Beacon --}}
+@include('partials.third-party.helpscout-tracking-beacon-script', [
+    'email' => !empty(user()) ? user()->email : null,
+    'brand' => $brand,
+])
+
+{!! \App\Analytics\Tracker::bodyBottom() !!}
+</body>
+
+@else
 
     <body class="tw-text-white tw-flex
                 @if($brand == 'drumeo')
@@ -64,4 +166,5 @@
             </div>
         </div>
     </body>
+@endif
 </html>

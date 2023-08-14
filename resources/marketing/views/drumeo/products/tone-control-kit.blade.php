@@ -22,7 +22,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.event.move/1.3.6/jquery.event.move.min.js"></script>
     <script>
         (function($){
-
             $.fn.twentytwenty = function(options) {
                 var options = $.extend({
                     default_offset_pct: 0.5,
@@ -174,7 +173,6 @@
     </script>
     <script>
         $(document).ready(function () {
-            $(document).foundation();
             setTimeout(function() {
                 $(".comparer").twentytwenty();
             }, 300);
@@ -299,8 +297,11 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
+
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
 
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
@@ -314,13 +315,13 @@
         <video poster="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/header-thumbnail.jpg" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/header.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
         <div class="overlay"></div>
         <div class="row">
-            <img class="logo drumeo" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo logo"><br>
+            <img class="logo drumeo" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo logo"><br>
             <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/tone-control-kit-logo.png" alt="Tone control kit logo"><br>
             <div class="watch-badge">
                 WATCH<br> THE DEMO
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
-            <i data-open="previewModal" class="fas fa-play play-button autoplay-video"></i>
+            <i @click="trailer = true;" class="fas fa-play play-button autoplay-video"></i>
             <br>
             <h1><strong>Better drum sounds<br class="hide-for-medium"> in seconds.</strong></h1>
 
@@ -346,18 +347,18 @@
                 {{--<br>LIMITED QUANTITIES--}}
             </p>
         </div>
-        <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/475135304?autoplay=1"
-                        frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-        </div>
     </header>
+
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '475135304',
+        'vimeo' => true,
+    ])
 
     <section class="four-tones text-center">
         <div class="row">
             <h2><strong>Flexible drum tones<br class="hide-for-medium"> on the fly.</strong></h2>
-            <p>You know the feeling. You’ve almost got your drums sounding <em>exactly</em> how you want, but there’s an uneven warble or obnoxious ring -- these are called overtones. The Drumeo Tone Control Kit helps you <strong>balance overtones</strong> with four adjustable levels of dampening in one simple system.</p>
+            <p>You know the feeling. You’ve almost got your drums sounding <em>exactly</em> how you want, but there’s an uneven warble or obnoxious ring — these are called overtones. The Drumeo Tone Control Kit helps you <strong>balance overtones</strong> with four adjustable levels of dampening in one simple system.</p>
 
             <div class="swapper-container">
                 <div class="large-image active" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/level-studio.jpg);"></div>
@@ -377,7 +378,7 @@
     <section class="comparison-slider text-center">
         <div class="row">
             <h2><strong>Cleaner than Buddy’s<br class="hide-for-medium"> double strokes.</strong></h2>
-            <p>The Drumeo Tone Control Kit is the cleanest solution to drum dampening-- so your drum heads can be spared the oily residues and sticky messes from traditional dampening methods.</p>
+            <p>The Drumeo Tone Control Kit is the cleanest solution to drum dampening— so your drum heads can be spared the oily residues and sticky messes from traditional dampening methods.</p>
         </div>
         <div class='comparer'>
             <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/compare-clean.jpg" alt="Clean drum">
@@ -397,7 +398,7 @@
             <div class="benefit">
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/2-set-it-forget-it.jpg" alt="Drum set">
                 <div class="text medium-text-left">
-                    <h2><strong>Set it and forget it --<br> Drummer’s Edition.</strong></h2>
+                    <h2><strong>Set it and forget it —<br> Drummer’s Edition.</strong></h2>
                     <p>Each Tone Control strip securely fastens to any metal hoop and can be left on during transport. No more worrying about that perfectly placed gel or tape falling off. </p>
                 </div>
             </div>
@@ -429,7 +430,7 @@
                     </div>
                 </div>
                 <div class="table-wrap">
-                    <p>The Drumeo Tone Control Kit includes a snare + three tom dampeners, and one handy canvas carrying case -- everything you need to make your kit sing.</p>
+                    <p>The Drumeo Tone Control Kit includes a snare + three tom dampeners, and one handy canvas carrying case — everything you need to make your kit sing.</p>
                     <table>
                         <tr>
                             <td>Snare dampener</td>
@@ -441,7 +442,7 @@
                         </tr>
                         <tr>
                             <td>Carrying Case</td>
-                            <td><i class="fal fa-check"></i></td>
+                            <td><i class="fa-light fa-check"></i></td>
                         </tr>
                         <tr>
                             <td>Cost</td>
@@ -485,7 +486,7 @@
         <div id="customize-anchor" class="anchor"></div>
         <div class="row">
             <div class="columns">
-                <img class="logo drumeo" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drume logo"><br>
+                <img class="logo drumeo" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drume logo"><br>
                 <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/tone-control-kit/tone-control-kit-logo.png" alt="Tone control kit logo">
 
                 <h2 class="uppercase">

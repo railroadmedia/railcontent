@@ -21,6 +21,11 @@
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/vuesora.css') }}" rel="stylesheet">
     <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"> -->
+    <style>
+        .top-bar .button-wrap .join.outline-button {
+            color:#fff;
+        }
+    </style>
 @stop
 
 @section('global-body')
@@ -30,18 +35,9 @@
     {{-- Confirmation Modal Container --}}
     <div id="confirmation-container"></div>
 
-    <nav id="nav" class="top-bar row expanded">
-        <div class="logo">
-            <a href="">
-                <img src="https://d38h3dn806jqj1.cloudfront.net/logos/musora-white.svg" alt="Drumeo">
-            </a>
-        </div>
-
-
-        <div class="button-wrap">
-            <a href="/drumshop" class="join outline-button text-white hover:text-black">Shop</a>
-        </div>
-    </nav>
+    @include("drumeo.sales.partials._nav", [
+        "checkoutVersion" => true,
+    ])
 
     <div id="app">
         @if(!empty(user()))
@@ -83,7 +79,7 @@
                 <div class="flex flex-row flex-wrap text-center features">
                     <div class="flex flex-column xs-12 sm-4 align-center pa-3">
                         <i
-                            class="fal fa-mobile text-white mb-2"
+                            class="fa-light fa-mobile text-white mb-2"
                             style="font-size:40px;"
                         ></i>
 
@@ -113,15 +109,15 @@
 
                     <div class="flex flex-column xs-12 sm-4 pa-3 pv-2 align-center">
                         <i
-                            class="fal fa-check-circle text-white mb-2"
+                            class="fa-light fa-check-circle text-white mb-2"
                             style="font-size:40px;"
                         ></i>
                         <p class="tiny font-bold text-white">
-                            100% Money Back Guarantee
+                            100% Money-Back Guarantee
                         </p>
                         <p class="x-tiny text-white">
                             Order risk-free with our 90-day, <br>
-                            100% money back guarantee.
+                            100% money-back guarantee.
                         </p>
                     </div>
                 </div>

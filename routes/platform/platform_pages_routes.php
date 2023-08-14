@@ -37,6 +37,10 @@ Route::domain('{musoraDomain}')
                     ->whereIn('brand', all_brands())
                     ->name('platform.home');
 
+                Route::get('/{brand}/create-playlist-window', [HomePageController::class, 'home'])
+                    ->whereIn('brand', all_brands())
+                    ->name('platform.home.create-playlist-window');
+
                 Route::get(
                     '/redirect30day',
                     [\App\Http\Controllers\Platform\HomePageController::class, 'redirect30day']
@@ -100,7 +104,8 @@ Route::domain('{musoraDomain}')
                         'sonor-drums',
                         'rudiments',
                         'boot-camps',
-                        'song-tutorials'
+                        'song-tutorials',
+                        'drum-fest-international-2022',
                     ])
                     ->name('platform.content-type-catalog');
 
@@ -206,6 +211,7 @@ Route::domain('{musoraDomain}')
                             'recording',
                             'play-alongs',
                             'song-tutorials',
+                            'drum-fest-international-2022',
                         ]
                     )
                     ->name('platform.content.first-level');
@@ -281,7 +287,7 @@ Route::domain('{musoraDomain}')
             ->name('platform.notifications-redirect');
 
         Route::get('/purchase-redirect/{brand}', [RedirectController::class, 'redirectPurchase'])
-            ->whereIn('brand', all_brands())
+            ->whereIn('brand', all_brands_and_musora())
             ->name('platform.purchase-redirect');
 
         /*
@@ -369,17 +375,17 @@ Route::domain('{musoraDomain}')
         /*
          * Users Lists Pages
          */
-        Route::get('/{brand}/lists/my-list', [UserListPagesController::class, 'myList'])
+        Route::get('/{brand}/lesson-history', [UserListPagesController::class, 'inProgress'])
             ->whereIn('brand', all_brands())
-            ->name('platform.lists.my-list');
+            ->name('platform.lesson-history');
 
-        Route::get('/{brand}/lists/in-progress', [UserListPagesController::class, 'inProgress'])
+        Route::get('/{brand}/lesson-history/in-progress', [UserListPagesController::class, 'inProgress'])
             ->whereIn('brand', all_brands())
-            ->name('platform.lists.in-progress');
+            ->name('platform.lesson-history.in-progress');
 
-        Route::get('/{brand}/lists/completed', [UserListPagesController::class, 'completed'])
+        Route::get('/{brand}/lesson-history/completed', [UserListPagesController::class, 'completed'])
             ->whereIn('brand', all_brands())
-            ->name('platform.lists.completed');
+            ->name('platform.lesson-history.completed');
 
         /*
          * Profile Public Pages
@@ -641,6 +647,23 @@ Route::domain('{musoraDomain}')
 
         Route::get('{brand}/cohort-packs/register/{product}', [CohortPackController::class, 'register'] )
             ->name('platform.cohort.register');
+
+        // New playlists
+        Route::get('/{brand}/playlists', [\App\Http\Controllers\Platform\UserPlaylistsController::class, 'index'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.user.playlists');
+
+        Route::get('/{brand}/playlist/{playlistId}/playlist-item/{playlistItemId}', [\App\Http\Controllers\Platform\UserPlaylistsController::class, 'playlistItem'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.user.playlist-item');
+
+        Route::get('/{brand}/playlist/{id}', [\App\Http\Controllers\Platform\UserPlaylistsController::class, 'playlist'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.user.playlist');
+
+        Route::get('/{brand}/playback/{playlistId}', [\App\Http\Controllers\Platform\UserPlaylistsController::class, 'playback'])
+            ->whereIn('brand', all_brands())
+            ->name('platform.play.playlist');
     });
 
 /*

@@ -15,7 +15,7 @@
     @parent
     @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" rel="stylesheet">
     <style>
         .expired {
             padding:30px 0 70px;
@@ -107,7 +107,7 @@
             <ol>
                 <li>Open Safari and visit <a href="/">guitareo.com</a></li>
                 <li><a href="/login">Log into your account</a> and visit the homepage.</li>
-                <li>Click the <i class="fal fa-arrow-square-up" style="color:#0060ff;"></i> share icon at the bottom of Safari. You may need to scroll to the top of the browser page to display the Safari toolbar.</li>
+                <li>Click the <i class="fa-light fa-arrow-square-up" style="color:#0060ff;"></i> share icon at the bottom of Safari. You may need to scroll to the top of the browser page to display the Safari toolbar.</li>
                 <li>Select "Add To Home Screen" from the available options (may need to scroll sideways).</li>
                 <li>Enter a short name like "Lessons" and click "Add".</li>
             </ol>

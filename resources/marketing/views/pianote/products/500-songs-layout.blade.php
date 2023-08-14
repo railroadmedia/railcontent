@@ -11,8 +11,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/500-songs.css') }}">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/500-songs-pianote.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" rel="stylesheet">
 @stop
 
@@ -98,11 +98,11 @@
             <h1>
                 @hasSection('name')
                     The Fastest Way To Learn How To <br class="hidden-xs">
-                    Play Songs By @yield('name') -- And Tons <br class="hidden-xs">
-                    Of Popular Artists -- <u>For Just ${{ $productPrice }}
+                    Play Songs By @yield('name') — And Tons <br class="hidden-xs">
+                    Of Popular Artists — <u>For Just ${{ $productPrice }}
                     </u>
                 @else
-                    The Fastest Way To Learn How<br class="hidden-xs"> To Play Songs -- <u>For Just ${{ $productPrice }}</u>
+                    The Fastest Way To Learn How<br class="hidden-xs"> To Play Songs — <u>For Just ${{ $productPrice }}</u>
                 @endif
             </h1>
             @if(floatval($productPrices['500-songs-in-5-days']->price) > $productPrice)
@@ -193,7 +193,7 @@
         <div class="container">
             <img class="yellow-red-icons" src="https://d2vyvo0tyx8ig5.cloudfront.net/500-songs/sales/more-songs-icons.png" alt="More songs icon">
             <h1>More Songs Than<br class="hidden-sm hidden-md hidden-lg"> You'll Ever Need</h1>
-            <h4>This training pack will teach you the skills to <em>play nearly any popular song on the piano</em> using chord charts. We won’t take up hours of your time to do this -- because we know you’d rather be playing songs than watching videos.
+            <h4>This training pack will teach you the skills to <em>play nearly any popular song on the piano</em> using chord charts. We won’t take up hours of your time to do this — because we know you’d rather be playing songs than watching videos.
                 <br><br>
                 But here at Pianote, we do believe in over-delivering. So beyond the five lessons that will teach you how to play 500 songs AND the two bonus lessons, you’ll also get:
                 <br><br>

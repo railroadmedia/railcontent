@@ -59,7 +59,8 @@
                     <h3>DRUMMER</h3>
                 </div>
                 <p>Your free guide to playing the<br class="sm:hidden"> drums with precision & clarity.</p>
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => "Drumeo - Engagement - Trigger - Sucherman Sound - Web Form",
                     "formName" => 'Sucherman Sound',
                     "buttonText" => 'Send The Videos&nbsp;'
@@ -89,7 +90,7 @@
                     <img src="https://i.vimeocdn.com/video/1040121560-ee27e9c3cbf6cf975c6445fa1963b3119d9786ff29ece084a06a9b2900d95906-d_1280" alt="sucherman-sound-thumb-2">
                     <div class="text">
                         <h4><strong>Fix your mix. </strong></h4>
-                        <p>Todd shows you the volume to play each instrument to get that professionally mixed sound -- in every style & playing situation!</p>
+                        <p>Todd shows you the volume to play each instrument to get that professionally mixed sound — in every style & playing situation!</p>
                     </div>
                 </div>
                 <div class="thumb-wrap">
@@ -118,7 +119,8 @@
             </div>
             <p>Enter your email and receive<br class="sm:hidden"> the five video series, FREE.</p>
             <br><br class="hidden lg:inline">
-            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formId" => "Drumeo - Engagement - Trigger - Sucherman Sound - Web Form",
                 "formName" => 'Sucherman Sound',
                 "buttonText" => 'Send The Videos&nbsp;'

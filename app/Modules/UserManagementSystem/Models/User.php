@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Models;
 
+use App\Modules\CustomerIO\Models\Customer;
 use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Mentor\Models\MentorStudent;
 use App\Modules\Notifications\Models\NotificationSetting;
@@ -315,6 +316,12 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
         return $this->hasMany(NotificationSetting::class, 'user_id');
     }
 
+    public function customerIO(): HasMany
+    {
+        return $this->hasMany(Customer::class, 'user_id');
+    }
+
+
     public function getNotificationSetting(string $brand, string $settingName): bool
     {
         if (!$this->notificationSettingsLookup) {
@@ -490,7 +497,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             case $this->total_xp >= 250000 && $this->total_xp < 500000:
                 return 'Drumeo Legend';
             case $this->total_xp >= 500000 && $this->total_xp < 1000000:
-                return 'Legends: Star';
+                return 'Legends: Starr';
             case $this->total_xp >= 1000000 && $this->total_xp < 1500000:
                 return 'Legends: Erskine';
             case $this->total_xp >= 1500000 && $this->total_xp < 2000000:
@@ -542,7 +549,7 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             case $brandXp >= 250000 && $this->total_xp < 500000:
                 return 'Drumeo Legend';
             case $brandXp >= 500000 && $this->total_xp < 1000000:
-                return 'Legends: Star';
+                return 'Legends: Starr';
             case $brandXp >= 1000000 && $this->total_xp < 1500000:
                 return 'Legends: Erskine';
             case $brandXp >= 1500000 && $this->total_xp < 2000000:
@@ -839,5 +846,20 @@ class User extends Model implements Authenticatable, CanResetPassword, Authoriza
             return null;
         }
         return Carbon::parse($this->membership_expiration_date);
+    }
+
+    public function isDeleted(): bool
+    {
+        return preg_match("/musora\+deleted_[\d]+@musora\.com/", $this->email);
+    }
+
+    public function getCustomerIOId()
+    {
+        foreach ($this->customerIO as $customerIOData){
+            if($customerIOData->workspace_name == 'musora'){
+                return $customerIOData->uuid;
+            }
+        }
+        return null;
     }
 }

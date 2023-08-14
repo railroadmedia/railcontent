@@ -124,9 +124,17 @@ const props = defineProps({
         type: Boolean,
         default: () => false,
     },
+    startSecond: {
+        type: [String, Number],
+        default: 0
+    },
+    endSecond: {
+        type: [String, Number],
+        default: null
+    }
 });
 
-const emit = defineEmits('play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state');
+const emit = defineEmits('onVideoEnd', 'play', 'pause', 'canplaythrough', 'loadedmetadata', 'durationchange', 'waiting', 'playing', 'timeupdate', 'cc-time', 'cc-playpause', 'cc-media', 'cc-disconnect', 'cc-state');
 
 // Non reactive vars
 let shakaPlayer = null;
@@ -270,9 +278,23 @@ function setRange({ range }) {
     }
 }
 
-function initializePlayer(time) {
+function getTimeToSeekTo() {
     const urlParams = new URLSearchParams(window.location.search);
-    const timeToSeekTo = time || (urlParams.get('time') || window.localStorage.getItem(`${contentCurrentTimeStorageKey.value}_currentTime`) || props.currentSecond);
+    let seconds = urlParams.get('time');
+    if (seconds) {
+        return seconds;
+    }
+    seconds = window.localStorage.getItem(`${contentCurrentTimeStorageKey.value}_currentTime`);
+    if (seconds) {
+        window.localStorage.removeItem(`${contentCurrentTimeStorageKey.value}_currentTime`);
+        return seconds;
+    }
+
+    return window.sessionStorage.getItem(`${contentCurrentTimeStorageKey.value}_currentTime`) || props.currentSecond;
+}
+
+function initializePlayer(time) {
+    const timeToSeekTo = time || getTimeToSeekTo();
 
     if (parseInt(timeToSeekTo) !== parseInt(currentTime.value)) {
         seek(timeToSeekTo);
@@ -316,7 +338,7 @@ function initializePlayer(time) {
     }, 100);
 
     setInterval(() => {
-        window.localStorage.setItem(`${contentCurrentTimeStorageKey.value}_currentTime`, currentTime.value);
+        window.sessionStorage.setItem(`${contentCurrentTimeStorageKey.value}_currentTime`, currentTime.value);
     }, 2500);
 }
 
@@ -739,7 +761,7 @@ function enableIntersectionObserver(videoWrap) {
     intersection.value.observe(videoWrap.parentElement);
 }
 
-function handleOverlayClick () {
+function handleOverlayClick() {
     mediaElement.value.pause();
 };
 
@@ -791,7 +813,12 @@ onMounted(() => {
                 return loadSource();
             })
             .then(() => {
-                initializePlayer();
+                if (props.startSecond !== null) {
+                    initializePlayer(props.startSecond);
+
+                } else {
+                    initializePlayer();
+                }
             })
             .catch((error) => {
                 if (error.severity === 2) {
@@ -817,7 +844,7 @@ onMounted(() => {
     document.addEventListener('click', (event) => {
         if (event.target.matches('[data-jump-to-time]')) {
             seek(event.target.dataset.jumpToTime);
-            document.getElementById('content-container').scrollTop=0;
+            document.getElementById('content-container').scrollTop = 0;
         }
     });
 
@@ -872,7 +899,7 @@ const isAbrEnabled = computed({
 
 const playbackQualities = computed({
     get() {
-        if (isShakaInitialized.value) {
+        if (isShakaInitialized.value && $_sources.value && $_sources.value.length > 0) {
             const qualities = $_sources.value.map(source => ({
                 ...source,
                 label: PlayerUtils.getQualityLabelByHeight(source.height),
@@ -887,10 +914,22 @@ const currentProgress = computed(() => {
     if (isChromeCastConnected.value) {
         const progress = (chromeCast.value.Player.currentTime / totalDuration.value) * 100;
 
+
+        if (totalDuration.value && props.endSecond &&
+            (currentTime.value < totalDuration.value) && Math.round(currentTime.value) === Math.round(props.endSecond)) {
+            playPause();
+            endCallback();
+        }
+
         return isNaN(progress) ? 0 : progress;
     }
 
     const progress = (currentTime.value / totalDuration.value) * 100;
+
+    if (totalDuration.value && props.endSecond && (currentTime.value < totalDuration.value) && Math.round(currentTime.value) === Math.round(props.endSecond)) {
+        playPause();
+        endCallback();
+    }
 
     return isNaN(progress) ? 0 : progress;
 });
@@ -907,8 +946,8 @@ const $_sources = computed({
 
         if (props.sources.length) {
             src = props.sources;
-        } else if (ranges.value[currentRange.value] && ranges.value[currentRange.value].length) {
-            src = ranges.value[currentRange.value];
+        } else if (props.ranges[currentRange.value] && props.ranges[currentRange.value].length) {
+            src = props.ranges[currentRange.value];
         }
 
         return src;
@@ -1015,6 +1054,21 @@ const currentTimeInSeconds = computed({
         return currentTime.value;
     },
 });
+  
+const endCallback = () => {
+    const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
+    const isInPlaybackMode = window.location.href.includes('playlist-item');
+    if (isRepeatOn && isInPlaybackMode) {
+        if (props.startSecond !== null) {
+            seek(props.startSecond);
+        } else {
+            seek(0);
+        }
+        playPause();
+    } else {
+        emit('onVideoEnd');
+    }
+};
 
 onBeforeUnmount(() => {
     document.removeEventListener('click', closeDrawers);
@@ -1055,6 +1109,7 @@ const {
     chromeCast,
     seek,
     playPause,
+    endCallback,
     fullscreen,
     changeVolume,
     currentVolume,
@@ -1070,8 +1125,7 @@ const {
         <div ref="videoWrap" class="video-wrap" :class="{ 'picture-in-picture': isPipEnabled }">
             <div class="widescreen bg-black">
                 <div ref="container" class="flex flex-column video-player"
-                    :class="{ 'user-active': userActive || !isPlaying }" 
-                    @contextmenu.stop.prevent="toggleContextMenu"
+                    :class="{ 'user-active': userActive || !isPlaying }" @contextmenu.stop.prevent="toggleContextMenu"
                     @mousemove="trackMousePosition" @touchmove="trackMousePosition">
                     <!--                    <transition name="grow-fade">-->
                     <!--                        <PlayerStats-->
@@ -1112,7 +1166,7 @@ const {
                             <!--                            </li>-->
                             <li v-if="!isMobile" class="pa-1 hover-bg-grey-4" @click="togglePip">
                                 {{ isPipEnabled || isExperimentalPictureInPictureEnabled
-                                        ? 'Disable' : 'Enable'
+                                    ? 'Disable' : 'Enable'
                                 }} Picture in Picture
                             </li>
                         </ul>
@@ -1136,7 +1190,8 @@ const {
                         </div>
                     </transition>
 
-                    <video id="video-component-id" ref="player" playsinline preload="metadata" :poster="poster" controlsList="nodownload">
+                    <video id="video-component-id" ref="player" playsinline preload="metadata" :poster="poster"
+                        controlsList="nodownload">
                         <track v-if="captions" :src="captions" label="English" kind="subtitles" srclang="en" default>
                     </video>
 
@@ -1155,8 +1210,7 @@ const {
                                 <transition name="grow-fade">
                                     <PlayerButton v-if="isChromeCastSupported && controls.chromecast && !isPipEnabled"
                                         :theme-color="themeColor" title="Chromecast"
-                                        :active="chromeCast && chromeCast.Connected"
-                                        @click.stop.native="enableChromeCast">
+                                        :active="chromeCast && chromeCast.Connected" @click.stop.native="enableChromeCast">
                                         <i class="fab fa-chromecast"></i>
                                     </PlayerButton>
                                 </transition>
@@ -1200,11 +1254,11 @@ const {
                             <!--  MIDDLE ROW  -->
                             <div v-if="controls.progress" class="flex flex-row" @dblclick.stop.prevent="() => false">
                                 <PlayerProgress :theme-color="themeColor" :current-progress="currentProgress"
-                                    :current-time="currentTime" :player-width="(player.value && player.value.clientWidth) || 0"
+                                    :current-time="currentTime"
+                                    :player-width="(player.value && player.value.clientWidth) || 0"
                                     :current-mouse-x="currentMousePosition.x" :total-duration="totalDuration"
-                                    :buffered-time-ranges="bufferedTimeRanges" :chapters="chapters"
-                                    :mousedown="mousedown" data-cy="progress-rail"
-                                    @mousedown.stop.native="triggerMouseDown"
+                                    :buffered-time-ranges="bufferedTimeRanges" :chapters="chapters" :mousedown="mousedown"
+                                    data-cy="progress-rail" @mousedown.stop.native="triggerMouseDown"
                                     @touchstart.stop.native="triggerMouseDown" />
                             </div>
 
@@ -1212,8 +1266,8 @@ const {
                             <div class="flex flex-row" @dblclick.stop.prevent="() => false"
                                 @click.stop.prevent="() => false">
                                 <PlayerButton v-if="controls.play" :theme-color="themeColor"
-                                    :title="isPlaying ? 'Pause (Spacebar)' : 'Play (Spacebar)'"
-                                    data-cy="play-pause-button" @click.stop.native="playPause">
+                                    :title="isPlaying ? 'Pause (Spacebar)' : 'Play (Spacebar)'" data-cy="play-pause-button"
+                                    @click.stop.native="playPause">
                                     <i class="fas" :class="isPlaying ? 'fa-pause' : 'fa-play'"></i>
                                 </PlayerButton>
 
@@ -1239,8 +1293,8 @@ const {
                                     <i class="fas fa-cog"></i>
                                 </PlayerButton>
 
-                                <PlayerButton v-show="!isPipEnabled" v-if="controls.fullscreen"
-                                    :theme-color="themeColor" title="Fullscreen (F)" :disabled="isChromeCastConnected"
+                                <PlayerButton v-show="!isPipEnabled" v-if="controls.fullscreen" :theme-color="themeColor"
+                                    title="Fullscreen (F)" :disabled="isChromeCastConnected"
                                     @click.stop.native="fullscreen">
                                     <i class="fas" :class="isFullscreen ? 'fa-compress' : 'fa-expand'"></i>
                                 </PlayerButton>

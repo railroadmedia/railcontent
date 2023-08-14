@@ -15,7 +15,7 @@
         },
     }"
 >
-    <div x-ref="splide" class="splide max-w-6xl mx-auto relative" aria-label="Splide/Alpine.js Carousel Example">
+    <div x-ref="splide" class="splide max-w-6xl mx-auto relative">
         <div class="splide__track relative" style="z-index: 10">
             <ul class="splide__list h-auto">
                 {{ $content }}

@@ -7,10 +7,10 @@
     @include('_partials.layout._tailwindcdn')
     <link rel="preload" href="{{ asset('/marketing/css/tailwind-helpers.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}"></noscript>
-    <link rel="preload" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}"></noscript>
-    <link rel="preload" href="{{ asset('/marketing/parcel/guitareo/lead-gen.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/lead-gen.css') }}"></noscript>
+    <link rel="preload" href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}"></noscript>
+    <link rel="preload" href="{{ asset('/marketing/parcel/drumeo/lead-gen-guitareo.css') }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-guitareo.css') }}"></noscript>
 
     <style>
         * {

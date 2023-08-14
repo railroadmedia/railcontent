@@ -29,9 +29,9 @@
 
 @section('biography')
     <h1>Brian Frasier Moore’s Favorite Gospel-Styled Combinations</h1>
-    <p>Brian Frasier-Moore is one of the most sought-after drummers in the music business. He’s toured with Madonna, Justin Timberlake, Christina Aguilera, Usher, and Janet Jackson -- and performed at the Super Bowl Halftime Show in 2018.
+    <p>Brian Frasier-Moore is one of the most sought-after drummers in the music business. He’s toured with Madonna, Justin Timberlake, Christina Aguilera, Usher, and Janet Jackson — and performed at the Super Bowl Halftime Show in 2018.
         <br><br>
-        In this course, Brian will share some fun gospel-styled combinations for all levels of drummers -- giving you the patterns, the understanding for placing them within music, and empowering you to experiment with your own pattern ideas in the future.
+        In this course, Brian will share some fun gospel-styled combinations for all levels of drummers — giving you the patterns, the understanding for placing them within music, and empowering you to experiment with your own pattern ideas in the future.
     </p>
 @endsection
 

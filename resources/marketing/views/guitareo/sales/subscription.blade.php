@@ -18,8 +18,8 @@
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/nav-footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/guitareo/sales-page.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-guitareo.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-page-guitareo.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <style>
@@ -152,6 +152,15 @@
     @endif
 
     @php
+        $bubble1 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/rob-scallon.png';
+        $bubble2 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/ayla-tesler-mabe.png';
+        $bubble3 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/mark-lettieri.png';
+        $bubble4 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/pete-thorn.png';
+        $bubble5 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/dean-lamb.png';
+        $bubble6 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/sami-ghawi.png';
+        $bubble7 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/yvette-young.png';
+        $bubble8 = 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/bubbles/kent-shores.png';
+
         $features = [
             [
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitar-lessons-icon.svg',
@@ -185,8 +194,9 @@
     @endphp
 
     @include('musora.sales.components.header-section', [
-        'header' => 'Online guitar lessons for all skill levels.',
-        'desc' => 'Learn the guitar faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
+        'header' => 'Online guitar lessons<br> for all skill levels.',
+            'underline' => true,
+        'desc' => 'Learn the guitar faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
         'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/header-thumb.jpg',
         'promoThumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/jan-thumb.png',
         'promoThumbM' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/jan-thumb-m.jpg',
@@ -194,26 +204,8 @@
         'pointTwo' => 'World-Class Teachers',
         'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
         'cta' => 'SEE YOUR DEAL &raquo',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Guitareo+Membership/79348454',
-        'students' => number_format(Prices::$students),
     ])
 
-{{--    @if(!empty($promoVersion))--}}
-{{--        @include('musora.sales.components.promo-section', [--}}
-{{--        'promoLogo' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs.svg',--}}
-{{--           'promoLogoM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs-m.png',--}}
-{{--        'desc' => 'Unlock step-by-step lessons & 1000+ songs to reach your guitar goals in 2023. ',--}}
-{{--           'text' => 'Learning songs has <u>never</u> been easier.<br><br>Introducing NEW Guitareo Songs – <strong>the ultimate tool for learning songs faster and better</strong> with note-for-note sheet music, tempo adjustments, and a looping feature.<br><br>And unlike other song tools, every song is perfectly transcribed and professionally proofed to guarantee its accuracy. Because playing songs should be fun, not frustrating.<br><br>PLUS you’ll have access to step-by-step video lessons on every topic, artist courses and exclusive events, and unlimited personal support to reach all of your guitar goals in 2023.<br><br>When you join today, you\'ll receive a Guitarist\'s Survival Kit for free (valued at $89) to help you sound even better on guitar.<br><br>Click below to grab the deal – or scroll down to try a demo of the NEW Guitareo Songs.',--}}
-{{--           'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/jan-launch-collage.png',--}}
-{{--           'belowButton' => 'SAVE 17% + GET 5 BONUSES WORTH $835',--}}
-{{--       ])--}}
-{{--    @else--}}
-        @include('musora.sales.components.learn-by-playing-section', [
-            'header' => 'Learn the guitar by<br class="inline sm:hidden"> <u>playing the guitar</u>.',
-            'desc' => 'Most new guitarists learn a chord or two – and then hit some sort of roadblock. Life gets in the way. Your calluses become soft. Or even worse, you lose motivation.<br><br>But playing guitar should never feel like a chore.<br><br>And it’s our mission to help you make progress faster by playing music that inspires you – with 1000+ popular songs – and conquer new styles, skills, and techniques to play like you’ve always wanted.<br><br>Whether you want to play your favorite songs, express your creativity over a backing track, or follow inspirational coaches – you’ll have it all in the Guitareo membership. You’ll get step-by-step lessons, interactive tools, and unlimited support to play your guitar better and faster.<br><br>So give the trailer a watch, and hear how you can achieve your guitar goals today.',
-            'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/collage-evergreen.png',
-        ])
-{{--    @endif--}}
 
     @php
         $gridItems = [
@@ -221,37 +213,66 @@
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/method.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Develop your core skills, techniques, and musicality to play confidently in any setting. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/method.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to help you see results.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/practical-assignments.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guided-workouts.jpg',
                 'title' => 'Guided Workouts',
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guided-workouts.jpg',
+                    ],
+                ]
             ],
             [
-                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/world-class-teachers.jpg',
+                'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches-thumb2.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'The best guitarists are here – including Grammy Award winners and touring musicians.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches-thumb2.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/downloadable-videos.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global guitar community. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/personalized-support.jpg',
+                    ],
+                ]
             ],
         ];
     @endphp
 
     @include('musora.sales.components.trailer-grid-section', [
-        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314551/rendition/540p/file.mp4?loc=external&signature=49333e2b437f90a4af69eb5b19468b68f5185729516f735cd390a6ce8b673516',
         'header' => 'Your guitar goals<br class="inline sm:hidden"> start here.',
         'desc' => 'Learn to play guitar online with a fluff-free curriculum that’ll<br class="hidden sm:inline">  take your skills from zero to guitar hero – with step-by-step<br class="hidden sm:inline">  lessons designed around playing songs faster. ',
     ])
@@ -276,23 +297,13 @@
                     'instructor' => 'Rob Scallon',
                     ],
                     [
-                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/rhythm-groove.jpg',
-                    'title' => 'Rhythm<br> & Groove ',
-                    'instructor' => 'Sami Ghawi',
-                    ],
-                    [
-                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/timing-feel.jpg',
-                    'title' => 'Timing<br> & Feel',
-                    'instructor' => 'David Becker',
-                    ],
-                    [
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/musical-lanes.jpg',
-                    'title' => 'Musical<br> Lanes',
+                    'title' => 'Creating The Perfect <br> Guitar Part',
                     'instructor' => 'Mark Lettieri',
                     ],
                     [
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/add-power-to-your-playing.jpg',
-                    'title' => 'Add Power To<br> Your Playing',
+                    'title' => 'Better <br> Guitar Solos',
                     'instructor' => 'Dave Weiner',
                     ],
                     [
@@ -305,6 +316,16 @@
                     'title' => 'The Anatomy<br> of a Song',
                     'instructor' => 'Pete Thorn',
                     ],
+                    [
+                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/looping.jpg',
+                    'title' => 'Looping',
+                    'instructor' => 'David Becker',
+                    ],
+                    [
+                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/altered-open-tunings.jpg',
+                    'title' => 'Altered &<br> Open Tunings',
+                    'instructor' => 'Don Ross',
+                    ],
                 ]
             ],
             [
@@ -314,11 +335,6 @@
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/rock-guitar.jpg',
                     'title' => 'Rock<br> Guitar ',
                     'instructor' => 'Ayla Tesler-Mabé',
-                    ],
-                    [
-                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/punk-rock.jpg',
-                    'title' => 'Punk<br> Rock',
-                    'instructor' => 'Kent Shores',
                     ],
                     [
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/surf-guitar.jpg',
@@ -350,6 +366,11 @@
                     'title' => 'Shred<br> Guitar',
                     'instructor' => 'Dean Lamb',
                     ],
+                    [
+                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/musical-lanes.jpg',
+                    'title' => 'Fusion <br> /Neo-Soul',
+                    'instructor' => 'Mark Lettieri',
+                    ],
                 ]
             ],
             [
@@ -364,16 +385,6 @@
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/getting-started-on-the-electric.jpg',
                     'title' => 'Getting Started<br> On The Electric<br> Guitar',
                     'instructor' => 'Ayla Tesler-Mabé',
-                    ],
-                    [
-                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/altered-open-tunings.jpg',
-                    'title' => 'Altered &<br> Open Tunings',
-                    'instructor' => 'Don Ross',
-                    ],
-                    [
-                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/looping.jpg',
-                    'title' => 'Looping',
-                    'instructor' => 'David Becker',
                     ],
                     [
                     'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/picking.jpg',
@@ -395,6 +406,16 @@
                     'title' => 'Bending &<br> Vibrato',
                     'instructor' => 'Ayla Tesler-Mabé',
                     ],
+                    [
+                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/rhythm-groove.jpg',
+                    'title' => 'Rhythm<br> & Groove ',
+                    'instructor' => 'Sami Ghawi',
+                    ],
+                    [
+                    'img' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/coaches/timing-feel.jpg',
+                    'title' => 'Timing<br> & Feel',
+                    'instructor' => 'David Becker',
+                    ],
                 ]
             ],
         ];
@@ -411,27 +432,32 @@
             [
                 'icon' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/songs-icon.svg',
                 'title' => '1000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for  <br class="hidden sm:inline"> every style, era, and skill level. ',
+                'desc' => 'Get note-for-note song breakdowns for   every style, era, and skill level. ',
             ],
             [
                 'icon' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/tempo-icon.svg',
                 'title' => 'Find the perfect tempo.',
-                'desc' => 'Slow down any section of a song  <br class="hidden sm:inline">to make those tricky bars easier. ',
+                'desc' => 'Slow down any section of a song  to make those tricky bars easier. ',
             ],
             [
                 'icon' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/loop-icon.svg',
                 'title' => 'Loop the hard parts.',
-                'desc' => 'Create practice loops to play-through <br class="hidden sm:inline"> those difficult parts over and over.   ',
+                'desc' => 'Create practice loops to play-through  those difficult parts over and over.   ',
             ],
             [
                 'icon' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/timing-icon.svg',
                 'title' => 'Improve your timing.',
-                'desc' => 'Use the built-in-metronome – your new <br class="hidden sm:inline"> best friend for difficult rhythms.  ',
+                'desc' => 'Use the built-in-metronome – your new  best friend for difficult rhythms.  ',
+            ],
+            [
+                'icon' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/play-it-right-icon.svg',
+                'title' => 'Play it right the first time.',
+                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
             ],
             [
                 'icon' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/devices-icon.svg',
                 'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable, <br class="hidden sm:inline"> so you can play any song, any time.    ',
+                'desc' => 'Accessible on any device, or printable,  so you can play any song, any time.    ',
             ],
 
         ];
@@ -440,9 +466,14 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note.',
-        'video' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/blackbird.mp4',
+        'video' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/device.png',
         'brandName' => 'Guitareo',
         'bannerDesc' => 'Powered by Musora, Guitareo includes full access to our communities for voice, piano, and drums.',
+    ])
+    @include('musora.sales.components.learn-by-playing-section', [
+        'header' => 'Learn the guitar by<br class="inline sm:hidden"> <u>playing the guitar</u>.',
+        'desc' => 'With Guitareo, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
+                'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314551/rendition/540p/file.mp4?loc=external&signature=49333e2b437f90a4af69eb5b19468b68f5185729516f735cd390a6ce8b673516',
     ])
 
     @php
@@ -484,7 +515,7 @@
             ],
             [
             'title' => "I’ve started making my own melodies.",
-            'description' => "Guitareo has been fun and motivated me to try more. I like how we start making melodies quickly along with helpful background information on chords and notes. I love seeing other students post their melodies -- it’s so much fun to listen to others!",
+            'description' => "Guitareo has been fun and motivated me to try more. I like how we start making melodies quickly along with helpful background information on chords and notes. I love seeing other students post their melodies — it’s so much fun to listen to others!",
             'name' => 'Jan M',
             'image' => 'https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/jan-berlin-germany.jpg',
             'location' => 'Germany',
@@ -507,28 +538,30 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by guitarists<br class="inline-block sm:hidden">  everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Guitareo+Membership/79348454',
-        'reviewText' => 'Rated 5 stars by Guitareo students from around the world!',
+        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/guitarlessonscom/',
         'youtube' => '1M',
         'facebookLink' => 'https://facebook.com/guitareoofficial/',
-        'facebook' => '333K',
+        'facebook' => '330K',
         'instagramLink' => 'https://instagram.com/guitareoofficial/',
-        'instagram' => '18K',
+        'instagram' => '19K',
     ])
+    @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2022/guitareo-guarantee.png',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the guitar.',
     ])
+    @endif
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
     @if(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://guitareo.s3.amazonaws.com/sales/2023/guitareo-plus-logo-light.svg",
-            "logo" => "https://guitareo.s3.amazonaws.com/sales/guitareo-logo.png",
-            "songs" => "1000",
+            "noSelector" => true,
+            "plusLogo" => "https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-plus-logo-light.svg",
+            "logo" => "https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo.png",
+            "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, piano, and drums.",
@@ -536,6 +569,9 @@
             "plusMonthlyLink" => "/ecommerce/add-to-cart?products[GUITAREO-7-DAY-TRIAL-ONE-TIME]=1&redirect=/order&locked=true",
             "annualLink" => "/ecommerce/add-to-cart?products[guitareo-base-annual-recurring-7-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
             "monthlyLink" => "/ecommerce/add-to-cart?products[guitareo-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'guitar',
         ])
     @elseif(!empty($promoVersion))
         @php
@@ -571,12 +607,13 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'logo' => 'https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png',
         'header' => 'Unlimited guitar lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Online guitar lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-guitareo"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, piano, and drum lessons with full access to all Musora communities.</li>',
-        'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-spread.png',
+        'image' => 'https://d122ay5chh2hr5.cloudfront.net/sales/2023/guitareo-collage.png',
         ])
     @endif
 

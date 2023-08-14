@@ -7,9 +7,9 @@
     <meta property="og:title" content="How To Stop Hating Your Voice">
     <meta name="description" content="Learn to love your voice in 3 easy lessons!"/>
     <meta property="og:description" content="Learn to love your voice in 3 easy lessons!">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/fb-share-image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/fb-share-image.jpg">
     <meta property="og:url" content="https://www.singeo.com/stop-hating-your-voice/">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-singeo.css') }}">
 @stop
 
 @section('title', 'How To Stop Hating Your Voice')
@@ -53,7 +53,7 @@
         @foreach ($lessons as $lesson)
             <a href="{{ $lesson['href'] }}" class="flex lg:flex-auto w-full md:w-1/2 lg:w-1/3 px-2 md:px-3 mb-7 md:mb-10 step">
                 <div class="rounded-xl overflow-hidden" style="background: linear-gradient(to bottom, #153044 56%, #252646); ">
-                    <div class="aspect-16:9 w-full bg-cover bg-black bg-center mb-2 cursor-pointer hover:opacity-90 transition-opacity duration-300 relative" style="background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $lesson['img'] }});">
+                    <div class="aspect-16:9 w-full bg-cover bg-black bg-center mb-2 cursor-pointer hover:opacity-90 transition-opacity duration-300 relative" style="background-image:url(https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $lesson['img'] }});">
                         <i class="fas fa-play bg-singeo rounded-full p-3 absolute bottom-0 left-0 m-2 text-center" style="text-indent: 2px;"></i>
                     </div>
                     <h4 class="px-4 mt-4 mb-2 uppercase font-bebas">{{ $lesson['title'] }}</h4>

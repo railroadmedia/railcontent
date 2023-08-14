@@ -18,8 +18,8 @@
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <style>
@@ -149,6 +149,15 @@
     @endif
 
     @php
+        $bubble1 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/summer-swee-singh.png';
+        $bubble2 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/lisa-witt.png';
+        $bubble3 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/jesus-molina.png';
+        $bubble4 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/kevin-castro.png';
+        $bubble5 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/erskine-hawkins.png';
+        $bubble6 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/victoria-theodore.png';
+        $bubble7 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/sangah-noona.png';
+        $bubble8 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/cassi-falk.png';
+
         $features = [
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/piano-lesson-icon.svg',
@@ -196,29 +205,37 @@
     @if(empty($hideHeader) || !$hideHeader)
         @if(!empty($beginnerVersion))
             @include('musora.sales.components.header-section', [
-                'header' => 'Online piano lessons tailored for beginners.',
-                'desc' => 'Learn the piano faster with step-by-step lessons, friendly teachers, and songs perfect for your skill level.',
+                'header' => 'Online piano lessons<br> tailored for beginners.',
+                'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> friendly teachers, and songs perfect for your skill level.',
                 'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
                 'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
                 'pointOne' => 'Perfect for Beginners',
                 'pointTwo' => 'Super-Friendly Teachers',
                 'pointThree' => 'Fun Lessons',
-                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
-                'students' => number_format(Prices::$students),
+            ])
+        @elseif(!empty($songsVersion))
+            @include('musora.sales.components.header-section', [
+                'header' => 'Learn piano from real teachers.<br> Play your favorite songs.',
+                'desc' => ' Find and play the songs you love. Download, print, and<br class="hidden sm:inline">   play 1000+ songs. Plus get flexible, fun lessons and<br class="hidden sm:inline">  unlimited personal support from real teachers.',
+                'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
+                'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
+                'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
+                'pointOne' => '1000+ popular songs',
+                'pointTwo' => 'World-Class Teachers',
+                'pointThree' => 'Learn anywhere, anytime',
             ])
         @else
             @include('musora.sales.components.header-section', [
-                'header' => 'Online piano lessons for all skill levels.',
-                'desc' => 'Learn the piano faster with step-by-step lessons, a thousand songs, and unlimited personal support. ',
+                'header' => 'Online piano lessons<br> for all skill levels.',
+                'underline' => true,
+                'desc' => 'Learn the piano faster with step-by-step lessons,<br class="hidden sm:inline"> a thousand songs, and unlimited personal support. ',
                 'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/header-thumb2.jpg',
                 'promoThumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb2.png',
                 'promoThumbM' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/jan-thumb-m2.jpg',
                 'pointOne' => 'Improve Your Skills',
                 'pointTwo' => 'World-Class Teachers',
                 'pointThree' => 'Play More<br class="inline lg:hidden"> Songs',
-                'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
-                'students' => number_format(Prices::$students),
             ])
         @endif
     @endif
@@ -226,22 +243,7 @@
     @hasSection('promo-banner')
         @yield('promo-banner')
     @endif
-{{--    @if(!empty($promoVersion))--}}
-{{--        @include('musora.sales.components.promo-section', [--}}
-{{--        'promoLogo' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs.svg',--}}
-{{--           'promoLogoM' => 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/new-year-new-songs-m.png',--}}
-{{--        'desc' => 'One membership. All instruments. 1000s of songs.',--}}
-{{--           'text' => 'This is your year.<br><br>Experience the NEW Pianote membership in 2023 and make the best investment in yourself. You’ll get guided lessons from world-class piano teachers to help you reach any goal this year.<br><br>And best of all…<br><br>You’ll have unlimited access to our brand new song library, complete with 1000 note-for-note transcriptions from our partners at Hal Leonard. Play your favorite songs the way they were written, complete with professional backing tracks so you’ll feel like a star.<br><br>And it gets better.<br><br>Because your Pianote membership now comes fully-loaded with all instruments. You can learn to sing, play guitar, or even rock out on the drums. All for no extra cost.<br><br>Join today and you’ll also get a set of Pianote professional over-ear headphones. Valued at $189, they’re yours free. Start the year off right. Click below to begin.',--}}
-{{--           'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/january/jan-launch-collage.png',--}}
-{{--           'belowButton' => 'SAVE 17% + GET 10 BONUSES WORTH $905',--}}
-{{--       ])--}}
-{{--    @else--}}
-        @include('musora.sales.components.learn-by-playing-section', [
-            'header' => 'Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.',
-            'desc' => 'It’s not rocket science.<br><br>If you don’t play your piano, you won’t get better. At Pianote, our mission is to get you playing more so you get better, faster (while having FUN!).<br><br>In short, you’ll learn piano <u>by playing piano</u>.<br><br>These are short, fun lessons from world-class teachers. But the real magic happens when you practice ALONG with your coaches.<br><br>You’ll play more, you’ll get better faster, and you’ll fall in love with your progress. Plus you’ll have access to a library of thousands of popular songs with sheet music and backing tracks.<br><br>Scroll down to watch the trailer, see more details, and start playing like you’ve always wanted!',
-            'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/collage-evergreen.png',
-        ])
-{{--    @endif--}}
+
 
     @php
         $gridItems = [
@@ -249,37 +251,66 @@
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/modern-method.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Develop your core skills, techniques, and musicality to play beautifully in any setting. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/modern-method.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to help you see results.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/practical-assignments.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/guided-workouts.jpg',
                 'title' => 'Guided Workouts',
                 'desc' => 'Stay inspired with guided workouts where you’ll play along with your teacher in real time.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/guided-workouts.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'Lifetime teachers, touring performers, recording professionals, and trending stars. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/world-class-teachers.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/downloadable-videos.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global piano community. ',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/personalized-support.jpg',
+                    ],
+                ]
             ],
         ];
     @endphp
 
     @include('musora.sales.components.trailer-grid-section', [
-        'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314572/rendition/540p/file.mp4?loc=external&signature=b8d6bc7c80a784c2cc9473ae9e1389b3f9e005fbbce2568d7bd6b7d548a4c19e',
         'header' => 'Your piano goals<br class="inline sm:hidden"> start here.',
         'desc' => 'Always know <em>exactly</em> what to practice with an organized 10-level <br class="hidden sm:inline lg:hidden">curriculum and direct access to real teachers. ',
     ])
@@ -438,27 +469,32 @@
             [
                 'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/songs-icon.svg',
                 'title' => '1000+ popular songs.',
-                'desc' => 'Get note-for-note song breakdowns for  <br class="hidden sm:inline"> every style, era, and skill level. ',
+                'desc' => 'Get note-for-note song breakdowns for every style, era, and skill level. ',
             ],
             [
                 'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/tempo-icons.svg',
                 'title' => 'Find the perfect tempo.',
-                'desc' => 'Slow down any section of a song  <br class="hidden sm:inline">to make those tricky bars easier. ',
+                'desc' => 'Slow down any section of a song to make those tricky bars easier. ',
             ],
             [
                 'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/loop-icons.svg',
                 'title' => 'Loop the hard parts.',
-                'desc' => 'Create practice loops to play-through <br class="hidden sm:inline"> those difficult parts over and over.   ',
+                'desc' => 'Create practice loops to play-through those difficult parts over and over.   ',
             ],
             [
                 'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/timing-icons.svg',
                 'title' => 'Improve your timing.',
-                'desc' => 'Use the built-in-metronome – your new <br class="hidden sm:inline"> best friend for difficult rhythms.  ',
+                'desc' => 'Use the built-in-metronome – your new best friend for difficult rhythms.  ',
+            ],
+            [
+                'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/play-it-right-icon.svg',
+                'title' => 'Play it right the first time.',
+                'desc' => 'Get perfect notation and learn to play accurately from the get-go.',
             ],
             [
                 'icon' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/devices-icons.svg',
                 'title' => 'Take your songs anywhere.',
-                'desc' => 'Accessible on any device, or printable, <br class="hidden sm:inline"> so you can play any song, any time.    ',
+                'desc' => 'Accessible on any device, or printable, so you can play any song, any time.    ',
             ],
 
         ];
@@ -467,9 +503,15 @@
     @include('musora.sales.components.songs-section', [
         'header' => 'Play your favorite songs.',
         'desc' => 'You’ll have <strong>all the tools you need</strong> to make sure you never miss a note.',
-        'video' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/someone-like-you2.mp4',
+        'video' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/device.png',
         'brandName' => 'Pianote',
         'bannerDesc' => 'Powered by Musora, Pianote includes full access to our communities for drums, guitar, and voice.',
+    ])
+    @include('musora.sales.components.learn-by-playing-section', [
+        'header' => 'Learn the piano by<br class="inline sm:hidden"> <u>playing the piano</u>.',
+        'desc' => 'With Pianote, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.',
+                'vid' => 'https://player.vimeo.com/progressive_redirect/playback/785314572/rendition/540p/file.mp4?loc=external&signature=b8d6bc7c80a784c2cc9473ae9e1389b3f9e005fbbce2568d7bd6b7d548a4c19e',
+
     ])
 
 {{--    @include('pianote.sales.headphones-section')--}}
@@ -540,20 +582,21 @@
     @endphp
     @include('musora.sales.components.testimonials-section', [
         'header' => 'Trusted by pianists<br class="inline-block sm:hidden">  everywhere.',
-        'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Pianote+Membership/79348450',
-        'reviewText' => 'Rated 5 stars by Pianote students of all skill levels!',
+        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/pianolessonscom/',
-        'youtube' => '1.2M',
+        'youtube' => '1.3M',
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
-        'facebook' => '422K',
+        'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '174K',
+        'instagram' => '203K',
     ])
+    @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
         'badge' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/piano-guarantee.png',
         'header' => '<strong>Happy student guarantee.</strong><br>Test-drive your lessons for 90 days. Zero risk.',
         'desc' => 'Online lessons can be intimidating. Maybe you’re wondering if they work, or if you’ll use them enough – or if you’ll even enjoy the experience. So we’re removing the risk with our 90-day guarantee. More than anything, we want to make sure you have a POSITIVE experience developing new skills and gaining confidence on the piano.',
     ])
+    @endif
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
@@ -561,9 +604,10 @@
         @yield('final')
     @elseif(!empty($trialVersion))
         @include('musora.sales.components.card-selection-section', [
-            "plusLogo" => "https://pianote.s3.amazonaws.com/sales/2023/pianote-plus-logo-light.svg",
-            "logo" => "https://pianote.s3.amazonaws.com/logo/pianote-logo-white.png",
-            "songs" => "1000",
+            "noSelector" => true,
+            "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
+            "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
+            "songs" => "1000+ popular songs.",
             "firstPoint" => "Unlimited piano lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, guitar, and drums.",
@@ -571,6 +615,9 @@
             "plusMonthlyLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true",
             "annualLink" => "/ecommerce/add-to-cart?products[pianote-base-annual-recurring-7-day-trial-membership]=1&promo-code=annual-trial&redirect=/order&locked=true",
             "monthlyLink" => "/ecommerce/add-to-cart?products[pianote-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
+        ])
+        @include('musora.sales.components.trial-explanation', [
+            'instrument' => 'piano',
         ])
     @elseif(!empty($promoVersion))
         @php
@@ -611,12 +658,13 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',
         'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
                     <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-spread.png',
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-collage.png',
         ])
     @endif
 

@@ -37,7 +37,7 @@
     >
         {{-- Background Image --}}
         <div class="tw-bg-cover tw-absolute tw-w-full tw-h-full tw-top-0 tw-left-0 tw-bg-top">
-            <img src="https://www.musora.com/musora-cdn/image/width=1000,quality=90/https://d3fzm1tzeyr5n3.cloudfront.net/headers/unified_header.jpg"
+            <img src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/headers/unified_header.jpg"
                 class="tw-h-full tw-w-full tw-object-cover tw-object-top tw-transition-opacity tw-opacity-0"
                 onload="this.classList.remove('tw-opacity-0')"
             >

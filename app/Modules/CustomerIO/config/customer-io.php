@@ -288,8 +288,28 @@ return [
                     'drumeo',
                 ],
             ],
+            '30 Day Chops Waitlist' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_30dc-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
         ],
         'pianote' => [
+            'Blues Piano Bootcamp' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_blues-piano-bootcamp',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
             'Chord Hacks' => [
                 'custom_attributes' => [
                 ],
@@ -355,6 +375,16 @@ return [
                 ],
                 'events' => [
                     'pianote_prospect_nppsh-waitlist',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Easy Chords Waitlist' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_easy-chords-waitlist',
                 ],
                 'accounts_to_sync' => [
                     'pianote',
@@ -515,6 +545,16 @@ return [
                 ],
                 'events' => [
                     'pianote_prospect_7-days',
+                ],
+                'accounts_to_sync' => [
+                    'pianote',
+                ],
+            ],
+            'Waltz in A Minor' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'pianote_prospect_waltz-in-a-minor',
                 ],
                 'accounts_to_sync' => [
                     'pianote',

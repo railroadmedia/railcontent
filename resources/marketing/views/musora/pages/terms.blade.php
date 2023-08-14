@@ -8,7 +8,7 @@
 
 <!-- Main -->
 @section('layout-body')
-<section class="py-24 md:py-40 text-white text-center bg-center bg-cover" style="background-color:#1a1e58;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/homepage/2021/header-about.jpg);">
+<section class="py-24 md:py-40 text-white text-center bg-center bg-cover" style="background-color:#1a1e58;background-image:url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2021/header-about.jpg);">
     <div class="container mx-auto relative z-0">
         <h1 class="text-2xl sm:text-4xl lg:text-5xl"><strong>Terms of Use</strong></h1>
     </div>
@@ -19,7 +19,7 @@
 
             <p class="py-2">Please read these Terms of Use ("Terms", "Terms of Use") carefully before using the www.drumeo.com website and/or the Drumeo mobile application (the "Service") operated by Musora Media Inc., (“Musora”, “us”, "we", or "our").</p>
 
-            <p class="py-2">Your access to and use of the Service is conditioned upon your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who wish to access or use the Service either through the website or mobile application.  We want you to have an enjoyable, educational experience using the Service, so we offer a 90-day Money Back Guarantee on all purchases made through the Service.</p>
+            <p class="py-2">Your access to and use of the Service is conditioned upon your acceptance of and compliance with these Terms. These Terms apply to all visitors, users and others who wish to access or use the Service either through the website or mobile application.  We want you to have an enjoyable, educational experience using the Service, so we offer a 90-day Money-Back Guarantee on all purchases made through the Service.</p>
 
             <p class="py-2">By accessing or using the Service you agree to be bound by these Terms. If you disagree with any part of the terms then you do not have permission to access the Service.</p>
 
@@ -28,7 +28,7 @@
 
             <p class="py-2">To be eligible to subscribe to the Service, you must be at least eighteen (18) years old, or above the age of majority in your jurisdiction, and fill out the information necessary to create a profile.  You agree to provide true, accurate, current, and complete information about yourself as prompted by the Service registration process.  You are responsible for your own personal account activity, and you agree to notify Musora if you suspect any unauthorized activity.</p>
 
-            <p class="py-2">By signing up for a subscription to the Service, you agree to pay the listed price at the chosen interval indefinitely until you contact us, OR use the provided tools to cancel your chosen subscription.  To request a refund please <a class="text-blue-600" href="{{ get_musora_brand_base_url() }}/contact">contact us</a>. If your subscription goes beyond our 90-Day Money Back Guarantee period, then your subscription will terminate at the end of your paid billing cycle.  Once you choose to cancel your subscription, you will continue to have access to your subscription portion of the Service until the end of your paid billing cycle.</p>
+            <p class="py-2">By signing up for a subscription to the Service, you agree to pay the listed price at the chosen interval indefinitely until you contact us, OR use the provided tools to cancel your chosen subscription.  To request a refund please <a class="text-blue-600" href="{{ get_musora_brand_base_url() }}/contact">contact us</a>. If your subscription goes beyond our 90-Day Money-Back Guarantee period, then your subscription will terminate at the end of your paid billing cycle.  Once you choose to cancel your subscription, you will continue to have access to your subscription portion of the Service until the end of your paid billing cycle.</p>
 
             <p class="py-2">By signing up for a Lifetime Membership to the Service you agree to pay the listed price in full. As a Lifetime Member you have the right to use the Service under these Terms, as long as the Service is available. If at any time the Service will permanently cease to be available we will, to the best of our ability and in a reasonable time frame, provide you the means necessary to download the material available on the Service, in whole, or in part, before the Service is terminated. To request a refund please <a class="text-blue-600" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days of your purchase. Once the initial 90 day period has expired, your Lifetime Membership is valid for the life of the Service and will remain in effect for as long as the Service is available.</p>
 

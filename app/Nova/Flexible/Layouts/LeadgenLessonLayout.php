@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\Hidden;
 use Laravel\Nova\Fields\Image;
+use Laravel\Nova\Fields\Markdown;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Number;
 use Whitecube\NovaFlexibleContent\Flexible;
@@ -49,10 +50,10 @@ class LeadgenLessonLayout extends Layout
 
         return [
             // Define the layout's fields.
-            Text::make('slug')->required(),
-            Text::make('title')->required(),
+            Text::make('slug')->required()->rules('required'),
+            Text::make('title')->required()->rules('required'),
             Text::make('caption'),
-            Text::make('Description', 'desc'),
+            Markdown::make('Description', 'desc')->help('Markup is supported!'),
             Image::make('Thumbnail', 'thumbnail_file')
                 ->disk('nova_s3')
                 ->prunable()
@@ -68,14 +69,15 @@ class LeadgenLessonLayout extends Layout
                     return $value;
                 }),
             Text::make('Thumbnail','thumbnail_text')->hideFromIndex()->hideFromDetail(),
-            Text::make('Video Src', 'video_src')->hideFromIndex()->required(),
-            Number::make('duration')->help('In minutes')->required(),
+            Text::make('Video Src', 'video_src')->hideFromIndex()->required()->rules('required')->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted" (unless YT embed). <br> e.g. //player.vimeo.com/video/798501810?autoplay=1 and https://www.youtube.com/embed/bNpiCbY2y0c?rel=0&showinfo=0'),
+            Number::make('duration')->help('In minutes')->required()->rules('required'),
             Flexible::make('Assignments')
                 ->addLayout(LeadgenLessonAssignmentLayout::class)
                 ->preset(LeadgenLessonAssignmentPreset::class),
             Flexible::make('Assets')
                 ->addLayout(LeadgenLessonAssetLayout::class)
-                ->preset(LeadgenLessonAssetPreset::class),
+                ->preset(LeadgenLessonAssetPreset::class)
+                ->help('PNG, JPEG, JPG, SVG, ZIP, and MP3'),
             Boolean::make('One off page', 'one_off')->default(false)->hideFromIndex(),
             Hidden::make('id', 'id'),
             Hidden::make('uuid')->withMeta(["value" => $uuid]),

@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onBeforeMount, onMounted } from "vue";
-import { testCarousel } from '../../../constants/carousel_data.js';
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -72,11 +71,10 @@ const handleNavClick = (index) => {
 
 onBeforeMount(() => {
   if (props.preloadedCarousel.length > 0) {
-    slides.value = props.preloadedCarousel;
-  } else {
-    slides.value = testCarousel.find(({ brand: iBrand }) => iBrand === props.brand).slides;
+      slides.value = props.preloadedCarousel;
+      prevSlide.value = slides.value.length - 1;
   }
-  prevSlide.value = slides.value.length - 1;
+
 });
 
 onMounted(() => {
@@ -86,7 +84,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="tw-block tw-border-[0.5px] tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-w-full tw-h-[370px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4 tw-overflow-hidden">
+    :class="slides.length > 0 ? 'tw-block tw-border-[0.5px] tw-border-[#A1A1A9] dark:tw-border-[#344858] tw-w-full tw-h-[370px] tw-border-box tw-rounded-[10px] tw-relative tw-my-4 tw-overflow-hidden' : 'tw-mb-4'">
 
     <CarouselSlide
       v-for="(slide, i) in slides"
@@ -97,27 +95,24 @@ onMounted(() => {
       :animateDirection="animateDirection"
       :brand="brand"
       :topSubtitle="slide.subtitle"
+      :topSubtitleColor="slide.subtitle_color"
       :title="slide.title"
-      :titleClasses="slide.titleClasses"
+      :titleColor="slide.title_color"
       :logo="slide.logo"
+      :btnLightMode="!!slide.btn_light_mode"
       :primaryCtaText="slide.primary_cta_text"
-      :primaryCtaTextAlt="slide.primary_cta_alt"
       :primaryCtaUrl="slide.primary_cta_url"
-      :primaryCtaUrlAlt="slide.primary_cta_url_alt"
+      :primaryVideo="slide.primary_video_src"
       :secondaryCtaText="slide.secondary_cta_text"
       :secondaryCtaUrl="slide.secondary_cta_url"
       :description="slide.description"
       :descriptionColor="slide.desc_color"
-      :registerUrl="slide.endpoint"
-      :video="slide.video_src"
-      :is-featured="slide.is_featured"
+      :secondaryVideo="slide.video_src"
+      :is-featured="!!slide.is_featured"
       :desktopImg="slide.desktop_img"
       :tabletImg="slide.tablet_img"
       :mobileImg="slide.mobile_img"
-      @mouseover="removeInterval"
-      @mouseout="resetInterval"
-      @keyup.left="handleLeft()"
-      @keyup.right="handleRight()"
+      :is-draft="slide.draft"
     />
 
       <!-- Directional Buttons -->

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Drumeo;
 
 use App\Models\Leadgen;
 use App\Models\LeadgenLesson;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -14,7 +15,7 @@ class LeadGenController extends BaseController
     {
         switch ($page) {
             case null:
-                return view('drumeo.lead-gen.100-songs.signup');
+                return view('drumeo.lead-gen.100-songs.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'unlocked':
                 return view('drumeo.lead-gen.100-songs.unlocked');
         }
@@ -24,19 +25,19 @@ class LeadGenController extends BaseController
 
     public function coop3rdrumm3r()
     {
-        return view('drumeo.lead-gen.coop3rdrumm3r.signup');
+        return view('drumeo.lead-gen.coop3rdrumm3r.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function destupefy()
     {
-        return view('drumeo.lead-gen.100-songs.signup');
+        return view('drumeo.lead-gen.100-songs.signup', ['recaptchaKey'=>config('recaptcha.key')]);
 
         throw new NotFoundHttpException();
     }
 
     public function drumSetMaintenance()
     {
-        return view('drumeo.lead-gen.courses.full.drum-set-maintenance.signup');
+        return view('drumeo.lead-gen.courses.full.drum-set-maintenance.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function dtmeTestimonials(Request $request, $domain, $page = null)
@@ -44,30 +45,27 @@ class LeadGenController extends BaseController
         return view('drumeo.products.dtme-testimonials');
     }
 
-    public function faster()
-    {
-        return view('drumeo.lead-gen.faster.signup');
-    }
-
     public function fasterNeon()
     {
-        return view('drumeo.lead-gen.faster.signup-neon');
+        return view('drumeo.lead-gen.faster.signup-neon', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function gavinsGrooves()
     {
-        return view('drumeo.lead-gen.courses.full.gavins-grooves.signup');
+        return view('drumeo.lead-gen.courses.full.gavins-grooves.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function gstd(Request $request, $domain, $page = null)
     {
         switch ($page) {
             case null:
-                return view('drumeo.lead-gen.getting-started.signup');
-            case 'recap':
-                return view('drumeo.lead-gen.getting-started.signup-recap', ['recaptchaKey'=>config('recaptcha.key')]);
+                return view('drumeo.lead-gen.getting-started.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
-                return view('drumeo.lead-gen.getting-started.thank-you');
+                return view('drumeo.lead-gen.getting-started.thank-you', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-annual':
+                return view('drumeo.lead-gen.getting-started.ty-annual', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-monthly':
+                return view('drumeo.lead-gen.getting-started.ty-monthly', ['theme'=> 'drumeo', 'month' => true]);
             case '10-practice':
                 $currentLesson = (object) array(
                     'title' => 'Building Your Practice Routine',
@@ -105,28 +103,36 @@ class LeadGenController extends BaseController
 
         throw new NotFoundHttpException();
     }
-
-    public function gtsdAlt()
+    public function faster(Request $request, $domain, $page = null)
     {
-        return view('drumeo.lead-gen.getting-started.signup-alt');
+        switch ($page) {
+            case null:
+                return view('drumeo.lead-gen.faster.signup', ['recaptchaKey'=>config('recaptcha.key')]);
+            case 'thank-you':
+                return view('drumeo.lead-gen.faster.thank-you', ['theme'=> 'drumeo', 'month' => true]);
+            case 'ty-annual':
+                return view('drumeo.lead-gen.getting-started.ty-annual');
+            case 'ty-monthly':
+                return view('drumeo.lead-gen.getting-started.ty-monthly');
+        }
 
         throw new NotFoundHttpException();
     }
 
     public function freePlayalongs(Request $request, $domain, $prefix = null, $page = null)
     {
-        return view('drumeo.lead-gen.free-playalongs.signup');
+        return view('drumeo.lead-gen.free-playalongs.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function metalPlayalongs()
     {
-        return view('drumeo.lead-gen.metal-playalongs.signup');
+        return view('drumeo.lead-gen.metal-playalongs.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function johnGrooves(Request $request, $domain, $prefix = null, $page = null)
     {
         if(is_null($prefix) && is_null($page)) {
-            return view('drumeo.lead-gen.grooves-of-john-bonham.signup');
+            return view('drumeo.lead-gen.grooves-of-john-bonham.signup', ['recaptchaKey'=>config('recaptcha.key')]);
         } else {
             switch ($page) {
                 case null:
@@ -141,22 +147,22 @@ class LeadGenController extends BaseController
 
     public function handTechnique()
     {
-        return view('drumeo.lead-gen.hand-technique.signup');
+        return view('drumeo.lead-gen.hand-technique.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function linearDrumming()
     {
-        return view('drumeo.lead-gen.linear-drumming.signup');
+        return view('drumeo.lead-gen.linear-drumming.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function jacksonGrooves()
     {
-        return view('drumeo.lead-gen.courses.full.michael-jackson-grooves.signup');
+        return view('drumeo.lead-gen.courses.full.michael-jackson-grooves.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function mustKnowGrooves()
     {
-        return view('drumeo.lead-gen.courses.full.must-know-grooves.signup');
+        return view('drumeo.lead-gen.courses.full.must-know-grooves.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function rockDrumming()
@@ -166,19 +172,19 @@ class LeadGenController extends BaseController
 
     public function subdivision()
     {
-        return view('drumeo.lead-gen.courses.full.subdivision-challenge.signup');
+        return view('drumeo.lead-gen.courses.full.subdivision-challenge.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function sucherman()
     {
-        return view('drumeo.lead-gen.courses.full.sucherman-sound.signup');
+        return view('drumeo.lead-gen.courses.full.sucherman-sound.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function toolbox(Request $request, $domain, $page = null)
     {
         switch ($page) {
             case null:
-                return view('drumeo.lead-gen.ultimate-toolbox.signup');
+                return view('drumeo.lead-gen.ultimate-toolbox.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'catalogue':
                 return view('drumeo.lead-gen.ultimate-toolbox.catalogue');
         }
@@ -253,7 +259,7 @@ class LeadGenController extends BaseController
     public function pages(Request $request, $domain, $page = null)
     {
         if(str_contains($page, 'blog')){
-            return view('drumeo.lead-gen.blog-forms.'.$page);
+            return view('drumeo.lead-gen.blog-forms.'.$page, ['recaptchaKey'=>config('recaptcha.key')]);
         }
         else {
             return view('drumeo.lead-gen.pages.'.$page);
@@ -284,16 +290,27 @@ class LeadGenController extends BaseController
 
     public function weeklyEmail()
     {
-        return view('drumeo.lead-gen.blog-forms.weekly-email');
+        return view('drumeo.lead-gen.blog-forms.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);
     }
     public function weeklyMail()
     {
-        return view('drumeo.lead-gen.blog-forms.weeklyemail');
+        return view('drumeo.lead-gen.blog-forms.weeklyemail', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)
     {
-        $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Drumeo')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
+        $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->where('leadgens.visible', true)
+            ->where(function ($query) {
+                return $query
+                    ->whereNull('leadgens.start_date')
+                    ->orWhere('leadgens.start_date', '<=', Carbon::now('PST')->toDateTimeString());
+            })
+            ->where(function ($query) {
+                return $query
+                    ->whereNull('leadgens.end_date')
+                    ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
+            })
+            ->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Drumeo')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
         if(!is_null($currentLesson)){
             if(!$currentLesson->one_off){
                 $lessons = LeadgenLesson::where([['leadgen_id', $currentLesson->leadgen_id], ['one_off', 0]])->get();
@@ -317,7 +334,17 @@ class LeadGenController extends BaseController
             ]);
         }
         else {
-            $leadgen = Leadgen::join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Drumeo')->where('slug', $leadgenSlug)->select('leadgens.*')->first();
+            $leadgen = Leadgen::where('leadgens.visible', true)
+                ->where(function ($query) {
+                    return $query
+                        ->whereNull('start_date')
+                        ->orWhere('start_date', '<=', Carbon::now('PST')->toDateTimeString());
+                })
+                ->where(function ($query) {
+                    return $query
+                        ->whereNull('leadgens.end_date')
+                        ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
+                })->join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Drumeo')->where('slug', $leadgenSlug)->select('leadgens.*')->where('leadgens.visible', true)->first();
             if(!is_null($leadgen)){
                 $lessons = LeadgenLesson::where([['leadgen_id', $leadgen->id], ['one_off', 0]])->get();
 

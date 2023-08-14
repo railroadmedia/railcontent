@@ -5,7 +5,7 @@
                 <div class="flex flex-row align-v-center">
                     <div class="flex flex-column arrow-column hide-xs-only">
                         <button class="btn collapse-square" @click="openAssignment">
-                            <span class="bg-grey-3" :class="accordionButtonClasses">
+                            <span class="tw-border-2 tw-border-solid tw-border-[#000C17] tw-text-[#000C17] dark:tw-text-white dark:tw-border-white tw-h-[50px] tw-w-[50px] tw-rounded-full tw-flex tw-justify-center tw-items-center">
                                 <i class="fas" :class="accordionButtonIconClasses"></i>
                             </span>
                         </button>
@@ -25,14 +25,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flex flex-column flex-auto body ph-2 hide-sm-up pointer dark:tw-text-white"
-                        @click="openAssignment">
-                        <i class="fas" :class="accordionButtonIconClasses"></i>
-                    </div>
+                    <button v-if="soundsliceSlug"
+                            title="Add To Playlist"
+                            class="dark:tw-text-white tw-text-[#00101D] md:tw-hidden"
+                            @click.stop.prevent="addToPlaylist({ content_id: id, brand: this.brand, type: 'General', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail })"
+                    >
+                        <musora-icon icon-name="plus" class="tw-h-8 tw-w-8 font-bold" />
+                    </button>
                 </div>
             </div>
             <div class="flex flex-column tw-ml-auto complete-column tw-items-start">
-                <div class="flex flex-row tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full">
+                <div class="flex flex-row md:tw-justify-end tw-flex-wrap md:tw-flex-nowrap tw-w-full">
 
                     <button id="open-exercise-button" v-if="soundsliceSlug"
                         class="tw-btn-secondary dark:tw-text-white tw-text-[#00101D] tw-mb-2 md:tw-mb-0 md:tw-mr-2 tw-w-full md:tw-w-[250px]"
@@ -40,11 +43,20 @@
                         <i class="fas fa-play mr-1"></i> Practice
                     </button>
 
-                    <button class="tw-w-full md:tw-w-[250px]"
+                    <button class="tw-w-full md:tw-w-[250px] md:tw-mr-2 tw-mb-2 md:tw-mb-0"
                         :class="isComplete ? `tw-btn-primary ${brandBgColor}` : `tw-btn-secondary ${brandTextColor}`"
                         :disabled="isRequesting" @click.stop="markAsComplete">
                         <i class="fas fa-check mr-1"></i>
                         {{ isComplete ? 'Completed' : 'Complete' }}
+                    </button>
+
+                    <!-- New Add To Playlist Button -->
+                    <button v-if="soundsliceSlug"
+                            title="Add To Playlist"
+                            class="dark:tw-text-white tw-text-[#00101D] tw-hidden md:tw-block"
+                            @click.stop.prevent="addToPlaylist({ content_id: id, brand: this.brand, type: 'General', name: lessonTitle, description: '', thumbnail_url: lessonThumbnail })"
+                    >
+                        <musora-icon icon-name="plus" class="tw-h-10 tw-w-10 font-bold" />
                     </button>
                 </div>
             </div>
@@ -102,7 +114,7 @@
         <transition name="show-from-bottom">
             <div v-if="open" id="practiceOverlay" class="bg-white">
                 <SoundSlice :user-id="userId" :theme-color="themeColor" :additional-params="additionalParams"
-                    :soundslice-slug="soundsliceSlug" :loading="loading" @onLoad="loading = false" @onPlay="handlePlay"
+                    :soundslice-slug="soundsliceSlug" :content-id="lessonId" :loading="loading" @onLoad="loading = false" @onPlay="handlePlay"
                     @onPause="handlePause">
                     <template v-slot:soundsliceControls>
                         <SoundSliceControls :title="title" :disable-next="disableNext" :disable-prev="disablePrev"
@@ -133,6 +145,18 @@ export default {
         SoundSliceControls,
     },
     props: {
+        lessonThumbnail: {
+            type: String,
+            default: () => '',
+        },
+        lessonTitle: {
+            type: String,
+            default: () => '',
+        },
+        lessonId: {
+            type: [Number, String],
+            default: () => 0,
+        },
         brand: {
             type: String,
             default: () => 'drumeo',
@@ -318,6 +342,7 @@ export default {
         },
     },
     mounted() {
+        console.log('thumb prop', this.lessonThumbnail);
         if (this.position < 3) {
             this.openAssignment();
         }
@@ -330,6 +355,10 @@ export default {
         window.removeEventListener('lesson-complete', this.syncCompleteState);
     },
     methods: {
+        addToPlaylist(data) {
+            window.openplaylistmodal({ modalType: 'addItem', brand: this.brand, content: data });
+        },
+
         scrollToPage(page) {
             this.currentPage = page;
         },

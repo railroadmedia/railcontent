@@ -7,8 +7,8 @@
     <meta name="description" content="Learn the songs you love; now on drums, piano, guitar, or vocals.">
     <meta property="og:description" content="Learn the songs you love; now on drums, piano, guitar, or vocals.">
 
-    <meta property="og:url" content="https://www.musora.com/unified-2022">
-    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2021/share-image.jpg">
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
     <style>
         [placeholder]:focus::-webkit-input-placeholder {
             color: transparent;
@@ -275,7 +275,7 @@
                 </div>
             </form>
                 <div class="disclaimer">
-                    <i class="fal fa-info-circle"></i>
+                    <i class="fa-light fa-info-circle"></i>
                     <p>By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</p>
                 </div>
                 <br><br>

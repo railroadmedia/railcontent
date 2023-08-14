@@ -82,7 +82,8 @@
                     <h2>Michael Jackson</h2>
                 </div>
                 <p>Enter your email below <br class="inline sm:hidden"> for 10 free video lessons...</p>
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => "Drumeo - Engagement - Trigger - Grooves of MJ - Web Form",
                     "formName" => 'Grooves Of Michael Jackson',
                     "buttonText" => 'Send The Videos&nbsp;'
@@ -94,7 +95,7 @@
     @include('drumeo.lead-gen.courses.full.partials.instructor',[
         "img" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/michael-jackson-grooves/avatar.jpg",
         "title" => '
-            Learn From The Master --
+            Learn From The Master —
             <br class="hidden sm:inline lg:hidden">
             Michael\'s Go-To Live Drummer
         ',
@@ -120,7 +121,8 @@
             </div>
             <p>Enter your email below <br class="sm:hidden"> for 10 free video lessons...</p>
             <br><br class="hidden sm:inlin">
-            @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+            @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                 "formId" => "Drumeo - Engagement - Trigger - Grooves of MJ - Web Form",
                 "formName" => 'Grooves Of Michael Jackson',
                 "buttonText" => 'Send The Videos&nbsp;'

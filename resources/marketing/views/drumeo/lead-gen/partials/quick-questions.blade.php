@@ -1,4 +1,4 @@
-<section class="text-{{ $textColor }} py-8 md:py-14" style="background-color:{{ $bgColor }};">
+<section class="text-{{ $textColor }} py-8 md:py-14" style="background:{{ $bgColor }};">
     <div class="container mx-auto">
         <div class="flex flex-wrap max-w-6xl mx-auto px-2 lg:px-3">
             <div class="px-3 md:px-4 w-full md:w-5/12 lg:w-5/12">
@@ -6,7 +6,7 @@
                     <strong>Is this really free?</strong>
                 </div>
                 <p>
-                    Yes! We love sharing videos to help drummers -- and deep down we hope you’ll see some of the value that we provide inside Drumeo juuuuust in case you ever want to consider joining!
+                    Yes! We love sharing videos to help drummers — and deep down we hope you’ll see some of the value that we provide inside Drumeo juuuuust in case you ever want to consider joining!
                 </p>
             </div>
             <div class="px-3 md:px-4 w-full md:w-7/12 lg:w-7/12">

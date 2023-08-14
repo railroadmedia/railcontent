@@ -9,7 +9,7 @@
     <meta property="og:image" content="https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/og-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.singeo.com/holiday-karaoke/">
 
-    <link href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-singeo.css') }}" rel="stylesheet">
     <style>
         .edge-pitch {top:40px;}
         @media (min-width: 768px) {  .edge-pitch {top:56px;}  }
@@ -54,7 +54,7 @@
     <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap z-10 py-2 sm:py-1 fixed mx-auto bg-black text-white">
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
-                <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png">
+                <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png">
                 <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$singeoSongs - 30 }}+ more songs + world-class vocal lessons <br>
                     inside Singeo. Click for a FREE trial.</p>
             </div>
@@ -314,7 +314,7 @@
                     <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 md:px-3 mb-5 md:mb-6 lg:mb-8">
                         <div class="relative autoplay-video cursor-pointer overflow-hidden group" data-open="{{ str_replace(".","",(str_replace("/","",(str_replace(" ","",$bonus['original']))))) }}">
                             <i class="absolute top-1/2 left-1/2 fas fa-play play-button smaller opacity-0 group-hover:opacity-100 -m-10 lg:-m-12"></i>
-                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=85/{{ $bonus['image'] }}"></div>
+                            <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=95/{{ $bonus['image'] }}"></div>
                         </div>
                         <h6 class="mt-3 mb-0.5 leading-tight"><strong>{{ $bonus['song'] }}</strong></h6>
                         <p class="text-navy leading-tight">{{ $bonus['artist'] }}</p>
@@ -323,7 +323,7 @@
             </div>
         </div>
     </section>
-    <section class="text-center py-14 md:py-24 lg:py-32 text-white lazyload" style="background: #6d7894 center center/cover;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/final.jpg">
+    <section class="text-center py-14 md:py-24 lg:py-32 text-white lazyload" style="background: #6d7894 center center/cover;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/final.jpg">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
                 <h1><strong>Keep the party going.</strong></h1>

@@ -19,7 +19,7 @@
 
         <div class="tw-flex tw-flex-col tw-w-full">
 
-            <div class="fluid tw-pb-3 tw-max-w-[1280px] tw-w-full tw-mx-auto">
+            <div class="fluid tw-pb-3 @if(count(json_decode($relatedLessons)->data) === 1 && $lessonContent['id'] === json_decode($relatedLessons)->data[0]->id) tw-max-w-[1280px] @endif tw-w-full tw-mx-auto">
 
                 <div class="p-lg-only lean">
                     {{-- Video Player --}}
@@ -79,8 +79,8 @@
                                 </transition>
                             @else
                                 <transition appear name="fade">
-                                    <video-player 
-                                        ref="mediaElementVueInstance" 
+                                    <video-player
+                                        ref="mediaElementVueInstance"
                                         theme-color="{{ $brand }}"
                                         brand="{{ $brand }}"
                                         poster="{{ $lessonContent['video_poster_image_url'] ?? '' }}"
@@ -97,7 +97,7 @@
                                         video-length="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds') }}"
                                         :total-duration="{{ $lessonContent->fetch('fields.video.fields.length_in_seconds', 0) }}"
                                         cast-title="{{ $lessonContent->fetch('fields.title') }}"
-                                        :use-intersection-observer="true" 
+                                        :use-intersection-observer="true"
                                         @play="handleVideoPlay"
                                         @pause="handleVideoPause">
                                         <div class="widescreen title tw-text-{{ $brand }} tw-mb-2"></div>
@@ -111,6 +111,9 @@
                 <div class="tw-container tw-mx-auto lean">
                     <video-resources theme-color="{{ $brand }}" brand="{{ $brand }}"
                         title="{{ $lessonContent->fetch('fields.title') }}"
+                        lesson-type="{{ $lessonType }}"
+                        thumbnail-url="{{ $lessonContent->fetch('data.thumbnail_url') }}"
+                        description="{{ $lessonContent->fetch('data.description') }}"
                         :instructors="{{ json_encode($lessonContent['coaches'] ?? []) }}"
                         parent-title="{{ isset($parent) ? $parent->fetch('fields.title') : null }}"
                         :is-liked="{{ json_encode($lessonContent['is_liked_by_current_user'] ?? false) }}"
@@ -118,11 +121,13 @@
                         :is-added="{{ json_encode($lessonContent->fetch('is_added_to_primary_playlist') ?? false) }}"
                         content-id="{{ $lessonContent->fetch('id') }}" user-id="{{ auth()->id() }}"
                         :resources="{{ json_encode(array_merge($lessonContent['resources'] ?? [], $parent['resources'] ?? [])) }}"
-                        :show-add-to-list="{{ json_encode($lessonType != 'song') }}"></video-resources>
+                        :show-add-to-list="{{ json_encode($lessonType != 'song') }}"
+                        :show-info-button="{{ json_encode(!empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters'])) }}"
+                    ></video-resources>
 
                     {{-- Add to List and Next/Prev Buttons --}}
                     @include('partials.bladesora.members.content.lesson-video._buttons', [
-                        'themeColor' => '{{ $brand }}',
+                        'themeColor' => $brand,
                         'prevLessonUrl' => !empty($previousChild) ? $previousChild->fetch('url') : null,
                         'nextLessonUrl' => !empty($nextChild) ? $nextChild->fetch('url') : null,
                         'hasQAVideo' => !empty($lessonContent['qna_video_playback_endpoints']),
@@ -158,7 +163,7 @@
 
             <div class="container-fluid tw-bg-{{ $brand }} tw-rounded-[10px]">
                 @include('partials.bladesora.members.content.content-progress', [
-                    'themeColor' => '{{ $brand }}',
+                    'themeColor' => $brand,
                     'contentType' => $lessonContent->fetch('type'),
                     'progress' => $lessonContent->fetch('progress_percent'),
                     'nextLessonUrl' => '',
@@ -215,49 +220,14 @@
                     <div class="tw-flex tw-flex-col tw-flex-grow tw-mt-3 tw-w-full">
                         <div class="tw-flex tw-flex-row pv-3 tw-w-full">
                             <h1 class="heading dark:tw-text-white">Assignments</h1>
-                            @php
-                                $formattedAssignments = [];
-                                foreach ($lessonContent->fetch('*assignments', []) as $index => $assignment) {
-                                    $content = [];
-                                    $content['themeColor'] = brand();
-                                    $content['timecode'] = $assignment->fetch('data.timecode', 0);
-                                    $content['id'] = $assignment->fetch('id');
-                                    $content['xp'] = $assignment->fetch('xp');
-                                    $content['title'] = $assignment->fetch('fields.title');
-                                    $content['soundsliceSlug'] = $assignment->fetch('fields.soundslice_slug');
-                                    $content['completed'] = $assignment->fetch('completed');
-                                    $content['userId'] = auth()->id();
-                                    $content['position'] = $index;
-                                    $formattedAssignments[] = $content;
-                                }
-                            @endphp
                         </div>
-                        @php
-                            $formattedAssignments = [];
-                            foreach ($lessonContent->fetch('*assignments', []) as $index => $assignment) {
-                                $content = [];
-                                $content['dusk'] = 'content-assignment';
-                                $content['themeColor'] = brand();
-                                $content['timecode'] = $assignment->fetch('data.timecode', 0);
-                                $content['id'] = $assignment->fetch('id');
-                                $content['xp'] = $assignment->fetch('fields.total_xp');
-                                $content['title'] = $assignment->fetch('fields.title');
-                                $content['soundsliceSlug'] = $assignment->fetch('fields.soundslice_slug');
-                                $content['completed'] = $assignment->fetch('completed');
-                                $content['userId'] = auth()->id();
-                                $content['position'] = $index;
-                                $formattedAssignments[] = $content;
-                            }
-                        @endphp
                         <div class="tw-flex tw-flex-row tw-w-full">
-                            <assignments-container :assignments="{{ json_encode($formattedAssignments) }}">
-                                <template slot="completion-bonus">
-                                    @include('partials.bladesora.members.partials._completion-bonus', [
-                                        'xpBonus' => $lessonContent->fetch('xp_bonus', 0),
-                                        'isComplete' => $lessonContent->fetch('progress_percent', 0) === 100,
-                                        'themeColor' => brand(),
-                                    ])
-                                </template>
+                            <assignments-container
+                                brand="{{ $brand }}"
+                                :user-id="{{ auth()->id() }}"
+                                :lesson-data="{{ json_encode($lessonContent) }}"
+                                :assignments="{{ json_encode($lessonContent->fetch('*assignments', [])) }}"
+                            >
                             </assignments-container>
                         </div>
                     </div>
@@ -265,7 +235,7 @@
             </div>
 
             @include('partials.bladesora.members.content._lesson-complete', [
-                'themeColor' => '{{ $brand }}',
+                'themeColor' => $brand,
                 'thisLessonJson' => $thisLessonJson,
                 'nextLessonJson' => !empty($nextChild) ? $nextLessonJson : null,
             ])
@@ -284,30 +254,32 @@
         </div>
 
         {{-- Related Lessons Section --}}
-        <div class="">
-            <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
-                <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
-                    <div class="tw-flex tw-flex-col tw-mb-5">
-                        @if ($parent && ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) === 'Song')
-                            <p class="tw-text-{{ $brand }} tw-text-sm tw-mb-1 tw-uppercase">
-                                {{ ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) }}</p>
-                            <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
-                                {{ $parent->fetch('fields.title') }}
-                            </h6>
-                        @else
-                            <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
-                                Related Lessons
-                            </h6>
-                        @endif
-                    </div>
+        @if(count(json_decode($relatedLessons)->data) > 1 && $lessonContent['id'] !== json_decode($relatedLessons)->data[0]->id)
+            <div class="">
+                <div id="lessonInfo" class="tw-flex tw-flex-row reverse tw-items-start">
+                    <div class="tw-flex tw-flex-col tw-w-full 2xl:tw-w-[420px] tw-my-4 2xl:tw-mt-0 2xl:tw-ml-4 ">
+                        <div class="tw-flex tw-flex-col tw-mb-5">
+                            @if ($parent && ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) === 'Song')
+                                <p class="tw-text-{{ $brand }} tw-text-sm tw-mb-1 tw-uppercase">
+                                    {{ ucwords(str_replace('bundle', '', str_replace('-', ' ', $parent['type']))) }}</p>
+                                <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
+                                    {{ $parent->fetch('fields.title') }}
+                                </h6>
+                            @else
+                                <h6 class="tw-text-2xl tw-leading-none tw-font-bold tw-text-[#00101D] dark:tw-text-white">
+                                    Related Lessons
+                                </h6>
+                            @endif
+                        </div>
 
-                    <content-catalogue catalogue-type="grid" theme-color="{{ $brand }}" :use-theme-color="true"
-                        brand="{{ brand() }}" :pre-loaded-content="{{ $relatedLessons }}"
-                        @if (!empty($lockUnowned)) :lock-unowned="true" @endif :display-inline="true"
-                        user-id="{{ auth()->id() }}"></content-catalogue>
+                        <content-catalogue catalogue-type="grid" theme-color="{{ $brand }}" :use-theme-color="true"
+                            brand="{{ brand() }}" :pre-loaded-content="{{ $relatedLessons }}"
+                            @if (!empty($lockUnowned)) :lock-unowned="true" @endif :display-inline="true"
+                            user-id="{{ auth()->id() }}"></content-catalogue>
+                    </div>
                 </div>
             </div>
-        </div>
+        @endif
     </div>
 
 @endsection

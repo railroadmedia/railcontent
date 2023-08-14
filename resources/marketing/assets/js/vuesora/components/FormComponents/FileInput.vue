@@ -1,6 +1,6 @@
 <template>
     <div class="file-field" :disabled="disabled">
-        <label :for="id" 
+        <label :for="id"
                class="btn-secondary text-gray-400 dark:text-[#7E9AB1] sm:btn-small"
                :aria-required="required"
                :aria-invalid="invalid"
@@ -8,7 +8,7 @@
         >
             <div class="input-icon">
                 <!-- Normal State -->
-                <i class="fal fa-paperclip"></i>
+                <i class="fa-light fa-paperclip"></i>
                 <!-- Heroicon name: solid/exclamation-circle -->
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" class="invalid-icon" fill="currentColor" aria-hidden="true">
                     <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
@@ -19,8 +19,8 @@
                 </svg>
             </div>
             {{ name + (multiple ? '(s)' : '') }}
-            <input type="file" 
-                   :id="id" 
+            <input type="file"
+                   :id="id"
                    :accept="accept"
                    @change="checkUploadedFile($event)">
         </label>
@@ -32,10 +32,10 @@
         <!-- Uploadedd Files -->
         <div v-if="files.length !== 0">
             <div v-for="(file, index) in files"
-                 :key="index" 
+                 :key="index"
                  class="bg-green-50 p-2 inline-flex items-center font-bold text-xs w-full mb-2"
             >
-                <span class="truncate">{{ files[index].name }}</span> 
+                <span class="truncate">{{ files[index].name }}</span>
                 <span class="ml-1 text-gray-500 mr-auto whitespace-nowrap">({{ formatBytes(files[index].size) }})</span>
                 <!-- Remove File -->
                 <div class="ml-4 inline-flex"
@@ -111,16 +111,16 @@ export default {
                 "video/mp4",
                 "video/x-m4v",
                 "video/quicktime",
-                "image/apng", 
-                "image/bmp", 
-                "image/gif", 
-                "image/jpeg", 
-                "image/pjpeg", 
-                "image/png", 
-                "image/svg+xml", 
-                "image/tiff", 
-                "image/webp", 
-                "image/x-icon", 
+                "image/apng",
+                "image/bmp",
+                "image/gif",
+                "image/jpeg",
+                "image/pjpeg",
+                "image/png",
+                "image/svg+xml",
+                "image/tiff",
+                "image/webp",
+                "image/x-icon",
             ];
 
 
@@ -135,7 +135,7 @@ export default {
                 return;
             } else {
                 this.validate()
-                this.formState = 2; 
+                this.formState = 2;
                 if(!this.multiple) this.$emit('clearFiles')
                 this.$emit('attachFile', e.target.files[0]);
             }
@@ -182,7 +182,7 @@ export default {
             if(Arr.length === 0 && !this.invalid) {
                 this.valid = false;
                 this.formState = 0;
-            } 
+            }
         }
     }
 }

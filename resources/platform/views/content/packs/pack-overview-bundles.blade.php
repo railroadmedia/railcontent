@@ -25,6 +25,7 @@
     @component('partials._header-banner', [
         'backgroundImage' => $pack->fetch('data.header_image_url'),
         'hideUser' => true,
+        'hideBrandGradient' => $pack['slug'] == 'piano-technique-made-easy',
     ])
         @slot('content')
             <div class="tw-flex tw-flex-col pr-1 tw-justify-end tw-items-center tw-w-full">
@@ -58,7 +59,7 @@
                 {{-- Logo --}}
                 <img alt="{{ $pack->fetch('title') }} Logo"
                     class="tw-w-full tw-transition-opacity tw-max-w-[480px] tw-opacity-0"
-                    src="{{ $pack->fetch('data.logo_image_url') }}" 
+                    src="{{ $pack->fetch('data.logo_image_url') }}"
                     onload="this.classList.remove('tw-opacity-0')"
                 >
             </div>

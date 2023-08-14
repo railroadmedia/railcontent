@@ -12,8 +12,8 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css">
     @include('_partials.layout._tailwindcdn')
-    <link href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/faster-fingers.css') }}">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/faster-fingers.css') }}">
 @stop
 
 @section('global-body')
@@ -79,9 +79,9 @@
             @endif
             <div class="wrapper">
                 <img src="https://d2vyvo0tyx8ig5.cloudfront.net/faster-fingers/sales/lisa.jpg" alt="Lisa">
-                <p>Playing fast on the piano is merely a dream for a lot of people. So many try -- and fail -- to play quicker. Faster Fingers is your roadmap to success for increasing your speed on the keys -- and it will only take 10 minutes a day (or less).
+                <p>Playing fast on the piano is merely a dream for a lot of people. So many try — and fail — to play quicker. Faster Fingers is your roadmap to success for increasing your speed on the keys — and it will only take 10 minutes a day (or less).
                     <br><br> Why learn to play faster?
-                    <br><br>Well, building speed will improve ALL other aspects of your piano playing -- so you’ll learn songs quicker, playing them faster, and play them BETTER.
+                    <br><br>Well, building speed will improve ALL other aspects of your piano playing — so you’ll learn songs quicker, playing them faster, and play them BETTER.
                     <br><br>But really, you want to play faster because it feels amazing! Because you’ll be sitting at the piano and you’ll KNOW you’ve got this. No imposter syndrome. It’s all you - and everyone listening will know it.
                     <br><br>That’s the cool part.
                     <br><br>And you’ll get there with these exercises. You’ll improve your finger strength, dexterity, keyboard familiarity, control, and overall piano technique.
@@ -96,12 +96,12 @@
         <div class="container">
             <h1>THE METRONOME DOESN’T LIE</h1>
             <p><strong class="text-red">50bpm. 80bpm. 140pm. 200pm.</strong>
-                <br><br> These aren’t abstract concepts designed to make you feel better. These are REAL tempos that you can either play -- or you can’t.
+                <br><br> These aren’t abstract concepts designed to make you feel better. These are REAL tempos that you can either play — or you can’t.
                 <br><br> This training pack cannot guarantee what speed you’ll reach. That’ll depend on your starting speed, previous experience and the work you’re willing to put in (and it will take work).
                 <br><br>But we can guarantee that if you DO put in the work, and are consistent, you WILL get faster.
                 <br><br>The metronome doesn’t lie. You’ll be tracking your tempo throughout the entire program and keeping notes.
                 <br><br><strong>So what does that sound like?</strong>
-                <br><br>Take a listen. Here are four different tempos - 50bpm -- 80bpm --- 140bpm -- 200bpm.
+                <br><br>Take a listen. Here are four different tempos - 50bpm — 80bpm  —  140bpm — 200bpm.
             </p>
             <div class="col-xs-12 col-sm-3 play-vimeo2" data-toggle="modal" data-target="#bpm50">
                 <div class="modal-wrap">
@@ -185,7 +185,7 @@
                     <br><br>I totally get it. What good is it to play an exercise fast?
                     <br><br>Think about that time you heard someone play an incredible riff or run on the piano and thought… WOW! Maybe you thought, “I’ll never be able to play like that.”
                     <br><br>You can.
-                    <br><br>Any piano player who can play fast got there by one way -- practice.
+                    <br><br>Any piano player who can play fast got there by one way — practice.
                     <br><br>And that’s what you’ll get through this training pack. You’ll develop the skills to play fast, so YOU can be the one playing those incredible riffs.
                     <br><br>And everyone who hears you will think… WOW!
                 </p>
@@ -203,7 +203,7 @@
                     <div class="top-badge">WEEK 1</div>
                 </div>
                 <p>
-                    <strong>Waking Up The Fingers</strong><br> This week is all about establishing a baseline tempo, and getting your fingers used to the daily exercises you’ll be doing. You’ll also push to see how fast you can play at the start -- so you’ll be able to see how much better you are the end.
+                    <strong>Waking Up The Fingers</strong><br> This week is all about establishing a baseline tempo, and getting your fingers used to the daily exercises you’ll be doing. You’ll also push to see how fast you can play at the start — so you’ll be able to see how much better you are the end.
                     <br><span class="calendar">1</span><span class="calendar">2</span><span class="calendar">3</span><span class="calendar">4</span><span class="calendar">5</span>
                 </p>
             </div>
@@ -223,7 +223,7 @@
                     <div class="top-badge">WEEK 3</div>
                 </div>
                 <p>
-                    <strong>Building Endurance</strong><br> Play fast -- for longer. It’s no fun playing fast if you can’t LAST! You’ll build your muscular endurance so you’ll be able to play longer, pain-free.
+                    <strong>Building Endurance</strong><br> Play fast — for longer. It’s no fun playing fast if you can’t LAST! You’ll build your muscular endurance so you’ll be able to play longer, pain-free.
                     <br><span class="calendar">1</span><span class="calendar">2</span><span class="calendar">3</span><span class="calendar">4</span><span class="calendar">5</span>
                 </p>
             </div>
@@ -257,54 +257,54 @@
 
     <section class="play-songs text-center">
         <div class="container">
-            <h1>PLAY FASTER --<br class="hidden-sm hidden-md hidden-lg"> THE RIGHT WAY</h1>
+            <h1>PLAY FASTER  — <br class="hidden-sm hidden-md hidden-lg"> THE RIGHT WAY</h1>
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-piano-keyboard"></i>
+                <i class="fa-light fa-piano-keyboard"></i>
                 <p>
-                    <strong>YOUR OWN PRACTICE PARTNER</strong><br> You will get 30 guided video lessons showing you exactly what to do -- at what tempo. No guessing about what comes next, Lisa will be there to show -- and motivate you.
+                    <strong>YOUR OWN PRACTICE PARTNER</strong><br> You will get 30 guided video lessons showing you exactly what to do — at what tempo. No guessing about what comes next, Lisa will be there to show — and motivate you.
                 </p>
             </div>
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-list-ol"></i>
+                <i class="fa-light fa-list-ol"></i>
                 <p>
-                    <strong>NO GUESSWORK</strong><br> You’ll know exactly what to play, and when. Every single day of this training period has been thought of (including the rest days), so you don’t have to worry about WHAT you’ll practice. No guesswork -- only results.
+                    <strong>NO GUESSWORK</strong><br> You’ll know exactly what to play, and when. Every single day of this training period has been thought of (including the rest days), so you don’t have to worry about WHAT you’ll practice. No guesswork — only results.
                 </p>
             </div>
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-stopwatch"></i>
+                <i class="fa-light fa-stopwatch"></i>
                 <p>
                     <strong>SHORT PRACTICES</strong><br> Each lesson (and practice) will take just 10-minutes or less to finish. You’ll be practicing efficiently, and have more time to play songs. There’s no wasting time here.
                 </p>
             </div>
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-music"></i>
+                <i class="fa-light fa-music"></i>
                 <p>
                     <strong>PLAY-ALONG AS YOU PRACTICE</strong><br> Specifically designed for you to play along and measure your progress. Practice along with every exercise and set your own tempo.
                 </p>
             </div>
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-chart-line"></i>
+                <i class="fa-light fa-chart-line"></i>
                 <p>
                     <strong>SEE REAL RESULTS</strong><br> You’ll be able to measure your progress as you go along and SEE how much faster you’re getting. Simply fill in the progress tracker after each lesson.
                 </p>
             </div>
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-question"></i>
+                <i class="fa-light fa-question"></i>
                 <p>
                     <strong>YOUR QUESTIONS ANSWERED</strong><br> Got questions? We’ll be available to answer any you might have. Whether you're struggling with one particular exercise or have a question about technique, we’re here for you.
                 </p>
             </div>
             <hr style="opacity: 0;margin:0;" class="col-xs-12 hidden-xs no-padding">
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-users"></i>
+                <i class="fa-light fa-users"></i>
                 <p>
                     <strong>THE BEST ONLINE COMMUNITY</strong><br> Share your progress and your success with the best online piano community. The Pianote forum is a great place to meet other students and find encouragement and support.
                 </p>
             </div>
             <div class="benefit-tile col-xs-12 col-sm-6">
-                <i class="fal fa-infinity"></i>
+                <i class="fa-light fa-infinity"></i>
                 <p>
                     <strong>LIFETIME ACCESS</strong><br> This training is 30 lessons. And you’ll have access to it for life. Come back anytime to brush up on your new-found speed skills. Or keep pushing to see how fast you can get.
                 </p>
@@ -324,8 +324,8 @@
         <div class="container">
             <p>
                 <span class="first-letter">L</span>isa Witt knows what it’s like to play fast. She’s been teaching the piano for more than 18 years and has helped hundreds of students improve their speed, dexterity, and strength on the piano.
-                <br><br> She knows exactly what exercises are guaranteed to increase your speed -- and she’s here to guide you through all of them -- step-by-step so you’ll see success.
-                <br><br> “Playing faster is a goal for every pianist. But I’ve seen so many people try -- and fail -- because they went about it the wrong way. You need a plan!” she says.
+                <br><br> She knows exactly what exercises are guaranteed to increase your speed — and she’s here to guide you through all of them — step-by-step so you’ll see success.
+                <br><br> “Playing faster is a goal for every pianist. But I’ve seen so many people try — and fail — because they went about it the wrong way. You need a plan!” she says.
                 <br><br> Lisa has that plan. 30 guided practice sessions to get you flying across the keys.
                 <br><br> She’s not only your teacher, but she’s also your practice partner.
                 <br><br> “I will be with you EVERY STEP of this journey. I’m here to motivate, encourage and keep you accountable. You’re not doing this on your own.”

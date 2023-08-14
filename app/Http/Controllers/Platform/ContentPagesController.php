@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Platform;
 
 use App\DataMappers\Views\Railcontent\ShowDataMapper;
 use App\Decorators\Content\ContentLikesDecorator;
+use App\Decorators\Content\ContentUserWatchPositionDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
 use App\Decorators\Content\ResourceDecorator;
 use App\Decorators\Content\VimeoVideoSourcesDecorator;
@@ -22,6 +23,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Modules\UserManagementSystem\Models\User;
+use Railroad\Railcontent\Decorators\Decorator;
 use Railroad\Railcontent\Decorators\DecoratorInterface;
 use Railroad\Railcontent\Decorators\ModeDecoratorBase;
 use Railroad\Railcontent\Entities\ContentFilterResultsEntity;
@@ -188,7 +190,6 @@ class ContentPagesController extends BaseController
                 false,
                 $futureScheduledContentOnly
             );
-
         }
 
         ContentRepository::$pullFilterResultsOptionsAndCount = false;
@@ -394,6 +395,13 @@ class ContentPagesController extends BaseController
                 $previewVideo = $video['file'];
             }
         }
+        $collectionForDecoration = new Collection();
+        $collectionForDecoration = $collectionForDecoration->merge([$firstLevelContent]);
+
+        Decorator::$typeDecoratorsEnabled = true;
+        $collectionForDecoration = $collectionForDecoration->filter();
+        \App\Decorators\Content\ModeDecoratorBase::$decorationMode = ModeDecoratorBase::DECORATION_MODE_MAXIMUM;
+        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
 
         $noProgress = empty($firstLevelContent->fetch('higher_key_progress'));
         $progressLevel = 'Level - ' . (($noProgress) ? '1.1' : $firstLevelContent->fetch('higher_key_progress', '1.1'));
@@ -675,6 +683,7 @@ class ContentPagesController extends BaseController
         ContentLikesDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
         ModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MINIMUM;
         AppModeDecoratorBase::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
+        ContentUserWatchPositionDecorator::$decorationMode = DecoratorInterface::DECORATION_MODE_MAXIMUM;
 
         $this->contentService->idContentCache = [];
 
@@ -945,6 +954,13 @@ class ContentPagesController extends BaseController
                 ->first();
 
         ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MAXIMUM;
+
+        Decorator::$typeDecoratorsEnabled = true;
+        $collectionForDecoration = new Collection();
+        $collectionForDecoration = $collectionForDecoration->merge([$lessonContent]);
+        $collectionForDecoration = $collectionForDecoration->filter();
+        $collectionForDecoration = Decorator::decorate($collectionForDecoration, 'content');
+
         $lessonContent = $this->resourceDecorator->decorate(new Collection([$lessonContent]))->first();
         ResourceDecorator::$decorationMode = ResourceDecorator::DECORATION_MODE_MINIMUM;
 
@@ -1432,8 +1448,7 @@ class ContentPagesController extends BaseController
         $lessonType = ContentTypes::newContentTypes();
         $filteredType = $request->get('included_types');
 
-        ContentRepository::$availableContentStatues =
-            [ContentService::STATUS_PUBLISHED, ContentService::STATUS_SCHEDULED];
+        ContentRepository::$availableContentStatues = [ContentService::STATUS_PUBLISHED];
 
         ContentRepository::$pullFutureContent = false;
         ContentRepository::$pullFilterResultsOptionsAndCount = false;

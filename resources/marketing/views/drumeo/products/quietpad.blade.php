@@ -19,8 +19,6 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
-            $(document).foundation();
-
             $('.pad-toggle').click(function (e) {
                 e.stopPropagation();
                 $('.pad-flipper').toggleClass('flipped');
@@ -115,8 +113,11 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
+
+@section('body-data')
+    x-data="{ trailerOne: false, trailerTwo: false, }"
+@endsection
 
 @section('content')
 
@@ -137,21 +138,27 @@
                 <span>WATCH<br> THE DEMO</span>
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
             </div>
-            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play button">
+            <i @click="trailerOne = true;" class="fas fa-play play-button autoplay-video"></i>
             <br class="hide-for-medium">
             <img class="logo hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/drumeo-quietpad.png" alt="Quietpad logo">
             <h2><strong style="font-weight: 900;">Practice anywhere</strong> with two<br class="hide-for-medium"> full-size playing surfaces.</h2>
-            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue max-w-xl">Get Yours &raquo;</a>
             <p class="dense" style="opacity: 0;"><strong class="text-yellow">LAUNCH SPECIAL</strong><br>
                 <s>NORMALLY ${{ floatval($productPrices['quietpad']->price) }}.</s> <strong>ONLY ${{ floatval($productPrices['quietpad']->discounted_price) }}</strong> (SAVE {{ round(100 - (100 * (floatval($productPrices['quietpad']->discounted_price) / floatval($productPrices['quietpad']->price)))) }}%)</p>
         </div>
-        <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/395000347?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
-        </div>
     </header>
+
+    @component('_partials.components.video-modal',[
+        'name' => 'trailerOne',
+        'video' => '395000347',
+        'vimeo' => true,
+    ])
+        @slot('button')
+            <div class="text-center bg-white rounded-b-xl py-4">
+                <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            </div>
+        @endslot
+    @endcomponent
 
     <section class="content-section two-sides text-center">
         <div class="row">
@@ -160,21 +167,21 @@
             <div class="pad-toggle">
                 <div class="pad-details traditional active">
                     <img class="pad-icon" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/icon-sticks.png" alt="Stick icon">
-                    <img class="mobile-pad hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad-regular.png" alt="Quiet pad">
+                    <img class="mobile-pad hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/flipper.png" alt="Quiet pad">
                     <h5><strong>Traditional Surface</strong></h5>
                     <p>Durable. Realistic. Portable. The blue side offers a 12” playing surface, snare-like rebound, and everything you’d expect for every day practice. (You’ll love the hand-assembled quality.)</p>
                     <img class="arrow active show-for-medium" style="transform: scaleX(-1);" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/left-arrow.png" alt="Left arrow">
                 </div>
                 <div class="pad-details quiet">
                     <img class="pad-icon" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/icon-moon.png" alt="Moon icon">
-                    <img class="mobile-pad hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad.png" alt="Quietpad">
+                    <img class="mobile-pad hide-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/flipper-black.png" alt="Quietpad">
                     <h5><strong>Quiet Surface</strong></h5>
                     <p>Shhhhhh. Avoid the tap-tappidy-tap complaints with our quiet side, up to 50% quieter than traditional pads and ideal for developing strength, endurance, and control. (You’ll love the way it feels.)</p>
                     <img class="arrow active show-for-medium" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/left-arrow.png" alt="Left arrow">
                 </div>
-                <div class="pad-flipper flipped show-for-medium">
-                    <div style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad-regular.png);"><i class="fad fa-repeat hover-icon"></i></div>
-                    <div style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/quiet-pad.png);"><i class="fad fa-repeat hover-icon"></i></div>
+                <div class="pad-flipper flipped show-for-medium text-white">
+                    <div style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/flipper.png);"><i class="fad fa-repeat hover-icon"></i></div>
+                    <div style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/flipper-black.png);"><i class="fad fa-repeat hover-icon"></i></div>
                 </div>
             </div>
         </div>
@@ -198,7 +205,7 @@
             <div class="thumb img-modal"><div style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/pad-quiet-jord-over-shoulder.jpg);"></div></div>
             <div class="thumb size-16-9 img-modal"><div style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/pad-snare-jared-2.jpg);"></div></div>
             <div class="thumb size-16-9 img-modal float-right"><div style="background-image: url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/pad-quiet-dub.jpg);"></div></div>
-            <div class="video-pop autoplay-video" data-open="blindModal">
+            <div class="video-pop autoplay-video" @click="trailerTwo = true;">
                 <div class="watch-badge">
                     <span>WATCH<br> BLIND TEST</span>
                     <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" alt="Left arrow">
@@ -207,13 +214,19 @@
                 <img class="bg" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietpad/blindfold-test-thumb.jpg" alt="Thumnail">
             </div>
         </div>
-        <div class="reveal large text-center" id="blindModal" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/394999066?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
-            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
-        </div>
     </section>
+
+    @component('_partials.components.video-modal',[
+        'name' => 'trailerTwo',
+        'video' => '394999066',
+        'vimeo' => true,
+    ])
+        @slot('button')
+            <div class="text-center bg-white rounded-b-xl py-4">
+                <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            </div>
+        @endslot
+    @endcomponent
 
     <div class="slider-overlay">
         <div class="slider-lightbox">
@@ -257,7 +270,7 @@
         </div>
     </div>
 
-    <section class="content-section text-center comparison">
+    <section class="content-section text-center comparison" style="background-color: #f4f8fb; color:#000;">
         <div class="row">
             <h2><strong>The everyday practice<br class="hide-for-medium"> pad for drummers.</strong></h2>
             <table>
@@ -361,7 +374,7 @@
                     <strong>ONLY ${{ floatval($productPrices['quietpad']->discounted_price) }}</strong>
                 @endif
             </h3>
-            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue">Get Yours &raquo;</a>
+            <a href="/ecommerce/add-to-cart?products[quietpad]=1" class="join blue max-w-xl">Get Yours &raquo;</a>
 
             <div class="credit-cards columns">
                 <i class="fab fa-cc-visa"></i>

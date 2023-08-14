@@ -24,12 +24,12 @@ export default {
         },
 
         currentSecond: {
-            type: Number,
+            type: [Number, String],
             default: () => 0,
         },
 
         totalDuration: {
-            type: Number,
+            type: [Number, String],
             default: () => 0,
         },
 
@@ -64,6 +64,14 @@ export default {
             type: String,
             default: () => 'singeo',
         },
+        endSecond: {
+            type: [Number, String],
+            default: null
+        },
+        startSecond: {
+            type: [Number, String],
+            default: 0
+        }
     },
     data() {
         return {
@@ -72,6 +80,7 @@ export default {
             currentTime: 0,
             isPipEnabled: false,
             currentRange: 'original',
+            hasBeenPlayed: false,
         };
     },
     computed: {
@@ -88,6 +97,15 @@ export default {
                 return this.currentTime;
             },
         },
+        contentCurrentTimeStorageKey:{
+            get(){
+                if (this.videoId) {
+                    return this.videoId;
+                } else {
+                    return this.contentId;
+                }
+            },
+        }
     },
     mounted() {
         const youtubeIframeApi = document.getElementById('youtubeIframeApi');
@@ -119,7 +137,6 @@ export default {
         clearInterval(this.syncInterval);
     },
     methods: {
-
         setRange({ range }) {
             if (this.rangesVideoIds[range]) {
                 this.currentRange = range;
@@ -140,10 +157,29 @@ export default {
             firstScriptTag.parentNode.insertBefore(scriptTag, firstScriptTag);
         },
 
+        getTimeToSeekTo() {
+            const urlParams = new URLSearchParams(window.location.search);
+            let seconds = urlParams.get('time');
+            if (seconds) {
+                return seconds;
+            }
+            seconds = window.localStorage.getItem(`${this.contentCurrentTimeStorageKey}_currentTime`);
+            if (seconds) {
+                window.localStorage.removeItem(`${this.contentCurrentTimeStorageKey}_currentTime`);
+                return seconds;
+            }
+
+            return window.sessionStorage.getItem(`${this.contentCurrentTimeStorageKey}_currentTime`) || this.currentSecond;
+        },
+
+        setHasBeenPlayed() {
+            this.hasBeenPlayed = true;
+        },
+
         initPlayer() {
             const { youtubeIframe } = this.$refs;
-            const urlParams = new URLSearchParams(window.location.search);
-            const timeToSeekTo = urlParams.get('time') || this.currentSecond;
+
+            const timeToSeekTo = this.getTimeToSeekTo();
             const vm = this;
             var videoId = this.videoId;
 
@@ -160,6 +196,10 @@ export default {
                     rel: 0,
                     enablejsapi: 1,
                     playsinline: 1,
+                    ...(this.startSecond !== 0) || (this.endSecond !== this.totalDuration) ? {
+                        start: vm.startSecond,
+                        end: vm.endSecond,
+                    } : {},
                 },
                 events: {
                     onReady() {
@@ -188,6 +228,10 @@ export default {
                     },
                     onStateChange(event) {
                         if (event.data === 1) {
+                            if (((vm.startSecond !== 0) || (vm.endSecond !== vm.totalDuration)) && !vm.hasBeenPlayed) {
+                                vm.player.seekTo(vm.startSecond);
+                                vm.setHasBeenPlayed();
+                            }
                             vm.$emit('play', {
                                 ...event,
                                 contentId: vm.contentId,
@@ -202,9 +246,31 @@ export default {
                                 contentId: vm.contentId,
                             });
                         }
+
+                        if (event.data === 0) {
+                            if (vm.hasBeenPlayed) {
+                                const isRepeatOn = localStorage.getItem("playbackRepeatOn") ? JSON.parse(localStorage.getItem("playbackRepeatOn")) : false;
+                                const isInPlaybackMode = window.location.href.includes('playlist-item');
+                                if (isRepeatOn && isInPlaybackMode) {
+                                    vm.player.seekTo(0);
+                                    vm.player.playVideo();
+                                } else {
+                                    vm.$emit('onVideoEnd', {
+                                        ...event,
+                                        contentId: vm.contentId,
+                                    });
+                                }
+                            }
+                        }
+
                     },
                 },
             });
+
+            setInterval(() => {
+                window.sessionStorage.setItem(`${this.contentCurrentTimeStorageKey}_currentTime`, this.player.getCurrentTime());
+            }, 2500);
+
         },
 
         enableIntersectionObserver() {

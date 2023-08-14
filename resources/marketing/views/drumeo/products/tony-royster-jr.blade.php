@@ -444,7 +444,7 @@
     </div>
     <div class="row hours-bonuses">
         <div class="medium-4 columns">
-            <div class="icon"><i class="fal fa-video"></i></div>
+            <div class="icon"><i class="fa-light fa-video"></i></div>
             <div class="text">
                 <p class="title">3 HOURS</p>
 
@@ -452,7 +452,7 @@
             </div>
         </div>
         <div class="medium-4 columns">
-            <div class="icon"><i class="fal fa-star"></i></div>
+            <div class="icon"><i class="fa-light fa-star"></i></div>
             <div class="text">
                 <p class="title">$97 BONUS</p>
 
@@ -460,7 +460,7 @@
             </div>
         </div>
         <div class="medium-4 columns">
-            <div class="icon"><i class="fal fa-infinity"></i></div>
+            <div class="icon"><i class="fa-light fa-infinity"></i></div>
             <div class="text">
                 <p class="title">LIFETIME ACCESS</p>
 
@@ -490,7 +490,7 @@
     </div>
     <div class="row trj-icon-grid">
         <div class="trj-icon-grid-item medium-4 columns">
-            <div class="icon"><i class="fal fa-hourglass-start"></i></div>
+            <div class="icon"><i class="fa-light fa-hourglass-start"></i></div>
             <div class="text">
                 <p class="title">GETTING STARTED</p>
 
@@ -498,7 +498,7 @@
             </div>
         </div>
         <div class="trj-icon-grid-item medium-4 columns">
-            <div class="icon"><i class="fal fa-user-graduate"></i></div>
+            <div class="icon"><i class="fa-light fa-user-graduate"></i></div>
             <div class="text">
                 <p class="title">INDEPENDENCE</p>
 
@@ -506,7 +506,7 @@
             </div>
         </div>
         <div class="trj-icon-grid-item medium-4 columns">
-            <div class="icon"><i class="fal fa-user-cog"></i></div>
+            <div class="icon"><i class="fa-light fa-user-cog"></i></div>
             <div class="text">
                 <p class="title">BASS DRUM TECHNIQUE</p>
 
@@ -514,7 +514,7 @@
             </div>
         </div>
         <div class="trj-icon-grid-item medium-4 columns">
-            <div class="icon"><i class="fal fa-shoe-prints"></i></div>
+            <div class="icon"><i class="fa-light fa-shoe-prints"></i></div>
             <div class="text">
                 <p class="title">DOUBLE BASS DRUMMING</p>
 
@@ -522,7 +522,7 @@
             </div>
         </div>
         <div class="trj-icon-grid-item medium-4 columns">
-            <div class="icon"><i class="fal fa-hand-paper"></i></div>
+            <div class="icon"><i class="fa-light fa-hand-paper"></i></div>
             <div class="text">
                 <p class="title">HAND TECHNIQUE</p>
 
@@ -530,7 +530,7 @@
             </div>
         </div>
         <div class="trj-icon-grid-item medium-4 columns">
-            <div class="icon"><i class="fal fa-chart-line"></i></div>
+            <div class="icon"><i class="fa-light fa-chart-line"></i></div>
             <div class="text">
                 <p class="title">THE MUSIC BUSINESS</p>
 
@@ -538,7 +538,7 @@
             </div>
         </div>
         <div class="trj-icon-grid-item medium-4 columns">
-            <div class="icon"><i class="fal fa-stopwatch"></i></div>
+            <div class="icon"><i class="fa-light fa-stopwatch"></i></div>
             <div class="text">
                 <p class="title">BETTER TIMING</p>
 
@@ -546,7 +546,7 @@
             </div>
         </div>
         <div class="trj-icon-grid-item medium-4 columns">
-            <div class="icon"><i class="fal fa-signal"></i></div>
+            <div class="icon"><i class="fa-light fa-signal"></i></div>
             <div class="text">
                 <p class="title">LINEAR DRUMMING</p>
 
@@ -554,7 +554,7 @@
             </div>
         </div>
         <div class="trj-icon-grid-item medium-4 columns">
-            <div class="icon"><i class="fal fa-drum"></i></div>
+            <div class="icon"><i class="fa-light fa-drum"></i></div>
             <div class="text">
                 <p class="title">RUDIMENTS</p>
 
@@ -562,7 +562,7 @@
             </div>
         </div>
         <div class="trj-icon-grid-item medium-4 columns">
-            <div class="icon"><i class="fal fa-music"></i></div>
+            <div class="icon"><i class="fa-light fa-music"></i></div>
             <div class="text">
                 <p class="title">MUSICIANSHIP</p>
 
@@ -570,7 +570,7 @@
             </div>
         </div>
         <div class="trj-icon-grid-item medium-4 columns">
-            <div class="icon"><i class="fal fa-user-friends"></i></div>
+            <div class="icon"><i class="fa-light fa-user-friends"></i></div>
             <div class="text">
                 <p class="title">PLAYING W/ A BASSIST</p>
 
@@ -578,7 +578,7 @@
             </div>
         </div>
         <div class="trj-icon-grid-item medium-4 columns">
-            <div class="icon"><i class="fal fa-users"></i></div>
+            <div class="icon"><i class="fa-light fa-users"></i></div>
             <div class="text">
                 <p class="title">PLAYING W/ A BAND</p>
 

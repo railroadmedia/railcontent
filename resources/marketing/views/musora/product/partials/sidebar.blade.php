@@ -20,7 +20,7 @@
         <div id="order" class="anchor"></div>
         <div class="side-slide overflow-hidden md:rounded md:border md:border-solid" style="border-color: #CCD3D3;">
             {{--<div class="promo-tab hidden lg:block text-center py-2 px-3" style="position:relative;background:#000 center center/450px;">--}}
-                {{--<img class="w-auto max-h-12" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/xm-logo2021.png">--}}
+                {{--<img class="w-auto max-h-12" src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/xm-logo2021.png">--}}
             {{--</div>--}}
             <div class="buy-section active px-5 pt-2 pb-6 text-center lg:py-6">
                 @if(!empty($instructor))
@@ -112,8 +112,8 @@
 
             @if($guaranteeBadge)
                 <div class="flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
-                    <img class="w-24 my-0 pr-6" src="https://www.musora.com/musora-cdn/image/width=170,quality=85/{{ $badge }}">
-                    <p class="text-xs font-bold text-left my-0 text-{{ $theme }}">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</p>
+                    <img class="w-24 my-0 pr-6" src="https://www.musora.com/musora-cdn/image/width=170,quality=95/{{ $badge }}">
+                    <p class="text-xs font-bold text-left my-0 text-{{ $theme }}">Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money-Back <br class="lg:hidden" /> Guarantee.</p>
                 </div>
             @endif
         </div>

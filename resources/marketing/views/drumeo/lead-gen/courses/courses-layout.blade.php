@@ -85,7 +85,7 @@
 
     <div class="reveal large trial text-center" id="trial" data-reveal data-reset-on-close="false">
         <div class="pre-trial">
-            <img class="logo" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
+            <img class="logo" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
             <h1>You'll <u>learn the drums faster</u> with<br> the best teacher in the world.</h1>
             <div class="artist-wrap large-up-3 medium-up-2 small-up-1">
                 @yield('artists')
@@ -180,7 +180,7 @@
                     <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-modern-drummer.png">
                 </div>
                 <div class="columns small-4">
-                    <a target="_blank" href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738', 'newwindow', 'width=750, height=550'); return false;"><img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-shopper-approved.png"></a>
+                    <a target="_blank" href="https://www.shopperapproved.com/reviews/Musora.com" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;"><img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-shopper-approved.png"></a>
                 </div>
                 <div class="columns small-4">
                     <img src="https://dpwjbsxqtam5n.cloudfront.net/sales/badge-drummies.png">

@@ -52,6 +52,11 @@ class Cohort extends Model
         return $this->hasMany(CohortDropdown::class);
     }
 
+    public function lists()
+    {
+        return $this->hasMany(CohortList::class);
+    }
+
 //    protected function slug(): Attribute
 //    {
 //        return Attribute::make(
@@ -72,43 +77,55 @@ class Cohort extends Model
 //            }
 
             if (gettype($model['dark_mode_logo']) === 'object') {
-                $model['dark_mode_logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . $model['dark_mode_logo']->getClientOriginalName(
-                    );
+                $model['dark_mode_logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['dark_mode_logo']->getClientOriginalName());
             }
 
             if (gettype($model['light_mode_logo']) === 'object') {
-                $model['light_mode_logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . $model['light_mode_logo']->getClientOriginalName(
-                    );
+                $model['light_mode_logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['light_mode_logo']->getClientOriginalName());
             }
 
             if (gettype($model['header_image_url']) === 'object') {
-                $model['header_image_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . $model['header_image_url']->getClientOriginalName(
-                    );
+                $model['header_image_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['header_image_url']->getClientOriginalName());
             }
 
             if (gettype($model['body_image_url']) === 'object') {
-                $model['body_image_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . $model['body_image_url']->getClientOriginalName(
-                    );
+                $model['body_image_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['body_image_url']->getClientOriginalName());
             }
 
             if (gettype($model['body_logo']) === 'object') {
-                $model['body_logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . $model['body_logo']->getClientOriginalName(
-                    );
+                $model['body_logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['body_logo']->getClientOriginalName());
             }
 
             if (gettype($model['icon1_url']) === 'object') {
-                $model['icon1_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . $model['icon1_url']->getClientOriginalName(
-                    );
+                $model['icon1_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['icon1_url']->getClientOriginalName());
             }
 
             if (gettype($model['icon2_url']) === 'object') {
-                $model['icon2_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . $model['icon2_url']->getClientOriginalName(
-                    );
+                $model['icon2_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['icon2_url']->getClientOriginalName());
             }
 
             if (gettype($model['icon3_url']) === 'object') {
-                $model['icon3_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . $model['icon3_url']->getClientOriginalName(
-                    );
+                $model['icon3_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['icon3_url']->getClientOriginalName());
+            }
+
+            if (gettype($model['description_trailer_1_thumb_url']) === 'object') {
+                $model['description_trailer_1_thumb_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['description_trailer_1_thumb_url']->getClientOriginalName());
+            }
+
+            if (gettype($model['description_trailer_2_thumb_url']) === 'object') {
+                $model['description_trailer_2_thumb_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['description_trailer_2_thumb_url']->getClientOriginalName());
+            }
+
+            if (gettype($model['demo_background_image_url']) === 'object') {
+                $model['demo_background_image_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['demo_background_image_url']->getClientOriginalName());
+            }
+
+            if (gettype($model['demo_desktop_center_image_url']) === 'object') {
+                $model['demo_desktop_center_image_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['demo_desktop_center_image_url']->getClientOriginalName());
+            }
+
+            if (gettype($model['demo_mobile_center_image_url']) === 'object') {
+                $model['demo_mobile_center_image_url'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/cohorts/' . $uuid . '-' . str_replace(' ', '+', $model['demo_mobile_center_image_url']->getClientOriginalName());
             }
         });
     }

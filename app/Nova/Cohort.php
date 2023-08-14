@@ -3,7 +3,9 @@
 namespace App\Nova;
 
 use App\Nova\Flexible\Layouts\CohortDropdownLayout;
+use App\Nova\Flexible\Layouts\CohortListLayout;
 use App\Nova\Flexible\Presets\CohortDropdownPreset;
+use App\Nova\Flexible\Presets\CohortListPreset;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\DateTime;
@@ -32,9 +34,9 @@ class Cohort extends Resource
             ID::make()->sortable(),
 
             BelongsTo::make('Brand', 'brand', 'App\Nova\Brand')->sortable(),
-            Text::make('slug')->required(),
+            Text::make('slug')->required()->rules('required'),
             Hidden::make('Uuid')->withMeta(["value" => $uuid]),
-            Text::make('Cohort Title', 'cohort_title')->required()->help("For easy reference to this banner in the CMS. This info won't show on the banner."),
+            Text::make('Cohort Title', 'cohort_title')->required()->rules('required')->help("For easy reference to this banner in the CMS. This info won't show on the banner."),
 
             Heading::make('Header'),
             Image::make('Dark Mode Logo', 'dark_mode_logo')
@@ -104,6 +106,9 @@ class Cohort extends Resource
             Text::make('Headline')->hideFromIndex(),
             Text::make('Subheadline')->hideFromIndex(),
             Text::make('Header Description', 'header_description')->hideFromIndex(),
+            Text::make('Benefit 1', 'benefit_1')->hideFromIndex(),
+            Text::make('Benefit 2', 'benefit_2')->hideFromIndex(),
+            Text::make('Benefit 3', 'benefit_3')->hideFromIndex(),
             Image::make('Header Image Url', 'header_image_url')
                 ->help('The image should be 464 x 464px or a comparable aspect ratio.')
                 ->disk('nova_s3')
@@ -136,7 +141,7 @@ class Cohort extends Resource
                     return $value;
                 }),
             Text::make('Header image url', 'header_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            Text::make('Trailer', 'cohort_trailer')->hideFromIndex(),
+            Text::make('Trailer', 'cohort_trailer')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
 //            Image::make('Icon 1', 'icon1_url')
 //                ->help('The icon should be 545 x 103px or a comparable aspect ratio.')
 //                ->disk('nova_s3')
@@ -278,7 +283,177 @@ class Cohort extends Resource
                     return $value;
                 }),
             Text::make('Body image url', 'body_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
-            Image::make('Body Logo', 'body_logo')
+
+
+            Text::make('First day Trailer URL', 'description_trailer_1')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
+            Image::make('Thumb image url - first day trailer', 'description_trailer_1_thumb_url')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('description_trailer_1_thumb_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Thumb image url - first day trailer', 'description_trailer_1_thumb_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Text::make('First day text', 'first_day_text')->hideFromIndex(),
+
+            Text::make('Last day Trailer URL', 'description_trailer_2')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
+            Image::make('Thumb image url - last day trailer', 'description_trailer_2_thumb_url')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('description_trailer_2_thumb_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Thumb image url - last day trailer', 'description_trailer_2_thumb_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Text::make('Last day text', 'last_day_text')->hideFromIndex(),
+
+            Heading::make('Demo Section'),
+            Text::make('Demo Title', 'demo_title_text')->hideFromIndex(),
+            Text::make('Demo Description', 'demo_description_text')->hideFromIndex(),
+            Text::make('Demo Label', 'demo_label_text')->hideFromIndex(),
+            Image::make('Demo Background Image', 'demo_background_image_url')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('demo_background_image_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Demo Background Image', 'demo_background_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Image::make('Demo Desktop Center Image', 'demo_desktop_center_image_url')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('demo_desktop_center_image_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Demo Desktop Center Image', 'demo_desktop_center_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Image::make('Demo Mobile Center Image', 'demo_mobile_center_image_url')
+                ->disk('nova_s3')
+                ->prunable()
+                ->hideFromIndex()
+                ->deletable(false)
+                ->disableDownload()
+                ->storeAs(function (Request $request){
+                    $brandId = $request->brand;
+                    $brand = '';
+
+                    if($brandId === "1") {
+                        $brand = 'Drumeo';
+                    }
+                    elseif($brandId === "2"){
+                        $brand = 'Pianote';
+                    }
+                    elseif($brandId === "3"){
+                        $brand = 'Guitareo';
+                    }
+                    elseif($brandId === "4"){
+                        $brand = 'Singeo';
+                    }
+
+                    return '/'.$brand.'/cohorts/'.$request->uuid.'-'.$request->file('demo_mobile_center_image_url')->getClientOriginalName();
+                })
+                ->preview(function($value){
+                    if(empty($value)) return null;
+
+                    return $value;
+                }),
+            Text::make('Demo Mobile Center Image', 'demo_mobile_center_image_url')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted image link. (Google Drive links will NOT work.)'),
+            Text::make('Demo Trailer', 'demo_trailer')->hideFromIndex()->help('In Vimeo, video permissions must be at least set to "Hidden from Vimeo", and cannot be set to "Unlisted". Use Vimeo links only, e.g. //player.vimeo.com/video/798501810?autoplay=1'),
+
+            Heading::make('Bottom'),
+            Image::make('Bottom Logo', 'body_logo')
                 ->help('The logo should be 896 x 100px or a comparable aspect ratio.')
                 ->disk('nova_s3')
                 ->prunable()
@@ -309,8 +484,12 @@ class Cohort extends Resource
 
                     return $value;
                 }),
-            Text::make('Body Logo', 'body_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted logo link. (Google Drive links will NOT work.)'),
-            Markdown::make('Body Bottom Description','body_bottom_description')->hideFromIndex(),
+            Text::make('Bottom Logo', 'body_logo')->hideFromIndex()->hideFromDetail()->help('Use this field if you have a hosted logo link. (Google Drive links will NOT work.)'),
+            Markdown::make('Bottom Description','body_bottom_description')->hideFromIndex(),
+
+            Flexible::make('Items')->help('You can use tags as {enrolled} that will be replaced with number of enrolled students   e.g: "Join {enrolled} players who have already registered."')
+                ->addLayout(CohortListLayout::class)
+                ->preset(CohortListPreset::class),
 
             Heading::make('Dropdown'),
             Text::make('Dropdown Title','dropdown_title')->hideFromIndex(),
@@ -318,17 +497,17 @@ class Cohort extends Resource
                 ->addLayout(CohortDropdownLayout::class)
                 ->preset(CohortDropdownPreset::class),
 
-            Heading::make('Bottom'),
-            Text::make('Title','bottom_title')->hideFromIndex(),
-            Text::make('Description','bottom_description')->hideFromIndex(),
+            Heading::make('Footer'),
+            Text::make('Footer Title','bottom_title')->hideFromIndex(),
+            Text::make('Footer Description','bottom_description')->hideFromIndex(),
 
             DateTime::make(__('Enrollment Start Time'), 'enrollment_start_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
             DateTime::make(__('Enrollment End Time'), 'enrollment_end_date')->hideFromIndex()->help('Ignore UTC. It is actually PST.<br>This does NOT account for Daylight Savings between Mar-Nov. Make sure you offset by an hour during PDT'),
-            Text::make('Product ID', 'product_id')->hideFromIndex()->required(),
+            Text::make('Product ID', 'product_id')->hideFromIndex()->required()->rules('required'),
             DateTime::make(__('Cohort Start Time'), 'cohort_start_date')->hideFromIndex()->help("Controls whether cohort is currently active.  Cohort banners/pinned packs are a couple of functions tied to this."),
             DateTime::make(__('Cohort End Time'), 'cohort_end_date')->hideFromIndex()->help("Controls whether cohort is currently active.  Cohort banners/pinned packs are a couple of functions tied to this."),
 
-            Text::make('Course ID','content_id')->hideFromIndex()->required(),
+            Text::make('Course ID','content_id')->hideFromIndex()->required()->rules('required'),
 
             Text::make('Conversation Thread ID','conversation_thread_id')->hideFromIndex(),
         ];

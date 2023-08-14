@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Guitareo;
 
 use App\Models\Leadgen;
 use App\Models\LeadgenLesson;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class LeadGenController extends BaseController
 {
-    public function thankyouwhite() {
+    public function thankyou() {
         return view('guitareo.lead-gen.pages.thank-you');
     }
     public function welcomeparty() {
@@ -26,23 +27,23 @@ class LeadGenController extends BaseController
         return view('guitareo.lead-gen.pages.subscribed');
     }
     public function weeklyemail() {
-        return view('guitareo.lead-gen.pages.weekly-email');
+        return view('guitareo.lead-gen.pages.weekly-email', ['recaptchaKey'=>config('recaptcha.key')]);
     }
     public function weeklyemail2() {
-        return view('guitareo.lead-gen.pages.weekly-email-2');
+        return view('guitareo.lead-gen.pages.weekly-email-2', ['recaptchaKey'=>config('recaptcha.key')]);
     }
     public function recitals() {
         return view('guitareo.lead-gen.pages.recitals');
     }
     public function fretboardcheatsheet() {
-        return view('guitareo.lead-gen.pages.fretboard-cheatsheet');
+        return view('guitareo.lead-gen.pages.fretboard-cheatsheet', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function backToBasics(Request $request, $domain, $page = null)
     {
         switch ($page) {
             case null:
-                return view('guitareo.lead-gen.back-to-basics.back-to-basics');
+                return view('guitareo.lead-gen.back-to-basics.back-to-basics', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'zoom':
                 return view('guitareo.lead-gen.back-to-basics.zoom');
         }
@@ -54,7 +55,7 @@ class LeadGenController extends BaseController
     {
         switch ($page) {
             case null:
-                return view('guitareo.lead-gen.clean-up-your-chord-changes.clean-up-your-chord-changes');
+                return view('guitareo.lead-gen.clean-up-your-chord-changes.clean-up-your-chord-changes', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'zoom':
                 return view('guitareo.lead-gen.clean-up-your-chord-changes.zoom');
         }
@@ -66,7 +67,7 @@ class LeadGenController extends BaseController
     {
         switch ($page) {
             case null:
-                return view('guitareo.lead-gen.song-in-an-hour.signup');
+                return view('guitareo.lead-gen.song-in-an-hour.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
                 return view('guitareo.lead-gen.song-in-an-hour.thank-you');
             case 'success':
@@ -93,19 +94,19 @@ class LeadGenController extends BaseController
 
     public function fagl()
     {
-        return view('guitareo.lead-gen.free-acoustic-guitar-lessons.signup');
+        return view('guitareo.lead-gen.free-acoustic-guitar-lessons.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function fegl()
     {
-        return view('guitareo.lead-gen.free-electric-guitar-lessons.signup');
+        return view('guitareo.lead-gen.free-electric-guitar-lessons.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function hitSongs(Request $request, $domain, $page = null, $lesson = null)
     {
         switch ($page) {
             case null:
-                return view('guitareo.lead-gen.chords-for-hit-songs.signup');
+                return view('guitareo.lead-gen.chords-for-hit-songs.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'thank-you':
                 return view('guitareo.lead-gen.chords-for-hit-songs.thank-you');
         }
@@ -115,24 +116,24 @@ class LeadGenController extends BaseController
 
     public function tricks()
     {
-        return view('guitareo.lead-gen.guitar-tricks.signup');
+        return view('guitareo.lead-gen.guitar-tricks.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function soloInAnHour()
     {
-        return view('guitareo.lead-gen.solo-in-an-hour.signup');
+        return view('guitareo.lead-gen.solo-in-an-hour.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function jumpstart()
     {
-        return view('guitareo.lead-gen.acoustic-guitar-jumpstart.signup');
+        return view('guitareo.lead-gen.acoustic-guitar-jumpstart.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function starterKit(Request $request, $domain, $page = null, $lesson = null, $num = null)
     {
         switch ($page) {
             case null:
-                return view('guitareo.lead-gen.starter-kit.signup');
+                return view('guitareo.lead-gen.starter-kit.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'lessons' && is_null($lesson):
                 return view('guitareo.lead-gen.starter-kit.lesson-grid');
             case 'lessons' && $lesson === 'using-a-tuner':
@@ -176,7 +177,7 @@ class LeadGenController extends BaseController
     {
         switch ($page){
             case null:
-                return view('guitareo.lead-gen.toolbox.signup');
+                return view('guitareo.lead-gen.toolbox.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'lessons':
                 return view('guitareo.lead-gen.toolbox.lesson-grid');
         }
@@ -224,7 +225,18 @@ class LeadGenController extends BaseController
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)
     {
-        $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Guitareo')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
+        $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->where('leadgens.visible', true)
+            ->where(function ($query) {
+                return $query
+                    ->whereNull('leadgens.start_date')
+                    ->orWhere('leadgens.start_date', '<=', Carbon::now('PST')->toDateTimeString());
+            })
+            ->where(function ($query) {
+                return $query
+                    ->whereNull('leadgens.end_date')
+                    ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
+            })
+            ->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Guitareo')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
         if(!is_null($currentLesson)){
             if(!$currentLesson->one_off){
                 $lessons = LeadgenLesson::where([['leadgen_id', $currentLesson->leadgen_id], ['one_off', 0]])->get();
@@ -248,7 +260,17 @@ class LeadGenController extends BaseController
             ]);
         }
         else {
-            $leadgen = Leadgen::join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Guitareo')->where('slug', $leadgenSlug)->select('leadgens.*')->first();
+            $leadgen = Leadgen::where('leadgens.visible', true)
+                ->where(function ($query) {
+                    return $query
+                        ->whereNull('leadgens.start_date')
+                        ->orWhere('leadgens.start_date', '<=', Carbon::now('PST')->toDateTimeString());
+                })
+                ->where(function ($query) {
+                    return $query
+                        ->whereNull('leadgens.end_date')
+                        ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
+                })->join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Guitareo')->where('slug', $leadgenSlug)->select('leadgens.*')->first();
             if(!is_null($leadgen)){
                 $lessons = LeadgenLesson::where([['leadgen_id', $leadgen->id], ['one_off', 0]])->get();
 

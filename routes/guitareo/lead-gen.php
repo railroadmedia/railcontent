@@ -8,7 +8,7 @@ Route::domain('{guitareoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
 
-    Route::get('/thank-you-white', [LeadGenController::class, 'thankyouwhite']);
+    Route::get('/thank-you', [LeadGenController::class, 'thankyou']);
     Route::get('/welcome-party', [LeadGenController::class, 'welcomeparty']);
     Route::get('/welcome-party-carlos', [LeadGenController::class, 'welcomepartycarlos']);
     Route::get('/confirming', [LeadGenController::class, 'confirming']);

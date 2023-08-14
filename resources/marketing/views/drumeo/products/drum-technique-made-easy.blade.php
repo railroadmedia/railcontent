@@ -1,6 +1,5 @@
 @extends('drumeo.products.misc-products-layout')
 
-
 @section('meta')
     @parent
     <title>Drum Technique Made Easy | Drumeo</title>
@@ -23,11 +22,8 @@
     @parent
     <script type="text/javascript">
         $(document).ready(function () {
-            $(document).foundation();
-
             // hide + show buy button
             var buyButton = $('.hidden-buy-slice');
-
 
             $(window).on("scroll", function () {
                 var buyDisplay = $('.three-benefits').offset().top - 60;
@@ -56,8 +52,14 @@
             });
         });
     </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
 @stop()
+
+@section('body-data')
+    x-data="{
+    trailer: false,
+    trailer2: false,
+    }"
+@endsection
 
 @section('content')
     @include('drumeo.products.partials.promo-banner', [
@@ -68,9 +70,9 @@
     ])
     <header class="hero-header">
         <div class="container clearfix lg:mx-auto max-w-6xl">
-            <div class="video-wrap autoplay-video" data-open="trailer">
+            <div class="video-wrap autoplay-video" @click="trailer = true;">
                 <div class="play-icon"><i class="fas fa-play"></i></div>
-                <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/logo-white.png" alt="Drum Technique Made Easy Logo">
+                <img class="logo" src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/logo-white.png" alt="Drum Technique Made Easy Logo" fetchpriority="high">
             </div>
             <h3>Drum Technique Made Easy is a 26-week
                 <br class="inline lg:hidden">online course with Bruce Becker & Jared Falk.</h3>
@@ -88,15 +90,25 @@
                 <br>
                 <strong class="text-yellow">** 90-Day Guarantee **</strong>
             </p>
-            <div class="reveal large trailer" id="trailer" data-reveal data-reset-on-close="false">
-                <div class="flex-video widescreen vimeo">
-                    <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/400749789?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-                </div>
-                <br>
-                <a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>
-            </div>
         </div>
     </header>
+
+    @component('_partials.components.video-modal',[
+                'name' => 'trailer',
+                'video' => '400749789',
+                'vimeo' => true,
+            ])
+        @slot('button')
+            <div class="text-center py-4">
+                <a href="/ecommerce/add-to-cart?products[drum-technique-made-easy-pack]=1" class="join">Get Started &raquo;</a>
+            </div>
+        @endslot
+    @endcomponent
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer2',
+        'video' => '248236311',
+        'vimeo' => true,
+    ])
 
     <section class="three-benefits">
         <div class="container clearfix lg:mx-auto max-w-6xl">
@@ -106,7 +118,7 @@
             <div class="float-left benefit-row practice">
                 <div class="sm:w-1/2 float-right">
                     <div class="arrow-outline">
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bubble1.jpg" alt="Bubble 1">
+                        <img class="transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bubble1.jpg" alt="Bubble 1" loading="lazy" onload="this.classList.remove('opacity-0')">
                     </div>
                 </div>
                 <div class="sm:w-1/2 text-wrap">
@@ -120,7 +132,7 @@
             <div class="float-left benefit-row play">
                 <div class="sm:w-1/2 float-left">
                     <div class="arrow-outline right">
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bubble2.jpg" alt="Bubble 2">
+                        <img class="transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bubble2.jpg" alt="Bubble 2" loading="lazy" onload="this.classList.remove('opacity-0')">
                     </div>
                 </div>
                 <div class="sm:w-1/2 text-wrap float-right">
@@ -134,7 +146,7 @@
             <div class="float-left benefit-row support">
                 <div class="sm:w-1/2 float-right">
                     <div class="arrow-outline">
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bubble3.jpg" alt="Bubble 3">
+                        <img class="transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bubble3.jpg" alt="Bubble 3" loading="lazy" onload="this.classList.remove('opacity-0')">
                     </div>
                 </div>
                 <div class="sm:w-1/2 text-wrap">
@@ -384,21 +396,21 @@
             <h1 class="upper">Your clear path frustration-free<br class="hidden lg:inline"> guide to better drumming!</h1>
             <div class="float-left w-full half-padding sm:w-1/3">
                 <div class="path-point">
-                    <img class="mx-auto" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/path-1.png" alt="Path 1">
+                    <img class="mx-auto transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/path-1.png" alt="Path 1" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h3><strong>ALWAYS KNOW EXACTLY WHAT TO PRACTICE</strong></h3>
                     <p>...with weekly video lessons, tips, and exercises that are structured to give you a clear-path for making real improvements and achieving measurable results.</p>
                 </div>
             </div>
             <div class="float-left w-full half-padding sm:w-1/3">
                 <div class="path-point">
-                    <img class="mx-auto" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/path-2.png" alt="Path 2">
+                    <img class="mx-auto transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/path-2.png" alt="Path 2" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h3><strong>ENJOY UNLIMITED PERSONAL SUPPORT</strong></h3>
                     <p>...with personalized feedback along the way. You will have direct access to a community of students and teachers who’ll be available to you every step of the way.</p>
                 </div>
             </div>
             <div class="float-left w-full half-padding sm:w-1/3">
                 <div class="path-point">
-                    <img class="mx-auto" src="https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/path-3.png" alt="Path 3">
+                    <img class="mx-auto transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=450,quality=85/https://dzryyo1we6bm3.cloudfront.net/independence-made-easy/sales/path-3.png" alt="Path 3" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h3><strong>GET BETTER AT DRUMS EVERY DAY</strong></h3>
                     <p>...with more enjoyable practice routines and exercises that are structured for rapid improvement. (Remember, just like when you first started playing drums!)</p>
                 </div>
@@ -413,31 +425,26 @@
                 <h1>Bruce Becker</h1>
                 <p>Is Your Drum Teacher</p>
             </div>
-            <div class="play-icon autoplay-video" data-open="trailer2"><i class="fas fa-play"></i></div>
-        </div>
-        <div class="reveal large trailer" id="trailer2" data-reveal data-reset-on-close="false">
-            <div class="flex-video widescreen vimeo">
-                <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/248236311?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-            </div>
+            <div class="play-icon autoplay-video" @click="trailer2 = true;"><i class="fas fa-play"></i></div>
         </div>
     </section>
 
     <section class="bruce-bio">
         <div class="container clearfix lg:mx-auto max-w-6xl">
             <p class="px-3 md:px-4">
-                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bold-b.png" alt="Alphabet B"></span> ruce Becker’s story begins in 1977, where he began his drumming studies under the instruction of the legendary Freddie Gruber -- who has often been referred to as the “zen master” of teaching.
-                <br><br> Freddie had a rare insight that was spurred on by his close 40 year friendship with Buddy Rich, and many of the best drummers in the world turned to him to perfect their individual techniques and styles -- including Neil Peart, Steve Smith, and Dave Weckl.
+                <span class="first-letter"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/bold-b.png" alt="Alphabet B"></span> ruce Becker’s story begins in 1977, where he began his drumming studies under the instruction of the legendary Freddie Gruber — who has often been referred to as the “zen master” of teaching.
+                <br><br> Freddie had a rare insight that was spurred on by his close 40 year friendship with Buddy Rich, and many of the best drummers in the world turned to him to perfect their individual techniques and styles — including Neil Peart, Steve Smith, and Dave Weckl.
                 <br><br> Bruce not only benefited from Freddie’s instruction for eight years, but he also developed a close personal relationship.
                 <br><br> “I became as close as one could become with him. I became Freddie’s go-to guy, house sitter, and airport runner,” Bruce told Modern Drummer in 2013. “I am the only guy I know of that actually did five clinics with him. There are too many stories to tell.”
                 <br><br> Freddie would have Bruce available when he’d teach other pupils, getting Bruce to demonstrate the techniques as he would teach. They spent many late nights discussing drum technique and the mind-body connection, and exactly how it applies to music.
-                <br><br> Through this incredible relationship, Bruce was able to watch the evolution and changes Freddie made in response to musical styles and drum innovations at the time -- gaining a deeper understanding of how the body should function in all sorts of musical situations and the importance of mastering a loose technical style that is built on natural ergonomic playing.
-                <br><br> Bruce has since gone on to build his own thoughts and concepts based on all that Freddie had shared with him -- offering the most comprehensive insights into the teachings of Freddie Gruber and applying these lessons to his own all-star cast of drum students including Daniel Glass, David Garibaldi, and Mark Schulman.
+                <br><br> Through this incredible relationship, Bruce was able to watch the evolution and changes Freddie made in response to musical styles and drum innovations at the time — gaining a deeper understanding of how the body should function in all sorts of musical situations and the importance of mastering a loose technical style that is built on natural ergonomic playing.
+                <br><br> Bruce has since gone on to build his own thoughts and concepts based on all that Freddie had shared with him — offering the most comprehensive insights into the teachings of Freddie Gruber and applying these lessons to his own all-star cast of drum students including Daniel Glass, David Garibaldi, and Mark Schulman.
                 <br><br> Bruce Becker’s conceptual approach to the drums is defined as “Balance + Motion = Emotion”. And through Drum Technique Made Easy, you’ll have the opportunity to study with Bruce and gain his best insights for improving your technique through 26 weekly lessons.
             </p>
             <div class="px-3 md:px-4 timeline-pic">
-                <img class="hidden lg:inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/timeline.jpg" alt="Timeline">
-                <img class="hidden lg:hidden sm:inline-block" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/timeline-tablet.jpg" alt="Timeline">
-                <img class="inline-block sm:hidden" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/timeline-mobile.jpg" alt="Timeline">
+                <img class="hidden lg:inline-block transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1300,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/timeline.jpg" alt="Timeline" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="hidden sm:inline-block lg:hidden transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/timeline-tablet.jpg" alt="Timeline" loading="lazy" onload="this.classList.remove('opacity-0')">
+                <img class="inline-block sm:hidden transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/timeline-mobile.jpg" alt="Timeline" loading="lazy" onload="this.classList.remove('opacity-0')">
             </div>
         </div>
     </section>
@@ -447,7 +454,7 @@
             <h1>What Drummers Are<br> Saying About Bruce Becker</h1>
             <div class="drummer-testimonial featured-testimonial">
                 <div class="float-left w-full px-3 md:px-4 sm:w-5/12 picture">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/jojo-mayer.jpg" alt="Jojo Mayer">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/jojo-mayer.jpg" alt="Jojo Mayer" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
                 <div class="float-right px-3 md:px-4 sm:w-7/12 text">
                     <h1>JoJo Mayer <span class="band">(Nerve)</span></h1>
@@ -456,24 +463,24 @@
             </div>
             <div class="float-left drummer-testimonial">
                 <div class="float-left px-3 md:px-4 sm:w-1/3">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/steve-smith.jpg" alt="Steve Smith">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/steve-smith.jpg" alt="Steve Smith" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Steve Smith<br> <span class="band">(Journey, Vital Information)</span></h1>
                     <p>"Bruce has managed to distill many of Fred Gruber’s essential teachings into manageable portions. Combining Freddie’s ideas with his own teaching discoveries and methods, Bruce has created a program that is vital viewing for all serious students of the drumset."</p>
                 </div>
                 <div class="float-left px-3 md:px-4 sm:w-1/3">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/mark-schulman.jpg" alt="Mark Schulman">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/mark-schulman.jpg" alt="Mark Schulman" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Mark Schulman<br> <span class="band">(Pink, Cher, Foreigner)</span></h1>
                     <p>"Bruce is not only one of my best friends and the most analytical and progressive drum teacher on the planet, he is also MY teacher! I do success coaching music lessons and when any of my students want to study on a regular basis, I always refer them to Bruce no matter what their level. I tell them: Don’t waste any more time, just study with the best!"</p>
                 </div>
                 <div class="float-left px-3 md:px-4 sm:w-1/3">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/david-garibaldi.jpg" alt="David Garibaldi">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/david-garibaldi.jpg" alt="David Garibaldi" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>David Garibaldi<br> <span class="band">(Tower of Power)</span></h1>
                     <p>"Bruce is a tremendous educator. His years as an understudy to the late great Freddie Gruber are now serving him well. He fully understands and teaches all aspects of hand/foot technique, and is very adept at assessing what the student needs. I'm currently studying with him and look forward to where this will take me."</p>
                 </div>
             </div>
             <div class="float-left drummer-testimonial featured-testimonial">
                 <div class="float-right sm:float-left w-full px-3 md:px-4 sm:w-5/12 picture">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/dave-weckl.jpg" alt="Dave Weckl">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/dave-weckl.jpg" alt="Dave Weckl" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
                 <div class="float-right px-3 md:px-4 sm:w-7/12 text">
                     <h1>Dave Weckl <span class="band">(The Dave Weckl Band, Chick Corea)</span></h1>
@@ -482,17 +489,17 @@
             </div>
             <div class="float-left drummer-testimonial">
                 <div class="float-left px-3 md:px-4 sm:w-1/3">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/daniel-glass.jpg" alt="Daniel Glass">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/daniel-glass.jpg" alt="Daniel Glass" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Daniel Glass<br> <span class="band">(Royal Crown Revue)</span></h1>
                     <p>"Not only is Bruce a fantastic player, but a master teacher in his own right. Having worked intensively with Freddie Gruber for nearly two decades, Bruce is in a unique position to not only pass along Freddie's teachings, but take them to his own place as well. He has a thorough knowledge of fundamental concepts such as balance, control, and developing the "internal clock" - key information that will dramatically enhance any drummers ability, no matter what style or skill level."</p>
                 </div>
                 <div class="float-left px-3 md:px-4 sm:w-1/3">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/ralph-johnson.jpg" alt="Ralph Johnson">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/ralph-johnson.jpg" alt="Ralph Johnson" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Ralph Johnson<br> <span class="band">(Earth, Wind, & Fire)</span></h1>
                     <p>"The study of a musical instrument is a lifetime study. Having said that, it’s absolutely essential to find a teacher who can convey the ideas and concepts that will allow you to become a confident, technical, proficient musician. Teaching is a very special gift and Bruce Becker has it. The time that I’ve spent with Bruce has been highly informative and very edifying. I always look forward to our time together. Here’s to great teachers!"</p>
                 </div>
                 <div class="float-left px-3 md:px-4 sm:w-1/3">
-                    <img class="drummer-pic" src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/tris-imboden.jpg" alt="Tris Imboden">
+                    <img class="drummer-pic transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/tris-imboden.jpg" alt="Tris Imboden" loading="lazy" onload="this.classList.remove('opacity-0')">
                     <h1>Tris Imboden<br> <span class="band">(Chicago)</span></h1>
                     <p>"Bruce Becker has the uncanny ability to break down and explain those subtle things that have always before eluded me in proper hand technique. Being primarily self taught, this has been of immeasurable help to me. He demystifies the mysteries in such a clear, concise, and understandable way."</p>
                 </div>
@@ -511,8 +518,8 @@
                 <tr>
                     <td></td>
                     <td>
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/macbook.png" class="macbook" alt="Macbook"><br>
-                        <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/logo-black.png" class="blue-logo" alt="Drum Technique Made Easy Logo">
+                        <img src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/macbook.png" class="macbook transition-all opacity-0" alt="Macbook" loading="lazy" onload="this.classList.remove('opacity-0')"><br>
+                        <img src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/logo-black.png" class="blue-logo transition-all opacity-0" alt="Drum Technique Made Easy Logo" loading="lazy" onload="this.classList.remove('opacity-0')">
                     </td>
                     <td><i class="fas fa-user gray-logo"></i><br>Private Lessons</td>
                 </tr>
@@ -567,7 +574,7 @@
                     <td><i class="fas fa-minus"></i></td>
                 </tr>
                 <tr>
-                    <td>Money Back Guarantee</td>
+                    <td>Money-Back Guarantee</td>
                     <td><i class="fas fa-check"></i></td>
                     <td><i class="fas fa-minus"></i></td>
                 </tr>
@@ -579,8 +586,8 @@
                 </tbody>
             </table>
             <p>
-                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums -- <u>all for just {{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }} for the entire course).
-                <br><br> You can choose a one-time payment, a two-payment plan, or a five-payment plan -- and the entire course is yours for life with no recurring subscription or additional fees.
+                <strong>You can unlock the full 26-week course today</strong> to get Bruce Becker’s curriculum for improving your technique on the drums — <u>all for just {{ round(floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) / 26, 2) }} per week</u> (billed at ${{ floatval($productPrices['drum-technique-made-easy-pack']->discounted_price) }} for the entire course).
+                <br><br> You can choose a one-time payment, a two-payment plan, or a five-payment plan — and the entire course is yours for life with no recurring subscription or additional fees.
             </p>
         </div>
     </section>
@@ -594,7 +601,7 @@
                 @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/KenBrashear.jpg",
                 "testimonialHighlight" => "I broke through a 5-year impasse!",
-                "fullTestimonial" => "As a self-taught drummer, I was struggling for years to achieve the speed and precision I wanted on the drums. Bruce helped me modify my finger positioning and hand technique -- it felt like I’d broke through a 5-year impasse! Regardless of your skill level, if you have issues playing what you want to play and getting that onto the kit, this course is for you!",
+                "fullTestimonial" => "As a self-taught drummer, I was struggling for years to achieve the speed and precision I wanted on the drums. Bruce helped me modify my finger positioning and hand technique — it felt like I’d broke through a 5-year impasse! Regardless of your skill level, if you have issues playing what you want to play and getting that onto the kit, this course is for you!",
                 "name" => "Ken Brashear",
                 "location" => "North Carolina, USA"
                 ])
@@ -615,7 +622,7 @@
                 @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/ElizaGagnon.jpg",
                 "testimonialHighlight" => "It gave me a new fluency and fluidity for playing grooves!",
-                "fullTestimonial" => "I was a beginner and had very little technique at all, so everything was new. Bruce broke things down very clearly and all of the exercises progressed logically and smoothly -- and they weren’t boring to practice!<br><br> Drum Technique Made Easy helped me get in the habit of having the sticks in my hands every day and to be satisfied with slow and steady progress. It gave me a new fluency and fluidity for playing grooves. My partner actually noticed it before I did and commented on how much better my playing sounded.",
+                "fullTestimonial" => "I was a beginner and had very little technique at all, so everything was new. Bruce broke things down very clearly and all of the exercises progressed logically and smoothly — and they weren’t boring to practice!<br><br> Drum Technique Made Easy helped me get in the habit of having the sticks in my hands every day and to be satisfied with slow and steady progress. It gave me a new fluency and fluidity for playing grooves. My partner actually noticed it before I did and commented on how much better my playing sounded.",
                 "name" => "Eliza Gagnon",
                 "location" => "Massachusetts, USA"
                 ])
@@ -639,9 +646,9 @@
 
     <section class="text-center guarantee">
         <div class="container clearfix lg:mx-auto max-w-6xl">
-            <img class="guarantee-badge inline-block sm:hidden" style="filter: hue-rotate(305deg) brightness(1.13);" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png">
+            <img class="guarantee-badge inline-block sm:hidden transition-all opacity-0" style="filter: hue-rotate(305deg) brightness(1.13);" src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" loading="lazy" onload="this.classList.remove('opacity-0')">
             <div class="flex-container">
-                <img class="guarantee-badge hidden sm:inline-block" style="filter: hue-rotate(305deg) brightness(1.13);" src="https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge">
+                <img class="guarantee-badge hidden sm:inline-block transition-all opacity-0" style="filter: hue-rotate(305deg) brightness(1.13);" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png" alt="Guarantee Badge" loading="lazy" onload="this.classList.remove('opacity-0')">
                 <div class="text-wrap text-left">
                     <h1>90-Day Money-Back Guarantee</h1>
                     <p><strong>OUR PROMISE TO YOU:</strong> More than anything, we want you to enjoy a super-positive experience on the drums. And that means we only want you to pay if you actually LOVE your Drum Technique Made Easy experience. So click any of the big buttons on this page to get started risk-free. If it’s not for you, simply <a class="text-white" href="{{ get_musora_brand_base_url() }}/contact">contact us</a> within 90 days for a full refund.</p>
@@ -652,7 +659,7 @@
 
     <section class="final">
         <div class="container clearfix lg:mx-auto max-w-6xl">
-            <div class="logo"><img src="https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/logo-white.png" alt="Drum Technique Made Easy Logo"></div>
+            <div class="logo"><img class="transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/logo-white.png" alt="Drum Technique Made Easy Logo" loading="lazy" onload="this.classList.remove('opacity-0')"></div>
 
             <h1>
                 Bruce Becker’s 26-Week Online <br class="inline lg:hidden">

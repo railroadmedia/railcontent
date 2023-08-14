@@ -19,12 +19,28 @@
         ]
     )
 
+    <div id="confirmationModal" class="modal">
+        <div class="tw-flex tw-justify-center tw-items-center" style="background:transparent!important;">
+            <div class="tw-max-w-xl tw-bg-white dark:tw-bg-[#081825] tw-text-center dark:tw-text-white tw-rounded-xl tw-px-5 sm:tw-px-8 tw-py-6 sm:tw-py-10 dark:tw-border-[#445F74] dark:tw-border">
+                <div class="tw-text-2xl tw-font-bold">Thanks for sharing your love for music!</div>
+                <p class="tw-mt-3 tw-mb-5 tw-max-w-md tw-mx-auto">
+                    You've successfully sent <span id="modalEmail"></span>
+                    <br class="tw-hidden sm:tw-inline-block"> a 30-Day Guest Pass to {{ ucfirst($brand) }}.
+                </p>
+                <div>
+                    <span onclick="window.closeAllModals();" class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]">Close</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('layout-scripts')
     <script>
         function sendPass(e) {
             e.preventDefault();
+
             let token = document.getElementById('_token').value;
             let brand = document.getElementById('brand').value;
             let email = document.getElementById('email').value;
@@ -44,69 +60,15 @@
                     body: JSON.stringify(data),
                 })
                 .then((res) => {
+                    //use email value for the modal
+                    document.getElementById('modalEmail').innerHTML = email;
                     //blank input
                     document.getElementById('email').value = '';
 
                     //open modal
-                    let buttonClicked = document.getElementById('sendButton').target;
-                    const openEvent = new CustomEvent('modalOpen', {
-                        detail: {
-                            trigger: buttonClicked,
-                        },
-                    });
-                    const modalToOpen = document.getElementById('confirmationModal');
-
-                    if (modalToOpen) {
-                        window.appendBackgroundOverlay();
-
-                        document.body.classList.add('no-scroll');
-                        document.documentElement.classList.add('no-scroll');
-                        modalToOpen.classList.add('displayed');
-                        setTimeout(() => {
-                            modalToOpen.classList.add('active');
-                        }, 50);
-
-                        modalToOpen.dispatchEvent(openEvent);
-                    }
+                    window.openModal('confirmationModal');
                 })
             }
-        }
-
-        function closeModal() {
-            const closeEvent = new CustomEvent('modalClose');
-
-            const modalOverlay = document.getElementById('modalOverlay');
-            const modalDialogs = document.querySelectorAll('.modal');
-
-            // Remove the event listeners from the overlay and remove it from the DOM
-            if (modalOverlay) {
-                modalOverlay.removeEventListener('click', closeModal);
-                document.body.removeChild(modalOverlay);
-                document.body.classList.remove('no-scroll');
-                document.documentElement.classList.remove('no-scroll');
-
-                document.body.style.paddingRight = '0';
-
-                window.dispatchEvent(closeEvent);
-            }
-
-            // Remove the active class from all Modals (easier than finding the specific one open)
-            Array.from(modalDialogs).forEach((dialog) => {
-                dialog.classList.remove('active');
-                dialog.classList.remove('displayed');
-
-                if (dialog.classList.contains('vimeo-embedded-player')) {
-                    // pause all videos in an iframe if they contain a vimeo src
-                    const iframes = dialog.getElementsByTagName('iframe');
-                    Array.from(iframes).forEach((iframe) => {
-                        const isVimeoIframe = iframe.getAttribute('src')?.includes('vimeo');
-                        if (iframe && isVimeoIframe) {
-                            const player = new Player(iframe);
-                            player.pause();
-                        }
-                    })
-                }
-            });
         }
 
         function copyLink() {

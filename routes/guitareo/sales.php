@@ -7,6 +7,7 @@ Route::domain('{guitareoDomain}')
     ->middleware(['web_public'])
     ->group(function () {
     Route::get('/', [SalesController::class, 'home'] );
+    Route::get('/restart', [SalesController::class, 'restart'] );
     Route::get('/trial', [SalesController::class, 'trial']);
     Route::get('/trial-month', [SalesController::class, 'homeMonth']);
     Route::get('/new-year', [SalesController::class, 'promo'] );

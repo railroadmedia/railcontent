@@ -6,7 +6,7 @@
         <!-- Post Header -->
         <div class="tw-flex tw-items-center">
             <!-- Avatar -->
-            <div class="tw-w-20 tw-h-20 tw-mr-4"> 
+            <div class="tw-w-20 tw-h-20 tw-mr-4">
                 <div class="user-avatar tw-w-20 tw-h-20"
                     :class="[avatarClassObject, brand]">
                     <a :href="post.authorProfileUrl"
@@ -44,7 +44,7 @@
                     class="tw-text-[#00101D] dark:tw-text-white tw-w-full tw-flex tw-flex-col"
                     :class="['post-body', brand]"
                 >
-                    <div v-html="post.postBody" 
+                    <div v-html="post.postBody"
                         :id="'post-body'+post.id"
                         class="tw-text-base"
                         :ref="'post-body'+post.id"
@@ -63,13 +63,13 @@
                             name="_method"
                             value="patch"
                         >
-                        <text-editor 
+                        <text-editor
                             :initial-value="post.postBody"
                         />
 
                         <div class="tw-flex tw-flex-row tw-justify-end tw-mt-4 tw-flex-wrap">
                             <a
-                                class="tw-btn-primary tw-bg-transparent tw-text-[#00101D] dark:tw-text-white hover:tw-bg-black/10 tw-mr-2 tw-w-full sm:tw-w-auto"
+                                class="tw-btn-primary tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D] tw-mr-2 tw-w-full sm:tw-w-auto"
                                 @click="editing = false"
                             >
                                 Cancel
@@ -77,7 +77,7 @@
 
                             <button
                                 class="tw-btn-primary tw-w-full sm:tw-w-auto"
-                                :class="`tw-bg-${brand} hover:tw-bg-${brand}-600`"
+                                :class="`tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`"
                                 type="submit"
                             >
                                 Save Post
@@ -134,7 +134,7 @@
                             Report
                         </p>
                         <p
-                            v-if="index !== 0 && canEdit"
+                            v-if="!(currentPage === 1 && index === 0) && canEdit"
                             class="tw-text-lg tw-text-[#00101D] dark:tw-text-white ml-3 tw-uppercase dense tw-cursor-pointer"
                             @click="deletePost"
                         >
@@ -150,7 +150,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Signature -->
             <div class="tw-flex tw-flex-row body">
                 <div
@@ -422,12 +422,12 @@ export default {
     },
     mounted() {
         //Hide Blockquotes (TEMPORARY FIX! NEEDS REFACTORING)
-        if(this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote').length > 0) { 
+        if(this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote').length > 0) {
             //Get Top Quote
             let topQuote = this.$refs['post-body'+this.post.id].getElementsByTagName('blockquote')[0];
             //Get Quote Count
             let quoteCount = topQuote.getElementsByTagName('blockquote').length + 1; //Only Counts blockquotes within first blockquote element
-            
+
             //Add ShowHide Button if there are multiple quotes
             if(topQuote.querySelectorAll('blockquote')[0]) {
                 //Hide Multiple Quotes By Default
@@ -447,13 +447,13 @@ export default {
                         </div>
                     </div>
                 `;
-                
+
                 //Add Button
                 if(topQuote.querySelector('.quote-heading')) {
-                    topQuote.querySelector('.quote-heading').insertAdjacentHTML("beforeend", buttonHTML ); 
+                    topQuote.querySelector('.quote-heading').insertAdjacentHTML("beforeend", buttonHTML );
                 } else {
-                    topQuote.getElementsByTagName('blockquote')[0].insertAdjacentHTML("beforebegin", buttonHTML ); 
-                } 
+                    topQuote.getElementsByTagName('blockquote')[0].insertAdjacentHTML("beforebegin", buttonHTML );
+                }
 
                 //HideShow Function
                 window.hideShow = function(postID) {
@@ -463,23 +463,23 @@ export default {
                     childQuote.classList.toggle('tw-hidden');
                     QuoteToggleIcon.classList.toggle('tw-rotate-180')
                 };
-                
+
             }
-        } 
+        }
     }
 };
 </script>
 <style>
     /* Post Body Specific Styles */
-    .post-body ul, 
+    .post-body ul,
     .post-body ol {
         list-style: revert;
         padding-left: 40px;
         margin: 15px 0;
     }
     .post-body p:empty { display: none; }
-    .post-body blockquote { 
-        margin: 15px 0; 
+    .post-body blockquote {
+        margin: 15px 0;
         width: 100%;
     }
     .forumSignature p {

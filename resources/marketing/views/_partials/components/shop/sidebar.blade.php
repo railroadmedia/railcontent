@@ -100,7 +100,7 @@
         </div>
         @if(!empty($guaranteeBadge))
             <div class="hidden lg:flex justify-center items-center px-5 pb-5 text-center md:pt-2 md:pt-4 md:pb-6 lg:p-5 lg:-mt-1 lg:mx-auto lg:mb-0 border-t-0 lg:border-t" style="border-color: #CCD3D3; border-top-style: solid;">
-                <img class="w-24 my-0 pr-6" src="https://www.musora.com/musora-cdn/image/width=170,quality=85/@php
+                <img class="w-24 my-0 pr-6" src="https://www.musora.com/musora-cdn/image/width=170,quality=95/@php
                     if($theme === 'drumeo'){
                         echo 'https://dpwjbsxqtam5n.cloudfront.net/sales/guarantee-badge.png';
                     }
@@ -114,7 +114,7 @@
                         echo 'https://d21xeg6s76swyd.cloudfront.net/sales/2021/guarantee.png';
                     }
                 @endphp" alt="guarantee badge">
-                <p class="text-sm text-left my-0 text-{{ $theme }}"><em>Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money Back <br class="lg:hidden" /> Guarantee.</em></p>
+                <p class="text-sm text-left my-0 text-{{ $theme }}"><em>Your entire order is backed by<br class="lg:hidden" /> our 90-Day Money-Back <br class="lg:hidden" /> Guarantee.</em></p>
             </div>
         @endif
     </div>

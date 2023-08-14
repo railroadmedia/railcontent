@@ -1,96 +1,55 @@
-<header class="sm:px-6 pb-10 sm:py-14 lg:py-20" style="background:#f6f8fc;">
-    <div class="container max-w-6xl mx-auto">
-        <div class="flex flex-wrap sm:flex-nowrap items-center">
-            <div class="w-full sm:w-7/12 sm:pr-6 text-center lg:text-left">
-                <div x-on:click="trailer = true;" alt="header image" class="mb-5 overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video relative"
-                    @if(!empty($promoVersion))
-                        style="background-image:url();padding-bottom: 60%;"
-                    @else
-                        style="background-image:url();padding-bottom: 75%;"
-                    @endif
-                >
-                    <img class="absolute inset-0 object-cover w-full" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ !empty($thumbM) ? $thumbM : $thumb }}" alt="Header thumbnail" />
-                    <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
-                </div>
-                <div class="px-5 sm:px-0">
-                    <h1 class="rotater-text text-{{ $theme }}"><strong>{!! $header !!}</strong></h1>
-                    <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>{!! $desc !!}</strong></h6>
-                    <p class="hidden lg:inline">
-                        <i class="fas fa-check text-{{ $theme }}"></i> {!! $pointOne !!}
-                        <i class="ml-2 fas fa-check text-{{ $theme }}"></i> {!! $pointTwo !!}
-                        <i class="ml-2 fas fa-check text-{{ $theme }}"></i> {!! $pointThree !!}
-                    </p>
-                    <div class="flex inline lg:hidden">
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointOne !!}</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointTwo !!}</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check text-{{ $theme }}"></i><br> {!! $pointThree !!}</p>
-                    </div>
-                    <div class="flex flex-wrap items-center justify-center sm:justify-start mt-6 sm:mt-5 lg:mt-10 sm:max-w-xs">
-                        <a class="w-full join bg-{{ $theme }} smaller mb-2 @if(!empty($promoVersion)) anchor-slide @endif"
-                            @if(!empty($promoVersion))
-                                href="#customize-anchor"
-                            @elseif(!empty($month))
-                                href="/choose-your-trial-month"
-                            @else
-                                href="/choose-plan"
-                            @endif
-                        >
-                            @if(!empty($promoVersion) && empty($trialVersion))
-                                @if(!empty($cta))
-                                    {!! $cta !!}
-                                @else
-                                    SEE YOUR DEAL &raquo;
-                                @endif
-                            @else
-                                START FOR FREE <i class="fas fa-arrow-right" style="line-height: 0;"></i>
-                            @endif
-                        </a>
-                        <a aria-label="Review" class="inline-block" href="{{ $reviewLink }}" target="_blank" onclick="window.open('{{ $reviewLink }}', 'newwindow', 'width=750, height=550'); return false;">
-                            <i class="align-middle text-lg fas fa-star" style="color: #ffac00;"></i>
-                            <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
-                            <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
-                            <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
-                            <i class="align-middle text-lg -ml-3 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;"></i>
-                        </a>
-                        <p class="inline-block leading-tight text-sm align-middle pl-2 m-0"><em>Trusted by {{ $students }} active students.</em></p>
-                    </div>
-                </div>
-            </div>
-            <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div x-on:click="trailer = true;"
-{{--                        @if(!empty($promoVersion))--}}
-{{--                            class="relative bg-contain bg-top bg-no-repeat cursor-pointer autoplay-video" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{!! $promoThumb !!});padding-bottom: 108%;"--}}
-{{--                        @else--}}
-                            class="bg-no-repeat @if(empty($noThumbShadow)) shadow-2xl bg-cover @else bg-contain @endif rounded-xl aspect-1:1 overflow-hidden relative bg-top cursor-pointer autoplay-video" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=85/{!! $thumb !!});"
-{{--                        @endif--}}
-                        >
-                        <div class="join white smaller absolute bottom-2 left-2"><i class="fas fa-play"></i> Watch Trailer</div>
-                    </div>
-            </div>
+<header class="text-center px-5 sm:px-6 py-32 sm:py-52 lg:py-56 relative overflow-hidden" style="background:linear-gradient(to bottom, #fff 40%, #ecf3f9);">
+    <div class="container max-w-xs sm:max-w-6xl mx-auto relative z-20">
+        <h1 class="relative w-auto inline-block text-3xl sm:text-4xl lg:text-5xl">
+            <strong>{!! $header !!}</strong>
+            @if(!empty($underline))
+                <img class="w-64 sm:w-72 lg:w-96 sm:absolute -mt-4 sm:mt-0 sm:-bottom-1 sm:px-6" style="right:6%" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/underline.png" alt="underline" fetchpriority="high">
+            @endif
+        </h1>
+        <h6 class="leading-relaxed sm:mt-6 mb-4 sm:mb-7 px-5 sm:px-0 max-w-xs sm:max-w-full">{!! $desc !!}</h6>
+        <a class="sm:mx-1 w-full sm:w-56 join {{ $theme }} smaller @if(!empty($promoVersion)) anchor-slide @endif"
+            @if(!empty($promoVersion))
+                href="#customize-anchor"
+            @elseif(!empty($month))
+                href="/choose-your-trial-month"
+            @else
+                href="/choose-plan"
+            @endif
+        >
+            @if(!empty($promoVersion) && empty($trialVersion))
+                @if(!empty($cta))
+                    {!! $cta !!}
+                @else
+                    SEE YOUR DEAL &raquo;
+                @endif
+            @elseif(!empty($month))
+                30 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+            @else
+                7 Days For Free <i class="fas fa-arrow-right" style="line-height: 0;"></i>
+            @endif
+        </a>
+        <div class="flex flex-wrap items-center justify-center mt-2 sm:mt-3 mx-auto">
+            <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+                <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                <i class="align-middle text-lg -ml-4 fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+            </a>
+            <p class="inline-block leading-tight text-xs align-middle pl-1 m-0"><em>Trusted by {{ number_format(Prices::$students) }} active students.</em></p>
         </div>
-        <div class="px-5 sm:px-0 mb-10">
-            <div class="flex flex-wrap sm:flex-nowrap text-center border-2 rounded-xl border-{{ $theme }} mt-8 lg:mt-12 lg:mb-4 relative"
-{{--                style="background-color:#eaf1fa;"--}}
-            >
-                    <div class="z-10 flex flex-wrap sm:flex-nowrap items-start justify-evenly w-full sm:w-auto sm:flex-grow py-4 sm:py-3 lg:py-4 lg:px-5 text-left sm:text-center">
-                        @foreach ($features as $key => $feature)
-                            <div class="flex sm:block w-full sm:w-auto px-4 sm:px-3 my-2 sm:mb-0">
-                                <img
-                                    src="https://www.musora.com/musora-cdn/image/{{ $feature['image'] }}"
-                                    class="h-5 sm:h-7 mb-2 mr-4 sm:mr-0 transition-opacity opacity-0"
-                                    alt="feature image{{$key+1}}"
-                                    loading="lazy"
-                                    onload="this.classList.remove('opacity-0')"
-                                >
-                                <p class="leading-tight mx-0"><strong class="font-black">{{ $feature['title'] }}</strong><br>
-                                    <span class="text-sm">{!!  $feature['desc']  !!}</span></p>
-                            </div>
-                        @endforeach
-                    </div>
-                <div class="absolute inset-0 z-0 bg-{{ $theme }}" style="opacity: 0.07;"></div>
-                </div>
-        </div>
-
+    </div>
+    <img class="absolute z-10 h-10 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[53%] sm:top-[53%] left-[4%] sm:left-[4%]" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/{{ $bubble1 }}" alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-24 sm:h-28 lg:h-44 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[21%] left-[8%] sm:left-[10%]" src="https://www.musora.com/musora-cdn/image/width=350,quality=95/{{ $bubble2 }}" alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-32 sm:h-40 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[84%] sm:top-[81%] left-[9%] sm:left-[18%]" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/{{ $bubble3 }}" alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[13%] left-[31%] sm:left-[31%]" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/{{ $bubble4 }}" alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-10 sm:h-12 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[8%] sm:top-[8%] left-[58%] sm:left-[58%]" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/{{ $bubble5 }}" alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-28 sm:h-32 lg:h-48 transform -translate-x-1/2 -translate-y-1/2 top-[88%] sm:top-[88%] left-[90%] sm:left-[78%]" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/{{ $bubble6 }}" alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-28 sm:h-36 lg:h-52 transform -translate-x-1/2 -translate-y-1/2 top-[13%] sm:top-[18%] left-[93%] sm:left-[87%]" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $bubble7 }}" alt="header circle image" fetchpriority="high">
+    <img class="absolute z-10 h-12 sm:h-14 lg:h-16 transform -translate-x-1/2 -translate-y-1/2 top-[63%] sm:top-[63%] left-[99%] sm:left-[99%]" src="https://www.musora.com/musora-cdn/image/width=100,quality=95/{{ $bubble8 }}" alt="header circle image" fetchpriority="high">
+</header>
+<section class="sm:px-6 py-4 sm:py-5 text-white" style="background:#0c1524;">
+    <div class="container max-w-4xl mx-auto">
         @component('_partials.components.carousel',[
             'xdata' => "
                 classes: {
@@ -112,13 +71,13 @@
                             <p class="leading-normal text-sm"><em>“{{ $slide['desc'] }}”</em></p>
                             <div class="flex flex-wrap md:flex-nowrap sm:text-left items-center justify-center mt-1.5">
                                 <img
-                                    class="rounded-full object-cover object-right w-10 h-10 transition-opacity opacity-0"
-                                    src="https://www.musora.com/musora-cdn/image/width=80,quality=85/{{ $slide['thumb'] }}"
+                                    class="rounded-full object-cover object-right w-9 h-9 transition-opacity opacity-0"
+                                    src="https://www.musora.com/musora-cdn/image/width=80,quality=95/{{ $slide['thumb'] }}"
                                     loading="lazy"
                                     onload="this.classList.remove('opacity-0')"
                                     alt="{{$slide['name']}}"
                                 ><br class="inline md:hidden">
-                                <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-1 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
+                                <p class="leading-tight w-full md:w-auto text-sm text-light-navy ml-1 md:ml-2 mr-0 mt-0.5 md:mt-0"><em>{{ $slide['name'] }}, {{ $slide['credit'] }}</em></p>
                             </div>
                         </div>
                     </li>
@@ -126,4 +85,4 @@
             @endslot
         @endcomponent
     </div>
-</header>
+</section>

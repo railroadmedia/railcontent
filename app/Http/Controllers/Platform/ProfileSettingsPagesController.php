@@ -230,7 +230,7 @@ class ProfileSettingsPagesController extends BaseController
             ->respond()
             ->getContent();
 
-        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.' . brand() . '.stripe_publishable_key');
+        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.musora.stripe_publishable_key');
 
         $membershipProductIds = ProductModel::query()
             ->where([
@@ -564,10 +564,10 @@ class ProfileSettingsPagesController extends BaseController
             $addToCartUrlTrial = 'https://musora.com/';
         }
 
-        $salesPage['drumeo'] = 'https://www.drumeo.com/';
-        $salesPage['pianote'] = 'https://www.pianote.com/';
-        $salesPage['guitareo'] = 'https://www.guitareo.com/';
-        $salesPage['singeo'] = 'https://www.singeo.com/';
+        $salesPage['drumeo'] = 'https://www.drumeo.com/lp';
+        $salesPage['pianote'] = 'https://www.pianote.com/lp';
+        $salesPage['guitareo'] = 'https://www.guitareo.com/lp';
+        $salesPage['singeo'] = 'https://www.singeo.com/lp';
         $salesPageUrl = $salesPage[$brand] ?? $salesPage['drumeo'];
 
         // -------------------------------------------------------------------------------------------------------------

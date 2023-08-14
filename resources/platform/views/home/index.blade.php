@@ -59,8 +59,8 @@
                 'brand' => brand(),
                 'hasStartedContent' => $startedContentCount > 0,
                 'contentEndpoint' => '/railcontent/content',
-                'continueUrl' => url()->route('platform.lists.in-progress'),
-                'seeAllUrl' => url()->route('platform.lists.in-progress'),
+                'continueUrl' => url()->route('platform.lesson-history.in-progress'),
+                'seeAllUrl' => url()->route('platform.lesson-history.in-progress'),
                 'startedContentJson' => $startedContentJson,
                 ])
             @endcomponent
@@ -110,8 +110,7 @@
         {{-- My Playlists --}}
         @component('partials.bladesora.members.components.home._list-section', [
             'brand' => brand(),
-            'myListUrl' => url()->route('platform.lists.my-list'),
-            'contentEndpoint' => '/railcontent/content',
+            'myListUrl' => url()->route('platform.user.playlists',['brand'=>brand()]),
             'usersList' => $usersList,
             ])
         @endcomponent
@@ -158,12 +157,14 @@
 
 @endsection
 
-<script>
-    import CohortBanner from "../../assets/js/vue/components/CohortBanner/CohortBanner";
-    export default {
-        components: {CohortBanner}
-    }
-</script>
-
-
-
+@section('layout-scripts')
+    @parent
+    
+    @if(str_contains(Request::url(), 'create-playlist-window'))
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                window.openplaylistmodal({ modalType: 'create', brand: '{{ $brand }}', data: { name: '', category: 'General', thumbnail_url: null, description: ''} });
+            })
+        </script>
+    @endif
+@endsection

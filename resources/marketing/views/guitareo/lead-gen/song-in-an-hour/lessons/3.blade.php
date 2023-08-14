@@ -16,9 +16,9 @@
     /song-in-an-hour/your-challenge/4
 @stop
 
-@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-2.png')
+@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=95/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-2.png')
 
-@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-4.png')
+@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=95/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-4.png')
 
 @section('assignments')
     @include('guitareo.lead-gen.song-in-an-hour._assignment-resources', [

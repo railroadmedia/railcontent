@@ -6,7 +6,7 @@
     <div class="feature-rotater w-full max-w-md md:max-w-full flex flex-wrap md:flex-nowrap items-center justify-center mx-auto my-4 md:my-14 lg:my-20 px-4">
         <div class="pic-wrap md:order-1 mb-10 md:my-5 md:my-0 pl-0 md:pl-5 lg:pl-14 w-56 md:w-80 lg:w-96">
             @foreach ($screens as $screen)
-                <img class="lazyload side-pic songs w-full h-auto rounded-2xl @if(!empty($screen['first'])) md:hidden @else hidden @endif" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $screen['img'] }}" alt="method-screen-{{ $screenNum }}">
+                <img class="lazyload side-pic songs w-full h-auto rounded-2xl @if(!empty($screen['first'])) md:hidden @else hidden @endif" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $screen['img'] }}" alt="method-screen-{{ $screenNum }}">
                 {{--{{ $screenNum++ }}--}}
             @endforeach
         </div>

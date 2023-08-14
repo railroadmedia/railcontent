@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Singeo;
 
 use App\Models\Leadgen;
 use App\Models\LeadgenLesson;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\BaseController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -38,7 +39,7 @@ class LeadGenController extends BaseController
     {
         switch ($page) {
             case null:
-                return view('singeo.lead-gen.holiday-karaoke.signup');
+                return view('singeo.lead-gen.holiday-karaoke.signup', ['recaptchaKey'=>config('recaptcha.key')]);
             case 'unlocked':
                 return view('singeo.lead-gen.holiday-karaoke.unlocked');
         }
@@ -48,7 +49,7 @@ class LeadGenController extends BaseController
 
     public function improveAnyVoice()
     {
-        return view('singeo.lead-gen.improve-any-voice.signup');
+        return view('singeo.lead-gen.improve-any-voice.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function liveBootcamp(Request $request, $domain, $page = null)
@@ -65,12 +66,23 @@ class LeadGenController extends BaseController
 
     public function stopHatingVoice()
     {
-        return view('singeo.lead-gen.stop-hating-your-voice.signup');
+        return view('singeo.lead-gen.stop-hating-your-voice.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
     public function leadgen(Request $request, $domain, $leadgenSlug = null)
     {
-        $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Singeo')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
+        $currentLesson = LeadgenLesson::join('leadgens', 'leadgens.id', '=', 'leadgen_lessons.leadgen_id')->where('leadgens.visible', true)
+            ->where(function ($query) {
+                return $query
+                    ->whereNull('leadgens.start_date')
+                    ->orWhere('leadgens.start_date', '<=', Carbon::now('PST')->toDateTimeString());
+            })
+            ->where(function ($query) {
+                return $query
+                    ->whereNull('leadgens.end_date')
+                    ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
+            })
+            ->join('brands', 'leadgens.brand_id', '=', 'brands.id')->where('brands.name', 'Singeo')->where('leadgen_lessons.slug', $leadgenSlug)->select('leadgen_lessons.*', 'brand_id')->first();
         if(!is_null($currentLesson)){
             if(!$currentLesson->one_off){
                 $lessons = LeadgenLesson::where([['leadgen_id', $currentLesson->leadgen_id], ['one_off', 0]])->get();
@@ -94,7 +106,17 @@ class LeadGenController extends BaseController
             ]);
         }
         else {
-            $leadgen = Leadgen::join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Singeo')->where('slug', $leadgenSlug)->select('leadgens.*')->first();
+            $leadgen = Leadgen::where('leadgens.visible', true)
+                ->where(function ($query) {
+                    return $query
+                        ->whereNull('leadgens.start_date')
+                        ->orWhere('leadgens.start_date', '<=', Carbon::now('PST')->toDateTimeString());
+                })
+                ->where(function ($query) {
+                    return $query
+                        ->whereNull('leadgens.end_date')
+                        ->orWhere('leadgens.end_date', '>', Carbon::now('PST')->toDateTimeString());
+                })->join('brands', 'brands.id', '=', 'leadgens.brand_id')->where('brands.name', 'Singeo')->where('slug', $leadgenSlug)->select('leadgens.*')->first();
             if(!is_null($leadgen)){
                 $lessons = LeadgenLesson::where([['leadgen_id', $leadgen->id], ['one_off', 0]])->get();
 

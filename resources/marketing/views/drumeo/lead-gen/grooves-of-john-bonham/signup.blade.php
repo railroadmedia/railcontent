@@ -33,7 +33,8 @@
 
             <h5 class="leading-normal my-3 md:my-5">Learn 10 of Led Zeppelin’s most famous <br class="inline md:hidden"> grooves in this FREE Drumeo series.</h5>
             <div class="mx-auto text-center max-w-3xl">
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formName" => 'Grooves Of John Bonham',
                     "formId" => "Drumeo - Engagement - Trigger - Grooves Of John Bonham - Web Form",
                     "buttonText" => "Hook Me Up ",
@@ -54,7 +55,7 @@
                     <br><br>
                     Your instructor, Brian Tichy (Whitesnake), has studied John Bonham’s playing with precision to bring you the ultimate guide to Led Zeppelin’s legendary drum grooves.
                     <br><br>
-                    By the end of this course, you’ll be a certified Bonham expert -- able to replicate his most famous beats with confidence. Plus, you’ll learn the fascinating details of how these legendary grooves came to be.</p>
+                    By the end of this course, you’ll be a certified Bonham expert — able to replicate his most famous beats with confidence. Plus, you’ll learn the fascinating details of how these legendary grooves came to be.</p>
             </div>
         </div>
     </section>
@@ -117,7 +118,8 @@
 
             <h5 class="leading-normal my-3 md:my-5">Learn 10 of Led Zeppelin’s most famous <br class="inline md:hidden"> grooves in this FREE Drumeo series.</h5>
             <div class="mx-auto text-center max-w-3xl">
-                @include("drumeo.lead-gen.partials.sign-up-form-tw", [
+                @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formName" => 'Grooves Of John Bonham',
                     "formId" => "Drumeo - Engagement - Trigger - Grooves Of John Bonham - Web Form",
                     "buttonText" => "Hook Me Up ",

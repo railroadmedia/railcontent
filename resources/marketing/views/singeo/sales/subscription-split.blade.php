@@ -18,8 +18,8 @@
 
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-singeo.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-page-singeo.css') }}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
 
     <style>
@@ -147,6 +147,15 @@
     @endif
 
     @php
+        $bubble1 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/hailey-benedict.png';
+        $bubble2 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/lisa-witt.png';
+        $bubble3 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/tony-lindsay.png';
+        $bubble4 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/chris-johnson.png';
+        $bubble5 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/julia-ziegler.png';
+        $bubble6 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/darcy-d.png';
+        $bubble7 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/shelea.png';
+        $bubble8 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/cate-canning.png';
+
         $features = [
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/vocal-lessons-icon.svg',
@@ -156,7 +165,7 @@
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/artist-course-icon.svg',
                 'title' => 'Artist Courses',
-                'desc' => 'Courses and live events<br class="hidden sm:inline"> with drumming heroes. ',
+                'desc' => 'Courses and live events<br class="hidden sm:inline"> with singing heroes. ',
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/songs-icon.svg',
@@ -192,16 +201,14 @@
     @endphp
 
         @include('musora.sales.components.header-section', [
-            'header' => 'Singing lessons that fit your schedule. ',
-            'desc' => 'Learn to sing from home, anytime, with bite-sized video lessons and unlimited personal support. ',
+            'header' => 'Singing lessons that <br> fit your schedule. ',
+            'desc' => 'Learn to sing from home, anytime, with bite-sized <br class="hidden sm:inline"> video lessons and unlimited personal support. ',
             'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/header-thumb2.jpg',
             'promoThumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb.png',
             'promoThumbM' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb-m.png',
             'pointOne' => 'Improve Your Voice',
             'pointTwo' => 'Helpful Vocal Coaches',
             'pointThree' => 'Sing Popular Songs',
-            'reviewLink' => 'https://www.shopperapproved.com/reviews/Musora.com/product/Singeo+Membership/79348458',
-            'students' => number_format(Prices::$students),
         ])
 
     @include('_partials.components.video-modal',[

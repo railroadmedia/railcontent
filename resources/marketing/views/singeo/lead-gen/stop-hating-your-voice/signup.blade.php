@@ -7,11 +7,11 @@
     <meta property="og:title" content="How To Stop Hating Your Voice">
     <meta name="description" content="Learn to love your voice in 3 easy lessons!"/>
     <meta property="og:description" content="Learn to love your voice in 3 easy lessons!">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/fb-share-image.jpg">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,q_60,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/fb-share-image.jpg">
     <meta property="og:url" content="https://www.singeo.com/stop-hating-your-voice/">
 
     <link rel="stylesheet" href="{{ asset('/marketing/css/animate.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-singeo.css') }}">
     <style>
 
         .header {
@@ -50,17 +50,18 @@
 @stop
 
 @section('body')
-    <header class="header text-white text-center px-3 md:px-6 pt-40 pb-4 md:py-5 lg:py-7 relative bg-no-repeat lazyload" style="background-color:#160431;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/header-bg.jpg">
+    <header class="header text-white text-center px-3 md:px-6 pt-40 pb-4 md:py-5 lg:py-7 relative bg-no-repeat lazyload" style="background-color:#160431;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/header-bg.jpg">
         <div class="container mx-auto relative z-20 max-w-4xl">
             <div class="flex flex-wrap items-center">
                 <div class="w-full md:w-1/2 lg:w-6/12 md:order-1 md:mt-40">
                     <i data-open="trailer" class="fas fa-play play-button autoplay-video mb-4 md:m-0" aria-controls="trailer" aria-haspopup="true" tabindex="0"></i>
                 </div>
                 <div class="w-full md:w-1/2 lg:w-6/12">
-                    <img class="h-24 md:h-36" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/logo.png">
+                    <img class="h-24 md:h-36" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/logo.png">
                     <h5 class="leading-tight mt-2 mb-2">Learn to love your voice<br> <strong>in 3 easy lessons!</strong></h5>
                     <p class="mb-3 md:mb-3 leading-normal text-navy">Do you cringe when you hear your voice on a recording? Do you love singing but don’t like your voice? You’re not alone. But there’s good news. The voice you think you have now is NOTHING like the potential lurking inside you. Simply enter your email below to get 3 free vocal lessons that will teach you to stop hating your voice...</p>
-                    @include("singeo._partials._sign-up-form", [
+                    @include("singeo._partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => "Singeo - Engagement - Trigger - Stop Hating Your Voice - Web Form",
                     "formName" => 'Stop Hating Your Voice',
                     "buttonText" => "Send My Lessons",
@@ -83,7 +84,7 @@
         "code" => "682918726"
     ])
 
-    <section class="px-4 sm:px-6 py-12 md:py-14 lg:py-20 text-white text-center lazyload bg-top bg-no-repeat bg-contain bg-musora-black" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/introduction-bg.jpg">
+    <section class="px-4 sm:px-6 py-12 md:py-14 lg:py-20 text-white text-center lazyload bg-top bg-no-repeat bg-contain bg-musora-black" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/introduction-bg.jpg">
         <div class="container mx-auto">
             <h4 class="leading-normal"><strong>Why you hate your voice</strong><br>
                 <em>(and how to fix it)</em></h4>
@@ -121,7 +122,7 @@
                 @foreach ($lessons as $lesson)
                     <div class="flex lg:flex-auto w-full md:w-1/2 lg:w-1/3 px-2 md:px-3 mb-7 md:mb-10 step">
                         <div class="rounded-xl overflow-hidden" style="background: linear-gradient(to bottom, #153044 56%, #252646); ">
-                            <img class="w-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $lesson['img'] }}">
+                            <img class="w-full lazyload" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $lesson['img'] }}">
                             <h4 class="px-4 mt-4 mb-2 uppercase font-bebas">{{ $lesson['title'] }}</h4>
 
                             <p class="px-4 pb-4 opacity-70">{!! $lesson['desc'] !!}</p>
@@ -154,10 +155,10 @@
             </div>
         </div>
     </section>
-    <section class="lisa-bio text-white pt-44 pb-6 md:py-28 lg:py-32 px-4 sm:px-6 relative bg-no-repeat lazyload bg-musora-black" data-bg="https://www.musora.com/musora-cdn/image/width=1900,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/coach-bg.jpg">
+    <section class="lisa-bio text-white pt-44 pb-6 md:py-28 lg:py-32 px-4 sm:px-6 relative bg-no-repeat lazyload bg-musora-black" data-bg="https://www.musora.com/musora-cdn/image/width=1900,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/coach-bg.jpg">
         <div class="container mx-auto max-w-3xl relative z-20">
             <div class="md:flex flex-wrap md:w-7/12 text-center sm:text-left">
-                <img class="h-16 sm:h-24 lg:h-32 mx-auto sm:mx-0 mb-4 sm:mb-6 lg:mb-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/meet-lisa.png">
+                <img class="h-16 sm:h-24 lg:h-32 mx-auto sm:mx-0 mb-4 sm:mb-6 lg:mb-8 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/meet-lisa.png">
                 <p class="leading-normal md:leading-relaxed text-left text-navy">Lisa is the lead instructor at Singeo and arguably the happiest vocal coach on the planet!<br><br>
                     With a background in classical and contemporary vocal training and a love for popular music, Lisa focuses on helping you find and fall in love with your unique voice.<br><br>
                     You’ll be inspired and smiling from the very first lesson.<br><br>
@@ -166,13 +167,14 @@
         </div>
         <div class="absolute inset-0 z-10 block md:hidden" style="background:linear-gradient(to bottom, transparent 25%, #000c17 50%);"></div>
     </section>
-    <section class="final-pitch px-4 py-14 md:py-20 lg:py-24 text-white text-center bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/order-bg.jpg">
+    <section class="final-pitch px-4 py-14 md:py-20 lg:py-24 text-white text-center bg-cover bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/order-bg.jpg">
         <div class="container mx-auto">
-            <img class="h-20 sm:h-32 lg:h-44" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/logo.png">
+            <img class="h-20 sm:h-32 lg:h-44" src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/stop-hating-your-voice/logo.png">
             <h4 class="leading-tight my-5">Learn to love your voice <strong>in 3 easy lessons!</strong></h4>
             <p class="mb-3 md:mb-5 leading-tight">Enter your email below to get 3 free vocal lessons that will teach you to stop hating your voice...</p>
             <div class="w-full mx-auto max-w-lg lg:max-w-3xl">
-                @include("singeo._partials._sign-up-form", [
+                @include("singeo._partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
                     "formId" => "Singeo - Engagement - Trigger - Stop Hating Your Voice - Web Form",
                     "formName" => 'Stop Hating Your Voice',
                     "buttonText" => "Send My Lessons",

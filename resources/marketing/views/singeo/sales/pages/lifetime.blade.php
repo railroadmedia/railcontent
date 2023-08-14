@@ -11,8 +11,8 @@
 
     @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
-    <link href="{{ asset('/marketing/parcel/singeo/sales-page.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/sales-page-singeo.css') }}" rel="stylesheet">
+    <link href="{{ asset('/marketing/parcel/drumeo/nav-footer-singeo.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/animate.css') }}" rel="stylesheet">
 
     <style>
@@ -157,7 +157,7 @@
                             <div class="flip-inner">
                                 <div class="front">
                                     <div class="hover-icon"><i class="fas fa-arrow-right"></i><br>DETAILS</div>
-                                    <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=670,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/promos/november/lifetime-bundle-mic-card.jpg);"></div>
+                                    <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=670,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/promos/november/lifetime-bundle-mic-card.jpg);"></div>
                                 </div>
                                 <div class="back">
                                     <div class="text-wrap">
@@ -177,7 +177,7 @@
                             <div class="flip-inner">
                                 <div class="front">
                                     <div class="hover-icon"><i class="fas fa-arrow-right"></i><br>DETAILS</div>
-                                    <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=670,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/lifetime/lisa-witt-exclusive-card.jpg);"></div>
+                                    <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=670,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/lifetime/lisa-witt-exclusive-card.jpg);"></div>
                                 </div>
                                 <div class="back">
                                     <div class="text-wrap">
@@ -235,7 +235,7 @@
                                     <div class="front border-singeo relative overflow-hidden @if(!empty($bonus['shipping'])) {{ $bonus['shipping'] }} @endif">
                                         @if(!empty($bonus['new']))<div class="bg-promo text-white font-bebas absolute flex justify-center items-center h-6 w-full">NEW</div>@endif
                                         <div class="hover-icon"><i class="fas fa-arrow-right"></i><br>DETAILS</div>
-                                        <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=85/{{ $bonus['image'] }});"></div>
+                                        <div class="image-wrap" style="background-image:url(https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }});"></div>
                                     </div>
                                     <div class="back">
                                         <div class="text-wrap">
@@ -256,9 +256,9 @@
                 {{-- <p style="max-width: 480px;color: #aaa;padding:0 15px;"><em>All digital bonuses are added to your account instantly with your membership to Singeo and they’re yours forever!</em></p> --}}
             </div>
             {{-- <div class="arrow-wrap text-promo">
-                <i class="fal fa-chevron-down animated infinite pulse"></i>
-                <i class="fal fa-chevron-down animated delay-1s infinite pulse"></i>
-                <i class="fal fa-chevron-down animated delay-2s infinite pulse"></i>
+                <i class="fa-light fa-chevron-down animated infinite pulse"></i>
+                <i class="fa-light fa-chevron-down animated delay-1s infinite pulse"></i>
+                <i class="fa-light fa-chevron-down animated delay-2s infinite pulse"></i>
             </div> --}}
             {{-- <a class="join sold-out methodcta my-4">SOLD OUT</a> --}}
             {{--                    <div class="w-full max-w-sm mx-auto">--}}

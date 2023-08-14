@@ -33,10 +33,10 @@
                 <p class="font-semibold md:text-lg">Express yourself by writing a song, adding lyrics, and recording something that makes you smile.</p>
             </div>
             <div class="mb-0 sm:mb-10 m-auto w-5/6 sm:w-full sm:px-4">
-                <i class="fal fa-trophy m-auto mb-2" style="font-size: 40px; color:#FFB500;"></i>
+                <i class="fa-light fa-trophy m-auto mb-2" style="font-size: 40px; color:#FFB500;"></i>
                 {{--<img src="{{ imgix("https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/icon-final-boss.svg", ["auto" => "format", "w" => 45]) }}" width="45px" class="m-auto mb-2">--}}
                 <h3 class="font-bison-bold uppercase text-3xl">The Final Mission</h3>
-                <p class="font-semibold mb-0 md:text-lg">Everything you’ve learned is tested with ONE high energy tune -- and it’s so satisfying to pull off.</p>
+                <p class="font-semibold mb-0 md:text-lg">Everything you’ve learned is tested with ONE high energy tune — and it’s so satisfying to pull off.</p>
             </div>
         </div>
     </div>

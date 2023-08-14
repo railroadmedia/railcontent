@@ -98,13 +98,6 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo']);
     }
-    public function fasterFeet()
-    {
-        $products = $this->productRepository->all();
-        $products = array_combine(array_entity_column($products, 'getSku'), $products);
-
-        return view('drumeo.sales.faster-feet', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true]);
-    }
     public function homeMonth()
     {
         $products = $this->productRepository->all();
@@ -119,12 +112,12 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
     }
-    public function trialSplit()
+    public function trialBeginner()
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.subscription-split', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true ]);
+        return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => true, 'trialVersion' => true, 'beginnerVersion' => true ]);
     }
     public function promo()
     {
@@ -132,6 +125,13 @@ class SalesController extends BaseController
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         return view('drumeo.sales.subscription', ['products' => $products, 'theme' => 'drumeo', 'promoVersion' => 'true']);
+    }
+    public function restart()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.sales.restart', ['products' => $products, 'theme' => 'drumeo']);
     }
     public function choosePlanVDF()
     {
@@ -219,6 +219,13 @@ class SalesController extends BaseController
 
         return view('drumeo.products.eardrums', ['products' => $products]);
     }
+    public function eardrumsMembers()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.products.eardrums-members', ['products' => $products]);
+    }
     public function thirtyDayDrummer()
     {
         $productId = 516;
@@ -228,6 +235,7 @@ class SalesController extends BaseController
         $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-drummer', [
+            'recaptchaKey'=>config('recaptcha.key'),
             'nPackOwners' => $nPackOwners,
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct
@@ -242,6 +250,7 @@ class SalesController extends BaseController
         $nPackOwners = $userProductService->getNumberProductOwners($productId);
 
         return view('drumeo.products.30-day-chops', [
+            'recaptchaKey'=>config('recaptcha.key'),
             'nPackOwners' => $nPackOwners,
             'theme' => 'drumeo',
             'hasProduct' => $hasProduct
@@ -254,6 +263,13 @@ class SalesController extends BaseController
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
         return view('drumeo.lead-gen.pages.30-day-drummer-deal', ['products' => $products]);
+    }
+    public function thirtyDayChopsDeal()
+    {
+        $products = $this->productRepository->all();
+        $products = array_combine(array_entity_column($products, 'getSku'), $products);
+
+        return view('drumeo.lead-gen.pages.30-day-chops-deal', ['products' => $products, 'theme' => 'drumeo']);
     }
 
 
@@ -402,5 +418,10 @@ class SalesController extends BaseController
     public function drummingSystem()
     {
         return view('drumeo.drumshop.pages.drumming-system', ['theme' => 'drumeo']);
+    }
+
+    public function fiveforthreeBundle()
+    {
+        return view('drumeo.drumshop.pages.5-for-3-bundle', ['theme' => 'drumeo']);
     }
 }

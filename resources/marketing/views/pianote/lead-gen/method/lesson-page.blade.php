@@ -2,19 +2,19 @@
 
 @section('global-head')
     <title>Pianote Method | Pianote</title>
-    <meta name="description" content="Master the fundamentals -- so you can play anything you want on the piano.">
+    <meta name="description" content="Master the fundamentals — so you can play anything you want on the piano.">
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/method/og-image.png" style="display: none;">
     <meta property="og:title" content="Pianote Method">
-    <meta property="og:description" content="Master the fundamentals -- so you can play anything you want on the piano.">
+    <meta property="og:description" content="Master the fundamentals — so you can play anything you want on the piano.">
     <meta property="og:url" content="https://www.pianote.com/method">
 
 
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/lead-gen.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen-pianote.css') }}">
     <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/lead-gen.css') }}">
 
     <style>

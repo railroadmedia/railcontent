@@ -75,7 +75,7 @@
             @endif
         </div>
     </section>
-
+    
     @include('_partials.components.video-modal',[
         'name' => 'drumeoTrailer',
         'video' => '785314424',

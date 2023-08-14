@@ -46,25 +46,25 @@
         [
             'firstName' => 'Lisa',
             'lastName' => 'Witt',
-            'img' => 'https://musora.imgix.net/https%3A%2F%2Fcdn.musora.com%2Fimage%2Ffetch%2Fc_fill%2Cw_660%2Ch_960%2Cq_auto%3Agood%2Fhttps%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2Fcoaches-2022%2Fpianote%2FLisa-Witt-Pianote-HEAD.jpg?ixlib=php-1.2.1&w=300&s=3a7206aa4962fb2652009de8dd0f7d56',
+            'img' => 'https://www.musora.com/musora-cdn/image/width=660,quality=95/https://d1923uyy6spedc.cloudfront.net/coaches-2022/pianote/Lisa-Witt-Pianote-HEAD.jpg',
             'intro' => 'Lisa has been teaching piano for 19 years and in that time has helped hundreds of students learn to play the songs they love. Lisa received classical piano training through the Royal Conservatory of Music, but she has since embraced popular music and playing by ear in order to accompany herself and others.',
         ],
         [
             'firstName' => 'Kevin',
             'lastName' => 'Castro',
-            'img' => 'https://musora.imgix.net/https%3A%2F%2Fcdn.musora.com%2Fimage%2Ffetch%2Fc_fill%2Cw_660%2Ch_960%2Cq_auto%3Agood%2Fhttps%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2FKevin-Castro-1-1640882695.jpg?ixlib=php-1.2.1&w=300&s=d7c242cb20a8bb349464382eef3f75a8',
+            'img' => 'https://www.musora.com/musora-cdn/image/width=660,quality=95/https://d1923uyy6spedc.cloudfront.net/Kevin-Castro-1-1640882695.jpg',
             'intro' => 'Kevin Castro is a pianist based out of Vancouver, British Columbia who performs contemporary music. Castro adds his own jazz spin on the songs he performs during solo piano, ensuring it connects with the musicality of the set and the audience. While also performing jazz, Kevin is highly skilled in designing Synth sounds for Pop music and is a very energetic performer.',
         ],
         [
             'firstName' => 'Brett',
             'lastName' => 'Ziegler',
-            'img' => 'https://musora.imgix.net/https%3A%2F%2Fcdn.musora.com%2Fimage%2Ffetch%2Fc_fill%2Cw_660%2Ch_960%2Cq_auto%3Agood%2Fhttps%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2Fcoaches-2022%2Fpianote%2FBrett-Ziegler-HEAD.jpg?ixlib=php-1.2.1&w=300&s=22584002e0ff5fb04ccfce292fec8690',
+            'img' => 'https://www.musora.com/musora-cdn/image/width=660,quality=95/https://d1923uyy6spedc.cloudfront.net/coaches-2022/pianote/Brett-Ziegler-HEAD.jpg',
             'intro' => 'A jack of all trades (and master of all trades), Brett Ziegler is your guide to broadening your horizons on the keys. From Cocktail Piano, Boogie Woogie, Gospel, and Improv — Brett’s got you covered. He’s taught piano for 23 years, worked as a musical director, technical director, worship leader, recording musician, touring musician, theater bandleader, and so much more — and he can’t wait to connect with you!',
         ],
         [
             'firstName' => 'Cassi',
             'lastName' => 'Falk',
-            'img' => 'https://musora.imgix.net/https%3A%2F%2Fcdn.musora.com%2Fimage%2Ffetch%2Fc_fill%2Cw_660%2Ch_960%2Cq_auto%3Agood%2Fhttps%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2Fcoaches-2022%2Fpianote%2FCassi-Falk-HEAD.jpg?ixlib=php-1.2.1&w=300&s=0cc1b02b6ca141c899dcf88f54b48907',
+            'img' => 'https://www.musora.com/musora-cdn/image/width=660,quality=95/https://d1923uyy6spedc.cloudfront.net/coaches-2022/pianote/Cassi-Falk-HEAD.jpg',
             'intro' => 'Each week, Cassi has 30 students going through her home-based teaching studio - and she’s excited to help you too, through Pianote! Cassi is trained as an Elementary and Intermediate Specialist through the Royal Conservatory Teacher Certification Program.',
         ],
     ];
@@ -73,31 +73,31 @@
         [
             'firstName' => 'Jesús',
             'lastName' => 'Molina',
-            'img' => 'https://musora.imgix.net/https%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2FCoachCardPack-Jesus_Coach+Card+Image+copy-1651096279.jpg?ixlib=php-1.2.1&w=300&s=b55a91124356e308e92ef74ee70815cb',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/CoachCardPack-Jesus_Coach+Card+Image+copy-1651096279.jpg',
             'intro' => 'Jesús Molina, born in Sincelejo, Sucre-Colombia, started his musical journey playing the saxophone until he moved on to jazz piano at the age of 15. Jesus received the prestigious Latin Grammy Cultural Foundation award in 2015, along with the Juan Luis Guerra Scholarship which included a music education at Berklee College of Music. Today he is one of the rising stars on the international jazz scene. ',
         ],
         [
             'firstName' => 'Sangah',
             'lastName' => 'Noona',
-            'img' => 'https://musora.imgix.net/https%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2FCoachCardPack-Sangha_Coach+Card+Image+copy-1653866114.jpg?ixlib=php-1.2.1&w=300&s=0d0f3767932adbe68bfad0dbe8f443b5',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/CoachCardPack-Sangha_Coach+Card+Image+copy-1653866114.jpg',
             'intro' => 'Sangah started her piano journey at the age five, completing her major in jazz piano and having a flourishing career in South Korea before moving to the United States in 2010. As an experienced performer and technical guru on the keys, Sangah Noona is an incredibly versatile pianist that can play in just about any and every style.',
         ],
         [
             'firstName' => 'Erskine',
             'lastName' => 'Hawkins',
-            'img' => 'https://musora.imgix.net/https%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2FErskine-Coach-Card-Image-1jpg-1648674552.jpg?ixlib=php-1.2.1&w=300&s=b2bfa0e0e92ec437dfb906d02852ed0b',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/Erskine-Coach-Card-Image-1jpg-1648674552.jpg',
             'intro' => 'As a music director for Disney star Zendaya, producer and performer, Erskine Hawkins has done a lot. But his favorite thing in the world is playing gospel piano. After touring with Eminem and Rihanna, Erskine focused on his love for gospel music and playing in church. He has become a true master of the genre.',
         ],
         [
             'firstName' => 'Victoria',
             'lastName' => 'Theodore',
-            'img' => 'https://musora.imgix.net/https%3A%2F%2Fcdn.musora.com%2Fimage%2Ffetch%2Fc_fill%2Cw_660%2Ch_960%2Cq_auto%3Agood%2Fhttps%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2Fvictoria-theodore-headshot-1640878069.jpg?ixlib=php-1.2.1&w=300&s=46793d1a0cf987e8bf70a97fbfaa6efa',
+            'img' => 'https://www.musora.com/musora-cdn/image/width=660,quality=95/https://d1923uyy6spedc.cloudfront.net/victoria-theodore-headshot-1640878069.jpg',
             'intro' => 'Your favorite coach is here to introduce you to the wonderful world of classical music. You will learn all about the different eras of classical piano and play pieces from famous composers like Beethoven, Bach, and Chopin. Our new Classical Method will prove to you that everyone, no matter their experience level, can play this timeless genre.',
         ],
         [
             'firstName' => 'Summer',
             'lastName' => 'Swee-singh',
-            'img' => 'https://musora.imgix.net/https%3A%2F%2Fd1923uyy6spedc.cloudfront.net%2Fsummer+coach+card+3-1661469522.png?ixlib=php-1.2.1&w=300&s=7e10e9cf1d97dd1175c6e0cb36bbfa92',
+            'img' => 'https://d1923uyy6spedc.cloudfront.net/summer+coach+card+3-1661469522.png',
             'intro' => 'There is nothing quite as satisfying and empowering as being able to put your own spin on your favorite songs. And Summer is a true master of doing just that. She’s truly dedicated to her craft, and is praised for her arrangements and compositions by artists around the world. Learn from the skilled Summer Swee-Singh and discover her process for creating arrangements on the piano.',
         ],
     ];
@@ -119,8 +119,8 @@
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
 
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/nav-footer.css') }}">
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/pianote/sales.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
@@ -243,7 +243,7 @@
     <section class="py-12 sm:py-20 px-4 sm:px-6">
         <div class="max-w-md md:max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto">
-                <img class="md:order-1 rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/intro.jpg" alt="intro image">
+                <img class="md:order-1 rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/intro.jpg" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-4 sm:mb-6">
                         The Pianote Mission
@@ -275,14 +275,14 @@
                         arrow: 'splide__arrow bg-pianote',
                         prev  : 'splide__arrow--prev your-class-prev',
                         next  : 'splide__arrow--next your-class-next',
-                        pagination: 'splide__pagination force-hidden',
+                        pagination: 'force-hidden',
                     },
                     breakpoints: {
-                        640: {
-                            perPage: 1,
-                        },
                         768: {
                             perPage: 3,
+                        },
+                        640: {
+                            perPage: 1,
                         }
                     },
                 }).mount()
@@ -294,14 +294,14 @@
         <div class="absolute w-full top-0 h-5 sm:h-7" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, white calc(50% + 1px));"></div>
         <h4 class="text-center font-extrabold mb-8">Our Story</h4>
         <div class="max-w-5xl mx-auto relative px-12">
-            <div x-ref="splide" class="splide" aria-label="Splide/Alpine.js Carousel Example">
+            <div x-ref="splide" class="splide">
                 <div class="splide__track relative" style="z-index: 10">
                     <ul class="splide__list">
                         @foreach ($slider as $slide)
                             <li class="splide__slide flex flex-col items-center justify-center">
                                 <div class="rounded-xl border-4 border-white border-solid relative overflow-hidden">
                                     <h3 class="font-bebas text-center py-2" style="background:linear-gradient(180deg, #780000 0%, #3C0000 100%);">{{$slide['year']}}</h3>
-                                    <div class="w-full bg-cover bg-top lazyload" style="padding-bottom:56%" data-bg="https://www.musora.com/musora-cdn/image/width=420,quality=85/{{$slide['img']}}"></div>
+                                    <div class="w-full bg-cover bg-top lazyload" style="padding-bottom:56%" data-bg="https://www.musora.com/musora-cdn/image/width=420,quality=95/{{$slide['img']}}"></div>
                                     <div class="text-xs flex items-center px-2 h-36 md:h-20 text-center" style="background: linear-gradient(180deg, #780000 0%, #3C0000 100%);">
                                         <div>{!! $slide['desc']!!}</div>
                                     </div>
@@ -320,7 +320,7 @@
     <section class="py-12 sm:py-20 px-4 sm:px-6">
         <div class="max-w-md md:max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto mb-10 md:mb-20">
-                <img class="md:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/start_collage.png" alt="intro image">
+                <img class="md:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/start_collage.png" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-4 sm:mb-6 leading-tight">
                         It all started <br class="sm:hidden md:inline"> with a duck farmer...
@@ -333,7 +333,7 @@
                 </div>
             </div>
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto mb-10 md:mb-20">
-                <img class="rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/lisa.jpg" alt="intro image">
+                <img class="rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/lisa.jpg" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-4 sm:mb-6 leading-tight">
                         Lisa Witt becomes <br class="sm:hidden md:inline"> the face of Pianote
@@ -358,7 +358,7 @@
                 </div>
             </div>
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-8 lg:gap-14 items-center justify-center flex flex-col mx-auto">
-                <img class="rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/pianote-coaches-collage.png" alt="intro image">
+                <img class="rounded-xl shadow-lg sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/pianote-coaches-collage.png" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-4 sm:mb-6 leading-tight">
                         The world's best <br> pianists join Pianote
@@ -502,7 +502,7 @@
     <section class="py-12 sm:py-20 border-t px-4 sm:px-6" style="background:#FAFAFA; border-color:#D1D1D1;">
         <div class="max-w-3xl lg:max-w-4xl mx-auto">
             <div class="md:grid md:grid-cols-2 sm:gap-6 md:gap-16 lg:gap-20 items-center justify-center flex flex-col mx-auto">
-                <img class="sm:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/company_collage.png" alt="intro image">
+                <img class="sm:order-1 rounded-md sm:w-2/3 mb-7 md:mb-0 md:w-auto mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=810,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/company_collage.png" alt="intro image">
                 <div class="inline-flex flex-col">
                     <h4 class="font-extrabold mx-0 mb-2">
                         The Pianote BTS Team

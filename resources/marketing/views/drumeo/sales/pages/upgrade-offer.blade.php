@@ -34,7 +34,7 @@
         ])
     <section class="content-section text-center" style="padding-bottom: 0;">
         <div class="container mx-auto">
-            <img class="h-7 md:h-10 lg:h-12 mb-2 md:mb-4" src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
+            <img class="h-7 md:h-10 lg:h-12 mb-2 md:mb-4" src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png">
             <h1><strong>Keep Your Membership +  <br class="inline lg:hidden">Get 9 Free Bonuses.</strong></h1>
             <div class="w-full mx-auto my-10 px-3" style="max-width:920px;">
                 <div class="aspect-16:9 w-full relative">
@@ -50,7 +50,7 @@
 
         <section class="content-section text-center px-6" style="background:linear-gradient(to bottom, #01050f, #021225);overflow:visible">
             <div class="container mx-auto max-w-4xl">
-                <img class="h-28 md:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=250,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png">
+                <img class="h-28 md:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2022/guarantee.png">
 
                 <h3 class="leading-tight mt-5 md:mt-8 mb-4 md:mb-6 " data-aos-once="true" data-aos="fade-up" data-aos-offset="150" data-aos-delay="150"><strong>Test-drive your lessons for 90 days.</strong><br>
                     Zero risk.</h3>
@@ -89,7 +89,7 @@
                                 [
                                 'image' => 'https://dpwjbsxqtam5n.cloudfront.net/promos/black-friday/bundles/vertical-bg/drumsticks.jpg',
                                 'title' => 'Drumeo Drumsticks',
-                                'description' => 'Drumeo 5A Drumsticks by Vater -- made with hickory and extra moisture to last longer.',
+                                'description' => 'Drumeo 5A Drumsticks by Vater — made with hickory and extra moisture to last longer.',
                                 'price' => floatval($productPrices['Drumeo-VaterSticks']->price),
                                 'online-ship' => "Free Shipping",
                                 'shipping' => "no-shipping"
@@ -154,7 +154,7 @@
                                             @if(!empty($bonus['shipping']))
                                                 <p class="absolute text-white top-0 left-0 w-full pb-0.5 text-sm bg-drumeo rounded-t-xl"><strong>Free Shipping</strong></p>
                                             @endif
-                                            <div class="h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=460,quality=85/{{ $bonus['image'] }}"></div>
+                                            <div class="h-full w-full bg-black bg-top bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=460,quality=95/{{ $bonus['image'] }}"></div>
                                             <div class="absolute z-40 text-center top-1/2 left-1/2 text-white transition-opacity duration-300 transform -translate-x-1/2 -translate-y-1/2 visible opacity-0 group-hover:opacity-100 text-shadow-2">
                                                 <i class="fas fa-arrow-right text-4xl"></i><br>
                                                 <p class="text-sm"><strong>DETAILS</strong></p>
@@ -190,8 +190,8 @@
         </section>
         <section class="content-section text-center" style="background: #0c1429;">
             <div class="container mx-auto relative z-50">
-                <a class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com/product/Drumeo+Membership/7918738', 'newwindow', 'width=750, height=550'); return false;">
-                    <img alt="" class="h-7 md:h-12 lg:h-14 mb-2 md:mb-0 mx-auto md:mr-2 opacity-70 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=320,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/shopper-approved-logo-white.png">
+                <a class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+                    <img alt="" class="h-7 md:h-12 lg:h-14 mb-2 md:mb-0 mx-auto md:mr-2 opacity-70 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=320,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/shopper-approved-logo-white.png">
                     <i class="align-middle text-2xl md:text-4xl fas fa-star" style="color: #f68d2d;"></i>
                     <i class="align-middle text-2xl md:text-4xl fas fa-star" style="color: #f68d2d;"></i>
                     <i class="align-middle text-2xl md:text-4xl fas fa-star" style="color: #f68d2d;"></i>

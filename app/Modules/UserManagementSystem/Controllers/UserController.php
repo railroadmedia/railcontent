@@ -46,9 +46,13 @@ class UserController extends Controller
 
         try {
             $validationRules = [
-                'email' => 'email|max:255|unique:' . config('user_management_system.database_connection_name') . '.usora_users',
+                'email' => 'email|max:255|unique:'.
+                    config('user_management_system.database_connection_name').
+                    '.usora_users',
                 'password' => 'required|string|min:8|max:128',
-                'display_name' => 'required|string|max:64|min:2|unique:' . config('user_management_system.database_connection_name') . '.usora_users',
+                'display_name' => 'required|string|max:64|min:2|unique:'.
+                    config('user_management_system.database_connection_name').
+                    '.usora_users',
             ];
 
             $this->validate(
@@ -57,11 +61,9 @@ class UserController extends Controller
             );
         } catch (ValidationException $exception) {
             if ($isJson) {
-                return json_encode(
-                    array(
-                        "errors" => $exception->errors()
-                    )
-                );
+                return json_encode([
+                                       "errors" => $exception->errors(),
+                                   ]);
             }
 
             return $request->has('redirect') ?
@@ -80,7 +82,9 @@ class UserController extends Controller
         $user->display_name = $request->display_name;
         $user->save();
 
-        $newUser = User::where('email', $user->email)->first();;
+        $newUser =
+            User::where('email', $user->email)
+                ->first();;
 
         event(new UserCreated($user));
 
@@ -95,12 +99,9 @@ class UserController extends Controller
                     ->back()
                     ->with($message);
         } else {
-            return json_encode(
-                array(
-                    "data" =>
-                        array("attributes" => json_encode($user))
-                )
-            );
+            return json_encode([
+                                   "data" => ["attributes" => json_encode($user)],
+                               ]);
         }
     }
 
@@ -114,12 +115,9 @@ class UserController extends Controller
         $user = User::findOrFail($id);
 
         if ($user) {
-            return json_encode(
-                array(
-                    "data" =>
-                        array("attributes" => json_encode($user))
-                )
-            );
+            return json_encode([
+                                   "data" => ["attributes" => json_encode($user)],
+                               ]);
         } else {
             throw new NotFoundHttpException();
         }
@@ -138,20 +136,25 @@ class UserController extends Controller
         }
         try {
             $request->validate([
-                'display_name' => [
-                    Rule::unique(config('user_management_system.database_connection_name') . '.usora_users')->ignore($id),
-                    'string',
-                    'max:64',
-                    'min:2'
-                ]
-            ]);
+               'display_name' => [
+                   Rule::unique(
+                       config('user_management_system.database_connection_name').'.usora_users'
+                   )
+                       ->ignore($id),
+                   'string',
+                   'max:64',
+                   'min:2',
+               ],
+           ]);
         } catch (ValidationException $e) {
-            $messagesByField = $e->validator->getMessageBag()->getMessages();
+            $messagesByField =
+                $e->validator->getMessageBag()
+                    ->getMessages();
             $messagesForFieldFailingField = reset($messagesByField);
 
             foreach ($messagesForFieldFailingField as $messagesForField) {
                 $errorMessageToUser = $messagesForField;
-            break;
+                break;
             }
             $default = 'Please try again, and contact support if the problem persists.';
             $message = ['error-message' => ($errorMessageToUser ?? $default)];
@@ -159,13 +162,20 @@ class UserController extends Controller
             if ($isJson) {
                 return response()->json(['errors' => $message], 422);
             }
-            return redirect()->back()->with($message);
+
+            return redirect()
+                ->back()
+                ->with($message);
         }
 
         $user = User::findOrFail($id);
 
         if (!empty($request->input('data.attributes.email'))) {
             $this->authorize('update-users-email-without-confirmation');
+        }
+
+        if (!empty($request->input('use_legacy_video_player')) && $request->get('use_legacy_video_player') == 'on') {
+            $request->merge(['use_legacy_video_player' => 1]);
         }
 
         //todo: create exception and add error message if user is not found
@@ -189,12 +199,9 @@ class UserController extends Controller
                     ->back()
                     ->with($message);
         } else {
-            return json_encode(
-                array(
-                    "data" =>
-                        array("attributes" => json_encode($user))
-                )
-            );
+            return json_encode([
+                                   "data" => ["attributes" => json_encode($user)],
+                               ]);
         }
     }
 
@@ -227,12 +234,9 @@ class UserController extends Controller
                     ->back()
                     ->with($message);
         } else {
-            return json_encode(
-                array(
-                    "data" =>
-                        array("attributes" => json_encode($user))
-                )
-            );
+            return json_encode([
+                                   "data" => ["attributes" => json_encode($user)],
+                               ]);
         }
     }
 
@@ -244,21 +248,20 @@ class UserController extends Controller
         $this->authorize('index-users');
         $searchTerm = $request->get('search_term');
 
-        $users = User::query()
-            ->where('displayName', 'LIKE', "%{$searchTerm}%")
-            ->orWhere('email', 'LIKE', "%{$searchTerm}%")
-            ->orWhere('firstName', 'LIKE', "%{$searchTerm}%")
-            ->orWhere('lastName', 'LIKE', "%{$searchTerm}%")
-            ->orWhere('phoneNumber', 'LIKE', "%{$searchTerm}%")
-            ->limit($request->get('per_page', 25))
-            ->orderBy($request->get('sort', 'createdAt'))
-            ->get();
+        $users =
+            User::query()
+                ->where('displayName', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('email', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('firstName', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('lastName', 'LIKE', "%{$searchTerm}%")
+                ->orWhere('phoneNumber', 'LIKE', "%{$searchTerm}%")
+                ->limit($request->get('per_page', 25))
+                ->orderBy($request->get('sort', 'createdAt'))
+                ->get();
 
-        return json_encode(
-            array(
-                "data" => json_encode($users)
-            )
-        );
+        return json_encode([
+                               "data" => json_encode($users),
+                           ]);
     }
 
     /**
@@ -275,7 +278,10 @@ class UserController extends Controller
             return response()->json(['errors' => $validator->getMessageBag()], 422);
         }
 
-        $user = User::where('display_name', $request->display_name)->where('id' , '!=', user()->id)->first();
+        $user =
+            User::where('display_name', $request->display_name)
+                ->where('id', '!=', user()->id)
+                ->first();
 
         if ($user) {
             return response()->json(['unique' => false]);
@@ -297,7 +303,9 @@ class UserController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->getMessageBag()], 422);
         }
-        $user = User::where('email', $request->email)->first();
+        $user =
+            User::where('email', $request->email)
+                ->first();
 
         if ($user) {
             return response()->json(['unique' => false]);
@@ -321,9 +329,13 @@ class UserController extends Controller
         $currentUser = user();
         $brand = brand();
 
-        ReportedUser::firstOrNew(['user_id' => $id,
+        ReportedUser::firstOrNew([
+                                     'user_id' => $id,
                                      'reporter_id' => $currentUser['id'],
-                                     "created_on" => Carbon::now()->toDateTimeString()])->save();
+                                     "created_on" => Carbon::now()
+                                         ->toDateTimeString(),
+                                 ])
+            ->save();
 
         $input['subject'] = 'User reported by '.$currentUser['display_name']." (".$currentUser['email'].")";
         $input['sender-address'] = config('mailora.report-sender-address');
@@ -369,9 +381,14 @@ class UserController extends Controller
         }
 
         $currentUser = user();
-        $blocked = BlockedUser::firstOrNew(['user_id' => $id,
-                                     'blocker_id' => $currentUser['id'],
-                                     "created_on" => Carbon::now()->toDateTimeString()])->save();
+        $blocked = BlockedUser::firstOrNew([
+                                               'user_id' => $id,
+                                               'blocker_id' => $currentUser['id'],
+                                               "created_on" => Carbon::now()
+                                                   ->toDateTimeString(),
+                                           ])
+            ->save();
+
         return response()->json([
                                     "success" => $blocked,
                                     "message" => $user['display_name']." was blocked",
@@ -390,7 +407,10 @@ class UserController extends Controller
         }
 
         $currentUser = user();
-        $unblock = BlockedUser::where('user_id','=',$id)->where('blocker_id', '=',$currentUser['id'])->delete();
+        $unblock =
+            BlockedUser::where('user_id', '=', $id)
+                ->where('blocker_id', '=', $currentUser['id'])
+                ->delete();
 
         return response()->json([
                                     "success" => $unblock > 0,
@@ -399,17 +419,37 @@ class UserController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return JsonResponse
      */
-    public function getBlockedUsers()
+    public function getBlockedUsers(Request $request)
     {
         $currentUser = user();
-        $blocked = BlockedUser::where('blocker_id', '=',$currentUser['id'])->get();
-        $blockedUsersIds = $blocked->pluck('user_id')->toArray();
+        $limit = $request->get('limit', 2);
+        $skip = ($request->get('page', 1) - 1) * $limit;
+        $blocked =
+            BlockedUser::where('blocker_id', '=', $currentUser['id'])
+                ->skip($skip)
+                ->take($limit)
+                ->orderBy('created_on', 'desc')
+                ->get();
+        $blockedUsersIds =
+            $blocked->pluck('user_id')
+                ->toArray();
 
-        $users =  User::query()->whereIn('id',$blockedUsersIds)->get();
+        $users =
+            User::query()
+                ->whereIn('id', $blockedUsersIds)
+                ->get();
+
         return response()->json([
                                     "data" => $users,
+                                    "meta" => [
+                                        "totalResulsts" => BlockedUser::where('blocker_id', '=', $currentUser['id'])
+                                            ->count(),
+                                        "page" => $request->get('page', 1),
+                                        "limit" => $request->get('limit', 2),
+                                    ],
                                 ], 200);
     }
 }

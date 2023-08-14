@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-row flex-wrap align-v-center pv-2">
+    <div class="tw-flex tw-items-center tw-mb-2">
         <div class="flex flex-column pv-2">
             <div
                 class="flex flex-row nmh-1 flex-wrap"
@@ -91,16 +91,15 @@
                         @click="addToList"
                     >
                         <span
-                            class="tw-shadow-none tw-text-lg"
+                            class="tw-shadow-none tw-text-lg tw-text-[#3F3F46] dark:tw-text-white"
                             style="padding:0 8px; box-shadow: none;"
-                            :class="hasAdded ? themeTextClass : 'tw-text-[#3F3F46] dark:tw-text-white'"
                         >
-                            <musora-icon icon-name="plus" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" :class="hasAdded ? 'tw-rotate-45' : 'tw-rotate-0'" />
+                            <musora-icon icon-name="plus" class="tw-w-6 tw-h-6 tw-mb-1 tw-transition-all" />
                             <span class="hide-xs-only">
-                                {{ hasAdded ? 'Added' : 'Add to List' }}
+                                Add to List
                             </span>
                             <span class="hide-sm-up">
-                                {{ hasAdded ? 'Added' : 'Add' }}
+                                Add
                             </span>
                         </span>
                     </button>
@@ -161,6 +160,11 @@ export default {
             default: () => 'drumeo',
         },
 
+        thumbnailUrl: {
+            type: String,
+            default: ''
+        },
+
         title: {
             type: String,
             default: () => '',
@@ -201,10 +205,20 @@ export default {
             default: () => null,
         },
 
+        contentType: {
+            type: String,
+            default: () => 'not-song',
+        },
+
         resources: {
             type: Array,
             default: () => [],
         },
+
+        description: {
+            type: String,
+            default: '',
+        }
     },
 
     data() {
@@ -267,9 +281,14 @@ export default {
         toCapitalCase: string => Utils.toCapitalCase(string),
 
         addToList() {
-            this.hasAdded = !this.hasAdded;
-
-            this.$nextTick(() => { ContentService.addOrRemoveContentFromList(this.contentId, !this.hasAdded); });
+            //this.hasAdded = !this.hasAdded;
+            window.openplaylistmodal({ modalType: 'addItem', content: {
+                content_id: this.contentId,
+                type: this.contentType,
+                name: this.title,
+                thumbnail_url: this.thumbnailUrl,
+                description: this.description,
+            } });
         },
 
         getResourceIcon(resource) {

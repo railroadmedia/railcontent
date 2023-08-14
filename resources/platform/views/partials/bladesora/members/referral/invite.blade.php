@@ -69,22 +69,21 @@
                         class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-lg 2xl:tw-max-w-none tw-mx-auto">
                         <h5 class="tw-leading-tight tw-py-4 tw-text-lg">Give a friend unlimited access to {{ ucfirst($brand) }}, free for 30 days
                         </h5>
-                        <form id="invite-email-form" name="invite-email-form" method="post"
-                            action="{{ $emailInviteUrl }}">
+                        <form id="invite-email-form" name="invite-email-form" onsubmit="sendPass(event)">
                             <label class="tw-inline-block tw-w-full tw-text-left tw-pt-6 tw-ml-6"
                                 for="email"><strong>Invite via email</strong></label>
                             <div
                                 class="tw-flex tw-flex-wrap sm:tw-flex-nowrap tw-items-center tw-justify-center tw-mt-1">
-                                <input type="hidden" name="_token" class="sort-input"
+                                <input type="hidden" name="_token" class="sort-input" id="_token"
                                     value="{{ csrf_token() }}" />
                                 <input type="hidden" name="brand" class="sort-input"
-                                    value="{{ $brand }}" />
+                                    value="{{ $brand }}" id="brand" />
                                 <input
                                     class="tw-inline-block tw-text-black tw-w-full tw-mb-4 sm:tw-mb-0 sm:tw-mr-4 tw-default-form-field sm:tw-flex-grow tw-py-0 tw-px-[25px] tw-h-[50px] tw-rounded-[25px] tw-border"
-                                    type="email" id="email" name="email" placeholder="Email address..." value="">
+                                    type="email" id="email" name="email" placeholder="Email address..." value="" required>
                                 <input name="button" type="submit" id="button"
                                     class=" tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
-                                    value="Send Guest Pass" />
+                                    value="Send Guest Pass" onclick="sendPass(event)" />
                             </div>
                         </form>
 

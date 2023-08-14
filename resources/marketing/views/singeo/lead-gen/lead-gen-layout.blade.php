@@ -3,7 +3,7 @@
 @section('global-head')
     @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}" >
-    <link rel="stylesheet" href="{{ asset('/marketing/parcel/singeo/nav-footer.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-singeo.css') }}">
 
     @yield('styles')
 
