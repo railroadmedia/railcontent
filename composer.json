@@ -34,7 +34,7 @@
         "railroad/points": "1.0.*",
         "railroad/railanalytics": "dev-v3.0-fixing-transaction-tracking as v3.0.7",
         "railroad/railchat": "2.0.*",
-        "railroad/railcontent": "2.1.*",
+        "railroad/railcontent": "dev-2.0-connection-mask-public as 2.1",
         "railroad/railforums": "2.0.*",
         "railroad/railnotifications": "3.0.*",
         "railroad/railtracker": "4.0.*",

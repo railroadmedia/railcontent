@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c37116cea0507bcfae0f3540f09a8f08",
+    "content-hash": "b466eefd1b4e09cdf78d7a1f287a10c8",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8561,16 +8561,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.32",
+            "version": "dev-2.0-connection-mask-public",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "ca95e836811a85e25c15fe611e0e86d46ff59015"
+                "reference": "78a18570488dd587fe640c9d66538e546062cc20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/ca95e836811a85e25c15fe611e0e86d46ff59015",
-                "reference": "ca95e836811a85e25c15fe611e0e86d46ff59015",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/78a18570488dd587fe640c9d66538e546062cc20",
+                "reference": "78a18570488dd587fe640c9d66538e546062cc20",
                 "shasum": ""
             },
             "require": {
@@ -8625,9 +8625,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.32"
+                "source": "https://github.com/railroadmedia/railcontent/tree/2.0-connection-mask-public"
             },
-            "time": "2023-08-07T13:09:16+00:00"
+            "time": "2023-08-14T12:16:23+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -17000,12 +17000,19 @@
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
             "alias_normalized": "3.0.7.0"
+        },
+        {
+            "package": "railroad/railcontent",
+            "version": "dev-2.0-connection-mask-public",
+            "alias": "2.1",
+            "alias_normalized": "2.1.0.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/ecommerce": 20,
-        "railroad/railanalytics": 20
+        "railroad/railanalytics": 20,
+        "railroad/railcontent": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
