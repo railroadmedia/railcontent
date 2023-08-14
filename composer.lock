@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b466eefd1b4e09cdf78d7a1f287a10c8",
+    "content-hash": "091777e6a2f0bf97fac0afc0289f6aab",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8123,16 +8123,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "dev-5.0-revenuecat",
+            "version": "v5.0.98",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "a454653deefc2f600c36198bc9c509f65c411e0d"
+                "reference": "e2a1468c1fa0a18ea6e391f119882ee3bf8de946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/a454653deefc2f600c36198bc9c509f65c411e0d",
-                "reference": "a454653deefc2f600c36198bc9c509f65c411e0d",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/e2a1468c1fa0a18ea6e391f119882ee3bf8de946",
+                "reference": "e2a1468c1fa0a18ea6e391f119882ee3bf8de946",
                 "shasum": ""
             },
             "require": {
@@ -8169,9 +8169,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-revenuecat"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.98"
             },
-            "time": "2023-07-17T10:29:34+00:00"
+            "time": "2023-08-11T18:25:00+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -8561,16 +8561,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "dev-2.0-connection-mask-public",
+            "version": "v2.1.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "78a18570488dd587fe640c9d66538e546062cc20"
+                "reference": "af114bdf5d253a362ae96ab6553bf5bf30e05375"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/78a18570488dd587fe640c9d66538e546062cc20",
-                "reference": "78a18570488dd587fe640c9d66538e546062cc20",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/af114bdf5d253a362ae96ab6553bf5bf30e05375",
+                "reference": "af114bdf5d253a362ae96ab6553bf5bf30e05375",
                 "shasum": ""
             },
             "require": {
@@ -8625,9 +8625,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/2.0-connection-mask-public"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.33"
             },
-            "time": "2023-08-14T12:16:23+00:00"
+            "time": "2023-08-14T12:32:06+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -16990,29 +16990,15 @@
     ],
     "aliases": [
         {
-            "package": "railroad/ecommerce",
-            "version": "dev-5.0-revenuecat",
-            "alias": "v5.0.89",
-            "alias_normalized": "5.0.89.0"
-        },
-        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
             "alias_normalized": "3.0.7.0"
-        },
-        {
-            "package": "railroad/railcontent",
-            "version": "dev-2.0-connection-mask-public",
-            "alias": "2.1",
-            "alias_normalized": "2.1.0.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/ecommerce": 20,
-        "railroad/railanalytics": 20,
-        "railroad/railcontent": 20
+        "railroad/railanalytics": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
