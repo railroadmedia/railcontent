@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1261b3077577004c779799f2ff96659c",
+    "content-hash": "acb95bb5a2e9d66cf7e83c989dab2979",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8123,16 +8123,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "dev-august-referral-contest",
+            "version": "v5.0.100",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "e9d84cdfbc94cf8b8f66b0622fc3a087c2598c73"
+                "reference": "c612a1dfea6205eb664814c48aee4c118b6cc868"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/e9d84cdfbc94cf8b8f66b0622fc3a087c2598c73",
-                "reference": "e9d84cdfbc94cf8b8f66b0622fc3a087c2598c73",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/c612a1dfea6205eb664814c48aee4c118b6cc868",
+                "reference": "c612a1dfea6205eb664814c48aee4c118b6cc868",
                 "shasum": ""
             },
             "require": {
@@ -8149,6 +8149,7 @@
                 "railroad/doctrine-array-hydrator": "2.0.*",
                 "railroad/location": "^3.0.0",
                 "railroad/permissions": "^2.0",
+                "railroad/referral": "3.0.*",
                 "railroad/remotestorage": "^2.0",
                 "ramsey/uuid": "^4.3",
                 "stripe/stripe-php": "^7.95"
@@ -8169,9 +8170,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/august-referral-contest"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.100"
             },
-            "time": "2023-08-11T22:43:52+00:00"
+            "time": "2023-08-15T18:18:39+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -16990,12 +16991,6 @@
     ],
     "aliases": [
         {
-            "package": "railroad/ecommerce",
-            "version": "dev-august-referral-contest",
-            "alias": "5.0.99",
-            "alias_normalized": "5.0.99.0"
-        },
-        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
@@ -17004,7 +16999,6 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
-        "railroad/ecommerce": 20,
         "railroad/railanalytics": 20
     },
     "prefer-stable": true,
