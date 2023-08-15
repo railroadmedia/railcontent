@@ -97,7 +97,7 @@
                     <div
                         class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-xl 2xl:tw-max-w-none tw-mx-auto">
                         <h5 class="tw-py-4 tw-text-lg tw-font-normal">
-                            Give your friend 1 month of free music lessons when they sign up for {{ ucfirst($brand) }}! Plus, every referral you make from <b>August 18 to September 14</b> gives you a chance to win a {{ $prizes[$brand] }}.
+                            Give your friend 1 month of free music lessons when they sign up for {{ ucfirst($brand) }}! Plus, every referral you make from <b>August 17 to September 14</b> gives you a chance to win a {{ $prizes[$brand] }}.
                         </h5>
                         <a href="#terms" class="tw-text-center tw-italic tw-underline tw-cursor-pointer tw-text-black dark:tw-text-white">See Contest Terms & Conditions</a>
                         <form id="invite-email-form" name="invite-email-form" onsubmit="sendPass(event)">
@@ -163,7 +163,7 @@
             <p>
                 <strong>Eligibility:</strong> This contest is open to Musora students with an active, paid membership and newly referred students, 18 years or older at the time of entry. Void where prohibited by law. Employees, officers, and directors of the sponsor and their immediate family members and/or those living in the same household are not eligible to participate in the contest.
                 <br><br>
-                <strong>How to Enter:</strong> Participants automatically receive (1) entry to the contest when a referred friend signs up for a membership with a 30-day trial from August 18 to September 14, 2023. Participants may collect up to (5) contest entries for {{ ucfirst($brand) }} based on each successful referral during the contest period. New students who sign up for {{ ucfirst($brand) }} will gain one contest entry. No purchase is necessary to enter or win.
+                <strong>How to Enter:</strong> Participants automatically receive (1) entry to the contest when a referred friend signs up for a membership with a 30-day trial from August 17 to September 14, 2023. Participants may collect up to (5) contest entries for {{ ucfirst($brand) }} based on each successful referral during the contest period. New students who sign up for {{ ucfirst($brand) }} will gain one contest entry. No purchase is necessary to enter or win.
                 <br><br>
                 <strong>Prize:</strong> The contest prize is a {{ $prizeWithPrice[$brand] }}. The prizes are non-transferable and cannot be exchanged for cash.
                 <br><br>
