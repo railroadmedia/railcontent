@@ -178,7 +178,7 @@
             <img class="h-10 md:h-20 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/christmas-carols/logo.png" alt="christmas-carol-logo" >
             <div class="mt-2 md:mt-3 mb-4 md:mb-6 lg:text-lg lg:leading-normal">Play these beautiful carols for your loved ones this holiday season.<br class="hidden md:inline"> Enter your email below for your free song tutorials.</div>
         ',
-        "formId" => "Pianote - Engagement - Trigger - Christmas Carols - Web Form",
+        "formId" => "Pianote - Engagement - Trigger - Christmas Carols - Web Form2",
         "formName" => "Beginner Piano Christmas Carols",
     ])
 

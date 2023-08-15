@@ -176,7 +176,7 @@
                 <div class="md:max-w-md lg:max-w-auto lg:w-3/4">
                     @include("guitareo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Guitareo - Engagement - Trigger - Guitar Chords for Hit Songs - Web Form",
+                        "formId" => "Guitareo - Engagement - Trigger - Guitar Chords for Hit Songs - Web Form2",
                         "formName" => 'Guitar Chords for Hit Songs',
                         "redirectURL" => "/chords-for-hit-songs/thank-you",
                         "buttonText" => "Get Started",

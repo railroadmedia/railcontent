@@ -83,7 +83,6 @@
             <div class="relative">
                 @include('drumeo.lead-gen.100-songs._songs',[
                     "signup" => true,
-                    "dataOpen" => "signUpModal",
                 ])
                 <div class="h-96 absolute bottom-0 left-0 right-0" style="background:linear-gradient(to bottom, transparent, #fff 90%);"></div>
             </div>
@@ -162,7 +161,7 @@
                 <div class="mx-auto" style="max-width:700px">
                     @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                            "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
+                            "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form2",
                                 "buttonText" => "Get It Now ",
                             "formName" => '40 Songs',
                         ])
@@ -171,24 +170,6 @@
         </div>
     </section>
 
-    <div class="reveal text-center max-w-2xl" id="signUpModal" data-reveal style="background-color: rgb(243, 244, 246);">
-        <div class="py-5 px-3 md:px-9 md:py-9">
-            <h4 class="leading-normal mb-4">
-                <strong>
-                    Enter your email to get note-for-note <br class="inline md:hidden">
-                    sheet music + handy playback tools for <br class="inline md:hidden">
-                    100 of drumming’s biggest songs FREE.
-                </strong>
-            </h4>
-            @include("drumeo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-            "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
-                                "buttonText" => "Get It Now ",
-            "formName" => '40 Songs',
-            "stacked" => true
-            ])
-        </div>
-    </div>
     @include("drumeo.sales.partials._footer", [
             "minimal" => true
         ])

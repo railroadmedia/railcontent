@@ -342,7 +342,7 @@
 
             @include("guitareo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                "formId" => "Guitareo - Engagement - Trigger - Website Signup - Web Form",
+                "formId" => "Guitareo - Engagement - Trigger - Website Signup - Web Form2",
                 "formName" => 'Blog Signup',
                 "buttonText" => "Notify Me",
                 'buttonTextColor' => 'black',

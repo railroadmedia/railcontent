@@ -289,8 +289,7 @@
                 @endphp
                 @foreach($bonuses as $bonus)
                     <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 md:px-3 mb-5 md:mb-6 lg:mb-8">
-                        <div class="relative autoplay-video cursor-pointer overflow-hidden group" data-open="signUpModal">
-                            <i class="absolute top-1/2 left-1/2 fas fa-play play-button smaller opacity-0 group-hover:opacity-100 -m-10 lg:-m-12"></i>
+                        <div class="relative overflow-hidden group">
                             <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=95/{{ $bonus['image'] }}"></div>
                         </div>
                         <h6 class="mt-3 mb-0.5 leading-tight"><strong>{{ $bonus['song'] }}</strong></h6>
@@ -308,7 +307,7 @@
                 @include("singeo._partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                 "formName" => 'Holiday Karaoke',
-                "formId" => "Singeo - Engagement - Trigger - Holiday Karaoke - Web Form",
+                "formId" => "Singeo - Engagement - Trigger - Holiday Karaoke - Web Form2",
                 "buttonText" => "Send My Songs ",
                 "oneLine" => true,
                 "noTy" => true
@@ -324,24 +323,4 @@
         </div>
         <div class="snow"></div>
     </section>
-
-    <div class="reveal text-center max-w-xl text-white lazyload" id="signUpModal" data-reveal style="background: #6d7894 right center/cover;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/final.jpg">
-        <div class="py-5 px-3 md:px-9 md:py-9">
-            <h4 class="leading-normal mb-4"><strong>Simply enter your email to unlock<br class="inline lg:hidden"> your holiday karaoke library!</strong></h4>
-            @include("singeo._partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-            "formId" => "Singeo - Engagement - Trigger - Holiday Karaoke - Web Form",
-            "formName" => 'Holiday Karaoke',
-            "oneLine" => true,
-            "noTy" => true
-            ])
-
-            <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl transition-all duration-700 block overflow-hidden invisible max-h-0 opacity-0">
-                <img class="h-9 md:h-11" src="https://d21xeg6s76swyd.cloudfront.net/lead-gen/holiday-karaoke/mic.svg">
-                <h2 class="leading-none text-singeo mt-3 md:mt-4 mb-5 md:mb-7 lg:mb-10"><strong>GET READY TO SING!</strong></h2>
-                <h6 class="leading-normal mx-auto max-w-xl mb-2 md:mb-3"><strong>YOUR HOLIDAY KARAOKE SONGS ARE <br class="hidden md:inline"> ON THEIR WAY TO YOUR INBOX!</strong></h6>
-                <p class="leading-normal mx-auto max-w-xl"><em>You should receive an email in just a few minutes. If you don’t <br class="hidden md:inline"> see it, check your spam folder in case it got lost along the way.</em></p>
-            </div>
-        </div>
-    </div>
 @stop

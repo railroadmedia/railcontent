@@ -697,7 +697,7 @@
             </p>
             @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
-                    "formId" => 'Pianote - Engagement - Trigger - Website Signup - Web Form',
+                    "formId" => 'Pianote - Engagement - Trigger - Website Signup - Web Form2',
                     "formName" => 'Pianote General',
                 'buttonText'=> 'Subscribe to the note',
             ])

@@ -296,7 +296,7 @@
                 @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
                     "stacked" => true,
-                    "formId" => "Pianote - Engagement - Trigger - Sight Reading - Web Form",
+                    "formId" => "Pianote - Engagement - Trigger - Sight Reading - Web Form2",
                     "formName" => 'Sight Reading Made Simple',
                 ])
             </div>
