@@ -170,7 +170,7 @@
         "bgImg" => "https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/order-background.jpg",
         "img" => '<img class="w-full max-w-md" src="https://d122ay5chh2hr5.cloudfront.net/lead-gen/guitar-tricks/logo-with.png">',
         "text" => '<h2 class="my-10">Enter your email below<br class="sm:hidden"> to get started!</h2>',
-        "formId" => "Guitareo - Engagement - Trigger - Guitar Tricks - Web Form",
+        "formId" => "Guitareo - Engagement - Trigger - Guitar Tricks - Web Form2",
         "formName" => 'Guitar Tricks',
         "submitButtonColor" => 'orange',
     ])

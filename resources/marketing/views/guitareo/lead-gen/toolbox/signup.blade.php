@@ -144,22 +144,10 @@
 
             @include("guitareo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                "formId" => "Guitareo - Engagement - Trigger - Toolbox - Web Form",
+                "formId" => "Guitareo - Engagement - Trigger - Toolbox - Web Form2",
                 "formName" => 'The Guitarists Toolbox',
                 "submitButtonColor" => "#408beb",
            ])
         </div>
     </section>
-
-    <div class="reveal large blue" id="getAccess" data-reveal data-reset-on-close="true" style="background:#1a1c1d;">
-        <p>Enter your email below to get a free beginner guitar <br
-                    class="sm:hidden"> course and start learning music theory.</p>
-        @include("guitareo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-           "stacked" => true,
-            "formId" => "Guitareo - Engagement - Trigger - Toolbox - Web Form",
-            "formName" => 'The Guitarists Toolbox',
-            "submitButtonColor" => "#408beb",
-       ])
-    </div>
 @stop

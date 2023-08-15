@@ -1,5 +1,5 @@
 <div class="mb-4 px-3 md:px-4 md:w-1/2 lg:w-1/3 lesson-thumbnail @if(!empty($details)) with-details @endif">
-    <a @if(!empty($locked)) data-open="getAccess" @elseif(!empty($Url)) href="{{ $Url }}" @endif>
+    <a @if(!empty($Url)) href="{{ $Url }}" @endif>
         <div class="thumb">
             @if(!empty($badgeText))
                 <span class="badge">
