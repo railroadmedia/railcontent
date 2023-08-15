@@ -23,7 +23,7 @@
     $prizeWithPrice = [
         'drumeo' => 'Yamaha E-Drum Kit retailing at $499.99 USD',
         'pianote' => 'Yamaha Digital Piano in white retailing at $699.99 USD',
-        'singeo' => 'Steinberg Recording Kit with an audio interface, headphones, and a condenser microphone retailing at [$$ $359.99 USD',
+        'singeo' => 'Steinberg Recording Kit with an audio interface, headphones, and a condenser microphone retailing at $359.99 USD',
         'guitareo' => 'Pacifica Electric Guitar in Red retailing at $209.99 USD',
     ];
 
