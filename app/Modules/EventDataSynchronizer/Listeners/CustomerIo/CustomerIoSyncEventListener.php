@@ -1331,7 +1331,7 @@ class CustomerIoSyncEventListener
      */
     public function handleAugustContestReferralClaimed(AugustContestReferralClaimed $referralClaimed) {
         $referrer = $referralClaimed->getReferrer();
-        $referrerEmail = $this->userService->getByIdOrNull($referrer->user_id)->getEmail();
+        $referrerEmail = $this->userService->getByIdOrNull($referrer->user_id)?->getEmail();
         dispatch(
             (new CustomerIoCreateEventByUserId(
                 $referralClaimed->getUserId(),
