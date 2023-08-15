@@ -50,7 +50,6 @@ const iconAllowList = {
   playlist: true,
   shuffle: true,
   repeat: true,
-  report: true,
 };
 
 export default {
@@ -121,7 +120,6 @@ export default {
     icon(val) {
       //Check if it's a Musora Icon
       if (iconAllowList[val]) {
-        console.log(val)
         this.SVGIcon = val;
       } else {
         this.SVGIcon = '';

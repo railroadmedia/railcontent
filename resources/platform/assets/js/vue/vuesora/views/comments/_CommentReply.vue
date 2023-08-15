@@ -130,14 +130,6 @@
                                 :class="comment.like_count > 0 ? themeBgClass : 'bg-grey-2'"
                             />&nbsp;{{ comment.like_count }}
                         </p>
-                        <p
-                            class="dark:tw-text-[#627F97] tw-text-[#65656B] tw-font-bebas-neue tw-cursor-pointer tw-flex tw-items-center"
-                            @click="reportComment"
-                        ><FlagIcon
-                                class="tw-inline tw-ml-[16px] tw-mr-[5px] tw-w-[20px] tw-h-[20px]"
-                                :class="isReported ? 'tw-text-[#00101D] dark:tw-text-[#80A0B9]' : 'tw-text-[#65656B] dark:tw-text-[#627F97]'"
-                            />&nbsp;{{ isReported ? 'REPORTED' : 'REPORT'  }}
-                        </p>
                     </div>
                 </div>
             </div>
@@ -212,7 +204,6 @@ import Toasts from '../../assets/js/classes/toasts';
 import CommentService from '../../assets/js/services/comments';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import { TrashIcon, ThumbUpIcon } from "@heroicons/vue/solid";
-import { FlagIcon } from "@heroicons/vue/outline";
 
 export default {
     name: 'CommentReply',
@@ -220,8 +211,7 @@ export default {
         'text-editor': TextEditor,
         TrashIcon,
         ThumbUpIcon,
-        MusoraIcon,
-        FlagIcon
+        MusoraIcon
     },
     mixins: [ThemeClasses],
     props: {
@@ -274,7 +264,6 @@ export default {
             reply: '',
             replying: false,
             loading: false,
-            isReported: false,
         };
     },
     computed: {
@@ -369,29 +358,6 @@ export default {
             });
         },
 
-        reportComment() {
-            if (!this.isReported) {
-                this.isReported = true;
-                CommentService.reportComment(this.comment.id).then(() => {
-                    window.shownotification({
-                        icon: 'report',
-                        text: 'The comment was reported.'
-                    });
-                }).catch(() => {
-                    this.isReported = false;
-                    window.shownotification({
-                        icon: 'error',
-                        text: 'There was am error reporting this comment, please try again later.'
-                    }); 
-                });
-            } else {
-                window.shownotification({
-                    icon: 'report',
-                    text: 'You have already reported this comment.'
-                });
-            }
-        },
-
         openLikes() {
             if (this.comment.like_count > 0) {
                 this.$emit('openLikes', {
@@ -455,9 +421,6 @@ export default {
                 },
             });
         },
-    },
-    beforeMount() {
-        this.isReported = this.comment.is_reported_by_viewer;
     },
     watch: { 
       	openedCommentId: function(newVal, oldVal) { // watch it

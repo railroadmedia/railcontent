@@ -55,9 +55,6 @@
                     <p class="tw-text-white tw-uppercase tw-font-bebas-neue tw-text-[28px]">
                         {{ $appName }} Member Since {{ \Carbon\Carbon::parse($memberSince)->format('Y') }}
                     </p>
-                    @if(!$isCurrentUsersProfile)
-                        <report-user :user="{{ json_encode($dashboardUser) }}" />
-                    @endif
                 </div>
             </div>
 
