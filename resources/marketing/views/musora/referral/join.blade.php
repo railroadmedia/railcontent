@@ -50,9 +50,9 @@
 
     $prizeDesc = [
         'drumeo' => 'It has over 250 drum sounds and 10 drum kits customizable to your taste, <br class="tw-hidden md:tw-inline lg:tw-hidden" />for ultimate control over your tone and volume.',
-        'pianote' => '',
-        'singeo' => '',
-        'guitareo' => '',
+        'pianote' => 'It has a metronome to keep your playing tight. Plus it connects with your headphones <br class="tw-hidden md:tw-inline lg:tw-hidden" />for all those late-night piano sessions.',
+        'singeo' => 'You’ll get a microphone, headphones, and an audio interface so you can start to feel more confident as a singer.',
+        'guitareo' => 'It’s sleek. It’s bold. It’s also well known for its excellent tone and playability.',
     ];
 
     $brand = $referralBrand;
@@ -132,7 +132,7 @@
     <section style="background:linear-gradient({{ $gradients[$brand] }});">
         <div class="flex flex-col lg:flex-row text-white max-w-4xl mx-auto items-center px-4 xl:px-0 text-center lg:text-left">
             <div class="mb-6 pt-10 lg:pt-0 lg:my-40 lg:max-w-md w-full lg:mr-6">
-                <h1 class="font-extrabold leading-none mb-4">This could be yours…</h1>
+                <h2 class="font-extrabold leading-none mb-4">This could be yours…</h2>
                 <div class="font-bold mt-2 mb-4 ">{{ $prizeNamesWithModel[$brand] }}</div>
                 <div>{!! $prizeDesc[$brand] !!}</div>
             </div>
