@@ -249,6 +249,7 @@
         },
         {
             "name": "aws/aws-sdk-php",
+<<<<<<< HEAD
             "version": "3.278.1",
             "source": {
                 "type": "git",
@@ -259,6 +260,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ed7cba5c8888421b89cdb3561dcd5e40e4bd4395",
                 "reference": "ed7cba5c8888421b89cdb3561dcd5e40e4bd4395",
+=======
+            "version": "3.278.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aws/aws-sdk-php.git",
+                "reference": "596534c0627d8b38597061341e99b460437d1a16"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/596534c0627d8b38597061341e99b460437d1a16",
+                "reference": "596534c0627d8b38597061341e99b460437d1a16",
+>>>>>>> master
                 "shasum": ""
             },
             "require": {
@@ -338,9 +351,15 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
+<<<<<<< HEAD
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.278.1"
             },
             "time": "2023-08-11T18:07:09+00:00"
+=======
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.278.3"
+            },
+            "time": "2023-08-15T18:07:55+00:00"
+>>>>>>> master
         },
         {
             "name": "behat/transliterator",
@@ -2943,16 +2962,16 @@
         },
         {
             "name": "google/apiclient-services",
-            "version": "v0.311.1",
+            "version": "v0.312.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client-services.git",
-                "reference": "e8816f6708fac9d78ab59ef27a61a08d0af84d1e"
+                "reference": "45d47fed73b28254c511882bc743b1690a99558d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/e8816f6708fac9d78ab59ef27a61a08d0af84d1e",
-                "reference": "e8816f6708fac9d78ab59ef27a61a08d0af84d1e",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client-services/zipball/45d47fed73b28254c511882bc743b1690a99558d",
+                "reference": "45d47fed73b28254c511882bc743b1690a99558d",
                 "shasum": ""
             },
             "require": {
@@ -2981,9 +3000,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client-services/issues",
-                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.311.1"
+                "source": "https://github.com/googleapis/google-api-php-client-services/tree/v0.312.0"
             },
-            "time": "2023-08-06T00:56:12+00:00"
+            "time": "2023-08-14T00:56:12+00:00"
         },
         {
             "name": "google/auth",
@@ -6348,24 +6367,28 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.68.1",
+            "version": "2.69.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "4f991ed2a403c85efbc4f23eb4030063fdbe01da"
+                "reference": "4308217830e4ca445583a37d1bf4aff4153fa81c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4f991ed2a403c85efbc4f23eb4030063fdbe01da",
-                "reference": "4f991ed2a403c85efbc4f23eb4030063fdbe01da",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4308217830e4ca445583a37d1bf4aff4153fa81c",
+                "reference": "4308217830e4ca445583a37d1bf4aff4153fa81c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": "^7.1.8 || ^8.0",
+                "psr/clock": "^1.0",
                 "symfony/polyfill-mbstring": "^1.0",
                 "symfony/polyfill-php80": "^1.16",
                 "symfony/translation": "^3.4 || ^4.0 || ^5.0 || ^6.0"
+            },
+            "provide": {
+                "psr/clock-implementation": "1.0"
             },
             "require-dev": {
                 "doctrine/dbal": "^2.0 || ^3.1.4",
@@ -6446,7 +6469,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-20T18:29:04+00:00"
+            "time": "2023-08-03T09:00:52+00:00"
         },
         {
             "name": "nette/schema",
@@ -6599,16 +6622,16 @@
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.16.0",
+            "version": "v4.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "19526a33fb561ef417e822e85f08a00db4059c17"
+                "reference": "a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/19526a33fb561ef417e822e85f08a00db4059c17",
-                "reference": "19526a33fb561ef417e822e85f08a00db4059c17",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d",
+                "reference": "a6303e50c90c355c7eeee2c4a8b27fe8dc8fef1d",
                 "shasum": ""
             },
             "require": {
@@ -6649,9 +6672,9 @@
             ],
             "support": {
                 "issues": "https://github.com/nikic/PHP-Parser/issues",
-                "source": "https://github.com/nikic/PHP-Parser/tree/v4.16.0"
+                "source": "https://github.com/nikic/PHP-Parser/tree/v4.17.1"
             },
-            "time": "2023-06-25T14:52:30+00:00"
+            "time": "2023-08-13T19:53:39+00:00"
         },
         {
             "name": "nova-kit/nova-packages-tool",
@@ -8328,16 +8351,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.29",
+            "version": "v3.1.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "a2932cb3389e164adb0951e23275d2ea360763c6"
+                "reference": "9c012215424e854459472a2e432c91fe8365c212"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/a2932cb3389e164adb0951e23275d2ea360763c6",
-                "reference": "a2932cb3389e164adb0951e23275d2ea360763c6",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/9c012215424e854459472a2e432c91fe8365c212",
+                "reference": "9c012215424e854459472a2e432c91fe8365c212",
                 "shasum": ""
             },
             "require": {
@@ -8367,9 +8390,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.29"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.31"
             },
-            "time": "2023-08-04T19:54:51+00:00"
+            "time": "2023-08-16T12:06:25+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -8562,16 +8585,16 @@
         },
         {
             "name": "railroad/railcontent",
-            "version": "v2.1.32",
+            "version": "v2.1.33",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/railcontent.git",
-                "reference": "ca95e836811a85e25c15fe611e0e86d46ff59015"
+                "reference": "af114bdf5d253a362ae96ab6553bf5bf30e05375"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/ca95e836811a85e25c15fe611e0e86d46ff59015",
-                "reference": "ca95e836811a85e25c15fe611e0e86d46ff59015",
+                "url": "https://api.github.com/repos/railroadmedia/railcontent/zipball/af114bdf5d253a362ae96ab6553bf5bf30e05375",
+                "reference": "af114bdf5d253a362ae96ab6553bf5bf30e05375",
                 "shasum": ""
             },
             "require": {
@@ -8626,9 +8649,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/railcontent/issues",
-                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.32"
+                "source": "https://github.com/railroadmedia/railcontent/tree/v2.1.33"
             },
-            "time": "2023-08-07T13:09:16+00:00"
+            "time": "2023-08-14T12:32:06+00:00"
         },
         {
             "name": "railroad/railforums",
@@ -14617,6 +14640,7 @@
         },
         {
             "name": "laravel/sail",
+<<<<<<< HEAD
             "version": "v1.23.2",
             "source": {
                 "type": "git",
@@ -14627,6 +14651,18 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/f8694d6af5729be72ae96b91e344c5676c89114a",
                 "reference": "f8694d6af5729be72ae96b91e344c5676c89114a",
+=======
+            "version": "v1.23.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/sail.git",
+                "reference": "e5536ac1df10eacd72a6569dc1b0db49b9ddbb85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/e5536ac1df10eacd72a6569dc1b0db49b9ddbb85",
+                "reference": "e5536ac1df10eacd72a6569dc1b0db49b9ddbb85",
+>>>>>>> master
                 "shasum": ""
             },
             "require": {
@@ -14678,7 +14714,11 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
+<<<<<<< HEAD
             "time": "2023-08-07T13:01:51+00:00"
+=======
+            "time": "2023-08-14T14:22:21+00:00"
+>>>>>>> master
         },
         {
             "name": "maximebf/debugbar",
@@ -15144,16 +15184,16 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.7.2",
+            "version": "1.7.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "b2fe4d22a5426f38e014855322200b97b5362c0d"
+                "reference": "3219c6ee25c9ea71e3d9bbaf39c67c9ebd499419"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/b2fe4d22a5426f38e014855322200b97b5362c0d",
-                "reference": "b2fe4d22a5426f38e014855322200b97b5362c0d",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/3219c6ee25c9ea71e3d9bbaf39c67c9ebd499419",
+                "reference": "3219c6ee25c9ea71e3d9bbaf39c67c9ebd499419",
                 "shasum": ""
             },
             "require": {
@@ -15196,9 +15236,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.7.2"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.7.3"
             },
-            "time": "2023-05-30T18:13:47+00:00"
+            "time": "2023-08-12T11:01:26+00:00"
         },
         {
             "name": "phpstan/phpdoc-parser",

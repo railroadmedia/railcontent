@@ -1292,12 +1292,14 @@ class CustomerIoSyncEventListener
             'timestamp' => $mobileOrderEvent->getSubscription()->getUpdatedAt()->timestamp
         ];
 
+        $brand = $mobileOrderEvent->getSubscription()->getProduct()->getBrand();
+
         dispatch(
             (new CustomerIoCreateEventByUserId(
                 $mobileOrderEvent->getSubscription()->getUser()
                     ->getId(),
-                $mobileOrderEvent->getSubscription()->getBrand(),
-                $mobileOrderEvent->getSubscription()->getBrand() . '_user_order',
+                $brand,
+                $brand . '_user_order',
                 $data,
                 null,
                 $mobileOrderEvent->getSubscription()->getCreatedAt()->timestamp
@@ -1307,13 +1309,13 @@ class CustomerIoSyncEventListener
             )
         );
 
-        $data['brand'] = $mobileOrderEvent->getSubscription()->getBrand();
+        $data['brand'] = $brand;
 
         dispatch(
             (new CustomerIoCreateEventByUserId(
                 $mobileOrderEvent->getSubscription()->getUser()
                     ->getId(),
-                $mobileOrderEvent->getSubscription()->getBrand(),
+                $brand,
                 'musora_user_order',
                 $data,
                 null,

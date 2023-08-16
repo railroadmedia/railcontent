@@ -7,6 +7,19 @@ use App\Http\Controllers\BaseController;
 class MarketingController extends BaseController
 {
 
+    public function homepage()
+    {
+        return view('musora.homepage', ['theme' => 'musora']);
+    }
+    public function sixReasons()
+    {
+        return view('musora.pages.6-reasons', ['theme' => 'musora']);
+    }
+
+    public function handbook()
+    {
+        return view('musora.handbook');
+    }
     public function terms()
     {
         return view('musora.pages.terms');
