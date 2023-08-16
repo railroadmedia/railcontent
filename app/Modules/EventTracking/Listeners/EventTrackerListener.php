@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventTracking\Listeners;
 
+use App\Modules\EventTracking\Avo\AvoHelper;
 use Avo;
 use Modules\UserManagementSystem\Events\User\UserCreated;
 
@@ -12,9 +13,6 @@ class EventTrackerListener
      */
     public function handleUserCreated(UserCreated $event): void
     {
-        Avo::account_created([
-            'user_id_' => strval($event->getUser()->id),
-            'musora_user_id' => $event->getUser()->id
-        ]);
+        Avo::account_created(AvoHelper::defaultEventProperties());
     }
 }

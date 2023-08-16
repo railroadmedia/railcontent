@@ -11,6 +11,7 @@ use App\Http\Controllers\Content\CoachesController;
 use App\Maps\ContentTypes;
 use App\Modules\Content\Services\CohortService;
 use App\Modules\Ecommerce\Services\UserProductService;
+use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use App\Services\LiveStreamEventService;
 use App\Services\PackService;
@@ -386,10 +387,7 @@ class HomePageController extends BaseController
 
     public function onboarding(Request $request)
     {
-        \Avo::onboarding_started([
-            'user_id_' => userIdString(),
-            'musora_user_id' => userId()
-        ]);
+        \Avo::onboarding_started(AvoHelper::defaultEventProperties());
         return view('home.onboarding');
     }
 

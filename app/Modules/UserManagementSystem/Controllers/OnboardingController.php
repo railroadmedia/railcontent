@@ -2,6 +2,7 @@
 
 namespace Modules\UserManagementSystem\Controllers;
 
+use App\Modules\EventTracking\Avo\AvoHelper;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Avo;
 use Illuminate\Http\Request;
@@ -46,13 +47,13 @@ class OnboardingController extends Controller
             ]);
             $gearList[] = $gear;
         }
-        Avo::gear_onboarding_step_completed([
-            'user_id_' => userIdString(),
-            'musora_user_id' => userId(),
-            'brand' => $request->brand,
-            'is_skipped' => false,
-            'gear_list' => $gearList
-        ]);
+        Avo::gear_onboarding_step_completed(
+            AvoHelper::defaultEventProperties([
+                'brand' => $request->brand,
+                'is_skipped' => false,
+                'gear_list' => $gearList
+            ])
+        );
 
         return response(json_encode(user()), 200);
     }
@@ -82,13 +83,13 @@ class OnboardingController extends Controller
             $topicList[] = $topic;
         }
 
-        Avo::topics_onboarding_step_completed([
-            'user_id_' => userIdString(),
-            'musora_user_id' => userId(),
-            'brand' => $request->brand,
-            'is_skipped' => false,
-            'topic_list' => $topicList
-        ]);
+        Avo::topics_onboarding_step_completed(
+            AvoHelper::defaultEventProperties([
+                'brand' => $request->brand,
+                'is_skipped' => false,
+                'topic_list' => $topicList
+            ])
+        );
         return response(json_encode(user()), 200);
     }
 
@@ -116,13 +117,13 @@ class OnboardingController extends Controller
             $genres[] = $genre;
         }
 
-        Avo::genres_onboarding_step_completed([
-            'user_id_' => userIdString(),
-            'musora_user_id' => userId(),
-            'brand' => $request->brand,
-            'is_skipped' => false,
-            'genre_list' => $genres
-        ]);
+        Avo::genres_onboarding_step_completed(
+            AvoHelper::defaultEventProperties([
+                'brand' => $request->brand,
+                'is_skipped' => false,
+                'genre_list' => $genres
+            ])
+        );
         return response(json_encode(user()), 200);
     }
 
@@ -150,13 +151,13 @@ class OnboardingController extends Controller
         $onboardingAnswerHistory->save();
 
 
-        Avo::experience_onboarding_step_completed([
-            'user_id_' => userIdString(),
-            'musora_user_id' => userId(),
-            'brand' => $request->brand,
-            'is_skipped' => false,
-            'experience_level' => strval($request->experience_level)
-        ]);
+        Avo::experience_onboarding_step_completed(
+            AvoHelper::defaultEventProperties([
+                'brand' => $request->brand,
+                'is_skipped' => false,
+                'experience_level' => strval($request->experience_level)
+            ])
+        );
 
         return response(json_encode(user()), 200);
     }
@@ -221,11 +222,11 @@ class OnboardingController extends Controller
         }
         $instrument = $request->get('instrument');
         $this->onboardingService->saveInstrument($instrument);
-        Avo::instrument_onboarding_step_completed([
-            'user_id_' => userIdString(),
-            'musora_user_id' => userId(),
-            'brand' => $this->onboardingService->getBrandFromInstrument($instrument)
-        ]);
+        Avo::instrument_onboarding_step_completed(
+            AvoHelper::defaultEventProperties([
+                'brand' => $this->onboardingService->getBrandFromInstrument($instrument)
+            ])
+        );
 
         return response("History data for instrument has been saved.", 200);
     }

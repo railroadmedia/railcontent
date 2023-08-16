@@ -7,5 +7,6 @@ the [Avo CLI documentation](https://www.avo.app/docs/avo-cli) for more informati
 
 Once installed and logged in run the following in the root of the project to regenerate the event tracking code:
 ```
+    cd railenvironment/applications/musora-web-platform
     avo pull "Musora Web Platform"
 ```

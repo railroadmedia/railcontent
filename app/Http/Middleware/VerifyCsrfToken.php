@@ -18,5 +18,6 @@ class VerifyCsrfToken extends Middleware
         '/customer-io/*',
         '*/songs',
         '/ecommerce/access-codes*',
+        '*'
     ];
 }
