@@ -164,23 +164,8 @@
         "bgColor" => "#1A1C1D",
         "img" => '<img class="h-14 mb-5 md:mb-7 lg:mb-10 sm:h-20 lg:h-36 mx-auto" src="https://s3.amazonaws.com/guitareo/acoustic-jump-start/logo-white.png" alt="logo">',
         "text" => '<p class="mb-4 px-3 text-sm md:px-4 md:text-xl">Enter your email below to get my<br class="hidden sm:inline lg:hidden"> free beginner acoustic guitar course!</p>',
-        "formId" => "Guitareo - Engagement - Trigger - AGJS - Web Form",
+        "formId" => "Guitareo - Engagement - Trigger - AGJS - Web Form2",
         "formName" => 'Acoustic Guitar Jump Start',
         "submitButtonColor" => "#ff8c00",
     ])
-
-    <div class="reveal acoustic text-center max-w-2xl" id="getAccess" data-reveal data-reset-on-close="false">
-
-        <div class="flex-video widescreen vimeo">
-            <iframe id="vimeo" src="//player.vimeo.com/video/299263691" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-        <p>Enter your email below to get my free  <br class="hidden sm:inline lg:hidden">
-            beginner acoustic guitar course!</p>
-        @include("guitareo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-            "formId" => "Guitareo - Engagement - Trigger - AGJS - Web Form",
-            "formName" => 'Acoustic Guitar Jump Start',
-            "submitButtonColor" => "#ff8c00",
-       ])
-    </div>
 @stop

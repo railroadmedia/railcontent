@@ -54,6 +54,10 @@ const props = defineProps({
       type: Boolean,
       default: true
   },
+  isOnboarding: {
+      type: Boolean,
+      default: false
+  },
   playlists: {
     type: Array,
     default: [],
@@ -255,7 +259,7 @@ onUpdated(() => {
     />
     <PlaylistsModal @onClosePlaylistsModal="handleClosePlaylistModal" key="playlists-modal-key" v-if="pageContainerStore.isPlaylistModalOpen" :modalProps="playlistModalProps" :brand="brand"></PlaylistsModal>
 
-    <Navbar :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications"
+    <Navbar v-if="!isOnboarding" :forceSidebarHidden="forceSidebarHidden" :brand="brand" :has-notifications="hasNotifications"
       :user-name="userName" :userAvatar="userAvatar" :account-url="accountUrl" :isSidebarHidden="pageContainerStore.isSidebarHidden"
       :isDarkModeSelected="isDarkModeSelected" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
       :canReferNewStudents="canReferNewStudents"
@@ -272,7 +276,7 @@ onUpdated(() => {
       ">
 
       <!-- Sidebar -->
-      <Sidebar :brand="brand" :isLive="isLive" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
+      <Sidebar v-if="!isOnboarding" :brand="brand" :isLive="isLive" :isSidebarCollapsed="pageContainerStore.isSidebarCollapsed"
         :isSidebarHidden="pageContainerStore.isSidebarHidden" @onCollapseSidebar="onCollapseSidebar"
         :forceSidebarHidden="forceSidebarHidden" :user-id="userId" />
 

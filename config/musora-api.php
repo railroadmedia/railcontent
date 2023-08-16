@@ -1791,7 +1791,7 @@ return [
         'singeo' => 'You\'ll be hearing from us soon!',
     ],
 
-    'routine_trailer' => 318971,
+    'routine_trailer' => 578243377,
 
     'pageTypeMapping' => [
         'songs' => 'Songs',

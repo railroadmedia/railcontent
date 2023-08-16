@@ -44,7 +44,7 @@ class PlaylistDecorator extends ModeDecoratorBase
 
     public function decorate($playlists)
     {
-        if (self::$skip) {
+        if ((self::$skip) || $playlists->isEmpty()) {
             return $playlists;
         }
 

@@ -541,7 +541,7 @@
                     </p>
                     @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Pianote - Engagement - Trigger - Piano In 5 Days - Web Form",
+                        "formId" => "Pianote - Engagement - Trigger - Piano In 5 Days - Web Form2",
                         "formName" => 'Piano In 5 Days',
                         "buttonText" => "Get started for free",
                         'stacked' => true,

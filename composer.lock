@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.278.1",
+            "version": "3.278.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "ed7cba5c8888421b89cdb3561dcd5e40e4bd4395"
+                "reference": "596534c0627d8b38597061341e99b460437d1a16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ed7cba5c8888421b89cdb3561dcd5e40e4bd4395",
-                "reference": "ed7cba5c8888421b89cdb3561dcd5e40e4bd4395",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/596534c0627d8b38597061341e99b460437d1a16",
+                "reference": "596534c0627d8b38597061341e99b460437d1a16",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.278.1"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.278.3"
             },
-            "time": "2023-08-11T18:07:09+00:00"
+            "time": "2023-08-15T18:07:55+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -6348,24 +6348,28 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "2.68.1",
+            "version": "2.69.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "4f991ed2a403c85efbc4f23eb4030063fdbe01da"
+                "reference": "4308217830e4ca445583a37d1bf4aff4153fa81c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4f991ed2a403c85efbc4f23eb4030063fdbe01da",
-                "reference": "4f991ed2a403c85efbc4f23eb4030063fdbe01da",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/4308217830e4ca445583a37d1bf4aff4153fa81c",
+                "reference": "4308217830e4ca445583a37d1bf4aff4153fa81c",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
                 "php": "^7.1.8 || ^8.0",
+                "psr/clock": "^1.0",
                 "symfony/polyfill-mbstring": "^1.0",
                 "symfony/polyfill-php80": "^1.16",
                 "symfony/translation": "^3.4 || ^4.0 || ^5.0 || ^6.0"
+            },
+            "provide": {
+                "psr/clock-implementation": "1.0"
             },
             "require-dev": {
                 "doctrine/dbal": "^2.0 || ^3.1.4",
@@ -6446,7 +6450,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-06-20T18:29:04+00:00"
+            "time": "2023-08-03T09:00:52+00:00"
         },
         {
             "name": "nette/schema",
@@ -8123,16 +8127,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.98",
+            "version": "v5.0.101",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "e2a1468c1fa0a18ea6e391f119882ee3bf8de946"
+                "reference": "33efcf2dc0b26b1ed7a8f6dc4589a79af8f3c4ea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/e2a1468c1fa0a18ea6e391f119882ee3bf8de946",
-                "reference": "e2a1468c1fa0a18ea6e391f119882ee3bf8de946",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/33efcf2dc0b26b1ed7a8f6dc4589a79af8f3c4ea",
+                "reference": "33efcf2dc0b26b1ed7a8f6dc4589a79af8f3c4ea",
                 "shasum": ""
             },
             "require": {
@@ -8149,6 +8153,7 @@
                 "railroad/doctrine-array-hydrator": "2.0.*",
                 "railroad/location": "^3.0.0",
                 "railroad/permissions": "^2.0",
+                "railroad/referral": "3.0.*",
                 "railroad/remotestorage": "^2.0",
                 "ramsey/uuid": "^4.3",
                 "stripe/stripe-php": "^7.95"
@@ -8169,9 +8174,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.98"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.101"
             },
-            "time": "2023-08-11T18:25:00+00:00"
+            "time": "2023-08-15T22:50:03+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -8327,16 +8332,16 @@
         },
         {
             "name": "railroad/musora-api",
-            "version": "v3.1.29",
+            "version": "v3.1.31",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/musora-api.git",
-                "reference": "a2932cb3389e164adb0951e23275d2ea360763c6"
+                "reference": "9c012215424e854459472a2e432c91fe8365c212"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/a2932cb3389e164adb0951e23275d2ea360763c6",
-                "reference": "a2932cb3389e164adb0951e23275d2ea360763c6",
+                "url": "https://api.github.com/repos/railroadmedia/musora-api/zipball/9c012215424e854459472a2e432c91fe8365c212",
+                "reference": "9c012215424e854459472a2e432c91fe8365c212",
                 "shasum": ""
             },
             "require": {
@@ -8366,9 +8371,9 @@
             ],
             "support": {
                 "issues": "https://github.com/railroadmedia/musora-api/issues",
-                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.29"
+                "source": "https://github.com/railroadmedia/musora-api/tree/v3.1.31"
             },
-            "time": "2023-08-04T19:54:51+00:00"
+            "time": "2023-08-16T12:06:25+00:00"
         },
         {
             "name": "railroad/permissions",
@@ -14616,16 +14621,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.23.2",
+            "version": "v1.23.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "f8694d6af5729be72ae96b91e344c5676c89114a"
+                "reference": "e5536ac1df10eacd72a6569dc1b0db49b9ddbb85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/f8694d6af5729be72ae96b91e344c5676c89114a",
-                "reference": "f8694d6af5729be72ae96b91e344c5676c89114a",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/e5536ac1df10eacd72a6569dc1b0db49b9ddbb85",
+                "reference": "e5536ac1df10eacd72a6569dc1b0db49b9ddbb85",
                 "shasum": ""
             },
             "require": {
@@ -14677,7 +14682,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2023-08-07T13:01:51+00:00"
+            "time": "2023-08-14T14:22:21+00:00"
         },
         {
             "name": "maximebf/debugbar",

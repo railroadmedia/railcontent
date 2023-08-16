@@ -1,3 +1,7 @@
+@php
+$isOnboarding = str_contains(request()->url(), '/onboarding')
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
@@ -48,7 +52,8 @@
                     <page-container
                         csrf_token="{{ csrf_token() }}"
                         brand="{{ $brand }}"
-                        :is-live="{{ isLive() ? 'true':'false' }}"
+                        :is-live="{{ json_encode(isLive()) }}"
+                        :is-onboarding="{{ json_encode($isOnboarding) }}"
                         search-url=""
                         :playlists="{{ json_encode($pinnedPlaylists) }}" {{-- Preloaded Content --}}mostRecentPlaylists
                         :most-recent-playlists="{{ json_encode($mostRecentPlaylists) }}" {{-- Preloaded Content --}}
@@ -57,10 +62,10 @@
                             user-avatar="{{ user()->profile_picture_url }}"
                             user-id="{{ user()->id }}"
                             account-url="{{ user()->getDashboardUrl() }}"
-                            :can-refer-new-students="{{ user()->isAMember() ? 'true' : 'false' }}"
+                            :can-refer-new-students="{{ json_encode(user()->isAMember()) }}"
                         @endif
                         @if(!empty( $hasUnreadNotifications ))
-                            :has-notifications="{{ $hasUnreadNotifications ? 'true' : 'false' }}"
+                            :has-notifications="{{ json_encode($hasUnreadNotifications) }}"
                         @endif
                         @if(isset($adminMessage))
                             admin-message="{{ $adminMessage }}"
