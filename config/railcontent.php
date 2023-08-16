@@ -342,7 +342,7 @@ return [
 
             \App\Decorators\Content\SemesterPackDecorator::class,
             \App\Decorators\Content\SemesterPackLessonDecorator::class,
-            \App\Modules\MusoraCenter\Decorators\UrlDecorator::class,
+//            \App\Modules\MusoraCenter\Decorators\UrlDecorator::class,
 
             \App\Decorators\Content\PlaylistItemDecorator::class,
 
