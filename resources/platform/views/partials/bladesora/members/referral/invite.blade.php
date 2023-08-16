@@ -1,9 +1,9 @@
 @php
     $prizes = [
-        'drumeo' => 'e-drum kit',
-        'pianote' => 'digital piano',
-        'singeo' => 'studio kit',
-        'guitareo' => 'guitar',
+        'drumeo' => 'an e-drum kit',
+        'pianote' => 'a digital piano',
+        'singeo' => 'a studio kit',
+        'guitareo' => 'a guitar',
     ];
 
     $prizeImgs = [
@@ -42,7 +42,7 @@
     ];
 
     $titleLineOne = $canRefer ? 'Refer your loved ones.' : 'Thank you for your';
-    $titleLineTwo = $canRefer ? 'Win '.$prizes[$brand] : 'referrals & support!';
+    $titleLineTwo = $canRefer ? 'Win '.$prizes[$brand]. '.' : 'referrals & support!';
     $footerLineOne = $canRefer ? '30-Day Trials are for new subscribers only and cannot be' : 'You have referred the maximum of five guests.';
     $footerLineTwo = $canRefer ? 'redeemed for renewals, extensions, or gift subscriptions.' : 'You\'ll have access to more invites soon!';
 
