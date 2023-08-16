@@ -147,12 +147,12 @@ class SalesController extends BaseController
 
         return view('drumeo.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo']);
     }
-    public function choosePlanMonth()
+    public function choosePlanMonth(Request $request)
     {
         $products = $this->productRepository->all();
         $products = array_combine(array_entity_column($products, 'getSku'), $products);
 
-        return view('drumeo.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo', 'month' => true]);
+        return view('drumeo.sales.choose-plan', ['products' => $products, 'theme' => 'drumeo', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
     public function method()
     {

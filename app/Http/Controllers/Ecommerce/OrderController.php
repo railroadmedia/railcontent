@@ -97,6 +97,7 @@ class OrderController extends Controller
 
         $cart = $this->cartService->getCart();
         $cartDataArray = $this->cartService->toArray();
+        $referralCode = $request->session()->get('referralCode');
 
         // if it's a brand domain, redirect to musora with the current cart items
         if (Str::endsWith($domain, 'drumeo.com') ||
@@ -131,6 +132,7 @@ class OrderController extends Controller
             $urlParams['locked'] = $cartDataArray['locked'] ?? false;
             $urlParams['number_of_payments'] = $cartDataArray['number_of_payments'] ?? false;
             $urlParams['redirect'] = $cartDataArray['redirect'] ?? ('/order/' . $brand);
+            $urlParams['referralCode'] = $referralCode;
 
             $queryString = http_build_query($urlParams);
 
@@ -321,6 +323,7 @@ class OrderController extends Controller
                 'allMembershipProductSkus' => config('event-data-synchronizer.' . $brand . '_membership_product_skus', []),
                 'lifetimeMembershipProductSkus' => config('ecommerce.lifetime_membership_product_skus.drumeo', []),
                 'membershipsNumberOfFreeDays' => config('ecommerce.memberships_number_of_free_days.drumeo', []),
+                'referralCode' => $referralCode,
             ]
         );
     }

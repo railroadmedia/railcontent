@@ -14,6 +14,7 @@ class EngageContentEventListener
 
     /**
      * @param ContentLastEngagedService $contentLastEngagedService
+     * @param UserPlaylistsService $userPlaylistService
      */
     public function __construct(ContentLastEngagedService $contentLastEngagedService, UserPlaylistsService $userPlaylistService)
     {
@@ -23,6 +24,9 @@ class EngageContentEventListener
 
     public function handleEngageContent(PlaylistItemLoaded $event)
     {
+        $item = $this->userPlaylistService->getPlaylistItemById($event->playlistItemId);
+
+        $this->userPlaylistService->updatePlaylistsLastProgress($item['content_id'], brand());
         $this->contentLastEngagedService->engageContent(user()->id, $event->playlistItemId, $event->playlistId);
     }
 
