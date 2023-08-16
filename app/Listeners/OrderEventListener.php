@@ -77,6 +77,7 @@ class OrderEventListener
             $this->cartService->refreshCart();
             $promoCode = $this->cartService->getCart()->getPromoCode();
 
+            // track per brand
             Tracker::queue(
                 $orderEvent->getOrder()->getBrand(),
                 function () use ($orderEvent, $promoCode) {
@@ -107,6 +108,40 @@ class OrderEventListener
                     );
                 }
             );
+
+            // also always track on musora domain if its not a musora origin order
+            if ($orderEvent->getOrder()->getBrand() != 'musora') {
+                Tracker::queue(
+                    'musora',
+                    function () use ($orderEvent, $promoCode) {
+                        $products = [];
+                        $order = $orderEvent->getOrder();
+
+                        foreach ($order->getOrderItems() as $orderItem) {
+                            $product = $orderItem->getProduct();
+                            $products[] = [
+                                'id' => $product->getId(),
+                                'name' => $product->getName(),
+                                'category' => $product->getType(),
+                                'value' => $orderItem->getFinalPrice(),
+                                'quantity' => $orderItem->getQuantity(),
+                                'sku' => $product->getSku(),
+                                'discount' => $orderItem->getTotalDiscounted()
+                            ];
+                        }
+
+                        Tracker::trackTransaction(
+                            $products,
+                            $order->getId(),
+                            $order->getTotalPaid(),
+                            $order->getTaxesDue(),
+                            $order->getShippingDue(),
+                            $orderEvent->getPayment() ? $orderEvent->getPayment()->getType() : null,
+                            $promoCode
+                        );
+                    }
+                );
+            }
         } catch (Throwable $throwable) {
             error_log("There is a problem with musora ecommerce order syncing to analytics providers.");
             error_log($throwable);

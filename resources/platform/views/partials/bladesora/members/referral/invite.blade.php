@@ -1,8 +1,8 @@
 @php
     $prizes = [
-        'drumeo' => 'drum kit',
-        'pianote' => 'piano',
-        'singeo' => 'singing kit',
+        'drumeo' => 'e-drum kit',
+        'pianote' => 'digital piano',
+        'singeo' => 'studio kit',
         'guitareo' => 'guitar',
     ];
 
@@ -14,10 +14,17 @@
     ];
 
     $prizeNames = [
-        'drumeo' => 'A DTX402K - Yamaha E-Drum Kit',
-        'pianote' => 'A P125A WH - Digital Piano (White Finish)',
-        'singeo' => 'A UR22CR PACK - Steinberg Interface with Mic and Headphones',
-        'guitareo' => 'A PAC012 RM - Pacifica Electric Guitar in Red',
+        'drumeo' => 'Yamaha e-drum kit',
+        'pianote' => 'Yamaha digital piano',
+        'singeo' => 'singing studio kit',
+        'guitareo' => 'Pacifica electric guitar',
+    ];
+
+    $prizeNamesWithModel = [
+        'drumeo' => 'Yamaha DTX402K E-Drum Kit',
+        'pianote' => 'Yamaha Digital Piano',
+        'singeo' => 'Steinberg studio kit',
+        'guitareo' => 'Yamaha Pacifica electric guitar',
     ];
 
     $prizeWithPrice = [
@@ -27,9 +34,16 @@
         'guitareo' => 'Pacifica Electric Guitar in Red retailing at $209.99 USD',
     ];
 
-    $titleLineOne = $canRefer ? 'Refer your loved ones for a chance' : 'Thank you for your';
-    $titleLineTwo = $canRefer ? 'to win a Yamaha '.$prizes[$brand] : 'referrals & support!';
-    $footerLineOne = $canRefer ? 'Guest passes are for new subscribers only and cannot be' : 'You have referred the maximum of five guests.';
+    $prizeDesc = [
+        'drumeo' => 'It has over 250 drum sounds and 10 drum kits customizable to your taste, <br class="tw-hidden md:tw-inline lg:tw-hidden" />for ultimate control over your tone and volume.',
+        'pianote' => 'It has a metronome to keep your playing tight. Plus it connects with your headphones <br class="tw-hidden md:tw-inline lg:tw-hidden" />for all those late-night piano sessions.',
+        'singeo' => 'You’ll get a microphone, headphones, and an audio interface so you can start to feel more confident as a singer.',
+        'guitareo' => 'It’s sleek. It’s bold. It’s also well known for its excellent tone and playability.',
+    ];
+
+    $titleLineOne = $canRefer ? 'Refer your loved ones.' : 'Thank you for your';
+    $titleLineTwo = $canRefer ? 'Win '.$prizes[$brand] : 'referrals & support!';
+    $footerLineOne = $canRefer ? '30-Day Trials are for new subscribers only and cannot be' : 'You have referred the maximum of five guests.';
     $footerLineTwo = $canRefer ? 'redeemed for renewals, extensions, or gift subscriptions.' : 'You\'ll have access to more invites soon!';
 
     $containerClass = $canRefer ? '' : 'tw-justify-center';
@@ -97,7 +111,7 @@
                     <div
                         class="tw-flex tw-flex-col lg:tw-h-full 2xl:tw-pl-10 tw-w-full tw-max-w-xl 2xl:tw-max-w-none tw-mx-auto">
                         <h5 class="tw-py-4 tw-text-lg tw-font-normal">
-                            Give your friend 1 month of free music lessons when they sign up for {{ ucfirst($brand) }}! Plus, every referral you make from <b>August 17 to September 14</b> gives you a chance to win a {{ $prizes[$brand] }}.
+                            Share one free month of {{ ucfirst($brand) }} with your friends! Each successful referral from <b>August 17 to September 14</b> enters you to win a {{ $prizeNames[$brand] }}.
                         </h5>
                         <a href="#terms" class="tw-text-center tw-italic tw-underline tw-cursor-pointer tw-text-black dark:tw-text-white">See Contest Terms & Conditions</a>
                         <form id="invite-email-form" name="invite-email-form" onsubmit="sendPass(event)">
@@ -114,7 +128,7 @@
                                     type="email" id="email" name="email" placeholder="Email address..." value="" required>
                                 <input name="button" type="submit" id="button"
                                        class=" tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600 tw-leading-none tw-text-lg tw-border-0 tw-rounded-full tw-select-none tw-cursor-pointer tw-text-center tw-py-4 tw-px-6 tw-uppercase tw-font-bebas-neue tw-text-white tw-flex-none tw-w-full sm:tw-w-52"
-                                       value="Send Guest Pass" onclick="sendPass(event)" />
+                                       value="Send 30-day trial" onclick="sendPass(event)" />
                             </div>
                         </form>
 
@@ -146,10 +160,11 @@
 
     <section style="background:linear-gradient({{ $gradients[$brand] }});">
         <div class="tw-flex tw-flex-col lg:tw-flex-row tw-text-white tw-max-w-4xl tw-mx-auto tw-items-center tw-px-4 xl:tw-px-0 tw-text-center lg:tw-text-left">
-            <div class="tw-mb-6 tw-pt-10 lg:tw-pt-0 lg:tw-my-40 lg:tw-max-w-sm tw-w-full lg:tw-mr-6">
-                <h1 class="tw-font-extrabold">You can win..</h1>
-                <div class="tw-font-bold tw-mt-2 tw-mb-4 ">{{ $prizeNames[$brand] }}</div>
-                <div><b>PLUS</b> your referred friend gets one <br class="sm:tw-hidden">entry for a chance to win these prizes!</div>
+            <div class="tw-mb-6 tw-pt-10 lg:tw-pt-0 lg:tw-my-40 lg:tw-max-w-md tw-w-full lg:tw-mr-6">
+                <h1 class="tw-font-extrabold tw-leading-none tw-mb-4">This could be yours…</h1>
+                <div class="tw-font-bold tw-mt-2 tw-mb-4 ">The {{ $prizeNamesWithModel[$brand] }}</div>
+                <div class="tw-mb-4">{!! $prizeDesc[$brand] !!}</div>
+                <div><b>PLUS</b> your referred friend gets an entry to win!</div>
             </div>
 
             <img class="@if($brand === 'drumeo') sm:tw-h-[450px] lg:tw-h-[32rem] xl:tw-h-[33rem] -tw-mb-6 lg:-tw-mb-20 @elseif($brand === 'pianote') sm:tw-h-[450px] lg:tw-h-[23rem] xl:tw-h-[28rem] -tw-mb-10 lg:-tw-mb-32 lg:-tw-ml-20 @elseif($brand === 'guitareo') sm:tw-h-[450px] lg:tw-h-[23rem] xl:tw-h-[28rem] -tw-mb-6 lg:-tw-mb-32 lg:-tw-ml-10 @elseif($brand === 'singeo') -tw-mb-6 lg:tw-mb-0 sm:tw-h-56 lg:tw-h-52 xl:tw-h-64 @endif tw-mx-auto" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $prizeImgs[$brand] }}" alt="{{ $brand }} prize" />
