@@ -249,18 +249,6 @@
         },
         {
             "name": "aws/aws-sdk-php",
-<<<<<<< HEAD
-            "version": "3.278.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "ed7cba5c8888421b89cdb3561dcd5e40e4bd4395"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/ed7cba5c8888421b89cdb3561dcd5e40e4bd4395",
-                "reference": "ed7cba5c8888421b89cdb3561dcd5e40e4bd4395",
-=======
             "version": "3.278.3",
             "source": {
                 "type": "git",
@@ -271,7 +259,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/596534c0627d8b38597061341e99b460437d1a16",
                 "reference": "596534c0627d8b38597061341e99b460437d1a16",
->>>>>>> master
                 "shasum": ""
             },
             "require": {
@@ -351,15 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-<<<<<<< HEAD
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.278.1"
-            },
-            "time": "2023-08-11T18:07:09+00:00"
-=======
                 "source": "https://github.com/aws/aws-sdk-php/tree/3.278.3"
             },
             "time": "2023-08-15T18:07:55+00:00"
->>>>>>> master
         },
         {
             "name": "behat/transliterator",
@@ -14640,18 +14621,6 @@
         },
         {
             "name": "laravel/sail",
-<<<<<<< HEAD
-            "version": "v1.23.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/laravel/sail.git",
-                "reference": "f8694d6af5729be72ae96b91e344c5676c89114a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/f8694d6af5729be72ae96b91e344c5676c89114a",
-                "reference": "f8694d6af5729be72ae96b91e344c5676c89114a",
-=======
             "version": "v1.23.3",
             "source": {
                 "type": "git",
@@ -14662,7 +14631,6 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/laravel/sail/zipball/e5536ac1df10eacd72a6569dc1b0db49b9ddbb85",
                 "reference": "e5536ac1df10eacd72a6569dc1b0db49b9ddbb85",
->>>>>>> master
                 "shasum": ""
             },
             "require": {
@@ -14714,11 +14682,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-<<<<<<< HEAD
-            "time": "2023-08-07T13:01:51+00:00"
-=======
             "time": "2023-08-14T14:22:21+00:00"
->>>>>>> master
         },
         {
             "name": "maximebf/debugbar",
