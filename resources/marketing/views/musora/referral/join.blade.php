@@ -69,20 +69,23 @@
     }"
 @endsection
 
-<div class="referral-sections pt-8 lg:pt-0">
-    <section class="py-16 bg-[#F9F9F9]">
-        <div class="container mx-auto max-w-5xl px-4 md:px-8">
+<div class="referral-sections -mt-[40px] md:-mt-[56px]">
+    <section class="py-10 md:py-16 bg-[#F9F9F9]">
+        <div class="container mx-auto max-w-5xl px-4">
             @if ($canRefer && !$errors->has('email-invite-message'))
-                <h2 class="leading-tight lg:mb-14 text-center"><strong>{{ $referredByUserName }} thinks you’ll enjoy these lessons. Get {{ ucfirst($brand) }} free for 1 month!</strong></h2>
-                <div class="flex items-center sm:px-4 lg:px-0">
-                    <div class="relative order-1">
+                <h2 class="leading-tight mb-10 lg:mb-14 text-center"><strong>{{ $referredByUserName }} thinks you’ll enjoy these lessons. Get {{ ucfirst($brand) }} free for 1 month!</strong></h2>
+                <div class="md:flex md:items-center sm:px-4 lg:px-0">
+                    <div class="text-center md:text-left relative md:order-1 mb-6 md:mb-0">
                         <img class="inline-block w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-3xl" src="{{ $cardImage }}" alt="{{ $brand }} card">
-                        <div class="text-center absolute w-full left-0 bottom-1 text-xs text-white">
+                        <div class="text-center absolute w-full left-0 bottom-1 md:bottom-0.5 lg:bottom-1 text-xs text-white">
                             <i>Starting at $20/month thereafter (billed annually). Cancel anytime.</i>
                         </div>
+                        <div class="absolute top-0 left-0 w-full h-full flex justify-center items-center cursor-pointer" @click="{{ $brand }}Trailer = true;">
+                            <i class="fas fa-play play-button border-white border-2 rounded-full text-xl py-3 px-5 sm:text-2xl sm:py-4 sm:px-6 md:text-3xl md:py-6 md:px-8 text-white" style="background:#0009;"></i>
+                        </div>
                     </div>
-                    <div class="mr-10">
-                        <h5 class="leading-normal font-bold mb-2">Learn the {{ $instruments[$brand] }} faster with step-by-step lessons, a thousand songs, and unlimited personal support.</h5>
+                    <div class="md:mr-4 lg:mr-10 text-center md:text-left">
+                        <h5 class="leading-normal font-bold mb-2">Learn the {{ $instruments[$brand] }} faster with step-by-step lessons, <br class="hidden lg:inline"> a thousand songs, and unlimited personal support.</h5>
                         <div class="flex justify-between max-w-[550px] mb-6">
                             <div>
                                 <i class="fas fa-check text-{{ $brand }}"></i> Improve your skills
@@ -123,7 +126,7 @@
     </section>
 
     <section class="bg-[#F3B13E] py-9">
-        <div class="text-center">
+        <div class="text-center px-4 sm:px-0">
             <p>Sign up for a {{ ucfirst($brand) }} 30-Day Free Trial for a chance to win a {{ $prizeNames[$brand] }}.</p>
             <p class="italic font-bold">The contest ends on September 14, 2023.</p>
         </div>
