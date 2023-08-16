@@ -18,7 +18,7 @@
     <a href="@yield('order-link')" class="artist-promo-banner fixed">
         <div class="noise-wrap">
             <div class="container">
-                <img class="logo hidden-xs" src="https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/logo.png">
+                <img class="logo hidden-xs" src="https://d2vyvo0tyx8ig5.cloudfront.net/chord-hacks/logo.png" alt="White decorative text “Chord Hacks.”">
                 <div class="text">
                     <p><strong>Save {{ round(100 - (100 * ($productPrice / floatval($productPrices['500-songs-in-5-days']->price)))) }}% on 500 Songs in 5 Days</strong><br>
                         Special for Students Only</p>

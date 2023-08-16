@@ -153,7 +153,7 @@
 
 @section('page-body')
     @include('pianote.lead-gen.partials.header1',[
-        "upperImg" => '<img class="h-12 md:h-20 lg:h-24 block mx-auto" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/logo.png" alt="sight-reading-made-simple">',
+        "upperImg" => '<img class="h-12 md:h-20 lg:h-24 block mx-auto" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/logo.png" alt="Text “Sight Reading Made Simple” in white and red font.">',
         "text" => '
             <div class="text-lg md:text-2xl lg:text-3xl">
                 Start <strong>Reading Music On<br class="md:hidden"> The Piano</strong> <em>In Minutes!</em>
@@ -286,7 +286,7 @@
 
     <section class="final text-center text-white py-14 md:py-20">
         <div class="container mx-auto lg:max-w-5xl">
-            <img class="h-16 md:h-24 lg:h-32" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/logo.png" alt="sight-reading-made-simple-logo">
+            <img class="h-16 md:h-24 lg:h-32" src="https://d2vyvo0tyx8ig5.cloudfront.net/sight-reading-made-simple/logo.png" alt="Text “Sight Reading Made Simple” in white and red font.">
             <div class="my-6 md:my-9 md:text-lg lg:text-xl">
                 Enter your email address to get the ENTIRE <br class="hidden md:inline">
                 4-video course on Sight-Reading Made Simple. <br class="hidden md:inline">
