@@ -21,10 +21,17 @@
     ];
 
     $prizeNames = [
-        'drumeo' => 'A DTX402K - Yamaha E-Drum Kit',
-        'pianote' => 'A P125A WH - Digital Piano (White Finish)',
-        'singeo' => 'A UR22CR PACK - Steinberg Interface with Mic and Headphones',
-        'guitareo' => 'A PAC012 RM - Pacifica Electric Guitar in Red',
+        'drumeo' => 'Yamaha e-drum kit',
+        'pianote' => 'Yamaha digital piano',
+        'singeo' => 'Steinberg studio kit',
+        'guitareo' => 'Pacifica electric guitar',
+    ];
+
+    $prizeNamesWithModel = [
+        'drumeo' => 'Yamaha DTX402K E-Drum Kit',
+        'pianote' => 'Yamaha Digital Piano',
+        'singeo' => 'Steinberg studio kit',
+        'guitareo' => 'Yamaha Pacifica electric guitar',
     ];
 
     $prizeImgs = [
@@ -39,6 +46,13 @@
         'pianote' => '180deg, #F01A2F 0%, #55050D 100%',
         'singeo' => '180deg, #8101E4 0%, #360160 100%',
         'guitareo' => '180deg, #01C8AB 0%, #045045 100%',
+    ];
+
+    $prizeDesc = [
+        'drumeo' => 'It has over 250 drum sounds and 10 drum kits customizable to your taste, <br class="tw-hidden md:tw-inline lg:tw-hidden" />for ultimate control over your tone and volume.',
+        'pianote' => '',
+        'singeo' => '',
+        'guitareo' => '',
     ];
 
     $brand = $referralBrand;
@@ -110,17 +124,17 @@
 
     <section class="bg-[#F3B13E] py-9">
         <div class="text-center">
-            <p>Enter for a chance to win a piano when you sign up for a {{ ucfirst($brand) }} 30-Day Free Trial.</p>
+            <p>Sign up for a {{ ucfirst($brand) }} 30-Day Free Trial for a chance to win a {{ $prizeNames[$brand] }}.</p>
             <p class="italic font-bold">The contest ends on September 14, 2023.</p>
         </div>
     </section>
 
     <section style="background:linear-gradient({{ $gradients[$brand] }});">
         <div class="flex flex-col lg:flex-row text-white max-w-4xl mx-auto items-center px-4 xl:px-0 text-center lg:text-left">
-            <div class="mb-6 pt-10 lg:pt-0 lg:my-40 lg:max-w-sm w-full lg:mr-6">
-                <h1 class="font-extrabold">You can win..</h1>
-                <div class="font-bold mt-2 mb-4 ">{{ $prizeNames[$brand] }}</div>
-                <div><b>PLUS</b> your referred friend gets one <br class="sm:hidden">entry for a chance to win these prizes!</div>
+            <div class="mb-6 pt-10 lg:pt-0 lg:my-40 lg:max-w-md w-full lg:mr-6">
+                <h1 class="font-extrabold leading-none mb-4">This could be yours…</h1>
+                <div class="font-bold mt-2 mb-4 ">{{ $prizeNamesWithModel[$brand] }}</div>
+                <div>{!! $prizeDesc[$brand] !!}</div>
             </div>
 
             <img class="@if($brand === 'drumeo') sm:h-[450px] lg:h-[32rem] xl:h-[33rem] -mb-6 lg:-mb-20 @elseif($brand === 'pianote') sm:h-[450px] lg:h-[23rem] xl:h-[28rem] -mb-10 lg:-mb-32 lg:-ml-20 @elseif($brand === 'guitareo') sm:h-[450px] lg:h-[23rem] xl:h-[28rem] -mb-6 lg:-mb-32 lg:-ml-10 @elseif($brand === 'singeo') -mb-6 lg:mb-0 sm:h-56 lg:h-52 xl:h-64 @endif mx-auto" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $prizeImgs[$brand] }}" alt="{{ $brand }} prize" />
