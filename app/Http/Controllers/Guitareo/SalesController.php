@@ -37,9 +37,9 @@ class SalesController extends BaseController
         return view('guitareo.sales.choose-plan', ['theme' => 'guitareo']);
     }
 
-    public function choosePlanMonth()
+    public function choosePlanMonth(Request $request)
     {
-        return view('guitareo.sales.choose-plan', ['theme' => 'guitareo', 'month' => true]);
+        return view('guitareo.sales.choose-plan', ['theme' => 'guitareo', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
 
     public function asobergirlsguide()

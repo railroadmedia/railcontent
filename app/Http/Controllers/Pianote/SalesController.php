@@ -54,9 +54,9 @@ class SalesController extends BaseController
     {
         return view('pianote.sales.choose-plan', ['theme' => 'pianote']);
     }
-    public function choosePlanMonth()
+    public function choosePlanMonth(Request $request)
     {
-        return view('pianote.sales.choose-plan', ['theme' => 'pianote', 'month' => true]);
+        return view('pianote.sales.choose-plan', ['theme' => 'pianote', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
 
     public function about()

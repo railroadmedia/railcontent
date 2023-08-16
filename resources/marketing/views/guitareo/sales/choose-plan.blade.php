@@ -71,8 +71,8 @@
             "firstPoint" => "Unlimited guitar lessons.",
             "thirdPoint" => "Direct access to real teachers.",
             "fifthPoint" => "Lesson access for singing, piano, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-30-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[guitareo-monthly-recurring-30-day-trial-membership]=1&redirect=/order&locked=true",
+            "plusAnnualLink" => "/ecommerce/add-to-cart?products[guitareo-annual-recurring-30-day-trial-membership]=1&redirect=/order&locked=true&promo-code=annual-trial&referralCode=$referralCode",
+            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[guitareo-monthly-recurring-30-day-trial-membership]=1&redirect=/order&locked=true&referralCode=$referralCode",
         ])
         @include('musora.sales.components.trial-explanation', [
             'instrument' => 'guitar',
