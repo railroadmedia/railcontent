@@ -50,9 +50,9 @@ class SalesController extends BaseController
         return view('singeo.sales.choose-plan', ['theme' => 'singeo']);
     }
 
-    public function choosePlanMonth()
+    public function choosePlanMonth(Request $request)
     {
-        return view('singeo.sales.choose-plan', ['theme' => 'singeo', 'month' => true]);
+        return view('singeo.sales.choose-plan', ['theme' => 'singeo', 'month' => true, 'referralCode' => $request->get('referralCode')]);
     }
 
     public function privacy()

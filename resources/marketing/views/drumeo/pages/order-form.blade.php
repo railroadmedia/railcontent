@@ -52,6 +52,7 @@
         @endif
         <div class="container order-form mv-3">
             <order-form
+                referral-code="{{ $referralCode }}"
                 theme-color="drumeo"
                 brand="drumeo"
                 :cart="{{ json_encode($cart) }}"
