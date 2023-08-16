@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Route;
 Route::domain('{musoraDomain}')
     ->middleware(['web_public'])
     ->group(function () {
+        Route::get('/', [MarketingController::class, 'homepage']);
+        Route::get('/6-reasons', [MarketingController::class, 'sixReasons']);
+//        Route::get('/handbook', [MarketingController::class, 'handbook']);
         Route::get('about', [MarketingController::class, 'about']);
         Route::get('contact', [MarketingController::class, 'contact']);
         Route::get('terms-of-service', [MarketingController::class, 'terms']);
