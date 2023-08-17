@@ -10,6 +10,7 @@ import PlaybackCue from './PlaybackCue.vue';
 import Comments from '../../vuesora/views/comments/Comments.vue';
 import PlaybackNavButtons from './PlaybackNavButtons.vue';
 import RelatedLesson from './RelatedLesson.vue';
+import RelatedPlaylists from './RelatedPlaylists.vue';
 import Breadcrumb from './Breadcrumb.vue';
 import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
 import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
@@ -68,7 +69,7 @@ const props = defineProps({
         default: false
     },
     lessonData:{
-        type: Array,
+        type: [Array, Object],
         default: () => []
     },
     lessonType: {

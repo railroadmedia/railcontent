@@ -58,7 +58,7 @@ export default {
             default: "",
         },
         userId: {
-            type: Number,
+            type: [String, Number],
             default: null,
         }
     },
@@ -68,8 +68,7 @@ export default {
         };
     },
     mounted() {
-        console.log('lessonData: ', this.lessonData);
-        console.log(this.brand)
+
     },
     computed: {
         //Thumbnail
