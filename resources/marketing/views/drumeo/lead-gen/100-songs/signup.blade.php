@@ -89,7 +89,7 @@
                 Out of {{ Prices::$drumeoSongs }}+ songs inside Drumeo, these are the <s class="opacity-50">40</s> <strong>100</strong> songs drummers love to play the most– and now <br class="hidden lg:inline">
                 it’s your turn. Scroll down to find your favorites and enter your email to get ALL the songs totally free.
             </h6>
-            <div class="relative">
+            <div class="relative overflow-hidden max-h-[1100px] sm:max-h-full">
                 @include('drumeo.lead-gen.100-songs._songs',[
                     "signup" => true,
                 ])
