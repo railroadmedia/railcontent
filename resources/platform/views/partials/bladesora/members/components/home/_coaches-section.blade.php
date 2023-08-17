@@ -19,7 +19,7 @@
                     <a href="{{ $coach->fetch('url','') }}"
                         class="tw-no-underline ">
                         <div class="tw-flex tw-bg-cover tw-bg-top tw-relative tw-bg-gray-200 tw-overflow-hidden tw-rounded-lg lg:tw-rounded-xl tw-no-underline tw-text-white">
-                            <img src="https://www.musora.com/musora-cdn/image/width=660,height=960,quality=90/{{ $coach->fetch('data.coach_card_image') }}"
+                            <img src="https://www.musora.com/musora-cdn/image/width=660,height=960,quality=95/{{ $coach->fetch('data.coach_card_image') }}"
                                  alt="{{ $coach->fetch('fields.name') }}"
                                  class="tw-w-full"
                             >

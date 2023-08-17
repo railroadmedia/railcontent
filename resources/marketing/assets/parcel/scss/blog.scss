@@ -1418,12 +1418,11 @@ h1, h2, h3, h4, h5, h6 {
         }
 
         blockquote {
-            font: 700 27px/1.1em $robotocondensed;
-            text-transform: uppercase;
+            font: italic 400 27px/1.1em $opensans;
             color: $drumeoBlue;
+            border-left: 5px solid $drumeoBlue;
             width: 100%;
             margin: 0 auto 15px;
-            border-left: 5px solid $drumeoBlue;
             padding: 10px 0 10px 15px;
             @include tablet {
                 font-size: 31px;
@@ -2680,7 +2679,7 @@ h1, h2, h3, h4, h5, h6 {
             z-index: 10;
 
             a {
-                color: #fff;
+                color: #fff!important;
                 text-decoration: underline;
             }
         }

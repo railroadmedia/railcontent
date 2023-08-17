@@ -263,6 +263,10 @@ export default {
     },
     mixins: [ThemeClasses],
     props: {
+        referralCode: {
+            type: String,
+            default: () => null,
+        },
         billingAddress: {
             type: Object,
             default: () => null,
@@ -665,10 +669,11 @@ export default {
 
         createOrderPayload() {
             const payload = {
-                gateway: this.brand,
+                gateway: 'musora',
                 brand: this.brand,
                 billing_country: this.paymentStateFactory.billingCountry,
                 billing_region: this.paymentStateFactory.billingRegion,
+                referralCode: this.referralCode,
             };
 
             if (!this.selectedPaymentMethod || this.newPayment) {

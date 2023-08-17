@@ -8,13 +8,13 @@
 
     <title>Practice Tool Demo | Drumeo</title>
     <meta name="description"
-            content="Accurate sheet music that scrolls-along with the music -- and practice tools to slow it down, speed it up, create loops, add or remove the metronome, and… well, play songs faster!">
+            content="Accurate sheet music that scrolls-along with the music — and practice tools to slow it down, speed it up, create loops, add or remove the metronome, and… well, play songs faster!">
 
     <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/sales/2023/share-image-drumeo.jpg"
             style="display: none;">
     <meta property="og:title" content="Practice Tool Demo">
     <meta property="og:description"
-            content="Accurate sheet music that scrolls-along with the music -- and practice tools to slow it down, speed it up, create loops, add or remove the metronome, and… well, play songs faster!">
+            content="Accurate sheet music that scrolls-along with the music — and practice tools to slow it down, speed it up, create loops, add or remove the metronome, and… well, play songs faster!">
     <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
 
     @include('_partials.layout._tailwindcdn')

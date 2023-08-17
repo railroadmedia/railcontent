@@ -111,13 +111,13 @@
         }
 
         .header {
-            background:#000512 url(https://www.musora.com/musora-cdn/image/width=750,q_60,quality=85/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/gq-testimonial-header-mobile.png) center center/cover;
+            background:#000512 url(https://www.musora.com/musora-cdn/image/width=750,q_60,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/gq-testimonial-header-mobile.png) center center/cover;
             padding-bottom:120%;
         }
 
         @media (min-width:40em) {
             .header {
-                background-image:url(https://www.musora.com/musora-cdn/image/width=2500,q_60,quality=85/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/gq-testimonial-header.png);
+                background-image:url(https://www.musora.com/musora-cdn/image/width=2500,q_60,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/testimonials/gq-testimonial-header.png);
                 padding-bottom:41.667%;
             }
         }

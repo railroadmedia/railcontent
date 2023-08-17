@@ -15,7 +15,7 @@
                 <div class="md:text-left px-2 md:pl-7 lg:pl-10">
                     <h2 class="uppercase"><strong><strong>SPECIAL OFFER:</strong> YOUR FIRST<br class="inline sm:hidden"> MONTH IS FREE!</strong></h2>
                     <h6 class="leading-normal my-3 md:my-5">Welcome! We’re so thankful you’re enjoying The Drummer's Toolbox. If you’d
-                        like to take your education up a notch, Drumeo is the perfect next step -- and you’ll get a
+                        like to take your education up a notch, Drumeo is the perfect next step — and you’ll get a
                         free 30-day trial when you click any of the big green buttons on this page.</h6>
                     <a href="/choose-your-trial-month/" class="join smaller">START MY FREE TRIAL</a>
                 </div>

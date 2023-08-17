@@ -5,7 +5,7 @@
             <img class="my-5 h-64 inline sm:hidden transition-opacity opacity-0"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
-                src="https://www.musora.com/musora-cdn/image/width=300,quality=85/{{ $img }}"
+                src="https://www.musora.com/musora-cdn/image/width=300,quality=95/{{ $img }}"
                 alt="learn playing image"
             >
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-center mt-2 sm:mt-8 mb-8 sm:mb-10">
@@ -13,14 +13,14 @@
                 <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=690,quality=85/{{ $img }}"
+                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/{{ $img }}"
                     alt="learn playing image"
                 >
             </div>
         @else
             <p class="leading-normal mt-2 sm:mt-3 mb-8 sm:mb-10">{!! $desc !!}</p>
         @endif
-        <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative z-20 -mb-10" x-on:click="trailer = true;">
+        <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative z-20 -mb-10" x-on:click="trailer = true;">
             <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
             <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="{{ $vid }}" type="video/mp4" autoplay muted loop playsinline></video>
         </div>

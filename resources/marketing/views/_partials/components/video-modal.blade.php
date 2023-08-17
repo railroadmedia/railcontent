@@ -27,11 +27,11 @@
     <div
         x-show="{{ $name }}" x-transition
         x-on:click="{{ $name }} = false;"
-        class="relative flex min-h-screen items-center justify-center p-4"
+        class="relative min-h-screen flex items-start justify-center px-4 pt-40 sm:pt-28 lg:pt-16"
         style="z-index: 1006;"
     >
         <!-- Close button -->
-        <i class="fal fa-times fa-2x fixed top-16 right-2 text-white cursor-pointer text-5xl"></i>
+        <i class="fa-light fa-times fa-2x fixed top-1 right-1 text-white cursor-pointer text-5xl"></i>
         <div
             x-on:click.stop
             class="relative w-full overflow-y-visible max-w-6xl"
@@ -42,6 +42,9 @@
             >
                 <iframe class="z-10 absolute w-full h-full reset-on-close" x-bind:src="{{ $name }} && '{{ $video }}'" frameborder="0" allowfullscreen allow="autoplay" title="{{ $name }}"></iframe>
             </div>
+            @if(!empty($button))
+                {!! $button !!}
+            @endif
         </div>
     </div>
 </div>

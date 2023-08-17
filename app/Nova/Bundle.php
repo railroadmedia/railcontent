@@ -149,7 +149,7 @@ class Bundle extends Resource
                         $brand = 'Singeo';
                     }
 
-                    return '/'.$brand.'/Spread-images/'.$request->uuid.'-'.$request->file('page_logo')->getClientOriginalName();
+                    return '/'.$brand.'/Spread-images/'.$request->uuid.'-'.$request->file('spread_img')->getClientOriginalName();
                 })
                 ->preview(function($value){
                     if(empty($value)) return null;

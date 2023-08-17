@@ -12,9 +12,11 @@ Route::domain('{pianoteDomain}')
             function () {
                 Route::get('/500-songs', [SalesController::class, 'songs500'] );
                 Route::get('/beginner-classical-piano', [SalesController::class, 'beginnerclassicalpiano'] );
+                Route::get('/classical-piano-pieces', [SalesController::class, 'classicalPianoPieces'] );
                 Route::get('/concert-headphones', [SalesController::class, 'concertHeadphones']);
                 Route::get('/destupefy-your-left-hand', [SalesController::class, 'destupefyyourlefthand'] );
                 Route::get('/easy-chords', [SalesController::class, 'easyChords'] );
+                Route::get('/30-day-blues-piano', [SalesController::class, 'thirtyDayBluesPiano'] );
                 Route::get('/easy-chords/deal', [SalesController::class, 'easyChordsDeal'] );
                 Route::get('/faster-fingers', [SalesController::class, 'fasterfingers'] );
                 Route::get('/improvisation-with-jesus-molina', [SalesController::class, 'jesusMolina'] );
@@ -25,6 +27,7 @@ Route::domain('{pianoteDomain}')
                 Route::get('/the-power-of-chords', [SalesController::class, 'PowerOfChords'] );
                 Route::get('/worship-piano', [SalesController::class, 'worshippiano'] );
                 Route::get('/beautiful-beginner-bundle', [SalesController::class, 'beautifulBeginnerBundle'] );
+                Route::get('/5-for-3-bundle', [SalesController::class, 'fiveforthreeBundle'] );
             }
         );
 

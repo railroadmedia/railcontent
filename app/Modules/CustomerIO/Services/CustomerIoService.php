@@ -8,6 +8,7 @@ use App\Modules\CustomerIO\ApiGateways\CustomerIoApiGateway;
 use App\Modules\CustomerIO\Events\CustomerCreated;
 use App\Modules\CustomerIO\Events\CustomerUpdated;
 use App\Modules\CustomerIO\Models\Customer;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class CustomerIoService
@@ -51,11 +52,11 @@ class CustomerIoService
         $customer =
             Customer::query()
                 ->where([
-                            'uuid' => $id,
-                            'workspace_name' => $accountConfigData['workspace_name'],
-                            'workspace_id' => $accountConfigData['workspace_id'],
-                            'site_id' => $accountConfigData['site_id'],
-                        ])
+                    'uuid' => $id,
+                    'workspace_name' => $accountConfigData['workspace_name'],
+                    'workspace_id' => $accountConfigData['workspace_id'],
+                    'site_id' => $accountConfigData['site_id'],
+                ])
                 ->firstOrFail();
 
         if ($includeExternalAttributes) {
@@ -88,11 +89,11 @@ class CustomerIoService
         $customer =
             Customer::query()
                 ->where([
-                            'user_id' => $userId,
-                            'workspace_name' => $accountConfigData['workspace_name'],
-                            'workspace_id' => $accountConfigData['workspace_id'],
-                            'site_id' => $accountConfigData['site_id'],
-                        ])
+                    'user_id' => $userId,
+                    'workspace_name' => $accountConfigData['workspace_name'],
+                    'workspace_id' => $accountConfigData['workspace_id'],
+                    'site_id' => $accountConfigData['site_id'],
+                ])
                 ->firstOrFail();
 
         if ($includeExternalAttributes) {
@@ -126,11 +127,11 @@ class CustomerIoService
         $customer =
             Customer::query()
                 ->where([
-                            'user_id' => $userId,
-                            'workspace_name' => $accountConfigData['workspace_name'],
-                            'workspace_id' => $accountConfigData['workspace_id'],
-                            'site_id' => $accountConfigData['site_id'],
-                        ])
+                    'user_id' => $userId,
+                    'workspace_name' => $accountConfigData['workspace_name'],
+                    'workspace_id' => $accountConfigData['workspace_id'],
+                    'site_id' => $accountConfigData['site_id'],
+                ])
                 ->firstOrFail();
 
         $customerActivities = $this->customerIoApiGateway->getCustomerActivities(
@@ -245,11 +246,11 @@ class CustomerIoService
         $customer =
             Customer::query()
                 ->where([
-                            'uuid' => $uuid,
-                            'workspace_name' => $accountConfigData['workspace_name'],
-                            'workspace_id' => $accountConfigData['workspace_id'],
-                            'site_id' => $accountConfigData['site_id'],
-                        ])
+                    'uuid' => $uuid,
+                    'workspace_name' => $accountConfigData['workspace_name'],
+                    'workspace_id' => $accountConfigData['workspace_id'],
+                    'site_id' => $accountConfigData['site_id'],
+                ])
                 ->firstOrFail();
 
         $oldCustomer = clone $customer;
@@ -319,11 +320,11 @@ class CustomerIoService
         $customer =
             Customer::query()
                 ->where([
-                            'email' => $lookupEmail,
-                            'workspace_name' => $accountConfigData['workspace_name'],
-                            'workspace_id' => $accountConfigData['workspace_id'],
-                            'site_id' => $accountConfigData['site_id'],
-                        ])
+                    'email' => $lookupEmail,
+                    'workspace_name' => $accountConfigData['workspace_name'],
+                    'workspace_id' => $accountConfigData['workspace_id'],
+                    'site_id' => $accountConfigData['site_id'],
+                ])
                 ->first();
 
         if (empty($customer)) {
@@ -379,11 +380,11 @@ class CustomerIoService
         $customer =
             Customer::query()
                 ->where([
-                            'user_id' => $userId,
-                            'workspace_name' => $accountConfigData['workspace_name'],
-                            'workspace_id' => $accountConfigData['workspace_id'],
-                            'site_id' => $accountConfigData['site_id'],
-                        ])
+                    'user_id' => $userId,
+                    'workspace_name' => $accountConfigData['workspace_name'],
+                    'workspace_id' => $accountConfigData['workspace_id'],
+                    'site_id' => $accountConfigData['site_id'],
+                ])
                 ->first();
 
         if (empty($customer)) {
@@ -412,37 +413,31 @@ class CustomerIoService
         return $customer;
     }
 
-    /**
-     * Deletes the customer based on the $uuid and $accountName config data.
-     *
-     * @param $uuid
-     * @param $accountName
-     * @param array $customAttributes
-     * @param null $email
-     * @param integer|null $createdAtTimestamp
-     * @return mixed
-     * @throws Exception
-     */
-    public function deleteCustomer($uuid, $accountName)
+    public function deleteCustomer(int $userId, $accountName)
     {
         $accountConfigData = $this->getAccountConfigData($accountName);
 
         $customer =
             Customer::query()
                 ->where([
-                            'uuid' => $uuid,
-                            'workspace_name' => $accountConfigData['workspace_name'],
-                            'workspace_id' => $accountConfigData['workspace_id'],
-                            'site_id' => $accountConfigData['site_id'],
-                        ])
-                ->firstOrFail();
+                    'user_id' => $userId,
+                    'workspace_name' => $accountConfigData['workspace_name'],
+                    'workspace_id' => $accountConfigData['workspace_id'],
+                    'site_id' => $accountConfigData['site_id'],
+                ])
+                ->first();
 
-        // save to the database
+        if (!$customer) {
+            Log::info("User $userId does not exist in the customer io workspace '$accountName'");
+            return;
+        }
+
+        $this->customerIoApiGateway->deleteCustomer(
+            $accountConfigData['site_id'],
+            $accountConfigData['track_api_key'],
+            $customer->uuid
+        );
         $customer->delete();
-
-        // delete customer.io using their API
-        // todo: delete
-
         return $customer;
     }
 
@@ -470,11 +465,11 @@ class CustomerIoService
                     $customer =
                         Customer::query()
                             ->where([
-                                        'email' => $email,
-                                        'workspace_name' => $accountConfigData['workspace_name'],
-                                        'workspace_id' => $accountConfigData['workspace_id'],
-                                        'site_id' => $accountConfigData['site_id'],
-                                    ])
+                                'email' => $email,
+                                'workspace_name' => $accountConfigData['workspace_name'],
+                                'workspace_id' => $accountConfigData['workspace_id'],
+                                'site_id' => $accountConfigData['site_id'],
+                            ])
                             ->first();
 
                     if (empty($customer)) {
@@ -570,11 +565,11 @@ class CustomerIoService
             $customer =
                 Customer::query()
                     ->where([
-                                'uuid' => $uuid,
-                                'workspace_name' => $accountConfigData['workspace_name'],
-                                'workspace_id' => $accountConfigData['workspace_id'],
-                                'site_id' => $accountConfigData['site_id'],
-                            ])
+                        'uuid' => $uuid,
+                        'workspace_name' => $accountConfigData['workspace_name'],
+                        'workspace_id' => $accountConfigData['workspace_id'],
+                        'site_id' => $accountConfigData['site_id'],
+                    ])
                     ->first();
         } else {
             /**
@@ -583,11 +578,11 @@ class CustomerIoService
             $customer =
                 Customer::query()
                     ->where([
-                                'email' => $email,
-                                'workspace_name' => $accountConfigData['workspace_name'],
-                                'workspace_id' => $accountConfigData['workspace_id'],
-                                'site_id' => $accountConfigData['site_id'],
-                            ])
+                        'email' => $email,
+                        'workspace_name' => $accountConfigData['workspace_name'],
+                        'workspace_id' => $accountConfigData['workspace_id'],
+                        'site_id' => $accountConfigData['site_id'],
+                    ])
                     ->first();
 
             if (empty($customer)) {
@@ -641,11 +636,11 @@ class CustomerIoService
         $customer =
             Customer::query()
                 ->where([
-                            'user_id' => $userId,
-                            'workspace_name' => $accountConfigData['workspace_name'],
-                            'workspace_id' => $accountConfigData['workspace_id'],
-                            'site_id' => $accountConfigData['site_id'],
-                        ])
+                    'user_id' => $userId,
+                    'workspace_name' => $accountConfigData['workspace_name'],
+                    'workspace_id' => $accountConfigData['workspace_id'],
+                    'site_id' => $accountConfigData['site_id'],
+                ])
                 ->first();
 
         if (!empty($customer)) {
@@ -693,11 +688,11 @@ class CustomerIoService
         $customer =
             Customer::query()
                 ->where([
-                            'email' => $customerEmail,
-                            'workspace_name' => $accountConfigData['workspace_name'],
-                            'workspace_id' => $accountConfigData['workspace_id'],
-                            'site_id' => $accountConfigData['site_id'],
-                        ])
+                    'email' => $customerEmail,
+                    'workspace_name' => $accountConfigData['workspace_name'],
+                    'workspace_id' => $accountConfigData['workspace_id'],
+                    'site_id' => $accountConfigData['site_id'],
+                ])
                 ->first();
 
         if (empty($customer)) {
@@ -769,7 +764,6 @@ class CustomerIoService
         )->first();
 
         if (!empty($customer)) {
-
             $this->customerIoApiGateway->addOrUpdateCustomerDevice(
                 $accountConfigData['site_id'],
                 $accountConfigData['track_api_key'],
@@ -856,9 +850,11 @@ class CustomerIoService
             }
         } catch (Exception $exception) {
             error_log($exception);
-            error_log('Failed to merge customer.io customers. Secondary customer will not be deleted from database.' .
+            error_log(
+                'Failed to merge customer.io customers. Secondary customer will not be deleted from database.' .
                 '$primaryCustomerId:' . $primaryCustomerId .
-                ' - $secondaryCustomerId:' . $secondaryCustomerId . ' - $accountName: ' . $accountName);
+                ' - $secondaryCustomerId:' . $secondaryCustomerId . ' - $accountName: ' . $accountName
+            );
 
             return false;
         }

@@ -8,7 +8,7 @@
 </div>
 
 <div class="modal" id="askQuestionModal">
-    <div class="flex flex-column bg-white shadow corners-10 pa-3">
+    <div class="flex flex-column bg-white shadow corners-10 pa-3 tw-relative modal-container">
         <h1 class="heading mb-2 tw-text-[#00101D]">Ask a Question</h1>
 
         <p class="tiny mb-3 tw-text-[#00101D]">Please submit your question(s) using the form below. Once submitted your question(s) will be answered in the next scheduled Q&A lesson.</p>

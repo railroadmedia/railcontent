@@ -243,7 +243,7 @@
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>
                             Save your seat in the first-ever <br class="inline lg:hidden">class starting June 5th.</strong></h6>
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-hover autoplay-video lazyload" style="padding-bottom: 61%;" data-open="trailer">
+                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video lazyload" style="padding-bottom: 61%;" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/header-image-m3.png" alt="trailer image" fetchpriority="high" />
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -274,7 +274,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl overflow-hidden relative bg-cover bg-center cursor-hover autoplay-video" style="padding-bottom: 105%;" data-open="trailer">
+                    <div class="rounded-xl overflow-hidden relative bg-cover bg-center cursor-pointer autoplay-video" style="padding-bottom: 105%;" data-open="trailer">
                         <img class="absolute inset-0" src="https://www.musora.com/musora-cdn/image/width=850,quality=100/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/header-image3.png" fetchpriority="high" alt="header image" />
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
@@ -385,7 +385,7 @@
                             <img class="-mt-7 rounded-lg transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}" loading="lazy" onload="this.classList.remove('opacity-0')" />
                         </div>
                     @else
-                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 md:mb-0 @if($key !== 4) md:mb-28 @endif">
+                        <div class="timeline relative flex flex-col md:grid md:grid-cols-2 gap-4 md:gap-14 lg:gap-20 mb-16 @if($key !== 4) md:mb-28 @else md:mb-0 @endif">
                             <div class="-mt-7 rounded-lg bg-cover bg-center relative aspect-16:9 overflow-hidden">
                                 <img class="absolute inset-0 transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $getting['img'] }}" alt="{{ $getting['title'] }}img" loading="lazy" onload="this.classList.remove('opacity-0')" />
                             </div>
@@ -407,15 +407,15 @@
                 This is your chance to keep your playing on the cutting edge by immersing yourself in the world of chops for 30 days. Below are three drummers who exemplify this style of playing – click the buttons to see short examples of each playing linear chops.</h6>
 
             <div class="flex flex-wrap max-w-xs sm:max-w-full mx-auto">
-                <div class="relative w-full sm:w-1/3 px-2 mb-4 sm:mb-0 cursor-hover autoplay-video" data-open="aaron">
+                <div class="relative w-full sm:w-1/3 px-2 mb-4 sm:mb-0 cursor-pointer autoplay-video" data-open="aaron">
                     <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-20"></i>
                     <img class="rounded-xl relative z-10 transition-all opacity-0" src="https://i.vimeocdn.com/video/1665544113-6ae072e9d0652bdfcd726f650d7208211eaec7245bead7abc8a44032fcc7993d-d_560" alt="aaron" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
-                <div class="relative w-full sm:w-1/3 px-2 mb-4 sm:mb-0 cursor-hover autoplay-video" data-open="anika">
+                <div class="relative w-full sm:w-1/3 px-2 mb-4 sm:mb-0 cursor-pointer autoplay-video" data-open="anika">
                     <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-20"></i>
                     <img class="rounded-xl relative z-10 transition-all opacity-0" src="https://i.vimeocdn.com/video/1665543766-0b53f480e98b9420f71219fe5ef7729f238a9f69f56e1e56cbc84e703930e96d-d_560" alt="anika" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
-                <div class="relative w-full sm:w-1/3 px-2 cursor-hover autoplay-video" data-open="larnell">
+                <div class="relative w-full sm:w-1/3 px-2 cursor-pointer autoplay-video" data-open="larnell">
                     <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button smaller z-20"></i>
                     <img class="rounded-xl relative z-10 transition-all opacity-0" src="https://i.vimeocdn.com/video/1665537466-98255352b2fe7e092811c665a39a7272ce9a23721135bc8907ae4c9afbdf5aa1-d_560" alt="larnell" loading="lazy" onload="this.classList.remove('opacity-0')">
                 </div>
@@ -569,7 +569,7 @@
         <div class="container max-w-4xl mx-auto mb-10">
             <img class="h-10 sm:h-20 mb-8 sm:mb-10 lg:mb-12 mx-auto transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=1220,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Just_Press_Play_logo.png" alt="just press play logo" loading="lazy" onload="this.classList.remove('opacity-0')">
 {{--            <img class="cursor-pointer rounded-xl autoplay-video overflow-hidden w-full" data-open="trailer" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/video-thumbnail.jpg">--}}
-            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative" data-open="trailer">
+            <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative" data-open="trailer">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
                 <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-chops/30dc.mp4" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
             </div>
@@ -874,6 +874,10 @@
                 $(this).parents().find('table').removeClass('private books online');
                 $(this).parents().find('table').addClass('private');
             });
+
+            @if(!empty($errors) && $errors->any())
+                $('#waitlistModal').foundation('open');
+            @endif
         });
     </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>

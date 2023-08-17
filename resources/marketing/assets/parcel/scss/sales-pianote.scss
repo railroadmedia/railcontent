@@ -133,6 +133,15 @@ img {
 }
 
 .join {
+    i {
+        transition: all .3s;
+        position: relative;
+        right: 0;
+    }
+
+    &:hover i {
+        right: -3px;
+    }
     &.smaller {
         padding: 8px 30px;
         font-size: 16px;
@@ -190,6 +199,16 @@ img {
             color: #000;
         }
 
+        &.black {
+            border-color: #000;
+            color: #000;
+
+            &:hover,
+            &:focus {
+                background: #000;
+                color: #fff;
+            }
+        }
         &.light-navy {
             border-color: #a1afc9;
             color: #a1afc9;

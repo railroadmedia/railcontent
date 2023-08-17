@@ -230,7 +230,7 @@
         <div class="row">
             <div class="title-text columns">
                 <h1>Your 26-Week Plan</h1>
-                <p>You’ll get immediate access to the full 26-week course to work through at your own pace -- with hand-picked exercises and detailed instructions on what to practice (and for exactly how long).</p>
+                <p>You’ll get immediate access to the full 26-week course to work through at your own pace — with hand-picked exercises and detailed instructions on what to practice (and for exactly how long).</p>
             </div>
             <div class="columns small-up-1 medium-up-3">
                 <div class="columns no-padding grid-item">
@@ -451,15 +451,15 @@
     <section class="instructor-bio">
         <div class="row">
             <p class="columns">
-                <span class="first-letter"><img src="https://d122ay5chh2hr5.cloudfront.net/gtme/bold-n.png" alt="Bold n"></span>ate Savage always knew he wanted to share his love for playing the guitar with others. After earning his Music Degree at San Jacinto College and playing hundreds of shows across Canada, the USA, and Europe -- he wanted to find a better way to help guitarists around the world.
+                <span class="first-letter"><img src="https://d122ay5chh2hr5.cloudfront.net/gtme/bold-n.png" alt="Bold n"></span>ate Savage always knew he wanted to share his love for playing the guitar with others. After earning his Music Degree at San Jacinto College and playing hundreds of shows across Canada, the USA, and Europe — he wanted to find a better way to help guitarists around the world.
                 <br><br>
-                So in 2009, he connected with Musora Media to start GuitarLessons.com -- a massive library of free online guitar lessons that has since helped more than 20 million guitar players.
+                So in 2009, he connected with Musora Media to start GuitarLessons.com — a massive library of free online guitar lessons that has since helped more than 20 million guitar players.
                 <br><br>
                 “I loved playing shows and touring,” Nate said in 2009. “But my heart has always been set on guitar education. I truly believe that playing the guitar can be a life-changing experience, so having the opportunity to create online lessons and help students around the world felt like such a perfect opportunity.”
                 <br><br>
                 Nate’s most popular videos are built to give beginners an easier way to get started without the friction of private lessons. “8 Guitar Chords You Must Know” has reached more than 4 million views. “Play 10 Songs With 4 Chords”, “5 Essential Strumming Patterns”, and “How To Hold The Guitar” are just a few other examples of videos that have been seen more by more than a million students.
                 <br><br>
-                Through his online lessons, Nate was able to reach more guitarists than he’d ever imagined and get personal feedback from tens of thousands of YouTube comments and personal emails -- gaining a deeper understanding of where students were having issues, what obstacles were getting in the way, and what was creating the fastest breakthroughs for getting to that next level.
+                Through his online lessons, Nate was able to reach more guitarists than he’d ever imagined and get personal feedback from tens of thousands of YouTube comments and personal emails — gaining a deeper understanding of where students were having issues, what obstacles were getting in the way, and what was creating the fastest breakthroughs for getting to that next level.
                 <br><br>
                 More than anything: <strong>it comes down to better technique.</strong>
                 <br><br>
@@ -520,7 +520,7 @@
                 </div>
                 <div class="columns">
                     <img class="drummer-pic" src="https://s3.amazonaws.com/guitareo/sales/testimonials/kathy-mire.jpg" alt="Kathy Mire">
-                    <p>"I highly recommend Guitar Technique Made Easy. Nate is the best guitar instructor I've ever had. Just the passion that he shows and his love of the instrument -- his way of explaining things is great. I especially liked the way he started with the basic topics and then increased the difficulty levels. Also, he didn't pull any punches. <strong>Nate let the students know exactly what was expected of them and what it took for improvement on the guitar, myself included.</strong>
+                    <p>"I highly recommend Guitar Technique Made Easy. Nate is the best guitar instructor I've ever had. Just the passion that he shows and his love of the instrument — his way of explaining things is great. I especially liked the way he started with the basic topics and then increased the difficulty levels. Also, he didn't pull any punches. <strong>Nate let the students know exactly what was expected of them and what it took for improvement on the guitar, myself included.</strong>
                         <br><br>
                         I have absolutely no negative comments. The course was very informative and multi-topical; utilizing videos, charts, jam tracks, etc. to accelerate the learning process (can you tell I'm a teacher?!). Thank you, Nate, for giving me a new perspective on my guitar playing."</p>
                     <h1>Kathy Mire <br> <span class="band">Texas, United States</span></h1>
@@ -626,7 +626,7 @@
                 </tbody>
             </table>
             <p class="columns">
-                <strong>Normally, Nate Savage charges $50 for a 30-minute private lesson</strong> and is extremely selective on which students he’ll teach. With Guitar Technique Made Easy, Nate is your personal guitar coach for 26 weeks, giving you a new exclusive video lesson each week and a clear path to improve your skills -- all for just
+                <strong>Normally, Nate Savage charges $50 for a 30-minute private lesson</strong> and is extremely selective on which students he’ll teach. With Guitar Technique Made Easy, Nate is your personal guitar coach for 26 weeks, giving you a new exclusive video lesson each week and a clear path to improve your skills — all for just
                 <u>
                 @hasSection('custom-price-2')
                     @yield('custom-price-2')
@@ -635,7 +635,7 @@
                 @endif
                  per week.</u>
                 <br><br>
-                    You can choose a one-time payment or a three-payment plan -- and the entire Guitar Technique Made Easy course is yours for life with no recurring subscription or additional fees.
+                    You can choose a one-time payment or a three-payment plan — and the entire Guitar Technique Made Easy course is yours for life with no recurring subscription or additional fees.
             </p>
         </div>
     </section>

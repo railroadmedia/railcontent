@@ -24,9 +24,9 @@
 @section('global-body')
     @include('pianote.sales.partials._nav')
 
-    <section class="py-32 md:py-48 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/bg.jpg')">
+    <section class="py-32 md:py-48 bg-center bg-cover bg-no-repeat" style="background-color:#1c0203;background-image:url('https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/bg.jpg')">
         <div class="max-w-md md:max-w-4xl mx-auto text-center text-white px-6 lg:px-0">
-            <img class="h-40 md:h-72 lg:h-80 mb-2" src="https://www.musora.com/musora-cdn/image/width=550,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/Q-SCIENTIST.png" alt="scientist">
+            <img class="h-40 md:h-72 lg:h-80 mb-2" src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/quiz/Q-SCIENTIST.png" alt="scientist">
             <h2 class="font-extrabold mt-2 mb-6">You are the Scientist!</h2>
             <p class="mb-4">
                 To learn more about what this means and to get free lessons tailored to your<br class="hidden md:inline">

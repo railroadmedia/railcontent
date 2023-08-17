@@ -29,7 +29,7 @@
 
 @section('biography')
     <h1>Utilize Your Basic Rudiments To Gain Freedom Around The Kit</h1>
-    <p>Marco Minnemann is known for his technical playing and insane interdependence -- on which he’s published several educational books and a DVD, and played with artists including The Aristocrats, Joe Satriani, Paul Gilbert, Eddie Jobson, Steven Wilson, Trey Gunn, Kreator, Necrophagist, Adrian Belew, Nena, Udo Lindenberg, Mike Keneally, Andy Partridge, FFW, Gianna Nannini, The Buddy Rich Big Band and more.
+    <p>Marco Minnemann is known for his technical playing and insane interdependence — on which he’s published several educational books and a DVD, and played with artists including The Aristocrats, Joe Satriani, Paul Gilbert, Eddie Jobson, Steven Wilson, Trey Gunn, Kreator, Necrophagist, Adrian Belew, Nena, Udo Lindenberg, Mike Keneally, Andy Partridge, FFW, Gianna Nannini, The Buddy Rich Big Band and more.
         <br><br>
         In this course, Marco will share some of his favorites combinations for various fills and grooves, and the importance of using them. And while these combinations alone will give you more freedom on the drums, you’ll also gain the framework for building your own creative combinations on the kit.
     </p>

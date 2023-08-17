@@ -22,13 +22,13 @@
         }
 
         .header-bg {
-            background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-header.jpg');
+            background-image:url('https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-header.jpg');
         }
 
         .meet-rob {
             background-size: 960px;
             background-position: 25% 6%;
-            background-image: url('https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-coach.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-coach.jpg');
         }
 
         .meet-rob .content-wrap {
@@ -37,23 +37,23 @@
 
         @media (min-width:768px) {
             .header-bg {
-                background-image:url('https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-header.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-header.jpg');
             }
 
             .meet-rob {
                 background-size: 1300px;
                 background-position: 50% top;
-                background-image: url('https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-coach.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-coach.jpg');
             }
         }
         @media (min-width:1024px) {
             .header-bg {
-                background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-header.jpg');
+                background-image:url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-header.jpg');
             }
 
             .meet-rob {
                 background-size: 1550px;
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-coach.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-coach.jpg');
             }
 
             .meet-rob .content-wrap {
@@ -77,7 +77,7 @@
 @section('body')
     @include('guitareo.lead-gen.partials._header1', [
         "bgColor" => "#010416",
-        "imgs" => ['<img class="h-14 sm:h-20 lg:h-28 mt-64 sm:mt-80 lg:mt-96 mb-5 lg:mb-8" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-logo.png" alt="logo">'],
+        "imgs" => ['<img class="h-14 sm:h-20 lg:h-28 mt-64 sm:mt-80 lg:mt-96 mb-5 lg:mb-8" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-logo.png" alt="logo">'],
         "formId" => "Guitareo - Engagement - Trigger - Getting Started On The Electric Guitar - Web Form",
         "formName" => "Getting Started On The Electric Guitar",
     ])
@@ -110,7 +110,7 @@
                         ],
                         [
                         'title' => "PLAY YOUR FIRST SONG",
-                        'description' => "The moment you’ve been waiting for! Put everything you’ve learned together and play a full song -- including a simple lead guitar line.",
+                        'description' => "The moment you’ve been waiting for! Put everything you’ve learned together and play a full song — including a simple lead guitar line.",
                         'image' => 'https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/thumbs-electric-05.jpg',
                         ],
                         [
@@ -191,9 +191,9 @@
 
     @include('guitareo.lead-gen.partials._enter-email', [
         "bgColor" => "linear-gradient(to bottom, #042932, #010317)",
-        "img" => '<img class="h-14 sm:h-20 lg:h-28 mx-auto" src="https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-logo.png" alt="logo" />',
+        "img" => '<img class="h-14 sm:h-20 lg:h-28 mx-auto" src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-logo.png" alt="logo" />',
         "text" => '<div class="text-lg leading-none my-5 md:my-8 md:text-2xl md:leading-none lg:text-3xl lg:leading-none">Enter your email below to get the ENTIRE 6-video <br class="hidden md:inline"> course on <strong>Getting Started On Electric Guitar</strong></div>',
-        "formId" => "Guitareo - Engagement - Trigger - Getting Started On The Electric Guitar - Web Form",
+        "formId" => "Guitareo - Engagement - Trigger - Getting Started On The Electric Guitar - Web Form2",
         "formName" => "Getting Started On The Electric Guitar",
     ])
 @stop

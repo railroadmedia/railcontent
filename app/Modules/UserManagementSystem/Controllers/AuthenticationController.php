@@ -229,7 +229,13 @@ class AuthenticationController extends Controller
             auth()->logout();
             auth()->loginUsingId($userId);
 
-            return redirect()->to('/members');
+            $user = auth()->user();
+            $token = $user->createToken('ios');
+            $user->withAccessToken($token);
+
+            return $request->wantsJson()
+                ? response()->json(['token' => $token->plainTextToken, 'user' => $user])
+                : redirect()->to('/members');
         }
 
         throw new NotFoundHttpException();

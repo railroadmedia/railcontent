@@ -69,7 +69,7 @@
                         </li>
 
                         @foreach($lessons as $lesson){
-                            @include('musora.product.partials._drum-shop-card', [
+                            @include('musora.product.partials._shop-card', [
                                 "sku" => $lesson->sku === 'drumeo' || $lesson->sku === 'pianote' || $lesson->sku === 'singeo' || $lesson->sku === 'guitareo' ? null : $lesson->sku,
                                 "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $lesson->slug ),
                                 "thumbnail" => $lesson->thumbnail,
@@ -103,7 +103,7 @@
                             </h5>
                         </li>
                         @foreach($accessories as $accessory){
-                            @include('musora.product.partials._drum-shop-card', [
+                            @include('musora.product.partials._shop-card', [
                                 "sku" => $accessory->sku,
                                 "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $accessory->slug ),
                                 "thumbnail" => $accessory->thumbnail,
@@ -140,7 +140,7 @@
                             </h5>
                         </li>
                         @foreach($hats as $hat){
-                            @include('musora.product.partials._drum-shop-card', [
+                            @include('musora.product.partials._shop-card', [
                                 "sku" => $hat->sku,
                                 "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hat->slug ),
                                 "thumbnail" => $hat->thumbnail,
@@ -170,7 +170,7 @@
                             </h5>
                         </li>
                         @foreach($shirts as $shirt){
-                            @include('musora.product.partials._drum-shop-card', [
+                            @include('musora.product.partials._shop-card', [
                                 "sku" => $shirt->sku,
                                 "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $shirt->slug ),
                                 "thumbnail" => $shirt->thumbnail,
@@ -188,7 +188,7 @@
                         }
                         @endforeach
                         @if($theme === 'drumeo')
-                            @include('musora.product.partials._drum-shop-card', [
+                            @include('musora.product.partials._shop-card', [
                                  "badgeText" => "SEE MORE ON TEESPRING",
                                  "itemURL" => "https://teespring.com/stores/drumeo",
                                  "thumbnail" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/teespring.jpg",
@@ -222,7 +222,7 @@
                             </h5>
                         </li>
                         @foreach($hoodies as $hoodie){
-                            @include('musora.product.partials._drum-shop-card', [
+                            @include('musora.product.partials._shop-card', [
                                 "sku" => $hoodie->sku,
                                 "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $hoodie->slug ),
                                 "thumbnail" => $hoodie->thumbnail,
@@ -245,7 +245,7 @@
             <section class="grid-view" x-show="filter === 'clothing' || filter === 'all'">
                 <ul class="fixed-cards container mx-auto">
                     @foreach($products as $product){
-                        @include('musora.product.partials._drum-shop-card', [
+                        @include('musora.product.partials._shop-card', [
                             "sku" => $product->sku,
                             "itemURL" => '/'.$theme.'/shop/'.str_replace( array('Drumeo-', 'Pianote-', 'Guitareo-', 'Singeo-'), '', $product->slug ),
                             "thumbnail" => $product->thumbnail,

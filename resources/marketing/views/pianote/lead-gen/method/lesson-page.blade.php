@@ -2,11 +2,11 @@
 
 @section('global-head')
     <title>Pianote Method | Pianote</title>
-    <meta name="description" content="Master the fundamentals -- so you can play anything you want on the piano.">
+    <meta name="description" content="Master the fundamentals — so you can play anything you want on the piano.">
 
     <meta property="og:image" content="https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/method/og-image.png" style="display: none;">
     <meta property="og:title" content="Pianote Method">
-    <meta property="og:description" content="Master the fundamentals -- so you can play anything you want on the piano.">
+    <meta property="og:description" content="Master the fundamentals — so you can play anything you want on the piano.">
     <meta property="og:url" content="https://www.pianote.com/method">
 
 

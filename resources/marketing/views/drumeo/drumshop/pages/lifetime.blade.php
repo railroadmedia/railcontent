@@ -23,7 +23,7 @@
         [
             'name' => '12 Pairs of Drumeo Drumsticks',
             'price' => 'Normally $155.40',
-            'desc' => 'The Drumeo 5A Drumsticks by Vater -- made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer-lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.',
+            'desc' => 'The Drumeo 5A Drumsticks by Vater — made of hickory for strength and durability, featuring up to 2X the moisture content than most manufacturers for longer-lasting sticks, and personally hand-rolled by Alan Vater to ensure they’re weighted and tone-matched to perfection.',
             'freeBonus' => true,
             'freeShipping' => true,
             'lineBreak' => true,
@@ -32,7 +32,7 @@
         [
             'name' => 'Drum Technique Made Easy',
             'price' => 'Normally $197',
-            'desc' => 'Technique guru Bruce Becker delivers an intimate 26-week course where you’ll get his proven process for improving your hand technique and foot technique so you can develop more speed and control around the kit -- all while preventing injuries & enjoying the music.',
+            'desc' => 'Technique guru Bruce Becker delivers an intimate 26-week course where you’ll get his proven process for improving your hand technique and foot technique so you can develop more speed and control around the kit — all while preventing injuries & enjoying the music.',
             'freeBonus' => true,
             'lifetimeAccess' => true,
             'lineBreak' => true,
@@ -68,7 +68,7 @@
         [
             'name' => 'Electrify Your Drumming',
             'price' => 'Normally $197',
-            'desc' => 'Electrify Your Drumming will teach you the tools and styles of electronic dance music -- so you can build energy with risers, lock in with the vocals, add power to your beats and fills, create a climax in the music, and ultimately fuel any song with your playing -- giving you valuable skills that will apply to every style of music.',
+            'desc' => 'Electrify Your Drumming will teach you the tools and styles of electronic dance music — so you can build energy with risers, lock in with the vocals, add power to your beats and fills, create a climax in the music, and ultimately fuel any song with your playing — giving you valuable skills that will apply to every style of music.',
             'freeBonus' => true,
             'lifetimeAccess' => true,
             'lineBreak' => true,
@@ -77,7 +77,7 @@
         [
             'name' => 'Successful Drumming',
             'price' => 'Normally $247',
-            'desc' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums. This digital training pack includes 18 hours of video lessons and a 274-page workbook -- helping you lock in with other musicians, prepare for gigs, and set yourself up for a successful experience on the drums.',
+            'desc' => 'Jared Falk’s step-by-step curriculum for building a rock-solid foundation on the drums. This digital training pack includes 18 hours of video lessons and a 274-page workbook — helping you lock in with other musicians, prepare for gigs, and set yourself up for a successful experience on the drums.',
             'freeBonus' => true,
             'lifetimeAccess' => true,
             'lineBreak' => true,
@@ -86,7 +86,7 @@
         [
             'name' => 'Learn Songs Faster',
             'price' => 'Normally $19',
-            'desc' => 'A 75-minute masterclass with Jared Falk & Dave Atkinson to help you learn MORE songs in less time -- from active listening that’ll help you hear phrasing and understand song structure, to building effective grooves and fills, and keeping time so your playing always matches the music.',
+            'desc' => 'A 75-minute masterclass with Jared Falk & Dave Atkinson to help you learn MORE songs in less time — from active listening that’ll help you hear phrasing and understand song structure, to building effective grooves and fills, and keeping time so your playing always matches the music.',
             'freeBonus' => true,
             'lifetimeAccess' => true,
             'lineBreak' => true,
@@ -95,7 +95,7 @@
         [
         "img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/language-of-drumming.jpg",
         "name" => "The Language Of Drumming",
-        "desc" => "Benny Greb’s system for musical expression -- featuring 3 hours of online video lessons to help you express your ideas on the drums.",
+        "desc" => "Benny Greb’s system for musical expression — featuring 3 hours of online video lessons to help you express your ideas on the drums.",
         "price" => "Normally $29.99",
         'freeBonus' => true,
             'lifetimeAccess' => true,
@@ -104,7 +104,7 @@
         [
         "img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/anatomy-of-a-drum-solo.jpg",
         "name" => "Anatomy Of A Drum Solo",
-        "desc" => "Neil Peart breaks down his approach to drum soloing -- with 3 hours of online video to improve your rhythm and improvisation.",
+        "desc" => "Neil Peart breaks down his approach to drum soloing — with 3 hours of online video to improve your rhythm and improvisation.",
         "price" => "Normally $29.99",
         'freeBonus' => true,
             'lifetimeAccess' => true,
@@ -122,7 +122,7 @@
         [
         "img" => "https://dpwjbsxqtam5n.cloudfront.net/drum-shop/card-thumbs/the-grid.jpg",
         "name" => "The Grid",
-        "desc" => "Mike Mangini’s system for creative drumming and improvisation -- including 3 hours of video for expanding your skills.",
+        "desc" => "Mike Mangini’s system for creative drumming and improvisation — including 3 hours of video for expanding your skills.",
         "price" => "Normally $29.99",
         'freeBonus' => true,
             'lifetimeAccess' => true,

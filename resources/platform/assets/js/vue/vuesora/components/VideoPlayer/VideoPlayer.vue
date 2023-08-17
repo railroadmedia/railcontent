@@ -899,7 +899,7 @@ const isAbrEnabled = computed({
 
 const playbackQualities = computed({
     get() {
-        if (isShakaInitialized.value) {
+        if (isShakaInitialized.value && $_sources.value && $_sources.value.length > 0) {
             const qualities = $_sources.value.map(source => ({
                 ...source,
                 label: PlayerUtils.getQualityLabelByHeight(source.height),
@@ -946,8 +946,8 @@ const $_sources = computed({
 
         if (props.sources.length) {
             src = props.sources;
-        } else if (ranges.value[currentRange.value] && ranges.value[currentRange.value].length) {
-            src = ranges.value[currentRange.value];
+        } else if (props.ranges[currentRange.value] && props.ranges[currentRange.value].length) {
+            src = props.ranges[currentRange.value];
         }
 
         return src;

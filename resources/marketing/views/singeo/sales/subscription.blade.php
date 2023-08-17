@@ -147,6 +147,15 @@
     @endif
 
     @php
+        $bubble1 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/hailey-benedict.png';
+        $bubble2 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/lisa-witt.png';
+        $bubble3 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/tony-lindsay.png';
+        $bubble4 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/chris-johnson.png';
+        $bubble5 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/julia-ziegler.png';
+        $bubble6 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/darcy-d.png';
+        $bubble7 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/shelea.png';
+        $bubble8 = 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/bubbles/cate-canning.png';
+
         $features = [
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/vocal-lessons-icon.svg',
@@ -193,8 +202,8 @@
 
     @if(!empty($beginnerVersion))
         @include('musora.sales.components.header-section', [
-            'header' => 'Singing lessons that fit your schedule. ',
-            'desc' => 'Learn to sing from home, anytime, with bite-sized video lessons and unlimited personal support. ',
+            'header' => 'Singing lessons that <br> fit your schedule. ',
+            'desc' => 'Learn to sing from home, anytime, with bite-sized <br class="hidden sm:inline"> video lessons and unlimited personal support. ',
             'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/header-thumb2.jpg',
             'promoThumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb.png',
             'promoThumbM' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb-m.png',
@@ -204,8 +213,8 @@
         ])
     @else
         @include('musora.sales.components.header-section', [
-            'header' => 'Get the singing voice you’ve always wanted.',
-            'desc' => 'Improve your vocal range, strength, and control with step-by-step lessons and unlimited personal support.',
+            'header' => 'Get the singing voice <br> you’ve always wanted.',
+            'desc' => 'Improve your vocal range, strength, and control with<br class="hidden sm:inline"> step-by-step lessons and unlimited personal support.',
             'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/header-thumb2.jpg',
             'promoThumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb.png',
             'promoThumbM' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/jan-thumb-m.png',
@@ -226,31 +235,61 @@
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/method.jpg',
                 'title' => '10-Level Curriculum',
                 'desc' => 'Turn your desire to sing into passionate practice with useful lessons and exercises.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/method.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/practical-assignments.jpg',
                 'title' => 'Practical Assignments',
                 'desc' => 'You\'ll always have on-screen assignments and practice tools to guide you along the way.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/practical-assignments.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/guided-workouts.jpg',
                 'title' => 'Warm-Up Routines',
                 'desc' => 'Access our quick warm-up routines to fit any schedule, ranging from 5 to 20 minutes.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/guided-workouts.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/world-class-teachers.jpg',
                 'title' => 'World-Class Teachers',
                 'desc' => 'Gain insights from vocal coaches, Grammy-Award winners, and chart-topping performers.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/world-class-teachers.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/downloadable-videos.jpg',
                 'title' => 'Downloadable Videos',
                 'desc' => 'Stream your lessons OR download your videos so you can practice anywhere, anytime.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/downloadable-videos.jpg',
+                    ],
+                ]
             ],
             [
                 'image' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/personalized-support.jpg',
                 'title' => 'Personalized Support',
                 'desc' => 'Get weekly live streams, student lesson plans, and access to a global singing community.',
+                'lessonInfo' => [
+                    [
+                        'thumb' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2023/personalized-support.jpg',
+                    ],
+                ]
             ],
         ];
     @endphp
@@ -492,7 +531,7 @@
         'header' => 'Trusted by singers everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
-        'youtube' => '29,000',
+        'youtube' => '75,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
         'facebook' => '23,000',
         'instagramLink' => 'https://instagram.com/singeoofficial/',
@@ -555,6 +594,7 @@
         ])
     @else
         @include('musora.sales.components.order-section-collage', [
+        'logo' => 'https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png',
         'header' => 'Unlimited singing lessons.<br> Vocal coaches and support.<br>1000+ popular songs.',
         'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
                     <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-singeo"></i> Online singing lessons on every topic.</li>

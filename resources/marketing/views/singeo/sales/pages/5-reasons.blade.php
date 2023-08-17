@@ -60,41 +60,41 @@
         ])
         <section class="text-center px-5 sm:px-8 pt-4 pb-10 sm:pt-7 sm:pb-14 lg:py-20">
             <div class="container max-w-3xl mx-auto">
-                <img src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/header.png">
+                <img src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/header.png">
                 <h2 class="leading-tight my-4 sm:my-6"><strong>5 Reasons Why Singeo Is Better Than<br class="hidden sm:inline"> In-Person Singing Lessons.</strong></h2>
                 <h6 class="text-left leading-normal mb-10 sm:mb-14">Imagine being able to sing ANY song you want. Leading the choir rather than following it. Or even just singing a lullaby for your kids and actually sounding good.
                     <br><br>All because you found the singing lessons that are right for you, your voice and the unique challenges you were facing… And because you didn’t waste your money and time with in-person signing lessons.</h6>
 
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center mb-10">
-                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/1-bang.jpg">
+                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/1-bang.jpg">
                     <div class="sm:pl-10 mt-3 sm:mt-0 sm:text-left">
                         <h5 class="leading-normal mb-2"><strong>1. Get more bang for your buck:</strong></h5>
                         <p class="leading-relaxed">Traditional singing lessons can be very expensive - up to $80+/session - especially when considering the cost of travel and the rate of instructors. Singeo provides complete instruction, on-demand practice tools, real coaches, and a vibrant community, all for a fraction of the cost of in-person lessons.</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center mb-10">
-                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/2-feedback.jpg">
+                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/2-feedback.jpg">
                     <div class="sm:pl-10 mt-3 sm:mt-0 sm:text-left">
                         <h5 class="leading-normal mb-2"><strong>2. Unlimited personal feedback:</strong></h5>
                         <p class="leading-relaxed">With Singeo you’ll get the personal feedback and support you need to get results faster. Your growth isn’t limited to someone else’s schedule. Get on-demand access to mentors, reviews & live lessons with real vocal coaches to overcome the challenges unique to you and your voice.</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center mb-10">
-                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/3-access.jpg">
+                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/3-access.jpg">
                     <div class="sm:pl-10 mt-3 sm:mt-0 sm:text-left">
                         <h5 class="leading-normal mb-2"><strong>3. Access whenever, wherever:</strong></h5>
                         <p class="leading-relaxed">Forget about commuting or adjusting to someone else's schedule. With Singeo, you can access top-quality singing lessons anytime, anywhere. Whether you're on the road, at home, between kid’s karate lessons or even on a lunch break, Singeo is there for you.</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center mb-10">
-                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/4-lost.jpg">
+                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/4-lost.jpg">
                     <div class="sm:pl-10 mt-3 sm:mt-0 sm:text-left">
                         <h5 class="leading-normal mb-2"><strong>4. You’ll never feel lost:</strong></h5>
                         <p class="leading-relaxed">Singeo offers a comprehensive 10-level curriculum. Everything from basic singing techniques to advanced skills that will help you grow and evolve as a singer. You'll never have to wonder where to go next in your journey to singing mastery.</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap sm:flex-nowrap items-center justify-center">
-                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/5-trained.jpg">
+                    <img class="rounded-xl h-64 lg:h-80" src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/5-reasons/5-trained.jpg">
                     <div class="sm:pl-10 mt-3 sm:mt-0 sm:text-left">
                         <h5 class="leading-normal mb-2"><strong>5. Be trained by the best:</strong></h5>
                         <p class="leading-relaxed">In-person lessons usually limit you to whatever teachers are available in your area. But with Singeo, you’ll get access to world-class teachers and Grammy-Winning coaches to teach you specialized skills, styles and techniques.</p>

@@ -19,6 +19,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  isLive: {
+    type: Boolean,
+    default: false
+  },
   userName: {
     type: String
   },
@@ -93,6 +97,14 @@ const toggleSearchModal = (val) => {
     </div>
     <div class="tw-self-end tw-h-full tw-flex tw-items-center tw-ml-auto">
 
+      <!-- Live Indicator -->
+      <a :href="`/${brand}/live`" v-if="isLive" class="tw-relative tw-mr-2">
+        <span
+          class="tw-animate-grow-shrink tw-blur-sm tw-origin-center tw-absolute tw-left-0 tw-top-0 tw-inline-flex tw-h-full tw-w-full tw-rounded tw-bg-[#F71B26] tw-opacity-75"></span>
+        <span
+          class="tw-relative tw-whitespace-nowrap tw-base tw-pt-[2px] tw-text-sm tw-pb-0 tw-px-[3px] tw-rounded tw-leading-none tw-text-white tw-bg-[#DC2626] tw-uppercase tw-font-bebas-neue">On-Air</span>
+      </a>
+
       <!-- Search Trigger -->
       <button
         @click="() => toggleSearchModal(true)"
@@ -103,17 +115,17 @@ const toggleSearchModal = (val) => {
       </button>
 
       <!-- Invite a Friend -->
-      <a v-if="canReferNewStudents"
-        :href="`/${ brand }/referral/invite-a-friend`"
-        class="tw-shrink-0 tw-w-[40px] sm:tw-w-[58px] tw-h-full tw-flex tw-items-center tw-mr-1 tw-justify-center hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
-        title="Invite a Friend"
-      >
-        <span class="tw-text-[#00101D] dark:tw-text-white">
-          <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M11.5 7V21.625M11.5 7C11.5 7 11.5 5.32063 11.5 4.75C11.5 3.50736 12.5074 2.5 13.75 2.5C14.9926 2.5 16 3.50736 16 4.75C16 5.99264 14.9926 7 13.75 7C13.078 7 11.5 7 11.5 7ZM11.5 7C11.5 7 11.5 4.82078 11.5 4.1875C11.5 2.6342 10.2408 1.375 8.6875 1.375C7.1342 1.375 5.875 2.6342 5.875 4.1875C5.875 5.7408 7.1342 7 8.6875 7C9.60752 7 11.5 7 11.5 7ZM3.625 11.5H19.375M3.625 11.5C2.38236 11.5 1.375 10.4926 1.375 9.25C1.375 8.00736 2.38236 7 3.625 7H19.375C20.6176 7 21.625 8.00736 21.625 9.25C21.625 10.4926 20.6176 11.5 19.375 11.5M3.625 11.5L3.625 19.375C3.625 20.6176 4.63236 21.625 5.875 21.625H17.125C18.3676 21.625 19.375 20.6176 19.375 19.375V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </span>
-      </a>
+<!--      <a v-if="canReferNewStudents"-->
+<!--        :href="`/${ brand }/referral/invite-a-friend`"-->
+<!--        class="tw-shrink-0 tw-w-[40px] sm:tw-w-[58px] tw-h-full tw-flex tw-items-center tw-mr-1 tw-justify-center hover:dark:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"-->
+<!--        title="Invite a Friend"-->
+<!--      >-->
+<!--        <span class="tw-text-[#00101D] dark:tw-text-white">-->
+<!--          <svg width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">-->
+<!--            <path d="M11.5 7V21.625M11.5 7C11.5 7 11.5 5.32063 11.5 4.75C11.5 3.50736 12.5074 2.5 13.75 2.5C14.9926 2.5 16 3.50736 16 4.75C16 5.99264 14.9926 7 13.75 7C13.078 7 11.5 7 11.5 7ZM11.5 7C11.5 7 11.5 4.82078 11.5 4.1875C11.5 2.6342 10.2408 1.375 8.6875 1.375C7.1342 1.375 5.875 2.6342 5.875 4.1875C5.875 5.7408 7.1342 7 8.6875 7C9.60752 7 11.5 7 11.5 7ZM3.625 11.5H19.375M3.625 11.5C2.38236 11.5 1.375 10.4926 1.375 9.25C1.375 8.00736 2.38236 7 3.625 7H19.375C20.6176 7 21.625 8.00736 21.625 9.25C21.625 10.4926 20.6176 11.5 19.375 11.5M3.625 11.5L3.625 19.375C3.625 20.6176 4.63236 21.625 5.875 21.625H17.125C18.3676 21.625 19.375 20.6176 19.375 19.375V11.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>-->
+<!--          </svg>-->
+<!--        </span>-->
+<!--      </a>-->
 
       <UserIcon
         :brand="brand"

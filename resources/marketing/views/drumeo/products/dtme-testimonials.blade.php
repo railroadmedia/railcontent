@@ -117,7 +117,7 @@
                 @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/ElizaGagnon.jpg",
                 "testimonialHighlight" => "It gave me a new fluency and fluidity for playing grooves!",
-                "fullTestimonial" => "I was a beginner and had very little technique at all, so everything was new. Bruce broke things down very clearly and all of the exercises progressed logically and smoothly -- and they weren’t boring to practice!<br><br> Drum Technique Made Easy helped me get in the habit of having the sticks in my hands every day and to be satisfied with slow and steady progress. It gave me a new fluency and fluidity for playing grooves. My partner actually noticed it before I did and commented on how much better my playing sounded.",
+                "fullTestimonial" => "I was a beginner and had very little technique at all, so everything was new. Bruce broke things down very clearly and all of the exercises progressed logically and smoothly — and they weren’t boring to practice!<br><br> Drum Technique Made Easy helped me get in the habit of having the sticks in my hands every day and to be satisfied with slow and steady progress. It gave me a new fluency and fluidity for playing grooves. My partner actually noticed it before I did and commented on how much better my playing sounded.",
                 "name" => "Eliza Gagnon",
                 "location" => "Massachusetts, USA"
                 ])
@@ -149,7 +149,7 @@
                 @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/DrewSmith.jpg",
                 "testimonialHighlight" => "One of the most effective uses of my time, ever.",
-                "fullTestimonial" => "Bruce Becker helped me focus on the proper movements and mechanics of drumming, rather than the result of those movements -- and the benefits of feeling and sounding better revealed themselves as the skills improved. The exercises in the very first week showed me that I was on the right track. Flow and awareness were at an all-time high.<br><br> Taking DTME has enabled me to play with even more feeling and groove, and the course has also helped me identify what movements may be incorporated into my playing in order to facilitate learning new stickings, grooves, and fills. This course remains as one of the most important and effective uses of my time ever.",
+                "fullTestimonial" => "Bruce Becker helped me focus on the proper movements and mechanics of drumming, rather than the result of those movements — and the benefits of feeling and sounding better revealed themselves as the skills improved. The exercises in the very first week showed me that I was on the right track. Flow and awareness were at an all-time high.<br><br> Taking DTME has enabled me to play with even more feeling and groove, and the course has also helped me identify what movements may be incorporated into my playing in order to facilitate learning new stickings, grooves, and fills. This course remains as one of the most important and effective uses of my time ever.",
                 "name" => "Drew Smith",
                 "location" => "Virginia, USA"
                 ])
@@ -208,7 +208,7 @@
                 @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/ZoltanWagner.jpg",
                 "testimonialHighlight" => "I’m getting over technique problems that I hadn’t solved in 10+ years!",
-                "fullTestimonial" => "The way Bruce explains there is NO WAY that someone would not understand what he is talking about! It was detailed, comprehensive and crystal clear (If it ever wasn’t, he made it clear via the private message feature).<br><br> Before this course, I had a notion that great technique is the privilege of the drumming greats. But Bruce helped me uncover the biggest flaw in my technique -- and I realized that it is achievable for me to get solid hand technique, and it gave me a plan to get there. I’m getting over technique problems that I didn’t manage to solve in the past 10-15 years! I would recommend it as a must for everyone, especially for beginners as it demystifies technique in a good way!",
+                "fullTestimonial" => "The way Bruce explains there is NO WAY that someone would not understand what he is talking about! It was detailed, comprehensive and crystal clear (If it ever wasn’t, he made it clear via the private message feature).<br><br> Before this course, I had a notion that great technique is the privilege of the drumming greats. But Bruce helped me uncover the biggest flaw in my technique — and I realized that it is achievable for me to get solid hand technique, and it gave me a plan to get there. I’m getting over technique problems that I didn’t manage to solve in the past 10-15 years! I would recommend it as a must for everyone, especially for beginners as it demystifies technique in a good way!",
                 "name" => "Zoltan Wagner",
                 "location" => "Budapest, Hungary"
                 ])
@@ -232,7 +232,7 @@
                 @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/WesleyOkada.jpg",
                 "testimonialHighlight" => "I had basically given up on push-pull technique.",
-                "fullTestimonial" => "I had basically given up on push-pull technique. I wasn’t sure how to perform it and didn’t think I was doing it right. Bruce went through every detail and clearly demonstrated how to perform the technique -- and I did it! If you want to learn new techniques and make sure you’re doing things right, then take Drum Technique Made Easy.",
+                "fullTestimonial" => "I had basically given up on push-pull technique. I wasn’t sure how to perform it and didn’t think I was doing it right. Bruce went through every detail and clearly demonstrated how to perform the technique — and I did it! If you want to learn new techniques and make sure you’re doing things right, then take Drum Technique Made Easy.",
                 "name" => "Wesley Okada",
                 "location" => "California, USA"
                 ])
@@ -248,7 +248,7 @@
                 @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/KenBrashear.jpg",
                 "testimonialHighlight" => "I broke through a 5-year impasse!",
-                "fullTestimonial" => "As a self-taught drummer, I was struggling for years to achieve the speed and precision I wanted on the drums. Bruce helped me modify my finger positioning and hand technique -- it felt like I’d broke through a 5-year impasse! Regardless of your skill level, if you have issues playing what you want to play and getting that onto the kit, this course is for you!",
+                "fullTestimonial" => "As a self-taught drummer, I was struggling for years to achieve the speed and precision I wanted on the drums. Bruce helped me modify my finger positioning and hand technique — it felt like I’d broke through a 5-year impasse! Regardless of your skill level, if you have issues playing what you want to play and getting that onto the kit, this course is for you!",
                 "name" => "Ken Brashear",
                 "location" => "North Carolina, USA"
                 ])
@@ -315,7 +315,7 @@
                 @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/Henk-JanWormgoor.jpg",
                 "testimonialHighlight" => "I want to play until I’m 85 and older.",
-                "fullTestimonial" => "Due to injuries, I was coming close to a final stop in my drumming. I had to find a way to relax my playing and get new techniques because I want to play until I’m 85 and older. Drum Technique Made Easy was an investment for my drumming life: a world-class instructor with 26-weeks of detailed instruction. If you are young, you can grow to new heights you never imagined -- and if you are 50+ you can extend your drumming career or hobby. Thanks and compliments to Drumeo for the great and inspiring drum lessons.",
+                "fullTestimonial" => "Due to injuries, I was coming close to a final stop in my drumming. I had to find a way to relax my playing and get new techniques because I want to play until I’m 85 and older. Drum Technique Made Easy was an investment for my drumming life: a world-class instructor with 26-weeks of detailed instruction. If you are young, you can grow to new heights you never imagined — and if you are 50+ you can extend your drumming career or hobby. Thanks and compliments to Drumeo for the great and inspiring drum lessons.",
                 "name" => "Henk-Jan Wormgoor",
                 "location" => "Netherlands"
                 ])
@@ -382,7 +382,7 @@
                 @include('drumeo.products.partials._testimonial', [
                 "avatarURL" => "https://dpwjbsxqtam5n.cloudfront.net/drum-technique-made-easy/testimonials/OwenBrown.jpg",
                 "testimonialHighlight" => "It felt so good to have the audience applauding!",
-                "fullTestimonial" => "I was one of those drummers who was just okay but had barriers that I could not break through -- and I could see certain things that I needed to improve in. I hoped Drum Technique Made Easy would be a part of the “open sesame” to some of the specialist techniques that professional drummers had been taught to raise them above the crowd. This proved to be the case.<br><br> The course was full on and I did struggle at times, but always managed to do most of what was shown. Most importantly, I improved my playing. I’m now able to do more, play smoother, and faster, and more articulately. My band members never said anything until one time we played Black Magic Woman. Santana often has two drummers plus at least two percussionists which I had to emulate. It felt so good to knock their socks off and have the audience applauding!<br><br> Any level player below advanced, professionally gigging & acclaimed, would find this course valuable, would see an almost instant improvement in aspects of their playing and would find it was really great value money wise.",
+                "fullTestimonial" => "I was one of those drummers who was just okay but had barriers that I could not break through — and I could see certain things that I needed to improve in. I hoped Drum Technique Made Easy would be a part of the “open sesame” to some of the specialist techniques that professional drummers had been taught to raise them above the crowd. This proved to be the case.<br><br> The course was full on and I did struggle at times, but always managed to do most of what was shown. Most importantly, I improved my playing. I’m now able to do more, play smoother, and faster, and more articulately. My band members never said anything until one time we played Black Magic Woman. Santana often has two drummers plus at least two percussionists which I had to emulate. It felt so good to knock their socks off and have the audience applauding!<br><br> Any level player below advanced, professionally gigging & acclaimed, would find this course valuable, would see an almost instant improvement in aspects of their playing and would find it was really great value money wise.",
                 "name" => "Owen Brown",
                 "location" => "Melbourne, Australia"
                 ])

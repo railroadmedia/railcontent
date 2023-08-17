@@ -16,9 +16,9 @@
     /song-in-an-hour/your-challenge/7
 @stop
 
-@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-5.png')
+@section('prev-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=95/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-5.png')
 
-@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=85/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-7.png')
+@section('next-thumb', 'https://www.musora.com/musora-cdn/image/width=800,q_60,quality=95/https://d1923uyy6spedc.cloudfront.net/Guitar-Quest-1-7.png')
 
 @section('assignments')
     <p class="mb-2 sm:mb-3 bg-yellow px-2 inline-block rounded-md">Interactive sheet music is optional. <br class="hidden sm:inline lg:hidden"> To complete your challenge in one-hour, only practice-along with the video.</p>
@@ -40,7 +40,7 @@
 @section('assets')
     @include('guitareo.lead-gen.song-in-an-hour._assignment-resources', [
         "title" => "Sheet Music",
-        "pdfURL" => "https://www.musora.com/musora-cdn/image/width=1760,q_60,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/6.png"
+        "pdfURL" => "https://www.musora.com/musora-cdn/image/width=1760,q_60,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/song-in-an-hour/6.png"
     ])
     @include('guitareo.lead-gen.song-in-an-hour._assignment-resources', [
         "title" => "Practice Both Chords In Time",

@@ -1,6 +1,6 @@
 <div
     class="dropdown text-center rounded-xl mb-3 select-none text-black"
-    x-data="{ open: @if($key === 0) true @else false @endif }"
+    x-data="{ open: @if($key === 2) true @else false @endif }"
     style="background:linear-gradient(180deg, #F1F7FE 0%, rgba(241, 247, 254, 0.00) 100%);"
 >
     <div class="flex">
@@ -45,7 +45,7 @@
                 <div class="@if(!empty($info['desc'])) p-4 @endif rounded-xl flex flex-col md:flex-row mb-2 md:items-center">
                     <img
                         class="rounded-xl @if(empty($info['desc'])) md:h-24 @else mb-6 md:mb-0 md:h-36 lg:h-48 @endif transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=650,quality=85/{{$info['thumb']}}"
+                        src="https://www.musora.com/musora-cdn/image/width=650,quality=95/{{$info['thumb']}}"
                         alt="lesson{{$key+1}} thumb"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"

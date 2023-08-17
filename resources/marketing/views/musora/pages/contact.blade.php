@@ -16,6 +16,10 @@
             color:inherit!important;
         }
     </style>
+
+    <script type="text/javascript">!function(e,t,n){function a(){var e=t.getElementsByTagName("script")[0],n=t.createElement("script");n.type="text/javascript",n.async=!0,n.src="https://beacon-v2.helpscout.net",e.parentNode.insertBefore(n,e)}if(e.Beacon=n=function(t,n,a){e.Beacon.readyQueue.push({method:t,options:n,data:a})},n.readyQueue=[],"complete"===t.readyState)return a();e.attachEvent?e.attachEvent("onload",a):e.addEventListener("load",a,!1)}(window,document,window.Beacon||function(){});
+    </script>
+    <script type="text/javascript">window.Beacon('init', 'e8d02e5b-8d06-4b6c-ae78-f2ca95d81b59')</script>
 @endsection
 
 <!-- Main -->
@@ -25,7 +29,7 @@
     <section class="py-16 md:py-20 text-white text-center relative bg-[#030814] px-4 md:px-0">
         <div class="container mx-auto relative z-0 max-w-xl md:max-w-none">
             <h3><strong>Advice and answers from the Musora team</strong></h3>
-            <p class="my-4">Find an answer on your own or get in touch with your dedicated Musora Mentor.</p>
+            <p class="my-4">Find an answer on your own or get in touch with our support team.</p>
             <div>
                 <form onsubmit="handleSearch(event)">
                     <input class="border-2 border-white rounded-full py-3 pl-4 text-black md:max-w-lg w-full mr-2 md:mr-0 mb-2 md:mb-0" placeholder="Search the knowledgebase" id="searchInput" />
@@ -41,45 +45,51 @@
             <div class="grid grid-cols-2 md:grid-cols-3
 {{--            lg:grid-cols-4 --}}
             gap-3 sm:gap-4">
-                <a href="https://help.musora.com/article/1034-musora-membership-options" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fal fa-toggle-on text-3xl md:text-4xl mb-3"></i>
+                <div  class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9 relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="fa-light fa-toggle-on text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Membership options</p>
                     <p class="text-sm">What different types of memberships are available? </p>
-                </a>
-                <a href="https://help.musora.com/article/981-do-you-have-a-curriculum" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fal fa-book-open text-3xl md:text-4xl mb-3"></i>
+                    <a href="#" data-beacon-article-sidebar="64272ebf8fe95055b525a84d" class="absolute inset-0" aria-label="Membership options"></a>
+                </div>
+                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9 relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="fa-light fa-book-open text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Lesson curriculum</p>
                     <p class="text-sm">Do you have a specific lesson curriculum?</p>
-                </a>
-                <a href="https://help.musora.com/article/946-how-do-i-track-my-shipment" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fal fa-truck-fast text-3xl md:text-4xl mb-3"></i>
+                    <a href="#" data-beacon-article-sidebar="637fe0fc6eb6095a0543930a" class="absolute inset-0" aria-label="Lesson curriculum"></a>
+                </div>
+                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9 relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="fa-light fa-truck-fast text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Shipment tracking</p>
                     <p class="text-sm">I ordered a product from you, how can I track my shipment?</p>
-                </a>
-                <a href="https://help.musora.com/article/1061-what-is-the-difference-between-your-free-and-paid-content" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fal fa-tag text-3xl md:text-4xl mb-3"></i>
+                    <a href="#" data-beacon-article-sidebar="634b2901927a2c1634dfac43" class="absolute inset-0" aria-label="Shipment tracking"></a>
+                </div>
+                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9 relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="fa-light fa-tag text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Free and paid</p>
                     <p class="text-sm">What’s the difference between free and paid content?</p>
-                </a>
-                <a href="https://help.musora.com/article/1062-what-are-the-terms-for-your-refund-policy" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fal fa-badge-check text-3xl md:text-4xl mb-3"></i>
+                    <a href="#" data-beacon-article-sidebar="6467ad5b67acd170a44c2eb8" class="absolute inset-0" aria-label="Free and paid"></a>
+                </div>
+                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9 relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="fa-light fa-badge-check text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">90-day guarantee</p>
                     <p class="text-sm">What are the terms for your refund guarantee? </p>
-                </a>
-                <a href="https://help.musora.com/article/1063-do-you-cover-customs-fees" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
-                    <i class="fal fa-hand-holding-dollar text-3xl md:text-4xl mb-3"></i>
+                    <a href="#" data-beacon-article-sidebar="6467b2256413a34741154344" class="absolute inset-0" aria-label="90-day guarantee"></a>
+                </div>
+                <div class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9 relative" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">
+                    <i class="fa-light fa-hand-holding-dollar text-3xl md:text-4xl mb-3"></i>
                     <p class="font-bold mb-1 text-sm">Customs fees</p>
                     <p class="text-sm">Does Musora cover customs fees?</p>
-                </a>
-{{--                <a href="TODO" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">--}}
-{{--                    <i class="fal fa-trophy text-3xl md:text-4xl mb-3"></i>--}}
+                    <a href="#" data-beacon-article-sidebar="6467b51367acd170a44c2ef9" class="absolute inset-0" aria-label="Customs fees"></a>
+                </div>
+{{--                <a href="" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">--}}
+{{--                    <i class="fa-light fa-trophy text-3xl md:text-4xl mb-3"></i>--}}
 {{--                    <p class="font-bold mb-1 text-sm"> Learning outcomes</p>--}}
-{{--                    <p class="text-sm">TODO</p>--}}
+{{--                    <p class="text-sm"></p>--}}
 {{--                </a>--}}
-{{--                <a href="TODO" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">--}}
-{{--                    <i class="fal fa-desktop text-3xl md:text-4xl mb-3"></i>--}}
+{{--                <a href="" class="bg-[#030814] text-white text-center rounded-xl px-3 py-6 sm:py-9" style="box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.25);">--}}
+{{--                    <i class="fa-light fa-desktop text-3xl md:text-4xl mb-3"></i>--}}
 {{--                    <p class="font-bold mb-1 text-sm">Online or in-person lessons?</p>--}}
-{{--                    <p class="text-sm">TODO</p>--}}
+{{--                    <p class="text-sm"></p>--}}
 {{--                </a>--}}
             </div>
         </div>
@@ -89,7 +99,7 @@
         <div class="container max-w-3xl mx-auto text-center">
             <h3><strong>Reach Out Directly</strong></h3>
             <p class="mt-4 mb-5 text-sm md:text-base max-w-3xl mx-auto">
-                Get in touch with your dedicated Musora Mentor!
+                Get in touch with our support team!
             </p>
             <div class="text-left">
                 <contact-email-form-marketing
@@ -98,7 +108,7 @@
                     email-subject="Support Request From Musora"
                     email-type="support-contact"
                     email-endpoint="{{url()->route('mailora.public.send') }}"
-                    email-logo="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://d3fzm1tzeyr5n3.cloudfront.net/musora/logo.png"
+                    email-logo="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://d3fzm1tzeyr5n3.cloudfront.net/musora/logo.png"
                     input-label="Report your issue here.."
                     recipient="support@musora.com"
                     success-message="Your email has been sent!"
@@ -157,4 +167,7 @@
     <script src="{{ mix('platform/js/manifest.js') }}"></script>
     <script src="{{ mix('platform/js/vendor.js') }}"></script>
     <script src="{{ mix('platform/js/app.js') }}"></script>
+    <script>
+
+    </script>
 @endsection

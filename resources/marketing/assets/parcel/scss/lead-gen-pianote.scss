@@ -5,37 +5,92 @@ html {
   box-sizing: border-box;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: $opensans;
+h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong, td strong {
+    font-weight: 900;
+}
+
+h1, h2, h3, h4, h5, h6, li, p {
+    font-weight: 400;
+    line-height: 1em;
+    font-family: $opensans;
+    margin: 0 auto;
+
+    sup {
+        font-size: 50%;
+        top: -0.75em;
+    }
 }
 
 h1 {
-  font-weight: 700;
-  font-size: 25px;
-  line-height: 1.1em;
-  margin: 0 auto 5px;
-  @include tablet {
+    line-height: 1.2em;
     font-size: 30px;
-  }
-  @include desktopOld {
-    font-size: 35px;
-  }
+    @include tablet {
+        font-size: 36px;
+    }
+    @include desktop {
+        font-size: 48px;
+    }
+}
+
+h2 {
+    line-height: 1.2em;
+    font-size: 24px;
+    @include tablet {
+        font-size: 30px;
+    }
+    @include desktop {
+        font-size: 36px;
+    }
 }
 
 h3 {
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1em;
-  margin: 0 auto 35px;
-  @include tablet {
-    font-size: 18px;
-    margin: 0 auto 40px;
-  }
-  @include desktopOld {
-    font-size: 21px;
-    margin: 0 auto 55px;
-  }
+    font-size: 20px;
+    @include tablet {
+        font-size: 24px;
+    }
+    @include desktop {
+        font-size: 30px;
+    }
 }
+
+h4 {
+    font-size: 18px;
+    @include tablet {
+        font-size: 20px;
+    }
+    @include desktop {
+        font-size: 24px;
+    }
+}
+
+h5 {
+    font-size: 16px;
+    @include tablet {
+        font-size: 18px;
+    }
+    @include desktop {
+        font-size: 20px;
+    }
+}
+
+h6 {
+    font-size: 15px;
+    @include tablet {
+        font-size: 16px;
+    }
+    @include desktop {
+        font-size: 18px;
+    }
+}
+
+p, li {
+    line-height: 1.6em;
+    font-size: 15px;
+    @include desktop {
+        font-size: 16px;
+    }
+}
+
 
 img {
   display: inline-block;
@@ -445,8 +500,7 @@ a:focus {
 }
 
 .infusion-form button {
-  font-family: $robotocondensed;
-  font-weight: 700;
+  font-family: $bebas;
   text-transform: uppercase;
   margin: 0 auto 15px;
   text-align: center;

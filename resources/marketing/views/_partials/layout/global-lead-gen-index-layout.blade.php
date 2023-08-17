@@ -25,7 +25,7 @@
         <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap py-2 sm:py-1 fixed mx-auto bg-black text-white z-[100]">
             <div class="container mx-auto">
                 <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
-                    <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=300,q_60,quality=85/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
+                    <img class="align-middle w-auto mr-2 h-6 hidden sm:inline-block" src="https://www.musora.com/musora-cdn/image/width=300,q_60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-white.png">
                     <p class="inline-block align-middle mx-auto text-xs leading-tight">Get {{ Prices::$drumeoPlayAlongs }}+ more play-alongs + world-class drum  <br>
                         lessons inside Drumeo. Click for a FREE trial.</p>
                 </div>
@@ -78,9 +78,30 @@
         @if($leadgen->slug === 'getting-started/lessons')
             @include('drumeo.lead-gen.partials.free-trial', [
                 'gsotd' => true,
+                'header' => 'Start playing your favorite songs',
+                'subHeader' => 'Try Drumeo’s Songs section <br class="sm:hidden">free for 7 days.',
+                'benefits' => ['5000+ Note-for-note songs', 'Lessons with your favorite drummers', 'Live support & clinics'],
+                'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums.png',
+                'mobileImg' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums-m.png',
             ])
         @else
-            @include('drumeo.lead-gen.partials.free-trial')
+            @include('drumeo.lead-gen.partials.free-trial', [
+                'header' => 'Test your speed out with real music.',
+                'subHeader' => 'Try Drumeo’s Songs section <br class="sm:hidden">free for 7 days.',
+                'benefits' => ['5000+ Note-for-note songs', 'Lessons with your favorite drummers', 'Live support & clinics'],
+                'img' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums.png',
+                'mobileImg' => 'https://dpwjbsxqtam5n.cloudfront.net/lead-gen/albums-m.png',
+            ])
+        @endif
+    @elseif($theme === 'pianote')
+        @if($leadgen->slug === 'blues-bootcamp/lessons' || $leadgen->slug === 'getting-started/lessons' || $leadgen->slug === 'chord-hacks/lessons')
+            @include('drumeo.lead-gen.partials.free-trial', [
+                'header' => 'You’ve started playing the piano. Now take the next step.',
+                'subHeader' => 'TRY PIANOTE FREE FOR 7 DAYS AND GET:',
+                'benefits' => ['The perfect step-by-step curriculum', 'Beginner-friendly song tutorials', 'Live support from REAL teachers'],
+                'img' => 'https://pianote.s3.amazonaws.com/products/30-day-blues-piano/collage-lessons.png',
+                'mobileImg' => 'https://pianote.s3.amazonaws.com/products/30-day-blues-piano/collage-lessons-m.png',
+            ])
         @endif
     @endif
 @endsection

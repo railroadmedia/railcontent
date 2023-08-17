@@ -7,6 +7,19 @@ use App\Http\Controllers\BaseController;
 class MarketingController extends BaseController
 {
 
+    public function homepage()
+    {
+        return view('musora.homepage', ['theme' => 'musora']);
+    }
+    public function sixReasons()
+    {
+        return view('musora.pages.6-reasons', ['theme' => 'musora']);
+    }
+
+    public function handbook()
+    {
+        return view('musora.handbook');
+    }
     public function terms()
     {
         return view('musora.pages.terms');
@@ -45,6 +58,11 @@ class MarketingController extends BaseController
     public function unified2022()
     {
         return view('musora.pages.unified-2022', [ 'theme' => 'musora']);
+    }
+
+    public function mentors()
+    {
+        return view('musora.pages.mentors', [ 'theme' => 'musora']);
     }
 
     public function playlists()

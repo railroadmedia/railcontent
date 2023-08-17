@@ -9,7 +9,7 @@
         <div class="flex flex-wrap">
             @foreach ($lessons as $key => $lesson)
                 <div class="mb-4 px-3 md:px-4 md:w-1/2 lg:w-1/3 lesson-thumbnail @if(!empty($lesson['details'])) with-details @endif">
-                    <div class="cursor-pointer" @if(!empty($lesson['locked'])) data-open="getAccess" @elseif(!empty($lesson['Url'])) href="{{ $lesson['Url'] }}" @endif>
+                    <div @if(empty($lesson['locked'])) class="cursor-pointer" @endif @if(!empty($lesson['Url'])) href="{{ $lesson['Url'] }}" @endif>
                         <div class="thumb">
                             @if(!empty($lesson['badgeText']))
                                 <span class="badge" @if(!empty($lesson['badgeBgColor'])) style="background:{{ $lesson['badgeBgColor'] }};" @endif>
@@ -30,9 +30,9 @@
                                 </div>
                             @endif
                             <picture>
-                                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=85/{{ $lesson['imgUrl'] }}">
-                                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/{{ $lesson['imgUrl'] }}">
-                                <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/{{ $lesson['imgUrl'] }}" alt="lesson-{{ $key + 1 }}">
+                                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=550,quality=95/{{ $lesson['imgUrl'] }}">
+                                <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=95/{{ $lesson['imgUrl'] }}">
+                                <img class="w-full" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/{{ $lesson['imgUrl'] }}" alt="lesson-{{ $key + 1 }}">
                             </picture>
                         </div>
                     </div>

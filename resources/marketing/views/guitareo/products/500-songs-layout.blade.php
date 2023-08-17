@@ -142,7 +142,7 @@
                     <div class="top-badge">DAY 4</div>
                 </div>
                 <p><strong>The “Other” Chords</strong><br>
-                    Master chord variations to really impact your playing. Gain a deeper understanding of inversions, slash, and suspended chords -- and even more importantly -- how to use them in songs.
+                    Master chord variations to really impact your playing. Gain a deeper understanding of inversions, slash, and suspended chords — and even more importantly — how to use them in songs.
                 </p>
             </div>
             <div class="day-slice">
@@ -256,7 +256,7 @@
         <div class="row">
             <p><span class="first-letter">N</span>ate Savage is trusted by guitarists around the world for his popular YouTube lessons and organized training programs including The Guitar System, Acoustic Guitar Made Easy, Guitar Technique Made Easy, and The Guitareo Membership.
                 <br><br>
-                And now, he's partnering with his talented wife, Chelsea Amber -- a touring singer and songwriter -- to help guitarists gain an advantage for learning and playing songs faster!
+                And now, he's partnering with his talented wife, Chelsea Amber — a touring singer and songwriter — to help guitarists gain an advantage for learning and playing songs faster!
                 <br><br>
                 "Being able to learn and play songs quickly is vital," says Nate. "If you're just starting out, you need to learn songs faster to gain momentum and fall in love with this instrument. And if you're a more established guitarist, knowing how to learn songs quickly will help you land more gigs and play with more confidence anywhere you go."
                 <br><br>

@@ -46,47 +46,41 @@
             <a href="#perks" class="anchor-slide"><h6 class="font-bebas mr-3 sm:mr-0">OUR PERKS</h6></a>
         </div>
         {{-- <a class="join gradient-outline fill-white smaller whitespace-nowrap anchor-slide relative" href="#join">APPLY NOW</a> --}}
-        <a class="join gradient-outline fill-white smaller whitespace-nowrap anchor-slide bg-white bg-clip-padding relative rounded-full text-drumeo hover:bg-musora hover:text-white py-2 px-3 md:py-3 md:px-5 text-sm tracking-widest font-medium border-musora" href="#join">APPLY NOW</a>
+        <a class="join gradient-outline smaller whitespace-nowrap anchor-slide relative rounded-full bg-white text-musora hover:text-black py-2 px-3 md:py-3 md:px-5 text-sm tracking-widest font-medium border-2 border-musora" href="#join">APPLY NOW</a>
     </div>
     <div class="w-full h-10 sm:h-12 lg:h-14"></div>
-    <header class="pb-24 sm:pb-32 pt-32 sm:pt-40 text-white text-center relative">
-        <img src="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/header-image.jpg"
-             class="absolute object-cover transition-opacity opacity-0 top-0 left-0 w-full h-full z-[-2]"
-             loading="lazy"
-             onload="this.classList.remove('opacity-0')"
-             alt="header image"
-        />
+    <header class="pb-24 sm:pb-32 pt-32 sm:pt-40 text-white text-center relative" style="background-color:#0c1524;">
         <div class="container mx-auto">
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
+                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo blue"
             >
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png"
+                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo red"
             >
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png"
+                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d122ay5chh2hr5.cloudfront.net/sales/guitareo-logo-green.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="logo green"
             >
             <img
                 class="h-5 md:h-6 mx-1 md:mx-2 inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png"
+                src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2021/singeo-logo.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="singeo logo"
             >
             <h1 class="mt-2 mb-11"><strong>Careers at Musora</strong></h1>
-            <a class="btn-primary btn-small bg-white text-drumeo rounded-full py-2 px-6 md:py-3 md:px-7 tracking-widest text-sm" href="#join">APPLY NOW</a>
+            <a class="join bg-musora text-black" href="#join">APPLY NOW</a>
         </div>
     </header>
     <div id="values" class="anchor block relative invisible"></div>
@@ -97,37 +91,19 @@
 
             <div class="flex flex-wrap items-start max-w-xs md:max-w-none mx-auto px-6 md:px-0">
                 <div class="w-full md:w-1/3 px-2 lg:px-5 mb-5 sm:mb-0">
-                    <img
-                        class="h-10 inline-block transition-opacity opacity-0"
-                        src="https://dmmior4id2ysr.cloudfront.net/careers/empathy--icon.svg"
-                        alt="empathy icon"
-                        loading="lazy"
-                        onload="this.classList.remove('opacity-0')"
-                    >
+                    <i class="far fa-heart-pulse inline-block text-musora text-4xl"></i>
                     <h5 class="mt-3 mb-1"><strong>Empathy</strong></h5>
                     <p class="text-gray-500"><span class="text-black uppercase inline-block mt-1 mb-1 lg:mb-2 text-sm">caring, thoughtful,<br class="inline lg:hidden"> humble.</span><br>
                         We listen deeply, ask questions, and celebrate achievements. Students know that we care.</p>
                 </div>
                 <div class="w-full md:w-1/3 px-2 lg:px-5 mb-5 sm:mb-0">
-                    <img
-                        class="h-10 inline-block transition-opacity opacity-0"
-                        src="https://dmmior4id2ysr.cloudfront.net/careers/grit-icon.svg"
-                        alt="grit icon"
-                        loading="lazy"
-                        onload="this.classList.remove('opacity-0')"
-                    >
+                    <i class="far fa-hand-fist inline-block text-musora text-4xl"></i>
                     <h5 class="mt-3 mb-1"><strong>Grit</strong></h5>
                     <p class="text-gray-500"><span class="text-black uppercase inline-block mt-1 mb-1 lg:mb-2 text-sm">reliable, brave,<br class="inline lg:hidden"> resilient.</span><br>
                         We strive for excellence, overcome setbacks, and keep pushing. Students know that we’ll deliver.</p>
                 </div>
                 <div class="w-full md:w-1/3 px-2 lg:px-5">
-                    <img
-                        class="h-10 inline-block transition-opacity opacity-0"
-                        src="https://dmmior4id2ysr.cloudfront.net/careers/passion-icon.svg"
-                        alt="passion icon"
-                        loading="lazy"
-                        onload="this.classList.remove('opacity-0')"
-                    >
+                    <i class="far fa-fire inline-block text-musora text-4xl"></i>
                     <h5 class="mt-3 mb-1"><strong>Passion</strong></h5>
                     <p class="text-gray-500"><span class="text-black uppercase inline-block mt-1 mb-1 lg:mb-2 text-sm">creative, innovative,<br class="inline lg:hidden"> problem-solver.</span><br>
                         We care more about the impact of our work than the output. Students smile when we help them.</p>
@@ -139,14 +115,14 @@
         <div class="container mx-auto relative z-0 max-w-5xl">
             <img
                 class="-mt-40 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/collage-1-m.png"
+                src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/collage-1-ma.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="collage 1"
             >
             <img
                 class="-mt-40 hidden sm:inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/collage-1.png"
+                src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/collage-1a.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="collage 1"
@@ -154,21 +130,23 @@
             <div id="mission" class="anchor block relative invisible"></div>
             <h2 class="mt-12 sm:mt-20 mb-5"><strong>Meaningful work matters</strong></h2>
             <p class="text-[#a1afc9] text-left max-w-2xl mx-auto">
-                We believe music can change the world -- that an instrument provides a voice, and a voice empowers an individual to express themselves. So when we’re building our music lesson communities, we always put relationships before technology. It’s our job to make sure students reach their musical goals.
+                We believe music can change the world — that an instrument provides a voice, and a voice empowers an individual to express themselves. So when we’re building our music lesson communities, we always put relationships before technology. It’s our job to make sure students reach their musical goals.
                 <br><br>
-                When you join our team, you’ll join our mission to create new musicians and keep them playing longer. That means caring about the details -- the messaging, the experience, and the impact. It also means that we’ll care about you, all humans are unique and we care about ensuring that our people feel welcome, heard and appreciated. We want to make sure you’re supported in the work you do -- with perks, benefits, opportunities for growth and more! We’d love to connect with you.
+                When you join our team, you’ll join our mission to create new musicians and keep them playing longer. That means caring about the details — the messaging, the experience, and the impact. It also means that we’ll care about you, all humans are unique and we care about ensuring that our people feel welcome, heard and appreciated. We want to make sure you’re supported in the work you do — with perks, benefits, opportunities for growth and more! We’d love to connect with you.
             </p>
 
             <img
                 class="my-12 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/quote-m.png"
+                style="filter: saturate(0) brightness(10);"
+                src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/quote-m.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="quote"
             >
             <img
                 class="my-24 hidden sm:inline-block transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/quote.png"
+                style="filter: saturate(0) brightness(10);"
+                src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/quote.png"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
                 alt="quote"
@@ -178,31 +156,31 @@
             <h3 class="mb-5 sm:mb-10"><strong>Join our team:</strong></h3>
             <div class="max-w-4xl mx-auto mb-14 sm:mb-20">
                 <div class="w-full relative" style="height:700px;">
-                    <iframe style="filter: invert(1) hue-rotate(200deg);" class="absolute w-full h-full rounded-lg" src="https://musoramediainc.bamboohr.com/careers/" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
+                    <iframe style="filter: invert(1) hue-rotate(30deg) saturate(1.5);" class="absolute w-full h-full rounded-lg" src="https://musoramediainc.bamboohr.com/careers/" frameborder="0" allowfullscreen allow="autoplay" title="musora jobs"></iframe>
                 </div>
             </div>
 
             <h3><strong>Not the right time or opportunity?</strong></h3>
             <p class="text-[#a1afc9] my-5">
-                No problem! We’re always looking for good people -- so if now isn’t the <br class="hidden md:inline">
-                right time, or there’s not an opening for what you do best -- just click the <br class="hidden md:inline">
+                No problem! We’re always looking for good people — so if now isn’t the <br class="hidden md:inline">
+                right time, or there’s not an opening for what you do best — just click the <br class="hidden md:inline">
                 link below to join our talent pool for future opportunities.
             </p>
-            <a class="join gradient-outline smaller rounded-full relative bg-musora-black py-2 px-5 md:py-3 md:px-7 hover:bg-musora border-musora" target="_blank" href="https://musoramediainc.bamboohr.com/careers/view.php?id=58">JOIN TALENT POOL <i class="fal fa-smile-plus"></i></a>
+            <a class="join bg-musora text-black" target="_blank" href="https://musoramediainc.bamboohr.com/careers/58">JOIN TALENT POOL <i class="fa-light fa-smile-plus"></i></a>
         </div>
     </section>
     <section class="py-12 sm:py-16 lg:py-20 px-4 sm:px-5 relative">
         <div class="container mx-auto max-w-5xl">
             <img
                 class="-mt-96 inline-block sm:hidden transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/collage-2-m.png"
+                src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/collage-2-m.png"
                 alt="collage 2"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
             >
             <img
                 class="-mt-96 hidden sm:inline-block"
-                src="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dmmior4id2ysr.cloudfront.net/careers/collage-2.png"
+                src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/careers/collage-2.png"
                 alt="collage 2"
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
@@ -211,19 +189,19 @@
             <h2 class="mt-12 sm:mt-20 mb-5 text-center"><strong>Our hiring process</strong></h2>
             <div class="max-w-2xl mx-auto relative">
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
-                    <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">1</h6>
+                    <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">1</h6>
                     <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
                         Once you apply for a role, you will be automatically notified that we received your application.
                     </p>
                 </div>
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
-                    <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">2</h6>
+                    <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">2</h6>
                     <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
                         Sometimes there’s a short assignment or test (role dependent). The order of the hiring process may be impacted by this.
                     </p>
                 </div>
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
-                    <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">3</h6>
+                    <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">3</h6>
                     <div class="pl-4 sm:pl-7 mt-4">
                         <p class="m-0 text-gray-500">
                             If you are selected, our Talent Acquisition Team will set up a 30-minute phone or video interview. Here are a few things we might ask:
@@ -236,36 +214,36 @@
                     </div>
                 </div>
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
-                    <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">4</h6>
+                    <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">4</h6>
                     <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
                         At least one additional 30-60 minute Interview with the hiring manager. To prepare for this, we suggest reading through the job description to understand how your experience relates to the role.  We also want to know why you want to work here.
                     </p>
                 </div>
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
-                    <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">5</h6>
+                    <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">5</h6>
                     <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
                         Reference checks (we ask for three professional references) - these are collected earlier on but are only used if the candidate is in the final stages of the hiring process.
                     </p>
                 </div>
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
-                    <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">6</h6>
+                    <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">6</h6>
                     <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
                         Sometimes there’s an additional interview with the CEO/COO and/or another team member (role-dependent).
                     </p>
                 </div>
                 <div class="flex items-start relative z-10 mb-5 sm:mb-7">
-                    <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">7</h6>
+                    <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">7</h6>
                     <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
                         If you make it to the final stage, the Talent Acquisition Team will contact you and tell you a bit about a Granted program we’ve piloted to see if you’re eligible for a grant.
                     </p>
                 </div>
                 <div class="flex items-start relative z-10">
-                    <h6 class="m-0 px-5 py-3 border-musora before:m-[-1px] relative bg-white rounded-full">8</h6>
+                    <h6 class="m-0 px-5 py-2.5 border-2 border-musora before:m-[-1px] relative bg-white rounded-full">8</h6>
                     <p class="pl-4 sm:pl-7 mt-4 m-0 text-gray-500">
                         A written offer will be sent for you to sign!
                     </p>
                 </div>
-                <div class="absolute h-full top-0 left-6 ml-0.5 z-0" style="width: 1px;background-color:#940fe6;"></div>
+                <div class="absolute h-full top-0 left-6 z-0 bg-musora" style="width: 2px;"></div>
             </div>
         </div>
     </section>
@@ -281,7 +259,7 @@
                         [
                         "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/health-icon.svg",
                         "title" => "Health Benefits",
-                        "description" => "Our people matter -- so you’ll gain access to a benefits package including health, dental, and vision.",
+                        "description" => "Our people matter — so you’ll gain access to a benefits package including health, dental, and vision.",
                         ],
                         [
                         "icon" => "https://dmmior4id2ysr.cloudfront.net/careers/mental-icon.svg",
@@ -342,7 +320,7 @@
                 @endphp
                 @foreach($points as $point)
                     <div class="flex items-start w-full sm:w-1/2 m:px-2 lg:px-10 mb-6 sm:mb-9 text-left">
-                        <div class="w-12 sm:w-14 lg:w-16 flex-shrink-0"><img class="h-6 sm:h-7" src="{!! $point['icon'] !!}" alt="{{ $point['title'] }} icon"></div>
+                        <div class="w-12 sm:w-14 lg:w-16 flex-shrink-0"><img class="h-6 sm:h-7" style="filter: saturate(0) brightness(10);" src="{!! $point['icon'] !!}" alt="{{ $point['title'] }} icon"></div>
                         <div>
                             <h5 class="leading-tight mb-2"><strong>{!! $point['title'] !!}</strong></h5>
                             <p class="text-[#a1afc9]">{!! $point['description'] !!}</p>

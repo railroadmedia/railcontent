@@ -230,7 +230,7 @@ class ProfileSettingsPagesController extends BaseController
             ->respond()
             ->getContent();
 
-        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.' . brand() . '.stripe_publishable_key');
+        $stripePublishableKey = config('ecommerce.payment_gateways.stripe.musora.stripe_publishable_key');
 
         $membershipProductIds = ProductModel::query()
             ->where([
@@ -792,18 +792,7 @@ class ProfileSettingsPagesController extends BaseController
         if (!$subscription) {
             return $this->returnRedirect(false);
         }
-
-        // determine if the subscription is a trial
-        $isTrial = false;
-        if ($subscription->getProduct()) {
-            $isTrial = in_array($subscription->getProduct()->getId(), self::TRIAL_MEMBERSHIP_PRODUCT_IDS);
-        } else {
-            error_log(
-                'User ' . user()->id . ' has a subscription (id ' . $subscription->getId() .
-                ') without an attached product (in \App\Http\Controllers\Platform\ProfileSettingsPagesController::su' .
-                ' bmitCancelReason).'
-            );
-        }
+        $isUnpaidTrial = $this->isUnpaidTrial($subscription);
 
         /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
          * store in session because we don't yet need it. We'll present the student with an offer, and if they     *
@@ -820,7 +809,7 @@ class ProfileSettingsPagesController extends BaseController
 
 
         // if they claimed retention(win-back) offer recently don't offer it again, instead go right to cancelling
-        if (ProductAccessMap::hasClaimedRetentionOfferWithin(user()) || $isTrial) {
+        if (ProductAccessMap::hasClaimedRetentionOfferWithin(user()) || $isUnpaidTrial) {
             return $this->cancel($request);
         }
 
@@ -1568,5 +1557,21 @@ class ProfileSettingsPagesController extends BaseController
         }
 
         return $subscriptionToUpdate;
+    }
+
+    public function isUnpaidTrial(Subscription $subscription): bool
+    {
+        $isTrial = false;
+        if ($subscription->getProduct()) {
+            $isTrial = in_array($subscription->getProduct()->getId(), self::TRIAL_MEMBERSHIP_PRODUCT_IDS)
+                && $subscription->getTotalCyclesPaid() == 0;
+        } else {
+            error_log(
+                'User ' . user()->id . ' has a subscription (id ' . $subscription->getId() .
+                ') without an attached product (in \App\Http\Controllers\Platform\ProfileSettingsPagesController::su' .
+                ' bmitCancelReason).'
+            );
+        }
+        return $isTrial;
     }
 }

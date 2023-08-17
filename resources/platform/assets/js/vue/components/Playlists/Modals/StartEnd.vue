@@ -63,11 +63,9 @@
         };
         //Update UI
         playlistsStore.updatePlaylistItem({
-            user_playlist_item_id: props.data.user_playlist_item_id,
-            index: props.index,
-            start: payload.start_second,
-            end: payload.end_second
-        })
+            ...props.data,
+            ...payload,
+        });
         //Send Request
         PlaylistService.updatePlaylistItem(payload, token)
             .then(function(response) {
@@ -157,11 +155,11 @@
         <div class="tw-pt-[30px] tw-flex tw-justify-end tw-w-full">
             <!-- Close Modal -->
             <button @click="() => emit('onCloseModal')"
-                    class="tw-btn-secondary tw-text-[#002039] dark:tw-text-white tw-mr-4 tw-w-[218px]">
+                    class="tw-btn-secondary tw-mr-4 tw-w-[218px] tw-text-[#00101D] dark:tw-text-white tw-border-2 tw-border-[#000C17] dark:tw-border-white tw-bg-white dark:tw-bg-[#00101D] hover:tw-bg-[#00101D] hover:tw-text-white dark:hover:tw-bg-white dark:hover:tw-text-[#00101D]">
                     CANCEL
             </button>
             <!-- Delete Lesson -->
-            <button :class="`tw-mb-2 tw-ml-auto tw-btn-primary tw-bg-${brand} tw-px-[30px] tw-w-[218px]`"
+            <button :class="`tw-mb-2 tw-ml-auto tw-btn-primary tw-px-[30px] tw-w-[218px] tw-text-white dark:tw-text-[#00101D] tw-bg-[#00101D] dark:tw-bg-white hover:tw-bg-[#3F3F46] dark:hover:tw-bg-[#223F57] dark:hover:tw-text-white`"
                     @click.prevent="handleConfirm()"
             >
                 SAVE

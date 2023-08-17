@@ -17,14 +17,21 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
     Route::get('/destupefying-your-weak-hand', [LeadGenController::class, 'destupefy'] );
     Route::get('/drum-set-maintenance', [LeadGenController::class, 'drumSetMaintenance']);
     Route::get('/drum-technique-made-easy/testimonials', [LeadGenController::class, 'dtmeTestimonials']);
-    Route::get('/faster', [LeadGenController::class, 'faster']);
     Route::get('/fwtgf', [LeadGenController::class, 'fasterNeon']);
+    Route::group(['prefix' => 'faster'],
+        function () {
+            Route::get('/{page?}', LeadGenController::class . '@faster')
+                ->whereIn('page', [
+                    null, 'thank-you', 'ty-annual', 'ty-monthly'
+                ]);
+        }
+    );
     Route::get('/gavins-grooves', [LeadGenController::class, 'gavinsGrooves']);
     Route::group(['prefix' => 'getting-started'],
         function () {
             Route::get('/{page?}', LeadGenController::class . '@gstd')
                 ->whereIn('page', [
-                    null, 'thank-you', '10-practice'
+                    null, 'thank-you', '10-practice', 'ty-annual', 'ty-monthly'
                 ]);
         }
     );

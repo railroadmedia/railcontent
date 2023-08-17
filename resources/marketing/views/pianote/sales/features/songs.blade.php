@@ -66,7 +66,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -117,7 +117,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -168,7 +168,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -219,7 +219,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -265,7 +265,7 @@
 {{--                                <div>--}}
 {{--                                    <img--}}
 {{--                                        class="rounded-xl mb-1 transition-opacity opacity-0"--}}
-{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"--}}
+{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"--}}
 {{--                                        alt="{{$slide['title']}} img"--}}
 {{--                                        loading="lazy"--}}
 {{--                                        onload="this.classList.remove('opacity-0')"--}}
@@ -311,7 +311,7 @@
 {{--                                <div>--}}
 {{--                                    <img--}}
 {{--                                        class="rounded-xl mb-1 transition-opacity opacity-0"--}}
-{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"--}}
+{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"--}}
 {{--                                        alt="{{$slide['title']}} img"--}}
 {{--                                        loading="lazy"--}}
 {{--                                        onload="this.classList.remove('opacity-0')"--}}
@@ -362,7 +362,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -413,7 +413,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -464,7 +464,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -515,7 +515,7 @@
                                 <div>
                                     <img
                                         class="rounded-xl mb-1 transition-opacity opacity-0"
-                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"
+                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"
                                         alt="{{$slide['title']}} img"
                                         loading="lazy"
                                         onload="this.classList.remove('opacity-0')"
@@ -561,7 +561,7 @@
 {{--                                <div>--}}
 {{--                                    <img--}}
 {{--                                        class="rounded-xl mb-1 transition-opacity opacity-0"--}}
-{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=85/{{$slide['img']}}"--}}
+{{--                                        src="https://www.musora.com/musora-cdn/image/width=250,quality=95/{{$slide['img']}}"--}}
 {{--                                        alt="{{$slide['title']}} img"--}}
 {{--                                        loading="lazy"--}}
 {{--                                        onload="this.classList.remove('opacity-0')"--}}

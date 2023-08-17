@@ -81,11 +81,11 @@
         <div class="max-w-md md:max-w-4xl mx-auto md:flex md:items-center text-white md:gap-10 px-6 lg:px-0">
             <div class="md:w-1/2 text-center md:text-left">
                 <picture>
-                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-pack/logo_left_light.png">
-                    <img class="h-24 lg:h-32 rounded-b-md lazyload mb-3" data-src="https://www.musora.com/musora-cdn/image/width=460,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-pack/logo_center_light.png" alt="logo">
+                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-pack/logo_left_light.png">
+                    <img class="h-24 lg:h-32 rounded-b-md lazyload mb-3" data-src="https://www.musora.com/musora-cdn/image/width=460,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-pack/logo_center_light.png" alt="logo">
                 </picture>
                 <div class="relative md:hidden">
-                    <img class="rounded-xl mb-4" src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-pack/header_thumb_m.jpg" alt="header thumb">
+                    <img class="rounded-xl mb-4" src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-pack/header_thumb_m.jpg" alt="header thumb">
 {{--                    <div class="absolute uppercase bg-white text-black rounded-full pb-1 pt-1.5 px-4 font-bebas bottom-6 left-2 cursor-pointer autoplay-video text-sm" data-open="trailer">--}}
 {{--                        <i class="fa-solid fa-play mr-1"></i> play video--}}
 {{--                    </div>--}}
@@ -97,7 +97,7 @@
                 </div>
             </div>
             <div class="md:w-1/2 hidden md:block relative">
-                <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-pack/header_thumb.jpg" alt="header thumb">
+                <img class="rounded-xl" src="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-pack/header_thumb.jpg" alt="header thumb">
 {{--                <div class="absolute uppercase bg-white text-black rounded-full pb-1 pt-2 px-6 font-bebas bottom-3 lg:bottom-4 left-4 lg:left-6 autoplay-video cursor-pointer" data-open="trailer">--}}
 {{--                    <i class="fa-solid fa-play mr-1"></i> play video--}}
 {{--                </div>--}}
@@ -130,7 +130,7 @@
                 </div>
             </div>
             <div class="absolute md:relative left-0 right-0 md:w-2/5 flex justify-center md:block">
-                <img class="h-72 md:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-pack/notepad.png" alt="note pad">
+                <img class="h-72 md:h-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-pack/notepad.png" alt="note pad">
             </div>
         </div>
     </section>
@@ -170,7 +170,7 @@
         <div class="max-w-md md:max-w-4xl mx-auto text-center px-6 lg:px-0">
             <h3 class="font-extrabold mb-4">How does it work?</h3>
             <p class="md:max-w-lg lg:max-w-xl mb-6">
-                It’s simple. You’ll get 8 step-by-step video lessons from us that will show you exactly what to do -- and better still… <br><br>
+                It’s simple. You’ll get 8 step-by-step video lessons from us that will show you exactly what to do — and better still… <br><br>
                 Exactly HOW TO PRACTICE. You’ll be able to sing along with hand-picked practice exercises after every lesson. You just have to press play.
             </p>
             @foreach($lessons as $key => $lesson)
@@ -211,7 +211,7 @@
 
     <section class="pb-12 pt-20 md:pb-20 md:pt-24 relative" style="background:#00101D;">
         <div class="absolute flex justify-center left-0 right-0 -top-12 md:-top-20 lg:-top-24">
-            <img class="h-24 md:h-32 lg:h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=280,quality=85/https://d21xeg6s76swyd.cloudfront.net/sales/2022/singeo-guarantee.png" alt="guarantee badge">
+            <img class="h-24 md:h-32 lg:h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=280,quality=95/https://d21xeg6s76swyd.cloudfront.net/sales/2022/singeo-guarantee.png" alt="guarantee badge">
         </div>
         <div class="max-w-md md:max-w-3xl mx-auto text-center text-white px-6 lg:px-0">
             <h3 class="leading-snug mb-4">
@@ -239,7 +239,7 @@
     </section>
 
     <section class="py-12 md:py-20 text-center" style="background:#F7ECFF;">
-        <img class="h-20 md:h-24 lg:h-32 mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-pack/logo_center_dark.png" alt="logo">
+        <img class="h-20 md:h-24 lg:h-32 mb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-pack/logo_center_dark.png" alt="logo">
         <h3 class="font-extrabold leading-snug md:leading-normal mb-4">
             Everything you need to <br class="md:hidden">start singing <br class="hidden md:inline">in perfect <br class="md:hidden">harmony now
         </h3>

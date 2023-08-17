@@ -8,7 +8,7 @@
     <meta property="og:description" content="Get A Professional Recording Studio At Home">
 
     <meta property="og:url" content="https://www.singeo.com/{{ Request::path() }}">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/share_image.jpg" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/share_image.jpg" style="display: none;">
 
     @include('_partials.layout._tailwindcdn')
     <link rel="stylesheet" href="{{ asset('/marketing/css/tailwind-helpers.css') }}">
@@ -188,13 +188,13 @@
 
 @section('global-body')
     @include("singeo.sales.partials._nav")
-    <header class="relative text-center text-white bg-no-repeat py-5 md:py-8 lg:py-14 px-3 sm:px-5 lg:px-7 lazyload" style="background-color:#5639a3;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/header_giveaway.jpg">
+    <header class="relative text-center text-white bg-no-repeat py-5 md:py-8 lg:py-14 px-3 sm:px-5 lg:px-7 lazyload" style="background-color:#5639a3;" data-bg="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/header_giveaway.jpg">
         <div class="container relative z-10 mx-auto max-w-5xl md:mt-0">
             <div class="flex flex-wrap">
                 <div class="w-full md:w-5/12 lg:w-1/2 pt-48 sm:pt-96 sm:order-1 relative">
                 </div>
                 <div class="w-full md:w-7/12 lg:w-1/2 sm:text-left">
-                    <img class="h-32 md:h-28 lg:h-40 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/logo_giveaway.png" alt="title image">
+                    <img class="h-32 md:h-28 lg:h-40 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/logo_giveaway.png" alt="title image">
                     {{--<p class="my-2 sm:my-3">Enter your email for your chance to win a microphone, audio interface, and a LIFETIME of singing lessons from Singeo.</p>--}}
                     <p class="leading-tight sm:leading-normal my-2 sm:my-5" style="color:#d0e2e7">
                         Win an Eikon Studio Box 3. You’ll also get instructions via email on how to get a TON more bonus entries!<br><br>
@@ -225,7 +225,7 @@
                 </div>
 
                 <div class="rounded-xl overflow-hidden w-full sm:w-1/2 pb-72 sm:pb-96 bg-cover bg-center lazyload relative cursor-pointer" style="background-color:#5e321a;" data-open="focusrite"
-                        data-bg="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/intro_giveaway.jpg">
+                        data-bg="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/intro_giveaway.jpg">
                     <div class="join white smaller absolute bottom-5 right-5">SEE SPECS</div>
                 </div>
             </div>
@@ -234,29 +234,29 @@
                 <div class="flex flex-col flex-auto w-full sm:w-1/2 lg:w-1/4 mb-7 sm:mb-0 md:px-1">
                     <div class="leading-tight py-3 px-3 w-full rounded-t-md text-sm text-white" style="background-color:#170426;"><strong>Condenser microphone with USB interface</strong></div>
                     <picture>
-                        <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/mic_giveaway.jpg">
-                        <img class="h-auto w-full md:w-auto md:h-56 lg:h-72 rounded-b-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/mic_giveaway_m.jpg" alt="logo">
+                        <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/mic_giveaway.jpg">
+                        <img class="h-auto w-full md:w-auto md:h-56 lg:h-72 rounded-b-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/mic_giveaway_m.jpg" alt="logo">
                     </picture>
                 </div>
                 <div class="flex flex-col flex-auto w-full sm:w-1/2 lg:w-1/4 mb-7 sm:mb-0 md:px-1">
                     <div class="leading-tight py-3 px-3 w-full rounded-t-md text-sm text-white" style="background-color:#170426;"><strong>Desktop<br class="hidden md:inline"> microphone stand</strong></div>
                     <picture>
-                        <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/stand_giveaway.jpg">
-                        <img class="h-auto w-full md:w-auto md:h-56 lg:h-72 rounded-b-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/stand_giveaway_m.jpg" alt="logo">
+                        <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/stand_giveaway.jpg">
+                        <img class="h-auto w-full md:w-auto md:h-56 lg:h-72 rounded-b-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/stand_giveaway_m.jpg" alt="logo">
                     </picture>
                 </div>
                 <div class="flex flex-col flex-auto w-full sm:w-1/2 lg:w-1/4 mb-7 sm:mb-0 md:px-1">
                     <div class="leading-tight py-3 px-3 w-full rounded-t-md text-sm text-white" style="background-color:#170426;"><strong>Nylon screen professional pop filter</strong></div>
                     <picture>
-                        <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/filter_giveaway.jpg">
-                        <img class="h-auto w-full md:w-auto md:h-56 lg:h-72 rounded-b-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/filter_giveaway_m.jpg" alt="logo">
+                        <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/filter_giveaway.jpg">
+                        <img class="h-auto w-full md:w-auto md:h-56 lg:h-72 rounded-b-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/filter_giveaway_m.jpg" alt="logo">
                     </picture>
                 </div>
                 <div class="flex flex-col flex-auto w-full sm:w-1/2 lg:w-1/4 md:px-1">
                     <div class="leading-tight py-3 px-3 w-full rounded-t-md text-sm text-white" style="background-color:#170426;"><strong>Professional Hi-End stereo headphones</strong></div>
                     <picture>
-                        <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/headphones_giveaway.jpg">
-                        <img class="h-auto w-full md:w-auto md:h-56 lg:h-72 rounded-b-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/headphones_giveaway_m.jpg" alt="logo">
+                        <source media="(min-width: 640px)" srcset="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/headphones_giveaway.jpg">
+                        <img class="h-auto w-full md:w-auto md:h-56 lg:h-72 rounded-b-md lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/headphones_giveaway_m.jpg" alt="logo">
                     </picture>
                 </div>
             </div>
@@ -270,7 +270,7 @@
             </div>
             {{--<p class="my-7"><em>(Laptop not included, you’ll need your own)</em></p>--}}
             {{--<div class="flex flex-col-reverse sm:flex-row rounded-lg items-center p-5 sm:p-10 mb-7" style="background-color:#170426;">--}}
-                {{--<img class="w-1/2 mb-6 sm:mb-0 sm:w-4/12 lg:w-3/12 order-1 lazyload rounded-lg" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/ui-screen.jpg" alt="ui screen image">--}}
+                {{--<img class="w-1/2 mb-6 sm:mb-0 sm:w-4/12 lg:w-3/12 order-1 lazyload rounded-lg" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/ui-screen.jpg" alt="ui screen image">--}}
                 {{--<div class="w-full sm:w-8/12 lg:w-9/12 sm:pr-8 text-left">--}}
                     {{--<h3><strong>More than just the equipment…</strong></h3>--}}
                     {{--<div class="mt-3 lg:mt-7 text-navy">--}}
@@ -290,7 +290,7 @@
             {{--<div class="flex flex-col sm:flex-row sm:items-center rounded-lg items-end">--}}
                 {{--<div class="w-full sm:w-1/2 lg:w-7/12 relative flex justify-center items-center cursor-pointer autoplay-video" data-open="performance">--}}
                     {{--<i class="fas fa-play play-button absolute"></i>--}}
-                    {{--<img class="lazyload rounded-lg mb-6 sm:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/coach-image.jpg" alt="coach image" />--}}
+                    {{--<img class="lazyload rounded-lg mb-6 sm:mb-0" data-src="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/coach-image.jpg" alt="coach image" />--}}
                 {{--</div>--}}
 
                 {{--<div class="w-full sm:w-1/2 lg:w-5/12 sm:pl-5 lg:pl-10 text-left">--}}
@@ -309,7 +309,7 @@
     <section class="px-4 py-12 sm:py-20" style="background-color:#faf5ff;">
         <div class="max-w-md sm:max-w-3xl lg:max-w-4xl mx-auto">
             <div class="flex flex-wrap sm:flex-nowrap items-center text-center">
-                <img class="sm:order-1 rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=660,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/phone_screen.png" alt="intro image">
+                <img class="sm:order-1 rounded-md h-72 sm:h-80 lg:h-96 mb-7 sm:mb-0 mx-auto lazyload" data-src="https://www.musora.com/musora-cdn/image/width=660,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/phone_screen.png" alt="intro image">
                 <div class="text-left sm:pr-6">
                     <h4 class="font-extrabold mb-1 sm:mb-2 leading-tight text-left mx-0">More than just a microphone…</h4>
                     <p class="leading-normal mb-2">A good mic does not a good singer make!
@@ -327,20 +327,20 @@
 
     <div id="final" class="anchor"></div>
     <div class="relative h-5 sm:h-10 -mb-5 sm:-mb-10" style="background: linear-gradient(to top left, transparent calc(50% - 1px), transparent, #faf5ff calc(50% + 1px));"></div>
-    <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/footer_giveaway.jpg">
+    <section class="text-center text-white py-8 md:py-16 lg:py-28 px-5 md:px-7 bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/footer_giveaway.jpg">
         <div class="container mx-auto max-w-2xl">
-            <img class="h-32 sm:h-36 md:h-44 lg:h-52 lazyload mb-4 sm:mb-6" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/logo_giveaway.png" alt="title image">
+            <img class="h-32 sm:h-36 md:h-44 lg:h-52 lazyload mb-4 sm:mb-6" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/eikon/logo_giveaway.png" alt="title image">
         </div>
     </section>
     <section class="flex items-center text-center text-white" style="background:linear-gradient(180deg, #8300E9 0%, #3F0071 100%);">
-        <img class="lazyload w-2/12 hidden md:inline" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/mic-icon.png" alt="mic icon" />
+        <img class="lazyload w-2/12 hidden md:inline" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/mic-icon.png" alt="mic icon" />
         <div class="container mx-auto max-w-3xl px-6 sm:px-0 lg:px-4 py-8 md:py-10 lg:py-12">
             <h3 class="mb-5 sm:mb-7"><strong>Why do I need to give<br class="inline sm:hidden"> my email address?</strong></h3>
             <p>Well, we want the winner to be someone who really wants and will use this equipment. <br class="hidden lg:inline">So it’s our way of making sure you’re a real person!
                 <br><br>
                 On top of that, we want to start a relationship with you. It’s our way of saying, “Hey, we create awesome singing lessons and we’d love to show you.” Don’t worry, we won’t send you spam or share your email address with anybody else. You’ll get free ongoing vocal lessons and some special offers. And if you don’t like our emails, you can unsubscribe at any time.</p>
         </div>
-        <img class="lazyload w-2/12 hidden md:inline" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/email-icon.png" alt="email icon" />
+        <img class="lazyload w-2/12 hidden md:inline" data-src="https://www.musora.com/musora-cdn/image/width=300,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/giveaway/email-icon.png" alt="email icon" />
     </section>
 
     @php
@@ -370,7 +370,7 @@
             {{--@else--}}
                 {{--<i class="absolute transform -translate-y-1/2 top-44 md:top-60 text-white cursor-pointer py-2.5 pr-2.5 md:pr-5 text-5xl md:text-6xl fas fa-angle-left -left-7 md:-left-10 opacity-50"></i>--}}
             {{--@endif--}}
-            <div class="relative rounded-t-lg pb-44 md:pb-60 bg-top bg-cover bg-black lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/{{ $spec['modalImage'] }}"></div>
+            <div class="relative rounded-t-lg pb-44 md:pb-60 bg-top bg-cover bg-black lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $spec['modalImage'] }}"></div>
             <div class="p-4 md:p-5">
                 <h2 class="leading-none font-bebas">{!!  str_replace('<br>', ' ', $spec['name'])  !!}</h2>
                 <p class="text-singeo uppercase mx-auto mb-3 md:mb-2">{!!  str_replace('<br>', ' ', $spec['subtitle'])  !!}</p>

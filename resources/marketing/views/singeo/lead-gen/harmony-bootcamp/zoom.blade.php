@@ -147,12 +147,12 @@
         .header {
             background-position: top;
             background-size: cover;
-            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/header_m.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/header_m.jpg');
         }
 
         @media (min-width: 768px) {
             .header {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/header_bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/header_bg.jpg');
                 background-size: 1160px;
             }
         }
@@ -184,7 +184,7 @@
             <div class="flex flex-wrap items-center">
                 <div class="w-full md:w-1/2">
                     <div class="block mt-52 mb-24 md:my-0"></div>
-                    <img class="h-28 md:h-32 lg:h-40" src="https://www.musora.com/musora-cdn/image/width=840,quality=85/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/logo.png" alt="logo">
+                    <img class="h-28 md:h-32 lg:h-40" src="https://www.musora.com/musora-cdn/image/width=840,quality=95/https://d21xeg6s76swyd.cloudfront.net/lead-gen/harmony-bootcamp/logo.png" alt="logo">
                     <h5 class="mt-2 md:mt-5 leading-tight">Start singing the RIGHT way with a LIVE 60-minute singing lesson from a vocal coach.</h5>
                 </div>
             </div>

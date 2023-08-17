@@ -22,14 +22,14 @@
         }
 
         .header-bg {
-            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/header-bg.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=700,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/header-bg.jpg');
         }
 
         .meet-rob {
             background-color:#020317;
             background-size: 1060px;
             background-position: 20% 30px;
-            background-image: url('https://www.musora.com/musora-cdn/image/width=1000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/coach-bg.jpg');
+            background-image: url('https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/coach-bg.jpg');
         }
 
         .meet-rob .content-wrap {
@@ -38,24 +38,24 @@
 
         @media (min-width:768px) {
             .header-bg {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/header-bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/header-bg.jpg');
             }
 
             .meet-rob {
                 background-size: cover;
                 background-position: 45% top;
-                background-image: url('https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/coach-bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/coach-bg.jpg');
             }
         }
         @media (min-width:1024px) {
             .header-bg {
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/header-bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/header-bg.jpg');
             }
 
             .meet-rob {
                 background-size: cover;
                 background-position: 50% top;
-                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/coach-bg.jpg');
+                background-image: url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/coach-bg.jpg');
             }
 
             .meet-rob .content-wrap {
@@ -80,8 +80,8 @@
         "bgColor" => "#010416",
         "imgs" => ['
             <picture>
-                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=850,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/logo.png">
-                <img class="h-14 sm:h-20 lg:h-28 mb-5 lg:mb-8" src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/logo.png" alt="logo">
+                <source media="(min-width: 1024px)" srcset="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/logo.png">
+                <img class="h-14 sm:h-20 lg:h-28 mb-5 lg:mb-8" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/logo.png" alt="logo">
             </picture>
         '],
         "playButton" => "up",
@@ -160,9 +160,9 @@
         "bgColor" => "#010416",
         "meetYourTeacher" => '<h3>Meet your teacher...</h3>',
         "name" => '<h1 class="leading-tight" style="background: linear-gradient(to bottom, #39e5b6, #6cb6d6);-webkit-background-clip: text;-webkit-text-fill-color: transparent;"><strong>Ayla Tesler-Mabe</strong></h1>',
-        "desc" => "Ayla Tesler-Mabe has made a splash in the music industry as a professional guitarist, vocalist, and songwriter -- playing in popular bands including Ludic and formally Calpurnia. And while she’s actively creating new music and performing, Ayla’s also passionate about helping students through Guitareo every day!
+        "desc" => "Ayla Tesler-Mabe has made a splash in the music industry as a professional guitarist, vocalist, and songwriter — playing in popular bands including Ludic and formally Calpurnia. And while she’s actively creating new music and performing, Ayla’s also passionate about helping students through Guitareo every day!
         <br><br>
-        Ayla’s no stranger to answering questions candidly, lending advice, and starting conversations about all things guitar -- and her teaching style makes students feel comfortable and encouraged, so you’ll keep practicing and developing your skills.",
+        Ayla’s no stranger to answering questions candidly, lending advice, and starting conversations about all things guitar — and her teaching style makes students feel comfortable and encouraged, so you’ll keep practicing and developing your skills.",
         "asSeenColor" => "text-guitareo",
         "thumbnails" => [
             [
@@ -205,9 +205,9 @@
 
     @include('guitareo.lead-gen.partials._enter-email', [
         "bgColor" => "linear-gradient(to bottom, #042932, #010317)",
-        "img" => '<img class="h-14 sm:h-20 lg:h-28 mx-auto" src="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/logo.png" alt="logo" />',
+        "img" => '<img class="h-14 sm:h-20 lg:h-28 mx-auto" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/logo.png" alt="logo" />',
         "text" => '<div class="leading-tight text-lg md:leading-tight md:text-2xl lg:leading-tight lg:text-3xl my-5 md:my-8">Enter your email below to get<br class="inline sm:hidden"> the ENTIRE 6-video course.</div>',
-        "formId" => "Guitareo - Engagement - Trigger - Getting Started On The Acoustic Guitar - Web Form",
+        "formId" => "Guitareo - Engagement - Trigger - Getting Started On The Acoustic Guitar - Web Form2",
         "formName" => "Getting Started On The Acoustic Guitar",
     ])
 @stop

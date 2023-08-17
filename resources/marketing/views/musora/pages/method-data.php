@@ -90,19 +90,19 @@
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Guitareo-Method-Level5-1640823238.jpg',
             'lessonNum' => 7,
-            'title' => 'Time To Get Fancy! Add Color To You Chords',
+            'title' => 'Time To Get Fancy! Add Color To Your Chords',
             'desc' => 'With a few simple shifts of your fingers, expanding your knowledge and palette of chords is easy. Impress your friends with these "fancy" chords.',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Guitareo-Method-Level6-1641917824.jpg',
             'lessonNum' => 8,
-            'title' => 'You Can Start Loloing, Like Now!',
+            'title' => 'You Can Start Soloing, Like Now!',
             'desc' => 'Learn three easy scales, a powerful picking technique, and how to know what key you\'re in to make soloing feel like second nature.',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/MethodLevel7-09-1643789795.png',
             'lessonNum' => 8,
-            'title' => 'Don’t Be Afraid Of Barre Chords… Embrace Them',
+            'title' => 'Don’t Be Afraid Of Bar Chords… Embrace Them',
             'desc' => 'Unlock the freedom to easily play ANY major or minor chord and color chords in any key across the neck of the guitar.',
         ],
         [
@@ -115,11 +115,11 @@
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Guitaro-Method-Level9-1650358480.jpg',
             'lessonNum' => 8,
             'title' => 'Tying It All Together: Add Dazzle To Your Playing',
-            'desc' => 'Take your playing to the next level by building your lick bank and throwing some recognizable punches into your solos with these 8 licks.',
+            'desc' => 'Take your playing to the next level by building your lick bank and throwing some recognizable punches into your solos with these 7 licks.',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Guitareo-Method-Level10-1663141571.jpg',
-            'lessonNum' => 9,
+            'lessonNum' => 5,
             'title' => 'You Made It! Let’s Push A Bit Further',
             'desc' => 'This isn\'t the end of your journey - it\'s just the beginning. Now that you\'ve gotten everything you need to become a complete guitarist, it\'s time to build a great practice routine that will help you continuously improve your playing!',
         ],
@@ -193,19 +193,19 @@
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Level-1.png',
             'lessonNum' => 6,
             'title' => 'Understanding Your Voice',
-            'desc' => 'This is where it starts. You’ll learn how to set up your drum-set, hold your drumsticks properly, and play your first beats. And, best of all, you’ll learn how to play your first two songs on the drums.',
+            'desc' => 'Welcome to the Singeo Method! The lessons ahead are designed to help you discover and fall in love with your unique voice. In Level 1, you will learn how your voice works so that you can be in control of your sound and sing with confidence.',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Level-2.png',
             'lessonNum' => 11,
             'title' => 'Build Strength & Gain Control',
-            'desc' => 'In Level Two, you’ll continue to build your drumming foundation. You’re going to learn your first drum rudiments, develop basic reading skills (it’s not that hard, we promise!), and get introduced to three styles of drumming: rock, punk, and metal.',
+            'desc' => "Now that you know how your voice works, it's time to begin developing your own unique voice. In this level, you will learn how to warm up your voice, develop great practice habits, identify your unique vocal type, and exercise your voice based on your unique vocal type!",
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Level-3.png',
             'lessonNum' => 7,
             'title' => 'Vowel Shapes & Sounds',
-            'desc' => 'Learning the motions of drumming will help you play faster, smoother, and for longer periods. This level introduces you to key drum set techniques like the three main stick grips and beginner bass drum pedal technique.',
+            'desc' => 'Vowels are the not so secret ingredient to singing better. This level will teach you how to use vowels to sing with more ease and impact.',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/Level-4.png',
@@ -277,11 +277,6 @@
             'img' => 'https://d1923uyy6spedc.cloudfront.net/YT-TechniquesToSoundLikeARockGod-05-1628743345.jpg',
             'title' => 'Rock Guitar',
             'artist' => 'Ayla Tesler-Mabé',
-        ],
-        [
-            'img' => 'https://d1923uyy6spedc.cloudfront.net/course-card-1647158359.jpg',
-            'title' => 'Punk Rock',
-            'artist' => 'Kent Shores',
         ],
         [
             'img' => 'https://d1923uyy6spedc.cloudfront.net/title-card-1657816791.jpg',

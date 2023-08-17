@@ -3,14 +3,15 @@
 @section('global-head')
     <title>New Drummers Start Here | Drumeo</title>
     <meta name="description" content="The fastest way to get started on the drums and play the songs you love.">
-    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/og-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/og-image.jpg" style="display: none;">
     <meta property="og:title" content="New Drummers Start Here | Drumeo">
     <meta property="og:description" content="The ultimate guide to getting started on the drums and playing the songs you love.">
     <meta property="og:url" content="https://www.drumeo.com/new-drummers/">
 
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
+{{--    @include('_partials.layout._tailwindcdn')--}}
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/ndsh.css') }}" rel="stylesheet">
@@ -54,6 +55,10 @@
     </style>
 @stop
 
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
+
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
         "cartVersion" => true
@@ -65,10 +70,10 @@
                 "noBreadcrumb" => true
                 ])
 
-    <header class="text-center text-white py-5 md:py-8 bg-top bg-no-repeat relative" style="background-color:#020d1f;background-image: url(https://www.musora.com/musora-cdn/image/width=3000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/header.jpg);">
+    <header class="text-center text-white py-5 md:py-8 bg-top bg-no-repeat relative" style="background-color:#020d1f;background-image: url(https://www.musora.com/musora-cdn/image/width=3000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/header.jpg);">
         <div class="container mx-auto relative z-10">
-            <img class="logo" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo"><br>
-            <i class="fas fa-play play-button autoplay-video mt-40 md:mt-72 mb-16 md:mb-24" data-open="trailer"></i>
+            <img class="logo" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo"><br>
+            <i class="fas fa-play play-button autoplay-video mt-40 md:mt-72 mb-16 md:mb-24" @click="trailer = true;"></i>
             <h2><strong>Crush your first 90 days<br class="inline md:hidden"> on the drums.</strong></h2>
             <h5 class="my-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
             <h4 class="text-yellow-400 mb-3 md:mb-5"><strong>ONLY
@@ -78,21 +83,15 @@
         </div>
     </header>
 
-    <div class="reveal large" id="trailer" data-reveal data-reset-on-close="false">
-        <div class="aspect-16:9 w-full relative">
-            <iframe class="absolute w-full h-full reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/543324037?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-    </div>
-
     <section class="text-center text-white py-10 md:py-20 lg:py-24 relative overflow-hidden" style="background:#000a1e;">
         <div class="container mx-auto z-10 relative">
             <div class="px-2 md:px-4">
                 <div class="relative w-full rounded-2xl mx-auto h-10 beg-adv-text" style="max-width: 840px;">
-                    <img class="absolute top-0 h-5 md:h-7" src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo">
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap hidden md:inline">Play your<br> favorite songs<br><i class="fal fa-angle-down"></i></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap">Play in<br> bands<br><i class="fal fa-angle-down"></i></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap hidden md:inline">Write & record<br> drum parts<br><i class="fal fa-angle-down"></i></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap">Play anything<br> you want<br><i class="fal fa-angle-down"></i></p>
+                    <img class="absolute top-0 h-5 md:h-7" src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo">
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap hidden md:inline">Play your<br> favorite songs<br><i class="fa-light fa-angle-down"></i></p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap">Play in<br> bands<br><i class="fa-light fa-angle-down"></i></p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap hidden md:inline">Write & record<br> drum parts<br><i class="fa-light fa-angle-down"></i></p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap">Play anything<br> you want<br><i class="fa-light fa-angle-down"></i></p>
                 </div>
                 <div class="relative w-full rounded-2xl h-20 mx-auto flex space-between overflow-hidden items-center beg-adv-bar" style="background-color: #1571bd;max-width: 840px;">
                     <div class="h-full flex items-center flex-wrap relative" style="background-color:#00bafd;">
@@ -106,9 +105,9 @@
                 </div>
                 <div class="relative w-full rounded-2xl mx-auto h-10 beg-adv-text block md:hidden" style="max-width: 840px;">
                     <p></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap inline md:hidden"><i class="fal fa-angle-up"></i><br>Play your<br> favorite songs</p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap inline md:hidden"><i class="fa-light fa-angle-up"></i><br>Play your<br> favorite songs</p>
                     <p></p>
-                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap inline md:hidden"><i class="fal fa-angle-up"></i><br>Write & record<br> drum parts</p>
+                    <p class="absolute top-0 leading-none text-xs uppercase whitespace-nowrap inline md:hidden"><i class="fa-light fa-angle-up"></i><br>Write & record<br> drum parts</p>
                     <p></p>
                 </div>
             </div>
@@ -126,8 +125,8 @@
                 </h5>
             </div>
         </div>
-        <img class="opacity-10 lg:opacity-30 w-80 z-0 absolute left-0 top-1/2 lazyload" style="    margin-left: -190px;transform: translate(0, -50%);" data-src="https://www.musora.com/musora-cdn/image/width=640,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/icon-blue.png" alt="Location Icon Blue">
-        <img class="opacity-10 lg:opacity-30 w-44 z-0 absolute right-0 top-1/2 lazyload" style="    width: 170px;margin-right: -80px;" data-src="https://www.musora.com/musora-cdn/image/width=340,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/icon-orange.png" alt="Location Icon Orange">
+        <img class="opacity-10 lg:opacity-30 w-80 z-0 absolute left-0 top-1/2 lazyload" style="    margin-left: -190px;transform: translate(0, -50%);" data-src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/icon-blue.png" alt="Location Icon Blue">
+        <img class="opacity-10 lg:opacity-30 w-44 z-0 absolute right-0 top-1/2 lazyload" style="    width: 170px;margin-right: -80px;" data-src="https://www.musora.com/musora-cdn/image/width=340,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/icon-orange.png" alt="Location Icon Orange">
     </section>
 
     <section class="text-center text-white pt-10 md:pt-20 lg:pt-24 pb-10 md:pb-14 overflow-hidden" style="background:linear-gradient(#000a1e, #01082b);">
@@ -143,7 +142,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>01</strong></h1>
-                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-setup-system.jpg" alt="Drum Setup System Image">
+                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-setup-system.jpg" alt="Drum Setup System Image">
                         </div>
                     </div>
                 </div>
@@ -156,7 +155,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>02</strong></h1>
-                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-tuning-quick-start.jpg" alt="Drum Tuning Quick Start Image"></div>
+                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-tuning-quick-start.jpg" alt="Drum Tuning Quick Start Image"></div>
                     </div>
                 </div>
                 <div class="px-5">
@@ -164,11 +163,11 @@
                         <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
                             <h2 class="uppercase text-blue"><strong>Drum Theory Simplifier<sup>&trade;</sup></strong></h2>
                             <h4 class="my-3 md:my-5"><strong>How to read drum music.</strong></h4>
-                            <h6 class="leading-relaxed">It’s not as hard as it sounds. Jared breaks down reading drum music in a quick & fun way so you’ll be able to look at a page of simple drum music and hear the pattern in your head -- it’s like you speak another language!</h6>
+                            <h6 class="leading-relaxed">It’s not as hard as it sounds. Jared breaks down reading drum music in a quick & fun way so you’ll be able to look at a page of simple drum music and hear the pattern in your head — it’s like you speak another language!</h6>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>03</strong></h1>
-                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-theory-simplifier.jpg" alt="Drum Theory Smplifier Image"></div>
+                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-theory-simplifier.jpg" alt="Drum Theory Smplifier Image"></div>
                     </div>
                 </div>
                 <div class="px-5">
@@ -180,7 +179,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>04</strong></h1>
-                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-technique-system.jpg" alt="Drum Technique System Image"></div>
+                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-technique-system.jpg" alt="Drum Technique System Image"></div>
                     </div>
                 </div>
                 <div class="px-5">
@@ -192,7 +191,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>05</strong></h1>
-                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-beat-system.jpg" alt="Drum Beat System Image"></div>
+                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-beat-system.jpg" alt="Drum Beat System Image"></div>
                     </div>
                 </div>
                 <div class="px-5">
@@ -204,7 +203,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>06</strong></h1>
-                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-fill-system.jpg" alt="Drum Fill system Image"></div>
+                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-fill-system.jpg" alt="Drum Fill system Image"></div>
                     </div>
                 </div>
                 <div class="px-5">
@@ -216,7 +215,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>07</strong></h1>
-                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-rudiment-quick-start.jpg" alt="Drum Rudiment Quick Start Image"></div>
+                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-rudiment-quick-start.jpg" alt="Drum Rudiment Quick Start Image"></div>
                     </div>
                 </div>
                 <div class="px-5">
@@ -228,7 +227,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>08</strong></h1>
-                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-5-step-song-learning-method.jpg" alt="5 Step Song Learning Method Image"></div>
+                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-5-step-song-learning-method.jpg" alt="5 Step Song Learning Method Image"></div>
                     </div>
                 </div>
                 <div class="px-5">
@@ -240,7 +239,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>09</strong></h1>
-                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-practice-routine-generator.jpg" alt="Practice Routine Generator Image"></div>
+                            <img class="rounded-2xl" src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-practice-routine-generator.jpg" alt="Practice Routine Generator Image"></div>
                     </div>
                 </div>
             </div>
@@ -254,7 +253,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>01</strong></h1>
-                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-setup-system.jpg" alt="Drum Setup System Image">
+                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-setup-system.jpg" alt="Drum Setup System Image">
                         </div>
                     </div>
                 </div>
@@ -267,7 +266,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>02</strong></h1>
-                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-tuning-quick-start.jpg"></div>
+                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-tuning-quick-start.jpg"></div>
                     </div>
                 </div>
                 <div class="px-5 mb-12">
@@ -275,11 +274,11 @@
                         <div class="w-full md:w-3/5 lg:w-1/2 mb-4 md:mb-0 md:pr-10 lg:pr-12 pt-7">
                             <h2 class="uppercase text-blue"><strong>Drum Theory Simplifier<sup>&trade;</sup></strong></h2>
                             <h4 class="my-3 md:my-5"><strong>How to read drum music.</strong></h4>
-                            <h6 class="leading-relaxed">It’s not as hard as it sounds. Jared breaks down reading drum music in a quick & fun way so you’ll be able to look at a page of simple drum music and hear the pattern in your head -- it’s like you speak another language!</h6>
+                            <h6 class="leading-relaxed">It’s not as hard as it sounds. Jared breaks down reading drum music in a quick & fun way so you’ll be able to look at a page of simple drum music and hear the pattern in your head — it’s like you speak another language!</h6>
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>03</strong></h1>
-                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-theory-simplifier.jpg" alt="Drum Theory Simplifier Image"></div>
+                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-theory-simplifier.jpg" alt="Drum Theory Simplifier Image"></div>
                     </div>
                 </div>
                 <div class="px-5 mb-12">
@@ -291,7 +290,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>04</strong></h1>
-                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-technique-system.jpg" alt="Drum Technique System Image"></div>
+                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-technique-system.jpg" alt="Drum Technique System Image"></div>
                     </div>
                 </div>
                 <div class="px-5 mb-12">
@@ -303,7 +302,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>05</strong></h1>
-                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-beat-system.jpg" alt="Drum Beat System Image"></div>
+                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-beat-system.jpg" alt="Drum Beat System Image"></div>
                     </div>
                 </div>
                 <div class="px-5 mb-12">
@@ -315,7 +314,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>06</strong></h1>
-                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-fill-system.jpg" alt="Drum Fill System Image"></div>
+                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-fill-system.jpg" alt="Drum Fill System Image"></div>
                     </div>
                 </div>
                 <div class="px-5 mb-12">
@@ -327,7 +326,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>07</strong></h1>
-                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-rudiment-quick-start.jpg" alt="Drum Rudiment Quick Start Image"></div>
+                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-drum-rudiment-quick-start.jpg" alt="Drum Rudiment Quick Start Image"></div>
                     </div>
                 </div>
                 <div class="px-5 mb-12">
@@ -339,7 +338,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>08</strong></h1>
-                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-5-step-song-learning-method.jpg" alt="5 Step Song Learning Method Image"></div>
+                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-5-step-song-learning-method.jpg" alt="5 Step Song Learning Method Image"></div>
                     </div>
                 </div>
                 <div class="px-5">
@@ -351,7 +350,7 @@
                         </div>
                         <div class="w-full md:w-2/5 lg:w-1/2 px-5 md:px-0 relative">
                             <h1 class="text-blue absolute bottom-0 text-7xl lg:text-9xl -left-3 lg:-left-8"><strong>09</strong></h1>
-                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-practice-routine-generator.jpg" alt="Practice Routine Generator Image"></div>
+                            <img class="rounded-2xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/level-practice-routine-generator.jpg" alt="Practice Routine Generator Image"></div>
                     </div>
                 </div>
             </div>
@@ -363,7 +362,7 @@
             <h3 class=" mb-6 md:mb-10 lg:mb-14"><strong>Why study with Jared Falk & Drumeo?</strong></h3>
             <div class="float-left w-1/3">
                 <div class="social-platform py-4 md:py-5 lg:py-6 rounded-3xl w-11/12" style="color: #0b76db;background: linear-gradient(#000a1e, #00102e);">
-                    <img class="lazyload w-auto h-10 md:h-12 lg:h-14 py-2" data-src="https://www.musora.com/musora-cdn/image/quality=100,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo Logo">
+                    <img class="lazyload w-auto h-10 md:h-12 lg:h-14 py-2" data-src="https://www.musora.com/musora-cdn/image/quality=95,width=250,metadata=none/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo Logo">
                     <h1 class="count font-black leading-none my-2 md:my-4 text-white" id="likes-count" data-total-count="51000">0</h1>
                     <p class="uppercase leading-none md:tracking-widest">Active Students</p>
                 </div>
@@ -386,14 +385,14 @@
     </section>
 
     <section class="text-white pt-10 pb-0 md:py-20 lg:py-28 relative" style="background-color:#020d1f;">
-        <div class="absolute inset-0 z-0 bg-top bg-no-repeat jared-bio lazyload hidden md:block" data-bg="https://www.musora.com/musora-cdn/image/width=3000,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/jared-falk.jpg" style="background-color:#020d1f;"></div>
-        <div class="absolute inset-0 z-0 bg-top bg-no-repeat jared-bio lazyload block md:hidden" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/jared-falk-m.jpg" style="background-color:#020d1f;"></div>
+        <div class="absolute inset-0 z-0 bg-top bg-no-repeat jared-bio lazyload hidden md:block" data-bg="https://www.musora.com/musora-cdn/image/width=3000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/jared-falk.jpg" style="background-color:#020d1f;"></div>
+        <div class="absolute inset-0 z-0 bg-top bg-no-repeat jared-bio lazyload block md:hidden" data-bg="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/jared-falk-m.jpg" style="background-color:#020d1f;"></div>
         <div class="container mx-auto max-w-4xl relative z-10 px-4">
             <div class="md:flex flex-wrap md:w-1/2 ml-auto order-1">
                 <h1 class="text-center md:text-left text-blue m-0 text-5xl md:text-6xl lg:text-8xl leading-none"><strong>JARED<br class="hidden md:inline"> FALK</strong></h1>
                 <h6 class="mt-60 md:mt-5 leading-relaxed">Jared Falk has been a trusted source for online drum lessons for 15+ years.
                     <br><br>
-                    As the face of Drumeo, Jared is a pioneer of online drum instruction -- helping prospective drummers around the world learn their first beats and beyond.
+                    As the face of Drumeo, Jared is a pioneer of online drum instruction — helping prospective drummers around the world learn their first beats and beyond.
                     <br><br>
                     His passion, grit, and approachable style have helped him become the most-watched drum instructor online… ever! And now you can take in his first-ever full curriculum for beginner drummers anytime and anywhere it fits your schedule.</h6>
             </div>
@@ -408,7 +407,7 @@
                     <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000a1e, #01092b)">
                         <p class="leading-normal md:leading-relaxed">"Drumeo is the real deal folks! Jared Falk and his team have my confidence and support in what is done to promote music through the art of drumming and percussion. It is absolutely imperative for the student of the art to SEE, HEAR and EMULATE every lesson that is presented by the instructor. This is accomplished when studying lessons at Drumeo - a good place to study and realize one’s dreams."</p>
                         <div class="flex items-center pt-5 md:pt-8">
-                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/billy-cobham.jpg" alt="Billy Cobham">
+                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/billy-cobham.jpg" alt="Billy Cobham">
                             <div class="text pl-3 md:pl-5">
                                 <h6 class="uppercase"><strong>BILLY COBHAM</strong></h6>
                                 <h6 class="text-blue uppercase pt-2">Legendary Jazz Fusion Drummer</h6>
@@ -420,7 +419,7 @@
                     <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000a1e, #01092b)">
                         <p class="leading-normal md:leading-relaxed">"Jared Falk has a comprehensive expert knowledge in providing and structuring lesson plans. He has a great human sense and knows how to handle, host and guide a lesson. It certainly didn’t come overnight. It’s more that he grew over the years to an expert and a professional instructor who really knows how to teach."</p>
                         <div class="flex items-center pt-5 md:pt-8">
-                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/anika-nilles.jpg" alt="Anika Nilles">
+                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/anika-nilles.jpg" alt="Anika Nilles">
                             <div class="text pl-3 md:pl-5">
                                 <h6 class="uppercase"><strong>Anika Nilles</strong></h6>
                                 <h6 class="text-blue uppercase pt-2">Drummer & Composer</h6>
@@ -432,7 +431,7 @@
                     <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000a1e, #01092b)">
                         <p class="leading-normal md:leading-relaxed">"After years of watching Jared's lessons on YouTube and Drumeo, and getting to work side by side with him, I can confidently say that he gives every bit of his effort and skill into every product or lesson he teaches. He cares about each and every drummer who will watch and learn from his work and wants nothing more than to change drumming education for the better each time he puts his name on something."</p>
                         <div class="flex items-center pt-5 md:pt-8">
-                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/casey-cooper.jpg" alt="Casey Cooper">
+                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/casey-cooper.jpg" alt="Casey Cooper">
                             <div class="text pl-3 md:pl-5">
                                 <h6 class="uppercase"><strong>Casey Cooper</strong></h6>
                                 <h6 class="text-blue uppercase pt-2">Most Subscribed Drummer On YouTube</h6>
@@ -444,7 +443,7 @@
                     <div class="rounded-2xl p-3 md:p-8" style="background:linear-gradient(#000a1e, #01092b)">
                         <p class="leading-normal md:leading-relaxed">"Jared and the whole Drumeo team have a great way of delivering information that’s proven to work and helps the student grow. In my visits to Drumeo it is apparent to me that not only is Jared wickedly smart, his heart is in the right place as well—and that’s an essential element for any successful teacher."</p>
                         <div class="flex items-center pt-5 md:pt-8">
-                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/todd-sucherman.jpg" alt="Todd Sucherman">
+                            <img class="rounded-full w-1/4 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/todd-sucherman.jpg" alt="Todd Sucherman">
                             <div class="text pl-3 md:pl-5">
                                 <h6 class="uppercase"><strong>Todd Sucherman</strong></h6>
                                 <h6 class="text-blue uppercase pt-2">Styx, Award-winning Rock Drummer</h6>
@@ -466,12 +465,12 @@
                     <tbody>
                     <tr style="background-color:transparent!important;">
                         <td></td>
-                        <td><img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo"></td>
-                        <td><img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=190,quality=85/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo Logo"></td>
+                        <td><img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo"></td>
+                        <td><img class="lazyload" data-src="https://www.musora.com/musora-cdn/image/width=190,quality=95/https://dpwjbsxqtam5n.cloudfront.net/logos/logo-blue.png" alt="Drumeo Logo"></td>
                         <td class="cursor-pointer">Other Online<br> Courses</td>
-                        <td class="cursor-pointer"><img src="https://www.musora.com/musora-cdn/image/width=190,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/udemy.png" alt="Udemy"></td>
-                        <td class="cursor-pointer"><img src="https://www.musora.com/musora-cdn/image/width=260,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/masterclass.png" alt="Masterclass"></td>
-                        <td class="cursor-pointer"><img src="https://www.musora.com/musora-cdn/image/width=240,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/drum-ambitions.png" alt="Drum Ambitions"></td>
+                        <td class="cursor-pointer"><img src="https://www.musora.com/musora-cdn/image/width=190,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/udemy.png" alt="Udemy"></td>
+                        <td class="cursor-pointer"><img src="https://www.musora.com/musora-cdn/image/width=260,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/masterclass.png" alt="Masterclass"></td>
+                        <td class="cursor-pointer"><img src="https://www.musora.com/musora-cdn/image/width=240,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/drum-ambitions.png" alt="Drum Ambitions"></td>
                     </tr>
                     <tr>
                         <td>Beginner focused</td>
@@ -560,7 +559,7 @@
     <section class="text-center text-white py-10 md:py-24" style="background:#000a1e;">
         <div class="container mx-auto">
             <div class="w-full md:mx-auto mt-3 md:mt-0 px-4 md:flex items-start lg:items-center" style="max-width:990px">
-                <img alt="Guarantee Badge" class="guarantee-badge lazyload mx-auto mb-3 md:mb-0 order-1" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/guarantee.png">
+                <img alt="Guarantee Badge" class="guarantee-badge lazyload mx-auto mb-3 md:mb-0 order-1" data-src="https://www.musora.com/musora-cdn/image/width=1160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/guarantee.png">
                 <div class="text-wrap md:pr-5 lg:pr-12">
                     <h3 class="md:text-left"><strong><em>“I’m still not sure...”</em></strong></h3>
                     <h6 class="text-left mt-3 md:mt-7 leading-relaxed">Hey, starting something new is scary… we get it.
@@ -572,11 +571,11 @@
     </section>
 
     <div id="customize-anchor" class="anchor"></div>
-    <section class="final text-center text-white py-10 md:py-20 lg:py-24 bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/order-background.jpg">
+    <section class="final text-center text-white py-10 md:py-20 lg:py-24 bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/order-background.jpg">
         <div class="container mx-auto">
-            <img class="logo lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1200,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo">
+            <img class="logo lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/new-drummers/logo.png" alt="New Drummers Logo">
             <h2 class="mt-5 md:mt-8"><strong>Crush your first 90 days<br class="inline md:hidden"> on the drums.</strong></h2>
-            {{--<h6 class="mb-5 md:mb-14 leading-normal px-3"><em>Choose your adventure -- get your beginner lessons for just $7 <br class="hidden md:inline">--}}
+            {{--<h6 class="mb-5 md:mb-14 leading-normal px-3"><em>Choose your adventure — get your beginner lessons for just $7 <br class="hidden md:inline">--}}
                     {{--or add a practice pad and drumsticks for a discount. </em></h6>--}}
 
             <h5 class="my-3 leading-normal px-3">Go from a total beginner to <br class="inline md:hidden"> playing drums with real music.</h5>
@@ -623,9 +622,14 @@
 
     @include("drumeo.sales.partials._footer")
 
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '543324037',
+        'vimeo' => true,
+    ])
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}"></script>
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/countup.js/1.9.3/countUp.min.js"></script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
@@ -633,7 +637,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
     <script>
         $(document).ready(function () {
-            $(document).foundation();
             $('.slick-1').slick({
                 slidesToShow: 1,
                 slidesToScroll: 1,

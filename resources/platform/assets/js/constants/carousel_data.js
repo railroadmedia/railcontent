@@ -16,7 +16,7 @@ export const testCarousel = [
                 ctaText: "LEARN MORE",
                 description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost.",
                 ctaUrl: "https://www.musora.com/unified-2022",
-                img: "https://www.musora.com/musora-cdn/image/quality=100,width=1536,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/musora-header-large+new.jpg",
+                img: "https://www.musora.com/musora-cdn/image/quality=95,width=1536,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/musora-header-large+new.jpg",
             },
             {
                 topSubtitle: "",
@@ -24,7 +24,7 @@ export const testCarousel = [
                 ctaText: "Go To Songs",
                 description: "January 11th - Student Request - 15 New Songs<br>January 18th - Songs Lottery - 50 New Songs<br>January 25th - Drumeo's Choice - 25 New Songs",
                 ctaUrl: "/drumeo/songs",
-                img: "https://www.musora.com/musora-cdn/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/Songs-banner.jpg",
+                img: "https://www.musora.com/musora-cdn/image/quality=95,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/Songs-banner.jpg",
             },
             {
                 topSubtitle: "",
@@ -32,7 +32,7 @@ export const testCarousel = [
                 ctaText: "Apply For Review",
                 description: "Submit a video to be reviewed by a Drumeo instructor!",
                 ctaUrl: "/drumeo/student-focus",
-                img: "https://www.musora.com/musora-cdn/image/quality=100,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/JanStudentFocusBannerBLogoC.jpg",
+                img: "https://www.musora.com/musora-cdn/image/quality=95,width=1536,height=430,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/JanStudentFocusBannerBLogoC.jpg",
             },
         ]
     },
@@ -53,7 +53,7 @@ export const testCarousel = [
                 ctaText: "LEARN MORE",
                 description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost.",
                 ctaUrl: "https://www.musora.com/unified-2022",
-                img: "https://www.musora.com/musora-cdn/image/quality=100,width=1536,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/musora-header-large+new.jpg",
+                img: "https://www.musora.com/musora-cdn/image/quality=95,width=1536,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/musora-header-large+new.jpg",
             },
             {
                 topSubtitle: "Coach of The Month",
@@ -61,7 +61,7 @@ export const testCarousel = [
                 ctaText: "Visit Summer's Coach Page",
                 description: "Summer Swee-Singh is a composer, music arranger, pianist, keyboardist, string contractor, music director, backing vocalist, and music educator.",
                 ctaUrl: "/pianote/coaches/summer-swee-singh/369384",
-                img: "https://www.musora.com/musora-cdn/image/quality=100,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pianote-COTM-summer-swee-singh.jpg",
+                img: "https://www.musora.com/musora-cdn/image/quality=95,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/pianote-COTM-summer-swee-singh.jpg",
             },
             {
                 topSubtitle: "",
@@ -69,7 +69,7 @@ export const testCarousel = [
                 ctaText: "Check out the schedule here",
                 description: "Join us for this incredibly fun live event where you will be inspired, have your questions answered, and stay up to date on what’s happening inside the Pianote Community!",
                 ctaUrl: "pianote/schedule",
-                img: "https://www.musora.com/musora-cdn/image/quality=100,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/2022-06-29-Lisa-Kevin-Boogie-Woogie-101-107.jpg",
+                img: "https://www.musora.com/musora-cdn/image/quality=95,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/2022-06-29-Lisa-Kevin-Boogie-Woogie-101-107.jpg",
             },
         ]
     },
@@ -90,7 +90,7 @@ export const testCarousel = [
                 ctaText: "LEARN MORE",
                 description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost.",
                 ctaUrl: "https://www.musora.com/unified-2022",
-                img: "https://www.musora.com/musora-cdn/image/quality=100,width=1536,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/musora-header-large+new.jpg",
+                img: "https://www.musora.com/musora-cdn/image/quality=95,width=1536,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/musora-header-large+new.jpg",
             },
             {
                 topSubtitle: "Coach of The Month",
@@ -98,7 +98,7 @@ export const testCarousel = [
                 ctaText: "Visit Dean's Coach Page",
                 description: 'Dean is a Canadian born guitarist, best know for his work in the Extreme Technical Death Metal band Archspire. He is also a content creator on YouTube, doing instructional guitar related content.',
                 ctaUrl: "/guitareo/coaches/dean-lamb/354026",
-                img: "https://www.musora.com/musora-cdn/image/quality=100,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/guitareo-COTM-dean-lamb.jpg",
+                img: "https://www.musora.com/musora-cdn/image/quality=95,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/guitareo-COTM-dean-lamb.jpg",
             },
         ]
     },
@@ -119,7 +119,7 @@ export const testCarousel = [
                 ctaText: "LEARN MORE",
                 description: "A unified learning platform that includes Drumeo, Pianote, Guitareo, and Singeo. You now have an all-access pass to all four platforms at no additional cost.",
                 ctaUrl: "https://www.musora.com/unified-2022",
-                img: "https://www.musora.com/musora-cdn/image/quality=100,width=1536,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/musora-header-large+new.jpg",
+                img: "https://www.musora.com/musora-cdn/image/quality=95,width=1536,fit=cover,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/musora-header-large+new.jpg",
             },
             {
                 topSubtitle: "Coach Of The Month",
@@ -127,7 +127,7 @@ export const testCarousel = [
                 ctaText: "Visit Hailey's Coach Page",
                 description: "Hailey Benedict is a Canadian country singer and songwriter and a five-time North America Country Music Association International Youth winner. She’s opened for several internationally recognized artists like Jason Aldean, Blue Rodeo, Lindsay Ell, and Doc Walker.",
                 ctaUrl: "/singeo/coaches/hailey-benedict/373871",
-                img: "https://www.musora.com/musora-cdn/image/quality=100,width=1536,height=430,metadata=none/https://d1923uyy6spedc.cloudfront.net/CoachCardPack-Hailey_Coach-Featured-Top-Bottom-Banner-1667243203.jpg",
+                img: "https://www.musora.com/musora-cdn/image/quality=95,width=1536,height=430,metadata=none/https://d1923uyy6spedc.cloudfront.net/CoachCardPack-Hailey_Coach-Featured-Top-Bottom-Banner-1667243203.jpg",
             },
             {
                 topSubtitle: "",
@@ -135,7 +135,7 @@ export const testCarousel = [
                 ctaText: "Check out the schedule here",
                 description: "Join us for this incredibly fun live event where you will be inspired, have your questions answered, and stay up to date on what’s happening inside the Singeo Community!",
                 ctaUrl: "/singeo/schedule",
-                img: "https://www.musora.com/musora-cdn/image/quality=100,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/2022-05-04-Singeo-Julia-Lisa-100.jpg",
+                img: "https://www.musora.com/musora-cdn/image/quality=95,width=1536,height=430,metadata=none/https://d3fzm1tzeyr5n3.cloudfront.net/carousel/2022-05-04-Singeo-Julia-Lisa-100.jpg",
             },
         ]
     }

@@ -54,7 +54,7 @@
             "image" => "https://dpwjbsxqtam5n.cloudfront.net/lead-gen/must-know-grooves/thumb-social-punk.jpg",
             "title" => "SoCal Punk",
             "duration" => "5",
-            "description" => "Rich shows you the fast & furious beats that became synonymous with 1990’s Southern California punk -- get ready to break a sweat.",
+            "description" => "Rich shows you the fast & furious beats that became synonymous with 1990’s Southern California punk — get ready to break a sweat.",
         ],
         [
             "url" => "/must-know-grooves/course-index/9-mozambiquesongo",

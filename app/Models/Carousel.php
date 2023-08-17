@@ -76,6 +76,10 @@ class Carousel extends Model
             if (gettype($model['logo']) === 'object') {
                 $model['logo'] = 'https://d1fyshwdvi6fth.cloudfront.net/' . $model->brand->name . '/carousels/' . $uuid . '-' .str_replace(' ', '+', $model['logo']->getClientOriginalName());
             }
+
+            $model['subtitle_color'] = strtolower($model['subtitle_color']);
+            $model['title_color'] = strtolower($model['title_color']);
+            $model['desc_color'] = strtolower($model['desc_color']);
         });
     }
 }

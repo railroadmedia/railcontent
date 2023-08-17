@@ -16,18 +16,11 @@
     <link href="{{ asset('/marketing/parcel/drumeo/learn-songs-faster.css') }}" rel="stylesheet">
 @stop()
 
-@section('scripts')
-    @parent
-    <script>
-        $(document).ready(function () {
-            $(document).foundation();
-        });
-    </script>
-    <script src="{{ asset('/marketing/js/modal-autoplay.js') }}"></script>
-@stop()
+@section('body-data')
+    x-data="{ trailer: false }"
+@endsection
 
 @section('content')
-
     @include('drumeo.products.partials.promo-banner', [
         "name" => "Learn Songs Faster",
         "fullPrice" => floatval($productPrices['learn-songs-faster-pack']->price),
@@ -37,8 +30,8 @@
 
     <header class="header text-center">
         <div class="row">
-            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/learn-songs-faster-logo.png" alt="Learn Songs Faster Logo"><br>
-            <img data-open="previewModal" class="play-button autoplay-video" src="https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play Button">
+            <img class="logo" src="https://www.musora.com/musora-cdn/image/width=750,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/learn-songs-faster-logo.png" alt="Learn Songs Faster Logo" fetchpriority="high"><br>
+            <img @click="trailer = true;" class="play-button autoplay-video" src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/sales/play-button.png" alt="Play Button" fetchpriority="high">
             <h1><strong>Your guide to learning MORE songs in  <br class="show-for-medium">
                     less time with Jared Falk & Dave Atkinson.</strong></h1>
             <h3 class="dense"><strong>
@@ -63,11 +56,11 @@
         </div>
     </header>
 
-    <div class="reveal large text-center" id="previewModal" data-reveal data-reset-on-close="false">
-        <div class="flex-video widescreen vimeo">
-            <iframe class="reset-on-close" src="" data-lazy-load-url="//player.vimeo.com/video/422880447?autoplay=1" frameborder="0" allowfullscreen allow="autoplay"></iframe>
-        </div>
-    </div>
+    @include('_partials.components.video-modal',[
+        'name' => 'trailer',
+        'video' => '422880447',
+        'vimeo' => true,
+    ])
 
     <section class="content-section benefits text-center">
         <div class="row">
@@ -75,14 +68,14 @@
                 <i class="far fa-video text-blue"></i>
                 <h3 class="dense"><strong>PLAY MORE SONGS</strong></h3>
                 <p><em class="text-blue">With A 75-Minute Video Masterclass.</em><br>
-                    You’ll get access to a 75-minute video masterclass with Jared Falk & Dave Atkinson where they’ll give you their best advice for learning to play songs on the drums -- from active listening that’ll help you hear phrasing and understand song structure, to building effective grooves and fills, and keeping time so your playing always sounds ‘right’.
+                    You’ll get access to a 75-minute video masterclass with Jared Falk & Dave Atkinson where they’ll give you their best advice for learning to play songs on the drums — from active listening that’ll help you hear phrasing and understand song structure, to building effective grooves and fills, and keeping time so your playing always sounds ‘right’.
                 </p>
             </div>
             <div class="columns medium-6">
                 <i class="far fa-shield-check text-blue"></i>
                 <h3 class="dense"><strong>100% GUARANTEED</strong></h3>
                 <p><em class="text-blue">Try Risk-Free For 90-Days</em><br>
-                    The ability to quickly & accurately learn songs is one of the most valuable skills for drummers -- for playing alone or in a band. It's also a very learnable skill that you can acquire through the techniques in this course. We're so confident you'll love these lessons, and the impact on your playing, that you'll get a 90-day money-back guarantee.
+                    The ability to quickly & accurately learn songs is one of the most valuable skills for drummers — for playing alone or in a band. It's also a very learnable skill that you can acquire through the techniques in this course. We're so confident you'll love these lessons, and the impact on your playing, that you'll get a 90-day money-back guarantee.
                 </p>
             </div>
         </div>
@@ -91,17 +84,17 @@
         <div class="row">
             <h2><strong>Meet your teachers.</strong></h2>
             <div class="columns medium-6">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/jared-falk.jpg" alt="Jared Falk">
+                <img src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/jared-falk.jpg" alt="Jared Falk">
                 <h3 class="dense"><strong>Jared Falk</strong></h3>
                 <p><em class="text-grey">TEACHING FOR {{ date('Y') - 1998 }} YEARS</em><br>
                     Jared Falk is the Co-Founder and CEO of Drumeo.com. As a drum teacher, his DVD-based curriculum “Successful Drumming” has helped more than 20,000 students, his YouTube videos have been seen by millions of drummers around the world, and he’s been voted “Best Drum Educator” by the readers of Rhythm Magazine. Jared’s goal is to create more drummers and keep them playing longer by helping them have more fun learning and playing drums.
                 </p>
             </div>
             <div class="columns medium-6">
-                <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/dave-atkinson.jpg" alt="Dave Atkinson">
+                <img src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/dave-atkinson.jpg" alt="Dave Atkinson">
                 <h3 class="dense"><strong>Dave Atkinson</strong></h3>
                 <p><em class="text-grey">TEACHING FOR {{ date('Y') - 2006 }} YEARS</em><br>
-                    Dave Atkinson has been working with students and teachers at FreeDrumLessons.com and Drumeo.com since 2006 -- teaching video lessons, hosting online events, and working alongside many of the world’s best drummers. Dave is one of the rare teachers in the world who has been directly responding to students every single day for the past 14 years -- making him uniquely qualified on the problems that drummers face and the best ways to overcome them.
+                    Dave Atkinson has been working with students and teachers at FreeDrumLessons.com and Drumeo.com since 2006 — teaching video lessons, hosting online events, and working alongside many of the world’s best drummers. Dave is one of the rare teachers in the world who has been directly responding to students every single day for the past 14 years — making him uniquely qualified on the problems that drummers face and the best ways to overcome them.
                 </p>
             </div>
         </div>
@@ -111,9 +104,10 @@
         <div class="row">
             <h2><strong>Just a few topics we'll cover...</strong></h2>
             <h5 class="text-yellow dense">(This masterclass will be geared towards beginner & intermediate drummers.)</h5>
-            <div class="topic-wrap large-up-4 medium-up-3">
+            <div class="topic-wrap large-up-4 medium-up-3 max-w-sm sm:max-w-none">
                 <div class="columns half-padding">
-                    <div class="thumb" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-ear-training.jpg)">
+                    <div class="thumb relative">
+                        <img class="absolute inset-0 object-cover transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-ear-training.jpg" alt="ear training" loading="lazy" onload="this.classList.remove('opacity-0')" />
                         <h1>EAR TRAINING</h1>
                     </div>
                     <p>
@@ -121,7 +115,8 @@
                     </p>
                 </div>
                 <div class="columns half-padding">
-                    <div class="thumb" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-timing-tempo.jpg)">
+                    <div class="thumb">
+                        <img class="absolute inset-0 object-cover transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-timing-tempo.jpg" alt="timing and tempo" loading="lazy" onload="this.classList.remove('opacity-0')" />
                         <h1>TIMING & TEMPO</h1>
                     </div>
                     <p>
@@ -129,7 +124,8 @@
                     </p>
                 </div>
                 <div class="columns half-padding">
-                    <div class="thumb" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-backbeat.jpg)">
+                    <div class="thumb">
+                        <img class="absolute inset-0 object-cover transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-backbeat.jpg" alt="the backbeat" loading="lazy" onload="this.classList.remove('opacity-0')" />
                         <h1>THE BACKBEAT</h1>
                     </div>
                     <p>
@@ -137,23 +133,26 @@
                     </p>
                 </div>
                 <div class="columns half-padding">
-                    <div class="thumb" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-downbeat.jpg)">
+                    <div class="thumb">
+                        <img class="absolute inset-0 object-cover transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-downbeat.jpg" alt="the downbeat" loading="lazy" onload="this.classList.remove('opacity-0')" />
                         <h1>THE DOWNBEAT</h1>
                     </div>
                     <p>
-                        The downbeat is usually known as the “1” count to each bar in the song. It sets up and finishes phrases. Here, you’ll learn how to create a solid downbeat -- and paired with a backbeat, you’ll be able to play almost any tune!
+                        The downbeat is usually known as the “1” count to each bar in the song. It sets up and finishes phrases. Here, you’ll learn how to create a solid downbeat — and paired with a backbeat, you’ll be able to play almost any tune!
                     </p>
                 </div>
                 <div class="columns half-padding">
-                    <div class="thumb" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-better-feel.jpg)">
+                    <div class="thumb">
+                        <img class="absolute inset-0 object-cover transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-better-feel.jpg" alt="better feel" loading="lazy" onload="this.classList.remove('opacity-0')" />
                         <h1>BETTER FEEL</h1>
                     </div>
                     <p>
-                        You don’t need to play songs note-for-note. A song is organic: it lives and breathes. Here, you’ll learn why understanding the feel is more important than the exact beats that are being played -- and how to lock in with the music.
+                        You don’t need to play songs note-for-note. A song is organic: it lives and breathes. Here, you’ll learn why understanding the feel is more important than the exact beats that are being played — and how to lock in with the music.
                     </p>
                 </div>
                 <div class="columns half-padding">
-                    <div class="thumb" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-effective-fills.jpg)">
+                    <div class="thumb">
+                        <img class="absolute inset-0 object-cover transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-effective-fills.jpg" alt="effective fills" loading="lazy" onload="this.classList.remove('opacity-0')" />
                         <h1>EFFECTIVE FILLS</h1>
                     </div>
                     <p>
@@ -161,7 +160,8 @@
                     </p>
                 </div>
                 <div class="columns half-padding">
-                    <div class="thumb" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-improv.jpg)">
+                    <div class="thumb">
+                        <img class="absolute inset-0 object-cover transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-improv.jpg" alt="improvisation" loading="lazy" onload="this.classList.remove('opacity-0')" />
                         <h1>IMPROVISATION</h1>
                     </div>
                     <p>
@@ -169,11 +169,12 @@
                     </p>
                 </div>
                 <div class="columns half-padding">
-                    <div class="thumb" style="background-image:url(https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-fine-tuning.jpg)">
+                    <div class="thumb">
+                        <img class="absolute inset-0 object-cover transition-all opacity-0" src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/topic-fine-tuning.jpg" alt="fine tuning" loading="lazy" onload="this.classList.remove('opacity-0')" />
                         <h1>FINE TUNING</h1>
                     </div>
                     <p>
-                        Once you can play the entire song at a basic level, it’s time to put the final touches on your grooves and fills. You’ll learn how to listen to key patterns and replicate them -- adding the right ghost notes and bass patterns.
+                        Once you can play the entire song at a basic level, it’s time to put the final touches on your grooves and fills. You’ll learn how to listen to key patterns and replicate them — adding the right ghost notes and bass patterns.
                     </p>
                 </div>
             </div>
@@ -182,7 +183,7 @@
 
     <section class="content-section text-center question-answered">
         <div class="row">
-            <img src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/question-answer.png" alt="Question Answer Image">
+            <img src="https://www.musora.com/musora-cdn/image/width=700,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/question-answer.png" alt="Question Answer Image">
             <div class="text medium-text-left">
                 <h2><strong>Your questions answered...</strong></h2>
                 <p>Inside this course, you’ll have opportunities to ask your biggest questions and get personalized feedback & support from real-live teachers and Drumeo students.</p>
@@ -193,7 +194,7 @@
 
     <section class="content-section final text-center">
         <div class="row">
-            <img class="logo" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/learn-songs-faster-logo.png" alt="Learn Songs Faster Logo">
+            <img class="logo" src="https://www.musora.com/musora-cdn/image/width=900,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/learn-songs-faster-logo.png" alt="Learn Songs Faster Logo">
             <h2><strong>Your guide to learning MORE songs in  <br class="show-for-medium">
                     less time with Jared Falk & Dave Atkinson</strong></h2>
 

@@ -7,7 +7,7 @@
     <meta name="description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
     <meta property="og:description" content="Go from a total beginner to playing your first drum beats in this FREE series.">
 
-    <meta property="og:image" content="https://drumeo-assets.s3.amazonaws.com/lead-gen/gsotd/updated/share-image.jpg" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/gsotd/updated/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/getting-started/">
 @stop
 
@@ -82,7 +82,7 @@
         <div class="container max-w-5xl mx-auto">
             <h2><strong>Learn the drums by<br class="inline sm:hidden"> <u>playing the drums</u>.</strong></h2>
                 <p class="leading-tight mt-2 sm:mt-3 mb-8 sm:mb-10">With Drumeo, you’ll play more, you’ll fall in love with your progress, <br class="hidden sm:inline lg:hidden"> and you’ll have personalized support every step of the way.</p>
-            <div class="aspect-16:9 cursor-hover rounded-xl autoplay-video overflow-hidden w-full relative z-20 mb-7" x-on:click="trailer = true;">
+            <div class="aspect-16:9 cursor-pointer rounded-xl autoplay-video overflow-hidden w-full relative z-20 mb-7" x-on:click="trailer = true;">
                 <i class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 fas fa-play play-button z-10"></i>
                 <video class="rounded-xl overflow-hidden object-cover w-full h-full absolute z-0 lazyload" data-src="https://player.vimeo.com/progressive_redirect/playback/785314560/rendition/540p/file.mp4?loc=external&signature=1549cce1dacabad80dd416b5a439f6639d3b7b30c7e4d70d46245bf70c6d5102" type="video/mp4" autoplay muted loop playsinline></video>
             </div>
@@ -135,7 +135,7 @@
                         <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
                             <div class="flex sm:inline-block">
                                 <div class="w-14 sm:w-full flex-shrink-0">
-                                    <i class="fal {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-drumeo"></i>
+                                    <i class="fa-light {!! $songItem['fa-icon'] !!} text-3xl sm:text-4xl text-drumeo"></i>
 {{--                                    <img alt="point icon" src="https://www.musora.com/musora-cdn/image/{{ $songItem['icon'] }}" class="h-6 sm:h-10">--}}
                                 </div>
                                 <div class="text-left sm:text-center">
@@ -207,7 +207,7 @@
             'name' => 'Ivy Elizondo',
             'video' => '373445819',
             'title' => 'Now we have a band and we’re recording an album!',
-            'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead -- she’s used Drumeo to build a foundation and formed a band.',
+            'description' => 'When Ivy’s kids decided to stop playing drums, she jumped on the throne instead — she’s used Drumeo to build a foundation and formed a band.',
             ],
         ]
     @endphp
@@ -224,8 +224,8 @@
         "firstPoint" => "The world’s best drum lessons.",
         "thirdPoint" => "Unlimited personal support.",
         "fifthPoint" => "Lesson access for piano, guitar, and singing.",
-        "plusAnnualLink" => "/ecommerce/add-to-cart?products[DLM-Trial-Annual-30-Day]=1&locked=true",
-        "plusMonthlyLink" => "/ecommerce/add-to-cart?products[DLM-Trial-30-Day]=1&locked=true",
+        "plusAnnualLink" => "/getting-started/ty-annual",
+        "plusMonthlyLink" => "/getting-started/ty-monthly",
     ])
     @include('musora.sales.components.trial-explanation', [
         'instrument' => 'drumming',
