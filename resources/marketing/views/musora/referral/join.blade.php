@@ -49,8 +49,8 @@
     ];
 
     $prizeDesc = [
-        'drumeo' => 'It has over 250 drum sounds and 10 drum kits customizable to your taste, <br class="tw-hidden md:tw-inline lg:tw-hidden" />for ultimate control over your tone and volume.',
-        'pianote' => 'It has a metronome to keep your playing tight. Plus it connects with your headphones <br class="tw-hidden md:tw-inline lg:tw-hidden" />for all those late-night piano sessions.',
+        'drumeo' => 'It has over 250 drum sounds and 10 drum kits customizable to your taste, <br class="hidden md:inline lg:hidden" />for ultimate control over your tone and volume.',
+        'pianote' => 'It has a metronome to keep your playing tight. Plus it connects with your headphones <br class="hidden md:inline lg:hidden" />for all those late-night piano sessions.',
         'singeo' => 'You’ll get a microphone, headphones, and an audio interface so you can start to feel more confident as a singer.',
         'guitareo' => 'It’s sleek. It’s bold. It’s also well known for its excellent tone and playability.',
     ];
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="md:mr-4 lg:mr-10 text-center md:text-left">
-                        <h5 class="leading-normal font-bold mb-2">Learn the {{ $instruments[$brand] }} faster with step-by-step lessons, <br class="hidden lg:inline"> a thousand songs, and unlimited personal support.</h5>
+                        <h5 class="leading-normal font-bold mb-2">Learn the {{ $instruments[$brand] }} faster with step-by-step lessons, a thousand songs, and unlimited personal support.</h5>
                         <div class="flex justify-between max-w-[550px] mb-6">
                             <div>
                                 <i class="fas fa-check text-{{ $brand }}"></i> Improve your skills
