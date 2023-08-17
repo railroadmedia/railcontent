@@ -1,7 +1,3 @@
-@php
-    require_once(resource_path('marketing/views/drumeo/products/30-day-drummer-testimonials.php'))
-@endphp
-
 @extends('drumeo._partials.global-layout')
 
 @section('global-head')
@@ -321,7 +317,7 @@
                     <h4 class="px-3 lg:px-5"><strong>September 4th</strong></h4>
                     <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
                     <p class="text-sm px-3 lg:px-5">
-                            Enrollment closes in<br class="inline lg:hidden">
+                            Early Bird closes in<br class="inline lg:hidden">
                             <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
                                  <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
                                  <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
@@ -387,9 +383,67 @@
                     },
                 }"
             >
-                <div x-ref="splide" class="splide md:mb-12">
+                <div x-ref="splide" class="splide sm:mb-9">
                     <div class="splide__track">
                         <ul class="splide__list items-start" style="padding-top: 60px !important;">
+                            @php
+                                $testimonials = [
+                                 [
+                                     'season' => '1',
+                                     'name' => 'Erin W.',
+                                     'comment' => '<strong>I am shocked at how much I learned in these last 30 days.</strong> My husbands a drummer so he watched me go from knowing NOTHING to being able to make it through a song.',
+                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1678130486-572603.jpg',
+                                 ],
+                                 [
+                                     'season' => '1',
+                                     'name' => 'Kristyn T.',
+                                     'comment' => '<b>I\'m SOO EXCITED to have actually learned my first entire song ever!!!</b>  Such a HIGH!!!  Domino is like having a dear sweet encouraging friend and mentor to work with daily! ',
+                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1679111185-496776.jpg',
+                                 ],
+                                 [
+                                     'season' => '1',
+                                     'name' => 'Tobias W.',
+                                     'comment' => 'The idea behind this format is really great. These short sessions can easily be fit into everyday life, no need to think or prepare what\'s next. <strong>It keeps the guesswork out of learning the drums so you can focus on the most important part: Playing the drums and having fun.</strong>',
+                                     'img' => 'https://d3fzm1tzeyr5n3.cloudfront.net/profile_picture_url/user-profile-picture-1669379419-276550.jpg',
+                                 ],
+                                 [
+                                     'season' => '1',
+                                     'name' => 'Stephiekitty (Estephania E.)',
+                                     'comment' => 'I never thought I’d be a drummer but here I am! I went from zero to hero all thanks to Domino and Drumeo! I would have never tried drums had it not been for this 30 day drummer program💕🥁🎵🎶',
+                                     'img' => 'https://dzryyo1we6bm3.cloudfront.net/avatars/526989_1660712845376-1660712847-526989.jpg',
+                                 ],
+                                 [
+                                     'season' => '1',
+                                     'name' => 'Monique G.',
+                                     'comment' => 'I\'m thrilled that I\'m back behind a drum kit after 30 years and not only loving it, but genuinely understanding it. Thank you, thank you, thank you! 🥁',
+                                     'img' => 'https://dzryyo1we6bm3.cloudfront.net/avatars/528540_1661460541688-1661460545-528540.jpg',
+                                 ],
+                                 [
+                                     'season' => '2',
+                                     'name' => 'Alan C.',
+                                     'comment' => '<strong>Five weeks ago I didn\'t own a drum kit – Today I played a whole song twice!</strong> I wouldn\'t have believed it possible if I hadn\'t just experienced it. Big thanks to Domino and all at Drumeo',
+                                     'img' => 'https://dzryyo1we6bm3.cloudfront.net/avatars/412320_1662361641020-1662361646-412320.jpg',
+                                 ],
+                                 [
+                                     'season' => '2',
+                                     'name' => 'Shae C.',
+                                     'comment' => 'Yes! I’m so happy and so proud. I still can’t believe I played my first ever drum song. And I did it twice!! So very happy right now, it’s making me tear up.',
+                                     'img' => 'https://dzryyo1we6bm3.cloudfront.net/avatars/521912_1663974802851-1663974809-521912.jpg',
+                                 ],
+                                 [
+                                     'season' => '2',
+                                     'name' => 'David Stanley',
+                                     'comment' => 'This has just been the best experience. In less than 30 days I\'ve gone from the occasional uncoordinated bash on my son\'s acoustic kit to sounding like I almost know what I\'m doing.',
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/david.jpg',
+                                 ],
+                                 [
+                                     'season' => '2',
+                                     'name' => 'Evan W.',
+                                     'comment' => 'An absolutely fabulous program… for yourself, your son, your daughter or otherwise. <strong>Filled with great energy, and sound fundamentals.</strong> 🤩 If you’re thinking about it - don’t think, just do! ⚡️',
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/evan.jpg',
+                                 ],
+                             ];
+                            @endphp
                             @foreach ($testimonials as $testimonial)
                                 <li class="splide__slide bg-[#F4F8FB] rounded-xl pb-6 px-8 mr-4 text-center">
                                     <div class="-mt-10 mb-6">
@@ -648,15 +702,19 @@
                 <img class="block h-20 sm:h-24 mx-auto lazyload animated infinite bounce slower" data-src="https://www.musora.com/musora-cdn/image/width=200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Important_Icon.svg" alt="important icon">
             </div>
             <h1 class="font-bebas text-5xl sm:text-6xl lg:text-7xl">FAIR WARNING</h1>
-            <h6 class="leading-normal  mt-4 mb-8">30-Day Drummer is a daily guided workout program for drummers — where you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this, students will not be able to join midway — and you need to register before the course begins. {{--on September 5th.--}}</h6>
-                        <h4 class="py-1.5 w-full font-bebas uppercase inline-block mx-auto" style="background-color:#fd5;color:#9d1032;">REGISTRATION CLOSES IN<br class="inline sm:hidden">
-                            <span x-cloak x-data="timer()" x-init="countdown()">
-                                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                                     </span>
+            <h6 class="leading-normal  mt-4">30-Day Drummer is a daily guided workout program for drummers — where you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this, students will not be able to join midway — and you need to register before the course begins. {{--on September 5th.--}}</h6>
+                        <h4 class="mt-8 py-1.5 w-full font-bebas uppercase inline-block mx-auto" style="background-color:#fd5;color:#9d1032;">
+
+                            STARTS ON September 4th
+
+{{--                            REGISTRATION CLOSES IN<br class="inline sm:hidden">--}}
+{{--                            <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                                     </span>--}}
                         </h4>
         </div>
     </section>
@@ -776,24 +834,24 @@
             </p>
 
             <div class="grid md:grid-cols-3 gap-2 lg:gap-4 items-start px-4 mx-auto max-w-md md:max-w-none">
-                <div class="bg-white rounded-xl border border-[#4595E1] py-8 px-4 mb-8 md:mb-0">
+                <div class="bg-white rounded-xl border border-drumeo py-8 px-4 mb-8 md:mb-0">
                     <div class="text-center -mt-11">
-                        <div class="bg-[#4595E1] rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Keeping it light</div>
+                        <div class="bg-drumeo rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Keeping it light</div>
                         <h4><strong>30-Day Drummer</strong></h4>
                         <p class="italic mb-4 text-xs mt-2">Course Only<br> &nbsp; </p>
                         <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-1a.png" alt="Tier 1 pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$97</s><strong>$77</strong></h2>
                         <p class="italic mb-4 text-xs">One-time payment</p>
-                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&promo-code=special&redirect=/order&locked=true" class="join bg-[#4595E1] medium w-full mb-5">ENROLL NOW</a>
+                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&promo-code=special&redirect=/order&locked=true" class="join bg-drumeo medium w-full mb-5">ENROLL NOW</a>
                         <p class="inline-block text-left">
                             <b>30-Day Drummer - Season 3</b><br/>
-                            <b class="text-[#4595E1]">Free</b> 1-Month Drumeo Access
+                            <b class="text-drumeo">Free</b> 1-Month Drumeo Access
                         </p>
                     </div>
                 </div>
                 <div class="bg-white rounded-xl border border-musora py-8 px-4 mb-8 md:mb-0">
                     <div class="text-center -mt-11">
-                        <div class="bg-musora rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Full send</div>
+                        <div class="bg-musora rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Best Deal</div>
                         <h4><strong>Starter Kit & More</strong></h4>
                         <p class="italic mb-4 text-xs mt-2">3 months of Drumeo + 5 bonuses worth $231
                             <br><strong class="text-musora">FREE SHIPPING WORLDWIDE</strong></p>

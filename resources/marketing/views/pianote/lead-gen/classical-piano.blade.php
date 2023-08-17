@@ -149,7 +149,7 @@
             <img class="h-10 md:h-20 lg:h-24" src="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/classical-piano/logo.png" alt="classical-piano-logo">
             <div class="mt-2 md:mt-3 mb-4 md:mb-6 lg:text-lg lg:leading-normal">Start playing beautiful classical music on the piano with this beginner-focused course.<br class="hidden md:inline"> <strong>Enter your email below for your free course.</strong></div>
         ',
-        "formId" => "Pianote - Engagement - Trigger - Classical Piano - Web Form",
+        "formId" => "Pianote - Engagement - Trigger - Classical Piano - Web Form2",
         "formName" => "Classical Piano Quick Start",
     ])
 

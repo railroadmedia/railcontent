@@ -121,7 +121,7 @@
                 @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
                     "formName" => 'Grooves Of John Bonham',
-                    "formId" => "Drumeo - Engagement - Trigger - Grooves Of John Bonham - Web Form",
+                    "formId" => "Drumeo - Engagement - Trigger - Grooves Of John Bonham - Web Form2",
                     "buttonText" => "Hook Me Up ",
                 ])
             </div>

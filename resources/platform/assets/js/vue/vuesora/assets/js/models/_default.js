@@ -3,6 +3,7 @@ import ContentHelpers from "../helper-functions/content.js";
 
 export default class ContentModel {
     constructor({ brand = 'drumeo', post }) {
+        //console.log('contentmodel post', post)
         this.brand = brand;
         this.post = post;
         this.id = post.id;

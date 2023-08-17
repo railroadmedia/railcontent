@@ -23,6 +23,10 @@
             type: Boolean,
             default: false,
         },
+        isMiniCatalog: {
+            type: Boolean,
+            default: false,
+        },
         linkUrl: {
             type: String,
             default: "",
@@ -33,7 +37,7 @@
         <!-- Playlist thumbnail -->
         <a id="playlist-list-view-thumbnail" :href="linkUrl.length ? linkUrl : false"
             class="tw-relative tw-overflow-hidden tw-bg-white dark:tw-bg-[#081825] tw-aspect-square"
-           :class="isListView ? 'tw-h-[48px] tw-w-[48px] tw-rounded tw-shrink-0' : 'tw-row-span-5 tw-col-span-5 tw-rounded-lg'"
+           :class="isListView ? 'tw-h-[48px] tw-w-[48px] tw-rounded tw-shrink-0' : `tw-row-span-5 tw-col-span-5 tw-rounded-lg ${isMiniCatalog ? 'tw-h-[195px] lg:tw-h-auto' : ''} `"
         >
             <!-- Image Conatiner -->
             <div class="tw-relative tw-w-full tw-h-full" v-if="listElement.thumbnail_url || img">

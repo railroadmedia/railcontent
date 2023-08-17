@@ -96,7 +96,7 @@
             </h3>
             @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                "formId" => "Drumeo - Engagement - Trigger - Hand Technique - Web Form",
+                "formId" => "Drumeo - Engagement - Trigger - Hand Technique - Web Form2",
                 "formName" => 'Hand Technique',
                 "buttonText" => "Get started for free ",
                 'inputBorder' => '1px solid #7A8491',

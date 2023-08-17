@@ -203,7 +203,7 @@
             <div class="form-wrap max-w-4xl mx-auto">
                 @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
-                    "formId" => "Pianote - Engagement - Trigger - Riffs And Fills - Web Form",
+                    "formId" => "Pianote - Engagement - Trigger - Riffs And Fills - Web Form2",
                     "formName" => 'Riffs And Fills',
                 ])
             </div>

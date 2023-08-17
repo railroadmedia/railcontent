@@ -45,6 +45,7 @@
             <order-form
                 theme-color="guitareo"
                 brand="guitareo"
+                referral-code="{{ $referralCode }}"
                 :cart="{{ json_encode($cart) }}"
                 cart-data-url='{{ get_musora_brand_base_url() }}'
                 :billing-address="{{ json_encode($billingAddress) }}"

@@ -193,7 +193,7 @@
         "bgColor" => "linear-gradient(to bottom, #042932, #010317)",
         "img" => '<img class="h-14 sm:h-20 lg:h-28 mx-auto" src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-electric-guitar-lessons/electric-logo.png" alt="logo" />',
         "text" => '<div class="text-lg leading-none my-5 md:my-8 md:text-2xl md:leading-none lg:text-3xl lg:leading-none">Enter your email below to get the ENTIRE 6-video <br class="hidden md:inline"> course on <strong>Getting Started On Electric Guitar</strong></div>',
-        "formId" => "Guitareo - Engagement - Trigger - Getting Started On The Electric Guitar - Web Form",
+        "formId" => "Guitareo - Engagement - Trigger - Getting Started On The Electric Guitar - Web Form2",
         "formName" => "Getting Started On The Electric Guitar",
     ])
 @stop

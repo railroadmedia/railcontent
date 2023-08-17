@@ -231,7 +231,7 @@
                 <div class="max-w-md md:max-w-auto mx-auto md:mx-0">
                     @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
-                    "formId" => "Pianote - Engagement - Trigger - Chord Hacks - Web Form",
+                    "formId" => "Pianote - Engagement - Trigger - Chord Hacks - Web Form2",
                     "formName" => 'Chord Hacks',
                         "buttonText" => "start for free",
                         'stacked' => true,

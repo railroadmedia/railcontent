@@ -11,10 +11,12 @@
 
     @include('_partials.layout._fonts')
 
-    @include('_partials.layout._tailwindcdn')
+    <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-tw.css') }}" rel="stylesheet">
+
+
     <style>
         .lazyload {opacity: 0;}  .lazyloading {opacity: 1;transition: opacity 300ms;}
         .edge-pitch {top:40px;}
@@ -23,21 +25,28 @@
     </style>
 @stop
 
+@section('body-data')
+    x-data ='{
+    soundslice : false,
+    }'
+@endsection
+
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
     <div class="shim w-full block h-11 sm:h-9" style="background-color:#010a2b;"></div>
-    <a href="/choose-plan" class="edge-pitch block text-center w-full whitespace-nowrap z-20 py-2 sm:py-1 fixed mx-auto bg-black text-white">
+    <a href="#final" class="edge-pitch block text-center w-full whitespace-nowrap z-20 py-2 sm:py-1 fixed mx-auto bg-black text-white anchor-slide">
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
                 <h3 class="inline-block align-middle mr-2 leading-none font-bebas text-coaches">100 SONGS</h3>
-                <p class="inline-block align-middle mx-auto text-xs leading-tight"><strong>EXPANDED EDITION</strong>
-                    For a limited time, you can<br>
-                    grab the ultimate drummer’s songs pack, FREE.</p>
+                <p class="inline-block align-middle mx-auto text-xs leading-tight">
+                    Enter your email to get 100 <br>
+                    FREE note-for-note sheet music</p>
+                <div class="join blue smaller ml-1" style="padding: 6px 13px;font-size: 15px;">Get IT NOW</div>
             </div>
         </div>
     </a>
-    <header class="text-white text-center sm:text-left pt-7 md:pt-20 px-6 pb-7 md:pb-0" style="background: #010a2b url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/header-background.jpg) center bottom/cover;">
+    <header class="text-white text-center sm:text-left pt-7 md:pt-16 px-6 pb-7 md:pb-10" style="background: linear-gradient(45deg, #02163D, #00BEF3);">
         <div class="container mx-auto max-w-5xl">
             <div class="flex flex-wrap justify-center items-end lg:items-center">
                 <div class="w-10/12 sm:w-1/2 {{--lg:w-7/12--}} sm:order-1 text-right sm:pl-4 lg:pl-0">
@@ -80,64 +89,93 @@
                 Out of {{ Prices::$drumeoSongs }}+ songs inside Drumeo, these are the <s class="opacity-50">40</s> <strong>100</strong> songs drummers love to play the most– and now <br class="hidden lg:inline">
                 it’s your turn. Scroll down to find your favorites and enter your email to get ALL the songs totally free.
             </h6>
-            <div class="relative">
+            <div class="relative overflow-hidden max-h-[1100px] sm:max-h-full">
                 @include('drumeo.lead-gen.100-songs._songs',[
                     "signup" => true,
-                    "dataOpen" => "signUpModal",
                 ])
                 <div class="h-96 absolute bottom-0 left-0 right-0" style="background:linear-gradient(to bottom, transparent, #fff 90%);"></div>
             </div>
             <h4 class="leading-tight"><strong><em>…and more! For a limited time,<br class="hidden sm:inline"> you’ll get 100 SONGS total.</em></strong></h4>
         </div>
     </section>
+
     <div class="relative h-5 sm:h-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #000318 calc(50% + 1px));"></div>
-    <section class="songs-info text-center text-white relative overflow-hidden py-8 md:py-14 lg:py-24" style="background-color:#000318;">
-        <div class="container mx-auto">
-            <h2 class="mb-4 md:mb-5">
-                <strong>
-                    Professional charts + handy <br class="inline md:hidden">
+    <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
+        <div class="container max-w-4xl mx-auto">
+            <h2><strong>Professional charts + handy <br class="inline md:hidden">
                     playback<br class="hidden md:inline"> tools to help  <br class="inline md:hidden">
-                    you nail every note.
-                </strong>
-            </h2>
-            <h6 class="leading-normal text-light-navy px-2">
-                Slow down the tempo, add/remove metronome, or loop any section you're <br class="hidden sm:inline">
-                struggling with. It’s never been easier to learn your favorite songs.
-            </h6>
-            <div class="flex-container w-full mx-auto md:max-w-6xl md:flex items-center px-5 md:px-8 mb-9 md:mb-10 mt-4 md:mt-16 lg:mt-20">
-                <div class="pic-wrap">
-                    <img class="lazyload side-pic" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-1.png" alt="songs-1">
-                    <img class="lazyload side-pic mobile-feature" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-2-alt.png" alt="songs-2">
-                    <img class="lazyload side-pic" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-3.png" alt="songs-3">
-                    <img class="lazyload side-pic" data-src="https://www.musora.com/musora-cdn/image/width=650,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2021/songs-phone-5.png" alt="songs-4">
-                </div>
-                <div class="text-left">
-                    <div class="text-icon-wrap active">
-                        <i class="text-songs fa-light fa-music"></i>
-                        <div>
-                            <h3><strong>Find the perfect tempo.</strong></h3>
-                            <p>Slow down or speed up any section of a song to hear every note your favorite drummer plays. When you’ve nailed the part, bump the tempo back up and rock out in real time.</p>
+                    you nail every note.</strong></h2>
+            <p class="leading-tight mt-2 sm:mt-3">You’ll have <strong>all the tools you need</strong> to make sure you never miss a beat. <strong class="cursor-pointer" x-on:click="soundslice = true;"><u>Try the demo »</u></strong></p>
+
+            <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto">
+                <div style="padding-bottom: 62.4%; background-image: url(&quot;https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png&quot;);" class="mt-4 sm:mt-6 lg:mt-8 lg:mb-6 bg-cover bg-center lazyloaded" x-on:click="soundslice = true;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png"></div>
+            </div>
+            <div class="text-center w-full sm:w-auto mt-6 lg:mt-0 mx-auto mb-5">
+                <div class="flex flex-wrap">
+                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
+                        <div class="flex sm:inline-block">
+                            <div class="w-14 sm:w-full flex-shrink-0">
+                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/5000-songs-icon.svg" class="h-6 sm:h-10">
+                            </div>
+                            <div class="text-left sm:text-center">
+                                <p class="mb-1 sm:my-2"><strong>5000+ popular songs.</strong></p>
+                                <p class="text-sm">Get note-for-note song breakdowns for every style, era, and skill level.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="text-icon-wrap">
-                        <i class="text-songs fa-light fa-repeat"></i>
-                        <div>
-                            <h3><strong>Loop the trouble spots.</strong></h3>
-                            <p>No more pausing and rewinding when you mess up that fill. Simply grab the section of the song and loop it over, and over, and over until you’ve got it down.</p>
+                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
+                        <div class="flex sm:inline-block">
+                            <div class="w-14 sm:w-full flex-shrink-0">
+                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/tempo-icon.svg" class="h-6 sm:h-10">
+                            </div>
+                            <div class="text-left sm:text-center">
+                                <p class="mb-1 sm:my-2"><strong>Find the perfect tempo.</strong></p>
+                                <p class="text-sm">Slow down or speed up any section of a song to hear every note.</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="text-icon-wrap">
-                        <i class="text-songs icon-metronome"></i>
-                        <div>
-                            <h3><strong>Counting just got easier.</strong></h3>
-                            <p>Add or remove the metronome to help you count out the beats in a bar. This makes learning songs of all levels easier — even that odd-time Rush song!</p>
+                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
+                        <div class="flex sm:inline-block">
+                            <div class="w-14 sm:w-full flex-shrink-0">
+                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/loop-icon.svg" class="h-6 sm:h-10">
+                            </div>
+                            <div class="text-left sm:text-center">
+                                <p class="mb-1 sm:my-2"><strong>Loop the trouble spots.</strong></p>
+                                <p class="text-sm">No more pausing and rewinding that tricky fill. Loop it over and over again!</p>
+                            </div>
                         </div>
                     </div>
-                    <div class="text-icon-wrap">
-                        <i class="text-songs fa-light fa-phone-laptop"></i>
-                        <div>
-                            <h3><strong>Available on all your devices.</strong></h3>
-                            <p>Load up DrumeoSONGS on your phone during practice time, your laptop when you’re behind the kit, and your tablet at the gig — wherever the music takes you!</p>
+                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
+                        <div class="flex sm:inline-block">
+                            <div class="w-14 sm:w-full flex-shrink-0">
+                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/no-drums-icon.svg" class="h-6 sm:h-10">
+                            </div>
+                            <div class="text-left sm:text-center">
+                                <p class="mb-1 sm:my-2"><strong>Remove the drums.</strong></p>
+                                <p class="text-sm">Magically remove the original drums to make each song uniquely yours.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
+                        <div class="flex sm:inline-block">
+                            <div class="w-14 sm:w-full flex-shrink-0">
+                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/play-it-right-icon.svg" class="h-6 sm:h-10">
+                            </div>
+                            <div class="text-left sm:text-center">
+                                <p class="mb-1 sm:my-2"><strong>Play it right the first time.</strong></p>
+                                <p class="text-sm">Get perfect notation and learn to play accurately from the get-go.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full sm:w-1/3 sm:px-2 lg:px-6 mb-6 lg:my-6">
+                        <div class="flex sm:inline-block">
+                            <div class="w-14 sm:w-full flex-shrink-0">
+                                <img alt="point icon" src="https://www.musora.com/musora-cdn/image/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/devices-icon.svg" class="h-6 sm:h-10">
+                            </div>
+                            <div class="text-left sm:text-center">
+                                <p class="mb-1 sm:my-2"><strong>Take your songs anywhere.</strong></p>
+                                <p class="text-sm">Accessible on any device, or printable,so you can play any song, any time.</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,15 +184,16 @@
     </section>
 
     @include('drumeo.lead-gen.partials.quick-questions',[
-        "bgColor" => "#030a21",
-        "textColor" => "white",
+        "bgColor" => "white",
+        "textColor" => "black",
     ])
 
-    <section class="text-center py-14 md:py-24 lg:py-32 text-white bg-black bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/order-background.jpg">
+    <div id="final" class="anchor"></div>
+    <section class="text-center py-14 md:py-24 lg:py-32 text-white" style="background: linear-gradient(45deg, #02163D, #00BEF3);">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
                 <h1 class="leading-none uppercase font-bebas"><span class="text-coaches">100 Drumming Anthems</span><br> Every. Single. Note.</h1>
-                <p class="text-coaches my-2 sm:my-3">EXPANDED EDITION</p>
+                <p class="text-coaches my-2 sm:my-3 font-black">EXPANDED EDITION</p>
                 <h5 class="mb-6 lg:mb-9 leading-normal">
                     <strong>For a LIMITED TIME, you’ll get 100 Drumeo Songs totally FREE.</strong><br>
                     <em>Enter your email to grab note-for-note sheet music & handy play-along tools.</em>
@@ -162,7 +201,7 @@
                 <div class="mx-auto" style="max-width:700px">
                     @include("drumeo.lead-gen.partials.sign-up-form", [
                     "recaptchaKey" => $recaptchaKey,
-                            "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
+                            "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form2",
                                 "buttonText" => "Get It Now ",
                             "formName" => '40 Songs',
                         ])
@@ -171,24 +210,11 @@
         </div>
     </section>
 
-    <div class="reveal text-center max-w-2xl" id="signUpModal" data-reveal style="background-color: rgb(243, 244, 246);">
-        <div class="py-5 px-3 md:px-9 md:py-9">
-            <h4 class="leading-normal mb-4">
-                <strong>
-                    Enter your email to get note-for-note <br class="inline md:hidden">
-                    sheet music + handy playback tools for <br class="inline md:hidden">
-                    100 of drumming’s biggest songs FREE.
-                </strong>
-            </h4>
-            @include("drumeo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-            "formId" => "Drumeo - Engagement - Trigger - 40S - Web Form",
-                                "buttonText" => "Get It Now ",
-            "formName" => '40 Songs',
-            "stacked" => true
-            ])
-        </div>
-    </div>
+    @include('_partials.components.video-modal',[
+        'name' => 'soundslice',
+        'video' => '1D6Vc',
+        'soundslice' => true,
+    ])
     @include("drumeo.sales.partials._footer", [
             "minimal" => true
         ])

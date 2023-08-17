@@ -207,7 +207,7 @@
         "bgColor" => "linear-gradient(to bottom, #042932, #010317)",
         "img" => '<img class="h-14 sm:h-20 lg:h-28 mx-auto" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/https://d122ay5chh2hr5.cloudfront.net/lead-gen/free-acoustic-guitar-lessons/logo.png" alt="logo" />',
         "text" => '<div class="leading-tight text-lg md:leading-tight md:text-2xl lg:leading-tight lg:text-3xl my-5 md:my-8">Enter your email below to get<br class="inline sm:hidden"> the ENTIRE 6-video course.</div>',
-        "formId" => "Guitareo - Engagement - Trigger - Getting Started On The Acoustic Guitar - Web Form",
+        "formId" => "Guitareo - Engagement - Trigger - Getting Started On The Acoustic Guitar - Web Form2",
         "formName" => "Getting Started On The Acoustic Guitar",
     ])
 @stop

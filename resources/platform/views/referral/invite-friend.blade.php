@@ -25,7 +25,7 @@
                 <div class="tw-text-2xl tw-font-bold">Thanks for sharing your love for music!</div>
                 <p class="tw-mt-3 tw-mb-5 tw-max-w-md tw-mx-auto">
                     You've successfully sent <span id="modalEmail"></span>
-                    <br class="tw-hidden sm:tw-inline-block"> a 30-Day Guest Pass to {{ ucfirst($brand) }}.
+                    <br class="tw-hidden sm:tw-inline-block"> a 30-Day Trial to {{ ucfirst($brand) }}.
                 </p>
                 <div>
                     <span onclick="window.closeAllModals();" class="tw-btn-primary tw-border-[#000C17] tw-text-[#000C17] hover:tw-bg-[#00101D] hover:tw-text-white dark:tw-bg-[#000C17] dark:tw-border-white dark:tw-text-white tw-mr-2 dark:hover:tw-bg-white dark:hover:tw-text-[#000C17]">Close</span>

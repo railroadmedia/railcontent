@@ -95,21 +95,9 @@
 
     @include('drumeo.lead-gen.partials.enter-email1',[
         "headLine" => "Enter your email below to open your toolbox...",
-        "formId" => "Drumeo - Engagement - Trigger - Ultimate Toolbox - Web Form",
+        "formId" => "Drumeo - Engagement - Trigger - Ultimate Toolbox - Web Form2",
         "formName" => 'The Ultimate Drumming Toolbox',
     ])
-
-    <div class="reveal medium" id="signUpModal" data-reveal>
-        <section class="header pop-up">
-            <h1 class="text-center">Enter your email below to open your toolbox...</h1>
-            @include("drumeo.lead-gen.partials.sign-up-form", [
-                    "recaptchaKey" => $recaptchaKey,
-                "stacked" => true,
-                "formId" => "Drumeo - Engagement - Trigger - Ultimate Toolbox - Web Form",
-                "formName" => 'The Ultimate Drumming Toolbox',
-            ])
-        </section>
-    </div>
 
     <div class="reveal large" id="thankYouModal" data-reveal data-reset-on-close="true">
         <div class="gavin-sign-up">
