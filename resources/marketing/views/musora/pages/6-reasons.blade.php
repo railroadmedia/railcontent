@@ -1,11 +1,11 @@
 @extends('musora._partials.layout')
 
 @section('head-includes')
-    <title>About | Musora</title>
-    <meta property="og:title" content="About | Musora">
+    <title>6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora</title>
+    <meta property="og:title" content="6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora">
 
-    <meta name="description" content="We have two simple goals: create more musicians and keep them playing longer.">
-    <meta property="og:description" content="We have two simple goals: create more musicians and keep them playing longer.">
+    <meta name="description" content="Online music lessons have grown in popularity because they work!">
+    <meta property="og:description" content="Online music lessons have grown in popularity because they work!">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
@@ -116,7 +116,15 @@
             <h2 class="leading-tight"><strong>6 Reasons Online Music Lessons<br class="hidden sm:inline"> Will Help Your Learn Faster</strong></h2>
 
             <div class="flex flex-wrap items-center justify-center mt-3 sm:mt-5 mx-auto">
-                <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+                <a aria-label="Review" class="inline-block sm:hidden" href="https://www.shopperapproved.com/reviews/Musora.com">
+                    <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                    <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                    <p class="inline-block leading-tight align-middle pl-1 m-0 font-bold"><u><em>{{ number_format(round(Prices::$reviews, -2)) }}+ Reviews</em></u></p>
+                </a>
+                <a aria-label="Review" class="hidden sm:inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
                     <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
                     <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
                     <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
@@ -200,9 +208,9 @@
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
                 <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/04-songs.jpg">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/04-songs2.jpg">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/04-songs.jpg"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/04-songs2.jpg"
                     >
                 </picture>
                 <div class="sm:pl-9 flex-shrink">
@@ -249,7 +257,7 @@
                 </div>
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
-                <picture class="w-full sm:w-56 flex-shrink-0">
+                <picture class="w-36 sm:w-56 flex-shrink-0">
                     <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/guarantee.png">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
                         src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/guarantee.png"
@@ -374,7 +382,16 @@
                 </div>
             </div>
 
-            <a aria-label="Review" class="inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+            <a aria-label="Review" class="hidden sm:inline-block" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+                <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
+                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
+                <br>
+                <p class="inline-block leading-tight align-middle pl-1 m-0 font-bold"><u><em>See {{ number_format(round(Prices::$reviews, -2)) }}+ More Student Reviews</em></u></p>
+            </a>
+            <a aria-label="Review" class="inline-block sm:hidden" href="https://www.shopperapproved.com/reviews/Musora.com">
                 <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>
                 <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
                 <i class="align-middle text-lg fas fa-star" style="text-shadow: -2px -1px 1px #f6f8fc;color: #ffac00;" aria-hidden="true"></i>
