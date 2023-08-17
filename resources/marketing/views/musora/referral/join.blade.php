@@ -7,10 +7,10 @@
     ];
 
     $instruments = [
-        'drumeo' => 'drums',
-        'pianote' => 'piano',
+        'drumeo' => 'the drums',
+        'pianote' => 'the piano',
         'singeo' => 'how to sing',
-        'guitareo' => 'guitar',
+        'guitareo' => 'the guitar',
     ];
 
     $prizeWithPrice = [
@@ -85,7 +85,7 @@
                         </div>
                     </div>
                     <div class="md:mr-4 lg:mr-10 text-center md:text-left">
-                        <h5 class="leading-normal font-bold mb-2">Learn the {{ $instruments[$brand] }} faster with step-by-step lessons, a thousand songs, and unlimited personal support.</h5>
+                        <h5 class="leading-normal font-bold mb-2">Learn {{ $instruments[$brand] }} faster with step-by-step lessons, a thousand songs, and unlimited personal support.</h5>
                         <div class="flex justify-between max-w-[550px] mb-6">
                             <div>
                                 <i class="fas fa-check text-{{ $brand }}"></i> Improve your skills
