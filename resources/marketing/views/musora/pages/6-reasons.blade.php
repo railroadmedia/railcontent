@@ -1,11 +1,11 @@
 @extends('musora._partials.layout')
 
 @section('head-includes')
-    <title>About | Musora</title>
-    <meta property="og:title" content="About | Musora">
+    <title>6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora</title>
+    <meta property="og:title" content="6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora">
 
-    <meta name="description" content="We have two simple goals: create more musicians and keep them playing longer.">
-    <meta property="og:description" content="We have two simple goals: create more musicians and keep them playing longer.">
+    <meta name="description" content="Online music lessons have grown in popularity because they work!">
+    <meta property="og:description" content="Online music lessons have grown in popularity because they work!">
 
     <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
