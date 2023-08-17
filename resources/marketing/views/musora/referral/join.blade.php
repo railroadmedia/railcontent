@@ -78,7 +78,7 @@
                     <div class="text-center md:text-left relative md:order-1 mb-6 md:mb-0">
                         <img class="inline-block w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-3xl" src="{{ $cardImage }}" alt="{{ $brand }} card">
                         <div class="text-center absolute w-full left-0 bottom-1 md:bottom-0.5 lg:bottom-1 text-xs text-white">
-                            <i>Starting at $20/month thereafter (billed annually). Cancel anytime.</i>
+                            <i>Starting at $20/month thereafter (billed annually). <br class="sm:hidden">Cancel anytime.</i>
                         </div>
                         <div class="absolute top-0 left-0 w-full h-full flex justify-center items-center cursor-pointer" @click="{{ $brand }}Trailer = true;">
                             <i class="fas fa-play play-button border-white border-2 rounded-full text-xl py-3 px-5 sm:text-2xl sm:py-4 sm:px-6 md:text-3xl md:py-6 md:px-8 text-white" style="background:#0009;"></i>
