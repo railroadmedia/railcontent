@@ -383,7 +383,7 @@
                     <h2 class="text-center sm:text-left"><strong>Kevin Castro</strong></h2>
                     <p class="leading-normal my-4 lg:my-6">Kevin Castro wouldn’t be a professional pianist without the Blues. In fact, it was a Blues improvisation that got him accepted into University.
                         <br><br>
-                        Since then, he’s toured with rising stars and JUNO-Award winners (JESSIA, Elijah Woods), played at TikTok Headquarters in New York and LA, and even recorded a demo for Jennifer Lopez (which was, sadly, never released).
+                        Since then, he’s toured with rising stars and JUNO-Award winners (JESSIA, Elijah Woods), played at TikTok Headquarters in New York and LA, and even recorded a demo for Jennifer Lopez.
                         <br><br>
                         And whenever Kevin plays with new musicians, he always uses the Blues to jam.
                         <br><br>
@@ -430,28 +430,19 @@
             <h3 class="mb-4"><strong>20 Guided Play-Along Lessons +<br class="lg:hidden"> Feedback From REAL Teachers.</strong></h3>
             <p class="leading-normal mb-12">
                 <strong class="bg-white text-black px-1">EARLY BIRD SPECIAL:</strong> Save up to 20% <br class="sm:hidden">on all bundles before August 20th.
-                <br>&nbsp;
-                <span class="text-pianote" x-cloak x-data="timer()" x-init="countdown()">
-                     <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                     <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                     <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                     <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                     <span x-cloak x-show="timeLeft > 0">left!</span>
-                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                 </span>
                 <br><br><strong class="font-black"><i class="fas fa-arrow-down"></i> CHOOSE YOUR BUNDLE <i class="fas fa-arrow-down"></i></strong>
             </p>
 
             <div class="grid md:grid-cols-3 gap-2 lg:gap-4 items-start px-4 mx-auto max-w-md md:max-w-none text-black">
-                <div class="bg-white rounded-xl border border-gray-400 py-8 px-4 mb-8 md:mb-0">
+                <div class="bg-white rounded-xl border border-pianote py-8 px-4 mb-8 md:mb-0">
                     <div class="text-center -mt-11">
-                        <div class="bg-gray-400 rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Course Only</div>
+                        <div class="bg-pianote rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Course Only</div>
                         <h4><strong>30-Day Blues Piano</strong></h4>
                         <p class="italic mb-4 text-xs mt-2">Course Only<br> &nbsp; </p>
                         <img class="h-24 lg:h-32 pb-2 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/course-only2.png" alt="Tier 1 pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$97</s><strong>$77</strong></h2>
                         <p class="italic mb-4 text-xs">One-time payment</p>
-                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&promo-code=special&redirect=/order&locked=true" class="join bg-gray-400 medium w-full">ENROLL NOW</a>
+                        <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1&promo-code=special&redirect=/order&locked=true" class="join bg-pianote medium w-full">ENROLL NOW</a>
                     </div>
                 </div>
                 <div class="bg-white rounded-xl border border-blue-600 py-8 px-4 mb-8 md:mb-0">
@@ -466,9 +457,9 @@
                         <a href="/ecommerce/add-to-cart?product-array=30-day-blues-piano:1,faster-fingers:1,piano-chords-and-scales-guide:1&redirect=/order&locked=true" class="join medium w-full mb-5 bg-[#284FFD]">ENROLL NOW</a>
                         <p class="inline-block text-left">
                             <b>30-Day Blues Piano</b><br/>
-                            <b class="text-blue-600">Free</b> Faster Fingers<br>
-                            <b class="text-blue-600">Free</b> Chords & Scales Book<br>
-                            <b class="text-blue-600">Free</b> <i>Shipping Worldwide</i>
+                            <b class="text-blue-600">Bonus</b> Faster Fingers<br>
+                            <b class="text-blue-600">Bonus</b> Chords & Scales Book<br>
+                            <b class="text-blue-600">Bonus</b> <i>Shipping Worldwide</i>
                         </p>
                     </div>
                 </div>
@@ -551,7 +542,7 @@
     ])
 
     @include('_partials.components.countdown',[
-        'countdownDate' => '2023-09-04 00:00:00',
+        'countdownDate' => '2023-09-01 00:00:00',
         'promoVersion' => false
     ])
     @include("pianote.sales.partials._footer")

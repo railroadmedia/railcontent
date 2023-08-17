@@ -366,8 +366,7 @@
                 @endphp
                 @foreach($bonuses as $bonus)
                     <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 md:px-3 mb-7 md:mb-10">
-                        <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md" data-open="signUpModal">
-                            <i class="absolute top-1/2 left-1/2 fas fa-cloud-download play-button opacity-0 transition-opacity duration-300" style="margin: -39px;padding: 22px 17px;"></i>
+                        <div class="relative overflow-hidden rounded-md">
                             <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=95/{{ $bonus['image'] }}"></div>
                         </div>
                         <h5 class="mt-3 mb-1"><strong>{{ $bonus['artist'] }}</strong></h5>
@@ -392,7 +391,7 @@
                 <div class="mx-auto" style="max-width:700px">
                     @include('pianote._partials.sign-up-form', [
                     "recaptchaKey" => $recaptchaKey,
-                        "formId" => "Pianote - Engagement - Trigger - 50 Chord Charts - Web Form",
+                        "formId" => "Pianote - Engagement - Trigger - 50 Chord Charts - Web Form2",
                         "formName" => '50 Chord Charts',
                         "buttonText" => 'Send My Charts '
                     ])
@@ -400,16 +399,4 @@
             </div>
         </div>
     </section>
-
-    <div class="reveal text-center" id="signUpModal" data-reveal style="max-width:560px;background-color: rgb(243, 244, 246);">
-        <div class="py-5 px-3 md:px-9 md:py-9">
-            <h4 class="leading-normal mb-4"><strong>Enter your email to get 50 chord charts<br class="hidden md:inline"> delivered to your inbox for FREE.</strong></h4>
-            @include('pianote._partials.sign-up-form', [
-                    "recaptchaKey" => $recaptchaKey,
-                "formId" => "Pianote - Engagement - Trigger - 50 Chord Charts - Web Form",
-                "formName" => '50 Chord Charts',
-                "stacked" => true
-            ])
-        </div>
-    </div>
 @stop

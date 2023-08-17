@@ -714,8 +714,7 @@
         @if(!empty($signup))
             @if(!empty($bonus['signup']))
                 <div class="w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 px-2 md:px-3 mb-7 md:mb-10">
-                    <div class="relative autoplay-video cursor-pointer overflow-hidden rounded-md" data-open="@if(!empty($dataOpen)){{$dataOpen}}@else{{str_replace(".","",(str_replace("/","",(str_replace(" ","",$bonus['artist'])))))}}{{$bonus['soundslice']}}@endif">
-                        <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;"></i>
+                    <div class="relative overflow-hidden rounded-md">
                         <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=95/{{ $bonus['image'] }}"></div>
                     </div>
                     <h5 class="mt-3 mb-1"><strong>{{ $bonus['artist'] }}</strong></h5>
