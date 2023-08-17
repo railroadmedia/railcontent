@@ -9,7 +9,7 @@
     $instruments = [
         'drumeo' => 'drums',
         'pianote' => 'piano',
-        'singeo' => 'singing',
+        'singeo' => 'how to sing',
         'guitareo' => 'guitar',
     ];
 
@@ -94,7 +94,7 @@
                                 <i class="fas fa-check text-{{ $brand }}"></i> World-class teachers
                             </div>
                             <div>
-                                <i class="fas fa-check text-{{ $brand }}"></i> Play more songs
+                                <i class="fas fa-check text-{{ $brand }}"></i> @if($brand === 'singeo') Sing more songs @else Play more songs @endif
                             </div>
                         </div>
                         <div class="inline-block">
