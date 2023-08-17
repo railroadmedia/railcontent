@@ -1,3 +1,7 @@
+@php
+    //dd($startedLessons);
+@endphp
+
 @extends('partials.layout')
 
 @section('meta')
@@ -5,59 +9,60 @@
 @endsection
 
 @section('content')
-    <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 dark:tw-text-white">
+    <div class="lg:tw-container tw-mx-auto lg:tw-px-8 dark:tw-text-white">
         @if(!$hasGear || !$hasTopics || !$hasGenres || !$hasExperience)
             {{-- On Boarding TriggerBanner --}}
             <trigger-banner brand="{{ $brand }}">
             </trigger-banner>
         @endif
+        <div class="tw-px-4 lg:tw-px-0">
+            {{-- Carousel --}}
+            <header-carousel
+                :preloaded-carousel="{{ $carousel }}"
+                brand="{{ $brand }}"
+            >
+            </header-carousel>
 
-        {{-- Carousel --}}
-        <header-carousel
-            :preloaded-carousel="{{ $carousel }}"
-            brand="{{ $brand }}"
-        >
-        </header-carousel>
+            @if($existsCohortBanner)
+                <cohort-banner
+                :preloaded-banner="{{$cohortBanner}}"
+                ></cohort-banner>
+                @endif
 
-        @if($existsCohortBanner)
-            <cohort-banner
-            :preloaded-banner="{{$cohortBanner}}"
-            ></cohort-banner>
+            {{-- Invite Email Message --}}
+            @if(session()->has('email-invite-message'))
+                <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
+                    <div class="tw-flex tw-flex-col tw-p-[20px] tw-bg-[#c7ff9b] tw-border tw-border-[#3fd525]">
+                        <h3 class="tw-text-[#00101D] tw-font-bold no-decoration grow">Your invite was emailed successfully!</h3>
+                    </div>
+                </div>
+            @endif
+            {{-- Access Code Message --}}
+            @if(session()->has('access-code-claimed-success') && session()->get('access-code-claimed-success') == true)
+                <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
+                    <div class="tw-flex tw-flex-col tw-p-[20px] tw-bg-[#eee]">
+                        <h3 class="tw-text-[#00101D] tw-font-bold no-decoration grow">Your access code has been claimed successfully!</h3>
+                    </div>
+                </div>
             @endif
 
-        {{-- Invite Email Message --}}
-        @if(session()->has('email-invite-message'))
-            <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
-                <div class="tw-flex tw-flex-col tw-p-[20px] tw-bg-[#c7ff9b] tw-border tw-border-[#3fd525]">
-                    <h3 class="tw-text-[#00101D] tw-font-bold no-decoration grow">Your invite was emailed successfully!</h3>
-                </div>
-            </div>
-        @endif
-        {{-- Access Code Message --}}
-        @if(session()->has('access-code-claimed-success') && session()->get('access-code-claimed-success') == true)
-            <div class="tw-container tw-mx-auto tw-rounded tw-px-4 md:tw-px-8 tw-my-4">
-                <div class="tw-flex tw-flex-col tw-p-[20px] tw-bg-[#eee]">
-                    <h3 class="tw-text-[#00101D] tw-font-bold no-decoration grow">Your access code has been claimed successfully!</h3>
-                </div>
-            </div>
-        @endif
-
-        <!-- Home Card Links -->
-        <home-card-links
-            brand="{{ $brand }}"
-            :has-started-method="{{ isset($hasStartedMethod) && $hasStartedMethod ? 'true' : 'false' }}"
-            :has-completed-method="{{ isset($hasCompletedMethod) && $hasCompletedMethod ? 'true' : 'false' }}"
-            completed-levels-url="{{ $completedLevelsUrl }}"
-            method-url="{{ $methodUrl }}"
-            next-learning-path-lesson-title="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}"
-            next-learning-path-level="{{ $nextLearningPathLevel }}"
-        ></home-card-links>
+            <!-- Home Card Links -->
+            <home-card-links
+                brand="{{ $brand }}"
+                :has-started-method="{{ isset($hasStartedMethod) && $hasStartedMethod ? 'true' : 'false' }}"
+                :has-completed-method="{{ isset($hasCompletedMethod) && $hasCompletedMethod ? 'true' : 'false' }}"
+                completed-levels-url="{{ $completedLevelsUrl }}"
+                method-url="{{ $methodUrl }}"
+                next-learning-path-lesson-title="{{ !empty($nextLearningPathLesson) ? $nextLearningPathLesson->fetch('fields.title') : '' }}"
+                next-learning-path-level="{{ $nextLearningPathLevel }}"
+            ></home-card-links>
+        </div>
 
         {{-- Continue Section --}}
-        @if($startedContentCount > 0)
+        @if($hasStartedLessons)
             @component('partials.bladesora.members.components.home._continue-section', [
                 'brand' => brand(),
-                'hasStartedContent' => $startedContentCount > 0,
+                'hasStartedContent' => $hasStartedLessons,
                 'contentEndpoint' => '/railcontent/content',
                 'continueUrl' => url()->route('platform.lesson-history.in-progress'),
                 'seeAllUrl' => url()->route('platform.lesson-history.in-progress'),
@@ -75,8 +80,8 @@
             ])
         @endcomponent
 
-        {{-- Popular Conversations --}}
         @if(count($hotForumTopics) > 0)
+            {{-- Popular Conversations --}}
             @component('partials.bladesora.members.components.home._conversations-section', [
                 'brand' => brand(),
                 'forumUrl' => brand() . '/forums',
@@ -96,17 +101,19 @@
                 ])
             @endcomponent
         @endif
-
+        
         {{-- Subscribed Coaches --}}
-        @component('partials.bladesora.members.components.home._coaches-section', [
-            'brand' => brand(),
-            'hasSubscribedCoaches' => $hasSubscribedCoaches,
-            'subscribedCoaches' => $subscribedCoaches,
-            'subscribedCoachesUrl' => route('platform.coaches', ['only_subscribed'=>'true']).'#coach-section',
-            'allCoachesUrl' => route('platform.coaches'),
-            ])
-        @endcomponent
-
+        @if($hasSubscribedCoaches)
+            @component('partials.bladesora.members.components.home._coaches-section', [
+                'brand' => brand(),
+                'hasSubscribedCoaches' => $hasSubscribedCoaches,
+                'subscribedCoaches' => $subscribedCoaches,
+                'subscribedCoachesUrl' => route('platform.coaches', ['only_subscribed'=>'true']).'#coach-section',
+                'allCoachesUrl' => route('platform.coaches'),
+                ])
+            @endcomponent
+        @endif
+        
         {{-- My Playlists --}}
         @component('partials.bladesora.members.components.home._list-section', [
             'brand' => brand(),
@@ -114,20 +121,22 @@
             'usersList' => $usersList,
             ])
         @endcomponent
-
-        {{-- Live Banner --}}
-        @if( !empty($coachEvent) )
-            <coach-event
-                brand="{{ $brand }}"
-                class="tw-mb-6"
-                :preloaded-content='{{ $coachEvent }}'
-                current-date-string="{{ $currentDate }}"
-                subscription-calendar-id="{{ $calendarId }}"
-                youtube-event-id="{{ $youtubeId }}"
-                :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
-                event-coach-profile-url="{{ $eventCoachProfileUrl }}"
-            ></coach-event>
-        @endif
+        
+        <div class="tw-px-4 lg:tw-px-0">
+            {{-- Live Banner --}}
+            @if( !empty($coachEvent) )
+                <coach-event
+                    brand="{{ $brand }}"
+                    class="tw-mb-6"
+                    :preloaded-content='{{ $coachEvent }}'
+                    current-date-string="{{ $currentDate }}"
+                    subscription-calendar-id="{{ $calendarId }}"
+                    youtube-event-id="{{ $youtubeId }}"
+                    :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+                    event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+                ></coach-event>
+            @endif
+        </div>
 
         {{-- Upcoming Events --}}
         @if($hasUpcomingEvents)
@@ -139,17 +148,18 @@
                 ])
             @endcomponent
         @endif
-
-        {{-- My Stats --}}
-        @if(user()->isAMember())
-        	<stats-section
-            	brand="{{ $brand }}"
-            	account-url="{{ user()->getDashboardUrl() }}"
-            	:next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
-            	next-learning-path-level="{{ user()->getMethodLevel() }}"
-            	:user-metrics="{{ json_encode($userMetrics) }}"
-        	></stats-section>
-        @endif
+        <div class="tw-px-4 lg:tw-px-0">
+            {{-- My Stats --}}
+            @if(user()->isAMember())
+                <stats-section
+                    brand="{{ $brand }}"
+                    account-url="{{ user()->getDashboardUrl() }}"
+                    :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
+                    next-learning-path-level="{{ user()->getMethodLevel() }}"
+                    :user-metrics="{{ json_encode($userMetrics) }}"
+                ></stats-section>
+            @endif
+        </div>
 
     </div>
 

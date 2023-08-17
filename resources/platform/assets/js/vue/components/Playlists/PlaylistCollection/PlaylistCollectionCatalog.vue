@@ -134,7 +134,7 @@
         <!-- No Playlists -->
         <section v-if="playlistsStore.playlists.length === 0 && !playlistsStore.loadingPlaylists && !state.searchTerm && !state.categories"
                  class="tw-w-full tw-flex dark:tw-text-white tw-items-center "
-                 :class="miniCatalog ? 'tw-mt-1' : 'tw-mt-[58px] tw-flex-col'"
+                 :class="miniCatalog ? 'tw-mt-1 tw-px-4 lg:tw-px-0' : 'tw-mt-[58px] tw-flex-col'"
         >
             <div class="tw-h-[84px] tw-w-[84px] tw-rounded-full tw-inline-flex tw-items-center tw-justify-center tw-text-white dark:tw-text-[#9EC0DC] tw-transition-colors tw-bg-[#223F57] dark:tw-bg-[#445F74] "
                  :class="{'tw-mb-[30px]': !miniCatalog}"
@@ -181,22 +181,10 @@
             </header>
 
             <!-- Cards -->
-            <section v-if="!playlistsStore.loadingPlaylists" class="tw-w-full tw-relative tw-mb-5"
+            <section v-if="!playlistsStore.loadingPlaylists && !miniCatalog" class="tw-w-full tw-relative tw-mb-5"
                 :class="state.isListView && !miniCatalog ? 'tw-flex tw-flex-col' : 'tw-grid tw-grid-cols-2 sm:tw-grid-cols-3 lg:tw-grid-cols-4 xl:tw-grid-cols-5 3xl:tw-grid-cols-6 tw-gap-4' "
             >
-                <!-- Mini Catalog -->
-                <template v-if="miniCatalog">
-                    <playlist-collection-card
-                        v-for="listElement in playlistsStore.playlists.slice(0,5)"
-                        :key="listElement.id"
-                        :listElement="listElement"
-                        :isListView="false"
-                        :token="token"
-                        :brand="brand"
-                    />
-                </template>
                 <!-- Full Catalog -->
-                <template v-else>
                     <playlist-collection-card
                         v-for="listElement in playlistsStore.playlists"
                         :key="listElement.id"
@@ -205,8 +193,24 @@
                         :token="token"
                         :brand="brand"
                     />
-                </template>
             </section>
+            <section class="tw-w-full tw-block tw-overflow-x-auto lg:tw-overflow-x-hidden tw-no-scrollbar">
+                <div v-if="!playlistsStore.loadingPlaylists && miniCatalog && !state.isListView" 
+                    class="tw-px-4 lg:tw-px-0 tw-w-full tw-relative tw-mb-5 tw-flex tw-flex-nowrap lg:tw-auto-rows-[0] lg:tw-grid-rows-1 lg:tw-overflow-hidden lg:tw-grid lg:tw-grid-cols-5 2xl:tw-grid-cols-6 4xl:tw-grid-cols-8 xl:tw-gap-[12px] 2xl:tw-gap-[16px]"
+                >
+                <!-- Mini Catalog -->
+                    <playlist-collection-card
+                        v-for="listElement in playlistsStore.playlists.slice(0,8)"
+                        :key="listElement.id"
+                        :listElement="listElement"
+                        :isListView="false"
+                        :isMiniCatalog="true"
+                        :token="token"
+                        :brand="brand"
+                    />
+                </div>
+            </section>
+            
 
             <!-- Pagination -->
             <Pagination
