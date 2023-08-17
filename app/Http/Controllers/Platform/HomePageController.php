@@ -346,7 +346,7 @@ class HomePageController extends BaseController
             "hotForumTopics" => $hotForumTopics,
             "newContentJson" => $newContent->toResponseRawJson(),
             "startedContentJson" => $startedLessons->toResponseRawJson(),
-            "startedContentCount" => count($startedLessons),
+            "hasStartedLessons" => count($followedLessons->results()) > 0,
             "usersList" => $usersList,
             "userMetrics" => $userMetrics,
             "nextLearningPathLevel" => $nextLearningPathLevel,
@@ -629,7 +629,7 @@ class HomePageController extends BaseController
             user()->id,
             'user-playlist',
             brand(),
-            5
+            8
         );
 
         $results =
