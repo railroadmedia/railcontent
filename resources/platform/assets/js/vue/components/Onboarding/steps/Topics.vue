@@ -21,6 +21,9 @@ const props = defineProps({
   },
   configOptions: {
     type: Object,
+  },
+  stepName: {
+    type: String,
   }
 });
 
@@ -99,7 +102,7 @@ const handleRedirect = () => {
         <ProgressBar :brand="brand" :currentStep="5" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
         <Button :brand="brand" @onButtonClick="handleRedirect" :isDisabled="isNextButtonDisabled()"
           classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block">Complete Your Account</Button>
-        <SkipStep :brand="brand" classOverride="tw-mt-[20px] md:tw-mt-0" />
+        <SkipStep :brand="brand" :step="stepName" classOverride="tw-mt-[20px] md:tw-mt-0" />
       </div>
     </div>
   </StepWrapper>

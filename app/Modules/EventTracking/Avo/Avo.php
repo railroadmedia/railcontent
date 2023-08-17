@@ -112,8 +112,8 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => '58JKCkh2cZyHusnuFYYo',
-                        'br' => 'master',
+                        'ac' => '7eLct1yOB9KH78kEGFCB',
+                        'br' => 'ufSKSeOYQ',
                         'en' => self::$__AVO_ENV__,
                         'ev' => $event_id,
                         'ha' => $hash,
@@ -149,8 +149,8 @@ class Avo
                 try {
                     $ch = curl_init('https://api.avo.app/i');
                     $data = [
-                        'ac' => '58JKCkh2cZyHusnuFYYo',
-                        'br' => 'master',
+                        'ac' => '7eLct1yOB9KH78kEGFCB',
+                        'br' => 'ufSKSeOYQ',
                         'en' => self::$__AVO_ENV__,
                         'ty' => $type,
                         'sc' => '1cMjCpEPIvTt6xkXe7Fi',
@@ -203,6 +203,13 @@ class Avo
              // debug console in Avo
              self::_invoke_meta('init', []);
          }
+     }
+
+     private static function _assert_step_skipped($step_skipped, $label_ = NULL)
+     {
+         $messages = [];
+         $messages = array_merge($messages, self::_avo_assert_string('3VO48nTzt-', isset($label_) ? 'step_skipped' . ':' . $label_ : 'step_skipped', $step_skipped));
+         return $messages;
      }
 
      private static function _assert_brand($brand, $label_ = NULL)
@@ -568,9 +575,47 @@ class Avo
          ]);
      }
 
+     public static function account_setup_skipped($properties = [])
+     {
+         // assert properties
+         if (self::$__AVO_ENV__ !== 'prod') {
+             $messages = [];
+             $messages = array_merge($messages, self::_assert_user_id_($properties['user_id_']));
+             $messages = array_merge($messages, self::_assert_step_skipped($properties['step_skipped']));
+             $messages = array_merge($messages, self::_assert_brand($properties['brand']));
+             // debug console in Avo
+             self::_invoke('JDGGcLaq4', '939a00bdb9d7345912dd0a7ba1c0db527b6a170da1d4ed73cc8bf2c2bd329c1a', $messages);
+             if (self::$__STRICT__) {
+                 // throw exception if messages is not empty
+                 if (count($messages) > 0) {
+                     throw new \UnexpectedValueException("Error sending event 'Account Setup Skipped': {$messages[0]['message']}");
+                 }
+             } else {
+                 if (self::$__VERBOSE__) {
+                     foreach($messages as $m) {
+                         self::$__LOGGER__->error("[avo] {$m['message']}");
+                     }
+                 }
+             }
+         }
+
+         if (self::$__AVO_ENV__ !== 'prod') {
+             self::$__LOGGER__->info("[avo] Event sent: 'Account Setup Skipped', Event props: ". print_r(array_filter([
+             'step_skipped' => $properties['step_skipped'],
+             'brand' => $properties['brand'],
+             ], function($value) { return isset($value); }), TRUE) . ", User props: " . print_r(array_filter([], function($value) { return isset($value); }), TRUE));
+         }
+
+         // destination rudder_stack
+         self::$rudder_stackDestination->log_event($properties['user_id_'], 'Account Setup Skipped', [
+         'step_skipped' => $properties['step_skipped'],
+         'brand' => $properties['brand'],
+         ]);
+     }
+
 }
 if (!function_exists('json_encode')) {
     throw new \Exception('Avo needs the JSON PHP extension.');
 }
 // AVOMODULEMAP:"Avo"
-// AVOEVENTMAP:["onboarding_started","account_created","instrument_onboarding_step_completed","gear_onboarding_step_completed","experience_onboarding_step_completed","genres_onboarding_step_completed","topics_onboarding_step_completed","test"]
+// AVOEVENTMAP:["onboarding_started","account_created","instrument_onboarding_step_completed","gear_onboarding_step_completed","experience_onboarding_step_completed","genres_onboarding_step_completed","topics_onboarding_step_completed","test","account_setup_skipped"]

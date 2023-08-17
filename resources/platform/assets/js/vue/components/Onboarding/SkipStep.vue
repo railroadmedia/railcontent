@@ -1,4 +1,7 @@
 <script setup>
+import axios from "axios";
+import Toasts from "../../vuesora/assets/js/classes/toasts";
+
 const props = defineProps({
     title: {
         type: String,
@@ -7,10 +10,40 @@ const props = defineProps({
     brand: {
         type: String,
         default: 'drumeo'
+    },
+    step: {
+        type: String,
+        default: null
     }
 })
+
+const handleError = (response) => {
+    let title = 'Oops, something went wrong';
+    let message = 'An error happened on the server, please contact support using the '
+        + 'chat widget at the bottom of your screen';
+
+    if (response.data.errors) {
+        title = response.data.errors[0].title;
+        message = response.data.errors[0].detail;
+    }
+
+    Toasts.push({
+        icon: 'sad',
+        themeColor: this.themeColor,
+        title,
+        message,
+        timeout: 7500,
+    });
+}
 const handleSkip = () => {
-    window.location.href = '/' + props.brand
+    axios.post('/user-management-system/onboarding-skip-account-setup',
+        {
+            skip: true,
+            skippedStep: props.step,
+            brand,
+        })
+        .then(() => window.location.href = '/' + props.brand)
+        .catch(handleError)
 };
 </script>
 
