@@ -1,5 +1,10 @@
 <div id="instructorInfo" class="tw-container tw-mx-auto fluid tw-bg-white dark:tw-bg-[#081825] tw-rounded-[10px]">
     <div class="tw-max-w-screen-2xl tw-px-4 md:tw-px-8 tw-mx-auto lean pv-2">
+
+        @if(!empty($breadcrumbs))
+            {{ $breadcrumbs }}
+        @endif
+
         @if(!empty($lessonList))
             <div class="tw-flex tw-flex-row">
                 <h6 class="body tw-font-bold tw-uppercase tw-text-[#191b1c] dark:tw-text-white tw-mb-1">Course Lessons</h6>
