@@ -86,11 +86,32 @@
                 !empty($lessonContent->fetch('data.description')) ||
                 !empty($lessonContent['chapters']))
             <template #info-section>
-                @include('partials.bladesora.members.content._content-info', [
+                @component('partials.bladesora.members.content._content-info', [
                     'instructors' => $lessonContent->fetch('*fields.instructor'),
                     'contentDescription' => $lessonContent->fetch('data.description', null),
                     'contentChapters' => $lessonContent['chapters'] ?? [],
                 ])
+                    @slot('breadcrumbs')
+                        <div class="tw-mb-6 tw-text-black dark:tw-text-white tw-uppercase">
+                            @if(!empty($lessonContent['parent']))
+                                {{-- FIRST LEVEL --}}
+                                @if($lessonContent['parent']->fetch('type') === 'learning-path-course')
+                                    <a class="tw-text-black dark:tw-text-white" href="{{ url()->route('platform.content.first-level', ['method', $lessonContent['slug'], $lessonContent['id']]) }}">{{ $brand.' Method' }}</a>
+                                @elseif($lessonContent['parent']->fetch('type') === 'pack-bundle')
+                                    <a class="tw-text-black dark:tw-text-white" href="{{ url()->route('platform.packs') }}">Packs</a>
+                                @else
+                                    <a class="tw-text-black dark:tw-text-white" href="{{ url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent['parent']->fetch('type')]]) }}">{{$lessonContent['parent']->fetch('type')}}</a>
+                                @endif
+
+                                {{-- SECOND LEVEL --}}
+                                / <a class="tw-text-black dark:tw-text-white" href="{{$lessonContent['parent']->fetch('url')}}">{{$lessonContent['parent']->fetch('fields.title')}}</a>
+                            @else
+                                <a class="tw-text-black dark:tw-text-white" href="{{ url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]) }}">{{ parse_lesson_type_readable($lessonContent->fetch('type'), true)  }}</a>
+                            @endif
+                                / <b>{{ $lessonContent['title'] }}</b>
+                        </div>
+                    @endslot
+                @endcomponent
             </template>
         @endif
     </playlist-playback-wrapper>
