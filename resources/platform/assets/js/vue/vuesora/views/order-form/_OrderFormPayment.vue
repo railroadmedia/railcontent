@@ -53,7 +53,7 @@
             <!-- Hiding with just CSS, need to investigate why there are problems with Stripe when hiding with v-if (yt) -->
             <div
                 class="flex flex-row flex-wrap"
-                :class="$_paymentMethod !== 'credit_card' ? 'hidden' : ''"
+                :class="$_paymentMethod !== 'credit_card' ? 'tw-hidden' : ''"
             >
                 <div class="flex flex-column xs-12 sm-6 ph-1 mb-2">
                     <div class="form-group">
