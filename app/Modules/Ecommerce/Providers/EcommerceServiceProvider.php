@@ -28,16 +28,8 @@ class EcommerceServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->commands(
-            [
-                UnifySubscriptions::class,
-                ProcessAppleExpiredSubscriptions::class,
-                MigrateExistingStripeMusoraGatewayPaymentsToDrumeo::class,
-                MigrateStripeCustomersToMusora::class,
-            ]
-        );
-
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
+        $this->loadRoutesFrom(__DIR__ . '/../routes/shopify.php');
     }
 
     /**
