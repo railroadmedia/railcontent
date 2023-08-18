@@ -39,7 +39,6 @@ const handleError = (response) => {
 const handleSkip = () => {
   skipAccountSetup(
     {
-      skip: true,
       skippedStep: props.step,
       brand,
     })

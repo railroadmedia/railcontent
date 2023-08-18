@@ -4,8 +4,8 @@ export const aboutStepCompleted = ({ skipped }) => {
   return axios.post(`/user-management-system/onboarding-about-completed`, { skipped });
 };
 
-export const skipAccountSetup = ({brand, skip, skippedStep}) => {
-  return axios.post('/user-management-system/onboarding-skip-account-setup', { brand, skip, skippedStep });
+export const skipAccountSetup = ({brand, skippedStep}) => {
+  return axios.post('/user-management-system/onboarding-skip-account-setup', { brand, skippedStep });
 }
 export const saveDisplayName = ({ name, userId }) => {
     return axios.patch(`/user-management-system/user/update/${userId}`, { display_name: name });
