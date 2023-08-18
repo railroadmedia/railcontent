@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-column grow align-v-center">
+  <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
 
     <div v-if="isCoachesGrid"
          id="coach-section"
@@ -103,7 +103,6 @@
       :brand="brand"
       :theme-color="themeColor"
       :use-theme-color="useThemeColor"
-      :no-wrap="noWrapGrid"
       :user-id="userId"
       :is-admin="isAdmin"
       :lock-unowned="lockUnowned"
@@ -123,7 +122,6 @@
       :brand="brand"
       :theme-color="themeColor"
       :use-theme-color="useThemeColor"
-      :no-wrap="noWrapGrid"
       :user-id="userId"
       :is-admin="isAdmin"
       :lock-unowned="lockUnowned"
@@ -140,7 +138,6 @@
       :brand="brand"
       :theme-color="themeColor"
       :use-theme-color="useThemeColor"
-      :no-wrap="noWrapGrid"
       :user-id="userId"
       :is-admin="isAdmin"
       :lock-unowned="lockUnowned"
@@ -159,7 +156,6 @@
       :brand="brand"
       :theme-color="themeColor"
       :use-theme-color="useThemeColor"
-      :no-wrap="noWrapGrid"
       :user-id="userId"
       :is-admin="isAdmin"
       :lock-unowned="lockUnowned"
@@ -369,10 +365,6 @@ export default {
     displayUserInteractions: {
       type: Boolean,
       default: () => true,
-    },
-    noWrapGrid: {
-      type: Boolean,
-      default: () => false,
     },
     showLoadingAnimation: {
       type: Boolean,
