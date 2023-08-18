@@ -40,8 +40,16 @@ class UpdateContentVimeoVideoId extends Command
         $tableHeaders = ["Content ID", "URL", "New Vimeo ID"];
         $tableRows = [];
 
+        $failed = collect();
+
         foreach ($this->contentWithValue as $contentId => $value) {
             $content = Content::find($contentId);
+
+            if (is_null($content)) {
+                $failed->push($contentId);
+                continue;
+            }
+
             $content->vimeo_video_id = $value;
 
             if (!$simulate) {
@@ -61,6 +69,11 @@ class UpdateContentVimeoVideoId extends Command
         $this->newLine();
 
         $this->table($tableHeaders, $tableRows);
+
+        if ($failed->isNotEmpty()) {
+            $this->error("The following content IDs could not be found:");
+            $failed->each(fn($id) => $this->error($id));
+        }
 
         return self::SUCCESS;
     }
