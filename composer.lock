@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "73a467bd18a9e42e0e74ceffa105b4c3",
+    "content-hash": "1f12053225e6843e7a67acb16f608ec1",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8123,16 +8123,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.99",
+            "version": "dev-srr-misc",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "71702be63c82e9b22f6d00e64715590fd9e0340d"
+                "reference": "82bcb858ef27b02c4242e2b939193e8ec38b7c92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/71702be63c82e9b22f6d00e64715590fd9e0340d",
-                "reference": "71702be63c82e9b22f6d00e64715590fd9e0340d",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/82bcb858ef27b02c4242e2b939193e8ec38b7c92",
+                "reference": "82bcb858ef27b02c4242e2b939193e8ec38b7c92",
                 "shasum": ""
             },
             "require": {
@@ -8149,6 +8149,7 @@
                 "railroad/doctrine-array-hydrator": "2.0.*",
                 "railroad/location": "^3.0.0",
                 "railroad/permissions": "^2.0",
+                "railroad/referral": "3.0.*",
                 "railroad/remotestorage": "^2.0",
                 "ramsey/uuid": "^4.3",
                 "stripe/stripe-php": "^7.95"
@@ -8169,9 +8170,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.99"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/srr-misc"
             },
-            "time": "2023-08-14T13:42:17+00:00"
+            "time": "2023-08-18T14:44:02+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -17053,6 +17054,12 @@
     ],
     "aliases": [
         {
+            "package": "railroad/ecommerce",
+            "version": "dev-srr-misc",
+            "alias": "v5.0.102",
+            "alias_normalized": "5.0.102.0"
+        },
+        {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
@@ -17061,6 +17068,7 @@
     ],
     "minimum-stability": "dev",
     "stability-flags": {
+        "railroad/ecommerce": 20,
         "railroad/railanalytics": 20
     },
     "prefer-stable": true,

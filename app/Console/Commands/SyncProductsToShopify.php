@@ -37,10 +37,6 @@ class SyncProductsToShopify extends Command
     protected ProductRepository $productRepository;
     protected EcommerceEntityManager $entityManager;
 
-    const PRODUCT_TYPE_DIGITAL_ONE_TIME = "digital one time";
-    const PRODUCT_TYPE_DIGITAL_SUBSCRIPTION = "digital subscription";
-    const PRODUCT_TYPE_PHYSICAL_ONE_TIME = "physical one time";
-
     /**
      * Execute the console command.
      *
@@ -84,23 +80,24 @@ class SyncProductsToShopify extends Command
         $tableHeaders = ["Product ID", "sku", "Shopify Variant ID"];
         $tableRows = [];
 
-        $products->each(function (Product $product) use ($fresh, $bar, $simulate, $shopifyIds, $location, &$tableRows) {
+        $simulatedShopifyId = 0;
+        $products->each(function (Product $product) use ($fresh, $bar, $simulate, $shopifyIds, $location, &$tableRows, &$simulatedShopifyId) {
             // STEP 3: determine if updating or creating
             $isCreating = $fresh || is_null($product->getShopifyId());
 
             // STEP 4: build up the data structure depending on product type
-            if ($product->getType() === self::PRODUCT_TYPE_DIGITAL_SUBSCRIPTION
-            || $product->getType() === self::PRODUCT_TYPE_DIGITAL_ONE_TIME) {
+            if ($product->getType() === Product::TYPE_DIGITAL_SUBSCRIPTION
+            || $product->getType() === Product::TYPE_DIGITAL_ONE_TIME) {
                 $postData = $isCreating ? $this->createProductData($product, $location->getAttributes()["id"])
                     : $this->updateProductData($product, $location->getAttributes()["id"]);
-            } elseif($product->getType() === self::PRODUCT_TYPE_PHYSICAL_ONE_TIME){
+            } elseif($product->getType() === Product::TYPE_PHYSICAL_ONE_TIME){
                 //TODO do whatever special stuff for clothes. handle each type specially to make the nested variants and whatnot
                 $postData = [];
                 return;
             } else {
                 throw new \Exception(sprintf("Unknown product type %s. Expected types are: %s",
-                        $product->getType(), implode(", ", [$this->PRODUCT_TYPE_DIGITAL_ONE_TIME,
-                        $this->PRODUCT_TYPE_DIGITAL_SUBSCRIPTION, $this->PRODUCT_TYPE_PHYSICAL_ONE_TIME])));
+                        $product->getType(), implode(", ", [Product::TYPE_DIGITAL_ONE_TIME,
+                        Product::TYPE_DIGITAL_SUBSCRIPTION, Product::TYPE_PHYSICAL_ONE_TIME])));
             }
 
             // STEP 5: send the data to Shopify
@@ -130,7 +127,7 @@ class SyncProductsToShopify extends Command
                     $this->entityManager->flush();
                 }
             } else {
-                $shopifyId = "";
+                $shopifyId = ++$simulatedShopifyId;
             }
 
             $tableRows[] = [$product->getId(), $product->getSku(), $shopifyId];
