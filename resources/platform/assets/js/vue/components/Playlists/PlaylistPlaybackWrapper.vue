@@ -365,8 +365,6 @@ onBeforeMount(() => {
                         :show-complete-button="released && !needAccess" :relatedLesson="relatedLesson"
                         :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton" />
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
-                    <RelatedLesson v-if="relatedLesson && relatedLesson.data && relatedLesson.data.length"
-                        :relatedLesson="relatedLesson.data[0]" :brand="brand" />
                 </div>
                 <!-- Info Section -->
                 <slot name="info-section"></slot>
