@@ -50,7 +50,6 @@ class OnboardingController extends Controller
         Avo::gear_onboarding_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $request->brand,
-                'is_skipped' => false,
                 'gear_list' => $gearList
             ])
         );
@@ -86,7 +85,6 @@ class OnboardingController extends Controller
         Avo::topics_onboarding_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $request->brand,
-                'is_skipped' => false,
                 'topic_list' => $topicList
             ])
         );
@@ -120,7 +118,6 @@ class OnboardingController extends Controller
         Avo::genres_onboarding_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $request->brand,
-                'is_skipped' => false,
                 'genre_list' => $genres
             ])
         );
@@ -154,7 +151,6 @@ class OnboardingController extends Controller
         Avo::experience_onboarding_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $request->brand,
-                'is_skipped' => false,
                 'experience_level' => strval($request->experience_level)
             ])
         );
@@ -188,6 +184,18 @@ class OnboardingController extends Controller
         ];
 
         return response($response, 200);
+    }
+
+    public function aboutStepCompleted(Request $request) {
+        $request->validate([
+            'skipped' => 'required'
+        ]);
+
+        \Avo::about_onboarding_step_completed(AvoHelper::defaultEventProperties([
+            'is_skipped' => $request->get('skipped')
+        ]));
+
+        return response(null, 200);
     }
 
     /**

@@ -1,6 +1,7 @@
 <script setup>
 import axios from "axios";
 import Toasts from "../../vuesora/assets/js/classes/toasts";
+import {skipAccountSetup} from "./services";
 
 const props = defineProps({
     title: {
@@ -36,14 +37,14 @@ const handleError = (response) => {
     });
 }
 const handleSkip = () => {
-    axios.post('/user-management-system/onboarding-skip-account-setup',
-        {
-            skip: true,
-            skippedStep: props.step,
-            brand,
-        })
-        .then(() => window.location.href = '/' + props.brand)
-        .catch(handleError)
+  skipAccountSetup(
+    {
+      skip: true,
+      skippedStep: props.step,
+      brand,
+    })
+    .then(() => window.location.href = '/' + props.brand)
+    .catch(handleError)
 };
 </script>
 
