@@ -45,6 +45,9 @@ const props = defineProps({
   info: {
     type: Object,
   },
+  stepName: {
+    type: String,
+  }
 });
 
 const emit = defineEmits(["onChangeStep", "onCheckStep", "onChangeInfo"]);
@@ -111,7 +114,7 @@ function goBack() {
         xl:tw-pt-0
       ">
         <ProgressBar :brand="brand" :currentStep="3" :steps="steps" @onChangeStep="(s) => emit('onChangeStep', s)" />
-        <SkipStep :brand="brand" />
+        <SkipStep :brand="brand" :step="stepName" />
       </div>
     </div>
   </StepWrapper>

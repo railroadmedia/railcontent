@@ -121,6 +121,7 @@ onMounted(() => {
             :steps="steps"
             :info="info"
             :config-options="configOptions"
+            :step-name="initialSteps[currentStep].label"
         />
         <Experience
             :brand="brand"
@@ -131,6 +132,7 @@ onMounted(() => {
             :steps="steps"
             :info="info"
             :config-options="configOptions"
+            :step-name="initialSteps[currentStep].label"
         />
         <Genre
             :brand="brand"
@@ -141,6 +143,7 @@ onMounted(() => {
             :steps="steps"
             :info="info"
             :config-options="configOptions"
+            :step-name="initialSteps[currentStep].label"
         />
         <Topics
             :brand="brand"
@@ -151,6 +154,7 @@ onMounted(() => {
             :steps="steps"
             :info="info"
             :config-options="configOptions"
+            :step-name="initialSteps[currentStep].label"
         />
     </ModalRenderer>
 </template>

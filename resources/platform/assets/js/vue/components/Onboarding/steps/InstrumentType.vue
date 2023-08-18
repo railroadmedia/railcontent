@@ -21,6 +21,9 @@ const props = defineProps({
   },
   configOptions: {
     type: Object,
+  },
+  stepName: {
+    type: String,
   }
 });
 
@@ -123,7 +126,7 @@ const isNextButtonDisabled = () => {
         classOverride="md:tw-w-[543px] tw-mt-[40px] tw-hidden md:tw-block"
         >Next</Button
       >
-      <SkipStep :brand="brand"
+      <SkipStep :brand="brand" :step="stepName"
         classOverride="tw-mt-[20px] md:tw-mt-0"
       />
     </div>

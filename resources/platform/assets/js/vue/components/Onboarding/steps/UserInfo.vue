@@ -6,7 +6,7 @@ import ProgressBar from "../../ProgressBar/ProgressBar.vue";
 import Button from "../../Button/Button.vue";
 import StepWrapper from "../StepWrapper.vue";
 import StepHeader from "../StepHeader.vue";
-import { saveDisplayName, checkDisplayName } from '../services';
+import {saveDisplayName, checkDisplayName, aboutStepCompleted} from '../services';
 
 const props = defineProps({
   brand: {
@@ -32,11 +32,13 @@ const onInputChange = (value) => {
 }
 
 const handleSkipStep = () => {
+  aboutStepCompleted({ skipped: true });
   emit('onChangeStep', 1);
   emit('onCheckStep', 0, true);
 };
 
 const goToNextStep = () => {
+  aboutStepCompleted({ skipped: false });
   emit('onChangeStep', 1);
   emit('onCheckStep', 0, true);
 };
