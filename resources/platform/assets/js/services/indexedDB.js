@@ -61,18 +61,32 @@ export function saveToDB(db, storeName, key, data) {
  */
 export function getFromDB(db, storeName, key) {
     return new Promise( (resolve, reject) =>  {
-        const transaction = db.transaction([storeName]);
+        const transaction = db.transaction(storeName, 'readonly');
         const objectStore = transaction.objectStore(storeName);
         const request = objectStore.get(key);
-
-        request.onerror = function(event) {
-            reject("Error saving to IndexedDB.")
-        };
 
         request.onsuccess = function(event) {
             resolve(request.result);
         }
+
+        request.onerror = function(event) {
+            reject("Error fetching data from IndexedDB.")
+        };
     })
+}
+
+/**
+ * Retrieve All Data from IndexedDB
+ * 
+ * @param {string} db - Name of Database
+ * @param {string} storeName - Name of Store
+ * @param {Array} key - Name of Keys you want to get the values for
+ */
+export function getMultipleFromDB(db, storeName, keys) {
+    // Create an array of promises for each key
+    const promises = keys.map(key => getFromDB(db, storeName, key));
+    // Use Promise.all to execute all promises in parallel
+    return Promise.all(promises);
 }
 
 /**
