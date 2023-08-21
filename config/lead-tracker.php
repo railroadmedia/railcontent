@@ -21,6 +21,23 @@ return [
         [
             'path' => '/customer-io/submit-email-form',
             'method' => 'post',
+            'form_name' => 'Kristinas Top 25',
+            'brand' => 'drumeo',
+
+            'input_data_map' => [
+                'email' => 'email',
+                'form_name' => 'form_name',
+                'utm_source' => 'leadtracker_utm_source',
+                'utm_medium' => 'leadtracker_utm_medium',
+                'utm_campaign' => 'leadtracker_utm_campaign',
+                'utm_term' => 'leadtracker_utm_term',
+                'customer_io_customer_id' => 'leadtracker_customer_io_customer_id',
+                'customer_io_event_name' => 'leadtracker_customer_io_event_name',
+            ],
+        ],
+        [
+            'path' => '/customer-io/submit-email-form',
+            'method' => 'post',
             'form_name' => '40 Songs',
             'brand' => 'drumeo',
 

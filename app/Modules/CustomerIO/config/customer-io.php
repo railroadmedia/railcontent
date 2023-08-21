@@ -58,6 +58,16 @@ return [
     // form names and configuration
     'forms' => [
         'drumeo' => [
+            'Kristinas Top 25' => [
+                'custom_attributes' => [
+                ],
+                'events' => [
+                    'drumeo_prospect_kristinas-top-25',
+                ],
+                'accounts_to_sync' => [
+                    'drumeo',
+                ],
+            ],
             '40 Songs' => [
                 'custom_attributes' => [
                 ],
