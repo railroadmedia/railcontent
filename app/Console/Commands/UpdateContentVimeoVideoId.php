@@ -37,7 +37,7 @@ class UpdateContentVimeoVideoId extends Command
         $bar = $this->output->createProgressBar(count($this->contentWithValue));
         $bar->start();
 
-        $tableHeaders = ["Content ID", "URL", "New Vimeo ID"];
+        $tableHeaders = ["Content ID", "URL", "Old Vimeo Id", "New Vimeo ID"];
         $tableRows = [];
 
         $failed = collect();
@@ -50,13 +50,14 @@ class UpdateContentVimeoVideoId extends Command
                 continue;
             }
 
+            $oldValue = $content->vimeo_video_id ?? "NULL";
             $content->vimeo_video_id = $value;
 
             if (!$simulate) {
                 $content->update();
             }
 
-            $tableRows[] = [$contentId, get_musora_brand_base_url() . $content->web_url_path, $value];
+            $tableRows[] = [$contentId, get_musora_brand_base_url() . $content->web_url_path, $oldValue, $value];
             $bar->advance();
         }
 
