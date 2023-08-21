@@ -7976,6 +7976,63 @@
             "time": "2023-07-31T14:32:22+00:00"
         },
         {
+            "name": "ql/uri-template",
+            "version": "1.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/QuickenLoans/uri-template.git",
+                "reference": "948f14d8e288641b72bd0c1de6647d2c9ccae616"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/QuickenLoans/uri-template/zipball/948f14d8e288641b72bd0c1de6647d2c9ccae616",
+                "reference": "948f14d8e288641b72bd0c1de6647d2c9ccae616",
+                "shasum": ""
+            },
+            "require": {
+                "ext-ctype": "*",
+                "ext-mbstring": "*",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^1.0||^2.0",
+                "phpunit/php-invoker": "*",
+                "phpunit/phpunit": "^4.8||^5.7||^6.5||^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "QL\\UriTemplate\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matt Nagi",
+                    "email": "mattnagi@quickenloans.com"
+                }
+            ],
+            "description": "An implementation of RFC 6570 level 4",
+            "homepage": "https://github.com/QuickenLoans/uri-template",
+            "keywords": [
+                "URI Template",
+                "rfc6570",
+                "template",
+                "uri",
+                "url"
+            ],
+            "support": {
+                "email": "mattnagi@quickenloans.com",
+                "issues": "https://github.com/QuickenLoans/uri-template/issues",
+                "source": "https://github.com/QuickenLoans/uri-template"
+            },
+            "time": "2018-06-10T16:08:54+00:00"
+        },
+        {
+==== BASE ====
             "name": "railroad/doctrine",
             "version": "v2.0.0",
             "source": {
@@ -8084,16 +8141,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "v5.0.101",
+            "version": "dev-5.0-revenuecat",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "33efcf2dc0b26b1ed7a8f6dc4589a79af8f3c4ea"
+                "reference": "0cc24b7f024c529f94f05da438596cee0e69cb36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/33efcf2dc0b26b1ed7a8f6dc4589a79af8f3c4ea",
-                "reference": "33efcf2dc0b26b1ed7a8f6dc4589a79af8f3c4ea",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/0cc24b7f024c529f94f05da438596cee0e69cb36",
+                "reference": "0cc24b7f024c529f94f05da438596cee0e69cb36",
                 "shasum": ""
             },
             "require": {
@@ -8131,9 +8188,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/v5.0.101"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-revenuecat"
             },
-            "time": "2023-08-15T22:50:03+00:00"
+            "time": "2023-07-07T08:24:39+00:00"
         },
         {
             "name": "railroad/lead-tracker",
