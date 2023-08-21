@@ -21912,6 +21912,9 @@ a:visited{
 .tw-mt-\[14px\]{
   margin-top: 14px !important;
 }
+.tw-mr-\[5px\]{
+  margin-right: 5px !important;
+}
 .tw-mr-\[24px\]{
   margin-right: 24px !important;
 }
@@ -21989,9 +21992,6 @@ a:visited{
 }
 .tw-ml-\[9px\]{
   margin-left: 9px !important;
-}
-.tw-mr-\[5px\]{
-  margin-right: 5px !important;
 }
 .tw-ml-\[-70px\]{
   margin-left: -70px !important;
@@ -25703,6 +25703,10 @@ a:visited{
 .tw-dark .dark\:tw-text-\[\#445F74\]{
   --tw-text-opacity: 1 !important;
   color: rgb(68 95 116 / var(--tw-text-opacity)) !important;
+}
+.tw-dark .dark\:tw-text-\[\#627F97\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(98 127 151 / var(--tw-text-opacity)) !important;
 }
 .tw-dark .dark\:tw-text-\[\#9ec0dc\]{
   --tw-text-opacity: 1 !important;
