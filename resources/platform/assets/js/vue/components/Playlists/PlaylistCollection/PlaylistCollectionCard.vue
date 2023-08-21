@@ -18,6 +18,10 @@
             type: Boolean,
             default: false,
         },
+        isMiniCatalog: {
+            type: Boolean,
+            default: false,
+        },
     });
 
     //-----------Computed Props-----------//
@@ -102,12 +106,13 @@
 </script>
 <template>
     <div class="tw-group tw-relative"
-         :class="isListView ? 'tw-h-[56px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]' : 'tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1' "
+         :class="isListView ? 'tw-h-[56px] tw-flex tw-flex-row tw-w-full tw-items-center tw-transition-colors tw-py-1 hover:tw-bg-[#E6E7E9]/40 dark:hover:tw-bg-[#081825]/50 even:tw-bg-white dark:even:tw-bg-[#081825]' : `tw-grid tw-grid-rows-5 tw-grid-cols-5 tw-gap-1 ${isMiniCatalog ? 'tw-w-[205px] tw-min-w-[205px] lg:tw-w-auto lg:tw-min-w-0 tw-pr-[10px]' : ''}` "
     >
         <!-- Playlist thumbnail -->
         <PlaylistThumbnail
             :listElement="listElement"
             :isListView="isListView"
+            :isMiniCatalog="isMiniCatalog"
             :brand="brand"
             :linkUrl="listElement.playback_url"
         />

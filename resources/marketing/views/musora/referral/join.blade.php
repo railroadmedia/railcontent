@@ -7,10 +7,10 @@
     ];
 
     $instruments = [
-        'drumeo' => 'drums',
-        'pianote' => 'piano',
-        'singeo' => 'singing',
-        'guitareo' => 'guitar',
+        'drumeo' => 'the drums',
+        'pianote' => 'the piano',
+        'singeo' => 'how to sing',
+        'guitareo' => 'the guitar',
     ];
 
     $prizeWithPrice = [
@@ -21,10 +21,17 @@
     ];
 
     $prizeNames = [
-        'drumeo' => 'A DTX402K - Yamaha E-Drum Kit',
-        'pianote' => 'A P125A WH - Digital Piano (White Finish)',
-        'singeo' => 'A UR22CR PACK - Steinberg Interface with Mic and Headphones',
-        'guitareo' => 'A PAC012 RM - Pacifica Electric Guitar in Red',
+        'drumeo' => 'Yamaha e-drum kit',
+        'pianote' => 'Yamaha digital piano',
+        'singeo' => 'Steinberg studio kit',
+        'guitareo' => 'Pacifica electric guitar',
+    ];
+
+    $prizeNamesWithModel = [
+        'drumeo' => 'Yamaha DTX402K E-Drum Kit',
+        'pianote' => 'Yamaha Digital Piano',
+        'singeo' => 'Steinberg studio kit',
+        'guitareo' => 'Yamaha Pacifica electric guitar',
     ];
 
     $prizeImgs = [
@@ -41,6 +48,13 @@
         'guitareo' => '180deg, #01C8AB 0%, #045045 100%',
     ];
 
+    $prizeDesc = [
+        'drumeo' => 'It has over 250 drum sounds and 10 drum kits customizable to your taste, <br class="hidden md:inline lg:hidden" />for ultimate control over your tone and volume.',
+        'pianote' => 'It has a metronome to keep your playing tight. Plus it connects with your headphones <br class="hidden md:inline lg:hidden" />for all those late-night piano sessions.',
+        'singeo' => 'You’ll get a microphone, headphones, and an audio interface so you can start to feel more confident as a singer.',
+        'guitareo' => 'It’s sleek. It’s bold. It’s also well known for its excellent tone and playability.',
+    ];
+
     $brand = $referralBrand;
     $cardImage = $cardImages[$brand];
 
@@ -55,20 +69,23 @@
     }"
 @endsection
 
-<div class="referral-sections pt-8 lg:pt-0">
-    <section class="py-16 bg-[#F9F9F9]">
-        <div class="container mx-auto max-w-5xl px-4 md:px-8">
+<div class="referral-sections -mt-[40px] md:-mt-[56px]">
+    <section class="py-10 md:py-16 bg-[#F9F9F9]">
+        <div class="container mx-auto max-w-5xl px-4">
             @if ($canRefer && !$errors->has('email-invite-message'))
-                <h2 class="leading-tight lg:mb-14 text-center"><strong>{{ $referredByUserName }} thinks you’ll enjoy these lessons. Get {{ ucfirst($brand) }} free for 1 month!</strong></h2>
-                <div class="flex items-center sm:px-4 lg:px-0">
-                    <div class="relative order-1">
+                <h2 class="leading-tight mb-10 lg:mb-14 text-center"><strong>{{ $referredByUserName }} thinks you’ll enjoy these lessons. Get {{ ucfirst($brand) }} free for 1 month!</strong></h2>
+                <div class="md:flex md:items-center sm:px-4 lg:px-0">
+                    <div class="text-center md:text-left relative md:order-1 mb-6 md:mb-0">
                         <img class="inline-block w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-3xl" src="{{ $cardImage }}" alt="{{ $brand }} card">
-                        <div class="text-center absolute w-full left-0 bottom-1 text-xs text-white">
-                            <i>Starting at $20/month thereafter (billed annually). Cancel anytime.</i>
+                        <div class="text-center absolute w-full left-0 bottom-1 md:bottom-0.5 lg:bottom-1 text-xs text-white">
+                            <i>Starting at $20/month thereafter (billed annually). <br class="sm:hidden">Cancel anytime.</i>
+                        </div>
+                        <div class="absolute top-0 left-0 w-full h-full flex justify-center items-center cursor-pointer" @click="{{ $brand }}Trailer = true;">
+                            <i class="fas fa-play play-button border-white border-2 rounded-full text-xl py-3 px-5 sm:text-2xl sm:py-4 sm:px-6 md:text-3xl md:py-6 md:px-8 text-white" style="background:#0009;"></i>
                         </div>
                     </div>
-                    <div class="mr-10">
-                        <h5 class="leading-normal font-bold mb-2">Learn the {{ $instruments[$brand] }} faster with step-by-step lessons, a thousand songs, and unlimited personal support.</h5>
+                    <div class="md:mr-4 lg:mr-10 text-center md:text-left">
+                        <h5 class="leading-normal font-bold mb-2">Learn {{ $instruments[$brand] }} faster with step-by-step lessons, a thousand songs, and unlimited personal support.</h5>
                         <div class="flex justify-between max-w-[550px] mb-6">
                             <div>
                                 <i class="fas fa-check text-{{ $brand }}"></i> Improve your skills
@@ -77,7 +94,7 @@
                                 <i class="fas fa-check text-{{ $brand }}"></i> World-class teachers
                             </div>
                             <div>
-                                <i class="fas fa-check text-{{ $brand }}"></i> Play more songs
+                                <i class="fas fa-check text-{{ $brand }}"></i> @if($brand === 'singeo') Sing more songs @else Play more songs @endif
                             </div>
                         </div>
                         <div class="inline-block">
@@ -109,18 +126,18 @@
     </section>
 
     <section class="bg-[#F3B13E] py-9">
-        <div class="text-center">
-            <p>Enter for a chance to win a piano when you sign up for a {{ ucfirst($brand) }} 30-Day Free Trial.</p>
+        <div class="text-center px-4 sm:px-0">
+            <p>Sign up for a {{ ucfirst($brand) }} 30-Day Free Trial for a chance to win a {{ $prizeNames[$brand] }}.</p>
             <p class="italic font-bold">The contest ends on September 14, 2023.</p>
         </div>
     </section>
 
     <section style="background:linear-gradient({{ $gradients[$brand] }});">
         <div class="flex flex-col lg:flex-row text-white max-w-4xl mx-auto items-center px-4 xl:px-0 text-center lg:text-left">
-            <div class="mb-6 pt-10 lg:pt-0 lg:my-40 lg:max-w-sm w-full lg:mr-6">
-                <h1 class="font-extrabold">You can win..</h1>
-                <div class="font-bold mt-2 mb-4 ">{{ $prizeNames[$brand] }}</div>
-                <div><b>PLUS</b> your referred friend gets one <br class="sm:hidden">entry for a chance to win these prizes!</div>
+            <div class="mb-6 pt-10 lg:pt-0 lg:my-40 lg:max-w-md w-full lg:mr-6">
+                <h2 class="font-extrabold leading-none mb-4">This could be yours…</h2>
+                <div class="font-bold mt-2 mb-4 ">{{ $prizeNamesWithModel[$brand] }}</div>
+                <div>{!! $prizeDesc[$brand] !!}</div>
             </div>
 
             <img class="@if($brand === 'drumeo') sm:h-[450px] lg:h-[32rem] xl:h-[33rem] -mb-6 lg:-mb-20 @elseif($brand === 'pianote') sm:h-[450px] lg:h-[23rem] xl:h-[28rem] -mb-10 lg:-mb-32 lg:-ml-20 @elseif($brand === 'guitareo') sm:h-[450px] lg:h-[23rem] xl:h-[28rem] -mb-6 lg:-mb-32 lg:-ml-10 @elseif($brand === 'singeo') -mb-6 lg:mb-0 sm:h-56 lg:h-52 xl:h-64 @endif mx-auto" src="https://www.musora.com/musora-cdn/image/width=800,quality=95/{{ $prizeImgs[$brand] }}" alt="{{ $brand }} prize" />
