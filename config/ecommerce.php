@@ -1028,7 +1028,16 @@ return [
     'annual_product_skus' => ['DLM-1-year', 'PIANOTE-MEMBERSHIP-1-YEAR', 'GUITAREO-1-YEAR-MEMBERSHIP', 'singeo-annual-recurring-membership'],
 
     'revenuecat'=>[
-        'ios' => env('REVENUE_KEY_IOS'),
-        'android' => env('REVENUE_KEY_ANDROID')
+        'ios' => [
+            'musora' => env('REVENUE_KEY_IOS_MUSORA'),
+            'drumeo' => env('REVENUE_KEY_IOS_DRUMEO'),
+            'pianote' => env('REVENUE_KEY_IOS_PIANOTE'),
+            ],
+        'android' =>
+            [
+                'musora' => env('REVENUE_KEY_ANDROID_MUSORA'),
+                'drumeo' => env('REVENUE_KEY_ANDROID_DRUMEO'),
+                'pianote' => env('REVENUE_KEY_ANDROID_PIANOTE'),
+            ]
     ]
 ];
