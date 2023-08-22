@@ -5,7 +5,12 @@
 @endsection
 
 @section('inject-components')
-    <script src="{{ mix('platform/js/lesson-page.js') }}"></script>
+<script>
+    import ContentInfo from "../../assets/js/vue/components/ContentInfo/ContentInfo";
+    export default {
+        components: {ContentInfo}
+    }
+</script>
 @endsection
 
 @section('content')
@@ -154,11 +159,11 @@
             @if (!empty($lessonContent->fetch('*fields.instructor')) ||
                 !empty($lessonContent->fetch('data.description')) ||
                 !empty($lessonContent['chapters']))
-                @include('partials.bladesora.members.content._content-info', [
-                    'instructors' => $lessonContent->fetch('*fields.instructor'),
-                    'contentDescription' => $lessonContent->fetch('data.description', null),
-                    'contentChapters' => $lessonContent['chapters'] ?? [],
-                ])
+                <content-info
+                    :instructors="{{ json_encode($lessonContent->fetch('*fields.instructor')) }}"
+                    :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"
+                    :content-chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
+                ></content-info>
             @endif
 
             <div class="container-fluid tw-bg-{{ $brand }} tw-rounded-[10px]">
