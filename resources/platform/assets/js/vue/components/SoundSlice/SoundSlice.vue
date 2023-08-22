@@ -136,7 +136,6 @@ const startCounter = (currentTime) => {
         if ( currentTime < endTime.value ) {
             currentTime ++;
             //Save currentTime
-            console.log(currentTime)
             localStorage.setItem(`${ props.soundsliceSlug }_currentTime`, currentTime);
         } else {
             clearInterval(intervalId);
@@ -156,6 +155,8 @@ const handleSoundsliceEvent = (event) => {
             case 'ssPlayerReady':
                 break 
             case 'ssNotationLoaded':
+                //Get Duration
+                ssiframe.value.contentWindow.postMessage(`{"method": "getDuration" }`, 'https://www.soundslice.com');
                 //Set Volume
                 ssiframe.value.contentWindow.postMessage(`{"method": "setVolume", "arg": ${globalSettings.volume} }`, 'https://www.soundslice.com');
                 //Set Zoom
@@ -166,6 +167,9 @@ const handleSoundsliceEvent = (event) => {
                 ssiframe.value.contentWindow.postMessage(`{"method": "seek", "arg": ${uniqueSettings.time} }`, 'https://www.soundslice.com');
                 //Done
                 isLoading.value = false;
+                break
+            case 'ssDuration':
+                endTime.value = cmd.arg;
                 break
             case 'ssVolumeChange': 
                 ssiframe.value.contentWindow.postMessage('{"method": "getVolume"}', 'https://www.soundslice.com');
@@ -181,7 +185,6 @@ const handleSoundsliceEvent = (event) => {
                 break
             //UNIQUE SETTINGS
             case 'ssCurrentTime':
-                console.log('ssCurrentTime')
                 //Start Counter
                 if(isPlaying.value) startCounter(Math.floor(cmd.arg));
                 break
@@ -193,6 +196,7 @@ const handleSoundsliceEvent = (event) => {
                 break;
             //PLAYBACK SETTINGS
             case 'ssPlay':
+                isPlaying.value = true;
                 handlePlay(event);
                 break;
             case 'ssPause':
@@ -219,7 +223,6 @@ const handleSoundsliceEvent = (event) => {
 };
 
 const handlePlay = (event) => {
-    isPlaying.value = true;
     playEventsRan.value ++; //HACK: SoundSlice is sending 2 messages on 'ssPlay'
     
     //Start Counter
