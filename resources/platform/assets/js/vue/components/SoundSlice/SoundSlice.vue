@@ -54,8 +54,6 @@ const progressTrackerEventListener = ref(null);
 let progressTracker = new ProgressTracker(); //????
 let intervalId = null;
 
-//IndexedDB Settings
-const dbName = "SoundSliceDB";
 
 //Reactive Objs
 const globalSettings = reactive({
@@ -70,6 +68,25 @@ const uniqueSettings = reactive({
 /**********************  
     Methods
 **********************/
+const handlePlay = (event) => {
+    playEventsRan.value ++; //HACK: SoundSlice is sending 2 messages on 'ssPlay'
+    
+    //Start Counter
+    if(playEventsRan.value > 1) {
+        ssiframe.value.contentWindow.postMessage('{"method": "getCurrentTime"}', 'https://www.soundslice.com');
+    }
+    //Update Content Service
+    if (!hasBeenPlayed.value) {
+        hasBeenPlayed.value = true;
+        ContentService.markContentAsStarted(props.contentId);
+    }
+    //Progress Tracker
+    progressTracker.start();
+    if (!progressTrackerEventListener.value) {
+        progressTrackerEventListener.value = true;
+        window.addEventListener('unload', sendProgressTracking);
+    }
+}
 
 const handlePause = () => {
     progressTracker.stop();
@@ -95,16 +112,20 @@ const spacebarToPlayPause = (event) => {
     }
 };
 
-const click = (x, y) => {
-    var ev = new MouseEvent('click', {
-        'view': window,
-        'bubbles': true,
-        'cancelable': true,
-        'screenX': x,
-        'screenY': y
-    });
-    var el = document.elementFromPoint(x, y);
-    el.dispatchEvent(ev);
+//Counter
+const startCounter = (currentTime) => {
+    intervalId = setInterval( ()=> {
+        if ( currentTime < endTime.value ) {
+            currentTime ++;
+            //SET Current Time
+            localStorage.setItem(`${ props.soundsliceSlug }_currentTime`, currentTime);
+        } else {
+            clearInterval(intervalId);
+        }
+    }, 1000)                 
+}
+const stopCounter = () => {
+    clearInterval(intervalId);
 }
 
 //DEBOUNCE
@@ -117,34 +138,19 @@ const debounce = (cb, delay = 1000) => {
         }, delay)
     }; 
 }
-//Update Volume Value
+
+//SET Volume
 const saveVolume = debounce(function(val){
     localStorage.setItem("ssVolume", val);
 }, 250);
-//Update Zoom Value
+//SET Zoom
 const saveZoom = debounce(function(val){
     localStorage.setItem("ssZoom", val);
 }, 250);
-//Save Audio Source Value
+//SET Audio Source 
 const saveAudioSource = (val) => {
     localStorage.setItem("ssAudioSource", val);
 };
-
-//Counters
-const startCounter = (currentTime) => {
-    intervalId = setInterval( ()=> {
-        if ( currentTime < endTime.value ) {
-            currentTime ++;
-            //Save currentTime
-            localStorage.setItem(`${ props.soundsliceSlug }_currentTime`, currentTime);
-        } else {
-            clearInterval(intervalId);
-        }
-    }, 1000)                 
-}
-const stopCounter = () => {
-    clearInterval(intervalId);
-}
 
 //listen For Soundslice Events....
 const handleSoundsliceEvent = (event) => {
@@ -222,42 +228,23 @@ const handleSoundsliceEvent = (event) => {
     }
 };
 
-const handlePlay = (event) => {
-    playEventsRan.value ++; //HACK: SoundSlice is sending 2 messages on 'ssPlay'
-    
-    //Start Counter
-    if(playEventsRan.value > 1) {
-        ssiframe.value.contentWindow.postMessage('{"method": "getCurrentTime"}', 'https://www.soundslice.com');
-    }
-    //Update Content Service
-    if (!hasBeenPlayed.value) {
-        hasBeenPlayed.value = true;
-        ContentService.markContentAsStarted(props.contentId);
-    }
-    //Progress Tracker
-    progressTracker.start();
-    if (!progressTrackerEventListener.value) {
-        progressTrackerEventListener.value = true;
-        window.addEventListener('unload', sendProgressTracking);
-    }
-}
-
 /**********************  
     Lifecycle Hooks
 **********************/
 onBeforeMount(()=> {
-    //Global Settings
+    //GET Volume
     if(localStorage.getItem("ssVolume")) {
         globalSettings.volume = localStorage.getItem("ssVolume");
     }
+    //GET Zoom
     if(localStorage.getItem("ssZoom")) {
         globalSettings.zoom = localStorage.getItem("ssZoom");
     }
-    //Unique Settings
+    //GET Audio Source
     if(localStorage.getItem("ssAudioSource")) {
         uniqueSettings.audioSource = localStorage.getItem("ssAudioSource");
     }
-    //Get CurrentTime
+    //GET Current Time
     if(localStorage.getItem(`${ props.soundsliceSlug }_currentTime`)) {
         uniqueSettings.time = localStorage.getItem(`${ props.soundsliceSlug }_currentTime`);
     }
