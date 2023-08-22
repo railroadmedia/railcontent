@@ -400,7 +400,7 @@
         <div class="container mx-auto max-w-6xl">
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
             <a class="join bg-musora-gold my-8 md:my-10 inline-block" href="https://airtable.com/shr086ixt4K8JIQpi">APPLY NOW</a>
-            <p class="leading-normal">Have any questions? Please email <a href="mailto:natalie@musora.com"><u>natalie@musora.com</u></a> after<br class="hidden md:inline">
+            <p class="leading-normal">Have any questions? Please email <a href="mailto:dave@musora.com"><u>dave@musora.com</u></a> after<br class="hidden md:inline">
                 reviewing the <span class="cursor-pointer" x-on:click="modal = true"><u>brand guidelines</u></span> and <a href="https://airtable.com/shr086ixt4K8JIQpi"><u>application page</u></a>.</p>
         </div>
     </section>
