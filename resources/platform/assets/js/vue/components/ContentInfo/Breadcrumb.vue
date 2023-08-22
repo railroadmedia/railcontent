@@ -1,9 +1,7 @@
 <template>
     <div class="tw-mb-6 tw-text-black dark:tw-text-white tw-uppercase tw-text-sm">
-        <template v-if="firstLevelTitle">
-            <a class="tw-text-black dark:tw-text-white tw-text-sm"
-               :href="firstLevelUrl">{{ firstLevelTitle }}</a>
-        </template>
+        <a class="tw-text-black dark:tw-text-white tw-text-sm"
+               :href="firstLevelUrl" v-if="firstLevelTitle">{{ firstLevelTitle }}</a>
 
         <template v-if="secondLevelTitle">
             / <a class="tw-text-black dark:tw-text-white tw-text-sm"
