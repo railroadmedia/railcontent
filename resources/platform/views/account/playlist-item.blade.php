@@ -15,6 +15,35 @@
         $recordingIdx = 2;
     }
     $soundsliceAdditionalParams = $brandParams[$brand] . '&layout=3&recording_idx=' . $recordingIdx;
+
+    class contentBreadCrumb {
+
+    };
+
+    $contentBreadCrumb = new contentBreadCrumb();
+    if(!empty($lessonContent['parent'])){
+        if($lessonContent['parent']->fetch('type') === 'learning-path-course') {
+            $contentBreadCrumb->firstLevelUrl = url()->route('platform.content.first-level', ['method', $lessonContent['slug'], $lessonContent['id']]);
+            $contentBreadCrumb->firstLevelTitle = $brand.' Method';
+        }
+        else if($lessonContent['parent']->fetch('type') === 'pack-bundle'){
+            $contentBreadCrumb->firstLevelUrl = url()->route('platform.packs');
+            $contentBreadCrumb->firstLevelTitle = 'Packs';
+        }
+        else {
+            $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent['parent']->fetch('type')]]);
+            $contentBreadCrumb->firstLevelTitle = $lessonContent['parent']->fetch('type');
+        }
+
+        $contentBreadCrumb->secondLevelUrl = $lessonContent['parent']->fetch('url');
+        $contentBreadCrumb->secondLevelTitle = $lessonContent['parent']->fetch('fields.title');
+        $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
+    }
+    else {
+        $contentBreadCrumb->firstLevelUrl = url()->route("platform.content-type-catalog", ["contentTypeName" => array_flip(\App\Maps\PrimaryURLSlugToContentTypeMap::$map)[$lessonContent->fetch('type')]]);
+        $contentBreadCrumb->firstLevelTitle = parse_lesson_type_readable($lessonContent->fetch('type'), true);
+        $contentBreadCrumb->lastLevelTitle = $lessonContent['title'];
+    }
 @endphp
 
 @extends('partials.layout', ['forceHideSidebar' => false])
@@ -83,18 +112,11 @@
         :assignments="{{ json_encode($lessonContent->fetch('*assignments', [])) }}"
         :lesson-data="{{ json_encode($lessonContent) }}"
         :show-info-button="{{ json_encode(!empty($lessonContent->fetch('*fields.instructor')) || !empty($lessonContent->fetch('data.description')) || !empty($lessonContent['chapters'])) }}"
+        :content-breadcrumb="{{ json_encode($contentBreadCrumb) }}"
+        :content-chapters="{{ json_encode($lessonContent['chapters'] ?? []) }}"
+        :content-description="{{ json_encode($lessonContent->fetch('data.description', null)) }}"
+        :content-instructors="{{ json_encode($lessonContent->fetch('*fields.instructor')) }}"
     >
-        @if (!empty($lessonContent->fetch('*fields.instructor')) ||
-                !empty($lessonContent->fetch('data.description')) ||
-                !empty($lessonContent['chapters']))
-            <template #info-section>
-                @include('partials.bladesora.members.content._content-info', [
-                    'instructors' => $lessonContent->fetch('*fields.instructor'),
-                    'contentDescription' => $lessonContent->fetch('data.description', null),
-                    'contentChapters' => $lessonContent['chapters'] ?? [],
-                ])
-            </template>
-        @endif
     </playlist-playback-wrapper>
 @endsection
 
