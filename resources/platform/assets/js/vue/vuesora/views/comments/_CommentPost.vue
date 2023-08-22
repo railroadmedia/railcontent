@@ -135,6 +135,14 @@
                                 :class="comment.like_count > 0 ? themeBgClass : 'bg-grey-2'"
                             />&nbsp;{{ comment.like_count }}
                         </p>
+                        <p
+                            class="dark:tw-text-[#627F97] tw-text-[#65656B] tw-font-bebas-neue tw-cursor-pointer tw-flex tw-items-center"
+                            @click="reportComment"
+                        ><FlagIcon
+                                class="tw-inline tw-ml-[16px] tw-mr-[5px] tw-w-[20px] tw-h-[20px]"
+                                :class="isReported ? 'tw-text-[#00101D] dark:tw-text-[#80A0B9]' : 'tw-text-[#65656B] dark:tw-text-[#627F97]'"
+                            />&nbsp;{{ isReported ? 'REPORTED' : 'REPORT'  }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -251,6 +259,7 @@ import MusoraIcon from '../../../components/MusoraIcons/MusoraIcon.vue'
 import Utils from '../../assets/js/classes/utils';
 import ThemeClasses from '../../mixins/ThemeClasses';
 import { TrashIcon, ThumbUpIcon } from "@heroicons/vue/solid";
+import { FlagIcon } from "@heroicons/vue/outline";
 
 export default {
     name: 'CommentPost',
@@ -260,6 +269,7 @@ export default {
         TrashIcon,
         ThumbUpIcon,
         MusoraIcon,
+        FlagIcon,
     },
     mixins: [ThemeClasses],
     props: {
@@ -301,6 +311,7 @@ export default {
             showAllReplies: false,
             reply: '',
             loading: false,
+            isReported: false,
         };
     },
     computed: {
@@ -475,6 +486,29 @@ export default {
             });
         },
 
+        reportComment() {
+            if (!this.isReported) {
+                this.isReported = true;
+                CommentService.reportComment(this.comment.id).then(() => {
+                    window.shownotification({
+                        icon: 'report',
+                        text: 'The comment was reported.'
+                    });
+                }).catch(() => {
+                    this.isReported = false;
+                    window.shownotification({
+                        icon: 'error',
+                        text: 'There was am error reporting this comment, please try again later.'
+                    }); 
+                });
+            } else {
+                window.shownotification({
+                    icon: 'report',
+                    text: 'You have already reported this comment.'
+                });
+            }
+        },
+
         deleteComment() {
             Toasts.confirm({
                 title: 'Are you sure you want to delete this comment?',
@@ -533,6 +567,9 @@ export default {
                 commentId.blur();
             }, 50);
         },
+    },
+    beforeMount() {
+        this.isReported = this.comment.is_reported_by_viewer;
     },
     watch: { 
       	openedCommentId: function(newVal, oldVal) { // watch it

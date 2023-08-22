@@ -19,13 +19,13 @@
         @slot('content')
             <div class="tw-flex tw-w-full tw-flex-row tw-justify-between">
                 <div class="tw-flex tw-flex-col tw-pr-4">
-                    <h1 class="tw-text-white tw-flex tw-items-center tw-mb-2">
+                    <h1 class="tw-text-white tw-flex tw-items-center">
                         <musora-icon icon-name="headphones-filled" class="tw-w-[36px] tw-mr-2 tw-text-{{ $brand }}">
                         </musora-icon>
-                        <span class="tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
+                        <span class="tw-text-[28px] lg:tw-text-32 tw-font-bold">{{ ucfirst($catalogueMeta['name']) }}</span>
                     </h1>
                     <p
-                        class="tw-text-white tw-text-[18px] tw-mb-4 tw-max-w-4xl tw-pr-12 tw-text-base tw-uppercase tw-font-open-sans tw-font-bold">
+                        class="tw-text-white tw-text-sm lg:tw-text-base tw-max-w-4xl tw-pr-12 tw-uppercase tw-font-open-sans tw-font-semibold">
                         <!-- TODO: GET THIS INFO FROM BACKEND -->
                         {{ $artistsNumber }} ARTISTS | {{ $songsNumber }} SONGS
                     </p>
@@ -44,20 +44,6 @@
                     <song-request brand="{{ $brand }}"></song-request>
                 </div>
             </div>
-        @endslot
-
-        @slot('interactionSlot')
-            @if ($catalogueMeta['name'] == 'Songs' && $brand === 'drumeo')
-                <div class="tw-flex tw-mt-4">
-                    <a @if (Carbon\Carbon::create(2022, 11, 15, 11, 0, 0, 'America/Vancouver') > Carbon\Carbon::now()) href="/drumeo/forums/drumeo-songs/15/december-2022-song-request-voting-thread/13853?sortby_val=published_on"
-                        @else
-                            href="/members/forums/threads/drumeo-songs/15" @endif
-                        class="tw-btn-primary tw-bg-{{ $brand }} hover:tw-bg-{{ $brand }}-600">
-                        Request A Song
-                        <span class="tw-text-4xl tw-ml-1 tw-leading-none tw-mt-0.5">»</span>
-                    </a>
-                </div>
-            @endif
         @endslot
     @endcomponent
 
@@ -95,7 +81,7 @@
             </div>
         </section>
     @endif
-    
+
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white songs-catalogue-container tw-pt-[30px]">
         <transition appear name="fade">
             <content-catalogue dusk="content-catalogue" brand="{{ $brand }}" theme-color="{{ $brand }}"
