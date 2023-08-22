@@ -61,16 +61,15 @@ import { onMounted, ref } from 'vue';
     <div id="instructorInfo" class="tw-container tw-mx-auto fluid tw-bg-white dark:tw-bg-[#081825] tw-rounded-[10px]">
         <div class="tw-max-w-screen-2xl tw-px-4 md:tw-px-8 tw-mx-auto tw-py-4">
             <!-- BREADCRUMBS -->
-            <template v-if="breadcrumbs && Object.keys(breadcrumbs).length">
-                <BreadCrumb
-                    :brand="brand"
-                    :firstLevelUrl="breadcrumbs.firstLevelUrl"
-                    :firstLevelTitle="breadcrumbs.firstLevelTitle"
-                    :secondLevelUrl="breadcrumbs.secondLevelUrl"
-                    :secondLevelTitle="breadcrumbs.secondLevelTitle"
-                    :lastLevelTitle="breadcrumbs.lastLevelTitle"
-                />
-            </template>
+            <BreadCrumb
+                v-if="breadcrumbs && Object.keys(breadcrumbs).length"
+                :brand="brand"
+                :firstLevelUrl="breadcrumbs.firstLevelUrl"
+                :firstLevelTitle="breadcrumbs.firstLevelTitle"
+                :secondLevelUrl="breadcrumbs.secondLevelUrl"
+                :secondLevelTitle="breadcrumbs.secondLevelTitle"
+                :lastLevelTitle="breadcrumbs.lastLevelTitle"
+            />
 
             <!-- COURSE LESSONS -->
             <template v-if="lessonList && lessonList.length">
@@ -91,39 +90,33 @@ import { onMounted, ref } from 'vue';
             </template>
 
             <!-- CONTENT DESCRIPTION -->
-            <template v-if="contentDescription">
-                <div  class="tw-flex tw-flex-row tw-mb-3">
-                    <div class="tw-flex tw-flex-col tw-flex-grow tw-text-[#191b1c] dark:tw-text-white">
-                        <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">About the Lesson</h6>
-                        <div v-html="contentDescription"></div>
-                    </div>
+            <div v-if="contentDescription" class="tw-flex tw-flex-row tw-mb-3">
+                <div class="tw-flex tw-flex-col tw-flex-grow tw-text-[#191b1c] dark:tw-text-white">
+                    <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">About the Lesson</h6>
+                    <div v-html="contentDescription"></div>
                 </div>
-            </template>
+            </div>
 
             <!-- CHAPTER MARKERS -->
-            <template v-if="chapterList && chapterList.length">
-                <div class="tw-flex tw-flex-row tw-mb-3">
-                    <div class="tw-flex tw-flex-col tw-flexgrow tw-text-[#191b1c] dark:tw-text-white">
-                        <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">Chapter Markers</h6>
-                        <template v-for="chapter in chapterList">
-                            <p class="body tw-text-[#191b1c] dark:tw-text-white" v-if="chapter['chapter_timecode']">
-                                <a class="tw-font-bold font-underline"
-                                   :data-jump-to-time="chapter.chapter_timecode">{{ chapter.chapter_timecode }}</a> - {{ chapter.chapter_description }}
-                            </p>
-                        </template>
-                    </div>
+            <div v-if="chapterList && chapterList.length" class="tw-flex tw-flex-row tw-mb-3">
+                <div class="tw-flex tw-flex-col tw-flexgrow tw-text-[#191b1c] dark:tw-text-white">
+                    <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">Chapter Markers</h6>
+                    <template v-for="chapter in chapterList">
+                        <p class="body tw-text-[#191b1c] dark:tw-text-white" v-if="chapter['chapter_timecode']">
+                            <a class="tw-font-bold font-underline"
+                               :data-jump-to-time="chapter.chapter_timecode">{{ chapter.chapter_timecode }}</a> - {{ chapter.chapter_description }}
+                        </p>
+                    </template>
                 </div>
-            </template>
+            </div>
 
             <!-- INSTRUCTORS -->
-            <template v-if="instructors && instructors.length">
-                <div  class="tw-flex tw-flex-row mb-3" v-for="instructor in instructors">
-                    <div class="tw-flex tw-flex-col tw-flexgrow tw-text-[#191b1c] dark:tw-text-white">
-                        <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">About {{ instructor.name }}</h6>
-                        <div v-html="instructor.data.find((i) => i.key === 'biography').value"></div>
-                    </div>
+            <div v-if="instructors && instructors.length"  class="tw-flex tw-flex-row mb-3" v-for="instructor in instructors">
+                <div class="tw-flex tw-flex-col tw-flexgrow tw-text-[#191b1c] dark:tw-text-white">
+                    <h6 class="tw-text-base tw-mb-4 tw-font-bold tw-uppercase tw-mb-1">About {{ instructor.name }}</h6>
+                    <div v-html="instructor.data.find((i) => i.key === 'biography').value"></div>
                 </div>
-            </template>
+            </div>
         </div>
     </div>
 </template>

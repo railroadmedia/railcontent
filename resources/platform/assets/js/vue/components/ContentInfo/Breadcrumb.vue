@@ -8,6 +8,7 @@
             / <a class="tw-text-black dark:tw-text-white tw-text-sm"
                :href="secondLevelUrl">{{ secondLevelTitle }}</a>
         </template>
+
         / <b>{{ lastLevelTitle }}</b>
     </div>
 
