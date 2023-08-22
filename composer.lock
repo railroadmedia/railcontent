@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "33462e3fe0337b519253c3bd033f62d7",
+    "content-hash": "a4d013ac11f10c731958b63ce249cf65",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8084,16 +8084,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "dev-5.0-revenuecat",
+            "version": "dev-5.0-revenuecat-observer",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "e702161cffc5c20a6cb0baa91d487f9627b52ee5"
+                "reference": "dfd490dd1ba696b1e9d5441a7d701df74b6c6af5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/e702161cffc5c20a6cb0baa91d487f9627b52ee5",
-                "reference": "e702161cffc5c20a6cb0baa91d487f9627b52ee5",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/dfd490dd1ba696b1e9d5441a7d701df74b6c6af5",
+                "reference": "dfd490dd1ba696b1e9d5441a7d701df74b6c6af5",
                 "shasum": ""
             },
             "require": {
@@ -8110,6 +8110,7 @@
                 "railroad/doctrine-array-hydrator": "2.0.*",
                 "railroad/location": "^3.0.0",
                 "railroad/permissions": "^2.0",
+                "railroad/referral": "3.0.*",
                 "railroad/remotestorage": "^2.0",
                 "ramsey/uuid": "^4.3",
                 "stripe/stripe-php": "^7.95"
@@ -8130,9 +8131,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-revenuecat"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/5.0-revenuecat-observer"
             },
-            "time": "2023-08-22T11:32:44+00:00"
+            "time": "2023-08-22T12:58:41+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -16952,7 +16953,7 @@
     "aliases": [
         {
             "package": "railroad/ecommerce",
-            "version": "dev-5.0-revenuecat",
+            "version": "dev-5.0-revenuecat-observer",
             "alias": "v5.0.89",
             "alias_normalized": "5.0.89.0"
         },
