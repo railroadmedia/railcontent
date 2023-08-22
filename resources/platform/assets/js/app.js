@@ -26,6 +26,7 @@ import GearCarousel from './vue/components/GearCarousel/GearCarousel.vue';
 import InfoModal from './vue/components/Modal/InfoModal';
 import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
 import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
+import ContentInfo from './vue/components/ContentInfo/ContentInfo';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -257,6 +258,7 @@ app.component('AppContainer', AppContainer)
     .component('SoundSlice', SoundSlice)
     .component('CohortBanner', CohortBanner)
     .component('CatalogueCardContainer', CatalogueCardContainer)
+    .component('ContentInfo', ContentInfo)
 
     .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
         import(
@@ -297,6 +299,13 @@ app.component('AppContainer', AppContainer)
         import(
             /* webpackChunkName: "song-request" */
             `./vue/components/Songs/SongRequest.vue`
+        )
+    ))
+
+    .component('ReportUser', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "report-user" */
+            `./vue/components/ReportUser/ReportUser.vue`
         )
     ))
 

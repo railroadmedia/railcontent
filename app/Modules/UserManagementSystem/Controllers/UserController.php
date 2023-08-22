@@ -452,4 +452,21 @@ class UserController extends Controller
                                     ],
                                 ], 200);
     }
+
+    /**
+     * @param $id
+     * @return JsonResponse
+     */
+    public function isReportedUser($id)
+    {
+        $currentUser = user();
+        $reported =
+            ReportedUser::where('user_id', '=', $id)
+                ->where('reporter_id', '=', $currentUser['id'])
+                ->first();
+
+        return response()->json([
+                                    "reported" => $reported ? true : false,
+                                ], 200);
+    }
 }

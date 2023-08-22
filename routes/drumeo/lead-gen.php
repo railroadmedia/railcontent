@@ -13,6 +13,15 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
 
         }
     );
+    Route::group(['prefix' => 'kristinas-top-25'],
+        function () {
+
+            // if page is null, it's the root /
+            Route::get('/{page?}', LeadGenController::class . '@kristinasTop25')
+                ->whereIn('page', [null, 'unlocked']);
+
+        }
+    );
     Route::get('/coop3rdrumm3r', [LeadGenController::class, 'coop3rdrumm3r']);
     Route::get('/destupefying-your-weak-hand', [LeadGenController::class, 'destupefy'] );
     Route::get('/drum-set-maintenance', [LeadGenController::class, 'drumSetMaintenance']);

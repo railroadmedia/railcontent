@@ -22,6 +22,17 @@ class LeadGenController extends BaseController
 
         throw new NotFoundHttpException();
     }
+    public function kristinasTop25(Request $request, $domain, $page = null)
+    {
+        switch ($page) {
+            case null:
+                return view('drumeo.lead-gen.kristinas-top-25.signup', ['theme'=> 'drumeo', 'recaptchaKey'=>config('recaptcha.key')]);
+            case 'unlocked':
+                return view('drumeo.lead-gen.kristinas-top-25.unlocked');
+        }
+
+        throw new NotFoundHttpException();
+    }
 
     public function coop3rdrumm3r()
     {
