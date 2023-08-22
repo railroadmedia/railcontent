@@ -36,10 +36,10 @@
         </div>
     </a>
 
-    <section class="text-center relative text-white py-8 md:py-10 lg:py-16 px-4" style="background-color:#010a2b;">
+    <section class="text-center relative py-8 md:py-10 lg:py-16 px-4">
         <div class="container mx-auto">
             <h3 class="mb-4 md:mb-5">
-                <strong>100 Drumming Anthems<br> Every. Single. Note.</strong>
+                <strong>Kristina’s favorite bangers</strong>
             </h3>
             <p class="leading-normal mb-6 md:mb-12 lg:mb-16 max-w-2xl">
                 Say hello to your free charts! Click below to get started playing your favorite songs. You’ll notice a handy player that scrolls along with the music in real time and lets you loop, add/remove metronome, and slow down any part you want.
@@ -47,7 +47,7 @@
                 Choose a song below:
             </p>
 
-            @include('drumeo.lead-gen.100-songs._songs')
+            @include('drumeo.lead-gen.kristinas-top-25._songs')
 
         </div>
     </section>

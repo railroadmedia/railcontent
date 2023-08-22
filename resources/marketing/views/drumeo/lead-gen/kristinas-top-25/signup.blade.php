@@ -37,7 +37,7 @@
                 <div class="w-full sm:w-1/2 {{--lg:w-5/12--}} mt-5 sm:mt-0 {{--lg:mt-14--}}">
                     <img src="">
                     <h6 class="mt-2 md:mt-4 mb-4 md:mb-7 lg:mb-8 leading-tight">
-                        Learn to play 25 of Kristina’s favorite drum covers. <strong>FORE FREE.</strong>
+                        Learn to play 25 of Kristina’s favorite drum covers. <strong class="text-[#ff72ef]">FOR FREE.</strong>
                     </h6>
                     <p class="hidden lg:inline">
                         <i class="fas fa-check text-drumeo" aria-hidden="true"></i> Note-For-Note Sheet Music
@@ -167,12 +167,12 @@
     ])
 
     <div id="final" class="anchor"></div>
-    <section class="text-center py-14 md:py-24 lg:py-32 text-white" style="background: linear-gradient(45deg, #02163D, #00BEF3);">
+    <section class="text-center py-14 md:py-24 lg:py-32 text-white" style="background: #000f5c;">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
                 <img src="">
                 <h5 class="my-6 lg:my-9 leading-normal">
-                    <strong>Learn to play 25 of Kristina’s favorite drum covers.</strong><br>
+                    <strong>Learn to play 25 of Kristina’s favorite drum covers <span class="text-[#ff72ef]">FOR FREE.</span></strong><br>
                     Enter your email to get all the charts sent to you.
                 </h5>
                 <div class="mx-auto" style="max-width:700px">
