@@ -7,10 +7,10 @@
     ];
 
     $instruments = [
-        'drumeo' => 'drums',
-        'pianote' => 'piano',
-        'singeo' => 'singing',
-        'guitareo' => 'guitar',
+        'drumeo' => 'the drums',
+        'pianote' => 'the piano',
+        'singeo' => 'how to sing',
+        'guitareo' => 'the guitar',
     ];
 
     $prizeWithPrice = [
@@ -49,8 +49,8 @@
     ];
 
     $prizeDesc = [
-        'drumeo' => 'It has over 250 drum sounds and 10 drum kits customizable to your taste, <br class="tw-hidden md:tw-inline lg:tw-hidden" />for ultimate control over your tone and volume.',
-        'pianote' => 'It has a metronome to keep your playing tight. Plus it connects with your headphones <br class="tw-hidden md:tw-inline lg:tw-hidden" />for all those late-night piano sessions.',
+        'drumeo' => 'It has over 250 drum sounds and 10 drum kits customizable to your taste, <br class="hidden md:inline lg:hidden" />for ultimate control over your tone and volume.',
+        'pianote' => 'It has a metronome to keep your playing tight. Plus it connects with your headphones <br class="hidden md:inline lg:hidden" />for all those late-night piano sessions.',
         'singeo' => 'You’ll get a microphone, headphones, and an audio interface so you can start to feel more confident as a singer.',
         'guitareo' => 'It’s sleek. It’s bold. It’s also well known for its excellent tone and playability.',
     ];
@@ -78,14 +78,14 @@
                     <div class="text-center md:text-left relative md:order-1 mb-6 md:mb-0">
                         <img class="inline-block w-full max-w-xs sm:max-w-md md:max-w-lg lg:max-w-3xl" src="{{ $cardImage }}" alt="{{ $brand }} card">
                         <div class="text-center absolute w-full left-0 bottom-1 md:bottom-0.5 lg:bottom-1 text-xs text-white">
-                            <i>Starting at $20/month thereafter (billed annually). Cancel anytime.</i>
+                            <i>Starting at $20/month thereafter (billed annually). <br class="sm:hidden">Cancel anytime.</i>
                         </div>
                         <div class="absolute top-0 left-0 w-full h-full flex justify-center items-center cursor-pointer" @click="{{ $brand }}Trailer = true;">
                             <i class="fas fa-play play-button border-white border-2 rounded-full text-xl py-3 px-5 sm:text-2xl sm:py-4 sm:px-6 md:text-3xl md:py-6 md:px-8 text-white" style="background:#0009;"></i>
                         </div>
                     </div>
                     <div class="md:mr-4 lg:mr-10 text-center md:text-left">
-                        <h5 class="leading-normal font-bold mb-2">Learn the {{ $instruments[$brand] }} faster with step-by-step lessons, <br class="hidden lg:inline"> a thousand songs, and unlimited personal support.</h5>
+                        <h5 class="leading-normal font-bold mb-2">Learn {{ $instruments[$brand] }} faster with step-by-step lessons, a thousand songs, and unlimited personal support.</h5>
                         <div class="flex justify-between max-w-[550px] mb-6">
                             <div>
                                 <i class="fas fa-check text-{{ $brand }}"></i> Improve your skills
@@ -94,7 +94,7 @@
                                 <i class="fas fa-check text-{{ $brand }}"></i> World-class teachers
                             </div>
                             <div>
-                                <i class="fas fa-check text-{{ $brand }}"></i> Play more songs
+                                <i class="fas fa-check text-{{ $brand }}"></i> @if($brand === 'singeo') Sing more songs @else Play more songs @endif
                             </div>
                         </div>
                         <div class="inline-block">

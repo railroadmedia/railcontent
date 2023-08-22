@@ -1,9 +1,9 @@
 @if($hasfollowedLessons)
     <section class="tw-flex tw-flex-row tw-mb-6 md:tw-mb-8">
-        <div class="tw-flex tw-flex-col tw-grow">
+        <div class="tw-flex tw-flex-col tw-w-full">
 
             <!-- Section Title -->
-            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between">
+            <div class="tw-flex tw-items-center tw-mb-4 tw-w-full tw-justify-between tw-px-4 lg:tw-px-0">
                 <a href="{{ $subscribedLessons }}" class="tw-text-[#00101D] dark:tw-text-white tw-pb-1 tw-border-b tw-border-transparent tw-transition-all hover:tw-border-current">
                     <h2 class="tw-font-bold tw-text-2xl tw-leading-none lg:tw-leading-none lg:tw-text-3xl">From Subscribed Coaches</h2>
                 </a>
@@ -15,29 +15,19 @@
                 </a>
             </div> 
 
-            <div class="tw-flex tw-flex-row six-cards-row">
+            <div>
                 <transition appear name="fade">
-                    <content-catalogue
-                            theme-color="{{$brand}}"
+                <catalogue-card-container
+                            theme-color="{{ $brand }}"
                             :use-theme-color="true"
                             content-endpoint="{{ $contentEndpoint ? $contentEndpoint : '/railcontent/content' }}"
+                            catalogue-type="grid"
                             no-results-icon="happy"
                             no-results-message="You haven't added any lessons yet, once you add a lesson of this type it will show up here for you to access later."
-                            catalogue-type="grid"
                             limit="16"
-                            :six-wide="true"
-                            :lock-unowned="true"
-                            :force-wide-thumbs="true"
                             :pre-loaded-content="{{ $followedLessons }}"
                     >
-                        <div class="tw-flex tw-flex-row nmh-1">
-                            @for($i = 0; $i < 6; $i++)
-                                @include('partials.bladesora.members.skeletons.card-item', [
-                                    "cardClass" => 'six-wide',
-                                ])
-                            @endfor
-                        </div>
-                    </content-catalogue>
+                    </catalogue-card-container>
                 </transition>
             </div>
             

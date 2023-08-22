@@ -88,11 +88,10 @@
 <script>
     function recaptchaSubmit{{$cleanFormId}}(token) {
         document.getElementById("{{$cleanFormId}}").submit();
-        var formId = $(this).find("input[name='inf_form_xid']").val();
 
         dataLayer.push({
             "event": "gtm.formSubmit",
-            "formId": formId,
+            "formId": "{{ $cleanFormId }}",
             "formSuccess": true
         });
     }
