@@ -50,7 +50,7 @@ import { onMounted, ref } from 'vue';
         chapters.forEach((c) => {
             let date = new Date(null);
             date.setSeconds(c.chapter_timecode);
-            c.chapter_timecode = date.toISOString().substr(11, 8);
+            c.chapter_time = date.toISOString().substr(11, 8);
         });
 
         chapterList.value = chapters;
@@ -104,7 +104,7 @@ import { onMounted, ref } from 'vue';
                     <template v-for="chapter in chapterList">
                         <p class="body tw-text-[#191b1c] dark:tw-text-white" v-if="chapter['chapter_timecode']">
                             <a class="tw-font-bold font-underline"
-                               :data-jump-to-time="chapter.chapter_timecode">{{ chapter.chapter_timecode }}</a> - {{ chapter.chapter_description }}
+                               :data-jump-to-time="chapter.chapter_timecode">{{ chapter.chapter_time }}</a> - {{ chapter.chapter_description }}
                         </p>
                     </template>
                 </div>
