@@ -77,7 +77,7 @@ class Kernel extends HttpKernel
 
         'web_member_only' => [
             ExpiredMemberRedirect::class,
-            PausedMemberRedirect::class
+//            PausedMemberRedirect::class
         ],
 
         'api_public' => [
