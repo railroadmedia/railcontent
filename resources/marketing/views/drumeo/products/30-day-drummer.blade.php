@@ -876,7 +876,7 @@
                             <br><strong class="text-drumeo">FREE SHIPPING WORLDWIDE</strong></p>
                         <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-3a.png" alt="Tier 3 pack" />
                         <h2>{{--<s class="text-[#ABB5C2] mr-2">$240</s>--}}<strong>$240</strong></h2>
-                        <p class="italic mb-4 text-xs">Your first year</p>
+                        <p class="italic mb-4 text-xs">Per year</p>
                         <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,DLM-1-year:1,quietpad:1,padstand:1,Drumeo-VaterSticks:1,BeginnerBook:1,Drumeo-Key:1,independence-made-easy-pack:1,four-weeks-to-better-drum-fills:1,learn-songs-faster-pack:1&redirect=/order&locked=true" class="join blue medium w-full mb-5">ENROLL NOW</a>
                         <p class="inline-block text-left">
                             <b>Annual Drumeo Membership</b><br/>

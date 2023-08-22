@@ -474,7 +474,7 @@
                             <br><strong class="text-pianote">FREE SHIPPING WORLDWIDE</strong></p>
                         <img class="h-24 lg:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/launch-membership-collage.png" alt="Tier 3 pack" />
                         <h2><s class="text-[#ABB5C2] mr-2">$726</s><strong>$240</strong></h2>
-                        <p class="italic mb-4 text-xs">Your first year</p>
+                        <p class="italic mb-4 text-xs">Per year</p>
                         <a href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-1-YEAR:1,30-day-blues-piano:1,easy-chords:1,new-piano-players-start-here:1,faster-fingers:1,piano-chords-and-scales-guide:1,poster-chords:1,poster-scales:1,pianote-practice-planner:1&redirect=/order&locked=true" class="join blue medium w-full mb-5">ENROLL NOW</a>
                         <p class="inline-block text-left">
                             <b>Annual Pianote Membership</b><br/>
