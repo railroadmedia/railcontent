@@ -20,6 +20,10 @@ import ContentInfo from '../ContentInfo/ContentInfo.vue';
 
 //-----------Props-----------//
 const props = defineProps({
+    isReleased: {
+        type: Boolean,
+        default: false,
+    },
     additionalSoundsliceParams: {
         type: String,
         default: ''
@@ -266,9 +270,7 @@ const lessonDate = activeItem.published_on_in_timezone ? activeItem.published_on
 //computed
 const homeUrl = computed(() => `/${props.brand}/playlists`);
 const secondLevelUrl = computed(() => `/${props.brand}/playlist/${props.playlistId}`);
-const released = computed(() => {
-    return lessonDateParsed < dateNow;
-})
+
 const needAccess = computed(() => {
     return activeItem.need_access;
 })
@@ -281,7 +283,7 @@ const isSong = computed(() => {
 })
 
 const unavailableType = computed(() => {
-    if (!released) {
+    if (!props.isReleased) {
         return 'unreleased';
     }
     if (needAccess) {
@@ -319,12 +321,12 @@ onBeforeMount(() => {
                  :class="playlistsStore.playerExpanded ? '2xl:tw-col-span-3' : '2xl:tw-col-span-2'"
             >
                 <!-- Content Unavailable -->
-                <ContentUnavailable v-if="!released || needAccess" @goToNext="handleGoToNext"
+                <ContentUnavailable v-if="!isReleased || needAccess" @goToNext="handleGoToNext"
                     :subscriptionCalendarId="subscriptionCalendarId" :bgImgUrl="thumbnailUrl"
                     :releaseDate="lessonDateParsed" :unavailableType="unavailableType" :itemName="playlistItemTitle"
                     :message="needAccessMessage" />
                 <!-- Soundslice Player -->
-                <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && !needAccess && released"
+                <div v-if="(lessonType === 'song' || lessonType === 'assignment' || lessonType === 'routine') && !needAccess && isReleased"
                     class="tw-w-full tw-aspect-video tw-max-h-[90vh] tw-mb-4"
                     :class="{ 'tw-max-w-[1280px]' : !playlistsStore.playerExpanded }"
                 >
@@ -333,7 +335,7 @@ onBeforeMount(() => {
                     </SoundSlice>
                 </div>
                 <!-- Video Players -->
-                <div v-if="released && !needAccess" class="p-lg-only lean tw-relative">
+                <div v-if="isReleased && !needAccess" class="p-lg-only lean tw-relative">
                     <div v-if="youtubeVideoId && String(youtubeVideoId).length" class="widescreen mb-2 bg-black">
                         <YoutubePlayer ref="mediaElementVueInstance" :brand="brand" :video-id="youtubeVideoId"
                             :start-second="startSecond" :end-second="endSecond"
@@ -378,7 +380,7 @@ onBeforeMount(() => {
                         :thumbnail-url="thumbnailUrl" :description="description" :instructors="instructors"
                         :parent-title="parentTitle" :is-liked="isLiked" :like-count="likeCount" :content-id="contentId"
                         :user-id="userId" :resources="videoResources" :show-add-to-list="true"
-                        :show-complete-button="released && !needAccess" :relatedLesson="relatedLesson"
+                        :show-complete-button="isReleased && !needAccess" :relatedLesson="relatedLesson"
                         :lesson="playlistItems.data[props.playlistItemPosition - 1]" :show-info-button="showInfoButton" />
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
                 </div>

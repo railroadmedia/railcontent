@@ -302,6 +302,13 @@ app.component('AppContainer', AppContainer)
         )
     ))
 
+    .component('ReportUser', defineAsyncComponent(() =>
+        import(
+            /* webpackChunkName: "report-user" */
+            `./vue/components/ReportUser/ReportUser.vue`
+        )
+    ))
+
     .component('PianoBackingTracks', defineAsyncComponent(() =>
         import(
             /* webpackChunkName: "piano-backing-tracks" */
