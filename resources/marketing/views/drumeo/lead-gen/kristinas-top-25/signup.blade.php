@@ -28,19 +28,19 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
-    <header class="text-white text-center lg:text-left px-6 lg:px-8 py-10 sm:py-12 lg:py-24 bg-cover bg-center" style="background: #000f5c url('https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/header-bg.jpg');">
+    <header class="text-white text-center lg:text-left px-6 lg:px-8 py-10 sm:py-12 lg:py-24 bg-cover bg-center" style="background: #000f5c url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/header-bg.jpg');">
         <div class="container mx-auto max-w-5xl">
             <div class="flex flex-wrap justify-center items-start lg:items-center">
                 <div class="w-full sm:w-7/12 xl:w-1/2">
                     <img
                         class="h-28 sm:h-32 lg:h-40 mb-3"
-                        src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/logo.svg"
+                        src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/logo.svg"
                         alt="logo"
                         fetchpriority="high"
                     />
                     <img
                         class="rounded-xl sm:hidden mb-5 transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/header-image-m.png"
+                        src="https://www.musora.com/musora-cdn/image/width=660,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/header-image-m.png"
                         alt="header hero image mobile"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -70,7 +70,7 @@
                 <div class="w-full sm:w-5/12 xl:w-1/2 sm:pl-5 xl:px-12 hidden sm:block">
                     <img
                         class="transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/header-image.png"
+                        src="https://www.musora.com/musora-cdn/image/width=830,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/header-image.png"
                         alt="header hero image"
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
@@ -104,7 +104,7 @@
                 every note, and loop a section until you have it nailed. </p>
 
             <div class="max-w-xs sm:max-w-xl lg:max-w-4xl xl:max-w-full mx-auto">
-                <div style="padding-bottom: 62.4%; background-image: url(&quot;https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png&quot;);" class="mt-4 sm:mt-6 lg:mt-8 lg:mb-6 bg-cover bg-center lazyloaded" x-on:click="soundslice = true;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png"></div>
+                <div style="padding-bottom: 62.4%; background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png);" class="mt-4 sm:mt-6 lg:mt-8 lg:mb-6 bg-cover bg-center lazyloaded" x-on:click="soundslice = true;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/sales/2023/device.png"></div>
             </div>
             <div class="text-center w-full sm:w-auto mt-6 lg:mt-0 mx-auto mb-5">
                 <div class="flex flex-wrap">
@@ -185,10 +185,10 @@
     ])
 
     <div id="final" class="anchor"></div>
-    <section class="text-center py-14 md:py-24 text-white bg-cover bg-center" style="background: #000f5c url('https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/bottom-bg.jpg');">
+    <section class="text-center py-14 md:py-24 text-white bg-cover bg-center" style="background: #000f5c url('https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/bottom-bg.jpg');">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
-                <img class="h-32 sm:h-36 lg:h-44" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/logo.svg" alt="FWTGF logo" />
+                <img class="h-32 sm:h-36 lg:h-44" src="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/logo.svg" alt="FWTGF logo" />
                 <h5 class="my-5 lg:my-7 leading-normal">
                     <strong>Learn to play 25 of Kristina’s <br class="sm:hidden">favorite drum covers <span class="text-[#ff72ef]">FOR FREE.</span></strong><br>
                     Enter your email to get all<br class="sm:hidden"> the charts sent to you.
