@@ -58,118 +58,118 @@
             ></home-card-links>
         </div>
 
-{{--        --}}{{-- Continue Section --}}
-{{--        @if($hasStartedLessons)--}}
-{{--            @component('partials.bladesora.members.components.home._continue-section', [--}}
-{{--                'brand' => brand(),--}}
-{{--                'hasStartedContent' => $hasStartedLessons,--}}
-{{--                'contentEndpoint' => '/railcontent/content',--}}
-{{--                'continueUrl' => url()->route('platform.lesson-history.in-progress'),--}}
-{{--                'seeAllUrl' => url()->route('platform.lesson-history.in-progress'),--}}
-{{--                'startedContentJson' => $startedContentJson,--}}
-{{--                ])--}}
-{{--            @endcomponent--}}
-{{--        @endif--}}
+        {{-- Continue Section --}}
+        @if($hasStartedLessons)
+            @component('partials.bladesora.members.components.home._continue-section', [
+                'brand' => brand(),
+                'hasStartedContent' => $hasStartedLessons,
+                'contentEndpoint' => '/railcontent/content',
+                'continueUrl' => url()->route('platform.lesson-history.in-progress'),
+                'seeAllUrl' => url()->route('platform.lesson-history.in-progress'),
+                'startedContentJson' => $startedContentJson,
+                ])
+            @endcomponent
+        @endif
 
-{{--        --}}{{-- New Section --}}
-{{--        @component('partials.bladesora.members.components.home._new-section', [--}}
-{{--            'brand' => brand(),--}}
-{{--            'contentEndpoint' => '/railcontent/content',--}}
-{{--            'allLessonsUrl' => url()->route('platform.new-lessons'),--}}
-{{--            'newContentJson' => $newContentJson,--}}
-{{--            ])--}}
-{{--        @endcomponent--}}
+        {{-- New Section --}}
+        @component('partials.bladesora.members.components.home._new-section', [
+            'brand' => brand(),
+            'contentEndpoint' => '/railcontent/content',
+            'allLessonsUrl' => url()->route('platform.new-lessons'),
+            'newContentJson' => $newContentJson,
+            ])
+        @endcomponent
 
-{{--        @if(count($hotForumTopics) > 0)--}}
-{{--            --}}{{-- Popular Conversations --}}
-{{--            @component('partials.bladesora.members.components.home._conversations-section', [--}}
-{{--                'brand' => brand(),--}}
-{{--                'forumUrl' => brand() . '/forums',--}}
-{{--                'forumPosts' => $hotForumTopics,--}}
-{{--                ])--}}
-{{--            @endcomponent--}}
-{{--        @endif--}}
+        @if(count($hotForumTopics) > 0)
+            {{-- Popular Conversations --}}
+            @component('partials.bladesora.members.components.home._conversations-section', [
+                'brand' => brand(),
+                'forumUrl' => brand() . '/forums',
+                'forumPosts' => $hotForumTopics,
+                ])
+            @endcomponent
+        @endif
 
-{{--        --}}{{-- From Subscribed Coaches --}}
-{{--        @if($hasfollowedLessons)--}}
-{{--            @component('partials.bladesora.members.components.home._followed-section', [--}}
-{{--                'brand' => brand(),--}}
-{{--                'subscribedLessons' => '/'.$brand.'/lessons/subscribed', // todo: need url--}}
-{{--                'contentEndpoint' => '/railcontent/content',--}}
-{{--                'followedLessons' => $followedLessons,--}}
-{{--                'hasfollowedLessons' => $hasfollowedLessons,--}}
-{{--                ])--}}
-{{--            @endcomponent--}}
-{{--        @endif--}}
-{{--        --}}
-{{--        --}}{{-- Subscribed Coaches --}}
-{{--        @if($hasSubscribedCoaches)--}}
-{{--            @component('partials.bladesora.members.components.home._coaches-section', [--}}
-{{--                'brand' => brand(),--}}
-{{--                'hasSubscribedCoaches' => $hasSubscribedCoaches,--}}
-{{--                'subscribedCoaches' => $subscribedCoaches,--}}
-{{--                'subscribedCoachesUrl' => route('platform.coaches', ['only_subscribed'=>'true']).'#coach-section',--}}
-{{--                'allCoachesUrl' => route('platform.coaches'),--}}
-{{--                ])--}}
-{{--            @endcomponent--}}
-{{--        @endif--}}
-{{--        --}}
-{{--        --}}{{-- My Playlists --}}
-{{--        @component('partials.bladesora.members.components.home._list-section', [--}}
-{{--            'brand' => brand(),--}}
-{{--            'myListUrl' => url()->route('platform.user.playlists',['brand'=>brand()]),--}}
-{{--            'usersList' => $usersList,--}}
-{{--            ])--}}
-{{--        @endcomponent--}}
-{{--        --}}
-{{--        <div class="tw-px-4 lg:tw-px-0">--}}
-{{--            --}}{{-- Live Banner --}}
-{{--            @if( !empty($coachEvent) )--}}
-{{--                <coach-event--}}
-{{--                    brand="{{ $brand }}"--}}
-{{--                    class="tw-mb-6"--}}
-{{--                    :preloaded-content='{{ $coachEvent }}'--}}
-{{--                    current-date-string="{{ $currentDate }}"--}}
-{{--                    subscription-calendar-id="{{ $calendarId }}"--}}
-{{--                    youtube-event-id="{{ $youtubeId }}"--}}
-{{--                    :time-cutoff-minutes="{{ $timeCutoffMinutes }}"--}}
-{{--                    event-coach-profile-url="{{ $eventCoachProfileUrl }}"--}}
-{{--                ></coach-event>--}}
-{{--            @endif--}}
-{{--        </div>--}}
+        {{-- From Subscribed Coaches --}}
+        @if($hasfollowedLessons)
+            @component('partials.bladesora.members.components.home._followed-section', [
+                'brand' => brand(),
+                'subscribedLessons' => '/'.$brand.'/lessons/subscribed', // todo: need url
+                'contentEndpoint' => '/railcontent/content',
+                'followedLessons' => $followedLessons,
+                'hasfollowedLessons' => $hasfollowedLessons,
+                ])
+            @endcomponent
+        @endif
+        
+        {{-- Subscribed Coaches --}}
+        @if($hasSubscribedCoaches)
+            @component('partials.bladesora.members.components.home._coaches-section', [
+                'brand' => brand(),
+                'hasSubscribedCoaches' => $hasSubscribedCoaches,
+                'subscribedCoaches' => $subscribedCoaches,
+                'subscribedCoachesUrl' => route('platform.coaches', ['only_subscribed'=>'true']).'#coach-section',
+                'allCoachesUrl' => route('platform.coaches'),
+                ])
+            @endcomponent
+        @endif
+        
+        {{-- My Playlists --}}
+        @component('partials.bladesora.members.components.home._list-section', [
+            'brand' => brand(),
+            'myListUrl' => url()->route('platform.user.playlists',['brand'=>brand()]),
+            'usersList' => $usersList,
+            ])
+        @endcomponent
+        
+        <div class="tw-px-4 lg:tw-px-0">
+            {{-- Live Banner --}}
+            @if( !empty($coachEvent) )
+                <coach-event
+                    brand="{{ $brand }}"
+                    class="tw-mb-6"
+                    :preloaded-content='{{ $coachEvent }}'
+                    current-date-string="{{ $currentDate }}"
+                    subscription-calendar-id="{{ $calendarId }}"
+                    youtube-event-id="{{ $youtubeId }}"
+                    :time-cutoff-minutes="{{ $timeCutoffMinutes }}"
+                    event-coach-profile-url="{{ $eventCoachProfileUrl }}"
+                ></coach-event>
+            @endif
+        </div>
 
-{{--        --}}{{-- Upcoming Events --}}
-{{--        @if($hasUpcomingEvents)--}}
-{{--            @component('partials.bladesora.members.components.home._upcoming-section', [--}}
-{{--                'brand' => brand(),--}}
-{{--                'upcomingUrl' => '/'.$brand.'/live', // todo: url--}}
-{{--                'upcomingEvents' => $upcomingEvents,--}}
-{{--                'contentEndpoint' => '/railcontent/content',--}}
-{{--                ])--}}
-{{--            @endcomponent--}}
-{{--        @endif--}}
-{{--        <div class="tw-px-4 lg:tw-px-0">--}}
-{{--            --}}{{-- My Stats --}}
-{{--            @if(user()->isAMember())--}}
-{{--                <stats-section--}}
-{{--                    brand="{{ $brand }}"--}}
-{{--                    account-url="{{ user()->getDashboardUrl() }}"--}}
-{{--                    :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"--}}
-{{--                    next-learning-path-level="{{ user()->getMethodLevel() }}"--}}
-{{--                    :user-metrics="{{ json_encode($userMetrics) }}"--}}
-{{--                ></stats-section>--}}
-{{--            @endif--}}
-{{--        </div>--}}
+        {{-- Upcoming Events --}}
+        @if($hasUpcomingEvents)
+            @component('partials.bladesora.members.components.home._upcoming-section', [
+                'brand' => brand(),
+                'upcomingUrl' => '/'.$brand.'/live', // todo: url
+                'upcomingEvents' => $upcomingEvents,
+                'contentEndpoint' => '/railcontent/content',
+                ])
+            @endcomponent
+        @endif
+        <div class="tw-px-4 lg:tw-px-0">
+            {{-- My Stats --}}
+            @if(user()->isAMember())
+                <stats-section
+                    brand="{{ $brand }}"
+                    account-url="{{ user()->getDashboardUrl() }}"
+                    :next-learning-path-progress-percent="{{ $nextLearningPathProgressPercent }}"
+                    next-learning-path-level="{{ user()->getMethodLevel() }}"
+                    :user-metrics="{{ json_encode($userMetrics) }}"
+                ></stats-section>
+            @endif
+        </div>
 
-{{--    </div>--}}
+    </div>
 
-{{--    @include('partials._railanalytics-brand-tracking-iframe')--}}
+    @include('partials._railanalytics-brand-tracking-iframe')
 
 @endsection
 
 @section('layout-scripts')
     @parent
-
+    
     @if(str_contains(Request::url(), 'create-playlist-window'))
         <script>
             document.addEventListener('DOMContentLoaded', function () {
