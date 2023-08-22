@@ -9,7 +9,6 @@ import SoundSlice from '../SoundSlice/SoundSlice.vue';
 import PlaybackCue from './PlaybackCue.vue';
 import Comments from '../../vuesora/views/comments/Comments.vue';
 import PlaybackNavButtons from './PlaybackNavButtons.vue';
-import RelatedLesson from './RelatedLesson.vue';
 import Breadcrumb from './Breadcrumb.vue';
 import VideoMediaElement from '../../vuesora/components/MediaElement/MediaElement.vue';
 import VideoPlayer from '../../vuesora/components/VideoPlayer/VideoPlayer.vue';
@@ -17,6 +16,7 @@ import VideoResources from '../../vuesora/components/VideoResources/VideoResourc
 import YoutubePlayer from '../../vuesora/components/YoutubePlayer/YoutubePlayer.vue';
 import ContentUnavailable from './ContentUnavailable.vue';
 import AssignmentsContainer from '../../vuesora/components/AssignmentsContainer/AssignmentsContainer.vue';
+import ContentInfo from '../ContentInfo/ContentInfo.vue';
 
 //-----------Props-----------//
 const props = defineProps({
@@ -36,9 +36,25 @@ const props = defineProps({
         type: String,
         default: ''
     },
+    contentBreadcrumb: {
+        type: Object,
+        default: () => {}
+    },
+    contentChapters: {
+        type: Array,
+        default: () => []
+    },
+    contentDescription: {
+        type: String,
+        default: ''
+    },
     contentId: {
         type: [Number, String],
         default: ''
+    },
+    contentInstructors: {
+        type: Array,
+        default: () => []
     },
     currentSecond: {
         type: [Number, String],
@@ -367,7 +383,7 @@ onBeforeMount(() => {
                     <PlaybackNavButtons :next-lesson-url="nextLessonUrl" :prev-lesson-url="prevLessonUrl" />
                 </div>
                 <!-- Info Section -->
-                <slot name="info-section"></slot>
+                <ContentInfo :breadcrumbs="contentBreadcrumb" :content-description="contentDescription" :content-chapters="contentChapters" :instructors="contentInstructors" />
             </div>
 
             <!-- Cue and Realted Playlist Wrapper -->
