@@ -3,7 +3,6 @@ import { onMounted, onBeforeMount, onBeforeUnmount, reactive, ref} from 'vue';
 import LoadingAnimation from '../../vuesora/components/LoadingAnimation/LoadingAnimation.vue';
 import ProgressTracker from '../../vuesora/assets/js/classes/progress-tracker';
 import ContentService from "../../vuesora/assets/js/services/content";
-import { openDB, saveToDB, getMultipleFromDB, storeExists } from "../../../services/indexedDB";
 
 //Props
 const props = defineProps({
@@ -57,34 +56,16 @@ let intervalId = null;
 
 //IndexedDB Settings
 const dbName = "SoundSliceDB";
-const globalStore = "globalSettings";
-const uniqueStore = props.soundsliceSlug;
 
 //Reactive Objs
-const globalSettings = reactive([    
-    {
-        name: "volume",
-        method: "setVolume",
-        value: 1
-    },
-    {
-        name: "zoom",
-        method: "setZoom",
-        value: 0
-    }
-]);
-const uniqueSettings = reactive([
-    {
-        name: 'current_time',
-        method: "seek",
-        value: 1
-    },
-    {
-        name: 'audio_source',
-        method: "changeAudioByIndex",
-        value: 1
-    }
-])
+const globalSettings = reactive({
+    volume: 1,
+    zoom: 0,
+});
+const uniqueSettings = reactive({
+    time: 1,
+    audioSource: 1,
+})
 
 /**********************  
     Methods
@@ -138,28 +119,33 @@ const debounce = (cb, delay = 1000) => {
 }
 //Update Volume Value
 const saveVolume = debounce(function(val){
-    openDB(dbName).then(db => {
-        saveToDB(db, globalStore, 'volume', val)
-    })
+    localStorage.setItem("ssVolume", val);
 }, 250);
 //Update Zoom Value
 const saveZoom = debounce(function(val){
-    openDB(dbName).then(db => {
-        saveToDB(db, globalStore, 'zoom', val)
-    })
+    localStorage.setItem("ssZoom", val);
 }, 250);
-//Update Layout Value
-const saveLayout = (val) => {
-    openDB(dbName).then(db => {
-        saveToDB(db, globalStore, 'layout', val)
-    })
-};
 //Save Audio Source Value
 const saveAudioSource = (val) => {
-    openDB(dbName).then(db => {
-        saveToDB(db, uniqueStore, 'audio_source', val)
-    })
+    localStorage.setItem("ssAudioSource", val);
 };
+
+//Counters
+const startCounter = (currentTime) => {
+    intervalId = setInterval( ()=> {
+        if ( currentTime < endTime.value ) {
+            currentTime ++;
+            //Save currentTime
+            console.log(currentTime)
+            localStorage.setItem(`${ props.soundsliceSlug }_currentTime`, currentTime);
+        } else {
+            clearInterval(intervalId);
+        }
+    }, 1000)                 
+}
+const stopCounter = () => {
+    clearInterval(intervalId);
+}
 
 //listen For Soundslice Events....
 const handleSoundsliceEvent = (event) => {
@@ -168,18 +154,18 @@ const handleSoundsliceEvent = (event) => {
         switch (cmd.method) {
             //GLOBAL SETTINGS
             case 'ssPlayerReady':
-                //Set Volume
-                console.log(globalSettings[0].method, globalSettings[0].value)
-                ssiframe.value.contentWindow.postMessage(`{"method": "${globalSettings[0].method}", "arg": ${globalSettings[0].value} }`, 'https://www.soundslice.com');
-                //Set CurrentTime
-                ssiframe.value.contentWindow.postMessage(`{"method": "${uniqueSettings[0].method}", "arg": ${uniqueSettings[0].value} }`, 'https://www.soundslice.com');
-                //Set Audio Source
-                ssiframe.value.contentWindow.postMessage(`{"method": "${uniqueSettings[1].method}", "arg": ${uniqueSettings[0].value} }`, 'https://www.soundslice.com');
-                isLoading.value = false;
                 break 
             case 'ssNotationLoaded':
+                //Set Volume
+                ssiframe.value.contentWindow.postMessage(`{"method": "setVolume", "arg": ${globalSettings.volume} }`, 'https://www.soundslice.com');
                 //Set Zoom
-                ssiframe.value.contentWindow.postMessage(`{"method": "${globalSettings[1].method}", "arg": "${globalSettings[1].value}" }`, 'https://www.soundslice.com');
+                ssiframe.value.contentWindow.postMessage(`{"method": "setZoom", "arg": ${globalSettings.zoom} }`, 'https://www.soundslice.com');
+                //Set Audio Source
+                ssiframe.value.contentWindow.postMessage(`{"method": "changeAudioByIndex", "arg": "${uniqueSettings.audioSource}" }`, 'https://www.soundslice.com');
+                //Get Current Time
+                ssiframe.value.contentWindow.postMessage(`{"method": "seek", "arg": ${uniqueSettings.time} }`, 'https://www.soundslice.com');
+                //Done
+                isLoading.value = false;
                 break
             case 'ssVolumeChange': 
                 ssiframe.value.contentWindow.postMessage('{"method": "getVolume"}', 'https://www.soundslice.com');
@@ -195,6 +181,7 @@ const handleSoundsliceEvent = (event) => {
                 break
             //UNIQUE SETTINGS
             case 'ssCurrentTime':
+                console.log('ssCurrentTime')
                 //Start Counter
                 if(isPlaying.value) startCounter(Math.floor(cmd.arg));
                 break
@@ -231,25 +218,10 @@ const handleSoundsliceEvent = (event) => {
     }
 };
 
-//Counters
-const startCounter = (currentTime) => {
-    intervalId = setInterval( ()=> {
-        if ( currentTime < endTime.value ) {
-            currentTime ++;
-            //SAVE TO LOCAL STORAGE { settingType, value }
-            localStorage.setItem("SS_startTime", JSON.stringify(currentTime));
-        } else {
-            clearInterval(intervalId);
-        }
-    }, 1000)                 
-}
-const stopCounter = () => {
-    clearInterval(intervalId);
-}
-
 const handlePlay = (event) => {
     isPlaying.value = true;
     playEventsRan.value ++; //HACK: SoundSlice is sending 2 messages on 'ssPlay'
+    
     //Start Counter
     if(playEventsRan.value > 1) {
         ssiframe.value.contentWindow.postMessage('{"method": "getCurrentTime"}', 'https://www.soundslice.com');
@@ -267,32 +239,25 @@ const handlePlay = (event) => {
     }
 }
 
-//Load Global Settings 
-const loadSettings = (storeName, settings) => {
-    const keys = settings.map(key => key.name);
-    openDB(dbName, storeName)
-        .then(db => {
-            return getMultipleFromDB(db, storeName, keys)
-        }) 
-        .then(values => {
-            settings.forEach((setting,i) => {
-                setting.value = values[i];
-            })
-            console.log(storeName, settings)
-        })   
-        .catch(error => {
-            console.log("Error:", error)
-        })
-}
-
 /**********************  
     Lifecycle Hooks
 **********************/
 onBeforeMount(()=> {
-    //Load Global Settings
-    loadSettings(globalStore, globalSettings)
-    //Load Local Settings
-    loadSettings(uniqueStore, uniqueSettings)
+    //Global Settings
+    if(localStorage.getItem("ssVolume")) {
+        globalSettings.volume = localStorage.getItem("ssVolume");
+    }
+    if(localStorage.getItem("ssZoom")) {
+        globalSettings.zoom = localStorage.getItem("ssZoom");
+    }
+    //Unique Settings
+    if(localStorage.getItem("ssAudioSource")) {
+        uniqueSettings.audioSource = localStorage.getItem("ssAudioSource");
+    }
+    //Get CurrentTime
+    if(localStorage.getItem(`${ props.soundsliceSlug }_currentTime`)) {
+        uniqueSettings.time = localStorage.getItem(`${ props.soundsliceSlug }_currentTime`);
+    }
 })
 
 onMounted(() => {
