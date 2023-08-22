@@ -62,7 +62,7 @@ const globalSettings = reactive({
     zoom: 0,
 });
 const uniqueSettings = reactive({
-    time: 1,
+    time: 0,
     audioSource: 1,
 })
 
