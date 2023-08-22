@@ -118,7 +118,7 @@ const startCounter = (currentTime) => {
         if ( currentTime < endTime.value ) {
             currentTime ++;
             //SET Current Time
-            localStorage.setItem(`${ props.soundsliceSlug }_currentTime`, currentTime);
+            saveCurrentTime(currentTime);
         } else {
             clearInterval(intervalId);
         }
@@ -151,6 +151,10 @@ const saveZoom = debounce(function(val){
 const saveAudioSource = (val) => {
     localStorage.setItem("ssAudioSource", val);
 };
+//SET Current Time
+const saveCurrentTime = (val) => {
+    localStorage.setItem(`${ props.soundsliceSlug }_currentTime`, val);
+}
 
 //listen For Soundslice Events....
 const handleSoundsliceEvent = (event) => {
@@ -177,6 +181,20 @@ const handleSoundsliceEvent = (event) => {
             case 'ssDuration':
                 endTime.value = cmd.arg;
                 break
+            // case 'ssLoopChange':
+            //     console.log('Loop has changed to ' + cmd.arg);
+            //     break;
+            // case 'ssNotationVisibility':
+            //     console.log('Notation visibility is now ' + cmd.arg);
+            //     break;
+            // case 'ssSpeed ':
+            //     console.log('speed', cmd.arg)
+            //     break
+            case 'ssSeek':
+                console.log('Play has seeked to ' + cmd.arg + ' seconds.');
+                //SET Current Time
+                saveCurrentTime( Math.floor(cmd.arg) );
+                break;
             case 'ssVolumeChange': 
                 ssiframe.value.contentWindow.postMessage('{"method": "getVolume"}', 'https://www.soundslice.com');
                 break;
@@ -184,18 +202,15 @@ const handleSoundsliceEvent = (event) => {
                 saveVolume(cmd.arg)
                 break
             case 'ssZoom':
-                saveZoom(cmd.arg)
+                saveZoom(cmd.arg);
                 break
             case 'ssLayoutChange':
-                saveLayout(cmd.arg)
+                saveLayout(cmd.arg);
                 break
             //UNIQUE SETTINGS
             case 'ssCurrentTime':
                 //Start Counter
                 if(isPlaying.value) startCounter(Math.floor(cmd.arg));
-                break
-            case 'ssSpeed ':
-                console.log('speed', cmd.arg)
                 break
             case 'ssAudioSourceChanged':
                 saveAudioSource(cmd.arg)
