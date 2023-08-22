@@ -181,15 +181,6 @@ const handleSoundsliceEvent = (event) => {
             case 'ssDuration':
                 endTime.value = cmd.arg;
                 break
-            // case 'ssLoopChange':
-            //     console.log('Loop has changed to ' + cmd.arg);
-            //     break;
-            // case 'ssNotationVisibility':
-            //     console.log('Notation visibility is now ' + cmd.arg);
-            //     break;
-            // case 'ssSpeed ':
-            //     console.log('speed', cmd.arg)
-            //     break
             case 'ssSeek':
                 console.log('Play has seeked to ' + cmd.arg + ' seconds.');
                 //SET Current Time
@@ -292,7 +283,7 @@ onBeforeUnmount(() => {
                     <iframe 
                         ref="ssiframe"
                         id="ssEmbed"
-                        :src="'https://www.soundslice.com/' + scoreOrSlice() + '/' + soundsliceSlug + '/embed/?api=1&scroll_type=2&branding=0&top_controls=1&u=' + userId + additionalParams"
+                        :src="`https://www.soundslice.com/${scoreOrSlice()}/${soundsliceSlug}/embed/?api=1&scroll_type=2&branding=0&top_controls=1&u=${userId}&show_chords=0&layout=3&recording_idx=${uniqueSettings.audioSource}`"
                         frameBorder="0" allowfullscreen
                     ></iframe>
                 </div>
