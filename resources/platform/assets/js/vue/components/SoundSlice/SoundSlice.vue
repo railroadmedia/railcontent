@@ -49,6 +49,7 @@ const playEventsRan = ref(0);
 const endTime = ref(30); //get end time depending on user settings
 const ssiframe = ref(null);
 const progressTrackerEventListener = ref(null);
+const ssURL = ref(`https://www.soundslice.com/${scoreOrSlice()}/${props.soundsliceSlug}/embed/?api=1&scroll_type=2&branding=0&recording_idx=2&top_controls=1&u=${props.userId}${props.additionalParams}`);
 
 //Static 
 let progressTracker = new ProgressTracker(); //????
@@ -182,7 +183,6 @@ const handleSoundsliceEvent = (event) => {
                 endTime.value = cmd.arg;
                 break
             case 'ssSeek':
-                console.log('Play has seeked to ' + cmd.arg + ' seconds.');
                 //SET Current Time
                 saveCurrentTime( Math.floor(cmd.arg) );
                 break;
@@ -249,6 +249,7 @@ onBeforeMount(()=> {
     //GET Audio Source
     if(localStorage.getItem("ssAudioSource")) {
         uniqueSettings.audioSource = localStorage.getItem("ssAudioSource");
+        ssURL.value = `https://www.soundslice.com/${scoreOrSlice()}/${props.soundsliceSlug}/embed/?api=1&scroll_type=2&branding=0&top_controls=1&u=${props.userId}&show_chords=0&layout=3&recording_idx=${uniqueSettings.audioSource}`;
     }
     //GET Current Time
     if(localStorage.getItem(`${ props.soundsliceSlug }_currentTime`)) {
@@ -283,7 +284,7 @@ onBeforeUnmount(() => {
                     <iframe 
                         ref="ssiframe"
                         id="ssEmbed"
-                        :src="`https://www.soundslice.com/${scoreOrSlice()}/${soundsliceSlug}/embed/?api=1&scroll_type=2&branding=0&top_controls=1&u=${userId}&show_chords=0&layout=3&recording_idx=${uniqueSettings.audioSource}`"
+                        :src="ssURL"
                         frameBorder="0" allowfullscreen
                     ></iframe>
                 </div>
