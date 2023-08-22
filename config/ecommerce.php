@@ -1029,15 +1029,15 @@ return [
 
     'revenuecat'=>[
         'ios' => [
-            'musora' => env('REVENUE_KEY_IOS_MUSORA'),
-            'drumeo' => env('REVENUE_KEY_IOS_DRUMEO'),
-            'pianote' => env('REVENUE_KEY_IOS_PIANOTE'),
+            'Musora' => env('REVENUE_KEY_IOS_MUSORA'),
+            'Drumeo' => env('REVENUE_KEY_IOS_DRUMEO'),
+            'Pianote' => env('REVENUE_KEY_IOS_PIANOTE'),
             ],
         'android' =>
             [
-                'musora' => env('REVENUE_KEY_ANDROID_MUSORA'),
-                'drumeo' => env('REVENUE_KEY_ANDROID_DRUMEO'),
-                'pianote' => env('REVENUE_KEY_ANDROID_PIANOTE'),
+                'Musora' => env('REVENUE_KEY_ANDROID_MUSORA'),
+                'Drumeo' => env('REVENUE_KEY_ANDROID_DRUMEO'),
+                'Pianote' => env('REVENUE_KEY_ANDROID_PIANOTE'),
             ]
     ]
 ];
