@@ -1039,5 +1039,6 @@ return [
                 'Drumeo' => env('REVENUE_KEY_ANDROID_DRUMEO'),
                 'Pianote' => env('REVENUE_KEY_ANDROID_PIANOTE'),
             ]
-    ]
+    ],
+    'sync_revenue_cat' => env('SYNC_REVENUE_CAT', true),
 ];
