@@ -5,7 +5,7 @@
     <meta property="og:title" content="25 Top Drum Songs With Kristina Rybalchenko | Drumeo">
     <meta name="description" content="Learn to play 25 of Kristina’s favorite drum covers.">
     <meta property="og:description" content="Learn to play 25 of Kristina’s favorite drum covers.">
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/og-image.png" style="display: none;">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/share-image.jpg" style="display: none;">
     <meta property="og:url" content="https://www.drumeo.com/kristinas-top-25/">
 
     @include('_partials.layout._fonts')
@@ -28,25 +28,34 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
-    <header class="text-white text-center sm:text-left pt-7 md:pt-16 px-6 pb-7 md:pb-10" style="background: #000f5c;">
+    <header class="text-white text-center lg:text-left px-6 lg:px-8 py-10 sm:py-12 lg:py-24 bg-cover bg-center" style="background: #000f5c url('https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/header-bg.jpg');">
         <div class="container mx-auto max-w-5xl">
-            <div class="flex flex-wrap justify-center items-end lg:items-center">
-                <div class="w-10/12 sm:w-1/2 {{--lg:w-7/12--}} sm:order-1 text-right sm:pl-4 lg:pl-0">
-                    <img src="" alt="Kristina's Top 25" class="mx-auto sm:mx-0">
-                </div>
-                <div class="w-full sm:w-1/2 {{--lg:w-5/12--}} mt-5 sm:mt-0 {{--lg:mt-14--}}">
-                    <img src="">
-                    <h6 class="mt-2 md:mt-4 mb-4 md:mb-7 lg:mb-8 leading-tight">
-                        Learn to play 25 of Kristina’s favorite drum covers. <strong class="text-[#ff72ef]">FOR FREE.</strong>
-                    </h6>
-                    <p class="hidden lg:inline">
-                        <i class="fas fa-check text-drumeo" aria-hidden="true"></i> Note-For-Note Sheet Music
-                        <i class="ml-2 fas fa-check text-drumeo" aria-hidden="true"></i> Play-Along Tools
-                        <i class="ml-2 fas fa-check text-drumeo" aria-hidden="true"></i> Drum-less Versions</p>
-                    <div class="flex inline lg:hidden">
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo" aria-hidden="true"></i><br> Note-For-Note<br>  Sheet Music</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo" aria-hidden="true"></i><br> Play-Along <br> Tools</p>
-                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo" aria-hidden="true"></i><br> Drum-less <br> Versions</p>
+            <div class="flex flex-wrap justify-center items-start lg:items-center">
+                <div class="w-full sm:w-7/12 xl:w-1/2">
+                    <img
+                        class="h-28 sm:h-32 lg:h-40 mb-3"
+                        src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/logo.svg"
+                        alt="logo"
+                        fetchpriority="high"
+                    />
+                    <img
+                        class="rounded-xl sm:hidden mb-5 transition-opacity opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/header-image-m.png"
+                        alt="header hero image mobile"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                    />
+                    <p class="leading-tight">
+                        <strong>Learn to play 25 of Kristina’s <br class="lg:hidden">favorite drum covers. <span class="text-[#ff72ef]">FOR FREE.</span></strong>
+                    </p>
+                    <p class="hidden lg:inline-block leading-tight mt-3 mb-6">
+                        <i class="fas fa-check text-[#ff72ef]" aria-hidden="true"></i> Accurate Sheet Music
+                        <i class="ml-2 fas fa-check text-[#ff72ef]" aria-hidden="true"></i> Play-Along Tools
+                        <i class="ml-2 fas fa-check text-[#ff72ef]" aria-hidden="true"></i> Drum-less Versions</p>
+                    <div class="flex inline-block lg:hidden leading-tight mt-2 sm:mt-3 mb-4 sm:mb-6">
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-[#ff72ef]" aria-hidden="true"></i><br> Accurate<br>  Sheet Music</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-[#ff72ef]" aria-hidden="true"></i><br> Play-Along <br> Tools</p>
+                        <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-[#ff72ef]" aria-hidden="true"></i><br> Drum-less <br> Versions</p>
                     </div>
                     <div class="mx-auto sm:mx-0 text-center" style="max-width:470px">
                         @include("drumeo.lead-gen.partials.sign-up-form", [
@@ -58,11 +67,20 @@
                             ])
                     </div>
                 </div>
+                <div class="w-full sm:w-5/12 xl:w-1/2 sm:pl-5 xl:px-12 hidden sm:block">
+                    <img
+                        class="transition-opacity opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=700,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/header-image.png"
+                        alt="header hero image"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                    />
+                </div>
             </div>
         </div>
     </header>
 
-    <section class="text-center relative py-8 md:py-10 lg:py-16 px-4">
+    <section class="text-center relative py-10 md:py-14 lg:py-20 px-4">
         <div class="container max-w-6xl mx-auto">
             <h2 class="mb-4 md:mb-5">
                 <strong>Kristina’s favorite bangers</strong>
@@ -78,7 +96,7 @@
     </section>
 
     <div class="relative h-5 sm:h-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #000318 calc(50% + 1px));"></div>
-    <section class="text-center text-white px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#0c1524;">
+    <section class="text-center text-white px-5 sm:px-6 py-8 sm:py-12 lg:py-20" style="background-color:#0c1524;">
         <div class="container max-w-4xl mx-auto">
             <h2><strong>Learn the easy way</strong></h2>
             <p class="leading-tight mt-2 sm:mt-3">
@@ -167,13 +185,13 @@
     ])
 
     <div id="final" class="anchor"></div>
-    <section class="text-center py-14 md:py-24 lg:py-32 text-white" style="background: #000f5c;">
+    <section class="text-center py-14 md:py-24 text-white bg-cover bg-center" style="background: #000f5c url('https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/bottom-bg.jpg');">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
-                <img src="">
-                <h5 class="my-6 lg:my-9 leading-normal">
-                    <strong>Learn to play 25 of Kristina’s favorite drum covers <span class="text-[#ff72ef]">FOR FREE.</span></strong><br>
-                    Enter your email to get all the charts sent to you.
+                <img class="h-32 sm:h-36 lg:h-44" src="https://www.musora.com/musora-cdn/image/width=400,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/logo.svg" alt="FWTGF logo" />
+                <h5 class="my-5 lg:my-7 leading-normal">
+                    <strong>Learn to play 25 of Kristina’s <br class="sm:hidden">favorite drum covers <span class="text-[#ff72ef]">FOR FREE.</span></strong><br>
+                    Enter your email to get all<br class="sm:hidden"> the charts sent to you.
                 </h5>
                 <div class="mx-auto" style="max-width:700px">
                     @include("drumeo.lead-gen.partials.sign-up-form", [
