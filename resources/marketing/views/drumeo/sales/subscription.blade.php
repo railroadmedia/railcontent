@@ -145,8 +145,14 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
-
+        <a href="/drumshop/30-day-drummer" class="flex items-center justify-center py-2 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(180deg, #EBF0FF 0%, #DEE6FF 100%);">
+            <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/30_day_drummer_logo.svg" alt="30 day drummer logo" />
+            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight">
+                REGISTRATION CLOSES Aug. 31 <span class="hidden sm:inline">|</span> <br class="sm:hidden"><span class="text-drumeo underline">Click here to join season 3 &raquo;</span>
+            </p>
+        </a>
     @endif
+
 
     @php
         $bubble1 = 'https://dpwjbsxqtam5n.cloudfront.net/sales/2023/bubbles/dorothea-taylor.png';

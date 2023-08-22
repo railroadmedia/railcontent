@@ -146,6 +146,13 @@
             "trialVersion" => true,
             "joinUrl" => '/choose-plan',
         ])
+        <a href="/shop/30-day-blues-piano" class="flex text-white items-center justify-center py-2 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(180deg, #000f24 0%, #010e4a 100%);">
+            <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />
+            <p class="text-sm sm:text-lg font-bebas uppercase mx-0 leading-tight">
+                REGISTRATION CLOSES Aug. 31 <span class="hidden sm:inline">|</span> <br class="sm:hidden"><span class="text-pianote underline">Click here to join &raquo;</span>
+            </p>
+        </a>
+
     @endif
 
     @php
