@@ -30,6 +30,7 @@
                             :force-wide-thumbs="true"
                             :pre-loaded-content="{{ $startedContentJson }}"
                             :show-dropdown="true"
+                            :extra-padding-bottom="true"
                     >
                     </catalogue-card-container>
                 </transition>
