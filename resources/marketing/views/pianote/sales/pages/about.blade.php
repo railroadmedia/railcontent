@@ -387,7 +387,7 @@
                 <div class="flex-1 rounded-xl shadow-lg text-white p-2 md:p-4 relative" style="background:#FF0000;">
                     <a href="https://youtube.com/user/pianolessonscom" target="_blank">
                     <img class="absolute h-4 lg:h-6 top-4 left-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/youtube_icon.svg" alt="youtube icon">
-                    <div class="text-right mb-12 font-bold text-3xl md:text-4xl lg:text-5xl">1.1M</div>
+                    <div class="text-right mb-12 font-bold text-3xl md:text-4xl lg:text-5xl">1.3M</div>
                     <p class="text-center font-bold text-xs md:text-sm">YouTube Subscribers</p>
                     </a>
                 </div>
@@ -401,14 +401,14 @@
                 <div class="flex-1 rounded-xl shadow-lg text-white p-2 md:p-4 relative" style="background:#1877F2;">
                     <a href="https://facebook.com/pianoteofficial" target="_blank">
                     <img class="absolute h-4 lg:h-6 top-4 left-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/facebook_icon.svg" alt="facebook icon">
-                    <div class="text-right mb-12 font-bold text-3xl md:text-4xl lg:text-5xl">408K</div>
+                    <div class="text-right mb-12 font-bold text-3xl md:text-4xl lg:text-5xl">430K</div>
                     <p class="text-center font-bold text-xs md:text-sm">Facebook <br class="hidden md:inline lg:hidden">Likes</p>
                     </a>
                 </div>
                 <div class="flex-1 rounded-xl shadow-lg text-white p-2 md:p-4 relative" style="background:linear-gradient(243.54deg, #012296 0.52%, #810090 26.94%, #EB0B61 52.85%, #FD5240 77.2%, #F8B803 100%);">
                     <a href="https://instagram.com/pianoteofficial" target="_blank">
                     <img class="absolute h-4 lg:h-6 top-4 left-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/instagram_icon.svg" alt="instagram icon">
-                    <div class="text-right mb-12 font-bold text-3xl md:text-4xl lg:text-5xl">101K</div>
+                    <div class="text-right mb-12 font-bold text-3xl md:text-4xl lg:text-5xl">200K</div>
                     <p class="text-center font-bold text-xs md:text-sm">Instagram Followers</p>
                     </a>
                 </div>

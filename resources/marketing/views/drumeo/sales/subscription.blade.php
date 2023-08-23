@@ -546,7 +546,7 @@
         'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/freedrumlessons/',
-        'youtube' => '2.7M',
+        'youtube' => '2.8M',
         'facebookLink' => 'https://facebook.com/drumeo/',
         'facebook' => '1.2M',
         'instagramLink' => 'https://instagram.com/drumeoofficial/',

@@ -595,7 +595,7 @@
         'facebookLink' => 'https://facebook.com/pianoteofficial/',
         'facebook' => '430K',
         'instagramLink' => 'https://instagram.com/pianoteofficial/',
-        'instagram' => '203K',
+        'instagram' => '200K',
     ])
     @if(empty($trialVersion))
     @include('musora.sales.components.guarantee-section', [
