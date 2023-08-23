@@ -2,13 +2,12 @@
 
 @section('global-head')
     <meta name="robots" content="noindex">
-    <title>100 Drumming Anthems | Drumeo</title>
-    <meta name="description" content="Get expertly transcribed sheet music for 100 of drumming’s biggest songs (FREE).">
-    <!-- Social Media -->
-    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/og-image.png" style="display: none;">
-    <meta property="og:title" content="100 Drumming Anthems | Drumeo">
-    <meta property="og:description" content="Get expertly transcribed sheet music for 100 of drumming’s biggest songs (FREE).">
-    <meta property="og:url" content="https://www.drumeo.com/100-songs/">
+    <title>25 Top Drum Songs With Kristina Rybalchenko | Drumeo</title>
+    <meta property="og:title" content="25 Top Drum Songs With Kristina Rybalchenko | Drumeo">
+    <meta name="description" content="Learn to play 25 of Kristina’s favorite drum covers.">
+    <meta property="og:description" content="Learn to play 25 of Kristina’s favorite drum covers.">
+    <meta property="og:image" content="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/share-image.jpg" style="display: none;">
+    <meta property="og:url" content="https://www.drumeo.com/kristinas-top-25/">
 
     @include('_partials.layout._fonts')
 
@@ -36,10 +35,10 @@
         </div>
     </a>
 
-    <section class="text-center relative text-white py-8 md:py-10 lg:py-16 px-4" style="background-color:#010a2b;">
+    <section class="text-center relative py-8 md:py-10 lg:py-16 px-4">
         <div class="container mx-auto">
             <h3 class="mb-4 md:mb-5">
-                <strong>100 Drumming Anthems<br> Every. Single. Note.</strong>
+                <strong>Kristina’s favorite bangers</strong>
             </h3>
             <p class="leading-normal mb-6 md:mb-12 lg:mb-16 max-w-2xl">
                 Say hello to your free charts! Click below to get started playing your favorite songs. You’ll notice a handy player that scrolls along with the music in real time and lets you loop, add/remove metronome, and slow down any part you want.
@@ -47,11 +46,11 @@
                 Choose a song below:
             </p>
 
-            @include('drumeo.lead-gen.100-songs._songs')
+            @include('drumeo.lead-gen.kristinas-top-25._songs')
 
         </div>
     </section>
-    <section class="text-center py-14 md:py-24 lg:py-32 text-white bg-black bg-center bg-cover lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/order-background.jpg">
+    <section class="text-center py-14 md:py-24 lg:py-32 text-white bg-center bg-cover lazyload" style="background-color:#010f5a;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,q_60,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/kristinas-top-25/bottom-bg.jpg">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
                 <h1><strong>Keep the party going.</strong></h1>

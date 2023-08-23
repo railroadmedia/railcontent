@@ -81,15 +81,15 @@
             ])
         @endcomponent
 
-        @if(count($hotForumTopics) > 0)
-            {{-- Popular Conversations --}}
-            @component('partials.bladesora.members.components.home._conversations-section', [
-                'brand' => brand(),
-                'forumUrl' => brand() . '/forums',
-                'forumPosts' => $hotForumTopics,
-                ])
-            @endcomponent
-        @endif
+{{--        @if(count($hotForumTopics) > 0)--}}
+{{--            --}}{{-- Popular Conversations --}}
+{{--            @component('partials.bladesora.members.components.home._conversations-section', [--}}
+{{--                'brand' => brand(),--}}
+{{--                'forumUrl' => brand() . '/forums',--}}
+{{--                'forumPosts' => $hotForumTopics,--}}
+{{--                ])--}}
+{{--            @endcomponent--}}
+{{--        @endif--}}
 
         {{-- From Subscribed Coaches --}}
         @if($hasfollowedLessons)
