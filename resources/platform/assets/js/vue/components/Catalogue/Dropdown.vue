@@ -1,4 +1,5 @@
 <script setup>
+import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
 
 const props = defineProps({
     brand: {
@@ -8,7 +9,7 @@ const props = defineProps({
     dropdownOptions: {
         type: Object,
     },
-    data: {
+    item: {
         type: Object,
     },
     isOpen: {
@@ -16,17 +17,22 @@ const props = defineProps({
         default: false
     },
 })
+
+const { progressReset } = useUserCatalogueEvents(props);
 </script>
 
 <template>
     <div v-if="isOpen"
-         class="tw-w-[162px] tw-drop-shadow-lg tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-z-50 tw-top-8">
+         class="tw-w-[162px] tw-drop-shadow-lg tw-rounded tw-bg-white tw-text-black dark:tw-bg-[#081825] dark:tw-text-white tw-absolute tw-right-0 tw-py-2 tw-top-8">
         <ul class="tw-text-xs tw-w-full">
             <!-- List Items -->
             <li v-for="(item, i) in dropdownOptions" :key="i" class="tw-w-full">
                 <button
                     class="tw-flex tw-items-center tw-w-full tw-px-4 tw-py-2 tw-z-30 tw-transition-colors dark:hover:tw-bg-[#102230] hover:tw-bg-[#F5F5F6]"
-                    @click="$emit(item.action, data)"
+                    @click="(event)=>{
+                        $emit(item.action, event);
+                        $emit('closeDropdown');
+                    }"
                 >
                     <svg v-if="item.name === 'Add to Playlist'" xmlns="http://www.w3.org/2000/svg" class="tw-h-5 tw-w-5 -tw-ml-1 tw-mr-1" fill="none" viewBox="0 0 24 24"
                          stroke="currentColor" stroke-width="2">
