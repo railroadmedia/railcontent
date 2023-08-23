@@ -82,5 +82,11 @@
 <script>
     function recaptchaSubmit{{$cleanFormId}}(token) {
         document.getElementById("{{$cleanFormId}}").submit();
+
+        dataLayer.push({
+            "event": "gtm.formSubmit",
+            "formId": "{{ $cleanFormId }}",
+            "formSuccess": true
+        });
     }
 </script>
