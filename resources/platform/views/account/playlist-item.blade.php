@@ -2,6 +2,7 @@
     //dd($playlistItem);
     //dd(get_defined_vars()['__data']);
     //dd(isset($playlistItem['instrumentless']));
+    //dd($playlistItem['released']);
 
     $brandParams = [
         'drumeo' => '&show_chords=0',
@@ -32,6 +33,7 @@
 
     {{-- WRAPPER VUE --}}
     <playlist-playback-wrapper
+        :is-released="{{ json_encode($playlistItem['released']) }}"
         lesson-type="{{ $lessonType }}"
         brand="{{ $brand }}"
         user-id="{{ user()->id }}"

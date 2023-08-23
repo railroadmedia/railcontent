@@ -287,8 +287,6 @@ export default {
         this.resourceDropdown = false;
       }
     });
-
-    console.log('infobutton', this.showInfoButton)
   },
   methods: {
     getCurrentTime() {
