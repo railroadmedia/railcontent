@@ -189,7 +189,8 @@
           :class="isBranchPath ? branchPathText : 'text-grey-2 hover-text-black'" title="Reset Progress"
           @click.stop.prevent="progressReset"></i>
       </div>
-      <button 
+      <button
+          v-if="!resetProgress"
           class="add-to-list tw-inline-flex tw-rounded-full tw-justify-center tw-px-0.5 tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white"
           :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#3F3F46] hover:tw-text-[#0B76DB] dark:tw-text-[#9EC0DC] dark:hover:tw-text-white'"
           :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'"
