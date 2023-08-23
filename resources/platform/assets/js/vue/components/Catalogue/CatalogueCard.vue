@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-auto tw-shrink-0 lg:tw-shrink tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]" :class="[class_object, displayInline ? 'tw-py-3' : 'tw-pb-2']">
+    <div class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]" :class="[class_object, displayInline ? 'tw-py-3' : 'tw-pb-2']">
         <div class="tw-flex" :class="displayInline ? 'tw-flex-row' : 'tw-flex-col'">
             <!-- Thumbnail Section -->
             <a :href="renderLink ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
@@ -67,27 +67,43 @@
                     </h6>
                 </a>
                 <!-- Add to Playlist -->
-                <div class="tw-inline-flex tw-items-start tw-p-1">
+                <div class="tw-inline-flex tw-items-start tw-p-1 tw-relative">
                     <button v-if="item.type !== 'pack-bundle' && showMyListAction"
                         class="add-to-list tw-inline-flex tw-rounded-full tw-p-0.5 tw-text-[#00101D] dark:tw-text-white"
                         :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                         :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
                         :data-content-type="item.type"
-                        @click.stop.prevent="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.color_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24"
+                        @click.stop.prevent="state.dropdownOpen = !state.dropdownOpen">
+                        <svg v-if="showDropdown" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.5 5.20768L12.5 5.2181M12.5 12.4993L12.5 12.5098M12.5 19.791L12.5 19.8014M12.5 6.24935C11.9247 6.24935 11.4583 5.78298 11.4583 5.20768C11.4583 4.63239 11.9247 4.16602 12.5 4.16602C13.0753 4.16602 13.5417 4.63239 13.5417 5.20768C13.5417 5.78298 13.0753 6.24935 12.5 6.24935ZM12.5 13.541C11.9247 13.541 11.4583 13.0746 11.4583 12.4993C11.4583 11.9241 11.9247 11.4577 12.5 11.4577C13.0753 11.4577 13.5417 11.9241 13.5417 12.4993C13.5417 13.0746 13.0753 13.541 12.5 13.541ZM12.5 20.8327C11.9247 20.8327 11.4583 20.3663 11.4583 19.791C11.4583 19.2157 11.9247 18.7493 12.5 18.7493C13.0753 18.7493 13.5417 19.2157 13.5417 19.791C13.5417 20.3663 13.0753 20.8327 12.5 20.8327Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <svg v-else xmlns="http://www.w3.org/2000/svg" class="tw-h-7 tw-w-7" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                         </svg>
                     </button>
+                    <Dropdown
+                        v-if="showDropdown"
+                        :brand="brand"
+                        :dropdownTop="false"
+                        :data="item"
+                        :is-open="true"
+                        :dropdownOptions="dropdownOptions"
+                        @closeDropdown="state.dropdownOpen = false"
+                        @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.color_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })"
+                        @resetProgres="(data)=>{resetProgressEventHandler(data)}"
+                    />
                 </div>
             </div>
         </div>
     </div>
 </template>
 <script setup>
-import { computed, onBeforeUnmount, onBeforeMount } from 'vue';
+import {computed, onBeforeUnmount, onBeforeMount, reactive} from 'vue';
 import useCatalogueItem from '../../hooks/useCatalogueItem.js';
 import useThemeClasses from '../../hooks/useThemeClasses.js';
+import Dropdown from './Dropdown';
+import useUserCatalogueEvents from "../../hooks/useUserCatalogueEvents";
 
 const props = defineProps({
     item: {
@@ -146,6 +162,10 @@ const props = defineProps({
         type: Boolean,
         default: false
     },
+    showDropdown: {
+        type: Boolean,
+        default: false
+    },
 });
 
 const {
@@ -158,6 +178,22 @@ const {
     isReleased,
     releaseDate,
 } = useCatalogueItem(props);
+
+const state = reactive({
+    dropdownOpen: false,
+});
+
+//-----------Static Data-----------//
+const dropdownOptions = [
+    {
+        name: "Add to Playlist",
+        action: "addToList"
+    },
+    {
+        name: "Reset Progress",
+        action: "resetProgress"
+    },
+]
 
 const { themeBgClass } = useThemeClasses(props);
 
@@ -180,6 +216,8 @@ const is_added = computed(() => props.item.is_added_to_primary_playlist);
 const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.item.completed === true);
 
 const isGuitareoChordAndScale = computed(() => props.brand.value === 'guitareo' && props.item.type === 'chord-and-scale');
+
+const { resetProgressEventHandler } = useUserCatalogueEvents(props);
 
 onBeforeUnmount(() => {
     mappedData.value = null;
