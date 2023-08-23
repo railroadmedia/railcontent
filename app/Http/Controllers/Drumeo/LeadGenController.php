@@ -39,13 +39,6 @@ class LeadGenController extends BaseController
         return view('drumeo.lead-gen.coop3rdrumm3r.signup', ['recaptchaKey'=>config('recaptcha.key')]);
     }
 
-    public function destupefy()
-    {
-        return view('drumeo.lead-gen.100-songs.signup', ['recaptchaKey'=>config('recaptcha.key')]);
-
-        throw new NotFoundHttpException();
-    }
-
     public function drumSetMaintenance()
     {
         return view('drumeo.lead-gen.courses.full.drum-set-maintenance.signup', ['recaptchaKey'=>config('recaptcha.key')]);
