@@ -87,11 +87,11 @@
                         :brand="brand"
                         :dropdownTop="false"
                         :data="item"
-                        :is-open="true"
+                        :is-open="state.dropdownOpen"
                         :dropdownOptions="dropdownOptions"
                         @closeDropdown="state.dropdownOpen = false"
                         @addToList="$emit('addToList', { content_id: item.id, type: item.type, name: mappedData.color_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })"
-                        @resetProgres="(data)=>{resetProgressEventHandler(data)}"
+                        @progressReset="emitResetProgress({content_id: item.id})"
                     />
                 </div>
             </div>
@@ -103,7 +103,7 @@ import {computed, onBeforeUnmount, onBeforeMount, reactive} from 'vue';
 import useCatalogueItem from '../../hooks/useCatalogueItem.js';
 import useThemeClasses from '../../hooks/useThemeClasses.js';
 import Dropdown from './Dropdown';
-import useUserCatalogueEvents from "../../hooks/useUserCatalogueEvents";
+import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
 
 const props = defineProps({
     item: {
@@ -191,7 +191,7 @@ const dropdownOptions = [
     },
     {
         name: "Reset Progress",
-        action: "resetProgress"
+        action: "progressReset"
     },
 ]
 
@@ -217,9 +217,12 @@ const showTrophy = computed(() => props.item.type === 'pack-bundle' && props.ite
 
 const isGuitareoChordAndScale = computed(() => props.brand.value === 'guitareo' && props.item.type === 'chord-and-scale');
 
-const { resetProgressEventHandler } = useUserCatalogueEvents(props);
-
 onBeforeUnmount(() => {
     mappedData.value = null;
 });
+
+const emit = defineEmits(['addToList', 'progressReset']);
+
+const { emitResetProgress } = useUserCatalogueEvents(props, { emit });
+
 </script>

@@ -22152,6 +22152,15 @@ a:visited{
 .-tw-ml-0{
   margin-left: -0px !important;
 }
+.tw-mb-6{
+  margin-bottom: 1.5rem !important;
+}
+.-tw-mt-5{
+  margin-top: -1.25rem !important;
+}
+.tw-mb-4{
+  margin-bottom: 1rem !important;
+}
 .tw-box-border{
   box-sizing: border-box !important;
 }
@@ -22900,6 +22909,9 @@ a:visited{
 .tw-w-5{
   width: 1.25rem !important;
 }
+.tw-w-full{
+  width: 100% !important;
+}
 .tw-min-w-0{
   min-width: 0px !important;
 }
@@ -23388,6 +23400,9 @@ a:visited{
 .tw-overflow-x-hidden{
   overflow-x: hidden !important;
 }
+.tw-overflow-y-hidden{
+  overflow-y: hidden !important;
+}
 .tw-overflow-x-clip{
   overflow-x: clip !important;
 }
@@ -23547,6 +23562,9 @@ a:visited{
 }
 .tw-border-t-\[1px\]{
   border-top-width: 1px !important;
+}
+.tw-border-b{
+  border-bottom-width: 1px !important;
 }
 .tw-border-solid{
   border-style: solid !important;
@@ -23718,6 +23736,9 @@ a:visited{
 }
 .tw-border-\[\#15803D\]\/20{
   border-color: rgb(21 128 61 / 0.2) !important;
+}
+.tw-border-transparent{
+  border-color: transparent !important;
 }
 .tw-border-b-\[\#E5E7EB\]{
   --tw-border-opacity: 1 !important;
@@ -24558,6 +24579,14 @@ a:visited{
   padding-left: 1rem !important;
   padding-right: 1rem !important;
 }
+.tw-py-4{
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+.tw-px-4{
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
 .tw-pt-8{
   padding-top: 2rem !important;
 }
@@ -24798,6 +24827,9 @@ a:visited{
 .tw-pb-2{
   padding-bottom: 0.5rem !important;
 }
+.tw-pb-1{
+  padding-bottom: 0.25rem !important;
+}
 .tw-text-left{
   text-align: left !important;
 }
@@ -24818,6 +24850,9 @@ a:visited{
 }
 .tw-font-primary{
   font-family: "Open Sans", Century Gothic, sans-serif !important;
+}
+.tw-font-bebas-neue{
+  font-family: Bebas Neue, cursive !important;
 }
 .tw-text-xs{
   font-size: 0.75rem !important;
@@ -24936,6 +24971,14 @@ a:visited{
   font-size: 0.75rem !important;
   line-height: 1rem !important;
 }
+.tw-text-2xl{
+  font-size: 1.5rem !important;
+  line-height: 2rem !important;
+}
+.tw-text-base{
+  font-size: 1rem !important;
+  line-height: 1.5rem !important;
+}
 .tw-font-bold{
   font-weight: 700 !important;
 }
@@ -25028,6 +25071,9 @@ a:visited{
 }
 .tw-leading-snug{
   line-height: 1.375 !important;
+}
+.tw-leading-none{
+  line-height: 1 !important;
 }
 .tw-tracking-wide{
   letter-spacing: 0.025em !important;
@@ -25320,6 +25366,10 @@ a:visited{
   --tw-text-opacity: 1 !important;
   color: rgb(0 0 0 / var(--tw-text-opacity)) !important;
 }
+.tw-text-\[\#00101D\]{
+  --tw-text-opacity: 1 !important;
+  color: rgb(0 16 29 / var(--tw-text-opacity)) !important;
+}
 .tw-underline{
   -webkit-text-decoration-line: underline !important;
           text-decoration-line: underline !important;
@@ -25467,6 +25517,11 @@ a:visited{
   transition-property: color, background-color, border-color, fill, stroke, -webkit-text-decoration-color !important;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke !important;
   transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
+}
+.tw-transition-all{
+  transition-property: all !important;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
   transition-duration: 150ms !important;
 }
@@ -25677,6 +25732,9 @@ a:visited{
 .hover\:tw-border-\[\#002039\]:hover{
   --tw-border-opacity: 1 !important;
   border-color: rgb(0 32 57 / var(--tw-border-opacity)) !important;
+}
+.hover\:tw-border-current:hover{
+  border-color: currentColor !important;
 }
 .hover\:tw-bg-black:hover{
   --tw-bg-opacity: 1 !important;
@@ -26998,6 +27056,9 @@ a:visited{
   .md\:tw-ml-auto{
     margin-left: auto !important;
   }
+  .md\:tw-mb-8{
+    margin-bottom: 2rem !important;
+  }
   .md\:tw-block{
     display: block !important;
   }
@@ -27940,6 +28001,9 @@ a:visited{
   .lg\:tw-overflow-x-clip{
     overflow-x: clip !important;
   }
+  .lg\:tw-overflow-x-clip{
+    overflow-x: clip !important;
+  }
   .lg\:tw-rounded-xl{
     border-radius: 0.75rem !important;
   }
@@ -28032,6 +28096,14 @@ a:visited{
     padding-left: 0px !important;
     padding-right: 0px !important;
   }
+  .lg\:tw-px-0{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
+  .lg\:tw-px-0{
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+  }
   .lg\:tw-pr-6{
     padding-right: 1.5rem !important;
   }
@@ -28107,8 +28179,15 @@ a:visited{
     font-size: 1.5rem !important;
     line-height: 2rem !important;
   }
+  .lg\:tw-text-3xl{
+    font-size: 1.875rem !important;
+    line-height: 2.25rem !important;
+  }
   .lg\:tw-font-normal{
     font-weight: 400 !important;
+  }
+  .lg\:tw-leading-none{
+    line-height: 1 !important;
   }
   .lg\:tw-leading-none{
     line-height: 1 !important;
@@ -28363,6 +28442,13 @@ a:visited{
   }
   .xl\:tw-text-5xl{
     font-size: 3rem !important;
+    line-height: 1 !important;
+  }
+  .xl\:tw-text-lg{
+    font-size: 1.125rem !important;
+    line-height: 1.75rem !important;
+  }
+  .xl\:tw-leading-none{
     line-height: 1 !important;
   }
   .xl\:tw-leading-none{
