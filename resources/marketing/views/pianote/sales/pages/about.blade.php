@@ -3,7 +3,7 @@
         [
             'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/story_one.jpg',
             'year' => '2003',
-            'desc' => 'Founder and Musora CEO Jared Falk jumps into the online music lessons scene by launching BreakSticks.com for drummers.',
+            'desc' => 'Founder Jared Falk jumps into the online music lessons scene by launching BreakSticks.com for drummers.',
         ],
         [
             'img' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/about/story_two.jpg',
@@ -326,7 +326,7 @@
                         It all started <br class="sm:hidden md:inline"> with a duck farmer...
                     </h4>
                     <p class="md:leading-snug" style="color:#27272A;">
-                        Our founder and CEO, Jared Falk, grew up on a duck farm in rural Canada. He’s a drummer (but we don’t hold that against him) and the founder of Drumeo, one of the world’s leading online music education brands.
+                        Our founder, Jared Falk, grew up on a duck farm in rural Canada. He’s a drummer (but we don’t hold that against him) and the founder of Drumeo, one of the world’s leading online music education brands.
                         <br><br>
                         In 2008, Jared bought PianoLessons.com and launched The Piano System with pianist Nate Bosch. This was our first curriculum and it included DVD lessons, play-along CDs, and workbooks.
                     </p>

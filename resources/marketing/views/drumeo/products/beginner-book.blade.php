@@ -350,7 +350,7 @@
                     <br><br> I like to compare getting better at drums to watching grass grow (I know, I know, sounds boring, but hear me out). If you sit there and stare at the grass trying to “watch” it grow you won’t see anything. But if you water the grass, fertilize it, and then come back a few days later, you’ll notice it has grown a lot.
                     <br><br> Drumming is similar. You need to practice (develop skills) and study (gain knowledge). Instead of just sitting there waiting impatiently to become a rock star, do the work and enjoy the process of learning. You will become a better drummer.
                     <br><br> Now—it’s time to start drumming. <br><br> To your drumming success,<br>
-                    <strong>Jared Falk</strong> <em>Drumeo Co-Founder & CEO</em>
+                    <strong>Jared Falk</strong> <em>Drumeo Founder</em>
                 </p>
             </div>
         </div>
