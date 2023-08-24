@@ -17,6 +17,13 @@ class RevenueCatController extends Controller
         Log::debug('Processing RevenueCatController processNotification');
         Log::debug(var_export($request->all(), true));
 
+        if (config('ecommerce.revenuecat_webhook_token') && (!$request->bearerToken() ||
+            $request->bearerToken() != config('ecommerce.revenuecat_webhook_token'))) {
+            Log::debug('Invalid token');
+
+            return response()->json('Invalid token');
+        }
+
         if (!$request->has('event')) {
             return response()->json();
         }
