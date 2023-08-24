@@ -64,7 +64,7 @@ const globalSettings = reactive({
 const uniqueSettings = reactive({
     time: 0,
     audioSource: 1,
-})
+});
 
 /**********************  
     Methods
@@ -150,7 +150,7 @@ const saveZoom = debounce(function(val){
 }, 250);
 //SET Audio Source 
 const saveAudioSource = (val) => {
-    localStorage.setItem("ssAudioSource", val);
+    localStorage.setItem(`${ props.soundsliceSlug }_audioSource`, val);
 };
 //SET Current Time
 const saveCurrentTime = (val) => {
@@ -247,8 +247,8 @@ onBeforeMount(()=> {
         globalSettings.zoom = localStorage.getItem("ssZoom");
     }
     //GET Audio Source
-    if(localStorage.getItem("ssAudioSource")) {
-        uniqueSettings.audioSource = localStorage.getItem("ssAudioSource");
+    if(localStorage.getItem(`${ props.soundsliceSlug }_audioSource`)) {
+        uniqueSettings.audioSource = localStorage.getItem(`${ props.soundsliceSlug }_audioSource`);
         ssURL.value = `https://www.soundslice.com/${scoreOrSlice()}/${props.soundsliceSlug}/embed/?api=1&scroll_type=2&branding=0&top_controls=1&u=${props.userId}&show_chords=0&layout=3&recording_idx=${uniqueSettings.audioSource}`;
     }
     //GET Current Time
