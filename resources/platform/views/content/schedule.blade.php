@@ -67,7 +67,7 @@
                 </div>
             </div>
             <div class="tw-flex tw-flex-row">
-                @if(!empty($scheduleEvents) && $scheduleEvents->count() > 0)
+                @if(!empty($scheduleEvents) && count(json_decode($scheduleEvents)) > 0)
                 <content-schedule
                     :preloaded-content="{{ $scheduleEvents }}"
                     subscription-calendar-id="{{ config('addevent.'.brand().'.uniquekeys.brand-overview') }}"
