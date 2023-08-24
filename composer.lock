@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1f12053225e6843e7a67acb16f608ec1",
+    "content-hash": "1077c0e553741774a015855027d32634",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -9642,16 +9642,16 @@
         },
         {
             "name": "signifly/laravel-shopify",
-            "version": "v1.2.7",
+            "version": "dev-fix-adjustInventoryLevel",
             "source": {
                 "type": "git",
-                "url": "https://github.com/signifly/laravel-shopify.git",
-                "reference": "380be076b1761704a44077f4f2e6b6833e03e9db"
+                "url": "https://github.com/BrandonKerr/laravel-shopify.git",
+                "reference": "ee2649b1f5398b85a1ac9d42715df374dc9bca39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/signifly/laravel-shopify/zipball/380be076b1761704a44077f4f2e6b6833e03e9db",
-                "reference": "380be076b1761704a44077f4f2e6b6833e03e9db",
+                "url": "https://api.github.com/repos/BrandonKerr/laravel-shopify/zipball/ee2649b1f5398b85a1ac9d42715df374dc9bca39",
+                "reference": "ee2649b1f5398b85a1ac9d42715df374dc9bca39",
                 "shasum": ""
             },
             "require": {
@@ -9684,7 +9684,16 @@
                     "Signifly\\Shopify\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Signifly\\Shopify\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -9698,10 +9707,9 @@
             "description": "A simple package to handle communication with Shopify API",
             "homepage": "https://github.com/signifly/laravel-shopify",
             "support": {
-                "issues": "https://github.com/signifly/laravel-shopify/issues",
-                "source": "https://github.com/signifly/laravel-shopify/tree/v1.2.7"
+                "source": "https://github.com/BrandonKerr/laravel-shopify/tree/fix-adjustInventoryLevel"
             },
-            "time": "2023-08-02T14:06:53+00:00"
+            "time": "2023-08-23T16:50:36+00:00"
         },
         {
             "name": "sokil/php-isocodes",
@@ -17064,12 +17072,19 @@
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
             "alias_normalized": "3.0.7.0"
+        },
+        {
+            "package": "signifly/laravel-shopify",
+            "version": "dev-fix-adjustInventoryLevel",
+            "alias": "v1.2.8",
+            "alias_normalized": "1.2.8.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/ecommerce": 20,
-        "railroad/railanalytics": 20
+        "railroad/railanalytics": 20,
+        "signifly/laravel-shopify": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
