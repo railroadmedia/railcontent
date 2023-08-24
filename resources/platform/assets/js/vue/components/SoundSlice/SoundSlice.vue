@@ -146,7 +146,7 @@ const saveVolume = debounce(function(val){
 }, 250);
 //SET Zoom
 const saveZoom = debounce(function(val){
-    localStorage.setItem("ssZoom", val);
+    //localStorage.setItem("ssZoom", val);
 }, 250);
 //SET Audio Source 
 const saveAudioSource = (val) => {
@@ -171,7 +171,7 @@ const handleSoundsliceEvent = (event) => {
                 //Set Volume
                 ssiframe.value.contentWindow.postMessage(`{"method": "setVolume", "arg": ${globalSettings.volume} }`, 'https://www.soundslice.com');
                 //Set Zoom
-                ssiframe.value.contentWindow.postMessage(`{"method": "setZoom", "arg": ${globalSettings.zoom} }`, 'https://www.soundslice.com');
+                //ssiframe.value.contentWindow.postMessage(`{"method": "setZoom", "arg": ${globalSettings.zoom} }`, 'https://www.soundslice.com');
                 //Set Audio Source
                 ssiframe.value.contentWindow.postMessage(`{"method": "changeAudioByIndex", "arg": "${uniqueSettings.audioSource}" }`, 'https://www.soundslice.com');
                 //Get Current Time
@@ -196,20 +196,22 @@ const handleSoundsliceEvent = (event) => {
                 saveZoom(cmd.arg);
                 break
             case 'ssLayoutChange':
-                saveLayout(cmd.arg);
+                //saveLayout(cmd.arg);
                 break
             //UNIQUE SETTINGS
             case 'ssCurrentTime':
                 //Start Counter
-                if(isPlaying.value) startCounter(Math.floor(cmd.arg));
+                if(isPlaying.value && uniqueSettings.audioSource !== "0") startCounter(Math.floor(cmd.arg));
                 break
             case 'ssAudioSourceChanged':
+                stopCounter();
                 saveAudioSource(cmd.arg)
                 break;
             //PLAYBACK SETTINGS
             case 'ssPlay':
                 isPlaying.value = true;
                 handlePlay(event);
+                if(isPlaying.value && uniqueSettings.audioSource === "0") startCounter(Math.floor(cmd.arg));
                 break;
             case 'ssPause':
                 isPlaying.value = false;
@@ -243,9 +245,9 @@ onBeforeMount(()=> {
         globalSettings.volume = localStorage.getItem("ssVolume");
     }
     //GET Zoom
-    if(localStorage.getItem("ssZoom")) {
-        globalSettings.zoom = localStorage.getItem("ssZoom");
-    }
+    // if(localStorage.getItem("ssZoom")) {
+    //     globalSettings.zoom = localStorage.getItem("ssZoom");
+    // }
     //GET Audio Source
     if(localStorage.getItem(`${ props.soundsliceSlug }_audioSource`)) {
         uniqueSettings.audioSource = localStorage.getItem(`${ props.soundsliceSlug }_audioSource`);
