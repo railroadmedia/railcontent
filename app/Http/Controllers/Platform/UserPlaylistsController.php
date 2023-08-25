@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Platform;
 
+use Carbon\Carbon;
+
 use App\Decorators\Content\AddedToPrimaryPlaylistDecorator;
 use App\Decorators\Content\ContentLikesDecorator;
 use App\Decorators\Content\LessonAssignmentDecorator;
@@ -374,6 +376,15 @@ class UserPlaylistsController extends BaseController
         $playlistItem['is_full_track'] = $initialItem['is_full_track'] ?? false;
         $playlistItem['is_instrumentless_track'] = $initialItem['is_instrumentless_track'] ?? false;
         $playlistItem['resources'] = $initialItem['resources'] ?? [] ;
+
+        // Calculate if the playlist item is released or not
+        $givenDate = Carbon::parse($initialItem['published_on']);
+        $today = Carbon::now();
+        if ($givenDate->lt($today)) {
+            $playlistItem['released'] = true;
+        } else {
+            $playlistItem['released'] = false;
+        }
 
         $playlistLessons = (new ContentFilterResultsEntity([
                                                                'results' => $otherItems,

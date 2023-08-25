@@ -66,12 +66,16 @@
                 </div>
             </div>
             <div class="tw-flex tw-flex-row">
-                <content-schedule
-                    :preloaded-content="{{ $scheduleEvents }}"
-                    timezone="{{ $fullTimezoneString }}"
-                    subscription-calendar-id="{{ config('addevent.'.brand().'.uniquekeys.brand-overview') }}"
-                    theme-color="{{ $brand }}"
-                />
+                @if(!empty($scheduleEvents) && count(json_decode($scheduleEvents)) > 0)
+                    <content-schedule
+                        :preloaded-content="{{ $scheduleEvents }}"
+                        timezone="{{ $fullTimezoneString }}"
+                        subscription-calendar-id="{{ config('addevent.'.brand().'.uniquekeys.brand-overview') }}"
+                        theme-color="{{ $brand }}"
+                    />
+                @else
+                <span>No upcoming live events</span>
+                @endif
             </div>
         </div>
     </div>

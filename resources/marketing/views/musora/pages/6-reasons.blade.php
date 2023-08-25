@@ -112,7 +112,7 @@
 <!-- Main -->
 @section('layout-body')
     <section class="text-center relative overflow-hidden py-10 md:py-14 lg:py-16 px-6 sm:px-7">
-        <div class="container mx-auto max-w-3xl">
+        <div class="container mx-auto max-w-4xl">
             <h2 class="leading-tight"><strong>6 Reasons Online Music Lessons<br class="hidden sm:inline"> Will Help Your Learn Faster</strong></h2>
 
             <div class="flex flex-wrap items-center justify-center mt-3 sm:mt-5 mx-auto">
@@ -284,16 +284,16 @@
                         "description" => "I could not be more THRILLED with Musora!!! This is the most positive, helpful, caring, innovative, knowledgeable, student-focused place on the planet!!! It has been a Godsend for me! <br><br><strong>Kristyn T.</strong>",
                         ],
                         [
-                        "title" => "Helpful lessons and supportive community. ",
-                        "description" => "The materials are in helpful bite-size chunks, the support materials are excellent, the tutors are cheerful, and the online community is very supportive.<br><br><strong>Devon F.</strong> ",
+                        "title" => "All the instruments for a great price. ",
+                        "description" => "I love the fact that I have access to many instruments for a great price. I'm learning to play the piano, which was a passion that I hadn't fulfilled in the past but now I'm so happy for it.<br><br><strong>Juan C.</strong>",
                         ],
                         [
                         "title" => "My daughter danced to my playing!",
                         "description" => "The lightbulb moment happened when my 6 year old daughter started dancing as I played – you must be doing something right if somebody dances when you’re playing, right?<br><br><strong>John M.</strong>",
                         ],
                         [
-                        "title" => "All the instruments for a great price. ",
-                        "description" => "I love the fact that I have access to many instruments for a great price. I'm learning to play the piano, which was a passion that I hadn't fulfilled in the past but now I'm so happy for it.<br><br><strong>Juan C.</strong>",
+                        "title" => "Helpful lessons and supportive community. ",
+                        "description" => "The materials are in helpful bite-size chunks, the support materials are excellent, the tutors are cheerful, and the online community is very supportive.<br><br><strong>Devon F.</strong> ",
                         ],
                         [
                         "title" => "The best course I’ve ever taken",
@@ -313,9 +313,9 @@
                         ],
                     ]
                 @endphp
-<div class="hidden sm:flex flex-wrap items-start text-left">
+            <div class="hidden sm:flex flex-wrap items-start text-left justify-center">
                 @foreach($reviews as $review)
-                    <div class="w-full sm:w-1/3 px-2 lg:px-3 mb-4 lg:mb-6 ">
+                    <div class="w-full sm:w-1/3 lg:w-1/4 px-2 lg:px-1 mb-4 lg:mb-2 ">
                         <div class="border-2 border-black rounded-xl px-5 py-9">
                             <div class="text-center">
                                 <i class="align-middle text-lg fas fa-star" style="color: #ffac00;" aria-hidden="true"></i>

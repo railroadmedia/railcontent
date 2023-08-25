@@ -1025,5 +1025,20 @@ return [
     // exchangerate-api.com
     'exchange_rate_api_token' => '89916546525703af0b7e1f9a',
 
-    'annual_product_skus' => ['DLM-1-year', 'PIANOTE-MEMBERSHIP-1-YEAR', 'GUITAREO-1-YEAR-MEMBERSHIP', 'singeo-annual-recurring-membership']
+    'annual_product_skus' => ['DLM-1-year', 'PIANOTE-MEMBERSHIP-1-YEAR', 'GUITAREO-1-YEAR-MEMBERSHIP', 'singeo-annual-recurring-membership'],
+
+    'revenuecat'=>[
+        'ios' => [
+            'Musora' => env('REVENUE_KEY_IOS_MUSORA'),
+            'Drumeo' => env('REVENUE_KEY_IOS_DRUMEO'),
+            'Pianote' => env('REVENUE_KEY_IOS_PIANOTE'),
+            ],
+        'android' =>
+            [
+                'Musora' => env('REVENUE_KEY_ANDROID_MUSORA'),
+                'Drumeo' => env('REVENUE_KEY_ANDROID_DRUMEO'),
+                'Pianote' => env('REVENUE_KEY_ANDROID_PIANOTE'),
+            ]
+    ],
+    'sync_revenue_cat' => env('SYNC_REVENUE_CAT', true),
 ];
