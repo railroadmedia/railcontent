@@ -1,19 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {ShopifyProvider, ShopPayButton} from '@shopify/hydrogen-react';
 
-const App = () => (
-    <div
-        style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            height: '100vh',
-        }}
-    >
-        <h1>
-            Hello World from <a href="https://www.polynique.com">Polynique</a>
-        </h1>
-    </div>
-)
+function App() {
+    return (
+        <ShopifyProvider
+            storeDomain="https://musora-sandbox-staging.myshopify.com/"
+            storefrontToken="82a7622a525e4e4052c0e645aab32356"
+            storefrontApiVersion="2023-01"
+            countryIsoCode="CA"
+            languageIsoCode="EN"
+        >
+            <AddVariantQuantity1 variantId="gid://shopify/Product/8540194275623" />
+        </ShopifyProvider>
+    );
+}
+function AddVariantQuantity1({variantId}) {
+    return <ShopPayButton variantIds={[variantId]} />;
+}
 
 ReactDOM.render(<App />, document.getElementById('app'))
