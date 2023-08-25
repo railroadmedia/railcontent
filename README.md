@@ -534,7 +534,7 @@ infrastructure (musora.com, brand.com, etc (MWP)). Each has a production and sta
 **SSH in to our mini EC2 instance running our in Laravel Vapor AWS VPC**  
 1. Create the SSH key file from your manager container in railenvironment:  
 `nano /credentials/jump-box-private-key`
-2. Paste in the contents of our 1pass entry **Laravel Vapor Jumpbox Production&Staging SSH Private Key**
+2. Paste & save in the contents of our 1pass entry **Laravel Vapor Jumpbox Production&Staging SSH Private Key**
 3. Connect to the EC2 instance (answer yes to fingerprint question):  
 `ssh -i /credentials/jump-box-private-key ubuntu@ec2-18-220-31-60.us-east-2.compute.amazonaws.com`
 4. Connect to our production redis cluster:  
