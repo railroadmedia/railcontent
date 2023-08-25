@@ -2,23 +2,35 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
+use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Rules\ReCaptcha;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use App\Modules\CustomerIO\Services\CustomerIoService;
 use Illuminate\Support\Facades\Log;
+use Modules\UserManagementSystem\Models\User;
 use Throwable;
 
 class RevenueCatController extends Controller
 {
+    private RevenueCatService $revenueCatService;
+
+    /**
+     * @param RevenueCatService $revenueCatService
+     */
+    public function __construct(RevenueCatService $revenueCatService)
+    {
+        $this->revenueCatService = $revenueCatService;
+    }
+
     public function processNotification(Request $request)
     {
         Log::debug('Processing RevenueCatController processNotification');
         Log::debug(var_export($request->all(), true));
 
-        if (config('ecommerce.revenuecat_webhook_token') && (!$request->bearerToken() ||
-            $request->bearerToken() != config('ecommerce.revenuecat_webhook_token'))) {
+        if (config('ecommerce.revenuecat_webhook_token') &&
+            (!$request->bearerToken() || $request->bearerToken() != config('ecommerce.revenuecat_webhook_token'))) {
             Log::debug('Invalid token');
 
             return response()->json('Invalid token');
@@ -37,12 +49,20 @@ class RevenueCatController extends Controller
             case 'INITIAL_PURCHASE':
                 // code...
                 echo 'INITIAL_PURCHASE';
+                $subscriber = $this->revenueCatService->getSubscriber($data['event']['app_user_id']);
+               // dd($data['event']['aliases']);
+               //
+                dd($subscriber);
                 break;
             case 'NON_RENEWING_PURCHASE':
                 echo 'NON_RENEWING_PURCHASE';
                 // code...
                 break;
             case 'RENEWAL':
+                $subscriber = $this->revenueCatService->getSubscriber($data['event']['app_user_id']);
+                $user = User::query()->whereIn('id', $data['event']['aliases'])->first();
+
+                dd($subscriber);
                 echo 'RENEWAL';
                 // code...
                 break;
