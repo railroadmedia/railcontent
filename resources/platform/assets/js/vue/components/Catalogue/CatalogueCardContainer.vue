@@ -6,15 +6,14 @@
                 <catalogue-card v-for="item in content" :key="'grid' + item.id" :item="item" :content-type="item.type"
                     :brand="brand" :theme-color="themeColor" :use-theme-color="useThemeColor" :user-id="userId"
                     :is-admin="isAdmin" :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs"
-                    :content-type-override="contentTypeOverride" :six-wide="sixWide" :five-wide="fiveWide"
-                    :show-my-list-action="showMyListAction" :display-inline="displayInline" @addToList="addToList" />
+                    :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction" :display-inline="displayInline" @addToList="addToList" />
             </div>
         </div>
         <div v-if="content.length === 0 && noResultsMessage.length > 0" class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
-            <div class="flex flex-column icon-col face-icon mr-1">
-                <div class="icon-wrap square" :class="noResultsIcon"></div>
+            <div class="tw-flex tw-flex-column icon-col face-icon tw-mr-1">
+                <div class="icon-wrap square"></div>
             </div>
-            <div class="flex flex-column">
+            <div class="tw-flex tw-flex-column">
                 <h4 class="body tw-text-[#00101D] dark:tw-text-white">{{ noResultsMessage }}</h4>
             </div>
         </div>
@@ -29,7 +28,7 @@ import useUserCatalogueEvents from '../../hooks/useUserCatalogueEvents';
 
 const props = defineProps({
     preLoadedContent: {
-        type: Array,
+        type: [Array, Object],
         default: () => [],
     },
     themeColor: {
