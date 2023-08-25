@@ -532,23 +532,28 @@ infrastructure (musora.com, brand.com, etc (MWP)). Each has a production and sta
 
 ## How To Connect To Our New Infrastructure Redis Server (musora.com, brand.com, etc (MWP))
 **SSH in to our mini EC2 instance running our in Laravel Vapor AWS VPC**  
-1. Create the SSH key file from your manager container in railenvironment: `nano /credentials/jump-box-private-key`
-2. Paste in the contents of the 1pass entry **Laravel Vapor Jumpbox Production&Staging SSH Private Key**
-3. Connect to the EC2 instance (answer yes to fingerprint question): `ssh -i /credentials/jump-box-private-key ubuntu@ec2-18-220-31-60.us-east-2.compute.amazonaws.com`
-4. Connect to our production redis cluster: `redis-cli -h musora-production-redis-cache.l3iqij.clustercfg.use2.cache.amazonaws.com` 
+1. Create the SSH key file from your manager container in railenvironment:  
+`nano /credentials/jump-box-private-key`
+2. Paste in the contents of our 1pass entry **Laravel Vapor Jumpbox Production&Staging SSH Private Key**
+3. Connect to the EC2 instance (answer yes to fingerprint question):  
+`ssh -i /credentials/jump-box-private-key ubuntu@ec2-18-220-31-60.us-east-2.compute.amazonaws.com`
+4. Connect to our production redis cluster:  
+`redis-cli -h musora-production-redis-cache.l3iqij.clustercfg.use2.cache.amazonaws.com` 
+
+<br>  
 
 We have 3 redis clusters in our Laravel Vapor infrastructure:  
 
-**musora-production-redis-cache** (for general laravel usage)
-- musora-production-redis-cache.l3iqij.clustercfg.use2.cache.amazonaws.com  
+**musora-production-redis-cache** (for general production laravel usage)  
+`musora-production-redis-cache.l3iqij.clustercfg.use2.cache.amazonaws.com`  
   
 
-**musora-production-session-cache** (for our web login sessions)
-- musora-production-session-cache.l3iqij.clustercfg.use2.cache.amazonaws.com
+**musora-production-session-cache** (for our production web login sessions)  
+`musora-production-session-cache.l3iqij.clustercfg.use2.cache.amazonaws.com`  
   
 
-**musora-staging-redis-cache** (for all our staging environments usage)
-- musora-staging-redis-cache.l3iqij.clustercfg.use2.cache.amazonaws.com
+**musora-staging-redis-cache** (for all our staging environments usage)  
+`musora-staging-redis-cache.l3iqij.clustercfg.use2.cache.amazonaws.com`  
 
 
 ## How To Connect To Our Old Infrastructure Redis Server (musora.com/admin (musora center))
@@ -557,10 +562,12 @@ We have 3 redis clusters in our Laravel Vapor infrastructure:
 **SSH in to our mini EC2 instance running our in Kubernetes AWS VPC**
 1. Set kubernetes to our production environment: `kset` -> choose 9 (musora) -> choose 2 (production)
 2. Run our cli helper commend to connect to a k8 pod: `kx` -> choose 2 (any production pod will work)
-3. Connect to redis: `redis-cli -h musora-production-m4.l3iqij.0001.use2.cache.amazonaws.com`  
+3. Connect to redis:  
+`redis-cli -h musora-production-m4.l3iqij.0001.use2.cache.amazonaws.com`  
 
 ### Staging  
 **SSH in to our mini EC2 instance running our in Kubernetes AWS VPC**
 1. Set kubernetes to our production environment: `kset` -> choose 9 (musora) -> choose 1 (staging)
 2. Run our cli helper commend to connect to a k8 pod: `kx` -> choose 2 (any staging pod will work)
-3. Connect to redis: `redis-cli -h musora-staging.l3iqij.0001.use2.cache.amazonaws.com`  
+3. Connect to redis:  
+`redis-cli -h musora-staging.l3iqij.0001.use2.cache.amazonaws.com`  
