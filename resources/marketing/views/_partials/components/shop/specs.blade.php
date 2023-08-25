@@ -34,6 +34,9 @@
         'membership' => 'fa-calendar',
         'accessory' => 'fa-suitcase',
         'hat' => 'fa-hat-cowboy',
+        'paper stock' => 'fa-book',
+        'poster' => 'fa-image',
+        'frame' => 'fa-vector-square',
     ];
 ?>
 
