@@ -175,7 +175,7 @@
                 <!-- Dropdown-->
                 <PlaylistDropdown
                     :brand="brand"
-                    :dropdownTop="state.dropdownTop"
+                    :dropdownTop="isMiniCatalog ? true : state.dropdownTop"
                     :is-private="state.isPrivate"
                     :is-pinned="state.isPinned"
                     :dropdownOptions="dropdownOptions"
