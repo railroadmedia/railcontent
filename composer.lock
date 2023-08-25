@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "485ef14da75d03df8c804eb7b9a6c3c9",
+    "content-hash": "1077c0e553741774a015855027d32634",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -8123,16 +8123,16 @@
         },
         {
             "name": "railroad/ecommerce",
-            "version": "dev-srr-19-shopify-ids",
+            "version": "dev-srr-misc",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "d36072037a831c711383f6f005d2d0ebcd2db2cf"
+                "reference": "82bcb858ef27b02c4242e2b939193e8ec38b7c92"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/d36072037a831c711383f6f005d2d0ebcd2db2cf",
-                "reference": "d36072037a831c711383f6f005d2d0ebcd2db2cf",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/82bcb858ef27b02c4242e2b939193e8ec38b7c92",
+                "reference": "82bcb858ef27b02c4242e2b939193e8ec38b7c92",
                 "shasum": ""
             },
             "require": {
@@ -8149,6 +8149,7 @@
                 "railroad/doctrine-array-hydrator": "2.0.*",
                 "railroad/location": "^3.0.0",
                 "railroad/permissions": "^2.0",
+                "railroad/referral": "3.0.*",
                 "railroad/remotestorage": "^2.0",
                 "ramsey/uuid": "^4.3",
                 "stripe/stripe-php": "^7.95"
@@ -8169,9 +8170,9 @@
             "description": "Ecommerce system",
             "support": {
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
-                "source": "https://github.com/railroadmedia/ecommerce/tree/srr-19-shopify-ids"
+                "source": "https://github.com/railroadmedia/ecommerce/tree/srr-misc"
             },
-            "time": "2023-08-11T20:10:41+00:00"
+            "time": "2023-08-18T14:44:02+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -9641,16 +9642,16 @@
         },
         {
             "name": "signifly/laravel-shopify",
-            "version": "v1.2.7",
+            "version": "dev-fix-adjustInventoryLevel",
             "source": {
                 "type": "git",
-                "url": "https://github.com/signifly/laravel-shopify.git",
-                "reference": "380be076b1761704a44077f4f2e6b6833e03e9db"
+                "url": "https://github.com/BrandonKerr/laravel-shopify.git",
+                "reference": "ee2649b1f5398b85a1ac9d42715df374dc9bca39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/signifly/laravel-shopify/zipball/380be076b1761704a44077f4f2e6b6833e03e9db",
-                "reference": "380be076b1761704a44077f4f2e6b6833e03e9db",
+                "url": "https://api.github.com/repos/BrandonKerr/laravel-shopify/zipball/ee2649b1f5398b85a1ac9d42715df374dc9bca39",
+                "reference": "ee2649b1f5398b85a1ac9d42715df374dc9bca39",
                 "shasum": ""
             },
             "require": {
@@ -9683,7 +9684,16 @@
                     "Signifly\\Shopify\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Signifly\\Shopify\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -9697,10 +9707,9 @@
             "description": "A simple package to handle communication with Shopify API",
             "homepage": "https://github.com/signifly/laravel-shopify",
             "support": {
-                "issues": "https://github.com/signifly/laravel-shopify/issues",
-                "source": "https://github.com/signifly/laravel-shopify/tree/v1.2.7"
+                "source": "https://github.com/BrandonKerr/laravel-shopify/tree/fix-adjustInventoryLevel"
             },
-            "time": "2023-08-02T14:06:53+00:00"
+            "time": "2023-08-23T16:50:36+00:00"
         },
         {
             "name": "sokil/php-isocodes",
@@ -17054,21 +17063,28 @@
     "aliases": [
         {
             "package": "railroad/ecommerce",
-            "version": "dev-srr-19-shopify-ids",
-            "alias": "v5.0.99",
-            "alias_normalized": "5.0.99.0"
+            "version": "dev-srr-misc",
+            "alias": "v5.0.102",
+            "alias_normalized": "5.0.102.0"
         },
         {
             "package": "railroad/railanalytics",
             "version": "dev-v3.0-fixing-transaction-tracking",
             "alias": "v3.0.7",
             "alias_normalized": "3.0.7.0"
+        },
+        {
+            "package": "signifly/laravel-shopify",
+            "version": "dev-fix-adjustInventoryLevel",
+            "alias": "v1.2.8",
+            "alias_normalized": "1.2.8.0"
         }
     ],
     "minimum-stability": "dev",
     "stability-flags": {
         "railroad/ecommerce": 20,
-        "railroad/railanalytics": 20
+        "railroad/railanalytics": 20,
+        "signifly/laravel-shopify": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
