@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Providers;
 
 use App\Modules\Ecommerce\Console\Commands\FixMissingStripeCustomerIds;
+use App\Modules\Ecommerce\Console\Commands\FixMobileSubscriptionsBrand;
 use App\Modules\Ecommerce\Console\Commands\MigrateExistingStripeMusoraGatewayPaymentsToDrumeo;
 use App\Modules\Ecommerce\Console\Commands\MigratePaypalGatewayToMusora;
 use App\Modules\Ecommerce\Console\Commands\MigrateStripeCustomersToMusora;
@@ -41,6 +42,7 @@ class EcommerceServiceProvider extends ServiceProvider
                 MigrateStripeCustomersToMusora::class,
                 MigratePaypalGatewayToMusora::class,
                 MigrateStripeSubscriptions::class,
+                FixMobileSubscriptionsBrand::class,
             ]
         );
 
