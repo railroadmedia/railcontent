@@ -7,7 +7,7 @@
                 <catalogue-card v-for="item in content" :key="'grid' + item.id" :item="item" :content-type="item.type"
                     :brand="brand" :theme-color="themeColor" :use-theme-color="useThemeColor" :user-id="userId"
                     :is-admin="isAdmin" :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs"
-                    :content-type-override="contentTypeOverride" :six-wide="sixWide" :five-wide="fiveWide"
+                    :content-type-override="contentTypeOverride"
                     :show-my-list-action="showMyListAction" :display-inline="displayInline" @addToList="addToList" @progressReset="resetProgressEventHandler" :show-dropdown="showDropdown" />
             </div>
         </div>
