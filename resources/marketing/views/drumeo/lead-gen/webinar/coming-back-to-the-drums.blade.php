@@ -78,7 +78,7 @@
             <div class="avatar">
                 <img src="https://dpwjbsxqtam5n.cloudfront.net/lead-gen/webinar/jared-falk.jpg">
                 <h4><strong>Jared Falk</strong></h4>
-                <h5><strong>DRUMEO CO-FOUNDER & CEO</strong></h5>
+                <h5><strong>DRUMEO FOUNDER</strong></h5>
             </div>
             <div class="awards columns">
                 <div class="columns small-4">

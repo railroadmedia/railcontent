@@ -47,31 +47,33 @@
 @endsection
 
 @section('page-body')
-    <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12" style="background-color:#000a1e;">
+    <div class="overflow-hidden px-3 py-5 sm:py-10 lg:py-14">
         <div class="container mx-auto max-w-3xl clearfix">
             <div class="text-center sm:px-3">
                 <img class="h-8 sm:h-10" src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/lead-gen/chord-hacks/logo.svg">
                 <h3 class="mt-4 leading-tight"><strong>
                         Congratulations! Your free lessons <br class="hidden sm:inline">
                         will be landing in your inbox soon!</strong></h3>
-                <p class="leading-normal mt-2 mb-8">
+                <p class="leading-normal mt-2 mb-12">
                     Before you get started, here’s a <br class="inline sm:hidden">
                     message from Lisa!</p>
-                <div class="max-w-xs mx-auto px-10 sm:px-7 relative">
-                    <img class="absolute top-0 right-0 -mx-14 -my-3 h-14" src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" style="filter: sepia()saturate(20)brightness(.8)hue-rotate(-17deg);">
-                    <div class="w-full relative rounded-xl overflow-hidden border-4 border-white" style="padding-bottom: 172%;">
-                        <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/847164746?h=857e80c5e2" frameborder="0" allowfullscreen title="intro-video"></iframe>
+                <div class="flex flex-wrap sm:text-left">
+                    <div class="w-full sm:w-5/12 mx-auto px-10 max-w-xs sm:max-w-full sm:pl-0 sm:pr-5 relative">
+{{--                        <img class="absolute top-0 right-0 -mx-14 -my-3 h-14" src="https://dpwjbsxqtam5n.cloudfront.net/sales/arrow-left-white.png" style="filter: sepia()saturate(20)brightness(.8)hue-rotate(-17deg);">--}}
+                        <div class="w-full relative rounded-xl overflow-hidden shadow-lg" style="padding-bottom: 177%;">
+                            <iframe class="fixed inset-0 h-full w-full absolute" src="//player.vimeo.com/video/847164746?h=857e80c5e2" frameborder="0" allowfullscreen title="intro-video"></iframe>
+                        </div>
                     </div>
+                    <p class="w-full sm:w-7/12 mt-8 sm:mt-0 flex-shrink sm:pl-4">Here’s what you need to do now:
+                        <br><br>
+                        <strong>✓ Check your inbox.</strong> Your access link will be emailed to the email address you provided. If you don’t see it in your inbox, check your spam or junk folder. Make sure you add us to your contacts or safe sender so you never miss a lesson!
+                        <br><br>
+                        <strong>✓ Get to your piano!</strong> You’re here to learn right?! You’ll be following along with Lisa for all of the lessons. That means you’ll want to be at your piano when you watch them. You can watch them on ANY device.
+                        <br><br>
+                        <strong>✓ Tell your friends and family.</strong> If you like the lessons, or you know someone who also wants to learn the piano, please <a target="_blank" href="/chord-hacks"><u><strong>share this link with them!</strong></u></a> Learning is more fun when it’s done together. And having a buddy learn with you will set you up for greater success.
+                        <br><br>
+                        We’ll see you in Lesson 1!!</p>
                 </div>
-                <p class="mt-8 max-w-lg">Here’s what you need to do now:
-                    <br><br>
-                    <strong>✓ Check your inbox.</strong> Your access link will be emailed to the email address you provided. If you don’t see it in your inbox, check your spam or junk folder. Make sure you add us to your contacts or safe sender so you never miss a lesson!
-                    <br><br>
-                    <strong>✓ Get to your piano!</strong> You’re here to learn right?! You’ll be following along with Lisa for all of the lessons. That means you’ll want to be at your piano when you watch them. You can watch them on ANY device.
-                    <br><br>
-                    <strong>✓ Tell your friends and family.</strong> If you like the lessons, or you know someone who also wants to learn the piano, please <a target="_blank" href="/chord-hacks"><u><strong>share this link with them!</strong></u></a> Learning is more fun when it’s done together. And having a buddy learn with you will set you up for greater success.
-                    <br><br>
-                    We’ll see you in Lesson 1!!</p>
             </div>
         </div>
     </div>

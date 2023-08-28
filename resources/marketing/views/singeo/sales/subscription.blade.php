@@ -531,7 +531,7 @@
         'header' => 'Trusted by singers everywhere.',
         'reviewText' => 'Check out the reviews and meet some of our friendly students.',
         'youtubeLink' => 'https://www.youtube.com/singeoofficial/',
-        'youtube' => '75,000',
+        'youtube' => '97,000',
         'facebookLink' => 'https://facebook.com/singeoofficial/',
         'facebook' => '23,000',
         'instagramLink' => 'https://instagram.com/singeoofficial/',

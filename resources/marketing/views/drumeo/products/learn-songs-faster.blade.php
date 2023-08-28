@@ -87,7 +87,7 @@
                 <img src="https://www.musora.com/musora-cdn/image/width=400,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/learn-songs-faster/jared-falk.jpg" alt="Jared Falk">
                 <h3 class="dense"><strong>Jared Falk</strong></h3>
                 <p><em class="text-grey">TEACHING FOR {{ date('Y') - 1998 }} YEARS</em><br>
-                    Jared Falk is the Co-Founder and CEO of Drumeo.com. As a drum teacher, his DVD-based curriculum “Successful Drumming” has helped more than 20,000 students, his YouTube videos have been seen by millions of drummers around the world, and he’s been voted “Best Drum Educator” by the readers of Rhythm Magazine. Jared’s goal is to create more drummers and keep them playing longer by helping them have more fun learning and playing drums.
+                    Jared Falk is the Founder of Drumeo. As a drum teacher, his DVD-based curriculum “Successful Drumming” has helped more than 20,000 students, his YouTube videos have been seen by millions of drummers around the world, and he’s been voted “Best Drum Educator” by the readers of Rhythm Magazine. Jared’s goal is to create more drummers and keep them playing longer by helping them have more fun learning and playing drums.
                 </p>
             </div>
             <div class="columns medium-6">
