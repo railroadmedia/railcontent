@@ -1,5 +1,5 @@
 <template>
-    <div class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]" :class="[class_object, displayInline ? 'tw-py-3' : 'tw-pb-2']">
+    <div class="tw-snap-center tw-flex tw-flex-col tw-group tw-w-[267px] lg:tw-w-1/4 2xl:tw-w-1/5 4xl:tw-w-1/6 tw-shrink-0 tw-pr-[8px] xl:tw-pr-[12px] 3xl:tw-pr-[18px]" :class="[class_object, displayInline ? 'tw-py-3' : 'tw-pb-2']" v-click-outside="() => { state.dropdownOpen = false }">
         <div class="tw-flex" :class="displayInline ? 'tw-flex-row' : 'tw-flex-col'">
             <!-- Thumbnail Section -->
             <a :href="renderLink ? item.url : null" class="tw-no-underline tw-flex tw-flex-col" :class="[
@@ -38,8 +38,8 @@
 
             <!-- Description Section -->
             <div class="tw-flex tw-w-full">
-                <a :href="renderLink ? item.url : null" class="card-info tw-flex tw-flex-col tw-p-1 tw-rounded-lg"
-                    :class="displayInline ? 'tw-justify-center' : 'tw-py-2'">
+                <a :href="renderLink ? item.url : null" class="card-info flex flex-column tw-p-1 tw-rounded-lg"
+                    :class="displayInline ? 'align-v-center' : 'tw-py-2'">
                     <!-- Coach Title -->
                     <div v-if="item.type !== 'song-part'">
                         <h5 class="tw-text-xs tw-font-normal tw-leading-none tw-text-[#3F3F46] tw-mb-1 tw-uppercase dark:tw-text-[#9EC0DC]"
@@ -73,7 +73,7 @@
                         :class="is_added ? 'is-added' + themeTextClass : 'tw-text-[#00101D] dark:tw-text-white'"
                         :title="is_added ? 'Remove from Playlist' : 'Add to Playlist'" :data-content-id="item.id"
                         :data-content-type="item.type"
-                        @click.stop.prevent="state.dropdownOpen = !state.dropdownOpen">
+                        @click.stop.prevent="showDropdown ? state.dropdownOpen = !state.dropdownOpen : $emit('addToList', { content_id: item.id, type: item.type, name: mappedData.color_title, description: mappedData.black_title, thumbnail_url: mappedData.thumbnail })">
                         <svg v-if="showDropdown" width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M12.5 5.20768L12.5 5.2181M12.5 12.4993L12.5 12.5098M12.5 19.791L12.5 19.8014M12.5 6.24935C11.9247 6.24935 11.4583 5.78298 11.4583 5.20768C11.4583 4.63239 11.9247 4.16602 12.5 4.16602C13.0753 4.16602 13.5417 4.63239 13.5417 5.20768C13.5417 5.78298 13.0753 6.24935 12.5 6.24935ZM12.5 13.541C11.9247 13.541 11.4583 13.0746 11.4583 12.4993C11.4583 11.9241 11.9247 11.4577 12.5 11.4577C13.0753 11.4577 13.5417 11.9241 13.5417 12.4993C13.5417 13.0746 13.0753 13.541 12.5 13.541ZM12.5 20.8327C11.9247 20.8327 11.4583 20.3663 11.4583 19.791C11.4583 19.2157 11.9247 18.7493 12.5 18.7493C13.0753 18.7493 13.5417 19.2157 13.5417 19.791C13.5417 20.3663 13.0753 20.8327 12.5 20.8327Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -82,6 +82,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
                         </svg>
                     </button>
+
                     <Dropdown
                         v-if="showDropdown"
                         :brand="brand"
