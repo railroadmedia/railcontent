@@ -77,6 +77,7 @@
             'contentEndpoint' => '/railcontent/content',
             'allLessonsUrl' => url()->route('platform.new-lessons'),
             'newContentJson' => $newContentJson,
+            'hasContinueSection' => $hasStartedLessons,
             ])
         @endcomponent
 
