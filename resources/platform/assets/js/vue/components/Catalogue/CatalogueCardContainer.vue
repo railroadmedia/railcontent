@@ -1,12 +1,14 @@
 <template>
     <div class="tw-flex tw-flex-col tw-grow tw-justify-center">
-        <div class="tw-block tw-overflow-x-auto lg:tw-overflow-x-hidden tw-no-scrollbar">
+        <div class="tw-block tw-no-scrollbar tw-overflow-x-clip">
             <div
-                class="tw-flex tw-flex-nowrap tw-px-4 lg:tw-px-0 lg:tw-auto-rows-[0] lg:tw-grid-rows-1 lg:tw-overflow-hidden lg:tw-grid lg:tw-grid-cols-4 2xl:tw-grid-cols-5 4xl:tw-grid-cols-6">
+                class="tw-flex tw-flex-nowrap tw-px-4 lg:tw-px-0 tw-no-scrollbar tw-overflow-x-scroll lg:tw-overflow-x-clip"
+                :class="extraPaddingBottom ? 'tw-pb-5' : '' ">
                 <catalogue-card v-for="item in content" :key="'grid' + item.id" :item="item" :content-type="item.type"
                     :brand="brand" :theme-color="themeColor" :use-theme-color="useThemeColor" :user-id="userId"
                     :is-admin="isAdmin" :lock-unowned="lockUnowned" :force-wide-thumbs="forceWideThumbs"
-                    :content-type-override="contentTypeOverride" :show-my-list-action="showMyListAction" :display-inline="displayInline" @addToList="addToList" />
+                    :content-type-override="contentTypeOverride"
+                    :show-my-list-action="showMyListAction" :display-inline="displayInline" @addToList="addToList" @progressReset="resetProgressEventHandler" :show-dropdown="showDropdown" />
             </div>
         </div>
         <div v-if="content.length === 0 && noResultsMessage.length > 0" class="tw-flex tw-flex-row tw-py-4 tw-justify-center tw-items-center tw-px-4 lg:tw-px-0">
@@ -75,13 +77,21 @@ const props = defineProps({
         type: Boolean,
         default: () => true,
     },
+    showDropdown: {
+        type: Boolean,
+        default: () => false,
+    },
     noResultsMessage: {
         type: String,
         default: 'No lessons found',
-    }
+    },
+    extraPaddingBottom: {
+        type: Boolean,
+        default: () => false,
+    },
 },
 );
 
-const { addToList } = useUserCatalogueEvents(props);
+const { addToList, resetProgressEventHandler } = useUserCatalogueEvents({ ...props, content: props.preLoadedContent.data });
 const content = ref(props.preLoadedContent ? props.preLoadedContent.data : []);
 </script>

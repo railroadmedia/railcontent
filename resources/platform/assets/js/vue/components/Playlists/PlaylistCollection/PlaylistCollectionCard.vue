@@ -32,9 +32,6 @@
         return props.listElement.description.replace(/(<([^>]+)>)/gi, "");
     })
 
-    //-------------Refs-------------//
-    const dropdownTarget = ref(null)
-
     //-----------Reactive Data-----------//
     const state = reactive({
         dropdownOpen: false,
