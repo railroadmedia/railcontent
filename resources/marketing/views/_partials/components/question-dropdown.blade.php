@@ -64,7 +64,7 @@
                         loading="lazy"
                         onload="this.classList.remove('opacity-0')"
                     />
-                    @if(!empty($info['desc']))
+                    @if(!empty($info['title']))
                         <div class="md:pl-6">
                             <h5 class="font-black">{{$info['title']}}</h5>
                             @if(!empty($info['desc']))<p class="my-2">{{$info['desc']}}</p>@endif
