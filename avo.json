@@ -7,8 +7,8 @@
     "name": "Members' Area"
   },
   "branch": {
-    "id": "ufSKSeOYQ",
-    "name": "account-setup-skipped"
+    "id": "master",
+    "name": "main"
   },
   "sources": [
     {
@@ -16,9 +16,9 @@
       "name": "Musora Web Platform",
       "path": "app/Modules/EventTracking/Avo/Avo.php",
       "interfacePath": "app/Modules/EventTracking/Avo/Avo.php",
-      "actionId": "YUEIByIeXm3C6N0CSmqP",
-      "branchId": "ufSKSeOYQ",
-      "updatedAt": "2023-08-18T16:16:11.579Z"
+      "actionId": "f9fiuQ5iRtHhkqScPfRZ",
+      "branchId": "master",
+      "updatedAt": "2023-08-29T14:24:05.436Z"
     }
   ],
   "force": false
