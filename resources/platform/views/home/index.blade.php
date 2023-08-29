@@ -59,7 +59,7 @@
         </div>
 
         {{-- Continue Section --}}
-        @if($hasStartedLessons)
+        @if(count(json_decode($startedContentJson)->data) > 0)
             @component('partials.bladesora.members.components.home._continue-section', [
                 'brand' => brand(),
                 'hasStartedContent' => $hasStartedLessons,

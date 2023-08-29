@@ -22,7 +22,7 @@
 
     $prizeNamesWithModel = [
         'drumeo' => 'Yamaha DTX402K E-Drum Kit',
-        'pianote' => 'Yamaha Digital Piano',
+        'pianote' => 'Yamaha P-125a Digital Piano',
         'singeo' => 'Steinberg studio kit',
         'guitareo' => 'Yamaha Pacifica electric guitar',
     ];
@@ -36,7 +36,7 @@
 
     $prizeDesc = [
         'drumeo' => 'It has over 250 drum sounds and 10 drum kits customizable to your taste, <br class="tw-hidden md:tw-inline lg:tw-hidden" />for ultimate control over your tone and volume.',
-        'pianote' => 'It has a metronome to keep your playing tight. Plus it connects with your headphones <br class="tw-hidden md:tw-inline lg:tw-hidden" />for all those late-night piano sessions.',
+        'pianote' => 'It has a metronome to keep your playing tight. And it connects with your headphones for all those late-night playing sessions.',
         'singeo' => 'You’ll get a microphone, headphones, and an audio interface so you can start to feel more confident as a singer.',
         'guitareo' => 'It’s sleek. It’s bold. It’s also well known for its excellent tone and playability.',
     ];
