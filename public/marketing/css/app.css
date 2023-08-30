@@ -677,6 +677,25 @@ Ensure the default browser behavior of the `hidden` attribute.
   width: 100%;
   z-index: 10;
 }
+.\!input-field ul.\!dropdown {
+  background-color: #fff !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+  border: 1px solid !important;
+  border-color: #d1d5db !important;
+  border-radius: 0.375rem !important;
+  font-size: 1rem !important;
+  list-style: none !important;
+  margin-top: 0.25rem !important;
+  max-height: 15rem !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+  padding-left: 0 !important;
+  position: absolute !important;
+  width: 100% !important;
+  z-index: 10 !important;
+}
 .input-field ul.dropdown li {
   color: #111827;
   cursor: default;
@@ -684,6 +703,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   -webkit-user-select: none;
      -moz-user-select: none;
           user-select: none;
+}
+.\!input-field ul.\!dropdown li {
+  color: #111827 !important;
+  cursor: default !important;
+  position: relative !important;
+  -webkit-user-select: none !important;
+     -moz-user-select: none !important;
+          user-select: none !important;
 }
 .input-field ul.dropdown li a, .input-field ul.dropdown li .option {
   cursor: pointer;
@@ -698,8 +725,24 @@ Ensure the default browser behavior of the `hidden` attribute.
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 150ms;
 }
+.\!input-field ul.\!dropdown li a, .\!input-field ul.\!dropdown li .\!option {
+  cursor: pointer !important;
+  display: block !important;
+  overflow: hidden !important;
+  position: relative !important;
+  padding-top: 0.5rem !important;
+  padding-bottom: 0.5rem !important;
+  padding-left: 0.75rem !important;
+  padding-right: 2.25rem !important;
+  transition-property: all !important;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
+  transition-duration: 150ms !important;
+}
 .input-field ul.dropdown li a:hover, .input-field ul.dropdown li a .option, .input-field ul.dropdown li .option:hover, .input-field ul.dropdown li .option .option {
   background-color: #e5e7eb;
+}
+.\!input-field ul.\!dropdown li a:hover, .\!input-field ul.\!dropdown li a .\!option, .\!input-field ul.\!dropdown li .\!option:hover, .\!input-field ul.\!dropdown li .\!option .\!option {
+  background-color: #e5e7eb !important;
 }
 .input-field ul.dropdown li input[type="checkbox"], .input-field ul.dropdown li input[type="radio"] {
   -webkit-appearance: none;
@@ -708,18 +751,38 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
   position: absolute;
 }
+.\!input-field ul.\!dropdown li input[type="checkbox"], .\!input-field ul.\!dropdown li input[type="radio"] {
+  -webkit-appearance: none !important;
+     -moz-appearance: none !important;
+          appearance: none !important;
+  display: none !important;
+  position: absolute !important;
+}
 .input-field ul.dropdown li input[type="checkbox"] + .option .input-icon svg, .input-field ul.dropdown li input[type="radio"] + .option .input-icon svg {
   color: currentColor;
   height: 1rem;
   opacity: 0;
   width: 1rem;
 }
+.\!input-field ul.\!dropdown li input[type="checkbox"] + .\!option .\!input-icon svg, .\!input-field ul.\!dropdown li input[type="radio"] + .\!option .\!input-icon svg {
+  color: currentColor !important;
+  height: 1rem !important;
+  opacity: 0 !important;
+  width: 1rem !important;
+}
 .input-field ul.dropdown li input[type="checkbox"]:checked + .option .input-icon svg, .input-field ul.dropdown li input[type="radio"]:checked + .option .input-icon svg {
   opacity: 1;
+}
+.\!input-field ul.\!dropdown li input[type="checkbox"]:checked + .\!option .\!input-icon svg, .\!input-field ul.\!dropdown li input[type="radio"]:checked + .\!option .\!input-icon svg {
+  opacity: 1 !important;
 }
 .input-field ul.dropdown li input[type="checkbox"]:checked + .option, .input-field ul.dropdown li input[type="radio"]:checked + .option {
   background-color: #374151;
   color: #fff;
+}
+.\!input-field ul.\!dropdown li input[type="checkbox"]:checked + .\!option, .\!input-field ul.\!dropdown li input[type="radio"]:checked + .\!option {
+  background-color: #374151 !important;
+  color: #fff !important;
 }
 .input-field[disabled=true] {
   pointer-events: none;
