@@ -5,12 +5,7 @@
 @endsection
 
 @section('inject-components')
-<script>
-    import ContentInfo from "../../assets/js/vue/components/ContentInfo/ContentInfo";
-    export default {
-        components: {ContentInfo}
-    }
-</script>
+    <script src="{{ mix('platform/js/lesson-page.js') }}"></script>
 @endsection
 
 @section('content')
