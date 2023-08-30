@@ -1,11 +1,11 @@
 <template>
     <div class="md:tw-px-8 tw-pt-8">
-        <filter-multi-selection></filter-multi-selection>
+        <filter-options></filter-options>
     </div>
 </template>
 
 <script setup>
-    import FilterMultiSelection from './FilterMultiSelection.vue';
+    import FilterOptions from './FilterOptions.vue';
 </script>
 
 <style scoped>
