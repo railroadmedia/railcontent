@@ -2,12 +2,15 @@
     <div class="lg:tw-flex tw-flex-wrap lg:tw-gap-14 tw-text-[#000C17] dark:tw-text-white">
         <filter-multi-selection-item v-for="column in columns" :column="column" @click-column-item="clickColumnItem" :filters="filters">
         </filter-multi-selection-item>
+        <filter-single-selection-item v-for="column in singleColumns" :column="column" @single-select="singleSelect" :single-selection="singleSelection">
+        </filter-single-selection-item>
     </div>
 </template>
 
 <script setup>
     import { ref } from 'vue';
     import FilterMultiSelectionItem from './FilterMultiSelectionItem';
+    import FilterSingleSelectionItem from './FilterSingleSelectionItem';
 
     //Mock data
      const columns = [
@@ -163,7 +166,24 @@
          },
      ];
 
+     const singleColumns = [
+         {
+             category: 'Progress',
+             items: [
+                 {
+                     name: 'In Progress',
+                     value: 'in_progress',
+                 },
+                 {
+                     name: 'Complete',
+                     value: 'complete',
+                 },
+             ],
+         },
+     ];
+
      const filters = ref({});
+     const singleSelection = ref({});
 
      const clickColumnItem = (category, item) => {
          if (filters.value[category]){
@@ -186,6 +206,10 @@
              filters.value[category] = [item];
          }
      };
+
+     const singleSelect = (category, item) => {
+         singleSelection.value[category] = item;
+     }
 </script>
 
 <style scoped>
