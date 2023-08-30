@@ -1,14 +1,4 @@
 <template>
-    <ul v-if="Object.keys(filters).length" class="tw-flex tw-flex-wrap tw-gap-4 tw-text-sm tw-mb-5 tw-px-4 md:tw-px-0">
-        <template v-for="key in Object.keys(filters)">
-            <li class="tw-flex tw-items-center tw-p-2 tw-rounded tw-border dark:tw-border-[#223F57] tw-bg-[#F2F2F2] dark:tw-bg-[#002039] dark:tw-text-white tw-font-semibold" v-for="filter in filters[key]">
-                {{ filter.name }}
-                <button class="tw-text-[#000C17] dark:tw-text-white">
-                    <XIcon class="tw-h-[20px] tw-w-[20px] tw-ml-1" @click="clickColumnItem(key, filter)" />
-                </button>
-            </li>
-        </template>
-    </ul>
     <div class="lg:tw-flex tw-flex-wrap lg:tw-gap-14 tw-text-[#000C17] dark:tw-text-white">
         <filter-multi-selection-item v-for="column in columns" :column="column" @click-column-item="clickColumnItem" :filters="filters">
         </filter-multi-selection-item>
@@ -17,8 +7,7 @@
 
 <script setup>
     import { ref } from 'vue';
-    import { XIcon } from "@heroicons/vue/solid";
-    import FilterMultiSelectionItem from './FilterMultiSelectionItem.vue';
+    import FilterMultiSelectionItem from './FilterMultiSelectionItem';
 
     //Mock data
      const columns = [
