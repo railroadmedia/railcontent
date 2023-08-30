@@ -134,6 +134,13 @@
             'signup' => true,
         ],
         [
+            'image' => 'https://d1923uyy6spedc.cloudfront.net/bullet-for-my-valentine-fever-1693380503.jpg',
+            'artist' => 'Bullet for My Valentine',
+            'song' => 'Your Betrayal',
+            'soundslice' => 'NK2wc',
+            'signup' => true,
+        ],
+        [
             'image' => 'https://d1923uyy6spedc.cloudfront.net/303677-card-thumbnail-maxres-1621265767.jpg',
             'artist' => 'Twenty One Pilots',
             'song' => 'Lane Boy',
@@ -154,6 +161,20 @@
             'soundslice' => 'wx-yc',
             'signup' => true,
         ],
+        [
+            'image' => 'https://d1923uyy6spedc.cloudfront.net/plini-handmade-cities-1693380091.jpg',
+            'artist' => 'Plini',
+            'song' => 'Electric Sunrise',
+            'soundslice' => 'NcCwc',
+            'signup' => true,
+        ],
+        [
+            'image' => 'https://d1923uyy6spedc.cloudfront.net/northlane-node-1693380381.jpg',
+            'artist' => 'Northlane',
+            'song' => 'Leech',
+            'soundslice' => 'K-2wc',
+            'signup' => true,
+        ],
     ];
 @endphp
 
@@ -165,8 +186,8 @@
                     <div class="relative overflow-hidden rounded-md">
                         <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=95/{{ $bonus['image'] }}"></div>
                     </div>
-                    <h6 class="mt-3 mb-1"><strong>{{ $bonus['artist'] }}</strong></h6>
-                    <p class="leading-none">{{ $bonus['song'] }}</p>
+                    <h6 class="mt-3 mb-1"><strong>{{ $bonus['song'] }}</strong></h6>
+                    <p class="leading-none">{{ $bonus['artist'] }}</p>
                 </div>
             @endif
         @else
@@ -175,8 +196,8 @@
                     <i class="absolute top-1/2 left-1/2 fas fa-play play-button" style="margin: -39px;"></i>
                     <div class="aspect-1:1 w-full bg-contain bg-center lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=470,quality=95/{{ $bonus['image'] }}"></div>
                 </div>
-                <h6 class="mt-3 mb-1"><strong>{{ $bonus['artist'] }}</strong></h6>
-                <p class="leading-none">{{ $bonus['song'] }}</p>
+                <h6 class="mt-3 mb-1"><strong>{{ $bonus['song'] }}</strong></h6>
+                <p class="leading-none">{{ $bonus['artist'] }}</p>
             </div>
 
             <div class="reveal text-center" id="{{ str_replace(".","",(str_replace("/","",(str_replace(" ","",$bonus['artist']))))) }}{{$bonus['soundslice']}}" data-reveal>
