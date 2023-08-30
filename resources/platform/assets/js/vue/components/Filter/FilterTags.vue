@@ -14,7 +14,7 @@
 <script setup>
     import { XIcon } from "@heroicons/vue/solid";
 
-    const props =defineProps({
+    const props = defineProps({
         filters: {
             type: Object,
             default: {},
