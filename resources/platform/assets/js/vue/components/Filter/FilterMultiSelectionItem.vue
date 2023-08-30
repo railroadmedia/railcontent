@@ -6,7 +6,7 @@
         </div>
         <hr class="tw-border-[rgba(101, 101, 107, 0.25)] dark:tw-border-[#223F57] tw-mb-[15px]" />
         <div class="tw-justify-between tw-items-center tw-mb-2 tw-px-4 md:tw-px-0" :class="dropdown ? 'tw-flex' : 'tw-hidden lg:tw-flex'" v-for="item in column.items">
-            {{ item.name }} <input class="dark:tw-bg-[#002039] tw-border tw-border-[#D1D5DB] dark:tw-border-[#445F74] tw-rounded checked:tw-bg-[#FFAE00] checked:dark:tw-bg-[#FFAE00]" type="checkbox" @click="$emit('clickColumnItem', column.category, item)" :checked="filters[column.category] ? filters[column.category].find((f)=> f.value === item.value) : false" />
+            {{ item.name }} <input class="tw-border tw-border-[#D1D5DB] dark:tw-border-[#445F74] tw-rounded dark:tw-bg-[#002039] checked:tw-bg-[#FFAE00] checked:dark:tw-bg-[#FFAE00]" type="checkbox" @click="$emit('clickColumnItem', column.category, item)" :checked="filters[column.category] ? filters[column.category].find((f)=> f.value === item.value) : false" />
         </div>
     </div>
 </template>
