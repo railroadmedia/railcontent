@@ -27,6 +27,7 @@ import InfoModal from './vue/components/Modal/InfoModal';
 import SoundSlice from './vue/components/SoundSlice/SoundSlice.vue';
 import CohortBanner from './vue/components/CohortBanner/CohortBanner.vue';
 import ContentInfo from './vue/components/ContentInfo/ContentInfo';
+import FilterWrapper from './vue/components/Filter/FilterWrapper';
 
 //Vuesora Assets
 import Forms from './vue/vuesora/assets/js/classes/forms';
@@ -259,6 +260,7 @@ app.component('AppContainer', AppContainer)
     .component('CohortBanner', CohortBanner)
     .component('CatalogueCardContainer', CatalogueCardContainer)
     .component('ContentInfo', ContentInfo)
+    .component('FilterWrapper', FilterWrapper)
 
     .component('PlaylistPlaybackWrapper', defineAsyncComponent(() =>
         import(
