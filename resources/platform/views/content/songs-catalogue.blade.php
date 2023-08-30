@@ -82,7 +82,7 @@
         </section>
     @endif
 
-    <filter-wrapper></filter-wrapper>
+{{--    <filter-wrapper></filter-wrapper>--}}
 
     <div class="tw-container tw-mx-auto tw-px-4 md:tw-px-8 tw-mt-[10px] dark:tw-text-white songs-catalogue-container tw-pt-[30px]">
         <transition appear name="fade">
