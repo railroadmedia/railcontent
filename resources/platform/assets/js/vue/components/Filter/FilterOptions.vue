@@ -2,7 +2,7 @@
     <div class="lg:tw-flex tw-flex-wrap lg:tw-gap-14 tw-text-[#000C17] dark:tw-text-white">
         <filter-multi-selection-item v-for="column in columns" :column="column" @click-column-item="clickColumnItem" :filters="filters">
         </filter-multi-selection-item>
-        <filter-single-selection-item v-for="column in singleColumns" :column="column" @single-select="singleSelect" :single-selection="singleSelection">
+        <filter-single-selection-item v-for="column in singleColumns" :column="column" @single-select="singleSelect" :selected-value="selectedOption[column.category] ? selectedOption[column.category].value : ''">
         </filter-single-selection-item>
     </div>
 </template>
@@ -183,7 +183,7 @@
      ];
 
      const filters = ref({});
-     const singleSelection = ref({});
+     const selectedOption = ref({});
 
      const clickColumnItem = (category, item) => {
          if (filters.value[category]){
@@ -208,7 +208,7 @@
      };
 
      const singleSelect = (category, item) => {
-         singleSelection.value[category] = item;
+         selectedOption.value[category] = item;
      }
 </script>
 
