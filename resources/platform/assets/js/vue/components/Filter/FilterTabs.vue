@@ -3,7 +3,7 @@
         <button
             v-for="option in tabOptions"
             @click="onTabClick(option.key)"
-            class="tw-flex tw-items-center tw-justify-center tw-text-center tw-h-[50px] tw-w-[108px] tw-uppercase tw-text-[20px] tw-font-bebas-neue tw-rounded-[55px] tw-border hover:tw-bg-[#223F57] tw-font-semibold dark:tw-border-[#445F74]"
+            class="tw-flex tw-items-center tw-justify-center tw-text-center tw-h-[50px] tw-w-[108px] tw-uppercase tw-text-[20px] tw-font-bebas-neue tw-rounded-[55px] tw-border hover:tw-bg-[#223F57] hover:tw-text-white tw-font-semibold dark:tw-border-[#445F74]"
             :class="isActive(option.key) ? `tw-bg-[#28282D] dark:tw-bg-[#445F74] tw-text-white` : `tw-bg-white dark:tw-bg-[#000C17] tw-border-[#CBCBCD] dark:tw-text-white`"
         >
            {{ option.name }}
@@ -17,13 +17,15 @@
             type: Array,
             default: [],
         },
+        selectedTab: {
+            type: String,
+            default: 'songs',
+        },
     });
     const emit = defineEmits(['onTabClick']);
 
     const isActive = (key) => {
-        if (key === 'songs') {
-            return true;
-        }
+        return key === props.selectedTab;
     };
 
     const onTabClick = (key) => {
