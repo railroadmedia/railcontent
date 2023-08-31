@@ -7,6 +7,10 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Exception\ORMException;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
+use libphonenumber\NumberParseException;
+use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberUtil;
 use Railroad\Ecommerce\Entities\Address;
 use Railroad\Ecommerce\Entities\Customer;
 use Railroad\Ecommerce\Entities\User;
@@ -83,6 +87,35 @@ class SyncCustomersToShopify extends Command
 
     protected function getTestUsersEntities(bool $fresh) : Collection
     {
+
+        //TODO Need to limit these results because it's crashing, due to the 424,730 users
+        $entityRepository = $repository ?? $this->getEcommerceEntityRepository();
+        $qb = $entityRepository->createQueryBuilder('entity');
+
+        if (!$fresh) {
+            $lastSyncAt = $this->getDateTimeOfLastSync();
+            $this->info(
+                sprintf("Retrieving all %s that have not been synced, or have been updated since %s ...",
+                    Str::plural($this->getSyncResource()),
+                    $lastSyncAt->toString())
+            );
+            $qb->where(
+                $qb->expr()
+                    ->isNull("entity.shopifyId")
+            )
+                ->orWhere(
+                    $qb->expr()
+                        ->gt("entity.updatedAt", ":lastSyncAt")
+                )->setParameter("lastSyncAt", $lastSyncAt)
+            ;
+        }
+
+        $qb->setMaxResults(10);
+
+        $q = $qb->getQuery();
+
+        return collect($q->getResult());
+
         /*
          TODO: delete this!
           this is just for a simple test case
@@ -132,10 +165,10 @@ class SyncCustomersToShopify extends Command
         // STEP 1: get all the Users that we're going to sync
         //TODO after test scenario, replace with
         //$users = $this->getEcommerceEntities($fresh);
+        // TODO probably going to need to make a local version of getEcommerceEntities for users, so we can chunk it
         $users = $this->getTestUsersEntities($fresh);
-        //TODO just ignore the customers for now
-        // $customers = $this->getEcommerceEntities($fresh, $this->customerRepository);
-        $customers = collect();
+        // TODO probably going to need to make a local version of getEcommerceEntities for customers, so we can chunk it
+        $customers = $this->getEcommerceEntities($fresh, $this->customerRepository);
 
         $this->info("Found {$users->count()} users and {$customers->count()} customers to be synced");
 
@@ -221,30 +254,8 @@ class SyncCustomersToShopify extends Command
                         : $this->updateAddressesDataForUser($user, $userCustomers);
 
                     // STEP 6: send it to Shopify, if there are any
-                    $addressesData->each(function ($addressData) use ($shopifyCustomerId) {
-                        // check if the addressData has a shopify id and create or update accordingly
-                        if (array_key_exists("id", $addressData)) {
-                            $addressResource = $this->shopify->updateCustomerAddress($shopifyCustomerId, $addressData["id"], $addressData);
-                            $addressShopifyId = $addressResource->id;
-                            $this->shopifyIds->push($addressShopifyId);
-                        } else {
-                            $addressResource = $this->shopify->createCustomerAddress($shopifyCustomerId, $addressData);
-                            // and record the Shopify ID on the Addresses
-                            $addressShopifyId = $addressResource->id;
-                            try {
-                                $addressEntity = $this->addressRepository->byId($addressData["ecommerce_address_id"]);
-                                if ($addressEntity) {
-                                    $addressEntity->setShopifyId($addressShopifyId);
-                                    $this->entityManager->persist($addressEntity);
-                                    $this->entityManager->flush();
-                                }
-                                $this->shopifyIds->push($addressShopifyId);
-                            } catch (\Doctrine\ORM\ORMException $e) {
-                                $this->error(sprintf("Failed to find address by ID %s: %s",
-                                    $addressData["ecommerce_address_id"], $e->getMessage()));
-                            }
-                        }
-                    });
+                    $this->sendAddressDataToShopify($addressesData, $shopifyCustomerId);
+
                 } catch (ORMException $e) {
                     $this->error(sprintf("Failed to save shopify_id for user or customer with email address %s: %s",
                         $user->getEmail(), $e->getMessage()));
@@ -274,7 +285,107 @@ class SyncCustomersToShopify extends Command
      */
     private function syncCustomers(Collection $customers, bool $fresh, ProgressBar $bar, bool $simulate): void
     {
-        //    TODO
+        $simulatedShopifyId = 0;
+        if ($simulate && count($this->tableRows)) {
+            $lastRow = end($this->tableRows);
+            $simulatedShopifyId = end($lastRow) + 1;
+        }
+        // STEP 1: group the customers together by email address, so we don't make duplicates in Shopify
+        $customers = $customers->groupBy(fn (Customer $customer) => $customer->getEmail());
+
+        $customers->each(function (Collection $customersCollection, string $email) use ($fresh, $bar, $simulate, &$simulatedShopifyId) {
+
+            // STEP 2: determine if updating or creating
+            $alreadySynced = $customersCollection->filter(fn (Customer $customer) => !is_null($customer->getShopifyId()));
+
+            // sort the customers collection so that we have the newest one first (so we can work our way back when trying to find data)
+            $customersCollection = $customersCollection->sort(function (Customer $customer1, Customer $customer2) {
+                return $customer1->getUpdatedAt() < $customer2->getUpdatedAt();
+            });
+
+            $isCreating = $fresh || $alreadySynced->isEmpty();
+
+            // STEP 3: build up the data structure
+            // DEV NOTE: we need the same data regardless of creating or updating
+            $postData = $this->createCustomerDataForCustomers($customersCollection, $email);
+
+            // STEP 4: send the data to Shopify
+            if (!$simulate) {
+
+                if ($isCreating) {
+                    $customerResource = $this->shopify->createCustomer($postData);
+                } else {
+                    $existingCustomerShopifyId = $this->getCustomerValueFor($customersCollection, "getShopifyId");
+                    $customerResource = $this->shopify->updateCustomer($existingCustomerShopifyId, $postData);
+                }
+
+                $shopifyCustomerId = $customerResource->id;
+                $this->shopifyIds->push($shopifyCustomerId);
+
+                try {
+                    // record the shopify ID each Customer
+                    $customersCollection->each(function (Customer $customer) use ($shopifyCustomerId) {
+                        $customer->setShopifyId($shopifyCustomerId);
+                        $this->entityManager->persist($customer);
+                        $this->entityManager->flush();
+                    });
+
+                    // STEP 5: build up the data structure for the Customers' Addresses
+                    $addressesData = $isCreating ? $this->createAddressesDataForCustomers($customersCollection)
+                        : $this->updateAddressesDataForCustomers($customersCollection, $shopifyCustomerId);
+
+                    // STEP 6: send it to Shopify, if there are any
+                    $this->sendAddressDataToShopify($addressesData, $shopifyCustomerId);
+                 } catch (ORMException $e) {
+                    $this->error(sprintf("Failed to save shopify_id for customer with email address %s: %s",
+                        $email, $e->getMessage()));
+                }
+
+            } else {
+                $shopifyCustomerId = ++$simulatedShopifyId;
+            }
+
+            $customersCollection->each(function(Customer $customer) use ($isCreating, $shopifyCustomerId, $bar) {
+                $this->tableRows[] = [$customer->getId(), "Customer", $isCreating ? "Created" : "Updated", $shopifyCustomerId];
+                $bar->advance();
+            });
+        })->chunk(100);
+    }
+
+    /**
+     * Send the given collection of address data to Shopify, to create or update accordingly,
+     * recording the resulting shopify id on each
+     *
+     * @param Collection $addressesData
+     * @param int $shopifyCustomerId
+     * @return void
+     */
+    private function sendAddressDataToShopify(Collection $addressesData, int $shopifyCustomerId): void
+    {
+        $addressesData->each(function ($addressData) use ($shopifyCustomerId) {
+            // check if the addressData has a shopify id and create or update accordingly
+            if (array_key_exists("id", $addressData)) {
+                $addressResource = $this->shopify->updateCustomerAddress($shopifyCustomerId, $addressData["id"], $addressData);
+                $addressShopifyId = $addressResource->id;
+                $this->shopifyIds->push($addressShopifyId);
+            } else {
+                $addressResource = $this->shopify->createCustomerAddress($shopifyCustomerId, $addressData);
+                // and record the Shopify ID on the Addresses
+                $addressShopifyId = $addressResource->id;
+                try {
+                    $addressEntity = $this->addressRepository->byId($addressData["ecommerce_address_id"]);
+                    if ($addressEntity) {
+                        $addressEntity->setShopifyId($addressShopifyId);
+                        $this->entityManager->persist($addressEntity);
+                        $this->entityManager->flush();
+                    }
+                    $this->shopifyIds->push($addressShopifyId);
+                } catch (\Doctrine\ORM\ORMException $e) {
+                    $this->error(sprintf("Failed to find address by ID %s: %s",
+                        $addressData["ecommerce_address_id"], $e->getMessage()));
+                }
+            }
+        });
     }
 
     /**
@@ -314,26 +425,9 @@ class SyncCustomersToShopify extends Command
      */
     protected function getEcommerceEntityRepository(): RepositoryBase|EntityRepository
     {
-        // return $this->customerRepository;
         return $this->userRepository;
     }
 
-    /**
-     * @param User $user
-     * @return Collection
-     */
-    private function getCustomersForUser(User $user): Collection
-    {
-        $qb = $this->customerRepository->createQueryBuilder('customer');
-        $qb->where(
-            $qb->expr()
-                ->eq("customer.email", ":email")
-        )->setParameter("email", $user->getEmail());
-
-        $q = $qb->getQuery();
-
-        return collect($q->getResult());
-    }
 
     /**
      * Create the data to post to Shopify to create a Customer from our User
@@ -353,7 +447,7 @@ class SyncCustomersToShopify extends Command
             "first_name" => $user->getFirstName(),
             "last_name" => $user->getLastName(),
             "note" => $user->getSupportNote(),
-            "phone" => $user->getPhoneNumber(),
+            "phone" => $this->getPhoneNumberForUser($user),
             // "tags" => "",
         ];
 
@@ -377,24 +471,20 @@ class SyncCustomersToShopify extends Command
      * Create the data to post to Shopify to create a Customer from our collection of grouped Customers
      *
      * @param Collection<Customer> $customers
+     * @param string $email
      * @return array
      */
-    private function createCustomerDataForCustomers(Collection $customers): array
+    private function createCustomerDataForCustomers(Collection $customers, string $email): array
     {
-        //    TODO
-        return [];
-    }
-
-    /**
-     * Create the data to post to Shopify to update a Customer from our collection of grouped Customers
-     *
-     * @param Collection<Customer> $customers
-     * @return array
-     */
-    private function updateCustomerDataForCustomers(Collection $customers): array
-    {
-        //    TODO
-        return [];
+        return [
+            "currency" => "USD",
+            "email" => $email,
+            "note" => $this->getCustomerValueFor($customers, "getNote"),
+            "phone" => $this->getPhoneNumberForCustomer($customers),
+            // "tags" => "",
+            // DEV NOTE: we won't bother recording the id in a metafield because the data is an amalgamation of
+            // any number of customers in our system
+        ];
     }
 
     /**
@@ -411,8 +501,131 @@ class SyncCustomersToShopify extends Command
         $addresses = collect($this->addressRepository->getUserShippingAddresses($user->getId()));
 
         // and its customers
+        $customers->each(fn(Customer $customer) => $addresses->push(
+            ...$this->addressRepository->getCustomerShippingAddresses($customer->getId())
+        ));
+
+        $addresses = $this->cleanUpAddresses($addresses);
+
+        $addresses->each(function($addressArray) use ($addressData) {
+            $addressData->push ($addressArray);
+        });
+
+        return $addressData;
+    }
+
+    /**
+     * Find and compare all local versions of addresses for the user provided, against the addresses
+     * for the customer in Shopify. If we have any changes, or any new addresses, format those to
+     * meet Shopify's expectations.
+     *
+     * @param User $user
+     * @param Collection<Customer> $userCustomers
+     * @return Collection
+     */
+    private function updateAddressesDataForUser(User $user, Collection $userCustomers): Collection
+    {
+        $addressData = collect();
+
+        $shopifyCustomerId = $user->getShopifyId();
+        // first, get the address information from Shopify
+        $shopifyAddressesResponse = $this->shopify->getCustomerAddresses($shopifyCustomerId);
+        $shopifyAddresses = $shopifyAddressesResponse->map(fn (ApiResource $apiResource) => $apiResource->getAttributes());
+
+        // keep track of the local addresses that we've checked, so we know not to check if they're new
+        $checkedLocalAddressIds = collect();
+
+        // get data for all the addresses that need to be updated
+        $this->addDataForUpdatedAddresses($shopifyCustomerId, $shopifyAddresses, $checkedLocalAddressIds, $addressData);
+
+        // next, check for any additional addresses that the user has, that haven't yet been synced up to Shopify
+        $allLocalAddressData = $this->createAddressesDataForUser($user, $userCustomers);
+        $this->addDataForNewAddresses($allLocalAddressData, $shopifyAddresses, $checkedLocalAddressIds, $addressData);
+
+       return $addressData;
+    }
+
+    /**
+     * Get all addresses for this collection of customers, then format it to meet Shopify's expectation
+     *
+     * @param Collection<Customer> $customers
+     * @return Collection
+     */
+    private function createAddressesDataForCustomers(Collection $customers): Collection
+    {
+        $addressData = collect();
+        // get all the addresses for all customers
+        $addresses = collect();
         $customers->each(fn(Customer $customer) => $addresses->merge($this->addressRepository->getCustomerShippingAddresses($customer->getId())));
 
+        $addresses = $this->cleanUpAddresses($addresses);
+
+        $addresses->each(function($addressArray) use ($addressData) {
+            $addressData->push ($addressArray);
+        });
+
+        return $addressData;
+    }
+
+    /**
+     * Find and compare all local versions of addresses for the collection of customers provided,
+     * against the addresses for the customer in Shopify. If we have any changes, or any new addresses,
+     * format those to meet Shopify's expectations.
+     *
+     * @param Collection<Customer> $customers
+     * @param int $shopifyCustomerId
+     * @return Collection
+     */
+    private function updateAddressesDataForCustomers(Collection $customers, int $shopifyCustomerId): Collection
+    {
+        $addressData = collect();
+
+        // first, get the address information from Shopify
+        $shopifyAddressesResponse = $this->shopify->getCustomerAddresses($shopifyCustomerId);
+        $shopifyAddresses = $shopifyAddressesResponse->map(fn (ApiResource $apiResource) => $apiResource->getAttributes());
+        // keep track of the local addresses that we've checked, so we know not to check if they're new
+        $checkedLocalAddressIds = collect();
+
+        // get data for all the addresses that need to be updated
+        $this->addDataForUpdatedAddresses($shopifyCustomerId, $shopifyAddresses, $checkedLocalAddressIds, $addressData);
+
+        // next, check for any additional addresses that the user has, that haven't yet been synced up to Shopify
+        $allLocalAddressData = $this->createAddressesDataForCustomers($customers);
+        $this->addDataForNewAddresses($allLocalAddressData, $shopifyAddresses, $checkedLocalAddressIds, $addressData);
+
+        return $addressData;
+    }
+
+
+    /** HELPERS **/
+
+    /**
+     * Get all customers with the same email address as the given user
+     *
+     * @param User $user
+     * @return Collection
+     */
+    private function getCustomersForUser(User $user): Collection
+    {
+        $qb = $this->customerRepository->createQueryBuilder('customer');
+        $qb->where(
+            $qb->expr()
+                ->eq("customer.email", ":email")
+        )->setParameter("email", $user->getEmail());
+
+        $q = $qb->getQuery();
+
+        return collect($q->getResult());
+    }
+
+    /**
+     * For the given collection of Addresses, clean up the data and format it in a way that Shopify will accept
+     *
+     * @param Collection<Address> $addresses
+     * @return Collection
+     */
+    private function cleanUpAddresses(Collection $addresses): Collection
+    {
         // only use addresses that have at least streetLine1, since we may have addresses with no real data
         $addresses = $addresses->filter(function (Address $address) {
             return !empty($address->getStreetLine1());
@@ -440,7 +653,7 @@ class SyncCustomersToShopify extends Command
         });
 
         // and make sure it's unique - Shopify won't allow multiple addresses with the same data
-        $addresses = $addresses->unique(function (array $address) {
+        return $addresses->unique(function (array $address) {
             // ignore case
             return  strtoupper($address["address1"]).
                 strtoupper($address["address2"]).
@@ -452,38 +665,23 @@ class SyncCustomersToShopify extends Command
                 strtoupper($address["province"]).
                 strtoupper($address["zip"]);
         });
-
-        $addresses->each(function($addressArray) use ($addressData) {
-            $addressData->push ($addressArray);
-        });
-
-        return $addressData;
     }
 
     /**
-     * Find and compare all local versions of addresses for the user provided, against the addresses
-     * for the customer in Shopify. If we have any changes, or any new addresses, format those to
-     * meet Shopify's expectations.
+     * Query Shopify for all addresses on file for the given customer ID, then get all of our local addresses with
+     * the matching shopify_id stored. Compare Shopify's address data and our own, and if there's a difference,
+     * record it in the running $addressData collection.
      *
-     * @param User $user
-     * @param Collection<Customer> $userCustomers
-     * @return Collection
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @param int $shopifyCustomerId
+     * @param Collection $shopifyAddresses
+     * @param Collection $checkedLocalAddressIds
+     * @param Collection $addressData
+     * @return void
      */
-    private function updateAddressesDataForUser(User $user, Collection $userCustomers): Collection
+    private function addDataForUpdatedAddresses(int $shopifyCustomerId, Collection $shopifyAddresses, Collection &$checkedLocalAddressIds, Collection &$addressData): void
     {
-        $shopifyCustomerId = $user->getShopifyId();
-        $addressData = collect();
-
-        // first, get the address information from Shopify
-        $shopifyAddressesResponse = $this->shopify->getCustomerAddresses($shopifyCustomerId);
-        $shopifyAddresses = $shopifyAddressesResponse->map(fn (ApiResource $apiResource) => $apiResource->getAttributes());
-
-        // keep track of the local addresses that we've checked, so we know not to check if they're new
-        $checkedLocalAddressIds = collect();
-
         // go through all the addresses from Shopify and see if we have any changes to the local version associated with it
-        $shopifyAddresses->each(function (array $shopifyAddressData) use ($checkedLocalAddressIds, $addressData, $shopifyCustomerId) {
+        $shopifyAddresses->each(function (array $shopifyAddressData) use (&$checkedLocalAddressIds, &$addressData, $shopifyCustomerId) {
             // use the shopify ID to find our version of it
             $localAddress = $this->addressRepository->getByShopifyId($shopifyAddressData["id"]);
             if (is_null($localAddress)) {
@@ -519,17 +717,32 @@ class SyncCustomersToShopify extends Command
                 $addressData->push($localAddressData);
             }
         });
+    }
 
-        // next, check for any additional addresses that the user has, that haven't yet been synced up to Shopify
-        $allUniqueLocalAddressData = $this->createAddressesDataForUser($user, $userCustomers);
+    /**
+     * Go through the given local address data and identify any that are not yet in Shopify's addresses. If any
+     * are identifies, record them in the running $addressData collection.
+     *
+     * @param Collection $allLocalAddressData
+     * @param Collection $shopifyAddresses
+     * @param Collection $checkedLocalAddressIds
+     * @param Collection $addressData
+     * @return void
+     */
+    private function addDataForNewAddresses(Collection $allLocalAddressData,
+                                            Collection $shopifyAddresses,
+                                            Collection $checkedLocalAddressIds,
+                                            Collection &$addressData): void
+    {
         // remove any that are already in our collection to sync
-        $allUniqueLocalAddressData = $allUniqueLocalAddressData->filter(function (array $localAddressData) use ($checkedLocalAddressIds) {
+        $allLocalAddressData = $allLocalAddressData->filter(function (array $localAddressData) use ($checkedLocalAddressIds) {
             return $checkedLocalAddressIds->doesntContain($localAddressData["ecommerce_address_id"]);
         });
+
         // make sure that Shopify doesn't already have the address
-        $allUniqueLocalAddressData->each(function(array $localAddressData) use ($addressData, $shopifyAddresses) {
+        $allLocalAddressData->each(function(array $localAddressData) use (&$addressData, $shopifyAddresses) {
             $isNew = false;
-            $shopifyAddresses->each(function (array $shopifyAddressData) use ($addressData, $localAddressData, &$isNew) {
+            $shopifyAddresses->each(function (array $shopifyAddressData) use (&$addressData, $localAddressData, &$isNew) {
                 foreach ($localAddressData as $key => $value) {
                     // make sure to ignore our added ecommerce_address_id
                     if ($key !== "ecommerce_address_id" && strtoupper($shopifyAddressData[$key]) !== strtoupper($value)) {
@@ -543,7 +756,115 @@ class SyncCustomersToShopify extends Command
                 }
             });
         });
+    }
 
-        return $addressData;
+    /**
+     * Go through all customers in the collection, and try to get the value for the given attribute function,
+     * returning the first non-null value retrieved.
+     *
+     * @param Collection<Customer> $customers
+     * @param string $attributeFunction
+     * @return string|null
+     */
+    private function getCustomerValueFor(Collection $customers, string $attributeFunction): ?string
+    {
+        $value = null;
+        $customers->each(function (Customer $customer) use ($attributeFunction, &$value) {
+           if ($value = $customer->$attributeFunction()) {
+               // break out because we found the value
+               return false;
+           }
+        });
+        return $value;
+    }
+
+    /**
+     * Get the E.164 formatted phone number for the given user
+     *
+     * @param User $user
+     * @return string|null
+     */
+    private function getPhoneNumberForUser(User $user): ?string
+    {
+        // get the raw phone number value
+        $phoneNumber = $user->getPhoneNumber();
+
+        if (empty($phoneNumber)) {
+            return null;
+        }
+
+        // get the user's country, so we can supply the country code
+        /** @var Address $address */
+        $address = $this->cleanUpAddresses(
+            collect($this->addressRepository->getUserShippingAddresses($user->getId()))
+        )->first();
+        $countryCode = $this->countryNameToISO3166($address?->getCountry() ?? "Canada");
+
+        $phoneUtil = PhoneNumberUtil::getInstance();
+
+        try {
+            $phoneNumberObject = $phoneUtil->parse($phoneNumber, $countryCode);
+            return $phoneUtil->format($phoneNumberObject, PhoneNumberFormat::E164);
+        } catch (NumberParseException $e) {
+            $this->error(sprintf("Unable to format phone number %s for User ID %s: %s", $phoneNumber, $user->getId(), $e->getMessage()));
+        }
+        return null;
+    }
+
+    /**
+     * Get the E.164 formatted phone number for the collection of customers
+     *
+     * @param Collection<Customer> $customers
+     * @return string|null
+     */
+    private function getPhoneNumberForCustomer(Collection $customers): ?string
+    {
+        // get the raw phone number value
+        $phoneNumber = $this->getCustomerValueFor($customers, "getPhone");
+
+        if (empty($phoneNumber)) {
+            return null;
+        }
+
+        // get the customers' latest address and get the country, so we can supply the country code
+        $addresses = collect();
+        $customers->each(fn(Customer $customer) => $addresses->push(
+            ...$this->addressRepository->getCustomerShippingAddresses($customer->getId())
+        ));
+
+        $address = $this->cleanUpAddresses($addresses)->first();
+        $countryCode = $this->countryNameToISO3166($address["country"] ?? "Canada");
+
+        $phoneUtil = PhoneNumberUtil::getInstance();
+
+        try {
+            $phoneNumberObject = $phoneUtil->parse($phoneNumber, $countryCode);
+            return $phoneUtil->format($phoneNumberObject, PhoneNumberFormat::E164);
+        } catch (NumberParseException $e) {
+            $this->error(sprintf("Unable to format phone number %s for Customer email %s: %s", $phoneNumber, $customers->first()->getEmail(), $e->getMessage()));
+        }
+        return null;
+    }
+
+    /**
+     * Get the ISO 3166 country code for the given country name
+     * @author https://www.php.net/manual/en/locale.getdisplayregion.php#119895
+     *
+     * @param $countryName
+     * @return string|null
+     */
+    function countryNameToISO3166($countryName): ?string
+    {
+        $language = "EN";
+        $countryCode_list = array('AF', 'AX', 'AL', 'DZ', 'AS', 'AD', 'AO', 'AI', 'AQ', 'AG', 'AR', 'AM', 'AW', 'AU', 'AT', 'AZ', 'BS', 'BH', 'BD', 'BB', 'BY', 'BE', 'BZ', 'BJ', 'BM', 'BT', 'BO', 'BQ', 'BA', 'BW', 'BV', 'BR', 'IO', 'BN', 'BG', 'BF', 'BI', 'KH', 'CM', 'CA', 'CV', 'KY', 'CF', 'TD', 'CL', 'CN', 'CX', 'CC', 'CO', 'KM', 'CG', 'CD', 'CK', 'CR', 'CI', 'HR', 'CU', 'CW', 'CY', 'CZ', 'DK', 'DJ', 'DM', 'DO', 'EC', 'EG', 'SV', 'GQ', 'ER', 'EE', 'ET', 'FK', 'FO', 'FJ', 'FI', 'FR', 'GF', 'PF', 'TF', 'GA', 'GM', 'GE', 'DE', 'GH', 'GI', 'GR', 'GL', 'GD', 'GP', 'GU', 'GT', 'GG', 'GN', 'GW', 'GY', 'HT', 'HM', 'VA', 'HN', 'HK', 'HU', 'IS', 'IN', 'ID', 'IR', 'IQ', 'IE', 'IM', 'IL', 'IT', 'JM', 'JP', 'JE', 'JO', 'KZ', 'KE', 'KI', 'KP', 'KR', 'KW', 'KG', 'LA', 'LV', 'LB', 'LS', 'LR', 'LY', 'LI', 'LT', 'LU', 'MO', 'MK', 'MG', 'MW', 'MY', 'MV', 'ML', 'MT', 'MH', 'MQ', 'MR', 'MU', 'YT', 'MX', 'FM', 'MD', 'MC', 'MN', 'ME', 'MS', 'MA', 'MZ', 'MM', 'NA', 'NR', 'NP', 'NL', 'NC', 'NZ', 'NI', 'NE', 'NG', 'NU', 'NF', 'MP', 'NO', 'OM', 'PK', 'PW', 'PS', 'PA', 'PG', 'PY', 'PE', 'PH', 'PN', 'PL', 'PT', 'PR', 'QA', 'RE', 'RO', 'RU', 'RW', 'BL', 'SH', 'KN', 'LC', 'MF', 'PM', 'VC', 'WS', 'SM', 'ST', 'SA', 'SN', 'RS', 'SC', 'SL', 'SG', 'SX', 'SK', 'SI', 'SB', 'SO', 'ZA', 'GS', 'SS', 'ES', 'LK', 'SD', 'SR', 'SJ', 'SZ', 'SE', 'CH', 'SY', 'TW', 'TJ', 'TZ', 'TH', 'TL', 'TG', 'TK', 'TO', 'TT', 'TN', 'TR', 'TM', 'TC', 'TV', 'UG', 'UA', 'AE', 'GB', 'US', 'UM', 'UY', 'UZ', 'VU', 'VE', 'VN', 'VG', 'VI', 'WF', 'EH', 'YE', 'ZM', 'ZW');
+        $ISO3166 = NULL;
+        foreach ($countryCode_list as $countryCode) {
+            $locale_cc = \Locale::getDisplayRegion('-' . $countryCode, $language);
+            if (strcasecmp($countryName, $locale_cc) == 0) {
+                $ISO3166 = $countryCode;
+                break;
+            }
+        }
+        return $ISO3166;
     }
 }

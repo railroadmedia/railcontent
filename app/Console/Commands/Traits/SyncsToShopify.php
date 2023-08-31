@@ -44,7 +44,9 @@ trait SyncsToShopify
             );
         }
 
-        $this->createSyncLog();
+        if (!$simulate) {
+            $this->createSyncLog();
+        }
 
         try {
             $shopifyIds = $this->syncResource($simulate, $fresh);
@@ -53,7 +55,9 @@ trait SyncsToShopify
             return self::FAILURE;
         }
 
-        $this->finishSyncLog($shopifyIds);
+        if (!$simulate) {
+            $this->finishSyncLog($shopifyIds);
+        }
 
         return self::SUCCESS;
     }
@@ -104,11 +108,13 @@ trait SyncsToShopify
      * Get all ecommerce entities of this resource that need to be synced
      *
      * @param bool $fresh
+     * @param RepositoryBase|EntityRepository|null $repository - optional override of the repository to query
      * @return Collection
      */
-    protected function getEcommerceEntities(bool $fresh) : Collection
+    protected function getEcommerceEntities(bool $fresh, RepositoryBase|EntityRepository|null $repository = null) : Collection
     {
-        $qb = $this->getEcommerceEntityRepository()->createQueryBuilder('entity');
+        $entityRepository = $repository ?? $this->getEcommerceEntityRepository();
+        $qb = $entityRepository->createQueryBuilder('entity');
 
         if (!$fresh) {
             $lastSyncAt = $this->getDateTimeOfLastSync();
