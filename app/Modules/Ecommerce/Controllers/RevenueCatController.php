@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use Modules\UserManagementSystem\Events\User\UserCreated;
 use Modules\UserManagementSystem\Models\User;
 
 class RevenueCatController extends Controller
@@ -49,10 +50,53 @@ class RevenueCatController extends Controller
             case 'INITIAL_PURCHASE':
                 // code...
                 echo 'INITIAL_PURCHASE';
-                //                $subscriber = $this->revenueCatService->getSubscriber($data['event']['app_user_id']);
-                // dd($data['event']['aliases']);
-                //
-                // dd($subscriber);
+                $subscriber = $this->revenueCatService->getSubscriber($data['event']['app_user_id']);
+
+                $user = new User;
+
+                $user->email = $data['event']['subscriber_attributes']['email']['value'];
+                $user->setPassword($data['event']['subscriber_attributes']['email']['value']);
+                $user->display_name = $data['event']['subscriber_attributes']['email']['value'];
+
+                $user->save();
+
+                $newUser =
+                    User::where('email', $user->email)
+                        ->first();
+
+                event(new UserCreated($newUser));
+
+                $productId = $data['event']['product_id'];
+
+                $store = (strtolower($data['event']['store']) == 'app_store') ? 'apple_store' : 'google_store';
+
+                $productsMap =
+                    array_merge(
+                        [config('ecommerce.'.$store.'_products_map')[$productId]],
+                        [config('ecommerce.'.$store.'_products_map_trial')[$productId]]
+                    );
+
+                $revenueCatSubscriptions = (json_decode(json_encode($subscriber->subscriptions), true));
+                $currentRevenueCatSubscription = $revenueCatSubscriptions["$productId"];
+                $musoraProducts =
+                    Product::whereIn('sku', $productsMap)
+                        ->get();
+
+                $musoraSubscription = new Subscription;
+                $musoraSubscription->user_id = $newUser->id;
+                $musoraSubscription->is_active = $currentRevenueCatSubscription['expires_date'] > Carbon::now();
+                $musoraSubscription->paid_until = Carbon::parse($currentRevenueCatSubscription['expires_date']);
+                $musoraSubscription->apple_expiration_date =
+                    Carbon::parse($currentRevenueCatSubscription['expires_date']);
+
+                $musoraSubscription->save();
+
+                UserProduct::query()->where('user_id', $user->id)
+                    ->where('product_id', $musoraSubscription->product_id)
+                    ->update([
+                                 'expiration_date' => $musoraSubscription->paid_until->addDays(config('ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only', 5))
+                             ]);
+
                 break;
             case 'NON_RENEWING_PURCHASE':
                 echo 'NON_RENEWING_PURCHASE';
