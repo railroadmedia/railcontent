@@ -356,7 +356,16 @@ class SalesController extends BaseController
     public function alesis(Request $request)
     {
         return view('drumeo.pages.redeem.redeem-page', [
+            'alesis' => true,
             'newAccount' => true,
+            'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
+        ]);
+    }
+    public function alesisExisting(Request $request)
+    {
+        return view('drumeo.pages.redeem.redeem-page', [
+            'alesis' => true,
+            'newAccount' => false,
             'accessCodeArray' =>  $this->accessCodeService->checkAndSplitAccessCode($request->get('code'))
         ]);
     }

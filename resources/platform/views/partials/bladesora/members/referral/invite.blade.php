@@ -22,9 +22,9 @@
 
     $prizeNamesWithModel = [
         'drumeo' => 'Yamaha DTX402K E-Drum Kit',
-        'pianote' => 'Yamaha Digital Piano',
+        'pianote' => 'Yamaha P-125a Digital Piano',
         'singeo' => 'Steinberg studio kit',
-        'guitareo' => 'Yamaha Pacifica electric guitar',
+        'guitareo' => 'Yamaha Pacifica PAC012 Electric Guitar',
     ];
 
     $prizeWithPrice = [
@@ -36,9 +36,9 @@
 
     $prizeDesc = [
         'drumeo' => 'It has over 250 drum sounds and 10 drum kits customizable to your taste, <br class="tw-hidden md:tw-inline lg:tw-hidden" />for ultimate control over your tone and volume.',
-        'pianote' => 'It has a metronome to keep your playing tight. Plus it connects with your headphones <br class="tw-hidden md:tw-inline lg:tw-hidden" />for all those late-night piano sessions.',
+        'pianote' => 'It has a metronome to keep your playing tight. And it connects with your headphones for all those late-night playing sessions.',
         'singeo' => 'You’ll get a microphone, headphones, and an audio interface so you can start to feel more confident as a singer.',
-        'guitareo' => 'It’s sleek. It’s bold. It’s also well known for its excellent tone and playability.',
+        'guitareo' => 'It\'s well-known for its beautiful tone, playability, and metallic-red look — with vintage-style vibratos and 5-way switching of the H-S-S pickup.',
     ];
 
     $titleLineOne = $canRefer ? 'Refer your loved ones.' : 'Thank you for your';

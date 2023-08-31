@@ -34,11 +34,17 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav")
 
-    <div class="shim w-full block h-11 sm:h-9" style="background-color:#010a2b;"></div>
+    <div class="shim w-full block h-11 sm:h-10" style="background-color:#010a2b;"></div>
     <a href="#final" class="edge-pitch block text-center w-full whitespace-nowrap z-20 py-2 sm:py-1 fixed mx-auto bg-black text-white anchor-slide">
         <div class="container mx-auto">
             <div class="text-center sm:text-left inline-block align-middle hover:opacity-90 transition-opacity duration-300">
-                <h3 class="inline-block align-middle mr-2 leading-none font-bebas text-coaches">100 SONGS</h3>
+                <img
+                    class="h-5 sm:h-8 mr-1 sm:mr-2 inline-block align-middle transition-opacity opacity-0"
+                    src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
+                    alt="logo"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                />
                 <p class="inline-block align-middle mx-auto text-xs leading-tight">
                     Enter your email to get 100 <br>
                     FREE note-for-note sheet music</p>
@@ -60,11 +66,17 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-1/2 {{--lg:w-5/12--}} mt-5 sm:mt-0 {{--lg:mt-14--}}">
-                    <h1 class="leading-none uppercase font-bebas"><span class="text-coaches">100 Drumming Anthems</span><br> Every. Single. Note.</h1>
-                    <h6 class="mt-2 md:mt-4 mb-4 md:mb-7 lg:mb-8 leading-tight">
-                        Enter your email to get note-for-note <br>
-                        sheet music + handy playback tools for <br>
-                        <s class="opacity-50">40</s> <strong class="text-coaches">100</strong> of drumming’s biggest songs FREE.
+                    <img
+                        class="h-12 sm:h-16 lg:h-24 transition-opacity opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
+                        alt="logo"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                    />
+                    <h6 class="mt-2 md:mt-3 mb-4 md:mb-6 leading-normal">
+                        Enter your email to get note-for-note sheet<br>
+                         music + handy playback tools for <s class="opacity-50">40</s> <strong class="text-coaches">100</strong><br>
+                         of drumming’s biggest songs FREE.
                     </h6>
                     <div class="mx-auto sm:mx-0 text-center" style="max-width:470px">
                         @include("drumeo.lead-gen.partials.sign-up-form", [
@@ -189,12 +201,18 @@
     ])
 
     <div id="final" class="anchor"></div>
-    <section class="text-center py-14 md:py-24 lg:py-32 text-white" style="background: linear-gradient(45deg, #02163D, #00BEF3);">
+    <section class="text-center py-14 md:py-24 lg:py-28 text-white" style="background: linear-gradient(45deg, #02163D, #00BEF3);">
         <div class="container mx-auto">
             <div class="w-full px-2 md:px-3 text-center">
-                <h1 class="leading-none uppercase font-bebas"><span class="text-coaches">100 Drumming Anthems</span><br> Every. Single. Note.</h1>
-                <p class="text-coaches my-2 sm:my-3 font-black">EXPANDED EDITION</p>
-                <h5 class="mb-6 lg:mb-9 leading-normal">
+                <img
+                    class="h-12 sm:h-16 lg:h-28 transition-opacity opacity-0"
+                    src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
+                    alt="logo"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                />
+                <p class="text-coaches my-3 sm:my-4 font-black">EXPANDED EDITION</p>
+                <h5 class="mb-6 sm:mb-8 leading-normal">
                     <strong>For a LIMITED TIME, you’ll get 100 Drumeo Songs totally FREE.</strong><br>
                     <em>Enter your email to grab note-for-note sheet music & handy play-along tools.</em>
                 </h5>
