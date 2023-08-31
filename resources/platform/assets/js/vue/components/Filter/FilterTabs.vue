@@ -1,9 +1,9 @@
 <template>
-    <div class="tw-flex tw-flex-wrap tw-gap-[10px] tw-text-sm tw-mb-5">
+    <div class="tw-flex tw-flex-wrap tw-gap-[4px] md:tw-gap-[10px] tw-text-sm">
         <button
             v-for="option in tabOptions"
             @click="onTabClick(option.key)"
-            class="tw-flex tw-items-center tw-justify-center tw-text-center tw-h-[50px] tw-w-[108px] tw-uppercase tw-text-[20px] tw-font-bebas-neue tw-rounded-[55px] tw-border hover:tw-bg-[#223F57] hover:tw-text-white tw-font-semibold dark:tw-border-[#445F74]"
+            class="tw-flex tw-items-center tw-justify-center tw-text-center tw-h-[40px] md:tw-h-[50px] tw-w-[76px] md:tw-w-[108px] tw-uppercase tw-text-[14px] md:tw-text-[20px] tw-font-bebas-neue tw-rounded-[55px] tw-border hover:tw-bg-[#223F57] hover:tw-text-white tw-font-semibold dark:tw-border-[#445F74]"
             :class="isActive(option.key) ? `tw-bg-[#28282D] dark:tw-bg-[#445F74] tw-text-white` : `tw-bg-white dark:tw-bg-[#000C17] tw-border-[#CBCBCD] dark:tw-text-white`"
         >
            {{ option.name }}
