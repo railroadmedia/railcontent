@@ -171,6 +171,10 @@
              category: 'Progress',
              items: [
                  {
+                     name: 'All',
+                     value: 'all',
+                 },
+                 {
                      name: 'In Progress',
                      value: 'in_progress',
                  },
@@ -183,7 +187,9 @@
      ];
 
      const filters = ref({});
-     const selectedOption = ref({});
+     const selectedOption = ref({
+         Progress: {name: 'All', value: 'all'},
+     });
 
      const clickColumnItem = (category, item) => {
          if (filters.value[category]){
