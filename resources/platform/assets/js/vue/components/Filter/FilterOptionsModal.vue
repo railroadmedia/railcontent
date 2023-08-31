@@ -11,10 +11,10 @@
                 <filter-options v-if="!isCollapsedMobile"></filter-options>
             </div>
             <div class="tw-sticky tw-flex tw-px-[12px] tw-bottom-0 tw-h-[107px] tw-bg-[#081825] tw-border-y tw-border-[#081825] tw-text-white" style="z-index: 2000;">
-                <button class="tw-font-bebas-neue">
+                <button class="tw-btn-secondary">
                     Clear All
                 </button>
-                <button>
+                <button class="tw-btn-primary">
                     Show Resuls
                 </button>
             </div>
