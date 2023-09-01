@@ -2,12 +2,15 @@
     <div class="lg:tw-flex tw-flex-wrap lg:tw-gap-14 tw-text-[#000C17] dark:tw-text-white">
         <filter-multi-selection-item v-for="column in columns" :column="column" @click-column-item="clickColumnItem" :filters="filters">
         </filter-multi-selection-item>
+        <filter-single-selection-item v-for="column in singleColumns" :column="column" @single-select="singleSelect" :selected-value="selectedOption[column.category] ? selectedOption[column.category].value : ''">
+        </filter-single-selection-item>
     </div>
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
     import FilterMultiSelectionItem from './FilterMultiSelectionItem';
+    import FilterSingleSelectionItem from './FilterSingleSelectionItem';
 
     //Mock data
      const columns = [
@@ -163,7 +166,28 @@
          },
      ];
 
+     const singleColumns = [
+         {
+             category: 'Progress',
+             items: [
+                 {
+                     name: 'All',
+                     value: 'all',
+                 },
+                 {
+                     name: 'In Progress',
+                     value: 'in_progress',
+                 },
+                 {
+                     name: 'Complete',
+                     value: 'complete',
+                 },
+             ],
+         },
+     ];
+
      const filters = ref({});
+     const selectedOption = ref({});
 
      const clickColumnItem = (category, item) => {
          if (filters.value[category]){
@@ -186,6 +210,18 @@
              filters.value[category] = [item];
          }
      };
+
+     const singleSelect = (category, item) => {
+         selectedOption.value[category] = item;
+     }
+
+    onMounted(()=>{
+        if(Object.keys(selectedOption.value).length === 0 && singleColumns.length > 0) {
+            selectedOption.value = {
+                [singleColumns[0].category]: singleColumns[0].items[0],
+            }
+        }
+    })
 </script>
 
 <style scoped>
