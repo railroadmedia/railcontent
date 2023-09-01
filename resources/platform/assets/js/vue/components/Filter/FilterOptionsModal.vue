@@ -8,7 +8,7 @@
                 </button>
             </div>
             <div class="tw-h-[calc(100%-200px)] tw-w-full tw-flex tw-flex-col tw-overflow-scroll">
-                <filter-options v-if="!isCollapsedMobile"></filter-options>
+                <filter-options></filter-options>
             </div>
             <div class="tw-sticky tw-flex tw-items-center tw-justify-center tw-gap-[10px] tw-px-[12px] tw-bottom-0 tw-h-[107px] tw-bg-[#081825] tw-border-y tw-border-[#081825] tw-text-white" style="z-index: 2000;">
                 <button class="tw-btn-secondary tw-bg-black tw-h-[50px] tw-max-w-[164px]">
