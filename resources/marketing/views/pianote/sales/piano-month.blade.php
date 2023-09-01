@@ -147,10 +147,9 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
-    <a href="/shop/30-day-blues-piano" class="flex text-white items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(to bottom, #d2012c, #a82591);">
-        {{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
-        <h6 class="leading-tight inline-block font-bebas mx-0 pr-3">national piano month</h6>
-        <p class="inline-block mx-0 leading-tight"><strong>Save 20%</strong> and 8 free bonuses</p>
+    <a href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&redirect=/order&locked=true&promo-code=special" class="flex text-white items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100]" style="background: linear-gradient(to bottom, #d2012c, #a82591);">
+        <img class="h-6 sm:h-7 mr-2 pr-2 border-r border-white" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/national-piano-month-logo.svg" alt="30 day drummer logo" />
+        <p class="inline-block mx-0 leading-tight"><strong>Save 20%</strong> and get 8 free bonuses.</p>
     </a>
 
     @php
@@ -250,13 +249,16 @@
     @endif
     <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white" style="background: linear-gradient(to bottom, #d2012c, #a82591);">
         <div class="container max-w-5xl mx-auto">
-            <img class="my-5 h-40 inline sm:hidden"
-                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/pianote-trial-sept-promo-collage-m.png"
+            <img class="mb-5 h-48 inline sm:hidden"
+                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/bundle-collage-m.png"
                 alt="learn playing image"
                 fetchpriority="high"
             >
             <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
-                <p class="leading-normal max-w-xl pr-5 lg:pr-8 mx-0">September is National Piano Month. So we're making it easier than ever to learn this beautiful instrument.
+                <p class="leading-normal max-w-xl pr-5 lg:pr-8 mx-0">
+                    <img class="h-16" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/national-piano-month-logo.svg">
+                    <br><br>
+                    September is National Piano Month. So we're making it easier than ever to learn this beautiful instrument.
                     <br><br>
                     Join Pianote this month and you’ll save 20% on your first year PLUS get some incredible bonuses to help you start and stay motivated.
                     <br><br>
@@ -268,12 +270,12 @@
                     <br><br>
                     And we’ll cover the shipping, no matter where you live.
                     <br><br>
-                    <a class="join smaller musora w-1/2 anchor-slide" href="#customize-anchor">GET Started &raquo;</a>
+                    <a class="join smaller musora w-1/2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&redirect=/order&locked=true&promo-code=special">GET Started &raquo;</a>
                 </p>
                 <img class="h-80 lg:h-96 hidden sm:inline transition-opacity opacity-0"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/pianote-trial-sept-promo-collage.png"
+                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/bundle-collage.png"
                     alt="learn playing image"
                 >
             </div>
@@ -647,11 +649,11 @@
             <div class="flex flex-wrap sm:flex-nowrap items-center">
                 <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0">
                     <picture>
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-collage.png">
+                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/bundle-collage.png">
                         <img class="h-72 sm:h-auto max-w-full sm:max-w-xl lg:max-w-full transition-opacity opacity-0"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
-                            src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-collage.png"
+                            src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/bundle-collage.png"
                             alt="{{$theme}} collage image"
                         >
                     </picture>
@@ -672,7 +674,8 @@
                         <h3><s class="opacity-50">$240</s> <strong>$200</strong> (Save 20%)</h3>
                         <p class="text-sm mt-1">For your first year, then $240/yr.</p>
 
-                        <a class=" w-full sm:w-82 join smaller mt-4 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif" href="TODO">GET STARTED <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
+                        <a class=" w-full sm:w-82 join smaller mt-4 @if($theme == 'musora') musora-gold @else bg-{{$theme}} @endif"
+                            href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[music-theory-posters]=1&products[piano-chords-and-scales-guide]=1&products[pianote-practice-planner]=1&redirect=/order&locked=true&promo-code=special">GET STARTED <i class="fas fa-arrow-right" style="line-height: 0;"></i></a>
                     </div>
                 </div>
             </div>
