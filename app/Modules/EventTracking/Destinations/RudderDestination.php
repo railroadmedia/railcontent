@@ -4,6 +4,7 @@ namespace App\Modules\EventTracking\Destinations;
 
 use Illuminate\Support\Facades\Log;
 use Rudder\Rudder;
+use Rudder\RudderException;
 
 class RudderDestination
 {
@@ -44,5 +45,15 @@ class RudderDestination
             "event" => $name,
             "properties" => $properties
         ));
+    }
+
+    /**
+     * @throws RudderException
+     */
+    function set_user_properties($user_id, $array){
+        Rudder::identify([
+            'userId' => $user_id,
+            'traits' => $array
+        ]);
     }
 }
