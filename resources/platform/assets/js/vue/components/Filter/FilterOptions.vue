@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue';
+import {onMounted, ref} from 'vue';
     import FilterMultiSelectionItem from './FilterMultiSelectionItem';
     import FilterSingleSelectionItem from './FilterSingleSelectionItem';
 
@@ -187,9 +187,7 @@
      ];
 
      const filters = ref({});
-     const selectedOption = ref({
-         Progress: {name: 'All', value: 'all'},
-     });
+     const selectedOption = ref({});
 
      const clickColumnItem = (category, item) => {
          if (filters.value[category]){
@@ -216,6 +214,14 @@
      const singleSelect = (category, item) => {
          selectedOption.value[category] = item;
      }
+
+    onMounted(()=>{
+        if(Object.keys(selectedOption.value).length === 0 && singleColumns.length > 0) {
+            selectedOption.value = {
+                [singleColumns[0].category]: singleColumns[0].items[0],
+            }
+        }
+    })
 </script>
 
 <style scoped>
