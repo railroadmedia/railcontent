@@ -6,11 +6,11 @@
      x-on:click.away="dropdown_{{ $id }} = false"
 >
     {{-- DROPDOWN TRIGGER --}}
-    <div class="flex py-2 mr-4 lg:mr-8 items-center text-white hover:text-{{ $brand }} tracking-widest text-base leading-none transition cursor-pointer"
+    <div class="flex mt-1 mr-4 lg:mr-8 items-center tracking-widest text-base leading-none transition cursor-pointer"
           dusk="parent-button-{{ strtolower(str_replace(' ', '-', $page)) }}"
-          x-on:click.prevent="dropdown_{{ $id }} = !dropdown_{{ $id }}"  
+          x-on:click.prevent="dropdown_{{ $id }} = !dropdown_{{ $id }}"
           x-on:keyup.enter="dropdown_{{ $id }} = !dropdown_{{ $id }}"
-          tabindex="0"   
+          tabindex="0"
     >
         {{ $page }}
         <i class="no-events fa-solid fa-caret-down ml-1 mb-1"></i>
@@ -27,7 +27,7 @@
                 @if(!empty($info['iconClass']))
                     <i class="no-events {{ $info['iconClass'] }} mr-1"></i>
                 @endif
-                {{ $page }}
+                <div class="pt-1">{{ $page }}</div>
             </a>
         @endforeach
     </div>
