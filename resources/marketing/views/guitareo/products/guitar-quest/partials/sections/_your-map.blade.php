@@ -1,5 +1,5 @@
 {{-- Guitar Quest: Your Map --}}
-<section id="your_map" class="py-24 relative md:py-28" style="background-image: url('https://musora.imgix.net/https%3A%2F%2Fd122ay5chh2hr5.cloudfront.net%2Fguitarquest%2Fassets%2Fstar-pattern.svg?auto=format&ixlib=php-1.2.1&w=1500&s=d8500ab0042ccc07f20b2465f7a39549'); background-color: #000718;">
+<section id="your_map" class="py-24 relative md:py-28" style="background-image: url('https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://d122ay5chh2hr5.cloudfront.net/guitarquest/assets/star-pattern.svg'); background-color: #000718;">
     <div class="max-w-screen-xl m-auto px-6 flex text-center mb-6">
         <div class="w-full m-auto text-white sm:w-3/4 lg:w-1/2">
             <h2 class="uppercase font-bison-bold text-5xl md:text-6xl">
