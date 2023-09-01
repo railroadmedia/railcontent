@@ -3,11 +3,13 @@
 namespace App\Console\Commands;
 
 use App\Console\Commands\Traits\SyncsToShopify;
+use Carbon\Carbon;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Exception\ORMException;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 use libphonenumber\NumberParseException;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
@@ -19,10 +21,10 @@ use Railroad\Ecommerce\Repositories\AddressRepository;
 use Railroad\Ecommerce\Repositories\CustomerRepository;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
 use Railroad\Ecommerce\Repositories\UserRepository;
+use Signifly\Shopify\Exceptions\ValidationException;
 use Signifly\Shopify\REST\Resources\ApiResource;
 use Signifly\Shopify\REST\Resources\CustomerResource;
 use Signifly\Shopify\Shopify;
-use Symfony\Component\Console\Helper\ProgressBar;
 
 class SyncCustomersToShopify extends Command
 {
@@ -33,7 +35,10 @@ class SyncCustomersToShopify extends Command
      *
      * @var string
      */
-    protected $signature = 'shopify:sync-customers {--fresh} {--execute}';
+    protected $signature = 'shopify:sync-customers
+                            {--limit= : (Optional) The number of users and customers to limit this run to. Applies to each.}
+                            {--fresh : Sync all users and customers, not just those that need it}
+                            {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
 
     /**
      * The console command description.
@@ -48,12 +53,19 @@ class SyncCustomersToShopify extends Command
     protected UserRepository $userRepository;
     protected EcommerceEntityManager $entityManager;
 
+    // the date and time that the last sync for this entity was performed
+    protected Carbon $lastSyncAt;
+
+    // customer IDs that have been synced with Shopify as part of the process to sync Users
     private Collection $customerIdsSyncedByUsers;
 
     // running collection of the Shopify IDs returned in this run, so we can record it
     protected Collection $shopifyIds;
+
+    // header for the results table display
+    protected array $tableHeader = [];
     // rows for displaying the results in a table
-    protected array $tableRows;
+    protected array $tableRows = [];
 
     /**
      * Execute the console command.
@@ -76,28 +88,48 @@ class SyncCustomersToShopify extends Command
         $this->userRepository = $userRepository;
         $this->addressRepository = $addressRepository;
         $this->entityManager = $entityManager;
-
         $this->customerIdsSyncedByUsers = collect();
 
-        $this->shopifyIds = collect();
-        $this->tableRows = [];
+        // record this as a class variable so that it doesn't get updated with each loop of the users
+        $this->lastSyncAt = $this->getDateTimeOfLastSync();
 
-        return $this->sync();
+        // DEV NOTE: we need to sync the customers by getting all of them from the db into one collection,
+        // so we can group them by the email address and make a singular entity for each customer in the group.
+        // Make sure to get the whole collection before doing any of the users, so that the sync logs created by the
+        // users don't affect the query
+        $customers = $this->getEcommerceEntities($this->getIsFresh());
+
+        // DEV NOTE: we do not use the SyncsToShopify sync() here. We need to run through all applicable Users and then
+        // all applicable Customers, rather than just one entity. That, combined with the huge number of Users in our
+        // database, leads to a unique situation for syncing up to Shopify Customers.
+        $this->notifyStartupStatus();
+        $batchSize = 50;
+        $this->loopUsersSync($batchSize);
+        $this->syncCustomers($customers, $batchSize);
+
+        return self::SUCCESS;
     }
 
-    protected function getTestUsersEntities(bool $fresh) : Collection
+    /**
+     * Get all the users that need to be synced, and perform the sync action on each one
+     *
+     * @param int $batchSize
+     * @return void
+     */
+    private function loopUsersSync(int $batchSize): void
     {
+        $simulate = $this->getIsSimulation();
+        $fresh = $this->getIsFresh();
+        $limit = $this->getLimitOption();
+        $this->tableHeader = ["User or Customer ID", "Class", "Action", "Shopify Customer ID"];
+        $this->tableRows = [];
 
-        //TODO Need to limit these results because it's crashing, due to the 424,730 users
-        $entityRepository = $repository ?? $this->getEcommerceEntityRepository();
-        $qb = $entityRepository->createQueryBuilder('entity');
-
-        if (!$fresh) {
-            $lastSyncAt = $this->getDateTimeOfLastSync();
+        // get the users, using pagination to keep from blowing up the memory usage
+        $qb = $this->userRepository->createQueryBuilder('entity');
+        if (!$this->getIsFresh()) {;
             $this->info(
-                sprintf("Retrieving all %s that have not been synced, or have been updated since %s ...",
-                    Str::plural($this->getSyncResource()),
-                    $lastSyncAt->toString())
+                sprintf("Retrieving all users that have not been synced, or have been updated since %s ...",
+                    $this->lastSyncAt->toString())
             );
             $qb->where(
                 $qb->expr()
@@ -106,250 +138,263 @@ class SyncCustomersToShopify extends Command
                 ->orWhere(
                     $qb->expr()
                         ->gt("entity.updatedAt", ":lastSyncAt")
-                )->setParameter("lastSyncAt", $lastSyncAt)
-            ;
+                )->setParameter("lastSyncAt", $this->lastSyncAt);
         }
 
-        $qb->setMaxResults(10);
-
-        $q = $qb->getQuery();
-
-        return collect($q->getResult());
-
-        /*
-         TODO: delete this!
-          this is just for a simple test case
-          people who bought product 129 - Drumeo for Teachers - 1 year, 163 - Bass Drum Technique
-            order id: 31490,59526,59715,61069,68775,60643,60895,61019,71344
-             -> this has no customers, only users
-             user id: (300577, 303623, 303835, 216876, 304549, 183029, 208824, 270181, 313935)
-         */
-        $qb = $this->getEcommerceEntityRepository()->createQueryBuilder('entity');
-
-        if (!$fresh) {
-            $lastSyncAt = $this->getDateTimeOfLastSync();
-            $this->info(
-                sprintf("Retrieving all users that have not been synced, or have been updated since %s, and are in our test pool of IDs ...",
-                    $lastSyncAt->toString())
-            );
-            // $qb->where(
-            //     $qb->expr()
-            //         ->isNull("entity.shopifyId")
-            // )
-            //     ->orWhere(
-            //         $qb->expr()
-            //             ->gt("entity.updatedAt", ":lastSyncAt")
-            //     )->setParameter("lastSyncAt", $lastSyncAt)
-            //  ->andWhere(
-            //      $qb->expr()
-            //          ->in("entity.id", ":ids")
-            //  )->setParameter("ids", [300577, 303623, 303835, 216876, 304549, 183029, 208824, 270181, 313935])
-            $qb->where(
-                $qb->expr()
-                    ->in("entity.id", ":ids")
-            )->setParameter("ids", [300577, 303623, 303835, 216876, 304549, 183029, 208824, 270181, 313935])
-            ;
+        if ($limit) {
+            $qb->setMaxResults($limit);
         }
-
         $q = $qb->getQuery();
+        $paginator = new Paginator($q);
 
-        return collect($q->getResult());
-    }
+        $totalCount = count($paginator);
 
+        $infoString = "Found {$totalCount} users to be synced.";
+        if ($limit) {
+            $infoString .= " Limiting to {$limit}.";
+        }
+        $infoString .= " Performing in batches of {$batchSize}.";
+        $this->info($infoString);
 
-    /**
-     * @inheritDoc
-     */
-    protected function syncResource(bool $simulate, bool $fresh): Collection
-    {
-        // STEP 1: get all the Users that we're going to sync
-        //TODO after test scenario, replace with
-        //$users = $this->getEcommerceEntities($fresh);
-        // TODO probably going to need to make a local version of getEcommerceEntities for users, so we can chunk it
-        $users = $this->getTestUsersEntities($fresh);
-        // TODO probably going to need to make a local version of getEcommerceEntities for customers, so we can chunk it
-        $customers = $this->getEcommerceEntities($fresh, $this->customerRepository);
+        $batchRun = 0;
+        $totalCountForRun = is_null($limit) ? $totalCount : min($totalCount, $limit);
+        $totalBatchesToRun = intval(ceil($totalCountForRun / $batchSize));
+        $bar = $this->output->createProgressBar($batchSize);
 
-        $this->info("Found {$users->count()} users and {$customers->count()} customers to be synced");
+        foreach ($paginator as $index => $user) {
 
-        $bar = $this->output->createProgressBar($users->count() + $customers->count());
-        $bar->start();
-
-        // STEP 2: sync Users
-        $this->syncUsers($users, $customers, $fresh, $bar, $simulate);
-
-        // STEP 3: sync Customers who were not done as part of the Users
-        $this->syncCustomers($customers, $fresh, $bar, $simulate);
-
-        $bar->finish();
-        $this->newLine();
-
-        $this->table(["User or Customer ID", "Class", "Action", "Shopify Customer ID"], $this->tableRows);
-        return $this->shopifyIds;
-    }
-
-    /**
-     * Sync the users up to Shopify
-     *
-     * @param Collection $users - users to sync up
-     * @param Collection $customers - our customers that we'll sync later
-     * @param bool $fresh
-     * @param ProgressBar $bar
-     * @param bool $simulate
-     * @return void
-     */
-    private function syncUsers(Collection $users, Collection $customers, bool $fresh, ProgressBar $bar, bool $simulate): void
-    {
-        $simulatedShopifyId = 0;
-        $users->each(function (User $user) use (&$customers, $fresh, $bar, $simulate, &$simulatedShopifyId) {
-            // STEP 1: for each User, find any of our Customers with the same email address, so we can use the combined data
-            $userCustomers = $this->getCustomersForUser($user);
-            if ($userCustomers->isNotEmpty()) {
-                // then remove them from the customers collection, so we don't try to add them again later
-
-                // DEV NOTE: we can't just `forget` because the entities don't expose their data,
-                // so we must pluck out the IDs and then `reject`
-                $userCustomerIds = $userCustomers->map(fn (Customer $customer) => $customer->getId());
-                $customers = $customers->reject(fn (Customer $customer) => $userCustomerIds->contains($customer->getId()));
+            // starting the batch
+            if ($index % $batchSize === 0) {
+                // start the sync log and prep the progress bar and table
+                ++$batchRun;
+                $this->newLine();
+                $this->info(sprintf("Running Users batch %s of %s", $batchRun, $totalBatchesToRun));
+                $this->shopifyIds = collect();
+                $this->createSyncLogIfExecuting();
+                // if this is the last run of the batches, set the progress bar's size
+                if ($batchRun === $totalBatchesToRun)
+                {
+                    $bar = $this->output->createProgressBar($totalCountForRun % $batchSize);
+                }
+                $bar->start();
             }
 
-            // STEP 2: determine if updating or creating
-            // ensuring to check for any of the user's customer entities that may have already been synced
-            $alreadySyncedUserCustomers = $userCustomers->filter(fn (Customer $customer) => !is_null($customer->getShopifyId()));
-            $isCreating = $fresh || (is_null($user->getShopifyId()) && $alreadySyncedUserCustomers->isEmpty());
+            $this->syncUser($user, $fresh, $simulate, $index+1);
+            $bar->advance();
 
-            // STEP 3: build up the data structure
-            $postData = $this->createCustomerDataForUser($user, $isCreating);
+            // batch has ended
+            if (($index % $batchSize === $batchSize-1) || $index+1 === $totalCountForRun) {
+                // print progress bar and table
+                $bar->finish();
+                $this->newLine();
+                $this->table($this->tableHeader, $this->tableRows);
+                // finish the sync log
+                $this->finishSyncLogIfExecuting($this->shopifyIds);
+                // and clear the table rows for the next run
+                $this->tableRows = [];
+            }
+        }
+    }
 
-            // STEP 4: send the data to Shopify
-            if (!$simulate) {
+    /**
+     * Sync the user up to Shopify
+     *
+     * @param User $user
+     * @param bool $fresh
+     * @param bool $simulate
+     * @param int|null $simulatedShopifyId
+     * @return void
+     */
+    private function syncUser(User $user, bool $fresh, bool $simulate, ?int $simulatedShopifyId): void
+    {
+        // STEP 1: find any of our Customers with the same email address, so we can use the combined data
+        $userCustomers = $this->getCustomersForUser($user);
+        if ($userCustomers->isNotEmpty()) {
+            // then add them to the customerIdsSyncedByUsers collection, so we don't try to add them again later
+            $this->customerIdsSyncedByUsers->push(...$userCustomers->map(fn (Customer $customer) => $customer->getId()));
+        }
+
+        // STEP 2: determine if updating or creating
+        // ensuring to check for any of the user's customer entities that may have already been synced
+        $alreadySyncedUserCustomers = $userCustomers->filter(fn (Customer $customer) => !is_null($customer->getShopifyId()));
+        $isCreating = $fresh || (is_null($user->getShopifyId()) && $alreadySyncedUserCustomers->isEmpty());
+
+        // STEP 3: build up the data structure
+        $postData = $this->createCustomerDataForUser($user, $isCreating);
+
+        // STEP 4: send the data to Shopify
+        if (!$simulate) {
+            try {
                 if ($isCreating) {
                     $customerResource = $this->shopify->createCustomer($postData);
                 } else {
                     $existingCustomerShopifyId = $user->getShopifyId() ?? $alreadySyncedUserCustomers->first()->getShopifyId();
                     $customerResource = $this->shopify->updateCustomer($existingCustomerShopifyId, $postData);
                 }
-
-                $shopifyCustomerId = $customerResource->id;
-                $this->shopifyIds->push($shopifyCustomerId);
-
-                try {
-                    // record the shopify ID on the User ...
-                    if ($user->getShopifyId() !== $shopifyCustomerId) {
-                        $user->setShopifyId($shopifyCustomerId);
-                        $this->entityManager->persist($user);
-                        $this->entityManager->flush();
-                    }
-                    // ... and any of their related Customers
-                    $userCustomers->each(function (Customer $customer) use ($shopifyCustomerId) {
-                        if ($customer->getShopifyId() !== $shopifyCustomerId) {
-                            $customer->setShopifyId($shopifyCustomerId);
-                            $this->entityManager->persist($customer);
-                            $this->entityManager->flush();
-                        }
-                    });
-
-                    // STEP 5: build up the data structure for the User's (and its Customers') Addresses
-                    $addressesData = $isCreating ? $this->createAddressesDataForUser($user, $userCustomers)
-                        : $this->updateAddressesDataForUser($user, $userCustomers);
-
-                    // STEP 6: send it to Shopify, if there are any
-                    $this->sendAddressDataToShopify($addressesData, $shopifyCustomerId);
-
-                } catch (ORMException $e) {
-                    $this->error(sprintf("Failed to save shopify_id for user or customer with email address %s: %s",
-                        $user->getEmail(), $e->getMessage()));
-                }
-            } else {
-                // simulating
-                $shopifyCustomerId = $user->getShopifyId() ?? ++$simulatedShopifyId;
+            } catch (ValidationException $exception) {
+                $this->error(sprintf("Validation failed when sending customer data to Shopify: %s",
+                    $exception->getMessage()));
+                $this->error(sprintf("Please investigate for user or customers with email address %s. Attempted customer data: %s",
+                    $user->getEmail(), json_encode($postData)));
             }
 
-            $this->tableRows[] = [$user->getId(), "User", $isCreating ? "Created" : "Updated", $shopifyCustomerId];
-            $userCustomers->each(function(Customer $customer) use ($isCreating, $shopifyCustomerId) {
-                $this->tableRows[] = [$customer->getId(), "Customer", $isCreating ? "Created" : "Updated", $shopifyCustomerId];
-            });
-            $bar->advance($userCustomers->count() + 1);
-        })->chunk(100);
-    }
+            $shopifyCustomerId = $customerResource->id;
+            $this->shopifyIds->push($shopifyCustomerId);
 
+            try {
+                // record the shopify ID on the User ...
+                if ($user->getShopifyId() !== $shopifyCustomerId) {
+                    $user->setShopifyId($shopifyCustomerId);
+                    $this->entityManager->persist($user);
+                    $this->entityManager->flush();
+                }
+                // ... and any of their related Customers
+                $userCustomers->each(function (Customer $customer) use ($shopifyCustomerId) {
+                    if ($customer->getShopifyId() !== $shopifyCustomerId) {
+                        $customer->setShopifyId($shopifyCustomerId);
+                        $this->entityManager->persist($customer);
+                        $this->entityManager->flush();
+                    }
+                });
+
+                // STEP 5: build up the data structure for the User's (and its Customers') Addresses
+                $addressesData = $isCreating ? $this->createAddressesDataForUser($user, $userCustomers)
+                    : $this->updateAddressesDataForUser($user, $userCustomers);
+
+                // STEP 6: send it to Shopify, if there are any
+                $this->sendAddressDataToShopify($addressesData, $shopifyCustomerId);
+
+            } catch (ORMException $e) {
+                $this->error(sprintf("Failed to save shopify_id for user or customer with email address %s: %s",
+                    $user->getEmail(), $e->getMessage()));
+            }
+        } else {
+            // simulating
+            $shopifyCustomerId = $user->getShopifyId() ?? $simulatedShopifyId;
+        }
+
+        $this->tableRows[] = [$user->getId(), "User", $isCreating ? "Created" : "Updated", $shopifyCustomerId];
+        $userCustomers->each(function(Customer $customer) use ($isCreating, $shopifyCustomerId) {
+            $this->tableRows[] = [$customer->getId(), "Customer", $isCreating ? "Created" : "Updated", $shopifyCustomerId];
+        });
+    }
 
     /**
      * Sync the customers up to Shopify
      *
      * @param Collection $customers
-     * @param bool $fresh
-     * @param ProgressBar $bar
-     * @param bool $simulate
+     * @param int $batchSize
      * @return void
      */
-    private function syncCustomers(Collection $customers, bool $fresh, ProgressBar $bar, bool $simulate): void
+    private function syncCustomers(Collection $customers, int $batchSize): void
     {
-        $simulatedShopifyId = 0;
-        if ($simulate && count($this->tableRows)) {
-            $lastRow = end($this->tableRows);
-            $simulatedShopifyId = end($lastRow) + 1;
-        }
+        $this->tableHeader = ["Customer ID", "Action", "Shopify Customer ID"];
+        $this->tableRows = [];
+
+        $totalCount = $customers->count();
+        $limit = $this->getLimitOption();
+
         // STEP 1: group the customers together by email address, so we don't make duplicates in Shopify
         $customers = $customers->groupBy(fn (Customer $customer) => $customer->getEmail());
 
-        $customers->each(function (Collection $customersCollection, string $email) use ($fresh, $bar, $simulate, &$simulatedShopifyId) {
+        // apply the limit outside the query so that we don't miss out on grouping by email
+        $customers = $customers->take($limit);
 
-            // STEP 2: determine if updating or creating
-            $alreadySynced = $customersCollection->filter(fn (Customer $customer) => !is_null($customer->getShopifyId()));
+        // chunk the customers, so we can make tables and sync logs for each chunk, like we did for the batched users
+        $chunkedCustomers = $customers->chunk($batchSize);
 
-            // sort the customers collection so that we have the newest one first (so we can work our way back when trying to find data)
-            $customersCollection = $customersCollection->sort(function (Customer $customer1, Customer $customer2) {
-                return $customer1->getUpdatedAt() < $customer2->getUpdatedAt();
-            });
+        $totalCountForRun = is_null($limit) ? $totalCount : min($totalCount, $limit);
+        $totalBatchesToRun = intval(ceil($totalCountForRun / $batchSize));
+        $bar = $this->output->createProgressBar($batchSize);
 
-            $isCreating = $fresh || $alreadySynced->isEmpty();
+        $chunkedCustomers->each(function(Collection $groupedCustomers, int $chunkIndex) use ($bar, $batchSize, $totalBatchesToRun, $totalCountForRun) {
+            $this->newLine();
+            $this->info(sprintf("Running Customers batch %s of %s", $chunkIndex+1, $totalBatchesToRun));
+            $this->shopifyIds = collect();
+            $this->createSyncLogIfExecuting();
+            // if this is the last chunk, set the progress bar's size
+            if ($chunkIndex+1 === $totalBatchesToRun)
+            {
+                $bar = $this->output->createProgressBar($groupedCustomers->count() % $batchSize);
+            }
+            $bar->start();
 
-            // STEP 3: build up the data structure
-            // DEV NOTE: we need the same data regardless of creating or updating
-            $postData = $this->createCustomerDataForCustomers($customersCollection, $email);
+            $simulatedShopifyId = $batchSize * $chunkIndex;
+            $groupedCustomers->each(function(Collection $customersCollection, string $email) use (&$simulatedShopifyId, $batchSize, $chunkIndex, $bar) {
 
-            // STEP 4: send the data to Shopify
-            if (!$simulate) {
+                    // STEP 2: determine if updating or creating
+                    $alreadySynced = $customersCollection->filter(fn (Customer $customer) => !is_null($customer->getShopifyId()));
 
-                if ($isCreating) {
-                    $customerResource = $this->shopify->createCustomer($postData);
-                } else {
-                    $existingCustomerShopifyId = $this->getCustomerValueFor($customersCollection, "getShopifyId");
-                    $customerResource = $this->shopify->updateCustomer($existingCustomerShopifyId, $postData);
-                }
-
-                $shopifyCustomerId = $customerResource->id;
-                $this->shopifyIds->push($shopifyCustomerId);
-
-                try {
-                    // record the shopify ID each Customer
-                    $customersCollection->each(function (Customer $customer) use ($shopifyCustomerId) {
-                        $customer->setShopifyId($shopifyCustomerId);
-                        $this->entityManager->persist($customer);
-                        $this->entityManager->flush();
+                    // sort the customers collection so that we have the newest one first (so we can work our way back when trying to find data)
+                    $customersCollection = $customersCollection->sort(function (Customer $customer1, Customer $customer2) {
+                        return $customer1->getUpdatedAt() < $customer2->getUpdatedAt();
                     });
 
-                    // STEP 5: build up the data structure for the Customers' Addresses
-                    $addressesData = $isCreating ? $this->createAddressesDataForCustomers($customersCollection)
-                        : $this->updateAddressesDataForCustomers($customersCollection, $shopifyCustomerId);
+                $isCreating = $this->getIsFresh() || $alreadySynced->isEmpty();
 
-                    // STEP 6: send it to Shopify, if there are any
-                    $this->sendAddressDataToShopify($addressesData, $shopifyCustomerId);
-                 } catch (ORMException $e) {
-                    $this->error(sprintf("Failed to save shopify_id for customer with email address %s: %s",
-                        $email, $e->getMessage()));
+                // STEP 3: build up the data structure
+                // DEV NOTE: we need the same data regardless of creating or updating
+                $postData = $this->createCustomerDataForCustomers($customersCollection, $email);
+
+                // STEP 4: send the data to Shopify
+                if (!$this->getIsSimulation()) {
+
+                    try {
+                        if ($isCreating) {
+                            $customerResource = $this->shopify->createCustomer($postData);
+                        } else {
+                            $existingCustomerShopifyId = $this->getCustomerValueFor($customersCollection, "getShopifyId");
+                            $customerResource = $this->shopify->updateCustomer($existingCustomerShopifyId, $postData);
+                        }
+                    } catch (ValidationException $exception) {
+                        $this->error(sprintf("Validation failed when sending customer data to Shopify: %s",
+                            $exception->getMessage()));
+                        $this->error(sprintf("Please investigate for customer with email address %s. Attempted customer data: %s",
+                            $email, json_encode($postData)));
+                    }
+
+                    $shopifyCustomerId = $customerResource->id;
+                    $this->shopifyIds->push($shopifyCustomerId);
+
+                    try {
+                        // record the shopify ID each Customer
+                        $customersCollection->each(function (Customer $customer) use ($shopifyCustomerId) {
+                            $customer->setShopifyId($shopifyCustomerId);
+                            $this->entityManager->persist($customer);
+                            $this->entityManager->flush();
+                        });
+
+                        // STEP 5: build up the data structure for the Customers' Addresses
+                        $addressesData = $isCreating ? $this->createAddressesDataForCustomers($customersCollection)
+                            : $this->updateAddressesDataForCustomers($customersCollection, $shopifyCustomerId);
+
+                        // STEP 6: send it to Shopify, if there are any
+                        $this->sendAddressDataToShopify($addressesData, $shopifyCustomerId);
+                     } catch (ORMException $e) {
+                        $this->error(sprintf("Failed to save shopify_id for customer with email address %s: %s",
+                            $email, $e->getMessage()));
+                    }
+
+                } else {
+                    $shopifyCustomerId = ++$simulatedShopifyId;
                 }
 
-            } else {
-                $shopifyCustomerId = ++$simulatedShopifyId;
-            }
-
-            $customersCollection->each(function(Customer $customer) use ($isCreating, $shopifyCustomerId, $bar) {
-                $this->tableRows[] = [$customer->getId(), "Customer", $isCreating ? "Created" : "Updated", $shopifyCustomerId];
-                $bar->advance();
+                $customersCollection->each(function(Customer $customer) use ($isCreating, $shopifyCustomerId, $bar) {
+                    $this->tableRows[] = [$customer->getId(), $isCreating ? "Created" : "Updated", $shopifyCustomerId];
+                    $bar->advance();
+                });
             });
-        })->chunk(100);
+
+            // batch has ended
+            // print progress bar and table
+            $bar->finish();
+            $this->newLine();
+            $this->table($this->tableHeader, $this->tableRows);
+            // finish the sync log
+            $this->finishSyncLogIfExecuting($this->shopifyIds);
+            // and clear the table rows for the next run
+            $this->tableRows = [];
+        });
     }
 
     /**
@@ -364,26 +409,33 @@ class SyncCustomersToShopify extends Command
     {
         $addressesData->each(function ($addressData) use ($shopifyCustomerId) {
             // check if the addressData has a shopify id and create or update accordingly
-            if (array_key_exists("id", $addressData)) {
-                $addressResource = $this->shopify->updateCustomerAddress($shopifyCustomerId, $addressData["id"], $addressData);
-                $addressShopifyId = $addressResource->id;
-                $this->shopifyIds->push($addressShopifyId);
-            } else {
-                $addressResource = $this->shopify->createCustomerAddress($shopifyCustomerId, $addressData);
-                // and record the Shopify ID on the Addresses
-                $addressShopifyId = $addressResource->id;
-                try {
-                    $addressEntity = $this->addressRepository->byId($addressData["ecommerce_address_id"]);
-                    if ($addressEntity) {
-                        $addressEntity->setShopifyId($addressShopifyId);
-                        $this->entityManager->persist($addressEntity);
-                        $this->entityManager->flush();
-                    }
+            try {
+                if (array_key_exists("id", $addressData)) {
+                    $addressResource = $this->shopify->updateCustomerAddress($shopifyCustomerId, $addressData["id"], $addressData);
+                    $addressShopifyId = $addressResource->id;
                     $this->shopifyIds->push($addressShopifyId);
-                } catch (\Doctrine\ORM\ORMException $e) {
-                    $this->error(sprintf("Failed to find address by ID %s: %s",
-                        $addressData["ecommerce_address_id"], $e->getMessage()));
+                } else {
+                    $addressResource = $this->shopify->createCustomerAddress($shopifyCustomerId, $addressData);
+                    // and record the Shopify ID on the Addresses
+                    $addressShopifyId = $addressResource->id;
+                    try {
+                        $addressEntity = $this->addressRepository->byId($addressData["ecommerce_address_id"]);
+                        if ($addressEntity) {
+                            $addressEntity->setShopifyId($addressShopifyId);
+                            $this->entityManager->persist($addressEntity);
+                            $this->entityManager->flush();
+                        }
+                        $this->shopifyIds->push($addressShopifyId);
+                    } catch (\Doctrine\ORM\ORMException $e) {
+                        $this->error(sprintf("Failed to find address by ID %s: %s",
+                            $addressData["ecommerce_address_id"], $e->getMessage()));
+                    }
                 }
+            } catch (ValidationException $exception) {
+                $this->error(sprintf("Validation failed when sending address data to Shopify: %s",
+                    $exception->getMessage()));
+                $this->error(sprintf("Please investigate for Shopify Customer ID %s. Attempted address data: %s",
+                    $shopifyCustomerId, json_encode($addressData)));
             }
         });
     }
@@ -421,11 +473,28 @@ class SyncCustomersToShopify extends Command
     }
 
     /**
+     * Do not allow the Customers to be limited for the query. We require the full result set so that we can
+     * group them by email address afterwards
+     */
+    function getLimit(): ?int
+    {
+        return null;
+    }
+
+    /**
+     * Get the optional limit provided for the number of users and customers to sync
+     */
+    function getLimitOption(): ?int
+    {
+        return $this->option("limit");
+    }
+
+    /**
      * @inheritDoc
      */
     protected function getEcommerceEntityRepository(): RepositoryBase|EntityRepository
     {
-        return $this->userRepository;
+        return $this->customerRepository;
     }
 
 
@@ -683,7 +752,13 @@ class SyncCustomersToShopify extends Command
         // go through all the addresses from Shopify and see if we have any changes to the local version associated with it
         $shopifyAddresses->each(function (array $shopifyAddressData) use (&$checkedLocalAddressIds, &$addressData, $shopifyCustomerId) {
             // use the shopify ID to find our version of it
-            $localAddress = $this->addressRepository->getByShopifyId($shopifyAddressData["id"]);
+            try {
+                $localAddress = $this->addressRepository->getByShopifyId($shopifyAddressData["id"]);
+            } catch (NonUniqueResultException $e) {
+                $this->error(sprintf("Mulitiple local addresses found with shopify_id %s. Cannot update address for User or Customer with shopify_id %s",
+                    $shopifyAddressData["id"], $shopifyCustomerId));
+                return;
+            }
             if (is_null($localAddress)) {
                 $this->error(sprintf("No local address found with shopify_id %s. Cannot update address for User or Customer with shopify_id %s",
                     $shopifyAddressData["id"], $shopifyCustomerId));
@@ -741,20 +816,32 @@ class SyncCustomersToShopify extends Command
 
         // make sure that Shopify doesn't already have the address
         $allLocalAddressData->each(function(array $localAddressData) use (&$addressData, $shopifyAddresses) {
-            $isNew = false;
-            $shopifyAddresses->each(function (array $shopifyAddressData) use (&$addressData, $localAddressData, &$isNew) {
+            // go through each shopify address and check if this local address data is a complete match.
+            // if all fields match for any of the shopify addresses, then we need to skip this one
+            $alreadyExists = false;
+            $shopifyAddresses->each(function (array $shopifyAddressData) use ($localAddressData, &$alreadyExists) {
+                $isDifferent = false;
+
                 foreach ($localAddressData as $key => $value) {
                     // make sure to ignore our added ecommerce_address_id
-                    if ($key !== "ecommerce_address_id" && strtoupper($shopifyAddressData[$key]) !== strtoupper($value)) {
-                        $isNew = true;
+                    if ($key === "ecommerce_address_id"){
+                        continue;
+                    }
+                    // do a loose comparison (so we don't have to worry about null and "", etc)
+                    if (strtoupper($shopifyAddressData[$key]) != strtoupper($value)) {
+                        $isDifferent = true;
                         break;
                     }
                 };
-                if ($isNew) {
-                    $addressData->push($localAddressData);
-                    $isNew = false;
+
+                if (!$isDifferent) {
+                    $alreadyExists = true;
                 }
             });
+
+            if (!$alreadyExists) {
+                $addressData->push($localAddressData);
+            }
         });
     }
 
@@ -794,11 +881,16 @@ class SyncCustomersToShopify extends Command
         }
 
         // get the user's country, so we can supply the country code
-        /** @var Address $address */
         $address = $this->cleanUpAddresses(
             collect($this->addressRepository->getUserShippingAddresses($user->getId()))
         )->first();
-        $countryCode = $this->countryNameToISO3166($address?->getCountry() ?? "Canada");
+
+        if (is_array($address) && array_key_exists("country", $address)) {
+            $countryName = $address["country"];
+        } else {
+            $countryName = $address?->getCountry();
+        }
+        $countryCode = $this->countryNameToISO3166($countryName ?? "Canada");
 
         $phoneUtil = PhoneNumberUtil::getInstance();
 
@@ -866,5 +958,18 @@ class SyncCustomersToShopify extends Command
             }
         }
         return $ISO3166;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    protected function syncResource(bool $simulate, bool $fresh): Collection
+    {
+        // we do not use the SyncsToShopify sync() here. We need to run through all applicable Users and then
+        // all applicable Customers, rather than just one entity. That, combined with the huge number of Users in our
+        // database, leads to a unique situation for syncing up to Shopify Customers.
+        // All of that is done in the handle function, and so this function is never used.
+
+        return collect();
     }
 }

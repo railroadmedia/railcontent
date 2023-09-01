@@ -33,8 +33,6 @@ class SyncPermissionsToShopify extends Command
 
     protected Shopify $shopify;
 
-    protected int|null $limit;
-
     /**
      * Execute the console command.
      *
@@ -44,7 +42,6 @@ class SyncPermissionsToShopify extends Command
     public function handle(Shopify $shopify): int
     {
         $this->shopify = $shopify;
-        $this->limit = $this->option("limit");
         return $this->sync();
     }
 
@@ -207,6 +204,14 @@ class SyncPermissionsToShopify extends Command
     /**
      * @inheritDoc
      */
+    function getLimit(): ?int
+    {
+        return $this->option("limit");
+    }
+
+    /**
+     * @inheritDoc
+     */
     protected function getEcommerceEntityRepository(): RepositoryBase
     {
         return $this->productRepository;
@@ -222,10 +227,9 @@ class SyncPermissionsToShopify extends Command
             ->when(!$fresh, function ($q) {
                 return $q->whereNull("shopify_id");
             })
-            ->when($this->limit, function ($q) {
-                return $q->limit($this->limit);
+            ->when($this->getLimit(), function ($q) {
+                return $q->limit($this->getLimit());
             })
             ->get();
     }
-
 }

@@ -30,36 +30,39 @@ trait SyncsToShopify
         // ensure this trait is only used by a Command, so that we can leverage the Command functionality
         assert($this instanceof Command);
 
-        $simulate = $this->getIsSimulation();
-        $fresh = $this->getIsFresh();
+        $this->notifyStartupStatus();
 
-        if ($simulate) {
-            $this->info("Executing in simulation mode. No changes will be made to the database.  Use --execute to run for real.");
-        }
-
-        if ($fresh) {
-            $this->info(
-                sprintf("Performing a fresh sync. All %s will be sent to Shopify.",
-                Str::plural($this->getSyncResource()))
-            );
-        }
-
-        if (!$simulate) {
-            $this->createSyncLog();
-        }
+        $this->createSyncLogIfExecuting();
 
         try {
-            $shopifyIds = $this->syncResource($simulate, $fresh);
+            $shopifyIds = $this->syncResource($this->getIsSimulation(), $this->getIsFresh());
         } catch (Exception $e) {
             $this->error($e->getMessage());
             return self::FAILURE;
         }
 
-        if (!$simulate) {
-            $this->finishSyncLog($shopifyIds);
-        }
+        $this->finishSyncLogIfExecuting($shopifyIds);
 
         return self::SUCCESS;
+    }
+
+    /**
+     * Print applicable info messages to the screen, set by the run's options
+     *
+     * @return void
+     */
+    protected function notifyStartupStatus(): void
+    {
+        if ($this->getIsSimulation()) {
+            $this->info("Executing in simulation mode. No changes will be made to the database.  Use --execute to run for real.");
+        }
+
+        if ($this->getIsFresh()) {
+            $this->info(
+                sprintf("Performing a fresh sync. All ecommerce %s will be sent to Shopify.",
+                    Str::plural($this->getSyncResource()))
+            );
+        }
     }
 
     /**
@@ -67,7 +70,7 @@ trait SyncsToShopify
      *
      * @return void
      */
-    protected function createSyncLog(): void
+    protected function createSyncLogIfExecuting(): void
     {
         if (!$this->getIsSimulation()) {
             $this->shopifySync = ShopifySync::create([
@@ -83,7 +86,7 @@ trait SyncsToShopify
      * @param Collection $shopifyIds
      * @return void
      */
-    protected function finishSyncLog(Collection $shopifyIds): void
+    protected function finishSyncLogIfExecuting(Collection $shopifyIds): void
     {
         if (!$this->getIsSimulation()) {
             $this->shopifySync->update([
@@ -130,8 +133,11 @@ trait SyncsToShopify
                 ->orWhere(
                     $qb->expr()
                         ->gt("entity.updatedAt", ":lastSyncAt")
-                )->setParameter("lastSyncAt", $lastSyncAt)
-            ;
+                )->setParameter("lastSyncAt", $lastSyncAt);
+        }
+
+        if ($this->getLimit()) {
+            $qb->setMaxResults($this->getLimit());
         }
 
         $q = $qb->getQuery();
@@ -168,6 +174,13 @@ trait SyncsToShopify
      * @return bool
      */
     abstract function getIsFresh(): bool;
+
+    /**
+     * Get the optional limit to the number of entities to sync
+     *
+     * @return int|null
+     */
+    abstract function getLimit(): ?int;
 
     /**
      * Get the name of type of Shopify Resource this class interacts with
