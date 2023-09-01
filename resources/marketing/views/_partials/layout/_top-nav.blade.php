@@ -5,12 +5,12 @@
     </a>
 
     <!-- link-wrapper -->
-    <div class="flex flex-1">
+    <div class="flex justify-end flex-1">
 
             @if(!empty($fullSubscriptionVersion))
 
                 {{-- Nav Links --}}
-                <ul class="flex items-center text-white font-bebas-neue hidden md:flex">
+                <ul class="flex items-center text-[#0C1524] font-bebas-neue hidden md:flex">
                     @foreach($nav_links as $page => $info)
                         @if(!empty($info['children']))
                             @include('_partials.layout._nav-dropdown', [
@@ -60,13 +60,9 @@
 
     </div>
 
-    <div class="hidden lg:block py-4 mr-1">
-        <a href="{{ get_legacy_brand_base_url('musora') }}/login" class="@if(!empty($whiteNav)) invert @endif border-2 border-white rounded-full text-[15px] text-white hover:text-black hover:bg-white uppercase font-bebas tracking-widest pt-[9px] px-[30px] pb-[8px] transition-all duration-200">Login</a>
-    </div>
-
     <div class="ml-auto flex items-center">
-        <a href="/choose-plan" class="btn-primary btn-small text-base leading-none text-black bg-musora border-0 py-1.5 px-3 md:py-3 md:px-8 mr-1.5 mb-0 h-auto md:h-initial">
-            Start for free &nbsp; <i class="fas fa-arrow-right" style="line-height: 0;" aria-hidden="true"></i>
+        <a href="/choose-plan" class="btn-primary btn-small text-base leading-none text-black bg-musora border-0 pb-1.5 px-3 md:pb-3 md:pt-4 md:px-8 mr-1.5 mb-0 h-auto md:h-initial">
+            Start for free &nbsp; <i class="fas fa-arrow-right mb-1" style="line-height: 0;" aria-hidden="true"></i>
         </a>
     </div>
 
