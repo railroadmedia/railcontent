@@ -1,27 +1,18 @@
 $(document).ready(function () {
-
-    // Setup Slick slider
     $('.slider-for').slick({
         slidesToShow: 1,
         slidesToScroll: 1,
-        asNavFor: '.slider-nav',
         arrows: false,
-        fade: true
+        fade: true,
+        asNavFor: '.slider-nav',
     });
     $('.slider-nav').slick({
-        slidesToShow: 6,
+        slidesToShow: 3,
         slidesToScroll: 1,
         asNavFor: '.slider-for',
-        arrows: false,
+        dots: true,
+        centerMode: true,
         focusOnSelect: true,
-        responsive: [
-            {
-                breakpoint: 640,
-                settings: {
-                    slidesToShow: 4,
-                }
-            }
-        ]
     });
 
 
