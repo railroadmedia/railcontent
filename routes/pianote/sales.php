@@ -13,6 +13,7 @@ Route::domain('{pianoteDomain}')
         Route::get('/trial-beginner', [SalesController::class, 'trialBeginner'] );
         Route::get('/trial-month', [SalesController::class, 'homeMonth'] );
         Route::get('/lp', [SalesController::class, 'promo'] );
+        Route::get('/piano-month', [SalesController::class, 'pianoMonth'] );
         Route::get('/student-only', [SalesController::class, 'promo'] );
         Route::get('/restart', [SalesController::class, 'restart'] );
         Route::get('/choose-plan', [SalesController::class, 'choosePlan'] );
