@@ -85,7 +85,8 @@ class OnboardingController extends Controller
         Avo::topics_onboarding_step_completed(
             AvoHelper::defaultEventProperties([
                 'brand' => $request->brand,
-                'topic_list' => $topicList
+                'topic_list' => $topicList,
+                'has_completed_onboarding' => true
             ])
         );
         return response(json_encode(user()), 200);
