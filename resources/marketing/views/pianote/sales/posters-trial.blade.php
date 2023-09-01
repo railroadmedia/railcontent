@@ -662,7 +662,7 @@
                     <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Try Pianote for 7 days & get<br class="hidden sm:inline"> FREE Chords & Scales posters.</strong></h2>
 
                     <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Click below to start your free 7-day trial. Your annual membership will<br class="hidden sm:inline"> continue on {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} (after your free trial).</span>
-                        <em>Only <s class="opacity-50">2000</s> <strong>1889</strong> posters left!</em></p>
+                        <em>Only <s class="opacity-50">2000</s> <strong> @if(!empty($products['poster-chords']->getPublicStockCount())) {{ $products['poster-chords']->getPublicStockCount() }} @endif </strong> posters left!</em></p>
 
                     <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Free for 7 days</strong></h3>
                     <p class="leading-tight opacity-70 text-sm"><em>Then billed at $240 per year. Save 33%.</em></p>
