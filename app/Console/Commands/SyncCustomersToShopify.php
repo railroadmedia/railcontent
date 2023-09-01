@@ -236,6 +236,9 @@ class SyncCustomersToShopify extends Command
                     $exception->getMessage()));
                 $this->error(sprintf("Please investigate for user or customers with email address %s. Attempted customer data: %s",
                     $user->getEmail(), json_encode($postData)));
+                // record the failure in the table then exit out for this user
+                $this->tableRows[] = [$user->getId(), "User", "<error>FAILED</error>", $exception->getMessage()];
+                return;
             }
 
             $shopifyCustomerId = $customerResource->id;
@@ -351,6 +354,9 @@ class SyncCustomersToShopify extends Command
                             $exception->getMessage()));
                         $this->error(sprintf("Please investigate for customer with email address %s. Attempted customer data: %s",
                             $email, json_encode($postData)));
+                        // record the failure in the table then exit out for this customer
+                        $this->tableRows[] = [$email, "<error>FAILED</error>", $exception->getMessage()];
+                        return;
                     }
 
                     $shopifyCustomerId = $customerResource->id;
