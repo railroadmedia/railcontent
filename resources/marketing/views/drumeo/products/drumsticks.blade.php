@@ -141,7 +141,7 @@
             <img class="signature" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/signature.png" alt="Jared signature"><br>
             <img class="avatar" src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/vater-sticks/jared-falk.jpg" alt="Jared Falk"><br>
             <h5><strong>JARED FALK</strong></h5>
-            <p class="text-blue">CEO & CO-FOUNDER OF DRUMEO</p>
+            <p class="text-blue">FOUNDER OF DRUMEO</p>
 
         </div>
     </section>

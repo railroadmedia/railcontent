@@ -55,21 +55,6 @@
     </script>
     <script src="{{ asset('/marketing/js/app.js') }}"></script>
     <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script>
-        $(document).ready(function () {
-            $(".infusion-form").submit(function(event) {
-                if(event.originalEvent != null) {
-                    var formId = $(this).find('input[name="inf_form_xid"]').val();
-
-                    dataLayer.push({
-                        'event': 'gtm.formSubmit',
-                        'formId': formId,
-                        'formSuccess': true
-                    });
-                }
-            });
-        });
-    </script>
 @stop()
 
 @section('content')

@@ -286,19 +286,12 @@
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
 {{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-{{--                            @if($hasProduct)--}}
-{{--                                <a class="join sold-out medium w-full">YOU'RE ENROLLED!</a>--}}
-{{--                            @else--}}
                                 <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
-{{--                            @endif--}}
-
-                            @if(!auth()->check())
-                                <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
-                                    <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Drumeo Members register for free here.</a>
-                                </p>
-                            @endif
+                            <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
+                                <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Drumeo Members register for free here.</a>
+                            </p>
                         </div>
-                        <div class="w-full sm:w-1/2 pt-4 lg:pb-5">
+                        <div class="w-full sm:w-1/2 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined student profiles">
                             <p class="inline-block leading-tight text-sm align-middle">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
                         </div>
@@ -986,7 +979,7 @@
     @include("drumeo.sales.partials._footer")
 
     @include('_partials.components.countdown',[
-        'countdownDate' => '2023-09-01 00:00:00',
+        'countdownDate' => '2023-09-04 00:00:00',
         'promoVersion' => false
     ])
 
