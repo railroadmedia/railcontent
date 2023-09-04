@@ -230,7 +230,7 @@ class RevenueCatController extends Controller
     /**
      * @param User $user
      * @param $expiresDate
-     * @param \Illuminate\Database\Eloquent\Model|object|\Illuminate\Database\Query\Builder|null $musoraProduct
+     * @param $musoraProduct
      * @param string $type
      * @param $purchasedAtMs
      * @return Subscription
@@ -238,7 +238,7 @@ class RevenueCatController extends Controller
     private function createMusoraSubscription(
         User $user,
         $expiresDate,
-        \Illuminate\Database\Eloquent\Model|object|\Illuminate\Database\Query\Builder|null $musoraProduct,
+        $musoraProduct,
         string $type,
         $purchasedAtMs
     )
@@ -273,13 +273,13 @@ class RevenueCatController extends Controller
 
     /**
      * @param User $user
-     * @param \Illuminate\Database\Eloquent\Model|object|\Illuminate\Database\Query\Builder|null $musoraProduct
+     * @param $musoraProduct
      * @param Subscription $musoraSubscription
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     private function createUserProduct(
         User $user,
-        \Illuminate\Database\Eloquent\Model|object|\Illuminate\Database\Query\Builder|null $musoraProduct,
+         $musoraProduct,
         Subscription $musoraSubscription
     )
     : void {
@@ -303,10 +303,9 @@ class RevenueCatController extends Controller
      * @param string $type
      * @param $periodType
      * @param mixed $productId
-     * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
+     *
      */
-    private function getMusoraProduct(string $type, $event, mixed $productId)
-    : \Illuminate\Database\Query\Builder|null|object|\Illuminate\Database\Eloquent\Model {
+    private function getMusoraProduct(string $type, $event, mixed $productId) {
         $store = $type.'_store';
         if ($event['period_type'] == 'TRIAL') {
             $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productId]];
@@ -363,7 +362,7 @@ class RevenueCatController extends Controller
      * @return Subscription|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object|null
      */
     private function getMusoraSubscription(User $user, string $type, $musoraProducts)
-    : \Illuminate\Database\Query\Builder|null|\Illuminate\Database\Eloquent\Builder|object|Subscription|\Illuminate\Database\Eloquent\Model {
+     {
         $musoraSubscription =
             Subscription::query()
                 ->where('user_id', '=', $user->id)
@@ -380,12 +379,12 @@ class RevenueCatController extends Controller
 
     /**
      * @param User $user
-     * @param \Illuminate\Database\Eloquent\Model|Subscription|object|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder $musoraSubscription
+     * @param $musoraSubscription
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     private function updateUserProduct(
         User $user,
-        \Illuminate\Database\Eloquent\Model|Subscription|object|\Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder $musoraSubscription
+        $musoraSubscription
     )
     : void {
         $oldUserProduct =
