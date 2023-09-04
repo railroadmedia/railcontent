@@ -119,7 +119,7 @@ class RevenueCatController extends Controller
                     $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
 
                 //get Musora subscription
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProducts);
+                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
                 if (!$musoraSubscription) {
                     //TBD
                     break;
@@ -167,7 +167,7 @@ class RevenueCatController extends Controller
                     $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
 
                 //get Musora subscription
-                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProducts);
+                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
                 if (!$musoraSubscription) {
                     //TBD
                     break;
