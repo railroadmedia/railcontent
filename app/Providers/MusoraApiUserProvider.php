@@ -348,4 +348,21 @@ class MusoraApiUserProvider implements UserProviderInterface
     {
         return generate_musora_cross_platform_login_key(user()->id, user()->password);
     }
+
+    /**
+     * @param $email
+     * @param $password
+     * @return null
+     */
+    public function getUserAfterRevenuecatPurchase($email, $password)
+    {
+        $user = \Modules\UserManagementSystem\Models\User::where('email', $email)->first();
+        if ($user) {
+           $user->setPassword($password);
+           $user->save();
+
+           return $user;
+        }
+        return null;
+    }
 }
