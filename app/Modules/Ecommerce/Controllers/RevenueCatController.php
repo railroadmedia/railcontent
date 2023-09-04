@@ -142,6 +142,39 @@ class RevenueCatController extends Controller
                 break;
             case 'PRODUCT_CHANGE':
                 echo 'PRODUCT_CHANGE';
+              //  dd($this->revenueCatService->getSubscriber('$RCAnonymousID:2e1585a377a14fa49af61b92782b1eb6'));
+                // get Musora user
+                $user = $this->getUser($data['event']['subscriber_attributes']['email']['value']);
+                if (!$user) {
+                    //TBD
+                    break;
+                }
+
+                //store type
+                $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
+
+                //productId
+                $productId = $this->getProductId($data['event']['new_product_id']);
+
+                //get Musora product
+                $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
+
+                //get RevenueCat subscription
+                $currentRevenueCatSubscription =
+                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
+
+                //create Musora subscription
+                $musoraSubscription = $this->createMusoraSubscription(
+                    $user,
+                    $currentRevenueCatSubscription['expires_date'],
+                    $musoraProduct,
+                    $type,
+                    $data['event']['purchased_at_ms']
+                );
+
+                //Assign user product
+                $this->createUserProduct($user, $musoraProduct, $musoraSubscription);
+
                 // code...
                 break;
             case 'CANCELLATION':
@@ -210,7 +243,7 @@ class RevenueCatController extends Controller
      * @return User
      */
     private function getUser($value, $createIfNotExists = false)
-    : User {
+    : ?User {
         $user =
             User::query()
                 ->where('email', $value)
@@ -350,7 +383,7 @@ class RevenueCatController extends Controller
     : mixed {
         $subscriber = $this->revenueCatService->getSubscriber($appUserId);
         $revenueCatSubscriptions = (json_decode(json_encode($subscriber->subscriptions), true));
-        $currentRevenueCatSubscription = $revenueCatSubscriptions["$productId"];
+        $currentRevenueCatSubscription = $revenueCatSubscriptions["$productId"] ?? null;
 
         return $currentRevenueCatSubscription;
     }
