@@ -203,11 +203,7 @@
             <div class="reveal text-center" id="{{ str_replace(".","",(str_replace("/","",(str_replace(" ","",$bonus['artist']))))) }}{{$bonus['soundslice']}}" data-reveal>
                 <div class="w-full relative overflow-hidden" style="padding-bottom: 85vh;">
                     <iframe class="fixed inset-0 h-full w-full absolute reset-on-close" frameborder="0" allowfullscreen="allowfullscreen" src=""
-                            @if(!empty($bonus['slices']))
-                            data-lazy-load-url="https://www.soundslice.com/slices/{{ $bonus['soundslice'] }}/embed/?api=1&amp;scroll_type=2&amp;branding=0"
-                            @else
-                            data-lazy-load-url="https://www.soundslice.com/scores/{{ $bonus['soundslice'] }}/embed/?api=1&amp;scroll_type=2&amp;branding=0"
-                        @endif ></iframe>
+                            data-lazy-load-url="https://www.soundslice.com/slices/{{ $bonus['soundslice'] }}/embed/?api=1&amp;scroll_type=2&amp;branding=0"></iframe>
                 </div>
             </div>
         @endif

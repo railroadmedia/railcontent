@@ -262,7 +262,7 @@
 
                     <h6 class="leading-tight mt-4 lg:mt-6 mb-4 sm:mb-2"><strong>Save your seat in the next class <br class="inline lg:hidden">starting Sept 4th.</strong></h6>
 
-                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video lazyload" style="padding-bottom: 63%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/header-thumb-closing.png" data-open="trailer">
+                    <div class="mt-6 mb-5 rounded-xl overflow-hidden relative block sm:hidden bg-cover bg-top cursor-pointer autoplay-video lazyload" style="padding-bottom: 63%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30DD2_header_thumb_no_badge_m.jpg" data-open="trailer">
                         <div class="join white smaller absolute bottom-1 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
 
@@ -275,21 +275,14 @@
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Drum<br> Every Day</p>
                         <p class="w-1/3 leading-tight"><i class="fas fa-check-circle text-drumeo"></i><br> Learn<br> By Doing</p>
                     </div>
-                    @if(session()->has('success-message'))
-                        <p class="mb-3 lg:-mb-7 mt-3 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-                    @endif
-
-                    @if(!$hasProduct && is_current_user_a_member())
-{{--                        <p class="mb-3 lg:-mb-7 mt-5 mb-2 text-drumeo text-left"><strong>You are a Drumeo member! <br>Enroll for free by clicking on the button below.</strong></p>--}}
-                    @endif
 
                     <div class="flex flex-wrap sm:flex-nowrap items-center mt-6 sm:mt-5 lg:mt-10">
                         <div class="w-full sm:w-1/2 text-center sm:pr-2">
-{{--                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>--}}
-                                <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>
-                            <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">
-                                <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Drumeo Members register for free here.</a>
-                            </p>
+                            <span class="join sold-out medium w-full" data-open="waitlistModal">JOIN WAITLIST</span>
+{{--                                <a href="#final" class="join blue medium w-full anchor-slide">ENROLL NOW</a>--}}
+{{--                            <p class="opacity-50 text-sm mt-2 mb-5 sm:mb-0 underline hover:text-drumeo">--}}
+{{--                                <a href="{{ get_musora_brand_base_url() }}/30-day-drummer">Drumeo Members register for free here.</a>--}}
+{{--                            </p>--}}
                         </div>
                         <div class="w-full sm:w-1/2 lg:pb-5">
                             <img class="h-7 sm:mb-1 lg:mb-0 mr-1 sm:mr-0 lg:mr-1 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined student profiles">
@@ -298,7 +291,7 @@
                     </div>
                 </div>
                 <div class="w-full sm:w-5/12 hidden sm:block">
-                    <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-contain bg-center bg-no-repeat cursor-pointer autoplay-video lazyload" style="padding-bottom: 98%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/header-thumb-closing.png" data-open="trailer">
+                    <div class="rounded-xl overflow-hidden relative {{-- bg-cover --}} bg-cover bg-top bg-no-repeat cursor-pointer autoplay-video lazyload" style="padding-bottom: 98%;" data-bg="https://www.musora.com/musora-cdn/image/width=850,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30DD2_header_no_badge_thumb.jpg" data-open="trailer">
                         <div class="join white smaller absolute {{-- bottom-1 --}} bottom-2 left-1"><i class="fas fa-play"></i> Watch Trailer</div>
                     </div>
                 </div>
@@ -308,18 +301,18 @@
                 <div class="w-full md:w-auto border-b sm:border-b-0 sm:border-r border-gray-300 py-4 md:py-3 lg:py-4">
                     <p class="tracking-wide opacity-70 text-sm">STARTS ON</p>
                     <h4 class="px-3 lg:px-5"><strong>September 4th</strong></h4>
-                    <hr class="border-gray-300 my-4 md:my-2 lg:my-4">
-                    <p class="text-sm px-3 lg:px-5">
-                        Enrollment closes in<br class="inline lg:hidden">
-                            <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">
-                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                             </span>
+{{--                    <hr class="border-gray-300 my-4 md:my-2 lg:my-4">--}}
+{{--                    <p class="text-sm px-3 lg:px-5">--}}
+{{--                        Enrollment closes in<br class="inline lg:hidden">--}}
+{{--                            <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                             </span>--}}
 {{--                        Enrollment closed--}}
-                    </p>
+{{--                    </p>--}}
                 </div>
                 <div class="flex flex-wrap md:flex-nowrap items-center justify-evenly w-full md:w-auto md:flex-grow py-4 md:py-3 lg:py-4 text-left md:text-center">
                     <div class="flex md:block w-full md:w-auto px-4 md:px-3 mb-4 md:mb-0 justify-center">
@@ -540,20 +533,10 @@
                     <i class="fas fa-check text-drumeo mr-5"></i> Ongoing motivation & support<br>
                     <i class="fas fa-check text-drumeo mr-5"></i> Guaranteed results</h4>
             </div>
-            @if(session()->has('success-message'))
-                <p class="-mb-2 sm:-mb-8 mt-5 text-drumeo text-center"><strong>Congrats! You have registered for 30-Day Drummer.<br class="hidden md:inline"> Check your email for the details.</strong></p>
-            @endif
-{{--            <span class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3" data-open="waitlistModal">JOIN WAITLIST</span><br>--}}
-            @if($hasProduct)
-                <a class="join sold-out medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3">YOU'RE ENROLLED</a><br>
-            @else
-                <a
-                    href="#final"
-                    class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>
-            @endif
-            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined student profiles">
-            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>
 
+{{--            <a href="#final" class="join blue medium w-3/4 sm:w-1/2 mt-6 sm:mt-12 mb-3 anchor-slide">ENROLL NOW</a><br>--}}
+{{--            <img class="h-7 mr-1 mb-5 sm:mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/Joined_profiles.png" alt="joined student profiles">--}}
+{{--            <p class="inline-block leading-tight text-sm align-middle mb-5 sm:mb-10">Join {{ number_format($nPackOwners ?? 0) }} drummers who<br> have already registered.</p>--}}
         </div>
     </section>
     <div class="h-5 sm:h-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #2a2f34 calc(50% + 1px));"></div>
@@ -696,16 +679,16 @@
             </div>
             <h1 class="font-bebas text-5xl sm:text-6xl lg:text-7xl">FAIR WARNING</h1>
             <h6 class="leading-normal  mt-4">30-Day Drummer is a daily guided workout program for drummers — where you’ll get a new video each weekday and a live session each weekend throughout the month. Because of this, students will not be able to join midway — and you need to register before the course begins. {{--on September 5th.--}}</h6>
-                        <h4 class="mt-8 py-1.5 w-full font-bebas uppercase inline-block mx-auto" style="background-color:#fd5;color:#9d1032;">
-                            REGISTRATION CLOSES IN<br class="inline sm:hidden">
-                            <span x-cloak x-data="timer()" x-init="countdown()">
-                                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
-                                     </span>
-                        </h4>
+{{--                        <h4 class="mt-8 py-1.5 w-full font-bebas uppercase inline-block mx-auto" style="background-color:#fd5;color:#9d1032;">--}}
+{{--                            REGISTRATION CLOSES IN<br class="inline sm:hidden">--}}
+{{--                            <span x-cloak x-data="timer()" x-init="countdown()">--}}
+{{--                                         <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
+{{--                                         <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                         <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                         <span x-cloak x-show="timeLeft > 0 && day < 7"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
+{{--                                         <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
+{{--                                     </span>--}}
+{{--                        </h4>--}}
         </div>
     </section>
     <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
@@ -809,7 +792,9 @@
         <div class="max-w-6xl mx-auto text-center">
             <img class="h-20 sm:h-24 lg:h-28 mb-10 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=440,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/30_day_drummer_logo.svg" alt="30DD logo season3 logo">
             <h3 class="mb-4"><strong>Learn the drums with daily guided workouts.</strong></h3>
-            <p class="leading-normal mb-12">
+
+            <span class="join sold-out medium w-full max-w-xs align-middle mt-7" data-open="waitlistModal">JOIN WAITLIST</span>
+{{--            <p class="leading-normal mb-12">--}}
 {{--                <strong class="bg-musora-black text-white px-1">EARLY BIRD SPECIAL:</strong> Save up to 20% on all bundles before August 20th.--}}
 {{--                <br>&nbsp;--}}
 {{--                <span class="text-drumeo" x-cloak x-data="timer()" x-init="countdown()">--}}
@@ -821,70 +806,70 @@
 {{--                     <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
 {{--                 </span>--}}
 {{--                <br><br>--}}
-                <strong class="font-black"><i class="fas fa-arrow-down"></i> CHOOSE YOUR BUNDLE <i class="fas fa-arrow-down"></i></strong>
-            </p>
+{{--                <strong class="font-black"><i class="fas fa-arrow-down"></i> CHOOSE YOUR BUNDLE <i class="fas fa-arrow-down"></i></strong>--}}
+{{--            </p>--}}
 
-            <div class="grid md:grid-cols-3 gap-2 lg:gap-4 items-start px-4 mx-auto max-w-md md:max-w-none">
-                <div class="bg-white rounded-xl border border-drumeo py-8 px-4 mb-8 md:mb-0">
-                    <div class="text-center -mt-11">
-                        <div class="bg-drumeo rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Keeping it light</div>
-                        <h4><strong>30-Day Drummer</strong></h4>
-                        <p class="italic mb-4 text-xs mt-2">Course Only<br> &nbsp; </p>
-                        <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-1a.png" alt="Tier 1 pack" />
-                        <h2>{{--<s class="text-[#ABB5C2] mr-2">$97</s>--}}<strong>$97</strong></h2>
-                        <p class="italic mb-4 text-xs">One-time payment</p>
-                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&redirect=/order&locked=true" class="join bg-drumeo medium w-full mb-5">ENROLL NOW</a>
-                        <p class="inline-block text-left">
-                            <b>30-Day Drummer - Season 3</b><br/>
-                            <b class="text-drumeo">Bonus</b> 1-Month Drumeo Access
-                        </p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl border border-musora py-8 px-4 mb-8 md:mb-0">
-                    <div class="text-center -mt-11">
-                        <div class="bg-musora rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Best Deal</div>
-                        <h4><strong>Starter Kit & More</strong></h4>
-                        <p class="italic mb-4 text-xs mt-2">3 months of Drumeo + 5 bonuses worth $231
-                            <br><strong class="text-musora">FREE SHIPPING WORLDWIDE</strong></p>
-                        <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-2a.png" alt="Tier 2 pack" />
-                        <h2>{{--<s class="text-[#ABB5C2] mr-2">$147</s>--}}<strong>$147</strong></h2>
-                        <p class="italic mb-4 text-xs">One-time payment</p>
-                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_90-days:1,quietpad:1,padstand:1,Drumeo-VaterSticks:1,Drumeo-Key:1&redirect=/order&locked=true" class="join medium w-full mb-5 bg-[#FFAE00]">ENROLL NOW</a>
-                        <p class="inline-block text-left">
-                            <b>30-Day Drummer - Season 3</b><br/>
-                            <b class="text-musora">Bonus</b> 3-Month Drumeo Access<br>
-                            <b class="text-musora">Bonus</b> QuietPad<br>
-                            <b class="text-musora">Bonus</b> PadStand <sup>*NEW*</sup><br>
-                            <b class="text-musora">Bonus</b> Pair of Drumsticks<br>
-                            <b class="text-musora">Bonus</b> Drum Key<br>
-                            <b class="text-musora">Bonus</b> <i>Shipping Worldwide</i>
-                        </p>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl border border-drumeo py-8 px-4">
-                    <div class="text-center -mt-11">
-                        <div class="bg-drumeo rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">All In, Baby</div>
-                        <h4><strong>Unlimited Lessons</strong></h4>
-                        <p class="italic mb-4 text-xs mt-2">1 year of Drumeo + 7 bonuses worth $581
-                            <br><strong class="text-drumeo">FREE SHIPPING WORLDWIDE</strong></p>
-                        <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-3a.png" alt="Tier 3 pack" />
-                        <h2>{{--<s class="text-[#ABB5C2] mr-2">$240</s>--}}<strong>$240</strong></h2>
-                        <p class="italic mb-4 text-xs">Per year</p>
-                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,DLM-1-year:1,quietpad:1,padstand:1,Drumeo-VaterSticks:1,BeginnerBook:1,Drumeo-Key:1,independence-made-easy-pack:1,four-weeks-to-better-drum-fills:1,learn-songs-faster-pack:1&redirect=/order&locked=true" class="join blue medium w-full mb-5">ENROLL NOW</a>
-                        <p class="inline-block text-left">
-                            <b>Annual Drumeo Membership</b><br/>
-                            <b class="text-drumeo">Free</b> 30-Day Drummer - Season 3<br>
-                            <b class="text-drumeo">Free</b> QuietPad<br>
-                            <b class="text-drumeo">Free</b> PadStand <sup>*NEW*</sup><br>
-                            <b class="text-drumeo">Free</b> Pair of Drumsticks<br>
-                            <b class="text-drumeo">Free</b> Drum Key<br>
-                            <b class="text-drumeo">Free</b> <i>Shipping Worldwide</i><br>
-                            <b class="text-drumeo">Free</b> Best Beginner Drum Book<br>
-                            <b class="text-drumeo">Free</b> 3 Bonus Training Packs
-                        </p>
-                    </div>
-                </div>
-            </div>
+{{--            <div class="grid md:grid-cols-3 gap-2 lg:gap-4 items-start px-4 mx-auto max-w-md md:max-w-none">--}}
+{{--                <div class="bg-white rounded-xl border border-drumeo py-8 px-4 mb-8 md:mb-0">--}}
+{{--                    <div class="text-center -mt-11">--}}
+{{--                        <div class="bg-drumeo rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Keeping it light</div>--}}
+{{--                        <h4><strong>30-Day Drummer</strong></h4>--}}
+{{--                        <p class="italic mb-4 text-xs mt-2">Course Only<br> &nbsp; </p>--}}
+{{--                        <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-1a.png" alt="Tier 1 pack" />--}}
+{{--                        <h2>--}}{{--<s class="text-[#ABB5C2] mr-2">$97</s>--}}{{--<strong>$97</strong></h2>--}}
+{{--                        <p class="italic mb-4 text-xs">One-time payment</p>--}}
+{{--                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_30-days:1&redirect=/order&locked=true" class="join bg-drumeo medium w-full mb-5">ENROLL NOW</a>--}}
+{{--                        <p class="inline-block text-left">--}}
+{{--                            <b>30-Day Drummer - Season 3</b><br/>--}}
+{{--                            <b class="text-drumeo">Bonus</b> 1-Month Drumeo Access--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="bg-white rounded-xl border border-musora py-8 px-4 mb-8 md:mb-0">--}}
+{{--                    <div class="text-center -mt-11">--}}
+{{--                        <div class="bg-musora rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">Best Deal</div>--}}
+{{--                        <h4><strong>Starter Kit & More</strong></h4>--}}
+{{--                        <p class="italic mb-4 text-xs mt-2">3 months of Drumeo + 5 bonuses worth $231--}}
+{{--                            <br><strong class="text-musora">FREE SHIPPING WORLDWIDE</strong></p>--}}
+{{--                        <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-2a.png" alt="Tier 2 pack" />--}}
+{{--                        <h2>--}}{{--<s class="text-[#ABB5C2] mr-2">$147</s>--}}{{--<strong>$147</strong></h2>--}}
+{{--                        <p class="italic mb-4 text-xs">One-time payment</p>--}}
+{{--                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,drumeo_access_90-days:1,quietpad:1,padstand:1,Drumeo-VaterSticks:1,Drumeo-Key:1&redirect=/order&locked=true" class="join medium w-full mb-5 bg-[#FFAE00]">ENROLL NOW</a>--}}
+{{--                        <p class="inline-block text-left">--}}
+{{--                            <b>30-Day Drummer - Season 3</b><br/>--}}
+{{--                            <b class="text-musora">Bonus</b> 3-Month Drumeo Access<br>--}}
+{{--                            <b class="text-musora">Bonus</b> QuietPad<br>--}}
+{{--                            <b class="text-musora">Bonus</b> PadStand <sup>*NEW*</sup><br>--}}
+{{--                            <b class="text-musora">Bonus</b> Pair of Drumsticks<br>--}}
+{{--                            <b class="text-musora">Bonus</b> Drum Key<br>--}}
+{{--                            <b class="text-musora">Bonus</b> <i>Shipping Worldwide</i>--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--                <div class="bg-white rounded-xl border border-drumeo py-8 px-4">--}}
+{{--                    <div class="text-center -mt-11">--}}
+{{--                        <div class="bg-drumeo rounded-full text-white inline-block uppercase py-0.5 px-4 text-sm mb-6">All In, Baby</div>--}}
+{{--                        <h4><strong>Unlimited Lessons</strong></h4>--}}
+{{--                        <p class="italic mb-4 text-xs mt-2">1 year of Drumeo + 7 bonuses worth $581--}}
+{{--                            <br><strong class="text-drumeo">FREE SHIPPING WORLDWIDE</strong></p>--}}
+{{--                        <img class="h-36 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=600,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/season3/tier-3a.png" alt="Tier 3 pack" />--}}
+{{--                        <h2>--}}{{--<s class="text-[#ABB5C2] mr-2">$240</s>--}}{{--<strong>$240</strong></h2>--}}
+{{--                        <p class="italic mb-4 text-xs">Per year</p>--}}
+{{--                        <a href="/ecommerce/add-to-cart?product-array=30-day-drummer-3:1,DLM-1-year:1,quietpad:1,padstand:1,Drumeo-VaterSticks:1,BeginnerBook:1,Drumeo-Key:1,independence-made-easy-pack:1,four-weeks-to-better-drum-fills:1,learn-songs-faster-pack:1&redirect=/order&locked=true" class="join blue medium w-full mb-5">ENROLL NOW</a>--}}
+{{--                        <p class="inline-block text-left">--}}
+{{--                            <b>Annual Drumeo Membership</b><br/>--}}
+{{--                            <b class="text-drumeo">Free</b> 30-Day Drummer - Season 3<br>--}}
+{{--                            <b class="text-drumeo">Free</b> QuietPad<br>--}}
+{{--                            <b class="text-drumeo">Free</b> PadStand <sup>*NEW*</sup><br>--}}
+{{--                            <b class="text-drumeo">Free</b> Pair of Drumsticks<br>--}}
+{{--                            <b class="text-drumeo">Free</b> Drum Key<br>--}}
+{{--                            <b class="text-drumeo">Free</b> <i>Shipping Worldwide</i><br>--}}
+{{--                            <b class="text-drumeo">Free</b> Best Beginner Drum Book<br>--}}
+{{--                            <b class="text-drumeo">Free</b> 3 Bonus Training Packs--}}
+{{--                        </p>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
         </div>
     </section>
 
@@ -970,6 +955,22 @@
         </div>
     </section>
 
+    <div class="reveal coach-wrap relative rounded-xl text-center overflow-visible select-none max-w-xs md:max-w-md" id="waitlistModal" style="max-width: 530px;" data-reveal data-reset-on-close="false">
+        <div class="p-5 sm:p-7">
+            {{--            <img class="h-24 sm:h-32 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=500,quality=85/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/30-day-drummer/30_day_drummer_logo.png" alt="30DD logo">--}}
+            <h3 class="leading-tight mb-4"><strong>Join The Waitlist!</strong></h3>
+            <p class="mb-4">Enter your email below to get notified when the <br class="hidden sm:inline">
+                next edition of 30-Day Drummer is announced. </p>
+            @include("drumeo.lead-gen.partials.sign-up-form", [
+                    "recaptchaKey" => $recaptchaKey,
+                "formName" => '30 Day Chops Waitlist',
+                "formId" => "Drumeo - Engagement - Trigger - 30 Day Chops Waitlist - Web Form",
+                "buttonText" => "Let Me Know ",
+                "stacked" => true,
+                "noSocial" => true,
+            ])
+        </div>
+    </div>
     @include('drumeo.sales.partials._video-modal',[
         'modalId' => "trailer",
         "video" => '//player.vimeo.com/video/852777053?h=87d3e7a97a&autoplay=1',

@@ -38,6 +38,7 @@ a.text-yellow:hover {
     cursor: pointer;
     outline: none;
     transition: opacity .3s;
+    color: #fff;
     background: rgba(0, 0, 0, 0.6);
     border: 3px solid #fff;
     border-radius: 200px;
@@ -56,6 +57,12 @@ a.text-yellow:hover {
 
     &:hover {
         opacity: 0.8;
+    }
+
+    &.smaller {
+        border-width: 2px;
+        font-size: 24px;
+        padding: 15px 17px;
     }
 }
 
@@ -689,47 +696,16 @@ a.text-yellow:hover {
         width: 33.33%;
       }
 
-      &:hover .play-button {
-        opacity: 0.9;
-      }
-
       .bg {
         width: 100%;
         border-radius: 14px;
       }
 
       .watch-badge {
-        position: absolute;
-        top: 41%;
-        left: 71%;
-        transform: translate(-50%, -50%);
         font: 400 13px/1em $bebas;
         text-shadow: 0 0 20px $musoraBlack;
-        @include tablet {
-          left: 75%;
-        }
         @include desktop {
           font-size: 18px;
-        }
-
-        img {
-          display: block;
-          margin-top: 5px;
-          width: 24px;
-          @include desktop {
-            width: 41px;
-          }
-        }
-      }
-
-      .play-button {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 50px;
-        @include desktop {
-          width: 90px;
         }
       }
     }
