@@ -4,9 +4,22 @@ namespace App\Modules\Ecommerce\Services;
 
 use App\Modules\Ecommerce\Models\UserProduct;
 use Carbon\Carbon;
+use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
+use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
+use Railroad\Ecommerce\Repositories\UserProductRepository;
 
 class UserProductService
 {
+    private UserProductRepository $userProductRepository;
+
+    /**
+     * @param UserProductRepository $userProductRepository
+     */
+    public function __construct(UserProductRepository $userProductRepository)
+    {
+        $this->userProductRepository = $userProductRepository;
+    }
+
     public function getFirstUserProductBrand(int $userId, array $brands): string
     {
         $result = UserProduct::query()
@@ -30,6 +43,50 @@ class UserProductService
     {
         $count = UserProduct::query()->where('product_id', '=', $productId)->count();
         return $count;
+    }
+
+    public function assignUserProduct(int $userId, int $productId, string $expirationDate)
+    {
+        $userProduct =
+            UserProduct::query()
+                ->where('user_id', $userId)
+                ->where('product_id', $productId)
+                ->first();
+
+        if(!$userProduct)
+        {
+            $userProduct = new UserProduct();
+            $userProduct->user_id = $userId;
+            $userProduct->product_id = $productId;
+            $userProduct->quantity = 1;
+            $userProduct->expiration_date = Carbon::parse($expirationDate)->addDays(
+                config(
+                    'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
+                    5
+                )
+            );
+            $userProduct->save();
+
+            $userProduct = $this->userProductRepository->find($userProduct->id);
+
+            event(new UserProductCreated($userProduct));
+        }else{
+            $oldUserProduct = $this->userProductRepository->find($userProduct->id);
+
+            UserProduct::query()
+                ->where('user_id', $userId)
+                ->where('product_id', $productId)
+                ->update([
+                             'expiration_date' => Carbon::parse($expirationDate)->addDays(
+                                 config(
+                                     'ecommerce.days_before_access_revoked_after_expiry_in_app_purchases_only',
+                                     5
+                                 )
+                             ),
+                         ]);
+            $userProduct = $this->userProductRepository->find($oldUserProduct->getId());
+            event(new UserProductUpdated($userProduct, $oldUserProduct));
+        }
     }
 
 

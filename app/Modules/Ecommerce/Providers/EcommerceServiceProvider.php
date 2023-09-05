@@ -8,6 +8,7 @@ use App\Modules\Ecommerce\Console\Commands\MigrateExistingStripeMusoraGatewayPay
 use App\Modules\Ecommerce\Console\Commands\MigratePaypalGatewayToMusora;
 use App\Modules\Ecommerce\Console\Commands\MigrateStripeCustomersToMusora;
 use App\Modules\Ecommerce\Console\Commands\MigrateStripeSubscriptions;
+use App\Modules\Ecommerce\Console\Commands\SyncRevenuecatSubscriptionsToMusora;
 use App\Modules\Ecommerce\Console\Commands\SyncStripePaymentMethods;
 use App\Modules\Ecommerce\Console\Commands\ProcessAppleExpiredSubscriptions;
 use App\Modules\Ecommerce\Console\Commands\UnifySubscriptions;
@@ -43,6 +44,7 @@ class EcommerceServiceProvider extends ServiceProvider
                 MigratePaypalGatewayToMusora::class,
                 MigrateStripeSubscriptions::class,
                 FixMobileSubscriptionsBrand::class,
+                SyncRevenuecatSubscriptionsToMusora::class
             ]
         );
 
