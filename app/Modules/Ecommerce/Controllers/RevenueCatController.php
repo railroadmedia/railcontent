@@ -63,7 +63,7 @@ class RevenueCatController extends Controller
                 echo 'INITIAL_PURCHASE';
 
                 //create new user
-                $user = $this->getUser($data['event']['subscriber_attributes']['email']['value'], true);
+                $user = $this->getUser($data['event']['subscriber_attributes']['email']['value'], $data['event']['app_user_id'],true);
 
                 //store type
                 $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
@@ -99,7 +99,7 @@ class RevenueCatController extends Controller
                 echo 'RENEWAL';
 
                 // get Musora user
-                $user = $this->getUser($data['event']['subscriber_attributes']['email']['value']);
+                $user = $this->getUser($data['event']['subscriber_attributes']['email']['value'], $data['event']['app_user_id']);
                 if (!$user) {
                     //TBD
                     break;
@@ -144,7 +144,7 @@ class RevenueCatController extends Controller
                 echo 'PRODUCT_CHANGE';
               //  dd($this->revenueCatService->getSubscriber('$RCAnonymousID:2e1585a377a14fa49af61b92782b1eb6'));
                 // get Musora user
-                $user = $this->getUser($data['event']['subscriber_attributes']['email']['value']);
+                $user = $this->getUser($data['event']['subscriber_attributes']['email']['value'], $data['event']['app_user_id']);
                 if (!$user) {
                     //TBD
                     break;
@@ -178,7 +178,7 @@ class RevenueCatController extends Controller
                 // code...
                 break;
             case 'CANCELLATION':
-                $user = $this->getUser($data['event']['subscriber_attributes']['email']['value']);
+                $user = $this->getUser($data['event']['subscriber_attributes']['email']['value'], $data['event']['app_user_id']);
                 if (!$user) {
                     //TBD
                     break;
@@ -240,13 +240,16 @@ class RevenueCatController extends Controller
 
     /**
      * @param $value
-     * @return User
+     * @param $appUserId
+     * @param false $createIfNotExists
+     * @return User|null
      */
-    private function getUser($value, $createIfNotExists = false)
+    private function getUser($value, $appUserId, $createIfNotExists = false)
     : ?User {
         $user =
             User::query()
                 ->where('email', $value)
+                ->orWhere('id', $appUserId)
                 ->first();
         if (!$user && $createIfNotExists) {
             $user = new User;
