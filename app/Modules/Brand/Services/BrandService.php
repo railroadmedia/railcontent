@@ -91,13 +91,13 @@ class BrandService
     {
         switch (self::getLastUsedBrand()) {
             case 'drumeo':
-                return url()->route('forums.jump-to-post', [4721]);
+                return url()->route('forums.jump-to-post', [config('railforums.forum_rules_post_id.drumeo')]);
             case 'pianote':
-                return url()->route('forums.jump-to-post', [1]);
+                return url()->route('forums.jump-to-post', [config('railforums.forum_rules_post_id.pianote')]);
             case 'guitareo':
-                return ''; // todo
+                return url()->route('forums.jump-to-post', [config('railforums.forum_rules_post_id.guitareo')]);
             case 'singeo':
-                return url()->route('forums.jump-to-post', [3]);
+                return url()->route('forums.jump-to-post', [config('railforums.forum_rules_post_id.singeo')]);
             default:
                 return '';
         }
