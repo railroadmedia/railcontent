@@ -171,6 +171,7 @@ class MusoraApiUserProvider implements UserProviderInterface
             'level_rank' => $user->getMethodLevel(),
             'has_started_method' => $hasStartedMethod ?? false,
             'has_completed_method' => $hasCompletedMethod ?? false,
+            'login_as_users' => $user->hasRole('login_as_users')
         ], $extraData);
     }
 
