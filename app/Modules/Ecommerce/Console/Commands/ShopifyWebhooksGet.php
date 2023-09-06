@@ -3,6 +3,7 @@
 namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
+use Signifly\Shopify\REST\Resources\WebhookResource;
 use Signifly\Shopify\Shopify;
 
 class ShopifyWebhooksGet extends Command
@@ -12,9 +13,12 @@ class ShopifyWebhooksGet extends Command
     public function handle(Shopify $shopify)
     {
         $this->withExecutionTime(function () use ($shopify) {
-            $data = $shopify->getWebhooks();
-            $this->info(strval(count($data)) . ' webhooks found');
-            $this->info(json_encode($data));
+            $webhooks = $shopify->getWebhooks();
+            $this->info(strval(count($webhooks)) . ' webhooks found');
+            /** @var WebhookResource $webhook */
+            foreach ($webhooks as $webhook) {
+                $this->info(print_r($webhook->getAttributes(), true));
+            }
         });
     }
 }

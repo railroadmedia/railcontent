@@ -95,6 +95,7 @@ use Spatie\Permission\Traits\HasRoles;
  * @property int $google_count_review_display
  * @property string|null $biography
  * @property string|null $support_note
+ * @property int|null $shopify_id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @method static Builder|User newModelQuery()

@@ -2,6 +2,8 @@
 
 namespace App\Modules\Ecommerce\Services;
 
+use Modules\UserManagementSystem\Models\User;
+
 class ShopifyOrderService
 {
     public function __construct()
@@ -17,7 +19,8 @@ class ShopifyOrderService
 
     private function getUserIdFromShopifyCustomerId($shopifyCustomerId)
     {
-        return null;
+        $user = User::query()->where('shopify_customer_id', '=', $shopifyCustomerId)->first('id');
+        return $user->id;
     }
 
     private function updateUserPermissions($userId, $userPermissions)

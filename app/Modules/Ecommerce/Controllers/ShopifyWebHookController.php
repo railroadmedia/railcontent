@@ -21,8 +21,12 @@ class ShopifyWebHookController extends Controller
         Log::debug('Shopify order created webhook received');
         Log::debug(print_r($request->all(), true));
 
+        //TODO: Verify this is a genuine request from Shopify
+
         //TODO: Transform the request data into a format that can be used by the ShopifyOrderService
-        $this->shopifyOrderService->orderCreated($request->get('customer')['id']);
+        $customerId = $request->get('customer')['id'];
+        $productsPurchased = $request->get('line_items');
+        $this->shopifyOrderService->orderCreated($customerId, $productsPurchased);
 
     }
 

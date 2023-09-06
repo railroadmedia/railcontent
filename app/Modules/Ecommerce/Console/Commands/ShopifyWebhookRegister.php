@@ -14,6 +14,7 @@ class ShopifyWebhookRegister extends Command
     {
         $this->withExecutionTime(function () use ($shopify) {
             if (app()->isProduction()) {
+                //TODO: Implement this for the production environment
                 $this->error("Not implemented for the production environment");
                 return;
             }
