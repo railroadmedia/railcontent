@@ -38,15 +38,13 @@ class SubscriptionService
     ) {
         $musoraSubscription = new Subscription();
         $musoraSubscription->user_id = $userId;
-        $musoraSubscription->is_active = $expiresDate > Carbon::now();
-        $musoraSubscription->paid_until = Carbon::parse($expiresDate);
-        $musoraSubscription->apple_expiration_date = Carbon::parse($expiresDate);
+        $musoraSubscription->is_active = Carbon::createFromTimestampMs($expiresDate) > Carbon::now();
+        $musoraSubscription->paid_until = Carbon::createFromTimestampMs($expiresDate);
+        $musoraSubscription->apple_expiration_date = Carbon::createFromTimestampMs($expiresDate);
         $musoraSubscription->product_id = $musoraProduct->id;
         $musoraSubscription->brand = $musoraProduct->brand;
         $musoraSubscription->type = $type.'_subscription';
-        $musoraSubscription->start_date =
-            Carbon::parse($purchasedAtMs)
-                ->toDateTimeString();
+        $musoraSubscription->start_date = Carbon::createFromTimestampMs($purchasedAtMs);
         $musoraSubscription->created_at = Carbon::now();
         $musoraSubscription->total_cycles_paid = 1;
         $musoraSubscription->stopped = false;
@@ -58,9 +56,7 @@ class SubscriptionService
         $musoraSubscription->interval_count = $musoraProduct->subscription_interval_count;
 
         if ($unsubscribeAtMs) {
-            $musoraSubscription->canceled_on =
-                Carbon::parse($unsubscribeAtMs)
-                    ->toDateTimeString();
+            $musoraSubscription->canceled_on = Carbon::createFromTimestampMs($unsubscribeAtMs);
         }
         $musoraSubscription->save();
 
@@ -80,17 +76,15 @@ class SubscriptionService
         $unsubscribeDate = null,
         $cancelReason = null
     ) {
-        $musoraSubscription->is_active = $expiresDate > Carbon::now();
-        $musoraSubscription->paid_until = Carbon::parse($expiresDate);
-        $musoraSubscription->apple_expiration_date = Carbon::parse($expiresDate);
+        $musoraSubscription->is_active = Carbon::createFromTimestampMs($expiresDate) > Carbon::now();
+        $musoraSubscription->paid_until = Carbon::createFromTimestampMs($expiresDate);
+        $musoraSubscription->apple_expiration_date = Carbon::createFromTimestampMs($expiresDate);
 
         $musoraSubscription->canceled_on = null;
         $musoraSubscription->cancellation_reason = null;
 
         if ($unsubscribeDate) {
-            $musoraSubscription->canceled_on =
-                Carbon::parse($unsubscribeDate)
-                    ->toDateTimeString();
+            $musoraSubscription->canceled_on = Carbon::createFromTimestampMs($unsubscribeDate);
             $musoraSubscription->cancellation_reason = $cancelReason;
         } else {
             $musoraSubscription->total_cycles_paid = $musoraSubscription->total_cycles_paid + 1;

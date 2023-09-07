@@ -24,13 +24,15 @@ class RevenueCatController extends Controller
      * @param RevenueCatService $revenueCatService
      * @param SubscriptionService $subscriptionService
      * @param UserProductService $userProductService
+     * @param PaymentService $paymentService
      */
     public function __construct(
-        RevenueCatService $revenueCatService,
+        RevenueCatService   $revenueCatService,
         SubscriptionService $subscriptionService,
-        UserProductService $userProductService,
-        PaymentService $paymentService
-    ) {
+        UserProductService  $userProductService,
+        PaymentService      $paymentService
+    )
+    {
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
         $this->userProductService = $userProductService;
@@ -82,18 +84,21 @@ class RevenueCatController extends Controller
                 $currentRevenueCatSubscription =
                     $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
 
-                //create Musora subscription
-                $musoraSubscription = $this->subscriptionService->createSubscription(
-                    $user->id,
-                    $currentRevenueCatSubscription['expires_date'],
-                    $musoraProduct,
-                    $type,
-                    $data['event']['purchased_at_ms']
-                );
+                //check if already exists Musora subscription
+                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
+                if (!$musoraSubscription) {
+                    //create Musora subscription
+                    $musoraSubscription = $this->subscriptionService->createSubscription(
+                        $user->id,
+                        $data['event']['expiration_at_ms'],
+                        $musoraProduct,
+                        $type,
+                        $data['event']['purchased_at_ms']
+                    );
+                }
 
-                if($data['event']['period_type'] != 'TRIAL')
-                {
-                    $this->paymentService->create( $user->id, $musoraProduct, $musoraSubscription, $type);
+                if ($data['event']['period_type'] != 'TRIAL') {
+                    $this->paymentService->create($musoraSubscription, $type, $data['event']['event_timestamp_ms'], $data['event']['transaction_id']);
                 }
 
                 //Assign user product
@@ -139,8 +144,8 @@ class RevenueCatController extends Controller
                     //create Musora subscription
                     $musoraSubscription = $this->subscriptionService->createSubscription(
                         $user->id,
-                        $currentRevenueCatSubscription['expires_date'],
-                        $musoraProduct,
+                        $data['event']['expiration_at_ms'],
+                        $musoraProduct->first(),
                         $type,
                         $data['event']['purchased_at_ms']
                     );
@@ -149,11 +154,10 @@ class RevenueCatController extends Controller
                 //update Musora subscription
                 $this->subscriptionService->updateSubscription(
                     $musoraSubscription,
-                    $currentRevenueCatSubscription['expires_date']
+                    $data['event']['expiration_at_ms']
                 );
 
-                $this->paymentService->create( $user->id, $musoraProduct, $musoraSubscription, $type);
-                dd('out');
+                $this->paymentService->create($musoraSubscription, $type, $data['event']['purchased_at_ms'], $data['event']['transaction_id']);
 
                 //update user product
                 $this->userProductService->assignUserProduct(
@@ -191,7 +195,7 @@ class RevenueCatController extends Controller
                 //create Musora subscription
                 $musoraSubscription = $this->subscriptionService->createSubscription(
                     $user->id,
-                    $currentRevenueCatSubscription['expires_date'],
+                    $data['event']['expiration_at_ms'],
                     $musoraProduct,
                     $type,
                     $data['event']['purchased_at_ms']
@@ -235,7 +239,7 @@ class RevenueCatController extends Controller
                     //create Musora subscription
                     $musoraSubscription = $this->subscriptionService->createSubscription(
                         $user->id,
-                        $currentRevenueCatSubscription['expires_date'],
+                        $data['event']['expiration_at_ms'],
                         $musoraProduct,
                         $type,
                         $data['event']['purchased_at_ms']
@@ -288,8 +292,8 @@ class RevenueCatController extends Controller
      * @param false $createIfNotExists
      * @return User|null
      */
-    private function getUser($value, $appUserId, $createIfNotExists = false)
-    : ?User {
+    private function getUser($value, $appUserId, $createIfNotExists = false): ?User
+    {
         $user =
             User::query()
                 ->where('email', $value)
@@ -315,17 +319,17 @@ class RevenueCatController extends Controller
      */
     private function getMusoraProduct(string $type, $event, mixed $productId)
     {
-        $store = $type.'_store';
-        if ($event['period_type'] == 'TRIAL') {
-            $productsMap = [config('ecommerce.'.$store.'_products_map_trial')[$productId]];
+        $store = $type . '_store';
+        if ($event['period_type'] == 'TRIAL' || $event['is_trial_conversion']) {
+            $productsMap = [config('ecommerce.' . $store . '_products_map_trial')[$productId]];
         } else {
-            $productsMap = [config('ecommerce.'.$store.'_products_map')[$productId]];
+            $productsMap = [config('ecommerce.' . $store . '_products_map')[$productId]];
         }
 
-        if ($event['type'] != 'INITIAL_PURCHASE') {
+        if ($event['type'] != 'INITIAL_PURCHASE' && !$event['is_trial_conversion']) {
             $productsMap = array_merge(
-                [config('ecommerce.'.$store.'_products_map')[$productId]],
-                [config('ecommerce.'.$store.'_products_map_trial')[$productId]]);
+                [config('ecommerce.' . $store . '_products_map')[$productId]],
+                [config('ecommerce.' . $store . '_products_map_trial')[$productId]]);
         }
 
         $musoraProduct =
@@ -339,8 +343,8 @@ class RevenueCatController extends Controller
      * @param $productId1
      * @return string
      */
-    private function getProductId($productId1)
-    : string {
+    private function getProductId($productId1): string
+    {
         $productId = $productId1;
         if (strpos($productId, ':') !== false) {
             $productId = explode(':', $productId)[0];
@@ -355,10 +359,12 @@ class RevenueCatController extends Controller
      * @return mixed
      * @throws \Exception
      */
-    private function getCurrentRevenueCatSubscription($appUserId, string $productId)
-    : mixed {
+    private function getCurrentRevenueCatSubscription($appUserId, string $productId): mixed
+    {
         $subscriber = $this->revenueCatService->getSubscriber($appUserId);
+
         $revenueCatSubscriptions = (json_decode(json_encode($subscriber->subscriptions), true));
+
         $currentRevenueCatSubscription = $revenueCatSubscriptions["$productId"] ?? null;
 
         return $currentRevenueCatSubscription;
@@ -375,7 +381,7 @@ class RevenueCatController extends Controller
         $musoraSubscription =
             Subscription::query()
                 ->where('user_id', '=', $user->id)
-                ->where('type', '=', $type.'_subscription')
+                ->where('type', '=', $type . '_subscription')
                 ->whereIn(
                     'product_id',
                     $musoraProducts->pluck('id')
