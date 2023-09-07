@@ -4,6 +4,7 @@ namespace App\Console\Commands\Traits;
 
 use App\Models\ShopifySync;
 use Carbon\Carbon;
+use Doctrine\ORM\EntityRepository;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -38,7 +39,7 @@ trait SyncsToShopify
 
         if ($fresh) {
             $this->info(
-                sprintf("Performing a fresh sync. All ecommerce %s will be sent to Shopify.",
+                sprintf("Performing a fresh sync. All %s will be sent to Shopify.",
                 Str::plural($this->getSyncResource()))
             );
         }
@@ -188,7 +189,7 @@ trait SyncsToShopify
     /**
      * Get the Repository for this ecommerce entity
      *
-     * @return RepositoryBase
+     * @return RepositoryBase|EntityRepository
      */
-    abstract protected function getEcommerceEntityRepository(): RepositoryBase;
+    abstract protected function getEcommerceEntityRepository(): RepositoryBase|EntityRepository;
 }
