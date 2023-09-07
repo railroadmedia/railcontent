@@ -10,6 +10,7 @@ use App\Modules\Ecommerce\Services\UserProductService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
+use Modules\Ecommerce\Services\PaymentService;
 use Modules\UserManagementSystem\Models\User;
 
 class RevenueCatController extends Controller
@@ -17,6 +18,7 @@ class RevenueCatController extends Controller
     private RevenueCatService $revenueCatService;
     private SubscriptionService $subscriptionService;
     private UserProductService $userProductService;
+    private PaymentService $paymentService;
 
     /**
      * @param RevenueCatService $revenueCatService
@@ -26,11 +28,13 @@ class RevenueCatController extends Controller
     public function __construct(
         RevenueCatService $revenueCatService,
         SubscriptionService $subscriptionService,
-        UserProductService $userProductService
+        UserProductService $userProductService,
+        PaymentService $paymentService
     ) {
         $this->revenueCatService = $revenueCatService;
         $this->subscriptionService = $subscriptionService;
         $this->userProductService = $userProductService;
+        $this->paymentService = $paymentService;
     }
 
     public function processNotification(Request $request)
@@ -142,6 +146,9 @@ class RevenueCatController extends Controller
                     $musoraSubscription,
                     $currentRevenueCatSubscription['expires_date']
                 );
+
+                $this->paymentService->create( $user->id, $musoraProduct, $musoraSubscription);
+                dd('out');
 
                 //update user product
                 $this->userProductService->assignUserProduct(
