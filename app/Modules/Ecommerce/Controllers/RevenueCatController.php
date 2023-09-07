@@ -118,7 +118,7 @@ class RevenueCatController extends Controller
                 // get Musora user
                 $user = $this->getUser(
                     $data['event']['subscriber_attributes']['email']['value'],
-                    $data['event']['app_user_id']
+                    $data['event']['app_user_id'],true
                 );
                 if (!$user) {
                     //TBD
@@ -320,13 +320,14 @@ class RevenueCatController extends Controller
     private function getMusoraProduct(string $type, $event, mixed $productId)
     {
         $store = $type . '_store';
-        if ($event['period_type'] == 'TRIAL' || $event['is_trial_conversion']) {
+        $isTrialConversion = array_key_exists('is_trial_conversion', $event) && $event['is_trial_conversion'] ;
+        if ($event['period_type'] == 'TRIAL' || $isTrialConversion) {
             $productsMap = [config('ecommerce.' . $store . '_products_map_trial')[$productId]];
         } else {
             $productsMap = [config('ecommerce.' . $store . '_products_map')[$productId]];
         }
 
-        if ($event['type'] != 'INITIAL_PURCHASE' && !$event['is_trial_conversion']) {
+        if ($event['type'] != 'INITIAL_PURCHASE' && !$isTrialConversion) {
             $productsMap = array_merge(
                 [config('ecommerce.' . $store . '_products_map')[$productId]],
                 [config('ecommerce.' . $store . '_products_map_trial')[$productId]]);
