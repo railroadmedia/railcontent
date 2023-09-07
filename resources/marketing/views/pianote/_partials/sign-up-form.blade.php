@@ -58,12 +58,12 @@
         <input name="success_redirect" type="hidden" value="/thank-you"/>
     @endif
 </form>
+
 @if(empty($minimalForm))
     <div class="disclaimer opacity-70 mx-auto flex items-center" style="max-width: 470px; @if(!empty($disclaimerColor)) color:{{ $disclaimerColor }}; @endif">
         <i class="fa-light fa-info-circle leading-none w-10 text-xl md:text-3xl"></i>
         <span class="mx-auto text-left leading-tight flex-1 text-xs"><em>By signing up you’ll also receive our ongoing free lessons and special offers. Don’t worry, we value your privacy and you can unsubscribe at any time.</em></span>
     </div>
-
     <div class="thank-you-box w-full rounded-lg mx-auto bg-white text-center text-black max-w-2xl">
         <p><strong><i class="fas fa-check"></i> Success!</strong></p>
         <h2 class="text-pianote my-4 sm:my-5 font-roboto"><strong>@if(!empty($headline)) {{ $headline }} @else CHECK YOUR EMAIL @endif</strong></h2>
