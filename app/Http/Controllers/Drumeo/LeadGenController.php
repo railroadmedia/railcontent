@@ -272,7 +272,7 @@ class LeadGenController extends BaseController
             return view('drumeo.lead-gen.blog-forms.'.$page, ['recaptchaKey'=>config('recaptcha.key')]);
         }
         else {
-            return view('drumeo.lead-gen.pages.'.$page);
+            return view('drumeo.lead-gen.pages.'.$page, ['theme' => 'drumeo']);
         }
 
         throw new NotFoundHttpException();

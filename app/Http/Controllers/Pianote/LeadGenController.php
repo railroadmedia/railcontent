@@ -72,6 +72,11 @@ class LeadGenController extends BaseController
         return view('pianote.lead-gen.recitals');
     }
 
+    public function sixReasons()
+    {
+        return view('pianote.lead-gen.6-reasons', ['theme' => 'pianote']);
+    }
+
     public function classicalcohort1()
     {
         return view('pianote.lead-gen.classical-cohort.1');
