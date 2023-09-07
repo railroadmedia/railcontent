@@ -24,9 +24,8 @@ class ShopifyWebHookController extends Controller
         //TODO: Verify this is a genuine request from Shopify
 
         //TODO: Transform the request data into a format that can be used by the ShopifyOrderService
-        $customerId = $request->get('customer')['id'];
-        $productsPurchased = $request->get('line_items');
-        $this->shopifyOrderService->orderCreated($customerId, $productsPurchased);
+        $shopifyCustomerId = $request->get('customer')['id'];
+        $this->shopifyOrderService->syncCustomer($shopifyCustomerId);
 
     }
 
