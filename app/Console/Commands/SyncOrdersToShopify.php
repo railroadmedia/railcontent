@@ -107,7 +107,6 @@ class SyncOrdersToShopify extends Command
         $batchSize = 50;
         $this->loopOrdersSync($batchSize);
 
-        // return $this->sync();
         return self::SUCCESS;
     }
     /**
@@ -535,7 +534,9 @@ class SyncOrdersToShopify extends Command
         }
 
         if ($order->getTaxesDue()) {
-            $orderData["tax_lines"] = [ "price" => $order->getTaxesDue()];
+            $orderData["tax_lines"] = [
+                [ "price" => $order->getTaxesDue()]
+            ];
         }
 
         // the proper addresses should already have been synced by the user/customer, so only use it if Shopify has it
