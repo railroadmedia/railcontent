@@ -1,19 +1,125 @@
-@extends('musora.pages.6-reasons-layout')
+@extends('musora._partials.layout')
 
-@php
-    $metaT = '6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora';
-    $metaD = 'Online music lessons have grown in popularity because they work!';
-    $metaI = 'https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg';
-    $title = '6 Reasons Online Music Lessons<br class="hidden sm:inline"> Will Help Your Learn Faster';
-    $header = 'https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/header.png';
-    $subHeader = 'You <strong>can</strong> play music like you’ve always wanted – piano, guitar, drums, or singing – learning from scratch at any age, expressing yourself creatively, and playing the songs you love.
+@section('head-includes')
+    <title>6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora</title>
+    <meta property="og:title" content="6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora">
+
+    <meta name="description" content="Online music lessons have grown in popularity because they work!">
+    <meta property="og:description" content="Online music lessons have grown in popularity because they work!">
+
+    <meta property="og:url" content="https://www.musora.com/{{ Request::path() }}">
+    <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
+    <style>
+        .join {
+            display:inline-block;
+            font:500 22px/1em 'Bebas Neue', sans-serif;
+            letter-spacing:0.1em;
+            text-transform:uppercase;
+            background:#0c1524;
+            border-radius:50px;
+            color:#fff;
+            padding:17px 7%;
+            outline:none;
+            cursor:pointer;
+            text-align:center;
+            user-select:none;
+            text-decoration:none;
+            transition:background-color 0.3s, color 0.3s, opacity 0.3s;
+            box-shadow:0 0 0 rgba(0, 0, 0, 0.35);
+        }
+
+        @media (min-width:768px) {
+            .join {
+                font-size:30px;
+            }
+        }
+
+        .join:hover, .join:focus {
+            color:#fff;
+            background:#14233d;
+            box-shadow:0 0 7px rgba(0, 0, 0, 0.35);
+        }
+        .join i {
+            transition:all .3s;
+            position:relative;
+            right:0px;
+        }
+        .join:hover i {
+            right:-3px;
+        }
+
+        .join.smaller {
+            padding:8px 30px;
+            font-size:16px;
+        }
+
+        @media (min-width:768px) {
+            .join.smaller {
+                font-size:18px;
+                padding:11px 30px;
+            }
+        }
+
+        .join.musora-gold {
+            background-color:#FFAE00;
+            color:#000;
+        }
+
+        .join.musora-gold:hover, .join.musora-gold:focus {
+            background:#FFAE00;
+            color:#000;
+        }
+
+        .text-musora-black {
+            color:#0c1524;
+        }
+
+        .text-musora,
+        .text-musora-gold {
+            color:#FFAE00;
+        }
+        .splide__pagination__page.is-active {
+            background:#01050F;
+            transform:none !important;
+        }
+
+        .splide__pagination__page {
+            margin:3px 10px !important;
+            opacity:1 !important;
+        }
+
+        @media (min-width:768px) {
+            .splide__pagination__page {
+                margin:3px 6px !important;
+            }
+        }
+
+        .splide__arrow svg {
+            fill:#FFAE00 !important;
+        }
+        p strong {
+            font-weight:900;
+        }
+    </style>
+@endsection
+
+@section('layout-scripts')
+    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+@endsection
+
+@include('musora.pages._6-reasons', [
+    "title" => '6 Reasons Online Music Lessons<br class="hidden sm:inline"> Will Help Your Learn Faster',
+    "header" => 'https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/header.png',
+    "subHeader" => 'You <strong>can</strong> play music like you’ve always wanted – piano, guitar, drums, or singing – learning from scratch at any age, expressing yourself creatively, and playing the songs you love
                 <br><br>
                 Online music lessons have grown in popularity <strong>because they work</strong>– combining TECHNOLOGY and TRADITION with step-by-step video lessons, helpful practice tools, and all of your favorite songs.
                 <br><br>
                 It’s easier to get started. You’ll have everything you need in one place, accessible anytime and affordable. And you’ll <strong>keep playing longer</strong> with the world’s best teachers and communities to support your goals.
                 <br><br>
-                <strong>Here are six reasons you’ll love online music lessons…</strong>';
-    $points = [
+                <strong>Here are six reasons you’ll love online music lessons…</strong>',
+    "points" => [
         [
         "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/01-happiness.jpg",
         "title" => "1. Happiness… backed by science!",
@@ -70,7 +176,7 @@
         [
         "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/06-love.jpg",
         "title" => "6. Unlimited love & support.",
-        "description" => "One last thing :)
+        "description" => "One last thing 🙂
         <br><br>
         When you join Musora, you’ll join a community of 80,000+ music students from around the world PLUS our in-house team of teachers and mentors to <strong>help you reach your goals</strong>.
         <br><br>
@@ -86,4 +192,4 @@
         <strong>You’ll only pay if you actually LOVE your music lessons experience.</strong>",
         ],
     ]
-@endphp
+])
