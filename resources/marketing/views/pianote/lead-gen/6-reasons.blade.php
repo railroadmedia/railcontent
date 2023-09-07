@@ -1,147 +1,21 @@
-@extends('drumeo._partials.global-layout')
+@extends('pianote._partials.global-layout')
 
 @section('global-head')
-    <title>6 Reasons Why You’ll Learn To Play The Drums Faster With Musora.</title>
-    <meta property="og:title" content="6 Reasons Why You’ll Learn To Play The Drums Faster With Musora.">
+    <title>6 Reasons Why You’ll Learn To Play The Piano Faster With Musora.</title>
+    <meta property="og:title" content="6 Reasons Why You’ll Learn To Play The Piano Faster With Musora.">
 
-    <meta name="description" content="Online drum lessons have soared in popularity for a good reason: they work.">
-    <meta property="og:description" content="Online drum lessons have soared in popularity for a good reason: they work.">
+    <meta name="description" content="Online piano lessons have soared in popularity for a good reason: they work.">
+    <meta property="og:description" content="Online piano lessons have soared in popularity for a good reason: they work.">
 
-    <meta property="og:url" content="https://www.drumeo.com/{{ Request::path() }}">
+    <meta property="og:url" content="https://www.pianote.com/{{ Request::path() }}">
     <meta property="og:image" content="https://dmmior4id2ysr.cloudfront.net/homepage/2023/share-image3.jpg" style="display: none;">
-
-    @include('_partials.layout._fonts')
 
     @include('_partials.layout._tailwindcdn')
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
-
+    <link href="{{ asset('/marketing/parcel/drumeo/lead-gen-learn-songs.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/sales-pianote.css') }}">
+    <link rel="stylesheet" href="{{ asset('/marketing/parcel/drumeo/nav-footer-pianote.css') }}">
     <style>
-
-        h1 strong, h2 strong, h3 strong, h4 strong, h5 strong, h6 strong {
-            font-weight:900
-        }
-
-        h1, h2, h3, h4, h5, h6, li, p {
-            font-family:Open Sans, sans-serif;
-            font-weight:400;
-            line-height:1em;
-            margin:0 auto
-        }
-
-        h1 sup, h2 sup, h3 sup, h4 sup, h5 sup, h6 sup, li sup, p sup {
-            font-size:50%;
-            top:-.75em
-        }
-
-        h1 {
-            font-size:24px;
-            line-height:1.2em
-        }
-
-        @media (min-width:768px) {
-            h1 {
-                font-size:36px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h1 {
-                font-size:48px
-            }
-        }
-
-        h2 {
-            font-size:20px;
-            line-height:1.2em
-        }
-
-        @media (min-width:768px) {
-            h2 {
-                font-size:30px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h2 {
-                font-size:36px
-            }
-        }
-
-        h3 {
-            font-size:18px
-        }
-
-        @media (min-width:768px) {
-            h3 {
-                font-size:24px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h3 {
-                font-size:30px
-            }
-        }
-
-        h4 {
-            font-size:16px
-        }
-
-        @media (min-width:768px) {
-            h4 {
-                font-size:20px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h4 {
-                font-size:24px
-            }
-        }
-
-        h5 {
-            font-size:15px
-        }
-
-        @media (min-width:768px) {
-            h5 {
-                font-size:18px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h5 {
-                font-size:20px
-            }
-        }
-
-        h6 {
-            font-size:15px
-        }
-
-        @media (min-width:768px) {
-            h6 {
-                font-size:16px
-            }
-        }
-
-        @media (min-width:1024px) {
-            h6 {
-                font-size:18px
-            }
-        }
-
-        li, p {
-            font-size:15px;
-            line-height:1.6em
-        }
-
-        @media (min-width:1024px) {
-            li, p {
-                font-size:16px
-            }
-        }
         .join.musora-gold {
             background-color: #FFAE00;
             color: #000;
@@ -154,21 +28,24 @@
         }
 
     </style>
-@stop
+@endsection
 
 @section('global-body')
-    @include("drumeo.sales.partials._nav")
+    @include('pianote.sales.partials._nav')
 
     @include('musora.pages._6-reasons', [
-        "title" => '6 Reasons Why You’ll Learn To Play<br class="hidden sm:inline"> The Drums Faster With Musora.',
+        "title" => '6 Reasons Why You’ll Learn To Play<br class="hidden sm:inline"> The Piano Faster With Musora.',
         "header" => 'https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/header.png',
-        "subHeader" => 'Imagine finally playing the drums like you’ve always wanted, expressing yourself creatively, and mastering those crazy solos that made you fall in love with music &nbsp;- all without having to spend $100s or having to go through hours of pointless practice.
-<br><br>
-Online drum lessons have soared in popularity for a good reason:&nbsp;<strong>they work.</strong>
-<br><br>
+        "subHeader" => 'Imagine playing the piano like you’ve always wanted, expressing yourself creatively, and mastering the songs you love - all without having to spend $100s or having to go through hours of pointless practice.
+			<br/>
+			<br/>
+Online piano lessons have soared in popularity for a good reason: they work.
+			<br/>
+			<br/>
 By marrying TECHNOLOGY and TRADITION, Musora gives you step-by-step video lessons, handy practice tools, and a library of your favorite songs.
-<br><br>
-Starting your journey has never been easier. You’ll get everything you need in one single place, accessible anytime, anywhere. Plus, learning from the world’s best drum teachers and finding support within our vibrant communities WILL keep you playing longer..
+			<br/>
+			<br/>
+Starting your journey has never been easier. You’ll get everything you need in one single place, accessible anytime, anywhere. Plus, learning from the world’s best piano teachers and finding support within our vibrant communities WILL keep you playing longer.
                     <br><br>
                     <strong>Here are six reasons you’ll love online music lessons…</strong>',
         "points" => [
@@ -191,7 +68,7 @@ Music should serve you. And having drum lessons that work around your life will 
             ],
             [
             "image" => "https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/02-learn.jpg",
-            "title" => "2. Drumming is happiness… backed by science!",
+            "title" => "2. Piano is happiness… backed by science!",
             "description" => "In today's stress-filled world, finding time to care for your mental health is vital.
 			<br/>
 			<br/>
@@ -274,12 +151,13 @@ With Musora, you're not just learning to hit drums with sticks – you're gettin
         ]
     ])
 
-    @include("drumeo.sales.partials._footer", [
+    @include("pianote.sales.partials._footer", [
             "minimal" => true
         ])
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
-    <script src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-@stop
+    <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js"></script>
+@endsection
+
