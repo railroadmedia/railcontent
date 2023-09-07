@@ -199,7 +199,7 @@
             <div class="guitar"  style="background-image: url(https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/background-guitar.jpg);"></div>
         </div>
         <div class="container mx-auto max-w-6xl relative z-10">
-            <img class="mx-auto h-16 sm:h-32 lg:h-40 mb-5 md:mb-10" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://musora-center.s3.amazonaws.com/affiliate/Musora-AllBrands.png" alt="musora logos" fetchpriority="high">
+            <img class="mx-auto h-16 sm:h-32 lg:h-40 mb-5 md:mb-10" src="https://www.musora.com/musora-cdn/image/width=900,quality=95/https://dmmior4id2ysr.cloudfront.net/affiliate/Musora-AllBrands.png" alt="musora logos" fetchpriority="high">
 
             <h2><strong>Musora’s<br class="inline sm:hidden"> Ambassador Program</strong></h2>
             <h4 class="mt-3 mb-5 md:mb-10 leading-normal">Get paid to promote world-class<br class="inline md:hidden"> online music lessons.</h4>

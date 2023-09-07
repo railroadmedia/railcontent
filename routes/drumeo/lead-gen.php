@@ -9,7 +9,9 @@ Route::domain('{drumeoDomain}')->middleware(['web_public'])->group(function () {
 
             // if page is null, it's the root /
             Route::get('/{page?}', LeadGenController::class . '@oneHundredSongs')
-                ->whereIn('page', [null, 'unlocked']);
+                ->whereIn('page', [
+                    null, 'unlocked', 'thank-you', 'ty-annual', 'ty-monthly'
+                ]);
 
         }
     );

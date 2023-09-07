@@ -12,7 +12,7 @@
                 @if(!empty($headline)) {!! $headline  !!}  @else Your first @if(empty($month)) week @else month @endif <br class="inline sm:hidden"> is free. @endif</strong></h1>
         <h5 class="mt-2 md:mt-4 mb-5 leading-tight">
             When you join in September, we’ll donate 20% of your first payment towards <br class="hidden sm:inline">
-            music programs for kids through the <a href="https://musicounts.ca/en/programs/musicounts-band-aid-program/"><u>MusiCounts Band Aid Program</u></a>.
+            music programs for kids through the <a href="https://musicounts.ca/en/programs/grants/musicounts-school-music-funding-programs/musicounts-band-aid-program/"><u>MusiCounts Band Aid Program</u></a>.
             <br><br>
             Choose the plan that will continue on <br class="inline lg:hidden">
             @if(empty($month)) {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} @else {{ Carbon\Carbon::now()->addDays(30)->format('F jS') }} @endif
