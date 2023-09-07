@@ -134,10 +134,10 @@
                 </a>
             </div>
             <picture>
-                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1800,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/header.png">
+                <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1800,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/header.png">
                 <img
                     class="w-full my-6 lg:my-10 transition-opacity opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/header-m.png"
+                    src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/header-m.png"
                     alt="header image"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
@@ -154,9 +154,9 @@
 
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
                 <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/01-happiness.jpg">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/01-happiness.jpg">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/01-happiness.jpg"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/01-happiness.jpg"
                     >
                 </picture>
                 <div class="sm:pl-9 flex-shrink">
@@ -170,9 +170,9 @@
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
                 <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/02-learn.jpg">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/02-learn.jpg">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/02-learn.jpg"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/02-learn.jpg"
                     >
                 </picture>
                 <div class="sm:pl-9 flex-shrink">
@@ -190,9 +190,9 @@
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
                 <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/03-teachers.jpg">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/03-teachers.jpg">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/03-teachers.jpg"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/03-teachers.jpg"
                     >
                 </picture>
                 <div class="sm:pl-9 flex-shrink">
@@ -208,9 +208,9 @@
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
                 <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/04-songs2.jpg">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/04-songs2.jpg">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/04-songs2.jpg"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/04-songs2.jpg"
                     >
                 </picture>
                 <div class="sm:pl-9 flex-shrink">
@@ -226,9 +226,9 @@
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
                 <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/05-save.jpg">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/05-save.jpg">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/05-save.jpg"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/05-save.jpg"
                     >
                 </picture>
                 <div class="sm:pl-9 flex-shrink">
@@ -242,9 +242,9 @@
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
                 <picture class="w-full sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/06-love.jpg">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/06-love.jpg">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/06-love.jpg"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/06-love.jpg"
                     >
                 </picture>
                 <div class="sm:pl-9 flex-shrink">
@@ -258,9 +258,9 @@
             </div>
             <div class="flex flex-wrap sm:flex-nowrap items-start justify-center text-left mb-16 sm:mb-20">
                 <picture class="w-36 sm:w-56 flex-shrink-0">
-                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/guarantee.png">
+                    <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guarantee.png">
                     <img class="w-full mb-5 sm:mb-0 rounded-xl transition-opacity opacity-0" alt="reason image" loading="lazy" onload="this.classList.remove('opacity-0')"
-                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://musora-center.s3.amazonaws.com/sales/6-reasons/guarantee.png"
+                        src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/sales/6-reasons/guarantee.png"
                     >
                 </picture>
                 <div class="sm:pl-9 flex-shrink">

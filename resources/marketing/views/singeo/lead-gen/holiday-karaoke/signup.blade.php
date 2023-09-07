@@ -25,7 +25,6 @@
                 "formName" => 'Holiday Karaoke',
                 "formId" => "Singeo - Engagement - Trigger - Holiday Karaoke - Web Form",
                 "buttonText" => "Send My Songs ",
-                "oneLine" => true,
                 "noTy" => true
                 ])
 
@@ -309,7 +308,6 @@
                 "formName" => 'Holiday Karaoke',
                 "formId" => "Singeo - Engagement - Trigger - Holiday Karaoke - Web Form2",
                 "buttonText" => "Send My Songs ",
-                "oneLine" => true,
                 "noTy" => true
                 ])
 
