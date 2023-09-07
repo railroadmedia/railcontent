@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Console\Commands\Traits\SyncsToShopify;
 use Carbon\Carbon;
 use Doctrine\ORM\ORMException;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
 use Illuminate\Console\Command;
@@ -124,42 +125,54 @@ class SyncOrdersToShopify extends Command
 
         // get the orders, using pagination to keep from blowing up the memory usage
         $qb = $this->orderRepository->createQueryBuilder('entity');
-        if (!$fresh) {;
+        if (!$fresh) {
             $this->info(
                 sprintf("Retrieving all orders that have not been synced, or have been updated since %s ...",
                     $this->lastSyncAt->toString())
             );
-            // we also need to check if any of the order's order items or order item fulfillments need to be synced, so join those
-            $qb->join('entity.orderItems', 'oi')
-                ->join('entity.orderItemFulfillments', 'oif')
-                // either has null shopify_id
-                ->where(
-                    $qb->expr()
-                        ->isNull("entity.shopifyId")
-                )->orWhere(
-                    $qb->expr()
-                        ->isNull("oi.shopifyId")
-                )
-                ->orWhere(
-                    $qb->expr()
-                        ->isNull("oif.shopifyId")
-                )
-                // either has been updated since the last sync
-                ->orWhere(
-                    $qb->expr()
-                        ->gt("entity.updatedAt", ":lastSyncAt")
-                )->orWhere(
-                    $qb->expr()
-                        ->gt("oi.updatedAt", ":lastSyncAt")
-                )->orWhere(
-                    $qb->expr()
-                        ->gt("oif.updatedAt", ":lastSyncAt")
-                )->setParameter("lastSyncAt", $this->lastSyncAt)
-            //TODO TESTING ONLY
-            ->andWhere(
+
+            // we also need to check if any of the order's order items or order item fulfillments need to be synced,
+            // so create query builders for each of those
+            $orderItemQB = new QueryBuilder($this->entityManager);
+            $orderItemFulfillmentQB = new QueryBuilder($this->entityManager);
+
+            $qb->where(
                 $qb->expr()
-                    ->in("entity.id", ":ids")
-            )->setParameter("ids", [4820, 59526,59715,68775,60643,60895,61019,71344]);
+                    ->isNull("entity.shopifyId")
+            )->orWhere(
+                $qb->expr()
+                    ->gt("entity.updatedAt", ":lastSyncAt")
+            )
+            ->orWhere(
+                $qb->expr()->in(
+                    "entity.id",
+                    $orderItemQB->select("oi.orderId")
+                        ->from(OrderItem::class, "oi")
+                        ->where(
+                            $orderItemQB->expr()
+                                ->isNull("oi.shopifyId")
+                        )->orWhere(
+                            $orderItemQB->expr()
+                                ->gt("oi.updatedAt", ":lastSyncAt")
+                        )
+                        ->getDQL()
+                )
+            )
+            ->orWhere(
+                $qb->expr()->in(
+                    "entity.id",
+                    $orderItemFulfillmentQB->select("oif.orderId")
+                        ->from(OrderItemFulfillment::class, "oif")
+                        ->where(
+                            $orderItemQB->expr()
+                                ->isNull("oif.shopifyId")
+                        )->orWhere(
+                            $orderItemQB->expr()
+                                ->gt("oif.updatedAt", ":lastSyncAt")
+                        )
+                        ->getDQL()
+                )
+            )->setParameter("lastSyncAt", $this->lastSyncAt);
         }
 
         if ($limit) {
@@ -200,7 +213,32 @@ class SyncOrdersToShopify extends Command
                 $bar->start();
             }
 
-            $this->syncOrder($order, $fresh, $index+1);
+            // TODO: remove this check once all users/customers have been synced
+            $skip = false;
+            if (!is_null($order->getUser())) {
+                // the user is returned with only their id and email, so get the id and get a fresh copy
+                $user = $this->userRepository->find($order->getUser()->getId());
+                if (is_null($user->getShopifyId())) {
+                    $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>","User has not been synced to Shopify"];
+                    $skip = true;
+                }
+            } elseif(!is_null($order->getCustomer())) {
+                // the customer is returned with only their id and email, so get the id and get a fresh copy
+                $customer = $this->customerRepository->find($order->getCustomer()->getId());
+                if (is_null($customer->getShopifyId())) {
+                    $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>","Customer has not been synced to Shopify"];
+                    $skip = true;
+                }
+            } else {
+                // something went very wrong here
+                $this->error(sprintf("No user or customer found for Order ID %s. Skipping order sync.", $order->getId()));
+                $skip = true;
+            }
+
+            if (!$skip) {
+                $this->syncOrder($order, $fresh, $index + 1);
+            }
+
             $bar->advance();
 
             // batch has ended
@@ -614,6 +652,7 @@ class SyncOrdersToShopify extends Command
                     $product->getType()));
             }
         }
+        return [];
     }
 
     /**
