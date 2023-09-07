@@ -65,6 +65,7 @@
                     "formId" => "Singeo - Engagement - Trigger - Stop Hating Your Voice - Web Form",
                     "formName" => 'Stop Hating Your Voice',
                     "buttonText" => "Send My Lessons",
+                    "stacked" => true,
                     "noTy" => true
                     ])
 
@@ -178,7 +179,6 @@
                     "formId" => "Singeo - Engagement - Trigger - Stop Hating Your Voice - Web Form2",
                     "formName" => 'Stop Hating Your Voice',
                     "buttonText" => "Send My Lessons",
-                    "oneLineLg" => true,
                     "noTy" => true
                     ])
 
