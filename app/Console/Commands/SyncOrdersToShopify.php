@@ -3,11 +3,13 @@
 namespace App\Console\Commands;
 
 use App\Console\Commands\Traits\SyncsToShopify;
+use Carbon\Carbon;
+use Doctrine\ORM\ORMException;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Railroad\Ecommerce\Entities\Order;
-use Railroad\Ecommerce\Entities\OrderDiscount;
 use Railroad\Ecommerce\Entities\OrderItem;
 use Railroad\Ecommerce\Entities\OrderItemFulfillment;
 use Railroad\Ecommerce\Entities\Product;
@@ -18,6 +20,8 @@ use Railroad\Ecommerce\Repositories\OrderItemRepository;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\RepositoryBase;
 use Railroad\Ecommerce\Repositories\UserRepository;
+use Signifly\Shopify\Exceptions\ValidationException;
+use Signifly\Shopify\REST\Resources\ApiResource;
 use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
 
@@ -50,9 +54,19 @@ class SyncOrdersToShopify extends Command
     protected UserRepository $userRepository;
     protected EcommerceEntityManager $entityManager;
 
+    // the date and time that the last sync for this entity was performed
+    protected Carbon $lastSyncAt;
+
+    // running collection of the Shopify IDs returned in this run, so we can record it
+    protected Collection $shopifyIds;
+
+    // rows for displaying the results in a table
+    protected array $tableRows = [];
+
     // constants for tracking results of creating fulfillments
-    const ORDER_ITEM_FULFILLMENT_ID = "order_item_fulfillment_id";
-    const SHOPIFY_FULFILLMENT_ID = "shopify_fulfillment_id";
+    const TABLE_ITEM_ID = "item_id";
+    const TABLE_SHOPIFY_FULFILLMENT_ID = "shopify_fulfillment_id";
+    const TABLE_ITEM_ACTION = "order_item_fulfillment_action";
 
     /**
      * Execute the console command.
@@ -82,196 +96,366 @@ class SyncOrdersToShopify extends Command
         $this->userRepository = $userRepository;
         $this->entityManager = $entityManager;
 
-        return $this->sync();
+        // record this as a class variable so that it doesn't get updated with each loop of the users
+        $this->lastSyncAt = $this->getDateTimeOfLastSync();
+
+        // DEV NOTE: we do not use the SyncsToShopify sync() here. We need to run through all applicable Users and then
+        // all applicable Customers, rather than just one entity. That, combined with the huge number of Users in our
+        // database, leads to a unique situation for syncing up to Shopify Customers.
+        $this->notifyStartupStatus();
+        $batchSize = 50;
+        $this->loopOrdersSync($batchSize);
+
+        // return $this->sync();
+        return self::SUCCESS;
     }
-
-    protected function getEcommerceEntities(bool $fresh) : Collection
+    /**
+     * Get all the orders that need to be synced, and perform the sync action on each one
+     *
+     * @param int $batchSize
+     * @return void
+     */
+    private function loopOrdersSync(int $batchSize): void
     {
-        /*
-         TODO: delete this!
-          this is just for a simple test case
-          people who bought product 129 - Drumeo for Teachers - 1 year, 163 - Bass Drum Technique
-            order id: 59526,59715,68775,60643,60895,61019,71344
-        (60643 also has 74 - Drum Rudiment System (Online Edition), and 165 - Maximize Your Groove )
-         */
-        $qb = $this->getEcommerceEntityRepository()->createQueryBuilder('entity');
+        $fresh = $this->getIsFresh();
+        $limit = $this->getLimit();
+        $tableHeader = ["Order ID", "Order Item ID", "Order Item Fulfillment ID", "Refund ID", "Action", "Shopify ID"];
+        $this->tableRows = [];
 
-        if (!$fresh) {
-            $lastSyncAt = $this->getDateTimeOfLastSync();
+        // get the orders, using pagination to keep from blowing up the memory usage
+        $qb = $this->orderRepository->createQueryBuilder('entity');
+        if (!$fresh) {;
             $this->info(
-                sprintf("Retrieving all orders that have not been synced, or have been updated since %s, and are in our test pool of IDs ...",
-                    $lastSyncAt->toString())
+                sprintf("Retrieving all orders that have not been synced, or have been updated since %s ...",
+                    $this->lastSyncAt->toString())
             );
-            // TODO test for specific order
-            // $qb->where(
-            //     $qb->expr()
-            //         ->in("entity.id", ":ids")
-            // )->setParameter("ids", [60643]);
-            $qb->where(
-                $qb->expr()
-                    ->isNull("entity.shopifyId")
-            )
+            // we also need to check if any of the order's order items or order item fulfillments need to be synced, so join those
+            $qb->join('entity.orderItems', 'oi')
+                ->join('entity.orderItemFulfillments', 'oif')
+                // either has null shopify_id
+                ->where(
+                    $qb->expr()
+                        ->isNull("entity.shopifyId")
+                )->orWhere(
+                    $qb->expr()
+                        ->isNull("oi.shopifyId")
+                )
+                ->orWhere(
+                    $qb->expr()
+                        ->isNull("oif.shopifyId")
+                )
+                // either has been updated since the last sync
                 ->orWhere(
                     $qb->expr()
                         ->gt("entity.updatedAt", ":lastSyncAt")
-                )->setParameter("lastSyncAt", $lastSyncAt)
-                ->andWhere(
+                )->orWhere(
                     $qb->expr()
-                        ->in("entity.id", ":ids")
-                )->setParameter("ids", [59526,59715,68775,60643,60895,61019,71344]);
+                        ->gt("oi.updatedAt", ":lastSyncAt")
+                )->orWhere(
+                    $qb->expr()
+                        ->gt("oif.updatedAt", ":lastSyncAt")
+                )->setParameter("lastSyncAt", $this->lastSyncAt)
+            //TODO TESTING ONLY
+            ->andWhere(
+                $qb->expr()
+                    ->in("entity.id", ":ids")
+            )->setParameter("ids", [4820, 59526,59715,68775,60643,60895,61019,71344]);
         }
 
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
         $q = $qb->getQuery();
+        $paginator = new Paginator($q);
 
-        return collect($q->getResult());
+        $totalCount = count($paginator);
+
+        $infoString = "Found {$totalCount} orders to be synced.";
+        if ($limit) {
+            $infoString .= " Limiting to {$limit}.";
+        }
+        $infoString .= " Performing in batches of {$batchSize}.";
+        $this->info($infoString);
+
+        $batchRun = 0;
+        $totalCountForRun = is_null($limit) ? $totalCount : min($totalCount, $limit);
+        $totalBatchesToRun = intval(ceil($totalCountForRun / $batchSize));
+        $bar = $this->output->createProgressBar($batchSize);
+
+        foreach ($paginator as $index => $order) {
+
+            // starting the batch
+            if ($index % $batchSize === 0) {
+                // start the sync log and prep the progress bar and table
+                ++$batchRun;
+                $this->newLine();
+                $this->info(sprintf("Running Orders batch %s of %s", $batchRun, $totalBatchesToRun));
+                $this->shopifyIds = collect();
+                $this->createSyncLogIfExecuting();
+                // if this is the last run of the batches, set the progress bar's size
+                if ($batchRun === $totalBatchesToRun)
+                {
+                    $bar = $this->output->createProgressBar($totalCountForRun % $batchSize);
+                }
+                $bar->start();
+            }
+
+            $this->syncOrder($order, $fresh, $index+1);
+            $bar->advance();
+
+            // batch has ended
+            if (($index % $batchSize === $batchSize-1) || $index+1 === $totalCountForRun) {
+                // print progress bar and table
+                $bar->finish();
+                $this->newLine();
+                $this->table($tableHeader, $this->tableRows);
+                // finish the sync log
+                $this->finishSyncLogIfExecuting($this->shopifyIds);
+                // and clear the table rows for the next run
+                $this->tableRows = [];
+            }
+        }
     }
 
     /**
-     * @inheritDoc
-     * @throws Exception
+     * Sync the order up to Shopify
+     *
+     * @param Order $order
+     * @param bool $fresh
+     * @param int|null $simulatedShopifyId
+     * @return void
      */
-    protected function syncResource(bool $simulate, bool $fresh): Collection
+    private function syncOrder(Order $order, bool $fresh, ?int $simulatedShopifyId): void
     {
-        $shopifyIds = collect();
+        // STEP 1: determine if updating or creating
+        $isCreating = $fresh || is_null($order->getShopifyId());
+        if ($isCreating) {
+            $needsToUpdate = false;
+        } else {
+            $needsToUpdate = $this->doesOrderNeedToSync($order);
+        }
 
-        // STEP 1: get all the Orders that we're going to sync
-        $orders = $this->getEcommerceEntities($fresh);
+        // STEP 2: build up the data structure, if the order needs to be updated
+        try {
+            $postData = $this->createOrderData($order, $isCreating);
+        } catch (ORMException $e) {
+            $this->error(sprintf("Failed to find User or Customer for Order ID %s",
+                $order->getId()));
+            // record the failure in the table then exit out for this order
+            $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>FAILED</error>", $e->getMessage()];
+            return;
+        }
 
-        $this->info("Found {$orders->count()} orders to be synced");
-
-        $bar = $this->output->createProgressBar($orders->count());
-        $bar->start();
-
-        $tableHeaders = ["Order ID", "Order Item ID", "Order Item Fulfillment ID", "Refund ID", "Shopify ID"];
-        $tableRows = [];
-
-        // STEP 2: sync Orders
-        $simulatedShopifyId = 0;
-        $orders->each(function (Order $order) use ($fresh, $bar, $simulate, $shopifyIds, &$tableRows, &$simulatedShopifyId) {
-
-            // STEP 3: determine if updating or creating
-            $isCreating = $fresh || is_null($order->getShopifyId());
-
-            // STEP 4: build up the data structure
-            //TODO probably going to need to separate things out for update, because this is already complicated enough
-            if (!$isCreating) {
-                $this->error(sprintf("Updates are not currently supported. Skipping Order %s", $order->getId()));
+        // STEP 3: send the data to Shopify
+        if (!$this->getIsSimulation()) {
+            try {
+                // STEP 4a: create the Order in Shopify
+                if ($isCreating) {
+                    $orderResource = $this->shopify->createOrder($postData);
+                    $orderShopifyId = $orderResource->id;
+                } else {
+                    if ($needsToUpdate) {
+                        $orderResource = $this->shopify->updateOrder($order->getShopifyId(), $postData);
+                    } else {
+                        $orderResource = null;
+                        $this->tableRows[] = [$order->getId(), "--", "--", "--", "Skipped", $order->getShopifyId()];
+                    }
+                    $orderShopifyId = $order->getShopifyId();
+                }
+            } catch (ValidationException $exception) {
+                $this->error(sprintf("Validation failed when sending order data to Shopify: %s",
+                    $exception->getMessage()));
+                $this->error(sprintf("Please investigate for Order ID %s. Attempted order data: %s",
+                    $order->getId(), json_encode($postData)));
+                // record the failure in the table then exit out for this order
+                $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>FAILED</error>", $exception->getMessage()];
                 return;
             }
-            // $postData = $isCreating ? $this->createOrderData($order)
-            //     : $this->updateOrderData($order);
-            $postData = $this->createOrderData($order);
 
-            // STEP 5: send the data to Shopify
-            if (!$simulate) {
-
-                // STEP 5a: create the Order in Shopify
-                // $orderResource = $isCreating ? $this->shopify->createOrder($postData)
-                //     : $this->shopify->updateOrder($order->getShopifyId(), $postData);
-                $orderResource = $this->shopify->createOrder($postData);
-
+            try {
                 // record the shopify ID on the Order
-                $orderShopifyId = $orderResource->id;
                 if ($order->getShopifyId() !== $orderShopifyId) {
                     $order->setShopifyId($orderShopifyId);
                     $this->entityManager->persist($order);
                     $this->entityManager->flush();
                 }
-                $shopifyIds->push($orderShopifyId);
-                $tableRows[] = [$order->getId(), "--", "--", "--", $orderShopifyId];
+                $this->shopifyIds->push($orderShopifyId);
+                $this->tableRows[] = [$order->getId(), "--", "--", "--", $isCreating ? "Created" : "Updated", $orderShopifyId];
+            } catch (\Doctrine\ORM\Exception\ORMException $e) {
+                $this->error(sprintf("Failed to save shopify_id for order ID %s: %s",
+                    $order->getId(), $e->getMessage()));
+            }
 
-                // STEP 5b: record the Shopify Order's Line Items as our Order Items
+            // STEP 4b: record the Shopify Order's Line Items as our Order Items
+            if (!is_null($orderResource)) {
                 $resourceLineItems = $orderResource->getAttributes()["line_items"];
                 $sentLineItems = $postData["line_items"];
                 foreach ($resourceLineItems as $idx => $resourceLineItem) {
-                    // grab the shopify id
-                    $lineItemShopifyId = $resourceLineItem["id"];
-                    // get our corresponding line item data
-                    $sentLineItem = $sentLineItems[$idx];
-                    // and get our Order Item for it
-                    $lineItem = $this->orderItemRepository->find($sentLineItem["ecommerce_order_item_id"]);
-                    // and finally, save the shopify id on it
-                    if ($lineItem->getShopifyId() !== $lineItemShopifyId) {
-                        $lineItem->setShopifyId($lineItemShopifyId);
-                        $this->entityManager->persist($lineItem);
-                        $this->entityManager->flush();
-                    }
-
-                    $tableRows[] = [$order->getId(), $sentLineItem["ecommerce_order_item_id"], "--", "--", $lineItemShopifyId];
-                }
-
-                // STEP 6: add the Fulfillments and tracking
-                // Shopify created an Order Fulfillment for our Order when they created it, so we need to grab that from them
-                $fulfillmentOrders = $this->shopify->getOrderFulfillmentOrders($orderShopifyId);
-                // there can be multiple fulfillment orders (but realistically, there will most likely only be one), so grab the last entry
-                $fulfillmentOrder = $fulfillmentOrders->last();
-
-                // get each line item from the fulfillment order
-                $lineItems = $fulfillmentOrder->getAttributes()["line_items"];
-                // and for each line item...
-                foreach ($lineItems as $lineItemData) {
-                    // get its fulfillment_order_id (so we can create a fulfillment for it)
-                    $fulfillmentOrderId = $lineItemData["fulfillment_order_id"];
-                    // get its id (so we can tell which fulfillment item it's for)
-                    // ** this is the fulfillment order line item, not the actual line item
-                    $fulfillmentOrderLineItemId = $lineItemData["id"];
-                    // use the line item ID to get our order item (matching the shopify_id)
-                    $orderItemShopifyId = $lineItemData["line_item_id"];
-                    // and use those IDs to create fulfillments for the order item
-                    $fulfillmentRecords = $this->createFulfillmentsForOrderItem($fulfillmentOrderId, $orderItemShopifyId, $fulfillmentOrderLineItemId, $simulate);
-                    foreach ($fulfillmentRecords as $fulfillmentRecord) {
-                        $tableRows[] = [
-                            $order->getId(),
-                            "--",
-                            $fulfillmentRecord[self::ORDER_ITEM_FULFILLMENT_ID],
-                            "--",
-                            $fulfillmentRecord[self::SHOPIFY_FULFILLMENT_ID]
-                        ];
+                    try {
+                        // grab the shopify id
+                        $lineItemShopifyId = $resourceLineItem["id"];
+                        // get our corresponding line item data
+                        $sentLineItem = $sentLineItems[$idx];
+                        // and get our Order Item for it
+                        $lineItem = $this->orderItemRepository->find($sentLineItem["ecommerce_order_item_id"]);
+                        // and finally, save the shopify id on it
+                        $isCreatedLineItem = false;
+                        if ($lineItem->getShopifyId() !== $lineItemShopifyId) {
+                            $isCreatedLineItem = true;
+                            $lineItem->setShopifyId($lineItemShopifyId);
+                            $this->entityManager->persist($lineItem);
+                            $this->entityManager->flush();
+                        }
+                        $this->tableRows[] = [$order->getId(), $sentLineItem["ecommerce_order_item_id"], "--", "--", $isCreatedLineItem ? "Created" : "Updated", $lineItemShopifyId];
+                    } catch (\Doctrine\ORM\Exception\ORMException $e) {
+                        $this->error(sprintf("Failed to save shopify_id for order item ID %s: %s",
+                            $sentLineItem["ecommerce_order_item_id"], $e->getMessage()));
+                    } catch (ORMException $e) {
+                        $this->error(sprintf("Could not find order item with ID %s: %s",
+                            $sentLineItem["ecommerce_order_item_id"], $e->getMessage()));
                     }
                 }
-                //END STEP 6
+            }
+            // STEP 5: add the Fulfillments and tracking
+            $fulfillmentOrder = $this->getFulfillmentOrderResource($order);
+            if (is_null($fulfillmentOrder)) {
+                $this->error(sprintf("Failed to retrieve Fulfillment Order Resource from Shopify for Order ID %s",
+                    $order->getId()));
+                // record the failure in the table then exit out for this order
+                $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>FAILED</error>", "No Fulfillment Order Resource"];
+                return;
+            }
+            $fulfillmentOrderStatus = $fulfillmentOrder->getAttributes()["status"];
 
-                // STEP 7: add any refunds
-                //TODO SRR-41: get any of our refunds and send those to shopify
-
+            // get each line item from the fulfillment order
+            $lineItems = $fulfillmentOrder->getAttributes()["line_items"];
+            // and for each line item...
+            foreach ($lineItems as $lineItemData) {
+                try {
+                    $fulfillmentRecords = $this->sendFulfillmentsForOrderItemToShopify($lineItemData["fulfillment_order_id"],
+                        $lineItemData["line_item_id"],
+                        $lineItemData["id"],
+                        $fulfillmentOrderStatus);
+                    // ... record the fulfillment(s) made for the line item
+                    if ($fulfillmentRecords) {
+                        foreach ($fulfillmentRecords as $fulfillmentRecord) {
+                            // print any records for fulfillments
+                            $this->tableRows[] = [
+                                $order->getId(),
+                                "--",
+                                $fulfillmentRecord[self::TABLE_ITEM_ID],
+                                "--",
+                                $fulfillmentRecord[self::TABLE_ITEM_ACTION],
+                                $fulfillmentRecord[self::TABLE_SHOPIFY_FULFILLMENT_ID]
+                            ];
+                        }
+                    }
+                } catch (Exception $e) {
+                    $this->error(sprintf("Failed to send fulfillments data to Shopify for order ID %s: %s",
+                        $order->getId(), $e->getMessage()));
+                }
+            }
+            // STEP 6: add any refunds
+            //TODO SRR-41: get any of our refunds and send those to shopify
+        } else {
+            // simulating
+            $orderShopifyId = $order->getShopifyId() ?? $simulatedShopifyId;
+            // record the action for the order
+            if ($isCreating) {
+                $action = "Created";
+            } elseif($needsToUpdate) {
+                $action = "Updated";
             } else {
-                // simulation mode
-                $orderItemShopifyId = ++$simulatedShopifyId;
-                $tableRows[] = [$order->getId(), "--", "--", "--", $orderItemShopifyId];
-                collect($postData["line_items"])->each(function (array $item, int $idx) use ($simulate, $orderItemShopifyId, $order, &$tableRows) {
-                    $tableRows[] = [$order->getId(), $item["ecommerce_order_item_id"], "--", "--", $orderItemShopifyId . "-line" . $idx];
+                $action = "Skipped";
+            }
+            $this->tableRows[] = [$order->getId(), "--", "--", "--", $action, $orderShopifyId];
 
-                    $fulfillmentRecords = $this->createFulfillmentsForOrderItem($item["ecommerce_order_item_id"], $orderItemShopifyId, $orderItemShopifyId+10, $simulate);
-                    foreach ($fulfillmentRecords as $fulfillmentRecord) {
-                        $tableRows[] = [
-                            $order->getId(),
-                            "--",
-                            $fulfillmentRecord[self::ORDER_ITEM_FULFILLMENT_ID],
-                            "--",
-                            $fulfillmentRecord[self::SHOPIFY_FULFILLMENT_ID]
-                        ];
-                    }
-                });
+            $fulfillmentOrder = $this->getFulfillmentOrderResource($order);
+            if (!is_null($fulfillmentOrder)) {
+                $fulfillmentOrderStatus = $fulfillmentOrder->getAttributes()["status"];
+            } else {
+                $fulfillmentOrderStatus = $isCreating ? "open" : "closed";
             }
 
-            $bar->advance();
-        })->chunk(100);
+            // simulate getting each line item from the fulfillment order
+            $lineItems = $postData["line_items"];
+            foreach ($lineItems as $idx => $lineItemData) {
+                // get or fake the shopify id for the line item
+                $lineItemShopifyId = $lineItemData["shopify_id"] ?? $orderShopifyId + $idx;
+                // get or fake the shopify id for the fulfillment order line item
+                $fulfillmentOrderLineItemId = $lineItemData["id"] ?? $orderShopifyId + 10;
+                // record the Shopify Order's Line Items as our Order Items
+                $this->tableRows[] = [
+                    $order->getId(),
+                    $lineItemData["ecommerce_order_item_id"],
+                    "--",
+                    "--",
+                    $lineItemData["shopify_id"] ? "Updated" : "Created",
+                    $lineItemShopifyId
+                ];
 
-        $bar->finish();
-        $this->newLine();
+                try {
+                    $fulfillmentRecords = $this->sendFulfillmentsForOrderItemToShopify($lineItemData["ecommerce_order_item_id"],
+                        $lineItemShopifyId,
+                        $fulfillmentOrderLineItemId,
+                        $fulfillmentOrderStatus
+                    );
+                    // record the fulfillment(s) made for the line item
+                    if ($fulfillmentRecords) {
+                        foreach ($fulfillmentRecords as $fulfillmentRecord) {
+                            // print any records for fulfillments
+                            $this->tableRows[] = [
+                                $order->getId(),
+                                "--",
+                                $fulfillmentRecord[self::TABLE_ITEM_ID],
+                                "--",
+                                $fulfillmentRecord[self::TABLE_ITEM_ACTION],
+                                $fulfillmentRecord[self::TABLE_SHOPIFY_FULFILLMENT_ID]
+                            ];
+                        }
+                    }
+                } catch (Exception $e) {
+                    $this->error(sprintf("Failed to send fulfillments data to Shopify for order ID %s: %s",
+                        $order->getId(), $e->getMessage()));
+                }
+            }
+            //TODO SRR-41: get any of our refunds and simulate sending those to shopify
+        }
+    }
 
-        $this->table($tableHeaders, $tableRows);
+    /**
+     * @inheritDoc
+     */
+    protected function syncResource(bool $simulate, bool $fresh): Collection
+    {
+        // we do not use the SyncsToShopify sync() here. We have too many Orders to complete in a single run,
+        // and so the logic had to be split up and chunked.
+        // All of that is done in the handle function, and so this function is never used.
+        return collect();
+    }
 
-        return $shopifyIds;
+    /**
+     * This order could be in our data set to sync either because it needs to be synced up with Shopify,
+     * or because its order item(s) or order item fulfillment(s) need to be synced. This function checks if the
+     * order itself needs to be synced or not.
+     *
+     * @param Order $order
+     * @return bool
+     */
+    private function doesOrderNeedToSync(Order $order): bool
+    {
+        return is_null($order->getShopifyId()) || $this->lastSyncAt->isBefore($order->getUpdatedAt());
     }
 
     /**
      * Create the data to post to Shopify to create an Order
      *
      * @param Order $order
+     * @param bool $withMetafields
      * @return array
+     * @throws ORMException
      */
-    private function createOrderData(Order $order): array
+    private function createOrderData(Order $order, bool $withMetafields): array
     {
         // the user or customer is returned with only their id and email, so get the id and get a fresh copy
         if ($order->getUser()) {
@@ -296,21 +480,21 @@ class SyncOrdersToShopify extends Command
             "total_outstanding" => $order->getTotalDue() - $order->getTotalPaid(),
             "total_price" => $order->getTotalDue(),
             "total_tax" => $order->getTaxesDue(),
-            //TODO?
             // "tags" => "",
+        ];
 
-            // TODO?
+        if ($withMetafields) {
             // refer to https://shopify.dev/docs/apps/custom-data/metafields/types
             // we can use meta fields for stuff like our order id, etc
-            "metafields" => [
+            $orderData["metafields"] = [
                 [
                     "key" => "_id",
                     "value" => $order->getId(),
                     "type" => "number_integer",
                     "namespace" => "orders"
                 ]
-            ]
-        ];
+            ];
+        }
 
         if ($order->getTaxesDue()) {
             $orderData["tax_lines"] = [ "price" => $order->getTaxesDue()];
@@ -340,6 +524,8 @@ class SyncOrdersToShopify extends Command
         $orderItemsData = [];
         collect($order->getOrderItems())->each(function (OrderItem $orderItem) use ($order, &$orderItemsData) {
             $data = [
+               // include the shopify_id, if we have one, so we know if we're updating or creating - shopify will just ignore this
+               "shopify_id" => $orderItem->getShopifyId(),
                // include our internal id, so we can reference it to update - shopify will just ignore this
                "ecommerce_order_item_id" => $orderItem->getId(),
                "fulfillable_quantity" => $orderItem->getQuantity(),
@@ -354,6 +540,18 @@ class SyncOrdersToShopify extends Command
                "vendor" => $order->getBrand(),
            ];
 
+            if ($orderItem->getTotalDiscounted()) {
+                $data["applied_discounts"] = [
+                    [
+                        "amount" =>  number_format($orderItem->getTotalDiscounted(), 2)
+                    ]
+                ];
+            }
+
+            /*
+            // DEV NOTE: this seems to be nearly what we'd need to properly apply discounts to build up the discount process,
+            // but we won't worry about that for these historical updates and will simply use the total_discounted on each
+            // order item
            if ($orderItem->getOrderItemDiscounts()) {
                // clean up bad data (there are some with discount id 0)
                $orderDiscounts = collect($orderItem->getOrderItemDiscounts())
@@ -368,7 +566,7 @@ class SyncOrdersToShopify extends Command
                    });
                 $data["discount_allocations"] = $discountsData;
            }
-
+            */
             $orderItemsData[] = $data;
         });
 
@@ -380,27 +578,26 @@ class SyncOrdersToShopify extends Command
      * Shopify for each of our fulfillments for it, and provide the status and tracking information, if available.
      * Returning a formatted array of the Order Item Fulfillment ID and the corresponding Shopify ID.
      *
-     * @param int $fulfillmentOrderId - the Shopify ID of the Fulfillment Order we're fulfilling
-     * @param int $orderItemShopifyId - the Shopify ID of the line item being filled (used to find our corresponding OrderItem)
-     * @param int $fulfillmentOrderLineItemId - the Shopify ID of the fulfillment's line item, needed to tell Shopify which item we're fulfilling
-     * @param bool $simulate - is this being simulated?
-     *
+     * @param int $fulfillmentOrderId the Shopify ID of the Fulfillment Order we're fulfilling
+     * @param int $orderItemShopifyId the Shopify ID of the line item being filled (used to find our corresponding OrderItem)
+     * @param int $fulfillmentOrderLineItemId the Shopify ID of the fulfillment's line item, needed to tell Shopify which item we're fulfilling
+     * @param string $fulfillmentOrderStatus the status of the Order's Fulfillment Order in Shopify
      * @return array|null
      * @throws Exception
      */
-    private function createFulfillmentsForOrderItem(int $fulfillmentOrderId, int $orderItemShopifyId, int $fulfillmentOrderLineItemId, bool $simulate): ?array
+    private function sendFulfillmentsForOrderItemToShopify(int $fulfillmentOrderId,
+                                                           int $orderItemShopifyId,
+                                                           int $fulfillmentOrderLineItemId,
+                                                           string $fulfillmentOrderStatus): ?array
     {
-        $fulfillmentRecords = [];
-        if ($simulate) {
-            // if we're simulating, we passed in the order item's ID as the $orderItemShopifyId
-            $orderItem = $this->orderItemRepository->find($orderItemShopifyId);
+        if ($this->getIsSimulation()) {
+            // if we're simulating, we passed in the order item's ID as the $fulfillmentOrderId
+            $orderItem = $this->orderItemRepository->find($fulfillmentOrderId);
         } else {
             $orderItem = $this->orderItemRepository->getByShopifyId($orderItemShopifyId);
         }
-
         if (is_null($orderItem)) {
-            $this->error(sprintf("No ecommerce Order Item found for shopify_id %s. Skipping fulfillment process with Shopify.", $orderItemShopifyId));
-            return null;
+            throw new Exception(sprintf("No ecommerce Order Item found for shopify_id %s. Skipping fulfillment process with Shopify.", $orderItemShopifyId));
         }
 
         // get the product, so we can see how to handle its fulfillment
@@ -408,127 +605,251 @@ class SyncOrdersToShopify extends Command
             // the product might be inactive, so use the id to get a fresh copy with all its data
             $product = $this->productRepository->findProduct($productEntity->getId(), [0,1]);
 
-            if ($product->getType() === Product::TYPE_DIGITAL_SUBSCRIPTION || $product->getType() === Product::TYPE_DIGITAL_ONE_TIME) {
-                // digital products don't have fulfillments in Musora, so just create an empty one in Shopify to mark it as fulfilled
-                $fulfillmentData = [
-                    "fulfillment" => [
-                        "notify_customer" => false
-                    ],
-                    "line_items_by_fulfillment_order" => [
-                        [
-                            "fulfillment_order_id" => $fulfillmentOrderId,
-                            "fulfillment_order_line_items" => [
-                                [
-                                    "id" => $fulfillmentOrderLineItemId,
-                                    "quantity" => $orderItem->getQuantity()
-                                ]
+            if ($product->getType() === Product::TYPE_DIGITAL_SUBSCRIPTION || $product->getType() === Product::TYPE_DIGITAL_ONE_TIME){
+                return $this->fulfillDigitalProduct($fulfillmentOrderId, $fulfillmentOrderLineItemId, $orderItem->getQuantity() ?? 0, $fulfillmentOrderStatus);
+            } elseif($product->getType() === Product::TYPE_PHYSICAL_ONE_TIME) {
+                return $this->fulfillPhysicalProduct($fulfillmentOrderId, $fulfillmentOrderLineItemId, $orderItem);
+            } else {
+                throw new Exception(sprintf("Unknown product type %s. Cannot create Shopify Fulfillment.",
+                    $product->getType()));
+            }
+        }
+    }
+
+    /**
+     * Handle fulfilling an order item in Shopify for a physical product, including its tracking information,
+     * if applicable
+     *
+     * @param int $fulfillmentOrderId
+     * @param int $fulfillmentOrderLineItemId
+     * @param OrderItem $orderItem
+     * @return array<array> array of result arrays
+     */
+    private function fulfillPhysicalProduct(int $fulfillmentOrderId, int $fulfillmentOrderLineItemId, OrderItem $orderItem): array
+    {
+        $fulfillmentRecords = [];
+        // physical products might have fulfillments, so check for any
+        $fulfillments = collect($orderItem->getOrderItemFulfillments());
+
+        if ($fulfillments->isEmpty()) {
+            $resultRecord = [
+                self::TABLE_ITEM_ID => "<bg=yellow;fg=black>No fulfillments for order item</bg=yellow;fg=black>",
+                self::TABLE_SHOPIFY_FULFILLMENT_ID => "N/A",
+                self::TABLE_ITEM_ACTION => "Skipped"
+            ];
+            $fulfillmentRecords[] = $resultRecord;
+            return $fulfillmentRecords;
+        }
+
+        // and create a fulfillment in Shopify for each one that hasn't already been done
+        $fulfillments->each(function (OrderItemFulfillment $fulfillment, int $idx)
+        use (
+            $orderItem,
+            $fulfillmentOrderLineItemId,
+            $fulfillmentOrderId,
+            &$fulfillmentRecords
+        ) {
+            $isNewFulFillment = is_null($fulfillment->getShopifyId());
+            $fulfillmentData = [
+                "fulfillment" => [
+                    "notify_customer" => false,
+                    "status" => $fulfillment->getStatus() == "fulfilled" ? "success" : "open"
+                ],
+                "line_items_by_fulfillment_order" => [
+                    [
+                        "fulfillment_order_id" => $fulfillmentOrderId,
+                        "fulfillment_order_line_items" => [
+                            [
+                                "id" => $fulfillmentOrderLineItemId,
+                                "quantity" => $orderItem->getQuantity() ?? 0
                             ]
                         ]
                     ]
+                ]
+            ];
+
+            if ($this->getIsSimulation()) {
+                $resultRecord = [
+                    self::TABLE_ITEM_ID => $fulfillment->getId(),
+                    self::TABLE_SHOPIFY_FULFILLMENT_ID => $orderItem->getShopifyId() . "-fulfil" . $idx,
+                    self::TABLE_ITEM_ACTION => $isNewFulFillment ? "Created" : "Updated"
                 ];
-                if ($simulate) {
-                    $resultRecord = [
-                        self::ORDER_ITEM_FULFILLMENT_ID => "N/A",
-                        self::SHOPIFY_FULFILLMENT_ID => $fulfillmentOrderLineItemId
-                    ];
-                } else {
-                    $fulfillmentResult = $this->shopify->createFulfillment($fulfillmentData);
-                    $resultRecord = [
-                        self::ORDER_ITEM_FULFILLMENT_ID => "N/A",
-                        self::SHOPIFY_FULFILLMENT_ID => $fulfillmentResult->getAttributes()["id"]
-                    ];
-                }
-
                 $fulfillmentRecords[] = $resultRecord;
-            } elseif($product->getType() === Product::TYPE_PHYSICAL_ONE_TIME) {
-
-                //TODO: DEV NOTE - this is untested, because we don't have any physical products yet. TEST THIS!!
-
-                // physical products might have fulfillments, so check for any
-                $fulfillments = collect($orderItem->getOrderItemFulfillments());
-
-                // and create a fulfillment in Shopify for each one
-                $fulfillments->each(function (OrderItemFulfillment $fulfillment, int $idx)
-                use (
-                    $orderItem,
-                    $fulfillmentOrderLineItemId,
-                    $orderItemShopifyId,
-                    $simulate,
-                    $fulfillmentOrderId,
-                    &$fulfillmentRecords
-                ) {
-                    $fulfillmentData = [
-                        "fulfillment" => [
-                            "notify_customer" => false,
-                            "status" => $fulfillment->getStatus() == "fulfilled" ? "success" : "open"
-                        ],
-                        "line_items_by_fulfillment_order" => [
-                            [
-                                "fulfillment_order_id" => $fulfillmentOrderId,
-                                "fulfillment_order_line_items" => [
-                                    [
-                                        "id" => $fulfillmentOrderLineItemId,
-                                        "quantity" => $orderItem->getQuantity()
-                                    ]
-                                ]
-                            ]
-                        ]
+                if (!is_null($fulfillment->getTrackingNumber())) {
+                    $fulfillmentRecords[] = $this->sendTrackingInfoForFulfillmentToShopify($fulfillment, []);
+                }
+            } else {
+                // we only need to create new fulfillments
+                if ($isNewFulFillment) {
+                    $fulfillmentResult = $this->shopify->createFulfillment($fulfillmentData);
+                    $fulfillmentShopifyId = $fulfillmentResult->getAttributes()["id"];
+                    $resultRecord = [
+                        self::TABLE_ITEM_ID => $fulfillment->getId(),
+                        self::TABLE_SHOPIFY_FULFILLMENT_ID => $fulfillmentShopifyId,
+                        self::TABLE_ITEM_ACTION => "Created"
                     ];
-                    if ($simulate) {
-                        $resultRecord = [
-                            self::ORDER_ITEM_FULFILLMENT_ID => $fulfillment->getId(),
-                            self::SHOPIFY_FULFILLMENT_ID => $orderItemShopifyId . "-fulfil" . $idx
-                        ];
-                    } else {
-                        $fulfillmentResult = $this->shopify->createFulfillment($fulfillmentData);
-                        $fulfillmentShopifyId = $fulfillmentResult->getAttributes()["id"];
-                        $resultRecord = [
-                            self::ORDER_ITEM_FULFILLMENT_ID => $fulfillment->getId(),
-                            self::SHOPIFY_FULFILLMENT_ID => $fulfillmentShopifyId
-                        ];
-                        $fulfillmentRecords[] = $resultRecord;
-                        // record the result's id as the shopify_id on our fulfillment
+                    $fulfillmentRecords[] = $resultRecord;
+
+                    // record the result's id as the shopify_id on our fulfillment
+                    try {
                         if ($fulfillment->getShopifyId() !== $fulfillmentShopifyId) {
                             $fulfillment->setShopifyId($fulfillmentShopifyId);
                             $this->entityManager->persist($fulfillment);
                             $this->entityManager->flush();
                         }
-                        // and update it with tracking info, if we have some
-                        $trackingData = [
-                            "fulfillment" => [
-                                "notify_customer" => false,
-                                "tracking_info" => [
-                                    "company" => $fulfillment->getCompany(),
-                                    "number" => $fulfillment->getTrackingNumber()
-                                ]
-                            ],
-                        ];
-                        $trackingInfoResult = $this->shopify->updateTrackingForFulfillment($fulfillmentShopifyId, $trackingData);
-                        // dd($trackingInfoResult);
+                    } catch (\Doctrine\ORM\Exception\ORMException $e) {
+                        $this->error(sprintf("Failed to save shopify_id for order item fulfillment ID %s: %s",
+                            $fulfillment->getId(), $e->getMessage()));
                     }
-                    $fulfillmentRecords[] = $resultRecord;
-                });
+                } else {
+                    // retrieve the fulfillment data from Shopify, so we can handle its tracking information
+                    $fulfillmentResult = $this->shopify->getOrderFulfillment($orderItem->getOrder()->getShopifyId(), $fulfillment->getShopifyId());
+                    $resultRecord = [
+                        self::TABLE_ITEM_ID => $fulfillment->getId(),
+                        self::TABLE_SHOPIFY_FULFILLMENT_ID => $fulfillment->getShopifyId(),
+                        self::TABLE_ITEM_ACTION => "Skipped"
+                    ];
+                }
 
-            } else {
-                throw new Exception(sprintf("Unknown product type %s. Cannot create Shopify Fulfillment.",
-                    $product->getType()));
+                $fulfillmentRecords[] = $resultRecord;
+
+                if (!is_null($fulfillment->getTrackingNumber())) {
+                    $fulfillmentRecords[] = $this->sendTrackingInfoForFulfillmentToShopify($fulfillment, $fulfillmentResult->getAttributes());
+                }
             }
+        });
 
+        return $fulfillmentRecords;
+    }
+
+    private function sendTrackingInfoForFulfillmentToShopify(OrderItemFulfillment $fulfillment, array $shopifyFulfillmentAttributes): array
+    {
+        $resultRecord = [
+            self::TABLE_ITEM_ID => $fulfillment->getId() . " tracking",
+            self::TABLE_SHOPIFY_FULFILLMENT_ID => "N/A",
+        ];
+
+        if ($this->getIsSimulation()) {
+            // if we're simulating, we don't have a real $shopifyFulfillmentAttributes because we didn't send the data
+            // to Shopify, so get the fulfillment data if it exists
+            if (!is_null($fulfillment->getShopifyId())) {
+                $orderFulfillmentResource = $this->shopify->getOrderFulfillment($fulfillment->getOrder()->getShopifyId(), $fulfillment->getShopifyId());
+                $shopifyFulfillmentAttributes = $orderFulfillmentResource->getAttributes();
+            } else {
+                // otherwise, just fake creating a new one
+                $resultRecord [self::TABLE_ITEM_ACTION] = "Created";
+                return $resultRecord;
+            }
         }
+        $isCreating = is_null($shopifyFulfillmentAttributes["tracking_number"]);
+
+        // if the tracking number already exists, make sure we have a change that needs to be sent
+        if ($shopifyFulfillmentAttributes["tracking_number"] === $fulfillment->getTrackingNumber() &&
+            $shopifyFulfillmentAttributes["tracking_company"] === $fulfillment->getCompany())
+        {
+            $resultRecord [self::TABLE_ITEM_ACTION] = "Skipped";
+            return $resultRecord;
+        }
+
+        // update the fulfillment order with tracking info, if we have some
+        $trackingData = [
+            "fulfillment" => [
+                "notify_customer" => false,
+                "tracking_info" => [
+                    "company" => $fulfillment->getCompany(),
+                    "number" => $fulfillment->getTrackingNumber()
+                ]
+            ],
+        ];
+
+        if (!$this->getIsSimulation()) {
+            $this->shopify->updateTrackingForFulfillment($shopifyFulfillmentAttributes["id"], $trackingData);
+        }
+        $resultRecord [self::TABLE_ITEM_ACTION] = $isCreating ? "Created" : "Updated";
+        return $resultRecord;
+    }
+
+    /**
+     * Handle fulfilling an order item in Shopify for a digital product.
+     *
+     * @param int $fulfillmentOrderId
+     * @param int $fulfillmentOrderLineItemId
+     * @param int $quantity
+     * @param string $fulfillmentOrderStatus
+     * @return array<array> array of result arrays
+     */
+    private function fulfillDigitalProduct(int $fulfillmentOrderId, int $fulfillmentOrderLineItemId, int $quantity, string $fulfillmentOrderStatus): array
+    {
+        $fulfillmentRecords = [];
+        $record = [
+            self::TABLE_ITEM_ID => "N/A for digital product",
+        ];
+
+        // digital products don't have fulfillments in Musora, so just create an empty one in Shopify to mark
+        // it as fulfilled, if we haven't already
+        if ($fulfillmentOrderStatus === "closed") {
+            // if the fulfillment order is already closed, there's nothing for us to do here
+            $record[self::TABLE_SHOPIFY_FULFILLMENT_ID] = $fulfillmentOrderLineItemId;
+            $record[self::TABLE_ITEM_ACTION] = "Skipped";
+            $fulfillmentRecords[] = $record;
+            return $fulfillmentRecords;
+        }
+
+        $fulfillmentData = [
+            "fulfillment" => [
+                "notify_customer" => false
+            ],
+            "line_items_by_fulfillment_order" => [
+                [
+                    "fulfillment_order_id" => $fulfillmentOrderId,
+                    "fulfillment_order_line_items" => [
+                        [
+                            "id" => $fulfillmentOrderLineItemId,
+                            "quantity" => $quantity
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $record[self::TABLE_ITEM_ACTION] = "Created";
+        if ($this->getIsSimulation()) {
+            $record[self::TABLE_SHOPIFY_FULFILLMENT_ID] = $fulfillmentOrderLineItemId;
+        } else {
+            $fulfillmentResult = $this->shopify->createFulfillment($fulfillmentData);
+            $record[self::TABLE_SHOPIFY_FULFILLMENT_ID] = $fulfillmentResult->getAttributes()["id"];
+        }
+        $fulfillmentRecords[] = $record;
+
         return $fulfillmentRecords;
     }
 
     /**
-     * Build up the payload data to update an Order
+     * Get the Fulfillment Order Resource from Shopify, for this Order
      *
      * @param Order $order
-     * @return array
+     * @return ApiResource|null
      */
-    private function updateOrderData(Order $order): array
+    private function getFulfillmentOrderResource(Order $order): ?ApiResource
     {
-    //    TODO
-        return [];
+        $orderShopifyId = $order->getShopifyId();
+        $fulfillmentOrders = null;
+
+        // get the fulfillment order and its status, so we can update it with our data
+        if (!$this->getIsSimulation()) {
+            // Shopify created an Order Fulfillment for our Order when they created it, so we need to grab that from them
+            $fulfillmentOrders = $this->shopify->getOrderFulfillmentOrders($orderShopifyId);
+        } else {
+            // if we're simulating, try to get the order's fulfillment orders from shopify, if we have a real shopify id
+            if (!is_null($orderShopifyId)) {
+                $fulfillmentOrders = $this->shopify->getOrderFulfillmentOrders($orderShopifyId);
+            }
+        }
+
+        // there can be multiple fulfillment orders (but realistically, there will most likely only be one), so grab the last entry
+        return $fulfillmentOrders?->last() ?? null;
     }
+
     /**
      * @inheritDoc
      */
