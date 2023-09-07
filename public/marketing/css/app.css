@@ -3762,10 +3762,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1 !important;
   color: rgb(37 99 235 / var(--tw-text-opacity)) !important;
 }
-.text-green-300 {
-  --tw-text-opacity: 1 !important;
-  color: rgb(134 239 172 / var(--tw-text-opacity)) !important;
-}
 .text-sky-900 {
   --tw-text-opacity: 1 !important;
   color: rgb(12 74 110 / var(--tw-text-opacity)) !important;
@@ -3781,6 +3777,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-blue-500 {
   --tw-text-opacity: 1 !important;
   color: rgb(59 130 246 / var(--tw-text-opacity)) !important;
+}
+.text-green-300 {
+  --tw-text-opacity: 1 !important;
+  color: rgb(134 239 172 / var(--tw-text-opacity)) !important;
 }
 .text-\[\#FFAC00\] {
   --tw-text-opacity: 1 !important;
@@ -8920,10 +8920,6 @@ li, p {
     padding-bottom: 8rem !important;
   }
 
-  .lg\:pr-0 {
-    padding-right: 0px !important;
-  }
-
   .lg\:pr-7 {
     padding-right: 1.75rem !important;
   }
@@ -8970,6 +8966,10 @@ li, p {
 
   .lg\:pb-6 {
     padding-bottom: 1.5rem !important;
+  }
+
+  .lg\:pr-0 {
+    padding-right: 0px !important;
   }
 
   .lg\:pt-28 {
