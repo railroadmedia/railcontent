@@ -51,7 +51,6 @@
 
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
 @stop
 
 @section('body-data')
@@ -201,34 +200,12 @@
             ],
         ]
     @endphp
-
-  <div x-data="{ isMobile: window.innerWidth <= 768 }" x-init="() => {
-    window.addEventListener('resize', () => {
-        isMobile = window.innerWidth <= 768;
-    });
-}">
-    <template x-if="isMobile">
-        <a class="inline-block text-center w-full my-12" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-            <img
-                alt="shopper approved image"
-                class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-            >
-        </a>
-    </template>
-    <template x-if="!isMobile">
-        <section style="background-color: #F6F8FC">
-            @include('musora.sales.components.testimonials-section-100songs', [
-                'desktopGrid' => true,
-                'header' => 'Drumeo is trusted by 78,229 active students.',
-                'reviewText' => 'We want to help you reach all of your drumming goals! Watch some of our students stories below:',
-            ])
-        </section>
-    </template>
-</div>
-
+   
+    <section style="background-color: #F6F8FC"> @include('musora.sales.components.testimonials-section-100songs', [
+        'desktopGrid' => true,
+        'header' => 'Drumeo is trusted by 78,229 active students.',
+        'reviewText' => 'We want to help you reach all of your drumming goals! Watch some of our students stories below:',
+    ])</section>
     
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('musora.sales.components.card-selection-section', [
