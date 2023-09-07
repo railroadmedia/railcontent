@@ -1,4 +1,7 @@
-@extends('musora._partials.layout')
+@extends('musora._partials.layout', [
+    'whiteNav' => true,
+    'fullSubscriptionVersion' => true,
+])
 
 @section('head-includes')
     <title>6 Reasons Online Music Lessons Will Help Your Learn Faster | Musora</title>
