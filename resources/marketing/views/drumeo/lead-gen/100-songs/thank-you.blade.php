@@ -15,42 +15,43 @@
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
-       
+        .splide__pagination__page.is-active {
+            background:#01050F;
+            transform:none !important;
+        }
+
+        .splide__pagination__page {
+            margin:3px 10px !important;
+            opacity:1 !important;
+        }
+
         @media (min-width:768px) {
+            .splide__pagination__page {
+                margin:3px 6px !important;
+            }
              .background-gradient {
             background-image: linear-gradient(265deg, #0B76DB 0%, #010B1F 100%); 
         }
-          .banner-logo {
-                width:380px;
-            }
+        }
+
+        .splide__arrow svg {
+            fill:#FFAE00 !important;
         }
         
         /* Styles for mobile screens */
         @media (max-width: 767px) {
             .background-gradient {
-                background-image: linear-gradient(85deg, #00BEF3 0%, #02163D 100%);
-            }
-
-            .banner-arrow {
-                height:68px;
-                bottom: 20px;
-            }
-
-            .banner-logo {
-                width:180px;
-            }
-        .container-custom-section{
-            padding-left: 20px;
-        }
-        }
+                background-image: linear-gradient(265deg, #00BEF3 0%, #02163D 100%);
+            }}
     </style>
 @stop
 
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
 @stop
 
 @section('body-data')
@@ -60,134 +61,86 @@
 @endsection
 
 @section('content')
-<!-- Hero banner -->
-<div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12 background-gradient relative">
-    <div class="container mx-auto max-w-3xl clearfix">
-        <div class="text-center sm:px-3">
-            <img
-                class="transition-opacity opacity-0 my-2 banner-logo"
-                src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
-                alt="Musora Logo"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-            />
-            <h3 class="my-4 lg:text-5xl md:text-4xl text-3xl"><strong>
-                    Check your email for<br class="inline sm:hidden"> your free songs.</strong></h3>
-            <p class="leading-normal mb-8">
-                Begin a free 30-day trial to test-drive<br class="inline sm:hidden">
-                the entire Drumeo song library!</p>
 
-            <div class="relative pb-6 pr-6">
-                <picture>
-                    <!-- Desktop version of the vinyl image -->
-                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,height=390,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/vinyl-header.png">
-                    <!-- Mobile version of the vinyl image -->
-                    <img
-                        class="transition-opacity opacity-0"
-                        src="https://www.musora.com/musora-cdn/image/width=330,height=230,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/vinyl-header.png"
-                        alt="Vinyl Record Header"
-                        loading="lazy"
-                        onload="this.classList.remove('opacity-0')"
-                        aria-hidden="true" 
-                    />
-                </picture>
-                <img
-                    class="transition-opacity opacity-0 absolute bottom-10 lg:w-35 sm:w-25 banner-arrow"
-                    src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/arrow.png"
-                    alt="Arrow Icon"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                    aria-label="Scroll Down"
-                />
-            </div>
-        </div>
+<div class="h-[870px] sm:h-[550px] background-gradient">
+    <div class="container mx-auto max-w-3xl flex flex-col justify-center items-center py-12">
+        <img
+            class="h-12 sm:h-14 transition-opacity opacity-0"
+            src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
+            alt="logo"
+            loading="lazy"
+            onload="this.classList.remove('opacity-0')"
+        />
+        <h3 class="mt-4 sm:text-{30px} text-white text-center text-5xl md:text-3xl font-semibold leading-tight md:leading-normal md:tracking-wide"><strong>Check your email for<br class="inline md:hidden"> your free drum lessons.</strong></h3>
+        <p class="mb-1 leading-50 text-white text-center text-base md:text-lg font-normal font-open-sans md:leading-20 md:font-medium sm:font-base sm:leading-15">
+            Begin a free 30-day trial to test-drive<br class="inline sm:hidden"> the entire Drumeo song library!
+        </p>
+        <img
+            class="max-h-72 sm:max-h-96 transition-opacity opacity-0"
+            src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/vinyl-header.png"
+            alt="logo"
+            loading="lazy"
+            onload="this.classList.remove('opacity-0')"
+        />
     </div>
 </div>
 
 
-<!-- Section with button -->
-<section class="sticky lg:top-10 top-8 text-center px-3 py-5 sm:py-7 z-40" style="background-color:#FFAC00;">
-        <div class="container mx-auto max-w-5xl" >
-            <h5 class="mb-4" style="line-height: 2rem">
-                Start playing the songs you love<br class="inline sm:hidden">
-                with a free 30-day trial to Drumeo.</h5>
-            <a class="join blue smaller anchor-slide" href="#customize-anchor">FREE FOR 30 DAYS <i class="fas fa-arrow-right"></i></a>
-        </div> 
+
+
+<section class="h-60" style="background-color:#FFAC00;">
+    <div class="container mx-auto max-w-5xl flex flex-col justify-center items-center h-full">
+       <h5 class="mb-4 text-base sm:text-lg md:text-xl lg:text-2xl font-normal leading-13 sm:leading-10">
+    Start playing the songs you love<br class="inline sm:hidden">
+    with a free 30-day trial to Drumeo.
+</h5>
+
+<a class="join blue smaller anchor-slide w-360 h-55 text-[22px] px-14"  href="#customize-anchor" >FREE FOR 30 DAYS <i class="fas fa-arrow-right"></i></a>
+    </div>
 </section>
 
-<!-- Main section -->
-<section class="flex flex-col tw-justify-items-center p-4 lg:justify-items-center lg:items-center" style="background: #F5F5F5">
 
 
-            @component('musora.sales.components.custom-section-100songs', [
-    'title' => 'Change The Tempo',
-    'subtitle' => 'Figure out the hard parts.',
-    'description' => 'Slow down or speed up any section of a song to hear every note. Practice any song with your desired tempo.',
-    'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/hard-parts.png',
-    'altText' => 'Musician adjusting tempo on a drum kit',
-    'textOnLeft' => true, 
-])
-@endcomponent
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
+        <div class="container max-w-5xl mx-auto">
 
-@component('musora.sales.components.custom-image-100songs', [
-    'title' => '5000+ songs',
-    'subtitle' => 'Play the songs you love.',
-    'description' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
-    'desktopImageSrc' => 'https://www.musora.com/musora-cdn/image/width=1300,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs.png',
-    'mobileImageSrc' => 'https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs-m.png',
-    'altText' => 'Mobile phone displaying sheet music',
-    'textOnLeft' => false, 
-])
-@endcomponent
 
-@component('musora.sales.components.custom-section-100songs', [
-    'title' => 'LOOP SECTIONS',
-    'subtitle' => 'Woodshed it until you nail it.',
-    'description' => 'Slow down or speed up any section of a song to hear every note.',
-    'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=940,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/woodshed-it.png',
-    'altText' => 'Musician practicing and looping a song section',
-    'textOnLeft' => true, 
-])
-@endcomponent
+            Change The Tempo
+            Figure out the hard parts.
+            Slow down or speed up any section of a song to hear every note. Practice any song with your desired tempo.
 
-@component('musora.sales.components.custom-image-100songs', [
-    'title' => 'Remove The Drums',
-    'subtitle' => 'Be the drummer in the band.',
-    'description' => 'Magically remove the original drums to make each song uniquely yours.',
-    'desktopImageSrc' => 'https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/be-the-drummer.png',
-    'mobileImageSrc' => 'https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/be-the-drummer-m.png',
-    'altText' => 'Musician playing drums',
-    'textOnLeft' => false, 
-])
-@endcomponent
 
-@component('musora.sales.components.custom-section-100songs', [
-    'title' => 'Perfect Notation',
-    'subtitle' => 'Learn it right the first time.',
-    'description' => 'Get note-for-note notation and learn to play accurately from the get-go.',
-    'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=940,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/learn-it-right.png',
-    'altText' => 'Sheet music with annotations',
-    'textOnLeft' => true, 
-])
-@endcomponent
+            5000+ songs
+            Play the songs you love.
+            Get note-for-note song breakdowns for every style, era, and skill level.
 
-@component('musora.sales.components.custom-section-100songs', [
-    'title' => 'On-The-Go',
-    'subtitle' => 'Take your songs with you.',
-    'description' => 'Accessible on any device, or printable, so you can play any song, any time.',
-    'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=940,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/take-your-songs-with-you.png',
-    'altText' => 'Musician carrying sheet music',
-    'textOnLeft' => false, 
-])
-@endcomponent
+
+            LOOP SECTIONS
+            Woodshed it until you nail it.
+            Slow down or speed up any section of a song to hear every note.
+
+
+            Remove The Drums
+            Be the drummer in the band.
+            Magically remove the original drums to make each song uniquely yours.
+
+
+            Perfect Notation
+            Learn it right the first time.
+            Get note-for-note notation and learn to play accurately from the get-go.
+
+
+            On-The-Go
+            Take your songs with you.
+            Accessible on any device, or printable, so you can play any song, any time.
 
 
 
-</section>
-<!-- End of main section -->
+        </div>
+    </section>
+  
+<div class="h-5 sm:h-10 relative z-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to top right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
 
-<!-- Review section -->
-<div class="h-5 sm:h-10 relative z-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #F6F8FC calc(50% + 1px));"></div>
     @php
         $testimonials = [
             [
@@ -248,15 +201,35 @@
             ],
         ]
     @endphp
-   
-    <section style="background-color: #F6F8FC"> @include('musora.sales.components.testimonials-section', [
-        'desktopGrid' => true,
-        'header' => 'Drumeo is trusted by 78,229 active students.',
-        'reviewText' => 'We want to help you reach all of your drumming goals! Watch some of our students stories below:',
-    ])</section>
 
-   <!-- End of review section --> 
-   
+  <div x-data="{ isMobile: window.innerWidth <= 768 }" x-init="() => {
+    window.addEventListener('resize', () => {
+        isMobile = window.innerWidth <= 768;
+    });
+}">
+    <template x-if="isMobile">
+        <a class="inline-block text-center w-full my-12" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+            <img
+                alt="shopper approved image"
+                class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
+                src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            >
+        </a>
+    </template>
+    <template x-if="!isMobile">
+        <section style="background-color: #F6F8FC">
+            @include('musora.sales.components.testimonials-section-100songs', [
+                'desktopGrid' => true,
+                'header' => 'Drumeo is trusted by 78,229 active students.',
+                'reviewText' => 'We want to help you reach all of your drumming goals! Watch some of our students stories below:',
+            ])
+        </section>
+    </template>
+</div>
+
+    
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
