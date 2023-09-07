@@ -91,6 +91,11 @@ class RevenueCatController extends Controller
                     $data['event']['purchased_at_ms']
                 );
 
+                if($data['event']['period_type'] != 'TRIAL')
+                {
+                    $this->paymentService->create( $user->id, $musoraProduct, $musoraSubscription, $type);
+                }
+
                 //Assign user product
                 $this->userProductService->assignUserProduct(
                     $user->id,
@@ -147,7 +152,7 @@ class RevenueCatController extends Controller
                     $currentRevenueCatSubscription['expires_date']
                 );
 
-                $this->paymentService->create( $user->id, $musoraProduct, $musoraSubscription);
+                $this->paymentService->create( $user->id, $musoraProduct, $musoraSubscription, $type);
                 dd('out');
 
                 //update user product
