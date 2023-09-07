@@ -8,6 +8,18 @@
     <div class="container mx-auto max-w-6xl">
         <h2 class="leading-tight text-black font-extrabold leading-10 text-5xl mb-4"><strong>{!! $header !!}</strong></h2>
         <p class="mx-auto mb-7 text-xl font-normal leading-loose">{!!  $reviewText  !!}</p>
+         @if($isReviewsTop) 
+        <a class="inline-block w-full" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+            <img
+                alt="shopper approved image"
+                class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
+                src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            >
+            <p class="mx-auto text-sm @if(empty($youtube)) mb-10 sm:mb-16 @endif">Rated <strong>4.8</strong> / 5 based on {{ number_format(Prices::$reviews) }} student reviews. <span class="inline-block @if($theme != 'musora') text-{{ $theme }} @else text-drumeo @endif">See the reviews »</span></p>
+        </a>
+    @endif
         
         @if(!empty($youtube))
             <div class="flex flex-wrap items-start justify-center mx-auto mt-2 sm:mt-6">
@@ -175,14 +187,8 @@
             @endcomponent
         @endif
     @endforeach
-
-<div x-data="{ isMobile: window.innerWidth <= 768 }" x-init="() => {
-    window.addEventListener('resize', () => {
-        isMobile = window.innerWidth <= 768;
-    });
-}">
-    <template x-if="isMobile">
-        <a class="inline-block w-full mt-2" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+         @if($isReviewsBottom) 
+        <a class="inline-block w-full" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
             <img
                 alt="shopper approved image"
                 class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
@@ -190,31 +196,7 @@
                 loading="lazy"
                 onload="this.classList.remove('opacity-0')"
             >
-    </template>
-    <template x-if="!isMobile">
-        <a class="inline-block w-full mt-2" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-            <img
-                alt="shopper approved image"
-                class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-            >
-            <p class="mx-auto my-2 text-sm @if(empty($youtube)) mb-10 sm:mb-16 @endif">Rated <strong>4.8</strong> / 5 based on {{ number_format(Prices::$reviews) }} student reviews. <span class="inline-block @if($theme != 'musora') text-{{ $theme }} @else text-drumeo @endif">See the reviews »</span></p>
+            <p class="mx-auto text-sm @if(empty($youtube)) mb-10 sm:mb-16 @endif">Rated <strong>4.8</strong> / 5 based on {{ number_format(Prices::$reviews) }} student reviews. <span class="inline-block @if($theme != 'musora') text-{{ $theme }} @else text-drumeo @endif">See the reviews »</span></p>
         </a>
-    </template>
-</div>
-
-
-
-            {{-- <a class="inline-block w-full mt-2" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
-            <img
-                alt="shopper approved image"
-                class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
-                src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png"
-                loading="lazy"
-                onload="this.classList.remove('opacity-0')"
-            >
-            <p class="mx-auto my-2 text-sm @if(empty($youtube)) mb-10 sm:mb-16 @endif">Rated <strong>4.8</strong> / 5 based on {{ number_format(Prices::$reviews) }} student reviews. <span class="inline-block @if($theme != 'musora') text-{{ $theme }} @else text-drumeo @endif">See the reviews »</span></p>
-        </a> --}}
+        @endif
 </section>
