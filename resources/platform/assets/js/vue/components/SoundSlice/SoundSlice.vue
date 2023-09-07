@@ -184,9 +184,6 @@ const handleSoundsliceEvent = (event) => {
                 // if(uniqueSettings.audioSource) {
                 //     ssiframe.value.contentWindow.postMessage(`{"method": "changeAudioByIndex", "arg": "${uniqueSettings.audioSource}" }`, 'https://www.soundslice.com');
                 // }
-                
-                //Set Layout
-                ssiframe.value.contentWindow.postMessage(`{"method": "setLayout", "arg": ${globalSettings.layout} }`, 'https://www.soundslice.com');
 
                 //Get Current Time
                 ssiframe.value.contentWindow.postMessage(`{"method": "seek", "arg": ${uniqueSettings.time} }`, 'https://www.soundslice.com');
@@ -207,14 +204,10 @@ const handleSoundsliceEvent = (event) => {
                 saveVolume(cmd.arg)
                 break
             case 'ssLayoutChange':
-                console.log(cmd.arg)
                 saveLayout(cmd.arg)
                 break
             case 'ssZoom':
                 saveZoom(cmd.arg);
-                break
-            case 'ssLayoutChange':
-                //saveLayout(cmd.arg);
                 break
             //UNIQUE SETTINGS
             case 'ssCurrentTime':
@@ -266,17 +259,17 @@ onBeforeMount(()=> {
         globalSettings.volume = localStorage.getItem("ssVolume");
     }
 
+    //GET Current Time
+    if(localStorage.getItem(`${ props.soundsliceSlug }_currentTime`)) {
+        uniqueSettings.time = localStorage.getItem(`${ props.soundsliceSlug }_currentTime`);
+    }
+
     //GET Layout
     if(localStorage.getItem("ssLayout")) {
         globalSettings.layout = localStorage.getItem("ssLayout");
         params.set('layout', globalSettings.layout);
         url.search = params.toString();
         ssURL.value = url.toString();
-    }
-
-    //GET Current Time
-    if(localStorage.getItem(`${ props.soundsliceSlug }_currentTime`)) {
-        uniqueSettings.time = localStorage.getItem(`${ props.soundsliceSlug }_currentTime`);
     }
 
     //GET Zoom
