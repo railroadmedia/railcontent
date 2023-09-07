@@ -147,6 +147,14 @@
             "joinUrl" => '/choose-plan',
         ])
     @endif
+    <a href="#customize-anchor" class="flex text-white items-center justify-center py-1.5 px-2 sm:px-0 w-full z-[100] anchor-slide" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
+{{--        <img class="h-8 sm:h-10 mr-4" src="https://cdn.musora.com/image/fetch/w_300,q_auto:best/https://d2vyvo0tyx8ig5.cloudfront.net/products/30-day-blues-piano/30-day-blues-piano-logo-blue-glow.png" alt="30 day drummer logo" />--}}
+        <h3 class="inline-block font-bebas text-musora mx-0 pr-3">* FREE POSTERS *</h3>
+        <p class="inline-block text-xs mx-0 leading-tight">
+            Get <strong>2 free posters</strong> when you try
+            <br> Pianote for 7 days. <em>While quantities last.</em>
+        </p>
+    </a>
 
     @php
         $bubble1 = 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/bubbles/summer-swee-singh.png';
@@ -244,7 +252,41 @@
         @yield('promo-banner')
     @endif
 
-    @include('musora.sales.components.musicounts-section')
+    <section class="text-center px-5 sm:px-6 py-12 sm:py-14 lg:py-20 text-white" style="background: linear-gradient(to bottom, #f41a30, #79080b);">
+        <div class="container max-w-5xl mx-auto">
+            <h2><strong>Unlimited piano lessons + 2 FREE posters. </strong></h2>
+            <p class="leading-tight text-musora mt-1"><strong>You’ll get free Chords & Scales Posters when you try Pianote for 7 days ($18 value)</strong></p>
+            <h6 class="inline-block mx-auto rounded-md text-black bg-musora py-2 px-4 mt-4 sm:mb-10"><strong>ONLY <s class="opacity-50">2000</s> @if(!empty($products['poster-chords']->getPublicStockCount())) {{ $products['poster-chords']->getPublicStockCount() }} @endif LEFT</strong></h6>
+            <img class="my-5 h-40 inline sm:hidden"
+                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/pianote-trial-sept-promo-collage-m.png"
+                alt="learn playing image"
+                fetchpriority="high"
+            >
+            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-start mb-5">
+                <p class="leading-normal max-w-xl pr-5 lg:pr-8 mx-0">We’ll send you 2 FREE posters when you start a 7-day trial of Pianote.
+                    <br><br>
+                    Chords and Scales are the building blocks of ALL music. Sign up for a free 7-day trial of Pianote and we’ll ship you these two posters FREE of charge. No matter where you live in the world.
+                    <br><br>
+                    Why?
+                    <br><br>
+                    September is National Piano Month, and we want to get as many people playing and loving the piano as possible. Hang these posters in your practice space and use them to help play your favorite songs this month.
+                    <br><br>
+                    Supplies are limited, so grab yours today.
+                    <br>
+                    <a class="join smaller musora my-3 w-1/2 anchor-slide" href="#customize-anchor">GET Started &raquo;</a>
+                    <br>
+                    <em>Free worldwide shipping!</em>
+                </p>
+                <img class="h-80 lg:h-96 hidden sm:inline transition-opacity opacity-0"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/pianote-trial-sept-promo-collage.png"
+                    alt="learn playing image"
+                >
+            </div>
+        </div>
+    </section>
+
 
     @php
         $gridItems = [
@@ -601,75 +643,39 @@
     <div class="unstick-trigger block"></div>
     <div id="customize-anchor" class="anchor"></div>
     <div id="order" class="anchor"></div>
-    @hasSection('final')
-        @yield('final')
-    @elseif(!empty($trialVersion))
-        @include('musora.sales.components.card-selection-section', [
-            "noSelector" => true,
-            "plusLogo" => "https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-plus-logo-light.svg",
-            "logo" => "https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-white.png",
-            "songs" => "1000+ popular songs.",
-            "firstPoint" => "Unlimited piano lessons.",
-            "thirdPoint" => "Direct access to real teachers.",
-            "fifthPoint" => "Lesson access for singing, guitar, and drums.",
-            "plusAnnualLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL]=1&promo-code=annual-trial&redirect=/order&locked=true",
-            "plusMonthlyLink" => "/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true",
-            "annualLink" => "/ecommerce/add-to-cart?products[pianote-base-annual-recurring-7-day-trial-membership]=1&promo-code=annual-trial&redirect=/order&locked=true",
-            "monthlyLink" => "/ecommerce/add-to-cart?products[pianote-base-monthly-recurring-7-day-trial-membership]=1&redirect=/order&locked=true",
-        ])
-        @include('musora.sales.components.trial-explanation', [
-            'instrument' => 'piano',
-        ])
-    @elseif(!empty($promoVersion))
-        @php
-            $bonuses = [
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2022/bonus-chords-scales.jpg',
-                    'title' => 'Chords & <br>Scales Book',
-                    'description' => 'Your encyclopedia of piano chords & scales.',
-                    'price' => floatval($productPrices['piano-chords-and-scales-guide']->price),
-                    'shipping' => 'true'
-                ],
-                [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-technique-made-easy.jpg',
-                'title' => 'Piano Technique<br> Made Easy',
-                'description' => 'Your ultimate guide to learning the piano. Learn EVERY scale, chord, arpeggio, and key signature.',
-                'price' => floatval($productPrices['piano-technique-made-easy']->price),
-                ],
-                [
-                'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/unlimited/piano-riffs-and-fills.jpg',
-                'title' => 'Piano Riffs<br> & Fills',
-                'description' => 'Learn the secrets and tips to play fills that sound complicated and advanced, but are simple to learn.',
-                'price' => floatval($productPrices['piano-riffs-and-fills']->price),
-                ],
-                [
-                    'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/black-friday/faster-fingers.jpg',
-                    'title' => '',
-                    'description' => 'Boost your speed and confidence with this guided practice course.',
-                    'price' => floatval($productPrices['faster-fingers']->price),
-                ],
-            ]
-        @endphp
-        @include('musora.sales.components.order-section-bonuses', [
-        'topImage' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-annual-2w-card.png',
-        'header' => 'Online piano lessons for all skill levels.',
-        'subDescription' => 'Save 17% + get 4 bonuses<br class="inline sm:hidden"> worth $357',
-        'buttonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-YEAR]=1&products[piano-chords-and-scales-guide]=1&products[piano-technique-made-easy]=1&products[piano-riffs-and-fills]=1&products[faster-fingers]=1&redirect=/order&locked=true&promo-code=special',
-        'altButtonLink' => '/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-1-MONTH]=1&redirect=%2Forder',
-        ])
-    @else
-        @include('musora.sales.components.order-section-collage', [
-        'logo' => 'https://d2vyvo0tyx8ig5.cloudfront.net/logo/pianote-logo-red.png',
-        'header' => 'Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.',
-        'list' => '<li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by ' . number_format(Prices::$students) . ' students.</li>
-                    <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> All-access for piano, guitar, drums, and singing.</li>
-                    <li class="leading-tight text-musora max-w-xs mx-0"><i class="fa-li fas fa-check"></i> We’ll donate 20% towards music programs for kids. </li>',
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/pianote-collage.png',
-        ])
-{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Online piano lessons on every topic.</li>--}}
-{{--        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>--}}
-{{--        <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>',--}}
-    @endif
+
+
+    <section class="py-14 sm:py-20 lg:py-24 relative overflow-hidden text-white text-center customize px-4 lg:px-6"
+            style="background: linear-gradient(to right, #08203a, #0c1524);">
+            <div class="container mx-auto max-w-6xl relative z-50">
+                <div class="w-full">
+                    <div class="bonus-wrap relative inline-block align-top mx-auto px-1 md:px-3 w-full max-w-lg">
+                        <div class=" inline-block relative w-full group" style="padding-bottom: 39.5%;perspective: 1000px;">
+                            <div class="text-center w-full h-full absolute" style="transform-style: preserve-3d;">
+                                <div class=" {{--border-2 border-promo--}} front absolute z-20  w-full h-full transition-transform duration-700" style="backface-visibility: hidden;">
+                                    <div class="h-full w-full bg-top bg-contain bg-no-repeat" style="background-image:url(https://www.musora.com/musora-cdn/image/width=850,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/pianote-trial-sept-order-collage.png);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <h2 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Try Pianote for 7 days & get<br class="hidden sm:inline"> FREE Chords & Scales posters.</strong></h2>
+
+                    <p class="leading-tight mt-4 sm:mt-5 mb-2"><span class="text-musora">Click below to start your free 7-day trial. Your annual membership will<br class="hidden sm:inline"> continue on {{ Carbon\Carbon::now()->addDays(7)->format('F jS') }} (after your free trial).</span>
+                        <em>Only <s class="opacity-50">2000</s> <strong> @if(!empty($products['poster-chords']->getPublicStockCount())) {{ $products['poster-chords']->getPublicStockCount() }} @endif </strong> posters left!</em></p>
+
+                    <h3 class="leading-tight mt-4 sm:mt-5 mb-2"><strong>Free for 7 days</strong></h3>
+                    <p class="leading-tight opacity-70 text-sm"><em>Then billed at $240 per year. Save 33%.</em></p>
+                    <a class="join {{ $theme }} my-4 md:my-6 w-full max-w-xs md:max-w-lg lg:max-w-xl" style="padding: 20px 10px;" href="/ecommerce/add-to-cart?product-array=PIANOTE-MEMBERSHIP-TRIAL-7-DAY-ANNUAL:1,poster-chords:1,poster-scales:1&promo-code=annual-trial&redirect=/order&locked=true">CLICK HERE TO GET STARTED</a>
+                </div>
+                    <a class="inline-block text-pianote mt-2" href="/ecommerce/add-to-cart?products[PIANOTE-MEMBERSHIP-TRIAL]=1&redirect=/order&locked=true"><p class="leading-tight"><strong><u>Or start a Monthly Plan for<br class="sm:hidden"> $30/month (no bonus posters)</u></strong></p></a>
+                    <p class="opacity-70 text-sm mt-2"><em>90-day money-back guarantee. Cancel anytime.</em></p>
+            </div>
+        </section>
+
+    @include('musora.sales.components.trial-explanation', [
+        'instrument' => 'piano',
+    ])
 
     @include('musora.sales.components.app-section', [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/2023/devices.png',
