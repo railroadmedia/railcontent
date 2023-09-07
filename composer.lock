@@ -8266,12 +8266,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/railroadmedia/ecommerce.git",
-                "reference": "eb78e475e81fc3f91b5cfcd8297b7d9f9b5bdf25"
+                "reference": "cdfb8cbee335523153dac60180dfa660e816f771"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/eb78e475e81fc3f91b5cfcd8297b7d9f9b5bdf25",
-                "reference": "eb78e475e81fc3f91b5cfcd8297b7d9f9b5bdf25",
+                "url": "https://api.github.com/repos/railroadmedia/ecommerce/zipball/cdfb8cbee335523153dac60180dfa660e816f771",
+                "reference": "cdfb8cbee335523153dac60180dfa660e816f771",
                 "shasum": ""
             },
             "require": {
@@ -8311,7 +8311,7 @@
                 "issues": "https://github.com/railroadmedia/ecommerce/issues",
                 "source": "https://github.com/railroadmedia/ecommerce/tree/srr-misc"
             },
-            "time": "2023-09-07T20:20:12+00:00"
+            "time": "2023-09-07T22:45:21+00:00"
         },
         {
             "name": "railroad/lead-tracker",
@@ -15407,16 +15407,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.23.1",
+            "version": "1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "846ae76eef31c6d7790fac9bc399ecee45160b26"
+                "reference": "3510b0a6274cc42f7219367cb3abfc123ffa09d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/846ae76eef31c6d7790fac9bc399ecee45160b26",
-                "reference": "846ae76eef31c6d7790fac9bc399ecee45160b26",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/3510b0a6274cc42f7219367cb3abfc123ffa09d6",
+                "reference": "3510b0a6274cc42f7219367cb3abfc123ffa09d6",
                 "shasum": ""
             },
             "require": {
@@ -15448,9 +15448,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.23.1"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.24.0"
             },
-            "time": "2023-08-03T16:32:59+00:00"
+            "time": "2023-09-07T20:46:32+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
