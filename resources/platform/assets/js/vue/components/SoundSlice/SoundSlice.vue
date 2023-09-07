@@ -173,6 +173,7 @@ const handleSoundsliceEvent = (event) => {
             case 'ssNotationLoaded':
                 //Get Duration
                 ssiframe.value.contentWindow.postMessage(`{"method": "getDuration" }`, 'https://www.soundslice.com');
+                
                 //Set Volume
                 ssiframe.value.contentWindow.postMessage(`{"method": "setVolume", "arg": ${globalSettings.volume} }`, 'https://www.soundslice.com');
                 
@@ -183,6 +184,9 @@ const handleSoundsliceEvent = (event) => {
                 // if(uniqueSettings.audioSource) {
                 //     ssiframe.value.contentWindow.postMessage(`{"method": "changeAudioByIndex", "arg": "${uniqueSettings.audioSource}" }`, 'https://www.soundslice.com');
                 // }
+                
+                //Set Layout
+                ssiframe.value.contentWindow.postMessage(`{"method": "setLayout", "arg": ${globalSettings.layout} }`, 'https://www.soundslice.com');
 
                 //Get Current Time
                 ssiframe.value.contentWindow.postMessage(`{"method": "seek", "arg": ${uniqueSettings.time} }`, 'https://www.soundslice.com');
@@ -283,7 +287,9 @@ onBeforeMount(()=> {
     //GET Audio Source
     // if(localStorage.getItem(`${ props.soundsliceSlug }_audioSource`)) {
     //     uniqueSettings.audioSource = localStorage.getItem(`${ props.soundsliceSlug }_audioSource`);
-    //     ssURL.value = `https://www.soundslice.com/${scoreOrSlice()}/${props.soundsliceSlug}/embed/?api=1&scroll_type=2&branding=0&top_controls=1&u=${props.userId}&show_chords=0&layout=3&recording_idx=${uniqueSettings.audioSource}`;
+    //     params.set('recording_idx', uniqueSettings.audioSource);
+    //     url.search = params.toString();
+    //     ssURL.value = url.toString();
     // }
 })
 
