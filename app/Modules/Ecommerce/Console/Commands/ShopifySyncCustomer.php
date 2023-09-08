@@ -4,7 +4,7 @@ namespace App\Modules\Ecommerce\Console\Commands;
 
 use App\Console\Commands\Infrastructure\Command;
 use App\Modules\Ecommerce\Models\Product;
-use App\Modules\Ecommerce\Services\ShopifyOrderService;
+use App\Modules\Ecommerce\Services\ShopifySyncService;
 use Modules\UserManagementSystem\Models\User;
 use Signifly\Shopify\Shopify;
 
@@ -12,7 +12,7 @@ class ShopifySyncCustomer extends Command
 {
     protected $signature = 'ecommerce:ShopifySyncCustomer {shopifyCustomerId}';
 
-    public function handle(ShopifyOrderService $shopifyOrderService)
+    public function handle(ShopifySyncService $shopifyOrderService)
     {
         $shopifyCustomerId = $this->argument('shopifyCustomerId');
         $shopifyOrderService->syncCustomer($shopifyCustomerId);

@@ -2,16 +2,16 @@
 
 namespace App\Modules\Ecommerce\Controllers;
 
-use App\Modules\Ecommerce\Services\ShopifyOrderService;
+use App\Modules\Ecommerce\Services\ShopifySyncService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
 
 class ShopifyWebHookController extends Controller
 {
-    private ShopifyOrderService $shopifyOrderService;
+    private ShopifySyncService $shopifyOrderService;
 
-    public function __construct(ShopifyOrderService $shopifyOrderService)
+    public function __construct(ShopifySyncService $shopifyOrderService)
     {
         $this->shopifyOrderService = $shopifyOrderService;
     }

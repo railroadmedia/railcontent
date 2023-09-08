@@ -11,7 +11,7 @@ use Railroad\Railcontent\Repositories\PermissionRepository;
 use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
 
-class ShopifyOrderService
+class ShopifySyncService
 {
     private Shopify $shopify;
     private PermissionsService $permissionService;
@@ -24,7 +24,6 @@ class ShopifyOrderService
 
     public function syncCustomer($shopifyCustomerId)
     {
-
         $userId = $this->getUserIdFromShopifyCustomerId($shopifyCustomerId);
         $ownedProducts = $this->getOwnedProducts($shopifyCustomerId);
         $userPermissions = $this->getUserPermissions($ownedProducts);
@@ -32,7 +31,13 @@ class ShopifyOrderService
         $this->permissionService->syncPermissions($userId, $userPermissions);
     }
 
-    public function getOwnedProducts(int $shopifyCustomerId): array
+    private function getUserIdFromShopifyCustomerId($shopifyCustomerId)
+    {
+        $user = User::query()->where('shopify_id', '=', $shopifyCustomerId)->first('id');
+        return $user->id ?? null;
+    }
+
+    private function getOwnedProducts(int $shopifyCustomerId): array
     {
         $orders = $this->shopify->getCustomerOrders($shopifyCustomerId);
         $ownedProducts = [];
@@ -47,12 +52,6 @@ class ShopifyOrderService
             }
         }
         return $ownedProducts;
-    }
-
-    private function getUserIdFromShopifyCustomerId($shopifyCustomerId)
-    {
-        $user = User::query()->where('shopify_id', '=', $shopifyCustomerId)->first('id');
-        return $user->id ?? null;
     }
 
     private function getUserPermissions(array $ownedProducts): array

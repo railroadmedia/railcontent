@@ -8,7 +8,7 @@ Route::prefix('ecommerce/shopify')->group(function () {
         Route::post(
             'order/create',
             ShopifyWebHookController::class . '@orderCreated'
-        );
+        )->name('shopify.webhook.order.create');
     });
 });
 
