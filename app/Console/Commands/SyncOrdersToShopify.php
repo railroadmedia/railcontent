@@ -513,12 +513,6 @@ class SyncOrdersToShopify extends Command
         $orderData = [
             "customer" => ["id" => $purchaser->getShopifyId()],
             "email" => $purchaser->getEmail(),
-
-            "payment_gateway_names" => collect($order->getPayments())
-                ->map(function($payment) {
-                    return $payment->getExternalProvider() . " - " . $payment->getGatewayName();
-                })->toArray(),
-
             "note" => $order->getNote(),
             "processed_at" => $order->getCreatedAt()->toIso8601String(),
             "source_name" => $order->getBrand(),
