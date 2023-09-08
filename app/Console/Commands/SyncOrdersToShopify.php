@@ -21,7 +21,10 @@ class SyncOrdersToShopify extends Command
      *
      * @var string
      */
-    protected $signature = 'shopify:sync-orders {--fresh} {--execute}';
+    protected $signature = 'shopify:sync-orders
+                            {--limit= : (Optional) The number of order to limit this run to}
+                            {--fresh : Sync all orders, not just those that need it}
+                            {--execute : Execute this sync to Shopify. Without this flag, it will be simulated. }';
 
     /**
      * The console command description.
@@ -122,6 +125,14 @@ class SyncOrdersToShopify extends Command
     function getIsFresh(): bool
     {
         return $this->option("fresh");
+    }
+
+    /**
+     * @inheritDoc
+     */
+    function getLimit(): ?int
+    {
+        return $this->option("limit");
     }
 
     /**
