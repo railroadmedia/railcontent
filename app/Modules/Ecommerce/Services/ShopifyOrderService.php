@@ -24,6 +24,7 @@ class ShopifyOrderService
 
     public function syncCustomer($shopifyCustomerId)
     {
+
         $userId = $this->getUserIdFromShopifyCustomerId($shopifyCustomerId);
         $ownedProducts = $this->getOwnedProducts($shopifyCustomerId);
         $userPermissions = $this->getUserPermissions($ownedProducts);

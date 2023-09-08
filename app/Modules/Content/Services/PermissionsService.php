@@ -24,15 +24,16 @@ class PermissionsService
             $startDate = $dates['start_date'] ?? Carbon::now();
 
             $existingPermission = $existingPermissions[$permissionId] ?? null;
-
+            $now = Carbon::now();
             if (!$existingPermission) {
                 $existingPermission = new UserPermission();
                 $existingPermission->user_id = $userId;
                 $existingPermission->permission_id = $permissionId;
+                $existingPermission->created_on = $now;
             }
             $existingPermission->start_date = $startDate;
             $existingPermission->expiration_date = $expirationDate;
-
+            $existingPermissions->updated_on = $now;
             $existingPermission->save();
         }
     }
