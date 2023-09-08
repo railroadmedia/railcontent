@@ -159,7 +159,7 @@
                             <div class="hidden sm:inline-block absolute inset-0 z-0 bg-cover bg-center" style="background-image:url(https://cdn.musora.com/image/fetch/w_2000,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/qk_banner.png);"></div>
                             <div class="inline-block sm:hidden absolute inset-0 z-0 bg-cover bg-center" style="background-image:url(https://cdn.musora.com/image/fetch/w_800,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/qk_banner_m.png);"></div>
                         </a>
-{{--                        <a href="/drumshop/eardrums" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-7 sm:px-10 lg:px-16 pt-48 pb-4 sm:py-12 lg:py-14 transition-opacity hover:opacity-90">--}}
+{{--                        <a href="/drumshop/eardrums" class="rounded-xl mb-5 overflow-hidden relative inline-block w-full sm:text-left px-7 sm:px-10 lg:px-16 pt-48 pb-4 sm:py-12 lg:py-14 transition-opacity hover:opacity-90" style="background-color:#f2f2f4;">--}}
 {{--                            <div class="relative z-10 inline-block w-full sm:w-auto text-center mx-0">--}}
 {{--                                <img class="h-14 sm:h-20 lg:h-28" src="https://cdn.musora.com/image/fetch/w_790,q_auto:best/https://drumeo-assets.s3.amazonaws.com/promos/september/drumeo-days/ed_logo.png"><br>--}}
 {{--                                <div class="join blue smaller my-2 lg:my-3 w-full">ONLY <s class="opacity-60">$149</s> $127</div><br>--}}
