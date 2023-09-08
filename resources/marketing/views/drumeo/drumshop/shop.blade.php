@@ -147,12 +147,11 @@
                             </div>
                             <h5 class="absolute z-20 top-0 left-0 text-white rounded-br-xl bg-drumeo uppercase font-bebas py-1 px-3 leading-none">
                                 SALE ENDS IN
-                                <span x-cloak x-data="timer()" x-init="countdown2()">
+                            <span x-cloak x-data="timer()" x-init="countdown2()">
                                  <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>
-                                 <span x-cloak x-show="timeLeft > 0">left!</span>
+                                 <span x-cloak x-show="timeLeft > 0 && day < 1 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="minute"></span><span x-text="minuteText"></span></span>
+                                 <span x-cloak x-show="timeLeft > 0 && hour < 1"><span x-text="second"></span><span x-text="secondText"></span></span>
                                  <span x-cloak x-show="timeLeft < 0">A Limited Time</span>
                              </span>
                             </h5>
@@ -167,12 +166,11 @@
 {{--                            </div>--}}
 {{--                            <h5 class="absolute z-20 top-0 left-0 text-white rounded-br-xl bg-drumeo uppercase font-bebas py-1 px-3 leading-none">--}}
 {{--                                SALE ENDS IN--}}
-{{--                                <span x-cloak x-data="timer()" x-init="countdown2()">--}}
+{{--                        <span x-cloak x-data="timer()" x-init="countdown2()">--}}
 {{--                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0">left!</span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && day < 1 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && hour < 1"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
 {{--                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
 {{--                             </span>--}}
 {{--                            </h5>--}}
@@ -186,12 +184,11 @@
 {{--                            </div>--}}
 {{--                            <h5 class="absolute z-20 top-0 left-0 text-white rounded-br-xl bg-drumeo uppercase font-bebas py-1 px-3 leading-none">--}}
 {{--                                SALE ENDS IN--}}
-{{--                                <span x-cloak x-data="timer()" x-init="countdown2()">--}}
+{{--                        <span x-cloak x-data="timer()" x-init="countdown2()">--}}
 {{--                                 <span x-cloak x-show="timeLeft > 0 && day > 0"><span x-text="day"></span><span x-text="dayText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
-{{--                                 <span x-cloak x-show="timeLeft > 0">left!</span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && day < 1 && hour > 0"><span x-text="hour"></span><span x-text="hourText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && day < 1"><span x-text="minute"></span><span x-text="minuteText"></span></span>--}}
+{{--                                 <span x-cloak x-show="timeLeft > 0 && hour < 1"><span x-text="second"></span><span x-text="secondText"></span></span>--}}
 {{--                                 <span x-cloak x-show="timeLeft < 0">A Limited Time</span>--}}
 {{--                             </span>--}}
 {{--                            </h5>--}}
