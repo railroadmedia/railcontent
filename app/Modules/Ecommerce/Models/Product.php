@@ -14,40 +14,40 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Modules\Ecommerce\Models
  *
- * @property integer id
- * @property string brand
- * @property string name
- * @property string sku
- * @property string inventory_control_sku
- * @property string fulfillment_sku
- * @property float price
- * @property string type
- * @property boolean active
- * @property string category
- * @property string description
- * @property string thumbnail_url
- * @property string sales_page_url
- * @property boolean is_physical
- * @property float weight
- * @property string subscription_interval_type
- * @property integer subscription_interval_count
- * @property string stock
- * @property string min_stock_level
- * @property string public_stock_count
- * @property string auto_decrement_stock
- * @property array digital_access_permission_names
- * @property string digital_access_type
- * @property string digital_access_time_interval_type
- * @property string digital_access_time_type
- * @property string digital_access_time_interval_length
- * @property string note
+ * @property int $id
+ * @property string $brand
+ * @property string $name
+ * @property string $sku
+ * @property string $inventory_control_sku
+ * @property string $fulfillment_sku
+ * @property string $price
+ * @property string $type
+ * @property int $active
+ * @property string $category
+ * @property string $description
+ * @property string $thumbnail_url
+ * @property string $sales_page_url
+ * @property int $is_physical
+ * @property string $weight
+ * @property string $subscription_interval_type
+ * @property int $subscription_interval_count
+ * @property int $stock
+ * @property int $min_stock_level
+ * @property int $public_stock_count
+ * @property int $auto_decrement_stock
+ * @property string $digital_access_permission_names
+ * @property string $digital_access_type
+ * @property string $digital_access_time_interval_type
+ * @property string $digital_access_time_type
+ * @property int $digital_access_time_interval_length
+ * @property string $note
  * @property Carbon $digital_membership_access_expiration_date
  * @property Carbon $start_date
  * @property Carbon $expiration_date
- * @property integer $shopify_id
+ * @property int $shopify_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
+ * @property Carbon $deleted_at
  * @method static \App\Modules\Ecommerce\database\factories\ProductFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
