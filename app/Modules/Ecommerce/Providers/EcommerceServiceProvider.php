@@ -29,7 +29,7 @@ class EcommerceServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->loadRoutesFrom(__DIR__ . '/../routes/routes.php');
-        $this->loadRoutesFrom(__DIR__ . '/../routes/shopify.php');
+        //$this->loadRoutesFrom(__DIR__ . '/../routes/shopify.php');
     }
 
     /**
