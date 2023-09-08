@@ -79,17 +79,18 @@
             </div>
         </div>
     </div>
+
+
+    
 <!-- Section with button -->
-<section class="text-center px-3 py-5 sm:py-7" style="background-color:#FFAC00;">
+<section class="sticky top-10 text-center px-3 py-5 sm:py-7 z-40" style="background-color:#FFAC00;">
         <div class="container mx-auto max-w-5xl">
             <h5 class="mb-4">
                 Start playing the songs you love<br class="inline sm:hidden">
                 with a free 30-day trial to Drumeo.</h5>
             <a class="join blue smaller anchor-slide" href="#customize-anchor">FREE FOR 30 DAYS <i class="fas fa-arrow-right"></i></a>
-        </div>
-
-        
-    </section>
+        </div> 
+</section>
 
 <!-- Main section -->
 <section class="flex flex-col tw-justify-items-center align-center sm:p-9" style="background: #F5F5F5">

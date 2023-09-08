@@ -7,7 +7,7 @@
        
     </div>
 
-    <div class="md:w-2/3 @unless($textOnLeft) md:order-1  @endif">
+    <div class="md:w-2/3 py-10 @unless($textOnLeft) md:order-1  @endif">
        <img
     class="w-full lg:w-640 lg:h-640 sm:w-350 sm:h-350 rounded-2xl transition-opacity"
     src="{{ $imageSrc }}"
