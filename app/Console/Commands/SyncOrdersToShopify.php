@@ -100,9 +100,8 @@ class SyncOrdersToShopify extends Command
         // record this as a class variable so that it doesn't get updated with each loop of the users
         $this->lastSyncAt = $this->getDateTimeOfLastSync();
 
-        // DEV NOTE: we do not use the SyncsToShopify sync() here. We need to run through all applicable Users and then
-        // all applicable Customers, rather than just one entity. That, combined with the huge number of Users in our
-        // database, leads to a unique situation for syncing up to Shopify Customers.
+        // DEV NOTE: we do not use the SyncsToShopify sync() here. With the huge number of Orders in our
+        // database, we need to loop through in batches, instead of the usual process in SyncsToShopify.
         $this->notifyStartupStatus();
         $batchSize = 50;
         $this->loopOrdersSync($batchSize);
@@ -141,8 +140,7 @@ class SyncOrdersToShopify extends Command
             )->orWhere(
                 $qb->expr()
                     ->gt("entity.updatedAt", ":lastSyncAt")
-            )
-            ->orWhere(
+            )->orWhere(
                 $qb->expr()->in(
                     "entity.id",
                     $orderItemQB->select("oi.orderId")
@@ -156,8 +154,7 @@ class SyncOrdersToShopify extends Command
                         )
                         ->getDQL()
                 )
-            )
-            ->orWhere(
+            )->orWhere(
                 $qb->expr()->in(
                     "entity.id",
                     $orderItemFulfillmentQB->select("oif.orderId")
@@ -216,16 +213,28 @@ class SyncOrdersToShopify extends Command
             $skip = false;
             if (!is_null($order->getUser())) {
                 // the user is returned with only their id and email, so get the id and get a fresh copy
-                $user = $this->userRepository->find($order->getUser()->getId());
-                if (is_null($user->getShopifyId())) {
-                    $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>","User has not been synced to Shopify"];
+                try {
+                    $user = $this->userRepository->find($order->getUser()->getId());
+                    if (is_null($user->getShopifyId())) {
+                        $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>", "User has not been synced to Shopify"];
+                        $skip = true;
+                    }
+                } catch (ORMException $e) {
+                    $this->error(sprintf("Could not find user by ID %s", $order->getUser()->getId()));
+                    $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>", "User not found"];
                     $skip = true;
                 }
-            } elseif(!is_null($order->getCustomer())) {
+            } elseif (!is_null($order->getCustomer())) {
                 // the customer is returned with only their id and email, so get the id and get a fresh copy
-                $customer = $this->customerRepository->find($order->getCustomer()->getId());
-                if (is_null($customer->getShopifyId())) {
-                    $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>","Customer has not been synced to Shopify"];
+                try {
+                    $customer = $this->customerRepository->find($order->getCustomer()->getId());
+                    if (is_null($customer->getShopifyId())) {
+                        $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>", "Customer has not been synced to Shopify"];
+                        $skip = true;
+                    }
+                } catch (ORMException $e) {
+                    $this->error(sprintf("Could not find customer by ID %s", $order->getCustomer()->getId()));
+                    $this->tableRows[] = [$order->getId(), "--", "--", "--", "<error>SKIPPED</error>", "Customer not found"];
                     $skip = true;
                 }
             } else {
@@ -563,21 +572,21 @@ class SyncOrdersToShopify extends Command
         $orderItemsData = [];
         collect($order->getOrderItems())->each(function (OrderItem $orderItem) use ($order, &$orderItemsData) {
             $data = [
-               // include the shopify_id, if we have one, so we know if we're updating or creating - shopify will just ignore this
-               "shopify_id" => $orderItem->getShopifyId(),
-               // include our internal id, so we can reference it to update - shopify will just ignore this
-               "ecommerce_order_item_id" => $orderItem->getId(),
-               "fulfillable_quantity" => $orderItem->getQuantity(),
-               "fulfillment_service" => "manual",
-               "price" => $orderItem->getInitialPrice(),
-               "quantity" => $orderItem->getQuantity(),
-               "requires_shipping" => $orderItem->getWeight() > 0,
-               "sku" => $orderItem->getProduct()?->getSku(),
-               "title" => $orderItem->getProduct()?->getName(),
-               "variant_id" => $orderItem->getProduct()?->getShopifyId(),
-               "variant_inventory_management" => "shopify",
-               "vendor" => $order->getBrand(),
-           ];
+                // include the shopify_id, if we have one, so we know if we're updating or creating - shopify will just ignore this
+                "shopify_id" => $orderItem->getShopifyId(),
+                // include our internal id, so we can reference it to update - shopify will just ignore this
+                "ecommerce_order_item_id" => $orderItem->getId(),
+                "fulfillable_quantity" => $orderItem->getQuantity(),
+                "fulfillment_service" => "manual",
+                "price" => $orderItem->getInitialPrice(),
+                "quantity" => $orderItem->getQuantity(),
+                "requires_shipping" => $orderItem->getWeight() > 0,
+                "sku" => $orderItem->getProduct()?->getSku(),
+                "title" => $orderItem->getProduct()?->getName(),
+                "variant_id" => $orderItem->getProduct()?->getShopifyId(),
+                "variant_inventory_management" => "shopify",
+                "vendor" => $order->getBrand(),
+            ];
 
             if ($orderItem->getTotalDiscounted()) {
                 $data["applied_discounts"] = [
@@ -590,7 +599,7 @@ class SyncOrdersToShopify extends Command
             /*
             // DEV NOTE: this seems to be nearly what we'd need to properly apply discounts to build up the discount process,
             // but we won't worry about that for these historical updates and will simply use the total_discounted on each
-            // order item
+            // order item. Leaving this here for now, in case it's useful later on.
            if ($orderItem->getOrderItemDiscounts()) {
                // clean up bad data (there are some with discount id 0)
                $orderDiscounts = collect($orderItem->getOrderItemDiscounts())
@@ -762,6 +771,14 @@ class SyncOrdersToShopify extends Command
         return $fulfillmentRecords;
     }
 
+    /**
+     * Get our tracking information for the given Order Item Fulfillment, and update the Shopify fulfillment with
+     * the tracking information, if it's different.
+     *
+     * @param OrderItemFulfillment $fulfillment
+     * @param array $shopifyFulfillmentAttributes
+     * @return string[] array of result data to display in the table
+     */
     private function sendTrackingInfoForFulfillmentToShopify(OrderItemFulfillment $fulfillment, array $shopifyFulfillmentAttributes): array
     {
         $resultRecord = [
