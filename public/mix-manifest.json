@@ -43,6 +43,8 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
     "/marketing/css/app.css": "/marketing/css/app.css?id=a665d83c3beb0a2c4b456ca81f921708",
 =======
     "/marketing/css/app.css": "/marketing/css/app.css?id=ff296710920cefef5827e53cfa239c93",
@@ -53,5 +55,11 @@
 =======
     "/marketing/css/app.css": "/marketing/css/app.css?id=9871656d8fa3e9245859d5afcce8223d",
 >>>>>>> c8555ef3a (Added more style)
+=======
+    "/marketing/css/app.css": "/marketing/css/app.css?id=3d29b0e4378e281036efe2e800cb312b",
+>>>>>>> 57be431b5 (Added minor style changes)
+=======
+    "/marketing/css/app.css": "/marketing/css/app.css?id=69be335314bdad08e1ae7153bd0bd3c2",
+>>>>>>> 3ea20567c (Added minor style changes)
     "/platform/js/vendor.js": "/platform/js/vendor.js?id=b075e5a0165fac6a7beaca80937280c5"
 }
