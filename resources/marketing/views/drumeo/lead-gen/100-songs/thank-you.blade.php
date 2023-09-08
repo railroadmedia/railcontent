@@ -18,28 +18,28 @@
     {{-- <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
-        .splide__pagination__page.is-active {
+        /* .splide__pagination__page.is-active {
             background:#01050F;
             transform:none !important;
-        }
+        } */
 
-        .splide__pagination__page {
+        /* .splide__pagination__page {
             margin:3px 10px !important;
             opacity:1 !important;
-        }
+        } */
 
         @media (min-width:768px) {
-            .splide__pagination__page {
+            /* .splide__pagination__page {
                 margin:3px 6px !important;
-            }
+            } */
              .background-gradient {
             background-image: linear-gradient(265deg, #0B76DB 0%, #010B1F 100%); 
         }
         }
 
-        .splide__arrow svg {
+        /* .splide__arrow svg {
             fill:#FFAE00 !important;
-        }
+        } */
         
         /* Styles for mobile screens */
         @media (max-width: 767px) {
@@ -62,7 +62,7 @@
 @section('content')
 
 <div class="h-[870px] sm:h-[550px] background-gradient">
-    <div class="container mx-auto max-w-3xl flex flex-col justify-center items-center py-12">
+    <div class="container mx-auto max-w-7xl flex flex-col items-center py-12 mx-10">
         <img
             class="h-12 sm:h-14 transition-opacity opacity-0"
             src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
@@ -70,9 +70,15 @@
             loading="lazy"
             onload="this.classList.remove('opacity-0')"
         />
-        <h3 class="mt-4 sm:text-{30px} text-white text-center text-5xl md:text-3xl font-semibold leading-tight md:leading-normal md:tracking-wide"><strong>Check your email for<br class="inline md:hidden"> your free drum lessons.</strong></h3>
+        <h3 class="mt-4 text-white text-center text-5xl md:text-5xl font-semibold leading-tight md:leading-normal md:tracking-wide">
+            <strong class="md:inline-block">Check your email for</strong>
+            <br class="hidden md:inline md:hidden"> 
+            <strong class="md:inline-block">your free drum lessons.</strong>
+        </h3>
         <p class="mb-1 leading-50 text-white text-center text-base md:text-lg font-normal font-open-sans md:leading-20 md:font-medium sm:font-base sm:leading-15">
-            Begin a free 30-day trial to test-drive<br class="inline sm:hidden"> the entire Drumeo song library!
+            Begin a free 30-day trial to test-drive
+            <br class="hidden sm:inline sm:hidden"> 
+            the entire Drumeo song library!
         </p>
         <img
             class="max-h-72 sm:max-h-96 transition-opacity opacity-0"
@@ -84,12 +90,9 @@
     </div>
 </div>
 
-
-
-
-<section class="h-60" style="background-color:#FFAC00;">
-    <div class="container mx-auto max-w-5xl flex flex-col justify-center items-center h-full">
-       <h5 class="mb-4 text-base sm:text-lg md:text-xl lg:text-2xl font-normal leading-13 sm:leading-10">
+<section class="" style="background-color:#FFAC00;">
+    <div class="container lg:h-60 md:h-54 mx-auto max-w-5xl flex flex-col justify-center items-center">
+       <h5 class="mb-4 text-base sm:text-lg md: text-2xl lg:text-3xl lg:text-2xl font-normal leading-13 sm:leading-10 ">
     Start playing the songs you love<br class="inline sm:hidden">
     with a free 30-day trial to Drumeo.
 </h5>
@@ -98,47 +101,56 @@
     </div>
 </section>
 
+<section class="pt-36 pb-24" style="background: #F5F5F5">
+@component('musora.sales.components.custom-section-100songs', [
+    'title' => 'Change The Tempo',
+    'subtitle' => 'Figure out the hard parts.',
+    'description' => 'Slow down or speed up any section of a song to hear every note. Practice any song with your desired tempo.',
+    'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/hard-parts.png',
+    'altText' => 'drummer',
+    'textOnLeft' => true, 
+])
+@endcomponent
+
+@component('musora.sales.components.custom-section-100songs', [
+    'title' => 'LOOP SECTIONS',
+    'subtitle' => 'Woodshed it until you nail it.',
+    'description' => 'Slow down or speed up any section of a song to hear every note.',
+    'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/woodshed-it.png',
+    'altText' => 'singer',
+    'textOnLeft' => true, 
+])
+@endcomponent
+
+@component('musora.sales.components.custom-section-100songs', [
+    'title' => 'Perfect Notation',
+    'subtitle' => 'Learn it right the first time.',
+    'description' => 'Get note-for-note notation and learn to play accurately from the get-go.',
+    'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/learn-it-right.png',
+    'altText' => 'note sheets',
+    'textOnLeft' => true, 
+])
+@endcomponent
+
+@component('musora.sales.components.custom-section-100songs', [
+    'title' => 'On-The-Go',
+    'subtitle' => 'Take your songs with you.',
+    'description' => 'Accessible on any device, or printable, so you can play any song, any time.',
+    'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/hard-parts.png',
+    'altText' => 'drummer',
+    'textOnLeft' => false, 
+])
+@endcomponent
+</section>
 
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
-        <div class="container max-w-5xl mx-auto">
-
-
-            Change The Tempo
-            Figure out the hard parts.
-            Slow down or speed up any section of a song to hear every note. Practice any song with your desired tempo.
-
-
-            5000+ songs
-            Play the songs you love.
-            Get note-for-note song breakdowns for every style, era, and skill level.
-
-
-            LOOP SECTIONS
-            Woodshed it until you nail it.
-            Slow down or speed up any section of a song to hear every note.
-
-
-            Remove The Drums
-            Be the drummer in the band.
-            Magically remove the original drums to make each song uniquely yours.
-
-
-            Perfect Notation
-            Learn it right the first time.
-            Get note-for-note notation and learn to play accurately from the get-go.
-
-
-            On-The-Go
-            Take your songs with you.
-            Accessible on any device, or printable, so you can play any song, any time.
 
 
 
-        </div>
-    </section>
-  
-<div class="h-5 sm:h-10 relative z-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to top right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
+
+<div class="h-5 sm:h-10 relative z-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #F6F8FC calc(50% + 1px));"></div>
+
+{{-- <div class="h-5 sm:h-10 relative z-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to top right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div> --}}
 
     @php
         $testimonials = [
@@ -205,6 +217,8 @@
         'desktopGrid' => true,
         'header' => 'Drumeo is trusted by 78,229 active students.',
         'reviewText' => 'We want to help you reach all of your drumming goals! Watch some of our students stories below:',
+        'isReviewsTop' => false,
+        'isReviewsBottom' => true,
     ])</section>
     
     <div id="customize-anchor" class="anchor anchor-slide"></div>
