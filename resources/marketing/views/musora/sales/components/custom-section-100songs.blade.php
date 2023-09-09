@@ -1,8 +1,9 @@
-<div class="container max-w-7xl mx-auto flex flex-col md:flex-row lg:min-h-850 lg:m-16">
+<div class="container max-w-7xl mx-auto flex flex-col md:flex-row lg:min-h-850 lg:m-16 container-custom-section">
     <div class="lg:w-2/3 @if($textOnLeft) md:order-1 @endif md:text-left lg:w-max mx-auto sm:pt-9 lg:align-center">
-        <div class="container lg:w-1/2 lg:ml-10 sm:flex-col sm:justify-start sm:items-start sm:inline-flex">
+        <div class="container lg:w-1/2 lg:ml-10 md:ml-10 sm:ml-10 sm:flex-col sm:justify-start sm:items-start sm:inline-flex">
             <h5 class="text-sky-600 lg:text-2xl sm:text-lg font-normal uppercase leading-10 py-4 m-0">{{ $title }}</h5>
-            <h3 class="text-black lg:text-5xl md:text-4xl sm:text-3xl font-extrabold leading-[3rem] sm:text-2xl md:text-4xl m-0 header-custom-section">
+
+            <h3 class="text-black lg:text-5xl md:text-4xl sm:text-3xl font-extrabold leading-[3rem] sm:text-2xl md:text-4xl m-0 header-custom-section"> 
                 {{ $subtitle }}
             </h3>
             <p class="text-gray-950 text-xl font-normal py-4">{{ $description }}</p>

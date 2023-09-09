@@ -34,7 +34,7 @@
             font-size: 30px;
         }
         .container-custom-section{
-            padding-left: 10px;
+            padding-left: 20px;
         }
         }
     </style>
@@ -62,7 +62,7 @@
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
                 />
-                <h3 class="my-4 text-3xl"><strong>
+                <h3 class="my-4 lg:text-5xl md:text-4xl sm:text-3xl"><strong>
                         Check your email for<br class="inline sm:hidden"> your free songs.</strong></h3>
                 <p class="leading-normal mb-8">
                     Begin a free 30-day trial to test-drive<br class="inline sm:hidden">
