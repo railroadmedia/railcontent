@@ -23,16 +23,25 @@
              .background-gradient {
             background-image: linear-gradient(265deg, #0B76DB 0%, #010B1F 100%); 
         }
+          .banner-logo {
+                width:380px;
+            }
         }
         
         /* Styles for mobile screens */
         @media (max-width: 767px) {
             .background-gradient {
-                background-image: linear-gradient(265deg, #00BEF3 0%, #02163D 100%);
+                background-image: linear-gradient(85deg, #00BEF3 0%, #02163D 100%);
             }
-        .header-custom-section {
-            font-size: 30px;
-        }
+
+            .banner-arrow {
+                height:68px;
+                bottom: 20px;
+            }
+
+            .banner-logo {
+                width:180px;
+            }
         .container-custom-section{
             padding-left: 20px;
         }
@@ -52,47 +61,52 @@
 
 @section('content')
 <!-- Hero banner -->
- <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12 background-gradient relative">
-        <div class="container mx-auto max-w-3xl clearfix">
-            <div class="text-center sm:px-3">
-                                <img
-                    class="h-12 transition-opacity opacity-0 my-2"
-                    src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
-                    alt="logo"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                />
-                <h3 class="my-4 lg:text-5xl md:text-4xl sm:text-3xl"><strong>
-                        Check your email for<br class="inline sm:hidden"> your free songs.</strong></h3>
-                <p class="leading-normal mb-8">
-                    Begin a free 30-day trial to test-drive<br class="inline sm:hidden">
-                    the entire Drumeo song library!</p>
-                
-                    <div class="sm:py-10"> 
-                        <img
-                    class="transition-opacity opacity-0 "
-                    src="https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/vinyl-header.png"
-                    alt="logo"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                /> 
+<div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12 background-gradient relative">
+    <div class="container mx-auto max-w-3xl clearfix">
+        <div class="text-center sm:px-3">
+            <img
+                class="transition-opacity opacity-0 my-2 banner-logo"
+                src="https://www.musora.com/musora-cdn/image/width=750,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
+                alt="Musora Logo"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            />
+            <h3 class="my-4 lg:text-5xl md:text-4xl text-3xl"><strong>
+                    Check your email for<br class="inline sm:hidden"> your free songs.</strong></h3>
+            <p class="leading-normal mb-8">
+                Begin a free 30-day trial to test-drive<br class="inline sm:hidden">
+                the entire Drumeo song library!</p>
+
+            <div class="relative pb-6 pr-6">
+                <picture>
+                    <!-- Desktop version of the vinyl image -->
+                    <source media="(min-width: 768px)" srcset="https://www.musora.com/musora-cdn/image/width=550,height=390,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/vinyl-header.png">
+                    <!-- Mobile version of the vinyl image -->
+                    <img
+                        class="transition-opacity opacity-0"
+                        src="https://www.musora.com/musora-cdn/image/width=330,height=230,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/vinyl-header.png"
+                        alt="Vinyl Record Header"
+                        loading="lazy"
+                        onload="this.classList.remove('opacity-0')"
+                        aria-hidden="true" 
+                    />
+                </picture>
                 <img
-                    class="transition-opacity opacity-0 mr-10 w-20"
+                    class="transition-opacity opacity-0 absolute bottom-10 lg:w-35 sm:w-25 banner-arrow"
                     src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/arrow.png"
-                    alt="arrow"
+                    alt="Arrow Icon"
                     loading="lazy"
                     onload="this.classList.remove('opacity-0')"
-                    style="position: absolute; bottom: 15px"
+                    aria-label="Scroll Down"
                 />
-            </div>
-               
-               
             </div>
         </div>
     </div>
-    
+</div>
+
+
 <!-- Section with button -->
-<section class="sticky lg:top-10 md:top-8 sm:top-8 text-center px-3 py-5 sm:py-7 z-40" style="background-color:#FFAC00;">
+<section class="sticky lg:top-10 top-8 text-center px-3 py-5 sm:py-7 z-40" style="background-color:#FFAC00;">
         <div class="container mx-auto max-w-5xl" >
             <h5 class="mb-4" style="line-height: 2rem">
                 Start playing the songs you love<br class="inline sm:hidden">
@@ -102,70 +116,71 @@
 </section>
 
 <!-- Main section -->
-<section class="flex flex-col tw-justify-items-center sm:justify-items-left align-center sm:p-9" style="background: #F5F5F5">
+<section class="flex flex-col tw-justify-items-center p-4 lg:justify-items-center lg:items-center" style="background: #F5F5F5">
 
 
             @component('musora.sales.components.custom-section-100songs', [
-                'title' => 'Change The Tempo',
-                'subtitle' => 'Figure out the hard parts.',
-                'description' => 'Slow down or speed up any section of a song to hear every note. Practice any song with your desired tempo.',
-                'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/hard-parts.png',
-                'altText' => 'drummer',
-                'textOnLeft' => true, 
-            ])
-            @endcomponent
+    'title' => 'Change The Tempo',
+    'subtitle' => 'Figure out the hard parts.',
+    'description' => 'Slow down or speed up any section of a song to hear every note. Practice any song with your desired tempo.',
+    'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/hard-parts.png',
+    'altText' => 'Musician adjusting tempo on a drum kit',
+    'textOnLeft' => true, 
+])
+@endcomponent
 
-            @component('musora.sales.components.custom-image-100songs', [
-                'title' => '5000+ songs',
-                'subtitle' => 'Play the songs you love.',
-                'description' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
-                'desktopImageSrc' => 'https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs.png',
-                'mobileImageSrc' => 'https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs-m.png',
-                'altText' => 'mobile phone',
-                'textOnLeft' => false, 
-            ])
-            @endcomponent
+@component('musora.sales.components.custom-image-100songs', [
+    'title' => '5000+ songs',
+    'subtitle' => 'Play the songs you love.',
+    'description' => 'Get note-for-note song breakdowns for every style, era, and skill level.',
+    'desktopImageSrc' => 'https://www.musora.com/musora-cdn/image/width=1300,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs.png',
+    'mobileImageSrc' => 'https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/play-songs-m.png',
+    'altText' => 'Mobile phone displaying sheet music',
+    'textOnLeft' => false, 
+])
+@endcomponent
 
-            @component('musora.sales.components.custom-section-100songs', [
-                'title' => 'LOOP SECTIONS',
-                'subtitle' => 'Woodshed it until you nail it.',
-                'description' => 'Slow down or speed up any section of a song to hear every note.',
-                'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/woodshed-it.png',
-                'altText' => 'singer',
-                'textOnLeft' => true, 
-            ])
-            @endcomponent
+@component('musora.sales.components.custom-section-100songs', [
+    'title' => 'LOOP SECTIONS',
+    'subtitle' => 'Woodshed it until you nail it.',
+    'description' => 'Slow down or speed up any section of a song to hear every note.',
+    'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=940,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/woodshed-it.png',
+    'altText' => 'Musician practicing and looping a song section',
+    'textOnLeft' => true, 
+])
+@endcomponent
 
-            @component('musora.sales.components.custom-image-100songs', [
-                'title' => 'Remove The Drums',
-                'subtitle' => 'Be the drummer in the band.',
-                'description' => 'Magically remove the original drums to make each song uniquely yours.',
-                'desktopImageSrc' => 'https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/be-the-drummer.png',
-                'mobileImageSrc' => 'https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/be-the-drummer-m.png',
-                'altText' => 'drummer',
-                'textOnLeft' => false, 
-            ])
-            @endcomponent
+@component('musora.sales.components.custom-image-100songs', [
+    'title' => 'Remove The Drums',
+    'subtitle' => 'Be the drummer in the band.',
+    'description' => 'Magically remove the original drums to make each song uniquely yours.',
+    'desktopImageSrc' => 'https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/be-the-drummer.png',
+    'mobileImageSrc' => 'https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/be-the-drummer-m.png',
+    'altText' => 'Musician playing drums',
+    'textOnLeft' => false, 
+])
+@endcomponent
 
-            @component('musora.sales.components.custom-section-100songs', [
-                'title' => 'Perfect Notation',
-                'subtitle' => 'Learn it right the first time.',
-                'description' => 'Get note-for-note notation and learn to play accurately from the get-go.',
-                'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/learn-it-right.png',
-                'altText' => 'note sheets',
-                'textOnLeft' => true, 
-            ])
-            @endcomponent
+@component('musora.sales.components.custom-section-100songs', [
+    'title' => 'Perfect Notation',
+    'subtitle' => 'Learn it right the first time.',
+    'description' => 'Get note-for-note notation and learn to play accurately from the get-go.',
+    'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=940,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/learn-it-right.png',
+    'altText' => 'Sheet music with annotations',
+    'textOnLeft' => true, 
+])
+@endcomponent
 
-            @component('musora.sales.components.custom-section-100songs', [
-                'title' => 'On-The-Go',
-                'subtitle' => 'Take your songs with you.',
-                'description' => 'Accessible on any device, or printable, so you can play any song, any time.',
-                'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=640,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/take-your-songs-with-you.png',
-                'altText' => 'drummer',
-                'textOnLeft' => false, 
-            ])
-            @endcomponent
+@component('musora.sales.components.custom-section-100songs', [
+    'title' => 'On-The-Go',
+    'subtitle' => 'Take your songs with you.',
+    'description' => 'Accessible on any device, or printable, so you can play any song, any time.',
+    'imageSrc' => 'https://www.musora.com/musora-cdn/image/width=940,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/take-your-songs-with-you.png',
+    'altText' => 'Musician carrying sheet music',
+    'textOnLeft' => false, 
+])
+@endcomponent
+
 
 
 </section>
