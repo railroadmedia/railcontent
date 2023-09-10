@@ -99,7 +99,7 @@ class UserProductToUserContentPermissionListener
         } catch (\Exception $exception) {
             error_log(
                 '--- Recovered railcontent renewal permissions FAILED! user id: ' .
-                $commandSubscriptionRenewFailed->getSubscription()->getUser()->getId() . ' ---'
+                ($commandSubscriptionRenewFailed->getSubscription()->getUser()?->getId() ?? '') . ' ---'
             );
             error_log($exception);
         }
