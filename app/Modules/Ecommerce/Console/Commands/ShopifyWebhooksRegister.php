@@ -9,6 +9,11 @@ use Signifly\Shopify\Webhooks\Webhook;
 
 class ShopifyWebhooksRegister extends Command
 {
+    public const WEBHOOKS = [
+        'orders/create' => 'shopify.webhook.order.create',
+        'orders/update' => 'shopify.webhook.order.update',
+    ];
+
     protected $signature = 'ecommerce:registerShopifyWebhook {customBaseURL?}';
 
     public function handle(Shopify $shopify)
@@ -18,17 +23,18 @@ class ShopifyWebhooksRegister extends Command
             if (app()->isLocal() && !$customBaseURL) {
                 throw new \Exception("Please provide a public url using ngrok or similar service");
             }
-            $this->registerOrderCreateURL($shopify, $customBaseURL);
+
+            foreach (self::WEBHOOKS as $topic => $route) {
+                $this->registerWebHook($shopify, $customBaseURL, $topic, $route);
+            }
         });
     }
 
-    function registerOrderCreateURL(Shopify $shopify, ?string $customBaseURL)
+    function registerWebHook(Shopify $shopify, ?string $customBaseURL, $topic, $route)
     {
-        $topic = 'orders/create';
-
-        $url = route('shopify.webhook.order.create', absolute: !$customBaseURL);
+        $url = route($route, absolute: !$customBaseURL);
         if ($customBaseURL) {
-            $url = "$customBaseURL/$url";
+            $url = $customBaseURL . $url;
         }
 
         $shopify->createWebhook([
@@ -38,4 +44,6 @@ class ShopifyWebhooksRegister extends Command
         ]);
         $this->info("Webhooks registered: $url $topic");
     }
+
+
 }

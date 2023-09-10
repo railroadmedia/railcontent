@@ -29,4 +29,17 @@ class ShopifyWebHookController extends Controller
 
     }
 
+    public function orderUpdated(Request $request)
+    {
+        Log::debug('Shopify order created webhook received');
+        Log::debug(print_r($request->all(), true));
+
+        //TODO: Verify this is a genuine request from Shopify
+
+        //TODO: Transform the request data into a format that can be used by the ShopifyOrderService
+        $shopifyCustomerId = $request->get('customer')['id'];
+        $this->shopifyOrderService->syncCustomer($shopifyCustomerId);
+
+    }
+
 }
