@@ -7,6 +7,7 @@ use App\Modules\Ecommerce\Models\Subscription;
 use App\Modules\Ecommerce\Services\RevenueCatService;
 use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\Ecommerce\Services\UserProductService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Log;
@@ -118,7 +119,7 @@ class RevenueCatController extends Controller
                 // get Musora user
                 $user = $this->getUser(
                     $data['event']['subscriber_attributes']['email']['value'],
-                    $data['event']['original_app_user_id'],true
+                    $data['event']['original_app_user_id'], true
                 );
                 if (!$user) {
                     //TBD
@@ -196,7 +197,7 @@ class RevenueCatController extends Controller
                 $musoraSubscription = $this->subscriptionService->createSubscription(
                     $user->id,
                     $data['event']['expiration_at_ms'],
-                    $musoraProduct,
+                    $musoraProduct->first(),
                     $type,
                     $data['event']['purchased_at_ms']
                 );
@@ -212,7 +213,7 @@ class RevenueCatController extends Controller
                 break;
             case 'CANCELLATION':
                 $user = $this->getUser(
-                    $data['event']['subscriber_attributes']['email']['value'],
+                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
                     $data['event']['original_app_user_id']
                 );
                 if (!$user) {
@@ -235,12 +236,13 @@ class RevenueCatController extends Controller
 
                 //get Musora subscription
                 $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
+
                 if (!$musoraSubscription) {
                     //create Musora subscription
                     $musoraSubscription = $this->subscriptionService->createSubscription(
                         $user->id,
                         $data['event']['expiration_at_ms'],
-                        $musoraProduct,
+                        $musoraProduct->first(),
                         $type,
                         $data['event']['purchased_at_ms']
                     );
@@ -256,7 +258,7 @@ class RevenueCatController extends Controller
 
                 $this->subscriptionService->updateSubscription(
                     $musoraSubscription,
-                    $currentRevenueCatSubscription['expires_date'],
+                    $data['event']['expiration_at_ms'],
                     $currentRevenueCatSubscription['unsubscribe_detected_at'],
                     $data['event']['cancel_reason']
                 );
@@ -292,22 +294,23 @@ class RevenueCatController extends Controller
      * @param false $createIfNotExists
      * @return User|null
      */
-    private function getUser($value, $appUserId, $createIfNotExists = false): ?User
+    private function getUser($value = null, $appUserId, $createIfNotExists = false): ?User
     {
         $user =
             User::query()
                 ->where('email', $value)
                 ->orWhere('revenuecat_origin_app_user_id', $appUserId)
+                ->orWhere('id', $appUserId)
                 ->first();
         if (!$user && $createIfNotExists) {
             $parts = explode('@', $value);
             $user = new User;
             $user->email = $value;
             $user->setPassword($value);
-            $user->display_name = $parts[0].rand(10000, 99999);
+            $user->display_name = $parts[0] . rand(10000, 99999);
             $user->revenuecat_origin_app_user_id = $appUserId;
             $user->save();
-        }else{
+        } elseif ($user) {
             $user->revenuecat_origin_app_user_id = $appUserId;
             $user->save();
         }
@@ -324,7 +327,7 @@ class RevenueCatController extends Controller
     private function getMusoraProduct(string $type, $event, mixed $productId)
     {
         $store = $type . '_store';
-        $isTrialConversion = array_key_exists('is_trial_conversion', $event) && $event['is_trial_conversion'] ;
+        $isTrialConversion = array_key_exists('is_trial_conversion', $event) && $event['is_trial_conversion'];
         if ($event['period_type'] == 'TRIAL' || $isTrialConversion) {
             $productsMap = [config('ecommerce.' . $store . '_products_map_trial')[$productId]];
         } else {
@@ -395,5 +398,96 @@ class RevenueCatController extends Controller
                 ->first();
 
         return $musoraSubscription;
+    }
+
+    public function syncSubscriber(Request $request)
+    {
+        $user = $this->getUser(
+            null,
+            $request->get('original_app_user_id')
+        );
+
+        $subscriber = $this->revenueCatService->getSubscriber($request->get('original_app_user_id'));
+        $entitlements = $subscriber->entitlements;
+        $subscriptions = $subscriber->subscriptions;
+
+        $active = false;
+        if (!empty($entitlements)) {
+            foreach ($entitlements as $entitlement) {
+                $productIdentifier = $entitlement->product_identifier;
+                $subscriptionData = $subscriptions->$productIdentifier;
+                if (Carbon::parse($subscriptionData->expires_date) >= now()->subDays(5)) {
+                    $active = true;
+                }
+                $type = (strtolower($subscriptionData->store) == 'app_store') ? 'apple' : 'google';
+                $store = $type . '_store';
+                $productsMap = array_merge(
+                    [config('ecommerce.' . $store . '_products_map')[$productIdentifier]],
+                    [config('ecommerce.' . $store . '_products_map_trial')[$productIdentifier]]);
+
+                $musoraProduct =
+                    Product::whereIn('sku', $productsMap)
+                        ->get();
+                if ($user) {
+                    $userId = $user->id;
+                    $musoraSubscription =
+                        Subscription::query()
+                            ->where('user_id', '=', $userId)
+                            ->where('type', '=', $type . '_subscription')
+                            ->whereIn(
+                                'product_id',
+                                $musoraProduct->pluck('id')
+                                    ->toArray()
+                            )
+                            ->first();
+
+                    if (!$musoraSubscription) {
+                        $musoraSubscription = $this->subscriptionService->createSubscription(
+                            $userId,
+                            Carbon::parse($subscriptionData->expires_date)->getTimestampMs(),
+                            $musoraProduct->first(),
+                            $type,
+                            Carbon::parse($subscriptionData->purchase_date)->getTimestampMs(),
+                            Carbon::parse($subscriptionData->unsubscribe_detected_at)->getTimestampMs()
+                        );
+
+                        //Assign user product
+                        $this->userProductService->assignUserProduct($userId, $musoraSubscription->product_id, $musoraSubscription->paid_until);
+                    } else {
+                        //update subscription
+                        $this->subscriptionService->updateSubscription(
+                            $musoraSubscription,
+                            Carbon::parse($subscriptionData->expires_date)->getTimestampMs(),
+                            Carbon::parse($subscriptionData->unsubscribe_detected_at)->getTimestampMs()
+                        );
+                        //update user product
+                        $this->userProductService->assignUserProduct($userId, $musoraSubscription->product_id, $musoraSubscription->paid_until);
+                    }
+                }
+            }
+        }
+
+        if (!$user && $active) {
+            return response()->json([
+                'shouldCreateAccount' => true,
+            ]);
+        }
+
+        if (\user() && \user()->id !== $userId) {
+            return response()->json([
+                'shouldLogin' => true,
+                'email' => $user->email,
+            ]);
+        } else if (\user()) {
+            $token = $user->createToken('');
+            $user->withAccessToken($token);
+
+            return response()->json([
+                'success' => true,
+                'token' => $token->plainTextToken,
+                'tokenType' => 'bearer',
+                'userId' => $user->id,
+            ]);
+        }
     }
 }
