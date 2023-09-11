@@ -307,6 +307,9 @@ class RevenueCatController extends Controller
             $user->display_name = $value;
             $user->revenuecat_origin_app_user_id = $appUserId;
             $user->save();
+        }else{
+            $user->revenuecat_origin_app_user_id = $appUserId;
+            $user->save();
         }
 
         return $user;
