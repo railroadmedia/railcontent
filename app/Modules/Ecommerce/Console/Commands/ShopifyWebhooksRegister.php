@@ -10,8 +10,7 @@ use Signifly\Shopify\Webhooks\Webhook;
 class ShopifyWebhooksRegister extends Command
 {
     public const WEBHOOKS = [
-        'orders/create' => 'shopify.webhook.order.create',
-        'orders/update' => 'shopify.webhook.order.update',
+        'orders/updated' => 'shopify.webhook.order.update'
     ];
 
     protected $signature = 'ecommerce:registerShopifyWebhook {customBaseURL?}';
@@ -37,12 +36,17 @@ class ShopifyWebhooksRegister extends Command
             $url = $customBaseURL . $url;
         }
 
-        $shopify->createWebhook([
-            'topic' => $topic,
-            'address' => $url,
-            'format' => 'json',
-        ]);
-        $this->info("Webhooks registered: $url $topic");
+        try {
+            $result = $shopify->createWebhook([
+                'topic' => $topic,
+                'address' => $url,
+                'format' => 'json',
+            ]);
+            $this->info("Webhooks registered: $url $topic");
+        } catch (\Exception $e) {
+            $this->info("Error registering webhook: $url $topic");
+            $this->info($e->getMessage());
+        }
     }
 
 
