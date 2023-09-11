@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ mix('marketing/css/app.css') }}">
     <link href="{{ asset('/marketing/parcel/drumeo/navigation-sales.css') }}" rel="stylesheet">
     <link href="{{ asset('/marketing/css/tailwind-helpers.css') }}" rel="stylesheet">
-    <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('/marketing/parcel/drumeo/sales-2020.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/css/splide.min.css">
     <style>
         .splide__pagination__page.is-active {
@@ -32,16 +32,26 @@
             .splide__pagination__page {
                 margin:3px 6px !important;
             }
+             .background-gradient {
+            background-image: linear-gradient(265deg, #0B76DB 0%, #010B1F 100%); 
+        }
         }
 
         .splide__arrow svg {
             fill:#FFAE00 !important;
         }
+        
+        /* Styles for mobile screens */
+        @media (max-width: 767px) {
+            .background-gradient {
+                background-image: linear-gradient(265deg, #00BEF3 0%, #02163D 100%);
+            }}
     </style>
 @stop
 
 @section('scripts')
     <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.0.7/dist/js/splide.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.13.0/dist/cdn.min.js"></script>
 @stop
 
 @section('body-data')
@@ -51,42 +61,47 @@
 @endsection
 
 @section('content')
-    <div class="overflow-hidden text-white px-3 py-5 sm:py-7 lg:py-12" style="background-color:#000a1e;">
-        <div class="container mx-auto max-w-3xl clearfix">
-            <div class="text-center sm:px-3">
-                <img
-                    class="h-12 sm:h-14 transition-opacity opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
-                    alt="logo"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                />
-                <h3 class="my-4"><strong>
-                        Check your email for<br class="inline sm:hidden"> your free drum lessons.</strong></h3>
-                <p class="leading-normal mb-8">
-                    Begin a free 30-day trial to test-drive<br class="inline sm:hidden">
-                    the entire Drumeo song library!</p>
 
-                <img
-                    class="h-72 sm:h-96 transition-opacity opacity-0"
-                    src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/TODO.png"
-                    alt="logo"
-                    loading="lazy"
-                    onload="this.classList.remove('opacity-0')"
-                />
-            </div>
-        </div>
+<div class="h-[870px] sm:h-[550px] background-gradient">
+    <div class="container mx-auto max-w-3xl flex flex-col justify-center items-center py-12">
+        <img
+            class="h-12 sm:h-14 transition-opacity opacity-0"
+            src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/logo.png"
+            alt="logo"
+            loading="lazy"
+            onload="this.classList.remove('opacity-0')"
+        />
+        <h3 class="mt-4 sm:text-{30px} text-white text-center text-5xl md:text-3xl font-semibold leading-tight md:leading-normal md:tracking-wide"><strong>Check your email for<br class="inline md:hidden"> your free drum lessons.</strong></h3>
+        <p class="mb-1 leading-50 text-white text-center text-base md:text-lg font-normal font-open-sans md:leading-20 md:font-medium sm:font-base sm:leading-15">
+            Begin a free 30-day trial to test-drive<br class="inline sm:hidden"> the entire Drumeo song library!
+        </p>
+        <img
+            class="max-h-72 sm:max-h-96 transition-opacity opacity-0"
+            src="https://www.musora.com/musora-cdn/image/width=250,quality=95/https://dpwjbsxqtam5n.cloudfront.net/lead-gen/40-songs/vinyl-header.png"
+            alt="logo"
+            loading="lazy"
+            onload="this.classList.remove('opacity-0')"
+        />
     </div>
-    <section class="text-center px-3 py-5 sm:py-7" style="background-color:#FFAC00;">
-        <div class="container mx-auto max-w-5xl">
-            <h5 class="mb-4">
-                Start playing the songs you love<br class="inline sm:hidden">
-                with a free 30-day trial to Drumeo.</h5>
-            <a class="join blue smaller anchor-slide" href="#customize-anchor">FREE FOR 30 DAYS <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </section>
+</div>
 
-    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20" style="background-color:#f4f8fb;">
+
+
+
+<section class="h-60" style="background-color:#FFAC00;">
+    <div class="container mx-auto max-w-5xl flex flex-col justify-center items-center h-full">
+       <h5 class="mb-4 text-base sm:text-lg md:text-xl lg:text-2xl font-normal leading-13 sm:leading-10">
+    Start playing the songs you love<br class="inline sm:hidden">
+    with a free 30-day trial to Drumeo.
+</h5>
+
+<a class="join blue smaller anchor-slide w-360 h-55 text-[22px] px-14"  href="#customize-anchor" >FREE FOR 30 DAYS <i class="fas fa-arrow-right"></i></a>
+    </div>
+</section>
+
+
+
+    <section class="text-center px-5 sm:px-6 py-10 sm:py-14 lg:py-20">
         <div class="container max-w-5xl mx-auto">
 
 
@@ -123,7 +138,8 @@
 
         </div>
     </section>
-    <div class="h-5 sm:h-10 relative z-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
+  
+<div class="h-5 sm:h-10 relative z-10 -mt-5 sm:-mt-10" style="background: linear-gradient(to top right, transparent calc(50% - 1px), transparent, #fff calc(50% + 1px));"></div>
 
     @php
         $testimonials = [
@@ -185,11 +201,35 @@
             ],
         ]
     @endphp
-    @include('musora.sales.components.testimonials-section', [
-        'desktopGrid' => true,
-        'header' => 'Trusted by drummers<br class="inline-block sm:hidden">  everywhere.',
-        'reviewText' => 'Check out the reviews and meet some of our friendly students.',
-    ])
+
+  <div x-data="{ isMobile: window.innerWidth <= 768 }" x-init="() => {
+    window.addEventListener('resize', () => {
+        isMobile = window.innerWidth <= 768;
+    });
+}">
+    <template x-if="isMobile">
+        <a class="inline-block text-center w-full my-12" href="https://www.shopperapproved.com/reviews/Musora.com" target="_blank" onclick="window.open('https://www.shopperapproved.com/reviews/Musora.com', 'newwindow', 'width=750, height=550'); return false;">
+            <img
+                alt="shopper approved image"
+                class="h-8 sm:h-9 lg:h-10 mb-2 mx-auto transition-opacity opacity-0"
+                src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dmmior4id2ysr.cloudfront.net/homepage/2023/shopper-approved.png"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+            >
+        </a>
+    </template>
+    <template x-if="!isMobile">
+        <section style="background-color: #F6F8FC">
+            @include('musora.sales.components.testimonials-section-100songs', [
+                'desktopGrid' => true,
+                'header' => 'Drumeo is trusted by 78,229 active students.',
+                'reviewText' => 'We want to help you reach all of your drumming goals! Watch some of our students stories below:',
+            ])
+        </section>
+    </template>
+</div>
+
+    
     <div id="customize-anchor" class="anchor anchor-slide"></div>
     @include('musora.sales.components.card-selection-section', [
         "plusLogo" => "https://dpwjbsxqtam5n.cloudfront.net/sales/2023/drumeoplus_logo.svg",
@@ -201,6 +241,7 @@
         "plusAnnualLink" => "/getting-started/ty-annual",
         "plusMonthlyLink" => "/getting-started/ty-monthly",
     ])
+    
     @include('musora.sales.components.trial-explanation', [
         'instrument' => 'drumming',
     ])
