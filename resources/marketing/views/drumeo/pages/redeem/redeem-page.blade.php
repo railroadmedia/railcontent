@@ -165,7 +165,6 @@
 @section('global-body')
     @include("drumeo.sales.partials._nav", [
         "subscriptionVersion" => true,
-        "fullSubscriptionVersion" => true,
         "trialVersion" => true,
         "joinUrl" => '/choose-plan',
     ])

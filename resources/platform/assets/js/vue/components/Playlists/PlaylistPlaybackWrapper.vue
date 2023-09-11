@@ -88,7 +88,7 @@ const props = defineProps({
         default: false
     },
     lessonData:{
-        type: Array,
+        type: [Array, Object],
         default: () => []
     },
     lessonType: {
