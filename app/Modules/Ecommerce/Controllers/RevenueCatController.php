@@ -67,7 +67,7 @@ class RevenueCatController extends Controller
                 //create new user
                 $user = $this->getUser(
                     $data['event']['subscriber_attributes']['email']['value'],
-                    $data['event']['app_user_id'],
+                    $data['event']['original_app_user_id'],
                     true
                 );
 
@@ -118,7 +118,7 @@ class RevenueCatController extends Controller
                 // get Musora user
                 $user = $this->getUser(
                     $data['event']['subscriber_attributes']['email']['value'],
-                    $data['event']['app_user_id'],true
+                    $data['event']['original_app_user_id'],true
                 );
                 if (!$user) {
                     //TBD
@@ -172,7 +172,7 @@ class RevenueCatController extends Controller
                 // get Musora user
                 $user = $this->getUser(
                     $data['event']['subscriber_attributes']['email']['value'],
-                    $data['event']['app_user_id']
+                    $data['event']['original_app_user_id']
                 );
                 if (!$user) {
                     //TBD
@@ -213,7 +213,7 @@ class RevenueCatController extends Controller
             case 'CANCELLATION':
                 $user = $this->getUser(
                     $data['event']['subscriber_attributes']['email']['value'],
-                    $data['event']['app_user_id']
+                    $data['event']['original_app_user_id']
                 );
                 if (!$user) {
                     //TBD
@@ -297,7 +297,7 @@ class RevenueCatController extends Controller
         $user =
             User::query()
                 ->where('email', $value)
-                ->orWhere('id', $appUserId)
+                ->orWhere('revenuecat_origin_app_user_id', $appUserId)
                 ->first();
         if (!$user && $createIfNotExists) {
             $user = new User;
@@ -305,6 +305,7 @@ class RevenueCatController extends Controller
             $user->email = $value;
             $user->setPassword($value);
             $user->display_name = $value;
+            $user->revenuecat_origin_app_user_id = $appUserId;
             $user->save();
         }
 
