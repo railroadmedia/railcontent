@@ -7,11 +7,11 @@
                     class="tw-flex md:tw-hidden tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
                     <SortDescendingIcon class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
                 </button>
-                <button v-if="!isCollapsed" @click="() => emit('onToggleCollapseMobile')"
+                <button v-if="!isCollapsed" @click="() => emit('onToggleCollapse')"
                     class="tw-flex md:tw-hidden tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
                     <XIcon class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
                 </button>
-                <button v-if="isCollapsed" @click="() => emit('onToggleCollapseMobile')"
+                <button v-else @click="() => emit('onToggleCollapse')"
                     class="tw-flex md:tw-hidden tw-self-end tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[40px] tw-h-[40px]">
                     <AdjustmentsIcon class="tw-w-[18px] tw-h-[18px] tw-text-black dark:tw-text-white" />
                 </button>
@@ -23,7 +23,7 @@
                 class="tw-hidden md:tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[50px] tw-h-[50px] tw-border-[2px] tw-border-black tw-bg-white dark:tw-border-white tw-rounded-full">
                 <XIcon class="tw-w-[18px] tw-h-[18px] tw-text-black" />
             </button>
-            <button v-if="isCollapsed" @click="() => emit('onToggleCollapse')"
+            <button v-else @click="() => emit('onToggleCollapse')"
                 class="tw-hidden md:tw-flex tw-items-center tw-justify-center tw-ml-[12px] tw-shrink-0 tw-w-[50px] tw-h-[50px] tw-border-[2px] tw-border-black tw-bg-black dark:tw-bg-[#000C17] dark:tw-border-white tw-rounded-full">
                 <AdjustmentsIcon class="tw-w-[18px] tw-h-[18px] tw-text-white" />
             </button>
@@ -51,7 +51,7 @@ const props = defineProps({
     },
 });
 
-const emit = defineEmits(['onToggleCollapse', 'onToggleCollapseMobile']);
+const emit = defineEmits(['onToggleCollapse']);
 
 const tabOptions = [{ key: 'songs', name: 'Songs' }, { key: 'artist', name: 'Artist' }, { key: 'genre', name: 'Genre' }];
 
