@@ -300,11 +300,11 @@ class RevenueCatController extends Controller
                 ->orWhere('revenuecat_origin_app_user_id', $appUserId)
                 ->first();
         if (!$user && $createIfNotExists) {
+            $parts = explode('@', $value);
             $user = new User;
-
             $user->email = $value;
             $user->setPassword($value);
-            $user->display_name = $value;
+            $user->display_name = $parts[0].rand(10000, 99999);
             $user->revenuecat_origin_app_user_id = $appUserId;
             $user->save();
         }else{
