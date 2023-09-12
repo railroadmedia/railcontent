@@ -145,31 +145,31 @@ class GenerateAccessCodes extends Command
         return $this::SUCCESS;
     }
 
-    function getProductId()
+    protected function getProductId()
     : int
     {
         return $this->argument('productId');
     }
 
-    function getAmount()
+    protected function getAmount()
     : int
     {
         return $this->argument("amount");
     }
 
-    function getSource()
+    protected function getSource()
     : ?string
     {
         return $this->argument('source') ?? null;
     }
 
-    function getBrand()
+    protected function getBrand()
     : ?string
     {
         return $this->argument('brand') ?? null;
     }
 
-    function isSimulation()
+    protected function isSimulation()
     : bool
     {
         return $this->option("execute") == false;
