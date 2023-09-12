@@ -5,6 +5,7 @@ namespace App\Modules\Ecommerce\Models;
 use App\Modules\Ecommerce\database\factories\ProductFactory;
 use App\Modules\Ecommerce\Enums\DigitalAccessType;
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -13,65 +14,40 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @package App\Modules\Ecommerce\Models
  *
- * @property integer id
- * @property string brand
- * @property string name
- * @property string sku
- * @property string inventory_control_sku
- * @property string fulfillment_sku
- * @property float price
- * @property string type
- * @property boolean active
- * @property string category
- * @property string description
- * @property string thumbnail_url
- * @property string sales_page_url
- * @property boolean is_physical
- * @property float weight
- * @property string subscription_interval_type
- * @property integer subscription_interval_count
- * @property string stock
- * @property string min_stock_level
- * @property string public_stock_count
- * @property string auto_decrement_stock
- * @property array digital_access_permission_names
- * @property string digital_access_type
- * @property string digital_access_time_type
- * @property string digital_access_time_interval_length
- * @property string note
- * @property Carbon $digital_membership_access_expiration_date
- * @property Carbon $start_date
- * @property Carbon $expiration_date
- * @property Carbon $created_at
- * @property Carbon $updated_at
- * @property Carbon|null $deleted_at
  * @property int $id
  * @property string $brand
  * @property string $name
  * @property string $sku
- * @property string|null $inventory_control_sku
- * @property string|null $fulfillment_sku
+ * @property string $inventory_control_sku
+ * @property string $fulfillment_sku
  * @property string $price
  * @property string $type
  * @property int $active
- * @property string|null $category
- * @property string|null $description
- * @property string|null $thumbnail_url
- * @property string|null $sales_page_url
+ * @property string $category
+ * @property string $description
+ * @property string $thumbnail_url
+ * @property string $sales_page_url
  * @property int $is_physical
- * @property string|null $weight
- * @property string|null $subscription_interval_type
- * @property int|null $subscription_interval_count
- * @property int|null $stock
- * @property int|null $min_stock_level
- * @property int|null $public_stock_count
+ * @property string $weight
+ * @property string $subscription_interval_type
+ * @property int $subscription_interval_count
+ * @property int $stock
+ * @property int $min_stock_level
+ * @property int $public_stock_count
  * @property int $auto_decrement_stock
- * @property string|null $digital_access_permission_names
- * @property string|null $digital_access_type
- * @property string|null $digital_access_time_interval_type
- * @property string|null $digital_access_time_type
- * @property int|null $digital_access_time_interval_length
- * @property string|null $note
+ * @property string $digital_access_permission_names
+ * @property string $digital_access_type
+ * @property string $digital_access_time_interval_type
+ * @property string $digital_access_time_type
+ * @property int $digital_access_time_interval_length
+ * @property string $note
+ * @property Carbon $digital_membership_access_expiration_date
+ * @property Carbon $start_date
+ * @property Carbon $expiration_date
+ * @property int $shopify_id
+ * @property Carbon $created_at
+ * @property Carbon $updated_at
+ * @property Carbon $deleted_at
  * @method static \App\Modules\Ecommerce\database\factories\ProductFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Product newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Product newQuery()
@@ -125,7 +101,6 @@ class Product extends Model
     const DIGITAL_ACCESS_TIME_TYPE_LIFETIME = 'lifetime';
 
 
-
     const MEMBERSHIP_DIGITAL_ACCESS_TYPES = [DigitalAccessType::Plus, DigitalAccessType::Basic];
 
     protected $table = 'ecommerce_products';
@@ -140,5 +115,28 @@ class Product extends Model
     public function isMembershipProduct(): bool
     {
         return in_array($this->digital_access_type, Product::MEMBERSHIP_DIGITAL_ACCESS_TYPES);
+    }
+
+    public function getDigitalAccessPermissionNames(): array
+    {
+        if ($this->digital_access_permission_names == null) {
+            return [];
+        }
+
+        return is_array($this->digital_access_permission_names) ? $this->digital_access_permission_names : json_decode(
+            $this->digital_access_permission_names
+        );
+    }
+
+    public function calculateExpirationDate(Carbon $createdAt)
+    {
+        if ($this->digital_access_time_type == Product::DIGITAL_ACCESS_TIME_TYPE_LIFETIME) {
+            return Carbon::maxValue();
+        }
+        $interval = CarbonInterval::make(
+            $this->digital_access_time_interval_length . ' ' . $this->digital_access_time_interval_type
+        );
+
+        return $createdAt->clone()->add($interval);
     }
 }
