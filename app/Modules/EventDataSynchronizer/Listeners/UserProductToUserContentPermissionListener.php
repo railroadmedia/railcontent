@@ -62,7 +62,7 @@ class UserProductToUserContentPermissionListener
 
     public function syncUserId($userId)
     {
-        $userPermissions = $this->buildUserPermissions($userId);
+        $userPermissions = $this->buildUserPermissionsList($userId);
         $existingPermissions = UserPermission::query()->where('user_id', '=', $userId)
             ->whereIn('permission_id', array_keys($userPermissions))->get()->keyBy('permission_id');
 
@@ -87,7 +87,7 @@ class UserProductToUserContentPermissionListener
         }
     }
 
-    private function buildUserPermissions(int $userId): array
+    private function buildUserPermissionsList(int $userId): array
     {
         $userProducts = $this->userProductService->getUserProductsQuery($userId)->with('product')->get();
         $permissionsLookup = $this->contentPermissionsService->getAll()->keyBy(function ($permission) {
