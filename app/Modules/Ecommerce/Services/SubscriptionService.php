@@ -84,7 +84,7 @@ class SubscriptionService
         $musoraSubscription->cancellation_reason = null;
 
         if ($unsubscribeDate || $cancelReason) {
-            $musoraSubscription->canceled_on = Carbon::createFromTimestampMs($unsubscribeDate);
+            $musoraSubscription->canceled_on = ($unsubscribeDate)?Carbon::createFromTimestampMs($unsubscribeDate):null;
             $musoraSubscription->cancellation_reason = $cancelReason;
         } else {
             $musoraSubscription->total_cycles_paid = $musoraSubscription->total_cycles_paid + 1;

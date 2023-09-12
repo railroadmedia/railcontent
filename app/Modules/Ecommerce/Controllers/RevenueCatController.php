@@ -277,7 +277,56 @@ class RevenueCatController extends Controller
                 // code...
                 break;
             case 'EXPIRATION':
-                // code...
+                $user = $this->getUser(
+                    $data['event']['subscriber_attributes']['email']['value'] ?? null,
+                    $data['event']['original_app_user_id']
+                );
+                if (!$user) {
+                    //TBD
+                    break;
+                }
+
+                //store type
+                $type = (strtolower($data['event']['store']) == 'app_store') ? 'apple' : 'google';
+
+                //productId
+                $productId = $this->getProductId($data['event']['product_id']);
+
+                //get Musora product
+                $musoraProduct = $this->getMusoraProduct($type, $data['event'], $productId);
+
+                //get RevenueCat subscription
+                $currentRevenueCatSubscription =
+                    $this->getCurrentRevenueCatSubscription($data['event']['app_user_id'], $productId);
+
+                //get Musora subscription
+                $musoraSubscription = $this->getMusoraSubscription($user, $type, $musoraProduct);
+
+                if (!$musoraSubscription) {
+                    //create Musora subscription
+                    $musoraSubscription = $this->subscriptionService->createSubscription(
+                        $user->id,
+                        $data['event']['expiration_at_ms'],
+                        $musoraProduct->first(),
+                        $type,
+                        $data['event']['purchased_at_ms']
+                    );
+
+                    //Assign user product
+                    $this->userProductService->assignUserProduct(
+                        $user->id,
+                        $musoraSubscription->product_id,
+                        $musoraSubscription->paid_until
+                    );
+                    break;
+                }
+
+                $this->subscriptionService->updateSubscription(
+                    $musoraSubscription,
+                    $data['event']['expiration_at_ms'],
+                     null,
+                    $data['event']['expiration_reason']
+                );
                 break;
             // handle other events..
             default:
