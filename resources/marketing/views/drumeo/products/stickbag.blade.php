@@ -34,133 +34,198 @@
                 "price" => $memberPrice,
                 "noBreadcrumb" => true
             ])
-    <header class="header text-white relative overflow-hidden z-10" style="background-color:#011434;">
+    <header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
         <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
-            <div class="container mx-auto max-w-6xl">
-                <img alt="quietkick" class="h-16 sm:h-24 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/drumeo-quietkick.png"><br>
-                <h1 class="leading-tight mt-72 sm:mt-96"><strong>Pack like a pro.</strong></h1>
-                @if( $products['quietkick']->getStockAvailability() > 1 && !empty($products['quietkick']->getStockAvailability()))
-                    <a class="join blue my-2 sm:my-4 lg:my-6 w-2/3 anchor-slide" href="#customize-anchor">Get Started &raquo;</a>
-                @else
-                    <a class="join sold-out my-2 sm:my-4 lg:my-6 w-2/3">SOLD OUT</a>
-                @endif
-                <h6 class="leading-tight">
-                    STARTING AT @if(floatval($productPrices['quietkick']->price) > $memberPrice) <s style="opacity: 0.6;">${{ floatval($productPrices['quietkick']->price) }}</s> @endif
-                    ${{ $memberPrice }}
-                    {{--@if( $products['quietkick']->getStockAvailability() > 1 && !empty($products['quietkick']->getStockAvailability()))--}}
-                    {{--<br><strong class="text-yellow-500">LAUNCH SPECIAL</strong>--}}
-                    {{--@endif--}}
-                </h6>
+            <div class="container mx-auto max-w-5xl">
+                <img alt="quietkick" class="h-10 sm:h-14" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/drumeo-quietkick.png"><br>
+                <h1 class="leading-tight"><strong>Pack like a pro.</strong></h1>
+                <h3 class="my-4 sm:my-6">
+                    @if(floatval($productPrices['quietkick']->price) > floatval($productPrices['quietkick']->discounted_price))
+                        <s class="opacity-50">${{ floatval($productPrices['quietkick']->price) }}.</s>
+                        <strong>${{ floatval($productPrices['quietkick']->discounted_price) }}</strong>
+                        (Save {{ round(100 - (100 * (floatval($productPrices['quietkick']->discounted_price) / floatval($productPrices['quietkick']->price)))) }}%).
+                    @else
+                        <strong>Only ${{ floatval($productPrices['quietkick']->discounted_price) }}</strong>
+                    @endif
+                </h3>
+                <div class="my-3 sm:my-6">
+                <a class="join outline blue" >Watch Video</a>
+                    @if( $products['quietkick']->getStockAvailability() > 1 && !empty($products['quietkick']->getStockAvailability()))
+                        <a class="join blue" href="#customize-anchor">Order Now</a>
+                    @else
+                        <a class="join sold-out">SOLD OUT</a>
+                    @endif
+                </div>
+                <h6 class="leading-tight">or get it free with an Annual Drumeo Membership.</h6>
             </div>
         </div>
         <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to bottom, transparent, rgba(0,79,153,0.6));"></div>
         <video class="object-cover w-full h-full relative z-0" poster="" src="https://player.vimeo.com/progressive_redirect/playback/696274730/rendition/1080p?loc=external&signature=a2e19f58b044993d2561fbeaabcd4855ec9d1f577a7bba332fc5a7e7221cb23a" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>
     </header>
 
-    <section class="text-left text-white px-5 sm:pl-5 sm:pr-0 bg-cover lazyload" style="background-color: #c1c6ca; color: #203e59;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/bg.jpg">
-        <div class="container mx-auto max-w-6xl relative pb-8 md:py-10 lg:py-16">
-            <div class="mx-auto mb-4 sm:mb-0 sm:absolute sm:top-0 sm:right-0 z-10 max-w-xs sm:max-w-full w-full sm:w-1/2 lg:w-7/12">
-                <img class="w-full img-toggle hidden active" src="https://www.musora.com/musora-cdn/image/width=1300,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Kick-up2.png" alt="quietkick pedal">
-                <img class="w-full img-toggle hidden" src="https://www.musora.com/musora-cdn/image/width=1300,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Kick-down2.png" alt="quietkick pedal">
-            </div>
-            <div class="w-full sm:w-1/2 lg:w-5/12 z-20">
-                <h2 class="leading-none mb-3 lg:mb-5"><strong>Never skip leg day.</strong></h2>
-                <p class="leading-tight">Drummers are notorious for it.
-                    <br><br>
-                    You focus on developing fast hands but your feet remain slow & inconsistent – and who can blame you?
-                    <br><br>
-                    Bass drum workouts are loud (bass cuts through the walls), not very musical (*thud*), and expensive – wearing out a bass drum head can cost you $50+! And the only bass drum practice pads available are either way too expensive OR poorly designed – most creep forward worse than a drummers backbeat after a cup of coffee.
-                    <br><br>
-                    The Drumeo Quietkick gives you a portable & convenient way to develop your kick foot anywhere – so you can start pounding out smooth & powerful doubles every time you sit at the kit.
-                </p>
-            </div>
-        </div>
-    </section>
-    <section class="text-left text-white px-3 sm:px-5 py-8 sm:py-16 lg:py-20 relative overflow-hidden lazyload" style="background:linear-gradient(to bottom, #000f1c 25%, #01192f);">
+    <section class="text-center px-3 sm:px-5 py-8 sm:py-16 lg:py-20 relative">
         <div class="container mx-auto z-10 relative max-w-5xl">
-            <h2 class="text-center mb-10 sm:mb-16"><strong>Foot workouts on the fly.</strong></h2>
-            <div class="flex flex-wrap sm:flex-nowrap items-center mb-8 sm:mb-16">
-                <img  alt="quietkick double pedal" class="h-44 sm:h-56 lg:h-80 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/double-kick.jpg">
-                <div class="w-full sm:w-1/2 sm:pl-10">
-                    <h5 class="mb-3 text-center sm:text-left"><strong>Single OR double kick.</strong></h5>
-                    <p class="text-light-navy max-w-xs sm:max-w-full">Yup, your double pedal works too. An extra beater turns your QuietKick into the ultimate double-kick workout station. (Extra beater sold separately.)</p>
+            <h3 class="leading-tight"><strong>A StickBag you’ll want to show your friends.</strong></h3>
+            <p class="leading-normal mt-2 mb-5">Crafted with input from gigging pros, the Drumeo StickBag features thoughtful<br class="sm:inline"> details that will help you organize your tools and even save you mid-song.</p>
+            <div class="flex">
+                <div class="w-1/4">
+                    <div>
+                        <img src="">
+                        <h5><strong>Premium Metal Tom Hooks</strong></h5>
+                        <p>No more tying your bag up with string. Your Drumeo StickBag includes sturdy metal loops that easily attach to any tom lugs.</p>
+                    </div>
+                    <div>
+                        <img src="">
+                        <h5><strong>One in the holster.</strong></h5>
+                        <p>A strategic easy-access sleeve lets your “rescue stick” poke just out of your stick bag so you can make that quick grab mid-song.</p>
+                    </div>
+                    <div>
+                        <img src="">
+                        <h5><strong>Zippers as tough as you are.</strong></h5>
+                        <p>Top-quality reinforced zippers make for a long-lasting stick bag – even when it’s jammed to the teeth with sticks, brushes, and mallets.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-center mb-6 sm:mb-16">
-                <img  alt="quietkick in library" class="sm:order-1 h-44 sm:h-56 lg:h-80 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/anywhere.jpg">
-                <div class="w-full sm:w-1/2 sm:pr-10">
-                    <h5 class="mb-3 text-center sm:text-left"><strong>Practice anywhere.</strong></h5>
-                    <p class="text-light-navy max-w-xs sm:max-w-full">A hotel, the park, or maybe just a new spot in your house. The QuietKick allows you to practice anywhere – and that means your foot will never hold you back again.</p>
-                </div>
-            </div>
-            <div class="flex flex-wrap sm:flex-nowrap items-center {{--mb-8 sm:mb-16--}}">
-                <img  alt="quietkick pedal" class="h-44 sm:h-56 lg:h-80 mx-auto sm:mx-0 rounded-xl mb-3 sm:mb-0 lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/any-pedal.jpg">
-                <div class="w-full sm:w-1/2 sm:pl-10">
-                    <h5 class="mb-3 text-center sm:text-left"><strong>Feels like a bass drum.</strong></h5>
-                    <p class="text-light-navy max-w-xs sm:max-w-full">The Drumeo QuietKick replicates the action & feel of playing a real bass drum. That makes your transition from pad to kit seamless.</p>
+                <div class="w-1/2"></div>
+                <div class="w-1/4">
+                    <div>
+                        <img src="">
+                        <h5><strong>Sweat, water and beer-proof.</strong></h5>
+                        <p>Your StickBag is made from waxed canvas – rugged cotton soaked in wax for extra strength and water resistance.</p>
+                    </div>
+                    <div>
+                        <img src="">
+                        <h5><strong>Flexible suede pockets for all your goodies.</strong></h5>
+                        <p>Drum keys, tuning gels, a Snickers bar? Suede pockets let you jam all your goodies into your pockets without losing their shape.</p>
+                    </div>
+                    <div>
+                        <img src="">
+                        <h5><strong>Drum keychain (key included!)</strong></h5>
+                        <p>Finally - a drum key you won’t lose. Your StickBag includes a brushed pewter drum key that has its own little key ring to live inside your bag.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
+    <div class="h-5 sm:h-10 mt-10 md:-mt-10" style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #F6F8FC calc(50% + 1px));"></div>
+    <section class="text-center px-3 sm:px-5 py-8 sm:py-16 lg:py-20 relative" style="background-color:#F6F8FC;">
+        <div class="container mx-auto z-10 relative max-w-4xl">
 
-    <div id="details" class="anchor"></div>
-    <section class="text-center text-white px-5 py-10 md:py-20 lg:py-24 bg-musora-black">
-        <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>How it works</strong></h2>
-            <div class="max-w-xl lg:max-w-3xl mx-auto my-6 sm:my-10">
-                <div class="aspect-16:9 rounded-xl overflow-hidden w-full relative">
-                    <iframe class="absolute w-full h-full" src="//player.vimeo.com/video/696274986" frameborder="0" allowfullscreen allow="autoplay" title="10year-video"></iframe>
-                </div>
+            <img class="my-5 h-64 inline sm:hidden"
+                src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/september/musicounts/drumeo-musicounts-collage.png"
+                alt="learn playing image"
+                fetchpriority="high"
+            >
+            <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center mb-5">
+                <p class="leading-normal max-w-xl pr-5 lg:pr-8 mx-0">
+                    Brushes take the worst beating in conventional stick bags – and at $30+ a pop, it hurts even more.
+                    <br><br>
+                    The Drumeo StickBag features a custom brushes sleeve that keeps your brush wires straight and true. And when you’re at your kit, toss your brush sleeve under your hi-hat for easy access in any song.
+                    <br><br>
+                    It’s an all-new innovation on one of drumming’s oldest tools.</p>
+                <img class="h-72 lg:h-96 hidden sm:inline transition-opacity opacity-0"
+                    loading="lazy"
+                    onload="this.classList.remove('opacity-0')"
+                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dpwjbsxqtam5n.cloudfront.net/promos/september/musicounts/drumeo-musicounts-collage.png"
+                    alt="learn playing image"
+                >
             </div>
+
+        </div>
+    </section>
+
+    <section class="content-section text-center comparison px-1 lg:px-3" style="background:#00101D;">
+        <div class="container mx-auto max-w-5xl">
+            <h3 class="mb-16 md:mb-12 "><strong>Your new favorite piece of gear. </strong></h3>
+            <div class="relative">
+                <p class="inline md:hidden leading-tight text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
+                <table class="w-full mx-auto border-separate comparison eardrums earbuds">
+                    <tbody style="background-color:transparent!important;">
+                    <tr style="background-color:transparent!important;">
+                        <td></td>
+                        <td class="rounded-t-xl">
+                            <img class="h-5 md:h-12 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png" alt="logo-white">
+                        </td>
+                        <td class="rounded-t-xl">
+                            <img class="h-5 md:h-12 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png" alt="logo-white">
+                        </td>
+                        <td class="rounded-t-xl">
+                            <img class="h-5 md:h-12 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=550,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/eardrums/Logo.png" alt="logo-white">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Material</td>
+                        <td>Waxed Canvas & Suede</td>
+                        <td>Canvas</td>
+                        <td>Leather</td>
+                    </tr>
+                    <tr>
+                        <td>Capacity</td>
+                        <td>18 Pairs</td>
+                        <td>24 Pairs</td>
+                        <td>6 Pairs</td>
+                    </tr>
+                    <tr>
+                        <td>Protective Brush Sleeve</td>
+                        <td>YES</td>
+                        <td>NO</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr>
+                        <td>Dimensions</td>
+                        <td>17.5” H x 16” W</td>
+                        <td>20” H x 22” W</td>
+                        <td>18” H x 16” W</td>
+                    </tr>
+                    <tr>
+                        <td>Drum Key Included</td>
+                        <td>YES</td>
+                        <td>NO</td>
+                        <td>NO</td>
+                    </tr>
+                    <tr style="background-color:transparent!important;">
+                        <td class="rounded-b-xl">Total</td>
+                        <td class="rounded-b-xl">$147 $97</td>
+                        <td class="rounded-b-xl">$104</td>
+                        <td class="rounded-b-xl">$220</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <section class="text-center px-5 py-10 md:py-20 lg:py-24">
+        <div class="container mx-auto relative z-10 max-w-5xl">
+            <h2><strong>The last StickBag you’ll ever need.</strong></h2>
+            <h6 class="mt-2 mb-5 sm:mb-10">A bag built to take everything from garage to stage. </h6>
             <div class="flex flex-wrap">
-                <div class="w-full sm:w-1/3 mb-6 sm:mb-0 sm:px-3 lg:px-8">
-                    <h1 class="inline-block text-drumeo rounded-full leading-none py-3.5 sm:py-3 lg:py-3.5 w-14 sm:w-16 lg:w-20 border-drumeo border-2"><strong>1</strong></h1><br>
-                    <img  alt="quietkick icon" class="my-6 sm:my-8 lg:my-10 h-16 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/step2.svg">
-                    <p class="text-light-navy">Swap out your existing beater with the included reverse-angle beater. This directs your kick motion downward – creating a quieter practice rig with little-to-no creeping across the floor.</p>
-                </div>
-                <div class="w-full sm:w-1/3 mb-6 sm:mb-0 sm:px-3 lg:px-8">
-                    <h1 class="inline-block text-drumeo rounded-full leading-none py-3.5 sm:py-3 lg:py-3.5 w-14 sm:w-16 lg:w-20 border-drumeo border-2"><strong>2</strong></h1><br>
-                    <img  alt="kick icon" class="my-6 sm:my-8 lg:my-10 h-16 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/step1.svg">
-                    <p class="text-light-navy">Now attach your QuietKick to your kick pedal the same way you would any bass drum. Just slide the unit under your pedal and clamp down until it’s secure.</p>
-                </div>
-                <div class="w-full sm:w-1/3 sm:px-3 lg:px-8">
-                    <h1 class="inline-block text-drumeo rounded-full leading-none py-3.5 sm:py-3 lg:py-3.5 w-14 sm:w-16 lg:w-20 border-drumeo border-2"><strong>3</strong></h1><br>
-                    <img  alt="pad icon" class="my-6 sm:my-8 lg:my-10 h-16 lazyload" data-src="https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/step-3.svg">
-                    <p class="text-light-navy">And finally, choose your strike pad. You’ll get one long-lasting strike pads + 2 ultra-quiet strike pads included with your QuietKick. And that’s it! You’re off to the races.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="text-center text-white px-5 py-10 md:py-20 lg:py-24" style="background:#01192e;">
-        <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>Finally, a practice pad<br class="inline sm:hidden"> for your feet.</strong></h2>
-            <h6 class="mt-2">(Kick pedal not included)</h6>
-            <div class="flex flex-wrap my-5 sm:my-10">
                 <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Quietkick-gallery-03.jpg"></div></div>
                 <div class="p-1 w-full sm:w-8/12"><div class="h-32 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Quietkick-gallery-04.jpg"></div></div>
                 <div class="p-1 w-full sm:w-8/12"><div class="h-36 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Quietkick-gallery-02.jpg"></div></div>
                 <div class="p-1 w-full sm:w-4/12"><div class="h-44 sm:h-52 lg:h-72 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/Quietkick-gallery-01.jpg"></div></div>
             </div>
+            <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Sticks/Brushes are not included.</em></p>
             <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
-                <p class="sm:max-w-md m-0 sm:pr-5 lg:pr-10 text-left mb-5 sm:mb-0">The QuietKick includes everything you need to start working out your foot. You’ll get three strike pads, one QuietKick unit, and one reverse-angle beater (with the option to add a second beater if you play double-kick).</p>
-                <table class="border border-white border-collapse rounded-xl">
+                <p class="sm:max-w-md m-0 sm:pr-5 lg:pr-10 text-left mb-5 sm:mb-0">Your Drumeo StickBag is built with premium components to ensure a long-lasting home for your sticks wherever your drumming takes you.</p>
+                <table class="border border-black border-collapse rounded-xl">
                     <tr class="rounded-xl">
-                        <td class="px-3 py-1 text-left border border-white border-collapse">QuietKick Frame</td>
-                        <td class="px-5 py-1 border border-white border-collapse">1</td>
+                        <td class="px-3 py-1 text-left border border-black border-collapse">Durable construction</td>
+                        <td class="px-5 py-1 border border-black border-collapse"><i class="fas fa-check"></i></td>
                     </tr>
                     <tr>
-                        <td class="px-3 py-1 text-left border border-white border-collapse">Reverse Angle Beater<br>
-                            <span class="opacity-50">(optional second)</span></td>
-                        <td class="px-5 py-1 border border-white border-collapse">1</td>
+                        <td class="px-3 py-1 text-left border border-black border-collapse">Premium zippers</td>
+                        <td class="px-5 py-1 border border-black border-collapse"><i class="fas fa-check"></i></td>
                     </tr>
                     <tr>
-                        <td class="px-3 py-1 text-left border border-white border-collapse">Ultra-Quiet Strike Pads</td>
-                        <td class="px-5 py-1 border border-white border-collapse">2</td>
+                        <td class="px-3 py-1 text-left border border-black border-collapse">Quick-stick slot</td>
+                        <td class="px-5 py-1 border border-black border-collapse"><i class="fas fa-check"></i></td>
                     </tr>
                     <tr>
-                        <td class="px-3 py-1 text-left border border-white border-collapse">Long-Lasting Strike Pad</td>
-                        <td class="px-5 py-1 border border-white border-collapse">1</td>
+                        <td class="px-3 py-1 text-left border border-black border-collapse">Drum key</td>
+                        <td class="px-5 py-1 border border-black border-collapse"><i class="fas fa-check"></i></td>
+                    </tr>
+                    <tr>
+                        <td class="px-3 py-1 text-left border border-black border-collapse">Cost</td>
+                        <td class="px-5 py-1 border border-black border-collapse">$97</td>
                     </tr>
                 </table>
             </div>
@@ -168,67 +233,56 @@
     </section>
 
     <div id="customize-anchor" class="anchor"></div>
-    <section class="content-section text-center customize px-4 lg:px-6 lazyload" style="background-color:#132332;background-size: cover;" data-bg="https://www.musora.com/musora-cdn/image/width=1500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/final.jpg">
+    <section class="content-section text-center customize px-4 lg:px-6 bg-cover lazyload" style="background-color:#193d5b;">
         <div class="container mx-auto">
             <img alt="quietkick logo" class="h-14 sm:h-20 lg:h-28" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/quietkick/drumeo-quietkick.png"><br>
-            <h2 class="leading-tight mt-4 mb-2"><strong>Improve your kick foot anywhere.</strong></h2>
-            <h6><em>Bass drum pedal not included.</em></h6>
 
             @if( $products['quietkick']->getStockAvailability() > 1 && !empty($products['quietkick']->getStockAvailability()))
-                <div class="flex flex-wrap items-end justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl my-5 sm:my-10 mx-auto">
+
+                <div id="plusOptions"
+                    class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl lg:max-w-3xl mb-5 sm:mb-10 mx-auto"
+                >
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                        {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
-                        <a href="/ecommerce/add-to-cart?products[stickbag]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
-                            <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
-                                <h5 class="leading-none mb-3"><strong>Single Kick</strong></h5>
-                                <h1 class="inline-block leading-none">
-                                    @if(floatval($productPrices['quietkick']->price) > $memberPrice)
-                                        <s class="opacity-60">${{ floatval($productPrices['quietkick']->price) }}</s>
-                                    @endif
-                                    <strong>${{ $memberPrice }}</strong></h1>
-                                <p class="text-drumeo text-sm my-2 sm:my-4"><em>Plus shipping.</em></p>
-                                <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Select</div>
-                            </div>
-                            <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
-                                <p class="mb-1"><strong>INCLUDES:</strong></p>
-                                <p class="mb-1">1 Drumeo QuietKick</p>
-                                <p class="mb-1">1 Reverse Angle Beater</p>
-                                <p class="mb-1">2 Ultra-quiet strike pads</p>
-                                <p>1 Long-lasting strike pad</p>
+                        <p class="inline-block relative -bottom-4 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black" >Save 34%</p>
+                        <a href="todo" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
+                            <div class="bg-white px-3 py-5 md:py-7">
+                                <h3 class="mb-2 sm:mb-3"><strong>StickBag Only</strong></h3>
+                                <h4 class="inline-block leading-tight"><s>$149</s> <strong>$97</strong></h4>
+                                <p class="text-sm"><em>Save 34%. One-time payment.</em></p>
+                                <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Select</div>
+                                <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>
+                                <p class="text-sm mb-1.5">1 Brushes Sleeve</p>
+                                <p class="text-sm">1 Premium Drum Key</p>
                             </div>
                         </a>
                     </div>
                     <div class="w-full md:w-1/2 px-2 md:px-3 relative">
-                        {{--<p class="w-full px-4 pt-2 pb-4 -mb-3 text-white rounded-t-2xl" style="background:linear-gradient(to bottom, #0a73d8, #10518f);"><strong>LAUNCH SPECIAL</strong></p>--}}
-                        <a href="/ecommerce/add-to-cart?products[stickbag-double-bass]=1" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group">
-                            <div class="bg-white px-3 pt-6 md:pt-8 pb-5 md:pb-8">
-                                <h5 class="leading-none mb-3"><strong>Double Kick</strong></h5>
-                                <h1 class="inline-block leading-none">
-                                    @if(floatval($productPrices['quietkick']->price) > $memberPrice)
-                                        <s class="opacity-60">${{ floatval($productPrices['quietkick']->price) + 20 }}</s>
-                                    @endif
-                                    <strong>${{ $memberPrice + 20 }}</strong></h1><br>
-                                <p class="text-drumeo text-sm my-2 sm:my-4"><em>Plus shipping.</em></p>
-                                <div class="join blue smaller w-full transition-opacity duration-300 group-hover:opacity-80" style="max-width: 230px;">Select</div>
-                            </div>
-                            <div class="px-3 pt-5 md:pt-6 pb-9 md:pb-10" style="background: #f1f8ff;border-top: 2px solid #e6f2ff;">
-                                <p class="mb-1"><strong>INCLUDES:</strong></p>
-                                <p class="mb-1">1 Drumeo QuietKick</p>
-                                <p class="mb-1">2 Reverse Angle Beaters</p>
-                                <p class="mb-1">2 Ultra-quiet strike pads</p>
-                                <p>1 Long-lasting strike pad</p>
+                        <p class="inline-block relative -bottom-4 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo" >LAUNCH SPECIAL</p>
+                        <a href="todo" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo">
+                            <div class="bg-white px-3 py-6 md:py-9">
+                                <h3 class="mb-2 sm:mb-3"><strong>StickBag + Lessons</strong></h3>
+                                <h4 class="inline-block leading-tight"><strong>Free StickBag</strong></h4>
+                                <p class="text-sm"><em>with annual Drumeo Membership</em></p>
+                                <div class="join my-5 drumeo smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">learn more</div>
+                                <p class="text-sm mb-1.5 text-drumeo"><strong>Annual Drumeo Membership</strong></p>
+                                <p class="text-sm mb-1.5">Step-By-Step Lessons</p>
+                                <p class="text-sm mb-1.5">5000+ Songs</p>
+                                <p class="text-sm mb-1.5">Unlimited Personal Support</p>
+                                <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>
+                                <p class="text-sm mb-1.5">1 Brushes Sleeve</p>
+                                <p class="text-sm mb-1.5">1 Premium Drum Key</p>
+                                <p class="text-sm">6 Pairs Of 5A Drumsticks</p>
                             </div>
                         </a>
                     </div>
                 </div>
-                <a style="color: #00bc75;" class="inline-block cursor-pointer" href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&locked=true"><h4><strong><u>Or get it FREE when you join Drumeo.</u></strong></h4></a>
             @else
                 <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
             @endif
         </div>
     </section>
 
-    <section class="content-section text-center" style="background: #0c1429;">
+    <section class="content-section text-center" style="background: #00101D;">
         <div class="container mx-auto relative z-50">
             <div class="inline-block w-full px-3 md:px-4 mb-5 text-light-navy">
                 <p>Call us toll-free at
@@ -245,39 +299,11 @@
         </div>
     </section>
 
-    <section class="text-center text-white px-5 py-10 md:py-20 lg:py-24" style="background: #030f1f;">
-        <div class="container mx-auto relative z-10 max-w-5xl">
-            <h2><strong>Still have questions?</strong></h2>
-            <div class="dropdowns">
-                @include('_partials.components.question-dropdown', [
-                "title" => "Does the QuietKick work with a double bass pedal?",
-                "desc" => "Yes! You’ll see the option to add a second beater to your QuietKick. This allows you to attach your double pedal and work out both your feet. The extra beater is the only additional piece you need for this.",
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "Does the QuietKick scoot?",
-                "desc" => "You know what we mean – when your bass drum goes scooting across the floor everytime you hit it. The QuietKick has little to no scooting – but on a hard floor it will shift a little. For the best results, use your QuietKick on a rug or carpet. If you’re still having trouble add a bit of velcro to the bottom.",
-                ])
-                @include('_partials.components.question-dropdown', [
-                "title" => "Will it ship internationally?",
-                "desc" => "Yes! Just enter your country upon checkout – you’ll see the shipping tally in your cart. You can also grab the QuietKick with FREE shipping by joining Drumeo. You’ll get a free QuietKick shipped anywhere in the world for the price of your annual membership. <a href='/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&locked=true'><u>Click here to see that option.</u></a>",
-                ])
-            </div>
-        </div>
-    </section>
 
     @include("drumeo.sales.partials._footer")
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="{{ asset('/marketing/parcel/drumeo/navigation-sales.js') }}" defer></script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal.js') }}" defer></script>
-    <script>
-        setInterval(function(){
-            setTimeout(function(){
-                for (var i = 0; i < document.querySelectorAll(".img-toggle").length; i++) {
-                    document.querySelectorAll(".img-toggle")[i].classList.toggle('active');
-                }
-            },900);
-        },900);
-    </script>
     <script type="text/javascript" src="{{ asset('/marketing/js/modal-autoplay.js') }}" defer></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/lazysizes.min.js" defer></script>
     <script async type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/lazysizes/5.3.2/plugins/unveilhooks/ls.unveilhooks.min.js" defer></script>
