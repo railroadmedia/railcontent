@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Product;
 use Carbon\Carbon;
+use Doctrine\ORM\NonUniqueResultException;
 use Illuminate\Console\Command;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\Mail;
@@ -12,68 +13,55 @@ use Symfony\Component\Console\Input\InputArgument;
 
 class GenerateAccessCodes extends Command
 {
+    private DatabaseManager $databaseManager;
 
-    /**
-     * @var DatabaseManager
-     */
-    private $databaseManager;
-
-    /**
-     * The console command name.
-     *
-     * @var string
-     */
-    protected $name = 'generateAccessCodes';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Generate access codes.';
-
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
-    public function __construct(DatabaseManager $databaseManager)
-    {
-        parent::__construct();
-
-        $this->databaseManager = $databaseManager;
-    }
-
-    // mandatory arguments: PRODUCT_ID, AMOUNT
-    // optional arguments: BRAND, SOURCE
+    // mandatory arguments: productId, amount
+    // optional arguments: brand, source, --execute
 
     // artisan generateAccessCodes PRODUCT_ID AMOUNT [SOURCE]
     // ex1: artisan generateAccessCodes 124 10
     // ex2: artisan generateAccessCodes 20 30 test-deal
     // ex3: artisan generateAccessCodes 7 100 sweetwater-2023-deal
+    protected $signature = 'generateAccessCodes
+                            {productId}
+                            {amount}
+                            {source?}
+                            {brand?}
+                            {--execute : Execute this command. Without this flag, it will be simulated}';
+
+    protected $description = 'Generate access codes.';
+
+    public function __construct(DatabaseManager $databaseManager)
+    {
+        parent::__construct();
+        $this->databaseManager = $databaseManager;
+    }
 
     /**
      * Execute the console command.
      *
+     * @param ProductRepository $productRepository
      * @return mixed
+     * @throws NonUniqueResultException
      */
     public function handle(ProductRepository $productRepository)
     {
+        $source = $this->getSource();
 
-        $source = $this->argument('source') ?? null;
-
-        $now = Carbon::now()
-            ->toDateTimeString();
+        $now =
+            Carbon::now()
+                ->toDateTimeString();
 
         $emails = [
+            'alexandre@musora.com',
             'caleb@drumeo.com',
-            'mircea@musora.com',
         ];
 
         $accessCodes = [];
 
-        $amountToCreate = $this->argument('amountToGenerate');
-        $productId = $this->argument('productId');
+        $amountToCreate = $this->getAmount();
+        $productId = $this->getProductId();
+        $simulate = $this->isSimulation();
 
         $product = $productRepository->findProduct($productId);
 
@@ -83,6 +71,8 @@ class GenerateAccessCodes extends Command
         }
 
         $brand = $product->getBrand();
+        $bar = $this->output->createProgressBar($amountToCreate);
+        $bar->start();
 
         for ($i = 1; $i <= $amountToCreate; $i++) {
             $code = bin2hex(
@@ -91,7 +81,7 @@ class GenerateAccessCodes extends Command
 
             $accessCodes[] = [
                 'code' => strtoupper($code),
-                'product_ids' => serialize([(integer) $productId]),
+                'product_ids' => serialize([(integer)$productId]),
                 'is_claimed' => false,
                 'claimer_id' => null,
                 'claimed_on' => null,
@@ -101,60 +91,87 @@ class GenerateAccessCodes extends Command
                 'created_at' => $now,
                 'updated_at' => $now,
             ];
+
+            $bar->advance();
         }
 
-        $this->databaseManager->connection(config('ecommerce.database_connection_name'))
-            ->table('ecommerce_access_codes')
-            ->insert($accessCodes);
+        $bar->finish();
 
-        Mail::send(
-            'emails.generateAccessCodes',
-            [
+        if (!$simulate) {
+            $this->databaseManager->connection(config('ecommerce.database_connection_name'))
+                ->table('ecommerce_access_codes')
+                ->insert($accessCodes);
+
+            Mail::send(
+                'emails.generateAccessCodes', [
                 'accessCodeData' => $accessCodes,
                 'product' => $product,
-                'source' => $source ?? 'no source'
-            ],
-            function (\Illuminate\Mail\Message $message) use ($emails, $now, $amountToCreate) {
+                'source' => $source ?? 'no source',
+            ], function (\Illuminate\Mail\Message $message) use ($emails, $now, $amountToCreate) {
                 $subject = 'Musora - ' . $amountToCreate . ' Access Codes Generated on ' . $now;
                 $message->from('support@musora.com', 'Musora');
                 $message->to($emails)
                     ->subject($subject);
             }
-        );
+            );
 
-        $this->info(
-            'Emails sent to: '.implode(', ', $emails)
-        );
+            $this->info(
+                'Emails sent to: ' . implode(', ', $emails)
+            );
 
-        $this->info(
-            $this->argument('amountToGenerate').' access codes for \''.$this->argument('productId').'\' have been created.'
-        );
-    }
-
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments()
-    {
-        return [
-            [
-                'productId',
-                InputArgument::REQUIRED,
-                'The product id.',
-            ],
-            [
-                'amountToGenerate',
-                InputArgument::REQUIRED,
-                'Amount of codes to generate.',
-            ],
-            [
+            $this->info(
+                $amountToCreate . ' access codes for \'' . $productId . '\' have been created.'
+            );
+        } else {
+            $this->table([
+                'code',
+                'product_ids',
+                'is_claimed',
+                'claimer_id',
+                'claimed_on',
+                'brand',
+                'note',
                 'source',
-                InputArgument::OPTIONAL,
-                'The source describes where the codes are going',
+                'created_at',
+                'updated_at',
             ],
-        ];
+                $accessCodes);
+
+            $this->info(
+                $amountToCreate . ' access codes for \'' . $productId . '\' have been simulated.'
+            );
+        }
+
+        return $this::SUCCESS;
     }
 
+    function getProductId()
+    : int
+    {
+        return $this->argument('productId');
+    }
+
+    function getAmount()
+    : int
+    {
+        return $this->argument("amount");
+    }
+
+    function getSource()
+    : ?string
+    {
+        return $this->argument('source') ?? null;
+    }
+
+    function getBrand()
+    : ?string
+    {
+        return $this->argument('brand') ?? null;
+    }
+
+    function isSimulation()
+    : bool
+    {
+        return $this->option("execute") == false;
+    }
 }
