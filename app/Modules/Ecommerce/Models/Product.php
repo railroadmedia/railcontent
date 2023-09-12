@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Carbon\CarbonInterval;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 
 /**
  * Class Product
@@ -83,6 +85,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Product whereWeight($value)
  * @mixin \Eloquent
+ * @property Collection $userProducts
  */
 class Product extends Model
 {
@@ -110,6 +113,11 @@ class Product extends Model
     protected static function newFactory(): ProductFactory
     {
         return ProductFactory::new();
+    }
+
+    public function userProducts(): HasMany
+    {
+        return $this->hasMany(UserProduct::class);
     }
 
     public function isMembershipProduct(): bool
