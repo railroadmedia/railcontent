@@ -98,9 +98,13 @@ class GenerateAccessCodes extends Command
         $bar->finish();
 
         if (!$simulate) {
-            $this->databaseManager->connection(config('ecommerce.database_connection_name'))
-                ->table('ecommerce_access_codes')
-                ->insert($accessCodes);
+            collect($accessCodes)
+                ->chunk(1000)
+                ->each(function ($chunk) {
+                    $this->databaseManager->connection(config('ecommerce.database_connection_name'))
+                        ->table('ecommerce_access_codes')
+                        ->insert($chunk->toArray());
+                });
 
             Mail::send(
                 'emails.generateAccessCodes', [
