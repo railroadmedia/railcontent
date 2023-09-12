@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\Log;
 
 class ShopifyWebHookController extends Controller
 {
-    private ShopifySyncService $shopifyOrderService;
+    private ShopifySyncService $shopifySyncService;
 
     public function __construct(ShopifySyncService $shopifyOrderService)
     {
-        $this->shopifyOrderService = $shopifyOrderService;
+        $this->shopifySyncService = $shopifyOrderService;
     }
 
     public function orderUpdated(Request $request)
@@ -22,7 +22,7 @@ class ShopifyWebHookController extends Controller
         Log::debug(print_r($request->all(), true));
 
         $shopifyCustomerId = $request->get('customer')['id'];
-        $this->shopifyOrderService->syncCustomer($shopifyCustomerId);
+        $this->shopifySyncService->syncCustomer($shopifyCustomerId);
     }
 
 }

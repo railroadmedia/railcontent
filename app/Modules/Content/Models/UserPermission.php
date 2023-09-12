@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * @property integer $id
  * @property integer $user_id
- * @property string $permission_id
+ * @property integer $permission_id
  * @property Carbon $start_date
  * @property Carbon $expiration_date
  * @property Carbon $created_on

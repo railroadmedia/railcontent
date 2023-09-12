@@ -2,6 +2,7 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners\CustomerIo;
 
+use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use App\Modules\EventDataSynchronizer\Events\FirstActivityPerDay;
 use App\Modules\EventDataSynchronizer\Events\LiveStreamEventAttended;
 use App\Modules\EventDataSynchronizer\Events\UTMLinks;
@@ -36,9 +37,6 @@ use Railroad\Ecommerce\Events\Subscriptions\SubscriptionCreated;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewed;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionRenewFailed;
 use Railroad\Ecommerce\Events\Subscriptions\SubscriptionUpdated;
-use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
-use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
-use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
 use Railroad\Ecommerce\Repositories\PaymentRepository;
 use Railroad\Railcontent\Events\CommentCreated;
 use Railroad\Railcontent\Events\CommentLiked;
@@ -248,49 +246,15 @@ class CustomerIoSyncEventListener
         }
     }
 
-    /**
-     * @param UserProductCreated $userProductCreated
-     */
-    public function handleUserProductCreated(UserProductCreated $userProductCreated)
+
+    public function handleUserProductsUpdated(UserProductsUpdated $userProductsUpdated)
     {
         if (self::$disable) {
             return;
         }
 
         try {
-            $userId = $userProductCreated->getUserProduct()
-                ->getUser()
-                ->getId();
-            $user = $this->userService->getByIdOrNull($userId);
-
-            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
-                dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
-                );
-
-                self::$alreadyQueuedUserIds[] = $user->id;
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
-     * @param UserProductUpdated $userProductUpdated
-     */
-    public function handleUserProductUpdated(UserProductUpdated $userProductUpdated)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            $userId = $userProductUpdated->getNewUserProduct()
-                ->getUser()
-                ->getId();
+            $userId = $userProductsUpdated->getUserId();
             $user = $this->userService->getByIdOrNull($userId);
 
             if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {

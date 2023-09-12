@@ -2,12 +2,10 @@
 
 namespace App\Modules\EventDataSynchronizer\Listeners;
 
+use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Railroad\Ecommerce\Events\Subscriptions\CommandSubscriptionRenewFailed;
-use Railroad\Ecommerce\Events\UserProducts\UserProductCreated;
-use Railroad\Ecommerce\Events\UserProducts\UserProductDeleted;
-use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
 use Railroad\Ecommerce\Repositories\ProductRepository;
 use Railroad\Ecommerce\Repositories\UserProductRepository;
 use Railroad\Railcontent\Helpers\CacheHelper;
@@ -59,28 +57,9 @@ class UserProductToUserContentPermissionListener
         $this->userPermissionsRepository = $userPermissionsRepository;
     }
 
-    /**
-     * @param Created $createdEvent
-     */
-    public function handleCreated(UserProductCreated $createdEvent)
+    public function handleUserProductsUpdated(UserProductsUpdated $userProductsUpdated)
     {
-        $this->syncUserId($createdEvent->getUserProduct()->getUser()->getId());
-    }
-
-    /**
-     * @param Updated $updatedEvent
-     */
-    public function handleUpdated(UserProductUpdated $updatedEvent)
-    {
-        $this->syncUserId($updatedEvent->getNewUserProduct()->getUser()->getId());
-    }
-
-    /**
-     * @param Updated $updatedEvent
-     */
-    public function handleDeleted(UserProductDeleted $deletedEvent)
-    {
-        $this->syncUserId($deletedEvent->getUserProduct()->getUser()->getId());
+        $this->syncUserId($userProductsUpdated->getUserId());
     }
 
     /**
