@@ -9,8 +9,6 @@ use App\Modules\Ecommerce\Models\UserProduct;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Modules\UserManagementSystem\Models\User;
-use Railroad\Ecommerce\Events\UserProducts\UserProductUpdated;
-use Railroad\Railcontent\Repositories\PermissionRepository;
 use Signifly\Shopify\REST\Resources\OrderResource;
 use Signifly\Shopify\Shopify;
 

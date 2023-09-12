@@ -7,7 +7,6 @@ use App\Modules\Content\Services\ContentPermissionsService;
 use App\Modules\Ecommerce\Events\UserProductsUpdated;
 use App\Modules\Ecommerce\Models\Product;
 use App\Modules\Ecommerce\Models\UserProduct;
-use App\Modules\Ecommerce\Services\ProductService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
@@ -20,16 +19,13 @@ use Railroad\Railcontent\Services\ConfigService;
 class UserProductToUserContentPermissionListener
 {
     private UserProductService $userProductService;
-    private ProductService $productService;
     private ContentPermissionsService $contentPermissionsService;
 
     public function __construct(
         UserProductService $userProductService,
-        ProductService $productService,
         ContentPermissionsService $contentPermissionsService,
     ) {
         $this->userProductService = $userProductService;
-        $this->productService = $productService;
         $this->contentPermissionsService = $contentPermissionsService;
     }
 
