@@ -77,6 +77,8 @@ class UserProductToUserContentPermissionListener
                 $existingPermission->user_id = $userId;
                 $existingPermission->permission_id = $permissionId;
                 $existingPermission->created_on = $now;
+            } elseif ($existingPermission->start_date == $startDate && $existingPermission->expiration_date == $expirationDate) {
+                continue; //no changes necessary save a query
             }
             $existingPermission->start_date = $startDate;
             $existingPermission->expiration_date = $expirationDate;
