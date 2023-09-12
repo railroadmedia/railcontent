@@ -7,8 +7,8 @@ class Prices
     public static $plusSubscriptionMonthly = 30;
 
     //Content Counts
-    public static $students = 82327;
-    public static $reviews = 6632;
+    public static $students = 82836;
+    public static $reviews = 6654;
     public static $drumeoLessons = 2500;
     public static $drumeoPlayAlongs = 300;
     public static $drumeoSongs = 5000;
