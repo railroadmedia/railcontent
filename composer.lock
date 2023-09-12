@@ -249,16 +249,16 @@
         },
         {
             "name": "aws/aws-sdk-php",
-            "version": "3.281.3",
+            "version": "3.281.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aws/aws-sdk-php.git",
-                "reference": "a3cfb20dbfb11117b7174b2594fc597745252e0c"
+                "reference": "c37035bcfb67a9d54f91dae303b3fe8f98ea59f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/a3cfb20dbfb11117b7174b2594fc597745252e0c",
-                "reference": "a3cfb20dbfb11117b7174b2594fc597745252e0c",
+                "url": "https://api.github.com/repos/aws/aws-sdk-php/zipball/c37035bcfb67a9d54f91dae303b3fe8f98ea59f4",
+                "reference": "c37035bcfb67a9d54f91dae303b3fe8f98ea59f4",
                 "shasum": ""
             },
             "require": {
@@ -338,9 +338,9 @@
             "support": {
                 "forum": "https://forums.aws.amazon.com/forum.jspa?forumID=80",
                 "issues": "https://github.com/aws/aws-sdk-php/issues",
-                "source": "https://github.com/aws/aws-sdk-php/tree/3.281.3"
+                "source": "https://github.com/aws/aws-sdk-php/tree/3.281.4"
             },
-            "time": "2023-09-08T18:06:26+00:00"
+            "time": "2023-09-11T18:07:49+00:00"
         },
         {
             "name": "behat/transliterator",
@@ -6834,16 +6834,16 @@
         },
         {
             "name": "openspout/openspout",
-            "version": "v4.17.0",
+            "version": "v4.17.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/openspout/openspout.git",
-                "reference": "3a058a1c5755f228b2addcb76b46dfcb54173d5e"
+                "reference": "7d567807c4892afdc2b264f7032ea68cabb3015e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/openspout/openspout/zipball/3a058a1c5755f228b2addcb76b46dfcb54173d5e",
-                "reference": "3a058a1c5755f228b2addcb76b46dfcb54173d5e",
+                "url": "https://api.github.com/repos/openspout/openspout/zipball/7d567807c4892afdc2b264f7032ea68cabb3015e",
+                "reference": "7d567807c4892afdc2b264f7032ea68cabb3015e",
                 "shasum": ""
             },
             "require": {
@@ -6857,7 +6857,7 @@
             },
             "require-dev": {
                 "ext-zlib": "*",
-                "friendsofphp/php-cs-fixer": "^3.25.1",
+                "friendsofphp/php-cs-fixer": "^3.26.1",
                 "infection/infection": "^0.27",
                 "phpbench/phpbench": "^1.2.14",
                 "phpstan/phpstan": "^1.10.33",
@@ -6911,7 +6911,7 @@
             ],
             "support": {
                 "issues": "https://github.com/openspout/openspout/issues",
-                "source": "https://github.com/openspout/openspout/tree/v4.17.0"
+                "source": "https://github.com/openspout/openspout/tree/v4.17.1"
             },
             "funding": [
                 {
@@ -6923,7 +6923,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-09-05T06:39:07+00:00"
+            "time": "2023-09-12T07:11:49+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
