@@ -7,6 +7,7 @@
             <filter-wrapper
                 :search-term="search_term"
                 :selected-tab="selectedTab"
+                :selected-sort="sort"
                 :filter-params="filter_params"
                 :multi-select-columns="filterMultiSelectColumns"
                 :tab-options="[{ value: 'allCoaches', key: 'All Coaches' }, { value: 'subscribedCoaches', key: 'Subscribed Coaches' }]"
