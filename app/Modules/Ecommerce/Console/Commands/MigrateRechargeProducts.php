@@ -8,7 +8,7 @@ use App\Modules\Ecommerce\Models\Product;
 use Signifly\Shopify\REST\Resources\WebhookResource;
 use Signifly\Shopify\Shopify;
 
-class RechargeMigrationProducts extends Command
+class MigrateRechargeProducts extends Command
 {
     protected $signature = 'ecommerce:MigrateRechargeProducts';
 
@@ -21,7 +21,7 @@ class RechargeMigrationProducts extends Command
             })->toArray();
 
             $subscriptionProducts = Product::query()->whereNotNull('subscription_interval_type')
-                ->where('name', 'like', '%musora annual membership%')->get();
+                ->where('id', '=', '409')->get();
 
             foreach ($subscriptionProducts as $product) {
                 $variant = $shopify->getVariant($product->shopify_id);
@@ -33,6 +33,20 @@ class RechargeMigrationProducts extends Command
                             'POST',
                             '/plans',
                             [
+                                'channel_settings' => [
+                                    'api' => [
+                                        'display' => true
+                                    ],
+                                    'customer_portal' => [
+                                        'display' => true
+                                    ],
+                                    'merchant_portal' => [
+                                        'display' => true
+                                    ],
+                                    'checkout_page' => [
+                                        'display' => true
+                                    ],
+                                ],
                                 'discount_amount' => '0',
                                 'discount_type' => 'percentage',
                                 'external_product_id' => [
@@ -40,9 +54,14 @@ class RechargeMigrationProducts extends Command
                                 ],
                                 'sort_order' => 1,
                                 'subscription_preferences' => [
-                                    "charge_interval_frequency" => $this->getIntervalCount($product),
-                                    "interval_unit" => $this->getIntervalUnit($product),
-                                    "order_interval_frequency" => $this->getIntervalCount($product),
+                                    'charge_interval_frequency' => $this->getIntervalCount($product),
+                                    'cutoff_day_of_month' => null,
+                                    'cutoff_day_of_week' => null,
+                                    'expire_after_specific_number_of_charges' => null,
+                                    'order_day_of_month' => null,
+                                    'order_day_of_week' => null,
+                                    'interval_unit' => $this->getIntervalUnit($product),
+                                    'order_interval_frequency' => $this->getIntervalCount($product),
                                 ],
                                 'title' => $this->getTitle($product),
                                 'type' => 'subscription'
