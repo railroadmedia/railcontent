@@ -273,36 +273,6 @@ class CustomerIoSyncEventListener
     }
 
     /**
-     * @param UserProductDeleted $userProductDeleted
-     */
-    public function handleUserProductDeleted(UserProductDeleted $userProductDeleted)
-    {
-        if (self::$disable) {
-            return;
-        }
-
-        try {
-            $userId = $userProductDeleted->getUserProduct()
-                ->getUser()
-                ->getId();
-            $user = $this->userService->getByIdOrNull($userId);
-
-            if (!empty($user) && !in_array($user->id, self::$alreadyQueuedUserIds)) {
-                dispatch(
-                    (new CustomerIoSyncUserByUserId($user))->delay(
-                        Carbon::now()
-                            ->addSeconds(3)
-                    )
-                );
-
-                self::$alreadyQueuedUserIds[] = $user->id;
-            }
-        } catch (Throwable $throwable) {
-            error_log($throwable);
-        }
-    }
-
-    /**
      * @param SubscriptionCreated $subscriptionCreated
      */
     public function handleSubscriptionCreated(SubscriptionCreated $subscriptionCreated)

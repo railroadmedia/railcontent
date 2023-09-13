@@ -26,6 +26,9 @@ class ShopifySyncService
     public function syncCustomer($shopifyCustomerId)
     {
         $userId = $this->getUserIdFromShopifyCustomerId($shopifyCustomerId);
+        if (!$userId) {
+            throw new \Exception("User not found for shopify customer id $shopifyCustomerId");
+        }
         $ownedProducts = $this->getOwnedProducts($shopifyCustomerId);
         $this->syncUserProducts($userId, $ownedProducts);
     }
@@ -91,7 +94,7 @@ class ShopifySyncService
         }
         UserProduct::query()->whereIn('id', $userProductIdsToDelete)->delete();
 
-        event(new UserProductsUpdated($userId, collect($userProducts)));
+        event(new UserProductsUpdated($userId));
     }
 
 

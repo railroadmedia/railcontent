@@ -6,22 +6,15 @@ class UserProductsUpdated
 {
 
     private int $userId;
-    private $userProducts;
 
-    public function __construct(int $userId, $userProducts)
+    public function __construct(int $userId)
     {
         $this->userId = $userId;
-        $this->userProducts = $userProducts;
     }
 
     public function getUserId()
     {
         return $this->userId;
-    }
-
-    public function getUserProducts()
-    {
-        return $this->userProducts;
     }
 
 }
