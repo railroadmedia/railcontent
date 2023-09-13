@@ -1,0 +1,530 @@
+
+@include('drumeo.products.partials.promo-banner', [
+            "name" => "StickBag",
+            "fullPrice" => floatval($productPrices['Drumeo-VaterSticks']->price),
+            "price" => $memberPrice,
+            "noBreadcrumb" => true
+        ])
+<header class="text-white relative overflow-hidden z-10" style="background-color:#011434;">
+    <div class="transform -translate-y-1/2 top-1/2 left-0 w-full absolute z-20 px-4 lg:px-6 text-center">
+        <div class="container mx-auto max-w-5xl">
+            <img alt="quietkick" class="h-10 sm:h-16" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stickbag-logo.svg"><br>
+            <h1 class="leading-tight"><strong>Pack like a pro.</strong></h1>
+            <h3 class="my-4 sm:my-6">
+                @if(floatval($productPrices['Drumeo-VaterSticks']->price) > floatval($productPrices['Drumeo-VaterSticks']->discounted_price))
+                    <s class="opacity-50">${{ floatval($productPrices['Drumeo-VaterSticks']->price) }}.</s>
+                    <strong>${{ floatval($productPrices['Drumeo-VaterSticks']->discounted_price) }}</strong>
+                    (Save {{ round(100 - (100 * (floatval($productPrices['Drumeo-VaterSticks']->discounted_price) / floatval($productPrices['Drumeo-VaterSticks']->price)))) }}%).
+                @else
+                    <strong>Only ${{ floatval($productPrices['Drumeo-VaterSticks']->discounted_price) }}</strong>
+                @endif
+            </h3>
+            <div class="my-3 sm:my-6">
+            <a class="join smaller outline" ><i class="fas fa-play"></i> &nbsp;Watch Video</a>
+                @if( $products['Drumeo-VaterSticks']->getStockAvailability() > 1 && !empty($products['Drumeo-VaterSticks']->getStockAvailability()))
+                    <a class="join smaller blue" href="#customize-anchor">Order Now</a>
+                @else
+                    <a class="join smaller sold-out">SOLD OUT</a>
+                @endif
+            </div>
+            <h6 class="text-sm leading-tight"><em>or get it free with an Annual Drumeo Membership.</em></h6>
+        </div>
+    </div>
+    <div class="top-0 left-0 absolute w-full h-full z-10" style="background: linear-gradient(to bottom, transparent, rgba(0,79,153,0.6));"></div>
+{{--    <video class="object-cover w-full h-full relative z-0" poster="" src="https://player.vimeo.com/progressive_redirect/playback/696274730/rendition/1080p?loc=external&signature=a2e19f58b044993d2561fbeaabcd4855ec9d1f577a7bba332fc5a7e7221cb23a" type="video/mp4" autoplay="" loop="" playsinline="" muted></video>--}}
+    <img class="object-cover w-full h-96 lg:h-full relative z-0" src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/header-image.jpg"></img>
+</header>
+
+<section class="text-center px-4 sm:px-6 py-8 sm:py-16 lg:py-20 relative" @if(!empty($blackBag)) style="background-color:#020D24;color:#fff;" @endif>
+    <div class="container mx-auto z-10 relative max-w-5xl pb-16">
+        <h2 class="leading-tight"><strong>A StickBag you’ll want<br class="sm:hidden"> to show your friends.</strong></h2>
+        <p class="leading-normal mt-2 mb-5">Crafted with input from gigging pros, the Drumeo StickBag features thoughtful<br class="sm:inline"> details that will help you organize your tools and even save you mid-song.</p>
+        <div class="hidden lg:flex">
+            <div class="w-1/4 pr-3">
+                <div>
+                    <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                        @if(!empty($blackBag))
+                            src="https://www.musora.com/musora-cdn/image/width=50,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-tom-hooks-icon.svg"
+                        @else
+                            src="https://www.musora.com/musora-cdn/image/width=50,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/tom-hooks-icon.svg"
+                        @endif
+                    >
+                    <h6 class="my-2"><strong>Premium Metal<br> Tom Hooks</strong></h6>
+                    <p class="text-sm">No more tying your bag up with string. Your Drumeo StickBag includes sturdy metal loops that easily attach to any tom lugs.</p>
+                </div>
+                <div class="my-7">
+                    <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                            @if(!empty($blackBag))
+                                src="https://www.musora.com/musora-cdn/image/width=50,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-holster-icon.svg"
+                            @else
+                                src="https://www.musora.com/musora-cdn/image/width=50,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/holster-icon.svg"
+                            @endif
+                    >
+                    <h6 class="my-2"><strong>One in the<br> holster.</strong></h6>
+                    <p class="text-sm">A strategic easy-access sleeve lets your “rescue stick” poke just out of your stick bag so you can make that quick grab mid-song.</p>
+                </div>
+                <div>
+                    <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                            @if(!empty($blackBag))
+                                src="https://www.musora.com/musora-cdn/image/width=50,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-zipper-icon.svg"
+                            @else
+                                src="https://www.musora.com/musora-cdn/image/width=50,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/zipper-icon.svg"
+                            @endif
+                    >
+                    <h6 class="my-2"><strong>Zippers as tough<br> as you are.</strong></h6>
+                    <p class="text-sm">Top-quality reinforced zippers make for a long-lasting stick bag – even when it’s jammed to the teeth with sticks, brushes, and mallets.</p>
+                </div>
+            </div>
+            <div class="w-1/2">
+                <img class="transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                        @if(!empty($blackBag))
+                            src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-bag-features.png"
+                        @else
+                            src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/bag-features.png"
+                        @endif
+                >
+            </div>
+            <div class="w-1/4 pl-3">
+                <div>
+                    <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                            @if(!empty($blackBag))
+                                src="https://www.musora.com/musora-cdn/image/width=50,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-waterproof-icon.svg"
+                            @else
+                                src="https://www.musora.com/musora-cdn/image/width=50,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/waterproof-icon.svg"
+                            @endif
+                    >
+                    <h6 class="my-2"><strong>Sweat, water<br> and beer-proof.</strong></h6>
+                    <p class="text-sm">Your StickBag is made from waxed canvas – rugged cotton soaked in wax for extra strength and water resistance.</p>
+                </div>
+                <div class="my-7">
+                    <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                            @if(!empty($blackBag))
+                                src="https://www.musora.com/musora-cdn/image/width=50,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-suede-icon.svg"
+                            @else
+                                src="https://www.musora.com/musora-cdn/image/width=50,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/suede-icon.svg"
+                            @endif
+                    >
+                    <h6 class="my-2"><strong>Flexible suede pockets<br> for all your goodies.</strong></h6>
+                    <p class="text-sm">Drum keys, tuning gels, a Snickers bar? Suede pockets let you jam all your goodies into your pockets without losing their shape.</p>
+                </div>
+                <div>
+                    <img class="h-8 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+                            @if(!empty($blackBag))
+                                src="https://www.musora.com/musora-cdn/image/width=50,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-keychain-icon.svg"
+                            @else
+                                src="https://www.musora.com/musora-cdn/image/width=50,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/keychain-icon.svg"
+                            @endif
+                    >
+                    <h6 class="my-2"><strong>Drum keychain<br> (key included!)</strong></h6>
+                    <p class="text-sm">Finally - a drum key you won’t lose. Your StickBag includes a brushed pewter drum key that has its own little key ring to live inside your bag.</p>
+                </div>
+            </div>
+        </div>
+        <div class="lg:hidden mb-5"
+                x-data="{
+                    init() {
+                        new Splide(this.$refs.splide, {
+                            classes: {
+                                    arrow: 'hidden',
+                                    prev: 'hidden',
+                                    next: 'hidden',
+                                    pagination: 'splide__pagination bottom-0',
+                            },
+                            perPage: 2.5,
+                            perMove: 1,
+                            type: 'loop',
+                            focus: 0,
+                            interval: 2000,
+                            breakpoints: {
+                                768: {
+                                    perPage: 2.5,
+                                    drag   : 'free',
+                                    snap   : false,
+                                },
+                                767: {
+                                    perPage: 1.5,
+                                    drag   : 'free',
+                                    snap   : false,
+                                },
+                            },
+                        }).mount()
+                    },
+                }"
+        >
+            <div x-ref="splide" class="splide">
+                <div class="splide__track pb-8">
+                    <ul class="splide__list items-start">
+                        @if(!empty($blackBag))
+                            @php
+                                $slides = [
+                                 [
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-waterproof-m.jpg',
+                                 ],
+                                 [
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-suede-m.jpg',
+                                 ],
+                                 [
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-zipper-m.jpg',
+                                 ],
+                                 [
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-holster-m.jpg',
+                                 ],
+                                 [
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-premium-hooks-m.jpg',
+                                 ],
+                                 [
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-drum-key-m.jpg',
+                                 ],
+                             ];
+                            @endphp
+                        @else
+                            @php
+                                $slides = [
+                                 [
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/waterproof-m.jpg',
+                                 ],
+                                 [
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/suede-m.jpg',
+                                 ],
+                                 [
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/zipper-m.jpg',
+                                 ],
+                                 [
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/holster-m.jpg',
+                                 ],
+                                 [
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/premium-hooks-m.jpg',
+                                 ],
+                                 [
+                                     'img' => 'https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/drum-key-m.jpg',
+                                 ],
+                             ];
+                            @endphp
+                        @endif
+                        @foreach ($slides as $slide)
+                            <li class="splide__slide px-2 text-center">
+                                <img class="h-68 rounded-xl lazyload" data-src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/{{ $slide['img'] }}" alt="drumeo stickbag" />
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="flex flex-wrap items-start justify-center text-left mb-2 sm:mb-6 lg:hidden">
+            @php
+                $gridItems = [
+                    [
+                    'title' => 'Sweat, water and beer-proof.',
+                    'desc' => 'Your StickBag is made from waxed canvas – rugged cotton soaked in wax for extra strength and water resistance.',
+                    ],
+                    [
+                    'title' => 'Flexible suede pockets for all your goodies.',
+                    'desc' => 'Drum keys, tuning gels, a Snickers bar? Suede pockets let you jam all your goodies into your pockets without losing their shape.',
+                    ],
+                    [
+                    'title' => 'Zippers as tough as you are.',
+                    'desc' => 'Top-quality reinforced zippers make for a long-lasting stick bag – even when it’s jammed to the teeth with sticks, brushes, and mallets.',
+                    ],
+                    [
+                    'title' => 'One in the holster.',
+                    'desc' => 'A strategic easy-access sleeve lets your “rescue stick” poke just out of your stick bag so you can make that quick grab mid-song.',
+                    ],
+                    [
+                    'title' => 'Drum keychain (key included!)',
+                    'desc' => 'Finally - a drum key you won’t lose. Your StickBag includes a brushed pewter drum key that has its own little key ring to live inside your bag.',
+                    ],
+                    [
+                    'title' => 'Premium Metal Tom Hooks',
+                    'desc' => 'No more tying your bag up with string. Your Drumeo StickBag includes sturdy metal loops that easily attach to any tom lugs.',
+                    ],
+                ];
+            @endphp
+            @foreach ($gridItems as $key => $gridItem)
+                @include('_partials.components.question-dropdown', [
+                    'variant' => true,
+                    "title" => $gridItem['title'],
+                    "desc" => $gridItem['desc'],
+                    'open' => $key === 0 ? true : false
+                ])
+            @endforeach
+        </div>
+    </div>
+</section>
+<div class="relative z-10 h-5 sm:h-10 -mt-5 md:-mt-10"
+        @if(!empty($blackBag))
+            style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #000 calc(50% + 1px));"
+        @else
+            style="background: linear-gradient(to bottom right, transparent calc(50% - 1px), transparent, #F6F8FC calc(50% + 1px));"
+        @endif
+></div>
+<section class="text-center px-6 sm:px-6 pb-8 sm:pb-16 lg:pb-20 relative"
+        @if(!empty($blackBag))
+            style="background-color:#000;color:#fff;"
+        @else
+            style="background-color:#F6F8FC;"
+        @endif
+>
+    <div class="container mx-auto z-10 relative max-w-3xl">
+        <img class="h-28 sm:h-36 sm:mb-10 -mt-14 sm:-mt-24 transition-opacity opacity-0" alt="icon" loading="lazy" onload="this.classList.remove('opacity-0')"
+            @if(!empty($blackBag))
+                src="https://www.musora.com/musora-cdn/image/width=820,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-thank-you-text.png"
+            @else
+                src="https://www.musora.com/musora-cdn/image/width=820,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/thank-you-text.png"
+            @endif
+        >
+        <img class="my-6 h-56 rounded-xl overflow-hidden inline sm:hidden"
+                @if(!empty($blackBag))
+                    src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-stick-sleeve.jpg"
+                @else
+                    src="https://www.musora.com/musora-cdn/image/width=620,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stick-sleeve.jpg"
+                @endif
+            alt="learn playing image"
+            fetchpriority="high"
+        >
+        <div class="text-left flex flex-wrap sm:flex-nowrap justify-center items-center">
+            <p class="flex-grow-0 leading-normal max-w-xl pr-5 lg:pr-8 mx-0">
+                Brushes take the worst beating in conventional stick bags – and at $30+ a pop, it hurts even more.
+                <br><br>
+                The Drumeo StickBag features a custom brushes sleeve that keeps your brush wires straight and true. And when you’re at your kit, toss your brush sleeve under your hi-hat for easy access in any song.
+                <br><br>
+                It’s an all-new innovation on one of drumming’s oldest tools.</p>
+            <img class="flex-shrink-0 w-60 lg:w-68 rounded-xl overflow-hidden hidden sm:inline-block transition-opacity opacity-0"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+                    @if(!empty($blackBag))
+                        src="https://www.musora.com/musora-cdn/image/width=520,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-stick-sleeve.jpg"
+                    @else
+                        src="https://www.musora.com/musora-cdn/image/width=520,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stick-sleeve.jpg"
+                    @endif
+                alt="learn playing image"
+            >
+        </div>
+
+    </div>
+</section>
+@if(empty($blackBag))
+<section class="content-section text-center comparison px-1 lg:px-3" style="background:#00101D;">
+    <div class="container mx-auto max-w-4xl">
+        <h2 class="mb-16 md:mb-12 "><strong>Your new favorite<br class="sm:hidden"> piece of gear. </strong></h2>
+        <div class="relative">
+            <p class="inline md:hidden leading-tight text-xs absolute top-0 right-0 -mt-9 w-1/3 animated infinite bounce slower"><strong>TAP TO SEE<br> EXAMPLES <i class="fas fa-level-down"></i></strong></p>
+            <table class="w-full mx-auto border-separate comparison eardrums earbuds">
+                <tbody style="background-color:transparent!important;">
+                <tr style="background-color:transparent!important;">
+                    <td></td>
+                    <td class="rounded-t-xl">
+                        <img class="h-8 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/drumeo-comparison.png" alt="logo-white">
+                    </td>
+                    <td class="rounded-t-xl">
+                        <img class="h-8 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/vic-firth-comparison.png" alt="logo-white">
+                    </td>
+                    <td class="rounded-t-xl">
+                        <img class="h-8 md:h-20 lazyload"  data-src="https://www.musora.com/musora-cdn/image/width=160,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/tackle-comparison.png" alt="logo-white">
+                    </td>
+                </tr>
+                <tr>
+                    <td>Material</td>
+                    <td>Waxed Canvas & Suede</td>
+                    <td>Canvas</td>
+                    <td>Leather</td>
+                </tr>
+                <tr>
+                    <td>Capacity</td>
+                    <td>18 Pairs</td>
+                    <td>24 Pairs</td>
+                    <td>6 Pairs</td>
+                </tr>
+                <tr>
+                    <td>Protective<br> Brush Sleeve</td>
+                    <td>YES</td>
+                    <td>NO</td>
+                    <td>NO</td>
+                </tr>
+                <tr>
+                    <td>Dimensions</td>
+                    <td>17.5” H x 16” W</td>
+                    <td>20” H x 22” W</td>
+                    <td>18” H x 16” W</td>
+                </tr>
+                <tr>
+                    <td>Drum Key<br> Included</td>
+                    <td>YES</td>
+                    <td>NO</td>
+                    <td>NO</td>
+                </tr>
+                <tr style="background-color:transparent!important;">
+                    <td class="rounded-b-xl">Total</td>
+                    <td class="rounded-b-xl"><s class="opacity-50">$147</s> <strong>$97</strong></td>
+                    <td class="rounded-b-xl"><strong>$104</strong></td>
+                    <td class="rounded-b-xl"><strong>$220</strong></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+@endif
+<section class="text-center px-5 py-10 md:py-20 lg:py-24" @if(!empty($blackBag)) style="background-color:#020D24;color:#fff;" @else style="background-color:#f6f8fc;" @endif>
+    <div class="container mx-auto relative z-10 max-w-5xl">
+        <h2><strong>The last StickBag<br class="sm:hidden"> you’ll ever need.</strong></h2>
+        <h6 class="leading-tight mt-2 mb-5 sm:mb-10">A bag built to take everything<br class="sm:hidden"> from garage to stage. </h6>
+
+        <img class="h-96 inline-block sm:hidden transition-opacity opacity-0"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+                @if(!empty($blackBag))
+                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-gallery-m.png"
+                @else
+                    src="https://www.musora.com/musora-cdn/image/width=690,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/gallery-m.png"
+                @endif
+                alt="learn playing image"
+        >
+        <img class="hidden sm:inline-block transition-opacity opacity-0"
+                loading="lazy"
+                onload="this.classList.remove('opacity-0')"
+                @if(!empty($blackBag))
+                    src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/black-gallery.png"
+                @else
+                    src="https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/gallery.png"
+                @endif
+                alt="learn playing image"
+        >
+{{--        <div class="flex flex-wrap items-center">--}}
+{{--            <div class="w-1/4">--}}
+{{--                <div class="p-2 w-full"><div class="h-44 sm:h-52 lg:h-48 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/todo.jpg"></div></div>--}}
+{{--                <div class="p-2 w-full"><div class="h-32 sm:h-52 lg:h-44 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/todo04.jpg"></div></div>--}}
+{{--            </div>--}}
+{{--            <div class="w-1/2">--}}
+{{--                <div class="p-2 w-full"><div class="h-36 sm:h-52 lg:h-96 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=1200,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/todo02.jpg"></div></div>--}}
+{{--            </div>--}}
+{{--            <div class="w-1/4">--}}
+{{--                <div class="p-2 w-full"><div class="h-44 sm:h-52 lg:h-48 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/todo01.jpg"></div></div>--}}
+{{--                <div class="p-2 w-full"><div class="h-44 sm:h-52 lg:h-44 w-full bg-center bg-cover rounded-xl lazyload" data-bg="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/todo01.jpg"></div></div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+        <p class="mt-2 mb-5 sm:mb-10 text-sm"><em>Disclaimer: Sticks/Brushes are not included.</em></p>
+        <div class="flex flex-wrap sm:flex-nowrap justify-center items-center">
+            <p class="sm:max-w-md m-0 sm:pr-5 lg:pr-10 text-left mb-5 sm:mb-0">Your Drumeo StickBag is built with premium components to ensure a long-lasting home for your sticks wherever your drumming takes you.</p>
+            <table class="rounded-xl border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">
+                <tr class="rounded-xl">
+                    <td class="px-3 py-1 text-left border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Durable construction</td>
+                    <td class="px-5 py-1 border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="px-3 py-1 text-left border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Premium zippers</td>
+                    <td class="px-5 py-1 border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="px-3 py-1 text-left border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Quick-stick slot</td>
+                    <td class="px-5 py-1 border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="px-3 py-1 text-left border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Drum key</td>
+                    <td class="px-5 py-1 border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif"><i class="fas fa-check"></i></td>
+                </tr>
+                <tr>
+                    <td class="px-3 py-1 text-left border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">Cost</td>
+                    <td class="px-5 py-1 border border-collapse @if(!empty($blackBag)) border-white @else border-black @endif">$97</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</section>
+
+<div id="customize-anchor" class="anchor"></div>
+<section class="content-section text-center customize px-4 lg:px-6" style="background:#173c59 url(https://www.musora.com/musora-cdn/image/width=2000,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/order-bg.jpg) center center/cover;">
+    <div class="container mx-auto">
+        <img alt="quietkick logo" class="h-14 sm:h-20" src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stickbag-logo.svg"><br>
+
+        @if( $products['Drumeo-VaterSticks']->getStockAvailability() > 1 && !empty($products['Drumeo-VaterSticks']->getStockAvailability()))
+
+            <div class="flex flex-wrap items-start justify-center 2-full max-w-sm md:max-w-2xl mx-auto">
+                <div class="w-full md:w-1/2 px-2 md:px-3 relative">
+                    <p class="inline-block relative -bottom-4 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-black" >Save 34%</p>
+                    <a href="/ecommerce/add-to-cart?products[stickbag]=1&products[Drumeo-Key]=1&locked=true" class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-black">
+                        <div class="bg-white px-3 py-5 md:py-7">
+                            <h4 class="mb-2 sm:mb-3"><strong>StickBag Only</strong></h4>
+                            <img class="h-24 transition-opacity opacity-0"
+                                    loading="lazy"
+                                    onload="this.classList.remove('opacity-0')"
+                                    src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/stickbag-option.png"
+                                    alt="learn playing image"
+                            >
+                            <br>
+                            <h4 class="inline-block leading-tight"><s>$149</s> <strong>$97</strong></h4>
+                            <p class="text-sm"><em>Save 34%. One-time payment.</em></p>
+                            <div class="join my-5 musora-black smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">Select</div>
+                            <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>
+                            <p class="text-sm mb-1.5">1 Brushes Sleeve</p>
+                            <p class="text-sm">1 Premium Drum Key</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="w-full md:w-1/2 px-2 md:px-3 relative">
+                    <img class="h-16 absolute top-0 right-0 z-10" src="https://www.musora.com/musora-cdn/image/width=130,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/free-shipping-icon.svg">
+                    <p class="inline-block relative -bottom-4 mb-1 px-5 py-1 z-10 leading-tight text-xs rounded-full bg-drumeo" >LAUNCH SPECIAL</p>
+                    <a
+                            @if(!empty($memberVersion))
+                                href="/ecommerce/add-to-cart?products[DLM-1-year]=1&products[stickbag]=1&products[Drumeo-VaterSticks]=6&locked=true"
+                            @else
+                                href="/lp"
+                            @endif
+                            class="text-black overflow-hidden rounded-2xl block mx-auto mb-4 md:mb-0 group border-2 border-drumeo">
+                        <div class="bg-white px-3 py-6 md:py-9">
+                            <h4 class="mb-2 sm:mb-3"><strong>StickBag + Lessons</strong></h4>
+                            <img class="h-24 transition-opacity opacity-0"
+                                    loading="lazy"
+                                    onload="this.classList.remove('opacity-0')"
+                                    src="https://www.musora.com/musora-cdn/image/width=500,quality=95/https://dpwjbsxqtam5n.cloudfront.net/drum-shop/stickbag/lessons-stickbag-option.png"
+                                    alt="learn playing image"
+                            >
+                            <br>
+                            <h4 class="inline-block leading-tight"><strong>Free StickBag</strong></h4>
+                            <p class="text-sm"><em>
+                                    @if(!empty($memberVersion))
+                                        with annual Membership renewal
+                                    @else
+                                        with annual Drumeo Membership
+                                    @endif
+                                </em></p>
+                            <div class="join my-5 drumeo smaller w-full transition-opacity duration-300 group-hover:opacity-80 max-w-[230px]">
+                            @if(!empty($memberVersion))
+                                renew membership
+                            @else
+                                learn more
+                            @endif
+                            </div>
+                            <p class="text-sm mb-1.5 text-drumeo"><strong>Annual Drumeo Membership</strong> ($240/yr)</p>
+                            <p class="text-sm mb-1.5"><strong>The world's best drum lessons.</strong></p>
+                            <p class="text-sm mb-1.5"><strong>5000+ popular songs</strong></p>
+                            <p class="text-sm mb-1.5"><strong>Unlimited Personal Support</strong></p>
+                            <p class="text-sm mb-1.5">1 Drumeo StickBag<sup>NEW</sup></p>
+                            <p class="text-sm mb-1.5">1 Brushes Sleeve</p>
+                            <p class="text-sm mb-1.5">1 Premium Drum Key</p>
+                            <p class="text-sm">6 Pairs Of 5A Drumsticks</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        @else
+            <a class="join sold-out mt-5 sm:mt-10">SOLD OUT</a>
+        @endif
+    </div>
+</section>
+
+<section class="text-center py-10" style="background: #00101D;">
+    <div class="container mx-auto relative z-50">
+        <div class="inline-block w-full px-3 md:px-4 mb-5 text-light-navy">
+            <p>Call us toll-free at
+                <a href="tel:+18004398921">1-800-439-8921</a> <br class="inline-block md:hidden"> or directly at
+                <a href="tel:+16048557605">1-604-855-7605</a>.<br> All prices listed in USD. </p>
+        </div>
+        <div class="inline-block w-full px-3 md:px-4 text-light-navy" style="margin-top: 0;">
+            <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-visa"></i>
+            <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-mastercard"></i>
+            <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-amex"></i>
+            <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-paypal"></i>
+            <i class="mx-0.5 text-3xl md:text-4xl fab fa-cc-discover"></i>
+        </div>
+    </div>
+</section>

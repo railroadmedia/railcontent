@@ -108,7 +108,9 @@
                 "noBreadcrumb" => true
             ])
 
-    @include('drumeo.products.partials._stickbag')
+    @include('drumeo.products.partials._stickbag',[
+    "blackBag" => true,
+])
 
     @include("drumeo.sales.partials._footer")
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
