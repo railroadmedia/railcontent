@@ -86,7 +86,9 @@
                     </div>
 
                     <p class="w-full leading-normal mt-2">
-                        {{--<strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>--}}
+                        @if(!empty($bonus['title']))
+                            <strong class="font-black leading-tight inline-block mb-1">{!!  $bonus['title']  !!}</strong><br>
+                        @endif
                         <span style="text-transform:uppercase; display:inline-block;">
                             @if(!empty($bonus['price']))
                             <s class="opacity-40">${{ $bonus['price'] }}</s>

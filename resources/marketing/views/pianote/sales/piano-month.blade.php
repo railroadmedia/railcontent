@@ -151,21 +151,24 @@
     <section class="py-10 sm:py-14 lg:py-16 relative overflow-hidden text-white text-center customize px-4 lg:px-8 relative overflow-hidden" style="background: linear-gradient(to bottom, #941831, #6B0059);">
         <div class="container mx-auto max-w-5xl">
             <div class="flex flex-wrap sm:flex-nowrap items-center">
-                <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5 mb-4 sm:mb-0">
-                    <picture>
-                        <source media="(min-width:640px)" srcset="https://www.musora.com/musora-cdn/image/width=1100,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/bundle-collage2.png">
-                        <img class="h-56 sm:h-auto max-w-full sm:max-w-xl lg:max-w-full transition-opacity opacity-0"
-                                loading="lazy"
-                                onload="this.classList.remove('opacity-0')"
-                                src="https://www.musora.com/musora-cdn/image/width=1000,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/bundle-collage-m2.png"
-                                alt="{{$theme}} collage image"
-                        >
-                    </picture>
+                <div class="flex w-full justify-center sm:justify-start sm:w-1/2 lg:w-auto sm:order-1 lg:pl-5">
+                    <img class="hidden sm:inline-block h-56 sm:h-auto max-w-full sm:max-w-xl lg:max-w-full transition-opacity opacity-0"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=1210,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/bundle-collage2.png"
+                            alt="{{$theme}} collage image"
+                    >
                 </div>
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-auto flex-shrink-0">
                     <img class="h-10 mb-3 sm:mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/national-piano-month-logo.svg">
                     <p class="inline-block leading-none bg-white rounded-lg px-3 py-1 font-black ml-2" style="color:#941831;">SAVE 20%</p>
-                    <h3 class="leading-tight"><strong>Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.</strong></h3>
+                    <img class="inline-block sm:hidden mb-4 h-56 sm:h-auto max-w-full sm:max-w-xl lg:max-w-full transition-opacity opacity-0"
+                            loading="lazy"
+                            onload="this.classList.remove('opacity-0')"
+                            src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/bundle-collage-m2.png"
+                            alt="{{$theme}} collage image"
+                    >
+                    <h3 class="leading-tight text-left"><strong>Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.</strong></h3>
                     <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
                         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> 6 BONUS Music Theory Posters <strong class="text-pianote">($39 VALUE)</strong></li>
                         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> The Ultimate Guide to Piano Chords & Scales <strong class="text-pianote">($39 VALUE)</strong></li>
@@ -662,38 +665,44 @@
     ],
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chords-poster.jpg',
+        'title' => 'Chords Poster',
         'description' => 'Play every major and minor chord.',
-        'price' => 39,
-        'shipping' => true,
-    ],
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chord-formulas-poster.jpg',
-        'description' => 'Play any chord. On any key. ',
-        'price' => 39,
-        'shipping' => true,
-    ],
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/circle-of-fifths-poster.jpg',
-        'description' => 'The essential piece of music theory.',
-        'price' => 39,
-        'shipping' => true,
-    ],
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/key-to-sight-reading-poster.jpg',
-        'description' => 'Link the notes on the page to your keys.',
-        'price' => 39,
-        'shipping' => true,
-    ],
-    [
-        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/dynamics-poster.jpg',
-        'description' => 'Don’t learn Italian. Just look at this poster.',
-        'price' => 39,
+        'price' => 9,
         'shipping' => true,
     ],
     [
         'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/scales-poster.jpg',
+        'title' => 'Scales Poster',
         'description' => 'All the major and minor scales on one place.',
-        'price' => 39,
+        'price' => 9,
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/dynamics-poster.jpg',
+        'title' => 'Dynamics Poster',
+        'description' => 'Don’t learn Italian. Just look at this poster.',
+        'price' => 9,
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/key-to-sight-reading-poster.jpg',
+        'title' => 'Keys To Sight Reading Poster',
+        'description' => 'Link the notes on the page to your keys.',
+        'price' => 9,
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/circle-of-fifths-poster.jpg',
+        'title' => 'Circle Of Fifths Poster',
+        'description' => 'The essential piece of music theory.',
+        'price' => 9,
+        'shipping' => true,
+    ],
+    [
+        'image' => 'https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/chord-formulas-poster.jpg',
+        'title' => 'Chord Formulas Poster',
+        'description' => 'Play any chord. On any key. ',
+        'price' => 9,
         'shipping' => true,
     ],
         ]
