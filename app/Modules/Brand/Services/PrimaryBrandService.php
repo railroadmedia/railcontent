@@ -6,9 +6,6 @@ use App\Modules\Ecommerce\Services\SubscriptionService;
 use App\Modules\Ecommerce\Services\UserProductService;
 use App\Modules\UserManagementSystem\Services\OnboardingService;
 use Illuminate\Support\Facades\Log;
-use Railroad\Ecommerce\Entities\Subscription;
-use Railroad\Ecommerce\Repositories\SubscriptionRepository;
-use Railroad\Ecommerce\Repositories\UserProductRepository;
 
 class PrimaryBrandService
 {
