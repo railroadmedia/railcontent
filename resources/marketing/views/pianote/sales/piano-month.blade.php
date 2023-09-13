@@ -173,7 +173,7 @@
                     <h3 class="w-auto leading-tight text-left"><strong>Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.</strong></h3>
                     <ul class="inline-block mx-auto fa-ul text-left pl-6 my-4 sm:my-5">
                         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> 6 BONUS Music Theory Posters <strong class="text-pianote">($39 VALUE)</strong></li>
-                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> The Ultimate Guide to Piano Chords & Scales <strong class="text-pianote">($39 VALUE)</strong></li>
+                        <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Piano Chords & Scales Book <strong class="text-pianote">($39 VALUE)</strong></li>
                         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Pianote Practice Planner <strong class="text-pianote">($39 VALUE)</strong></li>
                         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Trusted by {{number_format(Prices::$students)}} students.</li>
                         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
