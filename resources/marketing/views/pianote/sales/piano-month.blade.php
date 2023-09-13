@@ -160,16 +160,18 @@
                     >
                 </div>
                 <div class="text-center sm:text-left w-full sm:w-1/2 lg:w-auto flex-shrink-0">
-                    <img class="h-10 mb-3 sm:mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/national-piano-month-logo.svg">
-                    <p class="inline-block leading-none bg-white rounded-lg px-3 py-1 font-black ml-2" style="color:#941831;">SAVE 20%</p>
-                    <img class="inline-block sm:hidden mb-4 h-56 sm:h-auto max-w-full sm:max-w-xl lg:max-w-full transition-opacity opacity-0"
+                    <img class="h-14 sm:h-10 mb-3 sm:mb-4" src="https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/national-piano-month-logo.svg">
+                    <p class="hidden sm:inline-block leading-none bg-white rounded-lg px-3 py-1 font-black ml-2" style="color:#941831;">SAVE 20%</p>
+                    <br>
+                    <img class="inline-block sm:hidden mb-4 h-64 sm:h-auto max-w-full sm:max-w-xl lg:max-w-full transition-opacity opacity-0"
                             loading="lazy"
                             onload="this.classList.remove('opacity-0')"
                             src="https://www.musora.com/musora-cdn/image/width=600,quality=95/https://d2vyvo0tyx8ig5.cloudfront.net/sales/promos/september/bundle-collage-m2.png"
                             alt="{{$theme}} collage image"
                     >
-                    <h3 class="leading-tight text-left"><strong>Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.</strong></h3>
-                    <ul class="fa-ul text-left pl-6 my-4 sm:my-5 mx-auto inline-block">
+                    <div class="inline-block mx-auto">
+                    <h3 class="w-auto leading-tight text-left"><strong>Unlimited piano lessons.<br> Direct access to real teachers.<br> 1000+ popular songs.</strong></h3>
+                    <ul class="inline-block mx-auto fa-ul text-left pl-6 my-4 sm:my-5">
                         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> 6 BONUS Music Theory Posters <strong class="text-pianote">($39 VALUE)</strong></li>
                         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> The Ultimate Guide to Piano Chords & Scales <strong class="text-pianote">($39 VALUE)</strong></li>
                         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Pianote Practice Planner <strong class="text-pianote">($39 VALUE)</strong></li>
@@ -177,6 +179,7 @@
                         <li class="leading-tight mb-3"><i class="fa-li fas fa-check text-pianote"></i> Personalized feedback from real teachers.</li>
                         <li class="leading-tight text-coaches max-w-xs mx-0"><i class="fa-li fas fa-check"></i> <strong>PLUS</strong> voice, guitar, and drums lessons with full access to all Musora communities.</li>
                     </ul>
+                    </div>
                     <div class="w-72 lg:w-96 mx-auto sm:mx-0">
                         <h3><s class="opacity-50">$240</s> <strong>$200</strong> <span class="text-musora">(Save 20%)</span></h3>
                         <p class="text-sm mt-1">For your first year, then $240/yr.</p>
