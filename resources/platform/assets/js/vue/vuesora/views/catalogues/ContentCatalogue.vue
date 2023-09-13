@@ -4,6 +4,17 @@
     <div v-if="isCoachesGrid"
          id="coach-section"
          class="tw-flex tw-flex-col tw-mb-6">
+            <filter-wrapper
+                :search-term="search_term"
+                :selected-tab="selectedTab"
+                :filter-params="filter_params"
+                :multi-select-columns="filterMultiSelectColumns"
+                :tab-options="[{ value: 'allCoaches', key: 'All Coaches' }, { value: 'subscribedCoaches', key: 'Subscribed Coaches' }]"
+                @handleSearch="handleSearch"
+                @on-filter-click="applyFilters"
+                @handleContentSort="handleContentSort"
+                @on-click-filter-tab="handleFilterTabClick"
+            ></filter-wrapper>
         <div class="tw-flex tw-flex-wrap">
             <a class="tw-no-underline tw-mb-2 sm:tw-mb-0 tw-mr-6 tw-transition"
                :href="coachIndexUrl + '#coach-section'"
@@ -264,10 +275,12 @@ import Toasts from "../../assets/js/classes/toasts";
 import Pagination from "../../components/Pagination.vue";
 import UserCatalogueEvents from "../../mixins/UserCatalogueEvents";
 import ThemeClasses from "../../mixins/ThemeClasses";
+import FilterWrapper from "../../../components/Filter/FilterWrapper";
 
 export default {
   name: "ContentCatalogue",
   components: {
+      FilterWrapper,
     "grid-catalogue": GridCatalogue,
     "coach-grid-catalogue": CoachGridCatalogue,
     "coaches-grid-catalogue": CoachesGridCatalogue,
@@ -499,14 +512,7 @@ export default {
         : 0,
       loading: false,
       requestingMore: false,
-      filter_params: {
-        artist: null,
-        bpm: null,
-        difficulty: null,
-        instructor: null,
-        style: null,
-        topic: null,
-      },
+      filter_params: {},
       selected_types: null,
       search_term: this.searchTerm,
       required_user_states: this.requiredUserStates || [],
@@ -531,6 +537,9 @@ export default {
               value: '-published_on'
           }
       ],
+      selectedTab: 'subscribedCoaches',
+      filterMultiSelectColumns: [],
+      coachData: { allCoaches: this.preLoadedContent ? this.preLoadedContent.data : [], subscribedCoaches: [] },
     };
   },
   computed: {
@@ -654,6 +663,18 @@ export default {
         this.loadedContentIds[item.id] = true;
       });
     }
+
+    if(this.isCoachesGrid){
+        this.getContent(true, true).then(()=>{
+            this.selectedTab = 'allCoaches';
+            this.coachData['subscribedCoaches'] = [...this.content];
+            this.getContent(true, true);
+            console.log(this.coachData)
+        });
+
+        this.getFilterColumns();
+    }
+
   },
   watch: {
     catalogueType: function () {
@@ -785,7 +806,7 @@ export default {
 
     fetchContent() {
       return axios
-        .get(this.$_contentEndpoint, {
+        .get( this.isCoachesGrid ? this.coachEndpoint() : this.$_contentEndpoint, {
           params: {
             brand: this.brand,
             limit: this.limit,
@@ -913,6 +934,7 @@ export default {
     handleFilterChange(payload) {
       this.filter_params[payload.key] = payload.value;
       this.page = 1;
+      console.log(this.filter_params);
 
       if (this.useUrlParams) {
         this.setUrlParams();
@@ -952,6 +974,49 @@ export default {
       this.setUrlParams();
 
       this.getContent();
+    },
+
+    coachEndpoint(){
+        return this.selectedTab === "allCoaches" ? '/railcontent/content?only_subscribed=' : '/railcontent/content?only_subscribed=true';
+    },
+
+    handleFilterTabClick(value){
+        this.coachData[this.selectedTab] = [...this.content];
+        this.selectedTab = value;
+        this.content = [...this.coachData[this.selectedTab]];
+    },
+
+    getFilterColumns(){
+      let filters = [];
+      for (const value of this.filterableValues){
+          filters.push({
+              category: value,
+              items: this.filters[value]
+          });
+      }
+      this.filterMultiSelectColumns = filters;
+    },
+
+    applyFilters(category, item){
+        if (this.filter_params[category]){
+            const isChecked = this.filter_params[category].find((f)=> f.value === item.value);
+
+            if (isChecked) {
+                this.filter_params[category] = this.filter_params[category].filter((f) => f.value !== item.value);
+
+                if(this.filter_params[category].length === 0) {
+                    delete this.filter_params[category];
+                }
+            }
+
+            else {
+                this.filter_params[category].push(item);
+            }
+        }
+
+        else {
+            this.filter_params[category] = [item];
+        }
     },
   },
 };

@@ -9,7 +9,7 @@
     brand: {
       type: String,
       default: 'Drumeo',
-    }
+    },
   });
 
   const emit = defineEmits(['onSubmit', 'onTextChange'])
@@ -19,11 +19,11 @@
   };
 
   const handleChange = (val) => {
-    emit('onTextChange', val);
+      emit('onTextChange', val);
   };
 
   const handleSubmitSearch = () => {
-    emit('onSubmit');
+      emit('onSubmit');
   };
 
   const handleIconClick = () => {
@@ -32,7 +32,7 @@
 </script>
 
 <template>
-  <form 
+  <form
     class="tw-relative dark:tw-bg-black tw-bg-white tw-rounded-[63px] tw-w-full md:tw-max-w-[576px] md:tw-ml-[10px] tw-h-[50px]"
   >
     <!-- Search Icon -->
